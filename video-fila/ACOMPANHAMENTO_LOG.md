@@ -1884,3 +1884,19 @@ Voltar: "abertura": "fato". Falta ver num Short real de cada braço (os próximo
    "coragem" = tremor/SFX em cena calma). Agora começo de palavra; curtas só inteiras. Volta: FX_DETECT_PEDACO=1.
 Teste novo `teste_gore_e_impacto.py` = tudo certo; `teste_viralizador.py` segue passando. Pacote do Kaggle refeito.
 Não medido: com que frequência a IA falha (o tamanho real do item 2). Cópias do hipercool/historias não mexidas.
+
+## 13/11/2026 15:40 — manutenção: horário nobre nos dias já agendados + Shorts presos no STI
+1. **Horário nobre (21-22 h) nos dias JÁ agendados.** 41 canal-dias dos próximos 7 dias tinham post e nenhum no
+   horário nobre; em 22 o dia já estava no teto do canal, então o agendador não conseguia pôr mais um (CenaReact,
+   Fio da Meada, inovare manhwa br, Plantão). Novo `video-fila/reagendar_nobre.py`: muda o HORÁRIO do último Short do
+   dia pro horário nobre do canal, por HTTP (sem navegador, sem subir nada), confere relendo o Studio (tem de seguir
+   privado + agendado) e corrige o publish_at no uploads_ledger. Feito e conferido: CenaReact 13, 14, 15 e 16/11 ->
+   21:35; Fio da Meada 14 e 15/11 -> 21:30. Tarefa `ReagendarNobre` 08:20, 13:20 e 18:20 (oculta). Desliga:
+   estado\reagendar_nobre.off. Dorama Noturno: o YouTube recusou a troca (nada mudou lá). 19 canal-dias ficaram de
+   fora porque o canal não tem login no cofre do PC1 (envia pelo Chrome dos notebooks).
+2. **STI**: 2 Shorts prontos ficaram presos lá — o scp falhava com o espaço de "animes recap" (`\ ` não vale no scp
+   novo). `disparar_sti.py`: caminho cru (o antigo de reserva), `_trazer_presos()` busca o que ficou lá mesmo sem
+   registro, e ssh que estoura o tempo não derruba a rodada. Contador de falhas zerado.
+3. Medido: 107 Shorts de parceiro hoje até 15 h; o Kaggle voltou a devolver Shorts (3 ok às 13:52-13:58).
+Pendente (dona): 68 envios hoje caíram pro Chrome porque o cofre do PC1 está sem login em vários canais ("sem
+SAPISID") — o envio pelo notebook é mais lento (HistoriasEmFrames ficou 2 h num upload e deu timeout).

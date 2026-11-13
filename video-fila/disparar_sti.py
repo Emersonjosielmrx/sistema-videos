@@ -120,12 +120,78 @@ def _video_ok(mp4):
     return True, f"{w}x{h}, {dur:.0f} s, {vol:.0f} dB"
 
 
+def _trazer_pasta(p):
+    """Traz 1 pasta de Short pronta do STI pra postagem do PC1. True = entrou na postagem."""
+    dst = SHORTS / p
+    if dst.exists():  # nome já usado aqui (raro): não sobrescreve
+        log(f"[!] {p} já existe no PC1 — fica no STI")
+        return False
+    tmp = Path(tempfile.mkdtemp(prefix="sti_short_", dir=str(SHORTS.parent)))
+    # 13/11: o scp do Windows fala SFTP e quer o caminho CRU — com "\ " ele procurava "animes\" e falhava
+    # ("No such file"): 2 Shorts prontos ficaram presos no STI. Tenta cru; o jeito antigo fica de reserva.
+    r = _scp(f"{ALVO}:{R_SHORTS}/{p}", str(tmp))
+    veio = tmp / p
+    if r.returncode != 0 or not (veio / "postar.json").exists():
+        shutil.rmtree(veio, ignore_errors=True)
+        r = _scp(f"{ALVO}:{R_SHORTS}/{p}".replace(" ", "\\ "), str(tmp))
+    if r.returncode != 0 or not (veio / "postar.json").exists() or not (veio / "video.mp4").exists():
+        log(f"[!] falhou trazer {p} do STI (fica lá): {(r.stderr or b'').decode('utf-8', 'replace')[:160]}")
+        shutil.rmtree(tmp, ignore_errors=True)
+        return False
+    ok, como = _video_ok(veio / "video.mp4")
+    if not ok:
+        log(f"[!] {p} do STI REPROVADO na chegada ({como}) — não entra na postagem; cópia fica no STI")
+        shutil.rmtree(tmp, ignore_errors=True)
+        _ssh(f"mv ~/{shlex.quote(R_SHORTS)}/{shlex.quote(p)} ~/{R_BASE}/reprovados_$(date +%s)_{shlex.quote(p)}", 60)
+        return False
+    try:  # marca de onde veio (pro painel e pra medir o STI depois)
+        pj = veio / "postar.json"
+        d = json.loads(pj.read_text(encoding="utf-8"))
+        d["feito_em"] = "sti"
+        pj.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
+    except (OSError, ValueError):
+        pass
+    shutil.move(str(veio), str(dst))
+    shutil.rmtree(tmp, ignore_errors=True)
+    _ssh(f"rm -rf ~/{shlex.quote(R_SHORTS)}/{shlex.quote(p)}", 120)
+    log(f"STI -> PC1: {p} trazido pra postagem ({como})")
+    return True
+    return False
+
+def _trazer_presos():
+    """13/11: Short que ficou pronto no STI e não veio (cópia falhou, registro apagado). Só quando nada roda lá.
+    Devolve False (não segura o disparo do próximo)."""
+    try:
+        rc, txt = _ssh(f"pgrep -fc '[a]nime_auto[.]py --modo' || true; echo ---; ls -1 ~/{shlex.quote(R_SHORTS)} "
+                       "2>/dev/null", timeout=40)
+    except subprocess.TimeoutExpired:
+        return False
+    if rc != 0 or "---" not in txt:
+        return False
+    rodando, pastas = txt.split("---", 1)
+    if rodando.strip() not in ("0", ""):
+        return False
+    trouxe = 0
+    for p in [x.strip() for x in pastas.splitlines() if x.strip()]:
+        trouxe += 1 if _trazer_pasta(p) else 0
+    if trouxe:
+        log(f"STI: {trouxe} Short(s) preso(s) lá trazido(s) pra postagem")
+        FALHOU.unlink(missing_ok=True)
+        try:
+            sys.path.insert(0, str(PROD / "bin"))
+            import parceiro_diario
+            parceiro_diario.disparar_postagem()
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] postagem não disparada ({type(e).__name__}) — a tarefa de 30 min pega")
+    return False
+
+
 def buscar():
     """Short que o STI terminou -> pasta de postagem do PC1. True = ainda está fazendo (não dispara outro)."""
     try:
         est = json.loads(EST.read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return False
+        return _trazer_presos()
     vid = est["id"]
     rc, txt = _ssh(f"cat ~/{R_BASE}/logs/sti_short_{shlex.quote(vid)}.fim 2>/dev/null || echo ANDANDO; "
                    f"echo ---; echo $(( ($(date +%s) - $(stat -c %Y ~/{R_BASE}/logs/sti_short_{shlex.quote(vid)}.log "
@@ -144,35 +210,7 @@ def buscar():
         return False
     trouxe = False
     for p in [x.strip() for x in pastas.splitlines() if x.strip()]:
-        dst = SHORTS / p
-        if dst.exists():  # nome já usado aqui (raro): não sobrescreve
-            log(f"[!] {p} já existe no PC1 — fica no STI")
-            continue
-        tmp = Path(tempfile.mkdtemp(prefix="sti_short_", dir=str(SHORTS.parent)))
-        r = _scp(f"{ALVO}:{R_SHORTS}/{p}".replace(" ", "\\ "), str(tmp))
-        veio = tmp / p
-        if r.returncode != 0 or not (veio / "postar.json").exists() or not (veio / "video.mp4").exists():
-            log(f"[!] falhou trazer {p} do STI (fica lá): {(r.stderr or b'').decode('utf-8', 'replace')[:160]}")
-            shutil.rmtree(tmp, ignore_errors=True)
-            continue
-        ok, como = _video_ok(veio / "video.mp4")
-        if not ok:
-            log(f"[!] {p} do STI REPROVADO na chegada ({como}) — não entra na postagem; cópia fica no STI")
-            shutil.rmtree(tmp, ignore_errors=True)
-            _ssh(f"mv ~/{shlex.quote(R_SHORTS)}/{shlex.quote(p)} ~/{R_BASE}/reprovados_$(date +%s)_{shlex.quote(p)}", 60)
-            continue
-        try:  # marca de onde veio (pro painel e pra medir o STI depois)
-            pj = veio / "postar.json"
-            d = json.loads(pj.read_text(encoding="utf-8"))
-            d["feito_em"] = "sti"
-            pj.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
-        except (OSError, ValueError):
-            pass
-        shutil.move(str(veio), str(dst))
-        shutil.rmtree(tmp, ignore_errors=True)
-        _ssh(f"rm -rf ~/{shlex.quote(R_SHORTS)}/{shlex.quote(p)}", 120)
-        log(f"STI -> PC1: {p} trazido pra postagem ({como})")
-        trouxe = True
+        trouxe = _trazer_pasta(p) or trouxe
     if trouxe:
         with open(FEITOS / "_feitos_short.txt", "a", encoding="utf-8") as f:
             f.write(vid + "\n")
@@ -195,8 +233,11 @@ def buscar():
 def _sti_livre():
     """(livre, motivo). Não disputa a máquina com render pesado dela mesma."""
     # "[a]nime_auto" = o padrão não casa com a própria linha do ssh/bash que carrega este comando (contava 1 sempre)
-    rc, txt = _ssh("nproc; cut -d' ' -f1 /proc/loadavg; free -m | awk 'NR==2{print $7}'; "
-                   "pgrep -fc '[a]nime_auto[.]py --modo' || true", timeout=40)
+    try:
+        rc, txt = _ssh("nproc; cut -d' ' -f1 /proc/loadavg; free -m | awk 'NR==2{print $7}'; "
+                       "pgrep -fc '[a]nime_auto[.]py --modo' || true", timeout=60)
+    except subprocess.TimeoutExpired:
+        return False, "STI não respondeu em 60 s"
     v = txt.split()
     if rc != 0 or len(v) < 4:
         return False, "STI não respondeu"
