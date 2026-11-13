@@ -1,14 +1,15 @@
-# Vigilância 24 h — 2026-11-13T10:10:40
+# Vigilância 24 h — 2026-11-13T13:40:38
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (6)
+## Alarmes desta volta (7)
 - longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B
 - longo dtjL5XFWlXQ (InovareManhwaVerse) sem as capas B/C do teste A/B
 - longo AWweNegHpbI (Manhwa Noturno) sem as capas B/C do teste A/B
 - longo I-ZCv6BaFrc (InovareManhwaVerse) sem as capas B/C do teste A/B
 - longo hf0T-InweRE (Manhwa Noturno) sem as capas B/C do teste A/B
 - longo Wdc8vq3XCQw (InovareManhwaVerse) sem as capas B/C do teste A/B
+- longo ijsBfAGDgb0 (Manhwa Noturno) sem as capas B/C do teste A/B
 
 ## Casos abertos (44)
 - [consertar] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B (1minopus-sonnetweb)
@@ -57,10 +58,6 @@
 - [consertar] canal leielucro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [sem_mudanca] _parceiro_20261107.log: mesmo erro 5x — gemini-4-argon / -
-- [sem_mudanca] longo eft6rqWlPms (InovareManhwaVerse) sem as capas B/C do teste A/B — 1minopus-sonnetweb / -
-- [sem_mudanca] _parceiro_20261107.log: mesmo erro 40x — gemini-4-argon / -
-- [sem_mudanca] longo F3uPpiblM7M (InovareManhwaVerse) sem as capas B/C do teste A/B — 1minopus-sonnetweb / -
 - [sem_mudanca] _parceiro_20261107.log: mesmo erro 7x — gemini-4-argon / -
 - [falso] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
 - [falso] longo hf0T-InweRE (Manhwa Noturno) sem as capas B/C do teste A/B — - / -
@@ -72,6 +69,10 @@
 - [falso] longo hf0T-InweRE (Manhwa Noturno) sem as capas B/C do teste A/B — - / -
 - [falso] longo I-ZCv6BaFrc (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
 - [falso] longo Wdc8vq3XCQw (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
+- [falso] longo ijsBfAGDgb0 (Manhwa Noturno) sem as capas B/C do teste A/B — - / -
+- [falso] longo AWweNegHpbI (Manhwa Noturno) sem as capas B/C do teste A/B — - / -
+- [falso] longo dtjL5XFWlXQ (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
+- [falso] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
 
 ## Placar dos consertadores
 - **cw/claude-sonnet-5-5**: 19 casos, nota 11% — capa-longo: 2/18 (voltou 0), postagem-tiktok: 0/1 (voltou 0)

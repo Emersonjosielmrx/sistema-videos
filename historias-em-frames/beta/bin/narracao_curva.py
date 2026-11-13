@@ -105,16 +105,61 @@ def prosodia(texto, indice, impactos, n, base_rate=BASE_RATE, base_pitch=0):
 
 
 # ─── escolha dos impactos (1x por vídeo) ────────────────────────────────────────────────────
-_GATILHO = re.compile(r"\b(mas|só que|porém|de repente|finalmente|revel|descobr|verdade|nunca|ninguém|tudo mud|"
-                      r"inacredit|choc|surpre|beij|morr|mat[aoe]u|poder|segredo|grit|explod|atac|confess|"
-                      r"desaparec|traí|traiç|virou|acord)\w*", re.I)
+# 13/11: palavra de virada inteira ("mas" casava "massa", "máscara", "mastigou"; "choc" casava "chocolate"; "morr"
+# casava "morro"; "acord" casava "acordo") — o prefixo com \w* fica só nos verbos
+_GATILHO = re.compile(r"\b(?:(?:mas|só que|porém|de repente|finalmente|verdade|nunca|ninguém|poder|segredo|virou)\b|"
+                      r"(?:revel|descobr|tudo mud|inacredit|chocad|chocou|chocant|surpre|beij|morre[ur]|morrendo|"
+                      r"mat[aoe]u|grit|explod|atac(?:ou|ar|ando)|confess|desaparec|traí|traiç|acord(?:ou|ar|ando))\w*)",
+                      re.I)
+
+
+# 13/11: o teto de 8 impactos foi pensado pro capítulo (~100 frases). O LONGO tem 1.000-1.500 frases: com 8 impactos
+# a voz só acelerava em ~80 delas (5%) e o resto de 2 h saía plano. Acima de 96 frases: 1 impacto a cada
+# NARRACAO_IMPACTOS_CADA frases (20), escolhidos por JANELA (o LLM não recebe 1.500 frases numa chamada só).
+# Voltar ao antigo: NARRACAO_IMPACTOS_MAX=8. Até 96 frases (Short, capítulo) nada muda.
+IMPACTOS_CADA = max(8, int(os.environ.get("NARRACAO_IMPACTOS_CADA", "20") or 20))
+IMPACTOS_MAX = int(os.environ.get("NARRACAO_IMPACTOS_MAX", "0") or 0)  # 0 = sem teto no longo
+JANELA_IMPACTOS = 120
 
 
 def _quantos(n):
-    return 1 if n <= 6 else 2 if n <= 20 else max(2, min(8, round(n / 12)))
+    if n <= 96:
+        return 1 if n <= 6 else 2 if n <= 20 else max(2, min(8, round(n / 12)))
+    k = max(8, round(n / IMPACTOS_CADA))
+    return min(k, IMPACTOS_MAX) if IMPACTOS_MAX > 0 else k
 
 
-def _heuristica(linhas, k):
+def _por_janela(linhas, k):
+    """Impactos do vídeo longo: reparte em janelas de ~JANELA_IMPACTOS frases e escolhe em cada uma (LLM; se falhar
+    numa janela, heurística nela e nas seguintes — não fica esperando 13 timeouts). Devolve (lista, origem)."""
+    n = len(linhas)
+    n_jan = max(1, round(n / JANELA_IMPACTOS))
+    tam = -(-n // n_jan)
+    out, llm_ok, usou_llm = [], True, False
+    for j in range(n_jan):
+        ini, fim = j * tam, min(n, (j + 1) * tam)
+        if ini >= fim:
+            break
+        kj = max(1, round(k * (fim - ini) / n))
+        lst = None
+        if llm_ok:
+            try:
+                lst = _pelo_llm(linhas[ini:fim], kj)
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[curva] LLM dos impactos falhou na janela {j + 1}/{n_jan} ({type(e).__name__}) — "
+                                "heurística daqui em diante")
+            llm_ok = bool(lst)
+            usou_llm = usou_llm or llm_ok
+        if not lst:
+            lst = _heuristica(linhas[ini:fim], kj, janela=True)
+        for i in lst:
+            g = ini + i
+            if g > 0 and (not out or g - out[-1] >= 3):   # nunca a frase 0; vizinhas de janelas diferentes não colam
+                out.append(g)
+    return out, ("llm" if usou_llm and llm_ok else "llm+heuristica" if usou_llm else "heuristica")
+
+
+def _heuristica(linhas, k, janela=False):
     """Reserva do LLM: exclamação, palavra de virada e o trecho do clímax (55-92% do vídeo) pesam; a 1ª frase não
     (o gancho já está na tela)."""
     n = len(linhas)
@@ -122,9 +167,10 @@ def _heuristica(linhas, k):
     for i, t in enumerate(linhas):
         s = 2.0 * ("!" in t) + 0.5 * ("?" in t) + 1.2 * len(_GATILHO.findall(t))
         pos = i / max(1, n - 1)
-        s += 1.5 if 0.55 <= pos <= 0.92 else 0.0
-        s += 1.0 if i == n - 1 else 0.0
-        s -= 1.0 if i == 0 else 0.0
+        if not janela:  # clímax, frase final e gancho são do VÍDEO, não de cada janela do longo
+            s += 1.5 if 0.55 <= pos <= 0.92 else 0.0
+            s += 1.0 if i == n - 1 else 0.0
+            s -= 1.0 if i == 0 else 0.0
         notas.append((s, i))
     escolhidos = []
     for _s, i in sorted(notas, key=lambda x: (-x[0], -x[1])):
@@ -173,12 +219,15 @@ def escolher_impactos(linhas, cache=None):
             pass
     k = _quantos(n)
     origem, lst = "llm", None
-    try:
-        lst = _pelo_llm(linhas, k)
-    except Exception as e:  # noqa: BLE001
-        logging.warning(f"[curva] LLM dos impactos falhou ({type(e).__name__}) — heurística")
-    if not lst:
-        origem, lst = "heuristica", _heuristica(linhas, k)
+    if n > JANELA_IMPACTOS * 1.5 and k > 8:
+        lst, origem = _por_janela(linhas, k)
+    else:
+        try:
+            lst = _pelo_llm(linhas, k)
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[curva] LLM dos impactos falhou ({type(e).__name__}) — heurística")
+        if not lst:
+            origem, lst = "heuristica", _heuristica(linhas, k)
     logging.info(f"[curva] impactos ({origem}): {lst} de {n} frases")
     if cache:
         try:

@@ -1013,3 +1013,73 @@
 - prova: 22bb27 q10 ('M ATÉ OS MOS', 'MESMOS' sob 'ATÉ OS') e q13 ('LONDRES' congelada sob 'DE LONDRES'); 461215 q06 (duas camadas em estilos diferentes).
 - onde: Camada de legenda e destaque: o destaque de palavra de impacto não é desligado quando a palavra seguinte entra.
 - como testar: Garantir que há uma única camada ativa por instante (fim da anterior = início da próxima). Re-renderizar 22bb27 e 461215 e checar q10, q13 e q06.
+
+## 13/11 10:50 PROPOSTA [CERTEZA] Legenda palavra a palavra fora do rosto e dentro da zona segura (cw/claude-sonnet-5-5)
+- prova: Legenda ou sticker sobre boca, olhos ou queixo em 22bb27 q08 e q16, 461215 q03 e q07, ed2afc q05 e q11. Texto encostado ou cortado na margem esquerda em 461215 q01 e ed2afc q17.
+- onde: Módulo que renderiza a legenda ASS/karaokê (posição Y e margens, provavelmente a função de montagem do ASS em cortes_*). Verificar também os cards de conversa e comparativos.
+- como testar: Rodar 5 Shorts de talking head, extrair a folha de quadros e medir: nenhuma caixa de texto com x<60 ou x>1020. Com detecção de rosto, nenhuma sobreposição da legenda com a região da boca. Comparar a nota de legibilidade antes e depois.
+
+## 13/11 10:50 PROPOSTA [CERTEZA] Uma única camada de legenda ativa por vez (sem palavra congelada) (cw/claude-sonnet-5-5)
+- prova: 22bb27 q10: 'ATÉ OS' desenhado em cima de 'MESMOS', resultando em 'M ATÉ OS MOS'. 22bb27 q13: 'LONDRES' congelada em cima enquanto 'DE LONDRES' aparece embaixo. ed2afc q16: sticker em cima do texto do card.
+- onde: Geração dos eventos de legenda (fim de cada palavra vs início da seguinte, estilos de destaque/adesivo). Provável: o evento de destaque não é encerrado quando a próxima palavra entra.
+- como testar: Gerar o ASS desses 2 Shorts e checar por script que nenhum par de eventos se sobrepõe no tempo na mesma região. Depois renderizar e conferir q10 e q13 do 22bb27.
+
+## 13/11 10:50 PROPOSTA [CERTEZA] Piso de contraste e opacidade nas cores de destaque da legenda (cw/claude-sonnet-5-5)
+- prova: Legenda translúcida ou de cor tênue (magenta, azul fino, avermelhado, amarelo-esverdeado) em 461215 q06 e q07, ed2afc q05, 88b8f9 q13, q15 e q17. O júri as descreve como praticamente invisíveis no celular.
+- onde: Paleta de cores por personagem/destaque (função que sorteia a cor do destaque). Impor opacidade 100%, traço preto e luminância mínima.
+- como testar: Calcular o contraste do preenchimento contra o traço e contra o fundo do quadro nos mesmos 3 Shorts, e rejeitar cores abaixo do limite. Reconferir as notas de legibilidade.
+
+## 13/11 10:50 PROPOSTA [GOSTO] Corte de cena adiantado ou atrasado em relação à palavra falada (cw/claude-sonnet-5-5)
+- prova: 461215 q14/q16 (skate mostrado antes do 'NUM SKATE'), ed2afc q12 (fala 'NUM CALABOUÇO' sobre a floresta), 88b8f9 q06 ('SÓ QUE DO NADA' com a cobra aparecendo 5 s depois), 22bb27 q03. Também há ping-pong de planos em 22bb27 q16-q18, 461215 q05-q07 e ed2afc q13-q18.
+- onde: Função que associa cena à frase (alinhamento tempo da voz × cena) e o seletor de cortes. Pode ser tolerância de alinhamento ou um atraso fixo.
+- como testar: Medir em 10 Shorts o desvio entre o início da frase e o início da cena que a ilustra (meta <=0,3 s). Testar um deslocamento de cena -0,3 s num lote controlado e comparar a retenção.
+
+## 13/11 10:50 PROPOSTA [CERTEZA] Verificar se a fonte tinha legenda queimada nos Shorts com texto da fonte à mostra (cw/claude-sonnet-5-5)
+- prova: 88b8f9 q09-q11 mostra 'ANTES EM SEGUNDOS E' e 'AGORA O BANQUETE DOS' à vista. ed2afc q01 mostra a marca d'água '@cenareact-f3j' no centro durante quase todo o vídeo. Ainda não sei se é legenda queimada, card nosso ou marca d'água, e não há log '[hardsub]' para provar.
+- onde: Log do Short 88b8f9 (linha '[hardsub] ... lido/N') e o módulo de cobertura (delogo). Para a marca d'água, o delogo ou recorte da região central.
+- como testar: Abrir os logs desses 2 Shorts. Se a visão leu legenda e não cobriu, é falha de tarja. Se a visão não leu, não é defeito. Para a marca d'água, aplicar o delogo na região e conferir a folha de quadros.
+
+## 13/11 12:00 PROPOSTA [CERTEZA] Remover/cobrir o @ do canal de origem no topo (e conferir qual @ deveria aparecer) (cw/claude-sonnet-5-5)
+- prova: ed2afc q01 e 23473f q01 a q18 mostram '@cenareact-f3j' no topo, centrado, durante quase todo o vídeo. O canal da postagem é @novo_universo_ia_d6s. A regra fixa da dona proíbe @ na tela, e esse é o @ de outra linha.
+- onde: etapa de render/overlay do topo (onde a marca do canal é desenhada) e a função que escolhe o handle por canal; checar também se o @ vem queimado na fonte e precisa de delogo no topo
+- como testar: Rodar o Short sem-obra-23473f e o sem-obra-ed2afc, tirar uma folha do TOPO no 1,5 s e no meio (D:\tmp\folha_topo.py) e confirmar que o @ é o do canal certo, ou que não há @. Depois varrer os Shorts do dia com a mesma folha para medir quantos saíram com o @ errado.
+
+## 13/11 12:00 PROPOSTA [CERTEZA] Prender a legenda palavra a palavra à zona segura lateral (x entre 60 e 1020), reduzindo o corpo em vez de cortar (cw/claude-sonnet-5-5)
+- prova: 461215 q01 ('Q' de QUERENDO fora da borda), ed2afc q17 (início de CONVERSA cortado, aparece 'NVERSA') e 23473f q17 (ARREMESSA com glow a menos de 60 px da borda). O defeito é objetivo e se repete em 3 dos 4 Shorts.
+- onde: função que calcula a posição e a largura de cada palavra da legenda (render ASS/karaokê); aplicar clamp de x e, se a palavra for larga, escala automática do corpo. Os cards ('CONVERSA') têm o mesmo problema: conferir o mesmo clamp.
+- como testar: Renderizar palavras longas (ARREMESSA, QUERENDO, CONVERSA) com o efeito de brilho/glow e medir a caixa com a largura real do texto: x_min >= 60 e x_max <= 1020 em 1080 px. Rodar nos 3 Shorts acima.
+
+## 13/11 12:00 PROPOSTA [CERTEZA] Piso de contraste e opacidade da legenda (preenchimento opaco, contorno grosso) e posição fora do rosto (cw/claude-sonnet-5-5)
+- prova: Palavras translúcidas ou apagadas em 461215 q06 e q07 ('IGNOREI' avermelhado, 'SÓ PRA NÃO SAIR'), 88b8f9 q15 e q17 ('SEM' magenta tênue, 'RESOLVEU' azul fino) e 23473f q11 e q15 (cinza-esverdeado sobre verde). Legenda sobre o rosto em 461215 q07, ed2afc q11 e q05, e sobre a ação em 88b8f9 q13 e 23473f q18.
+- onde: paleta/estilo da legenda por personagem (cores e fontes) e o posicionador da legenda; restringir as cores sorteadas a um conjunto com contraste mínimo sobre a cena e evitar o centro do rosto detectado
+- como testar: Calcular o contraste entre o preenchimento e o fundo atrás da caixa em cada quadro dos 4 Shorts. Reprovar abaixo de 4.5:1 ou opacidade menor que 100%. Reprovar também se a caixa cobrir a região do rosto detectada no mesmo quadro. Comparar a nota de legibilidade no lote seguinte.
+
+## 13/11 12:00 PROPOSTA [GOSTO] Sincronia da imagem com o sujeito narrado (personagem/ação adiantada ou atrasada) (cw/claude-sonnet-5-5)
+- prova: ed2afc q01 ('O VELHO VIROU' sobre o jovem), 88b8f9 q06 e q14 (a fala 'DO NADA' antecipa uma cena que só vem 5 s depois e 'PREDADOR' aparece quando o animal já saiu) e 461215 q14 e q16 ('NUM SKATE' aparece sobre um borrão, o plano de skate já tinha passado). Aparece em 3 Shorts, mas o júri só vê quadros soltos. Antes de mexer, conferir no roteiro.txt e nos tempos da voz.
+- onde: etapa que casa a cena com a palavra falada (alinhamento de cena por tempo da voz) e o filtro que descarta tomadas desfocadas ou escuras (461215 q16, 23473f q17)
+- como testar: Para 3 Shorts, comparar o tempo da palavra-chave na voz com o início da cena correspondente (tolerância de 0,5 s). Medir antes e depois a nota de movimento e história, em um lote de pelo menos 8 Shorts. Mexer em uma coisa só por vez.
+
+## 13/11 13:11 PROPOSTA [CERTEZA] Cor/contorno da legenda palavra a palavra: preenchimento escuro e translúcido some no fundo (cw/claude-sonnet-5-5)
+- prova: Em 4 de 4 Shorts: parasyte q14 ('CACHORRO' transparente sobre focinho preto), b36464 q03/q08/q02/q16 ('MOLEZA' azul-escuro, 'GALHADAS' verde-oliva), d79377 q06/q12 ('NISSO' e 'ASSISTIR' cinza/verde-escuro), 421860 q11 ('MANCHA' verde-escuro). Todas são cores escuras por personagem/palavra de impacto sem contorno claro.
+- onde: Renderizador da legenda palavra a palavra (a função que escolhe a cor da palavra e o traçado; procurar a paleta de cores por personagem/impacto no módulo de legenda da linha CORTES).
+- como testar: Forçar piso de luminância no preenchimento (ou contorno claro/preto de 6–10 px quando o fundo for escuro), regerar os 4 Shorts e conferir os quadros citados com a folha de quadros. Respeita a preferência da dona por palavras de impacto maiores e cores por personagem, só impedindo cores ilegíveis.
+
+## 13/11 13:11 PROPOSTA [CERTEZA] Legenda sai pela borda esquerda da tela (palavra cortada) (cw/claude-sonnet-5-5)
+- prova: 421860 q06: 'COLHER/ESCOLHER' com o início fora da tela. Visto em 1 Short, então só proposta de verificação, não padrão.
+- onde: Posicionamento horizontal da palavra na legenda (clamp de x ao calcular a largura do texto), módulo de legenda.
+- como testar: Medir a largura da palavra maior e aplicar clamp com margem de 60 px; procurar nos próximos lotes se repete em >= 2 Shorts.
+
+## 13/11 13:11 PROPOSTA [CERTEZA] Duas camadas de legenda ativas ao mesmo tempo / resíduo fantasma (cw/claude-sonnet-5-5)
+- prova: parasyte q11 ('REVELOU' duplicado), d79377 q14/q16/q17 (resíduo de 'BRAÇO' e 'VERDADE' sobrepostos), 421860 q01 ('OLHA' vazando). Repete em 3 Shorts.
+- onde: Renderização das camadas de legenda (ASS/overlay): conferir se um evento termina exatamente no início do próximo e se o estilo de 'impacto' não é desenhado junto com o estilo normal.
+- como testar: Extrair o frame do instante exato de cada troca de palavra nos Shorts citados e contar eventos ativos; deve haver no máximo 1 por tempo.
+
+## 13/11 13:11 PROPOSTA [CERTEZA] Marca do canal coberta por seta/card e marca de outro canal visível (cw/claude-sonnet-5-5)
+- prova: parasyte q15 (card 'ALERTA MONSTRO' sobre @manhwareact-ia), d79377 q07 (seta sobre @historiasemframes), 421860 q01 (@inventoreact da fonte visível, canal oficial diferente). Dois Shorts com sobreposição de grafismo sobre a marca própria.
+- onde: Posição dos cards/setas versus a posição da marca d'água do canal (módulo de overlays); e cobertura da marca da fonte.
+- como testar: Proibir overlays na faixa y=160–220 e conferir os quadros citados. A marca da fonte precisa de checagem à parte, pois não sei se o júri leu o canal certo.
+
+## 13/11 13:11 PROPOSTA [GOSTO] Cortes de cena em desacordo com a fala (equipamento/objeto trocado) (cw/claude-sonnet-5-5)
+- prova: b36464 q04/q06/q09 (carretilha x molinete) e 421860 q10 (fala 'a molecada' sobre caneta mágica). Repete em 2 Shorts, mas depende da sincronia entre fala e cena, não do texto.
+- onde: Alinhamento de cena com as palavras-chave do roteiro (seleção/corte de cena e sincronia fala-imagem).
+- como testar: Para cada substantivo-chave do roteiro, checar se a cena exibida no instante da fala corresponde; começar pelos dois Shorts citados.

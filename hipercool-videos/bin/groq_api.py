@@ -11,6 +11,7 @@ Chaves: D:\\postador-de-videos\\secrets\\groq_keys.json (só status "ok"; a que 
 import datetime
 import json
 import os
+import re
 import time
 from pathlib import Path
 
@@ -232,6 +233,12 @@ def transcrever(audio, idioma="pt", palavras=True, timeout=300):
         log(f"  groq: chave {id_} -> HTTP {st} {str(msg)[:90]}")
         if st == 401:
             _marcar_invalida(arq, id_, "401")
+        # 13/11: conta do Groq BLOQUEADA responde 400 "Organization has been restricted" — é defeito da CHAVE, não do
+        # pedido. Caía no "erro do pedido" abaixo e a transcrição voltava None na 1ª chave morta sem tentar as boas
+        # (26 das 54 chaves estavam assim): a conferência do áudio lia o vazio como "vídeo mudo" e 59 Shorts prontos
+        # foram descartados. Chave restrita sai do rodízio (como a 401) e segue pra próxima.
+        elif st == 400 and re.search(r"restricted|organization|deactivated|suspended", str(msg), re.I):
+            _marcar_invalida(arq, id_, "400 organização restrita")
         elif st not in (0, 403, 429, 503):
             return None  # erro do pedido (arquivo grande demais, formato...): outra chave não resolve
     return None
@@ -248,3 +255,5 @@ if __name__ == "__main__":
             print(f"chave {id_}: HTTP {st} via {_mascara(proxy)}")
             if st == 401:
                 _marcar_invalida(arq, id_, "401")
+            elif st == 400 and re.search(r"restricted|organization|deactivated|suspended", json.dumps(_j or {}), re.I):
+                _marcar_invalida(arq, id_, "400 organização restrita")  # 13/11: conta bloqueada pelo Groq

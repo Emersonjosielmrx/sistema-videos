@@ -1,0 +1,233 @@
+{
+ "video": "gestaodegrupos_ia_20261102_075517.mp4",
+ "conta": "gestaodegrupos.ia",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Agente Sniper e seus grupos de WhatsApp no automático",
+ "formato": "dono_abre_fecha_veo_meio",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "moana",
+ "status": "fila/postado",
+ "juri": {
+  "nota": null,
+  "notas": null,
+  "movimento": null,
+  "graves": null,
+  "reprovar": null,
+  "motivo": null
+ },
+ "juri_problemas": [],
+ "historico_notas": [
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261112_165224.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261113_051134.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

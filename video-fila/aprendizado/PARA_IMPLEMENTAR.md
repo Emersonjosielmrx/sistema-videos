@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 13/11/2026 10:06. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 13/11/2026 12:38. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -18,7 +18,7 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 
 (nenhum)
 
-## B. Candidatos (sem resposta em 24 h): 635 grupo(s), os 40 mais fortes
+## B. Candidatos (sem resposta em 24 h): 638 grupo(s), os 40 mais fortes
 
 ### 1. [visual] Texto centralizado em caixa preta/amarela com borda preta ('Original step:' e 'Jennie doing it in encore:')
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
@@ -300,4 +300,4 @@ na produção, com humor/visual que derruba monetização e com marca do parceir
 - exemplos: https://www.youtube.com/watch?v=5-vQopGwQ8Y seg 1850.5 (trecho 1b9593b5.mp4)
 - ids: 1b9593b5
 
-(+ 595 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)
+(+ 598 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)

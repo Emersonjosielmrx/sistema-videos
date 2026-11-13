@@ -388,7 +388,11 @@ def _escolher_pc2(pdi, anime_discover, c):
         # LÍNGUAS com fila abaixo do alvo (cada uma é um anime-pipeline inteiro = render). Sem língua faltando = para
         # como antes. LINGUAS_QUANDO_CHEIO=0 desliga.
         ling = []
-        if os.environ.get("LINGUAS_QUANDO_CHEIO", "1") != "0":
+        # 13/11: com as regras atuais a versão de língua não posta (parceiro_diario.lingua_nasce_morta: mesma fonte do pt
+        # + "nunca em 2 canais" + pt com preferência — 10 feitas e 1 agendada desde 12/11; e o mesmo vídeo rende 1.273
+        # views no Esporte Noturno contra 0 no canal tailandês). A máquina livre não gasta ~23 min por versão morta.
+        morta = getattr(pdi, "lingua_nasce_morta", lambda: False)()
+        if os.environ.get("LINGUAS_QUANDO_CHEIO", "1") != "0" and not morta:
             ling = [lang for lang, d in (c.get("idiomas") or {}).items()
                     if d.get("ativo", True) and fila[d["canal"]] < d.get("fila_alvo", 2)]
             ling = sorted(ling, key=lambda lg: fila[c["idiomas"][lg]["canal"]])[:int(os.environ.get(

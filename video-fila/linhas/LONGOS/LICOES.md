@@ -38,13 +38,13 @@
 - 26/10: vídeo de 1 h: música dinâmica leva ~30 min pra mixar; timeout tem que ser proporcional à duração.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Recap longo — 13/11 10:14
+# Brief do melhorador central — Recap longo — 13/11 13:14
 
-Vídeos nos últimos 7 dias: 25 | elegíveis (receberam o lote do feed): 14 | NÃO elegíveis: 0 | sem medida ainda: 11
-% assistido mediano (só elegíveis): 0.7 | views 48 h mediana: 10 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
+Vídeos nos últimos 7 dias: 26 | elegíveis (receberam o lote do feed): 14 | NÃO elegíveis: 0 | sem medida ainda: 12
+% assistido mediano (só elegíveis): 0.7 | views 48 h mediana: 57.0 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
-- @CodigoInteligente-n7j: n 9, elegíveis 6, % assistido 2.9, views48 161
+- @CodigoInteligente-n7j: n 10, elegíveis 6, % assistido 2.9, views48 185.0
 - InventoReact: n 3, elegíveis 3, % assistido 0.6, views48 66.5
 - inovaremanhwabr: n 4, elegíveis 0, % assistido None, views48 4
 - ManhwaReact-ia: n 1, elegíveis 1, % assistido 16.9, views48 1
@@ -55,9 +55,9 @@ Vídeos nos últimos 7 dias: 25 | elegíveis (receberam o lote do feed): 14 | N�
 - Dorama Noturno: n 1, elegíveis 0, % assistido None, views48 None
 
 ## Os que mais renderam (copiar a estrutura, não o texto)
+- cIB4X-Q9MIk @CodigoInteligente-n7j: views48 220, % assistido 2.16, continuaram 0 — 
 - nd67FAr0h14 @CodigoInteligente-n7j: views48 209, % assistido 0, continuaram 0 — 
 - updrdJlgTEM @CodigoInteligente-n7j: views48 161, % assistido 0, continuaram 0 — 
-- gUsq9g6aUOo InventoReact: views48 123, % assistido 0.6, continuaram 0 — 
 
 ## O QUE DECIDE VIEWS (dado medido em 29/10 — FABLE_DECISOES.md D1; vale mais que gosto e que nota de júri)
 - 60% dos Shorts NÃO entram no lote de teste do feed ("continuaram" 100% com < 10 views = o YouTube mostrou a 2–5
@@ -70,10 +70,10 @@ Vídeos nos últimos 7 dias: 25 | elegíveis (receberam o lote do feed): 14 | N�
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-13T09:23: youtube 20/36, tiktok 44/58, instagram 46/53, flow 87/230, fotos 0/4 | MORTOS: youtube animescomia, youtube assistiainvestimentos, youtube bichonoturno, youtube cartuchoreact, youtube dicasfinanceirasdaia, youtube doramanoturno, youtube filmenoturno, youtube fiodameada, youtube forjareact, youtube gamenoturno, youtube historiasemframes, youtube inovare_thai
+## SEM NAVEGADOR (HTTP) — saúde em 11-13T12:20: youtube 22/36, tiktok 44/58, instagram 46/53, flow 82/230, fotos 0/4 | MORTOS: youtube animescomia, youtube assistiainvestimentos, youtube bichonoturno, youtube cartuchoreact, youtube curiosidadesnoturnas, youtube dicasfinanceirasdaia, youtube filmenoturno, youtube forjareact, youtube gamenoturno, youtube historiasemframes, youtube inovare_thai, youtube inovaremanhwabr
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
-Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @fabricadeautomacoesia (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (0), Tiktok @emersonjosiel2030 (3), Tiktok @inovaremanhwaverse2 (0), Tiktok @curiosidadesnoturnas (3), Tiktok @emersonjosiel2032 (0), Tiktok @emersonjosiel2031 (0), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0)
+MS Energy - Instagram @msenergycap (5), Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @fabricadeautomacoesia (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (0), Tiktok @emersonjosiel2030 (3), Tiktok @inovaremanhwaverse2 (0), Tiktok @curiosidadesnoturnas (3), Tiktok @emersonjosiel2032 (0), Tiktok @emersonjosiel2031 (0), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0)
 
 ## PEDIDOS DA DONA QUE NÃO SAÍRAM NOS ÚLTIMOS LONGOS (conferido no log do render; corrigir a causa)
 - GMuCrqDRe9A_No_Mana_Boy_Becomes_a_Genius: 12/13 ok — faltou: Mini-ganchos a cada 15 min
@@ -83,58 +83,58 @@ Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovareman
 - e2nIzNGXvmA_POOR_Guy_Receives_90_BILLION: 11/13 ok — faltou: Narradores por grupo, 1º = voz do resumo, Falas de personagem com outra voz
 
 ## VARIANTES DOS LONGOS (views/h e % assistido por fator; só fixar com 4+ vídeos por variante)
-| cortes_resumo | A | 19 | 0.04 | 0.6 |
-| cortes_resumo | B | 19 | 0.04 | 1.3 |
+| cortes_resumo | A | 20 | 0.04 | 3.0 |
+| cortes_resumo | B | 20 | 0.04 | 1.5 |
 | **cortes_resumo** | **vence B** (views/h) | | | |
 | fala_rapida | A | 6 | 0.03 | 0.1 |
-| fala_rapida | B | 9 | 0.03 | 0.4 |
-| fala_rapida | C | 11 | 0.04 | 10.4 |
+| fala_rapida | B | 10 | 0.04 | 0.8 |
+| fala_rapida | C | 12 | 0.05 | 2.2 |
 | fala_rapida | D | 7 | 0.04 | 0.6 |
-| fala_rapida | E | 5 | 1.30 | 8.2 |
+| fala_rapida | E | 5 | 1.27 | 8.2 |
 | **fala_rapida** | **vence E** (views/h) | | | |
-| ganchos_15min | A | 4 | 0.04 | 20.2 |
+| ganchos_15min | A | 6 | 0.15 | 5.5 |
 | ganchos_15min | B | 11 | 0.04 | 0.4 |
 | ganchos_15min | C | 23 | 0.03 | 1.5 |
-| **ganchos_15min** | **vence B** (views/h) | | | |
+| **ganchos_15min** | **vence A** (views/h) | | | |
 | narradores_modo | com_terciarios | 2 | 0.01 | 36.4 |
 | narradores_modo | dupla | 2 | 0.01 | — |
 | narradores_modo | mistura_grande | 2 | 0.13 | — |
-| narradores_modo | primarios_secundarios | 7 | 0.04 | 0.3 |
+| narradores_modo | primarios_secundarios | 8 | 0.06 | 0.4 |
 | narradores_modo | so_primarios | 16 | 0.03 | 1.1 |
-| narradores_modo | solo | 9 | 0.06 | 12.4 |
+| narradores_modo | solo | 10 | 0.06 | 8.9 |
 | titulo_triade | A | 18 | 0.03 | 1.9 |
-| titulo_triade | B | 20 | 0.04 | 1.1 |
+| titulo_triade | B | 22 | 0.04 | 1.5 |
 | **titulo_triade** | **vence B** (views/h) | | | |
 
 ## OBRAS: CONTINUAR OU NÃO (48 h+, 20+ views, 30%+ assistido)
-| 14  He got into the Medieval Age   bega | Fio da Meada | 8 | — | 5 | pouco dado |
-| 13  He got into the Medieval Age   bega | Fio da Meada | 5 | — | 5 | pouco dado |
-| 8 He got into the Medieval Age   began | Fio da Meada | 4 | — | 5 | pouco dado |
-| No Mana Boy Becomes a Genius Alchemist i | InovareManhwaVerse | 0 | — | 8 | pouco dado |
-| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 0 | — | 10 | pouco dado |
-| He Destroys the Hunter Exam So Easily Th | CenaReact | 0 | — | 12 | pouco dado |
-| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 13 | pouco dado |
-| He Spent 3000 Years in a Loop  Now Even | Manhwa Noturno | 2 | 0.1 | 15 | pouco dado |
-| He Acquires a New Skill Every Day    Man | Dorama Noturno | 1 | — | 21 | pouco dado |
-| His Ex Girlfriend wanted to Return when | InventoReact | 540 | 3.0 | 27 | pouco dado |
-| He got into the Stone Age and Conquered | inovare manhwa br | 6 | — | 31 | pouco dado |
-| His Party Left Him to Fight an Army For | InovareManhwaVerse | 3 | — | 32 | pouco dado |
-| He Was Lvl 99 But Got Reincarnated So He | Manhwa Noturno | 1 | 0.3 | 35 | pouco dado |
-| He Got Max Luck After a System Error and | Curiosidades Noturnas | 5 | 0.7 | 36 | pouco dado |
-| Lost their parents on plane crash they w | CenaReact | 0 | — | 38 | pouco dado |
-| Bullied Boy Levels Up 300 Times Using Ch | ForjaReact | 1 | 0.1 | 39 | pouco dado |
-| Depressed Hero Hated by Humanity Is Love | HistoriasEmFrames | 1 | — | 40 | pouco dado |
-| 12  He got into the Medieval Age   bega | Fio da Meada | 44 | 11.4 | 40 | pouco dado |
-| Bullied Orphan Dated His Master After Be | InovareManhwaVerse | 4 | — | 41 | pouco dado |
-| 11  He got into the Medieval Age   bega | Fio da Meada | 25 | 5.5 | 46 | pouco dado |
-| 9 He got into the Medieval Age   began | Fio da Meada | 220 | 2.2 | 48 | pouco dado |
-| He Devours Viruses to Become the Stronge | inovare manhwa br | 7 | — | 54 | pouco dado |
-| 2  The Little Orc everyone Mocked accid | InventoReact | 123 | 0.6 | 57 | parar (assistem pouco) |
-| When the Slave Becomes the  1 Mage and E | InovareManhwaVerse | 3 | 0.1 | 58 | pouco dado |
-| He Eats Monster Cores and Receives Their | InventoReact | 12 | 0.3 | 63 | pouco dado |
-| He Opens Loot Boxes in his Safe Hideout | Fio da Meada | 116 | 3.9 | 79 | parar (assistem pouco) |
-| He Farms Monsters in His Own Dungeon and | inovare manhwa br | 5 | — | 151 | pouco dado |
-| 7 He got into the Medieval Age   began | inovare manhwa br | 6 | 8.0 | 153 | pouco dado |
+| POOR Guy Receives 90 BILLION To Get REVE | Manhwa Noturno | 0 | — | 2 | pouco dado |
+| 14  He got into the Medieval Age   bega | Fio da Meada | 11 | — | 8 | pouco dado |
+| 13  He got into the Medieval Age   bega | Fio da Meada | 5 | — | 8 | pouco dado |
+| 8 He got into the Medieval Age   began | Fio da Meada | 15 | — | 8 | pouco dado |
+| No Mana Boy Becomes a Genius Alchemist i | InovareManhwaVerse | 0 | — | 11 | pouco dado |
+| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 0 | — | 13 | pouco dado |
+| He Destroys the Hunter Exam So Easily Th | CenaReact | 0 | — | 15 | pouco dado |
+| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 16 | pouco dado |
+| He Spent 3000 Years in a Loop  Now Even | Manhwa Noturno | 3 | 0.1 | 18 | pouco dado |
+| He Acquires a New Skill Every Day    Man | Dorama Noturno | 1 | — | 24 | pouco dado |
+| His Ex Girlfriend wanted to Return when | InventoReact | 540 | 3.0 | 30 | pouco dado |
+| He got into the Stone Age and Conquered | inovare manhwa br | 6 | — | 34 | pouco dado |
+| His Party Left Him to Fight an Army For | InovareManhwaVerse | 3 | — | 35 | pouco dado |
+| He Was Lvl 99 But Got Reincarnated So He | Manhwa Noturno | 1 | 0.3 | 38 | pouco dado |
+| He Got Max Luck After a System Error and | Curiosidades Noturnas | 5 | 0.7 | 39 | pouco dado |
+| Lost their parents on plane crash they w | CenaReact | 0 | — | 41 | pouco dado |
+| Bullied Boy Levels Up 300 Times Using Ch | ForjaReact | 1 | 0.1 | 42 | pouco dado |
+| Depressed Hero Hated by Humanity Is Love | HistoriasEmFrames | 2 | — | 43 | pouco dado |
+| 12  He got into the Medieval Age   bega | Fio da Meada | 44 | 11.4 | 43 | pouco dado |
+| Bullied Orphan Dated His Master After Be | InovareManhwaVerse | 4 | — | 44 | pouco dado |
+| 11  He got into the Medieval Age   bega | Fio da Meada | 25 | 5.5 | 49 | parar (assistem pouco) |
+| 9 He got into the Medieval Age   began | Fio da Meada | 220 | 2.2 | 51 | parar (assistem pouco) |
+| He Devours Viruses to Become the Stronge | inovare manhwa br | 7 | — | 57 | pouco dado |
+| 2  The Little Orc everyone Mocked accid | InventoReact | 125 | 0.6 | 60 | parar (assistem pouco) |
+| When the Slave Becomes the  1 Mage and E | InovareManhwaVerse | 3 | 0.1 | 61 | pouco dado |
+| He Eats Monster Cores and Receives Their | InventoReact | 12 | 0.3 | 66 | pouco dado |
+| He Opens Loot Boxes in his Safe Hideout | Fio da Meada | 116 | 3.9 | 82 | parar (assistem pouco) |
+| He Farms Monsters in His Own Dungeon and | inovare manhwa br | 5 | — | 154 | pouco dado |
 
 ## PEDIDOS E OPINIÕES DA DONA (valem mais que o júri; atender antes de qualquer outra coisa)
 - 30/10 00:20 | hipercool, longo | Hipercool está DESATIVADO de propósito (como o Historias em Frames, trocado pelo Claude Code Video); volta à produção na semana que vem, depois que terminar a postagem dos capítulos já feitos. Usar um projeto para melhorar o outro: o hipercool é o mais moderno — os personagens FALAM (ela pediu falas também nos longos) e tem muitos efeitos bons; os que não acrescentam muito tempo de render podem ir para os longos | aberto

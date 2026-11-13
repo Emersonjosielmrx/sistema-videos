@@ -21701,6 +21701,150 @@
         "Como canais de recap de anime/manhwa grandes em inglês, espanhol e outras línguas montam títulos; qual formato repete entre os campeões"
       ],
       "origem": "area_corpus_titulos__sonnet_0936.md 2026-11-13"
+    },
+    {
+      "id": "ranking_views_canal",
+      "nome": "Recaps mais vistos por canal",
+      "subtemas": [
+        "yt-dlp --flat-playlist ordenando por view_count em canais de recap (anime/manhwa), em vários idiomas"
+      ],
+      "origem": "area_yt_reused_recap__sonnet_1031.md 2026-11-13"
+    },
+    {
+      "id": "oficial_reused",
+      "nome": "Política \"reused content\" para recap",
+      "subtemas": [
+        "Ler a página oficial de reused content e os exemplos de comentário/transformação, e extrair uma checklist prática de o que precisa mudar num recap para continuar monetizado"
+      ],
+      "origem": "area_ranking_views_canal__sonnet_1046.md 2026-11-13"
+    },
+    {
+      "id": "oficial_shorts_longo",
+      "nome": "Regras e distribuição Shorts→longo",
+      "subtemas": [
+        "Páginas oficiais sobre vídeos relacionados, \"assistir em seguida\" e playlists para Shorts; separar o que está escrito do que é interpretação"
+      ],
+      "origem": "area_ranking_views_canal__sonnet_1046.md 2026-11-13"
+    },
+    {
+      "id": "similaridade_roteiro",
+      "nome": "Comparador de roteiros por canal",
+      "subtemas": [
+        "Truque simples em Python puro (difflib/ngram) para detectar roteiros e aberturas repetidos entre vídeos do mesmo canal, antes de postar"
+      ],
+      "origem": "area_ranking_views_canal__sonnet_1046.md 2026-11-13"
+    },
+    {
+      "id": "tendencia_ritmo",
+      "nome": "Views por dia em fila de recap",
+      "subtemas": [
+        "usar `timestamp` aproximado mais `view_count` para ranquear por ritmo recente e comparar com a nota views÷inscritos que já temos"
+      ],
+      "origem": "area_tendencia_sem_api__sonnet_1056.md 2026-11-13"
+    },
+    {
+      "id": "regras_yt_oficiais",
+      "nome": "Regras oficiais do YouTube sobre recap e conteúdo reutilizado",
+      "subtemas": [
+        "ler support.google.com/youtube sobre conteúdo reutilizado e inautêntico, com link e data"
+      ],
+      "origem": "area_tendencia_sem_api__sonnet_1056.md 2026-11-13"
+    },
+    {
+      "id": "auditoria_top",
+      "nome": "Auditoria dos vídeos mais vistos e recentes por canal",
+      "subtemas": [
+        "como listar top views, mais novos e maior watch time pelo Studio via navegador e conferir cada um contra a checklist acima"
+      ],
+      "origem": "area_oficial_reused__sonnet_1111.md 2026-11-13"
+    },
+    {
+      "id": "variacao_roteiro",
+      "nome": "Variação de abertura e estrutura do recap entre canais",
+      "subtemas": [
+        "truques de prompt e Python para impedir roteiros com cara de molde e conferir se dois canais não estão com roteiro parecido"
+      ],
+      "origem": "area_oficial_reused__sonnet_1111.md 2026-11-13"
+    },
+    {
+      "id": "titulo_capa_gancho",
+      "nome": "Títulos, capas e os primeiros 30 s",
+      "subtemas": [
+        "scripts em Python que pontuam títulos de recap campeão (comprimento, números, palavras de gancho) a partir de listas do yt-dlp, sem IA nova"
+      ],
+      "origem": "area_tendencia_ritmo__sonnet_1121.md 2026-11-13"
+    },
+    {
+      "id": "termux_ffmpeg_lote",
+      "nome": "Render em celular Android",
+      "subtemas": [
+        "receitas reais de Termux + ffmpeg (libx264/mediacodec) para render em lote e fila entre máquinas, com tempo medido"
+      ],
+      "origem": "area_tendencia_ritmo__sonnet_1121.md 2026-11-13"
+    },
+    {
+      "id": "sintetico_rotulo",
+      "nome": "Divulgação de conteúdo alterado ou sintético",
+      "subtemas": [
+        "ler a página oficial sobre rotular conteúdo alterado/sintético (voz clonada, imagens geradas) e quando o rótulo é obrigatório"
+      ],
+      "origem": "area_regras_yt_oficiais__sonnet_1132.md 2026-11-13"
+    },
+    {
+      "id": "inautentico_blog",
+      "nome": "Esclarecimentos de 2025–2026 sobre conteúdo inautêntico",
+      "subtemas": [
+        "procurar no blog oficial e no Creator Insider os esclarecimentos sobre recap, compilado e canais em massa, com data"
+      ],
+      "origem": "area_regras_yt_oficiais__sonnet_1132.md 2026-11-13"
+    },
+    {
+      "id": "convergencia_titulos",
+      "nome": "Anime quente por convergência de títulos",
+      "subtemas": [
+        "RSS de 20–30 canais recap EN, agrupar títulos dos últimos 14 dias por palavras em comum e ver quais animes 3+ canais recaparam"
+      ],
+      "origem": "area_anime_long__sonnet_1156.md 2026-11-13"
+    },
+    {
+      "id": "lag_idioma",
+      "nome": "Atraso entre recap em inglês e em pt-BR/es",
+      "subtemas": [
+        "achar pares do mesmo anime em canais EN e pt-BR pelo RSS e medir os dias de diferença e a diferença de views"
+      ],
+      "origem": "area_anime_long__sonnet_1156.md 2026-11-13"
+    },
+    {
+      "id": "titulo_ab",
+      "nome": "Troca de título depois de postar",
+      "subtemas": [
+        "página oficial de teste de título/miniatura em support.google.com/youtube e ver se canais grandes renomeiam vídeos (comparar título do mesmo video_id entre coletas)"
+      ],
+      "origem": "area_anime_long__sonnet_1156.md 2026-11-13"
+    },
+    {
+      "id": "titulos_capas_outliers",
+      "nome": "Títulos e capas dos outliers",
+      "subtemas": [
+        "padrões de título e primeiros 30 s dos vídeos que o item 2 sinalizar, coletados com yt-dlp (`--dump-json`) e analisados em Python puro"
+      ],
+      "origem": "area_competitor_watch__sonnet_1221.md 2026-11-13"
+    },
+    {
+      "id": "regras_youtube_reuso",
+      "nome": "Política oficial de conteúdo reutilizado/inautêntico",
+      "subtemas": [
+        "páginas de support.google.com/youtube sobre conteúdo reutilizado e monetização de recaps, com citação e data"
+      ],
+      "origem": "area_competitor_watch__sonnet_1221.md 2026-11-13"
+    },
+    {
+      "id": "canais_estrangeiros_por_pais",
+      "nome": "Canais de recap por país/idioma",
+      "subtemas": [
+        "como achar os recaps mais vistos em espanhol, inglês e outros idiomas via RSS `UULF` e o que muda no título por país"
+      ],
+      "origem": "area_competitor_watch__sonnet_1221.md 2026-11-13"
     }
   ],
   "projetos": [

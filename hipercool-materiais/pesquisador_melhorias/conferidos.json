@@ -16803,5 +16803,55 @@
     "arquivado": false,
     "descricao": "Rastreia canais de recap de manhwa numa planilha Google (GitHub Actions + YouTube Data API)",
     "data": "2026-11-13"
+  },
+  "maatmyali-eng/youtube-channel-replication": {
+    "ok": true,
+    "nome": "maatmyali-eng/YouTube-Channel-Replication",
+    "estrelas": 1,
+    "push": "2026-10-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "one reusable, $0 system for modeling any YouTube channel's style (tone, script, hook, audio, visuals, Shorts and long videos, thumbnails) an",
+    "data": "2026-11-13"
+  },
+  "adrk18/viralize": {
+    "ok": true,
+    "nome": "adrk18/viralize",
+    "estrelas": 1,
+    "push": "2026-08-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Predicts which YouTube topics are about to trend, from view velocity measured across repeated snapshots. LightGBM + multilingual embeddings,",
+    "data": "2026-11-13"
+  },
+  "thomaspraun/spoken-script": {
+    "ok": true,
+    "nome": "ThomasPraun/spoken-script",
+    "estrelas": 0,
+    "push": "2026-10-23",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Agent skill that writes video scripts that sound like a real person talking, not like AI. Hooks, retention structure, anti-AI-pattern cleanu",
+    "data": "2026-11-13"
+  },
+  "gsstharun/youtube-agent-skill-": {
+    "ok": true,
+    "nome": "gsstharun/youtube-agent-skill-",
+    "estrelas": 1,
+    "push": "2026-11-11",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Eleven Claude skills that run a YouTube channel: scripts off 21 hook formulas with a scored hook, title and thumbnail linted as one pairing,",
+    "data": "2026-11-13"
+  },
+  "web3wesley/trend-research-toolkit": {
+    "ok": true,
+    "nome": "web3wesley/trend-research-toolkit",
+    "estrelas": 8,
+    "push": "2026-10-29",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Two-tier YouTube topic research: demand (Google Trends via SerpApi) + competition (YouTube Data API) to find rising, under-served video topi",
+    "data": "2026-11-13"
   }
 }

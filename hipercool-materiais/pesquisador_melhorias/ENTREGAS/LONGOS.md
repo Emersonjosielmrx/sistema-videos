@@ -1433,3 +1433,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 13/11 — 0/0/0 (filtro automático já tirou tudo; nada a avaliar) — 2026-11-13 05:11 — Mais vistos por país (`area_trends_yt_pais`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_yt_pais__sonnet_0506.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 10:37 — Conteúdo reutilizado aplicado a recap de anime/manhwa (`area_yt_reused_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_yt_reused_recap__sonnet_1031.md`
+- [INÉDITO] github.com/maatmyali-eng/YouTube-Channel-Replication — ★1, push 2026-10-21, MIT — one reusable, $0 system for modeling any YouTube channel's style (tone, script, hook, audio, visuals, Shorts and long videos, thumbnails) an
+
+## [ ] PENDENTE — 2026-11-13 11:34 — Regras oficiais do YouTube sobre recap e conteúdo reutilizado (`area_regras_yt_oficiais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_regras_yt_oficiais__sonnet_1132.md`
+- (todos os itens desta pesquisa foram reprovados)

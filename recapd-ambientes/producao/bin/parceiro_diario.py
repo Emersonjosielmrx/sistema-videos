@@ -564,11 +564,52 @@ def alvo_por_rendimento(d, rend, base):
     r = rend.get(d["canal"])
     if os.environ.get("PARCEIRO_ALVO_RENDIMENTO", "1") == "0":
         return base * 2 if (r or 0) >= 300 else base
-    if r is None:
-        return base
+    # 13/11: o estoque era contado pelo "por_dia" do CADASTRO, mas o canal posta muito mais (rampa do postador):
+    # CenaReact cadastro 2 e abre 6,3/dia; inovare manhwa br 2 -> 6,7; Animescomia 2 -> 4,7. O alvo dava 14/14/6
+    # vídeos = 2 a 4 dias de reserva, e o sistema dizia "fila cheia" com o canal abaixo da semana que a dona pede
+    # (02/11: reserva de 1 semana). Agora o gasto do dia é o MAIOR entre o cadastro e o que o canal abriu de verdade
+    # (média de 3 dias, ritmo_real). Dias de reserva: forte 10, médio 7, fraco 7 (era 3: a semana vale pra todos; o
+    # fraco continua depois na FILA de produção, que é por rendimento). Canal novo sem medida: 7 dias também.
+    # PARCEIRO_ALVO_RITMO=0 volta à conta de 12/11.
     pd = max(1, int(d.get("por_dia") or 2))
-    dias = 10 if r >= 300 else 7 if r >= 50 else 3
-    return max(3, pd * dias)
+    if os.environ.get("PARCEIRO_ALVO_RITMO", "1") == "0":
+        if r is None:
+            return base
+        return max(3, pd * (10 if r >= 300 else 7 if r >= 50 else 3))
+    gasto = max(pd, ritmo_real().get(d["canal"], 0))
+    dias = 10 if (r or 0) >= 300 else 7
+    return max(base if r is None else 3, int(round(gasto * dias)))
+
+
+_RITMO = {"t": 0, "v": {}}
+
+
+def ritmo_real():
+    """{id do canal: Shorts do parceiro que ABRIRAM por dia} — média dos últimos 3 dias completos, lida do ledger do
+    postador (publish_at). Cache de 10 min. Falhou = {} (vale o por_dia do cadastro)."""
+    if time.time() - _RITMO["t"] < 600:
+        return _RITMO["v"]
+    v = Counter()
+    try:
+        hoje = datetime.now(FUSO_BR).date()
+        with open(LEDGER, "rb") as fh:
+            fh.seek(0, 2)
+            fh.seek(max(0, fh.tell() - 1_500_000))
+            linhas = fh.read().decode("utf-8", "replace").splitlines()[1:]
+        for l in linhas:
+            try:
+                u = json.loads(l)
+            except ValueError:
+                continue
+            if u.get("projeto") != PROJETO:
+                continue
+            q = _dt(u.get("publish_at") or u.get("ts") or "")
+            if q and 1 <= (hoje - q.astimezone(FUSO_BR).date()).days <= 3:
+                v[u.get("canal_id")] += 1
+    except OSError:
+        pass
+    _RITMO.update(t=time.time(), v={k: n / 3 for k, n in v.items()})
+    return _RITMO["v"]
 
 
 def _rendimento_canais():
@@ -690,6 +731,11 @@ def producao(args):
                 log(f"línguas: {', '.join(ling)} esperam (1 versão de língua a cada "
                     f"{os.environ.get('PARCEIRO_LINGUA_A_CADA', '3')} Shorts — PC pro pt)")
                 ling = []
+            if ling and lingua_nasce_morta():
+                log(f"línguas: {', '.join(ling)} NÃO são feitas junto deste Short — a versão sairia da mesma fonte do pt "
+                    "e as regras (nunca o mesmo vídeo em 2 canais + o pt tem a preferência) impedem que ela poste: "
+                    "desde 12/11, 10 feitas (~23 min de PC cada) e 1 agendada. LINGUA_JUNTO_DO_PT=1 volta a fazer.")
+                ling = []
             antes = {str(x["pj"]) for x in its}
             rc = _rodar_auto(c, alvo, ling, fonte_url, tipo_fonte)
             if nome_fonte:
@@ -730,6 +776,18 @@ def producao(args):
 
 
 # ─────────────────────────── postagem ───────────────────────────────────────
+def lingua_nasce_morta():
+    """13/11: a versão em outra língua é feita da MESMA fonte do Short pt. Com as duas regras em vigor — "nunca o mesmo
+    vídeo em 2 canais, em qualquer língua" (dona 01/11) e "o pt tem a preferência" (PREFERE_PT, 12/11) — ela só
+    consegue postar se o pt falhar. Medido: as 27 versões que postaram em 8 dias eram todas de fonte cujo pt NÃO
+    postou; as 27 paradas hoje nunca vão subir; canais de língua com "nada pronto" 33x no dia. Fazer a versão é gastar
+    ~23 min de PC por vídeo que não posta. True = não fazer (regras atuais). Volta a fazer com LINGUA_JUNTO_DO_PT=1
+    ou com PREFERE_PT=0 (aí é o pt que espera a língua). Usada também pelo ocioso._escolher_pc2 (PC2/desktop)."""
+    if os.environ.get("LINGUA_JUNTO_DO_PT") == "1":
+        return False
+    return os.environ.get("PREFERE_PT", "1") != "0"
+
+
 def _trazer_do_drive(x, nome):
     """Traz de volta do Drive o video.mp4 de UM Short da reserva (reserva_shorts_drive.py deixa _NO_DRIVE.txt com o
     caminho). True se o arquivo está no lugar. 12/11 dona: "pode mandar as reservas pro Drive"."""

@@ -13,6 +13,7 @@ Detecção por keyword PT/EN na descrição do painel DE DESTINO (painel B do co
 Anti-repetição consecutiva. force_all=ELEMENTAL_FORCE força um efeito em todo corte
 (ciclo fire->water->ice->tear) pra teste visual.
 """
+import re
 import os
 import subprocess
 import sys
@@ -308,9 +309,31 @@ def detect_element(desc):
         return None
     d = desc.lower()
     for element, kws in ELEMENT_KEYWORDS.items():
-        if any(kw in d for kw in kws):
+        if _rx_elemento(element, kws).search(d):
             return element
     return None
+
+
+# 13/11: era "kw in d" (pedaço de palavra): "marido"/"território"/"vários" davam ÁGUA (mar, rio), "animal"/"normal"
+# davam SOMBRA (mal), "ferro"/"terror" davam GLITCH (erro), "índice" dava GELO (ice), "floresta" dava PÉTALAS (flor),
+# "soldado" dava SOL, "socorro" dava SOCO, "aguardou" dava ÁGUA. Agora a palavra-chave casa no COMEÇO da palavra
+# (radical: "mergulh" pega "mergulhou") e as curtas que também são começo de outra palavra só casam INTEIRAS.
+_SO_INTEIRA = frozenset(
+    "ama mar rio mal tv ice pó rip tear fog bug onda tela erro sinal sol lua run page joy shy yay arte corte corre flor "
+    "fast manha manhã neve soco acao ação bang boom chama juro puto hein corou bomba agua pool cozy neon evil holy gust "
+    "warp rain snow wind love kiss fire burn mana gelo fogo frio medo raio flores".split())
+_RX_ELEMENTO = {}
+
+
+def _rx_elemento(element, kws):
+    rx = _RX_ELEMENTO.get(element)
+    if rx is None:
+        letra = "0-9a-zà-öø-ÿ"
+        partes = [re.escape(k.lower()) + (rf"s?(?![{letra}])" if k.lower() in _SO_INTEIRA else "")
+                  for k in sorted(kws, key=len, reverse=True) if k]
+        # elemento sem palavra-chave (lista vazia) não pode casar: "(?:)" casaria em qualquer texto
+        rx = _RX_ELEMENTO[element] = re.compile(rf"(?<![{letra}])(?:" + "|".join(partes) + ")" if partes else r"(?!)")
+    return rx
 
 
 def _probe_dur(path):

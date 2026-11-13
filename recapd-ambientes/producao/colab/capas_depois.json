@@ -724,8 +724,8 @@
    "source_url": "https://www.youtube.com/watch?v=bX7kyJWkQTc"
   },
   "publicar": false,
-  "estado": "pendente",
-  "tentativas": 6,
+  "estado": "feito",
+  "tentativas": 7,
   "em": "2026-11-05T21:51",
   "refazer": "fora_padrao_1111"
  },
@@ -1346,5 +1346,54 @@
   "estado": "feito",
   "tentativas": 2,
   "em": "2026-11-13T05:28"
+ },
+ {
+  "canal": "novo_manhwanoturno",
+  "vid": "ijsBfAGDgb0",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-d88c9e_cap1_20261113",
+  "params": {
+   "anime": "sem-obra-d88c9e",
+   "cap": 1,
+   "texto": "90 BILHÕES?",
+   "cena": "ELE FOI HUMILHADO por ser pobre mas DESPERTOU o SISTEMA BILIONÁRIO de VINGANÇA e agora é rico",
+   "protagonista": "Young adult male protagonist with short dark hair, wearing casual student clothes, shocked expression, colorful webtoon style, detailed lighting, solid background",
+   "generos": [
+    "romance",
+    "comedia",
+    "escola",
+    "sistema",
+    "vinganca"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=e2nIzNGXvmA"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-13T10:38"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "0XuSqUWUbBw",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-fd7333_cap1_20261113",
+  "params": {
+   "anime": "sem-obra-fd7333",
+   "cap": 1,
+   "texto": "EXÉRCITO DEMÔNIO",
+   "cena": "O EXÉRCITO de DEMÔNIOS CHEGOU! ELE DESPERTOU o PODER secreto para salvar o império",
+   "protagonista": "Young adult male fantasy noble, dark hair, intelligent expression, wearing medieval European royal coat, fantasy castle background, highly detailed digital art",
+   "generos": [
+    "isekai",
+    "fantasia",
+    "acao",
+    "aventura"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=oLBasz5H1-4"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-13T12:20"
  }
 ]

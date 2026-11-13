@@ -1,0 +1,363 @@
+{
+ "video": "gestaodegrupos_ia_20261030_194947.mp4",
+ "conta": "gestaodegrupos.ia",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Boas-vindas no automático nos seus grupos de WhatsApp",
+ "formato": "sem_dono",
+ "veo_total": 0,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    9.74
+   ],
+   [
+    1,
+    "imagem",
+    17.21
+   ],
+   [
+    2,
+    "conversa",
+    5.5
+   ],
+   [
+    3,
+    "imagem",
+    13.61
+   ],
+   [
+    4,
+    "cartao",
+    5.44
+   ]
+  ],
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "No bloco '3 O resultado', a primeira pílula contém apenas o texto 'grupos de WhatsApp', aparentando texto cortado ou incompleto, pois não comunica o resultado narrado na locução ('ficam no automático').",
+   "como_corrigir": "Alterar o texto da pílula para 'grupos no automático' ou 'WhatsApp no automático', garantindo que o bullet expresse um resultado completo e claro."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Cena parada e ritmo arrastado: o cartão com a pergunta permanece estático por mais de 4 segundos sobre um fundo desfocado completamente congelado, sem nenhum movimento de câmera, pulsação ou dinamismo.",
+   "como_corrigir": "Aplicar animação de entrada com overshoot/spring no cartão da pergunta e um leve push-in contínuo (Ken Burns lento) no plano de fundo para manter a retenção inicial."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca: a mudança da cena 0 para a cena 1 ocorre por corte duro da mesma imagem desfocada para a versão nítida, gerando uma quebra abrupta sem continuidade de movimento.",
+   "como_corrigir": "Criar uma transição fluida, como um zoom contínuo que dissipa o cartão ou um wipe direcional com blur de movimento conectando a pergunta à dor."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Imagem com cara de banco de imagem genérico e plano 100% estático: o homem olhando para o celular não possui qualquer animação, paralaxe ou movimento de câmera entre q04 e q06, parecendo uma foto parada inserida no vídeo.",
+   "como_corrigir": "Substituir por vídeo real de uso ou animar a imagem estática em 2.5D, separando o personagem do fundo com deslocamento de paralaxe e leve movimento de respiração/câmera."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Falta de variedade e repetição de molde: a composição com cards brancos de cantos arredondados e checks verdes empilhados à esquerda possui exatamente o mesmo formato estrutural que é reutilizado na cena 3.",
+   "como_corrigir": "Diferenciar a identidade visual entre dor e solução: usar elementos com estética de alerta ou tag lateral na cena 1, reservando os cartões brancos com checkmark para a cena de resultado."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Transição seca e desaparecimento de elementos sem animação no WhatsApp: entre q08 e q09, a conversa anterior é bruscamente cortada e substituída em vez de rolar suavemente para cima, deixando um grande vazio estático no topo da janela.",
+   "como_corrigir": "Adicionar animação de rolagem vertical fluida (smooth scroll) empurrando as mensagens antigas para cima com desaceleração conforme a nova dúvida e o balão de digitação entram."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Cena congelada por mais de 2 segundos: entre q10 e q11 a tela permanece visualmente idêntica com apenas um card na tela sobre foto genérica congelada, enquanto o áudio já menciona 'moderação ativa e resumo das conversas'.",
+   "como_corrigir": "Fracionar a entrada dos elementos visuais, sincronizando o surgimento de tópicos animados para 'moderação ativa' e 'resumo das conversas' no exato momento da locução, somados a um zoom contínuo no fundo."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Reutilização excessiva do mesmo background estático: a mesma foto desfocada do homem à mesa foi utilizada nas cenas 0, 1, 2 e agora novamente na cena 4, tornando o vídeo monótono.",
+   "como_corrigir": "Substituir o fundo repetido por um background em motion design com gradientes sutis animados da marca, malha de pontos ou formas geométricas flutuantes."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "O card 'grupos de WhatsApp' está truncado e não expressa o resultado falado.",
+   "como_corrigir": "Substituir por 'grupos no automático' para refletir o benefício."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Gancho inicial estático e sem retenção nos primeiros 2 segundos. O anúncio abre com um cartão de texto estático cobrindo um fundo escuro e totalmente desfocado, sem movimento, sem rosto ativo e sem ação dramática, parecendo um slide de PowerPoint ou post estático de carrossel em vez de um vídeo dinâmico de Reels.",
+   "como_corrigir": "MUDANÇA DE IMPACTO 1 (Cena 0): Transformar o gancho em uma abertura dinâmica nos primeiros 2 segundos. Em vez de cartão estático sobre fundo borrado, mostrar ação visual imediata (tela do celular sendo bombardeada de notificações de novos membros entrando ou o apresentador falando diretamente para a câmera com energia sobre a sobrecarga manual)."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Artefato visual desalinhado sob o cartão de pergunta. Há uma barra turquesa solta e cortada visível abaixo do canto inferior esquerdo do cartão branco, transmitindo falha de acabamento e desalinhamento de camadas.",
+   "como_corrigir": "Remover a barra deslocada ou estendê-la por toda a largura inferior do cartão como acabamento visual intencional e integrado."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Incoerência semiótica grave no bloco de dor. Sob o rótulo '1 O problema', os tópicos 'toma o seu tempo' e 'atrasa o começo' aparecem com ícone de checkmark verde (✓). Checkmark verde é convenção universal de sucesso, benefício e aprovação, gerando contradição cognitiva e visual de template genérico.",
+   "como_corrigir": "MUDANÇA DE IMPACTO 2 (Cena 1): Substituir os checks verdes (✓) por ícones semióticos de dor ou impedimento (como '✕' vermelho/laranja ou ícone de alerta ⚠️), alinhando o design à narrativa do problema."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Demonstração do produto truncada e desvio temático. Após o fluxo inicial de boas-vindas, a conversa muda repentinamente para uma pergunta sobre 'resumos das conversas' e o vídeo corta para a cena seguinte com o bot apenas digitando ('...'), sem entregar a resposta da IA e frustrando a expectativa de eficiência.",
+   "como_corrigir": "MUDANÇA DE IMPACTO 3 (Cena 2): Manter o foco da simulação estritamente na promessa de boas-vindas do cabeçalho ou garantir que a resposta da IA apareça completa na tela antes do corte para a próxima cena, eliminando o corte durante o carregamento."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Copy truncada e fraca no tópico de resultado. O item '✓ grupos de WhatsApp' é apenas um substantivo solto, não comunicando um benefício ou resultado tangível conquistado pelo cliente.",
+   "como_corrigir": "Substituir o texto do tópico por um resultado comercial tangível, como '✓ Grupos 100% no automático' ou '✓ Moderação ativa 24/7'."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261112_165224.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261113_051134.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

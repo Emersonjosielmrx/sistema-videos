@@ -3184,3 +3184,44 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 09:49 — Corpus de títulos reais por nicho (`area_corpus_titulos`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_corpus_titulos__sonnet_0936.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 10:53 — Recaps mais vistos por canal (`area_ranking_views_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_ranking_views_canal__sonnet_1046.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 11:04 — Tendências de recap sem API (`area_tendencia_sem_api`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_tendencia_sem_api__sonnet_1056.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 11:14 — Política "reused content" para recap (`area_oficial_reused`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_oficial_reused__sonnet_1111.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 11:27 — Views por dia em fila de recap (`area_tendencia_ritmo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_tendencia_ritmo__sonnet_1121.md`
+- [INÉDITO] github.com/adrk18/viralize — ★1, push 2026-08-07, MIT — Predicts which YouTube topics are about to trend, from view velocity measured across repeated snapshots. LightGBM + multilingual embeddings,
+
+## [ ] PENDENTE — 2026-11-13 11:47 — Variação de abertura e estrutura do recap entre canais (`area_variacao_roteiro`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_variacao_roteiro__sonnet_1141.md`
+- [INÉDITO] github.com/ThomasPraun/spoken-script — ★0, push 2026-10-23, MIT — Agent skill that writes video scripts that sound like a real person talking, not like AI. Hooks, retention structure, anti-AI-pattern cleanu
+- [INÉDITO] github.com/gsstharun/youtube-agent-skill- — ★1, push 2026-11-11, MIT — Eleven Claude skills that run a YouTube channel: scripts off 21 hook formulas with a scored hook, title and thumbnail linted as one pairing,
+
+## [ ] PENDENTE — 2026-11-13 12:01 — Canais de recap de anime em inglês, 1-3 h (`area_anime_long`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_anime_long__sonnet_1156.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 12:14 — Atraso entre recap em inglês e em pt-BR/es (`area_lag_idioma`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_lag_idioma__sonnet_1206.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 12:27 — Monitor de novos uploads de concorrentes (`area_competitor_watch`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_competitor_watch__sonnet_1221.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 12:37 — Canais de recap por país/idioma (`area_canais_estrangeiros_por_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_canais_estrangeiros_por_pais__sonnet_1231.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 12:52 — Previsão da curva de uma tendência (`area_trend_forecast`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trend_forecast__sonnet_1241.md`
+- [INÉDITO] github.com/web3wesley/trend-research-toolkit — ★8, push 2026-10-29, MIT — Two-tier YouTube topic research: demand (Google Trends via SerpApi) + competition (YouTube Data API) to find rising, under-served video topi

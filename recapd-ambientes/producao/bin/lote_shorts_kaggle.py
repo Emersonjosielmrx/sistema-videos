@@ -65,10 +65,59 @@ def _curto_rodando():
         return None
 
 
+PLACAR = Path(r"D:\recapd-ambientes\producao\estado\shorts_kaggle_placar.json")
+
+
+def _placar_ler():
+    try:
+        return json.loads(PLACAR.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"ultimos": []}
+
+
+def _placar_registrar(resultado, minutos):
+    """resultado: 'ok' (o vídeo veio do Kaggle), 'ninguem' (nenhuma GPU pegou), 'erro', 'prazo'."""
+    d = _placar_ler()
+    d["ultimos"] = (d.get("ultimos") or [])[-19:] + [
+        {"em": datetime.now().isoformat(timespec="minutes"), "r": resultado, "min": round(minutos, 1)}]
+    try:
+        PLACAR.parent.mkdir(parents=True, exist_ok=True)
+        PLACAR.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def kaggle_em_pausa():
+    """13/11: nos últimos dias 0 de 6 Shorts mandados voltaram do Kaggle (4 esperaram 26 min cada e foram renderizados
+    no PC do mesmo jeito; 2 deram erro) — sem cota de GPU pra curto até a renovação e as contas vivas nos longos. Cada
+    Short do PC1 perdia 26 min parado. Agora o próprio resultado decide: SHORTS_KAGGLE_FALHAS (3) tentativas seguidas
+    sem o vídeo vir do Kaggle = pausa de SHORTS_KAGGLE_PAUSA_H (3) h; depois testa 1 de novo (se vier, volta ao
+    normal; se não, mais 3 h). Devolve o motivo (texto) ou ''. SHORTS_KAGGLE_FALHAS=0 desliga."""
+    n = int(os.environ.get("SHORTS_KAGGLE_FALHAS", "3"))
+    if n <= 0:
+        return ""
+    ult = (_placar_ler().get("ultimos") or [])[-n:]
+    if len(ult) < n or any(x.get("r") == "ok" for x in ult):
+        return ""
+    try:
+        horas = (datetime.now() - datetime.fromisoformat(ult[-1]["em"])).total_seconds() / 3600
+    except (ValueError, KeyError):
+        return ""
+    pausa = float(os.environ.get("SHORTS_KAGGLE_PAUSA_H", "3"))
+    if horas >= pausa:
+        return ""  # passou a pausa: este Short é o teste
+    return (f"{n} Shorts seguidos sem voltar do Kaggle (último {ult[-1]['r']} às {ult[-1]['em'][11:16]}) — "
+            f"testa de novo em {pausa - horas:.1f} h")
+
+
 def renderizar(work, video, roteiro, cand, short_kind, env, vf):
     """Manda o pedido, espera o Kaggle e baixa o vídeo pra vf. True = vf pronto."""
     if os.environ.get("SHORTS_KAGGLE_SEM_CURTO") != "1" and _curto_rodando() is False:
         logging.info("[kaggle-lote] nenhuma conta de curto rodando no Kaggle — renderizo no PC agora (sem esperar 90 min)")
+        return False
+    motivo = kaggle_em_pausa()
+    if motivo:
+        logging.info(f"[kaggle-lote] Kaggle em pausa pros Shorts: {motivo} — renderizo no PC agora")
         return False
     work = Path(work)
     pid = f"{datetime.now():%Y%m%d_%H%M%S}_{str(cand.get('id', 'x'))[:11]}"
@@ -99,6 +148,7 @@ def renderizar(work, video, roteiro, cand, short_kind, env, vf):
     # "em_andamento"), desiste e renderiza no PC; se uma GPU JÁ pegou, espera até os 90 como antes (crédito gasto).
     pegar_s = float(os.environ.get("SHORTS_KAGGLE_PEGAR_MIN", "25")) * 60
     pegou = False
+    resultado = "prazo"
     while time.time() < prazo:
         time.sleep(60)
         try:
@@ -108,6 +158,7 @@ def renderizar(work, video, roteiro, cand, short_kind, env, vf):
         pegou = pegou or any(n.startswith("em_andamento") and "SEGURADO" not in n for n in nomes)
         if not pegou and time.time() - t0 > pegar_s and "pronto.json" not in nomes:
             logging.info(f"[kaggle-lote] {pid}: nenhuma GPU pegou em {pegar_s / 60:.0f} min — renderizo no PC")
+            resultado = "ninguem"
             break
         if "pronto.json" in nomes and "video.mp4" in nomes:
             _rc("copyto", f"{FILA}/{pid}/video.mp4", str(vf), timeout=1800)
@@ -116,10 +167,14 @@ def renderizar(work, video, roteiro, cand, short_kind, env, vf):
                     _rc("copyto", f"{FILA}/{pid}/{extra}", str(work / extra), timeout=300)
             _rc("purge", f"{FILA}/{pid}", timeout=300)
             shutil.rmtree(pasta, ignore_errors=True)
-            return vf.exists() and vf.stat().st_size > 300_000
+            veio = vf.exists() and vf.stat().st_size > 300_000
+            _placar_registrar("ok" if veio else "erro", (time.time() - t0) / 60)
+            return veio
         if "erro.json" in nomes:
             logging.warning(f"[kaggle-lote] {pid} deu erro no Kaggle: {_rc('cat', f'{FILA}/{pid}/erro.json')[:400]}")
+            resultado = "erro"
             break
+    _placar_registrar(resultado, (time.time() - t0) / 60)
     # desistiu: tira da fila (se ainda ninguém pegou) pra não renderizar 2x. 02/11: tenta 3x — com o Drive lento a
     # pasta ficava na fila e uma GPU nova renderizava o mesmo Short que o PC já fazia
     for _ in range(3):

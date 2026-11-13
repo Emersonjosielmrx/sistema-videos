@@ -1,8 +1,8 @@
-# Teste gradual de formatos e vozes — 13/11 10:16
+# Teste gradual de formatos e vozes — 13/11 13:17
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 431.5 de 820 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 437.5 de 828 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|

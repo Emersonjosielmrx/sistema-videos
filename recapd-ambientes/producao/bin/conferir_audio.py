@@ -53,6 +53,36 @@ def _roteiro(ficha, d):
     return None
 
 
+def _tem_som(audio):
+    """True = há som de verdade; False = mudo (volume médio < -50 dB ou 90%+ do tempo em silêncio); None = não medi."""
+    try:
+        r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(audio), "-af",
+                            "volumedetect,silencedetect=noise=-45dB:d=0.5", "-vn", "-f", "null", "-"],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120,
+                           creationflags=SEM_JANELA)
+        m = re.search(r"mean_volume:\s*(-?[\d.]+) dB", r.stderr or "")
+        if not m:
+            return None
+        if float(m.group(1)) < -50:
+            return False
+        mudo = sum(float(x) for x in re.findall(r"silence_duration:\s*([\d.]+)", r.stderr or ""))
+        dur = _duracao(audio)
+        return not (dur > 0 and mudo / dur >= 0.9)
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _whisper_local(audio):
+    """Transcrição pelo Whisper do próprio PC (o mesmo _whisper_sub.py do anime_fetch, modelo tiny) — reserva de quando
+    o Groq está fora. '' se não deu."""
+    try:
+        r = subprocess.run([sys.executable, str(BIN / "_whisper_sub.py"), str(audio), "tiny"], capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=600, creationflags=SEM_JANELA)
+        return (r.stdout or "").splitlines()[0].strip() if r.returncode == 0 and (r.stdout or "").strip() else ""
+    except Exception:  # noqa: BLE001
+        return ""
+
+
 def ouvir(ficha):
     """{"ok": True|False|None, "motivo", "ouvido", ...}. None = não deu pra conferir."""
     ficha = Path(ficha)
@@ -66,6 +96,20 @@ def ouvir(ficha):
                         str(mp3)], check=True, timeout=180, creationflags=SEM_JANELA)
         import monitor_bordoes
         ouvido = monitor_bordoes._transcrever(mp3) or ""
+        # 13/11: TRANSCRIÇÃO VAZIA NÃO É VÍDEO MUDO. Com o Groq fora ("Organization has been restricted", proxy fora)
+        # a transcrição volta vazia e a regra abaixo lia "0 palavras = quase nada se ouve": 25 Shorts prontos segurados
+        # só em 13/11 (53 em 2 semanas) e depois descartados pro Drive pelo descartar_segurados. Conferido num deles
+        # (sem-obra-ec501f): volume -17 dB, 0 s de silêncio, narração inteira. Zero palavra só vale como "mudo" se o
+        # ÁUDIO for mudo de verdade (medido pelo ffmpeg); com som, tenta o Whisper local e, sem ele, NÃO segura.
+        if not _palavras(ouvido):
+            som = _tem_som(mp3)
+            if som is not False:
+                local = _whisper_local(mp3)
+                if _palavras(local):
+                    ouvido = local
+                else:
+                    return {"ok": None, "motivo": "transcrição vazia com som no vídeo (Groq fora?) — não conferi",
+                            "tem_som": som}
     except Exception as e:  # noqa: BLE001
         return {"ok": None, "motivo": f"não conferi ({type(e).__name__})"}
     finally:

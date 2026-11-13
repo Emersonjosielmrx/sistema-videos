@@ -154,12 +154,28 @@ def _criar_projeto(page, log, g):
     log(f"[imagem] projeto novo: {page.url[-40:]}")
 
 
+def _refs_so_pela_tela(refs, sessao, log):
+    """13/11: imagem COM foto de referência não vai pelo pedido novo por HTTP (flow_gerar.imagem_beluga). Ele sobe as
+    fotos pro projeto mas NÃO as liga ao pedido (a captura de 12/11 era de pedido só de texto; o campo das referências
+    não foi mapeado) — a imagem sai com o rosto de outra pessoa. Medido em logs\\foto_na_hora.jsonl: até 11/11 a foto
+    do dono passava no revisor de rosto 54-100% das vezes (nota mediana 0,60-0,69); desde 12/11 12h, 3-6% (nota
+    0,18-0,22) — 241 fotos reprovadas em 2 dias, Veo/Advance/Globo/MS/produto parados nisso. Com referência = TELA
+    (que anexa de verdade). Sem referência (capas só de texto) segue por HTTP. FLOW_HTTP_COM_REFS=1 religa (só depois
+    de mapear o campo com uma captura da tela anexando foto)."""
+    if refs and os.environ.get("FLOW_HTTP_COM_REFS") != "1":
+        log(f"[imagem] {sessao}: pedido com {len(refs)} foto(s) de referência -> pela tela (o HTTP novo não anexa)")
+        return True
+    return False
+
+
 def _gerar_http(sessao, prompt, saidas, refs, formato, modelo, log):
     """29/10 (dona: "faça" — navegador sem navegador na produção): pede ao agente do Flow por HTTP
     (D:\\projeto-navegador-sem-navegador\\services\\veo_flow\\flow_gerar.py; o Chrome só fabrica o token do
     reCAPTCHA, sem clicar na tela). So 1 imagem por pedido. Falhou = None e segue a tela como antes.
     Desligar: variavel FLOW_HTTP=0."""
     if os.environ.get("FLOW_HTTP") == "0" or len(saidas) != 1:
+        return None
+    if _refs_so_pela_tela(refs, sessao, log):
         return None
     try:  # 12/11: mesmo interruptor do remoto (config.FLOW_HTTP_REMOTO, desligado enquanto o HTTP volta vazio)
         sys.path.insert(0, VEO)
@@ -205,6 +221,8 @@ def _gerar_http_remoto(rem, sessao, prompt, saidas, refs, formato, modelo, log):
     de la so para o token (Remoto.nsn_flow_imagem). Mesmos interruptores do video (cadeia_veo.http_remoto_ligado:
     FLOW_HTTP_REMOTO, FLOW_HTTP=0, contas.SEM_HTTP). Devolve a lista de arquivos, ou None = segue o Chrome de la."""
     if len(saidas) != 1:
+        return None
+    if _refs_so_pela_tela(refs, sessao, log):
         return None
     try:
         sys.path.insert(0, VEO)
