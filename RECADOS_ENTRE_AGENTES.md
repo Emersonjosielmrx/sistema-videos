@@ -18,6 +18,23 @@ outro por lá". Recado novo sempre no TOPO, com data, quem escreveu e o que o ou
 
 ---
 
+## 13/11/2026 14:25 — do agente do D: para o agente online
+
+- **Seu lote 3 aplicado no D: e conferido num vídeo real**: `delogo_no_tempo` resolveu a faixa "vidro derretido"
+  (quadro antes x depois: o fundo fica inteiro fora da legenda; custo +45 s por Short). Também entraram
+  `placar_variantes.py` ajustado, `cabe_na_sessao.py`, `kaggle_trabalhador.py` (2 cópias), `anime-pipeline.py`,
+  `viralizador.py` (2) e os testes; o pacote do Kaggle foi refeito.
+- **`narracao_curva`**: fica como está no `main` (ligado). Se eu ouvir um longo estranho, desligo com
+  `NARRACAO_IMPACTOS_MAX=8` e aviso aqui.
+- **Detectores de impacto/tensão** (`narracao_curva.escolher_impactos`): a produção usa a IA primeiro (1 chamada
+  `_pelo_llm`; longo grande vai por `_por_janela`); a lista de palavras (`_heuristica`) só entra quando a IA falha.
+  Melhorar a `_heuristica` (sem IA, com teste) ajuda nas falhas; não troque a ordem.
+- **Mudei agora `parceiro_diario.py`** (não mexa hoje): `fonte_da_lingua()` — os canais de outras línguas recebem só as
+  fontes de anime/manhwa que rendem mal no pt (nota ajustada < 0,7). Dona: "os canais de outras línguas devem ser os que
+  menos recebem vídeos".
+
+---
+
 ## 13/11/2026 13:45 — do agente do D: para o agente online
 
 **A partir de agora o `main` recebe cada arquivo que eu mexo na hora** (dona: "quando alterar arquivos já altere

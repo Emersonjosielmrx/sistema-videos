@@ -731,7 +731,10 @@ def producao(args):
                 log(f"línguas: {', '.join(ling)} esperam (1 versão de língua a cada "
                     f"{os.environ.get('PARCEIRO_LINGUA_A_CADA', '3')} Shorts — PC pro pt)")
                 ling = []
-            if ling and lingua_nasce_morta():
+            if ling and fonte_da_lingua(nome_fonte):
+                log(f"línguas: {', '.join(ling)} feitas desta fonte ({nome_fonte}) — ela rende pouco nos canais pt, então a "
+                    "versão de língua posta e o Short pt dela espera (canais de língua recebem só as sobras)")
+            elif ling and lingua_nasce_morta():
                 log(f"línguas: {', '.join(ling)} NÃO são feitas junto deste Short — a versão sairia da mesma fonte do pt "
                     "e as regras (nunca o mesmo vídeo em 2 canais + o pt tem a preferência) impedem que ela poste: "
                     "desde 12/11, 10 feitas (~23 min de PC cada) e 1 agendada. LINGUA_JUNTO_DO_PT=1 volta a fazer.")
@@ -776,6 +779,33 @@ def producao(args):
 
 
 # ─────────────────────────── postagem ───────────────────────────────────────
+LINGUA_FONTE_MAX = float(os.environ.get("LINGUA_FONTE_MAX", "0.7"))
+LINGUA_TIPOS = {"anime", "manhwa"}  # o que os canais de língua postam (inovare manhwa verse)
+
+
+def fonte_da_lingua(nome_fonte):
+    """13/11 dona ("canais de outras línguas: os que MENOS recebem vídeos; o foco é nos que têm mais views"): fonte de
+    anime/manhwa que rende MAL nos canais pt (nota geral ajustada pelo horário < LINGUA_FONTE_MAX, 0,7 —
+    inteligencia_ajustada.py: king_chan01 0,49, ddedits5 0,49, nerdcf 0,52, ansaketv 0,59, a_UCHCxgk 0,64) é a fonte
+    PRÓPRIA dos canais de língua: a versão de língua dela posta e o Short pt espera. Assim a língua recebe o mínimo,
+    das sobras, e nunca tira vídeo bom de canal pt. LINGUA_FONTE_MAX=0 desliga."""
+    if not nome_fonte or LINGUA_FONTE_MAX <= 0:
+        return False
+    try:
+        if "geral" not in _LINGUA_CACHE:
+            _LINGUA_CACHE["geral"] = json.loads((BIN.parent / "estado" / "fontes_por_canal.json").read_text(
+                encoding="utf-8")).get("geral", {})
+            _LINGUA_CACHE["tipo"] = {f["nome"]: f["tipo"] for f in cfg().get("fontes", [])}
+    except (OSError, ValueError):
+        return False
+    nota = _LINGUA_CACHE["geral"].get(nome_fonte)
+    return (nota is not None and nota < LINGUA_FONTE_MAX
+            and _LINGUA_CACHE["tipo"].get(nome_fonte) in LINGUA_TIPOS)
+
+
+_LINGUA_CACHE = {}
+
+
 def lingua_nasce_morta():
     """13/11: a versão em outra língua é feita da MESMA fonte do Short pt. Com as duas regras em vigor — "nunca o mesmo
     vídeo em 2 canais, em qualquer língua" (dona 01/11) e "o pt tem a preferência" (PREFERE_PT, 12/11) — ela só
@@ -1329,14 +1359,23 @@ def postar(args):
             # língua saíam da MESMA fonte; a língua postava antes e o pt (canal que rende) virava "fonte repetida" e ia
             # pro lixo (19 em 11-12/11). Agora o PT tem a preferência: a versão da língua é que espera o pt. PREFERE_PT=0
             # volta a regra de 01/11.
+            # 13/11 dona ("os canais de outras línguas devem ser os que MENOS recebem; o foco é nos que têm mais views"):
+            # a fonte FRACA pros canais pt (fonte_da_lingua) fica com a LÍNGUA — o Short pt dela, que renderia pouco,
+            # é que espera. Nas outras fontes o pt continua com a preferência.
+            def _fonte_lingua(y):
+                return fonte_da_lingua(y.get("d", {}).get("parceiro"))
             if dst["idioma"] == "pt" and os.environ.get("PREFERE_PT", "1") == "0":
                 pendentes_lang = {_id_fonte(y["fonte"]) for y in its if y["lang"] != "pt"
+                                  and y["estado"] in ("pronto", "esperando") and _id_fonte(y["fonte"])}
+                prontos = [x for x in prontos if _id_fonte(x["fonte"]) not in pendentes_lang]
+            elif dst["idioma"] == "pt":
+                pendentes_lang = {_id_fonte(y["fonte"]) for y in its if y["lang"] != "pt" and _fonte_lingua(y)
                                   and y["estado"] in ("pronto", "esperando") and _id_fonte(y["fonte"])}
                 prontos = [x for x in prontos if _id_fonte(x["fonte"]) not in pendentes_lang]
             elif dst["idioma"] != "pt" and os.environ.get("PREFERE_PT", "1") != "0":
                 pendentes_pt = {_id_fonte(y["fonte"]) for y in its if y["lang"] == "pt"
                                 and y["estado"] in ("pronto", "esperando") and _id_fonte(y["fonte"])}
-                prontos = [x for x in prontos if _id_fonte(x["fonte"]) not in pendentes_pt]
+                prontos = [x for x in prontos if _id_fonte(x["fonte"]) not in pendentes_pt or _fonte_lingua(x)]
             livres = [x for x in prontos if x["fonte"] not in usados[(dia, dst["idioma"])]]
             livres.sort(key=lambda x: not x["d"].get("viral_de"))  # 30/10: a versão do viral sai antes do Short comum
             if not livres:

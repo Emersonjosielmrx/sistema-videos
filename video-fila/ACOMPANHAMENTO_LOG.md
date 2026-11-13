@@ -1858,3 +1858,11 @@ Teste: simulação do laço real nos 26 canais = dia cheio e exatamente 1 post n
 - **STI — 1º Short real ponta a ponta:** KJt0huFSzsM pra Esporte Noturno em 20 min (13:02→13:22), trazido sozinho pro PC1 e conferido na chegada (1080x1920, 60 fps, 35 s, -17 dB). Ouvi pela conferência do áudio: 115 palavras, sem defeito, voz clonada (kkvirjao). Olhei 4 quadros: legenda colorida e @esportenoturno no lugar. 2º Short já disparado sozinho pela tarefa (YtxaAmd45Js, pesca, 13:30). A ReservaShortsDrive mandou o vídeo dele pro Drive 2 min depois (é o mais novo do canal — normal; volta na vez de postar).
 - **Defeito visual visto no Short (NÃO é da STI — PC1 faz igual):** a cobertura "delogo" da legenda do parceiro sai na largura inteira da tela em 18 de 86 Shorts e alta (100+ px) em 32: faixa de listras verticais no meio do vídeo. Não mexi nesta volta (mexe na cobertura de todo Short; quero testar com calma num vídeo real). Deixei a leitura do código pedida ao agente online no recado.
 - **GitHub na hora (dona: "já altere também no GitHub imediatamente"):** hipercool-materiais\comum\github_agora.py — manda só os arquivos pedidos (ou `--desde N` minutos), com a mesma limpeza e varredura de segredos, `git pull --rebase` antes. 1º uso: 124 arquivos mudados desde 10:33 enviados em segundos. Recado novo pro agente online em RECADOS_ENTRE_AGENTES.md (o que entrou, o que não mexer, a pergunta do delogo).
+
+## 13/11/2026 14:25 — canais de outras línguas recebem só as sobras
+Dona: "os canais de outras línguas devem ser os que menos recebem vídeos; o foco é nos que têm mais views". Antes: zero
+(versão de língua não era feita: `lingua_nasce_morta`). Agora `parceiro_diario.fonte_da_lingua(nome)`: fonte de
+anime/manhwa com nota geral ajustada < 0,7 nos canais pt (hoje king_chan01, nerdcf, ansaketv, a_UCHCxgk, ddedits5) faz
+a versão de língua, ela posta e o Short pt dessa fonte espera (bloco PREFERE_PT invertido só pra essas fontes). As demais
+fontes seguem 100% pt. Continua no máximo 1 língua a cada 3 Shorts (`_vez_da_lingua`). Desliga: LINGUA_FONTE_MAX=0.
+Ensaio da postagem rodou sem erro.
