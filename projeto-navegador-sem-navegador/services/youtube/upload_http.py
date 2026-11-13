@@ -123,7 +123,7 @@ def colher_sessao(slug, espera=90):  # 60 s não bastou com o PC1 carregado (ino
             except Exception:  # noqa: BLE001
                 pass
             cofre.fechar(proc, None, email)
-    if "SAPISID" not in ck:
+    if not youtube_http.tem_sapisid(ck):  # 13/11: vale também __Secure-1PAPISID/3PAPISID (youtube_http.autorizacao)
         raise RuntimeError(f"{slug}: sem SAPISID (conta deslogada no cofre?)")
     # atômico: o youtube_http da produção lê estes arquivos a qualquer hora
     gravar_json(youtube_http.COOKIES_DIR / f"{slug}.json", ck, ensure_ascii=True)
@@ -158,9 +158,7 @@ class Enviador:
             return None
 
     def _hd(self):
-        ts = int(time.time())
-        sap = self.st.s.cookies.get("SAPISID")
-        return {"Authorization": f"SAPISIDHASH {ts}_{hashlib.sha1(f'{ts} {sap} {youtube_http.STUDIO}'.encode()).hexdigest()}",
+        return {"Authorization": youtube_http.autorizacao(self.st.s.cookies),
                 "X-Origin": youtube_http.STUDIO, "Origin": youtube_http.STUDIO, "x-goog-authuser": "0"}
 
     def _yt(self, rota, corpo):

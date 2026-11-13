@@ -64,7 +64,7 @@ PC2_FALHOU = BASE / "estado" / "pc2_parceiro_falhou.json"
 # 30/10 (D39): 3 -> 4. Com 2 Shorts (00:41) a CPU média da última hora foi 19% e sobraram 6,9 GB; RAM/disco/CPU(2+)
 # continuam barrando, e o AlimentarPC2 dispara no máximo 1 a cada 5 min (preparo ~160 s aqui).
 PC2_SHORTS_MAX = 4
-PC2_SHORT_CPU_MAX, PC2_SHORT_RAM_MIN, PC2_SHORT_DISCO_MIN = 85, 2.5, 8
+PC2_SHORT_CPU_MAX, PC2_SHORT_RAM_MIN, PC2_SHORT_DISCO_MIN = 85, 2.5, 3  # 13/11 dona: disco até o fim (era 8)
 
 
 def _pc2_estados():
@@ -359,6 +359,32 @@ def _reservar(vid):
 _LINGUAS_DA_VEZ = ""  # 12/11: línguas da versão extra quando as filas pt estão cheias (_escolher_pc2)
 
 
+_FONTES_VAZIAS = BASE / "estado" / "fontes_vazias.json"
+
+
+def _fontes_vazias():
+    """{url da fonte} que veio sem vídeo novo nos últimos FONTE_VAZIA_MIN minutos (vale pra PC2, PC3, STI e Kaggle)."""
+    try:
+        d = json.loads(_FONTES_VAZIAS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    corte = time.time() - float(os.environ.get("FONTE_VAZIA_MIN", "90")) * 60
+    return {u for u, t in d.items() if t > corte}
+
+
+def _fonte_vazia_marcar(url):
+    try:
+        try:
+            d = json.loads(_FONTES_VAZIAS.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            d = {}
+        d = {u: t for u, t in d.items() if time.time() - t < 86400}
+        d[url] = time.time()
+        _FONTES_VAZIAS.write_text(json.dumps(d), encoding="utf-8")
+    except OSError:
+        pass
+
+
 def _escolher_pc2(pdi, anime_discover, c):
     """(alvo, escolha, cand) do próximo Short do PC2, ou None (mesma regra do parceiro_diario)."""
     fila = pdi._fila(pdi.itens(c))
@@ -407,24 +433,35 @@ def _escolher_pc2(pdi, anime_discover, c):
     usados = _ler_feitos("_feitos_short.txt") | _ler_feitos("_feitos_short_attempted.txt") | _reservados()
     # 30/10 (D39): fonte sem vídeo novo (29/10 22:49 @grananerd) deixava o PC2 vazio a rodada inteira: tenta os próximos
     # canais da fila na mesma ordem de prioridade (até 3)
-    for alvo in sorted(falta, key=pdi._prioridade(pdi.itens(c), fila, c.get("fila_alvo", 2), c))[:3]:
+    # 13/11 (dona: "todos têm de estar sempre no máximo; resolver os gargalos"): olhava só os 3 canais do topo e
+    # desistia — em 13/11 o PC2 teve 76 rodadas "sem vídeo novo" e o Kaggle 84, quase todas em 4 fontes do Fio da Meada
+    # e no @score90, com outros 13 canais abaixo do estoque. Agora percorre TODOS os canais que faltam (na mesma ordem
+    # de prioridade) e não consulta de novo, por FONTE_VAZIA_MIN (padrão 90 min), fonte que acabou de vir sem vídeo
+    # novo (cada consulta gasta a vez do yt-dlp). ESCOLHER_SO_3=1 volta ao antigo.
+    _max = 3 if os.environ.get("ESCOLHER_SO_3") == "1" else len(falta)
+    vazias = _fontes_vazias()
+    for alvo in sorted(falta, key=pdi._prioridade(pdi.itens(c), fila, c.get("fila_alvo", 2), c))[:_max]:
         # 09/11: a escolha ficava presa na fonte de maior peso (gplottwist09 pra Filme/CenaReact/Assist-IA, sem vídeo
         # novo há dias) e o canal era pulado — com 51 fontes novas autorizadas, sorteia de novo até 4 fontes distintas
         tentadas = set()
         for _ in range(8):
-            escolha = pdi._escolher_fonte(c, alvo, evitar=tentadas)
+            escolha = pdi._escolher_fonte(c, alvo, evitar=tentadas | vazias)
             if escolha[0] in tentadas:
                 break  # o nicho acabou (todas as fontes tentadas)
             tentadas.add(escolha[0])
+            if escolha[0] in vazias:
+                continue  # veio sem vídeo novo há pouco: não gasta outra consulta
             cand = next((x for x in anime_discover.discover_canal(escolha[0])
                          if x["id"] not in usados and _reservar(x["id"])), None)
             if cand:
                 return alvo, escolha, cand
             log(f"parceiro: sem vídeo novo em {escolha[0]} ({alvo['nome']}) — tento outra fonte")
+            _fonte_vazia_marcar(escolha[0])
+            vazias.add(escolha[0])
             if len(tentadas) >= 4:
                 break
         log(f"parceiro: {alvo['nome']}: {len(tentadas)} fonte(s) sem vídeo novo — tenta o próximo canal")
-    log("parceiro: nenhum dos 3 canais da vez tem vídeo novo — PC2 sem Short pra fazer")
+    log(f"parceiro: nenhum dos {min(_max, len(falta))} canais que faltam tem vídeo novo — sem Short pra fazer")
     return None
 
 

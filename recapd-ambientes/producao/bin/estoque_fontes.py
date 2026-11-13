@@ -32,7 +32,7 @@ FONTES_POSTADAS = Path(r"D:\recapd-ambientes\producao\workspace\anime\_fontes_po
 PARCEIRO_CFG = Path(r"D:\recapd-ambientes\producao\config\parceiro.json")
 ALVO = 8            # fontes prontas no estoque (≈ meio dia de produção)
 VALIDADE_DIAS = 7
-DISCO_MIN_GB = 8.5  # não enche o estoque com o disco apertado (23/10, dono: era 10 e o D: vive em 9-10 GB -> estoque nunca repôs; 8 fontes ~0,3 GB, a produção para em 8)
+DISCO_MIN_GB = float(__import__('os').environ.get('ESTOQUE_DISCO_MIN_GB', '3'))  # 13/11 dona: usar o disco até o fim (era 8.5) # não enche o estoque com o disco apertado (23/10, dono: era 10 e o D: vive em 9-10 GB -> estoque nunca repôs; 8 fontes ~0,3 GB, a produção para em 8)
 _RX_ID = re.compile(r"(?:youtu\.be/|shorts/|v=)([\w-]{11})")
 
 

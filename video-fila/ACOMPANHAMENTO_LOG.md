@@ -1911,3 +1911,23 @@ SAPISID") — o envio pelo notebook é mais lento (HistoriasEmFrames ficou 2 h n
   O postador de longos já espera espaço ("sem espaço: 8,4 GB livres e o vídeo tem 6,4 GB").
 - reagendar_nobre: Tech Noturno, Curiosidades e os 4 canais de negócios foram pulados por "não consegui conferir se
   é conta do Kaggle" (o nome do canal não bate com o cadastro de e-mails) — falta ligar esse cadastro.
+
+## 13/11/2026 17:55 — manutenção: "sem login" era falso; despacho olha todos os canais; STI cai sozinho
+1. **68 envios/dia caindo pro Chrome dos notebooks por "conta deslogada no cofre" — era falso.** O YouTube parou de
+   entregar o cookie `SAPISID` em .youtube.com pra várias contas (vem só `__Secure-3PAPISID`/`1PAPISID`, mesmo valor);
+   o Studio abria normal no painel do canal. `gemini-argo/youtube_http.py`: `tem_sapisid()` + `autorizacao()` (rótulo
+   SAPISIDHASH com o valor do cookie que existir — testado: só "SAPISID3PHASH" = 401; SAPISIDHASH com o valor 3P = 200);
+   `upload_http.py` usa as duas. Prova: lista de vídeos do inovaremanhwabr lida por HTTP; Plantão das Histórias
+   reagendado pro horário nobre (15 e 16/11 -> 22:15). `YT_SO_SAPISID=1` volta. Falta ver um ENVIO inteiro por HTTP
+   num desses canais (o próximo da fila mostra no youtube_http.log).
+2. **Despacho olhava só os 3 canais do topo** e desistia: PC2 com 76 rodadas "sem vídeo novo" e Kaggle 84, quase todas
+   em 4 fontes do Fio da Meada e no @score90. `ocioso._escolher_pc2`: percorre TODOS os canais que faltam e não
+   consulta de novo por 90 min a fonte que veio vazia (`estado/fontes_vazias.json`, vale pra PC2/PC3/STI/Kaggle).
+   `ESCOLHER_SO_3=1` / `FONTE_VAZIA_MIN` voltam. Ensaio: achou vídeo pulando a fonte vazia.
+3. **Disco até o fim (dona)**: folga dos longos 6 -> 1,5 GB (`LONGO_FOLGA_GB`), estoque de fontes 8,5 -> 3 GB
+   (`ESTOQUE_DISCO_MIN_GB`), PC2 8 -> 3 GB. Shorts já paravam só em 2,5 GB (agora 2).
+4. **STI reinicia sozinho**: 3 quedas hoje (12:51, 17:38, 17:41, "crash" no `last`), sem motivo no journal; na das
+   17:38 rodava 1 Short + 3 Chromes de upload. Cada queda mata o Short. Instalado `~/recapd-sti/saude_min.sh` (cron de
+   1 min: temperatura, carga, RAM, bateria) pra ter prova na próxima. `disparar_sti.py`: Short sem processo lá e log
+   parado > 6 min = máquina caiu -> libera na hora (esperava 100 min), devolve o vídeo e não conta falha.
+Medido hoje: Shorts entregues PC2 43, PC3 10, STI 3 (até 17 h).

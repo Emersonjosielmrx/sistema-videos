@@ -142,6 +142,38 @@ def _email(slug):
     return _mapa()[slug]["email"]
 
 
+# 13/11: o YouTube parou de entregar o cookie SAPISID em .youtube.com pra várias contas (vem só __Secure-3PAPISID /
+# __Secure-1PAPISID, mesmo valor) e o código dizia "conta deslogada no cofre" com o Studio ABERTO no painel do canal:
+# 68 envios do dia caíram pro Chrome dos notebooks por isso. Qualquer um dos três serve pra assinar.
+# YT_SO_SAPISID=1 volta a exigir o nome antigo.
+_SAP_NOMES = (("SAPISID", "SAPISIDHASH"), ("__Secure-1PAPISID", "SAPISID1PHASH"), ("__Secure-3PAPISID", "SAPISID3PHASH"))
+
+
+def tem_sapisid(ck):
+    """ck = dict de cookies (ou jar do requests). True se dá pra assinar."""
+    if __import__("os").environ.get("YT_SO_SAPISID") == "1":
+        return bool(ck.get("SAPISID"))
+    return any(ck.get(n) for n, _h in _SAP_NOMES)
+
+
+def autorizacao(ck, origem=None):
+    """Cabeçalho Authorization. O valor do SAPISID, do __Secure-1PAPISID e do __Secure-3PAPISID é o mesmo; conferido
+    13/11 no inovaremanhwabr (só tinha o 3P): "SAPISID3PHASH" sozinho = 401; "SAPISIDHASH" com o valor do 3P = 200.
+    Manda os três rótulos com o valor que existir (é o que o Studio do navegador faz)."""
+    origem = origem or STUDIO
+    v = None
+    for nome, _r in _SAP_NOMES:
+        try:
+            v = ck.get(nome)
+        except Exception:  # noqa: BLE001 — jar com o mesmo cookie em 2 domínios
+            v = next((c.value for c in ck if c.name == nome), None)
+        if v or __import__("os").environ.get("YT_SO_SAPISID") == "1":
+            break
+    ts = int(time.time())
+    h = hashlib.sha1(f"{ts} {v} {origem}".encode()).hexdigest()
+    return " ".join(f"{rot} {ts}_{h}" for _n, rot in _SAP_NOMES)
+
+
 def sincronizar(slug):
     """Única etapa com navegador: abre o perfil da conta no cofre, entra no Studio e guarda os cookies .youtube.com."""
     sys.path.insert(0, r"D:\logins-google")
@@ -165,7 +197,7 @@ def sincronizar(slug):
     finally:
         cofre.fechar(proc, br, email)
     ck = {c["name"]: c["value"] for c in todos if c.get("domain", "").endswith("youtube.com")}
-    if "SAPISID" not in ck:
+    if not tem_sapisid(ck):
         raise RuntimeError(f"{slug}: sem SAPISID (conta deslogada no cofre?)")
     (COOKIES_DIR / f"{slug}.json").write_text(json.dumps(ck, indent=1), "utf-8")
     return len(ck)
@@ -215,9 +247,7 @@ class Studio:
         tmp.replace(self.arq)
 
     def _post(self, rota, corpo):
-        ts = int(time.time())
-        sapisid = self.s.cookies.get("SAPISID")
-        hd = {"Authorization": f"SAPISIDHASH {ts}_{hashlib.sha1(f'{ts} {sapisid} {STUDIO}'.encode()).hexdigest()}",
+        hd = {"Authorization": autorizacao(self.s.cookies),
               "X-Origin": STUDIO, "Origin": STUDIO, "x-goog-authuser": "0"}
         corpo["context"] = {"client": {"clientName": 62, "clientVersion": self.versao, "hl": "pt", "gl": "BR"}}
         r = self.s.post(f"{STUDIO}/youtubei/v1/{rota}?alt=json&key={self.chave}", json=corpo, headers=hd, timeout=40)

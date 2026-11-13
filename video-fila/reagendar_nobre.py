@@ -62,6 +62,12 @@ def _slugs_http(horas=48):
                 out.add(m.group(5))
     except (OSError, ValueError):
         pass
+    try:  # 13/11: sessão HTTP do canal renovada há pouco (cofre do PC1) também vale, mesmo sem envio por HTTP ainda
+        for f in Path(r"D:\gemini-argo\cookies_youtube").glob("*.json"):
+            if time.time() - f.stat().st_mtime < horas * 3600:
+                out.add(f.stem)
+    except OSError:
+        pass
     return out
 
 

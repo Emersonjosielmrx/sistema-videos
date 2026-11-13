@@ -153,6 +153,8 @@ _PALAVRAO = re.compile(r"\b(caralh\w*|porras?|put[ao]s?|puta\w*|merda\w*|fod[aei
 def _tem_palavrao(ficha):
     """27/10: o KwdN (Dragon) foi ao ar com "caralho" falado numa passagem do revezamento. O que a voz falou nas trocas
     fica no pipeline.log — achou palavrão = não sobe (vira reprovado)."""
+    if (ficha / "SEM_PALAVRAO.txt").exists():  # 13/11: bipar_palavrao.py já tirou o palavrão do áudio
+        return False
     try:
         txt = (ficha / "pipeline.log").read_text(encoding="utf-8", errors="replace")
     except OSError:
@@ -400,9 +402,11 @@ def _publicar(ficha, d):
     # ocupar (_RESERVADO) antes de liberar este.
     with _TRAVA_DISCO:
         livre = shutil.disk_usage(str(pasta)).free - sum(_RESERVADO.values())
-        if livre - tam < 6e9:
+        # 13/11 dona ("use os 10 GB até acabar; produza até o último MB"): folga 6 -> 1,5 GB (LONGO_FOLGA_GB)
+        _folga = float(os.environ.get("LONGO_FOLGA_GB", "1.5")) * 1e9
+        if livre - tam < _folga:
             log(f"  sem espaço: {livre / 1e9:.1f} GB livres (já descontados os downloads em curso) e o vídeo tem "
-                f"{tam / 1e9:.1f} GB (folga 6 GB p/ clientes) — fica pra próxima rodada")
+                f"{tam / 1e9:.1f} GB (folga {_folga / 1e9:.1f} GB) — fica pra próxima rodada")
             return None, pasta
         _RESERVADO[str(video)] = tam
     try:

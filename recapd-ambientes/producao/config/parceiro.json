@@ -1299,7 +1299,7 @@
   }
  },
  "_virais_fracos_obs": "30/10 (dona: 'postar nos canais que não dão views os vídeos que viralizam nos outros'): bin/virais_fracos.py. Short nosso com >= min_views_48h no placar de 48 h -> versão NOVA da mesma fonte (anime_auto --id: outro roteiro/narração/título, nunca o mesmo arquivo) pro canal fraco pt (mediana < 100 views e <= 10% com 500+, n >= 5 em 21 dias) + línguas fracas; o postar sobe essa versão antes do Short comum e ela pode repetir fonte (exceção da regra 'nunca a mesma fonte em 2 canais'). modo: desligado | ensaio (só registra em logs/virais_fracos.jsonl) | ligado. Ver: python bin/virais_fracos.py --ensaio",
- "disco_min_gb": 2.5,
+ "disco_min_gb": 2,
  "pt": [
   {
    "canal": "novo_manhwanoturno",

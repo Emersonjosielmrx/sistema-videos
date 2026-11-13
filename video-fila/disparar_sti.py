@@ -120,6 +120,16 @@ def _video_ok(mp4):
     return True, f"{w}x{h}, {dur:.0f} s, {vol:.0f} dB"
 
 
+def _devolver(vid):
+    """Tira o vídeo do "já tentado" pra outra máquina poder fazer (o Short não chegou a existir)."""
+    arq = FEITOS / "_feitos_short_attempted.txt"
+    try:
+        linhas = [l for l in arq.read_text(encoding="utf-8").splitlines() if l.strip() and l.strip() != vid]
+        arq.write_text("".join(l + chr(10) for l in linhas), encoding="utf-8")
+    except OSError:
+        pass
+
+
 def _trazer_pasta(p):
     """Traz 1 pasta de Short pronta do STI pra postagem do PC1. True = entrou na postagem."""
     dst = SHORTS / p
@@ -204,6 +214,20 @@ def buscar():
     fim, parado, pastas = (p.strip() for p in (txt.split("---") + ["", ""])[:3])
     if fim == "ANDANDO":
         mins = int(parado) if parado.lstrip("-").isdigit() else 0
+        # 13/11: o STI reiniciou sozinho 3x no dia (12:51, 17:38, 17:41) e o Short que rodava morria; o PC1 esperava
+        # 100 min de log parado pra perceber. Sem processo do anime_auto lá e log parado há > 6 min = caiu: libera
+        # agora, devolve o vídeo pra fila (sai do "attempted") e NÃO conta como falha do Short.
+        if mins > 6:
+            try:
+                rc3, vivo = _ssh("pgrep -fc '[a]nime_auto[.]py --modo' || true; uptime -s", timeout=40)
+            except subprocess.TimeoutExpired:
+                rc3, vivo = 1, ""
+            if rc3 == 0 and vivo.split()[:1] == ["0"]:
+                log(f"[!] STI: o Short {vid} morreu no meio (sem processo lá; ligado desde "
+                    f"{' '.join(vivo.split()[1:3])}) — máquina reiniciou; libero o próximo")
+                _devolver(vid)
+                EST.unlink(missing_ok=True)
+                return False
         if mins <= MORTO_MIN:
             log(f"STI ainda fazendo o Short {vid} ({est.get('destino')}; log parado há {mins} min)")
             return True
