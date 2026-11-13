@@ -1965,3 +1965,13 @@ o teste e mudei pra soltar a trava a cada escolha, com teto de 150 s. Ainda NÃO
 funcionar de ponta a ponta (o 2º teste saiu sem pedir nada porque outro despacho estava escolhendo).
 Erro pego no teste antes de ir pra produção: faltava `import time` no disjuntor.
 STI: segue fora do ar (Tailscale "offline, last seen 23 min" às 19:50).
+
+## 13/11/2026 20:45 — STI: a causa das quedas é CALOR (prova no registro)
+`~/recapd-sti/logs/saude_min.log` (1 linha/min, instalado 17:49): parado 44-49 °C; com Short + Chromes de upload
+96-100 °C várias vezes (17:55 99, 18:43 100, 19:16 99, 19:21-19:27 96-100, 19:48 100). O processador (2 núcleos / 4
+threads, crítico = 100 °C) desliga ao chegar lá — é o "crash" sem motivo no journal. A temperatura salta de 47 pra 96 °C
+em 1 minuto: refrigeração fraca (cooler/pasta térmica), não é só carga.
+Feito: `disparar_sti._sti_livre` não manda Short com o STI acima de 70 °C (STI_TEMP_MAX) nem com mais de 5 Chromes de
+upload abertos (STI_CHROMES_MAX); `sti_short.sh` roda o Short em 2 núcleos (taskset, STI_NUCLEOS=4 volta). Sem sudo lá:
+não dá pra desligar o turbo nem limitar a frequência daqui (precisa da senha na máquina).
+NÃO fazer o STI rodar 2 Shorts juntos nem virar gerente enquanto a refrigeração não for vista.

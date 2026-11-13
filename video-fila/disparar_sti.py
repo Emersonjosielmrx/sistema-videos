@@ -261,13 +261,27 @@ def _sti_livre():
     # "[a]nime_auto" = o padrão não casa com a própria linha do ssh/bash que carrega este comando (contava 1 sempre)
     try:
         rc, txt = _ssh("nproc; cut -d' ' -f1 /proc/loadavg; free -m | awk 'NR==2{print $7}'; "
-                       "pgrep -fc '[a]nime_auto[.]py --modo' || true", timeout=60)
+                       "pgrep -fc '[a]nime_auto[.]py --modo' || true; "
+                       "sort -nr /sys/class/thermal/thermal_zone*/temp 2>/dev/null | head -1; "
+                       "pgrep -fc '[c]hrome.*remote-debugging' || true", timeout=60)
     except subprocess.TimeoutExpired:
         return False, "STI não respondeu em 60 s"
     v = txt.split()
     if rc != 0 or len(v) < 4:
         return False, "STI não respondeu"
     nucleos, carga, ram, rodando = int(v[0]), float(v[1]), int(v[2]), int(v[3])
+    # 13/11: o STI desligava sozinho por CALOR (registro de 1 em 1 min, ~/recapd-sti/logs/saude_min.log: 99-100 °C
+    # com Short + Chromes de upload; o processador desliga a 100 °C; parado fica em 45 °C). Não manda Short com ele
+    # acima de STI_TEMP_MAX (padrão 70 °C) nem com muitos Chromes de upload abertos (STI_CHROMES_MAX, padrão 5).
+    try:
+        temp = int(v[4]) // 1000 if len(v) > 4 else 0
+        chromes = int(v[5]) if len(v) > 5 else 0
+    except ValueError:
+        temp, chromes = 0, 0
+    if temp > int(os.environ.get("STI_TEMP_MAX", "70")):
+        return False, f"STI quente ({temp} °C) — espera esfriar"
+    if chromes > int(os.environ.get("STI_CHROMES_MAX", "5")):
+        return False, f"STI com {chromes} Chromes de upload abertos — Short junto disso superaquece"
     if rodando:
         return False, "já tem um anime_auto rodando lá"
     if ram < 3500:

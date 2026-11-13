@@ -17,7 +17,11 @@ export PARCEIRO_HANDLE="$HANDLE" PARCEIRO_CANAL="$CANAL" PARCEIRO_TIPO="$TIPO"
 # no Linux o clone de voz usa o caminho "nuvem" do anime_tts (voz_clonada_nuvem.py) com o Applio local
 export APPLIO_DIR="$HOME/hipercool-materiais/tools/applio" RAIZ_WIN="$HOME"
 export VOZES_PY_NUVEM="$HOME/hipercool-materiais/python/venv_vozes/bin/python"
-nice -n 5 timeout 7200 "$HOME/hipercool-materiais/python/venv_vozes/bin/python" -X utf8 anime_auto.py \
+# 13/11: o STI desligava por calor (99-100 C com o Short usando os 4 nucleos). O Short fica em STI_NUCLEOS nucleos
+# (padrao 2: 0-1) e o ffmpeg em 2 threads; mais lento, mas a maquina nao cai. STI_NUCLEOS=4 volta ao antigo.
+NUC="${STI_NUCLEOS:-2}"
+export OMP_NUM_THREADS="$NUC" MKL_NUM_THREADS="$NUC" FFMPEG_THREADS="$NUC"
+nice -n 5 taskset -c 0-$((NUC-1)) timeout 7200 "$HOME/hipercool-materiais/python/venv_vozes/bin/python" -X utf8 anime_auto.py \
     --modo short --fonte "$FONTE" --engine local --limit 1 --top 5 --id "$ID" > "$LOG" 2>&1
 RC=$?
 echo "$RC" > "$BASE/logs/sti_short_$ID.fim"
