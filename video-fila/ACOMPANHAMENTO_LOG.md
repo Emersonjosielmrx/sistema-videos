@@ -1900,3 +1900,14 @@ Não medido: com que frequência a IA falha (o tamanho real do item 2). Cópias 
 3. Medido: 107 Shorts de parceiro hoje até 15 h; o Kaggle voltou a devolver Shorts (3 ok às 13:52-13:58).
 Pendente (dona): 68 envios hoje caíram pro Chrome porque o cofre do PC1 está sem login em vários canais ("sem
 SAPISID") — o envio pelo notebook é mais lento (HistoriasEmFrames ficou 2 h num upload e deu timeout).
+
+## 13/11/2026 16:30 — manutenção: STI destravado de verdade + o que NÃO é gargalo
+- STI: a 1ª correção do scp (caminho cru) também falhava; testadas as 3 formas — só o caminho entre ASPAS SIMPLES
+  funciona. Às 16:22-16:25 os 2 Shorts presos chegaram (1080x1920, 29 s e 27 s, -17 dB) e entraram na postagem.
+- Medido e descartado como gargalo: postagem (84 agendados hoje, intervalo mediano 7 min); baixador do Kaggle (vivo).
+- Longos saem pouco porque TODAS as contas vivas do Kaggle gastaram as 30 h da semana (0,2 a 2,1 h livres; lido do
+  estado da central, sem consultar conta). Renova 14/11. Nada a consertar.
+- Disco D: 10 GB livres de 166. Não há sobra fácil: os 25 GB de "assets" aparecem 4x por atalho (junction), é 1 pasta só.
+  O postador de longos já espera espaço ("sem espaço: 8,4 GB livres e o vídeo tem 6,4 GB").
+- reagendar_nobre: Tech Noturno, Curiosidades e os 4 canais de negócios foram pulados por "não consegui conferir se
+  é conta do Kaggle" (o nome do canal não bate com o cadastro de e-mails) — falta ligar esse cadastro.

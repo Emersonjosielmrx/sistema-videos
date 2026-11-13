@@ -129,7 +129,9 @@ def _trazer_pasta(p):
     tmp = Path(tempfile.mkdtemp(prefix="sti_short_", dir=str(SHORTS.parent)))
     # 13/11: o scp do Windows fala SFTP e quer o caminho CRU — com "\ " ele procurava "animes\" e falhava
     # ("No such file"): 2 Shorts prontos ficaram presos no STI. Tenta cru; o jeito antigo fica de reserva.
-    r = _scp(f"{ALVO}:{R_SHORTS}/{p}", str(tmp))
+    # (testado 13/11 15:36: cru e com "\ " falham; entre ASPAS SIMPLES funciona — o scp daqui manda o caminho pro
+    # shell do STI, que separa no espaço)
+    r = _scp(f"{ALVO}:'{R_SHORTS}/{p}'", str(tmp))
     veio = tmp / p
     if r.returncode != 0 or not (veio / "postar.json").exists():
         shutil.rmtree(veio, ignore_errors=True)
