@@ -3,7 +3,7 @@
 (preenchido automaticamente a cada passada do D:ideo-fila\melhorador_central.py; quem for melhorar esta linha lê antes)
 
 <!-- central:inicio -->
-# Brief do melhorador central — Hipercool (manhwa narrado) — 13/11 08:44
+# Brief do melhorador central — Hipercool (manhwa narrado) — 13/11 08:54
 
 Vídeos nos últimos 7 dias: 0 | elegíveis (receberam o lote do feed): 0 | NÃO elegíveis: 0 | sem medida ainda: 0
 % assistido mediano (só elegíveis): None | views 48 h mediana: None | QA com problema: 0 | saíram com parte faltando (IA caiu): 0

@@ -1076,3 +1076,5 @@
 - 2026-11-13 06:03 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B EVIDÊNCIA: D → [20261113_060035_c653.md](20261113_060035_c653.md)
 - 2026-11-13 07:55 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): longo hf0T-InweRE (Manhwa Noturno) sem as capas B/C do teste A/B EVIDÊNCIA: D:\hi → [20261113_075040_b530.md](20261113_075040_b530.md)
 - 2026-11-13 08:04 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal leielucro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem po → [20261113_080048_6842.md](20261113_080048_6842.md)
+- 2026-11-13 08:42 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): longo I-ZCv6BaFrc (InovareManhwaVerse) sem as capas B/C do teste A/B EVIDÊNCIA: D → [20261113_084050_c66a.md](20261113_084050_c66a.md)
+- 2026-11-13 08:43 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): longo Wdc8vq3XCQw (InovareManhwaVerse) sem as capas B/C do teste A/B EVIDÊNCIA: D → [20261113_084050_1a66.md](20261113_084050_1a66.md)

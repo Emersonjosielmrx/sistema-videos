@@ -439,4 +439,877 @@
      "n_total": 571,
      "n_medidos": 348,
      "n_elegiveis": 183,
-     "pct_elegivel": 0.5
+     "pct_elegivel": 0.526,
+     "chega_500": 0.727,
+     "chega_1500": 0.279,
+     "pct_media": 61.0,
+     "pct_ge65": 0.326,
+     "log_views_rel": 1.415
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "B": 11,
+     "A": 12
+    },
+    "Animescomia": {
+     "A": 8,
+     "B": 9
+    },
+    "AssistIA Investimentos": {
+     "A": 5,
+     "B": 3
+    },
+    "Bicho Noturno": {
+     "B": 11,
+     "A": 15
+    },
+    "CartuchoReact": {
+     "A": 2,
+     "B": 8
+    },
+    "CenaReact": {
+     "A": 21,
+     "B": 18
+    },
+    "Curiosidades Noturnas": {
+     "B": 4,
+     "A": 8
+    },
+    "DicasFinanceirasDaIA": {
+     "B": 16,
+     "A": 14
+    },
+    "Dorama Noturno": {
+     "A": 5,
+     "B": 7
+    },
+    "Esporte Noturno": {
+     "B": 25,
+     "A": 25
+    },
+    "Filme Noturno": {
+     "B": 9,
+     "A": 8
+    },
+    "Game Noturno": {
+     "B": 5,
+     "A": 3
+    },
+    "HistoriasEmFrames": {
+     "B": 17,
+     "A": 21
+    },
+    "Inovare": {
+     "A": 7,
+     "B": 4
+    },
+    "InventoReact": {
+     "B": 11,
+     "A": 8
+    },
+    "ManhwaReact-ia": {
+     "A": 3,
+     "B": 2
+    },
+    "MundoQueNaoExiste": {
+     "B": 4,
+     "A": 2
+    },
+    "YouTube inovaremanhwaverseind": {
+     "A": 1
+    },
+    "inovaremanhwabr": {
+     "B": 19,
+     "A": 9
+    }
+   },
+   "canais_com_6_por_braco": [
+    "@CodigoInteligente-n7j",
+    "Animescomia",
+    "Bicho Noturno",
+    "CenaReact",
+    "DicasFinanceirasDaIA",
+    "Esporte Noturno",
+    "Filme Noturno",
+    "HistoriasEmFrames",
+    "InventoReact",
+    "inovaremanhwabr"
+   ],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "B": 0.57
+   },
+   "p_melhor_que_ref_pct65": {
+    "B": 0.681
+   },
+   "sugestao": "",
+   "nota": ""
+  },
+  "mascote": {
+   "valor_atual": "ab",
+   "bracos_sorteados": [
+    "A",
+    "B"
+   ],
+   "referencia": "A",
+   "estado": "dados suficientes, sem diferença clara ainda",
+   "por_braco": {
+    "A": {
+     "n_total": 556,
+     "n_medidos": 334,
+     "n_elegiveis": 169,
+     "pct_elegivel": 0.506,
+     "chega_500": 0.751,
+     "chega_1500": 0.278,
+     "pct_media": 59.1,
+     "pct_ge65": 0.293,
+     "log_views_rel": 1.437
+    },
+    "A_falhou": {
+     "n_total": 30,
+     "n_medidos": 30,
+     "n_elegiveis": 10,
+     "pct_elegivel": 0.333,
+     "chega_500": 0.6,
+     "chega_1500": 0.0,
+     "pct_media": 59.2,
+     "pct_ge65": 0.4,
+     "log_views_rel": 2.807
+    },
+    "B": {
+     "n_total": 581,
+     "n_medidos": 339,
+     "n_elegiveis": 181,
+     "pct_elegivel": 0.534,
+     "chega_500": 0.702,
+     "chega_1500": 0.276,
+     "pct_media": 61.4,
+     "pct_ge65": 0.33,
+     "log_views_rel": 1.324
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "B": 12,
+     "A": 11
+    },
+    "Animescomia": {
+     "A": 7,
+     "B": 10
+    },
+    "AssistIA Investimentos": {
+     "A_falhou": 1,
+     "B": 1,
+     "A": 6
+    },
+    "Bicho Noturno": {
+     "A": 14,
+     "B": 12
+    },
+    "CartuchoReact": {
+     "B": 6,
+     "A": 4
+    },
+    "CenaReact": {
+     "A": 22,
+     "B": 17
+    },
+    "Curiosidades Noturnas": {
+     "B": 7,
+     "A": 5
+    },
+    "DicasFinanceirasDaIA": {
+     "B": 21,
+     "A": 9
+    },
+    "Dorama Noturno": {
+     "A": 5,
+     "B": 7
+    },
+    "Esporte Noturno": {
+     "A": 26,
+     "A_falhou": 2,
+     "B": 22
+    },
+    "Filme Noturno": {
+     "A_falhou": 2,
+     "A": 8,
+     "B": 7
+    },
+    "Game Noturno": {
+     "A_falhou": 1,
+     "B": 5,
+     "A": 2
+    },
+    "HistoriasEmFrames": {
+     "A_falhou": 1,
+     "B": 17,
+     "A": 20
+    },
+    "Inovare": {
+     "A_falhou": 3,
+     "A": 4,
+     "B": 4
+    },
+    "InventoReact": {
+     "B": 12,
+     "A": 7
+    },
+    "ManhwaReact-ia": {
+     "B": 3,
+     "A": 2
+    },
+    "MundoQueNaoExiste": {
+     "A": 4,
+     "B": 2
+    },
+    "YouTube inovaremanhwaverseind": {
+     "A": 1
+    },
+    "inovaremanhwabr": {
+     "B": 16,
+     "A": 12
+    }
+   },
+   "canais_com_6_por_braco": [
+    "@CodigoInteligente-n7j",
+    "Animescomia",
+    "Bicho Noturno",
+    "CenaReact",
+    "DicasFinanceirasDaIA",
+    "Esporte Noturno",
+    "Filme Noturno",
+    "HistoriasEmFrames",
+    "InventoReact",
+    "inovaremanhwabr"
+   ],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "A_falhou": 0.128,
+    "B": 0.153
+   },
+   "p_melhor_que_ref_pct65": {
+    "A_falhou": 0.795,
+    "B": 0.764
+   },
+   "sugestao": "",
+   "nota": "braço 'A_falhou' = sorteado B mas falhou: não é sorteio, compare só os braços sorteados."
+  },
+  "curto": {
+   "valor_atual": "ab",
+   "bracos_sorteados": [
+    "A",
+    "B"
+   ],
+   "referencia": "A",
+   "estado": "dados suficientes, sem diferença clara ainda",
+   "por_braco": {
+    "A": {
+     "n_total": 582,
+     "n_medidos": 338,
+     "n_elegiveis": 177,
+     "pct_elegivel": 0.524,
+     "chega_500": 0.718,
+     "chega_1500": 0.249,
+     "pct_media": 56.3,
+     "pct_ge65": 0.279,
+     "log_views_rel": 1.406
+    },
+    "B": {
+     "n_total": 553,
+     "n_medidos": 333,
+     "n_elegiveis": 171,
+     "pct_elegivel": 0.514,
+     "chega_500": 0.731,
+     "chega_1500": 0.298,
+     "pct_media": 64.8,
+     "pct_ge65": 0.349,
+     "log_views_rel": 1.411
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "A": 13,
+     "B": 10
+    },
+    "Animescomia": {
+     "A": 5,
+     "B": 9
+    },
+    "AssistIA Investimentos": {
+     "A": 3,
+     "B": 4
+    },
+    "Bicho Noturno": {
+     "B": 11,
+     "A": 15
+    },
+    "CartuchoReact": {
+     "B": 4,
+     "A": 6
+    },
+    "CenaReact": {
+     "A": 14,
+     "B": 20
+    },
+    "Curiosidades Noturnas": {
+     "A": 7,
+     "B": 5
+    },
+    "DicasFinanceirasDaIA": {
+     "B": 14,
+     "A": 16
+    },
+    "Dorama Noturno": {
+     "A": 7,
+     "B": 5
+    },
+    "Esporte Noturno": {
+     "B": 28,
+     "A": 22
+    },
+    "Filme Noturno": {
+     "B": 7,
+     "A": 10
+    },
+    "Game Noturno": {
+     "A": 2,
+     "B": 6
+    },
+    "HistoriasEmFrames": {
+     "A": 22,
+     "B": 15
+    },
+    "Inovare": {
+     "A": 6,
+     "B": 5
+    },
+    "InventoReact": {
+     "A": 10,
+     "B": 9
+    },
+    "ManhwaReact-ia": {
+     "A": 3,
+     "B": 2
+    },
+    "MundoQueNaoExiste": {
+     "A": 4
+    },
+    "YouTube inovaremanhwaverseind": {
+     "A": 1
+    },
+    "inovaremanhwabr": {
+     "B": 17,
+     "A": 11
+    }
+   },
+   "canais_com_6_por_braco": [
+    "@CodigoInteligente-n7j",
+    "Bicho Noturno",
+    "CenaReact",
+    "DicasFinanceirasDaIA",
+    "Esporte Noturno",
+    "Filme Noturno",
+    "HistoriasEmFrames",
+    "InventoReact",
+    "inovaremanhwabr"
+   ],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "B": 0.609
+   },
+   "p_melhor_que_ref_pct65": {
+    "B": 0.916
+   },
+   "sugestao": "",
+   "nota": ""
+  },
+  "fala_rapida": {
+   "valor_atual": "ab",
+   "bracos_sorteados": [
+    "A",
+    "B"
+   ],
+   "referencia": "A",
+   "estado": "dados suficientes, sem diferença clara ainda",
+   "por_braco": {
+    "A": {
+     "n_total": 552,
+     "n_medidos": 325,
+     "n_elegiveis": 172,
+     "pct_elegivel": 0.529,
+     "chega_500": 0.703,
+     "chega_1500": 0.291,
+     "pct_media": 60.1,
+     "pct_ge65": 0.323,
+     "log_views_rel": 1.287
+    },
+    "B": {
+     "n_total": 569,
+     "n_medidos": 332,
+     "n_elegiveis": 168,
+     "pct_elegivel": 0.506,
+     "chega_500": 0.738,
+     "chega_1500": 0.256,
+     "pct_media": 60.3,
+     "pct_ge65": 0.289,
+     "log_views_rel": 1.391
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "A": 12,
+     "B": 11
+    },
+    "Animescomia": {
+     "A": 7,
+     "B": 7
+    },
+    "AssistIA Investimentos": {
+     "A": 3,
+     "B": 4
+    },
+    "Bicho Noturno": {
+     "B": 16,
+     "A": 10
+    },
+    "CartuchoReact": {
+     "B": 3,
+     "A": 7
+    },
+    "CenaReact": {
+     "B": 15,
+     "A": 19
+    },
+    "Curiosidades Noturnas": {
+     "B": 7,
+     "A": 5
+    },
+    "DicasFinanceirasDaIA": {
+     "B": 16,
+     "A": 14
+    },
+    "Dorama Noturno": {
+     "A": 2,
+     "B": 10
+    },
+    "Esporte Noturno": {
+     "B": 26,
+     "A": 21
+    },
+    "Filme Noturno": {
+     "A": 13,
+     "B": 4
+    },
+    "Game Noturno": {
+     "A": 5,
+     "B": 3
+    },
+    "HistoriasEmFrames": {
+     "B": 21,
+     "A": 16
+    },
+    "Inovare": {
+     "A": 4,
+     "B": 2
+    },
+    "InventoReact": {
+     "B": 7,
+     "A": 12
+    },
+    "ManhwaReact-ia": {
+     "B": 2,
+     "A": 3
+    },
+    "MundoQueNaoExiste": {
+     "A": 3,
+     "B": 1
+    },
+    "YouTube inovaremanhwaverseind": {
+     "B": 1
+    },
+    "inovaremanhwabr": {
+     "B": 12,
+     "A": 16
+    }
+   },
+   "canais_com_6_por_braco": [
+    "@CodigoInteligente-n7j",
+    "Animescomia",
+    "Bicho Noturno",
+    "CenaReact",
+    "DicasFinanceirasDaIA",
+    "Esporte Noturno",
+    "HistoriasEmFrames",
+    "InventoReact",
+    "inovaremanhwabr"
+   ],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "B": 0.762
+   },
+   "p_melhor_que_ref_pct65": {
+    "B": 0.253
+   },
+   "sugestao": "",
+   "nota": ""
+  },
+  "saudacao": {
+   "valor_atual": "ab",
+   "bracos_sorteados": [
+    "A",
+    "B"
+   ],
+   "referencia": "A",
+   "estado": "dados suficientes, sem diferença clara ainda",
+   "por_braco": {
+    "A": {
+     "n_total": 507,
+     "n_medidos": 268,
+     "n_elegiveis": 144,
+     "pct_elegivel": 0.537,
+     "chega_500": 0.694,
+     "chega_1500": 0.25,
+     "pct_media": 61.1,
+     "pct_ge65": 0.302,
+     "log_views_rel": 1.3
+    },
+    "B": {
+     "n_total": 529,
+     "n_medidos": 304,
+     "n_elegiveis": 159,
+     "pct_elegivel": 0.523,
+     "chega_500": 0.755,
+     "chega_1500": 0.327,
+     "pct_media": 60.8,
+     "pct_ge65": 0.325,
+     "log_views_rel": 1.307
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "A": 11,
+     "B": 12
+    },
+    "Animescomia": {
+     "B": 4,
+     "A": 8
+    },
+    "AssistIA Investimentos": {
+     "A": 3,
+     "B": 3
+    },
+    "Bicho Noturno": {
+     "B": 14,
+     "A": 10
+    },
+    "CartuchoReact": {
+     "B": 8,
+     "A": 2
+    },
+    "CenaReact": {
+     "A": 17,
+     "B": 16
+    },
+    "Curiosidades Noturnas": {
+     "B": 6,
+     "A": 6
+    },
+    "DicasFinanceirasDaIA": {
+     "A": 17,
+     "B": 13
+    },
+    "Dorama Noturno": {
+     "A": 7,
+     "B": 3
+    },
+    "Esporte Noturno": {
+     "B": 25,
+     "A": 15
+    },
+    "Filme Noturno": {
+     "A": 9,
+     "B": 5
+    },
+    "Game Noturno": {
+     "A": 2,
+     "B": 5
+    },
+    "HistoriasEmFrames": {
+     "B": 14,
+     "A": 18
+    },
+    "Inovare": {
+     "A": 2
+    },
+    "InventoReact": {
+     "A": 5,
+     "B": 10
+    },
+    "ManhwaReact-ia": {
+     "B": 4
+    },
+    "MundoQueNaoExiste": {
+     "A": 3,
+     "B": 1
+    },
+    "YouTube inovaremanhwaverseind": {
+     "A": 1
+    },
+    "inovaremanhwabr": {
+     "B": 16,
+     "A": 8
+    }
+   },
+   "canais_com_6_por_braco": [
+    "@CodigoInteligente-n7j",
+    "Bicho Noturno",
+    "CenaReact",
+    "Curiosidades Noturnas",
+    "DicasFinanceirasDaIA",
+    "Esporte Noturno",
+    "HistoriasEmFrames",
+    "inovaremanhwabr"
+   ],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "B": 0.878
+   },
+   "p_melhor_que_ref_pct65": {
+    "B": 0.662
+   },
+   "sugestao": "",
+   "nota": ""
+  },
+  "ninguem_esperava": {
+   "valor_atual": "ab",
+   "bracos_sorteados": [
+    "A",
+    "B"
+   ],
+   "referencia": "A",
+   "estado": "PRONTO PARA DECIDIR (D3+D16)",
+   "por_braco": {
+    "A": {
+     "n_total": 516,
+     "n_medidos": 278,
+     "n_elegiveis": 139,
+     "pct_elegivel": 0.5,
+     "chega_500": 0.748,
+     "chega_1500": 0.331,
+     "pct_media": 63.4,
+     "pct_ge65": 0.372,
+     "log_views_rel": 1.506
+    },
+    "B": {
+     "n_total": 520,
+     "n_medidos": 294,
+     "n_elegiveis": 164,
+     "pct_elegivel": 0.558,
+     "chega_500": 0.707,
+     "chega_1500": 0.256,
+     "pct_media": 58.8,
+     "pct_ge65": 0.264,
+     "log_views_rel": 1.132
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "B": 14,
+     "A": 9
+    },
+    "Animescomia": {
+     "A": 6,
+     "B": 6
+    },
+    "AssistIA Investimentos": {
+     "B": 3,
+     "A": 3
+    },
+    "Bicho Noturno": {
+     "A": 13,
+     "B": 11
+    },
+    "CartuchoReact": {
+     "B": 8,
+     "A": 2
+    },
+    "CenaReact": {
+     "A": 14,
+     "B": 19
+    },
+    "Curiosidades Noturnas": {
+     "A": 9,
+     "B": 3
+    },
+    "DicasFinanceirasDaIA": {
+     "B": 16,
+     "A": 14
+    },
+    "Dorama Noturno": {
+     "A": 3,
+     "B": 7
+    },
+    "Esporte Noturno": {
+     "A": 19,
+     "B": 21
+    },
+    "Filme Noturno": {
+     "B": 10,
+     "A": 4
+    },
+    "Game Noturno": {
+     "A": 4,
+     "B": 3
+    },
+    "HistoriasEmFrames": {
+     "A": 15,
+     "B": 17
+    },
+    "Inovare": {
+     "A": 1,
+     "B": 1
+    },
+    "InventoReact": {
+     "A": 8,
+     "B": 7
+    },
+    "ManhwaReact-ia": {
+     "A": 3,
+     "B": 1
+    },
+    "MundoQueNaoExiste": {
+     "A": 2,
+     "B": 2
+    },
+    "YouTube inovaremanhwaverseind": {
+     "B": 1
+    },
+    "inovaremanhwabr": {
+     "B": 14,
+     "A": 10
+    }
+   },
+   "canais_com_6_por_braco": [
+    "@CodigoInteligente-n7j",
+    "Animescomia",
+    "Bicho Noturno",
+    "CenaReact",
+    "DicasFinanceirasDaIA",
+    "Esporte Noturno",
+    "HistoriasEmFrames",
+    "InventoReact",
+    "inovaremanhwabr"
+   ],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "B": 0.216
+   },
+   "p_melhor_que_ref_pct65": {
+    "B": 0.025
+   },
+   "sugestao": "; ['B'] pior que A",
+   "nota": ""
+  },
+  "horario_fraco": {
+   "valor_atual": "ab",
+   "bracos_sorteados": [
+    "A",
+    "B"
+   ],
+   "referencia": "A",
+   "estado": "dá pra olhar (só indício: braço por canal)",
+   "por_braco": {
+    "A": {
+     "n_total": 670,
+     "n_medidos": 397,
+     "n_elegiveis": 201,
+     "pct_elegivel": 0.506,
+     "chega_500": 0.672,
+     "chega_1500": 0.239,
+     "pct_media": 60.1,
+     "pct_ge65": 0.284,
+     "log_views_rel": 0.841
+    },
+    "B": {
+     "n_total": 536,
+     "n_medidos": 323,
+     "n_elegiveis": 189,
+     "pct_elegivel": 0.585,
+     "chega_500": 0.683,
+     "chega_1500": 0.243,
+     "pct_media": 68.2,
+     "pct_ge65": 0.312,
+     "log_views_rel": 1.333
+    }
+   },
+   "elegiveis_por_canal": {
+    "@CodigoInteligente-n7j": {
+     "A": 41
+    },
+    "Animescomia": {
+     "B": 15
+    },
+    "AssistIA Investimentos": {
+     "A": 9
+    },
+    "Bicho Noturno": {
+     "A": 24
+    },
+    "CartuchoReact": {
+     "B": 14
+    },
+    "CenaReact": {
+     "B": 41
+    },
+    "Curiosidades Noturnas": {
+     "A": 14
+    },
+    "DicasFinanceirasDaIA": {
+     "B": 33
+    },
+    "Dorama Noturno": {
+     "B": 11
+    },
+    "Esporte Noturno": {
+     "A": 45
+    },
+    "Filme Noturno": {
+     "B": 18
+    },
+    "Game Noturno": {
+     "B": 8
+    },
+    "HistoriasEmFrames": {
+     "B": 42
+    },
+    "Inovare": {
+     "A": 2
+    },
+    "InventoReact": {
+     "A": 23
+    },
+    "ManhwaReact-ia": {
+     "B": 7
+    },
+    "MundoQueNaoExiste": {
+     "A": 4
+    },
+    "inovaremanhwabr": {
+     "A": 39
+    }
+   },
+   "canais_com_6_por_braco": [],
+   "n12_por_braco": true,
+   "p_melhor_que_ref_500": {
+    "B": 0.589
+   },
+   "p_melhor_que_ref_pct65": {
+    "B": 0.721
+   },
+   "sugestao": "",
+   "nota": "sorteio por CANAL (cada canal fica num braço só): não dá pra estratificar por canal; a comparação é entre canais diferentes e vale só como indício."
+  }
+ }
+}

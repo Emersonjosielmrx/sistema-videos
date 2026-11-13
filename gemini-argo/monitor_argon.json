@@ -1,16 +1,15 @@
 {
-  "funcionando": false,
-  "previsao_avisada": "2026-11-13T08:34",
+  "funcionando": true,
+  "previsao_avisada": null,
   "teste_falhou_em": null,
   "leitura": {
-    "em": "2026-11-13T08:26:56",
+    "em": "2026-11-13T08:44:58",
     "contas": 29,
-    "prontas": 0,
+    "prontas": 3,
     "voltas": [
-      "2026-11-13T08:34",
       "2026-11-14T00:33"
     ],
-    "exata": false,
-    "cookies_mortos": 23
+    "exata": true,
+    "cookies_mortos": 24
   }
 }

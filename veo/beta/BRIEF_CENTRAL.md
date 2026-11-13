@@ -3,7 +3,7 @@
 (preenchido automaticamente a cada passada do D:ideo-fila\melhorador_central.py; quem for melhorar esta linha lê antes)
 
 <!-- central:inicio -->
-# Brief do melhorador central — Veo / manhwa-react — 13/11 08:34
+# Brief do melhorador central — Veo / manhwa-react — 13/11 08:54
 
 Vídeos nos últimos 7 dias: 28 | elegíveis (receberam o lote do feed): 12 | NÃO elegíveis: 4 | sem medida ainda: 12
 % assistido mediano (só elegíveis): 103.4 | views 48 h mediana: 6.5 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
