@@ -64,8 +64,12 @@ def rodada():
                 log(f"DISPAROU Short no PC2 ({motivo}; preparo {round(time.time() - t0)} s)")
     # 30/10 (D39): com o PC2 ocupado (ou logo depois de disparar), o PC1 já baixa o próximo — o preparo levava
     # 438–793 s com o PC2 parado esperando
+    # 13/11 (pilha única pra PC2, PC3 e STI — ocioso.PILHA_ALVO): prepara em sequência até encher a pilha ou passar
+    # PILHA_RODADA_MIN (padrão 12 min; a tarefa roda de 5 em 5 e a trava impede 2 ao mesmo tempo). Parou de achar = sai.
+    fim = time.time() + float(os.environ.get("PILHA_RODADA_MIN", "12")) * 60
     try:
-        ocioso.preparar_proximo_pc2()
+        while ocioso.preparar_proximo_pc2() and time.time() < fim:
+            pass
     except Exception as e:  # noqa: BLE001
         log(f"[!] preparar o próximo: {type(e).__name__}: {str(e)[:150]}")
 

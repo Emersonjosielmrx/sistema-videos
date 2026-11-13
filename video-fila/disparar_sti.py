@@ -338,31 +338,54 @@ def disparar():
     import anime_fetch
     import parceiro_diario as pdi
     c = pdi.cfg()
-    esc = ocioso._escolher_pc2(pdi, anime_discover, c)
-    if not esc:
-        raise RuntimeError("nenhum canal da vez tem vídeo novo (ou filas cheias)")
-    alvo, escolha, cand = esc
+    # 13/11: pilha única (ocioso.pegar_pronto) — Short já escolhido e baixado pelo PC1 = dispara em segundos. O STI
+    # ficava parado enquanto o PC1 escolhia e baixava (até 50 min numa rodada). Pilha vazia = caminho antigo.
+    pronto = ocioso.pegar_pronto("sti") if ocioso.PILHA_ALVO > 1 else None
+    if pronto:
+        tmp, meta = pronto
+        cand, alvo = meta["cand"], meta["alvo"]
+        escolha = (meta["fonte"], meta["tipo"], meta["rodizio"]) if meta.get("rodizio") else (meta["fonte"], meta["tipo"])
+        log(f"STI pega da pilha: {cand['id']} pra {alvo['nome']}")
+    else:
+        esc = ocioso._escolher_pc2(pdi, anime_discover, c)
+        if not esc:
+            raise RuntimeError("nenhum canal que falta tem vídeo novo (ou filas cheias)")
+        alvo, escolha, cand = esc
+        tmp = None
     fonte, tipo = escolha[0], escolha[1]
     if not _instalar():
+        if pronto:
+            ocioso.devolver_pronto(tmp)
         raise RuntimeError("não consegui mandar o sti_short.sh pro STI")
-    tmp = Path(tempfile.mkdtemp(prefix="prebaixar_sti_"))
+    if tmp is None:
+        tmp = Path(tempfile.mkdtemp(prefix="prebaixar_sti_"))
+    enviado = False
     try:
-        video = anime_fetch.download_video(cand["url"], tmp)  # baixa AQUI (vez do yt-dlp do PC1)
+        if pronto:
+            video = next(iter(sorted(tmp.glob("*.mp4"))), None)
+        else:
+            video = anime_fetch.download_video(cand["url"], tmp)  # baixa AQUI (vez do yt-dlp do PC1)
         if not video:
             raise RuntimeError(f"a fonte {cand['id']} não baixou aqui — o STI não baixa, não dispara")
         fonte_mp4 = tmp / "source.mp4"
         if Path(video) != fonte_mp4:
             shutil.move(str(video), str(fonte_mp4))
-        extras = ocioso._extras_pc1(cand, tmp, anime_fetch)
+        extras = (sorted(tmp.glob("cap*.vtt")) + [tmp / "cand.json"]) if pronto else ocioso._extras_pc1(cand, tmp, anime_fetch)
+        extras = [x for x in extras if Path(x).exists()]
         r_dir = f"{R_BASE}/workspace/anime/{cand['id']}_{ocioso._slug(cand['title'])}"
         _ssh(f"mkdir -p ~/{shlex.quote(r_dir)}", 30)
         cp = _scp(str(fonte_mp4), *[str(p) for p in extras], f"{ALVO}:{r_dir}/", timeout=900)
         if cp.returncode != 0:
             raise RuntimeError(f"scp pro STI falhou: {(cp.stderr or b'').decode('utf-8', 'replace')[:200]}")
+        enviado = True
     finally:
-        shutil.rmtree(tmp, ignore_errors=True)
-    with open(FEITOS / "_feitos_short_attempted.txt", "a", encoding="utf-8") as f:
-        f.write(cand["id"] + "\n")
+        if pronto and not enviado:
+            ocioso.devolver_pronto(tmp)  # não chegou lá: o download volta pra pilha
+        else:
+            shutil.rmtree(tmp, ignore_errors=True)
+    if not pronto:  # o preparado já entrou nos tentados quando foi preparado
+        with open(FEITOS / "_feitos_short_attempted.txt", "a", encoding="utf-8") as f:
+            f.write(cand["id"] + "\n")
     args = " ".join(shlex.quote(str(a)) for a in (cand["id"], fonte, alvo["handle"], alvo["canal"], tipo))
     rc, saida = _ssh(f"nohup ~/{R_BASE}/sti_short.sh {args} > /dev/null 2>&1 < /dev/null & echo disparado", 40)
     if "disparado" not in saida:

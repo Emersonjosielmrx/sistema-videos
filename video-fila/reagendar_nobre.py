@@ -209,6 +209,8 @@ def main():
         if o["slug"] in falhou:
             continue
         if _kaggle(o["slug"]):
+            # 13/11 conferido: Curiosidades, Empresário, Clínica, Imóvel e Vendas usam contas Google que são contas
+            # VIVAS do Kaggle — mexer nelas de casa é a causa dos banimentos. Não é defeito: fica pulado.
             log(f"{rot} — pulado (conta do Kaggle ou não consegui conferir)")
             continue
         try:

@@ -14,6 +14,7 @@ import sys as _sys
 _sys.path.insert(0, r"D:\hipercool-materiais\comum")
 import sem_janela  # noqa: E402,F401 — 29/10 (dona): nenhum processo filho (yt-dlp, ssh, ffmpeg) abre janela
 import json
+import shutil
 import os
 import subprocess
 import sys
@@ -304,6 +305,53 @@ TRAVA_DISPARO_PC2 = BASE / "estado" / "pc2_disparo.lock"
 # 438–793 s por Short (03:27–03:51) com o PC2 esperando; com 1 pronto o disparo é só enviar e rodar.
 PRONTOS_PC2 = BASE / "estado" / "pc2_prontos"
 PRONTO_MAX_H = 8
+# 13/11 (dona: "o sistema tem de se comportar como um só; todos sempre no máximo"): a pilha era de 1 Short e só do PC2;
+# o PC3 e o STI escolhiam e baixavam NA HORA do disparo (4 a 50 min com a máquina parada: em 13/11 o PC2 entregou 43
+# Shorts, o PC3 10 e o STI 3). Agora é UMA pilha pra todos: o PC1 mantém PILHA_ALVO Shorts já baixados e cada máquina
+# livre pega o mais antigo (pegar_pronto). PILHA_ALVO=1 volta ao antigo. Disco: cada fonte tem ~5-40 MB.
+PILHA_ALVO = int(os.environ.get("PILHA_ALVO", "5"))
+PILHA_DISCO_MIN_GB = float(os.environ.get("PILHA_DISCO_MIN_GB", "2"))
+
+
+def _pilha_por_canal():
+    """{id do canal: quantos Shorts já estão preparados pra ele} — entra na conta da fila (senão a pilha inteira ia
+    pro mesmo canal do topo)."""
+    out = {}
+    for m in PRONTOS_PC2.glob("*/meta.json"):
+        try:
+            cid = json.loads(m.read_text(encoding="utf-8"))["alvo"]["canal"]
+            out[cid] = out.get(cid, 0) + 1
+        except (OSError, ValueError, KeyError):
+            pass
+    return out
+
+
+def pegar_pronto(maquina):
+    """Tira da pilha o Short preparado mais antigo e devolve (pasta, meta) — a pasta passa a ser de quem pegou (move
+    pra estado\\pilha_em_uso\\<maquina>_<id>; apagar depois de mandar). None = pilha vazia. O rename é atômico: duas
+    máquinas nunca pegam o mesmo."""
+    uso = BASE / "estado" / "pilha_em_uso"
+    uso.mkdir(parents=True, exist_ok=True)
+    for d in uso.glob("*"):  # sobra de disparo que caiu no meio há mais de 2 h
+        if d.is_dir() and time.time() - d.stat().st_mtime > 7200:
+            import shutil
+            shutil.rmtree(d, ignore_errors=True)
+    for pasta, meta in _prontos_pc2():
+        dst = uso / f"{maquina}_{pasta.name}"
+        try:
+            pasta.rename(dst)
+        except OSError:
+            continue  # outra máquina pegou este agora
+        return dst, meta
+    return None
+
+
+def devolver_pronto(pasta):
+    """O envio pra máquina falhou: o preparado volta pra pilha (não perde o download)."""
+    try:
+        Path(pasta).rename(PRONTOS_PC2 / Path(pasta).name.split("_", 1)[1])
+    except (OSError, IndexError):
+        pass
 
 
 def _ler_feitos(nome):
@@ -388,6 +436,8 @@ def _fonte_vazia_marcar(url):
 def _escolher_pc2(pdi, anime_discover, c):
     """(alvo, escolha, cand) do próximo Short do PC2, ou None (mesma regra do parceiro_diario)."""
     fila = pdi._fila(pdi.itens(c))
+    for _cid, _n in _pilha_por_canal().items():  # 13/11: o que já está na pilha conta como estoque do canal
+        fila[_cid] += _n
     # 12/11 (dona: "por que PC2, STI, desktop e celulares não estão sendo usados se precisamos de mais vídeos?"): aqui
     # o alvo era o fila_alvo PURO (21) — o parceiro_diario dobra pra quem rende (>= 300 views/48 h: 42). Os canais que
     # MAIS rendem (Esporte Noturno 25/42, Plantão 25/42, HistoriasEmFrames 26/42, Fio da Meada 24/42, CenaReact 21/42)
@@ -514,8 +564,10 @@ def preparar_proximo_pc2():
         f.close()
         return False
     try:
-        if _prontos_pc2():
-            return False  # já tem 1 pronto
+        if len(_prontos_pc2()) >= max(1, PILHA_ALVO):
+            return False  # pilha cheia
+        if shutil.disk_usage(str(BASE)).free / 1e9 < PILHA_DISCO_MIN_GB:
+            return False  # disco no fim: não empilha (quem dispara na hora ainda funciona)
         sys.path.insert(0, str(PROD / "bin"))
         import parceiro_diario as pdi
         import anime_discover
@@ -545,7 +597,8 @@ def preparar_proximo_pc2():
             {"cand": cand, "alvo": {k: alvo[k] for k in ("nome", "handle", "canal")}, "fonte": escolha[0],
              "tipo": escolha[1], "rodizio": escolha[2] if len(escolha) == 3 else None, "quando": time.time()},
             ensure_ascii=False), encoding="utf-8")
-        log(f"preparado com antecedência: {cand['id']} pra {alvo['nome']} ({round(time.time() - t0)} s)")
+        log(f"preparado com antecedência: {cand['id']} pra {alvo['nome']} ({round(time.time() - t0)} s; pilha "
+            f"{len(_prontos_pc2())}/{PILHA_ALVO})")
         return True
     finally:
         os.environ.pop("YTDLP_PRIORIDADE", None)
@@ -592,10 +645,10 @@ def _disparar_parceiro_pc2_travado():
     if _pc2_falhas() >= 3:
         log(f"parceiro: PC2 pausado (3 Shorts seguidos falharam lá — {PC2_FALHOU.name})")
         return False
-    prontos = _prontos_pc2()
+    prontos = pegar_pronto("pc2")  # 13/11: pilha única — tira da pilha (PC3 e STI pegam da mesma)
     pasta_pronta = None
     if prontos:  # 30/10 (D39): preparado com antecedência pelo AlimentarPC2 = só enviar e rodar
-        pasta_pronta, meta = prontos[0]
+        pasta_pronta, meta = prontos
         cand, alvo, fonte, tipo = meta["cand"], meta["alvo"], meta["fonte"], meta["tipo"]
         escolha = (fonte, tipo, meta["rodizio"]) if meta.get("rodizio") else (fonte, tipo)
     else:
@@ -615,13 +668,16 @@ def _disparar_parceiro_pc2_travado():
                         creationflags=_SEM_JANELA)
     if cp.returncode != 0:
         log(f"[!] não consegui copiar o parceiro.json pro PC2: {(cp.stderr or b'').decode('utf-8', 'replace')[:200]}")
+        if pasta_pronta:
+            devolver_pronto(pasta_pronta)
         return False
     # 30/10 (D39): falhou o envio/download = NÃO dispara. Antes seguia e o PC2 (SEM_YTDLP=1) tentava baixar sozinho,
     # falhava e somava "falha seguida" (04:22 kTRHBKY-oQI). Preparado que não foi: fica pra próxima; download que não
     # veio: o vídeo fica nos tentados (é dele, não da máquina).
     if pasta_pronta:
         if not _enviar_pronto_pc2(cand, pasta_pronta):
-            log("[!] envio do Short preparado falhou — fica preparado pra próxima")
+            log("[!] envio do Short preparado falhou — volta pra pilha")
+            devolver_pronto(pasta_pronta)
             return False
     elif not _prebaixar_pc2(cand):
         log(f"[!] prebaixar falhou — {cand['id']} não vai pro PC2 (fica nos tentados)")
@@ -800,14 +856,24 @@ def disparar_parceiro_pc3():
     c = pdi.cfg()
     # 04/11: o PC3 tentava UM canal só (o 1º da prioridade) e, sem vídeo novo nele (@thalisshortsbr, a noite toda), o
     # desktop ficava parado com CPU 0%. Mesma escolha do PC2: até 3 canais na ordem de prioridade, fonte já reservada.
-    esc = _escolher_pc2(pdi, anime_discover, c)
-    if not esc:
-        raise RuntimeError("nenhum dos 3 canais da vez tem vídeo novo (ou filas cheias)")
-    alvo, escolha, cand = esc
+    pronto = pegar_pronto("pc3") if PILHA_ALVO > 1 else None  # 13/11: pilha única (já baixado = dispara em segundos)
+    if pronto:
+        tmp, meta = pronto
+        cand, alvo = meta["cand"], meta["alvo"]
+        escolha = (meta["fonte"], meta["tipo"], meta["rodizio"]) if meta.get("rodizio") else (meta["fonte"], meta["tipo"])
+        log(f"PC3 pega da pilha: {cand['id']} pra {alvo['nome']}")
+    else:
+        esc = _escolher_pc2(pdi, anime_discover, c)
+        if not esc:
+            raise RuntimeError("nenhum canal que falta tem vídeo novo (ou filas cheias)")
+        alvo, escolha, cand = esc
+        tmp = Path(tempfile.mkdtemp(prefix="prebaixar_pc3_"))
     fonte, tipo = escolha[0], escolha[1]
-    tmp = Path(tempfile.mkdtemp(prefix="prebaixar_pc3_"))
     try:
-        video = anime_fetch.download_video(cand["url"], tmp)  # baixa AQUI (vez do yt-dlp do PC1)
+        if pronto:
+            video = next(iter(sorted(tmp.glob("*.mp4"))), None)
+        else:
+            video = anime_fetch.download_video(cand["url"], tmp)  # baixa AQUI (vez do yt-dlp do PC1)
         if not video:
             raise RuntimeError(f"a fonte {cand['id']} não baixou aqui — o PC3 não baixa, não dispara")
         r_dir = f"C:/recapd-e-animes/workspace/anime/{cand['id']}_{_slug(cand['title'])}"
@@ -817,14 +883,21 @@ def disparar_parceiro_pc3():
         shutil.copy2(PROD / "config" / "parceiro.json", tmp / "parceiro.json")
         # 12/11: a tabela de vozes x nicho vai no mesmo scp (o PC3 escolhia a voz pela tabela velha — Pica-Pau em negócios)
         shutil.copy2(PROD / "config" / "narradores_nichos.json", tmp / "narradores_nichos.json")
-        cp = _scp(str(video), *[str(p) for p in _extras_pc1(cand, tmp, anime_fetch)], str(tmp / "parceiro.json"),
+        extras = (sorted(tmp.glob("cap*.vtt")) + [tmp / "cand.json"]) if pronto else _extras_pc1(cand, tmp, anime_fetch)
+        cp = _scp(str(video), *[str(p) for p in extras if Path(p).exists()], str(tmp / "parceiro.json"),
                   str(tmp / "narradores_nichos.json"), f"desktop:{r_dir}/", timeout=900)
         if cp.returncode != 0:
+            if pronto:
+                for sobra in ("parceiro.json", "narradores_nichos.json"):
+                    (tmp / sobra).unlink(missing_ok=True)
+                devolver_pronto(tmp)
             raise RuntimeError(f"scp pro PC3 falhou: {(cp.stderr or b'').decode('utf-8', 'replace')[:200]}")
     finally:
-        shutil.rmtree(tmp, ignore_errors=True)
-    with open(FEITOS / "_feitos_short_attempted.txt", "a", encoding="utf-8") as f:
-        f.write(cand["id"] + "\n")
+        if not (pronto and not tmp.exists()):
+            shutil.rmtree(tmp, ignore_errors=True)
+    if not pronto:  # o preparado já entrou nos tentados quando foi preparado
+        with open(FEITOS / "_feitos_short_attempted.txt", "a", encoding="utf-8") as f:
+            f.write(cand["id"] + "\n")
     rc, saida = _pc3(f"Move-Item -Force '{r_dir}/parceiro.json' 'C:/recapd-e-animes/config/parceiro.json'; "
                      f"Move-Item -Force '{r_dir}/narradores_nichos.json' 'C:/recapd-e-animes/config/narradores_nichos.json'; "
                      # 02/11: a ExecutionPolicy do desktop está Undefined (= Restricted): "& script.ps1" era bloqueado e
