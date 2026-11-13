@@ -23,6 +23,23 @@
  ],
  "tarja_largura_max": 0.8,
  "tarja_letra": 0.62,
+ "cobertura_legenda": "delogo",
+ "legenda_impacto": "lateral",
+ "texto_video_modelo": "gemini-4-argon",
+ "texto_video_reserva": "agy/gemini-3.8-flash-high",
+ "texto_video_timeout_s": 120,
+ "gancho_remotion": "ab",
+ "gancho_meio": "ab",
+ "fx_choque": "ab",
+ "mascote": "ab",
+ "curto": "ab",
+ "fala_rapida": "ab",
+ "fala_delta": 15,
+ "saudacao": "ab",
+ "ninguem_esperava": "ab",
+ "horario_fraco": "ab",
+ "_variantes": "30/10: testes A/B/C/D… pelo bin\\variantes.py. Valor \"ab\"/\"abc\"/\"abcd\" ou lista [\"x\",\"y\",\"z\"] = teste com N braços (sorteio estável md5 por vídeo); valor fixo (\"A\", \"B\", \"lateral\"…) = sem teste. Placar: bin\\placar_variantes.py -> D:\\video-fila\\linhas\\CORTES\\placar_cortes_testes.json/.md. Decidir só pela régua D1/D3 do FABLE_DECISOES.md, nunca pelo júri.",
+ "abertura": "abcd",
  "historico": [
   {
    "em": "2026-10-27T06:20",
@@ -670,22 +687,14 @@
     "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa."
    ],
    "porque": "Palavras em inglês e termos soltos viraram legenda/sticker em 3 Shorts: eb6c7b q05 ('BIRDS'), 7f259b q06/q13 ('LOCAL MUN', 'A GALERA'), a96e79 q14/q15 ('VITÓRIA! VENCEU'). A legenda é o texto do roteiro."
+  },
+  {
+   "em": "2026-11-13T14:40",
+   "quem": "sessão manutenção (pesquisador CURTOS, ThomasPraun/spoken-script)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "abcd",
+   "porque": "teste T13: forma da 1ª frase sorteada por vídeo — fato (como sempre) x pergunta x contraste x custo (anime_script._ABERTURAS); placar_variantes decide. Voltar: \"abertura\": \"fato\""
   }
- ],
- "cobertura_legenda": "delogo",
- "legenda_impacto": "lateral",
- "texto_video_modelo": "gemini-4-argon",
- "texto_video_reserva": "agy/gemini-3.8-flash-high",
- "texto_video_timeout_s": 120,
- "gancho_remotion": "ab",
- "gancho_meio": "ab",
- "fx_choque": "ab",
- "mascote": "ab",
- "curto": "ab",
- "fala_rapida": "ab",
- "fala_delta": 15,
- "saudacao": "ab",
- "ninguem_esperava": "ab",
- "horario_fraco": "ab",
- "_variantes": "30/10: testes A/B/C/D… pelo bin\\variantes.py. Valor \"ab\"/\"abc\"/\"abcd\" ou lista [\"x\",\"y\",\"z\"] = teste com N braços (sorteio estável md5 por vídeo); valor fixo (\"A\", \"B\", \"lateral\"…) = sem teste. Placar: bin\\placar_variantes.py -> D:\\video-fila\\linhas\\CORTES\\placar_cortes_testes.json/.md. Decidir só pela régua D1/D3 do FABLE_DECISOES.md, nunca pelo júri."
+ ]
 }

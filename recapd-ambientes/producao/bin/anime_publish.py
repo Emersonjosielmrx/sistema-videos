@@ -531,6 +531,7 @@ def main():
         # ESPERAVA" liberado, B = proibido. "variantes" = todos os braços por vídeo sorteados no fazer_short
         "saudacao": __import__("os").environ.get("CORTES_SAUDACAO") or None,
         "ninguem_esperava": __import__("os").environ.get("CORTES_NINGUEM_ESPERAVA") or None,
+        "abertura": __import__("os").environ.get("CORTES_ABERTURA") or None,  # 13/11 teste T13: forma da 1ª frase
         "variantes": _variantes_do_ambiente(),
         "texto_modelo": __import__("os").environ.get("TEXTO_VIDEO_MODELO") or None,  # 27/10 Argon no texto do vídeo
         "elenco": [v for v in (args.elenco or "").split(",") if v] or None,

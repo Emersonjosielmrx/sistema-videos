@@ -45,6 +45,9 @@ TESTES = {
     "ninguem_esperava": dict(prefixo="ne", env="CORTES_NINGUEM_ESPERAVA", campo="ninguem_esperava"),
     # T12 horário 15-21 h de Brasília: A = ordem normal (antes de 30/10), B = vai pro fim da fila (30/10).
     # Por CANAL (parceiro_diario._ordem_horarios); o placar recalcula o braço pelo canal do ledger.
+    # T13 (13/11, pesquisador): forma da 1ª frase do roteiro — anime_script._ABERTURAS. "fato" = como sempre.
+    "abertura": dict(prefixo="abt", env="CORTES_ABERTURA", campo="abertura", padrao="fato",
+                     nomes=["fato", "pergunta", "contraste", "custo"]),
     "horario_fraco": dict(prefixo="hf", env=None, campo="horario_fraco", por="canal"),
 }
 

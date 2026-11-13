@@ -1866,3 +1866,11 @@ anime/manhwa com nota geral ajustada < 0,7 nos canais pt (hoje king_chan01, nerd
 a versão de língua, ela posta e o Short pt dessa fonte espera (bloco PREFERE_PT invertido só pra essas fontes). As demais
 fontes seguem 100% pt. Continua no máximo 1 língua a cada 3 Shorts (`_vez_da_lingua`). Desliga: LINGUA_FONTE_MAX=0.
 Ensaio da postagem rodou sem erro.
+
+## 13/11/2026 14:45 — manutenção: teste T13 (forma da 1ª frase) + caixa do pesquisador
+Caixa CURTOS do pesquisador: 10 blocos avaliados (1 implantado, 3 reprovados, 7 já vinham reprovados pelo motor).
+Implantado (ideia de ThomasPraun/spoken-script, reescrita): a forma da 1ª frase do Short vira teste de 4 braços por
+vídeo — fato (como sempre) x pergunta x contraste x custo. `anime_script._ABERTURAS` (entra em `_jeito_do_nicho`),
+`variantes.py` "abertura" (env CORTES_ABERTURA), campo "abertura" no postar.json, `cortes_ajustes.json` "abertura":
+"abcd". O placar_variantes já lê. Conferido: sorteio estável por vídeo e a instrução aparece no pedido do roteiro.
+Voltar: "abertura": "fato". Falta ver num Short real de cada braço (os próximos produzidos).
