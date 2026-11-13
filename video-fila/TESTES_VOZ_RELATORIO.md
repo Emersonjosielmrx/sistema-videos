@@ -1,17 +1,17 @@
-# Teste gradual de formatos e vozes — 13/11 07:15
+# Teste gradual de formatos e vozes — 13/11 10:16
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 430.5 de 819 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 431.5 de 820 Shorts medidos passaram da mediana do canal (taxa 0.53). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | voz:cintilante_she_ra_flavia_saddy | promovido | 45 | 0 | 0 | 28 | 15 | 14.0/18 | 0.75 | 443 | 47% (10) | 44/0 | 0 |
-| voz:moana | promovido | 10 | 0 | 0 | 5 | 1 | 11.0/17 | 0.63 | 510 | 39% (3) | 10/0 | 0 |
+| voz:moana | promovido | 10 | 0 | 0 | 5 | 2 | 12.0/18 | 0.65 | 1684 | 39% (3) | 10/0 | 0 |
 | voz:chapolin_colorado | testando | 8 | 0 | 0 | 3 | 2 | 6.5/10 | 0.62 | 2114 | 53% (2) | 8/0 | 0 |
 | voz:chamber_valorant | testando | 1 | 0 | 0 | 1 | 1 | 5.0/9 | 0.55 | 1091 | 36% (1) | 1/0 | 0 |
 | formato:joao_chico | testando | 6 | 0 | 0 | 3 | 3 | 3.0/6 | 0.50 | 13 | 18% (1) | 3/0 | 0 |
-| formato:chaves_chiquinha | promovido | 13 | 0 | 0 | 6 | 5 | 4.5/5 | 0.79 | 1140 | 64% (4) | 11/0 | 0 |
+| formato:chaves_chiquinha | promovido | 14 | 0 | 0 | 6 | 5 | 4.5/5 | 0.79 | 1140 | 64% (4) | 12/0 | 0 |
 | formato:show_do_milhao | testando | 4 | 0 | 0 | 4 | 4 | 2.0/5 | 0.43 | 123 | 66% (2) | 4/0 | 0 |
 | formato:escolinha | testando | 3 | 0 | 0 | 3 | 3 | 3.0/4 | 0.67 | 16 | 28% (1) | 3/0 | 0 |
 | formato:videocassetadas | testando | 2 | 0 | 0 | 2 | 2 | 1.5/4 | 0.42 | 9 | - | 2/0 | 0 |
@@ -20,9 +20,9 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:aracy_top_therm | testando | 2 | 0 | 0 | 2 | 2 | 1.5/3 | 0.50 | 13 | - | 2/0 | 0 |
 | voz:bills | testando | 3 | 0 | 0 | 3 | 3 | 1.0/3 | 0.40 | 6 | 81% (1) | 3/0 | 0 |
 | formato:chaves_quico | testando | 6 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 1145 | 47% (1) | 2/0 | 0 |
-| formato:fofoca | testando | 6 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 3235 | 60% (2) | 2/0 | 0 |
+| formato:fofoca | testando | 6 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 3235 | 61% (2) | 2/0 | 0 |
 | formato:madruga_chaves | testando | 7 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1388 | 70% (1) | 3/0 | 0 |
-| voz:chaves_chapolin | testando | 7 | 0 | 0 | 4 | 2 | 0.5/2 | 0.38 | 2 | - | 7/0 | 0 |
+| voz:chaves_chapolin | testando | 7 | 0 | 0 | 4 | 2 | 0.5/2 | 0.38 | 2 | 37% (1) | 7/0 | 0 |
 | voz:chico_selton | testando | 3 | 0 | 0 | 3 | 2 | 1.5/2 | 0.62 | 1451 | 44% (1) | 3/0 | 0 |
 | voz:mestre_kame | testando | 3 | 0 | 0 | 3 | 2 | 1.0/2 | 0.50 | 17 | - | 3/0 | 0 |
 | voz:quico | testando | 4 | 0 | 0 | 3 | 2 | 1.5/2 | 0.62 | 1783 | 68% (2) | 4/0 | 0 |
@@ -34,7 +34,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:gru_hassum | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 2 | - | 1/0 | 0 |
 | voz:homem_de_ferro_tony_stark | testando | 2 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 2113 | 59% (1) | 2/0 | 0 |
 | voz:husk_hazbin_hotel | testando | 4 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 1983 | 65% (2) | 4/0 | 0 |
-| voz:jett_valorant | testando | 2 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1317 | 49% (1) | 2/0 | 0 |
+| voz:jett_valorant | testando | 2 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1317 | 50% (1) | 2/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 1 | 0.5/1 | 0.50 | 4 | - | 2/0 | 0 |
 | voz:mulher_maravilha | testando | 1 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1003 | 32% (1) | 1/0 | 0 |
 | voz:naruto | testando | 5 | 0 | 0 | 4 | 1 | 1.0/1 | 0.67 | 96 | 67% (1) | 5/0 | 0 |

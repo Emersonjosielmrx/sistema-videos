@@ -23,7 +23,7 @@ def get_token():
     with urllib.request.urlopen(req, timeout=15) as resp:
         for h in resp.headers.get_all("Set-Cookie") or []:
             if "auth_token=" in h:
-                return h.split("auth_token="<SEGREDO_REMOVIDO>";")[0]
+                return h.split("auth_token=")[1].split(";")[0]
     raise RuntimeError("login falhou — sem auth_token no cookie")
 
 def main():

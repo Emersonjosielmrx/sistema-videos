@@ -983,3 +983,33 @@
 - prova: d7f768: o take da concha de q01 volta em q12 e q13, e a feijoada aparece em 'E A NOSSA'. 69b7d1: o pênalti de q03 volta em q07, e Neymar chorando de q06 volta em q08 e q10, enquanto a fala já cita o Mbappé em q09 e q10. 461215: 'NUM SKATE' cai sobre um borrão verde em q16, e o skate já tinha aparecido em q14. É um padrão de seleção e ordem de clipes em 3 Shorts.
 - onde: Seleção e ordenação de takes por cena (função que casa trecho do roteiro com o clipe da fonte). Provável: falta uma lista de takes já usados e uma checagem da distância entre o tempo da palavra-chave e a troca de plano.
 - como testar: Marcar o hash perceptual de cada take usado no Short e vetar o reuso dentro do mesmo Short. Medir o atraso entre a palavra-chave da fala e a troca de imagem, com tolerância de 0,3 s. Rodar nos 3 Shorts e conferir os quadros citados. Descartar quadros sem sujeito (borrão) como candidatos.
+
+## 13/11 09:41 PROPOSTA [CERTEZA] Legenda palavra a palavra tampando rosto e boca (cw/claude-sonnet-5-5)
+- prova: 22bb27 q08 e q16 (legenda sobre a boca e o queixo); 461215 q03 e q07 (sobre a testa e o rosto); ed2afc q05 e q11 (sobre a bochecha e os olhos). Defeito em 3 Shorts do lote.
+- onde: Função que posiciona a legenda no render (y da legenda palavra a palavra). Provavelmente no módulo de legenda da linha CORTES; o arquivo exato precisa ser conferido.
+- como testar: Detectar o rosto na janela de cada palavra (por exemplo, o rosto já medido na cena) e descer a legenda para o terço inferior (y entre 1200 e 1450) quando houver sobreposição. Rodar nos 3 Shorts acima e conferir os quadros q08, q16, q03, q07, q05 e q11.
+
+## 13/11 09:41 PROPOSTA [CERTEZA] Texto, card e sticker cortados na margem lateral (< 60 px) (cw/claude-sonnet-5-5)
+- prova: 461215 q01 ('QUERENDO' com o Q fora da tela); ed2afc q17 (card 'CONVERSA' exibido como 'NVERSA').
+- onde: Render de cards e stickers e cálculo de x da legenda. Falta clamp de x entre 60 e 1020.
+- como testar: Aplicar clamp horizontal (x entre 60 e 1020) a todo overlay e re-renderizar 461215 e ed2afc. Conferir que nenhum texto toca a borda.
+
+## 13/11 09:41 PROPOSTA [CERTEZA] Card comparativo com fonte minúscula e frase truncada (cw/claude-sonnet-5-5)
+- prova: 88b8f9 q09 a q11 (rótulos < 24 px, 'EM SEGUNDOS E' e 'O BANQUETE DOS' cortados); ed2afc q16 e q17 (mensagens do chat < 34 px e sticker cobrindo a linha 3 do card).
+- onde: Template do card comparativo e do card de conversa.
+- como testar: Impor corpo mínimo de 34 px e quebra de frase completa ou omissão do card se não couber. Re-renderizar os 2 Shorts. Antes, confirmar no log se o 'EM SEGUNDOS E' é o card nosso ou a legenda queimada da fonte, pois 88b8f9 q10 sugere legenda da fonte à mostra.
+
+## 13/11 09:41 PROPOSTA [CERTEZA] Legenda com cor translúcida ou baixo contraste (cw/claude-sonnet-5-5)
+- prova: 461215 q06 (vermelho escuro translúcido) e q07 (letras apagadas); 88b8f9 q13, q15 e q17 (magenta e azul finos sobre a garrafa); ed2afc q05 (amarelo-esverdeado apagado).
+- onde: Paleta de destaque por personagem ou palavra de impacto. Provável bug de opacidade ou contorno na cor por personagem.
+- como testar: Forçar opacidade 100%, contorno preto >= 6 px e luminância mínima nas cores por personagem. Medir o contraste nos quadros citados. Isso preserva a preferência da dona por cores por personagem, só corrige as que ficam invisíveis.
+
+## 13/11 09:41 PROPOSTA [GOSTO] Cortes ping-pong entre dois planos do mesmo sujeito (cw/claude-sonnet-5-5)
+- prova: 22bb27 q16 a q18 (perfil, frente, perfil em menos de 4 s); 461215 q05 a q07 (parque, close, parque); ed2afc q15 a q18 (rei, protagonista, rei, protagonista).
+- onde: Seleção e ordem de tomadas por cena (corte de cena). Hoje parece alternar fontes de B-roll sem conferir a continuidade.
+- como testar: Medir quantos retornos A-B-A existem por Short em 10 Shorts antes e depois. Testar com a regra de não voltar ao plano anterior em menos de 5 s. Comparar a retenção e a nota do júri. Uma mudança por vez.
+
+## 13/11 09:41 PROPOSTA [CERTEZA] Legenda duplicada ou sobreposta na mesma posição (cw/claude-sonnet-5-5)
+- prova: 22bb27 q10 ('M ATÉ OS MOS', 'MESMOS' sob 'ATÉ OS') e q13 ('LONDRES' congelada sob 'DE LONDRES'); 461215 q06 (duas camadas em estilos diferentes).
+- onde: Camada de legenda e destaque: o destaque de palavra de impacto não é desligado quando a palavra seguinte entra.
+- como testar: Garantir que há uma única camada ativa por instante (fim da anterior = início da próxima). Re-renderizar 22bb27 e 461215 e checar q10, q13 e q06.

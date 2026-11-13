@@ -5149,3 +5149,13 @@ STATUS: OK
 - Causa provável: Intervalo normal sem novos vídeos nos canais monitorados do parceiro, aguardando o próximo ciclo de varredura.
 - CONSERTO PROPOSTO: Nenhum (processo ativo e aguardando novos itens).
 - Estado: NADA A FAZER
+## 20261113_0936 — Falha de timeout no ffmpeg durante a cobertura do parceiro (já tratada com try/except no código)
+- Motivo / O que achei: TimeoutExpired: Command '['ffmpeg', '-v', 'error', '-ss', '38.45', '-i', 'D:\\recapd-ambientes\\producao\\workspace\\anime\\PdmIOjL-pTU_From_the_door_of_the_triplex__Deltan_Dal\\source.mp4', '-frames:v', '1', '-vf', 'scale=180:320,format=gray', '-f', 'rawvideo', '-']' timed out after 60 seconds — sem cobertura o Short não sai.
+- Causa provável: Contenção transitória de CPU/I/O no Windows durante a extração de frame pelo ffmpeg.
+- CONSERTO PROPOSTO: O bloco try/except em bin/anime_auto.py já pega a exceção e segue o fluxo normalmente. Nenhum ajuste necessário no código.
+- Estado: NADA A FAZER
+## 20261113_0957 — Disco D: com 7.83 GB livres e pipeline e serviços operando normalmente
+- Motivo / O que achei (trecho de log): Disco D: com 7.83 GB livres (ligeiramente abaixo do limite de 8 GB). Os logs em `D:\recapd-ambientes\producao\logs\` mostram que a produção, as postagens do parceiro e os monitores de saúde estão operando normalmente. O Wise Memory Optimizer (PID 6272) está ativo e rodando em segundo plano.
+- Causa provável: Acúmulo natural de arquivos de workspace e cache de vídeos na pasta de projetos, mantendo o disco próximo à margem mínima.
+- CONSERTO PROPOSTO: Nenhum (Modo somente aviso, sem limpeza de disco ou exclusão de arquivos de produção).
+- Estado: NADA A FAZER

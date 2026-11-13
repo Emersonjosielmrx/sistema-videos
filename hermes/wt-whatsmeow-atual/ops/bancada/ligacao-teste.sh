@@ -5,7 +5,7 @@
 #   ligacao-teste.sh disparar ["fala de abertura"]   → dispara e mostra o id da campanha
 #   ligacao-teste.sh relatorio <desde: "YYYY-MM-DD HH:MM:SS">  → resumo dos logs das duas pontas
 set -euo pipefail
-SID=edba8cacecab3732912295e5b33da30d          # 8288 na bancada
+SID=<SEGREDO_REMOVIDO>          # 8288 na bancada
 PROF=36e3e547-fb9f-41c9-8e23-22b8336d24ce     # "Cliente Simulado" (conta de teste da bancada)
 # Número de destino: fica FORA do git, em /etc/hermes-call/ensaio.env (DEST=55...), só na VPS.
 [ -r /etc/hermes-call/ensaio.env ] && . /etc/hermes-call/ensaio.env

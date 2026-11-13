@@ -581,9 +581,16 @@ def _publicacoes(canal, regs=None):
     """Quando cada vídeo do canal abre (publish_at, ou a hora do upload), de TODOS os projetos. Bloqueado no Studio não
     abre: fica de fora."""
     bloq = bloqueados()
+    # 13/11: SIMULADOS = horários ocupados só de mentira (ensaio do parceiro_diario: {id do canal: [datetime]}). O
+    # ensaio não grava no ledger, então todo vídeo simulado recebia o MESMO horário livre (6 no mesmo minuto) e a
+    # agenda do ensaio não servia pra conferir nada. Vazio na postagem de verdade.
     return [t for t in (_dt(r.get("publish_at")) or _dt(r["ts"])
                         for r in (regs if regs is not None else _ler_ledger())
-                        if _do_canal(r, canal) and r.get("video_id") not in bloq) if t]
+                        if _do_canal(r, canal) and r.get("video_id") not in bloq) if t] + list(
+        SIMULADOS.get(canal.get("id"), []))
+
+
+SIMULADOS = {}
 
 
 def _slots_canal(x):

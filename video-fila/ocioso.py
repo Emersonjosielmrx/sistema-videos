@@ -568,6 +568,8 @@ def _disparar_parceiro_pc2_travado():
     # PC2 escolhia a voz pela tabela velha: os canais novos de negócios saíram com Pica-Pau e Chapolin
     cp = subprocess.run([_SCP, "-q", "-o", "BatchMode=yes", str(PROD / "config" / "parceiro.json"),
                          str(PROD / "config" / "narradores_nichos.json"),
+                         *([str(PROD / "config" / "narradores_ajustado.json")]  # 13/11: ranking de voz ajustado
+                           if (PROD / "config" / "narradores_ajustado.json").exists() else []),
                          "pc2:C:/recapd-e-animes/config/"], capture_output=True, timeout=120,
                         creationflags=_SEM_JANELA)
     if cp.returncode != 0:

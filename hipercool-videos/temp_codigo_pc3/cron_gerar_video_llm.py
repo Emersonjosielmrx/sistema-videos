@@ -22,7 +22,7 @@ Uso:
   set LLM_DISABLED=1
   python cron_gerar_video_llm.py
 """
-import os, sys, random, subprocess, glob, datetime, json
+import os, re, sys, random, subprocess, glob, datetime, json
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)

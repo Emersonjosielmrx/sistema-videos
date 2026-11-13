@@ -1,0 +1,59 @@
+{
+ "titulo": "A física tirou férias! 🚚🚢",
+ "descricao": "Personagens famosos reagem aos comentários mais absurdos de um vídeo viral hilário. Assista até o fim para ver a zueira completa!",
+ "tags": [
+  "comedia noturna",
+  "faustao",
+  "patolino",
+  "chiquinha",
+  "valdemiro",
+  "fisica",
+  "viral",
+  "shorts"
+ ],
+ "tipo": "short",
+ "sintetico": true,
+ "fonte": "https://www.youtube.com/shorts/Poidmg8SzKw",
+ "elenco": [
+  "Faustão",
+  "Apóstolo Valdemiro Santiago",
+  "Pato Donald",
+  "Chiquinha",
+  "Patolino"
+ ],
+ "criado": "2026-11-13T07:01:56",
+ "falas": [
+  {
+   "nome": "Faustão",
+   "comentario": "Quando pago pra a encomenda chegar no mesmo dia",
+   "texto": "Quando pago pra a encomenda chegar no mesmo dia... Essa fera aí, meu, chegou antes do boleto vencer, ô louco, meu",
+   "desc": "Homem sorrindo intensamente com expressão exagerada de alegria genuína"
+  },
+  {
+   "nome": "Apóstolo Valdemiro Santiago",
+   "comentario": "O barco o tempo todo: ah se eu quisesse",
+   "texto": "O barco o tempo todo: ah se eu quisesse... Sai, maldição, esse batelão só navega pelo poder da fé e da graça",
+   "desc": "Homem com expressão de desespero e angústia, olhando para cima em situação crítica"
+  },
+  {
+   "nome": "Pato Donald",
+   "comentario": "Mulher não confia em ninguém, os homens :",
+   "texto": "Mulher não confia em ninguém, os homens :... Por todas as penas, nem no meu pior pesadelo eu entregaria esse frete",
+   "desc": "Homem com expressão de desconfiança e ceticismo, texto 'Confía'"
+  },
+  {
+   "nome": "Chiquinha",
+   "comentario": "A lei da física tava de folga nesse dia",
+   "texto": "A lei da física tava de folga nesse dia... Cala a boca, cala a boca, cala a boca, você me deixa louca!",
+   "desc": "Emoji amarelo furioso com punhos cerrados, expressão de raiva intensa"
+  },
+  {
+   "nome": "Patolino",
+   "comentario": "As leis da física obedece esses caras sem questionar.",
+   "texto": "As leis da física obedece esses caras sem questionar... Isso é incorreto, absolutamente incorreto, a física só obedece porque eu ensinei com classe",
+   "desc": "Homem sorrindo maliciosamente enquanto aponta para a cabeça, indicando uma ideia inteligente."
+  }
+ ],
+ "duracao": 35.9,
+ "feito_na": "kaggle"
+}

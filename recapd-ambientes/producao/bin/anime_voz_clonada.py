@@ -198,6 +198,17 @@ def ranking_geral(hist=None):
     puxada pra 0 com 3 vídeos "neutros" (pouco dado = nota perto de 0). Voz com >= 2 medidos: {voz: (nota -1,5..+1,5, n)}."""
     import math
     import statistics
+    # 13/11: ranking AJUSTADO pelo horário (video-fila\inteligencia_ajustada.py, todo dia): compara cada Short só com os
+    # do mesmo canal no mesmo período (noite 21-23 h x resto). O cálculo abaixo dividia pela mediana do NICHO e a voz
+    # que caiu mais vezes no post da noite (que rende ~100x) parecia boa — moana/pica_pau/walter foram cortadas por
+    # isso e, ajustado, estão acima da média. VOZ_RANKING_AJUSTADO=0 volta ao cálculo antigo.
+    if os.environ.get("VOZ_RANKING_AJUSTADO", "1") != "0":
+        try:
+            aj = json.loads(_cfg_arq("narradores_ajustado.json").read_text(encoding="utf-8")).get("vozes") or {}
+            if len(aj) >= 10:
+                return {v: (float(x[0]), int(x[1])) for v, x in aj.items()}
+        except (OSError, ValueError, TypeError, IndexError):
+            pass
     hist = _historico() if hist is None else hist
     try:
         met = json.loads(METRICAS.read_text(encoding="utf-8"))

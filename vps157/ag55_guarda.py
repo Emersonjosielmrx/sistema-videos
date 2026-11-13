@@ -67,7 +67,7 @@ def login():
     r = urllib.request.urlopen(req, timeout=30)
     for ck in r.headers.get_all("Set-Cookie") or []:
         if "auth_token=" in ck:
-            return ck.split("auth_token="<SEGREDO_REMOVIDO>";")[0]
+            return ck.split("auth_token=")[1].split(";")[0]
     raise SystemExit("login no painel falhou")
 
 

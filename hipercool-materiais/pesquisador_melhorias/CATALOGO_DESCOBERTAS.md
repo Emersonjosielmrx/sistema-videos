@@ -4535,8 +4535,8 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_anime_pais__sonnet_0531.md`
 
-- [INÉDITO] github.com/jindratilk/youtube-research-mcp — ★2, push 2026-10-19, MIT — Keyless YouTube MCP server + research skill for AI agents: multi-language search with transcript highlights, transcript ranges, real video f
-- [INÉDITO] github.com/wopian/kitsu-season-trends — ★23, push 2026-11-12, MIT — 🦊 Kitsu seasonal anime trends
+- [REPROVADO por CURTOS: servidor MCP para agente de chat; a busca de fontes já roda por yt-dlp no buscar_fontes_campeas.py (sem dependência nova)] github.com/jindratilk/youtube-research-mcp — ★2, push 2026-10-19, MIT — Keyless YouTube MCP server + research skill for AI agents: multi-language search with transcript highlights, transcript ranges, real video f
+- [REPROVADO por CURTOS: site de tendência de anime da temporada; CURTOS corta Shorts de parceiros autorizados, não escolhe obra por temporada] github.com/wopian/kitsu-season-trends — ★23, push 2026-11-12, MIT — 🦊 Kitsu seasonal anime trends
 
 ## 2026-11-13 05:46 — Fórmula de títulos dos recaps campeões por língua (`area_titulo_formula`, Sonnet 5.5 web)
 
@@ -4554,21 +4554,21 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_primeiros_30s__sonnet_0601.md`
 
-- [INÉDITO] github.com/shobhit007-rm/video-intelligence-dashboard — ★0, push 2026-11-01, MIT — Local real-time dashboard that breaks down YouTube videos (hooks, cuts, pacing, transcript) with yt-dlp, PySceneDetect, WhisperX and FFmpeg.
+- [REPROVADO por CURTOS: dashboard local com WhisperX+PySceneDetect (pesado, tela); a análise dos parceiros já é do aprendizado.py] github.com/shobhit007-rm/video-intelligence-dashboard — ★0, push 2026-11-01, MIT — Local real-time dashboard that breaks down YouTube videos (hooks, cuts, pacing, transcript) with yt-dlp, PySceneDetect, WhisperX and FFmpeg.
 
 ## 2026-11-13 06:21 — Catálogo de ganchos dos recaps mais vistos (`area_catalogo_ganchos_campeoes`, Sonnet 5.5 web)
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_catalogo_ganchos_campeoes__sonnet_0616.md`
 
-- [INÉDITO] github.com/AgriciDaniel/youtube-scout — ★78, push 2026-10-30, MIT — Claude Code skill: one topic in, one ranked YouTube research workbook out. Searches YouTube Data API v3, ranks by views, engagement, momentu
-- [INÉDITO] github.com/jaxstudio1/hookshot — ★3, push 2026-10-17, MIT — Free, local AI clipper: paste a YouTube link or stream VOD, get viral-ranked vertical clips with captions for Shorts, TikTok and Reels. No s
+- [REPROVADO por CURTOS: usa YouTube Data API v3 (Google Cloud) — proibido pelas regras] github.com/AgriciDaniel/youtube-scout — ★78, push 2026-10-30, MIT — Claude Code skill: one topic in, one ranked YouTube research workbook out. Searches YouTube Data API v3, ranks by views, engagement, momentu
+- [REPROVADO por CURTOS: clipador com IA própria e tela; o pipeline de cortes já existe (anime_auto) e roda em 5 máquinas] github.com/jaxstudio1/hookshot — ★3, push 2026-10-17, MIT — Free, local AI clipper: paste a YouTube link or stream VOD, get viral-ranked vertical clips with captions for Shorts, TikTok and Reels. No s
 
 ## 2026-11-13 06:35 — Detecção de tendência por Reddit/HN sem API paga (`area_reddit_trend`, Sonnet 5.5 web)
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_reddit_trend__sonnet_0631.md`
 
 - [USA em D:\recapd-ambientes\producao\bin\musicgen_local.py:33] github.com/agamjn/rising — ★18, push 2026-05-26, MIT — Personal Reddit content engine for Claude Code. Researches subreddit trends and proposes 3 authentic posts daily based on your writing style
-- [INÉDITO] github.com/printemps-tokyo/trendcat — ★1, push 2026-11-12, MIT — Aggregate what's trending now from Hacker News, Reddit, Wikipedia, Hatena, and Google News. Zero-dependency CLI.
+- [REPROVADO por CURTOS: tendência geral (HN/Reddit/Wikipedia): o canal posta o que o parceiro autorizado publica, não tema do dia] github.com/printemps-tokyo/trendcat — ★1, push 2026-11-12, MIT — Aggregate what's trending now from Hacker News, Reddit, Wikipedia, Hatena, and Google News. Zero-dependency CLI.
 
 ## 2026-11-13 06:49 — Recaps de anime/manhwa mais vistos (`area_anime_mais_vistos_recap`, Sonnet 5.5 web)
 
@@ -4580,10 +4580,22 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_longos_pt_concorrentes__sonnet_0656.md`
 
-- [INÉDITO] github.com/loginov1/alt-track-dubbing — ★0, push 2026-11-02, MIT — Agent skill and CLI: full-length, synchronized alternate-language audio tracks for YouTube multi-language audio, with local ASR, Chirp 3 HD 
+- [REPROVADO por CURTOS: faixa de áudio alternativa do YouTube usa Chirp 3 HD (Google Cloud pago); as versões em língua já saem por canal próprio] github.com/loginov1/alt-track-dubbing — ★0, push 2026-11-02, MIT — Agent skill and CLI: full-length, synchronized alternate-language audio tracks for YouTube multi-language audio, with local ASR, Chirp 3 HD 
 
 ## 2026-11-13 07:33 — Recap >4 h por idioma, sem API (`area_canais_longos_4h`, Sonnet 5.5 web)
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_canais_longos_4h__sonnet_0711.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-13 09:30 — Formatos que viralizam por nicho (`area_formatos_nicho`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_formatos_nicho__sonnet_0917.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-13 09:49 — Corpus de títulos reais por nicho (`area_corpus_titulos`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_corpus_titulos__sonnet_0936.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)

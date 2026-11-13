@@ -7390,5 +7390,47 @@
     "motivo": "depende da ferramenta zcode e é recap de manhwa (hipercool), não Short de parceiro",
     "quem": "CURTOS",
     "data": "2026-11-13"
+  },
+  {
+    "repo": "jindratilk/youtube-research-mcp",
+    "motivo": "servidor MCP para agente de chat; a busca de fontes já roda por yt-dlp no buscar_fontes_campeas.py (sem dependência nova)",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "wopian/kitsu-season-trends",
+    "motivo": "site de tendência de anime da temporada; CURTOS corta Shorts de parceiros autorizados, não escolhe obra por temporada",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "shobhit007-rm/video-intelligence-dashboard",
+    "motivo": "dashboard local com WhisperX+PySceneDetect (pesado, tela); a análise dos parceiros já é do aprendizado.py",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "AgriciDaniel/youtube-scout",
+    "motivo": "usa YouTube Data API v3 (Google Cloud) — proibido pelas regras",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "jaxstudio1/hookshot",
+    "motivo": "clipador com IA própria e tela; o pipeline de cortes já existe (anime_auto) e roda em 5 máquinas",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "printemps-tokyo/trendcat",
+    "motivo": "tendência geral (HN/Reddit/Wikipedia): o canal posta o que o parceiro autorizado publica, não tema do dia",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "loginov1/alt-track-dubbing",
+    "motivo": "faixa de áudio alternativa do YouTube usa Chirp 3 HD (Google Cloud pago); as versões em língua já saem por canal próprio",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
   }
 ]

@@ -91,6 +91,49 @@ def _load_font(size):
     return ImageFont.load_default()
 
 
+def _chave_palavra(w):
+    return re.sub(r"[^0-9a-zà-ÿ]", "", str(w).lower())
+
+
+def _alinhar_tempos(words, wt):
+    """Tempo REAL de cada palavra da legenda a partir do que a voz devolveu (wt = [[ini, fim, palavra], ...]).
+    Antes só valia quando a CONTAGEM batia; bastava a voz partir "Dong-su" em duas, juntar "1.500" ou a fala trocar uma
+    palavra do roteiro (anti_ban: "matou" -> "tirou a vida") pra frase inteira cair na estimativa por tamanho da
+    palavra — e o karaokê acendia fora do tempo. Agora casa palavra com palavra; onde não casa, reparte só o tempo
+    daquele pedaço. Devolve lista do tamanho de words, ou None (pouca coisa casou: fica a estimativa)."""
+    try:
+        wt = [(float(a), float(b), str(c)) for a, b, c in wt]
+    except (TypeError, ValueError):
+        return None
+    if not words or not wt:
+        return None
+    if len(wt) == len(words):
+        return [[x[0], x[1], w] for x, w in zip(wt, words)]
+    import difflib
+    a = [_chave_palavra(w) for w in words]
+    b = [_chave_palavra(x[2]) for x in wt]
+    sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+    iguais = sum(i2 - i1 for tag, i1, i2, _j1, _j2 in sm.get_opcodes() if tag == "equal")
+    if iguais < max(1, 0.5 * len(words)):
+        return None
+    out = [None] * len(words)
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            for k in range(i2 - i1):
+                out[i1 + k] = [wt[j1 + k][0], wt[j1 + k][1], words[i1 + k]]
+        elif i2 > i1:  # palavras da legenda sem par exato: repartem o tempo do pedaço correspondente da fala
+            t0 = wt[j1][0] if j2 > j1 else (wt[j1 - 1][1] if j1 > 0 else wt[0][0])
+            t1 = wt[j2 - 1][1] if j2 > j1 else (wt[j1][0] if j1 < len(wt) else wt[-1][1])
+            t1 = max(t1, t0)
+            pesos = [max(2, len(w)) for w in words[i1:i2]]
+            acum, total = 0.0, float(sum(pesos))
+            for k, pz in enumerate(pesos):
+                ini = t0 + (t1 - t0) * acum / total
+                acum += pz
+                out[i1 + k] = [round(ini, 3), round(t0 + (t1 - t0) * acum / total, 3), words[i1 + k]]
+    return out if all(out) else None
+
+
 def _wrap_lines(text, font, draw, max_w):
     """Quebra o texto em linhas que cabem em max_w pixels."""
     words = (text or "").strip().replace("\n", " ").split()
@@ -114,13 +157,13 @@ def detect_context(text):
     whisper(...)>thought(*) — !! checado antes de ! pra não virar shout."""
     t = (text or "")
     low = t.lower()
-    if "!!" in t or re.search(r"import|crític|critic|vital", low):
+    if "!!" in t or re.search(r"\bimportant|\bcrític|\bcritic|\bvita(?:l|is)\b", low):
         return "emphasis"
-    if "!" in t or re.search(r"grito|berro|alto\b", low):
+    if "!" in t or re.search(r"\bgrit|\bberr|\bem voz alta\b", low):
         return "shout"
-    if "..." in t or re.search(r"sussurr|baixo|murmur", low):
+    if "..." in t or re.search(r"\bsussurr|\bbaixinho\b|\bem voz baixa\b|\bmurmur", low):
         return "whisper"
-    if "*" in t or re.search(r"pensa|imagin|reflet", low):
+    if "*" in t or re.search(r"\bpens(?:a|ou|ava|ando|amento)|\bimagin|\breflet", low):
         return "thought"
     return "normal"
 
@@ -265,8 +308,8 @@ def render_subtitles_progressive(entries, tmp_dir, offsets=None, word_times=None
         n = len(words)
         # MELHORIA WordBoundary: usa timing REAL de cada palavra se veio o sidecar da entry.
         wt_real = None
-        if word_times and i < len(word_times) and word_times[i] and len(word_times[i]) == n:
-            wt_real = word_times[i]  # [[start,end,word],...] relativo ao clip
+        if word_times and i < len(word_times) and word_times[i]:
+            wt_real = _alinhar_tempos(words, word_times[i])  # [[start,end,word],...] relativo ao clip
         # Distribuição proporcional ao comprimento de cada palavra (fallback quando sem real)
         weights = [max(2, len(w)) for w in words]
         total_weight = sum(weights)
@@ -461,8 +504,8 @@ def render_subtitles_short(entries, offsets=None, words_per_card=None, word_time
         # WordBoundary: timing REAL de cada palavra (relativo ao clip) se veio o sidecar
         # e o nº de palavras casa. Mata o drift legenda×balão.
         wt_real = None
-        if word_times and i < len(word_times) and word_times[i] and len(word_times[i]) == len(words):
-            wt_real = word_times[i]
+        if word_times and i < len(word_times) and word_times[i]:
+            wt_real = _alinhar_tempos(words, word_times[i])
         # agrupa em cards de N palavras; cada palavra do card ACENDE amarelo no seu tempo
         for g in range(0, len(words), words_per_card):
             grp = words[g:g + words_per_card]

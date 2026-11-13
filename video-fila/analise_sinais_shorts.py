@@ -72,6 +72,10 @@ def carregar():
         for c in CAMPOS:
             if pj.get(c) is not None:
                 d[c] = pj[c]
+        for c in ("parceiro", "narrador"):  # quem decide fonte/voz (inteligencia_ajustada.py)
+            if pj.get(c):
+                d[c] = pj[c]
+        d["projeto"] = m.get("fonte") or ""
         t = d["titulo"]
         d["titulo_len"] = "<=40" if len(t) <= 40 else "41-60" if len(t) <= 60 else "61-80" if len(t) <= 80 else ">80"
         d["titulo_pergunta"] = "?" in t

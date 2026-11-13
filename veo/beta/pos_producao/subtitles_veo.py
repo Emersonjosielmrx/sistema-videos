@@ -59,13 +59,13 @@ def detect_context(text):
     """Detecta tom: shout|whisper|thought|emphasis|normal."""
     t = (text or "")
     low = t.lower()
-    if "!!" in t or re.search(r"import|crític|critic|vital", low):
+    if "!!" in t or re.search(r"\bimportant|\bcrític|\bcritic|\bvita(?:l|is)\b", low):
         return "emphasis"
-    if "!" in t or re.search(r"grito|berro|alto\b", low):
+    if "!" in t or re.search(r"\bgrit|\bberr|\bem voz alta\b", low):
         return "shout"
-    if "..." in t or re.search(r"sussurr|baixo|murmur", low):
+    if "..." in t or re.search(r"\bsussurr|\bbaixinho\b|\bem voz baixa\b|\bmurmur", low):
         return "whisper"
-    if "*" in t or re.search(r"pensa|imagin|reflet", low):
+    if "*" in t or re.search(r"\bpens(?:a|ou|ava|ando|amento)|\bimagin|\breflet", low):
         return "thought"
     return "normal"
 

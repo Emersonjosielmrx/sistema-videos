@@ -16793,5 +16793,15 @@
     "arquivado": false,
     "descricao": "YouTube outlier badges, observed view history, and channel analysis",
     "data": "2026-11-13"
+  },
+  "losted-secondary/youtube-tracker": {
+    "ok": true,
+    "nome": "losted-secondary/youtube-tracker",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Rastreia canais de recap de manhwa numa planilha Google (GitHub Actions + YouTube Data API)",
+    "data": "2026-11-13"
   }
 }

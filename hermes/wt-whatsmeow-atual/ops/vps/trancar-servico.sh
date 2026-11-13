@@ -21,7 +21,7 @@ UNIT=/etc/systemd/system/hermes-call.service
 DROP=/etc/systemd/system/hermes-call.service.d/10-segredos.conf
 ALERTAS=/etc/hermes-call/alertas.env
 KEYF=/root/.hermes-campanha-apikey
-SID=290f2fb3c1ad8d570c732d16afd41f1e   # linha 8653 (campanha)
+SID=<SEGREDO_REMOVIDO>   # linha 8653 (campanha)
 umask 077
 TS=$(date +%Y%m%d-%H%M)
 

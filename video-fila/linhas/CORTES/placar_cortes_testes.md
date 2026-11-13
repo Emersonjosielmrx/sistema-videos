@@ -1,4 +1,4 @@
-# Placar dos testes dos Shorts (Cortes) — 2026-11-13 08:48
+# Placar dos testes dos Shorts (Cortes) — 2026-11-13 09:11
 
 Gerado por `D:\recapd-ambientes\producao\bin\placar_variantes.py` (só lê; não muda nada). Régua do FABLE_DECISOES.md: D1 só **elegíveis** (views >= 20), D3 >= 6 elegíveis por braço no mesmo canal, D16 >= 12 por braço e P >= 0,95; nunca pela nota do júri (D6). Decidir = mudar a chave em `bin\cortes_ajustes.json` para o braço vencedor (com linha no histórico).
 

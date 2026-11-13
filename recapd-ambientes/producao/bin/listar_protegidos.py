@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Lista os PROTEGIDOS agrupados por CATEGORIA (anime/jogo/filme/artista/funk...)."""
 import os, re
-import importlib
-from pathlib import Path.util
+import importlib.util
+from pathlib import Path
 
 spec = importlib.util.spec_from_file_location("cc", str(Path(__file__).resolve().parent / "classificar_copyright.py"))
 cc = importlib.util.module_from_spec(spec)

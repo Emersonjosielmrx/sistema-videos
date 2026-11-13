@@ -122,6 +122,14 @@ def main():
     imprimir("POR CANAL DE ORIGEM (parceiro)", resumo([l for l in linhas if l["origem"]], lambda l: l["origem"], minimo))
     if "--aplicar" in sys.argv:
         fontes_por_canal(linhas)
+        try:  # 13/11: notas de fonte e de narrador SEM o efeito do horário (substitui o arquivo acima)
+            import inteligencia_ajustada
+            aj = inteligencia_ajustada.gravar()
+            print(f"ajustado pelo horário: {sum(len(v) for v in aj['canais'].values())} pares canal x fonte, "
+                  f"{len(aj['geral'])} fontes, {len(aj['vozes'])} vozes")
+            inteligencia_ajustada.relatorio()
+        except Exception as e:  # noqa: BLE001 — fica a conta antiga
+            print(f"[!] inteligencia_ajustada falhou ({type(e).__name__}: {e}) — ficam as notas sem ajuste")
         aplicar(resumo(linhas, lambda l: (l["canal"], l["tipo"]), minimo),
                 {r["grupo"]: r["views_med"] or 0 for r in resumo(linhas, lambda l: l["canal"], 1)})
 
@@ -155,6 +163,7 @@ def fontes_por_canal(linhas):
 
 
 PARCEIRO = Path(r"D:\recapd-ambientes\producao\config\parceiro.json")
+FOCO_MIN_AJUSTADO = 0.85  # 13/11: razão mínima do tipo no canal, comparando no mesmo período do dia
 FOCO_MIN_MED = 100  # tipo entra no foco do canal com mediana >= 100 views (com --min Shorts medidos)
 
 
@@ -178,6 +187,29 @@ def aplicar(canal_tipo, med_canal=None):
         v = r["views_med"] or 0
         if tipo in nichos and (v >= FOCO_MIN_MED or (v >= 20 and v >= 1.3 * (med_canal.get(slug) or 0))):
             foco[slug][tipo] = r["views_med"]
+    # 13/11: tira do foco o tipo que só parecia bom por ter caído no post da noite (21-23 h rende ~100x nos canais
+    # fracos): Filme Noturno tinha foco em 'esportes' (480 views de mediana, 4 vídeos, 2 deles à noite) e, comparando
+    # no mesmo período, esportes rende 0,67x o normal do canal. Fica o tipo com razão ajustada >= FOCO_MIN_AJUSTADO
+    # (0,85) ou o tipo mais produzido do canal (é a própria régua). inteligencia_ajustada.py.
+    try:
+        import math
+        import inteligencia_ajustada
+        gr = defaultdict(list)
+        for l in inteligencia_ajustada.linhas_ajustadas():
+            if l.get("midia"):
+                gr[(l["canal"], l["midia"])].append(l["rz"])
+        for slug_ in list(foco):
+            maior = max((m for (c_, m) in gr if c_ == slug_), key=lambda m: len(gr[(slug_, m)]), default=None)
+            for tipo_ in list(foco[slug_]):
+                rz = gr.get((slug_, tipo_)) or []
+                aj = math.exp(sum(math.log(x) for x in rz) / (len(rz) + 2)) if rz else 1.0
+                if tipo_ != maior and aj < FOCO_MIN_AJUSTADO:
+                    print(f"foco: {slug_} perde '{tipo_}' (ajustado pelo horário rende {aj:.2f}x o normal do canal)")
+                    del foco[slug_][tipo_]
+            if not foco[slug_]:
+                del foco[slug_]
+    except Exception as e:  # noqa: BLE001 — sem o ajuste fica a regra antiga
+        print(f"[!] foco sem ajuste de horário ({type(e).__name__}: {e})")
     shutil.copy(PARCEIRO, PARCEIRO.with_name(f"parceiro.json.bak_foco_{datetime.now():%Y%m%d_%H%M}"))
     for c in d.get("pt", []):
         slug = next((s for s, creds in cred_do_slug.items() if c["canal"] in creds), None)

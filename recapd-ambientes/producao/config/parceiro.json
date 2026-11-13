@@ -1361,17 +1361,16 @@
    "fuso": "America/Sao_Paulo",
    "horarios": [
     "13:20",
-    "20:10",
-    "22:40"
+    "21:05",
+    "15:10"
    ],
    "horario": "13:20",
    "por_dia": 3,
    "fila_alvo": 21,
    "ativo": true,
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
-   "nichos_foco": {
-    "esportes": 480.5
-   }
+   "_obs_nobre": "13/11: 20:10 -> 21:05 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)",
+   "_obs_nobre2": "13/11: 1 só horário nobre por dia (2º post da noite nunca rendeu: 0 de 10); 22:40->15:10"
   },
   {
    "canal": "novo_manhwareact_ia",
@@ -1382,7 +1381,7 @@
    "horarios": [
     "12:10",
     "18:40",
-    "20:30",
+    "21:20",
     "15:30"
    ],
    "horario": "12:10",
@@ -1391,7 +1390,8 @@
    "ativo": true,
    "teste_rede": true,
    "_obs": "17/10: não posta (ManhwaReact: login vencido; Animescomia: só API, proibida) — religar quando consertar",
-   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_obs_nobre": "13/11: 20:30 -> 21:20 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "KOpyXE9rBy1YirlZ",
@@ -1442,7 +1442,7 @@
    "fuso": "America/Sao_Paulo",
    "horarios": [
     "12:00",
-    "20:10"
+    "21:35"
    ],
    "horario": "12:00",
    "por_dia": 2,
@@ -1454,10 +1454,9 @@
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
    "nichos_foco": {
     "pesca": 1159.0,
-    "jogos": 394.0,
-    "dorama": 316.0,
-    "financas": 196.0
-   }
+    "jogos": 394.0
+   },
+   "_obs_nobre": "13/11: 20:10 -> 21:35 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_ia_agora_h3n",
@@ -1508,14 +1507,15 @@
    "horarios": [
     "11:00",
     "17:10",
-    "20:10"
+    "21:45"
    ],
    "horario": "11:00",
    "por_dia": 1,
    "fila_alvo": 21,
    "ativo": true,
    "teste_rede": true,
-   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_obs_nobre": "13/11: 20:10 -> 21:45 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_mundoquenaoexiste",
@@ -1554,10 +1554,7 @@
    "teste_rede": true,
    "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
    "nichos_foco": {
-    "fatos": 1256.5,
-    "pesca": 1000.0,
-    "jogos": 214.5,
-    "manhwa": 204.0
+    "fatos": 1256.5
    },
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
   },
@@ -1571,7 +1568,7 @@
     "12:10",
     "18:00",
     "19:50",
-    "20:40",
+    "15:25",
     "21:30"
    ],
    "horario": "19:10",
@@ -1584,7 +1581,8 @@
    "nichos_foco": {
     "fatos": 1385.5
    },
-   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
+   "_obs_nobre2": "13/11: 20:40->15:25 (ficava a 50 min do nobre 21:30 e o 5º post do dia não cabia)"
   },
   {
    "canal": "novo_assistiainvestimentos",
@@ -1595,14 +1593,16 @@
    "horarios": [
     "07:40",
     "12:15",
-    "19:30"
+    "19:30",
+    "22:05"
    ],
    "horario": "07:40",
    "por_dia": 1,
    "fila_alvo": 21,
    "ativo": true,
    "teste_rede": true,
-   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_obs_nobre": "13/11: + 22:05 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_dicasfinanceirasdaia",
@@ -1626,8 +1626,7 @@
    "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
    "nichos_foco": {
     "esportes": 1545.0,
-    "dorama": 1125.0,
-    "anime": 458.0
+    "dorama": 1100.0
    },
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
   },
@@ -1705,14 +1704,15 @@
    "horarios": [
     "13:10",
     "19:00",
-    "22:40"
+    "22:25"
    ],
    "horario": "13:10",
    "por_dia": 1,
    "fila_alvo": 21,
    "ativo": true,
    "_obs": "21/10: canal novo pros gêneros de parceiro sem canal (dono)",
-   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_obs_nobre": "13/11: 22:40 -> 22:25 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_inovareq8l",
@@ -1723,14 +1723,15 @@
    "horarios": [
     "12:40",
     "19:20",
-    "22:50"
+    "21:15"
    ],
    "horario": "12:40",
    "por_dia": 2,
    "fila_alvo": 21,
    "ativo": true,
    "_obs": "29/10: canal de tema novo (dona: temas que os parceiros têm e nós não)",
-   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_obs_nobre": "13/11: 22:50 -> 21:15 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_inovareu8b",
@@ -1741,14 +1742,15 @@
    "horarios": [
     "13:00",
     "19:50",
-    "23:10"
+    "21:25"
    ],
    "horario": "13:00",
    "por_dia": 2,
    "fila_alvo": 21,
    "ativo": true,
    "_obs": "29/10: canal de tema novo (dona: temas que os parceiros têm e nós não)",
-   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_obs_nobre": "13/11: 23:10 -> 21:25 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_empresariointeligenteia",
@@ -1759,14 +1761,16 @@
    "horarios": [
     "09:30",
     "13:30",
-    "19:30"
+    "19:30",
+    "21:55"
    ],
    "horario": "09:30",
    "por_dia": 2,
    "fila_alvo": 4,
    "ativo": true,
    "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
-   "nicho_fixo": true
+   "nicho_fixo": true,
+   "_obs_nobre": "13/11: + 21:55 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_clinicalucrativaia",
@@ -1777,14 +1781,16 @@
    "horarios": [
     "09:30",
     "13:30",
-    "19:30"
+    "19:30",
+    "21:12"
    ],
    "horario": "09:30",
    "por_dia": 2,
    "fila_alvo": 4,
    "ativo": true,
    "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
-   "nicho_fixo": true
+   "nicho_fixo": true,
+   "_obs_nobre": "13/11: + 21:12 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_imovelemfoco",
@@ -1795,14 +1801,16 @@
    "horarios": [
     "09:30",
     "13:30",
-    "19:30"
+    "19:30",
+    "21:27"
    ],
    "horario": "09:30",
    "por_dia": 2,
    "fila_alvo": 4,
    "ativo": true,
    "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
-   "nicho_fixo": true
+   "nicho_fixo": true,
+   "_obs_nobre": "13/11: + 21:27 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_vendasqueescalam",
@@ -1813,14 +1821,16 @@
    "horarios": [
     "09:30",
     "13:30",
-    "19:30"
+    "19:30",
+    "21:42"
    ],
    "horario": "09:30",
    "por_dia": 2,
    "fila_alvo": 4,
    "ativo": true,
    "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
-   "nicho_fixo": true
+   "nicho_fixo": true,
+   "_obs_nobre": "13/11: + 21:42 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   },
   {
    "canal": "novo_leielucro",
@@ -1831,14 +1841,16 @@
    "horarios": [
     "09:30",
     "13:30",
-    "19:30"
+    "19:30",
+    "21:57"
    ],
    "horario": "09:30",
    "por_dia": 2,
    "fila_alvo": 4,
    "ativo": true,
    "nicho_fixo": true,
-   "_obs": "13/11 dona: canal NOVO (advocacia/contabilidade); conta emersonjosiel2035 = a do Kaggle, YouTube pelo MESMO IP (rnprmtfo-14)"
+   "_obs": "13/11 dona: canal NOVO (advocacia/contabilidade); conta emersonjosiel2035 = a do Kaggle, YouTube pelo MESMO IP (rnprmtfo-14)",
+   "_obs_nobre": "13/11: + 21:57 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
   }
  ],
  "idiomas": {
@@ -1981,5 +1993,5 @@
  "tipo_fonte": "manhwa",
  "_linguas_obs": "17/10 13:25: línguas pausadas (ainda saem com o borrão antigo e roubam render do teste dos 12 canais pt)",
  "_reserva_obs": "02/11 dona: TODO projeto mantém reserva de 1 SEMANA (7 dias x por_dia) — se a produção parar 1 semana, os canais seguem postando. fila_alvo pt = 7 x por_dia (antes 6-9). Doc: hipercool docs/MELHORIAS_PARA_TODOS_OS_PROJETOS.md (Novidades 02/11).",
- "_nichos_foco_obs": "13/11 05:40 analise_shorts_foco.py --aplicar: tipo com mediana >= 100 views NO canal (Studio). Recalcular: rodar de novo."
+ "_nichos_foco_obs": "13/11 09:12 analise_shorts_foco.py --aplicar: tipo com mediana >= 100 views NO canal (Studio). Recalcular: rodar de novo."
 }

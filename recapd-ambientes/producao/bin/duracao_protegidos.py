@@ -8,8 +8,8 @@
 Le duracao via ffprobe.
 """
 import os, re, subprocess, json
-import importlib
-from pathlib import Path.util
+import importlib.util
+from pathlib import Path
 
 spec = importlib.util.spec_from_file_location("cc", str(Path(__file__).resolve().parent / "classificar_copyright.py"))
 cc = importlib.util.module_from_spec(spec); spec.loader.exec_module(cc)

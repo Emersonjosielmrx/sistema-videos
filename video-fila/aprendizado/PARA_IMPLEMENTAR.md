@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 13/11/2026 08:39. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 13/11/2026 10:06. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md

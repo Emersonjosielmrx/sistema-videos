@@ -295,7 +295,145 @@ _VIRAL = [
     (r"\bperdeu\b", "foi de base"),
 ]
 
-_ANTI_BAN_C = [(re.compile(r, re.IGNORECASE), s) for r, s in _ANTI_BAN]
+# ───────── PALAVRA INTEIRA + CONTEXTO (13/11) ─────────
+# As regras acima casavam PEDAÇO de palavra, em toda narração (áudio e legenda): "prometeu" -> "promandando ver",
+# "cometeu" -> "comandando ver", "enviado" -> "endiferentão", "diamante" -> "diaffair", "biscoito" -> "bisvuco-vuco",
+# "atropelado" -> "atrosem roupa", "homenagem" -> "hofesta privadam", "manuscrito" -> "mpopôcrito", "a heroína da
+# história" -> "a aditivos proibidos". Agora: (1) cada regra só casa palavra inteira (plural com "s" continua valendo);
+# (2) palavra que normalmente é inocente só troca com contexto (tabela _GUARDAS); (3) _ANTES acerta gênero/conjugação.
+_LETRA = r"[0-9A-Za-zÀ-ÖØ-öø-ÿ_]"
+_FRONT_INI = rf"(?<!{_LETRA})"
+_FRONT_FIM = rf"(?=s?(?!{_LETRA}))"
+
+
+def _alternativas(rx):
+    """Divide o padrão nas alternativas de 1º nível (o "|" fora de parênteses e de [])."""
+    partes, atual, prof, classe, i = [], "", 0, False, 0
+    while i < len(rx):
+        c = rx[i]
+        if c == "\\":
+            atual += rx[i:i + 2]
+            i += 2
+            continue
+        if classe:
+            classe = c != "]"
+        elif c == "[":
+            classe = True
+        elif c == "(":
+            prof += 1
+        elif c == ")":
+            prof -= 1
+        elif c == "|" and prof == 0:
+            partes.append(atual)
+            atual = ""
+            i += 1
+            continue
+        atual += c
+        i += 1
+    return partes + [atual]
+
+
+def _palavra_inteira(rx):
+    out = []
+    for alt in _alternativas(rx):
+        if alt.startswith("(?<"):       # já tem "não vem depois de X": soma a fronteira de palavra
+            ini = _FRONT_INI
+        elif alt.startswith(("\\b", "\\d", "(?:(")) or not re.match(r"[A-Za-zÀ-ÿ\[(]", alt):
+            ini = ""
+        else:
+            ini = _FRONT_INI
+        fim = "" if re.search(r"(\\w\*|\\b|\\w\+|\)\?|\\s\+|\+\))$", alt) or alt.endswith(")") else _FRONT_FIM
+        out.append(ini + alt + fim)
+    return "|".join(out)
+
+
+# sinais de cena picante na MESMA frase (inclui o que as regras de cima já trocaram)
+_PICANTE = re.compile(
+    r"na cama|pra cama|para a cama|motel|\bnu[as]?\b|sem roupa|pelad|beij|gemi|gemendo|barulhinho|tes[ãa]o|prazer|"
+    r"\bsexo|vuco|transa|dar um trato|\bpeit|dotes|frontais|\bseios?\b|\bcoxas?\b|bumbum|\bbunda|calcinha|lingerie|"
+    r"roupa de baixo|cueca|sedu[zç]|excit|\baces[oa]\b|safad|sem vergonha|tirou a roupa|tirar a roupa|strip|er[óo]tic|"
+    r"picante|\bdesejo|ardente|\bflor\b|pop[ôo]|finaliz|\bcorpo d[ae]l[ae]|l[áa]bios|amasso|namorad|esposa|marido|"
+    r"noite juntos|dormiu com|dormir com", re.I)
+# (palavra casada, tipo, contexto). tipo: "so" = só troca se o contexto aparece na frase; "sem" = não troca se aparece;
+# "depois" = não troca se o que vem logo depois casa; "antes" = não troca se o que vem logo antes casa
+_GUARDAS = [(re.compile(a, re.I), tipo, re.compile(c, re.I)) for a, tipo, c in [
+    (r"^(?:metendo|meteu|meter|pinto|pau|rola|molhad[oa]|virgem|gala|cavalg\w*|dominad\w*|domina[çc][ãa]o|"
+     r"exibi[çc]\w*|se toc\w*|violar|viola[çc][ãa]o)$", "so", _PICANTE.pattern),
+    (r"^hero[ií]na$", "so", r"drog|aditivo|vici|injet|trafic|comerciante ilegal|overdose|apag[ãa]o qu[íi]mico|cheir|"
+                           r"seringa|usu[áa]ri|dose\b"),
+    (r"^gostos[oa]$", "sem", r"comida|prato|sabor|bolo|carne|sopa|cheiro|bebida|refei[çc]|janta|almo[çc]|lanche|"
+                             r"doce|tempero|receita|ch[áa]\b|caf[ée]|fruta|p[ãa]o|cozinh"),
+    (r"^(?:chup\w+|mam(?:ar|ando|ou))$", "sem", r"sangue|suco de tomate|vampir|dedo|pirulito|\bbala\b|lim[ãa]o|"
+                                                r"laranja|picol[ée]|sorvete|leite|mamadeira|beb[êe]|filhote|energia|"
+                                                r"\bmana\b|\balma|poder"),
+    (r"^(?:gemidos?|gemendo|geme|gemir)$", "sem", r"\bdor\b|ferid|machuc|agoni|sofr|doente|febre|sangr|golpe|soco|"
+                                                  r"chute|apanh|medo|fantasma"),
+    (r"^piranha$", "sem", r"\brio\b|peixe|[áa]gua|\blago|aqu[áa]rio|cardume|pesc"),
+    (r"^seio$", "depois", r"^\s+d[aeo]s?\b"),                       # "no seio da família"
+    (r"^goz\w+$", "depois", r"^\s+d[aeo]s?\b"),                     # "gozava de boa saúde"
+    (r"^retardad[oa]$", "antes", r"(?:efeito|a[çc][ãa]o|bomba|explos[ãa]o|disparo)\s+$"),
+    (r"^amante$", "depois", r"^s?\s+d[aeo]s?\s+(?:arte|m[úu]sica|livro|natureza|leitura|vinho|cinema|poesia|"
+                            r"batalha|luta|paz|liberdade|conhecimento|justi[çc]a)"),
+]]
+
+
+_ORIGINAL = {"txt": ""}  # o texto como chegou no anti_ban (antes de qualquer troca)
+
+
+def _frase_de(m):
+    txt, i = m.string, m.start()
+    ini = max(txt.rfind(c, 0, i) for c in ".!?\n") + 1
+    fins = [p for p in (txt.find(c, m.end()) for c in ".!?\n") if p >= 0]
+    return txt[ini:min(fins) if fins else len(txt)]
+
+
+def _pode_trocar(m):
+    casado = m.group(0)
+    for rx, tipo, ctx in _GUARDAS:
+        if not rx.match(casado):
+            continue
+        if tipo == "so":
+            # também o texto ORIGINAL: uma regra anterior pode já ter trocado o sinal ("tesão" -> "fogo")
+            return bool(ctx.search(_frase_de(m).replace(casado, " ", 1)) or
+                        ctx.search(_ORIGINAL["txt"].replace(casado, " ")))
+        if tipo == "sem":
+            return not ctx.search(_frase_de(m))
+        if tipo == "depois":
+            return not ctx.search(m.string[m.end():m.end() + 40])
+        if tipo == "antes":
+            return not ctx.search(m.string[max(0, m.start() - 20):m.start()])
+    return True
+
+
+def _com_guarda(troca):
+    def f(m):
+        if not _pode_trocar(m):
+            return m.group(0)
+        return troca(m) if callable(troca) else m.expand(troca)
+    return f
+
+
+# acertos de gênero/conjugação que vêm ANTES da regra genérica (a genérica deixava "a servo", "ficou aceso" pra
+# mulher, "ele gravata definitiva o traidor", "ele encanta a plateia" no passado, "a a peça de baixo")
+_ANTES = [
+    (r"escrava", "serva"), (r"escravid[ãa]o", "servidão"),
+    (r"excitada", "acesa"),
+    # 13/11 (chat do D:, conferindo o lote do agente online): com palavra inteira, "estuprou"/"estupraram" caíam no
+    # genérico estupr\w* e a frase saía sem conjugação ("matou e forçar a barra a vila"). Verbo conjugado antes.
+    (r"estupraram", "atacaram"), (r"estuprou", "atacou"), (r"estuprando", "atacando"), (r"estuprava(m?)", r"atacava\1"),
+    (r"seduziram", "encantaram"), (r"seduziu", "encantou"), (r"seduzindo", "encantando"), (r"seduzir", "encantar"),
+    (r"seduzid([oa])", r"encantad\1"),
+    (r"enforcaram\s+(o|a)(s?)\b", r"deram a gravata definitiva n\1\2"), (r"enforcou\s+(o|a)(s?)\b", r"deu a gravata definitiva n\1\2"),
+    (r"enforcar\s+(o|a)(s?)\b", r"dar a gravata definitiva n\1\2"),
+    (r"enforcaram", "deram a gravata definitiva em"), (r"enforcou", "deu a gravata definitiva em"),
+    (r"enforcar", "dar a gravata definitiva em"), (r"enforcad[oa]", "na gravata definitiva"),
+    (r"(?:degolar|decapitar)\s+(o|a)(s?)\b", r"tirar a cabeça d\1\2"),
+    (r"espiar", "bisbilhotar"),
+    (r"os seios", "os frontais"),
+    (r"cueca", "peça de baixo"),
+]
+
+_ANTI_BAN_C = [(re.compile(_palavra_inteira(r), re.IGNORECASE), _com_guarda(s)) for r, s in _ANTES + _ANTI_BAN]
 _VIRAL_C = [(re.compile(r, re.IGNORECASE), s) for r, s in _VIRAL]
 
 
@@ -303,6 +441,7 @@ def anti_ban(texto):
     """Suaviza termos de strike. SEMPRE aplicado. Não muda o sentido da história."""
     if not texto:
         return texto
+    _ORIGINAL["txt"] = texto
     _CENSURA["trocou"] = False
     for rgx, sub in _ANTI_BAN_C:
         texto = rgx.sub(sub, texto)

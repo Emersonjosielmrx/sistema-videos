@@ -1,9 +1,8 @@
-# Vigilância 24 h — 2026-11-13T08:50:39
+# Vigilância 24 h — 2026-11-13T10:10:40
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (7)
-- canal leielucro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+## Alarmes desta volta (6)
 - longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B
 - longo dtjL5XFWlXQ (InovareManhwaVerse) sem as capas B/C do teste A/B
 - longo AWweNegHpbI (Manhwa Noturno) sem as capas B/C do teste A/B

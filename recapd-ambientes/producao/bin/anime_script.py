@@ -461,18 +461,31 @@ def _auto_block_chars(target_lines, text_len):
 # ("The prompt could not be submitted... violate Google's Generative AI Prohibited Use policy") e ela foi NARRADA em
 # 4 vídeos (2 chegaram a ser agendados). Resposta de erro/recusa nunca vira roteiro: em qualquer língua, descarta.
 _RX_ERRO_IA = re.compile(
-    r"could not be submitted|prohibited use|violat\w* .{0,40}polic|sensitive words|generative ai|"
-    r"as an ai\b|i can(?:'|no)t (?:help|assist|create|write|provide)|i'?m (?:sorry|unable)|unable to (?:help|assist)|"
+    r"could not be submitted|prohibited use|violat\w* .{0,40}polic|sensitive words|"
+    r"as an? (?:generative )?ai\b|generative ai (?:model|assistant|system)|"
+    r"i can(?:'|no)t (?:help|assist|create|write|provide)|i'?m sorry,? (?:but|i )|i'?m unable to|"
+    r"unable to (?:help|assist)|"
     r"against (?:my|the) (?:guidelines|polic)|content policy|safety (?:filter|policy|guidelines)|"
-    r"request (?:was )?blocked|send feedback|troubleshooting|\bapi key\b|rate limit|\bquota exceeded\b|"
-    r"internal server error|\b(?:http|error)\s*[45]\d{2}\b|traceback \(most recent|exception:|"
+    r"request (?:was )?blocked|send feedback|troubleshooting|"
+    # 13/11: "api key", "rate limit", "prompt", "exception:" sozinhos também são NARRAÇÃO nos canais de negócios/IA
+    # ("o prompt certo muda tudo", "sem a api key o robô não funciona"): o roteiro inteiro era descartado como erro.
+    # Agora só a forma que o PROVEDOR escreve.
+    r"(?:invalid|missing|incorrect|no|wrong) api key|api key (?:not|is|inv[áa]lida|ausente|incorreta)|"
+    r"rate.?limit\w* (?:exceeded|reached|error|atingido)|exceeded .{0,25}rate limit|\bquota exceeded\b|"
+    r"internal server error|\b(?:http|error)\s*[45]\d{2}\b|traceback \(most recent|\w+(?:exception|error):\s|"
     # revisão 23/10: "como ia sair dali", "alíquota", "o erro 100 vezes" são narração normal — fora da lista
     r"não posso (?:ajudar|criar|escrever|gerar)|como modelo de linguagem|"
-    r"viola(?:m|r)? (?:as )?(?:diretrizes|políticas)|conteúdo (?:sensível|impróprio) .{0,30}não|"
+    r"viola(?:m|r)? (?:as )?(?:diretrizes|políticas) (?:de (?:uso|conte[úu]do|seguran[çc]a)|d[ao] (?:openai|google|"
+    r"anthropic|plataforma|youtube))|conteúdo (?:sensível|impróprio) .{0,30}não (?:posso|consigo|pode ser|é permitido)|"
     # 30/10 (PROPOSTAS CORTES, sem-obra-54b88d nota 2,5): a IA pediu o material em vez de escrever e o pedido foi
     # NARRADO ("envie a transcrição para que criar o roteiro completo no estilo do ... garantindo perfeita para o loop")
-    r"(?:envie|mande|forneça|cole|me passe) (?:a|o) (?:transcrição|legenda|texto|vídeo|roteiro)|"
-    r"(?:aqui está|segue) (?:o|seu) roteiro\s*[:\n]|roteiro (?:completo|reescrito) no estilo|\bprompt\b|"
+    # 13/11: só quando é PEDIDO DE MATERIAL ("...para que eu crie", "...completa", "...aqui"); "Mande o vídeo pro grupo
+    # da família" e "Cole o texto no ChatGPT" são fala normal de CTA/tutorial
+    r"(?:envie|mande|forneça|cole|me passe)(?:-me)? (?:a|o) (?:transcrição|legenda|texto|vídeo|roteiro)\b"
+    r"(?=.{0,80}(?:para que|pra que|para eu|pra eu|que eu possa|e eu (?:crio|escrevo|fa[çc]o|reescrevo)|abaixo|"
+    r"complet[ao]|original|aqui\b))|"
+    r"(?:aqui está|segue) (?:o|seu) roteiro\s*[:\n]|roteiro (?:completo|reescrito) no estilo|"
+    r"(?:seu|este|esse|do|no|o|ao) prompt (?:acima|abaixo|fornecido|enviado|anterior|original|do sistema)|system prompt|"
     r"garantindo .{0,25}\bloop\b|please (?:provide|send|share)", re.I)
 
 
@@ -488,15 +501,39 @@ def resposta_de_erro(texto):
     return bool(texto) and bool(_RX_ERRO_IA.search(texto))
 
 
+# Marcador de lista no começo da linha: "- ", "* ", "• ", "1. ", "2) " (e reticências soltas). NÃO é número da frase:
+# antes era r"^[\-\*\d\.\)\s]+" e comia o número de "300 soldados cercaram a vila" -> "soldados cercaram a vila",
+# "2 anos depois" -> "anos depois", "1995 foi o ano" -> "foi o ano" (a narração saía sem o número).
+_RX_MARCADOR_LISTA = re.compile(r"^\s*(?:(?:[-*•–—]+|\d{1,3}[.)]|#{1,6})\s+|\.{2,}\s*|…\s*)+")
+_PARES_ASPAS = (('"', '"'), ("“", "”"), ("«", "»"), ("'", "'"))
+
+
+_RX_CURTA = re.compile(r"[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,6}[.!?…]+")   # frase de 1-2 palavras com pontuação final
+
+
+def _limpa_linha(s):
+    """Uma linha da resposta do modelo -> frase limpa (sem marcador de lista, sem negrito de markdown, sem aspas em
+    volta da frase inteira). Aspas de fala no MEIO da frase ficam inteiras: antes o strip tirava só uma das duas
+    ('"Você não é nada", disse ela.' virava 'Você não é nada", disse ela.')."""
+    s = _RX_MARCADOR_LISTA.sub("", s.strip())
+    s = re.sub(r"\*+|(?<!\w)_{1,2}(?=\w)|(?<=\w)_{1,2}(?!\w)", "", s).strip()   # **negrito**, _itálico_
+    for a, b in _PARES_ASPAS:
+        if len(s) >= 2 and s[0] == a and s[-1] == b and a not in s[1:-1] and b not in s[1:-1]:
+            s = s[1:-1].strip()
+    if s.count('"') == 1 and (s[0] == '"' or s[-1] == '"'):   # aspa órfã na ponta (o par ficou em outra linha)
+        s = s.replace('"', "").strip()
+    return s
+
+
 def _clean_lines(raw):
     """Quebra a resposta do modelo em frases-linha limpas."""
     out = []
     for ln in raw.splitlines():
-        s = ln.strip()
-        s = re.sub(r"^[\-\*\d\.\)\s]+", "", s)      # bullets/numeração
-        s = s.strip(' "\'')
+        s = _limpa_linha(ln)
         if len(s) >= 8:
             out.append(s)
+        elif out and _RX_CURTA.fullmatch(s):
+            out[-1] = f"{out[-1]} {s}"   # "Não!", "Vazio.", "Tarde." numa linha só: gruda na anterior em vez de sumir
     return out
 
 
@@ -732,6 +769,20 @@ _VITORIA_CEDO = (
     "tiver, NÃO invente.\n")
 
 
+# LONGOS_MELHORIAS "A FAZER 10/11 (a)": o roteiro tinha 1 frase a cada 6,6 s do original SEM teto — fonte de 206 min
+# (HZRT) virou 1952 frases ≈ 13 h de render a 24 s/frase > 11,5 h da sessão do Kaggle: refeito 3x, nunca terminou.
+# Com teto, fonte de 3 h+ volta a caber (1500 × 24 s = 10 h). Só muda o que passa do teto; LONGO_TETO_FRASES=0 desliga.
+TETO_FRASES_LONGO = int(os.environ.get("LONGO_TETO_FRASES", "1500") or 0)
+
+
+def alvo_com_teto(alvo):
+    """(alvo, apertado): o alvo de frases do longo já limitado ao teto, e se o teto cortou."""
+    alvo = int(alvo)
+    if TETO_FRASES_LONGO > 0 and alvo > TETO_FRASES_LONGO:
+        return TETO_FRASES_LONGO, True
+    return alvo, False
+
+
 def rewrite_longo_com_tempo(cues, target_lines, src_dur=None):
     """Roteiro LONGO (deitado) com o segundo do original de cada frase. Dona 25/10 ("os longos estão muito atrás dos
     Cortes"): o Short já narrava o que está na tela (rewrite_curto_com_tempo, 21/10) e o longo espalhava as frases na
@@ -741,6 +792,11 @@ def rewrite_longo_com_tempo(cues, target_lines, src_dur=None):
     Devolve (frases, tempos) ou ([], []) — quem chama cai no rewrite_to_file normal."""
     if not cues or not claude_client.is_available():
         return [], []
+    pedido_original = target_lines
+    target_lines, apertado = alvo_com_teto(target_lines)
+    if apertado:
+        logging.info(f"[script] roteiro longo: alvo {pedido_original} frases passa do teto — uso {target_lines} "
+                     "(LONGO_TETO_FRASES) pra caber na sessão")
     marcados = _cues_marcados(cues)
     texto_total = "\n".join(m for _t, m in marcados)
     if len(re.sub(r"[^a-zA-ZáéíóúãõçÁÉÍÓÚÃÕÇ]", "", texto_total)) < 200:
@@ -788,6 +844,11 @@ def rewrite_longo_com_tempo(cues, target_lines, src_dur=None):
             f"momentos relevantes. Como referência de ritmo, algo perto de {por_bloco} frases curtas de narração — "
             "use quantas o trecho pedir para ficar a MELHOR narração possível, UMA POR LINHA, na "
             "ordem do vídeo. NÃO condense demais, NÃO pule diálogos importantes.\n"
+            # só quando o original é longo demais pra sessão (teto): aqui o nº de frases deixa de ser só referência
+            + (f"ESTE VÍDEO É MUITO LONGO: fique em NO MÁXIMO {por_bloco + 2} frases neste trecho. Para caber, junte "
+               "numa frase só as cenas de transição, repetições e conversa sem consequência; os momentos fortes "
+               "(virada, luta, humilhação, revelação) continuam com todas as frases que precisarem.\n"
+               if apertado else "") +
             "CONCORDÂNCIA DE GÊNERO: use o artigo e pronome corretos (a/o, ela/ele, da/do) para cada personagem. "
             "Se o personagem é feminino, diga 'a Lilim', 'ela', 'da guerreira'; nunca 'o Lilim'. Erre o gênero = erro grave.\n"
             "Cada linha COMEÇA com o segundo do vídeo original em que acontece o que a frase narra, no formato [123s] "
@@ -815,6 +876,12 @@ def rewrite_longo_com_tempo(cues, target_lines, src_dur=None):
         for linha in resp.splitlines():
             m = _RX_TEMPO.match(linha)
             txt = " ".join(_clean_lines(m.group(2) if m else linha))
+            if not txt and soltas:  # linha só com "Não!" / "Vazio.": fica na frase anterior (antes era jogada fora)
+                curta = _limpa_linha(m.group(2) if m else linha)
+                if _RX_CURTA.fullmatch(curta):
+                    if marc and marc[-1][1] == soltas[-1]:
+                        marc[-1] = (marc[-1][0], f"{marc[-1][1]} {curta}")
+                    soltas[-1] = f"{soltas[-1]} {curta}"
             if not txt or resposta_de_erro(txt) or (txt.endswith(":") and len(txt.split()) < 5):
                 continue
             low = txt.lower()
@@ -850,6 +917,29 @@ def rewrite_longo_com_tempo(cues, target_lines, src_dur=None):
 _RX_MARCA = re.compile(r"\[(\d+(?:[.,]\d+)?)\s*s?\]")
 
 
+# ponto de abreviação não fecha frase ("O Sr. Kim chegou" virava "O Sr." + "Kim chegou." e o "O Sr." era jogado fora)
+_RX_FIM_SENTENCA = re.compile(r"(?<!\bSr\.)(?<!\bDr\.)(?<!\bSra\.)(?<!\bDra\.)(?<!\bProf\.)(?<!\bMr\.)(?<!\bMrs\.)"
+                              r"(?<!\bMs\.)(?<!\bSt\.)(?<!\bvs\.)(?<!\bn[ºo]\.)(?<=[.!?…])\s+")
+
+
+def _sentencas(txt):
+    """Texto -> frases. Pedaço curto ("Vazio.", "Não!", "Tarde.") NÃO é jogado fora (antes sumia da narração — e é
+    justamente a frase de impacto): gruda na frase vizinha, sem criar um clipe de 1 palavra."""
+    out = []
+    for p in (x.strip() for x in _RX_FIM_SENTENCA.split(txt or "")):
+        if not p:
+            continue
+        if len(p) < 8 and out:
+            out[-1] = f"{out[-1]} {p}"            # curto depois de uma frase: fica junto dela
+        elif out and len(out[-1]) < 8:
+            out[-1] = f"{out[-1]} {p}"            # curto abrindo: gruda na seguinte
+        else:
+            out.append(p)
+    if len(out) == 1 and len(out[0]) < 8 and not re.search(r"[A-Za-zÀ-ÿ]{2}", out[0]):
+        return []
+    return out
+
+
 def _frases_com_tempo(resp, src_dur=None):
     """(frases, tempos) de uma resposta com marcas [Ns] em qualquer lugar do texto. Trecho com várias frases entre
     duas marcas vira uma frase por sentença, com o tempo repartido até a marca seguinte (no último, até ~o fim)."""
@@ -859,7 +949,7 @@ def _frases_com_tempo(resp, src_dur=None):
         t0 = float(m.group(1).replace(",", "."))
         fim = marcas[k + 1].start() if k + 1 < len(marcas) else len(resp)
         txt = " ".join(_clean_lines(re.sub(r"^\s*[-•*]?\s*", "", resp[m.end():fim]))).strip()
-        partes = [p.strip() for p in re.split(r"(?<=[.!?…])\s+", txt) if len(p.strip()) >= 8] or ([txt] if txt else [])
+        partes = _sentencas(txt)
         if k + 1 < len(marcas):
             t1 = float(marcas[k + 1].group(1).replace(",", "."))
         else:

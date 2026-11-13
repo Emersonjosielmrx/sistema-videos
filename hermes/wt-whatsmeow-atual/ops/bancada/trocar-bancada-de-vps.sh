@@ -17,7 +17,7 @@ set -euo pipefail
 
 PROD=hermes-prod
 T209=hermes-staging
-SID=edba8cacecab3732912295e5b33da30d
+SID=<SEGREDO_REMOVIDO>
 BANCOS="bancada_main bancada_$SID"
 SSH="ssh -o BatchMode=yes -o ConnectTimeout=20"
 

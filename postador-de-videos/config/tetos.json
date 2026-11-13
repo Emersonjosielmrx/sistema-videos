@@ -49,9 +49,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T07:08:03",
     "ultimo_sinal": {
-     "em": "2026-11-13T06:14:39",
-     "tipo": "sessao_expirada",
-     "maquina": "?"
+     "em": "2026-11-13T09:23:51",
+     "tipo": "saude_morto",
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -379,9 +379,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-13T07:20:25",
+     "em": "2026-11-12T12:23:01",
      "tipo": "saude_morto",
-     "maquina": "desktop"
+     "maquina": "pc2"
     },
     "historico": [
      {
@@ -559,9 +559,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-30T23:07:57",
     "ultimo_sinal": {
-     "em": "2026-11-13T01:21:25",
+     "em": "2026-11-13T09:20:29",
      "tipo": "saude_morto",
-     "maquina": "pc2"
+     "maquina": "acer"
     },
     "historico": [
      {
@@ -589,9 +589,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-29T22:09:34",
     "ultimo_sinal": {
-     "em": "2026-11-12T06:02:30",
-     "tipo": "unusual_activity",
-     "maquina": "pc2"
+     "em": "2026-11-13T09:20:29",
+     "tipo": "saude_morto",
+     "maquina": "acer"
     },
     "historico": [
      {
@@ -1296,7 +1296,7 @@
     "base": 90,
     "nivel": 6,
     "teto": 180,
-    "estado": "segurando",
+    "estado": "subindo",
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-07T18:07:57",
     "ultimo_sinal": {
@@ -1374,6 +1374,11 @@
       "em": "2026-11-11T16:08:08",
       "o_que": "sinal de login/recusa: segurando (não sobe nesta janela)",
       "teto": 180
+     },
+     {
+      "em": "2026-11-13T10:08:25",
+      "o_que": "janela limpa: volta a subir",
+      "teto": 180
      }
     ]
    },
@@ -1385,9 +1390,9 @@
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-10-31T23:14:16",
     "ultimo_sinal": {
-     "em": "2026-11-13T04:21:14",
+     "em": "2026-11-13T09:21:12",
      "tipo": "saude_morto",
-     "maquina": "pc2"
+     "maquina": "sti"
     },
     "historico": [
      {
@@ -2916,15 +2921,15 @@
    },
    "inovarecom.ia": {
     "base": 2,
-    "nivel": 3,
-    "teto": 5,
-    "estado": "no_limite",
+    "nivel": 0,
+    "teto": 2,
+    "estado": "fora",
     "desde": "2026-10-29T22:09:34",
     "ultimo_degrau": "2026-11-05T00:08:22",
     "ultimo_sinal": {
-     "em": "2026-11-12T10:06:21",
-     "tipo": "upload_400",
-     "maquina": "x200ma"
+     "em": "2026-11-13T08:21:26",
+     "tipo": "conta_restrita",
+     "maquina": "pc1"
     },
     "historico": [
      {
@@ -2951,6 +2956,11 @@
       "em": "2026-11-05T10:07:59",
       "o_que": "sinal FORTE de bloqueio: volta 1 degrau e fica NO LIMITE (não sobe mais sozinha)",
       "teto": 5
+     },
+     {
+      "em": "2026-11-13T09:08:04",
+      "o_que": "conta restrita/suspensa: FORA da rampa (teto volta à base)",
+      "teto": 2
      }
     ]
    },
@@ -4093,9 +4103,9 @@
    "desde": "2026-10-29T22:09:34",
    "ultimo_degrau": "2026-10-29T22:09:34",
    "ultimo_sinal": {
-    "em": "2026-11-13T07:20:25",
+    "em": "2026-11-13T09:23:51",
     "tipo": "saude_morto",
-    "conta": "emersongenc"
+    "conta": "aulacomia"
    },
    "historico": [
     {

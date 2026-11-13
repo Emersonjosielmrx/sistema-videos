@@ -60,6 +60,12 @@ _PRONUNCIA = [
 ]
 
 
+_RX_ROMANO_1 = re.compile(
+    r"(?i:\b(cap[ií]tulo|cap\.|temporada|parte|volume|vol\.|epis[óo]dio|ato|livro|tomo|s[ée]culo|fase|"
+    r"henrique|carlos|lu[ií]s|jo[ãa]o|pedro|afonso|fel?ipe|filipe|jorge|eduardo|guilherme|ricardo|le[ãa]o|pio|bento|"
+    r"paulo|alexandre|ivan|fernando|manuel|frederico) )(V|X)\b")
+
+
 def _pronuncia(t):
     for rx, troca in _PRONUNCIA:
         t = rx.sub(troca, t)
@@ -68,8 +74,11 @@ def _pronuncia(t):
 
 def _seguro(text):
     t = _pronuncia(viralizador.anti_ban(text))
-    t = re.sub(r"(?<=\S )(II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|XVI|XX)\b",
+    t = re.sub(r"(?<=\S )(II|III|IV|VI|VII|VIII|IX|XI|XII|XIII|XIV|XV|XVI|XX)\b",
                lambda m: str(_ROMANOS[m.group(1)]) if m.group(1) in _ROMANOS else m.group(0), t)
+    # "V" e "X" sozinhos quase sempre são LETRA ("o X da questão", "Sr. X", "Projeto X", "Rank X" saíam "10"): só
+    # viram número depois de capítulo/parte/temporada... ou de nome de rei/papa ("Henrique V", "Capítulo X")
+    t = _RX_ROMANO_1.sub(lambda m: m.group(1) + " " + str(_ROMANOS[m.group(2)]), t)
     return viralizador.viralizar(t) if os.environ.get("VIRAL_SLANG") == "1" else t
 
 

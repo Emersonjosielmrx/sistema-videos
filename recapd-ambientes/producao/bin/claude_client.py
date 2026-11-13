@@ -473,7 +473,8 @@ def _balloon_lines(text):
     out = []
     for ln in text.splitlines():
         ln = ln.strip()
-        ln = re.sub(r"^[\-\*\d\.\)]+\s*", "", ln)
+        # só marcador de lista ("- ", "1. ", "2) ", "..."): o padrão antigo comia o número do balão ("100 anos" -> "anos")
+        ln = re.sub(r"^(?:(?:[-*•]+|\d{1,3}[.)])\s+|[-*•]+(?=\S)|\.{2,}\s*)+", "", ln)
         if ln and ln.upper() != "SEM TEXTO" and not is_refusal(ln):
             out.append(ln)
     return out

@@ -299,7 +299,9 @@ def _nicho_do_canal(alvo, proprio, principais):
         return (v + 1) / (t + 2)
     melhor = max((n for n in principais if placar.get(n, (0, 0))[0] >= NICHO_MIN_MEDIDAS), key=media, default=None)
     principal = melhor if melhor and media(melhor) > media(proprio) + NICHO_MARGEM else proprio
-    outros = [n for n in principais if n != principal]
+    # 13/11: o teste de 20% mandava 'juridico'/'negocios' pro Curiosidades Noturnas — os nichos SÉRIOS são dos canais
+    # criados pra vender automação (vozes sérias, público de negócio); canal de entretenimento não testa esses.
+    outros = [n for n in principais if n != principal and (n not in NICHOS_SERIOS or proprio in NICHOS_SERIOS)]
     if outros and random.random() < NICHO_TESTE:
         escolhido = max(outros, key=lambda n: random.betavariate(placar.get(n, (0, 0))[1] + 1,
                                                                  placar.get(n, (0, 0))[0] - placar.get(n, (0, 0))[1] + 1))
@@ -366,8 +368,10 @@ def _escolher_fonte(c, alvo=None, evitar=None):
     _fonte_no_canal = {}
     if alvo and os.environ.get("PARCEIRO_FONTE_POR_CANAL", "1") != "0":
         try:  # gerado todo dia pelo video-fila\analise_shorts_foco.py --aplicar (tarefa FocoShorts)
-            _fonte_no_canal = json.loads((BIN.parent / "estado" / "fontes_por_canal.json").read_text(
-                encoding="utf-8")).get("canais", {}).get(alvo["canal"], {})
+            _fpc = json.loads((BIN.parent / "estado" / "fontes_por_canal.json").read_text(encoding="utf-8"))
+            # 13/11: notas sem o efeito do horário (inteligencia_ajustada.py); fonte ainda sem vídeo NESTE canal usa a
+            # nota geral dela (0,4-2,5) em vez de 1 — a fonte que rende nos outros canais é testada antes aqui
+            _fonte_no_canal = {**(_fpc.get("geral") or {}), **_fpc.get("canais", {}).get(alvo["canal"], {})}
         except (OSError, ValueError):
             _fonte_no_canal = {}
 
@@ -726,6 +730,59 @@ def producao(args):
 
 
 # ─────────────────────────── postagem ───────────────────────────────────────
+def _trazer_do_drive(x, nome):
+    """Traz de volta do Drive o video.mp4 de UM Short da reserva (reserva_shorts_drive.py deixa _NO_DRIVE.txt com o
+    caminho). True se o arquivo está no lugar. 12/11 dona: "pode mandar as reservas pro Drive"."""
+    no_drive = x["pj"].parent / "_NO_DRIVE.txt"
+    try:
+        origem = no_drive.read_text(encoding="utf-8").strip()
+        subprocess.run([r"D:\tools\rclone.exe", "copyto", origem, str(x["mp4"]), "--retries", "3"],
+                       capture_output=True, timeout=900, creationflags=0x08000000)
+    except Exception as e:  # noqa: BLE001
+        log(f"{nome}: {x['pj'].parent.name} não voltou do Drive ({type(e).__name__})")
+        return False
+    if x["mp4"].exists():
+        log(f"{nome}: {x['pj'].parent.name} voltou do Drive pra postar")
+        no_drive.unlink(missing_ok=True)
+        return True
+    log(f"{nome}: {x['pj'].parent.name} não voltou do Drive (arquivo não chegou)")
+    return False
+
+
+def horas_nobres():
+    """Horas (de Brasília) em que o Short rende mais dentro do mesmo canal — ver _ordem_horarios (13/11)."""
+    return {int(x) for x in os.environ.get("HORARIO_NOBRE_BR", "21,22").split(",") if x.strip()}
+
+
+_NOTA_CACHE = {}
+
+
+def nota_pronto(x, dst):
+    """13/11 dona ("melhore a inteligência de postagem"): nota de um Short PRONTO pra decidir qual vai no horário
+    nobre do canal — o que tem mais chance de render ALI: fonte que rende neste canal (estado\fontes_por_canal.json,
+    0,3-3) x tipo de conteúdo em foco no canal (nichos_foco: 1-2; fora do foco 0,8) x narrador (ranking geral de
+    views, 0,6-1,7). Sem dado = 1 em cada fator. Só ordena; nunca segura vídeo."""
+    d = x.get("d") or {}
+    if "fontes" not in _NOTA_CACHE:
+        try:
+            _NOTA_CACHE["fontes"] = json.loads((BIN.parent / "estado" / "fontes_por_canal.json").read_text(
+                encoding="utf-8")).get("canais", {})
+        except (OSError, ValueError):
+            _NOTA_CACHE["fontes"] = {}
+        try:
+            import anime_voz_clonada
+            _NOTA_CACHE["vozes"] = {v: n for v, (n, _q) in anime_voz_clonada.ranking_geral().items()}
+        except Exception:  # noqa: BLE001
+            _NOTA_CACHE["vozes"] = {}
+    nota = float(_NOTA_CACHE["fontes"].get(dst.get("canal"), {}).get(d.get("parceiro") or "", 1.0))
+    foco = dst.get("nichos_foco") or {}
+    if foco:
+        m = d.get("midia")
+        nota *= (1 + float(foco[m]) / max(float(v) for v in foco.values())) if m in foco else 0.8
+    nota *= 2 ** (0.5 * float(_NOTA_CACHE["vozes"].get(d.get("narrador") or "", 0.0)))
+    return round(nota, 3)
+
+
 def _ordem_horarios(horarios, tz):
     """Dono 22/10 ("usar os horários vencedores"): o canal preenche PRIMEIRO o horário cuja faixa de 3 h (hora de
     Brasília, a mesma do placar do notificar_telegram.medir_48h) mais rende — sorteio Thompson sobre vitórias/testes,
@@ -746,9 +803,16 @@ def _ordem_horarios(horarios, tz):
     # 30/10 (321 Shorts de 18-27/10, comparação dentro do canal): postado 15-21 h de Brasília chega a 500 views em 13%
     # contra 33% no resto (pior em 9 de 9 canais às 15-18 h e 8 de 8 às 19-21 h). Esses horários vão pro FIM da fila
     # (só enchem se sobrar Short no dia). HORARIO_FRACO_BR="" desliga.
-    fracos = {int(x) for x in os.environ.get("HORARIO_FRACO_BR", "15,16,17,18,19,20,21").split(",") if x.strip()}
+    # 13/11 (1.300 Shorts de parceiro com 48 h+, video-fila\analise_sinais_shorts.py): o post das 21-22 h de Brasília
+    # rende MUITO mais dentro do mesmo canal e da mesma mídia (13 de 13 canais; nos fracos mediana ~1.000 views contra
+    # ~10 no resto do dia; 60% passam de 500 contra 0-28%). O 21 estava na lista de FRACOS desde 30/10 e ia pro fim
+    # da fila. Agora: 21 sai dos fracos e a hora NOBRE (HORARIO_NOBRE_BR, padrão "21,22"; "" desliga) é preenchida
+    # PRIMEIRO em todo canal pt.
+    fracos = {int(x) for x in os.environ.get("HORARIO_FRACO_BR", "15,16,17,18,19,20").split(",") if x.strip()}
+    nobres = horas_nobres()
     if str(tz) != str(FUSO_BR):  # o dado é dos canais em pt; os de outras línguas (outro fuso) seguem só o placar
         fracos = set()
+        nobres = set()
     # 30/10 variante T12 (dona: "coisa subjetiva vira variante"; bin\variantes.py, cortes_ajustes "horario_fraco"):
     # sorteio por CANAL — A = ordem de antes de 30/10 (sem empurrar 15-21 h), B = 15-21 h no fim. O id do canal vem do
     # `cid` de quem chama (o laço da postagem), para não mexer fora desta função; sem cid = B (como estava).
@@ -761,12 +825,13 @@ def _ordem_horarios(horarios, tz):
     except Exception:  # noqa: BLE001
         pass
     if not placar:
-        return sorted(horarios, key=lambda h: (_hb(h) in fracos, h))
+        return sorted(horarios, key=lambda h: (_hb(h) not in nobres, _hb(h) in fracos, h))
 
     def nota(h):
         hb = _hb(h)
         testes, vit = placar.get(f"{hb - hb % 3:02d}h", (0, 0))
-        return random.betavariate(vit + 1, testes - vit + 1) - (1.0 if hb in fracos else 0.0)
+        return (random.betavariate(vit + 1, testes - vit + 1) - (1.0 if hb in fracos else 0.0)
+                + (2.0 if hb in nobres else 0.0))
     return sorted(horarios, key=nota, reverse=True)
 
 
@@ -1113,14 +1178,44 @@ def postar(args):
                 for d in range(DIAS_FRENTE):
                     dia_la = (agora_la + timedelta(days=d)).date()
                     no_dia = [m for m in meus if m and m.astimezone(tz).date() == dia_la]
+                    # 13/11: 67 dos 105 canal-dias JÁ agendados (regra antiga) estavam cheios e SEM post nobre — o
+                    # horário nobre só entraria em 7 dias (ForjaReact, Assist-IA, Tech Noturno, CenaReact...). Dia cheio
+                    # sem nenhum post às 21-22 h de Brasília aceita +1, só no horário nobre (o teto do canal no
+                    # postador — pol.horario_publicacao/cota_restante — continua mandando). PARCEIRO_NOBRE_EXTRA=0 desliga.
+                    so_nobre = False
                     if len(no_dia) >= por_dia:
-                        continue
+                        if (dst["idioma"] == "pt" and len(no_dia) == por_dia and horas_nobres()
+                                and os.environ.get("PARCEIRO_NOBRE_EXTRA", "1") != "0"
+                                and not any(m.astimezone(FUSO_BR).hour in horas_nobres() for m in no_dia)):
+                            so_nobre = True
+                        else:
+                            continue
                     for h in ordem:
                         hh, mm = (int(v) for v in h.split(":"))
                         t = agora_la.replace(year=dia_la.year, month=dia_la.month, day=dia_la.day, hour=hh,
                                              minute=mm, second=0, microsecond=0)
+                        # 13/11: só UM post por noite na faixa nobre — em 10 canal-dias com 2 posts às 21-23 h, o 2º
+                        # nunca rendeu (0 de 10 com os dois >= 300 views: 1.740 e 5; 1.267 e 14...). Se o dia já tem
+                        # post nobre, este horário (nobre ou depois dele, até 23:59) fica vazio; o Short vai pra outro
+                        # horário/dia. PARCEIRO_UM_NOBRE_POR_DIA=0 desliga.
+                        if so_nobre and t.astimezone(FUSO_BR).hour not in horas_nobres():
+                            continue  # dia já cheio: só cabe o post do horário nobre
+                        if (dst["idioma"] == "pt" and os.environ.get("PARCEIRO_UM_NOBRE_POR_DIA", "1") != "0"
+                                and t.astimezone(FUSO_BR).hour >= min(horas_nobres() or {99})
+                                and any(m.astimezone(FUSO_BR).hour in horas_nobres() for m in no_dia)):
+                            continue
                         if t >= agora_la + timedelta(minutes=70) and all(abs((t - m).total_seconds()) > 3000
                                                                           for m in no_dia):
+                            # 13/11: horário nobre só vale se o POSTADOR mantiver (teto do dia do canal com os vídeos
+                            # de todos os projetos, 1 h do vizinho): Tech Noturno pedia 13/11 21:25 e o postador
+                            # devolvia 17/11 12:00 — o Short escolhido pro nobre saía num horário fraco, calado.
+                            # Não manteve = este horário não serve; segue pro próximo horário/dia.
+                            if dst["idioma"] == "pt" and t.astimezone(FUSO_BR).hour in horas_nobres():
+                                real = pol.horario_publicacao(canal, t, PROJETO) or t
+                                if abs((real - t).total_seconds()) > 1800:
+                                    if so_nobre:
+                                        break  # dia cheio e o nobre não cabe no teto do canal: próximo dia
+                                    continue
                             alvo = t
                             break
                     if alvo:
@@ -1130,22 +1225,14 @@ def postar(args):
                 break
             dia = alvo.astimezone(FUSO_BR).date()
             prontos = [x for x in its if x["canal"] == cid and x["estado"] == "pronto"]
-            for x in [x for x in prontos if not x["mp4"].exists()]:
-                # 12/11 dona ("pode mandar as reservas pro Drive"): reserva_shorts_drive.py tira o video.mp4 que passa de
-                # 7 dias e deixa _NO_DRIVE.txt — na vez de postar ele volta do Drive (o próximo da fila, 1 por vez)
-                no_drive = x["pj"].parent / "_NO_DRIVE.txt"
-                if no_drive.exists() and os.environ.get("RESERVA_VOLTA_DO_DRIVE", "1") != "0":
-                    try:
-                        origem = no_drive.read_text(encoding="utf-8").strip()
-                        subprocess.run([r"D:\tools\rclone.exe", "copyto", origem, str(x["mp4"]), "--retries", "3"],
-                                       capture_output=True, timeout=900, creationflags=0x08000000)
-                        if x["mp4"].exists():
-                            log(f"{nome}: {x['pj'].parent.name} voltou do Drive pra postar")
-                            no_drive.unlink(missing_ok=True)
-                            continue
-                    except Exception as e:  # noqa: BLE001
-                        log(f"{nome}: {x['pj'].parent.name} não voltou do Drive ({type(e).__name__})")
-            for x in [x for x in prontos if not x["mp4"].exists()]:  # 22/10: o marcar_aprovacao derrubava a rodada inteira
+            # 13/11: aqui a rodada baixava do Drive TODOS os prontos do canal que estavam na reserva (30 do InventoReact
+            # em 23 min; 265 vídeos num dia) pra postar 1 ou 2 — a rodada levava horas (as seguintes pulavam: "outra
+            # rodada ainda subindo") e o disco enchia de novo. Agora o vídeo da reserva continua valendo como pronto e
+            # só o ESCOLHIDO volta do Drive, na hora de subir (_trazer_do_drive, mais abaixo).
+            def _na_reserva(y):
+                return (not y["mp4"].exists() and (y["pj"].parent / "_NO_DRIVE.txt").exists()
+                        and os.environ.get("RESERVA_VOLTA_DO_DRIVE", "1") != "0")
+            for x in [x for x in prontos if not x["mp4"].exists() and not _na_reserva(x)]:  # 22/10: o marcar_aprovacao derrubava a rodada inteira
                 log(f"{nome}: {x['pj'].parent.name} está pronto mas sem {x['mp4'].name} — pulado")
                 x["estado"] = "sem_video"
             prontos = [x for x in prontos if x["estado"] == "pronto"]
@@ -1200,6 +1287,21 @@ def postar(args):
                     + (f"; {len(prontos)} com a fonte já usada nesse dia" if prontos else "") + ")")
                 break
             x = livres[0]
+            # 13/11: horário nobre (21-22 h de Brasília) = o pronto com mais chance de render neste canal (nota_pronto);
+            # fora dele segue a fila. PARCEIRO_MELHOR_NO_NOBRE=0 desliga.
+            if (dst["idioma"] == "pt" and len(livres) > 1 and not x["d"].get("viral_de")
+                    and os.environ.get("PARCEIRO_MELHOR_NO_NOBRE", "1") != "0"
+                    and alvo.astimezone(FUSO_BR).hour in horas_nobres()):
+                melhor = max(livres, key=lambda y: nota_pronto(y, dst))
+                if melhor is not x:
+                    log(f"{nome}: horário nobre {alvo.astimezone(FUSO_BR):%H:%M} -> {melhor['pj'].parent.name} "
+                        f"(nota {nota_pronto(melhor, dst)} contra {nota_pronto(x, dst)} do 1º da fila)")
+                    x = melhor
+            # 13/11: só o escolhido volta do Drive. Não voltou = sai da fila desta rodada e tenta o próximo pronto.
+            if _na_reserva(x) and not args.ensaio:
+                if not _trazer_do_drive(x, nome):
+                    x["estado"] = "sem_video"
+                    continue
             # 1 h longe dos vídeos do canal (de qualquer projeto) + teto do dia de lá com a vaga do dono guardada
             quando = pol.horario_publicacao(canal, alvo, PROJETO) or alvo
             tit = x["d"].get("titulo") or x["pj"].parent.name
@@ -1209,6 +1311,9 @@ def postar(args):
                 x["estado"] = "ensaio"
                 x["d"]["agendado_para"] = quando.isoformat(timespec="seconds")
                 meus.append(quando)
+                # 13/11: o ensaio conta o horário simulado como ocupado no postador (politica.SIMULADOS) — sem isso
+                # todo vídeo simulado caía no mesmo minuto e a agenda do ensaio não conferia nada
+                pol.SIMULADOS.setdefault(canal.get("id"), []).append(quando)
                 urgente = False
                 continue
             thumb = x["pj"].parent / x["d"]["thumb"] if x["d"].get("thumb") else None

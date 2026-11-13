@@ -1,4 +1,4 @@
-"""
+r"""
 Deploy projetos-navegador para PC3 (100.108.160.85) via SSH/SFTP.
 
 Pré-requisito: o PC3 precisa ter a chave SSH autorizada.

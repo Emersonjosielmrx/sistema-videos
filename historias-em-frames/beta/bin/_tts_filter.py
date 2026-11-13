@@ -21,9 +21,14 @@ import re
 # Linhas que provavelmente são código (qualquer uma dessas pistas e a linha é descartada)
 CODE_LINE_HINTS = (
     re.compile(r"^\s*(ffmpeg|curl|docker|sudo|brew|pip3?|npm|yarn|git|cd|ls|cat|echo|grep|sed|awk|chmod|python3?|node)\s"),
-    re.compile(r"^\s*(import|from|const|let|var|function|def|class|return|if|else|while|for|try|catch|except|async|await)\s"),
+    # palavra-chave + cara de código na mesma linha. Só a palavra-chave descartava narração inteira que começava com
+    # "if", "for", "return", "class"... ("return para casa era o plano dele" sumia)
+    re.compile(r"^\s*(import|from|const|let|var|function|def|class|return|if|else|while|for|try|catch|except|async|await)\s"
+               r"(?:(?=.*(?:[=(){}\[\]<>;]|:\s*$))|(?=\S+(?:\s+\S+)?\s*$))"),   # ...ou linha de até 3 palavras
     re.compile(r"^\s*[#/]{2,}"),                          # comentários // ou ## etc
-    re.compile(r"^\s*[<>{}\[\]]"),                        # começa com tag/bracket
+    # começa com tag/bracket — menos "[Missão concluída] Recompensa: ..." (janela de sistema de manhwa: é narração;
+    # os colchetes saem depois e o texto fica)
+    re.compile(r"^\s*(?:[<>{}]|\[(?![A-Za-zÀ-ÿ][^\]\n]{0,60}\]\s*\S)|\](?!\S))"),
     re.compile(r".+=>.+"),                                # arrow function
     re.compile(r".+;\s*$"),                               # termina com ;
     re.compile(r".+\{\s*$"),                              # bloco abrindo
@@ -72,7 +77,8 @@ DISCARD_TOKENS = (
     re.compile(r"www\.\S+"),
     re.compile(r"\S+@\S+\.\S+"),                          # emails
     re.compile(r"[a-zA-Z0-9_-]{20,}"),                    # tokens/IDs longos
-    re.compile(r"\b[A-F0-9]{8,}\b"),                      # hex
+    # hex (id/hash): exige letra E dígito — antes "10000000 de wons" (só dígitos) também sumia
+    re.compile(r"\b(?=[A-F0-9]*[A-F])(?=[A-F0-9]*\d)[A-F0-9]{8,}\b"),
     re.compile(r"\$\{[^}]+\}"),                           # ${VAR}
     re.compile(r"\{\{[^}]+\}\}"),                         # {{var}}
 )
@@ -182,6 +188,11 @@ def _portuguesify(text):
     return text
 
 
+_SIGLAS = frozenset(
+    "NPC HP MP XP SP TV RPG PVP PVE PC CD DVD GPS DPS FPS MMR MMO MMORPG SS SSS SSR SR UR GM CG DJ MC KG KM CM MM ML GB "
+    "MB TB HD SSD LED PDF SMS CPF CNPJ RG CLT PM PF BBB DF RJ SP MG RS SC PR CNH DNS PH PSG NBA NFL KPI CRM QR WC".split())
+
+
 def _strip_onomatopoeia(text):
     """Remove onomatopeias/balbucio que o LLM às vezes transcreve dos balões como
     se fossem fala (ex: 'DING DONG', 'POP', 'BAAARF', 'SS SSP', 'AAA NNG', 'EUP').
@@ -193,17 +204,29 @@ def _strip_onomatopoeia(text):
         return text
 
     # lista explícita de onomatopeias comuns em manhwa (case-insensitive, palavra inteira)
-    KNOWN = (r"ding[\s-]?dong|dong|tlim|toc[\s-]?toc|knock|slam|bang|boom|pow|pop|"
-             r"beep|bip|tum|tec|click|clack|"
-             r"thump|thud|crash|splash|swoosh|whoosh|vrum|vroom|screech|"
-             r"barf|baaa+rf|bleh|blergh|ugh+|argh+|grr+|hmph|tsk|gulp|sniff|"
-             r"gasp|huff|puff|achoo|atchim|burp|hic|zzz+|"
-             r"ang|ann+|nng+|eup|arg|erp|urp|glup|nhe+|hng+|unf+|aff")
-    text = re.sub(rf"\b({KNOWN})\b[!.,]*", " ", text, flags=re.IGNORECASE)
+    # Barulho que nunca é palavra nem nome: sai sempre. (?<![\w-]) / (?![\w-]): não corta pedaço de nome com hífen.
+    SEMPRE = (r"ding[\s-]?dong|tlim|toc[\s-]?toc|bip|thump|thud|swoosh|whoosh|vrum|vroom|screech|"
+              r"barf|baaa+rf|bleh|blergh|ugh+|argh+|grr+|hmph|tsk|achoo|atchim|burp|huff|zzz+|"
+              r"nng+|eup|erp|urp|glup|nhe+|hng+|unf+|aff")
+    text = re.sub(rf"(?<![\w-])({SEMPRE})(?![\w-])[!.,]*", " ", text, flags=re.IGNORECASE)
+    # Estes também são PALAVRA ou NOME de personagem (Dong, Bang, Ann, Ang, Tum; "o boom", "um click", "um crash",
+    # "K-pop"): antes saíam sempre e a narração/legenda ficava "Kang -su entrou", "Com um o portal abriu". Agora só
+    # saem quando são claramente barulho de balão: em CAIXA ALTA ("BANG") ou seguidos de "!" ("Bang! A porta caiu").
+    AMBIGUO = (r"dong|knock|slam|bang|boom|pow|pop|beep|tum|tec|click|clack|crash|splash|gulp|sniff|gasp|puff|hic|"
+               r"ang|ann+|arg")
+
+    def _barulho(m):
+        tok = m.group(1)
+        return " " if (len(tok) > 1 and tok.isupper()) or m.group(2).startswith("!") else m.group(0)
+    text = re.sub(rf"(?<![\w-])({AMBIGUO})(?![\w-])([!.,]*)", _barulho, text, flags=re.IGNORECASE)
 
     def _is_noise(tok):
         core = re.sub(r"[^A-Za-zÀ-ÿ]", "", tok)
         if len(core) < 2:
+            return False
+        # sigla de verdade (sem vogal, em maiúscula) não é barulho: antes "O NPC entregou a missão" virava "O entregou
+        # a missão", "caçador rank SSS" perdia o SSS, "O HP dele caiu e o MP zerou" virava "O dele caiu e o zerou"
+        if core in _SIGLAS:
             return False
         # precisa estar majoritariamente em CAIXA ALTA pra ser candidato a ruído
         uppers = sum(1 for c in core if c.isupper())

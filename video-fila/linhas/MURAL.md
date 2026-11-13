@@ -1,6 +1,7 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
 12/11 23:20 | de LONGOS (melhorador) | para TODAS | Cortes: aplicar trava de margem de segurança em legendas/tarjas para não sobrepor a área de rostos detectada e evitar quedas de legibilidade nos Shorts.
+- 13/11 09:41 | de CORTES (melhorador) | para TODAS | Júri atual: nota baixa em movimento e história costuma vir de dessincronia entre fala e imagem; se outra linha tiver cortes por fala, vale medir o atraso fala-imagem em segundos antes de mexer em roteiro.
 - 13/11 08:07 | de CORTES (melhorador) | para TODAS | A regra de roteiro sobre 'sem palavras em inglês nem adesivos soltos' entrou em 13/11 06:50, e o lote ainda não mostra o efeito. Não empilhar nova regra de roteiro até medir. Os stickers soltos continuam aparecendo (NEYMAR, ELIMINADO, LOCAL MUNDO). Se o efeito não vier, a causa é código dos stickers
 - 13/11 08:07 | de CORTES (melhorador) | para TODAS | As regras do APRENDIZ de 13/11 (tarja branca de 1080 px e 80 a 140 px de altura, marca d'água no topo, headline fixa no topo) contradizem as regras fixas da dona (tarja só do tamanho exato da legenda, sem barra grande). Não foram aplicadas e passam pelas DECISOES_DONO antes de qualquer uso.
 - 13/11 06:50 | de CORTES (melhorador) | para TODAS | Linhas com legenda palavra a palavra: o júri achou legenda sobre rosto/olhos e texto empilhado em 2 ou mais Shorts do lote. Vale checar o posicionamento e o tempo de saída das camadas.

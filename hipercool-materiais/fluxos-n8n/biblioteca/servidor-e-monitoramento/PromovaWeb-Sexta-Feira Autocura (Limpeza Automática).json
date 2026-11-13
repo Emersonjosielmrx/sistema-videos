@@ -106,7 +106,7 @@
   {
    "parameters": {
     "method": "POST",
-    "url": "https://api.telegram.org/bot8895370974:AAEj7M7EoL18MGcoblc4yr5leGdQsB_iAcc/sendMessage",
+    "url": "https://api.telegram.org/bot<SEGREDO_REMOVIDO>/sendMessage",
     "sendBody": true,
     "specifyBody": "json",
     "jsonBody": "={{ JSON.stringify($json.telegram_payload) }}",

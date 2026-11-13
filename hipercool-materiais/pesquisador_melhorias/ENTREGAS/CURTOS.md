@@ -3118,61 +3118,69 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_cruzar_yt__sonnet_0356.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 04:31 — Horário de postagem por país (`area_trends_ritmo_pais`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou os itens). Nota: o horário foi medido HOJE nos nossos 1.300 Shorts — o 1º post das 21-22 h de Brasília rende ~100x nos canais fracos; implantado em parceiro_diario._ordem_horarios (HORARIO_NOBRE_BR) — ver video-fila\INTELIGENCIA_SHORTS.md — 2026-11-13 04:31 — Horário de postagem por país (`area_trends_ritmo_pais`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_ritmo_pais__sonnet_0417.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 04:50 — Filtro de tema recapável (`area_trends_filtro_recap`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 04:50 — Filtro de tema recapável (`area_trends_filtro_recap`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_filtro_recap__sonnet_0436.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 05:01 — Trends RSS em outros países (`area_trends_geo`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 05:01 — Trends RSS em outros países (`area_trends_geo`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_geo__sonnet_0456.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 05:18 — Fontes de tendência sem API do Google (`area_trend_fontes`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 05:18 — Fontes de tendência sem API do Google (`area_trend_fontes`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trend_fontes__sonnet_0516.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 05:28 — Achar os recaps mais vistos por tema (`area_recap_vistos`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 05:28 — Achar os recaps mais vistos por tema (`area_recap_vistos`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_recap_vistos__sonnet_0521.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 05:37 — Anime/manhwa em alta por país (`area_trends_anime_pais`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 2 reprovado(s) (youtube-research-mcp (MCP de chat); kitsu-season-trends (tendência de temporada)), 0 deixados — 2026-11-13 05:37 — Anime/manhwa em alta por país (`area_trends_anime_pais`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_anime_pais__sonnet_0531.md`
 - [INÉDITO] github.com/jindratilk/youtube-research-mcp — ★2, push 2026-10-19, MIT — Keyless YouTube MCP server + research skill for AI agents: multi-language search with transcript highlights, transcript ranges, real video f
 - [INÉDITO] github.com/wopian/kitsu-season-trends — ★23, push 2026-11-12, MIT — 🦊 Kitsu seasonal anime trends
 
-## [ ] PENDENTE — 2026-11-13 05:46 — Fórmula de títulos dos recaps campeões por língua (`area_titulo_formula`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 05:46 — Fórmula de títulos dos recaps campeões por língua (`area_titulo_formula`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_titulo_formula__sonnet_0541.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 05:57 — Padrão de título de recap campeão por idioma (`area_recap_titulo_padrao`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 05:57 — Padrão de título de recap campeão por idioma (`area_recap_titulo_padrao`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_recap_titulo_padrao__sonnet_0551.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 06:06 — Primeiros 30 s dos recaps campeões (`area_primeiros_30s`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 1 reprovado(s) (video-intelligence-dashboard (pesado, com tela)), 0 deixados — 2026-11-13 06:06 — Primeiros 30 s dos recaps campeões (`area_primeiros_30s`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_primeiros_30s__sonnet_0601.md`
 - [INÉDITO] github.com/shobhit007-rm/video-intelligence-dashboard — ★0, push 2026-11-01, MIT — Local real-time dashboard that breaks down YouTube videos (hooks, cuts, pacing, transcript) with yt-dlp, PySceneDetect, WhisperX and FFmpeg.
 
-## [ ] PENDENTE — 2026-11-13 06:21 — Catálogo de ganchos dos recaps mais vistos (`area_catalogo_ganchos_campeoes`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 2 reprovado(s) (youtube-scout (API do Google Cloud); hookshot (clipador com tela)), 0 deixados — 2026-11-13 06:21 — Catálogo de ganchos dos recaps mais vistos (`area_catalogo_ganchos_campeoes`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_catalogo_ganchos_campeoes__sonnet_0616.md`
 - [INÉDITO] github.com/AgriciDaniel/youtube-scout — ★78, push 2026-10-30, MIT — Claude Code skill: one topic in, one ranked YouTube research workbook out. Searches YouTube Data API v3, ranks by views, engagement, momentu
 - [INÉDITO] github.com/jaxstudio1/hookshot — ★3, push 2026-10-17, MIT — Free, local AI clipper: paste a YouTube link or stream VOD, get viral-ranked vertical clips with captions for Shorts, TikTok and Reels. No s
 
-## [ ] PENDENTE — 2026-11-13 06:35 — Detecção de tendência por Reddit/HN sem API paga (`area_reddit_trend`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 1 reprovado(s) (trendcat (tendência geral)), 0 deixados — agamjn/rising já é usado — 2026-11-13 06:35 — Detecção de tendência por Reddit/HN sem API paga (`area_reddit_trend`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_reddit_trend__sonnet_0631.md`
 - [USA em D:\recapd-ambientes\producao\bin\musicgen_local.py:33] github.com/agamjn/rising — ★18, push 2026-05-26, MIT — Personal Reddit content engine for Claude Code. Researches subreddit trends and proposes 3 authentic posts daily based on your writing style
 - [INÉDITO] github.com/printemps-tokyo/trendcat — ★1, push 2026-11-12, MIT — Aggregate what's trending now from Hacker News, Reddit, Wikipedia, Hatena, and Google News. Zero-dependency CLI.
 
-## [ ] PENDENTE — 2026-11-13 06:49 — Recaps de anime/manhwa mais vistos (`area_anime_mais_vistos_recap`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 06:49 — Recaps de anime/manhwa mais vistos (`area_anime_mais_vistos_recap`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_anime_mais_vistos_recap__sonnet_0641.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 07:05 — Recap longo de 4 a 13 h por país (`area_longos_pt_concorrentes`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 1 reprovado(s) (alt-track-dubbing (Google Cloud pago)), 0 deixados — 2026-11-13 07:05 — Recap longo de 4 a 13 h por país (`area_longos_pt_concorrentes`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_longos_pt_concorrentes__sonnet_0656.md`
 - [INÉDITO] github.com/loginov1/alt-track-dubbing — ★0, push 2026-11-02, MIT — Agent skill and CLI: full-length, synchronized alternate-language audio tracks for YouTube multi-language audio, with local ASR, Chirp 3 HD 
 
-## [ ] PENDENTE — 2026-11-13 07:33 — Recap >4 h por idioma, sem API (`area_canais_longos_4h`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 07:33 — Recap >4 h por idioma, sem API (`area_canais_longos_4h`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_canais_longos_4h__sonnet_0711.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 09:30 — Formatos que viralizam por nicho (`area_formatos_nicho`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_formatos_nicho__sonnet_0917.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 13/11 — 0 implantados, 0 reprovados, 0 deixados (motor já reprovou todos os itens) — 2026-11-13 09:49 — Corpus de títulos reais por nicho (`area_corpus_titulos`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_corpus_titulos__sonnet_0936.md`
 - (todos os itens desta pesquisa foram reprovados)

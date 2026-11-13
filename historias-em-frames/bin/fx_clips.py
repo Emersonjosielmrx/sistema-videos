@@ -241,7 +241,8 @@ def build_clip(img_path, audio_path, out_path, panel_idx, effects_mgr, duration=
         if audio_path and Path(audio_path).exists():
             with open(audio_path, "rb") as f: m.update(f.read())
         m.update(str(duration).encode('utf-8'))
-        m.update(str(color_filter if hasattr(effects_mgr, 'pick_color') else "").encode('utf-8'))
+        # color_filter era usado ANTES de existir -> NameError engolido pelo except -> cache nunca valia
+        m.update(str(mood or "").encode('utf-8'))
         m.update("V1_LEGACY".encode('utf-8'))
         
         clip_hash = m.hexdigest()
@@ -463,7 +464,8 @@ def build_clip_with_shake(img_path, audio_path, out_path, panel_idx, effects_mgr
         if audio_path and Path(audio_path).exists():
             with open(audio_path, "rb") as f: m.update(f.read())
         m.update(str(duration).encode('utf-8'))
-        m.update(str(color_filter if hasattr(effects_mgr, 'pick_color') else "").encode('utf-8'))
+        # color_filter era usado ANTES de existir -> NameError engolido pelo except -> cache nunca valia
+        m.update(str(mood or "").encode('utf-8'))
         m.update("V1_SHAKE".encode('utf-8'))
         
         clip_hash = m.hexdigest()
@@ -1395,7 +1397,6 @@ def build_clip_animated(img_path, audio_path, out_path, panel_idx, effects_mgr, 
         if audio_path and Path(audio_path).exists():
             with open(audio_path, "rb") as f: m.update(f.read())
         m.update(str(duration).encode('utf-8'))
-        m.update(str(color_filter if hasattr(effects_mgr, 'pick_color') else "").encode('utf-8'))
         m.update("V1_ANIMATED".encode('utf-8'))
         
         clip_hash = m.hexdigest()

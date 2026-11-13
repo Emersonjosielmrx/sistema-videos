@@ -38,7 +38,7 @@
 - 26/10: vídeo de 1 h: música dinâmica leva ~30 min pra mixar; timeout tem que ser proporcional à duração.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Recap longo — 13/11 08:44
+# Brief do melhorador central — Recap longo — 13/11 10:14
 
 Vídeos nos últimos 7 dias: 25 | elegíveis (receberam o lote do feed): 14 | NÃO elegíveis: 0 | sem medida ainda: 11
 % assistido mediano (só elegíveis): 0.7 | views 48 h mediana: 10 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
@@ -70,7 +70,7 @@ Vídeos nos últimos 7 dias: 25 | elegíveis (receberam o lote do feed): 14 | N�
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-13T08:20: youtube 21/36, tiktok 44/58, instagram 46/53, flow 87/229, fotos 0/4 | MORTOS: youtube animescomia, youtube assistiainvestimentos, youtube bichonoturno, youtube cartuchoreact, youtube dicasfinanceirasdaia, youtube filmenoturno, youtube fiodameada, youtube forjareact, youtube gamenoturno, youtube historiasemframes, youtube inovare_thai, youtube inovaremanhwabr
+## SEM NAVEGADOR (HTTP) — saúde em 11-13T09:23: youtube 20/36, tiktok 44/58, instagram 46/53, flow 87/230, fotos 0/4 | MORTOS: youtube animescomia, youtube assistiainvestimentos, youtube bichonoturno, youtube cartuchoreact, youtube dicasfinanceirasdaia, youtube doramanoturno, youtube filmenoturno, youtube fiodameada, youtube forjareact, youtube gamenoturno, youtube historiasemframes, youtube inovare_thai
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
 Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @fabricadeautomacoesia (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (0), Tiktok @emersonjosiel2030 (3), Tiktok @inovaremanhwaverse2 (0), Tiktok @curiosidadesnoturnas (3), Tiktok @emersonjosiel2032 (0), Tiktok @emersonjosiel2031 (0), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0)
@@ -90,51 +90,51 @@ Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovareman
 | fala_rapida | B | 9 | 0.03 | 0.4 |
 | fala_rapida | C | 11 | 0.04 | 10.4 |
 | fala_rapida | D | 7 | 0.04 | 0.6 |
-| fala_rapida | E | 5 | 1.31 | 8.2 |
+| fala_rapida | E | 5 | 1.30 | 8.2 |
 | **fala_rapida** | **vence E** (views/h) | | | |
 | ganchos_15min | A | 4 | 0.04 | 20.2 |
-| ganchos_15min | B | 11 | 0.05 | 0.4 |
+| ganchos_15min | B | 11 | 0.04 | 0.4 |
 | ganchos_15min | C | 23 | 0.03 | 1.5 |
 | **ganchos_15min** | **vence B** (views/h) | | | |
 | narradores_modo | com_terciarios | 2 | 0.01 | 36.4 |
 | narradores_modo | dupla | 2 | 0.01 | — |
-| narradores_modo | mistura_grande | 2 | 0.14 | — |
+| narradores_modo | mistura_grande | 2 | 0.13 | — |
 | narradores_modo | primarios_secundarios | 7 | 0.04 | 0.3 |
 | narradores_modo | so_primarios | 16 | 0.03 | 1.1 |
 | narradores_modo | solo | 9 | 0.06 | 12.4 |
-| titulo_triade | A | 18 | 0.04 | 1.9 |
+| titulo_triade | A | 18 | 0.03 | 1.9 |
 | titulo_triade | B | 20 | 0.04 | 1.1 |
 | **titulo_triade** | **vence B** (views/h) | | | |
 
 ## OBRAS: CONTINUAR OU NÃO (48 h+, 20+ views, 30%+ assistido)
-| 14  He got into the Medieval Age   bega | Fio da Meada | 3 | — | 3 | pouco dado |
-| 13  He got into the Medieval Age   bega | Fio da Meada | 4 | — | 3 | pouco dado |
-| 8 He got into the Medieval Age   began | Fio da Meada | 4 | — | 4 | pouco dado |
-| No Mana Boy Becomes a Genius Alchemist i | InovareManhwaVerse | 0 | — | 6 | pouco dado |
-| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 0 | — | 9 | pouco dado |
-| He Destroys the Hunter Exam So Easily Th | CenaReact | 0 | — | 10 | pouco dado |
-| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 12 | pouco dado |
-| He Spent 3000 Years in a Loop  Now Even | Manhwa Noturno | 2 | 0.1 | 13 | pouco dado |
-| He Acquires a New Skill Every Day    Man | Dorama Noturno | 1 | — | 19 | pouco dado |
-| His Ex Girlfriend wanted to Return when | InventoReact | 538 | 3.0 | 25 | pouco dado |
-| He got into the Stone Age and Conquered | inovare manhwa br | 6 | — | 29 | pouco dado |
-| His Party Left Him to Fight an Army For | InovareManhwaVerse | 3 | — | 30 | pouco dado |
-| He Was Lvl 99 But Got Reincarnated So He | Manhwa Noturno | 1 | 0.3 | 34 | pouco dado |
-| He Got Max Luck After a System Error and | Curiosidades Noturnas | 5 | 0.7 | 34 | pouco dado |
-| Lost their parents on plane crash they w | CenaReact | 0 | — | 36 | pouco dado |
-| Bullied Boy Levels Up 300 Times Using Ch | ForjaReact | 1 | 0.1 | 38 | pouco dado |
-| Depressed Hero Hated by Humanity Is Love | HistoriasEmFrames | 1 | — | 39 | pouco dado |
-| 12  He got into the Medieval Age   bega | Fio da Meada | 44 | 11.4 | 39 | pouco dado |
-| Bullied Orphan Dated His Master After Be | InovareManhwaVerse | 4 | — | 40 | pouco dado |
-| 11  He got into the Medieval Age   bega | Fio da Meada | 25 | 5.5 | 44 | pouco dado |
-| 9 He got into the Medieval Age   began | Fio da Meada | 220 | 2.2 | 46 | pouco dado |
-| He Devours Viruses to Become the Stronge | inovare manhwa br | 7 | — | 52 | pouco dado |
-| 2  The Little Orc everyone Mocked accid | InventoReact | 123 | 0.6 | 55 | parar (assistem pouco) |
-| When the Slave Becomes the  1 Mage and E | InovareManhwaVerse | 3 | 0.1 | 57 | pouco dado |
-| He Eats Monster Cores and Receives Their | InventoReact | 12 | 0.3 | 61 | pouco dado |
-| He Opens Loot Boxes in his Safe Hideout | Fio da Meada | 116 | 3.9 | 77 | parar (assistem pouco) |
-| He Farms Monsters in His Own Dungeon and | inovare manhwa br | 5 | — | 149 | pouco dado |
-| 7 He got into the Medieval Age   began | inovare manhwa br | 6 | 8.0 | 152 | pouco dado |
+| 14  He got into the Medieval Age   bega | Fio da Meada | 8 | — | 5 | pouco dado |
+| 13  He got into the Medieval Age   bega | Fio da Meada | 5 | — | 5 | pouco dado |
+| 8 He got into the Medieval Age   began | Fio da Meada | 4 | — | 5 | pouco dado |
+| No Mana Boy Becomes a Genius Alchemist i | InovareManhwaVerse | 0 | — | 8 | pouco dado |
+| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 0 | — | 10 | pouco dado |
+| He Destroys the Hunter Exam So Easily Th | CenaReact | 0 | — | 12 | pouco dado |
+| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 13 | pouco dado |
+| He Spent 3000 Years in a Loop  Now Even | Manhwa Noturno | 2 | 0.1 | 15 | pouco dado |
+| He Acquires a New Skill Every Day    Man | Dorama Noturno | 1 | — | 21 | pouco dado |
+| His Ex Girlfriend wanted to Return when | InventoReact | 540 | 3.0 | 27 | pouco dado |
+| He got into the Stone Age and Conquered | inovare manhwa br | 6 | — | 31 | pouco dado |
+| His Party Left Him to Fight an Army For | InovareManhwaVerse | 3 | — | 32 | pouco dado |
+| He Was Lvl 99 But Got Reincarnated So He | Manhwa Noturno | 1 | 0.3 | 35 | pouco dado |
+| He Got Max Luck After a System Error and | Curiosidades Noturnas | 5 | 0.7 | 36 | pouco dado |
+| Lost their parents on plane crash they w | CenaReact | 0 | — | 38 | pouco dado |
+| Bullied Boy Levels Up 300 Times Using Ch | ForjaReact | 1 | 0.1 | 39 | pouco dado |
+| Depressed Hero Hated by Humanity Is Love | HistoriasEmFrames | 1 | — | 40 | pouco dado |
+| 12  He got into the Medieval Age   bega | Fio da Meada | 44 | 11.4 | 40 | pouco dado |
+| Bullied Orphan Dated His Master After Be | InovareManhwaVerse | 4 | — | 41 | pouco dado |
+| 11  He got into the Medieval Age   bega | Fio da Meada | 25 | 5.5 | 46 | pouco dado |
+| 9 He got into the Medieval Age   began | Fio da Meada | 220 | 2.2 | 48 | pouco dado |
+| He Devours Viruses to Become the Stronge | inovare manhwa br | 7 | — | 54 | pouco dado |
+| 2  The Little Orc everyone Mocked accid | InventoReact | 123 | 0.6 | 57 | parar (assistem pouco) |
+| When the Slave Becomes the  1 Mage and E | InovareManhwaVerse | 3 | 0.1 | 58 | pouco dado |
+| He Eats Monster Cores and Receives Their | InventoReact | 12 | 0.3 | 63 | pouco dado |
+| He Opens Loot Boxes in his Safe Hideout | Fio da Meada | 116 | 3.9 | 79 | parar (assistem pouco) |
+| He Farms Monsters in His Own Dungeon and | inovare manhwa br | 5 | — | 151 | pouco dado |
+| 7 He got into the Medieval Age   began | inovare manhwa br | 6 | 8.0 | 153 | pouco dado |
 
 ## PEDIDOS E OPINIÕES DA DONA (valem mais que o júri; atender antes de qualquer outra coisa)
 - 30/10 00:20 | hipercool, longo | Hipercool está DESATIVADO de propósito (como o Historias em Frames, trocado pelo Claude Code Video); volta à produção na semana que vem, depois que terminar a postagem dos capítulos já feitos. Usar um projeto para melhorar o outro: o hipercool é o mais moderno — os personagens FALAM (ela pediu falas também nos longos) e tem muitos efeitos bons; os que não acrescentam muito tempo de render podem ir para os longos | aberto

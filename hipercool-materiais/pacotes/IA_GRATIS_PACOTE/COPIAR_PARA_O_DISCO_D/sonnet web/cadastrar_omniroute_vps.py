@@ -29,7 +29,7 @@ def pedir(metodo, rota, corpo=None, token=None):
 
 resp = urllib.request.urlopen(urllib.request.Request(f"{BASE}/api/auth/login", data=json.dumps({"password": senha}).encode(),
                                                      headers={"Content-Type": "application/json"}, method="POST"), timeout=30)
-token = next((c.split("auth_token="<SEGREDO_REMOVIDO>";")[0] for c in resp.headers.get_all("Set-Cookie") or [] if "auth_token=" in c), "")
+token = next((c.split("auth_token=")[1].split(";")[0] for c in resp.headers.get_all("Set-Cookie") or [] if "auth_token=" in c), "")
 if not token:
     sys.exit("login no painel falhou (sem auth_token)")
 

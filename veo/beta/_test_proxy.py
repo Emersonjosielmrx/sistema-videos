@@ -4,7 +4,7 @@ import sys, os, time, subprocess, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from playwright.sync_api import sync_playwright
 
-PROXY_RAW = "rnprmtfo-rotate:pprcs5dbgnyn@45.39.15.202:6632"
+PROXY_RAW = "<USUARIO>:<SEGREDO_REMOVIDO>@45.39.15.202:6632"
 cred, hp = PROXY_RAW.rsplit("@", 1)
 PROXY_USER, PROXY_PASS = cred.split(":", 1)
 PROXY_HOST = hp

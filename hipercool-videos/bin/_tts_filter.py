@@ -20,9 +20,14 @@ import re
 # Linhas que provavelmente são código (qualquer uma dessas pistas e a linha é descartada)
 CODE_LINE_HINTS = (
     re.compile(r"^\s*(ffmpeg|curl|docker|sudo|brew|pip3?|npm|yarn|git|cd|ls|cat|echo|grep|sed|awk|chmod|python3?|node)\s"),
-    re.compile(r"^\s*(import|from|const|let|var|function|def|class|return|if|else|while|for|try|catch|except|async|await)\s"),
+    # palavra-chave + cara de código na mesma linha. Só a palavra-chave descartava narração inteira que começava com
+    # "if", "for", "return", "class"... ("return para casa era o plano dele" sumia)
+    re.compile(r"^\s*(import|from|const|let|var|function|def|class|return|if|else|while|for|try|catch|except|async|await)\s"
+               r"(?:(?=.*(?:[=(){}\[\]<>;]|:\s*$))|(?=\S+(?:\s+\S+)?\s*$))"),   # ...ou linha de até 3 palavras
     re.compile(r"^\s*[#/]{2,}"),                          # comentários // ou ## etc
-    re.compile(r"^\s*[<>{}\[\]]"),                        # começa com tag/bracket
+    # começa com tag/bracket — menos "[Missão concluída] Recompensa: ..." (janela de sistema de manhwa: é narração;
+    # os colchetes saem depois e o texto fica)
+    re.compile(r"^\s*(?:[<>{}]|\[(?![A-Za-zÀ-ÿ][^\]\n]{0,60}\]\s*\S)|\](?!\S))"),
     re.compile(r".+=>.+"),                                # arrow function
     re.compile(r".+;\s*$"),                               # termina com ;
     re.compile(r".+\{\s*$"),                              # bloco abrindo
@@ -71,7 +76,8 @@ DISCARD_TOKENS = (
     re.compile(r"www\.\S+"),
     re.compile(r"\S+@\S+\.\S+"),                          # emails
     re.compile(r"[a-zA-Z0-9_-]{20,}"),                    # tokens/IDs longos
-    re.compile(r"\b[A-F0-9]{8,}\b"),                      # hex
+    # hex (id/hash): exige letra E dígito — antes "10000000 de wons" (só dígitos) também sumia
+    re.compile(r"\b(?=[A-F0-9]*[A-F])(?=[A-F0-9]*\d)[A-F0-9]{8,}\b"),
     re.compile(r"\$\{[^}]+\}"),                           # ${VAR}
     re.compile(r"\{\{[^}]+\}\}"),                         # {{var}}
 )

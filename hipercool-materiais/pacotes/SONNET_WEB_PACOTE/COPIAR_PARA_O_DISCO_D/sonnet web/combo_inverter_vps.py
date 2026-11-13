@@ -23,7 +23,7 @@ def pedir(metodo, rota, corpo=None, token=None):
 
 
 r, _ = pedir("POST", "/api/auth/login", {"password": sys.argv[1]})
-token = next((c.split("auth_token="<SEGREDO_REMOVIDO>";")[0] for c in r.headers.get_all("Set-Cookie") or [] if "auth_token=" in c), "")
+token = next((c.split("auth_token=")[1].split(";")[0] for c in r.headers.get_all("Set-Cookie") or [] if "auth_token=" in c), "")
 modelos = [{"kind": "model", "model": "cw/claude-sonnet-5-5", "providerId": "claude-web", "weight": 0},
            {"kind": "model", "model": "claude/claude-sonnet-5-5", "providerId": "claude", "weight": 0}]
 for metodo in ("PUT", "PATCH"):

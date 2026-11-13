@@ -21677,6 +21677,30 @@
         "repositórios pequenos que ordenam capítulos em séries, fim de tela e cards de próximo vídeo para recaps de 1 a 4 h"
       ],
       "origem": "area_canais_longos_4h__sonnet_0711.md 2026-11-13"
+    },
+    {
+      "id": "campeoes_por_pais",
+      "nome": "Campeões por país e idioma",
+      "subtemas": [
+        "busca yt-dlp com hl/gl por país; o que muda em título e duração nos canais estrangeiros de recap"
+      ],
+      "origem": "area_formatos_nicho__sonnet_0917.md 2026-11-13"
+    },
+    {
+      "id": "corpus_titulos",
+      "nome": "Corpus de títulos reais por nicho",
+      "subtemas": [
+        "oEmbed sem chave; comparar campeões e não-campeões para few-shot de título"
+      ],
+      "origem": "area_formatos_nicho__sonnet_0917.md 2026-11-13"
+    },
+    {
+      "id": "titulos_por_lingua",
+      "nome": "Padrões de título por idioma",
+      "subtemas": [
+        "Como canais de recap de anime/manhwa grandes em inglês, espanhol e outras línguas montam títulos; qual formato repete entre os campeões"
+      ],
+      "origem": "area_corpus_titulos__sonnet_0936.md 2026-11-13"
     }
   ],
   "projetos": [

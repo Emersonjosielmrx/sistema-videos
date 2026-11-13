@@ -144,7 +144,7 @@ def preparar(pasta, titulo=""):
         pass
     if os.environ.get("ANIME_VARIANTE") == "anime_recap":
         seg_frase = 5.0  # frase de anime dura ~4,9 s (cena rápida) contra ~5,7 s no manhwa: alvo maior pro mesmo tempo
-    alvo = max(40, round(dur * 0.99 / seg_frase))
+    alvo, _apertado = anime_script.alvo_com_teto(max(40, round(dur * 0.99 / seg_frase)))  # teto: cabe na sessão
     frases, tempos = anime_script.rewrite_longo_com_tempo(cues, alvo, dur)
     if frases:
         roteiro.write_text("\n".join(frases) + "\n", encoding="utf-8")

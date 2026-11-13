@@ -27,26 +27,26 @@
   impacto maiores, de lado, fontes e cores por personagem.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Cortes (Shorts de parceiro) — 13/11 08:44
+# Brief do melhorador central — Cortes (Shorts de parceiro) — 13/11 10:14
 
-Vídeos nos últimos 7 dias: 730 | elegíveis (receberam o lote do feed): 269 | NÃO elegíveis: 9 | sem medida ainda: 452
-% assistido mediano (só elegíveis): 49.6 | views 48 h mediana: 136 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
+Vídeos nos últimos 7 dias: 728 | elegíveis (receberam o lote do feed): 276 | NÃO elegíveis: 9 | sem medida ainda: 443
+% assistido mediano (só elegíveis): 50.1 | views 48 h mediana: 141.0 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
 - Esporte Noturno: n 45, elegíveis 32, % assistido 70.0, views48 1362.0
 - InventoReact: n 22, elegíveis 19, % assistido 53.5, views48 1185.5
-- DicasFinanceirasDaIA: n 45, elegíveis 22, % assistido 62.5, views48 1064.5
-- CenaReact: n 48, elegíveis 29, % assistido 48.0, views48 983
+- DicasFinanceirasDaIA: n 44, elegíveis 28, % assistido 64.2, views48 1064.5
+- CenaReact: n 49, elegíveis 29, % assistido 48.0, views48 983
 - inovaremanhwabr: n 47, elegíveis 23, % assistido 41.6, views48 945
 - HistoriasEmFrames: n 41, elegíveis 21, % assistido 52.0, views48 465.5
-- @CodigoInteligente-n7j: n 35, elegíveis 17, % assistido 51.1, views48 133
+- @CodigoInteligente-n7j: n 34, elegíveis 16, % assistido 49.2, views48 119.5
 - Curiosidades Noturnas: n 33, elegíveis 12, % assistido 56.2, views48 77.5
 - Filme Noturno: n 36, elegíveis 6, % assistido 58.4, views48 34
 - Bicho Noturno: n 46, elegíveis 14, % assistido 44.7, views48 33.0
-- CartuchoReact: n 41, elegíveis 13, % assistido 30.8, views48 7.5
+- CartuchoReact: n 39, elegíveis 12, % assistido 35.7, views48 7.5
 - ManhwaReact-ia: n 16, elegíveis 13, % assistido 37.9, views48 7.0
-- Animescomia: n 38, elegíveis 9, % assistido 63.1, views48 6
-- AssistIA Investimentos: n 39, elegíveis 2, % assistido 90.2, views48 2.0
+- Animescomia: n 39, elegíveis 9, % assistido 63.1, views48 6
+- AssistIA Investimentos: n 39, elegíveis 5, % assistido 57.2, views48 2.0
 - Inovare: n 91, elegíveis 27, % assistido 0, views48 0
 - ForjaReact: n 10, elegíveis 1, % assistido 46.7, views48 None
 - Manhwa Noturno: n 11, elegíveis 9, % assistido 0, views48 0.0
@@ -77,7 +77,7 @@ Vídeos nos últimos 7 dias: 730 | elegíveis (receberam o lote do feed): 269 | 
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-13T08:20: youtube 21/36, tiktok 44/58, instagram 46/53, flow 87/229, fotos 0/4 | MORTOS: youtube animescomia, youtube assistiainvestimentos, youtube bichonoturno, youtube cartuchoreact, youtube dicasfinanceirasdaia, youtube filmenoturno, youtube fiodameada, youtube forjareact, youtube gamenoturno, youtube historiasemframes, youtube inovare_thai, youtube inovaremanhwabr
+## SEM NAVEGADOR (HTTP) — saúde em 11-13T09:23: youtube 20/36, tiktok 44/58, instagram 46/53, flow 87/230, fotos 0/4 | MORTOS: youtube animescomia, youtube assistiainvestimentos, youtube bichonoturno, youtube cartuchoreact, youtube dicasfinanceirasdaia, youtube doramanoturno, youtube filmenoturno, youtube fiodameada, youtube forjareact, youtube gamenoturno, youtube historiasemframes, youtube inovare_thai
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
 Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @fabricadeautomacoesia (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (0), Tiktok @emersonjosiel2030 (3), Tiktok @inovaremanhwaverse2 (0), Tiktok @curiosidadesnoturnas (3), Tiktok @emersonjosiel2032 (0), Tiktok @emersonjosiel2031 (0), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0)

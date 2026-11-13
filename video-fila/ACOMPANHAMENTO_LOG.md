@@ -1755,3 +1755,51 @@ Auditoria cartão por cartão (sonnet-ajudante + conferência minha nos dados re
 - 2037: dona logou o Google pelo IP fixo (rnprmtfo-16) — cofre google=vivo. 2038 aberta na tela pelo IP fixo (ponte 18317) esperando a dona; 2039 depois.
 - Dona reiniciou acer e x200ma: voltaram COM o swap (x200ma 6+8 GB, acer 8+2 GB) — o fstab de hoje funcionou.
 - STI: o roteiro parava em "claude_client indisponível" — o STI não tinha recapd-sti/secrets. Copiado o mesmo conjunto do PC2 (sem rclone.conf; chmod 600). IA de texto testada no STI: responde. Short de teste rodando de novo.
+
+## 13/11/2026 09:25 — INTELIGÊNCIA de postagem e criação (dona: "faça todas as melhorias possíveis"; Fable 5.2)
+Medido em 1.300 Shorts de parceiro com 48 h+ (Studio + ledger + postar.json). Análise: video-fila\analise_sinais_shorts.py.
+
+**ACHADO PRINCIPAL — horário nobre.** O post das 21-23 h de Brasília rende muito mais dentro do MESMO canal e da MESMA mídia: ganha em 13 canais, perde em 2 (os dois com 2-3 views de qualquer jeito). Nos fracos é a diferença entre viver e morrer: bichonoturno 1.217 x 10, cartuchoreact 1.223 x 6, curiosidadesnoturnas 985 x 4, animescomia 1.023 x 6, filmenoturno 1.051 x 35 (mediana de views noite x resto). Vale nas 4 semanas (43-46). Canal-dia COM post à noite: 1.272 views no total; sem: 141. Só vale pro parceiro (react/veo/hipercool não têm o efeito). E só o 1º da noite rende: em 10 canal-dias com 2 posts às 21-23 h, 0 tiveram os dois acima de 300 (1.740 e 5; 1.267 e 14).
+- O 21 h estava na lista de horários FRACOS desde 30/10 (ia pro FIM da fila) — a análise de 30/10 misturou 15-21 h; separado por hora, 20 h é o pior (mediana 3) e 21 h o melhor.
+- 13 canais não tinham nenhum horário entre 21:00 e 22:30 (os 5 novos de negócios, CenaReact, ManhwaReact, ForjaReact, Tech, Mistérios, Filme, Game, Assist-IA).
+
+**Postagem (parceiro_diario.py; backup D:\tmp\parceiro_diario.bak_13nov_nobre):**
+1. _ordem_horarios: 21 saiu dos fracos; hora NOBRE (HORARIO_NOBRE_BR="21,22"; "" desliga) é preenchida PRIMEIRO em todo canal pt.
+2. parceiro.json: os 26 canais pt ativos têm exatamente 1 horário nobre, em minutos diferentes (backup .bak_nobre_*; _obs_nobre em cada canal). Filme Noturno e Fio da Meada ganharam horário de tarde no lugar do 2º da noite.
+3. Um post nobre por dia: se o dia já tem post às 21-22 h, os horários dali até 23:59 ficam vazios (PARCEIRO_UM_NOBRE_POR_DIA=0 desliga).
+4. nota_pronto(): no horário nobre sobe o PRONTO com mais chance no canal (fonte no canal x tipo em foco x narrador), não o 1º da fila; viral continua na frente (PARCEIRO_MELHOR_NO_NOBRE=0 desliga). Ensaio real: "Filme Noturno: horário nobre 21:05 -> ... (nota 2,9 contra 1,1 do 1º da fila)".
+5. --ensaio não baixa mais vídeo do Drive (o meu ensaio trouxe 23 vídeos / 672 MB à toa; a ReservaShortsDrive das 04:50 leva de volta).
+Teste: simulação do laço real nos 26 canais = dia cheio e exatamente 1 post nobre em todos.
+
+**Criação — notas SEM o efeito do horário (video-fila\inteligencia_ajustada.py, novo):** as notas antigas (views ÷ mediana do canal ou do nicho) premiavam a fonte/voz que caiu no post da noite. Agora cada Short é comparado só com os do mesmo canal no mesmo período, com teto de 8x.
+6. Narradores: anime_voz_clonada.ranking_geral usa estado/config\narradores_ajustado.json (VOZ_RANKING_AJUSTADO=0 volta). O corte de ontem tirava moana, pica_pau, walter_white e fatos_desconhecidos — ajustado, estão NA MÉDIA OU ACIMA (+0,14/+0,23/+0,31/0,0): voltaram. Cortadas agora (<= -0,5 com 6+ vídeos): alex_madagascar e seu_madruga. O arquivo vai pro PC2 no mesmo scp do ocioso.
+7. Fontes: fontes_por_canal.json refeito ajustado (221 pares) + nota "geral" por fonte (74); _escolher_fonte usa a geral quando a fonte ainda não tem vídeo naquele canal.
+8. Foco por tipo de conteúdo: sai do foco o tipo que só parecia bom pelo horário (razão ajustada < 0,85): Filme Noturno perdeu 'esportes' (0,67x), HistoriasEmFrames perdeu pesca/jogos/manhwa, CenaReact perdeu dorama/finanças, Plantão perdeu anime.
+9. Teste de nicho (20%): canal de entretenimento não testa mais nicho SÉRIO (o Curiosidades Noturnas estava "testando" jurídico e negócios).
+10. Tarefa FocoShorts (05:40) faz tudo isso todo dia e escreve **D:\video-fila\INTELIGENCIA_SHORTS.md** (prova do horário nobre por canal + melhores/piores fontes e vozes). Rodada inteira testada sem erro.
+
+**Testes A/B (variantes) refeitos sem o efeito do horário:** nenhum aberto tem diferença pra fechar sozinho — ninguem_esperava P(A melhor)=0,84, saudacao 0,90, curto 0,71, fala_rapida 0,68, gancho_meio 0,40. Legenda lateral x centro: lateral ganha (1,06 x 0,75) — já é o padrão. O placar_variantes.py dava ninguem_esperava e gancho_remotion como "prontos pra decidir"; pela conta ajustada ainda não.
+
+**Não mexi:** títulos (comprimento, caixa alta, emoji, pergunta: sem diferença dentro do mesmo canal/período); hora do react/veo/hipercool (sem efeito medido).
+**Aprendizado (LEIA_ANTES_DE_MELHORAR):** 0 aprovados pela dona na fila; 635 candidatos são de visual/jeito de falar, fora do que mexi (agenda e escolha) — 0 aplicados, 0 reprovados, deixados.
+**Aberto:** POR QUE o 1º post da noite rende (hipótese: o YouTube dá 1 "semente" de ~1.000 views por canal por dia e ela cai no vídeo das 21-22 h) — conferir em 7 dias no INTELIGENCIA_SHORTS.md se continua com todo canal postando à noite.
+**STI:** 1º Short completo montado no Linux (1080x1920, 60 fps, 31 s) — falta eu OLHAR vídeo/voz/legenda e criar o disparo automático.
+
+## 13/11/2026 09:40 — manutenção (horário nobre: valer JÁ e só quando o postador mantém)
+- Conferido na agenda real: 67 dos 105 canal-dias já agendados (regra antiga) estavam cheios e SEM post às 21-22 h — o horário nobre só entraria em ~7 dias (ForjaReact, Assist-IA, Tech Noturno, CenaReact...).
+- parceiro_diario (backup D:\tmp\parceiro_diario.bak_13nov_nobre3): (a) dia cheio sem post nobre aceita +1, só no horário nobre (PARCEIRO_NOBRE_EXTRA=0 desliga); (b) o horário nobre só é usado se o POSTADOR mantiver (pol.horario_publicacao a menos de 30 min do pedido) — Tech Noturno pedia 13/11 21:25 e o postador devolvia 17/11 12:00; o Short escolhido pro nobre sairia num horário fraco, calado. Não manteve = pula pro próximo horário/dia.
+- Simulação com a agenda e os tetos reais: 60 agendamentos, 23 nobres, 0 empurrados (antes do item b: Tech, CenaReact, Fio da Meada, Empresário, Clínica, Dorama e ManhwaReact seriam empurrados). Compila sem avisos. Vale na próxima rodada de postagem (a das 08:45 ainda roda com o código antigo).
+
+## 13/11/2026 10:15 — agente online (GitHub sistema-videos): lote aplicado no D: + recados
+- Dona: outro agente trabalha só pelo GitHub (ramo claude/optimistic-rubin-8buena); "vocês sincronizam os arquivos no GitHub e deixam recados um pro outro por lá". Repositório fica PÚBLICO por enquanto (decisão da dona).
+- **Aplicado no D: o ramo dele (7 commits, 46 arquivos; git apply só do trecho mudado; backup D:\tmp\agente_online\backup_antes):** filtro de palavras da narração só casa palavra inteira (viralizador.py x2), narração/legenda não perdem mais números, nomes e siglas (_tts_filter x8, anime_script, claude_client x7), detector de "erro da IA" não descarta narração de negócios, karaokê usa o tempo real da palavra (fx_subtitles x7, effects_engine, subtitles_veo), teto de 1.500 frases no longo de 3 h+ (anime_script.alvo_com_teto, anime_preparo_longo; LONGO_TETO_FRASES=0 desliga), cache de clipes do historias-em-frames (fx_clips x4), 5 bugs de import/sintaxe, salvar_github.py (limpeza de segredos não quebra mais código/JSON; tira token do Telegram e cookies).
+- Conferido no D:: 38 .py compilam sem avisos; os 5 testes dele passam ("tudo certo"); filtro antigo x novo com o código real: prometeu→"promandando ver", enviado→"endiferentão", diamante→"diaffair", heroína→"aditivos proibidos" no antigo, certos no novo. 8 de 344 roteiros de Shorts prontos carregam o estrago antigo (não refiz).
+- **Defeito que achei no lote e corrigi:** verbo conjugado caía no genérico ("matou e estuprou a vila" → "matou e forçar a barra a vila"). _ANTES ganhou estuprou/estupraram/estuprando/estuprava → atacou/atacaram/atacando/atacava. Teste dele continua passando; cópia do postador igualada.
+- **NÃO aplicado:** item 2c (narracao_curva.py, 7 cópias — muda o som do longo; ele pediu "ouvir antes de valer").
+- Pacote do Kaggle refeito (montar_pacote.py --codigo): teto de frases e filtro novo conferidos em manhwa-drive:colab_recap/raiz.
+- Recados: D:\video-fila\agentes\RECADOS_ENTRE_AGENTES.md (meu 1º recado: o que apliquei, o defeito, os arquivos em que estou mexendo, o achado do horário nobre, onde ele ajuda mais) + MELHORIAS_AGENTE_ONLINE.md (o dele). salvar_github.py leva os dois pra raiz do repositório (RECADOS_RAIZ) — antes a limpeza apagava tudo que não vinha do D:.
+- **Segredos expostos (repositório público, conferido no main de 09:06):** 1 token de bot do Telegram ATIVO (@Emerson_videos_de_apps_teste_bot) em 2 fluxos do n8n e cookies de sessão do YouTube em video-fila\REVISAO_MELHORIAS.md. O limpador novo tira do próximo envio; o histórico do git guarda os antigos — só deixam de valer se a dona trocar na origem.
+
+## 13/11/2026 10:25 — caixa CURTOS do pesquisador (16 pendentes -> 0) + furo no limpador do GitHub
+- CURTOS: 16 blocos avaliados. 7 reprovados (youtube-research-mcp: MCP de chat; kitsu-season-trends: tendência de temporada; video-intelligence-dashboard: pesado/com tela; youtube-scout: API do Google Cloud; hookshot: clipador com tela; trendcat: tendência geral; alt-track-dubbing: Google Cloud pago), 0 implantados; 9 blocos vieram vazios. No bloco "Horário de postagem por país" deixei a nota do que medi hoje (horário nobre).
+- salvar_github.py: a cópia nova ainda levava 5 cookies do YouTube com valor (PSIDTS, SIDCC, PAPISID) do bloco de cookies.txt colado em video-fila\REVISAO_MELHORIAS.md — o limpador só tirava o __Secure-1PSID. Regra nova (linha no formato Netscape, validade > 0, perde o valor) + teste test_cookies_txt_colado_sai_inteiro. No arquivo real: 0 sobrando, 8 linhas mudadas em 3.003. Remontando a cópia pra enviar.
