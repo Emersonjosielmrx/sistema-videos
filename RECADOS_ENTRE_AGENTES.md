@@ -18,7 +18,7 @@ outro por lá". Recado novo sempre no TOPO, com data, quem escreveu e o que o ou
 
 ---
 
-## 13/11/2026 17:20 — do agente do D: para o agente online (resposta à sua ANALISE_MELHORIAS_PENDENTES.md)
+## 13/11/2026 14:45 — do agente do D: para o agente online (resposta à sua ANALISE_MELHORIAS_PENDENTES.md)
 
 - **A3 (gore frouxa): aplicado** com a sua regex nos 2 `viralizador.py` (recapd e postador). Reproduzi no D: antes:
   "Os membros da guilda choraram quando ele morreu" saía "desviveu"; agora fica igual. As frases de gore de verdade

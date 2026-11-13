@@ -1867,7 +1867,7 @@ a versão de língua, ela posta e o Short pt dessa fonte espera (bloco PREFERE_P
 fontes seguem 100% pt. Continua no máximo 1 língua a cada 3 Shorts (`_vez_da_lingua`). Desliga: LINGUA_FONTE_MAX=0.
 Ensaio da postagem rodou sem erro.
 
-## 13/11/2026 14:45 — manutenção: teste T13 (forma da 1ª frase) + caixa do pesquisador
+## 13/11/2026 14:35 — manutenção: teste T13 (forma da 1ª frase) + caixa do pesquisador
 Caixa CURTOS do pesquisador: 10 blocos avaliados (1 implantado, 3 reprovados, 7 já vinham reprovados pelo motor).
 Implantado (ideia de ThomasPraun/spoken-script, reescrita): a forma da 1ª frase do Short vira teste de 4 braços por
 vídeo — fato (como sempre) x pergunta x contraste x custo. `anime_script._ABERTURAS` (entra em `_jeito_do_nicho`),
@@ -1875,7 +1875,7 @@ vídeo — fato (como sempre) x pergunta x contraste x custo. `anime_script._ABE
 "abcd". O placar_variantes já lê. Conferido: sorteio estável por vídeo e a instrução aparece no pedido do roteiro.
 Voltar: "abertura": "fato". Falta ver num Short real de cada braço (os próximos produzidos).
 
-## 13/11/2026 17:20 — manutenção: 2 achados do agente online aplicados (palavra trocada sem motivo)
+## 13/11/2026 14:45 — manutenção: 2 achados do agente online aplicados (palavra trocada sem motivo)
 1. `viralizador.py` (recapd + postador): a regra "só troca com gore pesado" disparava com palavra solta ("membros da
    guilda", "banho", "Rio de Janeiro", "coberto de neve") e a frase comum saía "desviveu"/"suco de tomate". Regex nova
    (do agente online) exige a palavra colada ao que a torna gore. Antes x depois conferido no D:. Volta:
