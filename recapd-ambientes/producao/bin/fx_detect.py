@@ -32,6 +32,30 @@ IMPACT_KEYWORDS = [
 ]
 
 
+# 13/11 (achado A1 do agente online, reproduzido no D:): a lista casava PEDAÇO de palavra — "caixa" (cai), "debateram"
+# (bate), "tirou" (tiro), "coragem" (rage), "absoluta" (luta) viravam impacto quando a IA não respondia. Agora a
+# palavra-chave casa no COMEÇO da palavra (radical: "quebr" -> quebrou) e as curtas/ambíguas só INTEIRAS.
+# FX_DETECT_PEDACO=1 volta ao antigo.
+_SO_INTEIRA = {"ko", "hit", "cut", "cai", "rip", "pow", "rage", "drop", "shot", "tiro", "bate", "luta", "faca", "soco",
+               "medo", "fall", "kill", "bang", "slam", "kick", "escuro", "tenso", "corta", "terror", "choque"}
+_RX_KW = {}
+
+
+def _casa_lista(texto, lista):
+    import os as _os
+    import re as _re
+    if _os.environ.get("FX_DETECT_PEDACO") == "1":
+        return any(kw in texto for kw in lista)
+    chave = id(lista)
+    if chave not in _RX_KW:
+        partes = []
+        for kw in lista:
+            e = _re.escape(kw)
+            partes.append(e + r"(?![0-9a-zà-ú])" if kw in _SO_INTEIRA else e)
+        _RX_KW[chave] = _re.compile(r"(?<![0-9a-zà-ú])(?:" + "|".join(partes) + ")")
+    return _RX_KW[chave].search(texto) is not None
+
+
 def is_impact_panel(description: str) -> bool:
     """Detecta se o painel tem contexto de ação/impacto. Haiku primeiro, keyword fallback."""
     if not description:
@@ -44,7 +68,7 @@ def is_impact_panel(description: str) -> bool:
     except Exception:
         pass
     desc_lower = description.lower()
-    return any(kw in desc_lower for kw in IMPACT_KEYWORDS)
+    return _casa_lista(desc_lower, IMPACT_KEYWORDS)
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -583,7 +607,7 @@ def is_tension_panel(description: str) -> bool:
     except Exception:
         pass
     desc_lower = description.lower()
-    return any(kw in desc_lower for kw in TENSION_KEYWORDS)
+    return _casa_lista(desc_lower, TENSION_KEYWORDS)
 
 
 # Sensual/+18 keywords. "cena intensa"/"intensa" é o marcador deixado pela

@@ -34,9 +34,26 @@ def _tirar_vida(m):
 # 29/10 noite (dona: "libere a palavra sangue; suco de tomate só nas partes MUITO violentas — às vezes fala de sangue como
 # descendência e 'suco de tomate' fica estranho"): sangue/sangrar só viram "suco de tomate"/"vazar suco" quando a FRASE
 # tem gore pesado (jorrar, poça, banho, tripas, cabeça arrancada...). "Sangue real", "do mesmo sangue" ficam.
-_GORE = re.compile(r"jorr|espirr|esguich|po[çc]a|banho|rio de|litros|encharc|ensopad|cobert[oa]s? de|lav(ad|ou)|cuspi"
-                   r"|vomit|v[ôo]mit|tripa|v[íi]scer|entranha|arranc|esmag|despeda[çc]|dilacer|mutil|esquartej|decapit"
-                   r"|degol|perder a cabe[çc]a|cabe[çc]a rol|membros|rasgad|carnific|massacr|chacin", re.IGNORECASE)
+# 13/11 (achado A3 do agente online, reproduzido no D:): a lista tinha palavras soltas que não são gore sozinhas
+# ("membros da guilda", "banho", "rio de Janeiro", "coberto de neve", "lavou", "arrancou o carro") e a frase comum
+# virava "desviveu"/"suco de tomate" — o que a dona mandou parar em 29-30/10. Agora só valem coladas no que as torna
+# gore. Lista antiga em _GORE_ANTIGA (VIRALIZADOR_GORE_ANTIGA=1 volta).
+_GORE_ANTIGA = re.compile(r"jorr|espirr|esguich|po[çc]a|banho|rio de|litros|encharc|ensopad|cobert[oa]s? de|lav(ad|ou)|cuspi"
+                          r"|vomit|v[ôo]mit|tripa|v[íi]scer|entranha|arranc|esmag|despeda[çc]|dilacer|mutil|esquartej|decapit"
+                          r"|degol|perder a cabe[çc]a|cabe[çc]a rol|membros|rasgad|carnific|massacr|chacin", re.IGNORECASE)
+_GORE = _GORE_ANTIGA if __import__("os").environ.get("VIRALIZADOR_GORE_ANTIGA") == "1" else re.compile(
+    r"jorr|espirr|esguich|"
+    r"(?:po[çc]a|banho|rio|litros|mar) de sangue|"
+    r"(?:encharcad|ensopad|cobert|lavad|banhad)[oa]s? (?:de|em) sangue|"
+    r"(?:cusp|v[oô]mit)\w+ sangue|"
+    r"\btripas?\b|v[íi]sceras?|entranhas?|"
+    r"arranc\w+ (?:(?:a|o|as|os|um|uma|seu|sua|seus|suas|d?el[ea]) )?(?:cabe[çc]a|bra[çc]o|perna|cora[çc][ãa]o|olho|"
+    r"l[íi]ngua|membro|pele|unha|dente|m[ãa]o|dedo)|"
+    r"esmag\w+ (?:(?:a|o|as|os|seu|sua) )?(?:cabe[çc]a|cr[âa]nio|corpo|peito|m[ãa]o|osso)|"
+    r"membros (?:arrancad|decepad|espalhad|cortad|dilacerad)|"
+    r"rasgad[oa]s? ao meio|partid[oa]s? ao meio|"
+    r"despeda[çc]|dilacer|mutil|esquartej|decapit|degol|perder a cabe[çc]a|cabe[çc]a rol|"
+    r"carnific|massacr|chacin", re.IGNORECASE)
 
 
 _CENSURA = {"trocou": False, "n": 0}  # 30/10: quantas trocas de gore já houve (piscada do narrador)

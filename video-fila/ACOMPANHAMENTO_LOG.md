@@ -1874,3 +1874,13 @@ vídeo — fato (como sempre) x pergunta x contraste x custo. `anime_script._ABE
 `variantes.py` "abertura" (env CORTES_ABERTURA), campo "abertura" no postar.json, `cortes_ajustes.json` "abertura":
 "abcd". O placar_variantes já lê. Conferido: sorteio estável por vídeo e a instrução aparece no pedido do roteiro.
 Voltar: "abertura": "fato". Falta ver num Short real de cada braço (os próximos produzidos).
+
+## 13/11/2026 17:20 — manutenção: 2 achados do agente online aplicados (palavra trocada sem motivo)
+1. `viralizador.py` (recapd + postador): a regra "só troca com gore pesado" disparava com palavra solta ("membros da
+   guilda", "banho", "Rio de Janeiro", "coberto de neve") e a frase comum saía "desviveu"/"suco de tomate". Regex nova
+   (do agente online) exige a palavra colada ao que a torna gore. Antes x depois conferido no D:. Volta:
+   VIRALIZADOR_GORE_ANTIGA=1.
+2. `fx_detect.py` (recapd): quando a IA não responde, impacto/tensão casava pedaço de palavra ("caixa", "debateram",
+   "coragem" = tremor/SFX em cena calma). Agora começo de palavra; curtas só inteiras. Volta: FX_DETECT_PEDACO=1.
+Teste novo `teste_gore_e_impacto.py` = tudo certo; `teste_viralizador.py` segue passando. Pacote do Kaggle refeito.
+Não medido: com que frequência a IA falha (o tamanho real do item 2). Cópias do hipercool/historias não mexidas.
