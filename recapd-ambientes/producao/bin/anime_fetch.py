@@ -295,6 +295,32 @@ def fetch_captions(url, out_dir, langs=("pt", "es")):
         # 26/10: PC2/PC3 = mesmo IP da casa; a legenda vem do PC1 junto com a fonte, senão Whisper
         logging.info("[fetch] SEM_YTDLP=1: sem legenda do PC1 — vai pro Whisper")
         return None, None
+    # 13/11 (dona: "resolver os gargalos"): hoje NENHUMA das 62 tentativas de legenda deu certo (o YouTube barra os
+    # proxies: "Sign in to confirm" / 429) e cada Short gastava até 4 tentativas de até 180 s antes de cair no Whisper,
+    # que resolve do mesmo jeito — o despacho do PC3 ficou mais de 1 h preso nisso. Disjuntor: LEGENDA_FALHAS_MAX
+    # falhas seguidas (padrão 4) = pula a legenda do YouTube por LEGENDA_PAUSA_MIN (padrão 90) e vai direto pro
+    # Whisper; 1 legenda que venha zera a conta. LEGENDA_DISJUNTOR=0 desliga.
+    import time
+    _disj = Path(r"D:\video-fila\estado\legenda_yt_disjuntor.json")
+    _usa_disj = os.environ.get("LEGENDA_DISJUNTOR", "1") != "0"
+
+    def _disj_ler():
+        try:
+            import json as _j
+            return _j.loads(_disj.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return {}
+
+    def _disj_gravar(d):
+        try:
+            import json as _j
+            _disj.write_text(_j.dumps(d), encoding="utf-8")
+        except OSError:
+            pass
+
+    if not achado and _usa_disj and time.time() < float(_disj_ler().get("ate") or 0):
+        logging.info("[fetch] legenda do YouTube em pausa (várias falhas seguidas) — direto pro Whisper")
+        return None, None
     for lang in ([] if achado else langs):
         # 22/10 (dono: "falei pra usar o webshare"): a LEGENDA é pequena (KB) e sai por proxy rotativo — não
         # gasta o IP da casa. Bloqueio COM proxy = proxy ruim (troca e tenta 1x de novo), sem pausar o PC.
@@ -333,6 +359,8 @@ def fetch_captions(url, out_dir, langs=("pt", "es")):
     if achado:
         txt, lang, vtt = achado
         logging.info(f"[fetch] legenda YT obtida (lang={lang}, {len(txt)} chars)")
+        if _usa_disj and _disj_ler():
+            _disj_gravar({})  # veio: zera o disjuntor
         try:
             import json as _json
             cues = _parse_vtt_tempos(vtt)
@@ -342,6 +370,14 @@ def fetch_captions(url, out_dir, langs=("pt", "es")):
             logging.warning(f"[fetch] tempos da legenda falharam: {e}")
         return txt, lang
     logging.warning("[fetch] sem legenda YT utilizável")
+    if _usa_disj:
+        d = _disj_ler()
+        d["seguidas"] = int(d.get("seguidas") or 0) + 1
+        if d["seguidas"] >= int(os.environ.get("LEGENDA_FALHAS_MAX", "4")):
+            d = {"seguidas": 0, "ate": time.time() + float(os.environ.get("LEGENDA_PAUSA_MIN", "90")) * 60}
+            logging.warning("[fetch] legenda do YouTube falhou várias vezes seguidas — pausa; os próximos vão direto "
+                            "pro Whisper")
+        _disj_gravar(d)
     return None, None
 
 

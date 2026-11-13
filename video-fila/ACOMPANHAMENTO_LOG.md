@@ -1945,3 +1945,23 @@ e o STI escolhiam e baixavam a fonte NA HORA do disparo (4 a 50 min com a máqui
   Esporte Noturno subiram por HTTP sem navegador.
 - reagendar_nobre: Curiosidades, Empresário, Clínica, Imóvel e Vendas usam contas Google que são contas VIVAS do
   Kaggle — ficam pulados de propósito (regra do banimento), não é defeito.
+
+## 13/11/2026 20:35 — manutenção: por que as máquinas esperam o PC1 (3 gargalos medidos e consertados)
+A pilha única (19:40) não enchia: preparar 1 Short levou 2084 s. Causas, medidas:
+1. **Fila única do yt-dlp** (`ytdlp_vez.py`, comum): listar um canal (9 s) esperou 239 s atrás de downloads, e uma
+   listagem de 5 min segurou TODOS os downloads. Agora 2 faixas: a consulta pequena (lista, legenda, metadado, busca —
+   sai pelo proxy) não espera o download grande; o download segue 1 por vez com a pausa e o espaçamento de sempre.
+   Teste: com um download de 20 s em curso, a lista passou em 0 s (antes 25 s). `YTDLP_UMA_FAIXA=1` volta. Publicado
+   pelo recursos.py (hipercool, manhwa-react, recapd).
+2. **Listagem trazia o canal inteiro** (`anime_discover.discover_canal`): até 4.172 Shorts, 38 canais com > 500, e 123
+   das 133 listas vencidas. Agora só os 150 mais novos, juntados à lista guardada, com teto de 120 s (estourou = usa a
+   guardada). Medido no @jresumos: 9 s (antes > 5 min). `CANAL_LISTA_MAX=0` volta.
+3. **Legenda do YouTube**: 0 de 62 tentativas deram certo hoje (proxies barrados) e cada Short gastava até 4 x 180 s
+   antes do Whisper; o despacho do PC3 ficou > 1 h num Short. Disjuntor em `anime_fetch.fetch_captions`: 4 falhas
+   seguidas = 90 min direto no Whisper. `LEGENDA_DISJUNTOR=0` desliga.
+Também: `ocioso.encher_pilha()` pede várias fontes de uma vez aos baixadores de fora (VPS + Kaggle, cada um com o
+seu IP). **Erro meu no 1º teste (20:07):** a escolha dos 5 vídeos segurou a trava de disparo do PC2 por 10 min; parei
+o teste e mudei pra soltar a trava a cada escolha, com teto de 150 s. Ainda NÃO vi o enchimento em paralelo
+funcionar de ponta a ponta (o 2º teste saiu sem pedir nada porque outro despacho estava escolhendo).
+Erro pego no teste antes de ir pra produção: faltava `import time` no disjuntor.
+STI: segue fora do ar (Tailscale "offline, last seen 23 min" às 19:50).
