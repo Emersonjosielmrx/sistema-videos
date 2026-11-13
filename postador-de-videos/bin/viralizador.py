@@ -421,6 +421,16 @@ _ANTES = [
     # 13/11 (chat do D:, conferindo o lote do agente online): com palavra inteira, "estuprou"/"estupraram" caíam no
     # genérico estupr\w* e a frase saía sem conjugação ("matou e forçar a barra a vila"). Verbo conjugado antes.
     (r"estupraram", "atacaram"), (r"estuprou", "atacou"), (r"estuprando", "atacando"), (r"estuprava(m?)", r"atacava\1"),
+    # 13/11 (agente online, sugestão do chat do D:): infinitivo também — "tentou estuprar a princesa" saía "tentou
+    # forçar a barra a princesa"
+    (r"estuprar", "atacar"),
+    # verbo conjugado de tortura (só com gore, como a regra genérica): "foi torturada" saía "foi interrogação intensa"
+    (r"torturad([oa])", _so_gore(lambda m: "maltratad" + m.group(1))), (r"torturaram", _so_gore("maltrataram")),
+    (r"torturou", _so_gore("maltratou")), (r"torturando", _so_gore("maltratando")), (r"torturar", _so_gore("maltratar")),
+    # "suicídio" como substantivo com artigo: "O ir de base do pai", "cometeu ir de base" não fazem frase
+    (r"comet(eu|er|eram|ia) suic[íi]dio", lambda m: {"eu": "tirou", "er": "tirar", "eram": "tiraram",
+                                                      "ia": "tirava"}[m.group(1).lower()] + " a própria vida"),
+    (r"\b(o|do|no|ao|um|pelo|esse|seu|meu)\s+suic[íi]dio", r"\1 fim trágico"),
     (r"seduziram", "encantaram"), (r"seduziu", "encantou"), (r"seduzindo", "encantando"), (r"seduzir", "encantar"),
     (r"seduzid([oa])", r"encantad\1"),
     (r"enforcaram\s+(o|a)(s?)\b", r"deram a gravata definitiva n\1\2"), (r"enforcou\s+(o|a)(s?)\b", r"deu a gravata definitiva n\1\2"),

@@ -479,6 +479,131 @@ def _caixa_justa(video, W, H, dur, faixa):
     return [round(y0, 3), round(y1, 3)], [round(x0, 3), round(x1, 3)]
 
 
+# ───────── delogo que ACOMPANHA a legenda no tempo (13/11, pedido do chat do D:) ─────────
+# A cobertura "delogo" era UMA caixa para o vídeo inteiro: a largura vinha da legenda MAIS LARGA (percentil 97 de todos
+# os quadros, _caixa_justa) ou, sem medida (leg_x None), de 5% a 95% da tela — e a altura, da união das 2 linhas. Em 18
+# de 86 Shorts a faixa pegava a largura toda; em fundo com textura vira listras ("vidro derretido") o tempo inteiro,
+# mesmo quando a legenda deles é uma palavra curta ou nem está na tela.
+# Agora mede as palavras dentro da faixa várias vezes por segundo e monta um delogo por TRECHO (enable='between(t,…)'),
+# com a largura e a altura daquele trecho; sem legenda na tela = sem delogo naquele instante.
+# PARCEIRO_DELOGO_TEMPO=0 volta à caixa única.
+DELOGO_FPS = 5            # amostras por segundo
+DELOGO_MAX_TRECHOS = 80   # teto de filtros delogo encadeados (acima disso junta os vizinhos)
+
+
+def _extensoes_no_tempo(video, W, H, faixa, fps=DELOGO_FPS, larg=720):
+    """Caixa das palavras da legenda deles em cada amostra do vídeo: lista de None | (x0, x1, y0, y1) em FRAÇÃO do
+    quadro, uma a cada 1/fps s. faixa = [y0, y1] em fração (onde procurar). Lê só o recorte da faixa (rápido)."""
+    w = int(min(W, larg) // 2 * 2)
+    esc = w / W
+    h_ref = H * esc
+    ya = max(0, int(faixa[0] * H) - int(faixa[0] * H) % 2)
+    hb = min(H, int(round(faixa[1] * H))) - ya
+    hb += hb % 2
+    hb = min(hb, H - ya - (H - ya) % 2)
+    if hb < 8:
+        return []
+    hs = int(round(hb * esc / 2) * 2) or 2
+    p = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(video), "-vf",
+                          f"fps={fps},crop={W}:{hb}:0:{ya}:exact=1,scale={w}:{hs}",
+                          "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], stdout=subprocess.PIPE)
+    out = []
+    try:
+        while True:
+            buf = p.stdout.read(w * hs * 3)
+            if len(buf) < w * hs * 3:
+                break
+            cs = _palavras(_letras(np.frombuffer(buf, np.uint8).reshape(hs, w, 3)), h_ref=h_ref)
+            if not cs:
+                out.append(None)
+                continue
+            out.append((min(c[0] for c in cs) / w, max(c[2] for c in cs) / w,
+                        (ya + min(c[1] for c in cs) / esc) / H, (ya + max(c[3] for c in cs) / esc) / H))
+    finally:
+        p.stdout.close()
+        p.wait()
+    return out
+
+
+def _trechos_delogo(amostras, W, H, fps=DELOGO_FPS, margem_x=6, margem_y=4, max_h=DELOGO_MAX_H,
+                    max_trechos=DELOGO_MAX_TRECHOS, salto=0.06):
+    """amostras (de _extensoes_no_tempo) -> [{"t0","t1","x","y","w","h"}] em segundos e pixels: um delogo por trecho
+    em que a legenda deles está na tela, do tamanho dela NAQUELE trecho. Função pura (sem vídeo).
+    - a letra entra animada (num quadro isolado a palavra aparece pela metade): cada amostra vale a união com as
+      vizinhas (±1 amostra), e o trecho começa/termina 1 amostra antes/depois;
+    - buraco de 1 amostra não quebra o trecho; mudança de largura maior que `salto` (fração da tela) abre outro;
+    - trecho mais alto que max_h da tela fica SEM delogo (viraria listras), como já era a regra da caixa única."""
+    n = len(amostras)
+    passo = 1.0 / fps
+    suave = []
+    for i in range(n):
+        jan = [a for a in amostras[max(0, i - 1):i + 2] if a]
+        suave.append((min(a[0] for a in jan), max(a[1] for a in jan), min(a[2] for a in jan), max(a[3] for a in jan))
+                     if amostras[i] or len(jan) == 2 else None)
+    trechos, atual = [], None
+    for i, a in enumerate(suave):
+        if a is None:
+            atual = None
+            continue
+        if atual and (abs(a[0] - atual["cx"][0]) > salto or abs(a[1] - atual["cx"][1]) > salto):
+            atual = None  # outra legenda (bem mais larga ou mais curta): caixa própria
+        if atual is None:
+            atual = {"i0": i, "i1": i, "cx": [a[0], a[1]], "cy": [a[2], a[3]]}
+            trechos.append(atual)
+        else:
+            atual["i1"] = i
+            atual["cx"] = [min(atual["cx"][0], a[0]), max(atual["cx"][1], a[1])]
+            atual["cy"] = [min(atual["cy"][0], a[2]), max(atual["cy"][1], a[3])]
+    while len(trechos) > max_trechos:  # filtro demais: junta os dois vizinhos mais próximos no tempo
+        k = min(range(len(trechos) - 1), key=lambda j: trechos[j + 1]["i0"] - trechos[j]["i1"])
+        a, b = trechos[k], trechos.pop(k + 1)
+        a["i1"] = b["i1"]
+        a["cx"] = [min(a["cx"][0], b["cx"][0]), max(a["cx"][1], b["cx"][1])]
+        a["cy"] = [min(a["cy"][0], b["cy"][0]), max(a["cy"][1], b["cy"][1])]
+    out = []
+    for t in trechos:
+        x0, x1 = max(2, int(t["cx"][0] * W) - margem_x), min(W - 3, int(t["cx"][1] * W) + margem_x)
+        y0, y1 = max(2, int(t["cy"][0] * H) - margem_y), min(H - 3, int(t["cy"][1] * H) + margem_y)
+        if x1 - x0 < 8 or y1 - y0 < 4 or (y1 - y0) > max_h * H:
+            continue
+        out.append({"t0": round(max(0.0, (t["i0"] - 1) * passo), 2), "t1": round((t["i1"] + 2) * passo, 2),
+                    "x": x0, "y": y0, "w": x1 - x0, "h": y1 - y0})
+    for a, b in zip(out, out[1:]):  # vizinhos não se sobrepõem no tempo (2 delogos no mesmo quadro = borrão dobrado)
+        if b["t0"] < a["t1"]:
+            meio = round((a["t1"] + b["t0"]) / 2, 2)
+            a["t1"], b["t0"] = meio, meio
+    return out
+
+
+def _filtro_delogo(trechos):
+    """Cadeia de filtros do ffmpeg: um delogo por trecho, ligado só no intervalo dele."""
+    return ",".join(f"delogo=x={t['x']}:y={t['y']}:w={t['w']}:h={t['h']}:enable='between(t,{t['t0']},{t['t1']})'"
+                    for t in trechos)
+
+
+def delogo_no_tempo(video, W, H, faixa_px, leg_x=None):
+    """Filtro delogo acompanhando a legenda deles, ou None (não mediu palavra nenhuma / desligado: vale a caixa única).
+    faixa_px = [y0, y1] da faixa da legenda (pixels); procura numa folga de meia faixa pra cima e pra baixo, e, se
+    leg_x veio medido, só dentro dele (texto do desenho ao lado não entra)."""
+    if os.environ.get("PARCEIRO_DELOGO_TEMPO", "1") == "0":
+        return None
+    alt = faixa_px[1] - faixa_px[0]
+    faixa = [max(0.0, (faixa_px[0] - 0.5 * alt) / H), min(1.0, (faixa_px[1] + 0.5 * alt) / H)]
+    am = _extensoes_no_tempo(video, W, H, faixa)
+    if leg_x:
+        am = [None if a is None or a[1] < leg_x[0] - 0.03 or a[0] > leg_x[1] + 0.03 else a for a in am]
+    com = sum(1 for a in am if a)
+    if com < 3:
+        return None
+    tr = _trechos_delogo(am, W, H)
+    if not tr:
+        return None
+    larg = sorted(t["w"] / W for t in tr)
+    logging.info(f"[parceiro] delogo no tempo: {len(tr)} trecho(s), legenda na tela em {com}/{len(am)} amostras, "
+                 f"largura mediana {larg[len(larg) // 2]:.0%} (máx. {larg[-1]:.0%})")
+    return _filtro_delogo(tr)
+
+
 MARCA_YS = (0.30, 0.24, 0.36, 0.18, 0.64)  # alturas possíveis da nossa @ (a 1ª é a de sempre)
 
 
@@ -509,9 +634,11 @@ def _y_marca(video, W, H, dur, evitar, alt):
     return int(f * H)
 
 
-def _palavras(m):
-    """Caixas [x0,y0,x1,y1] com forma de palavra (altura de letra, mais larga que alta) na máscara de letras."""
+def _palavras(m, h_ref=None):
+    """Caixas [x0,y0,x1,y1] com forma de palavra (altura de letra, mais larga que alta) na máscara de letras.
+    h_ref: altura do quadro INTEIRO quando m é só um recorte (a régua de "altura de letra" é do quadro, não do recorte)."""
     h, w = m.shape
+    h = h_ref or h
     j = cv2.morphologyEx(m, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_RECT, (7, 3)))
     _n, _lab, st, _c = cv2.connectedComponentsWithStats(j)
     out = []
@@ -848,7 +975,14 @@ def cobrir_canal(video, saida, handle, cob, titulo=None, fps_saida=30):
         x0 = max(2, int(leg_x[0] * W) - 6) if leg_x else int(W * 0.05)
         x1 = min(W - 3, int(leg_x[1] * W) + 6) if leg_x else int(W * 0.95)
         y0, y1 = max(2, leg_px[0] - 4), min(H - 3, leg_px[1] + 4)
-        if (y1 - y0) > DELOGO_MAX_H * H:
+        no_tempo = None
+        try:  # 13/11: caixa que acompanha cada legenda (largura/altura do trecho; sem legenda = sem delogo)
+            no_tempo = delogo_no_tempo(video, W, H, leg_px, leg_x)
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[parceiro] delogo no tempo falhou ({type(e).__name__}: {e}) — caixa única")
+        if no_tempo:
+            delogo = no_tempo
+        elif (y1 - y0) > DELOGO_MAX_H * H:
             # 30/10: faixa alta demais (visão folgada + linhas extras) = delogo de 35-50% da tela vira "vidro derretido"
             # o vídeo inteiro (betinha, gta-rp). Sem delogo nem borrão: a nossa legenda (cartão) entra em cima da deles.
             logging.warning(f"[parceiro] faixa da legenda deles alta demais ({(y1 - y0) / H:.0%} da tela) — sem delogo")

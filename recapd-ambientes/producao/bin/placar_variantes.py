@@ -149,6 +149,46 @@ def carregar(idade_min):
     for x in linhas:
         x["elegivel"] = bool(x["medido"] and float(x["V"]) >= ELEGIVEL)
         x["log_rel"] = math.log(max(float(x["V"]), 1.0) / mediana[x["canal"]]) if x["medido"] else None
+    return ajustar_por_periodo(linhas)
+
+
+# ───────── 13/11: views SEM o efeito do horário (pedido do chat do D: em RECADOS_ENTRE_AGENTES.md) ─────────
+# Nos Shorts de parceiro o 1º post das 21-23 h rende ~100x o do resto do dia nos canais fracos. "≥ 500 views" e
+# "views ÷ mediana do canal" medem em que horário o vídeo caiu, não o braço do teste: braço que caiu mais vezes à
+# noite parecia vencedor. Aqui cada vídeo é comparado só com os do MESMO canal no MESMO período (noite x resto), a
+# mesma conta do video-fila\inteligencia_ajustada.linhas_ajustadas:
+#     rz = (views + 1) ÷ (mediana do grupo + 1), entre 1/8 e 8; grupo com < 4 medidos = mediana do canal inteiro
+# e o que o placar compara entre os braços é "ficou ACIMA da mediana do próprio grupo" (rz > 1).
+# PLACAR_AJUSTADO=0 volta a decidir pelo ≥ 500 (conta antiga).
+NOITE = (21, 22, 23)
+MIN_GRUPO = 4
+AJUSTADO = __import__("os").environ.get("PLACAR_AJUSTADO", "1") != "0"
+
+
+def _hora_br(pub):
+    d = _dt(pub) if isinstance(pub, str) else pub
+    return d.astimezone(BR).hour if d else None
+
+
+def ajustar_por_periodo(linhas):
+    """Põe em cada linha MEDIDA: noite (bool), rz (razão ajustada) e acima (rz > 1). Linha sem medida ou sem hora de
+    publicação fica com rz=None (não entra na conta ajustada). Só lê "canal", "pub", "V" e "medido"."""
+    grupo, canal = defaultdict(list), defaultdict(list)
+    for x in linhas:
+        x["noite"], x["rz"], x["acima"] = None, None, None
+        h = _hora_br(x.get("pub"))
+        if not x.get("medido") or x.get("V") is None or h is None:
+            continue
+        x["noite"] = h in NOITE
+        grupo[(x["canal"], x["noite"])].append(float(x["V"]))
+        canal[x["canal"]].append(float(x["V"]))
+    for x in linhas:
+        if x["noite"] is None:
+            continue
+        g = grupo[(x["canal"], x["noite"])]
+        base = statistics.median(g) if len(g) >= MIN_GRUPO else statistics.median(canal[x["canal"]])
+        x["rz"] = round(max(0.125, min(8.0, (float(x["V"]) + 1) / (base + 1))), 4)
+        x["acima"] = x["rz"] > 1.0
     return linhas
 
 
@@ -180,6 +220,19 @@ def _resumo(xs):
         pct_media=round(statistics.mean(pcts), 1) if pcts else None,
         pct_ge65=round(sum(p >= 65 for p in pcts) / len(pcts), 3) if pcts else None,
         log_views_rel=round(statistics.mean(rel), 3) if rel else None,
+        # ajustado pelo horário (mesmo canal + mesmo período); conta TODOS os medidos, não só os elegíveis: de dia o
+        # canal fraco quase não tem vídeo com 20 views e o corte dos elegíveis deixava só os posts da noite
+        **_resumo_ajustado(xs),
+    )
+
+
+def _resumo_ajustado(xs):
+    A = [x for x in xs if x.get("rz") is not None]
+    n = len(A)
+    return dict(
+        n_ajustados=n, n_noite=sum(bool(x["noite"]) for x in A),
+        acima_grupo=round(sum(bool(x["acima"]) for x in A) / n, 3) if n else None,
+        log_rz=round(statistics.mean(math.log(x["rz"]) for x in A), 3) if n else None,
     )
 
 
@@ -211,8 +264,23 @@ def placar(linhas, aj):
         p65 = _p_melhor(kn65, ref)
         n_ok = all(por_braco.get(b, {}).get("n_elegiveis", 0) >= MIN_TOTAL for b in sorteados) if len(sorteados) >= 2 \
             else False
-        vencedor = [b for b in sorteados if b != ref and max(p500.get(b, 0), p65.get(b, 0)) >= P_DECIDE]
-        perdedor = [b for b in sorteados if b != ref and min(p500.get(b, 1), p65.get(b, 1)) <= 1 - P_DECIDE]
+        # 13/11: views ajustadas pelo horário — "acima da mediana do próprio grupo" por braço, com TODOS os medidos
+        kn_aj = {b: (sum(bool(x["acima"]) for x in xs if x["bracos"][nome] == b and x.get("rz") is not None),
+                     sum(1 for x in xs if x["bracos"][nome] == b and x.get("rz") is not None)) for b in bracos}
+        p_aj = _p_melhor(kn_aj, ref)
+        canal_aj = defaultdict(lambda: defaultdict(int))
+        for x in xs:
+            if x.get("rz") is not None:
+                canal_aj[x["canal"]][x["bracos"][nome]] += 1
+        if AJUSTADO:  # decide pela conta ajustada (e pela retenção, que não depende do horário)
+            p_views = p_aj
+            n_ok = len(sorteados) >= 2 and all(kn_aj.get(b, (0, 0))[1] >= MIN_TOTAL for b in sorteados)
+            canais_ok = sorted(c for c, d in canal_aj.items() if len(sorteados) >= 2
+                               and all(d.get(b, 0) >= MIN_CANAL for b in sorteados))
+        else:
+            p_views = p500
+        vencedor = [b for b in sorteados if b != ref and max(p_views.get(b, 0), p65.get(b, 0)) >= P_DECIDE]
+        perdedor = [b for b in sorteados if b != ref and min(p_views.get(b, 1), p65.get(b, 1)) <= 1 - P_DECIDE]
         if not ops:
             estado = f"sem teste agora (valor fixo {valor!r})"
         elif nome == "horario_fraco":
@@ -228,6 +296,8 @@ def placar(linhas, aj):
             por_braco=por_braco, elegiveis_por_canal={c: dict(d) for c, d in sorted(canal.items())},
             canais_com_6_por_braco=canais_ok, n12_por_braco=n_ok,
             p_melhor_que_ref_500=p500, p_melhor_que_ref_pct65=p65,
+            p_melhor_que_ref_ajustado=p_aj, decide_por=("ajustado+pct65" if AJUSTADO else "500+pct65"),
+            medidos_por_canal_ajustado={c: dict(d) for c, d in sorted(canal_aj.items())},
             sugestao=(f"{vencedor} melhor que {ref}" if vencedor else "") + (f"; {perdedor} pior que {ref}"
                                                                            if perdedor else ""),
             nota=NOTAS.get(nome, ""),
@@ -251,13 +321,18 @@ def relatorio_md(res, linhas, gerado):
         if r["nota"]:
             L.append(f"> {r['nota']}")
         L.append("")
-        L.append("| braço | vídeos | medidos | elegíveis | % eleg. | ≥500 | ≥1.500 | pct_media | pct≥65 | log(v/med) |")
-        L.append("|---|---|---|---|---|---|---|---|---|---|")
+        L.append("| braço | vídeos | medidos | elegíveis | % eleg. | ≥500 | ≥1.500 | pct_media | pct≥65 | log(v/med) | "
+                 "à noite | acima do grupo | log(rz) |")
+        L.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
         f = lambda v, pc=False: "—" if v is None else (f"{v:.0%}" if pc else f"{v}")
         for b, s in r["por_braco"].items():
             L.append(f"| {b} | {s['n_total']} | {s['n_medidos']} | {s['n_elegiveis']} | {f(s['pct_elegivel'], 1)} | "
                      f"{f(s['chega_500'], 1)} | {f(s['chega_1500'], 1)} | {f(s['pct_media'])} | {f(s['pct_ge65'], 1)} | "
-                     f"{f(s['log_views_rel'])} |")
+                     f"{f(s['log_views_rel'])} | {s.get('n_noite', 0)}/{s.get('n_ajustados', 0)} | "
+                     f"{f(s.get('acima_grupo'), 1)} | {f(s.get('log_rz'))} |")
+        if r.get("p_melhor_que_ref_ajustado"):
+            L.append(f"\nP(melhor que {r['referencia']}) AJUSTADO pelo horário (acima da mediana do mesmo canal e "
+                     f"período): {r['p_melhor_que_ref_ajustado']} — decide por: {r.get('decide_por')}")
         if r["p_melhor_que_ref_500"] or r["p_melhor_que_ref_pct65"]:
             L.append(f"\nP(melhor que {r['referencia']}): ≥500 {r['p_melhor_que_ref_500']} | pct≥65 "
                      f"{r['p_melhor_que_ref_pct65']}")

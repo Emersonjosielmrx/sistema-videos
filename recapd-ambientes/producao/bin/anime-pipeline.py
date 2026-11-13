@@ -1225,6 +1225,15 @@ def main():
         if r.returncode != 0 or not Path(args.script).exists():
             logging.error("[preparo] roteiro não ficou pronto — vídeo não sai")
             sys.exit(1)
+        # LONGOS_MELHORIAS 10/11 (b): o trabalhador pegou este pedido sem saber o tamanho do roteiro (chute de 7 h).
+        # Agora que o roteiro existe, confere de novo: não cabe no resto da sessão = sai JÁ (código 75) e o trabalhador
+        # guarda o roteiro e solta o pedido, em vez de renderizar até o Kaggle cortar.
+        import cabe_na_sessao
+        _cabe_ok, _cabe_txt = cabe_na_sessao.conferir(args.script)
+        logging.info(f"[preparo] {_cabe_txt}")
+        if not _cabe_ok:
+            logging.error("[preparo] o longo não cabe no que resta da sessão — devolvo pra fila com o roteiro pronto")
+            sys.exit(cabe_na_sessao.CODIGO_NAO_CABE)
 
     # Legenda QUEIMADA da fonte (dona 25/10: "se não tem legenda não tinha por que ter borrado a tela"): detecta UMA vez
     # por source (anime_legenda_fonte: ~100 quadros do vídeo inteiro) e os formatos herdam via env. Tem legenda = borra

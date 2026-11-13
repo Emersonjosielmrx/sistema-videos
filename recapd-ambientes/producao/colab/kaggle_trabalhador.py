@@ -367,6 +367,11 @@ def fazer(pid, gpu=None):
     # 04/11 (dois longos por sessão, loop_duplo): só 1 longo por vez na parte de CPU (anime_segments._vez_da_cpu); a
     # marca _fase_cpu avisa que este entrou nela; cada longo na sua T4 (o NVENC e a voz clonada não disputam)
     amb["TRAB_CPU_LOCK"] = str(BASE / "_cpu.lock")
+    # LONGOS_MELHORIAS 10/11 (b): prazo da sessão pro anime-pipeline conferir de novo depois de gerar o roteiro
+    # (bin\cabe_na_sessao.py). Sem limite de sessão (VPS) não passa nada = sempre cabe.
+    if LIMITE_S != float("inf"):
+        amb["TRAB_PRAZO_EPOCH"] = str(INICIO + SESSAO_MAX_S)
+        amb["TRAB_S_POR_FRASE"] = str(S_POR_FRASE)
     amb["TRAB_FASE_CPU_ARQ"] = str(local / "_fase_cpu")
     if gpu is not None:
         amb["CUDA_VISIBLE_DEVICES"] = str(gpu)
@@ -441,6 +446,21 @@ def fazer(pid, gpu=None):
     seg = round(time.time() - t0)
     final = local / "final_anime_deitado.mp4"
     rc("copyto", str(log), f"{FILA}/{pid}/pipeline.log")
+    if rcod == 75:  # LONGOS_MELHORIAS 10/11 (b): roteiro feito aqui e o longo NÃO cabe no resto da sessão
+        # o roteiro (e a transcrição) voltam pra fila: a próxima sessão já começa no render e o _cabe dela passa a
+        # estimar pelo roteiro de verdade, não pelo chute de 7 h. Não é erro do vídeo: sem erro.json.
+        for extra in ("roteiro.txt", "roteiro_tempos.json", "legenda_tempos.json"):
+            if (local / extra).exists():
+                try:
+                    rc("copyto", str(local / extra), f"{FILA}/{pid}/{extra}")
+                except RuntimeError as e:
+                    print(f"[{_agora()}] {pid}: {extra} não subiu ({str(e)[-100:]})", flush=True)
+        _soltar(pid)
+        _DEIXADOS.add(pid)
+        _TRAB["nao_coube"] = True
+        print(f"[{_agora()}] {pid}: roteiro pronto em {seg / 60:.0f} min, mas o longo não cabe no que resta da "
+              "sessão — roteiro guardado na fila, pedido solto pra outra sessão", flush=True)
+        return
     try:  # 04/11: uso de CPU/GPU minuto a minuto durante ESTE longo (medir o ganho dos 2 longos juntos)
         linhas = [l for l in USO_LOG.read_text(encoding="utf-8").splitlines() if l and float(l.split()[0]) >= t0]
         (local / "uso.log").write_text("\n".join(linhas) + "\n", encoding="utf-8")

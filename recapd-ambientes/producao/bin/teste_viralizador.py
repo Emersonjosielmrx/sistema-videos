@@ -73,6 +73,14 @@ STRIKE = [
     ("O estupro chocou a vila.", "estupro", None),
     ("Ela gemeu, gemendo alto de prazer.", "gemendo", None),
     ("Os peitos dela e a bunda chamavam atenção.", "bunda", "bumbum"),
+    # conjugação (achado do chat do D: em 13/11 + infinitivo)
+    ("O vilão matou e estuprou a vila.", "estupr", "atacou a vila"),
+    ("Eles estupraram e saquearam.", "estupr", "atacaram"),
+    ("Ele tentou estuprar a princesa.", "estupr", "tentou atacar a princesa"),
+    ("Vou te estuprar, disse o monstro.", "estupr", "te atacar"),
+    ("Ela foi torturada por dias, com sangue jorrando.", "torturada", "foi maltratada"),
+    ("Ele cometeu suicídio naquela noite.", "suicídio", "tirou a própria vida"),
+    ("O suicídio do pai mudou tudo.", "suicídio", "O fim trágico do pai"),
 ]
 
 
