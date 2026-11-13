@@ -1931,3 +1931,17 @@ SAPISID") — o envio pelo notebook é mais lento (HistoriasEmFrames ficou 2 h n
    1 min: temperatura, carga, RAM, bateria) pra ter prova na próxima. `disparar_sti.py`: Short sem processo lá e log
    parado > 6 min = máquina caiu -> libera na hora (esperava 100 min), devolve o vídeo e não conta falha.
 Medido hoje: Shorts entregues PC2 43, PC3 10, STI 3 (até 17 h).
+
+## 13/11/2026 19:40 — manutenção: pilha única de Shorts preparados (passo 1 do "sistema único")
+Dona: "o sistema tem de se comportar como um só; todos sempre no máximo". Medido: PC2 43 Shorts, PC3 10, STI 3 — o PC3
+e o STI escolhiam e baixavam a fonte NA HORA do disparo (4 a 50 min com a máquina parada); só o PC2 tinha 1 preparado.
+- `ocioso.py`: `PILHA_ALVO` (5) Shorts já escolhidos e baixados em `estado\pc2_prontos`; `pegar_pronto(maquina)` tira o
+  mais antigo (rename atômico: 2 máquinas nunca pegam o mesmo) e `devolver_pronto` devolve se o envio falhar;
+  `_pilha_por_canal` entra na conta da fila (a pilha não vai toda pro mesmo canal). PC2, PC3
+  (`disparar_parceiro_pc3`) e STI (`disparar_sti.disparar`) pegam da mesma pilha; pilha vazia = caminho antigo.
+- `alimentar_pc2.py`: prepara em sequência até encher a pilha (até 12 min por rodada). Não empilha com < 2 GB livres.
+- Voltar: PILHA_ALVO=1. Testado com itens falsos (pegar/devolver/contar). Falta ver nas rodadas reais.
+- Conferido em ENVIO real o conserto do "sem login": desde 17:50, 0 "sem SAPISID" (eram 66-83 por dia); Assist-IA e
+  Esporte Noturno subiram por HTTP sem navegador.
+- reagendar_nobre: Curiosidades, Empresário, Clínica, Imóvel e Vendas usam contas Google que são contas VIVAS do
+  Kaggle — ficam pulados de propósito (regra do banimento), não é defeito.
