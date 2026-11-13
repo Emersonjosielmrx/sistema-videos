@@ -1,0 +1,42 @@
+{
+ "modelo": "argon-gemini",
+ "segundos": 306,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Proiba sobreposição de múltiplos títulos no topo e realize revisão estrita de ortografia para eliminar erros de digitação.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "Nos Shorts sem-obra-c853c4 (q16) e sem-obra-110e14 (q14), tarjas centrais cobrem rostos sem legenda da fonte subjacente. Em sem-obra-8a49d5 (q01), ocorre sobreposição direta de dois títulos no topo, e em sem-obra-110e14 (q01), registra-se erro de digitação no hook.",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Proiba sobreposição de múltiplos títulos no topo e realize revisão estrita de ortografia para eliminar erros de digitação.",
+    "porque": "Evita colisões de texto e erros crassos recorrentes em sem-obra-8a49d5 e sem-obra-110e14."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Restringir aplicação de tarja central à existência comprovada de hardsub",
+    "tipo": "CERTEZA",
+    "prova": "O júri apontou tarjas centrais cobrindo rostos sem legenda da fonte embaixo em sem-obra-c853c4 (q16) e sem-obra-110e14 (q14).",
+    "onde": "módulo de processamento de tarjas / hardsub",
+    "como_testar": "Garantir que a tarja central só seja renderizada se o log de visão confirmar legenda queimada da fonte no quadro."
+   }
+  ],
+  "mural": [
+   "Sempre verificar hardsub antes de posicionar tarjas centrais para evitar obstrução de rostos e ações."
+  ]
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "modelo": "agy/gemini-3.8-flash-high",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "versao": "so_texto",
+ "quando": "2026-10-29T18:46:19",
+ "segundos": 279,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:46:19",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "agy/gemini-3.8-flash-high",
+   "decisor": "agy/gemini-3.8-flash-high"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "A variante 'dono_tres' mantém o apresentador no mesmo plano médio por mais de 26 segundos contínuos (cenas 0 a 3) sem nenhuma demonstração prática ou tela do produto Hermes Call.",
+    "prova": "formato dono_tres / juri_problemas movimento cena 1 e diretor cena 2 / historico_notas",
+    "sugestao": "Sugerir teste de reduzir o peso ou desligar a variante 'dono_tres' em pesos_variantes ou variantes_desligadas, priorizando formatos que alternem o apresentador com telas do produto ou simulações.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Headroom estrangulado na Cena 1: a faixa fixa verde superior com a pílula de etapa ('1 O problema') encosta diretamente no topo da cabeça do apresentador.",
+    "prova": "juri_problemas diretor cena 1",
+    "sugestao": "Ajustar o enquadramento abrindo respiro acima do topo da cabeça (cabelo) ou reduzindo ligeiramente a escala do apresentador para evitar contato com a pílula gráfica.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho inicial na Cena 0 com ritmo considerado lento na leitura da caixinha de pergunta, sem quebra de padrão ou elemento visual imediato da dor para retenção.",
+    "prova": "juri_problemas diretor cena 0",
+    "sugestao": "Sugerir teste de inserção de elemento visual de impacto (ex.: print de leads parados) ou corte dinâmico nos primeiros 2 segundos para testar a retenção inicial.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "Reduzir a frequência da variante dono_tres para priorizar formatos que alternem o apresentador com telas e demonstrações do produto, melhorando o ritmo e a retenção.",
+    "prova": "formato dono_tres / juri_problemas movimento cena 1 e diretor cena 2 / historico_notas"
+   }
+  ],
+  "aprovadas": 1
+ }
+}

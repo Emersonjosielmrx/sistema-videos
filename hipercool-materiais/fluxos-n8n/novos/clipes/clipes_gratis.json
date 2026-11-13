@@ -1,0 +1,1056 @@
+{
+ "name": "🎥 Clipes de vídeo IA grátis sem chave (LTX-Video no Hugging Face) — estilo Veo + ou - ok",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🎥 Clipes de vídeo por IA (grátis)\nAbra **/webhook/gratis-clipe**. Texto → vídeo ou foto → vídeo, 2 a 5 s.\n\nMotor: **LTX-Video distilled** (Space público do Hugging Face, sem chave). Qualidade abaixo do Veo; a cota grátis por IP acaba depois de alguns clipes (aí responde \"cota acabou, tente mais tarde\").\n\nO pedido responde **na hora** com um código e a página consulta **/webhook/gratis-clipe-status?id=...** até ficar pronto (conexão longa o navegador derrubava). A espera longa fica nos nós HTTP (o Code do n8n para em 60 s). O MP4 fica no Redis por 7 dias.",
+    "height": 320,
+    "width": 560,
+    "color": 4
+   },
+   "id": "3cd6a055-586c-535d-bb4a-d9e378d43466",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -40,
+    -420
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-clipe",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "af92d64d-26f7-5b7f-971f-43afa0435eb8",
+   "name": "🔔 Página dos clipes (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "7aca24ca-8261-59f8-a9ee-d4502e605db1"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Página do gerador de clipes de vídeo por IA (LTX-Video no Hugging Face).\n// ── Moldura das páginas (mesmo visual em todos os fluxos grátis) ──\nfunction pagina(titulo, corpo, script) {\n  const css = `\n:root{--fundo:#f6f5f2;--cartao:#fff;--texto:#1d1d1b;--suave:#6b6b66;--linha:#e3e1db;--acento:#0f766e;--acento2:#115e59;--erro:#b42318;--ok:#067647}\n@media (prefers-color-scheme:dark){:root{--fundo:#121412;--cartao:#1b1e1c;--texto:#ecebe7;--suave:#a3a39d;--linha:#2c302d;--acento:#2dd4bf;--acento2:#5eead4;--erro:#f97066;--ok:#47cd89}}\n*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif}\nmain{max-width:760px;margin:0 auto;padding:20px 16px 48px}h1{font-size:1.45rem;margin:.2em 0 .1em}h2{font-size:1.1rem;margin:1.2em 0 .5em}\n.sub{color:var(--suave);margin:0 0 18px}.cartao{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:12px 0}\nlabel{display:block;font-weight:600;margin:12px 0 6px}textarea,input,select{width:100%;padding:11px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);color:var(--texto);font:inherit}\ntextarea{min-height:120px;resize:vertical}.linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}\nbutton,.botao{display:inline-block;background:var(--acento);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 1rem system-ui,sans-serif;cursor:pointer;text-decoration:none;margin-top:14px}\n@media (prefers-color-scheme:dark){button,.botao{color:#04211e}}\nbutton[disabled]{opacity:.55;cursor:wait}.botao.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}\n.aviso{color:var(--suave);font-size:.9rem}.erro{color:var(--erro);font-weight:600}.ok{color:var(--ok);font-weight:600}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.grade img,.grade video{width:100%;border-radius:10px;border:1px solid var(--linha);background:#000}\nvideo,audio{width:100%;margin-top:10px;border-radius:10px}pre{white-space:pre-wrap;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:12px;font-size:.9rem}\n.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0}.barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .6s}\n.selo{display:inline-block;font-size:.78rem;border:1px solid var(--linha);border-radius:99px;padding:2px 9px;color:var(--suave);margin:2px 4px 2px 0}\nfooter{color:var(--suave);font-size:.82rem;margin-top:28px}`;\n  return '<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n    '<meta name=\"robots\" content=\"noindex\"><title>' + titulo + '</title><style>' + css + '</style></head><body><main>' + corpo +\n    '<footer>Feito com serviços grátis e sem chave (Hugging Face, Pollinations, Bing/Google Tradutor). Pode demorar ou falhar quando eles estão cheios.</footer>' +\n    '</main>' + (script ? '<script>' + script + '</script>' : '') + '</body></html>';\n}\nconst escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\nconst corpo = `\n<h1>🎥 Clipes de vídeo por IA, grátis</h1>\n<p class=\"sub\">Texto → vídeo ou foto → vídeo com o LTX-Video (Hugging Face), sem chave. Clipes de 2 a 5 s, qualidade\nabaixo do Veo. A cota grátis acaba depois de alguns clipes por dia.</p>\n<div class=\"cartao\">\n  <label for=\"prompt\">O que acontece na cena</label>\n  <textarea id=\"prompt\" maxlength=\"800\" placeholder=\"Ex.: drone sobrevoando uma casa com placas solares ao pôr do sol\">drone sobrevoando uma casa moderna com placas solares no telhado ao pôr do sol, cinematográfico</textarea>\n  <label for=\"foto\">Foto para animar (opcional)</label>\n  <input id=\"foto\" type=\"file\" accept=\"image/*\">\n  <div class=\"linha\">\n    <div><label for=\"formato\">Formato</label><select id=\"formato\"><option value=\"9:16\">Vertical 9:16</option>\n      <option value=\"16:9\">Deitado 16:9</option><option value=\"1:1\">Quadrado</option></select></div>\n    <div><label for=\"dur\">Duração</label><select id=\"dur\"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>\n    <div><label for=\"melhorar\">Melhorar o pedido com IA</label><select id=\"melhorar\"><option value=\"1\">Sim</option><option value=\"0\">Não</option></select></div>\n  </div>\n  <button id=\"ir\">Gerar clipe</button>\n  <p id=\"estado\" class=\"aviso\"></p>\n  <video id=\"video\" controls loop playsinline hidden></video>\n  <a id=\"baixar\" class=\"botao sec\" hidden download=\"clipe.mp4\">Baixar MP4</a>\n</div>\n<div class=\"cartao aviso\">Outros fluxos: <code>POST</code> aqui com <code>{\"prompt\":\"...\",\"formato\":\"9:16\",\"duracao\":3}</code>\n(ou <code>\"foto_b64\"</code> com a foto em base64) → <code>{\"id\":\"...\",\"status\":\"...\"}</code> na hora; consulte o\n<code>status</code> até vir <code>{\"etapa\":\"pronto\",\"url\":\"...\"}</code> (ou <code>\"erro\"</code>). O link vale 7 dias.</div>`;\nconst script = `\nconst $ = id => document.getElementById(id);\nfunction fotoReduzida(arq) {\n  return new Promise((ok, falha) => {\n    const img = new Image();\n    img.onload = () => {\n      const m = Math.min(1, 1024 / Math.max(img.width, img.height));\n      const c = document.createElement('canvas'); c.width = Math.round(img.width * m); c.height = Math.round(img.height * m);\n      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      ok(c.toDataURL('image/jpeg', 0.88));\n    };\n    img.onerror = () => falha(new Error('não consegui abrir a foto'));\n    img.src = URL.createObjectURL(arq);\n  });\n}\n// Plano B: a cota grátis do Hugging Face é por IP. Quando a do servidor acaba, o mesmo pedido sai daqui do navegador\n// (IP de quem está usando, cota própria). O Space libera chamadas desta página (CORS).\nconst HF = 'https://lightricks-ltx-video-distilled.hf.space/gradio_api';\nconst NEG = 'worst quality, inconsistent motion, blurry, jittery, distorted, watermark, text, subtitles';\nasync function peloNavegador(s, corpo) {\n  $('estado').dataset.extra = ' — a cota grátis do servidor acabou; gerando pelo seu navegador';\n  const [w, h] = { '9:16': [480, 832], '16:9': [832, 480], '1:1': [640, 640] }[corpo.formato] || [480, 832];\n  let rota = 'text_to_video', foto = null;\n  if (corpo.foto_b64) {\n    const fd = new FormData();\n    fd.append('files', await (await fetch(corpo.foto_b64)).blob(), 'foto.jpg');\n    const up = await (await fetch(HF + '/upload', { method: 'POST', body: fd })).json();\n    if (!Array.isArray(up) || !up[0]) throw new Error('não consegui mandar a foto ao Hugging Face');\n    foto = { path: up[0], orig_name: 'foto.jpg', meta: { _type: 'gradio.FileData' } };\n    rota = 'image_to_video';\n  }\n  const dados = [s.prompt || corpo.prompt, NEG, foto, null, h, w, foto ? 'image-to-video' : 'text-to-video', corpo.duracao, 9, 42, true, 1, true];\n  const ev = await (await fetch(HF + '/call/' + rota, { method: 'POST', headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ data: dados }) })).json();\n  if (!ev.event_id) throw new Error('o Hugging Face não aceitou o pedido agora; tente mais tarde');\n  const txt = await (await fetch(HF + '/call/' + rota + '/' + ev.event_id)).text();\n  const ultima = txt.split('\\\\n').filter(l => l.startsWith('data:')).pop() || '';\n  let url = null;\n  try { const d = JSON.parse(ultima.slice(5)); url = txt.includes('event: complete') && d[0] && d[0].video && d[0].video.url; } catch (e) {}\n  if (!url) throw new Error('a cota grátis do Hugging Face acabou (no servidor e neste aparelho); tente daqui a algumas horas');\n  return { url: URL.createObjectURL(await (await fetch(url)).blob()), prompt_usado: s.prompt_usado };\n}\n$('ir').onclick = async () => {\n  $('ir').disabled = true; $('video').hidden = true; $('baixar').hidden = true; $('estado').className = 'aviso';\n  $('estado').dataset.extra = '';\n  const t0 = Date.now();\n  const relogio = setInterval(() => { $('estado').textContent = 'Gerando o clipe... ' + Math.round((Date.now() - t0) / 1000) + ' s (de 15 s a 3 min)' + ($('estado').dataset.extra || ''); }, 1000);\n  try {\n    const arq = $('foto').files[0];\n    const corpo = { prompt: $('prompt').value.trim(), formato: $('formato').value, duracao: Number($('dur').value),\n      melhorar: $('melhorar').value === '1' };\n    if (arq) corpo.foto_b64 = await fotoReduzida(arq);\n    const r = await fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });\n    const p = await r.json();\n    if (!p.ok) throw new Error(p.erro || 'falhou');\n    // o pedido volta na hora com o código; aqui a página consulta o andamento até o clipe sair (uma consulta que falhar só repete)\n    let j = null, falhas = 0;\n    while (!j) {\n      await new Promise(ok => setTimeout(ok, 3000));\n      if (Date.now() - t0 > 12 * 60 * 1000) throw new Error('demorou demais; tente de novo mais tarde');\n      try {\n        const s = await (await fetch(location.pathname + '-status?id=' + encodeURIComponent(p.id), { cache: 'no-store' })).json();\n        falhas = 0;\n        if (s.etapa === 'pronto') j = s;\n        else if (s.etapa === 'erro' && !s.cota) throw Object.assign(new Error(s.erro || 'falhou'), { doFluxo: true });\n        else if (s.etapa === 'erro') j = await peloNavegador(s, corpo).catch(e => { throw Object.assign(e, { doFluxo: true }); });\n      } catch (e) {\n        if (e.doFluxo || ++falhas > 20) throw e;\n      }\n    }\n    $('video').src = j.url; $('video').hidden = false; $('video').play().catch(() => {});\n    $('baixar').href = j.url; $('baixar').hidden = false;\n    $('estado').className = 'ok'; $('estado').textContent = 'Pronto em ' + Math.round((Date.now() - t0) / 1000) + ' s' + (j.prompt_usado ? ' — pedido usado: ' + j.prompt_usado : '');\n  } catch (e) {\n    $('estado').className = 'erro';\n    $('estado').textContent = 'Não deu: ' + (e.message === 'Failed to fetch' ? 'a conexão caiu; confira a internet e tente de novo' : e.message);\n  }\n  clearInterval(relogio); $('ir').disabled = false;\n};`;\nreturn [{ json: { html: pagina('Clipes de vídeo grátis', corpo, script) } }];\n"
+   },
+   "id": "d45a7b14-3c86-5b3b-9c8d-3175bd54ef2e",
+   "name": "🧩 Monta a página",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "5d029cc5-c5e0-59c2-9709-46be0ca83d9c",
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-clipe",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "ce0a256b-5ca9-518d-b0e8-8b4d0b0fb54d",
+   "name": "🔔 Pedido de clipe (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    280
+   ],
+   "webhookId": "8b983586-43d3-56e1-92f2-aa45de3f9a0a"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere o pedido na hora (sem IA) para responder logo com o código; a geração continua depois da resposta.\nconst ent = $input.first().json;\nconst b = ent.body || {};\nconst h = ent.headers || {};\nconst base = (h['x-forwarded-proto'] || 'https') + '://' + (h['x-forwarded-host'] || h.host);\nconst prompt = String(b.prompt || '').replace(/\\s+/g, ' ').trim().slice(0, 800);\nconst temFoto = !!b.foto_b64;\nif (!prompt && !temFoto) return [{ json: { ok: false, erro: 'Descreva a cena ou mande uma foto.' } }];\nconst formato = ['9:16', '16:9', '1:1'].includes(b.formato) ? b.formato : '9:16';\nconst dur = Math.max(2, Math.min(5, Number(b.duracao) || 3));\nconst [w, hh] = { '9:16': [480, 832], '16:9': [832, 480], '1:1': [640, 640] }[formato];\nlet foto = null;\nif (temFoto) {\n  foto = Buffer.from(String(b.foto_b64).replace(/^data:[^,]+,/, ''), 'base64');\n  if (foto.length < 1000 || foto.length > 6e6) return [{ json: { ok: false, erro: 'A foto precisa ter entre 1 KB e 6 MB.' } }];\n}\nconst id = Date.now().toString(36) + require('crypto').randomBytes(3).toString('hex');\nconst item = { json: { ok: true, id, base, prompt, melhorar: b.melhorar !== false, tem_foto: temFoto, w, hh, dur,\n  status: base + '/webhook/gratis-clipe-status?id=' + id } };\nif (foto) item.binary = { data: await this.helpers.prepareBinaryData(foto, 'foto.jpg', 'image/jpeg') };\nreturn [item];\n"
+   },
+   "id": "5b874f26-90b0-58cf-8895-793d1d124624",
+   "name": "🧩 Confere o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "977b4642-12cf-5a7b-99b6-da1a8580d168",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "c5c50401-10b7-5c1c-b1f1-3f3a6dfc61dd",
+   "name": "🚦 Pedido ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    480,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 400
+    }
+   },
+   "id": "403316a0-6100-5e4c-841e-36a7198f6d11",
+   "name": "📤 Recusa o pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    520
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gclip:st:{{ $('🧩 Confere o pedido').first().json.id }}",
+    "value": "={{ JSON.stringify({ etapa: 'gerando' }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "c59cd108-2d4b-5711-af3a-0a217e7da74d",
+   "name": "💾 Andamento: gerando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    720,
+    280
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, id: $('🧩 Confere o pedido').first().json.id, status: $('🧩 Confere o pedido').first().json.status }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "12a57da8-2da1-5041-8390-73a6e6ccd334",
+   "name": "📤 Responde já com o código",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Melhora o texto da cena com IA grátis (depois da resposta à página). A foto segue como arquivo para o nó HTTP subir ao Space.\n// ── Texto por IA grátis e sem chave (Pollinations, modelo openai-fast) ──\n// Limite sem chave: 1 resposta a cada 30 s por IP. Quem chama em sequência precisa esperar (nó ⏳ de 31 s).\n// Sem chave o \"response_format\" dá 400: o JSON é pedido no texto e lido com lerJson (tolera ```json e texto em volta).\n// O modelo grátis \"pensa\" antes de responder: sem reasoning_effort low ele estoura o limite e devolve 400\n// (output_token_limit_exceeded); \"minimal\" não existe e \"medium\" também estoura.\nasync function perguntaIA(helpers, mensagens, emJson = false, tentativas = 1) {\n  let ultimo = '';\n  for (let t = 0; t < tentativas; t++) {\n    try {\n      const r = await helpers.httpRequest({ method: 'POST', url: 'https://text.pollinations.ai/openai', json: true, timeout: 50000,\n        // seed aleatória: sem ela o Pollinations devolve do cache a MESMA resposta para o mesmo pedido\n        body: { model: 'openai', messages: mensagens, reasoning_effort: 'low', max_tokens: 6000, seed: Math.floor(Math.random() * 1e9) } });\n      const txt = r && r.choices && r.choices[0] && r.choices[0].message && r.choices[0].message.content;\n      if (txt) return emJson ? lerJson(txt) : String(txt).trim();\n      ultimo = 'resposta vazia';\n    } catch (e) {\n      ultimo = String((e.response && e.response.body && JSON.stringify(e.response.body)) || e.message || e).slice(0, 200);\n    }\n  }\n  throw new Error('IA grátis (Pollinations) não respondeu: ' + ultimo);\n}\n\nfunction lerJson(txt) {\n  const s = String(txt).replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '').trim();\n  try { return JSON.parse(s); } catch (e) { /* tenta achar o bloco */ }\n  const i = s.indexOf('{'), j = s.lastIndexOf('}');\n  if (i >= 0 && j > i) return JSON.parse(s.slice(i, j + 1));\n  throw new Error('a IA não devolveu JSON');\n}\n\nconst c = $('🧩 Confere o pedido').first();\nlet prompt = c.json.prompt;\nlet usado = '';\nif (c.json.melhorar && prompt) {\n  try {\n    usado = await perguntaIA(this.helpers, [\n      { role: 'system', content: 'You write prompts for a text-to-video model (LTX-Video). Translate to English and ' +\n        'describe ONE continuous shot in max 50 words: subject, action/motion, camera movement, lighting, style. ' +\n        'No text, captions or logos. Answer only the prompt.' },\n      { role: 'user', content: prompt }]);\n    usado = usado.replace(/^[\"']|[\"']$/g, '').slice(0, 600);\n    if (usado.length > 10) prompt = usado; else usado = '';\n  } catch (e) { usado = ''; }\n}\nif (!prompt) prompt = 'smooth cinematic camera movement, subtle natural motion, high quality';\nconst item = { json: { ...c.json, prompt, prompt_usado: usado } };\nif (c.binary) item.binary = c.binary;\nreturn [item];\n"
+   },
+   "id": "6cec3311-0935-53df-a4ad-35737230106f",
+   "name": "🧩 Prepara o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "5f727ebd-e65d-50d7-8b3f-c88f56ab7ba2",
+       "leftValue": "={{ $json.tem_foto }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "fba32326-9a55-5e6a-bbf4-8f81810742b3",
+   "name": "🚦 Tem foto?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1440,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://lightricks-ltx-video-distilled.hf.space/gradio_api/upload",
+    "sendBody": true,
+    "contentType": "multipart-form-data",
+    "bodyParameters": {
+     "parameters": [
+      {
+       "parameterType": "formBinaryData",
+       "name": "files",
+       "inputDataFieldName": "data"
+      }
+     ]
+    },
+    "options": {
+     "timeout": 60000,
+     "response": {
+      "response": {
+       "responseFormat": "text",
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "a4dd3d1b-4e80-5d4a-80c3-594ce6b0abf8",
+   "name": "🌐 Sobe a foto",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1680,
+    200
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta a chamada do LTX-Video: texto → vídeo, ou foto → vídeo com o caminho da foto já enviada ao Space.\n// ── Spaces do Hugging Face pela API pública do Gradio (sem chave; cota grátis por IP) ──\n// Chamada curta (cabe nos 60 s do Code). Para espera longa, use dois nós HTTP: POST .../call/<rota> e\n// GET .../call/<rota>/<event_id> (texto), e depois gradioLe() num Code.\nasync function gradioChama(helpers, espaco, rota, dados, limite = 50000) {\n  const base = 'https://' + espaco + '.hf.space/gradio_api/call/' + rota;\n  const r = await helpers.httpRequest({ method: 'POST', url: base, body: { data: dados }, json: true, timeout: 20000 });\n  const ev = r && r.event_id;\n  if (!ev) throw new Error(espaco + ': sem event_id');\n  return gradioLe(String(await helpers.httpRequest({ url: base + '/' + ev, timeout: limite, json: false })), espaco);\n}\n\n// Lê a resposta (SSE) da 2ª chamada: devolve o JSON final ou dá erro com o motivo.\nfunction gradioLe(txt, espaco = 'Hugging Face') {\n  txt = String(txt || '');\n  if (!txt.includes('event: complete')) {\n    const m = /event: error\\s*\\ndata: (.*)/.exec(txt);\n    const motivo = m && m[1] !== 'null' ? m[1].slice(0, 200) : 'recusou (a cota grátis do Hugging Face acabou ou a fila está cheia; tente mais tarde)';\n    throw new Error(espaco + ': ' + motivo);\n  }\n  const linhas = txt.split('\\n').filter(l => l.startsWith('data:'));\n  return JSON.parse(linhas[linhas.length - 1].slice(5));\n}\n\nconst urlDe = d => { const m = /\"url\":\\s*\"([^\"]+)\"/.exec(JSON.stringify(d)); return m ? m[1] : null; };\n\n// Arquivos para o Space: o Gradio não aceita link de fora nem base64 nas entradas de arquivo, só o caminho de um\n// upload (POST .../gradio_api/upload, multipart). O upload tem que ser pelo nó HTTP do n8n (n8nlib.http_envia_arquivo):\n// o httpRequest do Code manda o binário como UTF-8 e estraga o arquivo (testado 30/10: 512 bytes viraram 768).\nconst arquivoGradio = (caminho, nome) => ({ path: caminho, orig_name: nome, meta: { _type: 'gradio.FileData' } });\nfunction caminhoDoUpload(txt) {\n  try { const l = JSON.parse(String(txt || '')); return Array.isArray(l) && l[0] ? l[0] : null; } catch (e) { return null; }\n}\n\nconst p = $('🧩 Prepara o pedido').first().json;\nconst ESPACO = 'lightricks-ltx-video-distilled';\nconst NEG = 'worst quality, inconsistent motion, blurry, jittery, distorted, watermark, text, subtitles';\nlet rota = 'text_to_video';\nlet dados = [p.prompt, NEG, null, null, p.hh, p.w, 'text-to-video', p.dur, 9, 42, true, 1, true];\nif (p.tem_foto) {\n  const caminho = caminhoDoUpload(($('🌐 Sobe a foto').first().json || {}).data);\n  if (!caminho) return [{ json: { ok: false, erro: 'Não consegui mandar a foto ao Hugging Face agora. Tente de novo.' } }];\n  rota = 'image_to_video';\n  dados = [p.prompt, NEG, arquivoGradio(caminho, 'foto.jpg'), null, p.hh, p.w, 'image-to-video', p.dur, 9, 42, true, 1, true];\n}\nreturn [{ json: { ok: true, rota, url_chamada: 'https://' + ESPACO + '.hf.space/gradio_api/call/' + rota, corpo: { data: dados } } }];\n"
+   },
+   "id": "e79b2899-c1ad-5069-b907-6cfc465967ba",
+   "name": "🧩 Monta o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1920,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "c2a18167-0062-55f8-acf3-d5ca3044dfc0",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "98c3de6f-268b-526a-8563-2058a10edb15",
+   "name": "🚦 Pedido montado?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2160,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.url_chamada }}",
+    "options": {
+     "timeout": 30000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($json.corpo) }}"
+   },
+   "id": "8fc12606-38e1-537a-bd39-bf81ab30fa27",
+   "name": "🌐 Pede o clipe",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2400,
+    260
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('🧩 Monta o pedido').first().json.url_chamada }}/{{ $json.event_id || 'sem-evento' }}",
+    "options": {
+     "timeout": 600000,
+     "response": {
+      "response": {
+       "responseFormat": "text",
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "5e8b088d-4a6c-5310-9c31-ee59fd38252d",
+   "name": "🌐 Espera o clipe (até 10 min)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2640,
+    260
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê a resposta do LTX-Video e baixa o MP4 (fica no Redis por 7 dias).\n// ── Spaces do Hugging Face pela API pública do Gradio (sem chave; cota grátis por IP) ──\n// Chamada curta (cabe nos 60 s do Code). Para espera longa, use dois nós HTTP: POST .../call/<rota> e\n// GET .../call/<rota>/<event_id> (texto), e depois gradioLe() num Code.\nasync function gradioChama(helpers, espaco, rota, dados, limite = 50000) {\n  const base = 'https://' + espaco + '.hf.space/gradio_api/call/' + rota;\n  const r = await helpers.httpRequest({ method: 'POST', url: base, body: { data: dados }, json: true, timeout: 20000 });\n  const ev = r && r.event_id;\n  if (!ev) throw new Error(espaco + ': sem event_id');\n  return gradioLe(String(await helpers.httpRequest({ url: base + '/' + ev, timeout: limite, json: false })), espaco);\n}\n\n// Lê a resposta (SSE) da 2ª chamada: devolve o JSON final ou dá erro com o motivo.\nfunction gradioLe(txt, espaco = 'Hugging Face') {\n  txt = String(txt || '');\n  if (!txt.includes('event: complete')) {\n    const m = /event: error\\s*\\ndata: (.*)/.exec(txt);\n    const motivo = m && m[1] !== 'null' ? m[1].slice(0, 200) : 'recusou (a cota grátis do Hugging Face acabou ou a fila está cheia; tente mais tarde)';\n    throw new Error(espaco + ': ' + motivo);\n  }\n  const linhas = txt.split('\\n').filter(l => l.startsWith('data:'));\n  return JSON.parse(linhas[linhas.length - 1].slice(5));\n}\n\nconst urlDe = d => { const m = /\"url\":\\s*\"([^\"]+)\"/.exec(JSON.stringify(d)); return m ? m[1] : null; };\n\n// Arquivos para o Space: o Gradio não aceita link de fora nem base64 nas entradas de arquivo, só o caminho de um\n// upload (POST .../gradio_api/upload, multipart). O upload tem que ser pelo nó HTTP do n8n (n8nlib.http_envia_arquivo):\n// o httpRequest do Code manda o binário como UTF-8 e estraga o arquivo (testado 30/10: 512 bytes viraram 768).\nconst arquivoGradio = (caminho, nome) => ({ path: caminho, orig_name: nome, meta: { _type: 'gradio.FileData' } });\nfunction caminhoDoUpload(txt) {\n  try { const l = JSON.parse(String(txt || '')); return Array.isArray(l) && l[0] ? l[0] : null; } catch (e) { return null; }\n}\n\nconst p = $('🧩 Prepara o pedido').first().json;\nconst ev = $('🌐 Pede o clipe').first().json;\nconst txt = String($input.first().json.data || '');\ntry {\n  if (!ev || !ev.event_id) throw new Error('o Hugging Face não aceitou o pedido agora (' + JSON.stringify(ev).slice(0, 120) + ')');\n  const d = gradioLe(txt, 'LTX-Video');\n  const url = urlDe(d);\n  if (!url) throw new Error('LTX-Video respondeu sem vídeo');\n  const mp4 = Buffer.from(await this.helpers.httpRequest({ url, encoding: 'arraybuffer', timeout: 50000 }));\n  if (mp4.length < 5000) throw new Error('vídeo vazio');\n  return [{ json: { ok: true, id: p.id, base: p.base, b64: mp4.toString('base64'), bytes: mp4.length,\n    prompt_usado: p.prompt_usado, rota: $('🧩 Monta o pedido').first().json.rota } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: String(e.message || e).slice(0, 300) } }];\n}\n"
+   },
+   "id": "e9db9822-e59b-5752-8b51-d262a6860869",
+   "name": "🧩 Lê o resultado",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2880,
+    260
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d462cf11-eb0e-5baf-9f01-d36435ed94d4",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "bc9b2230-4661-51f3-a15f-f8bffe847e20",
+   "name": "🚦 Saiu o vídeo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    3120,
+    260
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gclip:{{ $json.id }}.mp4",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "18b24d25-9a80-5c0f-be1d-6afe2fb174f6",
+   "name": "💾 Guarda o clipe (7 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3360,
+    180
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gclip:st:{{ $('🧩 Confere o pedido').first().json.id }}",
+    "value": "={{ JSON.stringify({ etapa: 'pronto', url: $('🧩 Lê o resultado').first().json.base + '/webhook/gratis-clipe-arquivo?id=' + $('🧩 Lê o resultado').first().json.id + '.mp4', bytes: $('🧩 Lê o resultado').first().json.bytes, prompt_usado: $('🧩 Lê o resultado').first().json.prompt_usado }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "4b367c2d-78ed-5ced-b6c0-9cd7e3ec3a50",
+   "name": "💾 Andamento: pronto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3600,
+    180
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gclip:st:{{ $('🧩 Confere o pedido').first().json.id }}",
+    "value": "={{ JSON.stringify({ etapa: 'erro', erro: $json.erro || 'falhou', cota: /cota/.test($json.erro || ''), prompt: $('🧩 Prepara o pedido').first().json.prompt, prompt_usado: $('🧩 Prepara o pedido').first().json.prompt_usado }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "d13b8aaf-dc12-5770-83a0-fdc6e1233bc2",
+   "name": "💾 Andamento: erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3360,
+    400
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "gratis-clipe-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "25e00480-d832-51a8-90d6-a35892b126ac",
+   "name": "🔔 Andamento do clipe (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    900
+   ],
+   "webhookId": "c68e4a70-e13c-59da-a123-e03154887989"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "st",
+    "key": "=gclip:st:{{ String($json.query.id || '').toLowerCase().replace(/[^a-z0-9]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "11fec2be-51ee-52cf-9627-b0c545d3aa60",
+   "name": "📖 Lê o andamento",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    900
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.st || JSON.stringify({ etapa: 'desconhecido' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "bf71ee48-bd95-5cd8-8aff-20634a7e7ce5",
+   "name": "📤 Responde o andamento",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    900
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-clipe-arquivo",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "08213947-72a8-531d-9d32-c14d8f9b449f",
+   "name": "🔔 Entrega o clipe (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    640
+   ],
+   "webhookId": "3913ed32-7ba9-5a75-a215-98202133ad21"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "dado",
+    "key": "=gclip:{{ String($json.query.id || '').toLowerCase().replace(/[^a-z0-9.-]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "26e37303-1636-54f1-b359-e1e4c42e55e1",
+   "name": "📖 Lê o clipe",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    640
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Devolve o arquivo guardado no Redis (texto base64) como arquivo de verdade, para o webhook entregar.\nconst id = String(($('🔔 Entrega o clipe (GET)').first().json.query || {}).id || '');\nconst b64 = String($input.first().json.dado || '');\nconst TIPOS = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', mp3: 'audio/mpeg',\n  mp4: 'video/mp4', webm: 'video/webm', json: 'application/json', txt: 'text/plain' };\nconst ext = (id.split('.').pop() || '').toLowerCase();\nif (!/^[a-z0-9-]{4,80}\\.[a-z0-9]{2,5}$/.test(id) || !b64 || !TIPOS[ext]) return [{ json: { existe: false } }];\nconst bin = await this.helpers.prepareBinaryData(Buffer.from(b64, 'base64'), id, TIPOS[ext]);\nreturn [{ json: { existe: true }, binary: { data: bin } }];\n"
+   },
+   "id": "c072af84-f7d6-5908-8a0a-9c06737b9eab",
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    640
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "f026d6d2-8c93-5463-b5b3-3938bcb62c2b",
+       "leftValue": "={{ $json.existe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "651fa2c9-0a3c-525f-86a5-67e86bfd5053",
+   "name": "🚦 O clipe existe?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    720,
+    640
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=604800"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       },
+       {
+        "name": "Access-Control-Expose-Headers",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "aec2a16c-3a90-54e9-b53b-3fd184fa8810",
+   "name": "📤 Entrega o clipe",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    560
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "Clipe não encontrado (os links valem 7 dias).",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 404
+    }
+   },
+   "id": "562483a7-aaaf-59bc-9dd4-9228146f76ee",
+   "name": "📤 Clipe não encontrado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    740
+   ]
+  }
+ ],
+ "connections": {
+  "🔔 Página dos clipes (GET)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta a página": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido de clipe (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o pedido": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pedido ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pedido ok?": {
+   "main": [
+    [
+     {
+      "node": "💾 Andamento: gerando",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Andamento: gerando": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde já com o código",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde já com o código": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara o pedido": {
+   "main": [
+    [
+     {
+      "node": "🚦 Tem foto?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Andamento do clipe (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o andamento": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Tem foto?": {
+   "main": [
+    [
+     {
+      "node": "🌐 Sobe a foto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Monta o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Sobe a foto": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta o pedido": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pedido montado?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pedido montado?": {
+   "main": [
+    [
+     {
+      "node": "🌐 Pede o clipe",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Andamento: erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Pede o clipe": {
+   "main": [
+    [
+     {
+      "node": "🌐 Espera o clipe (até 10 min)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Espera o clipe (até 10 min)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê o resultado": {
+   "main": [
+    [
+     {
+      "node": "🚦 Saiu o vídeo?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Saiu o vídeo?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o clipe (7 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Andamento: erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o clipe (7 dias)": {
+   "main": [
+    [
+     {
+      "node": "💾 Andamento: pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Entrega o clipe (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o clipe",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o clipe": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "🚦 O clipe existe?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 O clipe existe?": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o clipe",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Clipe não encontrado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

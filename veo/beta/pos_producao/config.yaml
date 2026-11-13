@@ -1,0 +1,25 @@
+video_src: D:/veo/beta/videos
+video_out: D:/veo/beta/videos_pos
+ffmpeg: D:\hipercool-materiais\bin\ffmpeg.exe
+# PIPELINE LIMPO (16/10/2026, item AB-03 de docs\PLANO_MELHORIAS_VEO.md):
+# 1. loudnorm    -> normaliza audio EBU R128 (resolve veos sem audio)
+# 2. crop_9_16   -> 1080x1920
+# 3. legendas    -> legendas queimadas estilo Shorts (PIL+stroke, detect shout/whisper)
+#
+# PROPAGANDA E MARCA SAIRAM DAQUI. Por que:
+#   - plugins.propaganda_inteligente punha no fim um slide de produto com o numero
+#     de WhatsApp; plugins.branding_watermark punha a marca "@InovareStories" no
+#     canto e um cartao final "Siga @...". Em 04/09/2026 o YouTube suspendeu 22
+#     canais por spam/praticas enganosas e esse slide e esse cartao estao entre as
+#     causas apontadas (D:\postador-de-videos\SPAM_BANIMENTO_2026-09-04.md e
+#     LEIA.txt; D:\postador-de-videos\bin\limpar_veo.py existe so para desfazer isso).
+#   - O @ do canal de destino e gravado na HORA DE POSTAR pela rede do manhwa-react
+#     (mr\rede.py::rebrand), entao o video nao deve nascer com marca nenhuma.
+# Quem quiser a variante COM propaganda (so TikTok/Instagram, nunca YouTube) usa
+# pos_producao\worker_noite.py, que monta o COMPLETO sob demanda.
+pipeline:
+- plugins.ffmpeg_loudnorm
+- plugins.crop_9_16
+- plugins.legendas
+max_videos_per_run: 3
+skip_if_output_exists: true

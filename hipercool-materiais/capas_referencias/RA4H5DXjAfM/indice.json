@@ -1,0 +1,203 @@
+{
+ "video": "D:\\hipercool-materiais\\tmp\\banco_video\\video.mp4",
+ "passo_s": 4.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "Leonora",
+   "principal": true,
+   "aparicoes": 22,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1284.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 576.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1836.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2492.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 2468.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 2452.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 576.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1836.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2492.0
+    }
+   ],
+   "papel": "Arcebispa do Santo País Digress que convoca e treina os heróis",
+   "visual": "Long grayish-ash blonde hair tied partially back with a red ribbon, green eyes, wearing a red cloak over a white and dark red dress with a high collar and yellow brooch",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "Kenzaki Rin",
+   "principal": false,
+   "aparicoes": 15,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2612.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 2612.0
+    }
+   ],
+   "papel": "estudante e candidata a heroína",
+   "visual": "dark brown hair in a ponytail, purple eyes, no accessories",
+   "adulta": false,
+   "mulher": true
+  },
+  {
+   "personagem": "p03",
+   "nome": "Leonora",
+   "principal": false,
+   "aparicoes": 7,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2528.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2204.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 584.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1012.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 2240.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 352.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 584.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1012.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2240.0
+    }
+   ],
+   "papel": "arcebispa do Santo País Digress que invocou os estudantes",
+   "visual": "long white hair, pale skin, beauty mark/mole under her left eye, wearing a white priestess/archbishop headdress and a white dress/robe",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p04",
+   "nome": "Kenzaki Rin",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2080.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2308.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2616.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2548.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 1564.0
+    }
+   ],
+   "papel": "Colega de classe de Kai convocada como heroína com habilidade de controle total",
+   "visual": "Pink hair, dark blue/purple eyes, wearing black outfit with red accents, ear piercings",
+   "adulta": false,
+   "mulher": true,
+   "repetida": "p02"
+  },
+  {
+   "personagem": "p05",
+   "nome": "Nagasi Reina",
+   "principal": false,
+   "aparicoes": 3,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 432.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1724.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 432.0
+    }
+   ],
+   "papel": "Colega de classe de Kai",
+   "visual": "Short brown hair, blue eyes, wearing a dark blue school uniform with a tie",
+   "adulta": false,
+   "mulher": true
+  },
+  {
+   "personagem": "p06",
+   "nome": "Kenzaki Rin / Kanzaki",
+   "principal": false,
+   "aparicoes": 3,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2200.0
+    }
+   ],
+   "papel": "Student with control/command powers who partners with Kai",
+   "visual": "dark hair, determined expression, school uniform",
+   "adulta": false,
+   "mulher": true,
+   "repetida": "p02"
+  }
+ ]
+}

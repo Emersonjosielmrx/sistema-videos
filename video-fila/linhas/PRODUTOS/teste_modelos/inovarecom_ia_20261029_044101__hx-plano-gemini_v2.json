@@ -1,0 +1,57 @@
+{
+ "modelo": "hx-plano-gemini",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T18:53:26",
+ "segundos": 717,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:53:26",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "hx-plano-gemini",
+   "decisor": "hx-plano-gemini"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Monotonia visual por repetição da variante dono_tres: o apresentador domina todos os 3 blocos narrativos (mais de 26 segundos) na mesma tomada frontal estática, sem inserção de telas de demonstração do produto ou simulação de uso do WhatsApp.",
+    "prova": "quadros 1 a 11 / formato dono_tres no dados.json / histórico com 3 vídeos sofrendo com notas baixas de movimento entre 4.0 e 5.0 (inovarecom_ia_20261028_153713, disparoemmassa_ia_20261029_031327 e inovarecom_ia_20261029_044101)",
+    "sugestao": "Reduzir o peso da variante dono_tres em pesos_variantes ou desativá-la em variantes_desligadas, priorizando formatos que alternem o apresentador com b-rolls e telas do produto (ex.: dono_abre_fecha_veo_meio).",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Sobreposição de elemento gráfico no topo da cabeça do apresentador: a faixa verde superior e a pílula de etapa ('1 O problema') tocam e cobrem o cabelo do apresentador, estrangulando o enquadramento.",
+    "prova": "quadros 3, 4 e 5 / júri diretor cena 1",
+    "sugestao": "Aumentar a folga superior ajustando folga_dono ou reduzir a escala do apresentador em cerca de 10% para que os elementos gráficos fiquem acima do cabelo com respiro.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho inicial com ritmo lento nos 2 primeiros segundos: abertura em tomada estática com leitura da caixa de pergunta sem quebra de padrão visual para prender a atenção no scroll.",
+    "prova": "quadros 1 e 2 / júri diretor cena 0",
+    "sugestao": "Testar punch-in dinâmico nos primeiros 1.5s ou sobrepor elemento gráfico animado ilustrando a dor dos contatos parados para aumentar a retenção inicial.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "Reduzir frequência do formato dono_tres que causou monotonia visual e notas baixas de movimento em 3 vídeos seguidos por falta de telas do produto.",
+    "prova": "quadros 1 a 11 / formato dono_tres no dados.json / histórico com 3 vídeos sofrendo com notas baixas de movimento entre 4.0 e 5.0"
+   },
+   {
+    "acao": "regra_editor",
+    "alvo": "",
+    "valor": "Nas cenas do dono, garantir respiro entre o topo da cabeça/cabelo e as pílulas/faixas superiores, reduzindo a escala do dono em até 10% se necessário para nunca sobrepor a cabeça.",
+    "motivo": "Evitar que a faixa superior e a pílula de etapa cubram o topo da cabeça do apresentador.",
+    "prova": "quadros 3, 4 e 5 / júri diretor cena 1",
+    "vetada": "Python: regra mexe em assunto de segurança/fatos: 10%"
+   }
+  ],
+  "aprovadas": 1
+ }
+}

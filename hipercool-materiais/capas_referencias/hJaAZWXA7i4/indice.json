@@ -1,0 +1,225 @@
+{
+ "video": "tmp/hJaAZWXA7i4.mp4",
+ "passo_s": 6.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "Lee Hiona",
+   "principal": true,
+   "aparicoes": 20,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1230.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1014.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1140.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2346.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 180.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1134.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1230.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1014.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1140.0
+    }
+   ],
+   "papel": "Antagonista e ex-interesse amoroso do protagonista",
+   "visual": "Long wavy brown hair with yellow hairclips, tanned skin, brown eyes",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "Lee Hiona",
+   "principal": false,
+   "aparicoes": 8,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 768.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 564.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 576.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 570.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 528.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 618.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 564.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 576.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 570.0
+    }
+   ],
+   "papel": "antagonista secundária que traiu o protagonista na vida passada",
+   "visual": "long strawberry blonde hair, purple eyes, mole under left eye",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p03",
+   "nome": "Gian",
+   "principal": false,
+   "aparicoes": 6,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2154.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1914.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1920.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1902.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 2154.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1914.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1920.0
+    }
+   ],
+   "papel": "Enfermeira-chefe do hospital",
+   "visual": "Pinkish-orange hair, reddish/pink eyes, elf-like pointed ears, wearing a nurse cap, lab coat, and stethoscope",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p04",
+   "nome": "Lee Hyona",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1896.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 576.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1140.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1146.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1896.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 576.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1146.0
+    }
+   ],
+   "papel": "Ex-interesse romântico do protagonista que o traiu e ajudou a matá-lo na linha do tempo anterior",
+   "visual": "blonde wavy hair, blue eyes, no visible accessories",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p05",
+   "nome": "Lee Hiona",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1752.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1506.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 324.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1752.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1506.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 324.0
+    }
+   ],
+   "papel": "interesse amoroso falso do protagonista e traidora",
+   "visual": "long black hair, brown eyes, tan skin, wearing feather earrings and a beaded necklace",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  }
+ ]
+}

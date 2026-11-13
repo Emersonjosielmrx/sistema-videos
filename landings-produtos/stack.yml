@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  web:
+    image: nginx:1.27-alpine
+    volumes:
+      - /opt/landings-produtos/site:/usr/share/nginx/html:ro
+      - /opt/landings-produtos/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - network_swarm_public
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 64M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.landings.rule=Host(`www.inovareinteligenciaartificial.com`) || Host(`inovareinteligenciaartificial.com`) || Host(`follow-up.inovareinteligenciaartificial.com`) || Host(`agenda.inovareinteligenciaartificial.com`) || Host(`vitrine.inovareinteligenciaartificial.com`)
+        - traefik.http.routers.landings.entrypoints=websecure
+        - traefik.http.routers.landings.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.landings.service=landings
+        - traefik.http.services.landings.loadbalancer.server.port=80
+networks:
+  network_swarm_public:
+    external: true

@@ -1,0 +1,25 @@
+{
+  "_LEIA": "Configuracao do guardiao de recurso. Ele mede RAM/CPU a cada ciclo e liga/desliga as pistas conforme a folga, SEMPRE respeitando a regra de ouro: a pista PROD nunca e desligada pelo guardiao (so pelo botao manual). Edite os numeros aqui sem tocar em codigo.",
+
+  "intervalo_seg": 60,
+  "_help_intervalo_seg": "De quanto em quanto tempo o guardiao mede o recurso e reavalia. 60 = 1min.",
+
+  "ram_livre_gb_alto": 6.0,
+  "_help_ram_livre_gb_alto": "Acima desta RAM livre (GB) = nivel ALTO: pode rodar as 3 pistas.",
+
+  "ram_livre_gb_baixo": 3.0,
+  "_help_ram_livre_gb_baixo": "Abaixo desta RAM livre (GB) = nivel BAIXO (critico): so a prod roda.",
+
+  "cpu_pct_alto": 75,
+  "_help_cpu_pct_alto": "Abaixo deste uso de CPU (%) considera-se folga. Acima, aperto.",
+
+  "ciclos_confirmacao": 2,
+  "_help_ciclos_confirmacao": "Quantos ciclos seguidos no mesmo nivel antes de agir (evita liga/desliga nervoso por picos momentaneos).",
+
+  "pistas": {
+    "prod":  { "dir": "D:\\historias-em-frames\\prod",  "prioridade": 1, "nunca_desliga": true },
+    "beta":  { "dir": "D:\\historias-em-frames\\beta",  "prioridade": 2, "nunca_desliga": false },
+    "teste": { "dir": "D:\\historias-em-frames\\teste", "prioridade": 3, "nunca_desliga": false }
+  },
+  "_help_pistas": "prioridade 1 = mais importante (prod). Quando falta recurso, o guardiao desliga da MAIOR prioridade numerica pra menor (teste=3 primeiro, depois beta=2). prod tem nunca_desliga=true: intocavel pelo automatico."
+}

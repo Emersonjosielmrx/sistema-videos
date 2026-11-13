@@ -1,0 +1,31 @@
+services:
+  redroid:
+    image: ${REDROID_IMAGE:-redroid/redroid:12.0.0_64only-latest}
+    container_name: redroid
+    # O Android em contêiner precisa de privileged (monta as próprias partições).
+    privileged: true
+    restart: unless-stopped
+    # adb só na própria VPS. Do PC se chega por túnel SSH (conectar.bat). Nunca abra esta porta.
+    ports:
+      - "127.0.0.1:${ADB_PORT:-5555}:5555"
+    volumes:
+      # A conta do WhatsApp mora aqui. NÃO apague esta pasta.
+      - ./android-data:/data
+      - /dev/binder:/dev/binder
+      - /dev/hwbinder:/dev/hwbinder
+      - /dev/vndbinder:/dev/vndbinder
+    command:
+      - androidboot.redroid_width=720
+      - androidboot.redroid_height=1280
+      - androidboot.redroid_dpi=320
+      - androidboot.redroid_fps=15
+      - androidboot.use_memfd=true
+      - androidboot.redroid_gpu_mode=guest
+      - androidboot.redroid_net_ndns=2
+      - androidboot.redroid_net_dns1=1.1.1.1
+      - androidboot.redroid_net_dns2=8.8.8.8
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"

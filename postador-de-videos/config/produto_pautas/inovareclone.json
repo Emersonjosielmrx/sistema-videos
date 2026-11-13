@@ -1,0 +1,144 @@
+{
+ "pautas": [
+  {
+   "id": "vergonha_camera",
+   "tipo": "dor",
+   "ideia": "O dono do negócio trava na hora de gravar vídeos para a empresa, mas usa o próprio avatar IA falando em português para manter o perfil ativo.",
+   "pergunta_cliente": "Consigo ter vídeos meus sem precisar sentar na frente da câmera?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "falta_tempo",
+   "tipo": "dor",
+   "ideia": "A rotina corrida da empresa impede o dono de gravar toda semana, então ele usa seu avatar com IA todo dia nas redes.",
+   "pergunta_cliente": "Como manter o perfil postando se não tenho tempo de gravar?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "voz_portugues",
+   "tipo": "objecao",
+   "ideia": "O empresário teme que ferramentas de IA só falem em inglês ou com sotaque estranho, mas o avatar fala em português com a voz dele.",
+   "pergunta_cliente": "O avatar realmente fala em português de forma natural?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "movimento_natural",
+   "tipo": "como_funciona",
+   "ideia": "O avatar com IA da pessoa gera posturas automáticas para apresentar o conteúdo da empresa sem parecer uma foto estática.",
+   "pergunta_cliente": "O avatar se mexe ou fica travado como uma imagem?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "postagem_diaria",
+   "tipo": "caso_de_uso",
+   "ideia": "O pequeno empresário precisa manter presença constante no Instagram e coloca seu avatar IA postando todo dia nas redes.",
+   "pergunta_cliente": "Dá para usar o avatar para publicar todos os dias?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "rosto_exclusivo",
+   "tipo": "pergunta_frequente",
+   "ideia": "O cliente quer saber sobre a exclusividade da imagem e descobre que o avatar com IA é cem por cento seu.",
+   "pergunta_cliente": "Esse avatar é exclusivo meu ou qualquer um pode usar?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "rotina_gravacao",
+   "tipo": "antes_depois",
+   "ideia": "Antes o empresário passava horas arrumando cenário e errando falas; agora tem seu próprio avatar IA com posturas automáticas.",
+   "pergunta_cliente": "Vou me livrar de ter que montar cenário toda vez?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "cravado_operacional",
+   "tipo": "dor",
+   "ideia": "O comerciante fica preso no balcão atendendo clientes e não consegue produzir vídeos, recorrendo ao seu avatar com IA todo dia.",
+   "pergunta_cliente": "Como gerar conteúdo se passo o dia todo atendendo cliente?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "parecer_robo",
+   "tipo": "objecao",
+   "ideia": "O profissional tem medo de parecer artificial para seus clientes, mas as posturas automáticas do avatar tornam a apresentação natural.",
+   "pergunta_cliente": "Meus clientes vão achar que parece um robô esquisito?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "apresentacao_servicos",
+   "tipo": "caso_de_uso",
+   "ideia": "Uma empresa de serviços usa o avatar IA da pessoa falando em português para explicar cada solução aos clientes nas redes.",
+   "pergunta_cliente": "Posso usar o avatar para explicar o que minha empresa faz?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "sumico_redes",
+   "tipo": "dor",
+   "ideia": "O negócio perde alcance quando o dono passa dias sem postar, problema resolvido pelo avatar IA postando todo dia nas redes.",
+   "pergunta_cliente": "O avatar resolve o problema de o perfil ficar abandonado?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "dificuldade_oratoria",
+   "tipo": "objecao",
+   "ideia": "O dono acha que não leva jeito para falar bem em público, mas o avatar com IA da pessoa fala em português com clareza.",
+   "pergunta_cliente": "E se eu não souber falar direito na frente do vídeo?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "geracao_posturas",
+   "tipo": "como_funciona",
+   "ideia": "O sistema cria posturas automáticas no avatar com IA da pessoa para acompanhar o ritmo da mensagem transmitida.",
+   "pergunta_cliente": "Como funcionam os gestos e a postura do avatar?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "identidade_propria",
+   "tipo": "pergunta_frequente",
+   "ideia": "O empresário pergunta se o clone fica parecido com ele e constata que é um avatar com IA cem por cento seu.",
+   "pergunta_cliente": "O avatar fica realmente idêntico a mim?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "fim_bloqueio",
+   "tipo": "antes_depois",
+   "ideia": "Antes a empresa não postava nada por falta de vídeos do dono; agora tem o avatar IA postando todo dia nas redes.",
+   "pergunta_cliente": "Isso acaba de vez com a falta de vídeos no meu perfil?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "dicas_diarias",
+   "tipo": "caso_de_uso",
+   "ideia": "O dono de negócio compartilha orientações para seus clientes todos os dias usando seu avatar com IA que fala em português.",
+   "pergunta_cliente": "Consigo passar dicas rápidas para meus clientes com ele?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "medo_tecnologia",
+   "tipo": "objecao",
+   "ideia": "O lojista acha que criar um clone digital é complexo demais, mas descobre que tem seu próprio avatar IA pronto para falar em português.",
+   "pergunta_cliente": "Preciso entender muito de tecnologia para usar meu avatar?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "dia_cansativo",
+   "tipo": "dor",
+   "ideia": "Após um dia exaustivo de trabalho o empresário não tem ânimo para gravar, mas mantém seu avatar IA postando todo dia nas redes.",
+   "pergunta_cliente": "Dá para manter os vídeos em dia mesmo nos dias mais cansativos?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "funcionamento_idioma",
+   "tipo": "pergunta_frequente",
+   "ideia": "O cliente quer entender a fala do clone e confirma que o avatar com IA da pessoa fala em português perfeitamente.",
+   "pergunta_cliente": "O avatar já vem configurado para falar na nossa língua?",
+   "criada": "2026-11-02T15:35:16"
+  },
+  {
+   "id": "constancia_perfil",
+   "tipo": "antes_depois",
+   "ideia": "Antes o perfil da empresa tinha postagens irregulares; agora conta com seu avatar com IA todo dia exibindo posturas automáticas.",
+   "pergunta_cliente": "O avatar ajuda minha empresa a ter presença constante?",
+   "criada": "2026-11-02T15:35:16"
+  }
+ ]
+}

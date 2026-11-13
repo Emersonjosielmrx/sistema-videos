@@ -1,0 +1,36 @@
+{
+  "catalogo": {
+    "gemini": "Gemini API (AI Studio)",
+    "youtube": "YouTube Data API v3",
+    "sheets": "Google Sheets API",
+    "drive": "Google Drive API",
+    "gmail": "Gmail API",
+    "calendar": "Google Calendar API",
+    "chat": "Google Chat API",
+    "vision": "Cloud Vision API",
+    "translate": "Cloud Translation API",
+    "blogger": "Blogger API v3",
+    "docs": "Google Docs API",
+    "slides": "Google Slides API",
+    "tts": "Cloud Text-to-Speech",
+    "speech": "Cloud Speech-to-Text"
+  },
+  "contas": {
+    "fabrica": {
+      "dry_run": true
+    },
+    "mundosolar1995": {
+      "dry_run": true
+    },
+    "canalalucinaai": {
+      "dry_run": true
+    },
+    "seebotsia": {
+      "dry_run": true
+    },
+    "emersonjosiel649": {
+      "dry_run": true
+    }
+  },
+  "ultima_execucao": "2026-07-02T16:19:42.178316+00:00"
+}

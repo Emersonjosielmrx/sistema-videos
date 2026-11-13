@@ -1,0 +1,1961 @@
+{
+ "updatedAt": "2026-10-14T00:57:49.849Z",
+ "createdAt": "2026-10-13T14:45:18.836Z",
+ "id": "MgWk3RWzM5q5Ria8",
+ "name": "Leads das Landing Pages com Nota da IA (CRM simples)",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "path": "lp-lead",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "name": "Lead chega (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "id": "c2220070-3d8c-475e-995f-a08acf606d44",
+   "webhookId": "f26669a6-d630-4505-a157-2dcf43e97349"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "=lead:rl:{{ ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || 'sem-ip').split(',')[0]).trim() }}",
+    "expire": true,
+    "ttl": 3600
+   },
+   "name": "Contador anti-spam",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    0
+   ],
+   "id": "4b75d9be-2a0b-41b3-8ca7-5bb46b79109d",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const LIMITE_POR_HORA = 20;\nlet b = $('Lead chega (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst usos = Number(Object.values($input.first().json)[0]) || 0;\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u001f\\u007f]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst id = String(b.id || '');\nconst erro = m => [{ json: { valido: false, erro: m } }];\nif (!/^[a-z0-9-]{4,80}$/.test(id)) return erro('Página inválida.');\nif (usos > LIMITE_POR_HORA) return erro('Muitos envios. Tente mais tarde.');\n\n// Descobre o que é nome, telefone, e-mail e mensagem pelo rótulo do campo\nconst campos = {};\nfor (const [k, v] of Object.entries(b.campos && typeof b.campos === 'object' ? b.campos : {}).slice(0, 12)) campos[limpa(k, 40)] = limpa(v, 600);\nconst acha = re => { const k = Object.keys(campos).find(x => re.test(x.normalize('NFD').replace(/[̀-ͯ]/g, ''))); return k ? campos[k] : ''; };\nconst nome = acha(/nome|name/i).slice(0, 60);\nlet fone = acha(/whats|telefone|celular|fone|phone|contato/i).replace(/\\D/g, '');\nif (!fone) {\n  const m = Object.values(campos).join(' ').match(/(?:\\+?55\\s?)?\\(?\\d{2}\\)?\\s?9?\\d{4}[-.\\s]?\\d{4}/);\n  if (m) fone = m[0].replace(/\\D/g, '');\n}\nif (fone.length === 10 || fone.length === 11) fone = '55' + fone;\nif (fone.length < 12 || fone.length > 13) fone = '';\nconst emailBruto = acha(/e-?mail/i);\nconst email = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(emailBruto) ? emailBruto.toLowerCase() : '';\nconst usados = new Set([nome, emailBruto].filter(Boolean));\nconst mensagem = acha(/mensag|message|assunto|precisa|conte|duvida|pedido|obs/i) ||\n  Object.values(campos).filter(v => !usados.has(v) && v.replace(/\\D/g, '').length < 10).sort((a, c) => c.length - a.length)[0] || '';\nif (!nome && !fone && !email && mensagem.length < 3) return erro('Formulário vazio.');\n\nconst eng = b.engajamento || {};\nconst lead = {\n  lead: 'ld' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),\n  pagina_id: id, nome, whatsapp: fone, email, mensagem: mensagem.slice(0, 600), campos,\n  origem: limpa(b.origem, 40) || 'direto',\n  pagina: { titulo: limpa(b.pagina && b.pagina.titulo, 120), descricao: limpa(b.pagina && b.pagina.descricao, 300), url: limpa(b.pagina && b.pagina.url, 300) },\n  engajamento: { segundos: Math.min(Number(eng.segundos) || 0, 36000), rolagem: Math.min(Number(eng.rolagem) || 0, 100), cliques: Math.min(Number(eng.cliques) || 0, 999), voltou: !!eng.voltou },\n  criadoEm: new Date().toISOString(),\n};\nreturn [{ json: { valido: true, lead } }];"
+   },
+   "name": "Validar lead",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    500,
+    0
+   ],
+   "id": "09429abe-52dc-408b-bba5-c9849e02e4ab"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfec6bc1-720b-4d31-a3df-a218b9fa95ce",
+       "leftValue": "={{ $json.valido }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Lead válido?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    750,
+    0
+   ],
+   "id": "af30cd02-d055-4bc2-92ef-3e502782c937"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     },
+     "responseCode": 400
+    }
+   },
+   "name": "Responde erro",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    200
+   ],
+   "id": "de8bf84c-3441-4557-ba27-a7473e5d4627"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde recebido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    0
+   ],
+   "id": "579828ab-9fe7-405f-87fc-08ee831aee7e"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=lpia:status:{{ $('Validar lead').first().json.lead.pagina_id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê dados da página",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1250,
+    0
+   ],
+   "id": "d32e9163-9b08-4ac4-a7e8-373e0ac4a922",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'LEAD:\\n' + JSON.stringify($('Validar lead').first().json.lead, null, 1) + '\\n\\nEMPRESA DA PÁGINA: ' + (JSON.parse($json.status || '{}').empresa || 'não informada') }}",
+    "options": {
+     "systemMessage": "Você é um SDR (pré-vendedor) experiente. Avalie o lead que preencheu o formulário de contato de uma landing page e diga o quanto ele está pronto para comprar.\n\nCONSIDERE\n- Intenção: pediu orçamento, preço, horário, disponibilidade ou quer contratar? Isso vale muito.\n- Clareza: explicou o que precisa? Mensagem vaga vale menos.\n- Urgência: menciona data, \"hoje\", \"urgente\", evento próximo?\n- Fit: o pedido combina com o que a página oferece (título e descrição)?\n- Contato: deixou WhatsApp ou e-mail válido?\n- Engajamento: tempo na página, quanto rolou e se voltou outras vezes.\n- Spam ou teste (texto aleatório, \"teste\", links, ofensas): spam true e nota baixa.\n\nnota de 0 a 100 (70+ = quente, 40 a 69 = morno, abaixo de 40 = frio).\nmensagem_sugerida: mensagem curta de WhatsApp, cordial e personalizada com o primeiro nome e o que a pessoa pediu, terminando com uma pergunta que avance a venda. Português do Brasil.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"nota\":0,\"intencao\":\"\",\"urgencia\":\"alta|media|baixa\",\"resumo\":\"1 frase\",\"proximo_passo\":\"\",\"mensagem_sugerida\":\"\",\"spam\":false}"
+    },
+    "needsFallback": true
+   },
+   "name": "IA Qualificadora",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1500,
+    0
+   ],
+   "id": "caeb2cc7-3b3e-4927-913d-458e8328381e",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 1500,
+     "temperature": 0.3,
+     "timeout": 120000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro da Qualificadora",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    230
+   ],
+   "id": "67036776-8a7a-491a-822e-79039a90915a",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst lead = JSON.parse(JSON.stringify($('Validar lead').first().json.lead));\nlet pagina = null;\ntry { pagina = JSON.parse($('Lê dados da página').first().json.status || 'null'); } catch (e) {}\nconst ia = parseJSON($input.first().json.output ?? '');\nconst limpa = (v, max) => String(v ?? '').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst e = lead.engajamento;\n\n// Sinais objetivos, que não dependem da IA\nlet bonus = 0; const sinais = [];\nif (lead.whatsapp) { bonus += 10; sinais.push('deixou WhatsApp'); }\nif (e.rolagem >= 75) { bonus += 8; sinais.push(`leu ${e.rolagem}% da página`); }\nif (e.segundos >= 60) { bonus += 5; sinais.push(`ficou ${Math.round(e.segundos / 60)} min`); }\nif (e.voltou) { bonus += 7; sinais.push('voltou à página'); }\n\nlet nota, usouIA = false;\nif (ia && Number.isFinite(Number(ia.nota))) {\n  usouIA = true;\n  nota = Math.round(Number(ia.nota) * 0.8 + bonus);\n} else {\n  const temIntencao = /orçamento|orcamento|preço|preco|valor|agendar|marcar|quanto|contratar|comprar|disponib/i.test(lead.mensagem);\n  nota = 25 + bonus + (temIntencao ? 25 : 0) + (lead.mensagem.length > 40 ? 10 : 0);\n}\nconst spam = !!(ia && ia.spam) || /^(teste|test|asdf|qwer|aaa+)\\b/i.test(lead.mensagem + ' ' + lead.nome) || /https?:\\/\\//i.test(lead.mensagem);\nif (spam) nota = Math.min(nota, 15);\nnota = Math.max(0, Math.min(100, nota));\nconst temperatura = nota >= 70 ? 'quente' : nota >= 40 ? 'morno' : 'frio';\n\nconst primeiro = (lead.nome || '').split(' ')[0];\nObject.assign(lead, {\n  nota, temperatura, spam, usou_ia: usouIA, sinais,\n  empresa: (pagina && pagina.empresa) || lead.pagina.titulo || lead.pagina_id,\n  intencao: limpa(ia && ia.intencao, 160),\n  urgencia: ['alta', 'media', 'baixa'].includes(ia && ia.urgencia) ? ia.urgencia : 'media',\n  resumo: limpa(ia && ia.resumo, 240) || 'Classificado pelas regras automáticas (a IA não respondeu).',\n  proximo_passo: limpa(ia && ia.proximo_passo, 200) || (lead.whatsapp ? 'Chamar no WhatsApp ainda hoje.' : 'Responder pelo canal informado.'),\n  mensagem_sugerida: limpa(ia && ia.mensagem_sugerida, 500) || `Olá${primeiro ? ', ' + primeiro : ''}! Recebemos sua mensagem pelo site e queremos te ajudar. Podemos conversar agora?`,\n});\nreturn [{ json: { lead, lead_str: JSON.stringify(lead) } }];"
+   },
+   "name": "Nota final",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1810,
+    0
+   ],
+   "id": "ab9544e3-4b38-42a9-b319-66557e5b31f2"
+  },
+  {
+   "parameters": {
+    "operation": "push",
+    "list": "lead:todos",
+    "messageData": "={{ $json.lead_str }}",
+    "tail": true
+   },
+   "name": "Guarda lead",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2060,
+    0
+   ],
+   "id": "a3164db2-144b-483d-8e6c-ada3ceca69a4",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// ⚙️ CONFIGURE AQUI para receber o alerta no WhatsApp (deixe NUMERO vazio para desligar)\nconst NUMERO = '';                 // quem recebe o alerta, com DDI e DDD. Ex: '5591999998888'\nconst EVOLUTION_URL = '';          // endereço da sua Evolution API. Ex: 'https://minha-evolution.com'\nconst INSTANCIA = '';              // nome da instância na Evolution\nconst APIKEY = '';                 // apikey da instância (o ideal é usar uma credencial do n8n)\nconst SO_QUENTES_E_MORNOS = true;  // true = não avisa leads frios\n\nconst l = $('Nota final').first().json.lead;\nconst base = String($('Lead chega (POST)').first().json.webhookUrl || '').split('/webhook/')[0];\nconst ICONE = { quente: '🔥', morno: '🌤️', frio: '❄️' };\nconst texto = [\n  `${ICONE[l.temperatura]} *Novo lead ${l.temperatura.toUpperCase()}* · nota ${l.nota}/100`,\n  `🏢 ${l.empresa}`,\n  `👤 ${l.nome || 'Sem nome'}${l.whatsapp ? ' · 📱 +' + l.whatsapp : ''}${l.email ? ' · ✉️ ' + l.email : ''}`,\n  l.mensagem ? `💬 \"${l.mensagem.slice(0, 240)}\"` : null,\n  `🧠 ${l.resumo}`,\n  `👉 ${l.proximo_passo}`,\n  `📋 Painel: ${base}/webhook/lp-leads?id=${l.pagina_id}`,\n].filter(Boolean).join('\\n');\n\nconst ligado = !!(NUMERO && EVOLUTION_URL && INSTANCIA && APIKEY) && !l.spam && (!SO_QUENTES_E_MORNOS || l.temperatura !== 'frio');\nreturn [{ json: { ligado, url: `${EVOLUTION_URL.replace(/\\/$/, '')}/message/sendText/${INSTANCIA}`, apikey: APIKEY, numero: NUMERO, texto } }];"
+   },
+   "name": "Monta alerta",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2310,
+    0
+   ],
+   "id": "1142ff66-04a9-4094-8f9d-7cb04fe404f8"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bf654281-97d1-4805-8fe5-9ee566ce0ff4",
+       "leftValue": "={{ $json.ligado }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Alerta ligado?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2560,
+    0
+   ],
+   "id": "03d705eb-92d2-4927-95ca-48fcab268184"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.url }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "={{ $json.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ number: $json.numero, text: $json.texto }) }}",
+    "options": {
+     "timeout": 20000
+    }
+   },
+   "name": "Envia alerta no WhatsApp",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2810,
+    -120
+   ],
+   "id": "d98f32bd-8cc3-4448-9b42-8665c7aeae87",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {},
+   "name": "Sem alerta",
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    2810,
+    120
+   ],
+   "id": "048a8bb2-5f57-44e1-ad8f-296dd4af26cd"
+  },
+  {
+   "parameters": {
+    "path": "lp-leads",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Painel de leads (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1150
+   ],
+   "id": "50bcbf45-5ead-4b49-abc9-adab0f745eae",
+   "webhookId": "b782eec3-0da6-41cd-8b8d-e06df79c2bde"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "leads",
+    "key": "lead:todos",
+    "keyType": "list",
+    "options": {}
+   },
+   "name": "Lê leads",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    1150
+   ],
+   "id": "39093b0d-eba4-440c-a9ab-56219705934f",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "situacao",
+    "key": "lead:situacao",
+    "keyType": "hash",
+    "options": {}
+   },
+   "name": "Lê situação",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    500,
+    1150
+   ],
+   "id": "e8486a2f-d0c9-4705-b97b-4a1bb85226c5",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// 🔐 Senha do painel: troque aqui e também no node \"Validar ação\"\nconst SENHA = '<SEGREDO_REMOVIDO>';\nconst q = $('Painel de leads (GET)').first().json.query || {};\nconst id = /^[a-z0-9-]{4,80}$/.test(q.id || '') ? q.id : '';\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\nconst casca = (titulo, corpo, extra = '') => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\"><title>${esc(titulo)}</title>\n<style>\n:root{--plano:#f6f5f2;--sup:#fff;--tx:#14130f;--tx2:#55534d;--mu:#8a877f;--borda:rgba(20,19,15,.10);--s1:#2a78d6;--trilho:#cde2fb;--quente:#fde4d8;--morno:#fdf1cf;--frio:#dcebfb}\n@media (prefers-color-scheme:dark){:root{--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--mu:#898781;--borda:rgba(255,255,255,.10);--s1:#3987e5;--trilho:#26303b;--quente:#4a2617;--morno:#45380f;--frio:#16324f}}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);padding:22px 14px 60px;line-height:1.45}\n.w{max-width:1000px;margin:0 auto}h1{font-size:24px}.sub{color:var(--tx2);font-size:13.5px;margin-top:4px}\n.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:16px}\n.k a{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--tx)}\n.k a.on{outline:2px solid var(--s1)}.k span{color:var(--tx2);font-size:13px;font-weight:600}.k b{display:block;font-size:26px}\n.lead{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px 18px;margin-top:12px}\n.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}\n.nome{font-size:17px;font-weight:650}.meta{color:var(--mu);font-size:12.5px;margin-top:2px}\n.tag{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;font-weight:650;font-size:13px;color:var(--tx)}\n.t-quente{background:var(--quente)}.t-morno{background:var(--morno)}.t-frio{background:var(--frio)}\n.nota{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--tx2)}\n.trilho{flex:1;max-width:260px;height:8px;background:var(--trilho);border-radius:4px;overflow:hidden}.trilho i{display:block;height:100%;background:var(--s1);border-radius:0 4px 4px 0}\n.msg{margin-top:10px;padding:10px 12px;border-left:3px solid var(--borda);color:var(--tx);font-size:14.5px;white-space:pre-wrap}\n.ia{margin-top:10px;font-size:14px;color:var(--tx2)}.ia b{color:var(--tx)}\n.sinais{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.sinais span{font-size:12px;border:1px solid var(--borda);border-radius:999px;padding:2px 9px;color:var(--tx2)}\n.acoes{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}\n.btn{border:1px solid var(--borda);background:var(--sup);color:var(--tx);border-radius:10px;padding:8px 12px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:none}\n.btn.zap{background:#25d366;border-color:#25d366;color:#05301a}.btn.sel{background:var(--tx);color:var(--sup);border-color:var(--tx)}\n.vazio{color:var(--mu);margin-top:20px}form.login{max-width:360px;margin:70px auto;background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:26px;text-align:center}\nform.login input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--borda);background:var(--plano);color:var(--tx);font:inherit;margin:14px 0 10px}\n.erro{color:#d03b3b;font-weight:600;font-size:14px}\n</style></head><body><div class=\"w\">${corpo}</div>${extra}</body></html>`;\n\nif (q.senha !== SENHA) {\n  return [{ json: { codigo: q.senha ? 401 : 200, html: casca('Leads · acesso', `<form class=\"login\" method=\"get\"><div style=\"font-size:42px\">🎯</div><h1>Painel de leads</h1><p class=\"sub\">Digite a senha do painel</p>\n    ${id ? `<input type=\"hidden\" name=\"id\" value=\"${esc(id)}\">` : ''}<input name=\"senha\" type=\"password\" placeholder=\"Senha\" autofocus required aria-label=\"Senha\">\n    ${q.senha ? '<p class=\"erro\">Senha incorreta.</p>' : ''}<button class=\"btn zap\" style=\"width:100%\">Entrar</button></form>`) } }];\n}\n\nlet lista = $('Lê leads').first().json.leads;\nif (!Array.isArray(lista)) lista = lista ? [lista] : [];\nconst situacao = $('Lê situação').first().json.situacao || {};\nlet leads = lista.map(s => { try { return typeof s === 'string' ? JSON.parse(s) : s; } catch (e) { return null; } }).filter(Boolean).reverse();\nif (id) leads = leads.filter(l => l.pagina_id === id);\nleads.forEach(l => { l.situacao = situacao[l.lead] || 'novo'; });\nconst cont = t => leads.filter(l => l.temperatura === t).length;\nconst filtro = ['quente', 'morno', 'frio'].includes(q.t) ? q.t : '';\nconst vis = filtro ? leads.filter(l => l.temperatura === filtro) : leads;\nconst link = t => `?${id ? 'id=' + esc(id) + '&' : ''}senha=${encodeURIComponent(SENHA)}${t ? '&t=' + t : ''}`;\nconst ICONE = { quente: '🔥 Quente', morno: '🌤️ Morno', frio: '❄️ Frio' };\nconst SIT = { novo: '🆕 Novo', contatado: '💬 Contatado', fechado: '✅ Fechado', perdido: '✖️ Perdido' };\nconst fuso = { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' };\n\nconst cards = vis.slice(0, 200).map(l => `<article class=\"lead\" data-lead=\"${esc(l.lead)}\">\n  <div class=\"top\"><div><div class=\"nome\">${esc(l.nome || 'Sem nome')}</div>\n  <div class=\"meta\">${esc(new Date(l.criadoEm).toLocaleString('pt-BR', fuso))} · ${esc(l.empresa)} · origem: ${esc(l.origem)}${l.whatsapp ? ' · 📱 +' + esc(l.whatsapp) : ''}${l.email ? ' · ✉️ ' + esc(l.email) : ''}</div></div>\n  <span class=\"tag t-${l.temperatura}\">${ICONE[l.temperatura]}</span></div>\n  <div class=\"nota\">Nota <b>${l.nota}</b><span class=\"trilho\" role=\"meter\" aria-valuenow=\"${l.nota}\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-label=\"Nota do lead\"><i style=\"width:${l.nota}%\"></i></span>${l.spam ? ' · ⚠️ parece spam ou teste' : ''}</div>\n  ${l.mensagem ? `<div class=\"msg\">${esc(l.mensagem)}</div>` : ''}\n  <div class=\"ia\">🧠 ${esc(l.resumo)}${l.intencao ? `<br><b>Intenção:</b> ${esc(l.intencao)} · <b>Urgência:</b> ${esc(l.urgencia)}` : ''}<br>👉 <b>Próximo passo:</b> ${esc(l.proximo_passo)}</div>\n  ${(l.sinais || []).length ? `<div class=\"sinais\">${l.sinais.map(s => `<span>${esc(s)}</span>`).join('')}</div>` : ''}\n  <div class=\"acoes\">${l.whatsapp ? `<a class=\"btn zap\" target=\"_blank\" rel=\"noopener\" href=\"https://wa.me/${esc(l.whatsapp)}?text=${encodeURIComponent(l.mensagem_sugerida)}\">📲 Responder com a mensagem sugerida</a>` : ''}\n  ${Object.entries(SIT).map(([k, v]) => `<button class=\"btn ${l.situacao === k ? 'sel' : ''}\" data-s=\"${k}\" type=\"button\">${v}</button>`).join('')}</div>\n</article>`).join('');\n\nconst corpo = `<h1>🎯 Leads${id && leads[0] ? ' · ' + esc(leads[0].empresa) : ''}</h1>\n<p class=\"sub\">${id ? 'Leads desta página' : 'Leads de todas as landing pages'} · a IA dá a nota de 0 a 100 e sugere a resposta</p>\n<div class=\"k\"><a href=\"${link('')}\" class=\"${filtro ? '' : 'on'}\"><span>Todos</span><b>${leads.length}</b></a>\n<a href=\"${link('quente')}\" class=\"${filtro === 'quente' ? 'on' : ''}\"><span>🔥 Quentes</span><b>${cont('quente')}</b></a>\n<a href=\"${link('morno')}\" class=\"${filtro === 'morno' ? 'on' : ''}\"><span>🌤️ Mornos</span><b>${cont('morno')}</b></a>\n<a href=\"${link('frio')}\" class=\"${filtro === 'frio' ? 'on' : ''}\"><span>❄️ Frios</span><b>${cont('frio')}</b></a>\n<a href=\"${link(filtro)}\"><span>💬 Já contatados</span><b>${leads.filter(l => l.situacao !== 'novo').length}</b></a></div>\n${cards || '<p class=\"vazio\">Nenhum lead por aqui ainda. Eles chegam quando alguém envia o formulário de contato da landing page.</p>'}`;\n\nconst script = `<script>\ndocument.addEventListener('click', function (e) {\n  var b = e.target.closest('[data-s]'); if (!b) return;\n  var card = b.closest('[data-lead]'); b.disabled = true;\n  fetch('/webhook/lp-lead-acao', { method: 'POST', headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ senha: ${JSON.stringify(SENHA)}, lead: card.getAttribute('data-lead'), situacao: b.getAttribute('data-s') }) })\n    .then(function (r) { return r.json(); }).then(function (j) {\n      b.disabled = false; if (!j.ok) return alert('Não foi possível salvar.');\n      card.querySelectorAll('[data-s]').forEach(function (x) { x.classList.toggle('sel', x === b); });\n    }).catch(function () { b.disabled = false; alert('Falha de conexão.'); });\n});\n</script>`;\nreturn [{ json: { codigo: 200, html: casca('Leads', corpo, script) } }];"
+   },
+   "name": "Montar painel de leads",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    750,
+    1150
+   ],
+   "id": "5d885f73-2194-4d0f-9d4f-c03c2003f676"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     },
+     "responseCode": "={{ $json.codigo }}"
+    }
+   },
+   "name": "Entrega o painel",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    1150
+   ],
+   "id": "37d62979-2d79-4121-b423-e49165a26030"
+  },
+  {
+   "parameters": {
+    "path": "lp-lead-acao",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "name": "Ação no lead (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1700
+   ],
+   "id": "880000c9-db05-4240-a0a3-8b1b2fe7c370",
+   "webhookId": "828ba992-18b1-4ce4-a550-b4f2fb2bccc4"
+  },
+  {
+   "parameters": {
+    "jsCode": "// 🔐 Mesma senha do node \"Montar painel de leads\"\nconst SENHA = '<SEGREDO_REMOVIDO>';\nlet b = $('Ação no lead (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst ok = b.senha === SENHA && /^ld[a-z0-9]{6,24}$/.test(String(b.lead || '')) && ['novo', 'contatado', 'fechado', 'perdido'].includes(b.situacao);\nreturn [{ json: { ok, valor: ok ? JSON.stringify({ [b.lead]: b.situacao }) : '' } }];"
+   },
+   "name": "Validar ação",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    250,
+    1700
+   ],
+   "id": "61558eda-6824-4e93-a847-03c2419a089f"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2eec09e6-f212-4c54-9ec7-ca380a591ba6",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Ação válida?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    500,
+    1700
+   ],
+   "id": "f79b24d7-64a2-4a6c-a2ac-abe410ca66a2"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "lead:situacao",
+    "value": "={{ $json.valor }}",
+    "keyType": "hash",
+    "valueIsJSON": true,
+    "expire": false
+   },
+   "name": "Salva situação",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    750,
+    1700
+   ],
+   "id": "1f39b8ee-eac5-4e5d-b543-7b1ff0bc4107",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde ok",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    1700
+   ],
+   "id": "10ff8f39-9dfd-4a8f-8535-248fd08b6034"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     },
+     "responseCode": 403
+    }
+   },
+   "name": "Responde negado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    750,
+    1900
+   ],
+   "id": "5be37788-14ea-40aa-ba41-05cb424e75e4"
+  },
+  {
+   "parameters": {
+    "content": "# 🎯 LEADS COM NOTA DA IA (um CRM simples)\n\n🤔 **O que é um lead?** Uma pessoa que demonstrou interesse: preencheu o formulário de contato da landing page.\n\n🏆 **O problema que resolvemos:** o dono recebe muitos contatos e não sabe **quem atender primeiro**. Aqui a IA lê cada lead e dá uma **nota de 0 a 100**:\n🔥 **Quente** (70+): quer comprar, atenda já\n🌤️ **Morno** (40 a 69): interessado, precisa de um empurrão\n❄️ **Frio** (abaixo de 40): só curiosidade, ou spam\n\nE ainda escreve a **mensagem de resposta** pronta para mandar no WhatsApp! 📲\n\n## 🔗 De onde vêm os leads?\nDas landing pages do **Gerador PRO**. O script do fluxo de **Métricas** \"escuta\" o formulário de contato e manda os dados para cá, junto com o **engajamento** da pessoa (quanto leu, quanto tempo ficou, se voltou).\n\n## ▶️ Como testar\n1. Abra uma landing page do Gerador PRO\n2. Preencha o formulário de contato e envie\n3. Abra `/webhook/lp-leads` e use a senha **leads-f480c7**\n\n## 🧭 As 3 faixas\n1️⃣ **Receber e qualificar** (esta faixa de cima)\n2️⃣ **Painel** com filtros por temperatura\n3️⃣ **Marcar situação**: novo, contatado, fechado ou perdido",
+    "height": 867,
+    "width": 760,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1400,
+    -160
+   ],
+   "id": "c56d50d0-546d-4e1f-9add-7fdabf90f51e"
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ RECEBER E QUALIFICAR\n\n🔔 **Lead chega (POST)**: o formulário da página chega aqui.\n🚧 **Contador anti-spam**: no máximo 20 envios por hora da mesma internet.\n🧹 **Validar lead**: descobre pelo **nome do campo** o que é nome, WhatsApp, e-mail e mensagem, mesmo que cada página tenha campos diferentes.\n🚦 **Lead válido?** Se o formulário veio vazio, responde erro.\n⚡ **Responde recebido**: a página não fica esperando a IA.\n🗄️ **Lê dados da página**: pega o nome da empresa.\n🤖 **IA Qualificadora** (cérebro: `gemini-3.1-flash-lite`): avalia intenção, urgência, clareza e se é spam.\n🧮 **Nota final**: junta a nota da IA com **sinais reais** (deixou WhatsApp, leu a página toda, voltou). Se a IA falhar, as regras dão a nota sozinhas.\n🗄️ **Guarda lead**: vai para a lista no Redis.\n📲 **Monta alerta** e **Alerta ligado?**: avisa no WhatsApp. ⚙️ Vem **desligado**: preencha o número e a Evolution no topo do node **Monta alerta**.",
+    "height": 660,
+    "width": 560,
+    "color": 4
+   },
+   "name": "Nota · Qualificar",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -600,
+    -160
+   ],
+   "id": "93a5dea3-0198-49a2-94c0-ce529d1cf518"
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ PAINEL DE LEADS 📋\n\n🔔 **Painel de leads (GET)**: `/webhook/lp-leads` (todos) ou `?id=CÓDIGO` (uma página só).\n🔐 Pede a **senha** (troque em **Montar painel de leads** e em **Validar ação**).\n🗄️ **Lê leads** (lista) e **Lê situação** (um \"hash\": uma tabelinha `lead → situação`).\n🎨 **Montar painel de leads** mostra cada lead com:\n• a nota numa barra, a temperatura e o motivo\n• o que a pessoa escreveu\n• o próximo passo sugerido\n• o botão **📲 Responder com a mensagem sugerida**, que já abre o WhatsApp com o texto pronto",
+    "height": 481,
+    "width": 560,
+    "color": 5
+   },
+   "name": "Nota · Painel",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -600,
+    990
+   ],
+   "id": "15c062e1-7194-4829-80e9-cdabb9006135"
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ MARCAR A SITUAÇÃO ✅\n\nQuando você clica em **Contatado**, **Fechado** ou **Perdido** no painel:\n🔔 **Ação no lead (POST)** recebe o clique\n🔐 **Validar ação** confere a senha e o valor\n🗄️ **Salva situação** grava no hash `lead:situacao`\n💡 Exercício: calcular a **taxa de fechamento** (fechados ÷ contatados).",
+    "height": 420,
+    "width": 560,
+    "color": 7
+   },
+   "name": "Nota · Ação",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -600,
+    1540
+   ],
+   "id": "e642ec18-9a9c-4571-ad62-2c2bd3d8284d"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 1500,
+     "temperature": 0.3,
+     "timeout": 120000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro da Qualificadora",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    410
+   ],
+   "id": "83f82f40-8c37-4b83-a4c7-e4423d46a6cc",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Lead chega (POST)": {
+   "main": [
+    [
+     {
+      "node": "Contador anti-spam",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Contador anti-spam": {
+   "main": [
+    [
+     {
+      "node": "Validar lead",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Validar lead": {
+   "main": [
+    [
+     {
+      "node": "Lead válido?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lead válido?": {
+   "main": [
+    [
+     {
+      "node": "Responde recebido",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Responde recebido": {
+   "main": [
+    [
+     {
+      "node": "Lê dados da página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro da Qualificadora": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "IA Qualificadora",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê dados da página": {
+   "main": [
+    [
+     {
+      "node": "IA Qualificadora",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "IA Qualificadora": {
+   "main": [
+    [
+     {
+      "node": "Nota final",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Nota final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Nota final": {
+   "main": [
+    [
+     {
+      "node": "Guarda lead",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Guarda lead": {
+   "main": [
+    [
+     {
+      "node": "Monta alerta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Monta alerta": {
+   "main": [
+    [
+     {
+      "node": "Alerta ligado?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Alerta ligado?": {
+   "main": [
+    [
+     {
+      "node": "Envia alerta no WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Sem alerta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Painel de leads (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê leads",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê leads": {
+   "main": [
+    [
+     {
+      "node": "Lê situação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê situação": {
+   "main": [
+    [
+     {
+      "node": "Montar painel de leads",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Montar painel de leads": {
+   "main": [
+    [
+     {
+      "node": "Entrega o painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ação no lead (POST)": {
+   "main": [
+    [
+     {
+      "node": "Validar ação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Validar ação": {
+   "main": [
+    [
+     {
+      "node": "Ação válida?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ação válida?": {
+   "main": [
+    [
+     {
+      "node": "Salva situação",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde negado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva situação": {
+   "main": [
+    [
+     {
+      "node": "Responde ok",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro da Qualificadora": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "IA Qualificadora",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1800
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": null,
+ "versionId": "3138fe4a-9cdb-46f2-869b-744c87ba6c11",
+ "activeVersionId": "3138fe4a-9cdb-46f2-869b-744c87ba6c11",
+ "versionCounter": 29,
+ "triggerCount": 3,
+ "shared": [
+  {
+   "updatedAt": "2026-10-13T14:45:18.836Z",
+   "createdAt": "2026-10-13T14:45:18.836Z",
+   "role": "workflow:owner",
+   "workflowId": "MgWk3RWzM5q5Ria8",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-14T00:57:49.853Z",
+  "createdAt": "2026-10-14T00:57:49.853Z",
+  "versionId": "3138fe4a-9cdb-46f2-869b-744c87ba6c11",
+  "workflowId": "MgWk3RWzM5q5Ria8",
+  "nodes": [
+   {
+    "parameters": {
+     "path": "lp-lead",
+     "responseMode": "responseNode",
+     "options": {},
+     "httpMethod": "POST"
+    },
+    "name": "Lead chega (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     0
+    ],
+    "id": "c2220070-3d8c-475e-995f-a08acf606d44",
+    "webhookId": "f26669a6-d630-4505-a157-2dcf43e97349"
+   },
+   {
+    "parameters": {
+     "operation": "incr",
+     "key": "=lead:rl:{{ ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || 'sem-ip').split(',')[0]).trim() }}",
+     "expire": true,
+     "ttl": 3600
+    },
+    "name": "Contador anti-spam",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     0
+    ],
+    "id": "4b75d9be-2a0b-41b3-8ca7-5bb46b79109d",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const LIMITE_POR_HORA = 20;\nlet b = $('Lead chega (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst usos = Number(Object.values($input.first().json)[0]) || 0;\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u001f\\u007f]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst id = String(b.id || '');\nconst erro = m => [{ json: { valido: false, erro: m } }];\nif (!/^[a-z0-9-]{4,80}$/.test(id)) return erro('Página inválida.');\nif (usos > LIMITE_POR_HORA) return erro('Muitos envios. Tente mais tarde.');\n\n// Descobre o que é nome, telefone, e-mail e mensagem pelo rótulo do campo\nconst campos = {};\nfor (const [k, v] of Object.entries(b.campos && typeof b.campos === 'object' ? b.campos : {}).slice(0, 12)) campos[limpa(k, 40)] = limpa(v, 600);\nconst acha = re => { const k = Object.keys(campos).find(x => re.test(x.normalize('NFD').replace(/[̀-ͯ]/g, ''))); return k ? campos[k] : ''; };\nconst nome = acha(/nome|name/i).slice(0, 60);\nlet fone = acha(/whats|telefone|celular|fone|phone|contato/i).replace(/\\D/g, '');\nif (!fone) {\n  const m = Object.values(campos).join(' ').match(/(?:\\+?55\\s?)?\\(?\\d{2}\\)?\\s?9?\\d{4}[-.\\s]?\\d{4}/);\n  if (m) fone = m[0].replace(/\\D/g, '');\n}\nif (fone.length === 10 || fone.length === 11) fone = '55' + fone;\nif (fone.length < 12 || fone.length > 13) fone = '';\nconst emailBruto = acha(/e-?mail/i);\nconst email = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(emailBruto) ? emailBruto.toLowerCase() : '';\nconst usados = new Set([nome, emailBruto].filter(Boolean));\nconst mensagem = acha(/mensag|message|assunto|precisa|conte|duvida|pedido|obs/i) ||\n  Object.values(campos).filter(v => !usados.has(v) && v.replace(/\\D/g, '').length < 10).sort((a, c) => c.length - a.length)[0] || '';\nif (!nome && !fone && !email && mensagem.length < 3) return erro('Formulário vazio.');\n\nconst eng = b.engajamento || {};\nconst lead = {\n  lead: 'ld' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),\n  pagina_id: id, nome, whatsapp: fone, email, mensagem: mensagem.slice(0, 600), campos,\n  origem: limpa(b.origem, 40) || 'direto',\n  pagina: { titulo: limpa(b.pagina && b.pagina.titulo, 120), descricao: limpa(b.pagina && b.pagina.descricao, 300), url: limpa(b.pagina && b.pagina.url, 300) },\n  engajamento: { segundos: Math.min(Number(eng.segundos) || 0, 36000), rolagem: Math.min(Number(eng.rolagem) || 0, 100), cliques: Math.min(Number(eng.cliques) || 0, 999), voltou: !!eng.voltou },\n  criadoEm: new Date().toISOString(),\n};\nreturn [{ json: { valido: true, lead } }];"
+    },
+    "name": "Validar lead",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     500,
+     0
+    ],
+    "id": "09429abe-52dc-408b-bba5-c9849e02e4ab"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "bfec6bc1-720b-4d31-a3df-a218b9fa95ce",
+        "leftValue": "={{ $json.valido }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Lead válido?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     750,
+     0
+    ],
+    "id": "af30cd02-d055-4bc2-92ef-3e502782c937"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      },
+      "responseCode": 400
+     }
+    },
+    "name": "Responde erro",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     200
+    ],
+    "id": "de8bf84c-3441-4557-ba27-a7473e5d4627"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde recebido",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     0
+    ],
+    "id": "579828ab-9fe7-405f-87fc-08ee831aee7e"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "status",
+     "key": "=lpia:status:{{ $('Validar lead').first().json.lead.pagina_id }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê dados da página",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1250,
+     0
+    ],
+    "id": "d32e9163-9b08-4ac4-a7e8-373e0ac4a922",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'LEAD:\\n' + JSON.stringify($('Validar lead').first().json.lead, null, 1) + '\\n\\nEMPRESA DA PÁGINA: ' + (JSON.parse($json.status || '{}').empresa || 'não informada') }}",
+     "options": {
+      "systemMessage": "Você é um SDR (pré-vendedor) experiente. Avalie o lead que preencheu o formulário de contato de uma landing page e diga o quanto ele está pronto para comprar.\n\nCONSIDERE\n- Intenção: pediu orçamento, preço, horário, disponibilidade ou quer contratar? Isso vale muito.\n- Clareza: explicou o que precisa? Mensagem vaga vale menos.\n- Urgência: menciona data, \"hoje\", \"urgente\", evento próximo?\n- Fit: o pedido combina com o que a página oferece (título e descrição)?\n- Contato: deixou WhatsApp ou e-mail válido?\n- Engajamento: tempo na página, quanto rolou e se voltou outras vezes.\n- Spam ou teste (texto aleatório, \"teste\", links, ofensas): spam true e nota baixa.\n\nnota de 0 a 100 (70+ = quente, 40 a 69 = morno, abaixo de 40 = frio).\nmensagem_sugerida: mensagem curta de WhatsApp, cordial e personalizada com o primeiro nome e o que a pessoa pediu, terminando com uma pergunta que avance a venda. Português do Brasil.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"nota\":0,\"intencao\":\"\",\"urgencia\":\"alta|media|baixa\",\"resumo\":\"1 frase\",\"proximo_passo\":\"\",\"mensagem_sugerida\":\"\",\"spam\":false}"
+     },
+     "needsFallback": true
+    },
+    "name": "IA Qualificadora",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1500,
+     0
+    ],
+    "id": "caeb2cc7-3b3e-4927-913d-458e8328381e",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 1500,
+      "temperature": 0.3,
+      "timeout": 120000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro da Qualificadora",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     230
+    ],
+    "id": "67036776-8a7a-491a-822e-79039a90915a",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst lead = JSON.parse(JSON.stringify($('Validar lead').first().json.lead));\nlet pagina = null;\ntry { pagina = JSON.parse($('Lê dados da página').first().json.status || 'null'); } catch (e) {}\nconst ia = parseJSON($input.first().json.output ?? '');\nconst limpa = (v, max) => String(v ?? '').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst e = lead.engajamento;\n\n// Sinais objetivos, que não dependem da IA\nlet bonus = 0; const sinais = [];\nif (lead.whatsapp) { bonus += 10; sinais.push('deixou WhatsApp'); }\nif (e.rolagem >= 75) { bonus += 8; sinais.push(`leu ${e.rolagem}% da página`); }\nif (e.segundos >= 60) { bonus += 5; sinais.push(`ficou ${Math.round(e.segundos / 60)} min`); }\nif (e.voltou) { bonus += 7; sinais.push('voltou à página'); }\n\nlet nota, usouIA = false;\nif (ia && Number.isFinite(Number(ia.nota))) {\n  usouIA = true;\n  nota = Math.round(Number(ia.nota) * 0.8 + bonus);\n} else {\n  const temIntencao = /orçamento|orcamento|preço|preco|valor|agendar|marcar|quanto|contratar|comprar|disponib/i.test(lead.mensagem);\n  nota = 25 + bonus + (temIntencao ? 25 : 0) + (lead.mensagem.length > 40 ? 10 : 0);\n}\nconst spam = !!(ia && ia.spam) || /^(teste|test|asdf|qwer|aaa+)\\b/i.test(lead.mensagem + ' ' + lead.nome) || /https?:\\/\\//i.test(lead.mensagem);\nif (spam) nota = Math.min(nota, 15);\nnota = Math.max(0, Math.min(100, nota));\nconst temperatura = nota >= 70 ? 'quente' : nota >= 40 ? 'morno' : 'frio';\n\nconst primeiro = (lead.nome || '').split(' ')[0];\nObject.assign(lead, {\n  nota, temperatura, spam, usou_ia: usouIA, sinais,\n  empresa: (pagina && pagina.empresa) || lead.pagina.titulo || lead.pagina_id,\n  intencao: limpa(ia && ia.intencao, 160),\n  urgencia: ['alta', 'media', 'baixa'].includes(ia && ia.urgencia) ? ia.urgencia : 'media',\n  resumo: limpa(ia && ia.resumo, 240) || 'Classificado pelas regras automáticas (a IA não respondeu).',\n  proximo_passo: limpa(ia && ia.proximo_passo, 200) || (lead.whatsapp ? 'Chamar no WhatsApp ainda hoje.' : 'Responder pelo canal informado.'),\n  mensagem_sugerida: limpa(ia && ia.mensagem_sugerida, 500) || `Olá${primeiro ? ', ' + primeiro : ''}! Recebemos sua mensagem pelo site e queremos te ajudar. Podemos conversar agora?`,\n});\nreturn [{ json: { lead, lead_str: JSON.stringify(lead) } }];"
+    },
+    "name": "Nota final",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1810,
+     0
+    ],
+    "id": "ab9544e3-4b38-42a9-b319-66557e5b31f2"
+   },
+   {
+    "parameters": {
+     "operation": "push",
+     "list": "lead:todos",
+     "messageData": "={{ $json.lead_str }}",
+     "tail": true
+    },
+    "name": "Guarda lead",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2060,
+     0
+    ],
+    "id": "a3164db2-144b-483d-8e6c-ada3ceca69a4",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "// ⚙️ CONFIGURE AQUI para receber o alerta no WhatsApp (deixe NUMERO vazio para desligar)\nconst NUMERO = '';                 // quem recebe o alerta, com DDI e DDD. Ex: '5591999998888'\nconst EVOLUTION_URL = '';          // endereço da sua Evolution API. Ex: 'https://minha-evolution.com'\nconst INSTANCIA = '';              // nome da instância na Evolution\nconst APIKEY = '';                 // apikey da instância (o ideal é usar uma credencial do n8n)\nconst SO_QUENTES_E_MORNOS = true;  // true = não avisa leads frios\n\nconst l = $('Nota final').first().json.lead;\nconst base = String($('Lead chega (POST)').first().json.webhookUrl || '').split('/webhook/')[0];\nconst ICONE = { quente: '🔥', morno: '🌤️', frio: '❄️' };\nconst texto = [\n  `${ICONE[l.temperatura]} *Novo lead ${l.temperatura.toUpperCase()}* · nota ${l.nota}/100`,\n  `🏢 ${l.empresa}`,\n  `👤 ${l.nome || 'Sem nome'}${l.whatsapp ? ' · 📱 +' + l.whatsapp : ''}${l.email ? ' · ✉️ ' + l.email : ''}`,\n  l.mensagem ? `💬 \"${l.mensagem.slice(0, 240)}\"` : null,\n  `🧠 ${l.resumo}`,\n  `👉 ${l.proximo_passo}`,\n  `📋 Painel: ${base}/webhook/lp-leads?id=${l.pagina_id}`,\n].filter(Boolean).join('\\n');\n\nconst ligado = !!(NUMERO && EVOLUTION_URL && INSTANCIA && APIKEY) && !l.spam && (!SO_QUENTES_E_MORNOS || l.temperatura !== 'frio');\nreturn [{ json: { ligado, url: `${EVOLUTION_URL.replace(/\\/$/, '')}/message/sendText/${INSTANCIA}`, apikey: APIKEY, numero: NUMERO, texto } }];"
+    },
+    "name": "Monta alerta",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2310,
+     0
+    ],
+    "id": "1142ff66-04a9-4094-8f9d-7cb04fe404f8"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "bf654281-97d1-4805-8fe5-9ee566ce0ff4",
+        "leftValue": "={{ $json.ligado }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Alerta ligado?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     2560,
+     0
+    ],
+    "id": "03d705eb-92d2-4927-95ca-48fcab268184"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $json.url }}",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "apikey",
+        "value": "={{ $json.apikey }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ number: $json.numero, text: $json.texto }) }}",
+     "options": {
+      "timeout": 20000
+     }
+    },
+    "name": "Envia alerta no WhatsApp",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     2810,
+     -120
+    ],
+    "id": "d98f32bd-8cc3-4448-9b42-8665c7aeae87",
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {},
+    "name": "Sem alerta",
+    "type": "n8n-nodes-base.noOp",
+    "typeVersion": 1,
+    "position": [
+     2810,
+     120
+    ],
+    "id": "048a8bb2-5f57-44e1-ad8f-296dd4af26cd"
+   },
+   {
+    "parameters": {
+     "path": "lp-leads",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Painel de leads (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1150
+    ],
+    "id": "50bcbf45-5ead-4b49-abc9-adab0f745eae",
+    "webhookId": "b782eec3-0da6-41cd-8b8d-e06df79c2bde"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "leads",
+     "key": "lead:todos",
+     "keyType": "list",
+     "options": {}
+    },
+    "name": "Lê leads",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     1150
+    ],
+    "id": "39093b0d-eba4-440c-a9ab-56219705934f",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "situacao",
+     "key": "lead:situacao",
+     "keyType": "hash",
+     "options": {}
+    },
+    "name": "Lê situação",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     500,
+     1150
+    ],
+    "id": "e8486a2f-d0c9-4705-b97b-4a1bb85226c5",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "// 🔐 Senha do painel: troque aqui e também no node \"Validar ação\"\nconst SENHA = '<SEGREDO_REMOVIDO>';\nconst q = $('Painel de leads (GET)').first().json.query || {};\nconst id = /^[a-z0-9-]{4,80}$/.test(q.id || '') ? q.id : '';\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\nconst casca = (titulo, corpo, extra = '') => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\"><title>${esc(titulo)}</title>\n<style>\n:root{--plano:#f6f5f2;--sup:#fff;--tx:#14130f;--tx2:#55534d;--mu:#8a877f;--borda:rgba(20,19,15,.10);--s1:#2a78d6;--trilho:#cde2fb;--quente:#fde4d8;--morno:#fdf1cf;--frio:#dcebfb}\n@media (prefers-color-scheme:dark){:root{--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--mu:#898781;--borda:rgba(255,255,255,.10);--s1:#3987e5;--trilho:#26303b;--quente:#4a2617;--morno:#45380f;--frio:#16324f}}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);padding:22px 14px 60px;line-height:1.45}\n.w{max-width:1000px;margin:0 auto}h1{font-size:24px}.sub{color:var(--tx2);font-size:13.5px;margin-top:4px}\n.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:16px}\n.k a{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--tx)}\n.k a.on{outline:2px solid var(--s1)}.k span{color:var(--tx2);font-size:13px;font-weight:600}.k b{display:block;font-size:26px}\n.lead{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px 18px;margin-top:12px}\n.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}\n.nome{font-size:17px;font-weight:650}.meta{color:var(--mu);font-size:12.5px;margin-top:2px}\n.tag{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;font-weight:650;font-size:13px;color:var(--tx)}\n.t-quente{background:var(--quente)}.t-morno{background:var(--morno)}.t-frio{background:var(--frio)}\n.nota{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--tx2)}\n.trilho{flex:1;max-width:260px;height:8px;background:var(--trilho);border-radius:4px;overflow:hidden}.trilho i{display:block;height:100%;background:var(--s1);border-radius:0 4px 4px 0}\n.msg{margin-top:10px;padding:10px 12px;border-left:3px solid var(--borda);color:var(--tx);font-size:14.5px;white-space:pre-wrap}\n.ia{margin-top:10px;font-size:14px;color:var(--tx2)}.ia b{color:var(--tx)}\n.sinais{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.sinais span{font-size:12px;border:1px solid var(--borda);border-radius:999px;padding:2px 9px;color:var(--tx2)}\n.acoes{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}\n.btn{border:1px solid var(--borda);background:var(--sup);color:var(--tx);border-radius:10px;padding:8px 12px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:none}\n.btn.zap{background:#25d366;border-color:#25d366;color:#05301a}.btn.sel{background:var(--tx);color:var(--sup);border-color:var(--tx)}\n.vazio{color:var(--mu);margin-top:20px}form.login{max-width:360px;margin:70px auto;background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:26px;text-align:center}\nform.login input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--borda);background:var(--plano);color:var(--tx);font:inherit;margin:14px 0 10px}\n.erro{color:#d03b3b;font-weight:600;font-size:14px}\n</style></head><body><div class=\"w\">${corpo}</div>${extra}</body></html>`;\n\nif (q.senha !== SENHA) {\n  return [{ json: { codigo: q.senha ? 401 : 200, html: casca('Leads · acesso', `<form class=\"login\" method=\"get\"><div style=\"font-size:42px\">🎯</div><h1>Painel de leads</h1><p class=\"sub\">Digite a senha do painel</p>\n    ${id ? `<input type=\"hidden\" name=\"id\" value=\"${esc(id)}\">` : ''}<input name=\"senha\" type=\"password\" placeholder=\"Senha\" autofocus required aria-label=\"Senha\">\n    ${q.senha ? '<p class=\"erro\">Senha incorreta.</p>' : ''}<button class=\"btn zap\" style=\"width:100%\">Entrar</button></form>`) } }];\n}\n\nlet lista = $('Lê leads').first().json.leads;\nif (!Array.isArray(lista)) lista = lista ? [lista] : [];\nconst situacao = $('Lê situação').first().json.situacao || {};\nlet leads = lista.map(s => { try { return typeof s === 'string' ? JSON.parse(s) : s; } catch (e) { return null; } }).filter(Boolean).reverse();\nif (id) leads = leads.filter(l => l.pagina_id === id);\nleads.forEach(l => { l.situacao = situacao[l.lead] || 'novo'; });\nconst cont = t => leads.filter(l => l.temperatura === t).length;\nconst filtro = ['quente', 'morno', 'frio'].includes(q.t) ? q.t : '';\nconst vis = filtro ? leads.filter(l => l.temperatura === filtro) : leads;\nconst link = t => `?${id ? 'id=' + esc(id) + '&' : ''}senha=${encodeURIComponent(SENHA)}${t ? '&t=' + t : ''}`;\nconst ICONE = { quente: '🔥 Quente', morno: '🌤️ Morno', frio: '❄️ Frio' };\nconst SIT = { novo: '🆕 Novo', contatado: '💬 Contatado', fechado: '✅ Fechado', perdido: '✖️ Perdido' };\nconst fuso = { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' };\n\nconst cards = vis.slice(0, 200).map(l => `<article class=\"lead\" data-lead=\"${esc(l.lead)}\">\n  <div class=\"top\"><div><div class=\"nome\">${esc(l.nome || 'Sem nome')}</div>\n  <div class=\"meta\">${esc(new Date(l.criadoEm).toLocaleString('pt-BR', fuso))} · ${esc(l.empresa)} · origem: ${esc(l.origem)}${l.whatsapp ? ' · 📱 +' + esc(l.whatsapp) : ''}${l.email ? ' · ✉️ ' + esc(l.email) : ''}</div></div>\n  <span class=\"tag t-${l.temperatura}\">${ICONE[l.temperatura]}</span></div>\n  <div class=\"nota\">Nota <b>${l.nota}</b><span class=\"trilho\" role=\"meter\" aria-valuenow=\"${l.nota}\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-label=\"Nota do lead\"><i style=\"width:${l.nota}%\"></i></span>${l.spam ? ' · ⚠️ parece spam ou teste' : ''}</div>\n  ${l.mensagem ? `<div class=\"msg\">${esc(l.mensagem)}</div>` : ''}\n  <div class=\"ia\">🧠 ${esc(l.resumo)}${l.intencao ? `<br><b>Intenção:</b> ${esc(l.intencao)} · <b>Urgência:</b> ${esc(l.urgencia)}` : ''}<br>👉 <b>Próximo passo:</b> ${esc(l.proximo_passo)}</div>\n  ${(l.sinais || []).length ? `<div class=\"sinais\">${l.sinais.map(s => `<span>${esc(s)}</span>`).join('')}</div>` : ''}\n  <div class=\"acoes\">${l.whatsapp ? `<a class=\"btn zap\" target=\"_blank\" rel=\"noopener\" href=\"https://wa.me/${esc(l.whatsapp)}?text=${encodeURIComponent(l.mensagem_sugerida)}\">📲 Responder com a mensagem sugerida</a>` : ''}\n  ${Object.entries(SIT).map(([k, v]) => `<button class=\"btn ${l.situacao === k ? 'sel' : ''}\" data-s=\"${k}\" type=\"button\">${v}</button>`).join('')}</div>\n</article>`).join('');\n\nconst corpo = `<h1>🎯 Leads${id && leads[0] ? ' · ' + esc(leads[0].empresa) : ''}</h1>\n<p class=\"sub\">${id ? 'Leads desta página' : 'Leads de todas as landing pages'} · a IA dá a nota de 0 a 100 e sugere a resposta</p>\n<div class=\"k\"><a href=\"${link('')}\" class=\"${filtro ? '' : 'on'}\"><span>Todos</span><b>${leads.length}</b></a>\n<a href=\"${link('quente')}\" class=\"${filtro === 'quente' ? 'on' : ''}\"><span>🔥 Quentes</span><b>${cont('quente')}</b></a>\n<a href=\"${link('morno')}\" class=\"${filtro === 'morno' ? 'on' : ''}\"><span>🌤️ Mornos</span><b>${cont('morno')}</b></a>\n<a href=\"${link('frio')}\" class=\"${filtro === 'frio' ? 'on' : ''}\"><span>❄️ Frios</span><b>${cont('frio')}</b></a>\n<a href=\"${link(filtro)}\"><span>💬 Já contatados</span><b>${leads.filter(l => l.situacao !== 'novo').length}</b></a></div>\n${cards || '<p class=\"vazio\">Nenhum lead por aqui ainda. Eles chegam quando alguém envia o formulário de contato da landing page.</p>'}`;\n\nconst script = `<script>\ndocument.addEventListener('click', function (e) {\n  var b = e.target.closest('[data-s]'); if (!b) return;\n  var card = b.closest('[data-lead]'); b.disabled = true;\n  fetch('/webhook/lp-lead-acao', { method: 'POST', headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ senha: ${JSON.stringify(SENHA)}, lead: card.getAttribute('data-lead'), situacao: b.getAttribute('data-s') }) })\n    .then(function (r) { return r.json(); }).then(function (j) {\n      b.disabled = false; if (!j.ok) return alert('Não foi possível salvar.');\n      card.querySelectorAll('[data-s]').forEach(function (x) { x.classList.toggle('sel', x === b); });\n    }).catch(function () { b.disabled = false; alert('Falha de conexão.'); });\n});\n</script>`;\nreturn [{ json: { codigo: 200, html: casca('Leads', corpo, script) } }];"
+    },
+    "name": "Montar painel de leads",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     750,
+     1150
+    ],
+    "id": "5d885f73-2194-4d0f-9d4f-c03c2003f676"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      },
+      "responseCode": "={{ $json.codigo }}"
+     }
+    },
+    "name": "Entrega o painel",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     1150
+    ],
+    "id": "37d62979-2d79-4121-b423-e49165a26030"
+   },
+   {
+    "parameters": {
+     "path": "lp-lead-acao",
+     "responseMode": "responseNode",
+     "options": {},
+     "httpMethod": "POST"
+    },
+    "name": "Ação no lead (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1700
+    ],
+    "id": "880000c9-db05-4240-a0a3-8b1b2fe7c370",
+    "webhookId": "828ba992-18b1-4ce4-a550-b4f2fb2bccc4"
+   },
+   {
+    "parameters": {
+     "jsCode": "// 🔐 Mesma senha do node \"Montar painel de leads\"\nconst SENHA = '<SEGREDO_REMOVIDO>';\nlet b = $('Ação no lead (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst ok = b.senha === SENHA && /^ld[a-z0-9]{6,24}$/.test(String(b.lead || '')) && ['novo', 'contatado', 'fechado', 'perdido'].includes(b.situacao);\nreturn [{ json: { ok, valor: ok ? JSON.stringify({ [b.lead]: b.situacao }) : '' } }];"
+    },
+    "name": "Validar ação",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     250,
+     1700
+    ],
+    "id": "61558eda-6824-4e93-a847-03c2419a089f"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "2eec09e6-f212-4c54-9ec7-ca380a591ba6",
+        "leftValue": "={{ $json.ok }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Ação válida?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     500,
+     1700
+    ],
+    "id": "f79b24d7-64a2-4a6c-a2ac-abe410ca66a2"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "lead:situacao",
+     "value": "={{ $json.valor }}",
+     "keyType": "hash",
+     "valueIsJSON": true,
+     "expire": false
+    },
+    "name": "Salva situação",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     750,
+     1700
+    ],
+    "id": "1f39b8ee-eac5-4e5d-b543-7b1ff0bc4107",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde ok",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     1700
+    ],
+    "id": "10ff8f39-9dfd-4a8f-8535-248fd08b6034"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      },
+      "responseCode": 403
+     }
+    },
+    "name": "Responde negado",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     750,
+     1900
+    ],
+    "id": "5be37788-14ea-40aa-ba41-05cb424e75e4"
+   },
+   {
+    "parameters": {
+     "content": "# 🎯 LEADS COM NOTA DA IA (um CRM simples)\n\n🤔 **O que é um lead?** Uma pessoa que demonstrou interesse: preencheu o formulário de contato da landing page.\n\n🏆 **O problema que resolvemos:** o dono recebe muitos contatos e não sabe **quem atender primeiro**. Aqui a IA lê cada lead e dá uma **nota de 0 a 100**:\n🔥 **Quente** (70+): quer comprar, atenda já\n🌤️ **Morno** (40 a 69): interessado, precisa de um empurrão\n❄️ **Frio** (abaixo de 40): só curiosidade, ou spam\n\nE ainda escreve a **mensagem de resposta** pronta para mandar no WhatsApp! 📲\n\n## 🔗 De onde vêm os leads?\nDas landing pages do **Gerador PRO**. O script do fluxo de **Métricas** \"escuta\" o formulário de contato e manda os dados para cá, junto com o **engajamento** da pessoa (quanto leu, quanto tempo ficou, se voltou).\n\n## ▶️ Como testar\n1. Abra uma landing page do Gerador PRO\n2. Preencha o formulário de contato e envie\n3. Abra `/webhook/lp-leads` e use a senha **leads-f480c7**\n\n## 🧭 As 3 faixas\n1️⃣ **Receber e qualificar** (esta faixa de cima)\n2️⃣ **Painel** com filtros por temperatura\n3️⃣ **Marcar situação**: novo, contatado, fechado ou perdido",
+     "height": 867,
+     "width": 760,
+     "color": 6
+    },
+    "name": "Nota · Comece aqui",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1400,
+     -160
+    ],
+    "id": "c56d50d0-546d-4e1f-9add-7fdabf90f51e"
+   },
+   {
+    "parameters": {
+     "content": "## 1️⃣ RECEBER E QUALIFICAR\n\n🔔 **Lead chega (POST)**: o formulário da página chega aqui.\n🚧 **Contador anti-spam**: no máximo 20 envios por hora da mesma internet.\n🧹 **Validar lead**: descobre pelo **nome do campo** o que é nome, WhatsApp, e-mail e mensagem, mesmo que cada página tenha campos diferentes.\n🚦 **Lead válido?** Se o formulário veio vazio, responde erro.\n⚡ **Responde recebido**: a página não fica esperando a IA.\n🗄️ **Lê dados da página**: pega o nome da empresa.\n🤖 **IA Qualificadora** (cérebro: `gemini-3.1-flash-lite`): avalia intenção, urgência, clareza e se é spam.\n🧮 **Nota final**: junta a nota da IA com **sinais reais** (deixou WhatsApp, leu a página toda, voltou). Se a IA falhar, as regras dão a nota sozinhas.\n🗄️ **Guarda lead**: vai para a lista no Redis.\n📲 **Monta alerta** e **Alerta ligado?**: avisa no WhatsApp. ⚙️ Vem **desligado**: preencha o número e a Evolution no topo do node **Monta alerta**.",
+     "height": 660,
+     "width": 560,
+     "color": 4
+    },
+    "name": "Nota · Qualificar",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -600,
+     -160
+    ],
+    "id": "93a5dea3-0198-49a2-94c0-ce529d1cf518"
+   },
+   {
+    "parameters": {
+     "content": "## 2️⃣ PAINEL DE LEADS 📋\n\n🔔 **Painel de leads (GET)**: `/webhook/lp-leads` (todos) ou `?id=CÓDIGO` (uma página só).\n🔐 Pede a **senha** (troque em **Montar painel de leads** e em **Validar ação**).\n🗄️ **Lê leads** (lista) e **Lê situação** (um \"hash\": uma tabelinha `lead → situação`).\n🎨 **Montar painel de leads** mostra cada lead com:\n• a nota numa barra, a temperatura e o motivo\n• o que a pessoa escreveu\n• o próximo passo sugerido\n• o botão **📲 Responder com a mensagem sugerida**, que já abre o WhatsApp com o texto pronto",
+     "height": 481,
+     "width": 560,
+     "color": 5
+    },
+    "name": "Nota · Painel",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -600,
+     990
+    ],
+    "id": "15c062e1-7194-4829-80e9-cdabb9006135"
+   },
+   {
+    "parameters": {
+     "content": "## 3️⃣ MARCAR A SITUAÇÃO ✅\n\nQuando você clica em **Contatado**, **Fechado** ou **Perdido** no painel:\n🔔 **Ação no lead (POST)** recebe o clique\n🔐 **Validar ação** confere a senha e o valor\n🗄️ **Salva situação** grava no hash `lead:situacao`\n💡 Exercício: calcular a **taxa de fechamento** (fechados ÷ contatados).",
+     "height": 420,
+     "width": 560,
+     "color": 7
+    },
+    "name": "Nota · Ação",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -600,
+     1540
+    ],
+    "id": "e642ec18-9a9c-4571-ad62-2c2bd3d8284d"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 1500,
+      "temperature": 0.3,
+      "timeout": 120000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro da Qualificadora",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     410
+    ],
+    "id": "83f82f40-8c37-4b83-a4c7-e4423d46a6cc",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Lead chega (POST)": {
+    "main": [
+     [
+      {
+       "node": "Contador anti-spam",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Contador anti-spam": {
+    "main": [
+     [
+      {
+       "node": "Validar lead",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Validar lead": {
+    "main": [
+     [
+      {
+       "node": "Lead válido?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lead válido?": {
+    "main": [
+     [
+      {
+       "node": "Responde recebido",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Responde erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Responde recebido": {
+    "main": [
+     [
+      {
+       "node": "Lê dados da página",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro da Qualificadora": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "IA Qualificadora",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê dados da página": {
+    "main": [
+     [
+      {
+       "node": "IA Qualificadora",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "IA Qualificadora": {
+    "main": [
+     [
+      {
+       "node": "Nota final",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Nota final",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Nota final": {
+    "main": [
+     [
+      {
+       "node": "Guarda lead",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Guarda lead": {
+    "main": [
+     [
+      {
+       "node": "Monta alerta",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Monta alerta": {
+    "main": [
+     [
+      {
+       "node": "Alerta ligado?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Alerta ligado?": {
+    "main": [
+     [
+      {
+       "node": "Envia alerta no WhatsApp",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Sem alerta",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Painel de leads (GET)": {
+    "main": [
+     [
+      {
+       "node": "Lê leads",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê leads": {
+    "main": [
+     [
+      {
+       "node": "Lê situação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê situação": {
+    "main": [
+     [
+      {
+       "node": "Montar painel de leads",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Montar painel de leads": {
+    "main": [
+     [
+      {
+       "node": "Entrega o painel",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ação no lead (POST)": {
+    "main": [
+     [
+      {
+       "node": "Validar ação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Validar ação": {
+    "main": [
+     [
+      {
+       "node": "Ação válida?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ação válida?": {
+    "main": [
+     [
+      {
+       "node": "Salva situação",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Responde negado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva situação": {
+    "main": [
+     [
+      {
+       "node": "Responde ok",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro da Qualificadora": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "IA Qualificadora",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-14T00:57:49.935Z",
+    "id": 238,
+    "workflowId": "MgWk3RWzM5q5Ria8",
+    "versionId": "3138fe4a-9cdb-46f2-869b-744c87ba6c11",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T00:57:49.994Z",
+    "id": 239,
+    "workflowId": "MgWk3RWzM5q5Ria8",
+    "versionId": "3138fe4a-9cdb-46f2-869b-744c87ba6c11",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

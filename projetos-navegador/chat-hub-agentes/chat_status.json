@@ -1,0 +1,25 @@
+{
+  "espacos_padrao": [
+    "Inovare-Pipeline",
+    "Inovare-Alertas",
+    "Inovare-Logs"
+  ],
+  "contas": {
+    "fabrica": {
+      "dry_run": true
+    },
+    "mundosolar1995": {
+      "dry_run": true
+    },
+    "canalalucinaai": {
+      "dry_run": true
+    },
+    "seebotsia": {
+      "dry_run": true
+    },
+    "emersonjosiel649": {
+      "dry_run": true
+    }
+  },
+  "ultima_execucao": "2026-07-02T16:19:41.863888+00:00"
+}

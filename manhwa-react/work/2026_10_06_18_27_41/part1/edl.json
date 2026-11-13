@@ -1,0 +1,994 @@
+{
+ "part": [
+  0.0,
+  40.3
+ ],
+ "keeps": [
+  [
+   0.48191700000000004,
+   15.770000000000001
+  ],
+  [
+   16.87,
+   37.61
+  ],
+  [
+   38.35,
+   40.3
+  ]
+ ],
+ "duration_out": 37.978083,
+ "zoom": [
+  [
+   0.0,
+   4.15,
+   1
+  ],
+  [
+   4.0,
+   5.728,
+   2
+  ],
+  [
+   10.918,
+   12.948,
+   1
+  ],
+  [
+   13.858,
+   18.008,
+   2
+  ],
+  [
+   17.858,
+   21.628,
+   1
+  ],
+  [
+   22.978,
+   27.128,
+   2
+  ],
+  [
+   26.978,
+   27.488,
+   1
+  ],
+  [
+   30.338,
+   34.488,
+   2
+  ],
+  [
+   34.338,
+   37.248,
+   1
+  ]
+ ],
+ "content_zoom": [
+  [
+   13.768083,
+   14.918083000000001
+  ],
+  [
+   32.668083,
+   33.818083
+  ],
+  [
+   34.668083,
+   35.818083
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 13.818083000000001,
+   "text": "SUPER NINTENDO",
+   "emoji": "🎮"
+  },
+  {
+   "t": 32.718083,
+   "text": "CORRE!",
+   "emoji": "🏃"
+  },
+  {
+   "t": 34.718083,
+   "text": "NO BRASIL",
+   "emoji": "🇧🇷"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 13.818083000000001,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 15.658083,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Ba Dum Tss - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 17.09013735,
+   "file": "D:\\manhwa-react\\assets\\sfx\\like.wav"
+  },
+  {
+   "t": 23.158082999999998,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Outros efeitos sonoros\\cartoon\\Cartoon Zoom Away Sound Effect.mp3"
+  },
+  {
+   "t": 30.718083,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Minecraft Anvil Falling Sound Effect EARRAPE.mp3"
+  },
+  {
+   "t": 32.718083,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 34.718083,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Cartoon Slide Whistle Down - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 35.478083,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 2.8,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_watchtoend.mov",
+   "dur": 1.7,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 13.718083000000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 13.818083000000001,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f3ae_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 15.658083,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f941_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 17.09013735,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_likeburst.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 23.158082999999998,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f4a8_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 30.618083,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 30.718083,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.4,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 32.618083,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 32.718083,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f3c3_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 34.618083,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 34.618083,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_emojirain.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 34.718083,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f1e7_1f1f7_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 35.478083,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk das Winx.mp3",
+ "meta": {
+  "hook": "NO BRASIL É DESSE JEITO!",
+  "title": "Sonic achou que era rápido, mas esqueceu que tá no BRASIL 😂🇧🇷 #shorts #sonic",
+  "description": "O Sonic achou que ia vencer fácil, mas não contava com o perigo brasileiro! 🏍️💨\nVocê já viu uma corrida mais caótica que essa?\nComenta aí o que aconteceria se o Sonic viesse pro Brasil! 🇧🇷\nSegue pra mais reacts insanos!\n\n#shorts #react #sonic #animação #sonicthehedgehog #brasil #humor #anime #corrida #meme #engracado #sonicbrasil #reactbrasil #animescomia",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#sonic",
+   "#animação",
+   "#sonicthehedgehog",
+   "#brasil",
+   "#humor",
+   "#anime",
+   "#corrida",
+   "#meme",
+   "#engracado",
+   "#reactbrasil"
+  ],
+  "tags": [
+   "react",
+   "sonic",
+   "sonic the hedgehog",
+   "animação sonic",
+   "sonic 2d",
+   "corrida sonic",
+   "sonic brasil",
+   "react sonic",
+   "humor brasileiro",
+   "meme sonic",
+   "anime react",
+   "sonic engraçado",
+   "react engraçado",
+   "dois caras numa moto",
+   "sonic super nintendo",
+   "animação engraçada",
+   "react brasil"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Se o Sonic viesse pro Brasil, ele sobreviveria? 🇧🇷😂",
+  "title_alternatives": [
+   "Sonic nunca correu tanto quanto no BRASIL 🇧🇷💨 #shorts #sonic",
+   "Dois caras numa moto atrás do Sonic?! SÓ NO BRASIL 😂🏍️ #shorts #react"
+  ],
+  "work": "SONIC",
+  "channel": "animescomia"
+ },
+ "channel": "animescomia",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1484_56_7.png",
+  "overlap": 56,
+  "y": 492,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_ff7a00_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Tamo",
+   "s": 0.0,
+   "e": 0.318083,
+   "p": 0.9,
+   "lip": 0.009348788923900501,
+   "speaker": "creator"
+  },
+  {
+   "w": "lá,",
+   "s": 0.318083,
+   "e": 0.49808299999999994,
+   "p": 0.9,
+   "lip": 0.011755804699645003,
+   "speaker": "creator"
+  },
+  {
+   "w": "mais",
+   "s": 0.49808299999999994,
+   "e": 0.618083,
+   "p": 0.9,
+   "lip": 0.010875082630811696,
+   "speaker": "creator"
+  },
+  {
+   "w": "um",
+   "s": 0.618083,
+   "e": 0.798083,
+   "p": 0.9,
+   "lip": 0.008697221075165481,
+   "speaker": "creator"
+  },
+  {
+   "w": "vídeo",
+   "s": 0.798083,
+   "e": 0.9780829999999999,
+   "p": 0.9,
+   "lip": 0.003938548928429751,
+   "speaker": "creator"
+  },
+  {
+   "w": "do",
+   "s": 0.9780829999999999,
+   "e": 1.198083,
+   "p": 0.9,
+   "lip": 0.003910369979313027,
+   "speaker": "creator"
+  },
+  {
+   "w": "Sonic.",
+   "s": 1.198083,
+   "e": 1.3780830000000002,
+   "p": 0.9,
+   "lip": 0.0031091364744477634,
+   "speaker": "creator"
+  },
+  {
+   "w": "Preparado",
+   "s": 1.238083,
+   "e": 1.718083,
+   "p": 0.9,
+   "lip": 0.0026275481180047964,
+   "speaker": "creator"
+  },
+  {
+   "w": "pra",
+   "s": 1.718083,
+   "e": 1.8380829999999997,
+   "p": 0.9,
+   "lip": 0.0026149296566807772,
+   "speaker": "creator"
+  },
+  {
+   "w": "comer",
+   "s": 1.8380829999999997,
+   "e": 2.118083,
+   "p": 0.9,
+   "lip": 0.002761058533118377,
+   "speaker": "creator"
+  },
+  {
+   "w": "poeira?",
+   "s": 2.118083,
+   "e": 2.738083,
+   "p": 0.9,
+   "lip": 0.0030292974569653395,
+   "speaker": "creator"
+  },
+  {
+   "w": "Arrogante",
+   "s": 2.3180829999999997,
+   "e": 3.2780829999999996,
+   "p": 0.9,
+   "lip": 0.0029012120763299556,
+   "speaker": "creator"
+  },
+  {
+   "w": "você,",
+   "s": 3.2780829999999996,
+   "e": 3.638083,
+   "p": 0.9,
+   "lip": 0.003150771850839974,
+   "speaker": "creator"
+  },
+  {
+   "w": "meu",
+   "s": 3.638083,
+   "e": 3.758083,
+   "p": 0.9,
+   "lip": 0.0028961227138114415,
+   "speaker": "creator"
+  },
+  {
+   "w": "amigo?",
+   "s": 3.758083,
+   "e": 4.098083,
+   "p": 0.9,
+   "lip": 0.0027528281235036315,
+   "speaker": "creator"
+  },
+  {
+   "w": "Só",
+   "s": 4.098083,
+   "e": 4.298083,
+   "p": 0.9,
+   "lip": 0.0021146997586110458,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 4.298083,
+   "e": 4.478083,
+   "p": 0.9,
+   "lip": 0.0021726598535575623,
+   "speaker": "creator"
+  },
+  {
+   "w": "acabar",
+   "s": 4.478083,
+   "e": 4.758083,
+   "p": 0.9,
+   "lip": 0.007877362643507097,
+   "speaker": "creator"
+  },
+  {
+   "w": "depois",
+   "s": 4.758083,
+   "e": 5.018083,
+   "p": 0.9,
+   "lip": 0.007466689176422848,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 5.018083,
+   "e": 5.1180829999999995,
+   "p": 0.9,
+   "lip": 0.008634828635314644,
+   "speaker": "creator"
+  },
+  {
+   "w": "terminar,",
+   "s": 5.1180829999999995,
+   "e": 5.5780829999999995,
+   "p": 0.9,
+   "lip": 0.005940876128308831,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ainda",
+   "s": 10.918083000000001,
+   "e": 11.398083000000002,
+   "p": 0.9,
+   "lip": 0.017284757836960676,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 11.398083000000002,
+   "e": 11.598083,
+   "p": 0.9,
+   "lip": 0.020945033411983262,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 11.598083,
+   "e": 11.678083,
+   "p": 0.9,
+   "lip": 0.020245982266985974,
+   "speaker": "creator"
+  },
+  {
+   "w": "Sonic",
+   "s": 11.618083,
+   "e": 11.918083000000001,
+   "p": 0.9,
+   "lip": 0.01701496760609981,
+   "speaker": "creator"
+  },
+  {
+   "w": "2D,",
+   "s": 11.918083000000001,
+   "e": 12.598083,
+   "p": 0.9,
+   "lip": 0.009350844550554323,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 12.598083,
+   "e": 12.798083,
+   "p": 0.9,
+   "lip": 0.004676924538272263,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ainda",
+   "s": 13.858083,
+   "e": 14.418083000000001,
+   "p": 0.9,
+   "lip": 0.007350777231211025,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 14.418083000000001,
+   "e": 14.558083,
+   "p": 0.9,
+   "lip": 0.009661321911338247,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 14.558083,
+   "e": 14.778083,
+   "p": 0.9,
+   "lip": 0.009691041056324871,
+   "speaker": "creator"
+  },
+  {
+   "w": "Sonic",
+   "s": 14.778083,
+   "e": 14.998083000000001,
+   "p": 0.9,
+   "lip": 0.010743165579415058,
+   "speaker": "creator"
+  },
+  {
+   "w": "do",
+   "s": 14.998083000000001,
+   "e": 15.218083,
+   "p": 0.9,
+   "lip": 0.011478413701007177,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 15.288083000000002,
+   "e": 15.368083000000002,
+   "p": 0.9,
+   "lip": 0.0025153557698108266,
+   "speaker": "creator"
+  },
+  {
+   "w": "quê?",
+   "s": 15.338083000000003,
+   "e": 15.658083,
+   "p": 0.9,
+   "lip": 0.0031708781645932585,
+   "speaker": "creator"
+  },
+  {
+   "w": "Haha,",
+   "s": 15.658083,
+   "e": 16.198083000000004,
+   "p": 0.9,
+   "lip": 0.0036940354496122997,
+   "speaker": "creator"
+  },
+  {
+   "w": "essa",
+   "s": 16.198083000000004,
+   "e": 16.358083,
+   "p": 0.9,
+   "lip": 0.005986698190617893,
+   "speaker": "creator"
+  },
+  {
+   "w": "sem",
+   "s": 16.358083,
+   "e": 16.518083000000004,
+   "p": 0.9,
+   "lip": 0.007164916791681021,
+   "speaker": "creator"
+  },
+  {
+   "w": "dúvida",
+   "s": 16.518083000000004,
+   "e": 16.738083000000003,
+   "p": 0.9,
+   "lip": 0.005498329164094482,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 16.738083000000003,
+   "e": 16.838083000000005,
+   "p": 0.9,
+   "lip": 0.004899554256497221,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 16.838083000000005,
+   "e": 16.918083000000003,
+   "p": 0.9,
+   "lip": 0.0052002386673379265,
+   "speaker": "creator"
+  },
+  {
+   "w": "corrida",
+   "s": 16.898083,
+   "e": 17.078083,
+   "p": 0.9,
+   "lip": 0.004754458390959888,
+   "speaker": "creator"
+  },
+  {
+   "w": "mais",
+   "s": 17.078083,
+   "e": 17.318083,
+   "p": 0.9,
+   "lip": 0.0022806677283190835,
+   "speaker": "creator"
+  },
+  {
+   "w": "fácil",
+   "s": 17.318083,
+   "e": 17.638083,
+   "p": 0.9,
+   "lip": 0.00011671590383419638,
+   "speaker": "creator"
+  },
+  {
+   "w": "da",
+   "s": 17.638083,
+   "e": 17.758083,
+   "p": 0.9,
+   "lip": 0.0040837803503564925,
+   "speaker": "creator"
+  },
+  {
+   "w": "minha",
+   "s": 17.758083,
+   "e": 17.898083,
+   "p": 0.9,
+   "lip": 0.0045932754467546185,
+   "speaker": "creator"
+  },
+  {
+   "w": "vida!",
+   "s": 17.898083,
+   "e": 18.278083000000002,
+   "p": 0.9,
+   "lip": 0.006667799537813357,
+   "speaker": "creator"
+  },
+  {
+   "w": "E",
+   "s": 18.198083000000004,
+   "e": 18.418083000000003,
+   "p": 0.9,
+   "lip": 0.007784019958811514,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 18.418083000000003,
+   "e": 18.518083000000004,
+   "p": 0.9,
+   "lip": 0.00861398422486647,
+   "speaker": "creator"
+  },
+  {
+   "w": "já",
+   "s": 18.518083000000004,
+   "e": 18.678083,
+   "p": 0.9,
+   "lip": 0.004692334853608767,
+   "speaker": "creator"
+  },
+  {
+   "w": "corri",
+   "s": 18.678083,
+   "e": 18.778083000000002,
+   "p": 0.9,
+   "lip": 0.004180595288802643,
+   "speaker": "creator"
+  },
+  {
+   "w": "contra",
+   "s": 18.778083000000002,
+   "e": 19.058083000000003,
+   "p": 0.9,
+   "lip": 0.001092674810820262,
+   "speaker": "creator"
+  },
+  {
+   "w": "tartarugas!",
+   "s": 19.058083000000003,
+   "e": 20.218083,
+   "p": 0.9,
+   "lip": 0.002796234871424737,
+   "speaker": "creator"
+  },
+  {
+   "w": "Hã?",
+   "s": 20.458083000000002,
+   "e": 20.938083,
+   "p": 0.9,
+   "lip": 0.003105194602037815,
+   "speaker": "creator"
+  },
+  {
+   "w": "Como",
+   "s": 20.938083,
+   "e": 21.478082999999998,
+   "p": 0.9,
+   "lip": 0.001910981208427124,
+   "speaker": "creator"
+  },
+  {
+   "w": "tão",
+   "s": 22.978082999999998,
+   "e": 23.158082999999998,
+   "p": 0.9,
+   "lip": 0.0018229961386994288,
+   "speaker": "creator"
+  },
+  {
+   "w": "rápido?",
+   "s": 23.158082999999998,
+   "e": 23.638083,
+   "p": 0.9,
+   "lip": 0.007347565155009038,
+   "speaker": "creator"
+  },
+  {
+   "w": "Mano,",
+   "s": 23.818083,
+   "e": 24.218083,
+   "p": 0.9,
+   "lip": 0.016411974205121492,
+   "speaker": "creator"
+  },
+  {
+   "w": "acho",
+   "s": 24.218083,
+   "e": 24.298083,
+   "p": 0.9,
+   "lip": 0.01659873567597049,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 24.298083,
+   "e": 24.378083000000004,
+   "p": 0.9,
+   "lip": 0.014231435617520688,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 24.378083000000004,
+   "e": 24.518083000000004,
+   "p": 0.9,
+   "lip": 0.012749174313052832,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 24.518083000000004,
+   "e": 24.638083,
+   "p": 0.9,
+   "lip": 0.010318776669039418,
+   "speaker": "creator"
+  },
+  {
+   "w": "vence",
+   "s": 24.638083,
+   "e": 24.718083,
+   "p": 0.9,
+   "lip": 0.0069467566977331465,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 24.658082999999998,
+   "e": 24.778083000000002,
+   "p": 0.9,
+   "lip": 0.00653483847501394,
+   "speaker": "creator"
+  },
+  {
+   "w": "corrida",
+   "s": 24.778083000000002,
+   "e": 25.118083,
+   "p": 0.9,
+   "lip": 0.006906156075348405,
+   "speaker": "creator"
+  },
+  {
+   "w": "não,",
+   "s": 25.118083,
+   "e": 25.398083,
+   "p": 0.9,
+   "lip": 0.004580718223451016,
+   "speaker": "creator"
+  },
+  {
+   "w": "hein?",
+   "s": 25.398083,
+   "e": 25.598083000000003,
+   "p": 0.9,
+   "lip": 0.007872615035961898,
+   "speaker": "creator"
+  },
+  {
+   "w": "Que",
+   "s": 25.718083,
+   "e": 25.798083,
+   "p": 0.9,
+   "lip": 0.007262159851785555,
+   "speaker": "creator"
+  },
+  {
+   "w": "maneira",
+   "s": 25.738083000000003,
+   "e": 25.998083,
+   "p": 0.9,
+   "lip": 0.005623519126763069,
+   "speaker": "creator"
+  },
+  {
+   "w": "corrida,",
+   "s": 25.998083,
+   "e": 26.538083,
+   "p": 0.9,
+   "lip": 0.010649514003695053,
+   "speaker": "creator"
+  },
+  {
+   "w": "cara!",
+   "s": 26.538083,
+   "e": 26.698083000000004,
+   "p": 0.9,
+   "lip": 0.011067938701643692,
+   "speaker": "creator"
+  },
+  {
+   "w": "Você",
+   "s": 26.698083000000004,
+   "e": 26.818083,
+   "p": 0.9,
+   "lip": 0.012639181675090922,
+   "speaker": "creator"
+  },
+  {
+   "w": "acha",
+   "s": 26.818083,
+   "e": 26.898083,
+   "p": 0.9,
+   "lip": 0.011153094664275377,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 26.898083,
+   "e": 26.978082999999998,
+   "p": 0.9,
+   "lip": 0.008612776625538547,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 26.978082999999998,
+   "e": 27.058082999999996,
+   "p": 0.9,
+   "lip": 0.006811017978157752,
+   "speaker": "creator"
+  },
+  {
+   "w": "tô",
+   "s": 26.998083,
+   "e": 27.078083,
+   "p": 0.9,
+   "lip": 0.006280141397599986,
+   "speaker": "creator"
+  },
+  {
+   "w": "ligando",
+   "s": 27.078083,
+   "e": 27.338083000000005,
+   "p": 0.9,
+   "lip": 0.004213325792913807,
+   "speaker": "creator"
+  },
+  {
+   "w": "Deus!",
+   "s": 30.338083000000005,
+   "e": 30.798083000000005,
+   "p": 0.9,
+   "lip": 0.010662856311635792,
+   "speaker": "creator"
+  },
+  {
+   "w": "Dois",
+   "s": 30.938083000000006,
+   "e": 31.398083,
+   "p": 0.9,
+   "lip": 0.01887892162579606,
+   "speaker": "creator"
+  },
+  {
+   "w": "caras",
+   "s": 31.398083,
+   "e": 31.578083,
+   "p": 0.9,
+   "lip": 0.021257571384479267,
+   "speaker": "creator"
+  },
+  {
+   "w": "numa",
+   "s": 31.578083,
+   "e": 31.798083000000005,
+   "p": 0.9,
+   "lip": 0.016383319116321442,
+   "speaker": "creator"
+  },
+  {
+   "w": "moto!",
+   "s": 31.798083000000005,
+   "e": 32.398083,
+   "p": 0.9,
+   "lip": 0.012596941588259702,
+   "speaker": "creator"
+  },
+  {
+   "w": "Exato,",
+   "s": 32.218083,
+   "e": 33.058083,
+   "p": 0.9,
+   "lip": 0.0074243637626460295,
+   "speaker": "creator"
+  },
+  {
+   "w": "corre!",
+   "s": 33.058083,
+   "e": 33.798083000000005,
+   "p": 0.9,
+   "lip": 0.0036262557379788296,
+   "speaker": "creator"
+  },
+  {
+   "w": "No",
+   "s": 34.218083,
+   "e": 35.358083,
+   "p": 0.9,
+   "lip": 0.019432600586420757,
+   "speaker": "creator"
+  },
+  {
+   "w": "Brasil",
+   "s": 35.358083,
+   "e": 36.028083,
+   "p": 0.9,
+   "lip": 0.01692571982880266,
+   "speaker": "creator"
+  },
+  {
+   "w": "desse",
+   "s": 36.028083,
+   "e": 36.298083,
+   "p": 0.9,
+   "lip": 0.012281241297088708,
+   "speaker": "creator"
+  },
+  {
+   "w": "jeito!",
+   "s": 36.298083,
+   "e": 37.098083,
+   "p": 0.9,
+   "lip": 0.007338639617995765,
+   "speaker": "creator"
+  }
+ ]
+}

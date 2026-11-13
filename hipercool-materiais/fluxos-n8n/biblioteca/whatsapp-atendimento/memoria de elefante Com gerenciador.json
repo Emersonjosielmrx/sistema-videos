@@ -1,0 +1,1611 @@
+{
+ "name": "memoria de elefante Com gerenciador",
+ "nodes": [
+  {
+   "parameters": {
+    "public": true,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -304,
+    0
+   ],
+   "id": "40fccea6-89b0-4867-b33e-de3579528c82",
+   "name": "api da sua escolha",
+   "webhookId": "b2759a1d-df6d-4191-8e81-93b543b4ce94"
+  },
+  {
+   "parameters": {
+    "mode": "insert",
+    "tableName": "n8n_vectors3",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+   "typeVersion": 1.3,
+   "position": [
+    960,
+    0
+   ],
+   "id": "f34b5a3a-85c9-4e53-b2c9-170571ba04e0",
+   "name": "Postgres PGVector Store",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-embedding-001"
+   },
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    944,
+    160
+   ],
+   "id": "3bff3791-6ec0-4ba5-8fff-0313435f71f9",
+   "name": "Embeddings Gemini",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsonMode": "expressionData",
+    "jsonData": "={{ $('Edit Fields').item.json }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+   "typeVersion": 1.1,
+   "position": [
+    1072,
+    160
+   ],
+   "id": "7f1da580-098c-4bf1-8605-9a2823c2cf24",
+   "name": "insere"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "c73a1986-69e5-451d-a42f-9aabfa58e9ba",
+       "name": "output",
+       "value": "={{ $('AI Agent').item.json.output }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1232,
+    0
+   ],
+   "id": "4ab40299-6f10-4045-b610-b5c627822a08",
+   "name": "saida da api da sua escolha1"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "={{ $json.sessionId }}",
+    "tableName": "n8n_chat_histories_memoriaelefante",
+    "contextWindowLength": 5000
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    1056,
+    512
+   ],
+   "id": "6ded5824-9258-410e-940f-d5b2d8565941",
+   "name": "Postgres Memory1",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryManager",
+   "typeVersion": 1.1,
+   "position": [
+    1056,
+    352
+   ],
+   "id": "3a4ec8f9-0270-4313-858e-3a2247132433",
+   "name": "toda a comversa"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "106b02eb-13eb-420b-b7b9-dd497de9e2e1",
+       "name": "condicao",
+       "value": "quando o usuario citar que passou uma informacao que voce nao concontrou na memoria",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    304,
+    0
+   ],
+   "id": "dba0127f-e6d4-4db2-a12c-fe69c0eae414",
+   "name": "quando o agente deve acessar toda a memoria"
+  },
+  {
+   "parameters": {
+    "content": "## api da sua escolha 📥\nURL Única 🔗: Quando você ativa esse fluxo no n8n, ele cria uma URL única, uma espécie de webhook.\n\nEscuta e Inicia 👂: O nó fica \"ouvindo\" essa URL. Sempre que uma mensagem de chat é enviada para ela (por meio de uma API de chatbot como Telegram, Discord, etc.), o fluxo é disparado.\n\nCaptura de Dados 📥: Ele captura a mensagem e outras informações enviadas e as transforma em dados que os próximos nós do fluxo podem usar.",
+    "height": 432,
+    "width": 256,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -432,
+    -464
+   ],
+   "typeVersion": 1,
+   "id": "3aba919e-c862-456e-a38e-0c012de0fd86",
+   "name": "Sticky Note2"
+  },
+  {
+   "parameters": {
+    "content": "## vetorial json🧠\nEste nó opera como um agente de IA que recebe a entrada de um nó anterior e a processa com base em um conjunto de regras predefinidas. Sua principal função é atuar como um mediador, respondendo perguntas ou buscando informações com base em um contexto fornecido.",
+    "height": 288,
+    "width": 224,
+    "color": 7
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    16,
+    -320
+   ],
+   "typeVersion": 1,
+   "id": "d0bf2cf0-570b-41ea-92a7-3e56af932d45",
+   "name": "Sticky Note3"
+  },
+  {
+   "parameters": {
+    "content": "## quando o agente deve acessar toda a memória 🔡\nele está configurado para criar uma nova variável (ou chave) chamada condicao e atribuir um valor a ela.\n\nname: \"condicao\": Este é o nome da variável que o nó está criando. É uma forma de \"rotular\" a informação. 🏷️\n\nvalue: \"quando o usuario citar que passou uma informacao que voce nao concontrou na memoria\": Este é o valor que está sendo armazenado na variável condicao. É um texto que descreve uma situação específica. 📖\n\ntype: \"string\": Isso indica que o valor da variável é do tipo texto (string). 🔡",
+    "height": 656,
+    "width": 192,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    272,
+    -688
+   ],
+   "typeVersion": 1,
+   "id": "ebe3a3a3-2a1f-463b-a530-3ed79b3f6595",
+   "name": "Sticky Note4"
+  },
+  {
+   "parameters": {
+    "content": "## atendimento🎯\nEste nó é o motor de conversação. Ele pega as informações do cliente (mensagem do cliente) e o resultado de uma busca interna (mensagem da ia ajudante) e usa o guia completo do systemMessage para produzir uma resposta final que é personalizada, útil e segue a persona \"Diana\". 🎯",
+    "height": 336,
+    "width": 224,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    480,
+    -368
+   ],
+   "typeVersion": 1,
+   "id": "c678a57b-40e6-4768-b29c-56b811666973",
+   "name": "Sticky Note5"
+  },
+  {
+   "parameters": {
+    "content": "## Postgres PGVector Store💾\nEste nó é a memória de longo prazo para o seu assistente de IA. Em vez de a IA ter que \"aprender\" tudo do zero a cada vez, ela pode consultar informações que foram armazenadas previamente.\n\nExemplo de uso:\n\nUm nó anterior coleta documentos, artigos ou conversas. 📄\n\nEsses documentos são processados e convertidos em vetores (representações numéricas do texto). 🔢\n\nO nó \"Postgres PGVector Store\" insere esses vetores no banco de dados. 💾\n\nPosteriormente, outro nó no fluxo pode fazer uma busca de similaridade no mesmo banco de dados para encontrar informações relacionadas à pergunta do cliente. 🔎",
+    "height": 544,
+    "width": 304,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    880,
+    -576
+   ],
+   "typeVersion": 1,
+   "id": "0d63fbc1-06a3-476d-a56b-8e86b4540620",
+   "name": "Sticky Note6"
+  },
+  {
+   "parameters": {
+    "content": "## saida da api da sua escolha📨\nEste nó serve como um ponto de consolidação. Ele padroniza a saída do fluxo, tornando o dado acessível para outros nós. Por exemplo, a variável output pode ser usada em um nó final para enviar a resposta para o cliente, seja por meio de um serviço de mensageria, como Telegram ou WhatsApp. 📨",
+    "height": 432,
+    "width": 176,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    1200,
+    -496
+   ],
+   "typeVersion": 1,
+   "id": "cdf529b9-f780-4347-9450-684b8438be35",
+   "name": "Sticky Note7"
+  },
+  {
+   "parameters": {
+    "content": "## Reranker Cohere🔐\nEle utiliza o modelo de IA Rerank da Cohere para melhorar a qualidade das respostas de um sistema de busca. Ao invés de simplesmente apresentar os resultados na ordem em que foram encontrados, o nó os analisa novamente para determinar quais são os mais relevantes para a pergunta do usuário.",
+    "height": 320,
+    "width": 304
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -64,
+    336
+   ],
+   "typeVersion": 1,
+   "id": "11e7b64a-422a-414a-9c45-70bf569b166a",
+   "name": "Sticky Note8"
+  },
+  {
+   "parameters": {
+    "content": "![Texto alternativo da imagem](https://i.postimg.cc/sDgZQM33/Gemini-Generated-Image-rteud1rteud1rteu.png#full-width)",
+    "height": 448,
+    "width": 416,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -496,
+    208
+   ],
+   "typeVersion": 1,
+   "id": "0d19ab98-8899-40d0-8eee-96570df00714",
+   "name": "Sticky Note12"
+  },
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "sessionId"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    896,
+    352
+   ],
+   "id": "5f6208e5-607a-4735-9ffe-2f1cc7d842c9",
+   "name": "When Executed by Another Workflow"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "8546e880-dcca-48b9-a4d2-8799303c32b2",
+       "name": "texto",
+       "value": "=id_chat = {{ $('api da sua escolha').item.json.sessionId }}\n\nPergunta_humano = {{ $('api da sua escolha').item.json.chatInput }}\n\nresposta_da_ia = {{ $json.output }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    784,
+    0
+   ],
+   "id": "24e92f5e-4776-45f0-a56b-5e9d7bef1e04",
+   "name": "Edit Fields"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+   "typeVersion": 1.1,
+   "position": [
+    1184,
+    160
+   ],
+   "id": "ab46e390-6756-4393-bdfc-25975467f88b",
+   "name": "Default Data Loader"
+  },
+  {
+   "parameters": {
+    "description": "sempre acione essa tool para buscar o pensar na resposta"
+   },
+   "type": "@n8n/n8n-nodes-langchain.toolThink",
+   "typeVersion": 1.1,
+   "position": [
+    672,
+    160
+   ],
+   "id": "e5a25786-7b9e-406a-adf3-76b3b38469fe",
+   "name": "Think"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "nova_lista_de_chaves",
+     "mode": "list",
+     "cachedResultName": "nova_lista_de_chaves"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "tipo",
+       "value": "gemini"
+      },
+      {
+       "column": "status",
+       "condition": "IS NULL"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -128,
+    0
+   ],
+   "id": "2d864e1d-3c06-4694-847a-21bf9b309185",
+   "name": "consulta_chave",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "={{ $('api da sua escolha').item.json.sessionId }}",
+    "tableName": "n8n_chat_histories_memoriaelefante"
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    576,
+    160
+   ],
+   "id": "884555af-cb93-4351-9950-529dd0a849ab",
+   "name": "Memory",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "backend-memoria-elefante",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -1264,
+    0
+   ],
+   "id": "ebcd79ab-459c-4aef-862c-7ef5fb5124dc",
+   "name": "backend",
+   "webhookId": "bd38f5e2-f4e6-4070-9976-1817e94034e0"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -832,
+    128
+   ],
+   "id": "df45adc3-2c64-4cd0-acfe-10dd3508abdb",
+   "name": "Code6"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook16",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -688,
+    128
+   ],
+   "typeVersion": 1,
+   "id": "ef46ff14-bf43-4514-a7de-3a7029c068b2"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "mode": "list",
+     "value": "n8n_vectors3"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -960,
+    128
+   ],
+   "id": "8667acb5-ff06-43eb-9d26-5eeb469685fd",
+   "name": "consulta_contato2",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -688,
+    272
+   ],
+   "typeVersion": 1,
+   "id": "82c2c0da-9770-4b45-b7b4-63f0217f10bd"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"light\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Oracle Knowledge | SPA Premium</title>\n    \n    <link href=\"https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css\" rel=\"stylesheet\">\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap\" rel=\"stylesheet\">\n\n    <style>\n        /* CSS Variables para Temas Dinâmicos (Estilo Oracle) */\n        :root {\n            --bg-base: #f8fafc;\n            --bg-panel: rgba(255, 255, 255, 0.85);\n            --text-main: #0f172a;\n            --text-muted: #64748b;\n            --border-color: rgba(226, 232, 240, 0.8);\n            --bubble-ia: #ffffff;\n            --bubble-ia-border: #e2e8f0;\n            --chart-bar: #c74634; /* Oracle Red */\n            --oracle-red: #c74634;\n            --oracle-dark: #1f1f1f;\n        }\n\n        html.dark {\n            --bg-base: #121212;\n            --bg-panel: rgba(31, 31, 31, 0.85);\n            --text-main: #f8fafc;\n            --text-muted: #94a3b8;\n            --border-color: rgba(51, 65, 85, 0.8);\n            --bubble-ia: #1e1e1e;\n            --bubble-ia-border: #333333;\n            --chart-bar: #e04a37;\n        }\n\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: var(--bg-base);\n            color: var(--text-main);\n            transition: background-color 0.5s ease;\n            overflow-x: hidden;\n        }\n\n        /* Glassmorphism Dinâmico */\n        .glass-panel {\n            background: var(--bg-panel);\n            backdrop-filter: blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border: 1px solid var(--border-color);\n            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);\n            transition: all 0.3s ease;\n        }\n        \n        html.dark .glass-panel { box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); }\n\n        /* Typography & Scrollbar */\n        .font-mono { font-family: 'JetBrains Mono', monospace; }\n        ::-webkit-scrollbar { width: 6px; height: 6px; }\n        ::-webkit-scrollbar-track { background: transparent; }\n        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 10px; opacity: 0.5; }\n\n        /* Bubbles Premium */\n        .preserve-breaks { white-space: pre-wrap; word-break: break-word; }\n        .bubble-h { \n            background: linear-gradient(135deg, #e04a37 0%, #a32c1e 100%);\n            color: #ffffff;\n            border-radius: 18px 18px 4px 18px;\n            box-shadow: 0 4px 15px rgba(199, 70, 52, 0.3);\n        }\n        .bubble-ia { \n            background: var(--bubble-ia);\n            color: var(--text-main);\n            border: 1px solid var(--bubble-ia-border);\n            border-radius: 18px 18px 18px 4px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);\n        }\n\n        /* Animações Complexas */\n        .content-transition { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease; }\n        .expanded .content-transition { max-height: 20000px; opacity: 1; padding-bottom: 1rem;}\n        .expanded .chevron-icon { transform: rotate(180deg); color: var(--oracle-red); }\n        .chevron-icon { transition: transform 0.4s ease, color 0.3s; }\n\n        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }\n        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }\n        @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }\n        \n        .animate-fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }\n        \n        /* Skeleton Loading */\n        .skeleton {\n            background: linear-gradient(90deg, var(--bubble-ia-border) 25%, var(--bg-base) 50%, var(--bubble-ia-border) 75%);\n            background-size: 1000px 100%;\n            animation: shimmer 2s infinite linear;\n            border-radius: 8px;\n        }\n\n        /* Toasts Customizados Empilháveis */\n        #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column-reverse; gap: 12px; }\n        .toast-item {\n            min-width: 300px; background: var(--bg-panel); border: 1px solid var(--border-color);\n            backdrop-filter: blur(10px); border-radius: 12px; padding: 16px;\n            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.2); display: flex; align-items: flex-start;\n            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; position: relative; overflow: hidden;\n        }\n        .toast-item.closing { opacity: 0; transform: translateX(50px) scale(0.95); transition: all 0.3s ease; }\n        .toast-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--oracle-red); width: 100%; transform-origin: left; }\n\n        /* Modal Avançado */\n        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease; justify-content: center; align-items: center; }\n        .modal.active { display: flex; opacity: 1; }\n        .modal-content { transform: scale(0.9) translateY(20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); max-height: 90vh; overflow-y: auto; }\n        .modal.active .modal-content { transform: scale(1) translateY(0); }\n\n        /* Background Particle Canvas */\n        #particle-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.6; }\n    </style>\n</head>\n<body class=\"antialiased min-h-screen relative\">\n\n    <canvas id=\"particle-canvas\"></canvas>\n    <div id=\"toast-container\"></div>\n\n    <nav class=\"glass-panel sticky top-0 z-40 border-b-0 border-x-0 border-t-0 rounded-none shadow-sm mb-8\">\n        <div class=\"container mx-auto max-w-7xl px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4\">\n            <div class=\"flex items-center gap-4\">\n                <div class=\"w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white text-2xl shadow-lg transform hover:scale-105 transition-transform\">\n                    <i class=\"fas fa-database\"></i>\n                </div>\n                <div>\n                    <h1 class=\"text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800\">\n                        Oracle Knowledge\n                    </h1>\n                    <p class=\"text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest\">Painel Operacional | Bem-vindo, Emerson</p>\n                </div>\n            </div>\n\n            <div class=\"flex items-center gap-3 flex-wrap justify-center\">\n                <button onclick=\"toggleTheme()\" class=\"w-10 h-10 rounded-xl glass-panel flex items-center justify-center text-gray-500 hover:text-red-600 transition-colors\" title=\"Alternar Tema\">\n                    <i id=\"theme-icon\" class=\"fas fa-moon\"></i>\n                </button>\n                <button onclick=\"exportToJSON()\" class=\"w-10 h-10 rounded-xl glass-panel flex items-center justify-center text-gray-500 hover:text-green-500 transition-colors\" title=\"Exportar Backup JSON\">\n                    <i class=\"fas fa-download\"></i>\n                </button>\n                \n                <input type=\"file\" id=\"pdfInput\" accept=\"application/pdf\" class=\"hidden\" onchange=\"handlePDFUpload(event)\">\n                <button onclick=\"triggerPDFUpload()\" class=\"bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg transition-all flex items-center gap-2\">\n                    <i class=\"fas fa-file-pdf text-red-500\"></i> Importar PDF\n                </button>\n\n                <button onclick=\"openInsertModal()\" class=\"bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg hover:shadow-red-600/30 transition-all flex items-center gap-2\">\n                    <i class=\"fas fa-plus\"></i> Novo Contexto\n                </button>\n            </div>\n        </div>\n    </nav>\n\n    <main class=\"container mx-auto px-4 max-w-7xl pb-24 space-y-8\">\n\n        <div id=\"loading\" class=\"space-y-6\">\n            <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 mb-8\">\n                <div class=\"skeleton h-32 rounded-2xl\"></div>\n                <div class=\"skeleton h-32 rounded-2xl\"></div>\n                <div class=\"skeleton h-32 rounded-2xl\"></div>\n            </div>\n            <div class=\"skeleton h-20 rounded-2xl\"></div>\n            <div class=\"skeleton h-40 rounded-2xl\"></div>\n            <div class=\"skeleton h-40 rounded-2xl\"></div>\n        </div>\n        \n        <div id=\"critical-error\" class=\"hidden text-center py-16 glass-panel rounded-3xl animate-fade-up border-red-200\">\n            <i class=\"fas fa-bomb text-6xl text-red-500 mb-4\"></i>\n            <h3 class=\"text-2xl font-bold text-gray-800 dark:text-white\" id=\"error-title\">Erro Crítico</h3>\n            <p class=\"text-gray-600 dark:text-gray-400 mt-2 max-w-2xl mx-auto\" id=\"error-message\">Detalhes do erro aqui.</p>\n            <button onclick=\"window.location.reload()\" class=\"mt-6 px-6 py-2 bg-red-100 text-red-600 rounded-xl font-bold hover:bg-red-200 transition-colors\">Tentar Novamente</button>\n        </div>\n\n        <div id=\"analytics-dashboard\" class=\"hidden animate-fade-up\"></div>\n\n        <div id=\"list-toolbar\" class=\"hidden glass-panel p-4 rounded-2xl flex flex-col md:flex-row gap-4 items-center justify-between animate-fade-up\" style=\"animation-delay: 0.1s;\">\n            <div class=\"relative w-full md:w-1/2\">\n                <i class=\"fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400\"></i>\n                <input type=\"text\" id=\"searchInput\" placeholder=\"Pesquisar por ID, Perguntas ou Respostas...\" class=\"w-full bg-transparent border-2 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-12 pr-4 focus:border-red-600 focus:ring-0 outline-none transition-colors text-sm font-medium dark:text-white\" onkeyup=\"handleSearch()\">\n            </div>\n            <div class=\"flex gap-2 w-full md:w-auto\">\n                <select id=\"sortSelect\" onchange=\"handleSort()\" class=\"bg-transparent border-2 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 focus:border-red-600 outline-none transition-colors text-sm font-medium dark:text-white cursor-pointer w-full md:w-auto\">\n                    <option value=\"vol-desc\">Maior Volume</option>\n                    <option value=\"vol-asc\">Menor Volume</option>\n                    <option value=\"alpha\">Ordem Alfabética</option>\n                </select>\n                <button onclick=\"fetchData()\" class=\"px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300\" title=\"Recarregar Dados\">\n                    <i class=\"fas fa-sync-alt\"></i>\n                </button>\n            </div>\n        </div>\n\n        <div id=\"interactionList\" class=\"space-y-4\"></div>\n\n        <div id=\"empty-state\" class=\"hidden text-center py-20 glass-panel rounded-3xl animate-fade-up\">\n            <i class=\"fas fa-ghost text-6xl text-gray-300 dark:text-gray-600 mb-4\"></i>\n            <h3 class=\"text-xl font-bold text-gray-700 dark:text-gray-300\">Nenhum registro encontrado</h3>\n            <p class=\"text-sm text-gray-500 dark:text-gray-400 mt-2\">Tente ajustar seus termos de busca ou adicione novos contextos.</p>\n        </div>\n\n    </main>\n\n    <div id=\"formModal\" class=\"modal\">\n        <div class=\"modal-content w-full max-w-3xl m-4\">\n            <div class=\"glass-panel rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900\">\n                <div class=\"px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center relative\">\n                    <div class=\"absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-800\"></div>\n                    <h3 id=\"modalTitle\" class=\"font-bold text-xl flex items-center gap-3 text-gray-800 dark:text-white\"></h3>\n                    <button onclick=\"closeModal()\" class=\"text-gray-400 hover:text-red-500 transition-colors p-2\"><i class=\"fas fa-times text-xl\"></i></button>\n                </div>\n                <div class=\"px-8 py-6 space-y-6\">\n                    <input type=\"hidden\" id=\"field-id\">\n                    <div class=\"space-y-2\">\n                        <label class=\"flex justify-between text-xs font-bold text-red-600 uppercase tracking-wide\">\n                            <span><i class=\"fas fa-fingerprint mr-1\"></i> ID do Chat (Identificador Único)</span>\n                            <span id=\"char-id\" class=\"text-gray-400\">0/100</span>\n                        </label>\n                        <input type=\"text\" id=\"field-chatid\" placeholder=\"Ex: 551199999999@s.whatsapp.net\" maxlength=\"100\" class=\"w-full bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-4 focus:border-red-600 outline-none transition-colors dark:text-white font-mono text-sm\" oninput=\"updateCharCount('field-chatid', 'char-id')\">\n                    </div>\n                    <div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n                        <div class=\"space-y-2\">\n                            <label class=\"text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide\"><i class=\"fas fa-user mr-1\"></i> Pergunta (Humano)</label>\n                            <textarea id=\"field-humano\" rows=\"6\" placeholder=\"Transcreva a interação exata do usuário...\" class=\"w-full bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-4 focus:border-red-600 outline-none transition-colors dark:text-white resize-none text-sm preserve-breaks\"></textarea>\n                        </div>\n                        <div class=\"space-y-2\">\n                            <label class=\"text-xs font-bold text-red-600 uppercase tracking-wide\"><i class=\"fas fa-robot mr-1\"></i> Resposta (IA)</label>\n                            <textarea id=\"field-ia\" rows=\"6\" placeholder=\"Defina o contexto estruturado para o Agente...\" class=\"w-full bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-4 focus:border-red-600 outline-none transition-colors dark:text-white resize-none text-sm preserve-breaks\"></textarea>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"px-8 py-5 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 flex justify-end gap-3\">\n                    <button onclick=\"closeModal()\" class=\"px-6 py-2.5 rounded-xl font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors\">Cancelar</button>\n                    <button onclick=\"handleSave()\" class=\"px-8 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold shadow-lg transition-all flex items-center gap-2\"><i class=\"fas fa-cloud-upload-alt\"></i> Salvar no n8n</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <script>\n        const API_URL = 'https://interface.inovareinteligenciaartificial.com/webhook/backend-memoria-elefante';\n        let allMessagesRaw = []; \n        let allParsedData = []; \n        let groupedData = {}; \n        let filteredGroupedData = {}; \n        let currentMode = 'inserir';\n\n        function showToast(title, message, type = 'info', duration = 4000) {\n            try {\n                const container = document.getElementById('toast-container');\n                const toast = document.createElement('div');\n                let icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-bomb' : 'fa-info-circle';\n                let colorClass = type === 'success' ? 'text-emerald-500' : type === 'error' ? 'text-red-500' : 'text-blue-500';\n                \n                toast.className = 'toast-item';\n                toast.innerHTML = `\n                    <i class=\"fas ${icon} ${colorClass} text-2xl mr-4 mt-1\"></i>\n                    <div class=\"flex-1 pr-4\">\n                        <h4 class=\"font-bold text-sm text-gray-800 dark:text-white\">${title}</h4>\n                        <p class=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">${message}</p>\n                    </div>\n                    <button onclick=\"this.parentElement.remove()\" class=\"text-gray-400 hover:text-gray-600\"><i class=\"fas fa-times\"></i></button>\n                    <div class=\"toast-progress\" style=\"animation: progress ${duration}ms linear forwards; background-color: var(--chart-bar)\"></div>\n                `;\n                container.appendChild(toast);\n                const style = document.createElement('style');\n                style.innerHTML = `@keyframes progress { from { transform: scaleX(1); } to { transform: scaleX(0); } }`;\n                toast.appendChild(style);\n                setTimeout(() => { toast.classList.add('closing'); setTimeout(() => toast.remove(), 300); }, duration);\n            } catch(e) { console.warn(\"Erro ao gerar Toast\", e); }\n        }\n\n        // Parse Seguro com Fallback\n        function parseMemoryText(rawText) {\n            try {\n                if (!rawText) return { idChat: 'ID_NAO_ENCONTRADO', humano: '', ia: '' };\n                const chatIdMatch = rawText.match(/id_chat\\s*=\\s*([^\\n\\r]+)/);\n                const idChat = chatIdMatch ? chatIdMatch[1].trim() : 'DESCONHECIDO';\n                let body = rawText.replace(/id_chat\\s*=\\s*[^\\n\\r]+\\n*/g, '').trim();\n                const parts = body.split('resposta_da_ia =');\n                const humano = parts[0] ? parts[0].replace('Pergunta_humano =', '').trim() : '';\n                const ia = parts[1] ? parts[1].trim() : '';\n                return { idChat, humano, ia };\n            } catch (error) {\n                return { idChat: 'ERRO_PARSE', humano: 'Falha ao decodificar', ia: 'Falha ao decodificar' };\n            }\n        }\n\n        function displayFatalError(title, message) {\n            document.getElementById('loading').style.display = 'none';\n            const errDiv = document.getElementById('critical-error');\n            errDiv.classList.remove('hidden');\n            document.getElementById('error-title').innerText = title;\n            document.getElementById('error-message').innerText = message;\n        }\n\n        async function fetchData() {\n            document.getElementById('critical-error').classList.add('hidden');\n            document.getElementById('loading').style.display = 'block';\n            document.getElementById('analytics-dashboard').classList.add('hidden');\n            document.getElementById('list-toolbar').classList.add('hidden');\n            document.getElementById('interactionList').innerHTML = '';\n            \n            try {\n                const controller = new AbortController();\n                const timeoutId = setTimeout(() => controller.abort(), 15000);\n\n                const response = await fetch(API_URL, { \n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ p: \"buscar\" }), \n                    signal: controller.signal \n                });\n                \n                clearTimeout(timeoutId);\n\n                if (!response.ok) throw new Error(`Status de Erro HTTP: ${response.status}`);\n                \n                const result = await response.json();\n                allMessagesRaw = result.data || [];\n                \n                allParsedData = allMessagesRaw.map(item => ({ ...item, parsed: parseMemoryText(item.text) }));\n\n                groupedData = allParsedData.reduce((acc, item) => {\n                    const id = item.parsed.idChat;\n                    if (!acc[id]) acc[id] = [];\n                    acc[id].push(item);\n                    return acc;\n                }, {});\n\n                filteredGroupedData = { ...groupedData };\n                \n                updateAnalytics();\n                handleSort(); \n\n                document.getElementById('analytics-dashboard').classList.remove('hidden');\n                document.getElementById('list-toolbar').classList.remove('hidden');\n                document.getElementById('loading').style.display = 'none';\n\n                if(allParsedData.length > 0) {\n                    showToast(\"Sincronização OK\", `${allParsedData.length} registros conectados.`, 'success');\n                }\n\n            } catch (error) {\n                console.error(\"Fetch Data Erro:\", error);\n                if (error.name === 'AbortError') {\n                    displayFatalError(\"Timeout de Conexão\", \"O seu servidor n8n demorou muito para responder (mais de 15 segundos). Verifique se o fluxo está ativo ou travado.\");\n                } else {\n                    displayFatalError(\"Falha de Rede/CORS\", error.message || \"Verifique os logs do n8n. O endpoint pode estar inacessível.\");\n                }\n            }\n        }\n\n        async function maintenanceRequest(payload) {\n            try {\n                const response = await fetch(API_URL, {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify(payload)\n                });\n                if (response.ok) {\n                    await fetchData();\n                    return true;\n                }\n                throw new Error(\"Resposta falha do n8n\");\n            } catch (error) {\n                showToast(\"Erro\", \"Falha de comunicação no envio.\", 'error');\n                return false;\n            }\n        }\n\n        /* ----- NOVA FUNÇÃO DE UPLOAD DE PDF ----- */\n        function triggerPDFUpload() {\n            document.getElementById('pdfInput').click();\n        }\n\n        async function handlePDFUpload(event) {\n            const file = event.target.files[0];\n            if (!file) return;\n            \n            if (file.type !== \"application/pdf\") {\n                return showToast(\"Erro de Formato\", \"Por favor, selecione um arquivo válido em formato .PDF\", \"error\");\n            }\n\n            const reader = new FileReader();\n            reader.onload = async function(e) {\n                // Pegando apenas o Base64 sem o cabeçalho data:application/pdf;base64,\n                const base64Data = e.target.result.split(',')[1];\n                \n                showToast(\"Processando...\", \"Enviando seu documento PDF para o servidor Oracle/n8n.\", \"info\");\n\n                // Envia para o n8n com o comando upload_pdf\n                const payload = {\n                    p: \"upload_pdf\",\n                    filename: file.name,\n                    fileData: base64Data\n                };\n\n                if (await maintenanceRequest(payload)) {\n                    showToast(\"Sucesso\", \"Documento PDF processado e salvo na base de conhecimento!\", \"success\");\n                }\n            };\n            \n            // Inicia a leitura do arquivo como Base64\n            reader.readAsDataURL(file);\n            \n            // Reseta o input para permitir enviar o mesmo arquivo novamente se necessário\n            event.target.value = '';\n        }\n\n        function updateAnalytics() {\n            try {\n                const total = allParsedData.length;\n                const unique = Object.keys(groupedData).length;\n                const top = Object.keys(groupedData).map(id => ({ id, count: groupedData[id].length })).sort((a,b) => b.count - a.count).slice(0,3);\n\n                document.getElementById('analytics-dashboard').innerHTML = `\n                    <div class=\"grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8\">\n                        <div class=\"glass-panel p-6 rounded-3xl flex items-center justify-between\">\n                            <div><p class=\"text-sm font-bold text-gray-500 uppercase\">Memórias</p><h2 class=\"text-4xl font-black text-red-600\">${total}</h2></div>\n                            <div class=\"w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl\"><i class=\"fas fa-database\"></i></div>\n                        </div>\n                        <div class=\"glass-panel p-6 rounded-3xl flex items-center justify-between\">\n                            <div><p class=\"text-sm font-bold text-gray-500 uppercase\">Chats</p><h2 class=\"text-4xl font-black text-gray-800 dark:text-gray-200\">${unique}</h2></div>\n                            <div class=\"w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-xl\"><i class=\"fas fa-users\"></i></div>\n                        </div>\n                        <div class=\"glass-panel p-6 rounded-3xl\">\n                            <p class=\"text-sm font-bold text-gray-500 uppercase mb-3\">Top Ativos</p>\n                            <div class=\"space-y-2\">\n                                ${top.map((c,i) => `<div class=\"flex items-center text-xs font-mono\"><span class=\"w-4\">#${i+1}</span><div class=\"flex-1 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden mx-2\"><div class=\"h-full bg-red-500\" style=\"width:${Math.max(10, (c.count/total)*100)}%\"></div></div><span class=\"text-red-600 font-bold\">${c.count}</span></div>`).join('')}\n                            </div>\n                        </div>\n                    </div>\n                `;\n            } catch(e) { console.warn(\"Analytics Erro\", e); }\n        }\n\n        function handleSearch() {\n            try {\n                const t = document.getElementById('searchInput').value.toLowerCase();\n                filteredGroupedData = t ? Object.keys(groupedData).reduce((acc, k) => {\n                    const m = groupedData[k].filter(i => k.toLowerCase().includes(t) || i.parsed.humano.toLowerCase().includes(t) || i.parsed.ia.toLowerCase().includes(t));\n                    if(m.length) acc[k] = m; return acc;\n                }, {}) : { ...groupedData };\n                handleSort();\n            } catch(e) {}\n        }\n\n        function handleSort() {\n            try {\n                const s = document.getElementById('sortSelect').value;\n                const c = document.getElementById('interactionList');\n                c.innerHTML = '';\n                const keys = Object.keys(filteredGroupedData);\n                \n                if(!keys.length) { document.getElementById('empty-state').classList.remove('hidden'); return; }\n                document.getElementById('empty-state').classList.add('hidden');\n\n                keys.sort((a,b) => s==='vol-desc' ? filteredGroupedData[b].length - filteredGroupedData[a].length : s==='vol-asc' ? filteredGroupedData[a].length - filteredGroupedData[b].length : a.localeCompare(b));\n\n                const f = document.createDocumentFragment();\n                keys.forEach((id, idx) => {\n                    const h = filteredGroupedData[id];\n                    const div = document.createElement('div');\n                    div.id = `card-${idx}`;\n                    div.className = \"glass-panel rounded-2xl overflow-hidden animate-fade-up border border-gray-200 dark:border-gray-700\";\n                    div.innerHTML = `\n                        <div onclick=\"document.getElementById('card-${idx}').classList.toggle('expanded')\" class=\"p-5 flex items-center justify-between cursor-pointer hover:bg-black/5 transition-colors\">\n                            <div class=\"flex items-center gap-4 truncate\">\n                                <div class=\"w-10 h-10 flex-shrink-0 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm\">${id.charAt(0).toUpperCase()}</div>\n                                <div class=\"truncate\"><h4 class=\"font-bold text-sm text-gray-800 dark:text-white font-mono truncate\">${id}</h4><p class=\"text-xs text-red-500 mt-1\">${h.length} itens</p></div>\n                            </div>\n                            <i class=\"fas fa-chevron-down text-gray-500 chevron-icon\"></i>\n                        </div>\n                        <div class=\"content-transition bg-white/50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-800\">\n                            <div class=\"p-4 space-y-6\">\n                                ${h.map(i => `\n                                    <div class=\"relative group\">\n                                        <div class=\"absolute right-0 top-0 flex gap-2 opacity-0 group-hover:opacity-100 z-10 bg-white dark:bg-gray-800 shadow-md rounded p-1\">\n                                            <button onclick=\"copyToClipboard('${btoa(unescape(encodeURIComponent(i.text||'')))}')\" class=\"w-8 h-8 rounded text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700\"><i class=\"fas fa-copy\"></i></button>\n                                            <button onclick=\"openEditModal('${i.id}')\" class=\"w-8 h-8 rounded text-amber-500 hover:bg-amber-100 dark:hover:bg-amber-900/30\"><i class=\"fas fa-pen\"></i></button>\n                                            <button onclick=\"deleteItem('${i.id}')\" class=\"w-8 h-8 rounded text-red-500 hover:bg-red-100 dark:hover:bg-red-900/30\"><i class=\"fas fa-trash\"></i></button>\n                                        </div>\n                                        <div class=\"space-y-4 pt-4\">\n                                            <div class=\"flex justify-end w-full pl-8\"><div class=\"bubble-h p-4 text-sm w-full md:w-auto\"><div class=\"text-[10px] text-red-200 mb-1 flex justify-end gap-1\">Humano <i class=\"fas fa-user-circle\"></i></div><div class=\"preserve-breaks\">${escapeHTML(i.parsed.humano)}</div></div></div>\n                                            <div class=\"flex justify-start w-full pr-8\"><div class=\"bubble-ia p-4 text-sm w-full md:w-auto\"><div class=\"text-[10px] text-red-600 mb-1 flex gap-1\"><i class=\"fas fa-database\"></i> Oracle IA</div><div class=\"preserve-breaks\">${escapeHTML(i.parsed.ia)}</div></div></div>\n                                        </div>\n                                    </div>\n                                `).join('<div class=\"h-px bg-gray-200 dark:bg-gray-700 my-4\"></div>')}\n                            </div>\n                        </div>\n                    `;\n                    f.appendChild(div);\n                });\n                c.appendChild(f);\n            } catch(e) { console.error(\"Sort Error\", e); }\n        }\n\n        function escapeHTML(s) { return s.replace(/[&<>'\"]/g, t => ({ '&':'&amp;','<':'&lt;','>':'&gt;',\"'\":'&#39;','\"':'&quot;' }[t])); }\n        function updateCharCount(i, c) { document.getElementById(c).innerText = `${document.getElementById(i).value.length}/100`; }\n        function copyToClipboard(b) { navigator.clipboard.writeText(decodeURIComponent(escape(atob(b)))).then(()=>showToast(\"Copiado!\", \"Texto bruto copiado.\", \"success\", 2000)); }\n        function openInsertModal() { currentMode='inserir'; document.getElementById('modalTitle').innerText=\"Novo Contexto\"; document.getElementById('field-id').value=''; document.getElementById('field-chatid').value=''; document.getElementById('field-humano').value=''; document.getElementById('field-ia').value=''; updateCharCount('field-chatid','char-id'); document.getElementById('formModal').classList.add('active'); }\n        function openEditModal(id) { currentMode='editar'; document.getElementById('modalTitle').innerText=\"Editar Contexto\"; const i=allMessagesRaw.find(m=>m.id===id); const p=parseMemoryText(i.text); document.getElementById('field-id').value=id; document.getElementById('field-chatid').value=p.idChat; document.getElementById('field-humano').value=p.humano; document.getElementById('field-ia').value=p.ia; updateCharCount('field-chatid','char-id'); document.getElementById('formModal').classList.add('active'); }\n        function closeModal() { document.getElementById('formModal').classList.remove('active'); }\n        \n        async function handleSave() {\n            const id=document.getElementById('field-id').value, chat=document.getElementById('field-chatid').value.trim(), hum=document.getElementById('field-humano').value.trim(), ia=document.getElementById('field-ia').value.trim();\n            if(!chat||!hum||!ia) return showToast(\"Aviso\", \"Preencha tudo.\", \"warning\");\n            const t = `id_chat = ${chat}\\n\\nPergunta_humano = ${hum}\\n\\nresposta_da_ia = ${ia}`;\n            const p = { p: currentMode, text: t }; if(currentMode==='editar') p.id=id;\n            if(await maintenanceRequest(p)) { closeModal(); showToast(\"Sucesso\", \"Contexto gravado no n8n\", \"success\"); }\n        }\n\n        async function deleteItem(id) { if(confirm(\"Apagar permanentemente este vetor?\")) await maintenanceRequest({p:\"excluir\", id}); }\n\n        function toggleTheme() {\n            try {\n                const isD = document.documentElement.classList.toggle('dark');\n                document.getElementById('theme-icon').className = isD ? 'fas fa-sun' : 'fas fa-moon';\n                localStorage.setItem('theme', isD ? 'dark' : 'light');\n                initParticles();\n            } catch(e) {}\n        }\n\n        // INIT PROTEGIDO\n        try {\n            try { if(localStorage.getItem('theme')==='dark') { document.documentElement.classList.add('dark'); document.getElementById('theme-icon').className='fas fa-sun'; } } catch(e){}\n            fetchData();\n        } catch(initErr) {\n            displayFatalError(\"Erro de JavaScript\", initErr.message);\n        }\n    </script>\n</body>\n</html>"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    -816,
+    272
+   ],
+   "id": "4694bf9a-7992-457b-9a22-ee85615b35d1",
+   "name": "HTML1"
+  },
+  {
+   "parameters": {
+    "path": "front-memoria-elefante",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "frontend",
+   "type": "n8n-nodes-base.webhook",
+   "position": [
+    -944,
+    272
+   ],
+   "webhookId": "4f2787c6-78e8-4d98-a313-609aa7f62d68",
+   "typeVersion": 1,
+   "id": "f291b7e0-48c8-4bb1-8b56-8a37c6a5208c"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "editar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "25b747da-b4a1-4eb2-b5a8-53aba65c35e7"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "editar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "bbf863d0-b292-4f20-b6b4-aa529f53be69",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "excluir",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "excluir"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ca69a75f-dce3-4135-993f-eb3a2f1dcec1",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "inserir",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "inserir"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.3,
+   "position": [
+    -1072,
+    -32
+   ],
+   "id": "afc770b2-2158-498b-95e0-dc0decab0cb4",
+   "name": "Switch1"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "n8n_vectors3",
+     "mode": "list",
+     "cachedResultName": "n8n_vectors3"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.body.id }}",
+      "text": "={{ $json.body.text }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "text",
+       "displayName": "text",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "metadata",
+       "displayName": "metadata",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "embedding",
+       "displayName": "embedding",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -960,
+    -432
+   ],
+   "id": "85caac59-e9f8-44e5-be53-821fa805939d",
+   "name": "consulta_contato3",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": true,\n  \"message\": \"Pagamento para o ID {{ $json.id }} atualizado.\",\n  \"data\": {\n    \"id\": \"{{ $json.id }}\",\n    \"nome\": \"{{ $json.nome }}\",\n    \"pagamento\": \"{{ $json.pagamento }}\",\n    \"data_pagamento\": \"{{ $json.data_pagamento }}\"\n  }\n}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "name": "Respond to Webhook17",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -704,
+    -432
+   ],
+   "typeVersion": 1,
+   "id": "c22a96cc-4da1-4447-8f6b-6393cb940948"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-embedding-001"
+   },
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    16,
+    176
+   ],
+   "id": "6c4ea391-6481-4759-a1fc-5171f19fdbac",
+   "name": "Embeddings Google Gemini1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "mode": "load",
+    "tableName": "n8n_vectors3",
+    "prompt": "=Me fale tudo que tem na base de dados sobre {{ $('api da sua escolha').item.json.chatInput }}  Responda exatamente com o que veio da \"pageContent\"",
+    "topK": 1,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+   "typeVersion": 1.3,
+   "position": [
+    16,
+    0
+   ],
+   "id": "4f31bd9e-ed29-436d-b46e-b36853f8db14",
+   "name": "Postgres PGVector Store5",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('api da sua escolha').item.json.chatInput }}",
+    "options": {
+     "systemMessage": "=Você é a secretaria para agendar chamadas de consultoria do n8n \n\n<base de dados>\n{{ $('Postgres PGVector Store5').item.json.document.pageContent }}\n</base de dados>"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3,
+   "position": [
+    480,
+    0
+   ],
+   "id": "083103fc-46da-4265-a330-98490aee9122",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "n8n_vectors3",
+     "mode": "list",
+     "cachedResultName": "n8n_vectors3"
+    },
+    "deleteCommand": "delete",
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $json.body.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -960,
+    -288
+   ],
+   "id": "06d8aafb-42e6-4d49-8b64-a7c10f060ea4",
+   "name": "consulta_contato4",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": true,\n  \"message\": \"Pagamento para o ID {{ $json.id }} atualizado.\",\n  \"data\": {\n    \"id\": \"{{ $json.id }}\",\n    \"nome\": \"{{ $json.nome }}\",\n    \"pagamento\": \"{{ $json.pagamento }}\",\n    \"data_pagamento\": \"{{ $json.data_pagamento }}\"\n  }\n}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "name": "Respond to Webhook18",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -704,
+    -288
+   ],
+   "typeVersion": 1,
+   "id": "ec514b78-b449-4734-bbae-6d6c4d139f8d"
+  },
+  {
+   "parameters": {
+    "mode": "insert",
+    "tableName": "n8n_vectors3",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+   "typeVersion": 1.3,
+   "position": [
+    -832,
+    -144
+   ],
+   "id": "c42db9f5-4221-4d99-b16d-760cf47d2982",
+   "name": "Postgres PGVector Store1",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsonMode": "expressionData",
+    "jsonData": "={{ $('Edit Fields1').item.json }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+   "typeVersion": 1.1,
+   "position": [
+    -720,
+    16
+   ],
+   "id": "0f006d4f-b804-418b-84b1-86806510a50b",
+   "name": "insere1"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "8546e880-dcca-48b9-a4d2-8799303c32b2",
+       "name": "texto",
+       "value": "={{ $json.body.text }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -960,
+    -144
+   ],
+   "id": "652c1998-ec75-4cc3-bbc3-046f65432f77",
+   "name": "Edit Fields1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+   "typeVersion": 1.1,
+   "position": [
+    -608,
+    16
+   ],
+   "id": "91107f40-c0ae-4a7d-a585-2b373b026a63",
+   "name": "Default Data Loader1"
+  },
+  {
+   "parameters": {
+    "useReranker": true,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+   "typeVersion": 1.3,
+   "position": [
+    304,
+    368
+   ],
+   "id": "877cffaf-1a85-4ca6-9414-fb92d6961e12",
+   "name": "Postgres PGVector Store2",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+   "typeVersion": 1,
+   "position": [
+    432,
+    512
+   ],
+   "id": "0d02b5db-dc04-4965-8c58-3c07aa18ef20",
+   "name": "Reranker Cohere1",
+   "credentials": {
+    "cohereApi": {
+     "id": "bv36WzhymBXbSABN",
+     "name": "emersonjosielmrx"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "mode": "retrieve-as-tool",
+    "toolDescription": "trazer memorias relacionadas a comversa",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+   "typeVersion": 1.3,
+   "position": [
+    560,
+    368
+   ],
+   "id": "ae1c3132-ef75-40ee-925d-238bcfd0e815",
+   "name": "Postgres PGVector Store3",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    560,
+    512
+   ],
+   "id": "51ffc77d-8d06-4d7c-9f0d-0d822ead0717",
+   "name": "Embeddings Gemini3",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZYOvdr3FD4B9j5QQ",
+     "name": "5-Google Gemini andre"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## fazer testes  com tool",
+    "height": 336,
+    "width": 528,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    272,
+    304
+   ],
+   "id": "3bc27231-970c-403a-8c0a-60b9531b3143",
+   "name": "Sticky Note1"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    304,
+    512
+   ],
+   "id": "6f49e54c-15c3-442d-a70c-7f97d1b5d8e8",
+   "name": "Embeddings Gemini2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZYOvdr3FD4B9j5QQ",
+     "name": "5-Google Gemini andre"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash-lite",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash-lite"
+    },
+    "responsesApiEnabled": false,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    480,
+    160
+   ],
+   "id": "ab97386b-169f-4804-897b-301033b4244f",
+   "name": "Model",
+   "credentials": {
+    "openAiApi": {
+     "id": "ob35iy2RaZh4DG2K",
+     "name": "roteador vps nova"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-embedding-001"
+   },
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -832,
+    16
+   ],
+   "id": "6619c1da-82c2-489a-b597-6373b7e4779b",
+   "name": "Embeddings",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 🖥️ Interface Gráfica (Frontend SPA) 🌐\n**O Palco Principal do seu Painel**\n\nEste bloco atua como o servidor web do seu sistema. O nó 'Webhook (frontend)' escuta requisições HTTP e entrega como resposta todo aquele mega código HTML/CSS/JS (a SPA Premium) que criamos.\n\n✨ **Como funciona:**\n1. O usuário acessa a URL pública.\n2. O Webhook recebe o pedido e aciona o nó HTML.\n3. O nó 'Respond to Webhook' devolve o painel interativo diretamente para o navegador do usuário, com os headers corretos ('text/html'). É a sua vitrine comercial de altíssimo nível!",
+    "height": 544,
+    "width": 236,
+    "color": 2
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -1504,
+    112
+   ],
+   "typeVersion": 1,
+   "id": "68609542-8edc-4ec0-b25a-155e71f2b24b",
+   "name": "Sticky Note Frontend"
+  },
+  {
+   "parameters": {
+    "content": "## ⚙️ API Backend & Roteador Lógico (CRUD) 🚦\n**A Casa de Máquinas do Painel**\n\nEste Webhook ('backend-memoria-elefante') é a ponte de comunicação entre o seu painel visual e o banco de dados. Ele escuta as ações do usuário (cliques em salvar, deletar, buscar) e usa o nó **Switch** como um grande *Guarda de Trânsito*.\n\n🔀 **O Roteamento (Switch):**\nO Switch avalia o payload ('$json.body.p') e direciona o fluxo de dados para a rota exata da requisição:\n* 🟢 **Inserir:** Manda para o carregador de documentos e gera um novo vetor vetorial no Postgres.\n* 🟡 **Editar:** Manda para o nó Postgres de Update.\n* 🔴 **Excluir:** Manda para o nó Postgres de Delete Table.\n* 🔵 **Buscar (Fallback):** Rota padrão que puxa tudo do banco para carregar a lista inicial.",
+    "height": 440,
+    "width": 420,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -1520,
+    -448
+   ],
+   "typeVersion": 1,
+   "id": "15ff4ab5-959a-4471-bd93-a60ed5ac63ce",
+   "name": "Sticky Note Backend"
+  },
+  {
+   "parameters": {
+    "content": "## 🗄️ Operações Diretas de Banco de Dados 🐘\n**A Manipulação Cirúrgica do Postgres**\n\nEstes nós Postgres são responsáveis por executar os comandos SQL brutos ditados pelo painel, sem quebrar o vetor.\n\n* 🗑️ **DeleteTable:** Quando o painel manda excluir, este nó busca pelo 'ID' exato gerado pelo n8n e oblitera o registro da tabela 'n8n_vectors3'.\n* 🔄 **Update:** Pega a string de memória reconstruída no painel e atualiza o texto do vetor correspondente de forma totalmente cirúrgica.\n\n✅ Tudo termina num 'Respond to Webhook' que devolve um JSON de sucesso ('success: true') para o painel mostrar a notificação (Toast) animada verde e bonita!",
+    "height": 240,
+    "width": 1020,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -1520,
+    -704
+   ],
+   "typeVersion": 1,
+   "id": "917e5cbe-41d6-4a33-acdb-81de5b83206b",
+   "name": "Sticky Note DB CRUD"
+  },
+  {
+   "parameters": {
+    "content": "## 🗃️ Gestão de Memória de Sessão 🧵\n**O Fio da Meada Histórico da Conversa**\n\nDiferente do banco vetorial enorme (que guarda os conhecimentos absolutos gerais), estes nós guardam o **Contexto Imediato de Interação**.\n\nBasicamente, eles lembram exatamente o que o cliente disse e enviou há 5 minutos atrás. Eles cuidam do controle e vinculam todas as mensagens da janela de contexto ao identificador único ('sessionId' que pode ser o WhatsApp do cliente). Isso barra a amnésia artificial da IA, criando assim um diálogo muito mais dinâmico, realístico, fluido e extremamente coerente.",
+    "height": 240,
+    "width": 732,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -1248,
+    416
+   ],
+   "typeVersion": 1,
+   "id": "7ec516c6-4974-4fb1-a30b-9f049aa88df2",
+   "name": "Sticky Note Session Memory"
+  },
+  {
+   "parameters": {
+    "description": "sempre acione essa tool para buscar o histórico completo das conversas anteriores",
+    "workflowId": {
+     "__rl": true,
+     "value": "tVc1VkPcUX5cmTil",
+     "mode": "list",
+     "cachedResultUrl": "/workflow/tVc1VkPcUX5cmTil",
+     "cachedResultName": "memoria de elefante Com gerenciador"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {},
+     "matchingColumns": [
+      "sessionId"
+     ],
+     "schema": [
+      {
+       "id": "sessionId",
+       "displayName": "sessionId",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+   "typeVersion": 2.2,
+   "position": [
+    784,
+    208
+   ],
+   "id": "019cd3cb-7bca-48fb-9863-82b5b10a19d6",
+   "name": "memoria de elefante"
+  }
+ ],
+ "pinData": {
+  "backend": [
+   {
+    "json": {
+     "headers": {
+      "host": "interface.inovareinteligenciaartificial.com",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+      "content-length": "110",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "origin": "null",
+      "pragma": "no-cache",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "45.71.241.206",
+      "x-forwarded-host": "interface.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "9f4389dd20d5",
+      "x-real-ip": "45.71.241.206"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "p": "inserir",
+      "text": "id_chat = card\n\nPergunta_humano = quero saber\n\nresposta_da_ia = Você está certo"
+     },
+     "webhookUrl": "https://interface.inovareinteligenciaartificial.com/webhook/backend-memoria-elefante",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "api da sua escolha": {
+   "main": [
+    [
+     {
+      "node": "consulta_chave",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings Gemini": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Postgres PGVector Store",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres PGVector Store": {
+   "main": [
+    [
+     {
+      "node": "saida da api da sua escolha1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "insere": {
+   "ai_document": [
+    []
+   ]
+  },
+  "saida da api da sua escolha1": {
+   "main": [
+    []
+   ]
+  },
+  "Postgres Memory1": {
+   "ai_memory": [
+    [
+     {
+      "node": "toda a comversa",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "quando o agente deve acessar toda a memoria": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "When Executed by Another Workflow": {
+   "main": [
+    [
+     {
+      "node": "toda a comversa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields": {
+   "main": [
+    [
+     {
+      "node": "Postgres PGVector Store",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Default Data Loader": {
+   "ai_document": [
+    [
+     {
+      "node": "Postgres PGVector Store",
+      "type": "ai_document",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Think": {
+   "ai_tool": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_chave": {
+   "main": [
+    [
+     {
+      "node": "Postgres PGVector Store5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "backend": {
+   "main": [
+    [
+     {
+      "node": "Switch1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code6": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook16",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_contato2": {
+   "main": [
+    [
+     {
+      "node": "Code6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "frontend": {
+   "main": [
+    [
+     {
+      "node": "HTML1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch1": {
+   "main": [
+    [
+     {
+      "node": "consulta_contato3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "consulta_contato4",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Edit Fields1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "consulta_contato2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_contato3": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook17",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings Google Gemini1": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Postgres PGVector Store5",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres PGVector Store5": {
+   "main": [
+    [
+     {
+      "node": "quando o agente deve acessar toda a memoria",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_contato4": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook18",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields1": {
+   "main": [
+    [
+     {
+      "node": "Postgres PGVector Store1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Default Data Loader1": {
+   "ai_document": [
+    [
+     {
+      "node": "Postgres PGVector Store1",
+      "type": "ai_document",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reranker Cohere1": {
+   "ai_reranker": [
+    [
+     {
+      "node": "Postgres PGVector Store2",
+      "type": "ai_reranker",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings Gemini3": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Postgres PGVector Store3",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings Gemini2": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Postgres PGVector Store2",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Postgres PGVector Store1",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "memoria de elefante": {
+   "ai_tool": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres PGVector Store3": {
+   "ai_tool": [
+    []
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "5fd8f788-e243-451b-b931-a738f0f61ca3",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "tVc1VkPcUX5cmTil",
+ "tags": []
+}

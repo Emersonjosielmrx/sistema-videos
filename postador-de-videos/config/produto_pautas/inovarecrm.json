@@ -1,0 +1,144 @@
+{
+ "pautas": [
+  {
+   "id": "historico_perdido",
+   "tipo": "dor",
+   "ideia": "O atendente precisa perguntar tudo de novo ao cliente porque as conversas anteriores sumiram, problema resolvido com o histórico centralizado em um só lugar.",
+   "pergunta_cliente": "Consigo ver as conversas e compras antigas do cliente na mesma tela?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "ia_duvidas_basicas",
+   "tipo": "como_funciona",
+   "ideia": "A equipe perde horas respondendo as mesmas dúvidas no chat e passa a usar a IA integrada para responder e triar chamados.",
+   "pergunta_cliente": "A IA consegue responder o cliente e já abrir o chamado se precisar?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "chatwoot_personalizacao",
+   "tipo": "objecao",
+   "ideia": "O dono acha que o Chatwoot padrão não atende sua operação, mas descobre que criamos um CRM personalizado para o fluxo dele.",
+   "pergunta_cliente": "Dá para adaptar o sistema exatamente para a rotina da minha empresa?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "chamado_sem_dono",
+   "tipo": "dor",
+   "ideia": "Mensagens de suporte são esquecidas no WhatsApp porque não viram chamado, situação eliminada com o sistema de tickets integrado.",
+   "pergunta_cliente": "Como faço para transformar uma mensagem de cliente em ticket de suporte?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "suporte_pos_venda",
+   "tipo": "caso_de_uso",
+   "ideia": "Uma empresa de serviços unifica a captação de clientes e os pedidos de suporte pós-venda dentro da mesma plataforma.",
+   "pergunta_cliente": "Posso usar a mesma ferramenta para vender e atender o suporte?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "transicao_caos_ordem",
+   "tipo": "antes_depois",
+   "ideia": "De vários atendentes respondendo no mesmo celular sem controle para um atendimento organizado com tickets, histórico e IA.",
+   "pergunta_cliente": "Minha equipe vai conseguir atender junta sem um atropelar a conversa do outro?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "medo_complexidade_ia",
+   "tipo": "objecao",
+   "ideia": "O gestor tem receio de que a IA seja difícil de implantar, mas vê que ela já vem integrada ao CRM personalizado.",
+   "pergunta_cliente": "Preciso entender de programação para usar a IA no atendimento?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "ticket_aberto_esquecido",
+   "tipo": "dor",
+   "ideia": "O cliente reclama que pediu ajuda e ninguém respondeu, o que deixa de acontecer com o helpdesk integrado acompanhando cada ticket.",
+   "pergunta_cliente": "Consigo acompanhar quais chamados de clientes ainda estão pendentes?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "ia_qualifica_lead",
+   "tipo": "caso_de_uso",
+   "ideia": "A IA atende o contato inicial fora do horário comercial e registra o histórico para o vendedor continuar no dia seguinte.",
+   "pergunta_cliente": "A IA consegue atender o cliente quando a minha equipe não estiver online?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "faq_integracao_helpdesk",
+   "tipo": "pergunta_frequente",
+   "ideia": "Explicar como funciona a união entre CRM comercial e helpdesk de atendimento dentro da mesma interface baseada em Chatwoot.",
+   "pergunta_cliente": "O CRM e o suporte ficam mesmo na mesma plataforma?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "mudanca_de_atendente",
+   "tipo": "dor",
+   "ideia": "Quando um funcionário falta ou sai da empresa, o novo atendente assume a conversa sabendo todo o histórico do cliente.",
+   "pergunta_cliente": "Se trocar o atendente, o novo consegue saber o que já foi conversado?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "solucao_feita_sob_medida",
+   "tipo": "objecao",
+   "ideia": "O empresário acredita que CRM pronto é engessado, descobrindo que o nosso é feito sob medida a partir do Chatwoot.",
+   "pergunta_cliente": "Vocês configuram os campos e etapas do jeito que meu negócio precisa?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "fluxo_completo_cliente",
+   "tipo": "como_funciona",
+   "ideia": "Demonstrar na prática o cliente chegando pela mensagem, sendo triado por IA e virando um ticket com histórico salvo.",
+   "pergunta_cliente": "Como é o caminho da mensagem do cliente desde o início até o atendimento?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "cliente_cobrando_retorno",
+   "tipo": "dor",
+   "ideia": "O cliente cobra status de um problema e ninguém sabe quem atendeu, o que se resolve com a gestão de tickets por atendente.",
+   "pergunta_cliente": "Tem como saber qual atendente ficou responsável pelo chamado do cliente?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "evolucao_chat_para_crm",
+   "tipo": "antes_depois",
+   "ideia": "De conversas soltas no chat sem dados organizados para um CRM completo com histórico de cada cliente em um só lugar.",
+   "pergunta_cliente": "O sistema guarda o histórico completo de cada contato que fala conosco?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "faq_o_que_e_chatwoot_ia",
+   "tipo": "pergunta_frequente",
+   "ideia": "Esclarecer o diferencial de ter o Chatwoot personalizado com recursos de IA e helpdesk para o negócio.",
+   "pergunta_cliente": "Qual é a diferença desse Chatwoot com IA para um sistema comum de mensagens?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "ia_ajuda_atendente",
+   "tipo": "caso_de_uso",
+   "ideia": "O atendente consulta o histórico e usa a IA integrada para agilizar a resposta de chamados complexos.",
+   "pergunta_cliente": "A IA pode ajudar o atendente a responder mais rápido os tickets?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "muitas_telas_abertas",
+   "tipo": "dor",
+   "ideia": "A equipe se perde alternando entre sistema de tickets e aplicativo de mensagens, unificando tudo em um só lugar.",
+   "pergunta_cliente": "Dá para parar de usar um programa para suporte e outro para mensagens?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "seguranca_historico",
+   "tipo": "objecao",
+   "ideia": "O empresário tem medo de perder o histórico das conversas de clientes ao migrar, vendo que tudo fica centralizado no CRM.",
+   "pergunta_cliente": "O histórico de atendimento dos clientes fica realmente salvo em um só lugar?",
+   "criada": "2026-11-02T21:33:23"
+  },
+  {
+   "id": "organizacao_suporte_vendas",
+   "tipo": "antes_depois",
+   "ideia": "De solicitações de clientes perdidas na caixa de entrada para um fluxo com tickets organizados e IA integrada.",
+   "pergunta_cliente": "Como faço para ver uma demonstração do CRM funcionando para o meu negócio?",
+   "criada": "2026-11-02T21:33:23"
+  }
+ ]
+}

@@ -1,0 +1,349 @@
+{
+ "resumo": "Inventario do que o D:\\manhwa-react (pacote mr\\ + scripts\\) tem e o veo deveria aproveitar. Leitura feita em CLAUDE.md, README.md, AUDITORIA.md, PLANO.md, HANDOFF.md, HANDOFF_REDE.md, REDE_ESTADO_E_PENDENCIAS.md, LEIA_MELHORIAS_HIPERCOOL.md, MELHORIAS_APLICADAS_E_PENDENTES.md, config.json, mr\\rede.py (1028 linhas) e os demais modulos pedidos, mais o lado do veo/postador para classificar cada peca.\n\nO manhwa-react e um RPA de pos-producao de Shorts de REACT (webcam em cima, video reagido embaixo) e, desde 04/10, o motor de POSTAGEM da rede de 19 canais (mr\\rede.py). Metade do codigo e especifica de react (layout por webcam, labios, cortes de silencio, divisoria, video base) e NAO serve ao veo. A outra metade e infraestrutura de distribuicao/qualidade que o veo nao tem e que ataca exatamente as causas do banimento de 04/09: agendamento sem rajada (janela de 3 h, 1 video por canal por dia, private+publishAt, jitter, trava), cada video em UM canal so, agente por canal com persona e revisor de metadados, bandit de estrategias com memoria de titulos (views em 48 h), dedupe por hash de quadros e trigramas de fala, validacao final (loudness, frames pretos), rebrand do @, backup no Drive, sem_janela.\n\nEstado atual da ligacao veo <-> manhwa-react: o Veo LIMPO (D:\\hipercool-materiais\\veo\\limpos, 296 arquivos feitos por limpar_veo.py) JA entra na rede como 3a fonte (rede.py:165-188), mas so em inventoreact e manhwareact, com nota minima e sem produto; na pratica 1 unico Veo saiu pela rede ate agora (alienigenas_20260806_074758, InventoReact, 15/10 23:00) e o log das 22:17-23:17 de 15/10 mostra \"161 video(s) aprovado(s) na fila\" e \"SEM VIDEO BOM para\" 9 canais. Ou seja: a rede funciona, mas o veo esta subaproveitado nela.\n\nNo veo, as pecas equivalentes estao assim: legendas = texto do PROMPT distribuido pela duracao, sem ouvir o audio (plugins\\legendas.py); loudnorm = 1 passo em -16 LUFS; sem blackdetect, sem trilha, sem dedupe de video, sem revisor de metadados, sem trava no loop, sem sem_janela; caption com \"#viral #brasil\" e emoji generico no fallback; postagem antiga round-robin (postar_tudo_hoje.py) e agendador de 771 videos (agendar_vo3.py) ainda na tarefa das 06:40 embora hoje nao achem canal livre; metrics_client pede YOUTUBE_API_KEY (contra a regra); edge_tts_veo usa vozes proibidas; o card CTA continua com numero de WhatsApp fixo e a marca @InovareStories (causa apontada do banimento).\n\nPrioridade de portagem (esforco): (1) usar a rede como UNICO caminho de postagem do veo e desligar postar_tudo_hoje/agendar_vo3 (P); (2) revisor + agente de metadados com regras anti-propaganda (P-M); (3) legendas palavra a palavra em ASS a partir da transcricao Groq (M); (4) validacao final + loudnorm 2 passos (P); (5) dedupe de ideia (trigramas) antes de gastar credito e de video (dHash) antes de postar (P/M); (6) bandit: mapear hook_family do veo aos bracos de ESTRATEGIAS e gravar a estrategia no publicados.json (M); (7) HyperFrames para CTA animado sem telefone/URL (M); (8) SFX por palavra e trilha com blocklist corrigida (P-M); (9) sem_janela, saude de perfis, folhas de quadros, backup ja cobre o veo (P).",
+ "fatos": [
+  {
+   "fato": "A rede agenda 1 video por canal por dia, so faz upload do que publica nas proximas 3 h (sem rajada), com antecedencia minima de 30 min e jitter deterministico por md5 do id do video.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:34-44 (REDE_PADRAO janela_upload_h=3, nota_min=6, antecedencia_min=30); :559-581 escolher_horario (jitter md5 em 566-567); :897-900 'reservado para este canal nesta rodada; sobe na rodada da hora certa'; D:\\postador-de-videos\\config\\rede_canais.json padrao {max_dia:1, jitter_min:15, explorar:0.25}"
+  },
+  {
+   "fato": "Cada video vai para UM canal so (distribuicao gulosa por nota do diretor LLM + bonus de canal original + fome); o docstring diz que o mesmo video em 2 canais 'foi o padrao que derrubou a rede antiga'.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:11-12 e :241-277 distribuir (usados.add(iid) em 274); :643-649 _fome"
+  },
+  {
+   "fato": "Trava de 1 rodada por vez (arquivo work/rede.lock, abandonada apos 90 min) e botoes LIGAR/DESLIGAR via arquivo POSTAGEM_DESLIGADA.json que tambem param o ciclo 06:40 e o agendar_vo3.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:668-688 class Trava; :795-829 desligada/desligar/ligar; D:\\postador-de-videos\\bin\\postar_tudo_auto.bat linhas 'if exist D:\\postador-de-videos\\config\\POSTAGEM_DESLIGADA.json ... exit /b 0'"
+  },
+  {
+   "fato": "Bandit de estrategias: 3 dimensoes textuais (titulo: pergunta/choque/curiosidade/opiniao/busca; gancho: 3; comentario: 3) + horario; cada braco e testado 2x no canal, depois media do canal puxada para a media da rede (K=2) com 25% de exploracao.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:323-343 ESTRATEGIAS; :365-393 ordem_bracos; :396-398 escolher_estrategia; nota medida em D:\\postador-de-videos\\bin\\painel_canais.py:99-101 'nota = views / mediana * (1 + eng)' com eng=(likes+3*coments)/views limitado a 0,5"
+  },
+  {
+   "fato": "Memoria de titulos: memoria_canal (3 melhores/3 piores do proprio canal, exige >=4 medidos) e memoria_rede (top/piores de TODOS os projetos em 48 h) entram no prompt do agente do canal.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:401-410 memoria_canal; :413-427 memoria_rede le _analise/aprendizado_global.json; gerado por D:\\postador-de-videos\\bin\\notificar_telegram.py:620-658 medir_48h (1a leitura entre 48 e 96 h, guarda 45 dias)"
+  },
+  {
+   "fato": "Formato do aprendizado_global.json: {_leia, atualizado, janela_dias:30, por_origem{n,mediana,p75,pct_1000}, por_canal{...}, top[15]{titulo,canal,origem,views,pub}, piores[10]}. Dados de 16/10 02:29: react n=16 mediana 195 views p75 1211 (44% passam de 1000); recap hipercool n=6 mediana 1; top = 'Voce sobreviveria casado com essa mulher? #shorts #garotaexemplar' cenareact 1332 views.",
+   "evidencia": "D:\\postador-de-videos\\_analise\\aprendizado_global.json (lido em 16/10); chaves e numeros impressos na auditoria"
+  },
+  {
+   "fato": "O aprendizado por braco ainda e raso: rede_aprendizado.json tem 1-3 amostras por braco por canal (ex.: dicasfinanceirasdaia titulo pergunta:2 curiosidade:1) e historico de 1-3 videos por canal; nenhum Veo medido.",
+   "evidencia": "D:\\postador-de-videos\\_analise\\rede_aprendizado.json chaves canais/historico/_medidos (impressas na auditoria); D:\\manhwa-react\\mr\\rede.py:404 'if len(hist) < 4: return \"\"'"
+  },
+  {
+   "fato": "Agente do canal reescreve titulo/descricao/tags/1o comentario com persona, proibe #fyp/#viral, 'o criador', nome da obra, palavras que derrubam anuncio; _validar_meta corta titulo em 100, mantem no maximo 5 hashtags quando passa de 8, forca aviso 'criadas com inteligencia artificial' em video sintetico e limita 15 tags/450 chars.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:431-451 AGENTE_INSTR (445 'Sem #fyp/#viral', 449 'NUNCA o nome da obra'); :526-550 _validar_meta; :536-537 aviso de IA"
+  },
+  {
+   "fato": "Revisor: regex PROIBIDO_TITULO (matar/morte/sexo/droga/arma/suicidio/sangue), PROIBIDO_DONO (robo/bot/garantido/fique rico/preve o mercado/lucro certo) para canais com 'regras', nome da obra e 'o criador'; 1 correcao pelo LLM, se insistir fica 'bloqueado' e o par (video,canal) sai da distribuicao.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:454-456 regexes; :459-475 revisar; :478-484 _barrado; :515-521 correcao unica"
+  },
+  {
+   "fato": "Rebrand do @: cobre o canto superior direito (50% x 5,5% do quadro) com boxblur e sobrepoe PNG do handle do canal de destino; para fonte 'veo' e 'historias' sempre aplica; o arquivo novo herda a aprovacao.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:281-290 _png_handle; :293-310 rebrand; :313-316 precisa_marca ('historias','veo' -> True); :919-922 marcar_aprovacao herdada"
+  },
+  {
+   "fato": "Veo LIMPO ja e fonte da rede: le D:/hipercool-materiais/veo/limpos/*.json, pula marca do TikTok, titulo reserva = 1a frase da fala, restrito a canais_veo_limpo=[inventoreact, manhwareact] com nota = nota_min (sem diretor), marca o json com posted_url ao postar.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:42-43, :165-188 inventario, :247-250 distribuir (restritos), :636-640 _arquivar_veo; D:\\manhwa-react\\CLAUDE.md secao 'Rede, 3a fonte (15/10...)'"
+  },
+  {
+   "fato": "Resultado real: apenas 1 Veo postado pela rede (veo:alienigenas_20260806_074758, InventoReact, publish_at 2026-10-15T23:00Z, comentario ok); o log de 15/10 22:17 e 23:17 diz '12 canais ativos | 161 video(s) aprovado(s) na fila' e 'SEM VIDEO BOM para: animescomia, inovaremanhwabr, cartuchoreact, forjareact, mundoquenaoexiste, historiasemframes, fiodameada, dicasfinanceirasdaia, assistiainvestimentos' e '0 video(s) agendado(s)'.",
+   "evidencia": "D:\\hipercool-materiais\\_postados\\react\\publicados.json (fonte=='veo' -> 1 entrada); D:\\manhwa-react\\logs\\rede_20261015.log ultimas 12 linhas"
+  },
+  {
+   "fato": "Dedupe em 3 niveis: impressao do arquivo (sha1 de 2 MB inicio+fim+tamanho), dHash 64 bits do centro do conteudo 1 quadro/0,5 s via ffmpeg rawvideo 9x8 gray (ignora quadros lisos std<=6), e trigramas da fala (>=30% em comum = repetido); limiar visual 0,35.",
+   "evidencia": "D:\\manhwa-react\\mr\\memoria.py:35-43 impressao_arquivo; :46-60 hashes_quadros; :63-74 _parecido (dist<=10 bits); :98-112 repetido; :132-158 repetido_texto; chamado em mr\\pipeline.py:125-134"
+  },
+  {
+   "fato": "Validacao final: ffprobe (video+audio, resolucao = output), duracao esperada +-1 s, minimo 5 s, ebur128 integrado -14 +-2 LUFS e blackdetect d=0.6 numa unica passada; falha => pronto=false no postar.json. Loudness em 2 passos com medicao JSON.",
+   "evidencia": "D:\\manhwa-react\\mr\\validate.py:8-41 validate_output; :44-52 mark_postar; D:\\manhwa-react\\mr\\audio.py:49-63 loudnorm_two_pass"
+  },
+  {
+   "fato": "Legendas palavra a palavra em ASS: blocos de ate 3 palavras/1,4 s, palavra ativa na cor do canal com pop (\\t fscx113), gancho, barra de progresso vetorial, keywords grandes e CTA final; aplicadas no render com ass=...:fontsdir (drawtext foi descartado por instavel).",
+   "evidencia": "D:\\manhwa-react\\mr\\captions.py:33-46 chunk_words; :63-172 build_ass (105-110 destaque+pop; 73 cap_y sem divisoria = 62% da altura); D:\\manhwa-react\\mr\\render.py:231; D:\\manhwa-react\\HANDOFF.md secao 4 'drawtext ... instavel'"
+  },
+  {
+   "fato": "Transcricao Groq whisper-large-v3 com timestamps por palavra ('timestamp_granularities[]': word+segment), sempre por proxy Webshare com rodizio de chaves do postador e cooldown por proxy; fallback faster-whisper local; limpeza de alucinacoes.",
+   "evidencia": "D:\\manhwa-react\\mr\\transcribe.py:66-119 transcribe_groq (95-96 words), :181-208 clean_hallucinations; D:\\manhwa-react\\mr\\groq_api.py:21-23 (chaves/proxies em D:\\postador-de-videos\\secrets), :162-195 _pedido, :198-223 transcrever"
+  },
+  {
+   "fato": "limpar_veo.py ja transcreve cada Veo limpo com mr.transcribe (venv do manhwa-react) mas descarta os tempos por palavra: junta so o texto dos segmentos para servir de titulo.",
+   "evidencia": "D:\\postador-de-videos\\bin\\limpar_veo.py:163-171 transcrever ('return \" \".join(s[\"text\"] for s in res[\"segments\"])'); postar_tudo_auto.bat etapa 2a roda com D:\\manhwa-react\\.venv"
+  },
+  {
+   "fato": "As legendas do veo NAO ouvem o audio: distribuem o texto 'fala' do meta (o prompt) em ate 4 pedacos proporcionais ao tamanho ao longo da duracao do video, renderizados em PNG pelo PIL.",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\plugins\\legendas.py:47-72 _chunk_fala; :74-110 processar ('distribui a fala pela duracao do video'); D:\\veo\\beta\\pos_producao\\subtitles_veo.py:1-8"
+  },
+  {
+   "fato": "HyperFrames caseiro: 5 templates HTML/CSS (cta_question, big_number, part_badge, watch_to_end, lower_third) renderizados pelo Chromium do Playwright quadro a quadro via Web Animations currentTime, em MOV png rgba com cache md5; HTML gravado em disco e aberto por file:// para as fontes carregarem.",
+   "evidencia": "D:\\manhwa-react\\mr\\hyperframes.py:21-78 TEMPLATES; :88-127 render (106 chromium.launch(headless=True), 114 currentTime); HANDOFF.md secao 4 'Playwright set_content com fontes file:// nao carregam'"
+  },
+  {
+   "fato": "SFX por palavra: tabela assets/gatilhos_palavras.json (regex + proxima palavra + sons + emoji), cooldown 5 s, maximo 6 por video, ganho -10 dB, duracao maxima 2,6 s, indice de nomes em sfx_memes/sfx/sfx_extras do hipercool-materiais; precisa de palavras com tempo (s/e).",
+   "evidencia": "D:\\manhwa-react\\mr\\triggers.py:18-25 load_table; :42-56 find_sound; :59-102 plan_word_triggers; chamado em mr\\pipeline.py:313"
+  },
+  {
+   "fato": "Trilha por mood: prefere pool MusicGen local (prefer_generated), senao moods.json do acervo fora da blocklist; mixada em -30 LUFS com sidechaincompress (ducking) e loudnorm final. BUG confirmado: _blocklist faz str(x).lower() sobre dicts {arquivo, bloquear} e por isso NADA e bloqueado (documentado no CLAUDE.md).",
+   "evidencia": "D:\\manhwa-react\\mr\\music.py:22-30 _blocklist (29 'return {str(x).lower() for x in items}'); :52-83 pick_track; D:\\manhwa-react\\mr\\render.py:45-48; D:\\manhwa-react\\CLAUDE.md 'Bugs conhecidos'; config.json music.safe_only=false, prefer_generated=true"
+  },
+  {
+   "fato": "sem_janela.py (identico ao do hipercool): monkeypatch de subprocess.Popen.__init__ pondo CREATE_NO_WINDOW quando nao ha creationflags; nao afeta programas graficos (Chrome). O veo nao tem nada equivalente.",
+   "evidencia": "D:\\manhwa-react\\mr\\sem_janela.py:14-25; D:\\hipercool-videos\\bin\\sem_janela.py (mesmo conteudo); grep 'CREATE_NO_WINDOW|sem_janela|pythonw' em D:\\veo\\beta\\**\\*.py = 0 arquivos"
+  },
+  {
+   "fato": "backup_drive.py ja cobre o veo: move para manhwa-drive:videos-backup/<projeto>/ o que o catalogo central diz que foi postado ha mais de 3 dias e os brutos do Veo que ja viraram final ha 14 dias; rclone moveto 1 arquivo por vez (confere tamanho+md5), manifesto em logs/backup_drive.jsonl; textos (.json/.txt/.md) so copiados.",
+   "evidencia": "D:\\manhwa-react\\scripts\\backup_drive.py:1-13 docstring; :35-36 ESPERA/ESPERA_BRUTO; :78-79 bruto do Veo; :123-162 enviar; D:\\postador-de-videos\\bin\\catalogo.py:1-8"
+  },
+  {
+   "fato": "Scripts de saude de perfis de Chrome: saude_perfis.py abre cada perfil por CDP e testa login real (myaccount.google.com redirecionando = morto), sonda_perfis_veo.py faz isso para copias dos perfis do veo, inventario_perfis.py e montar_cofre.py alimentam o cofre D:/logins-google/cofre.",
+   "evidencia": "D:\\manhwa-react\\scripts\\saude_perfis.py:1-4, :22-27 TESTES; scripts\\sonda_perfis_veo.py:1-2 e 11-15 (caminhos D:\\veo\\beta\\chrome_gen_*); scripts\\inventario_perfis.py:1-4; scripts\\montar_cofre.py:1-4"
+  },
+  {
+   "fato": "Aprovacao delegada ao agente com folhas de quadros (5 quadros por video, 3 videos por folha) e rede --aprovar/--tudo gravando em politica.marcar_aprovacao; limpar_veo ja aprova os de formato padrao.",
+   "evidencia": "D:\\manhwa-react\\testes\\folhas_quadros.py:1-2; D:\\manhwa-react\\mr\\rede.py:998-1028 aprovar; D:\\postador-de-videos\\bin\\limpar_veo.py docstring 'so os de formato conhecido sao aprovados (politica.marcar_aprovacao)'"
+  },
+  {
+   "fato": "Toda a postagem da rede passa pela politica do postador, mas HOJE pela Data API: politica.postar_youtube so usa youtube_web_poster.py (navegador) se o canal estiver em youtube_navegador.json, e esse arquivo esta com canais = {}. rede.py tambem fala direto com googleapis para privar, editar metadados, comentar e thumbnail.",
+   "evidencia": "D:\\postador-de-videos\\bin\\politica.py:42-44 e :429-456 (_usar_navegador, POSTER_WEB); D:\\postador-de-videos\\config\\youtube_navegador.json {'canais': {}}; D:\\manhwa-react\\mr\\rede.py:585-624 _req/privar/editar_meta; D:\\manhwa-react\\mr\\publish.py:118-134 _thumbnail/_comentar"
+  },
+  {
+   "fato": "politica.json hoje: max 10 uploads por canal por dia, 50 no total, intervalo 0 h, aprovacao humana ligada, parada geral ao detectar suspensao. A rede aplica limites mais duros por cima (max_dia=1 por canal, janela de 3 h).",
+   "evidencia": "D:\\postador-de-videos\\config\\politica.json; D:\\postador-de-videos\\config\\rede_canais.json padrao.max_dia=1"
+  },
+  {
+   "fato": "Os caminhos antigos de postagem do veo continuam na tarefa das 06:40: postar_tudo_hoje.py (round-robin entre canais, titulo por Gemini com #shorts, fallback 'persona - tema #shorts' e '#shorts #ia #viral') e postar_pos_final.py; agendar_vo3.py distribui 'os 771 videos de pos_final' em 5 slots. HANDOFF_REDE diz que hoje 'nao acham canal livre' porque os canais estao reservados a rede.",
+   "evidencia": "D:\\postador-de-videos\\bin\\postar_tudo_auto.bat etapas 1 e 2; D:\\postador-de-videos\\bin\\postar_tudo_hoje.py:5, :48-69, :150-172; D:\\postador-de-videos\\bin\\agendar_vo3.py docstring; D:\\manhwa-react\\HANDOFF_REDE.md secao 6"
+  },
+  {
+   "fato": "publicar.py do veo gera caption com '1-2 emojis' no titulo e, no fallback, titulo = fala[:75] + ' 🔥' e descricao terminando em '#shorts #ia #<canal> #viral #brasil' com tags 'viral','brasil' (padrao template que a rede proibe).",
+   "evidencia": "D:\\veo\\beta\\publicar.py:55; :79-90 _caption_fallback"
+  },
+  {
+   "fato": "O veo nao tem dedupe de video nem de fala: so saturacao por tema (max 5 por dia em 24 h) e md5 do prompt normalizado; o video_cache.json guarda id, ts, canal, tema, fala, cenario, prompt_final, foto, score, hook_family, thumbnails, metrics.",
+   "evidencia": "D:\\veo\\beta\\cron_gerar_video_llm.py:387-411 contar_videos_recentes_por_tema/detectar_saturacao; :975-979 md5 do prompt; D:\\veo\\beta\\logs\\video_cache.json entrada 'eddc40e7' (hook_family 'comando')"
+  },
+  {
+   "fato": "validate.py do veo e um smoke test de imports e de contas, nao valida video; o unico loudnorm e 1 passo em -16 LUFS no plugin antigo; montar_final.py nao tem loudnorm, trilha, sfx nem blackdetect; loop_cron.py e worker_noite.py nao tem trava.",
+   "evidencia": "D:\\veo\\beta\\validate.py:1-16 e :21-27 MODULOS_VIVOS; D:\\veo\\beta\\pos_producao\\plugins\\ffmpeg_loudnorm.py:33; grep 'trilha|music|sfx|loudnorm|amix' em montar_final.py/montagem.py = vazio; grep 'lock|Trava' em loop_cron.py/worker_noite.py = vazio"
+  },
+  {
+   "fato": "O veo ainda grava propaganda que foi apontada como causa do banimento: card CTA com numero de WhatsApp fixo no codigo e plugin de branding com '@InovareStories' e 'Siga pra mais historias IA'.",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\cta_card.py:155 'whatsapp = \"91 98469-8653\"'; D:\\veo\\beta\\pos_producao\\plugins\\branding_watermark.py:24-26; D:\\postador-de-videos\\bin\\limpar_veo.py docstring 'slide de propaganda/WhatsApp que derrubou os canais antigos do Veo'"
+  },
+  {
+   "fato": "edge_tts_veo.py usa as vozes PROIBIDAS pt-BR-FranciscaNeural e pt-BR-AntonioNeural em 12 variantes; cta_builder cai nesse modulo quando o ElevenLabs falha.",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\edge_tts_veo.py:24-44; D:\\veo\\beta\\pos_producao\\cta_builder.py:169 'from edge_tts_veo import speak as edge_speak'; regra em D:\\manhwa-react\\LEIA_MELHORIAS_HIPERCOOL.md secao 4b"
+  },
+  {
+   "fato": "metrics_client.py do veo depende de YOUTUBE_API_KEY (Data API v3 com key), enquanto o hipercool ja mede CTR/retencao pelo Studio no navegador (youtube_studio_extras.metricas).",
+   "evidencia": "D:\\veo\\beta\\metrics_client.py:9, :21, :26; D:\\hipercool-videos\\bin\\metricas.py docstring 'PELO NAVEGADOR ... nunca API do Google'; D:\\postador-de-videos\\bin\\youtube_studio_extras.py:579 def metricas"
+  },
+  {
+   "fato": "Dependencias do venv do manhwa-react que o veo nao tem: soundfile (mr.transcribe usa em _duration/load_audio_16k), pysubs2, mediapipe, faster-whisper e torch estao em requirements.txt; o venv do veo tem playwright 1.61, PIL, cv2, numpy, scipy, requests, edge_tts e faster_whisper, mas nao lista soundfile nem pysubs2.",
+   "evidencia": "D:\\manhwa-react\\requirements.txt; D:\\manhwa-react\\mr\\transcribe.py:21-32 e :58-63; ls D:\\veo\\venv\\Lib\\site-packages (filtrado na auditoria)"
+  },
+  {
+   "fato": "Comentario da rede em loop de erro: o video wKiGkUQ6bBc (InventoReact, fonte 'completo', publish_at 2026-10-13T23:00Z, item 2026_10_09_17_22_24) responde 404 videoNotFound a cada hora; o codigo so desiste depois de 3 dias.",
+   "evidencia": "D:\\manhwa-react\\logs\\rede_20261015.log 21:17/22:17/23:17 'comentario falhou (InventoReact https://youtu.be/wKiGkUQ6bBc): 404 videoNotFound'; D:\\hermes... nao; D:\\hipercool-materiais\\_postados\\react\\publicados.json; D:\\manhwa-react\\mr\\publish.py:178-180"
+  },
+  {
+   "fato": "Outros projetos ja tem pecas complementares prontas: hipercool seo.py (escolher_estilo com Thompson Beta, _sem_obra, registrar_resultado), capa_ia.py (3 capas A/B com checagem de seguranca), fx_acabamento._clipe_parado (contorno do travamento do ffmpeg 8 com varios -loop 1), youtube_studio_extras.py (comentar_fixar, relacionado, teste_ab, editar_metadados, metricas).",
+   "evidencia": "D:\\hipercool-videos\\bin\\seo.py:193, :230-245; D:\\hipercool-videos\\bin\\capa_ia.py:201, :306-317; D:\\hipercool-videos\\bin\\fx_acabamento.py:893-906; D:\\postador-de-videos\\bin\\youtube_studio_extras.py:158-605; D:\\manhwa-react\\MELHORIAS_APLICADAS_E_PENDENTES.md itens 3-6 ainda 'Nao aplicado'"
+  }
+ ],
+ "problemas": [
+  {
+   "titulo": "Veo ainda produz e guarda a propaganda que derrubou os canais (WhatsApp no video + marca @InovareStories)",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\cta_card.py:155 'whatsapp = \"91 98469-8653\"'; D:\\veo\\beta\\pos_producao\\plugins\\branding_watermark.py:24-26; montar_final.montar() gera a variante _COMPLETO com card CTA (pos_producao\\montar_final.py:54-68, :108-150); D:\\postador-de-videos\\bin\\limpar_veo.py docstring 'slide de propaganda/WhatsApp que derrubou os canais antigos do Veo'",
+   "impacto": "Qualquer COMPLETO que escape para o YouTube (postar_pos_final.py ainda esta na tarefa 06:40) repete o padrao 'spam/praticas enganosas'. Enquanto o CTA nao for redesenhado (nome do produto + pergunta, sem telefone/URL na tela), o comercial do veo nao pode voltar a ser postado.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Postagem do veo ainda tem 3 caminhos; os dois antigos sao round-robin/rajada e seguem agendados",
+   "evidencia": "D:\\postador-de-videos\\bin\\postar_tudo_auto.bat etapas 1 (postar_tudo_hoje.py) e 2 (postar_pos_final.py); postar_tudo_hoje.py:5 'posta round-robin entre os canais ATIVOS', :160-172 titulo 'persona - tema #shorts' e '#shorts #ia #viral'; agendar_vo3.py docstring 'Distribui os 771 videos ... Fim do dia: varredura de quota nao preenchida e postagem imediata'; tarefa AgendadorVO3 05:00 (HANDOFF_REDE.md secao 6)",
+   "impacto": "Hoje nao postam porque os canais estao reservados a rede (canais_reservados.json), mas basta um canal novo fora da reserva para o veo voltar ao padrao de 04/09 (dezenas por dia, mesmo video em varios canais, titulos por template, 730 do pos_final repostados). Devem ser desligados/removidos do .bat e o veo deve sair SO pela rede.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Toda a postagem e manutencao da rede e pela Data API, contra a regra 'Google/YouTube so pelo navegador'; o mesmo projeto OAuth em quase todos os canais foi apontado como causa do banimento",
+   "evidencia": "D:\\postador-de-videos\\bin\\politica.py:454 (navegador so se marcado) e D:\\postador-de-videos\\config\\youtube_navegador.json canais = {}; D:\\manhwa-react\\mr\\rede.py:585-624 _req/privar/editar_meta (googleapis), D:\\manhwa-react\\mr\\publish.py:118-134 thumbnail/comentario por API; HANDOFF_REDE.md secao 4 'quase todos os canais novos usam o projeto Google 100689820764'; D:\\hipercool-videos docs (LEIA_MELHORIAS_HIPERCOOL.md secao 7) 'Postagem so pelo navegador (sem Data API)'",
+   "impacto": "Se a regra vale para os refresh tokens ja existentes, a rede inteira (upload, 1o comentario, privar, editar metadados, painel/aprendizado) precisa migrar para youtube_web_poster.py + youtube_studio_extras.py antes de o veo escalar por ela; a vinculacao por projeto OAuth comum liga os canais entre si aos olhos do YouTube.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Legendas do veo nao correspondem ao que o Veo fala",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\plugins\\legendas.py:47-72 _chunk_fala (texto do prompt dividido pela duracao), :74-110 processar; limpar_veo.py:163-171 transcreve mas joga fora res['words']",
+   "impacto": "O Veo nem sempre fala o texto do prompt e as legendas ficam fora de sincronia ou erradas (retencao cai e passa imagem de video automatico). O manhwa-react ja tem a cadeia certa (Groq palavra a palavra -> ASS) pronta para portar.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Vozes proibidas no TTS do veo (fallback do card CTA)",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\edge_tts_veo.py:24-44 (pt-BR-FranciscaNeural, pt-BR-AntonioNeural); D:\\veo\\beta\\pos_producao\\cta_builder.py:169; regra: D:\\manhwa-react\\LEIA_MELHORIAS_HIPERCOOL.md secao 4b",
+   "impacto": "Viola decisao do dono de 15/10; trocar pelas Multilingual aprovadas com voz fixa por md5 (cta_builder.py:74 ja usa md5, so faltam as vozes).",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Bug da blocklist de copyright no music.py (nada e bloqueado)",
+   "evidencia": "D:\\manhwa-react\\mr\\music.py:29 'return {str(x).lower() for x in items}' com itens dict {arquivo, bloquear}; D:\\manhwa-react\\CLAUDE.md 'Bugs conhecidos'; config.json music.safe_only=false",
+   "impacto": "Se a trilha for portada ao veo sem o fix, as 165 faixas da blocklist podem entrar no comercial (reivindicacao de Content ID em video de produto). Corrigir antes de copiar: {x['arquivo'].lower() for x in items if isinstance(x, dict) and x.get('bloquear', True)}.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Veo entra na rede so em 2 canais, sem diretor e sem produto; 161 aprovados parados",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:43 canais_veo_limpo=['inventoreact','manhwareact'], :249-250 nota = nota_min; D:\\manhwa-react\\logs\\rede_20261015.log '161 video(s) aprovado(s) na fila' / 'SEM VIDEO BOM para' 9 canais / '0 video(s) agendado(s)'; publicados.json: 1 veo postado",
+   "impacto": "A rede tem vaga sobrando em 9 canais e o veo tem estoque, mas a regra atual impede o encontro; e sem Veo medido o bandit e a memoria_rede nao aprendem nada sobre esse formato. Decisao de produto (quais canais podem receber Veo, com ou sem produto) esta pendente.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "metrics_client do veo exige chave de API do Google",
+   "evidencia": "D:\\veo\\beta\\metrics_client.py:9 'exporte YOUTUBE_API_KEY=AIza...', :21-26, :39-43; cron_gerar_video_llm.py:179-193 usa posted_url/YOUTUBE_API_KEY para o loop de aprendizado",
+   "impacto": "Contra a regra da dona (nunca criar/pedir chave no Google Cloud) e redundante: notificar_telegram.medir_48h + aprendizado_global.json ja medem 48 h de todos os canais e youtube_studio_extras.metricas le CTR/retencao pelo navegador.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Comentario da rede em loop 404 num video que sumiu do InventoReact",
+   "evidencia": "D:\\manhwa-react\\logs\\rede_20261015.log 'comentario falhou (InventoReact https://youtu.be/wKiGkUQ6bBc): 404 videoNotFound' a cada hora; publicados.json item 2026_10_09_17_22_24 (fonte 'completo', publish_at 2026-10-13T23:00Z); D:\\manhwa-react\\mr\\publish.py:178-180 so desiste apos 3 dias",
+   "impacto": "Um video agendado que nao existe mais pode ter sido removido pelo YouTube (ou privado pela dona). Precisa ser conferido no Studio antes de o veo ampliar a presenca nesse canal; e vale marcar 'erro' no 1o 404 de video (nao de comentario) para nao gastar cota.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Aprendizado ainda fino demais para decidir (1-3 amostras por braco) e sem retencao",
+   "evidencia": "D:\\postador-de-videos\\_analise\\rede_aprendizado.json (impresso: dicasfinanceirasdaia titulo pergunta:2 curiosidade:1; historico 1-3 por canal); aprendizado_global.json react n=16; REDE_ESTADO_E_PENDENCIAS.md secao 9 'Analytics API desligada -> usa views/likes/comentarios publicos (nao retencao)'",
+   "impacto": "Portar o bandit ao veo e barato, mas qualquer conclusao sobre 'qual gancho/CTA funciona' levara semanas; o critic score do veo (video_cache.score) pode servir de prior inicial, como score_formula ja faz (cron_gerar_video_llm.py:550-583).",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Sem trava nem sem_janela no veo",
+   "evidencia": "grep 'lock|Trava' em D:\\veo\\beta\\loop_cron.py e pos_producao\\worker_noite.py = vazio; grep CREATE_NO_WINDOW em D:\\veo\\beta = vazio; regra 'um render pesado por vez' e 'tarefa agendada nao pode abrir janela' (LEIA_MELHORIAS_HIPERCOOL.md 4b)",
+   "impacto": "Dois workers (worker_noite + cron_pos_producao/montar) podem renderizar ao mesmo tempo e estourar a memoria (pagefile cheio, HANDOFF.md secao 6); janelas de ffmpeg/python aparecem na tela quando a tarefa roda.",
+   "liga_banimento": false
+  }
+ ],
+ "oportunidades": [
+  {
+   "titulo": "Veo sai SO pela rede (agendamento sem rajada, 1/canal/dia, janela 3 h, trava, liga/desliga)",
+   "fonte": "D:\\manhwa-react\\mr\\rede.py: _agendar (846-979), escolher_horario (559-581), Trava (668-688), desligada/ligar/desligar (795-829), inventario fonte 'veo' (165-188); D:\\postador-de-videos\\bin\\politica.py postar_youtube (436-497)",
+   "como_adaptar": "Ja existe e esta ligado para o Veo LIMPO. Falta: (a) tirar postar_tudo_hoje.py, postar_pos_final.py e AgendadorVO3 do postar_tudo_auto.bat/schtasks; (b) ampliar canais_veo_limpo (ou melhor: deixar o diretor dar nota ao Veo como as outras fontes, removendo 'so_canais' quando o json do limpo tiver tema/fala) e criar no rede_canais.json o(s) canal(is) que receberao o Veo com produto, com 'regras' do dono; (c) gravar no json do limpo o 'formato' (limpo/comercial) para o aprendizado. Dependencias: politica.py, youtube_canais.json, rede_canais.json. Sem codigo novo relevante.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Agente de metadados por canal + revisor anti-propaganda",
+   "fonte": "D:\\manhwa-react\\mr\\rede.py: AGENTE_INSTR (431-451), adaptar (487-523), _validar_meta (526-550), PROIBIDO_* (454-456), revisar (459-475), _barrado (478-484)",
+   "como_adaptar": "Trocar publicar.py _caption_llm/_caption_fallback do veo (titulo com emoji, '#viral #brasil') por adaptar() da rede, que ja roda para a fonte veo. Acrescentar ao revisor uma regex PROIBIDO_PROPAGANDA (numero de telefone, 'whatsapp', 'chama no zap', url, 'garantido', 'ganhe', 'clique no link') aplicada a todo video de fonte veo, e um campo 'produto' no resumo para o agente citar o produto so pelo nome na descricao. Passar 'sintetico=True' (ja passa, rede.py:926 -> --sintetico). Dependencia: proxy LLM (secrets_proxy.json) via mr/llm.py ask_json; 1 chamada por video/canal com cache em work/rede_meta.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Legendas palavra a palavra em ASS a partir da transcricao Groq",
+   "fonte": "D:\\manhwa-react\\mr\\transcribe.py transcribe/transcribe_groq (66-119, 212-221) + mr\\groq_api.py + mr\\captions.py build_ass/chunk_words (33-172) + mr\\render.py:231 (ass=...:fontsdir) + mr\\emoji.py emoji_png",
+   "como_adaptar": "No limpar_veo.py (ja chama mr.transcribe) guardar res['words'] no json do limpo; num passo novo de acabamento (antes do rebrand, ou dentro do montar_final para os novos) chamar build_ass(cfg, words, dur, plan={}, meta={'hook':..}, keywords, channel={'color':cor_do_canal,'handle':''}) - sem divisoria o codigo ja poe a legenda em 62% da altura (captions.py:73) - e aplicar com '-vf ass=<arquivo>:fontsdir=<assets/fonts>'. Para Short de 8-16 s: max_words 3, max_chunk_seconds 1.4, uppercase, sem barra de progresso. Dependencias: chaves Groq + proxies Webshare em D:\\postador-de-videos\\secrets (nao copiar), fontes Montserrat/Luckiest Guy em D:\\manhwa-react\\assets\\fonts, pacote soundfile (rodar com o venv do manhwa-react, como limpar_veo ja faz, ou instalar soundfile no venv do veo). Se o Veo falou diferente do prompt, a legenda segue o audio (correto) e a 'fala' do json pode ser atualizada.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Validacao final do Short + loudness 2 passos (-14 LUFS)",
+   "fonte": "D:\\manhwa-react\\mr\\validate.py validate_output/mark_postar (8-52); D:\\manhwa-react\\mr\\audio.py loudnorm_two_pass (49-63)",
+   "como_adaptar": "Chamar validate_output(cfg, mp4, expected_duration=None, lufs_target=-14) ao fim de limpar_veo.processar e de montar_final.montar; se falhar, gravar pronto=false/revisar no json (a rede ja ignora pronto=false). Acrescentar freezedetect (Veo as vezes congela) e duracao minima 6 s. Substituir o plugin ffmpeg_loudnorm (1 passo, -16) por loudnorm_two_pass com alvo -14/TP -1. Dependencias: so ffmpeg/ffprobe. cfg minimo: {'paths':{'ffmpeg','ffprobe'}, 'output':{'width':1080,'height':1920}, 'audio':{'target_lufs':-14,'true_peak':-1,'lra':11}}.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Dedupe de IDEIA antes de gastar credito e de VIDEO antes de postar",
+   "fonte": "D:\\manhwa-react\\mr\\memoria.py: _trigramas/repetido_texto (132-158), impressao_arquivo (35-43), hashes_quadros/_parecido/repetido (46-112)",
+   "como_adaptar": "(1) Ideia: no cron_gerar_video_llm.run, antes de disparar gera_auto, comparar trigramas da 'fala' nova com as falas do video_cache.json (500 itens) e das vencedoras; >=30% em comum = repetida, pede outra ao Hook Generator (hoje so ha saturacao por tema, cron:404-411). (2) Video: ao entrar um limpo/novo, calcular hashes_quadros(cfg, mp4, caixa=[0,0,1080,1920], passo=0.5) e comparar (_parecido, limiar 0,35) com um indice dos ja postados (publicados.json + catalogo) e dos 730 do pos_final; repetido = nao entra na fila. Sem webcam a caixa e o quadro inteiro; filtrar o 1o e o ultimo segundo (cartoes). Dependencias: numpy (veo venv tem), ffmpeg. Indice inicial dos 730 + 296: ~1 h de CPU, uma vez.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Bandit de estrategias + memoria de titulos para o Veo",
+   "fonte": "D:\\manhwa-react\\mr\\rede.py ESTRATEGIAS/ordem_bracos/escolher_estrategia/memoria_canal/memoria_rede (323-427); D:\\postador-de-videos\\bin\\painel_canais.py (74-108) e notificar_telegram.py medir_48h (620-658); alternativa simples: D:\\hipercool-videos\\bin\\seo.py escolher_estilo/registrar_resultado (230-245, Thompson Beta)",
+   "como_adaptar": "Ja roda para qualquer item que a rede posta (a estrategia vai em publicados.json e o painel mede em 48 h). Para o veo: (a) mapear hook_family do video_cache ('comando','pergunta','choque','segredo'... inteligencia.py:315-323) para um braco novo 'gancho_video' e gravar no json do limpo, assim o aprendizado da rede mede tambem o gancho falado; (b) acrescentar dimensao 'formato' (limpo | comercial_curto | comercial_com_card) por canal; (c) alimentar agents.py (Hook Generator) com memoria_rede(cfg, canal) - top/piores de aprendizado_global.json - no lugar do loop por YOUTUBE_API_KEY; (d) usar o critic score como prior enquanto nao ha views (score_formula ja faz isso). Dependencias: nenhuma nova. Aviso: precisa de semanas de dados (1-3 amostras por braco hoje).",
+   "esforco": "M"
+  },
+  {
+   "titulo": "HyperFrames para CTA/texto animado do produto (sem telefone e sem URL na tela)",
+   "fonte": "D:\\manhwa-react\\mr\\hyperframes.py render/TEMPLATES (21-127); composicao com tpad em mr\\render.py:223-224",
+   "como_adaptar": "Criar templates 'cta_produto' (nome do produto + 1 beneficio + 'link na descricao') e reaproveitar 'big_number' (numero falado: '70% menos ligacoes perdidas') e 'cta_question' (pergunta do comentario fixado) na cor do canal; render em MOV rgba 1080x400 e sobrepor nos ultimos 2-3 s do Short com overlay+tpad (nunca -itsoffset). Substitui o card estatico cta_card.py (PNG com WhatsApp) e o slide de 5-6 s - o comercial fica de 8-12 s. Dependencias: playwright (veo venv 1.61 tem) + Chromium do Playwright instalado ('playwright install chromium' - o veo hoje so usa CDP num Chrome real; confirmar), fontes de D:\\manhwa-react\\assets\\fonts. Cache em assets/hyperframes por md5.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "SFX por palavra (e reacoes marcadas pelo critic)",
+   "fonte": "D:\\manhwa-react\\mr\\triggers.py plan_word_triggers (59-102) + D:\\manhwa-react\\assets\\gatilhos_palavras.json; D:\\manhwa-react\\mr\\reactions.py plan_reactions (100-129); render.py render_audio (27-63) para mixar",
+   "como_adaptar": "Depois das legendas (precisa de words com tempo): plan_word_triggers(cfg, words, timeline_identidade, dur, emoji_png) com max_por_video 2 e cooldown 2,5 s para 8 s; mixar com amix normalize=0 e ganho -10 dB sobre o audio do Veo. Reacoes so se o Quality Critic (agents.py) passar a marcar {'t','type'} - opcional. Dependencias: acervo D:\\hipercool-materiais\\assets\\sfx_memes|sfx|sfx_extras, ffprobe.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Trilha por mood com ducking e blocklist (corrigida)",
+   "fonte": "D:\\manhwa-react\\mr\\music.py pick_track/_blocklist (22-83), mr\\render.py render_audio (45-48 sidechaincompress), mr\\musicgen.py pool_candidates",
+   "como_adaptar": "Corrigir _blocklist primeiro (ver problemas). No veo usar safe_only=true (so mixkit/prioritarias/MusicGen) porque e video de produto; mood vindo do Hook Generator; trilha em -30 LUFS com sidechaincompress pela voz do Veo, afade 1,5 s, loudnorm final -14. Testar com a dona se trilha sobre o ambiente que o Veo ja gera agrada. Dependencias: D:\\hipercool-materiais\\assets\\trilhas\\moods.json e _curadoria\\copyright_blocklist.json.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Rebrand do @ por canal e nunca o mesmo arquivo em dois canais",
+   "fonte": "D:\\manhwa-react\\mr\\rede.py rebrand/_png_handle/precisa_marca (281-316)",
+   "como_adaptar": "Ja aplicado a fonte 'veo'. Para os videos novos: gerar SEM marca (desligar plugins.branding_watermark) e deixar o rebrand gravar o @ do canal de destino na hora de postar (1 arquivo por canal em work/rede_marca). Se um dia o veo for para canal sem limpeza, usar o mesmo boxblur para apagar marca antiga.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "sem_janela em todos os pontos de entrada agendados do veo",
+   "fonte": "D:\\manhwa-react\\mr\\sem_janela.py (= D:\\hipercool-videos\\bin\\sem_janela.py)",
+   "como_adaptar": "Copiar para D:\\veo\\beta\\sem_janela.py e 'import sem_janela' como primeira linha de loop_cron.py, cron_pos_producao.py, pos_producao\\worker_noite.py, supervisor.py e dos scripts do postador que o veo chama; o Chrome do flow_bot nao e afetado (GUI). Testar que o Chrome via CDP continua abrindo visivel quando precisa (Veo_LIGAR_visivel).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Trava de 1 render por vez no veo",
+   "fonte": "D:\\manhwa-react\\mr\\rede.py class Trava (668-688)",
+   "como_adaptar": "Copiar a classe (arquivo .lock com pid e hora, abandono apos N min) e envolver montar_final.montar / limpar_veo.processar / worker_noite com 'with Trava(cfg) as t: if t.ok:'. Serve tambem para impedir cron_gerar e pos-producao de disputarem CPU.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Aprovacao por folhas de quadros antes de subir",
+   "fonte": "D:\\manhwa-react\\testes\\folhas_quadros.py; D:\\manhwa-react\\mr\\rede.py aprovar (998-1028); politica.marcar_aprovacao",
+   "como_adaptar": "Para cada lote novo do veo (limpos nao padrao e comerciais novos), gerar as folhas (5 quadros x 3 videos) e o agente aprova/rejeita conferindo telefone/URL/marca na tela, texto ilegivel e quadros congelados; so entao politica.marcar_aprovacao. Ja e o fluxo delegado pela dona.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Saude dos perfis Google do veo antes do cron",
+   "fonte": "D:\\manhwa-react\\scripts\\saude_perfis.py, scripts\\sonda_perfis_veo.py, scripts\\inventario_perfis.py, scripts\\montar_cofre.py; D:\\postador-de-videos\\bin\\youtube_web_poster.py esperar_assentar",
+   "como_adaptar": "Rodar sonda/saude 1x por dia sobre os perfis do cofre usados por contas.py e marcar em contas.py as deslogadas (hoje a conta so cai quando o Flow falha). Nao envia nada. Dependencias: playwright + Chrome real.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Backup no Drive ja cobre o veo: so manter as pastas no catalogo",
+   "fonte": "D:\\manhwa-react\\scripts\\backup_drive.py; D:\\postador-de-videos\\bin\\catalogo.py pasta_de",
+   "como_adaptar": "Nada a portar; conferir que veo\\limpos, videos_pos e as pastas novas de comerciais aparecem em catalogo.pasta_de e que o json do limpo (posted_url) e lido pelo catalogo, para o arquivo sair do PC 3 dias apos postar e nunca ser repostado.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Mascara de marca d'agua/logo por quadros parados (reforco do detector do TikTok)",
+   "fonte": "D:\\manhwa-react\\mr\\capa.py mascara_marca/tirar_marca/cortar_marca (65-127)",
+   "como_adaptar": "Usar em limpar_veo para detectar qualquer logo fixo (TikTok, @ antigo, selo) nos brutos de formato desconhecido ('revisar') e cortar a faixa ou inpaint, em vez de so o template MARCA_TIKTOK. Dependencias: numpy, cv2 (veo venv tem).",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Metricas e extras pelo navegador no lugar do metrics_client",
+   "fonte": "D:\\postador-de-videos\\bin\\youtube_studio_extras.py (comentar_fixar 287, relacionado 207, editar_metadados 498, metricas 579); D:\\hipercool-videos\\bin\\metricas.py; aprendizado_global.json",
+   "como_adaptar": "Remover YOUTUBE_API_KEY do veo; ler views 48 h de aprendizado_global.json (por video_id de publicados.json) e CTR/retencao via youtube_studio_extras.metricas 1x/dia; usar comentar_fixar para a pergunta do canal (fixar exige canal verificado). Dependencias: perfil Chrome do canal no cofre.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "LLM com fallback e extrator de JSON robusto",
+   "fonte": "D:\\manhwa-react\\mr\\llm.py extract_json (17-48), ask_json (124-137)",
+   "como_adaptar": "Trocar o parse de JSON do llm_client.py/publicar.py do veo por extract_json (aguenta ```json e chaves aninhadas) e adotar a cadeia providers [proxy:sonnet, proxy:opus, cli] como reserva quando o Gemini do gateway devolver 429/402 (worker_noite ja tem circuit-breaker).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "O que do manhwa-react NAO faz sentido no veo",
+   "fonte": "D:\\manhwa-react\\mr\\probe.py, lips.py, camera.py, divider.py, cuts.py, base.py, temas.py, grande.py, audio.py (RNNoise/de-esser), editorial.py (speakers/remove/parts), memes.py, channels.py, musicgen.py",
+   "como_adaptar": "Nao portar: probe/lips/camera/divider existem so porque ha webcam + video reagido (layout, quem fala, divisoria irregular); cuts.py corta silencios/retakes/vicios de uma gravacao humana (o Veo de 8 s nao tem isso); base.py sincroniza o original do react; temas/grande tratam gravacoes longas deitadas; a cadeia RNNoise/de-esser e para microfone (o audio do Veo e sintetico e limpo - so o loudnorm vale); do editorial.py so valem a estrutura do JSON (hook, title_alternatives, pinned_comment, mood, seguranca de anuncios), nao as regras de CRIADOR/CONTEUDO; memes.py poe memes sobre o video reagido (num Short de 8 s com a dona falando polui - no maximo opcional); channels.py gera kits de canal com a foto da dona (so se criar canais novos); musicgen depende do venv do recapd (2 min/faixa na CPU) - opcional.",
+   "esforco": "P"
+  }
+ ],
+ "perguntas_abertas": [
+  "A regra 'Google/YouTube so pelo navegador' vale tambem para os refresh tokens OAuth ja existentes? Hoje a rede faz upload, 1o comentario, privar/editar e o painel de aprendizado pela Data API (youtube_navegador.json esta vazio). Se vale, a migracao para youtube_web_poster + youtube_studio_extras vem ANTES de escalar o veo pela rede.",
+  "Quais canais vao receber o Veo com PRODUTO (comercial)? Hoje o veo so entra limpo em inventoreact/manhwareact. Criar canal(is) do negocio no rede_canais.json com 'regras' do dono, ou usar AssistIA/Dicas (que tem regras proprias de 'nunca prometer lucro')?",
+  "Qual CTA e aceitavel no video: nome do produto + 'link na descricao' + pergunta no comentario fixado? Numero de WhatsApp e URL ficam SO na descricao/comentario ou nem la? (Hoje o card tem o numero na tela.)",
+  "A legenda deve seguir o AUDIO (transcricao Groq) ou o texto do prompt quando o Veo fala diferente? Recomendo o audio; se a diferenca for grande, o video deveria ser reprovado pelo critic.",
+  "O Chromium do Playwright esta instalado no venv do veo (hyperframes usa chromium.launch, nao CDP)? Se nao, 'playwright install chromium' (~150 MB) ou rodar o render de HyperFrames pelo venv do manhwa-react.",
+  "Trilha de fundo sobre o audio ambiente que o Veo ja gera: a dona quer? Testar 2-3 amostras antes de ligar por padrao.",
+  "O video wKiGkUQ6bBc (InventoReact, agendado 13/10 23:00) foi removido pelo YouTube ou privado pela dona? Decide se o InventoReact e seguro para receber mais Veo.",
+  "Onde registrar estrategia/aprendizado do veo: so em publicados.json da rede (ja medido pelo painel) espelhando o video_id no video_cache.json, ou tambem no video_cache para o Hook Generator aprender? Sugestao: publicados.json manda; video_cache recebe posted_url+video_id.",
+  "Com a Analytics API desligada e a regra de navegador, o aprendizado deve passar a usar youtube_studio_extras.metricas (CTR/retencao) para Shorts tambem? Hoje so mede longos no hipercool.",
+  "Ao desligar postar_tudo_hoje.py/postar_pos_final.py/AgendadorVO3, alguma fonte que NAO e veo (recaps de anime, materiais) ainda depende deles? Conferir coletar_materiais em postar_tudo_hoje.py antes de remover do .bat."
+ ]
+}

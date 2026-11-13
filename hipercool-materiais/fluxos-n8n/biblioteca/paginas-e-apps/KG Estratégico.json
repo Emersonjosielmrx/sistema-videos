@@ -1,0 +1,315 @@
+{
+ "name": "KG Estratégico",
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {}
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    160,
+    -112
+   ],
+   "id": "e8dbdaa3-e860-49e7-8d7c-0b7e59e6cea2",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.prompt  }}",
+    "options": {
+     "systemMessage": "# AGENTE: ATENDIMENTO ANALYTICS AI\n\n## Especialista em Análise de Conversas e Otimização de Conversão\n\n---\n\n## IDENTIDADE\n\nVocê é um analista especialista em:\n\n* conversão de atendimento (SDR)\n* vendas consultivas\n* comportamento do consumidor\n* copywriting aplicado a conversas\n* psicologia de persuasão\n* marketing conversacional\n* otimização de funis de atendimento\n\nVocê pensa como:\n\n* um closer experiente\n* um estrategista de marketing\n* um analista de dados\n* um especialista em conversão\n\n---\n\n## MISSÃO\n\nSua única função é:\n\n**analisar dados de atendimentos reais e gerar um planejamento estratégico para aumentar a conversão em agendamentos.**\n\nVocê NÃO atende clientes.\nVocê NÃO escreve copy para uso direto.\n\n### Você:\n\n* analisa\n* identifica padrões\n* extrai insights\n* propõe melhorias\n\n---\n\n## FONTES DE DADOS\n\n### NÓ — relatório\n\n**Função:**\nFornece dados estruturados das conversas da secretária IA.\n\n**Esses dados incluem:**\n\n* tipo de lead (curioso, quente, frio, etc.)\n* se houve agendamento ou não\n* abordagem utilizada\n* técnicas usadas\n* o que funcionou\n* o que não funcionou\n* contexto da conversa\n\n> ⚠️ IMPORTANTE: \"relatório\" NÃO é uma tool. É um NÓ de dados já disponível no fluxo.\n\n---\n\n## TOOL DISPONÍVEL\n\n### TOOL — Aprendizagem\n\n**Função:**\nSalvar o planejamento estratégico gerado.\n\n**Esse material será usado para:**\n\n* melhorar o agente de atendimento\n* alimentar inteligência do sistema\n\n---\n\n## FLUXO OBRIGATÓRIO\n\n### ETAPA 1 — COLETA DE DADOS\n\nVocê deve obrigatoriamente:\n\n➡️ UTILIZAR os dados do nó **relatório** (NÃO chamar como tool)\n\n---\n\n### ETAPA 2 — ANÁLISE DOS DADOS\n\n#### PERFORMANCE\n\n* taxa de conversão geral\n* taxa de agendamento\n* proporção de leads curiosos vs qualificados\n\n#### PADRÕES DE SUCESSO\n\nIdentifique:\n\n* o que mais gerou agendamento\n* abordagens mais eficazes\n* frases ou estratégias que funcionaram\n\n#### PADRÕES DE FALHA\n\nIdentifique:\n\n* onde os leads abandonam\n* objeções não contornadas\n* falhas de abordagem\n* pontos de perda de interesse\n\n#### ANÁLISE COMPORTAMENTAL\n\nEntenda:\n\n* perfil dos leads\n* nível de consciência\n* padrão emocional\n\n---\n\n### ETAPA 3 — GERAÇÃO DO RELATÓRIO\n\n#### RELATÓRIO DE PERFORMANCE\n\n* taxa de conversão\n* taxa de agendamento\n* volume de leads\n* distribuição por tipo de lead\n\n#### INSIGHTS PRINCIPAIS\n\n* o que está funcionando\n* o que não está funcionando\n\n#### ANÁLISE DE ABORDAGEM\n\n* estilo da comunicação\n* nível de persuasão\n* pontos fortes e fracos\n\n#### GARGALOS IDENTIFICADOS\n\n* onde ocorre perda de conversão\n* erros críticos\n\n#### OPORTUNIDADES DE MELHORIA\n\n* melhorias claras e acionáveis\n\n#### RECOMENDAÇÕES ESTRATÉGICAS\n\n##### 1 — ABORDAGEM\n\n* melhorias na comunicação\n* ajustes no tom\n\n##### 2 — TÉCNICAS DE VENDAS\n\n* rapport\n* antecipação de objeções\n* condução para fechamento\n\n##### 3 — GATILHOS MENTAIS\n\n* escassez\n* urgência\n* autoridade\n* prova social\n\n##### 4 — GANCHOS DE FRASES\n\nSugira exemplos como:\n\n* abertura de conversa\n* resposta para curioso\n* resposta para objeções\n\n##### 5 — ESTRATÉGIA DE CONVERSÃO\n\n* como aumentar taxa de agendamento\n* como reduzir curiosos\n* como acelerar decisão\n\n---\n\n### PLANO DE AÇÃO\n\nListe ações práticas:\n\n* o que implementar imediatamente\n* o que testar\n* o que otimizar\n\n---\n\n### ETAPA 4 — ARMAZENAMENTO\n\nApós gerar o relatório:\n\n➡️ chamar a tool **Aprendizagem**\n\nSalvar:\n\n* todo o planejamento estratégico\n* insights\n* recomendações\n\n---\n\n## REGRAS IMPORTANTES\n\nVocê deve:\n\n* basear tudo em dados\n* evitar achismos\n* ser direto e estratégico\n* gerar insights acionáveis\n* sempre acionar a tool Aprendizagem para gerar o relatório.\n\n---\n\n## O QUE NÃO FAZER\n\nVocê NÃO deve:\n\n* tentar chamar \"relatório\" como tool\n* ignorar os dados do nó relatório\n* pular a etapa de análise\n* gerar relatório superficial\n* deixar de salvar na Aprendizagem\n\n---\n\n## FORMATO FINAL\n\nSeu output deve ser:\n\n1. Relatório estruturado completo\n2. Em seguida, envio para tool Aprendizagem\n\n---\n\n## NÍVEL DE QUALIDADE\n\nO relatório deve parecer:\n\n* análise profissional de vendas\n* nível consultoria\n* orientado a resultado\n* altamente estratégico\n\n---\n\n## REGRA FINAL\n\nVocê transforma dados de atendimento em inteligência estratégica e escreve no Google Docs usando a tool Aprendizagem.\n\n**Nada além disso.**"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    640,
+    -112
+   ],
+   "id": "b75308c2-5d61-4c4b-814b-df88e14c921c",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "Update a document in Google Docs",
+    "operation": "update",
+    "documentURL": "https://docs.google.com/document/d/1ykyvhWvkve4i_KyM7_dnGNvBcZT9Wf62KjNPbeXN3wM/edit?tab=t.0",
+    "actionsUi": {
+     "actionFields": [
+      {
+       "action": "insert",
+       "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('actionFields0_Text', ``, 'string') }}"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.googleDocsTool",
+   "typeVersion": 2,
+   "position": [
+    784,
+    64
+   ],
+   "id": "edbc3b16-9faa-4384-863f-373f959b668d",
+   "name": "Aprendizagem",
+   "credentials": {
+    "googleDocsOAuth2Api": {
+     "id": "JlWJWE3UB6FoO73V",
+     "name": "Google Docs account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "n8n_chat_histories",
+     "mode": "list",
+     "cachedResultName": "n8n_chat_histories"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1024,
+    80
+   ],
+   "id": "97addacf-a90f-4022-823a-71d0f7985df5",
+   "name": "Delete table or rows",
+   "credentials": {
+    "postgres": {
+     "id": "y5T5MmodIqOdRj7A",
+     "name": "Postgres account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "getAll",
+    "tableId": "Relatorio",
+    "returnAll": true
+   },
+   "type": "n8n-nodes-base.supabase",
+   "typeVersion": 1,
+   "position": [
+    320,
+    -112
+   ],
+   "id": "3a3fbce8-0289-47f2-882a-23b1dc7f3396",
+   "name": "Relatório",
+   "credentials": {
+    "supabaseApi": {
+     "id": "3Q3U8qipz885tVgA",
+     "name": "Supabase account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const rows = $input.all().map(item => item.json);\n\nreturn [\n  {\n    json: {\n      total_registros: rows.length,\n      rows,\n      prompt: `Você é um analista de atendimento e performance comercial.\n\nSua função é ler os dados abaixo e entregar um relatório final pronto, com análise concluída.\n\nRegras obrigatórias:\n- Não diga o que você vai fazer.\n- Não use frases como \"quando os dados forem disponibilizados\", \"devo analisar\", \"irei analisar\" ou similares.\n- Não repita instruções.\n- Não escreva um briefing.\n- Entregue somente o relatório final.\n- Baseie-se apenas nos dados fornecidos.\n- Se os dados forem limitados, extraia o máximo possível deles sem inventar.\n\nEstrutura obrigatória da resposta:\n1. Resumo executivo\n2. Quantidade de registros analisados\n3. Padrões percebidos\n4. Principais falhas\n5. Principais oportunidades\n6. Estratégias recomendadas\n7. Plano de ação prático\n\nQuantidade de registros recebidos: ${rows.length}\n\nDados para análise:\n${JSON.stringify(rows, null, 2)}`\n    }\n  }\n];"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    -112
+   ],
+   "id": "7eb4b12f-3c3c-4ac9-9309-8b2399f46826",
+   "name": "Code in JavaScript"
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gpt-5.4",
+     "mode": "list",
+     "cachedResultName": "gpt-5.4"
+    },
+    "builtInTools": {},
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    608,
+    64
+   ],
+   "id": "2f68c1f0-4641-40d0-b4dc-a58956a88fba",
+   "name": "OpenAI Chat Model",
+   "credentials": {
+    "openAiApi": {
+     "id": "pNX8XEHRT6gGVUWI",
+     "name": "OpenAi account"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "Schedule Trigger": [
+   {
+    "json": {
+     "timestamp": "2026-05-05T00:00:19.011-03:00",
+     "Readable date": "May 5th 2026, 12:00:19 am",
+     "Readable time": "12:00:19 am",
+     "Day of week": "Tuesday",
+     "Year": "2026",
+     "Month": "May",
+     "Day of month": "05",
+     "Hour": "00",
+     "Minute": "00",
+     "Second": "19",
+     "Timezone": "America/Sao_Paulo (UTC-03:00)"
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ],
+  "Relatório": [
+   {
+    "json": {
+     "id": 1,
+     "created_at": "2026-05-02T21:22:21.810173+00:00",
+     "tipo_lead": "Marcos José Barros Filho",
+     "houve_agendamento": "Não quis agendar",
+     "relatorio": "Lead desistiu após relatar gasto com gasolina; encerrou com 'Não quero mais agendar, obrigado, boa noite'."
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   },
+   {
+    "json": {
+     "id": 2,
+     "created_at": "2026-05-02T21:26:10.91935+00:00",
+     "tipo_lead": "Marcos José Barros Filho",
+     "houve_agendamento": "não quis agendar",
+     "relatorio": "Lead desistiu do agendamento após indisponibilidade de horários e relatou gasto com gasolina."
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ],
+  "Code in JavaScript": [
+   {
+    "json": {
+     "total_registros": 2,
+     "rows": [
+      {
+       "id": 1,
+       "created_at": "2026-05-02T21:22:21.810173+00:00",
+       "tipo_lead": "Marcos José Barros Filho",
+       "houve_agendamento": "Não quis agendar",
+       "relatorio": "Lead desistiu após relatar gasto com gasolina; encerrou com 'Não quero mais agendar, obrigado, boa noite'."
+      },
+      {
+       "id": 2,
+       "created_at": "2026-05-02T21:26:10.91935+00:00",
+       "tipo_lead": "Marcos José Barros Filho",
+       "houve_agendamento": "não quis agendar",
+       "relatorio": "Lead desistiu do agendamento após indisponibilidade de horários e relatou gasto com gasolina."
+      }
+     ],
+     "prompt": "Você é um analista de atendimento e performance comercial.\n\nSua função é ler os dados abaixo e entregar um relatório final pronto, com análise concluída.\n\nRegras obrigatórias:\n- Não diga o que você vai fazer.\n- Não use frases como \"quando os dados forem disponibilizados\", \"devo analisar\", \"irei analisar\" ou similares.\n- Não repita instruções.\n- Não escreva um briefing.\n- Entregue somente o relatório final.\n- Baseie-se apenas nos dados fornecidos.\n- Se os dados forem limitados, extraia o máximo possível deles sem inventar.\n\nEstrutura obrigatória da resposta:\n1. Resumo executivo\n2. Quantidade de registros analisados\n3. Padrões percebidos\n4. Principais falhas\n5. Principais oportunidades\n6. Estratégias recomendadas\n7. Plano de ação prático\n\nQuantidade de registros recebidos: 2\n\nDados para análise:\n[\n  {\n    \"id\": 1,\n    \"created_at\": \"2026-05-02T21:22:21.810173+00:00\",\n    \"tipo_lead\": \"Marcos José Barros Filho\",\n    \"houve_agendamento\": \"Não quis agendar\",\n    \"relatorio\": \"Lead desistiu após relatar gasto com gasolina; encerrou com 'Não quero mais agendar, obrigado, boa noite'.\"\n  },\n  {\n    \"id\": 2,\n    \"created_at\": \"2026-05-02T21:26:10.91935+00:00\",\n    \"tipo_lead\": \"Marcos José Barros Filho\",\n    \"houve_agendamento\": \"não quis agendar\",\n    \"relatorio\": \"Lead desistiu do agendamento após indisponibilidade de horários e relatou gasto com gasolina.\"\n  }\n]"
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ],
+  "AI Agent": [
+   {
+    "json": {
+     "output": "1. Resumo executivo\n\nA análise dos 2 registros mostra taxa de agendamento de 0%, com perda total dos leads no momento de fechamento. O padrão central é objetivo: as desistências ocorreram por fricção prática, especialmente custo de deslocamento (“gasto com gasolina”) e indisponibilidade de horários.\n\nOs dados indicam que o problema principal não foi ausência de interesse inicial explícita, mas baixa viabilidade percebida para concluir o agendamento. O processo atual é sensível a objeções operacionais simples e não demonstra capacidade de recuperação quando o lead encontra dificuldade de agenda ou deslocamento.\n\n2. Quantidade de registros analisados\n\n- Total de registros: 2\n- Agendamentos realizados: 0\n- Não agendaram: 2\n- Taxa de agendamento: 0%\n- Taxa de não conversão: 100%\n\n3. Padrões percebidos\n\n- Objeção de custo de deslocamento apareceu nos 2 registros.\n- A perda aconteceu na etapa de agendamento, não no início da conversa.\n- Em 1 dos 2 casos, a indisponibilidade de horários foi fator direto de desistência.\n- Em pelo menos 1 caso, o lead encerrou de forma definitiva: “Não quero mais agendar”.\n- O processo parece pouco flexível diante de barreiras práticas.\n\nLeitura comportamental com base na amostra:\n- Lead com perfil pragmático e sensível a custo-benefício.\n- Decisão influenciada mais por conveniência do que por impulso emocional.\n- Interesse condicionado à facilidade de encaixe e ao esforço necessário para comparecer.\n\n4. Principais falhas\n\n- Falha em contornar objeção de deslocamento.\n- Falha operacional de agenda, com falta de horários aderentes.\n- Falha na recuperação da conversa após a objeção.\n- Falha em reforçar valor suficiente para justificar o deslocamento.\n- Processo de fechamento vulnerável a barreiras logísticas simples.\n\n5. Principais oportunidades\n\n- Reduzir a fricção logística na etapa de fechamento.\n- Melhorar disponibilidade ou distribuição dos horários ofertados.\n- Criar respostas específicas para objeções de gasolina/deslocamento.\n- Reforçar valor antes de entrar no fechamento.\n- Implementar retenção para leads que não conseguem agendar no momento.\n\n6. Estratégias recomendadas\n\nAbordagem\n- Confirmar disponibilidade e facilidade de deslocamento antes de ofertar o horário final.\n- Validar a objeção sem confronto e reposicionar a proposta com foco em conveniência.\n- Reforçar o benefício do agendamento no momento em que surgir resistência.\n\nTécnicas de vendas\n- Antecipar objeções com perguntas sobre período ideal e limitações práticas.\n- Fazer fechamento com alternativas objetivas, em vez de pergunta aberta.\n- Criar fluxo de recuperação para leads sem encaixe imediato.\n- Trabalhar reancoragem de valor diante da objeção de custo indireto.\n\nGatilhos mentais aplicáveis\n- Conveniência: destacar o menor esforço possível para o lead.\n- Escassez: usar disponibilidade limitada de forma objetiva.\n- Prioridade: oferecer aviso antecipado em caso de encaixe.\n- Compromisso progressivo: conduzir com pequenas confirmações antes do fechamento.\n\nGanchos de frases\n- “Qual período costuma ser mais fácil para você?”\n- “Antes de te passar os horários, queria entender o que funciona melhor na sua rotina.”\n- “Entendo seu ponto com o deslocamento. Vamos ver um horário que faça mais sentido para você.”\n- “Posso te deixar como prioridade caso abra um horário melhor para o seu período.”\n\nEstratégia de conversão\n- Mapear restrições práticas antes do fechamento.\n- Fortalecer valor antes de entrar na agenda.\n- Reduzir perguntas abertas e conduzir com opções.\n- Não encerrar o lead sem próxima ação definida quando houver objeção de horário ou deslocamento.\n\n7. Plano de ação prático\n\nImplementar imediatamente\n- Inserir pergunta sobre melhor período e facilidade de deslocamento no início da condução.\n- Criar resposta padrão para objeção de gasolina/deslocamento.\n- Padronizar fechamento com duas opções de horário.\n- Criar fluxo de retenção para falta de agenda compatível.\n\nTestar\n- Validação da objeção antes de oferecer novo horário.\n- Fechamento por escolha entre duas opções.\n- Lista de prioridade para leads sem encaixe imediato.\n\nOtimizar\n- Revisar oferta de horários mais aderentes.\n- Registrar objeções em categorias separadas: deslocamento, agenda e desistência.\n- Monitorar recorrência dessas perdas para confirmar se o gargalo é estrutural.\n\nConclusão\nO maior gargalo identificado é a conveniência operacional. A melhor oportunidade de aumento de conversão está em adaptar o fechamento para reduzir esforço percebido, melhorar encaixe de agenda e impedir que objeções logísticas encerrem a conversa sem retenção."
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ]
+ },
+ "connections": {
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "Relatório",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Aprendizagem": {
+   "ai_tool": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Relatório": {
+   "main": [
+    [
+     {
+      "node": "Code in JavaScript",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code in JavaScript": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "versionId": "4dd8c929-1fa5-4e73-bb86-403eb1b45578",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "0c5ebea9d5ba0063c17c28ddf9a2beb95be4a017b1b73707c5c8528741580d5d"
+ },
+ "id": "qPmClGYeQhoJyjkp",
+ "tags": []
+}

@@ -1,0 +1,2221 @@
+{
+ "name": "[v1] Youtube Auto Create and Post",
+ "nodes": [
+  {
+   "parameters": {
+    "url": " https://youtube-v2.p.rapidapi.com/video/details",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "video_id",
+       "value": "={{ $json.id.split(':').last() }}"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-Rapidapi-Key"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1360,
+    1568
+   ],
+   "id": "85ddae82-fbd7-4216-8b49-52263825ddcf",
+   "name": "busca_video"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "158aef7a-8943-43b3-85c9-a99e6152da0e",
+       "leftValue": "={{ $json.type }}",
+       "rightValue": "NORMAL",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    1584,
+    1568
+   ],
+   "id": "badb83f0-effc-4a41-8067-7a29e07f38d0",
+   "name": "video_type_normal"
+  },
+  {
+   "parameters": {
+    "url": "https://youtube-v2.p.rapidapi.com/video/subtitles",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "video_id",
+       "value": "={{ $json.video_id }}"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-rapidapi-host",
+       "value": "youtube-v2.p.rapidapi.com"
+      },
+      {
+       "name": "x-rapidapi-key"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1824,
+    1568
+   ],
+   "id": "154da14e-7238-4044-8819-1c35535bf485",
+   "name": "busca_legenda"
+  },
+  {
+   "parameters": {
+    "url": "https://cdn.leonardo.ai/users/f37415f1-bf3e-4cef-82c2-824ffd1533f9/generations/686fb7c2-20e1-409a-a233-59b63362a9fb/686fb7c2-20e1-409a-a233-59b63362a9fb.mp4",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    9216,
+    1504
+   ],
+   "id": "343cef36-6abf-4952-8db3-7c3bf48e9d82",
+   "name": "baixa_video_leonardoai"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://www.googleapis.com/upload/youtube/v3/videos",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "youTubeOAuth2Api",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-Upload-Content-Length",
+       "value": "={{ $binary.data.fileSize.match(/([\\d\\.]+)\\s*([KMGTPEZY]?B)/i)[1] * 1024 * 1024 }}"
+      },
+      {
+       "name": "X-Upload-Content-Type",
+       "value": "={{ $binary.data.mimeType }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "data",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    9424,
+    1504
+   ],
+   "id": "d3513781-8495-4862-a6e0-32cffb2b7909",
+   "name": "upload_video"
+  },
+  {
+   "parameters": {
+    "resource": "video",
+    "operation": "update",
+    "videoId": "={{ $json.id }}",
+    "title": "teste novo",
+    "regionCode": "US",
+    "categoryId": "24",
+    "updateFields": {
+     "privacyStatus": "=unlisted"
+    }
+   },
+   "type": "n8n-nodes-base.youTube",
+   "typeVersion": 1,
+   "position": [
+    9664,
+    1504
+   ],
+   "id": "3af1a3dc-545c-499b-b97d-5b488d38a04a",
+   "name": "update_video"
+  },
+  {
+   "parameters": {
+    "content": "consultar banco de dados pra ver se ja existe e qual status"
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    400,
+    1392
+   ],
+   "typeVersion": 1,
+   "id": "8499313d-3fc7-4b24-a554-3c55ed824369",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "documentId": {
+     "__rl": true,
+     "value": "1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs",
+     "mode": "list",
+     "cachedResultName": "Vídeos Youtube - The Bible Stories For You",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 651566303,
+     "mode": "list",
+     "cachedResultName": "roteiro",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit#gid=651566303"
+    },
+    "filtersUI": {
+     "values": [
+      {
+       "lookupColumn": "Status"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    608,
+    1440
+   ],
+   "id": "29e70f46-e196-4e6a-a332-fd76f4c428d8",
+   "name": "Google Sheets"
+  },
+  {
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "value": "1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs",
+     "mode": "list",
+     "cachedResultName": "Vídeos Youtube - The Bible Stories For You",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 651566303,
+     "mode": "list",
+     "cachedResultName": "roteiro",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit#gid=651566303"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "Vídeo original": "={{ $('busca_video').item.json.video_id }}",
+      "Tema": "={{ $('busca_video').item.json.title }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "Vídeo original",
+       "displayName": "Vídeo original",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Tema",
+       "displayName": "Tema",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Novo título",
+       "displayName": "Novo título",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Descrição",
+       "displayName": "Descrição",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Cena1",
+       "displayName": "Cena1",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena2",
+       "displayName": "Cena2",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena3",
+       "displayName": "Cena3",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena4",
+       "displayName": "Cena4",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena5",
+       "displayName": "Cena5",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena6",
+       "displayName": "Cena6",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena7",
+       "displayName": "Cena7",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena8",
+       "displayName": "Cena8",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Status",
+       "displayName": "Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    2048,
+    1568
+   ],
+   "id": "e5d77090-ba74-4d31-9dfa-c28424d0242a",
+   "name": "adiciona_tema_video"
+  },
+  {
+   "parameters": {
+    "resource": "assistant",
+    "assistantId": {
+     "__rl": true,
+     "value": "asst_3kxbAwBHY7fvct4MXBu7jiqy",
+     "mode": "list",
+     "cachedResultName": "yt-bible-content-narration-2"
+    },
+    "prompt": "define",
+    "text": "=create a narration with theme {{ $json.Tema }}",
+    "memory": "threadId",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    2784,
+    1568
+   ],
+   "id": "a38ca5b6-dad3-4c0c-bfa7-7e00ab50e903",
+   "name": "criador_narracao"
+  },
+  {
+   "parameters": {
+    "resource": "assistant",
+    "assistantId": {
+     "__rl": true,
+     "value": "asst_3kxbAwBHY7fvct4MXBu7jiqy",
+     "mode": "list",
+     "cachedResultName": "yt-bible-content-narration-2"
+    },
+    "prompt": "define",
+    "text": "=1. verifique se a narração criada contém os itens 5 e 9 da response structure do seu system prompt\n2. caso isso seja verdade, ignore o restante e siga com a narração atual\n3. caso esses critérios estejam faltando, ajuste a narração e retorne-a ajustada sem nenhum outro texto adicional",
+    "memory": "threadId",
+    "threadId": "={{ $json.threadId }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    2784,
+    1792
+   ],
+   "id": "750c291a-28c8-4d5a-bb69-96c0e30ad7b1",
+   "name": "verifica_narracao"
+  },
+  {
+   "parameters": {
+    "resource": "assistant",
+    "assistantId": {
+     "__rl": true,
+     "value": "asst_LaCoVIInGvJ0bddEgh5csc5f",
+     "mode": "list",
+     "cachedResultName": "yt-bible-content-title"
+    },
+    "prompt": "define",
+    "text": "=create a title for narration\nthe output text needs attend specification: no quotation marks",
+    "memory": "threadId",
+    "threadId": "={{ $json.threadId }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    2784,
+    2016
+   ],
+   "id": "9ef52726-efe0-4a85-99d5-d92925821f78",
+   "name": "cria_titulo"
+  },
+  {
+   "parameters": {
+    "modelId": {
+     "__rl": true,
+     "value": "gpt-4o-mini",
+     "mode": "list",
+     "cachedResultName": "GPT-4O-MINI"
+    },
+    "messages": {
+     "values": [
+      {
+       "content": "=Preciso que divida a narração em 5 partes e crie 5 prompts de imagem para 5 cenas baseadas nestes blocos de narração.\n\nCada prompt deve ter instruções para as cenas, adaptados a cada cena da narração, incluindo:\n- Descrição geral\n- Ações dos personagens\n- Aparência dos personagens\n- Cenário / Plano de fundo\n\nFormate os resultados como objeto JSON contendo uma matriz chamada \"cenas\". Cada objeto dentro do array deve ter duas chaves:\n- \"original\", com a parte original da narração\n- \"imagemPrompt\", que contém a string do prompt detalhado para gerar a imagem\n- use a ferramenta parse_json\n\nExemplo de output:\n{\n  \"cenas\": [\n    {\n      \"original1\": \"string\",\n      \"imagemPrompt1\": \"string\"\n    },\n    {\n      \"original2\": \"Next paragraph of text...\",\n      \"imagemPrompt2\": \"Description of corresponding image prompt...\"\n    }\n  ]\n}\n\nNarração: {{ $('verifica_narracao').item.json.output }}"
+      }
+     ]
+    },
+    "jsonOutput": true,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    2784,
+    2480
+   ],
+   "id": "1723b1c0-35b2-4fd3-a2ac-ff866de8b2fa",
+   "name": "cria_cenas"
+  },
+  {
+   "parameters": {
+    "operation": "appendOrUpdate",
+    "documentId": {
+     "__rl": true,
+     "value": "1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs",
+     "mode": "list",
+     "cachedResultName": "Vídeos Youtube - The Bible Stories For You",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 651566303,
+     "mode": "list",
+     "cachedResultName": "roteiro",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit#gid=651566303"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "Vídeo original": "={{ $('adiciona_tema_video').item.json['Vídeo original'] }}",
+      "Novo título": "={{ $('cria_titulo').item.json.output }}",
+      "Descrição": "={{ $('verifica_narracao').item.json.output }}",
+      "Cena1": "={{ $json.imagemPrompt1 }}",
+      "Cena2": "={{ $json.imagemPrompt2 }}",
+      "Cena3": "={{ $json.imagemPrompt3 }}",
+      "Cena4": "={{ $json.imagemPrompt4 }}",
+      "Cena5": "={{ $json.imagemPrompt5 }}",
+      "Cena6": "={{ $json.imagemPrompt6 }}",
+      "Cena7": "={{ $json.imagemPrompt7 }}",
+      "Cena8": "={{ $json.imagemPrompt8 }}",
+      "Status": "Roteiro e cenas criados"
+     },
+     "matchingColumns": [
+      "Vídeo original"
+     ],
+     "schema": [
+      {
+       "id": "Vídeo original",
+       "displayName": "Vídeo original",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Tema",
+       "displayName": "Tema",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Novo título",
+       "displayName": "Novo título",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Descrição",
+       "displayName": "Descrição",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena1",
+       "displayName": "Cena1",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena2",
+       "displayName": "Cena2",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena3",
+       "displayName": "Cena3",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena4",
+       "displayName": "Cena4",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena5",
+       "displayName": "Cena5",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena6",
+       "displayName": "Cena6",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena7",
+       "displayName": "Cena7",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena8",
+       "displayName": "Cena8",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Status",
+       "displayName": "Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    4416,
+    1392
+   ],
+   "id": "d55fb056-b381-4be2-b0a8-b9d3430c6b29",
+   "name": "atualiza_info"
+  },
+  {
+   "parameters": {
+    "jsCode": "const cenas = $input.first().json.message.content.cenas;\nconst output = {};\n\nif (cenas && Array.isArray(cenas)) {\n  for (let i = 0; i < Math.min(cenas.length, 8); i++) {\n    output[`original${i + 1}`] = cenas[i].original;\n    output[`imagemPrompt${i + 1}`] = cenas[i].imagemPrompt;\n  }\n}\n\nreturn [\n  {\n    json: output,\n  },\n];"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    4096,
+    1856
+   ],
+   "id": "a124ff33-d4de-40a9-be3b-ab45ac548b47",
+   "name": "trata_json_sheets"
+  },
+  {
+   "parameters": {
+    "command": "=mkdir {{ $('busca_video').item.json.video_id }}",
+    "cwd": "./edicao_video"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    2320,
+    1360
+   ],
+   "id": "e30ef9b2-d550-4ce1-bee0-aab81145ee6e",
+   "name": "SSH1"
+  },
+  {
+   "parameters": {
+    "resource": "file",
+    "path": "=./edicao_video/_E262KNURqc",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    4976,
+    1120
+   ],
+   "id": "0472d488-219a-4a36-a555-f2e102446618",
+   "name": "SSH3"
+  },
+  {
+   "parameters": {
+    "command": "={{ $json.command }}",
+    "cwd": "./edicao_video/_E262KNURqc"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    9456,
+    2336
+   ],
+   "id": "6313c651-0c0f-4521-b21c-463bfd6b4b92",
+   "name": "SSH4"
+  },
+  {
+   "parameters": {
+    "command": "=ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 \"{{ $json.guid.rendered }}\"",
+    "cwd": "./edicao_video/_E262KNURqc"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    5648,
+    1312
+   ],
+   "id": "bf5817d1-39a4-4888-bad6-aeab5be91b74",
+   "name": "SSH5"
+  },
+  {
+   "parameters": {
+    "jsCode": "function formatarTempo(segundos) {\n    const horas = Math.floor(segundos / 3600);\n    const minutos = Math.floor((segundos % 3600) / 60);\n    const segs = Math.floor(segundos % 60);\n    const milis = Math.floor((segundos % 1) * 1000);\n    \n    return `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segs).padStart(2, '0')},${String(milis).padStart(3, '0')}`;\n}\n\nfunction gerarSRT(output, duracaoTotal) {\n    let srt = '';\n\n    if (Array.isArray(output) && output.length > 0) {\n        output = output[0].output || \"Texto não encontrado\";\n    }\n\n    if (typeof output === 'string') {\n        // Quebrar o texto em frases usando pontuação\n        const frases = output.split(/(?<=[.!?])\\s+/).filter(f => f.trim());\n\n        // Criar chunks de até 5 palavras por frase\n        const chunks = [];\n        frases.forEach(frase => {\n            const palavras = frase.split(' ');\n            for (let i = 0; i < palavras.length; i += 5) {\n                chunks.push(palavras.slice(i, i + 5).join(' '));\n            }\n        });\n\n        // Calcular tempo proporcional para cada chunk\n        const tempoPorChunk = duracaoTotal / chunks.length;\n\n        chunks.forEach((chunk, index) => {\n            const inicio = index * tempoPorChunk;\n            const fim = (index + 1) * tempoPorChunk;\n\n            srt += `${index + 1}\\n`;\n            srt += `${formatarTempo(inicio)} --> ${formatarTempo(fim)}\\n`;\n            srt += `${chunk}\\n\\n`;\n        });\n    } else {\n        srt = \"Erro: Estrutura do output inesperada.\\n\";\n    }\n\n    return srt;\n}\n\n// Pegar a duração real do áudio do FFmpeg\nconst output = $node[\"atualiza_info\"].json[\"Descrição\"];\nconst duracao = Number($('SSH5').item.json.stdout); // Convertendo para número\n\nif (isNaN(duracao) || duracao <= 0) {\n    return { json: { error: \"Duração do áudio inválida.\" } };\n}\n\nconst srtFinal = gerarSRT(output, duracao);\nreturn { json: { srt: srtFinal } };\n"
+   },
+   "id": "586903b9-57f4-401e-abbb-aa3f0419a74a",
+   "name": "Code7",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    5904,
+    1392
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "629ab86b-932c-4648-a940-a2d6be4aa790",
+       "name": "message.content",
+       "value": "={{ $json.srt.replaceAll(\"```\",\"\") }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "2067502c-2f80-4ec7-9c2f-e3fd32b26c9e",
+   "name": "Edit Fields2",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    6144,
+    1392
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "toText",
+    "sourceProperty": "message.content",
+    "options": {}
+   },
+   "id": "7f453564-3599-4d9a-a2b2-d12f21ab330b",
+   "name": "Convert to File2",
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    6384,
+    1392
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "file",
+    "path": "=./edicao_video/_E262KNURqc",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    6704,
+    1104
+   ],
+   "id": "4508e3aa-4555-428f-baac-9e8169eed7a5",
+   "name": "SSH6"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "8cd6f708-ec2b-402c-95c7-1979b743c1bb",
+       "name": "Imagens",
+       "value": "={{ $json.links }}",
+       "type": "array"
+      },
+      {
+       "id": "fd96e8f6-21f3-46f2-9d78-0a439d8aeef8",
+       "name": "Audio",
+       "value": "={{ $json.rendered[0] }}",
+       "type": "string"
+      },
+      {
+       "id": "dc9fda4f-75a9-4e99-83ca-c9382ca3b693",
+       "name": "Legendas",
+       "value": "={{ $json.rendered[1] }}",
+       "type": "string"
+      },
+      {
+       "id": "febd7fa9-4280-40fd-9826-9dbf7ba8b868",
+       "name": "Tempo De Cada Imagem",
+       "value": "={{ $json.finalResult }}",
+       "type": "string"
+      },
+      {
+       "id": "a01c0f2d-af13-4a8b-8bcf-c47aba7efd3b",
+       "name": "Título",
+       "value": "={{ $json.titulo }}",
+       "type": "string"
+      },
+      {
+       "id": "f364b3a4-10a6-4694-8aeb-5aa721fa6879",
+       "name": "Descrição",
+       "value": "={{ $json.descricao }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "9fb3ce5c-9f41-4209-9499-a1872bd48a6c",
+   "name": "Edit Fields3",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    9456,
+    1888
+   ]
+  },
+  {
+   "parameters": {
+    "fieldsToAggregate": {
+     "fieldToAggregate": [
+      {
+       "fieldToAggregate": "generations_by_pk.generated_images[0].url"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.aggregate",
+   "typeVersion": 1,
+   "position": [
+    7328,
+    2080
+   ],
+   "id": "7a7162b7-b5e3-48cc-be81-943c1175ffd5",
+   "name": "Aggregate"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://cloud.leonardo.ai/api/rest/v1/generations",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json"
+      },
+      {
+       "name": "authorization",
+       "value": "Bearer"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "alchemy",
+       "value": true
+      },
+      {
+       "name": "height",
+       "value": "={{720}}"
+      },
+      {
+       "name": "modelId",
+       "value": "b24e16ff-06e3-43eb-8d33-4416c2d75876"
+      },
+      {
+       "name": "num_images",
+       "value": 1
+      },
+      {
+       "name": "presetStyle",
+       "value": "CINEMATIC"
+      },
+      {
+       "name": "prompt",
+       "value": "={{ $json.imagemPrompt }}"
+      },
+      {
+       "name": "width",
+       "value": "={{ 1280 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    5328,
+    2400
+   ],
+   "id": "4d206a03-e40e-4e18-84dc-44bf34ca66f6",
+   "name": "HTTP Request9"
+  },
+  {
+   "parameters": {
+    "url": "=https://cloud.leonardo.ai/api/rest/v1/generations/{{ $json.sdGenerationJob.generationId }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json"
+      },
+      {
+       "name": "authorization",
+       "value": "Bearer "
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    6224,
+    2400
+   ],
+   "id": "c4bbee0e-7dbc-4c9d-ae3e-8cdab44ed783",
+   "name": "HTTP Request10"
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.generations_by_pk.generated_images[0].url }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    6000,
+    2096
+   ],
+   "id": "f8830dc9-6003-4316-ad75-4b5e2a2a3574",
+   "name": "HTTP Request11"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    5904,
+    2400
+   ],
+   "id": "565ee516-5879-45e3-9f80-f240bddc1a32",
+   "name": "Wait2",
+   "webhookId": "ef5fab6d-2756-4c8d-ad35-1d2cf18c1265"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    4960,
+    2400
+   ],
+   "id": "8465bec2-0d5c-4a8a-9f5f-90bd2277da7b",
+   "name": "Wait3",
+   "webhookId": "ef5fab6d-2756-4c8d-ad35-1d2cf18c1265"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    4624,
+    2272
+   ],
+   "id": "f6d23d34-1be8-4d79-966a-42f6ec64477f",
+   "name": "Loop Over Items1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    5568,
+    2272
+   ],
+   "id": "182f75fe-cc16-4961-b1ad-f08f3829f4c3",
+   "name": "Loop Over Items2"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Captura todas as URLs do input atual\nconst links = $input.item.json.url || [];\n\n// Retorna no formato esperado\nreturn [\n  {\n    json: {\n      links: links\n    }\n  }\n];"
+   },
+   "id": "e3cedd2a-9a51-4d54-8a11-af4a43d290fa",
+   "name": "Code2",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    7648,
+    2080
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "file",
+    "path": "=./edicao_video/_E262KNURqc",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    6736,
+    1888
+   ],
+   "id": "a79abf83-f117-4eea-bd74-6da03c00838c",
+   "name": "SSH7"
+  },
+  {
+   "parameters": {
+    "mode": "combineBySql",
+    "numberInputs": 4,
+    "query": "SELECT * FROM input1, input2, input3, input4"
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.1,
+   "position": [
+    9200,
+    1872
+   ],
+   "id": "732ef0ae-b530-49c5-a3ed-9cfbed888040",
+   "name": "Merge"
+  },
+  {
+   "parameters": {
+    "amount": 30
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3136,
+    1568
+   ],
+   "id": "93dd4ed4-ac63-4029-b960-3e27bce79003",
+   "name": "Wait4",
+   "webhookId": "bd64c8be-bc8a-48a0-911d-bad295f222fc"
+  },
+  {
+   "parameters": {
+    "amount": 30
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3136,
+    1792
+   ],
+   "id": "a8a27f49-f21e-4983-8959-a5d5667819d5",
+   "name": "Wait5",
+   "webhookId": "6bbdaa7c-54b0-4d08-a776-e6b1dbc7fcd6"
+  },
+  {
+   "parameters": {
+    "amount": 30
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3136,
+    2016
+   ],
+   "id": "83b4e43e-0069-4845-9a5e-2135054a239a",
+   "name": "Wait6",
+   "webhookId": "6295aebd-5461-4b56-8b02-911a357bc439"
+  },
+  {
+   "parameters": {
+    "fieldToSplitOut": "message.content.cenas",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitOut",
+   "typeVersion": 1,
+   "position": [
+    4080,
+    2368
+   ],
+   "id": "f414af19-efe5-4e9f-acb4-635ec525ff4b",
+   "name": "Split Out"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.elevenlabs.io/v1/text-to-speech/nPczCjzI2devNBz1zQrb",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "output_format",
+       "value": "mp3_44100_128"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "xi-api-key"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "text",
+       "value": "={{ $('verifica_narracao').item.json.output }}"
+      },
+      {
+       "name": "model_id",
+       "value": "eleven_flash_v2_5"
+      }
+     ]
+    },
+    "options": {
+     "response": {
+      "response": {
+       "fullResponse": true
+      }
+     }
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    4704,
+    1392
+   ],
+   "id": "dfc1b099-9410-44ee-b479-b4112c7137d5",
+   "name": "ElevenLabs - Create audio"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wp.digitalfocus.click/wp-json/wp/v2/media",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "wordpressApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "content-disposition",
+       "value": "=attachment; filename={{ $binary['data'].fileName }}.file.srt"
+      },
+      {
+       "name": "content-type",
+       "value": "=srt"
+      }
+     ]
+    },
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "data",
+    "options": {}
+   },
+   "id": "c062e82d-1e08-41d2-9bd0-7080d3cf4f5f",
+   "name": "upload de txt1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4,
+   "position": [
+    6704,
+    1392
+   ]
+  },
+  {
+   "parameters": {
+    "url": "=https://wp.digitalfocus.click/wp-json/wp/v2/media/{{ $json.id }}",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "wordpressApi",
+    "options": {}
+   },
+   "id": "553a26da-dc95-4665-92b7-2b3ef08ac3c6",
+   "name": "link do txt1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4,
+   "position": [
+    6944,
+    1392
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wp.digitalfocus.click/wp-json/wp/v2/media",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "wordpressApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "content-disposition",
+       "value": "=attachment; filename={{ $('cria_titulo').item.json.output }}.mp3"
+      },
+      {
+       "name": "content-type",
+       "value": "={{ $binary.data.mimeType }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "data",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    4976,
+    1392
+   ],
+   "id": "bb582ad1-bd04-4146-a4d7-73351971a2ea",
+   "name": "upload_audio"
+  },
+  {
+   "parameters": {
+    "url": "=https://wp.digitalfocus.click/wp-json/wp/v2/media/{{ $json.id }}",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "wordpressApi",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    5200,
+    1392
+   ],
+   "id": "0f5658eb-ed34-4889-ab79-8c346e7f0fb3",
+   "name": "link_audio"
+  },
+  {
+   "parameters": {
+    "mode": "combine",
+    "fieldsToMatchString": "guid.rendered",
+    "joinMode": "keepEverything",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.1,
+   "position": [
+    6944,
+    1696
+   ],
+   "id": "263cc9d5-5794-4745-ba11-18e66aad7ef6",
+   "name": "Merge1"
+  },
+  {
+   "parameters": {
+    "fieldsToAggregate": {
+     "fieldToAggregate": [
+      {
+       "fieldToAggregate": "guid.rendered"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.aggregate",
+   "typeVersion": 1,
+   "position": [
+    7456,
+    1696
+   ],
+   "id": "b86e52fe-b74d-495d-8fbe-1b58d4cfca6d",
+   "name": "Aggregate1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    6288,
+    1856
+   ],
+   "id": "64d53ff9-cef2-4a45-92de-ea55b35ce26d",
+   "name": "Loop Over Items3"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    6528,
+    1776
+   ],
+   "id": "517ef9ce-82c4-4905-b90f-f2b471bcf583",
+   "name": "No Operation, do nothing1"
+  },
+  {
+   "parameters": {
+    "resource": "file",
+    "operation": "download",
+    "path": "./edicao_video/_E262KNURqc/output.mp4",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    9456,
+    2816
+   ],
+   "id": "6ec9734f-c18e-4aab-91e3-433060836b41",
+   "name": "SSH8"
+  },
+  {
+   "parameters": {
+    "jsCode": "// 1. Obtém o valor de content do item atual\nlet contentValue = $('SSH5').item.json.stdout || \"0\";\n\n// 2. Substitui vírgula por ponto, se existir\ncontentValue = contentValue.replace(\",\", \".\");\n\n// 3. Converte para número de ponto flutuante\nconst numberValue = parseFloat(contentValue);\n\n// 4. Divide por 10 e mantém 3 casas decimais\nconst result = Number((numberValue / 10));\n\n// 5. Retorna no formato esperado pelo n8n (array de objetos)\nreturn [\n  {\n    json: {\n      finalResult: result\n    }\n  }\n];\n"
+   },
+   "id": "d815639e-1bb5-4fb1-af37-2df5c16c9731",
+   "name": "Code5",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    7968,
+    1520
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const images = $('Edit Fields3').item.json.Imagens;\nconst audio = $('Edit Fields3').item.json.Audio;\nconst subtitles = $('Edit Fields3').item.json.Legendas;\nconst timePerImage = Number($('Edit Fields3').item.json['Tempo De Cada Imagem']);\nconst audioDuration = timePerImage * 10;\nconst imageDuration = Math.ceil(audioDuration / images.length);\n\n// Download das legendas (executar separadamente seria ideal para melhor controle)\nconst downloadCommand = `wget \"${subtitles}\" -O /tmp/subs.srt && `;\n\n// Comando FFmpeg principal\nlet ffmpegCommand = 'ffmpeg -hide_banner';\n\n// Input das imagens\nimages.forEach((image, i) => {\n    ffmpegCommand += ` -loop 1 -t ${audioDuration} -i \"${image}\"`;\n});\n\n// Input de áudio\nffmpegCommand += ` -i \"${audio}\"`;\n\n// Filtros\nlet filters = [];\n\n// Escalar todas as imagens para 1280x720 com padding para manter o formato correto (FORMATO DEITADO)\nfor (let i = 0; i < images.length; i++) {\n    filters.push(`[${i}:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:white[v${i}scaled]`);\n}\n\n// Transições entre imagens\nfor (let i = 0; i < images.length - 1; i++) {\n    const offset = i * imageDuration;\n    if (i === 0) {\n        filters.push(`[v0scaled][v1scaled]xfade=transition=fade:duration=1:offset=${offset}[vf0]`);\n    } else {\n        filters.push(`[vf${i-1}][v${i+1}scaled]xfade=transition=fade:duration=1:offset=${offset}[vf${i}]`);\n    }\n}\n\n// Legendas configuradas\nconst lastIndex = images.length - 2;\nfilters.push(`[vf${lastIndex}]subtitles=/tmp/subs.srt:\n    force_style='\n    Fontname=Arial Bold,\n    Fontsize=30,\n    Alignment=2,\n    MarginV=60,\n    PrimaryColour=&HFFFFFF&,\n    OutlineColour=&H000000&,\n    BorderStyle=3,\n    Outline=2,\n    Shadow=0,\n    Bold=1,\n    AssemblyMode=1,\n    LineAlignment=Center':\n    charenc=UTF-8\n[outv]`);\n\n// Adicionar filtros ao comando\nffmpegCommand += ' -filter_complex \"' + filters.join(';') + '\"';\n\n// Configurações de saída (FORMATO DEITADO 1280x720)\nffmpegCommand += ' -map \"[outv]\"' +\n                     ' -map ' + images.length + ':a' +\n                     ' -c:v libx264' +\n                     ' -preset medium' +\n                     ' -profile:v main' +\n                     ' -crf 20' +\n                     ' -c:a aac' +\n                     ' -ar 48000' +\n                     ' -b:a 192k' +\n                     ' -pix_fmt yuv420p' +\n                     ' -r 30' +\n                     ' -max_muxing_queue_size 4096' +\n                     ' -t ' + audioDuration +\n                     ' -s 1280x720' + // Definindo a resolução do vídeo para 1280x720 (16:9)\n                     ' -aspect 16:9' + // Definindo a proporção de tela para 16:9\n                     ' -y output.mp4';\n\n// Comando final\nconst finalCommand = downloadCommand + ffmpegCommand;\n\nreturn { json: { command: finalCommand } };"
+   },
+   "id": "701f2874-886a-4c0f-850a-b3034ad38d95",
+   "name": "1280x720",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    9456,
+    2128
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://www.googleapis.com/upload/youtube/v3/videos?part=snippet,status&uploadType=resumable",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "youTubeOAuth2Api",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      },
+      {
+       "name": "X-Upload-Content-Type",
+       "value": "video/webm"
+      }
+     ]
+    },
+    "sendBody": true,
+    "contentType": "raw",
+    "rawContentType": "RAW/JSON",
+    "body": "={\n  \"snippet\": {\n    \"title\": \"{{ $('Merge').item.json.titulo }}\",\n    \"description\": \"{{ $('Merge').item.json.descricao }}\",\n    \"defaultLanguage\": \"en\",\n    \"defaultAudioLanguage\": \"en\"\n  },\n  \"status\": {\n    \"privacyStatus\": \"unlisted\",\n    \"license\": \"youtube\",\n    \"embeddable\": true,\n    \"publicStatsViewable\": true,\n    \"madeForKids\": false\n  }\n}\n\n",
+    "options": {
+     "response": {
+      "response": {
+       "fullResponse": true
+      }
+     }
+    }
+   },
+   "id": "434ad7d0-3579-4539-8b82-23c913019682",
+   "name": "Initiate YouTube Resumable Upload",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    9456,
+    2560
+   ],
+   "typeVersion": 4.2
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "={{ $('Initiate YouTube Resumable Upload').item.json.headers.location }}",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "youTubeOAuth2Api",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "video/webm"
+      }
+     ]
+    },
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "data",
+    "options": {}
+   },
+   "id": "40e22770-5471-4fe5-aba5-678edb40021c",
+   "name": "Upload Video to YouTube",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    9456,
+    3072
+   ],
+   "typeVersion": 4.2
+  },
+  {
+   "parameters": {
+    "resource": "assistant",
+    "assistantId": {
+     "__rl": true,
+     "value": "asst_pkpdkOUWkiVmF4evr2ZTcq6p",
+     "mode": "list",
+     "cachedResultName": "yt-bible-content-description"
+    },
+    "prompt": "define",
+    "text": "=create a description for video\nthe output text needs attend specification: no quotation marks",
+    "memory": "threadId",
+    "threadId": "={{ $json.threadId }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    2784,
+    2240
+   ],
+   "id": "ad16973e-4bdf-4fcd-89bd-4f376e737135",
+   "name": "cria_descricao"
+  },
+  {
+   "parameters": {
+    "amount": 30
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3136,
+    2240
+   ],
+   "id": "3d8656e6-72c5-4779-a0ef-5283cd4182fa",
+   "name": "Wait",
+   "webhookId": "6295aebd-5461-4b56-8b02-911a357bc439"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "a6c6e25e-558d-4b40-a479-a88d68522f9b",
+       "name": "titulo",
+       "value": "={{ $('cria_titulo').item.json.output }}",
+       "type": "string"
+      },
+      {
+       "id": "e294643c-f0fb-4e03-8b88-bd7e227b29f4",
+       "name": "descricao",
+       "value": "={{ $('cria_descricao').item.json.output }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    5584,
+    2688
+   ],
+   "id": "aa1a0579-4437-4ba4-8340-4a8e9eadd337",
+   "name": "Edit Fields"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    720,
+    1552
+   ],
+   "id": "d2c1bc84-c781-422c-b4c0-e4a8f5bcfd18",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    1024,
+    1200
+   ],
+   "id": "fd40da5b-01bd-4cc8-842a-0366a7616563",
+   "name": "No Operation, do nothing"
+  },
+  {
+   "parameters": {
+    "fieldToSplitOut": "title, link, id",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitOut",
+   "typeVersion": 1,
+   "position": [
+    336,
+    1552
+   ],
+   "id": "43609f41-ae90-4d58-b88c-836e34f7b919",
+   "name": "Split Out1"
+  },
+  {
+   "parameters": {
+    "pollTimes": {
+     "item": [
+      {
+       "hour": 23,
+       "minute": 59
+      }
+     ]
+    },
+    "feedUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=channel"
+   },
+   "type": "n8n-nodes-base.rssFeedReadTrigger",
+   "typeVersion": 1,
+   "position": [
+    -432,
+    1552
+   ],
+   "id": "b4e34da6-2668-40a0-973c-292e6f26a250",
+   "name": "canal fonte",
+   "disabled": true
+  }
+ ],
+ "pinData": {
+  "canal fonte": [
+   {
+    "json": {
+     "title": "The Deep Meaning of \"I Am\" That God Said to Moses on Mount Horeb #biblestories",
+     "link": "https://www.youtube.com/watch?v=_E262KNURqc",
+     "pubDate": "2025-03-04T04:28:36.000Z",
+     "author": "Bible Stories",
+     "id": "yt:video:_E262KNURqc",
+     "isoDate": "2025-03-04T04:28:36.000Z"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "busca_video": {
+   "main": [
+    [
+     {
+      "node": "video_type_normal",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "video_type_normal": {
+   "main": [
+    [
+     {
+      "node": "busca_legenda",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "baixa_video_leonardoai": {
+   "main": [
+    [
+     {
+      "node": "upload_video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "upload_video": {
+   "main": [
+    [
+     {
+      "node": "update_video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_legenda": {
+   "main": [
+    [
+     {
+      "node": "adiciona_tema_video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "adiciona_tema_video": {
+   "main": [
+    [
+     {
+      "node": "SSH1",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "criador_narracao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criador_narracao": {
+   "main": [
+    [
+     {
+      "node": "Wait4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_narracao": {
+   "main": [
+    [
+     {
+      "node": "Wait5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cria_titulo": {
+   "main": [
+    [
+     {
+      "node": "Wait6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cria_cenas": {
+   "main": [
+    [
+     {
+      "node": "trata_json_sheets",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Edit Fields",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Split Out",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "atualiza_info": {
+   "main": [
+    [
+     {
+      "node": "ElevenLabs - Create audio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "trata_json_sheets": {
+   "main": [
+    [
+     {
+      "node": "atualiza_info",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "SSH4": {
+   "main": [
+    [
+     {
+      "node": "Initiate YouTube Resumable Upload",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "SSH5": {
+   "main": [
+    [
+     {
+      "node": "Code7",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code7": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields2": {
+   "main": [
+    [
+     {
+      "node": "Convert to File2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Convert to File2": {
+   "main": [
+    [
+     {
+      "node": "SSH6",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "upload de txt1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields3": {
+   "main": [
+    [
+     {
+      "node": "1280x720",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Aggregate": {
+   "main": [
+    [
+     {
+      "node": "Code2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request9": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request10": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request11": {
+   "main": [
+    [
+     {
+      "node": "Aggregate",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Loop Over Items3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait2": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request10",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait3": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request9",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Wait3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items2": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request11",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Wait2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "SSH7": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code2": {
+   "main": [
+    [
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Merge": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait4": {
+   "main": [
+    [
+     {
+      "node": "verifica_narracao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait5": {
+   "main": [
+    [
+     {
+      "node": "cria_titulo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait6": {
+   "main": [
+    [
+     {
+      "node": "cria_descricao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Split Out": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "ElevenLabs - Create audio": {
+   "main": [
+    [
+     {
+      "node": "upload_audio",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "SSH3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "upload de txt1": {
+   "main": [
+    [
+     {
+      "node": "link do txt1",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "link do txt1": {
+   "main": [
+    [
+     {
+      "node": "Code5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "upload_audio": {
+   "main": [
+    [
+     {
+      "node": "link_audio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "link_audio": {
+   "main": [
+    [
+     {
+      "node": "SSH5",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Merge1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Merge1": {
+   "main": [
+    [
+     {
+      "node": "Aggregate1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Aggregate1": {
+   "main": [
+    [
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  },
+  "Loop Over Items3": {
+   "main": [
+    [
+     {
+      "node": "No Operation, do nothing1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "SSH7",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code5": {
+   "main": [
+    [
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "1280x720": {
+   "main": [
+    [
+     {
+      "node": "SSH4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "SSH8": {
+   "main": [
+    [
+     {
+      "node": "Upload Video to YouTube",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Initiate YouTube Resumable Upload": {
+   "main": [
+    [
+     {
+      "node": "SSH8",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cria_descricao": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "cria_cenas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields": {
+   "main": [
+    [
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 3
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [
+     {
+      "node": "No Operation, do nothing",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "busca_video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Upload Video to YouTube": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Split Out1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "canal fonte": {
+   "main": [
+    [
+     {
+      "node": "Split Out1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "80d49ebf-d771-45d8-a11c-aadfec5bb6cf",
+ "meta": {
+  "instanceId": "e968bb3ef712785332f9409e5e269ec2acd9f35e86b417980143414c2b02365c"
+ },
+ "id": "eOdHIUiy16O5DAby",
+ "tags": []
+}

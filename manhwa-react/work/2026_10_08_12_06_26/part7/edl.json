@@ -1,0 +1,467 @@
+{
+ "part": [
+  2101.0,
+  2149.0
+ ],
+ "keeps": [
+  [
+   2101.545583,
+   2105.411229
+  ],
+  [
+   2109.434146,
+   2112.194104
+  ],
+  [
+   2112.369313,
+   2114.183437
+  ],
+  [
+   2114.4102709999997,
+   2115.601833
+  ],
+  [
+   2116.188667,
+   2117.836021
+  ],
+  [
+   2119.216625,
+   2119.850937
+  ],
+  [
+   2120.883271,
+   2124.8399999999997
+  ],
+  [
+   2125.1600000000003,
+   2126.04
+  ],
+  [
+   2126.78,
+   2136.465938
+  ],
+  [
+   2137.061104,
+   2143.9270619999998
+  ],
+  [
+   2144.436229,
+   2147.986146
+  ],
+  [
+   2148.553,
+   2149.0
+  ]
+ ],
+ "duration_out": 37.298497999999654,
+ "zoom": [
+  [
+   0.264,
+   2.674,
+   1
+  ],
+  [
+   9.853,
+   11.429,
+   2
+  ],
+  [
+   12.28,
+   16.43,
+   1
+  ],
+  [
+   16.28,
+   20.15,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   8.296290999999837,
+   9.446290999999837
+  ],
+  [
+   14.829685000000335,
+   15.979685000000336
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 8.346290999999837,
+   "text": "35 A 40 MIL",
+   "emoji": "💰"
+  },
+  {
+   "t": 14.879685000000336,
+   "text": "UM SALÁRIO",
+   "emoji": "🤑"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 8.346290999999837,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 10.372623000000203,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Cash Register.mp3"
+  },
+  {
+   "t": 14.879685000000336,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Tiro de Rifle - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 34.798497999999654,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 2.8,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_watchtoend.mov",
+   "dur": 1.7,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 8.246290999999838,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 8.346290999999837,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f4b0_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 10.372623000000203,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f4b8_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 14.779685000000336,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 14.779685000000336,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_confetti.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 14.879685000000336,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f911_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 34.798497999999654,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Undertale Sound Effect - Taking Damage.mp3",
+ "meta": {
+  "hook": "COM 35 MIL VOCÊ GANHA UM SALÁRIO",
+  "title": "Com 35 mil no bot de IA dá pra tirar um salário por mês 💰🤖 #shorts #rendapassiva",
+  "description": "Ele fez a conta ao vivo: 30 a 40 mil investidos no bot com 50% ao ano dá mais de mil por mês!\nJá dá pra começar a viver com renda passiva.\nQuanto você investiria? Comenta! 👇\nSegue pra mais conteúdo sobre investimento com IA!\n\n#shorts #react #rendapassiva #bot #ia #investimento #cripto #salario #dinheiro #automacao #lucro #mercadofinanceiro #liberdadefinanceira #renda #trading",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#rendapassiva",
+   "#bot",
+   "#ia",
+   "#investimento",
+   "#salario"
+  ],
+  "tags": [
+   "react",
+   "renda passiva",
+   "salario",
+   "bot trading",
+   "inteligencia artificial",
+   "investimento",
+   "cripto",
+   "dinheiro",
+   "automacao",
+   "lucro",
+   "liberdade financeira",
+   "30 mil",
+   "50 por cento",
+   "mercado financeiro",
+   "viver de renda"
+  ],
+  "cta": "Segue pra aprender a investir!",
+  "mood": "neutral_chill",
+  "music": true,
+  "pinned_comment": "Quanto você precisaria pra largar o emprego? 💰",
+  "title_alternatives": [
+   "30 mil no bot = um salário por mês no automático 🤖💸 #shorts #ia",
+   "A conta que ninguém faz: quanto precisa pra viver de bot com IA 🧮🔥 #shorts #rendapassiva"
+  ],
+  "work": "BOT DE TRADING COM IA",
+  "channel": "assistiainvestimentos"
+ },
+ "channel": "assistiainvestimentos",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1368_56_7.png",
+  "overlap": 56,
+  "y": 608,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_22c55e_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "o",
+   "s": 0.2644169999998667,
+   "e": 0.3444169999998667,
+   "p": 0.9,
+   "lip": 0.007248554954516321,
+   "speaker": "creator"
+  },
+  {
+   "w": "salário",
+   "s": 0.284436999999798,
+   "e": 0.6044170000000122,
+   "p": 0.9,
+   "lip": 0.005843413394979315,
+   "speaker": "creator"
+  },
+  {
+   "w": "também",
+   "s": 0.6044170000000122,
+   "e": 0.8444169999997939,
+   "p": 0.9,
+   "lip": 0.006387538126956039,
+   "speaker": "creator"
+  },
+  {
+   "w": "tu",
+   "s": 0.8444169999997939,
+   "e": 0.9644170000001395,
+   "p": 0.9,
+   "lip": 0.0021416963743772794,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 0.9644170000001395,
+   "e": 1.1044170000000122,
+   "p": 0.9,
+   "lip": 0.005528958196584303,
+   "speaker": "creator"
+  },
+  {
+   "w": "vive,",
+   "s": 1.1044170000000122,
+   "e": 1.4644170000001395,
+   "p": 0.9,
+   "lip": 0.008683233389936937,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 1.4644170000001395,
+   "e": 1.6243970000000445,
+   "p": 0.9,
+   "lip": 0.013781804984342684,
+   "speaker": "creator"
+  },
+  {
+   "w": "Bora",
+   "s": 1.6243970000000445,
+   "e": 1.9044169999997393,
+   "p": 0.9,
+   "lip": 0.01787297722154214,
+   "speaker": "creator"
+  },
+  {
+   "w": "combinar,",
+   "s": 1.9044169999997393,
+   "e": 2.424417000000176,
+   "p": 0.9,
+   "lip": 0.0039748760548185815,
+   "speaker": "creator"
+  },
+  {
+   "w": "mas",
+   "s": 2.424417000000176,
+   "e": 2.524417000000085,
+   "p": 0.9,
+   "lip": null,
+   "speaker": "creator"
+  },
+  {
+   "w": "Uns",
+   "s": 9.852623000000222,
+   "e": 9.992623000000549,
+   "p": 0.9,
+   "lip": 0.0015244323276223646,
+   "speaker": "creator"
+  },
+  {
+   "w": "30",
+   "s": 9.992623000000549,
+   "e": 10.372623000000203,
+   "p": 0.9,
+   "lip": 0.0021174215416878963,
+   "speaker": "creator"
+  },
+  {
+   "w": "mil...",
+   "s": 10.372623000000203,
+   "e": 11.27864400000044,
+   "p": 0.9,
+   "lip": 0.0026678792626218454,
+   "speaker": "creator"
+  },
+  {
+   "w": "vezes",
+   "s": 12.279685000000427,
+   "e": 12.81968500000039,
+   "p": 0.9,
+   "lip": null,
+   "speaker": "creator"
+  },
+  {
+   "w": "50%,",
+   "s": 12.81968500000039,
+   "e": 14.31968500000039,
+   "p": 0.9,
+   "lip": null,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 14.31968500000039,
+   "e": 14.539685000000645,
+   "p": 0.9,
+   "lip": null,
+   "speaker": "creator"
+  },
+  {
+   "w": "vê",
+   "s": 14.539685000000645,
+   "e": 14.639685000000554,
+   "p": 0.9,
+   "lip": null,
+   "speaker": "creator"
+  },
+  {
+   "w": "15",
+   "s": 14.639685000000554,
+   "e": 15.019685000000209,
+   "p": 0.9,
+   "lip": 0.010326372950289103,
+   "speaker": "creator"
+  },
+  {
+   "w": "mil,",
+   "s": 15.019685000000209,
+   "e": 15.439685000000281,
+   "p": 0.9,
+   "lip": 0.006252203171259297,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 15.439685000000281,
+   "e": 15.869685000000118,
+   "p": 0.9,
+   "lip": 0.006314516302139214,
+   "speaker": "creator"
+  },
+  {
+   "w": "mil",
+   "s": 15.869685000000118,
+   "e": 16.19968499999959,
+   "p": 0.9,
+   "lip": 0.004716943689103266,
+   "speaker": "creator"
+  },
+  {
+   "w": "e",
+   "s": 16.19968499999959,
+   "e": 16.339684999999918,
+   "p": 0.9,
+   "lip": 0.0024905398953689066,
+   "speaker": "creator"
+  },
+  {
+   "w": "pouco,",
+   "s": 16.339684999999918,
+   "e": 16.749684999999772,
+   "p": 0.9,
+   "lip": 0.00196743381217199,
+   "speaker": "creator"
+  },
+  {
+   "w": "Acho",
+   "s": 16.749684999999772,
+   "e": 16.939684999999827,
+   "p": 0.9,
+   "lip": 0.0015555805561564052,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 16.939684999999827,
+   "e": 17.619684999999663,
+   "p": 0.9,
+   "lip": 0.009866981912175695,
+   "speaker": "creator"
+  },
+  {
+   "w": "uns",
+   "s": 17.619684999999663,
+   "e": 17.69968499999966,
+   "p": 0.9,
+   "lip": 0.01666185738188532,
+   "speaker": "creator"
+  },
+  {
+   "w": "35",
+   "s": 17.67968499999961,
+   "e": 18.539684999999736,
+   "p": 0.9,
+   "lip": 0.009115442942020623,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 18.539684999999736,
+   "e": 19.619684999999663,
+   "p": 0.9,
+   "lip": 0.006399806334875696,
+   "speaker": "creator"
+  },
+  {
+   "w": "40",
+   "s": 19.619684999999663,
+   "e": 19.999684999999317,
+   "p": 0.9,
+   "lip": 0.0038704772134458294,
+   "speaker": "creator"
+  }
+ ]
+}

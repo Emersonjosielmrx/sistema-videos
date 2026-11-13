@@ -1,0 +1,352 @@
+{
+ "part": [
+  47.38,
+  81.5
+ ],
+ "keeps": [
+  [
+   47.38,
+   51.21
+  ],
+  [
+   51.53,
+   52.97
+  ],
+  [
+   66.01,
+   68.67247900000001
+  ],
+  [
+   73.34064599999999,
+   73.840687
+  ],
+  [
+   75.169979,
+   78.54545800000001
+  ],
+  [
+   79.11056199999999,
+   80.466729
+  ]
+ ],
+ "duration_out": 13.164166000000037,
+ "zoom": [
+  [
+   1.62,
+   5.77,
+   1
+  ],
+  [
+   5.62,
+   7.89,
+   2
+  ],
+  [
+   8.563,
+   11.433,
+   1
+  ],
+  [
+   11.937,
+   13.164,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   1.5699999999999974,
+   2.7199999999999975
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 1.6199999999999974,
+   "text": "LEVANTAR O VESTIDO",
+   "emoji": "😳"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 1.6199999999999974,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Bamboo Hit - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 10.664166000000037,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 1.5199999999999974,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 1.5199999999999974,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_speedlines.mov",
+   "dur": 0.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 1.6199999999999974,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f633_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 10.664166000000037,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\FNAF FUNK (Funk Remix) (128 kbps).mp3",
+ "meta": {
+  "hook": "ELA TACOU O FENELE NELE!",
+  "title": "O movimento dela foi LEVANTAR O VESTIDO e tacar tudo 😂💥 #shorts #anime",
+  "description": "O criador reage a uma cena onde a personagem surpreende com um golpe inesperado depois de um movimento suspeito!\nVocês esperavam essa reação dela?\nComenta aí e segue pra mais!\n\n#shorts #react #anime #luta #cena #animereact #otaku #mangá #golpe #surpresa #hype #reação #poder #personagem",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#anime",
+   "#luta",
+   "#cena",
+   "#animereact",
+   "#otaku",
+   "#golpe",
+   "#surpresa",
+   "#hype"
+  ],
+  "tags": [
+   "react",
+   "anime",
+   "cena anime",
+   "golpe inesperado",
+   "react anime",
+   "personagem feminina",
+   "luta anime",
+   "anime react br",
+   "manhwa react",
+   "reação anime",
+   "momento épico",
+   "anime engraçado",
+   "react portugues"
+  ],
+  "cta": "Comenta o que achou!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Qual foi o golpe mais inesperado que vocês já viram num anime? 😂",
+  "title_alternatives": [
+   "Ela fez O QUÊ antes de atacar?! Não acredito 😳🔥 #shorts #react",
+   "O movimento SUSPEITO dela antes do golpe final 💀😂 #shorts #anime"
+  ],
+  "work": null,
+  "channel": "manhwareact"
+ },
+ "channel": "manhwareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1280_56_7.png",
+  "overlap": 56,
+  "y": 696,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_ff2d55_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Levantar",
+   "s": 1.6199999999999974,
+   "e": 2.559999999999995,
+   "p": 0.9,
+   "lip": 0.013773224780538643,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 2.559999999999995,
+   "e": 2.6599999999999966,
+   "p": 0.9,
+   "lip": 0.013706103825174063,
+   "speaker": "creator"
+  },
+  {
+   "w": "vestido",
+   "s": 2.6599999999999966,
+   "e": 3.059999999999995,
+   "p": 0.9,
+   "lip": 0.01927345286794671,
+   "speaker": "creator"
+  },
+  {
+   "w": "dela.",
+   "s": 3.059999999999995,
+   "e": 3.3999999999999986,
+   "p": 0.9,
+   "lip": 0.016328109168531044,
+   "speaker": "creator"
+  },
+  {
+   "w": "O",
+   "s": 3.3999999999999986,
+   "e": 3.4799999999999986,
+   "p": 0.9,
+   "lip": 0.022802837827902725,
+   "speaker": "creator"
+  },
+  {
+   "w": "movimento",
+   "s": 3.460000000000001,
+   "e": 3.8299999999999983,
+   "p": 0.9,
+   "lip": 0.01826593177659334,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 3.8299999999999983,
+   "e": 3.9099999999999984,
+   "p": 0.9,
+   "lip": 0.020069777379361012,
+   "speaker": "creator"
+  },
+  {
+   "w": "levantar",
+   "s": 3.8999999999999986,
+   "e": 4.419999999999995,
+   "p": 0.9,
+   "lip": 0.012383749274589614,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 4.419999999999995,
+   "e": 4.5,
+   "p": 0.9,
+   "lip": 0.00859559380878785,
+   "speaker": "creator"
+  },
+  {
+   "w": "vestido",
+   "s": 4.5,
+   "e": 4.839999999999996,
+   "p": 0.9,
+   "lip": 0.0041191560626424525,
+   "speaker": "creator"
+  },
+  {
+   "w": "dela.",
+   "s": 4.839999999999996,
+   "e": 5.269999999999996,
+   "p": 0.9,
+   "lip": 0.0030188835413850145,
+   "speaker": "creator"
+  },
+  {
+   "w": "ela",
+   "s": 5.269999999999996,
+   "e": 5.439999999999998,
+   "p": 0.9,
+   "lip": 0.005378599399723524,
+   "speaker": "creator"
+  },
+  {
+   "w": "tacou",
+   "s": 5.439999999999998,
+   "e": 6.659999999999997,
+   "p": 0.9,
+   "lip": 0.0061831278546552884,
+   "speaker": "creator"
+  },
+  {
+   "w": "logo",
+   "s": 6.659999999999997,
+   "e": 6.939999999999998,
+   "p": 0.9,
+   "lip": 0.01077186032404108,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 6.939999999999998,
+   "e": 7.139999999999986,
+   "p": 0.9,
+   "lip": 0.006800137720776685,
+   "speaker": "creator"
+  },
+  {
+   "w": "veneno",
+   "s": 7.139999999999986,
+   "e": 7.739999999999995,
+   "p": 0.9,
+   "lip": 0.006914834390957328,
+   "speaker": "creator",
+   "w_orig": "fenele."
+  },
+  {
+   "w": "Vai",
+   "s": 8.56254100000001,
+   "e": 8.742541000000017,
+   "p": 0.9,
+   "lip": 0.0075496781042213214,
+   "speaker": "creator"
+  },
+  {
+   "w": "dizer",
+   "s": 8.742541000000017,
+   "e": 9.082541000000006,
+   "p": 0.9,
+   "lip": 0.011200869040368698,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 9.082541000000006,
+   "e": 9.30254100000002,
+   "p": 0.9,
+   "lip": 0.009905868960162692,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 9.30254100000002,
+   "e": 9.38254100000002,
+   "p": 0.9,
+   "lip": 0.010529862731341067,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 9.342541000000011,
+   "e": 9.542541000000014,
+   "p": 0.9,
+   "lip": 0.007388097557333275,
+   "speaker": "creator"
+  },
+  {
+   "w": "mesmo,",
+   "s": 9.542541000000014,
+   "e": 11.282541000000009,
+   "p": 0.9,
+   "lip": 0.008382493683598322,
+   "speaker": "creator"
+  },
+  {
+   "w": "Do...",
+   "s": 11.937437000000031,
+   "e": 13.164166000000037,
+   "p": 0.9,
+   "lip": 0.0040027861434465545,
+   "speaker": "creator"
+  }
+ ]
+}

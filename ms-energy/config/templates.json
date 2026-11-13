@@ -1,0 +1,112 @@
+{
+  "templates": [
+    {
+      "id": "economia",
+      "nome": "Economia na Conta",
+      "descricao": "Número impactante de economia + transição dramática",
+      "duracao_s": 25,
+      "estrutura": [
+        {"fase": "hook", "duracao_s": 3, "tipo": "texto_grande", "exemplo": "CONTA DE LUZ: R$ 800 → R$ 47"},
+        {"fase": "contexto", "duracao_s": 8, "tipo": "foto_instalacao", "texto": "Instalação em X dias"},
+        {"fase": "resultado", "duracao_s": 8, "tipo": "comparativo", "texto": "Economia comprovada"},
+        {"fase": "cta", "duracao_s": 6, "tipo": "cta_final", "texto": "Peça seu orçamento"}
+      ],
+      "musica_mood": "upbeat",
+      "cor_fundo": "secundaria"
+    },
+    {
+      "id": "antes_depois",
+      "nome": "Antes e Depois",
+      "descricao": "Transformação visual do telhado/instalação",
+      "duracao_s": 20,
+      "estrutura": [
+        {"fase": "hook", "duracao_s": 2, "tipo": "texto_grande", "exemplo": "OLHA ESSA TRANSFORMAÇÃO 👇"},
+        {"fase": "antes", "duracao_s": 6, "tipo": "foto_antes", "texto": "ANTES"},
+        {"fase": "transicao", "duracao_s": 2, "tipo": "wipe_solar"},
+        {"fase": "depois", "duracao_s": 6, "tipo": "foto_depois", "texto": "DEPOIS"},
+        {"fase": "cta", "duracao_s": 4, "tipo": "cta_final"}
+      ],
+      "musica_mood": "reveal",
+      "cor_fundo": "primaria"
+    },
+    {
+      "id": "dados",
+      "nome": "Dados Impactantes",
+      "descricao": "Curiosidades e números sobre energia solar",
+      "duracao_s": 30,
+      "estrutura": [
+        {"fase": "hook", "duracao_s": 3, "tipo": "texto_grande", "exemplo": "VOCÊ SABIA? ☀️"},
+        {"fase": "dado1", "duracao_s": 5, "tipo": "infografico", "texto": "O Brasil recebe X horas de sol/ano"},
+        {"fase": "dado2", "duracao_s": 5, "tipo": "infografico", "texto": "1 painel = XX kWh/mês"},
+        {"fase": "dado3", "duracao_s": 5, "tipo": "infografico", "texto": "Payback médio: X anos"},
+        {"fase": "resumo", "duracao_s": 6, "tipo": "destaque", "texto": "Energia solar se paga sozinha"},
+        {"fase": "cta", "duracao_s": 6, "tipo": "cta_final"}
+      ],
+      "musica_mood": "educational",
+      "cor_fundo": "secundaria"
+    },
+    {
+      "id": "processo",
+      "nome": "Passo a Passo",
+      "descricao": "Como funciona a instalação em passos simples",
+      "duracao_s": 35,
+      "estrutura": [
+        {"fase": "hook", "duracao_s": 3, "tipo": "texto_grande", "exemplo": "COMO INSTALAR ENERGIA SOLAR? ⚡"},
+        {"fase": "passo1", "duracao_s": 5, "tipo": "icone_texto", "texto": "1️⃣ Análise do telhado"},
+        {"fase": "passo2", "duracao_s": 5, "tipo": "icone_texto", "texto": "2️⃣ Projeto personalizado"},
+        {"fase": "passo3", "duracao_s": 5, "tipo": "icone_texto", "texto": "3️⃣ Instalação (1-3 dias)"},
+        {"fase": "passo4", "duracao_s": 5, "tipo": "icone_texto", "texto": "4️⃣ Conexão à rede"},
+        {"fase": "passo5", "duracao_s": 5, "tipo": "icone_texto", "texto": "5️⃣ Economia começa!"},
+        {"fase": "cta", "duracao_s": 7, "tipo": "cta_final"}
+      ],
+      "musica_mood": "upbeat",
+      "cor_fundo": "accent"
+    },
+    {
+      "id": "depoimento",
+      "nome": "Depoimento Cliente",
+      "descricao": "Satisfação de cliente real (foto + texto)",
+      "duracao_s": 22,
+      "estrutura": [
+        {"fase": "hook", "duracao_s": 3, "tipo": "texto_grande", "exemplo": "CLIENTE SATISFEITO 💛"},
+        {"fase": "foto_cliente", "duracao_s": 5, "tipo": "foto_com_borda"},
+        {"fase": "depoimento", "duracao_s": 8, "tipo": "texto_citacao", "texto": "Minha conta caiu 90%!"},
+        {"fase": "resultado", "duracao_s": 3, "tipo": "destaque", "texto": "Economia real"},
+        {"fase": "cta", "duracao_s": 3, "tipo": "cta_final"}
+      ],
+      "musica_mood": "emotional",
+      "cor_fundo": "primaria"
+    },
+    {
+      "id": "timelapse",
+      "nome": "Timelapse Instalação",
+      "descricao": "Instalação acelerada com música energética",
+      "duracao_s": 30,
+      "estrutura": [
+        {"fase": "hook", "duracao_s": 2, "tipo": "texto_grande", "exemplo": "INSTALAÇÃO COMPLETA EM 60s ⚡"},
+        {"fase": "timelapse", "duracao_s": 20, "tipo": "video_acelerado"},
+        {"fase": "resultado", "duracao_s": 4, "tipo": "destaque", "texto": "PRONTO! ☀️"},
+        {"fase": "cta", "duracao_s": 4, "tipo": "cta_final"}
+      ],
+      "musica_mood": "energetic",
+      "cor_fundo": "secundaria"
+    }
+  ],
+  "hooks_virais": [
+    "CONTA DE LUZ: R$ {valor_antes} → R$ {valor_depois}",
+    "OLHA ESSA TRANSFORMAÇÃO 👇",
+    "VOCÊ SABIA que o sol pode ZERAR sua conta?",
+    "PARE de dar dinheiro pra concessionária ☀️",
+    "COMO economizar {porcentagem}% na conta de luz",
+    "Instalação COMPLETA em {dias} dias ⚡",
+    "NUNCA mais pague conta de luz cara",
+    "RESULTADO REAL de quem instalou energia solar",
+    "R$ {valor} por mês? Com solar: R$ {valor_solar}",
+    "CHOCANTE: sua conta pode cair {porcentagem}%",
+    "O segredo que as concessionárias NÃO querem que você saiba",
+    "Energia GRÁTIS do sol? SIM, é possível ☀️",
+    "VOU te mostrar quanto EU economizo por mês",
+    "{cidade}: melhor região pra energia solar!",
+    "ESSE telhado vai GERAR dinheiro"
+  ]
+}

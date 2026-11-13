@@ -1,0 +1,691 @@
+{
+ "_leia": "Ajustes da linha CORTES que o MELHORADOR (cortes_melhorador.py) pode mudar sem tocar em código. Lido por anime_script (regras_roteiro), seo_generator (regras_titulo) e parceiro_marca (tarja_*). Cada mudança fica no historico com o porquê e volta sozinha se a nota do júri cair. Vazio = comportamento padrão.",
+ "regras_roteiro": [
+  "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+  "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+  "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+  "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+  "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+  "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+  "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+  "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+  "Proibido usar bordões de personagens ou desenhos ('Pelos poderes de Bright Moon', 'Moana de Motunui') na abertura: inicie direto no gancho factual da cena.",
+  "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa."
+ ],
+ "regras_titulo": [
+  "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+  "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+  "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+  "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+  "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+  "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
+  "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS')."
+ ],
+ "tarja_largura_max": 0.8,
+ "tarja_letra": 0.62,
+ "historico": [
+  {
+   "em": "2026-10-27T06:20",
+   "quem": "sessao CORTES",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "tarja",
+   "depois": "ab",
+   "porque": "dono 27/10: tarja do tamanho exato OU delogo sutil com a nossa legenda em cima — teste T2, views decidem"
+  },
+  {
+   "em": "2026-10-27T07:10",
+   "quem": "sessao CORTES (aprovou sugestão do melhorador em sombra)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado."
+   ],
+   "porque": "júri: spoiler no título/1º quadro (c853c4, 110e14, 'PODER PROIBIDO da MÃE')"
+  },
+  {
+   "em": "2026-10-27T12:20",
+   "quem": "sessão CORTES",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "ab",
+   "porque": "teste T3: impacto no centro x inclinado de lado (dona 27/10)"
+  },
+  {
+   "em": "2026-10-27T12:40",
+   "quem": "sessão CORTES (dona mandou)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "gemini-4-argon",
+   "porque": "dona 27/10: trocar o Gemini pelo Argon no texto do vídeo (não no melhorador); reserva = gemini-3-flash"
+  },
+  {
+   "em": "2026-10-27T15:30",
+   "quem": "sessão CORTES (dona mandou)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "gemini-3-flash / 420 s",
+   "depois": "agy/gemini-3.8-flash-high / 120 s",
+   "porque": "dona: Argon curto, se demorar troca pro Gemini 3.8"
+  },
+  {
+   "em": "2026-10-29T03:05",
+   "quem": "Fable 5.1 (tarefas complexas, ER_01)",
+   "chave": "curto",
+   "antes": null,
+   "depois": "ab",
+   "porque": "teste T8: Short curto 4-5 frases (~20-27 s) x alvo de sempre. Dos 5 Shorts que passaram do 1º lote (~1.200 views), todos têm 13-24 s e 64-89% assistido; os do platô, 50-75 s e 44%"
+  },
+  {
+   "em": "2026-10-29T07:14",
+   "quem": "Fable 5.1 (dona 29/10: variantes de fala rápida)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "ab",
+   "porque": "teste T9: metade dos Shorts com a fala +15 pontos % (clone), metade como sempre; placar decide (views/pct_media dos elegíveis)"
+  },
+  {
+   "em": "2026-10-29T18:15",
+   "quem": "melhorador gweb/gemini-3.1-pro",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa."
+   ],
+   "porque": "Gênero trocado na narração/legenda em 2 Shorts do lote: sem-obra-990199_cap1_20261029 (q14.jpg: 'Inconformada' narrado sobre o chefe masculino Takeda) e bleach_cap1_20261029 (q01.jpg: chama o vilão masculino Aizen de 'a garota')."
+  },
+  {
+   "em": "2026-10-29T19:26",
+   "quem": "melhorador gweb/gemini-3.1-pro",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero."
+   ],
+   "porque": "Mesmo com a regra anterior, houve erro de gênero em bleach_cap1_20261029 q01 ('com a garota agradecendo ao cara' para Aizen), sem-obra-990199_cap1_20261029 q14 ('Inconformada' sobre close de Takeda) e dr-stone_cap1_20261029 q05."
+  },
+  {
+   "em": "2026-10-29T20:34",
+   "quem": "melhorador gweb/gemini-3.1-pro",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.5,
+   "depois": 0.56,
+   "porque": "Em sem-obra-7dbdbc_cap1_20261029 (q08) e sem-obra-c4fa8c_cap1_20261029 (q01), letras da legenda original queimada do parceiro ('nn', '...ROUND US') vazaram pelas bordas da cobertura atual (0.5)."
+  },
+  {
+   "em": "2026-10-29T20:34",
+   "quem": "melhorador gweb/gemini-3.1-pro",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Revise a concordância verbal, nominal e a grafia de nomes próprios: o verbo e o adjetivo devem concordar exatamente com o sujeito da frase."
+   ],
+   "porque": "Erros gramaticais/ortográficos no texto narrado em 2 Shorts: 'a terra funciona sozinho' em sem-obra-c4fa8c_cap1_20261029 (q03) e nome próprio 'Coronel vivida' com inicial minúscula em sem-obra-7dbdbc_cap1_20261029 (q01)."
+  },
+  {
+   "em": "2026-10-29T21:44",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.56,
+   "depois": 0.5,
+   "porque": "nota caiu 5.33 -> 4.79"
+  },
+  {
+   "em": "2026-10-29T21:44",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Revise a concordância verbal, nominal e a grafia de nomes próprios: o verbo e o adjetivo devem concordar exatamente com o sujeito da frase."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero."
+   ],
+   "porque": "nota caiu 5.33 -> 4.79"
+  },
+  {
+   "em": "2026-10-29T21:45",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação."
+   ],
+   "porque": "Em sem-obra-8bac11_cap1_20261029 (q01.jpg) o título diz 'ELE FOI ISOLADO' mas a vítima na tela é 'PESQUISADORA, 28 ANOS' (mulher); em sem-obra-bb6977_cap1_20261029 (q02.jpg) o título diz 'ELE USOU' mas quem joga a isca na armadilha é uma mulher de vestido florido."
+  },
+  {
+   "em": "2026-10-30T01:12",
+   "quem": "melhorador cw/claude-sonnet-5-5",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração."
+   ],
+   "porque": "sem-obra-54b88d q10-q18: meta-instrução de IA falada e legendada a partir dos 10 s (defeito objetivo, CERTEZA). Regra curta de roteiro reduz a chance; a validação real vira proposta."
+  },
+  {
+   "em": "2026-10-30T02:14",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO')."
+   ],
+   "porque": "Em sem-obra-cb8d24_cap1_20261029 (q01) o título superior saiu com palavras coladas ('UMERRO IMPARDONÁVEL MUDOU TUDO'), e em sem-obra-206d3a_cap1_20261029 (q01) o gancho do topo ('ELE VENCEU COM UM COGUMELO') violou a regra de spoiler."
+  },
+  {
+   "em": "2026-10-30T03:26",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO')."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena."
+   ],
+   "porque": "Em sem-obra-e4043b_cap1_20261029 (q01.jpg) e sem-obra-7c9658_cap1_20261029 (q01.jpg), o gerador usou títulos genéricos de isekai/calabouço para vídeos de romance e drama escolar moderno."
+  },
+  {
+   "em": "2026-10-30T04:44",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "lateral",
+   "porque": "Em sem-obra-6b31a0 (q09, q11), sem-obra-ae7564 (q16) e sem-obra-4c9116 (q12), palavras de impacto no centro ('ANTÁRTIDA', 'CONTADOR', 'PORÉM') cobriram olhos e rostos dos personagens e colidiram com a legenda; a dona já definiu preferência por impacto de lado."
+  },
+  {
+   "em": "2026-10-30T15:12",
+   "quem": "sessão variantes (dona 30/10)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "ab",
+   "porque": "teste T10 (dona 30/10: 'coisa subjetiva vira variante'): A = tira a saudação da 1ª fala (mudança de 30/10, anime_script._tirar_abertura_vazia), B = mantém; placar_variantes.py decide"
+  },
+  {
+   "em": "2026-10-30T15:12",
+   "quem": "sessão variantes (dona 30/10)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "ab",
+   "porque": "teste T11: A = título/gancho sem proibir 'NINGUÉM ESPERAVA' (texto de antes de 30/10), B = proibido (seo_palavras.json provocacao + anime_gancho, 30/10)"
+  },
+  {
+   "em": "2026-10-30T15:12",
+   "quem": "sessão variantes (dona 30/10)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": null,
+   "depois": "ab",
+   "porque": "teste T12 POR CANAL (pt): A = ordem de horários de antes de 30/10, B = 15-21 h de Brasília no fim da fila (parceiro_diario._ordem_horarios, 30/10). 12 canais A x 9 B"
+  },
+  {
+   "em": "2026-10-30T17:44",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Ancore cada frase no que aparece no quadro daquela cena: não antecipe nem atrase objetos ou personagens de cortes vizinhos e mantenha os termos consistentes do início ao fim."
+   ],
+   "porque": "Dessincronia entre o sujeito/objeto narrado e a imagem do corte em 3 Shorts: sem-obra-f9f1f7_cap1_20261030 (q03/q04 narra 'bebeu a água' mostrando comida sólida; q17 narra 'os alimentos' exibindo uma latrina; q02/q14 alterna vírus e bactérias), tensei-shitara-slime-datta-ken_cap1_20261030 (q04 cita "
+  },
+  {
+   "em": "2026-10-30T18:54",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Ancore cada frase no que aparece no quadro daquela cena: não antecipe nem atrase objetos ou personagens de cortes vizinhos e mantenha os termos consistentes do início ao fim."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração."
+   ],
+   "porque": "nota caiu 5.92 -> 4.85"
+  },
+  {
+   "em": "2026-10-30T18:55",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento')."
+   ],
+   "porque": "Erros graves de grafia/acentuação e termos absurdos no texto queimado na legenda em sem-obra-ffeedb (q12 'reconhecér', q16 'aqûele') e pirarucu (q07 'um pica-instrumento')."
+  },
+  {
+   "em": "2026-10-30T23:44",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou')."
+   ],
+   "porque": "Repetido em 2 Shorts do lote: sem-obra-43e95b (q01 'ELE SALVOU UM ELEFANTE EM QUEDA LIVRE') e sem-obra-a3e127 (q01 'ELE SE TORNOU UMA LENDA' e erro 'viro HERÓI' no título)."
+  },
+  {
+   "em": "2026-10-31T05:44",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento')."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Não mencione textos escritos na tela da fonte (placares, números ou legendas originais como 'sete') na narração; descreva apenas a ação física da cena."
+   ],
+   "porque": "Em jujutsu-kaisen_cap1_20261030 (q11) o roteiro leu o gráfico queimado 'SETE' da fonte e gerou a frase sem sentido 'enquanto o Todo sete musical no lugar', além de erros de atribuição de nomes/textos em sem-obra-2a4dba_cap1_20261030 (q01, q03)."
+  },
+  {
+   "em": "2026-10-31T06:54",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Não mencione textos escritos na tela da fonte (placares, números ou legendas originais como 'sete') na narração; descreva apenas a ação física da cena."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento')."
+   ],
+   "porque": "nota caiu 5.75 -> 4.73"
+  },
+  {
+   "em": "2026-10-31T06:54",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento')."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro."
+   ],
+   "porque": "Vazamento de saudação, nome de criador e bordão desconexo na legenda/roteiro em 3 Shorts do lote: sem-obra-a6ac68 (q01 'Salve rapaziada,'), sem-obra-01ce63 (q06 'o Poucas Trancas') e sem-obra-ceafe2 (q01 'Moana de Motunui,')."
+  },
+  {
+   "em": "2026-10-31T08:18",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou')."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título."
+   ],
+   "porque": "Em sem-obra-554315_cap1_20261030 (q01), o título e a tarja estampam 'FILHO DO CHEFE/CHEFÃO', mas a vítima da agressão na cena é uma jovem (Ana, filha do chefe), enquanto as regras atuais de título só restringiam 'ELE'/'ELA'."
+  },
+  {
+   "em": "2026-10-31T11:46",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.72,
+   "depois": 0.78,
+   "porque": "Em sem-obra-488579 (q01, q03, q06), a cobertura central com largura máxima de 0.72 deixou escapar as sílabas laterais da legenda queimada da fonte ('FINA...NTE', 'APO...AR', 'S...Z')."
+  },
+  {
+   "em": "2026-10-31T11:47",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro."
+   ],
+   "porque": "Repetido em 3 Shorts: sem-obra-843743 (q09 narra Mbappé com Bellingham em tela; q14 narra gesto com goleiro caído), sem-obra-488579 (q13 cita Real Madrid com Barcelona em tela) e sem-obra-bab5ba (q13 narra ataque com ovos estáticos)."
+  },
+  {
+   "em": "2026-10-31T12:55",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta)."
+   ],
+   "porque": "Em sem-obra-bd075c (q03.jpg) o roteiro narrou 'comia pimenta' enquanto o lobo devorava uma carcaça, e em sem-obra-f28742 (q08.jpg e q17.jpg) narrou 'cansado da construtora' e 'abro a porta' durante a avaliação de um cubo mágico por um robô."
+  },
+  {
+   "em": "2026-11-11T11:47",
+   "quem": "melhorador cw/claude-sonnet-5-5",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta)."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Em 1ª pessoa, só cite cargo, gênero ou parentesco do narrador se bater com o personagem do roteiro-base; na dúvida, narre a ação sem rótulo (profissão, 'marido', 'mãe')."
+   ],
+   "porque": "think q06 ('eu viro uma advogada' sobre homem de jaqueta) e q09 ('o próprio marido me contrata' sobre o homem errado); mesmo padrão de personagem trocado em 9d0daf q17 (card FUUKO sobre o Andy). Repete em 2 Shorts."
+  },
+  {
+   "em": "2026-11-11T12:54",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Em 1ª pessoa, só cite cargo, gênero ou parentesco do narrador se bater com o personagem do roteiro-base; na dúvida, narre a ação sem rótulo (profissão, 'marido', 'mãe')."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta)."
+   ],
+   "porque": "nota caiu 4.41 -> 3.67"
+  },
+  {
+   "em": "2026-11-11T12:59",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.78,
+   "depois": 0.8,
+   "porque": "Em questões-questionáveis-8_cap1_20261107 (q13 e q14) e the-incredible-power-of-damascus-steel_cap1_20261107 (q08), as legendas queimadas da fonte vazaram pelas laterais e bordas da área coberta."
+  },
+  {
+   "em": "2026-11-11T15:14",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.5,
+   "depois": 0.58,
+   "porque": "Em sem-obra-0c27d4_cap1_20261107 (q02, q03, q05) e sem-obra-9e94d9_cap1_20261107 (q01, q16), a cobertura delogo deixou letras e metades verticais da legenda original vazando; aumentar tarja_letra de 0.5 para 0.58 amplia a caixa de cobertura sobre as letras da fonte respeitando o tamanho da legenda."
+  },
+  {
+   "em": "2026-11-11T19:31",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta)."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Narre os fatos na ordem exata em que aparecem nos quadros e só nomeie espécie, objeto ou local se bater com o que está visível na tomada."
+   ],
+   "porque": "Em sem-obra-36a60f (q05.jpg, q06.jpg, q08.jpg, q16.jpg) o roteiro narra ações fora da ordem visual (videochamada/porão enquanto a tela mostra extração/rua de dia), e em sem-obra-4667a3 (q07.jpg, q10.jpg) descreve peixe Pintado (de couro) enquanto o vídeo exibe um Dourado de escamas."
+  },
+  {
+   "em": "2026-11-11T22:05",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Narre os fatos na ordem exata em que aparecem nos quadros e só nomeie espécie, objeto ou local se bater com o que está visível na tomada."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta)."
+   ],
+   "porque": "nota caiu 5.63 -> 4.10"
+  },
+  {
+   "em": "2026-11-11T22:05",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta)."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido."
+   ],
+   "porque": "Em sem-obra-66b167 (q01 e q02), o roteiro usou 'COM O PROTA', violando a regra fixa e gerando penalidade direta."
+  },
+  {
+   "em": "2026-11-12T00:27",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.58,
+   "depois": 0.62,
+   "porque": "Em sem-obra-4d4db7 (q01, q02, q15), sem-obra-66b167 (q03 'DESCOBRINDO', q08 'ASSUSTAR', q17 'CONCORDARAM'), sem-obra-0e3c03 (q01, q07, q09) e sem-obra-8d5a76 (q01, q05, q11, q17), a legenda queimada da fonte vazou e colidiu com a nossa legenda; elevar tarja_letra ao teto (0.62) amplia a altura da ca"
+  },
+  {
+   "em": "2026-11-12T21:08",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Proibido usar bordões de personagens ou desenhos ('Pelos poderes de Bright Moon', 'Moana de Motunui') na abertura: inicie direto no gancho factual da cena."
+   ],
+   "porque": "Repetido em 2 Shorts do lote: sem-obra-72412c_cap1_20261109 (q01.jpg) e how-does-a-snake-rattle-make-sound_cap1_20261109 (q01.jpg) abriram a narração com 'Pelos poderes de Bright Moon' (nota de história 2.0 e 3.0)."
+  },
+  {
+   "em": "2026-11-12T23:45",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
+    "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS')."
+   ],
+   "porque": "Em sem-obra-dc6f15_cap1_20261109 (q01, q07), o título exibido na tarja saiu com erro de digitação ('MULHRES') e erro de concordância ('FALTA HOMENS')."
+  },
+  {
+   "em": "2026-11-13T06:50",
+   "quem": "melhorador cw/claude-sonnet-5-5",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Proibido usar bordões de personagens ou desenhos ('Pelos poderes de Bright Moon', 'Moana de Motunui') na abertura: inicie direto no gancho factual da cena."
+   ],
+   "depois": [
+    "Confirme o gênero de cada personagem antes de narrar: nunca use pronomes ou adjetivos femininos para personagens masculinos nem vice-versa.",
+    "Não use 'o cara', 'a garota' ou adjetivos de gênero sem checar quem está na tomada; na dúvida entre cortes rápidos, use termos neutros sem flexão de gênero.",
+    "Narre só o que o roteiro-base e a imagem sustentam: nunca inclua instruções, pedidos ao usuário nem texto de prompt ('envie a transcrição', 'estilo do...') na narração.",
+    "Escreva em português padrão com ortografia e acentuação corretas: nunca invente acentos ('reconhecér', 'aqûele') nem use termos sem sentido ou de duplo sentido ('pica-instrumento').",
+    "Comece direto no gancho da cena: nunca inclua saudações ('Salve rapaziada', 'Fala galera'), nomes de canais/criadores ('Poucas Trancas') ou bordões estranhos ('Moana de Motunui') no roteiro.",
+    "Não cite nome de atleta, gesto específico ou ataque se a tomada mostrar apenas cenário parado ou outro jogador: descreva só o que está visível no quadro.",
+    "Corrija palavras sem sentido vindas de erro de transcrição pelo contexto visual: nunca narre termos absurdos para a cena ('lobo comendo pimenta', 'cansado da construtora', 'abro a porta' sem porta).",
+    "Nunca use a gíria 'prota' nem o termo 'protagonista' na narração: refira-se ao personagem pelo papel na cena ou narre direto em 1ª pessoa quando exigido.",
+    "Proibido usar bordões de personagens ou desenhos ('Pelos poderes de Bright Moon', 'Moana de Motunui') na abertura: inicie direto no gancho factual da cena.",
+    "Escreva a narração só em português, sem palavras em inglês nem adesivos soltos ('BIRDS', 'LOCAL MUN', 'VITÓRIA'); cada frase curta e completa, para a legenda sair limpa."
+   ],
+   "porque": "Palavras em inglês e termos soltos viraram legenda/sticker em 3 Shorts: eb6c7b q05 ('BIRDS'), 7f259b q06/q13 ('LOCAL MUN', 'A GALERA'), a96e79 q14/q15 ('VITÓRIA! VENCEU'). A legenda é o texto do roteiro."
+  }
+ ],
+ "cobertura_legenda": "delogo",
+ "legenda_impacto": "lateral",
+ "texto_video_modelo": "gemini-4-argon",
+ "texto_video_reserva": "agy/gemini-3.8-flash-high",
+ "texto_video_timeout_s": 120,
+ "gancho_remotion": "ab",
+ "gancho_meio": "ab",
+ "fx_choque": "ab",
+ "mascote": "ab",
+ "curto": "ab",
+ "fala_rapida": "ab",
+ "fala_delta": 15,
+ "saudacao": "ab",
+ "ninguem_esperava": "ab",
+ "horario_fraco": "ab",
+ "_variantes": "30/10: testes A/B/C/D… pelo bin\\variantes.py. Valor \"ab\"/\"abc\"/\"abcd\" ou lista [\"x\",\"y\",\"z\"] = teste com N braços (sorteio estável md5 por vídeo); valor fixo (\"A\", \"B\", \"lateral\"…) = sem teste. Placar: bin\\placar_variantes.py -> D:\\video-fila\\linhas\\CORTES\\placar_cortes_testes.json/.md. Decidir só pela régua D1/D3 do FABLE_DECISOES.md, nunca pelo júri."
+}

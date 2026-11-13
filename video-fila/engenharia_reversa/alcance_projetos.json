@@ -1,0 +1,267 @@
+{
+ "n": 542,
+ "projetos": {
+  "parceiro/short": {
+   "n": 333,
+   "mediana": 5.0,
+   "media": 358,
+   "faixas": [
+    66,
+    132,
+    31,
+    23,
+    76,
+    5
+   ],
+   "pct500": 0.24,
+   "horas_top": [
+    [
+     23,
+     0.44,
+     9
+    ],
+    [
+     22,
+     0.43,
+     23
+    ],
+    [
+     8,
+     0.38,
+     13
+    ]
+   ],
+   "horas_piores": [
+    [
+     15,
+     0.06,
+     17
+    ],
+    [
+     3,
+     0.0,
+     9
+    ],
+    [
+     6,
+     0.0,
+     10
+    ]
+   ],
+   "fonte_unica": [
+    224,
+    8.0
+   ],
+   "fonte_repetida": [
+    109,
+    1.0
+   ]
+  },
+  "None/None": {
+   "n": 128,
+   "mediana": 1.0,
+   "media": 180,
+   "faixas": [
+    58,
+    38,
+    12,
+    3,
+    16,
+    1
+   ],
+   "pct500": 0.13,
+   "horas_top": [
+    [
+     17,
+     0.33,
+     6
+    ],
+    [
+     22,
+     0.33,
+     6
+    ],
+    [
+     19,
+     0.3,
+     10
+    ]
+   ],
+   "horas_piores": [
+    [
+     8,
+     0.0,
+     6
+    ],
+    [
+     10,
+     0.0,
+     8
+    ],
+    [
+     7,
+     0.0,
+     5
+    ]
+   ],
+   "fonte_unica": [
+    0,
+    null
+   ],
+   "fonte_repetida": [
+    0,
+    null
+   ]
+  },
+  "hipercool/short": {
+   "n": 37,
+   "mediana": 2.0,
+   "media": 2,
+   "faixas": [
+    5,
+    32,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pct500": 0.0,
+   "horas_top": [
+    [
+     14,
+     0.0,
+     5
+    ],
+    [
+     13,
+     0.0,
+     6
+    ],
+    [
+     12,
+     0.0,
+     8
+    ]
+   ],
+   "horas_piores": [
+    [
+     14,
+     0.0,
+     5
+    ],
+    [
+     13,
+     0.0,
+     6
+    ],
+    [
+     12,
+     0.0,
+     8
+    ]
+   ],
+   "fonte_unica": [
+    0,
+    null
+   ],
+   "fonte_repetida": [
+    0,
+    null
+   ]
+  },
+  "manhwa-react/veo": {
+   "n": 27,
+   "mediana": 5.0,
+   "media": 476,
+   "faixas": [
+    2,
+    12,
+    9,
+    2,
+    1,
+    1
+   ],
+   "pct500": 0.07,
+   "horas_top": [
+    [
+     9,
+     0.13,
+     15
+    ],
+    [
+     15,
+     0.0,
+     7
+    ]
+   ],
+   "horas_piores": [
+    [
+     9,
+     0.13,
+     15
+    ],
+    [
+     15,
+     0.0,
+     7
+    ]
+   ],
+   "fonte_unica": [
+    0,
+    null
+   ],
+   "fonte_repetida": [
+    0,
+    null
+   ]
+  },
+  "hipercool/completo": {
+   "n": 14,
+   "mediana": 1.5,
+   "media": 2,
+   "faixas": [
+    5,
+    9,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pct500": 0.0,
+   "horas_top": [],
+   "horas_piores": [],
+   "fonte_unica": [
+    0,
+    null
+   ],
+   "fonte_repetida": [
+    0,
+    null
+   ]
+  },
+  "parceiro/completo": {
+   "n": 3,
+   "mediana": 9.0,
+   "media": 9,
+   "faixas": [
+    0,
+    2,
+    1,
+    0,
+    0,
+    0
+   ],
+   "pct500": 0.0,
+   "horas_top": [],
+   "horas_piores": [],
+   "fonte_unica": [
+    0,
+    null
+   ],
+   "fonte_repetida": [
+    0,
+    null
+   ]
+  }
+ }
+}

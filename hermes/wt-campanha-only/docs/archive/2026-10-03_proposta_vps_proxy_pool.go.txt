@@ -1,0 +1,186 @@
+//go:build ignore
+
+// FORA DO BUILD (revisão de 03/10): proposta de outro agente pra mandar a IA da LIGAÇÃO
+// (Groq) pelas outras VPS. Não entra porque: (1) a medição da própria produção mostrou que
+// cada salto soma ~0,11 s (conexão reaproveitada) a 0,5 s (conexão nova) em toda fala;
+// (2) o limite do Groq é por conta/chave, não por IP; (3) usava a VPS 209, que foi invadida,
+// e exigia Squid aberto entre as VPS (inclusive na produção compartilhada). A dona decide
+// depois de medir; a ligação hoje tem reserva no OpenRouter (mesmo modelo).
+
+package main
+
+// vps_proxy_pool.go — Proxy pool otimizado por VPS baseado em latência (03/10/2026).
+//
+// Cada VPS tem sua própria configuração de proxies baseada nos testes de latência:
+//
+// VPS 241 (62.171.128.241):
+//   - Chamadas diretas: 33%
+//   - Via VPS 53 (209.145.60.53): 33%
+//   - Via VPS 22 (157.173.207.22): 33%
+//   Latência: direto 0.341s, via 53 +0.511s, via 22 +0.427s
+//
+// VPS 53 (209.145.60.53):
+//   - Chamadas diretas: 50%
+//   - Via VPS 22 (157.173.207.22): 50%
+//   Latência: direto 0.266s (melhor), via 22 +0.065s
+//
+// VPS 22 (157.173.207.22):
+//   - Chamadas diretas: 50%
+//   - Via VPS 53 (209.145.60.53): 50%
+//   Latência: direto 0.312s, via 53 -0.063s (MELHORA!)
+//
+// VPS 241 não é usada como proxy pois sempre piora (VPS3 como proxy sempre piora).
+
+import (
+	"net/http"
+	"net/url"
+	"os"
+	"strings"
+	"sync/atomic"
+	"time"
+)
+
+// vpsProxyConfig define os proxies disponíveis para cada VPS.
+type vpsProxyConfig struct {
+	vpsID       string   // IP da VPS atual
+	proxyURLs   []string // Lista de proxies HTTP para esta VPS (vazio = sem proxy)
+	directRatio float64  // % de chamadas diretas (0-1)
+}
+
+var (
+	currentVPSIP     string
+	vpsProxySettings *vpsProxyConfig
+	vpsProxyCounter  atomic.Uint32
+)
+
+// initVPSProxyPool detecta a VPS atual e configura os proxies apropriados.
+func initVPSProxyPool() {
+	// Detecta IP da VPS atual via env ou consulta externa
+	currentVPSIP = detectCurrentVPSIP()
+
+	switch currentVPSIP {
+	case "62.171.128.241":
+		// VPS 241: usa VPS 53 e VPS 22 como proxies (divide em 3: 33% direto, 33% via 53, 33% via 22)
+		vpsProxySettings = &vpsProxyConfig{
+			vpsID: "241",
+			proxyURLs: []string{
+				"http://209.145.60.53:3128", // VPS 53
+				"http://157.173.207.22:3128", // VPS 22
+			},
+			directRatio: 0.33,
+		}
+
+	case "209.145.60.53":
+		// VPS 53: usa APENAS VPS 22 como proxy (divide em 2: 50% direto, 50% via 22)
+		vpsProxySettings = &vpsProxyConfig{
+			vpsID: "53",
+			proxyURLs: []string{
+				"http://157.173.207.22:3128", // VPS 22
+			},
+			directRatio: 0.50,
+		}
+
+	case "157.173.207.22":
+		// VPS 22: usa VPS 53 como proxy (divide em 2: 50% direto, 50% via 53 - MELHORA latência!)
+		vpsProxySettings = &vpsProxyConfig{
+			vpsID: "22",
+			proxyURLs: []string{
+				"http://209.145.60.53:3128", // VPS 53
+			},
+			directRatio: 0.50,
+		}
+
+	default:
+		// Desenvolvimento local ou VPS desconhecida: sem proxy
+		vpsProxySettings = &vpsProxyConfig{
+			vpsID:       "unknown",
+			proxyURLs:   []string{},
+			directRatio: 1.0,
+		}
+	}
+}
+
+// detectCurrentVPSIP retorna o IP público da VPS atual.
+func detectCurrentVPSIP() string {
+	// 1. Tenta via env var
+	if ip := os.Getenv("HERMES_VPS_IP"); ip != "" {
+		return ip
+	}
+
+	// 2. Tenta consultar serviço externo (com timeout curto)
+	client := &http.Client{Timeout: 2 * time.Second}
+	resp, err := client.Get("https://api.ipify.org?format=text")
+	if err == nil {
+		defer resp.Body.Close()
+		var buf [64]byte
+		n, _ := resp.Body.Read(buf[:])
+		if n > 0 {
+			return strings.TrimSpace(string(buf[:n]))
+		}
+	}
+
+	// 3. Fallback: assume desenvolvimento local
+	return "localhost"
+}
+
+// getVPSProxyHTTPClient retorna um http.Client configurado para Groq com o proxy apropriado.
+// Usa round-robin entre chamadas diretas e proxies baseado no directRatio.
+func getVPSProxyHTTPClient(timeout time.Duration, forGroq bool) *http.Client {
+	// Só usa proxy VPS para Groq
+	if !forGroq || vpsProxySettings == nil || len(vpsProxySettings.proxyURLs) == 0 {
+		return &http.Client{Timeout: timeout}
+	}
+
+	// Round-robin: a cada N chamadas, usa proxy
+	counter := vpsProxyCounter.Add(1)
+	totalSlots := len(vpsProxySettings.proxyURLs) + 1 // +1 para chamada direta
+
+	// Calcula quantos slots são diretos
+	directSlots := int(float64(totalSlots) * vpsProxySettings.directRatio)
+	if directSlots < 1 {
+		directSlots = 1
+	}
+
+	currentSlot := int(counter % uint32(totalSlots))
+
+	// Se estamos nos slots diretos, retorna sem proxy
+	if currentSlot < directSlots {
+		return &http.Client{Timeout: timeout}
+	}
+
+	// Caso contrário, usa um dos proxies
+	proxyIndex := (currentSlot - directSlots) % len(vpsProxySettings.proxyURLs)
+	proxyURL := vpsProxySettings.proxyURLs[proxyIndex]
+
+	return newHTTPClientWithVPSProxy(proxyURL, timeout)
+}
+
+// newHTTPClientWithVPSProxy cria um http.Client com proxy específico para VPS.
+func newHTTPClientWithVPSProxy(proxyURL string, timeout time.Duration) *http.Client {
+	proxyFunc := func(req *http.Request) (*url.URL, error) {
+		return url.Parse(proxyURL)
+	}
+
+	transport := &http.Transport{
+		Proxy:               proxyFunc,
+		MaxIdleConns:        100,
+		MaxIdleConnsPerHost: 10,
+		IdleConnTimeout:     90 * time.Second,
+	}
+
+	return &http.Client{
+		Transport: transport,
+		Timeout:   timeout,
+	}
+}
+
+// isGroqProvider verifica se o provider é Groq (baseado em provider string ou URL).
+func isGroqProvider(provider, baseURL string) bool {
+	p := strings.ToLower(strings.TrimSpace(provider))
+	if p == "groq" {
+		return true
+	}
+
+	b := strings.ToLower(strings.TrimSpace(baseURL))
+	return strings.Contains(b, "groq.com")
+}

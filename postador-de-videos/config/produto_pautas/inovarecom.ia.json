@@ -1,0 +1,102 @@
+{
+ "pautas": [
+  {
+   "id": "lead_frio_parado",
+   "tipo": "dor",
+   "ideia": "Sua equipe não dá conta de ligar para os contatos parados na base, então o Hermes Call faz ligações em massa pelo WhatsApp com voz real para reativar esses clientes.",
+   "pergunta_cliente": "Como faço para falar por ligação com os contatos antigos pelo WhatsApp?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "medo_voz_robotica",
+   "tipo": "objecao",
+   "ideia": "Donos de empresa acham que voz de robô espanta clientes, mas o Hermes Call utiliza voz real ou clonada nas ligações de WhatsApp.",
+   "pergunta_cliente": "A voz da ligação parece um robô ou parece uma pessoa de verdade?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "ligacao_em_escala",
+   "tipo": "como_funciona",
+   "ideia": "O Hermes Call conecta na sua base e dispara quantas ligações automáticas pelo WhatsApp você precisar sem depender de aumentar a equipe.",
+   "pergunta_cliente": "Consigo ligar para muitas pessoas ao mesmo tempo pelo WhatsApp?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "gargalo_equipe_vendas",
+   "tipo": "antes_depois",
+   "ideia": "Antes os vendedores perdiam o dia discando manualmente para leads frios, agora o Hermes Call liga automaticamente pelo WhatsApp e qualifica os clientes.",
+   "pergunta_cliente": "Como tirar a tarefa manual de discagem da minha equipe de vendas?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "duvida_clonagem_voz",
+   "tipo": "pergunta_frequente",
+   "ideia": "Empresários querem saber se a IA soa como a própria empresa, e o Hermes Call permite usar voz clonada nas chamadas do WhatsApp.",
+   "pergunta_cliente": "Posso usar a minha própria voz para a inteligência artificial ligar?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "demora_primeiro_contato",
+   "tipo": "dor",
+   "ideia": "O lead pede contato mas esfria antes de alguém responder por texto, enquanto o Hermes Call já inicia uma ligação imediata de WhatsApp com IA.",
+   "pergunta_cliente": "Como ligar na hora para quem acabou de pedir contato?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "duvida_canal_ligacao",
+   "tipo": "pergunta_frequente",
+   "ideia": "Muitos acham que são ligações telefônicas comuns, mas o Hermes Call opera fazendo chamadas de voz diretamente pelo WhatsApp.",
+   "pergunta_cliente": "A ligação toca no WhatsApp do cliente ou no chip do telefone?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "medo_configuracao_complexa",
+   "tipo": "objecao",
+   "ideia": "Gestores temem que configurar chamadas com IA seja inviável, mas o Hermes Call centraliza ligações e atendimento no WhatsApp de forma escalável.",
+   "pergunta_cliente": "É difícil colocar essa inteligência artificial para ligar pelo WhatsApp?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "recuperacao_orcamentos",
+   "tipo": "caso_de_uso",
+   "ideia": "Orçamentos enviados ficam sem resposta no chat, e o Hermes Call faz chamadas pelo WhatsApp com voz real para retomar a conversa com o cliente.",
+   "pergunta_cliente": "Dá para ligar pelo WhatsApp para quem visualizou a proposta e sumiu?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "leads_sem_resposta_texto",
+   "tipo": "dor",
+   "ideia": "Mensagens de texto são ignoradas no WhatsApp, mas as ligações automáticas do Hermes Call com voz real chamam a atenção do cliente.",
+   "pergunta_cliente": "O que fazer quando o cliente não responde minhas mensagens de texto no WhatsApp?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "escala_sem_limites",
+   "tipo": "como_funciona",
+   "ideia": "A operação de vendas cresce sem gargalo humano, pois o Hermes Call escala quantas ligações pelo WhatsApp você precisar.",
+   "pergunta_cliente": "Existe limite de quantas ligações pelo WhatsApp posso disparar?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "humanizacao_com_ia",
+   "tipo": "objecao",
+   "ideia": "Achar que a IA não passa confiança na chamada é superado pela voz clonada e natural que o Hermes Call usa no WhatsApp.",
+   "pergunta_cliente": "O cliente vai perceber na ligação que está falando com uma IA?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "rotina_equipe_sobrecarregada",
+   "tipo": "antes_depois",
+   "ideia": "Antes o time de vendas se esgotava tentando ligar para listas enormes, agora o bot do Hermes Call faz as ligações em massa pelo WhatsApp.",
+   "pergunta_cliente": "Como automatizar as ligações de WhatsApp para desafogar meus vendedores?",
+   "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "padrao_atendimento_voz",
+   "tipo": "caso_de_uso",
+   "ideia": "Manter a voz da marca constante em todas as abordagens é possível usando o recurso de voz clonada do Hermes Call em ligações no WhatsApp.",
+   "pergunta_cliente": "Posso padronizar a mesma voz em todas as ligações de WhatsApp da minha empresa?",
+   "criada": "2026-10-25T11:04:54"
+  }
+ ]
+}

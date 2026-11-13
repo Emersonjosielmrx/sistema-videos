@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Editor de Reels com IA</title><meta name="robots" content="noindex">
+<style>
+:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}
+:root[data-theme="dark"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}
+*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}
+.w{max-width:760px;margin:0 auto}h1{font-size:28px;line-height:1.2}.sub{color:var(--tx2);margin-top:6px}
+.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-top:16px}.card h2{font-size:17px;margin-bottom:6px}
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.passos div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:13px;color:var(--tx2)}.passos b{display:block;color:var(--tx)}
+.drop{border:2px dashed var(--borda);border-radius:14px;padding:26px 16px;text-align:center;cursor:pointer;color:var(--tx2);margin-top:12px}
+.drop.on{border-color:var(--pri);background:var(--cod)}.drop b{color:var(--tx);display:block;font-size:16px;margin-bottom:2px}
+video{width:100%;max-height:360px;border-radius:12px;background:#000;margin-top:12px;display:block}
+.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:10px}.barra i{display:block;height:100%;width:0;background:var(--pri);transition:width .3s}
+label{display:block;font-weight:600;font-size:14px;margin-top:12px}label small{font-weight:400;color:var(--mu)}
+select,input[type=text],textarea{width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}
+textarea{min-height:90px;resize:vertical}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.chks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.chks label{margin:0;font-weight:500;display:flex;gap:8px;align-items:flex-start;background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:10px}
+.chks label input{margin-top:4px}.chks small{display:block;color:var(--mu);font-weight:400}
+.corlinha{display:flex;gap:10px;align-items:center;margin-top:6px}.corlinha input[type=color]{width:52px;height:40px;border:1px solid var(--borda);border-radius:10px;background:none;padding:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px 20px;border-radius:14px;cursor:pointer}
+.btn.sec{background:var(--sup);color:var(--tx);border:1px solid var(--borda);font-size:14px;padding:9px 14px}
+.btn[disabled]{opacity:.5;cursor:default}
+.erro{color:var(--er);font-weight:600;margin-top:12px}.ok{color:var(--ok);font-weight:600}
+@media(max-width:600px){.duas,.chks,.passos{grid-template-columns:1fr}}
+</style></head><body><div class="w">
+<h1>✂️ Editor de Reels com IA</h1>
+<p class="sub">Mande o <b>vídeo que você gravou</b> (falando do seu produto ou serviço) e a IA devolve um <b>Reel pronto para o Instagram</b>: corta as pausas e os "né", "é", "tipo", põe <b>legenda animada</b> com a palavra falada acesa, <b>frase de impacto</b> no topo, <b>tópicos</b>, trilha baixinha e o seu <b>@ no final</b>.</p>
+<div class="passos"><div><b>1. Grave</b>em pé, falando, até 1min30</div><div><b>2. Envie</b>e conte o que é</div><div><b>3. A IA edita</b>uns 2 minutos</div><div><b>4. Poste</b>vídeo + legenda prontos</div></div>
+
+<div class="card"><h2>1. O vídeo</h2>
+  <p class="sub">MP4 ou MOV do celular, até 120 MB. Grave em pé (9:16); se for deitado, a IA põe em pé com fundo desfocado.</p>
+  <div><button class="btn sec" type="button" id="ex">🎬 Usar vídeo de exemplo</button></div>
+  <div class="drop" id="drop"><b>📤 Toque para escolher o vídeo</b>ou arraste aqui</div>
+  <input type="file" id="arq" accept="video/*" hidden>
+  <video id="prev" controls playsinline hidden></video>
+  <div class="barra" id="barra" hidden><i></i></div>
+  <p class="sub" id="info">Nenhum vídeo ainda.</p>
+</div>
+
+<form class="card" id="form"><h2>2. Sobre o vídeo</h2>
+  <div class="duas">
+    <div><label for="tipo">Tipo</label><select id="tipo"><option value="imovel">🏠 Imóvel</option><option value="produto" selected>🛍️ Produto</option><option value="comida">🍔 Restaurante / comida</option><option value="veiculo">🚗 Carro ou moto</option><option value="servico">🧰 Serviço</option><option value="evento">🎉 Evento</option><option value="outro">✨ Outro</option></select></div>
+    <div><label for="marca">Nome do negócio <small>(vai no final)</small></label><input type="text" id="marca" maxlength="50" placeholder="Ex.: Imobiliária Vista Alta"></div>
+  </div>
+  <label for="titulo">O que aparece no vídeo *</label><input type="text" id="titulo" maxlength="90" placeholder="Ex.: Apartamento 3 quartos com varanda" required>
+  <label for="detalhes">Detalhes <small>(opcional: ajuda a IA a escrever a legenda do post)</small></label><textarea id="detalhes" maxlength="1000"></textarea>
+  <div class="duas">
+    <div><label for="instagram">Instagram</label><input type="text" id="instagram" placeholder="@seunegocio"></div>
+    <div><label for="trilha">Trilha</label><select id="trilha"><option value="auto">🤖 A IA escolhe</option><option value="nenhuma">🔇 Sem trilha</option><option value="elegante">✨ Elegante</option><option value="animado">🎉 Animado</option><option value="urgente">⚡ Urgente</option><option value="emocional">💛 Emocional</option><option value="calmo">🌿 Calmo</option><option value="tropical">🌴 Tropical</option><option value="latino">💃 Latino</option><option value="chill">😎 Chill</option></select></div>
+  </div>
+  <label>Cor de destaque <small>(topo, palavra acesa, cartão)</small></label><div class="corlinha"><input type="color" id="cor" value="#c9a227"><label style="margin:0;font-weight:500"><input type="checkbox" id="cor-ia" checked> a IA escolhe</label></div>
+  <div class="chks">
+    <label><input type="checkbox" id="cortar_pausas" checked><span>Cortar as pausas<small>silêncio maior que meio segundo</small></span></label>
+    <label><input type="checkbox" id="cortar_vicios" checked><span>Cortar os vícios<small>"né", "é", "ãh", "tipo"...</small></span></label>
+    <label><input type="checkbox" id="legendas" checked><span>Legenda animada<small>a palavra falada acende</small></span></label>
+    <label><input type="checkbox" id="cartao_final" checked><span>Cartão final<small>marca, chamada e @</small></span></label>
+  </div>
+  <p class="erro" id="erro" role="alert"></p>
+  <button class="btn" type="submit" id="enviar" style="width:100%;margin-top:16px">✂️ Editar o meu Reel</button>
+</form></div>
+<script>
+(function () {
+  var el = function (s) { return document.querySelector(s); };
+  var VIDEO = '', enviando = false;
+  function envia(arq) {
+    if (arq.size > 120e6) { el('#info').textContent = '⚠️ Vídeo maior que 120 MB.'; return; }
+    el('#prev').src = URL.createObjectURL(arq); el('#prev').hidden = false;
+    var fd = new FormData(); fd.append('video', arq, arq.name || 'video.mp4');
+    var x = new XMLHttpRequest(); x.open('POST', 'editor-reel-video');
+    enviando = true; VIDEO = ''; el('#barra').hidden = false; el('#info').textContent = 'Enviando…';
+    x.upload.onprogress = function (e) { if (e.lengthComputable) { var p = Math.round(e.loaded / e.total * 100); el('#barra i').style.width = p + '%'; el('#info').textContent = 'Enviando ' + p + '%' + (p === 100 ? ' · guardando…' : ''); } };
+    x.onload = function () { enviando = false; var r = {}; try { r = JSON.parse(x.responseText); } catch (e) {}
+      if (x.status === 200 && r.ok) { VIDEO = r.id; el('#info').innerHTML = '<span class="ok">✅ Vídeo pronto para editar</span> (' + Math.round(arq.size / 1e6) + ' MB)'; }
+      else el('#info').textContent = '⚠️ ' + (r.erro || 'não deu para enviar'); };
+    x.onerror = function () { enviando = false; el('#info').textContent = '⚠️ falha de conexão'; };
+    x.send(fd);
+  }
+  var drop = el('#drop'), inp = el('#arq');
+  drop.addEventListener('click', function () { inp.click(); });
+  ['dragover', 'dragenter'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('on'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });
+  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files.length) envia(e.dataTransfer.files[0]); });
+  inp.addEventListener('change', function () { if (inp.files.length) envia(inp.files[0]); inp.value = ''; });
+  el('#ex').addEventListener('click', function () {
+    VIDEO = 'exemplo'; el('#prev').src = '__EXEMPLO__'; el('#prev').hidden = false; el('#barra').hidden = true;
+    el('#info').innerHTML = '<span class="ok">✅ Vídeo de exemplo</span> (40 s com pausas e "né, é" para cortar)';
+    el('#tipo').value = 'imovel'; el('#marca').value = 'Vista Alta Imóveis'; el('#titulo').value = 'Apartamento 3 quartos com varanda gourmet';
+    el('#instagram').value = '@vistaalta.imoveis'; el('#detalhes').value = '3 quartos (1 suíte), sala ampla com janelas do chão ao teto, varanda gourmet com churrasqueira e vista para a cidade.';
+  });
+  el('#form').addEventListener('submit', function (e) {
+    e.preventDefault(); el('#erro').textContent = '';
+    if (enviando) { el('#erro').textContent = 'Espere o vídeo terminar de enviar.'; return; }
+    if (!VIDEO) { el('#erro').textContent = 'Envie o vídeo (ou use o exemplo).'; return; }
+    var d = { video: VIDEO };
+    ['tipo', 'marca', 'titulo', 'detalhes', 'instagram', 'trilha'].forEach(function (c) { d[c] = el('#' + c).value; });
+    ['cortar_pausas', 'cortar_vicios', 'legendas', 'cartao_final'].forEach(function (c) { d[c] = el('#' + c).checked; });
+    if (!el('#cor-ia').checked) d.cor = el('#cor').value;
+    var bt = el('#enviar'); bt.disabled = true; bt.textContent = 'Começando…';
+    fetch('editor-reel', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r.ok) { el('#erro').textContent = (r.erros || ['Não deu para começar.']).join(' '); bt.disabled = false; bt.textContent = '✂️ Editar o meu Reel'; return; }
+      location.href = r.link;
+    }).catch(function () { el('#erro').textContent = 'Falha de conexão.'; bt.disabled = false; bt.textContent = '✂️ Editar o meu Reel'; });
+  });
+})();
+</script></body></html>

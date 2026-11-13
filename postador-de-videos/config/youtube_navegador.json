@@ -1,0 +1,655 @@
+{
+  "canais": {
+    "manhwareact": {
+      "usar": true,
+      "nome": "ManhwaReact",
+      "handle": "@manhwareact-ia",
+      "creds": [
+        "novo_manhwareact_ia",
+        "novo_mente_artificial_i5r"
+      ],
+      "email": "emersonjosiel2032@gmail.com",
+      "perfil": "yt_manhwareact",
+      "perfil_existe": false,
+      "porta": 9400,
+      "channel_id": "UC5Za1hPxak0iufFcJ4UsK9w",
+      "_mudado_em": "2026-10-16: o dono mandou parar de postar por API neste canal (8 uploads por API em 16/10, todos dele)",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2032"
+    },
+    "animescomia": {
+      "usar": true,
+      "nome": "Animescomia",
+      "handle": "@animescomia",
+      "creds": [
+        "KOpyXE9rBy1YirlZ"
+      ],
+      "email": "canalanimescomia@gmail.com",
+      "perfil": "yt_animescomia",
+      "perfil_existe": false,
+      "porta": 9401,
+      "channel_id": "UCRrz2BKdhCzy1-nAAs2E8bg",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "canalanimescomia"
+    },
+    "inovaremanhwabr": {
+      "usar": true,
+      "nome": "inovare manhwa br",
+      "handle": "@inovaremanhwabr",
+      "creds": [
+        "hNQrW5ouNe0Ni5Me"
+      ],
+      "email": "inovaremanhwabr@gmail.com",
+      "perfil": "inovaremanhwabr",
+      "perfil_existe": true,
+      "porta": 9402,
+      "channel_id": "UCZfQc_UIPRzU35GEjfTMCGA",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwabr"
+    },
+    "cenareact": {
+      "usar": true,
+      "nome": "CenaReact",
+      "handle": "@cenareact-f3j",
+      "creds": [
+        "novo_universo_ia_d6s"
+      ],
+      "email": "emersonjosiel2029@gmail.com",
+      "perfil": "yt_cenareact",
+      "perfil_existe": false,
+      "porta": 9403,
+      "channel_id": "UCrYkau_YGtx8C29qnF9xSYQ",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2029"
+    },
+    "inventoreact": {
+      "usar": true,
+      "nome": "InventoReact",
+      "handle": "@inventoreact",
+      "creds": [
+        "novo_ia_agora_h3n"
+      ],
+      "email": "emersonjosiel2026@gmail.com",
+      "perfil": "emersonjosiel2026",
+      "perfil_existe": true,
+      "porta": 9404,
+      "channel_id": "UClN7sup9FM11tMM1UxXBwOQ",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2026"
+    },
+    "cartuchoreact": {
+      "usar": true,
+      "nome": "CartuchoReact",
+      "handle": "@cartuchoreact",
+      "creds": [
+        "novo_cartuchoreact",
+        "novo_ia_sem_limites_h4b"
+      ],
+      "email": "emersonjosiel2030@gmail.com",
+      "perfil": "yt_cartuchoreact",
+      "perfil_existe": false,
+      "porta": 9405,
+      "channel_id": "UCrskUXOpfPUkSY3HMT2c7_A",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2030"
+    },
+    "forjareact": {
+      "usar": true,
+      "nome": "ForjaReact",
+      "handle": "@forjareact",
+      "creds": [
+        "novo_forjareact"
+      ],
+      "email": "emersonjosiel0@gmail.com",
+      "perfil": "yt_forjareact",
+      "perfil_existe": false,
+      "porta": 9406,
+      "channel_id": "UCab6vzKMQam-5ovJ9H58IuQ",
+      "maquina": [
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel0"
+    },
+    "mundoquenaoexiste": {
+      "usar": true,
+      "nome": "Mundo Que Nao Existe",
+      "handle": "@mundoquenaoexiste",
+      "creds": [
+        "novo_mundoquenaoexiste"
+      ],
+      "email": "rezaulkarimul355@gmail.com",
+      "perfil": "yt_mundoquenaoexiste",
+      "perfil_existe": false,
+      "porta": 9407,
+      "channel_id": "UCPTjuCzT0k82K9sE5KXdSIw",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "rezaulkarimul355"
+    },
+    "historiasemframes": {
+      "usar": true,
+      "nome": "HistoriasEmFrames",
+      "handle": "@historiasemframes-emerson",
+      "creds": [
+        "novo_historias_em_frames",
+        "novo_ia_agora_n7h"
+      ],
+      "email": "emersonjosiel2027@gmail.com",
+      "perfil": "yt_historiasemframes",
+      "perfil_existe": false,
+      "porta": 9408,
+      "channel_id": "UCIFvn2aqdrv8X-LYscTyjjA",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2027"
+    },
+    "fiodameada": {
+      "usar": true,
+      "nome": "Fio da Meada",
+      "handle": "@codigointeligente-n7j",
+      "creds": [
+        "novo_codigo_inteligente_n7j"
+      ],
+      "email": "emersonjosiel2031@gmail.com",
+      "perfil": "yt_fiodameada",
+      "perfil_existe": false,
+      "porta": 9409,
+      "channel_id": "UCh-REEcJ9Jt1lCvTr6Sdu8Q",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2031"
+    },
+    "assistiainvestimentos": {
+      "usar": true,
+      "nome": "Assist-IA Investimentos",
+      "handle": "@assistiainvestimentos",
+      "creds": [
+        "novo_assistiainvestimentos"
+      ],
+      "email": "emersonjosiel2033@gmail.com",
+      "perfil": "yt_assistiainvestimentos",
+      "perfil_existe": false,
+      "porta": 9410,
+      "channel_id": "UCDkimm8rTPj8u5qKd-es3dA",
+      "maquina": [
+        "pc2"
+      ],
+      "perfil_remoto": "emersonjosiel2033"
+    },
+    "dicasfinanceirasdaia": {
+      "usar": true,
+      "nome": "Plantão das Histórias",
+      "nome_antigo": "Dicas financeiras da ia",
+      "handle": "@dicasfinanceirasdaia",
+      "creds": [
+        "novo_dicasfinanceirasdaia"
+      ],
+      "email": "empressinovare@gmail.com",
+      "perfil": "empressinovare",
+      "perfil_existe": true,
+      "porta": 9411,
+      "channel_id": "UC0dFPL0BhYnpfmXK-qN3hPw",
+      "maquina": [
+        "pc2"
+      ],
+      "perfil_remoto": "empressinovare"
+    },
+    "inovare_french": {
+      "usar": true,
+      "nome": "inovare Manhwa french",
+      "handle": "@inovaremanhwafrench",
+      "creds": [
+        "GG97QQt8lmyv0dDG"
+      ],
+      "email": "inovaremanhwaversefrench@gmail.com",
+      "perfil": "inovaremanhwaversefrench",
+      "perfil_existe": true,
+      "porta": 9412,
+      "channel_id": "UCRxr-mCIY4gZbgFLx0IR-eg",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaversefrench"
+    },
+    "inovare_hindi": {
+      "usar": true,
+      "nome": "Inovaremanhwaversehindi",
+      "handle": "@inovaremanhwaversehindi",
+      "creds": [
+        "GtuH5ezUK8eBaC60"
+      ],
+      "email": "inovaremanhwaversehindi@gmail.com",
+      "perfil": "inovaremanhwaversehindi",
+      "perfil_existe": true,
+      "porta": 9413,
+      "channel_id": "UCj3Wg1ubA13WKoOCDoDrO1A",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaversehindi"
+    },
+    "inovare_ind": {
+      "usar": true,
+      "nome": "Inovare Manga ind",
+      "handle": "@inovaremanhwaverseind",
+      "creds": [
+        "nYsAKUb3DbR1QOEm"
+      ],
+      "email": "inovaremanhwaverseind@gmail.com",
+      "perfil": "inovaremanhwaverseind",
+      "perfil_existe": true,
+      "porta": 9414,
+      "channel_id": "UCQj00Ic_N20yJp6eqSmIkXw",
+      "nota": "13/10: so pelo navegador (decisao do dono). Conta inovaremanhwaverseind@gmail.com sem login no cofre: ate logar (python D:\\logins-google\\cofre.py logar <conta>) o upload falha como 'morto'. A conta inovaremanhwaverse@gmail.com NAO tem acesso a este canal (Studio: sem permissao).",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverseind"
+    },
+    "inovare_eng": {
+      "usar": true,
+      "nome": "Inovare Manhwa eng",
+      "handle": "@inovaremanhwaverseeng",
+      "creds": [
+        "UYjkdFO3V3kjmKU5"
+      ],
+      "email": "inovaremanhwaverseing@gmail.com",
+      "perfil": "inovaremanhwaverseing",
+      "perfil_existe": true,
+      "porta": 9415,
+      "channel_id": "UCSGryZuOYBYE6oCFS7n-yUg",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverseing"
+    },
+    "inovare_ita": {
+      "usar": true,
+      "nome": "inovaremanhwaverseita",
+      "handle": "@inovaremanhwaverseita",
+      "creds": [
+        "7zpNZNll2jlBnQ0J"
+      ],
+      "email": "inovaremanhwaverseita@gmail.com",
+      "perfil": "inovaremanhwaverseita",
+      "perfil_existe": true,
+      "porta": 9416,
+      "channel_id": "UC-ibFyKECFgzroC3bntM--w",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverseita"
+    },
+    "inovare_ru": {
+      "usar": true,
+      "nome": "inovare manhwa verse ru",
+      "handle": "@inovaremanhwaru",
+      "creds": [
+        "TkfzifstYEoG4jKg"
+      ],
+      "email": "inovaremanhwaverserussian@gmail.com",
+      "perfil": "inovaremanhwaverserussian",
+      "perfil_existe": true,
+      "porta": 9417,
+      "channel_id": "UCn3EprJOEgidU2QsNyUvqKQ",
+      "maquina": [
+        "x200ma",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverserussian"
+    },
+    "inovare_thai": {
+      "usar": true,
+      "nome": "Inovaremanhwaversethai",
+      "handle": "@inovaremanhwaversethai",
+      "creds": [
+        "q3mik36FjtTgFkNC"
+      ],
+      "email": "inovaremanhwaversethai@gmail.com",
+      "perfil": "inovaremanhwaversethai",
+      "perfil_existe": true,
+      "porta": 9418,
+      "channel_id": "UCmB2ZETqZTrYYEYcydim2Qw",
+      "nota": "13/10: so pelo navegador (decisao do dono). Conta inovaremanhwaversethai@gmail.com sem login no cofre: ate logar (python D:\\logins-google\\cofre.py logar <conta>) o upload falha como 'morto'. A conta inovaremanhwaverse@gmail.com NAO tem acesso a este canal (Studio: sem permissao).",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaversethai"
+    },
+    "inovare_viet": {
+      "usar": true,
+      "creds": [
+        "8ROQmZVjbpwiwMoX"
+      ],
+      "nome": "Inovaremanhwaverseviet",
+      "handle": "@inovaremanhwaverseviet",
+      "email": "inovaremanhwaverseviet@gmail.com",
+      "perfil": "inovaremanhwaverseviet",
+      "perfil_existe": true,
+      "porta": 9740,
+      "channel_id": "UCTLn9GymqU0AJ4pPUizRuzA",
+      "nota": "13/10: canal do hipercool (lingua vietnamita), so pelo navegador (decisao do dono)",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverseviet"
+    },
+    "inovaremanhwaverse": {
+      "usar": true,
+      "creds": [
+        "novo_inovaremanhwaverse"
+      ],
+      "nome": "InovareManhwaVerse",
+      "email": "inovaremanhwaverse@gmail.com",
+      "perfil": "inovaremanhwaverse",
+      "perfil_existe": true,
+      "porta": 9731,
+      "channel_id": "UCiPlcsKHRQK9ZmbdvzDF0DQ",
+      "nota": "13/10: canal principal do hipercool (portugues), so pelo navegador. ADVERTENCIA de direitos autorais ativa desde 08/10/2026 (dono decidiu postar mesmo assim)",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverse"
+    },
+    "manhwanoturno": {
+      "usar": true,
+      "creds": [
+        "novo_manhwanoturno"
+      ],
+      "nome": "Manhwa Noturno",
+      "email": "inovaremanhwaverse2@gmail.com",
+      "perfil": "_nova_conta_animes",
+      "perfil_existe": true,
+      "porta": 9751,
+      "channel_id": "UCJvdEtoogBqfBKHikARiLfw",
+      "nota": "16/10: canal pt do hipercool, so pelo navegador. 19/10: NAO e substituto do InovareManhwaVerse (repostar conteudo de canal advertido = evasao, regra do YouTube); The Inheritor segurado ate 23/10 (hipercool config/fila.json postar_pt_volta_em)",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "inovaremanhwaverse2"
+    },
+    "doramanoturno": {
+      "usar": true,
+      "creds": [
+        "novo_doramanoturno"
+      ],
+      "nome": "Dorama Noturno",
+      "handle": "@doramanoturno",
+      "email": "maiteanajessicajesus@gmail.com",
+      "perfil": "maiteanajessicajesus",
+      "perfil_existe": true,
+      "porta": 9754,
+      "channel_id": "UCCF2-yciERdJbuTnruw4jVg",
+      "nota": "18/10: Shorts de dorama do recapd (parceiro_diario), so pelo navegador",
+      "maquina": [
+        "x200ma",
+        "pc2"
+      ],
+      "perfil_remoto": "maiteanajessicajesus"
+    },
+    "curiosidadesnoturnas": {
+      "usar": true,
+      "creds": [
+        "novo_curiosidadesnoturnas"
+      ],
+      "nome": "Curiosidades Noturnas",
+      "handle": "@curiosidadesnoturnasbr",
+      "email": "gabriellyvitoriaisabelaaraujo@gmail.com",
+      "perfil": "gabriellyvitoriaisabelaaraujo",
+      "perfil_existe": true,
+      "porta": 9755,
+      "channel_id": "UCRdCdrORHLWiki711nRgkeQ",
+      "nota": "18/10: Shorts de curiosidades/fatos do recapd (parceiro_diario), so pelo navegador. @curiosidadesnoturnas ja tinha dono",
+      "maquina": [
+        "x200ma",
+        "pc2"
+      ],
+      "perfil_remoto": "gabriellyvitoriaisabelaaraujo"
+    },
+    "filmenoturno": {
+      "usar": true,
+      "creds": [
+        "novo_filmenoturno"
+      ],
+      "nome": "Filme Noturno",
+      "handle": "@filmenoturno",
+      "email": "simonerebecaluizasilva@gmail.com",
+      "perfil": "simonerebecaluizasilva",
+      "perfil_existe": true,
+      "porta": 9756,
+      "channel_id": "UCfP-zfZaA-n6lK7CyQl197g",
+      "nota": "18/10: Shorts de filmes do recapd (parceiro_diario), so pelo navegador",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "simonerebecaluizasilva"
+    },
+    "esportenoturno": {
+      "usar": true,
+      "creds": [
+        "novo_esportenoturno"
+      ],
+      "nome": "Esporte Noturno",
+      "handle": "@esportenoturno",
+      "email": "revolutionemerson1@gmail.com",
+      "perfil": "revolutionemerson1",
+      "perfil_existe": true,
+      "porta": 9759,
+      "channel_id": "UC9ziOepIj3qSCtR8b8v37YQ",
+      "nota": "21/10: Shorts de esportes do recapd (parceiro_diario), so pelo navegador",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "revolutionemerson1"
+    },
+    "bichonoturno": {
+      "usar": true,
+      "creds": [
+        "novo_bichonoturno"
+      ],
+      "nome": "Bicho Noturno",
+      "handle": "@bichonoturnobr",
+      "email": "revolutionemerson2@gmail.com",
+      "perfil": "revolutionemerson2",
+      "perfil_existe": true,
+      "porta": 9760,
+      "channel_id": "UC31FWzAEk7U3chngTl7VXZg",
+      "nota": "21/10: Shorts de animais do recapd (parceiro_diario), so pelo navegador",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "revolutionemerson2"
+    },
+    "gamenoturno": {
+      "usar": true,
+      "creds": [
+        "novo_gamenoturno"
+      ],
+      "nome": "Game Noturno",
+      "handle": "@gamenoturnobr",
+      "email": "revolutionemerson3@gmail.com",
+      "perfil": "revolutionemerson3",
+      "perfil_existe": true,
+      "porta": 9761,
+      "channel_id": "UC9Zxl8NJPG0YQkCQvWu_6BQ",
+      "nota": "21/10: Shorts de jogos do recapd (parceiro_diario), so pelo navegador",
+      "maquina": [
+        "x200ma",
+        "acer",
+        "pc2"
+      ],
+      "perfil_remoto": "revolutionemerson3"
+    },
+    "inovareq8l": {
+      "usar": true,
+      "nome": "Mistérios Noturnos",
+      "handle": "@Inovare-q8l",
+      "creds": [
+        "novo_inovareq8l"
+      ],
+      "email": "inovaremanhwaverse5@gmail.com",
+      "perfil": "inovaremanhwaverse5",
+      "perfil_existe": false,
+      "porta": 9762,
+      "channel_id": "UCJTNPiJJax_YdwqdKVb6r8w",
+      "nota": "29/10: canal novo do projeto rede (adicionar_canal.py), só pelo navegador"
+    },
+    "inovareu8b": {
+      "usar": true,
+      "nome": "Tech Noturno",
+      "handle": "@Inovare-u8b",
+      "creds": [
+        "novo_inovareu8b"
+      ],
+      "email": "inovaremanhwaverse6@gmail.com",
+      "perfil": "inovaremanhwaverse6",
+      "perfil_existe": false,
+      "porta": 9763,
+      "channel_id": "UCHIg900SWxRdHsI7jEX6sTg",
+      "nota": "29/10: canal novo do projeto rede (adicionar_canal.py), só pelo navegador"
+    },
+    "comedianoturna": {
+      "usar": true,
+      "nome": "Comédia Noturna",
+      "handle": "@comedianoturna",
+      "creds": [
+        "novo_comedianoturna"
+      ],
+      "email": "emersonjosiel02@gmail.com",
+      "perfil": "emersonjosiel02",
+      "perfil_existe": false,
+      "porta": 9764,
+      "channel_id": "UCoAiFiUT99wnXjgZ2d7r_AQ",
+      "nota": "01/11: canal novo do projeto rede (adicionar_canal.py), só pelo navegador"
+    },
+    "empresariointeligenteia": {
+      "usar": true,
+      "nome": "Empresário Inteligente IA",
+      "handle": "@empresariointeligenteia",
+      "creds": [
+        "novo_empresariointeligenteia"
+      ],
+      "email": "inovaremanhwaverse8@gmail.com",
+      "perfil": "inovaremanhwaverse8",
+      "perfil_existe": true,
+      "porta": 9823,
+      "channel_id": "UChXUdv7NQJ7Soa73c9xwESw",
+      "_obs": "12/11: conta do Kaggle — o poster abre pelo MESMO IP fixo (youtube_web_poster._proxy_da_conta_kaggle)"
+    },
+    "clinicalucrativaia": {
+      "usar": true,
+      "nome": "Clínica Lucrativa IA",
+      "handle": "@clinicalucrativaia",
+      "creds": [
+        "novo_clinicalucrativaia"
+      ],
+      "email": "inovaremanhwaverse9@gmail.com",
+      "perfil": "inovaremanhwaverse9",
+      "perfil_existe": true,
+      "porta": 9824,
+      "channel_id": "UCwrlsPBLGkUQG6jONETdRCQ",
+      "_obs": "12/11: conta do Kaggle — o poster abre pelo MESMO IP fixo (youtube_web_poster._proxy_da_conta_kaggle)"
+    },
+    "imovelemfoco": {
+      "usar": true,
+      "nome": "Imóvel em Foco",
+      "handle": "@imovelemfoco",
+      "creds": [
+        "novo_imovelemfoco"
+      ],
+      "email": "inovaremanhwaverse7@gmail.com",
+      "perfil": "inovaremanhwaverse7",
+      "perfil_existe": true,
+      "porta": 9822,
+      "channel_id": "UCfDa2choRM5dvEyuwTPLlTA",
+      "_obs": "12/11: conta do Kaggle — o poster abre pelo MESMO IP fixo (youtube_web_poster._proxy_da_conta_kaggle)"
+    },
+    "vendasqueescalam": {
+      "usar": true,
+      "nome": "Vendas que Escalam",
+      "handle": "@vendasqueescalam",
+      "creds": [
+        "novo_vendasqueescalam"
+      ],
+      "email": "emersonjosiel2034@gmail.com",
+      "perfil": "emersonjosiel2034",
+      "perfil_existe": true,
+      "porta": 9825,
+      "channel_id": "UCdKG9omHV8Nf_DpKk-M_AMg",
+      "_obs": "12/11: conta do Kaggle — o poster abre pelo MESMO IP fixo (youtube_web_poster._proxy_da_conta_kaggle)"
+    },
+    "leielucro": {
+      "usar": true,
+      "nome": "Lei e Lucro",
+      "handle": "@leielucroia",
+      "creds": [
+        "novo_leielucro"
+      ],
+      "email": "emersonjosiel2035@gmail.com",
+      "perfil": "emersonjosiel2035",
+      "perfil_existe": true,
+      "porta": 9829,
+      "channel_id": "UCy1nvnDnn70OQQX7k18mB2A",
+      "_obs": "13/11: conta do Kaggle — o poster abre pelo MESMO IP fixo (youtube_web_poster._proxy_da_conta_kaggle)"
+    }
+  },
+  "_leia": "usar=true: politica.postar_youtube sobe esse canal pelo navegador (youtube_web_poster.py) em vez da API. Perfil e porta vem do cofre de logins (D:/logins-google/cofre/contas.json) pelo email; perfil/porta daqui sao antigos."
+}

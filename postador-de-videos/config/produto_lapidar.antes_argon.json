@@ -1,0 +1,10 @@
+{
+  "_leia": "verificadores Gemini do vídeo de produto (cópia do lapidar do D:\\claude-code-video, 26/10). nota < reprovar_abaixo ou grave de roteiro_marca = vídeo vai para _revisar; o resto entra na fila e os problemas viram aprendizado (logs\\produto_lapidar.jsonl).",
+  "ligado": true,
+  "gateway": "http://157.173.207.22:20133",
+  "chave": "<SEGREDO_REMOVIDO>",
+  "modelo": "agy/gemini-3.8-flash-high",
+  "reprovar_abaixo": 4.5,
+  "editor": {"ligado": true, "rodadas": 4, "alvo": 9, "por_rodada": 2, "modelo_reserva": "agy/gemini-3.8-flash-tiered"},
+  "_editor": "26/10: depois do molde, o editor Gemini refaz em Remotion (produto\\editor.py) + corretor até 'rodadas'; fica a versão de maior nota. por_rodada = quantos vídeos por execução do diário passam pelo editor (cada um leva ~1–3 h)."
+}

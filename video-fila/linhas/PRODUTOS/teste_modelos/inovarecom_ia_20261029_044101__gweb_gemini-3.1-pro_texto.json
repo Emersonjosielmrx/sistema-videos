@@ -1,0 +1,64 @@
+{
+ "modelo": "gweb/gemini-3.1-pro",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "versao": "so_texto",
+ "quando": "2026-10-29T18:30:11",
+ "segundos": 84,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:30:11",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "gweb/gemini-3.1-pro",
+   "decisor": "gweb/gemini-3.1-pro"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "A variante 'dono_tres' mantém o dono em 3 blocos seguidos (~27s no mesmo plano médio, das cenas 0 a 3) sem inserir nenhuma tela de demonstração do produto ou simulação do Hermes Call, e formatos com 'dono_tres' repetem notas baixas no histórico (5.5 a 6.5 em 6 vídeos, com notas de movimento entre 4.0 e 5.0).",
+    "prova": "formato: dono_tres / juri_problemas (cena 1 movimento grave e cena 2 diretor grave) / historico_notas (6 vídeos com dono_tres ou dono_tres_veo_final com movimento <= 5.0)",
+    "sugestao": "Testar desligar a variante 'dono_tres' (incluir em variantes_desligadas) ou reduzir seu peso em pesos_variantes, priorizando formatos que intercalem cenas de demonstração de tela do produto.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "A faixa fixa superior com a pílula de etapa ('1 O problema') encosta diretamente no topo da cabeça/cabelo do dono na cena 1.",
+    "prova": "juri_problemas (diretor, media, cena 1: 'o conjunto da faixa fixa verde superior com a pílula de etapa (1 O problema) encosta diretamente no topo da cabeça do apresentador')",
+    "sugestao": "Aumentar o ajuste 'folga_dono' (atualmente em 0.45) ou reduzir levemente a escala/subir a margem da pílula para garantir respiro acima do topo do cabelo do apresentador.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "O cartão final (cena 4) tem movimento muito baixo (4.63%, quase no limite de 4% de cena parada), ficando estático além do brilho do botão.",
+    "prova": "juri.movimento (cena 4, 'cartao', 4.63) / juri_problemas (cena 4, movimento e diretor, media)",
+    "sugestao": "Aumentar 'pulso_botao' (atualmente em 0.06) e adicionar entrada animada escalonada para os elementos do cartão final ou movimento de fundo.",
+    "repetido": true
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Apesar de o movimento medido nas cenas do dono ser alto (10.14% a 14.18%), o júri aponta monotonia e falta de dinamismo na abertura (cena 0) e nos blocos longos de fala (cena 2) por falta de elementos gráficos entrando junto com a fala.",
+    "prova": "juri.movimento (cenas 0 a 3 entre 10.14 e 14.18) / juri_problemas (cena 0 diretor grave e cena 2 movimento media)",
+    "sugestao": "Como o movimento base já é alto, aumentar kenburns_zoom não resolve: testar ideia_codigo para inserir elementos visuais dinâmicos sincronizados com a fala (como pop-ups de notificação/chamada ou punch-in mais perceptível que o punchin_video atual de 0.06).",
+    "repetido": true
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "A variante 'dono_tres' mantém o apresentador em 3 blocos seguidos sem tela de demonstração do produto e repete notas baixas no histórico (5.5 a 6.5, com movimento <= 5.0).",
+    "prova": "formato: dono_tres / juri_problemas (cena 1 movimento grave e cena 2 diretor grave) / historico_notas (6 vídeos com dono_tres ou dono_tres_veo_final com movimento <= 5.0)"
+   },
+   {
+    "acao": "ajuste",
+    "alvo": "pulso_botao",
+    "valor": 0.1,
+    "motivo": "O cartão final (cena 4) está com movimento muito baixo (4.63%, próximo ao limite de 4% de cena parada), repetindo falta de dinamismo no fechamento.",
+    "prova": "juri.movimento (cena 4, 'cartao', 4.63) / juri_problemas (cena 4, movimento e diretor, media)"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

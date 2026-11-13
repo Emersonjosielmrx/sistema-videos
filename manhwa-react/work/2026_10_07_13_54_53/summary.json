@@ -1,0 +1,101 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 13-54-53.mp4",
+ "duration": 82.366667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 712,
+  "has_webcam": true,
+  "contrast": 54.8,
+  "trimmed": {
+   "webcam_bottom": 200,
+   "content_bottom": 111
+  },
+  "divider": 562,
+  "webcam": [
+   0,
+   0,
+   720,
+   362
+  ],
+  "content": [
+   0,
+   562,
+   712,
+   1169
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": false,
+  "score": 2,
+  "reason": "Gravação muito curta com apenas 3 frases soltas, sem reação expressiva, sem contexto suficiente e sem conteúdo reagido audível para montar um Short interessante.",
+  "topic": "censura de cena de anime com braço comido",
+  "channel": "animescomia",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 47.38,
+    "hook": "CENSURARAM ESSA CENA EM TODO LUGAR",
+    "title": "Essa cena foi CENSURADA em vários países 😱🔥 #shorts #anime",
+    "description": "O criador reage à cena polêmica que foi censurada em vários lugares! Você já viu a versão sem cortes?\nComenta aí se você sabia dessa censura!\nSegue pra mais reacts de anime!\n\n#shorts #react #anime #censura #luta #cena #otaku #animebrasil #mangá #reactanime #censurado #hype #viral #animereact",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#censura",
+     "#luta",
+     "#otaku",
+     "#animebrasil"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "censura",
+     "cena censurada",
+     "lutador pré-histórico",
+     "braço",
+     "react anime",
+     "otaku",
+     "anime brasil",
+     "cena polêmica",
+     "futebol anime",
+     "anime luta"
+    ],
+    "keywords": [
+     {
+      "t": 18.0,
+      "text": "CENSURARAM",
+      "emoji": "🚫"
+     }
+    ],
+    "reactions": [],
+    "memes": [],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Você já viu essa cena sem censura? 👀",
+    "title_alternatives": [
+     "Essa cena foi PROIBIDA em vários países 🚫😱 #shorts #anime",
+     "Não acredito que CENSURARAM isso no anime 😳🔥 #shorts #react"
+    ],
+    "mood": "neutral_chill",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 30.0,
+    "end": 47.38,
+    "why": "Frase solta 'já copiou' sem contexto, parece teste ou ação técnica do criador"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "animescomia",
+ "outputs": [],
+ "status": "rejected"
+}

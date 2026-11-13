@@ -1,0 +1,876 @@
+{
+ "name": "atendimento 1",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "atend1",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -640,
+    944
+   ],
+   "id": "3153b8f7-def5-43ed-82b4-e793b3a55eef",
+   "name": "Webhook",
+   "webhookId": "1e67474d-df6f-4a57-8388-6b795b6c6bbd"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Webhook').item.json.body.BaseUrl }}/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('Webhook').item.json.body.token }}"
+      },
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.token }}"
+      },
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Webhook').item.json.body.token }}"
+      },
+      {
+       "name": "instance",
+       "value": "={{ $('Webhook').item.json.body.instanceName }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"number\": \"{{ $('Webhook').item.json.body.message.sender_pn.replace('@s.whatsapp.net', '').replace(/\\D/g, '') }}\",\n  \"text\": {{ JSON.stringify($json.output) }},\n  \"delay\": 1500,\n  \"readchat\": true,\n  \"linkPreview\": true,\n  \"mentions\": \"\",\n  \"replyid\": \"\"\n}",
+    "options": {
+     "allowUnauthorizedCerts": true,
+     "response": {
+      "response": {
+       "fullResponse": true,
+       "responseFormat": "json"
+      }
+     },
+     "timeout": 15000
+    }
+   },
+   "id": "eb644c36-380a-4f80-aec0-a64cc913941a",
+   "name": "HTTP Request (Auth Absoluta)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    1728,
+    560
+   ],
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "notesInFlow": true,
+   "notes": "Cabeçalhos triplos inseridos: apikey, token e Authorization."
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "0c44e380-f326-4703-9572-183b3cf13d1b",
+       "leftValue": "={{ $json.atendimentoHumano_curto }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "empty",
+        "singleValue": true
+       }
+      },
+      {
+       "id": "2aa384e4-ab47-4795-a51d-35c737fafad9",
+       "leftValue": "={{ $('verifica deligamento humano').item.json.atendimentoHumano }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "empty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    704,
+    656
+   ],
+   "id": "e67b5104-7e0a-4a60-ab0f-1dc366240f7f",
+   "name": "se esta desligado"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "atendimentoHumano",
+    "key": "=desliga_humano:{{ $('normatizacao do numero api whatsapp').item.json.numero_telefone_contato }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    480,
+    656
+   ],
+   "id": "620c29b2-c4cf-4c08-a0ad-bff72ccdd48a",
+   "name": "verifica deligamento humano",
+   "credentials": {
+    "redis": {
+     "id": "zETZyGtAmnHSpmzs",
+     "name": "Redis account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=desliga_humano:{{ $('normatizacao do numero api whatsapp').item.json.numero_telefone_contato }}",
+    "value": "true",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 3600
+   },
+   "id": "b53e5546-60a2-42bb-a46c-af731101da47",
+   "name": "desliga_por_humano",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    480,
+    848
+   ],
+   "credentials": {
+    "redis": {
+     "id": "zETZyGtAmnHSpmzs",
+     "name": "Redis account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "={{ $('normatizacao do numero api whatsapp').item.json.numero_telefone_contato }}12",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+   "typeVersion": 1.5,
+   "position": [
+    1472,
+    784
+   ],
+   "id": "30dbb65b-95ba-4fdb-bccb-3321193333de",
+   "name": "Memory",
+   "credentials": {
+    "redis": {
+     "id": "zETZyGtAmnHSpmzs",
+     "name": "Redis account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    1376,
+    784
+   ],
+   "id": "836f8392-b9bb-4963-ae88-171d05bf9e16",
+   "name": "Gemini ",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "aVpTQVN7Pp5Zh502",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "condicao-evento",
+       "leftValue": "={{ $('Webhook').item.json.body.EventType }}",
+       "rightValue": "messages",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "looseTypeValidation": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -192,
+    944
+   ],
+   "id": "6c832df7-20df-4ca4-ae81-6a2f651751f3",
+   "name": "1. É Mensagem?"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "condicao-grupo",
+       "leftValue": "={{ $('Webhook').item.json.body.message.isGroup }}",
+       "rightValue": "true",
+       "operator": {
+        "type": "boolean",
+        "operation": "notEquals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "looseTypeValidation": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    32,
+    848
+   ],
+   "id": "fe07f529-6eb0-44fd-823a-a39102cd679e",
+   "name": "2. É Chat Privado?"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "condicao-from-me",
+       "leftValue": "={{ $('Webhook').item.json.body.message.fromMe }}",
+       "rightValue": "true",
+       "operator": {
+        "type": "boolean",
+        "operation": "notEquals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "looseTypeValidation": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    256,
+    752
+   ],
+   "id": "b17b3873-080b-45aa-adb1-bd95a82f7c8c",
+   "name": "3. É Cliente (Lead)?"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "condicao-texto",
+       "leftValue": "={{ $('Webhook').item.json.body.message.type }}",
+       "rightValue": "text",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "looseTypeValidation": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    928,
+    656
+   ],
+   "id": "2db17ea9-32a5-43e1-bc8c-5b919f76e81e",
+   "name": "4. É Somente Texto?"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    32,
+    1040
+   ],
+   "id": "4631f954-e1fc-4783-9748-da96acc18e66",
+   "name": "Ignorar - Outros Eventos"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    256,
+    944
+   ],
+   "id": "7cdd85a0-7724-4999-84cd-2305245022c7",
+   "name": "Ignorar - Grupo"
+  },
+  {
+   "parameters": {
+    "values": {
+     "string": [
+      {
+       "name": "status_midia",
+       "value": "mídia_ignorada"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 2,
+   "position": [
+    1152,
+    752
+   ],
+   "id": "78caa392-ecdc-4892-9edb-0d21290a3503",
+   "name": "Descarte de Áudio/Imagem"
+  },
+  {
+   "parameters": {
+    "values": {
+     "string": [
+      {
+       "name": "status_fluxo",
+       "value": "processar_ia_texto"
+      },
+      {
+       "name": "texto_extraido",
+       "value": "={{ $('Webhook').item.json.body.message.text }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 2,
+   "position": [
+    1152,
+    560
+   ],
+   "id": "1f887e0b-0b03-48af-92e7-d4f9e2290f45",
+   "name": "Avançar Agente de Texto"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.texto_extraido }}",
+    "options": {
+     "systemMessage": "=### IDENTIDADE E CONTEXTO DO AGENTE ###\nVocê é cassia uma humana real Especialista de Atendimento e Consultor(a) Comercial de Alta Performance da empresa \"DPS Química - Especialidades Cosméticas\". \nSeu papel é recepcionar leads, qualificar o interesse, orientar sobre formulações básicas e conduzir o cliente até o fechamento de orçamento ou envio de portfólio.\nVocê é extremamente cordial, empático(a), técnico(a) quando necessário, mas possui uma comunicação fluida, humana e persuasiva. nunca mande mensagens longas, mande como um humando mandaria e com pontuaçoes apenas que um humano mandaria jamais use * asteristicos e suas respontas devem ter no maximo 50 tokens\n\n### SOBRE A DPS QUÍMICA ###\n- Slogan: \"A nova geração de matéria-prima para seu cosmético\".\n- Missão: Fornecer ingredientes de primeiríssima qualidade para indústrias e pequenos empreendedores (\"não importa qual seja o seu tamanho\").\n- Diferenciais Competitivos: Embalagens flexíveis a partir de 1kg, envio rápido para todo o Brasil, laboratório moderno e equipado, equipe especializada para ajudar em formulações, e foco em novos ingredientes e tecnologias com eficácia comprovada.\n- Localização Física: Rua Além Paraíba, 63 - Cidade Industrial Satélite de São Paulo - Guarulhos, SP. CEP: 07.223-150.\n- Portfólio: Mais de 600 produtos focados no desenvolvimento de cosméticos.\n\n### DIRETRIZES DE COMUNICAÇÃO E TONE OF VOICE (CRÍTICO) ###\n1. OBRIGATÓRIO: Suas mensagens iniciais DEVEM ser curtas e diretas. Proibido enviar blocos massivos de texto logo na entrada.\n2. OBRIGATÓRIO: O atendimento deve ser altamente humanizado (use emojis com moderação, demonstre real interesse pelo projeto do cliente).\n3. Responda apenas o que for perguntado em cada etapa do funil. Deixe o cliente respirar e interagir.\n4. Nunca encerre a conversa de forma abrupta. Sempre faça uma pergunta de engajamento no final (Call to Action) para manter a conversa fluindo.\n\n### FUNIL DE ATENDIMENTO E JORNADA DO CLIENTE (PASSO A PASSO RIGOROSO) ###\nVocê deve obedecer estritamente a sequência deste funil, movendo o lead de uma etapa para outra apenas após a interação dele.\n\n👉 ETAPA 1: ENTRADA E CONTATO INICIAL\n- Se o cliente disser apenas \"Olá\", \"Bom dia\", ou vier de um botão do site:\n- Ação: Cumprimente de forma calorosa, curta e humanizada. Apresente-se brevemente.\n- Exemplo mental (não copie, adapte): \"Olá! Tudo bem? Que bom ter você aqui na DPS Química! Como posso te ajudar hoje com as suas produções?\"\n\n👉 ETAPA 2: QUALIFICAÇÃO (PERGUNTAR E OUVIR)\n- Antes de jogar o catálogo inteiro, você deve entender o cenário do cliente.\n- Faça perguntas investigativas de forma natural, uma por vez ou no máximo duas:\n- \"Você já trabalha na área de cosméticos ou está estruturando um projeto novo?\"\n- \"Qual tipo de produto você formula ou pretende produzir? (ex: capilar, skincare, saboaria...)\"\n- \"Qual seria a matéria-prima ou ingrediente de seu interesse hoje?\"\n\n👉 ETAPA 3: OFERTA E APRESENTAÇÃO DE SOLUÇÃO\n- Depois que o cliente interagir e disser o que busca (após a qualificação), siga com a oferta.\n- Apresente as categorias que a DPS Química possui que resolvem o problema dele.\n- Informe que a DPS atende desde pequenos empreendedores (com embalagens fracionadas a partir de 1kg) até grandes indústrias.\n- Envie ou ofereça o envio do Portfólio em PDF. Ex: \"Temos opções perfeitas para a sua formulação! Quer que eu te mande o nosso catálogo completo em PDF para você dar uma olhada nas opções?\"\n\n👉 ETAPA 4: NEGOCIAÇÃO E ORÇAMENTO\n- Se o cliente já sabe o que quer, inicie o levantamento de dados para gerar o orçamento.\n- Para gerar o orçamento oficial, peça educadamente os dados básicos (Nome, E-mail, CNPJ/CPF, Cidade e Estado).\n- Fale sobre o laboratório da DPS, reforce a qualidade, reforce que envia para todo o Brasil.\n- Se o cliente pedir preço na hora: Informe que os valores variam conforme a quantidade em Kg/Litros e a cotação do momento, mas que você vai providenciar um orçamento sob medida rapidamente.\n\n### CATÁLOGO DE PRODUTOS E CATEGORIAS (BASE DE CONHECIMENTO) ###\nUtilize a lista abaixo para responder dúvidas técnicas e confirmar disponibilidade de categorias. A DPS possui mais de 600 produtos, abrangendo:\n\n1. Óleos Vegetais (Mais de 200 opções):\n- Óleo de Argan, Óleo de Rosa Mosqueta, Óleo de Amêndoas Doces, Óleo de Semente de Uva.\n- Óleo de Abacate, Óleo de Girassol, Óleo de Macadâmia, Óleo de Jojoba, Óleo de Rícino.\n- Óleo de Coco, Óleo de Algodão, Óleo de Linhaça, Óleo de Maracujá, Óleo de Pequi.\n- Óleo de Andiroba, Óleo de Copaíba, Óleo de Semente de Abóbora, Óleo de Cenoura.\n- Óleo de Gergelim, Óleo de Germe de Trigo, Óleo de Neem, Óleo de Avelã.\n\n2. Extratos Vegetais:\n- Extrato de Aloe Vera, Extrato de Camomila, Extrato de Calêndula, Extrato de Chá Verde.\n- Extrato de Alecrim, Extrato de Aveia, Extrato de Pepino, Extrato de Hamamélis.\n- Extrato de Própolis, Extrato de Barbatimão, Extrato de Jaborandi, Extrato de Mutamba.\n- Extrato de Quina, Extrato de Arnica, Extrato de Centella Asiática, Extrato de Ginkgo Biloba.\n- Extrato de Hortelã, Extrato de Malva, Extrato de Melissa, Extrato de Romã.\n\n3. Argilas (Skincare e Terapia Capilar):\n- Argila Branca (clareamento, peles sensíveis).\n- Argila Verde (ação adstringente, pele oleosa/acneica).\n- Argila Preta (detox, rejuvenescimento).\n- Argila Rosa (suavidade, brilho, peles delicadas).\n- Argila Vermelha (antissinais, circulação).\n- Argila Amarela (nutrição, estimulação de colágeno).\n- Argila Roxa (tônus, viço).\n- Argila Cinza (manchas, esfoliação leve).\n- Argila Marrom (purificante, estimulante).\n\n4. Silicones:\n- Dimeticone, Ciclometicone, Amodimeticone.\n- Fenil Trimeticone, Ciclopentasiloxano, Dimeticonol.\n- Misturas formadoras de filme e reparadores de pontas.\n\n5. Surfactantes (Tensoativos para Limpeza):\n- Lauril Éter Sulfato de Sódio (LESS).\n- Cocoamidopropil Betaína (Anfótero).\n- Decil Glucosídeo, Lauril Glucosídeo (Plantacare).\n- Isetionato de Sódio (SCI - formador de espuma suave).\n\n6. Espessantes e Gelificantes:\n- Goma Xantana, Goma Guar.\n- Carbômero (Carbopol).\n- Hidroxietilcelulose (HEC), Metilcelulose.\n\n7. Antioxidantes e Conservantes:\n- Vitamina E (Tocoferol).\n- BHT, Nipagin (Metilparabeno), Nipazol (Propilparabeno).\n- Conservantes naturais, Phenoxyethanol.\n\n8. Agentes de Consistência e Emulsionantes:\n- Ácido Esteárico.\n- Álcool Cetílico, Álcool Cetoestearílico.\n- Cera de Abelha, Cera de Carnaúba, Cera de Candelila.\n- Polawax, Base autoemulsionante não iônica.\n- Vaselina Sólida e Líquida, Manteiga de Karité, Manteiga de Cacau.\n\n### MANEJO DE OBJEÇÕES E DÚVIDAS COMUNS ###\n- Objeção \"Achei caro\": Destaque o rendimento das matérias-primas da DPS. Ingredientes com maior pureza demandam menor concentração na fórmula final. Cite o laboratório moderno como garantia de estabilidade.\n- Objeção \"Vocês entregam fracionado?\": Sim, reforce fortemente que a DPS vende embalagens a partir de 1kg, permitindo testes, formulações piloto e viabilizando a vida de pequenos e médios produtores.\n- Objeção \"Tem pedido mínimo financeiro?\": Não trave a venda. Diga que o mínimo é atrelado ao peso (1kg), peça para enviarem a lista desejada para que você possa cotar a viabilidade do frete e os melhores valores.\n- Pergunta \"Vocês dão suporte de formulação?\": Sim! Temos uma equipe especializada e um laboratório pronto para auxiliar os clientes caso tenham dúvidas técnicas sobre a aplicação dos nossos ingredientes.\n\n### REGRAS FINAIS DE EXECUÇÃO ###\n- NUNCA invente preços exatos. Sempre solicite que o cliente envie a lista e as quantidades (1kg, 5kg, 20kg, tambor) para formular a cotação oficial.\n- SE o cliente perguntar o CNPJ da empresa, não invente. Direcione que todas as faturas acompanham os dados fiscais da matriz em Guarulhos.\n- Lembre-se: Frases curtas. Perguntas engajadoras no final. Caminhe passo a passo pelo funil (Contato -> Qualificação -> Oferta -> Negociação).\n\ninformaçoes da empresa:{\n  \"company_profile\": {\n    \"trade_name\": \"DPS Química\",\n    \"corporate_name\": \"DPS QUÍMICA\",\n    \"industry\": \"Matéria-prima para cosméticos\",\n    \"slogan\": \"A nova geração de matéria-prima para seu cosmético\",\n    \"mission_statement\": \"Empresa de pessoas para pessoas. Fornecemos matérias-primas para realizar o seu sonho, não importa qual seja o seu tamanho!\",\n    \"extended_description\": \"A DPS fornece o melhor para sua indústria. Afinal, sabemos que empreender nos tempos atuais é extremamente desafiador e exige muito de nós, mas vale a pena quando vemos nosso sonho se concretizando em forma de produtos, projetos e pedidos.\",\n    \"foundation_year\": null,\n    \"copyright_info\": \"© 2024 DPS QUÍMICA. Todos os direitos reservados.\"\n  },\n  \"contact_information\": {\n    \"primary_phone\": \"(11) 2472-7225\",\n    \"whatsapp_sales\": \"(11) 94867-2289\",\n    \"primary_email\": \"contato@dpsquimica.com.br\",\n    \"website_url\": \"https://dpsquimica.com.br/\",\n    \"languages_supported\": [\"pt\", \"en\", \"es\"]\n  },\n  \"location_data\": {\n    \"street_address\": \"Rua Além Paraíba\",\n    \"number\": \"63\",\n    \"neighborhood\": \"Cidade Industrial Satélite de São Paulo\",\n    \"city\": \"Guarulhos\",\n    \"state\": \"SP\",\n    \"zip_code\": \"07.223-150\",\n    \"country\": \"Brasil\"\n  },\n  \"business_metrics\": {\n    \"total_products_available\": 600,\n    \"oil_and_extract_variations\": 200,\n    \"minimum_order_quantity_kg\": 1,\n    \"shipping_coverage\": \"Todo o Brasil\"\n  },\n  \"infrastructure_and_services\": {\n    \"facilities\": [\n      \"Laboratório moderno e equipado\"\n    ],\n    \"services_offered\": [\n      \"Fornecimento de matérias-primas\",\n      \"Ajuda e suporte em formulações cosméticas\",\n      \"Desenvolvimento de exclusividades\"\n    ],\n    \"team_description\": \"Equipe especializada e preparada\"\n  },\n  \"value_propositions\": [\n    \"Embalagens fracionadas a partir de 1kg\",\n    \"Foco no pequeno empreendedor e na grande indústria\",\n    \"Qualidade e inovação constante\",\n    \"Novos ingredientes e tecnologias\",\n    \"Benefícios cientificamente comprovados\",\n    \"Atendimento humanizado (de pessoas para pessoas)\"\n  ],\n  \"product_categories_main\": [\n    {\n      \"category_id\": 1,\n      \"category_name\": \"Argilas\",\n      \"description\": \"Skincare e terapia capilar\"\n    },\n    {\n      \"category_id\": 2,\n      \"category_name\": \"Antioxidantes\",\n      \"description\": \"Conservação e estabilidade de fórmulas\"\n    },\n    {\n      \"category_id\": 3,\n      \"category_name\": \"Agentes de Consistência\",\n      \"description\": \"Bases e estruturação de cosméticos\"\n    },\n    {\n      \"category_id\": 4,\n      \"category_name\": \"Espessantes\",\n      \"description\": \"Gomas e controle de viscosidade\"\n    },\n    {\n      \"category_id\": 5,\n      \"category_name\": \"Óleos e Extratos Vegetais\",\n      \"description\": \"Mais de 200 opções ativas\"\n    },\n    {\n      \"category_id\": 6,\n      \"category_name\": \"Silicones\",\n      \"description\": \"Reparadores e formadores de filme\"\n    },\n    {\n      \"category_id\": 7,\n      \"category_name\": \"Surfactantes\",\n      \"description\": \"Tensoativos para limpeza e espuma\"\n    }\n  ],\n  \"website_structure_and_forms\": {\n    \"navigation_menu\": [\n      \"Home\",\n      \"Nossa história\",\n      \"Especialidades\",\n      \"Contato\",\n      \"VEMPRADPS\"\n    ],\n    \"budget_form_fields_required\": [\n      \"Nome\",\n      \"E-mail\",\n      \"Whatsapp\",\n      \"CNPJ\",\n      \"Cidade\",\n      \"UF\",\n      \"Observações\"\n    ],\n    \"call_to_action_buttons\": [\n      \"Faça um Orçamento\",\n      \"Baixe nosso portfólio (PDF)\",\n      \"Saiba mais\",\n      \"Trabalhe conosco\",\n      \"Whatsapp DPS\"\n    ],\n    \"developer_agency\": \"OP!S\"\n  }\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1376,
+    560
+   ],
+   "id": "d6391ef9-2040-40be-ae69-2e310549d060",
+   "name": "agente de atendimento"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "ef95a740-2e7b-43c9-9c11-182901a92168",
+       "name": "numero_telefone_contato",
+       "value": "={{ $('Webhook').item.json.body.chat.phone }}",
+       "type": "string"
+      },
+      {
+       "id": "3f8af0a7-30fe-4556-b4bd-f59c3204f83e",
+       "name": "texto_mensagem",
+       "value": "={{ $('Webhook').item.json.body.message.text }}",
+       "type": "string"
+      },
+      {
+       "id": "74d89e1e-f099-4dbc-a3e7-af9221b77b2d",
+       "name": "id_especifico_mensagem",
+       "value": "={{ $('Webhook').item.json.body.message.messageid }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-001",
+       "name": "tipo_evento",
+       "value": "={{ $('Webhook').item.json.body.EventType }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-002",
+       "name": "nome_instancia_conexao",
+       "value": "={{ $('Webhook').item.json.body.instanceName }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-003",
+       "name": "nome_do_contato",
+       "value": "={{ $('Webhook').item.json.body.chat.name }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-004",
+       "name": "numero_remetente_limpo",
+       "value": "={{ $('Webhook').item.json.body.message.sender_pn.replace('@s.whatsapp.net', '') }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-005",
+       "name": "id_whatsapp_contato",
+       "value": "={{ $('Webhook').item.json.body.chat.wa_chatid }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-006",
+       "name": "tipo_de_mensagem",
+       "value": "={{ $('Webhook').item.json.body.message.type }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-007",
+       "name": "enviado_por_mim_atendente",
+       "value": "={{ $('Webhook').item.json.body.message.fromMe }}",
+       "type": "boolean"
+      },
+      {
+       "id": "nova-var-008",
+       "name": "e_grupo",
+       "value": "={{ $('Webhook').item.json.body.message.isGroup }}",
+       "type": "boolean"
+      },
+      {
+       "id": "nova-var-009",
+       "name": "timestamp_mensagem",
+       "value": "={{ $('Webhook').item.json.body.message.messageTimestamp }}",
+       "type": "number"
+      },
+      {
+       "id": "nova-var-010",
+       "name": "nome_perfil_remetente",
+       "value": "={{ $('Webhook').item.json.body.message.senderName }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-011",
+       "name": "url_foto_perfil",
+       "value": "={{ $('Webhook').item.json.body.chat.imagePreview }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-012",
+       "name": "mensagens_nao_lidas_qtd",
+       "value": "={{ $('Webhook').item.json.body.chat.wa_unreadCount }}",
+       "type": "number"
+      },
+      {
+       "id": "nova-var-013",
+       "name": "contato_esta_bloqueado",
+       "value": "={{ $('Webhook').item.json.body.chat.wa_isBlocked }}",
+       "type": "boolean"
+      },
+      {
+       "id": "nova-var-014",
+       "name": "id_interno_chat_sistema",
+       "value": "={{ $('Webhook').item.json.body.chat.id }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-015",
+       "name": "numero_dono_da_instancia",
+       "value": "={{ $('Webhook').item.json.body.chat.owner }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-016",
+       "name": "mensagem_enviada_por_api",
+       "value": "={{ $('Webhook').item.json.body.message.wasSentByApi }}",
+       "type": "boolean"
+      },
+      {
+       "id": "nova-var-017",
+       "name": "mensagem_foi_editada",
+       "value": "={{ $('Webhook').item.json.body.message.edited }}",
+       "type": "string"
+      },
+      {
+       "id": "nova-var-018",
+       "name": "token_autenticacao_webhook",
+       "value": "={{ $('Webhook').item.json.body.token }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -416,
+    944
+   ],
+   "id": "1879bd99-6e1a-4d15-b5a0-67ef7779cd1a",
+   "name": "normatizacao do numero api whatsapp"
+  }
+ ],
+ "pinData": {
+  "Webhook": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "uazapiGO-Webhook/1.0",
+      "content-length": "2500",
+      "accept-encoding": "gzip",
+      "content-type": "application/json",
+      "x-forwarded-for": "65.108.141.240",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "65.108.141.240"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "BaseUrl": "https://automatizou.uazapi.com",
+      "EventType": "messages",
+      "chat": {
+       "chatbot_agentResetMemoryAt": 0,
+       "chatbot_disableUntil": 0,
+       "chatbot_lastTriggerAt": 0,
+       "chatbot_lastTrigger_id": "",
+       "id": "r545bb7896013bb",
+       "image": "",
+       "imagePreview": "https://pps.whatsapp.net/v/t61.24694-24/462236440_2896466360511291_6725686263529896368_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa4AEmuJ_q6SnPqRvEAn3CncrjYCQNaevw6BlhmXAxP6ZP-Q&oe=69DE7218&_nc_sid=5e03e0&_nc_cat=103",
+       "lead_assignedAttendant_id": "",
+       "lead_email": "",
+       "lead_field01": "",
+       "lead_field02": "",
+       "lead_field03": "",
+       "lead_field04": "",
+       "lead_field05": "",
+       "lead_field06": "",
+       "lead_field07": "",
+       "lead_field08": "",
+       "lead_field09": "",
+       "lead_field10": "",
+       "lead_field11": "",
+       "lead_field12": "",
+       "lead_field13": "",
+       "lead_field14": "",
+       "lead_field15": "",
+       "lead_field16": "",
+       "lead_field17": "",
+       "lead_field18": "",
+       "lead_field19": "",
+       "lead_field20": "",
+       "lead_fullName": "",
+       "lead_isTicketOpen": false,
+       "lead_kanbanOrder": 0,
+       "lead_name": "",
+       "lead_notes": "",
+       "lead_personalid": "",
+       "lead_status": "",
+       "lead_tags": [],
+       "name": "Emerson IA",
+       "owner": "5511939297125",
+       "phone": "+55 91 8469-8653",
+       "wa_archived": false,
+       "wa_chatid": "559184698653@s.whatsapp.net",
+       "wa_chatlid": "132250784018630@lid",
+       "wa_contactName": "",
+       "wa_ephemeralExpiration": 0,
+       "wa_fastid": "5511939297125:559184698653",
+       "wa_isBlocked": false,
+       "wa_isGroup": false,
+       "wa_isGroup_admin": false,
+       "wa_isGroup_announce": false,
+       "wa_isGroup_community": false,
+       "wa_isGroup_member": false,
+       "wa_isPinned": false,
+       "wa_label": [],
+       "wa_lastMessageSender": "132250784018630@lid",
+       "wa_lastMessageTextVote": "Teste",
+       "wa_lastMessageType": "Conversation",
+       "wa_lastMsgTimestamp": 1775845765000,
+       "wa_muteEndTime": 0,
+       "wa_name": "Emerson IA",
+       "wa_notes": "",
+       "wa_unreadCount": 6
+      },
+      "chatSource": "updated",
+      "instanceName": "comercial3",
+      "message": {
+       "buttonOrListid": "",
+       "chatid": "559184698653@s.whatsapp.net",
+       "chatlid": "132250784018630@lid",
+       "content": "Teste",
+       "convertOptions": "",
+       "edited": "",
+       "fromMe": false,
+       "groupName": "",
+       "id": "5511939297125:2ACA1AD818978336974C",
+       "isGroup": false,
+       "mediaType": "",
+       "messageTimestamp": 1775845765000,
+       "messageType": "Conversation",
+       "messageid": "2ACA1AD818978336974C",
+       "owner": "5511939297125",
+       "pinned": false,
+       "quoted": "",
+       "reaction": "",
+       "sender": "132250784018630@lid",
+       "senderName": "Emerson IA",
+       "sender_lid": "132250784018630@lid",
+       "sender_pn": "559184698653@s.whatsapp.net",
+       "source": "unknown",
+       "status": "",
+       "text": "Teste",
+       "track_id": "",
+       "track_source": "",
+       "type": "text",
+       "vote": "",
+       "wasSentByApi": false
+      },
+      "owner": "5511939297125",
+      "token": "<SEGREDO_REMOVIDO>"
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/atend1",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "Webhook": {
+   "main": [
+    [
+     {
+      "node": "normatizacao do numero api whatsapp",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se esta desligado": {
+   "main": [
+    [
+     {
+      "node": "4. É Somente Texto?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "verifica deligamento humano": {
+   "main": [
+    [
+     {
+      "node": "se esta desligado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "agente de atendimento",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini ": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "agente de atendimento",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "1. É Mensagem?": {
+   "main": [
+    [
+     {
+      "node": "2. É Chat Privado?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Ignorar - Outros Eventos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "2. É Chat Privado?": {
+   "main": [
+    [
+     {
+      "node": "3. É Cliente (Lead)?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Ignorar - Grupo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "3. É Cliente (Lead)?": {
+   "main": [
+    [
+     {
+      "node": "verifica deligamento humano",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "desliga_por_humano",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "4. É Somente Texto?": {
+   "main": [
+    [
+     {
+      "node": "Avançar Agente de Texto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Descarte de Áudio/Imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Avançar Agente de Texto": {
+   "main": [
+    [
+     {
+      "node": "agente de atendimento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "agente de atendimento": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request (Auth Absoluta)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "normatizacao do numero api whatsapp": {
+   "main": [
+    [
+     {
+      "node": "1. É Mensagem?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "eac13470-469d-47ec-b91b-df74e91b9dc6",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "1bXtTPPjwgBWpj5N",
+ "tags": []
+}

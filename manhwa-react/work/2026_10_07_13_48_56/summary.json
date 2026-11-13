@@ -1,0 +1,184 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 13-48-56.mp4",
+ "duration": 100.033333,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 713,
+  "has_webcam": true,
+  "contrast": 45.8,
+  "trimmed": {},
+  "divider": 402,
+  "webcam": [
+   0,
+   0,
+   720,
+   402
+  ],
+  "content": [
+   0,
+   402,
+   713,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 6,
+  "reason": "React sobre teoria de poder sobrenatural da família do Bach com reações genuínas do criador ao ver o avô na batalha.",
+  "topic": "Teoria sobre poder sobrenatural da família do Bach em anime/manhwa",
+  "channel": "manhwareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 100.0,
+    "hook": "A FAMÍLIA TODA TEM PODER SOBRENATURAL?!",
+    "title": "O avô dele apareceu no meio da batalha e NINGUÉM esperava 😱 #shorts #anime",
+    "description": "O criador reage à teoria que explica por que toda a família é absurdamente forte — e o avô aparece no meio da luta!\nVocê já tinha percebido essa conexão?\nOs outros personagens começaram a notar também...\nSegue pra mais reacts insanos!\n\n#shorts #react #anime #manhwa #teoria #avô #família #poder #sobrenatural #batalha #otaku #animebrasil #reactbr #hype",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#manhwa",
+     "#teoria",
+     "#poder",
+     "#sobrenatural",
+     "#família",
+     "#batalha",
+     "#otaku"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "manhwa",
+     "teoria",
+     "poder sobrenatural",
+     "família forte",
+     "avô",
+     "batalha",
+     "react anime",
+     "react br",
+     "otaku",
+     "anime brasil",
+     "Bach",
+     "poder",
+     "sobrenatural",
+     "hype anime"
+    ],
+    "keywords": [
+     {
+      "t": 20.0,
+      "text": "PODER SOBRENATURAL",
+      "emoji": "⚡"
+     },
+     {
+      "t": 48.0,
+      "text": "É O AVÔ",
+      "emoji": "👴"
+     },
+     {
+      "t": 58.0,
+      "text": "COMEÇARAM A VER",
+      "emoji": "👀"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 48.0,
+      "type": "shock"
+     },
+     {
+      "t": 58.0,
+      "type": "hype"
+     }
+    ],
+    "memes": [
+     {
+      "t": 48.0,
+      "id": 7
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Você acha que o avô é mais forte que o pai? 👴⚡",
+    "title_alternatives": [
+     "Então ERA POR ISSO que a família toda é forte?! 😱 #shorts #anime",
+     "O avô apareceu na batalha e TODO MUNDO ficou em choque 👀 #shorts #react"
+    ],
+    "mood": "tense_dramatic",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_13_48_56\\2026_10_07_13_48_56.mp4",
+   "duration": 43.00433700000025,
+   "keeps": 29,
+   "meta": {
+    "hook": "A FAMÍLIA TODA TEM PODER SOBRENATURAL?!",
+    "title": "O avô dele apareceu no meio da batalha e NINGUÉM esperava 😱 #shorts #anime",
+    "description": "O criador reage à teoria que explica por que toda a família é absurdamente forte — e o avô aparece no meio da luta!\nVocê já tinha percebido essa conexão?\nOs outros personagens começaram a notar também...\nSegue pra mais reacts insanos!\n\n#shorts #react #anime #manhwa #teoria #avô #família #poder #sobrenatural #batalha #otaku #animebrasil #reactbr #hype",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#manhwa",
+     "#teoria",
+     "#poder",
+     "#sobrenatural",
+     "#família",
+     "#batalha",
+     "#otaku"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "manhwa",
+     "teoria",
+     "poder sobrenatural",
+     "família forte",
+     "avô",
+     "batalha",
+     "react anime",
+     "react br",
+     "otaku",
+     "anime brasil",
+     "Bach",
+     "poder",
+     "sobrenatural",
+     "hype anime"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "tense_dramatic",
+    "music": true,
+    "pinned_comment": "Você acha que o avô é mais forte que o pai? 👴⚡",
+    "title_alternatives": [
+     "Então ERA POR ISSO que a família toda é forte?! 😱 #shorts #anime",
+     "O avô apareceu na batalha e TODO MUNDO ficou em choque 👀 #shorts #react"
+    ],
+    "work": null,
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_13_48_56\\2026_10_07_13_48_56_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\phonk_football_anime_infraction_27jILMV2-fw.mp3",
+   "removed_pct": 57.0,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 42.97,
+    "lufs": -14.2
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 325.7
+}

@@ -1,0 +1,29 @@
+{
+ "formato": "screencast de ferramenta/processo com narração explicativa",
+ "descricao": "Gravação de tela mostrando um dashboard ou ferramenta de branding (fases de criação de identidade visual) enquanto explica o processo de brand book para agências. Ritmo didático, foco em mostrar o 'como fazer'.",
+ "replicavel": true,
+ "como_fazer": "1. Criar slides ou usar Canva/Figma para montar um dashboard visual de 'fases do brand book' (Agente 1: Estratégia, Agente 2: Branding, Agente 3: Identidade Visual). 2. Gerar narração com TTS ou LLM explicando cada fase (tom educativo, exemplos práticos tipo 'farmácia não usa preto/vermelho'). 3. Gravar tela com Playwright ou OBS simulando navegação pelo processo. 4. Adicionar overlays de texto destacando pontos-chave ('PALETA DE CORES', 'SEGMENTO', 'DIFERENCIAÇÃO'). 5. Trilha de fundo corporativa/motivacional. 6. Cortar em Shorts de 30-50s focando em 1 fase ou dica específica.",
+ "ferramentas": [
+  "Playwright",
+  "TTS",
+  "Canva/Figma para mockup",
+  "ffmpeg",
+  "overlays de texto"
+ ],
+ "fonte_de_material": "Mockups de dashboards criados em Canva/Figma, prints de ferramentas de branding (Notion, Miro), ou geração de interface via IA (Gemini para criar layouts de 'sistema de brand book')",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "Empreendedores e designers buscam processos prontos e dicas práticas que economizam tempo; o exemplo concreto ('farmácia nunca é preta') gera engajamento nos comentários.",
+ "exemplo_roteiro": "❌ Você sabia que CORES ERRADAS matam negócios?\n🏪 Já viu farmácia preta? NÃO. E barbearia verde? NUNCA.\n🎨 O segredo? BRAND BOOK.\n📊 Vou te mostrar as 3 fases que agências COBRAM R$5mil.\n✅ Fase 1: Estratégia. Defina segmento, público, diferenciais...",
+ "nicho_canal": "novo canal: negociosreact ou marketinghacks",
+ "tags": [
+  "branding",
+  "identidade visual",
+  "empreendedorismo",
+  "marketing digital",
+  "brand book",
+  "dica de negócios"
+ ],
+ "video": "2026-10-09 17-22-24.mp4",
+ "data": "2026-10-12"
+}

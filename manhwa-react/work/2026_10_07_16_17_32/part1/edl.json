@@ -1,0 +1,673 @@
+{
+ "part": [
+  0.0,
+  49.0
+ ],
+ "keeps": [
+  [
+   0.43689599999999995,
+   1.865917
+  ],
+  [
+   5.384854,
+   6.972792
+  ],
+  [
+   8.149999999999999,
+   8.833020999999999
+  ],
+  [
+   9.837021000000002,
+   11.994375
+  ],
+  [
+   13.022563000000002,
+   16.106917
+  ],
+  [
+   22.130000000000003,
+   28.307603999999998
+  ],
+  [
+   28.622604,
+   29.126645999999997
+  ],
+  [
+   32.370000000000005,
+   33.552792000000004
+  ],
+  [
+   37.999375,
+   38.52854200000001
+  ],
+  [
+   38.79725,
+   41.59333300000001
+  ],
+  [
+   45.942354,
+   49.0
+  ]
+ ],
+ "duration_out": 23.189022000000005,
+ "zoom": [
+  [
+   0.283,
+   4.433,
+   1
+  ],
+  [
+   4.283,
+   5.673,
+   2
+  ],
+  [
+   6.475,
+   8.205,
+   1
+  ],
+  [
+   8.942,
+   13.092,
+   2
+  ],
+  [
+   12.942,
+   13.302,
+   1
+  ],
+  [
+   15.623,
+   16.883,
+   2
+  ],
+  [
+   17.498,
+   21.648,
+   1
+  ],
+  [
+   21.498,
+   23.189,
+   2
+  ]
+ ],
+ "content_zoom": [],
+ "keywords": [],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 2.0441670000000003,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Suspense 1.mp3"
+  },
+  {
+   "t": 10.435059900000002,
+   "file": "D:\\manhwa-react\\assets\\sfx\\like.wav"
+  },
+  {
+   "t": 16.806750999999988,
+   "file": "D:\\manhwa-react\\assets\\memes_audio\\video_com_zoom1MP54.wav"
+  },
+  {
+   "t": 19.438042999999997,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Outros efeitos sonoros\\Efeitos Sonoros\\Boowomp sound effect that they play on Spongebob when something sad happens.mp3"
+  },
+  {
+   "t": 20.689022000000005,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 1.9441670000000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_question.mov",
+   "dur": 1.2,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 2.0441670000000003,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f914_220.png",
+   "dur": 1.4,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 10.435059900000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_likeburst.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 16.806750999999988,
+   "file": "D:\\hipercool-materiais\\assets\\memes_img\\memes\\video_com_zoom1MP54.mp4",
+   "dur": 4.0,
+   "png": false,
+   "video": true
+  },
+  {
+   "t": 19.438042999999997,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f622_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 20.689022000000005,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_part2.mov",
+   "dur": 2.0,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk da deep web (Original).mp3",
+ "meta": {
+  "hook": "OS TRITONS SÃO ASSEXUADOS?!",
+  "title": "Esse acordo NÃO vale a pena 😳 Se o cara vai embora, esquece! #shorts #react",
+  "description": "O criador reage a um filme e descobre que os tritons são assexuados 😂 Será que vale a pena fazer esse acordo? Ele acha que não!\nVocê faria esse acordo? Comenta aí!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #filme #triton #sereia #acordo #reacao #cenareact #filmes #curiosidade #engracado #humor #reactbr #viral",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#filme",
+   "#triton",
+   "#sereia",
+   "#acordo",
+   "#reacao",
+   "#cenareact",
+   "#humor",
+   "#reactbr"
+  ],
+  "tags": [
+   "react",
+   "filme",
+   "triton",
+   "sereia",
+   "acordo",
+   "reação",
+   "react filme",
+   "cena de filme",
+   "react br",
+   "shorts",
+   "cenareact",
+   "humor",
+   "comédia",
+   "filmes",
+   "curiosidade",
+   "react engraçado"
+  ],
+  "cta": "Você faria esse acordo?",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Você faria esse acordo sabendo das consequências? 🤔",
+  "title_alternatives": [
+   "Tritons são ASSEXUADOS?! 😂 Esse acordo não compensa! #shorts #react",
+   "Se o cara vai embora, NÃO VALE A PENA 😳🚫 #shorts #filme"
+  ],
+  "work": null,
+  "channel": "cenareact"
+ },
+ "channel": "cenareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1490_56_7.png",
+  "overlap": 56,
+  "y": 486,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\fire_ffb800_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "fire"
+ },
+ "words": [
+  {
+   "w": "ver",
+   "s": 0.283104,
+   "e": 0.503104,
+   "p": 0.9,
+   "lip": 0.010578496650418042,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 0.503104,
+   "e": 0.6831040000000002,
+   "p": 0.9,
+   "lip": 0.011611635395048678,
+   "speaker": "creator"
+  },
+  {
+   "w": "filme.",
+   "s": 0.6831040000000002,
+   "e": 1.223104,
+   "p": 0.9,
+   "lip": 0.00977457391564548,
+   "speaker": "creator"
+  },
+  {
+   "w": "Como",
+   "s": 1.6241670000000004,
+   "e": 1.8841670000000001,
+   "p": 0.9,
+   "lip": 0.010388203366379129,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 1.8841670000000001,
+   "e": 1.9641670000000002,
+   "p": 0.9,
+   "lip": 0.013218540007629363,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 1.9641670000000002,
+   "e": 2.104167,
+   "p": 0.9,
+   "lip": 0.014352948396407566,
+   "speaker": "creator"
+  },
+  {
+   "w": "faz,",
+   "s": 2.104167,
+   "e": 2.424167,
+   "p": 0.9,
+   "lip": 0.012469517916759668,
+   "speaker": "creator"
+  },
+  {
+   "w": "então?",
+   "s": 2.424167,
+   "e": 2.724167,
+   "p": 0.9,
+   "lip": 0.009207482838931396,
+   "speaker": "creator"
+  },
+  {
+   "w": "tá.",
+   "s": 3.0169590000000004,
+   "e": 3.6999800000000005,
+   "p": 0.9,
+   "lip": 0.004793575439906684,
+   "speaker": "creator"
+  },
+  {
+   "w": "Então,",
+   "s": 3.8229589999999996,
+   "e": 4.202958999999998,
+   "p": 0.9,
+   "lip": 0.01083904949918427,
+   "speaker": "creator"
+  },
+  {
+   "w": "os",
+   "s": 4.202958999999998,
+   "e": 4.282958999999998,
+   "p": 0.9,
+   "lip": 0.011868911725482998,
+   "speaker": "creator"
+  },
+  {
+   "w": "tritons",
+   "s": 4.282958999999998,
+   "e": 4.642958999999998,
+   "p": 0.9,
+   "lip": 0.013475109454735814,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 4.642958999999998,
+   "e": 4.782958999999998,
+   "p": 0.9,
+   "lip": 0.012446578595864911,
+   "speaker": "creator"
+  },
+  {
+   "w": "fazem",
+   "s": 4.782958999999998,
+   "e": 4.9829589999999975,
+   "p": 0.9,
+   "lip": 0.012564969043680563,
+   "speaker": "creator"
+  },
+  {
+   "w": "nada.",
+   "s": 4.9829589999999975,
+   "e": 5.522958999999998,
+   "p": 0.9,
+   "lip": 0.00988394031869413,
+   "speaker": "creator"
+  },
+  {
+   "w": "São",
+   "s": 6.474770999999997,
+   "e": 6.834770999999996,
+   "p": 0.9,
+   "lip": 0.004008703859460255,
+   "speaker": "creator"
+  },
+  {
+   "w": "assexuados.",
+   "s": 6.834770999999996,
+   "e": 8.054770999999997,
+   "p": 0.9,
+   "lip": 0.009188477000095797,
+   "speaker": "creator"
+  },
+  {
+   "w": "como",
+   "s": 8.941687999999996,
+   "e": 9.191687999999992,
+   "p": 0.9,
+   "lip": 0.01866084386135746,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 9.191687999999992,
+   "e": 9.271687999999994,
+   "p": 0.9,
+   "lip": 0.024257620358049767,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 9.271687999999994,
+   "e": 9.371687999999992,
+   "p": 0.9,
+   "lip": 0.022536944667107563,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 9.371687999999992,
+   "e": 9.491687999999993,
+   "p": 0.9,
+   "lip": 0.020977112250336497,
+   "speaker": "creator"
+  },
+  {
+   "w": "entra?",
+   "s": 9.491687999999993,
+   "e": 10.111687999999994,
+   "p": 0.9,
+   "lip": 0.011275276756989916,
+   "speaker": "creator"
+  },
+  {
+   "w": "Eu",
+   "s": 10.671687999999993,
+   "e": 10.891687999999991,
+   "p": 0.9,
+   "lip": 0.017156578386398134,
+   "speaker": "creator"
+  },
+  {
+   "w": "faria",
+   "s": 10.891687999999991,
+   "e": 11.211687999999992,
+   "p": 0.9,
+   "lip": 0.01946627001228958,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 11.211687999999992,
+   "e": 11.411687999999995,
+   "p": 0.9,
+   "lip": 0.015329012043741538,
+   "speaker": "creator"
+  },
+  {
+   "w": "acordo,",
+   "s": 11.411687999999995,
+   "e": 11.871687999999992,
+   "p": 0.9,
+   "lip": 0.010245301597613353,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 11.871687999999992,
+   "e": 12.091687999999994,
+   "p": 0.9,
+   "lip": 0.01000752217151255,
+   "speaker": "creator"
+  },
+  {
+   "w": "faria",
+   "s": 12.091687999999994,
+   "e": 12.371687999999992,
+   "p": 0.9,
+   "lip": 0.01080516528913677,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 12.371687999999992,
+   "e": 12.611687999999994,
+   "p": 0.9,
+   "lip": 0.00991090491141974,
+   "speaker": "creator"
+  },
+  {
+   "w": "acordo?",
+   "s": 12.611687999999994,
+   "e": 13.151687999999993,
+   "p": 0.9,
+   "lip": 0.004628047630466168,
+   "speaker": "creator"
+  },
+  {
+   "w": "mudinha!",
+   "s": 15.62333399999999,
+   "e": 16.73333399999998,
+   "p": 0.9,
+   "lip": 0.006919014983007713,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ai,",
+   "s": 17.498043,
+   "e": 18.038043,
+   "p": 0.9,
+   "lip": 0.021039594986027668,
+   "speaker": "creator"
+  },
+  {
+   "w": "mata",
+   "s": 18.038043,
+   "e": 18.218042999999998,
+   "p": 0.9,
+   "lip": 0.033178236424932714,
+   "speaker": "creator"
+  },
+  {
+   "w": "os",
+   "s": 18.218042999999998,
+   "e": 18.398042999999998,
+   "p": 0.9,
+   "lip": 0.030069917750565174,
+   "speaker": "creator"
+  },
+  {
+   "w": "caras!",
+   "s": 18.398042999999998,
+   "e": 18.678043,
+   "p": 0.9,
+   "lip": 0.020734302407949275,
+   "speaker": "creator"
+  },
+  {
+   "w": "Aí",
+   "s": 18.678043,
+   "e": 18.838042999999995,
+   "p": 0.9,
+   "lip": 0.018319358697441616,
+   "speaker": "creator"
+  },
+  {
+   "w": "já",
+   "s": 18.838042999999995,
+   "e": 18.998043,
+   "p": 0.9,
+   "lip": 0.01899495952242631,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 18.998043,
+   "e": 19.118042999999997,
+   "p": 0.9,
+   "lip": 0.015215916846732116,
+   "speaker": "creator"
+  },
+  {
+   "w": "vale",
+   "s": 19.118042999999997,
+   "e": 19.338042999999995,
+   "p": 0.9,
+   "lip": 0.013693835992257009,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 19.338042999999995,
+   "e": 19.438042999999997,
+   "p": 0.9,
+   "lip": 0.01345741918092169,
+   "speaker": "creator"
+  },
+  {
+   "w": "pena.",
+   "s": 19.438042999999997,
+   "e": 20.018042999999995,
+   "p": 0.9,
+   "lip": 0.009390958481972607,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 20.469022000000006,
+   "e": 20.589022000000003,
+   "p": 0.9,
+   "lip": 0.018353964834192656,
+   "speaker": "creator"
+  },
+  {
+   "w": "vale",
+   "s": 20.589022000000003,
+   "e": 20.829022000000005,
+   "p": 0.9,
+   "lip": 0.017642223759146123,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 20.829022000000005,
+   "e": 20.929022000000007,
+   "p": 0.9,
+   "lip": 0.01506608503132392,
+   "speaker": "creator"
+  },
+  {
+   "w": "pena,",
+   "s": 20.929022000000007,
+   "e": 21.129022000000003,
+   "p": 0.9,
+   "lip": 0.01700896702253955,
+   "speaker": "creator"
+  },
+  {
+   "w": "não.",
+   "s": 21.129022000000003,
+   "e": 21.249022000000007,
+   "p": 0.9,
+   "lip": 0.01596105947552982,
+   "speaker": "creator"
+  },
+  {
+   "w": "Se",
+   "s": 21.249022000000007,
+   "e": 21.389022000000008,
+   "p": 0.9,
+   "lip": 0.015605668216028601,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 21.389022000000008,
+   "e": 21.469022000000006,
+   "p": 0.9,
+   "lip": 0.015167653272485843,
+   "speaker": "creator"
+  },
+  {
+   "w": "cara",
+   "s": 21.469022000000006,
+   "e": 21.649022000000006,
+   "p": 0.9,
+   "lip": 0.014762951170188204,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 21.649022000000006,
+   "e": 21.889022000000008,
+   "p": 0.9,
+   "lip": 0.016041000380428206,
+   "speaker": "creator"
+  },
+  {
+   "w": "morrer,",
+   "s": 21.889022000000008,
+   "e": 22.389022000000008,
+   "p": 0.9,
+   "lip": 0.01830693246938757,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 22.389022000000008,
+   "e": 22.489022000000002,
+   "p": 0.9,
+   "lip": 0.02167812713497699,
+   "speaker": "creator"
+  },
+  {
+   "w": "vale",
+   "s": 22.489022000000002,
+   "e": 22.709022000000008,
+   "p": 0.9,
+   "lip": 0.01784900849907056,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 22.709022000000008,
+   "e": 22.789022000000006,
+   "p": 0.9,
+   "lip": 0.015778351393661186,
+   "speaker": "creator"
+  },
+  {
+   "w": "pena,",
+   "s": 22.769022000000003,
+   "e": 23.049022000000004,
+   "p": 0.9,
+   "lip": 0.013533993175532891,
+   "speaker": "creator"
+  },
+  {
+   "w": "não.",
+   "s": 23.049022000000004,
+   "e": 23.189022000000005,
+   "p": 0.9,
+   "lip": 0.007379714361196281,
+   "speaker": "creator"
+  }
+ ]
+}

@@ -1,0 +1,75 @@
+=== STDOUT ===
+=== DIAG START ===
+
+Python: 3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 09:38:07) [MSC v.1941 64 bit (AMD64)]
+
+Executable: C:\projetos-navegador\venv\Scripts\python.exe
+
+CWD: C:\projetos-navegador
+
+
+
+--- Testando imports ---
+
+  config OK, BASE_DIR=C:\projetos-navegador
+
+  logger OK
+
+  flags OK
+
+  progress OK
+
+  browser OK
+
+  engagement OK
+
+  worker OK
+
+  scheduler OK
+
+  main OK
+
+
+
+--- Verificando arquivos ---
+
+  VIDEOS_FILE=C:\projetos-navegador\all_channel_videos_full.json, exists=True
+
+  config_file=C:\projetos-navegador\engage_config.json, exists=True
+
+  shared/=C:\projetos-navegador\shared, exists=True
+
+  google_session.py=C:\projetos-navegador\shared\google_session.py, exists=True
+
+  gemini_keys=C:\projetos-navegador\secrets\gemini_keys.json, exists=True
+
+  logins-google=C:\logins-google, exists=True
+
+    2 profiles
+
+
+
+--- Playwright ---
+
+  playwright import OK
+
+
+
+--- Config ---
+
+  mode=both, workers=5, paused=False
+
+
+
+--- Proxy ---
+
+[2026-08-05 07:50:00] PROXY HEALTH: 22/35 vivos � [1, 11, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
+
+  proxies saudaveis: 22
+
+
+
+=== DIAG OK ===
+
+
+=== STDERR ===

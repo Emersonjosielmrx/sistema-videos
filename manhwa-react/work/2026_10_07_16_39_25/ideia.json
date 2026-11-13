@@ -1,0 +1,28 @@
+{
+ "formato": "meme de anime com legenda word-by-word sincronizada",
+ "descricao": "Pega cenas de anime/manhwa, adiciona legenda que aparece palavra por palavra (estilo karaokê) contando uma piada ou situação relatable. Ritmo rápido, punchline visual no final.",
+ "replicavel": true,
+ "como_fazer": "1) Escolher 3-5 frames de anime/manhwa dos 86 mil painéis que combinem com a narrativa. 2) Escrever roteiro curto (15-20 palavras) com setup + punchline sobre dinheiro/relacionamento/escola. 3) Gerar legendas sincronizadas palavra por palavra no ffmpeg com efeito de surgimento (0.2s por palavra). 4) Adicionar trilha phonk/drill brasileira de fundo. 5) Overlay de dinheiro/efeitos no frame final (confete, brilho). 6) Exportar 9:16 com texto grande estilo impact branco com borda preta.",
+ "ferramentas": [
+  "ffmpeg",
+  "paineis-manhwa",
+  "trilhas-musica",
+  "overlays-animados"
+ ],
+ "fonte_de_material": "86 mil painéis de manhwa já disponíveis; selecionar expressões faciais que casem com a narrativa (surpresa, felicidade, dinheiro caindo)",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "Timing perfeito entre legenda e imagem cria dopamina; todo mundo se identifica com piadas de 'ficou rico' ou 'perdeu tudo'",
+ "exemplo_roteiro": "ELE É MILIONÁRIO AGORA... 😂\nSEU / PAGAR / COMO\n[Frame 1: gaveta de dinheiro]\n[Frame 2: personagem pagando]\n[Frame 3: personagem sorrindo]\n[Frame 4: personagem deitado em pilha de dinheiro com efeito de confete]",
+ "nicho_canal": "manhwareact",
+ "tags": [
+  "meme-anime",
+  "legenda-sincronizada",
+  "anime-brasileiro",
+  "manhwa-meme",
+  "rico-pobre",
+  "relatable"
+ ],
+ "video": "2026-10-07 16-39-25.mp4",
+ "data": "2026-10-12"
+}

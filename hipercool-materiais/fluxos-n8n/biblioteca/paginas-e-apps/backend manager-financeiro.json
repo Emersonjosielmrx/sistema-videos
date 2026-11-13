@@ -1,0 +1,2728 @@
+{
+ "name": "backend manager-financeiro",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "backend-manager",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "beba9767-9147-4a1a-86fc-e9de81256a75",
+   "name": "🌐 Portal do Manager",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -3760,
+    1008
+   ],
+   "webhookId": "c0c0c779-ffe1-40a7-9265-d91e36aa97de"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -3344,
+    1008
+   ],
+   "id": "3fe6620a-47bf-406a-b143-3344bd96da5a",
+   "name": "🔍 Detector de Instância"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $('Webhook').item.json.body.apikey }}",
+       "rightValue": "={{ $('Postgres').item.json.token }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -3104,
+    944
+   ],
+   "id": "97222d53-1b25-44dc-8f0c-a969afac4da6",
+   "name": "🔐 Validador de Token"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "dash",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "9228436f-8819-4b51-9100-5842713daff2"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "dash"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "91d44ff7-6496-47ee-8c03-11f7ca047f3d",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "edit_financeiro",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "edit_financeiro"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "8518a25c-c9cd-4937-b58e-cb4e4865024b",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "delete_financeiro",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "delete_financeiro"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b8460666-006c-4f51-a3cc-e435129ba71a",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "chat",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "chat"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "7dcfaf5b-4fa2-4f8c-92fc-72b3c20472b0",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "followup",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "followup"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "f889e05e-9559-4eaa-a00f-07428ea52023",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "prompt",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "prompt"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b598941b-a8dd-44f3-a88e-e3215d8ed5ad",
+          "leftValue": "={{ $('Webhook').item.json.body.action }}",
+          "rightValue": "save_prompt",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "save_prompt"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "3c894bb8-d0b8-4d1d-a232-2e2b4fdea46a",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "status",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "status"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a79d21d1-f0f6-4016-9090-09d469de730d",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "=qrcode",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "qrcode"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b5562951-16be-47e1-bb66-b349bae3fbfd",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "pairing_code",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "pairing_code"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "565ad767-4ae0-4122-ac1b-bbb79e2e9eac",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "novo_conhecimento",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "novo_conhecimento"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "fdfc39ce-1f53-4fa9-912f-71fe352e11c0",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "deletar_conhecimento",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "deletar_conhecimento"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "26b20a51-eb28-4508-91a9-77c9bf3f0e8c",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "edit_kamban",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "edit_kamban"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "f96ae6b2-6f7f-4a75-9174-4b57959b86a6",
+          "leftValue": "={{ $('Webhook').item.json.body.p }}",
+          "rightValue": "financeiro",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "financeiro"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    -2368,
+    640
+   ],
+   "id": "8a349c61-388a-4b4b-a65d-49dbcb5bc981",
+   "name": "🎛️ Roteador de Operações"
+  },
+  {
+   "parameters": {
+    "errorMessage": "Token invalido!"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    -2896,
+    1040
+   ],
+   "id": "43f656b8-1506-460b-9ad8-3dcfb3505235",
+   "name": "🚫 Bloqueio por Senha"
+  },
+  {
+   "parameters": {
+    "errorMessage": "Não existe essa Instancia!"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    -3120,
+    1104
+   ],
+   "id": "4f99e826-4ac8-4d19-b392-31d467df3d44",
+   "name": "🚫 Bloqueio por Instância"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "📤 Entrega do Dashboard",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1648,
+    416
+   ],
+   "typeVersion": 1,
+   "id": "4e80b55b-8e57-4c8b-956a-1b38804c564c"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT \n  c.id,\n  c.whatsapp,\n  c.data,\n  c.hora_cadastro,\n  c.credito_gasto,\n\n  f.whatsapp,\n  f.token_limit,\n  f.plano,\n  f.sum_tokens,\n  f.vencimento\n\nFROM \n  contagem_creditos c\nLEFT JOIN \n  cadastro_wuzapi f \n  ON f.whatsapp = c.whatsapp\nWHERE \n  c.whatsapp = '{{ $json.whatsapp }}';",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2064,
+    416
+   ],
+   "id": "631b4b97-0701-4d80-8105-04ece81d9e4d",
+   "name": "📊 Consulta para Dashboard",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "7f223bd7-1272-4130-aebc-3f96a3037a89",
+       "name": "whatsapp",
+       "value": "={{ $('Postgres').item.json.whatsapp }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -2256,
+    416
+   ],
+   "id": "a4765e15-83d0-4bb5-8c33-3cb6ce784d88",
+   "name": "✏️ Preparador de Dashboard"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      dash: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -1856,
+    416
+   ],
+   "id": "fd35e880-f272-4e64-86cb-1b895e77ba8f",
+   "name": "⚙️ Motor do Dashboard"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "cadastro_wuzapi",
+     "mode": "list",
+     "cachedResultName": "cadastro_wuzapi"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "instancia",
+       "value": "={{ $json.body.nome }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "baf446c9-0f6e-4158-b015-234be74cd853",
+   "name": "🗄️ Consulta Credenciais",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    -3536,
+    1008
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('Webhook').item.json.body.kamban_data.contactCell }}",
+      "etapa": "={{ $('Webhook').item.json.body.kamban_data.action }}",
+      "pushname": "={{ $('Webhook').item.json.body.kamban_data.contactName }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ProfilePicture",
+       "displayName": "ProfilePicture",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "sobrenome",
+       "displayName": "sobrenome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cidade",
+       "displayName": "cidade",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "estado",
+       "displayName": "estado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "pais",
+       "displayName": "pais",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "valor_venda",
+       "displayName": "valor_venda",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_id",
+       "displayName": "item_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_name",
+       "displayName": "item_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cta",
+       "displayName": "cta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ctwaclid",
+       "displayName": "ctwaclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_url",
+       "displayName": "source_url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data_criacao",
+       "displayName": "data_criacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_id",
+       "displayName": "source_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "id_transacao",
+       "displayName": "id_transacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbclid",
+       "displayName": "fbclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fpb",
+       "displayName": "fpb",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_medium",
+       "displayName": "utm_medium",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_source",
+       "displayName": "utm_source",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_id",
+       "displayName": "utm_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_content",
+       "displayName": "utm_content",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_term",
+       "displayName": "utm_term",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_campaign",
+       "displayName": "utm_campaign",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbc",
+       "displayName": "fbc",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "user_agent",
+       "displayName": "user_agent",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nomeEmpresa",
+       "displayName": "nomeEmpresa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome_completo",
+       "displayName": "nome_completo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "pushname",
+       "displayName": "pushname",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2128,
+    1008
+   ],
+   "id": "3271850b-5e2c-48a0-946b-8ec9aded5b81",
+   "name": "💬 Despachante WhatsApp",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.xpopdigital.com.br/user/avatar",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('Webhook').item.json.body.kamban_data.contactCell.split(\"_\")[0] }}"
+      },
+      {
+       "name": "Preview",
+       "value": "={{ true }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -1936,
+    1008
+   ],
+   "id": "c5677e62-e4fe-4bca-bdcb-609ffef9511c",
+   "name": "📤 Mensageiro WuzAPI"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('Webhook').item.json.body.kamban_data.contactCell }}",
+      "ProfilePicture": "={{ $json.data.url }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ProfilePicture",
+       "displayName": "ProfilePicture",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "sobrenome",
+       "displayName": "sobrenome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cidade",
+       "displayName": "cidade",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "estado",
+       "displayName": "estado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "pais",
+       "displayName": "pais",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "valor_venda",
+       "displayName": "valor_venda",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_id",
+       "displayName": "item_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_name",
+       "displayName": "item_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cta",
+       "displayName": "cta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ctwaclid",
+       "displayName": "ctwaclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_url",
+       "displayName": "source_url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data_criacao",
+       "displayName": "data_criacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_id",
+       "displayName": "source_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "id_transacao",
+       "displayName": "id_transacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbclid",
+       "displayName": "fbclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fpb",
+       "displayName": "fpb",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_medium",
+       "displayName": "utm_medium",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_source",
+       "displayName": "utm_source",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_id",
+       "displayName": "utm_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_content",
+       "displayName": "utm_content",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_term",
+       "displayName": "utm_term",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_campaign",
+       "displayName": "utm_campaign",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbc",
+       "displayName": "fbc",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "user_agent",
+       "displayName": "user_agent",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nomeEmpresa",
+       "displayName": "nomeEmpresa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1712,
+    1008
+   ],
+   "id": "b947bdcd-ae1c-4531-b8d0-1fc47e49ed22",
+   "name": "📝 Registro de Envio",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "cadastro_wuzapi",
+     "mode": "list",
+     "cachedResultName": "cadastro_wuzapi"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "whatsapp": "={{ $json.whatsapp }}",
+      "ultimo_login": "={{ $now }}"
+     },
+     "matchingColumns": [
+      "whatsapp"
+     ],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "dataCadastro",
+       "displayName": "dataCadastro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instancia",
+       "displayName": "instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "vencimento",
+       "displayName": "vencimento",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token",
+       "displayName": "token",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "gemini",
+       "displayName": "gemini",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "groq",
+       "displayName": "groq",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome_agente",
+       "displayName": "nome_agente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contexto",
+       "displayName": "contexto",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "linguagem",
+       "displayName": "linguagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "objetivo",
+       "displayName": "objetivo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "exemplos",
+       "displayName": "exemplos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "restricoes",
+       "displayName": "restricoes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "whatsapp_testador",
+       "displayName": "whatsapp_testador",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mode",
+       "displayName": "mode",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "prompt_mode",
+       "displayName": "prompt_mode",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "prompt_completo",
+       "displayName": "prompt_completo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "validador",
+       "displayName": "validador",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "split_message",
+       "displayName": "split_message",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "split_time_ms",
+       "displayName": "split_time_ms",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "sum_tokens",
+       "displayName": "sum_tokens",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_limit",
+       "displayName": "token_limit",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "plano",
+       "displayName": "plano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapas",
+       "displayName": "etapas",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultimo_login",
+       "displayName": "ultimo_login",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "id": "ac34f681-d172-467b-b34d-a1246f6e108f",
+   "name": "📝 Registro de Login",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    -2880,
+    768
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      financeiro: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -2032,
+    1232
+   ],
+   "id": "0ae87390-8d56-4e2c-9f4e-5b7a9d02176f",
+   "name": "⚙️ Processador de Dados"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega de Consulta",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1840,
+    1232
+   ],
+   "typeVersion": 1,
+   "id": "db06e2dd-a3e7-40f9-9333-09690205d566"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "financeiro",
+     "mode": "list",
+     "cachedResultName": "financeiro"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instancia",
+       "value": "={{ $('Webhook').item.json.body.nome }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2256,
+    1232
+   ],
+   "id": "ee9a8516-3b54-4ba6-a319-0441d399f8ed",
+   "name": "📋 Consultor de Registros",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "financeiro",
+     "mode": "list",
+     "cachedResultName": "financeiro"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('Webhook').item.json.body.data_financeiro.id }}",
+      "descricao": "={{ $('Webhook').item.json.body.data_financeiro.descricao }}",
+      "valor": "={{ $('Webhook').item.json.body.data_financeiro.valor }}",
+      "categoria_nome": "={{ $('Webhook').item.json.body.data_financeiro.categoria_nome }}",
+      "data": "={{ $('Webhook').item.json.body.data_financeiro.data }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "descricao",
+       "displayName": "descricao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "valor",
+       "displayName": "valor",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data",
+       "displayName": "data",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "tipo",
+       "displayName": "tipo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "categoria_codigo",
+       "displayName": "categoria_codigo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "categoria_nome",
+       "displayName": "categoria_nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "forma_pagamento",
+       "displayName": "forma_pagamento",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "criado_em",
+       "displayName": "criado_em",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atualizado_em",
+       "displayName": "atualizado_em",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "grupo",
+       "displayName": "grupo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instancia",
+       "displayName": "instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2016,
+    656
+   ],
+   "id": "0470e2e0-2f3a-441c-b2fe-31665d80ada5",
+   "name": "✏️ Editor Financeiro",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "financeiro",
+     "mode": "list",
+     "cachedResultName": "financeiro"
+    },
+    "deleteCommand": "delete",
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('Webhook').item.json.body.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2128,
+    832
+   ],
+   "id": "d7dd70c3-7aac-4690-abe4-584b02b89797",
+   "name": "🗑️ Removedor Financeiro",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE \"cadastro_wuzapi\" (\n\t\"whatsapp\" TEXT NOT NULL,\n\t\"email\" TEXT NULL DEFAULT NULL,\n\t\"dataCadastro\" DATE NULL DEFAULT NULL,\n\t\"instancia\" TEXT NULL DEFAULT NULL,\n\t\"vencimento\" DATE NULL DEFAULT NULL,\n\t\"token\" TEXT NULL DEFAULT NULL,\n\t\"gemini\" TEXT NULL DEFAULT NULL,\n\t\"groq\" TEXT NULL DEFAULT NULL,\n\t\"nome_agente\" TEXT NULL DEFAULT NULL,\n\t\"contexto\" TEXT NULL DEFAULT NULL,\n\t\"linguagem\" TEXT NULL DEFAULT NULL,\n\t\"objetivo\" TEXT NULL DEFAULT NULL,\n\t\"exemplos\" TEXT NULL DEFAULT NULL,\n\t\"restricoes\" TEXT NULL DEFAULT NULL,\n\t\"whatsapp_testador\" TEXT NULL DEFAULT NULL,\n\t\"mode\" TEXT NULL DEFAULT NULL,\n\t\"prompt_mode\" TEXT NULL DEFAULT NULL,\n\t\"prompt_completo\" TEXT NULL DEFAULT NULL,\n\t\"validador\" TEXT NULL DEFAULT NULL,\n\t\"split_message\" TEXT NULL DEFAULT NULL,\n\t\"split_time_ms\" INTEGER NULL DEFAULT NULL,\n\t\"sum_tokens\" INTEGER NULL DEFAULT NULL,\n\t\"token_limit\" INTEGER NULL DEFAULT NULL,\n\t\"plano\" TEXT NULL DEFAULT NULL,\n\t\"etapas\" TEXT NULL DEFAULT NULL,\n\t\"ultimo_login\" TIMESTAMP NULL DEFAULT NULL,\n\t\"jornada\" TEXT NULL DEFAULT NULL,\n\t\"marcar_anuncio\" BOOLEAN NULL DEFAULT NULL,\n\t\"agente_financeiro\" BOOLEAN NULL DEFAULT NULL,\n\t\"token_meta\" TEXT NULL DEFAULT NULL,\n\t\"fonte_dados_meta\" TEXT NULL DEFAULT NULL,\n\t\"monitorar\" BOOLEAN NULL DEFAULT NULL,\n\tPRIMARY KEY (\"whatsapp\")\n)\n;\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"whatsapp\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"email\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"dataCadastro\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"instancia\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"vencimento\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"token\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"gemini\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"groq\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"nome_agente\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"contexto\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"linguagem\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"objetivo\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"exemplos\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"restricoes\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"whatsapp_testador\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"mode\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"prompt_mode\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"prompt_completo\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"validador\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"split_message\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"split_time_ms\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"sum_tokens\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"token_limit\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"plano\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"etapas\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"ultimo_login\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"jornada\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"marcar_anuncio\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"agente_financeiro\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"token_meta\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"fonte_dados_meta\" IS '';\nCOMMENT ON COLUMN \"cadastro_wuzapi\".\"monitorar\" IS '';",
+    "options": {}
+   },
+   "id": "7369532c-e15a-4abc-a8db-0f24984f50ec",
+   "name": "🏗️ Construtor de Tabela",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    -3328,
+    752
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "cadastro_wuzapi",
+     "mode": "list",
+     "cachedResultName": "cadastro_wuzapi"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "marcar_anuncio": false,
+      "agente_financeiro": false,
+      "monitorar": false,
+      "split_time_ms": 0,
+      "sum_tokens": 0,
+      "token_limit": 0,
+      "instancia": "s22-bus-5106",
+      "token": "<SEGREDO_REMOVIDO>",
+      "vencimento": "2027-08-31T00:00:00",
+      "dataCadastro": "2026-08-20T21:53:22",
+      "whatsapp": "5522998908709"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "dataCadastro",
+       "displayName": "dataCadastro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "instancia",
+       "displayName": "instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "vencimento",
+       "displayName": "vencimento",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "token",
+       "displayName": "token",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "gemini",
+       "displayName": "gemini",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "groq",
+       "displayName": "groq",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "nome_agente",
+       "displayName": "nome_agente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "contexto",
+       "displayName": "contexto",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "linguagem",
+       "displayName": "linguagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "objetivo",
+       "displayName": "objetivo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "exemplos",
+       "displayName": "exemplos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "restricoes",
+       "displayName": "restricoes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "whatsapp_testador",
+       "displayName": "whatsapp_testador",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "mode",
+       "displayName": "mode",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "prompt_mode",
+       "displayName": "prompt_mode",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "prompt_completo",
+       "displayName": "prompt_completo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "validador",
+       "displayName": "validador",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "split_message",
+       "displayName": "split_message",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "split_time_ms",
+       "displayName": "split_time_ms",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "sum_tokens",
+       "displayName": "sum_tokens",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "token_limit",
+       "displayName": "token_limit",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "plano",
+       "displayName": "plano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapas",
+       "displayName": "etapas",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "ultimo_login",
+       "displayName": "ultimo_login",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "jornada",
+       "displayName": "jornada",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "marcar_anuncio",
+       "displayName": "marcar_anuncio",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "agente_financeiro",
+       "displayName": "agente_financeiro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "token_meta",
+       "displayName": "token_meta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "fonte_dados_meta",
+       "displayName": "fonte_dados_meta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "monitorar",
+       "displayName": "monitorar",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "id": "377d563d-1ce1-43bf-9869-b24a29712d99",
+   "name": "📝 Cadastrador de Registros",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    -3136,
+    752
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "# 🏗️ BACKEND MANAGER FINANCEIRO\n\n🔧 **API Backend** para o sistema financeiro.\n\n🔄 **Fluxo**: Webhook POST → Consulta credenciais → Valida instância → Valida token → Roteia operação (Switch com 5+ rotas)\n\n🎛️ **Operações**: Dashboard, Editar, Deletar, Enviar WhatsApp, Consultar, Criar Tabela, Cadastrar\n\n🔐 **Segurança**: Dupla validação (instância + token API)\n\n⚠️ **Status**: INATIVO (em desenvolvimento)",
+    "height": 344,
+    "width": 804,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -3744,
+    576
+   ],
+   "id": "sticky-wf3-overview",
+   "name": "📌 Visão Geral do Backend"
+  },
+  {
+   "parameters": {
+    "content": "## 🔐 AUTENTICAÇÃO\n\n1️⃣ Webhook recebe requisição POST\n2️⃣ Consulta cadastro no PostgreSQL\n3️⃣ Verifica se instância existe\n4️⃣ Compara API key com token do banco\n\n✅ Aprovado → roteia para operação\n❌ Instância inexistente → erro\n❌ Senha incorreta → erro",
+    "height": 280,
+    "width": 400,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -3792,
+    816
+   ],
+   "id": "sticky-wf3-auth",
+   "name": "📝 Autenticação"
+  },
+  {
+   "parameters": {
+    "content": "## 🎛️ ROTEADOR DE OPERAÇÕES\n\n📊 **dash** → Consulta + Code → Dashboard HTML\n✏️ **edit_financeiro** → Atualiza registro\n🗑️ **delete_financeiro** → Remove registro\n💬 **chat** → Envia mensagem WhatsApp\n📋 **consultar** → Select + Processa dados\n🏗️ **criar_tabela** → DDL PostgreSQL\n📝 **cadastrar** → Insert de registros",
+    "height": 300,
+    "width": 460,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2704,
+    608
+   ],
+   "id": "sticky-wf3-routes",
+   "name": "📝 Rotas do Switch"
+  },
+  {
+   "parameters": {
+    "content": "## 📊 DASHBOARD\n\n✏️ Prepara campos → 📊 Consulta PostgreSQL → ⚙️ Processa em JavaScript → 📤 Retorna HTML\n\n💡 Rota principal para visualização dos dados financeiros",
+    "height": 180,
+    "width": 460,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2208,
+    608
+   ],
+   "id": "sticky-wf3-dash",
+   "name": "📝 Rota Dashboard"
+  },
+  {
+   "parameters": {
+    "content": "## 💬 INTEGRAÇÃO WHATSAPP\n\n💬 Envia mensagem via WuzAPI\n📤 HTTP Request para API WuzAPI\n📝 Registra envio no banco\n\n🔗 Conecta com o módulo-financeiro (Workflow 2)",
+    "height": 200,
+    "width": 400
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1952,
+    800
+   ],
+   "id": "sticky-wf3-whatsapp",
+   "name": "📝 Integração WhatsApp"
+  }
+ ],
+ "pinData": {
+  "Webhook": [
+   {
+    "json": {
+     "headers": {
+      "host": "setup.winiciuspereira.co",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+      "content-length": "86",
+      "accept": "*/*",
+      "accept-encoding": "gzip, br",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "cache-control": "no-cache",
+      "cdn-loop": "cloudflare; loops=1",
+      "cf-connecting-ip": "45.71.243.7",
+      "cf-ipcountry": "BR",
+      "cf-ray": "9b281608bd386491-GIG",
+      "cf-visitor": "{\"scheme\":\"https\"}",
+      "content-type": "application/json",
+      "origin": "null",
+      "pragma": "no-cache",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "10.0.0.2",
+      "x-forwarded-host": "setup.winiciuspereira.co",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "5028ec4554f6",
+      "x-real-ip": "10.0.0.2"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "p": "delete_financeiro",
+      "nome": "Rafael_5522998908709",
+      "apikey": "<SEGREDO_REMOVIDO>",
+      "id": "6"
+     },
+     "webhookUrl": "https://setup.winiciuspereira.co/webhook/backend-manager",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "🌐 Portal do Manager": {
+   "main": [
+    [
+     {
+      "node": "🗄️ Consulta Credenciais",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔍 Detector de Instância": {
+   "main": [
+    [
+     {
+      "node": "🔐 Validador de Token",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🚫 Bloqueio por Instância",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔐 Validador de Token": {
+   "main": [
+    [
+     {
+      "node": "🎛️ Roteador de Operações",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "📝 Registro de Login",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🚫 Bloqueio por Senha",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎛️ Roteador de Operações": {
+   "main": [
+    [
+     {
+      "node": "✏️ Preparador de Dashboard",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "✏️ Editor Financeiro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🗑️ Removedor Financeiro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+     {
+      "node": "💬 Despachante WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📋 Consultor de Registros",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📊 Consulta para Dashboard": {
+   "main": [
+    [
+     {
+      "node": "⚙️ Motor do Dashboard",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "✏️ Preparador de Dashboard": {
+   "main": [
+    [
+     {
+      "node": "📊 Consulta para Dashboard",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⚙️ Motor do Dashboard": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega do Dashboard",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗄️ Consulta Credenciais": {
+   "main": [
+    [
+     {
+      "node": "🔍 Detector de Instância",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Mensageiro WuzAPI": {
+   "main": [
+    [
+     {
+      "node": "📝 Registro de Envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💬 Despachante WhatsApp": {
+   "main": [
+    [
+     {
+      "node": "📤 Mensageiro WuzAPI",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⚙️ Processador de Dados": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega de Consulta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📋 Consultor de Registros": {
+   "main": [
+    [
+     {
+      "node": "⚙️ Processador de Dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "6913a6c7-3b4c-4ff5-a889-bbf44adbc93e",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "xHAS7BzAFhiNpr3q",
+ "tags": [
+  {
+   "updatedAt": "2026-08-21T00:17:50.015Z",
+   "createdAt": "2026-08-21T00:17:50.015Z",
+   "id": "zZep8aR8JfSco1LF",
+   "name": "bot-financeiro"
+  }
+ ]
+}

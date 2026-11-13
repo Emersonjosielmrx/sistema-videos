@@ -1,0 +1,368 @@
+{
+ "resumo": "D:\\hipercool-videos (recap de manhwa) e hoje a referencia mais completa de \"acabamento + SEO + Studio + medicao\" entre os projetos de video da dona; docs/MELHORIAS_PARA_TODOS_OS_PROJETOS.md e a leitura obrigatoria e manda copiar/adaptar o codigo de la.\nO que ele tem e que o veo NAO tem (ou tem pela metade):\n1) bin/seo.py: agente de titulo/descricao/tags com banco de palavras do autocompletar publico (config/seo_palavras.json, suggestqueries sem chave), 3 estilos de titulo (busca/provocacao/curiosidade) sorteados por Thompson, apagador de nome proibido (_sem_obra) e dicionario de seguranca de anuncios; o estilo usado fica gravado no estado da postagem para medir CTR.\n2) bin/fx_acabamento.py: acabamento num unico encode: editorial por LLM (gancho, 5-8 palavras de impacto + emoji, pergunta do CTA), tempo real por palavra (Groq Whisper via proxy, fallback proporcional), legenda ASS palavra a palavra com pop, palavra gigante, barra de progresso, selo, CTA; punch-in nos impactos; emoji/figurinha como clipe .mov (_clipe_parado) porque varias entradas \"-loop 1\" travam o ffmpeg 8.1; Quick Sync com fallback x264; validar() (LUFS, trechos pretos, audio x video).\n3) Audio: masterizar_audio = trilha nivelada -28 LUFS com ducking por sidechain + SFX por gatilho de palavra (gatilhos_narracao.json, foley) + master -14 LUFS/-1 dBTP em 2 passos; bin/fx_music.py escolhe trilha por clima com prioritarias do dono, blocklist de copyright, filtro de lixo, max 100 s por faixa, crossfade e memoria das ultimas 16 faixas.\n4) Studio pelo navegador (modulo compartilhado D:\\postador-de-videos\\bin\\youtube_studio_extras.py): tela final, video relacionado, teste A/B de capa, comentario fixado, limpar rascunhos, renomear playlist, editar metadados e LER METRICAS (views, impressoes, CTR, duracao media, retencao 30 s). bin/metricas.py le 6 videos/dia e alimenta os rodizios (titulo, abertura) — parsing NAO testado em pagina real.\n5) bin/capa_ia.py: capas com rodizio Thompson de variantes, checagem por visao (cache md5), <capa>.json com variantes, registrar_teste/registrar_vencedora, capas 9:16 dos Shorts (nunca rodou com imagem, sem cota).\n6) Regras do dono que valem pro veo: vozes edge Multilingual (PROIBIDAS Antonio/Francisca/Isabella), voz fixa por md5/elenco (nunca hash()), bin/sem_janela.py em todo ponto de entrada agendado, um render pesado por vez, Groq so por proxy Webshare, Google/YouTube so pelo navegador, postar no pico do pais com poucos videos/dia e intervalo, nome proibido em lugar nenhum (inclusive playlist e texto na tela).\nEstado: canal pt com recursos avancados NEGADOS ate 14/11/2026 (bloqueia comentario fixado, video relacionado e teste A/B; contestacao ate 14/12); canais de lingua pedem \"verificacao unica\" (telefone). Metricas e A/B de capa existem no codigo mas ninguem alimentou ainda.\nNo veo hoje: vozes proibidas sao o padrao do fallback; nao ha SEO com palavras buscadas nem medicao de estilo; legendas antigas usam N entradas \"-loop 1\" num grafo so; o COMPLETO/LIMPO sai sem nivelamento de loudness; roteamento persona->canal usa hash() nao deterministico; branding \"@InovareStories\"/\"Siga pra mais historias IA\" ainda no codigo; postagem e round-robin publica em rajada as 06:40 com teto de 10/canal/dia e intervalo 0 h; agendador usa a Data API.",
+ "fatos": [
+  {
+   "fato": "O agente de SEO do hipercool monta o prompt com palavras buscadas por genero + padroes reais do autocompletar e exige titulo = provocacao + palavras buscadas, ate 95 caracteres, 3-5 palavras em maiusculas, 1 emoji; 20-30 tags; descricao em 3 paragrafos; lista fixa de palavras proibidas para anuncios.",
+   "evidencia": "D:\\hipercool-videos\\bin\\seo.py:147-166 (REGRAS) e :174-184 (_palavras le config/seo_palavras.json: generos, sempre, padroes_reais)"
+  },
+  {
+   "fato": "O banco de palavras foi feito com o endpoint publico suggestqueries (client=youtube&ds=yt&hl=pt-BR), sem chave de API, e deve ser refeito por genero novo.",
+   "evidencia": "D:\\hipercool-videos\\docs\\seo_titulos.md:14 'https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&hl=pt-BR&gl=BR&q=<semente>'; config/seo_palavras.json:38-42 'estilos_titulo' busca/provocacao/curiosidade"
+  },
+  {
+   "fato": "O estilo de titulo e sorteado por amostragem de Thompson Beta(vitorias+1, derrotas+1) sobre workspace/titulos_estilos.json; registrar_resultado(estilo, venceu) alimenta; o completo sai com 3 titulos e o escolhido vai no pacote.",
+   "evidencia": "D:\\hipercool-videos\\bin\\seo.py:230-244 'random.betavariate(... vitorias+1 ... testes-vitorias+1)' e :274-281 'estilo = escolher_estilo(...)'"
+  },
+  {
+   "fato": "_sem_obra apaga o nome proibido (e variacoes, inclusive #NomeJunto) de titulo/descricao/titulos e descarta a tag inteira; e generico: recebe {titulo, slug} + nomes_proibidos.",
+   "evidencia": "D:\\hipercool-videos\\bin\\seo.py:193-220 'rx = re.compile(r\"#?(?:\" + \"|\".join(alts) + r\")\\w*\", re.I)'"
+  },
+  {
+   "fato": "O dicionario de seguranca de anuncios (65 palavras proibidas com eufemismos) e aplicado por regex de palavra inteira no titulo, descricao, titulos e tags.",
+   "evidencia": "D:\\hipercool-videos\\bin\\seo.py:110-144 (_sanitizar_seo) e config/dicionario_seguro.json (chaves proibidas/idiomas; ex. 'matar' -> ['eliminar','acabar com'])"
+  },
+  {
+   "fato": "metricas.py le no Studio pelo navegador (nunca API) videos longos com 48 h a 21 dias, 6 por rodada, 1 rodada a cada 20 h; decide com 7+ dias e 3+ amostras: retencao 30 s acima da mediana = vitoria da abertura; CTR acima da mediana do canal (100+ impressoes) = vitoria do estilo de titulo.",
+   "evidencia": "D:\\hipercool-videos\\bin\\metricas.py:28-36 (TIPOS, IDADE_MIN_H=48, POR_RODADA=6, INTERVALO_H=20, MIN_IMPRESSOES=100, MIN_AMOSTRA=3), :82 'yx.rodar(canal, video=vid, metricas=True, timeout=900)', :99-133 (decidir)"
+  },
+  {
+   "fato": "A leitura das metricas raspa 3 abas do Analytics do video (overview, reach_viewers, interest_viewers) procurando os rotulos 'Visualizações', 'Impressões', 'Taxa de cliques', 'Duração média' e '0:30'; NAO foi testada em pagina real do Studio.",
+   "evidencia": "D:\\postador-de-videos\\bin\\youtube_studio_extras.py:579-601 (metricas) e D:\\hipercool-videos\\CLAUDE.md:205 'NÃO TESTADO em página real do Studio'"
+  },
+  {
+   "fato": "youtube_studio_extras.py e um modulo do postador (compartilhado) com tela_final, relacionado, teste_ab, comentar_fixar, limpar_rascunhos, playlists/renomear_playlist, editar_metadados, metricas e rodar() (subprocesso que devolve o dict RESULTADO); usa o mesmo Chrome/perfil/trava do youtube_web_poster.",
+   "evidencia": "D:\\postador-de-videos\\bin\\youtube_studio_extras.py:1-24 (docstring), :158, :207, :242, :287, :394, :456, :474, :498, :579, :605-630"
+  },
+  {
+   "fato": "O modulo reconhece os bloqueios da CONTA ('recursos avançados não estão disponíveis' e 'verificação única') e devolve 'bloqueado: ... até AAAA-MM-DD'; o hipercool so tenta de novo depois da data.",
+   "evidencia": "D:\\postador-de-videos\\bin\\youtube_studio_extras.py:40-72 (NEGADO, VERIF_UNICA, _bloqueio_conta); D:\\hipercool-videos\\bin\\postar_hipercool.py:396-404 (_extra_pendente: 'bloqueado' -> so apos a data)"
+  },
+  {
+   "fato": "O canal pt do hipercool teve a verificacao NEGADA em 15/10: pedir de novo em 14/11/2026, contestar ate 14/12/2026; bloqueia comentario fixado, video relacionado e teste A/B. Canais de lingua pedem verificacao unica por telefone para ligar Short a video.",
+   "evidencia": "D:\\hipercool-videos\\docs\\PEDIDOS_DO_DONO_PENDENTES.md:76-87 e bin/metricas.py:12-13"
+  },
+  {
+   "fato": "No hipercool os extras sao planejados no estado da postagem (tela final so em nao-Short, comentario fixado, teste A/B com as variantes do <capa>.json, 'relacionado' = o completo nos Shorts) e executados por rodar_extras (3 videos por rodada) dentro de fila.postagem, que tambem chama metricas.rodar().",
+   "evidencia": "D:\\hipercool-videos\\bin\\postar_hipercool.py:375-393 (_extras_de), :407-445 (rodar_extras, chama capa_ia.registrar_teste), bin/fila.py:581-592"
+  },
+  {
+   "fato": "Vozes: PROIBIDAS = pt-BR-AntonioNeural, pt-BR-FranciscaNeural, it-IT-IsabellaNeural; aprovadas as edge Multilingual (5 F, 7 M) x 10 variacoes de velocidade/tom; voz fixa por personagem/obra; md5 para escolha estavel; falar_edge recusa voz proibida e faz cache por voz+rate+pitch+texto.",
+   "evidencia": "D:\\hipercool-videos\\bin\\elenco.py:43-52 (PROIBIDAS, EDGE_F, EDGE_M, VARIACOES), :103-104 (_n = md5), :247-274 (falar_edge: 'raise ValueError(f\"voz proibida pelo dono...\")')"
+  },
+  {
+   "fato": "O proprio hipercool ainda tem o motor legado bin/edge_tts_engine.py com Francisca como padrao e escolha por hash(persona): NAO e o arquivo a portar (o certo e elenco.py).",
+   "evidencia": "D:\\hipercool-videos\\bin\\edge_tts_engine.py:20-22 'VOICES_FEMALE = [\"pt-BR-FranciscaNeural\", ...]', :71 '_NARRATOR_PROFILE = {\"voice\": \"pt-BR-FranciscaNeural\"...', :193 'idx = hash(persona) % len(_MALE_POOL)'"
+  },
+  {
+   "fato": "sem_janela.py (25 linhas) poe CREATE_NO_WINDOW em todo subprocess.Popen sem creationflags; e importado no ponto de entrada da fila, que roda via pythonw na tarefa agendada.",
+   "evidencia": "D:\\hipercool-videos\\bin\\sem_janela.py:14-25; bin/fila.py:33 'import sem_janela'; tarefa HipercoolFila = 'D:\\hipercool-videos\\venv\\Scripts\\pythonw.exe D:\\hipercool-videos\\bin\\fila.py ciclo' (Get-ScheduledTask)"
+  },
+  {
+   "fato": "_clipe_parado converte imagem parada em .mov qtrle com alfa (cache por md5 de caminho+mtime+duracao) porque varias entradas '-loop 1 -t X -i img' no mesmo grafo travam o ffmpeg 8.1 sem usar CPU; tpad->setpts, -threads 1 e -framerate 5 nao resolvem.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_acabamento.py:893-906; usado em :945 (emoji) e :961 (meme imagem); docs/MELHORIAS_PARA_TODOS_OS_PROJETOS.md:180-186"
+  },
+  {
+   "fato": "passe_final faz UM encode: fps=30 + scale lanczos 1080x1920 + cas=0.35, punch-in/tranco nas janelas de impacto, overlays .mov deslocados por setpts, emojis, memes e filtro ass; tenta h264_qsv (Quick Sync) com timeout 1 h e cai no x264 (ffmpeg_retry) se travar.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_acabamento.py:909-999 ('[0:v]fps=30,scale=...:flags=lanczos,cas=0.35', 'qsv = [\"-c:v\", \"h264_qsv\"...]', 'except (RuntimeError, subprocess.TimeoutExpired) ... x264')"
+  },
+  {
+   "fato": "masterizar_audio: SFX com adelay/atrim 2.6 s/afade e ganho em dB; trilha com -stream_loop -1, loudnorm I=-28:TP=-3:LRA=7, fade in 1.5 s/out 3 s, ducking sidechaincompress threshold=0.02:ratio=8:attack=30:release=500 pela voz; amix normalize=0; depois loudnorm em 2 passos para -14 LUFS / -1 dBTP (linear=true).",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_acabamento.py:606-656; constantes :66-67 'LUFS_ALVO=-14', 'MUSICA_LUFS=-28'"
+  },
+  {
+   "fato": "fx_music: prioritarias do dono tocam ~85% (fora da blocklist, risco so de Content ID), catalogo moods.json filtrado por blocklist de copyright, regex de lixo (ringtone/meme/efeito) e duracao >= 60 s; nenhuma faixa > 100 s seguidos; crossfade 2.5 s; evita as ultimas 16 faixas (trilhas_recentes.json); riser nas trocas de clima.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_music.py:38-49 (BLOCKLIST_FILE, CHANCE_PRIORIDADE=0.85, MAX_FAIXA_S=100, MIN_DUR_S=60, CROSSFADE_S=2.5, LIXO_RE), :146-184 (_escolher/_pick_track_file), :300-411 (compose_dynamic_music)"
+  },
+  {
+   "fato": "montar_ass gera uma legenda ASS unica: blocos de ate 3 palavras/1,4 s/18 letras, palavra ativa na cor de destaque com pop (\\t fscx113), gancho (Luckiest Guy 96) nos primeiros 2,8 s, selo deslizante, marca d'agua (handle do canal), barra de progresso, palavra de impacto gigante (Bangers 150) por 1,3 s e CTA nos ultimos 3,2 s com a pergunta do editorial.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_acabamento.py:715-729 (_blocos), :745-834 (montar_ass), :73-77 (CAP_Y, HOOK_Y, KEY_Y, CTA_SEGUNDOS=3.2); fontes em D:\\hipercool-materiais\\assets\\fonts (:54)"
+  },
+  {
+   "fato": "editorial() faz 1 chamada de LLM (proxy Anthropic do manhwa-react -> Gemini) por capitulo: gancho 3-6 palavras, 5-8 impactos (fala, palavra que existe na fala, emoji), pergunta do CTA; valida e tem heuristica de reserva.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_acabamento.py:258-297 (editorial), :219-255 (_validar_editorial), :174-175 (PROXY_SECRETS = D:\\manhwa-react\\secrets_proxy.json, PROXY_MODELOS)"
+  },
+  {
+   "fato": "planejar_sons: gatilhos por palavra do narrador (regex -> sons, emoji), cooldown 6 s, max 10 por video, ganho -10 dB, max 2,6 s, lista de bloqueio de nomes; anti-poluicao de 0,6 s entre eventos. planejar_retencao poe 'assiste ate o fim' em 3 s (video > 35 s), like em 45% (video > 20 s) e inscreva-se no CTA.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fx_acabamento.py:514-602; config/gatilhos_narracao.json (cooldown_s 6.0, max_por_video 10, gain_db -10, max_duracao_s 2.6; ex. gatilho 'soco' -> sons ['punch','Punches','thud'], emoji 👊)"
+  },
+  {
+   "fato": "groq_api.py: Whisper large-v3 com tempo por palavra, rodizio das chaves de D:\\postador-de-videos\\secrets\\groq_keys.json, SEMPRE por proxy Webshare (gemini_tts._get_next_proxy); sem proxy nao vai direto; 401 marca a chave 'invalida'. Docs: usar requests (urllib leva 403 do Cloudflare) e mandar FLAC/Opus.",
+   "evidencia": "D:\\hipercool-videos\\bin\\groq_api.py:19-23, :60-94 ('groq: nenhum proxy disponível ... — não vai direto'), :97-122; docs/MELHORIAS_PARA_TODOS_OS_PROJETOS.md:170-178"
+  },
+  {
+   "fato": "capa_ia: variantes escolhidas por Thompson sobre workspace/capas_poses.json; cada imagem passa por checagem de visao (Gemini, reserva Claude Haiku pelo gateway) com cache md5 que devolve exposto/censura/ato_sexual/menor/texto/dividida + caixas dos rostos; _reprovada barra; capas() grava <capa>.json com as variantes; registrar_teste e registrar_vencedora (esta NUNCA foi chamada ainda).",
+   "evidencia": "D:\\hipercool-videos\\bin\\capa_ia.py:273-279 (_escolher_poses), :201-233 (_checar), :260-264 (_reprovada), :306-326 (registrar_teste/registrar_vencedora), :564-613 (capas); docs/PEDIDOS_DO_DONO_PENDENTES.md:123 'registrar_vencedora (NÃO chamado)'"
+  },
+  {
+   "fato": "capas_short gera 720x1280 (2 imagens 9:16, uma capa por Short com selo 'CAP. N • i/total'); postar_hipercool.capas_short poe a capa em cada Short; nunca rodou com imagem por falta de cota; o poster avisa que capa personalizada exige canal verificado por telefone e so aceita ate 2 MB.",
+   "evidencia": "D:\\hipercool-videos\\bin\\capa_ia.py:616-655; bin/postar_hipercool.py:301-323; D:\\postador-de-videos\\bin\\youtube_web_poster.py:489-509 ('o canal precisa ser verificado (telefone) para ter capa personalizada')"
+  },
+  {
+   "fato": "Teste A/B nativo do Studio ('Testar e comparar') vale ate 3 titulos/capas, SO video longo (nao Shorts), so pelo Studio; vencedor = mais tempo de exibicao. Short nao tem tela final.",
+   "evidencia": "D:\\hipercool-videos\\docs\\plano_melhorias.md:187-191; D:\\postador-de-videos\\bin\\youtube_studio_extras.py:9 'Short não tem tela final'"
+  },
+  {
+   "fato": "Cadencia do hipercool: canal de lingua so posta no pico do pais (hora de la, ZoneInfo), intervalo_h 2 entre videos, max_dia 3, 1 completo/dia; canal parado > 24 h sai ja; prioridade compilado > completo > shorts; producao e postagem sao processos separados com locks.",
+   "evidencia": "D:\\hipercool-videos\\bin\\fila.py:461-484 (_pode_postar), :563-594 (postagem); config/fila.json postagem_idiomas {'max_dia': 3, 'intervalo_h': 2, 'parado_h': 24}, idiomas.hi {'fuso': 'Asia/Kolkata', 'pico': [17, 21]}"
+  },
+  {
+   "fato": "O manhwa-react so faz o upload (private + publishAt) do que publica nas proximas 3 h, com a tarefa de hora em hora, 'sem rajada de uploads'.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:848-849 'janela_h: so faz o UPLOAD do que publica nas proximas N horas (padrao rede.janela_upload_h = 3) ... sem rajada de uploads'"
+  },
+  {
+   "fato": "limitador.py: 3 falhas seguidas de um servico abrem pausa de 5 min que dobra ate 2 h e cai pela metade a cada sucesso; estado em workspace/limitador.json respeitado pela fila.",
+   "evidencia": "D:\\hipercool-videos\\bin\\limitador.py:21-23 'LIMIAR = 3', 'BASE = 5 * 60', 'MAXIMO = 2 * 60 * 60' e falhou()/ok()/restante()"
+  },
+  {
+   "fato": "Ajudantes de postagem reutilizaveis: _caber_tags (Studio conta 500 chars com aspas em tag com espaco; limite 480), _fim_sem_hashtag (descricao terminando em #hashtag deixa a lista de sugestoes aberta e o clique seguinte expira) e _nome_playlist (nome gerado 1x pelo SEO e gravado na config, playlist achada pelo nome).",
+   "evidencia": "D:\\hipercool-videos\\bin\\postar_hipercool.py:219-238 e :170-199"
+  },
+  {
+   "fato": "claude_client.py fala com proxies compativeis com a API Anthropic (secrets/claude_proxy.json e D:\\manhwa-react\\secrets_proxy.json) e tambem serve Gemini pelo mesmo proxy (GEMINI_PROXY: antigravity/gemini-3-flash etc.); haiku_helpers usa isso como assistente que sempre degrada para o codigo.",
+   "evidencia": "D:\\hipercool-videos\\bin\\claude_client.py:16, :65-86, :98-105; bin/haiku_helpers.py:1-9"
+  },
+  {
+   "fato": "intros_voz (abertura com voz humana de canais autorizados) e SO para compilado 16:9/video longo e proibe Shorts verticais; o util dela pro veo e so o padrao de rodizio com exploracao minima (USOS_PRA_EXPLORAR=2) antes do Thompson.",
+   "evidencia": "D:\\hipercool-videos\\CLAUDE.md:387 'NUNCA: ... Shorts verticais'; bin/intros_voz.py:49 'USOS_PRA_EXPLORAR = 2', :487-506 (escolher)"
+  },
+  {
+   "fato": "VEO: as vozes proibidas sao o padrao do motor edge e do fallback do CTA (ElevenLabs esgotado -> edge_tts_veo.speak com Francisca/Antonio).",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\edge_tts_veo.py:24-26 'VOICES_MALE = [\"pt-BR-AntonioNeural\"]', 'NARRATOR_VOICES = {\"veo\": \"pt-BR-FranciscaNeural\"...}', :47; pos_producao/assets/voz_config.json '\"voz\": \"pt-BR-FranciscaNeural\"'; plugins/_tts_helper.py:68; plugins/voz_whatsapp.py:36; cta_builder.py:166-171 (_narracao_edge)"
+  },
+  {
+   "fato": "VEO: roteamento persona->canal e escolha de produto no plugin antigo usam hash() nativo (muda a cada processo); o cta_builder e o montar_final ja usam md5.",
+   "evidencia": "D:\\veo\\beta\\roteamento.py:60 'idx = abs(hash(f\"{p}|{stem or ''}\")) % len(_POOL_HUMOR)' (usado por publicar.py:129 e D:\\postador-de-videos\\bin\\agendar_vo3.py:188); pos_producao/plugins/propaganda_inteligente.py:61 'h = hash(stem or \"\")'; cta_builder.py:74 e montar_final.py:47 (md5)"
+  },
+  {
+   "fato": "VEO: as legendas antigas poem uma entrada '-loop 1 -t ... -i png' por trecho num unico filter_complex (padrao que travou o ffmpeg 8.1 no hipercool); o ffmpeg do veo e o mesmo 8.1 de D:\\hipercool-materiais\\bin. Hoje montar_final/worker_noite NAO chamam esses modulos (so o runner antigo via config.yaml).",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\plugins\\legendas.py:124-126; pos_producao/subtitles_veo.py:150-171; pos_producao/config.yaml:3 e pipeline 'plugins.legendas'; grep de subtitles_veo/legendas em montar_final.py e worker_noite.py vazio"
+  },
+  {
+   "fato": "VEO: o COMPLETO/LIMPO sai sem nivelamento de loudness: montar_final.py e worker_noite.py nao chamam loudnorm/amix; so o trecho do CTA tem loudnorm -16 e um ducking fixo por volume 0.25; o plugin ffmpeg_loudnorm (passo unico) esta comentado na config nova.",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\cta_builder.py:354-356 'loudnorm=I=-16:TP=-1.5:LRA=11[cta]; [0:a]volume=if(gte(t,start),0.25,1.0)'; pos_producao/config.py:39 '# \"plugins.ffmpeg_loudnorm\"'; grep loudnorm em montar_final.py/worker_noite.py vazio"
+  },
+  {
+   "fato": "VEO: titulo/descricao sem palavras buscadas e sem medicao: publicar.py pede ao LLM 'titulo chamativo ate 80 caracteres, com 1-2 emojis' e o fallback e '<fala> 🔥' + '#shorts #ia #viral #brasil'; o postador roteia com Gemini ('ate 90 chars ... com #shorts') e cai em '{persona} - {tema} #shorts'.",
+   "evidencia": "D:\\veo\\beta\\publicar.py:55, :79-90; D:\\postador-de-videos\\bin\\postar_tudo_hoje.py:58, :160-172"
+  },
+  {
+   "fato": "VEO: thumbnail_client gera 3 variantes A/B/C (Pillow), mas so a 'A' vai pro postar.json; nao ha checagem por visao, rodizio nem registro de vencedora.",
+   "evidencia": "D:\\veo\\beta\\cron_gerar_video_llm.py:1545-1569 '_thumb_capa = thumbs.get(\"A\")'; thumbnail_client.py:1-9, :152"
+  },
+  {
+   "fato": "VEO: metrics_client depende de YOUTUBE_API_KEY (Data API v3), que nao esta definida no ambiente; o postador mede views por tokens OAuth existentes (medir_metricas.py, notificar_telegram.py). Ninguem le CTR/impressoes/retencao.",
+   "evidencia": "D:\\veo\\beta\\metrics_client.py:19-45; 'YOUTUBE_API_KEY set: False' (python -c os.environ); D:\\postador-de-videos\\bin\\medir_metricas.py:1-12; bin/notificar_telegram.py:38 'API_YT = \"https://www.googleapis.com/youtube/v3\"'"
+  },
+  {
+   "fato": "VEO/postador: nao existe sem_janela/CREATE_NO_WINDOW; a tarefa VeoProducaoDiaria7h (desabilitada) roda 'cmd /c Veo_START_DIARIO_7H.bat' com 'title' (janela de console); AgendadorVO3 e PostadorDeVideos rodam por rodar_oculto.vbs mas os filhos python/ffmpeg nao sao protegidos.",
+   "evidencia": "grep CREATE_NO_WINDOW|sem_janela em D:\\veo\\beta e D:\\postador-de-videos\\bin vazio; Get-ScheduledTask: 'VeoProducaoDiaria7h | Disabled | cmd /c \"D:\\veo\\beta\\Veo_START_DIARIO_7H.bat\"'; D:\\veo\\beta\\Veo_START_DIARIO_7H.bat:12 'title Veo-START-DIARIO-7H'"
+  },
+  {
+   "fato": "VEO/postador: cadencia atual = round-robin publico imediato entre canais ativos, teto 10/canal/dia e 50/dia, intervalo 0 h, aprovacao humana ligada; o AgendadorVO3 (5 slots 12h/18h/21h/00h/03h) usa youtube_poster.py --publish-at (Data API).",
+   "evidencia": "D:\\postador-de-videos\\config\\politica.json ('max_uploads_por_canal_dia': 10, 'max_uploads_total_dia': 50, 'intervalo_min_horas_mesmo_canal': 0); bin/postar_tudo_hoje.py:5, :178 '\"privacy\": \"public\"'; bin/agendar_vo3.py:7 'Usa youtube_poster.py --publish-at (RFC3339)' e :18"
+  },
+  {
+   "fato": "VEO: o branding '@InovareStories' / 'Siga pra mais historias IA' continua no plugin e na config (pipeline antigo do runner); o montar_final atual nao chama branding.",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\plugins\\branding_watermark.py:24-26, :100-104; pos_producao/assets/branding.json ('handle': '@InovareStories', 'cta_texto': 'Siga @InovareStories'); pos_producao/config.yaml pipeline 'plugins.branding_watermark'; grep branding em montar_final.py vazio"
+  },
+  {
+   "fato": "Os extras do Studio ja existem no postador (compartilhado) mas nada do veo os chama; o hipercool e o unico que liga.",
+   "evidencia": "grep youtube_studio_extras em D:\\veo\\beta vazio; D:\\hipercool-videos\\bin\\postar_hipercool.py:410 'import youtube_studio_extras as yx'"
+  }
+ ],
+ "problemas": [
+  {
+   "titulo": "Cadencia de postagem do veo e a oposta das regras do dono (rajada publica, 10/canal/dia, intervalo 0, round-robin)",
+   "evidencia": "D:\\postador-de-videos\\config\\politica.json (max 10/canal/dia, 50 total, intervalo 0 h); bin/postar_tudo_hoje.py:5 'posta round-robin entre os canais ATIVOS' e :178 privacy public; contraste: D:\\hipercool-videos\\bin\\fila.py:461-484 (pico, intervalo 2 h, max 3/dia) e D:\\manhwa-react\\mr\\rede.py:848-849 (janela de 3 h, sem rajada)",
+   "impacto": "Repete o padrao apontado no banimento de 04/09 (uploads em rajada ate o limite, muitos videos por dia em varios canais).",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Agendador do veo usa a Data API (youtube_poster.py --publish-at) em vez do navegador",
+   "evidencia": "D:\\postador-de-videos\\bin\\agendar_vo3.py:7 'Usa youtube_poster.py --publish-at (RFC3339) pra agendar'; regra: D:\\hipercool-videos\\docs\\PEDIDOS_DO_DONO_PENDENTES.md:16-17 'Google/YouTube só pelo navegador'",
+   "impacto": "Contraria a regra do dono e mantem o mesmo projeto OAuth em todos os canais (causa listada no relatorio do banimento).",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Branding '@InovareStories' + 'Siga pra mais historias IA' ainda vivo no codigo/config do veo",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\plugins\\branding_watermark.py:24-26 e :100-104; pos_producao/assets/branding.json; pos_producao/config.yaml pipeline inclui plugins.branding_watermark",
+   "impacto": "Se alguem religar o runner antigo, o cartao que o LEIA.txt do postador associa a queda dos canais volta a entrar em todo video.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "roteamento.py escolhe canal com hash() nativo (muda a cada processo)",
+   "evidencia": "D:\\veo\\beta\\roteamento.py:60 'idx = abs(hash(f\"{p}|{stem or ''}\")) % len(_POOL_HUMOR)'; usado em publicar.py:129 e D:\\postador-de-videos\\bin\\agendar_vo3.py:188; regra: docs/MELHORIAS...:151 'nunca escolher ... por hash() do Python'",
+   "impacto": "O mesmo video pode ser roteado a canais diferentes em execucoes diferentes (publicar vs agendador), abrindo brecha para o mesmo video em mais de um canal.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Vozes proibidas pelo dono sao o padrao do veo (Francisca/Antonio)",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\edge_tts_veo.py:24-26, :47; assets/voz_config.json 'voz': 'pt-BR-FranciscaNeural'; plugins/_tts_helper.py:68; plugins/voz_whatsapp.py:36; cta_builder.py:166-171 (fallback _narracao_edge)",
+   "impacto": "Toda vez que o ElevenLabs esgota, o CTA sai com voz que o dono proibiu em qualquer projeto (docs/MELHORIAS §4b).",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Legendas antigas do veo usam N entradas '-loop 1' num grafo so (padrao que trava o ffmpeg 8.1)",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\plugins\\legendas.py:124-126; pos_producao/subtitles_veo.py:150-171; mesmo ffmpeg 8.1 (config.yaml:3); causa documentada em D:\\hipercool-videos\\docs\\MELHORIAS_PARA_TODOS_OS_PROJETOS.md:180-186",
+   "impacto": "Fora do caminho atual (montar_final nao chama), mas se religar o pipeline de legendas o render pode ficar preso horas sem usar CPU, como o cap 6/8 do hipercool.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "COMPLETO/LIMPO do veo saem sem nivelamento de loudness e sem ducking real",
+   "evidencia": "grep loudnorm/amix em D:\\veo\\beta\\pos_producao\\montar_final.py e worker_noite.py vazio; cta_builder.py:354-356 so no trecho do CTA, ducking fixo volume 0.25; config.py:39 plugin ffmpeg_loudnorm comentado",
+   "impacto": "Volume desigual entre videos e entre o clipe e o CTA; o hipercool resolve com -28 LUFS na trilha + sidechain + master -14 LUFS em 2 passos e validacao.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Nenhuma medicao do que rende no veo (CTR/impressoes/retencao) e thumbnails B/C nunca testadas",
+   "evidencia": "D:\\veo\\beta\\metrics_client.py:19-45 exige YOUTUBE_API_KEY (nao definida); cron_gerar_video_llm.py:1566 '_thumb_capa = thumbs.get(\"A\")'; nada chama registrar_vencedora/Thompson no veo (grep betavariate/Thompson vazio)",
+   "impacto": "Titulos, capas e CTAs nunca aprendem; o hipercool ja tem o esqueleto (metricas.py + rodizios), faltando so o teste em pagina real.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Leitor de metricas do Studio do hipercool nunca rodou em pagina real",
+   "evidencia": "D:\\hipercool-videos\\CLAUDE.md:205 'NÃO TESTADO em página real do Studio (parsing unit-testado, mas os rótulos podem ter mudado)'; bin/metricas.py:5-14; youtube_studio_extras.py:579-601",
+   "impacto": "Portar para o veo exige 1 rodada manual (--agora) conferindo os rotulos; Shorts usam rotulos diferentes (deslizou x assistiu) e TIPOS exclui 'short' hoje (metricas.py:28).",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Extras do Studio bloqueados pela conta ate 14/11/2026 (canal pt) e por 'verificacao unica' nos demais",
+   "evidencia": "D:\\hipercool-videos\\docs\\PEDIDOS_DO_DONO_PENDENTES.md:76-87; youtube_studio_extras.py:40-72; youtube_web_poster.py:505-506 (capa personalizada exige canal verificado)",
+   "impacto": "Comentario fixado, video relacionado, teste A/B e capa personalizada podem nao funcionar nos canais que o veo for usar; precisa mapear canal a canal antes de prometer.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Arquivo errado para portar vozes: bin/edge_tts_engine.py do hipercool e legado (Francisca + hash)",
+   "evidencia": "D:\\hipercool-videos\\bin\\edge_tts_engine.py:20-22, :71, :193-196 'hash(persona)'",
+   "impacto": "Quem copiar esse arquivo em vez de elenco.py traz de volta exatamente o que o dono proibiu.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Nenhum ponto de entrada do veo/postador importa sem_janela",
+   "evidencia": "grep CREATE_NO_WINDOW|sem_janela em D:\\veo\\beta e D:\\postador-de-videos\\bin vazio; VeoProducaoDiaria7h roda cmd /c .bat com 'title' (Veo_START_DIARIO_7H.bat:12)",
+   "impacto": "Quando as tarefas do veo forem religadas, cada python/ffmpeg filho abre janela na tela (pedido explicito do dono em 15/10).",
+   "liga_banimento": false
+  }
+ ],
+ "oportunidades": [
+  {
+   "titulo": "Agente de SEO com palavras buscadas do autocompletar + 3 estilos de titulo com Thompson",
+   "fonte": "D:\\hipercool-videos\\bin\\seo.py (REGRAS :147-166, _palavras :174-184, _sem_obra :193-220, escolher_estilo/registrar_resultado :230-244, pacote :247-281) + config/seo_palavras.json + docs/seo_titulos.md:14 (endpoint suggestqueries)",
+   "como_adaptar": "Criar D:\\veo\\beta\\seo_veo.py: trocar 'obra/generos' por produto/tema/persona (pos_producao/assets/produtos.json + inteligencia.get_persona); refazer o banco com sementes do nicho ('atendimento whatsapp ia', 'agente de ia para empresas', 'automacao whatsapp', 'crm whatsapp', 'ia que vende', 'video com ia') e por tema do video atrativo; nomes_proibidos vira lista de termos de spam (numero de telefone, URL, 'clique no link', 'ganhe', 'garantido') que _sem_obra apaga; Shorts = 1 titulo por video alternando estilo (busca/provocacao/curiosidade) e gravar 'estilo' no postar.json (publicar.gerar_postar_json) para medir; manter o dicionario de seguranca; cache por video_id. Enquanto o Studio nao estiver lido, medir pelas views de 48 h do _analise/aprendizado_global.json do postador.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Modulo generico de rodizio Thompson com exploracao minima",
+   "fonte": "seo.escolher_estilo/registrar_resultado (seo.py:230-244); capa_ia._escolher_poses/registrar_teste/registrar_vencedora (capa_ia.py:273-326); intros_voz.escolher com USOS_PRA_EXPLORAR (intros_voz.py:49, :487-506)",
+   "como_adaptar": "Um rodizio.py no veo com escolher(chave, opcoes) e registrar(chave, opcao, venceu) sobre logs/rodizios.json; usar para: estilo de titulo, variante de thumb A/B/C, voz do CTA (pool ElevenLabs), formato do CTA (card vs so voz), tipo de gancho da legenda. Cada opcao roda pelo menos 2 vezes antes de o Thompson mandar (padrao do intros_voz).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Leitura de metricas no Studio pelo navegador alimentando os rodizios",
+   "fonte": "D:\\hipercool-videos\\bin\\metricas.py (coletar :68-96, decidir :99-133, rodar :136-147) + D:\\postador-de-videos\\bin\\youtube_studio_extras.py metricas :579-601, _numero :549-565, rodar(..., metricas=True) :605-630",
+   "como_adaptar": "Copiar metricas.py para o veo lendo os video_ids de logs/video_cache.json (posted_url) e o canal; TIPOS = ('short',); idade 48 h-21 d; 6 por rodada, 1 rodada/dia, chamada no fim do postar_tudo (ou tarefa propria); decidir: CTR/views acima da mediana do canal -> rodizio.registrar(estilo_titulo / thumb / cta). Antes de ligar: rodar 1 vez com --agora num Short real e conferir os rotulos (Shorts mostram 'Visualizações' e 'assistiram x deslizaram'; ajustar _valor_depois/regex). Nunca API.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Extras do Studio pelo navegador (comentario fixado, relacionado, limpar rascunhos, metadados)",
+   "fonte": "D:\\postador-de-videos\\bin\\youtube_studio_extras.py (modulo compartilhado; _bloqueio_conta :46-72) + padrao de uso D:\\hipercool-videos\\bin\\postar_hipercool.py _extras_de :375-393, _extra_pendente :396-404, rodar_extras :407-445",
+   "como_adaptar": "No veo, gravar no video_cache.json um plano 'extras' por video postado: comentario fixado com pergunta de engajamento (SEM numero de WhatsApp e SEM link: o dono ligou a propaganda ao banimento e o hipercool nao poe link), 'relacionado' do Short para um video longo do produto se houver, limpar_rascunhos por canal 1x/dia, editar_metadados para corrigir titulo/descricao de videos antigos (tirar numero/handle). Repetir pendente a cada 3 h; 'bloqueado: ... até data' so depois da data. Tela final e teste A/B NAO se aplicam a Shorts.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "sem_janela.py em todo ponto de entrada agendado do veo",
+   "fonte": "D:\\hipercool-videos\\bin\\sem_janela.py (25 linhas; tambem D:\\manhwa-react\\mr\\sem_janela.py)",
+   "como_adaptar": "Copiar para D:\\veo\\beta\\sem_janela.py e importar na 1a linha de loop_cron.py, cron_gerar_video_llm.py, pos_producao/worker_noite.py e supervisor.py; trocar as tarefas (quando religadas) para pythonw.exe em vez de 'cmd /c .bat'. O Chrome do Flow (grafico) nao e afetado. No postador, modulo novo importado por postar_tudo_hoje.py/agendar_vo3.py (regra: nao editar o que ja existe de forma incompativel).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Passe final unico com _clipe_parado (ffmpeg 8) e Quick Sync",
+   "fonte": "D:\\hipercool-videos\\bin\\fx_acabamento.py _clipe_parado :893-906, passe_final :909-999, ffmpeg_retry :93",
+   "como_adaptar": "No montar_final.montar(): juntar overlay de intro/impacto, card CTA, emoji e legenda num unico filter_complex (fps=30, scale lanczos, cas=0.35, ass), com toda imagem parada (card PNG, faixa do overlay, emoji) convertida por _clipe_parado para .mov qtrle em cache (pos_producao/cache/clipes_parados) em vez de '-loop 1'; usar h264_qsv com timeout e fallback x264 (a maquina tem UHD 620, ja usada pelo hipercool). Trocar cta_builder.py:342 ('-loop 1' da faixa) e as legendas antigas (legendas.py:126, subtitles_veo.py:152/166) pelo mesmo truque se forem religadas.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Audio: trilha nivelada com ducking, SFX e master em 2 passos + validacao",
+   "fonte": "fx_acabamento.masterizar_audio :622-656, loudnorm_dois_passos :606-619, validar :1003-1040; fx_music.py (_pick_track_file :155-184, compose_dynamic_music :300-411, LIXO_RE :47, blocklist :63-77, trilhas_recentes :44)",
+   "como_adaptar": "No COMPLETO e no LIMPO: 1 faixa de trilha (8-16 s nao precisa trocar clima) escolhida de assets/trilhas/prioritarias fora da blocklist de D:\\hipercool-materiais\\_curadoria\\copyright_blocklist.json, nivelada a -28 LUFS, ducking sidechain pela fala do Veo e pela voz do CTA, SFX do CTA/transicao com adelay, amix normalize=0, master -14 LUFS/-1 dBTP em 2 passos; evitar repetir a trilha dos ultimos 16 videos (videos iguais entre si foram causa apontada); validar() antes de marcar pronto (duracao, 1080x1920, LUFS +-2, trechos pretos, audio x video) e reprovar em vez de postar.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Legenda ASS palavra a palavra com gancho, impacto gigante, barra e CTA",
+   "fonte": "fx_acabamento.montar_ass :745-834, _blocos :715-729, emoji_png :660, editorial :258-297, tempos_palavras :416 (_proporcional :323 como reserva); fontes em D:\\hipercool-materiais\\assets\\fonts",
+   "como_adaptar": "Substituir os PNGs por trecho (subtitles_veo/legendas) por um ASS unico queimado no passe final: a fala do Veo ja e conhecida do prompt (cron_gerar_video_llm), entao usar _proporcional sobre os limites de silencio (_limites_fala) ou Groq para o tempo por palavra; editorial() reduzido para 8-16 s: gancho 3-5 palavras nos 1,5-2 s iniciais, 1-2 palavras de impacto, pergunta/CTA nos 2-3 s finais (CTA_SEGUNDOS); barra de progresso e selo (nome do produto, sem numero). Manter max 3 palavras/18 letras por bloco e palavra ativa com pop.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Tempo real por palavra com Groq Whisper pelo proxy (opcional, se a legenda for palavra a palavra)",
+   "fonte": "D:\\hipercool-videos\\bin\\groq_api.py (transcrever :97-122, _pedido :60-94) + fx_acabamento._transcrever_groq :334 e _alinhar :365 (difflib com o texto conhecido)",
+   "como_adaptar": "Depende da rotacao de proxies de gemini_tts (_get_next_proxy/_proxy_falhou/_proxy_ok) e de secrets/proxies.txt do hipercool: ou importar D:\\hipercool-videos\\bin via sys.path (como o hipercool faz com o postador) ou copiar so a rotacao; chaves em D:\\postador-de-videos\\secrets\\groq_keys.json (nao copiar valores). Mandar FLAC, usar requests. Para 8 s de fala talvez nao compense a banda do proxy (~1 MB/pedido): decidir com a dona.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "SFX por palavra-gatilho e foley com anti-poluicao",
+   "fonte": "fx_acabamento.planejar_sons :544-602 + config/gatilhos_narracao.json (regex -> sons, emoji, cooldown 6 s, max 10, -10 dB, bloqueio_nomes) + fx_foley.FOLEY_MAP :43-101",
+   "como_adaptar": "Reduzir para o Short: max 2-3 sons por video (whoosh na transicao elemental, ding no card CTA, impacto na palavra de gancho), cooldown 2 s, biblioteca em D:\\hipercool-materiais\\assets\\sfx; entra na mesma mixagem do masterizar_audio.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Capas: checagem por visao + rodizio das variantes A/B/C + registro de vencedora",
+   "fonte": "capa_ia._checar :201-233 (visao com cache md5, reserva Claude Haiku pelo gateway :186-199), _reprovada :260-264, _escolher_poses :273-279, registrar_teste/registrar_vencedora :306-326, capas() gravando <capa>.json :609-611; postar_hipercool.capas_short :301-323",
+   "como_adaptar": "thumbnail_client ja gera A/B/C: adicionar _checar adaptado (texto legivel, rosto da dona visivel, nenhum numero de telefone/URL/handle na capa, nada enganoso), escolher a variante enviada por rodizio Thompson (em vez de sempre 'A'), gravar <mp4>.capa.json com as 3 e o indice usado, e registrar vitoria pelas metricas. So sobe capa em canal verificado (youtube_web_poster._capa avisa). As POSES/roupas/POSES_GENERO do manhwa NAO se aplicam.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Cadencia de postagem: pico por canal, poucos por dia, intervalo, janela de 3 h, so navegador",
+   "fonte": "D:\\hipercool-videos\\bin\\fila.py _pode_postar :461-484 + config/fila.json postagem_idiomas (max_dia 3, intervalo_h 2, parado_h 24; pico/fuso por canal); D:\\manhwa-react\\mr\\rede.py :848-849 (janela_upload_h 3, private+publishAt); docs/MELHORIAS §7 :215-219",
+   "como_adaptar": "Config por canal do veo {fuso, pico [ini,fim], max_dia 1-2, intervalo_h >= 3}; cada video em UM canal so (dedupe por hash de quadros do manhwa-react mr/memoria.py); upload private + publishAt apenas do que publica nas proximas 3 h, por youtube_web_poster (usar_navegador para todo canal do veo); substituir o round-robin do postar_tudo_hoje e o AgendadorVO3 (Data API) por esse laco; politica por projeto em vez de mexer no politica.json global (10/canal/dia e do postador compartilhado).",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Pausa dinamica por servico (limitador) no lugar de PAUSE_SYSTEM fixo",
+   "fonte": "D:\\hipercool-videos\\bin\\limitador.py (falhou/ok/restante/esperar; LIMIAR 3, BASE 5 min, MAXIMO 2 h)",
+   "como_adaptar": "Servicos 'flow' (creditos/bloqueio do Google Flow), 'llm', 'youtube': 3 falhas seguidas -> pausa que dobra e encolhe no sucesso, estado em logs/limitador.json; cron_gerar_video_llm.pausar_sistema (60 min fixos, :244) passa a consultar o limitador; a troca de conta por exit 2 continua.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Vozes: elenco fixo por md5 com PROIBIDAS e variacoes Multilingual",
+   "fonte": "D:\\hipercool-videos\\bin\\elenco.py (PROIBIDAS :43, EDGE_F/EDGE_M :45-49, VARIACOES :51-52, virtuais :88-91, falar_edge :247-274)",
+   "como_adaptar": "Em edge_tts_veo.py trocar os pools Francisca/Antonio por EDGE_F/EDGE_M, recusar PROIBIDAS, narrador/CTA fixos por produto (md5 ja existe em cta_builder._escolher_voz); atualizar assets/voz_config.json, plugins/_tts_helper.py e plugins/voz_whatsapp.py; cache por voz+rate+pitch+texto como no falar_edge. Nao copiar edge_tts_engine.py.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Ajudantes de metadados: tags que cabem no Studio, descricao sem hashtag no fim, playlist por produto com nome gerado 1x",
+   "fonte": "D:\\hipercool-videos\\bin\\postar_hipercool.py _caber_tags :229-238, _fim_sem_hashtag :219-226, _nome_playlist :170-199 (+ seo.nome_playlist :284-307)",
+   "como_adaptar": "Aplicar em publicar.gerar_postar_json antes de gravar o postar.json (o poster do navegador trava com >480 chars de tags e com descricao terminando em #); playlist por produto ('Hermes Call', 'Avatar IA'...) com nome no padrao dos titulos gravado em produtos.json, sem numero/URL.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Cadeia de LLM alternativa (proxy Anthropic + Gemini pelo mesmo proxy) para SEO/editorial",
+   "fonte": "D:\\hipercool-videos\\bin\\claude_client.py (_post :65-86, GEMINI_PROXY :98-99, perguntar/gemini) + haiku_helpers.py (padrao 'assistente que degrada para o codigo')",
+   "como_adaptar": "Usar como reserva do llm_client.py do veo (Gemini Flash Lite) nas chamadas de SEO/editorial/checagem de capa; le D:\\manhwa-react\\secrets_proxy.json (nao copiar o segredo para o veo, so o caminho).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Figurinha/meme estampada no 'video atrativo' (opcional)",
+   "fonte": "D:\\hipercool-videos\\bin\\fx_memes.py (GATILHOS :20-29, escolher_memes :83-111) + catalogo D:\\historias-em-frames\\config\\memes_catalogo.json; encaixe em passe_final :952-974",
+   "como_adaptar": "So no clipe criativo (nao no comercial do produto): no maximo 1 figurinha por Short, sem som, no centro acima da legenda, pela palavra de impacto; imagem parada via _clipe_parado.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "O que NAO se aplica ao veo (nao portar)",
+   "fonte": "capa_ia.POSES/POSES_GENERO/ROUPAS (capa_ia.py:44-110); censura_visual/Sightengine/NudeNet (CLAUDE.md:126-155); intros_voz (CLAUDE.md:387 'NUNCA ... Shorts verticais'); marca_scan.py; fx_parallax/2.5D/isnet; hiper-longo compilado e tela final (Short nao tem, youtube_studio_extras.py:9); teste A/B nativo (so video longo, plano_melhorias.md:187-191); idiomas/PC2; CHAMADA_SEM_CENSURA (postar_hipercool.py:55)",
+   "como_adaptar": "Nada a adaptar: sao especificos de painel de manhwa, de conteudo +18 ou de video longo 16:9. Do 'nome da obra em lugar nenhum' aproveita-se so o mecanismo (lista de termos proibidos apagada em titulo/descricao/tags/texto na tela), aplicado a numero de WhatsApp, URL e handles banidos.",
+   "esforco": "P"
+  }
+ ],
+ "perguntas_abertas": [
+  "O veo pode importar modulos do hipercool por sys.path (como postar_hipercool importa o postador) ou a dona quer copia dos arquivos em D:\\veo\\beta (a regra do MELHORIAS diz 'copie/adapte')?",
+  "Metricas: a dona aceita o leitor do Studio pelo navegador (abre o Chrome de cada canal, ~6 videos/dia) tambem para o veo, sabendo que o parsing nunca rodou em pagina real e que Shorts tem rotulos diferentes? E os tokens OAuth do medir_metricas.py/notificar_telegram.py (leitura publica de views) podem continuar ou tambem e 'so navegador'?",
+  "Comentario fixado e descricao dos Shorts do veo: com ou sem numero de WhatsApp/URL? O hipercool nao poe link e a propria dona ligou a propaganda com zap ao banimento; sem resposta, a proposta e sem numero e sem link.",
+  "Quais canais vao receber o veo 'atrativo' e o comercial, e quais deles tem verificacao por telefone/recursos avancados (capa personalizada, video relacionado, comentario fixado)? Hoje o veo nao mapeia isso e o canal pt do hipercool esta negado ate 14/11/2026.",
+  "Vale gastar banda do proxy Webshare (~1 MB por pedido) com Groq para 8 s de fala do Veo, ou o tempo proporcional pelo texto conhecido do prompt basta para a legenda palavra a palavra?",
+  "Corrigir roteamento.py de hash() para md5 muda o canal de personas ja roteadas: a dona aceita a troca (e o re-roteamento do que ainda nao foi postado)?",
+  "politica.json do postador e global (10/canal/dia, intervalo 0): baixar para todos os projetos ou criar politica por projeto so para o veo?",
+  "Ligar trilha de fundo nos clipes do Veo (que ja tem fala/audio gerado) e aceitar o risco de Content ID das prioritarias fora da blocklist, como o hipercool faz?",
+  "O comercial com imagens (card CTA) deve continuar com o numero fixo '91 98469-8653' no badge (cta_card.py) ou passa a ser so o nome do produto + convite, com o contato no 'Sobre' do canal?"
+ ]
+}

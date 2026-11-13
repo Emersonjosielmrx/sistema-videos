@@ -1,0 +1,188 @@
+{
+ "hx-maos-kiro": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 300,
+   "turnos": 6,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 12,
+   "total": 12,
+   "tempo": 160,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  },
+  "relatorio": {
+   "ok": 10,
+   "total": 10,
+   "tempo": 180,
+   "turnos": 13,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-socorro-kiro": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 396,
+   "turnos": 6,
+   "erro": "",
+   "falhas": []
+  },
+  "relatorio": {
+   "ok": 10,
+   "total": 10,
+   "tempo": 406,
+   "turnos": 14,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 12,
+   "total": 12,
+   "tempo": 501,
+   "turnos": 10,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-plano-kiro": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 61,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 12,
+   "total": 12,
+   "tempo": 41,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  },
+  "relatorio": {
+   "ok": 9,
+   "total": 10,
+   "tempo": 53,
+   "turnos": 13,
+   "erro": "",
+   "falhas": [
+    "por_canal([{'canal': 'Manhwa', 'segundos': 10}, {'canal': ' manhwa ', 'segundos': 5}]) == {'manhwa': {'videos': 2, 'segundos': 15}}"
+   ]
+  }
+ },
+ "hx-revisor-kiro": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 62,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 12,
+   "total": 12,
+   "tempo": 69,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  },
+  "relatorio": {
+   "ok": 9,
+   "total": 10,
+   "tempo": 50,
+   "turnos": 11,
+   "erro": "",
+   "falhas": [
+    "por_canal([{'canal': 'Manhwa', 'segundos': 10}, {'canal': ' manhwa ', 'segundos': 5}]) == {'manhwa': {'videos': 2, 'segundos': 15}}"
+   ]
+  }
+ },
+ "hx-erro-kiro": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 63,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 12,
+   "total": 12,
+   "tempo": 62,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  },
+  "relatorio": {
+   "ok": 10,
+   "total": 10,
+   "tempo": 62,
+   "turnos": 11,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "kr/claude-sonnet-4.5": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 41,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 12,
+   "total": 12,
+   "tempo": 48,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  },
+  "relatorio": {
+   "ok": 9,
+   "total": 10,
+   "tempo": 59,
+   "turnos": 12,
+   "erro": "",
+   "falhas": [
+    "por_canal([{'canal': 'Manhwa', 'segundos': 10}, {'canal': ' manhwa ', 'segundos': 5}]) == {'manhwa': {'videos': 2, 'segundos': 15}}"
+   ]
+  }
+ },
+ "gemini-4-argon": {
+  "calc": {
+   "ok": 8,
+   "total": 8,
+   "tempo": 105,
+   "turnos": 6,
+   "erro": "",
+   "falhas": []
+  },
+  "loja": {
+   "ok": 4,
+   "total": 12,
+   "tempo": 168,
+   "turnos": 7,
+   "erro": "",
+   "falhas": [
+    "c(('a', 10, 3)).subtotal() == 30",
+    "c(('a', 10, 3), ('b', 2.5, 2)).subtotal() == 35.0",
+    "c(('a', 10, 3)).total() == 45.0",
+    "c(('a', 50, 2)).total() == 100.0",
+    "c(('a', 60, 2), cupom='DEZ').total() == 108.0 -> AttributeError: 'Carrinho' object has no attribute 'aplicar_cupom'"
+   ]
+  }
+ }
+}

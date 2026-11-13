@@ -1,0 +1,6 @@
+[
+  {"seletor_arquivos": "(()=>{const b=document.querySelector('ytcp-thumbnail-uploader #select-button'); b.scrollIntoView({block:'center'}); const r=b.getBoundingClientRect(); return [r.x+r.width/2, r.y+r.height/2]})()", "arquivo": "D:\\projeto-navegador-sem-navegador\\capturas\\teste_capa_1280.jpg", "espera": 10},
+  {"foto": "D:\\projeto-navegador-sem-navegador\\capturas\\capa_depois.png", "espera": 1},
+  {"js": "document.querySelector('ytcp-button#save')?.hasAttribute('disabled')", "espera": 1},
+  {"js": "(()=>{const b=document.querySelector('ytcp-button#save'); b.click(); return 'salvar'})()", "espera": 15}
+]

@@ -1,0 +1,1262 @@
+{
+ "name": "📚 Revisão de livro · 6 · Beta (leitores simulados)",
+ "nodes": [
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "id"
+      },
+      {
+       "name": "inicio",
+       "type": "number"
+      },
+      {
+       "name": "sozinho",
+       "type": "boolean"
+      }
+     ]
+    }
+   },
+   "name": "▶️ Entrada",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    0,
+    184
+   ],
+   "id": "9046e25f-41b2-4fc8-ba22-7cedf654ba02"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "livro",
+    "key": "=lv:{{ $('▶️ Entrada').first().json.id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o livro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    184
+   ],
+   "id": "faa46aa4-29a3-45cc-bed5-89ce2f285b13",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "keys",
+    "keyPattern": "=lv:{{ $('▶️ Entrada').first().json.id }}:beta:*",
+    "getValues": true
+   },
+   "name": "🗂️ Lê o que já foi feito",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    600,
+    184
+   ],
+   "id": "7c283439-54de-4d07-b77b-64db5b2ea408",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Regras comuns da revisão de livro (as mesmas no principal e nos 9 sub-fluxos).\nconst rvT = (v, max) => {\n  const s = String(v ?? '').replace(/\\s+/g, ' ').trim();\n  if (s.length <= max) return s;\n  const c = s.slice(0, max), esp = c.lastIndexOf(' ');\n  return (esp >= max * 0.55 ? c.slice(0, esp) : c.slice(0, max - 1)).replace(/[\\s,;:.–—-]+$/, '') + '…';\n};\nconst rvL = (v, max) => rvT(v, max).replace(/[<>{}]/g, '');\nconst rvEsc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst rvPalavras = s => (String(s || '').match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []).length;\nconst rvSemAcento = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');\nconst rvLista = (v, max = 50) => (Array.isArray(v) ? v : []).filter(x => x !== null && x !== undefined).slice(0, max);\nconst RV_TTL = 34560000;\n// a equipe (MD 22): número do agente, ordem de trabalho e o MD que cada um entrega\nconst RV_AGENTES = [\n  { chave: '<SEGREDO_REMOVIDO>', num: 0, nome: 'Leitor', emoji: '📖', papel: 'fichas de cada capítulo', md: '', peso: 20 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 1, nome: 'O Arquiteto', emoji: '🏛️', papel: 'carta editorial', md: 'MD 23 - CARTA EDITORIAL AGENTE 1', peso: 9 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 2, nome: 'O Físico', emoji: '🧪', papel: 'continuidade e regras do mundo', md: 'MD 24 - AUDITORIA AGENTE 2', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 3, nome: 'O Psicólogo', emoji: '🧠', papel: 'personagens e relações', md: 'MD 25 - DOSSIE AGENTE 3', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 5, nome: 'O Relojoeiro', emoji: '⏱️', papel: 'cena a cena e ritmo', md: 'MD 27 - CENAS AGENTE 5', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 4, nome: 'O Estilista', emoji: '✒️', papel: 'linha, tiques e voz', md: 'MD 26 - LINHA AGENTE 4', peso: 14 },\n  { chave: 'beta', num: 6, nome: 'O Beta', emoji: '👥', papel: 'leitores simulados (leitura cega)', md: 'MD 28 - BETA AGENTE 6', peso: 14 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 7, nome: 'O Guardião', emoji: '🛡️', papel: 'copidesque e style sheet', md: 'MD 29 - STYLE SHEET', peso: 13 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 8, nome: 'Editor-chefe', emoji: '✅', papel: 'checklist final de correções', md: 'MD 30 - CHECKLIST CORRECOES', peso: 6 },\n];\nconst RV_ORDEM = [['leitor'], ['arquiteto'], ['fisico', 'psicologo'], ['relojoeiro'], ['estilista'], ['beta'], ['guardiao'], ['checklist']];\nconst rvAg = k => RV_AGENTES.find(a => a.chave === k);\n\n// ── divide o livro em capítulos (títulos \"Capítulo N\", \"# ...\", ou vários arquivos) ──\nconst RV_CAP = /^\\s*(?:#{1,3}\\s*)?(?:cap[ií]tulo|cap\\.)\\s*([0-9]{1,3}|[ivxlcdm]{1,7})\\b\\s*[-–—:.]?\\s*(.*)$/i;\nfunction rvDivide(texto, arquivos) {\n  const limpa = t => String(t || '').replace(/\\r\\n?/g, '\\n').replace(/[​﻿]/g, '');\n  const linhasDe = t => limpa(t).split('\\n').map(l => l.replace(/[ \\t]+/g, ' ').trim()).filter(Boolean);\n  let caps = [];\n  if (Array.isArray(arquivos) && arquivos.length > 1) {\n    caps = arquivos.map((a, i) => {\n      const ls = linhasDe(a.texto); let titulo = rvL(a.nome, 80).replace(/\\.(txt|md|docx|pdf)$/i, '');\n      if (ls.length && (RV_CAP.test(ls[0]) || /^#{1,3}\\s/.test(ls[0]))) { const m = ls[0].match(RV_CAP); titulo = rvL(m ? (m[2] || ls[0]) : ls[0].replace(/^#+\\s*/, ''), 80) || titulo; ls.shift(); }\n      return { titulo, linhas: ls };\n    });\n  } else {\n    const ls = linhasDe(texto || (arquivos && arquivos[0] && arquivos[0].texto));\n    const marca = ls.map(l => RV_CAP.test(l) && l.length < 120);\n    const usaHash = marca.filter(Boolean).length < 2 && ls.filter(l => /^#{1,2}\\s/.test(l)).length >= 2;\n    let atual = null;\n    ls.forEach((l, i) => {\n      const ehTitulo = usaHash ? /^#{1,2}\\s/.test(l) : marca[i];\n      if (ehTitulo) { const m = l.match(RV_CAP); atual = { titulo: rvL(m ? (m[2] || l.replace(/^#+\\s*/, '')) : l.replace(/^#+\\s*/, ''), 80), linhas: [] }; caps.push(atual); }\n      else { if (!atual) { atual = { titulo: 'Abertura', linhas: [] }; caps.push(atual); } atual.linhas.push(l); }\n    });\n    if (caps.length === 1 && caps[0].linhas.length > 400) {   // sem títulos: corta em partes de ~2.500 palavras\n      const todas = caps[0].linhas; caps = []; let p = null, n = 0;\n      todas.forEach(l => { if (!p || n > 2500) { p = { titulo: `Parte ${caps.length + 1}`, linhas: [] }; caps.push(p); n = 0; } p.linhas.push(l); n += rvPalavras(l); });\n    }\n  }\n  return caps.filter(c => c.linhas.length).map((c, i) => ({ n: i + 1, titulo: c.titulo || `Capítulo ${i + 1}`, linhas: c.linhas, palavras: c.linhas.reduce((s, l) => s + rvPalavras(l), 0) }));\n}\nconst rvNumera = linhas => linhas.map((l, i) => `L${i + 1}: ${l}`).join('\\n');\nconst rvCapN = n => String(n).padStart(2, '0');\n\n// ── contagens que o CÓDIGO faz melhor que a IA ──\nconst RV_PARADAS = new Set('a o as os um uma uns umas de do da dos das em no na nos nas por para pra pro com sem que e ou mas se é ser foi era ao à às aos me te lhe eu ele ela eles elas você vocês nós meu minha meus minhas seu sua seus suas isso isto aquilo esse essa este esta não sim mais menos muito muita já só também quando como onde porque então tinha tem ter estava está tá lá aí ali aqui num numa pelo pela pelos pelas até depois antes ainda nem mesmo tudo nada todo toda foi vai vou ia tão bem mal sobre entre gente quem qual cada outro outra'.split(' '));\nfunction rvTokens(l) { return (l.match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []); }\nfunction rvNomesProprios(caps) {\n  const cont = {};\n  caps.forEach(c => c.linhas.forEach(l => rvTokens(l).forEach((t, i) => { const k = t.toLowerCase(); cont[k] = cont[k] || [0, 0]; cont[k][0]++; if (i > 0 && /^\\p{Lu}/u.test(t)) cont[k][1]++; })));\n  return new Set(Object.entries(cont).filter(([, [n, m]]) => n >= 2 && m / n > 0.7).map(([k]) => k));\n}\nfunction rvRepeticoes(caps) {\n  const total = caps.reduce((s, c) => s + c.palavras, 0), MIN = Math.max(3, Math.round(total / 10000));\n  const nomes = rvNomesProprios(caps), g = {};\n  caps.forEach(c => c.linhas.forEach(l => {\n    const t = rvTokens(l).map(x => x.toLowerCase());\n    for (let n = 2; n <= 5; n++) for (let i = 0; i + n <= t.length; i++) {\n      const w = t.slice(i, i + n), conteudo = w.filter(x => !RV_PARADAS.has(x) && !nomes.has(x) && x.length > 2);\n      if (!conteudo.length || RV_PARADAS.has(w[n - 1]) && n > 2) continue;\n      const k = w.join(' '); g[k] = g[k] || { n, total: 0, por: {} }; g[k].total++; g[k].por[c.n] = (g[k].por[c.n] || 0) + 1;\n    }\n  }));\n  let lista = Object.entries(g).filter(([, v]) => v.total >= MIN).map(([k, v]) => ({ expressao: k, ...v }));\n  lista = lista.filter(a => !lista.some(b => b.n > a.n && b.total >= a.total * 0.8 && (' ' + b.expressao + ' ').includes(' ' + a.expressao + ' ')));\n  return lista.sort((a, b) => b.total * Math.sqrt(b.n) - a.total * Math.sqrt(a.n)).slice(0, 25).map(x => {\n    const pico = Object.entries(x.por).sort((a, b) => b[1] - a[1])[0];\n    return { expressao: x.expressao, total: x.total, capitulos: Object.keys(x.por).length, pico: `Cap${rvCapN(pico[0])} (${pico[1]}x)` };\n  });\n}\nconst RV_MARCAS = [['como quem', /\\bcomo quem\\b/gi], ['como se', /\\bcomo se\\b/gi], ['de repente', /\\bde repente\\b/gi], ['advérbios em -mente', /\\b\\p{L}{4,}mente\\b/giu],\n  ['reticências', /\\.\\.\\.|…/g], ['exclamações', /!/g], ['\"você\" fora de diálogo', null], ['itálico longo (+120 letras)', /\\*[^*\\n]{120,}\\*|_[^_\\n]{120,}_/g]];\nfunction rvMarcadores(caps) {\n  return RV_MARCAS.map(([nome, re]) => {\n    const por = {};\n    caps.forEach(c => c.linhas.forEach(l => {\n      const k = re ? (l.match(re) || []).length : (/^[—–-]/.test(l) ? 0 : (l.match(/\\bvocê\\b/gi) || []).length);\n      if (k) por[c.n] = (por[c.n] || 0) + k;\n    }));\n    const total = Object.values(por).reduce((a, b) => a + b, 0), pico = Object.entries(por).sort((a, b) => b[1] - a[1])[0];\n    return { marca: nome, total, pico: pico ? `Cap${rvCapN(pico[0])} (${pico[1]}x)` : '-' };\n  }).filter(m => m.total);\n}\nfunction rvDuplicados(caps) {\n  const vistos = {}, dups = [];\n  caps.forEach(c => c.linhas.forEach((l, i) => {\n    const frases = l.split(/(?<=[.!?…])\\s+/);\n    frases.forEach(f => { const k = rvSemAcento(f).toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\\s+/g, ' ').trim();\n      if (k.split(' ').length < 8) return; (vistos[k] = vistos[k] || []).push(`Cap${rvCapN(c.n)}:${i + 1}`); });\n  }));\n  Object.entries(vistos).forEach(([k, onde]) => { const u = [...new Set(onde)]; if (u.length > 1) dups.push({ trecho: rvT(k, 90), onde: u }); });\n  return dups.slice(0, 30);\n}\nconst RV_DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];\nconst RV_MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];\nfunction rvCalendario(caps, ano) {\n  ano = parseInt(ano, 10); if (!(ano > 1800 && ano < 2300)) return { conferido: false, erros: [], datas: 0 };\n  const erros = []; let datas = 0;\n  const re = new RegExp(`\\\\b(domingo|segunda|ter[çc]a|quarta|quinta|sexta|s[áa]bado)(?:-feira)?\\\\b[^.\\\\n]{0,25}?\\\\b(\\\\d{1,2})\\\\s+de\\\\s+(${RV_MESES.join('|').replace('ç', '[çc]')})`, 'gi');\n  caps.forEach(c => c.linhas.forEach((l, i) => { let m; re.lastIndex = 0;\n    while ((m = re.exec(l))) {\n      datas++;\n      const dia = parseInt(m[2], 10), mes = RV_MESES.findIndex(x => rvSemAcento(x) === rvSemAcento(m[3].toLowerCase()));\n      const real = RV_DIAS[new Date(Date.UTC(ano, mes, dia)).getUTCDay()], dito = rvSemAcento(m[1].toLowerCase());\n      if (rvSemAcento(real) !== dito) erros.push({ onde: `Cap${rvCapN(c.n)}:${i + 1}`, escrito: m[0], certo: `${dia}/${mes + 1}/${ano} é ${real}${['domingo', 'sábado'].includes(real) ? '' : '-feira'}` });\n    } }));\n  return { conferido: true, erros, datas, ano };\n}\nfunction rvNomes(caps) {\n  const chave = t => rvSemAcento(t).toLowerCase().replace(/h/g, '').replace(/(.)\\1/g, '$1');\n  const grupos = {};\n  caps.forEach(c => c.linhas.forEach((l, i) => rvTokens(l).forEach((t, j) => {\n    if (j === 0 || !/^\\p{Lu}\\p{Ll}{2,}$/u.test(t)) return;\n    const k = chave(t); grupos[k] = grupos[k] || {}; grupos[k][t] = grupos[k][t] || []; grupos[k][t].push(`Cap${rvCapN(c.n)}:${i + 1}`);\n  })));\n  return Object.values(grupos).filter(g => Object.keys(g).length > 1).map(g => {\n    const formas = Object.entries(g).sort((a, b) => b[1].length - a[1].length);\n    return { oficial: formas[0][0], vezes: formas[0][1].length, variantes: formas.slice(1).map(([f, onde]) => ({ forma: f, onde: onde.slice(0, 6) })) };\n  });\n}\nfunction rvFormatos(caps) {\n  const n = re => caps.reduce((s, c) => s + c.linhas.reduce((t, l) => t + (l.match(re) || []).length, 0), 0);\n  return { horas_hhmm: n(/\\b\\d{1,2}:\\d{2}\\b/g), horas_h: n(/\\b\\d{1,2}h\\d{0,2}\\b/g), travessao: n(/^—/gm), hifen_dialogo: n(/^[-–]\\s/gm), aspas_retas: n(/\"/g), aspas_curvas: n(/[“”]/g) };\n}\n\n// ── resposta da IA ──\nfunction rvJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\nconst RV_PRIOS = ['ALTA', 'MÉDIA', 'BAIXA'];\nconst rvPrio = p => { const s = rvSemAcento(String(p || '')).toUpperCase(); return s.startsWith('A') ? 'ALTA' : s.startsWith('B') ? 'BAIXA' : 'MÉDIA'; };\nconst rvAcoes = (v, agente) => rvLista(v, 30).filter(a => a && (a.o_que || a.acao)).map(a => ({ prioridade: rvPrio(a.prioridade), onde: rvL(a.onde, 40), o_que: rvL(a.o_que || a.acao, 300), agente }));\n// cabeçalho no padrão dos MDs do projeto\nconst rvCab = (id, titulo, status, depende, impacta) => `# ${id} — ${titulo}\\n\\n\\`\\`\\`text\\nID: ${id}\\nVERSÃO: 1.0\\nSTATUS: ${status}\\nDEPENDE DE: ${depende}\\nALTERA: -\\nIMPACTA: ${impacta}\\nÚLTIMA REVISÃO: ${new Date().toISOString().slice(0, 10)}\\n\\`\\`\\`\\n\\n`;\nconst rvCel = v => String(v ?? '').replace(/\\|/g, '/').replace(/\\n/g, ' ');\nconst rvTabela = (cab, linhas) => linhas.length ? `| ${cab.join(' | ')} |\\n|${cab.map(() => '---').join('|')}|\\n${linhas.map(l => `| ${l.map(rvCel).join(' | ')} |`).join('\\n')}\\n` : '_(nada)_\\n';\n// Markdown simples ➜ HTML (títulos, tabelas, listas, [ ] , negrito, itálico, código, citação); o mesmo na página e no PDF\nfunction rvMdHtml(md) {\n  const e = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n  const inl = s => e(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\\*\\*([^*]+)\\*\\*/g, '<b>$1</b>').replace(/(^|[\\s(])_([^_]+)_(?=[\\s).,;]|$)/g, '$1<i>$2</i>').replace(/(^|[\\s(])\\*([^*]+)\\*(?=[\\s).,;]|$)/g, '$1<i>$2</i>');\n  const out = [], ls = String(md || '').split('\\n'); let i = 0;\n  while (i < ls.length) {\n    const l = ls[i];\n    if (/^```/.test(l)) { const b = []; i++; while (i < ls.length && !/^```/.test(ls[i])) b.push(ls[i++]); i++; out.push('<pre>' + e(b.join('\\n')) + '</pre>'); continue; }\n    const h = l.match(/^(#{1,4})\\s+(.*)/); if (h) { out.push(`<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`); i++; continue; }\n    if (/^\\|/.test(l)) { const rows = []; while (i < ls.length && /^\\|/.test(ls[i])) rows.push(ls[i++]);\n      const cel = r => r.replace(/^\\||\\|$/g, '').split('|').map(c => c.trim());\n      out.push('<table><thead><tr>' + cel(rows[0]).map(c => `<th>${inl(c)}</th>`).join('') + '</tr></thead><tbody>' + rows.slice(2).map(r => '<tr>' + cel(r).map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table>'); continue; }\n    if (/^\\s*([-*]|\\d+\\.)\\s/.test(l)) { const ord = /^\\s*\\d+\\./.test(l), it = []; while (i < ls.length && /^\\s*([-*]|\\d+\\.)\\s/.test(ls[i])) it.push(ls[i++].replace(/^\\s*([-*]|\\d+\\.)\\s/, ''));\n      out.push(`<${ord ? 'ol' : 'ul'}>` + it.map(t => { const c = t.match(/^\\[( |x)\\]\\s(\\S+)\\s(.*)/); return c ? `<li class=\"ck\" data-id=\"${e(c[2])}\"><span class=\"cx\">${c[1] === 'x' ? '☑' : '☐'}</span> <b>${e(c[2])}</b> ${inl(c[3])}</li>` : `<li>${inl(t)}</li>`; }).join('') + `</${ord ? 'ol' : 'ul'}>`); continue; }\n    if (/^>\\s?/.test(l)) { out.push('<blockquote>' + inl(l.replace(/^>\\s?/, '')) + '</blockquote>'); i++; continue; }\n    if (l.trim()) out.push('<p>' + inl(l) + '</p>');\n    i++;\n  }\n  return out.join('\\n');\n}\nfunction rvPdfHtml(livro, docs) {\n  return `<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>Revisão · ${rvEsc(livro.titulo)}</title><style>\n@page{size:A4;margin:18mm 16mm}body{font-family:Inter,'Noto Color Emoji',sans-serif;font-size:10pt;line-height:1.5;color:#1d1d22}\n.capa{height:250mm;display:flex;flex-direction:column;justify-content:center;page-break-after:always}.capa h1{font:800 30pt Montserrat,sans-serif;margin:0}.capa p{font-size:13pt;color:#555}\nsection{page-break-before:always}h1{font:800 17pt Montserrat,sans-serif;color:#7a2e3a;border-bottom:2px solid #e8d5d8;padding-bottom:4px}h2{font:700 12.5pt Montserrat,sans-serif;margin:14px 0 4px}h3{font-size:11pt}\ntable{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #ddd;padding:3px 5px;text-align:left;vertical-align:top}th{background:#f4ecee}\npre{background:#f5f5f2;padding:6px 8px;font-size:8pt;white-space:pre-wrap}blockquote{border-left:3px solid #7a2e3a;margin:8px 0;padding:4px 10px;background:#faf6f7}li.ck{list-style:none;margin-left:-14px}code{background:#f2f2ef;padding:0 3px}\n</style></head><body><div class=\"capa\"><p>Revisão editorial com 7 especialistas de IA</p><h1>${rvEsc(livro.titulo)}</h1><p>${rvEsc(livro.autor)} · ${livro.capitulos.length} capítulos · ${livro.palavras.toLocaleString('pt-BR')} palavras · ${new Date().toLocaleDateString('pt-BR')}</p>\n<p>${docs.map(d => rvEsc(d[0])).join('<br>')}</p></div>${docs.map(d => `<section>${rvMdHtml(d[1])}</section>`).join('')}</body></html>`;\n}\nconst rvAcoesMd = acoes => acoes.length ? `\\n## AÇÕES PARA O CHECKLIST\\n${acoes.map(a => `- (${a.prioridade}) ${a.onde ? a.onde + ' — ' : ''}${a.o_que}`).join('\\n')}\\n` : '';\n\n// Escolhe o próximo LOTE de capítulos (até 5 e até ~12 mil palavras): cada execução cabe folgada nos 26 min do n8n6.\n// Capítulo que já tem resultado gravado é pulado (reexecutar continua de onde parou).\nconst E = $('▶️ Entrada').first().json;\nlet livro = null;\ntry { livro = JSON.parse($('📖 Lê o livro').first().json.livro || 'null'); } catch (e) {}\nif (!livro) return [{ json: { fim: true, sem_livro: true, id: E.id } }];\nconst feitos = new Set(Object.keys($('🗂️ Lê o que já foi feito').first().json || {}).filter(k => k.startsWith(`lv:${livro.id}:beta:`)).map(k => parseInt(k.split(':').pop(), 10)));\nconst falta = livro.capitulos.filter(c => !feitos.has(c.n));\nconst lote = []; let pal = 0;\nfor (const c of falta) { if (lote.length && (lote.length >= 5 || pal + c.palavras > 12000)) break; lote.push(c); pal += c.palavras; }\nif (!lote.length) return [{ json: { fim: true, id: livro.id, total: livro.capitulos.length } }];\nreturn lote.map(c => ({ json: { fim: false, id: livro.id, n: c.n, titulo: c.titulo, total: livro.capitulos.length, feitos: feitos.size,\n  detalhe: `capítulos ${lote[0].n} a ${lote[lote.length - 1].n} de ${livro.capitulos.length}` } }));"
+   },
+   "name": "🧩 Escolhe o lote",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    900,
+    184
+   ],
+   "id": "44e2a016-f3a3-48ce-9fa0-b9db8265eb55"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "26897327-6fcc-422a-8214-efaed3f34027",
+       "leftValue": "={{ $json.fim === true }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Acabaram os capítulos?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1200,
+    184
+   ],
+   "id": "e94598c0-d7b7-47c0-8feb-1c1c84bcaf07"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lv:{{ $('▶️ Entrada').first().json.id }}:ag:beta",
+    "value": "={{ JSON.stringify({ estado: 'rodando', detalhe: $('🧩 Escolhe o lote').first().json.detalhe, at: Date.now(), feitos: $('🧩 Escolhe o lote').first().json.feitos, total: $('🧩 Escolhe o lote').first().json.total }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 34560000
+   },
+   "name": "💾 Status: lendo o lote",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    657
+   ],
+   "id": "7d359b6d-a2cd-489c-b504-77fa6ad49eda",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "texto",
+    "key": "=lv:{{ $('▶️ Entrada').first().json.id }}:cap:{{ $json.n }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o capítulo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    657
+   ],
+   "id": "b4996c7c-e9a7-427c-b273-755b10d0dbe0",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Regras comuns da revisão de livro (as mesmas no principal e nos 9 sub-fluxos).\nconst rvT = (v, max) => {\n  const s = String(v ?? '').replace(/\\s+/g, ' ').trim();\n  if (s.length <= max) return s;\n  const c = s.slice(0, max), esp = c.lastIndexOf(' ');\n  return (esp >= max * 0.55 ? c.slice(0, esp) : c.slice(0, max - 1)).replace(/[\\s,;:.–—-]+$/, '') + '…';\n};\nconst rvL = (v, max) => rvT(v, max).replace(/[<>{}]/g, '');\nconst rvEsc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst rvPalavras = s => (String(s || '').match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []).length;\nconst rvSemAcento = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');\nconst rvLista = (v, max = 50) => (Array.isArray(v) ? v : []).filter(x => x !== null && x !== undefined).slice(0, max);\nconst RV_TTL = 34560000;\n// a equipe (MD 22): número do agente, ordem de trabalho e o MD que cada um entrega\nconst RV_AGENTES = [\n  { chave: '<SEGREDO_REMOVIDO>', num: 0, nome: 'Leitor', emoji: '📖', papel: 'fichas de cada capítulo', md: '', peso: 20 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 1, nome: 'O Arquiteto', emoji: '🏛️', papel: 'carta editorial', md: 'MD 23 - CARTA EDITORIAL AGENTE 1', peso: 9 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 2, nome: 'O Físico', emoji: '🧪', papel: 'continuidade e regras do mundo', md: 'MD 24 - AUDITORIA AGENTE 2', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 3, nome: 'O Psicólogo', emoji: '🧠', papel: 'personagens e relações', md: 'MD 25 - DOSSIE AGENTE 3', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 5, nome: 'O Relojoeiro', emoji: '⏱️', papel: 'cena a cena e ritmo', md: 'MD 27 - CENAS AGENTE 5', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 4, nome: 'O Estilista', emoji: '✒️', papel: 'linha, tiques e voz', md: 'MD 26 - LINHA AGENTE 4', peso: 14 },\n  { chave: 'beta', num: 6, nome: 'O Beta', emoji: '👥', papel: 'leitores simulados (leitura cega)', md: 'MD 28 - BETA AGENTE 6', peso: 14 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 7, nome: 'O Guardião', emoji: '🛡️', papel: 'copidesque e style sheet', md: 'MD 29 - STYLE SHEET', peso: 13 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 8, nome: 'Editor-chefe', emoji: '✅', papel: 'checklist final de correções', md: 'MD 30 - CHECKLIST CORRECOES', peso: 6 },\n];\nconst RV_ORDEM = [['leitor'], ['arquiteto'], ['fisico', 'psicologo'], ['relojoeiro'], ['estilista'], ['beta'], ['guardiao'], ['checklist']];\nconst rvAg = k => RV_AGENTES.find(a => a.chave === k);\n\n// ── divide o livro em capítulos (títulos \"Capítulo N\", \"# ...\", ou vários arquivos) ──\nconst RV_CAP = /^\\s*(?:#{1,3}\\s*)?(?:cap[ií]tulo|cap\\.)\\s*([0-9]{1,3}|[ivxlcdm]{1,7})\\b\\s*[-–—:.]?\\s*(.*)$/i;\nfunction rvDivide(texto, arquivos) {\n  const limpa = t => String(t || '').replace(/\\r\\n?/g, '\\n').replace(/[​﻿]/g, '');\n  const linhasDe = t => limpa(t).split('\\n').map(l => l.replace(/[ \\t]+/g, ' ').trim()).filter(Boolean);\n  let caps = [];\n  if (Array.isArray(arquivos) && arquivos.length > 1) {\n    caps = arquivos.map((a, i) => {\n      const ls = linhasDe(a.texto); let titulo = rvL(a.nome, 80).replace(/\\.(txt|md|docx|pdf)$/i, '');\n      if (ls.length && (RV_CAP.test(ls[0]) || /^#{1,3}\\s/.test(ls[0]))) { const m = ls[0].match(RV_CAP); titulo = rvL(m ? (m[2] || ls[0]) : ls[0].replace(/^#+\\s*/, ''), 80) || titulo; ls.shift(); }\n      return { titulo, linhas: ls };\n    });\n  } else {\n    const ls = linhasDe(texto || (arquivos && arquivos[0] && arquivos[0].texto));\n    const marca = ls.map(l => RV_CAP.test(l) && l.length < 120);\n    const usaHash = marca.filter(Boolean).length < 2 && ls.filter(l => /^#{1,2}\\s/.test(l)).length >= 2;\n    let atual = null;\n    ls.forEach((l, i) => {\n      const ehTitulo = usaHash ? /^#{1,2}\\s/.test(l) : marca[i];\n      if (ehTitulo) { const m = l.match(RV_CAP); atual = { titulo: rvL(m ? (m[2] || l.replace(/^#+\\s*/, '')) : l.replace(/^#+\\s*/, ''), 80), linhas: [] }; caps.push(atual); }\n      else { if (!atual) { atual = { titulo: 'Abertura', linhas: [] }; caps.push(atual); } atual.linhas.push(l); }\n    });\n    if (caps.length === 1 && caps[0].linhas.length > 400) {   // sem títulos: corta em partes de ~2.500 palavras\n      const todas = caps[0].linhas; caps = []; let p = null, n = 0;\n      todas.forEach(l => { if (!p || n > 2500) { p = { titulo: `Parte ${caps.length + 1}`, linhas: [] }; caps.push(p); n = 0; } p.linhas.push(l); n += rvPalavras(l); });\n    }\n  }\n  return caps.filter(c => c.linhas.length).map((c, i) => ({ n: i + 1, titulo: c.titulo || `Capítulo ${i + 1}`, linhas: c.linhas, palavras: c.linhas.reduce((s, l) => s + rvPalavras(l), 0) }));\n}\nconst rvNumera = linhas => linhas.map((l, i) => `L${i + 1}: ${l}`).join('\\n');\nconst rvCapN = n => String(n).padStart(2, '0');\n\n// ── contagens que o CÓDIGO faz melhor que a IA ──\nconst RV_PARADAS = new Set('a o as os um uma uns umas de do da dos das em no na nos nas por para pra pro com sem que e ou mas se é ser foi era ao à às aos me te lhe eu ele ela eles elas você vocês nós meu minha meus minhas seu sua seus suas isso isto aquilo esse essa este esta não sim mais menos muito muita já só também quando como onde porque então tinha tem ter estava está tá lá aí ali aqui num numa pelo pela pelos pelas até depois antes ainda nem mesmo tudo nada todo toda foi vai vou ia tão bem mal sobre entre gente quem qual cada outro outra'.split(' '));\nfunction rvTokens(l) { return (l.match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []); }\nfunction rvNomesProprios(caps) {\n  const cont = {};\n  caps.forEach(c => c.linhas.forEach(l => rvTokens(l).forEach((t, i) => { const k = t.toLowerCase(); cont[k] = cont[k] || [0, 0]; cont[k][0]++; if (i > 0 && /^\\p{Lu}/u.test(t)) cont[k][1]++; })));\n  return new Set(Object.entries(cont).filter(([, [n, m]]) => n >= 2 && m / n > 0.7).map(([k]) => k));\n}\nfunction rvRepeticoes(caps) {\n  const total = caps.reduce((s, c) => s + c.palavras, 0), MIN = Math.max(3, Math.round(total / 10000));\n  const nomes = rvNomesProprios(caps), g = {};\n  caps.forEach(c => c.linhas.forEach(l => {\n    const t = rvTokens(l).map(x => x.toLowerCase());\n    for (let n = 2; n <= 5; n++) for (let i = 0; i + n <= t.length; i++) {\n      const w = t.slice(i, i + n), conteudo = w.filter(x => !RV_PARADAS.has(x) && !nomes.has(x) && x.length > 2);\n      if (!conteudo.length || RV_PARADAS.has(w[n - 1]) && n > 2) continue;\n      const k = w.join(' '); g[k] = g[k] || { n, total: 0, por: {} }; g[k].total++; g[k].por[c.n] = (g[k].por[c.n] || 0) + 1;\n    }\n  }));\n  let lista = Object.entries(g).filter(([, v]) => v.total >= MIN).map(([k, v]) => ({ expressao: k, ...v }));\n  lista = lista.filter(a => !lista.some(b => b.n > a.n && b.total >= a.total * 0.8 && (' ' + b.expressao + ' ').includes(' ' + a.expressao + ' ')));\n  return lista.sort((a, b) => b.total * Math.sqrt(b.n) - a.total * Math.sqrt(a.n)).slice(0, 25).map(x => {\n    const pico = Object.entries(x.por).sort((a, b) => b[1] - a[1])[0];\n    return { expressao: x.expressao, total: x.total, capitulos: Object.keys(x.por).length, pico: `Cap${rvCapN(pico[0])} (${pico[1]}x)` };\n  });\n}\nconst RV_MARCAS = [['como quem', /\\bcomo quem\\b/gi], ['como se', /\\bcomo se\\b/gi], ['de repente', /\\bde repente\\b/gi], ['advérbios em -mente', /\\b\\p{L}{4,}mente\\b/giu],\n  ['reticências', /\\.\\.\\.|…/g], ['exclamações', /!/g], ['\"você\" fora de diálogo', null], ['itálico longo (+120 letras)', /\\*[^*\\n]{120,}\\*|_[^_\\n]{120,}_/g]];\nfunction rvMarcadores(caps) {\n  return RV_MARCAS.map(([nome, re]) => {\n    const por = {};\n    caps.forEach(c => c.linhas.forEach(l => {\n      const k = re ? (l.match(re) || []).length : (/^[—–-]/.test(l) ? 0 : (l.match(/\\bvocê\\b/gi) || []).length);\n      if (k) por[c.n] = (por[c.n] || 0) + k;\n    }));\n    const total = Object.values(por).reduce((a, b) => a + b, 0), pico = Object.entries(por).sort((a, b) => b[1] - a[1])[0];\n    return { marca: nome, total, pico: pico ? `Cap${rvCapN(pico[0])} (${pico[1]}x)` : '-' };\n  }).filter(m => m.total);\n}\nfunction rvDuplicados(caps) {\n  const vistos = {}, dups = [];\n  caps.forEach(c => c.linhas.forEach((l, i) => {\n    const frases = l.split(/(?<=[.!?…])\\s+/);\n    frases.forEach(f => { const k = rvSemAcento(f).toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\\s+/g, ' ').trim();\n      if (k.split(' ').length < 8) return; (vistos[k] = vistos[k] || []).push(`Cap${rvCapN(c.n)}:${i + 1}`); });\n  }));\n  Object.entries(vistos).forEach(([k, onde]) => { const u = [...new Set(onde)]; if (u.length > 1) dups.push({ trecho: rvT(k, 90), onde: u }); });\n  return dups.slice(0, 30);\n}\nconst RV_DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];\nconst RV_MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];\nfunction rvCalendario(caps, ano) {\n  ano = parseInt(ano, 10); if (!(ano > 1800 && ano < 2300)) return { conferido: false, erros: [], datas: 0 };\n  const erros = []; let datas = 0;\n  const re = new RegExp(`\\\\b(domingo|segunda|ter[çc]a|quarta|quinta|sexta|s[áa]bado)(?:-feira)?\\\\b[^.\\\\n]{0,25}?\\\\b(\\\\d{1,2})\\\\s+de\\\\s+(${RV_MESES.join('|').replace('ç', '[çc]')})`, 'gi');\n  caps.forEach(c => c.linhas.forEach((l, i) => { let m; re.lastIndex = 0;\n    while ((m = re.exec(l))) {\n      datas++;\n      const dia = parseInt(m[2], 10), mes = RV_MESES.findIndex(x => rvSemAcento(x) === rvSemAcento(m[3].toLowerCase()));\n      const real = RV_DIAS[new Date(Date.UTC(ano, mes, dia)).getUTCDay()], dito = rvSemAcento(m[1].toLowerCase());\n      if (rvSemAcento(real) !== dito) erros.push({ onde: `Cap${rvCapN(c.n)}:${i + 1}`, escrito: m[0], certo: `${dia}/${mes + 1}/${ano} é ${real}${['domingo', 'sábado'].includes(real) ? '' : '-feira'}` });\n    } }));\n  return { conferido: true, erros, datas, ano };\n}\nfunction rvNomes(caps) {\n  const chave = t => rvSemAcento(t).toLowerCase().replace(/h/g, '').replace(/(.)\\1/g, '$1');\n  const grupos = {};\n  caps.forEach(c => c.linhas.forEach((l, i) => rvTokens(l).forEach((t, j) => {\n    if (j === 0 || !/^\\p{Lu}\\p{Ll}{2,}$/u.test(t)) return;\n    const k = chave(t); grupos[k] = grupos[k] || {}; grupos[k][t] = grupos[k][t] || []; grupos[k][t].push(`Cap${rvCapN(c.n)}:${i + 1}`);\n  })));\n  return Object.values(grupos).filter(g => Object.keys(g).length > 1).map(g => {\n    const formas = Object.entries(g).sort((a, b) => b[1].length - a[1].length);\n    return { oficial: formas[0][0], vezes: formas[0][1].length, variantes: formas.slice(1).map(([f, onde]) => ({ forma: f, onde: onde.slice(0, 6) })) };\n  });\n}\nfunction rvFormatos(caps) {\n  const n = re => caps.reduce((s, c) => s + c.linhas.reduce((t, l) => t + (l.match(re) || []).length, 0), 0);\n  return { horas_hhmm: n(/\\b\\d{1,2}:\\d{2}\\b/g), horas_h: n(/\\b\\d{1,2}h\\d{0,2}\\b/g), travessao: n(/^—/gm), hifen_dialogo: n(/^[-–]\\s/gm), aspas_retas: n(/\"/g), aspas_curvas: n(/[“”]/g) };\n}\n\n// ── resposta da IA ──\nfunction rvJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\nconst RV_PRIOS = ['ALTA', 'MÉDIA', 'BAIXA'];\nconst rvPrio = p => { const s = rvSemAcento(String(p || '')).toUpperCase(); return s.startsWith('A') ? 'ALTA' : s.startsWith('B') ? 'BAIXA' : 'MÉDIA'; };\nconst rvAcoes = (v, agente) => rvLista(v, 30).filter(a => a && (a.o_que || a.acao)).map(a => ({ prioridade: rvPrio(a.prioridade), onde: rvL(a.onde, 40), o_que: rvL(a.o_que || a.acao, 300), agente }));\n// cabeçalho no padrão dos MDs do projeto\nconst rvCab = (id, titulo, status, depende, impacta) => `# ${id} — ${titulo}\\n\\n\\`\\`\\`text\\nID: ${id}\\nVERSÃO: 1.0\\nSTATUS: ${status}\\nDEPENDE DE: ${depende}\\nALTERA: -\\nIMPACTA: ${impacta}\\nÚLTIMA REVISÃO: ${new Date().toISOString().slice(0, 10)}\\n\\`\\`\\`\\n\\n`;\nconst rvCel = v => String(v ?? '').replace(/\\|/g, '/').replace(/\\n/g, ' ');\nconst rvTabela = (cab, linhas) => linhas.length ? `| ${cab.join(' | ')} |\\n|${cab.map(() => '---').join('|')}|\\n${linhas.map(l => `| ${l.map(rvCel).join(' | ')} |`).join('\\n')}\\n` : '_(nada)_\\n';\n// Markdown simples ➜ HTML (títulos, tabelas, listas, [ ] , negrito, itálico, código, citação); o mesmo na página e no PDF\nfunction rvMdHtml(md) {\n  const e = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n  const inl = s => e(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\\*\\*([^*]+)\\*\\*/g, '<b>$1</b>').replace(/(^|[\\s(])_([^_]+)_(?=[\\s).,;]|$)/g, '$1<i>$2</i>').replace(/(^|[\\s(])\\*([^*]+)\\*(?=[\\s).,;]|$)/g, '$1<i>$2</i>');\n  const out = [], ls = String(md || '').split('\\n'); let i = 0;\n  while (i < ls.length) {\n    const l = ls[i];\n    if (/^```/.test(l)) { const b = []; i++; while (i < ls.length && !/^```/.test(ls[i])) b.push(ls[i++]); i++; out.push('<pre>' + e(b.join('\\n')) + '</pre>'); continue; }\n    const h = l.match(/^(#{1,4})\\s+(.*)/); if (h) { out.push(`<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`); i++; continue; }\n    if (/^\\|/.test(l)) { const rows = []; while (i < ls.length && /^\\|/.test(ls[i])) rows.push(ls[i++]);\n      const cel = r => r.replace(/^\\||\\|$/g, '').split('|').map(c => c.trim());\n      out.push('<table><thead><tr>' + cel(rows[0]).map(c => `<th>${inl(c)}</th>`).join('') + '</tr></thead><tbody>' + rows.slice(2).map(r => '<tr>' + cel(r).map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table>'); continue; }\n    if (/^\\s*([-*]|\\d+\\.)\\s/.test(l)) { const ord = /^\\s*\\d+\\./.test(l), it = []; while (i < ls.length && /^\\s*([-*]|\\d+\\.)\\s/.test(ls[i])) it.push(ls[i++].replace(/^\\s*([-*]|\\d+\\.)\\s/, ''));\n      out.push(`<${ord ? 'ol' : 'ul'}>` + it.map(t => { const c = t.match(/^\\[( |x)\\]\\s(\\S+)\\s(.*)/); return c ? `<li class=\"ck\" data-id=\"${e(c[2])}\"><span class=\"cx\">${c[1] === 'x' ? '☑' : '☐'}</span> <b>${e(c[2])}</b> ${inl(c[3])}</li>` : `<li>${inl(t)}</li>`; }).join('') + `</${ord ? 'ol' : 'ul'}>`); continue; }\n    if (/^>\\s?/.test(l)) { out.push('<blockquote>' + inl(l.replace(/^>\\s?/, '')) + '</blockquote>'); i++; continue; }\n    if (l.trim()) out.push('<p>' + inl(l) + '</p>');\n    i++;\n  }\n  return out.join('\\n');\n}\nfunction rvPdfHtml(livro, docs) {\n  return `<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>Revisão · ${rvEsc(livro.titulo)}</title><style>\n@page{size:A4;margin:18mm 16mm}body{font-family:Inter,'Noto Color Emoji',sans-serif;font-size:10pt;line-height:1.5;color:#1d1d22}\n.capa{height:250mm;display:flex;flex-direction:column;justify-content:center;page-break-after:always}.capa h1{font:800 30pt Montserrat,sans-serif;margin:0}.capa p{font-size:13pt;color:#555}\nsection{page-break-before:always}h1{font:800 17pt Montserrat,sans-serif;color:#7a2e3a;border-bottom:2px solid #e8d5d8;padding-bottom:4px}h2{font:700 12.5pt Montserrat,sans-serif;margin:14px 0 4px}h3{font-size:11pt}\ntable{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #ddd;padding:3px 5px;text-align:left;vertical-align:top}th{background:#f4ecee}\npre{background:#f5f5f2;padding:6px 8px;font-size:8pt;white-space:pre-wrap}blockquote{border-left:3px solid #7a2e3a;margin:8px 0;padding:4px 10px;background:#faf6f7}li.ck{list-style:none;margin-left:-14px}code{background:#f2f2ef;padding:0 3px}\n</style></head><body><div class=\"capa\"><p>Revisão editorial com 7 especialistas de IA</p><h1>${rvEsc(livro.titulo)}</h1><p>${rvEsc(livro.autor)} · ${livro.capitulos.length} capítulos · ${livro.palavras.toLocaleString('pt-BR')} palavras · ${new Date().toLocaleDateString('pt-BR')}</p>\n<p>${docs.map(d => rvEsc(d[0])).join('<br>')}</p></div>${docs.map(d => `<section>${rvMdHtml(d[1])}</section>`).join('')}</body></html>`;\n}\nconst rvAcoesMd = acoes => acoes.length ? `\\n## AÇÕES PARA O CHECKLIST\\n${acoes.map(a => `- (${a.prioridade}) ${a.onde ? a.onde + ' — ' : ''}${a.o_que}`).join('\\n')}\\n` : '';\n\n// Monta o pedido de cada capítulo do lote: dados do livro + o texto com as linhas numeradas (L1, L2…) para a IA citar \"Cap03:12\".\nconst livro = JSON.parse($('📖 Lê o livro').first().json.livro);\nconst L = $('🧩 Escolhe o lote').all().map(i => i.json), T = $input.all().map(i => i.json);\nconst AG = 'beta';\nconst cego = AG === 'beta';   // o Beta lê às cegas: sem regras, sem personagens, sem promessa do autor\nconst contexto = cego ? `LIVRO: ${livro.titulo} · ${livro.genero} · público: ${livro.publico}` : `LIVRO: ${livro.titulo} (${livro.autor}) · ${livro.genero} · público: ${livro.publico} · ${livro.capitulos.length} capítulos\nPROMESSA DO AUTOR: ${livro.apoio.promessa || '(não informada)'}\nREGRAS DO MUNDO: ${livro.apoio.regras || '(não informadas)'}\nPERSONAGENS: ${livro.apoio.personagens || '(não informados)'}\nLINHA DO TEMPO: ${livro.apoio.linha_tempo || '(não informada)'}${livro.apoio.ano ? ' · ano da história: ' + livro.apoio.ano : ''}`;\nreturn L.map((c, i) => {\n  let linhas = [];\n  try { linhas = JSON.parse((T[i] || {}).texto || '[]'); } catch (e) {}\n  return { json: { n: c.n, linhas: linhas.length, texto_ia: `${contexto}\n\nCAPÍTULO ${c.n} de ${livro.capitulos.length}: \"${c.titulo}\" (${linhas.length} linhas)\n${rvNumera(linhas)}` } };\n});"
+   },
+   "name": "🧩 Prepara o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    600,
+    657
+   ],
+   "id": "d1aa2715-f1f8-4832-8c87-d35582ae0437"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.texto_ia }}",
+    "options": {
+     "systemMessage": "Você simula 3 LEITORES BETA do público do livro lendo às cegas (sem saber da revisão), UM capítulo por vez, cada um com o seu jeito:\n1 \"voraz\" (lê muito, adora o gênero), 2 \"casual\" (larga fácil se cansar), 3 \"crítico\" (nota furo e clichê).\nPara cada leitor dê notas de 1 a 5: P = prendeu?, E = entendeu?, T = torceu pelo protagonista? Seja honesto: nem tudo é 5.\n- leitores: [{\"persona\":\"voraz|casual|critico\",\"P\":0,\"E\":0,\"T\":0,\"reacao\":\"1 frase na voz do leitor\",\"quase_larguei\":\"onde e por quê (ou vazio)\"}]\n- confusoes: o que não entenderam [{\"linha\":\"\",\"pergunta\":\"\"}] · emocoes: onde sentiram algo forte [{\"linha\":\"\",\"emocao\":\"\"}]\n- furos_mundo_real: coisa que na vida real não passaria (escola chamaria a mãe, hospital…) · problematico: algo que leitor jovem criticaria nas redes (ou vazio) · amado: o que defenderiam\n- rotulo: 1 a 3 palavras para o capítulo (ex.: \"Devorado\", \"Neblina\", \"Medo real\")\nRETORNE SOMENTE JSON VÁLIDO, sem texto antes ou depois."
+    },
+    "needsFallback": true
+   },
+   "name": "🤖 Beta (por capítulo)",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    900,
+    657
+   ],
+   "id": "8157c692-3486-4a17-9c95-1b1726ea5e80",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 2500,
+     "temperature": 0.7,
+     "timeout": 300000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro · Beta (por capítulo)",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    900,
+    877
+   ],
+   "id": "19bd32eb-e977-4a9a-b7a2-6e3ac9830a71",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 2500,
+     "temperature": 0.7,
+     "timeout": 300000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro · Beta (por capítulo)",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    900,
+    1057
+   ],
+   "id": "65e19d62-ea60-4cfc-9cbc-eebcba25c475",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Regras comuns da revisão de livro (as mesmas no principal e nos 9 sub-fluxos).\nconst rvT = (v, max) => {\n  const s = String(v ?? '').replace(/\\s+/g, ' ').trim();\n  if (s.length <= max) return s;\n  const c = s.slice(0, max), esp = c.lastIndexOf(' ');\n  return (esp >= max * 0.55 ? c.slice(0, esp) : c.slice(0, max - 1)).replace(/[\\s,;:.–—-]+$/, '') + '…';\n};\nconst rvL = (v, max) => rvT(v, max).replace(/[<>{}]/g, '');\nconst rvEsc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst rvPalavras = s => (String(s || '').match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []).length;\nconst rvSemAcento = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');\nconst rvLista = (v, max = 50) => (Array.isArray(v) ? v : []).filter(x => x !== null && x !== undefined).slice(0, max);\nconst RV_TTL = 34560000;\n// a equipe (MD 22): número do agente, ordem de trabalho e o MD que cada um entrega\nconst RV_AGENTES = [\n  { chave: '<SEGREDO_REMOVIDO>', num: 0, nome: 'Leitor', emoji: '📖', papel: 'fichas de cada capítulo', md: '', peso: 20 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 1, nome: 'O Arquiteto', emoji: '🏛️', papel: 'carta editorial', md: 'MD 23 - CARTA EDITORIAL AGENTE 1', peso: 9 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 2, nome: 'O Físico', emoji: '🧪', papel: 'continuidade e regras do mundo', md: 'MD 24 - AUDITORIA AGENTE 2', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 3, nome: 'O Psicólogo', emoji: '🧠', papel: 'personagens e relações', md: 'MD 25 - DOSSIE AGENTE 3', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 5, nome: 'O Relojoeiro', emoji: '⏱️', papel: 'cena a cena e ritmo', md: 'MD 27 - CENAS AGENTE 5', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 4, nome: 'O Estilista', emoji: '✒️', papel: 'linha, tiques e voz', md: 'MD 26 - LINHA AGENTE 4', peso: 14 },\n  { chave: 'beta', num: 6, nome: 'O Beta', emoji: '👥', papel: 'leitores simulados (leitura cega)', md: 'MD 28 - BETA AGENTE 6', peso: 14 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 7, nome: 'O Guardião', emoji: '🛡️', papel: 'copidesque e style sheet', md: 'MD 29 - STYLE SHEET', peso: 13 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 8, nome: 'Editor-chefe', emoji: '✅', papel: 'checklist final de correções', md: 'MD 30 - CHECKLIST CORRECOES', peso: 6 },\n];\nconst RV_ORDEM = [['leitor'], ['arquiteto'], ['fisico', 'psicologo'], ['relojoeiro'], ['estilista'], ['beta'], ['guardiao'], ['checklist']];\nconst rvAg = k => RV_AGENTES.find(a => a.chave === k);\n\n// ── divide o livro em capítulos (títulos \"Capítulo N\", \"# ...\", ou vários arquivos) ──\nconst RV_CAP = /^\\s*(?:#{1,3}\\s*)?(?:cap[ií]tulo|cap\\.)\\s*([0-9]{1,3}|[ivxlcdm]{1,7})\\b\\s*[-–—:.]?\\s*(.*)$/i;\nfunction rvDivide(texto, arquivos) {\n  const limpa = t => String(t || '').replace(/\\r\\n?/g, '\\n').replace(/[​﻿]/g, '');\n  const linhasDe = t => limpa(t).split('\\n').map(l => l.replace(/[ \\t]+/g, ' ').trim()).filter(Boolean);\n  let caps = [];\n  if (Array.isArray(arquivos) && arquivos.length > 1) {\n    caps = arquivos.map((a, i) => {\n      const ls = linhasDe(a.texto); let titulo = rvL(a.nome, 80).replace(/\\.(txt|md|docx|pdf)$/i, '');\n      if (ls.length && (RV_CAP.test(ls[0]) || /^#{1,3}\\s/.test(ls[0]))) { const m = ls[0].match(RV_CAP); titulo = rvL(m ? (m[2] || ls[0]) : ls[0].replace(/^#+\\s*/, ''), 80) || titulo; ls.shift(); }\n      return { titulo, linhas: ls };\n    });\n  } else {\n    const ls = linhasDe(texto || (arquivos && arquivos[0] && arquivos[0].texto));\n    const marca = ls.map(l => RV_CAP.test(l) && l.length < 120);\n    const usaHash = marca.filter(Boolean).length < 2 && ls.filter(l => /^#{1,2}\\s/.test(l)).length >= 2;\n    let atual = null;\n    ls.forEach((l, i) => {\n      const ehTitulo = usaHash ? /^#{1,2}\\s/.test(l) : marca[i];\n      if (ehTitulo) { const m = l.match(RV_CAP); atual = { titulo: rvL(m ? (m[2] || l.replace(/^#+\\s*/, '')) : l.replace(/^#+\\s*/, ''), 80), linhas: [] }; caps.push(atual); }\n      else { if (!atual) { atual = { titulo: 'Abertura', linhas: [] }; caps.push(atual); } atual.linhas.push(l); }\n    });\n    if (caps.length === 1 && caps[0].linhas.length > 400) {   // sem títulos: corta em partes de ~2.500 palavras\n      const todas = caps[0].linhas; caps = []; let p = null, n = 0;\n      todas.forEach(l => { if (!p || n > 2500) { p = { titulo: `Parte ${caps.length + 1}`, linhas: [] }; caps.push(p); n = 0; } p.linhas.push(l); n += rvPalavras(l); });\n    }\n  }\n  return caps.filter(c => c.linhas.length).map((c, i) => ({ n: i + 1, titulo: c.titulo || `Capítulo ${i + 1}`, linhas: c.linhas, palavras: c.linhas.reduce((s, l) => s + rvPalavras(l), 0) }));\n}\nconst rvNumera = linhas => linhas.map((l, i) => `L${i + 1}: ${l}`).join('\\n');\nconst rvCapN = n => String(n).padStart(2, '0');\n\n// ── contagens que o CÓDIGO faz melhor que a IA ──\nconst RV_PARADAS = new Set('a o as os um uma uns umas de do da dos das em no na nos nas por para pra pro com sem que e ou mas se é ser foi era ao à às aos me te lhe eu ele ela eles elas você vocês nós meu minha meus minhas seu sua seus suas isso isto aquilo esse essa este esta não sim mais menos muito muita já só também quando como onde porque então tinha tem ter estava está tá lá aí ali aqui num numa pelo pela pelos pelas até depois antes ainda nem mesmo tudo nada todo toda foi vai vou ia tão bem mal sobre entre gente quem qual cada outro outra'.split(' '));\nfunction rvTokens(l) { return (l.match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []); }\nfunction rvNomesProprios(caps) {\n  const cont = {};\n  caps.forEach(c => c.linhas.forEach(l => rvTokens(l).forEach((t, i) => { const k = t.toLowerCase(); cont[k] = cont[k] || [0, 0]; cont[k][0]++; if (i > 0 && /^\\p{Lu}/u.test(t)) cont[k][1]++; })));\n  return new Set(Object.entries(cont).filter(([, [n, m]]) => n >= 2 && m / n > 0.7).map(([k]) => k));\n}\nfunction rvRepeticoes(caps) {\n  const total = caps.reduce((s, c) => s + c.palavras, 0), MIN = Math.max(3, Math.round(total / 10000));\n  const nomes = rvNomesProprios(caps), g = {};\n  caps.forEach(c => c.linhas.forEach(l => {\n    const t = rvTokens(l).map(x => x.toLowerCase());\n    for (let n = 2; n <= 5; n++) for (let i = 0; i + n <= t.length; i++) {\n      const w = t.slice(i, i + n), conteudo = w.filter(x => !RV_PARADAS.has(x) && !nomes.has(x) && x.length > 2);\n      if (!conteudo.length || RV_PARADAS.has(w[n - 1]) && n > 2) continue;\n      const k = w.join(' '); g[k] = g[k] || { n, total: 0, por: {} }; g[k].total++; g[k].por[c.n] = (g[k].por[c.n] || 0) + 1;\n    }\n  }));\n  let lista = Object.entries(g).filter(([, v]) => v.total >= MIN).map(([k, v]) => ({ expressao: k, ...v }));\n  lista = lista.filter(a => !lista.some(b => b.n > a.n && b.total >= a.total * 0.8 && (' ' + b.expressao + ' ').includes(' ' + a.expressao + ' ')));\n  return lista.sort((a, b) => b.total * Math.sqrt(b.n) - a.total * Math.sqrt(a.n)).slice(0, 25).map(x => {\n    const pico = Object.entries(x.por).sort((a, b) => b[1] - a[1])[0];\n    return { expressao: x.expressao, total: x.total, capitulos: Object.keys(x.por).length, pico: `Cap${rvCapN(pico[0])} (${pico[1]}x)` };\n  });\n}\nconst RV_MARCAS = [['como quem', /\\bcomo quem\\b/gi], ['como se', /\\bcomo se\\b/gi], ['de repente', /\\bde repente\\b/gi], ['advérbios em -mente', /\\b\\p{L}{4,}mente\\b/giu],\n  ['reticências', /\\.\\.\\.|…/g], ['exclamações', /!/g], ['\"você\" fora de diálogo', null], ['itálico longo (+120 letras)', /\\*[^*\\n]{120,}\\*|_[^_\\n]{120,}_/g]];\nfunction rvMarcadores(caps) {\n  return RV_MARCAS.map(([nome, re]) => {\n    const por = {};\n    caps.forEach(c => c.linhas.forEach(l => {\n      const k = re ? (l.match(re) || []).length : (/^[—–-]/.test(l) ? 0 : (l.match(/\\bvocê\\b/gi) || []).length);\n      if (k) por[c.n] = (por[c.n] || 0) + k;\n    }));\n    const total = Object.values(por).reduce((a, b) => a + b, 0), pico = Object.entries(por).sort((a, b) => b[1] - a[1])[0];\n    return { marca: nome, total, pico: pico ? `Cap${rvCapN(pico[0])} (${pico[1]}x)` : '-' };\n  }).filter(m => m.total);\n}\nfunction rvDuplicados(caps) {\n  const vistos = {}, dups = [];\n  caps.forEach(c => c.linhas.forEach((l, i) => {\n    const frases = l.split(/(?<=[.!?…])\\s+/);\n    frases.forEach(f => { const k = rvSemAcento(f).toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\\s+/g, ' ').trim();\n      if (k.split(' ').length < 8) return; (vistos[k] = vistos[k] || []).push(`Cap${rvCapN(c.n)}:${i + 1}`); });\n  }));\n  Object.entries(vistos).forEach(([k, onde]) => { const u = [...new Set(onde)]; if (u.length > 1) dups.push({ trecho: rvT(k, 90), onde: u }); });\n  return dups.slice(0, 30);\n}\nconst RV_DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];\nconst RV_MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];\nfunction rvCalendario(caps, ano) {\n  ano = parseInt(ano, 10); if (!(ano > 1800 && ano < 2300)) return { conferido: false, erros: [], datas: 0 };\n  const erros = []; let datas = 0;\n  const re = new RegExp(`\\\\b(domingo|segunda|ter[çc]a|quarta|quinta|sexta|s[áa]bado)(?:-feira)?\\\\b[^.\\\\n]{0,25}?\\\\b(\\\\d{1,2})\\\\s+de\\\\s+(${RV_MESES.join('|').replace('ç', '[çc]')})`, 'gi');\n  caps.forEach(c => c.linhas.forEach((l, i) => { let m; re.lastIndex = 0;\n    while ((m = re.exec(l))) {\n      datas++;\n      const dia = parseInt(m[2], 10), mes = RV_MESES.findIndex(x => rvSemAcento(x) === rvSemAcento(m[3].toLowerCase()));\n      const real = RV_DIAS[new Date(Date.UTC(ano, mes, dia)).getUTCDay()], dito = rvSemAcento(m[1].toLowerCase());\n      if (rvSemAcento(real) !== dito) erros.push({ onde: `Cap${rvCapN(c.n)}:${i + 1}`, escrito: m[0], certo: `${dia}/${mes + 1}/${ano} é ${real}${['domingo', 'sábado'].includes(real) ? '' : '-feira'}` });\n    } }));\n  return { conferido: true, erros, datas, ano };\n}\nfunction rvNomes(caps) {\n  const chave = t => rvSemAcento(t).toLowerCase().replace(/h/g, '').replace(/(.)\\1/g, '$1');\n  const grupos = {};\n  caps.forEach(c => c.linhas.forEach((l, i) => rvTokens(l).forEach((t, j) => {\n    if (j === 0 || !/^\\p{Lu}\\p{Ll}{2,}$/u.test(t)) return;\n    const k = chave(t); grupos[k] = grupos[k] || {}; grupos[k][t] = grupos[k][t] || []; grupos[k][t].push(`Cap${rvCapN(c.n)}:${i + 1}`);\n  })));\n  return Object.values(grupos).filter(g => Object.keys(g).length > 1).map(g => {\n    const formas = Object.entries(g).sort((a, b) => b[1].length - a[1].length);\n    return { oficial: formas[0][0], vezes: formas[0][1].length, variantes: formas.slice(1).map(([f, onde]) => ({ forma: f, onde: onde.slice(0, 6) })) };\n  });\n}\nfunction rvFormatos(caps) {\n  const n = re => caps.reduce((s, c) => s + c.linhas.reduce((t, l) => t + (l.match(re) || []).length, 0), 0);\n  return { horas_hhmm: n(/\\b\\d{1,2}:\\d{2}\\b/g), horas_h: n(/\\b\\d{1,2}h\\d{0,2}\\b/g), travessao: n(/^—/gm), hifen_dialogo: n(/^[-–]\\s/gm), aspas_retas: n(/\"/g), aspas_curvas: n(/[“”]/g) };\n}\n\n// ── resposta da IA ──\nfunction rvJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\nconst RV_PRIOS = ['ALTA', 'MÉDIA', 'BAIXA'];\nconst rvPrio = p => { const s = rvSemAcento(String(p || '')).toUpperCase(); return s.startsWith('A') ? 'ALTA' : s.startsWith('B') ? 'BAIXA' : 'MÉDIA'; };\nconst rvAcoes = (v, agente) => rvLista(v, 30).filter(a => a && (a.o_que || a.acao)).map(a => ({ prioridade: rvPrio(a.prioridade), onde: rvL(a.onde, 40), o_que: rvL(a.o_que || a.acao, 300), agente }));\n// cabeçalho no padrão dos MDs do projeto\nconst rvCab = (id, titulo, status, depende, impacta) => `# ${id} — ${titulo}\\n\\n\\`\\`\\`text\\nID: ${id}\\nVERSÃO: 1.0\\nSTATUS: ${status}\\nDEPENDE DE: ${depende}\\nALTERA: -\\nIMPACTA: ${impacta}\\nÚLTIMA REVISÃO: ${new Date().toISOString().slice(0, 10)}\\n\\`\\`\\`\\n\\n`;\nconst rvCel = v => String(v ?? '').replace(/\\|/g, '/').replace(/\\n/g, ' ');\nconst rvTabela = (cab, linhas) => linhas.length ? `| ${cab.join(' | ')} |\\n|${cab.map(() => '---').join('|')}|\\n${linhas.map(l => `| ${l.map(rvCel).join(' | ')} |`).join('\\n')}\\n` : '_(nada)_\\n';\n// Markdown simples ➜ HTML (títulos, tabelas, listas, [ ] , negrito, itálico, código, citação); o mesmo na página e no PDF\nfunction rvMdHtml(md) {\n  const e = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n  const inl = s => e(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\\*\\*([^*]+)\\*\\*/g, '<b>$1</b>').replace(/(^|[\\s(])_([^_]+)_(?=[\\s).,;]|$)/g, '$1<i>$2</i>').replace(/(^|[\\s(])\\*([^*]+)\\*(?=[\\s).,;]|$)/g, '$1<i>$2</i>');\n  const out = [], ls = String(md || '').split('\\n'); let i = 0;\n  while (i < ls.length) {\n    const l = ls[i];\n    if (/^```/.test(l)) { const b = []; i++; while (i < ls.length && !/^```/.test(ls[i])) b.push(ls[i++]); i++; out.push('<pre>' + e(b.join('\\n')) + '</pre>'); continue; }\n    const h = l.match(/^(#{1,4})\\s+(.*)/); if (h) { out.push(`<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`); i++; continue; }\n    if (/^\\|/.test(l)) { const rows = []; while (i < ls.length && /^\\|/.test(ls[i])) rows.push(ls[i++]);\n      const cel = r => r.replace(/^\\||\\|$/g, '').split('|').map(c => c.trim());\n      out.push('<table><thead><tr>' + cel(rows[0]).map(c => `<th>${inl(c)}</th>`).join('') + '</tr></thead><tbody>' + rows.slice(2).map(r => '<tr>' + cel(r).map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table>'); continue; }\n    if (/^\\s*([-*]|\\d+\\.)\\s/.test(l)) { const ord = /^\\s*\\d+\\./.test(l), it = []; while (i < ls.length && /^\\s*([-*]|\\d+\\.)\\s/.test(ls[i])) it.push(ls[i++].replace(/^\\s*([-*]|\\d+\\.)\\s/, ''));\n      out.push(`<${ord ? 'ol' : 'ul'}>` + it.map(t => { const c = t.match(/^\\[( |x)\\]\\s(\\S+)\\s(.*)/); return c ? `<li class=\"ck\" data-id=\"${e(c[2])}\"><span class=\"cx\">${c[1] === 'x' ? '☑' : '☐'}</span> <b>${e(c[2])}</b> ${inl(c[3])}</li>` : `<li>${inl(t)}</li>`; }).join('') + `</${ord ? 'ol' : 'ul'}>`); continue; }\n    if (/^>\\s?/.test(l)) { out.push('<blockquote>' + inl(l.replace(/^>\\s?/, '')) + '</blockquote>'); i++; continue; }\n    if (l.trim()) out.push('<p>' + inl(l) + '</p>');\n    i++;\n  }\n  return out.join('\\n');\n}\nfunction rvPdfHtml(livro, docs) {\n  return `<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>Revisão · ${rvEsc(livro.titulo)}</title><style>\n@page{size:A4;margin:18mm 16mm}body{font-family:Inter,'Noto Color Emoji',sans-serif;font-size:10pt;line-height:1.5;color:#1d1d22}\n.capa{height:250mm;display:flex;flex-direction:column;justify-content:center;page-break-after:always}.capa h1{font:800 30pt Montserrat,sans-serif;margin:0}.capa p{font-size:13pt;color:#555}\nsection{page-break-before:always}h1{font:800 17pt Montserrat,sans-serif;color:#7a2e3a;border-bottom:2px solid #e8d5d8;padding-bottom:4px}h2{font:700 12.5pt Montserrat,sans-serif;margin:14px 0 4px}h3{font-size:11pt}\ntable{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #ddd;padding:3px 5px;text-align:left;vertical-align:top}th{background:#f4ecee}\npre{background:#f5f5f2;padding:6px 8px;font-size:8pt;white-space:pre-wrap}blockquote{border-left:3px solid #7a2e3a;margin:8px 0;padding:4px 10px;background:#faf6f7}li.ck{list-style:none;margin-left:-14px}code{background:#f2f2ef;padding:0 3px}\n</style></head><body><div class=\"capa\"><p>Revisão editorial com 7 especialistas de IA</p><h1>${rvEsc(livro.titulo)}</h1><p>${rvEsc(livro.autor)} · ${livro.capitulos.length} capítulos · ${livro.palavras.toLocaleString('pt-BR')} palavras · ${new Date().toLocaleDateString('pt-BR')}</p>\n<p>${docs.map(d => rvEsc(d[0])).join('<br>')}</p></div>${docs.map(d => `<section>${rvMdHtml(d[1])}</section>`).join('')}</body></html>`;\n}\nconst rvAcoesMd = acoes => acoes.length ? `\\n## AÇÕES PARA O CHECKLIST\\n${acoes.map(a => `- (${a.prioridade}) ${a.onde ? a.onde + ' — ' : ''}${a.o_que}`).join('\\n')}\\n` : '';\n\n// Lê a resposta da IA de cada capítulo e grava NA HORA (um registro por capítulo). Se a IA falhou, grava \"falhou\" e o livro segue.\nconst AG = 'beta', livro = JSON.parse($('📖 Lê o livro').first().json.livro);\nconst P = $('🧩 Prepara o pedido').all().map(i => i.json), R = $input.all().map(i => i.json);\nreturn P.map((p, i) => {\n  const x = rvJSON((R[i] || {}).output);\n  const valor = x && typeof x === 'object' ? { ...x, n: p.n, ok: true } : { n: p.n, ok: false, erro: rvT((R[i] || {}).error || 'a IA não respondeu em JSON', 200) };\n  return { json: { chave: `lv:${livro.id}:${AG}:${p.n}`, valor: JSON.stringify(valor) } };\n});"
+   },
+   "name": "🧩 Lê a resposta",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1260,
+    657
+   ],
+   "id": "2f2bb137-218a-40c0-8a32-ff696b73de48"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "={{ $json.chave }}",
+    "value": "={{ $json.valor }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 34560000
+   },
+   "name": "💾 Guarda o capítulo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1560,
+    657
+   ],
+   "id": "83d587b4-f340-4884-b353-dbd9d2162a7a",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Fecha o lote: sobrou capítulo sem resultado? Então chama o próximo lote (o próprio sub-fluxo, numa execução nova).\nconst E = $('▶️ Entrada').first().json, L = $('🧩 Escolhe o lote').all().map(i => i.json);\nconst feitos = (L[0].feitos || 0) + L.length, total = L[0].total || 0;\nreturn [{ json: { id: E.id, sozinho: E.sozinho === true || E.sozinho === 'true', mais: feitos < total, feitos, total } }];"
+   },
+   "name": "🧩 Fecha o lote",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1860,
+    657
+   ],
+   "id": "dd3906b4-7f6e-4c6e-9f56-9c296b64ada9"
+  },
+  {
+   "parameters": {
+    "workflowId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "={{ $workflow.id }}"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.id }}",
+      "inicio": "={{ $json.feitos }}",
+      "sozinho": "={{ $json.sozinho }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      },
+      {
+       "id": "inicio",
+       "displayName": "inicio",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "number",
+       "removed": false
+      },
+      {
+       "id": "sozinho",
+       "displayName": "sozinho",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "boolean",
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": true
+    },
+    "options": {
+     "waitForSubWorkflow": false
+    }
+   },
+   "name": "🔁 Chama o próximo lote (ele mesmo)",
+   "type": "n8n-nodes-base.executeWorkflow",
+   "typeVersion": 1.2,
+   "position": [
+    2160,
+    657
+   ],
+   "id": "57415e73-9785-4e07-93d4-c042ae69b58a"
+  },
+  {
+   "parameters": {
+    "operation": "keys",
+    "keyPattern": "=lv:{{ $('▶️ Entrada').first().json.id }}:beta:*",
+    "getValues": true
+   },
+   "name": "🗂️ Lê os resultados por capítulo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    1510
+   ],
+   "id": "3da23b1d-a1d3-4eac-8fc9-511e4f585040",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "keys",
+    "keyPattern": "=lv:{{ $('▶️ Entrada').first().json.id }}:cap:*",
+    "getValues": true
+   },
+   "name": "🗂️ Lê os textos",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    1510
+   ],
+   "id": "164a6934-369a-4ab7-b9a5-7bde367b012f",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "keys",
+    "keyPattern": "=lv:{{ $('▶️ Entrada').first().json.id }}:leitor:*",
+    "getValues": true
+   },
+   "name": "🗂️ Lê as fichas",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    600,
+    1510
+   ],
+   "id": "76b62ed7-2b54-49e7-b744-159f53543246",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "keys",
+    "keyPattern": "=lv:{{ $('▶️ Entrada').first().json.id }}:rel:*",
+    "getValues": true
+   },
+   "name": "🗂️ Lê os relatórios",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    900,
+    1510
+   ],
+   "id": "1182b813-3105-4cbc-86d7-9fa4b03d7281",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lv:{{ $('▶️ Entrada').first().json.id }}:ag:beta",
+    "value": "={{ JSON.stringify({ estado: 'rodando', detalhe: 'escrevendo o relatório', at: Date.now() }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 34560000
+   },
+   "name": "💾 Status: síntese",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1200,
+    1510
+   ],
+   "id": "9b30bfa4-56a6-49ec-8f2c-d67dca0c6b98",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Regras comuns da revisão de livro (as mesmas no principal e nos 9 sub-fluxos).\nconst rvT = (v, max) => {\n  const s = String(v ?? '').replace(/\\s+/g, ' ').trim();\n  if (s.length <= max) return s;\n  const c = s.slice(0, max), esp = c.lastIndexOf(' ');\n  return (esp >= max * 0.55 ? c.slice(0, esp) : c.slice(0, max - 1)).replace(/[\\s,;:.–—-]+$/, '') + '…';\n};\nconst rvL = (v, max) => rvT(v, max).replace(/[<>{}]/g, '');\nconst rvEsc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst rvPalavras = s => (String(s || '').match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []).length;\nconst rvSemAcento = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');\nconst rvLista = (v, max = 50) => (Array.isArray(v) ? v : []).filter(x => x !== null && x !== undefined).slice(0, max);\nconst RV_TTL = 34560000;\n// a equipe (MD 22): número do agente, ordem de trabalho e o MD que cada um entrega\nconst RV_AGENTES = [\n  { chave: '<SEGREDO_REMOVIDO>', num: 0, nome: 'Leitor', emoji: '📖', papel: 'fichas de cada capítulo', md: '', peso: 20 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 1, nome: 'O Arquiteto', emoji: '🏛️', papel: 'carta editorial', md: 'MD 23 - CARTA EDITORIAL AGENTE 1', peso: 9 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 2, nome: 'O Físico', emoji: '🧪', papel: 'continuidade e regras do mundo', md: 'MD 24 - AUDITORIA AGENTE 2', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 3, nome: 'O Psicólogo', emoji: '🧠', papel: 'personagens e relações', md: 'MD 25 - DOSSIE AGENTE 3', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 5, nome: 'O Relojoeiro', emoji: '⏱️', papel: 'cena a cena e ritmo', md: 'MD 27 - CENAS AGENTE 5', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 4, nome: 'O Estilista', emoji: '✒️', papel: 'linha, tiques e voz', md: 'MD 26 - LINHA AGENTE 4', peso: 14 },\n  { chave: 'beta', num: 6, nome: 'O Beta', emoji: '👥', papel: 'leitores simulados (leitura cega)', md: 'MD 28 - BETA AGENTE 6', peso: 14 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 7, nome: 'O Guardião', emoji: '🛡️', papel: 'copidesque e style sheet', md: 'MD 29 - STYLE SHEET', peso: 13 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 8, nome: 'Editor-chefe', emoji: '✅', papel: 'checklist final de correções', md: 'MD 30 - CHECKLIST CORRECOES', peso: 6 },\n];\nconst RV_ORDEM = [['leitor'], ['arquiteto'], ['fisico', 'psicologo'], ['relojoeiro'], ['estilista'], ['beta'], ['guardiao'], ['checklist']];\nconst rvAg = k => RV_AGENTES.find(a => a.chave === k);\n\n// ── divide o livro em capítulos (títulos \"Capítulo N\", \"# ...\", ou vários arquivos) ──\nconst RV_CAP = /^\\s*(?:#{1,3}\\s*)?(?:cap[ií]tulo|cap\\.)\\s*([0-9]{1,3}|[ivxlcdm]{1,7})\\b\\s*[-–—:.]?\\s*(.*)$/i;\nfunction rvDivide(texto, arquivos) {\n  const limpa = t => String(t || '').replace(/\\r\\n?/g, '\\n').replace(/[​﻿]/g, '');\n  const linhasDe = t => limpa(t).split('\\n').map(l => l.replace(/[ \\t]+/g, ' ').trim()).filter(Boolean);\n  let caps = [];\n  if (Array.isArray(arquivos) && arquivos.length > 1) {\n    caps = arquivos.map((a, i) => {\n      const ls = linhasDe(a.texto); let titulo = rvL(a.nome, 80).replace(/\\.(txt|md|docx|pdf)$/i, '');\n      if (ls.length && (RV_CAP.test(ls[0]) || /^#{1,3}\\s/.test(ls[0]))) { const m = ls[0].match(RV_CAP); titulo = rvL(m ? (m[2] || ls[0]) : ls[0].replace(/^#+\\s*/, ''), 80) || titulo; ls.shift(); }\n      return { titulo, linhas: ls };\n    });\n  } else {\n    const ls = linhasDe(texto || (arquivos && arquivos[0] && arquivos[0].texto));\n    const marca = ls.map(l => RV_CAP.test(l) && l.length < 120);\n    const usaHash = marca.filter(Boolean).length < 2 && ls.filter(l => /^#{1,2}\\s/.test(l)).length >= 2;\n    let atual = null;\n    ls.forEach((l, i) => {\n      const ehTitulo = usaHash ? /^#{1,2}\\s/.test(l) : marca[i];\n      if (ehTitulo) { const m = l.match(RV_CAP); atual = { titulo: rvL(m ? (m[2] || l.replace(/^#+\\s*/, '')) : l.replace(/^#+\\s*/, ''), 80), linhas: [] }; caps.push(atual); }\n      else { if (!atual) { atual = { titulo: 'Abertura', linhas: [] }; caps.push(atual); } atual.linhas.push(l); }\n    });\n    if (caps.length === 1 && caps[0].linhas.length > 400) {   // sem títulos: corta em partes de ~2.500 palavras\n      const todas = caps[0].linhas; caps = []; let p = null, n = 0;\n      todas.forEach(l => { if (!p || n > 2500) { p = { titulo: `Parte ${caps.length + 1}`, linhas: [] }; caps.push(p); n = 0; } p.linhas.push(l); n += rvPalavras(l); });\n    }\n  }\n  return caps.filter(c => c.linhas.length).map((c, i) => ({ n: i + 1, titulo: c.titulo || `Capítulo ${i + 1}`, linhas: c.linhas, palavras: c.linhas.reduce((s, l) => s + rvPalavras(l), 0) }));\n}\nconst rvNumera = linhas => linhas.map((l, i) => `L${i + 1}: ${l}`).join('\\n');\nconst rvCapN = n => String(n).padStart(2, '0');\n\n// ── contagens que o CÓDIGO faz melhor que a IA ──\nconst RV_PARADAS = new Set('a o as os um uma uns umas de do da dos das em no na nos nas por para pra pro com sem que e ou mas se é ser foi era ao à às aos me te lhe eu ele ela eles elas você vocês nós meu minha meus minhas seu sua seus suas isso isto aquilo esse essa este esta não sim mais menos muito muita já só também quando como onde porque então tinha tem ter estava está tá lá aí ali aqui num numa pelo pela pelos pelas até depois antes ainda nem mesmo tudo nada todo toda foi vai vou ia tão bem mal sobre entre gente quem qual cada outro outra'.split(' '));\nfunction rvTokens(l) { return (l.match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []); }\nfunction rvNomesProprios(caps) {\n  const cont = {};\n  caps.forEach(c => c.linhas.forEach(l => rvTokens(l).forEach((t, i) => { const k = t.toLowerCase(); cont[k] = cont[k] || [0, 0]; cont[k][0]++; if (i > 0 && /^\\p{Lu}/u.test(t)) cont[k][1]++; })));\n  return new Set(Object.entries(cont).filter(([, [n, m]]) => n >= 2 && m / n > 0.7).map(([k]) => k));\n}\nfunction rvRepeticoes(caps) {\n  const total = caps.reduce((s, c) => s + c.palavras, 0), MIN = Math.max(3, Math.round(total / 10000));\n  const nomes = rvNomesProprios(caps), g = {};\n  caps.forEach(c => c.linhas.forEach(l => {\n    const t = rvTokens(l).map(x => x.toLowerCase());\n    for (let n = 2; n <= 5; n++) for (let i = 0; i + n <= t.length; i++) {\n      const w = t.slice(i, i + n), conteudo = w.filter(x => !RV_PARADAS.has(x) && !nomes.has(x) && x.length > 2);\n      if (!conteudo.length || RV_PARADAS.has(w[n - 1]) && n > 2) continue;\n      const k = w.join(' '); g[k] = g[k] || { n, total: 0, por: {} }; g[k].total++; g[k].por[c.n] = (g[k].por[c.n] || 0) + 1;\n    }\n  }));\n  let lista = Object.entries(g).filter(([, v]) => v.total >= MIN).map(([k, v]) => ({ expressao: k, ...v }));\n  lista = lista.filter(a => !lista.some(b => b.n > a.n && b.total >= a.total * 0.8 && (' ' + b.expressao + ' ').includes(' ' + a.expressao + ' ')));\n  return lista.sort((a, b) => b.total * Math.sqrt(b.n) - a.total * Math.sqrt(a.n)).slice(0, 25).map(x => {\n    const pico = Object.entries(x.por).sort((a, b) => b[1] - a[1])[0];\n    return { expressao: x.expressao, total: x.total, capitulos: Object.keys(x.por).length, pico: `Cap${rvCapN(pico[0])} (${pico[1]}x)` };\n  });\n}\nconst RV_MARCAS = [['como quem', /\\bcomo quem\\b/gi], ['como se', /\\bcomo se\\b/gi], ['de repente', /\\bde repente\\b/gi], ['advérbios em -mente', /\\b\\p{L}{4,}mente\\b/giu],\n  ['reticências', /\\.\\.\\.|…/g], ['exclamações', /!/g], ['\"você\" fora de diálogo', null], ['itálico longo (+120 letras)', /\\*[^*\\n]{120,}\\*|_[^_\\n]{120,}_/g]];\nfunction rvMarcadores(caps) {\n  return RV_MARCAS.map(([nome, re]) => {\n    const por = {};\n    caps.forEach(c => c.linhas.forEach(l => {\n      const k = re ? (l.match(re) || []).length : (/^[—–-]/.test(l) ? 0 : (l.match(/\\bvocê\\b/gi) || []).length);\n      if (k) por[c.n] = (por[c.n] || 0) + k;\n    }));\n    const total = Object.values(por).reduce((a, b) => a + b, 0), pico = Object.entries(por).sort((a, b) => b[1] - a[1])[0];\n    return { marca: nome, total, pico: pico ? `Cap${rvCapN(pico[0])} (${pico[1]}x)` : '-' };\n  }).filter(m => m.total);\n}\nfunction rvDuplicados(caps) {\n  const vistos = {}, dups = [];\n  caps.forEach(c => c.linhas.forEach((l, i) => {\n    const frases = l.split(/(?<=[.!?…])\\s+/);\n    frases.forEach(f => { const k = rvSemAcento(f).toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\\s+/g, ' ').trim();\n      if (k.split(' ').length < 8) return; (vistos[k] = vistos[k] || []).push(`Cap${rvCapN(c.n)}:${i + 1}`); });\n  }));\n  Object.entries(vistos).forEach(([k, onde]) => { const u = [...new Set(onde)]; if (u.length > 1) dups.push({ trecho: rvT(k, 90), onde: u }); });\n  return dups.slice(0, 30);\n}\nconst RV_DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];\nconst RV_MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];\nfunction rvCalendario(caps, ano) {\n  ano = parseInt(ano, 10); if (!(ano > 1800 && ano < 2300)) return { conferido: false, erros: [], datas: 0 };\n  const erros = []; let datas = 0;\n  const re = new RegExp(`\\\\b(domingo|segunda|ter[çc]a|quarta|quinta|sexta|s[áa]bado)(?:-feira)?\\\\b[^.\\\\n]{0,25}?\\\\b(\\\\d{1,2})\\\\s+de\\\\s+(${RV_MESES.join('|').replace('ç', '[çc]')})`, 'gi');\n  caps.forEach(c => c.linhas.forEach((l, i) => { let m; re.lastIndex = 0;\n    while ((m = re.exec(l))) {\n      datas++;\n      const dia = parseInt(m[2], 10), mes = RV_MESES.findIndex(x => rvSemAcento(x) === rvSemAcento(m[3].toLowerCase()));\n      const real = RV_DIAS[new Date(Date.UTC(ano, mes, dia)).getUTCDay()], dito = rvSemAcento(m[1].toLowerCase());\n      if (rvSemAcento(real) !== dito) erros.push({ onde: `Cap${rvCapN(c.n)}:${i + 1}`, escrito: m[0], certo: `${dia}/${mes + 1}/${ano} é ${real}${['domingo', 'sábado'].includes(real) ? '' : '-feira'}` });\n    } }));\n  return { conferido: true, erros, datas, ano };\n}\nfunction rvNomes(caps) {\n  const chave = t => rvSemAcento(t).toLowerCase().replace(/h/g, '').replace(/(.)\\1/g, '$1');\n  const grupos = {};\n  caps.forEach(c => c.linhas.forEach((l, i) => rvTokens(l).forEach((t, j) => {\n    if (j === 0 || !/^\\p{Lu}\\p{Ll}{2,}$/u.test(t)) return;\n    const k = chave(t); grupos[k] = grupos[k] || {}; grupos[k][t] = grupos[k][t] || []; grupos[k][t].push(`Cap${rvCapN(c.n)}:${i + 1}`);\n  })));\n  return Object.values(grupos).filter(g => Object.keys(g).length > 1).map(g => {\n    const formas = Object.entries(g).sort((a, b) => b[1].length - a[1].length);\n    return { oficial: formas[0][0], vezes: formas[0][1].length, variantes: formas.slice(1).map(([f, onde]) => ({ forma: f, onde: onde.slice(0, 6) })) };\n  });\n}\nfunction rvFormatos(caps) {\n  const n = re => caps.reduce((s, c) => s + c.linhas.reduce((t, l) => t + (l.match(re) || []).length, 0), 0);\n  return { horas_hhmm: n(/\\b\\d{1,2}:\\d{2}\\b/g), horas_h: n(/\\b\\d{1,2}h\\d{0,2}\\b/g), travessao: n(/^—/gm), hifen_dialogo: n(/^[-–]\\s/gm), aspas_retas: n(/\"/g), aspas_curvas: n(/[“”]/g) };\n}\n\n// ── resposta da IA ──\nfunction rvJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\nconst RV_PRIOS = ['ALTA', 'MÉDIA', 'BAIXA'];\nconst rvPrio = p => { const s = rvSemAcento(String(p || '')).toUpperCase(); return s.startsWith('A') ? 'ALTA' : s.startsWith('B') ? 'BAIXA' : 'MÉDIA'; };\nconst rvAcoes = (v, agente) => rvLista(v, 30).filter(a => a && (a.o_que || a.acao)).map(a => ({ prioridade: rvPrio(a.prioridade), onde: rvL(a.onde, 40), o_que: rvL(a.o_que || a.acao, 300), agente }));\n// cabeçalho no padrão dos MDs do projeto\nconst rvCab = (id, titulo, status, depende, impacta) => `# ${id} — ${titulo}\\n\\n\\`\\`\\`text\\nID: ${id}\\nVERSÃO: 1.0\\nSTATUS: ${status}\\nDEPENDE DE: ${depende}\\nALTERA: -\\nIMPACTA: ${impacta}\\nÚLTIMA REVISÃO: ${new Date().toISOString().slice(0, 10)}\\n\\`\\`\\`\\n\\n`;\nconst rvCel = v => String(v ?? '').replace(/\\|/g, '/').replace(/\\n/g, ' ');\nconst rvTabela = (cab, linhas) => linhas.length ? `| ${cab.join(' | ')} |\\n|${cab.map(() => '---').join('|')}|\\n${linhas.map(l => `| ${l.map(rvCel).join(' | ')} |`).join('\\n')}\\n` : '_(nada)_\\n';\n// Markdown simples ➜ HTML (títulos, tabelas, listas, [ ] , negrito, itálico, código, citação); o mesmo na página e no PDF\nfunction rvMdHtml(md) {\n  const e = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n  const inl = s => e(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\\*\\*([^*]+)\\*\\*/g, '<b>$1</b>').replace(/(^|[\\s(])_([^_]+)_(?=[\\s).,;]|$)/g, '$1<i>$2</i>').replace(/(^|[\\s(])\\*([^*]+)\\*(?=[\\s).,;]|$)/g, '$1<i>$2</i>');\n  const out = [], ls = String(md || '').split('\\n'); let i = 0;\n  while (i < ls.length) {\n    const l = ls[i];\n    if (/^```/.test(l)) { const b = []; i++; while (i < ls.length && !/^```/.test(ls[i])) b.push(ls[i++]); i++; out.push('<pre>' + e(b.join('\\n')) + '</pre>'); continue; }\n    const h = l.match(/^(#{1,4})\\s+(.*)/); if (h) { out.push(`<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`); i++; continue; }\n    if (/^\\|/.test(l)) { const rows = []; while (i < ls.length && /^\\|/.test(ls[i])) rows.push(ls[i++]);\n      const cel = r => r.replace(/^\\||\\|$/g, '').split('|').map(c => c.trim());\n      out.push('<table><thead><tr>' + cel(rows[0]).map(c => `<th>${inl(c)}</th>`).join('') + '</tr></thead><tbody>' + rows.slice(2).map(r => '<tr>' + cel(r).map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table>'); continue; }\n    if (/^\\s*([-*]|\\d+\\.)\\s/.test(l)) { const ord = /^\\s*\\d+\\./.test(l), it = []; while (i < ls.length && /^\\s*([-*]|\\d+\\.)\\s/.test(ls[i])) it.push(ls[i++].replace(/^\\s*([-*]|\\d+\\.)\\s/, ''));\n      out.push(`<${ord ? 'ol' : 'ul'}>` + it.map(t => { const c = t.match(/^\\[( |x)\\]\\s(\\S+)\\s(.*)/); return c ? `<li class=\"ck\" data-id=\"${e(c[2])}\"><span class=\"cx\">${c[1] === 'x' ? '☑' : '☐'}</span> <b>${e(c[2])}</b> ${inl(c[3])}</li>` : `<li>${inl(t)}</li>`; }).join('') + `</${ord ? 'ol' : 'ul'}>`); continue; }\n    if (/^>\\s?/.test(l)) { out.push('<blockquote>' + inl(l.replace(/^>\\s?/, '')) + '</blockquote>'); i++; continue; }\n    if (l.trim()) out.push('<p>' + inl(l) + '</p>');\n    i++;\n  }\n  return out.join('\\n');\n}\nfunction rvPdfHtml(livro, docs) {\n  return `<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>Revisão · ${rvEsc(livro.titulo)}</title><style>\n@page{size:A4;margin:18mm 16mm}body{font-family:Inter,'Noto Color Emoji',sans-serif;font-size:10pt;line-height:1.5;color:#1d1d22}\n.capa{height:250mm;display:flex;flex-direction:column;justify-content:center;page-break-after:always}.capa h1{font:800 30pt Montserrat,sans-serif;margin:0}.capa p{font-size:13pt;color:#555}\nsection{page-break-before:always}h1{font:800 17pt Montserrat,sans-serif;color:#7a2e3a;border-bottom:2px solid #e8d5d8;padding-bottom:4px}h2{font:700 12.5pt Montserrat,sans-serif;margin:14px 0 4px}h3{font-size:11pt}\ntable{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #ddd;padding:3px 5px;text-align:left;vertical-align:top}th{background:#f4ecee}\npre{background:#f5f5f2;padding:6px 8px;font-size:8pt;white-space:pre-wrap}blockquote{border-left:3px solid #7a2e3a;margin:8px 0;padding:4px 10px;background:#faf6f7}li.ck{list-style:none;margin-left:-14px}code{background:#f2f2ef;padding:0 3px}\n</style></head><body><div class=\"capa\"><p>Revisão editorial com 7 especialistas de IA</p><h1>${rvEsc(livro.titulo)}</h1><p>${rvEsc(livro.autor)} · ${livro.capitulos.length} capítulos · ${livro.palavras.toLocaleString('pt-BR')} palavras · ${new Date().toLocaleDateString('pt-BR')}</p>\n<p>${docs.map(d => rvEsc(d[0])).join('<br>')}</p></div>${docs.map(d => `<section>${rvMdHtml(d[1])}</section>`).join('')}</body></html>`;\n}\nconst rvAcoesMd = acoes => acoes.length ? `\\n## AÇÕES PARA O CHECKLIST\\n${acoes.map(a => `- (${a.prioridade}) ${a.onde ? a.onde + ' — ' : ''}${a.o_que}`).join('\\n')}\\n` : '';\n\n// junta o que o especialista precisa: o livro, os textos, as fichas do Leitor, os resultados por capítulo e os relatórios já prontos\nconst livro = JSON.parse($('📖 Lê o livro').first().json.livro);\nconst _kv = f => { try { return f() || {}; } catch (e) { return {}; } };   // nome do node sempre escrito por extenso (o renomeador de emojis só acha assim)\nconst _por = (obj, pre) => { const o = {}; Object.entries(obj).filter(([k]) => k.startsWith(pre)).forEach(([k, v]) => { try { o[k.slice(pre.length)] = JSON.parse(v); } catch (e) {} }); return o; };\nconst textos = _por(_kv(() => $('🗂️ Lê os textos').first().json), `lv:${livro.id}:cap:`);\nconst caps = livro.capitulos.map(c => ({ ...c, linhas: textos[c.n] || [] }));\nconst fichas = _por(_kv(() => $('🗂️ Lê as fichas').first().json), `lv:${livro.id}:leitor:`);\nconst rels = _por(_kv(() => $('🗂️ Lê os relatórios').first().json), `lv:${livro.id}:rel:`);\nconst meus = _por(_kv(() => $('🗂️ Lê os resultados por capítulo').first().json), `lv:${livro.id}:beta:`);\nconst ficha = n => fichas[n] && fichas[n].ok ? fichas[n] : null;\nconst cabLivro = `LIVRO: ${livro.titulo} (${livro.autor}) · ${livro.genero} · público: ${livro.publico} · ${caps.length} capítulos · ${livro.palavras} palavras${livro.apoio.meta_palavras ? ' · meta: ' + livro.apoio.meta_palavras : ''}\nPROMESSA DO AUTOR: ${livro.apoio.promessa || '(não informada)'}\nO QUE O AUTOR QUER SABER: ${livro.apoio.foco || '(nada específico)'}`;\n\n// Beta: mapa de calor calculado pelo CÓDIGO (média P/E/T dos 3 leitores por capítulo) + reações para a síntese.\nconst nota = v => Math.max(1, Math.min(5, Number(v) || 3));\nconst calor = caps.map(c => { const m = meus[c.n], ls = m && m.ok ? rvLista(m.leitores, 3) : [];\n  const med = k => ls.length ? Math.round(ls.reduce((s, l) => s + nota(l[k]), 0) / ls.length * 10) / 10 : null;\n  const P = med('P'), E = med('E'), T = med('T'), media = P === null ? null : (P + E + T) / 3;\n  const status = media === null ? 'sem leitura' : (Math.min(P, T) <= 2.5 || media <= 3) ? 'ARRISCO DROP' : media >= 4.6 ? 'DEVORADO' : media >= 4 ? 'Sólido' : 'Morno';\n  return { cap: c.n, P, E, T, status, rotulo: m && m.ok ? rvL(m.rotulo, 40) : '' }; });\nconst reacoes = caps.map(c => { const m = meus[c.n]; if (!m || !m.ok) return `CAP ${c.n}: (sem leitura)`;\n  return `CAP ${c.n}: ${rvLista(m.leitores, 3).map(l => `${l.persona} P${l.P}/E${l.E}/T${l.T} \"${rvT(l.reacao, 120)}\"${l.quase_larguei ? ' · quase largou: ' + rvT(l.quase_larguei, 100) : ''}`).join(' | ')}\n  confusões: ${rvLista(m.confusoes, 4).map(x => `L${x.linha} ${rvT(x.pergunta, 90)}`).join('; ') || '-'} · emoções: ${rvLista(m.emocoes, 4).map(x => `L${x.linha} ${rvT(x.emocao, 70)}`).join('; ') || '-'}\n  furos: ${rvLista(m.furos_mundo_real, 3).map(f => rvT(typeof f === 'string' ? f : JSON.stringify(f), 120)).join('; ') || '-'} · problemático: ${rvT(m.problematico, 120) || '-'} · amado: ${rvT(m.amado, 120) || '-'}`; });\nreturn [{ json: { calor, texto_ia: `LIVRO: ${livro.titulo} · ${livro.genero} · público: ${livro.publico}\nMAPA DE CALOR (código): ${calor.map(k => `Cap${k.cap} P${k.P}/E${k.E}/T${k.T} ${k.status}`).join(' · ')}\n\n${reacoes.join('\\n')}` } }];"
+   },
+   "name": "🧩 Prepara a síntese",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1500,
+    1510
+   ],
+   "id": "f992a9ac-5882-404a-be8f-77dcdccf0b27"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.texto_ia }}",
+    "options": {
+     "systemMessage": "Você junta o PAINEL BETA simulado (3 leitores do público, leitura cega). Recebe o mapa de calor calculado pelo código e as reações por capítulo.\nAviso honesto: é simulação; não substitui leitores reais.\n- notas: nota final 0 a 10 de cada leitor [{\"persona\":\"voraz|casual|critico\",\"nota\":0,\"frase\":\"\"}]\n- devorados / risco: capítulos de consenso · divergencias: 1 frase\n- confusoes: top 10 [{\"onde\":\"\",\"pergunta\":\"\"}] · emocoes: top 10 [{\"onde\":\"\",\"emocao\":\"\"}]\n- furos: furos de lógica do mundo real [\"\"] · problematicos: [\"\"] · amado: [\"\"]\n- frase_tatuagem / frase_riscada: 1 trecho do livro cada (cite o lugar)\n- \"acoes\":[{\"prioridade\":\"ALTA|MÉDIA|BAIXA\",\"onde\":\"Cap07:22-45\",\"o_que\":\"ação concreta em 1 frase\"}]\nRETORNE SOMENTE JSON VÁLIDO, sem texto antes ou depois."
+    },
+    "needsFallback": true
+   },
+   "name": "🤖 Beta",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1800,
+    1510
+   ],
+   "id": "d40c7078-5f58-42f3-bd00-938606864326",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 5000,
+     "temperature": 0.5,
+     "timeout": 360000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro · Beta",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1800,
+    1730
+   ],
+   "id": "03ac1bf6-5c9f-4d61-a895-9ff62ef71fbc",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 5000,
+     "temperature": 0.5,
+     "timeout": 360000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro · Beta",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1800,
+    1910
+   ],
+   "id": "f0104bfc-da49-4930-9556-1fe9425dc8be",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "try {\n\n// Regras comuns da revisão de livro (as mesmas no principal e nos 9 sub-fluxos).\nconst rvT = (v, max) => {\n  const s = String(v ?? '').replace(/\\s+/g, ' ').trim();\n  if (s.length <= max) return s;\n  const c = s.slice(0, max), esp = c.lastIndexOf(' ');\n  return (esp >= max * 0.55 ? c.slice(0, esp) : c.slice(0, max - 1)).replace(/[\\s,;:.–—-]+$/, '') + '…';\n};\nconst rvL = (v, max) => rvT(v, max).replace(/[<>{}]/g, '');\nconst rvEsc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst rvPalavras = s => (String(s || '').match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []).length;\nconst rvSemAcento = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');\nconst rvLista = (v, max = 50) => (Array.isArray(v) ? v : []).filter(x => x !== null && x !== undefined).slice(0, max);\nconst RV_TTL = 34560000;\n// a equipe (MD 22): número do agente, ordem de trabalho e o MD que cada um entrega\nconst RV_AGENTES = [\n  { chave: '<SEGREDO_REMOVIDO>', num: 0, nome: 'Leitor', emoji: '📖', papel: 'fichas de cada capítulo', md: '', peso: 20 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 1, nome: 'O Arquiteto', emoji: '🏛️', papel: 'carta editorial', md: 'MD 23 - CARTA EDITORIAL AGENTE 1', peso: 9 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 2, nome: 'O Físico', emoji: '🧪', papel: 'continuidade e regras do mundo', md: 'MD 24 - AUDITORIA AGENTE 2', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 3, nome: 'O Psicólogo', emoji: '🧠', papel: 'personagens e relações', md: 'MD 25 - DOSSIE AGENTE 3', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 5, nome: 'O Relojoeiro', emoji: '⏱️', papel: 'cena a cena e ritmo', md: 'MD 27 - CENAS AGENTE 5', peso: 8 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 4, nome: 'O Estilista', emoji: '✒️', papel: 'linha, tiques e voz', md: 'MD 26 - LINHA AGENTE 4', peso: 14 },\n  { chave: 'beta', num: 6, nome: 'O Beta', emoji: '👥', papel: 'leitores simulados (leitura cega)', md: 'MD 28 - BETA AGENTE 6', peso: 14 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 7, nome: 'O Guardião', emoji: '🛡️', papel: 'copidesque e style sheet', md: 'MD 29 - STYLE SHEET', peso: 13 },\n  { chave: '<SEGREDO_REMOVIDO>', num: 8, nome: 'Editor-chefe', emoji: '✅', papel: 'checklist final de correções', md: 'MD 30 - CHECKLIST CORRECOES', peso: 6 },\n];\nconst RV_ORDEM = [['leitor'], ['arquiteto'], ['fisico', 'psicologo'], ['relojoeiro'], ['estilista'], ['beta'], ['guardiao'], ['checklist']];\nconst rvAg = k => RV_AGENTES.find(a => a.chave === k);\n\n// ── divide o livro em capítulos (títulos \"Capítulo N\", \"# ...\", ou vários arquivos) ──\nconst RV_CAP = /^\\s*(?:#{1,3}\\s*)?(?:cap[ií]tulo|cap\\.)\\s*([0-9]{1,3}|[ivxlcdm]{1,7})\\b\\s*[-–—:.]?\\s*(.*)$/i;\nfunction rvDivide(texto, arquivos) {\n  const limpa = t => String(t || '').replace(/\\r\\n?/g, '\\n').replace(/[​﻿]/g, '');\n  const linhasDe = t => limpa(t).split('\\n').map(l => l.replace(/[ \\t]+/g, ' ').trim()).filter(Boolean);\n  let caps = [];\n  if (Array.isArray(arquivos) && arquivos.length > 1) {\n    caps = arquivos.map((a, i) => {\n      const ls = linhasDe(a.texto); let titulo = rvL(a.nome, 80).replace(/\\.(txt|md|docx|pdf)$/i, '');\n      if (ls.length && (RV_CAP.test(ls[0]) || /^#{1,3}\\s/.test(ls[0]))) { const m = ls[0].match(RV_CAP); titulo = rvL(m ? (m[2] || ls[0]) : ls[0].replace(/^#+\\s*/, ''), 80) || titulo; ls.shift(); }\n      return { titulo, linhas: ls };\n    });\n  } else {\n    const ls = linhasDe(texto || (arquivos && arquivos[0] && arquivos[0].texto));\n    const marca = ls.map(l => RV_CAP.test(l) && l.length < 120);\n    const usaHash = marca.filter(Boolean).length < 2 && ls.filter(l => /^#{1,2}\\s/.test(l)).length >= 2;\n    let atual = null;\n    ls.forEach((l, i) => {\n      const ehTitulo = usaHash ? /^#{1,2}\\s/.test(l) : marca[i];\n      if (ehTitulo) { const m = l.match(RV_CAP); atual = { titulo: rvL(m ? (m[2] || l.replace(/^#+\\s*/, '')) : l.replace(/^#+\\s*/, ''), 80), linhas: [] }; caps.push(atual); }\n      else { if (!atual) { atual = { titulo: 'Abertura', linhas: [] }; caps.push(atual); } atual.linhas.push(l); }\n    });\n    if (caps.length === 1 && caps[0].linhas.length > 400) {   // sem títulos: corta em partes de ~2.500 palavras\n      const todas = caps[0].linhas; caps = []; let p = null, n = 0;\n      todas.forEach(l => { if (!p || n > 2500) { p = { titulo: `Parte ${caps.length + 1}`, linhas: [] }; caps.push(p); n = 0; } p.linhas.push(l); n += rvPalavras(l); });\n    }\n  }\n  return caps.filter(c => c.linhas.length).map((c, i) => ({ n: i + 1, titulo: c.titulo || `Capítulo ${i + 1}`, linhas: c.linhas, palavras: c.linhas.reduce((s, l) => s + rvPalavras(l), 0) }));\n}\nconst rvNumera = linhas => linhas.map((l, i) => `L${i + 1}: ${l}`).join('\\n');\nconst rvCapN = n => String(n).padStart(2, '0');\n\n// ── contagens que o CÓDIGO faz melhor que a IA ──\nconst RV_PARADAS = new Set('a o as os um uma uns umas de do da dos das em no na nos nas por para pra pro com sem que e ou mas se é ser foi era ao à às aos me te lhe eu ele ela eles elas você vocês nós meu minha meus minhas seu sua seus suas isso isto aquilo esse essa este esta não sim mais menos muito muita já só também quando como onde porque então tinha tem ter estava está tá lá aí ali aqui num numa pelo pela pelos pelas até depois antes ainda nem mesmo tudo nada todo toda foi vai vou ia tão bem mal sobre entre gente quem qual cada outro outra'.split(' '));\nfunction rvTokens(l) { return (l.match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’-]*/gu) || []); }\nfunction rvNomesProprios(caps) {\n  const cont = {};\n  caps.forEach(c => c.linhas.forEach(l => rvTokens(l).forEach((t, i) => { const k = t.toLowerCase(); cont[k] = cont[k] || [0, 0]; cont[k][0]++; if (i > 0 && /^\\p{Lu}/u.test(t)) cont[k][1]++; })));\n  return new Set(Object.entries(cont).filter(([, [n, m]]) => n >= 2 && m / n > 0.7).map(([k]) => k));\n}\nfunction rvRepeticoes(caps) {\n  const total = caps.reduce((s, c) => s + c.palavras, 0), MIN = Math.max(3, Math.round(total / 10000));\n  const nomes = rvNomesProprios(caps), g = {};\n  caps.forEach(c => c.linhas.forEach(l => {\n    const t = rvTokens(l).map(x => x.toLowerCase());\n    for (let n = 2; n <= 5; n++) for (let i = 0; i + n <= t.length; i++) {\n      const w = t.slice(i, i + n), conteudo = w.filter(x => !RV_PARADAS.has(x) && !nomes.has(x) && x.length > 2);\n      if (!conteudo.length || RV_PARADAS.has(w[n - 1]) && n > 2) continue;\n      const k = w.join(' '); g[k] = g[k] || { n, total: 0, por: {} }; g[k].total++; g[k].por[c.n] = (g[k].por[c.n] || 0) + 1;\n    }\n  }));\n  let lista = Object.entries(g).filter(([, v]) => v.total >= MIN).map(([k, v]) => ({ expressao: k, ...v }));\n  lista = lista.filter(a => !lista.some(b => b.n > a.n && b.total >= a.total * 0.8 && (' ' + b.expressao + ' ').includes(' ' + a.expressao + ' ')));\n  return lista.sort((a, b) => b.total * Math.sqrt(b.n) - a.total * Math.sqrt(a.n)).slice(0, 25).map(x => {\n    const pico = Object.entries(x.por).sort((a, b) => b[1] - a[1])[0];\n    return { expressao: x.expressao, total: x.total, capitulos: Object.keys(x.por).length, pico: `Cap${rvCapN(pico[0])} (${pico[1]}x)` };\n  });\n}\nconst RV_MARCAS = [['como quem', /\\bcomo quem\\b/gi], ['como se', /\\bcomo se\\b/gi], ['de repente', /\\bde repente\\b/gi], ['advérbios em -mente', /\\b\\p{L}{4,}mente\\b/giu],\n  ['reticências', /\\.\\.\\.|…/g], ['exclamações', /!/g], ['\"você\" fora de diálogo', null], ['itálico longo (+120 letras)', /\\*[^*\\n]{120,}\\*|_[^_\\n]{120,}_/g]];\nfunction rvMarcadores(caps) {\n  return RV_MARCAS.map(([nome, re]) => {\n    const por = {};\n    caps.forEach(c => c.linhas.forEach(l => {\n      const k = re ? (l.match(re) || []).length : (/^[—–-]/.test(l) ? 0 : (l.match(/\\bvocê\\b/gi) || []).length);\n      if (k) por[c.n] = (por[c.n] || 0) + k;\n    }));\n    const total = Object.values(por).reduce((a, b) => a + b, 0), pico = Object.entries(por).sort((a, b) => b[1] - a[1])[0];\n    return { marca: nome, total, pico: pico ? `Cap${rvCapN(pico[0])} (${pico[1]}x)` : '-' };\n  }).filter(m => m.total);\n}\nfunction rvDuplicados(caps) {\n  const vistos = {}, dups = [];\n  caps.forEach(c => c.linhas.forEach((l, i) => {\n    const frases = l.split(/(?<=[.!?…])\\s+/);\n    frases.forEach(f => { const k = rvSemAcento(f).toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\\s+/g, ' ').trim();\n      if (k.split(' ').length < 8) return; (vistos[k] = vistos[k] || []).push(`Cap${rvCapN(c.n)}:${i + 1}`); });\n  }));\n  Object.entries(vistos).forEach(([k, onde]) => { const u = [...new Set(onde)]; if (u.length > 1) dups.push({ trecho: rvT(k, 90), onde: u }); });\n  return dups.slice(0, 30);\n}\nconst RV_DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];\nconst RV_MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];\nfunction rvCalendario(caps, ano) {\n  ano = parseInt(ano, 10); if (!(ano > 1800 && ano < 2300)) return { conferido: false, erros: [], datas: 0 };\n  const erros = []; let datas = 0;\n  const re = new RegExp(`\\\\b(domingo|segunda|ter[çc]a|quarta|quinta|sexta|s[áa]bado)(?:-feira)?\\\\b[^.\\\\n]{0,25}?\\\\b(\\\\d{1,2})\\\\s+de\\\\s+(${RV_MESES.join('|').replace('ç', '[çc]')})`, 'gi');\n  caps.forEach(c => c.linhas.forEach((l, i) => { let m; re.lastIndex = 0;\n    while ((m = re.exec(l))) {\n      datas++;\n      const dia = parseInt(m[2], 10), mes = RV_MESES.findIndex(x => rvSemAcento(x) === rvSemAcento(m[3].toLowerCase()));\n      const real = RV_DIAS[new Date(Date.UTC(ano, mes, dia)).getUTCDay()], dito = rvSemAcento(m[1].toLowerCase());\n      if (rvSemAcento(real) !== dito) erros.push({ onde: `Cap${rvCapN(c.n)}:${i + 1}`, escrito: m[0], certo: `${dia}/${mes + 1}/${ano} é ${real}${['domingo', 'sábado'].includes(real) ? '' : '-feira'}` });\n    } }));\n  return { conferido: true, erros, datas, ano };\n}\nfunction rvNomes(caps) {\n  const chave = t => rvSemAcento(t).toLowerCase().replace(/h/g, '').replace(/(.)\\1/g, '$1');\n  const grupos = {};\n  caps.forEach(c => c.linhas.forEach((l, i) => rvTokens(l).forEach((t, j) => {\n    if (j === 0 || !/^\\p{Lu}\\p{Ll}{2,}$/u.test(t)) return;\n    const k = chave(t); grupos[k] = grupos[k] || {}; grupos[k][t] = grupos[k][t] || []; grupos[k][t].push(`Cap${rvCapN(c.n)}:${i + 1}`);\n  })));\n  return Object.values(grupos).filter(g => Object.keys(g).length > 1).map(g => {\n    const formas = Object.entries(g).sort((a, b) => b[1].length - a[1].length);\n    return { oficial: formas[0][0], vezes: formas[0][1].length, variantes: formas.slice(1).map(([f, onde]) => ({ forma: f, onde: onde.slice(0, 6) })) };\n  });\n}\nfunction rvFormatos(caps) {\n  const n = re => caps.reduce((s, c) => s + c.linhas.reduce((t, l) => t + (l.match(re) || []).length, 0), 0);\n  return { horas_hhmm: n(/\\b\\d{1,2}:\\d{2}\\b/g), horas_h: n(/\\b\\d{1,2}h\\d{0,2}\\b/g), travessao: n(/^—/gm), hifen_dialogo: n(/^[-–]\\s/gm), aspas_retas: n(/\"/g), aspas_curvas: n(/[“”]/g) };\n}\n\n// ── resposta da IA ──\nfunction rvJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\nconst RV_PRIOS = ['ALTA', 'MÉDIA', 'BAIXA'];\nconst rvPrio = p => { const s = rvSemAcento(String(p || '')).toUpperCase(); return s.startsWith('A') ? 'ALTA' : s.startsWith('B') ? 'BAIXA' : 'MÉDIA'; };\nconst rvAcoes = (v, agente) => rvLista(v, 30).filter(a => a && (a.o_que || a.acao)).map(a => ({ prioridade: rvPrio(a.prioridade), onde: rvL(a.onde, 40), o_que: rvL(a.o_que || a.acao, 300), agente }));\n// cabeçalho no padrão dos MDs do projeto\nconst rvCab = (id, titulo, status, depende, impacta) => `# ${id} — ${titulo}\\n\\n\\`\\`\\`text\\nID: ${id}\\nVERSÃO: 1.0\\nSTATUS: ${status}\\nDEPENDE DE: ${depende}\\nALTERA: -\\nIMPACTA: ${impacta}\\nÚLTIMA REVISÃO: ${new Date().toISOString().slice(0, 10)}\\n\\`\\`\\`\\n\\n`;\nconst rvCel = v => String(v ?? '').replace(/\\|/g, '/').replace(/\\n/g, ' ');\nconst rvTabela = (cab, linhas) => linhas.length ? `| ${cab.join(' | ')} |\\n|${cab.map(() => '---').join('|')}|\\n${linhas.map(l => `| ${l.map(rvCel).join(' | ')} |`).join('\\n')}\\n` : '_(nada)_\\n';\n// Markdown simples ➜ HTML (títulos, tabelas, listas, [ ] , negrito, itálico, código, citação); o mesmo na página e no PDF\nfunction rvMdHtml(md) {\n  const e = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n  const inl = s => e(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\\*\\*([^*]+)\\*\\*/g, '<b>$1</b>').replace(/(^|[\\s(])_([^_]+)_(?=[\\s).,;]|$)/g, '$1<i>$2</i>').replace(/(^|[\\s(])\\*([^*]+)\\*(?=[\\s).,;]|$)/g, '$1<i>$2</i>');\n  const out = [], ls = String(md || '').split('\\n'); let i = 0;\n  while (i < ls.length) {\n    const l = ls[i];\n    if (/^```/.test(l)) { const b = []; i++; while (i < ls.length && !/^```/.test(ls[i])) b.push(ls[i++]); i++; out.push('<pre>' + e(b.join('\\n')) + '</pre>'); continue; }\n    const h = l.match(/^(#{1,4})\\s+(.*)/); if (h) { out.push(`<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`); i++; continue; }\n    if (/^\\|/.test(l)) { const rows = []; while (i < ls.length && /^\\|/.test(ls[i])) rows.push(ls[i++]);\n      const cel = r => r.replace(/^\\||\\|$/g, '').split('|').map(c => c.trim());\n      out.push('<table><thead><tr>' + cel(rows[0]).map(c => `<th>${inl(c)}</th>`).join('') + '</tr></thead><tbody>' + rows.slice(2).map(r => '<tr>' + cel(r).map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table>'); continue; }\n    if (/^\\s*([-*]|\\d+\\.)\\s/.test(l)) { const ord = /^\\s*\\d+\\./.test(l), it = []; while (i < ls.length && /^\\s*([-*]|\\d+\\.)\\s/.test(ls[i])) it.push(ls[i++].replace(/^\\s*([-*]|\\d+\\.)\\s/, ''));\n      out.push(`<${ord ? 'ol' : 'ul'}>` + it.map(t => { const c = t.match(/^\\[( |x)\\]\\s(\\S+)\\s(.*)/); return c ? `<li class=\"ck\" data-id=\"${e(c[2])}\"><span class=\"cx\">${c[1] === 'x' ? '☑' : '☐'}</span> <b>${e(c[2])}</b> ${inl(c[3])}</li>` : `<li>${inl(t)}</li>`; }).join('') + `</${ord ? 'ol' : 'ul'}>`); continue; }\n    if (/^>\\s?/.test(l)) { out.push('<blockquote>' + inl(l.replace(/^>\\s?/, '')) + '</blockquote>'); i++; continue; }\n    if (l.trim()) out.push('<p>' + inl(l) + '</p>');\n    i++;\n  }\n  return out.join('\\n');\n}\nfunction rvPdfHtml(livro, docs) {\n  return `<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><title>Revisão · ${rvEsc(livro.titulo)}</title><style>\n@page{size:A4;margin:18mm 16mm}body{font-family:Inter,'Noto Color Emoji',sans-serif;font-size:10pt;line-height:1.5;color:#1d1d22}\n.capa{height:250mm;display:flex;flex-direction:column;justify-content:center;page-break-after:always}.capa h1{font:800 30pt Montserrat,sans-serif;margin:0}.capa p{font-size:13pt;color:#555}\nsection{page-break-before:always}h1{font:800 17pt Montserrat,sans-serif;color:#7a2e3a;border-bottom:2px solid #e8d5d8;padding-bottom:4px}h2{font:700 12.5pt Montserrat,sans-serif;margin:14px 0 4px}h3{font-size:11pt}\ntable{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #ddd;padding:3px 5px;text-align:left;vertical-align:top}th{background:#f4ecee}\npre{background:#f5f5f2;padding:6px 8px;font-size:8pt;white-space:pre-wrap}blockquote{border-left:3px solid #7a2e3a;margin:8px 0;padding:4px 10px;background:#faf6f7}li.ck{list-style:none;margin-left:-14px}code{background:#f2f2ef;padding:0 3px}\n</style></head><body><div class=\"capa\"><p>Revisão editorial com 7 especialistas de IA</p><h1>${rvEsc(livro.titulo)}</h1><p>${rvEsc(livro.autor)} · ${livro.capitulos.length} capítulos · ${livro.palavras.toLocaleString('pt-BR')} palavras · ${new Date().toLocaleDateString('pt-BR')}</p>\n<p>${docs.map(d => rvEsc(d[0])).join('<br>')}</p></div>${docs.map(d => `<section>${rvMdHtml(d[1])}</section>`).join('')}</body></html>`;\n}\nconst rvAcoesMd = acoes => acoes.length ? `\\n## AÇÕES PARA O CHECKLIST\\n${acoes.map(a => `- (${a.prioridade}) ${a.onde ? a.onde + ' — ' : ''}${a.o_que}`).join('\\n')}\\n` : '';\n\nconst calor = $('🧩 Prepara a síntese').first().json.calor;\nconst x = rvJSON($input.first().json.output) || {};\nconst L = (v, m) => rvL(typeof v === 'string' ? v : v ? JSON.stringify(v) : '', m || 300), A = v => rvLista(v, 30);\nconst j = { calor, notas: A(x.notas).map(n => ({ persona: L(n.persona, 20), nota: Number(n.nota) || 0, frase: L(n.frase, 200) })),\n  devorados: calor.filter(k => k.status === 'DEVORADO').map(k => k.cap), risco: calor.filter(k => k.status === 'ARRISCO DROP').map(k => k.cap), divergencias: L(x.divergencias),\n  confusoes: A(x.confusoes).slice(0, 10).map(c => ({ onde: L(c.onde, 30), pergunta: L(c.pergunta, 200) })), emocoes: A(x.emocoes).slice(0, 10).map(c => ({ onde: L(c.onde, 30), emocao: L(c.emocao, 200) })),\n  furos: A(x.furos).map(f => L(f)), problematicos: A(x.problematicos).map(f => L(f)), amado: A(x.amado).map(f => L(f)),\n  frase_tatuagem: L(x.frase_tatuagem), frase_riscada: L(x.frase_riscada), acoes: rvAcoes(x.acoes, 'Beta') };\nconst f1 = v => v === null ? '-' : String(v).replace('.', ',');\nconst md = rvCab('MD 28', 'PAINEL BETA (AGENTE 6)', 'SIMULAÇÃO GERADA PELO FLUXO + KIT REAL (página de leitores)', 'MD 22, Capítulos', 'Validação com leitores reais')\n  + `> **Aviso honesto:** painel SIMULADO cego (3 personas: voraz, casual, crítico; sem acesso aos relatórios). Não substitui leitores reais — use a página de leitores beta (Parte B).\\n\\n`\n  + `## PARTE A — MAPA DE CALOR (média P/E/T dos 3 betas, conta do código)\\n\\n${rvTabela(['Cap', 'P', 'E', 'T', 'Status'], calor.map(k => [rvCapN(k.cap), f1(k.P), f1(k.E), f1(k.T), (['DEVORADO', 'ARRISCO DROP'].includes(k.status) ? '**' + k.status + '**' : k.status) + (k.rotulo ? ' (' + k.rotulo + ')' : '')]))}\\n`\n  + `**Notas:** ${j.notas.map(n => `${n.persona} ${f1(n.nota)}`).join(', ') || '-'}. Consenso de devoração: ${j.devorados.join(', ') || '-'}. Consenso de risco: ${j.risco.join(', ') || '-'}. ${j.divergencias}\\n\\n`\n  + `## Top confusões\\n${j.confusoes.map((c, k) => `${k + 1}. ${c.onde} — ${c.pergunta}`).join('\\n') || '-'}\\n\\n## Top emoções\\n${j.emocoes.map((c, k) => `${k + 1}. ${c.onde} — ${c.emocao}`).join('\\n') || '-'}\\n\\n`\n  + `## Furos pegos por leitores (lógica de mundo real)\\n${j.furos.map((f, k) => `${k + 1}. ${f}`).join('\\n') || '-'}\\n\\n## Problemáticos\\n${j.problematicos.join('; ') || '-'}\\n\\n## Amado (defender)\\n${j.amado.join('; ') || '-'}\\n\\nFrase-tatuagem: ${j.frase_tatuagem || '-'} · Frase-riscada: ${j.frase_riscada || '-'}\\n\\n`\n  + `## PARTE B — KIT DE LEITORES REAIS\\n\\n**Perfil:** 3 a 5 leitores do público, 2 vorazes + 2 casuais + 1 crítico. Leitura cega (só o texto). Prazo 2 semanas, sem contato entre eles.\\n**Por capítulo (1-5 + 1 frase):** PRENDEU? ENTENDI? TORCI? + \"onde quase larguei e por quê\". **No fim:** 5 confusões · 5 favoritos · defendo/sacudiria · Livro 2 sim/não · nota 0-10 · frase-tatuagem e frase-riscada.\\n**Como:** mande o link \"leitores beta\" do relatório; as respostas entram no mapa de calor real ao lado deste.\\n` + rvAcoesMd(j.acoes);\nreturn [{ json: { rel: JSON.stringify({ agente: 'beta', ok: calor.some(k => k.P !== null), json: j, md, acoes: j.acoes }) } }];\n\n} catch (erro) {\n  return [{ json: { rel: JSON.stringify({ agente: 'beta', ok: false, erro: String(erro.message || erro), json: {}, acoes: [], md: '# MD 28 — BETA\\n\\n⚠️ O relatório não saiu: ' + String(erro.message || erro) }) } }];\n}"
+   },
+   "name": "🧱 Monta o relatório",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2160,
+    1510
+   ],
+   "id": "86a9fb64-2763-4f3d-8906-c02beb4a0712"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lv:{{ $('▶️ Entrada').first().json.id }}:rel:beta",
+    "value": "={{ $('🧱 Monta o relatório').first().json.rel }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 34560000
+   },
+   "name": "💾 Guarda o relatório",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2460,
+    1510
+   ],
+   "id": "ecb23e28-710d-40ca-ad63-0c5e0838eada",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lv:{{ $('▶️ Entrada').first().json.id }}:ag:beta",
+    "value": "={{ JSON.stringify({ estado: 'pronto', detalhe: JSON.parse($('🧱 Monta o relatório').first().json.rel).ok ? 'pronto' : 'parcial (a IA falhou: veja o relatório)', at: Date.now() }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 34560000
+   },
+   "name": "💾 Status: pronto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2760,
+    1510
+   ],
+   "id": "8c5ea72d-2f74-426f-b337-96a3a284f2e7",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "b3f2e34f-0620-4aee-8565-db6a4265186a",
+       "leftValue": "={{ $('▶️ Entrada').first().json.sozinho === true || $('▶️ Entrada').first().json.sozinho === 'true' }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Rodou sozinho?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    0,
+    2304
+   ],
+   "id": "9828a7e1-5f9d-47c0-bd9e-98250b420a34"
+  },
+  {
+   "parameters": {
+    "workflowId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "={{ '4wvoKxPmnXnnFa4U' }}"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('▶️ Entrada').first().json.id }}",
+      "terminou": "beta"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      },
+      {
+       "id": "terminou",
+       "displayName": "terminou",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": true
+    },
+    "options": {
+     "waitForSubWorkflow": false
+    }
+   },
+   "name": "📨 Avisa o editor-chefe",
+   "type": "n8n-nodes-base.executeWorkflow",
+   "typeVersion": 1.2,
+   "position": [
+    300,
+    2504
+   ],
+   "id": "32d4a537-5454-49e5-83cc-ec5a7a482ffe"
+  },
+  {
+   "parameters": {},
+   "name": "🧪 Teste só este especialista",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    0,
+    2948
+   ],
+   "id": "23cf8fab-91dc-48fb-b6be-317d701dfd4d"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "f43f6783-889a-4f9c-897d-810bead2e2ed",
+       "name": "id",
+       "value": "cole-aqui-o-codigo-do-livro",
+       "type": "string"
+      },
+      {
+       "id": "8ac4a78d-3d96-47e4-91c4-b96cca582844",
+       "name": "inicio",
+       "value": 0,
+       "type": "number"
+      },
+      {
+       "id": "747811f9-4071-4327-ab10-4f83a8ce76e1",
+       "name": "sozinho",
+       "value": true,
+       "type": "boolean"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "✏️ Livro do teste (cole o código)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    300,
+    2948
+   ],
+   "id": "6d1b6597-b471-48b9-885c-717b93e3bce7"
+  },
+  {
+   "parameters": {
+    "workflowId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "={{ $workflow.id }}"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.id }}",
+      "inicio": "={{ $json.inicio }}",
+      "sozinho": "={{ true }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      },
+      {
+       "id": "inicio",
+       "displayName": "inicio",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "number",
+       "removed": false
+      },
+      {
+       "id": "sozinho",
+       "displayName": "sozinho",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "boolean",
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": true
+    },
+    "options": {
+     "waitForSubWorkflow": false
+    }
+   },
+   "name": "▶️ Roda este especialista",
+   "type": "n8n-nodes-base.executeWorkflow",
+   "typeVersion": 1.2,
+   "position": [
+    600,
+    2948
+   ],
+   "id": "d4a6e90c-4870-495d-84fa-a5ca2dc33ac8"
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ CHAMADO PELO EDITOR-CHEFE ▶️\n▶️ **Entrada** recebe `id` do livro (e `inicio`, `sozinho`) ➜ 📖 lê o livro no Redis (capítulos, documentos de apoio, quem está na equipe).\nEste sub-fluxo é o **👥 Beta** do MD 22: roda numa execução só dele.",
+    "height": 384,
+    "width": 4300,
+    "color": 7
+   },
+   "name": "Nota · Entrada",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    0
+   ],
+   "id": "bdfa750a-e780-43d7-bf78-9ce0eb3d0089"
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ UM LOTE DE CAPÍTULOS 🔁 (até 5 capítulos / 12 mil palavras por execução)\n🗂️ vê o que já foi feito ➜ 🧩 **Escolhe o lote** (pula capítulo pronto: reexecutar continua de onde parou) ➜ 📖 cada capítulo com as linhas numeradas (L1, L2… para citar \"Cap03:12\")\n➜ 🤖 **Beta** (1 chamada por capítulo; 🧠 + 🛟 reserva) ➜ 🧩 lê o JSON ➜ 💾 grava NA HORA ➜ 🔁 **chama a si mesmo** (`$workflow.id`) numa execução nova: ela pega o próximo lote ou, se acabou, segue para o passo 3️⃣.\n💡 Por quê: no n8n6 cada execução vai até ~26 min; um livro de 26 capítulos levaria mais. Em lotes, qualquer tamanho cabe.",
+    "height": 793,
+    "width": 4300,
+    "color": 5
+   },
+   "name": "Nota · Lote",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    444
+   ],
+   "id": "623615cd-d665-4263-aae4-d809f59a1998"
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ O RELATÓRIO DO BETA 👥\n🗂️ junta tudo do Redis (textos, fichas do Leitor, resultados por capítulo, relatórios dos colegas) ➜ 🧩 **Prepara a síntese** (com as CONTAGENS EXATAS do código)\n➜ 🤖 **Beta** (🧠 + 🛟) ➜ 🧱 **Monta o relatório** no formato do **MD 28 — BETA** (cabeçalho ID/VERSÃO/STATUS, tabelas, ações para o checklist; **trava**: o que o código achou entra mesmo se a IA esquecer)\n➜ 💾 guarda (400 dias) ➜ 💾 status pronto.",
+    "height": 793,
+    "width": 4300,
+    "color": 4
+   },
+   "name": "Nota · Síntese",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    1297
+   ],
+   "id": "81450f31-c967-41c7-8887-fdd6ff0acc98"
+  },
+  {
+   "parameters": {
+    "content": "## 4️⃣ AVISA O EDITOR-CHEFE 📨\n🚦 rodou sozinho (teste)? para aqui · senão 📨 chama o fluxo principal (sem esperar) dizendo \"terminei\": ele decide quem trabalha agora.",
+    "height": 554,
+    "width": 4300,
+    "color": 6
+   },
+   "name": "Nota · Avisa",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    2150
+   ],
+   "id": "2962f39a-3c13-429c-9736-104fd9ffc16f"
+  },
+  {
+   "parameters": {
+    "content": "## 🧪 TESTE SÓ ESTE ESPECIALISTA\nCole o **código de um livro** que já passou pelo Leitor (aparece no link do relatório: /livro/CÓDIGO/relatorio) e clique ▶️: o Beta refaz o trabalho dele **sem avisar** o editor-chefe (o resto da equipe não roda).\nPara refazer do zero, apague antes as chaves lv:CÓDIGO:beta:* no Redis (o lote pula capítulo pronto).",
+    "height": 384,
+    "width": 4300,
+    "color": 3
+   },
+   "name": "Nota · Teste",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    2764
+   ],
+   "id": "b0fead47-f723-4040-bc18-5bd1ef15483f"
+  },
+  {
+   "parameters": {
+    "content": "# 👥 6 · BETA (LEITORES SIMULADOS)\nSub-fluxo da **Revisão de livro** (o principal é \"📚 Revisão de livro · Editor-chefe\").\n🎯 **Papel (MD 22):** 3 leitores simulados às cegas: mapa de calor P/E/T, confusões, emoções.\n🔗 **Quem chama:** o Editor-chefe (nó Execute Workflow, sem esperar). **Quem ele chama:** ele mesmo (próximo lote) e o Editor-chefe quando termina.\n💾 Redis: lê `lv:CÓDIGO`, grava `lv:CÓDIGO:beta:N` (por capítulo), `lv:CÓDIGO:rel:beta` (relatório) e `lv:CÓDIGO:ag:beta` (status).\n\n## 🔎 LEGENDA DOS ÍCONES\n🔔 recebe um pedido (webhook) · 📤 responde · 🧪 teste manual · ⏰ relógio\n🧩 código · ✏️ campos · 🚦 decisão sim/não · 🔀 escolhe o caminho · 🔁 laço\n📖 lê do Redis · 💾 grava no Redis · 🧮 soma · 🗂️ lista · 🗑️ apaga\n🤖 agente de IA · 🧠 cérebro (modelo) · 🛟 cérebro reserva\n🌐 chama outro serviço · ⏳ espera · 🎨 desenha imagem · 📸 Instagram\n▶️ chamado por outro fluxo · 📨 chama outro fluxo · 🔁 chama a si mesmo · 🧱 monta o relatório",
+    "height": 478,
+    "width": 1240,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1400,
+    0
+   ],
+   "id": "5300fea3-7247-4b29-925d-ae9ecf815af1"
+  }
+ ],
+ "connections": {
+  "▶️ Entrada": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o livro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o livro": {
+   "main": [
+    [
+     {
+      "node": "🗂️ Lê o que já foi feito",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗂️ Lê o que já foi feito": {
+   "main": [
+    [
+     {
+      "node": "🧩 Escolhe o lote",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Escolhe o lote": {
+   "main": [
+    [
+     {
+      "node": "🚦 Acabaram os capítulos?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro · Beta (por capítulo)": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Beta (por capítulo)",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro · Beta (por capítulo)": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Beta (por capítulo)",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "🚦 Acabaram os capítulos?": {
+   "main": [
+    [
+     {
+      "node": "🗂️ Lê os resultados por capítulo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Status: lendo o lote",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "📖 Lê o capítulo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o capítulo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara o pedido": {
+   "main": [
+    [
+     {
+      "node": "🤖 Beta (por capítulo)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Beta (por capítulo)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê a resposta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê a resposta": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o capítulo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o capítulo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Fecha o lote",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Fecha o lote": {
+   "main": [
+    [
+     {
+      "node": "🔁 Chama o próximo lote (ele mesmo)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro · Beta": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Beta",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro · Beta": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Beta",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "🗂️ Lê os resultados por capítulo": {
+   "main": [
+    [
+     {
+      "node": "🗂️ Lê os textos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗂️ Lê os textos": {
+   "main": [
+    [
+     {
+      "node": "🗂️ Lê as fichas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗂️ Lê as fichas": {
+   "main": [
+    [
+     {
+      "node": "🗂️ Lê os relatórios",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗂️ Lê os relatórios": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: síntese",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: síntese": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara a síntese",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara a síntese": {
+   "main": [
+    [
+     {
+      "node": "🤖 Beta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Beta": {
+   "main": [
+    [
+     {
+      "node": "🧱 Monta o relatório",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧱 Monta o relatório",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧱 Monta o relatório": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o relatório",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o relatório": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: pronto": {
+   "main": [
+    [
+     {
+      "node": "🚦 Rodou sozinho?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Rodou sozinho?": {
+   "main": [
+    [],
+    [
+     {
+      "node": "📨 Avisa o editor-chefe",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧪 Teste só este especialista": {
+   "main": [
+    [
+     {
+      "node": "✏️ Livro do teste (cole o código)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "✏️ Livro do teste (cole o código)": {
+   "main": [
+    [
+     {
+      "node": "▶️ Roda este especialista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "timezone": "America/Sao_Paulo",
+  "callerPolicy": "workflowsFromSameOwner"
+ }
+}

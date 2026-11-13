@@ -1,0 +1,22 @@
+{
+  "_comment": "Config de máquinas pro render distribuído. 'local' sempre presente. Edite/adicione workers remotos aqui. enabled=false desliga sem remover. gemini_key_range separa as chaves por máquina (rule #8: nunca 2 caps na mesma chave) — [lo,hi] inclusivo, ou null pra usar todas.",
+  "workers": [
+    {
+      "name": "local",
+      "mode": "local",
+      "gemini_key_range": [0, 4]
+    },
+    {
+      "name": "pc2",
+      "mode": "http",
+      "host": "100.125.7.77",
+      "port": 8771,
+      "enabled": true,
+      "gemini_key_range": [5, 9]
+    }
+  ],
+  "distribute": {
+    "min_caps": 2,
+    "_comment_min_caps": "abaixo disto roda tudo local (mandar pro worker não compensa)"
+  }
+}

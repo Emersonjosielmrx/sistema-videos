@@ -1,0 +1,627 @@
+{
+ "part": [
+  0.0,
+  90.0
+ ],
+ "keeps": [
+  [
+   0.41474999999999995,
+   0.825687
+  ],
+  [
+   0.9712080000000002,
+   3.046063
+  ],
+  [
+   6.465792,
+   12.511541999999999
+  ],
+  [
+   15.105562,
+   17.0
+  ],
+  [
+   34.096479,
+   34.596917000000005
+  ],
+  [
+   40.552811999999996,
+   43.896063000000005
+  ],
+  [
+   44.084229,
+   44.66041700000001
+  ],
+  [
+   45.290604,
+   45.81637500000001
+  ],
+  [
+   50.955062,
+   51.461167
+  ],
+  [
+   51.823875,
+   54.30656200000001
+  ],
+  [
+   55.351062,
+   57.389458000000005
+  ],
+  [
+   58.577813,
+   59.48054200000001
+  ],
+  [
+   64.91943699999999,
+   66.19383300000001
+  ],
+  [
+   67.410479,
+   67.91050000000001
+  ],
+  [
+   72.54849999999999,
+   73.048625
+  ],
+  [
+   73.21954199999999,
+   77.176854
+  ],
+  [
+   78.698,
+   79.899792
+  ]
+ ],
+ "duration_out": 28.73519100000013,
+ "zoom": [
+  [
+   0.0,
+   2.05,
+   1
+  ],
+  [
+   2.98,
+   7.13,
+   2
+  ],
+  [
+   6.98,
+   10.576,
+   1
+  ],
+  [
+   11.154,
+   14.084,
+   2
+  ],
+  [
+   15.372,
+   17.064,
+   1
+  ],
+  [
+   19.009,
+   20.439,
+   2
+  ],
+  [
+   21.302,
+   22.612,
+   1
+  ],
+  [
+   27.735,
+   28.735,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   0.3897289999999998,
+   1.539729
+  ],
+  [
+   18.459358000000034,
+   19.609358000000036
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 0.4397289999999998,
+   "text": "EXTRAVAGANTES",
+   "emoji": "✨"
+  },
+  {
+   "t": 18.509358000000034,
+   "text": "NÃO",
+   "emoji": "😱"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 11.153606000000005,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Outros efeitos sonoros\\Outros efeitos sonoros\\Bruh - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 12.930835950000057,
+   "file": "D:\\manhwa-react\\assets\\sfx\\like.wav"
+  },
+  {
+   "t": 18.509358000000034,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\MK Finish Him - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 26.23519100000013,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 0.33972899999999984,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 0.4397289999999998,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_2728_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 10.142646499999998,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_glitch.mov",
+   "dur": 0.566667,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 11.153606000000005,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f633_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 12.930835950000057,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_likeburst.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 18.409358000000033,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 18.409358000000033,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 18.509358000000034,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 26.23519100000013,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\FNAF FUNK (Funk Remix) (128 kbps).mp3",
+ "meta": {
+  "hook": "O DRAMA TODO POR CAUSA DE UM NOME ERRADO",
+  "title": "Trocaram o nome e deu ESSE caos todo 😂🤦 #shorts #manhwa",
+  "description": "O criador reage a um recap onde o gerente confunde a identidade da protagonista e cria o maior drama!\nVocê acredita que tudo isso aconteceu só por causa de um nome trocado?\nComenta aí se já viu uma confusão assim num dorama ou manhwa!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #manhwa #dorama #coreano #confusão #identidade #recap #webtoon #anime #reactbr #drama #engraçado #viral #reactmanhwa",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#manhwa",
+   "#dorama",
+   "#coreano",
+   "#confusão",
+   "#identidade",
+   "#recap",
+   "#webtoon",
+   "#drama",
+   "#reactbr",
+   "#engraçado"
+  ],
+  "tags": [
+   "react",
+   "manhwa",
+   "dorama coreano",
+   "recap manhwa",
+   "confusão de identidade",
+   "react br",
+   "webtoon",
+   "drama coreano",
+   "react dorama",
+   "nome trocado",
+   "gerente confundiu",
+   "cozinheira",
+   "chefe",
+   "react engraçado",
+   "manhwa portugues",
+   "shorts react",
+   "react viral"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Você já viu um drama inteiro acontecer só por causa de um nome trocado? 😂",
+  "title_alternatives": [
+   "Confundiram o nome e olha o que aconteceu 😱🔥 #shorts #manhwa",
+   "Esse gerente DESTRUIU tudo por trocar um nome 🤦😂 #shorts #react"
+  ],
+  "work": null,
+  "channel": "inovaremanhwabr"
+ },
+ "channel": "inovaremanhwabr",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_2dd4bf_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Vamos",
+   "s": 0.0,
+   "e": 0.8197289999999997,
+   "p": 0.9,
+   "lip": 0.006140860853642869,
+   "speaker": "creator"
+  },
+  {
+   "w": "ver",
+   "s": 0.8197289999999997,
+   "e": 1.059729,
+   "p": 0.9,
+   "lip": 0.005445038627756153,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 1.059729,
+   "e": 1.279729,
+   "p": 0.9,
+   "lip": 0.007331926959475017,
+   "speaker": "creator"
+  },
+  {
+   "w": "aqui.",
+   "s": 1.279729,
+   "e": 1.8997289999999998,
+   "p": 0.9,
+   "lip": 0.0036426439783334014,
+   "speaker": "creator"
+  },
+  {
+   "w": "Eles",
+   "s": 2.9799999999999995,
+   "e": 3.1799999999999997,
+   "p": 0.9,
+   "lip": 0.009695846239155075,
+   "speaker": "creator"
+  },
+  {
+   "w": "são",
+   "s": 3.1799999999999997,
+   "e": 3.26,
+   "p": 0.9,
+   "lip": 0.01089217248730119,
+   "speaker": "creator"
+  },
+  {
+   "w": "muito",
+   "s": 3.26,
+   "e": 3.5199999999999996,
+   "p": 0.9,
+   "lip": 0.01457988085372606,
+   "speaker": "creator"
+  },
+  {
+   "w": "extravagantes,",
+   "s": 3.5199999999999996,
+   "e": 4.719999999999999,
+   "p": 0.9,
+   "lip": 0.012760064233857116,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 4.719999999999999,
+   "e": 4.879999999999999,
+   "p": 0.9,
+   "lip": 0.007716635970284377,
+   "speaker": "creator"
+  },
+  {
+   "w": "Esses",
+   "s": 4.879999999999999,
+   "e": 5.139999999999999,
+   "p": 0.9,
+   "lip": 0.006442625163379437,
+   "speaker": "creator"
+  },
+  {
+   "w": "coreanos,",
+   "s": 5.139999999999999,
+   "e": 6.0,
+   "p": 0.9,
+   "lip": 0.007892266347460599,
+   "speaker": "creator"
+  },
+  {
+   "w": "assim...",
+   "s": 6.0,
+   "e": 6.58,
+   "p": 0.9,
+   "lip": 0.006917876516532279,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 6.58,
+   "e": 6.959999999999999,
+   "p": 0.9,
+   "lip": 0.003976380769811073,
+   "speaker": "creator"
+  },
+  {
+   "w": "dorama",
+   "s": 6.959999999999999,
+   "e": 7.6,
+   "p": 0.9,
+   "lip": 0.006960032522951925,
+   "speaker": "creator"
+  },
+  {
+   "w": "coreano.",
+   "s": 7.6,
+   "e": 8.2,
+   "p": 0.9,
+   "lip": 0.007124059708240442,
+   "speaker": "creator"
+  },
+  {
+   "w": "Aí",
+   "s": 8.665979999999998,
+   "e": 8.865979999999997,
+   "p": 0.9,
+   "lip": 0.012981122739091093,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 8.865979999999997,
+   "e": 8.965979999999997,
+   "p": 0.9,
+   "lip": 0.01967588626499734,
+   "speaker": "creator"
+  },
+  {
+   "w": "dizer",
+   "s": 8.965979999999997,
+   "e": 9.085979999999998,
+   "p": 0.9,
+   "lip": 0.01845041328994853,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 9.085979999999998,
+   "e": 9.245979999999998,
+   "p": 0.9,
+   "lip": 0.014839417576902983,
+   "speaker": "creator"
+  },
+  {
+   "w": "foi",
+   "s": 9.245979999999998,
+   "e": 9.425979999999997,
+   "p": 0.9,
+   "lip": 0.018028069644291288,
+   "speaker": "creator"
+  },
+  {
+   "w": "ela",
+   "s": 9.425979999999997,
+   "e": 9.705979999999998,
+   "p": 0.9,
+   "lip": 0.018114807210868347,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 9.705979999999998,
+   "e": 9.905979999999998,
+   "p": 0.9,
+   "lip": 0.01265084898365032,
+   "speaker": "creator"
+  },
+  {
+   "w": "fez.",
+   "s": 9.905979999999998,
+   "e": 10.425979999999997,
+   "p": 0.9,
+   "lip": 0.0071575915625599704,
+   "speaker": "creator"
+  },
+  {
+   "w": "Caramba,",
+   "s": 11.153606000000005,
+   "e": 11.873606000000004,
+   "p": 0.9,
+   "lip": 0.01233926999097766,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 11.873606000000004,
+   "e": 11.993606000000002,
+   "p": 0.9,
+   "lip": 0.010660223368833628,
+   "speaker": "creator"
+  },
+  {
+   "w": "bastava",
+   "s": 11.993606000000002,
+   "e": 12.393606000000007,
+   "p": 0.9,
+   "lip": 0.00928966697910181,
+   "speaker": "creator"
+  },
+  {
+   "w": "ser",
+   "s": 12.393606000000007,
+   "e": 12.673606000000001,
+   "p": 0.9,
+   "lip": 0.00903888821180329,
+   "speaker": "creator"
+  },
+  {
+   "w": "cozinheira",
+   "s": 12.673606000000001,
+   "e": 13.313606000000002,
+   "p": 0.9,
+   "lip": 0.00706672002979709,
+   "speaker": "creator"
+  },
+  {
+   "w": "não,",
+   "s": 13.313606000000002,
+   "e": 13.593606000000003,
+   "p": 0.9,
+   "lip": 0.006227759397874214,
+   "speaker": "creator"
+  },
+  {
+   "w": "dele?",
+   "s": 13.593606000000003,
+   "e": 13.933606000000006,
+   "p": 0.9,
+   "lip": 0.003598020271498471,
+   "speaker": "creator"
+  },
+  {
+   "w": "tornar",
+   "s": 15.371628000000024,
+   "e": 15.496566000000024,
+   "p": 0.9,
+   "lip": 0.001286132067225063,
+   "speaker": "creator"
+  },
+  {
+   "w": "Chef.",
+   "s": 15.496566000000024,
+   "e": 15.87773300000003,
+   "p": 0.9,
+   "lip": 0.001690649626442946,
+   "speaker": "creator",
+   "w_orig": "chefe."
+  },
+  {
+   "w": "justamente",
+   "s": 15.87773300000003,
+   "e": 16.07385800000003,
+   "p": 0.9,
+   "lip": 0.002408269566204022,
+   "speaker": "creator"
+  },
+  {
+   "w": "isso",
+   "s": 16.07385800000003,
+   "e": 16.913858000000026,
+   "p": 0.9,
+   "lip": 0.0021233071441536504,
+   "speaker": "creator"
+  },
+  {
+   "w": "O",
+   "s": 19.009358000000034,
+   "e": 19.749358000000036,
+   "p": 0.9,
+   "lip": 0.002394528431895298,
+   "speaker": "creator"
+  },
+  {
+   "w": "restaurante",
+   "s": 19.749358000000036,
+   "e": 19.829358000000035,
+   "p": 0.9,
+   "lip": 0.004391144923721405,
+   "speaker": "creator"
+  },
+  {
+   "w": "impediu",
+   "s": 19.769358000000032,
+   "e": 20.069358000000037,
+   "p": 0.9,
+   "lip": 0.00457232390210688,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 20.069358000000037,
+   "e": 20.209358000000037,
+   "p": 0.9,
+   "lip": 0.004111923581476578,
+   "speaker": "creator"
+  },
+  {
+   "w": "ele",
+   "s": 20.209358000000037,
+   "e": 20.289358000000036,
+   "p": 0.9,
+   "lip": 0.0034662054861290363,
+   "speaker": "creator"
+  },
+  {
+   "w": "cyber",
+   "s": 21.301545000000047,
+   "e": 21.922108000000065,
+   "p": 0.9,
+   "lip": 0.00465812406656911,
+   "speaker": "creator",
+   "w_orig": "Céber"
+  },
+  {
+   "w": "isso.",
+   "s": 21.922108000000065,
+   "e": 22.462108000000057,
+   "p": 0.9,
+   "lip": 0.004660988509882694,
+   "speaker": "creator"
+  },
+  {
+   "w": "Será?",
+   "s": 27.73539900000013,
+   "e": 28.73519100000013,
+   "p": 0.9,
+   "lip": 0.0028495434202435764,
+   "speaker": "creator"
+  }
+ ]
+}

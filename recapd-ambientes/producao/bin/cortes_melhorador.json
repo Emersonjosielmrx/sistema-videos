@@ -1,0 +1,66 @@
+{
+ "_leia": "Melhorador dos CORTES (dona 26-27/10: 'cópia do sistema de melhoria só pros Shorts, faz o que o chat faz: vê o vídeo feito e faz o próximo melhor/mais viral; fica pronto e só liga no meu sinal'). LIGAR = controle.json projeto 'melhorador_cortes' etapa 'producao' (painel :8790). 'sombra': true = decide mas NÃO aplica (grava em linhas\\CORTES\\SOMBRA.md pra comparar com a sessão Claude). Só mexe nas ALAVANCAS do bin\\cortes_ajustes.json; código vira PROPOSTA. Gemini tem histórico de quebrar o sistema: por isso tipo/faixa conferidos no código, 1 mudança a cada intervalo_h, desfaz sozinho se a nota cair.",
+ "sombra": false,
+ "lote": 4,
+ "intervalo_h": 6,
+ "max_mudancas_por_lote": 2,
+ "piora_desfaz": 0.5,
+ "videos_para_julgar_mudanca": 3,
+ "alavancas": {
+  "cortes_ajustes.json:regras_roteiro": {
+   "tipo": "lista_str",
+   "max_itens": 10,
+   "max_chars": 200
+  },
+  "cortes_ajustes.json:regras_titulo": {
+   "tipo": "lista_str",
+   "max_itens": 8,
+   "max_chars": 200
+  },
+  "cortes_ajustes.json:tarja_largura_max": {
+   "tipo": "float",
+   "min": 0.5,
+   "max": 0.8
+  },
+  "cortes_ajustes.json:tarja_letra": {
+   "tipo": "float",
+   "min": 0.38,
+   "max": 0.62
+  },
+  "cortes_ajustes.json:cobertura_legenda": {
+   "tipo": "str",
+   "valores": [
+    "delogo"
+   ]
+  }
+ },
+ "camadas": {
+  "_leia": "Dona 27/10: sem Opus nem Kiro nos pipelines (inclui o melhorador) — só Argon com prazo curto (prazo_argon_s) e reserva Gemini 3.8. Opus/Kiro só voltam quando ela liberar.",
+  "_bancada_29_10": "bancada real (D:\\tmp\\bancada_real, COMPARACAO_MODELOS.md 29/10): argon-pro 8,5 (265 s, único que abriu quadro/júri e achou defeito fora do pedido); Argon puro, Gemini 3.8, Flash+Argon e gweb 3.1 Pro 7,5; argon-gemini estourou 1500 s. argon-pro hoje = hx-maos-gemini (sem Kiro).",
+  "decisor": [
+   [
+    "argon-pro",
+    30
+   ],
+   [
+    "gemini-4-argon",
+    30
+   ],
+   [
+    "agy/gemini-3.8-flash-high",
+    30
+   ]
+  ]
+ },
+ "argon_liberado": true,
+ "so_gemini_hoje": false,
+ "prazo_argon_s": 360,
+ "modelos_desligados": [
+  "cc/claude-opus-5-5",
+  "antigravity/claude-opus-4-6-thinking",
+  "kr/claude-sonnet-4.5",
+  "argon-opus",
+  "argon-kiro"
+ ],
+ "_testes_fora_30_10": "30/10 (D6/CORTES_01): testes A/B (T3-T7) saíram das alavancas — teste só se decide por VIEWS dos elegíveis (D1/D3), nunca pela nota do júri. Voltar: cortes_melhorador.json.bak_20261030_shorts. Tirados: cortes_ajustes.json:gancho_remotion, cortes_ajustes.json:mascote, cortes_ajustes.json:fx_choque, cortes_ajustes.json:gancho_meio, cortes_ajustes.json:legenda_impacto"
+}

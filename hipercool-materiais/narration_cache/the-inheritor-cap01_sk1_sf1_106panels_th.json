@@ -1,0 +1,798 @@
+{
+  "titulo_video": "ทายาทลึกลับ: ความลับอะไรกันนี่?!",
+  "tags": [
+    "manhwa",
+    "the inheritor",
+    "recap"
+  ],
+  "locucoes": [
+    {
+      "painel": 1,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "อีกวันธรรมดาในมหาวิทยาลัย หรืออย่างน้อยก็ดูเหมือนงั้น"
+    },
+    {
+      "painel": 2,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "มาสรุปเนื้อหากันนะครับทุกคน"
+    },
+    {
+      "painel": 3,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "หัวข้อของเราวันนี้คือ 'เซ็กส์และความปรารถนา'"
+    },
+    {
+      "painel": 4,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "การส่งกระดาษเปล่าในรายงานของคุณมีความหมายลึกซึ้ง..."
+    },
+    {
+      "painel": 5,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "สรุปก็คือ Joo Inhyuk..."
+    },
+    {
+      "painel": 6,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "หมายความว่าคุณไม่มีความใคร่เลยเหรอ?"
+    },
+    {
+      "painel": 7,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ทันใดนั้น ความเงียบในห้องก็กลายเป็นสิ่งที่ทนไม่ได้เกือบจะทนไม่ได้"
+    },
+    {
+      "painel": 8,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "หือ? ตอบฉันหน่อยสิ"
+    },
+    {
+      "painel": 9,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "คุณ Inhyuk?"
+    },
+    {
+      "painel": 10,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "เอ่อ... ไม่ใช่อย่างนั้น"
+    },
+    {
+      "painel": 11,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ไม่ใช่อย่างที่คุณคิด"
+    },
+    {
+      "painel": 12,
+      "persona": "Professora",
+      "gender": "F",
+      "text": "แล้วมันคืออะไร?"
+    },
+    {
+      "painel": 13,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "แต่... ฉันจะอธิบายยังไง?"
+    },
+    {
+      "painel": 14,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันแค่..."
+    },
+    {
+      "painel": 15,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "อ้าาา?!"
+    },
+    {
+      "painel": 16,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "หา? อะไรของเธอ?!"
+    },
+    {
+      "painel": 17,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "นั่นเป็นสัญญาณว่าความสับสนในใจเพิ่งเริ่มต้น"
+    },
+    {
+      "painel": 18,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทำไมฉันถึงนึกถึงเรื่องนี้ตอนนี้?!"
+    },
+    {
+      "painel": 19,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "รถไฟตัดผ่านเมือง ขณะที่ใจเขาล่องลอยไปที่อื่น"
+    },
+    {
+      "painel": 20,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แต่ก่อนจะดูต่อ คุณรู้แล้วนะ อยากอ่านไหม? ลิงก์อยู่ในเว็บไซต์ทางการ!"
+    },
+    {
+      "painel": 21,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ข้างนอก กลางคืนดูเหมือนจะซ่อนความลับที่มืดมิดมากขึ้นเรื่อยๆ"
+    },
+    {
+      "painel": 22,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทุกอย่างมันน่าเบื่อจัง"
+    },
+    {
+      "painel": 23,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ทุกก้าวที่เดินรู้สึกเหมือนมีน้ำหนักเพิ่มขึ้นในการเดินทาง"
+    },
+    {
+      "painel": 24,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เมื่อมองดูฝูงชนนี้ จะเห็นว่าทุกคนติดอยู่ในกิจวัตร"
+    },
+    {
+      "painel": 25,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พวกเขารู้สึกว่าชีวิตไม่ได้เป็นอะไรนอกจากความมัวเบลอที่ไร้รส"
+    },
+    {
+      "painel": 26,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "กับกระเป๋าในมือ เขาแบกดวงวิญญาณที่เหนื่อยล้าไปด้วย"
+    },
+    {
+      "painel": 27,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ท้ายที่สุด การทำงานจนล้มดูเหมือนจะเป็นกฎเดียวที่มีอยู่"
+    },
+    {
+      "painel": 28,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ระหว่างโปรโมชั่นและเป้าหมาย วงจรอุบาทว์นี้ไม่มีวันหยุด"
+    },
+    {
+      "painel": 29,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ดอกไม้และเค้กที่ถูกลืมกลายเป็นสัญญาณของวันที่ว่างเปล่า"
+    },
+    {
+      "painel": 30,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ต่อหน้าแผนที่รถไฟใต้ดิน เขาเผชิญหน้ากับเขาวงกตของทุกวัน"
+    },
+    {
+      "painel": 31,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เป็นตัวเลขและเส้นทางที่ดูเหมือนจะไม่ไปไหนเลย"
+    },
+    {
+      "painel": 32,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "บนพื้น ใบไม้แห้ง เปราะบางเท่ากับความอดทนของเขา"
+    },
+    {
+      "painel": 33,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เขาเหยียบและทำลายมัน โดยไม่มีความสงสารหรือเมตตา"
+    },
+    {
+      "painel": 34,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฮ่า... อ่า... อะไรของเธอ?"
+    },
+    {
+      "painel": 35,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันเห็นถูกไหม?"
+    },
+    {
+      "painel": 36,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ผู้หญิงคนนั้น... จะใช่เธอไหม?"
+    },
+    {
+      "painel": 37,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "อาจารย์ Han Sihyun?!"
+    },
+    {
+      "painel": 38,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ตอนนั้นแหละที่หัวใจเขาเต้นแรงเต้นแรงจนหยุดไม่ได้!"
+    },
+    {
+      "painel": 39,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ไม่ แค่คนที่ดูคล้าย คงต้องเป็นแบบนั้น"
+    },
+    {
+      "painel": 40,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "มันเป็นแค่ฝันของฉัน คงเป็นผลจากมัน"
+    },
+    {
+      "painel": 41,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Han Sihyun... รักแรกเราไม่มีวันลืมใช่ไหม?"
+    },
+    {
+      "painel": 42,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แต่เหมือนเกือบทุกอย่างในชีวิตเขา มันไม่ได้ตอบรับ"
+    },
+    {
+      "painel": 43,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันควรหยุดคิดถึงเธอ"
+    },
+    {
+      "painel": 44,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "บรรยากาศหนักขึ้นและความตึงเครียดก็พุ่งสูงขึ้นอย่างรวดเร็ว!"
+    },
+    {
+      "painel": 45,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ท้ายที่สุด เขาซ่อนอะไรไว้จากทุกคน?"
+    },
+    {
+      "painel": 46,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ในที่สุด มันก็เป็นแค่ความปรารถนาที่ดูเหมือนเป็นไปไม่ได้"
+    },
+    {
+      "painel": 47,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "น่าเกลียดและไม่สามารถเอื้อมถึง นั่นคือฉัน"
+    },
+    {
+      "painel": 48,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันกำลังคิดอะไรอยู่?"
+    },
+    {
+      "painel": 49,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันไม่มีสิทธิ์กับเรื่องนี้... ขอตัวก่อน"
+    },
+    {
+      "painel": 50,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ตอนนั้น ทันใดนั้น มีคนโผล่มาจากเงามืดจากเงามืด"
+    },
+    {
+      "painel": 51,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ตกใจจัง! คุณต้องการอะไร?"
+    },
+    {
+      "painel": 52,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "นี่มันอะไร? คุณกำลังทำอะไร?"
+    },
+    {
+      "painel": 53,
+      "persona": "Estranho",
+      "gender": "M",
+      "text": "นี่ ฉันมีเรื่องจะขอให้ช่วย"
+    },
+    {
+      "painel": 54,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ขอให้ช่วย? ฉันเหรอ?"
+    },
+    {
+      "painel": 55,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ถนนว่างเปล่าและบทสนทนาเริ่มแปลกๆ"
+    },
+    {
+      "painel": 56,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "คุณอยากให้ฉันถ่ายรูปเหรอ?"
+    },
+    {
+      "painel": 57,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "อะไรก็ได้? อะไรก็ได้งั้นเหรอ?"
+    },
+    {
+      "painel": 58,
+      "persona": "Estranho",
+      "gender": "M",
+      "text": "เอาเลย อย่ามัวแต่คุย"
+    },
+    {
+      "painel": 59,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ในตรอกมืดนั่นเหรอ?"
+    },
+    {
+      "painel": 60,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "มันไม่อันตรายใช่ไหม?"
+    },
+    {
+      "painel": 61,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "แล้วกล้องล่ะ? คุณไม่มีด้วยซ้ำ!"
+    },
+    {
+      "painel": 62,
+      "persona": "Estranho",
+      "gender": "M",
+      "text": "มาเร็วเข้า มานี่ใกล้ๆ"
+    },
+    {
+      "painel": 63,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "แปลกมาก อุปกรณ์อยู่ไหน?"
+    },
+    {
+      "painel": 64,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ถ้ามันเป็นการปล้น ฉันเจ็บแน่"
+    },
+    {
+      "painel": 65,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ถ้าฉันวิ่งตอนนี้ หนีทันไหม?"
+    },
+    {
+      "painel": 66,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "พระเจ้า กำลังเกิดอะไรขึ้น?!"
+    },
+    {
+      "painel": 67,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ระหว่างนั้น เสียงฝีเท้าก้องไปตามตรอกที่ว่างเปล่า"
+    },
+    {
+      "painel": 68,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "นี่ไง! มาถึงแล้ว"
+    },
+    {
+      "painel": 69,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "เธอไง ดูสิ"
+    },
+    {
+      "painel": 70,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ช็อกแรงช็อกแรงและตากลมบอกทุกอย่าง!"
+    },
+    {
+      "painel": 71,
+      "persona": "Estranho",
+      "gender": "M",
+      "text": "ใช้มือถือของคุณ เร็วเข้า!"
+    },
+    {
+      "painel": 72,
+      "persona": "Estranho",
+      "gender": "M",
+      "text": "ได้โปรด ทำให้ฉันหน่อย!"
+    },
+    {
+      "painel": 73,
+      "persona": "Estranho",
+      "gender": "M",
+      "text": "ถ่ายรูปเธอเดี๋ยวนี้!"
+    },
+    {
+      "painel": 74,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันเหงื่อออกเย็นๆ... บ้าจริง"
+    },
+    {
+      "painel": 75,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันจะทำอะไรตอนนี้?"
+    },
+    {
+      "painel": 76,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ใต้ท้องฟ้า พระจันทร์เต็มดวงมองลงมาอย่างเงียบๆ จากเบื้องบน"
+    },
+    {
+      "painel": 77,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เกือบเที่ยงคืนแล้ว เวลาที่เหมาะสำหรับความลับ"
+    },
+    {
+      "painel": 78,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฮ่า... คืนยาวจัง"
+    },
+    {
+      "painel": 79,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "มันแค่ฝันแปลกๆ ใช่ไหม?"
+    },
+    {
+      "painel": 80,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "คนแปลกๆ ที่ฉันเจอ..."
+    },
+    {
+      "painel": 81,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฮ่า... ต้องนอนแล้ว"
+    },
+    {
+      "painel": 82,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แต่ทำไมรูปครอบครัวครอบครัวถึงอยู่ที่นี่?"
+    },
+    {
+      "painel": 83,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทำไมเรื่องนี้ถึงเกิดขึ้นกับฉัน?"
+    },
+    {
+      "painel": 84,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทำไมพวกเขาถึงยิ้มแบบนั้น?"
+    },
+    {
+      "painel": 85,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "บ้าจริง ผิดหมดทุกอย่าง"
+    },
+    {
+      "painel": 86,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เสียงส้นสูงก้องดัง บ่งบอกว่ามีคนกำลังเข้ามาใกล้"
+    },
+    {
+      "painel": 87,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ชีวิตของฉันเป็นฝันร้ายตลอดเวลา"
+    },
+    {
+      "painel": 88,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ดูเหมือนเรื่องร้ายๆ จะเกิดขึ้นเป็นลำดับ ไม่หยุดเลย"
+    },
+    {
+      "painel": 89,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ทุกอย่างมาเหมือนคลื่นทำลายล้าง"
+    },
+    {
+      "painel": 90,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ฉากตรงหน้าเขาบ้าคลั่งบ้าคลั่งมากขึ้นเรื่อยๆ!"
+    },
+    {
+      "painel": 91,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "คุณคือใคร? ฝันหรือความจริง?"
+    },
+    {
+      "painel": 92,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ใครอยู่ที่นั่น?"
+    },
+    {
+      "painel": 93,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ฉันจะแสดงสิ่งที่คุณต้องเห็น"
+    },
+    {
+      "painel": 94,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันไม่เชื่อสิ่งที่เห็น"
+    },
+    {
+      "painel": 95,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ฉันอยู่ที่นี่แล้ว ในที่สุด"
+    },
+    {
+      "painel": 96,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ขอโทษนะคะ คุณ Inhyuk"
+    },
+    {
+      "painel": 97,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันคือเขา แต่คุณคือใคร?"
+    },
+    {
+      "painel": 98,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ยินดีที่ได้รู้จัก ในที่สุด"
+    },
+    {
+      "painel": 99,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "อาจารย์"
+    },
+    {
+      "painel": 100,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ความระทึกถึงจุดสูงสุด... ตอนนี้ หยุดทุกอย่าง!"
+    },
+    {
+      "painel": 101,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ฉันคือ... คุณได้รับฉันมาจากพ่อของคุณ"
+    },
+    {
+      "painel": 102,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "จากพ่อของคุณ เข้าใจไหม?"
+    },
+    {
+      "painel": 103,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "ฉันคือมรดกของคุณ เข้าใจแล้วใช่ไหม?"
+    },
+    {
+      "painel": 104,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "Noh Yeseul? แต่คุณคือใครกัน?!"
+    },
+    {
+      "painel": 105,
+      "persona": "Mulher",
+      "gender": "F",
+      "text": "นั่นคือชื่อของฉัน จำให้ดีนะ"
+    },
+    {
+      "painel": 106,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "มรดก?! ยังไงกัน?!"
+    }
+  ],
+  "descriptions": [
+    "Prédio escolar sob céu claro, exibindo fachada institucional de vários andares.",
+    "Caneta sobre papéis, com balão de texto indicando: Professora diz \"Vamos recapitular.\"",
+    "Professora diz \"O tema dessa aula é 'Sexo e desejos'.\" sobre papéis organizados.",
+    "Professora olha para baixo enquanto diz: \"Enviar uma folha em branco significa... para os seus relatórios...\"",
+    "Close nos olhos da professora enquanto ela diz: \"Bem, pra resumir... Joo Inhyuk...\"",
+    "Mulher pergunta: \"Quer dizer que... isso significa que você não tem libido?\"",
+    "Mulher olha fixamente para a frente com expressão serena em ambiente iluminado.",
+    "Balão de texto define conceito psicológico enquanto mulher questiona: \"Hã? Por favor, me responda.\"",
+    "Mulher diz: \"Sr. Inhyuk.\" e homem reage surpreso com um ponto de exclamação.",
+    "Homem e mulher ficam de pé frente a frente, ele diz: \"É que...\"",
+    "Personagem diz: \"Não é isso.\" com expressão séria sobre mesa com lápis",
+    "Personagem com olhar tenso diz: \"Mas...\" enquanto alguém segura suas mãos",
+    "Personagem suando diz: \"Mas?\" em momento de tensão física",
+    "Personagem diz: \"Eu...\" com expressão nervosa e boca aberta",
+    "Um impacto violento acontece com efeito sonoro intenso enquanto alguém grita \"AHH?!\"",
+    "Personagem arregala os olhos com suor no rosto e balão diz: \"HÃ?\"",
+    "Interior de metrô vazio com bancos azuis e balão diz: \"...\"",
+    "Personagem reflete com as mãos abertas; balão: \"POR QUE ME LEMBREI DO QUE ACONTECEU NAQUELE DIA\"",
+    "Trem atravessa uma cidade à noite sob luzes urbanas, balão: \"DE REPENTE...?\"",
+    "Logotipo artístico com texto promocional sobre lançamento antecipado de capítulo em site específico.",
+    "Um poste de iluminação brilha intensamente sob o céu estrelado da noite.",
+    "Pés caminham no asfalto enquanto uma voz interna diz: \"É chato.\"",
+    "Um único passo é dado sobre o chão escuro e plano.",
+    "Uma multidão caminha na rua com balão de pensamento: \"A maioria das pessoas que andam pela rua...\"",
+    "Pessoas caminham concentradas com balão de pensamento: \"Provavelmente estão pensando em como tudo parece sem graça.\"",
+    "Personagem em pé, segurando pasta, sob texto sobre rotina diária repetitiva.",
+    "Personagem sentado em mesa de escritório, trabalhando enquanto multidão caminha na rua.",
+    "Pessoas caminham sobre faixa de pedestres sob texto sobre trabalho e promoções.",
+    "Flores e bolo de aniversário sobre mesa, alternando para personagem sentado no escritório.",
+    "Personagem com pasta parado diante de mapa do metrô, sob texto sobre rotina.",
+    "Uma trilha pontilhada com números e texto sobreposta a um ambiente urbano.",
+    "Uma folha seca repousa sobre o solo rachado com marcas de movimento.",
+    "Um pé pisa com força sobre a folha, esmagando-a completamente no chão.",
+    "O homem suspira e pergunta: \"Haa... Ahh... O quê?\" com expressão confusa.",
+    "O homem olha para o lado com expressão de dúvida e surpresa.",
+    "Um homem e uma mulher observam algo à frente e pensam: \"Aquela mulher, será que ela é...\"",
+    "A mulher olha de lado, surpresa, e pensa: \"A professora Han Sihyun?!\"",
+    "A mulher sorri levemente e olha para trás com uma interrogação na mente.",
+    "O homem diz: \"Isso me surpreendeu... É só alguém que se parece com ela.\"",
+    "Um homem nervoso, suando e corado, pensa: \"Será que é por causa do meu sonho de antes?\"",
+    "Narrador diz: \"Han Sihyun... aquela mulher foi o meu primeiro amor.\"",
+    "Narrador diz: \"Embora tenha terminado só como um primeiro amor não correspondido...\"",
+    "Jovem homem expressa nervosismo e hesitação enquanto olha para o lado.",
+    "Cena intensa entre personagens.",
+    "Cena intensa entre personagens.",
+    "Texto central sobre fundo escuro com manchas vermelhas diz: \"NÃO FOI NADA MAIS\".",
+    "Rosto em close, suando, com texto acima: \"DO QUE O MEU DESEJO FEIO E INATINGÍVEL\".",
+    "Personagem de costas, usando mochila, pensa: \"...\" e \"NO QUE DIABOS TÔ DIZENDO?\".",
+    "Perfil do personagem sorrindo levemente enquanto pensa: \"NÃO TENHO O DIREITO DE PENSAR NISSO... COM LICENÇA...\".",
+    "Personagem de perfil observa outro homem que sorri com expressão satisfeita.",
+    "Um homem se assusta com a abordagem de outro em um corredor escuro.",
+    "Homem questiona \"O-O que é isso?\" enquanto outro fala \"É só que...\" e \"Hum...\".",
+    "Homem sorridente diz: \"Eu tenho um favor... pra te pedir.\"",
+    "O homem reage confuso com uma expressão de dúvida, pensando: \"...?\".",
+    "Cena de uma rua noturna com a legenda: \"...então você quer...\".",
+    "Dois homens conversam em um beco escuro à noite. Um deles pergunta: \"Quer tirar uma foto?\", e o outro responde: \"Sim, isso mesmo.\"",
+    "Homem demonstra nervosismo ao coçar a cabeça, enquanto balão questiona: \"Tudo bem ser qualquer coisa?\"",
+    "Uma mão estendida convida alguém a seguir, enquanto o balão diz: \"Vamos lá.\"",
+    "Personagem pergunta: \"Naquele beco?\", e recebe a confirmação: \"Sim, sim, isso mesmo.\"",
+    "Homem sorri de forma ansiosa enquanto o outro o observa; balão diz: \"Talvez... não seja nada perigoso, né?\"",
+    "Homem ri, põe a mão na cabeça e diz: \"E a câmera? A-ahh- isso mesmo.\"",
+    "Homem gesticula enquanto o jovem observa e diz: \"P-por enquanto, venha aqui...\"",
+    "Jovem pensativo questiona: \"Tá mais estranho do que eu pensava. Ele nem tem uma câmera...\"",
+    "Balão com texto de suspense: \"E se tiver um ladrão de verdade esperando lá na frente?\"",
+    "Jovem com expressão preocupada e suando pensa: \"Se for esse o caso... mesmo se eu fugir agora...\"",
+    "Personagem apresenta expressão de choque absoluto com suor no rosto.",
+    "Figura caminha em um cenário noturno escuro com som de passos.",
+    "Mulher olha para frente com expressão serena enquanto diz: \"AQUI~\".",
+    "Mulher caminha enquanto diz: \"É essa mulher.\"",
+    "Close extremo em um olho arregalado, transmitindo intensa tensão.",
+    "Homem sorri e diz: \"Usando o seu próprio celular,\" enquanto encara alguém.",
+    "Pessoa suplicante diz: \"Por favor...\" em um ambiente escuro e tenso.",
+    "Pessoa ordena: \"Tire uma foto dessa mulher,\" com foco em sua figura.",
+    "Olhar atento e suor no rosto expressam grande nervosismo ou medo.",
+    "Homem parado com expressão séria e suada observa o cenário escuro.",
+    "A lua cheia ilumina a fachada de um prédio durante a noite.",
+    "Um relógio de parede indica o horário aproximado de dez para as doze.",
+    "Personagem suspira e diz: \"Haa...\" ao observar o relógio de parede.",
+    "Jovem deitado na cama olha para o celular e diz: \"Aquele foi um sonho estranho...\"",
+    "Cena intensa entre personagens, enquanto o protagonista diz: \"Pessoas estranhas...\"",
+    "Personagem deitado na cama suspira: \"Haah...\"",
+    "Retrato de família em uma moldura, com a legenda: \"Por que isso...\"",
+    "Balão de fala solitário com o texto: \"Tá acontecendo comigo?\"",
+    "Retrato de uma família sorridente em close, com a fala: \"Por que...\"",
+    "Bicicleta encostada em um corredor escuro, com a fala: \"Droga...\"",
+    "Pernas em saltos altos caminham, a saia esvoaçante compõe a cena.",
+    "Um homem deitado na cama com os braços cruzados, adormecido, reflete: \"A MINHA VIDA COM CERTEZA É ESTRANHA.\"",
+    "Uma sala escura e sombria com uma maçaneta visível, e um balão de fala com o texto: \"COISAS RUINS ACONTECERAM UMA APÓS A OUTRA.\" (Narrador).",
+    "Mulher com expressão assustada em fundo escuro.\n\"MUITAS VEZES TAMBÉM VÊM EM ONDAS.\"",
+    "Cena do manhwa",
+    "Mulher encara homem próximo enquanto caixas de texto refletem pensamentos introspectivos sobre sonhos.",
+    "Pés caminham no chão de um ambiente fechado enquanto balão pergunta: \"Quem é?\".",
+    "Personagem abre um sobretudo em um ambiente urbano durante a noite.",
+    "Homem observa por trás de uma porta entreaberta com expressão séria e atenta.",
+    "Mulher está parada em pé em um ambiente interno, olhando diretamente para frente.",
+    "Close-up do rosto de uma mulher que diz: \"Com licença.\"",
+    "Jovem pergunta, confuso: \"Você é o Sr. Joo Inhyuk? Sim... mas quem é você?\"",
+    "Mulher de cabelos longos se aproxima e diz: \"É um prazer finalmente te conhecer...\"",
+    "Um balão de fala isolado exibe o texto: \"Mestre.\"",
+    "Cena intensa entre personagens.",
+    "O texto diz: \"Eu sou sua... você me herdou do seu pai\" em balões de fala.",
+    "Um pé calça um salto alto, com o texto: \"do seu pai\" em balão de fala.",
+    "Pessoa de costas no chão, outra observa, balão diz: \"Eu sou a sua 'herança'\", o outro diz: \"??\"",
+    "Personagem masculino expressa surpresa e choque, balão diz: \"'Noh Yeseul'\".",
+    "Cena intensa entre personagens, com balão de fala dizendo: \"Esse é o meu nome\".",
+    "Personagem expressa choque extremo com suor e pergunta: \"HERANÇA?!\""
+  ],
+  "_revised": true,
+  "_editorial": {
+    "gancho": "เขาไม่ควรออกมาเลย",
+    "impactos": [
+      {
+        "fala": 6,
+        "palavra": "ทนไมได",
+        "emoji": "😶"
+      },
+      {
+        "fala": 37,
+        "palavra": "เตนแรง",
+        "emoji": "💓"
+      },
+      {
+        "fala": 49,
+        "palavra": "เงามด",
+        "emoji": "👤"
+      },
+      {
+        "fala": 69,
+        "palavra": "ชอกแรง",
+        "emoji": "😳"
+      },
+      {
+        "fala": 81,
+        "palavra": "ครอบครว",
+        "emoji": "🖼️"
+      },
+      {
+        "fala": 89,
+        "palavra": "บาคลง",
+        "emoji": "🤯"
+      },
+      {
+        "fala": 99,
+        "palavra": "ระทก",
+        "emoji": "⏳"
+      }
+    ],
+    "pergunta": "เขาซ่อนอะไรจากทุกคน?",
+    "fonte": "llm"
+  },
+  "idioma": "th"
+}

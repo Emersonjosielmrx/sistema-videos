@@ -1,0 +1,88 @@
+{
+ "pautas": [
+  {
+   "id": "msg_madrugada",
+   "tipo": "dor",
+   "ideia": "O cliente manda mensagem às onze da noite querendo horário para o dia seguinte e a Agenda IA atende e agenda direto no WhatsApp enquanto você dorme.",
+   "pergunta_cliente": "Consigo atender quem me chama de madrugada sem precisar responder na hora?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "medo_duplo_horario",
+   "tipo": "objecao",
+   "ideia": "O receio de colocar dois clientes no mesmo horário acaba porque a IA faz agendamentos automáticos sem conflito e sem duplo agendamento.",
+   "pergunta_cliente": "Não corre o risco da inteligência artificial marcar duas pessoas no mesmo horário?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "custo_recepcao",
+   "tipo": "caso_de_uso",
+   "ideia": "Consultórios que gastam dois mil e quinhentos por mês com recepção humana passam a ter atendimento automático vinte e quatro horas a partir de cento e noventa e nove.",
+   "pergunta_cliente": "Vale a pena trocar ou complementar a recepção com a IA?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "desistencia_ultima_hora",
+   "tipo": "dor",
+   "ideia": "Quando um paciente desiste em cima da hora, a IA reagenda sozinha direto pelo WhatsApp sem deixar a cadeira vazia.",
+   "pergunta_cliente": "A IA consegue remarcar o cliente que pediu para mudar o dia?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "configuracao_dificil",
+   "tipo": "objecao",
+   "ideia": "Mesmo sem entender de tecnologia, o dono do salão consegue agendamentos automáticos com IA direto no WhatsApp do próprio negócio.",
+   "pergunta_cliente": "Preciso entender de tecnologia para colocar isso no meu negócio?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "barbearia_atendimento_pausa",
+   "tipo": "antes_depois",
+   "ideia": "Antes o barbeiro parava o corte para responder mensagens; agora a Agenda IA cuida de tudo no WhatsApp sem conflitos de horário.",
+   "pergunta_cliente": "Vou conseguir trabalhar sem ter que parar toda hora para responder mensagem?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "ia_fala_estranho",
+   "tipo": "objecao",
+   "ideia": "Muitos acham que o atendimento fica robotizado, mas a IA agenda direto no WhatsApp de forma natural e sem gerar conflito.",
+   "pergunta_cliente": "O atendimento pelo WhatsApp parece muito artificial para o cliente?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "fluxo_reagendamento",
+   "tipo": "como_funciona",
+   "ideia": "O cliente avisa que teve um imprevisto e a própria IA faz o reagendamento automático direto pelo WhatsApp sem você intervir.",
+   "pergunta_cliente": "O que acontece quando o cliente avisa que não pode ir naquele horário?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "perda_mensagens_pico",
+   "tipo": "dor",
+   "ideia": "Em horários de pico onde é impossível responder todo mundo, os agendamentos automáticos com IA evitam filas e perdas de clientes.",
+   "pergunta_cliente": "O que acontece se vários clientes mandarem mensagem ao mesmo tempo querendo marcar?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "clinica_sem_atraso",
+   "tipo": "antes_depois",
+   "ideia": "Antes a clínica perdia consultas por falta de confirmação manual; agora a IA confirma e reagenda sozinha direto pelo WhatsApp.",
+   "pergunta_cliente": "Vou conseguir diminuir os buracos na agenda por esquecimento dos clientes?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "cliente_idoso_zap",
+   "tipo": "objecao",
+   "ideia": "Por funcionar diretamente no WhatsApp sem links complicados, qualquer perfil de cliente consegue agendar com a IA de forma simples.",
+   "pergunta_cliente": "Meus clientes que não sabem mexer em aplicativos vão conseguir agendar?",
+   "criada": "2026-11-03T13:00:46"
+  },
+  {
+   "id": "passo_confirmacao_ia",
+   "tipo": "como_funciona",
+   "ideia": "A IA agenda, confirma e reagenda de forma autônoma na conversa do WhatsApp, eliminando o trabalho braçal da recepção.",
+   "pergunta_cliente": "Como a inteligência artificial cuida da confirmação dos horários marcados?",
+   "criada": "2026-11-03T13:00:46"
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "modelo": "argon-pro",
+ "segundos": 31,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Proibir terminantemente erros de digitação e termos inexistentes (como 'socomando') em títulos e legendas.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "Nos Shorts sem-obra-c853c4 e sem-obra-110e14, a tarja central branca foi colocada sem nenhuma legenda queimada da fonte por baixo, cobrindo o rosto dos personagens em q01, q04, q08 e q16. Além disso, em sem-obra-110e14 o título superior apresentou erro crasso ('SOCOMANDO').",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Proibir terminantemente erros de digitação e termos inexistentes (como 'socomando') em títulos e legendas.",
+    "porque": "O júri apontou erro grotesco no Short sem-obra-110e14_cap1_20261027."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Ajustar validação de tarja para exigir comprovação de hardsub por visão ou log",
+    "tipo": "CERTEZA",
+    "prova": "Júri apontou tarjas centrais sem legenda da fonte em sem-obra-c853c4 e sem-obra-110e14.",
+    "onde": "pipeline de tarjas / gerador de cortes",
+    "como_testar": "Verificar se o short gerado omite a tarja central quando o log de visão indicar 0 legendas na faixa."
+   }
+  ],
+  "mural": [
+   "Linha CORTES reforçando o rigor contra tarjas em áreas sem legenda da fonte e erros ortográficos em títulos."
+  ]
+ }
+}

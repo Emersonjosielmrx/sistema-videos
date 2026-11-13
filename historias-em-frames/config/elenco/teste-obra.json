@@ -1,0 +1,26 @@
+{
+ "_leia": "Vozes fixas desta obra (bin/elenco.py). Pode editar à mão: edge = {voice, rate, pitch} (vozes em EDGE_F/EDGE_M; PROIBIDAS: Antonio, Francisca, Isabella); gemini = nome da voz. papel: protagonista | par | personagem | figurante. apelidos = outros nomes que a IA usa.",
+ "obra": "teste-obra",
+ "narrador": {
+  "genero": "F",
+  "edge": {
+   "voice": "en-US-EmmaMultilingualNeural",
+   "rate": "+5%",
+   "pitch": "+0Hz"
+  },
+  "gemini": "Kore"
+ },
+ "personagens": {
+  "Protagonista": {
+   "papel": "personagem",
+   "genero": "M",
+   "apelidos": [],
+   "edge": {
+    "voice": "en-US-AndrewMultilingualNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz"
+   },
+   "gemini": "Sadachbia"
+  }
+ }
+}

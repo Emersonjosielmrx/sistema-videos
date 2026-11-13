@@ -1,0 +1,107 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-39-25.mp4",
+ "duration": 30.666667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 715,
+  "has_webcam": true,
+  "contrast": 47.3,
+  "trimmed": {},
+  "divider": 363,
+  "webcam": [
+   0,
+   0,
+   720,
+   363
+  ],
+  "content": [
+   0,
+   363,
+   715,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": false,
+  "score": 2,
+  "reason": "Gravação quase vazia: só 3 frases repetidas ('vendeu moleque') sem contexto, sem reação real e sem conteúdo reagido audível.",
+  "topic": "react genérico sem conteúdo identificável",
+  "channel": "inventoreact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 30.666667,
+    "hook": "VENDEU MOLEQUE OU NÃO?",
+    "title": "Será que vendeu mesmo? 😱 Reagindo ao impossível #shorts #react",
+    "description": "O criador reage e repete 'vendeu moleque' sem parar — mas o que ele tá vendo?\nVocê consegue adivinhar?\nComenta aí e segue pra mais reacts!\n\n#shorts #react #vendeu #moleque #reação #viral #reagindo #humor #curioso #entretenimento",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#vendeu",
+     "#reação",
+     "#viral",
+     "#humor"
+    ],
+    "tags": [
+     "react",
+     "vendeu moleque",
+     "reação",
+     "reagindo",
+     "shorts",
+     "viral",
+     "humor",
+     "entretenimento",
+     "react brasileiro",
+     "react br",
+     "moleque",
+     "surpresa"
+    ],
+    "keywords": [
+     {
+      "t": 16.0,
+      "text": "VENDEU",
+      "emoji": "🤯"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 16.0,
+      "type": "shock"
+     }
+    ],
+    "memes": [],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Será que vendeu mesmo ou não? Comenta aí!",
+    "title_alternatives": [
+     "Vendeu moleque?! 😳 Essa reação diz tudo #shorts #react",
+     "Ele não acreditou no que viu 🤯 Vendeu moleque! #shorts #react"
+    ],
+    "mood": "neutral_chill",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 18.0,
+    "end": 20.0,
+    "why": "Repetição exata da frase anterior (retake de 'vendeu moleque')"
+   },
+   {
+    "start": 28.62,
+    "end": 30.62,
+    "why": "Terceira repetição de 'vendeu moleque' após silêncio longo, sem contexto novo"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "inventoreact",
+ "outputs": [],
+ "status": "rejected"
+}

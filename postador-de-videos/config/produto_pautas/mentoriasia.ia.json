@@ -1,0 +1,144 @@
+{
+ "pautas": [
+  {
+   "id": "tarefas_manuais_rotina",
+   "tipo": "dor",
+   "ideia": "O dono da empresa passa horas copiando dados e respondendo mensagens repetitivas, mas pode aprender a criar automações com IA usando o treinamento de Vibe Coding.",
+   "pergunta_cliente": "Como eu faço para parar de perder tempo com tarefas repetitivas?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "sem_saber_programar",
+   "tipo": "objecao",
+   "ideia": "Quem não entende de programação acha que não consegue automatizar a rotina, mas o treinamento de Vibe Coding ensina a montar automações com IA mesmo sem saber código.",
+   "pergunta_cliente": "Preciso saber programar para automatizar os processos da minha empresa?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "entregas_treinamento",
+   "tipo": "como_funciona",
+   "ideia": "O empresário quer saber como aplicar IA na prática e recebe treinamento de Vibe Coding, consultoria de otimização, pack de prompts validados e mapa mental.",
+   "pergunta_cliente": "O que vem incluído no treinamento e mentoria de IA?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "atendimento_lento",
+   "tipo": "caso_de_uso",
+   "ideia": "A equipe demora para responder mensagens de clientes e o negócio resolve isso aprendendo a criar automações com IA com base nos prompts validados.",
+   "pergunta_cliente": "Dá para automatizar as respostas dos clientes com IA?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "prompts_eficientes",
+   "tipo": "pergunta_frequente",
+   "ideia": "O empreendedor tenta usar IA mas só recebe respostas ruins, e resolve isso usando o pack de prompts validados da mentoria.",
+   "pergunta_cliente": "Por que a IA não me entrega as respostas que eu preciso?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "rotina_desorganizada_processos",
+   "tipo": "antes_depois",
+   "ideia": "O negócio sai de uma operação confusa e cheia de retrabalho para processos organizados com automações próprias e mapa mental.",
+   "pergunta_cliente": "Como organizar meus processos internos com inteligência artificial?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "medo_ferramentas_complexas",
+   "tipo": "objecao",
+   "ideia": "O gestor tem receio de não conseguir usar ferramentas de IA sozinho, mas conta com a consultoria de otimização para guiar a implementação.",
+   "pergunta_cliente": "Vou ter suporte para aplicar isso na prática no meu negócio?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "organizacao_fluxo_trabalho",
+   "tipo": "como_funciona",
+   "ideia": "O empresário aprende a estruturar suas ideias e fluxos de trabalho usando o mapa mental antes de colocar as automações para rodar.",
+   "pergunta_cliente": "Como planejar o que deve ser automatizado na minha empresa?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "gargalo_operacional",
+   "tipo": "dor",
+   "ideia": "A operação trava toda vez que o volume de clientes aumenta, situação resolvida ao montar suas próprias automações com IA através do Vibe Coding.",
+   "pergunta_cliente": "Minha operação não dá conta da demanda, a IA resolve isso?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "otimizacao_processo_atual",
+   "tipo": "caso_de_uso",
+   "ideia": "A empresa já tem fluxos existentes mas lentos e recebe consultoria de otimização para identificar onde aplicar automações com IA.",
+   "pergunta_cliente": "Vocês avaliam o que pode ser melhorado nos meus processos atuais?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "dificuldade_escrever_comandos",
+   "tipo": "dor",
+   "ideia": "O profissional perde tempo tentando descobrir o que digitar na IA, usando o pack de prompts validados para obter resultados imediatos.",
+   "pergunta_cliente": "Vocês já entregam os comandos prontos para usar na IA?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "dependencia_de_terceiros",
+   "tipo": "antes_depois",
+   "ideia": "Em vez de depender de desenvolvedores caros para qualquer melhoria, o dono aprende Vibe Coding e passa a criar suas próprias automações.",
+   "pergunta_cliente": "Consigo criar minhas automações sem depender de um programador?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "tempo_para_implementar",
+   "tipo": "pergunta_frequente",
+   "ideia": "O dono do negócio quer saber o que precisa fazer para começar e descobre o passo a passo com o mapa mental e a consultoria de otimização.",
+   "pergunta_cliente": "Como funciona o passo a passo da consultoria para minha empresa?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "ia_generica_demais",
+   "tipo": "objecao",
+   "ideia": "O empresário acha que IA é apenas um chat comum, mas aprende no Vibe Coding a integrá-la em fluxos de automação para o seu dia a dia.",
+   "pergunta_cliente": "A IA serve para automatizar rotinas ou só gera textos?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "triagem_pedidos_mensagens",
+   "tipo": "caso_de_uso",
+   "ideia": "O negócio perde vendas por demorar na triagem inicial de contatos e resolve o problema montando automações com IA.",
+   "pergunta_cliente": "Como usar IA para agilizar o primeiro contato com o cliente?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "processos_descentralizados",
+   "tipo": "dor",
+   "ideia": "As informações da empresa ficam espalhadas em vários lugares, e o gestor usa o mapa mental e as automações para conectar a rotina de trabalho.",
+   "pergunta_cliente": "Como juntar as informações do meu negócio usando automações?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "duvida_sobre_vibe_coding",
+   "tipo": "pergunta_frequente",
+   "ideia": "O empreendedor não sabe o que é Vibe Coding e aprende como essa metodologia permite criar automações com IA de forma acessível.",
+   "pergunta_cliente": "O que é Vibe Coding e como isso ajuda minha empresa?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "ajuste_fino_operacao",
+   "tipo": "como_funciona",
+   "ideia": "O cliente recebe a consultoria de otimização para alinhar os prompts validados diretamente às necessidades específicas do seu negócio.",
+   "pergunta_cliente": "A consultoria me ajuda a adaptar os prompts para o meu nicho?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "sobrecarga_da_equipe",
+   "tipo": "dor",
+   "ideia": "A equipe vive sobrecarregada com tarefas burocráticas e passa a produzir mais após o dono aprender a criar automações com IA.",
+   "pergunta_cliente": "Como diminuir a sobrecarga de trabalho da minha equipe com IA?",
+   "criada": "2026-10-30T13:06:18"
+  },
+  {
+   "id": "autonomia_digital",
+   "tipo": "antes_depois",
+   "ideia": "A empresa sai do zero em tecnologia para a capacidade de montar automações com IA por conta própria através do treinamento.",
+   "pergunta_cliente": "Eu mesmo serei capaz de manter e criar novas automações depois?",
+   "criada": "2026-10-30T13:06:18"
+  }
+ ]
+}

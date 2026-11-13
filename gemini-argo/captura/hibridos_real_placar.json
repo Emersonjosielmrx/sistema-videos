@@ -1,0 +1,249 @@
+{
+ "gemini-4-argon": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 94,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 14,
+   "total": 15,
+   "tempo": 126,
+   "turnos": 5,
+   "erro": "",
+   "falhas": [
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 457,
+   "turnos": 12,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-socorro-gemini": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 328,
+   "turnos": 8,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 15,
+   "total": 15,
+   "tempo": 109,
+   "turnos": 5,
+   "erro": "",
+   "falhas": []
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 799,
+   "turnos": 11,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-maos-gemini": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 157,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 15,
+   "total": 15,
+   "tempo": 224,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 178,
+   "turnos": 4,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-plano-gemini": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 372,
+   "turnos": 17,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 11,
+   "total": 15,
+   "tempo": 263,
+   "turnos": 31,
+   "erro": "error_max_turns",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2.3M views') == 2300000",
+    "n('1.5K views') == 1500",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 409,
+   "turnos": 31,
+   "erro": "error_max_turns",
+   "falhas": []
+  }
+ },
+ "hx-revisor-gemini": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 416,
+   "turnos": 18,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 11,
+   "total": 15,
+   "tempo": 226,
+   "turnos": 31,
+   "erro": "error_max_turns",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2.3M views') == 2300000",
+    "n('1.5K views') == 1500",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "microcortes": {
+   "ok": 0,
+   "total": 11,
+   "tempo": 196,
+   "turnos": 31,
+   "erro": "error_max_turns",
+   "falhas": [
+    "prep: \n  File \"D:\\gemini-argo\\captura\\hibridos_real\\microcortes\\hx-revisor-gemini\\_conferir.py\", line 7, in <module>\n    exec(compile(PREP, \"prep\", \"exec\"), ns)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"prep\", line 34, in <module>\nAttributeError: module 'narracao' has no attribute 'microcortes'\n"
+   ]
+  }
+ },
+ "hx-erro-gemini": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 127,
+   "turnos": 15,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 11,
+   "total": 15,
+   "tempo": 253,
+   "turnos": 31,
+   "erro": "error_max_turns",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2.3M views') == 2300000",
+    "n('1.5K views') == 1500",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 611,
+   "turnos": 30,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "agy/gemini-3.8-flash-high": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 169,
+   "turnos": 22,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 11,
+   "total": 15,
+   "tempo": 248,
+   "turnos": 31,
+   "erro": "error_max_turns",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2.3M views') == 2300000",
+    "n('1.5K views') == 1500",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "microcortes": {
+   "ok": 0,
+   "total": 11,
+   "tempo": 1200,
+   "turnos": null,
+   "erro": "timeout 20 min",
+   "falhas": [
+    "prep: \"D:\\gemini-argo\\captura\\hibridos_real\\microcortes\\agy_gemini-3.8-flash-high\\_conferir.py\", line 7, in <module>\n    exec(compile(PREP, \"prep\", \"exec\"), ns)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"prep\", line 34, in <module>\nAttributeError: module 'narracao' has no attribute 'microcortes'\n"
+   ]
+  }
+ },
+ "argon-flash": {
+  "fila_agendado": {
+   "ok": 5,
+   "total": 11,
+   "tempo": 1200,
+   "turnos": null,
+   "erro": "timeout 20 min",
+   "falhas": [
+    "ok([h(-5), h(24 * 6)]) is True",
+    "ok([h(24 * 3)]) is True",
+    "ok([h(-30), h(48)]) is True",
+    "ok([h(-6), h(-3), h(2)], teto=4) is True",
+    "ok([h(-3)], agora=h(-6)) is True"
+   ]
+  },
+  "numero_yt": {
+   "ok": 11,
+   "total": 15,
+   "tempo": 1200,
+   "turnos": null,
+   "erro": "timeout 20 min",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2.3M views') == 2300000",
+    "n('1.5K views') == 1500",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "microcortes": {
+   "ok": 0,
+   "total": 11,
+   "tempo": 1200,
+   "turnos": null,
+   "erro": "timeout 20 min",
+   "falhas": [
+    "prep: last):\n  File \"D:\\gemini-argo\\captura\\hibridos_real\\microcortes\\argon-flash\\_conferir.py\", line 7, in <module>\n    exec(compile(PREP, \"prep\", \"exec\"), ns)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"prep\", line 34, in <module>\nAttributeError: module 'narracao' has no attribute 'microcortes'\n"
+   ]
+  }
+ }
+}

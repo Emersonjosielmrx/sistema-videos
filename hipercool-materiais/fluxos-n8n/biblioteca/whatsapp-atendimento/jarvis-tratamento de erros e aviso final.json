@@ -1,0 +1,2491 @@
+{
+ "name": "jarvis-tratamento de erros e aviso final",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "279bf011-9549-4bf4-8e26-91489c8713b8",
+   "name": "ativado_pelo_erro",
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -432,
+    288
+   ]
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.prompt }}\n{{ $json.system_message }}\nErro no fluxo: {{ $(\"ativado_pelo_erro\").item.json.workflow.name }}\\nMensagem de erro: {{ $(\"ativado_pelo_erro\").item.json.execution.error.message }}\\nStack Trace: {{ $(\"ativado_pelo_erro\").item.json.execution.error.stack }}\\nÚltimo nó: {{ $(\"ativado_pelo_erro\").item.json.execution.lastNodeExecuted }}\\n\\nAnalise os detalhes desse erro.",
+    "hasOutputParser": true,
+    "options": {
+     "systemMessage": "={{ $json.system_message }}"
+    }
+   },
+   "id": "1acd1ac3-b59d-4084-8b86-fe05bbe455b0",
+   "name": "JarvisDecisor",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    80,
+    288
+   ]
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.output.action }}",
+          "rightValue": "DISABLE",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "8e71170e-590f-493b-8b06-b04026bd4309"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "Disable Flow"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "id": "5ce04040-15c6-4b89-b9bd-c8a91b64672d",
+          "leftValue": "={{ $('contador de erros').item.json['captura de grupos p got ver'] }}",
+          "rightValue": 5,
+          "operator": {
+           "type": "number",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "exesso de erros"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.output.action }}",
+          "rightValue": "RESTART_VPS",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "ccc8252b-2390-454b-8359-4e5dedf57164"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "Restart VPS"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.output.action }}",
+          "rightValue": "CLEAR_CACHE",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "169fc508-144b-417c-9869-7564f40dc68c"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "Clear Cache"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.output.retry }}",
+          "rightValue": true,
+          "operator": {
+           "type": "boolean",
+           "operation": "equals"
+          },
+          "id": "0e1f43cc-afc4-4731-9fa1-184df72a244c"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "Retry Execution"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "id": "6191ea19-34bd-47df-982d-9cfd30ec09d2",
+   "name": "RouteAction",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.4,
+   "position": [
+    336,
+    224
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "deactivate",
+    "workflowId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "={{ $(\"ativado_pelo_erro\").item.json.workflow.id }}"
+    },
+    "requestOptions": {}
+   },
+   "id": "d35713bc-167b-4b58-8889-c5499fe53f28",
+   "name": "DeactivateWorkflow",
+   "type": "n8n-nodes-base.n8n",
+   "typeVersion": 1,
+   "position": [
+    752,
+    128
+   ],
+   "credentials": {
+    "n8nApi": {
+     "id": "qMPcuUwexJCpC61i",
+     "name": "n8n account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('busca_jarvis_config').item.json.url_wuzapi }}/chat/send/text ",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('busca_jarvis_config').item.json.token_wuzapi }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('busca_jarvis_config').item.json.adm }}"
+      },
+      {
+       "name": "Body",
+       "value": "=🚨 *Autocura JARVIS ({{ $(\"JarvisDecisor\").item.json.output?.level || \"WARNING\" }})*\\nO(A) fluxo *{{ $(\"ativado_pelo_erro\").item.json.workflow.name }}* teve um erro.\\n\\n*Ação Tomada:* {{ $(\"JarvisDecisor\").item.json.output?.action || \"NONE\" }}\\n*Diagnóstico:* {{ $(\"JarvisDecisor\").item.json.output?.solution || \"Erro genérico\" }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "54b8b2da-9b65-4064-b27c-634f27a786ae",
+   "name": "WUZAP_Notify_Admin",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    896,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('busca_jarvis_config').item.json.url_wuzapi }}/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('busca_jarvis_config').item.json.token_wuzapi }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('busca_jarvis_config').item.json.dev }}"
+      },
+      {
+       "name": "Body",
+       "value": "=🚨 *Autocura JARVIS ({{ $(\"JarvisDecisor\").item.json.output?.level || \"WARNING\" }})*\\nO(A) fluxo *{{ $(\"ativado_pelo_erro\").item.json.workflow.name }}* teve um erro.\\n\\n*Ação Tomada:* {{ $(\"JarvisDecisor\").item.json.output?.action || \"NONE\" }}\\n*Diagnóstico:* {{ $(\"JarvisDecisor\").item.json.output?.solution || \"Erro genérico\" }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "fdc57262-23f7-4142-a139-82cfd6c83eeb",
+   "name": "WUZAP_Notify_Dev",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1072,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "command": "sudo reboot"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    752,
+    272
+   ],
+   "id": "1d325ea6-6728-4abe-8a3f-5d99d9b137ed",
+   "name": "Execute a command",
+   "credentials": {
+    "sshPassword": {
+     "id": "Ak1qrzt01yCEr238",
+     "name": "SSH Password account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "fdeb7e4b-843f-487d-a04e-aa5375566018",
+       "name": "UrlPortainer",
+       "value": "https://painel5.inovareinteligenciaartificial.com",
+       "type": "string"
+      },
+      {
+       "id": "e990450f-0865-4b65-8eb4-a23ed029470e",
+       "name": "LoginPortainer",
+       "value": "admin",
+       "type": "string"
+      },
+      {
+       "id": "15def61f-7b6a-4a0b-953d-c3da4e714f01",
+       "name": "SenhaPortainer",
+       "value": "sW5pgAG9obRu@",
+       "type": "string"
+      },
+      {
+       "id": "70698868-e49d-41e9-ae4e-0080f8abdba9",
+       "name": "stackdopotgres",
+       "value": "postgres2",
+       "type": "string"
+      },
+      {
+       "id": "60a62a54-763d-4510-829d-cea0d79e4ac7",
+       "name": "url_wuzapi",
+       "value": "https://wuzapi.inovareinteligenciaartificial.com",
+       "type": "string"
+      },
+      {
+       "id": "b7c33ea9-9e9d-4e2b-92fe-7c1dc693e443",
+       "name": "Token_wuzapi",
+       "value": "poco-norm2",
+       "type": "string"
+      },
+      {
+       "id": "c4b7b5aa-57e9-4596-9048-b7de8c0acb01",
+       "name": "adm",
+       "value": "559184698653",
+       "type": "string"
+      },
+      {
+       "id": "c281f4f0-1253-4ef6-a39c-bd32199ce9c7",
+       "name": "dev",
+       "value": "5522998908709",
+       "type": "string"
+      },
+      {
+       "id": "681c95ba-f6f6-4dad-b9f9-24eab3db02b8",
+       "name": "prompt",
+       "value": "=Analise os detalhes desse erro.",
+       "type": "string"
+      },
+      {
+       "id": "b5f9b911-659e-4206-835c-f71c97893e20",
+       "name": "system_message",
+       "value": "Sua tarefa é agir como o núcleo de autocura (Jarvis). Retorne apenas um objeto JSON com os seguintes campos estruturados:\n- action: Pode ser um dos valores [\"NONE\", \"DISABLE\", \"RESTART_VPS\", \"CLEAR_CACHE\"] (Se for um erro crítico estrutural/looping recomende DISABLE. Se faltar disco CLEAR_CACHE, etc).\n- level: [\"WARNING\", \"MEDIUM\", \"CRITICAL\"]\n- solution: Uma breve frase sobre como resolver.\n- retry: (boolean) True se voce recomenda tentar de novo depois (ex: timeout)",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -208,
+    112
+   ],
+   "id": "2fe1e564-efdc-454a-b879-756b7b065846",
+   "name": "dados"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('busca_jarvis_config').item.json.url_portainer }}/api/auth",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"username\": \"{{ $('busca_jarvis_config').item.json.login_portainer }}\",\n  \"password\": \"{{ $('busca_jarvis_config').item.json.senha_portainer }}\"\n}\n",
+    "options": {}
+   },
+   "id": "873d61e4-233a-4f8e-812e-e57fe54a25f3",
+   "name": "Paga Token",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    752,
+    416
+   ]
+  },
+  {
+   "parameters": {
+    "url": "={{ $('busca_jarvis_config').item.json.url_portainer }}/api/endpoints/1/docker/containers/json?all=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    896,
+    496
+   ],
+   "id": "01de00fa-0103-47c5-a39c-c93751fc86af",
+   "name": "Busca Conteineres Vazios"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.State }}",
+       "rightValue": "exited",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    1072,
+    496
+   ],
+   "id": "b28a12cb-eae7-492c-b727-c062cfb24b35",
+   "name": "Filtra Conteineres Vazios"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    1264,
+    496
+   ],
+   "id": "a87a2dda-2052-467f-bd79-d6b37e9d3076",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "={{ $('busca_jarvis_config').item.json.url_portainer }}/api/endpoints/1/docker/containers/{{ $json.Id }}?force=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1472,
+    512
+   ],
+   "id": "15cf043b-b2ba-4c26-a8a2-8efe59de8576",
+   "name": "Deleta Conteiner Vazio"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('busca_jarvis_config').item.json.url_portainer }}/api/docker/1/images?withUsage=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    896,
+    656
+   ],
+   "id": "92c4e093-58ef-47cf-a5ee-5da2ea5f131a",
+   "name": "Busca Imagens"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.used }}",
+       "rightValue": "exited",
+       "operator": {
+        "type": "boolean",
+        "operation": "false",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    1072,
+    656
+   ],
+   "id": "a6ed2d84-1521-49c4-b6f1-d085808a7054",
+   "name": "Filtra imagens não usadas"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    1264,
+    656
+   ],
+   "id": "b52d0d8e-75f8-494f-aa96-2df65b62c8ce",
+   "name": "Loop Over Items1"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "={{ $('busca_jarvis_config').item.json.url_portainer }}/api/endpoints/1/docker/images/{{ $json.id }}?force=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1472,
+    672
+   ],
+   "id": "e0852a35-1235-4b69-8718-b1ea18888ff6",
+   "name": "Deleta imagem não usada"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('busca_jarvis_config').item.json.url_portainer }}/api/endpoints/1/docker/containers/json?all=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    880,
+    816
+   ],
+   "id": "3f26e900-b372-4de0-be69-3af5ae9594fe",
+   "name": "Busca Conteineres Vazios1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.Labels['com.docker.stack.namespace'] }}",
+       "rightValue": "={{ $('busca_jarvis_config').item.json.stack_postgres }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      },
+      {
+       "id": "71e7c7e8-4837-479a-8101-af4a0121bb8d",
+       "leftValue": "={{ $json.State }}",
+       "rightValue": "running",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    1056,
+    816
+   ],
+   "id": "a113fceb-c85c-42db-9390-cebb72c4b40b",
+   "name": "Filtra Conteineres Vazios1"
+  },
+  {
+   "parameters": {
+    "command": "=docker exec {{ $json.Labels['com.docker.swarm.task.name'] }} \\\npsql -U postgres -d n8n_queue -c \"TRUNCATE TABLE execution_data;\""
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    1248,
+    816
+   ],
+   "id": "1b464ef1-60a7-497b-9b72-07fc3a0dba46",
+   "name": "Execute a command1",
+   "credentials": {
+    "sshPassword": {
+     "id": "Ak1qrzt01yCEr238",
+     "name": "SSH Password account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "command": "=docker exec {{ $('Filtra Conteineres Vazios1').item.json.Labels['com.docker.swarm.task.name'] }} \\\npsql -U postgres -d n8n_queue -c \"VACUUM FULL execution_data;\""
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    1456,
+    816
+   ],
+   "id": "4b54d168-7f10-4670-929c-ff9feeae78f0",
+   "name": "Execute a command2",
+   "credentials": {
+    "sshPassword": {
+     "id": "Ak1qrzt01yCEr238",
+     "name": "SSH Password account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE IF NOT EXISTS jarvis_config (\n    id SERIAL PRIMARY KEY,\n    \n    url_portainer TEXT NOT NULL,\n    login_portainer VARCHAR(100) NOT NULL,\n    senha_portainer TEXT NOT NULL,\n    \n    stack_postgres VARCHAR(100) NOT NULL,\n    \n    url_wuzapi TEXT NOT NULL,\n    token_wuzapi TEXT NOT NULL,\n    \n    adm VARCHAR(20),\n    dev VARCHAR(20),\n    \n    prompt TEXT NOT NULL,\n    system_message TEXT NOT NULL,\n    \n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    32,
+    112
+   ],
+   "id": "7f00449c-82a5-4138-8ad5-11a6743dbdfd",
+   "name": "criar_tabela",
+   "credentials": {
+    "postgres": {
+     "id": "6j2swNMgB2dLLqsT",
+     "name": "Postgres account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "jarvis_config",
+     "mode": "list",
+     "cachedResultName": "jarvis_config"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "url_portainer": "={{ $json.UrlPortainer }}",
+      "login_portainer": "={{ $json.LoginPortainer }}",
+      "senha_portainer": "<SEGREDO_REMOVIDO>",
+      "stack_postgres": "={{ $json.stackdopotgres }}",
+      "url_wuzapi": "={{ $json.url_wuzapi }}",
+      "token_wuzapi": "<SEGREDO_REMOVIDO>",
+      "adm": "={{ $json.adm }}",
+      "dev": "={{ $json.dev }}",
+      "created_at": "={{ $now }}",
+      "updated_at": "={{ $now }}",
+      "prompt": "={{ $json.prompt }}",
+      "system_message": "={{ $json.system_message }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "url_portainer",
+       "displayName": "url_portainer",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "login_portainer",
+       "displayName": "login_portainer",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "senha_portainer",
+       "displayName": "senha_portainer",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "stack_postgres",
+       "displayName": "stack_postgres",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "url_wuzapi",
+       "displayName": "url_wuzapi",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "adm",
+       "displayName": "adm",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "dev",
+       "displayName": "dev",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "prompt",
+       "displayName": "prompt",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "system_message",
+       "displayName": "system_message",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "updated_at",
+       "displayName": "updated_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -96,
+    112
+   ],
+   "id": "9e0cf6ff-fd06-4b43-9838-066f0a06c6b1",
+   "name": "criar_tabela1",
+   "credentials": {
+    "postgres": {
+     "id": "6j2swNMgB2dLLqsT",
+     "name": "Postgres account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "jarvis_config",
+     "mode": "list",
+     "cachedResultName": "jarvis_config"
+    },
+    "limit": 1,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -64,
+    288
+   ],
+   "id": "0bb764f7-537b-48f9-bbc2-c588284f6032",
+   "name": "busca_jarvis_config",
+   "credentials": {
+    "postgres": {
+     "id": "6j2swNMgB2dLLqsT",
+     "name": "Postgres account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -272,
+    1440
+   ],
+   "typeVersion": 1,
+   "id": "bf06bc0a-5456-486a-bd9b-d87ce306edcf"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"light\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Jarvis Ops | Painel de Controle Autocura</title>\n    \n    <link href=\"https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css\" rel=\"stylesheet\">\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap\" rel=\"stylesheet\">\n    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n\n    <style>\n        :root { \n            --bg-body: #f8fafc; \n            --bg-card: #ffffff; \n            --text-main: #0f172a; \n            --text-muted: #64748b;\n            --accent-primary: #dc2626;\n            --accent-glow: rgba(220, 38, 38, 0.4);\n            --border-color: #e2e8f0;\n            --glass-bg: rgba(255, 255, 255, 0.85);\n        }\n        \n        html.dark { \n            --bg-body: #020617; \n            --bg-card: #0f172a; \n            --text-main: #f8fafc; \n            --text-muted: #94a3b8;\n            --accent-primary: #ef4444; \n            --accent-glow: rgba(239, 68, 68, 0.2);\n            --border-color: #1e293b;\n            --glass-bg: rgba(15, 23, 42, 0.85);\n        }\n\n        body { \n            font-family: 'Inter', sans-serif; \n            background-color: var(--bg-body); \n            color: var(--text-main); \n            transition: background-color 0.3s ease, color 0.3s ease;\n        }\n\n        ::-webkit-scrollbar { width: 8px; height: 8px; }\n        ::-webkit-scrollbar-track { background: var(--bg-body); }\n        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }\n        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }\n\n        .glass-nav {\n            background: var(--glass-bg);\n            backdrop-filter: blur(12px);\n            -webkit-backdrop-filter: blur(12px);\n            border-bottom: 1px solid var(--border-color);\n        }\n\n        .master-card {\n            background: var(--bg-card);\n            border-radius: 1.25rem;\n            border: 1px solid var(--border-color);\n            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);\n            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n            position: relative;\n            overflow: hidden;\n            margin-bottom: 1.5rem;\n        }\n        .master-card:hover {\n            transform: translateY(-4px);\n            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);\n            border-color: var(--accent-glow);\n        }\n\n        .view-compact .master-card {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            padding: 1rem;\n            margin-bottom: 0.5rem;\n        }\n        .view-compact .section-box { display: none; }\n\n        .label { \n            font-size: 0.65rem; \n            font-weight: 800; \n            text-transform: uppercase; \n            letter-spacing: 0.05em; \n            color: var(--text-muted); \n            margin-bottom: 0.25rem; \n            display: flex;\n            align-items: center;\n            gap: 0.25rem;\n        }\n        .value { font-size: 0.875rem; font-weight: 600; word-break: break-all; }\n\n        .code-block {\n            background: rgba(0,0,0,0.03);\n            border: 1px solid var(--border-color);\n            padding: 1rem;\n            border-radius: 0.75rem;\n            font-family: 'JetBrains Mono', monospace;\n            font-size: 0.75rem;\n            color: var(--text-main);\n            white-space: pre-wrap;\n            line-height: 1.5;\n            position: relative;\n        }\n        html.dark .code-block { background: rgba(0,0,0,0.2); }\n        \n        .copy-btn {\n            position: absolute;\n            top: 0.5rem;\n            right: 0.5rem;\n            background: var(--bg-card);\n            border: 1px solid var(--border-color);\n            border-radius: 0.25rem;\n            padding: 0.25rem 0.5rem;\n            font-size: 0.6rem;\n            cursor: pointer;\n            opacity: 0.7;\n            transition: opacity 0.2s;\n        }\n        .copy-btn:hover { opacity: 1; }\n\n        .badge { padding: 0.15rem 0.5rem; border-radius: 0.375rem; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }\n        .badge-red { background: rgba(220, 38, 38, 0.1); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.2); }\n        .badge-blue { background: rgba(37, 99, 235, 0.1); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.2); }\n        .badge-green { background: rgba(22, 163, 74, 0.1); color: #16a34a; border: 1px solid rgba(22, 163, 74, 0.2); }\n        .badge-amber { background: rgba(217, 119, 6, 0.1); color: #d97706; border: 1px solid rgba(217, 119, 6, 0.2); }\n\n        html.dark .badge-red { color: #f87171; }\n        html.dark .badge-blue { color: #60a5fa; }\n        html.dark .badge-green { color: #4ade80; }\n        html.dark .badge-amber { color: #fbbf24; }\n\n        .pulse-ring { animation: pulse-ring-anim 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }\n        @keyframes pulse-ring-anim {\n            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }\n            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }\n            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }\n        }\n\n        .fade-in-up { animation: fadeInUp 0.4s ease-out forwards; opacity: 0; transform: translateY(10px); }\n        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }\n\n        .tab-btn {\n            position: relative;\n            padding: 0.75rem 1.5rem;\n            font-weight: 600;\n            font-size: 0.875rem;\n            color: var(--text-muted);\n            transition: color 0.3s;\n            white-space: nowrap;\n        }\n        .tab-btn:hover { color: var(--text-main); }\n        .tab-btn.active { color: var(--accent-primary); }\n        .tab-btn.active::after {\n            content: '';\n            position: absolute;\n            bottom: -1px;\n            left: 0;\n            right: 0;\n            height: 2px;\n            background-color: var(--accent-primary);\n            border-top-left-radius: 2px;\n            border-top-right-radius: 2px;\n        }\n        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }\n        .tab-content.active { display: block; }\n        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }\n\n        .form-input {\n            width: 100%;\n            background: var(--bg-body);\n            color: var(--text-main);\n            padding: 0.75rem 1rem;\n            border-radius: 0.75rem;\n            border: 1px solid var(--border-color);\n            font-size: 0.875rem;\n            transition: all 0.2s;\n            outline: none;\n        }\n        .form-input:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px var(--accent-glow); }\n        \n        #toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }\n        .toast {\n            min-width: 300px;\n            background: var(--bg-card);\n            border: 1px solid var(--border-color);\n            padding: 1rem;\n            border-radius: 0.75rem;\n            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            animation: slideInRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;\n        }\n        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }\n        .toast-out { animation: slideOutRight 0.3s ease-in forwards; }\n        @keyframes slideOutRight { to { transform: translateX(100%); opacity: 0; } }\n\n        .skeleton { background: linear-gradient(90deg, var(--border-color) 25%, var(--bg-body) 50%, var(--border-color) 75%); background-size: 200% 100%; animation: skeletonLoading 1.5s infinite; border-radius: 0.5rem; }\n        @keyframes skeletonLoading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }\n        \n        details summary::-webkit-details-marker { display: none; }\n    </style>\n</head>\n<body class=\"antialiased pb-20\">\n\n    <nav class=\"glass-nav px-6 py-3 sticky top-0 z-50 transition-all shadow-sm\">\n        <div class=\"container mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center gap-4\">\n            \n            <div class=\"flex items-center gap-4 w-full md:w-auto justify-between\">\n                <div class=\"flex items-center gap-3\">\n                    <div class=\"bg-red-600 p-2.5 rounded-xl text-white shadow-lg shadow-red-600/30 flex items-center justify-center\">\n                        <i class=\"fas fa-layer-group text-lg\"></i>\n                    </div>\n                    <div>\n                        <h1 class=\"font-black text-xl tracking-tighter uppercase leading-none\">Jarvis <span class=\"text-red-600\">Ops</span></h1>\n                        <p class=\"text-[10px] font-bold text-slate-400 tracking-widest uppercase\">Inovare Autocura</p>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"flex items-center gap-3 w-full md:w-auto\">\n                <div class=\"relative w-full md:w-64 hidden sm:block\">\n                    <i class=\"fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm\"></i>\n                    <input type=\"text\" id=\"global-search\" placeholder=\"Buscar hosts, URLs...\" class=\"form-input pl-9 py-2 text-xs\" onkeyup=\"filterLists()\">\n                </div>\n                \n                <div class=\"h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1 hidden md:block\"></div>\n\n                <button onclick=\"initDash()\" class=\"p-2.5 text-slate-400 hover:text-blue-500 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all tooltip\" title=\"Forçar Sincronização n8n\">\n                    <i id=\"sync-icon\" class=\"fas fa-sync-alt\"></i>\n                </button>\n                <button onclick=\"toggleTheme()\" class=\"p-2.5 text-slate-400 hover:text-amber-500 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all tooltip\" title=\"Alternar Tema\">\n                    <i id=\"theme-icon\" class=\"fas fa-moon\"></i>\n                </button>\n                \n                <div class=\"flex items-center gap-2 bg-slate-100 dark:bg-slate-800 py-1.5 px-3 rounded-full border border-slate-200 dark:border-slate-700 ml-2\">\n                    <img src=\"https://ui-avatars.com/api/?name=Emerson+Inovare&background=0D8ABC&color=fff&rounded=true\" alt=\"Emerson\" class=\"w-6 h-6 rounded-full\">\n                    <span class=\"text-xs font-bold hidden md:inline-block\">Emerson</span>\n                </div>\n            </div>\n        </div>\n    </nav>\n\n    <div class=\"border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm sticky top-[73px] z-40\">\n        <div class=\"container mx-auto max-w-6xl flex overflow-x-auto scrollbar-hide\">\n            <button class=\"tab-btn active\" onclick=\"switchTab('tab-dashboard')\"><i class=\"fas fa-chart-pie mr-2\"></i> Visão Geral</button>\n            <button class=\"tab-btn\" onclick=\"switchTab('tab-hosts')\"><i class=\"fas fa-server mr-2\"></i> Lista de Hosts <span id=\"badge-hosts\" class=\"ml-2 badge badge-blue\">0</span></button>\n            <button class=\"tab-btn\" onclick=\"switchTab('tab-erros')\"><i class=\"fas fa-bug mr-2\"></i> Histórico de Erros <span id=\"badge-erros\" class=\"ml-2 badge badge-red\">0</span></button>\n            <button class=\"tab-btn ml-auto font-black text-red-600 hover:text-red-700\" onclick=\"openModal()\"><i class=\"fas fa-plus-circle mr-1\"></i> ADICIONAR NOVO HOST</button>\n        </div>\n    </div>\n\n    <main class=\"container mx-auto max-w-6xl pt-8 px-4\">\n        \n        <section id=\"tab-dashboard\" class=\"tab-content active space-y-6\">\n            <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4\">\n                <div class=\"master-card p-5 flex items-center gap-4 fade-in-up\" style=\"margin-bottom: 0;\">\n                    <div class=\"w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600\"><i class=\"fas fa-network-wired text-xl\"></i></div>\n                    <div>\n                        <p class=\"text-[10px] font-bold text-slate-400 uppercase tracking-wider\">Hosts Registrados</p>\n                        <h3 class=\"text-2xl font-black\" id=\"dash-hosts\">0</h3>\n                    </div>\n                </div>\n                \n                <div class=\"master-card p-5 flex items-center gap-4 fade-in-up\" style=\"margin-bottom: 0; animation-delay: 0.1s;\">\n                    <div class=\"relative w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600\">\n                        <span class=\"pulse-ring absolute inset-0 rounded-full\"></span>\n                        <i class=\"fas fa-exclamation-triangle text-xl relative z-10\"></i>\n                    </div>\n                    <div>\n                        <p class=\"text-[10px] font-bold text-slate-400 uppercase tracking-wider\">Erros na Fila</p>\n                        <h3 class=\"text-2xl font-black text-red-600\" id=\"dash-errors\">0</h3>\n                    </div>\n                </div>\n\n                <div class=\"master-card p-5 flex items-center gap-4 fade-in-up\" style=\"margin-bottom: 0; animation-delay: 0.2s;\">\n                    <div class=\"w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600\"><i class=\"fas fa-check-double text-xl\"></i></div>\n                    <div>\n                        <p class=\"text-[10px] font-bold text-slate-400 uppercase tracking-wider\">Uptime Simulado</p>\n                        <h3 class=\"text-2xl font-black text-emerald-600\">99.9%</h3>\n                    </div>\n                </div>\n\n                <div class=\"master-card p-5 flex items-center gap-4 fade-in-up\" style=\"margin-bottom: 0; animation-delay: 0.3s;\">\n                    <div class=\"w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600\"><i class=\"fas fa-cogs text-xl\"></i></div>\n                    <div>\n                        <p class=\"text-[10px] font-bold text-slate-400 uppercase tracking-wider\">Ações Autocura</p>\n                        <h3 class=\"text-2xl font-black text-amber-600\">Ativa</h3>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"grid grid-cols-1 lg:grid-cols-3 gap-6 fade-in-up\" style=\"animation-delay: 0.4s;\">\n                <div class=\"master-card p-6 lg:col-span-2\">\n                    <h3 class=\"font-bold text-sm uppercase tracking-wide text-slate-500 mb-4\"><i class=\"fas fa-chart-area mr-2\"></i> Gráfico de Erros Simulados (7 Dias)</h3>\n                    <div class=\"h-64 w-full\"><canvas id=\"lineChart\"></canvas></div>\n                </div>\n                <div class=\"master-card p-6\">\n                    <h3 class=\"font-bold text-sm uppercase tracking-wide text-slate-500 mb-4\"><i class=\"fas fa-server mr-2\"></i> Distribuição de Hosts</h3>\n                    <div class=\"h-56 w-full flex items-center justify-center\"><canvas id=\"doughnutChart\"></canvas></div>\n                </div>\n            </div>\n        </section>\n\n        <section id=\"tab-hosts\" class=\"tab-content\">\n            <div class=\"flex justify-between items-center mb-6\">\n                <h2 class=\"font-black text-xs uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2\">\n                    <i class=\"fas fa-server\"></i> Gerenciamento de Hosts\n                </h2>\n                <button onclick=\"toggleLayout()\" class=\"p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-500 hover:text-main\">\n                    <i id=\"layout-icon\" class=\"fas fa-list\"></i> Alterar Visualização\n                </button>\n            </div>\n\n            <div id=\"main-list\" class=\"grid grid-cols-1 gap-6 transition-all duration-300\">\n                </div>\n        </section>\n\n        <section id=\"tab-erros\" class=\"tab-content\">\n            <div class=\"flex justify-between items-center mb-6\">\n                <h2 class=\"font-black text-xs uppercase tracking-[0.2em] text-red-600 flex items-center gap-2\">\n                    <span class=\"relative flex h-2 w-2\"><span class=\"pulse-ring absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75\"></span><span class=\"relative inline-flex rounded-full h-2 w-2 bg-red-600\"></span></span>\n                    Logs de Erros Reais\n                </h2>\n            </div>\n            \n            <div id=\"error-list\" class=\"flex flex-col gap-4\">\n                </div>\n        </section>\n\n    </main>\n\n    <div id=\"global-loader\" class=\"fixed inset-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm z-[200] hidden items-center justify-center flex-col gap-4\">\n        <div class=\"inline-block animate-spin rounded-full h-12 w-12 border-4 border-red-600 border-t-transparent\"></div>\n        <p class=\"text-sm font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300\">Conectando ao n8n...</p>\n    </div>\n\n    <div id=\"modal\" class=\"fixed inset-0 z-[100] hidden bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-4\">\n        <div class=\"bg-white dark:bg-slate-900 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]\">\n            \n            <div class=\"px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50\">\n                <h3 class=\"font-black text-sm uppercase tracking-widest text-slate-800 dark:text-slate-200\" id=\"modal-title\">Configurar Host Jarvis</h3>\n                <button type=\"button\" onclick=\"closeModal()\" class=\"text-slate-400 hover:text-red-500 w-8 h-8 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm\"><i class=\"fas fa-times\"></i></button>\n            </div>\n            \n            <form id=\"jarvis-form\" onsubmit=\"saveData(event)\" class=\"p-6 overflow-y-auto flex-1\">\n                <input type=\"hidden\" id=\"field-id\">\n                \n                <div class=\"grid grid-cols-1 md:grid-cols-2 gap-5\">\n                    <div class=\"col-span-1 md:col-span-2\">\n                        <label class=\"label\">URL Portainer</label>\n                        <input type=\"text\" id=\"url_portainer\" required class=\"form-input\">\n                    </div>\n                    \n                    <div>\n                        <label class=\"label\">Login Admin</label>\n                        <input type=\"text\" id=\"login_portainer\" class=\"form-input\">\n                    </div>\n                    \n                    <div>\n                        <label class=\"label\">Senha</label>\n                        <input type=\"password\" id=\"senha_portainer\" class=\"form-input\">\n                    </div>\n                    \n                    <div>\n                        <label class=\"label text-blue-500\">Stack Postgres</label>\n                        <input type=\"text\" id=\"stack_postgres\" class=\"form-input border-blue-200\">\n                    </div>\n                    \n                    <div>\n                        <label class=\"label text-green-500\">Token Wuzapi</label>\n                        <input type=\"text\" id=\"token_wuzapi\" class=\"form-input border-green-200\">\n                    </div>\n                    \n                    <div class=\"col-span-1 md:col-span-2\">\n                        <label class=\"label text-green-500\">URL Wuzapi</label>\n                        <input type=\"text\" id=\"url_wuzapi\" class=\"form-input border-green-200\">\n                    </div>\n                    \n                    <div>\n                        <label class=\"label\">ADM WhatsApp</label>\n                        <input type=\"text\" id=\"adm\" class=\"form-input\">\n                    </div>\n                    \n                    <div>\n                        <label class=\"label\">DEV WhatsApp</label>\n                        <input type=\"text\" id=\"dev\" class=\"form-input\">\n                    </div>\n                    \n                    <div class=\"col-span-1 md:col-span-2\">\n                        <label class=\"label text-purple-500\">Prompt Base</label>\n                        <textarea id=\"prompt\" rows=\"2\" class=\"form-input resize-y border-purple-200\"></textarea>\n                    </div>\n                    \n                    <div class=\"col-span-1 md:col-span-2\">\n                        <label class=\"label text-purple-500\">System Message (Mantenha a densidade total)</label>\n                        <textarea id=\"system_message\" rows=\"6\" class=\"form-input font-mono text-xs leading-relaxed resize-y border-purple-200 bg-slate-50 dark:bg-slate-900\"></textarea>\n                    </div>\n                </div>\n                \n                <div class=\"mt-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3\">\n                    <button type=\"button\" onclick=\"closeModal()\" class=\"px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800\">Cancelar</button>\n                    <button type=\"submit\" class=\"bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-black text-sm uppercase tracking-widest flex items-center gap-2 transition-all shadow-lg shadow-red-600/30\">\n                        <i class=\"fas fa-save\"></i> Salvar no Banco Real\n                    </button>\n                </div>\n            </form>\n        </div>\n    </div>\n\n    <div id=\"toast-container\"></div>\n\n    <script>\n        // ==============================================================================\n        // CORE ORIGINAL DO SEU HTML RESTAURADO (COMUNICANDO REALMENTE COM O N8N)\n        // ==============================================================================\n        const BACKEND_URL = 'https://webhookn8n6.inovareinteligenciaartificial.com/webhook/backend-jarvis-tratamento';\n        let dataset = [];\n        let errors = [];\n        let layoutMode = 'grid'; \n\n        // Função de Boot\n        async function initDash() {\n            const loader = document.getElementById('global-loader');\n            const icon = document.getElementById('sync-icon');\n            \n            loader.style.display = 'flex';\n            icon.classList.add('fa-spin');\n\n            // As duas rotas reais do seu Switch do n8n (p=buscar e p=consulta_erros)\n            await Promise.all([fetchData(), fetchErrors()]);\n            \n            updateDashboardCounters();\n            updateCharts();\n            \n            loader.style.display = 'none';\n            icon.classList.remove('fa-spin');\n            showToast('Dados sincronizados com o n8n.', 'success');\n        }\n\n        // 1. O FETCH DE DADOS REAIS DOS HOSTS (IDÊNTICO AO ORIGINAL)\n        async function fetchData() {\n            try {\n                const response = await fetch(BACKEND_URL, {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ p: 'buscar' })\n                });\n                const result = await response.json();\n                dataset = result.data || [];\n                renderList();\n            } catch (e) { \n                console.error(\"Erro ao buscar hosts reais no n8n:\", e);\n                showToast('Falha ao consultar banco de hosts.', 'error');\n            }\n        }\n\n        // 2. O FETCH DE ERROS REAIS DA FILA (IDÊNTICO AO ORIGINAL)\n        async function fetchErrors() {\n            try {\n                const response = await fetch(BACKEND_URL, {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ p: 'consulta_erros' })\n                });\n                const result = await response.json();\n                errors = result.data || [];\n                renderErrors();\n            } catch (e) { \n                console.error(\"Erro ao buscar erros reais no n8n:\", e); \n                showToast('Falha ao consultar fila de erros.', 'error');\n            }\n        }\n\n        // 3. A FUNÇÃO DE SALVAR/EDITAR (IDÊNTICO AO ORIGINAL, MESMOS CAMPOS E PAYLOAD)\n        async function saveData(e) {\n            e.preventDefault();\n            const btn = e.target.querySelector('button[type=\"submit\"]');\n            btn.innerHTML = '<i class=\"fas fa-spinner fa-spin\"></i> Salvando...';\n            \n            const payload = {\n                p: document.getElementById('field-id').value ? 'editar' : 'inserir',\n                id: document.getElementById('field-id').value,\n                url_portainer: document.getElementById('url_portainer').value,\n                login_portainer: document.getElementById('login_portainer').value,\n                senha_portainer: document.getElementById('senha_portainer').value,\n                stack_postgres: document.getElementById('stack_postgres').value,\n                url_wuzapi: document.getElementById('url_wuzapi').value,\n                token_wuzapi: document.getElementById('token_wuzapi').value,\n                adm: document.getElementById('adm').value,\n                dev: document.getElementById('dev').value,\n                prompt: document.getElementById('prompt').value,\n                system_message: document.getElementById('system_message').value\n            };\n\n            try {\n                await fetch(BACKEND_URL, { \n                    method: 'POST', \n                    headers: {'Content-Type': 'application/json'}, \n                    body: JSON.stringify(payload) \n                });\n                showToast('Configuração salva com sucesso no banco de dados.', 'success');\n                closeModal();\n                // Recarrega tudo para pegar o novo ID ou atualização real do banco\n                await initDash(); \n            } catch (error) {\n                showToast('Erro ao comunicar com webhook.', 'error');\n                console.error(error);\n                btn.innerHTML = '<i class=\"fas fa-save\"></i> Tentar Novamente';\n            }\n        }\n\n        // 4. A FUNÇÃO DE DELETAR (IDÊNTICO AO ORIGINAL)\n        async function deleteItem(id) {\n            if(!confirm(`Remover definitivamente o host ID ${id}? A ação irá apagar os dados no banco.`)) return;\n            \n            try {\n                await fetch(BACKEND_URL, { \n                    method: 'POST', \n                    headers: {'Content-Type': 'application/json'}, \n                    body: JSON.stringify({p:'excluir', id: id}) \n                });\n                showToast('Host excluído da base de dados.', 'success');\n                // Recarrega para validar a exclusão real\n                await initDash();\n            } catch (e) {\n                showToast('Erro na exclusão do host.', 'error');\n            }\n        }\n\n        // ==============================================================================\n        // RENDERIZAÇÃO DA INTERFACE (A CARA NOVA PARA OS DADOS REAIS)\n        // ==============================================================================\n\n        function renderList() {\n            const list = document.getElementById('main-list');\n            const search = document.getElementById('global-search').value.toLowerCase();\n            list.innerHTML = '';\n            \n            // Filtro local da barra de pesquisa\n            const filtered = dataset.filter(item => {\n                return (item.url_portainer || '').toLowerCase().includes(search) || \n                       (item.stack_postgres || '').toLowerCase().includes(search) ||\n                       String(item.id).includes(search);\n            });\n\n            if(filtered.length === 0) {\n                list.innerHTML = '<div class=\"text-center py-10 text-slate-400\">Nenhum host encontrado.</div>';\n                return;\n            }\n\n            list.className = layoutMode === 'grid' ? 'grid grid-cols-1 gap-6' : 'flex flex-col gap-3 view-compact';\n\n            filtered.forEach(item => {\n                const card = document.createElement('div');\n                card.className = \"master-card animate-fade-up\";\n                card.innerHTML = `\n                    <div class=\"px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-white/5\">\n                        <div class=\"flex items-center gap-4\">\n                            <span class=\"badge-amber text-[10px]\">ID #${item.id}</span>\n                            <h2 class=\"font-black text-sm uppercase tracking-tight truncate max-w-[200px] md:max-w-xs\">\n                                ${item.url_portainer || 'Sem URL'}\n                            </h2>\n                        </div>\n                        <div class=\"flex gap-3\">\n                            <button onclick=\"openEditModal(${item.id})\" class=\"text-slate-400 hover:text-blue-500 transition-colors tooltip\" title=\"Editar\"><i class=\"fas fa-pen\"></i></button>\n                            <button onclick=\"deleteItem(${item.id})\" class=\"text-slate-400 hover:text-red-500 transition-colors tooltip\" title=\"Excluir\"><i class=\"fas fa-trash-alt\"></i></button>\n                        </div>\n                    </div>\n\n                    <div class=\"section-box grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-5\">\n                        <div><span class=\"label\"><i class=\"fas fa-database text-blue-500\"></i> Stack Postgres</span><p class=\"value badge-blue inline-block mt-1\">${item.stack_postgres || '-'}</p></div>\n                        <div><span class=\"label\"><i class=\"fab fa-whatsapp text-green-500\"></i> Wuzapi</span><p class=\"value text-xs font-mono mt-1 truncate\" title=\"${item.url_wuzapi}\">${item.url_wuzapi || '-'}</p></div>\n                        <div><span class=\"label\">Login Admin</span><p class=\"value text-xs mt-1\">${item.login_portainer || '-'}</p></div>\n                        <div><span class=\"label\">ADM Celular</span><p class=\"value text-xs mt-1\">${item.adm || '-'}</p></div>\n                    </div>\n\n                    <div class=\"section-box px-6 py-4 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-100 dark:border-slate-800\">\n                        <details class=\"group\">\n                            <summary class=\"font-bold text-[10px] uppercase text-purple-500 cursor-pointer flex items-center justify-between list-none\">\n                                <span><i class=\"fas fa-robot mr-1\"></i> Ver System Message</span>\n                                <i class=\"fas fa-chevron-down\"></i>\n                            </summary>\n                            <div class=\"mt-3 relative\">\n                                <pre class=\"code-block text-[10px] max-h-32 overflow-y-auto\">${item.system_message || ''}</pre>\n                            </div>\n                        </details>\n                    </div>\n                `;\n                list.appendChild(card);\n            });\n        }\n\n        function renderErrors() {\n            const list = document.getElementById('error-list');\n            list.innerHTML = '';\n\n            if (errors.length === 0) {\n                list.innerHTML = '<div class=\"text-center py-10 text-slate-400\">Nenhum erro na base (Fila vazia).</div>';\n                return;\n            }\n\n            errors.forEach(err => {\n                const card = document.createElement('div');\n                card.className = \"master-card border-l-4 border-l-red-500 p-5\";\n                card.innerHTML = `\n                    <div class=\"flex items-center gap-2 mb-2\">\n                        <span class=\"bg-red-100 dark:bg-red-900/30 text-red-600 text-[9px] font-black px-2 py-0.5 rounded tracking-widest uppercase\">FALHA #${err.id}</span>\n                        <h4 class=\"font-bold text-sm text-slate-800 dark:text-slate-200\">${err.name || 'Erro Desconhecido'}</h4>\n                    </div>\n                    <p class=\"text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3\">${err.message || ''}</p>\n                    ${err.stack ? `\n                    <details>\n                        <summary class=\"text-[10px] font-black uppercase text-red-600 cursor-pointer list-none\"><i class=\"fas fa-terminal\"></i> Ver Stack Trace Completa</summary>\n                        <div class=\"mt-2\"><pre class=\"code-block text-[9px] border-red-200 max-h-48 overflow-y-auto custom-scrollbar\">${err.stack}</pre></div>\n                    </details>` : ''}\n                `;\n                list.appendChild(card);\n            });\n        }\n\n        // ==============================================================================\n        // FUNÇÕES DE UI E COMPORTAMENTO (NÃO QUEBRAM O BANCO)\n        // ==============================================================================\n\n        function openModal() {\n            document.getElementById('jarvis-form').reset();\n            document.getElementById('field-id').value = '';\n            document.getElementById('modal-title').innerText = 'Adicionar Novo Host';\n            document.getElementById('modal').classList.remove('hidden');\n        }\n\n        function openEditModal(id) {\n            // Usa o ID real garantido do dataset original (evitando strict equal error se um for string)\n            const item = dataset.find(d => String(d.id) === String(id));\n            if(!item) return showToast('Erro interno ao ler host do dataset.', 'error');\n            \n            document.getElementById('field-id').value = item.id;\n            document.getElementById('url_portainer').value = item.url_portainer || '';\n            document.getElementById('login_portainer').value = item.login_portainer || '';\n            document.getElementById('senha_portainer').value = item.senha_portainer || '';\n            document.getElementById('stack_postgres').value = item.stack_postgres || '';\n            document.getElementById('url_wuzapi').value = item.url_wuzapi || '';\n            document.getElementById('token_wuzapi').value = item.token_wuzapi || '';\n            document.getElementById('adm').value = item.adm || '';\n            document.getElementById('dev').value = item.dev || '';\n            document.getElementById('prompt').value = item.prompt || '';\n            document.getElementById('system_message').value = item.system_message || '';\n            \n            document.getElementById('modal-title').innerText = `Editando Host #${id}`;\n            document.getElementById('modal').classList.remove('hidden');\n        }\n\n        function closeModal() {\n            document.getElementById('modal').classList.add('hidden');\n        }\n\n        function switchTab(tabId) {\n            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));\n            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));\n            document.getElementById(tabId).classList.add('active');\n            event.currentTarget.classList.add('active');\n        }\n\n        function toggleLayout() {\n            layoutMode = layoutMode === 'grid' ? 'compact' : 'grid';\n            document.getElementById('layout-icon').className = layoutMode === 'grid' ? 'fas fa-list' : 'fas fa-th-large';\n            renderList();\n        }\n\n        function filterLists() {\n            renderList();\n        }\n\n        function toggleTheme() { \n            document.documentElement.classList.toggle('dark'); \n            const isDark = document.documentElement.classList.contains('dark');\n            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';\n            if(window.jarvisLineChart) updateCharts();\n        }\n\n        function showToast(message, type = 'info') {\n            const container = document.getElementById('toast-container');\n            const toast = document.createElement('div');\n            let styling = type === 'success' ? 'border-l-4 border-emerald-500 text-emerald-600' : (type === 'error' ? 'border-l-4 border-red-500 text-red-600' : 'border-l-4 border-blue-500 text-blue-600');\n            toast.className = `toast ${styling}`;\n            toast.innerHTML = `<i class=\"fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} text-lg\"></i><p class=\"text-sm font-semibold flex-1 text-slate-800 dark:text-slate-200\">${message}</p>`;\n            container.appendChild(toast);\n            setTimeout(() => { toast.classList.add('toast-out'); setTimeout(() => toast.remove(), 300); }, 3000);\n        }\n\n        function updateDashboardCounters() {\n            document.getElementById('dash-hosts').innerText = dataset.length;\n            document.getElementById('badge-hosts').innerText = dataset.length;\n            document.getElementById('dash-errors').innerText = errors.length;\n            document.getElementById('badge-erros').innerText = errors.length;\n        }\n\n        // Gráficos Simulados baseados na métrica real do seu payload\n        function updateCharts() {\n            const isDark = document.documentElement.classList.contains('dark');\n            const textColor = isDark ? '#94a3b8' : '#64748b';\n            \n            // Line Chart Mock (usando proporção dos erros atuais)\n            const ctxLine = document.getElementById('lineChart').getContext('2d');\n            if(window.jarvisLineChart) window.jarvisLineChart.destroy();\n            const baseVol = errors.length > 0 ? errors.length : 2;\n            \n            window.jarvisLineChart = new Chart(ctxLine, {\n                type: 'line',\n                data: { labels: ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', 'Hoje'], datasets: [{\n                    label: 'Erros na Fila',\n                    data: [baseVol*2, Math.max(0, baseVol-1), baseVol*3, baseVol, 0, Math.max(0, baseVol-2), errors.length],\n                    borderColor: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.1)', borderWidth: 2, fill: true, tension: 0.4\n                }]},\n                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: textColor } }, y: { beginAtZero: true, ticks: { color: textColor } } } }\n            });\n\n            // Doughnut Chart Mock\n            const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');\n            if(window.jarvisDoughnutChart) window.jarvisDoughnutChart.destroy();\n            \n            window.jarvisDoughnutChart = new Chart(ctxDoughnut, {\n                type: 'doughnut',\n                data: { labels: ['Postgres Ativos', 'Wuzapi Ativos', 'Sem Token'], datasets: [{\n                    data: [dataset.length > 0 ? dataset.length : 1, dataset.filter(d=>d.url_wuzapi).length, dataset.filter(d=>!d.token_wuzapi).length],\n                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'], borderWidth: 0\n                }]},\n                options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'right', labels: { color: textColor } } } }\n            });\n        }\n\n        // Boot inicial\n        window.onload = () => {\n            if (window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme();\n            initDash();\n        };\n\n    </script>\n</body>\n</html>"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    -432,
+    1440
+   ],
+   "id": "141f1b78-4eb3-437a-9a94-1b860b6fff1c",
+   "name": "HTML1"
+  },
+  {
+   "parameters": {
+    "path": "front-jarvis-tratamento2",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "frontend",
+   "type": "n8n-nodes-base.webhook",
+   "position": [
+    -592,
+    1440
+   ],
+   "webhookId": "f86f2a6b-128d-4567-80de-fe18a1424b82",
+   "typeVersion": 1,
+   "id": "9b78daeb-24cf-46fe-ae14-4b4473e01c69"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "backend-jarvis-tratamento",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -848,
+    1056
+   ],
+   "id": "0c260c51-cc5d-41b2-af99-1957ee7090be",
+   "name": "backend",
+   "webhookId": "c277376b-361b-44dd-91ce-5b29dbd214fd"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -320,
+    1168
+   ],
+   "id": "77c826f9-eb6d-4e48-86db-5398ddaf5261",
+   "name": "Code6"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook16",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -176,
+    1168
+   ],
+   "typeVersion": 1,
+   "id": "27ea5b47-4ebb-4988-990b-d41e5614d8f1"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "editar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "25b747da-b4a1-4eb2-b5a8-53aba65c35e7"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "editar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "bbf863d0-b292-4f20-b6b4-aa529f53be69",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "excluir",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "excluir"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ca69a75f-dce3-4135-993f-eb3a2f1dcec1",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "inserir",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "inserir"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a24355ed-90d4-48b3-9b32-9511e615e8c5",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "consulta_erros",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "consulta_erros"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.3,
+   "position": [
+    -688,
+    1024
+   ],
+   "id": "5b3d4a9e-ebc8-4fdd-99e1-6586d0f741dc",
+   "name": "Switch1"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "jarvis_config",
+     "mode": "list",
+     "cachedResultName": "jarvis_config"
+    },
+    "limit": 1,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -464,
+    1168
+   ],
+   "id": "9e4c417b-7f42-4815-ae12-3e4c8c56d658",
+   "name": "busca_jarvis_config1",
+   "credentials": {
+    "postgres": {
+     "id": "6j2swNMgB2dLLqsT",
+     "name": "Postgres account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "jarvis_config",
+     "mode": "list",
+     "cachedResultName": "jarvis_config"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.body.id }}",
+      "url_portainer": "={{ $json.body.url_portainer }}",
+      "login_portainer": "={{ $json.body.login_portainer }}",
+      "senha_portainer": "<SEGREDO_REMOVIDO>",
+      "stack_postgres": "={{ $json.body.stack_postgres }}",
+      "url_wuzapi": "={{ $json.body.url_wuzapi }}",
+      "token_wuzapi": "<SEGREDO_REMOVIDO>",
+      "adm": "={{ $json.body.adm }}",
+      "dev": "={{ $json.body.dev }}",
+      "prompt": "={{ $json.body.prompt }}",
+      "system_message": "={{ $json.body.system_message }}",
+      "updated_at": "={{ $now }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "url_portainer",
+       "displayName": "url_portainer",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "login_portainer",
+       "displayName": "login_portainer",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "senha_portainer",
+       "displayName": "senha_portainer",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "stack_postgres",
+       "displayName": "stack_postgres",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "url_wuzapi",
+       "displayName": "url_wuzapi",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "adm",
+       "displayName": "adm",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "dev",
+       "displayName": "dev",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "prompt",
+       "displayName": "prompt",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "system_message",
+       "displayName": "system_message",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "updated_at",
+       "displayName": "updated_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -464,
+    880
+   ],
+   "id": "80ecd679-29c9-4312-990a-a5c6f348e79a",
+   "name": "edita_jarvis_config",
+   "credentials": {
+    "postgres": {
+     "id": "6j2swNMgB2dLLqsT",
+     "name": "Postgres account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook17",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -272,
+    880
+   ],
+   "typeVersion": 1,
+   "id": "3a03f619-9138-4692-9b8b-40cd6f4bbac8"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "={{ $json.workflow.name }}",
+    "expire": true
+   },
+   "id": "10444b22-f1e4-47e7-8867-6df2525a0185",
+   "name": "contador de erros",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    -240,
+    288
+   ],
+   "credentials": {
+    "redis": {
+     "id": "Fa6y0tiUh9BihClV",
+     "name": "Redis account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "erros",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+   "typeVersion": 1.5,
+   "position": [
+    128,
+    512
+   ],
+   "id": "3c4e3946-5894-44b4-8e6a-f951d5230db4",
+   "name": "Memory",
+   "credentials": {
+    "redis": {
+     "id": "zETZyGtAmnHSpmzs",
+     "name": "Redis account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('busca_jarvis_config').item.json.url_wuzapi }}/chat/send/text ",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('busca_jarvis_config').item.json.token_wuzapi }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('busca_jarvis_config').item.json.adm }}"
+      },
+      {
+       "name": "Body",
+       "value": "=🚨 *Autocura JARVIS ({{ $(\"JarvisDecisor\").item.json.output?.level || \"WARNING\" }})*\\nO(A) fluxo *{{ $(\"ativado_pelo_erro\").item.json.workflow.name }}* teve um erro.\\n\\n*Ação Tomada:* {{ $(\"JarvisDecisor\").item.json.output?.action || \"NONE\" }}\\n*Diagnóstico:* {{ $(\"JarvisDecisor\").item.json.output?.solution || \"Erro genérico\" }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "61ac2be2-21f7-417d-80de-4ea77ac39984",
+   "name": "WUZAP_Notify_Admin1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    576,
+    272
+   ]
+  },
+  {
+   "parameters": {
+    "jsonSchemaExample": "{ \"action\": \"NONE\", \"level\": \"WARNING\", \"solution\": \"Aguardar a rede estabilizar\", \"retry\": true }"
+   },
+   "id": "e607d49d-fac8-42b1-af0c-cb889bc045b3",
+   "name": "Parser",
+   "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+   "typeVersion": 1.3,
+   "position": [
+    224,
+    512
+   ]
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "id": "159cef4f-2bde-4415-ac41-29bf0f869c51",
+   "name": "Gemini",
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -112,
+    576
+   ],
+   "credentials": {
+    "googlePalmApi": {
+     "id": "k65bPkY1ndMhCCP7",
+     "name": "Google Gemini(PaLM) Api account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=execution_entity",
+     "mode": "name"
+    },
+    "limit": 10,
+    "where": {
+     "values": [
+      {
+       "column": "status",
+       "value": "error"
+      }
+     ]
+    },
+    "sort": {
+     "values": [
+      {
+       "column": "id",
+       "direction": "DESC"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -464,
+    1024
+   ],
+   "id": "e5d77621-69f8-4f52-ada4-75b059600561",
+   "name": "criar_tabela2",
+   "credentials": {
+    "postgres": {
+     "id": "lqcMWZQestoAY7Ko",
+     "name": "Postgres n8n_queue"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT \n  ee.id,\n  substring(ed.data from '\"stack\":\"([^\"]+)\"') AS error_stack\nFROM execution_entity ee\nLEFT JOIN execution_data ed \n  ON ed.\"executionId\" = ee.id\nWHERE ee.status = 'error'\nORDER BY ee.id DESC\nLIMIT 10;",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    176,
+    112
+   ],
+   "id": "01b2f2f3-09d2-4a43-9b1c-3a04680db4fe",
+   "name": "criar_tabela4",
+   "credentials": {
+    "postgres": {
+     "id": "lqcMWZQestoAY7Ko",
+     "name": "Postgres n8n_queue"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "execution",
+    "operation": "get",
+    "executionId": "={{ $json.id }}",
+    "options": {
+     "activeWorkflows": true
+    },
+    "requestOptions": {}
+   },
+   "type": "n8n-nodes-base.n8n",
+   "typeVersion": 1,
+   "position": [
+    -272,
+    1024
+   ],
+   "id": "553b589b-b569-47ad-83d6-7852b2e70228",
+   "name": "Get an execution",
+   "credentials": {
+    "n8nApi": {
+     "id": "qMPcuUwexJCpC61i",
+     "name": "n8n account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "02cdc9be-9d4c-4b14-8a5a-b277c7f20664",
+       "name": "id",
+       "value": "={{ $json.id }}",
+       "type": "string"
+      },
+      {
+       "id": "89c57bcb-1afc-4539-9af0-6661f68e4ad5",
+       "name": "name",
+       "value": "={{ $json.workflowData.name }}",
+       "type": "string"
+      },
+      {
+       "id": "954b8a35-12c7-4497-9f52-d09490920ed5",
+       "name": "message",
+       "value": "={{ $json.data.resultData.error.message }}",
+       "type": "string"
+      },
+      {
+       "id": "86c0a16c-f19c-4cc9-89b8-d3d2dc0a16ee",
+       "name": "stack",
+       "value": "={{ $json.data.resultData.error.stack }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -96,
+    1024
+   ],
+   "id": "3d7bf893-c290-4f69-9a75-c060d9a1b52a",
+   "name": "Edit Fields"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    48,
+    1024
+   ],
+   "id": "d2c384d9-6f03-4735-b514-e3eebf54a826",
+   "name": "Code"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook18",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    208,
+    1024
+   ],
+   "typeVersion": 1,
+   "id": "0ad0d559-a833-496a-8e07-812d8c3e79c4"
+  },
+  {
+   "parameters": {
+    "content": "## 🚀 VISÃO GERAL: JARVIS OPS (AUTOCURA)\n\n**Objetivo Principal:**\nEste ecossistema foi projetado para atuar como um engenheiro de confiabilidade (SRE) autônomo para a sua VPS (Debian 12) e infraestrutura Docker Swarm.\n\n**Fluxo de Trabalho:**\n1️⃣ **Interceptação:** O `Error Trigger` escuta falhas globais do n8n.\n2️⃣ **Diagnóstico:** A Inteligência Artificial (Gemini 2.5 Flash-lite) recebe o `stack trace`, o erro exato e o histórico de sessão.\n3️⃣ **Decisão:** Com base no System Message, o Jarvis escolhe a ação corretiva apropriada (`DISABLE`, `RESTART_VPS`, `CLEAR_CACHE` ou `NONE`).\n4️⃣ **Ação:** O fluxo executa comandos via SSH, deleta containers/imagens fantasmas no Portainer ou limpa o banco de dados.\n5️⃣ **Notificação:** Dispara um alerta pelo WhatsApp através da sua API Wuzapi.",
+    "height": 404,
+    "width": 558,
+    "color": 2
+   },
+   "id": "7018b8b5-f09a-4e25-be46-feed7410eabb",
+   "name": "Sticky Note - Visão Geral",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    -64
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🛑 GATILHO & BANCO DE DADOS\n\n**Módulo de Entrada e Configuração**\n\n🔹 **Error Trigger (`ativado_pelo_erro`):** Ponto de partida. Pega o JSON bruto do erro da execução que falhou em qualquer outro workflow da instância.\n\n🔹 **Redis (`contador de erros`):** Impede o famoso \"loop da morte\". Ele registra a chave de falha usando o nome do workflow. Se o limite de falhas repetidas (5 vezes) for alcançado no nó de decisão, o fluxo interrompe a autocura.\n\n🔹 **PostgreSQL (`busca_jarvis_config`):** Faz a consulta na tabela `jarvis_config` (no seu banco público da stack `postgres2`) para puxar todos os parâmetros críticos de forma dinâmica: URLs do Portainer, senhas, tokens do Wuzapi (`poco-norm2`) e, mais importante, o Prompt e o System Message que moldarão a resposta da IA.",
+    "height": 409,
+    "width": 560,
+    "color": 6
+   },
+   "id": "ae8b4cc9-8bef-4649-9778-6d9ff42830b7",
+   "name": "Sticky Note - Gatilho",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -608,
+    1632
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🧠 CÉREBRO JARVIS (AGENT LANGCHAIN)\n\n**O Núcleo de Processamento de IA**\n\n🤖 **Agente Gemini (`JarvisDecisor`):** Processa os dados de erro formatados.\n- **Input:** Prompt base + System Message + JSON do erro.\n- **Memory:** Utiliza o nó Redis Chat Memory para reter o contexto em um cache de até 50 interações. Isso permite que o Jarvis saiba o que ele tentou consertar há 5 minutos atrás.\n\n🧩 **Output Parser:** Força o Gemini a não ser \"conversador\" e responder estritamente dentro do JSON Schema definido. A saída deve conter as chaves absolutas:\n`{ \"action\": \"...\", \"level\": \"...\", \"solution\": \"...\", \"retry\": boolean }`\n\n*Nota: Nunca simplifique ou remova a densidade do System Message enviado via banco de dados, pois isso destrói o padrão de resposta exigido pelo Parser.*",
+    "height": 420,
+    "width": 559,
+    "color": 5
+   },
+   "id": "9e5be3a2-e55d-46d5-b469-bacfcadfcc76",
+   "name": "Sticky Note - IA",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    160,
+    1200
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🚦 ROTEAMENTO DE AUTOCURA\n\n**O nó Switch `RouteAction` divide o caminho com base no `output.action` gerado pelo Jarvis:**\n\n⛔ **DISABLE:** Aciona a API interna do n8n (`DeactivateWorkflow`) para desligar imediatamente o workflow problemático. Usado para loops destrutivos.\n\n🔁 **RESTART_VPS:** Usa autenticação SSH (`sudo reboot`) para dar um hard reset na sua máquina. Usado quando o Docker Engine engasga ou a RAM esgota completamente.\n\n🧹 **CLEAR_CACHE:** Caminho mais complexo. Executa rotinas de limpeza pesada na infraestrutura para recuperar espaço e memória (Detalhado na nota verde).\n\n⏳ **EXCESSO DE ERROS:** Trava de segurança do Redis. Se > 5, interrompe para não agravar a situação.",
+    "height": 412,
+    "width": 557,
+    "color": 4
+   },
+   "id": "c986746d-d863-47e8-885f-978c099bd430",
+   "name": "Sticky Note - Rotas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    288,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🧹 MÓDULO DE LIMPEZA (CLEAR CACHE)\n\n**Limpeza do Portainer (`painel5`):**\n1. Gera Token JWT usando login e senha do banco.\n2. Busca Containers em estado `exited` e deleta via Split In Batches.\n3. Busca Imagens soltas (`used: false`) e força exclusão (`?force=true`).\n\n**Limpeza da Fila do PostgreSQL (`n8n_queue`):**\n1. Filtra na API do Portainer qual é a Task ativa do Swarm para o seu PostgreSQL baseado na variável `stack_postgres`.\n2. Roda via SSH o comando Docker Exec para limpar lixo de execução:\n`psql -U postgres -d n8n_queue -c \"TRUNCATE TABLE execution_data;\"`\n3. Roda `VACUUM FULL` para recuperar o espaço físico liberado no disco da VPS.",
+    "height": 448,
+    "width": 556,
+    "color": 3
+   },
+   "id": "6df481d4-b908-405c-a4ee-50fdb1efd6e3",
+   "name": "Sticky Note - Limpeza",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1088,
+    1008
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📱 NOTIFICAÇÕES (WUZAPI)\n\n**Alerta em Tempo Real no WhatsApp**\n\nSempre que o Jarvis toma qualquer decisão de cura ou desativação, ele faz uma requisição POST na rota `/chat/send/text` da sua instância Wuzapi.\n\nO payload inclui o token e manda a mensagem formatada para dois canais simultâneos (caso preenchidos no BD):\n- **`adm`:** Número do administrador principal.\n- **`dev`:** Número do desenvolvedor de suporte.\n\nA mensagem em MarkDown no WhatsApp irá exibir:\n🚨 Nível Crítico (WARNING/MEDIUM/CRITICAL)\nNome do fluxo que falhou\nAção técnica tomada (Ex: RESTART_VPS)\nDiagnóstico traduzido pelo Gemini de forma simples.",
+    "height": 412,
+    "width": 561,
+    "color": 3
+   },
+   "id": "77fd3a91-e4b1-449b-b26b-d297bc51bd26",
+   "name": "Sticky Note - Wuzapi",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    928,
+    48
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🌐 PAINEL FRONTEND & BACKEND\n\n**A Interface Administrativa do Jarvis Ops**\n\n🎨 **Frontend (`HTML1`):** Responde no Webhook GET com a interface construída em HTML/Tailwind/JS. É nela que você gerencia a inserção, edição e exclusão de parâmetros do banco de dados e acompanha os gráficos simulados.\n\n⚙️ **Backend (`Switch1`):** Webhook POST que recebe requisições JSON da interface HTML. Faz o roteamento com base no parâmetro `p` do body:\n- `buscar`: Retorna todos os hosts ativos na tabela.\n- `inserir/editar/excluir`: Atualiza a tabela `jarvis_config` no Postgres.\n- `consulta_erros`: Faz uma query cabulosa direto no banco nativo do n8n (`execution_entity`) para trazer os últimos 10 logs de erro reais da ferramenta, decodificando o Stack Trace.",
+    "height": 444,
+    "width": 560
+   },
+   "id": "1edc8a13-0be1-4ee2-8684-10f7e45e95f8",
+   "name": "Sticky Note - Dashboard",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -960,
+    352
+   ]
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "mode": "list",
+     "value": "gpt-5-mini"
+    },
+    "builtInTools": {},
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    -16,
+    544
+   ],
+   "id": "af4bbba3-2290-499c-9412-a293e56a1384",
+   "name": "OpenAI Chat Model",
+   "credentials": {
+    "openAiApi": {
+     "id": "k13FkNpsIWA0faaP",
+     "name": "dinamico n8n5"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "ativado pelo erro": [
+   {
+    "json": {
+     "execution": {
+      "id": "2946515",
+      "url": "https://interface.inovareinteligenciaartificial.com/workflow/sbR8wiWrZBQ0LFxS/executions/2946515",
+      "error": {
+       "level": "warning",
+       "tags": {},
+       "description": "Bad Gateway",
+       "timestamp": 1774429247657,
+       "context": {
+        "itemIndex": 0,
+        "request": {
+         "headers": {
+          "apikey": "<SEGREDO_REMOVIDO>",
+          "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7"
+         },
+         "method": "GET",
+         "uri": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+         "gzip": true,
+         "rejectUnauthorized": true,
+         "followRedirect": true,
+         "resolveWithFullResponse": true,
+         "followAllRedirects": true,
+         "maxRedirects": 21,
+         "timeout": 300000,
+         "encoding": null,
+         "json": false,
+         "useStream": true
+        }
+       },
+       "functionality": "regular",
+       "name": "NodeApiError",
+       "node": {
+        "parameters": {
+         "preBuiltAgentsCalloutHttpRequest": "",
+         "curlImport": "",
+         "method": "GET",
+         "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+         "authentication": "none",
+         "provideSslCertificates": false,
+         "sendQuery": false,
+         "sendHeaders": true,
+         "specifyHeaders": "keypair",
+         "headerParameters": {
+          "parameters": [
+           {
+            "name": "apikey",
+            "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+           }
+          ]
+         },
+         "sendBody": false,
+         "options": {
+          "redirect": {
+           "redirect": {
+            "followRedirects": true,
+            "maxRedirects": 21
+           }
+          }
+         },
+         "infoMessage": ""
+        },
+        "id": "d7554551-f57a-4b5b-bf3c-e06791c673cf",
+        "name": "verifica_instancias2",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+         -144,
+         -144
+        ],
+        "retryOnFail": true
+       },
+       "messages": [
+        "502 - \"Bad Gateway\""
+       ],
+       "httpCode": "502",
+       "message": "Bad gateway - the service failed to handle your request",
+       "stack": "NodeApiError: Bad gateway - the service failed to handle your request\n    at ExecuteContext.execute (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file+packages+nodes-base_@aws-sdk+credential-providers@3.808.0_asn1.js@5_afd197edb2c1f848eae21a96a97fab23/node_modules/n8n-nodes-base/nodes/HttpRequest/V3/HttpRequestV3.node.ts:858:16)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at WorkflowExecute.executeNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1093:8)\n    at WorkflowExecute.runNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1274:11)\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1708:27\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:2324:11"
+      },
+      "lastNodeExecuted": "verifica_instancias2",
+      "mode": "trigger"
+     },
+     "workflow": {
+      "id": "sbR8wiWrZBQ0LFxS",
+      "name": "captura de grupos p got ver"
+     }
+    }
+   }
+  ],
+  "ativado_pelo_erro": [
+   {
+    "json": {
+     "execution": {
+      "id": "2946515",
+      "url": "https://interface.inovareinteligenciaartificial.com/workflow/sbR8wiWrZBQ0LFxS/executions/2946515",
+      "error": {
+       "level": "warning",
+       "tags": {},
+       "description": "Bad Gateway",
+       "timestamp": 1774429247657,
+       "context": {
+        "itemIndex": 0,
+        "request": {
+         "headers": {
+          "apikey": "<SEGREDO_REMOVIDO>",
+          "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7"
+         },
+         "method": "GET",
+         "uri": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+         "gzip": true,
+         "rejectUnauthorized": true,
+         "followRedirect": true,
+         "resolveWithFullResponse": true,
+         "followAllRedirects": true,
+         "maxRedirects": 21,
+         "timeout": 300000,
+         "encoding": null,
+         "json": false,
+         "useStream": true
+        }
+       },
+       "functionality": "regular",
+       "name": "NodeApiError",
+       "node": {
+        "parameters": {
+         "preBuiltAgentsCalloutHttpRequest": "",
+         "curlImport": "",
+         "method": "GET",
+         "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+         "authentication": "none",
+         "provideSslCertificates": false,
+         "sendQuery": false,
+         "sendHeaders": true,
+         "specifyHeaders": "keypair",
+         "headerParameters": {
+          "parameters": [
+           {
+            "name": "apikey",
+            "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+           }
+          ]
+         },
+         "sendBody": false,
+         "options": {
+          "redirect": {
+           "redirect": {
+            "followRedirects": true,
+            "maxRedirects": 21
+           }
+          }
+         },
+         "infoMessage": ""
+        },
+        "id": "d7554551-f57a-4b5b-bf3c-e06791c673cf",
+        "name": "verifica_instancias2",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+         -144,
+         -144
+        ],
+        "retryOnFail": true
+       },
+       "messages": [
+        "502 - \"Bad Gateway\""
+       ],
+       "httpCode": "502",
+       "message": "Bad gateway - the service failed to handle your request",
+       "stack": "NodeApiError: Bad gateway - the service failed to handle your request\n    at ExecuteContext.execute (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file+packages+nodes-base_@aws-sdk+credential-providers@3.808.0_asn1.js@5_afd197edb2c1f848eae21a96a97fab23/node_modules/n8n-nodes-base/nodes/HttpRequest/V3/HttpRequestV3.node.ts:858:16)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at WorkflowExecute.executeNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1093:8)\n    at WorkflowExecute.runNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1274:11)\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1708:27\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:2324:11"
+      },
+      "lastNodeExecuted": "verifica_instancias2",
+      "mode": "trigger"
+     },
+     "workflow": {
+      "id": "I7O5X5F0SWMfV4YV",
+      "name": "captura de grupos p got ver"
+     }
+    }
+   }
+  ],
+  "backend": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+      "content-length": "871",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "cache-control": "no-cache",
+      "content-type": "application/json",
+      "origin": "null",
+      "pragma": "no-cache",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "45.71.241.184",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "45.71.241.184"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "p": "editar",
+      "id": "1",
+      "url_portainer": "https://painel5.inovareinteligenciaartificial.com",
+      "login_portainer": "admin",
+      "senha_portainer": "<SEGREDO_REMOVIDO>",
+      "stack_postgres": "postgres2",
+      "url_wuzapi": "https://wuzapi.inovareinteligenciaartificial.com",
+      "token_wuzapi": "<SEGREDO_REMOVIDO>",
+      "adm": "559184698653",
+      "dev": "5522998908709",
+      "prompt": "Analise os detalhes desse erro.",
+      "system_message": "Sua tarefa é agir como o núcleo de autocura (Jarvis). Retorne apenas um objeto JSON com os seguintes campos estruturados:\n- action: Pode ser um dos valores [\"NONE\", \"DISABLE\", \"RESTART_VPS\", \"CLEAR_CACHE\"] (Se for um erro crítico estrutural/looping recomende DISABLE. Se faltar disco CLEAR_CACHE, etc).\n- level: [\"WARNING\", \"MEDIUM\", \"CRITICAL\"]\n- solution: Uma breve frase sobre como resolver.\n- retry: (boolean) True se voce recomenda tentar de novo depois (ex: timeout)"
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/backend-jarvis-tratamento",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "ativado_pelo_erro": {
+   "main": [
+    [
+     {
+      "node": "contador de erros",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "JarvisDecisor": {
+   "main": [
+    [
+     {
+      "node": "RouteAction",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "RouteAction": {
+   "main": [
+    [
+     {
+      "node": "DeactivateWorkflow",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "DeactivateWorkflow",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "WUZAP_Notify_Admin1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Paga Token",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [
+     {
+      "node": "WUZAP_Notify_Admin",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "DeactivateWorkflow": {
+   "main": [
+    [
+     {
+      "node": "WUZAP_Notify_Admin",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "WUZAP_Notify_Admin": {
+   "main": [
+    [
+     {
+      "node": "WUZAP_Notify_Dev",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a command": {
+   "main": [
+    []
+   ]
+  },
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "criar_tabela1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Paga Token": {
+   "main": [
+    [
+     {
+      "node": "Busca Conteineres Vazios",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Busca Imagens",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Busca Conteineres Vazios1",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "WUZAP_Notify_Admin",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Conteineres Vazios": {
+   "main": [
+    [
+     {
+      "node": "Filtra Conteineres Vazios",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra Conteineres Vazios": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [],
+    [
+     {
+      "node": "Deleta Conteiner Vazio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Deleta Conteiner Vazio": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Imagens": {
+   "main": [
+    [
+     {
+      "node": "Filtra imagens não usadas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra imagens não usadas": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items1": {
+   "main": [
+    [],
+    [
+     {
+      "node": "Deleta imagem não usada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Deleta imagem não usada": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Conteineres Vazios1": {
+   "main": [
+    [
+     {
+      "node": "Filtra Conteineres Vazios1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra Conteineres Vazios1": {
+   "main": [
+    [
+     {
+      "node": "Execute a command1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a command1": {
+   "main": [
+    [
+     {
+      "node": "Execute a command2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_jarvis_config": {
+   "main": [
+    [
+     {
+      "node": "JarvisDecisor",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "frontend": {
+   "main": [
+    [
+     {
+      "node": "HTML1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "backend": {
+   "main": [
+    [
+     {
+      "node": "Switch1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code6": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook16",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch1": {
+   "main": [
+    [
+     {
+      "node": "edita_jarvis_config",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [],
+    [
+     {
+      "node": "criar_tabela2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "busca_jarvis_config1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_jarvis_config1": {
+   "main": [
+    [
+     {
+      "node": "Code6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "edita_jarvis_config": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook17",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "contador de erros": {
+   "main": [
+    [
+     {
+      "node": "busca_jarvis_config",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "JarvisDecisor",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "WUZAP_Notify_Admin1": {
+   "main": [
+    [
+     {
+      "node": "Execute a command",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parser": {
+   "ai_outputParser": [
+    [
+     {
+      "node": "JarvisDecisor",
+      "type": "ai_outputParser",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini": {
+   "ai_languageModel": [
+    []
+   ]
+  },
+  "criar_tabela2": {
+   "main": [
+    [
+     {
+      "node": "Get an execution",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Get an execution": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields": {
+   "main": [
+    [
+     {
+      "node": "Code",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook18",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criar_tabela1": {
+   "main": [
+    [
+     {
+      "node": "criar_tabela",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criar_tabela": {
+   "main": [
+    [
+     {
+      "node": "criar_tabela4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "JarvisDecisor",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "timeSavedMode": "fixed",
+  "callerPolicy": "workflowsFromSameOwner",
+  "executionTimeout": -1,
+  "availableInMCP": false
+ },
+ "versionId": "bce4671f-0d30-4a5c-9666-0a0655294c3b",
+ "meta": {
+  "aiBuilderAssisted": true,
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "yFGKObmqVvOOlgRt",
+ "tags": []
+}

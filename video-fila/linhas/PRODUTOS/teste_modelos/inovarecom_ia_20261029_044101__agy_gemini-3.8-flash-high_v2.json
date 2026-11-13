@@ -1,0 +1,42 @@
+{
+ "modelo": "agy/gemini-3.8-flash-high",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T18:02:03",
+ "segundos": 1490,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:02:03",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "agy/gemini-3.8-flash-high",
+   "decisor": "agy/gemini-3.8-flash-high"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Monotonia visual e ausência de telas do produto ou simulação prática ao longo de 27 segundos contínuos do apresentador no mesmo enquadramento; a causa é a variante 'dono_tres'.",
+    "prova": "campo formato 'dono_tres' / historico_notas (repetido em 3+ vídeos: inovarecom 28/10 15:37, disparoemmassa 29/10 03:13 e inovarecom 29/10 04:41) / quadros 1 a 10 da folha",
+    "sugestao": "Testar redução de peso ou desligar a variante 'dono_tres' (em pesos_variantes ou variantes_desligadas), dando preferência a variantes que alternem a fala com telas e b-rolls do produto.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Headroom estrangulado no enquadramento: a pílula de etapas ('1 O problema', '2 Como funciona', '3 O resultado') encosta diretamente no topo da cabeça (cabelo) do apresentador.",
+    "prova": "quadros 3 a 10 da folha / júri diretor cena 1",
+    "sugestao": "Ajustar a escala/enquadramento do apresentador ou aumentar o parâmetro folga_dono para posicioná-lo mais abaixo e garantir área de respiro acima do cabelo.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "Variante com 27s contínuos do apresentador no mesmo enquadramento sem telas do produto gera monotonia visual e notas baixas de movimento repetidas em 3+ vídeos; reduzir o peso diminui sua frequência no sorteio preservando a variabilidade.",
+    "prova": "campo formato 'dono_tres' / historico_notas (repetido em 3+ vídeos: inovarecom 28/10 15:37, disparoemmassa 29/10 03:13 e inovarecom 29/10 04:41) / quadros 1 a 10 da folha"
+   }
+  ],
+  "aprovadas": 1
+ }
+}

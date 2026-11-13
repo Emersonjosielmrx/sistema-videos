@@ -1,0 +1,13 @@
+PASTA MOVIDA PARA O GOOGLE DRIVE
+==================================
+
+Data: 2026-10-20
+Destino: manhwa-drive:referencias_backup/narradores
+Tamanho: 8.3 GB
+
+Como recuperar:
+---------------
+D:\tools\rclone.exe copy manhwa-drive:referencias_backup/narradores D:\hipercool-materiais\referencias_narradores --transfers 8 --progress
+
+Motivo: Limpeza de disco (análise 2026-10-20)
+Material de estudo/referência, não muda, baixo risco

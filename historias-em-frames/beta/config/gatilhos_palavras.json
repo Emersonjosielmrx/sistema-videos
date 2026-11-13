@@ -1,0 +1,274 @@
+{
+  "_nota": "Gatilhos de som por palavra falada pelo criador. 'regex' casa com a palavra normalizada (minusculas, sem acento). 'sons' sao trechos de nomes de arquivos em sfx_memes/sfx/sfx_extras (o primeiro que existir e for curto e usado, sorteado). 'emoji' opcional aparece junto. Editavel.",
+  "cooldown_s": 5.0,
+  "max_por_video": 6,
+  "gain_db": -10,
+  "max_duracao_s": 2.6,
+  "gatilhos": [
+    {
+      "regex": "^(caramba|caraca|eita|nossa|mano|meu deus|surreal|absurdo|inacreditavel|bizarro)$",
+      "sons": [
+        "Vine Boom Sound Effect Bass Boosted",
+        "Bruh",
+        "Whaaat"
+      ],
+      "emoji": "😳",
+      "nome": "choque"
+    },
+    {
+      "regex": "^(que|o)$",
+      "proxima": "^(isso|que)$",
+      "sons": [
+        "Esquilo gritando",
+        "Whaaat"
+      ],
+      "emoji": "🤨",
+      "nome": "que_isso"
+    },
+    {
+      "regex": "^(errou|errado|falhou|fail|quebrou|estragou|ferrou|lascou)$",
+      "sons": [
+        "Windows Error",
+        "Fail 1",
+        "Fail 2",
+        "Ops",
+        "Price is Right Losing Horn"
+      ],
+      "emoji": "🙃",
+      "nome": "falha"
+    },
+    {
+      "regex": "^(perfeito|sucesso|funcionou|conseguiu|ganhou|acertou|top|sensacional|incrivel|genial)$",
+      "sons": [
+        "TADAAH",
+        "Children Yay",
+        "Minecraft Level Up",
+        "Nice Shot",
+        "Acertou Miseravel"
+      ],
+      "emoji": "🏆",
+      "nome": "vitoria"
+    },
+    {
+      "regex": "^(dinheiro|caro|barato|reais|preco|custa|custou|mil|milhao|milhoes|grana)$",
+      "sons": [
+        "Cash Register",
+        "Caixa Registradora",
+        "Dinheiro 1",
+        "Dinheiro 2",
+        "Moeda caindo"
+      ],
+      "emoji": "💸",
+      "nome": "dinheiro"
+    },
+    {
+      "regex": "^(suspeito|impostor|sus|estranho|esquisito)$",
+      "sons": [
+        "Among Us Impostor",
+        "AMOGUS",
+        "Among Us (Reporting Body)"
+      ],
+      "emoji": "🤔",
+      "nome": "sus"
+    },
+    {
+      "regex": "^(acabou|destruiu|finalizou|fatality|humilhou|lavou)$",
+      "sons": [
+        "MK Finish Him",
+        "MK Fatality",
+        "Super Smash Bros Ultimate Final KO"
+      ],
+      "emoji": "💀",
+      "nome": "finish"
+    },
+    {
+      "regex": "^(morreu|morri|perdeu|game over|wasted)$",
+      "sons": [
+        "GTA Wasted",
+        "MORRI",
+        "E Morreu - Didi"
+      ],
+      "emoji": "☠️",
+      "nome": "wasted"
+    },
+    {
+      "regex": "^(triste|pena|coitado|coitada|chato|decepcao)$",
+      "sons": [
+        "Boowomp",
+        "Sad Music 1",
+        "Triste",
+        "Cartoon Violin Descending"
+      ],
+      "emoji": "😢",
+      "nome": "triste"
+    },
+    {
+      "regex": "^(horrivel|pessimo|lixo|ruim|porcaria|vaia)$",
+      "sons": [
+        "Crowd Booing",
+        "Windows Error",
+        "Fail 1"
+      ],
+      "emoji": "👎",
+      "nome": "ruim"
+    },
+    {
+      "regex": "^(uau|wow|lindo|linda|incrivel|maravilhoso|maravilhosa|belissimo)$",
+      "sons": [
+        "Anime Wow",
+        "Brilho Magico",
+        "Magic_Wand_1",
+        "Angel  Sound Effect"
+      ],
+      "emoji": "✨",
+      "nome": "wow"
+    },
+    {
+      "regex": "^(tenso|tensao|medo|assustador|perigo|perigoso|cuidado)$",
+      "sons": [
+        "Heartbeat",
+        "Suspense 1",
+        "Danger Alarm",
+        "Riser 1"
+      ],
+      "emoji": "😨",
+      "nome": "tensao"
+    },
+    {
+      "regex": "^(piada|trocadilho|zoeira|zuera|kkk|haha)$",
+      "sons": [
+        "Ba Dum Tss",
+        "Badum Tsss",
+        "Cartoon Slide Whistle Down"
+      ],
+      "emoji": "🥁",
+      "nome": "piada"
+    },
+    {
+      "regex": "^(doeu|machucou|machuquei|socorro|aiai)$",
+      "sons": [
+        "Minecraft hurt  sound effect",
+        "Minecraft Alpha Damage",
+        "Cartoon Bonk"
+      ],
+      "emoji": "🤕",
+      "nome": "dor"
+    },
+    {
+      "regex": "^(rapido|rapida|velocidade|correndo|voando|ligeiro)$",
+      "sons": [
+        "Eu sou a velocidade",
+        "Fast woosh",
+        "Cartoon Zoom Away"
+      ],
+      "emoji": "💨",
+      "nome": "velocidade"
+    },
+    {
+      "regex": "^(magica|magico|feitico|truque)$",
+      "sons": [
+        "Magica",
+        "Brilho Magico",
+        "Magic_Wand_1"
+      ],
+      "emoji": "🪄",
+      "nome": "magica"
+    },
+    {
+      "regex": "^(noticia|urgente|breaking|plantao)$",
+      "sons": [
+        "Breaking News",
+        "Big Bell",
+        "Samsung Notification"
+      ],
+      "emoji": "📰",
+      "nome": "noticia"
+    },
+    {
+      "regex": "^(peido|peidou|fedido|fedor)$",
+      "sons": [
+        "PEIDO",
+        "Fart 1",
+        "Fart Meme Sound"
+      ],
+      "emoji": "💨",
+      "nome": "peido"
+    },
+    {
+      "regex": "^(foto|print|printa|screenshot)$",
+      "sons": [
+        "Camera Shutter",
+        "Shutter Click",
+        "Camera Shot"
+      ],
+      "emoji": "📸",
+      "nome": "foto"
+    },
+    {
+      "regex": "^(soco|porrada|pancada|bateu|tapa)$",
+      "sons": [
+        "Punch 1",
+        "Punch 2",
+        "Hard slap",
+        "Cartoon Slap"
+      ],
+      "emoji": "👊",
+      "nome": "soco"
+    },
+    {
+      "regex": "^(vidro|quebrou|espatifou)$",
+      "sons": [
+        "Vidro Quebrando",
+        "Copo quebrando"
+      ],
+      "emoji": "💥",
+      "nome": "vidro"
+    },
+    {
+      "regex": "^(tiro|arma|atirou|bang)$",
+      "sons": [
+        "Tiro - Efeitos Sonoros Nerzinho",
+        "Headshot",
+        "Arma 1"
+      ],
+      "emoji": "🔫",
+      "nome": "tiro"
+    },
+    {
+      "regex": "^(sono|dormir|dormindo|cansado|cansada|tedio)$",
+      "sons": [
+        "Windows XP Shutdown",
+        "Grilos",
+        "Discord Leave"
+      ],
+      "emoji": "😴",
+      "nome": "sono"
+    },
+    {
+      "regex": "^(nope|nao|jamais|nunca)$",
+      "proxima": "^(nao|jamais|nunca)$",
+      "sons": [
+        "Nope (Construction Worker TF2)",
+        "Aham sei",
+        "Eu nao quero"
+      ],
+      "emoji": "🙅",
+      "nome": "nope"
+    }
+  ],
+  "bloqueio_nomes": [
+    "pika",
+    "mamar",
+    "matar",
+    "caralho",
+    "fuck",
+    "nigga",
+    "xereca",
+    "puta",
+    "cu ",
+    "sangrando",
+    "earrape",
+    "cheirao",
+    "menininho"
+  ]
+}

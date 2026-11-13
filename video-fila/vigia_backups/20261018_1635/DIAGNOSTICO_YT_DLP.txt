@@ -1,0 +1,42 @@
+DIAGNÓSTICO yt-dlp — 2026-10-18 16:35
+
+PROBLEMA: Todos os downloads do parceiro falhando desde ~16:05 (exit code 1)
+
+CAUSA RAIZ (3 problemas simultâneos):
+1. YouTube bloqueando bot: "Sign in to confirm you're not a bot"
+2. Cookies Chrome travados: "Could not copy Chrome cookie database" (issue #7271)
+3. Sem runtime JS: "No supported JavaScript runtime" (deno/node ausentes)
+
+LOG TÍPICO:
+2026-10-18 16:16:08 - WARNING - [fetch] download (width) falhou: exit status 1
+2026-10-18 16:16:11 - ERROR - [fetch] download falhou: exit status 1
+
+VÍDEOS AFETADOS: TODOS desde 16:05 (kaijinre, king_chan01, filmes, UCQ1X71...)
+- https://www.youtube.com/shorts/lb2bqpO4Zmk
+- https://www.youtube.com/shorts/4_etoQLkKIM
+- (+ ~30 outros)
+
+TESTE MANUAL (19:35):
+$ yt-dlp --cookies-from-browser chrome "https://www.youtube.com/shorts/lb2bqpO4Zmk"
+→ ERROR: Could not copy Chrome cookie database
+→ ERROR: Sign in to confirm you're not a bot
+
+$ yt-dlp --print "%(id)s" "https://www.youtube.com/shorts/lb2bqpO4Zmk"
+→ WARNING: No supported JavaScript runtime
+→ ERROR: Sign in to confirm you're not a bot. Use --cookies-from-browser
+
+SOLUÇÃO PROPOSTA:
+1. Fechar Chrome (destrava cookies.db)
+2. Tentar --cookies-from-browser chrome novamente
+3. Se falhar: extrair cookies com extensão "Get cookies.txt LOCALLY" → cookies.txt
+4. Usar: yt-dlp --cookies cookies.txt ...
+
+ALTERNATIVA (mais robusta):
+- Instalar deno (runtime JS): scoop install deno OU choco install deno
+- Extrair cookies: extensão "Get cookies.txt LOCALLY" (não envia pra servidor)
+- Atualizar anime_fetch.py: adicionar --cookies cookies.txt
+
+RISCO: Sem conserto, NENHUM vídeo do parceiro será baixado (0 postagens).
+IMPACTO: 14 canais brasileiros sem post hoje (viola REGRA DO DONO).
+
+DECISÃO: PRECISA REVISÃO (envolve fechar Chrome do usuário ou mexer em autenticação).

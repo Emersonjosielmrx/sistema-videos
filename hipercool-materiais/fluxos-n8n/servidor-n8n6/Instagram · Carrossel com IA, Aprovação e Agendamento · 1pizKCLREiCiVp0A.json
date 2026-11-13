@@ -1,0 +1,4623 @@
+{
+ "updatedAt": "2026-10-14T00:57:59.204Z",
+ "createdAt": "2026-10-13T23:39:43.894Z",
+ "id": "1pizKCLREiCiVp0A",
+ "name": "Instagram · Carrossel com IA, Aprovação e Agendamento",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "path": "insta-carrossel",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Página de criação (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    316
+   ],
+   "id": "4f14cf38-bb4e-4251-80a9-acad6466f00f",
+   "webhookId": "27f4c7a7-11ef-4cb2-acdb-ff68e1dac327"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<meta name=\"robots\" content=\"noindex\">\n<title>Carrossel com IA</title>\n<style>\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#fafafa;color:#262626;line-height:1.5}\n.top{background:linear-gradient(45deg,#f58529,#dd2a7b 55%,#8134af);color:#fff;text-align:center;padding:48px 18px 86px}\n.top h1{font-size:clamp(26px,5vw,40px);line-height:1.1;max-width:640px;margin:0 auto 10px}\n.top p{max-width:560px;margin:0 auto;opacity:.95}\n.w{width:min(640px,calc(100% - 28px));margin:-56px auto 60px}\n.box{background:#fff;border:1px solid #dbdbdb;border-radius:16px;padding:22px;margin-bottom:14px}\n.box h2{font-size:17px;margin-bottom:12px}\nlabel{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}\ninput,select,textarea{width:100%;padding:12px;border:1px solid #dbdbdb;border-radius:10px;font:inherit;font-size:15px;background:#fff}\ntextarea{min-height:80px;resize:vertical}\n.g{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}\n.cores{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}\n.cores label{margin:0;cursor:pointer;text-align:center;font-weight:600;font-size:12px}\n.cores input{position:absolute;opacity:0;pointer-events:none}\n.cores span{display:block;aspect-ratio:4/5;border-radius:10px;border:3px solid transparent;margin-bottom:4px;position:relative;overflow:hidden}\n.cores span::after{content:\"\";position:absolute;left:14%;top:16%;width:30%;height:5%;background:var(--d);border-radius:2px}\n.cores label:has(input:checked) span{border-color:#0095f6}\n.hint{font-size:12.5px;color:#8e8e8e;margin-top:5px}\n.btn{width:100%;border:0;border-radius:12px;padding:15px;font:inherit;font-weight:700;font-size:16px;color:#fff;background:#0095f6;cursor:pointer}\n.btn:disabled{opacity:.6;cursor:wait}\n.erro{display:none;margin-top:12px;color:#d03b3b;font-weight:600}\n.hp{position:absolute;left:-9999px}\n@media(max-width:560px){.g{grid-template-columns:1fr}.cores{grid-template-columns:repeat(3,1fr)}}\n</style>\n</head>\n<body>\n<section class=\"top\"><h1>📸 Carrossel para Instagram com IA</h1><p>A IA escreve o roteiro de 6 slides, desenha as imagens e a legenda. Você revisa, aprova e o fluxo publica (ou agenda) no Instagram.</p></section>\n<main class=\"w\">\n<form id=\"f\" novalidate>\n  <div class=\"box\"><h2>1. Sobre o post</h2>\n    <label for=\"tema\">Tema do carrossel *</label><textarea id=\"tema\" name=\"tema\" maxlength=\"160\" placeholder=\"Ex: 5 automações com IA que todo pequeno negócio deveria usar\"></textarea>\n    <div class=\"g\">\n      <div><label for=\"perfil\">@ do perfil *</label><input id=\"perfil\" name=\"perfil\" maxlength=\"30\" placeholder=\"@seuperfil\"></div>\n      <div><label for=\"objetivo\">Objetivo</label><select id=\"objetivo\" name=\"objetivo\"><option>ensinar</option><option>vender</option><option>gerar engajamento</option><option>contar uma história</option><option>quebrar uma objeção</option></select></div>\n    </div>\n    <label for=\"publico\">Para quem é?</label><input id=\"publico\" name=\"publico\" maxlength=\"200\" placeholder=\"Ex: donos de pequenos negócios que nunca usaram IA\">\n    <div class=\"g\">\n      <div><label for=\"tom\">Tom de voz</label><select id=\"tom\" name=\"tom\"><option>direto e próximo</option><option>divertido</option><option>técnico e didático</option><option>inspirador</option><option>provocativo</option></select></div>\n      <div><label for=\"palavra\">Palavra para comentar</label><input id=\"palavra\" name=\"palavra\" maxlength=\"20\" placeholder=\"Ex: QUERO (opcional)\"><p class=\"hint\">Vira o \"comente QUERO\" do último slide.</p></div>\n    </div>\n    <label for=\"cta\">Chamada final</label><input id=\"cta\" name=\"cta\" maxlength=\"120\" placeholder=\"Ex: Siga para mais dicas de IA\">\n  </div>\n  <div class=\"box\"><h2>2. Visual dos slides</h2>\n    <div class=\"cores\">\n      <label><input type=\"radio\" name=\"estilo\" value=\"escuro\" checked><span style=\"background:#0f172a;--d:#f59e0b\"></span>Escuro</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"claro\"><span style=\"background:#fafaf9;border-color:#eee;--d:#e11d48\"></span>Claro</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"vibrante\"><span style=\"background:#5b21b6;--d:#facc15\"></span>Vibrante</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"natural\"><span style=\"background:#f1f5ec;--d:#2f855a\"></span>Natural</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"corporativo\"><span style=\"background:#0b3a6e;--d:#38bdf8\"></span>Corporativo</label>\n    </div>\n    <div class=\"hp\" aria-hidden=\"true\"><input name=\"site\" tabindex=\"-1\" autocomplete=\"off\"></div>\n  </div>\n  <button class=\"btn\" id=\"btn\" type=\"submit\">✨ Criar carrossel</button>\n  <p class=\"erro\" id=\"erro\" role=\"alert\"></p>\n</form>\n</main>\n<script>\n(function () {\n  var f = document.getElementById('f'), btn = document.getElementById('btn'), er = document.getElementById('erro');\n  function falha(m) { er.textContent = m; er.style.display = 'block'; }\n  f.addEventListener('submit', function (e) {\n    e.preventDefault(); er.style.display = 'none';\n    if (f.tema.value.trim().length < 5) { f.tema.focus(); return falha('Descreva o tema do carrossel.'); }\n    if (f.perfil.value.replace('@', '').trim().length < 2) { f.perfil.focus(); return falha('Informe o @ do perfil.'); }\n    var d = {}; new FormData(f).forEach(function (v, k) { d[k] = String(v).trim(); });\n    btn.disabled = true; btn.textContent = 'Enviando…';\n    fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })\n      .then(function (r) { return r.json(); })\n      .then(function (j) { if (!j.ok) throw new Error(j.erro || 'Não foi possível criar.'); location.href = j.link; })\n      .catch(function (x) { btn.disabled = false; btn.textContent = '✨ Criar carrossel'; falha(x.message); });\n  });\n})();\n</script>\n</body>\n</html>\n"
+   },
+   "name": "HTML da criação",
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    240,
+    316
+   ],
+   "id": "9fa08219-b9a9-433d-8562-c9f037c90e8a"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    316
+   ],
+   "id": "9384864d-dc23-4366-9cec-dfe870a95ebe"
+  },
+  {
+   "parameters": {
+    "path": "insta-carrossel",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "name": "Novo carrossel (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    909
+   ],
+   "id": "4baf6a85-ff4c-4516-ab01-f3ff13ac3b05",
+   "webhookId": "39caa3d7-f61a-4e39-b7ec-b332bbc6fb33"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "=ig:rl:{{ ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || 'sem-ip').split(',')[0]).trim() }}",
+    "expire": true,
+    "ttl": 3600
+   },
+   "name": "Contador por IP",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    909
+   ],
+   "id": "85fa7420-cbb8-4da0-a34c-70450e93b04d",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const LIMITE_POR_HORA = 10;\nconst req = $('Novo carrossel (POST)').first().json;\nconst b = (req.body && typeof req.body === 'object') ? req.body : {};\nconst usos = Number(Object.values($input.first().json)[0]) || 0;\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u001f\\u007f]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst ESTILOS = ['escuro', 'claro', 'vibrante', 'natural', 'corporativo'];\nconst d = {\n  tema: limpa(b.tema, 160), perfil: limpa(b.perfil, 30).replace(/^@+/, '').replace(/[^\\w.]/g, ''),\n  publico: limpa(b.publico, 200), objetivo: limpa(b.objetivo, 60) || 'ensinar', tom: limpa(b.tom, 60) || 'direto e próximo',\n  estilo: ESTILOS.includes(b.estilo) ? b.estilo : 'escuro', cta: limpa(b.cta, 120) || 'Salve este post e siga para mais dicas',\n  palavra: limpa(b.palavra, 20).replace(/[^\\p{L}\\p{N}]/gu, ''),\n};\nconst erros = [];\nif (d.tema.length < 5) erros.push('Descreva o tema do carrossel.');\nif (d.perfil.length < 2) erros.push('Informe o @ do perfil.');\nif (String(b.site || '').trim()) erros.push('Requisição recusada.');\nif (usos > LIMITE_POR_HORA) erros.unshift('Muitos carrosséis criados nesta rede na última hora. Tente mais tarde.');\nconst rnd = n => Array.from({ length: n }, () => 'abcdefghijkmnpqrstuvwxyz23456789'[Math.floor(Math.random() * 32)]).join('');\nconst id = 'car-' + Date.now().toString(36) + rnd(4);\nconst k = rnd(18);\nconst base = String(req.webhookUrl || '').split('/webhook/')[0] || 'https://webhookn8n6.inovareinteligenciaartificial.com';\nreturn [{ json: { valido: erros.length === 0, erros, codigo_http: usos > LIMITE_POR_HORA ? 429 : 400, id, k, base, dados: d,\n  link: `${base}/webhook/insta-carrossel-ver?id=${id}&k=${k}`, criadoEm: new Date().toISOString() } }];"
+   },
+   "name": "Validar pedido do carrossel",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    500,
+    909
+   ],
+   "id": "e838c4f9-f67c-491f-815d-1f4e4dd4968e"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "9f3b463b-79e2-4e67-8006-fc1e7d431a54",
+       "leftValue": "={{ $json.valido }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Pedido ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    750,
+    909
+   ],
+   "id": "3175b4ee-9021-4fde-923f-2ed0bc5dc755"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erros.join(' ') }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     },
+     "responseCode": "={{ $json.codigo_http }}"
+    }
+   },
+   "name": "Responde erro",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    1089
+   ],
+   "id": "2e0c2b50-e1f7-4248-874a-47b2ee69416d"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $('Validar pedido do carrossel').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Validar pedido do carrossel').first().json.id, k: $('Validar pedido do carrossel').first().json.k, status: 'gerando', dados: $('Validar pedido do carrossel').first().json.dados, criadoEm: $('Validar pedido do carrossel').first().json.criadoEm }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Rascunho: gerando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1000,
+    909
+   ],
+   "id": "71e864a0-c113-485a-9557-9ddd37880799",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, link: $('Validar pedido do carrossel').first().json.link }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde com o link",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1250,
+    909
+   ],
+   "id": "70d3f347-3040-48cd-bf78-710518c61e75"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'PEDIDO:\\n' + JSON.stringify($('Validar pedido do carrossel').first().json.dados, null, 1) }}",
+    "options": {
+     "systemMessage": "Você é ROTEIRISTA DE CARROSSEL para Instagram, especialista em posts que as pessoas salvam e compartilham.\n\nESTRUTURA FIXA DE 6 SLIDES\n1. Capa: título-gancho de até 60 caracteres (curiosidade, número ou promessa clara) e subtítulo de até 90.\n2 a 5. Quatro slides de conteúdo: título de até 45 caracteres e texto de até 240. Uma ideia por slide, prática e com exemplo concreto.\n6. Chamada final: título de até 45 e texto de até 150, usando a chamada final pedida e a palavra para comentar, se houver.\n\nREGRAS\n- Português do Brasil, no tom pedido, falando com o público informado.\n- Acentuação correta do português é obrigatória em tudo (você, não, negócio, horário, também, até). Texto sem acento será recusado.\n- NUNCA use emoji nos textos dos slides (a fonte das imagens não desenha emoji). Na legenda pode.\n- Nada de promessas falsas ou números inventados.\n- Legenda de 600 a 1200 caracteres: gancho na primeira linha, desenvolvimento curto, uma pergunta para gerar comentários e a chamada final.\n- De 5 a 8 hashtags relevantes, sem o símbolo #.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"capa\":{\"titulo\":\"\",\"subtitulo\":\"\"},\"slides\":[{\"titulo\":\"\",\"texto\":\"\"}],\"cta\":{\"titulo\":\"\",\"texto\":\"\"},\"legenda\":\"\",\"hashtags\":[\"\"]}"
+    },
+    "needsFallback": true
+   },
+   "name": "Roteirista de carrossel",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1500,
+    909
+   ],
+   "id": "3a2ac0bd-c6a8-4374-a1df-c5aa70f813fb",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 6000,
+     "temperature": 0.8,
+     "timeout": 300000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro do roteirista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    1149
+   ],
+   "id": "542f327c-eb94-43c9-aada-d05b1676f78d",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst r = $('Validar pedido do carrossel').first().json;\nconst ia = parseJSON($input.first().json.output ?? '') || {};\nconst FONTES = '/usr/share/fonts/truetype/msttcorefonts/';\nconst PALETAS = {\n  escuro: { fundo: '#0f172a', destaque: '#f59e0b', titulo: '#ffffff', texto: '#cbd5e1', rodape: '#94a3b8', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n  claro: { fundo: '#fafaf9', destaque: '#e11d48', titulo: '#111827', texto: '#374151', rodape: '#6b7280', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n  vibrante: { fundo: '#5b21b6', destaque: '#facc15', titulo: '#ffffff', texto: '#ede9fe', rodape: '#ddd6fe', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n  natural: { fundo: '#f1f5ec', destaque: '#2f855a', titulo: '#1c3324', texto: '#3f5a47', rodape: '#6b8573', tit: 'Georgia_Bold.ttf', txt: 'Georgia.ttf' },\n  corporativo: { fundo: '#0b3a6e', destaque: '#38bdf8', titulo: '#ffffff', texto: '#dbeafe', rodape: '#93c5fd', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n};\nconst P = PALETAS[r.dados.estilo] || PALETAS.escuro;\n\n// Sem emoji (as fontes do servidor não têm) e sem aspas retas (quebram o comando de desenho)\nconst limpa = (s, max) => String(s ?? '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}\\u{200D}]/gu, '')\n  .replace(/\"/g, '”').replace(/'/g, '’').replace(/\\\\/g, '/').replace(/\\s+/g, ' ').trim().slice(0, max);\nfunction quebra(texto, porLinha) {\n  const linhas = []; let atual = '';\n  for (const p of texto.split(' ')) {\n    if ((atual + ' ' + p).trim().length > porLinha && atual) { linhas.push(atual); atual = p; } else atual = (atual + ' ' + p).trim();\n  }\n  if (atual) linhas.push(atual);\n  return linhas;\n}\n\nconst d = r.dados;\nconst capa = ia.capa || {}, cta = ia.cta || {};\nlet meio = Array.isArray(ia.slides) ? ia.slides.slice(0, 4) : [];\nwhile (meio.length < 4) meio.push({ titulo: d.tema, texto: 'Salve este post para consultar depois.' });\nconst roteiro = [\n  { tipo: 'capa', titulo: limpa(capa.titulo || d.tema, 70), texto: limpa(capa.subtitulo, 110) },\n  ...meio.map(s => ({ tipo: 'conteudo', titulo: limpa(s.titulo, 60), texto: limpa(s.texto, 280) })),\n  { tipo: 'cta', titulo: limpa(cta.titulo || 'Gostou? Salve e compartilhe!', 60), texto: limpa(cta.texto || d.cta, 170) },\n];\n\nconst W = 1080, H = 1350, X = 90;\nconst slides = roteiro.map((s, i) => {\n  const capaOuCta = s.tipo !== 'conteudo';\n  const tTam = s.tipo === 'capa' ? 84 : capaOuCta ? 72 : 66;\n  const tLinhas = quebra(s.titulo, s.tipo === 'capa' ? 16 : 20);\n  const xTam = capaOuCta ? 46 : 44;\n  const xLinhas = quebra(s.texto, capaOuCta ? 33 : 35).slice(0, 10);\n  // Centraliza o bloco (título + texto) na área entre o cabeçalho e o rodapé\n  const tLH = Math.round(tTam * 1.22), xLH = Math.round(xTam * 1.24);\n  const altura = tLinhas.length * tLH + (xLinhas.length ? 60 + xLinhas.length * xLH : 0);\n  const topo = 210 + Math.max(0, Math.round((950 - altura) / 2));\n  const tY = Math.round(topo + tTam * 0.85);\n  const xY = Math.round(topo + tLinhas.length * tLH + 60 + xTam * 0.85);\n  return { json: { n: i + 1, tipo: s.tipo, titulo: tLinhas.join('\\n'), texto: xLinhas.join('\\n'),\n    tTam, xTam, tY, xY, W, H, X, cor: P, fonteTitulo: FONTES + P.tit, fonteTexto: FONTES + P.txt,\n    contador: `${i + 1}/6`, rodape: '@' + d.perfil, seta: i < 5 ? 'arraste  »' : (d.palavra ? `comente ${d.palavra.toUpperCase()}` : 'salve e compartilhe') } };\n});\n\nconst tags = (Array.isArray(ia.hashtags) ? ia.hashtags : []).map(t => '#' + String(t).replace(/[^\\p{L}\\p{N}_]/gu, '')).filter(t => t.length > 2).slice(0, 8);\nlet legenda = String(ia.legenda || '').trim().slice(0, 1800);\nif (d.palavra && !legenda.toUpperCase().includes(d.palavra.toUpperCase())) legenda += `\\n\\n💬 Comente ${d.palavra.toUpperCase()} que eu te mando o link no direct!`;\nif (tags.length) legenda += '\\n\\n' + tags.join(' ');\n// Alerta se o texto veio sem acentos (o modelo às vezes esquece)\nconst tudo = roteiro.map(s => s.titulo + ' ' + s.texto).join(' ') + ' ' + legenda;\nconst semAcento = (tudo.match(/\\b(voce|voces|nao|sao|tambem|negocio|negocios|horario|horarios|ate|facil|rapido|automacao|automacoes|inteligencia|conteudo|proximo|unico|ultimo|ja|sera|e possivel)\\b/gi) || []).length;\nconst alerta = semAcento >= 2 ? `O texto parece estar sem acentos (${semAcento} palavras como \"voce\" ou \"nao\"). Revise antes de publicar ou crie de novo.` : '';\nreturn slides.map(s => ({ json: { ...s.json, legenda, alerta, roteiro_ok: !!(ia.capa && ia.slides) } }));"
+   },
+   "name": "Organiza slides",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1810,
+    909
+   ],
+   "id": "a4ca712b-e8d2-43e9-abbd-120548dfb155"
+  },
+  {
+   "parameters": {
+    "operation": "multiStep",
+    "operations": {
+     "operations": [
+      {
+       "operation": "create",
+       "backgroundColor": "={{ $json.cor.fundo }}",
+       "width": 1080,
+       "height": 1350
+      },
+      {
+       "operation": "draw",
+       "primitive": "rectangle",
+       "color": "={{ $json.cor.destaque }}",
+       "startPositionX": 90,
+       "startPositionY": 118,
+       "endPositionX": 240,
+       "endPositionY": 132,
+       "cornerRadius": 0
+      },
+      {
+       "operation": "text",
+       "text": "={{ $json.contador }}",
+       "fontSize": 34,
+       "fontColor": "={{ $json.cor.rodape }}",
+       "positionX": 905,
+       "positionY": 138,
+       "lineLength": 400,
+       "font": "={{ $json.fonteTexto }}"
+      },
+      {
+       "operation": "text",
+       "text": "={{ $json.titulo }}",
+       "fontSize": "={{ $json.tTam }}",
+       "fontColor": "={{ $json.cor.titulo }}",
+       "positionX": 90,
+       "positionY": "={{ $json.tY }}",
+       "lineLength": 400,
+       "font": "={{ $json.fonteTitulo }}"
+      },
+      {
+       "operation": "text",
+       "text": "={{ $json.texto || ' ' }}",
+       "fontSize": "={{ $json.xTam }}",
+       "fontColor": "={{ $json.cor.texto }}",
+       "positionX": 90,
+       "positionY": "={{ $json.xY }}",
+       "lineLength": 400,
+       "font": "={{ $json.fonteTexto }}"
+      },
+      {
+       "operation": "draw",
+       "primitive": "line",
+       "color": "={{ $json.cor.rodape }}",
+       "startPositionX": 90,
+       "startPositionY": 1205,
+       "endPositionX": 990,
+       "endPositionY": 1205
+      },
+      {
+       "operation": "text",
+       "text": "={{ $json.rodape }}",
+       "fontSize": 34,
+       "fontColor": "={{ $json.cor.rodape }}",
+       "positionX": 90,
+       "positionY": 1272,
+       "lineLength": 400,
+       "font": "={{ $json.fonteTitulo }}"
+      },
+      {
+       "operation": "text",
+       "text": "={{ $json.seta }}",
+       "fontSize": 34,
+       "fontColor": "={{ $json.cor.destaque }}",
+       "positionX": "={{ 990 - $json.seta.length * 24 }}",
+       "positionY": 1272,
+       "lineLength": 400,
+       "font": "={{ $json.fonteTitulo }}"
+      }
+     ]
+    },
+    "options": {
+     "format": "jpeg",
+     "quality": 92,
+     "fileName": "={{ 'slide-' + $json.n + '.jpg' }}"
+    }
+   },
+   "name": "Desenha o slide",
+   "type": "n8n-nodes-base.editImage",
+   "typeVersion": 1,
+   "position": [
+    2060,
+    909
+   ],
+   "id": "5969d879-c94b-4f94-aaef-7e965d011a6a",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O Edit Image entrega a imagem como arquivo; aqui viramos texto (base64) para guardar no Redis\nconst itens = $input.all();\nconst saida = [];\nfor (let i = 0; i < itens.length; i++) {\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  saida.push({ json: { n: itens[i].json.n, b64: buf.toString('base64'), kb: Math.round(buf.length / 1024) } });\n}\nreturn saida;"
+   },
+   "name": "Imagem para base64",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2310,
+    909
+   ],
+   "id": "810452e8-d8f3-4526-b8a9-9065a0724b13"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:img:{{ $('Validar pedido do carrossel').first().json.id }}:{{ $json.n }}",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Guarda imagem",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2560,
+    909
+   ],
+   "id": "687bd605-189c-4370-93b9-ada353be027a",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const v = $('Validar pedido do carrossel').first().json;\nconst slides = $('Organiza slides').all().map(i => i.json);\nconst imagens = $('Imagem para base64').all().map(i => i.json);\nconst urls = slides.map(s => `${v.base}/webhook/insta-img?id=${v.id}&n=${s.n}`);\nconst rascunho = {\n  id: v.id, k: v.k, status: 'aguardando', dados: v.dados, legenda: slides[0].legenda,\n  slides: slides.map(s => ({ n: s.n, tipo: s.tipo, titulo: s.titulo.replace(/\\n/g, ' '), texto: s.texto.replace(/\\n/g, ' ') })),\n  urls, kb: imagens.map(i => i.kb), roteiro_ia: slides[0].roteiro_ok, alerta: slides[0].alerta || '',\n  criadoEm: v.criadoEm, atualizadoEm: new Date().toISOString(),\n};\nreturn [{ json: { rascunho_str: JSON.stringify(rascunho) } }];"
+   },
+   "name": "Junta rascunho",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2810,
+    909
+   ],
+   "id": "a5f83d67-e892-4e18-8aba-cf810637e3dd"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $('Validar pedido do carrossel').first().json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva rascunho",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3060,
+    909
+   ],
+   "id": "c22cd627-8b04-43ce-8e68-9023861fbe98",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $('Validar pedido do carrossel').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Validar pedido do carrossel').first().json.id, k: $('Validar pedido do carrossel').first().json.k, status: 'erro_geracao', erro: 'Falha ao desenhar as imagens: ' + String($json.error && $json.error.message || $json.error || '').slice(0, 200), dados: $('Validar pedido do carrossel').first().json.dados }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Rascunho: erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2310,
+    1129
+   ],
+   "id": "c1eae100-c154-40ea-83e8-c1aa79c73192",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "insta-img",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Pedido de imagem (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1703
+   ],
+   "id": "40220ddb-f363-473b-877d-58f9e6fe50c4",
+   "webhookId": "c841593e-99aa-4704-9dec-e4574dc5b1c9"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "img",
+    "key": "={{ /^car-[a-z0-9]+$/.test($json.query.id || '') && /^[1-6]$/.test($json.query.n || '') ? 'ig:img:' + $json.query.id + ':' + $json.query.n : 'ig:img:invalida' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê imagem",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    1703
+   ],
+   "id": "0faa3413-e6f2-4ba8-a8fe-0f9a2d60638a",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "const b64 = $input.first().json.img;\nif (!b64) return [{ json: { achou: false } }];\nreturn [{ json: { achou: true }, binary: { data: { data: b64, mimeType: 'image/jpeg', fileName: 'slide.jpg', fileExtension: 'jpg' } } }];"
+   },
+   "name": "Converte em arquivo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    500,
+    1703
+   ],
+   "id": "5cb44e1a-7034-4653-ae9b-111e1f8b074d"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "f3a74125-c26d-4208-89bd-d88e514f7b77",
+       "leftValue": "={{ $json.achou }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Achou a imagem?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    750,
+    1703
+   ],
+   "id": "2e2b57c3-3416-41df-932e-6a75be0ce74a"
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "responseDataSource": "automatically",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "image/jpeg"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=86400"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Entrega o JPEG",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    1623
+   ],
+   "id": "c0284521-d4e6-48da-a054-feb2af876b97"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "não encontrada",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     },
+     "responseCode": 404
+    }
+   },
+   "name": "Imagem não encontrada",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    1823
+   ],
+   "id": "aa658e41-e0d8-40cc-9b34-b44384720402"
+  },
+  {
+   "parameters": {
+    "path": "insta-carrossel-ver",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Ver carrossel (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    2297
+   ],
+   "id": "f079dc73-d627-4bc3-a470-d0f7326898df",
+   "webhookId": "8f2d691c-7469-4b41-aa45-5252dc27ffac"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "rascunho",
+    "key": "={{ /^car-[a-z0-9]+$/.test($json.query.id || '') ? 'ig:rasc:' + $json.query.id : 'ig:rasc:invalido' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê rascunho",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    2297
+   ],
+   "id": "d2afdc87-13e9-4be1-b98b-1de84ca8c947",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "const q = $('Ver carrossel (GET)').first().json.query || {};\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst casca = (titulo, corpo, refresh) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">${refresh ? '<meta http-equiv=\"refresh\" content=\"5\">' : ''}<title>${esc(titulo)}</title>\n<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#fafafa;color:#262626;padding:20px 14px 60px}\n.w{max-width:560px;margin:0 auto}.cab{display:flex;align-items:center;gap:10px;margin-bottom:12px}.av{width:38px;height:38px;border-radius:50%;background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);padding:2px}.av i{display:block;width:100%;height:100%;border-radius:50%;background:#fff}\n.post{background:#fff;border:1px solid #dbdbdb;border-radius:12px;overflow:hidden}.trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.trilho::-webkit-scrollbar{display:none}\n.trilho img{width:100%;flex:none;scroll-snap-align:start;aspect-ratio:4/5;object-fit:cover;background:#eee}.pts{display:flex;justify-content:center;gap:5px;padding:10px}.pts b{width:6px;height:6px;border-radius:50%;background:#c7c7c7}\n.leg{padding:4px 14px 14px;font-size:14px;white-space:pre-wrap}.box{background:#fff;border:1px solid #dbdbdb;border-radius:12px;padding:16px;margin-top:14px}\nlabel{display:block;font-weight:600;font-size:13px;margin:10px 0 6px}textarea,input{width:100%;padding:11px;border:1px solid #dbdbdb;border-radius:10px;font:inherit;font-size:14px}textarea{min-height:170px}\n.bts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.bt{flex:1 1 150px;border:0;border-radius:10px;padding:13px;font:inherit;font-weight:700;cursor:pointer;background:#efefef;color:#262626}\n.bt.pub{background:#0095f6;color:#fff}.bt:disabled{opacity:.55;cursor:wait}.msg{margin-top:12px;font-weight:600;font-size:14px}.ok{color:#2e9e5b}.er{color:#d03b3b}\n.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;background:#efefef}.s{width:44px;height:44px;border:4px solid #efefef;border-top-color:#dd2a7b;border-radius:50%;margin:60px auto 16px;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}h1{font-size:20px}.mu{color:#8e8e8e;font-size:13px}</style></head><body><div class=\"w\">${corpo}</div></body></html>`;\n\nif (!r || q.k !== r.k) return [{ json: { codigo: 404, html: casca('Não encontrado', '<h1 style=\"text-align:center;margin-top:60px\">Carrossel não encontrado</h1><p class=\"mu\" style=\"text-align:center\">Confira o link completo, com a chave.</p>') } }];\nif (r.status === 'gerando') return [{ json: { codigo: 200, html: casca('Criando o carrossel…', '<div class=\"s\"></div><h1 style=\"text-align:center\">A IA está escrevendo e desenhando os 6 slides</h1><p class=\"mu\" style=\"text-align:center\">Esta página se atualiza sozinha. Leva de 1 a 3 minutos.</p>', true) } }];\nif (r.status === 'erro_geracao') return [{ json: { codigo: 500, html: casca('Erro', `<h1>Não foi possível criar o carrossel</h1><p class=\"mu\">${esc(r.erro)}</p>`) } }];\n\nconst STATUS = { aguardando: '📝 Aguardando aprovação', agendado: '⏰ Agendado', publicado: '✅ Publicado', erro: '⚠️ Falhou ao publicar', descartado: '🗑️ Descartado' };\nconst quando = r.quando ? new Date(r.quando).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';\nconst imgs = r.urls.map((u, i) => `<img src=\"${esc(u)}\" alt=\"Slide ${i + 1}\" loading=\"${i ? 'lazy' : 'eager'}\">`).join('');\nconst pode = ['aguardando', 'erro', 'agendado'].includes(r.status);\nconst corpo = `<div class=\"cab\"><span class=\"av\"><i></i></span><div><b>${esc(r.dados.perfil)}</b><div class=\"mu\">${esc(r.dados.tema)}</div></div></div>\n<p style=\"margin-bottom:10px\"><span class=\"tag\">${STATUS[r.status] || esc(r.status)}</span>${quando ? ` <span class=\"mu\">para ${esc(quando)}</span>` : ''}${r.permalink ? ` · <a href=\"${esc(r.permalink)}\" target=\"_blank\" rel=\"noopener\">ver no Instagram</a>` : ''}</p>\n${r.erro && r.status === 'erro' ? `<p class=\"msg er\">${esc(r.erro)}</p>` : ''}\n${r.alerta && pode ? `<p class=\"msg er\">⚠️ ${esc(r.alerta)}</p>` : ''}\n<div class=\"post\"><div class=\"trilho\" id=\"tr\">${imgs}</div><div class=\"pts\">${r.urls.map(() => '<b></b>').join('')}</div><div class=\"leg\" id=\"legPrev\">${esc(r.legenda)}</div></div>\n${pode ? `<div class=\"box\"><label for=\"leg\">Legenda (pode editar)</label><textarea id=\"leg\" maxlength=\"2200\">${esc(r.legenda)}</textarea>\n<label for=\"senha\">Senha de publicação</label><input id=\"senha\" type=\"password\" placeholder=\"Só quem tem a senha publica na conta\" autocomplete=\"off\">\n<label for=\"quando\">Agendar para (opcional)</label><input id=\"quando\" type=\"datetime-local\">\n<div class=\"bts\"><button class=\"bt pub\" data-a=\"publicar\" type=\"button\">🚀 Publicar agora</button><button class=\"bt\" data-a=\"agendar\" type=\"button\">⏰ Agendar</button>\n${r.status === 'agendado' ? '<button class=\"bt\" data-a=\"cancelar\" type=\"button\">✖ Cancelar agendamento</button>' : '<button class=\"bt\" data-a=\"descartar\" type=\"button\">🗑️ Descartar</button>'}</div><p class=\"msg\" id=\"msg\" role=\"status\"></p></div>` : ''}\n<p class=\"mu\" style=\"margin-top:14px\">Dica: os slides são imagens 1080×1350 (formato 4:5, o que mais aparece no feed).</p>\n<script>\nvar tr=document.getElementById('tr'),pts=document.querySelectorAll('.pts b');function marca(){var i=Math.round(tr.scrollLeft/tr.clientWidth);pts.forEach(function(p,j){p.style.background=j===i?'#0095f6':'#c7c7c7';});}tr.addEventListener('scroll',marca);marca();\ndocument.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){\n  var a=b.getAttribute('data-a'),m=document.getElementById('msg'),q=document.getElementById('quando');\n  if(a==='agendar'&&!q.value){m.className='msg er';m.textContent='Escolha a data e a hora do agendamento.';return;}\n  if(a==='publicar'&&!confirm('Publicar agora na conta do Instagram?'))return;\n  document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=true;});m.className='msg';m.textContent=a==='publicar'?'Publicando… pode levar até 1 minuto.':'Salvando…';\n  fetch('/webhook/insta-carrossel-acao',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:${JSON.stringify(r.id)},k:${JSON.stringify(r.k)},acao:a,senha:document.getElementById('senha').value,legenda:document.getElementById('leg').value,quando:q.value})})\n   .then(function(x){return x.json();}).then(function(j){if(!j.ok){m.className='msg er';m.textContent=j.erro||'Não foi possível.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});return;}m.className='msg ok';m.textContent=j.mensagem||'Feito!';setTimeout(function(){location.reload();},1500);})\n   .catch(function(){m.className='msg er';m.textContent='Falha de conexão.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});});\n});});\n</script>`;\nreturn [{ json: { codigo: 200, html: casca('Aprovar carrossel', corpo) } }];"
+   },
+   "name": "Monta página de aprovação",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    500,
+    2297
+   ],
+   "id": "9869f662-f7ee-4e40-8d8f-a0ceba828af4"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     },
+     "responseCode": "={{ $json.codigo }}"
+    }
+   },
+   "name": "Entrega a aprovação",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    750,
+    2297
+   ],
+   "id": "5627ffd2-0457-4d22-a96d-ee71a5d92395"
+  },
+  {
+   "parameters": {
+    "path": "insta-carrossel-acao",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "name": "Ação no carrossel (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    2990
+   ],
+   "id": "032fbd77-6399-4bbd-b44d-868cdff57eab",
+   "webhookId": "91a8caca-016f-4c97-8a50-7de83cec5522"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "rascunho",
+    "key": "={{ /^car-[a-z0-9]+$/.test(($json.body || {}).id || '') ? 'ig:rasc:' + $json.body.id : 'ig:rasc:invalido' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê rascunho da ação",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    2990
+   ],
+   "id": "43dcf7a8-c1cf-4444-a779-b61eb0b882c9",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// 🔐 Senha para publicar ou agendar na conta do Instagram (troque aqui)\nconst SENHA = '<SEGREDO_REMOVIDO>';\nconst b = $('Ação no carrossel (POST)').first().json.body || {};\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst nao = (erro, codigo = 400) => [{ json: { ok: false, erro, codigo } }];\nif (!r || b.k !== r.k) return nao('Carrossel não encontrado.', 404);\nconst acao = String(b.acao || '');\nif (!['publicar', 'agendar', 'descartar', 'cancelar'].includes(acao)) return nao('Ação inválida.');\nif ((acao === 'publicar' || acao === 'agendar') && b.senha !== SENHA) return nao('Senha de publicação incorreta.', 403);\nif (r.status === 'publicado') return nao('Este carrossel já foi publicado.');\nif (acao === 'cancelar' && r.status !== 'agendado') return nao('Não há agendamento para cancelar.');\n\nconst legenda = String(b.legenda ?? r.legenda).replace(/\\r/g, '').trim().slice(0, 2200) || r.legenda;\nlet quando = null;\nif (acao === 'agendar') {\n  const t = new Date(String(b.quando || '') + ':00-03:00');\n  if (isNaN(t) || t.getTime() < Date.now() + 2 * 60000 || t.getTime() > Date.now() + 60 * 86400000) return nao('Escolha um horário entre 2 minutos e 60 dias a partir de agora.');\n  quando = t.toISOString();\n}\nconst novo = { ...r, legenda, atualizadoEm: new Date().toISOString(), erro: '' };\nif (acao === 'agendar') Object.assign(novo, { status: 'agendado', quando });\nif (acao === 'descartar') novo.status = 'descartado';\nif (acao === 'cancelar') Object.assign(novo, { status: 'aguardando', quando: null });\nreturn [{ json: { ok: true, acao, id: r.id, urls: r.urls, legenda, quando, rascunho_str: JSON.stringify(novo),\n  mensagem: { agendar: 'Agendado! O fluxo publica sozinho no horário.', descartar: 'Carrossel descartado.', cancelar: 'Agendamento cancelado.', publicar: '' }[acao] } }];"
+   },
+   "name": "Valida ação",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    500,
+    2990
+   ],
+   "id": "50f39d99-c639-4b19-a23c-b16f756b58b4"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d8330433-3ea0-462b-885f-bb6f4db377b5",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Ação permitida?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    750,
+    2990
+   ],
+   "id": "6e7ad5ed-f44f-4d17-b6c2-dae5bf901c0f"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     },
+     "responseCode": "={{ $json.codigo }}"
+    }
+   },
+   "name": "Responde recusa",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    3410
+   ],
+   "id": "4b8882ad-6306-4cc2-9084-502dd068b1f8"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "6dc848b7-7872-4168-81a0-478392e02053",
+          "leftValue": "={{ $json.acao }}",
+          "rightValue": "publicar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "publicar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "3ba3d378-c498-468f-a0de-55fdf5f12d68",
+          "leftValue": "={{ $json.acao }}",
+          "rightValue": "agendar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "agendar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "29d2ee93-58fd-46dd-b6be-07579b7ccd03",
+          "leftValue": "={{ $json.acao }}",
+          "rightValue": "descartar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "descartar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a2c277ec-d3d5-4fa6-8a45-19d574ffe92b",
+          "leftValue": "={{ $json.acao }}",
+          "rightValue": "cancelar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "cancelar"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "Qual ação?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    1000,
+    2990
+   ],
+   "id": "5c29e292-d408-4995-a5bb-e42cccfc80bc"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "createCarouselPost",
+    "carouselChildren": {
+     "child": [
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[0] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[1] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[2] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[3] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[4] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[5] }}"
+      }
+     ]
+    },
+    "carouselCaption": "={{ $json.legenda }}",
+    "carouselAdditionalOptions": {}
+   },
+   "name": "Cria carrossel",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1300,
+    2830
+   ],
+   "id": "ec116621-c858-4775-b20d-a401d07aa257",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "publishPost",
+    "creationId": "={{ $json.id }}"
+   },
+   "name": "Publica no feed",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    2830
+   ],
+   "id": "c9a8ea70-1961-4135-813e-7516ec3eb7c6",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "media",
+    "operation": "getMedia",
+    "mediaId": "={{ $json.id }}",
+    "mediaDetailFields": [
+     "id",
+     "permalink",
+     "timestamp"
+    ]
+   },
+   "name": "Pega o link do post",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1780,
+    2830
+   ],
+   "id": "5fcc65ab-7c57-49f8-9ab7-cbb277b2a792",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta o resultado da publicação com o rascunho e marca como publicado (ou erro)\nconst NO_ORIGEM = 'Valida ação';\nconst saida = [];\nconst origem = $(NO_ORIGEM).all();\nconst itens = $input.all();\nfor (let i = 0; i < itens.length; i++) {\n  const o = origem[i] ? origem[i].json : origem[0].json;\n  const r = JSON.parse(o.rascunho_str);\n  const j = itens[i].json;\n  if (j.error || !j.id) {\n    const e = j.error;\n    Object.assign(r, { status: 'erro', erro: 'O Instagram recusou: ' + String((e && (e.message || e.description)) || e || 'sem resposta').slice(0, 300) });\n  } else {\n    Object.assign(r, { status: 'publicado', media_id: j.id, permalink: j.permalink || '', publicadoEm: new Date().toISOString(), erro: '' });\n  }\n  r.atualizadoEm = new Date().toISOString();\n  saida.push({ json: { id: r.id, ok: r.status === 'publicado', permalink: r.permalink || '', erro: r.erro || '', rascunho_str: JSON.stringify(r) } });\n}\nreturn saida;"
+   },
+   "name": "Registra publicação",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2020,
+    2830
+   ],
+   "id": "c18dedfb-cc7f-4dad-ba57-9a4d9197d561"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva publicado",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2260,
+    2830
+   ],
+   "id": "0054f168-1de2-4cf9-b53f-bfe30992bf04",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: $json.ok, mensagem: $json.ok ? 'Publicado no Instagram! 🎉' : $json.erro, erro: $json.erro, permalink: $json.permalink }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde publicação",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2500,
+    2830
+   ],
+   "id": "8e571ee1-12e1-4ea1-8f08-bf4506908c04"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva agendamento",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1300,
+    3050
+   ],
+   "id": "c85cd4af-f800-49c0-baa8-2375262407b7",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "ig:fila",
+    "value": "={{ JSON.stringify({ [$('Valida ação').first().json.id]: $('Valida ação').first().json.quando }) }}",
+    "keyType": "hash",
+    "valueIsJSON": true,
+    "expire": false
+   },
+   "name": "Entra na fila",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    3050
+   ],
+   "id": "69224021-d366-43a4-85f4-ed83da1f6efa",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, mensagem: $('Valida ação').first().json.mensagem }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde agendamento",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1780,
+    3050
+   ],
+   "id": "13182005-93d0-447e-adf1-d97fc4f1de2f"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva descarte",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1300,
+    3230
+   ],
+   "id": "0f2ed898-104a-4066-b36e-9b1ace1b7eef",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva cancelamento",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1300,
+    3390
+   ],
+   "id": "959d5b49-2488-403e-9281-bace039eb8cf",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "ig:fila",
+    "value": "={{ JSON.stringify({ [$('Valida ação').first().json.id]: 'cancelado' }) }}",
+    "keyType": "hash",
+    "valueIsJSON": true,
+    "expire": false
+   },
+   "name": "Tira da fila",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    3390
+   ],
+   "id": "0299d052-5833-47b2-ade6-78ec05e4c145",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, mensagem: $('Valida ação').first().json.mensagem }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde ok",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1780,
+    3290
+   ],
+   "id": "5139417e-ed02-48c8-b756-130f5bc795ee"
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 5
+      }
+     ]
+    }
+   },
+   "name": "A cada 5 minutos",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    3884
+   ],
+   "id": "466b9a2b-0135-4f7b-b532-35c225d5e8e2"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "fila",
+    "key": "ig:fila",
+    "keyType": "hash",
+    "options": {}
+   },
+   "name": "Lê fila",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    250,
+    3884
+   ],
+   "id": "80aac08e-4a8a-4469-9aec-24d7c402e544",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê a fila de agendamentos e devolve só o que já passou do horário\nconst fila = $input.first().json.fila || {};\nconst agora = Date.now();\nreturn Object.entries(fila)\n  .filter(([id, quando]) => /^car-[a-z0-9]+$/.test(id) && quando !== 'feito' && quando !== 'cancelado' && new Date(quando).getTime() <= agora)\n  .map(([id]) => ({ json: { id } }));"
+   },
+   "name": "Separa os vencidos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    500,
+    3884
+   ],
+   "id": "f5e108d6-3510-43ac-a64e-6e8eefcf9fe3"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "rascunho",
+    "key": "=ig:rasc:{{ $json.id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê rascunho agendado",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    750,
+    3884
+   ],
+   "id": "ed53e002-8aa6-4c57-9939-4bf2d354e989",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Só publica o que continua agendado (o dono pode ter cancelado ou publicado antes)\nreturn $input.all().map(i => { try { return JSON.parse(i.json.rascunho || 'null'); } catch (e) { return null; } })\n  .filter(r => r && r.status === 'agendado')\n  .map(r => ({ json: { id: r.id, urls: r.urls, legenda: r.legenda, rascunho_str: JSON.stringify(r) } }));"
+   },
+   "name": "Prepara agendado",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1000,
+    3884
+   ],
+   "id": "c5a53b60-84f5-4fe4-99ee-dc1b4583ba00"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "createCarouselPost",
+    "carouselChildren": {
+     "child": [
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[0] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[1] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[2] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[3] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[4] }}"
+      },
+      {
+       "media_type": "IMAGE",
+       "image_url": "={{ $json.urls[5] }}"
+      }
+     ]
+    },
+    "carouselCaption": "={{ $json.legenda }}",
+    "carouselAdditionalOptions": {}
+   },
+   "name": "Cria carrossel (agendado)",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1300,
+    3884
+   ],
+   "id": "af7101a0-7a92-49ca-98c5-a0655fe178c4",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "publishPost",
+    "creationId": "={{ $json.id }}"
+   },
+   "name": "Publica no feed (agendado)",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    3884
+   ],
+   "id": "8d97ab1b-741f-4fb7-b5cd-8f408957a383",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "media",
+    "operation": "getMedia",
+    "mediaId": "={{ $json.id }}",
+    "mediaDetailFields": [
+     "id",
+     "permalink",
+     "timestamp"
+    ]
+   },
+   "name": "Pega o link do post (agendado)",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1780,
+    3884
+   ],
+   "id": "416e3d55-d590-4704-a77b-95c6f0817fe7",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta o resultado da publicação com o rascunho e marca como publicado (ou erro)\nconst NO_ORIGEM = 'Prepara agendado';\nconst saida = [];\nconst origem = $(NO_ORIGEM).all();\nconst itens = $input.all();\nfor (let i = 0; i < itens.length; i++) {\n  const o = origem[i] ? origem[i].json : origem[0].json;\n  const r = JSON.parse(o.rascunho_str);\n  const j = itens[i].json;\n  if (j.error || !j.id) {\n    const e = j.error;\n    Object.assign(r, { status: 'erro', erro: 'O Instagram recusou: ' + String((e && (e.message || e.description)) || e || 'sem resposta').slice(0, 300) });\n  } else {\n    Object.assign(r, { status: 'publicado', media_id: j.id, permalink: j.permalink || '', publicadoEm: new Date().toISOString(), erro: '' });\n  }\n  r.atualizadoEm = new Date().toISOString();\n  saida.push({ json: { id: r.id, ok: r.status === 'publicado', permalink: r.permalink || '', erro: r.erro || '', rascunho_str: JSON.stringify(r) } });\n}\nreturn saida;"
+   },
+   "name": "Registra publicação (agendado)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2020,
+    3884
+   ],
+   "id": "f7f636af-74d9-43bb-8c84-56d57c918675"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ig:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva resultado",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2260,
+    3884
+   ],
+   "id": "62bb3f9b-389c-4d33-9d85-7a4e4b77daca",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "ig:fila",
+    "value": "={{ JSON.stringify({ [$json.id]: 'feito' }) }}",
+    "keyType": "hash",
+    "valueIsJSON": true,
+    "expire": false
+   },
+   "name": "Marca como feito",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2500,
+    3884
+   ],
+   "id": "faa82377-c720-4633-ae10-bf5e5be9e271",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "# 📸 CARROSSEL COM IA, APROVAÇÃO E AGENDAMENTO\n🎯 A IA escreve um carrossel de **6 slides**, **desenha as imagens** e escreve a legenda. Você **revisa e aprova** numa página, e o fluxo **publica no Instagram** na hora ou no horário agendado.\n▶️ **Teste:** abra a Production URL do node **Página de criação (GET)**, preencha e espere a prévia. Para publicar use a senha **publica-5b514a** (troque no node **Valida ação**).\n🧩 **Faixa 1 · Página de criação:** o formulário (tema, @, objetivo, tom, palavra para comentar e paleta de cores).",
+    "height": 256,
+    "width": 1100,
+    "color": 6
+   },
+   "name": "Nota · faixa 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    0
+   ],
+   "id": "b2134985-55c6-4ba4-833a-e74c00185ba2"
+  },
+  {
+   "parameters": {
+    "content": "## 🏭 2. A FÁBRICA DO CARROSSEL\n🔔 **Novo carrossel (POST)** → 🚧 **Contador por IP** (10 por hora) → 🧹 **Validar pedido** → 🚦 **Pedido ok?**\n🗄️ **Rascunho: gerando** salva o pedido e ⚡ **Responde com o link** devolve na hora o link da página de aprovação (que mostra \"criando…\" e se atualiza sozinha).\n✍️ **Roteirista de carrossel** (`gemini-3-flash`): capa com gancho, 4 slides de conteúdo, chamada final, legenda e hashtags.\n🧩 **Organiza slides**: transforma o roteiro em 6 itens com cores, fontes e posições (e quebra o texto em linhas).\n🎨 **Desenha o slide** (node **Edit Image**): cria uma imagem 1080×1350 e desenha a barra, o contador \"1/6\", o título, o texto, o rodapé e o \"arraste »\". Roda **6 vezes**, uma por slide.\n💾 **Imagem para base64** → **Guarda imagem** (Redis) → **Junta rascunho** → **Salva rascunho**: pronto para aprovar.",
+    "height": 273,
+    "width": 3420,
+    "color": 4
+   },
+   "name": "Nota · faixa 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    576
+   ],
+   "id": "3d0e159d-87ae-4b77-a70d-538c3de7161d"
+  },
+  {
+   "parameters": {
+    "content": "## 🖼️ 3. ENTREGA DAS IMAGENS\nO Instagram **não recebe arquivos**: ele **baixa as imagens de um link público**. Esta faixa é esse link: `/webhook/insta-img?id=...&n=1` lê a imagem no Redis e devolve um **JPEG** de verdade. A página de aprovação usa os mesmos links para mostrar a prévia.",
+    "height": 154,
+    "width": 1360,
+    "color": 5
+   },
+   "name": "Nota · faixa 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    1409
+   ],
+   "id": "53f556bb-ef33-46b7-b351-e4a779fd01c6"
+  },
+  {
+   "parameters": {
+    "content": "## ✅ 4. PÁGINA DE APROVAÇÃO\n🔔 **Ver carrossel (GET)** com o link secreto (`id` + chave `k`) → 🗄️ **Lê rascunho** → 🧩 **Monta página de aprovação**, parecida com um post do Instagram: slides deslizando, legenda **editável**, senha, campo para agendar e os botões **Publicar agora**, **Agendar** e **Descartar**.",
+    "height": 154,
+    "width": 1110,
+    "color": 7
+   },
+   "name": "Nota · faixa 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    2083
+   ],
+   "id": "8a92e336-cca4-4cd8-a155-a429d0aacfa4"
+  },
+  {
+   "parameters": {
+    "content": "## 🚀 5. AÇÕES: PUBLICAR, AGENDAR, DESCARTAR\n🔔 **Ação no carrossel (POST)** → 🔐 **Valida ação** (confere a chave do link e a **senha**, a legenda e o horário) → 🔀 **Qual ação?**\n🚀 **Publicar:** usa o **community node do Instagram** em 3 passos: **Cria carrossel** (manda os 6 links e a legenda) → **Publica no feed** → **Pega o link do post**. Depois **Registra publicação** e responde com o link. Se o Instagram recusar, o erro aparece na página.\n⏰ **Agendar:** salva e coloca o carrossel na **fila** (um \"hash\" no Redis: `id → horário`).\n🗑️ **Descartar** e ✖️ **Cancelar agendamento** só atualizam o rascunho e a fila.",
+    "height": 213,
+    "width": 2860,
+    "color": 3
+   },
+   "name": "Nota · faixa 5",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    2557
+   ],
+   "id": "b9574ee3-5fab-4bd0-8a89-497ce2ec3308"
+  },
+  {
+   "parameters": {
+    "content": "## ⏰ 6. O CARTEIRO DOS AGENDADOS\n🔁 **A cada 5 minutos** o fluxo acorda sozinho, lê a fila, separa o que **já passou do horário**, confere se continua agendado e publica com os mesmos 3 nodes do Instagram. No fim marca como **feito** na fila.\n💡 Exercício: mandar uma mensagem no WhatsApp para o dono quando o post agendado for publicado.",
+    "height": 154,
+    "width": 2860,
+    "color": 2
+   },
+   "name": "Nota · faixa 6",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    3670
+   ],
+   "id": "f65d6b1b-b76f-43b1-819e-988dfef3212a"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 6000,
+     "temperature": 0.8,
+     "timeout": 300000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro do roteirista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1540,
+    1329
+   ],
+   "id": "b8585c71-ea76-49c3-86a1-187363b72066",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Página de criação (GET)": {
+   "main": [
+    [
+     {
+      "node": "HTML da criação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML da criação": {
+   "main": [
+    [
+     {
+      "node": "Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Novo carrossel (POST)": {
+   "main": [
+    [
+     {
+      "node": "Contador por IP",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Contador por IP": {
+   "main": [
+    [
+     {
+      "node": "Validar pedido do carrossel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Validar pedido do carrossel": {
+   "main": [
+    [
+     {
+      "node": "Pedido ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pedido ok?": {
+   "main": [
+    [
+     {
+      "node": "Rascunho: gerando",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Rascunho: gerando": {
+   "main": [
+    [
+     {
+      "node": "Responde com o link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro do roteirista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Roteirista de carrossel",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Responde com o link": {
+   "main": [
+    [
+     {
+      "node": "Roteirista de carrossel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Roteirista de carrossel": {
+   "main": [
+    [
+     {
+      "node": "Organiza slides",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Organiza slides",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Organiza slides": {
+   "main": [
+    [
+     {
+      "node": "Desenha o slide",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Desenha o slide": {
+   "main": [
+    [
+     {
+      "node": "Imagem para base64",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Rascunho: erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Imagem para base64": {
+   "main": [
+    [
+     {
+      "node": "Guarda imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Guarda imagem": {
+   "main": [
+    [
+     {
+      "node": "Junta rascunho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Junta rascunho": {
+   "main": [
+    [
+     {
+      "node": "Salva rascunho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pedido de imagem (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê imagem": {
+   "main": [
+    [
+     {
+      "node": "Converte em arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Converte em arquivo": {
+   "main": [
+    [
+     {
+      "node": "Achou a imagem?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Achou a imagem?": {
+   "main": [
+    [
+     {
+      "node": "Entrega o JPEG",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Imagem não encontrada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ver carrossel (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê rascunho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê rascunho": {
+   "main": [
+    [
+     {
+      "node": "Monta página de aprovação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Monta página de aprovação": {
+   "main": [
+    [
+     {
+      "node": "Entrega a aprovação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ação no carrossel (POST)": {
+   "main": [
+    [
+     {
+      "node": "Lê rascunho da ação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê rascunho da ação": {
+   "main": [
+    [
+     {
+      "node": "Valida ação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Valida ação": {
+   "main": [
+    [
+     {
+      "node": "Ação permitida?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ação permitida?": {
+   "main": [
+    [
+     {
+      "node": "Qual ação?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde recusa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cria carrossel": {
+   "main": [
+    [
+     {
+      "node": "Publica no feed",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registra publicação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Publica no feed": {
+   "main": [
+    [
+     {
+      "node": "Pega o link do post",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registra publicação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pega o link do post": {
+   "main": [
+    [
+     {
+      "node": "Registra publicação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Qual ação?": {
+   "main": [
+    [
+     {
+      "node": "Cria carrossel",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Salva agendamento",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Salva descarte",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Salva cancelamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registra publicação": {
+   "main": [
+    [
+     {
+      "node": "Salva publicado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva publicado": {
+   "main": [
+    [
+     {
+      "node": "Responde publicação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva agendamento": {
+   "main": [
+    [
+     {
+      "node": "Entra na fila",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Entra na fila": {
+   "main": [
+    [
+     {
+      "node": "Responde agendamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva cancelamento": {
+   "main": [
+    [
+     {
+      "node": "Tira da fila",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva descarte": {
+   "main": [
+    [
+     {
+      "node": "Responde ok",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tira da fila": {
+   "main": [
+    [
+     {
+      "node": "Responde ok",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "A cada 5 minutos": {
+   "main": [
+    [
+     {
+      "node": "Lê fila",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê fila": {
+   "main": [
+    [
+     {
+      "node": "Separa os vencidos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Separa os vencidos": {
+   "main": [
+    [
+     {
+      "node": "Lê rascunho agendado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê rascunho agendado": {
+   "main": [
+    [
+     {
+      "node": "Prepara agendado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cria carrossel (agendado)": {
+   "main": [
+    [
+     {
+      "node": "Publica no feed (agendado)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registra publicação (agendado)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Publica no feed (agendado)": {
+   "main": [
+    [
+     {
+      "node": "Pega o link do post (agendado)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registra publicação (agendado)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pega o link do post (agendado)": {
+   "main": [
+    [
+     {
+      "node": "Registra publicação (agendado)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Prepara agendado": {
+   "main": [
+    [
+     {
+      "node": "Cria carrossel (agendado)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registra publicação (agendado)": {
+   "main": [
+    [
+     {
+      "node": "Salva resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva resultado": {
+   "main": [
+    [
+     {
+      "node": "Marca como feito",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro do roteirista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Roteirista de carrossel",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1800
+ },
+ "staticData": {
+  "node:A cada 5 minutos": {
+   "recurrenceRules": []
+  }
+ },
+ "meta": null,
+ "pinData": null,
+ "versionId": "4b4f4df9-aeaf-4329-ae10-86565befa2b3",
+ "activeVersionId": "4b4f4df9-aeaf-4329-ae10-86565befa2b3",
+ "versionCounter": 30,
+ "triggerCount": 6,
+ "shared": [
+  {
+   "updatedAt": "2026-10-13T23:39:43.894Z",
+   "createdAt": "2026-10-13T23:39:43.894Z",
+   "role": "workflow:owner",
+   "workflowId": "1pizKCLREiCiVp0A",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-14T00:57:59.210Z",
+  "createdAt": "2026-10-14T00:57:59.210Z",
+  "versionId": "4b4f4df9-aeaf-4329-ae10-86565befa2b3",
+  "workflowId": "1pizKCLREiCiVp0A",
+  "nodes": [
+   {
+    "parameters": {
+     "path": "insta-carrossel",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Página de criação (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     316
+    ],
+    "id": "4f14cf38-bb4e-4251-80a9-acad6466f00f",
+    "webhookId": "27f4c7a7-11ef-4cb2-acdb-ff68e1dac327"
+   },
+   {
+    "parameters": {
+     "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<meta name=\"robots\" content=\"noindex\">\n<title>Carrossel com IA</title>\n<style>\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#fafafa;color:#262626;line-height:1.5}\n.top{background:linear-gradient(45deg,#f58529,#dd2a7b 55%,#8134af);color:#fff;text-align:center;padding:48px 18px 86px}\n.top h1{font-size:clamp(26px,5vw,40px);line-height:1.1;max-width:640px;margin:0 auto 10px}\n.top p{max-width:560px;margin:0 auto;opacity:.95}\n.w{width:min(640px,calc(100% - 28px));margin:-56px auto 60px}\n.box{background:#fff;border:1px solid #dbdbdb;border-radius:16px;padding:22px;margin-bottom:14px}\n.box h2{font-size:17px;margin-bottom:12px}\nlabel{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}\ninput,select,textarea{width:100%;padding:12px;border:1px solid #dbdbdb;border-radius:10px;font:inherit;font-size:15px;background:#fff}\ntextarea{min-height:80px;resize:vertical}\n.g{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}\n.cores{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}\n.cores label{margin:0;cursor:pointer;text-align:center;font-weight:600;font-size:12px}\n.cores input{position:absolute;opacity:0;pointer-events:none}\n.cores span{display:block;aspect-ratio:4/5;border-radius:10px;border:3px solid transparent;margin-bottom:4px;position:relative;overflow:hidden}\n.cores span::after{content:\"\";position:absolute;left:14%;top:16%;width:30%;height:5%;background:var(--d);border-radius:2px}\n.cores label:has(input:checked) span{border-color:#0095f6}\n.hint{font-size:12.5px;color:#8e8e8e;margin-top:5px}\n.btn{width:100%;border:0;border-radius:12px;padding:15px;font:inherit;font-weight:700;font-size:16px;color:#fff;background:#0095f6;cursor:pointer}\n.btn:disabled{opacity:.6;cursor:wait}\n.erro{display:none;margin-top:12px;color:#d03b3b;font-weight:600}\n.hp{position:absolute;left:-9999px}\n@media(max-width:560px){.g{grid-template-columns:1fr}.cores{grid-template-columns:repeat(3,1fr)}}\n</style>\n</head>\n<body>\n<section class=\"top\"><h1>📸 Carrossel para Instagram com IA</h1><p>A IA escreve o roteiro de 6 slides, desenha as imagens e a legenda. Você revisa, aprova e o fluxo publica (ou agenda) no Instagram.</p></section>\n<main class=\"w\">\n<form id=\"f\" novalidate>\n  <div class=\"box\"><h2>1. Sobre o post</h2>\n    <label for=\"tema\">Tema do carrossel *</label><textarea id=\"tema\" name=\"tema\" maxlength=\"160\" placeholder=\"Ex: 5 automações com IA que todo pequeno negócio deveria usar\"></textarea>\n    <div class=\"g\">\n      <div><label for=\"perfil\">@ do perfil *</label><input id=\"perfil\" name=\"perfil\" maxlength=\"30\" placeholder=\"@seuperfil\"></div>\n      <div><label for=\"objetivo\">Objetivo</label><select id=\"objetivo\" name=\"objetivo\"><option>ensinar</option><option>vender</option><option>gerar engajamento</option><option>contar uma história</option><option>quebrar uma objeção</option></select></div>\n    </div>\n    <label for=\"publico\">Para quem é?</label><input id=\"publico\" name=\"publico\" maxlength=\"200\" placeholder=\"Ex: donos de pequenos negócios que nunca usaram IA\">\n    <div class=\"g\">\n      <div><label for=\"tom\">Tom de voz</label><select id=\"tom\" name=\"tom\"><option>direto e próximo</option><option>divertido</option><option>técnico e didático</option><option>inspirador</option><option>provocativo</option></select></div>\n      <div><label for=\"palavra\">Palavra para comentar</label><input id=\"palavra\" name=\"palavra\" maxlength=\"20\" placeholder=\"Ex: QUERO (opcional)\"><p class=\"hint\">Vira o \"comente QUERO\" do último slide.</p></div>\n    </div>\n    <label for=\"cta\">Chamada final</label><input id=\"cta\" name=\"cta\" maxlength=\"120\" placeholder=\"Ex: Siga para mais dicas de IA\">\n  </div>\n  <div class=\"box\"><h2>2. Visual dos slides</h2>\n    <div class=\"cores\">\n      <label><input type=\"radio\" name=\"estilo\" value=\"escuro\" checked><span style=\"background:#0f172a;--d:#f59e0b\"></span>Escuro</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"claro\"><span style=\"background:#fafaf9;border-color:#eee;--d:#e11d48\"></span>Claro</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"vibrante\"><span style=\"background:#5b21b6;--d:#facc15\"></span>Vibrante</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"natural\"><span style=\"background:#f1f5ec;--d:#2f855a\"></span>Natural</label>\n      <label><input type=\"radio\" name=\"estilo\" value=\"corporativo\"><span style=\"background:#0b3a6e;--d:#38bdf8\"></span>Corporativo</label>\n    </div>\n    <div class=\"hp\" aria-hidden=\"true\"><input name=\"site\" tabindex=\"-1\" autocomplete=\"off\"></div>\n  </div>\n  <button class=\"btn\" id=\"btn\" type=\"submit\">✨ Criar carrossel</button>\n  <p class=\"erro\" id=\"erro\" role=\"alert\"></p>\n</form>\n</main>\n<script>\n(function () {\n  var f = document.getElementById('f'), btn = document.getElementById('btn'), er = document.getElementById('erro');\n  function falha(m) { er.textContent = m; er.style.display = 'block'; }\n  f.addEventListener('submit', function (e) {\n    e.preventDefault(); er.style.display = 'none';\n    if (f.tema.value.trim().length < 5) { f.tema.focus(); return falha('Descreva o tema do carrossel.'); }\n    if (f.perfil.value.replace('@', '').trim().length < 2) { f.perfil.focus(); return falha('Informe o @ do perfil.'); }\n    var d = {}; new FormData(f).forEach(function (v, k) { d[k] = String(v).trim(); });\n    btn.disabled = true; btn.textContent = 'Enviando…';\n    fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })\n      .then(function (r) { return r.json(); })\n      .then(function (j) { if (!j.ok) throw new Error(j.erro || 'Não foi possível criar.'); location.href = j.link; })\n      .catch(function (x) { btn.disabled = false; btn.textContent = '✨ Criar carrossel'; falha(x.message); });\n  });\n})();\n</script>\n</body>\n</html>\n"
+    },
+    "name": "HTML da criação",
+    "type": "n8n-nodes-base.html",
+    "typeVersion": 1.2,
+    "position": [
+     240,
+     316
+    ],
+    "id": "9fa08219-b9a9-433d-8562-c9f037c90e8a"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Entrega a página",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     480,
+     316
+    ],
+    "id": "9384864d-dc23-4366-9cec-dfe870a95ebe"
+   },
+   {
+    "parameters": {
+     "path": "insta-carrossel",
+     "responseMode": "responseNode",
+     "options": {},
+     "httpMethod": "POST"
+    },
+    "name": "Novo carrossel (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     909
+    ],
+    "id": "4baf6a85-ff4c-4516-ab01-f3ff13ac3b05",
+    "webhookId": "39caa3d7-f61a-4e39-b7ec-b332bbc6fb33"
+   },
+   {
+    "parameters": {
+     "operation": "incr",
+     "key": "=ig:rl:{{ ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || 'sem-ip').split(',')[0]).trim() }}",
+     "expire": true,
+     "ttl": 3600
+    },
+    "name": "Contador por IP",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     909
+    ],
+    "id": "85fa7420-cbb8-4da0-a34c-70450e93b04d",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const LIMITE_POR_HORA = 10;\nconst req = $('Novo carrossel (POST)').first().json;\nconst b = (req.body && typeof req.body === 'object') ? req.body : {};\nconst usos = Number(Object.values($input.first().json)[0]) || 0;\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u001f\\u007f]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst ESTILOS = ['escuro', 'claro', 'vibrante', 'natural', 'corporativo'];\nconst d = {\n  tema: limpa(b.tema, 160), perfil: limpa(b.perfil, 30).replace(/^@+/, '').replace(/[^\\w.]/g, ''),\n  publico: limpa(b.publico, 200), objetivo: limpa(b.objetivo, 60) || 'ensinar', tom: limpa(b.tom, 60) || 'direto e próximo',\n  estilo: ESTILOS.includes(b.estilo) ? b.estilo : 'escuro', cta: limpa(b.cta, 120) || 'Salve este post e siga para mais dicas',\n  palavra: limpa(b.palavra, 20).replace(/[^\\p{L}\\p{N}]/gu, ''),\n};\nconst erros = [];\nif (d.tema.length < 5) erros.push('Descreva o tema do carrossel.');\nif (d.perfil.length < 2) erros.push('Informe o @ do perfil.');\nif (String(b.site || '').trim()) erros.push('Requisição recusada.');\nif (usos > LIMITE_POR_HORA) erros.unshift('Muitos carrosséis criados nesta rede na última hora. Tente mais tarde.');\nconst rnd = n => Array.from({ length: n }, () => 'abcdefghijkmnpqrstuvwxyz23456789'[Math.floor(Math.random() * 32)]).join('');\nconst id = 'car-' + Date.now().toString(36) + rnd(4);\nconst k = rnd(18);\nconst base = String(req.webhookUrl || '').split('/webhook/')[0] || 'https://webhookn8n6.inovareinteligenciaartificial.com';\nreturn [{ json: { valido: erros.length === 0, erros, codigo_http: usos > LIMITE_POR_HORA ? 429 : 400, id, k, base, dados: d,\n  link: `${base}/webhook/insta-carrossel-ver?id=${id}&k=${k}`, criadoEm: new Date().toISOString() } }];"
+    },
+    "name": "Validar pedido do carrossel",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     500,
+     909
+    ],
+    "id": "e838c4f9-f67c-491f-815d-1f4e4dd4968e"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "9f3b463b-79e2-4e67-8006-fc1e7d431a54",
+        "leftValue": "={{ $json.valido }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Pedido ok?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     750,
+     909
+    ],
+    "id": "3175b4ee-9021-4fde-923f-2ed0bc5dc755"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erros.join(' ') }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      },
+      "responseCode": "={{ $json.codigo_http }}"
+     }
+    },
+    "name": "Responde erro",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     1089
+    ],
+    "id": "2e0c2b50-e1f7-4248-874a-47b2ee69416d"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $('Validar pedido do carrossel').first().json.id }}",
+     "value": "={{ JSON.stringify({ id: $('Validar pedido do carrossel').first().json.id, k: $('Validar pedido do carrossel').first().json.k, status: 'gerando', dados: $('Validar pedido do carrossel').first().json.dados, criadoEm: $('Validar pedido do carrossel').first().json.criadoEm }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Rascunho: gerando",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1000,
+     909
+    ],
+    "id": "71e864a0-c113-485a-9557-9ddd37880799",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true, link: $('Validar pedido do carrossel').first().json.link }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde com o link",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1250,
+     909
+    ],
+    "id": "70d3f347-3040-48cd-bf78-710518c61e75"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'PEDIDO:\\n' + JSON.stringify($('Validar pedido do carrossel').first().json.dados, null, 1) }}",
+     "options": {
+      "systemMessage": "Você é ROTEIRISTA DE CARROSSEL para Instagram, especialista em posts que as pessoas salvam e compartilham.\n\nESTRUTURA FIXA DE 6 SLIDES\n1. Capa: título-gancho de até 60 caracteres (curiosidade, número ou promessa clara) e subtítulo de até 90.\n2 a 5. Quatro slides de conteúdo: título de até 45 caracteres e texto de até 240. Uma ideia por slide, prática e com exemplo concreto.\n6. Chamada final: título de até 45 e texto de até 150, usando a chamada final pedida e a palavra para comentar, se houver.\n\nREGRAS\n- Português do Brasil, no tom pedido, falando com o público informado.\n- Acentuação correta do português é obrigatória em tudo (você, não, negócio, horário, também, até). Texto sem acento será recusado.\n- NUNCA use emoji nos textos dos slides (a fonte das imagens não desenha emoji). Na legenda pode.\n- Nada de promessas falsas ou números inventados.\n- Legenda de 600 a 1200 caracteres: gancho na primeira linha, desenvolvimento curto, uma pergunta para gerar comentários e a chamada final.\n- De 5 a 8 hashtags relevantes, sem o símbolo #.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"capa\":{\"titulo\":\"\",\"subtitulo\":\"\"},\"slides\":[{\"titulo\":\"\",\"texto\":\"\"}],\"cta\":{\"titulo\":\"\",\"texto\":\"\"},\"legenda\":\"\",\"hashtags\":[\"\"]}"
+     },
+     "needsFallback": true
+    },
+    "name": "Roteirista de carrossel",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1500,
+     909
+    ],
+    "id": "3a2ac0bd-c6a8-4374-a1df-c5aa70f813fb",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3-flash",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 6000,
+      "temperature": 0.8,
+      "timeout": 300000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro do roteirista",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     1149
+    ],
+    "id": "542f327c-eb94-43c9-aada-d05b1676f78d",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst r = $('Validar pedido do carrossel').first().json;\nconst ia = parseJSON($input.first().json.output ?? '') || {};\nconst FONTES = '/usr/share/fonts/truetype/msttcorefonts/';\nconst PALETAS = {\n  escuro: { fundo: '#0f172a', destaque: '#f59e0b', titulo: '#ffffff', texto: '#cbd5e1', rodape: '#94a3b8', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n  claro: { fundo: '#fafaf9', destaque: '#e11d48', titulo: '#111827', texto: '#374151', rodape: '#6b7280', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n  vibrante: { fundo: '#5b21b6', destaque: '#facc15', titulo: '#ffffff', texto: '#ede9fe', rodape: '#ddd6fe', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n  natural: { fundo: '#f1f5ec', destaque: '#2f855a', titulo: '#1c3324', texto: '#3f5a47', rodape: '#6b8573', tit: 'Georgia_Bold.ttf', txt: 'Georgia.ttf' },\n  corporativo: { fundo: '#0b3a6e', destaque: '#38bdf8', titulo: '#ffffff', texto: '#dbeafe', rodape: '#93c5fd', tit: 'Verdana_Bold.ttf', txt: 'Verdana.ttf' },\n};\nconst P = PALETAS[r.dados.estilo] || PALETAS.escuro;\n\n// Sem emoji (as fontes do servidor não têm) e sem aspas retas (quebram o comando de desenho)\nconst limpa = (s, max) => String(s ?? '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}\\u{200D}]/gu, '')\n  .replace(/\"/g, '”').replace(/'/g, '’').replace(/\\\\/g, '/').replace(/\\s+/g, ' ').trim().slice(0, max);\nfunction quebra(texto, porLinha) {\n  const linhas = []; let atual = '';\n  for (const p of texto.split(' ')) {\n    if ((atual + ' ' + p).trim().length > porLinha && atual) { linhas.push(atual); atual = p; } else atual = (atual + ' ' + p).trim();\n  }\n  if (atual) linhas.push(atual);\n  return linhas;\n}\n\nconst d = r.dados;\nconst capa = ia.capa || {}, cta = ia.cta || {};\nlet meio = Array.isArray(ia.slides) ? ia.slides.slice(0, 4) : [];\nwhile (meio.length < 4) meio.push({ titulo: d.tema, texto: 'Salve este post para consultar depois.' });\nconst roteiro = [\n  { tipo: 'capa', titulo: limpa(capa.titulo || d.tema, 70), texto: limpa(capa.subtitulo, 110) },\n  ...meio.map(s => ({ tipo: 'conteudo', titulo: limpa(s.titulo, 60), texto: limpa(s.texto, 280) })),\n  { tipo: 'cta', titulo: limpa(cta.titulo || 'Gostou? Salve e compartilhe!', 60), texto: limpa(cta.texto || d.cta, 170) },\n];\n\nconst W = 1080, H = 1350, X = 90;\nconst slides = roteiro.map((s, i) => {\n  const capaOuCta = s.tipo !== 'conteudo';\n  const tTam = s.tipo === 'capa' ? 84 : capaOuCta ? 72 : 66;\n  const tLinhas = quebra(s.titulo, s.tipo === 'capa' ? 16 : 20);\n  const xTam = capaOuCta ? 46 : 44;\n  const xLinhas = quebra(s.texto, capaOuCta ? 33 : 35).slice(0, 10);\n  // Centraliza o bloco (título + texto) na área entre o cabeçalho e o rodapé\n  const tLH = Math.round(tTam * 1.22), xLH = Math.round(xTam * 1.24);\n  const altura = tLinhas.length * tLH + (xLinhas.length ? 60 + xLinhas.length * xLH : 0);\n  const topo = 210 + Math.max(0, Math.round((950 - altura) / 2));\n  const tY = Math.round(topo + tTam * 0.85);\n  const xY = Math.round(topo + tLinhas.length * tLH + 60 + xTam * 0.85);\n  return { json: { n: i + 1, tipo: s.tipo, titulo: tLinhas.join('\\n'), texto: xLinhas.join('\\n'),\n    tTam, xTam, tY, xY, W, H, X, cor: P, fonteTitulo: FONTES + P.tit, fonteTexto: FONTES + P.txt,\n    contador: `${i + 1}/6`, rodape: '@' + d.perfil, seta: i < 5 ? 'arraste  »' : (d.palavra ? `comente ${d.palavra.toUpperCase()}` : 'salve e compartilhe') } };\n});\n\nconst tags = (Array.isArray(ia.hashtags) ? ia.hashtags : []).map(t => '#' + String(t).replace(/[^\\p{L}\\p{N}_]/gu, '')).filter(t => t.length > 2).slice(0, 8);\nlet legenda = String(ia.legenda || '').trim().slice(0, 1800);\nif (d.palavra && !legenda.toUpperCase().includes(d.palavra.toUpperCase())) legenda += `\\n\\n💬 Comente ${d.palavra.toUpperCase()} que eu te mando o link no direct!`;\nif (tags.length) legenda += '\\n\\n' + tags.join(' ');\n// Alerta se o texto veio sem acentos (o modelo às vezes esquece)\nconst tudo = roteiro.map(s => s.titulo + ' ' + s.texto).join(' ') + ' ' + legenda;\nconst semAcento = (tudo.match(/\\b(voce|voces|nao|sao|tambem|negocio|negocios|horario|horarios|ate|facil|rapido|automacao|automacoes|inteligencia|conteudo|proximo|unico|ultimo|ja|sera|e possivel)\\b/gi) || []).length;\nconst alerta = semAcento >= 2 ? `O texto parece estar sem acentos (${semAcento} palavras como \"voce\" ou \"nao\"). Revise antes de publicar ou crie de novo.` : '';\nreturn slides.map(s => ({ json: { ...s.json, legenda, alerta, roteiro_ok: !!(ia.capa && ia.slides) } }));"
+    },
+    "name": "Organiza slides",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1810,
+     909
+    ],
+    "id": "a4ca712b-e8d2-43e9-abbd-120548dfb155"
+   },
+   {
+    "parameters": {
+     "operation": "multiStep",
+     "operations": {
+      "operations": [
+       {
+        "operation": "create",
+        "backgroundColor": "={{ $json.cor.fundo }}",
+        "width": 1080,
+        "height": 1350
+       },
+       {
+        "operation": "draw",
+        "primitive": "rectangle",
+        "color": "={{ $json.cor.destaque }}",
+        "startPositionX": 90,
+        "startPositionY": 118,
+        "endPositionX": 240,
+        "endPositionY": 132,
+        "cornerRadius": 0
+       },
+       {
+        "operation": "text",
+        "text": "={{ $json.contador }}",
+        "fontSize": 34,
+        "fontColor": "={{ $json.cor.rodape }}",
+        "positionX": 905,
+        "positionY": 138,
+        "lineLength": 400,
+        "font": "={{ $json.fonteTexto }}"
+       },
+       {
+        "operation": "text",
+        "text": "={{ $json.titulo }}",
+        "fontSize": "={{ $json.tTam }}",
+        "fontColor": "={{ $json.cor.titulo }}",
+        "positionX": 90,
+        "positionY": "={{ $json.tY }}",
+        "lineLength": 400,
+        "font": "={{ $json.fonteTitulo }}"
+       },
+       {
+        "operation": "text",
+        "text": "={{ $json.texto || ' ' }}",
+        "fontSize": "={{ $json.xTam }}",
+        "fontColor": "={{ $json.cor.texto }}",
+        "positionX": 90,
+        "positionY": "={{ $json.xY }}",
+        "lineLength": 400,
+        "font": "={{ $json.fonteTexto }}"
+       },
+       {
+        "operation": "draw",
+        "primitive": "line",
+        "color": "={{ $json.cor.rodape }}",
+        "startPositionX": 90,
+        "startPositionY": 1205,
+        "endPositionX": 990,
+        "endPositionY": 1205
+       },
+       {
+        "operation": "text",
+        "text": "={{ $json.rodape }}",
+        "fontSize": 34,
+        "fontColor": "={{ $json.cor.rodape }}",
+        "positionX": 90,
+        "positionY": 1272,
+        "lineLength": 400,
+        "font": "={{ $json.fonteTitulo }}"
+       },
+       {
+        "operation": "text",
+        "text": "={{ $json.seta }}",
+        "fontSize": 34,
+        "fontColor": "={{ $json.cor.destaque }}",
+        "positionX": "={{ 990 - $json.seta.length * 24 }}",
+        "positionY": 1272,
+        "lineLength": 400,
+        "font": "={{ $json.fonteTitulo }}"
+       }
+      ]
+     },
+     "options": {
+      "format": "jpeg",
+      "quality": 92,
+      "fileName": "={{ 'slide-' + $json.n + '.jpg' }}"
+     }
+    },
+    "name": "Desenha o slide",
+    "type": "n8n-nodes-base.editImage",
+    "typeVersion": 1,
+    "position": [
+     2060,
+     909
+    ],
+    "id": "5969d879-c94b-4f94-aaef-7e965d011a6a",
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// O Edit Image entrega a imagem como arquivo; aqui viramos texto (base64) para guardar no Redis\nconst itens = $input.all();\nconst saida = [];\nfor (let i = 0; i < itens.length; i++) {\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  saida.push({ json: { n: itens[i].json.n, b64: buf.toString('base64'), kb: Math.round(buf.length / 1024) } });\n}\nreturn saida;"
+    },
+    "name": "Imagem para base64",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2310,
+     909
+    ],
+    "id": "810452e8-d8f3-4526-b8a9-9065a0724b13"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:img:{{ $('Validar pedido do carrossel').first().json.id }}:{{ $json.n }}",
+     "value": "={{ $json.b64 }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Guarda imagem",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2560,
+     909
+    ],
+    "id": "687bd605-189c-4370-93b9-ada353be027a",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const v = $('Validar pedido do carrossel').first().json;\nconst slides = $('Organiza slides').all().map(i => i.json);\nconst imagens = $('Imagem para base64').all().map(i => i.json);\nconst urls = slides.map(s => `${v.base}/webhook/insta-img?id=${v.id}&n=${s.n}`);\nconst rascunho = {\n  id: v.id, k: v.k, status: 'aguardando', dados: v.dados, legenda: slides[0].legenda,\n  slides: slides.map(s => ({ n: s.n, tipo: s.tipo, titulo: s.titulo.replace(/\\n/g, ' '), texto: s.texto.replace(/\\n/g, ' ') })),\n  urls, kb: imagens.map(i => i.kb), roteiro_ia: slides[0].roteiro_ok, alerta: slides[0].alerta || '',\n  criadoEm: v.criadoEm, atualizadoEm: new Date().toISOString(),\n};\nreturn [{ json: { rascunho_str: JSON.stringify(rascunho) } }];"
+    },
+    "name": "Junta rascunho",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2810,
+     909
+    ],
+    "id": "a5f83d67-e892-4e18-8aba-cf810637e3dd"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $('Validar pedido do carrossel').first().json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva rascunho",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     3060,
+     909
+    ],
+    "id": "c22cd627-8b04-43ce-8e68-9023861fbe98",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $('Validar pedido do carrossel').first().json.id }}",
+     "value": "={{ JSON.stringify({ id: $('Validar pedido do carrossel').first().json.id, k: $('Validar pedido do carrossel').first().json.k, status: 'erro_geracao', erro: 'Falha ao desenhar as imagens: ' + String($json.error && $json.error.message || $json.error || '').slice(0, 200), dados: $('Validar pedido do carrossel').first().json.dados }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Rascunho: erro",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2310,
+     1129
+    ],
+    "id": "c1eae100-c154-40ea-83e8-c1aa79c73192",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "path": "insta-img",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Pedido de imagem (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1703
+    ],
+    "id": "40220ddb-f363-473b-877d-58f9e6fe50c4",
+    "webhookId": "c841593e-99aa-4704-9dec-e4574dc5b1c9"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "img",
+     "key": "={{ /^car-[a-z0-9]+$/.test($json.query.id || '') && /^[1-6]$/.test($json.query.n || '') ? 'ig:img:' + $json.query.id + ':' + $json.query.n : 'ig:img:invalida' }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê imagem",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     1703
+    ],
+    "id": "0faa3413-e6f2-4ba8-a8fe-0f9a2d60638a",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "const b64 = $input.first().json.img;\nif (!b64) return [{ json: { achou: false } }];\nreturn [{ json: { achou: true }, binary: { data: { data: b64, mimeType: 'image/jpeg', fileName: 'slide.jpg', fileExtension: 'jpg' } } }];"
+    },
+    "name": "Converte em arquivo",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     500,
+     1703
+    ],
+    "id": "5cb44e1a-7034-4653-ae9b-111e1f8b074d"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "f3a74125-c26d-4208-89bd-d88e514f7b77",
+        "leftValue": "={{ $json.achou }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Achou a imagem?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     750,
+     1703
+    ],
+    "id": "2e2b57c3-3416-41df-932e-6a75be0ce74a"
+   },
+   {
+    "parameters": {
+     "respondWith": "binary",
+     "responseDataSource": "automatically",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "image/jpeg"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "public, max-age=86400"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Entrega o JPEG",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     1623
+    ],
+    "id": "c0284521-d4e6-48da-a054-feb2af876b97"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "não encontrada",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/plain; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      },
+      "responseCode": 404
+     }
+    },
+    "name": "Imagem não encontrada",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     1823
+    ],
+    "id": "aa658e41-e0d8-40cc-9b34-b44384720402"
+   },
+   {
+    "parameters": {
+     "path": "insta-carrossel-ver",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Ver carrossel (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     2297
+    ],
+    "id": "f079dc73-d627-4bc3-a470-d0f7326898df",
+    "webhookId": "8f2d691c-7469-4b41-aa45-5252dc27ffac"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "rascunho",
+     "key": "={{ /^car-[a-z0-9]+$/.test($json.query.id || '') ? 'ig:rasc:' + $json.query.id : 'ig:rasc:invalido' }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê rascunho",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     2297
+    ],
+    "id": "d2afdc87-13e9-4be1-b98b-1de84ca8c947",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "const q = $('Ver carrossel (GET)').first().json.query || {};\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst casca = (titulo, corpo, refresh) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">${refresh ? '<meta http-equiv=\"refresh\" content=\"5\">' : ''}<title>${esc(titulo)}</title>\n<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#fafafa;color:#262626;padding:20px 14px 60px}\n.w{max-width:560px;margin:0 auto}.cab{display:flex;align-items:center;gap:10px;margin-bottom:12px}.av{width:38px;height:38px;border-radius:50%;background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);padding:2px}.av i{display:block;width:100%;height:100%;border-radius:50%;background:#fff}\n.post{background:#fff;border:1px solid #dbdbdb;border-radius:12px;overflow:hidden}.trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.trilho::-webkit-scrollbar{display:none}\n.trilho img{width:100%;flex:none;scroll-snap-align:start;aspect-ratio:4/5;object-fit:cover;background:#eee}.pts{display:flex;justify-content:center;gap:5px;padding:10px}.pts b{width:6px;height:6px;border-radius:50%;background:#c7c7c7}\n.leg{padding:4px 14px 14px;font-size:14px;white-space:pre-wrap}.box{background:#fff;border:1px solid #dbdbdb;border-radius:12px;padding:16px;margin-top:14px}\nlabel{display:block;font-weight:600;font-size:13px;margin:10px 0 6px}textarea,input{width:100%;padding:11px;border:1px solid #dbdbdb;border-radius:10px;font:inherit;font-size:14px}textarea{min-height:170px}\n.bts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.bt{flex:1 1 150px;border:0;border-radius:10px;padding:13px;font:inherit;font-weight:700;cursor:pointer;background:#efefef;color:#262626}\n.bt.pub{background:#0095f6;color:#fff}.bt:disabled{opacity:.55;cursor:wait}.msg{margin-top:12px;font-weight:600;font-size:14px}.ok{color:#2e9e5b}.er{color:#d03b3b}\n.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;background:#efefef}.s{width:44px;height:44px;border:4px solid #efefef;border-top-color:#dd2a7b;border-radius:50%;margin:60px auto 16px;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}h1{font-size:20px}.mu{color:#8e8e8e;font-size:13px}</style></head><body><div class=\"w\">${corpo}</div></body></html>`;\n\nif (!r || q.k !== r.k) return [{ json: { codigo: 404, html: casca('Não encontrado', '<h1 style=\"text-align:center;margin-top:60px\">Carrossel não encontrado</h1><p class=\"mu\" style=\"text-align:center\">Confira o link completo, com a chave.</p>') } }];\nif (r.status === 'gerando') return [{ json: { codigo: 200, html: casca('Criando o carrossel…', '<div class=\"s\"></div><h1 style=\"text-align:center\">A IA está escrevendo e desenhando os 6 slides</h1><p class=\"mu\" style=\"text-align:center\">Esta página se atualiza sozinha. Leva de 1 a 3 minutos.</p>', true) } }];\nif (r.status === 'erro_geracao') return [{ json: { codigo: 500, html: casca('Erro', `<h1>Não foi possível criar o carrossel</h1><p class=\"mu\">${esc(r.erro)}</p>`) } }];\n\nconst STATUS = { aguardando: '📝 Aguardando aprovação', agendado: '⏰ Agendado', publicado: '✅ Publicado', erro: '⚠️ Falhou ao publicar', descartado: '🗑️ Descartado' };\nconst quando = r.quando ? new Date(r.quando).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';\nconst imgs = r.urls.map((u, i) => `<img src=\"${esc(u)}\" alt=\"Slide ${i + 1}\" loading=\"${i ? 'lazy' : 'eager'}\">`).join('');\nconst pode = ['aguardando', 'erro', 'agendado'].includes(r.status);\nconst corpo = `<div class=\"cab\"><span class=\"av\"><i></i></span><div><b>${esc(r.dados.perfil)}</b><div class=\"mu\">${esc(r.dados.tema)}</div></div></div>\n<p style=\"margin-bottom:10px\"><span class=\"tag\">${STATUS[r.status] || esc(r.status)}</span>${quando ? ` <span class=\"mu\">para ${esc(quando)}</span>` : ''}${r.permalink ? ` · <a href=\"${esc(r.permalink)}\" target=\"_blank\" rel=\"noopener\">ver no Instagram</a>` : ''}</p>\n${r.erro && r.status === 'erro' ? `<p class=\"msg er\">${esc(r.erro)}</p>` : ''}\n${r.alerta && pode ? `<p class=\"msg er\">⚠️ ${esc(r.alerta)}</p>` : ''}\n<div class=\"post\"><div class=\"trilho\" id=\"tr\">${imgs}</div><div class=\"pts\">${r.urls.map(() => '<b></b>').join('')}</div><div class=\"leg\" id=\"legPrev\">${esc(r.legenda)}</div></div>\n${pode ? `<div class=\"box\"><label for=\"leg\">Legenda (pode editar)</label><textarea id=\"leg\" maxlength=\"2200\">${esc(r.legenda)}</textarea>\n<label for=\"senha\">Senha de publicação</label><input id=\"senha\" type=\"password\" placeholder=\"Só quem tem a senha publica na conta\" autocomplete=\"off\">\n<label for=\"quando\">Agendar para (opcional)</label><input id=\"quando\" type=\"datetime-local\">\n<div class=\"bts\"><button class=\"bt pub\" data-a=\"publicar\" type=\"button\">🚀 Publicar agora</button><button class=\"bt\" data-a=\"agendar\" type=\"button\">⏰ Agendar</button>\n${r.status === 'agendado' ? '<button class=\"bt\" data-a=\"cancelar\" type=\"button\">✖ Cancelar agendamento</button>' : '<button class=\"bt\" data-a=\"descartar\" type=\"button\">🗑️ Descartar</button>'}</div><p class=\"msg\" id=\"msg\" role=\"status\"></p></div>` : ''}\n<p class=\"mu\" style=\"margin-top:14px\">Dica: os slides são imagens 1080×1350 (formato 4:5, o que mais aparece no feed).</p>\n<script>\nvar tr=document.getElementById('tr'),pts=document.querySelectorAll('.pts b');function marca(){var i=Math.round(tr.scrollLeft/tr.clientWidth);pts.forEach(function(p,j){p.style.background=j===i?'#0095f6':'#c7c7c7';});}tr.addEventListener('scroll',marca);marca();\ndocument.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){\n  var a=b.getAttribute('data-a'),m=document.getElementById('msg'),q=document.getElementById('quando');\n  if(a==='agendar'&&!q.value){m.className='msg er';m.textContent='Escolha a data e a hora do agendamento.';return;}\n  if(a==='publicar'&&!confirm('Publicar agora na conta do Instagram?'))return;\n  document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=true;});m.className='msg';m.textContent=a==='publicar'?'Publicando… pode levar até 1 minuto.':'Salvando…';\n  fetch('/webhook/insta-carrossel-acao',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:${JSON.stringify(r.id)},k:${JSON.stringify(r.k)},acao:a,senha:document.getElementById('senha').value,legenda:document.getElementById('leg').value,quando:q.value})})\n   .then(function(x){return x.json();}).then(function(j){if(!j.ok){m.className='msg er';m.textContent=j.erro||'Não foi possível.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});return;}m.className='msg ok';m.textContent=j.mensagem||'Feito!';setTimeout(function(){location.reload();},1500);})\n   .catch(function(){m.className='msg er';m.textContent='Falha de conexão.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});});\n});});\n</script>`;\nreturn [{ json: { codigo: 200, html: casca('Aprovar carrossel', corpo) } }];"
+    },
+    "name": "Monta página de aprovação",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     500,
+     2297
+    ],
+    "id": "9869f662-f7ee-4e40-8d8f-a0ceba828af4"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      },
+      "responseCode": "={{ $json.codigo }}"
+     }
+    },
+    "name": "Entrega a aprovação",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     750,
+     2297
+    ],
+    "id": "5627ffd2-0457-4d22-a96d-ee71a5d92395"
+   },
+   {
+    "parameters": {
+     "path": "insta-carrossel-acao",
+     "responseMode": "responseNode",
+     "options": {},
+     "httpMethod": "POST"
+    },
+    "name": "Ação no carrossel (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     2990
+    ],
+    "id": "032fbd77-6399-4bbd-b44d-868cdff57eab",
+    "webhookId": "91a8caca-016f-4c97-8a50-7de83cec5522"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "rascunho",
+     "key": "={{ /^car-[a-z0-9]+$/.test(($json.body || {}).id || '') ? 'ig:rasc:' + $json.body.id : 'ig:rasc:invalido' }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê rascunho da ação",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     2990
+    ],
+    "id": "43dcf7a8-c1cf-4444-a779-b61eb0b882c9",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "// 🔐 Senha para publicar ou agendar na conta do Instagram (troque aqui)\nconst SENHA = '<SEGREDO_REMOVIDO>';\nconst b = $('Ação no carrossel (POST)').first().json.body || {};\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst nao = (erro, codigo = 400) => [{ json: { ok: false, erro, codigo } }];\nif (!r || b.k !== r.k) return nao('Carrossel não encontrado.', 404);\nconst acao = String(b.acao || '');\nif (!['publicar', 'agendar', 'descartar', 'cancelar'].includes(acao)) return nao('Ação inválida.');\nif ((acao === 'publicar' || acao === 'agendar') && b.senha !== SENHA) return nao('Senha de publicação incorreta.', 403);\nif (r.status === 'publicado') return nao('Este carrossel já foi publicado.');\nif (acao === 'cancelar' && r.status !== 'agendado') return nao('Não há agendamento para cancelar.');\n\nconst legenda = String(b.legenda ?? r.legenda).replace(/\\r/g, '').trim().slice(0, 2200) || r.legenda;\nlet quando = null;\nif (acao === 'agendar') {\n  const t = new Date(String(b.quando || '') + ':00-03:00');\n  if (isNaN(t) || t.getTime() < Date.now() + 2 * 60000 || t.getTime() > Date.now() + 60 * 86400000) return nao('Escolha um horário entre 2 minutos e 60 dias a partir de agora.');\n  quando = t.toISOString();\n}\nconst novo = { ...r, legenda, atualizadoEm: new Date().toISOString(), erro: '' };\nif (acao === 'agendar') Object.assign(novo, { status: 'agendado', quando });\nif (acao === 'descartar') novo.status = 'descartado';\nif (acao === 'cancelar') Object.assign(novo, { status: 'aguardando', quando: null });\nreturn [{ json: { ok: true, acao, id: r.id, urls: r.urls, legenda, quando, rascunho_str: JSON.stringify(novo),\n  mensagem: { agendar: 'Agendado! O fluxo publica sozinho no horário.', descartar: 'Carrossel descartado.', cancelar: 'Agendamento cancelado.', publicar: '' }[acao] } }];"
+    },
+    "name": "Valida ação",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     500,
+     2990
+    ],
+    "id": "50f39d99-c639-4b19-a23c-b16f756b58b4"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "d8330433-3ea0-462b-885f-bb6f4db377b5",
+        "leftValue": "={{ $json.ok }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Ação permitida?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     750,
+     2990
+    ],
+    "id": "6e7ad5ed-f44f-4d17-b6c2-dae5bf901c0f"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      },
+      "responseCode": "={{ $json.codigo }}"
+     }
+    },
+    "name": "Responde recusa",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     3410
+    ],
+    "id": "4b8882ad-6306-4cc2-9084-502dd068b1f8"
+   },
+   {
+    "parameters": {
+     "rules": {
+      "values": [
+       {
+        "conditions": {
+         "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict",
+          "version": 2
+         },
+         "conditions": [
+          {
+           "id": "6dc848b7-7872-4168-81a0-478392e02053",
+           "leftValue": "={{ $json.acao }}",
+           "rightValue": "publicar",
+           "operator": {
+            "type": "string",
+            "operation": "equals"
+           }
+          }
+         ],
+         "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "publicar"
+       },
+       {
+        "conditions": {
+         "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict",
+          "version": 2
+         },
+         "conditions": [
+          {
+           "id": "3ba3d378-c498-468f-a0de-55fdf5f12d68",
+           "leftValue": "={{ $json.acao }}",
+           "rightValue": "agendar",
+           "operator": {
+            "type": "string",
+            "operation": "equals"
+           }
+          }
+         ],
+         "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "agendar"
+       },
+       {
+        "conditions": {
+         "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict",
+          "version": 2
+         },
+         "conditions": [
+          {
+           "id": "29d2ee93-58fd-46dd-b6be-07579b7ccd03",
+           "leftValue": "={{ $json.acao }}",
+           "rightValue": "descartar",
+           "operator": {
+            "type": "string",
+            "operation": "equals"
+           }
+          }
+         ],
+         "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "descartar"
+       },
+       {
+        "conditions": {
+         "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict",
+          "version": 2
+         },
+         "conditions": [
+          {
+           "id": "a2c277ec-d3d5-4fa6-8a45-19d574ffe92b",
+           "leftValue": "={{ $json.acao }}",
+           "rightValue": "cancelar",
+           "operator": {
+            "type": "string",
+            "operation": "equals"
+           }
+          }
+         ],
+         "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "cancelar"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "name": "Qual ação?",
+    "type": "n8n-nodes-base.switch",
+    "typeVersion": 3.2,
+    "position": [
+     1000,
+     2990
+    ],
+    "id": "5c29e292-d408-4995-a5bb-e42cccfc80bc"
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "operation": "createCarouselPost",
+     "carouselChildren": {
+      "child": [
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[0] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[1] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[2] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[3] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[4] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[5] }}"
+       }
+      ]
+     },
+     "carouselCaption": "={{ $json.legenda }}",
+     "carouselAdditionalOptions": {}
+    },
+    "name": "Cria carrossel",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1300,
+     2830
+    ],
+    "id": "ec116621-c858-4775-b20d-a401d07aa257",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "operation": "publishPost",
+     "creationId": "={{ $json.id }}"
+    },
+    "name": "Publica no feed",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     2830
+    ],
+    "id": "c9a8ea70-1961-4135-813e-7516ec3eb7c6",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "resource": "media",
+     "operation": "getMedia",
+     "mediaId": "={{ $json.id }}",
+     "mediaDetailFields": [
+      "id",
+      "permalink",
+      "timestamp"
+     ]
+    },
+    "name": "Pega o link do post",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1780,
+     2830
+    ],
+    "id": "5fcc65ab-7c57-49f8-9ab7-cbb277b2a792",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Junta o resultado da publicação com o rascunho e marca como publicado (ou erro)\nconst NO_ORIGEM = 'Valida ação';\nconst saida = [];\nconst origem = $(NO_ORIGEM).all();\nconst itens = $input.all();\nfor (let i = 0; i < itens.length; i++) {\n  const o = origem[i] ? origem[i].json : origem[0].json;\n  const r = JSON.parse(o.rascunho_str);\n  const j = itens[i].json;\n  if (j.error || !j.id) {\n    const e = j.error;\n    Object.assign(r, { status: 'erro', erro: 'O Instagram recusou: ' + String((e && (e.message || e.description)) || e || 'sem resposta').slice(0, 300) });\n  } else {\n    Object.assign(r, { status: 'publicado', media_id: j.id, permalink: j.permalink || '', publicadoEm: new Date().toISOString(), erro: '' });\n  }\n  r.atualizadoEm = new Date().toISOString();\n  saida.push({ json: { id: r.id, ok: r.status === 'publicado', permalink: r.permalink || '', erro: r.erro || '', rascunho_str: JSON.stringify(r) } });\n}\nreturn saida;"
+    },
+    "name": "Registra publicação",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2020,
+     2830
+    ],
+    "id": "c18dedfb-cc7f-4dad-ba57-9a4d9197d561"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva publicado",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2260,
+     2830
+    ],
+    "id": "0054f168-1de2-4cf9-b53f-bfe30992bf04",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: $json.ok, mensagem: $json.ok ? 'Publicado no Instagram! 🎉' : $json.erro, erro: $json.erro, permalink: $json.permalink }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde publicação",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     2500,
+     2830
+    ],
+    "id": "8e571ee1-12e1-4ea1-8f08-bf4506908c04"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva agendamento",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1300,
+     3050
+    ],
+    "id": "c85cd4af-f800-49c0-baa8-2375262407b7",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "ig:fila",
+     "value": "={{ JSON.stringify({ [$('Valida ação').first().json.id]: $('Valida ação').first().json.quando }) }}",
+     "keyType": "hash",
+     "valueIsJSON": true,
+     "expire": false
+    },
+    "name": "Entra na fila",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     3050
+    ],
+    "id": "69224021-d366-43a4-85f4-ed83da1f6efa",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true, mensagem: $('Valida ação').first().json.mensagem }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde agendamento",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1780,
+     3050
+    ],
+    "id": "13182005-93d0-447e-adf1-d97fc4f1de2f"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva descarte",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1300,
+     3230
+    ],
+    "id": "0f2ed898-104a-4066-b36e-9b1ace1b7eef",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva cancelamento",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1300,
+     3390
+    ],
+    "id": "959d5b49-2488-403e-9281-bace039eb8cf",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "ig:fila",
+     "value": "={{ JSON.stringify({ [$('Valida ação').first().json.id]: 'cancelado' }) }}",
+     "keyType": "hash",
+     "valueIsJSON": true,
+     "expire": false
+    },
+    "name": "Tira da fila",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     3390
+    ],
+    "id": "0299d052-5833-47b2-ade6-78ec05e4c145",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true, mensagem: $('Valida ação').first().json.mensagem }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde ok",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1780,
+     3290
+    ],
+    "id": "5139417e-ed02-48c8-b756-130f5bc795ee"
+   },
+   {
+    "parameters": {
+     "rule": {
+      "interval": [
+       {
+        "field": "minutes",
+        "minutesInterval": 5
+       }
+      ]
+     }
+    },
+    "name": "A cada 5 minutos",
+    "type": "n8n-nodes-base.scheduleTrigger",
+    "typeVersion": 1.2,
+    "position": [
+     0,
+     3884
+    ],
+    "id": "466b9a2b-0135-4f7b-b532-35c225d5e8e2"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "fila",
+     "key": "ig:fila",
+     "keyType": "hash",
+     "options": {}
+    },
+    "name": "Lê fila",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     250,
+     3884
+    ],
+    "id": "80aac08e-4a8a-4469-9aec-24d7c402e544",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "// Lê a fila de agendamentos e devolve só o que já passou do horário\nconst fila = $input.first().json.fila || {};\nconst agora = Date.now();\nreturn Object.entries(fila)\n  .filter(([id, quando]) => /^car-[a-z0-9]+$/.test(id) && quando !== 'feito' && quando !== 'cancelado' && new Date(quando).getTime() <= agora)\n  .map(([id]) => ({ json: { id } }));"
+    },
+    "name": "Separa os vencidos",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     500,
+     3884
+    ],
+    "id": "f5e108d6-3510-43ac-a64e-6e8eefcf9fe3"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "rascunho",
+     "key": "=ig:rasc:{{ $json.id }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê rascunho agendado",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     750,
+     3884
+    ],
+    "id": "ed53e002-8aa6-4c57-9939-4bf2d354e989",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "// Só publica o que continua agendado (o dono pode ter cancelado ou publicado antes)\nreturn $input.all().map(i => { try { return JSON.parse(i.json.rascunho || 'null'); } catch (e) { return null; } })\n  .filter(r => r && r.status === 'agendado')\n  .map(r => ({ json: { id: r.id, urls: r.urls, legenda: r.legenda, rascunho_str: JSON.stringify(r) } }));"
+    },
+    "name": "Prepara agendado",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1000,
+     3884
+    ],
+    "id": "c5a53b60-84f5-4fe4-99ee-dc1b4583ba00"
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "operation": "createCarouselPost",
+     "carouselChildren": {
+      "child": [
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[0] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[1] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[2] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[3] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[4] }}"
+       },
+       {
+        "media_type": "IMAGE",
+        "image_url": "={{ $json.urls[5] }}"
+       }
+      ]
+     },
+     "carouselCaption": "={{ $json.legenda }}",
+     "carouselAdditionalOptions": {}
+    },
+    "name": "Cria carrossel (agendado)",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1300,
+     3884
+    ],
+    "id": "af7101a0-7a92-49ca-98c5-a0655fe178c4",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "operation": "publishPost",
+     "creationId": "={{ $json.id }}"
+    },
+    "name": "Publica no feed (agendado)",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     3884
+    ],
+    "id": "8d97ab1b-741f-4fb7-b5cd-8f408957a383",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "resource": "media",
+     "operation": "getMedia",
+     "mediaId": "={{ $json.id }}",
+     "mediaDetailFields": [
+      "id",
+      "permalink",
+      "timestamp"
+     ]
+    },
+    "name": "Pega o link do post (agendado)",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1780,
+     3884
+    ],
+    "id": "416e3d55-d590-4704-a77b-95c6f0817fe7",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Junta o resultado da publicação com o rascunho e marca como publicado (ou erro)\nconst NO_ORIGEM = 'Prepara agendado';\nconst saida = [];\nconst origem = $(NO_ORIGEM).all();\nconst itens = $input.all();\nfor (let i = 0; i < itens.length; i++) {\n  const o = origem[i] ? origem[i].json : origem[0].json;\n  const r = JSON.parse(o.rascunho_str);\n  const j = itens[i].json;\n  if (j.error || !j.id) {\n    const e = j.error;\n    Object.assign(r, { status: 'erro', erro: 'O Instagram recusou: ' + String((e && (e.message || e.description)) || e || 'sem resposta').slice(0, 300) });\n  } else {\n    Object.assign(r, { status: 'publicado', media_id: j.id, permalink: j.permalink || '', publicadoEm: new Date().toISOString(), erro: '' });\n  }\n  r.atualizadoEm = new Date().toISOString();\n  saida.push({ json: { id: r.id, ok: r.status === 'publicado', permalink: r.permalink || '', erro: r.erro || '', rascunho_str: JSON.stringify(r) } });\n}\nreturn saida;"
+    },
+    "name": "Registra publicação (agendado)",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2020,
+     3884
+    ],
+    "id": "f7f636af-74d9-43bb-8c84-56d57c918675"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=ig:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva resultado",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2260,
+     3884
+    ],
+    "id": "62bb3f9b-389c-4d33-9d85-7a4e4b77daca",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "ig:fila",
+     "value": "={{ JSON.stringify({ [$json.id]: 'feito' }) }}",
+     "keyType": "hash",
+     "valueIsJSON": true,
+     "expire": false
+    },
+    "name": "Marca como feito",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2500,
+     3884
+    ],
+    "id": "faa82377-c720-4633-ae10-bf5e5be9e271",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "content": "# 📸 CARROSSEL COM IA, APROVAÇÃO E AGENDAMENTO\n🎯 A IA escreve um carrossel de **6 slides**, **desenha as imagens** e escreve a legenda. Você **revisa e aprova** numa página, e o fluxo **publica no Instagram** na hora ou no horário agendado.\n▶️ **Teste:** abra a Production URL do node **Página de criação (GET)**, preencha e espere a prévia. Para publicar use a senha **publica-5b514a** (troque no node **Valida ação**).\n🧩 **Faixa 1 · Página de criação:** o formulário (tema, @, objetivo, tom, palavra para comentar e paleta de cores).",
+     "height": 256,
+     "width": 1100,
+     "color": 6
+    },
+    "name": "Nota · faixa 1",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     0
+    ],
+    "id": "b2134985-55c6-4ba4-833a-e74c00185ba2"
+   },
+   {
+    "parameters": {
+     "content": "## 🏭 2. A FÁBRICA DO CARROSSEL\n🔔 **Novo carrossel (POST)** → 🚧 **Contador por IP** (10 por hora) → 🧹 **Validar pedido** → 🚦 **Pedido ok?**\n🗄️ **Rascunho: gerando** salva o pedido e ⚡ **Responde com o link** devolve na hora o link da página de aprovação (que mostra \"criando…\" e se atualiza sozinha).\n✍️ **Roteirista de carrossel** (`gemini-3-flash`): capa com gancho, 4 slides de conteúdo, chamada final, legenda e hashtags.\n🧩 **Organiza slides**: transforma o roteiro em 6 itens com cores, fontes e posições (e quebra o texto em linhas).\n🎨 **Desenha o slide** (node **Edit Image**): cria uma imagem 1080×1350 e desenha a barra, o contador \"1/6\", o título, o texto, o rodapé e o \"arraste »\". Roda **6 vezes**, uma por slide.\n💾 **Imagem para base64** → **Guarda imagem** (Redis) → **Junta rascunho** → **Salva rascunho**: pronto para aprovar.",
+     "height": 273,
+     "width": 3420,
+     "color": 4
+    },
+    "name": "Nota · faixa 2",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     576
+    ],
+    "id": "3d0e159d-87ae-4b77-a70d-538c3de7161d"
+   },
+   {
+    "parameters": {
+     "content": "## 🖼️ 3. ENTREGA DAS IMAGENS\nO Instagram **não recebe arquivos**: ele **baixa as imagens de um link público**. Esta faixa é esse link: `/webhook/insta-img?id=...&n=1` lê a imagem no Redis e devolve um **JPEG** de verdade. A página de aprovação usa os mesmos links para mostrar a prévia.",
+     "height": 154,
+     "width": 1360,
+     "color": 5
+    },
+    "name": "Nota · faixa 3",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     1409
+    ],
+    "id": "53f556bb-ef33-46b7-b351-e4a779fd01c6"
+   },
+   {
+    "parameters": {
+     "content": "## ✅ 4. PÁGINA DE APROVAÇÃO\n🔔 **Ver carrossel (GET)** com o link secreto (`id` + chave `k`) → 🗄️ **Lê rascunho** → 🧩 **Monta página de aprovação**, parecida com um post do Instagram: slides deslizando, legenda **editável**, senha, campo para agendar e os botões **Publicar agora**, **Agendar** e **Descartar**.",
+     "height": 154,
+     "width": 1110,
+     "color": 7
+    },
+    "name": "Nota · faixa 4",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     2083
+    ],
+    "id": "8a92e336-cca4-4cd8-a155-a429d0aacfa4"
+   },
+   {
+    "parameters": {
+     "content": "## 🚀 5. AÇÕES: PUBLICAR, AGENDAR, DESCARTAR\n🔔 **Ação no carrossel (POST)** → 🔐 **Valida ação** (confere a chave do link e a **senha**, a legenda e o horário) → 🔀 **Qual ação?**\n🚀 **Publicar:** usa o **community node do Instagram** em 3 passos: **Cria carrossel** (manda os 6 links e a legenda) → **Publica no feed** → **Pega o link do post**. Depois **Registra publicação** e responde com o link. Se o Instagram recusar, o erro aparece na página.\n⏰ **Agendar:** salva e coloca o carrossel na **fila** (um \"hash\" no Redis: `id → horário`).\n🗑️ **Descartar** e ✖️ **Cancelar agendamento** só atualizam o rascunho e a fila.",
+     "height": 213,
+     "width": 2860,
+     "color": 3
+    },
+    "name": "Nota · faixa 5",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     2557
+    ],
+    "id": "b9574ee3-5fab-4bd0-8a89-497ce2ec3308"
+   },
+   {
+    "parameters": {
+     "content": "## ⏰ 6. O CARTEIRO DOS AGENDADOS\n🔁 **A cada 5 minutos** o fluxo acorda sozinho, lê a fila, separa o que **já passou do horário**, confere se continua agendado e publica com os mesmos 3 nodes do Instagram. No fim marca como **feito** na fila.\n💡 Exercício: mandar uma mensagem no WhatsApp para o dono quando o post agendado for publicado.",
+     "height": 154,
+     "width": 2860,
+     "color": 2
+    },
+    "name": "Nota · faixa 6",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     3670
+    ],
+    "id": "f65d6b1b-b76f-43b1-819e-988dfef3212a"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-2.5-flash",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 6000,
+      "temperature": 0.8,
+      "timeout": 300000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro do roteirista",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1540,
+     1329
+    ],
+    "id": "b8585c71-ea76-49c3-86a1-187363b72066",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Página de criação (GET)": {
+    "main": [
+     [
+      {
+       "node": "HTML da criação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "HTML da criação": {
+    "main": [
+     [
+      {
+       "node": "Entrega a página",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Novo carrossel (POST)": {
+    "main": [
+     [
+      {
+       "node": "Contador por IP",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Contador por IP": {
+    "main": [
+     [
+      {
+       "node": "Validar pedido do carrossel",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Validar pedido do carrossel": {
+    "main": [
+     [
+      {
+       "node": "Pedido ok?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pedido ok?": {
+    "main": [
+     [
+      {
+       "node": "Rascunho: gerando",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Responde erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Rascunho: gerando": {
+    "main": [
+     [
+      {
+       "node": "Responde com o link",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro do roteirista": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Roteirista de carrossel",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Responde com o link": {
+    "main": [
+     [
+      {
+       "node": "Roteirista de carrossel",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Roteirista de carrossel": {
+    "main": [
+     [
+      {
+       "node": "Organiza slides",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Organiza slides",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Organiza slides": {
+    "main": [
+     [
+      {
+       "node": "Desenha o slide",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Desenha o slide": {
+    "main": [
+     [
+      {
+       "node": "Imagem para base64",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Rascunho: erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Imagem para base64": {
+    "main": [
+     [
+      {
+       "node": "Guarda imagem",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Guarda imagem": {
+    "main": [
+     [
+      {
+       "node": "Junta rascunho",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Junta rascunho": {
+    "main": [
+     [
+      {
+       "node": "Salva rascunho",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pedido de imagem (GET)": {
+    "main": [
+     [
+      {
+       "node": "Lê imagem",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê imagem": {
+    "main": [
+     [
+      {
+       "node": "Converte em arquivo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Converte em arquivo": {
+    "main": [
+     [
+      {
+       "node": "Achou a imagem?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Achou a imagem?": {
+    "main": [
+     [
+      {
+       "node": "Entrega o JPEG",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Imagem não encontrada",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ver carrossel (GET)": {
+    "main": [
+     [
+      {
+       "node": "Lê rascunho",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê rascunho": {
+    "main": [
+     [
+      {
+       "node": "Monta página de aprovação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Monta página de aprovação": {
+    "main": [
+     [
+      {
+       "node": "Entrega a aprovação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ação no carrossel (POST)": {
+    "main": [
+     [
+      {
+       "node": "Lê rascunho da ação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê rascunho da ação": {
+    "main": [
+     [
+      {
+       "node": "Valida ação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Valida ação": {
+    "main": [
+     [
+      {
+       "node": "Ação permitida?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ação permitida?": {
+    "main": [
+     [
+      {
+       "node": "Qual ação?",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Responde recusa",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cria carrossel": {
+    "main": [
+     [
+      {
+       "node": "Publica no feed",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Registra publicação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Publica no feed": {
+    "main": [
+     [
+      {
+       "node": "Pega o link do post",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Registra publicação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pega o link do post": {
+    "main": [
+     [
+      {
+       "node": "Registra publicação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Qual ação?": {
+    "main": [
+     [
+      {
+       "node": "Cria carrossel",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Salva agendamento",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Salva descarte",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Salva cancelamento",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Registra publicação": {
+    "main": [
+     [
+      {
+       "node": "Salva publicado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva publicado": {
+    "main": [
+     [
+      {
+       "node": "Responde publicação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva agendamento": {
+    "main": [
+     [
+      {
+       "node": "Entra na fila",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Entra na fila": {
+    "main": [
+     [
+      {
+       "node": "Responde agendamento",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva cancelamento": {
+    "main": [
+     [
+      {
+       "node": "Tira da fila",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva descarte": {
+    "main": [
+     [
+      {
+       "node": "Responde ok",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Tira da fila": {
+    "main": [
+     [
+      {
+       "node": "Responde ok",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "A cada 5 minutos": {
+    "main": [
+     [
+      {
+       "node": "Lê fila",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê fila": {
+    "main": [
+     [
+      {
+       "node": "Separa os vencidos",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Separa os vencidos": {
+    "main": [
+     [
+      {
+       "node": "Lê rascunho agendado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê rascunho agendado": {
+    "main": [
+     [
+      {
+       "node": "Prepara agendado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cria carrossel (agendado)": {
+    "main": [
+     [
+      {
+       "node": "Publica no feed (agendado)",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Registra publicação (agendado)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Publica no feed (agendado)": {
+    "main": [
+     [
+      {
+       "node": "Pega o link do post (agendado)",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Registra publicação (agendado)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pega o link do post (agendado)": {
+    "main": [
+     [
+      {
+       "node": "Registra publicação (agendado)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Prepara agendado": {
+    "main": [
+     [
+      {
+       "node": "Cria carrossel (agendado)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Registra publicação (agendado)": {
+    "main": [
+     [
+      {
+       "node": "Salva resultado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva resultado": {
+    "main": [
+     [
+      {
+       "node": "Marca como feito",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro do roteirista": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Roteirista de carrossel",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-14T00:57:59.316Z",
+    "id": 242,
+    "workflowId": "1pizKCLREiCiVp0A",
+    "versionId": "4b4f4df9-aeaf-4329-ae10-86565befa2b3",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T00:57:59.418Z",
+    "id": 243,
+    "workflowId": "1pizKCLREiCiVp0A",
+    "versionId": "4b4f4df9-aeaf-4329-ae10-86565befa2b3",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

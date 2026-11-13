@@ -1,0 +1,211 @@
+{
+ "updatedAt": "2026-07-09T10:55:10.274Z",
+ "createdAt": "2026-07-09T10:54:53.374Z",
+ "id": "5CxQjseCrrMkC3Tv",
+ "name": "hermescall4-brodcast",
+ "description": null,
+ "active": false,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "color": 6,
+    "content": "## 🚀 Integração AstraCalls (Chamadas de Voz Híbridas)\n\n**O que esse fluxo faz?**\nEle recebe um comando externo via API (Webhook), formata os parâmetros e dispara uma ligação para um número especifico no WhatsApp via *AstraCalls* tocando o arquivo de áudio informado.\n\n**Parâmetros de Entrada aceitos (JSON no corpo do POST):**\n- `session_id` (Opcional): ID da sessão a ser usada\n- `phone` ou `numero` (Opcional): O número completo para onde ligar (formato: 55 DDD NUMERO)\n- `audio_url` (Opcional): Link direto e público do arquivo em formato mp3 ou wav\n- `hangup_after_ms` (Opcional): Em quantos milisegundos a chamada vai ser forçosamente cortada (Default: 70000ms = 70s)\n\n**Como usar como outro Agente LLM:**\nBasta disparar um `POST` para a URL de Webhook no formato JSON indicando de quem é, por exemplo: `{\"phone\": \"5511999999999\", \"audio_url\": \"https://sua-url/audio.mp3\"}`"
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -300,
+    -100
+   ],
+   "id": "87ad633e-02fb-4d55-ad33-7f3dd7a2cf52",
+   "name": "Introdução"
+  },
+  {
+   "parameters": {
+    "color": 2,
+    "content": "### 1) Recebe os Dados \n(Trigger)\n\nEste é o gateway de entrada. Um webhook POST que recebe as informações do chamador. Em producao ele fica aguardando requisições."
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    200,
+    150
+   ],
+   "id": "b79953a3-f421-4a2a-9a90-a8b3d2d05bae",
+   "name": "Passo 1"
+  },
+  {
+   "parameters": {
+    "color": 3,
+    "content": "### 2) Variaveis & Fallback\n\nAqui nós normatizamos as variáveis.  \nSe o payload vier vazio, ele estabelece:\n\n- O Audio musical default (exemplo)\n- O numero default passado (918...)\n- O session_id do AstraCalls existente"
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    400,
+    150
+   ],
+   "id": "5d34c325-ee09-45af-9541-7f061b48ea09",
+   "name": "Passo 2"
+  },
+  {
+   "parameters": {
+    "color": 5,
+    "content": "### 3) Executor do AstraCalls\n\n- Transforma em um POST astra.\n- Envia pro endpoint `/api/sessions/[ID]/broadcast`.\n- A Autenticacao usa `X-API-Key` injetada dinamicamente nos headers."
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    650,
+    150
+   ],
+   "id": "2431e49e-4856-4665-b0de-aa486ede0423",
+   "name": "Passo 3"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "9c863715-13a4-4772-978d-54bb80f9cb63",
+    "options": {}
+   },
+   "name": "Webhook (Receita de Dados)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 1.1,
+   "position": [
+    250,
+    300
+   ],
+   "webhookId": "9c863715-13a4-4772-978d-54bb80f9cb63",
+   "id": "56713ab4-d1ed-4672-8076-a75bd283b01b"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "7817dd7c-d6b9",
+       "name": "session_id",
+       "value": "={{ $json.body.session_id || $json.body.sessions || 'c9f26da0c5cae05a38d55a113d1fe138' }}",
+       "type": "string"
+      },
+      {
+       "id": "2817dd7c-d6b9",
+       "name": "numero_destino",
+       "value": "={{ $json.body.phone || $json.body.numero || '559184698653' }}",
+       "type": "string"
+      },
+      {
+       "id": "3817dd7c-d6b9",
+       "name": "audio_url",
+       "value": "={{ $json.body.audio_url || 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' }}",
+       "type": "string"
+      },
+      {
+       "id": "4817dd7c-d6b9",
+       "name": "hangup_after_ms",
+       "value": "={{ $json.body.hangup_after_ms || 70000 }}",
+       "type": "number"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "Variaveis (Audio e Numero)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    450,
+    300
+   ],
+   "id": "824d51d1-22dd-44b1-a0da-4c6446bc8759"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ 'https://astracalls.inovareinteligenciaartificial.com/api/sessions/' + $json.session_id + '/broadcast' }}",
+    "authentication": "none",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({\n  numbers: [$json.numero_destino],\n  audio_url: $json.audio_url,\n  hangup_after_ms: $json.hangup_after_ms\n}) }}",
+    "options": {},
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "KBPSweRK4ckPhn01my0QpsBnsHFWxjyKc5x7nSZS94w"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    }
+   },
+   "name": "Disparar Ligacao",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    700,
+    300
+   ],
+   "id": "0eab3d15-0ab4-4a3f-9602-26c41ff2d1b4"
+  }
+ ],
+ "connections": {
+  "Webhook (Receita de Dados)": {
+   "main": [
+    [
+     {
+      "node": "Variaveis (Audio e Numero)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Variaveis (Audio e Numero)": {
+   "main": [
+    [
+     {
+      "node": "Disparar Ligacao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "availableInMCP": true
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": null,
+ "versionId": "2255db2a-6d41-42d1-a62d-516fcd92ef5c",
+ "activeVersionId": null,
+ "versionCounter": 2,
+ "triggerCount": 0,
+ "shared": [
+  {
+   "updatedAt": "2026-07-09T10:54:53.374Z",
+   "createdAt": "2026-07-09T10:54:53.374Z",
+   "role": "workflow:owner",
+   "workflowId": "5CxQjseCrrMkC3Tv",
+   "projectId": "VjtctrZnAI1uyZTt",
+   "project": {
+    "updatedAt": "2026-03-25T00:27:09.830Z",
+    "createdAt": "2026-03-25T00:19:45.271Z",
+    "id": "VjtctrZnAI1uyZTt",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "241ebc8f-7077-47b7-8e6d-f7720abb61bd"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": null
+}

@@ -1,0 +1,250 @@
+{
+  "_leia": "Canais que NENHUM postador usa. 'suspensos' e 'desativados' valem até você remover a entrada. 'token_morto' tem token_hash: quando o token é renovado (relogin) o bloqueio cai sozinho. O youtube_poster.py adiciona entradas aqui automaticamente quando o YouTube devolve suspensão/token inválido.",
+  "suspensos": [
+    {
+      "nome": "fake News ia",
+      "id": "iRFUGk9O4vUbFlx9",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "fofos e absurdos",
+      "id": "Qj1KuRrIen2U7pCI",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Cérebro Digital, Piada Real",
+      "id": "rnejQCTSYYBQQhNb",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Cérebro Digital, Piada Real",
+      "id": "eFybCEfRjwxkBwCS",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Emerson AI",
+      "id": "TQHvWDib398yy5RN",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Emerson AI",
+      "id": "qVbHRTFgTxilpshH",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "sintetize risada",
+      "id": "ifBvEBgDU9B1ttax",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "dança e música com ia",
+      "id": "7jDLXpQYNGvbhigD",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Game of thrones kingsroad brasil",
+      "id": "NdHuOLpVF21th3YZ",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Inovare inteligência artificial",
+      "id": "n6w2HCpYQI6i63cu",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Inovare inteligência artificial",
+      "id": "oD2B8wL3p4oyd0UZ",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "energia solar ia",
+      "id": "zGbkHNRhIfqHua4E",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Vídeos cassetadas ia",
+      "id": "yZ1N2Asldwj3e4cn",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "curiosidades e fatos ia",
+      "id": "u1S7r9FfDdqcDrtS",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "fala com a IA",
+      "id": "ikcbItItaj2bNPqh",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Aulas Ia",
+      "id": "1A2FbLAQ1XswAhly",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "ia brasileira",
+      "id": "nYfShqgOuc7VLGUo",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "IA PRO- Mentoria N8N, Dify, code e +",
+      "id": "Pbvr1t6upxkBLYBi",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Inovare com ia",
+      "id": "nmitE1d50lEJ9j7I",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Re cenas ia",
+      "id": "FC6GWhGDhaAY31Kn",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Fabio com ia",
+      "id": "oqeQ184UqMDyqt59",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "Inovare Manhwa esp",
+      "id": "0RW4rz4ekPpkPcZx",
+      "motivo": "2026-10-04: API channels.list -> 403 \"The YouTube account of the authenticated user is suspended\" (upload do distribuir_videos.py tambem deu 403)",
+      "em": "2026-10-04T14:05:45-03:00"
+    }
+  ],
+  "token_morto": [
+    {
+      "nome": "InovareManhwaVerse",
+      "id": "zsEhAgkXUSofZr5Y",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "inovaremanhwabr",
+      "id": "hNQrW5ouNe0Ni5Me",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "Inovaremanhwaversethai",
+      "id": "q3mik36FjtTgFkNC",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@IAAgora-h3n",
+      "id": "novo_ia_agora_h3n",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@IAAgora-n7h",
+      "id": "novo_ia_agora_n7h",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@UniversoIA-d6s",
+      "id": "novo_universo_ia_d6s",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@IASemLimites-h4b",
+      "id": "novo_ia_sem_limites_h4b",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@CodigoInteligente-n7j",
+      "id": "novo_codigo_inteligente_n7j",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@MenteArtificial-i5r",
+      "id": "novo_mente_artificial_i5r",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    },
+    {
+      "nome": "@Inovaremanhwaversethai",
+      "id": "novo_inovare_thai_v2",
+      "motivo": "invalid_grant / API desativada no projeto",
+      "em": "2026-09-24",
+      "token_hash": "<SEGREDO_REMOVIDO>"
+    }
+  ],
+  "desativados": [
+    {
+      "nome": "fabio com ia",
+      "id": "w6YWmnIMTPujfVOn",
+      "motivo": "desativado manualmente (lista antiga)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "enpresainovare (financeiro",
+      "id": "evnS5OlDFeglVFGA",
+      "motivo": "desativado manualmente (lista antiga)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "emersonjosiel1995( motivação",
+      "id": "q1YDRNl2tFvhnL0Z",
+      "motivo": "desativado manualmente (lista antiga)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "emersonjosiel1995nov(motivação",
+      "id": "APdbtp1sLMAFhAid",
+      "motivo": "desativado manualmente (lista antiga)",
+      "em": "2026-09-24"
+    },
+    {
+      "nome": "nova conta de manga br",
+      "motivo": "desativado manualmente (lista antiga) (sem credencial)",
+      "em": "2026-09-24"
+    }
+  ],
+  "liberados": [
+    {
+      "nome": "YouTube inovaremanhwaverseviet",
+      "id": "8ROQmZVjbpwiwMoX",
+      "motivo": "suspenso pelo YouTube em 2026-09-04 (spam)",
+      "em": "2026-09-24",
+      "liberado_em": "2026-10-13T15:49",
+      "por": "13/10: Studio abriu o painel normal (conta inovaremanhwaverseviet@gmail.com); a marca de suspenso de 04/09 estava velha"
+    }
+  ]
+}

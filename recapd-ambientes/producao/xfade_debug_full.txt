@@ -1,0 +1,697 @@
+=== CMD ===
+ffmpeg -y -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_0.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_1.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_2.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_3.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_4.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_5.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_6.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_7.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_8.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_9.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_10.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_11.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_12.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_13.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_14.mp4 -i workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_15.mp4 -filter_complex [0:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v1];[2:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v2];[3:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v3];[4:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v4];[5:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v5];[6:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=1.200,settb=AVTB,setpts=PTS-STARTPTS[v6];[7:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v7];[8:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v8];[9:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v9];[10:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v10];[11:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v11];[12:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=1.100,settb=AVTB,setpts=PTS-STARTPTS[v12];[13:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v13];[14:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v14];[15:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v15];[0:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.4726,atrim=0:6.4726,asetpts=PTS-STARTPTS[a0];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.5380,atrim=0:5.5380,asetpts=PTS-STARTPTS[a1];[2:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.2047,atrim=0:5.2047,asetpts=PTS-STARTPTS[a2];[3:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.5060,atrim=0:6.5060,asetpts=PTS-STARTPTS[a3];[4:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.5050,atrim=0:5.5050,asetpts=PTS-STARTPTS[a4];[5:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.9728,atrim=0:6.9728,asetpts=PTS-STARTPTS[a5];[6:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.8713,atrim=0:5.8713,asetpts=PTS-STARTPTS[a6];[7:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.8049,atrim=0:5.8049,asetpts=PTS-STARTPTS[a7];[8:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.3044,atrim=0:5.3044,asetpts=PTS-STARTPTS[a8];[9:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.6725,atrim=0:6.6725,asetpts=PTS-STARTPTS[a9];[10:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.5390,atrim=0:6.5390,asetpts=PTS-STARTPTS[a10];[11:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.0389,atrim=0:6.0389,asetpts=PTS-STARTPTS[a11];[12:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.4049,atrim=0:6.4049,asetpts=PTS-STARTPTS[a12];[13:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.0722,atrim=0:6.0722,asetpts=PTS-STARTPTS[a13];[14:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.9054,atrim=0:5.9054,asetpts=PTS-STARTPTS[a14];[15:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.3392,atrim=0:6.3392,asetpts=PTS-STARTPTS[a15];[v0][v1]xfade=transition=smoothdown:duration=0.420:offset=6.053[vx1];[a0][a1]acrossfade=d=0.420[ax1];[vx1][v2]xfade=transition=circleclose:duration=0.420:offset=11.171[vx2];[ax1][a2]acrossfade=d=0.420[ax2];[vx2][v3]xfade=transition=slidedown:duration=0.420:offset=15.955[vx3];[ax2][a3]acrossfade=d=0.420[ax3];[vx3][v4]xfade=transition=smoothup:duration=0.420:offset=22.041[vx4];[ax3][a4]acrossfade=d=0.420[ax4];[vx4][v5]xfade=transition=horzopen:duration=0.420:offset=27.126[vx5];[ax4][a5]acrossfade=d=0.420[ax5];[vx5][v6]xfade=transition=smoothleft:duration=0.420:offset=33.679[vx6];[ax5][a6]acrossfade=d=0.420[ax6];[vx6][v7]xfade=transition=revealup:duration=0.420:offset=39.130[vx7];[ax6][a7]acrossfade=d=0.420[ax7];[vx7][v8]xfade=transition=vertopen:duration=0.420:offset=44.515[vx8];[ax7][a8]acrossfade=d=0.420[ax8];[vx8][v9]xfade=transition=coverdown:duration=0.420:offset=49.400[vx9];[ax8][a9]acrossfade=d=0.420[ax9];[vx9][v10]xfade=transition=diagtl:duration=0.420:offset=55.652[vx10];[ax9][a10]acrossfade=d=0.420[ax10];[vx10][v11]xfade=transition=horzopen:duration=0.420:offset=61.771[vx11];[ax10][a11]acrossfade=d=0.420[ax11];[vx11][v12]xfade=transition=smoothleft:duration=0.420:offset=67.390[vx12];[ax11][a12]acrossfade=d=0.420[ax12];[vx12][v13]xfade=transition=wiperight:duration=0.420:offset=73.375[vx13];[ax12][a13]acrossfade=d=0.420[ax13];[vx13][v14]xfade=transition=fade:duration=0.420:offset=79.027[vx14];[ax13][a14]acrossfade=d=0.420[ax14];[vx14][v15]xfade=transition=wiperight:duration=0.420:offset=84.513[vx15];[ax14][a15]acrossfade=d=0.420[ax15] -map [vx15] -map [ax15] -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 192k -ar 44100 -ac 2 -movflags +faststart -pix_fmt yuv420p workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\_xfseg_00.mp4
+
+=== FILTER_COMPLEX ===
+[0:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v1];[2:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v2];[3:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v3];[4:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v4];[5:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v5];[6:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=1.200,settb=AVTB,setpts=PTS-STARTPTS[v6];[7:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v7];[8:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v8];[9:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v9];[10:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v10];[11:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v11];[12:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=1.100,settb=AVTB,setpts=PTS-STARTPTS[v12];[13:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v13];[14:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v14];[15:v]format=yuv420p,fps=30,scale=1280:720,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v15];[0:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.4726,atrim=0:6.4726,asetpts=PTS-STARTPTS[a0];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.5380,atrim=0:5.5380,asetpts=PTS-STARTPTS[a1];[2:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.2047,atrim=0:5.2047,asetpts=PTS-STARTPTS[a2];[3:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.5060,atrim=0:6.5060,asetpts=PTS-STARTPTS[a3];[4:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.5050,atrim=0:5.5050,asetpts=PTS-STARTPTS[a4];[5:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.9728,atrim=0:6.9728,asetpts=PTS-STARTPTS[a5];[6:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.8713,atrim=0:5.8713,asetpts=PTS-STARTPTS[a6];[7:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.8049,atrim=0:5.8049,asetpts=PTS-STARTPTS[a7];[8:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.3044,atrim=0:5.3044,asetpts=PTS-STARTPTS[a8];[9:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.6725,atrim=0:6.6725,asetpts=PTS-STARTPTS[a9];[10:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.5390,atrim=0:6.5390,asetpts=PTS-STARTPTS[a10];[11:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.0389,atrim=0:6.0389,asetpts=PTS-STARTPTS[a11];[12:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.4049,atrim=0:6.4049,asetpts=PTS-STARTPTS[a12];[13:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.0722,atrim=0:6.0722,asetpts=PTS-STARTPTS[a13];[14:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.9054,atrim=0:5.9054,asetpts=PTS-STARTPTS[a14];[15:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.3392,atrim=0:6.3392,asetpts=PTS-STARTPTS[a15];[v0][v1]xfade=transition=smoothdown:duration=0.420:offset=6.053[vx1];[a0][a1]acrossfade=d=0.420[ax1];[vx1][v2]xfade=transition=circleclose:duration=0.420:offset=11.171[vx2];[ax1][a2]acrossfade=d=0.420[ax2];[vx2][v3]xfade=transition=slidedown:duration=0.420:offset=15.955[vx3];[ax2][a3]acrossfade=d=0.420[ax3];[vx3][v4]xfade=transition=smoothup:duration=0.420:offset=22.041[vx4];[ax3][a4]acrossfade=d=0.420[ax4];[vx4][v5]xfade=transition=horzopen:duration=0.420:offset=27.126[vx5];[ax4][a5]acrossfade=d=0.420[ax5];[vx5][v6]xfade=transition=smoothleft:duration=0.420:offset=33.679[vx6];[ax5][a6]acrossfade=d=0.420[ax6];[vx6][v7]xfade=transition=revealup:duration=0.420:offset=39.130[vx7];[ax6][a7]acrossfade=d=0.420[ax7];[vx7][v8]xfade=transition=vertopen:duration=0.420:offset=44.515[vx8];[ax7][a8]acrossfade=d=0.420[ax8];[vx8][v9]xfade=transition=coverdown:duration=0.420:offset=49.400[vx9];[ax8][a9]acrossfade=d=0.420[ax9];[vx9][v10]xfade=transition=diagtl:duration=0.420:offset=55.652[vx10];[ax9][a10]acrossfade=d=0.420[ax10];[vx10][v11]xfade=transition=horzopen:duration=0.420:offset=61.771[vx11];[ax10][a11]acrossfade=d=0.420[ax11];[vx11][v12]xfade=transition=smoothleft:duration=0.420:offset=67.390[vx12];[ax11][a12]acrossfade=d=0.420[ax12];[vx12][v13]xfade=transition=wiperight:duration=0.420:offset=73.375[vx13];[ax12][a13]acrossfade=d=0.420[ax13];[vx13][v14]xfade=transition=fade:duration=0.420:offset=79.027[vx14];[ax13][a14]acrossfade=d=0.420[ax14];[vx14][v15]xfade=transition=wiperight:duration=0.420:offset=84.513[vx15];[ax14][a15]acrossfade=d=0.420[ax15]
+
+=== STDERR ===
+ffmpeg version 8.1.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+
+  libavutil      60. 26.102 / 60. 26.102
+
+  libavcodec     62. 28.102 / 62. 28.102
+
+  libavformat    62. 12.102 / 62. 12.102
+
+  libavdevice    62.  3.102 / 62.  3.102
+
+  libavfilter    11. 14.102 / 11. 14.102
+
+  libswscale      9.  5.102 /  9.  5.102
+
+  libswresample   6.  3.102 /  6.  3.102
+
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_0.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.97, start: 0.000000, bitrate: 3172 kb/s
+
+  Stream #0:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2979 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 184 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #1, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_1.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.04, start: 0.000000, bitrate: 3313 kb/s
+
+  Stream #1:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3160 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #1:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 164 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #2, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_2.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.70, start: 0.000000, bitrate: 3353 kb/s
+
+  Stream #2:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3181 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #2:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 162 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #3, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_3.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:06.01, start: 0.000000, bitrate: 3708 kb/s
+
+  Stream #3:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3517 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #3:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 182 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #4, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_4.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.01, start: 0.000000, bitrate: 3768 kb/s
+
+  Stream #4:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3595 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #4:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 163 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #5, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_5.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:06.47, start: 0.000000, bitrate: 3558 kb/s
+
+  Stream #5:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3396 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #5:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 170 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #6, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_6.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.67, start: 0.000000, bitrate: 2939 kb/s
+
+  Stream #6:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2766 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #6:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 163 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #7, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_7.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.30, start: 0.000000, bitrate: 2831 kb/s
+
+  Stream #7:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2669 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #7:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 169 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #8, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_8.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.80, start: 0.000000, bitrate: 3198 kb/s
+
+  Stream #8:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3048 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #8:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 161 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #9, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_9.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:06.17, start: 0.000000, bitrate: 2478 kb/s
+
+  Stream #9:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2303 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #9:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 178 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #10, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_10.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:06.04, start: 0.000000, bitrate: 2538 kb/s
+
+  Stream #10:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2358 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #10:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 183 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #11, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_11.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.54, start: 0.000000, bitrate: 2885 kb/s
+
+  Stream #11:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2710 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #11:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 166 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #12, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_12.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.30, start: 0.000000, bitrate: 3180 kb/s
+
+  Stream #12:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3025 kb/s, 29.97 fps, 29.97 tbr, 30k tbn, start 0.033000 (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #12:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 164 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #13, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_13.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.57, start: 0.000000, bitrate: 1987 kb/s
+
+  Stream #13:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 1811 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #13:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 168 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #14, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_14.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.41, start: 0.000000, bitrate: 2438 kb/s
+
+  Stream #14:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2263 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #14:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 166 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #15, mov,mp4,m4a,3gp,3g2,mj2, from 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\clip_15.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.84, start: 0.000000, bitrate: 2674 kb/s
+
+  Stream #15:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 2477 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #15:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 188 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Stream mapping:
+
+  Stream #0:0 (h264) -> format:default
+
+  Stream #0:1 (aac) -> aresample:default
+
+  Stream #1:0 (h264) -> format:default
+
+  Stream #1:1 (aac) -> aresample:default
+
+  Stream #2:0 (h264) -> format:default
+
+  Stream #2:1 (aac) -> aresample:default
+
+  Stream #3:0 (h264) -> format:default
+
+  Stream #3:1 (aac) -> aresample:default
+
+  Stream #4:0 (h264) -> format:default
+
+  Stream #4:1 (aac) -> aresample:default
+
+  Stream #5:0 (h264) -> format:default
+
+  Stream #5:1 (aac) -> aresample:default
+
+  Stream #6:0 (h264) -> format:default
+
+  Stream #6:1 (aac) -> aresample:default
+
+  Stream #7:0 (h264) -> format:default
+
+  Stream #7:1 (aac) -> aresample:default
+
+  Stream #8:0 (h264) -> format:default
+
+  Stream #8:1 (aac) -> aresample:default
+
+  Stream #9:0 (h264) -> format:default
+
+  Stream #9:1 (aac) -> aresample:default
+
+  Stream #10:0 (h264) -> format:default
+
+  Stream #10:1 (aac) -> aresample:default
+
+  Stream #11:0 (h264) -> format:default
+
+  Stream #11:1 (aac) -> aresample:default
+
+  Stream #12:0 (h264) -> format:default
+
+  Stream #12:1 (aac) -> aresample:default
+
+  Stream #13:0 (h264) -> format:default
+
+  Stream #13:1 (aac) -> aresample:default
+
+  Stream #14:0 (h264) -> format:default
+
+  Stream #14:1 (aac) -> aresample:default
+
+  Stream #15:0 (h264) -> format:default
+
+  Stream #15:1 (aac) -> aresample:default
+
+  xfade:default -> Stream #0:0 (libx264)
+
+  acrossfade:default -> Stream #0:1 (aac)
+
+Press [q] to stop, [?] for help
+
+[libx264 @ 0000000002b18640] using SAR=1/1
+
+[libx264 @ 0000000002b18640] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+
+[libx264 @ 0000000002b18640] profile High, level 3.1, 4:2:0, 8-bit
+
+[libx264 @ 0000000002b18640] 264 - core 165 r3223 0480cb0 - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=2 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=6 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=12 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=30 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+
+Output #0, mp4, to 'workspace\anime\vDIFuEamH5c_The_ENTIRE_Story_of_Attack_on_Titan_in_2\clipes_landscape\_xfseg_00.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+
+    Metadata:
+
+      encoder         : Lavc62.28.102 libx264
+
+    Side data:
+
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s
+
+    Metadata:
+
+      encoder         : Lavc62.28.102 aac
+
+frame=  132 fps= 41 q=29.0 size=       0KiB time=00:00:00.71 bitrate=   0.5kbits/s speed=0.222x elapsed=0:00:03.24    
+frame=  132 fps= 35 q=29.0 size=     512KiB time=00:00:04.24 bitrate= 987.2kbits/s speed=1.13x elapsed=0:00:03.76    
+frame=  151 fps= 35 q=29.0 size=     768KiB time=00:00:04.96 bitrate=1266.8kbits/s speed=1.16x elapsed=0:00:04.27    
+frame=  178 fps= 37 q=29.0 size=    1024KiB time=00:00:05.86 bitrate=1429.9kbits/s speed=1.22x elapsed=0:00:04.80    
+frame=  204 fps= 38 q=29.0 size=    1280KiB time=00:00:06.73 bitrate=1557.3kbits/s speed=1.26x elapsed=0:00:05.32    
+frame=  226 fps= 39 q=29.0 size=    1280KiB time=00:00:07.46 bitrate=1404.4kbits/s speed=1.28x elapsed=0:00:05.83    
+frame=  253 fps= 40 q=29.0 size=    1536KiB time=00:00:08.36 bitrate=1504.0kbits/s speed=1.31x elapsed=0:00:06.36    
+frame=  281 fps= 41 q=29.0 size=    1792KiB time=00:00:09.30 bitrate=1578.5kbits/s speed=1.35x elapsed=0:00:06.86    
+frame=  307 fps= 42 q=29.0 size=    2048KiB time=00:00:10.16 bitrate=1650.3kbits/s speed=1.38x elapsed=0:00:07.38    
+frame=  330 fps= 42 q=29.0 size=    2304KiB time=00:00:10.93 bitrate=1726.3kbits/s speed=1.38x elapsed=0:00:07.90    
+frame=  350 fps= 42 q=29.0 size=    2304KiB time=00:00:11.60 bitrate=1627.1kbits/s speed=1.38x elapsed=0:00:08.42    
+frame=  378 fps= 42 q=29.0 size=    2816KiB time=00:00:12.53 bitrate=1840.6kbits/s speed= 1.4x elapsed=0:00:08.94    
+frame=  404 fps= 43 q=29.0 size=    2816KiB time=00:00:13.40 bitrate=1721.6kbits/s speed=1.41x elapsed=0:00:09.47    
+frame=  432 fps= 43 q=29.0 size=    3072KiB time=00:00:14.33 bitrate=1755.8kbits/s speed=1.44x elapsed=0:00:09.98    
+frame=  463 fps= 44 q=29.0 size=    3072KiB time=00:00:15.36 bitrate=1637.7kbits/s speed=1.46x elapsed=0:00:10.50    
+frame=  489 fps= 44 q=29.0 size=    3328KiB time=00:00:16.23 bitrate=1679.5kbits/s speed=1.47x elapsed=0:00:11.03    
+frame=  521 fps= 45 q=29.0 size=    3584KiB time=00:00:17.30 bitrate=1697.1kbits/s speed= 1.5x elapsed=0:00:11.55    
+frame=  547 fps= 45 q=29.0 size=    3840KiB time=00:00:18.16 bitrate=1731.6kbits/s speed= 1.5x elapsed=0:00:12.08    
+frame=  571 fps= 45 q=29.0 size=    3840KiB time=00:00:18.96 bitrate=1658.6kbits/s speed=1.51x elapsed=0:00:12.59    
+frame=  590 fps= 45 q=29.0 size=    4096KiB time=00:00:19.60 bitrate=1712.0kbits/s speed=1.49x elapsed=0:00:13.12    
+frame=  615 fps= 45 q=29.0 size=    4352KiB time=00:00:20.43 bitrate=1744.8kbits/s speed= 1.5x elapsed=0:00:13.64    
+frame=  646 fps= 46 q=29.0 size=    4608KiB time=00:00:21.46 bitrate=1758.5kbits/s speed=1.51x elapsed=0:00:14.17    
+frame=  669 fps= 46 q=29.0 size=    4864KiB time=00:00:22.23 bitrate=1792.2kbits/s speed=1.51x elapsed=0:00:14.68    
+frame=  699 fps= 46 q=29.0 size=    5120KiB time=00:00:23.23 bitrate=1805.3kbits/s speed=1.53x elapsed=0:00:15.23    
+frame=  720 fps= 46 q=29.0 size=    5120KiB time=00:00:23.93 bitrate=1752.5kbits/s speed=1.52x elapsed=0:00:15.75    
+frame=  747 fps= 46 q=29.0 size=    5376KiB time=00:00:24.83 bitrate=1773.4kbits/s speed=1.52x elapsed=0:00:16.30    
+frame=  771 fps= 46 q=29.0 size=    5632KiB time=00:00:25.63 bitrate=1799.9kbits/s speed=1.52x elapsed=0:00:16.80    
+frame=  802 fps= 46 q=29.0 size=    5888KiB time=00:00:26.66 bitrate=1808.8kbits/s speed=1.54x elapsed=0:00:17.32    
+frame=  830 fps= 47 q=29.0 size=    6144KiB time=00:00:27.60 bitrate=1823.6kbits/s speed=1.55x elapsed=0:00:17.84    
+frame=  860 fps= 47 q=29.0 size=    6144KiB time=00:00:28.60 bitrate=1759.9kbits/s speed=1.56x elapsed=0:00:18.34    
+frame=  892 fps= 47 q=29.0 size=    6400KiB time=00:00:29.66 bitrate=1767.3kbits/s speed=1.57x elapsed=0:00:18.89    
+frame=  924 fps= 48 q=29.0 size=    6656KiB time=00:00:30.73 bitrate=1774.2kbits/s speed=1.58x elapsed=0:00:19.43    
+frame=  952 fps= 48 q=29.0 size=    6912KiB time=00:00:31.66 bitrate=1788.1kbits/s speed=1.59x elapsed=0:00:19.95    
+frame=  982 fps= 48 q=29.0 size=    7168KiB time=00:00:32.66 bitrate=1797.6kbits/s speed=1.59x elapsed=0:00:20.50    
+frame= 1018 fps= 48 q=29.0 size=    7168KiB time=00:00:33.86 bitrate=1733.9kbits/s speed=1.61x elapsed=0:00:21.02    
+frame= 1046 fps= 49 q=29.0 size=    7424KiB time=00:00:34.80 bitrate=1747.6kbits/s speed=1.61x elapsed=0:00:21.55    
+frame= 1071 fps= 48 q=29.0 size=    7680KiB time=00:00:35.63 bitrate=1765.6kbits/s speed=1.61x elapsed=0:00:22.10    
+frame= 1097 fps= 48 q=29.0 size=    7936KiB time=00:00:36.50 bitrate=1781.2kbits/s speed=1.61x elapsed=0:00:22.64    
+frame= 1126 fps= 49 q=29.0 size=    8192KiB time=00:00:37.46 bitrate=1791.2kbits/s speed=1.62x elapsed=0:00:23.16    
+frame= 1163 fps= 49 q=29.0 size=    8192KiB time=00:00:38.70 bitrate=1734.1kbits/s speed=1.63x elapsed=0:00:23.68    
+frame= 1195 fps= 49 q=29.0 size=    8448KiB time=00:00:39.76 bitrate=1740.3kbits/s speed=1.64x elapsed=0:00:24.22    
+frame= 1224 fps= 49 q=29.0 size=    8704KiB time=00:00:40.73 bitrate=1750.5kbits/s speed=1.65x elapsed=0:00:24.74    
+frame= 1248 fps= 49 q=29.0 size=    8704KiB time=00:00:41.53 bitrate=1716.8kbits/s speed=1.64x elapsed=0:00:25.26    
+frame= 1274 fps= 49 q=29.0 size=    8960KiB time=00:00:42.40 bitrate=1731.1kbits/s speed=1.64x elapsed=0:00:25.78    
+frame= 1306 fps= 50 q=29.0 size=    8960KiB time=00:00:43.46 bitrate=1688.7kbits/s speed=1.65x elapsed=0:00:26.31    
+frame= 1337 fps= 50 q=29.0 size=    9216KiB time=00:00:44.50 bitrate=1696.6kbits/s speed=1.66x elapsed=0:00:26.83    
+frame= 1359 fps= 50 q=29.0 size=    9472KiB time=00:00:45.23 bitrate=1715.4kbits/s speed=1.65x elapsed=0:00:27.34    
+frame= 1384 fps= 49 q=29.0 size=    9472KiB time=00:00:46.06 bitrate=1684.4kbits/s speed=1.65x elapsed=0:00:27.98    
+frame= 1404 fps= 49 q=29.0 size=    9728KiB time=00:00:46.73 bitrate=1705.3kbits/s speed=1.63x elapsed=0:00:28.60    
+frame= 1426 fps= 49 q=29.0 size=    9728KiB time=00:00:47.46 bitrate=1678.9kbits/s speed=1.63x elapsed=0:00:29.18    
+frame= 1454 fps= 49 q=29.0 size=    9984KiB time=00:00:48.40 bitrate=1689.9kbits/s speed=1.63x elapsed=0:00:29.69    
+frame= 1489 fps= 49 q=29.0 size=    9984KiB time=00:00:49.56 bitrate=1650.1kbits/s speed=1.64x elapsed=0:00:30.20    
+frame= 1514 fps= 49 q=29.0 size=   10240KiB time=00:00:50.40 bitrate=1664.4kbits/s speed=1.64x elapsed=0:00:30.74    
+frame= 1548 fps= 50 q=29.0 size=   10496KiB time=00:00:51.53 bitrate=1668.5kbits/s speed=1.65x elapsed=0:00:31.27    
+frame= 1585 fps= 50 q=26.0 size=   10496KiB time=00:00:52.76 bitrate=1629.5kbits/s speed=1.66x elapsed=0:00:31.79    
+frame= 1619 fps= 50 q=29.0 size=   10752KiB time=00:00:53.90 bitrate=1634.2kbits/s speed=1.67x elapsed=0:00:32.31    
+frame= 1646 fps= 50 q=29.0 size=   10752KiB time=00:00:54.80 bitrate=1607.3kbits/s speed=1.67x elapsed=0:00:32.84    
+frame= 1673 fps= 50 q=29.0 size=   11008KiB time=00:00:55.70 bitrate=1619.0kbits/s speed=1.67x elapsed=0:00:33.36    
+frame= 1704 fps= 50 q=29.0 size=   11264KiB time=00:00:56.73 bitrate=1626.5kbits/s speed=1.67x elapsed=0:00:33.90    
+frame= 1736 fps= 50 q=29.0 size=   11264KiB time=00:00:57.80 bitrate=1596.5kbits/s speed=1.68x elapsed=0:00:34.46    
+[fc#0 @ 0000000000738a00] Error while filtering: Cannot allocate memory
+
+frame= 1769 fps= 51 q=29.0 size=   11520KiB time=00:00:58.90 bitrate=1602.2kbits/s speed=1.68x elapsed=0:00:34.98    
+frame= 1769 fps= 50 q=29.0 size=   11520KiB time=00:00:58.90 bitrate=1602.2kbits/s speed=1.66x elapsed=0:00:35.48    
+[fc#0 @ 0000000000738a00] Task finished with error code: -12 (Cannot allocate memory)
+
+[fc#0 @ 0000000000738a00] Terminating thread with return code -12 (Cannot allocate memory)
+
+[mp4 @ 0000000002d82c80] Starting second pass: moving the moov atom to the beginning of the file
+
+[out#0/mp4 @ 0000000002aa5cc0] video:10585KiB audio:1243KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.488109%
+
+frame= 1815 fps= 50 q=-1.0 Lsize=   11887KiB time=00:01:00.43 bitrate=1611.3kbits/s speed=1.67x elapsed=0:00:36.21    
+
+[libx264 @ 0000000002b18640] frame I:34    Avg QP:16.70  size: 35585
+
+[libx264 @ 0000000002b18640] frame P:1249  Avg QP:21.62  size:  7051
+
+[libx264 @ 0000000002b18640] frame B:532   Avg QP:24.35  size:  1546
+
+[libx264 @ 0000000002b18640] consecutive B-frames: 57.9%  5.7% 10.4% 26.0%
+
+[libx264 @ 0000000002b18640] mb I  I16..4: 70.7% 14.4% 15.0%
+
+[libx264 @ 0000000002b18640] mb P  I16..4:  5.4%  3.0%  0.4%  P16..4: 33.6%  4.2%  2.7%  0.0%  0.0%    skip:50.7%
+
+[libx264 @ 0000000002b18640] mb B  I16..4:  0.8%  1.1%  0.0%  B16..8: 19.3%  0.8%  0.0%  direct: 3.4%  skip:74.6%  L0:52.6% L1:44.8% BI: 2.6%
+
+[libx264 @ 0000000002b18640] 8x8 transform intra:31.4% inter:69.6%
+
+[libx264 @ 0000000002b18640] coded y,uvDC,uvAC intra: 28.1% 50.9% 10.9% inter: 7.3% 12.6% 0.1%
+
+[libx264 @ 0000000002b18640] i16 v,h,dc,p: 23% 34% 14% 29%
+
+[libx264 @ 0000000002b18640] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 27% 27% 32%  2%  2%  2%  2%  3%  3%
+
+[libx264 @ 0000000002b18640] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 35% 28% 22%  2%  3%  3%  3%  2%  2%
+
+[libx264 @ 0000000002b18640] i8c dc,h,v,p: 44% 28% 18% 10%
+
+[libx264 @ 0000000002b18640] Weighted P-Frames: Y:0.1% UV:0.0%
+
+[libx264 @ 0000000002b18640] ref P L0: 80.9% 19.1%
+
+[libx264 @ 0000000002b18640] ref B L0: 78.4% 21.6%
+
+[libx264 @ 0000000002b18640] ref B L1: 95.4%  4.6%
+
+[libx264 @ 0000000002b18640] kb/s:1433.23
+
+[aac @ 0000000002b18d80] Qavg: 31239.910
+
+Conversion failed!
+

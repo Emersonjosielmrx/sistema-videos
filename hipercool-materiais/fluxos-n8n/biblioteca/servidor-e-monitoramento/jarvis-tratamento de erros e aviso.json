@@ -1,0 +1,464 @@
+{
+ "name": "jarvis-tratamento de erros e aviso",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "ed8ce9d6-bc87-4aff-a5dd-85843be8a8b3",
+   "name": "ativado pelo erro",
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -192,
+    -112
+   ]
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "1",
+    "contextWindowLength": 50
+   },
+   "id": "b626dea6-8a0d-4361-a87e-e12e31a42487",
+   "name": "memoria do jarvis usar qualquer chave",
+   "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+   "typeVersion": 1.2,
+   "position": [
+    784,
+    96
+   ]
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=mensagem de erro:{{ $('ativado pelo erro').item.json.execution.error.message }}\nstack do erro:{{ $('ativado pelo erro').item.json.execution.error.stack }}\n\nnome do nó que parou: {{ $('ativado pelo erro').item.json.execution.lastNodeExecuted }}\ntipo do nó:{{ $json.execution.error.node.type }}\n\nfluxo comppleto:{{ JSON.stringify($('Get a workflow').item.json) }}\n# sempre responda em portugues ou voçe sera punido",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "me diga como resolver esse erro do n8n com as informaçoes que vou te passar que a mensagem de erro, o ultimo nó, o tipo de nó e a stack do erro e me ofereça detalhadamento todas as possiveis soluçoes"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.1,
+   "position": [
+    528,
+    -112
+   ],
+   "id": "67d8fcfa-c878-4b0f-b677-d2e919edd036",
+   "name": "AI Agent1"
+  },
+  {
+   "parameters": {
+    "amount": 3
+   },
+   "id": "60ccf0a9-9b44-4694-9bb9-88cc0de5acd7",
+   "name": "Wait",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    352,
+    -112
+   ],
+   "webhookId": "3ef7d97b-27e3-49fa-988d-fbd1f6ce6a34",
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash-lite",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash-lite"
+    },
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.2,
+   "position": [
+    448,
+    96
+   ],
+   "id": "c93f63f5-3ccb-4214-bf9e-cd10ddb3f8ea",
+   "name": "gemini",
+   "credentials": {
+    "openAiApi": {
+     "id": "vP7SrznVbVFu6NeZ",
+     "name": "roteador llm n8n"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wuzapi.inovareinteligenciaartificial.com/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "=s22-bus-5106"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "=559184698653"
+      },
+      {
+       "name": "Body",
+       "value": "=erro: *{{ $('ativado pelo erro').first().json.workflow.name }}*\n \nnóde(\n{{ $('ativado pelo erro').first().json.execution.lastNodeExecuted }})\n\na mensgem \n*{{ $('ativado pelo erro').first().json.execution.error.message }}*\n\nlink da execução:https://console.{{ $('ativado pelo erro').first().json.execution.url.split('https://')[1].split('Interface.')[1] }}\n\n\ncomo resolver:\n\n{{ $json.output }}\n"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    928,
+    -176
+   ],
+   "id": "aaa4aca6-ec4d-49df-9003-458f1fb4d2e7",
+   "name": "WUZAP1",
+   "retryOnFail": true,
+   "maxTries": 5
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    1232,
+    256
+   ],
+   "id": "7c321b47-3825-465e-a4ad-ec51a09471b6",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "xrgBpJf0kIceuw8a",
+     "name": "3-emersonprincipal"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "workflowId": {
+     "__rl": true,
+     "value": "={{ $json.workflow.id }}",
+     "mode": "id"
+    },
+    "requestOptions": {}
+   },
+   "type": "n8n-nodes-base.n8n",
+   "typeVersion": 1,
+   "position": [
+    176,
+    -112
+   ],
+   "id": "df6ae057-1b23-4daf-bd81-250c9f0f10b4",
+   "name": "Get a workflow",
+   "credentials": {
+    "n8nApi": {
+     "id": "cICv12I2Pb1KCxr8",
+     "name": "n8n server test"
+    }
+   },
+   "disabled": true,
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wuzapi.inovareinteligenciaartificial.com/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "=s22-bus-5106"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "=5522998908709"
+      },
+      {
+       "name": "Body",
+       "value": "=erro: *{{ $('ativado pelo erro').first().json.workflow.name }}*\n \nnóde(\n{{ $('ativado pelo erro').first().json.execution.lastNodeExecuted }})\n\na mensgem \n*{{ $('ativado pelo erro').first().json.execution.error.message }}*\n\nlink da execução:https://console.{{ $('ativado pelo erro').first().json.execution.url.split('https://')[1].split('Interface.')[1] }}\n\n\ncomo resolver:\n\n{{ $json.output }}\n"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    928,
+    -32
+   ],
+   "id": "acb8076a-84e5-4907-a1ea-06f4c4a302cb",
+   "name": "WUZAP",
+   "retryOnFail": true,
+   "maxTries": 5
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    608,
+    112
+   ],
+   "id": "e76f09fe-791b-4c21-a88f-cd4f98ec2bc4",
+   "name": "Google Gemini Chat Model1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "push",
+    "list": "fluxos com erro",
+    "messageData": "={{ $json.workflow.name }}"
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    16,
+    -112
+   ],
+   "id": "b092072c-3ced-4e38-8f8b-794961491d9d",
+   "name": "Redis",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "ativado pelo erro": [
+   {
+    "json": {
+     "execution": {
+      "id": "2946515",
+      "url": "https://interface.inovareinteligenciaartificial.com/workflow/sbR8wiWrZBQ0LFxS/executions/2946515",
+      "error": {
+       "level": "warning",
+       "tags": {},
+       "description": "Bad Gateway",
+       "timestamp": 1774429247657,
+       "context": {
+        "itemIndex": 0,
+        "request": {
+         "headers": {
+          "apikey": "<SEGREDO_REMOVIDO>",
+          "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7"
+         },
+         "method": "GET",
+         "uri": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+         "gzip": true,
+         "rejectUnauthorized": true,
+         "followRedirect": true,
+         "resolveWithFullResponse": true,
+         "followAllRedirects": true,
+         "maxRedirects": 21,
+         "timeout": 300000,
+         "encoding": null,
+         "json": false,
+         "useStream": true
+        }
+       },
+       "functionality": "regular",
+       "name": "NodeApiError",
+       "node": {
+        "parameters": {
+         "preBuiltAgentsCalloutHttpRequest": "",
+         "curlImport": "",
+         "method": "GET",
+         "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+         "authentication": "none",
+         "provideSslCertificates": false,
+         "sendQuery": false,
+         "sendHeaders": true,
+         "specifyHeaders": "keypair",
+         "headerParameters": {
+          "parameters": [
+           {
+            "name": "apikey",
+            "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+           }
+          ]
+         },
+         "sendBody": false,
+         "options": {
+          "redirect": {
+           "redirect": {
+            "followRedirects": true,
+            "maxRedirects": 21
+           }
+          }
+         },
+         "infoMessage": ""
+        },
+        "id": "d7554551-f57a-4b5b-bf3c-e06791c673cf",
+        "name": "verifica_instancias2",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+         -144,
+         -144
+        ],
+        "retryOnFail": true
+       },
+       "messages": [
+        "502 - \"Bad Gateway\""
+       ],
+       "httpCode": "502",
+       "message": "Bad gateway - the service failed to handle your request",
+       "stack": "NodeApiError: Bad gateway - the service failed to handle your request\n    at ExecuteContext.execute (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file+packages+nodes-base_@aws-sdk+credential-providers@3.808.0_asn1.js@5_afd197edb2c1f848eae21a96a97fab23/node_modules/n8n-nodes-base/nodes/HttpRequest/V3/HttpRequestV3.node.ts:858:16)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at WorkflowExecute.executeNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1093:8)\n    at WorkflowExecute.runNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1274:11)\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1708:27\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_08b575bec2313d5d8a4cc75358971443/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:2324:11"
+      },
+      "lastNodeExecuted": "verifica_instancias2",
+      "mode": "trigger"
+     },
+     "workflow": {
+      "id": "sbR8wiWrZBQ0LFxS",
+      "name": "captura de grupos p got ver"
+     }
+    }
+   }
+  ]
+ },
+ "connections": {
+  "ativado pelo erro": {
+   "main": [
+    [
+     {
+      "node": "Redis",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "memoria do jarvis usar qualquer chave": {
+   "ai_memory": [
+    [
+     {
+      "node": "AI Agent1",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent1": {
+   "main": [
+    [
+     {
+      "node": "WUZAP1",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "WUZAP",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "AI Agent1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    []
+   ]
+  },
+  "WUZAP1": {
+   "main": [
+    []
+   ]
+  },
+  "Get a workflow": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent1",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model1": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent1",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Redis": {
+   "main": [
+    [
+     {
+      "node": "Get a workflow",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "4f086e35-9aaa-4736-85a2-a08dbeb644a6",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "fIjhhNc1hHRl4WwM",
+ "tags": []
+}

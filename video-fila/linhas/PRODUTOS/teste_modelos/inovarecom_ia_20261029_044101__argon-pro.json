@@ -1,0 +1,70 @@
+{
+ "modelo": "argon-pro",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T15:01:32",
+ "segundos": 511,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T15:01:32",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "argon-pro",
+   "decisor": "argon-pro"
+  },
+  "achados": [
+   {
+    "tipo": "CERTEZA",
+    "problema": "Legenda karaokê com falha grave de contraste e corte na Cena 2: na frase de revelação da marca ('Adotamos o Hermes Call'), a palavra 'Call' aparece em verde-escuro sem caixa/tarja escura de fundo nem borda branca direto sobre a camisa azul-marinho do apresentador, e 'Hermes' sai cortado, ficando quase invisível.",
+    "prova": "juri_problemas (cena 2, graves de movimento e diretor)",
+    "sugestao": "Garantir que a tarja de fundo escuro ou contorno/sombra de alto contraste persista em todas as palavras da legenda karaokê (especialmente nomes de marca destacados) e revisar o alinhamento/quebra da frase.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Pílula superior de etapa ('1 O problema' / '2 Como funciona') encosta no topo da cabeça/cabelo do apresentador na Cena 1, violando a régua de respiro do topo da cabeça.",
+    "prova": "juri_problemas (cena 1, diretor) / régua do topo da cabeça (cabelo)",
+    "sugestao": "Abaixar o enquadramento ou reduzir levemente a escala do vídeo do dono quando houver faixa fixa + pílula de etapa no topo, garantindo folga acima do cabelo.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Falta de elementos visuais dinâmicos que acompanhem a fala nas cenas do dono (cenas 0 a 3 têm movimento de vídeo de 10.14% a 14.18%, mas o júri aponta monotonia, ausência de demonstração visual/simulação durante 26s e nota de movimento estacionada em 4.0–5.0 no histórico).",
+    "prova": "juri.movimento (cenas 0–3 entre 10.14% e 14.18% com nota movimento 5.0) / historico_notas (movimento <= 5.0 em 11 de 12 vídeos) / juri_problemas (cenas 1 e 2)",
+    "sugestao": "Inserir elementos gráficos animados sincronizados com a fala no formato dono_tres (ex.: card/toast simulando chamada de WhatsApp do Hermes Call entrando na Cena 2, e transição animada na troca da pílula de tópico '1 O problema' para '2 Como funciona').",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Cartão final (Cena 4) com movimento no limite mínimo (4.63%) e aspecto estático por mais de 2,3s.",
+    "prova": "juri.movimento (cena 4 com 4.63%) / juri_problemas (cena 4, movimento e diretor)",
+    "sugestao": "Adicionar entrada escalonada (slide/fade com easing) dos elementos do cartão final e reforçar `pulso_botao` (atualmente 0.06) com frequência que não coincida com a amostragem de quadros.",
+    "repetido": true
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho inicial (Cena 0) e cortes entre frases longas do apresentador sem variação perceptível de escala (`punchin_video` em 0.06) ou elemento visual de impacto da dor nos primeiros 2 segundos.",
+    "prova": "juri_problemas (cena 0 diretor e cena 2 movimento) / ajustes.punchin_video (0.06)",
+    "sugestao": "Testar aumentar `punchin_video` de 0.06 para 0.12 nos momentos-chave/trocas de bloco e testar a sobreposição de um badge/notificação visual de 'leads parados' junto à caixinha de pergunta na Cena 0.",
+    "repetido": true
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "ajuste",
+    "alvo": "pulso_botao",
+    "valor": 0.1,
+    "motivo": "Aumentar o pulso do botão no cartão final de 6% para 10% para eliminar o aspecto estático da Cena 4 (movimento no limite de 4.63% por mais de 2,3s).",
+    "prova": "juri.movimento (cena 4 com 4.63%) e achado CERTEZA repetido sobre cartão final estático"
+   },
+   {
+    "acao": "regra_editor",
+    "alvo": "",
+    "valor": "Na legenda karaokê, manter sempre caixa/tarja escura ou contorno preto de alto contraste sob todas as palavras (inclusive nomes de marca destacados em cor), sem cortar palavras na quebra.",
+    "motivo": "Corrigir falha grave de legibilidade e corte na Cena 2 onde 'Call' ficou verde-escuro sem fundo nem borda sobre a camisa azul-marinho e 'Hermes' saiu cortado.",
+    "prova": "juri_problemas (cena 2, graves de movimento e diretor)"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

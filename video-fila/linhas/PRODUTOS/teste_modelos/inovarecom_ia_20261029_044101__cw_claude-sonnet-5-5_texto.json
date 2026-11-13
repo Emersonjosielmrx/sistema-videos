@@ -1,0 +1,72 @@
+{
+ "modelo": "cw/claude-sonnet-5-5",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "versao": "so_texto",
+ "quando": "2026-10-29T18:28:38",
+ "segundos": 51,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:28:38",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "cw/claude-sonnet-5-5",
+   "decisor": "cw/claude-sonnet-5-5"
+  },
+  "achados": [
+   {
+    "tipo": "CERTEZA",
+    "problema": "O vídeo inteiro é o mesmo plano do dono (variante dono_tres, ~27 s, cenas 1 a 3 com o mesmo enquadramento), sem tela do produto, WhatsApp ou ligação aparecendo. A causa é a variante, não zoom nem pulso. A nota de movimento fica em 4 a 5 em todos os vídeos dono_tres do histórico.",
+    "prova": "formato dono_tres; júri grave (cena 1: mesmo molde nas cenas 0 a 3; diretor cena 2: sem prova visual do produto); historico_notas: dono_tres 6.5 (mov 4.0), 5.62 (mov 4.5, diretor 4.0), 5.5 (este); dono_tres_veo_final 5.5, 5.75 e 5.5 (mov 4.0 a 5.0, diretor 5.0 a 6.0). Aparece em 3+ vídeos.",
+    "sugestao": "Pôr peso menor em dono_tres em pesos_variantes (por exemplo 0.3) ou desligá-la em variantes_desligadas. Placar_formatos ainda não tem nenhum registro de dono_tres, então testar a troca contra dono_abre_fecha_veo_meio, que foi o melhor do histórico (7.0).",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Cena 4, o cartão final, tem movimento de 4,63%, perto do limite de cena parada (4%). Só o brilho do botão se mexe, e o júri a descreve como slide chapado por quase 3 s. O ajuste brilho_botao já está ligado, então não é caso de ligar de novo.",
+    "prova": "juri.movimento cena 4 = 4.63; juri_problemas cena 4 (movimento e diretor); ajustes pulso_botao 0.06, brilho_botao 1",
+    "sugestao": "Como a medida é baixa (não alta), aqui falta de fato movimento. Subir pulso_botao (0.06 para ~0.10) e propor ideia_codigo de entrada escalonada dos elementos do cartão (texto e botão entrando em sequência). Antes de afirmar que não há animação, conferir o período do pulso contra o espaço entre os quadros do júri, porque a fase pode ter caído igual.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Possível texto de gancho fraco: a cena 0 (pergunta, movimento 11,41%) abre com o dono lendo a caixinha de pergunta. O júri diz que não há quebra de padrão nos 2 primeiros segundos. A medida de movimento é ALTA, então mais zoom não resolve: falta elemento visual da dor entrando junto com a fala.",
+    "prova": "juri.movimento cena 0 = 11.41; juri_problemas diretor cena 0 (grave)",
+    "sugestao": "Propor ideia_codigo de elemento que entra com a fala na cena 0 (por exemplo contador ou notificações acumuladas de contatos parados). Não aumentar kenburns_zoom nem punchin_video.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Cena 1: a faixa verde superior com a pílula de etapa ('1 O problema') encosta no topo da cabeça do dono. A régua é o topo da cabeça (cabelo), e o júri só descreveu em texto, sem quadro para eu conferir.",
+    "prova": "juri_problemas diretor cena 1 (media), sem quadro verificado neste teste",
+    "sugestao": "Testar o dono ~10% menor ou a pílula mais alta na cena 1. Confirmar no quadro real o espaço entre cabelo e pílula antes de tratar como defeito certo, porque se houver coisa sobre a cabeça passa a ser CERTEZA.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Os 4 blocos de fala duram mais de 7 s cada no mesmo plano, com ritmo arrastado segundo o júri. Já há punchin_video 0.06 e conversa_zoom 0.12 nos ajustes.",
+    "prova": "juri_problemas movimento cena 2 (media); ajustes punchin_video 0.06",
+    "sugestao": "Só como teste, subir punchin_video para ~0.10 em um vídeo e comparar a nota. Isso é secundário, porque a causa principal é a variante (achado 1).",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "O vídeo inteiro ficou no mesmo plano do dono, sem tela do produto. A causa é a variante, não zoom nem pulso. A nota de movimento fica em 4 a 5 em todos os vídeos dono_tres. Reduzir o peso é pequeno e reversível, e mantém a variante no sorteio para o placar ainda poder medi-la.",
+    "prova": "dono_tres: 6.5 (mov 4.0), 5.62 (mov 4.5, diretor 4.0), 5.5 neste vídeo (mov 5.0, diretor 6.0). Júri grave: mesmo molde nas cenas 0 a 3 e sem prova visual do produto. Aparece em 3 ou mais vídeos. dono_abre_fecha_veo_meio foi o melhor do histórico (7.0)."
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "cartao_final_entrada_escalonada",
+    "valor": "Fazer os elementos do cartão final (texto e botão) entrarem em sequência, com movimento contínuo durante toda a cena. O movimento da cena 4 está em 4,63%, perto do limite de cena parada (4%).",
+    "motivo": "Só o brilho do botão se mexe e o júri descreve a cena como slide chapado por quase 3 s. Isso exige programação, e não é caso de mexer em pulso_botao junto com a mudança de variante, para o efeito de cada mudança continuar legível.",
+    "prova": "juri.movimento cena 4 = 4.63; juri_problemas cena 4 (movimento e diretor); brilho_botao já está em 1 e pulso_botao em 0.06.",
+    "vetada": "Veto. (1) O texto da ideia_codigo é vago e ambíguo: não define o que entra, em que ordem, em quanto tempo, qual é o movimento contínuo nem o critério de pronto. Isso deixa a implementação ao palpite da outra IA. (2) A mudança é grande e arriscada para aplicar sem humano, porque exige programação nova em uma cena que contém a chamada final (texto e botão), onde a zona segura e a letra mínima podem ser afetadas por animação de entrada escalonada. (3) A prova é fraca: 4,63% está acima do limite de cena parada (4%), então a medida não prova cena parada. O achado em si diz que o júri só descreve o fato em texto e que a fase do pulso pode ter caído igual entre os quadros, e a conferência pedida não foi feita. (4) Não há como medir o efeito: o motivo diz que a mudança deve ficar separada da de variante para a leitura ficar clara, mas a ideia ainda mexe no mesmo vídeo e na mesma nota. Se houver pedido humano, reenviar com a especificação exata (elementos, ordem, duração, animação) e com a verificação do período do pulso feita."
+   }
+  ],
+  "aprovadas": 1
+ }
+}

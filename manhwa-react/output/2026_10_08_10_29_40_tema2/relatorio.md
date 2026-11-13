@@ -1,0 +1,752 @@
+# Relatorio - 2026-10-08 10-29-40_tema2.mp4
+
+- Duracao original: 4374.2s
+- Status: rejected
+- Canal: fiodameada
+- Transcricao: groq:whisper-large-v3
+- Editorial: score=2 usable=False - Gravação é uma conversa informal/podcast sobre política brasileira, partidos, vida pessoal e saúde — sem valor educacional claro, sem react, sem conteúdo visual reagido, e o tema político é arriscado para monetização e não se encaixa em nenhum canal da rede.
+- Assunto: conversa informal sobre política brasileira, vida pessoal e investimentos | Obra: None
+
+## Transcricao (CRIADOR = legendado; CONTEUDO = audio do video reagido)
+
+- [00:00.00] **creator**: ...caras que saíram do PT, né? Foram fundadores. É uma unanimidade entre eles falar que o PT se perdeu, desvirtuou totalmente do que ele era.
+- [00:12.18] **creator**: Porque uma coisa é o PT, outra coisa é o que trouxeram... É o bando de ladrão que tão aí.
+- [00:17.28] **creator**: Exatamente, é o bando de ladrão, o bando de ideologia ligada a comunismo que trouxeram o que não é...
+- [00:23.86] **creator**: De fato, não é a essência da fundação do PT.
+- [00:28.74] **creator**: Então, acabaram o partido, olhando por essa ótica.
+- [00:32.80] **creator**: Re.Zero, ele cresceu muito, mas...
+- [00:35.60] **creator**: destruíram, né, a essência do partido.
+- [00:38.64] **creator**: Eu achava que eu só ia ver a queda do PT,
+- [00:42.34] **creator**: o PT se desmanchar do jeito que tá se desmanchando,
+- [00:45.78] **creator**: depois que o Lula saísse da cena.
+- [00:48.62] **creator**: Se a gente for olhar pelo copo meio cheio,
+- [00:51.76] **creator**: A gente já tá num avanço muito grande, porque o PT já tá se desmanchando mesmo com o Lula aí.
+- [00:59.00] **creator**: É, o que... E isso também não tá livre de acontecer com o PL, depois de vários anos de governo.
+- [01:08.20] **creator**: O PL não tem licença também, o PL... Porra, o PL, na minha opinião, é o pior do PT.
+- [01:13.32] **creator**: É uma junção de várias pessoas que decidiram...
+- [01:17.56] **creator**: Exatamente.
+- [01:18.56] **creator**: Vamos juntar aqui pra tirar o PT, né?
+- [01:21.36] **creator**: Aham.
+- [01:23.36] **creator**: Mas o fato é que...
+- [01:25.36] **creator**: É, mas o fato é que...
+- [01:27.36] **creator**: O fato nessa situação...
+- [01:29.36] **creator**: É que, tipo assim, da minha classe, querendo ou não, o PT...
+- [01:35.36] **creator**: Ela é uma classe que ela existe...
+- [01:37.36] **creator**: Por causa do PT, entendeu?
+- [01:41.36] **creator**: E continuava existindo...
+- [01:45.36] **creator**: Por causa dos incentivos sociais do PT.
+- [01:47.36] **creator**: ... dos incentivos sociais do PT. Então, era uma coisa que você aprendia...
+- [01:51.80] **creator**: ... é uma coisa que você aprendia na faculdade. Você já aprendia na faculdade que era...
+- [01:57.20] **creator**: ... daquele jeito, entendeu? Uhum.
+- [02:00.00] **creator**: Aí... aí, a partir daí, havia sua consciência. Por exemplo...
+- [02:05.80] **creator**: ... naquela época, é... eu já não gostava muito do... do governo do PT.
+- [02:13.00] **creator**: Porque foi quando... foi assim que a Dilma entrou.
+- [02:16.00] **creator**: Eu acho que foi assim que a Dilma entrou. Que ano que foi?
+- [02:20.00] **creator**: Da Dilma? Tem uns 15 anos já da Dilma?
+- [02:24.00] **creator**: foi em 2014 n Eu n lembro acho que pro final foi 2014 se se eu n me engano N n foi antes Em 2014 ela j tava no segundo
+- [02:36.00] **creator**: Foi em 2014. Foi o impeachment, né?
+- [02:39.00] **creator**: É, quando a Dilma entrou, eu já não gostava do PT.
+- [02:45.00] **creator**: E aí, tipo assim, eu já tinha me decidido de não votar no PT.
+- [02:53.00] **creator**: Aham.
+- [03:23.00] **creator**: E tu não vai votar no PT, não sei o quê...
+- [03:27.50] **creator**: E depois quer emprego...
+- [03:32.50] **creator**: A minha consciência tá tranquila porque eu nunca na minha vida votei em nenhum candidato do PT.
+- [03:39.00] **creator**: Nunca.
+- [03:42.00] **creator**: A minha consciência tá tranquila.
+- [03:46.00] **creator**: Mas o PT... Tu que tá vivo há mais tempo...
+- [03:50.00] **creator**: Quando o Lula entrou, como foi o momento, assim, que ele entrou?
+- [03:55.00] **creator**: Cara, foi o momento do sindica... Foi o momento da indústria, né? Foi o momento do sindicalismo forte.
+- [04:01.00] **creator**: As montadoras brasileiras, né? As montadoras eram fortes, né?
+- [04:06.00] **creator**: O que carregava esse país além de Porto era a indústria automobilística.
+- [04:10.00] **creator**: E o Lula, ele foi na onda do sindicalismo forte, de greve, de bater de frente com o governo.
+- [04:19.00] **creator**: Aí, como o brasileiro sempre gostou de populista, né? De populismo, aí vem a história.
+- [04:26.00] **creator**: Aí ele começou a criar as narrativas do Nós Contra Eles. Não foi ele que inventou, mas foi ele que trouxe essa narrativa com força pro Brasil.
+- [04:36.00] **creator**: Do Nós Contra Eles, Branco Contra o Preto, Homem Contra Gay. E ele, é aquela história do dividir pra conquistar.
+- [04:43.00] **creator**: Eu divido o povo, eu enfraqueço e eu conquisto.
+- [04:47.00] **creator**: É! E pior que o cara não lê livro, né? Imagina se ele vesse.
+- [04:52.00] **creator**: É... Imagina se ele vesse.
+- [04:57.00] **creator**: Agora t na carta que o Lula n tirou isso tudo da cabe dele Ele foi moldado n Algu pilotou ele
+- [05:08.00] **creator**: Alguém pilotou ele. Dizem que foi o Zé de Seu. Eu não acho que tenha sido só o Zé de Seu. Acho que foi um conjunto de gente, muita gente, inclusive empresários, na minha opinião, pilotaram ele.
+- [05:22.00] **creator**: Aí... eu lembro que ele concorreu uma vez antes e perdeu na primeira, foi o que ele...
+- [05:28.40] **creator**: Ele perdeu várias vezes. Ele perdeu pro Fernando Collor, ele perdeu pro Fernando Henrique...
+- [05:36.00] **creator**: Mas ele já tinha sido político antes ou ele foi logo à presidência?
+- [05:40.00] **creator**: Não, ele chegou a ser... se não me falha muito a memória, o Lula chegou a ser deputado.
+- [05:46.00] **creator**: Se não me falha muito a memória, ele chegou a ser deputado.
+- [05:52.00] **creator**: Mas foi, acho que foi o único cargo, né? Porque politicamente ele foi presidente do sindicato, né? Sindicato dos Metalúrgicos.
+- [06:03.00] **creator**: O ingresso dele na política foi como presidente do Sindicato dos Metalúrgicos.
+- [06:08.00] **creator**: E o sindicato metalúrgico naquela época era muito forte, porque, né? As montadoras, né? No Brasil eram muito fortes.
+- [06:17.00] **creator**: Porque o emprego, né? Dependia das montadoras. Quando a montadora fazia greve, quando os funcionários faziam greve, quando as montadoras mandavam um monte de gente embora, porra, era um caos no país.
+- [06:33.00] **creator**: A contagem de desemprego era muito forte, por causa das montadoras.
+- [06:37.00] **creator**: Ele foi deputado federal antes mesmo, em 86.
+- [06:40.66] **creator**: Ah, não falei? Então, minha memória não tá tão ruim assim.
+- [06:43.50] **creator**: Em recorde.
+- [06:46.50] **creator**: A minha memória não tá tão ruim assim.
+- [06:49.50] **creator**: Mas, é... foi o único...
+- [06:54.50] **creator**: Foi o único cargo político que ele...
+- [06:58.00] **creator**: teve no legislativo, né?
+- [07:00.50] **creator**: E depois ele já partiu pra candidatura a presidente.
+- [07:04.50] **creator**: Ele nunca se candidatou nem a governador, nem a prefeito, nem a nada. Ele já foi direto pra presidente.
+- [07:13.50] **creator**: Tá aqui a foto dele de preso. Memória da ditadura.
+- [07:19.50] **creator**: Ó, ele foi líder sindical.
+- [07:22.50] **creator**: Uhum.
+- [07:23.50] **creator**: Rodou mandato contra... é, foi líder sindical.
+- [07:27.50] **creator**: A proje dele foi ele A proje dele foi o l sindical A ele ficou muito tempo como presidente dos sindicatos metal
+- [07:38.28] **creator**: o sindicato metalúrgico era muito forte, então...
+- [07:41.82] **creator**: aí...
+- [07:42.92] **creator**: ele soube navegar, ele soube criar o caos direitinho.
+- [07:46.92] **creator**: Aquela velha estratégia que o brasileiro é muito bom,
+- [07:50.42] **creator**: é criar dificuldade pra vender facilidade.
+- [07:53.12] **creator**: Por que ele fez?
+- [07:55.12] **creator**: Exatamente.
+- [08:25.12] **creator**: Ah, tem que tirar o papel lá. Eles não colocam no marketing, né? Pra ele ganhar...
+- [08:32.12] **creator**: Quando ele ganhou, foi porque o... Eu não sei a história... Cada um conta uma história, mas...
+- [08:40.12] **creator**: O marqueteiro, ele era muito radical. O discurso dele era muito radical.
+- [08:46.12] **creator**: O brasileiro não gosta de radicalismo, aí resolveram pulir.
+- [08:50.12] **creator**: Mas o que fez ele conseguir ganhar foi a polida que deram nele pro discurso dele ser menos radical e colocaram o José de Alencar, que era o...
+- [09:01.64] **creator**: um grande empresário brasileiro na época, como vice dele.
+- [09:05.44] **creator**: Se ele fosse presidente, senão ele não ia ser.
+- [09:08.74] **creator**: Se ele continuasse com aquele discurso radical do Boulos, ele não teria conseguido ser presidente nunca.
+- [09:17.24] **creator**: É por isso que o Bôlos não desiste, porque o Lula já foi ele um dia, né?
+- [09:20.90] **creator**: Exatamente, só que o Bôlos, ele não muda.
+- [09:24.90] **creator**: Se ele não mudar, ele não vai ser nada nunca.
+- [09:28.24] **creator**: Assim espero. Deixo ele sem mudar.
+- [09:30.90] **creator**: Eu também espero.
+- [09:32.74] **creator**: Deixo ele sem mudar.
+- [09:35.74] **creator**: Mas tá ficando mais difícil o... o Emos pelo seguinte...
+- [09:40.24] **creator**: Eu tava vendo até uma entrevista do Caio Coppola esses dias, onde ele tava falando, a...
+- [09:48.24] **creator**: A molecada hoje, né? Elas se informam pela internet.
+- [09:54.24] **creator**: Os mais velhos, né? Era TV, né?
+- [10:00.24] **creator**: velho nisso, os mais velhos que
+- [10:14.30] **creator**: É, mas o Boulos ainda vai tá vivo daqui uns anos, né?
+- [10:17.66] **creator**: Vai estar vivo, mas eu acho que esse é como se cria. A não ser que ele vire... a não ser que ele aprenda a mentir que não é o Lula.
+- [10:25.40] **creator**: Aí, ele não tem nada a ver, tá? Ele já mente pra cacete, mas... ainda mente pouco.
+- [10:30.76] **creator**: Não, o Bôlus é... eu sempre vi o Bôlus como um Lula jovem, entendeu?
+- [10:35.86] **creator**: É, é, exatamente, é.
+- [10:38.70] **creator**: Inclusive, muita gente apostava que ele seria o sucessor natural do Lula.
+- [10:44.16] **creator**: Quando eu... é, o Bôlus, eu sempre vi ele assim...
+- [10:48.90] **creator**: Quando eu penso no Lula como ele seria jovem,
+- [10:53.74] **creator**: Eu penso no Boulos, entendeu?
+- [10:55.74] **creator**: E eu vou te falar uma coisa. Eu acredito que ele só não tenha sido o sucessor natural do Lula, porque ele montava o PT. Se ele tivesse no PT, ele teria sido naturalmente.
+- [11:07.24] **creator**: Mas como ele montava o PT, aí o Lula tentou fabricar o Fernando Haddad de tudo quanto é jeito, mas esse Fernando Haddad é muito burro, né? Não tem jeito.
+- [11:18.98] **creator**: Eu acho que ele... o discurso dele é muito fraco.
+- [11:23.98] **creator**: Porque ele é burro. Ele é muito burro. Não tem jeito.
+- [11:26.98] **creator**: Eu acho que o discurso dele é muito fraco. O Lula é mais eloquente.
+- [11:32.98] **creator**: Exato. O Lula mente com convicção. Talvez, se a Dade não consiga ser tão mentiroso.
+- [11:38.98] **creator**: Por isso ele se torna um burro.
+- [11:40.98] **creator**: Aí ele fica lá no meio do termo, né? E o cérebro...
+- [11:43.98] **creator**: Quando o cara é muito corretinho, o cérebro dele não deixa ele mentir.
+- [11:48.50] **creator**: Com propriedade.
+- [11:49.94] **creator**: Imagina se mentisse, do jeito que ele já mente hoje...
+- [11:54.46] **creator**: É, não mente, mas o cara mente, mas você percebe que o cara não mente com naturalidade.
+- [12:00.66] **creator**: O Lula mente com uma naturalidade espantosa, é incrível.
+- [12:04.38] **creator**: Impressionante.
+- [12:05.98] **creator**: O cara é profissional.
+- [12:07.58] **creator**: O cara é profissa.
+- [12:09.02] **creator**: Ele realmente consegue encantar jumento, que é uma beleza.
+- [12:13.66] **creator**: É, eu espero que esses partidozinhos, assim, que nem o do Renan, entendeu? Que é um partidozinho
+- [12:23.26] **creator**: bom que apare mais partidos assim entendeu E assim partidos que tenham a transpar Olha eu n gosto muito desse partido do Renan n porque esses caras eles escorrecam demais Eu sou mais o tipo
+- [12:56.00] **creator**: Eu também queria... É, mas... Olha...
+- [13:01.00] **creator**: Não, se nós tivéssemos...
+- [13:03.00] **creator**: Eu acho que um cara que é um bom deputado não pode falar o que ele falou nessa eleição.
+- [13:08.00] **creator**: Tudo bem, mas vamos... Mas...
+- [13:11.00] **creator**: Mas você viu essa, num discurso dele de palanque? Ele falou se...
+- [13:16.00] **creator**: É, dos três...
+- [13:17.00] **creator**: Se o Fernando não tivesse pelo menos 3%, ele renunciaria.
+- [13:21.00] **creator**: É.
+- [13:22.00] **creator**: Então, porra, se ele não renuncia é porque ele não tem palavra. Então, meu, o cara não pode falar uma merda dessa.
+- [13:28.40] **creator**: É, eu acho assim que o... como é que eu vou te dizer? É...
+- [13:38.20] **creator**: É... tipo assim, hoje, se nós tivéssemos, se os nossos políticos hoje, os deputados, fossem a maioria como ele,
+- [13:51.20] **creator**: Seria melhor do que o que tá, entendeu?
+- [13:53.20] **creator**: Ah, sim! É o menos pior. É aquela velha nossa conversa...
+- [13:56.20] **creator**: É a regra do menos pior, entende?
+- [13:58.20] **creator**: Ele está sempre no menos pior.
+- [14:00.20] **creator**: Mas a gente já teria que ter passado dessa fase do menos pior pra gente...
+- [14:04.20] **creator**: Ah, mas nós ainda estamos no ruim!
+- [14:06.20] **creator**: Ainda não estamos nem no menos pior!
+- [14:08.20] **creator**: Pois é.
+- [14:09.20] **creator**: Que o Lula ainda está no governo, nós ainda estamos no ruim, ainda...
+- [14:12.20] **creator**: A gente não chegou na fase do menos pior!
+- [14:15.20] **creator**: Olha, eu quero ver se a gente chega agora. Eu tô... eu quero só ver.
+- [14:19.20] **creator**: Eu tô pagando pra ver se realmente esses caras que entraram no Senado, se eles vão botar pra fuder em cima do Supremo, se eles realmente vão fazer impeachment ou se vai acabar impeachment, se eles vão fazer acordo pra dizer que tem que pacificar o país.
+- [14:38.20] **creator**: Cara, se eles fizerem isso, se eles não impeachmarem pelo menos o Alexandre de Moraes, realmente isso aqui não tem jeito.
+- [14:45.20] **creator**: Não, mas eu acho que vai sim. Talvez não o outro lá, né?
+- [14:53.20] **creator**: Por dois motivos Porque na hora que impeachment um o outro vai meter o rabo entre as pernas E tamb porque ele um que vale a pena negociar mas o Alexandre de Moraes p n vale a pena
+- [15:10.00] **creator**: Hã? Dois que não vale a pena negociar.
+- [15:14.00] **creator**: Alexandre de Moraes e Claudino.
+- [15:26.00] **creator**: Aham.
+- [15:49.00] **creator**: Aham, sem dúvida. É um favor popular, né?
+- [15:52.00] **creator**: É, de algum... é, de alguma forma ele vai...
+- [15:55.06] **creator**: Por exemplo, esses caras muito se elegeram, afirmando que iam impitimar o cara.
+- [16:02.26] **creator**: Se o cara não impitimar, ele já perdeu um ponto, e ele não quer perder.
+- [16:05.82] **creator**: Exatamente.
+- [16:07.82] **creator**: Entendeu? Então, eu acho que vai acontecer nesse ritmo...
+- [16:13.16] **creator**: De pelo menos um deles ser impitimado.
+- [16:17.16] **creator**: Eu esperaria que fossem os dois, entendeu? Gostaria que fossem os dois.
+- [16:21.16] **creator**: Eu gostaria que fosse os três, pra mim hoje o fato é que eu sou o último.
+- [16:31.16] **creator**: Com o Alexandre Moraes é uma cabeça, é sem dúvida.
+- [16:34.16] **creator**: Isso aí é unanimidade, o Alexandre Moraes é o que tem que ir embora primeiro.
+- [16:38.16] **creator**: Mas tem que ir preso, na minha opinião não é só impeachment.
+- [16:41.16] **creator**: Pra ele ficar, tem que ir preso.
+- [16:43.16] **creator**: É, exatamente.
+- [16:45.16] **creator**: Depois que ele não tiver poder real nenhum, aí tu persegue ele à vontade, entendeu?
+- [16:52.40] **creator**: Depois que ele tá desarmado...
+- [16:55.60] **creator**: Depois que ele tá desarmado e sem amigos, aí você persegue ele à vontade, o cara tá.
+- [17:02.24] **creator**: O cara não... Se ele for impeachment, ninguém vai defender ele.
+- [17:06.28] **creator**: Nenhum cachorro dele vai defender ele.
+- [17:08.28] **creator**: Se ele for impeachment, eu não acredito que ele fique no Brasil, não.
+- [17:11.96] **creator**: Não.
+- [17:12.56] **creator**: Ele vai cair fora.
+- [17:14.36] **creator**: N vai muitos ficaram como o caso do Bolsonaro por quest de patriotismo mas um cara que ele n tem mais poder nenhum que ele t no Brasil porque tem poder A n tem mais poder nenhum ningu gosta dele Ele vai falando E o Bolsonaro n cometeu crime nenhum n
+- [17:38.50] **creator**: Não, sim.
+- [17:40.02] **creator**: O Bolsonaro podia fugir, agora ele cometeu um monte de crime, pô.
+- [17:43.08] **creator**: Pois é, então eu acho que... que a questão dele realmente é fugir, né?
+- [17:48.44] **creator**: Eu só também não acho que ele vá pros Estados Unidos devido...
+- [17:51.62] **creator**: Ah, não. Nem podendo. Nos Estados Unidos ele tá preso lá também.
+- [17:55.20] **creator**: É, mas fácil ele ir pra Europa, pra algum lugar assim, né?
+- [17:59.20] **creator**: A Europa também ficou arriscada pra ele, viu?
+- [18:01.20] **creator**: Mas a Europa... Mas a Europa...
+- [18:03.20] **creator**: Ele vai ter que ir pra Rússia, viu?
+- [18:05.20] **creator**: Pois é, mas a Europa tem muito país, entende?
+- [18:07.20] **creator**: Tem, mas...
+- [18:09.20] **creator**: É, Mussa é um... Não é possível que nenhum acolha ele lá, entende?
+- [18:13.20] **creator**: Pode acolher, mas ele é facilmente alcançável.
+- [18:17.20] **creator**: Na Europa, esse é o ponto.
+- [18:19.20] **creator**: Eu acho que ele vai ter que ir pra Rússia ou pra China, né?
+- [18:23.20] **creator**: Mas eu acho que não vai... A diferença cultural é muito grande pra...
+- [18:28.20] **creator**: É muito grande, mas se o cara não tiver, pode correr.
+- [18:31.20] **creator**: Não, mas aí se o cara não tiver... Na Europa tem o quê? Tem uns 70 países na Europa?
+- [18:38.20] **creator**: Deve ter uns 70 países na Europa. Se 70 países e ninguém quiser ele, ele tá fudido.
+- [18:44.20] **creator**: Tá fudido.
+- [18:45.20] **creator**: Se de 70 países...
+- [18:47.20] **creator**: Eu acredito que Portugal não queira ele.
+- [18:50.20] **creator**: Não, Portugal não. Eles já tem muito ladrão lá.
+- [18:53.44] **creator**: Já! Fora os que, além dos de lá, ainda foram muitos daqui.
+- [18:58.36] **creator**: É, eles já tem muito ladrão lá.
+- [19:03.20] **creator**: Aí, se os caras não... Eu só acho assim, que desse tanto de país, algum vai querer ele.
+- [19:10.74] **creator**: Entende? É a minha opinião, que eu acho que algum vai querer ele, né? Então...
+- [19:15.40] **creator**: Ele tinha que ir pra El Salvador.
+- [19:19.90] **creator**: Eu mandaria ele logo pro inferno, mandaria ele nem pro Salvador, não.
+- [19:24.10] **creator**: Ele tinha que ir pra El Salvador, né?
+- [19:26.10] **creator**: O Gabon... O Gabon pra ele era o inferno, não era nem um desses países, não.
+- [19:32.70] **creator**: Mas, do jeito que a gente imagina que ele vai, ele vai.
+- [19:37.50] **creator**: E aí...
+- [19:39.30] **creator**: E aí, agora ele pode tá ouvindo a gente!
+- [19:41.50] **creator**: Ele pode... Ele pode estar ouvindo a gente!
+- [19:46.30] **creator**: Não duvido nada.
+- [19:47.50] **creator**: Não duvida nada.
+- [19:49.90] **creator**: Não duvido nada, viu?
+- [19:51.90] **creator**: É, cara, aí vem as situações, né? Você...
+- [19:57.90] **creator**: tem uma...
+- [19:59.90] **creator**: É, vários problemas, a gente...
+- [20:30.00] **creator**: Aí eu acredito que agora...
+- [20:34.00] **creator**: Tipo assim, uma vez o ca... o negócio é, tipo assim, seria que nem os partidos menores.
+- [20:41.00] **creator**: Só entra quem tem de fato a nossa ideologia, né? Agora que eles já tão num número muito massivo, tu vai ver que começa a aparecer cagada do PL também.
+- [20:53.00] **creator**: 
+- [20:53.00] **creator**: Porque, véi, eles tão num número muito grande que não tem como eles...
+- [20:58.94] **creator**: é... conterem todo mundo a ponto de não... de não ter, entendeu?
+- [21:04.94] **creator**: Ó, um partido que tem uma linha que tá indo bem e que me agrada é o Novo.
+- [21:10.36] **creator**: O Novo tem uma linha legal.
+- [21:13.02] **creator**: Se vão conseguir continuar, só Deus sabe.
+- [21:17.20] **creator**: Mas até hoje, eles tão indo numa trajetória legal.
+- [21:23.00] **creator**: É... só que tinha que... só que ele fica uma competição desonesta, né? Tinha que ter... eles tinham que conseguir crescer a ponto...
+- [21:33.00] **creator**: de tornar isso viável pra acontecer como regra geral pro jogo. Por exemplo, dinheiro público de campanha, eles não utilizam.
+- [21:42.50] **creator**: Sim. Eles tinham que conseguir jogar e acabar com o dinheiro público de campanha. Pra todo mundo como regra geral.
+- [21:50.00] **creator**: É, eu acho assim, que em algum momento, é... algum momento, durante esses quatro anos, esses partidos menores vão crescer, porque vai ter que ter pelo menos uma polarização pra próxima eleição, né?
+- [22:08.00] **creator**: No mínimo, um partido vai se destacar que não vai ser o PT.
+- [22:12.00] **creator**: Não, o PT já era.
+- [22:14.00] **creator**: O PT já era.
+- [22:16.00] **creator**: Mesmo que o Lula ganhasse dessa vez, ainda que ele virasse o jogo, o PT tá muito queimado.
+- [22:24.00] **creator**: J um partido muito de terceira linha entendeu E a novos partidos nesse momento tem Aham
+- [22:56.00] **creator**: ...que eles são uma opção viável, entendeu? Então, a gente vai ter muito político doando o salário dele, não usando...
+- [23:05.00] **creator**: ...é... não usando dinheiro eleitoral. A gente vai ter muito político, tipo assim, que nem o estilo do Kim, né? Do Kim Takagi.
+- [23:17.00] **creator**: É... mostrando muito pro povo que ele é honesto, entendeu?
+- [23:23.00] **creator**: A gente vai ter muita coisa desse nível desses partidos novos, entendeu?
+- [23:29.00] **creator**: Eu acho que vai ter muita coisa desse... desse...
+- [23:33.00] **creator**: nesse ponto.
+- [23:35.00] **creator**: E aí vão ser os caras que vão... é...
+- [23:39.00] **creator**: Vão ser os caras que vão... que vão ou polarizar, né? Ou multipolarizar as próximas eleições, né? Bom seria... Pode falar.
+- [23:50.00] **creator**: Agora o negócio tá tão louco, tá tão louco que tá parecendo até petista consciente. Eu tava vendo um vídeo do petista aí, pouco cedo, que o cara tava pedindo voto pro Flávio Bolsonaro.
+- [24:04.00] **creator**: Porque ele disse assim, gente, vocês me conhecem. Eu tava falando pra base dele, gente, vocês me conhecem. Eu sou petista, eu a vida inteira votei no Lula, mas agora não dá mais, gente, porque é o seguinte, eu sou petista, mas não sou louco. Olha o que aconteceu. O PL conseguiu fazer a maioria. Mesmo que o Lula consiga reverter, ele não vai conseguir governar.
+- [24:32.00] **creator**: Olha o que já aconteceu com a Bolsa de Valores, a gente tá precisando de investimento nesse país. Não tem como, agora tem que ser 22. Me dói o coração falar isso, ele fala, me dói o coração falar isso, mas agora tem que ser o 22, não tem pra onde correr.
+- [24:50.00] **creator**: É, vai ser um...
+- [24:52.00] **creator**: De que ponto chegamos?
+- [24:54.00] **creator**: É, vai ser um...
+- [24:56.00] **creator**: Um ponto n Que vai Que nesse momento que a Que A gente vai ter essa quest do 22 do PL crescendo
+- [25:09.00] **creator**: vamo ver novos partidos aparecendo, que a gente espera que sejam partidos bons, melhores, eles têm que ser melhores do que o PL,
+- [25:18.00] **creator**: porque se for pior do que o PL, eles não vão fazer sucesso, né?
+- [25:21.00] **creator**: Tem que ser.
+- [25:22.00] **creator**: Se for pior ou igual não faz sucesso. A ideia dos partidos é eles mostrarem algo diferente que seja melhor do que o PL.
+- [25:32.64] **creator**: O PL até agora não foi ruim, mas de agora em diante eu espero que ele seja ruim.
+- [25:37.40] **creator**: Eu acredito que ele vai ser ruim, porque vai ter... querendo ou não, tem muita gente. Um que fizer besteira vai respingar em todos.
+- [25:45.00] **creator**: Ah, principalmente... e eu vou te falar uma coisa.
+- [25:49.40] **creator**: Se tem uma coisa que o PT sempre fez muito bem, é oposição.
+- [25:58.16] **creator**: Não vou entrar no mérito de ser uma oposição suja, mas eles fazem uma oposição por quê?
+- [26:05.46] **creator**: Eles fazem um barulho muito grande.
+- [26:07.96] **creator**: O PL vai ser posição, vai virar vitrine, vai tomar porrada forte.
+- [26:15.06] **creator**: Então, é isso aí que você tá falando. Qualquer um que fizer um... sem fazer cagada já vai ter ruído. Imagina se o cara fizer.
+- [26:23.06] **creator**: O cara fizer uma cag... Primeira cagada que o PL fizer, né? Depois dessas eleições...
+- [26:29.06] **creator**: Nossa! Depois de janeiro a primeira cagada vai ser...
+- [26:32.06] **creator**: Vai ser muita coisa, assim. Óbvio que o PT vai ser opor, vai, mas o pessoal...
+- [26:38.06] **creator**: Pessoal que tem alguma lembrança vai lembrar que o PT foi...
+- [26:45.06] **creator**: Foi muito infeliz, né?
+- [26:47.06] **creator**: Tipo assim, eu espero que esse governo seja bom...
+- [26:51.06] **creator**: A ponto da gente lembrar que o PT foi muito ruim.
+- [26:55.06] **creator**: Uhum.
+- [26:56.06] **creator**: Né? E a gente vê que o governo dele foi muito ruim.
+- [26:59.06] **creator**: E aí...
+- [27:04.06] **creator**: Nessa levada, né?
+- [27:36.06] **creator**: N tenho aux iPhone n tenho aux moradia
+- [27:39.50] **creator**: eu não pego nada disso aí... esses caras...
+- [27:42.50] **creator**: Só nisso aí eles já vão decolar muito, né?
+- [27:45.50] **creator**: Eu já não usei dinheiro de campanha...
+- [27:49.00] **creator**: Só nisso aí eles já vão...
+- [27:51.50] **creator**: Eles já vão decolar muito, né? Já vão conseguir, é...
+- [27:56.00] **creator**: Já vão conseguir bastante gente.
+- [27:58.50] **creator**: E tem a galera nova também, que prefere votar nesses caras.
+- [28:02.50] **creator**: Eu vi muito jovenzinho votando no Renan.
+- [28:10.50] **creator**: E algumas coisas eu tive que admitir.
+- [28:13.00] **creator**: Disse assim, olha, realmente o candidato não é ruim.
+- [28:16.50] **creator**: Eu não posso votar nele porque não tem...
+- [28:19.50] **creator**: Porque ele não tem chance de ganhar.
+- [28:22.00] **creator**: E alguém tem que tirar o PT, e ele não tem chance.
+- [28:25.50] **creator**: É que... é que... é... a gente que é mais macaco velho, não é só o que o cara sai da boca dele, é o comportamento do cara. Esse renome que não me agrada nele é o comportamento.
+- [28:37.50] **creator**: Não, tem muitas coisas que eu... As ações dele... é, mas as ações dele ficam gritantes, ele não tem como dizer com a fala.
+- [28:44.50] **creator**: Tem muita coisa, tipo assim, ele xingou muito o outro lado sem o outro lado ter feito nada, entendeu?
+- [28:52.50] **creator**: Xingou muito o outro lado sem o outro lado ter feito nada, porque a... a...
+- [28:57.50] **creator**: a... como é que foi? Vamos dizer assim, a...
+- [29:00.50] **creator**: O discurso dele é, os dois lados são ladrões.
+- [29:04.50] **creator**: É simplesmente bater pra aparecer.
+- [29:06.50] **creator**: É. Bati, vou pra todo lado, ativo pra todo lado e deu muito errado.
+- [29:13.50] **creator**: Exatamente.
+- [29:14.80] **creator**: E... mas eu acho que ele vai continuar nessa ideia.
+- [29:17.40] **creator**: Vai, vai. Vamos ver.
+- [29:19.40] **creator**: Porque se ele fosse de ele mudar de ideia, seria agora, na hora do apoio.
+- [29:25.40] **creator**: Aham.
+- [29:26.40] **creator**: Entendeu? Seria na hora do apoio, ele dizer assim, não, declaro meu apoio, tal.
+- [29:31.20] **creator**: Aí seria a hora dele virar a casaca, mas...
+- [29:35.40] **creator**: Não vai virar, nem vai se...
+- [29:37.40] **creator**: Não, pelo jeito ele vai morrer falando...
+- [29:40.40] **creator**: A mesma coisa.
+- [29:42.40] **creator**: Vai morrer falando a mesma coisa.
+- [29:44.40] **creator**: E ele também não... É...
+- [29:46.40] **creator**: Não, mas é...
+- [29:48.40] **creator**: Mas, tipo assim, nós temos que ter também
+- [29:50.40] **creator**: um candidato viável.
+- [29:52.40] **creator**: Vamos dizer assim, ah... Mas tá difícil.
+- [29:54.40] **creator**: Mas o povo não ajuda, ô, Anderson.
+- [29:56.40] **creator**: É difícil. Se o cara...
+- [30:00.40] **creator**: Cara, o candidato aqui que que
+- [30:06.80] **creator**: Não adianta, a gente fala tanto da mentira do Lula, que o Lula, ele exagera, ele bate o recorde de ser mentiroso,
+- [30:13.34] **creator**: mas a realidade é que um candidato que fale verdade aqui nesse país, no Brasil de hoje, com o povo de hoje, não se cria.
+- [30:21.00] **creator**: O cara tem que mentir.
+- [30:23.00] **creator**: Tem como.
+- [30:24.00] **creator**: É, porque eu... eu... é...
+- [30:30.00] **creator**: O... PL, ele tem que ter uma oposição...
+- [30:36.00] **creator**: Porque... eu acho que o... o... o...
+- [30:39.00] **creator**: Eu não desejo mais o PT como oposição ao PL.
+- [30:44.00] **creator**: Porque oposição a ela sempre tem que ter uma chance de ganhar, entendeu?
+- [30:47.00] **creator**: Sim.
+- [30:48.00] **creator**: E o PT, pelo amor de Deus, né?
+- [30:50.00] **creator**: É, ele acabou com a chance dele, mas...
+- [30:52.00] **creator**: Pois é, mas eu... mas ele tem que ter uma...
+- [30:54.00] **creator**: Não ser o estilo adversário.
+- [30:55.00] **creator**: Tem que nascer uma oposição que seja melhor do que o PT e que nesse momento, depois da...
+- [31:05.50] **creator**: Tipo assim, daqui quatro anos, né? Ganhe... daqui quatro... daqui dois anos já, pra prefeito, né?
+- [31:13.00] **creator**: Que esse segundo parti... esse segundo partido, que a gente não sabe qual é, ou se é o segundo, ou se é o terceiro, ou se é o quarto...
+- [31:20.00] **creator**: Se vão ser mais de um, né?
+- [31:22.00] **creator**: Ele ganha poder suficiente pra suplantar o PT.
+- [31:30.00] **creator**: Hoje o PT tá morrendo, mas ele ainda é grande.
+- [31:36.00] **creator**: Entende?
+- [31:38.00] **creator**: Mas uma coisa que tinha que mudar aqui, e aí já pra mentalidade do nosso povo ser ainda hoje uma utopia,
+- [31:45.00] **creator**: Seria oposição, tem que ter oposição, mas oposição de proposições, de projeto.
+- [31:51.56] **creator**: Aqui a oposição é só de baixaria. Só de baixaria.
+- [31:55.16] **creator**: Esse... Porra, enquanto o brasileiro continuar com essa mentalidade que oposição tem que ser baixaria,
+- [32:01.96] **creator**: a gente vai continuar sempre no raso. Só que o brasileiro não acordou pra vida ainda que hoje, no mundo que a gente vive,
+- [32:09.16] **creator**: a competição não é mais local, a competição é mundial.
+- [32:13.80] **creator**: O brasileiro corre muito risco de ser escravo dos países desenvolvidos.
+- [32:19.80] **creator**: Ah, mas isso aí, querendo ou não, é uma coisa assim...
+- [32:23.80] **creator**: Por exemplo quem que pode parar a China Mal e mal Estados Unidos N pode Sabe por qu
+- [32:39.00] **creator**: Quem é que para o cara? Como é que os caras vão competir?
+- [32:44.00] **creator**: Trabalhando 8 horas por dia, 6 horas por dia, ou mesmo os que trabalham mais de 10 horas por dia.
+- [32:51.00] **creator**: Quantos caras que trabalham 16?
+- [32:54.00] **creator**: Ah, sim, sem dúvida. Não tem como. Primeiro que os caras são... Primeiro que os caras tão na casa de bilhão.
+- [33:01.00] **creator**: Não, eu não vou nem nessa linha. Eu vou na linha do seguinte. Você tem de um lado...
+- [33:07.00] **creator**: a democracia com o capitalismo, e do outro lado você tem uma ditadura com o capitalismo.
+- [33:14.00] **creator**: É. Porra, só por milagre que a ditadura com o capitalismo não vai vencer a democracia.
+- [33:21.00] **creator**: Exatamente. Então, realmente, é difícil.
+- [33:51.00] **creator**: A Índia.
+- [33:57.00] **creator**: A Índia. A Índia tá rivalizando com a China.
+- [34:21.00] **creator**: ...muito grande, em que o cara que ganha pouco, ele tá... é... ele tá satisfeito de ganhar pouco.
+- [34:29.48] **creator**: Porque ele entende religiosamente a vida dele, que a vida dele é pra ser assim.
+- [34:35.24] **creator**: Então, é uma coisa enraiz... uma coisa que é enraizada religiosamente, é difícil de... de... de você retirar, entendeu?
+- [34:44.60] **creator**: É que nem... vamos colocar a questão religiosa do Brasil.
+- [34:48.76] **creator**: Mesmo que o Brasil inteiro virasse evangélico,
+- [34:52.76] **creator**: é difícil você tirar, vamos dizer assim, Maria dos Cantos.
+- [34:56.76] **creator**: Porque t enraizado t no nome das pessoas t na t na t nos nomes de monumento t nas igrejas t nas coisas hist t enraizado no no no povo entendeu E na hist e em tudo
+- [35:14.00] **creator**: E já no caso deles são a... vamos dizer assim, as culturas de casta, né? Essa questão de se conformar, então...
+- [35:24.00] **creator**: A China é um grande competidor, mas ela só conta com uma perna, entende? Ela só tem uma perna, e eles são muito voltados, mas...
+- [35:35.00] **creator**: A... a questão, por exemplo, a questão tecnológica deles é muito boa, realmente.
+- [35:41.56] **creator**: Mas a questão industrial pra competir com a China, não dá pra competir.
+- [35:47.16] **creator**: Então, hoje não tem nenhum país que consiga competir.
+- [35:51.00] **creator**: E cada vez mais essa diferença vai ser cada vez maior.
+- [35:55.00] **creator**: Hoje a diferença é um trem, entendeu?
+- [35:59.24] **creator**: É um trem, é algumas coisas, né? Que eles... que tem mais do que a gente.
+- [36:04.36] **creator**: É... cada vez mais essas... é... essas diferenças vão aumentar.
+- [36:10.36] **creator**: Entendeu? Cada vez mais a gente tá falando aqui, daqui 10 anos, daqui 20 anos, vai ter muito mais coisa que vai ser diferente na China, que a galera vai tá migrando pra China que nem tá hoje.
+- [36:22.36] **creator**: E aí, não tem jeito, não tem como parar. É uma coisa que infelizmente não tem como parar.
+- [36:29.36] **creator**: Vai ter países que vão ficar, vamos dizer assim, do lado dos Estados Unidos, independente de ir caindo? Vai, sempre vai ter.
+- [36:38.36] **creator**: Mas assim, tecnologicamente, vão ser dois mundos diferentes, entendeu? Eu acredito que vão ser dois mundos diferentes, não tem jeito.
+- [36:50.36] **creator**: E aí, a... é... o Brasil coitado no meio dessa conta.
+- [36:57.36] **creator**: Realmente, o Brasil, na fila do pão, tá lascado.
+- [37:06.36] **creator**: O Brasil coitado, tem... é... é... eu vou dizer... não vou dizer centenas, porque só tem um e pouco, né?
+- [37:19.36] **creator**: Mas tem dezenas de pa que tem mais chance do que o Brasil que est abaixo do Brasil inclusive mas que tem mais chance por v fatores n Pol a cultura de trabalhar que o brasileiro n tem mesmo V coisas que o Brasil t abaixo T tipo assim ele t acima mas tem muito pa com mais potencial de passar o Brasil em muitos pa
+- [37:51.00] **creator**: É, tem mais de 100 metros, mano.
+- [38:21.00] **creator**: Pode tá lá na frente, mas se ele tá a 40 e o cara aqui atrás tá a 60, uma hora ele vai passar.
+- [38:27.88] **creator**: Vai demorar um pouco? Vai, mas uma hora ele vai passar.
+- [38:32.84] **creator**: E o Brasil, depois principalmente da pandemia, desacelerou muito.
+- [38:37.84] **creator**: Porque a gente... eu tinha, assim, uma... um entendimento no...
+- [38:44.08] **creator**: pelo menos na minha cidade, quando eu era novo, que assim, era a oportunidade, né?
+- [38:50.12] **creator**: Tipo, todo mundo queria ter muito dinheiro e as pessoas trabalhavam, corriam atrás.
+- [38:54.76] **creator**: Hoje não tem mais essa cultura, as pessoas querem viver bem e só.
+- [39:00.16] **creator**: Ela alcançou o certo padrão de vida, é o que ela quer.
+- [39:03.96] **creator**: Ela quer o padrão de vida e quer manter. E não tá errado.
+- [39:07.16] **creator**: Não, o cara tem que postar um porro na sombra.
+- [39:09.66] **creator**: É, mas o chinês não pensa assim. Tem vários países que não pensam assim.
+- [39:13.96] **creator**: Nem fodendo.
+- [39:27.96] **creator**: Frutebolzinho.
+- [39:31.96] **creator**: Até fudra, mano.
+- [39:35.96] **creator**: E é uma característica do porrô matinho, né?
+- [39:39.96] **creator**: É, aí não. Aí tem os que tão pior do que a gente também, né? Aí tem os que tão pior do que a gente, que também não tá.
+- [39:48.46] **creator**: Tem os que tão pior do que a gente, que não é uma questão de só que a gente tá ruim. Tem os que a gente tá numa certa posição, que eu acho que vai cair, porque tem países que tão
+- [40:22.00] **creator**: Cuba.
+- [40:30.00] **creator**: Né? Numa era que não existe mais, né? Já vive com pouca internet, com carros antigos, já é um lugar antiquado, né?
+- [40:43.50] **creator**: É. Agora tu imagina isso... Não, quando era criança era assim.
+- [40:48.60] **creator**: Aham. Tipo, as reportagens que a gente via, quando era moleque, anos... 2000 e pouco, né?
+- [40:56.60] **creator**: Era que Cuba vivia nos anos 80. Exatamente.
+- [41:00.10] **creator**: Cuba vivia preso nos anos 80.
+- [41:03.10] **creator**: Né? E que a gente vê hoje que continua vivendo nos anos 80.
+- [41:07.60] **creator**: Agora imagina quando chegar daqui 20 anos, daqui... mais anos ainda que... Cuba vai ficar preso no tempo...
+- [41:16.60] **creator**: Esquece. Esquece.
+- [41:19.10] **creator**: Não tem como.
+- [41:20.60] **creator**: Então tem... tem Coreia do Norte, tem Cuba...
+- [41:24.10] **creator**: Eu só espero que a gente nunca chegue lá.
+- [41:27.10] **creator**: Bom, se bem que chega, eu não tô aqui pra ver.
+- [41:30.10] **creator**: O Brasil é muito grande. É difícil de chegar lá nessa questão de regime, porque você tem...
+- [41:37.10] **creator**: É o que... ó, eu vi o cara falando...
+- [41:41.10] **creator**: O cara... não sei se...
+- [41:45.10] **creator**: O cara pegou umas formiguinhas, né? E começou a traçar a linha.
+- [41:50.10] **creator**: E ela não passava a linha.
+- [42:22.10] **creator**: As linhas do Globo dos países, né?
+- [42:25.58] **creator**: Assim olha nenhuma dessas linhas tamb real n Se o neg apertar Pula pro outro lado Pula pro Paraguai
+- [42:38.04] **creator**: Sim.
+- [42:38.84] **creator**: Pula pra Argentina se não tiver pior do que a gente...
+- [42:43.96] **creator**: Né?
+- [42:45.08] **creator**: Pula pro outro canto, se tiver muito ruim...
+- [42:48.60] **creator**: Pula pra El Salvador que pode tá melhor...
+- [42:51.16] **creator**: É, não tem... não tem muito essa questão de, ah, não, vai... É... se a situação ficasse muito pior, eu é porque eu não... eu jamais faria isso, assim, devido à minha família, né?
+- [43:09.16] **creator**: Olha, certo pra ela, viu?
+- [43:39.16] **creator**: É, porque, por exemplo, a empresa que ela trabalha aqui, ela é uma empresa multinacional, né?
+- [43:47.80] **creator**: Aham.
+- [43:49.00] **creator**: Ela é uma narradora multinacional. Aí, é... tipo assim, ela tem vários... ela tem vários lugares no mundo inteiro.
+- [43:59.52] **creator**: Aham.
+- [44:00.88] **creator**: Entendeu? Então, tipo assim, aqui é uma empresa que você vai subindo, né?
+- [44:07.16] **creator**: Sim.
+- [44:08.16] **creator**: Regionalmente, ela já chegou no topo, né?
+- [44:11.16] **creator**: Então, pra... pra o... então, tipo assim...
+- [44:15.16] **creator**: É... pra ela subir no cargo, ela tem que ir...
+- [44:19.16] **creator**: Pra outro lugar.
+- [44:20.16] **creator**: Pra outro lugar.
+- [44:22.16] **creator**: Entendeu? Pra ela...
+- [44:24.16] **creator**: Aí, ela já... antes dela me conhecer, ela já tava preparada.
+- [44:28.16] **creator**: Falando inglês, já... participando das reuniões com o pessoal de fora...
+- [44:33.16] **creator**: Cacete, aí ela foi fazer a cagada de me conhecer. Foi fazer a cagada de me conhecer, aí...
+- [44:41.16] **creator**: Ah, tá vendo? Esse é o problema brasileiro. Se lascou.
+- [44:45.16] **creator**: Esse é o problema brasileiro. Vocês estavam há quanto tempo juntos, já?
+- [44:50.16] **creator**: Ah, cara, vai fazer três anos agora, né? Três anos? Ah, novinho, hein?
+- [44:56.16] **creator**: Mas todos os dois j tem muito tempo rodado ela j vai fazer 40 Sim Sim N mas eu digo novinho de relacionamento Relacionamento no come uma del
+- [45:08.00] **creator**: É, mas a gente também... nosso relacionamento já começou velho.
+- [45:12.00] **creator**: Ah, é verdade. Porque a...
+- [45:15.00] **creator**: É, já começou velho, assim, não o primeiro ano, mas de lá pra cá, porque a...
+- [45:21.00] **creator**: Tipo assim, eu já tô na terceira esposa, entendeu?
+- [45:24.00] **creator**: Aham.
+- [45:26.00] **creator**: Aí ela também já teve uma relação antes. Sim.
+- [45:30.00] **creator**: Então, tipo assim, todos os dois têm muitos quilômetros rodados.
+- [45:33.00] **creator**: Bastante bagagem. Bastante bagagem, assim, de...
+- [45:40.00] **creator**: Sabe, de viver. Tipo, ela já sabe fazer a parte dela certinha, eu faço a minha parte certinho.
+- [45:47.00] **creator**: Entendeu? Então, é...
+- [45:50.00] **creator**: Ninguém precisa... Tipo, a minha primeira esposa eu tive que ensinar ela a ser mulher.
+- [45:55.00] **creator**: A segunda também. Essa daí eu não preciso.
+- [45:59.00] **creator**: Minha esposa anterior tinha 16 anos quando eu casei com ela.
+- [46:03.30] **creator**: Pedófilo.
+- [46:05.30] **creator**: Tinha 16 anos quando eu casei com ela.
+- [46:08.00] **creator**: Ai... Tinha 16 anos. Então, tipo, eu tive que ensinar o básico da vida dela.
+- [46:15.00] **creator**: É foda. Eu não teria essa coragem, não.
+- [46:19.00] **creator**: Hoje eu não tenho mais não, também.
+- [46:21.00] **creator**: Tive muita mulherzinha nova na minha vida quando eu era novo, mas só foi namorinha, porque não dava, não.
+- [46:27.00] **creator**: Hoje, não. Depois dela, só foi assim. Aí, ela agora...
+- [46:33.00] **creator**: Então, a gente já... a gente já, tipo assim, é tranquilo, entendeu?
+- [46:38.00] **creator**: Tipo, eu fui fazer... foi sair com ela ontem.
+- [46:42.00] **creator**: Fui fazer os exames com ela, né?
+- [46:44.00] **creator**: Aham.
+- [46:45.00] **creator**: Aí, a gente recebeu um casal aqui em casa.
+- [46:48.00] **creator**: E aí, quando eu falei, assim, dos exames que eu fui acompanhar e tal, do que aconteceu lá nos exames que eu... que eu... fazer o... o... como é que é o nome? Foi levantar o capô, né?
+- [47:06.00] **creator**: Ahn... Aí eu tava lá, junto do médico, né? Do lado do médico, médico, ó, tu tá vendo isso aqui, tal, tal?
+- [47:12.64] **creator**: Ah, tô vendo, tal, isso aqui, isso aqui é sarda, sarda cozida, é... Parece que nós tava debaixo de um carro, sabe? Olhando as peças quebradas.
+- [47:22.32] **creator**: E no de mama tamb tipo que que que que ela foi fazer o ultrassom n Pra ver se tal se tinha um Ela foi fazer preventivo n isso isso isso pra ver se tinha n tal Aham A tinha uma bolinha de l n
+- [47:39.00] **creator**: Sim.
+- [47:40.00] **creator**: E aí eu fui lá, meti a mão, peguei, ó... tá aqui, ó, bem aqui, ó.
+- [47:43.00] **creator**: É?
+- [47:44.00] **creator**: Não tá rachando, sabe?
+- [47:45.00] **creator**: Sim.
+- [47:46.00] **creator**: Aí o... aí o outro casou agora com um amigo nosso, tem quase o nosso tempo de casa, só que é um casal novo, né?
+- [47:52.00] **creator**: Aham.
+- [47:53.00] **creator**: Aham.
+- [48:04.00] **creator**: Não, eu acho que não. Isso é normal.
+- [48:21.50] **creator**: Aham.
+- [48:23.00] **creator**: Aí isso traz... aí isso...
+- [48:26.00] **creator**: Quem ama, quem ama cuida. Eu sou muito detalhista pras coisas.
+- [48:33.00] **creator**: A minha esposa já é mais...
+- [48:38.00] **creator**: Tranquila, né? Eu tenho uma... Relaxada.
+- [48:41.00] **creator**: É, eu tenho uma característica que pra médico me convencer de alguma coisa, ele tem que gastar muita saliva.
+- [48:48.00] **creator**: Não é assim.
+- [48:50.00] **creator**: É... então, vamo lá. Eu me lembro até hoje de um episódio.
+- [48:56.48] **creator**: Mais ou menos 18 anos atrás, a minha esposa tava sentindo muita dor nas pernas.
+- [49:07.82] **creator**: E... tinha umas... não chegava a ser varizes, mas tinha umas veias que estavam...
+- [49:14.46] **creator**: Parecia que estavam inflamadas.
+- [49:17.72] **creator**: Aí ela foi no médico.
+- [49:50.00] **creator**: O cara era casado com uma jornalista da tribuna, que era...
+- [49:57.00] **creator**: ligada, ligou ligada da Globo aqui, que o cara fazia muito sucesso,
+- [50:12.48] **creator**: Ela chegou em casa falando a mesma coisa. Eu falei, não tô convencido ainda, isso pra mim não é por aí.
+- [50:21.32] **creator**: Aí, papo vai, papo vem, eu conversando com alguns amigos, aí tem um amigo meu que é dentista, ele fala assim, olha, eu vou te dar o nome do telefone do médico aqui que tratou, o caso, ele tratou a minha sogra, a minha sogra, ela foi no médico, o médico queria amputar a perna dela, e esse médico aí salvou a minha sogra, a minha sogra morreu com as duas pernas,
+- [50:51.32] **creator**: Quase que o cara me disse assim, mas graças a Deus, morreu.
+- [50:55.32] **creator**: Exatamente. Aí eu falei, beleza. Me manda me dar o endereço aí, dei pra minha esposa, a esposa marcou consulta, eu falei, ah, nesse aí eu vou com você.
+- [51:07.32] **creator**: Porque não é possível. É, mas eu me lembro até hoje. Ela chegou lá, explicou, o médico examinou, aquele história, né, de o Ryu fez exame clínico com as duas pernas delas.
+- [51:21.32] **creator**: Eu já tava com os exames na mão.
+- [51:24.76] **creator**: Esse médico...
+- [51:26.64] **creator**: É...
+- [51:28.96] **creator**: Ela falou assim, eu já fui em dois médicos, os médicos querem tirar minha safena.
+- [51:34.08] **creator**: Esse médico, ele bateu com as duas mãos na mesa e ele falou assim,
+- [51:37.52] **creator**: puta que pariu, esses meus coragens de produção me levou, né?
+- [51:42.48] **creator**: Isso aqui não é caso de cirurgia de safena porra nenhuma,
+- [51:45.48] **creator**: isso aqui é uma microcirurgia, é uma coisa besta.
+- [51:48.96] **creator**: É... eu... eu...
+- [51:52.96] **creator**: Ela fez a microcirurgia com ele, fez o tratamento, tá aí até hoje, não tirou sua fera, nunca mais sentiu dor nas pernas...
+- [52:00.96] **creator**: Tá bom o problema.
+- [52:01.96] **creator**: Então, cara, eu tiro...
+- [52:02.96] **creator**: Imagina se ela tira essa fera por causa de dois imbecis.
+- [52:06.96] **creator**: Não, eu vejo muita irrestabilidade nesse sentido, porque justamente essa menina, que era minha esposa,
+- [52:14.96] **creator**: ela cancelou ela tipo assim a Mi deixou uns 20 dias antes do casamento e eu n entendi o porqu e depois que a m dela foi l eu fui entender que ela teve um NIC2 ela foi no m e tava com um NIC2 que era c e o m disse que ia ter que tirar o dela A p menina 16 anos e tira o Tu j pensou Nossa morte
+- [52:40.00] **creator**: É morte. Aí ela... doidou. Aí, nesse ano, num... Aí eu peguei a mãe dela... Ah, bora pra Castanhão, que ela morava em Castanhão.
+- [52:49.00] **creator**: Aí peguei a mãe dela, bora, bora, e... Aí peguei os exames, a gente foi num médico, foi no outro médico...
+- [52:55.00] **creator**: Aí o último disse assim, olha, não, a gente pode fazer uma queimação a laser, ver como se comporta.
+- [53:03.00] **creator**: Aí até que eu peguei o...
+- [53:06.60] **creator**: É, a gente foi no hospital que eu fui agora, né? Que é o que eu te falei lá, que é muito bom, que é o hospital Amazônia.
+- [53:15.00] **creator**: Uhum.
+- [53:15.70] **creator**: Que é onde trata os políticos lá, e aí a gente pegou o número, né? Desse médico lá, que era o que tratava o pessoal lá de Capitão Poço, né?
+- [53:25.90] **creator**: Cara rico da minha cidade. Aí, tá, olha, só tem agenda pra daqui tantos dias. Dá pra esperar? Dá.
+- [53:35.30] **creator**: Aí fomos lá, pronto, o cara disse, ah, ih, rapaz, isso aqui é muito tratável, não precisa nem disso, vai tratar com remédio.
+- [53:42.70] **creator**: Eu já vi casos muito piores, porque as meninas estão com o filho hoje.
+- [53:46.70] **creator**: Uhum.
+- [53:47.70] **creator**: E pronto, cara, deu assim uma tranquilidade tão grande, entendeu? Pra ela.
+- [53:51.70] **creator**: Sim.
+- [53:52.70] **creator**: E pra gente realmente não foi papo, cara, realmente tratou bem, entendeu?
+- [53:56.70] **creator**: Hoje... hoje eu também sou cabreiro, a não ser que seja uma coisa muito...
+- [54:02.70] **creator**: muito...
+- [54:05.70] **creator**: concreta, entendeu? A não ser que seja algo muito concreto de eu ver no exame que é aquilo.
+- [54:10.70] **creator**: Aham.
+- [54:23.70] **creator**: Exatamente.
+- [54:27.70] **creator**: Uhum.
+- [54:31.70] **creator**: Aí, há uma segunda opinião, uma terceira opinião, se for o caso de precisasse fazer alguma coisa, né?
+- [54:38.70] **creator**: Que graça do rei Prismas caso precisasse.
+- [54:41.70] **creator**: Então, acho que todo procedimento que você tem que fazer, se for, né? Você fazer um procedimento, você tem que ter uma segunda ou terceira opinião.
+- [54:48.70] **creator**: Exatamente Eu eu h muito tempo eu sou cabreiro at porque eu sempre me informei sempre li sempre Acho que n tem ningu pra cuidar da sa de mais medos A o diagn aceito Se eu for fazer um exame de rotina e n der nada e eu n estiver sentindo nada
+- [55:11.00] **creator**: Uhum. Mas se eu fizer...
+- [55:13.00] **creator**: Mas se eu tô sentindo alguma coisa e no exame não acusou,
+- [55:16.00] **creator**: repetir o exame, trocar de médico até descobrir o que é.
+- [55:20.00] **creator**: Exatamente. Aí... aí, ah, não... é...
+- [55:23.00] **creator**: Não tem nada. Tem, que eu tô sentindo.
+- [55:26.00] **creator**: Exato.
+- [55:56.00] **creator**: Porque é o correto, quando se trata de ser humano, quando se trata de médico, o erro médico é muito comum. Ainda mais com os médicos que estão chegando agora, né?
+- [56:12.00] **creator**: Os médicos que estão chegando.
+- [56:15.00] **creator**: E o corpo humano, por melhor que seja o médico, eu acho que a pessoa tem que prestar mínima atenção no que o corpo dela fala.
+- [56:25.00] **creator**: Eu tive um caso meu aí de dois, três anos atrás. Eu comecei a ter uma dor no joelho, mas não era uma dor constante, era uma dor no movimento, quando eu agachava.
+- [56:41.00] **creator**: E aquela dor começou a incomodar, começou a aumentar, aí eu procurei um ortopedista.
+- [56:52.00] **creator**: Eu fui em dois ortopedistas. No segundo, eu já tinha feito radiografia do joelho, eu já tinha feito ultrassonografia.
+- [57:06.00] **creator**: E não aparecia nada, não tinha problema nenhum. Aí o que o médico recomenda? Fisioterapia.
+- [57:15.00] **creator**: Aí os caras já colocam na culpa da idade e botam pra fisioterapia. Comecei a fazer fisioterapia, até melhorava um pouco, mas não resolvia.
+- [57:27.00] **creator**: A continuei insistindo com esse segundo m Num dia do nada ele pega a minha receita pra eu tomar vitamina D12
+- [57:41.00] **creator**: Eu até questionei ele, falei pra ele, mas doutor, eu faço os periódicos aí...
+- [57:47.00] **creator**: E as vitaminas D12 que saem lá no pedido do exame, tá tudo normal.
+- [57:53.00] **creator**: Ele falou, tá, mas toma a vitamina D12.
+- [57:58.00] **creator**: Eu fui que nem tirar com a mão, acabou a dor no meu joelho.
+- [58:03.00] **creator**: É... Aí eu voltei nele pra perguntar, né?
+- [58:09.00] **creator**: Doutor, não deu nada no exame, não tinha problema nenhum.
+- [58:14.00] **creator**: Ah, duas coisas que ele falou. Ele falou pra eu tomar vitamina B12 e comer muito ovo.
+- [58:19.00] **creator**: Coma ovo como se não houvesse amanhã.
+- [58:22.00] **creator**: E eu fiz essas duas coisas e acabou meu problema no joelho.
+- [58:27.00] **creator**: É, eu voltei nele e perguntei, doutor, mas...
+- [58:31.64] **creator**: Nunca tive problema, nunca deu nos meus exames deficiência de vitamina B.
+- [58:37.64] **creator**: O que que resolveu o problema?
+- [58:40.64] **creator**: A resposta dele.
+- [58:42.64] **creator**: O exame clínico se sobrepõe ao exame...
+- [58:47.64] **creator**: Da experiência?
+- [58:49.64] **creator**: É, foi o exame clínico se sobrepõe ao exame...
+- [58:54.64] **creator**: De máquina.
+- [58:57.00] **creator**: Resolveu. Continua fazendo.
+- [59:01.00] **creator**: É. Mas é isso, é experiência, cara.
+- [59:05.00] **creator**: Dependendo do médico...
+- [59:07.00] **creator**: Porque o... Não é porque o médico é velho é bom, mas quando ele é um bom médico e ele é velho...
+- [59:14.00] **creator**: Velho, exatamente.
+- [59:15.00] **creator**: Entendeu? Porque ter um médico velho, ruim.
+- [59:18.00] **creator**: Mas quando ele é um bom médico e ele é velho quando ele ar duas coisas, aí é bom.
+- [59:25.00] **creator**: Ele é bom. Exatamente.
+- [59:27.00] **creator**: Ele é bom quando ele é as duas coisas.
+- [59:29.00] **creator**: Exatamente.
+- [59:31.00] **creator**: Eu sei que eu fiquei bem impressionado e satisfeito, né?
+- [59:35.00] **creator**: Porque era um negócio que tava parecendo velho, né?
+- [59:37.00] **creator**: Eu agachava pra levantar,
+- [59:39.00] **creator**: só pra me apoiar e segurar em algum lugar pra levantar.
+- [59:43.00] **creator**: É, mas você começa a entender,
+- [59:45.00] **creator**: porque... ó, eu mesmo,
+- [59:47.00] **creator**: acredito que eu tô aprendendo a entender meu corpo agora,
+- [59:50.00] **creator**: depois de mais de 30.
+- [59:52.00] **creator**: Mas é assim mesmo.
+- [59:54.00] **creator**: Porque, tipo assim, eu sentia febre, eu não prestava atenção que eu tava com febre.
+- [59:58.00] **creator**: Uhum.
+- [59:59.00] **creator**: Eu sentia dor incomodável, tipo assim, não ligava.
+- [61:00.00] **creator**: Entendeu? Não trabalhar muito...
+- [61:02.96] **creator**: É um trabalhozinho básico mesmo, só pra...
+- [61:06.40] **creator**: Pra não ficar sem fazer nada, tá entendendo?
+- [61:09.84] **creator**: Pegar um trabalhinho ali, otacular pra fazer...
+- [61:13.40] **creator**: Entendeu? Participar aqui da promovaweb, pronto.
+- [61:16.80] **creator**: Aham.
+- [61:17.80] **creator**: Só isso, porque...
+- [61:20.80] **creator**: Não dá, não dá mais pra mim...
+- [61:24.00] **creator**: Bater cabeça, já também não tenho mais a mesma coragem, a mesma disponibilidade...
+- [61:28.80] **creator**: E aí já tem...
+- [61:30.80] **creator**: Menos stress, sem dúvida, mais saúde.
+- [61:32.80] **creator**: Não tem jeito.
+- [61:36.80] **creator**: Espero que...
+- [61:40.80] **creator**: Eu sei que meu filho vai reclamar muito,
+- [61:44.80] **creator**: né? Mas isso aí não vai
+- [61:46.80] **creator**: interferir em nada na minha vida, porque...
+- [61:48.80] **creator**: Eu já não tenho sucessor
+- [61:50.80] **creator**: de todo jeito.
+- [61:54.80] **creator**: Se eu vou ter herdeiro
+- [61:56.80] **creator**: É... ou não... porque um herdeiro eu vou ter, né?
+- [61:59.80] **creator**: Uhum.
+- [62:00.80] **creator**: Alguém vai herdar, né?
+- [62:02.80] **creator**: Sim.
+- [62:03.80] **creator**: Mas... a não ser que eu acabe tudo daqui pra lá, né?
+- [62:06.80] **creator**: Mas o que sobrar, alguém vai herdar.
+- [62:10.80] **creator**: Mas já que eu não vou ter sucessor, tanto faz de quem vai ser o herdeiro.
+- [62:14.80] **creator**: Ah, eu sou a favor de gastar tudo. Chega uma certa hora da vida que é melhor gastar do que deixar.
+- [62:20.80] **creator**: Se eu fiz o que fica, vai ter que fazer também.
+- [62:23.80] **creator**: É...
+- [62:24.80] **creator**: Sou muito a favor Apesar que sou suspeito n Porque n vou ter dedo nenhum n Algu vai herdar o governo por exemplo por isso que eu pretendo Eu pretendo torrar tudo antes de
+- [62:39.96] **creator**: Alguém vai herdar. Tu não tem nenhum parente vivo?
+- [62:44.30] **creator**: Parente descendente nenhum. Nem lateralidade. Não tenho irmão também. Os irmãos vão morrer.
+- [62:49.70] **creator**: Ah, então tu é realmente o último.
+- [62:52.10] **creator**: Exatamente.
+- [62:53.10] **creator**: É, e os teus irmãos também não tiveram filho?
+- [62:57.10] **creator**: Tiveram, mas... eu não quero nem saber dos filhos deles.
+- [63:03.10] **creator**: Ai... porque vai herdar o vizinho.
+- [63:06.10] **creator**: Exatamente.
+- [63:08.10] **creator**: Ai... é, cara, realmente é...
+- [63:13.10] **creator**: Aí faz que nem a velhinha que fez o acordo com o cara, né?
+- [63:19.10] **creator**: Que ela...
+- [63:23.10] **creator**: Que ele ia pagar tanto por mês pra ela, pra na hora que ela morrer, ele herdar as coisas.
+- [63:29.10] **creator**: Aham.
+- [63:30.10] **creator**: E o cara morreu antes dela.
+- [63:35.10] **creator**: Não tem ninguém pra herdar, tu vai herdar. Tu só vai me dar X por mês pra mim sobreviver.
+- [63:41.10] **creator**: Sim.
+- [63:42.10] **creator**: Não posso vender minha casa, porque senão eu vou ficar de aluguel.
+- [63:45.10] **creator**: Sim.
+- [63:46.10] **creator**: Então, só quero que tu me dê tanto por mês que quando eu morrer é teu.
+- [63:50.90] **creator**: É teu, aí o cara vai primeiro.
+- [63:52.90] **creator**: Aí o cara vai primeiro, só...
+- [63:54.90] **creator**: Tem que começar a fazer esses acordos, né?
+- [63:56.90] **creator**: Ah, sacanagem...
+- [64:00.90] **creator**: É, tem que começar a fazer esses acordos, porque esses são os acordos que tão certos, né?
+- [64:04.90] **creator**: É, exatamente. É bem por aí, esse negócio.
+- [64:07.90] **creator**: Me deu uma ideia, né?
+- [64:08.90] **creator**: É?
+- [64:09.50] **creator**: De fato.
+- [64:10.30] **creator**: De uma delícia.
+- [64:11.30] **creator**: Oh... Você não conhece meu... como é que é o nome?
+- [64:19.30] **creator**: Oh, vender rifa pro cara se tornar meu... é...
+- [64:23.30] **creator**: Sucessor.
+- [64:25.30] **creator**: É, bem usufruto, acho que é o seu nome, né? Que o cara... que você fica tão bem até morrer.
+- [64:32.30] **creator**: Agora, mudando de áreas para o lugar, Zé Nelson, como é que tá o nosso produto aí? Já evoluiu?
+- [64:44.30] **creator**: Cara, eu tô metendo o... o... o feibo nele.
+- [64:51.30] **creator**: me tira uma d Voc falou aquele dia que a gente tava conversando n sei se eu entendi direito Voc disse que n d pra isolar o cara o investimento o cara n consegue tirar Eu n entendi isso direito
+- [65:09.00] **creator**: Eu não entendi também não, o que você falou.
+- [65:12.00] **creator**: Explica isso melhor.
+- [65:14.00] **creator**: Ó, aqui mesmo eu tô rodando nele, eu tô rodando ele no Fable, ó. Tá vendo aí?
+- [65:19.00] **creator**: Tô só esperando dar meio dia aqui, agoniado esperando dar meio dia pra voltar o...
+- [65:25.40] **creator**: Que ele tá justamente fazendo uma análise de projeção pra ver se pode melhorar ainda, entendeu?
+- [65:32.96] **creator**: Sim.
+- [65:33.88] **creator**: Que é justamente o que ele tá fazendo, tá pegando o que a gente tem hoje, né?
+- [65:38.80] **creator**: Ó, o plano principal hoje, ele tá dando 54 a 57 por ano.
+- [65:45.68] **creator**: Certo.
+- [65:46.76] **creator**: Entendeu?
+- [65:47.84] **creator**: Aham.
+- [65:48.68] **creator**: É... aí, é... tem várias ideias aqui testadas, entendeu? Também que dão outros valores, só que esse aqui atualmente é o melhor.
+- [65:59.24] **creator**: Uhum.
+- [65:59.84] **creator**: Entendeu? Aí, o que que eu quero fazer? Eu quero agregar mais ideias junto com essa daqui pra aumentar essa margem.
+- [66:06.88] **creator**: Sim.
+- [66:08.60] **creator**: Entendeu?
+- [66:10.60] **creator**: A gente tem uma margem segura hoje de 54% a 57%, o que já é muito bom, né?
+- [66:18.68] **creator**: Agora, a gente tá na margem... É bruta ou é líquida?
+- [66:23.34] **creator**: Líquida.
+- [66:24.54] **creator**: É líquida já? Líquida.
+- [66:26.54] **creator**: Então tá excelente.
+- [66:27.54] **creator**: A gente tem até estratégia de como pagar a operação.
+- [66:32.38] **creator**: Sim. Por exemplo, tem uma moeda que é da própria Binance,
+- [66:36.58] **creator**: que se você pagar nela, a operação fica mais barata, entendeu?
+- [66:41.98] **creator**: Uhum. Tipo assim, a taxa, se você pagar com ela, fica mais barata.
+- [66:45.48] **creator**: E aí o próprio sistema vai fazer a operação, ele tem lá, tipo, todo o tempo 5 dólares dessa moeda,
+- [66:51.72] **creator**: que é pra pagar as operações até pra diminuir o... o valor de operação, entendeu?
+- [66:56.80] **creator**: Sim.
+- [66:57.60] **creator**: Aí o dinheiro tá parado, vai pro... pro... pro... pro... pra... vou dizer assim, pro CDB da... da...
+- [67:06.72] **creator**: da Binance, entendeu?
+- [67:08.36] **creator**: Vai pro CDB da Binance.
+- [67:10.60] **creator**: E aí eu tô testando várias outras ideias, entendeu?
+- [67:15.48] **creator**: É, pra ver... o que que a gente consegue agregar. Aqui ele rodou pra caramba, ele rodou com 16 agentes, me com...
+- [67:25.80] **creator**: Aqui ele parou duas vezes pra te ter uma ideia Ele atingiu o limite aqui Uhum E atingiu o limite aqui De novo sem completar de tanto de tanto agente que rodou Foi uma conversa curta que nem tu t vendo entendeu
+- [67:44.00] **creator**: Aham.
+- [67:45.00] **creator**: Foi uma conversa muito curta, ó. Mas que gastou uma quantidade massiva de... de token, entendeu?
+- [67:55.00] **creator**: Aham.
+- [67:56.00] **creator**: Porque aqui ele não vai... ele não vai abrir aqui...
+- [68:01.00] **creator**: Porque eu não... ele não vai abrir aqui porque eu não...
+- [68:05.00] **creator**: Ele só aparece aqui quando tá rodando, né? Os agentes. No momento ele tá parado, tá sem crédito.
+- [68:12.00] **creator**: Mas ele tava rodando 16 agentes, valendo pra... pra ver se a gente consegue fundir as estra... Ah, tá aqui, ó.
+- [68:21.00] **creator**: Isso aqui foi o primeiro, que foi o que falhou, ó.
+- [68:27.00] **creator**: Que que foi na fusão do negócio dos agentes, aí passou 23 minutos rodando só o... o que ia fundir, né? E já tinha dado um erro em 30 minutos.
+- [68:40.00] **creator**: Uhum. Matemática pura. E muito toque em gasto.
+- [68:47.00] **creator**: Será?
+- [68:49.00] **creator**: Isso aí não poderia ser um produto de investimento em fundos de Bitcoin?
+- [68:54.00] **creator**: Sim, mas é o produto. É isso! Ele não é um... um apostador trade, ele não é um...
+- [69:03.00] **creator**: Ele é um... um investimento que te garante X por ano.
+- [69:12.00] **creator**: Então, se o produto é isso, onde que tá a dificuldade que você tá tendo de divulgar?
+- [70:11.00] **creator**: Sim!
+- [70:12.00] **creator**: E aí, eu não tenho como competir com o cara que tá gritando aos quatro ventos que a estratégia dele dá 2000%. Eu tenho um cara aqui que eu fiz, que é o Ronaldo, que é um parceiro meu,
+- [70:27.00] **creator**: Que ele tem uma estratégia, que ele tem a estratégia dele lá, que a estratégia dele não dá 50% de chance.
+- [70:42.00] **creator**: Que pra ser viável, a minha tem 1% de risco, a dele tem 50%.
+- [70:47.00] **creator**: E ele tem gente lá, tá entendendo?
+- [70:51.00] **creator**: E ele tem gente má.
+- [71:00.00] **creator**: Pois é, a questão é pra mim provar que isso aqui é...
+- [71:06.00] **creator**: É... que isso aqui não é alucinação da IA.
+- [71:11.00] **creator**: Que não é... é...
+- [71:16.00] **creator**: Como é que eu vou dizer?
+- [71:18.00] **creator**: Que não é alucinação da IA.
+- [71:21.00] **creator**: Que n Que n teoria algo matem provado baseado em anos de testes de dados n
+- [71:34.56] **creator**: E está sendo usado agora, eu tenho que ter pelo menos um ano que eu tenha ganhado isso aqui.
+- [71:42.06] **creator**: Olha, está aqui, está aqui minha carteira. Quem quiser pode conferir, está público.
+- [71:47.56] **creator**: Entendeu? Então tem que ter pelo menos um ano que eu tenha ganhado e diga assim, olha, está aqui a prova que eu ganhei o dinheiro, entendeu?
+- [71:57.56] **creator**: Mas não é... até que dá pra fazer dessa forma, entendeu? É... dá pra eu... é... só que eu tenho que fazer parcerias, porque eu não tenho a... a... a desenvoltura de... de vender.
+- [72:12.56] **creator**: ...vender. Entendeu? Você não tem a desenvoltura de vender um produto, quanto mais um produto financeiro. Entendeu? Não tem a desenvoltura de vender.
+- [72:23.40] **creator**: Uhum.
+- [72:23.90] **creator**: Então, tipo assim, hoje... E também não tenho o capital disponível, porque o meu capital tá aqui.
+- [72:33.22] **creator**: Sim.
+- [72:33.72] **creator**: Eu prefiro colocar o meu capital aqui e ganhar 50% dele seguro do que apostar parte dele numa campanha que, tipo assim, que o cara vai me pagar 50 reais na assinatura, 100 reais na assinatura e eu mal vou ganhar o investimento, entendeu? De novo.

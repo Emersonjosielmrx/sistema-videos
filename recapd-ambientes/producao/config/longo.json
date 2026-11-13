@@ -1,0 +1,275 @@
+{
+ "_leia": "Perfil do recap LONGO (deitado), lido pelo bin\\anime-pipeline.py em qualquer máquina (Kaggle/Colab/VPS/PC2/PC1). Dona 25/10/2026: 'os longos estão muito atrás dos Cortes em efeitos, melhorias e narração'. 'efeitos' = o que todo longo ganha (os Cortes já usam). 'por_tipo' = só pra fonte daquele tipo. Variável já definida por fora (ex.: teste) manda mais que este arquivo. Tipo da fonte: 'tipo' no pedido.json (alimentador, pela lista 'canais'), senão palavras do título ('palavras'), senão 'tipo_padrao'.",
+ "efeitos": {
+  "_leia": "ANIME_FX_MOV=1: câmera por trecho (zoom-in, pan, zoom-out) + tremida e clarão na frase de impacto — o mesmo dos Shorts dos Cortes (fx_clips._movimento).",
+  "ANIME_FX_MOV": "1",
+  "ANIME_FX_ZOOM": "0.25",
+  "ANIME_FX_DERIVA": "1",
+  "ANIME_FX_GLITCH": "1",
+  "ANIME_SFX_MAIS": "1",
+  "_leia_28_10": "Dona 28/10 aprovou itens 1-6: ANIME_FX_ZOOM/DERIVA = camera forte dentro da imagem (custo ~0); ANIME_FX_GLITCH = glitch de cor nas frases de impacto; ANIME_SFX_MAIS = sons de acao (fx_detect.FOLEY_LUTA, 16%->40% das frases com som).",
+  "ANIME_FX_BALANCO": "1",
+  "ANIME_FX_PARTICULAS": "0",
+  "ANIME_FX_TRANSICAO": "0",
+  "ANIME_FX_TRANSICAO_CADA": "8",
+  "ANIME_FX_BALANCO_ROT": "1",
+  "ANIME_FX_TREMIDA_TODOS": "0",
+  "ANIME_TROCA_LONGO": "1",
+  "ANIME_FX_BLOOM": "1",
+  "ANIME_FX_BLOOM_CADA": "5",
+  "ANIME_FX_25D": "1",
+  "ANIME_FX_25D_CADA": "5",
+  "_leia_28_10b": "Dona 28/10 aprovou: particulas e transicoes (overlays leves VP9), balanco com rotacao nas lutas, tremida leve em todo trecho, corte na troca de cena no longo.",
+  "_29_10_dona": "partículas/transições de elemento (fogo, água, sombra...) = 'roxo horrível' e 'antigas' — fora; tremida só nas lutas/impactos (não em todo trecho)",
+  "ANIME_FX_DIVISORIA": "1",
+  "ANIME_FX_DIVISORIA_CADA": "3",
+  "_31_10_divisoria": "Dona 31/10: transição do raio MAIS vezes (6 -> 3). Figurinha de meme no canto lateral = ruim; desligada, no lugar entram reações da mascote (_memes_resumo).",
+  "ANIME_MEMES_FIGURINHA": "0",
+  "ANIME_MEMES_FIG_CADA": "5",
+  "ANIME_DUCK_LIMIAR": "0.02",
+  "ANIME_FX_ROSTO": "1",
+  "_30_10_rosto": "Fable 30/10 (dona: efeitos bons do hipercool que custam pouco): zoom-in/zoom-out MIRA o rosto do personagem (YOLOv8 de rosto de anime do hipercool, 1 quadro por trecho, ~1% do tempo). 0 desliga. Backup: longo.json.antes_rosto_30out",
+  "ANIME_PRESET_INTER": "veryfast",
+  "ANIME_PRESET_LEGENDA": "veryfast",
+  "_30_10_velocidade": "Fable 30/10 (dona: 92% por horas): o acabamento do Top Fighter levou 2h45 (junta-trechos 57 min, mascote antiga 42, legenda 57). Junta-trechos (intermediário, crf 20) e legenda em veryfast em vez de fast (~1/3 mais rápido cada). Vazio = como antes.",
+  "CORTES_FALA_DELTA": "10",
+  "_30_10_fala": "Fable 30/10: engenharia reversa (14 vídeos, PADROES_COMUNS): os de 450k-2,1M views falam 200-230 palavras/min; o Pastor deu ~144 (com pausas/memes). Dona já pediu fala mais rápida nos Cortes ('um louco como o kaijime', T9). Clone +10% de velocidade no longo (anime_tts._frase_v2). O respiro entre falas (aprovado pela dona) NÃO mudou. Vazio/0 = como antes.",
+  "ANIME_SPRINT_RESUMO": "1",
+  "_30_10_sprint": "Fable 30/10 (engenharia reversa: topo 25-51 cortes no 1º minuto e 12-18 depois; Pastor 17 no 1º e 41-45 depois): nas frases do resumo de abertura, corte seco a cada 2 s andando pra frente no mesmo momento (fx_clips sprint). 0 desliga.",
+  "ANIME_FX_OBJETO": "1",
+  "ANIME_FX_OBJETO_MAX": "40",
+  "_30_10_objeto": "Fable 30/10 (dona: 'mirar no rosto no zoom; pode ser em objetos importantes naquela hora, como uma poção de cura ou espada'): frase que cita objeto (espada, poção, anel, cristal, carta...) -> Gemini (visão, gateway, 3-7 s) acha o objeto no quadro e o trecho faz zoom-in nele; senão rosto. Máx. 40 por vídeo (~3 min). 0 desliga.",
+  "ANIME_PISCADA_CENSURA": "1",
+  "_31_10_narradores": "Dona 31/10 (bin/anime_tts.revezar): 1º narrador >= REVEZ_PRIMEIRO_FRAC do vídeo; máx. REVEZ_MAX principais; ANIME_PARTICIPACAO = só REVEZ_ESPECIAL_LINHAS frases no meio de um bloco; ANIME_NARRA_PROIBIDA nunca narra.",
+  "REVEZ_PRIMEIRO_FRAC": "0.35",
+  "REVEZ_MAX": "5",
+  "REVEZ_ESPECIAL_LINHAS": "3",
+  "ANIME_PARTICIPACAO": "galvao_bueno,chaves,chaves_chapolin,chapolin_colorado,seu_madruga,chiquinha,pica_pau,gretchen",
+  "ANIME_NARRA_PROIBIDA": "kratos_god_of_war_2018,kratos_ascension,patrick_estrela,capitao_nascimento,ei_nerd",
+  "_31_10_sfx": "Dona 31/10: som de efeito e voz não podem tocar juntos — a voz do trecho espera o SFX acabar (fx_clips.apply_effects_to_cmd, máx. ANIME_SFX_GAP_MAX s). 0 = como antes (mistura).",
+  "_31_10_camera": "Dona 31/10: ANIME_FX_SUAVE = trecho sem rosto (paisagem parada) anda acelerando/freando e flutua de leve; ANIME_FX_MULTIZOOM = 3 zooms secos seguidos no rosto/objeto, 1 a cada ANIME_FX_MULTIZOOM_CADA trechos com alvo (fx_clips._movimento). Amostra: docs/AUDITORIA_E_CORRECOES_31OUT.md.",
+  "ANIME_FX_SUAVE": "1",
+  "ANIME_FX_MULTIZOOM": "1",
+  "ANIME_FX_MULTIZOOM_CADA": "6",
+  "_31_10_1080": "REGRA da dona 31/10: nenhum vídeo sai com menos de 1080p. Sempre ligado no código (fx_subtitles sobe na legenda; anime-pipeline._garantir_1080 confere o arquivo final). Não há chave pra desligar.",
+  "ANIME_SFX_GAP": "1",
+  "ANIME_SFX_GAP_MAX": "1.2",
+  "ANIME_LEGENDA_LEVE": "1",
+  "_leia_04_11_legenda": "04/11 dona: \"a legenda pode simplificar, mas tem que deixar documentado que a outra é melhor e que depois podemos voltar\". ANIME_LEGENDA_LEVE=1 = legenda MIX sem o brilho desfocado (\blur) em volta da palavra, cor chapada no lugar do degradê (2 faixas \\clip) e sem o rastro da palavra anterior. Medido 04/11 (testes_legenda_04nov): 269 s -> 201 s na passada da legenda (-25%; ~-7% no longo). A COMPLETA (=0) É MELHOR VISUALMENTE: voltar pra \"0\" quando a produção folgar. Transições e efeitos NÃO mudam (dona: fazem muita diferença)."
+ },
+ "por_tipo": {
+  "_leia": "manhwa: sem espelho (o espelho inverte o texto dos balões e painéis; os Cortes de manhwa estão sem espelho desde 16/10). Anime segue espelhado (descaracteriza).",
+  "manhwa": {
+   "ANIME_DESCARACT_FLIP": "0"
+  },
+  "anime": {},
+  "_anime_recap_leia": "02/11 dona (parceiros novos @MattzRecaps, @NoteLeyZerandoAnimes, @DuduzivelAnimeRecap): recap de ANIME (temporada/episódios, vídeo em movimento) é VARIANTE própria — título/capa/tags/capítulos por episódio, cuidado maior com Content ID de estúdio. Playbook: docs\\VARIANTE_ANIME_RECAP.md. 1º vídeo: fQTiy7CVMxA (Mattz, 1-12, 2 h).",
+  "anime_recap": {
+   "ANIME_DESCARACT_FLIP": "1",
+   "ANIME_VARIANTE": "anime_recap"
+  }
+ },
+ "cta": {
+  "_leia": "Pedido de inscrição/like no longo (os Shorts dos Cortes já fecham com CTA). 1 frase depois da abertura (depois_da_frase) e 1 no fim, em rodízio estável por vídeo. Só em português (as versões em outras línguas não ganham). ligado=false desliga. 26/10: 'meio' = 1 frase no meio do vídeo (roteiro com 60+ frases).",
+  "ligado": true,
+  "depois_da_frase": 4,
+  "inicio": [
+   "Antes de continuar, se inscreve no canal e ativa o sininho pra não perder a próxima história.",
+   "Se você tá curtindo, já deixa o like e se inscreve, porque essa história só melhora daqui pra frente.",
+   "Rapidinho: se inscreve no canal pra acompanhar as próximas histórias completas como essa."
+  ],
+  "fim": [
+   "E aí, o que você achou dessa história? Comenta aqui embaixo e se inscreve pra ver a próxima.",
+   "Se você curtiu, deixa o like, se inscreve e me conta nos comentários qual história eu conto na próxima.",
+   "Essa foi a história completa. Se gostou, deixa o like e se inscreve no canal pra não perder a próxima!"
+  ],
+  "meio": [
+   "Pausa rápida: se tá curtindo essa história, deixa o like que isso ajuda demais o canal a continuar.",
+   "Antes da parte mais tensa, se inscreve e ativa o sininho, porque daqui pra frente a história vira de vez.",
+   "Se você chegou até aqui, já sabe: o like e a inscrição fazem a gente trazer mais histórias completas assim."
+  ]
+ },
+ "resumo": {
+  "_leia": "Dona 28/10: abertura com RESUMO antes da história ('hoje você vai conhecer X... expulso, traído... depois virou um cara foda' com a imagem de cada momento + gancho que volta pro início). bin/anime-pipeline._resumo_longo; min/max = frases. Só com roteiro_tempos.json. ligado=false desliga.",
+  "ligado": true,
+  "min": 5,
+  "max": 8,
+  "memes": 2
+ },
+ "capitulos": {
+  "_leia": "Capítulos do longo (descrição do YouTube + tarja na tela). Dona 25/10: quando a fonte TEM legenda queimada, a tarja branca dos Cortes cobre a legenda deles e muda a cada capítulo 'como a apresentação de um capítulo' (anime_tarja_capitulo); sem legenda na fonte não há tarja nem borrão. 1 capítulo a cada a_cada_s segundos (no mínimo 4, no máximo max).",
+  "a_cada_s": 300,
+  "max": 24,
+  "parte2": true,
+  "_parte2": "Fable 30/10: o capítulo perto dos 22 min vira \"Comente PARTE 2 pra continuar\" (engenharia reversa G1/Porão, PADROES_COMUNS item 9). false desliga."
+ },
+ "canais": {
+  "@manhwa_fresh": "manhwa"
+ },
+ "palavras": {
+  "manhwa": [
+   "manhwa",
+   "manhua",
+   "webtoon"
+  ]
+ },
+ "tipo_padrao": "anime",
+ "mascote": {
+  "_leia": "26/10 (prompt LONGOS, base item 2): garota-mascote do canal no canto inferior esquerdo do longo deitado, nos começos de capítulo e no CTA do meio (bin/mascote_overlay.overlay_mascote_deitado). ligado=false desliga.",
+  "ligado": true,
+  "max": 8,
+  "_fala": "28/10: os CTAs saem com a voz da mascote = base edge (voz/tom) + CLONE voz_clone por cima (dona: edge puro nunca). Sem clone = narrador.",
+  "fala": true,
+  "voz": "pt-BR-FranciscaNeural",
+  "tom": "+6%,+22Hz",
+  "voz_clone": "moana",
+  "reacoes": true,
+  "reacoes_max": 9,
+  "_31_10_reacoes": "Dona 31/10: figurinha de meme no canto desligada (ANIME_MEMES_FIGURINHA=0); a mascote reage até 6x por vídeo no lugar (era 3)."
+ },
+ "memes_series": {
+  "_leia": "Dona 28/10: falas REAIS curtas de series (Chaves, Julius, Greg...) do arsenal (hipercool-materiais/bin/arsenal_memes.py, corte 1-6 s), tocadas numa brecha (imagem congela, meme toca, video segue) quando a frase da narracao casa um gatilho. a_cada_s = no maximo 1 a cada N s; nunca o mesmo 2x.",
+  "ligado": true,
+  "a_cada_s": 120
+ },
+ "personagens": {
+  "_leia": "Dona 28/10 (item 4): como o Mike, o narrador as vezes faz a VOZ do personagem: a IA escolhe ~1 fala a cada a_cada_s segundos e ela sai com a voz clonada (mesma voz pro mesmo personagem; m/f pelo genero). So com clone (Kaggle). Vozes do cache do Drive (vozes_no_drive.json).",
+  "ligado": true,
+  "a_cada_s": 15,
+  "_31_10": "Dona 31/10: Kratos grave demais pra protagonista — saiu de vozes_m; vozes graves só em monstro/vilão gigante (vozes_monstro, papel 'monstro' que a IA marca).",
+  "_11_11": "Dona 11/11: longos com MAIS falas de personagem (a_cada_s 90 -> 45); meninas fofas e crianças nas falas (vozes_crianca, papel 'crianca'); vozes de inimigo só em vilão (vozes_vilao) e monstro; cada lista é SORTEADA por vídeo (antes saía sempre a 1ª: Vegeta/Jett) para medir quais vozes rendem. Voz nova precisa estar no Drive (colab/vozes_no_drive.json).",
+  "vozes_monstro": [
+   "kratos_god_of_war_2018",
+   "barba_branca",
+   "muzan"
+  ],
+  "vozes_vilao": [
+   "sukuna",
+   "freeza",
+   "enel",
+   "muzan",
+   "shadow_cid",
+   "bills"
+  ],
+  "vozes_crianca": [
+   "anya_forger",
+   "chopper",
+   "goten_gohan_crianca",
+   "pan_dbz",
+   "trunks_crianca"
+  ],
+  "vozes_m": [
+   "vegeta",
+   "sett_lol",
+   "naruto",
+   "thomas_shelby_peaky_blinders",
+   "saitama",
+   "asta",
+   "subaru",
+   "loid_forger",
+   "buggy",
+   "optimus_prime"
+  ],
+  "vozes_f": [
+   "jett_valorant",
+   "ashe_overwatch",
+   "mulher_maravilha",
+   "akali_lol",
+   "bulma",
+   "d_va_overwatch",
+   "rem",
+   "ram",
+   "emilia",
+   "yor_forger"
+  ],
+  "_11_11b": "Dona 11/11 17h ('muito bom os personagens terem voz, tem que acontecer mais vezes'): a_cada_s 45 -> 25 (~2 falas por minuto de história). Voltar: 45.",
+  "_a_cada_obs_1112": "12/11 dona: 'as falas dos personagens sozinhos fora do narrador o máximo possível, fica muito bom' — 25 -> 15 s"
+ },
+ "memes_visuais": {
+  "ligado": true,
+  "imagem_cada": 15,
+  "_31_10_imagem": "Dona 31/10: meme de imagem em TELA CHEIA, rápido (1,2 s + whoosh), depois de frase com emoção, no mínimo a cada imagem_cada frases (~75 s). 0 desliga. memes_visuais.escolher_imagens/montar_imagem.",
+  "_leia": "29/10 dona: memes visuais como o hipercool — figurinha estampada (ANIME_MEMES_FIGURINHA) e meme em tela cheia com som depois de fala de emoção forte (~1/min)"
+ },
+ "ganchos": {
+  "_leia": "Fable 30/10 (engenharia reversa: Porão 482k + PADROES_COMUNS item 7): mini-gancho do narrador a cada a_cada_s segundos provocando o que vem (1 chamada à IA, cadeia de modelos vivos). Testado no roteiro do Pastor: 5 ganchos bons. ligado=false desliga; o melhorador pode testar A/B.",
+  "ligado": true,
+  "a_cada_s": 900
+ },
+ "ab_fatores": {
+  "_leia": "Fable 30/10 (dona: 'não precisa ser só A/B, pode ter C, D, E, F; zoom em rosto e objeto, reação da mascote, aviso de censura e Comente PARTE 2 sempre'). Cada pedido sorteia UMA variante por fator (md5 do pid + fator, independente e fixa; quantas letras o fator tiver) no cliente.enviar -> longo_override + pedido['ab'] -> pronto.json/render.json -> longos_postados.json. A = como era antes. titulo_triade é aplicado na postagem.",
+  "fala_rapida": {
+   "A": {
+    "efeitos.CORTES_FALA_DELTA": "0"
+   },
+   "B": {
+    "efeitos.CORTES_FALA_DELTA": "5"
+   },
+   "C": {
+    "efeitos.CORTES_FALA_DELTA": "10"
+   },
+   "D": {
+    "efeitos.CORTES_FALA_DELTA": "15"
+   },
+   "E": {
+    "efeitos.CORTES_FALA_DELTA": "20"
+   }
+  },
+  "ganchos_15min": {
+   "A": {
+    "ganchos.ligado": false
+   },
+   "B": {
+    "ganchos.ligado": true,
+    "ganchos.a_cada_s": 900
+   },
+   "C": {
+    "ganchos.ligado": true,
+    "ganchos.a_cada_s": 600
+   }
+  },
+  "cortes_resumo": {
+   "A": {
+    "efeitos.ANIME_SPRINT_RESUMO": "0"
+   },
+   "B": {
+    "efeitos.ANIME_SPRINT_RESUMO": "1"
+   }
+  },
+  "titulo_triade": {
+   "A": {},
+   "B": {}
+  }
+ },
+ "prioridade_canais": [
+  "Fio da Meada",
+  "inovare manhwa br",
+  "Animescomia",
+  "InovareManhwaVerse",
+  "InventoReact"
+ ],
+ "_prioridade_canais": "03/11 dona: manhwa br (boas views) 1º, depois HistoriasEmFrames — sempre depois dos canais com 0 longo | 05/11 (dona: longos com 0 views, \"faça todas as possíveis\"): Studio mostrou 13-14 impressões/semana nos longos (CTR 7-14%, 12 min média) — sem público. Na frente os canais cujos SHORTS têm público (mediana 2-7 dias: Fio da Meada 1295, HistoriasEmFrames 274) e os longos que mais renderam (inovare br 24 v, InventoReact 10). | 06/11 ranking dos 52 longos (views públicas): Fio da Meada 76 (o de 05/11 já 54 em <1 dia), inovare br 38, Animescomia 21, InovareManhwaVerse 19, InventoReact 10/2 longos. Zerando: CartuchoReact 1, Manhwa Noturno 6, CenaReact 10/5, Dorama Noturno 11/5 (4 com <=1).",
+ "canais_bloqueados": [
+  "novo_assistiainvestimentos"
+ ],
+ "_canais_bloqueados": "05/11 08:42: Assist-IA Investimentos — o YouTube tirou os RECURSOS AVANÇADOS ('acreditamos que você violou as políticas; pedir de novo em 29/11/2026; se confirmarmos que está tentando burlar, podemos encerrar a conta'). Longo não sobe lá (o envio falhava no título) e insistir parece burla. Print: postador-de-videos\\logs\\yt_web61105_084227_bloqueio_conta.png. Tirar daqui só depois de 29/11, com a dona.",
+ "canais_minimo": [],
+ "_canais_minimo": "06/11 dona (\"ver se compensa voltar aos outros que não estão dando nada\"): esses recebem longo só depois que os da prioridade tiveram o do dia (máx 1 por 3 dias). Ver postar_longos._ordem. | 07/11: substituído pelos pesos_canais (todos recebem, proporcional).",
+ "pesos_canais": {
+  "_leia": "07/11 dona: 'invista mais na Fio da Meada; dobre os que vão bem; o melhor triplique; fila pra todos mas proporcional às views'. Peso = longos por rodada relativo aos outros (vez de quem tem menos longos-hoje/peso). Ranking 07/11: Fio 49 v/longo (6x o 2º) -> 3; inovare br/Verse/Invento 7-9 -> 2; resto 1; Cartucho/ManhwaReact 0,5 (poucos dados). Recalcular com o ranking novo.",
+  "Fio da Meada": 3,
+  "inovare manhwa br": 2,
+  "InovareManhwaVerse": 2,
+  "InventoReact": 2,
+  "HistoriasEmFrames": 1,
+  "Animescomia": 1,
+  "Assist-IA Investimentos": 1,
+  "Dorama Noturno": 1,
+  "Curiosidades Noturnas": 1,
+  "ForjaReact": 1,
+  "CenaReact": 1,
+  "Manhwa Noturno": 1,
+  "CartuchoReact": 0.5,
+  "ManhwaReact": 0.5
+ }
+}

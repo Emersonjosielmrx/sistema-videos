@@ -1,0 +1,199 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 13-50-45.mp4",
+ "duration": 95.4,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 714,
+  "has_webcam": true,
+  "contrast": 63.8,
+  "trimmed": {},
+  "divider": 361,
+  "webcam": [
+   0,
+   0,
+   720,
+   361
+  ],
+  "content": [
+   0,
+   361,
+   714,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto sobre cena de anime/manhwa com tema de devorar braço, tem algumas reações mas pouco conteúdo verbal do criador e muitos silêncios longos.",
+  "topic": "Personagem pré-histórico que devora braço de outro personagem",
+  "channel": "manhwareact",
+  "work": "BAKI",
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 35.36,
+    "hook": "O CARA VIROU CARNE SECA!",
+    "title": "O cara DEIXOU ser devorado?! 😱🍖 #shorts #baki",
+    "description": "O criador reage à cena insana do Baki onde o cara pré-histórico devora o braço do oponente e ele simplesmente DEIXA acontecer! 😳\nVocê teria coragem de enfrentar esse monstro?\nSegue pra mais reacts insanos de anime!\n\n#shorts #react #baki #anime #luta #cenainsana #reactanime #mangá #reactbrasil #animetiktok #animebrasil #otaku #hype #brutal",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#baki",
+     "#anime",
+     "#luta",
+     "#cenainsana",
+     "#reactanime",
+     "#mangá",
+     "#reactbrasil",
+     "#animetiktok"
+    ],
+    "tags": [
+     "react",
+     "baki",
+     "anime",
+     "luta",
+     "pickle",
+     "pré-histórico",
+     "devora braço",
+     "cena insana",
+     "react anime",
+     "react baki",
+     "anime brasil",
+     "otaku",
+     "mangá",
+     "carne seca",
+     "react brasil",
+     "anime react"
+    ],
+    "keywords": [
+     {
+      "t": 1.5,
+      "text": "PRÉ-HISTÓRICO",
+      "emoji": "🦴"
+     },
+     {
+      "t": 15.5,
+      "text": "DEVORA",
+      "emoji": "😱"
+     },
+     {
+      "t": 31.0,
+      "text": "CARNE SECA",
+      "emoji": "💀"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 9.0,
+      "type": "shock"
+     },
+     {
+      "t": 30.5,
+      "type": "laugh"
+     }
+    ],
+    "memes": [
+     {
+      "t": 15.5,
+      "id": 7
+     },
+     {
+      "t": 31.0,
+      "id": 40
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Você deixaria alguém te devorar numa luta? 😳",
+    "title_alternatives": [
+     "Ele DEIXOU o braço ser devorado?! 😳🦴 #shorts #baki",
+     "O pré-histórico transformou o cara em CARNE SECA 💀 #shorts #anime"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 55.18,
+    "end": 63.84,
+    "why": "Silêncio longo sem fala do criador nem conteúdo relevante"
+   },
+   {
+    "start": 35.36,
+    "end": 55.17,
+    "why": "Silêncio longo e trecho sem fala do criador, cortado para caber no Short"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_13_50_45\\2026_10_07_13_50_45.mp4",
+   "duration": 20.588167,
+   "keeps": 11,
+   "meta": {
+    "hook": "O CARA VIROU CARNE SECA!",
+    "title": "O cara DEIXOU ser devorado?! 😱🍖 #shorts #baki",
+    "description": "O criador reage à cena insana do Baki onde o cara pré-histórico devora o braço do oponente e ele simplesmente DEIXA acontecer! 😳\nVocê teria coragem de enfrentar esse monstro?\nSegue pra mais reacts insanos de anime!\n\n#shorts #react #baki #anime #luta #cenainsana #reactanime #mangá #reactbrasil #animetiktok #animebrasil #otaku #hype #brutal",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#baki",
+     "#anime",
+     "#luta",
+     "#cenainsana",
+     "#reactanime",
+     "#mangá",
+     "#reactbrasil",
+     "#animetiktok"
+    ],
+    "tags": [
+     "react",
+     "baki",
+     "anime",
+     "luta",
+     "pickle",
+     "pré-histórico",
+     "devora braço",
+     "cena insana",
+     "react anime",
+     "react baki",
+     "anime brasil",
+     "otaku",
+     "mangá",
+     "carne seca",
+     "react brasil",
+     "anime react"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Você deixaria alguém te devorar numa luta? 😳",
+    "title_alternatives": [
+     "Ele DEIXOU o braço ser devorado?! 😳🦴 #shorts #baki",
+     "O pré-histórico transformou o cara em CARNE SECA 💀 #shorts #anime"
+    ],
+    "work": "BAKI",
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_13_50_45\\2026_10_07_13_50_45_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk das Winx.mp3",
+   "removed_pct": 41.8,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 20.57,
+    "lufs": -14.2
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 223.6
+}

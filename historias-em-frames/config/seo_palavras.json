@@ -1,0 +1,123 @@
+{
+ "_leia": "Banco de palavras de busca pro gerador de SEO (bin/seo_generator.py). Fonte: autocompletar da busca do YouTube pt-BR (suggestqueries client=youtube hl=pt-BR, sem chave), refeito em 16/10/2026 pros gêneros que a produção faz. Fora de propósito: buscas infantis/'para crianças' e nomes de marcas/pessoas.",
+ "sempre": [
+  "história",
+  "história real",
+  "história de terror",
+  "história assustadora",
+  "creepypasta",
+  "shorts",
+  "história curta"
+ ],
+ "padroes_reais": [
+  "história de terror real",
+  "história assustadora que aconteceu de verdade",
+  "ela ouviu batidas na porta mas morava sozinha",
+  "ele acordou às 3h e viu algo na janela",
+  "história de superação que vai te emocionar",
+  "ela foi humilhada mas se vingou",
+  "história real que vai te arrepiar",
+  "creepypasta assustadora",
+  "história de terror verdadeira",
+  "história que aconteceu comigo",
+  "história de terror fatos reais",
+  "história de terror para não dormir a noite",
+  "história de superação de vida real",
+  "história de superação financeira",
+  "história de fé e superação",
+  "história de amor emocionante",
+  "histórias engraçadas e curtas",
+  "ela descobriu a verdade depois de anos",
+  "história triste que vai te fazer chorar"
+ ],
+ "generos": {
+  "terror": [
+   "terror",
+   "assustador",
+   "arrepiante",
+   "medo",
+   "pânico",
+   "perturbador",
+   "sombrio",
+   "sinistro",
+   "bizarro",
+   "creepypasta",
+   "sobrenatural",
+   "fantasma",
+   "mal-assombrado",
+   "3h da manhã",
+   "entidade",
+   "fatos reais",
+   "para não dormir",
+   "história de terror real"
+  ],
+  "superacao": [
+   "superação",
+   "motivação",
+   "inspiração",
+   "emocionante",
+   "motivacional",
+   "lição de vida",
+   "nunca desista",
+   "força",
+   "coragem",
+   "vencedor",
+   "realizou o sonho",
+   "transformação",
+   "vitória",
+   "superação de vida",
+   "vida real",
+   "superação financeira",
+   "empreendedorismo"
+  ],
+  "drama": [
+   "drama",
+   "história de drama",
+   "história emocionante",
+   "história triste",
+   "segredo",
+   "verdade revelada",
+   "traição",
+   "família",
+   "emocionante",
+   "vai te fazer chorar",
+   "lição de vida"
+  ],
+  "romance": [
+   "história de amor",
+   "romance",
+   "amor verdadeiro",
+   "casal",
+   "se apaixonou",
+   "reencontro",
+   "amor impossível",
+   "história de amor emocionante",
+   "destino"
+  ],
+  "comedia": [
+   "história engraçada",
+   "histórias engraçadas e curtas",
+   "comédia",
+   "engraçado",
+   "hilário",
+   "situação absurda",
+   "não aguentei de rir"
+  ],
+  "religioso": [
+   "história de fé",
+   "história de fé e superação",
+   "fé",
+   "Deus",
+   "milagre",
+   "oração",
+   "gratidão",
+   "história de fé na bíblia",
+   "propósito"
+  ]
+ },
+ "estilos_titulo": {
+  "busca": "frase no padrão do que o público digita (ver padroes_reais), com 3-5 palavras buscadas, tom de 'ela fez X e aconteceu Y'",
+  "provocacao": "provocação curiosa/assustadora (ex.: NÃO OLHE, O QUE ELA VIU, ISSO É REAL) + 2-3 palavras buscadas",
+  "curiosidade": "pergunta ou revelação chocante + 2-3 palavras buscadas"
+ }
+}

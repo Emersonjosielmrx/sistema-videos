@@ -1,0 +1,25 @@
+{
+ "_leia": "12/11 dona: 'o pesquisador procura muita coisa que não usamos, aí é lixo; oriente o que ele pode pesquisar e o que não'. O motor lê este arquivo a cada volta. 'nao_pesquisar' = área cujo id/nome casar NÃO é pesquisada nem aceita como área nova. 'foco' = área que casar vai NA FRENTE (na ordem da lista: 1ª linha = mais importante). 'texto' vai em todo pedido. PESQUISADOR_ORIENTACAO=0 desliga tudo isto. Medido em 12/11: 1210 reprovados x 4 implantados; os 4 implantados eram IDEIAS simples de ffmpeg/YouTube (0 a 5 estrelas), nenhum modelo de IA.",
+ "foco": [
+  "recap|mais_vist|garimp|tendenc|trend|concorrent|nicho",
+  "idioma|lingua|traduc|dublag|multiling|legenda_traduz|canal_estrang|localiz",
+  "serie|compil|playlist|sequenc|parte_|maratona|binge|sessao",
+  "titulo|thumb|capa|miniatura|ctr|clique",
+  "retenc|gancho|hook|abertura|primeiros_|queda_|abandono|ritmo",
+  "impress|distribu|canal_novo|recomend|algoritm|ponte_short|funil",
+  "meme|piada|humor|fala|personag|dialog|roteiro|storytelling",
+  "celular|termux|android|arm|ffmpeg|encode|render_|qsv|vaapi|segment|concat|disco|rclone|drive",
+  "politica|monetiz|reutiliz|inautent|direitos|claim|copyright|strike|rotulo_ia"
+ ],
+ "nao_pesquisar": [
+  "tts|rvc|f0|pitch|voz|vozes|vocoder|codec_audio|prosod|g2p|homograf|deesser|chatterbox|kokoro|piper|xtts|cosyvoice|sovits|f5_|qwen|voxcpm|meanvc|mvc_|paraling|nao_verbais|risada_ia|clone",
+  "intel_uhd|directml|igpu|gguf|destil|distill|cuda|onnx|openvino|tensorrt|quantiz|fp16|fp8|int8|bf16|_t4$|_t4_|^t4_|turing|sglang|vllm|sdpa|flash_?att|attn_|vram|kernel_|driver",
+  "lora|finetun|fine_tun|treino|treinar|dataset|corpus|corpora|bench|paper|artigo|survey|probe|embedding|conformal|sintetico_controle|entropack|tensor",
+  "licenc|clausula|_aup$|termos_de_uso_modelo|consentimento",
+  "mos_|_mos|nisqa|utmos|metric_|metrica_de_modelo|naturalness",
+  "comfy|node_|hunyuan|ltx|wan2|minimax|stability|diffus|controlnet|ip_adapter",
+  "wasm|webgpu|rust_|golang|docker|k8s|ci_|lint|schema_|sdk_|mcp_|worklet|navegador_audio",
+  "yolo|detr|paddle|landmark|pose_|segmenta_modelo"
+ ],
+ "texto": "ORIENTAÇÃO DA DONA (12/11) — o que SERVE e o que é LIXO para nós.\nSERVE (traga isto): ideias e truques PRONTOS PARA USAR hoje em Python + FFmpeg + yt-dlp + YouTube/TikTok, que rendam MAIS VIEWS ou MAIS VÍDEOS por dia: (1) como achar os vídeos/recaps MAIS VISTOS para recapar (qualquer canal, anime/manhwa/outros) e tendências; (2) títulos, capas e os primeiros 30 s que seguram o público; (3) séries, compilados e playlists que fazem a pessoa ver o próximo; (4) vídeo longo em OUTRAS LÍNGUAS (tradução do roteiro, canais estrangeiros, o que muda por país); (5) distribuição/impressões de canal novo e ponte Short->longo; (6) roteiro: memes, piadas, falas de personagem; (7) render mais rápido/leve em PC fraco e em CELULAR Android (Termux/FFmpeg), usar todas as máquinas, liberar disco; (8) regras oficiais do YouTube que nos afetem. Projeto pequeno (0 estrelas) com uma IDEIA boa vale mais que modelo famoso: os 4 achados que implantamos eram assim.\nLIXO (NÃO traga, não cite, não sugira como área nova): modelo de IA novo para treinar/rodar (TTS, clonagem de voz, RVC, difusão, LoRA, ComfyUI, detector, upscaler pesado); otimização de GPU/ONNX/OpenVINO/quantização; dataset, benchmark, paper, métrica de laboratório; discussão de licença de pesos; biblioteca que só REESCREVE o que o ffmpeg já faz; ferramenta de navegador/JS/Rust/Docker; app de desktop com tela; qualquer coisa que exija GPU fora do Kaggle. Voz e efeitos estão CONGELADOS pela dona.\nCada item tem que dizer em 1 linha: 'onde entra no nosso pipeline e o que a dona veria de diferente'. Se não souber dizer, não traga. Prefira 5 itens certeiros a 15 fracos.\nAREAS_NOVAS: no MÁXIMO 3, e só dentro dos temas SERVE acima."
+}

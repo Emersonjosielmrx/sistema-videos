@@ -1,0 +1,2086 @@
+[
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_00_0_normal.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_00_0_normal.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.82,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.45,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_01_0_normal.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_01_0_normal.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.82,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.45,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_02_0_engracado.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_02_0_engracado.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.638,
+  "final_st": 0.82,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    2.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.3,
+  "volume_envelope": 0.8
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_03_0_engracado.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_03_0_engracado.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.638,
+  "final_st": 0.82,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    2.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.3,
+  "volume_envelope": 0.8
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_04_0_tensao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_04_0_tensao.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.048,
+  "final_st": -0.5,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    6000.0,
+    -2.0
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.42,
+  "protect": 0.38,
+  "volume_envelope": 0.7
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_05_0_tensao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_05_0_tensao.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.048,
+  "final_st": -0.5,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    6000.0,
+    -2.0
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.42,
+  "protect": 0.38,
+  "volume_envelope": 0.7
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_06_0_terror.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_06_0_terror.wav",
+  "tom_extra": -1,
+  "f0_escala": 0.852,
+  "final_st": -1.0,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    180.0,
+    1.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    5000.0,
+    -3.0
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    10000.0,
+    -5.0
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.45,
+  "volume_envelope": 0.6
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_07_0_terror.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_07_0_terror.wav",
+  "tom_extra": -1,
+  "f0_escala": 0.852,
+  "final_st": -1.0,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    180.0,
+    1.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    5000.0,
+    -3.0
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    10000.0,
+    -5.0
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.45,
+  "volume_envelope": 0.6
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_08_0_terror.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_08_0_terror.wav",
+  "tom_extra": -1,
+  "f0_escala": 0.852,
+  "final_st": -1.0,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    180.0,
+    1.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    5000.0,
+    -3.0
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    10000.0,
+    -5.0
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.45,
+  "volume_envelope": 0.6
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_09_0_vilao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_09_0_vilao.wav",
+  "tom_extra": -7,
+  "f0_escala": 0.983,
+  "final_st": -1.2,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    140.0,
+    2.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    -1.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_10_0_acao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_10_0_acao.wav",
+  "tom_extra": 11,
+  "f0_escala": 1.529,
+  "final_st": 2,
+  "eq": [
+   [
+    63.0,
+    -0.1
+   ],
+   [
+    125.0,
+    -2.2
+   ],
+   [
+    250.0,
+    -1.0
+   ],
+   [
+    500.0,
+    0.7
+   ],
+   [
+    1000.0,
+    0.1
+   ],
+   [
+    2000.0,
+    0.5
+   ],
+   [
+    2500.0,
+    1.5
+   ],
+   [
+    4000.0,
+    -0.3
+   ],
+   [
+    8000.0,
+    1.8
+   ],
+   [
+    12000.0,
+    3.8
+   ]
+  ],
+  "index_rate": 0.6,
+  "protect": 0.25,
+  "volume_envelope": 0.85
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_10_1_acao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_10_1_acao.wav",
+  "tom_extra": 11,
+  "f0_escala": 1.529,
+  "final_st": 2,
+  "eq": [
+   [
+    63.0,
+    -0.1
+   ],
+   [
+    125.0,
+    -2.2
+   ],
+   [
+    250.0,
+    -1.0
+   ],
+   [
+    500.0,
+    0.7
+   ],
+   [
+    1000.0,
+    0.1
+   ],
+   [
+    2000.0,
+    0.5
+   ],
+   [
+    2500.0,
+    1.5
+   ],
+   [
+    4000.0,
+    -0.3
+   ],
+   [
+    8000.0,
+    1.8
+   ],
+   [
+    12000.0,
+    3.8
+   ]
+  ],
+  "index_rate": 0.6,
+  "protect": 0.25,
+  "volume_envelope": 0.85
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_10_2_acao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_10_2_acao.wav",
+  "tom_extra": 11,
+  "f0_escala": 1.529,
+  "final_st": 2,
+  "eq": [
+   [
+    63.0,
+    -0.1
+   ],
+   [
+    125.0,
+    -2.2
+   ],
+   [
+    250.0,
+    -1.0
+   ],
+   [
+    500.0,
+    0.7
+   ],
+   [
+    1000.0,
+    0.1
+   ],
+   [
+    2000.0,
+    0.5
+   ],
+   [
+    2500.0,
+    1.5
+   ],
+   [
+    4000.0,
+    -0.3
+   ],
+   [
+    8000.0,
+    1.8
+   ],
+   [
+    12000.0,
+    3.8
+   ]
+  ],
+  "index_rate": 0.6,
+  "protect": 0.25,
+  "volume_envelope": 0.85
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_10_3_acao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_10_3_acao.wav",
+  "tom_extra": 11,
+  "f0_escala": 1.529,
+  "final_st": 2,
+  "eq": [
+   [
+    63.0,
+    -0.1
+   ],
+   [
+    125.0,
+    -2.2
+   ],
+   [
+    250.0,
+    -1.0
+   ],
+   [
+    500.0,
+    0.7
+   ],
+   [
+    1000.0,
+    0.1
+   ],
+   [
+    2000.0,
+    0.5
+   ],
+   [
+    2500.0,
+    1.5
+   ],
+   [
+    4000.0,
+    -0.3
+   ],
+   [
+    8000.0,
+    1.8
+   ],
+   [
+    12000.0,
+    3.8
+   ]
+  ],
+  "index_rate": 0.6,
+  "protect": 0.25,
+  "volume_envelope": 0.85
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_11_0_acao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_11_0_acao.wav",
+  "tom_extra": 11,
+  "f0_escala": 1.529,
+  "final_st": 2,
+  "eq": [
+   [
+    63.0,
+    -0.1
+   ],
+   [
+    125.0,
+    -2.2
+   ],
+   [
+    250.0,
+    -1.0
+   ],
+   [
+    500.0,
+    0.7
+   ],
+   [
+    1000.0,
+    0.1
+   ],
+   [
+    2000.0,
+    0.5
+   ],
+   [
+    2500.0,
+    1.5
+   ],
+   [
+    4000.0,
+    -0.3
+   ],
+   [
+    8000.0,
+    1.8
+   ],
+   [
+    12000.0,
+    3.8
+   ]
+  ],
+  "index_rate": 0.6,
+  "protect": 0.25,
+  "volume_envelope": 0.85
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_11_1_acao.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_11_1_acao.wav",
+  "tom_extra": 12,
+  "f0_escala": 1.529,
+  "final_st": 2,
+  "eq": [
+   [
+    63.0,
+    -0.1
+   ],
+   [
+    125.0,
+    -2.2
+   ],
+   [
+    250.0,
+    -1.0
+   ],
+   [
+    500.0,
+    0.7
+   ],
+   [
+    1000.0,
+    0.1
+   ],
+   [
+    2000.0,
+    0.5
+   ],
+   [
+    2500.0,
+    1.5
+   ],
+   [
+    4000.0,
+    -0.3
+   ],
+   [
+    8000.0,
+    1.8
+   ],
+   [
+    12000.0,
+    3.8
+   ]
+  ],
+  "index_rate": 0.6,
+  "protect": 0.25,
+  "volume_envelope": 0.85
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_12_0_epico.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_12_0_epico.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.441,
+  "final_st": -0.5,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    120.0,
+    1.5
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.8
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_13_0_epico.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_13_0_epico.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.441,
+  "final_st": -0.5,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    120.0,
+    1.5
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.8
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_14_0_triste.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_14_0_triste.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.113,
+  "final_st": -1.5,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    -0.4
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.42,
+  "protect": 0.38,
+  "volume_envelope": 0.7
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_climas_15_0_normal.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_climas_15_0_normal.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.82,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.45,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_00_kokoro.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_00_kokoro.wav",
+  "tom_extra": 10,
+  "f0_escala": 1.33,
+  "final_st": 1.62,
+  "eq": [
+   [
+    63,
+    -0.1
+   ],
+   [
+    125,
+    -2.2
+   ],
+   [
+    250,
+    -1.0
+   ],
+   [
+    500,
+    0.7
+   ],
+   [
+    1000,
+    0.1
+   ],
+   [
+    2000,
+    0.5
+   ],
+   [
+    4000,
+    -0.3
+   ],
+   [
+    8000,
+    1.8
+   ],
+   [
+    12000,
+    3.8
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.36,
+  "volume_envelope": 0.66
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_01_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_01_francisca.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.66,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.41,
+  "protect": 0.37,
+  "volume_envelope": 0.74
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_02_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_02_francisca.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.66,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.38,
+  "volume_envelope": 0.67
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_03_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_03_francisca.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.66,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.4,
+  "volume_envelope": 0.74
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_04_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_04_francisca.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.31,
+  "final_st": 0.66,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.36,
+  "protect": 0.36,
+  "volume_envelope": 0.73
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_05_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_05_francisca.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.31,
+  "final_st": 0.9,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.4,
+  "protect": 0.39,
+  "volume_envelope": 0.76
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_06_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_06_francisca.wav",
+  "tom_extra": 2,
+  "f0_escala": 1.31,
+  "final_st": 0.9,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.36,
+  "protect": 0.39,
+  "volume_envelope": 0.81
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_07_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_07_francisca.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 0.36,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.28,
+  "volume_envelope": 0.81
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_08_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_08_francisca.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.31,
+  "final_st": 0.36,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.49,
+  "protect": 0.28,
+  "volume_envelope": 0.74
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_09_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_09_francisca.wav",
+  "tom_extra": 2,
+  "f0_escala": 1.31,
+  "final_st": 0.36,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.47,
+  "protect": 0.28,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_10_kokoro.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_10_kokoro.wav",
+  "tom_extra": 12,
+  "f0_escala": 1.33,
+  "final_st": 0.8,
+  "eq": [
+   [
+    63,
+    -0.1
+   ],
+   [
+    125,
+    -2.2
+   ],
+   [
+    250,
+    -1.0
+   ],
+   [
+    500,
+    0.7
+   ],
+   [
+    1000,
+    0.1
+   ],
+   [
+    2000,
+    0.5
+   ],
+   [
+    4000,
+    -0.3
+   ],
+   [
+    8000,
+    1.8
+   ],
+   [
+    12000,
+    3.8
+   ]
+  ],
+  "index_rate": 0.46,
+  "protect": 0.28,
+  "volume_envelope": 0.69
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_11_kokoro.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_11_kokoro.wav",
+  "tom_extra": 13,
+  "f0_escala": 1.33,
+  "final_st": 2.62,
+  "eq": [
+   [
+    63,
+    -0.1
+   ],
+   [
+    125,
+    -2.2
+   ],
+   [
+    250,
+    -1.0
+   ],
+   [
+    500,
+    0.7
+   ],
+   [
+    1000,
+    0.1
+   ],
+   [
+    2000,
+    0.5
+   ],
+   [
+    4000,
+    -0.3
+   ],
+   [
+    8000,
+    1.8
+   ],
+   [
+    12000,
+    3.8
+   ]
+  ],
+  "index_rate": 0.52,
+  "protect": 0.22,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_12_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_12_francisca.wav",
+  "tom_extra": 0,
+  "f0_escala": 1.31,
+  "final_st": 0.33,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.45,
+  "protect": 0.28,
+  "volume_envelope": 0.67
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_13_kokoro.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_13_kokoro.wav",
+  "tom_extra": 11,
+  "f0_escala": 1.33,
+  "final_st": 0.8,
+  "eq": [
+   [
+    63,
+    -0.1
+   ],
+   [
+    125,
+    -2.2
+   ],
+   [
+    250,
+    -1.0
+   ],
+   [
+    500,
+    0.7
+   ],
+   [
+    1000,
+    0.1
+   ],
+   [
+    2000,
+    0.5
+   ],
+   [
+    4000,
+    -0.3
+   ],
+   [
+    8000,
+    1.8
+   ],
+   [
+    12000,
+    3.8
+   ]
+  ],
+  "index_rate": 0.45,
+  "protect": 0.28,
+  "volume_envelope": 0.65
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_14_kokoro.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_14_kokoro.wav",
+  "tom_extra": 13,
+  "f0_escala": 1.33,
+  "final_st": 2.62,
+  "eq": [
+   [
+    63,
+    -0.1
+   ],
+   [
+    125,
+    -2.2
+   ],
+   [
+    250,
+    -1.0
+   ],
+   [
+    500,
+    0.7
+   ],
+   [
+    1000,
+    0.1
+   ],
+   [
+    2000,
+    0.5
+   ],
+   [
+    4000,
+    -0.3
+   ],
+   [
+    8000,
+    1.8
+   ],
+   [
+    12000,
+    3.8
+   ]
+  ],
+  "index_rate": 0.51,
+  "protect": 0.22,
+  "volume_envelope": 0.73
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_hoje_15_francisca.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_hoje_15_francisca.wav",
+  "tom_extra": 1,
+  "f0_escala": 1.31,
+  "final_st": 1.07,
+  "eq": [
+   [
+    63,
+    -2.1
+   ],
+   [
+    125,
+    -1.8
+   ],
+   [
+    250,
+    -0.1
+   ],
+   [
+    500,
+    -0.3
+   ],
+   [
+    1000,
+    -1.2
+   ],
+   [
+    2000,
+    0.7
+   ],
+   [
+    4000,
+    0.9
+   ],
+   [
+    8000,
+    1.6
+   ],
+   [
+    12000,
+    2.3
+   ]
+  ],
+  "index_rate": 0.35,
+  "protect": 0.37,
+  "volume_envelope": 0.76
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_vilao_A_francisca_-8st.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_vilao_A_francisca_-8st.wav",
+  "tom_extra": -7,
+  "f0_escala": 0.983,
+  "final_st": -1.2,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    140.0,
+    2.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    -1.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_vilao_B_antonio_-8st.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_vilao_B_antonio_-8st.wav",
+  "tom_extra": 2,
+  "f0_escala": 0.983,
+  "final_st": -1.2,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    140.0,
+    2.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    -1.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_vilao_C_andrew_-8st.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_vilao_C_andrew_-8st.wav",
+  "tom_extra": 6,
+  "f0_escala": 0.983,
+  "final_st": -1.2,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    140.0,
+    2.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    -1.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ },
+ {
+  "saida": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\trechos\\mike_vilao_D_andrew_igual_ao_teste_-13st.wav",
+  "tom_base": "2_edge_francisca",
+  "entrada": "D:\\hipercool-materiais\\teste_vozes_base\\variacoes\\_bases\\mike_vilao_D_andrew_igual_ao_teste_-13st.wav",
+  "tom_extra": 1,
+  "f0_escala": 0.983,
+  "final_st": -1.2,
+  "eq": [
+   [
+    63.0,
+    -2.1
+   ],
+   [
+    125.0,
+    -1.8
+   ],
+   [
+    140.0,
+    2.5
+   ],
+   [
+    250.0,
+    -0.1
+   ],
+   [
+    500.0,
+    -0.3
+   ],
+   [
+    1000.0,
+    -1.2
+   ],
+   [
+    2000.0,
+    0.7
+   ],
+   [
+    3000.0,
+    -1.0
+   ],
+   [
+    4000.0,
+    0.9
+   ],
+   [
+    8000.0,
+    1.6
+   ],
+   [
+    12000.0,
+    2.3
+   ]
+  ],
+  "index_rate": 0.5,
+  "protect": 0.33,
+  "volume_envelope": 0.75
+ }
+]

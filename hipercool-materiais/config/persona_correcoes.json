@@ -1,0 +1,57 @@
+{
+ "_leia": "Correções do DONO sobre bordões/maneirismos dos personagens (persona_personagem.py). 'bordoes'/'maneirismos' entram SEMPRE e na frente; 'remover' tira o que o modelo atribuiu errado. Depois de editar: python D:\\hipercool-materiais\\bin\\persona_personagem.py <voz> --refazer",
+ "chiquinha": {
+  "maneirismos": [
+   "pois é, pois é, pois é"
+  ],
+  "bordoes": [
+   "Isso, isso, isso!"
+  ]
+ },
+ "chaves": {
+  "remover": [
+   "Isso, isso, isso!"
+  ]
+ },
+ "joao_grilo": {
+  "bordoes": [
+   "Deixe de ser mentiroso, Chicó!"
+  ],
+  "maneirismos": [
+   "oxe",
+   "home",
+   "cabra",
+   "vixe"
+  ],
+  "remover": [
+   "Não sei, só sei que foi assim."
+  ]
+ },
+ "chico_selton": {
+  "bordoes": [
+   "Não sei, só sei que foi assim."
+  ],
+  "maneirismos": [
+   "oxe",
+   "home",
+   "cabra"
+  ]
+ },
+ "faustao": {
+  "bordoes": [
+   "Errou!",
+   "Ô loco, meu!",
+   "Essa fera aí, meu!"
+  ],
+  "maneirismos": [
+   "meu",
+   "bicho"
+  ]
+ },
+ "pato_donald": {
+  "bordoes": [
+   "Ei! Ei! Isso não é justo!"
+  ],
+  "maneirismos": []
+ }
+}

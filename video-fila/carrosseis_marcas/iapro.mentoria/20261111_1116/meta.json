@@ -1,0 +1,25 @@
+{
+ "conta": "iapro.mentoria",
+ "marca": "IA Pro Mentoria",
+ "capa": "Como a IA interpreta seus comandos?",
+ "slides": [
+  {
+   "titulo": "O contexto muda o resultado",
+   "texto": "A inteligência artificial analisa todo o texto enviado para identificar a intenção principal antes de gerar qualquer resposta detalhada para você."
+  },
+  {
+   "titulo": "Quebra das frases em partes",
+   "texto": "O sistema divide suas palavras em pequenos blocos de informação para entender o significado de cada termo dentro da estrutura."
+  },
+  {
+   "titulo": "Busca por padrões relevantes",
+   "texto": "A ferramenta compara seu pedido com uma vasta base de dados para prever qual sequência de palavras faz mais sentido."
+  },
+  {
+   "titulo": "Refinamento contínuo da resposta",
+   "texto": "Fornecer exemplos claros e instruções diretas ajuda o modelo a ajustar a linguagem exatamente ao objetivo do seu projeto."
+  }
+ ],
+ "legenda": "Entender o funcionamento básico da inteligência artificial ajuda a estruturar pedidos mais eficientes.\nAprenda a guiar a tecnologia para obter os melhores resultados no seu dia a dia.\nSalve este post para consultar sempre que for criar um comando.",
+ "gerado_em": "2026-11-11T11:54:23"
+}

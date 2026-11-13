@@ -1,0 +1,360 @@
+{
+ "_leia": "GERADO pelo gerar_config.py — editar config\\clientes_manuais.json",
+ "ignorar": [
+  "5591984698653",
+  "_lucrocomia_",
+  "advance_novoestrela",
+  "agentesdeia",
+  "agentesdeia.ia",
+  "avataria",
+  "canalhistoriacomia",
+  "crmchatwoot",
+  "crmchatwoot.ia",
+  "danceandmusicwith.ia",
+  "dicasfinanceiras.ia",
+  "disparoemmassa",
+  "disparoemmassa.ia",
+  "emerson.inteligenciaartificial",
+  "fabricadeautomacoesia",
+  "fabricadeautomacoesn8n",
+  "fabricademarketing",
+  "fabricademarketing.ia",
+  "fakenews.ia4",
+  "followupia",
+  "followupia.ia",
+  "futebolcom.ia2",
+  "gestaodegrupos",
+  "gestaodegrupos.ia",
+  "hayllamikeyce",
+  "iapro.mentoria",
+  "inovareagenda",
+  "inovareclaw",
+  "inovareclone",
+  "inovarecom.ia",
+  "inovarecrm",
+  "inovaremanhwaverseesp",
+  "inovaresites",
+  "jornalcomia",
+  "landingpageia",
+  "landingpageia.ia",
+  "mentoriasia",
+  "mentoriasia.ia",
+  "msenergycap",
+  "msenergysolar.pa",
+  "recenas.ia",
+  "sintetizerisada",
+  "superchatia",
+  "superchatia.ia",
+  "videocassetadascom.ia",
+  "vitrineia",
+  "vitrineia_inovare",
+  "vpsblindada",
+  "vpsblindada.ia"
+ ],
+ "clientes": [
+  {
+   "id": "precioso",
+   "nome": "Açaí O Precioso",
+   "tipo": "cliente",
+   "cor": "#7c3aed",
+   "cidade": "Paragominas - PA",
+   "instagram": [
+    "accai_oprecioso"
+   ],
+   "loja": "precioso",
+   "sites": [
+    "precioso.opus-sem-limites.com.br"
+   ],
+   "site": "https://precioso.opus-sem-limites.com.br/",
+   "whatsapp": "",
+   "ativo": true
+  },
+  {
+   "id": "msenergy",
+   "nome": "MS Energy",
+   "tipo": "cliente",
+   "cor": "#e11d48",
+   "cidade": "Paragominas - PA",
+   "instagram": [
+    "msenergycap"
+   ],
+   "sites": [],
+   "site": "https://www.instagram.com/msenergycap/",
+   "whatsapp": "https://wa.me/message/RTCI5IGNUZVIF1",
+   "ativo": true
+  },
+  {
+   "id": "advance",
+   "nome": "Advance Energia Solar",
+   "tipo": "cliente",
+   "cor": "#5b21ea",
+   "cidade": "Castanhal - PA",
+   "instagram": [
+    "advance_novoestrela"
+   ],
+   "instagram_http": true,
+   "_instagram_http": "30/10: conta pessoal sem token da API -> coletor\\coletar_instagram_http.py lê pela sessão do cofre",
+   "sites": [],
+   "site": "https://www.instagram.com/advance_novoestrela/",
+   "whatsapp": "https://wa.me/message/XSYWM2W3MFLK",
+   "login": "luiz",
+   "_login": "30/10 (dona): login e senha = nome dele (luiz / luiz); a senha fica só como hash em segredos\\chaves.json",
+   "ativo": true
+  },
+  {
+   "id": "follow_up",
+   "nome": "Follow-up IA",
+   "tipo": "produto",
+   "cor": "#4ECDC4",
+   "cidade": "",
+   "instagram": [
+    "followupia.ia"
+   ],
+   "sites": [
+    "follow-up.opus-sem-limites.com.br"
+   ],
+   "site": "https://follow-up.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "agenda_ia",
+   "nome": "Agenda IA",
+   "tipo": "produto",
+   "cor": "#FFA94D",
+   "cidade": "",
+   "instagram": [
+    "sintetizerisada",
+    "inovareagenda"
+   ],
+   "sites": [
+    "agenda.opus-sem-limites.com.br"
+   ],
+   "site": "https://agenda.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "vitrine_ia",
+   "nome": "Vitrine IA",
+   "tipo": "produto",
+   "cor": "#A78BFA",
+   "cidade": "",
+   "instagram": [
+    "vitrineia_inovare"
+   ],
+   "sites": [
+    "vitrine.opus-sem-limites.com.br"
+   ],
+   "site": "https://vitrine.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "superchat",
+   "nome": "SuperChat IA",
+   "tipo": "produto",
+   "cor": "#5B6CFF",
+   "cidade": "",
+   "instagram": [
+    "superchatia.ia"
+   ],
+   "sites": [
+    "superchat.opus-sem-limites.com.br"
+   ],
+   "site": "https://superchat.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "crm_chatwoot",
+   "nome": "CRM Chatwoot IA",
+   "tipo": "produto",
+   "cor": "#1F93FF",
+   "cidade": "",
+   "instagram": [
+    "crmchatwoot.ia",
+    "inovarecrm"
+   ],
+   "sites": [
+    "crm.opus-sem-limites.com.br"
+   ],
+   "site": "https://crm.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "disparo_massa",
+   "nome": "Disparo em Massa IA",
+   "tipo": "produto",
+   "cor": "#22C55E",
+   "cidade": "",
+   "instagram": [
+    "disparoemmassa.ia"
+   ],
+   "sites": [
+    "disparo.opus-sem-limites.com.br"
+   ],
+   "site": "https://disparo.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "vps_infra",
+   "nome": "VPS Blindada",
+   "tipo": "produto",
+   "cor": "#0EA5E9",
+   "cidade": "",
+   "instagram": [
+    "vpsblindada.ia"
+   ],
+   "sites": [
+    "vps.opus-sem-limites.com.br"
+   ],
+   "site": "https://vps.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "fabrica_conteudo",
+   "nome": "Fábrica de Marketing IA",
+   "tipo": "produto",
+   "cor": "#F472B6",
+   "cidade": "",
+   "instagram": [
+    "fabricademarketing.ia"
+   ],
+   "sites": [
+    "marketing.opus-sem-limites.com.br"
+   ],
+   "site": "https://marketing.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "treinamentos",
+   "nome": "Treinamentos e Mentorias IA",
+   "tipo": "produto",
+   "cor": "#2563EB",
+   "cidade": "",
+   "instagram": [
+    "mentoriasia.ia"
+   ],
+   "sites": [
+    "mentoria.opus-sem-limites.com.br"
+   ],
+   "site": "https://mentoria.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "landing_page",
+   "nome": "Landing Page e Comunicação",
+   "tipo": "produto",
+   "cor": "#F59E0B",
+   "cidade": "",
+   "instagram": [
+    "landingpageia.ia",
+    "inovaresites"
+   ],
+   "sites": [
+    "landing-page.opus-sem-limites.com.br"
+   ],
+   "site": "https://landing-page.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "gestao_grupos",
+   "nome": "Gestão de Grupos IA",
+   "tipo": "produto",
+   "cor": "#14B8A6",
+   "cidade": "",
+   "instagram": [
+    "gestaodegrupos.ia"
+   ],
+   "sites": [
+    "grupos.opus-sem-limites.com.br"
+   ],
+   "site": "https://grupos.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "agente_tarefas",
+   "nome": "Agentes de IA",
+   "tipo": "produto",
+   "cor": "#10B981",
+   "cidade": "",
+   "instagram": [
+    "agentesdeia.ia"
+   ],
+   "sites": [
+    "agentes.opus-sem-limites.com.br"
+   ],
+   "site": "https://agentes.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "avatar_ia",
+   "nome": "Avatar IA",
+   "tipo": "produto",
+   "cor": "#8B5CF6",
+   "cidade": "",
+   "instagram": [
+    "inovareclone"
+   ],
+   "sites": [
+    "avatar.opus-sem-limites.com.br"
+   ],
+   "site": "https://avatar.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "cardapio_digital",
+   "nome": "Cardápio Digital",
+   "tipo": "produto",
+   "cor": "#E11D48",
+   "cidade": "",
+   "instagram": [
+    "futebolcom.ia2"
+   ],
+   "sites": [
+    "cardapio.opus-sem-limites.com.br"
+   ],
+   "site": "https://cardapio.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "inovare_claw",
+   "nome": "Inovare Claw",
+   "tipo": "produto",
+   "cor": "#10b981",
+   "cidade": "",
+   "instagram": [],
+   "sites": [
+    "claw.opus-sem-limites.com.br"
+   ],
+   "site": "https://claw.opus-sem-limites.com.br/",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  },
+  {
+   "id": "hermes_call",
+   "nome": "Hermes Call",
+   "tipo": "produto",
+   "cor": "#25D366",
+   "cidade": "",
+   "instagram": [
+    "inovarecom.ia"
+   ],
+   "sites": [],
+   "site": "",
+   "whatsapp": "https://wa.me/5591984698653",
+   "ativo": true
+  }
+ ]
+}

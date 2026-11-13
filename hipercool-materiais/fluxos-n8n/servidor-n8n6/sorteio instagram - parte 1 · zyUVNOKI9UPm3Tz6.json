@@ -1,0 +1,3635 @@
+{
+ "updatedAt": "2026-10-13T01:02:43.945Z",
+ "createdAt": "2026-10-11T00:04:59.226Z",
+ "id": "zyUVNOKI9UPm3Tz6",
+ "name": "sorteio instagram - parte 1",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "content": "### 📦 Community Node\nInstalar nó comunitário no n8n:\n`n8n-nodes-instagram-token`",
+    "height": 110,
+    "width": 320,
+    "color": 5
+   },
+   "id": "0a395b32-c810-41ff-9bf2-f2ebd9f37640",
+   "name": "Sticky Note",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2400,
+    -208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "### 🔑 Meta Developers App\nCriar App no portal:\nhttps://developers.facebook.com/\n\nGuia / Print de permissões:\nhttps://ibb.co/n86cByNK",
+    "height": 142,
+    "width": 320,
+    "color": 6
+   },
+   "id": "2406842f-9b26-4ece-b0b6-4ef2a61090a6",
+   "name": "Sticky Note1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2048,
+    -240
+   ]
+  },
+  {
+   "parameters": {
+    "content": "### 📱 Conta de Testes\nPerfil Instagram de testes:\n`_lucrocomia_`",
+    "height": 110,
+    "width": 304,
+    "color": 7
+   },
+   "id": "59d24483-fceb-47e2-9c7a-4203b567d23c",
+   "name": "Sticky Note2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1696,
+    -208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🗄️ 1. SETUP DDL & BANCO DE DADOS (POSTGRESQL)\n\nEstruturação das tabelas relacionais e adequação de tipagem de campos para alta volumetria de comentários e participantes.\n\n* **criar tabelas (`Postgres`)**:\n  Executa DDL (`CREATE TABLE IF NOT EXISTS`) criando as duas tabelas centrais:\n  - `instagram_comentarios`: Guarda o log completo dos comentários do webhook (`comment_id` UNIQUE, `media_id`, `from_user_id`, `from_username`, `comment_text`, `commented_at`, etc.) com índices para performance.\n  - `sorteio_participantes`: Tabela dos participantes aptos ao sorteio com restrição UNIQUE composta `(media_id, from_user_id)`, número da sorte sequencial (`ticket_number SERIAL`) e flag de seguidor (`is_following`).\n\n* **Execute a SQL query1 (`Postgres`)**:\n  Executa migração estrutural (`ALTER TABLE instagram_comentarios ALTER COLUMN commented_at TYPE BIGINT USING EXTRACT(EPOCH FROM commented_at)`), convertendo a coluna de data para inteiro Unix Epoch (timestamp bruto numérico do webhook do Instagram).",
+    "height": 340,
+    "width": 580,
+    "color": 4
+   },
+   "id": "e2589782-8c18-4960-98d7-a924cb0b1faa",
+   "name": "Note - Setup DDL",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2640,
+    -80
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🧹 2. MANUTENÇÃO & RESET OPERACIONAL\n\nAções administrativas manuais para expurgo e limpeza das tabelas, permitindo zerar o histórico entre diferentes campanhas ou rodadas de teste.\n\n* **limpar instagram_comentarios (`Postgres`)**:\n  Operação `deleteTable` que remove todos os registros da tabela `instagram_comentarios`, zerando os comentários ingeridos anteriormente.\n\n* **limpar sorteio_participantes (`Postgres`)**:\n  Operação `deleteTable` que apaga todos os concorrentes da tabela `sorteio_participantes`, limpando números da sorte e permitindo novo sorteio do zero.",
+    "height": 360,
+    "width": 640,
+    "color": 3
+   },
+   "id": "3fdba519-0525-4477-ae3a-a54e40ee7622",
+   "name": "Note - Limpeza & Manutenção",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1136,
+    -416
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🎲 3. MOTOR DE SORTEIO & AUDITORIA\n\nQueries de consulta determinística e seleção pseudoaleatória com base nas regras oficiais da promoção.\n\n* **sorteio (`Postgres`)**:\n  Query oficial de extração do ganhador: seleciona 1 participante vencedor via `ORDER BY RANDOM() LIMIT 1` filtrando pelo post (`media_id = '18057195563557757'`), confirmando que segue a página (`is_following = true`) e que comentou dentro da janela de data/hora oficial.\n\n* **sorteio1 (`Postgres`)**:\n  Query em lote para conferência e suplência: retorna até 50 participantes qualificados aleatórios (`ORDER BY RANDOM() LIMIT 50`) para validação ao vivo ou seleção de suplentes caso o ganhador seja desclassificado.",
+    "height": 360,
+    "width": 580,
+    "color": 7
+   },
+   "id": "c295553c-4b10-4a08-8015-8836cb40d90e",
+   "name": "Note - Motor de Sorteio",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -3264,
+    96
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 💬 4. CAPTURA DE COMENTÁRIOS NO POST & AUTOMAÇÃO DE ENGAJAMENTO\n\nPorta de entrada do evento de comentário no post do Instagram, validação de palavras-chave, envio de DM com botão interativo e resposta pública.\n\n* **Instagram Trigger (`Instagram Trigger`)**:\n  Webhook oficial do Instagram Graph API escutando em tempo real eventos de `comments`, `mentions`, `messages` e postbacks. O **Output 3** dispara quando um comentário é publicado em qualquer post ou reel monitorado.\n\n* **normatizacao (`Set / Edit Fields`)**:\n  Higieniza e descompacta os campos recebidos do webhook: extrai `senderId`, `id_usuario` (`fromUserId`), `comentario` (`text`), `id_comentario` (`commentId`), `id_entrada` (`entryId`), `isReply` e metadados de roteamento.\n\n* **palavta_chave (`Switch`)**:\n  Filtro de qualificação da campanha: checa se `$json.comentario.toLowerCase()` contém a palavra-chave oficial (ex: `\"vip\"`). Comentários sem a palavra-chave são descartados imediatamente para poupar processamento.\n\n* **If1 (`If`)**:\n  Trava de segurança anti-loop: compara se o autor do comentário não é a própria página proprietária (`id_entrada != id_usuario`), impedindo que respostas automáticas gerem loops infinitos de execução.\n\n* **Reply to comment1 (`Instagram Token`)**:\n  Envia uma mensagem privada instantânea na DM do autor (`sendPrivateReplyQuickReplies`) alertando para abrir pelo celular e exibindo o botão Quick Reply interativo com o título *\"Quero participar\"* (payload: `\"quero-participar\"`).\n\n* **Reply to comment3 (`Instagram Token`)**:\n  Responde publicamente ao comentário do seguidor no próprio post informando: *\"Verifique suas DM.\"*, aumentando a visibilidade e o engajamento orgânico da publicação.\n\n* **Insert rows in a table (`Postgres`)**:\n  Insere o comentário completo na tabela `instagram_comentarios` com ID, texto, usuário, timestamp e media_id para histórico de auditoria.",
+    "height": 420,
+    "width": 1960,
+    "color": 6
+   },
+   "id": "52acdd73-e3a4-46e7-bb52-f1216be60553",
+   "name": "Note - Ingestão de Comentários",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2256,
+    992
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📱 5. RECEPÇÃO DA DM & VALIDAÇÃO DE SEGUIDOR (OPT-IN)\n\nRecepção do clique no botão interativo da DM, verificação em tempo real se o perfil segue a conta e controle de cobrança caso não siga.\n\n* **normatizacao1 (`Set / Edit Fields`)**:\n  Conectado ao **Output 0** do `Instagram Trigger` (mensagens e postbacks da DM), mapeia `senderId`, `id_usuario`, `comentario` (texto/payload) e identificadores da conversa privada.\n\n* **Switch1 (`Switch`)**:\n  Roteador do payload: verifica se o clique veio do botão com payload `\"quero-participar\"`, direcionando o lead para a verificação de elegibilidade.\n\n* **verifica_seguindo (`Instagram Token`)**:\n  Consulta em tempo real a API do Instagram Graph (`operation: getProfile`) solicitando o campo `is_user_follow_business` para o `senderId` do usuário.\n\n* **se_seguindo (`If`)**:\n  Avalia a regra se `is_user_follow_business == true`:\n  - Se **Falso (Não segue)**: Desvia para a saída 1 para cobrar que o usuário siga o perfil.\n  - Se **Verdadeiro (Segue)**: Desvia para a saída 0, avançando para a conferência e inscrição.\n\n* **Reply to comment6 (`Instagram Token`)**:\n  Disparado se o usuário não seguir a conta: envia DM alertando *\"Você ainda não esta me seguindo. Me siga primeiro e depois clique no botão.\"* com o botão Quick Reply novamente.",
+    "height": 380,
+    "width": 1020,
+    "color": 5
+   },
+   "id": "0a3975fc-5c25-4586-8bb5-fce8f76793e0",
+   "name": "Note - DM & Validação de Seguidor",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1920,
+    240
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🔍 6. CONSULTA & INSCRIÇÃO NO SORTEIO\n\nConsulta ao histórico do comentário para identificação do post, checagem de cadastro e inserção direta de participantes aptos.\n\n* **Select rows from a table (`Postgres`)**:\n  Busca o último comentário do usuário na tabela `instagram_comentarios` (`from_user_id = $json.id`) para recuperar o `media_id` do post correspondente.\n\n* **Select rows from a table1 (`Postgres`)**:\n  Consulta a tabela `sorteio_participantes` filtrando por `from_user_id` e conferindo se `char_name IS NOT NULL` para checar se o usuário já possui inscrição registrada.\n\n* **If (`If`)**:\n  Testa se o retorno da consulta anterior está vazio (`$json is empty`):\n  - **Vazio (Saída 0)**: Direciona para o Módulo 7 (recuperação completa e tratamento de concorrência com chave única).\n  - **Não Vazio (Saída 1)**: Conduz à rota de inserção direta no banco de participantes.\n\n* **Insert rows in a table1 (`Postgres`)**:\n  Insere o registro na tabela `sorteio_participantes` com dados do post, usuário, `is_following = true`, timestamps e número da sorte.\n\n* **Reply to comment2 (`Instagram Token`)**:\n  Envia mensagem direta de confirmação na DM ao usuário: *\"Cadastrado com sucesso.\"*.",
+    "height": 380,
+    "width": 760,
+    "color": 2
+   },
+   "id": "3aff9545-59e5-4414-8c1a-3937738914bc",
+   "name": "Note - Consulta & Inscrição no Sorteio",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -848,
+    96
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🛡️ 7. TRATAMENTO ANTI-DUPLICIDADE & CONFIRMAÇÃO FINAL\n\nGarantia de integridade relacional via restrição UNIQUE do banco de dados, confirmando novos cadastros e notificando duplicidades amigavelmente.\n\n* **Select rows from a table3 (`Postgres`)**:\n  Recupera o registro mais recente do comentário do usuário em `instagram_comentarios` (`LIMIT 1, ORDER BY id DESC`) garantindo a consistência de `media_id` e `from_username` antes da inserção.\n\n* **Insert rows in a table2 (`Postgres`)**:\n  Insere o participante em `sorteio_participantes`. Configurado com tratamento de erro contínuo:\n  - **Sucesso (Saída 0)**: Inscrição confirmada, avança para mensagem de sucesso.\n  - **Erro (Saída 1)**: Em caso de falha ou conflito, desvia para diagnóstico do erro.\n\n* **Reply to comment7 (`Instagram Token`)**:\n  Disparado em caso de sucesso na gravação: envia DM de celebração: *\"Você foi cadastrado no sorteio com sucesso.\"*.\n\n* **If2 (`If`)**:\n  Analisa o erro retornado pelo PostgreSQL: checa se `$json.message` contém `\"duplicate key\"`, confirmando violação da chave única `uq_sorteio_usuario (media_id, from_user_id)`.\n\n* **Reply to comment5 (`Instagram Token`)**:\n  Disparado em caso de duplicidade confirmada: envia DM explicativa e amigável: *\"Você já esta cadastrado nessa postagem.\"*, orientando o participante e mantendo a lista de sorteio limpa sem cadastros repetidos.",
+    "height": 420,
+    "width": 930
+   },
+   "id": "e39838c5-ecc5-496d-aafc-d66ea724164f",
+   "name": "Note - Anti-Duplicidade & Confirmação Final",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    -64
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "56e535fc-f677-47b2-9f65-4c6a28ba2d67",
+       "leftValue": "={{ $json.id_entrada }}",
+       "rightValue": "={{ $json.id_usuario }}",
+       "operator": {
+        "type": "string",
+        "operation": "notEquals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -1200,
+    864
+   ],
+   "id": "3ef9f43d-a898-4c4b-ae16-1976103a6c3c",
+   "name": "If1"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "228cf138-2d5b-4455-8899-2f7d617f9cf9",
+       "name": "senderId",
+       "value": "={{ $json.senderId }}",
+       "type": "string"
+      },
+      {
+       "id": "9974d322-bb68-474e-9820-d794126a95ca",
+       "name": "id_usuario",
+       "value": "={{ $json.fromUserId }}",
+       "type": "string"
+      },
+      {
+       "id": "42a59c13-5194-4843-a01d-6e65d48184fc",
+       "name": "comentario",
+       "value": "={{ $json.text }}",
+       "type": "string"
+      },
+      {
+       "id": "4a0fed2d-2f86-4f96-ae3b-730c446959dd",
+       "name": "id_comentario",
+       "value": "={{ $json.commentId }}",
+       "type": "string"
+      },
+      {
+       "id": "71694b31-d7a9-4981-a379-af1d4b71617f",
+       "name": "id_entrada",
+       "value": "={{ $json.entryId }}",
+       "type": "string"
+      },
+      {
+       "id": "5c6ffb99-6ebe-4934-b985-8d24dfd5318a",
+       "name": "se e resposta a outro comentario",
+       "value": "={{ $json.isReply }}",
+       "type": "boolean"
+      },
+      {
+       "id": "783897af-49b2-4018-8679-5f63e0c84865",
+       "name": "remetente",
+       "value": "={{ $json.senderId }}",
+       "type": "string"
+      },
+      {
+       "id": "2e722a41-0824-49bf-a287-35b9c2396cc2",
+       "name": "destinatario",
+       "value": "={{ $json.recipientId }}",
+       "type": "string"
+      },
+      {
+       "id": "20c57ce5-7dfb-4965-86d3-122c34480ae0",
+       "name": "evento",
+       "value": "={{ $json.eventType }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -1904,
+    864
+   ],
+   "id": "50217b93-e3e8-4fb6-bf41-4d8b425bf540",
+   "name": "normatizacao"
+  },
+  {
+   "parameters": {
+    "operation": "sendPrivateReplyQuickReplies",
+    "commentId": "={{ $json.id_comentario }}",
+    "messageText": "Oi, te enviei o botão para entrar no sorteio, mas só funciona abrindo pelo celular.",
+    "quickReplies": {
+     "quickReply": [
+      {
+       "title": "Quero participar",
+       "payload": "quero-participar"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    -944,
+    848
+   ],
+   "id": "4a372412-964d-40ff-847c-9e1fe503dc37",
+   "name": "Reply to comment1",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "228cf138-2d5b-4455-8899-2f7d617f9cf9",
+       "name": "senderId",
+       "value": "={{ $json.senderId }}",
+       "type": "string"
+      },
+      {
+       "id": "9974d322-bb68-474e-9820-d794126a95ca",
+       "name": "id_usuario",
+       "value": "={{ $json.fromUserId }}",
+       "type": "string"
+      },
+      {
+       "id": "42a59c13-5194-4843-a01d-6e65d48184fc",
+       "name": "comentario",
+       "value": "={{ $json.text }}",
+       "type": "string"
+      },
+      {
+       "id": "4a0fed2d-2f86-4f96-ae3b-730c446959dd",
+       "name": "id_comentario",
+       "value": "={{ $json.commentId }}",
+       "type": "string"
+      },
+      {
+       "id": "71694b31-d7a9-4981-a379-af1d4b71617f",
+       "name": "id_entrada",
+       "value": "={{ $json.entryId }}",
+       "type": "string"
+      },
+      {
+       "id": "5c6ffb99-6ebe-4934-b985-8d24dfd5318a",
+       "name": "se e resposta a outro comentario",
+       "value": "={{ $json.isReply }}",
+       "type": "boolean"
+      },
+      {
+       "id": "783897af-49b2-4018-8679-5f63e0c84865",
+       "name": "remetente",
+       "value": "={{ $json.senderId }}",
+       "type": "string"
+      },
+      {
+       "id": "2e722a41-0824-49bf-a287-35b9c2396cc2",
+       "name": "destinatario",
+       "value": "={{ $json.recipientId }}",
+       "type": "string"
+      },
+      {
+       "id": "20c57ce5-7dfb-4965-86d3-122c34480ae0",
+       "name": "evento",
+       "value": "={{ $json.eventType }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -1904,
+    720
+   ],
+   "id": "fbfde01a-cb3f-4420-a2d0-cfe519249188",
+   "name": "normatizacao1"
+  },
+  {
+   "parameters": {
+    "resource": "comment",
+    "commentId": "={{ $('normatizacao').item.json.id_comentario }}",
+    "message": "Verifique suas DM."
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    -736,
+    848
+   ],
+   "id": "95bbda1d-c45b-417d-b28e-0890b9efadcc",
+   "name": "Reply to comment3",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "events": [
+     "comments",
+     "mentions",
+     "messages",
+     "messaging_optins",
+     "messaging_postbacks"
+    ]
+   },
+   "type": "n8n-nodes-instagram-token.instagramTrigger",
+   "typeVersion": 1,
+   "position": [
+    -2208,
+    752
+   ],
+   "id": "180be26a-b602-4043-8a25-542aab91c300",
+   "name": "Instagram Trigger",
+   "webhookId": "d4daf931-5d12-4681-84b2-615fb3aa6594",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "user",
+    "operation": "getProfile",
+    "userId": "={{ $json.senderId }}",
+    "fields": [
+     "is_user_follow_business"
+    ]
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    -1248,
+    512
+   ],
+   "id": "f4eadb2a-6e29-4e2c-8abc-50563e063ef6",
+   "name": "verifica_seguindo",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "dbe4afb1-a9d0-4669-9b21-d3d4548bfbfd",
+       "leftValue": "={{ $json.is_user_follow_business }}",
+       "rightValue": false,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    -1040,
+    512
+   ],
+   "id": "420df2de-eeb4-44a9-bc48-d3a6052e1f72",
+   "name": "se_seguindo"
+  },
+  {
+   "parameters": {
+    "operation": "sendQuickReplies",
+    "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+    "messageText": "Você ainda não esta me seguindo. Me siga primeiro e depois clique no botão.",
+    "quickReplies": {
+     "quickReply": [
+      {
+       "title": "Quero participar",
+       "payload": "quero-participar"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    608
+   ],
+   "id": "6bad2e71-f084-4abc-a32a-9602018f464e",
+   "name": "Reply to comment6",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instagram_comentarios",
+     "mode": "list",
+     "cachedResultName": "instagram_comentarios"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "is_reply": "={{ $('Instagram Trigger').item.json.isReply }}",
+      "comment_id": "={{ $('Instagram Trigger').item.json.commentId }}",
+      "media_id": "={{ $('Instagram Trigger').item.json.mediaId }}",
+      "media_product_type": "={{ $('Instagram Trigger').item.json.mediaProductType }}",
+      "from_user_id": "={{ $('Instagram Trigger').item.json.fromUserId }}",
+      "from_username": "={{ $('Instagram Trigger').item.json.fromUsername }}",
+      "entry_id": "={{ $('Instagram Trigger').item.json.entryId }}",
+      "comment_text": "={{ $('Instagram Trigger').item.json.text }}",
+      "parent_comment_id": "={{ $('Instagram Trigger').item.json.parentCommentId }}",
+      "commented_at": "={{ $('Instagram Trigger').item.json.timestamp }}",
+      "created_at": "={{ $now }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "comment_id",
+       "displayName": "comment_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "media_id",
+       "displayName": "media_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "media_product_type",
+       "displayName": "media_product_type",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "from_user_id",
+       "displayName": "from_user_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "from_username",
+       "displayName": "from_username",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "entry_id",
+       "displayName": "entry_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "comment_text",
+       "displayName": "comment_text",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "parent_comment_id",
+       "displayName": "parent_comment_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "is_reply",
+       "displayName": "is_reply",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "commented_at",
+       "displayName": "commented_at",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -528,
+    848
+   ],
+   "id": "b7770c66-f12f-4ad4-b599-23bbec1a8101",
+   "name": "Insert rows in a table",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "ALTER TABLE instagram_comentarios \n    ALTER COLUMN commented_at TYPE BIGINT \n    USING EXTRACT(EPOCH FROM commented_at)::BIGINT;",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2336,
+    128
+   ],
+   "id": "88dbe95d-52c2-4582-a167-cb41a80d6a62",
+   "name": "Execute a SQL query1",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instagram_comentarios",
+     "mode": "list",
+     "cachedResultName": "instagram_comentarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "from_user_id",
+       "value": "={{ $json.id }}"
+      }
+     ]
+    },
+    "sort": {
+     "values": [
+      {
+       "column": "id",
+       "direction": "DESC"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -800,
+    416
+   ],
+   "id": "cd54614b-7b94-4c9d-9132-55ef39940e65",
+   "name": "Select rows from a table",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "sorteio_participantes",
+     "mode": "list",
+     "cachedResultName": "sorteio_participantes"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "is_following": true,
+      "ticket_number": 0,
+      "from_user_id": "={{ $('Instagram Trigger').item.json.senderId }}",
+      "from_username": "={{ $json.from_username }}",
+      "media_id": "={{ $json.media_id }}",
+      "created_at": "={{ $json.created_at }}",
+      "confirmed_at": "={{ $json.created_at }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "media_id",
+       "displayName": "media_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "from_user_id",
+       "displayName": "from_user_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "from_username",
+       "displayName": "from_username",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "is_following",
+       "displayName": "is_following",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "primeiro_comment_id",
+       "displayName": "primeiro_comment_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "ticket_number",
+       "displayName": "ticket_number",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "confirmed_at",
+       "displayName": "confirmed_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "char_name",
+       "displayName": "char_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -48,
+    512
+   ],
+   "id": "353cc1ae-2f32-4bde-ba38-23e85e76d8ea",
+   "name": "Insert rows in a table1",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "sorteio_participantes",
+     "mode": "list",
+     "cachedResultName": "sorteio_participantes"
+    },
+    "where": {
+     "values": [
+      {
+       "column": "from_user_id",
+       "value": "={{ $json.from_user_id }}"
+      },
+      {
+       "column": "char_name",
+       "condition": "IS NOT NULL"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -544,
+    416
+   ],
+   "id": "4ec75432-0810-4aa9-a2ed-54ea25afcf82",
+   "name": "Select rows from a table1",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "3213aa25-7f37-4c45-8dcc-bf01a1c401f3",
+       "leftValue": "={{ $json }}",
+       "rightValue": 0,
+       "operator": {
+        "type": "object",
+        "operation": "empty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    -336,
+    416
+   ],
+   "id": "255b2e93-be0f-4ed5-ac52-9cd8c89b2631",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+    "messageText": "Cadastrado com sucesso."
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    144,
+    512
+   ],
+   "id": "7542e658-0d8a-4b10-8a24-0d2f16b25f85",
+   "name": "Reply to comment2",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $('Instagram Trigger').item.json.quickReplyPayload }}",
+          "rightValue": "quero-participar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "85899df1-727d-48f4-87e5-3c9824728026"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "quero-participar"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.4,
+   "position": [
+    -1696,
+    720
+   ],
+   "id": "89e6d269-5e9d-40a4-b234-43ce77aa5417",
+   "name": "Switch1"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "sorteio_participantes",
+     "mode": "list",
+     "cachedResultName": "sorteio_participantes"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "is_following": true,
+      "ticket_number": 0,
+      "from_user_id": "={{ $('Instagram Trigger').item.json.senderId }}",
+      "from_username": "={{ $json.from_username }}",
+      "media_id": "={{ $json.media_id }}",
+      "created_at": "={{ $json.created_at }}",
+      "confirmed_at": "={{ $json.created_at }}",
+      "char_name": "={{ $('Instagram Trigger').item.json.text }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "media_id",
+       "displayName": "media_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "from_user_id",
+       "displayName": "from_user_id",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "from_username",
+       "displayName": "from_username",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "is_following",
+       "displayName": "is_following",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "primeiro_comment_id",
+       "displayName": "primeiro_comment_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "ticket_number",
+       "displayName": "ticket_number",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "confirmed_at",
+       "displayName": "confirmed_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "char_name",
+       "displayName": "char_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    160,
+    128
+   ],
+   "id": "0ee6d892-c98d-45af-a21a-6650d35ec216",
+   "name": "Insert rows in a table2",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instagram_comentarios",
+     "mode": "list",
+     "cachedResultName": "instagram_comentarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "from_user_id",
+       "value": "={{ $('Instagram Trigger').item.json.senderId }}"
+      }
+     ]
+    },
+    "sort": {
+     "values": [
+      {
+       "column": "id",
+       "direction": "DESC"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -48,
+    160
+   ],
+   "id": "0a4e7a13-f41c-47e0-a8d7-9ab91abd6b36",
+   "name": "Select rows from a table3",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "9e7cab4a-94ae-4ece-87fc-003dc4291f07",
+       "leftValue": "={{ $json.message }}",
+       "rightValue": "duplicate key",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    368,
+    224
+   ],
+   "id": "540fa335-41f5-4cf6-b7e8-651391f74e76",
+   "name": "If2"
+  },
+  {
+   "parameters": {
+    "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+    "messageText": "Você já esta cadastrado nessa postagem."
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    624,
+    144
+   ],
+   "id": "0c4154db-5a89-45f9-8274-0ff37b8de691",
+   "name": "Reply to comment5",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT \n    from_username,\n    char_name,\n    from_user_id,\n    ticket_number,\n    confirmed_at,\n    created_at AS data_comentario\nFROM sorteio_participantes\nWHERE \n is_following = true\n  -- Filtro de horário do dia 29/09/2026 (00:00:00 até 23:59:59)\n  AND created_at >= '2026-10-12 00:00:00'\n  AND created_at <  '2026-10-13 00:00:00'\nORDER BY RANDOM()\nLIMIT 50;\n",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2976,
+    656
+   ],
+   "id": "c9ac0973-ebd4-4602-a832-e6b1ba5040c8",
+   "name": "sorteio1",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+    "messageText": "Você foi cadastrado no sorteio com sucesso."
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    432,
+    0
+   ],
+   "id": "af30f913-06d8-40e8-b144-a0445eb79927",
+   "name": "Reply to comment7",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 3
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.comentario.toLowerCase() }}",
+          "rightValue": "vip",
+          "operator": {
+           "type": "string",
+           "operation": "contains"
+          },
+          "id": "adc32f7d-5940-44bd-b39a-17dbbb16823d"
+         }
+        ],
+        "combinator": "and"
+       }
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.4,
+   "position": [
+    -1472,
+    864
+   ],
+   "id": "80fc11ac-b3b7-485f-98da-52979de2c914",
+   "name": "palavta_chave"
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=instagram_comentarios",
+     "mode": "name"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1072,
+    -176
+   ],
+   "id": "85265b10-5c3a-4ef5-af38-7477eaa1b2b1",
+   "name": "limpar instagram_comentarios",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=sorteio_participantes",
+     "mode": "name"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -752,
+    -176
+   ],
+   "id": "e3dd14e2-5eee-45df-901e-8add7894ce49",
+   "name": "limpar sorteio_participantes",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "-- 1. Tabela para registrar todos os comentários recebidos via Webhook\nCREATE TABLE IF NOT EXISTS instagram_comentarios (\n    id SERIAL PRIMARY KEY,\n    comment_id VARCHAR(64) UNIQUE NOT NULL,      -- '18145753870492848'\n    media_id VARCHAR(64) NOT NULL,                -- ID do Post/Reel do sorteio\n    media_product_type VARCHAR(32),              -- 'FEED', 'REELS'\n    from_user_id VARCHAR(64) NOT NULL,           -- '2244588436403008'\n    from_username VARCHAR(100),                  -- 'rafael.s.pereira'\n    entry_id VARCHAR(64),                        -- ID da sua página/conta\n    comment_text TEXT NOT NULL,                  -- 'Gold'\n    parent_comment_id VARCHAR(64),               -- ID do comentário pai (se for resposta)\n    is_reply BOOLEAN DEFAULT FALSE,\n    commented_at TIMESTAMPTZ NOT NULL,           -- to_timestamp(timestamp)\n    created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\n-- Índices para consultas rápidas\nCREATE INDEX idx_comentarios_media_id ON instagram_comentarios(media_id);\nCREATE INDEX idx_comentarios_user_id ON instagram_comentarios(from_user_id);\nCREATE INDEX idx_comentarios_username ON instagram_comentarios(from_username);\n\n\n-- 2. Tabela dos Participantes Aptos ao Sorteio\nCREATE TABLE IF NOT EXISTS sorteio_participantes (\n    id SERIAL PRIMARY KEY,\n    media_id VARCHAR(64) NOT NULL,               -- Identifica qual sorteio/post\n    from_user_id VARCHAR(64) NOT NULL,           -- Usuário único por sorteio\n    from_username VARCHAR(100) NOT NULL,\n    status VARCHAR(30) DEFAULT 'pendente',       -- 'pendente', 'confirmado', 'desqualificado'\n    is_following BOOLEAN DEFAULT FALSE,          -- Retorno de 'is_user_follow_business'\n    primeiro_comment_id VARCHAR(64) REFERENCES instagram_comentarios(comment_id),\n    ticket_number SERIAL,                        -- Número da sorte sequencial\n    confirmed_at TIMESTAMPTZ,                    -- Momento que confirmou na DM\n    created_at TIMESTAMPTZ DEFAULT NOW(),\n    \n    -- Garante que o mesmo usuário não tenha múltiplos cadastros no mesmo sorteio\n    CONSTRAINT uq_sorteio_usuario UNIQUE (media_id, from_user_id)\n);\n\nCREATE INDEX idx_participantes_status ON sorteio_participantes(media_id, status);\n",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2560,
+    128
+   ],
+   "id": "657544a9-9831-4bd0-9a90-9771c72cc632",
+   "name": "criar tabelas",
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "postImageUrl": "https://cdn-jghdn.nitrocdn.com/WaAKrPwVavvRtmiuchNkiowpZvENVGmM/assets/images/optimized/rev-8dbf00a/www.homehost.com.br/blog/wp-content/uploads/2023/07/sorteio-instagram.jpg",
+    "postCaption": "=O ganhador do sorteio do dia {{ $now.format('dd/MM/yyyy') }} foi  {{ $json.from_username }}",
+    "postAdditionalOptions": {}
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    -2704,
+    656
+   ],
+   "id": "0d416a08-9896-4079-b666-fa904e32f005",
+   "name": "Create a single post",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "publishPost",
+    "creationId": "={{ $json.id }}"
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    -2528,
+    656
+   ],
+   "id": "bafb4d4f-8540-4321-8001-1c196510d69e",
+   "name": "Publish a post",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {}
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -3216,
+    656
+   ],
+   "id": "3d28cb00-fb09-49b5-bb39-3ff94be56428",
+   "name": "Schedule Trigger",
+   "disabled": true
+  }
+ ],
+ "connections": {
+  "If1": {
+   "main": [
+    [
+     {
+      "node": "Reply to comment1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "normatizacao": {
+   "main": [
+    [
+     {
+      "node": "palavta_chave",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reply to comment1": {
+   "main": [
+    [
+     {
+      "node": "Reply to comment3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "normatizacao1": {
+   "main": [
+    [
+     {
+      "node": "Switch1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reply to comment3": {
+   "main": [
+    [
+     {
+      "node": "Insert rows in a table",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Instagram Trigger": {
+   "main": [
+    [
+     {
+      "node": "normatizacao1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [],
+    [
+     {
+      "node": "normatizacao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_seguindo": {
+   "main": [
+    [
+     {
+      "node": "se_seguindo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se_seguindo": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Reply to comment6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Insert rows in a table1": {
+   "main": [
+    [
+     {
+      "node": "Reply to comment2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table1": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Insert rows in a table1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch1": {
+   "main": [
+    [
+     {
+      "node": "verifica_seguindo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "Insert rows in a table2": {
+   "main": [
+    [
+     {
+      "node": "Reply to comment7",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "If2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table3": {
+   "main": [
+    [
+     {
+      "node": "Insert rows in a table2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If2": {
+   "main": [
+    [
+     {
+      "node": "Reply to comment5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "palavta_chave": {
+   "main": [
+    [
+     {
+      "node": "If1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "sorteio1": {
+   "main": [
+    [
+     {
+      "node": "Create a single post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Create a single post": {
+   "main": [
+    [
+     {
+      "node": "Publish a post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "sorteio1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "timeSavedMode": "fixed",
+  "callerPolicy": "workflowsFromSameOwner",
+  "availableInMCP": true
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "pinData": {
+  "Instagram Trigger": [
+   {
+    "json": {
+     "senderId": "1653298526465439",
+     "recipientId": "17841436893509111",
+     "timestamp": 1791764339537,
+     "entryId": "17841436893509111",
+     "eventType": "message",
+     "messageId": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDM2ODkzNTA5MTExOjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI1OTgzNjM1Mjk1OTQ2MDc4ODozMzA1MjIxODIxMTgzOTI0MTI3NDI0NjU1NzY0ODAyNzY0OAZDZD",
+     "text": "Quero participar",
+     "quickReplyPayload": "quero-participar",
+     "isEcho": false
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ],
+  "sorteio1": [
+   {
+    "json": {
+     "from_username": "rafael.s.pereira",
+     "char_name": "Quero participar",
+     "from_user_id": "1653298526465439",
+     "ticket_number": 0,
+     "confirmed_at": "2026-10-12T00:42:51.166Z",
+     "data_comentario": "2026-10-12T00:42:51.166Z"
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ]
+ },
+ "versionId": "a8badf64-3fc0-40cb-97f4-86226b08923d",
+ "activeVersionId": "a8badf64-3fc0-40cb-97f4-86226b08923d",
+ "versionCounter": 158,
+ "triggerCount": 1,
+ "shared": [
+  {
+   "updatedAt": "2026-10-11T00:04:59.226Z",
+   "createdAt": "2026-10-11T00:04:59.226Z",
+   "role": "workflow:owner",
+   "workflowId": "zyUVNOKI9UPm3Tz6",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-13T01:02:46.184Z",
+  "createdAt": "2026-10-13T01:02:43.951Z",
+  "versionId": "a8badf64-3fc0-40cb-97f4-86226b08923d",
+  "workflowId": "zyUVNOKI9UPm3Tz6",
+  "nodes": [
+   {
+    "parameters": {
+     "content": "### 📦 Community Node\nInstalar nó comunitário no n8n:\n`n8n-nodes-instagram-token`",
+     "height": 110,
+     "width": 320,
+     "color": 5
+    },
+    "id": "0a395b32-c810-41ff-9bf2-f2ebd9f37640",
+    "name": "Sticky Note",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -2400,
+     -208
+    ]
+   },
+   {
+    "parameters": {
+     "content": "### 🔑 Meta Developers App\nCriar App no portal:\nhttps://developers.facebook.com/\n\nGuia / Print de permissões:\nhttps://ibb.co/n86cByNK",
+     "height": 142,
+     "width": 320,
+     "color": 6
+    },
+    "id": "2406842f-9b26-4ece-b0b6-4ef2a61090a6",
+    "name": "Sticky Note1",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -2048,
+     -240
+    ]
+   },
+   {
+    "parameters": {
+     "content": "### 📱 Conta de Testes\nPerfil Instagram de testes:\n`_lucrocomia_`",
+     "height": 110,
+     "width": 304,
+     "color": 7
+    },
+    "id": "59d24483-fceb-47e2-9c7a-4203b567d23c",
+    "name": "Sticky Note2",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1696,
+     -208
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 🗄️ 1. SETUP DDL & BANCO DE DADOS (POSTGRESQL)\n\nEstruturação das tabelas relacionais e adequação de tipagem de campos para alta volumetria de comentários e participantes.\n\n* **criar tabelas (`Postgres`)**:\n  Executa DDL (`CREATE TABLE IF NOT EXISTS`) criando as duas tabelas centrais:\n  - `instagram_comentarios`: Guarda o log completo dos comentários do webhook (`comment_id` UNIQUE, `media_id`, `from_user_id`, `from_username`, `comment_text`, `commented_at`, etc.) com índices para performance.\n  - `sorteio_participantes`: Tabela dos participantes aptos ao sorteio com restrição UNIQUE composta `(media_id, from_user_id)`, número da sorte sequencial (`ticket_number SERIAL`) e flag de seguidor (`is_following`).\n\n* **Execute a SQL query1 (`Postgres`)**:\n  Executa migração estrutural (`ALTER TABLE instagram_comentarios ALTER COLUMN commented_at TYPE BIGINT USING EXTRACT(EPOCH FROM commented_at)`), convertendo a coluna de data para inteiro Unix Epoch (timestamp bruto numérico do webhook do Instagram).",
+     "height": 340,
+     "width": 580,
+     "color": 4
+    },
+    "id": "e2589782-8c18-4960-98d7-a924cb0b1faa",
+    "name": "Note - Setup DDL",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -2640,
+     -80
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 🧹 2. MANUTENÇÃO & RESET OPERACIONAL\n\nAções administrativas manuais para expurgo e limpeza das tabelas, permitindo zerar o histórico entre diferentes campanhas ou rodadas de teste.\n\n* **limpar instagram_comentarios (`Postgres`)**:\n  Operação `deleteTable` que remove todos os registros da tabela `instagram_comentarios`, zerando os comentários ingeridos anteriormente.\n\n* **limpar sorteio_participantes (`Postgres`)**:\n  Operação `deleteTable` que apaga todos os concorrentes da tabela `sorteio_participantes`, limpando números da sorte e permitindo novo sorteio do zero.",
+     "height": 360,
+     "width": 640,
+     "color": 3
+    },
+    "id": "3fdba519-0525-4477-ae3a-a54e40ee7622",
+    "name": "Note - Limpeza & Manutenção",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1136,
+     -416
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 🎲 3. MOTOR DE SORTEIO & AUDITORIA\n\nQueries de consulta determinística e seleção pseudoaleatória com base nas regras oficiais da promoção.\n\n* **sorteio (`Postgres`)**:\n  Query oficial de extração do ganhador: seleciona 1 participante vencedor via `ORDER BY RANDOM() LIMIT 1` filtrando pelo post (`media_id = '18057195563557757'`), confirmando que segue a página (`is_following = true`) e que comentou dentro da janela de data/hora oficial.\n\n* **sorteio1 (`Postgres`)**:\n  Query em lote para conferência e suplência: retorna até 50 participantes qualificados aleatórios (`ORDER BY RANDOM() LIMIT 50`) para validação ao vivo ou seleção de suplentes caso o ganhador seja desclassificado.",
+     "height": 360,
+     "width": 580,
+     "color": 7
+    },
+    "id": "c295553c-4b10-4a08-8015-8836cb40d90e",
+    "name": "Note - Motor de Sorteio",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -3264,
+     96
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 💬 4. CAPTURA DE COMENTÁRIOS NO POST & AUTOMAÇÃO DE ENGAJAMENTO\n\nPorta de entrada do evento de comentário no post do Instagram, validação de palavras-chave, envio de DM com botão interativo e resposta pública.\n\n* **Instagram Trigger (`Instagram Trigger`)**:\n  Webhook oficial do Instagram Graph API escutando em tempo real eventos de `comments`, `mentions`, `messages` e postbacks. O **Output 3** dispara quando um comentário é publicado em qualquer post ou reel monitorado.\n\n* **normatizacao (`Set / Edit Fields`)**:\n  Higieniza e descompacta os campos recebidos do webhook: extrai `senderId`, `id_usuario` (`fromUserId`), `comentario` (`text`), `id_comentario` (`commentId`), `id_entrada` (`entryId`), `isReply` e metadados de roteamento.\n\n* **palavta_chave (`Switch`)**:\n  Filtro de qualificação da campanha: checa se `$json.comentario.toLowerCase()` contém a palavra-chave oficial (ex: `\"vip\"`). Comentários sem a palavra-chave são descartados imediatamente para poupar processamento.\n\n* **If1 (`If`)**:\n  Trava de segurança anti-loop: compara se o autor do comentário não é a própria página proprietária (`id_entrada != id_usuario`), impedindo que respostas automáticas gerem loops infinitos de execução.\n\n* **Reply to comment1 (`Instagram Token`)**:\n  Envia uma mensagem privada instantânea na DM do autor (`sendPrivateReplyQuickReplies`) alertando para abrir pelo celular e exibindo o botão Quick Reply interativo com o título *\"Quero participar\"* (payload: `\"quero-participar\"`).\n\n* **Reply to comment3 (`Instagram Token`)**:\n  Responde publicamente ao comentário do seguidor no próprio post informando: *\"Verifique suas DM.\"*, aumentando a visibilidade e o engajamento orgânico da publicação.\n\n* **Insert rows in a table (`Postgres`)**:\n  Insere o comentário completo na tabela `instagram_comentarios` com ID, texto, usuário, timestamp e media_id para histórico de auditoria.",
+     "height": 420,
+     "width": 1960,
+     "color": 6
+    },
+    "id": "52acdd73-e3a4-46e7-bb52-f1216be60553",
+    "name": "Note - Ingestão de Comentários",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -2256,
+     992
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 📱 5. RECEPÇÃO DA DM & VALIDAÇÃO DE SEGUIDOR (OPT-IN)\n\nRecepção do clique no botão interativo da DM, verificação em tempo real se o perfil segue a conta e controle de cobrança caso não siga.\n\n* **normatizacao1 (`Set / Edit Fields`)**:\n  Conectado ao **Output 0** do `Instagram Trigger` (mensagens e postbacks da DM), mapeia `senderId`, `id_usuario`, `comentario` (texto/payload) e identificadores da conversa privada.\n\n* **Switch1 (`Switch`)**:\n  Roteador do payload: verifica se o clique veio do botão com payload `\"quero-participar\"`, direcionando o lead para a verificação de elegibilidade.\n\n* **verifica_seguindo (`Instagram Token`)**:\n  Consulta em tempo real a API do Instagram Graph (`operation: getProfile`) solicitando o campo `is_user_follow_business` para o `senderId` do usuário.\n\n* **se_seguindo (`If`)**:\n  Avalia a regra se `is_user_follow_business == true`:\n  - Se **Falso (Não segue)**: Desvia para a saída 1 para cobrar que o usuário siga o perfil.\n  - Se **Verdadeiro (Segue)**: Desvia para a saída 0, avançando para a conferência e inscrição.\n\n* **Reply to comment6 (`Instagram Token`)**:\n  Disparado se o usuário não seguir a conta: envia DM alertando *\"Você ainda não esta me seguindo. Me siga primeiro e depois clique no botão.\"* com o botão Quick Reply novamente.",
+     "height": 380,
+     "width": 1020,
+     "color": 5
+    },
+    "id": "0a3975fc-5c25-4586-8bb5-fce8f76793e0",
+    "name": "Note - DM & Validação de Seguidor",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1920,
+     240
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 🔍 6. CONSULTA & INSCRIÇÃO NO SORTEIO\n\nConsulta ao histórico do comentário para identificação do post, checagem de cadastro e inserção direta de participantes aptos.\n\n* **Select rows from a table (`Postgres`)**:\n  Busca o último comentário do usuário na tabela `instagram_comentarios` (`from_user_id = $json.id`) para recuperar o `media_id` do post correspondente.\n\n* **Select rows from a table1 (`Postgres`)**:\n  Consulta a tabela `sorteio_participantes` filtrando por `from_user_id` e conferindo se `char_name IS NOT NULL` para checar se o usuário já possui inscrição registrada.\n\n* **If (`If`)**:\n  Testa se o retorno da consulta anterior está vazio (`$json is empty`):\n  - **Vazio (Saída 0)**: Direciona para o Módulo 7 (recuperação completa e tratamento de concorrência com chave única).\n  - **Não Vazio (Saída 1)**: Conduz à rota de inserção direta no banco de participantes.\n\n* **Insert rows in a table1 (`Postgres`)**:\n  Insere o registro na tabela `sorteio_participantes` com dados do post, usuário, `is_following = true`, timestamps e número da sorte.\n\n* **Reply to comment2 (`Instagram Token`)**:\n  Envia mensagem direta de confirmação na DM ao usuário: *\"Cadastrado com sucesso.\"*.",
+     "height": 380,
+     "width": 760,
+     "color": 2
+    },
+    "id": "3aff9545-59e5-4414-8c1a-3937738914bc",
+    "name": "Note - Consulta & Inscrição no Sorteio",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -848,
+     96
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 🛡️ 7. TRATAMENTO ANTI-DUPLICIDADE & CONFIRMAÇÃO FINAL\n\nGarantia de integridade relacional via restrição UNIQUE do banco de dados, confirmando novos cadastros e notificando duplicidades amigavelmente.\n\n* **Select rows from a table3 (`Postgres`)**:\n  Recupera o registro mais recente do comentário do usuário em `instagram_comentarios` (`LIMIT 1, ORDER BY id DESC`) garantindo a consistência de `media_id` e `from_username` antes da inserção.\n\n* **Insert rows in a table2 (`Postgres`)**:\n  Insere o participante em `sorteio_participantes`. Configurado com tratamento de erro contínuo:\n  - **Sucesso (Saída 0)**: Inscrição confirmada, avança para mensagem de sucesso.\n  - **Erro (Saída 1)**: Em caso de falha ou conflito, desvia para diagnóstico do erro.\n\n* **Reply to comment7 (`Instagram Token`)**:\n  Disparado em caso de sucesso na gravação: envia DM de celebração: *\"Você foi cadastrado no sorteio com sucesso.\"*.\n\n* **If2 (`If`)**:\n  Analisa o erro retornado pelo PostgreSQL: checa se `$json.message` contém `\"duplicate key\"`, confirmando violação da chave única `uq_sorteio_usuario (media_id, from_user_id)`.\n\n* **Reply to comment5 (`Instagram Token`)**:\n  Disparado em caso de duplicidade confirmada: envia DM explicativa e amigável: *\"Você já esta cadastrado nessa postagem.\"*, orientando o participante e mantendo a lista de sorteio limpa sem cadastros repetidos.",
+     "height": 420,
+     "width": 930
+    },
+    "id": "e39838c5-ecc5-496d-aafc-d66ea724164f",
+    "name": "Note - Anti-Duplicidade & Confirmação Final",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -96,
+     -64
+    ]
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "56e535fc-f677-47b2-9f65-4c6a28ba2d67",
+        "leftValue": "={{ $json.id_entrada }}",
+        "rightValue": "={{ $json.id_usuario }}",
+        "operator": {
+         "type": "string",
+         "operation": "notEquals"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     -1200,
+     864
+    ],
+    "id": "3ef9f43d-a898-4c4b-ae16-1976103a6c3c",
+    "name": "If1"
+   },
+   {
+    "parameters": {
+     "assignments": {
+      "assignments": [
+       {
+        "id": "228cf138-2d5b-4455-8899-2f7d617f9cf9",
+        "name": "senderId",
+        "value": "={{ $json.senderId }}",
+        "type": "string"
+       },
+       {
+        "id": "9974d322-bb68-474e-9820-d794126a95ca",
+        "name": "id_usuario",
+        "value": "={{ $json.fromUserId }}",
+        "type": "string"
+       },
+       {
+        "id": "42a59c13-5194-4843-a01d-6e65d48184fc",
+        "name": "comentario",
+        "value": "={{ $json.text }}",
+        "type": "string"
+       },
+       {
+        "id": "4a0fed2d-2f86-4f96-ae3b-730c446959dd",
+        "name": "id_comentario",
+        "value": "={{ $json.commentId }}",
+        "type": "string"
+       },
+       {
+        "id": "71694b31-d7a9-4981-a379-af1d4b71617f",
+        "name": "id_entrada",
+        "value": "={{ $json.entryId }}",
+        "type": "string"
+       },
+       {
+        "id": "5c6ffb99-6ebe-4934-b985-8d24dfd5318a",
+        "name": "se e resposta a outro comentario",
+        "value": "={{ $json.isReply }}",
+        "type": "boolean"
+       },
+       {
+        "id": "783897af-49b2-4018-8679-5f63e0c84865",
+        "name": "remetente",
+        "value": "={{ $json.senderId }}",
+        "type": "string"
+       },
+       {
+        "id": "2e722a41-0824-49bf-a287-35b9c2396cc2",
+        "name": "destinatario",
+        "value": "={{ $json.recipientId }}",
+        "type": "string"
+       },
+       {
+        "id": "20c57ce5-7dfb-4965-86d3-122c34480ae0",
+        "name": "evento",
+        "value": "={{ $json.eventType }}",
+        "type": "string"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+     -1904,
+     864
+    ],
+    "id": "50217b93-e3e8-4fb6-bf41-4d8b425bf540",
+    "name": "normatizacao"
+   },
+   {
+    "parameters": {
+     "operation": "sendPrivateReplyQuickReplies",
+     "commentId": "={{ $json.id_comentario }}",
+     "messageText": "Oi, te enviei o botão para entrar no sorteio, mas só funciona abrindo pelo celular.",
+     "quickReplies": {
+      "quickReply": [
+       {
+        "title": "Quero participar",
+        "payload": "quero-participar"
+       }
+      ]
+     }
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     -944,
+     848
+    ],
+    "id": "4a372412-964d-40ff-847c-9e1fe503dc37",
+    "name": "Reply to comment1",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "assignments": {
+      "assignments": [
+       {
+        "id": "228cf138-2d5b-4455-8899-2f7d617f9cf9",
+        "name": "senderId",
+        "value": "={{ $json.senderId }}",
+        "type": "string"
+       },
+       {
+        "id": "9974d322-bb68-474e-9820-d794126a95ca",
+        "name": "id_usuario",
+        "value": "={{ $json.fromUserId }}",
+        "type": "string"
+       },
+       {
+        "id": "42a59c13-5194-4843-a01d-6e65d48184fc",
+        "name": "comentario",
+        "value": "={{ $json.text }}",
+        "type": "string"
+       },
+       {
+        "id": "4a0fed2d-2f86-4f96-ae3b-730c446959dd",
+        "name": "id_comentario",
+        "value": "={{ $json.commentId }}",
+        "type": "string"
+       },
+       {
+        "id": "71694b31-d7a9-4981-a379-af1d4b71617f",
+        "name": "id_entrada",
+        "value": "={{ $json.entryId }}",
+        "type": "string"
+       },
+       {
+        "id": "5c6ffb99-6ebe-4934-b985-8d24dfd5318a",
+        "name": "se e resposta a outro comentario",
+        "value": "={{ $json.isReply }}",
+        "type": "boolean"
+       },
+       {
+        "id": "783897af-49b2-4018-8679-5f63e0c84865",
+        "name": "remetente",
+        "value": "={{ $json.senderId }}",
+        "type": "string"
+       },
+       {
+        "id": "2e722a41-0824-49bf-a287-35b9c2396cc2",
+        "name": "destinatario",
+        "value": "={{ $json.recipientId }}",
+        "type": "string"
+       },
+       {
+        "id": "20c57ce5-7dfb-4965-86d3-122c34480ae0",
+        "name": "evento",
+        "value": "={{ $json.eventType }}",
+        "type": "string"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+     -1904,
+     720
+    ],
+    "id": "fbfde01a-cb3f-4420-a2d0-cfe519249188",
+    "name": "normatizacao1"
+   },
+   {
+    "parameters": {
+     "resource": "comment",
+     "commentId": "={{ $('normatizacao').item.json.id_comentario }}",
+     "message": "Verifique suas DM."
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     -736,
+     848
+    ],
+    "id": "95bbda1d-c45b-417d-b28e-0890b9efadcc",
+    "name": "Reply to comment3",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "events": [
+      "comments",
+      "mentions",
+      "messages",
+      "messaging_optins",
+      "messaging_postbacks"
+     ]
+    },
+    "type": "n8n-nodes-instagram-token.instagramTrigger",
+    "typeVersion": 1,
+    "position": [
+     -2208,
+     752
+    ],
+    "id": "180be26a-b602-4043-8a25-542aab91c300",
+    "name": "Instagram Trigger",
+    "webhookId": "d4daf931-5d12-4681-84b2-615fb3aa6594",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "resource": "user",
+     "operation": "getProfile",
+     "userId": "={{ $json.senderId }}",
+     "fields": [
+      "is_user_follow_business"
+     ]
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     -1248,
+     512
+    ],
+    "id": "f4eadb2a-6e29-4e2c-8abc-50563e063ef6",
+    "name": "verifica_seguindo",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 3
+      },
+      "conditions": [
+       {
+        "id": "dbe4afb1-a9d0-4669-9b21-d3d4548bfbfd",
+        "leftValue": "={{ $json.is_user_follow_business }}",
+        "rightValue": false,
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.3,
+    "position": [
+     -1040,
+     512
+    ],
+    "id": "420df2de-eeb4-44a9-bc48-d3a6052e1f72",
+    "name": "se_seguindo"
+   },
+   {
+    "parameters": {
+     "operation": "sendQuickReplies",
+     "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+     "messageText": "Você ainda não esta me seguindo. Me siga primeiro e depois clique no botão.",
+     "quickReplies": {
+      "quickReply": [
+       {
+        "title": "Quero participar",
+        "payload": "quero-participar"
+       }
+      ]
+     }
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     -816,
+     608
+    ],
+    "id": "6bad2e71-f084-4abc-a32a-9602018f464e",
+    "name": "Reply to comment6",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "instagram_comentarios",
+      "mode": "list",
+      "cachedResultName": "instagram_comentarios"
+     },
+     "columns": {
+      "mappingMode": "defineBelow",
+      "value": {
+       "is_reply": "={{ $('Instagram Trigger').item.json.isReply }}",
+       "comment_id": "={{ $('Instagram Trigger').item.json.commentId }}",
+       "media_id": "={{ $('Instagram Trigger').item.json.mediaId }}",
+       "media_product_type": "={{ $('Instagram Trigger').item.json.mediaProductType }}",
+       "from_user_id": "={{ $('Instagram Trigger').item.json.fromUserId }}",
+       "from_username": "={{ $('Instagram Trigger').item.json.fromUsername }}",
+       "entry_id": "={{ $('Instagram Trigger').item.json.entryId }}",
+       "comment_text": "={{ $('Instagram Trigger').item.json.text }}",
+       "parent_comment_id": "={{ $('Instagram Trigger').item.json.parentCommentId }}",
+       "commented_at": "={{ $('Instagram Trigger').item.json.timestamp }}",
+       "created_at": "={{ $now }}"
+      },
+      "matchingColumns": [
+       "id"
+      ],
+      "schema": [
+       {
+        "id": "id",
+        "displayName": "id",
+        "required": false,
+        "defaultMatch": true,
+        "display": true,
+        "type": "number",
+        "canBeUsedToMatch": true,
+        "removed": true
+       },
+       {
+        "id": "comment_id",
+        "displayName": "comment_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "media_id",
+        "displayName": "media_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "media_product_type",
+        "displayName": "media_product_type",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "from_user_id",
+        "displayName": "from_user_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "from_username",
+        "displayName": "from_username",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "entry_id",
+        "displayName": "entry_id",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "comment_text",
+        "displayName": "comment_text",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "parent_comment_id",
+        "displayName": "parent_comment_id",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "is_reply",
+        "displayName": "is_reply",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "boolean",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "commented_at",
+        "displayName": "commented_at",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "number",
+        "canBeUsedToMatch": true
+       },
+       {
+        "id": "created_at",
+        "displayName": "created_at",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "dateTime",
+        "canBeUsedToMatch": true
+       }
+      ],
+      "attemptToConvertTypes": false,
+      "convertFieldsToString": false
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -528,
+     848
+    ],
+    "id": "b7770c66-f12f-4ad4-b599-23bbec1a8101",
+    "name": "Insert rows in a table",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "executeQuery",
+     "query": "ALTER TABLE instagram_comentarios \n    ALTER COLUMN commented_at TYPE BIGINT \n    USING EXTRACT(EPOCH FROM commented_at)::BIGINT;",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -2336,
+     128
+    ],
+    "id": "88dbe95d-52c2-4582-a167-cb41a80d6a62",
+    "name": "Execute a SQL query1",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "select",
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "instagram_comentarios",
+      "mode": "list",
+      "cachedResultName": "instagram_comentarios"
+     },
+     "limit": 1,
+     "where": {
+      "values": [
+       {
+        "column": "from_user_id",
+        "value": "={{ $json.id }}"
+       }
+      ]
+     },
+     "sort": {
+      "values": [
+       {
+        "column": "id",
+        "direction": "DESC"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -800,
+     416
+    ],
+    "id": "cd54614b-7b94-4c9d-9132-55ef39940e65",
+    "name": "Select rows from a table",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "sorteio_participantes",
+      "mode": "list",
+      "cachedResultName": "sorteio_participantes"
+     },
+     "columns": {
+      "mappingMode": "defineBelow",
+      "value": {
+       "is_following": true,
+       "ticket_number": 0,
+       "from_user_id": "={{ $('Instagram Trigger').item.json.senderId }}",
+       "from_username": "={{ $json.from_username }}",
+       "media_id": "={{ $json.media_id }}",
+       "created_at": "={{ $json.created_at }}",
+       "confirmed_at": "={{ $json.created_at }}"
+      },
+      "matchingColumns": [
+       "id"
+      ],
+      "schema": [
+       {
+        "id": "id",
+        "displayName": "id",
+        "required": false,
+        "defaultMatch": true,
+        "display": true,
+        "type": "number",
+        "canBeUsedToMatch": true,
+        "removed": true
+       },
+       {
+        "id": "media_id",
+        "displayName": "media_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "from_user_id",
+        "displayName": "from_user_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "from_username",
+        "displayName": "from_username",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "status",
+        "displayName": "status",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "is_following",
+        "displayName": "is_following",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "boolean",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "primeiro_comment_id",
+        "displayName": "primeiro_comment_id",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "ticket_number",
+        "displayName": "ticket_number",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "number",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "confirmed_at",
+        "displayName": "confirmed_at",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "dateTime",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "created_at",
+        "displayName": "created_at",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "dateTime",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "char_name",
+        "displayName": "char_name",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       }
+      ],
+      "attemptToConvertTypes": false,
+      "convertFieldsToString": false
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -48,
+     512
+    ],
+    "id": "353cc1ae-2f32-4bde-ba38-23e85e76d8ea",
+    "name": "Insert rows in a table1",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "select",
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "sorteio_participantes",
+      "mode": "list",
+      "cachedResultName": "sorteio_participantes"
+     },
+     "where": {
+      "values": [
+       {
+        "column": "from_user_id",
+        "value": "={{ $json.from_user_id }}"
+       },
+       {
+        "column": "char_name",
+        "condition": "IS NOT NULL"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -544,
+     416
+    ],
+    "id": "4ec75432-0810-4aa9-a2ed-54ea25afcf82",
+    "name": "Select rows from a table1",
+    "alwaysOutputData": true,
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 3
+      },
+      "conditions": [
+       {
+        "id": "3213aa25-7f37-4c45-8dcc-bf01a1c401f3",
+        "leftValue": "={{ $json }}",
+        "rightValue": 0,
+        "operator": {
+         "type": "object",
+         "operation": "empty",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.3,
+    "position": [
+     -336,
+     416
+    ],
+    "id": "255b2e93-be0f-4ed5-ac52-9cd8c89b2631",
+    "name": "If"
+   },
+   {
+    "parameters": {
+     "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+     "messageText": "Cadastrado com sucesso."
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     144,
+     512
+    ],
+    "id": "7542e658-0d8a-4b10-8a24-0d2f16b25f85",
+    "name": "Reply to comment2",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "rules": {
+      "values": [
+       {
+        "conditions": {
+         "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict",
+          "version": 3
+         },
+         "conditions": [
+          {
+           "leftValue": "={{ $('Instagram Trigger').item.json.quickReplyPayload }}",
+           "rightValue": "quero-participar",
+           "operator": {
+            "type": "string",
+            "operation": "equals"
+           },
+           "id": "85899df1-727d-48f4-87e5-3c9824728026"
+          }
+         ],
+         "combinator": "and"
+        },
+        "renameOutput": true,
+        "outputKey": "quero-participar"
+       }
+      ]
+     },
+     "options": {
+      "fallbackOutput": "extra"
+     }
+    },
+    "type": "n8n-nodes-base.switch",
+    "typeVersion": 3.4,
+    "position": [
+     -1696,
+     720
+    ],
+    "id": "89e6d269-5e9d-40a4-b234-43ce77aa5417",
+    "name": "Switch1"
+   },
+   {
+    "parameters": {
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "sorteio_participantes",
+      "mode": "list",
+      "cachedResultName": "sorteio_participantes"
+     },
+     "columns": {
+      "mappingMode": "defineBelow",
+      "value": {
+       "is_following": true,
+       "ticket_number": 0,
+       "from_user_id": "={{ $('Instagram Trigger').item.json.senderId }}",
+       "from_username": "={{ $json.from_username }}",
+       "media_id": "={{ $json.media_id }}",
+       "created_at": "={{ $json.created_at }}",
+       "confirmed_at": "={{ $json.created_at }}",
+       "char_name": "={{ $('Instagram Trigger').item.json.text }}"
+      },
+      "matchingColumns": [
+       "id"
+      ],
+      "schema": [
+       {
+        "id": "id",
+        "displayName": "id",
+        "required": false,
+        "defaultMatch": true,
+        "display": true,
+        "type": "number",
+        "canBeUsedToMatch": true,
+        "removed": true
+       },
+       {
+        "id": "media_id",
+        "displayName": "media_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "from_user_id",
+        "displayName": "from_user_id",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "from_username",
+        "displayName": "from_username",
+        "required": true,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "status",
+        "displayName": "status",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "is_following",
+        "displayName": "is_following",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "boolean",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "primeiro_comment_id",
+        "displayName": "primeiro_comment_id",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "ticket_number",
+        "displayName": "ticket_number",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "number",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "confirmed_at",
+        "displayName": "confirmed_at",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "dateTime",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "created_at",
+        "displayName": "created_at",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "dateTime",
+        "canBeUsedToMatch": true,
+        "removed": false
+       },
+       {
+        "id": "char_name",
+        "displayName": "char_name",
+        "required": false,
+        "defaultMatch": false,
+        "display": true,
+        "type": "string",
+        "canBeUsedToMatch": true,
+        "removed": false
+       }
+      ],
+      "attemptToConvertTypes": false,
+      "convertFieldsToString": false
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     160,
+     128
+    ],
+    "id": "0ee6d892-c98d-45af-a21a-6650d35ec216",
+    "name": "Insert rows in a table2",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "operation": "select",
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "instagram_comentarios",
+      "mode": "list",
+      "cachedResultName": "instagram_comentarios"
+     },
+     "limit": 1,
+     "where": {
+      "values": [
+       {
+        "column": "from_user_id",
+        "value": "={{ $('Instagram Trigger').item.json.senderId }}"
+       }
+      ]
+     },
+     "sort": {
+      "values": [
+       {
+        "column": "id",
+        "direction": "DESC"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -48,
+     160
+    ],
+    "id": "0a4e7a13-f41c-47e0-a8d7-9ab91abd6b36",
+    "name": "Select rows from a table3",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 3
+      },
+      "conditions": [
+       {
+        "id": "9e7cab4a-94ae-4ece-87fc-003dc4291f07",
+        "leftValue": "={{ $json.message }}",
+        "rightValue": "duplicate key",
+        "operator": {
+         "type": "string",
+         "operation": "contains"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.3,
+    "position": [
+     368,
+     224
+    ],
+    "id": "540fa335-41f5-4cf6-b7e8-651391f74e76",
+    "name": "If2"
+   },
+   {
+    "parameters": {
+     "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+     "messageText": "Você já esta cadastrado nessa postagem."
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     624,
+     144
+    ],
+    "id": "0c4154db-5a89-45f9-8274-0ff37b8de691",
+    "name": "Reply to comment5",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "executeQuery",
+     "query": "SELECT \n    from_username,\n    char_name,\n    from_user_id,\n    ticket_number,\n    confirmed_at,\n    created_at AS data_comentario\nFROM sorteio_participantes\nWHERE \n is_following = true\n  -- Filtro de horário do dia 29/09/2026 (00:00:00 até 23:59:59)\n  AND created_at >= '2026-10-12 00:00:00'\n  AND created_at <  '2026-10-13 00:00:00'\nORDER BY RANDOM()\nLIMIT 50;\n",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -2976,
+     656
+    ],
+    "id": "c9ac0973-ebd4-4602-a832-e6b1ba5040c8",
+    "name": "sorteio1",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "recipientId": "={{ $('normatizacao1').item.json.senderId }}",
+     "messageText": "Você foi cadastrado no sorteio com sucesso."
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     432,
+     0
+    ],
+    "id": "af30f913-06d8-40e8-b144-a0445eb79927",
+    "name": "Reply to comment7",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "rules": {
+      "values": [
+       {
+        "conditions": {
+         "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict",
+          "version": 3
+         },
+         "conditions": [
+          {
+           "leftValue": "={{ $json.comentario.toLowerCase() }}",
+           "rightValue": "vip",
+           "operator": {
+            "type": "string",
+            "operation": "contains"
+           },
+           "id": "adc32f7d-5940-44bd-b39a-17dbbb16823d"
+          }
+         ],
+         "combinator": "and"
+        }
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.switch",
+    "typeVersion": 3.4,
+    "position": [
+     -1472,
+     864
+    ],
+    "id": "80fc11ac-b3b7-485f-98da-52979de2c914",
+    "name": "palavta_chave"
+   },
+   {
+    "parameters": {
+     "operation": "deleteTable",
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "=instagram_comentarios",
+      "mode": "name"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -1072,
+     -176
+    ],
+    "id": "85265b10-5c3a-4ef5-af38-7477eaa1b2b1",
+    "name": "limpar instagram_comentarios",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "deleteTable",
+     "schema": {
+      "__rl": true,
+      "mode": "list",
+      "value": "public"
+     },
+     "table": {
+      "__rl": true,
+      "value": "=sorteio_participantes",
+      "mode": "name"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -752,
+     -176
+    ],
+    "id": "e3dd14e2-5eee-45df-901e-8add7894ce49",
+    "name": "limpar sorteio_participantes",
+    "alwaysOutputData": true,
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "executeQuery",
+     "query": "-- 1. Tabela para registrar todos os comentários recebidos via Webhook\nCREATE TABLE IF NOT EXISTS instagram_comentarios (\n    id SERIAL PRIMARY KEY,\n    comment_id VARCHAR(64) UNIQUE NOT NULL,      -- '18145753870492848'\n    media_id VARCHAR(64) NOT NULL,                -- ID do Post/Reel do sorteio\n    media_product_type VARCHAR(32),              -- 'FEED', 'REELS'\n    from_user_id VARCHAR(64) NOT NULL,           -- '2244588436403008'\n    from_username VARCHAR(100),                  -- 'rafael.s.pereira'\n    entry_id VARCHAR(64),                        -- ID da sua página/conta\n    comment_text TEXT NOT NULL,                  -- 'Gold'\n    parent_comment_id VARCHAR(64),               -- ID do comentário pai (se for resposta)\n    is_reply BOOLEAN DEFAULT FALSE,\n    commented_at TIMESTAMPTZ NOT NULL,           -- to_timestamp(timestamp)\n    created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\n-- Índices para consultas rápidas\nCREATE INDEX idx_comentarios_media_id ON instagram_comentarios(media_id);\nCREATE INDEX idx_comentarios_user_id ON instagram_comentarios(from_user_id);\nCREATE INDEX idx_comentarios_username ON instagram_comentarios(from_username);\n\n\n-- 2. Tabela dos Participantes Aptos ao Sorteio\nCREATE TABLE IF NOT EXISTS sorteio_participantes (\n    id SERIAL PRIMARY KEY,\n    media_id VARCHAR(64) NOT NULL,               -- Identifica qual sorteio/post\n    from_user_id VARCHAR(64) NOT NULL,           -- Usuário único por sorteio\n    from_username VARCHAR(100) NOT NULL,\n    status VARCHAR(30) DEFAULT 'pendente',       -- 'pendente', 'confirmado', 'desqualificado'\n    is_following BOOLEAN DEFAULT FALSE,          -- Retorno de 'is_user_follow_business'\n    primeiro_comment_id VARCHAR(64) REFERENCES instagram_comentarios(comment_id),\n    ticket_number SERIAL,                        -- Número da sorte sequencial\n    confirmed_at TIMESTAMPTZ,                    -- Momento que confirmou na DM\n    created_at TIMESTAMPTZ DEFAULT NOW(),\n    \n    -- Garante que o mesmo usuário não tenha múltiplos cadastros no mesmo sorteio\n    CONSTRAINT uq_sorteio_usuario UNIQUE (media_id, from_user_id)\n);\n\nCREATE INDEX idx_participantes_status ON sorteio_participantes(media_id, status);\n",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.postgres",
+    "typeVersion": 2.6,
+    "position": [
+     -2560,
+     128
+    ],
+    "id": "657544a9-9831-4bd0-9a90-9771c72cc632",
+    "name": "criar tabelas",
+    "credentials": {
+     "postgres": {
+      "id": "6xi2NwJjZR2l2zYQ",
+      "name": "209.145.60.53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "postImageUrl": "https://cdn-jghdn.nitrocdn.com/WaAKrPwVavvRtmiuchNkiowpZvENVGmM/assets/images/optimized/rev-8dbf00a/www.homehost.com.br/blog/wp-content/uploads/2023/07/sorteio-instagram.jpg",
+     "postCaption": "=O ganhador do sorteio do dia {{ $now.format('dd/MM/yyyy') }} foi  {{ $json.from_username }}",
+     "postAdditionalOptions": {}
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     -2704,
+     656
+    ],
+    "id": "0d416a08-9896-4079-b666-fa904e32f005",
+    "name": "Create a single post",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "operation": "publishPost",
+     "creationId": "={{ $json.id }}"
+    },
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     -2528,
+     656
+    ],
+    "id": "bafb4d4f-8540-4321-8001-1c196510d69e",
+    "name": "Publish a post",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "rule": {
+      "interval": [
+       {}
+      ]
+     }
+    },
+    "type": "n8n-nodes-base.scheduleTrigger",
+    "typeVersion": 1.3,
+    "position": [
+     -3216,
+     656
+    ],
+    "id": "3d28cb00-fb09-49b5-bb39-3ff94be56428",
+    "name": "Schedule Trigger",
+    "disabled": true
+   }
+  ],
+  "connections": {
+   "If1": {
+    "main": [
+     [
+      {
+       "node": "Reply to comment1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "normatizacao": {
+    "main": [
+     [
+      {
+       "node": "palavta_chave",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reply to comment1": {
+    "main": [
+     [
+      {
+       "node": "Reply to comment3",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "normatizacao1": {
+    "main": [
+     [
+      {
+       "node": "Switch1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reply to comment3": {
+    "main": [
+     [
+      {
+       "node": "Insert rows in a table",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Instagram Trigger": {
+    "main": [
+     [
+      {
+       "node": "normatizacao1",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [],
+     [],
+     [
+      {
+       "node": "normatizacao",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "verifica_seguindo": {
+    "main": [
+     [
+      {
+       "node": "se_seguindo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "se_seguindo": {
+    "main": [
+     [
+      {
+       "node": "Select rows from a table",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Reply to comment6",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Select rows from a table": {
+    "main": [
+     [
+      {
+       "node": "Select rows from a table1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Insert rows in a table1": {
+    "main": [
+     [
+      {
+       "node": "Reply to comment2",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Select rows from a table1": {
+    "main": [
+     [
+      {
+       "node": "If",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "If": {
+    "main": [
+     [
+      {
+       "node": "Select rows from a table3",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Insert rows in a table1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Switch1": {
+    "main": [
+     [
+      {
+       "node": "verifica_seguindo",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     []
+    ]
+   },
+   "Insert rows in a table2": {
+    "main": [
+     [
+      {
+       "node": "Reply to comment7",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "If2",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Select rows from a table3": {
+    "main": [
+     [
+      {
+       "node": "Insert rows in a table2",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "If2": {
+    "main": [
+     [
+      {
+       "node": "Reply to comment5",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "palavta_chave": {
+    "main": [
+     [
+      {
+       "node": "If1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "sorteio1": {
+    "main": [
+     [
+      {
+       "node": "Create a single post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Create a single post": {
+    "main": [
+     [
+      {
+       "node": "Publish a post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Schedule Trigger": {
+    "main": [
+     [
+      {
+       "node": "sorteio1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": "Version a8badf64",
+  "description": "",
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-13T01:02:46.177Z",
+    "id": 94,
+    "workflowId": "zyUVNOKI9UPm3Tz6",
+    "versionId": "a8badf64-3fc0-40cb-97f4-86226b08923d",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

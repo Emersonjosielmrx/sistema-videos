@@ -1,0 +1,63 @@
+Videos quebrados em D:\hipercool-materiais\veo\limpos (16/10/2026)
+
+ATUALIZADO 16/10: sao 28 (faltava transformacao_20260727_062012). Os 28 json
+estao marcados com revisar="arquivo quebrado, nao decodifica" e decodifica=false,
+e a rede (mr/rede.py) pula tudo que tem "quebrado" no revisar: nao vao pro YouTube
+nem entram na fila. Os arquivos NAO foram apagados (decisao a/b abaixo segue com a dona).
+
+O que sao: 28 dos 240 videos da pasta (11%) NAO DECODIFICAM. O arquivo abre, o
+ffprobe le o cabecalho e diz que esta tudo bem, mas o ffmpeg nao consegue
+decodificar o conteudo (Invalid NAL unit size). Na pratica o video nao toca.
+
+Por que importa: eles estao APROVADOS na politica de postagem, e esta pasta e a
+fonte que a rede do manhwa-react publica no YouTube. A rede pode agendar um
+deles hoje.
+
+O que ja esta protegido: o validador novo (D:\veo\beta\validar_video.py) reprova
+todos eles, e o porteiro do cron impede que video assim nasca de novo. Mas o
+validador ainda NAO e chamado na hora de postar: por isso estes continuam na fila.
+
+Nenhum deles foi postado ainda (nenhum tem posted_url). Os 27 estao com status
+"aprovado" na politica.
+
+Por tema: 14 transformacao, 10 tech_news, 2 super_slow_ia, 2 sobras de teste.
+A concentracao em 2 temas sugere que o defeito entrou num lote especifico (dias
+26-27/07 e 02/08), nao em arquivos soltos: vale olhar o bruto correspondente em
+veo_videos_iniciais antes de apagar, porque pode ser que a limpeza e que esteja
+quebrando esses casos.
+
+O que fazer (decisao da dona):
+  a) apagar os 27 e o json ao lado;
+  b) refazer a limpeza a partir do bruto em veo_videos_iniciais (pode ser que o
+     defeito tenha entrado na limpeza, nao na geracao);
+  c) marcar como rejeitado na politica, para a rede nao pegar.
+
+Lista:
+super_slow_ia_20260807_172502.mp4
+super_slow_ia_20260811_073136.mp4
+tech_news_20260802_010738.mp4
+tech_news_20260802_015437.mp4
+tech_news_20260802_071231.mp4
+tech_news_20260802_071926.mp4
+tech_news_20260802_073930.mp4
+tech_news_20260802_074150.mp4
+tech_news_20260802_094519.mp4
+tech_news_20260802_101135.mp4
+tech_news_20260802_102120.mp4
+tech_news_20260802_102416.mp4
+teste1.mp4
+teste_alucina_v3.mp4
+transformacao_20260725_234842.mp4
+transformacao_20260726_001932.mp4
+transformacao_20260726_003202.mp4
+transformacao_20260726_005810.mp4
+transformacao_20260726_031530.mp4
+transformacao_20260727_062012.mp4  (achado depois, 16/10: tambem Invalid NAL unit)
+transformacao_20260803_033542.mp4
+transformacao_20260805_080810.mp4
+transformacao_20260806_082927.mp4
+transformacao_20260806_084943.mp4
+transformacao_20260806_110538.mp4
+transformacao_20260807_092551.mp4
+transformacao_20260807_160504.mp4
+transformacao_20260811_085529.mp4

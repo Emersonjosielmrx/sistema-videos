@@ -1,0 +1,137 @@
+{
+ "pautas": [
+  {
+   "id": "historico_perdido",
+   "tipo": "dor",
+   "ideia": "O cliente entra em contato de novo e ninguém sabe o que foi tratado antes, mas o CRM personalizado reúne o histórico completo e o atendimento no mesmo lugar.",
+   "pergunta_cliente": "Consigo ver tudo o que o cliente conversou antes sem ter que perguntar para a equipe?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "medo_ferramenta_generica",
+   "tipo": "objecao",
+   "ideia": "O empresário teme contratar outro CRM engessado que não cabe na sua rotina, mas a solução é adaptada sob medida para o negócio a partir do Chatwoot.",
+   "pergunta_cliente": "Esse CRM pode ser adaptado exatamente para o fluxo do meu negócio?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "fluxo_chamados_vendas",
+   "tipo": "como_funciona",
+   "ideia": "Demonstração de como as mensagens de clientes viram tickets de suporte ou oportunidades comerciais na mesma tela integrada.",
+   "pergunta_cliente": "Como funciona a divisão entre suporte por tickets e vendas na prática?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "ia_no_atendimento",
+   "tipo": "caso_de_uso",
+   "ideia": "Uso da inteligência artificial dentro do Chatwoot para responder dúvidas comuns e qualificar o contato antes do atendente humano assumir.",
+   "pergunta_cliente": "A inteligência artificial ajuda a responder os clientes direto no atendimento?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "duvida_chatwoot_puro",
+   "tipo": "pergunta_frequente",
+   "ideia": "Esclarecimento de que não se trata apenas do Chatwoot padrão, e sim de uma estrutura personalizada com IA, CRM e helpdesk para a sua operação.",
+   "pergunta_cliente": "Qual a diferença entre o Chatwoot comum e essa versão personalizada com IA?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "pos_venda_organizado",
+   "tipo": "antes_depois",
+   "ideia": "Antes o pós-venda perdia reclamações soltas em conversas, agora cada chamado vira um ticket organizado com histórico unificado.",
+   "pergunta_cliente": "Minha equipe vai conseguir acompanhar os chamados sem perder mensagens?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "atendente_sem_contexto",
+   "tipo": "dor",
+   "ideia": "O atendente assume a conversa sem saber se a pessoa é cliente nova ou antiga, problema resolvido pelo CRM com dados e tickets centralizados.",
+   "pergunta_cliente": "O atendente consegue ver se quem chamou já comprou com a gente?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "medo_complexidade_ia",
+   "tipo": "objecao",
+   "ideia": "O dono do negócio acha que CRM com IA é complexo demais para o seu tamanho, descobrindo que o sistema é feito sob medida para sua realidade.",
+   "pergunta_cliente": "Meu negócio é pequeno, um CRM com IA não vai ser complicado demais?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "visao_unica_cliente",
+   "tipo": "como_funciona",
+   "ideia": "Apresentação de como o perfil do cliente exibe atendimentos anteriores, pendências e tickets abertos em uma só interface.",
+   "pergunta_cliente": "Fica tudo mesmo numa tela só ou preciso abrir outro sistema?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "demanda_suporte_gargalo",
+   "tipo": "caso_de_uso",
+   "ideia": "Empresa com fila de dúvidas repetitivas usa a IA integrada ao Chatwoot para agilizar o suporte e organizar a fila de tickets.",
+   "pergunta_cliente": "A IA consegue adiantar o suporte das dúvidas mais comuns?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "centralizar_ferramentas",
+   "tipo": "pergunta_frequente",
+   "ideia": "Explicação de como a integração entre CRM, helpdesk e atendimento elimina a necessidade de pagar vários sistemas separados.",
+   "pergunta_cliente": "Consigo parar de usar uma ferramenta de tickets e outra de atendimento?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "fim_planilhas_atendimento",
+   "tipo": "antes_depois",
+   "ideia": "Antes o controle de clientes ficava em planilhas desatualizadas, agora fica registrado no CRM integrado ao atendimento em tempo real.",
+   "pergunta_cliente": "Vou conseguir tirar o controle de clientes das planilhas?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "ajuste_ao_processo",
+   "tipo": "objecao",
+   "ideia": "O gestor acha que terá que mudar seu processo de trabalho, mas o CRM é construído a partir do Chatwoot de forma personalizada para a sua rotina.",
+   "pergunta_cliente": "Vocês configuram o CRM de acordo com a forma que eu já atendo?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "jornada_do_ticket",
+   "tipo": "como_funciona",
+   "ideia": "Passo a passo de como uma mensagem recebida vira um ticket resolvido com histórico salvo no perfil do contato.",
+   "pergunta_cliente": "Como o sistema transforma uma conversa de suporte em um ticket resolvido?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "triagem_com_ia",
+   "tipo": "caso_de_uso",
+   "ideia": "Cliente busca atendimento e a IA realiza a triagem inicial com direcionamento correto para o setor de suporte ou comercial.",
+   "pergunta_cliente": "Tem como a inteligência artificial fazer a triagem inicial dos contatos?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "historico_compartilhado",
+   "tipo": "pergunta_frequente",
+   "ideia": "Confirmação de que qualquer membro autorizado da equipe pode consultar o histórico de tickets e atendimentos do cliente.",
+   "pergunta_cliente": "Se outro atendente assumir o cliente, ele tem acesso ao que foi dito antes?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "desordem_para_controle",
+   "tipo": "antes_depois",
+   "ideia": "Antes vários atendentes respondiam sem saber o contexto, agora o time opera com tickets definidos e histórico compartilhado.",
+   "pergunta_cliente": "Como fica a organização quando mais de uma pessoa atende o mesmo cliente?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "cliente_cobrando_retorno",
+   "tipo": "dor",
+   "ideia": "O cliente cobra uma resposta prometida e ninguém sabe quem ficou responsável, dor resolvida pelos tickets de helpdesk do Chatwoot.",
+   "pergunta_cliente": "Consigo saber quem da equipe está responsável por resolver o chamado?",
+   "criada": "2026-10-27T20:14:40"
+  },
+  {
+   "id": "rotina_personalizada",
+   "tipo": "caso_de_uso",
+   "ideia": "Negócio que precisa de etapas específicas de atendimento utiliza um CRM sob medida com tickets e IA desenhados para sua operação.",
+   "pergunta_cliente": "É possível personalizar as etapas de atendimento para o meu tipo de serviço?",
+   "criada": "2026-10-27T20:14:40"
+  }
+ ]
+}

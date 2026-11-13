@@ -1,0 +1,64 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "Irmão Lee",
+   "principal": false,
+   "aparicoes": 30,
+   "arquivos": [
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1416.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1518.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1812.0
+    }
+   ],
+   "papel": "ally",
+   "visual": "Blonde styled hair, light brown eyes, often wearing a fur-lined jacket or sporty shirt with gold chain accessories",
+   "protagonista": false,
+   "adulto": true
+  },
+  {
+   "personagem": "h02",
+   "nome": "Han Feng",
+   "principal": true,
+   "aparicoes": 25,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 726.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2340.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2346.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1134.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 1044.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 2268.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "messy black hair, dark eyes, blue top over white collared shirt",
+   "protagonista": true,
+   "adulto": true
+  }
+ ]
+}

@@ -1,0 +1,166 @@
+{
+ "name": "PromovaWeb-Sexta-Feira: 📈 Termômetro das VPSs",
+ "nodes": [
+  {
+   "parameters": {
+    "path": "tool-metricas-performance",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "a94c0fdd-fa4a-405f-93a9-db6b0aeb46da",
+   "name": "📈 Pedido de Métricas",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    240,
+    304
+   ],
+   "webhookId": "59cf552b-d3a8-44c4-a334-007381c38a89"
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "echo CPU_PERCENT=$(top -bn1 | grep 'Cpu(s)' | awk '{print $2}') && echo MEM_TOTAL=$(free -m | awk '/Mem:/{print $2}')MB && echo MEM_USED=$(free -m | awk '/Mem:/{print $3}')MB && echo MEM_PERCENT=$(free | awk '/Mem:/{printf \"%.0f\", $3/$2*100}')% && echo SWAP_USED=$(free -m | awk '/Swap:/{print $3}')MB && echo LOAD_1MIN=$(cat /proc/loadavg | awk '{print $1}') && echo LOAD_5MIN=$(cat /proc/loadavg | awk '{print $2}') && echo LOAD_15MIN=$(cat /proc/loadavg | awk '{print $3}') && echo IO_WAIT=$(iostat -c 2>/dev/null | awk '/^ /{print $4}' | tail -1 || echo 'N/A') && echo PROCS_TOTAL=$(ps aux | wc -l) && echo PROCS_ZOMBIE=$(ps aux | awk '$8==\"Z\"' | wc -l)"
+   },
+   "id": "576778c1-8ad1-4d6f-9f26-d8889d10c9a5",
+   "name": "📊 Termômetro VPS1",
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    544,
+    304
+   ],
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "Ak1qrzt01yCEr238",
+     "name": "SSH VPS1 Inovare (209.145.60.53)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "echo CPU_PERCENT=$(top -bn1 | grep 'Cpu(s)' | awk '{print $2}') && echo MEM_TOTAL=$(free -m | awk '/Mem:/{print $2}')MB && echo MEM_USED=$(free -m | awk '/Mem:/{print $3}')MB && echo MEM_PERCENT=$(free | awk '/Mem:/{printf \"%.0f\", $3/$2*100}')% && echo SWAP_USED=$(free -m | awk '/Swap:/{print $3}')MB && echo LOAD_1MIN=$(cat /proc/loadavg | awk '{print $1}') && echo LOAD_5MIN=$(cat /proc/loadavg | awk '{print $2}') && echo LOAD_15MIN=$(cat /proc/loadavg | awk '{print $3}') && echo IO_WAIT=$(iostat -c 2>/dev/null | awk '/^ /{print $4}' | tail -1 || echo 'N/A') && echo PROCS_TOTAL=$(ps aux | wc -l) && echo PROCS_ZOMBIE=$(ps aux | awk '$8==\"Z\"' | wc -l)"
+   },
+   "id": "2fdf4c2b-83f9-46fb-a439-0609d8814dfc",
+   "name": "📊 Termômetro VPS2",
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    848,
+    304
+   ],
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "xvjyiGDy9PIuvVIB",
+     "name": "SSH VPS2 Inovare (157.173.207.22)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseMetrics(stdout) {\n  const obj = {};\n  (stdout || '').split('\\n').forEach(l => {\n    const [k, ...v] = l.split('=');\n    if (k && v.length) obj[k.toLowerCase()] = v.join('=').trim();\n  });\n  return obj;\n}\n\nconst vps1 = parseMetrics($('📊 Termômetro VPS1').first().json.stdout);\nconst vps2 = parseMetrics($('📊 Termômetro VPS2').first().json.stdout);\n\nconst alertas = [];\nif (parseFloat(vps1.cpu_percent) > 80) alertas.push('VPS1 CPU alta: ' + vps1.cpu_percent + '%');\nif (parseFloat(vps2.cpu_percent) > 80) alertas.push('VPS2 CPU alta: ' + vps2.cpu_percent + '%');\nif (parseInt(vps1.mem_percent) > 90) alertas.push('VPS1 RAM critica: ' + vps1.mem_percent);\nif (parseInt(vps2.mem_percent) > 90) alertas.push('VPS2 RAM critica: ' + vps2.mem_percent);\n\nreturn [{ json: {\n  success: true,\n  timestamp: new Date().toISOString(),\n  vps1,\n  vps2,\n  alertas,\n  status: alertas.length > 0 ? 'ATENCAO' : 'SAUDAVEL'\n} }];"
+   },
+   "id": "e5483f31-204b-4aa1-afc2-7fa56ae5c981",
+   "name": "🌡️ Diagnóstico Completo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1152,
+    304
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "id": "a295f103-30d3-4af9-8559-419b24086c5e",
+   "name": "📤 Boletim Performance",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1440,
+    304
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📈 Termômetro das VPSs\n\n**O que faz:** Métricas de CPU, RAM, load e IO em tempo real! 🌡️\n\n**Como usar:**\n```\nGET /webhook/tool-metricas-performance\n```\n\n**Coleta:**\n- 🔥 CPU % (pico de uso)\n- 🧠 RAM usada/total + %\n- 💾 Swap utilizado\n- ⚡ Load Average (1/5/15 min)\n- 💿 IO Wait\n- 🧟 Processos zombie\n\n**Alertas automáticos:**\n- CPU > 80% → ⚠️\n- RAM > 90% → 🔴\n\n**Nodes:**\n- 📈 Pedido → trigger\n- 📊 Termometro VPS1 → top/free/loadavg\n- 📊 Termometro VPS2 → top/free/loadavg\n- 🌡️ Diagnostico → alertas se fora do normal",
+    "height": 400,
+    "width": 420
+   },
+   "id": "sticky-uYDbLNql",
+   "name": "📋 Documentação",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    144,
+    80
+   ]
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "📈 Pedido de Métricas": {
+   "main": [
+    [
+     {
+      "node": "📊 Termômetro VPS1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📊 Termômetro VPS1": {
+   "main": [
+    [
+     {
+      "node": "📊 Termômetro VPS2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📊 Termômetro VPS2": {
+   "main": [
+    [
+     {
+      "node": "🌡️ Diagnóstico Completo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌡️ Diagnóstico Completo": {
+   "main": [
+    [
+     {
+      "node": "📤 Boletim Performance",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": true
+ },
+ "versionId": "87031667-c48c-40eb-8c66-6453a15de7e5",
+ "meta": {
+  "aiBuilderAssisted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "uYDbLNqlhGY4aDRb",
+ "tags": []
+}

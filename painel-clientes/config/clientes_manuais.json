@@ -1,0 +1,127 @@
+{
+  "_leia": "Clientes do Painel de Clientes (dona 24/10/2026). Cliente novo = copiar o modelo abaixo, trocar os dados, \"ativo\": true, e rodar: python D:\\painel-clientes\\publicar.py. id = só letras minúsculas/números/_ (vai no link). instagram = @ sem a arroba (o token tem que estar em D:\\credenciais-canais\\instagram_contas.json). loja = id da loja no sistema acai-lojas (só quem vende pelo site). sites = endereços do site do cliente para contar visitas. whatsapp = link do WhatsApp para onde vão os links rastreados das campanhas. Os produtos entram sozinhos (gerar_config.py lê as landings e as contas de Instagram).",
+  "_leia_ignorar": "contas e telefones DA CASA (dona, equipe, contas nossas): não contam como pessoa que entrou em contato. As contas de Instagram nossas (marcas_instagram.json e credenciais) entram sozinhas.",
+  "ignorar": [
+    "hayllamikeyce",
+    "emerson.inteligenciaartificial",
+    "5591984698653"
+  ],
+  "clientes": [
+    {
+      "id": "precioso",
+      "nome": "Açaí O Precioso",
+      "tipo": "cliente",
+      "cor": "#7c3aed",
+      "cidade": "Paragominas - PA",
+      "instagram": [
+        "acai_oprecioso"
+      ],
+      "loja": "precioso",
+      "sites": [
+        "precioso.opus-sem-limites.com.br"
+      ],
+      "site": "https://precioso.opus-sem-limites.com.br/",
+      "whatsapp": "5591993668986",
+      "ativo": true,
+      "login": "acai",
+      "senha": "acai",
+      "historico": [
+        {
+          "em": "2026-11-05T00:19",
+          "o_que": "Instagram @acai_oprecioso conectado ao nosso sistema (login feito pela equipe)."
+        },
+        {
+          "em": "2026-11-05T00:28",
+          "o_que": "Print do perfil ANTES de qualquer mudança: 15 posts, 771 seguidores e nenhum destaque."
+        },
+        {
+          "em": "2026-11-05T00:30",
+          "o_que": "Estudo da marca: cores roxo e verde, fotos dos produtos (açaí no litro, 500 ml e na tigela)."
+        },
+        {
+          "em": "2026-11-05T02:12",
+          "o_que": "Carrossel publicado: O verdadeiro sabor do açaí nativo.",
+          "link": "https://www.instagram.com/p/DfWQhKqEb79/"
+        },
+        {
+          "em": "2026-11-05T03:20",
+          "o_que": "5 destaques criados com capas na cor da marca: Cardápio, Pedidos, Onde estamos, Encomendas e Clientes."
+        },
+        {
+          "em": "2026-11-05T04:50",
+          "o_que": "Reel publicado: o açaí mais precioso de Paragominas.",
+          "link": "https://www.instagram.com/reel/DfWim4YP08m/"
+        },
+        {
+          "em": "2026-11-05T06:50",
+          "o_que": "Carrossel publicado: Açaí com peixe frito? Aqui tem!",
+          "link": "https://www.instagram.com/p/DfWwXJfm95W/"
+        },
+        {
+          "em": "2026-11-05T08:45",
+          "o_que": "Pasta no Google Drive criada para vocês mandarem fotos, vídeos e ideias de posts.",
+          "link": "https://drive.google.com/drive/folders/1hAu584YvbsWZ3rg9ANARePf_WeaF4_33"
+        },
+        {
+          "em": "2026-11-05T09:51",
+          "o_que": "Carrossel publicado: Leve o açaí pra casa (litro e 500 ml).",
+          "link": "https://www.instagram.com/p/DfXFA84FAdc/"
+        }
+      ],
+      "cliente_desde": "2026-10-24"
+    },
+    {
+      "id": "msenergy",
+      "nome": "MS Energy",
+      "tipo": "cliente",
+      "cor": "#e11d48",
+      "cidade": "Paragominas - PA",
+      "instagram": [
+        "msenergycap"
+      ],
+      "sites": [],
+      "site": "https://www.instagram.com/msenergycap/",
+      "whatsapp": "https://wa.me/message/RTCI5IGNUZVIF1",
+      "ativo": true,
+      "cliente_desde": "2026-08-24"
+    },
+    {
+      "id": "advance",
+      "nome": "Advance Energia Solar",
+      "tipo": "cliente",
+      "cor": "#5b21ea",
+      "cidade": "Castanhal - PA",
+      "instagram": [
+        "advance_novoestrela"
+      ],
+      "instagram_http": true,
+      "_instagram_http": "30/10: conta pessoal sem token da API -> coletor\\coletar_instagram_http.py lê pela sessão do cofre",
+      "sites": [],
+      "site": "https://www.instagram.com/advance_novoestrela/",
+      "whatsapp": "https://wa.me/message/XSYWM2W3MFLK",
+      "login": "luiz",
+      "_login": "30/10 (dona): login e senha = nome dele (luiz / luiz); a senha fica só como hash em segredos\\chaves.json",
+      "ativo": true,
+      "cliente_desde": "2026-10-29"
+    },
+    {
+      "id": "globo",
+      "nome": "Globo Solar",
+      "tipo": "cliente",
+      "cor": "#ea3a21",
+      "cidade": "Concórdia do Pará - PA",
+      "instagram": [
+        "globosolarenergiag"
+      ],
+      "instagram_http": true,
+      "_instagram_http": "31/10: conta sem token da API -> coletor\\coletar_instagram_http.py lê pela sessão do cofre ig_globosolarenergiag",
+      "sites": [],
+      "site": "https://www.instagram.com/globosolarenergiag/",
+      "whatsapp": "https://wa.me/5591993949409",
+      "login": "globo",
+      "_login": "31/10 (dona): login e senha = globo / globo; a senha fica só como hash em segredos\\chaves.json",
+      "ativo": true,
+      "cliente_desde": "2026-10-31"
+    }
+  ]
+}

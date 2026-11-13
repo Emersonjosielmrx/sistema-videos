@@ -1,0 +1,50 @@
+11:50:52 | aulasrevolution                | OK | aulasrevolution
+11:52:35 | e4487017                       | OK | e4487017
+11:55:11 | emersongencshin                | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+    - locator resolved to <button tabindex="0" role="button" class="sc-kLEbxe iWITea">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+
+11:59:44 | emersonjosiel1995              | FALHA | botao 'Create New API Token' nao encontrado
+12:02:32 | emersonjosiel2027              | FALHA | nao conseguiu logar no Kaggle
+12:04:36 | filmescomia00                  | FALHA | nao conseguiu logar no Kaggle
+12:06:46 | gameoftroneskingsroadbrasil    | OK | gameoftroneskingsroa
+12:11:14 | inovaremanhwaverse             | FALHA | Page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://www.kaggle.com/settings", waiting until "domcontentloaded"
+
+12:13:22 | inovaremanhwaverseind          | OK | inovaremanhwaversein
+12:15:08 | inovaremanhwaverseing          | FALHA | nao conseguiu logar no Kaggle
+12:17:52 | inovaremanhwaverseita          | OK | inovaremanhwaverseit
+12:19:43 | inovaremanhwaversethai         | OK | inovaremanhwaverseth
+12:20:59 | inovaremanhwaverseviet         | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+    - locator resolved to <button tabindex="0" role="button" class="sc-kLEbxe iWITea">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+   
+12:22:43 | inovaremultiatendimento        | OK | inovaremultiatendime
+12:24:29 | mentoriaiapro                  | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+
+12:27:00 | mundosolar1995                 | FALHA | Page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://www.kaggle.com/account/login?returnUrl=%2Fsettings", waiting until "domcontentloaded"
+
+12:28:43 | rezaulkarimul355               | OK | rezaulkarimul355
+12:30:09 | seebotsia                      | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+    - locator resolved to <button tabindex="0" role="button" class="sc-kLEbxe iWITea">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+   
+12:31:42 | inovaremanhwaverse2            | OK | inovaremanhwaverse2
+12:33:01 | simonerebecaluizasilva         | OK | simonerebecaluizasil
+12:35:11 | revolutionemerson2             | OK | revolutionemerson2
+12:37:31 | revolutionemerson3             | OK | revolutionemerson3
+12:39:28 | emersonjosielmrx1995           | OK | emersonjosielmrx1995

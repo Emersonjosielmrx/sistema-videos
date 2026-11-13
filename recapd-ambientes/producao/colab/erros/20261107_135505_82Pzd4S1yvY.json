@@ -1,0 +1,9 @@
+{
+ "ok": false,
+ "error": "rc=1",
+ "segundos": 6544,
+ "voz_clonada": "momo",
+ "applio": "ok em 53 s",
+ "log": "2026-11-07 20:18:41,370 - INFO - [preparo] sem roteiro (/kaggle/tmp/trab/trabalho/20261107_135505_82Pzd4S1yvY/roteiro.txt) — transcrevendo e roteirizando aqui\n2026-11-07 20:20:48,998 - INFO - [preparo] libs CUDA pro Whisper: libcublas.so.12, libcublasLt.so.12, libcudnn.so.9, libcudnn_cnn.so.9, libcudnn_ops.so.9\n2026-11-07 20:20:49,483 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main \"HTTP/1.1 200 OK\"\n2026-11-07 20:20:50,284 - INFO - Processing audio with duration 03:22:56.314\n2026-11-07 20:21:02,221 - INFO - Detected language 'en' with probability 1.00\n2026-11-07 20:27:47,852 - INFO - [preparo] Whisper small (GPU) (T4 núcleos): 2647 trechos, língua en, até 12173s, em 421s\n2026-11-07 20:27:47,915 - INFO - [script] roteiro longo com tempo: 59 blocos, ~31 frases/bloco, 0s..12173s do original\n2026-11-07 20:28:27,044 - WARNING - [script] roteiro longo com tempo saiu com 59 frases pra 1826 — uso o normal\n2026-11-07 20:28:27,076 - INFO - [script] 62 blocos (block_chars=4070), ~29 frases/bloco\n2026-11-07 20:28:53,677 - INFO - [script] roteiro final: 62 frases (target_lines=1826)\n2026-11-07 20:28:53,688 - ERROR - [script] roteiro com 62 frase(s) pra 1826 pedidas — falha, não narra\n2026-11-07 20:28:53,688 - INFO - [preparo] roteiro FALHOU: ? frases sem tempo (alvo 1826, original 203 min) — The Loser Got His Own Dungeon at Home Where Only He Can Leve\n2026-11-07 20:28:54,536 - ERROR - [preparo] roteiro não ficou pronto — vídeo não sai\n",
+ "por": "comoseriasecomia"
+}

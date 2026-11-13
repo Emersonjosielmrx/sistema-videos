@@ -1,0 +1,3329 @@
+{
+ "updatedAt": "2026-07-08T17:08:41.228Z",
+ "createdAt": "2026-07-08T16:32:56.959Z",
+ "id": "YvcqTFj3qWCkBQhm",
+ "name": "HermesCall V2 All Endpoints copy 2",
+ "description": null,
+ "active": false,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "path": "b7919a2b-6d63-4bc5-ab96-b2d2a46b97b3",
+    "httpMethod": "GET",
+    "responseMode": "lastNode"
+   },
+   "id": "d6d96051-9743-47a1-bd86-00d28b889354",
+   "name": "Webhook Trigger",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 1,
+   "position": [
+    -304,
+    128
+   ],
+   "webhookId": "b7919a2b-6d63-4bc5-ab96-b2d2a46b97b3"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/config",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "4346451c-6da8-481b-b02f-52aa265cce65",
+   "name": "[GET] /api/config",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    -176
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "4a17c80a-46c1-4b4d-848f-1be3084e7c51",
+   "name": "[GET] /api/sessions",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    32
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e13ca958-15d9-47fd-ab9d-09eff4c2e71d",
+   "name": "[POST] /api/sessions",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/recording",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "cec2e967-6251-419d-8510-dfff3bff4dc9",
+   "name": "[GET] /api/sessions/{sid}/recording",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/recording",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "b002f28f-498a-4876-9b5f-863daf30de8b",
+   "name": "[PUT] /api/sessions/{sid}/recording",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/proxy",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "31f72241-770d-4961-8182-dc1018cab7f6",
+   "name": "[GET] /api/sessions/{sid}/proxy",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/proxy",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3037e068-0374-4e6b-9b5a-ad45f348915c",
+   "name": "[PUT] /api/sessions/{sid}/proxy",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    1024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/broadcast",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "046ada96-ac07-4f1c-9ca3-816dbef1f797",
+   "name": "[POST] /api/sessions/{sid}/broadcast",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    1232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/broadcast/{cid}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "65e5f84e-fa69-4a7f-9e54-2320263f7ba6",
+   "name": "[GET] /api/sessions/{sid}/broadcast/{cid}",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    1424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/recordings/{id}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "657555f5-6e9b-44fe-9760-c18c885907f2",
+   "name": "[GET] /recordings/{id}",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    1632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3ca4d52e-2ee2-4a6d-93d0-32352a69b49d",
+   "name": "[DELETE] /api/sessions/{sid}",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    1824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/pair",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "d15f69ef-7029-4e20-bebb-4b5a445b3eee",
+   "name": "[POST] /api/sessions/{sid}/pair",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    2032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/logout",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "a1dd0592-2702-4f79-b16b-8f4b503fc838",
+   "name": "[POST] /api/sessions/{sid}/logout",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    2224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/calls",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3473210b-fd2b-4774-95a8-c855c8499705",
+   "name": "[GET] /api/sessions/{sid}/calls",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    2432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/calls",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "91a947ff-8b99-4c8c-ac52-0a40a043328a",
+   "name": "[POST] /api/sessions/{sid}/calls",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    2624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/calls/{id}/accept",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "20f24717-a604-4399-8c45-78e734c4f18f",
+   "name": "[POST] /api/sessions/{sid}/calls/{id}/accept",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    2832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/calls/{id}/reject",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "76e3188e-a015-482c-b405-d85c57e21e5b",
+   "name": "[POST] /api/sessions/{sid}/calls/{id}/reject",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    3024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/calls/{id}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "91d59672-8ecf-4150-afbd-a78d7d6201fb",
+   "name": "[DELETE] /api/sessions/{sid}/calls/{id}",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    3232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "2337cea4-04ad-4f53-b69f-1ec38aa64877",
+   "name": "[POST] /api/sessions/{sid}/messages/text",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    3424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/image",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "1203b6b6-83c5-4fde-9730-f93e8b227ebc",
+   "name": "[POST] /api/sessions/{sid}/messages/image",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    3632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/audio",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "f2bb965c-cfda-4241-b643-5e58ce57c52e",
+   "name": "[POST] /api/sessions/{sid}/messages/audio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    3824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/video",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3c4df106-07d3-4617-bded-ea480357b4b8",
+   "name": "[POST] /api/sessions/{sid}/messages/video",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    4032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/document",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "4a90dcdc-1473-4516-89d8-212fbd4223c7",
+   "name": "[POST] /api/sessions/{sid}/messages/document",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    4224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/webhook",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "0d437b7c-73eb-4462-be37-81302de53bce",
+   "name": "[GET] /api/sessions/{sid}/webhook",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    4432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/webhook",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "abc658c9-a01b-4306-b78b-bdf37a988612",
+   "name": "[POST] /api/sessions/{sid}/webhook",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    4624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/webhook",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "90a767b6-6c4f-4f57-95b2-627f4d3d3af7",
+   "name": "[DELETE] /api/sessions/{sid}/webhook",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    4832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chatwoot",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "c0203383-8e0e-4b99-b30a-cf99fc7b7fd1",
+   "name": "[GET] /api/sessions/{sid}/chatwoot",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    5024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chatwoot",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "237e0df5-05fb-4583-9d41-276941d38430",
+   "name": "[POST] /api/sessions/{sid}/chatwoot",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    5232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chatwoot",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "59c3cdc5-431c-4d77-951a-b37d8de587df",
+   "name": "[DELETE] /api/sessions/{sid}/chatwoot",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    5424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chatwoot/groups/{gid}/open",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "1945597f-bc99-4b48-b5d1-86072c2ddca5",
+   "name": "[POST] /api/sessions/{sid}/chatwoot/groups/{gid}/open",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    5632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chatwoot/channels/{id}/open",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "ec75381e-0eca-47b6-b5a5-04af79cf1b7e",
+   "name": "[POST] /api/sessions/{sid}/chatwoot/channels/{id}/open",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    5824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chatwoot/webhook",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "97ddcc96-66ad-4f62-9206-6968c4b6b813",
+   "name": "[POST] /api/sessions/{sid}/chatwoot/webhook",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    6032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/history",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "39f0ccd3-6f94-4d9b-8276-21a45320eae4",
+   "name": "[GET] /api/sessions/{sid}/history",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    6224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/events",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "307e00be-e201-483c-bcdd-68422e01c389",
+   "name": "[GET] /api/events",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    6432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/location",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "cbcf4cbf-de44-4770-893d-98dcafbd7242",
+   "name": "[POST] /api/sessions/{sid}/messages/location",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    6624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/contact",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e96b3f0e-c94d-4944-80e1-5f7dd40fa943",
+   "name": "[POST] /api/sessions/{sid}/messages/contact",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    6832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/poll",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e463b77f-129d-40a3-ad0b-d7e8d37844af",
+   "name": "[POST] /api/sessions/{sid}/messages/poll",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    7024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/poll-vote",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "19296985-0fe4-44af-8a1e-ad6070edb7fc",
+   "name": "[POST] /api/sessions/{sid}/messages/poll-vote",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    7232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/event-response",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e9b75040-466a-4466-a1e0-929c8aa73462",
+   "name": "[POST] /api/sessions/{sid}/messages/event-response",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    7424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/link-preview",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "b281e4c1-91dc-4514-bf07-16f3c08a23bb",
+   "name": "[POST] /api/sessions/{sid}/messages/link-preview",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    7632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/react",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "b1b60e75-c01d-4c5b-9892-53d2b18c28c0",
+   "name": "[PUT] /api/sessions/{sid}/messages/react",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    7824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/edit",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "47870888-4baa-44e6-b43c-8d128c218b39",
+   "name": "[PUT] /api/sessions/{sid}/messages/edit",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    8032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "83585eba-3f8a-4cfd-8752-29240173a043",
+   "name": "[GET] /api/sessions/{sid}/messages",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    8224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "06fbdfba-5baf-4d24-b406-0c8a265fadab",
+   "name": "[DELETE] /api/sessions/{sid}/messages",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    8432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/seen",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "0560e7b3-769d-4886-ae0d-c95a870d1d68",
+   "name": "[POST] /api/sessions/{sid}/messages/seen",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    8624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/messages/typing",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "29fa7c7b-f4f3-4569-a311-888f2e78bef4",
+   "name": "[POST] /api/sessions/{sid}/messages/typing",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    8832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/contacts/check",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "c2a40457-dffc-462c-a305-ebb6972c3fec",
+   "name": "[GET] /api/sessions/{sid}/contacts/check",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    9024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/contacts",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "137036e1-9c19-44cc-8077-0cbd61312891",
+   "name": "[GET] /api/sessions/{sid}/contacts",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    9232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/contacts/559185685106@s.whatsapp.net",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "d954f910-700a-43f2-9778-6e5155eeeb1f",
+   "name": "[GET] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    9424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/contacts/559185685106@s.whatsapp.net/picture",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "5068342a-bfe8-40ca-b350-95dda67abd93",
+   "name": "[GET] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net/picture",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    9632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/contacts/559185685106@s.whatsapp.net/block",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "d364a633-1343-4ca2-a350-45b1ad86578f",
+   "name": "[POST] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net/block",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    9824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/contacts/559185685106@s.whatsapp.net/unblock",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "bf8cef4d-e520-4b3f-b2f7-1f1d7d65b77b",
+   "name": "[POST] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net/unblock",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    10032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/blocklist",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "2e4c1055-a70b-430e-8e67-2de7c272e971",
+   "name": "[GET] /api/sessions/{sid}/blocklist",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    10224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "d1046d96-6c0d-4394-a6d3-bb36faa776f2",
+   "name": "[GET] /api/sessions/{sid}/groups",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    10432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "b5006235-21fe-4d0a-ba7e-00d879e36279",
+   "name": "[POST] /api/sessions/{sid}/groups",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    10624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/join",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "9a5769d3-9630-4717-acaf-e7128f8f6172",
+   "name": "[POST] /api/sessions/{sid}/groups/join",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    10832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/join-info",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "9e24b08b-9b2d-4a25-a489-e808b96ca708",
+   "name": "[GET] /api/sessions/{sid}/groups/join-info",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    11024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "4ffe58e9-cbd3-4c4d-bba3-3aefd55601a7",
+   "name": "[GET] /api/sessions/{sid}/groups/{gid}",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    11232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/leave",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "14336b17-88eb-4196-bd17-ddf3fdc610d9",
+   "name": "[POST] /api/sessions/{sid}/groups/{gid}/leave",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    11424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/participants",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "af9eaf40-7a3c-4e3e-90c0-798b89e6840d",
+   "name": "[GET] /api/sessions/{sid}/groups/{gid}/participants",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    11632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/participants/add",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "8bf26285-2f31-4dba-b0ae-98eec1af3be8",
+   "name": "[POST] /api/sessions/{sid}/groups/{gid}/participants/add",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    11824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/participants/remove",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "1a6cc76f-be3e-4387-a2ba-525f217ae976",
+   "name": "[POST] /api/sessions/{sid}/groups/{gid}/participants/remove",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    12032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/participants/promote",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "9a923745-bf8d-40fe-9e42-10dbac844157",
+   "name": "[POST] /api/sessions/{sid}/groups/{gid}/participants/promote",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    12224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/participants/demote",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "07e4c9fa-bd4c-475f-9e44-a557f47129b6",
+   "name": "[POST] /api/sessions/{sid}/groups/{gid}/participants/demote",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    12432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/subject",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "6e3b3f3b-fed9-45c7-b02b-e78c00771ad3",
+   "name": "[PUT] /api/sessions/{sid}/groups/{gid}/subject",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    12624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/description",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "138e0823-b188-4faa-93de-1f8cc23339e6",
+   "name": "[PUT] /api/sessions/{sid}/groups/{gid}/description",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    12832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/picture",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e7f635b8-a61a-49ed-997f-ae402e75dd4d",
+   "name": "[PUT] /api/sessions/{sid}/groups/{gid}/picture",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    13024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/invite",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "83c7621a-852b-46a5-8920-a0a52ca855de",
+   "name": "[GET] /api/sessions/{sid}/groups/{gid}/invite",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    13232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/invite/revoke",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "d50faf9c-f91b-4f72-838a-6cf896f5da84",
+   "name": "[POST] /api/sessions/{sid}/groups/{gid}/invite/revoke",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    13424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/settings/announce",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3e240181-6de3-4773-88ca-cbf61a2a1840",
+   "name": "[PUT] /api/sessions/{sid}/groups/{gid}/settings/announce",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    13632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/groups/{gid}/settings/locked",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "86ed9931-7093-49b0-a5bf-cec65e6d4fd6",
+   "name": "[PUT] /api/sessions/{sid}/groups/{gid}/settings/locked",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    13824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "ce287181-7d9b-49ba-9e89-abd984a19ca0",
+   "name": "[GET] /api/sessions/{sid}/channels",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    14032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels/{id}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e39a0239-7fde-435e-8872-8dc3fbdca264",
+   "name": "[GET] /api/sessions/{sid}/channels/{id}",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    14224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels/{id}/messages",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "b449b0bf-de82-4e77-99d6-270a408864f7",
+   "name": "[GET] /api/sessions/{sid}/channels/{id}/messages",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    14432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels/{id}/follow",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "6cab94a5-ab98-4d98-83f4-abb9cd65eb01",
+   "name": "[POST] /api/sessions/{sid}/channels/{id}/follow",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    14624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels/{id}/unfollow",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "64c45fd1-4e3c-4276-b28b-3fb6460a4645",
+   "name": "[POST] /api/sessions/{sid}/channels/{id}/unfollow",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    14832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels/{id}/mute",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3f44259f-44f4-4806-9119-97baf7616310",
+   "name": "[POST] /api/sessions/{sid}/channels/{id}/mute",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    15024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/channels/{id}/unmute",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "92eb58fe-41f3-4030-a8eb-f5ebd7b650ca",
+   "name": "[POST] /api/sessions/{sid}/channels/{id}/unmute",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    15232
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/presence",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e2b65998-2491-4d13-86b0-b6311aaa1cd0",
+   "name": "[POST] /api/sessions/{sid}/presence",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    15424
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/presence/559185685106@s.whatsapp.net/subscribe",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "cb925993-5874-4eb1-9817-1df888b059a2",
+   "name": "[POST] /api/sessions/{sid}/presence/559185685106@s.whatsapp.net/subscribe",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    15632
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/profile",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "7abc22d1-ef4f-4bfb-94c9-4b95268799de",
+   "name": "[GET] /api/sessions/{sid}/profile",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    15824
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/profile/status",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "2164af50-b8a5-415a-80aa-cebedb7b9fdc",
+   "name": "[PUT] /api/sessions/{sid}/profile/status",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    16032
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/status/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "00470a3d-da41-44ce-8812-b4abc651f30b",
+   "name": "[POST] /api/sessions/{sid}/status/text",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    16224
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/status/image",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "e48014e6-8d43-4001-a3d6-4e9b03ac6f26",
+   "name": "[POST] /api/sessions/{sid}/status/image",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    16432
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/status/video",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "ec9345f3-97de-42d7-b38c-caf31898d55f",
+   "name": "[POST] /api/sessions/{sid}/status/video",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    16624
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/status/audio",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{}",
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "35358418-e90b-48a6-8d13-0453cd7566a9",
+   "name": "[POST] /api/sessions/{sid}/status/audio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    16832
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chats",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "3a10ad65-181b-470b-a2af-727747c148c4",
+   "name": "[GET] /api/sessions/{sid}/chats",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    17024
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions/d1ee59f4d4e1c80aaded16e80629f541/chats/559185685106@s.whatsapp.net/messages",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "timeout": 15000
+    }
+   },
+   "id": "289d6204-f07b-48ff-b437-57babf101bdf",
+   "name": "[GET] /api/sessions/{sid}/chats/559185685106@s.whatsapp.net/messages",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -48,
+    17232
+   ],
+   "onError": "continueRegularOutput"
+  }
+ ],
+ "connections": {
+  "Webhook Trigger": {
+   "main": [
+    [
+     {
+      "node": "[GET] /api/config",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/recording",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/recording",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/proxy",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/proxy",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/broadcast",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/broadcast/{cid}",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /recordings/{id}",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[DELETE] /api/sessions/{sid}",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/pair",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/logout",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/calls",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/calls",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/calls/{id}/accept",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/calls/{id}/reject",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[DELETE] /api/sessions/{sid}/calls/{id}",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/text",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/image",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/audio",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/video",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/document",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/webhook",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/webhook",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[DELETE] /api/sessions/{sid}/webhook",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/chatwoot",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/chatwoot",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[DELETE] /api/sessions/{sid}/chatwoot",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/chatwoot/groups/{gid}/open",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/chatwoot/channels/{id}/open",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/chatwoot/webhook",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/history",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/events",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/location",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/contact",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/poll",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/poll-vote",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/event-response",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/link-preview",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/messages/react",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/messages/edit",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/messages",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[DELETE] /api/sessions/{sid}/messages",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/seen",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/messages/typing",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/contacts/check",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/contacts",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net/picture",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net/block",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/contacts/559185685106@s.whatsapp.net/unblock",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/blocklist",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/groups",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/join",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/groups/join-info",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/groups/{gid}",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/{gid}/leave",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/groups/{gid}/participants",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/{gid}/participants/add",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/{gid}/participants/remove",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/{gid}/participants/promote",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/{gid}/participants/demote",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/groups/{gid}/subject",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/groups/{gid}/description",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/groups/{gid}/picture",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/groups/{gid}/invite",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/groups/{gid}/invite/revoke",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/groups/{gid}/settings/announce",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/groups/{gid}/settings/locked",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/channels",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/channels/{id}",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/channels/{id}/messages",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/channels/{id}/follow",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/channels/{id}/unfollow",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/channels/{id}/mute",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/channels/{id}/unmute",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/presence",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/presence/559185685106@s.whatsapp.net/subscribe",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/profile",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[PUT] /api/sessions/{sid}/profile/status",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/status/text",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/status/image",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/status/video",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[POST] /api/sessions/{sid}/status/audio",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/chats",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "[GET] /api/sessions/{sid}/chats/559185685106@s.whatsapp.net/messages",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": true
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": {},
+ "versionId": "8240fa2e-8658-4ac4-847f-b0ccd095df8f",
+ "activeVersionId": null,
+ "versionCounter": 2,
+ "triggerCount": 0,
+ "shared": [
+  {
+   "updatedAt": "2026-07-08T16:32:56.959Z",
+   "createdAt": "2026-07-08T16:32:56.959Z",
+   "role": "workflow:owner",
+   "workflowId": "YvcqTFj3qWCkBQhm",
+   "projectId": "VjtctrZnAI1uyZTt",
+   "project": {
+    "updatedAt": "2026-03-25T00:27:09.830Z",
+    "createdAt": "2026-03-25T00:19:45.271Z",
+    "id": "VjtctrZnAI1uyZTt",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "241ebc8f-7077-47b7-8e6d-f7720abb61bd"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": null
+}

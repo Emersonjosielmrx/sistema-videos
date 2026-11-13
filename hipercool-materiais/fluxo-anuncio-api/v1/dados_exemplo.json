@@ -1,0 +1,18 @@
+{
+  "🧩 Confere o pedido": {
+    "job": "atesteloc01",
+    "fotos": ["https://files.catbox.moe/lofjjm.jpg", "https://files.catbox.moe/zs3gzu.jpg", "https://files.catbox.moe/u3ca8g.jpg", "https://files.catbox.moe/yuif3s.jpg", "https://files.catbox.moe/9nfm29.jpg"],
+    "logo": "",
+    "dados": { "tipo": "imovel", "tipo_txt": "imóvel", "marca": "Vista Alta Imóveis", "titulo": "Apartamento 3 quartos com varanda gourmet e vista", "preco": "R$ 890 mil", "whatsapp": "5511988887777", "instagram": "vistaalta.imoveis" },
+    "op": { "formato": "vertical", "voz": "pt-BR-ThalitaMultilingualNeural", "legendas": true, "versao_musica": true, "cartao_final": true }
+  },
+  "🧩 Junta tudo": {
+    "cor": "#C9A227", "clima": "elegante", "cta": "Agende sua visita", "contatos": ["WhatsApp (11) 98888-7777", "@vistaalta.imoveis"],
+    "segmentos": [
+      { "n": 1, "foto": 0, "texto": "Imagine acordar com essa vista todos os dias.", "texto_tela": "Vista para a cidade", "movimento": "zoom_in", "foco": { "x": 0.5, "y": 0.3 }, "transicao": "fade", "selo_preco": false },
+      { "n": 2, "foto": 1, "texto": "Sala ampla com janelas do chão ao teto e muita luz natural.", "texto_tela": "Sala ampla", "movimento": "pan_dir", "foco": { "x": 0.5, "y": 0.5 }, "transicao": "slideleft", "selo_preco": false },
+      { "n": 3, "foto": 2, "texto": "São noventa e oito metros quadrados, três quartos e uma suíte master.", "texto_tela": "98 m² · 3 quartos", "movimento": "zoom_out", "foco": { "x": 0.7, "y": 0.5 }, "transicao": "fade", "selo_preco": true },
+      { "n": 4, "foto": 4, "texto": "Chame no WhatsApp e agende sua visita hoje!", "texto_tela": "", "movimento": "zoom_in", "foco": { "x": 0.5, "y": 0.5 }, "transicao": "zoomin", "selo_preco": false }
+    ]
+  }
+}

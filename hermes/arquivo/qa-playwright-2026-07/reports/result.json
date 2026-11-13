@@ -1,0 +1,2153 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\qa-apps\\hermes-call\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "D:\\qa-apps\\hermes-call\\playwright.config.ts",
+    "rootDir": "D:/qa-apps/hermes-call/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/qa-apps/hermes-call/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/qa-apps/hermes-call/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "reports/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/result.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "e2e-agents.spec.ts",
+      "file": "e2e-agents.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Agentes IA — criar, verificar no backend, limpar",
+          "file": "e2e-agents.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "criar agente com voz -> aparece no GET /api/agent-profiles -> deletar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "agente 209395d6-0448-414c-a3e3-8748e3075660 confirmado com voz=nova"
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"agente QA_Agent_1785261683232\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1279,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:22.527Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "agente 209395d6-0448-414c-a3e3-8748e3075660 confirmado com voz=nova"
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"agente QA_Agent_1785261683232\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6561caa3a853c411142d-8a198da306393e0daa2e",
+              "file": "e2e-agents.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "preview de voz (TTS edge-tts) retorna audio_base64",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1540,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:24.529Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6561caa3a853c411142d-62078eb4ea51017eaafb",
+              "file": "e2e-agents.spec.ts",
+              "line": 43,
+              "column": 3
+            },
+            {
+              "title": "wizard de criar agente abre na UI (visao confirma)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "PASS: A tela exibe um assistente de criação de agente de IA com um processo de 8 etapas, estando atualmente na etapa 1 para configuração de canal e função."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13870,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:26.097Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "PASS: A tela exibe um assistente de criação de agente de IA com um processo de 8 etapas, estando atualmente na etapa 1 para configuração de canal e função."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\e2e-agents-Agentes-IA-—-cr-ec3ee--abre-na-UI-visao-confirma--chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6561caa3a853c411142d-38ac460bfbf45835cc3b",
+              "file": "e2e-agents.spec.ts",
+              "line": 51,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e-data.spec.ts",
+      "file": "e2e-data.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Dados — criar, verificar no backend, limpar",
+          "file": "e2e-data.spec.ts",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CRM: criar etapa -> aparece em GET /api/crm/board -> deletar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "etapa 27e09e03-644c-41e0-a5c2-033f34754acb confirmada no board"
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"etapa QA_Etapa_1785261700970\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1200,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:40.334Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "etapa 27e09e03-644c-41e0-a5c2-033f34754acb confirmada no board"
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"etapa QA_Etapa_1785261700970\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "136dd98535fa1d9b0370-67d3759b01d22a8166c2",
+              "file": "e2e-data.spec.ts",
+              "line": 12,
+              "column": 3
+            },
+            {
+              "title": "Agenda: criar evento -> aparece em GET /api/agenda/appointments -> deletar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "evento 79c3f1d7-85fc-4ee8-a136-a05c8167ca3e confirmado"
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"evento QA_Evento_1785261702181\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 899,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:42.175Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "evento 79c3f1d7-85fc-4ee8-a136-a05c8167ca3e confirmado"
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"evento QA_Evento_1785261702181\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "136dd98535fa1d9b0370-2391e43bf6587b7ffaa2",
+              "file": "e2e-data.spec.ts",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "Vitrine: criar produto -> aparece em GET /api/catalog/products -> deletar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "produto 9d5854c7-bd8a-4cdb-97a4-d78a6ae09218 confirmado"
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"produto QA_Produto_1785261703094\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 804,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:43.084Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "produto 9d5854c7-bd8a-4cdb-97a4-d78a6ae09218 confirmado"
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"produto QA_Produto_1785261703094\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "136dd98535fa1d9b0370-4c2f52639b6718759db5",
+              "file": "e2e-data.spec.ts",
+              "line": 53,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e-guarded.spec.ts",
+      "file": "e2e-guarded.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Fluxos bloqueados — guard confirmado, sem envio real",
+          "file": "e2e-guarded.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "conta trial nao tem WhatsApp pareado (GET /api/sessions vazio)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "guard",
+                      "description": "sessions=0"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 209,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:43.921Z",
+                      "annotations": [
+                        {
+                          "type": "guard",
+                          "description": "sessions=0"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9169e253ff8b820ce8bb-2d289bdea333d449cf5a",
+              "file": "e2e-guarded.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "enviar WhatsApp sem sessao e' RECUSADO pelo backend (nao envia)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "guard",
+                      "description": "send status=404"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 196,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:44.376Z",
+                      "annotations": [
+                        {
+                          "type": "guard",
+                          "description": "send status=404"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9169e253ff8b820ce8bb-d82602e409314b381868",
+              "file": "e2e-guarded.spec.ts",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "UI de Telefonia/Chat monta sem linha, mas sem permitir envio real",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "ui",
+                      "description": "Voice Ops (Central IA)"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8437,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:44.583Z",
+                      "annotations": [
+                        {
+                          "type": "ui",
+                          "description": "Voice Ops (Central IA)"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\e2e-guarded-Fluxos-bloquea-8ded2-mas-sem-permitir-envio-real-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9169e253ff8b820ce8bb-59e9d2582fdd6f05f059",
+              "file": "e2e-guarded.spec.ts",
+              "line": 32,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e-settings.spec.ts",
+      "file": "e2e-settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Configuracoes — salvar e reler no backend",
+          "file": "e2e-settings.spec.ts",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "IA Base: salvar system prompt -> confirma em GET /api/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "ai.system_message confirmado"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 714,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:53.050Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "ai.system_message confirmado"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-364ec88aaaebc422de05",
+              "file": "e2e-settings.spec.ts",
+              "line": 14,
+              "column": 3
+            },
+            {
+              "title": "Orcamento: salvar budget -> confirma em GET /api/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "budget block: {\"enabled\":false,\"hard_limit\":false,\"monthly_brl\":0,\"warn_at_pct\":80}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 386,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:54.422Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "budget block: {\"enabled\":false,\"hard_limit\":false,\"monthly_brl\":0,\"warn_at_pct\":80}"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-1544aa7fa4b07ec46c9a",
+              "file": "e2e-settings.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "Voz: salvar voice -> confirma bloco voice em GET /api/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "voice block: {\"ambient_mode\":\"\",\"auto_answer\":false,\"background_noise\":\"office\",\"background_noise_volume\":0.1,\"callback_missed\":true,"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 434,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:54.823Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "voice block: {\"ambient_mode\":\"\",\"auto_answer\":false,\"background_noise\":\"office\",\"background_noise_volume\":0.1,\"callback_missed\":true,"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-78c00cc883675e70fbce",
+              "file": "e2e-settings.spec.ts",
+              "line": 36,
+              "column": 3
+            },
+            {
+              "title": "TTS test dispara sintese (edge-tts) -> ok:true",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "tts",
+                      "description": "200 {\"ok\":true}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1524,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:55.266Z",
+                      "annotations": [
+                        {
+                          "type": "tts",
+                          "description": "200 {\"ok\":true}"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-0ef2ba95aa1246eba21d",
+              "file": "e2e-settings.spec.ts",
+              "line": 44,
+              "column": 3
+            },
+            {
+              "title": "Telegram test: manda msg real (aceita ok / 503 bot-off / 400 sem chat)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "telegram",
+                      "description": "503 {\"error\":\"telegram bot not running\"}"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 210,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:56.810Z",
+                      "annotations": [
+                        {
+                          "type": "telegram",
+                          "description": "503 {\"error\":\"telegram bot not running\"}"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-65271d95887ef81f78c9",
+              "file": "e2e-settings.spec.ts",
+              "line": 51,
+              "column": 3
+            },
+            {
+              "title": "Credenciais IA: criar com chave Gemini -> GET confirma -> DELETE",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "create",
+                      "description": "200 {\"id\":\"ffb7607e-ea18-440a-aabd-f499cf9ee9f7\"}"
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"cred QA_Cred_1785261717067\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 602,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:57.051Z",
+                      "annotations": [
+                        {
+                          "type": "create",
+                          "description": "200 {\"id\":\"ffb7607e-ea18-440a-aabd-f499cf9ee9f7\"}"
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"cred QA_Cred_1785261717067\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-a51addf907ce88707202",
+              "file": "e2e-settings.spec.ts",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "API do Sistema: gerar chave -> GET confirma -> DELETE",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "create",
+                      "description": "200 {\"key\":{\"id\":\"b5489727-f438-4885-adc2-ec2e02337f8f\",\"user_id\":\"8b2ca87b-1ff0-4c33-bcb4-f29b5f757f6d\""
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"key QA_Key_1785261717691\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 577,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:57.680Z",
+                      "annotations": [
+                        {
+                          "type": "create",
+                          "description": "200 {\"key\":{\"id\":\"b5489727-f438-4885-adc2-ec2e02337f8f\",\"user_id\":\"8b2ca87b-1ff0-4c33-bcb4-f29b5f757f6d\""
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"key QA_Key_1785261717691\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "01f20221072a9f821663-b73c4a452364bccdc729",
+              "file": "e2e-settings.spec.ts",
+              "line": 78,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e-wizards.spec.ts",
+      "file": "e2e-wizards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Wizards — salvar e verificar no backend",
+          "file": "e2e-wizards.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Gestor Facil: salvar config -> GET /api/easy-manager/wizard confirma",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "gestor confirmado: name/prompt/provider"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 368,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:58.295Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "gestor confirmado: name/prompt/provider"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f51415d69cee6d511885-ffb3b165d1398ff54f22",
+              "file": "e2e-wizards.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "Follow-up: criar sequencia -> GET /api/followup/sequences confirma -> deletar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "backend",
+                      "description": "sequencia 0ea5a26e-a59d-44ef-b83f-c2a3e31c0e93 confirmada"
+                    },
+                    {
+                      "type": "cleanup",
+                      "description": "[{\"label\":\"followup QA_Seq_1785261718906\",\"status\":200,\"ok\":true}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 758,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:58.885Z",
+                      "annotations": [
+                        {
+                          "type": "backend",
+                          "description": "sequencia 0ea5a26e-a59d-44ef-b83f-c2a3e31c0e93 confirmada"
+                        },
+                        {
+                          "type": "cleanup",
+                          "description": "[{\"label\":\"followup QA_Seq_1785261718906\",\"status\":200,\"ok\":true}]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f51415d69cee6d511885-c70504a4c486b1a2df49",
+              "file": "e2e-wizards.spec.ts",
+              "line": 27,
+              "column": 3
+            },
+            {
+              "title": "Gestor Facil na UI: 4 etapas + Salvar Gestor visivel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11675,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:01:59.669Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\e2e-wizards-Wizards-—-salv-92c78-tapas-Salvar-Gestor-visivel-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f51415d69cee6d511885-2d4a7b73bda0083a10c8",
+              "file": "e2e-wizards.spec.ts",
+              "line": 49,
+              "column": 3
+            },
+            {
+              "title": "Base de Conhecimento: aba abre (mapeia se persiste ou e' cosmetica)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "PASS: A seção 'Central de Conhecimento (RAG)' está claramente visível e selecionada no menu lateral."
+                    },
+                    {
+                      "type": "nota",
+                      "description": "botoes disabled visiveis: 0"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12851,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:02:11.378Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "PASS: A seção 'Central de Conhecimento (RAG)' está claramente visível e selecionada no menu lateral."
+                        },
+                        {
+                          "type": "nota",
+                          "description": "botoes disabled visiveis: 0"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\e2e-wizards-Wizards-—-salv-98bcb-se-persiste-ou-e-cosmetica--chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f51415d69cee6d511885-129d5b2fcb25a6ae0557",
+              "file": "e2e-wizards.spec.ts",
+              "line": 68,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e-zzz-clean.spec.ts",
+      "file": "e2e-zzz-clean.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "conta trial esta' limpa de residuos QA_* (varre e remove sobras)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "cleanup-final",
+                  "description": "agentes: 0 residuo(s) removido(s) | credenciais: 0 residuo(s) removido(s) | chaves: 0 residuo(s) removido(s) | produtos: 0 residuo(s) removido(s) | eventos: 0 residuo(s) removido(s) | followups: 0 residuo(s) removido(s)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3049,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-28T18:02:24.292Z",
+                  "annotations": [
+                    {
+                      "type": "cleanup-final",
+                      "description": "agentes: 0 residuo(s) removido(s) | credenciais: 0 residuo(s) removido(s) | chaves: 0 residuo(s) removido(s) | produtos: 0 residuo(s) removido(s) | eventos: 0 residuo(s) removido(s) | followups: 0 residuo(s) removido(s)"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9254cf33cd9118db5eb2-90f4b0b38fb0d05d3abe",
+          "file": "e2e-zzz-clean.spec.ts",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "qa-func.spec.ts",
+      "file": "qa-func.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Funcionarios IA — criar agente dispara API",
+          "file": "qa-func.spec.ts",
+          "line": 27,
+          "column": 6,
+          "specs": [
+            {
+              "title": "abrir wizard de criar agente mostra o formulario",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "PASS: A tela apresenta um assistente com um progresso de 8 etapas, com a primeira etapa de configuração de canal e função de agente ativa."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12695,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:02:28.065Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "PASS: A tela apresenta um assistente com um progresso de 8 etapas, com a primeira etapa de configuração de canal e função de agente ativa."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Funcionarios-IA-—--9b332--agente-mostra-o-formulario-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-8ac3ec41c6b35eaf49dc",
+              "file": "qa-func.spec.ts",
+              "line": 43,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Voz & Transcricao — testar/ouvir dispara API de TTS",
+          "file": "qa-func.spec.ts",
+          "line": 56,
+          "column": 6,
+          "specs": [
+            {
+              "title": "botao \"Testar voz TTS\" faz o que promete (chama /api/tts OU valida a chave)",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "tts",
+                      "description": "chamou /api/tts: 401"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 12115,
+                      "error": {
+                        "message": "Error: TTS respondeu inesperado: [{\"method\":\"POST\",\"url\":\"https://hermescall.inovareinteligenciaartificial.com/api/tts/test\",\"status\":401,\"ok\":false}]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: TTS respondeu inesperado: [{\"method\":\"POST\",\"url\":\"https://hermescall.inovareinteligenciaartificial.com/api/tts/test\",\"status\":401,\"ok\":false}]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at D:\\qa-apps\\hermes-call\\tests\\qa-func.spec.ts:83:62",
+                        "location": {
+                          "file": "D:\\qa-apps\\hermes-call\\tests\\qa-func.spec.ts",
+                          "column": 62,
+                          "line": 83
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 81 |\u001b[39m       test\u001b[33m.\u001b[39minfo()\u001b[33m.\u001b[39mannotations\u001b[33m.\u001b[39mpush({ type\u001b[33m:\u001b[39m \u001b[32m\"tts\"\u001b[39m\u001b[33m,\u001b[39m description\u001b[33m:\u001b[39m \u001b[32m\"chamou /api/tts: \"\u001b[39m \u001b[33m+\u001b[39m hits\u001b[33m.\u001b[39mmap((h) \u001b[33m=>\u001b[39m h\u001b[33m.\u001b[39mstatus)\u001b[33m.\u001b[39mjoin(\u001b[32m\",\"\u001b[39m) })\u001b[33m;\u001b[39m\n \u001b[90m 82 |\u001b[39m       expect(hits\u001b[33m.\u001b[39msome((h) \u001b[33m=>\u001b[39m h\u001b[33m.\u001b[39mok \u001b[33m||\u001b[39m [\u001b[35m400\u001b[39m\u001b[33m,\u001b[39m \u001b[35m402\u001b[39m\u001b[33m,\u001b[39m \u001b[35m422\u001b[39m]\u001b[33m.\u001b[39mincludes(h\u001b[33m.\u001b[39mstatus))\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 83 |\u001b[39m         \u001b[32m`TTS respondeu inesperado: ${JSON.stringify(hits)}`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 84 |\u001b[39m       \u001b[36mreturn\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 85 |\u001b[39m     }\n \u001b[90m 86 |\u001b[39m     \u001b[90m// Sem chamada de rede: tem que haver um toast de validacao (guard correto).\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\qa-apps\\hermes-call\\tests\\qa-func.spec.ts",
+                            "column": 62,
+                            "line": 83
+                          },
+                          "message": "Error: TTS respondeu inesperado: [{\"method\":\"POST\",\"url\":\"https://hermescall.inovareinteligenciaartificial.com/api/tts/test\",\"status\":401,\"ok\":false}]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  81 |       test.info().annotations.push({ type: \"tts\", description: \"chamou /api/tts: \" + hits.map((h) => h.status).join(\",\") });\n  82 |       expect(hits.some((h) => h.ok || [400, 402, 422].includes(h.status)),\n> 83 |         `TTS respondeu inesperado: ${JSON.stringify(hits)}`).toBeTruthy();\n     |                                                              ^\n  84 |       return;\n  85 |     }\n  86 |     // Sem chamada de rede: tem que haver um toast de validacao (guard correto).\n    at D:\\qa-apps\\hermes-call\\tests\\qa-func.spec.ts:83:62"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:02:41.060Z",
+                      "annotations": [
+                        {
+                          "type": "tts",
+                          "description": "chamou /api/tts: 401"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Voz-Transcricao-—--d1f96--api-tts-OU-valida-a-chave--chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Voz-Transcricao-—--d1f96--api-tts-OU-valida-a-chave--chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Voz-Transcricao-—--d1f96--api-tts-OU-valida-a-chave--chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\qa-apps\\hermes-call\\tests\\qa-func.spec.ts",
+                        "column": 62,
+                        "line": 83
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-76dc30281881e6e886f0",
+              "file": "qa-func.spec.ts",
+              "line": 70,
+              "column": 3
+            },
+            {
+              "title": "botao \"Salvar Motor de Voz\" dispara PUT /api/settings/voice",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11800,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:02:55.544Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Voz-Transcricao-—--cad97-para-PUT-api-settings-voice-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-15a634b1334e7548c3da",
+              "file": "qa-func.spec.ts",
+              "line": 92,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Configuracoes — sub-abas salvam de verdade",
+          "file": "qa-func.spec.ts",
+          "line": 105,
+          "column": 6,
+          "specs": [
+            {
+              "title": "IA Base: salvar prompt dispara PUT /api/settings/ai",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10081,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:03:08.623Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Configuracoes-—-su-a0e07-dispara-PUT-api-settings-ai-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-6ca70d0b237e2c608e45",
+              "file": "qa-func.spec.ts",
+              "line": 106,
+              "column": 3
+            },
+            {
+              "title": "Credenciais IA: abrir dialog de Nova Credencial",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "PASS: O dialogo exibido contem campos para insercao de chave de API e orientacoes para configuracao de modelos, atendendo a expectativa."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14305,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:03:18.735Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "PASS: O dialogo exibido contem campos para insercao de chave de API e orientacoes para configuracao de modelos, atendendo a expectativa."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Configuracoes-—-su-07898-r-dialog-de-Nova-Credencial-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-d8479087648fbc56928e",
+              "file": "qa-func.spec.ts",
+              "line": 123,
+              "column": 3
+            },
+            {
+              "title": "API do Sistema: abrir dialog de Nova Chave",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13245,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:03:33.084Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Configuracoes-—-su-b0820--abrir-dialog-de-Nova-Chave-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-ceb1e79036b02dc08f13",
+              "file": "qa-func.spec.ts",
+              "line": 145,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Gestor Facil — wizard salva",
+          "file": "qa-func.spec.ts",
+          "line": 159,
+          "column": 6,
+          "specs": [
+            {
+              "title": "abrir Gestor Fácil e avancar etapas",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12288,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:03:46.369Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-func-Gestor-Facil-—-wiz-b6ebd-stor-Fácil-e-avancar-etapas-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "38b507e4553fb793a6b1-bc3ed595a61c1c755d76",
+              "file": "qa-func.spec.ts",
+              "line": 160,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "qa-ui.spec.ts",
+      "file": "qa-ui.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Painel — fluxo de cliente novo (trial)",
+          "file": "qa-ui.spec.ts",
+          "line": 63,
+          "column": 6,
+          "specs": [
+            {
+              "title": "login e dashboard carregam",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4819,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:03:58.732Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-f60b0--login-e-dashboard-carregam-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-3002cb3887533c722e7f",
+              "file": "qa-ui.spec.ts",
+              "line": 64,
+              "column": 3
+            },
+            {
+              "title": "aba \"Visão Geral\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8804,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:04.256Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-4286d-a-Visão-Geral-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-e1a74ca6ebaae258be6b",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Gestão de Leads\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A página exibida é a 'Visão Geral', e não a aba 'Gestão de Leads' solicitada."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9674,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:13.077Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A página exibida é a 'Visão Geral', e não a aba 'Gestão de Leads' solicitada."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-01b62-stão-de-Leads-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-5d323b48784ac147a9dd",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Chat\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A página exibida é a 'Visão Geral', e não a aba 'Chat' conforme esperado."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8947,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:22.773Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A página exibida é a 'Visão Geral', e não a aba 'Chat' conforme esperado."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-632bc-rial-aba-Chat-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-4cdc889f90751cb00e5f",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Funcionário Gestor\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A aba selecionada na lateral é 'Funcionário Gestor', mas a tela exibe o conteúdo da 'Visão Geral'."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9169,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:31.751Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A aba selecionada na lateral é 'Funcionário Gestor', mas a tela exibe o conteúdo da 'Visão Geral'."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-91cad-onário-Gestor-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-d211bf709c5dacdde031",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Funcionários IA\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A aba 'Funcionários IA' está selecionada no menu, mas o conteúdo exibido na tela é da 'Visão Geral'."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8568,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:40.948Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A aba 'Funcionários IA' está selecionada no menu, mas o conteúdo exibido na tela é da 'Visão Geral'."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-af0d2-ncionários-IA-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-b68a20b0ffa53978c952",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Agenda\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A página exibida é a 'Visão Geral', não a aba 'Agenda' conforme solicitado."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8457,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:49.542Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A página exibida é a 'Visão Geral', não a aba 'Agenda' conforme solicitado."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-3ffc9-al-aba-Agenda-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-78499708766bd953a431",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Vitrine de Produtos\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A aba 'Vitrine de Produtos' está selecionada no menu, mas o conteúdo exibido refere-se a um 'Painel' de visão geral, não ao conteúdo da vitrine."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8628,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:04:58.029Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A aba 'Vitrine de Produtos' está selecionada no menu, mas o conteúdo exibido refere-se a um 'Painel' de visão geral, não ao conteúdo da vitrine."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-506a0-e-de-Produtos-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-82c7bad840bee1471edc",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Central de Telefonia\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A página carregada é o 'Painel' (Dashboard principal) e não a 'Central de Telefonia', apesar do item estar selecionado no menu."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8917,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:05:06.683Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A página carregada é o 'Painel' (Dashboard principal) e não a 'Central de Telefonia', apesar do item estar selecionado no menu."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-4c1d8--de-Telefonia-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-a7cb5b14f9d6b70c0cbc",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            },
+            {
+              "title": "aba \"Meet com IA\" abre sem erro",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: FAIL: A página exibida é o 'Painel' (Dashboard), e não a seção 'Meet com IA' (IA em Reuniões) solicitada."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9048,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:05:15.626Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: FAIL: A página exibida é o 'Painel' (Dashboard), e não a seção 'Meet com IA' (IA em Reuniões) solicitada."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Painel-—-fluxo-de-cl-07bc4-a-Meet-com-IA-abre-sem-erro-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-fb03792a0cc8151d289a",
+              "file": "qa-ui.spec.ts",
+              "line": 74,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "Botoes principais respondem (mecanico)",
+          "file": "qa-ui.spec.ts",
+          "line": 82,
+          "column": 6,
+          "specs": [
+            {
+              "title": "botao Sair existe e desloga",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8621,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:05:24.710Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Botoes-principais-re-aa251-botao-Sair-existe-e-desloga-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-cdb3423e43ffa85f528a",
+              "file": "qa-ui.spec.ts",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "botao dispara toast e ele aparece (top-center, fix step 7)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "vision",
+                      "description": "FAIL: O toast esta localizado no canto inferior direito da tela, e nao no topo-centro."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 22831,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Conta usada: qa_1785244095173@qa-hermes.test\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-28T18:05:33.379Z",
+                      "annotations": [
+                        {
+                          "type": "vision",
+                          "description": "FAIL: O toast esta localizado no canto inferior direito da tela, e nao no topo-centro."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\qa-apps\\hermes-call\\test-results\\qa-ui-Botoes-principais-re-52845-rece-top-center-fix-step-7--chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8df2085304eed891d590-0ea7124cf3871d7ecb70",
+              "file": "qa-ui.spec.ts",
+              "line": 116,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-28T18:01:21.178Z",
+    "duration": 275525.678,
+    "expected": 39,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

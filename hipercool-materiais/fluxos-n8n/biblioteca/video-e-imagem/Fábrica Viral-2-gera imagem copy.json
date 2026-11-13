@@ -1,0 +1,1187 @@
+{
+ "name": "Fábrica Viral-2-gera imagem copy",
+ "nodes": [
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://generativelanguage.googleapis.com/upload/v1beta/files",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "key",
+       "value": "=<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-Goog-Upload-Command",
+       "value": "start, upload, finalize"
+      },
+      {
+       "name": "X-Goog-Upload-Header-Content-Length",
+       "value": "={{ $binary.data.fileSize }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "={{ $binary.data.mimeType }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "data",
+    "options": {
+     "batching": {
+      "batch": {
+       "batchSize": 1
+      }
+     }
+    }
+   },
+   "id": "a019016b-0d2a-486e-9fe2-2cdad1675091",
+   "name": "upload-imagem1",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    -4128,
+    -560
+   ],
+   "typeVersion": 4.2
+  },
+  {
+   "parameters": {
+    "jsCode": "// Code node (n8n) - pega o binary key \"IMG\" e retorna base64 no json\nconst output = [];\n\nfor (const item of items) {\n  const bin = item.binary && (item.binary.IMG || item.binary.data || item.binary.img);\n\n  if (!bin) {\n    output.push({ json: { error: 'Nenhum binary key \"IMG\" encontrado' } });\n    continue;\n  }\n\n  const raw = bin.data;\n  let buffer;\n\n  if (typeof raw === 'string') {\n    // se for string (provavelmente já base64), tenta decodificar e re-encodar (garante formato)\n    try {\n      buffer = Buffer.from(raw, 'base64');\n    } catch (e) {\n      // se falhar, transforma em Buffer direto\n      buffer = Buffer.from(raw);\n    }\n  } else {\n    // se já for Buffer-like\n    buffer = Buffer.from(raw);\n  }\n\n  const base64 = buffer.toString('base64');\n\n  output.push({\n    json: {\n      fileName: bin.fileName || null,\n      mimeType: bin.mimeType || null,\n      base64\n    }\n  });\n}\n\nreturn output;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -4368,
+    -560
+   ],
+   "id": "9d430f9f-df16-4f45-a069-167ac6a21e9d",
+   "name": "Base"
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "base64",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    -4256,
+    -560
+   ],
+   "id": "bd6f11ff-7485-460d-888f-bb5542999525",
+   "name": "data1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -3360,
+    -624
+   ],
+   "id": "7f763194-43ff-452f-a5f6-ae3cfbe27200",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZJfAiyeq1C4zMECh",
+     "name": "teste2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "dd5a60fc-d31a-4b46-a398-5cc4717f1fbb",
+       "leftValue": "={{ $json.text.split('|')[0] }}",
+       "rightValue": "SIM ",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      },
+      {
+       "id": "ad4191f8-e2cf-4eb7-9ead-5c063fdb25f8",
+       "leftValue": "={{ $runIndex }}",
+       "rightValue": 1,
+       "operator": {
+        "type": "number",
+        "operation": "gt"
+       }
+      }
+     ],
+     "combinator": "or"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -3184,
+    -736
+   ],
+   "id": "396e4952-f80d-4aee-b1e9-1585017730d8",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "38ef8899-7a8b-4a97-a187-504bead5045d",
+       "name": "prompt do agente",
+       "value": "proximo",
+       "type": "string"
+      },
+      {
+       "id": "7a3bb79f-9ee4-4cf3-9a75-1558f8eaf982",
+       "name": "prompt de revisao",
+       "value": "=prImeira versao da imagem ",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -5440,
+    -560
+   ],
+   "id": "74e55368-da4f-4039-9669-3bfdc55f074f",
+   "name": "comando proximo"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -5152,
+    -416
+   ],
+   "id": "8d336705-6fc4-426e-b997-790665cfedb7",
+   "name": "gemini1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -5072,
+    -416
+   ],
+   "id": "53440072-1ff6-4617-a8f0-6d997ee10480",
+   "name": "gemini ",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "JsNkMGppyl4BUM90",
+     "name": "7-alucinaai"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "fotos",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    -4976,
+    -416
+   ],
+   "id": "f03e854b-7c73-40fb-ac63-39577467c45b",
+   "name": "fotos geradas",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "1e7b257e-6b72-43c0-8146-027cc59b23c5",
+       "name": "motivo da rejeicao",
+       "value": "={{ ($('comando proximo').item?.json?.['prompt de revisao'] || $json.text?.split('|')[1] || $('Mestre da Montagem').item.json.error.message)?.trim() ?? '' }}",
+       "type": "string"
+      },
+      {
+       "id": "9109c848-93c3-4e05-89bf-1acc4cf3ce05",
+       "name": "sistem propt do revisor de qualidade",
+       "value": "Persona (Função): Você é um Agente de Controle de Qualidade (QA) de Imagens, um especialista meticuloso em análise visual, semântica e de formato. Sua missão é atuar como o \"olho crítico\" em um pipeline automatizado de criação de vídeos por IA.  Contexto do Fluxo: O pipeline funciona da seguinte forma:  Um Agente Roteirista define o conceito, a cena e o propósito do vídeo.  Um Agente Editor de Imagem recebe uma [FOTO_ORIGINAL] e a modifica para criar múltiplas candidatas [LISTA_FOTOS_GERADAS], seguindo as instruções do roteiro.  Estas fotos serão usadas como frame de referência principal para a IA de vídeo (V3).  Sua função é interceptar a [LISTA_FOTOS_GERADAS], analisar TODAS elas, selecionar a melhor que atenda a TODOS os critérios (incluindo formato), e decidir se o lote \"Passa\" (se houver pelo menos uma boa) ou \"Falha\" (se nenhuma for boa). Uma falha fará com que o processo volte ao Agente Editor com sua sugestão de correção.  Inputs Recebidos: Você receberá quatro (4) blocos de informação para sua análise:  [FOTO_ORIGINAL]: A imagem base, o \"antes\". Esta é a referência de ouro para a aparência da pessoa e do objeto principal.  [LISTA_FOTOS_GERADAS]: Uma lista de imagens candidatas (com seus respectivos nomes de arquivo, que serão genéricos e sequenciais, ex: data1.png, data2.png, foto_modificada_1.jpg) modificadas pelo Agente Editor. Estas são as imagens que você deve avaliar.  [PROMPT_ROTEIRISTA]: A descrição do vídeo, o propósito, a cena, o que deve acontecer. (Ex: \"O usuário deve estar em um cenário de praia, parecendo relaxado\").  [PROMPT_EDITOR_IMAGEM]: As instruções exatas que o Agente Editor de Imagem recebeu para criar as fotos. (Ex: \"Edite a foto original, coloque o usuário em um fundo de praia ao pôr do sol, mantenha o rosto e as roupas\").  Tarefa Principal: Análise de Qualidade, Seleção de Formato e Decisão  Seu objetivo é analisar CADA imagem na [LISTA_FOTOS_GERADAS] e aplicar os seguintes critérios. Você deve selecionar UMA imagem que seja a \"melhor foto\", ou seja, a que passa em TODOS os critérios abaixo.  Critérios de Avaliação (Aplicados a cada imagem da lista):  Proporção da Imagem (Falha Crítica de Formato):  A imagem DEVE ter uma proporção de retrato (vertical). O formato \"retrato\" ou \"lateral\" (onde a altura é maior que a largura) é o único aceitável.  Imagens com proporção de paisagem (horizontal) DEVEM ser REJEITADAS, pois não funcionam para o vídeo final.  Inconsistência de Identidade (Falha Crítica):  A pessoa na foto gerada não é mais reconhecível como a pessoa na [FOTO_ORIGINAL]. O rosto está distorcido, parece outra pessoa, etc.  Exceção: A menos que o [PROMPT_ROTEIRISTA] especificamente peça uma transformação.  Artefatos e Deformidades (Falha Visual):  A imagem contém anomalias visuais óbvias (membros desproporcionais, mãos com 6 dedos, olhos bizarros, texturas \"derretidas\", proporções corporais incorretas).  Estilo Incorreto (Falha de Renderização):  A foto gerada parece um desenho, \"cartonesca\", pintura ou anime, quando o esperado era uma edição fotorrealista. (Endereça o problema \"cartonesca\").  Desalinhamento de Propósito (Falha Semântica):  A imagem não reflete o propósito descrito no [PROMPT_ROTEIRISTA] ou no [PROMPT_EDITOR_IMAGEM]. (Ex: Roteiro pedia \"escritório\" e a foto mostra uma \"montanha\").  Qualidade Geral Baixa (Falha Técnica):  A imagem está excessivamente borrada, pixelada ou com iluminação irrealista.  Decisão Final (Baseada na análise de TODAS as fotos):  APROVADO (SIM): A decisão será SIM se PELO MENOS UMA imagem da [LISTA_FOTOS_GERADAS] passar em TODOS os 6 critérios acima (Qualidade + Proporção Retrato).  REJEITADO (NÃO): A decisão será NÃO se NENHUMA das imagens na lista atender a todos os critérios simultaneamente.  Formato de Resposta Obrigatório:  Sua resposta DEVE seguir rigorosamente este formato de três partes, separadas por um pipe (barra vertical: |):  DECISÃO | NOME_ARQUIVO_APROVADO | SUGESTÃO  DECISÃO: Deve ser APENAS a palavra SIM ou a palavra NÃO.  NOME_ARQUIVO_APROVADO (A nova parte central):  Se a DECISÃO for SIM: Você deve inserir aqui o nome exato do arquivo (ex: data2.png ou foto_modificada_1.png) da imagem que você selecionou como a \"melhor foto\" (a que passou em todos os critérios).  Se a DECISÃO for NÃO: Você deve inserir aqui a palavra NENHUM.  SEPARADOR: Você deve usar OBRIGATORIAMENTE um pipe (|) para separar CADA uma das três partes.  SUGESTÃO (Terceira parte):  Se NÃO (Decisão foi NÃO): A SUGESTÃO deve ser uma instrução clara e curta para o Agente Editor, explicando por que todas as imagens falharam. (Ex: \"Nenhuma imagem tinha a proporção retrato\" ou \"Todas as imagens falharam no critério de identidade\").  Se SIM (Decisão foi SIM): A SUGESTÃO pode ficar vazia ou conter apenas um \"OK\" ou \"Aprovado\".  Exemplos de Respostas:  (Exemplo de Falha de Proporção): NÃO | NENHUM | Todas as imagens enviadas (data1.png, data2.png) estavam no formato paisagem (horizontal). É necessário gerar uma imagem no formato retrato (vertical) para continuar.  (Exemplo de Falha de Identidade): NÃO | NENHUM | O rosto em todas as imagens geradas (ex: data1.png, data3.png) está muito diferente da foto original e não é reconhecível. Tente preservar melhor os traços faciais ao aplicar a edição.  (Exemplo de Falha de Estilo): NÃO | NENHUM | Todas as imagens geradas (ex: foto_modificada_1.png) ficaram com um estilo \"cartonesco\". A edição deve ser fotorrealista. Refaça mantendo o realismo da foto original.  (Exemplo de Falha de Artefato): NÃO | NENHUM | A imagem 'data3.png' tinha proporção correta, mas a mão esquerda estava desproporcional. As outras (data1.png, data2.png) falharam na proporção. Corrija a proporção da mão.  (Exemplo de Sucesso): SIM | data2.png | Aprovado",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -5280,
+    -560
+   ],
+   "id": "edadeb4f-2844-4d3b-b003-5f79b2d567f3",
+   "name": "refazer a imagem"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=user pompt:\nnome das iamgens que ira receber sao {{ $binary.data.fileName }} que o original que voce ira fazer a comparacao e voce nao deve escolher ela nunca pois e a imagem sabe da qual a alterada foi feita e {{ $binary.data_modificada.fileName }} que o que voce vai analisar se vai aprovar ou nao e colocar o nome dela na resposta do meio caso seja aprovada\n\nagente que gera descricao do video{{ $('Start').item.json.output }}\n\nprompt do agente que que foi usado para gerar a imagem:{{ $('Arquiteto Visual').item.json.output }}\n\n\nSystem pompt:{{ $('refazer a imagem').item.json['sistem propt do revisor de qualidade'] }} lembre-se tambem de considerar sempre as dimensoes da foto que deve ser sempre em retrato e nao paisagem",
+    "needsFallback": true,
+    "messages": {
+     "messageValues": [
+      {
+       "type": "HumanMessagePromptTemplate",
+       "messageType": "imageBinary",
+       "binaryImageDataKey": "data_modificada"
+      },
+      {
+       "type": "HumanMessagePromptTemplate",
+       "messageType": "imageBinary"
+      }
+     ]
+    },
+    "batching": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.chainLlm",
+   "typeVersion": 1.7,
+   "position": [
+    -3424,
+    -736
+   ],
+   "id": "bee9f731-eb70-48bf-928a-423f8e72aa24",
+   "name": "controle de qualidade"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -3216,
+    -624
+   ],
+   "id": "f3479801-c481-49eb-9070-c24f9ec8a690",
+   "name": "Google Gemini Chat Model1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "cI7TnfCtTjIrpXE2",
+     "name": "919-emersongenshin"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"contents\": [\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"fileData\": {\n            \"fileUri\": \"{{ $json.file.uri }}\",\n            \"mimeType\": \"{{ $json.file.mimeType }}\"\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"text\": {{ $('prompt da edicao da imagem').item.json.prompt }}\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"temperature\": 1,\n    \"topK\": 40,\n    \"topP\": 0.95,\n    \"maxOutputTokens\": 8192,\n    \"responseModalities\": [\n      \"image\",\n      \"text\"\n    ]\n  }\n}",
+    "options": {}
+   },
+   "id": "fa5e8e34-e1cc-4646-9a6a-ef77f943e1d5",
+   "name": "Mestre da Montagem",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    -3968,
+    -560
+   ],
+   "typeVersion": 4.2,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=agente que gera descricao do video{{ $('Start').item.json.output }} motivo da rejeicao pelo agente de verisao caso haja:{{ $json['motivo da rejeicao'] }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "PROMPT DO AGENTE (Versão Modificada e Reforçada)\nEngenheiro de Prompt de Edição\n\n[PERFIL] Você é um agente de IA com a função de \"Engenheiro de Prompt de Edição\". Sua única finalidade é atuar como uma ferramenta de processamento. Você não conversa, não opina, não saúda e não oferece sugestões. Sua função é receber um input de roteiro narrativo e traduzi-lo em um único prompt de texto detalhado para ser usado por uma IA de edição de imagem (API de inpainting/edição).\n\n[TAREFA_PRINCIPAL] Analisar os dois inputs ([INPUT_ROTEIRO] e [INPUT_REVISAO]) e gerar um único prompt de texto (uma string) que instrua uma IA de edição a modificar uma foto-base de um homem (Emerson), integrando-o ao cenário, personagem e tom descritos no roteiro.\n\n[REGRAS DE OPERAÇÃO ESTRITAS]\n\nPRIORIDADE MÁXIMA (ROSTO INALTERADO): O rosto do homem na foto-base NÃO PODE SER MODIFICADO. Em todos os prompts que você gerar, você DEVE incluir um comando explícito, em letras maiúsculas, como \"MANTENHA O ROSTO DO HOMEM INALTERADO\" ou \"O ROSTO ORIGINAL DEVE PERMANECER IDÊNTICO\".\n\n<mark>PRIORIDADE CRÍTICA (FORMATO 9:16) - TOLERÂNCIA ZERO</mark>\n\n<mark>Regra:</mark> Esta é uma regra de tolerância zero. A imagem final DEVE ser em formato vertical (retrato) 9:16, adequada para YouTube Shorts e Instagram Reels. Qualquer outra proporção (paisagem 16:9, quadrada 1:1) é considerada uma FALHA CATASTRÓFICA da tarefa.\n\n<mark>Ação Mandatória:</mark> O prompt que você gerar DEVE ser escrito de forma defensiva e redundante para forçar a IA de edição a obedecer.\n\n<mark>Técnicas de Segurança (Obrigatório):</mark> Você DEVE injetar no seu prompt de saída uma combinação de comandos de reforço, comandos de punição (prompts negativos) e declarações de sucesso/falha para garantir a proporção.\n\n<mark>Exemplos de Comandos (Use-os):</mark> O prompt que você gerar deve conter frases como:\n\n\"FORMATO OBRIGATÓRIO: 9:16 VERTICAL.\" (Use no início).\n\n\"REFORÇO CRÍTICO: A proporção da imagem final deve ser 9:16 (retrato).\"\n\n\"PROMPT NEGATIVO DE PUNIÇÃO: (landscape: -2.0), (horizontal: -2.0), (16:9: -2.0), (quadrado: -1.0).\" (Use no final).\n\n\"SUCESSO DA TAREFA: A geração só é bem-sucedida se for 9:16 vertical.\"\n\nFOCO EM EDIÇÃO, NÃO CRIAÇÃO: Seu prompt deve sempre presumir que existe uma foto-base. Seus comandos devem ser para editar, modificar, transformar ou integrar o homem da foto no cenário, e não para \"criar um homem\".\n\nCOMANDO DIRETO: Sua saída deve sempre começar com um comando de ação direto (após a trava de formato). (Ex: \"Modifique a foto...\", \"Coloque o homem da imagem...\").\n\nNÃO-CONVERSACIONAL (REGRA CRÍTICA): Você é uma ferramenta. Sua saída deve ser exclusivamente o prompt de texto para a IA de imagem. NUNCA inclua saudações, confirmações, ou qualquer texto que não seja o próprio prompt. (NUNCA diga \"Ok, aqui está o prompt:\", \"Entendido:\", etc.)\n\nINTERPRETAÇÃO DE ROTEIRO: O [INPUT_ROTEIRO] será um texto livre e narrativo. Você deve \"ler\" este texto e extrair os elementos visuais principais: cenário, personagem (roupas, adereços), ação e iluminação para construir seu prompt. Ignore as falas (diálogos) do roteiro, a menos que elas descrevam uma ação ou emoção visual.\n\nLÓGICA DE REVISÃO:\n\nSe [INPUT_REVISAO] contiver \"primeira versão\", gere o prompt inicial com base no [INPUT_ROTEIRO].\n\nSe [INPUT_REVISAO] contiver qualquer outro texto, ele é um feedback corretivo. Você DEVE usar esse feedback para gerar um novo prompt que corrija o problema, ainda seguindo o [INPUT_ROTEIRO] como base.\n\n[INPUTS ESPERADOS] Você sempre receberá dois inputs de texto (string):\n\n[INPUT_ROTEIRO] (String): (Exemplo: \"Ok, para a primeira cena... um cavaleiro medieval...\")\n\n[INPUT_REVISAO] (String): (Exemplo: \"primeira versão\" ou \"A armadura ficou parecendo de plástico...\")\n\n[EXEMPLOS DE OPERAÇÃO (FEW-SHOT)] Estes exemplos mostram exatamente como sua saída deve ser (apenas o prompt final).\n\nExemplo 1: Primeira Versão\n\n[INPUT_ROTEIRO]: \"Ok, para a primeira cena, o gancho é o seguinte: um cavaleiro medieval, armadura completa brilhando, tá no meio de um parque da cidade. Ele tá super confuso, tentando explicar como funciona um smartphone. A fala dele é: 'E esta relíquia mística... mostra gatos!' O tom tem que ser bem cômico, mas fotorrealista. Luz do dia.\" [INPUT_REVISAO]: \"primeira versão\"\n\n[SUA SAÍDA ESPERADA (APENAS ESTE TEXTO)]: <mark>FORMATO OBRIGATÓRIO: 9:16 VERTICAL.</mark> Modifique a foto para colocar o homem da imagem em um parque urbano ensolarado. O ROSTO DO HOMEM DEVE PERMANECER INALTERADO. Transforme suas roupas em uma armadura de cavaleiro medieval metálica e completa, com reflexos da luz do sol. Ele deve estar segurando um smartphone moderno, apontando para a tela com uma expressão confusa. O fundo deve ser um parque comum com bancos e árvores. Fotorrealista. <mark>REFORÇO CRÍTICO: A proporção da imagem final deve ser 9:16 (retrato). SUCESSO DA TAREFA: A geração só é bem-sucedida se for 9:16 vertical. PROMPT NEGATIVO DE PUNIÇÃO: (landscape: -2.0), (horizontal: -2.0), (16:9: -2.0).</mark>\n\nExemplo 2: Versão com Revisão\n\n[INPUT_ROTEIRO]: \"Cena 2: Agora ele é um cientista maluco. O laboratório/cozinha tá uma zona total. Ele levanta uma cafeteira que tá soltando fumaça e dá aquela risada maníaca, sabe? 'Funciona! Meu café de plutônio!' A luz é bem forte, de cima, meio estourada.\" [INPUT_REVISAO]: \"A imagem anterior ficou muito escura e o cabelo dele não estava bagunçado o suficiente. O rosto também foi um pouco alterado, corrija isso.\"\n\n[SUA SAÍDA ESPERADA (APENAS ESTE TEXTO)]: <mark>FORMATO OBRIGATÓRIO: 9:16 VERTICAL.</mark> Refaça a edição: MANTENHA O ROSTO ORIGINAL DO HOMEM INALTERADO, garantindo que a expressão maníaca esteja clara. Coloque-o em uma cozinha caótica e bagunçada. Adicione um cabelo extremamente selvagem, branco e arrepiado. Transforme suas roupas em um jaleco de cientista manchado. A iluminação deve ser fluorescente, muito brilhante e vinda de cima. Ele segura uma cafeteira que solta fumaça. Corrija a escuridão da versão anterior. <mark>A imagem deve ser vertical (formato 9:16). A GERAÇÃO FALHARÁ SE NÃO FOR 9:16. PROMPT NEGATIVO DE PUNIÇÃO: (landscape: -2.0), (16:9: -2.0).</mark>\n\nExemplo 3: Primeira Versão (Outro Conceito)\n\n[INPUT_ROTEIRO]: \"Vamos fazer uma cena dele como um viking. Ele está no convés de um navio Drakkar, no meio de uma tempestade no oceano. O céu tá escuro, raios ao longe. Ele está gritando para a tripulação (que não vemos). A roupa tem que ser de couro e peles, e ele segura um machado. Bem épico.\" [INPUT_REVISAO]: \"primeira versão\"\n\n[SUA SAÍDA ESPERADA (APENAS ESTE TEXTO)]: <mark>FORMATO OBRIGATÓRIO: 9:16 VERTICAL.</mark> Edite a foto para colocar o homem no convés de um navio viking (Drakkar) durante uma tempestade no mar. O ROSTO DO HOMEM DEVE PERMANECER IDÊNTICO, mas com uma expressão de quem está gritando. Transforme suas roupas em trajes de viking, com peles e couro molhados pela chuva. Ele deve segurar um machado de batalha. O fundo é um oceano agitado, céu escuro com nuvens de tempestade e raios ao longe. Iluminação dramática e sombria. <mark>Force o formato retrato (vertical) 9:16 para a saída final. REFORÇO: 9:16. PROMPT NEGATIVO DE PUNIÇÃO: (horizontal: -2.0), (16:9 aspect ratio: -2.0).</mark>",
+     "passthroughBinaryImages": true,
+     "enableStreaming": true
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    -5152,
+    -560
+   ],
+   "id": "d88b9e3f-a3c1-4c50-8999-e48c296748f9",
+   "name": "Arquiteto Visual"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "c094156e-318a-4457-9064-713463859abc",
+       "name": "prompt",
+       "value": "={{ $json.output.toJsonString() }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -4896,
+    -560
+   ],
+   "id": "5312e6c7-31be-4e32-918e-24b680571193",
+   "name": "prompt da edicao da imagem"
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "candidates[0].content.parts[1].inlineData.data",
+    "binaryPropertyName": "data_modificada",
+    "options": {
+     "fileName": "foto_modificada.png"
+    }
+   },
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    -3792,
+    -560
+   ],
+   "id": "f3b14cfb-49e3-468f-aeb0-51aba3de01b0",
+   "name": "O Alquimista",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "candidates[0].content.parts[0].inlineData.data",
+    "binaryPropertyName": "data_modificada",
+    "options": {
+     "fileName": "foto_modificada.png"
+    }
+   },
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    -3680,
+    -480
+   ],
+   "id": "a5f5bdcb-5e9c-4eb3-bc06-d00624c8f426",
+   "name": "O Alquimista1"
+  },
+  {
+   "parameters": {
+    "mode": "combine",
+    "combineBy": "combineByPosition",
+    "numberInputs": 3,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    -3136,
+    -496
+   ],
+   "id": "24d00035-e202-4a6d-acd5-a0c7f91a5c26",
+   "name": "FUSÃO! ha2"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "ad4191f8-e2cf-4eb7-9ead-5c063fdb25f8",
+       "leftValue": "={{ $runIndex }}",
+       "rightValue": 0,
+       "operator": {
+        "type": "number",
+        "operation": "lte"
+       }
+      }
+     ],
+     "combinator": "or"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -4800,
+    -560
+   ],
+   "id": "de36f15c-bb73-4c6e-b579-45ad646ad02d",
+   "name": "If3"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -2960,
+    -368
+   ],
+   "id": "301114b0-dafc-488a-8d2b-af0628495433",
+   "name": "Google Gemini Chat Model2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZJfAiyeq1C4zMECh",
+     "name": "teste2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "dd5a60fc-d31a-4b46-a398-5cc4717f1fbb",
+       "leftValue": "={{ $json.text.split('|')[0] }}",
+       "rightValue": "SIM ",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      },
+      {
+       "id": "ad4191f8-e2cf-4eb7-9ead-5c063fdb25f8",
+       "leftValue": "={{ $runIndex }}",
+       "rightValue": 1,
+       "operator": {
+        "type": "number",
+        "operation": "gt"
+       }
+      }
+     ],
+     "combinator": "or"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -2768,
+    -496
+   ],
+   "id": "d337f64f-eefa-4d63-82bd-010ad6e7a4d4",
+   "name": "If6"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=user pompt:\nnome das iamgens que ira receber sao {{ $binary.data_modificada_anterior.fileName }} , {{ $binary.data.fileName }} que o original e {{ $binary.data_modificada.fileName }} exeto a original {{ $binary.data.fileName }} pois ela foi a base para as outras e voce usara ela para verificar se o rosto bate com as outras, uma delas voce ira escolher como a melhor para o video o seu prompt como esta abaixo e de dizer nenhum quando nenhuma das imagens corresponder, mais nesse caso foge do padrao e voce deve escolher a mais proxima mesmo se a primeira resposta for NAO a segunda deve ser a imagem mais proxima da original mais que seja uma das outras duas modificadas\n\nagente que gera descricao do video{{ $('Start').item.json.output }}\n\nprompt do agente que que foi usado para gerar a imagem:{{ $('Arquiteto Visual').item.json.output }}\n\nSystem pompt:{{ $('refazer a imagem').item.json['sistem propt do revisor de qualidade'] }} lembre-se tambem de considerar sempre as dimensoes da foto que deve ser sempre em retrato e nao paisagem",
+    "needsFallback": true,
+    "messages": {
+     "messageValues": [
+      {
+       "type": "HumanMessagePromptTemplate",
+       "messageType": "imageBinary",
+       "binaryImageDataKey": "data_modificada"
+      },
+      {
+       "type": "HumanMessagePromptTemplate",
+       "messageType": "imageBinary"
+      },
+      {
+       "type": "HumanMessagePromptTemplate",
+       "messageType": "imageBinary",
+       "binaryImageDataKey": "data_modificada_anterior"
+      }
+     ]
+    },
+    "batching": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.chainLlm",
+   "typeVersion": 1.7,
+   "position": [
+    -3008,
+    -496
+   ],
+   "id": "3e97c62f-df8c-43e0-b726-dd2f0419fb11",
+   "name": "controle de qualidade1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -2816,
+    -368
+   ],
+   "id": "c04baa68-ea0f-4f33-8550-00265e7ca650",
+   "name": "Google Gemini Chat Model3",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "cI7TnfCtTjIrpXE2",
+     "name": "919-emersongenshin"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $runIndex }}",
+          "rightValue": 0,
+          "operator": {
+           "type": "number",
+           "operation": "equals"
+          },
+          "id": "635ae0f8-f90e-490a-b41e-16c03436b68e"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "0"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "88df24a8-badf-4d84-b062-4a822e18e704",
+          "leftValue": "={{ $runIndex }}",
+          "rightValue": 1,
+          "operator": {
+           "type": "number",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "1"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "0d5c7613-0b9e-4cdf-832c-afc22b87ffcd",
+          "leftValue": "={{ $runIndex }}",
+          "rightValue": 2,
+          "operator": {
+           "type": "number",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "2"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.3,
+   "position": [
+    -3568,
+    -592
+   ],
+   "id": "b7735702-e325-4e1b-8480-bbccabfa2e46",
+   "name": "Switch"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -3440,
+    -480
+   ],
+   "id": "c86a8cdc-0ced-4ec7-96a9-2d0c3597d780",
+   "name": "para binario anterior"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -3264,
+    -336
+   ],
+   "id": "b9f900c9-ac72-4828-86d5-e48d1a1159c3",
+   "name": "para binario anterior1"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "0c7e4804-4a79-4e85-bafa-5a7fcad3bade",
+       "name": "id",
+       "value": "={{ $json.id }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -2992,
+    512
+   ],
+   "id": "d24e99ad-266d-4b11-94d8-7fde23fc11dc",
+   "name": "Edit Fields2"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "823bc796-ae31-4e5a-8384-091894866809",
+       "name": "imagem escolhida definitiva",
+       "value": "={{ $json.propertyName }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -4560,
+    -576
+   ],
+   "id": "87624fe6-caba-4027-8cbb-8c3e040d5f13",
+   "name": "imagem escolhida definitiva"
+  },
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "output",
+       "type": "any"
+      },
+      {
+       "name": "canal",
+       "type": "any"
+      }
+     ]
+    }
+   },
+   "id": "2e511734-52fa-452c-88fd-75557f74ebca",
+   "typeVersion": 1.1,
+   "name": "Start2",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "position": [
+    -5648,
+    -560
+   ],
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "e26dc15e-37f2-4030-8bf8-ae2e7b3f3f7d",
+       "name": "output",
+       "value": "={{ $json.output }}",
+       "type": "string"
+      },
+      {
+       "id": "63d80668-2fb9-4aa3-bce5-8ea714c172a2",
+       "name": "canal",
+       "value": "={{ $json.canal }}",
+       "type": "string"
+      },
+      {
+       "id": "c2341f0c-d881-45d9-b385-48dbcc58f06f",
+       "name": "id do video",
+       "value": "={{ $json['id do video'] }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -5536,
+    -560
+   ],
+   "id": "5f03c1a3-6081-40ac-bd23-73fc38dbaaa6",
+   "name": "Start"
+  }
+ ],
+ "pinData": {
+  "Start2": [
+   {
+    "json": {
+     "output": "MUNDO | #ia #shortvideo #veo3 #curiosidades #viral #youtubeshorts #shorts #Shorts #fatos #dados || [Música de fundo: Música eletrônica hipnótica e ambiente, com um ritmo lento e repetitivo, com notas de sintetizador que se alongam, criando uma sensação de sonho ou transe.] [Cena 1 - Visual: O vídeo é uma única sequência de \"zoom infinito\" e \"morphing\" contínuo. Começa com um close-up numa paisagem de cristal vibrante, que gradualmente se transforma em uma floresta feita de doces derretidos. A floresta, por sua vez, se dissolve num oceano de néon líquido, que então se reconstrói numa cidade futurista feita de padrões fractais que giram e se expandem em loop. As cores são hiper-saturadas (magenta, ciano, verde elétrico). Câmera: Movimento lento e contínuo, como um 'voo' hipnótico (Dolly In/Zoom Infinito) que nunca para, mantendo o espectador preso à transformação constante.] [Cena 1 - Áudio/Voz: (Sem Diálogo. Apenas narração ambiente com voz robótica, reverberante e calma.) Seu cérebro está ligado. O mundo real é a sugestão. O que você vê agora é a realidade gerada.] [Cena 1 - Áudio/SFX: Um som de 'whoosh' ou 'swoosh' suave acompanhando cada grande transição de forma. Efeitos sonoros sutis de cliques ou 'glitches' digitais que se dissolvem na música.]",
+     "canal": "canal:4"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "upload-imagem1": {
+   "main": [
+    [
+     {
+      "node": "Mestre da Montagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Base": {
+   "main": [
+    [
+     {
+      "node": "data1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "data1": {
+   "main": [
+    [
+     {
+      "node": "upload-imagem1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "controle de qualidade",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [],
+    [
+     {
+      "node": "refazer a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "comando proximo": {
+   "main": [
+    [
+     {
+      "node": "refazer a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini1": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Arquiteto Visual",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini ": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Arquiteto Visual",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "fotos geradas": {
+   "ai_memory": [
+    [
+     {
+      "node": "Arquiteto Visual",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "refazer a imagem": {
+   "main": [
+    [
+     {
+      "node": "Arquiteto Visual",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "controle de qualidade": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model1": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "controle de qualidade",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Mestre da Montagem": {
+   "main": [
+    [
+     {
+      "node": "O Alquimista",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Mestre da Montagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Arquiteto Visual": {
+   "main": [
+    [
+     {
+      "node": "prompt da edicao da imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "prompt da edicao da imagem": {
+   "main": [
+    [
+     {
+      "node": "If3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "O Alquimista": {
+   "main": [
+    [
+     {
+      "node": "Switch",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "O Alquimista1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "O Alquimista1": {
+   "main": [
+    [
+     {
+      "node": "Switch",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "FUSÃO! ha2": {
+   "main": [
+    [
+     {
+      "node": "controle de qualidade1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If3": {
+   "main": [
+    [
+     {
+      "node": "imagem escolhida definitiva",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "imagem escolhida definitiva",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model2": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "controle de qualidade1",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If6": {
+   "main": [
+    [],
+    [
+     {
+      "node": "refazer a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "controle de qualidade1": {
+   "main": [
+    [
+     {
+      "node": "If6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model3": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "controle de qualidade1",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Switch": {
+   "main": [
+    [
+     {
+      "node": "controle de qualidade",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "para binario anterior",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "FUSÃO! ha2",
+      "type": "main",
+      "index": 1
+     },
+     {
+      "node": "para binario anterior1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "para binario anterior": {
+   "main": [
+    [
+     {
+      "node": "FUSÃO! ha2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "para binario anterior1": {
+   "main": [
+    [
+     {
+      "node": "FUSÃO! ha2",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  },
+  "imagem escolhida definitiva": {
+   "main": [
+    [
+     {
+      "node": "Base",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Start2": {
+   "main": [
+    [
+     {
+      "node": "Start",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Start": {
+   "main": [
+    [
+     {
+      "node": "comando proximo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "8d862e0f-61f7-4f6e-86c7-248d8e6d3b0e",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "oPQdTYm22EIbKzdl",
+ "tags": []
+}

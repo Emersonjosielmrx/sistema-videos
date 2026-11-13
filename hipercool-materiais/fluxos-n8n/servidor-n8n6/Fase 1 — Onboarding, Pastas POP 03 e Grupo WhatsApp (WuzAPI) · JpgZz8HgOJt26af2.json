@@ -1,0 +1,2059 @@
+{
+ "updatedAt": "2026-09-25T20:40:46.902Z",
+ "createdAt": "2026-09-20T00:11:34.065Z",
+ "id": "JpgZz8HgOJt26af2",
+ "name": "Fase 1 — Onboarding, Pastas POP 03 e Grupo WhatsApp (WuzAPI)",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🌐 1. INTERFACE WEB (MANUAL / SDR)\n\nDisponibiliza interface visual responsiva para lançamento manual dos dados do novo cliente pelo SDR ou equipe de atendimento.\n\n* **Webhook - Carregar Form Onboarding (`Webhook`)**:\n  Escuta requisições HTTP GET na rota `/form-onboarding` para abrir o formulário interativo no navegador.\n\n* **HTML (`HTML`)**:\n  Renderiza a interface completa em HTML5/CSS moderno (tema escuro), com campos de entrada, validações e script assíncrono de submissão.\n\n* **Respond to Webhook (`Respond to Webhook`)**:\n  Devolve o código HTML compilado com status HTTP 200 para renderização imediata na tela do operador.",
+    "height": 420,
+    "width": 620,
+    "color": 6
+   },
+   "id": "85fa0a74-65cc-446f-8313-d5a3d9518172",
+   "name": "Note - Interface Web",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    464,
+    672
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📥 2. INGESTÃO & NORMALIZAÇÃO\n\nPonto de entrada oficial do pipeline para processamento e higienização dos dados do cliente.\n\n* **Webhook - Iniciar Onboarding (`Webhook`)**:\n  Escuta requisições HTTP POST na rota `/onboarding-cliente` enviadas pelo formulário web ou via CRM externo.\n\n* **Sanitizar Dados & Parâmetros (`Code`)**:\n  Higieniza strings, padroniza telefones (adiciona DDI 55 e remove caracteres), gera o slug único da empresa, define nomes de pastas, monta a lista de participantes do grupo e organiza variáveis operacionais.",
+    "height": 400,
+    "width": 460,
+    "color": 4
+   },
+   "id": "e2c2e775-fc2c-4ce9-b12f-153ddd3db384",
+   "name": "Note - Ingestão",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    208,
+    1296
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🗂️ 3. CÉREBRO CENTRALIZADO (POP 03 & VPS)\n\nCriação física das pastas no Google Drive e dos diretórios locais no servidor VPS para centralizar todo o conhecimento e ativos do cliente.\n\n* **Google Drive - Criar Pasta Raiz do Projeto (`Google Drive`)**:\n  Cria no Drive a pasta mestre do cliente nomeada como `📁 [Empresa] — Central de Inteligência`.\n\n* **Preparar Subpastas POP 03 (`Code`)**:\n  Recupera o ID da pasta raiz recém-criada e estrutura os 4 itens oficiais do POP 03: `01_Diagnostico`, `02_Brandbook`, `03_Criativos` e `04_Relatorios`.\n\n* **Google Drive - Criar Subpastas POP 03 (`Google Drive`)**:\n  Cria recursivamente cada uma das 4 subpastas do POP 03 dentro da pasta raiz criada no Drive.\n\n* **SSH - Garantir Diretórios na VPS (`SSH`)**:\n  Executa comando SSH no servidor VPS (`mkdir -p`) garantindo a criação dos diretórios `/root/briefing/[Empresa]` e `/root/Brandbook/[Empresa]` para processamento dos agentes locais.",
+    "height": 400,
+    "width": 860,
+    "color": 7
+   },
+   "id": "5275b5c3-f0f1-4c53-a17f-caddb1237d3b",
+   "name": "Note - Pastas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    704,
+    1296
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 💬 4. AUTOMAÇÃO WHATSAPP & GOVERNANÇA (WUZAPI)\n\nCriação automática do grupo oficial de alinhamento com cliente e equipe, extração do link de convite e disparo das mensagens de acolhimento.\n\n* **Preparar Payload WuzAPI (`Code`)**:\n  Recupera o link do Google Drive, credenciais da WuzAPI e lista de telefones dos participantes, estruturando os dados para as chamadas de API.\n\n* **WuzAPI - Criar Grupo WhatsApp (`HTTP Request`)**:\n  Executa `POST /group/create` na WuzAPI criando o grupo com o nome `[Empresa] | Agência` e adicionando participantes autorizados.\n\n* **Tratar Retorno do Grupo & Obter JID (`Code`)**:\n  Processa a resposta da WuzAPI com múltiplos fallbacks de segurança para extrair com precisão o JID único do grupo (`...g.us`).\n\n* **WuzAPI - Obter Link de Convite (`HTTP Request`)**:\n  Executa `GET /group/invitelink` na WuzAPI informando o JID para obter a URL compartilhável de entrada no grupo (`chat.whatsapp.com/...`).\n\n* **Montar Mensagens Oficiais de Boas-Vindas (`Code`)**:\n  Redige de forma personalizada os textos de boas-vindas, governança, link da pasta no Google Drive e link do Questionário Norteador (QNP), gerando templates para o grupo e para o decisor.\n\n* **WuzAPI - Enviar Boas-Vindas no Grupo (`HTTP Request`)**:\n  Executa `POST /chat/send/text` publicando a mensagem oficial de abertura e regras de governança diretamente no grupo recém-criado.\n\n* **WuzAPI - Notificar Decisor no Privado (`HTTP Request`)**:\n  Executa `POST /chat/send/text` enviando mensagem individual ao WhatsApp privado do decisor com instruções de boas-vindas e link de acesso ao grupo.",
+    "height": 420,
+    "width": 1450,
+    "color": 5
+   },
+   "id": "10ca1ab2-9ecc-4556-bd68-ad5cad8fea32",
+   "name": "Note - WuzAPI",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1600,
+    1296
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📄 5. GERAÇÃO & ENVIO DO CONTRATO\n\nAutomação completa da minuta contratual: duplicação de modelo no Google Docs, preenchimento de cláusulas, conversão em PDF e entrega via WhatsApp.\n\n* **Copiar Contrato (`Google Drive`)**:\n  Duplica o modelo mestre oficial de contrato do Google Docs, gerando um novo arquivo: `Contrato de Serviços | [Nome da Empresa]`.\n\n* **Wait (`Wait`)**:\n  Aplica pausa estratégica de execução para garantir a conclusão da duplicação e indexação do arquivo pelo Google Drive.\n\n* **Localizar e Substituir1 (`Google Docs`)**:\n  Substitui todas as variáveis dinâmicas do contrato (`{{nomeDaEmpresa}}`, `{{CNPJ}}`, `{{CPF}}`, `{{enderecoSede}}`, `{{emailContato}}`, `{{valorContrato}}`, etc.) pelos dados reais do cliente.\n\n* **Converter para PDF (`Google Drive`)**:\n  Exporta o documento preenchido fazendo download no formato PDF (`application/pdf`).\n\n* **converteparabase (`Extract from File`)**:\n  Converte o arquivo binário do PDF baixado em string Base64 (`binaryToProperty`), preparando-o para envio via payload JSON na API.\n\n* **envia pdf (`HTTP Request`)**:\n  Executa `POST /chat/send/document` na WuzAPI transmitindo o contrato em PDF diretamente no grupo do WhatsApp como anexo oficial do projeto.",
+    "height": 440,
+    "width": 1300,
+    "color": 2
+   },
+   "id": "f5facee1-2a27-4ea6-b359-f062883f82d7",
+   "name": "Note - Contrato",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1648,
+    1760
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📊 6. RESPOSTA & AUDITORIA FINAL\n\nConsolidação executiva de todos os recursos provisionados na Fase 1 e retorno estruturado para o solicitante original.\n\n* **Consolidar Relatório da Fase 1 (`Code`)**:\n  Compila o payload JSON executivo com status de sucesso, links do Google Drive, JID do grupo WhatsApp, link de convite e próximos passos da Fase 2.\n\n* **Responder Webhook com Resumo (`Respond to Webhook`)**:\n  Devolve o payload JSON com status HTTP 200 para o emissor da requisição (CRM/Formulário), concluindo o ciclo de onboarding com sucesso.",
+    "height": 440,
+    "width": 440,
+    "color": 3
+   },
+   "id": "961ff61f-aeb4-4bb4-a1a8-bb600472b183",
+   "name": "Note - Resposta",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2976,
+    1760
+   ]
+  },
+  {
+   "parameters": {
+    "path": "form-onboarding",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "0245c70c-0390-463f-bfa1-4e1a16119ac6",
+   "name": "Webhook - Carregar Form Onboarding",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    496,
+    928
+   ],
+   "webhookId": "ac7a7a32-fffb-49e6-aaf8-63589d4b4d9e"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "onboarding-cliente",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "2269caa2-c69f-40d9-ad7c-9dd0eae6d455",
+   "name": "Webhook - Iniciar Onboarding",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    240,
+    1536
+   ],
+   "webhookId": "bbf1d866-d792-45f1-8314-5d931a6d2495"
+  },
+  {
+   "parameters": {
+    "jsCode": "const raw = $input.first().json.body || $input.first().json;\n\n// 1. Identificação Básica\nconst nomeEmpresa = (raw.nome_empresa || raw.nome || \"Novo Cliente\").trim();\nconst nomeResponsavel = (raw.nome_responsavel || raw.responsavel || \"Parceiro(a)\").trim();\n\n// 2. Normalização de Slug e ID\nconst slugEmpresa = nomeEmpresa\n  .toLowerCase()\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\")\n  .replace(/[^a-z0-9]+/g, \"-\")\n  .replace(/(^-|-$)/g, \"\");\n\nconst projectId = `${slugEmpresa}-${Date.now()}`;\n\n// 3. Sanitização de Números Telefônicos\nfunction cleanPhone(phone) {\n  if (!phone) return \"\";\n  let digits = String(phone).replace(/\\D/g, \"\");\n  // Se começou com 0, remove\n  if (digits.startsWith(\"0\")) digits = digits.substring(1);\n  // Se tem 10 ou 11 dígitos (DDD + Número), prefixa com 55 (Brasil)\n  if (digits.length === 10 || digits.length === 11) {\n    digits = \"55\" + digits;\n  }\n  return digits;\n}\n\nconst whatsappCliente = cleanPhone(raw.whatsapp_cliente || raw.telefone || raw.phone);\n\nlet membrosAgencia = [];\nif (Array.isArray(raw.membros_agencia)) {\n  membrosAgencia = raw.membros_agencia.map(cleanPhone).filter(Boolean);\n} else if (typeof raw.membros_agencia === \"string\" && raw.membros_agencia.trim()) {\n  membrosAgencia = raw.membros_agencia.split(\",\").map(s => cleanPhone(s.trim())).filter(Boolean);\n}\n\n// Participantes para a criação do grupo no WuzAPI (Cliente + Time da Agência)\nconst participantesSet = new Set();\nif (whatsappCliente) participantesSet.add(whatsappCliente);\nmembrosAgencia.forEach(p => participantesSet.add(p));\nconst participantes = Array.from(participantesSet);\n\n// 4. Configurações de API e Ambiente\nconst urlWuzapi = raw.url_wuzapi || \"https://wuzapi.inovareinteligenciaartificial.com\";\nconst tokenWuzapi = raw.token_wuzapi || \"pessoal\";\nconst urlQnp = raw.url_qnp || \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/form-qnp\";\nconst urlVideo = raw.url_video_boas_vindas || \"https://loom.com/share/cronograma-30-dias-onboarding\";\nconst parentFolderId = raw.parent_folder_id || \"\";\n\n// 5. Nomes Padronizados\nconst nomeGrupo = `🚀 ${nomeEmpresa} x Agência`;\nconst nomePastaDrive = `📁 ${nomeEmpresa} — Central de Inteligência`;\n\nreturn [{\n  json: {\n    project_id: projectId,\n    slug_empresa: slugEmpresa,\n    nome_empresa: nomeEmpresa,\n    nome_responsavel: nomeResponsavel,\n    whatsapp_cliente: whatsappCliente,\n    membros_agencia: membrosAgencia,\n    participantes: participantes,\n    nome_grupo: nomeGrupo,\n    nome_pasta_drive: nomePastaDrive,\n    parent_folder_id: parentFolderId,\n    url_wuzapi: urlWuzapi,\n    token_wuzapi: tokenWuzapi,\n    url_qnp: urlQnp,\n    url_video_boas_vindas: urlVideo,\n    data_inicio: new Date().toISOString()\n  }\n}];"
+   },
+   "id": "f7c94fbb-dde6-4d69-8a3e-7b6c1e9097e7",
+   "name": "Sanitizar Dados & Parâmetros",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    464,
+    1536
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "={{ $json.nome_pasta_drive }}",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "1kQB8QeYEEOfISfJUB5FtuY51kNL98uDW",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "id": "7fb29893-a22b-409e-94df-962d0622faf2",
+   "name": "Google Drive - Criar Pasta Raiz do Projeto",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    752,
+    1536
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const items = $input.all();\nconst mainItem = $('Sanitizar Dados & Parâmetros').first().json;\nconst driveResult = items[0] ? items[0].json : {};\n\n// Extrair Folder ID criado ou usar fallback\nconst rootFolderId = driveResult.id || driveResult.folderId || `folder-pop03-${mainItem.slug_empresa}`;\nconst driveUrl = driveResult.webViewLink || `https://drive.google.com/drive/folders/${rootFolderId}`;\n\n// 4 Subpastas Oficiais do POP 03 (Protocolo do Cérebro Centralizado)\nconst subpastas = [\n  \"01_Materiais\",\n  \"02_Criativos\",\n  \"03_Criativos_e_Anuncios\",\n  \"04_Relatorios_e_Dashboards\"\n];\n\nreturn subpastas.map((nome, index) => ({\n  json: {\n    ...mainItem,\n    root_folder_id: rootFolderId,\n    drive_folder_url: driveUrl,\n    subpasta_index: index + 1,\n    nome_subpasta: nome\n  }\n}));"
+   },
+   "id": "826207c2-8945-4b6c-a577-95e8c6616b30",
+   "name": "Preparar Subpastas POP 03",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    944,
+    1536
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "={{ '📁 ' + $json.nome_subpasta }}",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $('Google Drive - Criar Pasta Raiz do Projeto').item.json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "id": "c798336a-915a-4c01-b869-575fb9576f64",
+   "name": "Google Drive - Criar Subpastas POP 03",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    1152,
+    1536
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "command": "=\"mkdir -p '/root/briefing/\" + $('Sanitizar Dados & Parâmetros').item.json.nome_empresa + \"' '/root/Brandbook/\" + $('Sanitizar Dados & Parâmetros').item.json.nome_empresa + \"'\""
+   },
+   "id": "83580795-8fb4-48aa-9ed4-6a3fa96d948d",
+   "name": "SSH - Garantir Diretórios na VPS",
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    1344,
+    1536
+   ],
+   "credentials": {
+    "sshPassword": {
+     "id": "8dDUhhIDCo7tLJss",
+     "name": "157.173.207.22"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const mainItem = $('Sanitizar Dados & Parâmetros').first().json;\nconst subpastasResults = $('Google Drive - Criar Subpastas POP 03').all();\n\n// Recupera a URL da pasta do Google Drive\nlet driveFolderUrl = `https://drive.google.com/drive/search?q=${encodeURIComponent(mainItem.nome_pasta_drive)}`;\ntry {\n  const rootDrive = $('Google Drive - Criar Pasta Raiz do Projeto').first().json;\n  if (rootDrive.webViewLink) {\n    driveFolderUrl = rootDrive.webViewLink;\n  }\n} catch(e) {}\n\nreturn [{\n  json: {\n    ...mainItem,\n    drive_folder_url: driveFolderUrl,\n    total_subpastas_criadas: subpastasResults.length\n  }\n}];"
+   },
+   "id": "87f80408-5efc-48d6-ae9d-557fd0789e45",
+   "name": "Preparar Payload WuzAPI",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1632,
+    1536
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.url_wuzapi }}/group/create",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $json.token_wuzapi }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ name: $json.nome_grupo, participants: $json.participantes }) }}",
+    "options": {}
+   },
+   "id": "b58e6b0a-cd84-4de0-a1d3-b7438c6ec20c",
+   "name": "WuzAPI - Criar Grupo WhatsApp",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1824,
+    1552
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const input = $input.first().json;\nconst prevData = $('Preparar Payload WuzAPI').first().json;\n\n// Extrai o JID retornado pelo WuzAPI (/group/create)\nlet groupJid = \"\";\nif (input.JID) groupJid = input.JID;\nelse if (input.jid) groupJid = input.jid;\nelse if (input.GroupJID) groupJid = input.GroupJID;\nelse if (input.Details && input.Details.JID) groupJid = input.Details.JID;\nelse if (input.data && input.data.JID) groupJid = input.data.JID;\nelse if (input.id) groupJid = input.id;\nelse {\n  // Fallback para desenvolvimento e testes\n  groupJid = `120363${Date.now()}@g.us`;\n}\n\nreturn [{\n  json: {\n    ...prevData,\n    group_jid: groupJid,\n    wuzapi_create_status: input.Status || input.status || 200,\n    wuzapi_create_raw: input\n  }\n}];"
+   },
+   "id": "6f2b1fe5-21c6-435d-9388-1b223f5ab4d3",
+   "name": "Tratar Retorno do Grupo & Obter JID",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2032,
+    1536
+   ]
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.url_wuzapi }}/group/invitelink",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "groupJID",
+       "value": "={{ $json.wuzapi_create_raw.data.JID }}"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $json.token_wuzapi }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "a7b128e7-0a84-4ae0-afdb-8a32654d15c3",
+   "name": "WuzAPI - Obter Link de Convite",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2224,
+    1568
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const data = $input.first().json;\n\n// 1. Dados dos nós anteriores de forma segura (com fallback)\nconst grupoData = $('Tratar Retorno do Grupo & Obter JID').first()?.json || {};\nconst nomeEmpresa = grupoData.nome_empresa || \"\";\nconst nomeResponsavel = grupoData.nome_responsavel || \"\";\n\nconst driveNode = $('Google Drive - Criar Pasta Raiz do Projeto').first()?.json || {};\nconst driveFolderId = driveNode.id || \"\";\nconst driveFolderUrl = data.drive_folder_url || (driveFolderId ? `https://drive.google.com/drive/folders/${driveFolderId}` : \"\");\n\n// 2. Extrair link de convite do grupo se disponível\nconst inviteResult = $('WuzAPI - Obter Link de Convite').first()?.json || {};\nlet inviteLink = \"\";\nif (inviteResult.InviteLink) inviteLink = inviteResult.InviteLink;\nelse if (inviteResult.invitelink) inviteLink = inviteResult.invitelink;\nelse if (inviteResult.link) inviteLink = inviteResult.link;\nelse if (inviteResult.Code) inviteLink = `https://chat.whatsapp.com/${inviteResult.Code}`;\nelse if (typeof inviteResult === \"string\" && inviteResult.startsWith(\"http\")) inviteLink = inviteResult;\n\n// 3. URLs com fallback\nconst urlQnp = data.url_qnp || \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/form-qnp\";\nconst urlVideo = data.url_video_boas_vindas || \"\";\n\n// 4. Mensagem Oficial do Grupo (Conforme Playbook POP 01 e POP 03)\nconst mensagemGrupo = `🚀 *Bem-vindos à Central de Inteligência Estratégica da ${nomeEmpresa}!*\n\nOlá, *${nomeResponsavel}* e time! É uma grande satisfação dar a largada oficial no projeto de crescimento da sua empresa.\n\nEste é o nosso grupo de governança e comunicação oficial. Aqui estão os estrategistas de negócios, gestores de mídia de performance e diretores criativos dedicados à sua conta.\n\n---\n\n📁 *1. Cérebro Centralizado do Projeto (POP 03):*\nSua pasta master no Google Drive já foi gerada com a estrutura de inteligência da agência:\n🔗 ${driveFolderUrl}\n\nEstrutura de governança criada:\n• 📁 \\`01_Diagnostico_e_KPIs\\`\n• 📁 \\`02_Brandbook_e_Identidade\\`\n• 📁 \\`03_Criativos_e_Anuncios\\`\n• 📁 \\`04_Relatorios_e_Dashboards\\`\n\n---\n\n📝 *2. AÇÃO IMEDIATA: Fase 2 — Quadro Norteador de Pesquisa (QNP)*\nPara construirmos seu Dossiê Executivo, Metas Financeiras Reversas e Estratégia dos Primeiros 90 Dias, preencha o formulário estratégico oficial:\n👉 *Link do Formulário:* ${urlQnp}\n\n*(Tempo estimado: 15 a 20 min. Respostas detalhadas destravam um diagnóstico muito mais profundo!)*\n\n---\n\n🧭 *3. Cronograma dos Primeiros 30 Dias:*\n• *Dias 1-2 (Hoje):* Boas-Vindas & Onboarding (Fase 1 ✅)\n• *Dias 3-7:* Diagnóstico Estratégico com QNP (01 a 04.md)\n• *Dias 8-14:* Identidade de Marca & BRAND OS (IA Especialistas)\n• *Dia 15:* Reunião Executiva de Alinhamento (Kickoff)\n• *Dias 16-25:* Setup Técnico, CAPI, GTM & Primeiros Anúncios\n• *Dias 30-60-90:* Escala Contínua & Rituais Semanais de Caixa\n\n🎥 *Vídeo de Apresentação do Estrategista:*\n🔗 ${urlVideo}\n\nQualquer dúvida, estamos 100% à disposição aqui no grupo. Vamos juntos acelerar o crescimento! 🎯`;\n\n// 5. Mensagem Privada para o Decisor (Garante entrada e acesso imediato)\nconst mensagemPrivada = `Olá, *${nomeResponsavel}*! 👋\n\nAqui é da equipe estratégica. Acabamos de configurar o ecossistema oficial da *${nomeEmpresa}*!\n\n👥 *Grupo Oficial no WhatsApp:*\n${inviteLink ? `👉 Acesse pelo convite: ${inviteLink}` : \"👉 Você já foi adicionado(a) ao grupo oficial com nossa diretoria!\"}\n\n📁 *Pasta Centralizada de Documentos:*\n${driveFolderUrl}\n\n📝 *Próximo Passo (Fase 2):*\nPor favor, responda o formulário do Quadro Norteador de Pesquisa para iniciarmos a análise profunda da empresa:\n👉 ${urlQnp}\n\nNos falamos dentro do grupo! 🚀`;\n\nreturn [{\n  json: {\n    ...data,\n    group_invite_link: inviteLink,\n    mensagem_grupo: mensagemGrupo,\n    mensagem_privada: mensagemPrivada\n  }\n}];"
+   },
+   "id": "0fa9ff30-3144-4725-887b-dc43f6a0a3a2",
+   "name": "Montar Mensagens Oficiais de Boas-Vindas",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2432,
+    1536
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Preparar Payload WuzAPI').item.json.url_wuzapi }}/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Preparar Payload WuzAPI').item.json.token_wuzapi }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ Phone: $('WuzAPI - Criar Grupo WhatsApp').item.json.data.JID, Body: $json.mensagem_grupo }) }}",
+    "options": {}
+   },
+   "id": "7c4e0ecd-0aba-4a0c-b036-12a7d3c4c838",
+   "name": "WuzAPI - Enviar Boas-Vindas no Grupo",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2624,
+    1568
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Preparar Payload WuzAPI').item.json.url_wuzapi }}/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Preparar Payload WuzAPI').item.json.token_wuzapi }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ Phone: $('Tratar Retorno do Grupo & Obter JID').item.json.whatsapp_cliente, Body: $('Montar Mensagens Oficiais de Boas-Vindas').item.json.mensagem_privada }) }}",
+    "options": {}
+   },
+   "id": "25be5963-438f-4e02-a9db-293f2de86278",
+   "name": "WuzAPI - Notificar Decisor no Privado",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2832,
+    1568
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const input = $input.first().json;\n\nreturn [{\n  json: {\n    status: \"success\",\n    fase: \"Fase 1: Boas-Vindas & Onboarding\",\n    project_id: input.project_id,\n    empresa: input.nome_empresa,\n    responsavel: input.nome_responsavel,\n    whatsapp_cliente: input.whatsapp_cliente,\n    participantes_adicionados: input.participantes,\n    whatsapp: {\n      group_name: input.nome_grupo,\n      group_jid: input.group_jid,\n      group_invite_link: input.group_invite_link || null,\n      status_criacao_grupo: \"sucesso\"\n    },\n    cerebro_centralizado: {\n      drive_folder_url: input.drive_folder_url,\n      subpastas_criadas: [\n        \"📁 01_Diagnostico_e_KPIs\",\n        \"📁 02_Brandbook_e_Identidade\",\n        \"📁 03_Criativos_e_Anuncios\",\n        \"📁 04_Relatorios_e_Dashboards\"\n      ],\n      vps_paths: [\n        `/root/briefing/${input.nome_empresa}`,\n        `/root/Brandbook/${input.nome_empresa}`\n      ]\n    },\n    proximos_passos: [\n      \"Fase 2: Preenchimento do Quadro Norteador de Pesquisa (/form-qnp)\",\n      \"Fase 3: BRAND OS — Geração do Brandbook com 4 Agentes Especialistas\",\n      \"Fase 4: Reunião Executiva de Alinhamento / Kickoff (Dia 15)\"\n    ],\n    timestamp: new Date().toISOString()\n  }\n}];"
+   },
+   "id": "9c3ed3ed-8b31-4487-a092-1e883aa5a404",
+   "name": "Consolidar Relatório da Fase 1",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2992,
+    2016
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "id": "cd62343a-66be-4943-8793-c8d32d5e8190",
+   "name": "Responder Webhook com Resumo",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    3200,
+    2016
+   ]
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n<title>Onboarding & Contrato — Novo Cliente</title>\n\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap\" rel=\"stylesheet\">\n\n<style>\n\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\n:root {\n    --bg: #f7f7f5;\n    --card: #ffffff;\n    --text: #151515;\n    --muted: #777;\n    --border: #e8e8e5;\n    --primary: #111111;\n    --accent: #111111;\n    --soft: #f2f2ef;\n    --success: #16803c;\n    --danger: #c62828;\n}\n\nbody {\n    font-family: 'Inter', Arial, sans-serif;\n    background:\n        radial-gradient(\n            circle at 50% -20%,\n            rgba(0,0,0,.045),\n            transparent 45%\n        ),\n        var(--bg);\n\n    color: var(--text);\n    min-height: 100vh;\n}\n\n/* =========================\n   CONTAINER\n========================= */\n\n.container {\n    width: min(780px, calc(100% - 32px));\n    margin: 0 auto;\n    padding: 42px 0 80px;\n}\n\n/* =========================\n   HEADER\n========================= */\n\n.header {\n    text-align: center;\n    margin-bottom: 38px;\n}\n\n.logo {\n    display: inline-flex;\n    align-items: center;\n    gap: 9px;\n\n    font-size: 14px;\n    font-weight: 800;\n    letter-spacing: .8px;\n\n    margin-bottom: 26px;\n}\n\n.logo-icon {\n    width: 34px;\n    height: 34px;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    border-radius: 10px;\n\n    background: #111;\n    color: white;\n\n    font-size: 15px;\n}\n\n.header h1 {\n    font-size: clamp(26px, 5vw, 40px);\n    line-height: 1.15;\n    letter-spacing: -1.4px;\n    font-weight: 800;\n\n    margin-bottom: 14px;\n}\n\n.header h1 span {\n    display: block;\n}\n\n.header p {\n    max-width: 620px;\n    margin: auto;\n\n    color: var(--muted);\n\n    font-size: 14px;\n    line-height: 1.7;\n}\n\n/* =========================\n   PROGRESS\n========================= */\n\n.progress-area {\n    margin-bottom: 28px;\n}\n\n.progress-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    margin-bottom: 9px;\n\n    font-size: 11px;\n    font-weight: 700;\n\n    color: #999;\n\n    text-transform: uppercase;\n    letter-spacing: .6px;\n}\n\n.progress-bar {\n    width: 100%;\n    height: 4px;\n\n    background: #e7e7e4;\n\n    border-radius: 20px;\n\n    overflow: hidden;\n}\n\n.progress-fill {\n    width: 25%;\n    height: 100%;\n\n    background: #111;\n\n    border-radius: 20px;\n\n    transition: width .3s ease;\n}\n\n/* =========================\n   CARD\n========================= */\n\n.card {\n    background: var(--card);\n\n    border: 1px solid var(--border);\n\n    border-radius: 20px;\n\n    padding: clamp(24px, 5vw, 42px);\n\n    box-shadow:\n        0 15px 50px rgba(0,0,0,.045);\n}\n\n/* =========================\n   SECTION\n========================= */\n\n.step-label {\n    font-size: 11px;\n    font-weight: 800;\n\n    text-transform: uppercase;\n    letter-spacing: 1px;\n\n    color: #999;\n\n    margin-bottom: 10px;\n}\n\n.section-title {\n    font-size: 21px;\n\n    line-height: 1.25;\n\n    font-weight: 750;\n\n    letter-spacing: -.5px;\n\n    margin-bottom: 8px;\n}\n\n.section-desc {\n    color: var(--muted);\n\n    font-size: 13px;\n\n    line-height: 1.6;\n\n    margin-bottom: 26px;\n}\n\n/* =========================\n   FIELDS\n========================= */\n\n.field {\n    margin-bottom: 20px;\n}\n\n.field label {\n    display: block;\n\n    font-size: 12px;\n\n    font-weight: 700;\n\n    margin-bottom: 8px;\n\n    color: #333;\n}\n\n.field input,\n.field textarea {\n    width: 100%;\n\n    border: 1px solid var(--border);\n\n    background: #fafaf9;\n\n    color: var(--text);\n\n    border-radius: 10px;\n\n    padding: 13px 14px;\n\n    outline: none;\n\n    font-family: inherit;\n\n    font-size: 14px;\n\n    transition:\n        border-color .2s,\n        background .2s,\n        box-shadow .2s;\n}\n\n.field textarea {\n    min-height: 80px;\n    resize: vertical;\n}\n\n.field input:hover,\n.field textarea:hover {\n    border-color: #d6d6d2;\n}\n\n.field input:focus,\n.field textarea:focus {\n    background: #fff;\n\n    border-color: #111;\n\n    box-shadow:\n        0 0 0 3px rgba(0,0,0,.06);\n}\n\n.field small {\n    display: block;\n\n    margin-top: 6px;\n\n    color: #999;\n\n    font-size: 11px;\n\n    line-height: 1.5;\n}\n\n/* =========================\n   GRID\n========================= */\n\n.grid-2 {\n    display: grid;\n\n    grid-template-columns: 1fr 1fr;\n\n    gap: 16px;\n}\n\n@media(max-width:650px) {\n\n    .grid-2 {\n        grid-template-columns: 1fr;\n        gap: 0;\n    }\n\n}\n\n/* =========================\n   DIVIDER\n========================= */\n\n.divider {\n    height: 1px;\n\n    background: var(--border);\n\n    margin: 32px 0;\n}\n\n/* =========================\n   BUTTON\n========================= */\n\nbutton {\n    width: 100%;\n\n    padding: 15px 18px;\n\n    border: none;\n\n    border-radius: 10px;\n\n    background: #111;\n\n    color: #fff;\n\n    font-family: inherit;\n\n    font-size: 14px;\n\n    font-weight: 700;\n\n    cursor: pointer;\n\n    transition:\n        transform .2s,\n        box-shadow .2s,\n        opacity .2s;\n\n    margin-top: 10px;\n}\n\nbutton:hover {\n    transform: translateY(-1px);\n\n    box-shadow:\n        0 8px 25px rgba(0,0,0,.15);\n}\n\nbutton:active {\n    transform: translateY(0);\n}\n\nbutton:disabled {\n    opacity: .55;\n\n    cursor: not-allowed;\n\n    transform: none;\n\n    box-shadow: none;\n}\n\n/* =========================\n   MESSAGE\n========================= */\n\n.box-msg {\n    display: none;\n\n    margin-top: 20px;\n\n    padding: 18px;\n\n    border-radius: 12px;\n\n    font-size: 13px;\n\n    line-height: 1.7;\n}\n\n.box-msg.success {\n    background: #f0f9f3;\n\n    border: 1px solid #c9ead5;\n\n    color: var(--success);\n}\n\n.box-msg.error {\n    background: #fff5f5;\n\n    border: 1px solid #f1cccc;\n\n    color: var(--danger);\n}\n\n.box-msg a {\n    color: inherit;\n    font-weight: 700;\n}\n\n/* =========================\n   FOOTER\n========================= */\n\n.footer {\n    text-align: center;\n\n    margin-top: 25px;\n\n    color: #aaa;\n\n    font-size: 11px;\n}\n\n</style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n    <!-- HEADER -->\n\n    <header class=\"header\">\n\n        <div class=\"logo\">\n\n            <div class=\"logo-icon\">\n                B\n            </div>\n\n            AGÊNCIA OS\n\n        </div>\n\n        <h1>\n            Fase 1:\n            <span>Onboarding & Geração de Contrato</span>\n        </h1>\n\n        <p>\n            Cadastre os dados cadastrais da empresa para preenchimento\n            automático do contrato e configuração dos canais operacionais.\n        </p>\n\n    </header>\n\n\n    <!-- PROGRESS -->\n\n    <div class=\"progress-area\">\n\n        <div class=\"progress-header\">\n\n            <span>Etapa 01</span>\n\n            <span>25%</span>\n\n        </div>\n\n        <div class=\"progress-bar\">\n\n            <div class=\"progress-fill\"></div>\n\n        </div>\n\n    </div>\n\n\n    <!-- FORM CARD -->\n\n    <div class=\"card\">\n\n        <form id=\"onboardingForm\">\n\n            <div class=\"step-label\">\n                Jurídico & Contratual\n            </div>\n\n            <div class=\"section-title\">\n                Dados para o Contrato\n            </div>\n\n            <p class=\"section-desc\">\n                Essas informações serão utilizadas para preencher as cláusulas\n                e a qualificação formal da Contratante.\n            </p>\n\n\n            <!-- EMPRESA & CNPJ -->\n\n            <div class=\"grid-2\">\n\n                <div class=\"field\">\n\n                    <label>\n                        Razão Social / Nome da Empresa *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"nomeDaEmpresa\"\n                        required\n                        placeholder=\"Ex.: Clínica Sorriso Prime LTDA\"\n                    >\n\n                </div>\n\n                <div class=\"field\">\n\n                    <label>\n                        CNPJ *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"CNPJ\"\n                        required\n                        placeholder=\"00.000.000/0001-00\"\n                    >\n\n                </div>\n\n            </div>\n\n\n            <!-- SEDE & EMAIL -->\n\n            <div class=\"field\">\n\n                <label>\n                    Endereço da Sede *\n                </label>\n\n                <input\n                    type=\"text\"\n                    name=\"enderecoSede\"\n                    required\n                    placeholder=\"Rua Exemplo, nº 100, Sala 201, Bairro Centro, Cidade - UF, CEP 00000-000\"\n                >\n\n            </div>\n\n            <div class=\"field\">\n\n                <label>\n                    E-mail de Contato e Notificações *\n                </label>\n\n                <input\n                    type=\"email\"\n                    name=\"emailContato\"\n                    required\n                    placeholder=\"contato@suaempresa.com.br\"\n                >\n\n            </div>\n\n\n            <!-- RESPONSÁVEL & CPF -->\n\n            <div class=\"grid-2\">\n\n                <div class=\"field\">\n\n                    <label>\n                        Nome do Sócio Administrador *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"nomeResponsavel\"\n                        required\n                        placeholder=\"Ex.: Dr. Carlos Eduardo de Souza\"\n                    >\n\n                </div>\n\n                <div class=\"field\">\n\n                    <label>\n                        CPF do Responsável *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"CPF\"\n                        required\n                        placeholder=\"000.000.000-00\"\n                    >\n\n                </div>\n\n            </div>\n\n\n            <div class=\"divider\"></div>\n\n\n            <!-- CANAIS & SETUP OPERACIONAL -->\n\n            <div class=\"step-label\">\n                Comunicação & Equipe\n            </div>\n\n            <div class=\"section-title\">\n                Setup Operacional\n            </div>\n\n            <p class=\"section-desc\">\n                Canais de mensageria e materiais de introdução.\n            </p>\n\n\n            <!-- CONTATOS -->\n\n            <div class=\"grid-2\">\n\n                <div class=\"field\">\n\n                    <label>\n                        WhatsApp do Cliente *\n                    </label>\n\n                    <input\n                        type=\"tel\"\n                        name=\"whatsapp_cliente\"\n                        required\n                        placeholder=\"5522998908709\"\n                    >\n\n                    <small>\n                        Informe DDI + DDD + número.\n                    </small>\n\n                </div>\n\n                <div class=\"field\">\n\n                    <label>\n                        Equipe da Agência\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"membros_agencia\"\n                        placeholder=\"5591988887777, 5511999998888\"\n                    >\n\n                    <small>\n                        Separe os números por vírgula.\n                    </small>\n\n                </div>\n\n            </div>\n\n\n            <!-- BOAS-VINDAS & DRIVE -->\n\n            <div class=\"field\">\n\n                <label>\n                    Vídeo de Boas-vindas do Estrategista\n                </label>\n\n                <input\n                    type=\"url\"\n                    name=\"url_video_boas_vindas\"\n                    placeholder=\"https://loom.com/share/exemplo\"\n                >\n\n                <small>\n                    Link do Loom, YouTube ou Drive.\n                </small>\n\n            </div>\n\n            <div class=\"field\">\n\n                <label>\n                    ID da Pasta Mãe no Google Drive\n                </label>\n\n                <input\n                    type=\"text\"\n                    name=\"parent_folder_id\"\n                    placeholder=\"Deixe vazio para criar na raiz do Drive\"\n                >\n\n            </div>\n\n\n            <!-- SUBMIT -->\n\n            <button\n                type=\"submit\"\n                id=\"btnSubmit\"\n            >\n                Iniciar Onboarding & Gerar Contrato →\n            </button>\n\n\n            <!-- SUCCESS -->\n\n            <div\n                id=\"msgSuccess\"\n                class=\"box-msg success\">\n            </div>\n\n\n            <!-- ERROR -->\n\n            <div\n                id=\"msgError\"\n                class=\"box-msg error\">\n            </div>\n\n        </form>\n\n    </div>\n\n\n    <div class=\"footer\">\n        AGÊNCIA OS · Inteligência e automação para operações\n    </div>\n\n</div>\n\n\n<script>\n\nconst form = document.getElementById(\"onboardingForm\");\nconst btn = document.getElementById(\"btnSubmit\");\nconst msgSuccess = document.getElementById(\"msgSuccess\");\nconst msgError = document.getElementById(\"msgError\");\n\nform.addEventListener(\"submit\", async function(e) {\n\n    e.preventDefault();\n\n    btn.disabled = true;\n    btn.innerText = \"Processando dados do onboarding...\";\n\n    msgSuccess.style.display = \"none\";\n    msgError.style.display = \"none\";\n\n    const formData = new FormData(form);\n\n    const nomeDaEmpresa = formData.get(\"nomeDaEmpresa\")?.trim();\n    const cnpj = formData.get(\"CNPJ\")?.trim();\n    const enderecoSede = formData.get(\"enderecoSede\")?.trim();\n    const emailContato = formData.get(\"emailContato\")?.trim();\n    const nomeResponsavel = formData.get(\"nomeResponsavel\")?.trim();\n    const cpf = formData.get(\"CPF\")?.trim();\n\n    // Texto da qualificação contratual gerado automaticamente\n    const clausulaQualificacao = `${nomeDaEmpresa}, pessoa jurídica, inscrita no CNPJ sob nº ${cnpj}, com sede na ${enderecoSede}, endereço de e-mail: ${emailContato}, neste ato representada por seu sócio ${nomeResponsavel}, sócio administrador(a), inscrito(a) no CPF sob nº ${cpf}, abaixo assinado(a), doravante designada apenas a “Contratante”.`;\n\n    const payload = {\n\n        // Variáveis mapeadas diretamente para o template do contrato\n        nomeDaEmpresa: nomeDaEmpresa,\n        CNPJ: cnpj,\n        enderecoSede: enderecoSede,\n        emailContato: emailContato,\n        nomeResponsavel: nomeResponsavel,\n        CPF: cpf,\n\n        // Cláusula já montada caso queira usar diretamente no Docs/PDF\n        clausula_contrato_contratante: clausulaQualificacao,\n\n        // Campos operacionais mantidos para compatibilidade com o n8n\n        nome_empresa: nomeDaEmpresa,\n        nome_responsavel: nomeResponsavel,\n        whatsapp_cliente: formData.get(\"whatsapp_cliente\")?.trim(),\n        membros_agencia: formData.get(\"membros_agencia\")\n            ? formData.get(\"membros_agencia\")\n                .split(\",\")\n                .map(s => s.trim())\n                .filter(Boolean)\n            : [],\n        url_video_boas_vindas: formData.get(\"url_video_boas_vindas\") || \"\",\n        parent_folder_id: formData.get(\"parent_folder_id\") || \"\"\n\n    };\n\n    try {\n\n        const response = await fetch(\n            \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/onboarding-cliente\",\n            {\n                method: \"POST\",\n                headers: {\n                    \"Content-Type\": \"application/json\"\n                },\n                body: JSON.stringify(payload)\n            }\n        );\n\n        if (!response.ok) {\n            throw new Error(\"Status HTTP: \" + response.status);\n        }\n\n        const res = await response.json();\n\n        msgSuccess.innerHTML = `\n            <strong>✓ Onboarding e Contrato iniciados com sucesso!</strong>\n            <br><br>\n            <strong>Empresa:</strong> ${payload.nomeDaEmpresa}\n            <br>\n            <strong>Responsável:</strong> ${payload.nomeResponsavel}\n            <br>\n            <strong>E-mail:</strong> ${payload.emailContato}\n            <br><br>\n            <strong>Grupo WhatsApp:</strong> ${res.whatsapp?.group_name || \"Criado\"}\n            ${\n                res.whatsapp?.group_invite_link\n                ? `<br><strong>Convite:</strong> <a href=\"${res.whatsapp.group_invite_link}\" target=\"_blank\">Abrir grupo</a>`\n                : \"\"\n            }\n            <br>\n            <strong>Google Drive:</strong>\n            <a href=\"${res.cerebro_centralizado?.drive_folder_url || \"#\"}\" target=\"_blank\">Abrir pasta do projeto</a>\n            <br><br>\n            <em>Os dados contratuais já foram encaminhados para a esteira de geração e assinatura de contrato.</em>\n        `;\n\n        msgSuccess.style.display = \"block\";\n        btn.innerText = \"✓ Onboarding concluído\";\n\n    } catch(err) {\n\n        console.error(err);\n\n        msgError.innerHTML = `\n            <strong>⚠ Não foi possível iniciar o onboarding.</strong>\n            <br><br>\n            ${err.message}\n            <br><br>\n            Verifique o workflow e as credenciais configuradas no n8n.\n        `;\n\n        msgError.style.display = \"block\";\n        btn.disabled = false;\n        btn.innerText = \"Tentar novamente\";\n\n    }\n\n});\n\n</script>\n\n</body>\n</html>"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    688,
+    928
+   ],
+   "id": "9bef6f75-1dee-4a03-9e95-b1eeca7ff500",
+   "name": "HTML"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    896,
+    928
+   ],
+   "typeVersion": 1,
+   "id": "2a47b244-1ff2-4fc5-a89e-c9fb2e13ef20"
+  },
+  {
+   "parameters": {
+    "operation": "copy",
+    "fileId": {
+     "__rl": true,
+     "value": "=1UHKJCSHOv1N9S66Euwc3pSlBy0XuVprxZ0ou8GtGphk",
+     "mode": "id"
+    },
+    "name": "=Contrato de Serviços | {{ $('Webhook - Iniciar Onboarding').item.json.body.nomeDaEmpresa }}",
+    "options": {
+     "copyRequiresWriterPermission": false
+    }
+   },
+   "id": "de0ca628-81e9-4f76-bd6e-525f9fa8e1f7",
+   "name": "Copiar Contrato",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    1696,
+    2016
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "documentURL": "={{ $('Copiar Contrato').item.json.id }}",
+    "actionsUi": {
+     "actionFields": [
+      {
+       "action": "replaceAll",
+       "text": "{{nomeDaEmpresa}}",
+       "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.nomeDaEmpresa }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{CNPJ}}",
+       "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.CNPJ }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{enderecoSede}}",
+       "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.enderecoSede }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{emailContato}}",
+       "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.emailContato }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{nomeResponsavel}}",
+       "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.nomeResponsavel }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{CPF}}",
+       "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.CPF }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{valorContrato}}",
+       "replaceText": "=1000"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{dataInicio}}",
+       "replaceText": "=21/09/2026"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{dataVencimento}}",
+       "replaceText": "10"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{clausulaVariavel}}",
+       "replaceText": "=4.5.  {{ $('Webhook - Iniciar Onboarding').item.json.body.clausula_contrato_contratante }}"
+      },
+      {
+       "action": "replaceAll",
+       "text": "{{duracaocontrato}}",
+       "replaceText": "=1 ano"
+      }
+     ]
+    }
+   },
+   "id": "d3d4ed42-0197-4e95-8850-22a62f6924f9",
+   "name": "Localizar e Substituir1",
+   "type": "n8n-nodes-base.googleDocs",
+   "typeVersion": 2,
+   "position": [
+    2144,
+    2016
+   ],
+   "credentials": {
+    "googleDocsOAuth2Api": {
+     "id": "xzE5KAAGSJJU9k2s",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    1920,
+    2016
+   ],
+   "id": "f698b8dd-157e-4c70-bdf2-6b84ecb2a3c6",
+   "name": "Wait",
+   "webhookId": "4c8a692e-fa32-45a6-98c7-0ebc2ef49c18"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Preparar Payload WuzAPI').item.json.url_wuzapi }}/chat/send/document",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Preparar Payload WuzAPI').item.json.token_wuzapi }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('WuzAPI - Criar Grupo WhatsApp').item.json.data.JID }}"
+      },
+      {
+       "name": "Document",
+       "value": "=data:application/octet-stream;base64,{{ $json.data }}"
+      },
+      {
+       "name": "FileName",
+       "value": "={{ $('Copiar Contrato').item.json.name }}.pdf"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2800,
+    2016
+   ],
+   "id": "56dccbb1-bd9d-475d-90bd-fae18b30efb2",
+   "name": "envia pdf"
+  },
+  {
+   "parameters": {
+    "operation": "binaryToPropery",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.extractFromFile",
+   "typeVersion": 1,
+   "position": [
+    2608,
+    2016
+   ],
+   "id": "92e2e5ce-e016-4b77-ad1e-23c0453608ad",
+   "name": "converteparabase"
+  },
+  {
+   "parameters": {
+    "operation": "download",
+    "fileId": {
+     "__rl": true,
+     "value": "={{ $json[\"documentId\"] }}",
+     "mode": "id"
+    },
+    "options": {
+     "googleFileConversion": {
+      "conversion": {
+       "docsToFormat": "application/pdf",
+       "drawingsToFormat": "application/pdf",
+       "slidesToFormat": "application/pdf",
+       "sheetsToFormat": "application/pdf"
+      }
+     },
+     "fileName": "={{ $('Copiar Contrato').item.json.name }}.pdf"
+    }
+   },
+   "id": "f83c06ee-82e9-4734-b362-1a0c201aa2f7",
+   "name": "Converter para PDF",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 2,
+   "position": [
+    2368,
+    2016
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Webhook - Carregar Form Onboarding": {
+   "main": [
+    [
+     {
+      "node": "HTML",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Webhook - Iniciar Onboarding": {
+   "main": [
+    [
+     {
+      "node": "Sanitizar Dados & Parâmetros",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Sanitizar Dados & Parâmetros": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Pasta Raiz do Projeto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Pasta Raiz do Projeto": {
+   "main": [
+    [
+     {
+      "node": "Preparar Subpastas POP 03",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Preparar Subpastas POP 03": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP 03",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Subpastas POP 03": {
+   "main": [
+    [
+     {
+      "node": "SSH - Garantir Diretórios na VPS",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "SSH - Garantir Diretórios na VPS": {
+   "main": [
+    [
+     {
+      "node": "Preparar Payload WuzAPI",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Preparar Payload WuzAPI": {
+   "main": [
+    [
+     {
+      "node": "WuzAPI - Criar Grupo WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "WuzAPI - Criar Grupo WhatsApp": {
+   "main": [
+    [
+     {
+      "node": "Tratar Retorno do Grupo & Obter JID",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tratar Retorno do Grupo & Obter JID": {
+   "main": [
+    [
+     {
+      "node": "WuzAPI - Obter Link de Convite",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "WuzAPI - Obter Link de Convite": {
+   "main": [
+    [
+     {
+      "node": "Montar Mensagens Oficiais de Boas-Vindas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Montar Mensagens Oficiais de Boas-Vindas": {
+   "main": [
+    [
+     {
+      "node": "WuzAPI - Enviar Boas-Vindas no Grupo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "WuzAPI - Enviar Boas-Vindas no Grupo": {
+   "main": [
+    [
+     {
+      "node": "WuzAPI - Notificar Decisor no Privado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "WuzAPI - Notificar Decisor no Privado": {
+   "main": [
+    [
+     {
+      "node": "Copiar Contrato",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Consolidar Relatório da Fase 1": {
+   "main": [
+    [
+     {
+      "node": "Responder Webhook com Resumo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Copiar Contrato": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Localizar e Substituir1": {
+   "main": [
+    [
+     {
+      "node": "Converter para PDF",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "Localizar e Substituir1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "envia pdf": {
+   "main": [
+    [
+     {
+      "node": "Consolidar Relatório da Fase 1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "converteparabase": {
+   "main": [
+    [
+     {
+      "node": "envia pdf",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Converter para PDF": {
+   "main": [
+    [
+     {
+      "node": "converteparabase",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "pinData": {
+  "Webhook - Iniciar Onboarding": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "content-length": "980",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/json",
+      "origin": "null",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "45.71.241.201",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "45.71.241.201"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "nomeDaEmpresa": "Inovare Inteligência Artificial LTDA",
+      "CNPJ": "12.345.678/0001-90",
+      "enderecoSede": "Av. Paulista, nº 1000, Sala 101, Bela Vista, São Paulo - SP, CEP 01310-100",
+      "emailContato": "contato@inovare.com.br",
+      "nomeResponsavel": "Rafael da Silva Souza",
+      "CPF": "123.456.789-00",
+      "clausula_contrato_contratante": "Inovare Inteligência Artificial LTDA, pessoa jurídica, inscrita no CNPJ sob nº 12.345.678/0001-90, com sede na Av. Paulista, nº 1000, Sala 101, Bela Vista, São Paulo - SP, CEP 01310-100, endereço de e-mail: contato@inovare.com.br, neste ato representada por seu sócio Rafael da Silva Souza, sócio administrador(a), inscrito(a) no CPF sob nº 123.456.789-00, abaixo assinado(a), doravante designada apenas a “Contratante”.",
+      "nome_empresa": "Inovare Inteligência Artificial LTDA",
+      "nome_responsavel": "Rafael da Silva Souza",
+      "whatsapp_cliente": "5522998908709",
+      "membros_agencia": [
+       "5522998887777",
+       "5511999998888"
+      ],
+      "url_video_boas_vindas": "https://loom.com/share/exemplo-boas-vindas",
+      "parent_folder_id": "1A2b3C4D5e6F7g8H9i0J"
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/onboarding-cliente",
+     "executionMode": "production"
+    }
+   }
+  ],
+  "WuzAPI - Criar Grupo WhatsApp": [
+   {
+    "json": {
+     "code": 200,
+     "data": {
+      "AddressingMode": "lid",
+      "AnnounceVersionID": "",
+      "CreatorCountryCode": "",
+      "DefaultMembershipApprovalMode": "",
+      "DisappearingTimer": 0,
+      "GroupCreated": "2026-09-13T21:50:21-03:00",
+      "IsAnnounce": false,
+      "IsDefaultSubGroup": false,
+      "IsEphemeral": false,
+      "IsIncognito": false,
+      "IsJoinApprovalRequired": false,
+      "IsLocked": false,
+      "IsParent": false,
+      "JID": "120363413117731792@g.us",
+      "LinkedParentJID": "",
+      "MemberAddMode": "admin_add",
+      "Name": "🚀 Inovare Inteligência Artificial LTDA x Agência",
+      "NameSetAt": "2026-09-13T21:50:21-03:00",
+      "NameSetBy": "132250784018630@lid",
+      "NameSetByPN": "559184698653@s.whatsapp.net",
+      "OwnerJID": "132250784018630@lid",
+      "OwnerPN": "559184698653@s.whatsapp.net",
+      "ParticipantCount": 0,
+      "ParticipantVersionID": "",
+      "Participants": [
+       {
+        "AddRequest": null,
+        "DisplayName": "",
+        "Error": 0,
+        "IsAdmin": true,
+        "IsSuperAdmin": true,
+        "JID": "132250784018630@lid",
+        "LID": "132250784018630@lid",
+        "PhoneNumber": "559184698653@s.whatsapp.net"
+       },
+       {
+        "AddRequest": null,
+        "DisplayName": "",
+        "Error": 0,
+        "IsAdmin": false,
+        "IsSuperAdmin": false,
+        "JID": "122793148580017@lid",
+        "LID": "122793148580017@lid",
+        "PhoneNumber": "5522998908709@s.whatsapp.net"
+       },
+       {
+        "AddRequest": null,
+        "DisplayName": "",
+        "Error": 0,
+        "IsAdmin": false,
+        "IsSuperAdmin": false,
+        "JID": "239303380725779@lid",
+        "LID": "239303380725779@lid",
+        "PhoneNumber": "5511999998888@s.whatsapp.net"
+       },
+       {
+        "AddRequest": null,
+        "DisplayName": "",
+        "Error": 451,
+        "IsAdmin": false,
+        "IsSuperAdmin": false,
+        "JID": "5522998887777@s.whatsapp.net",
+        "LID": "",
+        "PhoneNumber": "5522998887777@s.whatsapp.net"
+       }
+      ],
+      "Suspended": false,
+      "Topic": "",
+      "TopicDeleted": false,
+      "TopicID": "",
+      "TopicSetAt": "0001-01-01T00:00:00Z",
+      "TopicSetBy": "",
+      "TopicSetByPN": ""
+     },
+     "success": true
+    }
+   }
+  ]
+ },
+ "versionId": "bb98be2f-d93a-49cb-9179-819f4c3235f1",
+ "activeVersionId": "57076321-18c3-4889-9a05-5bdcfa08cb86",
+ "versionCounter": 24,
+ "triggerCount": 2,
+ "shared": [
+  {
+   "updatedAt": "2026-09-20T00:11:34.065Z",
+   "createdAt": "2026-09-20T00:11:34.065Z",
+   "role": "workflow:owner",
+   "workflowId": "JpgZz8HgOJt26af2",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [
+  {
+   "updatedAt": "2026-09-20T14:28:10.499Z",
+   "createdAt": "2026-09-20T14:28:10.499Z",
+   "id": "RecBackup0000001",
+   "name": "Rec - Backup"
+  }
+ ],
+ "activeVersion": {
+  "updatedAt": "2026-09-25T00:00:39.223Z",
+  "createdAt": "2026-09-21T00:09:49.400Z",
+  "versionId": "57076321-18c3-4889-9a05-5bdcfa08cb86",
+  "workflowId": "JpgZz8HgOJt26af2",
+  "nodes": [
+   {
+    "parameters": {
+     "content": "## 🌐 1. INTERFACE WEB (MANUAL / SDR)\n\nDisponibiliza interface visual responsiva para lançamento manual dos dados do novo cliente pelo SDR ou equipe de atendimento.\n\n* **Webhook - Carregar Form Onboarding (`Webhook`)**:\n  Escuta requisições HTTP GET na rota `/form-onboarding` para abrir o formulário interativo no navegador.\n\n* **HTML (`HTML`)**:\n  Renderiza a interface completa em HTML5/CSS moderno (tema escuro), com campos de entrada, validações e script assíncrono de submissão.\n\n* **Respond to Webhook (`Respond to Webhook`)**:\n  Devolve o código HTML compilado com status HTTP 200 para renderização imediata na tela do operador.",
+     "height": 420,
+     "width": 620,
+     "color": 6
+    },
+    "id": "85fa0a74-65cc-446f-8313-d5a3d9518172",
+    "name": "Note - Interface Web",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     464,
+     672
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 📥 2. INGESTÃO & NORMALIZAÇÃO\n\nPonto de entrada oficial do pipeline para processamento e higienização dos dados do cliente.\n\n* **Webhook - Iniciar Onboarding (`Webhook`)**:\n  Escuta requisições HTTP POST na rota `/onboarding-cliente` enviadas pelo formulário web ou via CRM externo.\n\n* **Sanitizar Dados & Parâmetros (`Code`)**:\n  Higieniza strings, padroniza telefones (adiciona DDI 55 e remove caracteres), gera o slug único da empresa, define nomes de pastas, monta a lista de participantes do grupo e organiza variáveis operacionais.",
+     "height": 400,
+     "width": 460,
+     "color": 4
+    },
+    "id": "e2c2e775-fc2c-4ce9-b12f-153ddd3db384",
+    "name": "Note - Ingestão",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     208,
+     1296
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 🗂️ 3. CÉREBRO CENTRALIZADO (POP 03 & VPS)\n\nCriação física das pastas no Google Drive e dos diretórios locais no servidor VPS para centralizar todo o conhecimento e ativos do cliente.\n\n* **Google Drive - Criar Pasta Raiz do Projeto (`Google Drive`)**:\n  Cria no Drive a pasta mestre do cliente nomeada como `📁 [Empresa] — Central de Inteligência`.\n\n* **Preparar Subpastas POP 03 (`Code`)**:\n  Recupera o ID da pasta raiz recém-criada e estrutura os 4 itens oficiais do POP 03: `01_Diagnostico`, `02_Brandbook`, `03_Criativos` e `04_Relatorios`.\n\n* **Google Drive - Criar Subpastas POP 03 (`Google Drive`)**:\n  Cria recursivamente cada uma das 4 subpastas do POP 03 dentro da pasta raiz criada no Drive.\n\n* **SSH - Garantir Diretórios na VPS (`SSH`)**:\n  Executa comando SSH no servidor VPS (`mkdir -p`) garantindo a criação dos diretórios `/root/briefing/[Empresa]` e `/root/Brandbook/[Empresa]` para processamento dos agentes locais.",
+     "height": 400,
+     "width": 860,
+     "color": 7
+    },
+    "id": "5275b5c3-f0f1-4c53-a17f-caddb1237d3b",
+    "name": "Note - Pastas",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     704,
+     1296
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 💬 4. AUTOMAÇÃO WHATSAPP & GOVERNANÇA (WUZAPI)\n\nCriação automática do grupo oficial de alinhamento com cliente e equipe, extração do link de convite e disparo das mensagens de acolhimento.\n\n* **Preparar Payload WuzAPI (`Code`)**:\n  Recupera o link do Google Drive, credenciais da WuzAPI e lista de telefones dos participantes, estruturando os dados para as chamadas de API.\n\n* **WuzAPI - Criar Grupo WhatsApp (`HTTP Request`)**:\n  Executa `POST /group/create` na WuzAPI criando o grupo com o nome `[Empresa] | Agência` e adicionando participantes autorizados.\n\n* **Tratar Retorno do Grupo & Obter JID (`Code`)**:\n  Processa a resposta da WuzAPI com múltiplos fallbacks de segurança para extrair com precisão o JID único do grupo (`...g.us`).\n\n* **WuzAPI - Obter Link de Convite (`HTTP Request`)**:\n  Executa `GET /group/invitelink` na WuzAPI informando o JID para obter a URL compartilhável de entrada no grupo (`chat.whatsapp.com/...`).\n\n* **Montar Mensagens Oficiais de Boas-Vindas (`Code`)**:\n  Redige de forma personalizada os textos de boas-vindas, governança, link da pasta no Google Drive e link do Questionário Norteador (QNP), gerando templates para o grupo e para o decisor.\n\n* **WuzAPI - Enviar Boas-Vindas no Grupo (`HTTP Request`)**:\n  Executa `POST /chat/send/text` publicando a mensagem oficial de abertura e regras de governança diretamente no grupo recém-criado.\n\n* **WuzAPI - Notificar Decisor no Privado (`HTTP Request`)**:\n  Executa `POST /chat/send/text` enviando mensagem individual ao WhatsApp privado do decisor com instruções de boas-vindas e link de acesso ao grupo.",
+     "height": 420,
+     "width": 1450,
+     "color": 5
+    },
+    "id": "10ca1ab2-9ecc-4556-bd68-ad5cad8fea32",
+    "name": "Note - WuzAPI",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1600,
+     1296
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 📄 5. GERAÇÃO & ENVIO DO CONTRATO\n\nAutomação completa da minuta contratual: duplicação de modelo no Google Docs, preenchimento de cláusulas, conversão em PDF e entrega via WhatsApp.\n\n* **Copiar Contrato (`Google Drive`)**:\n  Duplica o modelo mestre oficial de contrato do Google Docs, gerando um novo arquivo: `Contrato de Serviços | [Nome da Empresa]`.\n\n* **Wait (`Wait`)**:\n  Aplica pausa estratégica de execução para garantir a conclusão da duplicação e indexação do arquivo pelo Google Drive.\n\n* **Localizar e Substituir1 (`Google Docs`)**:\n  Substitui todas as variáveis dinâmicas do contrato (`{{nomeDaEmpresa}}`, `{{CNPJ}}`, `{{CPF}}`, `{{enderecoSede}}`, `{{emailContato}}`, `{{valorContrato}}`, etc.) pelos dados reais do cliente.\n\n* **Converter para PDF (`Google Drive`)**:\n  Exporta o documento preenchido fazendo download no formato PDF (`application/pdf`).\n\n* **converteparabase (`Extract from File`)**:\n  Converte o arquivo binário do PDF baixado em string Base64 (`binaryToProperty`), preparando-o para envio via payload JSON na API.\n\n* **envia pdf (`HTTP Request`)**:\n  Executa `POST /chat/send/document` na WuzAPI transmitindo o contrato em PDF diretamente no grupo do WhatsApp como anexo oficial do projeto.",
+     "height": 440,
+     "width": 1300,
+     "color": 2
+    },
+    "id": "f5facee1-2a27-4ea6-b359-f062883f82d7",
+    "name": "Note - Contrato",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1648,
+     1760
+    ]
+   },
+   {
+    "parameters": {
+     "content": "## 📊 6. RESPOSTA & AUDITORIA FINAL\n\nConsolidação executiva de todos os recursos provisionados na Fase 1 e retorno estruturado para o solicitante original.\n\n* **Consolidar Relatório da Fase 1 (`Code`)**:\n  Compila o payload JSON executivo com status de sucesso, links do Google Drive, JID do grupo WhatsApp, link de convite e próximos passos da Fase 2.\n\n* **Responder Webhook com Resumo (`Respond to Webhook`)**:\n  Devolve o payload JSON com status HTTP 200 para o emissor da requisição (CRM/Formulário), concluindo o ciclo de onboarding com sucesso.",
+     "height": 440,
+     "width": 440,
+     "color": 3
+    },
+    "id": "961ff61f-aeb4-4bb4-a1a8-bb600472b183",
+    "name": "Note - Resposta",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2976,
+     1760
+    ]
+   },
+   {
+    "parameters": {
+     "path": "form-onboarding",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "id": "0245c70c-0390-463f-bfa1-4e1a16119ac6",
+    "name": "Webhook - Carregar Form Onboarding",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     496,
+     928
+    ],
+    "webhookId": "ac7a7a32-fffb-49e6-aaf8-63589d4b4d9e"
+   },
+   {
+    "parameters": {
+     "httpMethod": "POST",
+     "path": "onboarding-cliente",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "id": "2269caa2-c69f-40d9-ad7c-9dd0eae6d455",
+    "name": "Webhook - Iniciar Onboarding",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     240,
+     1536
+    ],
+    "webhookId": "bbf1d866-d792-45f1-8314-5d931a6d2495"
+   },
+   {
+    "parameters": {
+     "jsCode": "const raw = $input.first().json.body || $input.first().json;\n\n// 1. Identificação Básica\nconst nomeEmpresa = (raw.nome_empresa || raw.nome || \"Novo Cliente\").trim();\nconst nomeResponsavel = (raw.nome_responsavel || raw.responsavel || \"Parceiro(a)\").trim();\n\n// 2. Normalização de Slug e ID\nconst slugEmpresa = nomeEmpresa\n  .toLowerCase()\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\")\n  .replace(/[^a-z0-9]+/g, \"-\")\n  .replace(/(^-|-$)/g, \"\");\n\nconst projectId = `${slugEmpresa}-${Date.now()}`;\n\n// 3. Sanitização de Números Telefônicos\nfunction cleanPhone(phone) {\n  if (!phone) return \"\";\n  let digits = String(phone).replace(/\\D/g, \"\");\n  // Se começou com 0, remove\n  if (digits.startsWith(\"0\")) digits = digits.substring(1);\n  // Se tem 10 ou 11 dígitos (DDD + Número), prefixa com 55 (Brasil)\n  if (digits.length === 10 || digits.length === 11) {\n    digits = \"55\" + digits;\n  }\n  return digits;\n}\n\nconst whatsappCliente = cleanPhone(raw.whatsapp_cliente || raw.telefone || raw.phone);\n\nlet membrosAgencia = [];\nif (Array.isArray(raw.membros_agencia)) {\n  membrosAgencia = raw.membros_agencia.map(cleanPhone).filter(Boolean);\n} else if (typeof raw.membros_agencia === \"string\" && raw.membros_agencia.trim()) {\n  membrosAgencia = raw.membros_agencia.split(\",\").map(s => cleanPhone(s.trim())).filter(Boolean);\n}\n\n// Participantes para a criação do grupo no WuzAPI (Cliente + Time da Agência)\nconst participantesSet = new Set();\nif (whatsappCliente) participantesSet.add(whatsappCliente);\nmembrosAgencia.forEach(p => participantesSet.add(p));\nconst participantes = Array.from(participantesSet);\n\n// 4. Configurações de API e Ambiente\nconst urlWuzapi = raw.url_wuzapi || \"https://wuzapi.inovareinteligenciaartificial.com\";\nconst tokenWuzapi = raw.token_wuzapi || \"pessoal\";\nconst urlQnp = raw.url_qnp || \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/form-qnp\";\nconst urlVideo = raw.url_video_boas_vindas || \"https://loom.com/share/cronograma-30-dias-onboarding\";\nconst parentFolderId = raw.parent_folder_id || \"\";\n\n// 5. Nomes Padronizados\nconst nomeGrupo = `🚀 ${nomeEmpresa} x Agência`;\nconst nomePastaDrive = `📁 ${nomeEmpresa} — Central de Inteligência`;\n\nreturn [{\n  json: {\n    project_id: projectId,\n    slug_empresa: slugEmpresa,\n    nome_empresa: nomeEmpresa,\n    nome_responsavel: nomeResponsavel,\n    whatsapp_cliente: whatsappCliente,\n    membros_agencia: membrosAgencia,\n    participantes: participantes,\n    nome_grupo: nomeGrupo,\n    nome_pasta_drive: nomePastaDrive,\n    parent_folder_id: parentFolderId,\n    url_wuzapi: urlWuzapi,\n    token_wuzapi: tokenWuzapi,\n    url_qnp: urlQnp,\n    url_video_boas_vindas: urlVideo,\n    data_inicio: new Date().toISOString()\n  }\n}];"
+    },
+    "id": "f7c94fbb-dde6-4d69-8a3e-7b6c1e9097e7",
+    "name": "Sanitizar Dados & Parâmetros",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     464,
+     1536
+    ]
+   },
+   {
+    "parameters": {
+     "resource": "folder",
+     "name": "={{ $json.nome_pasta_drive }}",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "root",
+      "cachedResultName": "/ (Root folder)"
+     },
+     "options": {}
+    },
+    "id": "7fb29893-a22b-409e-94df-962d0622faf2",
+    "name": "Google Drive - Criar Pasta Raiz do Projeto",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     752,
+     1536
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "const items = $input.all();\nconst mainItem = $('Sanitizar Dados & Parâmetros').first().json;\nconst driveResult = items[0] ? items[0].json : {};\n\n// Extrair Folder ID criado ou usar fallback\nconst rootFolderId = driveResult.id || driveResult.folderId || `folder-pop03-${mainItem.slug_empresa}`;\nconst driveUrl = driveResult.webViewLink || `https://drive.google.com/drive/folders/${rootFolderId}`;\n\n// 4 Subpastas Oficiais do POP 03 (Protocolo do Cérebro Centralizado)\nconst subpastas = [\n  \"01_Materiais\",\n  \"02_Criativos\",\n  \"03_Criativos_e_Anuncios\",\n  \"04_Relatorios_e_Dashboards\"\n];\n\nreturn subpastas.map((nome, index) => ({\n  json: {\n    ...mainItem,\n    root_folder_id: rootFolderId,\n    drive_folder_url: driveUrl,\n    subpasta_index: index + 1,\n    nome_subpasta: nome\n  }\n}));"
+    },
+    "id": "826207c2-8945-4b6c-a577-95e8c6616b30",
+    "name": "Preparar Subpastas POP 03",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     944,
+     1536
+    ]
+   },
+   {
+    "parameters": {
+     "resource": "folder",
+     "name": "={{ '📁 ' + $json.nome_subpasta }}",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "value": "={{ $('Google Drive - Criar Pasta Raiz do Projeto').item.json.id }}",
+      "mode": "id"
+     },
+     "options": {}
+    },
+    "id": "c798336a-915a-4c01-b869-575fb9576f64",
+    "name": "Google Drive - Criar Subpastas POP 03",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     1152,
+     1536
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "command": "=\"mkdir -p '/root/briefing/\" + $('Sanitizar Dados & Parâmetros').item.json.nome_empresa + \"' '/root/Brandbook/\" + $('Sanitizar Dados & Parâmetros').item.json.nome_empresa + \"'\""
+    },
+    "id": "83580795-8fb4-48aa-9ed4-6a3fa96d948d",
+    "name": "SSH - Garantir Diretórios na VPS",
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     1344,
+     1536
+    ],
+    "credentials": {
+     "sshPassword": {
+      "id": "8dDUhhIDCo7tLJss",
+      "name": "157.173.207.22"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "const mainItem = $('Sanitizar Dados & Parâmetros').first().json;\nconst subpastasResults = $('Google Drive - Criar Subpastas POP 03').all();\n\n// Recupera a URL da pasta do Google Drive\nlet driveFolderUrl = `https://drive.google.com/drive/search?q=${encodeURIComponent(mainItem.nome_pasta_drive)}`;\ntry {\n  const rootDrive = $('Google Drive - Criar Pasta Raiz do Projeto').first().json;\n  if (rootDrive.webViewLink) {\n    driveFolderUrl = rootDrive.webViewLink;\n  }\n} catch(e) {}\n\nreturn [{\n  json: {\n    ...mainItem,\n    drive_folder_url: driveFolderUrl,\n    total_subpastas_criadas: subpastasResults.length\n  }\n}];"
+    },
+    "id": "87f80408-5efc-48d6-ae9d-557fd0789e45",
+    "name": "Preparar Payload WuzAPI",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1632,
+     1536
+    ]
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $json.url_wuzapi }}/group/create",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $json.token_wuzapi }}"
+       },
+       {
+        "name": "Content-Type",
+        "value": "application/json"
+       }
+      ]
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ name: $json.nome_grupo, participants: $json.participantes }) }}",
+     "options": {}
+    },
+    "id": "b58e6b0a-cd84-4de0-a1d3-b7438c6ec20c",
+    "name": "WuzAPI - Criar Grupo WhatsApp",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     1824,
+     1536
+    ],
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "const input = $input.first().json;\nconst prevData = $('Preparar Payload WuzAPI').first().json;\n\n// Extrai o JID retornado pelo WuzAPI (/group/create)\nlet groupJid = \"\";\nif (input.JID) groupJid = input.JID;\nelse if (input.jid) groupJid = input.jid;\nelse if (input.GroupJID) groupJid = input.GroupJID;\nelse if (input.Details && input.Details.JID) groupJid = input.Details.JID;\nelse if (input.data && input.data.JID) groupJid = input.data.JID;\nelse if (input.id) groupJid = input.id;\nelse {\n  // Fallback para desenvolvimento e testes\n  groupJid = `120363${Date.now()}@g.us`;\n}\n\nreturn [{\n  json: {\n    ...prevData,\n    group_jid: groupJid,\n    wuzapi_create_status: input.Status || input.status || 200,\n    wuzapi_create_raw: input\n  }\n}];"
+    },
+    "id": "6f2b1fe5-21c6-435d-9388-1b223f5ab4d3",
+    "name": "Tratar Retorno do Grupo & Obter JID",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2032,
+     1536
+    ]
+   },
+   {
+    "parameters": {
+     "url": "={{ $json.url_wuzapi }}/group/invitelink",
+     "sendQuery": true,
+     "queryParameters": {
+      "parameters": [
+       {
+        "name": "groupJID",
+        "value": "={{ $json.wuzapi_create_raw.data.JID }}"
+       }
+      ]
+     },
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $json.token_wuzapi }}"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "id": "a7b128e7-0a84-4ae0-afdb-8a32654d15c3",
+    "name": "WuzAPI - Obter Link de Convite",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     2224,
+     1536
+    ],
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "const data = $input.first().json;\n\n// 1. Dados dos nós anteriores de forma segura (com fallback)\nconst grupoData = $('Tratar Retorno do Grupo & Obter JID').first()?.json || {};\nconst nomeEmpresa = grupoData.nome_empresa || \"\";\nconst nomeResponsavel = grupoData.nome_responsavel || \"\";\n\nconst driveNode = $('Google Drive - Criar Pasta Raiz do Projeto').first()?.json || {};\nconst driveFolderId = driveNode.id || \"\";\nconst driveFolderUrl = data.drive_folder_url || (driveFolderId ? `https://drive.google.com/drive/folders/${driveFolderId}` : \"\");\n\n// 2. Extrair link de convite do grupo se disponível\nconst inviteResult = $('WuzAPI - Obter Link de Convite').first()?.json || {};\nlet inviteLink = \"\";\nif (inviteResult.InviteLink) inviteLink = inviteResult.InviteLink;\nelse if (inviteResult.invitelink) inviteLink = inviteResult.invitelink;\nelse if (inviteResult.link) inviteLink = inviteResult.link;\nelse if (inviteResult.Code) inviteLink = `https://chat.whatsapp.com/${inviteResult.Code}`;\nelse if (typeof inviteResult === \"string\" && inviteResult.startsWith(\"http\")) inviteLink = inviteResult;\n\n// 3. URLs com fallback\nconst urlQnp = data.url_qnp || \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/form-qnp\";\nconst urlVideo = data.url_video_boas_vindas || \"\";\n\n// 4. Mensagem Oficial do Grupo (Conforme Playbook POP 01 e POP 03)\nconst mensagemGrupo = `🚀 *Bem-vindos à Central de Inteligência Estratégica da ${nomeEmpresa}!*\n\nOlá, *${nomeResponsavel}* e time! É uma grande satisfação dar a largada oficial no projeto de crescimento da sua empresa.\n\nEste é o nosso grupo de governança e comunicação oficial. Aqui estão os estrategistas de negócios, gestores de mídia de performance e diretores criativos dedicados à sua conta.\n\n---\n\n📁 *1. Cérebro Centralizado do Projeto (POP 03):*\nSua pasta master no Google Drive já foi gerada com a estrutura de inteligência da agência:\n🔗 ${driveFolderUrl}\n\nEstrutura de governança criada:\n• 📁 \\`01_Diagnostico_e_KPIs\\`\n• 📁 \\`02_Brandbook_e_Identidade\\`\n• 📁 \\`03_Criativos_e_Anuncios\\`\n• 📁 \\`04_Relatorios_e_Dashboards\\`\n\n---\n\n📝 *2. AÇÃO IMEDIATA: Fase 2 — Quadro Norteador de Pesquisa (QNP)*\nPara construirmos seu Dossiê Executivo, Metas Financeiras Reversas e Estratégia dos Primeiros 90 Dias, preencha o formulário estratégico oficial:\n👉 *Link do Formulário:* ${urlQnp}\n\n*(Tempo estimado: 15 a 20 min. Respostas detalhadas destravam um diagnóstico muito mais profundo!)*\n\n---\n\n🧭 *3. Cronograma dos Primeiros 30 Dias:*\n• *Dias 1-2 (Hoje):* Boas-Vindas & Onboarding (Fase 1 ✅)\n• *Dias 3-7:* Diagnóstico Estratégico com QNP (01 a 04.md)\n• *Dias 8-14:* Identidade de Marca & BRAND OS (IA Especialistas)\n• *Dia 15:* Reunião Executiva de Alinhamento (Kickoff)\n• *Dias 16-25:* Setup Técnico, CAPI, GTM & Primeiros Anúncios\n• *Dias 30-60-90:* Escala Contínua & Rituais Semanais de Caixa\n\n🎥 *Vídeo de Apresentação do Estrategista:*\n🔗 ${urlVideo}\n\nQualquer dúvida, estamos 100% à disposição aqui no grupo. Vamos juntos acelerar o crescimento! 🎯`;\n\n// 5. Mensagem Privada para o Decisor (Garante entrada e acesso imediato)\nconst mensagemPrivada = `Olá, *${nomeResponsavel}*! 👋\n\nAqui é da equipe estratégica. Acabamos de configurar o ecossistema oficial da *${nomeEmpresa}*!\n\n👥 *Grupo Oficial no WhatsApp:*\n${inviteLink ? `👉 Acesse pelo convite: ${inviteLink}` : \"👉 Você já foi adicionado(a) ao grupo oficial com nossa diretoria!\"}\n\n📁 *Pasta Centralizada de Documentos:*\n${driveFolderUrl}\n\n📝 *Próximo Passo (Fase 2):*\nPor favor, responda o formulário do Quadro Norteador de Pesquisa para iniciarmos a análise profunda da empresa:\n👉 ${urlQnp}\n\nNos falamos dentro do grupo! 🚀`;\n\nreturn [{\n  json: {\n    ...data,\n    group_invite_link: inviteLink,\n    mensagem_grupo: mensagemGrupo,\n    mensagem_privada: mensagemPrivada\n  }\n}];"
+    },
+    "id": "0fa9ff30-3144-4725-887b-dc43f6a0a3a2",
+    "name": "Montar Mensagens Oficiais de Boas-Vindas",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2432,
+     1536
+    ]
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('Preparar Payload WuzAPI').item.json.url_wuzapi }}/chat/send/text",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $('Preparar Payload WuzAPI').item.json.token_wuzapi }}"
+       },
+       {
+        "name": "Content-Type",
+        "value": "application/json"
+       }
+      ]
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ Phone: $('WuzAPI - Criar Grupo WhatsApp').item.json.data.JID, Body: $json.mensagem_grupo }) }}",
+     "options": {}
+    },
+    "id": "7c4e0ecd-0aba-4a0c-b036-12a7d3c4c838",
+    "name": "WuzAPI - Enviar Boas-Vindas no Grupo",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     2624,
+     1536
+    ],
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('Preparar Payload WuzAPI').item.json.url_wuzapi }}/chat/send/text",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $('Preparar Payload WuzAPI').item.json.token_wuzapi }}"
+       },
+       {
+        "name": "Content-Type",
+        "value": "application/json"
+       }
+      ]
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ Phone: $('Tratar Retorno do Grupo & Obter JID').item.json.whatsapp_cliente, Body: $('Montar Mensagens Oficiais de Boas-Vindas').item.json.mensagem_privada }) }}",
+     "options": {}
+    },
+    "id": "25be5963-438f-4e02-a9db-293f2de86278",
+    "name": "WuzAPI - Notificar Decisor no Privado",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     2832,
+     1536
+    ],
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "const input = $input.first().json;\n\nreturn [{\n  json: {\n    status: \"success\",\n    fase: \"Fase 1: Boas-Vindas & Onboarding\",\n    project_id: input.project_id,\n    empresa: input.nome_empresa,\n    responsavel: input.nome_responsavel,\n    whatsapp_cliente: input.whatsapp_cliente,\n    participantes_adicionados: input.participantes,\n    whatsapp: {\n      group_name: input.nome_grupo,\n      group_jid: input.group_jid,\n      group_invite_link: input.group_invite_link || null,\n      status_criacao_grupo: \"sucesso\"\n    },\n    cerebro_centralizado: {\n      drive_folder_url: input.drive_folder_url,\n      subpastas_criadas: [\n        \"📁 01_Diagnostico_e_KPIs\",\n        \"📁 02_Brandbook_e_Identidade\",\n        \"📁 03_Criativos_e_Anuncios\",\n        \"📁 04_Relatorios_e_Dashboards\"\n      ],\n      vps_paths: [\n        `/root/briefing/${input.nome_empresa}`,\n        `/root/Brandbook/${input.nome_empresa}`\n      ]\n    },\n    proximos_passos: [\n      \"Fase 2: Preenchimento do Quadro Norteador de Pesquisa (/form-qnp)\",\n      \"Fase 3: BRAND OS — Geração do Brandbook com 4 Agentes Especialistas\",\n      \"Fase 4: Reunião Executiva de Alinhamento / Kickoff (Dia 15)\"\n    ],\n    timestamp: new Date().toISOString()\n  }\n}];"
+    },
+    "id": "9c3ed3ed-8b31-4487-a092-1e883aa5a404",
+    "name": "Consolidar Relatório da Fase 1",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2992,
+     2016
+    ]
+   },
+   {
+    "parameters": {
+     "respondWith": "json",
+     "responseBody": "={{ $json }}",
+     "options": {}
+    },
+    "id": "cd62343a-66be-4943-8793-c8d32d5e8190",
+    "name": "Responder Webhook com Resumo",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     3200,
+     2016
+    ]
+   },
+   {
+    "parameters": {
+     "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n<title>Onboarding & Contrato — Novo Cliente</title>\n\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap\" rel=\"stylesheet\">\n\n<style>\n\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\n:root {\n    --bg: #f7f7f5;\n    --card: #ffffff;\n    --text: #151515;\n    --muted: #777;\n    --border: #e8e8e5;\n    --primary: #111111;\n    --accent: #111111;\n    --soft: #f2f2ef;\n    --success: #16803c;\n    --danger: #c62828;\n}\n\nbody {\n    font-family: 'Inter', Arial, sans-serif;\n    background:\n        radial-gradient(\n            circle at 50% -20%,\n            rgba(0,0,0,.045),\n            transparent 45%\n        ),\n        var(--bg);\n\n    color: var(--text);\n    min-height: 100vh;\n}\n\n/* =========================\n   CONTAINER\n========================= */\n\n.container {\n    width: min(780px, calc(100% - 32px));\n    margin: 0 auto;\n    padding: 42px 0 80px;\n}\n\n/* =========================\n   HEADER\n========================= */\n\n.header {\n    text-align: center;\n    margin-bottom: 38px;\n}\n\n.logo {\n    display: inline-flex;\n    align-items: center;\n    gap: 9px;\n\n    font-size: 14px;\n    font-weight: 800;\n    letter-spacing: .8px;\n\n    margin-bottom: 26px;\n}\n\n.logo-icon {\n    width: 34px;\n    height: 34px;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    border-radius: 10px;\n\n    background: #111;\n    color: white;\n\n    font-size: 15px;\n}\n\n.header h1 {\n    font-size: clamp(26px, 5vw, 40px);\n    line-height: 1.15;\n    letter-spacing: -1.4px;\n    font-weight: 800;\n\n    margin-bottom: 14px;\n}\n\n.header h1 span {\n    display: block;\n}\n\n.header p {\n    max-width: 620px;\n    margin: auto;\n\n    color: var(--muted);\n\n    font-size: 14px;\n    line-height: 1.7;\n}\n\n/* =========================\n   PROGRESS\n========================= */\n\n.progress-area {\n    margin-bottom: 28px;\n}\n\n.progress-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    margin-bottom: 9px;\n\n    font-size: 11px;\n    font-weight: 700;\n\n    color: #999;\n\n    text-transform: uppercase;\n    letter-spacing: .6px;\n}\n\n.progress-bar {\n    width: 100%;\n    height: 4px;\n\n    background: #e7e7e4;\n\n    border-radius: 20px;\n\n    overflow: hidden;\n}\n\n.progress-fill {\n    width: 25%;\n    height: 100%;\n\n    background: #111;\n\n    border-radius: 20px;\n\n    transition: width .3s ease;\n}\n\n/* =========================\n   CARD\n========================= */\n\n.card {\n    background: var(--card);\n\n    border: 1px solid var(--border);\n\n    border-radius: 20px;\n\n    padding: clamp(24px, 5vw, 42px);\n\n    box-shadow:\n        0 15px 50px rgba(0,0,0,.045);\n}\n\n/* =========================\n   SECTION\n========================= */\n\n.step-label {\n    font-size: 11px;\n    font-weight: 800;\n\n    text-transform: uppercase;\n    letter-spacing: 1px;\n\n    color: #999;\n\n    margin-bottom: 10px;\n}\n\n.section-title {\n    font-size: 21px;\n\n    line-height: 1.25;\n\n    font-weight: 750;\n\n    letter-spacing: -.5px;\n\n    margin-bottom: 8px;\n}\n\n.section-desc {\n    color: var(--muted);\n\n    font-size: 13px;\n\n    line-height: 1.6;\n\n    margin-bottom: 26px;\n}\n\n/* =========================\n   FIELDS\n========================= */\n\n.field {\n    margin-bottom: 20px;\n}\n\n.field label {\n    display: block;\n\n    font-size: 12px;\n\n    font-weight: 700;\n\n    margin-bottom: 8px;\n\n    color: #333;\n}\n\n.field input,\n.field textarea {\n    width: 100%;\n\n    border: 1px solid var(--border);\n\n    background: #fafaf9;\n\n    color: var(--text);\n\n    border-radius: 10px;\n\n    padding: 13px 14px;\n\n    outline: none;\n\n    font-family: inherit;\n\n    font-size: 14px;\n\n    transition:\n        border-color .2s,\n        background .2s,\n        box-shadow .2s;\n}\n\n.field textarea {\n    min-height: 80px;\n    resize: vertical;\n}\n\n.field input:hover,\n.field textarea:hover {\n    border-color: #d6d6d2;\n}\n\n.field input:focus,\n.field textarea:focus {\n    background: #fff;\n\n    border-color: #111;\n\n    box-shadow:\n        0 0 0 3px rgba(0,0,0,.06);\n}\n\n.field small {\n    display: block;\n\n    margin-top: 6px;\n\n    color: #999;\n\n    font-size: 11px;\n\n    line-height: 1.5;\n}\n\n/* =========================\n   GRID\n========================= */\n\n.grid-2 {\n    display: grid;\n\n    grid-template-columns: 1fr 1fr;\n\n    gap: 16px;\n}\n\n@media(max-width:650px) {\n\n    .grid-2 {\n        grid-template-columns: 1fr;\n        gap: 0;\n    }\n\n}\n\n/* =========================\n   DIVIDER\n========================= */\n\n.divider {\n    height: 1px;\n\n    background: var(--border);\n\n    margin: 32px 0;\n}\n\n/* =========================\n   BUTTON\n========================= */\n\nbutton {\n    width: 100%;\n\n    padding: 15px 18px;\n\n    border: none;\n\n    border-radius: 10px;\n\n    background: #111;\n\n    color: #fff;\n\n    font-family: inherit;\n\n    font-size: 14px;\n\n    font-weight: 700;\n\n    cursor: pointer;\n\n    transition:\n        transform .2s,\n        box-shadow .2s,\n        opacity .2s;\n\n    margin-top: 10px;\n}\n\nbutton:hover {\n    transform: translateY(-1px);\n\n    box-shadow:\n        0 8px 25px rgba(0,0,0,.15);\n}\n\nbutton:active {\n    transform: translateY(0);\n}\n\nbutton:disabled {\n    opacity: .55;\n\n    cursor: not-allowed;\n\n    transform: none;\n\n    box-shadow: none;\n}\n\n/* =========================\n   MESSAGE\n========================= */\n\n.box-msg {\n    display: none;\n\n    margin-top: 20px;\n\n    padding: 18px;\n\n    border-radius: 12px;\n\n    font-size: 13px;\n\n    line-height: 1.7;\n}\n\n.box-msg.success {\n    background: #f0f9f3;\n\n    border: 1px solid #c9ead5;\n\n    color: var(--success);\n}\n\n.box-msg.error {\n    background: #fff5f5;\n\n    border: 1px solid #f1cccc;\n\n    color: var(--danger);\n}\n\n.box-msg a {\n    color: inherit;\n    font-weight: 700;\n}\n\n/* =========================\n   FOOTER\n========================= */\n\n.footer {\n    text-align: center;\n\n    margin-top: 25px;\n\n    color: #aaa;\n\n    font-size: 11px;\n}\n\n</style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n    <!-- HEADER -->\n\n    <header class=\"header\">\n\n        <div class=\"logo\">\n\n            <div class=\"logo-icon\">\n                B\n            </div>\n\n            AGÊNCIA OS\n\n        </div>\n\n        <h1>\n            Fase 1:\n            <span>Onboarding & Geração de Contrato</span>\n        </h1>\n\n        <p>\n            Cadastre os dados cadastrais da empresa para preenchimento\n            automático do contrato e configuração dos canais operacionais.\n        </p>\n\n    </header>\n\n\n    <!-- PROGRESS -->\n\n    <div class=\"progress-area\">\n\n        <div class=\"progress-header\">\n\n            <span>Etapa 01</span>\n\n            <span>25%</span>\n\n        </div>\n\n        <div class=\"progress-bar\">\n\n            <div class=\"progress-fill\"></div>\n\n        </div>\n\n    </div>\n\n\n    <!-- FORM CARD -->\n\n    <div class=\"card\">\n\n        <form id=\"onboardingForm\">\n\n            <div class=\"step-label\">\n                Jurídico & Contratual\n            </div>\n\n            <div class=\"section-title\">\n                Dados para o Contrato\n            </div>\n\n            <p class=\"section-desc\">\n                Essas informações serão utilizadas para preencher as cláusulas\n                e a qualificação formal da Contratante.\n            </p>\n\n\n            <!-- EMPRESA & CNPJ -->\n\n            <div class=\"grid-2\">\n\n                <div class=\"field\">\n\n                    <label>\n                        Razão Social / Nome da Empresa *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"nomeDaEmpresa\"\n                        required\n                        placeholder=\"Ex.: Clínica Sorriso Prime LTDA\"\n                    >\n\n                </div>\n\n                <div class=\"field\">\n\n                    <label>\n                        CNPJ *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"CNPJ\"\n                        required\n                        placeholder=\"00.000.000/0001-00\"\n                    >\n\n                </div>\n\n            </div>\n\n\n            <!-- SEDE & EMAIL -->\n\n            <div class=\"field\">\n\n                <label>\n                    Endereço da Sede *\n                </label>\n\n                <input\n                    type=\"text\"\n                    name=\"enderecoSede\"\n                    required\n                    placeholder=\"Rua Exemplo, nº 100, Sala 201, Bairro Centro, Cidade - UF, CEP 00000-000\"\n                >\n\n            </div>\n\n            <div class=\"field\">\n\n                <label>\n                    E-mail de Contato e Notificações *\n                </label>\n\n                <input\n                    type=\"email\"\n                    name=\"emailContato\"\n                    required\n                    placeholder=\"contato@suaempresa.com.br\"\n                >\n\n            </div>\n\n\n            <!-- RESPONSÁVEL & CPF -->\n\n            <div class=\"grid-2\">\n\n                <div class=\"field\">\n\n                    <label>\n                        Nome do Sócio Administrador *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"nomeResponsavel\"\n                        required\n                        placeholder=\"Ex.: Dr. Carlos Eduardo de Souza\"\n                    >\n\n                </div>\n\n                <div class=\"field\">\n\n                    <label>\n                        CPF do Responsável *\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"CPF\"\n                        required\n                        placeholder=\"000.000.000-00\"\n                    >\n\n                </div>\n\n            </div>\n\n\n            <div class=\"divider\"></div>\n\n\n            <!-- CANAIS & SETUP OPERACIONAL -->\n\n            <div class=\"step-label\">\n                Comunicação & Equipe\n            </div>\n\n            <div class=\"section-title\">\n                Setup Operacional\n            </div>\n\n            <p class=\"section-desc\">\n                Canais de mensageria e materiais de introdução.\n            </p>\n\n\n            <!-- CONTATOS -->\n\n            <div class=\"grid-2\">\n\n                <div class=\"field\">\n\n                    <label>\n                        WhatsApp do Cliente *\n                    </label>\n\n                    <input\n                        type=\"tel\"\n                        name=\"whatsapp_cliente\"\n                        required\n                        placeholder=\"5522998908709\"\n                    >\n\n                    <small>\n                        Informe DDI + DDD + número.\n                    </small>\n\n                </div>\n\n                <div class=\"field\">\n\n                    <label>\n                        Equipe da Agência\n                    </label>\n\n                    <input\n                        type=\"text\"\n                        name=\"membros_agencia\"\n                        placeholder=\"5591988887777, 5511999998888\"\n                    >\n\n                    <small>\n                        Separe os números por vírgula.\n                    </small>\n\n                </div>\n\n            </div>\n\n\n            <!-- BOAS-VINDAS & DRIVE -->\n\n            <div class=\"field\">\n\n                <label>\n                    Vídeo de Boas-vindas do Estrategista\n                </label>\n\n                <input\n                    type=\"url\"\n                    name=\"url_video_boas_vindas\"\n                    placeholder=\"https://loom.com/share/exemplo\"\n                >\n\n                <small>\n                    Link do Loom, YouTube ou Drive.\n                </small>\n\n            </div>\n\n            <div class=\"field\">\n\n                <label>\n                    ID da Pasta Mãe no Google Drive\n                </label>\n\n                <input\n                    type=\"text\"\n                    name=\"parent_folder_id\"\n                    placeholder=\"Deixe vazio para criar na raiz do Drive\"\n                >\n\n            </div>\n\n\n            <!-- SUBMIT -->\n\n            <button\n                type=\"submit\"\n                id=\"btnSubmit\"\n            >\n                Iniciar Onboarding & Gerar Contrato →\n            </button>\n\n\n            <!-- SUCCESS -->\n\n            <div\n                id=\"msgSuccess\"\n                class=\"box-msg success\">\n            </div>\n\n\n            <!-- ERROR -->\n\n            <div\n                id=\"msgError\"\n                class=\"box-msg error\">\n            </div>\n\n        </form>\n\n    </div>\n\n\n    <div class=\"footer\">\n        AGÊNCIA OS · Inteligência e automação para operações\n    </div>\n\n</div>\n\n\n<script>\n\nconst form = document.getElementById(\"onboardingForm\");\nconst btn = document.getElementById(\"btnSubmit\");\nconst msgSuccess = document.getElementById(\"msgSuccess\");\nconst msgError = document.getElementById(\"msgError\");\n\nform.addEventListener(\"submit\", async function(e) {\n\n    e.preventDefault();\n\n    btn.disabled = true;\n    btn.innerText = \"Processando dados do onboarding...\";\n\n    msgSuccess.style.display = \"none\";\n    msgError.style.display = \"none\";\n\n    const formData = new FormData(form);\n\n    const nomeDaEmpresa = formData.get(\"nomeDaEmpresa\")?.trim();\n    const cnpj = formData.get(\"CNPJ\")?.trim();\n    const enderecoSede = formData.get(\"enderecoSede\")?.trim();\n    const emailContato = formData.get(\"emailContato\")?.trim();\n    const nomeResponsavel = formData.get(\"nomeResponsavel\")?.trim();\n    const cpf = formData.get(\"CPF\")?.trim();\n\n    // Texto da qualificação contratual gerado automaticamente\n    const clausulaQualificacao = `${nomeDaEmpresa}, pessoa jurídica, inscrita no CNPJ sob nº ${cnpj}, com sede na ${enderecoSede}, endereço de e-mail: ${emailContato}, neste ato representada por seu sócio ${nomeResponsavel}, sócio administrador(a), inscrito(a) no CPF sob nº ${cpf}, abaixo assinado(a), doravante designada apenas a “Contratante”.`;\n\n    const payload = {\n\n        // Variáveis mapeadas diretamente para o template do contrato\n        nomeDaEmpresa: nomeDaEmpresa,\n        CNPJ: cnpj,\n        enderecoSede: enderecoSede,\n        emailContato: emailContato,\n        nomeResponsavel: nomeResponsavel,\n        CPF: cpf,\n\n        // Cláusula já montada caso queira usar diretamente no Docs/PDF\n        clausula_contrato_contratante: clausulaQualificacao,\n\n        // Campos operacionais mantidos para compatibilidade com o n8n\n        nome_empresa: nomeDaEmpresa,\n        nome_responsavel: nomeResponsavel,\n        whatsapp_cliente: formData.get(\"whatsapp_cliente\")?.trim(),\n        membros_agencia: formData.get(\"membros_agencia\")\n            ? formData.get(\"membros_agencia\")\n                .split(\",\")\n                .map(s => s.trim())\n                .filter(Boolean)\n            : [],\n        url_video_boas_vindas: formData.get(\"url_video_boas_vindas\") || \"\",\n        parent_folder_id: formData.get(\"parent_folder_id\") || \"\"\n\n    };\n\n    try {\n\n        const response = await fetch(\n            \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/onboarding-cliente\",\n            {\n                method: \"POST\",\n                headers: {\n                    \"Content-Type\": \"application/json\"\n                },\n                body: JSON.stringify(payload)\n            }\n        );\n\n        if (!response.ok) {\n            throw new Error(\"Status HTTP: \" + response.status);\n        }\n\n        const res = await response.json();\n\n        msgSuccess.innerHTML = `\n            <strong>✓ Onboarding e Contrato iniciados com sucesso!</strong>\n            <br><br>\n            <strong>Empresa:</strong> ${payload.nomeDaEmpresa}\n            <br>\n            <strong>Responsável:</strong> ${payload.nomeResponsavel}\n            <br>\n            <strong>E-mail:</strong> ${payload.emailContato}\n            <br><br>\n            <strong>Grupo WhatsApp:</strong> ${res.whatsapp?.group_name || \"Criado\"}\n            ${\n                res.whatsapp?.group_invite_link\n                ? `<br><strong>Convite:</strong> <a href=\"${res.whatsapp.group_invite_link}\" target=\"_blank\">Abrir grupo</a>`\n                : \"\"\n            }\n            <br>\n            <strong>Google Drive:</strong>\n            <a href=\"${res.cerebro_centralizado?.drive_folder_url || \"#\"}\" target=\"_blank\">Abrir pasta do projeto</a>\n            <br><br>\n            <em>Os dados contratuais já foram encaminhados para a esteira de geração e assinatura de contrato.</em>\n        `;\n\n        msgSuccess.style.display = \"block\";\n        btn.innerText = \"✓ Onboarding concluído\";\n\n    } catch(err) {\n\n        console.error(err);\n\n        msgError.innerHTML = `\n            <strong>⚠ Não foi possível iniciar o onboarding.</strong>\n            <br><br>\n            ${err.message}\n            <br><br>\n            Verifique o workflow e as credenciais configuradas no n8n.\n        `;\n\n        msgError.style.display = \"block\";\n        btn.disabled = false;\n        btn.innerText = \"Tentar novamente\";\n\n    }\n\n});\n\n</script>\n\n</body>\n</html>"
+    },
+    "type": "n8n-nodes-base.html",
+    "typeVersion": 1.2,
+    "position": [
+     688,
+     928
+    ],
+    "id": "9bef6f75-1dee-4a03-9e95-b1eeca7ff500",
+    "name": "HTML"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Respond to Webhook",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "position": [
+     896,
+     928
+    ],
+    "typeVersion": 1,
+    "id": "2a47b244-1ff2-4fc5-a89e-c9fb2e13ef20"
+   },
+   {
+    "parameters": {
+     "operation": "copy",
+     "fileId": {
+      "__rl": true,
+      "value": "=1UHKJCSHOv1N9S66Euwc3pSlBy0XuVprxZ0ou8GtGphk",
+      "mode": "id"
+     },
+     "name": "=Contrato de Serviços | {{ $('Webhook - Iniciar Onboarding').item.json.body.nomeDaEmpresa }}",
+     "options": {
+      "copyRequiresWriterPermission": false
+     }
+    },
+    "id": "de0ca628-81e9-4f76-bd6e-525f9fa8e1f7",
+    "name": "Copiar Contrato",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     1696,
+     2016
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "update",
+     "documentURL": "={{ $('Copiar Contrato').item.json.id }}",
+     "actionsUi": {
+      "actionFields": [
+       {
+        "action": "replaceAll",
+        "text": "{{nomeDaEmpresa}}",
+        "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.nomeDaEmpresa }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{CNPJ}}",
+        "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.CNPJ }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{enderecoSede}}",
+        "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.enderecoSede }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{emailContato}}",
+        "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.emailContato }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{nomeResponsavel}}",
+        "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.nomeResponsavel }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{CPF}}",
+        "replaceText": "={{ $('Webhook - Iniciar Onboarding').item.json.body.CPF }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{valorContrato}}",
+        "replaceText": "=1000"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{dataInicio}}",
+        "replaceText": "=21/09/2026"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{dataVencimento}}",
+        "replaceText": "10"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{clausulaVariavel}}",
+        "replaceText": "=4.5.  {{ $('Webhook - Iniciar Onboarding').item.json.body.clausula_contrato_contratante }}"
+       },
+       {
+        "action": "replaceAll",
+        "text": "{{duracaocontrato}}",
+        "replaceText": "=1 ano"
+       }
+      ]
+     }
+    },
+    "id": "d3d4ed42-0197-4e95-8850-22a62f6924f9",
+    "name": "Localizar e Substituir1",
+    "type": "n8n-nodes-base.googleDocs",
+    "typeVersion": 2,
+    "position": [
+     2144,
+     2016
+    ],
+    "credentials": {
+     "googleDocsOAuth2Api": {
+      "id": "xzE5KAAGSJJU9k2s",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    }
+   },
+   {
+    "parameters": {},
+    "type": "n8n-nodes-base.wait",
+    "typeVersion": 1.1,
+    "position": [
+     1920,
+     2016
+    ],
+    "id": "f698b8dd-157e-4c70-bdf2-6b84ecb2a3c6",
+    "name": "Wait",
+    "webhookId": "4c8a692e-fa32-45a6-98c7-0ebc2ef49c18"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('Preparar Payload WuzAPI').item.json.url_wuzapi }}/chat/send/document",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $('Preparar Payload WuzAPI').item.json.token_wuzapi }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "bodyParameters": {
+      "parameters": [
+       {
+        "name": "Phone",
+        "value": "={{ $('WuzAPI - Criar Grupo WhatsApp').item.json.data.JID }}"
+       },
+       {
+        "name": "Document",
+        "value": "=data:application/octet-stream;base64,{{ $json.data }}"
+       },
+       {
+        "name": "FileName",
+        "value": "={{ $('Copiar Contrato').item.json.name }}.pdf"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     2800,
+     2016
+    ],
+    "id": "56dccbb1-bd9d-475d-90bd-fae18b30efb2",
+    "name": "envia pdf"
+   },
+   {
+    "parameters": {
+     "operation": "binaryToPropery",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.extractFromFile",
+    "typeVersion": 1,
+    "position": [
+     2608,
+     2016
+    ],
+    "id": "92e2e5ce-e016-4b77-ad1e-23c0453608ad",
+    "name": "converteparabase"
+   },
+   {
+    "parameters": {
+     "operation": "download",
+     "fileId": {
+      "__rl": true,
+      "value": "={{ $json[\"documentId\"] }}",
+      "mode": "id"
+     },
+     "options": {
+      "googleFileConversion": {
+       "conversion": {
+        "docsToFormat": "application/pdf",
+        "drawingsToFormat": "application/pdf",
+        "slidesToFormat": "application/pdf",
+        "sheetsToFormat": "application/pdf"
+       }
+      },
+      "fileName": "={{ $('Copiar Contrato').item.json.name }}.pdf"
+     }
+    },
+    "id": "f83c06ee-82e9-4734-b362-1a0c201aa2f7",
+    "name": "Converter para PDF",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 2,
+    "position": [
+     2368,
+     2016
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Webhook - Carregar Form Onboarding": {
+    "main": [
+     [
+      {
+       "node": "HTML",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Webhook - Iniciar Onboarding": {
+    "main": [
+     [
+      {
+       "node": "Sanitizar Dados & Parâmetros",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Sanitizar Dados & Parâmetros": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Pasta Raiz do Projeto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Pasta Raiz do Projeto": {
+    "main": [
+     [
+      {
+       "node": "Preparar Subpastas POP 03",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Preparar Subpastas POP 03": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP 03",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Subpastas POP 03": {
+    "main": [
+     [
+      {
+       "node": "SSH - Garantir Diretórios na VPS",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "SSH - Garantir Diretórios na VPS": {
+    "main": [
+     [
+      {
+       "node": "Preparar Payload WuzAPI",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Preparar Payload WuzAPI": {
+    "main": [
+     [
+      {
+       "node": "WuzAPI - Criar Grupo WhatsApp",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "WuzAPI - Criar Grupo WhatsApp": {
+    "main": [
+     [
+      {
+       "node": "Tratar Retorno do Grupo & Obter JID",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Tratar Retorno do Grupo & Obter JID": {
+    "main": [
+     [
+      {
+       "node": "WuzAPI - Obter Link de Convite",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "WuzAPI - Obter Link de Convite": {
+    "main": [
+     [
+      {
+       "node": "Montar Mensagens Oficiais de Boas-Vindas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Montar Mensagens Oficiais de Boas-Vindas": {
+    "main": [
+     [
+      {
+       "node": "WuzAPI - Enviar Boas-Vindas no Grupo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "WuzAPI - Enviar Boas-Vindas no Grupo": {
+    "main": [
+     [
+      {
+       "node": "WuzAPI - Notificar Decisor no Privado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "WuzAPI - Notificar Decisor no Privado": {
+    "main": [
+     [
+      {
+       "node": "Copiar Contrato",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Consolidar Relatório da Fase 1": {
+    "main": [
+     [
+      {
+       "node": "Responder Webhook com Resumo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "HTML": {
+    "main": [
+     [
+      {
+       "node": "Respond to Webhook",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Copiar Contrato": {
+    "main": [
+     [
+      {
+       "node": "Wait",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Localizar e Substituir1": {
+    "main": [
+     [
+      {
+       "node": "Converter para PDF",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Wait": {
+    "main": [
+     [
+      {
+       "node": "Localizar e Substituir1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "envia pdf": {
+    "main": [
+     [
+      {
+       "node": "Consolidar Relatório da Fase 1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "converteparabase": {
+    "main": [
+     [
+      {
+       "node": "envia pdf",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Converter para PDF": {
+    "main": [
+     [
+      {
+       "node": "converteparabase",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": "Version 57076321",
+  "description": "",
+  "autosaved": true,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-09-25T00:00:39.093Z",
+    "id": 26,
+    "workflowId": "JpgZz8HgOJt26af2",
+    "versionId": "57076321-18c3-4889-9a05-5bdcfa08cb86",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

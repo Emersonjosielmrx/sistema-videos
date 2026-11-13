@@ -1,0 +1,109 @@
+[
+ {
+  "tipo": "perfil",
+  "i": 0,
+  "arquivo": "D:\\hipercool-materiais\\canais\\manhwa-picante\\geradas\\perfil_0.png",
+  "ok": true,
+  "checagem": {
+   "exposto": false,
+   "censura": false,
+   "ato_sexual": false,
+   "menor": false,
+   "texto": false,
+   "sensual": 7.0,
+   "roupa_ousada": true,
+   "dividida": false,
+   "ela": [
+    0.264,
+    0.0,
+    0.712,
+    0.74
+   ],
+   "ele": null
+  }
+ },
+ {
+  "tipo": "perfil",
+  "i": 1,
+  "erro": "não gerou"
+ },
+ {
+  "tipo": "perfil",
+  "i": 2,
+  "arquivo": "D:\\hipercool-materiais\\canais\\manhwa-picante\\geradas\\perfil_2.png",
+  "ok": true,
+  "checagem": {
+   "exposto": false,
+   "censura": false,
+   "ato_sexual": false,
+   "menor": false,
+   "texto": false,
+   "sensual": 7.0,
+   "roupa_ousada": true,
+   "dividida": false,
+   "ela": [
+    0.381,
+    0.105,
+    0.665,
+    0.445
+   ],
+   "ele": null
+  }
+ },
+ {
+  "tipo": "banner",
+  "i": 0,
+  "arquivo": "D:\\hipercool-materiais\\canais\\manhwa-picante\\geradas\\banner_0.png",
+  "ok": true,
+  "checagem": {
+   "exposto": false,
+   "censura": false,
+   "ato_sexual": false,
+   "menor": false,
+   "texto": false,
+   "sensual": 7.0,
+   "roupa_ousada": true,
+   "dividida": false,
+   "ela": [
+    0.565,
+    0.404,
+    0.67,
+    0.631
+   ],
+   "ele": [
+    0.659,
+    0.141,
+    0.758,
+    0.366
+   ]
+  }
+ },
+ {
+  "tipo": "banner",
+  "i": 1,
+  "arquivo": "D:\\hipercool-materiais\\canais\\manhwa-picante\\geradas\\banner_1.png",
+  "ok": true,
+  "checagem": {
+   "exposto": false,
+   "censura": false,
+   "ato_sexual": false,
+   "menor": false,
+   "texto": false,
+   "sensual": 7.0,
+   "roupa_ousada": true,
+   "dividida": false,
+   "ela": [
+    0.568,
+    0.409,
+    0.656,
+    0.548
+   ],
+   "ele": [
+    0.642,
+    0.101,
+    0.75,
+    0.35
+   ]
+  }
+ }
+]

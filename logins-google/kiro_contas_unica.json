@@ -1,0 +1,1280 @@
+{
+  "_leia": "LISTA ÚNICA das contas Google x Kiro (o OmniRoute não mostra e-mail). Uma entrada por conta: em que máquina/perfil ela está e a última situação no Kiro. Atualizar ao conferir (kiro_creditos.py) ou abrir para a dona. Procedimento: KIRO_PROCEDIMENTO.md",
+  "atualizado": "2026-10-23T20:40",
+  "contas": {
+    "acaciabaterias2@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 104"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "alijutt09806@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 102"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "ameliablack.uk@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 58"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "apcdparacatu@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 124"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "ariany.ferreira.gemini@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 98"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "aulacomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "aulacomia",
+        "pc2_chrome": "Profile 10"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "48.1",
+        "limite": "50",
+        "em": "2026-10-23T16:41"
+      },
+      "antigravity_omniroute": true
+    },
+    "aulasrevolution@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "aulasrevolution",
+        "pc2_chrome": "Profile 12"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "19.6",
+        "limite": "50",
+        "em": "2026-10-23T16:41"
+      },
+      "antigravity_omniroute": true
+    },
+    "brunagesteira.ia@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 65"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "brunno.ia.01@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 119"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "brunno.ia.02@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 120"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "canalalucinaai@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "canalalucinaai",
+        "pc1_chrome": "Profile 14",
+        "pc2_chrome": "Profile 6"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:42"
+      },
+      "antigravity_omniroute": true
+    },
+    "canalanimescomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "canalanimescomia"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:43"
+      },
+      "antigravity_omniroute": true
+    },
+    "canalhistoriacomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "canalhistoriacomia",
+        "desktop_chrome": "Profile 139",
+        "pc2_chrome": "Profile 9"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:44"
+      },
+      "antigravity_omniroute": true
+    },
+    "chatscentralz@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 43"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "comoseriasecomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "comoseriasecomia",
+        "pc2_chrome": "Profile 11"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:44"
+      },
+      "antigravity_omniroute": true
+    },
+    "corehorizont@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 94"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "daniel.automacaoia@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 39"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "deboratheotonio.ia.1@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 105"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "diego.silveira.ia@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 106"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "e4487017@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "e4487017",
+        "pc2_chrome": "Profile 19"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:45"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersongenc@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersongenc",
+        "pc2_chrome": "Profile 29"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:45"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersongencshin@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersongencshin",
+        "pc1_chrome": "Profile 27",
+        "desktop_chrome": "Profile 131"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:46"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel0@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel0",
+        "pc1_chrome": "Profile 32"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:46"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel1995@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel1995",
+        "pc2_chrome": "Profile 2"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "0.0",
+        "limite": "50",
+        "em": "2026-10-23T16:47"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2026@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2026",
+        "pc1_chrome": "Profile 30"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:47"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2027@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2027",
+        "pc1_chrome": "Profile 31",
+        "desktop_chrome": "Profile 140"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "41.8",
+        "limite": "50",
+        "em": "2026-10-23T16:48"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2029@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2029",
+        "pc1_chrome": "Profile 33"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:49"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2030@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2030",
+        "pc1_chrome": "Profile 34"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:49"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2031@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2031",
+        "pc1_chrome": "Profile 35"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:50"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2032@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2032",
+        "pc1_chrome": "Profile 36",
+        "desktop_chrome": "Profile 141"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:51"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel2033@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel2033",
+        "pc1_chrome": "Profile 37"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:52"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosiel649@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosiel649",
+        "pc1_chrome": "Profile 13",
+        "pc2_chrome": "Profile 30"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:51"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosielmrx1995@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "emersonjosielmrx1995",
+        "pc2_chrome": "Profile 32"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:13"
+      },
+      "antigravity_omniroute": true
+    },
+    "emersonjosielmrx@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Default",
+        "desktop_chrome": "Default",
+        "pc2_chrome": "Default"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "empressinovare@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "empressinovare",
+        "pc1_chrome": "Profile 47",
+        "desktop_chrome": "Profile 132",
+        "pc2_chrome": "Profile 27"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:52"
+      },
+      "antigravity_omniroute": true
+    },
+    "en1653964@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "en1653964",
+        "pc2_chrome": "Profile 20"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:52"
+      },
+      "antigravity_omniroute": true
+    },
+    "entrevistacomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "entrevistacomia",
+        "pc2_chrome": "Profile 7"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:52"
+      },
+      "antigravity_omniroute": true
+    },
+    "evoogabriel@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 51",
+        "desktop_chrome": "Profile 90"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "fabio.martech@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 80"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "fabiovideoseducativos@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "fabiovideoseducativos",
+        "pc1_chrome": "Profile 6",
+        "pc2_chrome": "Profile 21"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:54"
+      },
+      "antigravity_omniroute": true
+    },
+    "fabricadeautomacoes0@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "fabricadeautomacoes0",
+        "pc1_chrome": "Profile 7",
+        "pc2_chrome": "Profile 13"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:54"
+      },
+      "antigravity_omniroute": true
+    },
+    "fabricadeautomacoesia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "fabricadeautomacoesia",
+        "pc1_chrome": "Profile 2",
+        "desktop_chrome": "Profile 1",
+        "pc2_chrome": "Profile 14"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:55"
+      },
+      "antigravity_omniroute": true
+    },
+    "felipeaguiar.ia.2@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 60"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "filmescomia00@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "filmescomia00",
+        "pc1_chrome": "Profile 38",
+        "desktop_chrome": "Profile 137",
+        "pc2_chrome": "Profile 5"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "filmescomia1@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "filmescomia1",
+        "desktop_chrome": "Profile 134",
+        "pc2_chrome": "Profile 3"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:53"
+      },
+      "antigravity_omniroute": true
+    },
+    "gabriellyvitoriaisabelaaraujo@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "gabriellyvitoriaisabelaaraujo"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:10"
+      },
+      "antigravity_omniroute": true
+    },
+    "gameoftroneskingsroadbrasil@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "gameoftroneskingsroadbrasil",
+        "pc2_chrome": "Profile 1"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:53"
+      },
+      "antigravity_omniroute": true
+    },
+    "gislainejustino.ia.1@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 113"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "glauciajustino.ia@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 116"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "hayllamikeycesouza@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 4"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "hermesmultiplic@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 65"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "hootztech@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 84"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "inovarecap@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovarecap",
+        "pc2_chrome": "Profile 22"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:56"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwabr@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwabr",
+        "pc1_chrome": "Profile 10",
+        "desktop_chrome": "Profile 142",
+        "pc2_chrome": "Profile 35"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:57"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverse2@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverse2"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:09"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverse@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverse",
+        "pc1_chrome": "Profile 11"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:57"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverseesp@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverseesp",
+        "pc1_chrome": "Profile 12"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:58"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaversefrench@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaversefrench",
+        "pc1_chrome": "Profile 20"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:58"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaversehindi@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaversehindi",
+        "pc1_chrome": "Profile 18"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:59"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverseind@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverseind",
+        "pc1_chrome": "Profile 25"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T16:59"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverseing@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverseing",
+        "pc1_chrome": "Profile 28"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:00"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverseita@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverseita",
+        "pc1_chrome": "Profile 21"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:01"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverserussian@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverserussian",
+        "pc1_chrome": "Profile 19"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:02"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaversethai@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaversethai",
+        "pc1_chrome": "Profile 16"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:02"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremanhwaverseviet@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremanhwaverseviet",
+        "pc1_chrome": "Profile 17"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:03"
+      },
+      "antigravity_omniroute": true
+    },
+    "inovaremultiatendimento@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "inovaremultiatendimento",
+        "pc2_chrome": "Profile 15"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:04"
+      },
+      "antigravity_omniroute": true
+    },
+    "jogoscomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "jogoscomia",
+        "pc1_chrome": "Profile 29"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:04"
+      },
+      "antigravity_omniroute": true
+    },
+    "jornalcomia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "jornalcomia",
+        "desktop_chrome": "Profile 138",
+        "pc2_chrome": "Profile 8"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:05"
+      },
+      "antigravity_omniroute": true
+    },
+    "kaline.martins.ia@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 112"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "leechardes.ia.1@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 59"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "maiteanajessicajesus@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "maiteanajessicajesus"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:10"
+      },
+      "antigravity_omniroute": true
+    },
+    "mentoriaiapro@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "mentoriaiapro",
+        "desktop_chrome": "Profile 129",
+        "pc2_chrome": "Profile 4"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:53"
+      },
+      "antigravity_omniroute": true
+    },
+    "msenergypara@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "msenergypara",
+        "desktop_chrome": "Profile 136",
+        "pc2_chrome": "Profile 16"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:06"
+      },
+      "antigravity_omniroute": true
+    },
+    "multiplic.ai.mkt@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 64"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "mundosolar1995@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "mundosolar1995",
+        "pc1_chrome": "Profile 15",
+        "pc2_chrome": "Profile 24"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:07"
+      },
+      "antigravity_omniroute": true
+    },
+    "murilodoctor192@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "murilodoctor192",
+        "desktop_chrome": "Profile 133",
+        "pc2_chrome": "Profile 28"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:07"
+      },
+      "antigravity_omniroute": true
+    },
+    "pauladvasconcelos3@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 41"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "potterantigravity1@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 122"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "projecthzt@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 96"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "raquelbezerra.ia.1@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 111"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "revolutionemerson1@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "revolutionemerson1"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:11"
+      },
+      "antigravity_omniroute": true
+    },
+    "revolutionemerson2@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "revolutionemerson2"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:54"
+      },
+      "antigravity_omniroute": true
+    },
+    "revolutionemerson3@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "revolutionemerson3"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:54"
+      },
+      "antigravity_omniroute": true
+    },
+    "rezaulkarimul355@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "rezaulkarimul355",
+        "pc1_chrome": "Profile 40"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:08"
+      },
+      "antigravity_omniroute": true
+    },
+    "seebotsia@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "seebotsia",
+        "pc2_chrome": "Profile 26"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:08"
+      },
+      "antigravity_omniroute": true
+    },
+    "simonerebecaluizasilva@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "simonerebecaluizasilva"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:11"
+      },
+      "antigravity_omniroute": true
+    },
+    "solarmundo195@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "solarmundo195",
+        "desktop_chrome": "Profile 130",
+        "pc2_chrome": "Profile 33"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:09"
+      },
+      "antigravity_omniroute": true
+    },
+    "suporte@irison.com.br": {
+      "maquinas": {
+        "desktop_chrome": "Profile 37"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "travelbds25@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 53"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "travelbds26@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 109"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "ulissesluciolaveriano@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 52"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "vanessacpina@gmail.com": {
+      "maquinas": {
+        "desktop_chrome": "Profile 35"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": false,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "vendeafiliados3@gmail.com": {
+      "maquinas": {
+        "pc1_cofre": "vendeafiliados3",
+        "desktop_chrome": "Profile 121",
+        "pc2_chrome": "Profile 25"
+      },
+      "kiro": {
+        "situacao": "usa_kiro",
+        "restantes": "50.0",
+        "limite": "50",
+        "em": "2026-10-23T17:13"
+      },
+      "antigravity_omniroute": true
+    },
+    "volupecenografiaintegrada@gmail.com": {
+      "maquinas": {
+        "pc1_chrome": "Profile 3",
+        "pc2_chrome": "Profile 36"
+      },
+      "kiro": {
+        "situacao": "feita_pela_dona",
+        "em": "2026-10-23T20:40"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    },
+    "andreluizdias384@gmail.com": {
+      "maquinas": {
+        "pc2_chrome": "Profile 18",
+        "pc1_cofre": "andreluizdias384"
+      },
+      "kiro": {
+        "situacao": "aberta_para_dona_pc1",
+        "em": "2026-10-23T20:50"
+      },
+      "antigravity_omniroute": true,
+      "bloqueada_novo_login": true,
+      "bloqueio_motivo": "NAO LOGAR em lugar novo (cofre, PC, navegador). AINDA PODE SER USADA normalmente onde ja esta logada (maquinas listadas acima).",
+      "bloqueada_em": "2026-10-24"
+    }
+  },
+  "removidas_mortas_23out": [
+    "andreluizdias384@gmail.com",
+    "emersonjosiel2028@gmail.com",
+    "ig_danceandmusicwith.ia",
+    "ig_dicasfinanceiras.ia",
+    "ig_emerson.inteligenciaartificial",
+    "ig_fabricadeautomacoesia",
+    "ig_fakenews.ia4",
+    "ig_futebolcom.ia2",
+    "ig_recenas.ia",
+    "ig_sintetizerisada",
+    "inovaremanhwaverse3@gmail.com",
+    "inovaremanhwaverse4@gmail.com",
+    "revolutionemerson7@gmail.com",
+    "testecanal18@gmail.com"
+  ],
+  "bloqueio_novo_login_leia": "Contas com bloqueada_novo_login=true: decisao da dona em 24/10/2026. Proibido fazer login novo nelas (logar_fila.py e cofre.py logar nao devem ser usados). ELAS AINDA PODEM SER USADAS onde ja estao logadas (Kiro, OmniRoute, perfis existentes)."
+}

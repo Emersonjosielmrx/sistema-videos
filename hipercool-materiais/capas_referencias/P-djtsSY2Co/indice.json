@@ -1,0 +1,309 @@
+{
+ "video": "tmp/P-djtsSY2Co.mp4",
+ "passo_s": 6.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "garota slime verde",
+   "principal": true,
+   "aparicoes": 11,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1974.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4224.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1980.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1068.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 4230.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1800.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 4224.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1068.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 4230.0
+    }
+   ],
+   "papel": "idol / cantora slime",
+   "visual": "green slime hair, red eyes, light green slime skin, wearing a futuristic outfit and holding a microphone",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "mulher de cabelos castanhos e olhos vermelhos",
+   "principal": false,
+   "aparicoes": 10,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 384.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1116.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1074.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 180.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 582.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 2538.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1116.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 180.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 582.0
+    }
+   ],
+   "papel": "personagem principal",
+   "visual": "brown hair, long hair, red eyes, flower accessory",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p03",
+   "nome": "mulher de cabelo roxo e roupa amarela",
+   "principal": false,
+   "aparicoes": 8,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1668.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1362.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1368.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1428.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 1788.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1302.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1668.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1362.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1368.0
+    }
+   ],
+   "papel": "personagem principal de combate",
+   "visual": "dark purple short hair with side braids, blue eyes, wearing yellow martial arts attire",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p04",
+   "nome": "garota de cabelo rosa",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3726.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3426.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 3420.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3390.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3378.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3426.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 3420.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 3390.0
+    }
+   ],
+   "papel": "personagem principal",
+   "visual": "bright pink hair with bangs, dark eyes, wearing a black maid/gothic headpiece with ribbons, black choker/dress",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p05",
+   "nome": "Cabelo rosa de olhos verdes",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3588.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 834.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4194.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3642.0
+    }
+   ],
+   "papel": "Personagem principal/de destaque da história",
+   "visual": "pink hair styled in braids, green eyes, wearing a gold leaves headband accessory",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p06",
+   "nome": "demônia de cabelo branco",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 684.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 756.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 672.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 690.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 684.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 756.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 672.0
+    }
+   ],
+   "papel": "personagem da história",
+   "visual": "white short hair covering one eye, red/purple eyes, dark horns, demonic features",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p07",
+   "nome": "garota de cabelo castanho e pele morena",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 4392.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 312.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2406.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 78.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 4392.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 312.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2406.0
+    }
+   ],
+   "papel": "personagem feminina principal",
+   "visual": "long wavy brown hair, brown eyes, tan skin, yellow scarf or green outfit",
+   "adulta": true,
+   "mulher": true
+  }
+ ]
+}

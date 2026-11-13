@@ -1,0 +1,70 @@
+{
+ "modelo": "argon-gemini",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T14:53:01",
+ "segundos": 711,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T14:53:01",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "argon-gemini",
+   "decisor": "argon-gemini"
+  },
+  "achados": [
+   {
+    "tipo": "CERTEZA",
+    "problema": "Falha de legibilidade e texto cortado na legenda karaokê: na frase 'Adotamos o Hermes Call', a caixa/tarja de fundo escuro some, a palavra 'Hermes' sai cortada e 'Call' aparece em verde-escuro direto sobre a camisa azul-marinho do apresentador, ficando quase invisível.",
+    "prova": "dados.json juri_problemas cena 2 (foco movimento e diretor, gravidade grave)",
+    "sugestao": "Garantir a persistência da tarja de fundo escuro ou borda/sombra de alto contraste em todas as palavras da legenda karaokê, especialmente em nomes próprios/marca ('Hermes Call'), e corrigir o cálculo de largura/quebra de linha para não cortar palavras.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Elemento gráfico encostando no topo da cabeça do apresentador (headroom estrangulado): o conjunto da faixa verde superior com a pílula de etapa ('1 O problema') toca o cabelo/topo da cabeça do dono.",
+    "prova": "dados.json juri_problemas cena 1 (foco diretor, gravidade media)",
+    "sugestao": "Descer o posicionamento do vídeo do apresentador ou reduzir levemente a escala (cerca de 10%) quando houver faixa fixa + pílula de etapa no topo, garantindo margem livre acima do cabelo.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Falta de elementos visuais dinâmicos e demonstração nas cenas de fala (cenas 0 a 3 têm movimento alto no vídeo base, entre 10.14% e 14.18%, mas o júri aponta monotonia por ficar 26s no mesmo plano médio do dono sem telas do produto ou elementos entrando junto com a fala).",
+    "prova": "dados.json juri.movimento (cenas 0 a 3 com 10.14% a 14.18% e nota movimento 5.0) / juri_problemas cenas 1 e 2 (graves) / historico_notas (movimento 4.0 a 5.0 em 11 dos 12 vídeos)",
+    "sugestao": "Inserir elementos gráficos sincronizados com a fala nas cenas de dono (ex.: mock-up/card de chamada do WhatsApp com selo 'Simulação' entrando na cena 2 e animação de slide na troca da pílula '1 O problema' -> '2 Como funciona') ou alternar cena do meio para demonstração visual.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Cartão final (cena 4) com movimento baixo (4.63%, muito próximo do limite de cena parada) e aspecto estático por mais de 2,3 segundos.",
+    "prova": "dados.json juri.movimento cena 4 ('cartao', 4.63) / juri_problemas cena 4 (movimento e diretor)",
+    "sugestao": "Adicionar entrada escalonada (slide/scale com easing) nos elementos do cartão final e aumentar `pulso_botao` (de 0.06 para 0.10) ou manter fundo dinâmico em movimento contínuo.",
+    "repetido": true
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Abertura na Cena 0 em plano contínuo lendo a caixinha de pergunta e cortes retos nas falas longas sem variação de escala (punch-in) para marcar o ritmo nos primeiros segundos.",
+    "prova": "dados.json juri_problemas cena 0 (foco diretor, grave) e cena 2 (foco movimento, media)",
+    "sugestao": "Testar aumento de `punchin_video` (de 0.06 para 0.12) nos momentos-chave da fala e nos primeiros 1.5s do gancho inicial.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "regra_editor",
+    "alvo": "",
+    "valor": "Na legenda karaokê, mantenha sempre tarja de fundo escuro ou contorno de alto contraste em todas as palavras (incluindo marcas) sem cortar texto. Garanta margem livre acima da cabeça do dono.",
+    "motivo": "Corrigir falha grave e repetida de legibilidade e corte na legenda karaokê ('Hermes Call' sumindo sobre camisa escura) e evitar que a faixa superior encoste na cabeça do apresentador.",
+    "prova": "dados.json juri_problemas cena 1 (diretor, media) e cena 2 (movimento e diretor, grave)"
+   },
+   {
+    "acao": "ajuste",
+    "alvo": "pulso_botao",
+    "valor": 0.1,
+    "motivo": "Aumentar o dinamismo do cartão final (cena 4), que apresentou movimento muito baixo (4.63%) e aspecto estático repetido.",
+    "prova": "dados.json juri.movimento cena 4 ('cartao', 4.63) / juri_problemas cena 4"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

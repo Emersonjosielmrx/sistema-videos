@@ -1,0 +1,842 @@
+# Relatorio - 2026-10-06_parte1_opiniao.mp4
+
+- Duracao original: 4060.1s
+- Status: done
+- Canal: assistiainvestimentos
+- Transcricao: groq:whisper-large-v3
+- Editorial: score=6 usable=True - conversa longa sobre política e IA, trechos técnicos sobre modelos e cripto funcionam para canais de nicho
+- Assunto: política brasileira e desenvolvimento com IA | Obra: None
+
+## 2026_10_06_parte1_opiniao_p1.mp4 (73.3s, 17.6% cortado)
+
+- Gancho: **TODOS POLÍTICOS MENTEM, MAS LULA BATE RECORDE**
+- Titulo: Lula BATE RECORDE de mentiras (até pra quem gosta dele) 🤯 #shorts #política
+- Alternativas: Político que MAIS MENTE no Brasil (segundo esse cara) 🤯 #shorts #política | TODO político mente, mas esse BATE RECORDE 🏆 #shorts #lula
+- Descricao: Todo político mente, mas esse cara aqui consegue bater o recorde. O criador fala a verdade que muita gente pensa mas não diz: mentir é esperado, mas tem limite.
+
+Você concorda que ele exagera nas histórias ou acha que é só narrativa?
+
+Segue a gente pra mais reacts de política e atualidades sem filtro.
+
+#shorts #política #lula #eleições #brasil #react #verdade #mentira #político #democracia #opinião #atualidades #debate #eleições2026
+- Tags: react, política, lula, mentira, eleições, brasil, político, democracia, debate, atualidades, opinião pública, eleições 2026, governo
+- Hashtags: #shorts #política #lula
+- Comentario fixado: Você já viu político mais mentiroso que esse?
+- CTA: Concorda? Comenta aí
+- Mood/musica: tense_dramatic / jungle_survival_theme.mp3
+- Thumb: 2026_10_06_parte1_opiniao_p1_thumb.jpg
+- Validacao: OK (LUFS -14.1)
+
+## 2026_10_06_parte1_opiniao_p2.mp4 (84.8s, 5.8% cortado)
+
+- Gancho: **PT ACABOU DE SE DESMANCHAR DE VEZ**
+- Titulo: PT se DESMANCHOU de vez no Brasil (análise REAL) 😱 #shorts #política
+- Alternativas: O cara que LEVOU e DESTRUIU o PT (que situação) 😱 #shorts #política | PT no Brasil: ACABOU de vez ou ainda volta? #shorts #eleições
+- Descricao: O criador fala sobre o fim de uma era: o PT que cresceu absurdamente agora está se decompondo. O cara que levou o partido ao topo foi o mesmo que destruiu tudo.
+
+Você acha que o PT ainda tem chance ou já era?
+
+Segue pra mais análises políticas direto ao ponto.
+
+#shorts #política #pt #eleições #brasil #partidopolítico #governo #democracia #análise #react #opinião #atualidades #eleições2026 #partidodostrabalhadores
+- Tags: react, política, pt, partido dos trabalhadores, eleições, brasil, governo, democracia, lula, análise política, opinião, atualidades, eleições 2026
+- Hashtags: #shorts #política #pt
+- Comentario fixado: O PT ainda tem futuro no Brasil?
+- CTA: O PT voltará? Opina
+- Mood/musica: tense_dramatic / phonk_football_anime_infraction_27jILMV2-fw.mp3
+- Thumb: 2026_10_06_parte1_opiniao_p2_thumb.jpg
+- Validacao: OK (LUFS -14.0)
+
+## 2026_10_06_parte1_opiniao_p3.mp4 (79.8s, 11.3% cortado)
+
+- Gancho: **SONNET 4 VIROU REALIDADE NO SISTEMA DE CRIPTO**
+- Titulo: Sonnet 4 deixou meu sistema de CRIPTO VIÁVEL (resultado REAL) 💰 #shorts #ia
+- Alternativas: IA tornou meu sistema de CRIPTO lucrativo (veja como) 💰 #shorts #investimentos | Como a IA MUDOU meus investimentos em cripto 🚀 #shorts #ia
+- Descricao: Criador conta como a evolução dos modelos de IA tornou seus projetos cada vez melhores. O Opus 5 tornou o sistema de WhatsApp viável, e o Sonnet 4 mudou tudo no sistema de cripto.
+
+Você investe em cripto ou tá começando agora?
+
+Segue pra ver como a IA tá revolucionando investimentos.
+
+#shorts #ia #cripto #investimentos #inteligenciaartificial #trading #bitcoin #claude #sonnet4 #tecnologia #dinheiro #mercadofinanceiro #automação
+- Tags: ia, inteligência artificial, cripto, investimentos, trading, bitcoin, claude, sonnet 4, opus 5, automação, tecnologia, dinheiro, mercado financeiro
+- Hashtags: #shorts #ia #cripto
+- Comentario fixado: Qual modelo de IA você usa nos seus projetos?
+- CTA: Usa IA pra investir?
+- Mood/musica: neutral_chill / Cxdy _ Hollow Bells(MP3_320K).mp3
+- Thumb: 2026_10_06_parte1_opiniao_p3_thumb.jpg
+- Validacao: OK (LUFS -14.0)
+
+## 2026_10_06_parte1_opiniao_p4.mp4 (77.5s, 10.9% cortado)
+
+- Gancho: **MELHOR EDITOR DE VÍDEO FEITO COM IA**
+- Titulo: Criei o MELHOR editor de vídeo com IA (faz qualquer efeito) 🔥 #shorts #ia
+- Alternativas: Editor de vídeo com IA que faz QUALQUER efeito 🔥 #shorts #tecnologia | IA criou o editor PERFEITO (não acredito) 😱 #shorts #edicaodevideo
+- Descricao: O criador conta como desenvolveu um editor de vídeo com IA capaz de reproduzir QUALQUER efeito do YouTube: choque, fogo, corte na cara do personagem… tudo automático.
+
+Você usa IA pra editar ou ainda faz tudo manual?
+
+Segue pra ver o que a IA já consegue fazer.
+
+#shorts #ia #edicaodevideo #inteligenciaartificial #editor #automacao #tecnologia #youtube #videomaker #criacao #conteudo #inovacao #claude
+- Tags: ia, edição de vídeo, inteligência artificial, automação, editor, youtube, criação de conteúdo, tecnologia, videomaker, claude, inovação, efeitos visuais
+- Hashtags: #shorts #ia #edicaodevideo
+- Comentario fixado: Qual efeito mais difícil você já tentou fazer?
+- CTA: Edita com IA? Conta
+- Mood/musica: neutral_chill / Two Moons - Bobby Richards.mp3
+- Thumb: 2026_10_06_parte1_opiniao_p4_thumb.jpg
+- Validacao: OK (LUFS -14.0)
+
+## 2026_10_06_parte1_opiniao_p5.mp4 (80.0s, 8.1% cortado)
+
+- Gancho: **TRADING DE CRIPTO COM IA DEU LUCRO REAL**
+- Titulo: Cripto com IA: resultado REAL depois de DIAS operando 💰 #shorts #investimentos
+- Alternativas: Sistema de CRIPTO com IA: resultado depois de DIAS 💰 #shorts #ia | IA operando cripto sozinha (tô FELIZ com o resultado) 😊 #shorts #investimentos
+- Descricao: Criador revela que tá operando cripto com IA há dias e o resultado tá BOM DEMAIS. Ele criou um sistema automático que identifica oportunidades e opera sozinho.
+
+Você investe em cripto ou tá estudando ainda?
+
+Segue pra mais reacts sobre IA e investimentos.
+
+#shorts #investimentos #cripto #ia #trading #bitcoin #inteligenciaartificial #dinheiro #lucro #mercadofinanceiro #automacao #daytrading #criptomoedas
+- Tags: investimentos, cripto, ia, trading, bitcoin, inteligência artificial, dinheiro, lucro, mercado financeiro, automação, day trading, criptomoedas
+- Hashtags: #shorts #investimentos #cripto
+- Comentario fixado: Quanto você já ganhou (ou perdeu) em cripto?
+- CTA: Investe em cripto?
+- Mood/musica: neutral_chill / Dog_Park.mp3
+- Thumb: 2026_10_06_parte1_opiniao_p5_thumb.jpg
+- Validacao: OK (LUFS -14.0)
+
+## 2026_10_06_parte1_opiniao_p6.mp4 (61.5s, 4.0% cortado)
+
+- Gancho: **CRIPTO É MAIS PREVISÍVEL QUE FOREX E AÇÕES**
+- Titulo: Cripto é o MAIS PREVISÍVEL (contraintuitivo mas é VERDADE) 🤯 #shorts #investimentos
+- Alternativas: Por que CRIPTO é mais fácil que FOREX e AÇÕES 📊 #shorts #investimentos | Cripto: o mercado MAIS PREVISÍVEL (surpreendente) 🤯 #shorts #trading
+- Descricao: O criador revela algo chocante: cripto é o mercado MAIS previsível entre forex, ações e criptomoedas. Isso vai contra tudo que você imagina, mas as moedas estão amarradas umas às outras.
+
+Você sabia disso ou achou que cripto era o mais caótico?
+
+Segue pra aprender mais sobre investimentos com IA.
+
+#shorts #investimentos #cripto #forex #acoes #trading #bitcoin #mercadofinanceiro #ia #dinheiro #análise #criptomoedas #daytrading
+- Tags: investimentos, cripto, forex, ações, trading, bitcoin, mercado financeiro, ia, dinheiro, análise, criptomoedas, day trading, inteligência artificial
+- Hashtags: #shorts #investimentos #cripto
+- Comentario fixado: Você achava que cripto era imprevisível?
+- CTA: Sabia disso? Comenta
+- Mood/musica: neutral_chill / Faultlines - Asher Fulero.mp3
+- Thumb: 2026_10_06_parte1_opiniao_p6_thumb.jpg
+- Validacao: OK (LUFS -14.0)
+
+## Trechos removidos pelo editorial
+
+- 00:00.00-00:13.38: início confuso, contexto incompleto
+- 08:02.00-08:06.92: comentário genérico sobre conversa
+
+## Transcricao (CRIADOR = legendado; CONTEUDO = audio do video reagido)
+
+- [00:00.00] **creator**: ...sentido, né? A não ser que ele consiga fazer um milagre, eu acho muito difícil do Flávio...
+- [00:07.62] **creator**: É...
+- [00:09.12] **creator**: É, tipo assim...
+- [00:10.84] **creator**: Ter mais chance de ser reeleito do que o pai dele.
+- [00:13.70] **creator**: O que eu acredito é que ele vai...
+- [00:15.96] **creator**: Ser...
+- [00:18.16] **creator**: É... Querendo ou não, vai...
+- [00:21.38] **creator**: Ter uma queda de impopularidade...
+- [00:24.20] **creator**: Né? E...
+- [00:25.34] **creator**: E vai vir o pai dele.
+- [00:26.54] **creator**: Aí o pai dele eu acho que vai receber mais votos do que ele receberia.
+- [00:31.04] **creator**: A não ser que o governo dele for muito, muito, muito bom.
+- [00:34.98] **creator**: O que eu espero que seja, porque eu tô no mesmo barco, né?
+- [00:38.18] **creator**: É, ele tá afirmando categoricamente que ele é o único que vai cumprir,
+- [00:42.68] **creator**: que ele vai acabar com a reeleição.
+- [00:46.42] **creator**: E eu não sei até que ponto se ele realmente não vai acabar com a reeleição
+- [00:51.26] **creator**: e realmente entra o pai dele como candidato na próxima.
+- [00:54.70] **creator**: Não, pra ele é muito bom acabar com a reeleição, porque... Exatamente.
+- [00:58.40] **creator**: Porque o candidato já não seria ele mesmo, já seria o pai.
+- [01:01.40] **creator**: Exatamente. Então pra ele é muito bom, aí daqui quatro anos troca de novo pro... pra ele...
+- [01:07.40] **creator**: Entendeu? É pra ele fica perfeita acabar com a reeleição.
+- [01:13.40] **creator**: Agora, eu sinceramente não acredito que o problema do Brasil esteja na reeleição.
+- [01:21.40] **creator**: Não, não tá.
+- [01:23.40] **creator**: É... esses caras ficam, ah, que é o cara no segundo... porra, mas aí eu fico pensando...
+- [01:30.40] **creator**: Caralho, e o cara que faz um puta de um governo, faz um bom governo, aí ele não se reelege, aí entra um bosta no lugar dele e fode tudo.
+- [01:39.40] **creator**: Não tá. O problema... é um problema muito profundo do Brasil, é justamente essa questão
+- [01:50.40] **creator**: Da meritocracia.
+- [01:52.40] **creator**: Porque, tipo assim, não há meritocracia nenhuma.
+- [01:56.40] **creator**: É... tipo assim, os nossos candidatos são palhaços.
+- [02:00.40] **creator**: Aham.
+- [02:01.40] **creator**: Entendeu? Nossos candidatos...
+- [02:03.40] **creator**: Né? Que nem o Chibi-Rika, nossos candidatos são...
+- [02:06.40] **creator**: É... são prostitutas.
+- [02:08.40] **creator**: Que nem o caso da Elise Sanchez e outros.
+- [02:12.40] **creator**: São atrizes pornô.
+- [02:14.40] **creator**: Nossos candidatos são... são qualquer pessoa que tem um mínimo de popularidade...
+- [02:19.40] **creator**: Mas n entrou dessa vez
+- [02:56.00] **creator**: É... tenta, e muitas vezes se elege.
+- [02:58.86] **creator**: Então, mas por um sistema que tá errado, que é um sistema corrupto,
+- [03:03.20] **creator**: quem sabe o preço desse voto proporcional.
+- [03:05.90] **creator**: Mas eu acredito que tem uma luz na fim do túnel, Emerson, nessa eleição.
+- [03:11.60] **creator**: Porque me impressionou bastante.
+- [03:14.60] **creator**: É... a maioria desses, porra...
+- [03:17.80] **creator**: Marcelinho Carioca do Corinthians, Edmundo, Tiririca...
+- [03:24.30] **creator**: Uma cacetada desses famosos, porra, nem o... aquele cara lá que faz o...
+- [03:34.30] **creator**: que é um cara popular, que faz aquele, é... Alerta Geral, né? Alguma...
+- [03:40.30] **creator**: Sim, nos programas de TV, é.
+- [03:42.30] **creator**: Costiqueira, na TV.
+- [03:44.30] **creator**: Teve dois de programa de TV que não se elegeram. Tudo bem, mas pra esses que não se elegeram, teve vários que se elegeram também, hein?
+- [03:53.30] **creator**: Entendeu? Então...
+- [03:54.98] **creator**: Não, mas... mudou...
+- [03:56.98] **creator**: ô, Emerson, se você for pensar em duas eleições pra trás...
+- [04:00.98] **creator**: É, tava bem pior.
+- [04:02.10] **creator**: Esses caras iam ter... arrebentar de volta.
+- [04:04.10] **creator**: É... sim.
+- [04:06.10] **creator**: E dessa vez... e eu acho que isso vai acabar fazendo com que os partidos...
+- [04:12.10] **creator**: porque os partidos já colocavam esses caras proporcionalmente pra...
+- [04:17.10] **creator**: arrastar multidões e eleger quem eles querem, na rabeira.
+- [04:23.10] **creator**: Né? Porque esses caras puxam voto e traz... o que o partido realmente quer.
+- [04:30.10] **creator**: E eu acredito que até o pensamento dos dirigentes de partido vai ter que mudar, porque eles vão começar a ver que isso não vai funcionar mais.
+- [04:39.10] **creator**: É... a principal... eu acho que a principal... o principal problema pra questão dos governantes...
+- [04:46.10] **creator**: é qualquer pessoa poder se candidatar. Entende? Eu acho que esse é um dos principais problemas.
+- [04:51.10] **creator**: mas por exemplo na China meritocracia O cara come com um cargo pequeno depois ele N adianta s ele ser popular n adianta ele ser bem
+- [05:27.00] **creator**: ...intencionado, ele pode ser uma sumidade na área dele, mas se ele não tiver conhecimento político, ele tá lascado, ele não vai fazer nada.
+- [05:35.76] **creator**: Ah, vamo pegar aí esse Kuri. Na minha opinião, esse Kuri se candidatou só pra ele se...
+- [05:41.80] **creator**: Promover.
+- [05:43.70] **creator**: É, só pra ele se promover.
+- [05:47.70] **creator**: Tava embaixo, eu vou me promover aqui...
+- [05:50.10] **creator**: Vou me promover, vou vender depois meus cursos, vou vender minhas mentoria, que eu vou vender muito mais.
+- [05:55.90] **creator**: Com certeza, o cara que... Ah, eu só entrei nessa e eu não me recandidato. Se eu não ganhar nessa, eu não me candidato mais. Ah, papinho furado, né?
+- [06:05.50] **creator**: Aí vai lá, 3% de otário vai e vota no cara.
+- [06:09.38] **creator**: Então, vou fazer o quê?
+- [06:12.42] **creator**: É, eu tô embaixo aqui, vou...
+- [06:14.82] **creator**: É oportunista, é oportunista. Quero me promover.
+- [06:17.78] **creator**: É, é oportunista.
+- [06:19.38] **creator**: É isso que eu tô te falando.
+- [06:20.78] **creator**: É... controlar as opções seria muito bom.
+- [06:23.98] **creator**: Não, não. Porque você teria três opções, por exemplo, cinco opções que seja, mas todos os cinco, cada um com uma ideia diferente, um é de esquerda, outro é de direita, mas todos os cinco são capazes de... de... de tentar, é... de, tipo assim, todos os cinco são capazes de conseguir, e a população só teria aqueles cinco de opção.
+- [06:45.98] **creator**: É, eu concordo com você. Tinha que ter uma mínima capacitação e a capacitação não só, né, escolaridade, mas uma capacitação política.
+- [06:54.14] **creator**: Uma capacitação política.
+- [06:55.72] **creator**: Você deveria ser obrigado a ter algum curso.
+- [06:57.72] **creator**: Ó, você... pra você ser político, você tem que ter... você tem que já, por exemplo, já ter ocupado um cargo público.
+- [07:05.72] **creator**: Exatamente.
+- [07:07.72] **creator**: Tem que ter tido... tem que ter tido 6 propostas de melhoria pro candidato que você trabalhou.
+- [07:13.72] **creator**: Exato.
+- [07:15.72] **creator**: Você tem que entender do assunto. Tipo assim, o cara que trabalha num gabinete de um candidato, que ajuda o candidato a fazer as propostas.
+- [07:22.96] **creator**: Esse cara deveria ser o futuro candidato Exato Ah mas isso um del nosso nunca vai acontecer isso nunca vai acontecer Infelizmente No Brasil nunca vai acontecer n Nunca vai acontecer E outra a o argumento b isso fere a democracia Democracia todos s iguais todos t o mesmo direito
+- [07:45.00] **creator**: É... todos têm o direito de se candidatar, é aquele papo furado de sempre.
+- [07:52.00] **creator**: Que é conveniente pro sistema. É.
+- [07:55.00] **creator**: É. Não, mas isso, de certa forma, não tive o direito. O cara tem o direito de se candidatar.
+- [08:01.40] **creator**: Exatamente. Só que ele tem um caminho...
+- [08:03.40] **creator**: Só que ele tem uma obrigação de se capacitar. É, só que ele tem uma obrigação de se capacitar.
+- [08:08.60] **creator**: Exatamente. Aí ele...
+- [08:10.60] **creator**: Aí, sim, eu acredito que isso seria uma coisa que melhoraria muito. Não...
+- [08:15.80] **creator**: Tornaria menos roubável. Mas, por exemplo, a distribuição de dinheiro já seria uma coisa que...
+- [08:52.80] **creator**: Nivela o jogo, o que passa a valer é as propostas, o cara continua tendo a opção de se eleger, mas ele tem que ter uma carreira política.
+- [09:03.84] **creator**: Funciona muito, muito, muito melhor.
+- [09:07.36] **creator**: Ah, beleza, tem a questão do cara ter um...
+- [09:10.88] **creator**: Ainda existem problemas que são mais inviáveis, né?
+- [09:16.80] **creator**: Por exemplo, o cara, talvez, o cara que não é escolarizado, o cara que não é informado,
+- [09:21.80] **creator**: que nem o que tá acontecendo agora do PT,
+- [09:24.80] **creator**: os caras votaram no pior candidato, literalmente,
+- [09:28.80] **creator**: é... pode acontecer do cara ainda votar porque o candidato A prometeu cachaça pra eles,
+- [09:34.80] **creator**: prometeu picanha, entendeu? Pode acontecer.
+- [09:37.80] **creator**: Pode acontecer.
+- [09:39.80] **creator**: Mas isso é uma tendência a diminuir.
+- [09:43.80] **creator**: Entendeu? É uma tendência a diminuir. E os caras olharem cada vez mais as propostas em vez de olhar o...
+- [09:51.80] **creator**: Em vez de olhar só um Bolsa Família, ou uma picanha que nunca chega, ou... Entende?
+- [10:22.00] **creator**: Aham. Ele não teve essa carreira política. Aí ele não teve a carreira política e ele também, tipo assim, não quer fazer isso agora pra continuar tendo. Aí já tem um cara do lado dele que ele quer candidatar na hora que ele parar, alguém da família, que ele também não quer que essa pessoa tenha a obrigação de fazer isso.
+- [10:43.00] **creator**: Aí, acaba que fica bem mais complicado, né? Você ter um controle desse pessoal. Mas algumas medidas pequenas, por exemplo, como essa, como a do... Tipo assim, se você recebe um benefício do governo, tipo, Bolsa Família, ou você trabalha pra prefeitura, ou coisa que você não tem direito de votar pra aquele...
+- [11:10.00] **creator**: São pequenas coisas que não consertaria totalmente, mas ajudaria muito.
+- [11:16.00] **creator**: Nossa! E como?
+- [11:17.00] **creator**: O cara, ah, eu trabalho na prefeitura, eu não posso votar pra prefeito.
+- [11:23.00] **creator**: Porque influencia na... porque eu vou ser tendencioso a votar, não no melhor, mas vou votar no que eu tô... no que me beneficia diretamente, entendeu?
+- [11:34.00] **creator**: Sim. Ah, um candidato disse que vai acabar com o Bolsa Família, o outro disse que vai aumentar.
+- [11:40.32] **creator**: Eu vou ser... O outro candidato pode ser o diabo.
+- [11:44.08] **creator**: Pode tá com chifra e tudo, mas eu vou votar no cara que vai aumentar.
+- [11:49.04] **creator**: Porque esse cara é o importante pra mim, entendeu?
+- [11:53.20] **creator**: E aí o resto que se lasca, se ele vai ser o diabo pros outros, contanto que ele aumente, hein?
+- [11:57.92] **creator**: Então o cenário político é muito complicado.
+- [12:01.52] **creator**: Pequenas medidas resolveriam, mas eu acho muito improvável de essas medidas serem... é...
+- [12:11.20] **creator**: Serem realmente... nem irem pra votação, né?
+- [12:16.98] **creator**: Tipo, esse negócio da reeleição é um problema muito menor.
+- [12:23.20] **creator**: Porque por exemplo agora por exemplo na minha cidade Capit Po hoje uma fam Entende Que governa n uma pessoa uma fam H Ent tipo assim eles j trocaram o candidato agora
+- [12:39.00] **creator**: Né? Tipo assim, o candidato deu dois mandatos, colocaram o outro.
+- [12:45.00] **creator**: Entendeu?
+- [12:47.00] **creator**: É... aí, quando der dois mandatos, vai voltar o primeiro.
+- [12:51.00] **creator**: Ou vão colocar um terceiro, entende?
+- [12:55.00] **creator**: Aham.
+- [12:56.00] **creator**: A única diferença de não ter reeleição era que eles iriam trocar com mais frequência o candidato.
+- [13:03.00] **creator**: Sim.
+- [13:04.00] **creator**: Só isso. Entende? Mas pra questão de... é... municipal, isso aí, reeleição não resolve.
+- [13:16.00] **creator**: Talvez melhore alguma coisa a nível nacional. Nacional talvez melhore alguma coisa, porque tem essa questão, né? De, tipo assim, não... É menos próximo da realidade nossa.
+- [13:36.00] **creator**: O prefeito da cidade, da minha cidade, eu conheço. Vejo ele direto.
+- [13:41.00] **creator**: O presidente já eu não conheço, né? Sim.
+- [13:44.00] **creator**: Então talvez melhore um pouco, né? Essa questão do...
+- [13:48.00] **creator**: Mais o... pra cidade, pra interior...
+- [13:53.00] **creator**: E essa questão de, ah, não... não, isso aí não resolve, não.
+- [13:56.00] **creator**: O cara vai colocar o filho, o cara vai colocar a mulher, o cara vai colocar qualquer coisa.
+- [14:01.00] **creator**: Assim como também vai acontecer agora na presidência, né? Sim.
+- [14:05.00] **creator**: Se fosse aprovado. Mas iria ser numa proporção, vamos dizer assim, menor, né?
+- [14:14.00] **creator**: A troca iria ser muito mais notada, né? Do que no interior.
+- [14:23.00] **creator**: Mas espero que o cara governe bem, né? Eu sei que um lado vai ser ruim e o outro seria muito pior se for eleito.
+- [14:32.00] **creator**: Não tenho dúvida, né?
+- [14:33.40] **creator**: Eu gosto dessa.
+- [15:03.40] **creator**: eu acho que isso tem tanto receio de tanto imposto agora a agricultura t praticamente acabada N
+- [15:07.00] **creator**: Agricultura, o varejo, tá uma beleza.
+- [15:11.00] **creator**: É, de todas as camadas, né? Pro grande empresário tá ruim, pro comerciante tá ruim...
+- [15:18.00] **creator**: Tá ruim.
+- [15:20.00] **creator**: Pro agricultor tá péssimo...
+- [15:24.00] **creator**: Então, o agricultor da peça é...
+- [15:26.00] **creator**: Eu nunca vi o gado subir tanto quando o governo do Bolsonaro entrou.
+- [15:32.00] **creator**: Cara, foi muito bom. Pensei...
+- [15:34.00] **creator**: Como eu ganhei dinheiro naquele momento.
+- [15:38.00] **creator**: E olha, mas com todo esse cenário que você tá falando, na minha opinião, é assustador ainda ver o cara ter 45% dos votos.
+- [15:48.00] **creator**: Ah, é?
+- [15:49.00] **creator**: É assustador.
+- [15:51.00] **creator**: Ah, isso é. Isso é, porque... a diferença... beleza, nunca aconteceu do cara do segundo...
+- [15:58.70] **creator**: do segundo colocado no primeiro turno ganhar. Realmente, nunca aconteceu.
+- [16:02.50] **creator**: Aham. Mas...
+- [16:04.00] **creator**: do PT é igual o diabo, eu não duvido nada.
+- [16:07.50] **creator**: Exatamente. Eu também não.
+- [16:10.00] **creator**: Do PT, cara, é...
+- [16:12.50] **creator**: Eu acho que eles vão perder muita força se o governo dele for...
+- [16:17.00] **creator**: for bom, né? Se o governo dele agora for bom...
+- [16:21.00] **creator**: É... razoavelmente bom. Se não ficar pior do que o que tá, é... já... eu acho que o PT já vai perder muito... já vai perder muita popularidade.
+- [16:33.24] **creator**: Sem dúvida.
+- [16:34.54] **creator**: Se ele... se ele somente não fizer tanta declaração ruim que nem foi o caso do pai dele, de fazer tanta declaração infeliz,
+- [16:42.66] **creator**: E conseguir manter o país... melhor um pouco, né? Eu acho que o PT já vai perder muita força.
+- [16:54.46] **creator**: O PT já vai perder muita força se for esse o caso, né?
+- [16:59.66] **creator**: Olha, com todas as cagadas que aconteceram no governo do pai dele, e com os erros que ele cometeu...
+- [17:09.66] **creator**: Mas também tem um detalhe, eu acredito que se não tivesse acontecido a pandemia...
+- [17:15.66] **creator**: Ah, sim.
+- [17:16.66] **creator**: E deu muito azar nesse aspecto, a coisa também seria diferente.
+- [17:22.66] **creator**: Ah, sim.
+- [17:23.66] **creator**: A pandemia também lascou grande o negócio.
+- [17:27.66] **creator**: Tanto t que a pandemia fudeu n s ele aqui como fudeu o Trump l n Ah sim mas infelizmente foi afetou muito mais do que um pol n Afetou o mundo inteiro
+- [17:41.00] **creator**: Exatamente.
+- [17:42.00] **creator**: Mas eu espero que o cara... que ele governe bem, que as coisas melhorem,
+- [17:46.10] **creator**: porque no momento tá muito ruim, sem expectativas de...
+- [17:51.60] **creator**: de melhoras, as coisas piorando e com tendência cada vez mais a piorar.
+- [17:58.00] **creator**: Então, eu espero de verdade que...
+- [18:00.80] **creator**: É, eu vejo tanta coisa que eu acho engraçado...
+- [18:04.40] **creator**: Eu já vi Pai de Santo no YouTube falando, eu já vi pastor falando...
+- [18:10.00] **creator**: Eu já vi gente dizendo que ia amaldiçoar o lado A, amaldiçoar o lado B...
+- [18:14.90] **creator**: É... Já vi o...
+- [18:17.30] **creator**: Cara, eu tenho visto tanta coisa engraçadíssima!
+- [18:21.80] **creator**: Outro dia eu vi o Caio fazendo um vídeo da... É, tipo assim, contando...
+- [18:25.80] **creator**: É... como nossos netos vão ver o cenário político daqui, tipo, em 2050?
+- [18:33.80] **creator**: Aí a pessoa contando, olha, em 2026 o Flávio Bolsonaro ganhou.
+- [18:42.80] **creator**: Aí em 2030 o pai dele veio à presidência.
+- [18:51.80] **creator**: Aí, o Lula foi preso. De novo. Aí, 2034, o Lula saiu da cadeia, ganhou a política e o Bolsonaro foi preso de novo.
+- [19:05.56] **creator**: Porque isso aí vai acontecer, o Lula vai acabar sendo preso de novo, não tem jeito, e o Bolsonaro vai acabar saindo, se um lado... né?
+- [19:15.16] **creator**: Se um lado... Se o Flávio ganhar, mesmo o pai dele com certeza vai sair e o Lula com certeza vai entrar.
+- [19:21.66] **creator**: É, do bom estilo aqui não dá pra duvidar de nada.
+- [19:25.66] **creator**: Aí, 2038, né?
+- [19:30.16] **creator**: Bolsonaro sai de novo da cadeia pela terceira vez e ganha política e Lula entra de novo na cadeia.
+- [19:38.66] **creator**: Não, mas aí eu acho que não vira não, porque aí não é possível que o Lula dure até os 90 anos, não é possível.
+- [19:44.66] **creator**: É... com as coisas do jeito que tão, né? Com a genética evoluindo, eu não sei não.
+- [19:53.66] **creator**: O cão tem muitas faces, né? É, isso é verdade.
+- [19:57.66] **creator**: vaso ruim não quebra face, né? Ele já tava morto. Eu
+- [20:11.00] **creator**: Mas, de fato, a gente sabe que pelo menos o Bolsonaro vai acabar saindo, né? Da prisão, se o filho dele for...
+- [20:20.00] **creator**: Agora eu fico pensando uma outra coisa.
+- [20:25.00] **creator**: O Lula pode ser o bosta que for,
+- [20:30.00] **creator**: não foi ele que fez, mas ele levou a fama.
+- [20:34.00] **creator**: O PT cresceu absurdamente no Brasil.
+- [20:39.00] **creator**: É.
+- [20:40.00] **creator**: O PT teve uma força muito grande.
+- [20:45.00] **creator**: O Lula se... elegeu e reelegeu, ainda fez a sucessora.
+- [20:54.60] **creator**: Cara, se eu tô no lugar do Lula, eu saio no auge.
+- [20:57.80] **creator**: É, não era pra ele ter voltado, né?
+- [21:00.60] **creator**: Porra, eu saio no auge! Ele tinha sido o herói.
+- [21:03.00] **creator**: Exatamente. Hoje o partido tá se decompondo.
+- [21:06.00] **creator**: Olha agora, agora acabou de se desmanchar de vez o PT no Brasil.
+- [21:10.60] **creator**: E ele tá aí ainda. Então, o cara, na biografia dele,
+- [21:13.80] **creator**: Ele vai... Porra, foi o cara que levou e foi o cara que destruiu.
+- [21:19.88] **creator**: É, não... não teve... não... vai acabar sem mérito nenhum, né?
+- [21:25.38] **creator**: Exatamente! Acabar sem mé... mérito de ser um bosta, que hoje em dia, porra...
+- [21:31.38] **creator**: Eu nunca considerei o Lula alguma coisa que preste.
+- [21:36.38] **creator**: Desde a época que ele era metalúrgico ainda.
+- [21:39.38] **creator**: A gente só tinha Globo pra... Pra dar notícia.
+- [21:45.38] **creator**: Pra ficar vendo. Aí eu ficava vendo aqueles comentaristas lá da Globo, eu não me esqueço até hoje.
+- [21:52.38] **creator**: A vida inteira eu escutei naquela época que o Lula era um grande orador. Cara, eu não sei onde que esse cara é um grande orador, eu nunca vi isso.
+- [22:00.38] **creator**: Ele não é hoje, depois de muitos anos, um grande orador, né?
+- [22:04.38] **creator**: Exatamente, mas... só que hoje, graças às redes sociais...
+- [22:09.38] **creator**: A gente percebe, né?
+- [22:10.88] **creator**: Muita gente enxerga isso, porque naquela época...
+- [22:14.88] **creator**: Você não tinha como nem reassistir, né?
+- [22:16.88] **creator**: Porra, eu vi muita gente inteligente, eu vi muita gente curta falar que o Lula era um grande orador.
+- [22:23.88] **creator**: Eu falei caralho eu queria saber aonde aonde Ele um grande mentiroso mentiroso isso ele sempre foi isso a sim
+- [22:36.00] **creator**: Isso ele sempre foi.
+- [22:37.50] **creator**: O homem tem talento.
+- [22:39.50] **creator**: Porra... Aí o pessoal fala, ah, todo político mente. Todo político mente, mas ele bate o recorde.
+- [22:45.00] **creator**: É.
+- [22:46.00] **creator**: Bate o recorde. Mentir, ok, todos mentem, mas ele bate o recorde.
+- [22:53.00] **creator**: E ele consegue encantar jumento, que é uma beleza.
+- [22:56.00] **creator**: Incrível! Nossa, eu fico abismado.
+- [22:59.00] **creator**: Rapaz, eu tenho visto tanta coisa, os caras fazendo passeata de jumento...
+- [23:05.00] **creator**: Né? E a galera mangando... rapaz, tudo é motivo de piada nesse momento.
+- [23:11.00] **creator**: É, sabe?
+- [23:12.00] **creator**: E esses dias aí, até a votação do segundo turno...
+- [23:18.00] **creator**: Cara, a gente vai ver muita cagada ainda, ó.
+- [23:21.00] **creator**: Eu abro o YouTube, né? E escorre merda.
+- [23:26.00] **creator**: Aham.
+- [23:27.00] **creator**: Tô te falando, cara, é uma...
+- [23:29.00] **creator**: Sim.
+- [23:30.00] **creator**: É uma coisa pior do que a outra.
+- [23:32.00] **creator**: E o Renan, cara, eu esperava que o Renan fosse tirar ao menos 10%, entendeu? Alguma coisa assim.
+- [23:39.00] **creator**: Mas 2%, cara, também foi muita humilhação.
+- [23:43.00] **creator**: Olha, olhando o lado do copo meio cheio, né, Marcelo? Tudo bem.
+- [23:50.00] **creator**: Sim. Estamos longe ainda. Mas eu acho que essa última eleição agora está dando uma luzinha no fim do túnel de que o povo está acordando. Tem muita gente ainda dormindo, mas a maioria está acordando para esses caras.
+- [24:07.00] **creator**: Eu acho que o Renan vai ser um grande... talvez o Renan não, mas o partido dele, de certa forma, vai ser um grande opositor, não que vá fazer as mesmas coisas que o PT fez, né?
+- [24:23.00] **creator**: Mas ele vai se tornar o novo PT, porque é um partido opositor, né?
+- [24:30.00] **creator**: Aham.
+- [24:31.00] **creator**: E que a gente vê que, tipo assim, que também é contra o PT, né? E o PT, depois dessa eleição, Lula perdendo, cara, ninguém mais quer o PT.
+- [24:43.00] **creator**: É, eu tenho minhas dúvidas se eles são contra o PT realmente ou se eles só surfam na onda do contra pra conseguir...
+- [24:51.00] **creator**: Talvez sim talvez n mas com certeza o PT caindo ele vai se tornar um novo opositor com certeza Ali ele se mostrou Ele j hoje n eles se mostraram opositores dos dois lados mas nessa de eu p de se opor aos dois lados eu vi um pouco de tend pra na hora que eu preciso eu apoio o PT
+- [25:17.00] **creator**: Então eu tenho minhas dúvidas se... se é direita realmente ou se é uma esquerda disfarçada.
+- [25:25.00] **creator**: Encaixa mais ainda como... como...
+- [25:29.32] **creator**: como oposição, né? Encaixa mais ainda como oposição.
+- [25:32.92] **creator**: Aham. Mas se a gente tiver uma oposição sendo duas direitas,
+- [25:37.28] **creator**: pra economia tá muito bom, não tá?
+- [25:39.20] **creator**: Ah, sim. Melhora. Não tem a dúvida.
+- [25:41.64] **creator**: Se tiver... Tá menos pior, né?
+- [25:43.12] **creator**: Não, se tiver... Ah, beleza, vai ter roubo, mas o objetivo dos caras
+- [25:48.72] **creator**: é ser de direita.
+- [25:50.76] **creator**: Beleza.
+- [25:52.04] **creator**: O ruim é os sem terra, entendeu?
+- [25:55.00] **creator**: Tomando o terreno da gente.
+- [25:57.56] **creator**: O ruim é esse, entendeu? É...
+- [26:03.24] **creator**: O ruim é a esquerda, né? Mas se a gente tiver dois candidatos bons de direita...
+- [26:08.92] **creator**: Por exemplo, agora, se o Renan realmente tivesse chance...
+- [26:12.36] **creator**: Eu acredito que tanto o Renan quanto o Flávio seriam bons candidatos.
+- [26:17.24] **creator**: Talvez não bons, mas melhores do que o PT.
+- [26:20.52] **creator**: Com certeza, entendeu? Menos pior.
+- [26:23.24] **creator**: Só uma coisa, é, mas... bom, bom, bom candidato, realmente, eu nunca vi nesse país, desde a redemocratização...
+- [26:30.90] **creator**: Não, a gente teve, a gente teve a esperança de um bom candidato, que seria, teria sido o Bolsonaro, ele foi a esperança de ser um bom candidato, que não foi.
+- [26:41.70] **creator**: Mas nem o Bolso... Então, mas nem o Bolsonaro viu um projeto de nação, e não precisa de coisas complicadas pra ter um bom projeto de nação.
+- [26:50.30] **creator**: Por exemplo, vamos lá. Eu não consigo entender nesses nossos políticos.
+- [26:55.30] **creator**: Eu entendo que eles gostam de roubar bastante, mas eu entendo também que eles são incompetentes até pra roubar.
+- [27:01.30] **creator**: Porque se eles tornam isso aqui uma galinha dos ovos de ouro muito mais...
+- [27:05.30] **creator**: Era melhor, né? Era melhor, dava pra roubar mais.
+- [27:08.30] **creator**: E, porra, e vamos lá. Eu, se eu tô na posição de um presidente de um país como o Brasil,
+- [27:17.30] **creator**: Eu não tô do lado nem de China nem dos Estados Unidos, eu tô do meu lado.
+- [27:21.54] **creator**: Ent aqui n temos terras raras n temos comida n temos um monte de coisa que China e Estados Unidos est de olho Querem vir pra c explorar Primeira coisa que eu faria beleza
+- [27:38.00] **creator**: Vocês querem isenção pra vir explorar o quê aqui?
+- [27:42.00] **creator**: Ah, eu quero terras raras, eu quero vender carro aí, eu quero... beleza!
+- [27:47.00] **creator**: Vocês vão transferir tecnologia pra nós.
+- [27:50.00] **creator**: Vocês vão gerar indústrias, vocês vão criar indústrias dentro do país
+- [27:55.00] **creator**: É... seria muito bom, mas apesar de ser uma situação muito boa, tipo assim, fazer acordos de transferência de tecnologia com outros países,
+- [28:18.00] **creator**: Exatamente.
+- [28:31.00] **creator**: Exatamente.
+- [28:45.00] **creator**: Exatamente. Então, quem tem tecnologia, tipo, a China, até um tempo atrás, não tinha.
+- [28:51.00] **creator**: O negócio deles era fabricar brinquedo.
+- [28:54.00] **creator**: Exatamente. Entendeu? Não tinha. Eles lutaram pra caramba pra ter.
+- [28:59.00] **creator**: Pegando dos outros, roubando, fazendo acordo, desenvolvendo as próprias, entendeu?
+- [29:07.00] **creator**: Então, mas por mais tecnologia que eles tenham, qualquer país do mundo precisa comer.
+- [29:14.00] **creator**: E nós temos comida.
+- [29:16.76] **creator**: Então só aí já é uma arma poderosíssima de negociação.
+- [29:20.40] **creator**: É, não, a gente pode usar mesmo as táticas deles, né?
+- [29:23.80] **creator**: Exatamente.
+- [29:24.80] **creator**: Negociar, levar tecnologia, tentar fazer outra coisa...
+- [29:31.80] **creator**: Exatamente, só que o nosso problema é que os nossos políticos se vendem muito barato.
+- [29:41.00] **creator**: Eis o problema.
+- [29:44.00] **creator**: É. Isso aí é inegável. Felizmente. O Lula, o Lula outro dia eu tava vendo ele contar uma... uma mentira.
+- [29:54.00] **creator**: mentira? Uma mentira é certeza, o Lula contava. Mais uma mentira? Se bem que dessa vez não foi uma mentira, foi uma meia-verdade.
+- [30:03.00] **creator**: Ele tava falando que o país, né, que o Lula acredita no endividamento do país
+- [30:08.00] **creator**: pra um país crescer.
+- [30:10.00] **creator**: E aí ele citou até os Estados Unidos que a dívida dos Estados Unidos é muito maior.
+- [30:17.00] **creator**: Brasil... um país precisa dever pra crescer.
+- [30:21.00] **creator**: A única coisa que ele não contou, não sei se ele omitiu ou se ele também não sabe,
+- [30:26.00] **creator**: porque eu não duvido que ele não saiba...
+- [30:29.00] **creator**: Eu tava vendo uma matéria justamente que tava falando sobre isso, da qualidade da dívida.
+- [30:38.90] **creator**: É, dívida com juros fixos... Não, é dívida com juros fixos...
+- [30:45.28] **creator**: Não, fixo não.
+- [30:46.72] **creator**: Dívida com juros variáveis que vão mudando ao longo do tempo no contrato,
+- [30:53.66] **creator**: Os Estados Unidos, 2% da dívida dos Estados Unidos é variável, tem juros variáveis.
+- [31:01.34] **creator**: 98% é precificada, é fixo, não tem como alterar no futuro.
+- [31:07.34] **creator**: No Brasil, mais de 50% da dívida tem juros variáveis.
+- [31:13.34] **creator**: Só isso aí já quebra o país.
+- [31:18.86] **creator**: Não dá pra comparar com a dívida dos Estados Unidos.
+- [31:22.26] **creator**: Só nisso aí.
+- [31:24.26] **creator**: É, eu espero que assim...
+- [31:30.26] **creator**: Que... é...
+- [31:32.26] **creator**: É... por um lado, né?
+- [31:36.26] **creator**: Eu gostaria que o Flávio fosse tentar fazer igual o Bolsonaro fez, de tentar resolver os problemas, né?
+- [31:42.26] **creator**: Tentar resolver algumas cagadas.
+- [31:46.26] **creator**: Pra mim, eu acho, nesse momento...
+- [32:18.26] **creator**: Não aguenta, eu termino de infartar.
+- [32:20.26] **creator**: Isso aí é um grande problema.
+- [32:22.26] **creator**: Mas é um grande problema.
+- [32:24.26] **creator**: O Praticamente desde da redemocratiza n s vivemos aqui em governos populistas O Bolsonaro de uma certa forma ele era populista tamb
+- [32:37.00] **creator**: Então, o próprio povo, na sua ignorância, não tá preparado pra alguém que queira resolver, de fato, o problema.
+- [32:46.00] **creator**: Isso que você tá apontando aí, realmente, é um problema sério.
+- [32:50.00] **creator**: Qualquer cara que tentar resolver tudo de uma vez e a popularidade dele foi pro saco, fudeu.
+- [32:57.00] **creator**: É. Fudeu.
+- [32:59.00] **creator**: Se o cara tentar resolver tudo de uma vez e jogando a popularidade dele fora...
+- [33:05.00] **creator**: Aham, fudeu.
+- [33:07.00] **creator**: Pra não ser releger, ele não se relege. Aí o cara... ou o cara é popular ou o cara resolve todos os problemas.
+- [33:13.00] **creator**: Exatamente.
+- [33:15.00] **creator**: Daí isso não tem como fazer as duas coisas. Eu prefiro que ele não resolva tudo agora e vá resolvendo ao longo dos anos...
+- [33:23.00] **creator**: Ao longo do tempo.
+- [33:24.00] **creator**: Ao longo do tempo, mas que a situação vá melhorando, né? Tipo assim, só de você estar subindo, da gente mudar de direção, já melhora muita coisa de você mudar de direção, né?
+- [33:37.00] **creator**: Quando você tá indo numa direção errada pra baixo, constante.
+- [33:40.72] **creator**: Mas se você tá indo pra cima constante, eu acho muito mais positivo você tá melhorando, né?
+- [33:50.02] **creator**: Tipo assim, ah, beleza, em quatro anos ele não vai fazer tudo que tem de fazer.
+- [33:54.86] **creator**: Mas ele em oito vai fazer muito mais do que faria nos quatro.
+- [33:59.04] **creator**: É, porque você já imagina a quantidade... Se ele ganhar, você já imagina como ele vai ser bombardeado.
+- [34:06.94] **creator**: Quantidade de mentira que vão...
+- [34:10.10] **creator**: Vão fazer a mesma coisa que o pai, vão fazer com ele.
+- [34:12.68] **creator**: Vão. Talvez pior. Não tenho dúvida.
+- [34:15.18] **creator**: Não tenho dúvida.
+- [34:18.52] **creator**: Talvez pior, e tudo que eles...
+- [34:21.98] **creator**: Tudo que ele fizer de errado vai ser muito notado.
+- [34:27.40] **creator**: Rapaz, pra te falar a verdade, a vida dele não vai ser muito boa, não.
+- [34:31.40] **creator**: Não vai, não.
+- [34:32.70] **creator**: A vida de um cara desse ainda não é muito boa, não.
+- [34:36.94] **creator**: É... O cara é presidente, mas...
+- [34:40.30] **creator**: A vida dele como senador ia ser muito... ia continuar muito mais tranquila.
+- [34:46.30] **creator**: É, eu acho assim, cara, que pro cara conseguir viver uma vida dessa,
+- [34:52.70] **creator**: eu particularmente n conseguiria viver n Mas pro cara conseguir viver uma vida dessa o cara teria assim que Ele conseguia se sentir bem mesmo ele sendo muito atrasado Sim
+- [35:27.00] **creator**: Quer me ver morto, quer me ver fracassar, quer ver...
+- [35:30.20] **creator**: É, eu tenho a impressão que ele vai ser muito mais equilibrado do que o pai.
+- [35:35.70] **creator**: Ah, isso eu acredito que sim, é mais novo, né?
+- [35:38.20] **creator**: Mas do ponto de vista da experiência política, que ele já tá lá faz tempo,
+- [35:45.20] **creator**: eu fiquei bastante preocupado em ver o comportamento dele com aquele episódio da jornalista que colocou o microfone na cara dele
+- [35:54.20] **creator**: E perguntou sobre o bolso... sobre o... o...
+- [35:58.00] **creator**: o Vorkaro, e ele falou que não conhecia, que não tinha nada a ver.
+- [36:05.00] **creator**: Porque ele foi pego no susto, e ele não soube responder.
+- [36:09.50] **creator**: Aí depois mudou toda a conversa.
+- [36:12.00] **creator**: Aquele episódio me deixou bastante preocupado, eu esperava muito...
+- [36:15.50] **creator**: eu esperava muito mais dele.
+- [36:17.50] **creator**: Não, tem muitos episódios que, tipo assim,
+- [36:20.50] **creator**: Exatamente.
+- [36:36.50] **creator**: Algum episódio.
+- [36:38.16] **creator**: É... cê vê, Ed...
+- [36:40.16] **creator**: O Bolsonaro, o pai, não teria problema nenhum, ele falaria...
+- [36:45.24] **creator**: Ele te falaria na cara.
+- [36:46.66] **creator**: Ele falaria na cara, é, eu pedi patrocínio, sim,
+- [36:49.86] **creator**: e quando eu pedi patrocínio, o cara não era investigado, não era bandido, não era porra nenhuma, e aí?
+- [36:54.94] **creator**: Como é que eu vou adivinhar?
+- [36:57.40] **creator**: É, uma vez que o cara mentiu, ele já...
+- [37:00.56] **creator**: Exatamente, aí você já fica com o pé atrás, muita gente, olha, é pilantra que nem os outros.
+- [37:07.84] **creator**: E aí não vai.
+- [37:09.44] **creator**: Quem é muito radical mesmo não vai votar nele, não vai.
+- [37:14.00] **creator**: Quem é radical a ponto de não votar no Lula que o Lula é ladrão não vai votar nele por suspeitar que ele também é pilantra.
+- [37:22.44] **creator**: É, eu acho que...
+- [37:25.72] **creator**: Eu espero que ele fa um bom governo Tanto que voc viu que o n de absten aumentou mais ainda Teve mais gente ainda que n votou em rela elei passada A vai continuar aumentando porque Vai continuar aumentando porque
+- [37:41.00] **creator**: Eu sinceramente não acredito em nenhum político que vá resolver isso aqui. Não com essa mentalidade que eles têm.
+- [37:50.00] **creator**: Vai continuar aumentando. A questão, a gente sabe que a... é...
+- [37:59.00] **creator**: Eu acho que a questão da abstenção, a abstenção aumentando, eu acho que é muito mais uma questão interna de culpa e decepção.
+- [38:12.00] **creator**: Porque, pra mim, é muito decepcionante votar num cara e, por exemplo, descobrir uma coisa muito ruim dele, me decepcionar com ele, entendeu? Por exemplo, teve muita gente que votou no Bolsonaro, e ele não foi um candidato ruim, foi um candidato bom, mas ele falhou em muita coisa, e essas pessoas se decepcionaram.
+- [38:38.00] **creator**: E preferiam ter votado branco, ter votado nulo, do que ter votado nele.
+- [38:46.00] **creator**: Você sabe por que que eu não me decepciono? Porque eu continuo votando sempre tentando achar o menos pior.
+- [38:53.00] **creator**: Menos pior, é isso mesmo. Eu não acho que o que... o Flávio é o cara. Não, o Flávio não é o cara. Ele é o menos pior.
+- [39:01.00] **creator**: O Flávio não é o cara, ele é o menos pior, então vamos votar nele.
+- [39:07.00] **creator**: Exatamente. É por isso que eu não me decepciono, porque nunca... É o que eu falo, desde que eu comecei a votar, eu nunca votei num candidato por achar que ele era melhor.
+- [39:16.50] **creator**: Eu sempre votei tentando não deixar entrar o pior. E é por isso que eu ainda vou votar até hoje, porque, sinceramente, eu não tenho vontade nenhuma de votar.
+- [39:26.50] **creator**: É, eu não tenho essa vontade, mas agora, nesse momento, cada voto conta.
+- [39:36.50] **creator**: Conta, sem dúvida. Tanto pra um lado quanto pro outro. A gente vai ter...
+- [39:39.50] **creator**: Eu acredito que a gente vai ter um número de justificativa de abstenção de votos brancos muito menor.
+- [39:48.50] **creator**: Será? Nesse mundo. Vamos?
+- [39:50.50] **creator**: Vamos! Porque é o seguinte, o cara que não votou, que ele justificou que ele, é...
+- [39:56.50] **creator**: É... não votou por algum motivo, é... ou votou branco ou votou nulo,
+- [40:07.08] **creator**: E ele vai ter que escolher um dos dois.
+- [40:10.20] **creator**: Ele vai ser incomodado a votar.
+- [40:12.60] **creator**: Por exemplo, teve uma pessoa aqui da minha família, da minha esposa, que não votou.
+- [40:18.20] **creator**: E ela botou ele na parede depois que caiu pro segundo lugar e disse assim, agora tu vai votar.
+- [40:23.88] **creator**: Ah, mas tu vota na puta que pariu. Pois tu vai lá votar na puta que pariu. Não interessa, mas tu vai lá votar.
+- [40:32.88] **creator**: Só não podemos encorajar a votar...
+- [40:36.88] **creator**: Petista. Não pode... não pode votar e não pode... esses aí é bom ficar em casa, descansando, já não gosta de trabalhar mesmo, né?
+- [40:47.88] **creator**: Exatamente. Esses a gente tem que encorajar a ficar em casa.
+- [40:51.88] **creator**: É... Mas...
+- [40:54.88] **creator**: Tem que ficar em casa, tem que ficar descansando, quer... né?
+- [40:59.88] **creator**: É, vamos ver no que que vai dar. Tá complicado, né?
+- [41:05.88] **creator**: É, cara, eu espero que a situação... de alguma forma...
+- [41:12.88] **creator**: Espero mesmo que a situação de alguma forma melhore.
+- [41:16.88] **creator**: A gente tem uma... uma... um resultado positivo, é. Um resultado positivo. Aí na próxima, sendo candidatos bons, ou menos ruins, pode se matar.
+- [41:33.88] **creator**: Pode se matar um quinto... Se fosse uma eleição com um Renan, um Nicolas, um Flávio Bolsonaro, um Bolsonaro, um...
+- [41:45.40] **creator**: Um Quinta Kaguri lá. Se for uma eleição só com candidato oponente, pode se matar.
+- [41:51.60] **creator**: Entendeu? Porque todos são mais ou menos a mesma coisa, todos são mais ou menos o que a gente espera que vai ser bom, tá entendendo?
+- [42:00.04] **creator**: É ruim quando a gente tem um candidato descaradamente ruim ganhando aí, é ruim.
+- [42:07.04] **creator**: Olha, se continuar nessa trajetória, um candidato que eu acredito que pode vir a ser um baita presidente é o Nicolas.
+- [42:21.04] **creator**: É.
+- [42:22.04] **creator**: Esse é uma esperança que eu tenho.
+- [42:25.04] **creator**: N tem v expectativas de candidatos que a gente acredita que v ser candidatos bons entendeu O problema que essas pessoas s iguais ao Renan Elas n t for pra disputar uma presid
+- [42:44.40] **creator**: O problema é que essas pessoas hoje não têm força, não têm popularidade suficiente, não têm conexões suficientes pra disputar uma presidência.
+- [42:55.36] **creator**: Mas se for numa próxima eleição e tiver só pessoas boas que nem eles, cara, por mim, tanto faz quem ganhar.
+- [43:04.48] **creator**: Sendo bons candidatos, entendeu? O ruim é quando tem um candidato filho de uma mãe que nem o que tem agora.
+- [43:11.92] **creator**: Olha, num cenário Flávio, depois...
+- [43:17.92] **creator**: ...Tassísio, depois Nicolas...
+- [43:20.92] **creator**: ...seria um bom...
+- [43:22.92] **creator**: ...seria um bom caminho pra... pra nós.
+- [43:25.92] **creator**: É...
+- [43:26.92] **creator**: Eu acho que se a gente evoluir pra candidatos melhores...
+- [43:31.92] **creator**: ...já melhora muito.
+- [43:33.92] **creator**: Se a gente evoluir pra... pra...
+- [43:35.92] **creator**: ...pra bons candidatos, entendeu?
+- [43:38.92] **creator**: Aham.
+- [43:39.92] **creator**: Eu acho que um caso que o PT volta a se tornar um partido viável só depois que todo mundo que tá hoje dessa geração morrer.
+- [43:47.92] **creator**: Aí talvez ele volte a ser um partido viável, sabe?
+- [43:52.92] **creator**: Eu acho que ninguém vai querer esse cadáver do PT depois que essa coxa toda morrer.
+- [44:00.92] **creator**: Eu acho que a história vai tá... esse partido vai tá tão queimado que ninguém vai querer ressuscitar.
+- [44:06.92] **creator**: E muita gente que tá nele hoje vai pros outros, sabe disso, né?
+- [44:10.42] **creator**: Exatamente. É isso que eu acho.
+- [44:12.42] **creator**: Os malandros continuam mesmo, eles só vão mudar de barco, porque o deles já fundou um.
+- [44:16.92] **creator**: Exatamente. Exatamente. É por aí. É por aí.
+- [44:20.42] **creator**: O cara que se elegeu aqui, é...
+- [44:23.92] **creator**: Mesmo que seja pelo PT, ah, ele se elegeu.
+- [44:26.92] **creator**: Mas na eleição que vem, se o PT não te perder agora e o PT não valer nada, ele não vai entrar pelo PT, ele vai entrar por outro partido.
+- [44:35.92] **creator**: Ele vai entrar pelo partido maior possível, mas...
+- [44:38.92] **creator**: O PT, ele já não... ele vai perder esse apoio... é...
+- [44:44.92] **creator**: Como é que se diz? Esse apoio, é... nos interiores, né?
+- [44:49.92] **creator**: É, o apoio popular, né? O apoio popular.
+- [44:52.92] **creator**: Porque o cara não vai querer ter o nome dele vinculado ao PT.
+- [44:55.92] **creator**: N vai O cara vai vincular um partido bom E t muito e A pr sigla j n ajuda mais porque ficou muito forte Partido das Trevas
+- [45:07.00] **creator**: Ah, isso é... tem muitas nomenclaturas... Tem, essas nomenclaturas já estão sobressaindo mais até do que o nome verdadeiro.
+- [45:19.50] **creator**: É... uma grande quantidade...
+- [45:23.26] **creator**: Há uma grande quantidade de...
+- [45:27.30] **creator**: De... de nomes, né?
+- [45:29.30] **creator**: Pra... pro partido...
+- [45:31.80] **creator**: Pro... pro PT, né?
+- [45:33.80] **creator**: Aham.
+- [45:35.30] **creator**: Assim como vai ter pro PL também.
+- [45:38.80] **creator**: É, exatamente isso.
+- [45:40.80] **creator**: Assim como vai existir pro PL logo em breve também...
+- [45:45.30] **creator**: O PL ficou mais fácil ainda, o partido dos ladrões.
+- [45:47.80] **creator**: É...
+- [45:49.50] **creator**: Assim como PL vai ter as suas... E tem! E tem essa quantidade de pessoas que foi eleita aí...
+- [46:01.50] **creator**: Tem muita... Tem muita... Tem muito lobo, né? Em pele de cordeiro aí nesse... Nossa, e como?
+- [46:10.50] **creator**: Tem muito lobo em pele de cordeiro nesses...
+- [46:15.00] **creator**: Nesses casos, né? Aí de...
+- [46:20.50] **creator**: Desse pessoal que foi eleito, que vão queimar muito pele também, mas ainda vai ser um partido muito forte pra...
+- [46:27.00] **creator**: O que eu acho que devia ser é o cara ser expulso de partido por queimar o partido, entendeu?
+- [46:33.00] **creator**: Aham.
+- [46:34.00] **creator**: Ah, queimou o partido. Tá bom, só que tu não faz mais parte.
+- [46:38.48] **creator**: A partir de agora tu não faz mais parte do PL.
+- [46:42.76] **creator**: Só que os caras preferem ter um cara queimado do lado deles pra apoiar um...
+- [46:48.00] **creator**: Passar uma proposta, do que expulsar o cara.
+- [46:52.96] **creator**: Aham.
+- [46:54.08] **creator**: Aí é foda.
+- [46:56.56] **creator**: Espero que melhore, né?
+- [46:59.00] **creator**: Rapaz, a conversa hoje foi animada, né?
+- [47:01.40] **creator**: Apesar que foi só nós.
+- [47:02.92] **creator**: Falamos... falamos sobre A, até.
+- [47:06.92] **creator**: Pois é, rapaz, nossa conversa hoje foi animada, né? Apesar que foi... apesar que foi sonora, mas...
+- [47:14.92] **creator**: Se duvidar, foi... foi do... foi das chamadas menos caladas dos últimos tempos.
+- [47:24.92] **creator**: Agora falando em A Voc t usando qual mais
+- [47:41.00] **creator**: Cara, é porque o Luís, ele parte de uma filosofia que eu tenho que usar o que eu posso.
+- [47:50.00] **creator**: É.
+- [47:51.00] **creator**: Entende?
+- [47:52.00] **creator**: Sim.
+- [47:53.00] **creator**: Que é uma filosofia que eu não concordo.
+- [47:55.00] **creator**: Hum.
+- [47:56.00] **creator**: Entende? Porque... Eu posso usar qualquer coisa se for pra mim brincar. Sim, concordo.
+- [48:06.00] **creator**: Tá entendendo? Mas a partir que eu desenvolvo um projeto que eu tenho, é... interesse de fato naquele projeto, eu tenho que usar melhor.
+- [48:17.00] **creator**: Por que que eu tenho que usar melhor? Porque, por exemplo, tu... vamos dizer, tu contrata o... o Codex aqui.
+- [48:24.20] **creator**: Sim. E tu contrata o Cloud. Tu põe isso pra fazer o mesmo projeto.
+- [48:27.20] **creator**: Certo? Aham.
+- [48:29.20] **creator**: O Cloud vai acabar o Stoker muito rápido. Sim.
+- [48:33.20] **creator**: Mas ele desenvolve o trabalho praticamente sozinho. Eu deixo ele colocado aqui pra na hora que os tokens voltarem, continuar.
+- [48:42.20] **creator**: Sim. No final, eu tenho um trabalho muito melhor, que eu precisei me envolver muito menos, entendeu? Sim.
+- [48:52.20] **creator**: E ao mesmo passo, se eu deixar o Codex lá, eu vou ter que interferir muito mais, eu vou ter que mexer muito mais, ah, eu vou usar o Astra, eu vou usar o Sol...
+- [49:03.20] **creator**: Sim. Tudo bem, você vai usar o melhor modelo, mas a qualidade dele ainda vai ser inferior aos modelos do Cloud.
+- [49:12.20] **creator**: Ahn. E aí eu vou ter que interferir mais, isso vai consumir mais o meu tempo.
+- [49:16.34] **creator**: O que adianta eu ter mais token, se uma parte daquele token ele vai errar?
+- [49:21.84] **creator**: Sim.
+- [49:22.64] **creator**: Entende? Eu sou louco por modelos novos.
+- [49:25.96] **creator**: Entende? Modelos novos bons, não tô falando de...
+- [49:28.84] **creator**: Ah, lançou um Astra aí, não, e eu... não. Sim.
+- [49:32.14] **creator**: Sou louco por modelos novos bons, por quê?
+- [49:35.06] **creator**: Eu tenho vários projetos que eles são um pouco à frente do meu tempo.
+- [49:39.34] **creator**: Uhum.
+- [49:40.44] **creator**: Entende que eu desenvolvo, mas eles são difíceis pra IA que tem hoje.
+- [49:49.56] **creator**: Por exemplo, eu comecei a desenvolver o projeto do...
+- [49:52.44] **creator**: Eu comecei a desenvolver o projeto do que eu tô fazendo hoje, que é o do financeiro, com
+- [50:06.64] **creator**: Aham, sim.
+- [50:08.64] **creator**: O desempenho era completamente diferente.
+- [50:13.04] **creator**: Ele me deu várias contas, ele me deu vários nãos.
+- [50:19.28] **creator**: Sim.
+- [50:20.48] **creator**: Em métodos, me deu vários métodos, às vezes um pouco imprecisos.
+- [50:24.08] **creator**: Não havia, nos testes reais, não havia uma confiança financeira
+- [50:29.28] **creator**: Que realmente dava muito certo.
+- [50:32.28] **creator**: O Antigram, você usava com a ideia dele ou você usa ele dentro de alguma ideia?
+- [50:37.28] **creator**: Eu usava com a ideia dele e depois passei a utilizar no VS Code.
+- [50:41.78] **creator**: Dentro do Cloud Code mesmo.
+- [50:43.78] **creator**: Você continua com o VS Code? Continuo com o VS Code.
+- [50:47.28] **creator**: Essa é uma dúvida que eu até hoje não cheguei a uma conclusão.
+- [50:50.78] **creator**: Se vale a pena ficar dentro do VS Code ou instalar o Cloud da vida também lá com...
+- [50:57.28] **creator**: O aplicativo. O melhor... Qual que é a melhor ideia que existe hoje?
+- [51:04.28] **creator**: É... pelo incrível que pareça.
+- [51:07.28] **creator**: É... não é o Cloud ali, não é o VS Code usando o Cloud dentro. Sabe qual é?
+- [51:15.28] **creator**: Qual? Chuta.
+- [51:17.28] **creator**: Não vou arriscar. Não vai arriscar, não?
+- [51:20.28] **creator**: Não. A melhor ideia é o Cloud Code Online.
+- [51:25.28] **creator**: Cloud Code Online.
+- [51:28.28] **creator**: É, eu vou reformular a minha colocação. Não é a melhor, mas é a que tem mais ferramentas.
+- [51:36.28] **creator**: Cloud Code Online.
+- [51:38.28] **creator**: Cloud Code Online. Por quê? Tu sabe qual a diferença entre usar no VS Code e no Anti-Gravity o Cloud Code?
+- [51:48.28] **creator**: Porque o... o... o anti-gravity, ele tem muito mais ferramenta do que o... do que o... do que o VS Code.
+- [51:58.06] **creator**: Então, tipo assim, tu tem o navegadorzinho guiado, tu tem muita ferramenta top no anti-gravity, que não tem no VS Code.
+- [52:06.40] **creator**: Por que que a galera insiste em usar o VS Code, então? Porque o VS Code é leve.
+- [52:10.78] **creator**: Uhum.
+- [52:11.74] **creator**: Entendeu? O VS Code é leve, então é mais fácil ter uma ferramenta leve.
+- [52:16.12] **creator**: Sim.
+- [52:16.62] **creator**: Qual que o segundo grau Eu tenho no Cloud Code no PC eu tenho um n de ferramentas diferentes das que eu tenho no Antigravity que elas n s todas Eu n tenho todas as ferramentas que eu tenho no Antigravity que eu tenho l mas eu tenho ferramentas l que n tenho no Antigravity
+- [52:36.80] **creator**: Tá.
+- [52:37.80] **creator**: Entendeu? Então, tipo assim, seriam os dois mais completos.
+- [52:41.30] **creator**: Sim.
+- [52:42.30] **creator**: Mas quando eu utilizo o Cloud Code Online, é outro salto. É muito melhor o Cloud Code Online em questão de ferramentas. Tu vê tanta coisa assim que abre na tela que tu não vê abrindo nos outros.
+- [52:55.80] **creator**: É muito top. Qual que é a dificuldade dele? É porque o Cloud Code, ele não te disponibiliza um ambiente local.
+- [53:04.48] **creator**: Você tem que desenvolver com base no... no... no... no GitHub.
+- [53:11.64] **creator**: Você tem que ter um espaço no GitHub pra ele ir jogando os arquivos.
+- [53:15.52] **creator**: Só que no GitHub você não executa.
+- [53:19.56] **creator**: Então você não consegue colocar o projeto pra produção.
+- [53:23.56] **creator**: A comunicação, ela é estrita entre o Cloud Code e o GitHub. Você não sai pra fora igual você sai no local.
+- [53:35.56] **creator**: Então, assim, é fenomenal pra você começar um projeto. Mas a partir que você precisa executar ele, você tem que sair pra um dos dois.
+- [53:46.56] **creator**: Ou até utilizar os dois. Sim.
+- [53:50.02] **creator**: E eu acho fenomenal o Cloud Code também online pra quem tá aprendendo.
+- [53:54.02] **creator**: Porque ele te obriga a começar com GitHub.
+- [53:57.06] **creator**: Aham. Não é igual o do Google que tem online lá no...
+- [54:01.66] **creator**: no IA Studio, que, tipo assim, tu entra lá, aí tu sincroniza com GitHub e tu baixa, não.
+- [54:08.56] **creator**: Tu é obrigado a colocar um negócio ali logo no começo.
+- [54:15.06] **creator**: Aham.
+- [54:16.06] **creator**: Tu tem que ter logo no começo.
+- [54:19.06] **creator**: Ou seja, tu já começa da maneira correta.
+- [54:23.06] **creator**: Correta.
+- [54:24.06] **creator**: Tu já começa trabalhando direito.
+- [54:27.06] **creator**: E eu acho que isso aí é uma coisa que faz toda a diferença, entendeu? Na hora de...
+- [54:33.06] **creator**: de... de você começar. Porque você já é obrigado a começar da forma correta.
+- [54:39.06] **creator**: Uhum.
+- [54:40.06] **creator**: E aí é muito bom. Aí, ah, beleza.
+- [54:42.06] **creator**: Aí conforme foram lançando os modelos, meus modelos novos, os projetos que eu tinha, que o modelo não dava conta, foram evoluindo.
+- [54:53.00] **creator**: Saiu 4 a eu j consegui fazer o projeto da liga com o IAP o WhatsApp Uhum Saiu o 5 a ele se tornou vi quando chegou o Opus 5
+- [55:10.00] **creator**: O 4.8 ainda era um...
+- [55:13.00] **creator**: Ainda era bom, funcionava, mas não era escalável.
+- [55:17.00] **creator**: Aí veio o 5.
+- [55:18.00] **creator**: Sim.
+- [55:19.00] **creator**: O 5 tornou ele viável.
+- [55:23.00] **creator**: E o Fable.
+- [55:54.00] **creator**: ...de possibilidades, de operações, entendeu?
+- [55:57.14] **creator**: Criou motores que passam uma semana rodando, tentando combinações, entendeu?
+- [56:04.40] **creator**: Aham.
+- [56:05.40] **creator**: É um negócio realmente incrível, entendeu?
+- [56:09.20] **creator**: Aí, tipo assim, veio as atualizações, Opus 5.5, Fable 5.1,
+- [56:16.90] **creator**: e tudo isso só foi tornando os projetos que eu tenho bons cada vez melhores.
+- [56:22.30] **creator**: E isso também se tornou realidade no vídeo. Porque os vídeos, tu sabe que eu faço vídeo, é... desde do... do quê? Desde que a gente tava fazendo sem IA, a gente fazia no N8N, né?
+- [56:36.50] **creator**: Aham.
+- [56:37.50] **creator**: com... é... com os recursos que a gente tinha.
+- [56:42.50] **creator**: Sim. Então, assim, a gente já fazia os videozinho, é... só... só com... com conta matemática, né?
+- [56:51.00] **creator**: Uhum. Sem... sem IA. Aí veio com IA, né? No começo do ano passado veio a IA pra... o VO3.
+- [57:00.30] **creator**: Pronto, revolucionou, começamos a fazer, né? Aí, tipo assim, vem melhorando.
+- [57:06.30] **creator**: Hoje, aí, tipo assim, foi melhorando as edições, a finalização de cada vídeo.
+- [57:11.58] **creator**: Cara, hoje eu tô com um editor de vídeo tão bom,
+- [57:14.98] **creator**: que ele é capaz de reproduzir qualquer efeito do... do... do YouTube.
+- [57:21.58] **creator**: Entendeu? Tipo assim, eu tava fazendo vídeo de react,
+- [57:24.02] **creator**: ah n eu quero que seja feito igual o do cara que usa o aplicativo l pago que X que um choquezinho um fogo um neg Um abalo um corte na c do cara sabe Na hora que o cara t falando alguma coisa Funciona
+- [57:40.50] **creator**: Não tem nada que ele não faça hoje no vídeo. E eu tô morrendo de ansiedade pelo próximo modelo. Porque o próximo modelo vai tornar meus vídeos melhores ainda.
+- [57:54.00] **creator**: Vai tornar o meu sistema de cripto mais lucrativo, porque ele vai enxergar uma estratégia que os outros não enxergaram.
+- [58:01.44] **creator**: Vai tornar o meu Hermes KAL melhor ainda.
+- [58:08.24] **creator**: Então, assim, eu vivo na busca do novo modelo que saiu.
+- [58:16.40] **creator**: Mas não o novo modelo que saiu, um Queen. Não o novo modelo que saiu, é... X. O modelo top de linha.
+- [58:26.04] **creator**: Sim.
+- [58:27.04] **creator**: Entendeu?
+- [58:29.04] **creator**: O modelo top de linha. Ah, ó, por exemplo, eu tô um pouco ansioso agora pelo modelo do Google que vai... que saiu, né?
+- [58:36.04] **creator**: Que a galera tá testando.
+- [58:38.04] **creator**: Qual que é?
+- [58:40.04] **creator**: É... eu não lembro o nome do modelo, mas já saiu um... deixa eu ver aqui o nome do modelo.
+- [58:44.04] **creator**: Eu tô perguntando porque eu acho que é o que eu vi também.
+- [58:47.04] **creator**: O novo modelo...
+- [58:50.04] **creator**: Ele me doou.
+- [58:52.04] **creator**: Vamos ver o nome dele.
+- [58:56.04] **creator**: É o Argon.
+- [58:57.04] **creator**: É, esse aí mesmo.
+- [58:59.04] **creator**: Eu não vi nada, mas eu já ouvi a chamada.
+- [59:01.04] **creator**: Dizem que esse modelo, sim, pode competir com o Fable.
+- [59:07.04] **creator**: Dizem que ele é bom ou até melhor, só que a gente não sabe.
+- [59:12.04] **creator**: É.
+- [59:13.04] **creator**: Se ele for bom, de fato, como o Fable, se ele for... a minha expectativa é que ele seja melhor, porque se ele for igual ou inferior, eu já tenho o Fable.
+- [59:27.24] **creator**: Aham, sim. Não vai mudar nada na minha realidade.
+- [59:30.24] **creator**: No meus... no meus sistemas, entendeu? Não vai mudar nada.
+- [59:35.24] **creator**: Então, eu tenho expectativa que ele seja melhor.
+- [59:39.24] **creator**: Uhum.
+- [59:40.24] **creator**: Se ele não for melhor, eu aguardo o próximo lançamento do Cloud.
+- [59:44.24] **creator**: Um Oppo i6, um... um Fable 6, entendeu?
+- [59:50.24] **creator**: Então...
+- [59:51.24] **creator**: Sim.
+- [59:52.24] **creator**: E aí, esse próximo lançamento vai trazer pra mim uma qualidade melhor no meu...
+- [59:57.24] **creator**: no meu Zap, mas eu não trabalho com modelos de segunda categoria.
+- [60:01.24] **creator**: Uhum.
+- [60:11.00] **creator**: É, eu até... eu entendo. Eu até entendo que alguns projetos até dá pra você ir pra um modelo intermediário, mas tem projeto que, por exemplo, esse projeto teu de cripto aí não dá pra brincar, né?
+- [60:27.00] **creator**: Exatamente, não dá pra brincar.
+- [60:30.00] **creator**: Ah, eu vou pagar aqui 100 reais a menos e vou deixar de ganhar mil reais se aquele modelo poderia me ajudar a ganhar ou vou perder nesse modelo... Não dá pra brincar, não dá pra usar um modelo ruim.
+- [60:43.00] **creator**: Esse negócio de cripto você já tá operando pra valer ou você tá só em simulação?
+- [60:49.00] **creator**: Eu tô operando pra valer faz a dia.
+- [60:51.00] **creator**: Faz dias? E como é que tá o saldo?
+- [60:53.00] **creator**: Tá bom demais, ó.
+- [60:55.00] **creator**: Tá bom demais?
+- [60:57.00] **creator**: Bom demais, eu tô alegre, satisfeito e feliz.
+- [61:02.00] **creator**: Ah, isso aí vai virar um produto? O que você vai fazer? Você só vai continuar ganhando dinheiro?
+- [61:06.50] **creator**: Eu acho que eu vou só continuar ganhando dinheiro.
+- [61:09.00] **creator**: É, não acho que seja mau negócio, não.
+- [61:11.00] **creator**: É, não, é porque, tipo assim, eu fiz pra mim.
+- [61:13.50] **creator**: Sim.
+- [61:14.50] **creator**: Tá entendendo? Aí, tipo assim, a partir que eu abro pra outras pessoas, é... não é mais segredo.
+- [61:22.50] **creator**: Sim, lógico.
+- [61:23.50] **creator**: Se eu pegar um... se eu, por exemplo, for mostrar ele aqui, ensinar o cara a fazer alguma coisa do tipo, o cara contrata um Fable e ele faz um igualzinho.
+- [61:34.74] **creator**: Aham.
+- [61:35.74] **creator**: Entendeu? Que nem já fizeram com o Hermes Cow, porque o Fable, ele vai pegar o visual, vai tentar entender o que é que tem por trás, entendeu? Vai fazer a engenharia reversa.
+- [61:47.16] **creator**: Aham, sim.
+- [61:48.16] **creator**: E ele vai conseguir ter um resultado muito parecido Uhum Entende E a vai conseguir ter um resultado muito parecido J o o se eu for por exemplo vender ele eu n vou vender pro automador vou
+- [62:02.32] **creator**: vender pro cara que tá no mercado financeiro, que é trader.
+- [62:06.38] **creator**: Só que eu tô tentando entrar nesse e-mail e eu não consigo.
+- [62:09.39] **creator**: Entende?
+- [62:10.39] **creator**: Eu não tenho grupo de WhatsApp, eu não tenho nada ainda, eu tenho que pegar, eu tenho que
+- [62:15.44] **creator**: começar a entrar nesse e-mail.
+- [62:17.28] **creator**: E eu vou vender pro cara que não entende nada de IA.
+- [62:19.92] **creator**: Que ele só quer chegar...
+- [62:21.92] **creator**: E eu fiz, é...
+- [62:25.92] **creator**: Três níveis pro cara...
+- [62:27.92] **creator**: Na verdade tem vários perfis.
+- [62:29.92] **creator**: Mas tem três níveis pro cara trabalhar.
+- [62:31.92] **creator**: Um que é o...
+- [62:33.92] **creator**: Eu chamei até de apostas.
+- [62:37.92] **creator**: Porque, é... ele é ridículo.
+- [62:39.92] **creator**: Ele é igual o que o pessoal faz,
+- [62:41.92] **creator**: entendeu? Aí, ah, não, tu vai colocar um cruzamento
+- [62:43.92] **creator**: de uma... dessa
+- [63:15.92] **creator**: Não se sabe quando ele vai parar de subir e nem quanto que ele pode dar de negativo até ele voltar a subir.
+- [63:22.92] **creator**: É o que você tá fazendo é day trade com...
+- [63:25.92] **creator**: Você tá fazendo é day trade com cripto, não é isso?
+- [63:28.92] **creator**: É, com cripto.
+- [63:29.92] **creator**: Aham.
+- [63:30.92] **creator**: Aí vem... ó, por exemplo, day trade é uma coisa que não existe lucrativo dentro da... do algoritmo.
+- [63:38.92] **creator**: Sim.
+- [63:39.92] **creator**: Sim Porque todas as velas que tem resultado elas s velas a partir de 4 horas 4 horas e 1 dia em diante Ent tu n tem como fazer vezes vai ter dia que n vai ter opera
+- [63:56.01] **creator**: Entende? Quando se trata de mercado... sério. Que não é o caso da minha tabela lá do apostas, né?
+- [64:04.01] **creator**: Uhum. Que aí o cara entra, ele sobe até onde ele quer, ele desce até onde quer, a IA não opera.
+- [64:32.01] **creator**: Então, Emerson, mas indo nessa linha aí que você já fez com o cripto, não seria a mesma lógica pra fazer com ações binárias, por exemplo?
+- [64:42.01] **creator**: Não. Não? Não. Porque é o seguinte, é... o segundo modo que eu fiz, que é o modo oportunidades, que é assim, são aquelas que a IA não entrou, não entraria, mas que a pessoa pode entrar.
+- [65:01.01] **creator**: Que é onde vem a mesma questão das opções binárias.
+- [65:08.01] **creator**: Porque o que eu ofereço pro cara é duas coisas. No apostas eu ofereço sinal de entrada.
+- [65:14.01] **creator**: Certo. Certo.
+- [65:16.01] **creator**: E no apostas eu ofereço sinal de entrada e o bot pra ele operar.
+- [65:23.01] **creator**: Ele ainda tem risco, mas ele sabe quanto que é o risco, ele sabe quanto ele pode ganhar e ele sabe que o bot vai operar.
+- [65:30.01] **creator**: eu acho que isso a O que
+- [65:55.01] **creator**: Ah, o Forex? Não deu?
+- [66:09.01] **creator**: Sério? Tô te falando. Então, tipo assim, o Forex, o cripto, ele tem muito mais padrões.
+- [66:15.66] **creator**: Uhum. Então, eu posso fazer pro mercado de ações, o apostas, e talvez posso fazer o de oportunidades? Posso.
+- [66:23.66] **creator**: Sim. O... posso fazer o... pro Forex? Posso.
+- [66:27.66] **creator**: Mas eu não garanto nenhum lucro pro cara. Ahn.
+- [66:31.66] **creator**: Aí vem o 3, que é o automático. Aí esse é o melhor dos mundos.
+- [66:36.66] **creator**: Porra, isso é bem... isso que você tá falando é bem contra-intuitivo, porque eu que não mexo com esse negócio de cripto, não mexo com nada disso, mas, empiricamente, eu achava que o cripto seria o pior deles.
+- [66:48.66] **creator**: Não.
+- [66:49.16] **creator**: Temos de...
+- [66:50.16] **creator**: Pelo incrível que pareça, o cripto é o melhor deles.
+- [66:55.16] **creator**: Que coisa incrível.
+- [66:56.16] **creator**: É o mais previsível. Até porque uma moeda, ela se baseia na outra. Elas estão amarradas.
+- [67:03.16] **creator**: Sim.
+- [67:04.16] **creator**: Por exemplo, tu tem o dólar, vamos dizer lá, tu vai ter o Forex, tu vai ter o dólar, tu vai ter o Yuan, tu vai ter os ativos lá, beleza.
+- [67:15.16] **creator**: Tu vai ter os ativos lá, ok.
+- [67:18.16] **creator**: Desses ativos que você vai... que você vai entrar, eles são contra-ativos.
+- [67:27.66] **creator**: Tipo assim, não quer dizer que porque o dólar caiu, o Yuan vai cair.
+- [67:32.66] **creator**: Ah, sim. Uhum.
+- [67:34.97] **creator**: Cê entende? Sim.
+- [67:36.80] **creator**: Quando se trata de cripto, é outra

@@ -1,0 +1,747 @@
+{
+ "part": [
+  1068.0,
+  1142.0
+ ],
+ "keeps": [
+  [
+   1068.0,
+   1069.2368119999999
+  ],
+  [
+   1071.3769170000003,
+   1072.475125
+  ],
+  [
+   1073.1935,
+   1073.693562
+  ],
+  [
+   1077.8438540000002,
+   1078.344437
+  ],
+  [
+   1081.448542,
+   1083.464875
+  ],
+  [
+   1085.3949380000001,
+   1095.396063
+  ],
+  [
+   1095.5363750000001,
+   1101.820188
+  ],
+  [
+   1103.2211040000002,
+   1110.692042
+  ],
+  [
+   1110.9017500000002,
+   1125.898521
+  ],
+  [
+   1126.593354,
+   1130.7178959999999
+  ],
+  [
+   1132.4356870000001,
+   1137.3041249999999
+  ],
+  [
+   1137.411125,
+   1139.986167
+  ],
+  [
+   1140.122125,
+   1142.0
+  ]
+ ],
+ "duration_out": 57.55054199999745,
+ "zoom": [
+  [
+   0.36,
+   2.27,
+   1
+  ],
+  [
+   3.687,
+   4.637,
+   2
+  ],
+  [
+   7.457,
+   11.607,
+   1
+  ],
+  [
+   11.457,
+   15.607,
+   2
+  ],
+  [
+   15.457,
+   19.607,
+   1
+  ],
+  [
+   19.457,
+   21.567,
+   2
+  ],
+  [
+   22.676,
+   24.886,
+   1
+  ],
+  [
+   32.286,
+   34.756,
+   2
+  ],
+  [
+   56.351,
+   57.521,
+   1
+  ]
+ ],
+ "content_zoom": [
+  [
+   7.907059999998819,
+   9.057059999998819
+  ],
+  [
+   13.907059999998818,
+   15.057059999998819
+  ],
+  [
+   34.156123999998,
+   35.306123999998
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 7.957059999998819,
+   "text": "3 MESES ATRÁS",
+   "emoji": "⏰"
+  },
+  {
+   "t": 13.957059999998819,
+   "text": "NEM ERA VIÁVEL",
+   "emoji": "😱"
+  },
+  {
+   "t": 34.206123999998,
+   "text": "ENCURTAR O TEMPO",
+   "emoji": "⚡"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 7.957059999998819,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 13.957059999998819,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Knife Slash - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 25.897743899998854,
+   "file": "D:\\manhwa-react\\assets\\sfx\\like.wav"
+  },
+  {
+   "t": 34.206123999998,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Minecraft Sword Armor Break - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 55.05054199999745,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 2.8,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_watchtoend.mov",
+   "dur": 1.7,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 7.857059999998819,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 7.957059999998819,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_23f0_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 13.85705999999882,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 13.85705999999882,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 13.957059999998819,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 25.897743899998854,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_likeburst.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 34.106123999998,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 34.106123999998,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_confetti.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 34.206123999998,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_26a1_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 55.05054199999745,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\jungle_survival_theme.mp3",
+ "meta": {
+  "hook": "3 MESES ATRÁS ISSO NEM EXISTIA",
+  "title": "Essa operação só existe por causa de um modelo de IA de 3 meses 🤯🧠 #shorts #ia",
+  "description": "O modelo de IA que tornou essa estratégia viável foi lançado há apenas 3 meses! Antes disso, a operação nem funcionava.\nE a tendência é encurtar esse tempo cada vez mais.\nImagina daqui mais 3 meses? Comenta o que você acha! 👇\n\n#shorts #react #ia #inteligenciaartificial #trading #bot #modelo #fable #investimento #cripto #futuro #tecnologia #automacao #inovacao #dinheiro",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#ia",
+   "#trading",
+   "#modelo",
+   "#futuro",
+   "#tecnologia"
+  ],
+  "tags": [
+   "react",
+   "modelo de ia",
+   "fable",
+   "opus",
+   "inteligencia artificial",
+   "trading bot",
+   "evolucao ia",
+   "investimento",
+   "cripto",
+   "futuro",
+   "tecnologia",
+   "automacao",
+   "inovacao",
+   "mercado financeiro",
+   "dinheiro",
+   "estrategia"
+  ],
+  "cta": "Segue pra acompanhar o futuro!",
+  "mood": "tense_dramatic",
+  "music": true,
+  "pinned_comment": "Daqui 3 meses, quanto você acha que a IA vai render? 🚀",
+  "title_alternatives": [
+   "Há 3 meses essa estratégia era impossível — a IA mudou tudo ⚡💰 #shorts #trading",
+   "O modelo de IA tem 3 meses e já rende 57% ao ano 🧠🔥 #shorts #ia"
+  ],
+  "work": "BOT DE TRADING COM IA",
+  "channel": "assistiainvestimentos"
+ },
+ "channel": "assistiainvestimentos",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1368_56_7.png",
+  "overlap": 56,
+  "y": 608,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_22c55e_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "mas",
+   "s": 0.36000000000012733,
+   "e": 0.4800000000000182,
+   "p": 0.9,
+   "lip": 0.002595944191966625,
+   "speaker": "creator"
+  },
+  {
+   "w": "vamo",
+   "s": 0.4800000000000182,
+   "e": 0.7000000000000455,
+   "p": 0.9,
+   "lip": 0.002776383359057113,
+   "speaker": "creator"
+  },
+  {
+   "w": "lá.",
+   "s": 0.7000000000000455,
+   "e": 1.2368119999998726,
+   "p": 0.9,
+   "lip": 0.001638283102497879,
+   "speaker": "creator"
+  },
+  {
+   "w": "Quando...",
+   "s": 1.3598949999995966,
+   "e": 2.1198949999995875,
+   "p": 0.9,
+   "lip": 0.0002074566015591071,
+   "speaker": "creator"
+  },
+  {
+   "w": "foi",
+   "s": 3.687122999999019,
+   "e": 3.847122999999101,
+   "p": 0.9,
+   "lip": 0.0022905580290400506,
+   "speaker": "creator"
+  },
+  {
+   "w": "lançado",
+   "s": 3.847122999999101,
+   "e": 4.287122999999156,
+   "p": 0.9,
+   "lip": 0.002834786425158866,
+   "speaker": "creator"
+  },
+  {
+   "w": "em",
+   "s": 4.287122999999156,
+   "e": 4.487122999998974,
+   "p": 0.9,
+   "lip": 0.0017492998593403794,
+   "speaker": "creator"
+  },
+  {
+   "w": "Três",
+   "s": 7.457059999998819,
+   "e": 8.817059999998946,
+   "p": 0.9,
+   "lip": 0.005789912190404669,
+   "speaker": "creator"
+  },
+  {
+   "w": "atrás.",
+   "s": 8.037079999998696,
+   "e": 8.437059999998837,
+   "p": 0.9,
+   "lip": 0.005042723968670508,
+   "speaker": "creator"
+  },
+  {
+   "w": "meses",
+   "s": 8.817059999998946,
+   "e": 9.257059999998773,
+   "p": 0.9,
+   "lip": 0.013005611536658485,
+   "speaker": "creator"
+  },
+  {
+   "w": "atrás.",
+   "s": 9.257059999998773,
+   "e": 9.997059999998783,
+   "p": 0.9,
+   "lip": 0.00948830389425536,
+   "speaker": "creator"
+  },
+  {
+   "w": "Então",
+   "s": 9.997059999998783,
+   "e": 10.6170599999989,
+   "p": 0.9,
+   "lip": 0.00657960596171981,
+   "speaker": "creator"
+  },
+  {
+   "w": "até",
+   "s": 10.6170599999989,
+   "e": 10.897059999998874,
+   "p": 0.9,
+   "lip": 0.0069197167172296405,
+   "speaker": "creator"
+  },
+  {
+   "w": "três",
+   "s": 10.897059999998874,
+   "e": 11.317059999998946,
+   "p": 0.9,
+   "lip": 0.013914196325296255,
+   "speaker": "creator"
+  },
+  {
+   "w": "meses",
+   "s": 11.317059999998946,
+   "e": 11.71705999999881,
+   "p": 0.9,
+   "lip": 0.014197492573939298,
+   "speaker": "creator"
+  },
+  {
+   "w": "atrás",
+   "s": 11.71705999999881,
+   "e": 12.097059999998692,
+   "p": 0.9,
+   "lip": 0.01631086317540015,
+   "speaker": "creator"
+  },
+  {
+   "w": "essa",
+   "s": 12.097059999998692,
+   "e": 12.297059999998737,
+   "p": 0.9,
+   "lip": 0.013851848972453675,
+   "speaker": "creator"
+  },
+  {
+   "w": "operação",
+   "s": 12.297059999998737,
+   "e": 12.777059999998755,
+   "p": 0.9,
+   "lip": 0.017299719348647116,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 12.777059999998755,
+   "e": 12.9770599999988,
+   "p": 0.9,
+   "lip": 0.018812477017651118,
+   "speaker": "creator"
+  },
+  {
+   "w": "era",
+   "s": 12.9770599999988,
+   "e": 13.197059999998828,
+   "p": 0.9,
+   "lip": 0.02004661964404798,
+   "speaker": "creator"
+  },
+  {
+   "w": "nem",
+   "s": 13.197059999998828,
+   "e": 13.437059999998837,
+   "p": 0.9,
+   "lip": 0.022474355279471427,
+   "speaker": "creator"
+  },
+  {
+   "w": "viável.",
+   "s": 13.437059999998837,
+   "e": 14.437059999998837,
+   "p": 0.9,
+   "lip": 0.01106268807682484,
+   "speaker": "creator"
+  },
+  {
+   "w": "Uhum.",
+   "s": 14.4770599999988,
+   "e": 15.337059999998928,
+   "p": 0.9,
+   "lip": 0.0011353782923294697,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ela",
+   "s": 15.337059999998928,
+   "e": 15.976747999998679,
+   "p": 0.9,
+   "lip": 0.0036444323179074737,
+   "speaker": "creator"
+  },
+  {
+   "w": "existiu",
+   "s": 15.976747999998679,
+   "e": 16.916747999998506,
+   "p": 0.9,
+   "lip": 0.007497969995438659,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 16.916747999998506,
+   "e": 17.056747999998606,
+   "p": 0.9,
+   "lip": 0.01247438631637955,
+   "speaker": "creator"
+  },
+  {
+   "w": "viabilidade",
+   "s": 17.056747999998606,
+   "e": 17.896767999998474,
+   "p": 0.9,
+   "lip": 0.02089662008748699,
+   "speaker": "creator"
+  },
+  {
+   "w": "dela",
+   "s": 17.896767999998474,
+   "e": 18.33674799999858,
+   "p": 0.9,
+   "lip": 0.02117889112299105,
+   "speaker": "creator"
+  },
+  {
+   "w": "por",
+   "s": 18.33674799999858,
+   "e": 18.556747999998606,
+   "p": 0.9,
+   "lip": 0.01683116597803076,
+   "speaker": "creator"
+  },
+  {
+   "w": "um",
+   "s": 18.556747999998606,
+   "e": 18.73672799999872,
+   "p": 0.9,
+   "lip": 0.013645412575685455,
+   "speaker": "creator"
+  },
+  {
+   "w": "modelo",
+   "s": 18.73672799999872,
+   "e": 19.25674799999865,
+   "p": 0.9,
+   "lip": 0.013092228950828918,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 19.25674799999865,
+   "e": 19.45674799999847,
+   "p": 0.9,
+   "lip": 0.01374839492941445,
+   "speaker": "creator"
+  },
+  {
+   "w": "nasceu",
+   "s": 19.45674799999847,
+   "e": 19.99674799999866,
+   "p": 0.9,
+   "lip": 0.02171286367657798,
+   "speaker": "creator"
+  },
+  {
+   "w": "três",
+   "s": 19.99674799999866,
+   "e": 20.296747999998615,
+   "p": 0.9,
+   "lip": 0.02076744254341638,
+   "speaker": "creator"
+  },
+  {
+   "w": "meses",
+   "s": 20.296747999998615,
+   "e": 20.59674799999857,
+   "p": 0.9,
+   "lip": 0.020310973842175565,
+   "speaker": "creator"
+  },
+  {
+   "w": "atrás.",
+   "s": 20.59674799999857,
+   "e": 21.416747999998506,
+   "p": 0.9,
+   "lip": 0.013575524582686665,
+   "speaker": "creator"
+  },
+  {
+   "w": "sabe",
+   "s": 22.67583199999831,
+   "e": 23.17583199999831,
+   "p": 0.9,
+   "lip": 0.00877846346863951,
+   "speaker": "creator"
+  },
+  {
+   "w": "daqui",
+   "s": 23.17583199999831,
+   "e": 23.4358319999983,
+   "p": 0.9,
+   "lip": 0.009453178919984456,
+   "speaker": "creator"
+  },
+  {
+   "w": "três",
+   "s": 23.4358319999983,
+   "e": 23.83581199999844,
+   "p": 0.9,
+   "lip": 0.012442609095681885,
+   "speaker": "creator"
+  },
+  {
+   "w": "meses",
+   "s": 23.83581199999844,
+   "e": 24.235831999998254,
+   "p": 0.9,
+   "lip": 0.010770028653897638,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 24.235831999998254,
+   "e": 24.375831999998354,
+   "p": 0.9,
+   "lip": 0.008808670140239276,
+   "speaker": "creator"
+  },
+  {
+   "w": "gente",
+   "s": 24.375831999998354,
+   "e": 24.515831999998227,
+   "p": 0.9,
+   "lip": 0.008065398945911429,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 24.515831999998227,
+   "e": 24.735831999998254,
+   "p": 0.9,
+   "lip": 0.004352863917626978,
+   "speaker": "creator"
+  },
+  {
+   "w": "Encurtar",
+   "s": 32.286123999997926,
+   "e": 32.666123999998035,
+   "p": 0.9,
+   "lip": 0.005658908397494564,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 32.666123999998035,
+   "e": 32.906123999998044,
+   "p": 0.9,
+   "lip": 0.011010213867826699,
+   "speaker": "creator"
+  },
+  {
+   "w": "tempo.",
+   "s": 32.906123999998044,
+   "e": 33.68612399999802,
+   "p": 0.9,
+   "lip": 0.009658938197445703,
+   "speaker": "creator"
+  },
+  {
+   "w": "A",
+   "s": 33.68612399999802,
+   "e": 33.80612399999791,
+   "p": 0.9,
+   "lip": 0.005837196362841114,
+   "speaker": "creator"
+  },
+  {
+   "w": "gente",
+   "s": 33.80612399999791,
+   "e": 33.886123999997906,
+   "p": 0.9,
+   "lip": 0.00621555207243693,
+   "speaker": "creator"
+  },
+  {
+   "w": "tem",
+   "s": 33.82612399999789,
+   "e": 33.926123999998026,
+   "p": 0.9,
+   "lip": 0.006374768472099873,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma...",
+   "s": 33.926123999998026,
+   "e": 34.34612399999787,
+   "p": 0.9,
+   "lip": 0.004648191477133819,
+   "speaker": "creator"
+  },
+  {
+   "w": "A",
+   "s": 33.706123999998,
+   "e": 33.786123999998,
+   "p": 0.9,
+   "lip": 0.005464642007196871,
+   "speaker": "creator"
+  },
+  {
+   "w": "tendência",
+   "s": 33.72612399999798,
+   "e": 34.52612399999816,
+   "p": 0.9,
+   "lip": 0.0038256154722557207,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 34.52612399999816,
+   "e": 34.60612399999816,
+   "p": 0.9,
+   "lip": 0.0015415846771779705,
+   "speaker": "creator"
+  },
+  {
+   "w": "Não,",
+   "s": 56.350541999997404,
+   "e": 57.110541999997395,
+   "p": 0.9,
+   "lip": 0.0027327052341194263,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 57.110541999997395,
+   "e": 57.27054199999748,
+   "p": 0.9,
+   "lip": 0.00589101635135912,
+   "speaker": "creator"
+  },
+  {
+   "w": "tu",
+   "s": 57.27054199999748,
+   "e": 57.37054199999761,
+   "p": 0.9,
+   "lip": 0.007241392408736453,
+   "speaker": "creator"
+  }
+ ]
+}

@@ -1,0 +1,100 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "Kim Ojin",
+   "principal": true,
+   "aparicoes": 61,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1056.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 5208.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 192.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1908.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 5058.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1920.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Messy dark hair parted in the middle, dark eyes, wearing a reddish-brown vest over a white shirt.",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h02",
+   "nome": "Kim Ojin",
+   "principal": false,
+   "aparicoes": 18,
+   "arquivos": [
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3972.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 2958.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3960.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Purple/lavender hair tied back, light-colored eyes, typically wears professional attire or casual clothing, appears as a young adult male veterinarian",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h03",
+   "nome": "Kim Ojin",
+   "principal": false,
+   "aparicoes": 12,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3906.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4194.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 3888.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 4398.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 4734.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 4392.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Blonde wavy medium-length hair, blue eyes, wearing a light blue vest over a white collared shirt",
+   "protagonista": true,
+   "adulto": true
+  }
+ ]
+}

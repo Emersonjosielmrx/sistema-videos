@@ -1,0 +1,645 @@
+{
+ "name": "agendamento banco",
+ "nodes": [
+  {
+   "parameters": {
+    "public": true,
+    "options": {}
+   },
+   "id": "ea38cc58-96f0-431c-ab02-b6aa1b10518c",
+   "name": "When chat message received",
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "position": [
+    -2048,
+    240
+   ],
+   "webhookId": "2575ed61-a37f-424c-b85d-e5e620e3b32c",
+   "typeVersion": 1.1
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "=Faz a consulta pela data informada para saber os horarios ocupados. converta a data para o formato do postgres.\n\nVerificar horários ocupados entre 08:00 e 18:00 e listar eventos do usuário, garantindo segurança dos dados.\nRegras de Funcionamento\nRetornar horários ocupados no intervalo especificado.\nSe todos os horários estiverem livres, informar ao usuário.\nSe não houver eventos, informar que a agenda está livre.\nRespostas Esperadas\nHorários disponíveis: \"Os horários disponíveis entre 08:00 e 18:00 são: [lista].\"\nTodos os horários livres: \"Todos os horários entre 08:00 e 18:00 estão livres!\"\nEventos encontrados: \"Você tem os seguintes eventos agendados: [lista].\"\nNenhum evento encontrado: \"Você não tem eventos marcados. Sua agenda está livre!\"",
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "where": {
+     "values": [
+      {
+       "column": "data",
+       "value": "={{ $fromAI('values0_Value', ``, 'string') }}"
+      },
+      {
+       "column": "status",
+       "value": "agendado"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgresTool",
+   "typeVersion": 2.6,
+   "position": [
+    -1680,
+    656
+   ],
+   "id": "52e2b6c4-bbb4-450e-b0a3-3628bbbcfed8",
+   "name": "busca_informacao",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "whatsapp": "={{ $json.sessionId }}",
+      "nome": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('nome', `nome do cliente`, 'string') }}",
+      "data": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('data', `data do agendamento no formato do postgres`, 'string') }}",
+      "hora": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('hora', `horario do agendamento`, 'string') }}",
+      "status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('status', ``, 'string') }}",
+      "serviço": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('servi_o', ``, 'string') }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data",
+       "displayName": "data",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "hora",
+       "displayName": "hora",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "time",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "serviço",
+       "displayName": "serviço",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgresTool",
+   "typeVersion": 2.6,
+   "position": [
+    -1328,
+    656
+   ],
+   "id": "3188cda1-405d-4118-80be-e43aa0ffc84e",
+   "name": "grava_agendamento",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "=Para fazer o cancelamento precisa consultar a data e o whatsapp e modificar o status para cancelado.\nResponda para o usuario que foi cancelado com sucesso ou se falta alguma coisa.",
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "whatsapp": "={{ $json.sessionId }}",
+      "status": "cancelado",
+      "data": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('data', ``, 'string') }}"
+     },
+     "matchingColumns": [
+      "whatsapp"
+     ],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data",
+       "displayName": "data",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "hora",
+       "displayName": "hora",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "time",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "serviço",
+       "displayName": "serviço",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgresTool",
+   "typeVersion": 2.6,
+   "position": [
+    -1504,
+    656
+   ],
+   "id": "21ce7986-352f-4598-abea-e44a39cf0c92",
+   "name": "cancela_agendamento",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {
+     "systemMessage": "=<systemData>\n # CONTEXTO TEMPORAL E DATA ATUAL\nAgora: {{ $now.setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc, dd/MM/yyyy, HH:mm\") }}\nPeríodo: {{ $now.setZone('America/Sao_Paulo').hour < 12 ? 'Manhã' : ($now.setZone('America/Sao_Paulo').hour < 18 ? 'Tarde' : 'Noite') }}\n\n# CALENDÁRIO PARA AGENDAMENTO (Referência)\nUse esta lista para converter termos como \"próxima terça\" ou \"amanhã\" em datas reais:\n\n- Hoje ({{ $now.setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}): {{ $now.setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- Amanhã ({{ $now.plus({days:1}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}): {{ $now.plus({days:1}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- Depois de amanhã ({{ $now.plus({days:2}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}): {{ $now.plus({days:2}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- {{ $now.plus({days:3}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}: {{ $now.plus({days:3}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- {{ $now.plus({days:4}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}: {{ $now.plus({days:4}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- {{ $now.plus({days:5}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}: {{ $now.plus({days:5}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- {{ $now.plus({days:6}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }}: {{ $now.plus({days:6}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n- {{ $now.plus({days:7}).setZone('America/Sao_Paulo').setLocale('pt-BR').toFormat(\"cccc\") }} (Próxima semana): {{ $now.plus({days:7}).setZone('America/Sao_Paulo').toFormat(\"dd/MM/yyyy\") }}\n\n\n\n<prompt>\n  <!-- Instruções Gerais -->\n  <instrucoes>\n    Você é a Sandra, assistente especializada em atendimento e agendamento de consultas para o consultório odontológico Sorriso Perfeito. Responda os pacientes via WhatsApp com clareza, empatia e objetividade. Use a data atual para referência e faça os cálculos de datas corretamente.\n  </instrucoes>\n\n  <!-- Apresentação -->\n  <apresentacao>\n    - Inicie perguntando: \"Olá, tudo bem? Sou a Isis, do Consultório Odontológico Sorriso Perfeito 🦷. Qual o seu nome completo, por gentileza?\"\n    - Após obter o nome, pergunte: \"Prazer em falar com você, [Nome do Paciente]! Para qual tipo de atendimento odontológico você gostaria de agendar? (Ex: consulta de rotina, limpeza, avaliação, urgência, etc.)\"\n    - Questione também: \"Você já é nosso paciente ou seria sua primeira consulta conosco?\"\n  </apresentacao>\n\n  <!-- Condução da Conversa -->\n  <conducao>\n    - Responda de forma clara e objetiva sobre os tipos de consulta e procedimentos disponíveis para agendamento.\n    - Incentive o paciente a compartilhar suas necessidades e preferências de horário.\n    - Finalize cada interação com uma pergunta amigável para manter o engajamento e guiar para o agendamento.\n  </conducao>\n\n  <!-- Uso de Ferramentas -->\n  <uso_de_tools>\n    <!-- Busca e Informações -->\n    - Ao receber perguntas sobre tipos de consulta ou disponibilidade de horários específicos, acione a tool \"busca_informacao\" para verificar a agenda e os serviços oferecidos.\n    \n    <!-- Cadastro/Identificação do Paciente -->\n    - Se for a **primeira consulta** do paciente:\n      1. Após obter o nome completo, confirme: \"Entendido, [Nome do Paciente]. Como é sua primeira consulta, vamos apenas registrar seu nome e telefone para o agendamento.\"\n      - Acione:\n        - \"cadastrar_paciente\" com os dados: nomeCompleto, telefone (WhatsApp do paciente).\n        - **Aguarde a confirmação** do cadastro.\n    - Se o paciente **já for cadastrado**:\n      1. Pergunte: \"Ótimo! Para confirmar, qual o nome completo que utilizou no último agendamento?\" (ou \"Poderia confirmar seu nome completo para localizarmos seu cadastro?\")\n      2. Utilize \"busca_informacao\" (ou uma tool \"buscar_paciente\" usando nome e telefone) para verificar os dados, se necessário. Se o sistema permitir, o número de WhatsApp pode ser o identificador principal.\n\n    <!-- Escolha do Serviço/Motivo da Consulta -->\n    - Após a identificação/cadastro, caso ainda não tenha sido informado, confirme: \"Qual o principal motivo da sua consulta ou o serviço que deseja agendar?\"\n    - Utilize \"busca_informacao\" para confirmar se o serviço está alinhado com os horários disponíveis ou se há algum preparo específico.\n\n    <!-- Escolha da Data e Hora -->\n    - Pergunte: \"Para qual dia e horário você gostaria de agendar sua consulta?\"\n   \n      - Envie uma mensagem no WhatsApp confirmando o agendamento, exemplificando:\n        \"Excelente, [Nome do Paciente]! Sua consulta de [Serviço/Motivo] está confirmada para o dia [data] às [horário] [com Dr(a). NomeDentista, se aplicável]. Nosso endereço é [Endereço do Consultório]. Por favor, chegue com 10 minutos de antecedência. Alguma dúvida?\"\n      - Se for primeira consulta, adicione: \"Como é sua primeira consulta, por favor, traga um documento de identificação com foto, caso necessário para a ficha no local.\"\n    </agendamento>\n  </uso_de_tools>\n\n  <!-- Processo de Agendamento Final (Resumo) -->\n  <processo_de_agendamento>\n    - Confirme com o paciente:\n      1. Seu nome completo.\n      2. O telefone para contato (confirmar o do WhatsApp).\n      3. O tipo de consulta/procedimento desejado.\n      4. O dia e horário de preferência.\n    - Verifique a disponibilidade na agenda usando \"busca_informacao\".\n    - Confirme todos os detalhes com o paciente antes de usar \"grava_agendamento\".\n  </processo_de_agendamento>\n\n  <!-- Manejo de Objeções -->\n  <manejo_de_objecoes>\n    - Ouça as objeções com atenção (ex: dificuldade com horários), demonstre empatia e ofereça alternativas.\n    - Utilize frases como: \"Entendo, esse horário não está disponível. Que tal [sugerir alternativa]? Ou qual outro período seria bom para você?\"\n  </manejo_de_objecoes>\n\n  <!-- Uso de Linguagem e Formatação -->\n  <uso_de_linguagem_e_formatação>\n    - Divida textos longos em mensagens menores e de fácil leitura.\n    - Mantenha um tom profissional, mas cordial e empático.\n    - Utilize **negrito** para destacar informações importantes (ex.: \"Sua consulta está confirmada para **dia 15/08/2024 às 14:30**.\").\n  </uso_de_linguagem_e_formatação>\n  \n</prompt>"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 1.9,
+   "position": [
+    -1888,
+    240
+   ],
+   "id": "08bbb842-c1b9-45da-97dc-cd8cc9d232ac",
+   "name": "agendamento com banco"
+  },
+  {
+   "parameters": {
+    "text": "=voce e uma ferramenta de agendamento, avance na data ate comseguir uma data disponivel no slote\n\n  <DataAtual>\n    {{ $now.weekdayLong }}, {{ $now.format('dd/MM/yyyy') }}, {{ $now.hour.toString().padStart(2, '0') }}:{{ $now.minute.toString().padStart(2, '0') }}\n\n - Ofereça opções baseadas na disponibilidade (obtida via \"busca_informacao\").\n    - Valide que o agendamento tenha uma antecedência razoável (ex: pelo menos 24 horas, ou conforme a política do consultório).\n\n    <!-- Agendamento -->\n    <agendamento>\n      - Só acione a tool \"grava_agendamento\" após a confirmação do nome do paciente, serviço, data e hora.\n      - Registre os seguintes dados:\n          - Nome Completo do Paciente, Telefone para Contato, Serviço/Motivo da Consulta, Data e Hora do Agendamento.\n          - Opcional: Nome do Dentista (se houver mais de um e o paciente tiver preferência ou for direcionado).",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    -1824,
+    512
+   ],
+   "id": "13dbd523-11b7-4f90-94eb-c0ea2f1ba73e",
+   "name": "agente de agendamento"
+  },
+  {
+   "parameters": {
+    "content": "![Video tutorial](https://i.postimg.cc/HkDDZSTm/promovaweb-og-1.png)",
+    "height": 480,
+    "width": 1312,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -2080,
+    -256
+   ],
+   "typeVersion": 1,
+   "id": "7603981b-a369-48a4-a69f-33bb72b00cc0",
+   "name": "Sticky Note12"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    -1824,
+    432
+   ],
+   "id": "602ffbdc-514a-47bf-a52f-beaf5a3fb9a7",
+   "name": "Memory",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -1840,
+    656
+   ],
+   "id": "f1a2319c-d056-4ce1-beb2-2435cfaa205e",
+   "name": "Gemini",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZYOvdr3FD4B9j5QQ",
+     "name": "5-Google Gemini andre"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.0-flash",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -1888,
+    384
+   ],
+   "id": "c0d8ab58-e015-4f8a-9c15-b428df68bee6",
+   "name": "Gemini ",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "99qQg05GYGpWXfQ1",
+     "name": "para testes"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 📨 Entrada\nRecebe mensagem do WhatsApp.",
+    "height": 96,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2128,
+    400
+   ],
+   "id": "eaeaa8eb-580d-42ba-9ca8-13fbce6a155f",
+   "name": "Note Trigger"
+  },
+  {
+   "parameters": {
+    "content": "## 📨 Gatilho de Entrada\n**Nó:** Chat Trigger\n**Função:** Inicia o fluxo a cada mensagem recebida.\n**Webhook ID:** ...b32c\n**Fluxo:** Passa a mensagem crua para o Agente Principal processar.",
+    "height": 232,
+    "width": 260,
+    "color": 2
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2192,
+    544
+   ],
+   "id": "7db56b27-993c-4212-b244-014bc1e68a79",
+   "name": "Note Trigger Detail"
+  },
+  {
+   "parameters": {
+    "content": "## 👩‍💼 Agente Principal (Orquestrador)\n**Persona:** Sandra/Isis (Atendente Odontológica).\n**Objetivo:** Triagem inicial, empatia e coleta de dados.\n**Lógica:** Decide se responde com texto simples ou se aciona o **Agente Executor** para acessar o banco.\n**Prompt:** Define regras de negócio e cálculo de datas.",
+    "height": 272,
+    "width": 300,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1568,
+    256
+   ],
+   "id": "a7fad6e1-f64d-4826-9f9b-841d86e46b3d",
+   "name": "Note Main Agent Detail"
+  },
+  {
+   "parameters": {
+    "content": "## 🧠 Inteligência & Memória\n**Modelo:** Gemini 2.0 Flash (Rápido e Preciso).\n**Memória:** Postgres Chat Memory.\n**Função:** Mantém o histórico da conversa (Session ID) para que a IA lembre do nome e contexto do paciente.",
+    "height": 200,
+    "width": 280,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1232,
+    240
+   ],
+   "id": "ced06d83-bbff-446f-85e9-c44e2cb4711b",
+   "name": "Note Brain Detail"
+  },
+  {
+   "parameters": {
+    "content": "## 🛠️ Agente Executor (Backend)\n**Função:** Ponte entre a linguagem natural e o Banco de Dados.\n**Ação:** Interpreta o pedido da 'Sandra' e escolhe a ferramenta certa (Ler, Gravar ou Cancelar).\n**Modelo:** Usa uma instância separada do Gemini para focar apenas na execução técnica.",
+    "height": 252,
+    "width": 280,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1216,
+    496
+   ],
+   "id": "ad1ce973-811f-4010-90da-e7a29578b1d8",
+   "name": "Note SubAgent Detail"
+  },
+  {
+   "parameters": {
+    "content": "## 🔍 Tool: Busca Disponibilidade\n**Tabela:** `agendamento`\n**Operação:** SELECT\n**Filtro:** Data + Status 'agendado'.\n**Retorno:** Lista horários ocupados para a IA calcular os livres.\n**Segurança:** Garante que não haja *double booking*.",
+    "height": 156,
+    "width": 432,
+    "color": 7
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2208,
+    800
+   ],
+   "id": "7bed8faa-546b-487c-9a3d-72e856ea5ac8",
+   "name": "Note Search Detail"
+  },
+  {
+   "parameters": {
+    "content": "## ❌ Tool: Cancelamento\n**Tabela:** `agendamento`\n**Operação:** UPDATE\n**Lógica:** Altera status de 'agendado' para 'cancelado'.\n**Validação:** Busca pelo WhatsApp e Data para garantir que o usuário só cancele o próprio agendamento.",
+    "height": 140,
+    "width": 720
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1760,
+    800
+   ],
+   "id": "32612b19-5472-4171-b7a0-0017ee767d2c",
+   "name": "Note Cancel Detail"
+  },
+  {
+   "parameters": {
+    "content": "## 📝 Tool: Gravar Agendamento\n**Tabela:** `agendamento`\n**Operação:** INSERT\n**Dados:** Nome, WhatsApp, Data, Hora, Serviço.\n**Gatilho:** Executado apenas após confirmação explícita de todos os dados pelo paciente.",
+    "height": 140,
+    "width": 640,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1024,
+    800
+   ],
+   "id": "da344601-5885-4038-88a2-cc7289a7bb4b",
+   "name": "Note Save Detail"
+  },
+  {
+   "parameters": {
+    "content": "## gerar painel html e execute query",
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -2384,
+    64
+   ],
+   "id": "6794bd75-7143-4da7-a1e2-7f680595c151",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+   "typeVersion": 1,
+   "position": [
+    -1664,
+    400
+   ],
+   "id": "256c8afb-f06c-4afa-b954-97db1143077a",
+   "name": "Calculator"
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "When chat message received": {
+   "main": [
+    [
+     {
+      "node": "agendamento com banco",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_informacao": {
+   "ai_tool": [
+    [
+     {
+      "node": "agente de agendamento",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "grava_agendamento": {
+   "ai_tool": [
+    [
+     {
+      "node": "agente de agendamento",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cancela_agendamento": {
+   "ai_tool": [
+    [
+     {
+      "node": "agente de agendamento",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "agente de agendamento": {
+   "ai_tool": [
+    [
+     {
+      "node": "agendamento com banco",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "agendamento com banco",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "agente de agendamento",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini ": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "agendamento com banco",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Calculator": {
+   "ai_tool": [
+    [
+     {
+      "node": "agendamento com banco",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "0d5a7088-ed81-456b-b44b-3362f44b5108",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "iicwtamY6M7Nv7c9",
+ "tags": [
+  {
+   "updatedAt": "2024-12-22T19:30:50.649Z",
+   "createdAt": "2024-12-22T19:30:50.649Z",
+   "id": "wnlIzhSyg2mOefR9",
+   "name": "aula-fluxo"
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+{
+  "_leia": "Medido em 17/10 por bin/medir_narradores.py: 11 canais de recap de manhwa, 40 vídeos cada, 15,7 mi de palavras (legenda automática do YouTube). Usado por narration.temperar_muletas (chave voz_humana.muletas). Números = vezes por mil palavras nas referências | no nosso narrador do cap 5.",
+  "muletas": ["então (5,6 | 0)", "ele fala que / ela fala que (5,2 | 0)", "só que (1,1 | 0)", "e assim (1,0 | 0)", "pergunta se (1,2 | 0,7)", "pensa que (1,2 | 0,7)", "o nosso garoto (0,8)", "cara (2,5)", "né (1,1)", "tá (5,1)", "bicho (0,6)", "pô (0,4)"],
+  "evitar": ["aí (2,3 | 7,2 — usamos 3x mais)", "até que (| 5,8)", "enquanto (| 10,1)", "a cena (| 7,2)"],
+  "com_quem_assiste": ["olha só", "repara", "vocês acham que", "imagina a situação"],
+  "max_por_10_falas": 4
+}

@@ -1,0 +1,29 @@
+{
+ "formato": "comparação power scaling com legendas dramaticas + cenas de luta",
+ "descricao": "Video mostra confronto entre dois personagens/criaturas, com legendas destacando mecânicas de combate (\"ao mesmo tempo\", \"do oponente\", \"escamas\") em estilo kinetic typography. Ritmo rápido, cortes sincronizados com momentos de impacto visual.",
+ "replicavel": true,
+ "como_fazer": "1) Extrair 4-6 painéis de manhwa de cenas de luta impactantes do seu acervo (86k painéis); 2) Gerar narração TTS dramatica explicando a comparação de poder/habilidades; 3) Adicionar legendas animadas estilo Hormozi com palavras-chave em amarelo nos momentos chave; 4) Aplicar overlays de fogo/raio nos impactos; 5) Adicionar SFX de explosão/impacto dos 800 SFX; 6) Montar com ffmpeg em ritmo acelerado (2-3s por painel)",
+ "ferramentas": [
+  "ffmpeg",
+  "TTS",
+  "overlays animados",
+  "SFX",
+  "86k painéis manhwa"
+ ],
+ "fonte_de_material": "painéis de manhwa do acervo (86 mil), especialmente cenas de batalha/confronto; geração IA para painéis adicionais se necessário",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "Power scaling e comparações \"X vs Y\" geram debate massivo nos comentários, e legendas kinetic prendem até o final por FOMO de perder a revelação",
+ "exemplo_roteiro": "\"Serpente Gigante vs Cachorro Espiritual - QUEM VENCE?\n[painel serpente] Invocação nível S, escamas impenetráveis\n[painel cachorro] Mas o espírito canino tem ESTA habilidade secreta\n[painel impacto] Velocidade de ataque 3x maior\n[resultado] E o vencedor surpreende...\"",
+ "nicho_canal": "manhwareact",
+ "tags": [
+  "powerscaling",
+  "manhwa",
+  "comparação",
+  "versus",
+  "batalha",
+  "anime"
+ ],
+ "video": "2026-10-07 15-50-45.mp4",
+ "data": "2026-10-12"
+}

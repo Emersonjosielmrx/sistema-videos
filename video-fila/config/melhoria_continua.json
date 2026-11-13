@@ -1,0 +1,34 @@
+{
+ "ligado": false,
+ "projetos": [
+  "cortes",
+  "voz",
+  "postador",
+  "hipercool",
+  "manhwa-react",
+  "veo",
+  "geral"
+ ],
+ "pausa_min": 5,
+ "ram_min_gb": 2.5,
+ "prompt": "Procure a melhoria ou correção que MAIS ajuda agora: primeiro erros reais nos logs das últimas 24 h e coisas que estão falhando ou travando a produção; depois pendências anotadas nos documentos do projeto (CONTINUAR_*, MELHORIAS_*, PENDENCIAS, relatórios); depois o que deixa os vídeos melhores ou mais vistos.",
+ "_leia": "Melhorias contínuas (dona 23/10). ligado: true/false (ou no Telegram, bot de produção: melhorias ligar/parar/status, melhorias prompt: <texto>). prompt: o que ela quer que ele procure. projetos: ids do painel_ia (só vídeo). pausa_min: pausa entre uma rodada e outra.",
+ "protegidos": {
+  "anime_discover.py": "2026-10-24",
+  "anime_auto.py": "2026-10-24",
+  "controlador.py": "2026-10-24",
+  "avisos.py": "2026-10-24",
+  "vigia_mutuo.py": "2026-10-24",
+  "painel.html": "2026-10-24",
+  "vitrine_painel.py": "2026-10-24",
+  "resumo_notebooks.py": "2026-10-24",
+  "indicacoes.py": "2026-10-24",
+  "politica.py": "2026-10-24",
+  "catalogo.py": "2026-10-24",
+  "youtube_studio_extras.py": "2026-10-24",
+  "metricas_rede.py": "2026-10-24",
+  "maquina_remota.py": "2026-10-24",
+  "chrome_conta.py": "2026-10-24"
+ },
+ "_protegidos": "nome do arquivo -> até quando: o motor não aplica sozinho proposta que cite o arquivo (vai pra dona). Pedido da outra sessão 23/10."
+}

@@ -1,0 +1,25 @@
+{
+ "conta": "iapro.mentoria",
+ "marca": "IA Pro Mentoria",
+ "capa": "Por que sua IA inventa coisas?",
+ "slides": [
+  {
+   "titulo": "O efeito da alucinação",
+   "texto": "A inteligência artificial não busca a verdade absoluta, mas sim a palavra seguinte mais provável. Quando falta contexto exato, ela preenche a lacuna criativamente."
+  },
+  {
+   "titulo": "Comandos vagos geram erros",
+   "texto": "Perguntas genéricas forçam o modelo a adivinhar o que você quer. Quanto mais amplo for o seu pedido, maior será a chance de respostas inventadas."
+  },
+  {
+   "titulo": "A importância do contexto",
+   "texto": "Fornecer dados confiáveis antes da pergunta limita as opções da ferramenta. Assim, ela usa a sua base de informações em vez de inventar fatos novos."
+  },
+  {
+   "titulo": "Verifique sempre as fontes",
+   "texto": "Trate a IA como um assistente talentoso, mas que precisa de supervisão. Sempre valide dados críticos antes de usar em decisões importantes ou relatórios."
+  }
+ ],
+ "legenda": "Entender como a inteligência artificial processa informações evita erros comuns no dia a dia.\nSalve este post para lembrar de checar seus prompts.",
+ "gerado_em": "2026-10-28T08:41:04"
+}

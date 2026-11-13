@@ -1,0 +1,31 @@
+{
+ "formato": "animação de personagem 2D clássico com plot twist brasileiro",
+ "descricao": "Animação simples estilo retrô (Sonic 2D correndo) com diálogo legendado, setup de corrida e punchline com referência cultural brasileira (dois numa moto = assalto). Ritmo rápido, 15-30s, reviravolta no final.",
+ "replicavel": true,
+ "como_fazer": "1. Gerar sprites/animação 2D de personagem clássico correndo com IA (Veo 3 ou Pollinations para loops simples) ou usar sprites existentes; 2. Criar cenário de corrida estilo 16-bit com parallax; 3. Escrever roteiro com LLM: setup arrogante → corrida → reviravolta cultural brasileira; 4. TTS para narração dos diálogos; 5. Legendas estilo meme com fonte grossa branca/contorno preto; 6. ffmpeg para montar tudo + trilha retro/tensa + SFX de corrida",
+ "ferramentas": [
+  "Veo 3",
+  "Pollinations",
+  "LLM",
+  "TTS",
+  "ffmpeg",
+  "overlays animados",
+  "SFX"
+ ],
+ "fonte_de_material": "Sprites de domínio público (OpenGameArt), gerar personagens 2D com IA, cenários pixel art gerados ou gratuitos, ou recriar estilo retrô com Veo 3",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "Plot twist cultural brasileiro pega desprevenido e gera identificação + compartilhamento ('é assim mesmo no Brasil'), nostalgia de jogos retrô amplifica alcance",
+ "exemplo_roteiro": "SONIC: 'Preparado pra comer poeira? Essa é a corrida mais fácil da minha vida!'\nPESSOA COMUM: 'Como você tá correndo tão rápido?'\nSONIC: 'Olha o que tem atrás de você!'\n[Aparecem dois numa moto]\nPESSOA: 'EXATO! CORRE!'\n[Legenda final: 'No Brasil é diferente 💀']",
+ "nicho_canal": "novo canal: BrasilMemeGames",
+ "tags": [
+  "sonic",
+  "meme brasileiro",
+  "animação retrô",
+  "plot twist",
+  "humor cultural",
+  "nostalgia"
+ ],
+ "video": "2026-10-06 18-27-41.mp4",
+ "data": "2026-10-12"
+}

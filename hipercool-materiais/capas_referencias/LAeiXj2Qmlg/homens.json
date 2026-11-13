@@ -1,0 +1,100 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "Turan",
+   "principal": true,
+   "aparicoes": 18,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 492.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3888.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 498.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 5046.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 4656.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 4152.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Silver/ash-grey medium hair, dark eyes, small beauty mark/mole below right eye, high-collared shirt/clothing",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h02",
+   "nome": "Turan (também chamado de Ray/Duran)",
+   "principal": false,
+   "aparicoes": 12,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 4602.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4674.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 4626.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Short brown hair, brown/amber eyes, simple traveling clothes, clean-shaven or light facial hair, average build",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h03",
+   "nome": "Turan",
+   "principal": false,
+   "aparicoes": 7,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 5238.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4464.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4134.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3894.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3924.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 4854.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Blonde short hair with bangs, light blue/grey eyes",
+   "protagonista": true,
+   "adulto": true
+  }
+ ]
+}

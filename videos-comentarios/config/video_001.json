@@ -1,0 +1,53 @@
+{
+ "video_base": "D:/videos-comentarios/downloads/risohit_Ebk0xr2fdbI.mp4",
+ "titulo": "Quando o personal não tá olhando",
+ "trilha": "D:/hipercool-materiais/assets/trilhas/A Fool_s Theme - Brian Bolger.mp3",
+ "trilha_volume": 0.25,
+ "falas": [
+  {
+   "voz": "silvio_santos",
+   "nome": "Silvio Santos",
+   "comentario": "Olha a vovó na academia kkkkk",
+   "texto": "Olha só a vovó na academia! Quem quer dinheiro? Ela não, ela quer é treinar!"
+  },
+  {
+   "voz": "professor_girafales",
+   "nome": "Professor Girafales",
+   "comentario": "Alguém descobriu qual músculo ela tá tentando lesionar?",
+   "texto": "Alguém descobriu qual músculo ela tá tentando lesionar? Tá, tá, tá, tá, táááá!"
+  },
+  {
+   "voz": "seu_madruga",
+   "nome": "Seu Madruga",
+   "comentario": "A família se estabilizando financeiramente e a avó:",
+   "texto": "A família finalmente estabilizou e a vó inventa esporte novo. E eu aqui sem pagar o aluguel há catorze meses!"
+  },
+  {
+   "voz": "quico",
+   "nome": "Quico",
+   "comentario": "Primeiro exercício: morto, vivo, morto, vivo, vivo",
+   "texto": "Primeiro exercício: morto, vivo, morto, vivo, VIVO! Que vó mais gentalha!"
+  },
+  {
+   "voz": "chiquinha",
+   "nome": "Chiquinha",
+   "comentario": "O personal olhou de longe e desistiu da profissão",
+   "texto": "O personal olhou de longe e desistiu da profissão! Pi pi pi pi pi pi!"
+  },
+  {
+   "voz": "faustao",
+   "nome": "Faustão",
+   "comentario": "Ela tá treinando pro apocalipse zumbi, certeza",
+   "texto": "Oh loco, meu! Ela tá treinando pro apocalipse zumbi! Errou!"
+  },
+  {
+   "voz": "chaves_chapolin",
+   "nome": "Chaves",
+   "comentario": "O aparelho pedindo socorro",
+   "texto": "Coitado do aparelho, pedindo socorro! Ela quebrou sem querer querendo!"
+  }
+ ],
+ "output": "D:/videos-comentarios/output/comentario_001_personal_v3.mp4",
+ "cache": "comentario_001_personal_v2",
+ "figurinha_lado": "esquerda"
+}

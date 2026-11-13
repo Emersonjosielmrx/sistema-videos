@@ -1,0 +1,56 @@
+{
+ "modelo": "gweb/gemini-3.1-pro",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T19:37:48",
+ "segundos": 425,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T19:37:48",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "gweb/gemini-3.1-pro",
+   "decisor": "gweb/gemini-3.1-pro"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Falta de variedade visual e ausência de demonstração do produto: o vídeo inteiro (cenas 0, 1, 2 e 3, mais de 26s) usa a variante dono_tres, mantendo o mesmo plano frontal do apresentador sem nenhuma tela de demonstração do Hermes Call ou simulação de ligação no WhatsApp.",
+    "prova": "quadros 1 a 11 / dados.json campo formato='dono_tres' / juri_problemas cenas 1 e 2 / historico_notas (dono_tres repetido com notas 5.5 e 5.62)",
+    "sugestao": "Diminuir o peso ou desligar a variante 'dono_tres' em variantes_desligadas/pesos_variantes, priorizando formatos que intercalem o dono com telas ou simulações do produto.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Pílula superior de etapa ('1 O problema' / '2 Como funciona' / '3 O resultado') e faixa verde de título encostam no topo da cabeça/cabelo do apresentador, deixando o enquadramento sem respiro superior.",
+    "prova": "quadros 3 a 10 / juri_problemas cena 1 (headroom estrangulado)",
+    "sugestao": "Aumentar folga_dono (atualmente 0.45) ou subir a posição do conjunto faixa de título + pílula de etapa para não encostar no topo da cabeça.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho inicial (Cena 0) abre nos primeiros segundos apenas com o apresentador e a caixinha de pergunta estática, sem elemento visual dinâmico que ilustre a dor logo de cara.",
+    "prova": "quadros 1 e 2 / juri_problemas cena 0 (diretor)",
+    "sugestao": "Testar entrada mais marcada da caixa de pergunta ou punch-in inicial mais forte na Cena 0.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "A variante dono_tres repete o mesmo plano frontal do dono por mais de 26s sem demonstrar a tela ou simulação do produto, resultando em notas baixas repetidas (5.5 e 5.62).",
+    "prova": "quadros 1 a 11 / dados.json campo formato='dono_tres' / juri_problemas cenas 1 e 2 / historico_notas"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Ajustar posicionamento vertical da pílula superior de etapa e da faixa verde de título nas cenas do dono (ou reenquadrar o vídeo do dono mais para baixo) para dar respiro superior e não encostar no topo da cabeça/cabelo.",
+    "motivo": "A pílula de etapa e a faixa de título encostam no topo da cabeça do apresentador, estrangulando o headroom e ferindo a regra de não cobrir o dono.",
+    "prova": "quadros 3 a 10 / juri_problemas cena 1 (headroom estrangulado)"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

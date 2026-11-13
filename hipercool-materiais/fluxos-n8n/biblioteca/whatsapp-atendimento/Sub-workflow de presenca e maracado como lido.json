@@ -1,0 +1,250 @@
+{
+ "name": "Sub-workflow de presenca e maracado como lido",
+ "nodes": [
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wuzapi.inovareinteligenciaartificial.com/chat/presence",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Start').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('Start').item.json.body_event_Info_Chat }}"
+      },
+      {
+       "name": "State",
+       "value": "composing"
+      },
+      {
+       "name": "Media"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -496,
+    80
+   ],
+   "id": "43cc4d8d-3ae1-417a-ab53-21192e219a81",
+   "name": "emvia presenca",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/chat/markread",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json"
+      },
+      {
+       "name": "Token",
+       "value": "={{ $('Start').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"Id\": [\"{{ $('Start').item.json.body_event_Info_ID }}\"],\n  \"ChatPhone\": \"{{ $('Start').first().json.body_event_Info_SenderAlt_split }}\",\n  \"SenderPhone\": \"{{ $('Start').first().json.body_event_Info_SenderAlt_split }}\"\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.3,
+   "position": [
+    -352,
+    80
+   ],
+   "id": "08b002ec-e9c2-4439-8e77-1fa4f986963f",
+   "name": "HTTP Request"
+  },
+  {
+   "parameters": {
+    "content": "## adc presenca sub workflow",
+    "height": 208,
+    "width": 368,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -512,
+    16
+   ],
+   "id": "66c96a27-952c-4c90-a95b-9cd52bb135d6",
+   "name": "Sticky Note10"
+  },
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "token",
+       "type": "any"
+      },
+      {
+       "name": "body_event_Info_Chat",
+       "type": "any"
+      },
+      {
+       "name": "body_event_Info_SenderAlt_split",
+       "type": "any"
+      },
+      {
+       "name": "body_event_Info_ID",
+       "type": "any"
+      }
+     ]
+    }
+   },
+   "id": "0935c9a5-d39f-4477-8f0a-31069ff269db",
+   "typeVersion": 1.1,
+   "name": "Start",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "position": [
+    -816,
+    80
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "e2fd1640-c519-48ac-8788-ec39d9c5cc63",
+       "leftValue": "={{ $json.body_event_Info_Chat }}",
+       "rightValue": "status@broadcast",
+       "operator": {
+        "type": "string",
+        "operation": "notContains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.3,
+   "position": [
+    -640,
+    80
+   ],
+   "id": "748751b4-7f2a-4e41-be77-bcef84dabae0",
+   "name": "Filter"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/chat/markread",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json"
+      },
+      {
+       "name": "Token",
+       "value": "={{ $('Start').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"Id\": [\"{{ $('Start').item.json.body_event_Info_ID }}\"],\n  \"ChatPhone\": \"{{ $('Start').item.json.body_event_Info_SenderAlt_split }}\",\n  \"SenderPhone\": \"{{ $('Start').item.json.body_event_Info_SenderAlt_split }}\"\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.3,
+   "position": [
+    -336,
+    240
+   ],
+   "id": "277bd5ae-4926-4e41-a9be-1aefcd2bb441",
+   "name": "HTTP Request1"
+  }
+ ],
+ "pinData": {
+  "Start": [
+   {
+    "json": {
+     "token": "<SEGREDO_REMOVIDO>",
+     "body_event_Info_Chat": "186578177622129@lid",
+     "body_event_Info_SenderAlt_split": "559188875419",
+     "body_event_Info_ID": "3A05F5D0A2C5F9482152"
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ]
+ },
+ "connections": {
+  "emvia presenca": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Start": {
+   "main": [
+    [
+     {
+      "node": "Filter",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filter": {
+   "main": [
+    [
+     {
+      "node": "emvia presenca",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "availableInMCP": false
+ },
+ "versionId": "269c877b-7380-4d5e-8e94-06a1cf4fe30b",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "dtRRtzQlbGTksxnY",
+ "tags": []
+}

@@ -1,0 +1,1222 @@
+{
+ "name": "fabrica de animes-1-funcional copy 2",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "##  criar intros e finais\n##  gerar imagens extrass  ",
+    "height": 112,
+    "width": 288
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -528,
+    -1024
+   ],
+   "id": "1439b8c2-1362-4cc0-8ddb-6d51504776b2",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: ORGANIZA + EDITA IMAGENS V11 (FULL + VIRAL ENGINE)\n// ======================================================================\n// BASE: V8 (Sua versão original robusta de 700 linhas)\n// + UPGRADE V11: Novos Filtros Visuais de Alta Retenção (Dopamina/Deep)\n// + UPGRADE V11: Lógica de seleção baseada em emoção para engajamento.\n// ======================================================================\n\nconst fs = require('fs');\nconst path = require('path');\nconst { execSync } = require('child_process');\n\n// ==========================================\n// ⚙️ CONFIGURAÇÃO - ALTERE AQUI\n// ==========================================\nconst CONFIG = {\n  pastaRaiz: '/tmp/youtubevideos',\n  arquivoEstado: 'estado_capitulos.json',\n  \n  // 🔴 CONTROLES MANUAIS\n  PAGINA_INICIAL_MANUAL: 0,\n  PAGINA_FINAL_MANUAL: 0,\n  \n  // Ignora estado\n  IGNORAR_ESTADO: false,\n  \n  // Força reprocessar\n  FORCAR_REPROCESSAMENTO: false,\n  \n  // FFmpeg\n  maxTentativasFFmpeg: 3,\n  timeoutFFmpeg: 120000,\n  \n  // Compressão\n  qualidadeAgente: 60,\n  maxLarguraAgente: 1200,\n  \n  // Logs\n  salvarLogs: true,\n  pastaLogs: 'logs',\n  \n  // Efeitos\n  evitarRepeticaoEfeitos: true,\n\n  // 🚀 CONFIGURAÇÃO VIRAL (INTENSIDADE)\n  SATURACAO_HYPE: 1.4,   // Cores vivas para reter atenção\n  CONTRASTE_DRAMA: 1.25, // Contraste para imersão\n  NITIDEZ_CRISPY: 1.0    // Nitidez para parecer HD no celular\n};\n\n// ==========================================\n// 🎨 BIBLIOTECA DE EFEITOS VIRAIS (V11)\n// ==========================================\n// Estes filtros são \"queimados\" na imagem para garantir o visual no vídeo final.\nconst filters = [\n  // 1. HYPE (Dopamina) - Para Comédia, Vitória, Tecnologia, Feliz\n  // Aumenta saturação e nitidez. Cores saltam da tela.\n  { \n    nome: \"HYPE (Dopamina)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=20:10[bg_blur];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[bg_blur][fg_scaled]overlay=(W-w)/2:(H-h)/2,eq=saturation=${CONFIG.SATURACAO_HYPE}:contrast=1.1:brightness=0.05,unsharp=5:5:1.0:5:5:0.0`, \n    categoria: \"dopamina\" \n  },\n\n  // 2. DEEP (Imersão) - Para Terror, Tensão, Medo, Mistério\n  // Aumenta contraste, escurece, adiciona vinheta e leve ruído de filme.\n  { \n    nome: \"DEEP (Imersão)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=20:10,eq=brightness=-0.7[bg_dark];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[bg_dark][fg_scaled]overlay=(W-w)/2:(H-h)/2,eq=saturation=0.6:contrast=${CONFIG.CONTRASTE_DRAMA}:brightness=-0.05,vignette=PI/3,noise=alls=5:allf=t+u`, \n    categoria: \"drama\" \n  },\n\n  // 3. IMPACT (Ação) - Para Luta, Raiva, Grito, Impacto\n  // Nitidez extrema, alto contraste, leve desvio de cor (chroma).\n  { \n    nome: \"IMPACT (Ação)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=20:10[bg_blur];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[fg_scaled]split=2[orig][shadow];[shadow]drawbox=t=fill:c=black@0.6,scale=iw*1.02:ih*1.02[shadow_layer];[bg_blur][shadow_layer]overlay=(W-w)/2:(H-h)/2[bg_w_shadow];[bg_w_shadow][orig]overlay=(W-w)/2:(H-h)/2,eq=contrast=1.2:saturation=1.1,unsharp=7:7:1.5:7:7:0.0`, \n    categoria: \"acao\" \n  },\n\n  // 4. NOSTALGIA (Emoção) - Para Flashback, Tristeza, Memória\n  // Tom sépia, suavidade (boxblur leve), cores lavadas.\n  { \n    nome: \"NOSTALGIA (Sépia)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=20:10,colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131[bg_sepia];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[bg_sepia][fg_scaled]overlay=(W-w)/2:(H-h)/2,colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131,boxblur=2:1`, \n    categoria: \"flashback\" \n  },\n\n  // 5. LOVE (Romance) - Para Romance, Amor, Timidez\n  // Tom rosado, brilho (bloom simulado), suavidade.\n  { \n    nome: \"LOVE (Bloom)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=40:20,colorbalance=rs=0.2:gs=0.1:bs=0.2[bg_pink];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[bg_pink][fg_scaled]overlay=(W-w)/2:(H-h)/2,eq=saturation=1.2:contrast=1.05,colorbalance=rs=0.05:bs=0.05,unsharp=5:5:0.8`, \n    categoria: \"romance\" \n  },\n\n  // 6. STANDARD POLISHED (Neutro) - Para cenas normais\n  // Não deixa a imagem crua. Aplica tratamento profissional padrão.\n  { \n    nome: \"STANDARD (Polido)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=20:10[bg_blur];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[bg_blur][fg_scaled]overlay=(W-w)/2:(H-h)/2,eq=saturation=1.15:contrast=1.05,unsharp=3:3:0.5`, \n    categoria: \"neutro\" \n  },\n  \n  // 7. SAFE MODE (Censura) - Para imagens censuradas\n  // Escurece e dessatura para não chamar atenção do algoritmo.\n  { \n    nome: \"CENSURA (Safe)\", \n    tipo: \"complex\", \n    filter: `[0:v]split=2[bg][fg];[bg]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=20:10[bg_blur];[fg]scale=1920:1080:force_original_aspect_ratio=decrease[fg_scaled];[bg_blur][fg_scaled]overlay=(W-w)/2:(H-h)/2,eq=brightness=-0.1:saturation=0.8,boxblur=2:1`, \n    categoria: \"censura\" \n  }\n];\n\n// Mantemos os movimentos apenas para constar no JSON, caso o vídeo use no futuro\nconst movements = [\n  { name: \"Standard Zoom\", filter: \"zoompan=z='min(zoom+0.001,1.2)':d=10000:x='iw/2-(iw/zoom/2)':y='ih/4':s=1920x1080\" }\n];\n\n// ==========================================\n// FUNÇÕES DE LOG\n// ==========================================\nfunction criarPastaLogs(pastaObra) {\n  const pastaLogs = path.join(pastaObra, CONFIG.pastaLogs);\n  if (!fs.existsSync(pastaLogs)) {\n    fs.mkdirSync(pastaLogs, { recursive: true });\n  }\n  return pastaLogs;\n}\n\nfunction log(pastaObra, mensagem, tipo = 'INFO') {\n  const timestamp = new Date().toISOString();\n  const linha = `[${timestamp}] [${tipo}] ${mensagem}`;\n  \n  console.log(linha);\n  \n  if (CONFIG.salvarLogs && pastaObra) {\n    try {\n      const pastaLogs = criarPastaLogs(pastaObra);\n      const dataHoje = new Date().toISOString().split('T')[0];\n      const arquivoLog = path.join(pastaLogs, `organiza_${dataHoje}.log`);\n      fs.appendFileSync(arquivoLog, linha + '\\n', 'utf8');\n    } catch (e) {}\n  }\n}\n\n// ==========================================\n// FUNÇÕES AUXILIARES\n// ==========================================\n\nfunction carregarEstado(pastaObra) {\n  if (CONFIG.IGNORAR_ESTADO) {\n    console.log('⚠️ IGNORAR_ESTADO=true - Não verificando estado');\n    return null;\n  }\n  \n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  \n  if (fs.existsSync(caminhoEstado)) {\n    try {\n      const conteudo = fs.readFileSync(caminhoEstado, 'utf8');\n      const estado = JSON.parse(conteudo);\n      return estado;\n    } catch (e) {\n      console.log(`Erro ao carregar estado: ${e.message}`);\n      return null;\n    }\n  }\n  \n  console.log(`📂 Arquivo de estado não existe: ${caminhoEstado}`);\n  return null;\n}\n\n// Lista todas as imagens no disco\nfunction listarImagensNoDisco(pastaObra) {\n  const imagens = [];\n  \n  if (!fs.existsSync(pastaObra)) {\n    return imagens;\n  }\n  \n  const arquivos = fs.readdirSync(pastaObra);\n  \n  for (const arquivo of arquivos) {\n    const match = arquivo.match(/^(\\d+)\\.jpg$/i);\n    \n    if (match) {\n      const numero = parseInt(match[1]);\n      const caminhoCompleto = path.join(pastaObra, arquivo);\n      \n      try {\n        const stats = fs.statSync(caminhoCompleto);\n        if (stats.size > 1024) { \n          imagens.push({\n            numero: numero,\n            arquivo: arquivo,\n            caminho: caminhoCompleto,\n            tamanho: stats.size\n          });\n        }\n      } catch (e) {}\n    }\n  }\n  \n  imagens.sort((a, b) => a.numero - b.numero);\n  return imagens;\n}\n\n// Verifica quais páginas estão pendentes\nfunction identificarPaginasPendentes(imagens, estado) {\n  const pendentes = [];\n  const jaProcessadas = [];\n  \n  for (const img of imagens) {\n    const paginaGlobal = img.numero;\n    \n    if (CONFIG.IGNORAR_ESTADO || CONFIG.FORCAR_REPROCESSAMENTO) {\n      pendentes.push(img);\n      continue;\n    }\n    \n    const infoPagina = estado?.paginasProcessadas?.[paginaGlobal];\n    \n    if (infoPagina && infoPagina.status === 'ok') {\n      jaProcessadas.push(paginaGlobal);\n    } else {\n      pendentes.push(img);\n    }\n  }\n  \n  return { pendentes, jaProcessadas };\n}\n\nfunction validarBinario(binary) {\n  if (!binary) return false;\n  const chave = Object.keys(binary)[0];\n  if (!chave) return false;\n  const dados = binary[chave];\n  if (!dados) return false;\n  if (!dados.data && !Buffer.isBuffer(dados)) return false;\n  return true;\n}\n\nlet ultimoEfeitoUsado = -1;\n\n// 🔴 SELEÇÃO DE EFEITO VIRAL INTELIGENTE (V11)\nfunction selecionarEfeito(nomeArquivo, index, efeitosRecomendados = {}, isCensored = false) {\n  const paginaNum = parseInt(nomeArquivo.toString().replace(/\\D/g, '')) || index;\n  \n  // Se estiver censurado, usa o modo SAFE imediatamente\n  if (isCensored) {\n      return {\n        filter: filters[6].filter, // Filtro CENSURA\n        filterName: filters[6].nome,\n        filterCategoria: \"censura\",\n        isSimple: false,\n        movement: movements[0]\n      };\n  }\n\n  // Tenta pegar a emoção recomendada pelo Agente\n  let emocao = 'neutro';\n  if (efeitosRecomendados[paginaNum]) {\n    emocao = (efeitosRecomendados[paginaNum].emocao || 'neutro').toLowerCase();\n  }\n\n  // Mapeia Emoção -> Filtro Visual\n  let filtroSelecionado;\n  \n  if (['comedia', 'vitoria', 'tecnologia', 'feliz', 'deboche', 'alegria'].includes(emocao)) {\n      filtroSelecionado = filters[0]; // HYPE\n  } else if (['tensao', 'medo', 'horror', 'suspense', 'misterio', 'susto'].includes(emocao)) {\n      filtroSelecionado = filters[1]; // DEEP\n  } else if (['acao', 'raiva', 'grito', 'luta', 'combate', 'odio'].includes(emocao)) {\n      filtroSelecionado = filters[2]; // IMPACT\n  } else if (['flashback', 'tristeza', 'memoria', 'saudade', 'triste'].includes(emocao)) {\n      filtroSelecionado = filters[3]; // NOSTALGIA\n  } else if (['romance', 'amor', 'timidez', 'paixao'].includes(emocao)) {\n      filtroSelecionado = filters[4]; // LOVE\n  } else {\n      filtroSelecionado = filters[5]; // STANDARD (Neutro mas polido)\n  }\n  \n  // Retorno compatível com V8\n  return {\n    filter: filtroSelecionado.filter,\n    filterName: filtroSelecionado.nome,\n    filterIndex: 0,\n    filterCategoria: filtroSelecionado.categoria,\n    isSimple: false, // Todos agora são complexos\n    movement: movements[0] // Placeholder\n  };\n}\n\nfunction aplicarEfeito(inputPath, outputPath, efeito, pastaObra) {\n  const filterType = efeito.isSimple ? \"-vf\" : \"-filter_complex\";\n  const cmd = `ffmpeg -y -i \"${inputPath}\" ${filterType} \"${efeito.filter}\" -q:v 2 \"${outputPath}\" 2>/dev/null`;\n  \n  for (let tentativa = 1; tentativa <= CONFIG.maxTentativasFFmpeg; tentativa++) {\n    try {\n      execSync(cmd, { timeout: CONFIG.timeoutFFmpeg });\n      \n      if (fs.existsSync(outputPath)) {\n        const stats = fs.statSync(outputPath);\n        if (stats.size > 1024) {\n          return { sucesso: true, tentativas: tentativa };\n        }\n      }\n    } catch (e) {\n      if (tentativa === CONFIG.maxTentativasFFmpeg) {\n        log(pastaObra, `FFmpeg falhou após ${tentativa} tentativas`, 'WARN');\n      }\n    }\n    if (tentativa < CONFIG.maxTentativasFFmpeg) execSync('sleep 1');\n  }\n  \n  try {\n    fs.copyFileSync(inputPath, outputPath);\n    return { sucesso: false, usouFallback: true };\n  } catch (e) {\n    return { sucesso: false, erro: e.message };\n  }\n}\n\nfunction comprimirParaAgente(inputPath, pastaObra) {\n  const tempPath = inputPath.replace('.jpg', '_agente_temp.jpg');\n  try {\n    const cmd = `ffmpeg -y -i \"${inputPath}\" -vf \"scale='min(${CONFIG.maxLarguraAgente},iw)':-1\" -q:v ${Math.floor((100 - CONFIG.qualidadeAgente) / 10 + 2)} \"${tempPath}\" 2>/dev/null`;\n    execSync(cmd, { timeout: 30000 });\n    \n    if (fs.existsSync(tempPath)) {\n      const buffer = fs.readFileSync(tempPath);\n      fs.unlinkSync(tempPath);\n      return buffer;\n    }\n  } catch (e) {}\n  return fs.readFileSync(inputPath);\n}\n\n// ==========================================\n// 🚀 LÓGICA PRINCIPAL (V11)\n// ==========================================\n\nconst items = $input.all();\nconst primeiroItem = items[0]?.json || {};\n\n// 🔴 RESGATE DE MEMÓRIA (FIX V6)\nlet itensOriginaisGerenciador = [];\ntry {\n    itensOriginaisGerenciador = $('GERENCIADOR MASTER').all();\n    console.log(`✅ Memória recuperada: ${itensOriginaisGerenciador.length} itens do Gerenciador`);\n} catch(e) {\n    console.log(\"⚠️ Aviso: Não foi possível ler memória do Gerenciador Master\");\n}\n\nconsole.log('');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('🚀 ORGANIZA + EDITA IMAGENS V11 (FULL + VIRAL ENGINE)');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`📅 ${new Date().toISOString()}`);\nconsole.log('');\nconsole.log('⚙️ CONFIGURAÇÕES:');\nconsole.log(`   PAGINA_INICIAL_MANUAL: ${CONFIG.PAGINA_INICIAL_MANUAL}`);\nconsole.log(`   PAGINA_FINAL_MANUAL: ${CONFIG.PAGINA_FINAL_MANUAL}`);\nconsole.log(`   IGNORAR_ESTADO: ${CONFIG.IGNORAR_ESTADO}`);\nconsole.log(`   FORCAR_REPROCESSAMENTO: ${CONFIG.FORCAR_REPROCESSAMENTO}`);\nconsole.log('');\n\n// ==========================================\n// 1. DESCOBRE A PASTA DA OBRA\n// ==========================================\nlet obra = primeiroItem.obra || primeiroItem._controle?.obra || \"Obra_Desconhecida\";\nlet capitulo = primeiroItem.capitulo || \"cap1\";\nlet pastaObra = primeiroItem.pastaObra || null;\n\ntry {\n  const configNode = $('Configura Obra1').first().json;\n  if (configNode) {\n    const nomeCompleto = configNode.nome_obra || '';\n    if (nomeCompleto.toLowerCase().startsWith('cap')) {\n      const partes = nomeCompleto.split('-');\n      if (partes.length > 1) {\n        capitulo = partes[0];\n        obra = partes.slice(1).join('-');\n      } else {\n        obra = nomeCompleto;\n      }\n    } else if (nomeCompleto) {\n      obra = nomeCompleto;\n      capitulo = configNode.capitulo || 'cap1';\n    }\n    console.log(`📍 De Configura Obra1: obra=${obra}, capitulo=${capitulo}`);\n  }\n} catch (e) {}\n\nif (!pastaObra) {\n  pastaObra = path.join(CONFIG.pastaRaiz, obra);\n}\n\nlog(pastaObra, `📁 Obra: ${obra}`);\nlog(pastaObra, `📖 Capítulo: ${capitulo}`);\nlog(pastaObra, `📂 Pasta: ${pastaObra}`);\n\nif (!fs.existsSync(pastaObra)) {\n  fs.mkdirSync(pastaObra, { recursive: true });\n  log(pastaObra, `📁 Pasta criada: ${pastaObra}`);\n}\n\n// ==========================================\n// 2. DETECTA MODO DE OPERAÇÃO\n// ==========================================\nconst temBinariosDoNode = items.some(item => validarBinario(item.binary));\nconst modoPularDownload = primeiroItem._pularDownload === true;\n\nlog(pastaObra, '');\nlog(pastaObra, '🔍 DETECTANDO MODO DE OPERAÇÃO...');\nlog(pastaObra, `   Items recebidos: ${items.length}`);\nlog(pastaObra, `   Tem binários válidos: ${temBinariosDoNode}`);\nlog(pastaObra, `   Flag _pularDownload: ${modoPularDownload}`);\n\n// ==========================================\n// MODO 1: PRIMEIRA EXECUÇÃO (DO DRIVE)\n// ==========================================\nif (temBinariosDoNode && !modoPularDownload) {\n  log(pastaObra, '');\n  log(pastaObra, '📥 MODO: PRIMEIRA EXECUÇÃO (salvando do Drive)');\n  log(pastaObra, '═══════════════════════════════════════════════════════════');\n  \n  const estado = carregarEstado(pastaObra);\n  const efeitosRecomendados = estado?.efeitosRecomendados || {};\n  \n  const processados = [];\n  let imagensSalvas = 0;\n  let imagensIgnoradas = 0;\n  \n  for (let i = 0; i < items.length; i++) {\n    const item = items[i];\n    const json = item.json;\n    \n    // 🔴 RESGATE DE MEMÓRIA (LÓGICA V6)\n    let paginaGlobal = json.paginaGlobal;\n    if (!paginaGlobal && itensOriginaisGerenciador.length > i) {\n        paginaGlobal = itensOriginaisGerenciador[i].json.paginaGlobal;\n    }\n    if (!paginaGlobal) {\n        paginaGlobal = (i + 1);\n        console.log(`⚠️ Alerta: Fallback sequencial item ${i} -> Pag ${paginaGlobal}`);\n    }\n\n    // 🔴 VERIFICA SE FOI CENSURADO (LÓGICA V7)\n    const isCensored = json.needs_censoring === true;\n\n    const paginaLocal = json.paginaLocal || (i + 1);\n    const nomeOriginal = json.name || `img_${paginaGlobal}`;\n    \n    const caminhoOriginal = json.caminhoOriginal || path.join(pastaObra, `${paginaGlobal}.jpg`);\n    const caminhoEditado = json.caminhoEditado || path.join(pastaObra, `${paginaGlobal}_editado.jpg`);\n    \n    if (!CONFIG.FORCAR_REPROCESSAMENTO && !CONFIG.IGNORAR_ESTADO) {\n      const statusPagina = estado?.paginasProcessadas?.[paginaGlobal]?.status;\n      if (statusPagina === 'ok') {\n        log(pastaObra, `⏭️ Pág ${paginaGlobal}: já processada (pulando)`);\n        imagensIgnoradas++;\n        continue;\n      }\n    }\n    \n    if (CONFIG.PAGINA_INICIAL_MANUAL > 0 && paginaGlobal < CONFIG.PAGINA_INICIAL_MANUAL) {\n      log(pastaObra, `⏭️ Pág ${paginaGlobal}: antes da página inicial manual (pulando)`);\n      imagensIgnoradas++;\n      continue;\n    }\n    if (CONFIG.PAGINA_FINAL_MANUAL > 0 && paginaGlobal > CONFIG.PAGINA_FINAL_MANUAL) {\n      log(pastaObra, `⏭️ Pág ${paginaGlobal}: depois da página final manual (pulando)`);\n      imagensIgnoradas++;\n      continue;\n    }\n    \n    log(pastaObra, `📄 Processando página ${paginaGlobal} (local: ${paginaLocal}) [Censurado: ${isCensored}]`);\n    \n    if (!validarBinario(item.binary)) {\n      log(pastaObra, `⚠️ Pág ${paginaGlobal}: binário inválido`, 'WARN');\n      continue;\n    }\n    \n    let bufferOriginal;\n    try {\n      const binaryKey = Object.keys(item.binary)[0];\n      bufferOriginal = await this.helpers.getBinaryDataBuffer(i, binaryKey);\n      fs.writeFileSync(caminhoOriginal, bufferOriginal);\n      log(pastaObra, `  💾 Original salvo: ${bufferOriginal.length} bytes → ${caminhoOriginal}`);\n      imagensSalvas++;\n    } catch (e) {\n      log(pastaObra, `  ❌ Erro ao salvar: ${e.message}`, 'ERROR');\n      continue;\n    }\n    \n    // APLICA EFEITO VIRAL (COM TRAVA DE SEGURANÇA)\n    const efeito = selecionarEfeito(nomeOriginal, paginaGlobal, efeitosRecomendados, isCensored);\n    \n    if (isCensored) {\n        log(pastaObra, `  🔒 Censura Detectada: Aplicando tratamento SAFE.`);\n    } else {\n        log(pastaObra, `  🎨 Aplicando tratamento viral: ${efeito.filterName}`);\n    }\n\n    const resultadoEfeito = aplicarEfeito(caminhoOriginal, caminhoEditado, efeito, pastaObra);\n    \n    if (resultadoEfeito.sucesso) {\n      log(pastaObra, `  ✨ Finalizada: ${efeito.filterName} (${resultadoEfeito.tentativas} tentativa(s))`);\n    } else if (resultadoEfeito.usouFallback) {\n      log(pastaObra, `  ⚠️ Fallback: copiou original`, 'WARN');\n    }\n    \n    const bufferAgente = comprimirParaAgente(caminhoEditado, pastaObra);\n    \n    processados.push({\n      paginaGlobal,\n      paginaLocal,\n      nomeOriginal,\n      caminhoOriginal,\n      caminhoEditado,\n      efeito: efeito.filterName,\n      efeitoCategoria: efeito.filterCategoria,\n      bufferAgente,\n      isCensored \n    });\n  }\n  \n  log(pastaObra, '');\n  log(pastaObra, `📊 Imagens salvas: ${imagensSalvas}`);\n  log(pastaObra, `📊 Imagens ignoradas: ${imagensIgnoradas}`);\n  \n  if (processados.length === 0) {\n    return [{ \n      json: { \n        status: 'TUDO_PROCESSADO', \n        obra, \n        capitulo,\n        pastaObra,\n        mensagem: 'Todas as páginas já foram processadas anteriormente'\n      } \n    }];\n  }\n  \n  processados.sort((a, b) => a.paginaGlobal - b.paginaGlobal);\n  \n  const binarios = {};\n  const listaPaginas = [];\n  const metadados = [];\n  \n  for (let i = 0; i < processados.length; i++) {\n    const p = processados[i];\n    const novaChave = i === 0 ? 'data' : `data${i}`;\n    \n    binarios[novaChave] = {\n      data: p.bufferAgente.toString('base64'),\n      mimeType: 'image/jpeg',\n      fileName: `${p.paginaGlobal}.jpg`\n    };\n    \n    listaPaginas.push(p.paginaGlobal);\n    \n    metadados.push({\n      pagina_numero: p.paginaGlobal,\n      paginaGlobal: p.paginaGlobal,\n      paginaLocal: p.paginaLocal,\n      nome_original: p.nomeOriginal,\n      caminho_original: p.caminhoOriginal,\n      caminho_editado: p.caminhoEditado,\n      effectUsedName: p.efeito,\n      effectCategoria: p.efeitoCategoria,\n      censurado: p.isCensored\n    });\n  }\n  \n  log(pastaObra, '');\n  log(pastaObra, '═══════════════════════════════════════════════════════════');\n  log(pastaObra, '📊 RESUMO (MODO DRIVE)');\n  log(pastaObra, `  ✅ Processadas: ${processados.length}`);\n  log(pastaObra, `  📦 Binários: ${Object.keys(binarios).length}`);\n  log(pastaObra, `  📄 Páginas: ${listaPaginas.join(', ')}`);\n  \n  return [{\n    json: {\n      info: `Lote com ${listaPaginas.length} imagens`,\n      paginas_neste_lote: listaPaginas.join(\", \"),\n      primeira_pagina: listaPaginas[0],\n      ultima_pagina: listaPaginas[listaPaginas.length - 1],\n      contexto_lote: `ATENÇÃO: Este lote contém as páginas: ${listaPaginas.join(\", \")}. Continue a história de onde parou.`,\n      obra: obra,\n      capitulo: capitulo,\n      pastaObra: pastaObra,\n      metadados_paginas: metadados,\n      total_paginas: listaPaginas.length,\n      _efeitosUsados: metadados.map(m => ({\n        pagina: m.paginaGlobal,\n        efeito: m.effectUsedName,\n        categoria: m.effectCategoria\n      })),\n      _infoParaSalvar: primeiroItem._controle?._infoParaSalvar || primeiroItem._infoParaSalvar || {}\n    },\n    binary: binarios\n  }];\n}\n\n// ==========================================\n// MODO 2: RE-EXECUÇÃO (DO DISCO)\n// ==========================================\nlog(pastaObra, '');\nlog(pastaObra, '📂 MODO: RE-EXECUÇÃO (lendo do disco)');\nlog(pastaObra, '═══════════════════════════════════════════════════════════');\n\nconst imagensNoDisco = listarImagensNoDisco(pastaObra);\nlog(pastaObra, `   📷 Total de imagens no disco: ${imagensNoDisco.length}`);\n\nif (imagensNoDisco.length === 0) {\n  log(pastaObra, `❌ Nenhuma imagem encontrada no disco!`, 'ERROR');\n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'SEM_IMAGENS',\n      _erroMensagem: 'Nenhuma imagem numerada encontrada na pasta',\n      obra, capitulo, pastaObra\n    }\n  }];\n}\n\nconst primeiraImagem = imagensNoDisco[0].numero;\nconst ultimaImagem = imagensNoDisco[imagensNoDisco.length - 1].numero;\n\nlog(pastaObra, `   📄 Primeira imagem: ${primeiraImagem}`);\nlog(pastaObra, `   📄 Última imagem: ${ultimaImagem}`);\n\nconst estado = carregarEstado(pastaObra);\nconst { pendentes, jaProcessadas } = identificarPaginasPendentes(imagensNoDisco, estado);\n\nlog(pastaObra, '');\nlog(pastaObra, '📋 COMPARAÇÃO DISCO vs ESTADO:');\nlog(pastaObra, `   ✅ Já processadas (status=ok): ${jaProcessadas.length}`);\nlog(pastaObra, `   ⏳ PENDENTES: ${pendentes.length}`);\n\nlet imagensParaProcessar = [...pendentes];\n\nif (CONFIG.PAGINA_INICIAL_MANUAL > 0) {\n  imagensParaProcessar = imagensParaProcessar.filter(img => img.numero >= CONFIG.PAGINA_INICIAL_MANUAL);\n  log(pastaObra, `🔴 Filtro manual: página >= ${CONFIG.PAGINA_INICIAL_MANUAL}`);\n}\n\nif (CONFIG.PAGINA_FINAL_MANUAL > 0) {\n  imagensParaProcessar = imagensParaProcessar.filter(img => img.numero <= CONFIG.PAGINA_FINAL_MANUAL);\n  log(pastaObra, `🔴 Filtro manual: página <= ${CONFIG.PAGINA_FINAL_MANUAL}`);\n}\n\nlog(pastaObra, `📥 Total para processar: ${imagensParaProcessar.length}`);\n\nif (imagensParaProcessar.length === 0) {\n  log(pastaObra, '');\n  log(pastaObra, '✅ TODAS AS PÁGINAS JÁ FORAM PROCESSADAS!');\n  return [{ \n    json: { \n      status: 'TUDO_PROCESSADO', \n      obra, \n      capitulo, \n      pastaObra, \n      totalNoDisco: imagensNoDisco.length, \n      totalProcessadas: jaProcessadas.length, \n      mensagem: 'Todas as páginas já foram processadas com sucesso anteriormente'\n    } \n  }];\n}\n\nlog(pastaObra, '');\nlog(pastaObra, '🔄 PROCESSANDO IMAGENS PENDENTES...');\n\nconst efeitosRecomendados = estado?.efeitosRecomendados || {};\nconst processados = [];\nconst erros = [];\n\nfor (let i = 0; i < imagensParaProcessar.length; i++) {\n  const img = imagensParaProcessar[i];\n  const paginaGlobal = img.numero;\n  const caminhoOriginal = img.caminho;\n  const caminhoEditado = caminhoOriginal.replace('.jpg', '_editado.jpg');\n  \n  log(pastaObra, `   📄 Página ${paginaGlobal} (${i + 1}/${imagensParaProcessar.length})...`);\n  \n  const efeito = selecionarEfeito(img.arquivo, paginaGlobal, efeitosRecomendados);\n  const resultadoEfeito = aplicarEfeito(caminhoOriginal, caminhoEditado, efeito, pastaObra);\n  \n  if (resultadoEfeito.sucesso) {\n    log(pastaObra, `      ✨ Efeito: ${efeito.filterName}`);\n  } else if (resultadoEfeito.usouFallback) {\n    log(pastaObra, `      ⚠️ Fallback (copiou original)`);\n  } else {\n    log(pastaObra, `      ❌ Erro: ${resultadoEfeito.erro}`, 'ERROR');\n    erros.push(paginaGlobal);\n    continue;\n  }\n  \n  const bufferAgente = comprimirParaAgente(caminhoEditado, pastaObra); // Usa editado\n  \n  processados.push({\n    paginaGlobal,\n    paginaLocal: paginaGlobal,\n    nomeOriginal: img.arquivo,\n    caminhoOriginal,\n    caminhoEditado,\n    efeito: efeito.filterName,\n    efeitoCategoria: efeito.filterCategoria,\n    bufferAgente\n  });\n}\n\nif (processados.length === 0) {\n  log(pastaObra, '❌ Nenhuma página foi processada com sucesso!', 'ERROR');\n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'ERRO_PROCESSAMENTO',\n      _erroMensagem: 'Nenhuma página foi processada com sucesso',\n      obra, capitulo, pastaObra,\n      paginasErro: erros\n    }\n  }];\n}\n\nprocessados.sort((a, b) => a.paginaGlobal - b.paginaGlobal);\n\nconst binarios = {};\nconst listaPaginas = [];\nconst metadados = [];\n\nfor (let i = 0; i < processados.length; i++) {\n  const p = processados[i];\n  const novaChave = i === 0 ? 'data' : `data${i}`;\n  \n  binarios[novaChave] = {\n    data: p.bufferAgente.toString('base64'),\n    mimeType: 'image/jpeg',\n    fileName: `${p.paginaGlobal}.jpg`\n  };\n  \n  listaPaginas.push(p.paginaGlobal);\n  \n  metadados.push({\n    pagina_numero: p.paginaGlobal,\n    paginaGlobal: p.paginaGlobal,\n    paginaLocal: p.paginaLocal,\n    nome_original: p.nomeOriginal,\n    caminho_original: p.caminhoOriginal,\n    caminho_editado: p.caminhoEditado,\n    effectUsedName: p.efeito,\n    effectCategoria: p.efeitoCategoria\n  });\n}\n\nlog(pastaObra, '');\nlog(pastaObra, '═══════════════════════════════════════════════════════════');\nlog(pastaObra, '📊 RESUMO FINAL (MODO DISCO)');\nlog(pastaObra, '═══════════════════════════════════════════════════════════');\nlog(pastaObra, `📁 Obra: ${obra}`);\nlog(pastaObra, `📖 Capítulo: ${capitulo}`);\nlog(pastaObra, `📷 Total no disco: ${imagensNoDisco.length}`);\nlog(pastaObra, `✅ Já processadas: ${jaProcessadas.length}`);\nlog(pastaObra, `📥 Processadas agora: ${processados.length}`);\nlog(pastaObra, `📄 Páginas: ${listaPaginas[0]} - ${listaPaginas[listaPaginas.length - 1]}`);\nlog(pastaObra, '═══════════════════════════════════════════════════════════');\n\nreturn [{\n  json: {\n    info: `Lote com ${listaPaginas.length} imagens`,\n    paginas_neste_lote: listaPaginas.join(\", \"),\n    primeira_pagina: listaPaginas[0],\n    ultima_pagina: listaPaginas[listaPaginas.length - 1],\n    contexto_lote: `ATENÇÃO: Este lote contém as páginas: ${listaPaginas.join(\", \")}. Continue a história de onde parou.`,\n    obra: obra,\n    capitulo: capitulo,\n    pastaObra: pastaObra,\n    metadados_paginas: metadados,\n    total_paginas: listaPaginas.length,\n    \n    _efeitosUsados: metadados.map(m => ({\n      pagina: m.paginaGlobal,\n      efeito: m.effectUsedName,\n      categoria: m.effectCategoria\n    })),\n    \n    _infoParaSalvar: primeiroItem._controle?._infoParaSalvar || primeiroItem._infoParaSalvar || {}\n  },\n  binary: binarios\n}];"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -464,
+    -896
+   ],
+   "id": "721a6d38-fde2-49ee-81c5-22b9da1b07c2",
+   "name": "ORGANIZA + EDITA IMAGENS"
+  },
+  {
+   "parameters": {
+    "mode": "combine",
+    "combineBy": "combineByPosition",
+    "numberInputs": 4,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    256,
+    -944
+   ],
+   "id": "e0320d64-b7dc-4e2f-afdb-2103afef7465",
+   "name": "Merge11"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: PROCESSA RESPOSTA DO AGENTE V10 (COM SISTEMA DE BACKUP)\n// ======================================================================\n// 🔴 MUDANÇAS V10:\n// - Sistema de backup aprimorado com pasta separada\n// - Backups com timestamp para histórico\n// - Configuração de quantidade máxima de backups\n// ======================================================================\n\nconst fs = require('fs');\nconst path = require('path');\n\n// ==========================================\n// ⚙️ CONFIGURAÇÃO - ALTERE AQUI\n// ==========================================\nconst CONFIG = {\n  pastaRaiz: '/tmp/youtubevideos',\n  arquivoEstado: 'estado_capitulos.json',\n  \n  // ══════════════════════════════════════════\n  // 🔴 CONTROLES MANUAIS\n  // ══════════════════════════════════════════\n  \n  // Página inicial manual (0 = usa do estado)\n  PAGINA_INICIAL_MANUAL: 0,\n  \n  // Modo teste - NÃO salva no estado\n  MODO_TESTE: false,\n  \n  // ══════════════════════════════════════════\n  // 🆕 CONFIGURAÇÕES DE BACKUP\n  // ══════════════════════════════════════════\n  \n  // Pasta onde os backups serão salvos (relativa à pasta da obra)\n  pastaBackups: 'backups_estado',\n  \n  // Quantidade máxima de backups a manter (0 = ilimitado)\n  maxBackups: 20,\n  \n  // Criar backup antes de salvar\n  criarBackupAntesDeSalvar: true,\n  \n  // ══════════════════════════════════════════\n  \n  // Logs\n  salvarLogs: true,\n  pastaLogs: 'logs',\n  \n  // Debug\n  DEBUG: true\n};\n\n// ==========================================\n// MAPEAMENTO DE EMOÇÕES → EFEITOS\n// ==========================================\nconst MAPA_EMOCOES_EFEITOS = {\n  romance: {\n    palavras: [\n      'amor', 'gosto de você', 'namorado', 'namorada', 'beijo', 'abraço', \n      'coração', 'romântico', 'paixão', 'crush', 'confessar', 'confissão',\n      'apaixonado', 'apaixonada', 'te amo', 'linda', 'lindo', 'fofa', 'fofo',\n      'carinho', 'sentimentos', 'declaração', 'date', 'encontro'\n    ],\n    efeitoRecomendado: 'Romantic',\n    efeitoIndice: 8\n  },\n  tensao: {\n    palavras: [\n      'matar', 'morte', 'perigo', 'ameaça', 'medo', 'terror', 'assustador', \n      'raiva', 'fúria', 'nervoso', 'tenso', 'pressão', 'ameaçar', 'violência',\n      'sangue', 'ferido', 'machucado', 'dor', 'sofrer', 'gritar', 'desespero',\n      'pânico', 'horror', 'assustado', 'tremendo', 'suando'\n    ],\n    efeitoRecomendado: 'Horror',\n    efeitoIndice: 9\n  },\n  tristeza: {\n    palavras: [\n      'triste', 'chorar', 'lágrima', 'sozinho', 'abandonado', 'rejeição', \n      'rejeitado', 'desculpa', 'sinto muito', 'perdão', 'solidão', 'deprimido',\n      'melancolia', 'saudade', 'perda', 'luto', 'desesperança', 'vazio',\n      'chorando', 'lágrimas', 'despedida', 'adeus', 'nunca mais'\n    ],\n    efeitoRecomendado: 'Cold',\n    efeitoIndice: 10\n  },\n  comedia: {\n    palavras: [\n      'haha', 'engraçado', 'cômico', 'piada', 'risada', 'idiota', 'palhaçada', \n      'bizarro', 'lol', 'kkkk', 'wtf', 'caramba', 'nossa', 'sério', 'brincadeira',\n      'zoeira', 'meme', 'hilário', 'rir', 'gargalhada', 'bobagem', 'ridículo',\n      'vergonha alheia', 'constrangedor', 'estranho'\n    ],\n    efeitoRecomendado: 'Blur',\n    efeitoIndice: 1\n  },\n  acao: {\n    palavras: [\n      'luta', 'batalha', 'poder', 'ataque', 'explosão', 'impacto', 'força', \n      'buff', 'nerf', 'hit', 'soco', 'chute', 'golpe', 'defesa', 'esquiva',\n      'velocidade', 'rápido', 'destruir', 'quebrar', 'esmagar', 'voar',\n      'super', 'habilidade', 'skill', 'combo', 'crítico', 'dano'\n    ],\n    efeitoRecomendado: 'Shadow',\n    efeitoIndice: 6\n  },\n  drama: {\n    palavras: [\n      'dramático', 'revelação', 'choque', 'surpresa', 'descoberta', 'segredo', \n      'verdade', 'mentira', 'traição', 'enganar', 'esconder', 'revelar',\n      'impossível', 'não acredito', 'como assim', 'por quê', 'injusto',\n      'destino', 'cruel', 'terrível', 'horrível', 'inacreditável'\n    ],\n    efeitoRecomendado: 'Dark',\n    efeitoIndice: 2\n  },\n  flashback: {\n    palavras: [\n      'memória', 'passado', 'lembrar', 'antigamente', 'quando era', \n      'naquela época', 'flashback', 'recordação', 'lembranças', 'há muito tempo',\n      'anos atrás', 'infância', 'criança', 'jovem', 'antes de', 'costumava'\n    ],\n    efeitoRecomendado: 'Sepia',\n    efeitoIndice: 5\n  },\n  vitoria: {\n    palavras: [\n      'vitória', 'ganhou', 'venceu', 'campeão', 'épico', 'incrível', 'sucesso', \n      'conseguiu', 'finalmente', 'missão cumprida', 'parabéns', 'celebrar',\n      'comemorar', 'conquista', 'troféu', 'prêmio', 'recompensa', 'herói',\n      'glorioso', 'triunfo', 'vencer', 'derrotar'\n    ],\n    efeitoRecomendado: 'Golden',\n    efeitoIndice: 11\n  },\n  tecnologia: {\n    palavras: [\n      'sistema', 'status', 'level', 'nível', 'skill', 'habilidade', 'menu', \n      'interface', 'computador', 'dados', 'análise', 'estatísticas', 'upgrade',\n      'evolução', 'rank', 'classe', 'atributos', 'pontos', 'exp', 'experiência',\n      'inventário', 'item', 'equipamento', 'quest', 'missão'\n    ],\n    efeitoRecomendado: 'Blue',\n    efeitoIndice: 5\n  },\n  misterio: {\n    palavras: [\n      'estranho', 'misterioso', 'enigma', 'dúvida', 'suspeito', 'oculto',\n      'escondido', 'sombrio', 'sinistro', 'inexplicável', 'sobrenatural',\n      'fantasma', 'espírito', 'amaldiçoado', 'maldição', 'profecia'\n    ],\n    efeitoRecomendado: 'Vignette',\n    efeitoIndice: 14\n  },\n  neutro: {\n    palavras: [],\n    efeitoRecomendado: 'Mirror',\n    efeitoIndice: 0\n  }\n};\n\n// ==========================================\n// FUNÇÕES DE LOG\n// ==========================================\nfunction criarPastaSeNaoExiste(caminho) {\n  if (!fs.existsSync(caminho)) {\n    try {\n      fs.mkdirSync(caminho, { recursive: true });\n      console.log(`📁 Pasta criada: ${caminho}`);\n      return true;\n    } catch (e) {\n      console.error(`❌ Erro ao criar pasta ${caminho}: ${e.message}`);\n      return false;\n    }\n  }\n  return true;\n}\n\nfunction log(pastaObra, mensagem, tipo = 'INFO') {\n  const timestamp = new Date().toISOString();\n  const linha = `[${timestamp}] [${tipo}] ${mensagem}`;\n  \n  console.log(linha);\n  \n  if (CONFIG.salvarLogs && pastaObra) {\n    try {\n      const pastaLogs = path.join(pastaObra, CONFIG.pastaLogs);\n      criarPastaSeNaoExiste(pastaLogs);\n      \n      const dataHoje = new Date().toISOString().split('T')[0];\n      const arquivoLog = path.join(pastaLogs, `processa_agente_${dataHoje}.log`);\n      fs.appendFileSync(arquivoLog, linha + '\\n', 'utf8');\n    } catch (e) {}\n  }\n}\n\nfunction debug(pastaObra, mensagem) {\n  if (CONFIG.DEBUG) {\n    log(pastaObra, `[DEBUG] ${mensagem}`, 'DEBUG');\n  }\n}\n\n// ==========================================\n// 🆕 FUNÇÕES DE BACKUP APRIMORADAS\n// ==========================================\n\n/**\n * Gera nome do arquivo de backup com timestamp\n */\nfunction gerarNomeBackup() {\n  const agora = new Date();\n  const timestamp = agora.toISOString()\n    .replace(/[:\\-]/g, '')\n    .replace('T', '_')\n    .replace(/\\.\\d{3}Z$/, '');\n  return `estado_backup_${timestamp}.json`;\n}\n\n/**\n * Lista todos os backups existentes ordenados por data (mais recente primeiro)\n */\nfunction listarBackups(pastaBackups) {\n  if (!fs.existsSync(pastaBackups)) {\n    return [];\n  }\n  \n  try {\n    const arquivos = fs.readdirSync(pastaBackups)\n      .filter(f => f.startsWith('estado_backup_') && f.endsWith('.json'))\n      .map(f => {\n        const caminhoCompleto = path.join(pastaBackups, f);\n        const stats = fs.statSync(caminhoCompleto);\n        return {\n          nome: f,\n          caminho: caminhoCompleto,\n          criadoEm: stats.mtime,\n          tamanho: stats.size\n        };\n      })\n      .sort((a, b) => b.criadoEm - a.criadoEm); // Mais recente primeiro\n    \n    return arquivos;\n  } catch (e) {\n    console.error(`❌ Erro ao listar backups: ${e.message}`);\n    return [];\n  }\n}\n\n/**\n * Remove backups antigos mantendo apenas os mais recentes\n */\nfunction limparBackupsAntigos(pastaBackups, maxBackups) {\n  if (maxBackups <= 0) return; // 0 = ilimitado\n  \n  const backups = listarBackups(pastaBackups);\n  \n  if (backups.length <= maxBackups) {\n    return;\n  }\n  \n  // Remove os mais antigos\n  const backupsParaRemover = backups.slice(maxBackups);\n  \n  for (const backup of backupsParaRemover) {\n    try {\n      fs.unlinkSync(backup.caminho);\n      console.log(`🗑️ Backup antigo removido: ${backup.nome}`);\n    } catch (e) {\n      console.error(`❌ Erro ao remover backup ${backup.nome}: ${e.message}`);\n    }\n  }\n}\n\n/**\n * Cria backup do arquivo de estado atual\n */\nfunction criarBackup(pastaObra) {\n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  \n  if (!fs.existsSync(caminhoEstado)) {\n    console.log('ℹ️ Arquivo de estado não existe, backup não necessário');\n    return { sucesso: false, motivo: 'arquivo_nao_existe' };\n  }\n  \n  const pastaBackups = path.join(pastaObra, CONFIG.pastaBackups);\n  criarPastaSeNaoExiste(pastaBackups);\n  \n  const nomeBackup = gerarNomeBackup();\n  const caminhoBackup = path.join(pastaBackups, nomeBackup);\n  \n  try {\n    // Lê o estado atual\n    const conteudoAtual = fs.readFileSync(caminhoEstado, 'utf8');\n    const estadoAtual = JSON.parse(conteudoAtual);\n    \n    // Adiciona metadados do backup\n    const backupData = {\n      _metaBackup: {\n        criadoEm: new Date().toISOString(),\n        arquivoOriginal: CONFIG.arquivoEstado,\n        versao: 'v10'\n      },\n      ...estadoAtual\n    };\n    \n    // Salva o backup\n    fs.writeFileSync(caminhoBackup, JSON.stringify(backupData, null, 2), 'utf8');\n    \n    console.log(`💾 Backup criado: ${nomeBackup}`);\n    \n    // Limpa backups antigos\n    limparBackupsAntigos(pastaBackups, CONFIG.maxBackups);\n    \n    return {\n      sucesso: true,\n      arquivo: nomeBackup,\n      caminho: caminhoBackup,\n      tamanho: fs.statSync(caminhoBackup).size\n    };\n  } catch (e) {\n    console.error(`❌ Erro ao criar backup: ${e.message}`);\n    return { sucesso: false, motivo: e.message };\n  }\n}\n\n// ==========================================\n// FUNÇÕES DE ESTADO\n// ==========================================\n\n// 🔴 FUNÇÃO ORIGINAL MANTIDA - backup simples para .bak\nfunction backupEstado(caminhoEstado) {\n  if (fs.existsSync(caminhoEstado)) {\n    try {\n      const caminhoBackup = caminhoEstado + '.bak';\n      fs.copyFileSync(caminhoEstado, caminhoBackup);\n      return true;\n    } catch (e) {\n      return false;\n    }\n  }\n  return false;\n}\n\nfunction carregarEstado(pastaObra) {\n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  \n  debug(pastaObra, `Tentando carregar estado de: ${caminhoEstado}`);\n  \n  if (fs.existsSync(caminhoEstado)) {\n    try {\n      const conteudo = fs.readFileSync(caminhoEstado, 'utf8');\n      const estado = JSON.parse(conteudo);\n      debug(pastaObra, `Estado carregado. Última página global: ${estado.ultimaPaginaGlobal || 0}`);\n      return estado;\n    } catch (e) {\n      log(pastaObra, `Erro ao carregar estado: ${e.message}`, 'WARN');\n      return criarEstadoVazio();\n    }\n  }\n  \n  debug(pastaObra, 'Arquivo de estado não existe, criando novo');\n  return criarEstadoVazio();\n}\n\nfunction criarEstadoVazio() {\n  return {\n    obra: '',\n    ultimaAtualizacao: new Date().toISOString(),\n    ultimaPaginaGlobal: 0,\n    capitulos: {},\n    paginasProcessadas: {},\n    efeitosRecomendados: {},\n    historicoNarracoes: {},\n    personagens: {},\n    estatisticas: {\n      totalNarracoesGeradas: 0,\n      totalPaginasProcessadas: 0,\n      ultimoProcessamento: null\n    }\n  };\n}\n\nfunction salvarEstado(pastaObra, estado) {\n  if (CONFIG.MODO_TESTE) {\n    console.log('');\n    console.log('⚠️ MODO_TESTE ativo - Estado NÃO foi salvo!');\n    return false;\n  }\n  \n  criarPastaSeNaoExiste(pastaObra);\n  \n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  estado.ultimaAtualizacao = new Date().toISOString();\n  \n  // 🔴 BACKUP ORIGINAL MANTIDO - cria .bak\n  backupEstado(caminhoEstado);\n  \n  // 🆕 NOVO: Cria backup com timestamp na pasta separada\n  if (CONFIG.criarBackupAntesDeSalvar) {\n    criarBackup(pastaObra);\n  }\n  \n  try {\n    fs.writeFileSync(caminhoEstado, JSON.stringify(estado, null, 2), 'utf8');\n    log(pastaObra, `💾 Estado salvo: ${caminhoEstado}`);\n    return true;\n  } catch (e) {\n    log(pastaObra, `❌ Erro ao salvar estado: ${e.message}`, 'ERROR');\n    return false;\n  }\n}\n\nfunction descobrirUltimaPaginaProcessada(estado) {\n  const paginasOk = Object.entries(estado.paginasProcessadas || {})\n    .filter(([k, v]) => v.status === 'ok')\n    .map(([k, v]) => parseInt(k));\n  \n  if (paginasOk.length === 0) {\n    return 0;\n  }\n  \n  return Math.max(...paginasOk);\n}\n\n// ==========================================\n// FUNÇÃO PARA EXTRAIR DADOS DO NODE ANTERIOR\n// ==========================================\nfunction extrairDadosNodeAnterior() {\n  console.log('');\n  console.log('🔍 Tentando extrair dados do node anterior...');\n  \n  const nomesNodeAnterior = [\n    'organiza imagens para o agente ler',\n    'Organiza Imagens',\n    'organiza imagens',\n    'ORGANIZA IMAGENS',\n    'ORGANIZA + EDITA IMAGENS',\n    'prepara imagens'\n  ];\n  \n  let dados = {\n    obra: 'Obra_Desconhecida',\n    capitulo: 'cap1',\n    pastaObra: null,\n    primeiraGlobal: null,\n    ultimaGlobal: null,\n    metadados: [],\n    infoParaSalvar: {}\n  };\n  \n  for (const nomeNode of nomesNodeAnterior) {\n    try {\n      const nodeData = $(nomeNode).first().json;\n      \n      if (nodeData) {\n        console.log(`✅ Node \"${nomeNode}\" encontrado!`);\n        \n        dados.obra = nodeData.obra || dados.obra;\n        dados.capitulo = nodeData.capitulo || dados.capitulo;\n        dados.pastaObra = nodeData.pastaObra || null;\n        dados.metadados = nodeData.metadados_paginas || nodeData.metadados || [];\n        dados.infoParaSalvar = nodeData._infoParaSalvar || {};\n        \n        if (dados.metadados.length > 0) {\n          dados.primeiraGlobal = dados.metadados[0].paginaGlobal || dados.metadados[0].pagina_numero;\n          dados.ultimaGlobal = dados.metadados[dados.metadados.length - 1].paginaGlobal || dados.metadados[dados.metadados.length - 1].pagina_numero;\n        }\n        \n        break;\n      }\n    } catch (e) {}\n  }\n  \n  // Tenta Configura Obra se não encontrou\n  if (dados.obra === 'Obra_Desconhecida') {\n    try {\n      const configNode = $('Configura Obra1').first().json;\n      if (configNode) {\n        const nomeCompleto = configNode.nome_obra || '';\n        if (nomeCompleto.toLowerCase().startsWith('cap')) {\n          const partes = nomeCompleto.split('-');\n          if (partes.length > 1) {\n            dados.capitulo = partes[0];\n            dados.obra = partes.slice(1).join('-');\n          }\n        } else {\n          dados.obra = nomeCompleto || dados.obra;\n        }\n      }\n    } catch (e) {}\n  }\n  \n  if (!dados.pastaObra) {\n    dados.pastaObra = path.join(CONFIG.pastaRaiz, dados.obra);\n  }\n  \n  return dados;\n}\n\n// ==========================================\n// FUNÇÕES DE ANÁLISE\n// ==========================================\nfunction analisarEmocaoPagina(falas) {\n  const textoCompleto = falas\n    .map(n => (n.texto || '').toLowerCase())\n    .join(' ');\n  \n  const scores = {};\n  \n  for (const [emocao, config] of Object.entries(MAPA_EMOCOES_EFEITOS)) {\n    scores[emocao] = 0;\n    for (const palavra of config.palavras) {\n      const regex = new RegExp(palavra.toLowerCase(), 'gi');\n      const matches = textoCompleto.match(regex);\n      if (matches) {\n        scores[emocao] += matches.length;\n      }\n    }\n  }\n  \n  let emocaoDominante = 'neutro';\n  let maiorScore = 0;\n  \n  for (const [emocao, score] of Object.entries(scores)) {\n    if (score > maiorScore) {\n      maiorScore = score;\n      emocaoDominante = emocao;\n    }\n  }\n  \n  const configEmocao = MAPA_EMOCOES_EFEITOS[emocaoDominante];\n  \n  return {\n    emocao: emocaoDominante,\n    efeitoRecomendado: configEmocao.efeitoRecomendado,\n    efeitoIndice: configEmocao.efeitoIndice\n  };\n}\n\nfunction extrairPersonagens(todasFalas) {\n  const personagens = {};\n  \n  for (const fala of todasFalas) {\n    const nome = fala.nome || 'DESCONHECIDO';\n    \n    if (!personagens[nome]) {\n      personagens[nome] = {\n        genero: fala.genero || 'UNKNOWN',\n        aparicoes: 0\n      };\n    }\n    \n    personagens[nome].aparicoes++;\n    personagens[nome].genero = fala.genero || personagens[nome].genero;\n  }\n  \n  return personagens;\n}\n\n// ==========================================\n// ═══════════════════════════════════════════\n// 🚀 LÓGICA PRINCIPAL\n// ═══════════════════════════════════════════\n// ==========================================\n\nconsole.log('');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('🎯 PROCESSA RESPOSTA DO AGENTE V10 (COM SISTEMA DE BACKUP)');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`📅 ${new Date().toISOString()}`);\nconsole.log(`🔧 PAGINA_INICIAL_MANUAL: ${CONFIG.PAGINA_INICIAL_MANUAL}`);\nconsole.log(`🔧 MODO_TESTE: ${CONFIG.MODO_TESTE}`);\nconsole.log(`🔧 MAX_BACKUPS: ${CONFIG.maxBackups}`);\nconsole.log(`🔧 PASTA_BACKUPS: ${CONFIG.pastaBackups}`);\nconsole.log('');\n\n// ==========================================\n// 1. 🔴 PEGA TODOS OS ITENS DO CORRIGE JSON\n// ==========================================\nconst todosItens = $input.all();\n\nconsole.log(`📥 Itens recebidos do corrige json: ${todosItens.length}`);\n\nif (todosItens.length === 0) {\n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'SEM_ITENS',\n      _erroMensagem: 'Nenhum item recebido do corrige json'\n    }\n  }];\n}\n\n// Mostra preview dos itens\nfor (let i = 0; i < Math.min(3, todosItens.length); i++) {\n  const item = todosItens[i].json;\n  console.log(`   Item ${i}: pagina_numero=${item.pagina_numero}, falas=${(item.falas || []).length}`);\n}\nif (todosItens.length > 3) {\n  console.log(`   ... e mais ${todosItens.length - 3} itens`);\n}\n\n// ==========================================\n// 2. EXTRAI DADOS DO NODE ANTERIOR\n// ==========================================\nconst dadosAnteriores = extrairDadosNodeAnterior();\n\nconst obra = dadosAnteriores.obra;\nconst capitulo = dadosAnteriores.capitulo;\nconst pastaObra = dadosAnteriores.pastaObra;\nconst metadados = dadosAnteriores.metadados;\n\ncriarPastaSeNaoExiste(pastaObra);\n\nlog(pastaObra, `Obra: ${obra}`);\nlog(pastaObra, `Capítulo: ${capitulo}`);\nlog(pastaObra, `Pasta: ${pastaObra}`);\n\n// ==========================================\n// 3. CARREGA ESTADO E DESCOBRE ÚLTIMA PÁGINA\n// ==========================================\nlog(pastaObra, '');\nlog(pastaObra, '📂 CARREGANDO ESTADO...');\n\nconst estado = carregarEstado(pastaObra);\nconst ultimaPaginaProcessada = descobrirUltimaPaginaProcessada(estado);\n\nlog(pastaObra, `   Última página com status=ok: ${ultimaPaginaProcessada}`);\n\n// 🆕 Lista backups existentes\nconst pastaBackups = path.join(pastaObra, CONFIG.pastaBackups);\nconst backupsExistentes = listarBackups(pastaBackups);\nlog(pastaObra, `   Backups existentes: ${backupsExistentes.length}`);\n\n// CALCULA PÁGINA INICIAL GLOBAL\nlet paginaInicialGlobal;\n\nif (CONFIG.PAGINA_INICIAL_MANUAL > 0) {\n  paginaInicialGlobal = CONFIG.PAGINA_INICIAL_MANUAL;\n  log(pastaObra, `🔴 Usando PÁGINA INICIAL MANUAL: ${paginaInicialGlobal}`);\n} else if (dadosAnteriores.primeiraGlobal) {\n  paginaInicialGlobal = dadosAnteriores.primeiraGlobal;\n  log(pastaObra, `📍 Usando página do node anterior: ${paginaInicialGlobal}`);\n} else {\n  paginaInicialGlobal = ultimaPaginaProcessada + 1;\n  log(pastaObra, `📊 Calculado do estado: última OK (${ultimaPaginaProcessada}) + 1 = ${paginaInicialGlobal}`);\n}\n\nlog(pastaObra, `✅ PÁGINA INICIAL GLOBAL: ${paginaInicialGlobal}`);\n\n// ==========================================\n// 4. 🔴 PROCESSA ITENS DO CORRIGE JSON\n// ==========================================\nconsole.log('');\nconsole.log('🔄 PROCESSANDO ITENS DO CORRIGE JSON...');\n\nconst paginasProcessadas = [];\nconst analisesPorPagina = {};\nconst todasFalas = [];\nlet primeiraGlobal = null;\nlet ultimaGlobal = null;\n\nfor (let idx = 0; idx < todosItens.length; idx++) {\n  const item = todosItens[idx].json;\n  \n  // Verifica se tem erro\n  if (item.erro) {\n    console.log(`   ⚠️ Item ${idx} tem erro: ${item.erro}`);\n    continue;\n  }\n  \n  const paginaLocal = item.pagina_numero;\n  const falas = item.falas || [];\n  \n  if (!paginaLocal || falas.length === 0) {\n    console.log(`   ⚠️ Item ${idx} sem pagina_numero ou falas`);\n    continue;\n  }\n  \n  // 🔴 CORRIGE PAGINAÇÃO: página local → página global\n  const paginaGlobal = paginaInicialGlobal + (paginaLocal - 1);\n  \n  console.log(`   📄 Página local ${paginaLocal} → global ${paginaGlobal} (${falas.length} falas)`);\n  \n  // Atualiza primeira e última\n  if (primeiraGlobal === null || paginaGlobal < primeiraGlobal) {\n    primeiraGlobal = paginaGlobal;\n  }\n  if (ultimaGlobal === null || paginaGlobal > ultimaGlobal) {\n    ultimaGlobal = paginaGlobal;\n  }\n  \n  // Corrige página nas falas\n  const falasCorrigidas = [];\n  for (const fala of falas) {\n    const falaCorrigida = {\n      pagina: paginaGlobal,\n      paginaOriginal: fala.pagina || paginaLocal,\n      paginaLocal: paginaLocal,\n      ordem: fala.ordem,\n      nome: fala.nome,\n      genero: fala.genero,\n      texto: fala.texto\n    };\n    \n    falasCorrigidas.push(falaCorrigida);\n    todasFalas.push(falaCorrigida);\n  }\n  \n  // Analisa emoção da página\n  const analise = analisarEmocaoPagina(falas);\n  analisesPorPagina[paginaGlobal] = {\n    ...analise,\n    paginaLocal: paginaLocal,\n    quantidadeFalas: falas.length\n  };\n  \n  // Guarda página processada\n  paginasProcessadas.push({\n    paginaGlobal: paginaGlobal,\n    paginaLocal: paginaLocal,\n    falas: falasCorrigidas\n  });\n}\n\nconst totalPaginas = paginasProcessadas.length;\n\nconsole.log('');\nconsole.log(`✅ Páginas processadas: ${totalPaginas}`);\nconsole.log(`📄 Range global: ${primeiraGlobal} - ${ultimaGlobal}`);\nconsole.log(`📝 Total falas: ${todasFalas.length}`);\n\n// ==========================================\n// 5. EXTRAI PERSONAGENS\n// ==========================================\nconst personagens = extrairPersonagens(todasFalas);\nconst nomesPersonagens = Object.keys(personagens);\nlog(pastaObra, `Personagens: ${nomesPersonagens.join(', ')}`);\n\n// ==========================================\n// 6. ATUALIZA ESTADO\n// ==========================================\nlog(pastaObra, 'Atualizando estado...');\n\nestado.obra = obra;\n\n// Atualiza última página global\nestado.ultimaPaginaGlobal = Math.max(\n  estado.ultimaPaginaGlobal || 0, \n  ultimaGlobal\n);\n\n// Atualiza info do capítulo\nif (!estado.capitulos[capitulo]) {\n  estado.capitulos[capitulo] = {};\n}\n\nconst paginaInicialCapitulo = estado.capitulos[capitulo].paginaInicialGlobal || primeiraGlobal;\n\nestado.capitulos[capitulo] = {\n  ...estado.capitulos[capitulo],\n  paginaInicialGlobal: paginaInicialCapitulo,\n  paginaFinalGlobal: ultimaGlobal,\n  totalPaginas: ultimaGlobal - paginaInicialCapitulo + 1,\n  status: 'narrado',\n  narradoEm: new Date().toISOString(),\n  totalNarracoes: todasFalas.length\n};\n\n// Salva cada página com status='ok'\nfor (const pag of paginasProcessadas) {\n  const meta = metadados.find(m => m.paginaGlobal === pag.paginaGlobal) || {};\n  \n  estado.paginasProcessadas[pag.paginaGlobal] = {\n    capitulo: capitulo,\n    paginaLocal: pag.paginaLocal,\n    status: 'ok',\n    processadoEm: new Date().toISOString(),\n    nomeOriginal: meta.nome_original || '',\n    idDrive: meta.idDrive || ''\n  };\n  \n  if (analisesPorPagina[pag.paginaGlobal]) {\n    estado.efeitosRecomendados[pag.paginaGlobal] = {\n      emocao: analisesPorPagina[pag.paginaGlobal].emocao,\n      efeitoRecomendado: analisesPorPagina[pag.paginaGlobal].efeitoRecomendado,\n      efeitoIndice: analisesPorPagina[pag.paginaGlobal].efeitoIndice\n    };\n  }\n}\n\n// Salva personagens\nif (!estado.personagens) estado.personagens = {};\nfor (const [nome, info] of Object.entries(personagens)) {\n  if (!estado.personagens[nome]) {\n    estado.personagens[nome] = { genero: info.genero, aparicoes: 0 };\n  }\n  estado.personagens[nome].aparicoes += info.aparicoes;\n}\n\n// Estatísticas\nif (!estado.estatisticas) estado.estatisticas = {};\nestado.estatisticas.totalNarracoesGeradas = (estado.estatisticas.totalNarracoesGeradas || 0) + todasFalas.length;\nestado.estatisticas.totalPaginasProcessadas = Object.keys(estado.paginasProcessadas)\n  .filter(p => estado.paginasProcessadas[p].status === 'ok').length;\nestado.estatisticas.ultimoProcessamento = new Date().toISOString();\n\n// ==========================================\n// 7. 💾 SALVA ESTADO\n// ==========================================\nconst salvou = salvarEstado(pastaObra, estado);\n\n// ==========================================\n// 8. FORMATA SAÍDA\n// ==========================================\n\n// Formato para SUB-WORKFLOW\nconst contentParts = paginasProcessadas.map(pag => ({\n  pagina_numero: pag.paginaGlobal,\n  falas: pag.falas.map(f => ({\n    pagina: f.pagina,\n    ordem: f.ordem,\n    nome: f.nome,\n    genero: f.genero,\n    texto: f.texto\n  }))\n}));\n\n// Formato texto com separador |==|\nconst blocosCorrigidos = paginasProcessadas.map(pag => \n  JSON.stringify(pag.falas.map(f => ({\n    pagina: f.pagina,\n    ordem: f.ordem,\n    nome: f.nome,\n    genero: f.genero,\n    texto: f.texto\n  })), null, 2)\n);\nconst textoCorrigido = blocosCorrigidos.join('\\n|==|\\n');\n\n// ==========================================\n// RESUMO\n// ==========================================\nconsole.log('');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('📊 RESUMO FINAL');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`✅ Falas processadas: ${todasFalas.length}`);\nconsole.log(`📄 Páginas: ${primeiraGlobal} - ${ultimaGlobal} (${totalPaginas} total)`);\nconsole.log(`👥 Personagens: ${nomesPersonagens.join(', ')}`);\nconsole.log(`💾 Estado salvo: ${salvou ? 'SIM' : 'NÃO'}`);\nconsole.log(`📦 Backups salvos em: ${pastaBackups}`);\nconsole.log(`📁 Arquivo: ${path.join(pastaObra, CONFIG.arquivoEstado)}`);\nconsole.log(`📁 Pasta backups: ${pastaBackups}`);\nconsole.log('');\nconsole.log('📦 SAÍDA PARA SUB-WORKFLOW:');\nconsole.log(`   nome_obra_firstItem: ${obra}`);\nconsole.log(`   content_parts_firstItem: ${contentParts.length} páginas`);\nconsole.log('═══════════════════════════════════════════════════════════');\n\n// ==========================================\n// 🔴 RETORNA (MÚLTIPLOS ITENS - UM POR PÁGINA)\n// ==========================================\nconst itensSaida = paginasProcessadas.map((pag, idx) => ({\n  json: {\n    // Dados da página\n    pagina_numero: pag.paginaGlobal,\n    paginaLocal: pag.paginaLocal,\n    falas: pag.falas.map(f => ({\n      pagina: f.pagina,\n      ordem: f.ordem,\n      nome: f.nome,\n      genero: f.genero,\n      texto: f.texto\n    })),\n    \n    // Contexto\n    obra: obra,\n    capitulo: capitulo,\n    pastaObra: pastaObra,\n    \n    // Análise de emoção\n    emocao: analisesPorPagina[pag.paginaGlobal]?.emocao || 'neutro',\n    efeitoRecomendado: analisesPorPagina[pag.paginaGlobal]?.efeitoRecomendado || 'Mirror',\n    efeitoIndice: analisesPorPagina[pag.paginaGlobal]?.efeitoIndice || 0,\n    \n    // Metadados\n    _estadoSalvo: salvou,\n    _totalPaginas: totalPaginas,\n    _primeiraGlobal: primeiraGlobal,\n    _ultimaGlobal: ultimaGlobal,\n    _indice: idx,\n    _totalItens: paginasProcessadas.length\n  }\n}));\n\n// Adiciona item de resumo no final\nitensSaida.push({\n  json: {\n    _tipo: 'RESUMO',\n    _erro: false,\n    _processado: true,\n    _estadoSalvo: salvou,\n    \n    // Formato para SUB-WORKFLOW\n    nome_obra_firstItem: obra,\n    content_parts_firstItem: contentParts,\n    Configura_Obra1_firstItem: {\n      json: { nome_obra: obra },\n      pairedItem: { item: 0 }\n    },\n    \n    // Formato texto\n    content: {\n      parts: [{ text: textoCorrigido }]\n    },\n    \n    obra, capitulo, pastaObra,\n    \n    paginacao: {\n      primeiraGlobal: primeiraGlobal,\n      ultimaGlobal: ultimaGlobal,\n      totalPaginas: totalPaginas,\n      ultimaPaginaAnterior: ultimaPaginaProcessada\n    },\n    \n    estatisticas: {\n      totalNarracoes: todasFalas.length,\n      personagens: nomesPersonagens\n    },\n    \n    efeitosRecomendados: Object.entries(analisesPorPagina).map(([pag, a]) => ({\n      pagina: parseInt(pag),\n      emocao: a.emocao,\n      efeito: a.efeitoRecomendado\n    })),\n    \n    narracoesCorrigidas: todasFalas\n  }\n});\n\nreturn itensSaida;\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    608,
+    -784
+   ],
+   "id": "cc527f16-6047-428d-8294-a0c179b7d135",
+   "name": "PROCESSA RESPOSTA DO AGENTE",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "image",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "models/gemini-2.5-flash-lite-preview-09-2025",
+     "mode": "id"
+    },
+    "text": "=# ROLE\nVocê é um Diretor de Narrativa e Showrunner experiente, especializado em adaptações de Mangá para Audiovisuais (Recaps).\nSua tarefa NÃO é escrever o roteiro final, mas sim criar a \"Bíblia de Contexto\" para este capítulo/sequência.\n\n# INPUT\nVocê recebeu uma sequência de imagens que compõem um capítulo (ou parte dele) de um mangá.\n\n# OBJECTIVE\nAnalise visualmente todas as imagens em ordem sequencial. Entenda a história, quem são os personagens, onde eles estão e, o mais importante, a evolução emocional da cena.\nAs informações que você gerar serão usadas por um Roteirista e um Revisor para extrair as falas com precisão. Se você errar o contexto aqui, eles errarão o roteiro.\n\n# OUTPUT FORMAT (Strict)\nGere sua resposta estruturada exatemente com as seções abaixo:\n\n## 1. SINOPSE DO LOTE\n(Um resumo conciso de 1 parágrafo explicando o que acontece do início ao fim desta sequência. Foque na ação e na virada de trama).\n\n## 2. PERFIS DOS PERSONAGENS (Visual & Personalidade)\nListe cada personagem que aparece nestas imagens. Para cada um, defina:\n- **Nome** (se aparecer no texto) ou **Apelido Visual** (ex: \"Garota de Cabelo Rosa\", \"Protagonista\").\n- **Características Visuais Chave:** (Para o roteirista não confundir quem é quem).\n- **Tom de Voz/Personalidade Atual:** (ex: \"Está sendo sarcástica e agressiva\", \"Está tímido e com medo\").\n- **Status de Relacionamento:** (Quem gosta de quem? Quem odeia quem? Isso é vital para o subtexto).\n\n## 3. ARCO EMOCIONAL (Timeline)\nDescreva como o clima muda ao longo das páginas.\n- *Início:* (ex: Cômico e leve).\n- *Meio:* (ex: Tensão súbita, revelação constrangedora).\n- *Fim:* (ex: Cliffhanger, choque).\n\n## 4. NOTAS DE DIREÇÃO (Critical Context)\nAponte detalhes que não são óbvios apenas pelo texto.\n- Exemplo: \"Na página 3, embora a garota esteja sorrindo, a aura ao redor dela indica ameaça, não felicidade.\"\n- Exemplo: \"O Protagonista está mentindo sobre ter namorada. O Roteirista deve notar que ele está suando frio.\"\n- Exemplo: \"Existe um flashback ou mudança de cenário abrupta?\"\n\n---\nIMPORTANTE: NÃO extraia os diálogos linha a linha agora. Foque 100% em garantir que o contexto e a intenção da cena estejam claros para a equipe.",
+    "inputType": "binary",
+    "binaryPropertyName": "={{ Object.keys($('ORGANIZA + EDITA IMAGENS').first().binary).slice(0, $('Configura Obra1').first().json['quantos binarios']).join(',') }}",
+    "simplify": false,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGemini",
+   "typeVersion": 1,
+   "position": [
+    -336,
+    -896
+   ],
+   "id": "38b40941-f652-484a-8fef-53275c34b381",
+   "name": "diretor",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "4qu2Grjm4jZ1qBRv",
+     "name": "r fluxo 1 direto"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: CORRIGE JSON V11 - RESPEITA PAGINAÇÃO ORIGINAL\n// ======================================================================\n\nconst inputItem = $('narrador chefe').first(); \nconst geminiResponse = inputItem?.json ?? inputItem;\nconst textoBruto = geminiResponse?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\n\nif (!textoBruto) {\n    return [{ json: { erro: \"Texto vazio do Gemini\", raw_input: inputItem } }];\n}\n\n// Limpeza básica do Markdown\nconst textoLimpo = textoBruto.replace(/```json/g, '').replace(/```/g, '').trim();\n\n// Tenta fazer o parse direto (o Gemini costuma mandar um array único agora)\nlet todosOsItens = [];\ntry {\n    // Se houver separadores |==|, trata cada bloco\n    if (textoLimpo.includes('|==|')) {\n        const blocos = textoLimpo.split('|==|');\n        for (const bloco of blocos) {\n            const parsed = JSON.parse(bloco.trim());\n            todosOsItens = todosOsItens.concat(Array.isArray(parsed) ? parsed : [parsed]);\n        }\n    } else {\n        // Se for um JSON único (o mais comum no seu prompt atual)\n        const parsed = JSON.parse(textoLimpo);\n        todosOsItens = Array.isArray(parsed) ? parsed : [parsed];\n    }\n} catch (e) {\n    return [{ json: { erro: \"Falha no Parse JSON\", raw: textoBruto, detalhe: e.message } }];\n}\n\n// 2. AGRUPAMENTO INTELIGENTE POR PÁGINA REAL\n// Aqui está o segredo: Agrupar pelo número da 'pagina' que veio do Gemini\nconst paginasMap = new Map();\n\ntodosOsItens.forEach(item => {\n    // Pega o número real que o Gemini mandou (ex: 25)\n    // Se não tiver, usa 0 ou trata erro\n    const numPagina = item.pagina;\n\n    if (!paginasMap.has(numPagina)) {\n        paginasMap.set(numPagina, {\n            pagina_numero: numPagina,\n            falas: []\n        });\n    }\n\n    // Adiciona a fala dentro da página correta\n    paginasMap.get(numPagina).falas.push({\n        pagina: item.pagina,\n        ordem: item.ordem,\n        nome: item.nome || \"NARRADOR\",\n        genero: item.genero || \"MALE\", // Mantém compatibilidade se precisar\n        texto: typeof item.texto === 'string' ? item.texto : JSON.stringify(item.texto)\n    });\n});\n\n// 3. RETORNA O ARRAY FINAL ORGANIZADO\n// Transforma o Map em Array e ordena pelo número da página para garantir a sequência\nconst resultadoFinal = Array.from(paginasMap.values()).sort((a, b) => a.pagina_numero - b.pagina_numero);\n\n// Retorna cada página como um item separado para o n8n processar (se for esse o objetivo)\n// Ou retorna tudo junto se preferir. Abaixo retorna 1 item por página (padrão n8n)\nreturn resultadoFinal.map(p => ({ json: p }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    496,
+    -912
+   ],
+   "id": "888dd965-2887-4369-a85c-57799e50278b",
+   "name": "corrige json",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ==========================================================\n// 🔑 ROTADOR GEMINI v6 - VARIÁVEL ÚNICA PARA TODOS OS NODES\n// ==========================================================\n// USE EM TODOS OS AGENTES:\n//   API Key: {{ $('roteador1').first().json.randomKey }}\n//   Modelo:  {{ $('roteador1').first().json.randomModel }}\n//\n// IMPORTANTE: Como cada node avalia a expressão separadamente,\n// mas o valor já vem definido do code, todos vão usar o mesmo.\n// Se precisar de chaves DIFERENTES por agente, use:\n//   Agente 1: {{ $('roteador1').first().json.key1 }}\n//   Agente 2: {{ $('roteador1').first().json.key2 }}\n//   Agente 3: {{ $('roteador1').first().json.key3 }}\n//   ... até key10\n// ==========================================================\n\nconst fs = require('fs');\nconst path = require('path');\n\n// ==========================================================\n// CAPTURA O NOME DO NODE ANTERIOR\n// ==========================================================\nconst nodeAnterior = \n    items[0]?.json?.nodeOrigem ??      // se o agente passou manualmente\n    $prevNode?.name ??                  // variável built-in do n8n\n    $input?.first()?.$node?.name ??     // outra forma de acessar\n    'desconhecido';\n\nconst PASTAS_CONFIG = [\n    '/root/209.145.60.53/root/n8n_videos',\n    '/tmp/youtubevideos'\n];\nconst CONFIG_FILENAME = 'gemini_config.json';\n\nfunction getConfigPath() {\n    for (const pasta of PASTAS_CONFIG) {\n        const caminho = path.join(pasta, CONFIG_FILENAME);\n        if (fs.existsSync(caminho)) return caminho;\n    }\n    for (const pasta of PASTAS_CONFIG) {\n        if (fs.existsSync(pasta)) return path.join(pasta, CONFIG_FILENAME);\n    }\n    return path.join(PASTAS_CONFIG[0], CONFIG_FILENAME);\n}\n\nconst chavesConfigPadrao = [\n  { nome: \"empressinovare@gmail.com\",              key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"vendeafiliados3@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersongenc@gmail.com\",                 key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"aulasrevolution@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"solarmundo195@gmail.com\",               key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"mundosolar1995@gmail.com\",              key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"seebotsia@gmail.com\",                   key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"murilodoctor192@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersongencshin@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"gameoftroneskingsroadbrasil@gmail.com\", key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"en1653964@gmail.com\",                   key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovaremanhwaverse@gmail.com\",          key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"fabricadeautomacoesia@gmail.com\",       key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersonjosielmrx1995@gmail.com\",        key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersonjosiel649@gmail.com\",            key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"fabricadeautomacoes0@gmail.com\",        key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"andreluizdias384@gmail.com\",            key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovaremanhwabr@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"msenergypara@gmail.com\",                key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovarecap@gmail.com\",                  key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovaremultiatendimento@gmail.com\",     key: \"<SEGREDO_REMOVIDO>\" }\n];\n\nconst modelosPadrao = [\n    \"gemini-2.5-flash-lite\",\n    \"gemini-2.0-flash-exp\",\n    \"gemini-exp-1206\",\n    \"gemini-2.5-pro\"\n];\n\nfunction criarConfigPadrao() {\n    return {\n        chaves: chavesConfigPadrao,\n        modelos: modelosPadrao,\n        config: {\n            modo_rotacao: \"sequencial\",\n            rotacionar_modelos: false,\n            chamadas_por_chave: 1\n        }\n    };\n}\n\nfunction carregarConfig() {\n    const CONFIG_PATH = getConfigPath();\n    try {\n        if (fs.existsSync(CONFIG_PATH)) {\n            const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));\n            if (!config.chaves || config.chaves.length === 0) config.chaves = chavesConfigPadrao;\n            if (!config.modelos) config.modelos = modelosPadrao;\n            if (!config.config) config.config = criarConfigPadrao().config;\n            return config;\n        }\n    } catch (err) {}\n    const config = criarConfigPadrao();\n    salvarConfig(config);\n    return config;\n}\n\nfunction salvarConfig(config) {\n    const CONFIG_PATH = getConfigPath();\n    try {\n        const dir = path.dirname(CONFIG_PATH);\n        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });\n        fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2), 'utf8');\n    } catch (err) {}\n}\n\nconst configExterno = carregarConfig();\nconst chavesConfig = configExterno.chaves;\nconst modelos = configExterno.modelos;\nconst cfg = configExterno.config || {};\n\nconst MODO_ROTACAO = cfg.modo_rotacao || \"sequencial\";\nconst ROTACIONAR_MODELOS = cfg.rotacionar_modelos || false;\nconst CHAMADAS_POR_CHAVE = cfg.chamadas_por_chave || 1;\n\nconst memoria = $getWorkflowStaticData('global');\n\nif (!memoria.rotador) {\n    memoria.rotador = {\n        chaveIndex: 0,\n        modeloIndex: 0,\n        contadorChamadas: 0,\n        totalChamadas: 0,\n        ultimaAtualizacao: Date.now()\n    };\n}\n\nlet estado = memoria.rotador;\n\nfunction proximaChaveSequencial() {\n    estado.chaveIndex = (estado.chaveIndex + 1) % chavesConfig.length;\n    return chavesConfig[estado.chaveIndex];\n}\n\nfunction proximaChaveRandom() {\n    estado.chaveIndex = Math.floor(Math.random() * chavesConfig.length);\n    return chavesConfig[estado.chaveIndex];\n}\n\nfunction proximaChaveBalanceada() {\n    estado.contadorChamadas++;\n    if (estado.contadorChamadas >= CHAMADAS_POR_CHAVE) {\n        estado.contadorChamadas = 0;\n        estado.chaveIndex = (estado.chaveIndex + 1) % chavesConfig.length;\n    }\n    return chavesConfig[estado.chaveIndex];\n}\n\nfunction selecionarChave() {\n    switch (MODO_ROTACAO) {\n        case \"random\": return proximaChaveRandom();\n        case \"balanceado\": return proximaChaveBalanceada();\n        case \"sequencial\":\n        default: return proximaChaveSequencial();\n    }\n}\n\nfunction selecionarModelo() {\n    if (ROTACIONAR_MODELOS && estado.chaveIndex === 0) {\n        estado.modeloIndex = (estado.modeloIndex + 1) % modelos.length;\n    }\n    return modelos[estado.modeloIndex];\n}\n\n// ==========================================================\n// GERAR 10 CHAVES DIFERENTES EMBARALHADAS\n// ==========================================================\nfunction shuffleArray(array) {\n    const arr = [...array];\n    for (let i = arr.length - 1; i > 0; i--) {\n        const j = Math.floor(Math.random() * (i + 1));\n        [arr[i], arr[j]] = [arr[j], arr[i]];\n    }\n    return arr;\n}\n\n// Embaralha todas as chaves\nconst chavesEmbaralhadas = shuffleArray(chavesConfig);\n\n// Pool embaralhado (todas as 21 chaves em ordem aleatória)\nconst poolEmbaralhado = chavesEmbaralhadas.map(c => c.key);\n\n// Modelos embaralhados também\nconst modelosEmbaralhados = shuffleArray(modelos);\n\n// Pega 10 chaves diferentes\nconst chavesDiferentes = {};\nfor (let i = 0; i < 10; i++) {\n    chavesDiferentes[`key${i + 1}`] = chavesEmbaralhadas[i].key;\n}\n\n// Pega 10 modelos random\nconst modelosRandom = {};\nfor (let i = 0; i < 10; i++) {\n    const idx = Math.floor(Math.random() * modelos.length);\n    modelosRandom[`model${i + 1}`] = modelos[idx];\n}\n\nconst chaveSelecionada = selecionarChave();\nconst modeloSelecionado = selecionarModelo();\n\nestado.totalChamadas++;\nestado.ultimaAtualizacao = Date.now();\nmemoria.rotador = estado;\n\n// ==========================================================\n// OUTPUT\n// ==========================================================\nreturn [\n    {\n        json: {\n            // CAMPO FIXO (sequencial - rotaciona a cada execução)\n            apiKey: chaveSelecionada.key,\n            modelName: modeloSelecionado,\n            \n            // =====================================================\n            // POOL EMBARALHADO - use índices fixos, chaves mudam!\n            // {{ $('roteador1').first().json.pool[0] }}\n            // {{ $('roteador1').first().json.pool[1] }}\n            // {{ $('roteador1').first().json.pool[2] }}\n            // ... até pool[20]\n            // =====================================================\n            pool: poolEmbaralhado,\n            \n            // =====================================================\n            // MODELOS EMBARALHADOS\n            // {{ $('roteador1').first().json.modelos[0] }}\n            // {{ $('roteador1').first().json.modelos[1] }}\n            // ... até modelos[3]\n            // =====================================================\n            modelos: modelosEmbaralhados,\n            \n            // Atalhos key1-key10 e model1-model10\n            ...chavesDiferentes,\n            ...modelosRandom,\n            \n            // =====================================================\n            // ORIGEM - NOME DO NODE ANTERIOR\n            // Use: {{ $('roteador1').first().json.origemErro }}\n            // =====================================================\n            origemErro: nodeAnterior,\n            \n            // DEBUG\n            debug: {\n                chaveNome: chaveSelecionada.nome,\n                chaveIndex: estado.chaveIndex,\n                totalChaves: chavesConfig.length,\n                modeloIndex: estado.modeloIndex,\n                totalModelos: modelos.length,\n                modoRotacao: MODO_ROTACAO,\n                totalChamadas: estado.totalChamadas,\n                configPath: getConfigPath()\n            }\n        }\n    }\n];"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -224,
+    -608
+   ],
+   "id": "0158683f-02d5-4e79-a73a-9e7d545298e9",
+   "name": "roteador1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "17e6e6ef-6508-481b-b022-cd12bd4bf644",
+       "leftValue": "={{ $runIndex }}",
+       "rightValue": 50,
+       "operator": {
+        "type": "number",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -128,
+    -608
+   ],
+   "id": "c32d7538-3042-4c4f-9b8f-3f8db5761aa8",
+   "name": "para rodeador"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "=diretor",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "a235f308-b88a-4f7c-8f11-2f2410b50fce"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "diretor"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "5055652c-169d-48ba-bb0b-267266c48229",
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "narrador",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "narrador"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "addb2c15-04f5-48aa-8cd9-c0a7cb49c1bf",
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "narrador2",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "narrador2"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "4b3a25a8-cb26-448f-9e42-30fa3b3a9813",
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "narrador3",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "narrador3"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "1dbf9143-f2cb-49c9-83e4-91ca1b72bbfa",
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "narrador chefe",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "narrador chefe"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "c898bf0e-7863-4b1c-acf2-26031cf22b4d",
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "Fiscal de Roteiro",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "Fiscal de Roteiro"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a4d49bce-c113-4436-bab5-b035fb7e3883",
+          "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+          "rightValue": "validador",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "validador"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.3,
+   "position": [
+    192,
+    -640
+   ],
+   "id": "12e592f5-7b32-4b65-8c9b-f479fb40a8f9",
+   "name": "Switch"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: CORRIGE JSON V11 - RESPEITA PAGINAÇÃO ORIGINAL\n// ======================================================================\n\nconst inputItem = $('narrador3').first(); \nconst geminiResponse = inputItem?.json ?? inputItem;\nconst textoBruto = geminiResponse?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\n\nif (!textoBruto) {\n    return [{ json: { erro: \"Texto vazio do Gemini\", raw_input: inputItem } }];\n}\n\n// Limpeza básica do Markdown\nconst textoLimpo = textoBruto.replace(/```json/g, '').replace(/```/g, '').trim();\n\n// Tenta fazer o parse direto (o Gemini costuma mandar um array único agora)\nlet todosOsItens = [];\ntry {\n    // Se houver separadores |==|, trata cada bloco\n    if (textoLimpo.includes('|==|')) {\n        const blocos = textoLimpo.split('|==|');\n        for (const bloco of blocos) {\n            const parsed = JSON.parse(bloco.trim());\n            todosOsItens = todosOsItens.concat(Array.isArray(parsed) ? parsed : [parsed]);\n        }\n    } else {\n        // Se for um JSON único (o mais comum no seu prompt atual)\n        const parsed = JSON.parse(textoLimpo);\n        todosOsItens = Array.isArray(parsed) ? parsed : [parsed];\n    }\n} catch (e) {\n    return [{ json: { erro: \"Falha no Parse JSON\", raw: textoBruto, detalhe: e.message } }];\n}\n\n// 2. AGRUPAMENTO INTELIGENTE POR PÁGINA REAL\n// Aqui está o segredo: Agrupar pelo número da 'pagina' que veio do Gemini\nconst paginasMap = new Map();\n\ntodosOsItens.forEach(item => {\n    // Pega o número real que o Gemini mandou (ex: 25)\n    // Se não tiver, usa 0 ou trata erro\n    const numPagina = item.pagina;\n\n    if (!paginasMap.has(numPagina)) {\n        paginasMap.set(numPagina, {\n            pagina_numero: numPagina,\n            falas: []\n        });\n    }\n\n    // Adiciona a fala dentro da página correta\n    paginasMap.get(numPagina).falas.push({\n        pagina: item.pagina,\n        ordem: item.ordem,\n        nome: item.nome || \"NARRADOR\",\n        genero: item.genero || \"MALE\", // Mantém compatibilidade se precisar\n        texto: typeof item.texto === 'string' ? item.texto : JSON.stringify(item.texto)\n    });\n});\n\n// 3. RETORNA O ARRAY FINAL ORGANIZADO\n// Transforma o Map em Array e ordena pelo número da página para garantir a sequência\nconst resultadoFinal = Array.from(paginasMap.values()).sort((a, b) => a.pagina_numero - b.pagina_numero);\n\n// Retorna cada página como um item separado para o n8n processar (se for esse o objetivo)\n// Ou retorna tudo junto se preferir. Abaixo retorna 1 item por página (padrão n8n)\nreturn resultadoFinal.map(p => ({ json: p }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    112,
+    -752
+   ],
+   "id": "c0122638-0c18-4c10-939c-a1679474e9da",
+   "name": "corrige json16",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "image",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "models/gemini-3-flash-preview",
+     "mode": "id"
+    },
+    "text": "=",
+    "inputType": "binary",
+    "binaryPropertyName": "={{ Object.keys($('ORGANIZA + EDITA IMAGENS').first().binary).slice(0, $('Configura Obra1').first().json['quantos binarios']).join(',') }}",
+    "simplify": false,
+    "options": {
+     "maxOutputTokens": 30000
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGemini",
+   "typeVersion": 1,
+   "position": [
+    -32,
+    -752
+   ],
+   "id": "b97baf07-c11c-4908-8773-1794a104b1cf",
+   "name": "narrador3",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "4qu2Grjm4jZ1qBRv",
+     "name": "r fluxo 1 direto"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Recupera os arquivos de imagem do node original\nconst binaryData = $('ORGANIZA + EDITA IMAGENS').first().binary;\n\n// Pega os itens que estão chegando (o roteiro/texto)\nreturn items.map(item => {\n  return {\n    json: item.json, // Mantém o texto/roteiro\n    binary: binaryData // Re-anexa as imagens\n  }\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -176,
+    -912
+   ],
+   "id": "717bd542-2f3c-4422-8569-c7d6b46c6d1d",
+   "name": "binarios"
+  },
+  {
+   "parameters": {
+    "resource": "image",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "=models/gemini-3-flash-preview",
+     "mode": "id"
+    },
+    "text": "=imput user:CONTEXTO DO DIRETOR (A Verdade Absoluta da Cena):\nUse o contexto abaixo para saber quem são os personagens e a emoção exata, mas aplique o ESTILO DE NARRADOR descrito nas suas instruções principais:\n<contexto_diretor>\n{{ $('diretor').first().json.candidates[0].content.parts[0].text }}\n</contexto_diretor>\n\nimput user:mensagem do agente de revisao caso haja pois pode ser a primeira vez que voce esta gerando essa narracao, caso nao seja elve em consideracao oque voce errou que ele destaca no comentario dele e corrija pois voce nao tera  a versao errada em sua memroria: {{ $('se e revisao').first().json['mensagem de revisao'] }}memoria do que ja foi narrado da historia caso haja(se nao houver nada e pro que e a primeira pagina do comeco da historia):{{ $('memoria').first().json.propertyName }}\n\n\n\n📥 ANÁLISE DE RASCUNHOS ANTERIORES (Sua Matéria-Prima):\nAbaixo estão tentativas de roteiro geradas anteriormente. Sua missão é agir como o EDITOR CHEFE:\n1. Compare os rascunhos abaixo com a IMAGEM REAL e o CONTEXTO DO DIRETOR.\n2. Identifique o melhor trecho de cada um.\n3. Se houver alucinações (falas que não existem na imagem), ELIMINE.\n4. Se faltaram balões, ADICIONE.\n5. Funda o que há de melhor para criar a VERSÃO DEFINITIVA (Suprema).\n\n<rascunhos_anteriores1>\n{{ $('narrador').item.json.candidates[0].content.parts[0].text }}\n</rascunhos_anteriores>\n<rascunhos_anteriores2>\n{{ $('narrador3').item.json.candidates[0].content.parts[0].text }}\n</rascunhos_anteriores2>\n<rascunhos_anteriores3>\n{{ $('narrador2').item.json.candidates[0].content.parts[0].text }}\n</rascunhos_anteriores3>\n\n--- A PARTIR DAQUI, SIGA RIGOROSAMENTE AS REGRAS DO PROMPT ORIGINAL PARA A SAÍDA ---\n\nimput system:{{ $('prompt1').first().json.propertyName }}\n\n\n\n## lembrando que sempre que as falas do narrador forem seguindas nao precisa separar elas pois a geracao da voz e por requisicao o custo, entao sempre que a voz do narrador se repetir agrupe ela  e jamis se apresnete voce nao interage com nimguem e e apenas uma ferramenta e deve retonar apenas o json",
+    "inputType": "binary",
+    "binaryPropertyName": "={{ Object.keys($('ORGANIZA + EDITA IMAGENS').first().binary).slice(0, $('Configura Obra1').first().json['quantos binarios']).join(',') }}",
+    "simplify": false,
+    "options": {
+     "maxOutputTokens": 30000
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGemini",
+   "typeVersion": 1,
+   "position": [
+    384,
+    -912
+   ],
+   "id": "9a6277af-8361-42c9-b383-4938b7467516",
+   "name": "narrador chefe",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "4qu2Grjm4jZ1qBRv",
+     "name": "r fluxo 1 direto"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Recupera os arquivos de imagem do node original\nconst binaryData = $('ORGANIZA + EDITA IMAGENS').first().binary;\n\n// Pega os itens que estão chegando (o roteiro/texto)\nreturn items.map(item => {\n  return {\n    json: item.json, // Mantém o texto/roteiro\n    binary: binaryData // Re-anexa as imagens\n  }\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    80,
+    -480
+   ],
+   "id": "f77b783f-df19-469f-ba6a-e97abc8ad857",
+   "name": "binarios2"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: RESTAURAR BACKUP DO ESTADO\n// ======================================================================\n// 📦 Este node permite restaurar o estado a partir de backups anteriores\n// \n// COMO USAR:\n// 1. Configure BACKUPS_PARA_VOLTAR para quantos backups você quer voltar\n//    - 1 = volta para o backup mais recente (último estado antes da modificação)\n//    - 2 = volta 2 backups atrás\n//    - etc.\n// \n// 2. Configure a OBRA ou deixe em branco para pegar do node anterior\n// \n// 3. MODO_PREVIEW = true mostra o que seria feito sem alterar nada\n// ======================================================================\n\nconst fs = require('fs');\nconst path = require('path');\n\n// ==========================================\n// ⚙️ CONFIGURAÇÃO - ALTERE AQUI\n// ==========================================\nconst CONFIG = {\n  pastaRaiz: '/tmp/youtubevideos',\n  arquivoEstado: 'estado_capitulos.json',\n  pastaBackups: 'backups_estado',\n  \n  // ══════════════════════════════════════════\n  // 🔴 CONFIGURAÇÕES DE RESTAURAÇÃO\n  // ══════════════════════════════════════════\n  \n  // Quantos backups voltar (1 = mais recente, 2 = penúltimo, etc.)\n  BACKUPS_PARA_VOLTAR: 1,\n  \n  // Nome da obra (deixe vazio para pegar do node anterior)\n  OBRA: '',\n  \n  // Modo preview - mostra o que seria feito sem alterar nada\n  MODO_PREVIEW: true,\n  \n  // Criar backup do estado ATUAL antes de restaurar\n  // (assim você pode desfazer a restauração se precisar)\n  BACKUP_ANTES_RESTAURAR: true,\n  \n  // ══════════════════════════════════════════\n  \n  // Debug\n  DEBUG: true\n};\n\n// ==========================================\n// FUNÇÕES UTILITÁRIAS\n// ==========================================\n\nfunction criarPastaSeNaoExiste(caminho) {\n  if (!fs.existsSync(caminho)) {\n    try {\n      fs.mkdirSync(caminho, { recursive: true });\n      console.log(`📁 Pasta criada: ${caminho}`);\n      return true;\n    } catch (e) {\n      console.error(`❌ Erro ao criar pasta ${caminho}: ${e.message}`);\n      return false;\n    }\n  }\n  return true;\n}\n\nfunction log(mensagem, tipo = 'INFO') {\n  const timestamp = new Date().toISOString();\n  const prefixo = {\n    'INFO': 'ℹ️',\n    'WARN': '⚠️',\n    'ERROR': '❌',\n    'SUCCESS': '✅',\n    'DEBUG': '🔍'\n  }[tipo] || 'ℹ️';\n  \n  console.log(`[${timestamp}] ${prefixo} ${mensagem}`);\n}\n\nfunction debug(mensagem) {\n  if (CONFIG.DEBUG) {\n    log(mensagem, 'DEBUG');\n  }\n}\n\n// ==========================================\n// FUNÇÕES DE BACKUP\n// ==========================================\n\n/**\n * Lista todos os backups existentes ordenados por data (mais recente primeiro)\n */\nfunction listarBackups(pastaBackups) {\n  if (!fs.existsSync(pastaBackups)) {\n    return [];\n  }\n  \n  try {\n    const arquivos = fs.readdirSync(pastaBackups)\n      .filter(f => f.startsWith('estado_backup_') && f.endsWith('.json'))\n      .map(f => {\n        const caminhoCompleto = path.join(pastaBackups, f);\n        const stats = fs.statSync(caminhoCompleto);\n        \n        // Extrai timestamp do nome do arquivo\n        const match = f.match(/estado_backup_(\\d{8})_(\\d{6})\\.json/);\n        let dataFormatada = 'Desconhecida';\n        if (match) {\n          const data = match[1];\n          const hora = match[2];\n          dataFormatada = `${data.slice(6,8)}/${data.slice(4,6)}/${data.slice(0,4)} ${hora.slice(0,2)}:${hora.slice(2,4)}:${hora.slice(4,6)}`;\n        }\n        \n        return {\n          nome: f,\n          caminho: caminhoCompleto,\n          criadoEm: stats.mtime,\n          dataFormatada: dataFormatada,\n          tamanho: stats.size,\n          tamanhoFormatado: formatarTamanho(stats.size)\n        };\n      })\n      .sort((a, b) => b.criadoEm - a.criadoEm); // Mais recente primeiro\n    \n    return arquivos;\n  } catch (e) {\n    console.error(`❌ Erro ao listar backups: ${e.message}`);\n    return [];\n  }\n}\n\nfunction formatarTamanho(bytes) {\n  if (bytes < 1024) return bytes + ' B';\n  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';\n  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';\n}\n\n/**\n * Gera nome do arquivo de backup com timestamp\n */\nfunction gerarNomeBackup(prefixo = 'estado_backup') {\n  const agora = new Date();\n  const timestamp = agora.toISOString()\n    .replace(/[:\\-]/g, '')\n    .replace('T', '_')\n    .replace(/\\.\\d{3}Z$/, '');\n  return `${prefixo}_${timestamp}.json`;\n}\n\n/**\n * Cria backup do estado atual\n */\nfunction criarBackupAtual(pastaObra) {\n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  \n  if (!fs.existsSync(caminhoEstado)) {\n    return { sucesso: false, motivo: 'estado_nao_existe' };\n  }\n  \n  const pastaBackups = path.join(pastaObra, CONFIG.pastaBackups);\n  criarPastaSeNaoExiste(pastaBackups);\n  \n  // Usa prefixo diferente para backups de pré-restauração\n  const nomeBackup = gerarNomeBackup('estado_pre_restore');\n  const caminhoBackup = path.join(pastaBackups, nomeBackup);\n  \n  try {\n    const conteudoAtual = fs.readFileSync(caminhoEstado, 'utf8');\n    const estadoAtual = JSON.parse(conteudoAtual);\n    \n    const backupData = {\n      _metaBackup: {\n        criadoEm: new Date().toISOString(),\n        tipo: 'pre_restauracao',\n        arquivoOriginal: CONFIG.arquivoEstado\n      },\n      ...estadoAtual\n    };\n    \n    fs.writeFileSync(caminhoBackup, JSON.stringify(backupData, null, 2), 'utf8');\n    \n    return {\n      sucesso: true,\n      arquivo: nomeBackup,\n      caminho: caminhoBackup\n    };\n  } catch (e) {\n    return { sucesso: false, motivo: e.message };\n  }\n}\n\n/**\n * Restaura um backup específico\n */\nfunction restaurarBackup(pastaObra, backupParaRestaurar) {\n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  \n  try {\n    // Lê o backup\n    const conteudoBackup = fs.readFileSync(backupParaRestaurar.caminho, 'utf8');\n    const dadosBackup = JSON.parse(conteudoBackup);\n    \n    // Remove metadados do backup antes de restaurar\n    delete dadosBackup._metaBackup;\n    \n    // Adiciona info de restauração\n    dadosBackup._restauracao = {\n      restauradoEm: new Date().toISOString(),\n      backupOrigem: backupParaRestaurar.nome,\n      backupData: backupParaRestaurar.dataFormatada\n    };\n    \n    // Salva como estado atual\n    fs.writeFileSync(caminhoEstado, JSON.stringify(dadosBackup, null, 2), 'utf8');\n    \n    return { sucesso: true };\n  } catch (e) {\n    return { sucesso: false, motivo: e.message };\n  }\n}\n\n/**\n * Carrega e analisa um backup para preview\n */\nfunction analisarBackup(caminhoBackup) {\n  try {\n    const conteudo = fs.readFileSync(caminhoBackup, 'utf8');\n    const dados = JSON.parse(conteudo);\n    \n    return {\n      obra: dados.obra || 'N/A',\n      ultimaPaginaGlobal: dados.ultimaPaginaGlobal || 0,\n      totalCapitulos: Object.keys(dados.capitulos || {}).length,\n      totalPaginasProcessadas: Object.keys(dados.paginasProcessadas || {}).length,\n      totalPersonagens: Object.keys(dados.personagens || {}).length,\n      ultimaAtualizacao: dados.ultimaAtualizacao || 'N/A',\n      metaBackup: dados._metaBackup || null\n    };\n  } catch (e) {\n    return null;\n  }\n}\n\n/**\n * Tenta descobrir a obra do node anterior\n */\nfunction descobrirObra() {\n  // Se configurado manualmente, usa esse\n  if (CONFIG.OBRA && CONFIG.OBRA.trim() !== '') {\n    return CONFIG.OBRA.trim();\n  }\n  \n  // Tenta pegar do input\n  try {\n    const input = $input.first()?.json;\n    if (input?.obra) return input.obra;\n    if (input?.pastaObra) return path.basename(input.pastaObra);\n  } catch (e) {}\n  \n  // Tenta Configura Obra\n  try {\n    const configNode = $('Configura Obra1').first().json;\n    if (configNode?.nome_obra) return configNode.nome_obra;\n  } catch (e) {}\n  \n  return null;\n}\n\n// ==========================================\n// ═══════════════════════════════════════════\n// 🚀 LÓGICA PRINCIPAL\n// ═══════════════════════════════════════════\n// ==========================================\n\nconsole.log('');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('📦 RESTAURAR BACKUP DO ESTADO');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`📅 ${new Date().toISOString()}`);\nconsole.log(`🔧 BACKUPS_PARA_VOLTAR: ${CONFIG.BACKUPS_PARA_VOLTAR}`);\nconsole.log(`🔧 MODO_PREVIEW: ${CONFIG.MODO_PREVIEW}`);\nconsole.log(`🔧 BACKUP_ANTES_RESTAURAR: ${CONFIG.BACKUP_ANTES_RESTAURAR}`);\nconsole.log('');\n\n// ==========================================\n// 1. DESCOBRE A OBRA\n// ==========================================\nconst obra = descobrirObra();\n\nif (!obra) {\n  log('Não foi possível descobrir a obra!', 'ERROR');\n  log('Configure CONFIG.OBRA manualmente ou conecte este node a outro que forneça a obra', 'ERROR');\n  \n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'OBRA_NAO_ENCONTRADA',\n      _erroMensagem: 'Configure CONFIG.OBRA ou conecte a um node que forneça a obra'\n    }\n  }];\n}\n\nconst pastaObra = path.join(CONFIG.pastaRaiz, obra);\nconst pastaBackups = path.join(pastaObra, CONFIG.pastaBackups);\n\nlog(`Obra: ${obra}`, 'INFO');\nlog(`Pasta: ${pastaObra}`, 'INFO');\nlog(`Pasta backups: ${pastaBackups}`, 'INFO');\nconsole.log('');\n\n// ==========================================\n// 2. LISTA BACKUPS DISPONÍVEIS\n// ==========================================\nlog('📋 LISTANDO BACKUPS DISPONÍVEIS...', 'INFO');\nconsole.log('');\n\nconst backups = listarBackups(pastaBackups);\n\nif (backups.length === 0) {\n  log('Nenhum backup encontrado!', 'ERROR');\n  \n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'SEM_BACKUPS',\n      _erroMensagem: 'Nenhum backup encontrado na pasta ' + pastaBackups,\n      obra: obra,\n      pastaObra: pastaObra\n    }\n  }];\n}\n\nconsole.log(`📦 ${backups.length} backup(s) encontrado(s):`);\nconsole.log('');\n\nbackups.forEach((b, idx) => {\n  const marcador = (idx + 1) === CONFIG.BACKUPS_PARA_VOLTAR ? ' ◀── SERÁ RESTAURADO' : '';\n  console.log(`   ${idx + 1}. ${b.nome}`);\n  console.log(`      📅 ${b.dataFormatada}`);\n  console.log(`      📏 ${b.tamanhoFormatado}${marcador}`);\n  console.log('');\n});\n\n// ==========================================\n// 3. VALIDA BACKUP SELECIONADO\n// ==========================================\nif (CONFIG.BACKUPS_PARA_VOLTAR < 1 || CONFIG.BACKUPS_PARA_VOLTAR > backups.length) {\n  log(`BACKUPS_PARA_VOLTAR (${CONFIG.BACKUPS_PARA_VOLTAR}) inválido!`, 'ERROR');\n  log(`Valor deve estar entre 1 e ${backups.length}`, 'ERROR');\n  \n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'INDICE_INVALIDO',\n      _erroMensagem: `BACKUPS_PARA_VOLTAR deve estar entre 1 e ${backups.length}`,\n      backupsDisponiveis: backups.length,\n      valorConfigurado: CONFIG.BACKUPS_PARA_VOLTAR\n    }\n  }];\n}\n\nconst backupSelecionado = backups[CONFIG.BACKUPS_PARA_VOLTAR - 1];\nconst analiseBackup = analisarBackup(backupSelecionado.caminho);\n\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('🎯 BACKUP SELECIONADO PARA RESTAURAÇÃO');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`📄 Arquivo: ${backupSelecionado.nome}`);\nconsole.log(`📅 Data: ${backupSelecionado.dataFormatada}`);\nconsole.log(`📏 Tamanho: ${backupSelecionado.tamanhoFormatado}`);\nconsole.log('');\n\nif (analiseBackup) {\n  console.log('📊 CONTEÚDO DO BACKUP:');\n  console.log(`   Obra: ${analiseBackup.obra}`);\n  console.log(`   Última página global: ${analiseBackup.ultimaPaginaGlobal}`);\n  console.log(`   Total capítulos: ${analiseBackup.totalCapitulos}`);\n  console.log(`   Total páginas processadas: ${analiseBackup.totalPaginasProcessadas}`);\n  console.log(`   Total personagens: ${analiseBackup.totalPersonagens}`);\n  console.log(`   Última atualização: ${analiseBackup.ultimaAtualizacao}`);\n}\nconsole.log('');\n\n// ==========================================\n// 4. ANALISA ESTADO ATUAL (para comparação)\n// ==========================================\nconst caminhoEstadoAtual = path.join(pastaObra, CONFIG.arquivoEstado);\nlet analiseEstadoAtual = null;\n\nif (fs.existsSync(caminhoEstadoAtual)) {\n  analiseEstadoAtual = analisarBackup(caminhoEstadoAtual);\n  \n  if (analiseEstadoAtual) {\n    console.log('📊 ESTADO ATUAL (será substituído):');\n    console.log(`   Última página global: ${analiseEstadoAtual.ultimaPaginaGlobal}`);\n    console.log(`   Total páginas processadas: ${analiseEstadoAtual.totalPaginasProcessadas}`);\n    console.log(`   Última atualização: ${analiseEstadoAtual.ultimaAtualizacao}`);\n    console.log('');\n    \n    // Calcula diferença\n    if (analiseBackup) {\n      const diffPaginas = analiseEstadoAtual.ultimaPaginaGlobal - analiseBackup.ultimaPaginaGlobal;\n      const diffProcessadas = analiseEstadoAtual.totalPaginasProcessadas - analiseBackup.totalPaginasProcessadas;\n      \n      console.log('📈 DIFERENÇA (o que será perdido):');\n      console.log(`   Páginas: ${diffPaginas > 0 ? '-' + diffPaginas : diffPaginas}`);\n      console.log(`   Páginas processadas: ${diffProcessadas > 0 ? '-' + diffProcessadas : diffProcessadas}`);\n      console.log('');\n    }\n  }\n}\n\n// ==========================================\n// 5. MODO PREVIEW OU EXECUÇÃO\n// ==========================================\nif (CONFIG.MODO_PREVIEW) {\n  console.log('═══════════════════════════════════════════════════════════');\n  console.log('👁️ MODO PREVIEW - NENHUMA ALTERAÇÃO SERÁ FEITA');\n  console.log('═══════════════════════════════════════════════════════════');\n  console.log('');\n  console.log('Para executar a restauração:');\n  console.log('   1. Altere MODO_PREVIEW para false');\n  console.log('   2. Execute novamente');\n  console.log('');\n  \n  return [{\n    json: {\n      _preview: true,\n      _mensagem: 'Modo preview - nenhuma alteração feita',\n      \n      obra: obra,\n      pastaObra: pastaObra,\n      \n      backupSelecionado: {\n        nome: backupSelecionado.nome,\n        data: backupSelecionado.dataFormatada,\n        tamanho: backupSelecionado.tamanhoFormatado,\n        analise: analiseBackup\n      },\n      \n      estadoAtual: analiseEstadoAtual,\n      \n      backupsDisponiveis: backups.map((b, i) => ({\n        indice: i + 1,\n        nome: b.nome,\n        data: b.dataFormatada,\n        tamanho: b.tamanhoFormatado\n      })),\n      \n      configuracao: {\n        BACKUPS_PARA_VOLTAR: CONFIG.BACKUPS_PARA_VOLTAR,\n        BACKUP_ANTES_RESTAURAR: CONFIG.BACKUP_ANTES_RESTAURAR\n      }\n    }\n  }];\n}\n\n// ==========================================\n// 6. EXECUTA RESTAURAÇÃO\n// ==========================================\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('🔄 EXECUTANDO RESTAURAÇÃO...');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('');\n\nlet backupPreRestauracao = null;\n\n// Cria backup do estado atual antes de restaurar\nif (CONFIG.BACKUP_ANTES_RESTAURAR && fs.existsSync(caminhoEstadoAtual)) {\n  log('Criando backup do estado atual antes de restaurar...', 'INFO');\n  backupPreRestauracao = criarBackupAtual(pastaObra);\n  \n  if (backupPreRestauracao.sucesso) {\n    log(`Backup pré-restauração criado: ${backupPreRestauracao.arquivo}`, 'SUCCESS');\n  } else {\n    log(`Falha ao criar backup pré-restauração: ${backupPreRestauracao.motivo}`, 'WARN');\n  }\n  console.log('');\n}\n\n// Executa a restauração\nlog(`Restaurando backup: ${backupSelecionado.nome}`, 'INFO');\nconst resultadoRestauracao = restaurarBackup(pastaObra, backupSelecionado);\n\nif (resultadoRestauracao.sucesso) {\n  console.log('');\n  console.log('═══════════════════════════════════════════════════════════');\n  console.log('✅ RESTAURAÇÃO CONCLUÍDA COM SUCESSO!');\n  console.log('═══════════════════════════════════════════════════════════');\n  console.log(`📄 Backup restaurado: ${backupSelecionado.nome}`);\n  console.log(`📅 Data do backup: ${backupSelecionado.dataFormatada}`);\n  if (backupPreRestauracao?.sucesso) {\n    console.log(`💾 Backup pré-restauração: ${backupPreRestauracao.arquivo}`);\n  }\n  console.log('');\n  \n  return [{\n    json: {\n      _sucesso: true,\n      _mensagem: 'Restauração concluída com sucesso',\n      \n      obra: obra,\n      pastaObra: pastaObra,\n      \n      backupRestaurado: {\n        nome: backupSelecionado.nome,\n        data: backupSelecionado.dataFormatada,\n        analise: analiseBackup\n      },\n      \n      backupPreRestauracao: backupPreRestauracao,\n      \n      estadoAnterior: analiseEstadoAtual\n    }\n  }];\n} else {\n  console.log('');\n  log(`FALHA na restauração: ${resultadoRestauracao.motivo}`, 'ERROR');\n  \n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'FALHA_RESTAURACAO',\n      _erroMensagem: resultadoRestauracao.motivo,\n      \n      obra: obra,\n      backupSelecionado: backupSelecionado.nome\n    }\n  }];\n}\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    752,
+    -528
+   ],
+   "id": "cc06a264-b544-4b09-9ca7-76ed1d529578",
+   "name": "restaura backup",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "b3b8094c-82a1-4a67-8442-b74ff7fbf9e2",
+       "leftValue": "={{ $('roteador1').item.json.origemErro }}",
+       "rightValue": "validador",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -32,
+    -608
+   ],
+   "id": "62b665d7-ea83-4dc1-99ec-f9dbc2f8ce33",
+   "name": "If3"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Recupera os arquivos de imagem do node original\nconst binaryData = $('Loop Over Items').first().binary;\n\n// Pega os itens que estão chegando (o roteiro/texto)\nreturn items.map(item => {\n  return {\n    json: item.json, // Mantém o texto/roteiro\n    binary: binaryData // Re-anexa as imagens\n  }\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    80,
+    -608
+   ],
+   "id": "a710d155-1933-44cf-b069-acc113523a28",
+   "name": "binarios4"
+  },
+  {
+   "parameters": {
+    "jsCode": "// 1. Apague o objeto vazio abaixo e COLE SEU JSON GIGANTE NO LUGAR DELE\n// Mantenha o 'const dados =' e o ';' no final.\n\nconst dados = {\n  \"_metadata\": {\n    \"versao\": \"2.0\",\n    \"criadoEm\": \"2025-12-05T05:43:18.819Z\",\n    \"atualizadoEm\": \"2025-12-11T19:47:55.089Z\",\n    \"totalPaginas\": 256,\n    \"hash\": \"46a7f303\"\n  },\n  \"nome_obra_firstItem\": \"pare_de_fumar\",\n  \"content_parts_firstItem\": [\n    // ... COLE O CONTEÚDO DAS 270 PÁGINAS AQUI ...\n    // ... CERTIFIQUE-SE DE QUE A ESTRUTURA DO ARRAY ESTÁ COMPLETA ...\n  ],\n  \"Configura_Obra1_firstItem\": {\n    \"json\": {\n      \"nome_obra\": \"pare_de_fumar\"\n    },\n    \"pairedItem\": {\n      \"item\": 0\n    }\n  }\n};\n\n// 2. O código abaixo garante que o n8n leia isso como um item único de entrada\nreturn [{\n  json: dados\n}];"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    560,
+    -528
+   ],
+   "id": "1279e17b-6246-4968-b865-3ffd4b41c672",
+   "name": "Mock Dados (Code)"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: GERENCIADOR MASTER V4 - CORRIGIDO\n// ======================================================================\n// CORREÇÕES:\n// - Respeita arquivo estado_capitulos.json\n// - Página inicial manual\n// - Flag para ignorar verificação de estado\n// - Logs mais claros\n// - FIX: Retorna itens separados mesmo quando pula download\n// ======================================================================\n\nconst fs = require('fs');\nconst path = require('path');\n\n// ==========================================\n// ⚙️ CONFIGURAÇÃO - ALTERE AQUI\n// ==========================================\nconst CONFIG = {\n  pastaRaiz: '/tmp/youtubevideos',\n  arquivoEstado: 'estado_capitulos.json',\n  \n  // ══════════════════════════════════════════════════════════════════\n  // 🔴 CONTROLES MANUAIS - ALTERE CONFORME NECESSÁRIO\n  // ══════════════════════════════════════════════════════════════════\n  \n  // Página inicial manual (0 = usa automático do estado)\n  // Se colocar um número, FORÇA começar dessa página\n  PAGINA_INICIAL_MANUAL: 0,  // Ex: 22 para começar da página 22\n  \n  // Ignora completamente o arquivo estado_capitulos.json\n  // true = processa TUDO, ignora o que já foi feito\n  // false = respeita o estado (pula páginas já ok)\n  IGNORAR_ESTADO: false,\n  \n  // Ignora verificação de imagens no disco\n  // true = sempre baixa do Drive\n  // false = pula download se imagem já existe\n  IGNORAR_DISCO: false,\n  \n  // Força reprocessar TUDO (mesmo páginas com status='ok')\n  FORCAR_REPROCESSAMENTO: false,\n  \n  // ══════════════════════════════════════════════════════════════════\n  \n  // NÃO salva estado aqui (salva só no node final)\n  SALVAR_ESTADO_AQUI: false,\n  \n  // Tamanho mínimo para considerar imagem válida\n  tamanhoMinimoBytes: 1024,\n  \n  // Logs\n  salvarLogs: true,\n  pastaLogs: 'logs'\n};\n\n// ==========================================\n// FUNÇÕES DE LOG\n// ==========================================\nfunction criarPastaLogs(pastaObra) {\n  const pastaLogs = path.join(pastaObra, CONFIG.pastaLogs);\n  if (!fs.existsSync(pastaLogs)) {\n    fs.mkdirSync(pastaLogs, { recursive: true });\n  }\n  return pastaLogs;\n}\n\nfunction log(pastaObra, mensagem, tipo = 'INFO') {\n  const timestamp = new Date().toISOString();\n  const linha = `[${timestamp}] [${tipo}] ${mensagem}`;\n  \n  console.log(linha);\n  \n  if (CONFIG.salvarLogs && pastaObra) {\n    try {\n      const pastaLogs = criarPastaLogs(pastaObra);\n      const dataHoje = new Date().toISOString().split('T')[0];\n      const arquivoLog = path.join(pastaLogs, `gerenciador_${dataHoje}.log`);\n      fs.appendFileSync(arquivoLog, linha + '\\n', 'utf8');\n    } catch (e) {}\n  }\n}\n\n// ==========================================\n// FUNÇÕES AUXILIARES\n// ==========================================\nfunction extrairNumeroCapitulo(nomeCapitulo) {\n  const match = nomeCapitulo.match(/cap[itulo]*\\s*(\\d+)/i);\n  return match ? parseInt(match[1], 10) : 1;\n}\n\nfunction backupEstado(caminhoEstado) {\n  if (fs.existsSync(caminhoEstado)) {\n    try {\n      fs.copyFileSync(caminhoEstado, caminhoEstado + '.bak');\n      return true;\n    } catch (e) {\n      return false;\n    }\n  }\n  return false;\n}\n\nfunction carregarEstado(pastaObra) {\n  if (CONFIG.IGNORAR_ESTADO) {\n    console.log('⚠️ IGNORAR_ESTADO=true - Não carregando estado');\n    return criarEstadoVazio();\n  }\n  \n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  \n  if (fs.existsSync(caminhoEstado)) {\n    try {\n      const conteudo = fs.readFileSync(caminhoEstado, 'utf8');\n      const estado = JSON.parse(conteudo);\n      \n      // Conta páginas com status 'ok'\n      const paginasOk = Object.entries(estado.paginasProcessadas || {})\n        .filter(([k, v]) => v.status === 'ok')\n        .map(([k, v]) => parseInt(k));\n      \n      log(pastaObra, `📂 Estado carregado: ${paginasOk.length} páginas com status='ok'`);\n      \n      if (paginasOk.length > 0) {\n        log(pastaObra, `   Páginas OK: ${paginasOk.slice(0, 10).join(', ')}${paginasOk.length > 10 ? '...' : ''}`);\n        log(pastaObra, `   Última página OK: ${Math.max(...paginasOk)}`);\n      }\n      \n      return estado;\n    } catch (e) {\n      log(pastaObra, `Erro ao carregar estado: ${e.message}`, 'WARN');\n    }\n  } else {\n    log(pastaObra, `📂 Arquivo de estado não existe: ${caminhoEstado}`);\n  }\n  \n  return criarEstadoVazio();\n}\n\nfunction criarEstadoVazio() {\n  return {\n    obra: '',\n    ultimaAtualizacao: new Date().toISOString(),\n    ultimaPaginaGlobal: 0,\n    capitulos: {},\n    paginasProcessadas: {},\n    efeitosRecomendados: {},\n    personagens: {},\n    estatisticas: {}\n  };\n}\n\nfunction salvarEstado(pastaObra, estado) {\n  if (!CONFIG.SALVAR_ESTADO_AQUI) {\n    log(pastaObra, '⏭️ Salvamento desativado neste node');\n    return false;\n  }\n  \n  const caminhoEstado = path.join(pastaObra, CONFIG.arquivoEstado);\n  estado.ultimaAtualizacao = new Date().toISOString();\n  \n  if (!fs.existsSync(pastaObra)) {\n    fs.mkdirSync(pastaObra, { recursive: true });\n  }\n  \n  backupEstado(caminhoEstado);\n  fs.writeFileSync(caminhoEstado, JSON.stringify(estado, null, 2), 'utf8');\n  log(pastaObra, `💾 Estado salvo: ${caminhoEstado}`);\n  return true;\n}\n\nfunction verificarImagensNoDisco(pastaObra, paginaInicial, paginaFinal) {\n  if (CONFIG.IGNORAR_DISCO) {\n    console.log('⚠️ IGNORAR_DISCO=true - Não verificando disco');\n    return {\n      todasExistem: false,\n      corrompidas: [],\n      faltando: Array.from({length: paginaFinal - paginaInicial + 1}, (_, i) => paginaInicial + i),\n      validas: []\n    };\n  }\n  \n  const resultado = {\n    todasExistem: true,\n    corrompidas: [],\n    faltando: [],\n    validas: []\n  };\n  \n  for (let p = paginaInicial; p <= paginaFinal; p++) {\n    const caminhoImg = path.join(pastaObra, `${p}.jpg`);\n    \n    if (!fs.existsSync(caminhoImg)) {\n      resultado.todasExistem = false;\n      resultado.faltando.push(p);\n    } else {\n      try {\n        const stats = fs.statSync(caminhoImg);\n        if (stats.size < CONFIG.tamanhoMinimoBytes) {\n          resultado.todasExistem = false;\n          resultado.corrompidas.push(p);\n        } else {\n          resultado.validas.push(p);\n        }\n      } catch (e) {\n        resultado.todasExistem = false;\n        resultado.faltando.push(p);\n      }\n    }\n  }\n  \n  return resultado;\n}\n\n// 🔴 FUNÇÃO CORRIGIDA - Conta páginas pelo ESTADO, não pelo disco\nfunction contarPaginasJaProcessadas(estado, paginaInicial, paginaFinal) {\n  if (CONFIG.IGNORAR_ESTADO || CONFIG.FORCAR_REPROCESSAMENTO) {\n    // Se ignorando estado ou forçando, tudo é pendente\n    return {\n      paginasOk: [],\n      paginasPendentes: Array.from({length: paginaFinal - paginaInicial + 1}, (_, i) => paginaInicial + i)\n    };\n  }\n  \n  const paginasOk = [];\n  const paginasPendentes = [];\n  \n  for (let p = paginaInicial; p <= paginaFinal; p++) {\n    const infoPagina = estado.paginasProcessadas?.[p];\n    \n    // 🔴 IMPORTANTE: Só considera 'ok' se tiver status='ok'\n    if (infoPagina && infoPagina.status === 'ok') {\n      paginasOk.push(p);\n    } else {\n      paginasPendentes.push(p);\n    }\n  }\n  \n  return { paginasOk, paginasPendentes };\n}\n\n// ==========================================\n// LÓGICA PRINCIPAL\n// ==========================================\n\nconsole.log('');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('🎬 GERENCIADOR MASTER V4 - CORRIGIDO');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`📅 ${new Date().toISOString()}`);\nconsole.log('');\nconsole.log('⚙️ CONFIGURAÇÕES:');\nconsole.log(`   PAGINA_INICIAL_MANUAL: ${CONFIG.PAGINA_INICIAL_MANUAL || 'AUTOMÁTICO'}`);\nconsole.log(`   IGNORAR_ESTADO: ${CONFIG.IGNORAR_ESTADO}`);\nconsole.log(`   IGNORAR_DISCO: ${CONFIG.IGNORAR_DISCO}`);\nconsole.log(`   FORCAR_REPROCESSAMENTO: ${CONFIG.FORCAR_REPROCESSAMENTO}`);\nconsole.log(`   SALVAR_ESTADO_AQUI: ${CONFIG.SALVAR_ESTADO_AQUI}`);\nconsole.log('');\n\n// ==========================================\n// 1. RECUPERA CONFIGURAÇÃO DA OBRA\n// ==========================================\nlet nomeObra = \"Obra_Sem_Nome\";\nlet nomeCapitulo = \"cap1\";\nlet idPastaDrive = \"\";\n\ntry {\n  const configNode = $('Configura Obra1').first().json;\n  const nomeCompleto = configNode.nome_obra || nomeObra;\n  \n  if (nomeCompleto.toLowerCase().startsWith('cap')) {\n    const partes = nomeCompleto.split('-');\n    if (partes.length > 1) {\n      nomeCapitulo = partes[0];\n      nomeObra = partes.slice(1).join('-');\n    } else {\n      nomeObra = nomeCompleto;\n    }\n  } else {\n    nomeObra = nomeCompleto;\n    nomeCapitulo = configNode.capitulo || 'cap1';\n  }\n  \n  idPastaDrive = configNode['id da pasta da obra'] || \"\";\n} catch (e) {\n  console.warn(`⚠️ Usando valores padrão: ${e.message}`);\n}\n\nconst pastaObra = path.join(CONFIG.pastaRaiz, nomeObra);\n\nif (!fs.existsSync(pastaObra)) {\n  fs.mkdirSync(pastaObra, { recursive: true });\n  log(pastaObra, `📁 Pasta criada: ${pastaObra}`);\n}\n\nlog(pastaObra, `Obra: ${nomeObra}`);\nlog(pastaObra, `Capítulo: ${nomeCapitulo}`);\n\n// ==========================================\n// 2. CARREGA ESTADO EXISTENTE\n// ==========================================\nconst estado = carregarEstado(pastaObra);\nestado.obra = nomeObra;\n\n// ==========================================\n// 3. PROCESSA INFO DO CAPÍTULO\n// ==========================================\nconst numeroCapitulo = extrairNumeroCapitulo(nomeCapitulo);\nlet capituloInfo = estado.capitulos[nomeCapitulo];\nlet paginaInicialGlobal;\nlet capituloExistente = false;\n\n// 🔴 PÁGINA INICIAL MANUAL tem prioridade\nif (CONFIG.PAGINA_INICIAL_MANUAL > 0) {\n  paginaInicialGlobal = CONFIG.PAGINA_INICIAL_MANUAL;\n  log(pastaObra, `🔴 USANDO PÁGINA INICIAL MANUAL: ${paginaInicialGlobal}`);\n} else if (capituloInfo) {\n  capituloExistente = true;\n  paginaInicialGlobal = capituloInfo.paginaInicialGlobal;\n  log(pastaObra, `📖 Capítulo ${nomeCapitulo} existe no estado:`);\n  log(pastaObra, `   - Página inicial: ${paginaInicialGlobal}`);\n  log(pastaObra, `   - Página final: ${capituloInfo.paginaFinalGlobal || '?'}`);\n  log(pastaObra, `   - Status: ${capituloInfo.status || 'desconhecido'}`);\n} else {\n  paginaInicialGlobal = estado.ultimaPaginaGlobal + 1;\n  log(pastaObra, `📖 Capítulo ${nomeCapitulo} é NOVO:`);\n  log(pastaObra, `   - Página inicial calculada: ${paginaInicialGlobal}`);\n  \n  capituloInfo = {\n    ordem: numeroCapitulo,\n    paginaInicialGlobal: paginaInicialGlobal,\n    paginaFinalGlobal: null,\n    totalPaginas: 0,\n    status: 'preparando',\n    idPastaDrive: idPastaDrive,\n    criadoEm: new Date().toISOString()\n  };\n}\n\n// ==========================================\n// 4. PROCESSA LISTA DE ARQUIVOS DO DRIVE\n// ==========================================\nconst items = $input.all();\n\nif (items.length === 0) {\n  log(pastaObra, '⚠️ Nenhum arquivo recebido do Drive!', 'WARN');\n  return [{\n    json: {\n      _erro: true,\n      _erroTipo: 'SEM_ARQUIVOS',\n      _erroMensagem: 'Nenhum arquivo encontrado na pasta do Drive',\n      obra: nomeObra,\n      capitulo: nomeCapitulo,\n      pastaObra: pastaObra\n    }\n  }];\n}\n\nitems.sort((a, b) => {\n  return a.json.name.localeCompare(b.json.name, undefined, {\n    numeric: true,\n    sensitivity: 'base'\n  });\n});\n\nlog(pastaObra, `📂 Arquivos na pasta do Drive: ${items.length}`);\n\nconst paginaFinalGlobal = paginaInicialGlobal + items.length - 1;\n\ncapituloInfo.totalPaginas = items.length;\ncapituloInfo.paginaFinalGlobal = paginaFinalGlobal;\n\nlog(pastaObra, `📄 Range de páginas: ${paginaInicialGlobal} - ${paginaFinalGlobal}`);\n\n// ==========================================\n// 5. VERIFICA IMAGENS NO DISCO\n// ==========================================\nconst verificacaoDisco = verificarImagensNoDisco(pastaObra, paginaInicialGlobal, paginaFinalGlobal);\n\nlog(pastaObra, `🔍 Verificação do DISCO:`);\nlog(pastaObra, `   - Imagens válidas: ${verificacaoDisco.validas.length}`);\nlog(pastaObra, `   - Imagens faltando: ${verificacaoDisco.faltando.length}`);\nlog(pastaObra, `   - Imagens corrompidas: ${verificacaoDisco.corrompidas.length}`);\n\n// ==========================================\n// 6. 🔴 VERIFICA PÁGINAS NO ESTADO (CORRIGIDO)\n// ==========================================\nconst verificacaoEstado = contarPaginasJaProcessadas(estado, paginaInicialGlobal, paginaFinalGlobal);\n\nlog(pastaObra, `📊 Verificação do ESTADO (arquivo JSON):`);\nlog(pastaObra, `   - Páginas com status='ok': ${verificacaoEstado.paginasOk.length}`);\nlog(pastaObra, `   - Páginas PENDENTES: ${verificacaoEstado.paginasPendentes.length}`);\n\nif (verificacaoEstado.paginasOk.length > 0) {\n  log(pastaObra, `   - Páginas OK: ${verificacaoEstado.paginasOk.slice(0, 10).join(', ')}${verificacaoEstado.paginasOk.length > 10 ? '...' : ''}`);\n}\n\nif (verificacaoEstado.paginasPendentes.length > 0) {\n  log(pastaObra, `   - Páginas pendentes: ${verificacaoEstado.paginasPendentes.slice(0, 10).join(', ')}${verificacaoEstado.paginasPendentes.length > 10 ? '...' : ''}`);\n}\n\n// ==========================================\n// 7. 🔴 DECIDE BASEADO NO ESTADO, NÃO NO DISCO\n// ==========================================\n\n// 🔴 IMPORTANTE: A decisão agora é baseada no ESTADO (paginasPendentes)\n// NÃO mais no disco (todasImagensExistem)\n\nconst temPaginasPendentes = verificacaoEstado.paginasPendentes.length > 0;\nconst todasImagensExistem = verificacaoDisco.todasExistem;\n\nlog(pastaObra, '');\nlog(pastaObra, '📋 DECISÃO:');\nlog(pastaObra, `   - Tem páginas pendentes no estado? ${temPaginasPendentes ? 'SIM' : 'NÃO'}`);\nlog(pastaObra, `   - Todas imagens existem no disco? ${todasImagensExistem ? 'SIM' : 'NÃO'}`);\n\n// Se NÃO tem pendentes E NÃO está forçando, então tudo processado\nif (!temPaginasPendentes && !CONFIG.FORCAR_REPROCESSAMENTO && !CONFIG.IGNORAR_ESTADO) {\n  log(pastaObra, '✅ Todas as páginas já têm status=\"ok\" no estado!');\n  \n  return [{\n    json: {\n      status: 'TUDO_PROCESSADO',\n      _pularDownload: true,\n      _tudoProcessado: true,\n      \n      obra: nomeObra,\n      capitulo: nomeCapitulo,\n      pastaObra: pastaObra,\n      \n      paginaInicialGlobal: paginaInicialGlobal,\n      paginaFinalGlobal: paginaFinalGlobal,\n      totalPaginas: items.length,\n      \n      paginasJaProcessadas: verificacaoEstado.paginasOk.length,\n      paginasPuladas: verificacaoEstado.paginasOk\n    }\n  }];\n}\n\n// ==========================================\n// 8. MONTA LISTA DE ARQUIVOS\n// ==========================================\nconst arquivosParaBaixar = [];\nconst arquivosPulados = [];\n\nfor (let i = 0; i < items.length; i++) {\n  const item = items[i];\n  const paginaLocal = i + 1;\n  const paginaGlobal = paginaInicialGlobal + i;\n  \n  // 🔴 VERIFICA SE ESTÁ PENDENTE NO ESTADO\n  const estaPendente = verificacaoEstado.paginasPendentes.includes(paginaGlobal);\n  \n  // Se NÃO está pendente e NÃO está forçando, pula\n  if (!estaPendente && !CONFIG.FORCAR_REPROCESSAMENTO) {\n    arquivosPulados.push(paginaGlobal);\n    continue;\n  }\n  \n  const arquivoInfo = {\n    id: item.json.id,\n    name: item.json.name,\n    paginaLocal: paginaLocal,\n    paginaGlobal: paginaGlobal,\n    obra: nomeObra,\n    capitulo: nomeCapitulo,\n    pastaObra: pastaObra,\n    caminhoOriginal: path.join(pastaObra, `${paginaGlobal}.jpg`),\n    caminhoEditado: path.join(pastaObra, `${paginaGlobal}_editado.jpg`),\n    nomeOriginal: item.json.name,\n    idDrive: item.json.id,\n    _pendente: true\n  };\n  \n  arquivosParaBaixar.push({ json: arquivoInfo });\n}\n\nif (arquivosPulados.length > 0) {\n  log(pastaObra, `⏭️ Páginas puladas (já com status='ok'): ${arquivosPulados.length}`);\n}\n\nlog(pastaObra, `📥 Páginas para processar: ${arquivosParaBaixar.length}`);\n\n// ==========================================\n// 9. NÃO SALVA ESTADO\n// ==========================================\nif (CONFIG.SALVAR_ESTADO_AQUI) {\n  estado.capitulos[nomeCapitulo] = capituloInfo;\n  estado.ultimaPaginaGlobal = Math.max(estado.ultimaPaginaGlobal, paginaFinalGlobal);\n  salvarEstado(pastaObra, estado);\n} else {\n  log(pastaObra, '📝 Estado NÃO salvo aqui (será salvo após confirmação do agente)');\n}\n\n// ==========================================\n// 10. MONTA INFO PARA O NODE FINAL\n// ==========================================\nconst infoParaSalvar = {\n  nomeCapitulo: nomeCapitulo,\n  numeroCapitulo: numeroCapitulo,\n  paginaInicialGlobal: paginaInicialGlobal,\n  paginaFinalGlobal: paginaFinalGlobal,\n  totalPaginas: items.length,\n  idPastaDrive: idPastaDrive,\n  capituloExistente: capituloExistente\n};\n\n// ==========================================\n// 11. VERIFICA SE TEM ALGO PARA PROCESSAR\n// ==========================================\nif (arquivosParaBaixar.length === 0) {\n  log(pastaObra, '✅ Nenhuma página pendente para processar!');\n  \n  return [{\n    json: {\n      status: 'TUDO_PROCESSADO',\n      _pularDownload: true,\n      _tudoProcessado: true,\n      \n      obra: nomeObra,\n      capitulo: nomeCapitulo,\n      pastaObra: pastaObra,\n      \n      paginaInicialGlobal: paginaInicialGlobal,\n      paginaFinalGlobal: paginaFinalGlobal,\n      totalPaginas: items.length,\n      \n      paginasJaProcessadas: arquivosPulados.length,\n      paginasPuladas: arquivosPulados,\n      \n      _infoParaSalvar: infoParaSalvar\n    }\n  }];\n}\n\n// ==========================================\n// 12. 🔴 CORRIGIDO - DECIDE PULAR DOWNLOAD OU NÃO\n// ==========================================\n\n// Verifica se as páginas PENDENTES existem no disco\nconst paginasPendentesNoDiscoFaltando = verificacaoEstado.paginasPendentes.filter(\n  p => verificacaoDisco.faltando.includes(p) || verificacaoDisco.corrompidas.includes(p)\n);\n\nconst precisaBaixar = paginasPendentesNoDiscoFaltando.length > 0 || CONFIG.IGNORAR_DISCO;\n\nif (!precisaBaixar) {\n  // 🔴 CORREÇÃO: Mesmo pulando download, envia os itens SEPARADOS para processamento\n  log(pastaObra, `⏭️ Imagens já existem no disco, enviando ${arquivosParaBaixar.length} itens para processamento (sem download)`);\n  \n  // Marca todos como _pularDownload mas envia separados\n  arquivosParaBaixar.forEach(item => {\n    item.json._pularDownload = true;\n  });\n  \n  // Adiciona info de controle no primeiro item\n  arquivosParaBaixar[0].json._controle = {\n    totalArquivos: arquivosParaBaixar.length,\n    paginaInicialGlobal: paginaInicialGlobal,\n    paginaFinalGlobal: paginaFinalGlobal,\n    totalPaginasCapitulo: items.length,\n    \n    corrompidas: verificacaoDisco.corrompidas,\n    faltando: verificacaoDisco.faltando,\n    paginasPuladas: arquivosPulados,\n    paginasPendentes: verificacaoEstado.paginasPendentes,\n    \n    _reprocessar: CONFIG.FORCAR_REPROCESSAMENTO,\n    _infoParaSalvar: infoParaSalvar\n  };\n  \n  // Resumo\n  console.log('');\n  console.log('═══════════════════════════════════════════════════════════');\n  console.log('📊 RESUMO GERENCIADOR MASTER V4 (PULAR DOWNLOAD)');\n  console.log('═══════════════════════════════════════════════════════════');\n  console.log(`📁 Obra: ${nomeObra}`);\n  console.log(`📖 Capítulo: ${nomeCapitulo}`);\n  console.log(`📄 Páginas: ${paginaInicialGlobal} - ${paginaFinalGlobal} (${items.length} total)`);\n  console.log(`✅ Já processadas (status=ok): ${verificacaoEstado.paginasOk.length}`);\n  console.log(`📥 Para processar (sem download): ${arquivosParaBaixar.length}`);\n  console.log(`⏭️ Puladas: ${arquivosPulados.length}`);\n  console.log('═══════════════════════════════════════════════════════════');\n  \n  return arquivosParaBaixar;\n}\n\n// ==========================================\n// 13. RETORNA PARA DOWNLOAD\n// ==========================================\nlog(pastaObra, `📥 Retornando ${arquivosParaBaixar.length} arquivos para download`);\n\narquivosParaBaixar[0].json._controle = {\n  totalArquivos: arquivosParaBaixar.length,\n  paginaInicialGlobal: paginaInicialGlobal,\n  paginaFinalGlobal: paginaFinalGlobal,\n  totalPaginasCapitulo: items.length,\n  \n  corrompidas: verificacaoDisco.corrompidas,\n  faltando: verificacaoDisco.faltando,\n  paginasPuladas: arquivosPulados,\n  paginasPendentes: verificacaoEstado.paginasPendentes,\n  \n  _reprocessar: CONFIG.FORCAR_REPROCESSAMENTO,\n  _infoParaSalvar: infoParaSalvar\n};\n\n// Resumo\nconsole.log('');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log('📊 RESUMO GERENCIADOR MASTER V4');\nconsole.log('═══════════════════════════════════════════════════════════');\nconsole.log(`📁 Obra: ${nomeObra}`);\nconsole.log(`📖 Capítulo: ${nomeCapitulo}`);\nconsole.log(`📄 Páginas: ${paginaInicialGlobal} - ${paginaFinalGlobal} (${items.length} total)`);\nconsole.log(`✅ Já processadas (status=ok): ${verificacaoEstado.paginasOk.length}`);\nconsole.log(`📥 Para processar: ${arquivosParaBaixar.length}`);\nconsole.log(`⏭️ Puladas: ${arquivosPulados.length}`);\nconsole.log('═══════════════════════════════════════════════════════════');\n\nreturn arquivosParaBaixar;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -800,
+    -880
+   ],
+   "id": "2e0ace92-8cc2-4e8c-862a-26e4d4c93e15",
+   "name": "GERENCIADOR MASTER"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "id": "60c85743-bbd4-40bd-860c-3e461120cfaa",
+   "name": "Loop Censura",
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    -624,
+    -880
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "boolean": [
+      {
+       "value1": "={{ $json.needs_censoring }}",
+       "value2": true
+      }
+     ]
+    }
+   },
+   "id": "b53e000e-0a62-4617-965d-feaa2dc258d3",
+   "name": "Precisa Censurar?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 1,
+   "position": [
+    -192,
+    -400
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.sightengine.com/1.0/check.json",
+    "sendBody": true,
+    "contentType": "multipart-form-data",
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "models",
+       "value": "nudity-2.0"
+      },
+      {
+       "name": "api_user",
+       "value": "602191550"
+      },
+      {
+       "name": "api_secret",
+       "value": "dmdugseEpkeSoAZoEWGajucEfTAr6UJy"
+      },
+      {
+       "parameterType": "formBinaryData",
+       "name": "media",
+       "inputDataFieldName": "data"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.3,
+   "position": [
+    -512,
+    -400
+   ],
+   "id": "a85cf839-e3c8-4e9c-8863-5f983594e568",
+   "name": "API Sightengine"
+  },
+  {
+   "parameters": {
+    "jsCode": "// =========================================================================\n// NODE: CALCULADORA MESTRE V21 (INTEGRAÇÃO TOTAL + DEFESA ANATÔMICA)\n// =========================================================================\n// EVOLUÇÃO: Base V19 + Filtros Agressivos V20 + Novas Camadas de Segurança\n// OBJETIVO: Evitar Alerta Amarelo em conteúdo Manhwa/Pornhwa via FFmpeg\n// =========================================================================\n\n// 1. GERENCIAMENTO DE ESTADO E BINÁRIOS\nlet binaryPack = null;\nlet binaryPropName = 'data';\n\n/**\n * Tenta localizar o arquivo de imagem/frame em diferentes origens do n8n\n * Garante que o código não pare se o nó anterior mudar de nome.\n */\nfunction findBinary(item) {\n    if (!item || !item.binary) return null;\n    const keys = Object.keys(item.binary);\n    if (keys.length > 0) {\n        binaryPropName = keys[0];\n        return item.binary[keys[0]];\n    }\n    return null;\n}\n\n// Resgate multi-camada (Input direto -> Loop -> Primeiro Item)\nif (items[0].binary) binaryPack = findBinary(items[0]);\nif (!binaryPack) try { binaryPack = findBinary($('Loop Censura').item); } catch (e) {}\nif (!binaryPack) try { binaryPack = findBinary($('Loop Censura').first()); } catch (e) {}\n\n// Definição de Resolução Padrão com verificação de metadados reais\nlet imgW = 1000; \nlet imgH = 1500;\nif (binaryPack && binaryPack.metadata) {\n    const w = parseInt(binaryPack.metadata.width);\n    const h = parseInt(binaryPack.metadata.height);\n    if (!isNaN(w) && w > 0) { imgW = w; imgH = h; }\n}\n\n// 2. FUNÇÕES AUXILIARES DE CÁLCULO ESPACIAL\nfunction getCoords(x, y, w, h) {\n    let safeX = Math.max(0, Math.floor(x));\n    let safeY = Math.max(0, Math.floor(y));\n    let safeW = Math.floor(w);\n    let safeH = Math.floor(h);\n    \n    // Trava de segurança para não exceder os limites da imagem\n    if (safeX + safeW > imgW) safeW = imgW - safeX;\n    if (safeY + safeH > imgH) safeH = imgH - safeY;\n    \n    return { x: safeX, y: safeY, w: safeW, h: safeH };\n}\n\n/**\n * Expande a caixa de censura em 30% (Aumentado na V21)\n * Crucial para cobrir o \"contorno\" da pele que a IA do YouTube detecta.\n */\nfunction expandBox(box, percentual = 0.30) {\n    const margemW = box.w * percentual;\n    const margemH = box.h * percentual;\n    return getCoords(\n        box.x - margemW,\n        box.y - margemH,\n        box.w + (margemW * 2),\n        box.h + (margemH * 2)\n    );\n}\n\n/**\n * Merge de caixas próximas (Vizinhança de 70px)\n * Evita deixar \"frestas\" de pele entre duas censuras.\n */\nfunction mergeNearbyBoxes(boxes, distancia = 70) {\n    if (boxes.length < 2) return boxes;\n    let merged = true;\n    while(merged) {\n        merged = false;\n        for (let i = 0; i < boxes.length; i++) {\n            for (let j = i + 1; j < boxes.length; j++) {\n                const b1 = boxes[i];\n                const b2 = boxes[j];\n                const cx1 = b1.x + b1.w/2; const cy1 = b1.y + b1.h/2;\n                const cx2 = b2.x + b2.w/2; const cy2 = b2.y + b2.h/2;\n                const dist = Math.sqrt(Math.pow(cx1-cx2, 2) + Math.pow(cy1-cy2, 2));\n                \n                if (dist < distancia + Math.max(b1.w, b2.w)/2) {\n                    const xMin = Math.min(b1.x, b2.x);\n                    const yMin = Math.min(b1.y, b2.y);\n                    const xMax = Math.max(b1.x + b1.w, b2.x + b2.w);\n                    const yMax = Math.max(b1.y + b1.h, b2.y + b2.h);\n                    boxes[i] = getCoords(xMin, yMin, xMax - xMin, yMax - yMin);\n                    boxes.splice(j, 1);\n                    merged = true;\n                    break;\n                }\n            }\n            if(merged) break;\n        }\n    }\n    return boxes;\n}\n\n// 3. LÓGICA PRINCIPAL DE CENSURA E SCORE\nconst item = items[0].json;\nlet filters = \"\"; \nlet needsCensoring = false;\nlet origemCensura = \"Nenhuma\";\nlet tipoFiltro = \"simple\"; \n\n// Scores de Risco Sightengine (Pesos Ponderados V21)\nconst activity = item.nudity?.sexual_activity || 0;\nconst display = item.nudity?.sexual_display || 0;\nconst suggestive = item.nudity?.suggestive || 0;\n\n// Rigor Máximo: Atividade Sexual tem peso 2.0x\nconst scoreTotal = (activity * 2.0) + (display * 1.2) + (suggestive * 0.8);\n\nlet boxes = [];\n\n// --- FASE 1: DETECÇÃO LOCALIZADA (SIGHTENGINE) ---\nif (item.nudity?.detections?.length > 0) {\n    item.nudity.detections.forEach(d => {\n        const c = getCoords(d.box.x1*imgW, d.box.y1*imgH, (d.box.x2-d.box.x1)*imgW, (d.box.y2-d.box.y1)*imgH);\n        if(c.w > 0 && c.h > 0) boxes.push(c);\n    });\n    origemCensura = \"Sightengine_Local\";\n} \n\n// --- FASE 2: DETECÇÃO GEMINI (REFORÇO) ---\nif (item.gemini_response) {\n    try {\n        let r = typeof item.gemini_response === 'string' ? JSON.parse(item.gemini_response.replace(/```json|```/g, '')) : item.gemini_response;\n        if (r.found && r.box) {\n            const c = getCoords(r.box.xmin*imgW, r.box.ymin*imgH, (r.box.xmax-r.box.xmin)*imgW, (r.box.ymax-r.box.ymin)*imgH);\n            if(c.w > 0 && c.h > 0) boxes.push(c);\n            origemCensura = (origemCensura === \"Sightengine_Local\") ? \"Híbrido_Local\" : \"Gemini_Local\";\n        }\n    } catch(e) {\n        console.log(\"Erro ao processar Gemini Response\");\n    }\n}\n\n// --- FASE 3: ZONAS PREVENTIVAS (BLINDAGEM CONTRA FALHAS DA IA) ---\n// Se o score for alto mas a IA não desenhou a caixa, forçamos a zona central\nif (boxes.length === 0 && (display > 0.12 || suggestive > 0.15 || activity > 0.10)) {\n    // Zona Peitoral / Abdômen Superior\n    boxes.push(getCoords(imgW * 0.15, imgH * 0.15, imgW * 0.70, imgH * 0.35)); \n    // Zona Pélvica / Pernas Superiores\n    boxes.push(getCoords(imgW * 0.20, imgH * 0.50, imgW * 0.60, imgH * 0.40));\n    origemCensura = `Blindagem_Agressiva_Score_${scoreTotal.toFixed(2)}`;\n}\n\n// --- FASE 4: GERAÇÃO DOS FILTROS AGRESSIVOS (DETERREIA DE IA) ---\nif (boxes.length > 0) {\n    boxes = boxes.map(b => expandBox(b, 0.30));\n    boxes = mergeNearbyBoxes(boxes, 80);\n    \n    /**\n     * FILTRO MOSAICO V21:\n     * 1. Boxblur forte (destrói texturas).\n     * 2. Hue 180 + Saturation 0 (Transforma pele em cinza neutro para enganar sensores de croma).\n     * 3. Drawbox com transparência black@0.4 (Disfarça o contorno anatômico).\n     */\n    filters = boxes.map(b => \n        `boxblur=25:enable='between(t,0,999)',hue=h=180:s=0:enable='between(t,0,999)',drawbox=x=${b.x}:y=${b.y}:w=${b.w}:h=${b.h}:color=black@0.4:t=fill`\n    ).join(\",\");\n    \n    needsCensoring = true;\n    tipoFiltro = \"simple\";\n}\n\n// --- FASE 5: MODO PÂNICO ULTRA (FILTRO ALIEN/TEXTO) ---\nconst safetyScore = item.nudity?.none !== undefined ? item.nudity.none : 1.0;\nconst GATILHO_RISCO_V21 = 0.20; // Muito mais sensível para não deixar passar nada\nconst GATILHO_INCERTEZA = 0.95; \n\nif (!needsCensoring && (scoreTotal > GATILHO_RISCO_V21 || safetyScore < GATILHO_INCERTEZA)) {\n    needsCensoring = true;\n    tipoFiltro = \"complex\";\n    origemCensura = `Modo_Panico_Alien_Score_${scoreTotal.toFixed(2)}`;\n\n    // LumaKey Avançado + Distorção Cromática Total\n    // Preserva as legendas (texto claro) mas destrói todo o fundo da imagem\n    filters = `[0:v]split=2[orig][mask];[mask]boxblur=60:15,hue=h=120:s=3,noise=alls=50:allf=t+u,eq=contrast=1.8[bg];[orig]lumakey=threshold=0.92:tolerance=0.08[txt];[bg][txt]overlay`;\n}\n\n// 4. PREPARAÇÃO DO RETORNO E DEBUG INFO\nconst tempName = `/tmp/censura_${item.paginaGlobal || Math.floor(Math.random() * 99999)}.jpg`;\nconst outputBinary = {};\nif (binaryPack) outputBinary[binaryPropName] = binaryPack;\n\nreturn {\n    json: {\n        ...item,\n        needs_censoring: needsCensoring,\n        ffmpeg_filter: filters,\n        filter_type: tipoFiltro,\n        censura_origem: origemCensura,\n        temp_file_name: tempName,\n        debug_v21: {\n            score_total: scoreTotal.toFixed(3),\n            safety_percent: (safetyScore * 100).toFixed(1) + \"%\",\n            caixas_ativas: boxes.length,\n            resolucao_detectada: `${imgW}x${imgH}`\n        }\n    },\n    binary: outputBinary\n};"
+   },
+   "id": "8fc6fc82-bd37-4c04-a565-12204438f156",
+   "name": "Calculadora Mestre",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -352,
+    -400
+   ]
+  },
+  {
+   "parameters": {
+    "filePath": "/tmp/censura_out.jpg"
+   },
+   "id": "2cb5d2b2-1e7f-40b8-a068-d66422d8907e",
+   "name": "Lê Resultado (Manual)",
+   "type": "n8n-nodes-base.readBinaryFile",
+   "typeVersion": 1,
+   "position": [
+    272,
+    -272
+   ]
+  },
+  {
+   "parameters": {
+    "command": "=ffmpeg -y -i /tmp/censura_in.jpg -vf \"{{ $json.ffmpeg_filter }}\" -f image2 -c:v mjpeg -q:v 2 /tmp/censura_out.jpg"
+   },
+   "id": "f6f4ed78-ed9f-4533-98a1-92d0ac807725",
+   "name": "Aplica Censura (File)2",
+   "type": "n8n-nodes-base.executeCommand",
+   "typeVersion": 1,
+   "position": [
+    80,
+    -272
+   ]
+  },
+  {
+   "parameters": {
+    "fileName": "/tmp/censura_in.jpg",
+    "options": {}
+   },
+   "id": "3550838f-fd07-4044-b071-d5b9c9ed5e6c",
+   "name": "Salva Temp Único",
+   "type": "n8n-nodes-base.writeBinaryFile",
+   "typeVersion": 1,
+   "position": [
+    -80,
+    -272
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// =========================================================\n// RESTAURADOR DE IDENTIDADE (PONTO DE ENCONTRO V2)\n// =========================================================\n// Corrige o problema onde a API Sightengine apaga o nome original.\n// Busca o nome direto no Loop e aplica no arquivo final.\n// =========================================================\n\nconst items = $input.all();\n\nreturn items.map(item => {\n    // 1. Variável para guardar o nome resgatado\n    let nomeOriginal = null;\n\n    // TENTATIVA 1: O nome está no item atual? (Caminho sem censura geralmente mantém)\n    if (item.json.name) nomeOriginal = item.json.name;\n    else if (item.json.fileName) nomeOriginal = item.json.fileName;\n\n    // TENTATIVA 2 (A MAIS IMPORTANTE): Resgate direto do Loop\n    // Se a API apagou o nome, o Loop ainda sabe quem é.\n    if (!nomeOriginal) {\n        try {\n            // Pega o item que está rodando AGORA no loop\n            const itemLoop = $('Loop Censura').item;\n            if (itemLoop && itemLoop.json) {\n                nomeOriginal = itemLoop.json.name || itemLoop.json.fileName;\n            }\n        } catch (e) {\n            // Fallback de segurança\n        }\n    }\n\n    // 2. Se achamos o nome (e deve achar!), renomeia o binário\n    if (nomeOriginal && item.binary) {\n        // Pega a chave do binário (pode ser 'data', 'image', etc)\n        const binaryKey = Object.keys(item.binary)[0];\n        \n        if (binaryKey && item.binary[binaryKey]) {\n            // AQUI A MÁGICA ACONTECE:\n            // Troca \"censura_out.jpg\" pelo nome original \"26.jpg\"\n            item.binary[binaryKey].fileName = nomeOriginal;\n            \n            // Opcional: Restaura o nome no JSON também para o próximo node não se perder\n            item.json.name = nomeOriginal;\n            item.json.fileName = nomeOriginal;\n        }\n    }\n    \n    return item;\n});"
+   },
+   "id": "5d05b45a-6590-4dd7-a203-3d7b82bbf2ea",
+   "name": "Ponto de Encontro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    384,
+    -384
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: CENSOR & VIRALIZADOR V6 (REFINED TAGS)\n// ======================================================================\n// Baseado na V5.\n// Novidade V6: Padronização de Tags de Emoção para melhor leitura da IA.\n// Mantém a substituição de palavras proibidas e gírias.\n// ======================================================================\n\nconst items = $input.all();\n\nconst REGRAS = [\n    // ==================================================================\n    // 🛡️ ZONA DE DEFESA: SEGURANÇA MÁXIMA (ANTI-BAN)\n    // ==================================================================\n    \n    // --- GATILHOS CRÍTICOS ---\n    { reg: /18\\s*(\\+|mais)/gi, sub: \"conteúdo maduro\" },\n    { reg: /hentai|ecchi|porn[oô]/gi, sub: \"anime de cultura\" },\n    { reg: /proibid[oa] para menores/gi, sub: \"exclusivo para adultos\" },\n    { reg: /estupr[oa]|abus[oa] sexual/gi, sub: \"forçar a barra\" },\n    { reg: /incesto/gi, sub: \"tabu familiar\" },\n    { reg: /nudes|nudez|pelad[oa]|nu[a]/gi, sub: \"arquivo sem roupa\" },\n    { reg: /fanservice/gi, sub: \"agrado visual\" },\n    \n    // --- ANATOMIA & ATOS ---\n    { reg: /boquete|oral/gi, sub: \"serviço especial\" },\n    { reg: /sexo|coito/gi, sub: \"o vucuvuco\" },\n    { reg: /transar|trepar/gi, sub: \"brincar de médico\" },\n    { reg: /foder/gi, sub: \"amar intensamente\" },\n    { reg: /gozar|ejacula[rçã]/gi, sub: \"finalizar\" },\n    { reg: /buceta|vagina|xereca|ppk|xana/gi, sub: \"flor\" },\n    { reg: /pinto|pau\\b|rola\\b|penis|pênis|piroca/gi, sub: \"instrumento\" },\n    { reg: /mamilos|tetas|peitos/gi, sub: \"comissão de frente\" },\n    { reg: /bunda|raba|nádegas/gi, sub: \"traseiro\" },\n    { reg: /orgasmo/gi, sub: \"clímax\" },\n    { reg: /gemido/gi, sub: \"som de esforço\" },\n    { reg: /masturba/gi, sub: \"amor próprio\" },\n\n    // --- VIOLÊNCIA & TABUS ---\n    { reg: /suic[íi]dio|se matar/gi, sub: \"ir de base\" },\n    { reg: /assassin[ao]|matar\\b|morrer\\b|morto\\b/gi, sub: \"desviver\" },\n    { reg: /degola[rçã]|decapita[rçã]/gi, sub: \"perder a cabeça\" },\n    { reg: /sangue/gi, sub: \"suco de tomate\" },\n    { reg: /sangra[r]/gi, sub: \"vazar suco\" },\n    { reg: /tortura[r]/gi, sub: \"interrogação intensa\" },\n    { reg: /escrav[oa]|escravidão/gi, sub: \"servo\" },\n    { reg: /drogas|cocaína|heroína|maconha/gi, sub: \"aditivos proibidos\" },\n    { reg: /pedófil[oa]|pedofilia/gi, sub: \"criminoso\" },\n    { reg: /traficante/gi, sub: \"comerciante ilegal\" },\n\n    // --- PALAVRÕES (SUAVIZAÇÃO) ---\n    { reg: /caralho/gi, sub: \"caramba\" },\n    { reg: /porra/gi, sub: \"poxa\" },\n    { reg: /puta/gi, sub: \"dama\" },\n    { reg: /merda/gi, sub: \"droga\" },\n    { reg: /cú\\b|cu\\b/gi, sub: \"olho de thundera\" },\n\n    // ==================================================================\n    // 🚀 ZONA DE ATAQUE: VIRALIZAÇÃO (VOCABULÁRIO GAMER/GEN-Z)\n    // ==================================================================\n\n    // --- ESCOLA & ESTUDO ---\n    { reg: /\\bestudar\\b|\\bestudo\\b/gi, sub: \"upar inteligência\" },\n    { reg: /\\bprova\\b|\\bteste\\b/gi, sub: \"o boss final do semestre\" },\n    { reg: /\\bprofessor\\b|\\bmestre\\b/gi, sub: \"o sensei\" },\n    { reg: /\\baluno\\b|\\bcolega\\b/gi, sub: \"o NPC da sala\" },\n    { reg: /\\binteligente\\b|\\bnerd\\b/gi, sub: \"big brain\" },\n    { reg: /\\bburro\\b|\\bidiota\\b/gi, sub: \"low int\" },\n    { reg: /\\bescola\\b|\\bcolégio\\b/gi, sub: \"o servidor escolar\" },\n    { reg: /\\bquadra\\b/gi, sub: \"a arena\" },\n    { reg: /\\bfilósofo\\b/gi, sub: \"o coach quântico\" },\n\n    // --- TRABALHO & COTIDIANO ---\n    { reg: /\\btrabalho\\b|\\bemprego\\b/gi, sub: \"o grind diário\" },\n    { reg: /\\bhora extra\\b/gi, sub: \"farmar hora\" },\n    { reg: /\\bcansado\\b|\\bexausto\\b/gi, sub: \"sem stamina\" },\n    { reg: /\\bdinheiro\\b|\\bsalário\\b/gi, sub: \"o gold\" },\n    { reg: /\\bchefe\\b|\\bpatrão\\b/gi, sub: \"o admin\" },\n    { reg: /\\bvizinha\\b/gi, sub: \"a mob da área\" },\n    { reg: /\\bcasa\\b|\\blar\\b/gi, sub: \"a base\" },\n    { reg: /\\bdormir\\b|\\bdescansar\\b/gi, sub: \"recuperar HP\" },\n    { reg: /\\bcomida\\b|\\bcomer\\b/gi, sub: \"bafar o status\" },\n\n    // --- SISTEMA & RANKER ---\n    { reg: /\\bsistema\\b/gi, sub: \"a interface\" },\n    { reg: /\\btela\\b|\\bjanela\\b/gi, sub: \"o hud\" },\n    { reg: /\\baviso\\b|\\bnotificação\\b/gi, sub: \"o pop-up\" },\n    { reg: /\\bmissão\\b|\\btarefa\\b/gi, sub: \"a quest\" },\n    { reg: /\\brecompensa\\b/gi, sub: \"o drop\" },\n    { reg: /\\bitem\\b|\\bobjeto\\b/gi, sub: \"o loot\" },\n    { reg: /\\bespada\\b|\\barma\\b/gi, sub: \"o equipamento\" },\n    { reg: /\\bmonstro\\b/gi, sub: \"o mob\" },\n    { reg: /\\bmasmorra\\b|\\bdungeon\\b/gi, sub: \"a raid\" },\n\n    // --- AÇÃO & MOVIMENTO ---\n    { reg: /\\bcorreu\\b|\\bfugiu\\b/gi, sub: \"usou o dash\" },\n    { reg: /\\brápido\\b|\\bveloz\\b/gi, sub: \"speedrun\" },\n    { reg: /\\bforte\\b|\\bpoderoso\\b/gi, sub: \"buffado\" },\n    { reg: /\\bfraco\\b/gi, sub: \"nerfado\" },\n    { reg: /\\bvenceu\\b|\\bganhou\\b/gi, sub: \"solou\" },\n    { reg: /\\bperdeu\\b/gi, sub: \"foi de base\" },\n    { reg: /\\bacertou\\b/gi, sub: \"critou\" },\n    { reg: /\\berrou\\b/gi, sub: \"pinou\" },\n    { reg: /\\bdesviou\\b/gi, sub: \"dibrou\" },\n    { reg: /\\batrapalhou\\b/gi, sub: \"trollou\" },\n    { reg: /\\bajudou\\b/gi, sub: \"deu suporte\" },\n    { reg: /\\bobservar\\b|\\banalisar\\b/gi, sub: \"telar\" },\n    { reg: /\\besconder\\b|\\bescondido\\b/gi, sub: \"camperar\" },\n\n    // --- RELACIONAMENTO & EMOÇÃO ---\n    { reg: /\\bbonita\\b|\\blinda\\b/gi, sub: \"waifu\" },\n    { reg: /\\bnamorada\\b/gi, sub: \"a morena\" },\n    { reg: /\\besposa\\b/gi, sub: \"a patroa\" },\n    { reg: /\\bmarido\\b/gi, sub: \"o player 2\" },\n    { reg: /\\btraiu\\b|\\btraição\\b/gi, sub: \"furou o olho\" },\n    { reg: /\\btalarico\\b/gi, sub: \"ladrão de loot\" },\n    { reg: /\\bapaixonado\\b/gi, sub: \"gado demais\" },\n    { reg: /\\bbeijou\\b/gi, sub: \"fez a boa\" },\n    { reg: /\\brejeitado\\b/gi, sub: \"tomou toco\" },\n    { reg: /\\bciúmes\\b/gi, sub: \"dor de cotovelo\" },\n    { reg: /\\bsurpreso\\b|\\bchocado\\b/gi, sub: \"tankou nada\" },\n    { reg: /\\bconfuso\\b/gi, sub: \"bugou a mente\" },\n    { reg: /\\bmedo\\b/gi, sub: \"trancou o wi-fi\" },\n    { reg: /\\braiva\\b|\\bfúria\\b/gi, sub: \"tiltou\" },\n    { reg: /\\bvergonha\\b/gi, sub: \"cringe\" },\n    { reg: /\\bengraçado\\b/gi, sub: \"intankável\" },\n    { reg: /\\bchato\\b/gi, sub: \"paia\" },\n    { reg: /\\bincrível\\b/gi, sub: \"insano\" },\n    \n    // --- GENÉRICOS DE HISTÓRIA ---\n    { reg: /\\bprotagonista\\b/gi, sub: \"o prota\" },\n    { reg: /\\bele\\b/gi, sub: \"o mano\" },\n    { reg: /\\bmenino\\b/gi, sub: \"o moleque\" },\n    { reg: /\\bvilão\\b/gi, sub: \"o boss\" },\n    { reg: /\\bhistória\\b/gi, sub: \"o plot\" },\n    { reg: /\\bfinal\\b/gi, sub: \"o GG\" },\n    { reg: /\\bcomeço\\b|\\binício\\b/gi, sub: \"o start\" },\n    { reg: /\\bplano\\b|\\bideia\\b/gi, sub: \"a call\" }\n];\n\n// REGRAS DE PADRONIZAÇÃO DE TAGS (NOVAS V6)\nconst REGRAS_TAGS = [\n    { reg: /\\[.*risada.*\\]|\\[.*rindo.*\\]|\\[.*risos.*\\]/gi, sub: \"[RISO]\" },\n    { reg: /\\[.*grito.*\\]|\\[.*berro.*\\]/gi, sub: \"[GRITANDO]\" },\n    { reg: /\\[.*choro.*\\]|\\[.*chorando.*\\]/gi, sub: \"[CHORANDO]\" },\n    { reg: /\\[.*sussurro.*\\]|\\[.*baixo.*\\]/gi, sub: \"[SUSSURRO]\" },\n    { reg: /\\[.*medo.*\\]|\\[.*assustado.*\\]/gi, sub: \"[MEDO]\" },\n    { reg: /\\[.*feliz.*\\]|\\[.*alegre.*\\]/gi, sub: \"[FELIZ]\" },\n    { reg: /\\[.*raiva.*\\]|\\[.*furioso.*\\]/gi, sub: \"[RAIVA]\" },\n    { reg: /\\[.*confuso.*\\]|\\[.*duvida.*\\]/gi, sub: \"[CONFUSO]\" },\n    { reg: /\\[.*serio.*\\]/gi, sub: \"[SERIO]\" },\n    { reg: /\\[.*ironia.*\\]/gi, sub: \"[IRONICO]\" },\n    { reg: /\\[.*deboche.*\\]/gi, sub: \"[DEBOCHE]\" },\n    { reg: /\\[.*surpresa.*\\]/gi, sub: \"[SURPRESO]\" }\n];\n\n// Função auxiliar de limpeza e substituição\nfunction sanearTexto(texto) {\n    if (!texto || typeof texto !== 'string') return texto;\n    let textoLimpo = texto;\n    \n    // 1. Aplica substituição de palavras e gírias (Segurança + Viral)\n    for (const regra of REGRAS) {\n        textoLimpo = textoLimpo.replace(regra.reg, regra.sub);\n    }\n\n    // 2. Padroniza Tags de Emoção (Para o próximo node entender melhor)\n    // Isso garante que [risada nervosa] vire [RISO] para a IA de áudio processar.\n    for (const regra of REGRAS_TAGS) {\n        textoLimpo = textoLimpo.replace(regra.reg, regra.sub);\n    }\n\n    return textoLimpo;\n}\n\n// =========================================================\n// LÓGICA DE PRESERVAÇÃO DE ESTRUTURA (MAP)\n// =========================================================\nreturn items.map(item => {\n    const json = item.json;\n\n    // 1. Verifica se existe o array de falas (Formato padrão)\n    if (json.falas && Array.isArray(json.falas)) {\n        json.falas = json.falas.map(fala => {\n            if (!fala.texto) return fala;\n\n            const original = fala.texto;\n            const processado = sanearTexto(fala.texto);\n            \n            // Só altera se houve mudança real\n            if (original !== processado) {\n                fala.texto = processado;       // APLICA\n                fala._texto_viralizado = true; // Debug\n            }\n            return fala;\n        });\n    }\n    \n    // 2. Verifica se é um item de RESUMO (Backup/Formato antigo)\n    if (json._tipo === 'RESUMO' && json.content && json.content.parts) {\n         json.content.parts.forEach(part => {\n             if (part.text) part.text = sanearTexto(part.text);\n         });\n    }\n\n    return item;\n});"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    784,
+    -784
+   ],
+   "id": "382cd6fa-c530-4190-9a33-c00892089bf8",
+   "name": "CENSOR CIRÚRGICO"
+  },
+  {
+   "parameters": {
+    "resource": "image",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "=models/gemini-3-flash-preview",
+     "mode": "id"
+    },
+    "text": "=",
+    "inputType": "binary",
+    "binaryPropertyName": "={{ Object.keys($('ORGANIZA + EDITA IMAGENS').first().binary).slice(0, $('Configura Obra1').first().json['quantos binarios']).join(',') }}",
+    "simplify": false,
+    "options": {
+     "maxOutputTokens": 30000
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGemini",
+   "typeVersion": 1,
+   "position": [
+    -32,
+    -896
+   ],
+   "id": "1f21cabc-bb3c-454a-bc98-32e6b073a201",
+   "name": "narrador2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "4qu2Grjm4jZ1qBRv",
+     "name": "r fluxo 1 direto"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "image",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "=models/gemini-3-flash-preview",
+     "mode": "id"
+    },
+    "text": "=",
+    "inputType": "binary",
+    "binaryPropertyName": "={{ Object.keys($('ORGANIZA + EDITA IMAGENS').first().binary).slice(0, $('Configura Obra1').first().json['quantos binarios']).join(',') }}",
+    "simplify": false,
+    "options": {
+     "maxOutputTokens": 30000
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGemini",
+   "typeVersion": 1,
+   "position": [
+    -32,
+    -1040
+   ],
+   "id": "63f5a349-57d1-4d34-944f-a847168c4dc3",
+   "name": "narrador",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "4qu2Grjm4jZ1qBRv",
+     "name": "r fluxo 1 direto"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: CORRIGE JSON V11 - RESPEITA PAGINAÇÃO ORIGINAL\n// ======================================================================\n\nconst inputItem = $('narrador').first(); \nconst geminiResponse = inputItem?.json ?? inputItem;\nconst textoBruto = geminiResponse?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\n\nif (!textoBruto) {\n    return [{ json: { erro: \"Texto vazio do Gemini\", raw_input: inputItem } }];\n}\n\n// Limpeza básica do Markdown\nconst textoLimpo = textoBruto.replace(/```json/g, '').replace(/```/g, '').trim();\n\n// Tenta fazer o parse direto (o Gemini costuma mandar um array único agora)\nlet todosOsItens = [];\ntry {\n    // Se houver separadores |==|, trata cada bloco\n    if (textoLimpo.includes('|==|')) {\n        const blocos = textoLimpo.split('|==|');\n        for (const bloco of blocos) {\n            const parsed = JSON.parse(bloco.trim());\n            todosOsItens = todosOsItens.concat(Array.isArray(parsed) ? parsed : [parsed]);\n        }\n    } else {\n        // Se for um JSON único (o mais comum no seu prompt atual)\n        const parsed = JSON.parse(textoLimpo);\n        todosOsItens = Array.isArray(parsed) ? parsed : [parsed];\n    }\n} catch (e) {\n    return [{ json: { erro: \"Falha no Parse JSON\", raw: textoBruto, detalhe: e.message } }];\n}\n\n// 2. AGRUPAMENTO INTELIGENTE POR PÁGINA REAL\n// Aqui está o segredo: Agrupar pelo número da 'pagina' que veio do Gemini\nconst paginasMap = new Map();\n\ntodosOsItens.forEach(item => {\n    // Pega o número real que o Gemini mandou (ex: 25)\n    // Se não tiver, usa 0 ou trata erro\n    const numPagina = item.pagina;\n\n    if (!paginasMap.has(numPagina)) {\n        paginasMap.set(numPagina, {\n            pagina_numero: numPagina,\n            falas: []\n        });\n    }\n\n    // Adiciona a fala dentro da página correta\n    paginasMap.get(numPagina).falas.push({\n        pagina: item.pagina,\n        ordem: item.ordem,\n        nome: item.nome || \"NARRADOR\",\n        genero: item.genero || \"MALE\", // Mantém compatibilidade se precisar\n        texto: typeof item.texto === 'string' ? item.texto : JSON.stringify(item.texto)\n    });\n});\n\n// 3. RETORNA O ARRAY FINAL ORGANIZADO\n// Transforma o Map em Array e ordena pelo número da página para garantir a sequência\nconst resultadoFinal = Array.from(paginasMap.values()).sort((a, b) => a.pagina_numero - b.pagina_numero);\n\n// Retorna cada página como um item separado para o n8n processar (se for esse o objetivo)\n// Ou retorna tudo junto se preferir. Abaixo retorna 1 item por página (padrão n8n)\nreturn resultadoFinal.map(p => ({ json: p }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    112,
+    -1040
+   ],
+   "id": "08863721-0a8e-4789-91f5-feb16e473330",
+   "name": "corrige json15",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// ======================================================================\n// NODE: CORRIGE JSON V11 - RESPEITA PAGINAÇÃO ORIGINAL\n// ======================================================================\n\nconst inputItem = $('narrador2').first(); \nconst geminiResponse = inputItem?.json ?? inputItem;\nconst textoBruto = geminiResponse?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';\n\nif (!textoBruto) {\n    return [{ json: { erro: \"Texto vazio do Gemini\", raw_input: inputItem } }];\n}\n\n// Limpeza básica do Markdown\nconst textoLimpo = textoBruto.replace(/```json/g, '').replace(/```/g, '').trim();\n\n// Tenta fazer o parse direto (o Gemini costuma mandar um array único agora)\nlet todosOsItens = [];\ntry {\n    // Se houver separadores |==|, trata cada bloco\n    if (textoLimpo.includes('|==|')) {\n        const blocos = textoLimpo.split('|==|');\n        for (const bloco of blocos) {\n            const parsed = JSON.parse(bloco.trim());\n            todosOsItens = todosOsItens.concat(Array.isArray(parsed) ? parsed : [parsed]);\n        }\n    } else {\n        // Se for um JSON único (o mais comum no seu prompt atual)\n        const parsed = JSON.parse(textoLimpo);\n        todosOsItens = Array.isArray(parsed) ? parsed : [parsed];\n    }\n} catch (e) {\n    return [{ json: { erro: \"Falha no Parse JSON\", raw: textoBruto, detalhe: e.message } }];\n}\n\n// 2. AGRUPAMENTO INTELIGENTE POR PÁGINA REAL\n// Aqui está o segredo: Agrupar pelo número da 'pagina' que veio do Gemini\nconst paginasMap = new Map();\n\ntodosOsItens.forEach(item => {\n    // Pega o número real que o Gemini mandou (ex: 25)\n    // Se não tiver, usa 0 ou trata erro\n    const numPagina = item.pagina;\n\n    if (!paginasMap.has(numPagina)) {\n        paginasMap.set(numPagina, {\n            pagina_numero: numPagina,\n            falas: []\n        });\n    }\n\n    // Adiciona a fala dentro da página correta\n    paginasMap.get(numPagina).falas.push({\n        pagina: item.pagina,\n        ordem: item.ordem,\n        nome: item.nome || \"NARRADOR\",\n        genero: item.genero || \"MALE\", // Mantém compatibilidade se precisar\n        texto: typeof item.texto === 'string' ? item.texto : JSON.stringify(item.texto)\n    });\n});\n\n// 3. RETORNA O ARRAY FINAL ORGANIZADO\n// Transforma o Map em Array e ordena pelo número da página para garantir a sequência\nconst resultadoFinal = Array.from(paginasMap.values()).sort((a, b) => a.pagina_numero - b.pagina_numero);\n\n// Retorna cada página como um item separado para o n8n processar (se for esse o objetivo)\n// Ou retorna tudo junto se preferir. Abaixo retorna 1 item por página (padrão n8n)\nreturn resultadoFinal.map(p => ({ json: p }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    112,
+    -896
+   ],
+   "id": "3b256057-1a1e-4681-a33a-0f8be16cb232",
+   "name": "corrige json24",
+   "onError": "continueRegularOutput"
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "ORGANIZA + EDITA IMAGENS": {
+   "main": [
+    [
+     {
+      "node": "diretor",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Merge11": {
+   "main": [
+    [
+     {
+      "node": "narrador chefe",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "PROCESSA RESPOSTA DO AGENTE": {
+   "main": [
+    [
+     {
+      "node": "CENSOR CIRÚRGICO",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "diretor": {
+   "main": [
+    [
+     {
+      "node": "binarios",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "roteador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "corrige json": {
+   "main": [
+    [
+     {
+      "node": "PROCESSA RESPOSTA DO AGENTE",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "roteador1": {
+   "main": [
+    [
+     {
+      "node": "para rodeador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "para rodeador": {
+   "main": [
+    [],
+    [
+     {
+      "node": "If3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch": {
+   "main": [
+    [
+     {
+      "node": "diretor",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "narrador",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "narrador2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "narrador3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "narrador chefe",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    []
+   ]
+  },
+  "corrige json16": {
+   "main": [
+    [
+     {
+      "node": "Merge11",
+      "type": "main",
+      "index": 3
+     }
+    ]
+   ]
+  },
+  "Analyze an image17": {
+   "main": [
+    [
+     {
+      "node": "corrige json15",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "narrador3": {
+   "main": [
+    [
+     {
+      "node": "corrige json16",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "roteador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "binarios": {
+   "main": [
+    [
+     {
+      "node": "narrador3",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Merge11",
+      "type": "main",
+      "index": 1
+     },
+     {
+      "node": "narrador2",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "narrador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "narrador chefe": {
+   "main": [
+    [
+     {
+      "node": "corrige json",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "roteador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "binarios2": {
+   "main": [
+    [
+     {
+      "node": "Switch",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If3": {
+   "main": [
+    [
+     {
+      "node": "binarios4",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "binarios2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "binarios4": {
+   "main": [
+    [
+     {
+      "node": "Switch",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "GERENCIADOR MASTER": {
+   "main": [
+    [
+     {
+      "node": "Loop Censura",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Censura": {
+   "main": [
+    [
+     {
+      "node": "ORGANIZA + EDITA IMAGENS",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "API Sightengine",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Precisa Censurar?": {
+   "main": [
+    [
+     {
+      "node": "Salva Temp Único",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Ponto de Encontro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "API Sightengine": {
+   "main": [
+    [
+     {
+      "node": "Calculadora Mestre",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Calculadora Mestre": {
+   "main": [
+    [
+     {
+      "node": "Precisa Censurar?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê Resultado (Manual)": {
+   "main": [
+    [
+     {
+      "node": "Ponto de Encontro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Aplica Censura (File)2": {
+   "main": [
+    [
+     {
+      "node": "Lê Resultado (Manual)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva Temp Único": {
+   "main": [
+    [
+     {
+      "node": "Aplica Censura (File)2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ponto de Encontro": {
+   "main": [
+    [
+     {
+      "node": "Loop Censura",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "CENSOR CIRÚRGICO": {
+   "main": [
+    []
+   ]
+  },
+  "narrador2": {
+   "main": [
+    [
+     {
+      "node": "corrige json24",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "roteador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "narrador": {
+   "main": [
+    [
+     {
+      "node": "corrige json15",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "roteador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "corrige json15": {
+   "main": [
+    [
+     {
+      "node": "Merge11",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "corrige json24": {
+   "main": [
+    [
+     {
+      "node": "Merge11",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "c4a0a4ed-fe48-4289-9579-cf3c5fd2dc61",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "I1yGrcBPjbSA69QP",
+ "tags": []
+}

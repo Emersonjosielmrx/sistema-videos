@@ -1,0 +1,137 @@
+{
+ "pautas": [
+  {
+   "id": "bloqueio_chip",
+   "tipo": "dor",
+   "ideia": "Você tem medo de fazer campanhas no WhatsApp e perder seu número comercial, mas a rotação de instâncias distribui os envios entre vários números de forma automática.",
+   "pergunta_cliente": "Se eu mandar muitas mensagens, meu número vai ser bloqueado?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "envio_individual_demorado",
+   "tipo": "dor",
+   "ideia": "Perder horas do dia copiando e colando mensagens para clientes é cansativo, enquanto o disparo em massa inteligente envia mensagens personalizadas automaticamente.",
+   "pergunta_cliente": "Consigo falar com toda a minha base sem ter que mandar um por um?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "cobranca_manual_pix",
+   "tipo": "caso_de_uso",
+   "ideia": "Cobrar clientes manualmente gera atrito e perda de tempo, mas com o envio de Pix você envia a cobrança direto no WhatsApp do cliente.",
+   "pergunta_cliente": "Dá para mandar o Pix direto na conversa do cliente?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "esquecer_aniversariante",
+   "tipo": "caso_de_uso",
+   "ideia": "Deixar o aniversário do cliente passar em branco faz perder vendas, mas o cartão de aniversário automatiza essa lembrança personalizada no WhatsApp.",
+   "pergunta_cliente": "O sistema lembra e parabeniza o cliente sozinho na data certa?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "parecer_robo_spam",
+   "tipo": "objecao",
+   "ideia": "O receio de que disparo em massa pareça mensagem fria de robô é superado pelo envio de mensagens personalizadas no WhatsApp.",
+   "pergunta_cliente": "A mensagem vai com o nome do cliente ou fica parecendo robô?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "precisa_varios_telefones",
+   "tipo": "objecao",
+   "ideia": "Achar que precisa ficar trocando de celular na mão para usar vários números cai por terra com a rotação de instâncias gerenciada na plataforma.",
+   "pergunta_cliente": "Preciso ter vários aparelhos físicos de celular ligados na mesa?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "como_funciona_disparo_massa",
+   "tipo": "como_funciona",
+   "ideia": "Você sobe seus contatos, define a mensagem personalizada e a IA executa o disparo em massa inteligente no WhatsApp de forma automática.",
+   "pergunta_cliente": "Como eu configuro um disparo para a minha lista de contatos?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "reengajar_base_parada",
+   "tipo": "antes_depois",
+   "ideia": "De contatos antigos esquecidos na agenda para milhares de conversas reaquecidas com campanhas automáticas no WhatsApp usando rotação de instâncias.",
+   "pergunta_cliente": "Consigo reativar clientes antigos que não compram faz tempo?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "rotina_cobranca_desorganizada",
+   "tipo": "antes_depois",
+   "ideia": "De pagamentos atrasados por esquecimento a recebimentos rápidos ao enviar a chave ou código Pix direto na mensagem do cliente.",
+   "pergunta_cliente": "Isso me ajuda a diminuir os atrasos nos pagamentos?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "duvida_volume_contatos",
+   "tipo": "pergunta_frequente",
+   "ideia": "Muitos negócios têm listas grandes e a ferramenta foi feita justamente para enviar campanhas para milhares de contatos no WhatsApp com segurança.",
+   "pergunta_cliente": "Minha base tem muita gente, a ferramenta aguenta milhares de contatos?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "duvida_pix_integrado",
+   "tipo": "pergunta_frequente",
+   "ideia": "Dúvidas sobre o recebimento são comuns, e a solução inclui o envio de Pix integrado no próprio fluxo de disparo do WhatsApp.",
+   "pergunta_cliente": "Como o cliente recebe a informação do Pix na mensagem?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "campanha_promocional_urgente",
+   "tipo": "caso_de_uso",
+   "ideia": "Quando você precisa soltar uma promoção relâmpago, o disparo em massa inteligente distribui a campanha para a base toda sem esforço manual.",
+   "pergunta_cliente": "Consigo disparar uma promoção para todo mundo no mesmo dia?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "sobrecarga_equipe_vendas",
+   "tipo": "dor",
+   "ideia": "Sua equipe de atendimento perde tempo mandando avisos repetitivos em vez de fechar vendas, algo resolvido com o envio automático no WhatsApp.",
+   "pergunta_cliente": "Minha equipe vai parar de perder tempo mandando mensagem manual?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "receio_bloqueio_geral",
+   "tipo": "objecao",
+   "ideia": "O receio de perder a comunicação com clientes diminui porque a rotação de números evita concentrar todos os disparos em um único chip.",
+   "pergunta_cliente": "A rotação de números realmente protege o meu atendimento principal?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "duvida_cartao_aniversario",
+   "tipo": "pergunta_frequente",
+   "ideia": "Dono de negócio quer saber como encantar clientes, e o envio automático de cartão de aniversário no WhatsApp gera proximidade e fidelização.",
+   "pergunta_cliente": "Como funciona o envio do cartão de aniversário para o cliente?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "fidelizacao_pos_venda",
+   "tipo": "caso_de_uso",
+   "ideia": "Manter o cliente ativo no pós-venda fica simples combinando mensagens personalizadas de acompanhamento e cartão de aniversário automatizado.",
+   "pergunta_cliente": "Posso usar a ferramenta para manter contato depois da venda?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "passo_a_passo_pix",
+   "tipo": "como_funciona",
+   "ideia": "O sistema automatiza o envio de Pix junto com mensagens personalizadas, facilitando o acerto financeiro do cliente diretamente no WhatsApp.",
+   "pergunta_cliente": "O que preciso fazer para enviar o Pix automático para o cliente?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "caos_planilhas_mensagens",
+   "tipo": "antes_depois",
+   "ideia": "De uma rotina caótica tentando controlar quem já recebeu mensagem para um processo com disparo em massa inteligente e envio automático.",
+   "pergunta_cliente": "Como eu acompanho se todas as mensagens foram realmente enviadas?",
+   "criada": "2026-10-25T14:33:19"
+  },
+  {
+   "id": "medo_complexidade_ferramenta",
+   "tipo": "objecao",
+   "ideia": "O medo de a ferramenta ser difícil demais é superado ao ver como o disparo em massa com mensagens personalizadas é simples de rodar.",
+   "pergunta_cliente": "Preciso ser especialista em tecnologia para conseguir usar o sistema?",
+   "criada": "2026-10-25T14:33:19"
+  }
+ ]
+}

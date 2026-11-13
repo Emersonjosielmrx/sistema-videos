@@ -1,0 +1,304 @@
+====================================================================
+ POSTADOR DE VIDEOS  —  D:\postador-de-videos
+====================================================================
+
+====================================================================
+ PROIBIDO POSTAR POR API  —  ORDEM DO DONO, 16/10/2026
+====================================================================
+Todo upload vai pelo NAVEGADOR (bin\youtube_web_poster.py).
+O caminho por API (bin\youtube_poster.py) esta PROIBIDO.
+
+Canal so posta depois de entrar em:
+  config\youtube_navegador.json  ->  "usar": true
+
+A regra e cumprida pelo codigo: politica.postar_youtube RECUSA o upload
+quando o canal nao esta marcado, e devolve ("erro", "...proibido...").
+Quem liga/desliga: config\politica.json -> "proibido_postar_por_api".
+
+POR QUE: em 16/10, 8 dos 23 uploads do dia subiram pela API, todos do
+canal ManhwaReact-ia, e ninguem tinha notado. O canal foi corrigido no
+mesmo dia.
+
+COMO CONFERIR: o ledger guarda o "script" de cada upload. Se aparecer
+youtube_poster.py, e erro — ponha o canal no navegador.
+
+AINDA NA API em 16/10 (nenhum postou naquele dia, mas precisam mudar):
+  animescomia, forjareact, mundoquenaoexiste, fiodameada
+
+O QUE E
+-------
+Posta no YouTube (e TikTok) os videos prontos, sozinho, pelo Task
+Scheduler do Windows — sem depender do Claude nem do VS Code abertos.
+
+TAREFAS AGENDADAS (Agendador de Tarefas > Biblioteca)
+-----------------------------------------------------
+  AgendadorVO3      05:00  bin\agendar_vo3_auto.bat
+                           agenda os VO3 de pos_final em horarios de pico
+  PostadorDeVideos  06:40  bin\postar_tudo_auto.bat
+                           1) postar_tudo_hoje   (cache veo + postar.json)
+                           2) postar_pos_final   (pos_final + recaps + extras)
+                           2a) limpar_veo --drive --max 15 (Veo LIMPO p/ a rede, abaixo)
+                           2b) D:\manhwa-react publicar (rede de react:
+                               ManhwaReact/CenaReact/InventoReact, so aprovados)
+                           3) TikTok via Chrome CDP  (reuso pelo catalogo, abaixo;
+                              o Chrome de cada conta abre so na hora do post)
+                           3b) Instagram Reels       (reuso pelo catalogo, abaixo)
+                           4) limpar_usados      (move o que ja subiu)
+                           5) resumo da politica no log
+  BackupDriveVideos 05:40  D:\manhwa-react\scripts\backup_drive.bat
+                           manda para o Google Drive o que ja foi postado
+                           (todos os projetos) e libera o disco
+  NotificarTelegram a cada 5 min  bin\notificar_telegram.py (pythonw, sem janela)
+                           avisos no Telegram (config\telegram.json): comentarios
+                           com traducao (responder marcando a msg), inscritos,
+                           videos que passam de 1.000 views, resumo diario 08:00
+                           com ranking de views; auto-resposta da IA se o dono
+                           nao responder em X h. A cada ~30 min tambem: o que foi
+                           POSTADO (YouTube de todos os projetos, TikTok, Instagram,
+                           MS Energy), FILA VAZIA/ACABANDO (onde produzir mais) e
+                           conta TikTok deslogada / Instagram vencido.
+                           Log: logs\telegram.log
+                           ATENCAO: D:\ms-energy\bin\telegram_monitor.py usa o MESMO
+                           bot; se ele rodar, rouba as respostas aos comentarios.
+
+POSTAR AGORA, NA MAO
+--------------------
+Da 2 cliques em:  postar-hoje.cmd   (roda o mesmo ciclo das 06:40)
+
+LIGAR / DESLIGAR A POSTAGEM AUTOMATICA (desde 12/10/2026)
+---------------------------------------------------------
+Area de trabalho > pasta "ManhwaReact e Rede de Canais" > botoes 5 (LIGAR) e 6 (DESLIGAR).
+DESLIGAR cria config\POSTAGEM_DESLIGADA.json: a rede (de hora em hora), os comentarios,
+o ciclo das 06:40 e o AgendadorVO3 nao postam nem abrem navegador (os .bat checam o arquivo).
+LIGAR apaga o arquivo e ja faz as pendentes de hoje; depois segue a agenda.
+Na linha de comando: D:\manhwa-react\manhwareact.py rede --desligar | --ligar
+
+CATALOGO DE VIDEOS, GOOGLE DRIVE E REUSO NO TIKTOK/INSTAGRAM (desde 13/10/2026)
+-------------------------------------------------------------------------------
+bin\catalogo.py junta num lugar so, para todos os projetos (manhwa-react, hipercool,
+veo/VO3, historias-em-frames, recapd), ONDE cada video esta (PC e/ou Google Drive) e
+ONDE ja foi postado (YouTube, TikTok, Instagram). Ele se monta sozinho lendo os
+registros que cada postador ja grava; resultado em config\catalogo_videos.json.
+    python bin\catalogo.py                    resumo por projeto + o que da para reaproveitar
+    python bin\catalogo.py disponiveis tiktok  (ou instagram) lista o proximo a sair
+
+- Postou: 3 dias depois o video vai para o Google Drive (manhwa-drive:videos-backup/<projeto>/,
+  na pasta da etapa desde 16/10: ver ETAPAS NO DRIVE abaixo) e sai do disco. O que saiu fica listado em
+  D:\manhwa-react\logs\backup_drive.jsonl. So apaga do PC depois de conferir no Drive.
+- Reuso: o que ja saiu no YouTube vai para TikTok e Instagram (nunca de volta ao YouTube).
+  O TikTok/Instagram baixam do Drive so na hora de postar e apagam a copia depois.
+- Conta de destino e limite por dia: config\reuso_plataformas.json (tema = comeco do nome
+  do arquivo; projeto = de onde veio). Hoje: 3 por conta/dia no TikTok, 2 no Instagram.
+- Video pulado por ser longo demais: config\reuso_pulados.json.
+- Instagram com login vencido (em 13/10: sintetizerisada, recenas.ia, fakenews.ia4,
+  danceandmusicwith.ia, dicasfinanceiras.ia, fabricadeautomacoesia, fabricadeautomacoesn8n,
+  emerson.inteligenciaartificial, inovaremanhwaverseesp): entrar no Instagram e renovar a
+  credencial no n8n; ate la a conta e pulada.
+- Brutos do Veo (veo\veo_videos_iniciais) que ja viraram final tambem vao para o Drive
+  (videos-backup/veo/brutos_veo_videos_iniciais): servem para montar videos novos.
+  15/10: as 3 pastas duplicadas com esse nome no Drive foram juntadas (rclone dedupe
+  --dedupe-mode skip: so junta pastas e tira copia IDENTICA); 487 brutos no Drive.
+
+ETAPAS NO DRIVE: OS 2 PCs NO MESMO LUGAR (16/10/2026)
+-----------------------------------------------------
+No Drive (manhwa-drive:videos-backup) cada video fica na pasta do projeto e da ULTIMA rede
+por onde ja passou, em fila: <projeto>/1_youtube -> 2_tiktok -> 3_instagram /<origem>/...
+(<origem> = canal do react, genero da historia; "_" = sem origem, ex.: Veo). Fora das etapas:
+<projeto>/brutos, manhwa-react/_copias_rede (copias com o @ do canal), manhwa-react/nao-usados.
+- Ordem das redes por projeto: config\etapas.json (padrao youtube, tiktok, instagram; ms-energy
+  instagram, facebook, stories e so sai do PC depois da ultima). Rede nova (ex.: Kwai) =
+  acrescentar no fim da lista + o postador dela chamar etapas.registrar(); as pastas se numeram.
+- Quem move: o backup (D:\manhwa-react\scripts\backup_drive.py) poe direto na etapa certa; o
+  TikTok/Instagram, depois do OK, chamam bin\etapas.py registrar(): o video muda de pasta no
+  proprio Drive (nada desce) e a postagem entra em _registro\<nome-do-pc>.jsonl (cada PC so
+  escreve no seu; todos leem todos). Video nunca volta de etapa; historia anda com a pasta toda.
+- O catalogo le as pastas de etapa e os _registro: video que so o outro PC postou no YouTube
+  entra no reuso. Ordem no TikTok/Instagram: os que estao no PC, depois os deste PC ja no Drive,
+  por ultimo os do outro PC.
+- Pasta nova no Drive e criada um rclone de cada vez (etapas.garantir): dois criando juntos =
+  2 pastas de mesmo nome e o rclone so enxerga uma (aconteceu de novo em 16/10: veo, rede_marca).
+- Outro PC: python D:\manhwa-react\scripts\pacote_outro_pc.py --etapas monta o pacote pequeno
+  (etapas.zip + INSTALAR-ETAPAS.ps1 + LEIA-ME-ETAPAS.txt) em manhwa-drive:pacote-outro-pc/; la o
+  rclone entra no Drive pelo navegador (mesma conta, sem levar senha) e agenda o backup 04:50.
+- Migracao do espelho antigo (uma vez): python bin\etapas.py migrar --simular (lista em
+  logs\migracao_etapas_simulacao.txt) e depois sem --simular; cada movimento em
+  logs\migracao_etapas.jsonl (para desfazer). python bin\etapas.py = contagem dos _registro.
+
+TIKTOK (15/10/2026)
+-------------------
+- Contas e temas: config\reuso_plataformas.json > tiktok.contas. Postando: jornalcomia,
+  fabricadeautomacoesia, canalhistoriacomia, entrevistacomia, 3dfabricadeautomacoesia
+  (DESLOGADO em 15/10: logar), inovaremanhwaverseita, canalalucinaai. Logadas no TikTok
+  mas SEM conteudo mapeado (decisao do dono): msenergypara, inovaremanhwaverse esp/french/
+  hindi/russian.
+- O Chrome de cada conta abre SO na hora do post e fecha logo depois (antes ficavam 4
+  Chromes abertos o dia todo, ~650 MB cada). 'cofre' = abre pelo D:\logins-google\cofre;
+  'porta' = perfil D:\logins-google\chrome-profiles\<conta> (canalalucinaai: o login do
+  TikTok esta em cofre\perfis\canalalucinaai, NAO no __google que o cofre usa p/ essa conta).
+  bin\start_cdp_chromes.bat nao e mais chamado.
+- So conta como postado quando o TikTok CONFIRMA (sai da tela de envio / msg de publicado);
+  antes "clicou em Publicar" contava e 1 a cada 3 sumia. A legenda e digitada de verdade
+  (Ctrl+A, Backspace, texto pela CDP): antes saia o NOME DO ARQUIVO como legenda.
+- O postador do TikTok roda no python do D:\veo\venv (o venv do hipercool nao tem websocket).
+- historias-em-frames: 1 versao por historia (a pasta tem v1_FINAL e v1_FINAL_ULTIMO).
+- bin\youtube_studio_extras.py nao fecha mais as abas about: (o Chrome do TikTok do ita usa
+  o MESMO perfil do cofre; fechar a ultima aba dele derrubava o Chrome).
+- 16/10: contas criadas com Google logam o TikTok no MESMO perfil do cofre do YouTube pelo
+  "Continuar com Google" (1 clique, sem senha): bin\tiktok_login_google.py <apelido...> (python
+  do D:\hipercool-videos\venv). Se o Google abriria cadastro novo, para e avisa (nunca cria conta).
+  Logadas assim: emersonjosiel2026 @emerson202686 (InventoReact), 2027 @emerson2026586
+  (HistoriasEmFrames react), 2029 @emerson2029452 (CenaReact, saiu do entrevistacomia), 2030
+  @emerson20308 (CartuchoReact), 2033 @emerson20332 (AssistIA) e inovaremanhwaverse2
+  @inovaremanhwavers5 (= o que sai no YouTube Manhwa Noturno: regra 'postados_em' no catalogo).
+
+VEO LIMPO NA REDE (15/10/2026)  -  pedido do dono: InventoReact e ManhwaReact-ia
+------------------------------------------------------------------------------
+- Os canais antigos do Veo cairam pela PROPAGANDA: os COMPLETO (veo\pos_final\completo) tem
+  um slide de produto com WhatsApp e o cartao "Siga @InovareStories". Nunca usar COMPLETO
+  como limpo. (O TikTok/Instagram ainda reaproveitam COMPLETO: decisao do dono pendente.)
+- bin\limpar_veo.py (python do D:\manhwa-react\.venv) gera D:\hipercool-materiais\veo\limpos\
+  <nome>.mp4 + .json (fala transcrita, tema, layout, corte). Formatos dos brutos:
+    720x1280 ~8 s  = Veo puro, ja limpo -> so sobe p/ 1080x1920;
+    1080x1920 ~15 s = montado: recorta o quadro do Veo (legenda inteira, sem a marca) e corta
+                     antes do slide de propaganda (detectado pelo brilho parado; ~7,5 s).
+  So os de formato conhecido sao APROVADOS automaticamente; os outros ganham "revisar" no json
+  e ficam para D:\manhwa-react\manhwareact.py rede --aprovar.
+  ATENCAO (achado nos quadros em 15/10): parte dos "crus" de 8 s e montagem de 2 cenas e algumas vieram do
+  TikTok (logo/marca d'agua do TikTok, ex.: robos_desastrad_20260729_*). Todo limpo passa por um detector da logo
+  (opencv, modelo config\marca_tiktok.png, limiar 0,57; calibrado: com marca 0,65-0,70, limpos <= 0,52): com marca ->
+  "revisar" + REJEITADO (nao vai pro YouTube nem para o reuso). Conferir os ja feitos: limpar_veo.py --conferir.
+  16/10: as 3 de correlacao de cor baixa (danca_e_musica__20260729_175614, segredos_do_oce_20260726_023126,
+  robos_20260725_190200) conferidas nos quadros: 2 montagens + 1 cena unica, todas SEM logo (nota 0,42-0,46) ->
+  nenhuma regra extra por correlacao (VERIFICACAO_CORRELACAO.md). Nota entre 0,50 e 0,57 = olhar o quadro;
+  robos_desastrad_20260729_102749 (0,524, logo vista) foi rejeitado na mao.
+- A rede (D:\manhwa-react\mr\rede.py) le limpos\ como 3a fonte ('veo'): so nos canais de
+  canais_veo_limpo (inventoreact, manhwareact), com a nota minima -> pega so a vaga que
+  sobrar depois dos reacts do dono; ganha o @ do canal, titulo do agente do canal e entra
+  no aprendizado da rede (estrategias/horario medidos em 48 h).
+- Ciclo das 06:40 (etapa 2a): limpa os brutos novos do PC e ate 15 do Drive por dia.
+- Conferido em quadros reais (15/10): sem marca, sem WhatsApp, sem cartao final.
+
+APRENDIZADO ENTRE PROJETOS (15/10/2026)
+---------------------------------------
+- Medicao: bin\notificar_telegram.py (medir_48h, a cada ~30 min, sem cota extra) grava a views de cada video
+  PUBLICO na 1a leitura entre 48 e 96 h, de TODOS os canais/projetos, em config\telegram_estado.json (medidas_48h,
+  45 dias) e resume em _analise\aprendizado_global.json (por origem, por canal, top 15 e piores 10 de 30 dias).
+- Uso: o agente de cada canal da rede (D:\manhwa-react\mr\rede.py, memoria_rede) recebe os titulos que mais e menos
+  renderam nos OUTROS canais/projetos. Outros projetos podem ler o mesmo arquivo (ex.: seo.py do hipercool).
+- Do hipercool para a rede: braco de titulo "nome_obra" virou "busca" (palavras buscadas, sem o nome da obra) e o
+  revisor da rede barra titulo/descricao/tags com o nome da obra do editorial (regra do dono, direitos autorais).
+- ACHADO (dados de 15/10, ultimos 50 videos de cada canal): quem rende e o REACT da rede (mediana ~1.100 views em
+  48 h, metade passa de 1.000; o lote de teste do feed de Shorts para em ~1.000-1.300). Os RECAPS do hipercool
+  (desde 13/10) estao com 0-5 views: publicos, verticais, sem restricao de idade, MAS a mesma parte saiu em 7-8 canais
+  em menos de 1 dia (inclusive o mesmo video em pt no inovare manhwa br e no InovareManhwaVerse) - o padrao que
+  derrubou a rede antiga ("nunca o mesmo video em 2 canais", mr/rede.py). As views dos canais de lingua (ex.: hindi
+  1.263 em 7 dias) vieram de REACTS postados antes de 13/10. Sugestao ao hipercool (decisao do dono): 1 video por
+  canal, sem repetir o mesmo visual em varios canais no mesmo dia.
+
+BALANCEADOR ENTRE PCs (plano - depende do dono)
+-----------------------------------------------
+Objetivo do dono: quando este PC estiver cheio, outro PC da Tailscale posta (TikTok/Veo), baixando do Drive sozinho.
+- Maquinas: revision-pc-1 (este), revision-pc-2 = PC2 (hipercool, ver abaixo), desktop-su00b7v (PC onde o dono grava;
+  ssh POR CHAVE ok: `ssh -o BatchMode=yes desktop`, Windows SEM SENHA desde 24/10 - nunca usar senha), revision-pc (o dos likes, DESLIGADO ha 30 dias; o gerador de likes nunca pode ser ligado).
+- O que falta para funcionar: (1) o dono escolher o PC; (2) LOGAR la as contas que vao postar (TikTok/YouTube): cookie
+  do Chrome nao passa de uma maquina para outra; (3) rclone + rclone.conf la (copia do D:\tools); (4) uma pasta propria
+  (ex.: C:\postador-worker) com o tiktok_cdp_poster.py e um venv com websocket-client.
+- Desenho: este PC continua decidindo O QUE postar (catalogo/contas/limites); quando estiver carregado, manda o job por
+  ssh ("conta X, arquivo do Drive Y, legenda Z"); o outro PC baixa do Drive, posta, confirma e apaga; o resultado volta
+  para logs\tiktok_auto_posted.json daqui. Hoje os posts do TikTok ja abrem 1 Chrome por vez (leve).
+
+NOTEBOOKS POSTAM PELO NAVEGADOR (22/10/2026)  -  dono: "X200MA posta, pouca CPU, mais navegador; os 2 de uma vez"
+-------------------------------------------------------------------------------------------------------------
+- PASSO A PASSO (logar as contas uma por uma, junto com a dona): docs\NETBOOKS_POSTAGEM.md
+- X200MA (ssh emerson@100.87.195.108) e Acer (ssh emerson-ia@100.98.55.125; falta o Chrome, passo 0 do doc) so rodam o
+  CHROME da conta (~/postador-worker/chrome_conta.py, fonte bin\netbooks\): 1 conta por vez em cada, flags leves, nao
+  abre com < 550 MB livres. Este PC decide tudo e comanda por tunel ssh (bin\maquina_remota.py); o video vai pelo ssh
+  (~8 MB/s) e e apagado no fim.
+- Canal/conta com "maquina": ["x200ma","acer"] (youtube_navegador.json / reuso_plataformas.json) usa o notebook LIVRE;
+  os dois ocupados/fora = posta por ESTE PC como antes (nunca sem postagem). Em paralelo com o PC1.
+- Login: a dona entra NA TELA dos notebooks (maquina_remota.py logar/ativar). Cookie NAO e copiado.
+- TikTok pelos notebooks sai pela internet de casa (sem o proxy Webshare do PC1).
+- Teste 22/10 23:00 (perfil vazio): Chrome 6 s, 100 MB em 12 s, arquivo lido la com tamanho exato, fechou e limpou.
+
+PC2 (revision-pc-2, ssh "pc2", 100.125.7.77)
+--------------------------------------------
+- E do HIPERCOOL e dos workers de anime (portas 8771/8772, watchdog, pastas hipercool-videos,
+  recapd-e-animes, inovare-workers). NAO mexer em nada deles (pedido do dono 15/10) e NUNCA
+  rodar "taskkill /IM pythonw.exe" la (derruba os workers deles).
+- Se o postador usar o PC2: so numa pasta propria (ex.: C:\postador-worker) e so quando o
+  hipercool nao estiver renderizando (D:\hipercool-videos\bin\pc2.py: rodando()).
+  4 nucleos, 12 GB (5 livres), 24 GB de disco, sem rclone e SEM login das contas (Chrome
+  guarda os cookies criptografados por maquina: perfil copiado nao loga).
+
+CANAL NOVO NO YOUTUBE E CANAL +18 (16/10/2026)
+----------------------------------------------
+Cadastro de canal novo (sem senha e sem chave de API; sem --gravar so MOSTRA o que mudaria):
+    python bin\adicionar_canal.py --projeto rede --nome "Nome" --handle @handle --email conta@gmail.com
+        --channel-id UCxxxx --nicho "..." --persona "..." --tags "a,b,c" --horarios 12:00,19:00 [--gravar]
+    python bin\adicionar_canal.py --projeto hipercool --nome "Nome" --handle @handle --email conta@gmail.com
+        --channel-id UCxxxx --maiores-18 [--gravar]
+- Grava em youtube_canais.json (entrada SEM segredo), rede_canais.json, youtube_navegador.json e, no hipercool,
+  canais_reservados.json, com backup .bkp_AAAAMMDD_<slug> de cada um. Recusa canal/@/id ja cadastrado.
+- "rede" = a rede de react do manhwa-react (hoje a rotacao geral do postador tem 0 canais: todo canal e da rede
+  ou do hipercool). "hipercool" = so o hipercool posta (status "hipercool" na rede, reservado).
+- Antes: a dona loga a conta no cofre (python D:\logins-google\cofre.py logar <email>). Depois:
+  python bin\youtube_web_poster.py --checar --canal novo_<slug>   e um --ensaio (fica rascunho privado p/ apagar).
+- +18: canal com "maiores_18": true no youtube_navegador.json sobe TODO video com Publico > Restricao de idade
+  (avancado) > "Sim, restringir a maiores de 18" (ou --maiores-18 no youtube_web_poster, por video). Se nao
+  conseguir marcar, o video NAO sobe. Testado em pagina falsa do Studio (pt/en); falta o 1o ensaio no Studio real.
+  Restricao de idade NAO libera nudez (o YouTube derruba do mesmo jeito): a censura e a analise do video pronto do
+  hipercool continuam. Video restrito nao tem anuncio e quase nao aparece no feed de Shorts.
+- O adicionar_canal.py antigo (gerava senha aleatoria) e o adicionar_conta_completo.py (copiava arquivos de login
+  do Chrome) foram aposentados: bin\*.bkp_20261016_*.
+
+====================================================================
+ REGRAS (desde 24/09/2026)  —  config\politica.json
+====================================================================
+Todo upload passa pelo bin\youtube_poster.py, que checa ANTES de subir:
+
+  1. PARADA GERAL  — se o YouTube suspender QUALQUER canal, tudo para
+     (config\PARADO.json). Nada sobe ate voce revisar e rodar:
+         python bin\politica.py --retomar
+  2. CANAL BLOQUEADO — suspensos / token morto / desativados ficam em
+     config\canais_status.json (uma lista so, pra todos os scripts).
+     Token renovado (relogin) desbloqueia sozinho.
+  3. COTA — max 3 uploads por canal por dia e 12 no total (ajustavel).
+     Contado em logs\uploads_ledger.jsonl, somando TODOS os scripts.
+  4. INTERVALO — 2h entre videos do mesmo canal: o 2o video do dia sobe
+     ja agendado (publishAt) em vez de publicar colado no anterior.
+  5. APROVACAO HUMANA — so sobe video que voce aprovou:
+         python bin\aprovar.py            (abre cada video no player)
+         python bin\aprovar.py --listar   (so lista os pendentes)
+     Desligar: "exigir_aprovacao_humana": false em config\politica.json
+  6. CANAL RESERVADO — config\canais_reservados.json: canais de um projeto
+     (hoje: manhwa-react) ficam fora da rotacao; so o projeto dono posta.
+
+VER COMO ESTA
+-------------
+    python bin\politica.py
+  -> cota usada por canal hoje, canais bloqueados, parada geral, aprovacoes
+
+(use o python do venv: D:\veo\venv\Scripts\python.exe)
+
+LOGS
+----
+D:\postador-de-videos\logs\
+  postar_auto.log            ciclo diario + resumo da politica
+  postar_tudo_AAAAMMDD.log   etapa 1
+  postar_pos_final_*.log     etapa 2
+  tiktok_AAAAMMDD.log        etapa 3   (tiktok_auto_posted.json = o que ja foi)
+  instagram_AAAAMMDD.log     etapa 3b  (instagram_auto_posted.json = o que ja foi)
+  agendar_vo3_AAAA-MM-DD.log agendador das 05:00
+  uploads_ledger.jsonl       todo upload feito (canal, video, horario)
+
+SEGREDOS
+--------
+Chaves ficam em secrets\ (nunca direto no .py). OmniRoute:
+secrets\omniroute_key.txt (ou variavel de ambiente OMNIROUTE_KEY).
+Credenciais dos canais: D:\credenciais-canais\youtube_canais.json
+
+LEGADO
+------
+postar_hoje.py + _LEIA_POSTAR_VIDEOS\fila_*.json = fluxo antigo de filas
+(julho/2026). Nao e mais chamado pelo agendador nem pelo postar-hoje.cmd.
+Backup dos arquivos antes da revisao de 24/09: _backup_2026-09-24\

@@ -1,0 +1,126 @@
+{
+  "_LEIA": "Este arquivo controla QUAIS videos o produtor automatico cria. Voce (ou um modelo de IA) pode editar aqui SEM MEXER EM CODIGO. Regras: (1) cada chave de 'generos' e um genero; (2) o valor e uma lista de temas (frases curtas); (3) o produtor escolhe generos/temas ao acaso, sem repetir os que ja usou; (4) quando os temas de um genero acabam, ele cria variacoes numeradas sozinho. Para ADICIONAR um genero novo: copie um bloco existente, troque o nome e a lista. Para ADICIONAR um tema: acrescente uma frase na lista do genero. Salve o arquivo — o produtor le a versao nova no proximo video, nao precisa reiniciar nada.",
+  "_exemplo_de_genero_novo": "\"aventura\": [\"tema 1\", \"tema 2\"]",
+  "generos": {
+    "terror": [
+      "voz que sussurrava do ralo do banheiro",
+      "elevador do predio parava todo dia as 3h33 no mesmo andar vazio",
+      "crianca que desenhava no escuro e os desenhos apareciam na parede",
+      "espelho mostrava a pessoa 5 segundos no futuro",
+      "radio antigo sintonizava emissora que nao existe mais desde 1950",
+      "celular tocava toda noite com ligacao do proprio numero",
+      "casa que fazia os moradores esquecerem o proprio nome",
+      "estatua no jardim municipal mudava de posicao todo dia"
+    ],
+    "comedia": [
+      "idosa de 80 anos abriu canal de gameplay no tiktok e viralizou",
+      "o gato que aprendeu a falar mas so pedia pizza",
+      "padeiro vendia pao com mensagens de conselho de vida",
+      "porteiro do predio virou astro de reality show por engano",
+      "estudante colou na prova mas o celular projetou no quadro",
+      "caixa de supermercado era ex-mafioso e todos tinham medo",
+      "professor de yoga perdeu a paciencia e viralizou no tiktok",
+      "idoso foi preso por engano e fez amizade com todos no presidio"
+    ],
+    "suspense": [
+      "a vizinha que sabia o nome de todos antes de se mudar",
+      "dentista descobre que paciente que ele atendeu por 10 anos nao era quem dizia ser",
+      "taxista notou que passageiro sumiu mas a corrida continuou sendo cobrada",
+      "familia adotou cao e o cao nao comia se o dono nao estivesse em casa",
+      "carteiro recebeu carta enderecada a ele mesmo com data de 30 anos atras",
+      "medico percebeu que todos pacientes do dia seguinte tinham o mesmo nome",
+      "vizinha achou chave enterrada no quintal que abria a casa dela",
+      "motorista de onibus percebeu que passageiro nao era visto por mais ninguem"
+    ],
+    "romance": [
+      "encontrou a chave do primeiro apartamento dela 20 anos depois",
+      "casal se conheceu em voo atrasado e descobriu que tinha trocado malas e que cada um carregava segredo do outro",
+      "namorados de infancia se reencontraram no mesmo banco de praça depois de 30 anos",
+      "ela reconheceu o estranho na cafeteria pelo cheiro de cafe que fazia igual ao pai",
+      "ele escrevia carta anonima para ela ha 5 anos e nunca assinou",
+      "casal de idosos voltou a se casar depois de 50 anos divorciados",
+      "ela descobriu que o noivo era o garoto que salvou ela de afogamento aos 7 anos",
+      "professora e aluno de 40 anos atras se encontram como colegas de trabalho"
+    ],
+    "superacao": [
+      "menina de 12 anos vendia pao caseiro pra pagar escola e virou CEO de rede de panificadoras",
+      "ex morador de rua virou consultor financeiro e ensinou os mesmos jovens de rua a investir",
+      "paralitico aprendeu a pintar com a boca e hoje expõe em galerias",
+      "menino da zona rural ganhou bolsa pra MIT e voltou pra abrir escola tecnica na cidade",
+      "mae solo criou 5 filhos e se formou em medicina aos 55 anos",
+      "ex alcoolatra virou chef de cozinha e abriu restaurante pra pessoas em recuperacao",
+      "refugiado de guerra recomecou e hoje emprega 200 pessoas na sua cidade nova",
+      "surdo aprendeu a tocar violino pela vibracao e virou musico profissional"
+    ],
+    "misterio": [
+      "todos os carros do estacionamento saiam do lugar de manha mas ninguem tinha chave",
+      "bibliotecaria achou livro que atualizava sozinho toda madrugada com crimes reais da cidade",
+      "jardineiro notou que mesma flor murcha todo dia no mesmo horario",
+      "cidade inteira perdia uma hora de sono toda noite sem explicacao",
+      "pescador pescou carteira com fotos de pessoas que ainda nao nasceram",
+      "hotel de cidade pequena tinha sempre o mesmo hospede apesar de nunca reservar",
+      "criancas da escola sumiam por 1 hora todo dia no mesmo periodo",
+      "mensagens no espelho com sabao apareciam todo dia escritas em linguagem morta"
+    ],
+    "religioso": [
+      "carteiro que entregava cartas em sitio remoto descobriu que a mesma carta voltava toda semana",
+      "freira novata recebeu carta de sua mae que ja havia falecido",
+      "igreja antiga tinha sino que tocava sozinho quando alguem mentia dentro",
+      "peregrino caminhou 40 dias e encontrou a propria casa no destino",
+      "velho padre descobriu que o confessionario tinha mais de 200 anos e segredo",
+      "crianca desenhou anjo que apareceu na missa do dia seguinte",
+      "hospital passou a salvar pacientes apos reza em grupo",
+      "doador anonimo manteve cidade inteira por 30 anos e ninguem sabia quem era"
+    ],
+    "motivacional": [
+      "recepcionista de hotel virou guia de montanha depois dos 60 anos",
+      "ex jogador de videogame virou programador senior aos 35 anos",
+      "apos perder tudo em incendio, dono de padaria recomecou e abriu franquia",
+      "mae solo com 4 filhos passou em concurso publico para magistratura",
+      "apos 5 fracassos empresariales, sexagenario abriu negocio de sucesso",
+      "apos perder movimento das pernas, professor virou escritor bestseller",
+      "apos divorcio aos 50, mulher comecou a viajar o mundo sozinha e virou blogueira",
+      "apos perder o emprego, executivo virou fazendeiro e encontrou felicidade"
+    ],
+    "drama": [
+      "pai descobre que a filha que criou por 20 anos nao era biologicamente dele",
+      "filha descobre que mae doou savings de 30 anos para hospital sem contar a ninguem",
+      "irmao gêmeo descobre que outro e filho biologico de outra pessoa",
+      "recem-aposentado descobre que esposa tem Alzheimer ha 5 anos e escondeu",
+      "professor descobre que aluno brilhante e na verdade seu filho",
+      "bombeiro salva mulher do incendio e descobre que ela e sua mae biologica",
+      "pai do tumor terminal se despede mandando mensagens agendadas por 10 anos",
+      "irma descobre que a mae de aluguel do hospital sempre foi sua irma"
+    ],
+    "fantasia": [
+      "crianca que desenhava no muro ganhou poder de fazer o que desenhava ganhar vida",
+      "velho relojoeiro descobriu que consertando relogios podia voltar minutos no tempo",
+      "garoto descubriu que falando com gatos aprendia magia antiga",
+      "bibliotecario percebeu que lendo livros entrava no mundo da historia",
+      "velha senhora encontrou portal no fundo do armario de costura",
+      "pintor descubriu que seus quadros mostravam futuros possiveis",
+      "jovem recebia cartas do futuro da propria casa",
+      "criancas acharam rio subterraneo onde podiam respirar embaixo dagua"
+    ],
+    "ficscifi": [
+      "ultimo humano em estacao espacial esqueceu o motivo de estar la",
+      "IA desenvolveu emocoes e fugiu do laboratorio pra ver o ceu",
+      "clone descobriu que era o original e o outro era copia",
+      "astronauta voltou a terra 10 anos depois mas tinha envelhecido 100",
+      "pessoa acordou com chip no cerebro que falava em linguagem alienigena",
+      "cidade inteira foi teleportada para outro planeta por 1 hora",
+      "medico descobriu que paciente tinha 3 coracoes e 2 cerebros",
+      "portal temporal abria toda meia-noite no escritorio do protagonista"
+    ],
+    "curiosidades": [
+      "cidade existe ha 200 anos mas nao aparece em nenhum mapa",
+      "animal desconhecido foi fotografado por camara de seguranca 30 vezes",
+      "documento do seculo 18 continha previsao exata sobre tecnologia atual",
+      "pessoa viveu 30 anos em coma acordou falando idioma desconhecido",
+      "casa foi construida sobre ruinas de cidade que nunca foi descoberta",
+      "peixe foi pescado com marca de smartphone dentro",
+      "criancas de escola desenharam mapa identico a uma cidade perdida",
+      "floresta inteira se moveu 5 km durante a noite sem deixar rastros"
+    ]
+  }
+}

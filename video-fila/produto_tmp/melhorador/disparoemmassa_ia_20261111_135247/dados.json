@@ -1,0 +1,356 @@
+{
+ "video": "disparoemmassa_ia_20261111_135247.mp4",
+ "conta": "disparoemmassa.ia",
+ "marca": "Disparo em Massa IA",
+ "titulo": "Disparo em massa inteligente com envio automático",
+ "formato": "dono_tres_veo_final",
+ "veo_total": 0,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.88,
+  "notas": {
+   "legibilidade": 8.5,
+   "movimento": 6.0,
+   "roteiro_marca": 8.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    9.38
+   ],
+   [
+    1,
+    "imagem",
+    16.84
+   ],
+   [
+    2,
+    "conversa",
+    7.78
+   ],
+   [
+    3,
+    "imagem",
+    18.14
+   ],
+   [
+    4,
+    "cartao",
+    5.54
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Na legenda karaokê inferior, a palavra falada destacada 'passar' está com preenchimento em verde escuro sem a caixa preta de fundo (pill), resultando em baixo contraste contra o blazer terracota e as sombras das mãos da apresentadora.",
+   "como_corrigir": "Padronizar o estilo da palavra ativa com o verde neon de alto contraste e a caixa de fundo preta arredondada (pill), exatamente como aplicado nos quadros q01, q02, q03 e q05."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Cena parada: o fundo com a imagem borrada fica totalmente estático por mais de 3,5 segundos, sem qualquer movimento de câmera (slow zoom ou pan) por trás do cartão de pergunta.",
+   "como_corrigir": "Aplicar um efeito Ken Burns (push-in contínuo de escala de 100% para 105%) no fundo e uma sutil flutuação no cartão de pergunta para dar dinamismo inicial."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Imagem com cara de banco de imagem genérico e tom emocional desconectado: mulher com sorriso aberto e radiante em loja de roupas ilustrando uma dor de frustração e esforço manual ('Eu cansava de passar horas copiando e colando').",
+   "como_corrigir": "Substituir por imagem ou gravação com expressão realista de cansaço ou foco no celular, conectada com o problema narrado."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada e congelada: a imagem de fundo permanece 100% estática do início ao fim do bloco (q04 a q06 são idênticos em enquadramento e pixels do fundo), durando quase 5 segundos sem movimento.",
+   "como_corrigir": "Aplicar zoom contínuo na imagem de fundo ou animar a entrada dos elementos gráficos com transições de posição e escala mais orgânicas."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Ritmo arrastado: o mockup da simulação de WhatsApp permanece estático no centro da tela por mais de 5 segundos, dependendo apenas do aparecimento simples dos balões de texto.",
+   "como_corrigir": "Inserir uma câmera lenta se aproximando (zoom in progressivo) conforme as mensagens chegam e agilizar a velocidade da troca de mensagens para acelerar o ritmo."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Imagem corporativa com aspecto de banco de imagem genérico: homem de terno digitando no notebook com iluminação de estúdio e planta decorativa, sem relação palpável com automação de WhatsApp.",
+   "como_corrigir": "Substituir por take mostrando uma tela de painel com disparos reais ou uma interface de campanhas funcionando."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Falta de variedade e repetição de molde: a cena 3 é uma cópia estrutural da cena 1 (foto estática congelada com pílulas brancas de checkmark empilhadas no centro do tronco do personagem), deixando o anúncio previsível e monótono.",
+   "como_corrigir": "Mudar a direção de arte do bloco de resultado: em vez de empilhar pílulas idênticas sobre foto estática, apresentar contadores animados com métricas de mensagens entregues ou visualização em grade de contatos."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "A imagem mostra a mulher sorrindo radiante e relaxada, o que não combina com a fala de dor e exaustão do momento ('Eu cansava de passar horas copiando e colando avisos para cada cliente no WhatsApp') nem com o bloco '1 O problema'.",
+   "como_corrigir": "Substituir por uma imagem em que a pessoa expresse frustração, cansaço ou sobrecarga ao mexer no celular, alinhando a linguagem corporal ao relato da dor."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho inicial não retém nos 2 primeiros segundos: estático, longo demais (quase 4 segundos) e ancorado num fundo com desfoque excessivo que parece um slide frio de PowerPoint, sem impacto visual que pare o scroll do usuário.",
+   "como_corrigir": "Cena 0: reduzir o tempo de tela da pergunta para no máximo 1.8 segundos, remover o desfoque cinzento do fundo e abrir com o apresentador/personagem em foco nítido fazendo uma expressão de dúvida ou quebra de padrão visual direta para a câmera."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Incongruência emocional e estética de banco de imagens amador: a locução narra sofrimento e exaustão ('Eu cansava de passar horas copiando e colando...'), mas a imagem mostra uma modelo sorrindo alegre e relaxada, quebrando totalmente a credibilidade.",
+   "como_corrigir": "Cena 1: substituir o take por uma cena onde a mesma personagem demonstre cansaço e frustração real trabalhando manualmente no celular/computador, alinhando a expressão facial com a dor narrada."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Erro semiótico ao utilizar ícone de checkmark verde ('✓') para listar tópicos de dor e problema ('passar horas copiando', 'cada cliente'), gerando confusão imediata com benefícios ou recursos concluídos.",
+   "como_corrigir": "Cena 1: substituir os ícones de check verde nos cards do bloco '1 O problema' por marcadores neutros, ícones de alerta ou 'X' vermelho, reservando o checkmark verde exclusivamente para os ganhos da Cena 3."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A simulação do WhatsApp retrata um simples atendimento individual 1x1 de loja física ('Olá Mariana...'), falhando em comprovar visualmente os diferenciais técnicos prometidos na locução ('rotação de números' e 'envio automático em massa').",
+   "como_corrigir": "Cena 2: reformular a simulação para exibir a escala do produto, mostrando mensagens sendo disparadas em fila para múltiplos contatos com variáveis de nomes e tags gráficas indicando a alternância entre números/chips."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Quebra de continuidade na narrativa em primeira pessoa: o vídeo inicia com a vivência de uma mulher lojista (Cena 1) e na Cena 3 corta repentinamente para um homem corporativo de terno em frente ao notebook, reforçando a impressão de retalho de banco de imagens.",
+   "como_corrigir": "Cena 3: manter a mesma protagonista da Cena 1, agora tranquila e aliviada ao ver o painel do sistema funcionando no computador, criando uma história visual coesa de antes e depois."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "crmchatwoot_ia_20261112_045401.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "sem_dono",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "mentoriasia_ia_20261112_063630.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261112_165224.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

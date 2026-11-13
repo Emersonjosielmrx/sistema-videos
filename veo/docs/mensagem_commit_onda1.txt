@@ -1,0 +1,50 @@
+Onda 1: porteiro de qualidade, conferencia de fala e dedupe
+
+Ate agora a unica conferencia depois que o Veo entregava o video era dimensao e
+codec de audio -- e ela rodava DEPOIS de copiar o mp4, gerar 3 thumbs e escrever
+o postar.json. Video mudo, de 4 s, no formato errado ou falando outra coisa
+entrava no cache como SUCESSO e virava "formula vencedora" para replicar.
+
+Porteiro (AT-02 e AT-01)
+- validar_video.py (novo): 9:16 por proporcao, duracao, audio, codec de imagem
+  disfarcado de video, quadro preto, quadro congelado, volume opcional e --
+  o mais importante -- se o arquivo DECODIFICA. O ffprobe le o cabecalho e diz
+  que esta tudo bem mesmo com o bitstream quebrado; sem olhar o codigo de saida
+  do ffmpeg, 27 dos 240 videos de hipercool-materiais\veo\limpos (11%, a pasta
+  que vai ao ar) passavam como bons.
+- conferir_fala.py (novo): transcreve o audio e compara com a fala pedida. Nao
+  da para usar o campo de idioma: mr\transcribe.py devolve o idioma que voce
+  PEDIU, nao o que ouviu. Duas medidas: semelhanca (falou outra coisa?) e
+  cobertura (falou a frase inteira?) -- sem a segunda, "Cansado" no lugar de
+  "Cansado de recomecar? Entao pare de desistir" passava com nota 1,00.
+- cron_gerar_video_llm.py: o porteiro roda ANTES de registrar, copiar, gerar
+  thumb e escrever o postar.json. Reprovado vai para videos\rejeitados\ com o
+  motivo escrito antes do move (se o arquivo estiver preso, e renomeado para
+  sair do glob *.mp4, senao o worker_noite o pegaria). Reprovar nao e falha de
+  conta: a sessao e marcada como sucesso e o ciclo encerra em 2 reprovas
+  (VEO_MAX_REPROVAS), em vez de queimar ate 12 geracoes pagas.
+  VEO_VALIDAR=0 e VEO_CONFERIR_FALA=0 desligam cada porta.
+
+Dedupe de fala (AT-04)
+- fala_repetida() compara a fala nova com TODO o historico (nao so o mesmo
+  tema), com limiar 0,62 calibrado nas 132 falas existentes: entre falas
+  diferentes a mediana e 0,12 e o p95 0,35; repeticoes reais ficam em 0,82-0,89.
+- sem_repetir() e usada nos TRES pontos que montam prompt (inicio do ciclo,
+  troca de prompt dentro da escada e enchimento da fila). So no inicio, a troca
+  da escada passava direto pelo dedupe.
+- 130 falas antigas da pasta experimental viraram logs\falas_historicas.json,
+  arquivo so de memoria, sem caminho de video, para nenhum postador achar que
+  ha fila ali.
+
+Correcao de defeito antigo
+- 're' nao estava importado no topo: analisar_padroes_viralizacao() levantaria
+  NameError assim que houvesse 3 videos com metricas, e o erro era engolido.
+- A validar_video() antiga virou obsoleta (so olhava dimensao e, quando o
+  ffprobe falhava, devolvia a mensagem de erro que quem chamava lia como
+  "tem audio").
+
+Validado: porteiro fim a fim em arquivo corrompido (reprova), em video bom
+(passa) e com fala trocada (reprova); fala truncada reprovando por cobertura;
+dedupe pegando repetidas e deixando passar novas; validate.py verde.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

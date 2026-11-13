@@ -1,0 +1,30 @@
+{
+  "_leia": "Videos de todos os projetos e PCs no Google Drive, por projeto e por ETAPA (bin/etapas.py, pedido do dono 16/10): <remoto>/<projeto>/<N>_<rede>/<origem>/<arquivo>. A pasta e a ULTIMA rede por onde o video ja passou, na ordem de 'etapas' do projeto (sem 'etapas' = 'padrao'). Rede nova (ex.: kwai) = acrescentar no fim da lista do projeto + o postador dela; as pastas se numeram pela ordem. Cada PC anota as postagens so no seu <remoto>/_registro/<pc>.jsonl. so_no_fim = o video so sai do PC quando passou por TODAS as etapas (o postador do projeto ainda usa o arquivo local).",
+  "remoto": "manhwa-drive:videos-backup",
+  "padrao": [
+    "youtube",
+    "tiktok",
+    "instagram"
+  ],
+  "projetos": {
+    "manhwa-react": {},
+    "hipercool": {},
+    "veo": {},
+    "historias-em-frames": {},
+    "recapd": {},
+    "parceiro": {
+      "so_no_fim": true,
+      "_obs": "18/10 (unificação): Shorts de parceiro entram no catálogo por ficha (postar.json). so_no_fim = o arquivo só sai do PC depois de todas as redes (o pipeline do parceiro e as línguas ainda podem usar a pasta).",
+      "sai_apos_dias": 0.01,
+      "_obs_sai": "23/10 (dona: 'veja se está pondo no Drive os postados; precisamos de todos?'): com so_no_fim os Shorts só saíam depois do Instagram e 195 nunca iriam pra lá (328 no PC, 8,7 GB). Agora saem também quando estão PÚBLICOS no YouTube há sai_apos_dias dias; TikTok/Instagram baixam do Drive (catalogo.baixar). postar.json e metadata.json ficam no PC. 29/10 (dona: \"não pode acumular\"): 3 -> 0.01 dia (0 desliga a regra): sai ~2h15 depois de PÚBLICO; 241 postados (4,7 GB) esperavam os 3 dias."
+    },
+    "ms-energy": {
+      "etapas": [
+        "instagram",
+        "facebook",
+        "stories"
+      ],
+      "so_no_fim": true
+    }
+  }
+}

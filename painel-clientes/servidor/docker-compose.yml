@@ -1,0 +1,23 @@
+name: painel-clientes
+
+services:
+  painel:
+    build: .
+    image: painel-clientes:1
+    container_name: painel-clientes
+    restart: unless-stopped
+    user: "1000:1000"
+    # Só o Traefik da própria VPS alcança a porta (rota em /opt/traefik-config/dynamic/clientes.yml).
+    ports:
+      - "127.0.0.1:8098:8098"
+    volumes:
+      - ./dados:/app/dados
+      # página e código montados: publicar a página = copiar o arquivo; o código novo vale no restart
+      - ./web:/app/web:ro
+      - ./app.py:/app/app.py:ro
+    mem_limit: 256m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

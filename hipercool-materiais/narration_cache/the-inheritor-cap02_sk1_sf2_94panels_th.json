@@ -1,0 +1,720 @@
+{
+  "titulo_video": "The Inheritor: ความลับอันมืดมิดของมรดก",
+  "tags": [
+    "Manhwa",
+    "The Inheritor",
+    "ระทึกขวัญ",
+    "Recap"
+  ],
+  "locucoes": [
+    {
+      "painel": 1,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ยินดีที่ได้รู้จักในที่สุด..."
+    },
+    {
+      "painel": 2,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ค่ำคืนเก็บงำความลับที่ไม่ควรกระซิบ"
+    },
+    {
+      "painel": 3,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ทุกย่างก้าวของเธอก้องไปตามทางเดินเหมือนคำพิพากษาประหารชีวิต"
+    },
+    {
+      "painel": 4,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉันเป็นของคุณ... คุณได้รับฉันมา"
+    },
+    {
+      "painel": 5,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "จากพ่อของคุณ"
+    },
+    {
+      "painel": 6,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉันคือ 'มรดก' ของคุณ"
+    },
+    {
+      "painel": 7,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "Noh Yeseul?!"
+    },
+    {
+      "painel": 8,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "นั่นคือชื่อของฉัน"
+    },
+    {
+      "painel": 9,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "มรดก?! หมายความว่าไง?"
+    },
+    {
+      "painel": 10,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "โอ้โห! ดราม่าเริ่มเต็มสูบเลยนี่"
+    },
+    {
+      "painel": 11,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "บรรยากาศหนักอึ้งและความลึกลับทวีขึ้นทุกวินาที"
+    },
+    {
+      "painel": 12,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "อะ... อะไรกัน?"
+    },
+    {
+      "painel": 13,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "เธอ... เธอบ้าหรือเปล่า?"
+    },
+    {
+      "painel": 14,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "เธอเพิ่งพูดแบบนั้นจริงๆ เหรอ?!"
+    },
+    {
+      "painel": 15,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "มรดก? ต้องล้อเล่นแน่"
+    },
+    {
+      "painel": 16,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "จากพ่อฉัน... เขาทิ้งทุกอย่างไว้ให้คุณ"
+    },
+    {
+      "painel": 17,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เข้ามาสิ!"
+    },
+    {
+      "painel": 18,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เธอเดินราวกับแบกรับภาระหนักอึ้ง"
+    },
+    {
+      "painel": 19,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ส่วนเขาไม่รู้จะหนีหรือเผชิญหน้ากับเรื่องวุ่นนี้"
+    },
+    {
+      "painel": 20,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ความเงียบของเธอน่ากลัวกว่าเสียงกรีดร้องใดๆ"
+    },
+    {
+      "painel": 21,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "หนุ่มน้อยเหงื่อตกไคลน้อยใจต่อแรงกดดันมากมาย"
+    },
+    {
+      "painel": 22,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ความตึงเครียดระหว่างสองคนมากจนตัดได้ด้วยมีด!"
+    },
+    {
+      "painel": 23,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เอาล่ะ... สรุปเรื่องราว"
+    },
+    {
+      "painel": 24,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "พ่อฉัน... เขาทิ้งนี่ไว้"
+    },
+    {
+      "painel": 25,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เขาเสียชีวิตใช่ไหม?"
+    },
+    {
+      "painel": 26,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "...ใช่"
+    },
+    {
+      "painel": 27,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "เข้าใจแล้ว ข้อมูลเยอะเกินรับไหว"
+    },
+    {
+      "painel": 28,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ท่ามกลางความสับสนก็มีท่าทางที่อ่อนโยน"
+    },
+    {
+      "painel": 29,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ขอบคุณ"
+    },
+    {
+      "painel": 30,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "บางที... เราอาจเข้าใจกันได้"
+    },
+    {
+      "painel": 31,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "คุณ... ไม่เศร้าเลยเหรอ?"
+    },
+    {
+      "painel": 32,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "การตายของพ่อเธอควรเป็นเรื่องตกใจแต่มีอะไรไม่ลงตัว"
+    },
+    {
+      "painel": 33,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เขาสังเกตทุกรายละเอียดหาความเท็จอย่างสิ้นหวัง"
+    },
+    {
+      "painel": 34,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เพราะสายตาเธอบอกอะไรมากกว่าคำพูด"
+    },
+    {
+      "painel": 35,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ชัดเจนว่ามีเรื่องมืดมิดเกิดขึ้นในครอบครัวนี้"
+    },
+    {
+      "painel": 36,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ถูกแล้ว แม้รู้ว่าเขาตายแล้วเธอก็ไม่แสดงอะไร"
+    },
+    {
+      "painel": 37,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ความเย็นชาของเธอขนลุกสุดๆ"
+    },
+    {
+      "painel": 38,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉัน... ฉันไม่รู้จะอธิบายยังไง"
+    },
+    {
+      "painel": 39,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "นี่ เอาไปสิ"
+    },
+    {
+      "painel": 40,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ซองจดหมายที่เธอถือเก็บงำความจริงที่ซ่อนไว้"
+    },
+    {
+      "painel": 41,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "สาเหตุของทุกอย่างดูเหมือนจะเป็นประวัติความรุนแรงในครอบครัว"
+    },
+    {
+      "painel": 42,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ห้องมืด เสียงกรีดร้องและความเจ็บปวดสร้างฝันร้ายนี้"
+    },
+    {
+      "painel": 43,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ความทรงจำของเธอถูกทำเครื่องหมายด้วยแผลเป็นทางอารมณ์ลึกซึ้ง"
+    },
+    {
+      "painel": 44,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แค่คิดก็สลายใจแล้วว่าเธอผ่านอะไรมา"
+    },
+    {
+      "painel": 45,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "อดีตไม่ตาย มันแค่กลายเป็นบาดแผลทางใจ"
+    },
+    {
+      "painel": 46,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "หนุ่มน้อยเริ่มเข้าใจความร้ายแรงในที่สุด"
+    },
+    {
+      "painel": 47,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "นั่นคือกรณี แล้วมันก็เกิดขึ้น"
+    },
+    {
+      "painel": 48,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "พ่อ? คุณเรียกเขาว่าพ่อ?"
+    },
+    {
+      "painel": 49,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฮ่าฮ่า... คุณหมายความว่าไงกับคำว่าพ่อ?"
+    },
+    {
+      "painel": 50,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ไม่ได้หยิ่งนะ... แต่เขาไม่ใช่"
+    },
+    {
+      "painel": 51,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "รู้ไหม ทุกอย่างไม่ใช่อย่างที่ดู"
+    },
+    {
+      "painel": 52,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "งั้น... เราดำเนินต่อได้ไหม?"
+    },
+    {
+      "painel": 53,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "ฉัน... อาจารย์ของฉัน... เขาทำอะไร?"
+    },
+    {
+      "painel": 54,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ปัง! ผลกระทบของการเปิดเผยโดนเต็มๆ!"
+    },
+    {
+      "painel": 55,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "กะ! ทำไมคุณถึงแปลกใจ?"
+    },
+    {
+      "painel": 56,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "แล้วไง? ถ้าเขาเป็นแบบนั้นก็ช่างเถอะ"
+    },
+    {
+      "painel": 57,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "แม้เขาจะไม่ได้ทำอะไรให้เราเลย?!"
+    },
+    {
+      "painel": 58,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "แล้วการมีชีวิต? นั่นคือทั้งหมดที่สำคัญตอนนี้เหรอ?"
+    },
+    {
+      "painel": 59,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ระดับความเครียดสูงมากเลยทุกคน!"
+    },
+    {
+      "painel": 60,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "เขาตายเพราะเขา! คุณไม่รู้อะไรเลย!"
+    },
+    {
+      "painel": 61,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "อ่า... คุณรุนแรงจัง"
+    },
+    {
+      "painel": 62,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "!!? คุณทำอะไร?"
+    },
+    {
+      "painel": 63,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "!? นี่เป็นไปไม่ได้!"
+    },
+    {
+      "painel": 64,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "คุ-คุณถอยห่างแต่นี่มันอะไร?!"
+    },
+    {
+      "painel": 65,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "คุ-คุณ... คุณเป็นใครกันแน่?"
+    },
+    {
+      "painel": 66,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉันเบื่อทุกอย่างแล้ว"
+    },
+    {
+      "painel": 67,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "..."
+    },
+    {
+      "painel": 68,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "ให้ตาย! ฉันต้องออกจากที่นี่!"
+    },
+    {
+      "painel": 69,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ปัง! ความขัดแย้งทวีความรุนแรงเร็วเกินไป"
+    },
+    {
+      "painel": 70,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "..."
+    },
+    {
+      "painel": 71,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ตามมาคือความเงียบหลังพายุ"
+    },
+    {
+      "painel": 72,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ค่ำคืนดำเนินต่อแต่ไม่มีอะไรเหมือนเดิม"
+    },
+    {
+      "painel": 73,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "พ่อเลวนั่น... ทุกอย่างเป็นความผิดของเขา"
+    },
+    {
+      "painel": 74,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ความโดดเดี่ยวบนม้านั่งสวนสาธารณะเจ็บกว่าหมัดใดๆ"
+    },
+    {
+      "painel": 75,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แต่เขาไม่ได้อยู่คนเดียวเพราะมีคนจ้องมองจากเงามืด"
+    },
+    {
+      "painel": 76,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เจอแล้ว คุณอยู่นี่นี่เอง"
+    },
+    {
+      "painel": 77,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "นั่งไหม? ขอบคุณที่รอ"
+    },
+    {
+      "painel": 78,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "คนแปลกหน้าสองคนผูกพันด้วยภาระของมรดกเน่าเปื่อย"
+    },
+    {
+      "painel": 79,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "อืม... เกี่ยวกับเรื่องที่เกิดขึ้น..."
+    },
+    {
+      "painel": 80,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "ขอโทษ... สำหรับเมื่อกี้ ฉันควบคุมตัวเองไม่ได้"
+    },
+    {
+      "painel": 81,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "โกรธขึ้นมาแล้ว... ทันใดนั้น..."
+    },
+    {
+      "painel": 82,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ไม่เป็นไร ไม่ต้องขอโทษ ฉันเข้าใจ"
+    },
+    {
+      "painel": 83,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "หา? คุณไม่สนจริงๆ เหรอ?"
+    },
+    {
+      "painel": 84,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "รายละเอียดของเสื้อคลุมสีเบจเผยท่าทางที่นежный而坚定"
+    },
+    {
+      "painel": 85,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ไม่มีอาจารย์คนไหนขอโทษ... มันเป็นแบบนั้นแหละ"
+    },
+    {
+      "painel": 86,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "ฉันเป็นทรัพย์สินของอาจารย์? หา?"
+    },
+    {
+      "painel": 87,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ชิ้นส่วนของปริศนาเริ่มเข้าที่"
+    },
+    {
+      "painel": 88,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "คุณอยากรู้ความจริงไหม?"
+    },
+    {
+      "painel": 89,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉันอาจ... แสดงให้คุณเห็นได้ไหม?"
+    },
+    {
+      "painel": 90,
+      "persona": "Rapaz",
+      "gender": "M",
+      "text": "อ-อะไรกัน?! หยุดนะ!"
+    },
+    {
+      "painel": 91,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ไม่ต้องถาม แค่รู้สึก"
+    },
+    {
+      "painel": 92,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "จะแสดงให้คุณเห็นว่าฉันได้รับอะไรมาจริงๆ"
+    },
+    {
+      "painel": 93,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ความตั้งใจของฉัน... คือสิ่งที่ผูกพันเราตอนนี้"
+    },
+    {
+      "painel": 94,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "และตอนจบด้วย cliffhanger สุดโหด! อยากได้ตอน 3 ไหม?"
+    }
+  ],
+  "descriptions": [
+    "Personagem diz: \"...é um prazer finalmente te conhecer...\" enquanto remove parte da vestimenta",
+    "Personagem encara fixamente com expressão serena e olhos fechados em um cenário noturno",
+    "Foco nos pés da personagem caminhando em direção ao espectador no cenário",
+    "Balões dizem: \"Eu sou sua...\" e \"Você me herdou\" sobre tecido caído",
+    "Personagem diz: \"Do seu pai.\" enquanto retira o calçado em close-up",
+    "Garota diz: \"Eu sou a sua 'herança'\", enquanto o rapaz observa confuso.",
+    "Rapaz olha surpreso para frente e exclama: \"'Noh Yeseul'\".",
+    "Personagem ajoelhada sobre tecidos afirma em balão: \"Esse é o meu nome.\"",
+    "Rapaz encara a situação com suor e espanto, perguntando: \"Herança?!\"",
+    "Tela final exibe créditos da obra sobre fundo branco com logotipos.",
+    "Um plano de fundo gradiente que transita suavemente do branco para o cinza escuro",
+    "A lua cheia brilha no céu noturno nublado com o balão: \"O QUE...\"",
+    "O jovem expressa choque e suor frio enquanto o balão diz: \"ELA...\"",
+    "Cena intensa entre personagens com o balão: \"ELA ACABOU DE DIZER...?\"",
+    "Cena intensa entre personagens sob um balão de pensamento que diz: \"UMA HERANÇA...\"",
+    "Balão de pensamento diz: \"DO MEU PAI?\", enquanto a personagem parece pensativa.",
+    "Homem segura a mulher pelos braços, e ela diz: \"POR FAVOR, ENTRA!\".",
+    "Personagem fecha os olhos com uma expressão de cansaço ou preocupação.",
+    "Alguém cruza os braços com firmeza, indicando uma postura de espera ou decisão.",
+    "Mulher sentada com as mãos juntas e olhar baixo em um momento reflexivo.",
+    "Homem olha de soslaio com expressão nervosa e bochechas coradas",
+    "Cena intensa entre personagens",
+    "Personagem diz: \"Enfim... pra resumir...\" enquanto observa o ambiente pensativo",
+    "Personagem diz: \"O meu pai...\" olhando para uma fotografia de família rasgada",
+    "Personagem diz: \"Ele faleceu, né?\" sobre um fundo cinza abstrato",
+    "Mulher sentada diz: \"...SIM\" enquanto o homem permanece de pé à sua frente",
+    "Água é despejada em um copo enquanto o homem diz: \"ENTENDO.\"",
+    "Homem oferece copo d'água para a mulher, que demonstra uma expressão surpresa",
+    "Mulher estende as mãos para pegar o copo e diz: \"OBRIGADA.\"",
+    "Homem de braços cruzados pergunta \"SIM?\" enquanto a mulher pensativa diz \"TALVEZ...\"",
+    "Homem demonstra confusão e pergunta: \"VOCÊ... NÃO TÁ TRISTE?\"",
+    "Vista superior de mesa com balões: \"O SEU PAI\" e \"ELE FALECEU...\"",
+    "Homem em perfil mantém silêncio absoluto com expressão pensativa",
+    "Cena intensa entre personagens",
+    "Cena intensa entre personagens",
+    "Dois recordatórios brancos com os textos: \"CERTO.\" e \"MESMO SABENDO QUE O MEU PAI MORREU,\"",
+    "Close no olhar pensativo de um personagem com o recordatório: \"EU NÃO FIQUEI TRISTE.\"",
+    "Personagem feminina sentada diz: \"EU...\" enquanto o narrador reflete sobre estar feliz.",
+    "Mãos femininas entregam um envelope branco enquanto ela diz: \"AQUI...\"",
+    "Uma mão estende-se para receber o envelope sob o recordatório: \"HAVIA DUAS CAUSAS PARA ISSO.\"",
+    "Narrador diz: \"A PRIMEIRA FOI VIOLÊNCIA DOMÉSTICA.\" sobre fundo sombrio e abstrato",
+    "Homem furioso agride mulher encolhida e aterrorizada no chão de um quarto escuro",
+    "Narrador diz: \"AS ÚNICAS MEMÓRIAS... SOBRE A MINHA MÃE E EU...\" enquanto criança chora",
+    "Narrador diz: \"ESTÃO CHEIAS DE VIOLÊNCIA E GRITOS.\" sobre fundo azulado e sombrio",
+    "Cena intensa entre personagens",
+    "Homem encara fixamente com expressão séria e sombria sob sombras densas.",
+    "Uma mão segura um papel enquanto balões dizem \"Esse foi o caso. E então aconteceu isso.\"",
+    "Close no sorriso tenso de um homem enquanto alguém pergunta: \"PAI?\".",
+    "Personagem diz \"HAHA... O QUE VOCÊ QUER DIZER COM PAI...?\" enquanto amassa o papel furiosamente.",
+    "Homem olha confuso dizendo \"HÃ?\" enquanto uma mulher fala: \"SEM QUERER SER PRESUNÇOSA...\".",
+    "A mulher fecha os olhos com uma expressão serena e tímida em um cenário interno.",
+    "Close nos lábios entreabertos da mulher enquanto ela diz: \"Então...\"",
+    "Homem arregala o olho em choque enquanto pensa: \"Eu... pelo meu mestre... !!!\"",
+    "Uma onomatopeia coreana grande surge centralizada para indicar um som de impacto súbito.",
+    "Cena intensa entre personagens onde a mulher grita: \"GAH!?\"",
+    "Homem sorri e diz: \"E DAÍ?\" com deboche em um cenário escuro",
+    "Homem expressa raiva e frustração dizendo: \"MESMO QUE NÃO TENHA FEITO NADA POR NÓS?\"",
+    "Close no rosto do homem que diz: \"E VIVER? É SÓ ISSO?\" com seriedade",
+    "Cena intensa entre personagens",
+    "Homem grita furioso: \"MORREU POR CAUSA DELE. VOCÊ NEM SABE AS DIFICULDADES QUE PASSAMOS...\"",
+    "Mulher suspira corada com balão de fala: \"...AH...!\"",
+    "Homem arregala os olhos surpreso diante de situação impactante com balão: \"!!?\"",
+    "Close-up enfatiza um momento de choque visual súbito com balão: \"!?\"",
+    "Homem recua assustado com as mãos levantadas diante de uma mulher",
+    "Homem observa em choque enquanto fala: \"V-VOCÊ...\"",
+    "Mulher com olhos fechados e boca aberta em expressão de êxtase ou cansaço",
+    "Homem engole seco com expressão de nervosismo e balão diz: \"...\"",
+    "Homem corre apressado com raiva enquanto grita: \"DROGA!\"",
+    "Onomatopeia coreana grande estilizada indicando um som de impacto ou batida forte",
+    "Mulher olha fixamente com bochechas coradas e balão de fala diz: \"...\"",
+    "Três barras horizontais escuras estão alinhadas no canto inferior esquerdo de um fundo branco",
+    "Uma escada de pedra cercada por vegetação densa sob um céu noturno estrelado",
+    "Garoto diz: \"Aquele maldito pai...\" enquanto senta frustrado em um banco de praça",
+    "Cena intensa entre personagens",
+    "Um personagem observa de costas outro sentado no banco, que parece angustiado",
+    "Mulher diz: \"ENTÃO VOCÊ TAVA AQUI.\" e homem exclama: \"!\" com surpresa",
+    "Balões indicam diálogos: \"...QUER SENTAR?\", \"AH, SIM...\" e \"OBRIGADA.\" sob a lua cheia",
+    "Personagens sentam-se em um banco de madeira à noite com expressões pensativas",
+    "Homem diz: \"HUM...\" e mulher vira o rosto perguntando: \"SIM?\" curiosa",
+    "Homem aperta as mãos nervosamente e diz: \"DESCULPA... POR MAIS CEDO.\"",
+    "Jovem de olhar expressivo diz: \"Fiquei com raiva e... de repente...\" e \"......\".",
+    "Mulher consome conversa com rapaz envergonhado: \"Você deve ter ficado surpresa...\", \"Tudo bem. Não precisa se desculpar.\"",
+    "Um personagem com expressão surpresa pensa \"Hã?\" enquanto olha confuso. [zoom_fast] surpresa",
+    "Mãos com unhas vermelhas abotoam cuidadosamente um casaco bege em close-up.",
+    "Diálogo sobre fundo etéreo: \"Não existe mestre que peça desculpas...\" e \"É assim mesmo.\"",
+    "Jovem confuso pergunta \"Eu sou um pertence do Mestre?\" e \"Hã?\" com expressão de dúvida",
+    "Cena intensa entre personagens",
+    "Jovem mulher olha surpresa e curiosa com expressão corada",
+    "Personagem pergunta \"Posso... mostrar pra você?\" com expressão tímida",
+    "Jovem assustado grita \"O-o que tá fazendo...??!\" gesticulando com nervosismo",
+    "Garota segura a cintura com firmeza enquanto fala: \"Não precisa perguntar.\"",
+    "Rapaz arregala os olhos espantado enquanto ouve e diz: \"Vou te mostrar.\"",
+    "Fundo rosa brilhante com texto flutuante enquanto diz: \"A minha 'resolução'...\"",
+    "Cena intensa entre personagens"
+  ],
+  "_revised": true,
+  "_editorial": {
+    "gancho": "มรดกซ่อนความลับอันมืดมิด",
+    "impactos": [
+      {
+        "fala": 2,
+        "palavra": "คาพพากษา",
+        "emoji": "💀"
+      },
+      {
+        "fala": 31,
+        "palavra": "ตาย",
+        "emoji": "😱"
+      },
+      {
+        "fala": 39,
+        "palavra": "ความจรง",
+        "emoji": "🔓"
+      },
+      {
+        "fala": 41,
+        "palavra": "ฝนราย",
+        "emoji": "😰"
+      },
+      {
+        "fala": 53,
+        "palavra": "การเปดเผย",
+        "emoji": "💥"
+      },
+      {
+        "fala": 68,
+        "palavra": "ความขดแยง",
+        "emoji": "👊"
+      },
+      {
+        "fala": 74,
+        "palavra": "เงามด",
+        "emoji": "👁️"
+      },
+      {
+        "fala": 77,
+        "palavra": "มรดก",
+        "emoji": "⚰️"
+      }
+    ],
+    "pergunta": "สงสัยไหมว่าซองจดหมายซ่อนอะไรไว้?",
+    "fonte": "llm"
+  },
+  "idioma": "th"
+}

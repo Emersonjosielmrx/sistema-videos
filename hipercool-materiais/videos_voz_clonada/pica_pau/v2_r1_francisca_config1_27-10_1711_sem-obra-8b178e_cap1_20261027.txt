@@ -1,0 +1,12 @@
+Narrador (voz clonada): pica_pau
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_bichonoturno  |  título: Por que NENHUM peixe resiste a essa HABILIDADE ÚNICA que ele DESCOBRIU? 🐟
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-8b178e_cap1_20261027\video.mp4
+
+frase abertura: trecho ORIGINAL  | clima normal | tom +0 | index None | protect None | vol None | (som) — Efeito sonoro RISADA DO PICA PAU https://www.youtube.com/watch?v=u9CyJTsYNuw
+frase 0: francisca +12% | clima engracado | tom +0 | index 0.54 | protect 0.22 | vol 0.74 | Essas iscas enganam os peixes melhor que eu enganando o Zeca Urubu, meu chapa!
+frase 1: francisca +3% | clima normal | tom +0 | index 0.47 | protect 0.28 | vol 0.75 | A primeira cai na água igual uma libélula e o peixe ataca sem resistir.
+frase 2: francisca -3% | clima tensao | tom -1 | index 0.55 | protect 0.28 | vol 0.68 | Mas olha só a segunda, um verme que mexe devagar no fundo e pega muito peixe.
+frase 3: francisca +26% | clima engracado | tom +0 | index 0.52 | protect 0.28 | vol 0.73 | E não é que a terceira é uma bolinha estranha cheia de bracinhos mexendo pra todo lado?
+frase 4: francisca -1% | clima epico | tom -1 | index 0.5 | protect 0.22 | vol 0.71 | Caramba, até esse trem esquisito fisga o peixe trouxa na hora, porque...

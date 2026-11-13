@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  fluxia:
+    image: fluxia:latest
+    env_file: /opt/fluxia/.env
+    volumes:
+      - fluxia_data:/data
+    networks:
+      - network_swarm_public
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.fluxia.rule=Host(`fluxia.157-173-207-22.sslip.io`)
+        - traefik.http.routers.fluxia.entrypoints=websecure
+        - traefik.http.routers.fluxia.tls.certresolver=letsencryptresolver
+        - traefik.http.services.fluxia.loadbalancer.server.port=8100
+
+volumes:
+  fluxia_data:
+
+networks:
+  network_swarm_public:
+    external: true

@@ -1,0 +1,546 @@
+{
+ "name": "📊 Radar dos canais grátis sem chave (YouTube público: inscritos, views, zerados)",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 📊 Radar dos canais\nPainel em **/webhook/gratis-radar**. Lê todo dia às 7h20 (e no botão) os canais da lista do nó ⚙️ (vem do rede_canais.json do postador; edite à vontade).\n\nSem login e sem chave: RSS público do canal (15 vídeos mais novos com visualizações) e a página pública do canal (inscritos e nº de vídeos). Guarda um retrato por dia no Redis (120 dias) e compara com o anterior: quem ganhou views, vídeo zerado depois de 48 h, canal sem vídeo há 3 dias.",
+    "height": 320,
+    "width": 600,
+    "color": 4
+   },
+   "id": "41dc6f71-854c-5e10-b3de-5f933b941a73",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -60,
+    -440
+   ]
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "20 7 * * *"
+      }
+     ]
+    }
+   },
+   "id": "d8e8395d-0505-553a-875d-996c599187ed",
+   "name": "⏰ Todo dia 7h20",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-radar-atualizar",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "20769757-3a02-51dd-a165-a8cfe454a355",
+   "name": "🔔 Atualizar agora (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    200
+   ],
+   "webhookId": "6a810630-98cf-59ae-8bb4-6566cd7ea2b8"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, msg: 'Lendo os canais; recarregue o painel em 1 a 2 minutos.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "82bf8568-b305-53e8-adcd-122c68b9c49b",
+   "name": "📤 Responde: lendo",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    240,
+    200
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "retrato",
+    "key": "radar:ultimo",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "f3a8328f-5221-52f4-8e9e-3d7220858ec8",
+   "name": "📖 Lê o retrato anterior",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    480,
+    100
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true,
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Canais lidos pelo radar (público: nome, @ e id do canal).\nconst CANAIS = [\n {\n  \"slug\": \"manhwareact\",\n  \"nome\": \"ManhwaReact\",\n  \"handle\": \"@manhwareact-ia\",\n  \"yt_id\": \"UC5Za1hPxak0iufFcJ4UsK9w\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"animescomia\",\n  \"nome\": \"Animescomia\",\n  \"handle\": \"@animescomia\",\n  \"yt_id\": \"UCRrz2BKdhCzy1-nAAs2E8bg\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"inovaremanhwabr\",\n  \"nome\": \"inovare manhwa br\",\n  \"handle\": \"@inovaremanhwabr\",\n  \"yt_id\": \"UCZfQc_UIPRzU35GEjfTMCGA\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"cenareact\",\n  \"nome\": \"CenaReact\",\n  \"handle\": \"@cenareact-f3j\",\n  \"yt_id\": \"UCrYkau_YGtx8C29qnF9xSYQ\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"inventoreact\",\n  \"nome\": \"InventoReact\",\n  \"handle\": \"@inventoreact\",\n  \"yt_id\": \"UClN7sup9FM11tMM1UxXBwOQ\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"cartuchoreact\",\n  \"nome\": \"CartuchoReact\",\n  \"handle\": \"@cartuchoreact\",\n  \"yt_id\": \"UCrskUXOpfPUkSY3HMT2c7_A\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"forjareact\",\n  \"nome\": \"ForjaReact\",\n  \"handle\": \"@forjareact\",\n  \"yt_id\": \"UCab6vzKMQam-5ovJ9H58IuQ\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"mundoquenaoexiste\",\n  \"nome\": \"Mundo Que Nao Existe\",\n  \"handle\": \"@mundoquenaoexiste\",\n  \"yt_id\": \"UCPTjuCzT0k82K9sE5KXdSIw\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"historiasemframes\",\n  \"nome\": \"HistoriasEmFrames\",\n  \"handle\": \"@historiasemframes-emerson\",\n  \"yt_id\": \"UCIFvn2aqdrv8X-LYscTyjjA\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"fiodameada\",\n  \"nome\": \"Fio da Meada\",\n  \"handle\": \"@codigointeligente-n7j\",\n  \"yt_id\": \"UCh-REEcJ9Jt1lCvTr6Sdu8Q\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"assistiainvestimentos\",\n  \"nome\": \"Assist-IA Investimentos\",\n  \"handle\": \"@assistiainvestimentos\",\n  \"yt_id\": \"UCDkimm8rTPj8u5qKd-es3dA\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"dicasfinanceirasdaia\",\n  \"nome\": \"Dicas financeiras da ia\",\n  \"handle\": \"@dicasfinanceirasdaia\",\n  \"yt_id\": \"UC0dFPL0BhYnpfmXK-qN3hPw\",\n  \"status\": \"ativo\"\n },\n {\n  \"slug\": \"inovare_french\",\n  \"nome\": \"inovare Manhwa french\",\n  \"handle\": \"@inovaremanhwafrench\",\n  \"yt_id\": \"UCRxr-mCIY4gZbgFLx0IR-eg\",\n  \"status\": \"pausado\"\n },\n {\n  \"slug\": \"inovare_hindi\",\n  \"nome\": \"Inovaremanhwaversehindi\",\n  \"handle\": \"@inovaremanhwaversehindi\",\n  \"yt_id\": \"UCj3Wg1ubA13WKoOCDoDrO1A\",\n  \"status\": \"hipercool\"\n },\n {\n  \"slug\": \"inovare_ind\",\n  \"nome\": \"Inovare Manga ind\",\n  \"handle\": \"@inovaremanhwaverseind\",\n  \"yt_id\": \"UCQj00Ic_N20yJp6eqSmIkXw\",\n  \"status\": \"hipercool\"\n },\n {\n  \"slug\": \"inovare_eng\",\n  \"nome\": \"Inovare Manhwa eng\",\n  \"handle\": \"@inovaremanhwaverseeng\",\n  \"yt_id\": \"UCSGryZuOYBYE6oCFS7n-yUg\",\n  \"status\": \"hipercool\"\n },\n {\n  \"slug\": \"inovare_ita\",\n  \"nome\": \"inovaremanhwaverseita\",\n  \"handle\": \"@inovaremanhwaverseita\",\n  \"yt_id\": \"UC-ibFyKECFgzroC3bntM--w\",\n  \"status\": \"hipercool\"\n },\n {\n  \"slug\": \"inovare_ru\",\n  \"nome\": \"inovare manhwa verse ru\",\n  \"handle\": \"@inovaremanhwaru\",\n  \"yt_id\": \"UCn3EprJOEgidU2QsNyUvqKQ\",\n  \"status\": \"hipercool\"\n },\n {\n  \"slug\": \"inovare_thai\",\n  \"nome\": \"Inovaremanhwaversethai\",\n  \"handle\": \"@inovaremanhwaversethai\",\n  \"yt_id\": \"UCmB2ZETqZTrYYEYcydim2Qw\",\n  \"status\": \"hipercool\"\n },\n {\n  \"slug\": \"inovareq8l\",\n  \"nome\": \"Mistérios Noturnos\",\n  \"handle\": \"@Inovare-q8l\",\n  \"yt_id\": \"UCJTNPiJJax_YdwqdKVb6r8w\",\n  \"status\": \"parceiro\"\n },\n {\n  \"slug\": \"inovareu8b\",\n  \"nome\": \"Tech Noturno\",\n  \"handle\": \"@Inovare-u8b\",\n  \"yt_id\": \"UCHIg900SWxRdHsI7jEX6sTg\",\n  \"status\": \"parceiro\"\n }\n];\nreturn CANAIS.map(c => ({ json: c }));"
+   },
+   "id": "8f2f8329-f041-5a73-8400-c8bf63589473",
+   "name": "⚙️ Lista de canais (edite aqui)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    720,
+    100
+   ]
+  },
+  {
+   "parameters": {
+    "batchSize": 1,
+    "options": {}
+   },
+   "id": "5740bb80-a094-5275-9042-cffc6104a36c",
+   "name": "🔁 Um canal por vez",
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    960,
+    100
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê UM canal do YouTube sem login e sem chave: RSS público (15 vídeos mais novos com visualizações) e a página\n// pública do canal pelo youtubei/browse (inscritos e nº de vídeos).\nconst c = $input.first().json;\nconst UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36' };\nfunction numeroBR(txt) {\n  const m = /([\\d.,]+)\\s*(mil|mi|bi)?/i.exec(String(txt || ''));\n  if (!m) return null;\n  let n = m[2] ? parseFloat(m[1].replace(/\\./g, '').replace(',', '.')) : parseInt(m[1].replace(/[.,]/g, ''), 10);\n  if (m[2]) n *= { mil: 1e3, mi: 1e6, bi: 1e9 }[m[2].toLowerCase()];\n  return Math.round(n);\n}\nconst ent = s => String(s).replace(/&amp;/g, '&').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").replace(/&lt;/g, '<').replace(/&gt;/g, '>');\nconst out = { slug: c.slug, nome: c.nome, handle: c.handle, yt_id: c.yt_id, status: c.status, lido: new Date().toISOString(),\n  ok: false, inscritos: null, videos: null, ultimos: [], erro: '' };\ntry {\n  const xml = String(await this.helpers.httpRequest({ url: 'https://www.youtube.com/feeds/videos.xml?channel_id=' + c.yt_id,\n    headers: UA, timeout: 20000 }));\n  for (const e of xml.split('<entry>').slice(1)) {\n    const id = (/<yt:videoId>([^<]+)</.exec(e) || [])[1];\n    if (!id) continue;\n    out.ultimos.push({ id, titulo: ent((/<title>([^<]*)</.exec(e) || [])[1] || ''),\n      publicado: (/<published>([^<]+)</.exec(e) || [])[1] || '',\n      views: Number((/<media:statistics views=\"(\\d+)\"/.exec(e) || [])[1] || 0),\n      short: /\\/shorts\\//.test((/<link rel=\"alternate\" href=\"([^\"]+)\"/.exec(e) || [])[1] || '') });\n  }\n  out.ok = true;\n} catch (e) {\n  out.erro = 'RSS: ' + String(e.message || e).slice(0, 100);\n}\ntry {\n  const t = JSON.stringify(await this.helpers.httpRequest({ method: 'POST', json: true, timeout: 25000, headers: UA,\n    url: 'https://www.youtube.com/youtubei/v1/browse?prettyPrint=false',\n    body: { context: { client: { clientName: 'WEB', clientVersion: '2.20251020.01.00', hl: 'pt', gl: 'BR' } }, browseId: c.yt_id } }));\n  const insc = /\"content\":\"([^\"]{1,40}inscrit[^\"]{0,20})\"/.exec(t) || /\"accessibilityLabel\":\"([^\"]{1,60}inscrit[^\"]{0,30})\"/.exec(t);\n  const vids = /\"content\":\"([^\"]{1,30}v[ií]deos?)\"/.exec(t);\n  out.inscritos = insc ? (/nenhum/i.test(insc[1]) ? 0 : numeroBR(insc[1])) : null;\n  out.videos = vids ? numeroBR(vids[1]) : null;\n  out.ok = true;\n} catch (e) {\n  out.erro += (out.erro ? ' · ' : '') + 'página: ' + String(e.message || e).slice(0, 100);\n}\nreturn [{ json: out }];\n"
+   },
+   "id": "66c0f6b5-4189-54d6-ac06-7198312fc6df",
+   "name": "🔎 Lê o canal",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta os canais, compara com o retrato anterior e marca os alertas (vídeo zerado, canal parado, quem mais cresceu).\nlet ant = {};\ntry { ant = JSON.parse($('📖 Lê o retrato anterior').first().json.retrato || '{}'); } catch (e) { ant = {}; }\nconst antPor = Object.fromEntries((ant.canais || []).map(c => [c.yt_id, c]));\nconst agora = Date.now();\nconst H48 = 48 * 3600e3, D3 = 3 * 86400e3, D7 = 7 * 86400e3;\nconst canais = $input.all().map(i => i.json).map(c => {\n  const a = antPor[c.yt_id] || {};\n  const viewsAnt = Object.fromEntries((a.ultimos || []).map(v => [v.id, v.views]));\n  const ultimos = (c.ultimos || []).map(v => ({ ...v, ganho: viewsAnt[v.id] == null ? null : v.views - viewsAnt[v.id] }));\n  const idade = v => agora - Date.parse(v.publicado || 0);\n  const ultimo = ultimos.map(v => Date.parse(v.publicado || 0)).sort((x, y) => y - x)[0] || 0;\n  return { ...c, ultimos,\n    d_inscritos: c.inscritos != null && a.inscritos != null ? c.inscritos - a.inscritos : null,\n    d_videos: c.videos != null && a.videos != null ? c.videos - a.videos : null,\n    views_recentes: ultimos.reduce((s, v) => s + v.views, 0),\n    novos_7d: ultimos.filter(v => idade(v) < D7).length,\n    zerados: ultimos.filter(v => idade(v) > H48 && idade(v) < D7 * 2 && v.views < 20).map(v => ({ id: v.id, titulo: v.titulo, views: v.views })),\n    parado: ultimo ? agora - ultimo > D3 : true,\n    ultimo_video: ultimo ? new Date(ultimo).toISOString() : null };\n});\nconst todos = canais.flatMap(c => c.ultimos.map(v => ({ ...v, canal: c.nome })));\nconst retrato = {\n  quando: new Date().toISOString(), anterior: ant.quando || null,\n  totais: { canais: canais.length, inscritos: canais.reduce((s, c) => s + (c.inscritos || 0), 0),\n    d_inscritos: canais.reduce((s, c) => s + (c.d_inscritos || 0), 0), views_recentes: canais.reduce((s, c) => s + c.views_recentes, 0),\n    novos_7d: canais.reduce((s, c) => s + c.novos_7d, 0) },\n  destaques: todos.filter(v => v.ganho != null).sort((a, b) => b.ganho - a.ganho).slice(0, 8),\n  mais_vistos: todos.slice().sort((a, b) => b.views - a.views).slice(0, 8),\n  alertas: [\n    ...canais.filter(c => c.status === 'ativo' && c.parado).map(c => '⏸️ ' + c.nome + ': sem vídeo novo há mais de 3 dias'),\n    ...canais.flatMap(c => c.zerados.slice(0, 3).map(v => '🧊 ' + c.nome + ': \"' + v.titulo.slice(0, 60) + '\" com ' + v.views + ' views depois de 48 h')),\n    ...canais.filter(c => !c.ok).map(c => '⚠️ ' + c.nome + ': não deu para ler (' + c.erro + ')') ],\n  canais };\nreturn [{ json: { retrato: JSON.stringify(retrato), dia: retrato.quando.slice(0, 10), resumo: retrato.totais, alertas: retrato.alertas.length } }];\n"
+   },
+   "id": "8f68999b-9e3c-55bd-ac95-61192192425a",
+   "name": "🧩 Compara com a leitura anterior",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "radar:ultimo",
+    "value": "={{ $json.retrato }}",
+    "keyType": "string"
+   },
+   "id": "5422958d-be11-59de-bbaf-52a9f4275468",
+   "name": "💾 Guarda o retrato",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1440,
+    0
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=radar:{{ $('🧩 Compara com a leitura anterior').first().json.dia }}",
+    "value": "={{ $('🧩 Compara com a leitura anterior').first().json.retrato }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 10368000
+   },
+   "id": "45a784a8-e3c1-5363-a70a-dfc790a514ef",
+   "name": "💾 Guarda o dia (120 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1680,
+    0
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "gratis-radar",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "e927c6d4-ce07-5fa2-b4fa-4207a8b6bfd3",
+   "name": "🔔 Painel (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    520
+   ],
+   "webhookId": "11ff6043-df8a-5edd-9707-ea842fabaea5"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "retrato",
+    "key": "radar:ultimo",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "47ddcc5a-9d44-528a-be57-112fd391f856",
+   "name": "📖 Lê o retrato",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    520
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Painel do radar: lê o último retrato e desenha a página.\n// ── Moldura das páginas (mesmo visual em todos os fluxos grátis) ──\nfunction pagina(titulo, corpo, script) {\n  const css = `\n:root{--fundo:#f6f5f2;--cartao:#fff;--texto:#1d1d1b;--suave:#6b6b66;--linha:#e3e1db;--acento:#0f766e;--acento2:#115e59;--erro:#b42318;--ok:#067647}\n@media (prefers-color-scheme:dark){:root{--fundo:#121412;--cartao:#1b1e1c;--texto:#ecebe7;--suave:#a3a39d;--linha:#2c302d;--acento:#2dd4bf;--acento2:#5eead4;--erro:#f97066;--ok:#47cd89}}\n*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif}\nmain{max-width:760px;margin:0 auto;padding:20px 16px 48px}h1{font-size:1.45rem;margin:.2em 0 .1em}h2{font-size:1.1rem;margin:1.2em 0 .5em}\n.sub{color:var(--suave);margin:0 0 18px}.cartao{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:12px 0}\nlabel{display:block;font-weight:600;margin:12px 0 6px}textarea,input,select{width:100%;padding:11px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);color:var(--texto);font:inherit}\ntextarea{min-height:120px;resize:vertical}.linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}\nbutton,.botao{display:inline-block;background:var(--acento);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 1rem system-ui,sans-serif;cursor:pointer;text-decoration:none;margin-top:14px}\n@media (prefers-color-scheme:dark){button,.botao{color:#04211e}}\nbutton[disabled]{opacity:.55;cursor:wait}.botao.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}\n.aviso{color:var(--suave);font-size:.9rem}.erro{color:var(--erro);font-weight:600}.ok{color:var(--ok);font-weight:600}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.grade img,.grade video{width:100%;border-radius:10px;border:1px solid var(--linha);background:#000}\nvideo,audio{width:100%;margin-top:10px;border-radius:10px}pre{white-space:pre-wrap;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:12px;font-size:.9rem}\n.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0}.barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .6s}\n.selo{display:inline-block;font-size:.78rem;border:1px solid var(--linha);border-radius:99px;padding:2px 9px;color:var(--suave);margin:2px 4px 2px 0}\nfooter{color:var(--suave);font-size:.82rem;margin-top:28px}`;\n  return '<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n    '<meta name=\"robots\" content=\"noindex\"><title>' + titulo + '</title><style>' + css + '</style></head><body><main>' + corpo +\n    '<footer>Feito com serviços grátis e sem chave (Hugging Face, Pollinations, Bing/Google Tradutor). Pode demorar ou falhar quando eles estão cheios.</footer>' +\n    '</main>' + (script ? '<script>' + script + '</script>' : '') + '</body></html>';\n}\nconst escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\nlet r = null;\ntry { r = JSON.parse($input.first().json.retrato || 'null'); } catch (e) { r = null; }\nconst n = x => x == null ? '–' : Number(x).toLocaleString('pt-BR');\nconst d = x => x == null ? '' : (x > 0 ? ' <span class=\"ok\">+' + n(x) + '</span>' : x < 0 ? ' <span class=\"erro\">' + n(x) + '</span>' : ' <span class=\"aviso\">=</span>');\nconst dataBR = s => s ? new Date(s).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : '–';\nlet corpo = '<h1>📊 Radar dos canais</h1>';\nif (!r) {\n  corpo += '<p class=\"sub\">Ainda não há leitura. Aperte o botão (leva 1 a 2 minutos) e recarregue.</p>';\n} else {\n  const t = r.totais;\n  corpo += '<p class=\"sub\">Leitura de ' + dataBR(r.quando) + (r.anterior ? ' · comparado com ' + dataBR(r.anterior) : '') +\n    '. Dados públicos do YouTube (sem login, sem chave).</p>' +\n    '<div class=\"linha\">' +\n    '<div class=\"cartao\"><div class=\"aviso\">Inscritos (todos)</div><h2>' + n(t.inscritos) + d(t.d_inscritos) + '</h2></div>' +\n    '<div class=\"cartao\"><div class=\"aviso\">Views dos 15 últimos de cada</div><h2>' + n(t.views_recentes) + '</h2></div>' +\n    '<div class=\"cartao\"><div class=\"aviso\">Vídeos novos em 7 dias</div><h2>' + n(t.novos_7d) + '</h2></div></div>';\n  if (r.alertas.length) corpo += '<div class=\"cartao\"><h2>Alertas</h2>' + r.alertas.map(a => '<div>' + escHtml(a) + '</div>').join('') + '</div>';\n  if (r.destaques.length) corpo += '<div class=\"cartao\"><h2>Quem mais ganhou views desde a última leitura</h2>' +\n    r.destaques.map(v => '<div>+' + n(v.ganho) + ' · <a href=\"https://youtu.be/' + v.id + '\" target=\"_blank\">' + escHtml(v.titulo) + '</a> <span class=\"selo\">' + escHtml(v.canal) + '</span></div>').join('') + '</div>';\n  corpo += '<div class=\"cartao\" style=\"overflow-x:auto\"><h2>Canais</h2><table style=\"width:100%;border-collapse:collapse;font-size:.92rem\">' +\n    '<tr style=\"text-align:left\"><th>Canal</th><th>Inscritos</th><th>Vídeos</th><th>Views (15 últ.)</th><th>Novos 7d</th><th>Último vídeo</th></tr>' +\n    r.canais.slice().sort((a, b) => (b.d_inscritos || 0) - (a.d_inscritos || 0) || (b.views_recentes - a.views_recentes)).map(c =>\n      '<tr style=\"border-top:1px solid var(--linha)\"><td><a href=\"https://www.youtube.com/channel/' + c.yt_id + '\" target=\"_blank\">' + escHtml(c.nome) +\n      '</a> <span class=\"selo\">' + escHtml(c.status || '') + '</span></td><td>' + n(c.inscritos) + d(c.d_inscritos) + '</td><td>' + n(c.videos) + d(c.d_videos) +\n      '</td><td>' + n(c.views_recentes) + '</td><td>' + c.novos_7d + '</td><td>' + (c.ultimo_video ? dataBR(c.ultimo_video).slice(0, 10) : '–') + '</td></tr>').join('') +\n    '</table></div>';\n  corpo += '<div class=\"cartao\"><h2>Mais vistos entre os recentes</h2>' + r.mais_vistos.map(v => '<div>' + n(v.views) +\n    ' · <a href=\"https://youtu.be/' + v.id + '\" target=\"_blank\">' + escHtml(v.titulo) + '</a> <span class=\"selo\">' + escHtml(v.canal) + '</span></div>').join('') + '</div>';\n}\ncorpo += '<button id=\"ir\">Atualizar agora</button><p id=\"estado\" class=\"aviso\">Atualiza sozinho todo dia às 7h20.</p>';\nconst script = `document.getElementById('ir').onclick = async () => {\n  const b = document.getElementById('ir'); b.disabled = true;\n  document.getElementById('estado').textContent = 'Lendo os canais... (1 a 2 minutos; depois recarregue a página)';\n  try { await fetch('gratis-radar-atualizar', { method: 'POST' }); } catch (e) {}\n  setTimeout(() => location.reload(), 90000);\n};`;\nreturn [{ json: { html: pagina('Radar dos canais', corpo, script) } }];\n"
+   },
+   "id": "c1ca21db-756e-5412-bfd0-1fd7c55b6105",
+   "name": "🧩 Desenha o painel",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    520
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "af7a9db4-e6a3-54b3-81da-b69af4152ff0",
+   "name": "📤 Entrega o painel",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    520
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-radar-dados",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "19ea573d-d9d0-5bc1-b1c0-dd5e78b43f0d",
+   "name": "🔔 Dados (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    720
+   ],
+   "webhookId": "ea6bd243-2862-5bb2-b431-e4aa01cbd2e4"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "retrato",
+    "key": "radar:ultimo",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "795152cf-0d99-5ea5-b3c6-ca09ed678a65",
+   "name": "📖 Lê o retrato (dados)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    720
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.retrato || '{}' }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "2ba0618f-03bc-5ff5-8ef8-b5cd56457586",
+   "name": "📤 Entrega os dados",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    720
+   ]
+  }
+ ],
+ "connections": {
+  "⏰ Todo dia 7h20": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o retrato anterior",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Atualizar agora (POST)": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde: lendo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde: lendo": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o retrato anterior",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o retrato anterior": {
+   "main": [
+    [
+     {
+      "node": "⚙️ Lista de canais (edite aqui)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⚙️ Lista de canais (edite aqui)": {
+   "main": [
+    [
+     {
+      "node": "🔁 Um canal por vez",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔁 Um canal por vez": {
+   "main": [
+    [
+     {
+      "node": "🧩 Compara com a leitura anterior",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🔎 Lê o canal",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔎 Lê o canal": {
+   "main": [
+    [
+     {
+      "node": "🔁 Um canal por vez",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Compara com a leitura anterior": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o retrato",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o retrato": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o dia (120 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Painel (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o retrato",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o retrato": {
+   "main": [
+    [
+     {
+      "node": "🧩 Desenha o painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Desenha o painel": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Dados (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o retrato (dados)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o retrato (dados)": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega os dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all",
+  "timezone": "America/Sao_Paulo"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

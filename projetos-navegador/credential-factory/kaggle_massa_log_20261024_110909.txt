@@ -1,0 +1,21 @@
+11:10:17 | aulasrevolution                | FALHA | nao conseguiu logar no Kaggle
+11:12:44 | e4487017                       | FALHA | nao conseguiu logar no Kaggle
+11:14:19 | emersongenc                    | OK | emersongenc
+11:16:44 | emersongencshin                | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+    - locator resolved to <button tabindex="0" role="button" class="sc-kLEbxe iWITea">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+
+11:21:13 | emersonjosiel1995              | FALHA | Page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://www.kaggle.com/account/login?returnUrl=%2Fsettings", waiting until "domcontentloaded"
+
+11:22:58 | emersonjosiel2026              | OK | emerson2026
+11:24:34 | emersonjosiel2027              | FALHA | nao conseguiu logar no Kaggle
+11:26:08 | en1653964                      | OK | en1653964
+11:27:36 | fabricadeautomacoesia          | OK | fabricadeautomacoesi
+11:29:41 | filmescomia00                  | FALHA | nao conseguiu logar no Kaggle
+11:33:49 | gameoftroneskingsroadbrasil    | FALHA | nao conseguiu logar no Kaggle
+11:38:51 | inovaremanhwaverse             | FALHA | download do kaggle.json não veio: TimeoutError

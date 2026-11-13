@@ -1,0 +1,1490 @@
+{
+ "name": "Youtube Auto Create and Post",
+ "nodes": [
+  {
+   "parameters": {
+    "url": "https://yt-api.p.rapidapi.com/video/info",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "id",
+       "value": "={{ $('Loop Over Items').item.json.id.split(':').last() }}"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-Rapidapi-Key"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -704,
+    1984
+   ],
+   "id": "54e8427a-b753-43f2-9b6e-222aadec023f",
+   "name": "busca_video"
+  },
+  {
+   "parameters": {
+    "url": "https://yt-api.p.rapidapi.com/get_transcript",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "id",
+       "value": "={{ $('Loop Over Items').item.json.id.split(':').last() }}"
+      }
+     ]
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-rapidapi-host",
+       "value": "yt-api.p.rapidapi.com"
+      },
+      {
+       "name": "x-rapidapi-key"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -304,
+    1984
+   ],
+   "id": "9d0ca0a4-d845-4e92-87f5-07fe868c789b",
+   "name": "busca_legenda"
+  },
+  {
+   "parameters": {
+    "operation": "append",
+    "documentId": {
+     "__rl": true,
+     "value": "1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs",
+     "mode": "list",
+     "cachedResultName": "Vídeos Youtube - The Bible Stories For You",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit?usp=drivesdk"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": 651566303,
+     "mode": "list",
+     "cachedResultName": "roteiro",
+     "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1shF_P-d2ykJduuviuOjKYysyM4WodDoFNndG0pPEVIs/edit#gid=651566303"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "Vídeo original": "={{ $('Loop Over Items').item.json.id.split(':').last() }}",
+      "Tema": "={{ $('busca_video').item.json.title }}",
+      "Descrição": "={{ $('busca_video').item.json.description }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "Vídeo original",
+       "displayName": "Vídeo original",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Tema",
+       "displayName": "Tema",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Novo título",
+       "displayName": "Novo título",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Descrição",
+       "displayName": "Descrição",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "Cena1",
+       "displayName": "Cena1",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena2",
+       "displayName": "Cena2",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena3",
+       "displayName": "Cena3",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena4",
+       "displayName": "Cena4",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena5",
+       "displayName": "Cena5",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena6",
+       "displayName": "Cena6",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena7",
+       "displayName": "Cena7",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Cena8",
+       "displayName": "Cena8",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "Status",
+       "displayName": "Status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    112,
+    1984
+   ],
+   "id": "fba74e11-0300-421a-8e15-e2167379f825",
+   "name": "adiciona_tema_video"
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "={{ $json.id.split(\":\").last() }}_{{ $json.title }}",
+    "driveId": {
+     "__rl": true,
+     "value": "1Fd6O4SoBe8hem1AgMoY7TpjxSVevonSQ",
+     "mode": "id"
+    },
+    "folderId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "root",
+     "cachedResultName": "/ (Root folder)"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    -1232,
+    1984
+   ],
+   "id": "25d96f34-8d14-4b3c-b166-b4b79c711adb",
+   "name": "Google Drive"
+  },
+  {
+   "parameters": {
+    "amount": 10
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3568,
+    2368
+   ],
+   "id": "3aa526ee-ea13-4cfc-b42a-cc35ac03207c",
+   "name": "Wait3",
+   "webhookId": "ef5fab6d-2756-4c8d-ad35-1d2cf18c1265"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    2832,
+    2240
+   ],
+   "id": "d9f49c56-09cf-418f-bbf4-1d7a3f843a75",
+   "name": "Loop Over Items1"
+  },
+  {
+   "parameters": {
+    "fieldToSplitOut": "output.cenas",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitOut",
+   "typeVersion": 1,
+   "position": [
+    2544,
+    2240
+   ],
+   "id": "21d6f480-819b-499e-b031-3a7834c58a08",
+   "name": "Split Out"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    3072,
+    2128
+   ],
+   "id": "5f738bfc-e20b-44d5-8755-2238d34db725",
+   "name": "No Operation, do nothing1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    -1552,
+    1968
+   ],
+   "id": "4cd37eb6-4e3c-49ab-aa3e-616a752927b5",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    -1248,
+    1616
+   ],
+   "id": "9ab13fd7-75df-4db8-8120-769f66d1675f",
+   "name": "No Operation, do nothing"
+  },
+  {
+   "parameters": {
+    "fieldToSplitOut": "title, link, id",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitOut",
+   "typeVersion": 1,
+   "position": [
+    -1936,
+    1968
+   ],
+   "id": "14333361-ab28-4160-8592-bd3b550c5c5c",
+   "name": "Split Out1"
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gpt-4o-mini",
+     "mode": "list",
+     "cachedResultName": "gpt-4o-mini"
+    },
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.2,
+   "position": [
+    2080,
+    2464
+   ],
+   "id": "de3cfeca-869e-4372-88f8-16df52493381",
+   "name": "OpenAI Chat Model"
+  },
+  {
+   "parameters": {
+    "jsonSchemaExample": "{\n  \"cenas\": [\n    {\n      \"imagemPrompt\": \"...\"\n    },\n    {\n      \"imagemPrompt\": \"...\"\n    },\n    {\n      \"imagemPrompt\": \"...\"\n    },\n    {\n      \"imagemPrompt\": \"...\"\n    }\n  ]\n}",
+    "autoFix": true,
+    "customizeRetryPrompt": true
+   },
+   "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+   "typeVersion": 1.3,
+   "position": [
+    2224,
+    2448
+   ],
+   "id": "74e3a990-1fea-4942-ad51-e7df45d25ddd",
+   "name": "Structured Output Parser"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    -864,
+    464
+   ],
+   "id": "50e664a6-c4ea-4955-a457-ded106bca7cd",
+   "name": "manual"
+  },
+  {
+   "parameters": {
+    "resource": "image",
+    "prompt": "=## IMAGE DESCRIPTION\t\n\n{{ $json.imagemPrompt }}\n\n## STYLE\n\nCinematic YouTube thumbnail in epic biblical style.\n\nUltra-dramatic high-contrast lighting with strong highlights and deep shadows. Warm golden, amber, deep orange and dark red color grading.\n\nHyper-realistic, expressive face clearly visible and readable at small sizes. Chest-up or close-up framing, centered or slightly off-center.\n\nClear biblical symbolism when applicable, subtle but recognizable. Background cinematic and slightly blurred to isolate the subject.\n\nStrong visual hierarchy, high clarity at small scale, dramatic mood, emotional intensity, spiritual and serious tone.\n\nComposition optimized for CTR: bold lighting, clean subject separation, negative space for large text overlay, film-like color grading.\n\n## NEGATIVE PROMPT\n\ncartoon, anime, illustration, flat lighting, low contrast, washed colors, cluttered background, distant subject, full body shot, tiny facial features, weak emotion, blur, noise, bad anatomy, extra limbs, distorted face, modern flashy fashion, futuristic elements, text baked into image, logos, watermarks, UI elements",
+    "options": {
+     "size": "=1792x1024",
+     "style": "vivid",
+     "returnImageUrls": true
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    3056,
+    2368
+   ],
+   "id": "241d5318-3c0c-49df-8bc2-b84911560ef4",
+   "name": "openai_dalle3_imagem1"
+  },
+  {
+   "parameters": {
+    "name": "={{ $binary.data.fileName }}",
+    "driveId": {
+     "__rl": true,
+     "value": "1Fd6O4SoBe8hem1AgMoY7TpjxSVevonSQ",
+     "mode": "id"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $('Google Drive').item.json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    3408,
+    2368
+   ],
+   "id": "eab2ec70-34c1-427c-9caa-2eafe3dfd161",
+   "name": "Google Drive5"
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.url }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    3248,
+    2368
+   ],
+   "id": "632a58a1-987f-41fd-a1c9-97a489fb88bb",
+   "name": "HTTP Request"
+  },
+  {
+   "parameters": {
+    "sendTo": "matheus.ocs@gmail.com",
+    "subject": "=🎥 [N8N YT Auto] Novo vídeo disponível",
+    "emailType": "text",
+    "message": "=Título original: {{ $('busca_video').item.json.title }}\n\nDrive: https://drive.google.com/drive/folders/{{ $('Google Drive').item.json.id }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.1,
+   "position": [
+    4496,
+    2528
+   ],
+   "id": "ac68ae0e-4955-450a-8ad6-a04cb2450b9f",
+   "name": "Send a message",
+   "webhookId": "ace5e209-aeee-4b31-ac10-6614e5fcfe85"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "a357c31f-1dff-414d-b317-3a77618744ca",
+       "name": "title",
+       "value": "The Lord's Prayer- EXPLAINED! The Truth Behind Every Word!",
+       "type": "string"
+      },
+      {
+       "id": "1028c91a-f4c9-4af1-994a-b89270327982",
+       "name": "link",
+       "value": "https://www.youtube.com/watch?v=vVYJzhn5Qc0",
+       "type": "string"
+      },
+      {
+       "id": "eab0798d-506b-482c-af6e-e00a5df6d859",
+       "name": "id",
+       "value": "yt:video:vVYJzhn5Qc0",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -2704,
+    2400
+   ],
+   "id": "db272f1d-d4ef-436a-bfdd-6d708e939e61",
+   "name": "Edit Fields",
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "options": {
+     "maxOutputTokens": 65536,
+     "temperature": 0.7,
+     "topK": 40,
+     "topP": 1
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    752,
+    1952
+   ],
+   "id": "05477cda-d598-40fe-9a65-47d44edf7c55",
+   "name": "Google Gemini Chat Model"
+  },
+  {
+   "parameters": {
+    "resource": "audio",
+    "input": "={{ $json.output.narration }}",
+    "voice": "onyx",
+    "options": {
+     "response_format": "mp3"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    1840,
+    1184
+   ],
+   "id": "ff73967c-3239-402a-8c3a-8ef80c68eece",
+   "name": "Generate audio"
+  },
+  {
+   "parameters": {
+    "jsonSchemaExample": "{\n\t\"narration\": \"string\"\n}",
+    "autoFix": true,
+    "customizeRetryPrompt": true
+   },
+   "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+   "typeVersion": 1.3,
+   "position": [
+    816,
+    1520
+   ],
+   "id": "6bad15bf-9e4d-4726-b6d3-356cc27d041e",
+   "name": "Structured Output Parser2"
+  },
+  {
+   "parameters": {
+    "jsonSchemaExample": "{\n  \"winner_title\": \"string\",\n  \"winner_thumbnail\": \"string\",\n  \"description\": \"string\",\n  \"tags\": \"string\"\n}",
+    "autoFix": true,
+    "customizeRetryPrompt": true
+   },
+   "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+   "typeVersion": 1.3,
+   "position": [
+    1680,
+    2000
+   ],
+   "id": "8faed16e-6d25-4c35-a545-bfcb633aeb2c",
+   "name": "Structured Output Parser3"
+  },
+  {
+   "parameters": {
+    "name": "={{ $binary.data.fileName }}",
+    "driveId": {
+     "__rl": true,
+     "value": "1Fd6O4SoBe8hem1AgMoY7TpjxSVevonSQ",
+     "mode": "id"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $('Google Drive').item.json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    2192,
+    1040
+   ],
+   "id": "05a6f2b1-35eb-45e3-bcdc-95fedaf2bac1",
+   "name": "Google Drive7"
+  },
+  {
+   "parameters": {
+    "mode": "combineBySql",
+    "query": "SELECT * FROM input1, input2"
+   },
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.1,
+   "position": [
+    2592,
+    1504
+   ],
+   "id": "2228a1d7-5116-479c-9453-2120e432f97d",
+   "name": "Merge",
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=Create a title, thumbnail text, description and tags for this theme and narration\n\n**Theme/Topic:** Biblical Medicine - REVEALED! The Truth Behind God’s Healing Power Hidden in Scripture!\n\n**Video duration:** {{ $json.duration }}\n\n**Narration:** {{ $json.output.narration }}",
+    "hasOutputParser": true,
+    "options": {
+     "systemMessage": "=",
+     "maxIterations": 10
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    1616,
+    1792
+   ],
+   "id": "fdaff854-0b3f-4534-b540-ea8cdb78cbdb",
+   "name": "titulo / thumb text / description",
+   "retryOnFail": true,
+   "waitBetweenTries": 5000
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=## INPUT\n\n**Theme/Topic:** {{ $json.Tema }}\n\n**Narration example:** {{ $('trata_legenda').item.json.texto_completo }}",
+    "hasOutputParser": true,
+    "options": {
+     "systemMessage": "=## ROLE SPECIFICATION\nYou are a specialized content creator for \"The Bible Stories For You\", a biblical-themed YouTube channel. Your audience consists of English-speaking individuals aged 35-60 from diverse cultural backgrounds seeking deep understanding and entertainment in biblical subjects. You must deliver SEO-optimized, engaging, and reverent content that drives clicks, watch time, and subscriptions.\n\n## CRITICAL LENGTH REQUIREMENT\n\n**MANDATORY NARRATION LENGTH:** Minimum 5000 words \n\n**ABSOLUTE REQUIREMENT:** The narration section MUST contain at least 5000 words. This is NON-NEGOTIABLE.\n\n**LENGTH VERIFICATION PROTOCOL:**\nBefore submitting your response, you MUST:\n1. Write the complete narration\n2. Count the total characters in the narration section\n3. If character count < 5000: EXPAND immediately\n4. If character count ≥ 5000: Proceed to submit\n\n**EXPANSION TECHNIQUES (use when needed to reach 5000+ words):**\n- Add more historical and archaeological evidence\n- Include multiple theological interpretations (rabbinical, patristic, reformed, etc.)\n- Elaborate on sensory details of settings and scenes\n- Deepen character emotional arcs and motivations\n- Add extensive biblical cross-references and parallels\n- Explore cultural practices and ancient Near Eastern context\n- Discuss prophetic connections and fulfillment patterns\n- Include modern application and contemporary relevance\n- Add vivid descriptive language and narrative detail\n- Expand on geographical and temporal context\n\n**STRUCTURAL GUIDANCE FOR 5000+ words:**\n- Introduction/Hook: 750-1000 words\n- Historical Context: 750-1000 words\n- Main Narrative Body (3-4 sections): 2500-3000 words\n- Theological Reflection: 500-750 words\n- Conclusion with Lesson: 750-1000 words\n\n**CRITICAL:** Do NOT submit a narration shorter than 5000 words under ANY circumstances. If your first draft is short, EXPAND it using the techniques above before submitting.\n\n---\n\n## INPUT\n**Theme/Topic:** [VIDEO THEME]\n**Example:** [NARRATION EXAMPLE]\n\n---\n\n## OUTPUT STRUCTURE\n\n### 3. NARRATION (MINIMUM 5000 WORDS)\n\n**ABSOLUTE REQUIREMENT:** This section MUST contain at least 5000 words. Count before submitting.\n\n**CONTENT STRUCTURE:**\n\n**Opening Hook (100-200 words):**\n- Start with a provocative question or stunning statement\n- Create immediate curiosity\n- Set the stage for the narrative\n\n**Paragraph 2 - MANDATORY Call to Action (75-100 words):**\nMust include this exact invitation:\n\"If you're finding value in this exploration of biblical truth, please like this video and subscribe to The Bible Stories For You to continue this journey of discovery with us.\"\n\n**Main Body (4000-4500 words):**\n- Linear narrative progression\n- ONLY narration text - no titles, headers, bullet points, or structural markers\n- Original formulations with improved clarity\n- Maintain historical integrity and accuracy\n- Rich sensory details (what people saw, heard, felt, smelled)\n- Character development and emotional depth\n- Historical and cultural context woven naturally into narrative\n- Multiple perspectives when appropriate\n- Theological insights integrated seamlessly\n\n**Conclusion (800-1,000 characters):**\n- Profound lesson related to the video's theme\n- Connection to contemporary life and faith\n- Reinforce call to action for likes and subscriptions\n- End with memorable reflection or question\n\n**ENGAGEMENT TECHNIQUES (use throughout):**\n- Pose provocative questions that make viewers pause\n- Emphasize central themes with emotional weight\n- Build suspense through pacing and revelation\n- Link content with broader biblical narratives and prophetic patterns\n- Reference historical and spiritual figures for emotional connection\n- Use retention hooks every 60-90 seconds of content\n- Create \"micro-cliffhangers\" that maintain interest\n- Employ contrast and comparison to deepen understanding\n\n**TONE & ACCURACY:**\n- Detailed, formal, and explanatory (but not academic or dry)\n- Deep biblical knowledge with cultural and historical context\n- Accurate scripture references (book, chapter, verse when relevant)\n- Coherent, reverent, and factually correct\n- Consistent tone throughout\n- Authentic to biblical text while accessible to modern audience\n- Balance between scholarly depth and engaging storytelling\n\n**SCRIPTURE INTEGRATION:**\n- Reference specific passages naturally in narrative flow\n- Don't just quote - explain context and significance\n- Connect Old and New Testament themes\n- Show how verses relate to broader biblical theology\n\n**HISTORICAL & CULTURAL DEPTH:**\n- Ancient Near Eastern context\n- Archaeological evidence when relevant\n- First-century Jewish practices\n- Greco-Roman world context\n- Geography and its significance\n- Daily life details that bring scenes alive\n\n**FORMATTING:**\n```\n[NARRATION TEXT - Minimum 5000 words]\n\n[No titles, headers, sections, or bullet points - just flowing narrative prose from beginning to end]\n\n[Remember: Count characters before submitting. If under 5000, EXPAND using the techniques listed in CRITICAL LENGTH REQUIREMENT section above]\n```\n---\n\n## CRITICAL GUIDELINES\n\n### 1. Biblical Accuracy (NON-NEGOTIABLE)\n- All scripture references must be accurate and contextual\n- Respect diverse theological traditions while maintaining orthodoxy\n- Acknowledge scholarly debates when they exist\n- Never fabricate or misrepresent biblical content\n- Cross-reference Old and New Testament appropriately\n\n### 2. SEO Optimization\n- Strategic keyword placement in title, description, tags\n- Natural integration (never keyword stuffing)\n- Long-tail keywords for niche targeting\n- Semantic variations of main terms\n- Question-based keywords (what, why, how, who)\n\n### 3. Engagement Maximization\n- Every element designed to increase CTR (Click-Through Rate)\n- Title creates curiosity gap\n- Thumbnail text reinforces title\n- Description encourages watch time\n- Chapters improve viewer retention\n- Call-to-action strategically placed\n\n### 4. Reverence & Respect\n- Maintain appropriate tone toward sacred texts\n- Balance academic rigor with devotional warmth\n- Avoid sensationalism that compromises integrity\n- Treat all biblical figures with dignity\n- Acknowledge mystery where scripture is silent\n\n### 5. Clarity & Accessibility\n- Complex theological concepts explained simply\n- No jargon without explanation\n- Assume intelligent but not specialized audience\n- Build bridges between ancient world and modern life\n- Make scholarship accessible to laypeople\n\n### 6. Cultural Sensitivity\n- Acknowledge diverse interpretations respectfully\n- Avoid sectarian bias when possible\n- Present multiple perspectives on contested passages\n- Recognize global Christianity's diversity\n- Maintain historical accuracy about ancient cultures\n\n### 7. Coherence & Unity\n- All elements (title, narration, description) must align thematically\n- Consistent voice and tone throughout\n- Unified message from opening to conclusion\n- Cross-referencing between sections reinforces themes\n\n---\n\n## QUALITY CHECKLIST\n\nBefore submitting your output, verify ALL of these requirements:\n\n**NARRATION:**\n- MINIMUM 5000 words (count before submitting!)\n- Call to action in paragraph 2\n- No titles, headers, or structural markers\n- Linear narrative flow\n- Opening hook is compelling\n- Conclusion includes profound lesson\n- Biblical accuracy maintained\n- Historical context integrated\n- Engagement techniques employed throughout\n\n**OVERALL:**\n- All sections align thematically\n- Consistent tone throughout\n- SEO-optimized but natural\n- Respectful and reverent\n- Engaging and click-worthy\n\n---\n\n## GEMINI-SPECIFIC OPTIMIZATION NOTES\n\n**For Best Results with Gemini Flash 2.5:**\n\n1. **Length Compliance:** Gemini responds well to explicit character count requirements. The 5000+ words mandate with verification protocol ensures compliance.\n\n2. **Structured Output:** The clear section divisions and formatting instructions leverage Gemini's strength in following templates.\n\n3. **Context Utilization:** Gemini's large context window means you can include multiple example outputs to guide style and length.\n\n4. **Expansion Techniques:** The detailed expansion techniques list gives Gemini concrete strategies when it needs to reach length requirements.\n\n5. **Self-Verification:** The checklist format aligns with Gemini's capability to follow multi-step instructions and self-check outputs.\n\n---\n\n## FINAL REMINDER\n\n**CHARACTER COUNT IS CRITICAL:** The narration section must contain at least 5000 words. This ensures the video reaches the target 8-10 minute duration. If your narration is shorter, use the expansion techniques provided to add depth, detail, and richness to the content. Quality AND quantity both matter for this format.",
+     "maxIterations": 10
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    752,
+    1312
+   ],
+   "id": "1799c5e2-633b-43a7-bb38-4e1e1be29e42",
+   "name": "narration",
+   "retryOnFail": true,
+   "waitBetweenTries": 5000
+  },
+  {
+   "parameters": {
+    "jsCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n    const binaryData = item.binary?.data;\n    \n    if (!binaryData) continue;\n\n    let fileSizeInBytes = binaryData.fileSize;\n\n    // Converte a string (ex: \"363 kB\") para número absoluto de bytes\n    if (typeof fileSizeInBytes === 'string') {\n        const parts = fileSizeInBytes.split(' ');\n        const valor = parseFloat(parts[0]);\n        const unidade = parts[1]?.toLowerCase() || '';\n\n        if (unidade.includes('m')) { // MB\n            fileSizeInBytes = valor * 1024 * 1024;\n        } else if (unidade.includes('k')) { // kB\n            fileSizeInBytes = valor * 1024;\n        } else {\n            fileSizeInBytes = valor;\n        }\n    }\n\n    /**\n     * AJUSTE DE PRECISÃO:\n     * Seu teste: 363 kB (~371.712 bytes) para 18 segundos.\n     * Cálculo: 371712 / 18 = 20650 bytes por segundo.\n     */\n    const bytesPerSecond = 20650; \n    const durationSeconds = fileSizeInBytes / bytesPerSecond;\n\n    results.push({\n        json: {\n            duration: new Date(durationSeconds * 1000).toISOString().substr(11, 8)\n        }\n    });\n}\n\nreturn results;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2192,
+    1312
+   ],
+   "id": "c65d9177-6598-4bf6-bd7d-8022724b1421",
+   "name": "video_time"
+  },
+  {
+   "parameters": {
+    "driveId": "sharedWithMe",
+    "folderId": "={{ $('Google Drive').item.json.id }}",
+    "title": "={{ $json.output.winner_title }}"
+   },
+   "type": "n8n-nodes-base.googleDocs",
+   "typeVersion": 2,
+   "position": [
+    2016,
+    1792
+   ],
+   "id": "6137ec01-cba8-47d3-b214-19765e7bb93b",
+   "name": "Create a document"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "documentURL": "={{ $json.id }}",
+    "actionsUi": {
+     "actionFields": [
+      {
+       "action": "insert",
+       "text": "=TÍTULO: {{ $('titulo / thumb text / description').item.json.output.winner_title }}\n\nTÍTULO THUMB: {{ $('titulo / thumb text / description').item.json.output.winner_thumbnail }}\n\nDESCRIÇÃO: {{ $('titulo / thumb text / description').item.json.output.description }}\n\nTAGS VÍDEO ORIGINAL: {{ $('busca_video').item.json.keywords }}\n\nTAGS CRIADAS: {{ $('titulo / thumb text / description').item.json.output.tags }}"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.googleDocs",
+   "typeVersion": 2,
+   "position": [
+    2224,
+    1792
+   ],
+   "id": "668cbcba-a377-4e1d-bd31-a993072d07ab",
+   "name": "Update a document"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=Preciso que divida a narração em 4 partes e crie 4 prompts de imagem para 4 cenas baseadas nestes blocos de narração.\n\nNarração: {{ $('narration').item.json.output.narration }}\n\nCada prompt deve ter instruções para as cenas, adaptados a cada cena da narração, incluindo:\n- Descrição geral\n- Ações dos personagens\n- Aparência dos personagens\n- Cenário / Plano de fundo\n\nEntregue um JSON contendo os itens \"imagemPrompt\" para cada imagem.\n\n",
+    "hasOutputParser": true,
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    2160,
+    2240
+   ],
+   "id": "67f6f3bd-1a7b-4469-903c-4ce9e5fef45e",
+   "name": "image prompt creator",
+   "retryOnFail": true,
+   "waitBetweenTries": 5000
+  },
+  {
+   "parameters": {
+    "jsCode": "// Acessa os dados do nó \"busca_legenda\"\nconst data = $node[\"busca_legenda\"].json;\n\n// Extrai apenas as frases do array 'transcript'\nconst frases = data.transcript.map(item => item.text);\n\n// Junta todas as frases com um espaço entre elas\nconst textoCompleto = frases.join(' ');\n\n// Opcional: Limpa espaços duplos ou quebras de linha indesejadas\nconst textoLimpo = textoCompleto.replace(/\\n/g, ' ').replace(/\\s+/g, ' ').trim();\n\nreturn {\n  texto_completo: textoLimpo\n};"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -96,
+    1984
+   ],
+   "id": "be4c4f3f-1601-4f3b-bc69-a75dbff83b1b",
+   "name": "trata_legenda"
+  },
+  {
+   "parameters": {
+    "resource": "audio",
+    "input": "={{ $json.texto_parte }}",
+    "voice": "onyx",
+    "options": {
+     "response_format": "mp3"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.openAi",
+   "typeVersion": 1.8,
+   "position": [
+    208,
+    480
+   ],
+   "id": "5b720707-6f52-46fd-bec0-d5261ad310cd",
+   "name": "Generate audio1",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "name": "={{ $('Loop Over Items2').item.json.file_name }}",
+    "driveId": {
+     "__rl": true,
+     "value": "1Fd6O4SoBe8hem1AgMoY7TpjxSVevonSQ",
+     "mode": "id"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "=1Gs-W2fSrE14KlOXd5uhrd3WHdBvxwM68",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    512,
+    480
+   ],
+   "id": "d21d0a6a-8766-4662-93e0-ed9963388e11",
+   "name": "Google Drive8"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "b9175328-780d-46d3-835a-7235c807a2d3",
+       "name": "narracao",
+       "value": "=Have you ever said, \"I believe in God,\" but when asked who God is, you hesitated? Not because you don't believe, but because no one ever explained the fullness of His nature in a way that actually made profound, coherent sense. Maybe you heard about the Trinity in Sunday school. Maybe your pastor touched on it once with a diagram, a few foggy metaphors, perhaps an illustration involving water or an egg. Maybe you nodded, said \"Amen,\" and filed it away as an impenetrable mystery. And now, here you are, years into your faith, and if someone genuinely pressed you to define God the Father, God the Son, and God the Holy Spirit as one, could you truly explain it without feeling like you were merely repeating a formula, or worse, lying? This is not a secondary concern; this is the most important, foundational doctrine in all of Christianity. Because if we get God wrong—if our understanding of His nature is fundamentally flawed—we get everything else wrong. The meaning of the cross, the nature of salvation, the power of prayer, the purpose of worship, the intimacy of relationship—it all starts and ends with who God actually is, eternally and immutably.\n\nAnd if the Trinity is still a mystery you unconsciously avoid, or a theological puzzle you never quite solved, then this video right here is for you. Because in this sacred exploration, we are not skipping the hard parts. We are not dumbing down the majesty of divine mystery. We are going deep into the doctrine that makes your salvation possible, your victory achievable, and your worship profoundly personal. By the end of this journey, your faith won't just feel stronger; it will feel clearer, grounded, and absolutely certain. One God, three persons, eternal mystery finally explained like never before. This wasn't just a theoretical exercise to the early church. They fought for this truth; they debated fiercely over its precise articulation; they endured suffering, and some even died, for refusing to compromise this one essential truth: that the Father is not the Son, the Son is not the Spirit, and the Spirit is not the Father, and yet, they are one, single, divine Being.\n\nIn today's world, where identity is questioned, truth is fluid, and spiritual confusion is everywhere, knowing the true triune God you belong to has never been more urgent for your spiritual survival. So let’s ask the question that often sits unspoken in the heart of many believers: Do you really understand the God you say you believe in? Are you worshiping a God you know intimately, or just a God you inherited from tradition or culture? Have you ever wondered why this specific doctrine of the Trinity matters so much? Or, better yet, what would fundamentally change in your daily life if you actually knew the Father who sent the Son, the Son who perfectly revealed the Father, and the Spirit who brings the presence and power of both into your heart right now? If you've ever wanted us to explain other topics like this—such as how to hear the Holy Spirit, or how Jesus could simultaneously be fully God and fully man—let us know in the comments. We are committed to going there with you. But for now, take a deep breath, settle your heart, because the God of the universe is not just an idea to believe in; He is a Trinity to encounter, and that encounter begins now.\n\nIf the Trinity shapes everything—your worship, your prayer, your identity—then the next question is obvious: where do we see it first? Because if this isn't some man-made doctrine added later in church history, then we should expect to find it woven into the very fabric of the Bible from the absolute beginning. And we do, right there in Genesis 1, before the Law, before Israel, before the prophets or the gospels. We see the triune God already moving, already working, already creating. But most people miss it because Genesis 1 doesn't scream \"Trinity\" in neon lights; it whispers it like a sacred echo, a divine fingerprint buried in the origin of everything. \"In the beginning God created the heavens and the earth.\" That's the Father, the ultimate source, the initiator, the one who commands light out of darkness. But then, the very next verse says, \"Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.\" Hovering—not passive, but poised, ready to act. The Hebrew word used here, Ruach, means breath, wind, or spirit—the dynamic, active presence of God, alive and dynamic, brooding over the chaos, preparing the way before order breaks in. And then comes the voice: \"And God said...\" Pause right there. God spoke. His Word created. And according to the Gospel of John, chapter 1, that Word wasn't just sound; it was a Person: \"In the beginning was the Word, and the Word was with God, and the Word was God. He was with God in the beginning. Through him all things were made; without him nothing was made that has been made.\" This is Jesus—not yet born in Bethlehem, but present before time, the eternal Son, the Word of God, speaking galaxies into motion, commanding water to separate from land, shaping humanity from dust with the same hands that would one day be pierced on a Roman cross. Father, Word (Son), Spirit—one God, three persons, from the very first breath of creation.\n\nAnd then there’s Genesis 1:26, a verse that should stop you in your tracks: \"Then God said, 'Let us make man in our image, after our likeness.'\" Who is God talking to? It’s not the angels; they are not co-creators. It’s not a \"royal we,\" which is a foreign concept to ancient Hebrew grammar. This is divine dialogue, an intimate conversation within the Godhead. \"Let us make man.\" The Father plans it, the Word speaks it, and the Spirit breathes life into the dust. Suddenly, you see it: humanity wasn't just made by God; we were made in the image of communion. That is what the Trinity is: eternal communion, eternal love, eternal relationship, perfectly unified. And when God made you, He didn't make you out of boredom; He made you out of the overflowing, shared love that has existed forever between the Father, the Son, and the Spirit. This is why we long so deeply for connection, why isolation wounds us, why betrayal cuts so deep—because we were made to reflect the image of a relational God who has never existed alone. The Trinity is not just a truth to believe; it’s a reality you were born from. And it doesn't stop in Genesis. In Genesis 3, after the tragic Fall, God says, \"The man has now become like one of us, knowing good and evil.\" Again, the plural \"us\"—the triune conversation continues. And even in the judgment, we see clear hints of redemption, because God doesn't destroy Adam and Eve; He covers them with skins, and He promises that the seed of the woman will crush the serpent's head—a prophecy pointing straight to Jesus, the Son, who would come to redeem what was lost. So, from the first page, the Trinity is there—not spelled out in systematic theological terms, but embodied in divine action: creating, speaking, hovering, loving, saving.\n\nAnd here's why that matters for you: because when you read Genesis without the Trinity, you see a powerful, distant Creator. But when you read it with eyes opened to who God really is, you see so much more. You see a relational God, a personal God, a God who was already moving in unity and love before you ever existed, and who now invites you into that same unity and love. Think about it: you were made in the image of a relationship. That means your healing, your calling, your identity—it all flows not from isolation or self-effort, but from connection with the Father who formed you, the Son who saved you, and the Spirit who fills you. If you've been feeling disconnected lately—from God, from purpose, from people—maybe it's because you've lost touch with the Trinity that breathed you into being. But here’s the hope: you can return. You can walk back into that triune presence—not into religion, not into performance, but into deep, abiding relationship with all three. If this is unlocking something in you, if you want us to dive deeper into how Jesus appears in the Old Testament, or how the Spirit worked before Pentecost, let us know in the comments. But right now, remember this: the Trinity didn't begin in the New Testament; He was already there at creation, in communion, and in the very essence of your being.\n\nIf the Trinity is one God in three persons, and that reality is not abstract but deeply personal, then we need to begin with the one the Bible calls Father. Not because he came first in time—the three persons are co-eternal—but because he is first in order and intention. He is the source, the voice, the initiator, the sender. And far too many of us hear the word \"Father\" and either feel nothing, or worse, we feel pain. Because here’s the truth no one likes to admit: for many people, \"father\" is a broken, painful word. Maybe yours wasn't there; maybe he was present but never really saw you; maybe he abandoned, disappointed, or even deeply damaged you. So, when the Bible calls God \"Father,\" something deep in you flinches, recoils, or shuts down. But the kind of Father God is is nothing like the flawed, limited, or absent fathers you have seen in this fallen world. He is not distant, not cold, not waiting for you to get your life together before He comes close. He is the God who planned redemption before sin ever entered the story. He is the one who formed the blueprint of creation with full, agonizing knowledge that it would cost Him everything—the life of His only begotten Son—to bring us back. He is the Father who speaks not just with ultimate authority, but with a love that breaks chains and heals generational wounds.\n\nLet's go deeper. Genesis begins with God creating, but scripture tells us the Father wasn't acting alone. He willed it, yes, but He spoke the Word (the Son), and the Spirit hovered, waiting to move. It was a triune work, and yet, it all flowed from the Father's heart and will. The Bible often refers to the Father as the one who sends, and not just in a casual way; He sends with eternal purpose. John 3:16: \"For God so loved the world that he gave his one and only Son.\" Romans 8:3: \"God sent his own Son in the likeness of sinful flesh to be a sin offering.\" John 14:26: \"The Advocate, the Holy Spirit, whom the Father will send in my name.\" Every single move of redemption began with the Father. The Incarnation was initiated by the Father; the sending of the Holy Spirit was ordained by the Father; the entire mission of salvation was authored by the Father. This means you are not an accident. Your healing, your calling, your new life—it's not just something Jesus handled on His own; it’s something the Father dreamed for you with eternal passion.\n\nThink again about the baptism of Jesus. The skies opened, the Spirit descended, and the voice of the Father thundered: \"This is my Son, whom I love; with him I am well pleased.\" Do you realize that same voice speaks over you? John 1:12 says, \"Yet to all who did receive him, to those who believed in his name, he gave the right to become children of God.\" Romans 8:15 adds, \"You received the Spirit of adoption, by whom we cry, 'Abba, Father.'\" That means this God—the one who created galaxies and commands legions of angels—is also the one who looks at you with unshakable, eternal affection and calls you His. And yet, many believers go their whole lives praying to God like He's a distant CEO, a strict judge, or a demanding landlord instead of a loving Father. Why? Because we don't understand what kind of Father He is. Let's clear it up. The Father is not angry while Jesus is loving. He’s not the Punisher while Jesus is the Protector. He’s not waiting for you to mess up; He is the one who sent Jesus, the one who ran to the prodigal son, the one who loved you first. We see His heart even in the Old Testament, where His justice is always tempered by compassion. Isaiah 64:8: \"Yet you, Lord, are our Father. We are the clay, you are the potter; we are all the work of your hand.\" Psalm 103:13: \"As a father shows compassion to his children, so the Lord shows compassion to those who fear him.\" Even when God disciplines Israel, it’s always from a place of loving correction, not wrathful rejection. Hosea 11:1-4 gives us one of the most tender pictures: \"When Israel was a child, I loved him, and out of Egypt I called my son... It was I who taught Ephraim to walk, taking them by the arms... I led them with cords of human kindness, with ties of love.\" Do you hear that? The Father isn't just powerful; He's intensely personal. He led Israel like a dad teaching a toddler to walk—steadying, guiding, catching, loving. And that same Father is the one who leads you. But if you don't understand this—if you keep Him at arm's length because of fear, shame, or past pain—you will never fully receive the freedom and intimacy that the Son and Spirit came to deliver. You’ll pray but never feel entirely safe. You’ll worship but never feel truly wanted. You’ll believe but never fully rest. And the Father wants more for you than that. He wants you to know His voice, to feel His constant presence, to run to Him not because you have to, but because you know His arms are the only place that never lets go. If you're struggling to trust the Father, especially because of your own dad's failures, or if you've never felt like God was actually for you, tell us in the comments. We’ll walk with you, or let us know if you want us to break down more on how to rebuild your image of God as Father. But for now, remember this: the Father is not just the beginning of the story; He is the heart behind it, the voice that spoke you into being, the love that sent the Son, the arms that still reach for you. And He's not waiting to punish you; He's waiting to hold you.\n\nIf the Father is the source, the voice who speaks identity over creation, who sends in love and holds with compassion, then everything changes when we realize who He sent. Because the Father didn't just send a message, or a symbolic gesture; He sent Himself in the Son. This is where the mystery deepens and the majesty explodes. Because if your idea of Jesus is just a man with kind eyes and good morals—if He’s just a teacher, or a prophet, or a great example—you have missed the very core of Christianity. Jesus is not a spiritual consultant; He’s not the first of God's creations (a heresy called Arianism that the early church battled fiercely); He’s not a secondary version of God or a divine assistant. He is God—fully God, fully man, forever one with the Father. And until you grasp this truth, until this reality hits your spirit with the weight it deserves, you will never understand the profound necessity of the cross, the power of the resurrection, or why His name alone carries the absolute power to save.\n\nLet's begin at the beginning—not of Matthew, not of Bethlehem, but of eternity. John 1:3 opens like Genesis all over again: \"In the beginning was the Word, and the Word was with God, and the Word was God. He was with God in the beginning. Through him all things were made; without him nothing was made that has been made.\" This is not poetry; this is precise, definitive theology. This is war against every false teaching that tries to reduce Jesus to anything less than who He is: the eternal Word, co-equal with the Father, the one through whom everything exists and holds together. And then verse 14 drives it home: \"The Word became flesh and made his dwelling among us.\" Let that truth hit you with its full force. The same Jesus who walked dusty roads, who touched lepers, who sat at tables with tax collectors, who cried at the tomb of His friend Lazarus, is the eternal I AM—the God who spoke galaxies into being—wrapped Himself in human skin. He had a heartbeat, He felt hunger, He knew sweat and blood and breath, and He did it not to sample human life, but to save human life. Colossians 1:15-17 says it like this: \"The Son is the image of the invisible God, the firstborn over all creation. For in him all things were created... all things have been created through him and for him.\" When Paul calls Him the \"firstborn,\" he doesn't mean Jesus was created; he means Jesus holds the rank, the status, the inheritance rights—He is preeminent, supreme, not created, but Creator.\n\nHe is the fulfillment of every Old Testament shadow. Remember the Angel of the Lord who spoke to Moses from the burning bush? The one who declared, \"I AM WHO I AM\"? Jesus takes that same divine title in John 8:58 and says, \"Before Abraham was born, I AM.\" They picked up stones to kill Him, not because He was confusing, but because He was perfectly clear: He was claiming divinity. He was saying, \"I am the God who met Moses. I am the one who parts seas and walks through fire. I am not a messenger; I am the Message, the very visible expression of the invisible God.\" And this is what makes Christianity unlike any other faith system. Every other religion tells you to climb your way to God through effort, ritual, or morality; only Christianity says God came down to you. Every other religion gives you a list of rules; only Jesus gives you Himself. The early church clung to this truth with blood in their mouths and fire at their backs. They refused to say Jesus was created; they refused to say He was just a prophet. They sang to Him as Lord, they prayed to Him as God, and they laid down their lives for the one they called God in the flesh. This central truth—the Hypostatic Union, the reality of Christ being fully God and fully man—is why this still matters right now. Because if Jesus is not fully God, He cannot save you; His sacrifice would be merely human and insufficient to pay the infinite penalty of sin. If He is not fully man, He cannot represent you; He would not share your temptation, your sorrow, or your death. But because He is both, He stands between heaven and earth like a bridge no demon can burn. You are not following a ghost or an idea; you are following the God who stepped into time, who wept, who bled, who died, and who got back up again. Hebrews 1:3 says the Son \"is the radiance of God's glory and the exact representation of his being, sustaining all things by his powerful word.\" He is not a copy; He is not a mere reflection; He is the radiance, the source, and the beam. And right now, that same Jesus—the one who walked with Peter, who rebuked storms, who silenced demons—is alive and active. He’s not a memory frozen in a page; He’s seated at the right hand of the Father, constantly interceding for you, acting as your High Priest and Advocate. And one day, He’s coming back, not as a suffering lamb, but as a conquering lion. So, the next time you pray in His name, remember what that name holds: power over death, victory over sin, and the fullness of God in a body that was broken just for you.\n\nJesus is not just the Son of God; He is God—fully divine, fully human, one with the Father from the beginning, speaking creation into motion and stepping into flesh to rescue what was broken. But after He rose, after He defeated death and stood victorious, He didn't just ascend to heaven and leave us with memories. He gave us more. He gave us someone. Not an echo of His ministry, not a shadow of His presence, but God Himself: the Holy Spirit. This is the part of the Trinity many talk about, but few truly understand. The Spirit isn't a backup power source; He isn't the afterthought of the Godhead. He isn't generic goosebumps during worship or a mysterious, impersonal force that makes people shake. He is a Person. He is God. He is alive and active now, today, in your life. And the confusion around Him today is no accident. In a world obsessed with energy, vibes, and manifestations, the identity of the Holy Spirit has been tragically distorted. In some churches, He's overemphasized to the point of sensationalism and theatrics; in others, He's treated like a topic best avoided—too controversial, too unpredictable, too misunderstood. But make no mistake: the Holy Spirit is not weird; He is holy. He is real. And without Him, you cannot live the supernatural life Jesus called you to live. Jesus made this clear in John 16:7: \"But very truly I tell you, it is for your good that I am going away. Unless I go away, the Advocate will not come to you; but if I go, I will send him to you.\" Imagine that: Jesus Himself saying, \"It's better for me to leave so the Spirit can come.\" That's not exaggeration; that's revelation.\n\nThe Spirit is not a what; He’s a who. He convicts. And that conviction is not condemnation; it’s clarity. When the Holy Spirit convicts you, it's not to shame you; it's to awaken you to the reality of your new identity. He taps on your heart when you're about to cross a line you know will hurt you. He whispers in that critical moment, \"This isn't who you are anymore; you were bought at a price.\" He breaks through the spiritual numbness and reminds you, \"You were made for more.\" He comforts deeply, personally, not with empty words, but with His very presence. Jesus called Him the Comforter, the Helper, the Counselor (Paraclete in Greek). He doesn't just calm your storm; He joins you in it. Romans 8:26 says, \"In the same way, the Spirit helps us in our weakness. We do not know what we ought to pray for, but the Spirit himself intercedes for us through wordless groans.\" When your language fails, His voice speaks. When your strength collapses, His presence carries. He is not just beside you; He is in you. He transforms. This is the part no one can fake. You can memorize scripture, attend church, and sing worship songs, but only the Holy Spirit can fundamentally change the desires of your heart. Only He can break the grip of addiction. Only He can take a cold, cynical heart and melt it into tenderness and compassion again. That's why Paul says in 2 Corinthians 3:17-18: \"Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom. And we all, who with unveiled faces contemplate the Lord's glory, are being transformed into his image with ever-increasing glory, which comes from the Lord, who is the Spirit.\" He’s not trying to make you better; He’s making you new, conforming you to the image of the Son.\n\nThis is why your relationship with Him is not optional; it’s essential, it’s urgent, it’s life itself. Because He’s the one who reveals the Word to your spirit when your eyes just see ink on a page. He’s the one who helps you forgive when everything in your flesh demands revenge. He’s the one who gives you the right words when you stand in front of someone who needs hope and you feel utterly unqualified. He’s the one who reminds you that the Father loves you when your past tries to convince you otherwise. And He’s been there since the beginning. In Genesis, He hovered over the chaos, ready to bring order. In Judges, He empowered warriors to fight battles they were never trained for. In the Gospels, He descended like a dove over Jesus and then drove Him into the wilderness to face Satan head-on. In Acts, He fell like fire, filled ordinary people, and flipped the known world upside down. That same Spirit is in you. And think about it: when Jesus walked the earth, He could only be in one physical place at one time. But now, through the Spirit, He is with you—on your worst days, in your weakest moments, in the car, at the office, in the middle of heartbreak, on the edge of temptation. He is not limited by walls, or miles, or moods. He is in you. But here’s the real question: have you acknowledged Him? Because the Spirit won't force Himself; He won't shout over your distractions. He waits for surrender, He waits for hunger, He waits for you to say, \"I don't just want to know about God; I want to walk with Him every step of my life.\" This isn't emotional hype; this is deep, biblical truth. And for some of you, the reason your faith feels stale isn't because you don't love Jesus; it's because you haven't welcomed the Spirit who reveals Him. You've been trying to live a supernatural life without supernatural power, and the result is exhaustion, performance, and emptiness. But that can end today, because the Spirit is ready. He's always been ready—to lead you, to fill you, to fight for you, to pray through you, and to make you like Jesus. But for now, let this settle deep: He is not just the presence of God; He is not just the power of God; He is the Person of God, and He has chosen to live in you.\n\nYou've just seen it: the Holy Spirit isn't an afterthought or a mystical accessory; He is God, alive and present, moving inside of you. But here’s the part that brings the entire mystery of the Trinity crashing into clarity: they never move alone. Father, Son, and Spirit don't work in separate lanes, taking turns; they work in complete, divine unity, always have, and always will. This is the theological concept of Perichoresis, or \"mutual indwelling\"—a divine dance where each person perfectly shares and indwells the other, resulting in perfect unity of will and action. And this is not just theological theory; it's your story. From Genesis to the Gospels to your own life today, the Trinity has been moving in perfect rhythm—three persons, one purpose. And when you see them working together, side-by-side, moment-by-moment, it doesn't just expand your theology; it radically awakens your worship.\n\nLet's go back to the beginning. Genesis 1. Creation wasn't a solo project. \"In the beginning God created the heavens and the earth\"—that's the Father speaking the universe into being. \"And the Spirit of God hovered over the face of the deep\"—that's the Holy Spirit hovering, ready, brooding. And John 1 tells us how it all happened: \"Through him [The Word/Son] all things were made.\" So, from the very first moment, all three are there: the Father wills it, the Son speaks it, and the Spirit moves it into being. Three in one—not overlapping, not confused, just perfectly unified. One God, three persons, in perfect communion, creating out of love. Then fast forward to one of the most sacred scenes in the gospels: the baptism of Jesus. Jesus walks into the Jordan River, not because He needed to be cleansed, but because He was stepping into His public mission. John the Baptist lowers Him into the water, and then heaven opens. The Spirit descends like a dove. The Father's voice booms from heaven: \"This is my beloved Son, in whom I am well pleased.\" And Jesus, the Son, stands in the water—Heaven touching Earth in His body. All three, all active, all present. The Trinity revealed not in a sermon or a dream, but in real time, in public, in front of witnesses. God didn't whisper this moment; He announced it, because something holy was beginning: the ministry of Jesus was about to explode, and the entire Godhead was in perfect agreement.\n\nAnd now, here’s where it gets profoundly personal. This isn't just about creation; it's not just about baptism. The Trinity didn't act once and retire; they are actively, intimately involved in your salvation—every single step of it. Ephesians 1 breaks it down like a divine blueprint: Verses 3-6: \"Blessed be the God and Father... who chose us in him before the creation of the world... according to the purpose of his will.\" That's the Father: choosing, adopting, initiating. Verses 7-12: \"In him [Christ] we have redemption through his blood, the forgiveness of sins.\" That's the Son: paying, redeeming, forgiving. Verses 13-14: \"When you believed, you were marked in him with a seal, the promised Holy Spirit.\" That's the Spirit: sealing, indwelling, securing. The Trinity saved you. Not just Jesus on the cross, not just the Father planning it, not just the Spirit wooing you—all three moving together, one heartbeat, one relentless rescue mission. And here's where it collides with real life: You didn't just find God one day; you didn't stumble into grace. The Father was calling you before you ever looked for Him. The Son was already interceding for you before you even knew His name. The Spirit was whispering in the background of your worst moments, \"Come home.\" They were working long before you were aware, and they are still working now. That moment you almost overdosed, the Father was shielding, the Spirit was whispering, the Son was standing between you and judgment. That season where your faith felt dry and brittle, the Father was patient, the Spirit was stirring, the Son was still praying for you. That night you cried out, unsure of who you even were anymore, the Trinity wasn't watching from a distance; they were moving in your heart. Your salvation is not fragile; it wasn't a solo deal; it was a Trinitarian rescue, and that's why it holds fast.\n\nAnd now, you get to walk in that rhythm daily. You pray to the Father, through the Son, by the power of the Spirit. You don't have to wonder who hears you; you don't have to guess who's with you. The fullness of God, the Trinity, has made His home in you. This is why your faith has power. This is why your prayers matter. This is why the cross worked. And this is why hell has no chance of winning against you. But for now, don't miss this: the same Trinity that spun the stars, stepped into the Jordan, and rolled away the stone is right here, creating again, redeeming again, living in you.\n\nYou've now seen what so many spend their whole lives missing. You've walked through the mystery of one God in three persons, not as a theological puzzle to be solved, but as a divine relationship to be entered. From the Father who chose you before the foundation of the world, to the Son who stepped into time to carry your sin, to the Spirit who lives in you now as fire, breath, and guide—you’ve encountered what the early church was willing to die for. And now, in the chaos of this world, amid political unrest, fractured relationships, spiritual confusion, and deep personal battles, you are holding on to something more solid than theory; you are holding on to God Himself. The Trinity is not a doctrine for seminary classrooms; it is the absolute foundation of your life. And now it’s time to respond, not with mere information, but with total surrender and renewed commitment. So, wherever you are right now—whether you're watching this in your bedroom, on your lunch break, or in a quiet place after a long, heavy week—this is your moment. Don't scroll. Don't rush. Don't miss this sacred opportunity to speak directly to the God who created you, saved you, and lives inside you.\n\nLet's pray.\n\nFather, You are not distant. You are not silent. You are not waiting for me to get it all right. You were the first voice that called me, the first hand that reached for me, the first heart that loved me before I knew what love was. You didn't create me out of obligation, but out of overflowing love. You designed me with intention. You've watched over every moment, even the ones I tried to hide. You knew I would fall, and You still called me Yours. So today, I come back—not with polished words, not with rehearsed holiness, but with raw honesty. I'm tired. I'm flawed. I'm unfinished. And You are still Father. You are still good. You are still here.\n\nJesus, You are not an idea. You are not just a story. You are not frozen on a cross in history. You are the living Son of God, the Word who became flesh, the perfect sacrifice who took my shame, the Risen King who kicked open the tomb I thought would hold me forever. You took the nails. You wore the crown. You carried the infinite wrath I deserved. And now, You clothe me in Your righteousness. You speak my name in heaven. You intercede when I don't have the words. You invite me into victory, not as a visitor, but as a co-heir. So, I lay down every part of me that still tries to earn what You already paid for. I surrender my past. I release my guilt. And I declare: It is finished, because You said it was.\n\nHoly Spirit, You are not wind. You are not a force. You are not a feeling that comes and goes. You're the breath in my lungs, the whisper in the silence, the fire that refines, the seal that says I belong to God. You comfort when the world collapses. You convict when I start to wander. You transform what I thought was impossible. Lead me. Teach me. Remind me of who I am in Christ. I don't want to live numb. I don't want to live distracted. I want to walk with You moment by moment, breath by breath. I open every part of me to You—the places I've hidden, the parts I've protected, the wounds I've denied. Make my heart Your home again. Wake up the gifts You've placed in me. Fill me with Your boldness, Your clarity, Your power.\n\nTriune God, I don't pretend to understand it all, but I trust You, and I love You. Not just one part of You, not just the one I'm most comfortable with, but all of You. Father, Son, and Holy Spirit—one God, three persons, one relentless love that has pursued me all my life. So, I give You my yes. My full yes. Not just on Sundays. Not just in private. Not just when I'm desperate. My yes in the fire. My yes in the favor. My yes when I'm doubting. My yes when I'm dancing. This is my surrender to the Father who formed me, to the Son who saved me, to the Spirit who fills me. You have all of me, forever. Amen.\n\nIf you prayed this with us, drop a word in the comments—even one word: \"Home,\" \"Yes,\" \"Trinity,\" \"Finally.\" Whatever this stirred in you, don't leave it unsaid, because the God who exists in eternal communion has just invited you into it. If you're finding value in this exploration of biblical truth, please like this video and subscribe to The Bible Stories For You to continue this journey of discovery with us. Thank you for watching, and stay blessed.",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -544,
+    464
+   ],
+   "id": "ce90623c-90b6-464d-aa59-b0b45a8e8c6a",
+   "name": "Edit Fields1"
+  },
+  {
+   "parameters": {
+    "jsCode": "// 1. Captura a string de narração\nconst inputData = $input.first().json;\nlet texto = inputData.narracao || \"\";\n\nif (!texto) {\n    throw new Error(\"Campo 'narracao' não encontrado.\");\n}\n\n// 2. TRATAMENTO DE CARACTERES: Limpa escapes de JSON e formatação poluída\n// Remove aspas escapadas (\\\"), quebras de linha literais (\\\\n) e espaços duplos\ntexto = texto\n    .replace(/\\\\\"/g, '\"')          // Transforma \\\" em \"\n    .replace(/\\\\n/g, ' ')          // Transforma \\n em espaço\n    .replace(/\\s+/g, ' ')          // Remove espaços duplos ou tabs\n    .trim();\n\nconst LIMITE_CARACTERES = 4000;\nconst blocos = [];\n\n// 3. FUNÇÃO DE DIVISÃO INTELIGENTE\nfunction dividirTexto(txt, limite) {\n  let startIndex = 0;\n  \n  while (startIndex < txt.length) {\n    let endIndex = startIndex + limite;\n    \n    if (endIndex < txt.length) {\n      // Tenta cortar no último ponto final antes do limite para manter o sentido\n      const lastPoint = txt.lastIndexOf('.', endIndex);\n      const lastSpace = txt.lastIndexOf(' ', endIndex);\n      \n      if (lastPoint > startIndex + (limite * 0.8)) { \n        endIndex = lastPoint + 1; \n      } else if (lastSpace > startIndex) {\n        endIndex = lastSpace;\n      }\n    }\n    \n    blocos.push({\n      texto_parte: txt.substring(startIndex, endIndex).trim(),\n      parte_numero: blocos.length + 1\n    });\n    \n    startIndex = endIndex;\n  }\n}\n\ndividirTexto(texto, LIMITE_CARACTERES);\n\n// 4. Adiciona o total de partes para controle no n8n\nconst resultado = blocos.map(bloco => ({\n  json: {\n    ...bloco,\n    total_partes: blocos.length,\n    // Gera um nome de arquivo seguro\n    file_name: `narracao_parte_${bloco.parte_numero}.mp3`\n  }\n}));\n\nreturn resultado;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -336,
+    464
+   ],
+   "id": "361c88bd-6716-423a-9f0d-fa8cbb50ac6b",
+   "name": "chunk_narracao"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    -128,
+    464
+   ],
+   "id": "db3c0db4-64e6-4c3d-a29c-f424fca278cd",
+   "name": "Loop Over Items2"
+  },
+  {
+   "parameters": {
+    "amount": 15
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    784,
+    480
+   ],
+   "id": "36cd37df-15d3-455d-a658-cbe4900196bf",
+   "name": "Wait1",
+   "webhookId": "8de5d4b4-e987-4fce-a3dd-616ce4c8d6c1"
+  },
+  {
+   "parameters": {
+    "aggregate": "aggregateAllItemData",
+    "include": "specifiedFields",
+    "fieldsToInclude": "fileSize",
+    "options": {
+     "includeBinaries": false
+    }
+   },
+   "type": "n8n-nodes-base.aggregate",
+   "typeVersion": 1,
+   "position": [
+    208,
+    0
+   ],
+   "id": "e5fd5eb8-093b-47bc-830e-3c59e1979348",
+   "name": "Aggregate"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+   "typeVersion": 1.3,
+   "position": [
+    880,
+    1952
+   ],
+   "id": "84ae6b08-aefd-41cf-9134-5ce98c67bf4d",
+   "name": "Simple Memory"
+  },
+  {
+   "parameters": {
+    "mode": "retrieve-as-tool",
+    "toolDescription": "Use this knowledge base to build a foundation for creating stories and narratives about the Bible.",
+    "memoryKey": {
+     "__rl": true,
+     "value": "bible",
+     "mode": "list",
+     "cachedResultName": "bible"
+    },
+    "topK": 10
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+   "typeVersion": 1.3,
+   "position": [
+    992,
+    1952
+   ],
+   "id": "ea103413-6428-4da9-9f84-a5cd39c1db6f",
+   "name": "Simple Vector Store"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    992,
+    2112
+   ],
+   "id": "3ee38c78-425b-4d4c-aef8-8059b783c4f0",
+   "name": "Embeddings Google Gemini"
+  },
+  {
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "const items = $('Generate audio1').all();\nconst results = [];\n\nfor (const item of items) {\n    const binaryData = item.binary?.data;\n    \n    if (!binaryData) continue;\n\n    let fileSizeInBytes = binaryData.fileSize;\n\n    // Converte a string (ex: \"363 kB\") para número absoluto de bytes\n    if (typeof fileSizeInBytes === 'string') {\n        const parts = fileSizeInBytes.split(' ');\n        const valor = parseFloat(parts[0]);\n        const unidade = parts[1]?.toLowerCase() || '';\n\n        if (unidade.includes('m')) { // MB\n            fileSizeInBytes = valor * 1024 * 1024;\n        } else if (unidade.includes('k')) { // kB\n            fileSizeInBytes = valor * 1024;\n        } else {\n            fileSizeInBytes = valor;\n        }\n    }\n\n    /**\n     * AJUSTE DE PRECISÃO:\n     * Seu teste: 363 kB (~371.712 bytes) para 18 segundos.\n     * Cálculo: 371712 / 18 = 20650 bytes por segundo.\n     */\n    const bytesPerSecond = 20650; \n    const durationSeconds = fileSizeInBytes / bytesPerSecond;\n\n    results.push({\n        json: {\n            duration: new Date(durationSeconds * 1000).toISOString().substr(11, 8)\n        }\n    });\n}\n\nreturn results;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "id": "93419d11-33a9-4deb-950d-337844cfa0f9",
+   "name": "video_time1"
+  },
+  {
+   "parameters": {
+    "aggregate": "aggregateAllItemData",
+    "options": {
+     "includeBinaries": false
+    }
+   },
+   "type": "n8n-nodes-base.aggregate",
+   "typeVersion": 1,
+   "position": [
+    512,
+    128
+   ],
+   "id": "cab6ebda-0e1e-495a-a2f9-2da414bf6154",
+   "name": "Aggregate1"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.noOp",
+   "typeVersion": 1,
+   "position": [
+    96,
+    320
+   ],
+   "id": "9643c037-6618-4b06-9b11-e53d5590a003",
+   "name": "No Operation, do nothing2"
+  },
+  {
+   "parameters": {
+    "pollTimes": {
+     "item": [
+      {
+       "hour": 8
+      }
+     ]
+    },
+    "feedUrl": "https://www.youtube.com/feeds/videos.xml?channel_id="
+   },
+   "type": "n8n-nodes-base.rssFeedReadTrigger",
+   "typeVersion": 1,
+   "position": [
+    -2704,
+    1808
+   ],
+   "id": "aafc1c0e-ab17-4090-82a1-d37cceac8f0e",
+   "name": "RSS @canal1",
+   "disabled": true
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "busca_video": {
+   "main": [
+    [
+     {
+      "node": "busca_legenda",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_legenda": {
+   "main": [
+    [
+     {
+      "node": "trata_legenda",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "adiciona_tema_video": {
+   "main": [
+    [
+     {
+      "node": "narration",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive": {
+   "main": [
+    [
+     {
+      "node": "busca_video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait3": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items1": {
+   "main": [
+    [
+     {
+      "node": "No Operation, do nothing1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "openai_dalle3_imagem1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Split Out": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [
+     {
+      "node": "No Operation, do nothing",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Google Drive",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Split Out1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "image prompt creator",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "Structured Output Parser",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Structured Output Parser": {
+   "ai_outputParser": [
+    [
+     {
+      "node": "image prompt creator",
+      "type": "ai_outputParser",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "manual": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "openai_dalle3_imagem1": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request": {
+   "main": [
+    [
+     {
+      "node": "Google Drive5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive5": {
+   "main": [
+    [
+     {
+      "node": "Wait3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "No Operation, do nothing1": {
+   "main": [
+    [
+     {
+      "node": "Send a message",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Send a message": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields": {
+   "main": [
+    [
+     {
+      "node": "Split Out1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "narration",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "titulo / thumb text / description",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "Structured Output Parser2",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "Structured Output Parser3",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Structured Output Parser2": {
+   "ai_outputParser": [
+    [
+     {
+      "node": "narration",
+      "type": "ai_outputParser",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Structured Output Parser3": {
+   "ai_outputParser": [
+    [
+     {
+      "node": "titulo / thumb text / description",
+      "type": "ai_outputParser",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Generate audio": {
+   "main": [
+    [
+     {
+      "node": "Google Drive7",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "video_time",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Merge": {
+   "main": [
+    [
+     {
+      "node": "titulo / thumb text / description",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "narration": {
+   "main": [
+    [
+     {
+      "node": "Generate audio",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "video_time": {
+   "main": [
+    [
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "titulo / thumb text / description": {
+   "main": [
+    [
+     {
+      "node": "Create a document",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "image prompt creator",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Create a document": {
+   "main": [
+    [
+     {
+      "node": "Update a document",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "image prompt creator": {
+   "main": [
+    [
+     {
+      "node": "Split Out",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "trata_legenda": {
+   "main": [
+    [
+     {
+      "node": "adiciona_tema_video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Generate audio1": {
+   "main": [
+    [
+     {
+      "node": "Google Drive8",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields1": {
+   "main": [
+    [
+     {
+      "node": "chunk_narracao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "chunk_narracao": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items2": {
+   "main": [
+    [
+     {
+      "node": "No Operation, do nothing2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Generate audio1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive8": {
+   "main": [
+    [
+     {
+      "node": "Wait1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Simple Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "narration",
+      "type": "ai_memory",
+      "index": 0
+     },
+     {
+      "node": "titulo / thumb text / description",
+      "type": "ai_memory",
+      "index": 0
+     },
+     {
+      "node": "image prompt creator",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Simple Vector Store": {
+   "ai_tool": [
+    [
+     {
+      "node": "narration",
+      "type": "ai_tool",
+      "index": 0
+     },
+     {
+      "node": "titulo / thumb text / description",
+      "type": "ai_tool",
+      "index": 0
+     },
+     {
+      "node": "image prompt creator",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings Google Gemini": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Simple Vector Store",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "video_time1": {
+   "main": [
+    [
+     {
+      "node": "Aggregate",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "RSS @canal1": {
+   "main": [
+    [
+     {
+      "node": "Split Out1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "95ac42d4-9334-4c5b-ad48-8417692a0664",
+ "meta": {
+  "instanceId": "e968bb3ef712785332f9409e5e269ec2acd9f35e86b417980143414c2b02365c"
+ },
+ "id": "nO18OA9dURo82qJN",
+ "tags": []
+}

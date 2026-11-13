@@ -1,0 +1,20 @@
+{
+  "_leia": "MELHORADOR automático da linha PRODUTOS (produto\\melhorador.py). DESLIGADO até o dono dar o sinal (LIGAR_MELHORADOR.bat em D:\\video-fila\\linhas\\PRODUTOS). modo 'ensaio' = só propõe e anota; 'aplicar' = aplica com backup e vigia.",
+  "ligado": false,
+  "modo": "ensaio",
+  "cadeia": {
+    "analista": ["agy/gemini-3.8-flash-high", "agy/gemini-3.8-flash-tiered"],
+    "decisor": ["cc/claude-opus-5-5", "antigravity/claude-opus-4-6-thinking", "kr/claude-sonnet-4.5", "agy/gemini-3.8-flash-high"],
+    "revisor": ["agy/gemini-3.8-flash-tiered", "agy/gemini-3.8-flash-high"]
+  },
+  "_cadeia": "ordem de preferência por papel; o 1º DISPONÍVEL faz. Modelo novo (ex.: argo) = acrescentar na lista quando o dono avisar. Revisor tenta usar modelo DIFERENTE do decisor.",
+  "modelos_desligados": ["kr/claude-sonnet-4.5"],
+  "_modelos_desligados": "Kiro sem crédito até 01/11 (dono 27/10: não usar).",
+  "cc_custo_pontos": 6,
+  "cc_certeza": 1.5,
+  "indisponivel_h": 2,
+  "max_mudancas": 2,
+  "desfazer_se_cair": 0.5,
+  "max_regras": 20,
+  "pausa_min": 30
+}

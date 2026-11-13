@@ -1,0 +1,1992 @@
+[
+ {
+  "descricao": "Exibição de caixas de comentários/perguntas de usuários na tela como gancho inicial",
+  "origem": "aplicado pela sessão: MS Energy 25/10: montagem_ms._png_pergunta - gancho em pergunta vira cartao branco estilo 'responder comentario' do Instagram com rotulo honesto 'Pergunta que a gente sempre recebe' (previa _diag\\analise\\folhas\\gancho_pergunta_20261025.jpg)",
+  "em": "2026-10-25T08:12:27"
+ },
+ {
+  "descricao": "Legenda dinâmica com preenchimento de cor progressivo (amarelo)",
+  "origem": "aplicado pela sessão: MS Energy 25/10: montagem_ms._png_legenda(destaque) + blocos_palavras - palavra falada em amarelo (karaoke), 1 imagem por palavra com o tempo do Whisper; MS_KARAOKE=0 desliga; ffmpeg falhou = refaz sem (teste _diag\\analise\\folhas\\teste_karaoke_quadros.jpg)",
+  "em": "2026-10-25T08:24:11"
+ },
+ {
+  "descricao": "Legenda centralizada palavra por palavra com destaque em cor contrastante (verde neon)",
+  "origem": "aplicado pela sessão: MS Energy 25/10: montagem_ms._png_legenda(destaque) + blocos_palavras - palavra falada em amarelo (karaoke), 1 imagem por palavra com o tempo do Whisper; MS_KARAOKE=0 desliga; ffmpeg falhou = refaz sem (teste _diag\\analise\\folhas\\teste_karaoke_quadros.jpg)",
+  "em": "2026-10-25T08:24:25"
+ },
+ {
+  "descricao": "Legenda com palavra-chave única centralizada, grande, branca com contorno preto grosso, aparece sincronizada com a fala em momentos-chave da narrativa",
+  "origem": "aplicado pela sessão: MS Energy 25/10: montagem_ms._png_legenda(destaque) + blocos_palavras - palavra falada em amarelo (karaoke), 1 imagem por palavra com o tempo do Whisper; MS_KARAOKE=0 desliga; ffmpeg falhou = refaz sem (teste _diag\\analise\\folhas\\teste_karaoke_quadros.jpg)",
+  "em": "2026-10-25T08:24:52"
+ },
+ {
+  "descricao": "Usa 'na sua opinião' + 'tenho certeza que muitos vão dizer' para criar debate antecipado",
+  "origem": "aplicado pela sessão: Instagram das empresas 25/10: legenda_empresa + empresas_instagram.json - toda legenda termina com pergunta facil de responder por pauta (debate = comentario), mais 'Comente SOL' com o vigia respondendo no Direct",
+  "em": "2026-10-25T08:25:10"
+ },
+ {
+  "descricao": "Headline estática com gancho de curiosidade no topo",
+  "origem": "aplicado pela sessão: 25/10 videos profissionais de produto (postador\\bin\\produto): karaoke na cor da marca, frase no topo, topicos numerados, cartao de pergunta, conversa WhatsApp animada, fundo desfocado",
+  "em": "2026-10-25T12:09:52"
+ },
+ {
+  "descricao": "Headline fixa no topo com fundo preto e texto em duas cores",
+  "origem": "aplicado pela sessão: 25/10 videos profissionais de produto (postador\\bin\\produto): karaoke na cor da marca, frase no topo, topicos numerados, cartao de pergunta, conversa WhatsApp animada, fundo desfocado",
+  "em": "2026-10-25T12:09:57"
+ },
+ {
+  "descricao": "Uso de títulos numerados e em caixa alta na parte inferior da tela para organizar tópicos.",
+  "origem": "aplicado pela sessão: 25/10 videos profissionais de produto (postador\\bin\\produto): karaoke na cor da marca, frase no topo, topicos numerados, cartao de pergunta, conversa WhatsApp animada, fundo desfocado",
+  "em": "2026-10-25T12:10:00"
+ },
+ {
+  "descricao": "Uso de recortes de tela (UI) para contar a história",
+  "origem": "aplicado pela sessão: 25/10 videos profissionais de produto (postador\\bin\\produto): karaoke na cor da marca, frase no topo, topicos numerados, cartao de pergunta, conversa WhatsApp animada, fundo desfocado",
+  "em": "2026-10-25T12:10:07"
+ },
+ {
+  "descricao": "Enquadramento com desfoque de borda dinâmico (Cinematic Blur)",
+  "origem": "aplicado pela sessão: 25/10 videos profissionais de produto (postador\\bin\\produto): karaoke na cor da marca, frase no topo, topicos numerados, cartao de pergunta, conversa WhatsApp animada, fundo desfocado",
+  "em": "2026-10-25T12:10:10"
+ },
+ {
+  "descricao": "Narração em primeira pessoa com tom de desabafo informal ('cê não tem noção do perrengue', 'o infeliz', 'aquele chato')",
+  "origem": "aprovado pelo dono",
+  "em": "2026-10-25T16:34:01"
+ },
+ {
+  "descricao": "Uso de adjetivos de julgamento direto ('A coitada')",
+  "origem": "aplicado pela sessão: claude-code-video: prompt_roteiro_entretenimento, bloco JEITO DE NARRAR (28/10)",
+  "em": "2026-10-28T22:00:09"
+ },
+ {
+  "descricao": "Uso de adjetivação inusitada ('humilhação minimalista')",
+  "origem": "aplicado pela sessão: claude-code-video: prompt_roteiro_entretenimento, bloco JEITO DE NARRAR (28/10)",
+  "em": "2026-10-28T22:00:09"
+ },
+ {
+  "descricao": "Subversão cômica no final com comportamento exagerado do Naruto",
+  "origem": "aplicado pela sessão: claude-code-video: prompt_roteiro_entretenimento, bloco JEITO DE NARRAR (28/10)",
+  "em": "2026-10-28T22:00:10"
+ },
+ {
+  "descricao": "Estrutura de contradição acumulativa: lista sobreviventes improváveis, depois inverte com morte absurda do mais preparado",
+  "origem": "aplicado pela sessão: claude-code-video: prompt_roteiro_entretenimento, bloco JEITO DE NARRAR (28/10)",
+  "em": "2026-10-28T22:00:10"
+ },
+ {
+  "descricao": "Encerramento meta: 'como eu desliguei sua respiração automática / porque você perdeu o jogo'",
+  "origem": "aplicado pela sessão: claude-code-video: prompt_roteiro_entretenimento, bloco JEITO DE NARRAR (28/10)",
+  "em": "2026-10-28T22:00:11"
+ },
+ {
+  "descricao": "Infográfico visual explicativo (48.4s): emoji de personagem + emoji de caixão = personagem chibi vestida de luto",
+  "origem": "aplicado pela sessão: claude-code-video: EDITOR_ENTRETENIMENTO.md truques dos parceiros (equação visual, glow flashback, blur antes do impacto, zoom lente) 28/10",
+  "em": "2026-10-28T22:00:20"
+ },
+ {
+  "descricao": "Ilustração esquemática em pensamento mostrando fórmula de soma (Personagem + Item = Ladrão)",
+  "origem": "aplicado pela sessão: claude-code-video: EDITOR_ENTRETENIMENTO.md truques dos parceiros (equação visual, glow flashback, blur antes do impacto, zoom lente) 28/10",
+  "em": "2026-10-28T22:00:20"
+ },
+ {
+  "descricao": "Filtro de brilho/glow (Dreamy Filter) em cenas de flashback",
+  "origem": "aplicado pela sessão: claude-code-video: EDITOR_ENTRETENIMENTO.md truques dos parceiros (equação visual, glow flashback, blur antes do impacto, zoom lente) 28/10",
+  "em": "2026-10-28T22:00:21"
+ },
+ {
+  "descricao": "Motion blur/velocidade em cena de ação (atropelamento)",
+  "origem": "aplicado pela sessão: claude-code-video: EDITOR_ENTRETENIMENTO.md truques dos parceiros (equação visual, glow flashback, blur antes do impacto, zoom lente) 28/10",
+  "em": "2026-10-28T22:00:21"
+ },
+ {
+  "descricao": "Zoom dramático no rosto com distorção de lente (olhos enormes, boca aberta) aos 51s",
+  "origem": "aplicado pela sessão: claude-code-video: EDITOR_ENTRETENIMENTO.md truques dos parceiros (equação visual, glow flashback, blur antes do impacto, zoom lente) 28/10",
+  "em": "2026-10-28T22:00:22"
+ },
+ {
+  "descricao": "Mapa com rota pontilhada animada",
+  "origem": "aplicado pela sessão: claude-code-video já tinha: EDITOR_ENTRETENIMENTO mapa com rota pontilhada (Trim Paths @remotion/paths)",
+  "em": "2026-10-28T22:00:29"
+ },
+ {
+  "descricao": "Mapa mundi minimalista estilo flat com setas tracejadas animadas mostrando rotas comerciais/fluxos",
+  "origem": "aplicado pela sessão: claude-code-video já tinha: EDITOR_ENTRETENIMENTO mapa com rota pontilhada (Trim Paths @remotion/paths)",
+  "em": "2026-10-28T22:00:29"
+ },
+ {
+  "descricao": "Personagem acompanhado por um mascote/bicho pelúcia com design dark/estilizado (coelho coroa/olhos pretos)",
+  "origem": "reprovado pela sessão: 01/11 ER: veio de vídeo nosso (url PREVIA), não de parceiro; e pede mascote no ombro do personagem dentro da cena — regra da dona: mascote chibi só como figurinha PNG colada, nunca integrada à cena",
+  "em": "2026-11-01T15:36:35"
+ },
+ {
+  "descricao": "Seta amarela cartoon minimalista apontando elemento secundário na água",
+  "origem": "aplicado pela sessão: recapd bin/anime_cartoes.py c_seta (palavras repara/detalhe/olha): seta amarela grossa com contorno preto apontando pro centro e deslizando; ANIME_CARTOES=0 desliga; testado em trecho real (seta_grade.jpg 01/11)",
+  "em": "2026-11-01T23:25:21"
+ },
+ {
+  "descricao": "Efeito de raio divino / flare celestial brilhante sobre a boca ao saborear comida",
+  "origem": "aplicado pela sessão: recapd bin/anime_cartoes.py c_triunfo (raios dourados girando + estrela + VITÓRIA) e fx_visual V-11 brasas no triunfo; testado na PREVIA3/PREVIA4 01/11",
+  "em": "2026-11-01T23:25:32"
+ },
+ {
+  "descricao": "Transição com dupla exposição suave / fusão de memória (ghost overlay)",
+  "origem": "aplicado pela sessão: recapd bin/fx_visual.py memoria (lembrou/passado/memória): tmix 18 quadros + blur + brilho 1,2 s = fantasma da cena anterior sobre a nova; ANIME_FX_MEMORIA=0; testado em trecho real (seta_grade.jpg 01/11)",
+  "em": "2026-11-01T23:25:44"
+ },
+ {
+  "descricao": "Uso de mapa/GPS detalhado em tela de computador para contextualizar a cena de investigação/localização",
+  "origem": "aplicado pela sessão: recapd bin/anime_cartoes.py c_gps (investigou/procurou/perseguiu): mapa quadriculado com trilha de pontos até o alfinete; testado na PREVIA3 01/11",
+  "em": "2026-11-01T23:25:55"
+ },
+ {
+  "descricao": "Ondas circulares concêntricas de choque sonoro/rugido emitidas a partir da boca do monstro",
+  "origem": "reprovado pela sessão: Overlays especificos de RPG/monstro/GTA RP/POV bizarro; nao cabem em anuncio real de energia solar",
+  "em": "2026-11-02T13:51:24"
+ },
+ {
+  "descricao": "Exibição de card/ficha estatística com status e atributos de personagem (Monster Profile / Stats System)",
+  "origem": "reprovado pela sessão: Overlays especificos de RPG/monstro/GTA RP/POV bizarro; nao cabem em anuncio real de energia solar",
+  "em": "2026-11-02T13:51:36"
+ },
+ {
+  "descricao": "Cartão translúcido de identificação/apresentação de personagem com forma de onda de áudio animada",
+  "origem": "reprovado pela sessão: Overlays especificos de RPG/monstro/GTA RP/POV bizarro; nao cabem em anuncio real de energia solar",
+  "em": "2026-11-02T13:51:49"
+ },
+ {
+  "descricao": "Enquadramento de POV com objeto estatico centralizado (tijolo/pe) no chao",
+  "origem": "reprovado pela sessão: Overlays especificos de RPG/monstro/GTA RP/POV bizarro; nao cabem em anuncio real de energia solar",
+  "em": "2026-11-02T13:52:05"
+ },
+ {
+  "descricao": "Tela de cadastro/login com cupom e seletor de origem no jogo",
+  "origem": "reprovado pela sessão: Overlays especificos de RPG/monstro/GTA RP/POV bizarro; nao cabem em anuncio real de energia solar",
+  "em": "2026-11-02T13:52:19"
+ },
+ {
+  "descricao": "Quebra de expectativa visual (Substituição de afeto por agressão cômica)",
+  "origem": "reprovado pela sessão: Humor de agressao incompativel com anuncio serio de produto",
+  "em": "2026-11-02T17:59:48"
+ },
+ {
+  "descricao": "Legenda centralizada palavra por palavra (estilo 'karaoke' rápido)",
+  "origem": "aplicado pela sessão: Ja aplicado via componente Karaoke (src/lib/karaoke.tsx) com destaque palavra a palavra",
+  "em": "2026-11-02T17:59:59"
+ },
+ {
+  "descricao": "Revelação de estampa termocrômica (mágica com água) em produto físico curiosidade",
+  "origem": "reprovado pela sessão: Estetica de anime/manga/gaming/true-crime/girias incompativel com anuncios B2B profissionais no postador-de-videos",
+  "em": "2026-11-02T19:23:18"
+ },
+ {
+  "descricao": "Tipografia de legenda em estilo script/cursiva itálica amarela com contorno preto pesado",
+  "origem": "reprovado pela sessão: Tipografia script/cursiva rústica não combina com anúncios B2B de tecnologia/SaaS (Inovare Agenda), onde a regra exige tipografia limpa e legível >=32px (Montserrat)",
+  "em": "2026-11-03T16:38:24"
+ },
+ {
+  "descricao": "Uso de mancha/máscara de rasgo/lacre de papel nas bordas ou cantos simulando transição dinâmica de manhua/mangá.",
+  "origem": "reprovado pela sessão: Máscara de rasgo de papel estilo manhua/mangá não serve para vídeos publicitários corporativos de produtos SaaS/clínicas, que exigem transições limpas de agência",
+  "em": "2026-11-03T16:39:56"
+ },
+ {
+  "descricao": "Zoom dinâmico agressivo com desfoque de movimento em cenas de impacto físico (mesa quebrada)",
+  "origem": "aplicado pela sessão: claude-code-video/remotion/src/lib/efeitos.tsx (BorraoMovimento + Tremor) e vivo.tsx (Impacto) ja implementados e aplicados nas entradas de impacto de advance_novoestrela_20261104_004353",
+  "em": "2026-11-04T01:16:52"
+ },
+ {
+  "descricao": "Inversão de cores/sombra total no rosto com destaque nos olhos vermelhos brilhantes",
+  "origem": "reprovado pela sessão: Estetica de anime/vilao (olhos vermelhos no escuro), incompativel com anuncio comercial de energia solar",
+  "em": "2026-11-04T01:22:45"
+ },
+ {
+  "descricao": "Uso de fotos coladas em painel na parede focando na obsessão/stalking",
+  "origem": "reprovado pela sessão: Mural de fotos estilo stalker/obsessao de anime, incompativel com anuncio comercial de energia solar",
+  "em": "2026-11-04T01:22:54"
+ },
+ {
+  "descricao": "Círculo de destaque com pulso/foco em elemento-chave no hook inicial",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/inovarecom_ia_20261104_044839/Cena0.tsx: anel pulsante de foco no hook inicial com fade-out completo antes da Fase 2",
+  "em": "2026-11-04T07:32:24"
+ },
+ {
+  "descricao": "Color grading / tint monocromático temático por cena (P&B, vermelho e verde)",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/inovarecom_ia_20261104_044839/Cena1.tsx: tint monocromatico tematico vermelho (Antes/fracasso) vs verde (Depois/sucesso)",
+  "em": "2026-11-04T07:32:49"
+ },
+ {
+  "descricao": "Corte rápido do vídeo com alternância de filtros coloridos por cena (vermelho, preto/branco, verde) cobrindo a tela inteira em tons translúcidos",
+  "origem": "reprovado pela sessão: duplicata de 64ed6121",
+  "em": "2026-11-04T07:34:50"
+ },
+ {
+  "descricao": "Inclusão de documento de identidade realista detalhado (RG/Cartão de ID) em close com dados fictícios para construir lore (Segundo 11.6)",
+  "origem": "reprovado pela sessão: RG ficticio exclusivo de lore/crime e viola regra de propaganda",
+  "em": "2026-11-04T07:35:03"
+ },
+ {
+  "descricao": "Transição de flashback em preto e branco com efeito de chuva e clima dramático (Segundos 58.2 a 66.0)",
+  "origem": "reprovado pela sessão: flashback dramatico de chuva inadequado para B2B",
+  "em": "2026-11-04T07:35:15"
+ },
+ {
+  "descricao": "Split screen persistente: metade azul escuro com título/hook fixo, metade bege com conteúdo que muda",
+  "origem": "reprovado pela sessão: Split-screen fixo reduz area util em Reels de produto",
+  "em": "2026-11-04T08:08:23"
+ },
+ {
+  "descricao": "Título fixo estilo canal em destaque no topo com pergunta de engajamento",
+  "origem": "reprovado pela sessão: Banner preto com amarelo no topo polui enquadramento do apresentador",
+  "em": "2026-11-04T08:08:35"
+ },
+ {
+  "descricao": "Corte transversal 3D animado comparando lareira mal desenhada vs bem desenhada",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:34:58"
+ },
+ {
+  "descricao": "Arte ilustrada cinematic estilo noir/true crime em todas as cenas",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:35:09"
+ },
+ {
+  "descricao": "Texto 'derretendo' fixado no gramado (tracking)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:35:20"
+ },
+ {
+  "descricao": "Legendas em verde neon trackeadas palavra por palavra sobre os artistas/elementos visuais originais",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:35:33"
+ },
+ {
+  "descricao": "Uso de imagens ilustrativas pop-up flutuantes em cima de gameplay de parkour de Minecraft correspondentes exatamente ao tema da pergunta absurda em cada trecho.",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:35:43"
+ },
+ {
+  "descricao": "Animação de escrita em tempo real (mão desenhando)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:35:54"
+ },
+ {
+  "descricao": "Captura de tela de console/terminal com comandos visíveis + texto amarelo sobreposto",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:36:06"
+ },
+ {
+  "descricao": "Badge 'PARTE 1' fixa na parte inferior sobre um trilho escuro de trem",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:36:17"
+ },
+ {
+  "descricao": "Close extremo em detalhes (olho no segundo 87.1, sorriso no 77.9)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:36:31"
+ },
+ {
+  "descricao": "Uso de interface de 'menu de jogo' ou 'janela de status' sobreposta ao personagem",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:36:42"
+ },
+ {
+  "descricao": "Palavras-chave únicas em CAIXA ALTA sincronizadas com a fala, posicionadas sobre o rosto/objeto em close",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:36:51"
+ },
+ {
+  "descricao": "Contador decrescente de saldo durante chamada telefônica na tela (segundo 93)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:37:03"
+ },
+ {
+  "descricao": "Tags amarelas contextuais sobre a imagem (ex: 'MAIO DE 1995 - LOS ANGELES', 'lojas de fora irritadas')",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:37:14"
+ },
+ {
+  "descricao": "Animação 2D estilo cartoon com narrativa visual completa sem narração",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:37:24"
+ },
+ {
+  "descricao": "Uso de 'jump scare' visual com mudança súbita de expressão facial do personagem.",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:37:33"
+ },
+ {
+  "descricao": "Enquadramento com 'letterbox' (barras pretas superiores e inferiores)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:37:43"
+ },
+ {
+  "descricao": "Interface de HUD futurista (estilo cockpit/computador)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:37:55"
+ },
+ {
+  "descricao": "Letterbox (tarjas pretas) fixas no topo e embaixo",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:03"
+ },
+ {
+  "descricao": "Split-screen vertical comparando o mesmo jogador em ângulos ou momentos diferentes (quadro 10)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:09"
+ },
+ {
+  "descricao": "Diagrama esquemático interativo (mapa de nave)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:14"
+ },
+ {
+  "descricao": "Inserção de painéis de mangá em preto e branco sobre fundo animado com efeitos de energia/explosão",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:19"
+ },
+ {
+  "descricao": "Mapa ilustrado estilo RPG/histórico com bandeiras de marcação de locais (Itaca e Troia)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:24"
+ },
+ {
+  "descricao": "Cena dividida entre monstros marinhos de múltiplas cabeças (hidra/Cila) e redemoinho gigante (Caríbdis)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:29"
+ },
+ {
+  "descricao": "Evolução do protagonista de cabelo escuro para cabelo totalmente branco indicando passagem de tempo / envelhecimento",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:35"
+ },
+ {
+  "descricao": "Uso de organograma/fluxograma para explicar relações entre personagens",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:40"
+ },
+ {
+  "descricao": "Timeline dinâmica interativa na base do vídeo",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:45"
+ },
+ {
+  "descricao": "Legenda com efeito de brilho/glow dinâmico",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:50"
+ },
+ {
+  "descricao": "Legenda com estilo de 'mangá' (fonte com contorno grosso e sombra projetada)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:54"
+ },
+ {
+  "descricao": "Legenda com preenchimento gradiente e stroke duplo",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:38:59"
+ },
+ {
+  "descricao": "Interface de fichas técnicas com ícones de caveira e labels estilizados (TECHNIQUES, POWER)",
+  "origem": "reprovado pela sessão: Estetica de games/anime/true-crime/letterbox/manga incompativel com regras de safe-zone e componente padrao lib/karaoke de anuncios verticais de produto",
+  "em": "2026-11-04T17:39:04"
+ },
+ {
+  "descricao": "Palavras-chave em caixa alta amarela sincronizadas com fala (RECLAMARAM, SURGIR, ENGANADOS, POSICIONAR, DISPENSADOR, AS, USÁ)",
+  "origem": "reprovado pela sessão: Ja temos componente Karaoke padrao obrigatorio com destaque em pilula por palavra em src/lib/karaoke.tsx",
+  "em": "2026-11-04T23:57:55"
+ },
+ {
+  "descricao": "Legenda com palavras destacadas coloridas em bloco estilo TikTok dinâmico por palavra",
+  "origem": "reprovado pela sessão: Ja temos componente Karaoke padrao obrigatorio com destaque em pilula por palavra em src/lib/karaoke.tsx",
+  "em": "2026-11-04T23:58:08"
+ },
+ {
+  "descricao": "Legenda com efeito de 'bounce' ou pulo constante a cada palavra falada",
+  "origem": "reprovado pela sessão: Ja temos componente Karaoke padrao obrigatorio com destaque em pilula por palavra em src/lib/karaoke.tsx",
+  "em": "2026-11-04T23:58:20"
+ },
+ {
+  "descricao": "Animação 3D médica/anatômica do dedo e junta em corte transversal",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:58:31"
+ },
+ {
+  "descricao": "Efeito de 'olhos em espiral' (hipnose/confusão) sobreposto ao rosto da personagem.",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:58:42"
+ },
+ {
+  "descricao": "Caracteres coreanos/asiáticos grandes como efeito sonoro visual",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:58:53"
+ },
+ {
+  "descricao": "Efeito de impacto/rachadura no chão com aura luminosa ao redor do personagem",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:59:05"
+ },
+ {
+  "descricao": "Transição brusca de anime colorido para sketch/esboço em preto e branco com linhas expressivas",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:59:15"
+ },
+ {
+  "descricao": "Uso de elementos 3D/sobreposição criativa (PC antigo sobre o personagem)",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:59:24"
+ },
+ {
+  "descricao": "Uso de meme de reação (Willem Dafoe) integrado à cena",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:59:35"
+ },
+ {
+  "descricao": "Enquadramento cenográfico em plongée total mostrando a formiga minúscula cercada por monstros gigantes",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:59:44"
+ },
+ {
+  "descricao": "Composição de personagem em silhueta contra luz estourada (backlight)",
+  "origem": "reprovado pela sessão: Efeitos visuais especificos de anime/manhwa/anatomia medica que nao se aplicam a anuncios institucionais/produto",
+  "em": "2026-11-04T23:59:54"
+ },
+ {
+  "descricao": "Faixa de hook fixa no topo em bloco branco sólido com tipografia preta compacta condensada",
+  "origem": "reprovado pela sessão: Tarja branca estatica de meme de anime no topo viola a safe zone y>=150 e estetica corporativa B2B de Reels",
+  "em": "2026-11-05T02:38:02"
+ },
+ {
+  "descricao": "Uso da gíria popular carioca 'o bagulho zaralha' para indicar caos/descontrole repentino",
+  "origem": "reprovado pela sessão: Giria carioca informal de anime incompativel com anuncios B2B de software CRM",
+  "em": "2026-11-05T02:38:12"
+ },
+ {
+  "descricao": "Moldura/template com barras superior e inferior estilizadas com título 'TOP' e 'ANIME' com gradiente azul/neon",
+  "origem": "reprovado pela sessão: Moldura TOP ANIME nao se aplica a anuncios comerciais de software B2B",
+  "em": "2026-11-05T02:38:22"
+ },
+ {
+  "descricao": "Narrativa comparativa em formato de showcase individual de personagens (apresentação em paralelo)",
+  "origem": "reprovado pela sessão: Showcase de personagens de batalha de anime nao se aplica a locucao pronta de produto B2B",
+  "em": "2026-11-05T02:38:32"
+ },
+ {
+  "descricao": "Uso de gráficos conceituais explicativos simples em animação 2D (espiral perfurando o gelo) para ilustrar a técnica do personagem.",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/crmchatwoot_ia_20261105_005814/Video.tsx: diagrama conceitual 2D animado explicando a integracao CRM + IA + Chatwoot -> Helpdesk",
+  "em": "2026-11-05T02:38:41"
+ },
+ {
+  "descricao": "Barra de progresso (progress bar) no topo da tela",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/crmchatwoot_ia_20261105_005814/Video.tsx: barra de progresso superior em y=152",
+  "em": "2026-11-05T02:38:51"
+ },
+ {
+  "descricao": "Vignette colorida adaptativa (Mood Lighting)",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/crmchatwoot_ia_20261105_005814/Video.tsx: vinheta colorida adaptativa (alerta coral no problema e azul marca na solucao)",
+  "em": "2026-11-05T02:39:01"
+ },
+ {
+  "descricao": "Palavras-chave isoladas aparecem gigantes sobre a cena do anime (PONTINHO, QUANTIDADE, UM, POR, DÉCADAS, VÁRIOS)",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/crmchatwoot_ia_20261105_005814/Video.tsx: palavras-chave em destaque gigante sincronizadas na abertura",
+  "em": "2026-11-05T02:39:11"
+ },
+ {
+  "descricao": "Indicador de capítulo/tópico no canto superior esquerdo com numeração e título.",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/crmchatwoot_ia_20261105_005814: indicador de capítulo/tópico numerado no canto superior esquerdo (01 O Problema, 02 Como Funciona, 03 O Resultado) que avança por cena",
+  "em": "2026-11-05T03:21:50"
+ },
+ {
+  "descricao": "Split-screen vertical com gameplay/vídeo em cima e POV/contexto em baixo",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:24:15"
+ },
+ {
+  "descricao": "Fundo espelhado com desfoque (Blurry Mirror Background)",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:24:27"
+ },
+ {
+  "descricao": "Inserção de personagem (PNG) interagindo com cena de filme",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:24:37"
+ },
+ {
+  "descricao": "Uso de 'quadrinhos' com bordas brancas e sombra projetada",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:24:44"
+ },
+ {
+  "descricao": "Efeito de censura/pixelização narrativa",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:24:51"
+ },
+ {
+  "descricao": "Uso de print de rede social (Twitter/X) como elemento narrativo",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:24:58"
+ },
+ {
+  "descricao": "Uso de 'picture-in-picture' (PIP) para mostrar detalhes da trama",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:25:08"
+ },
+ {
+  "descricao": "Menu de escolhas pixelado estilo RPG/Visual Novel retrô com opções numeradas (+pontos)",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:25:19"
+ },
+ {
+  "descricao": "Barra de progresso vertical com preenchimento animado",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:25:30"
+ },
+ {
+  "descricao": "Corte abrupto de primeira pessoa (POV campo de treino) para footage profissional de jogo real",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:25:42"
+ },
+ {
+  "descricao": "Corte dinâmico em grade/mosaico de múltiplos painéis no segundo 1555.3",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:25:53"
+ },
+ {
+  "descricao": "Time-lapse de construção de estrada com operários em movimento acelerado",
+  "origem": "reprovado pela sessão: Estetica de gameplay/webtoon/meme/RPG nao serve para anuncio corporativo B2B de software com apresentador real",
+  "em": "2026-11-05T03:26:04"
+ },
+ {
+  "descricao": "Transição de mock de celular/app no final (segundo 3311)",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:27"
+ },
+ {
+  "descricao": "Simulação de digitação em tempo real no console do jogo",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:27"
+ },
+ {
+  "descricao": "Caixa de comentário estilo rede social com foto de perfil e pergunta simulando interação de usuário (Tiririca Deputado)",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:27"
+ },
+ {
+  "descricao": "Uso de analogias visuais diretas (ex: 'lanterna' para o peixe)",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:28"
+ },
+ {
+  "descricao": "Seta vermelha grande e estática para guiar o olhar",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:28"
+ },
+ {
+  "descricao": "Rodapé fixo com CTA de algoritmo e inscrição",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:28"
+ },
+ {
+  "descricao": "Inserção de ilustração 3D/CGI explicativa",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:28"
+ },
+ {
+  "descricao": "Perspectiva macro/miniaturização: pessoas minúsculas interagindo com objetos gigantes do cotidiano (como caixa de biscoito e instrumentos médicos gigantes).",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:28"
+ },
+ {
+  "descricao": "Simulação de tela de monitoramento/babá eletrônica em visão noturna preto e branco",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:29"
+ },
+ {
+  "descricao": "Contadores digitais flutuantes azuis na cabeça dos personagens indicando o tempo/pontuação",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:29"
+ },
+ {
+  "descricao": "Exibição de card de status com rank e objetivos em estilo RPG",
+  "origem": "reprovado pela sessão: Efeitos de gameplay/anime/RPG ou CTA de YouTube que nao cabem em anuncio institucional de software de WhatsApp no Reels",
+  "em": "2026-11-05T08:49:29"
+ },
+ {
+  "descricao": "Curadoria de conteúdo baseada em nostalgia de 'One-Hit Wonders'",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:45:54"
+ },
+ {
+  "descricao": "Mashup visual de universos (Crossover)",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:46:08"
+ },
+ {
+  "descricao": "Uso da expressão 'quase foi de arrasta'",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:46:21"
+ },
+ {
+  "descricao": "Demonstração prática de comando do console do FiveM (F8 + connect)",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:48:29"
+ },
+ {
+  "descricao": "Uso de apelidos cômicos e pejorativos carinhosos para personagens ('Zé Mané', 'cabeça-oca', 'maluco')",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:49:20"
+ },
+ {
+  "descricao": "Narrativa baseada em 'storytelling' de fatos curiosos e pouco conhecidos",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:51:29"
+ },
+ {
+  "descricao": "Conectivos irônicos que criam ritmo: 'Veja bem', 'Ora', 'Consequentemente', 'Em suma', 'Acontece que', 'Ora bolas', 'A questão é'",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:51:57"
+ },
+ {
+  "descricao": "Narração com termos acadêmicos/científicos irônicos",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:52:14"
+ },
+ {
+  "descricao": "Uso de planos detalhe (close-up) extremos para criar tensão",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:53:00"
+ },
+ {
+  "descricao": "Narração com gírias de nicho 'cria'",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:53:40"
+ },
+ {
+  "descricao": "Narração com 'punchlines' rápidas e ganchos de ironia",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:54:06"
+ },
+ {
+  "descricao": "Gancho final cortado ('mas cê sabe por que...') sem resolver",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:54:36"
+ },
+ {
+  "descricao": "Tom de indignação crescente com perguntas retóricas sarcásticas (acredita? tipo?)",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:55:03"
+ },
+ {
+  "descricao": "Narrativa em primeira pessoa com tom de julgamento moral",
+  "origem": "reprovado pela sessão: Sugestao incompativel com anuncio institucional de energia solar (Advance Solar)",
+  "em": "2026-11-05T14:55:20"
+ },
+ {
+  "descricao": "Comparação lado a lado vertical com divisor no meio e labels de contraste (mal diseñada vs bien diseñada)",
+  "origem": "reprovado pela sessão: Ja temos regra 15 e composicao (c) de tela dividida antes x depois 50/50 com linha que varre e rotulos de contraste no EDITOR.md e APRENDIDO.md",
+  "em": "2026-11-05T15:24:31"
+ },
+ {
+  "descricao": "Cartão de pergunta/enquete estilizado com bordas arredondadas e ícone superior minimalista",
+  "origem": "reprovado pela sessão: Ja temos componente de card de pergunta no gancho inicial dos videos Remotion de produto",
+  "em": "2026-11-05T15:24:42"
+ },
+ {
+  "descricao": "Legenda superior persistente com frase de contexto forte ('A MENINA SE TORNOU CAMPEÃ DE GINÁSTICA')",
+  "origem": "reprovado pela sessão: Ja temos selo/gancho_tela persistente no topo dos videos de produto no EDITOR.md",
+  "em": "2026-11-05T15:24:52"
+ },
+ {
+  "descricao": "Cena de lobo místico em salto com rastro de energia branca/elétrica",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:08:10"
+ },
+ {
+  "descricao": "Artefatos/Status de itens com caixa de descrição amarela transparente detalhando bônus e tempo de duração",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:08:15"
+ },
+ {
+  "descricao": "Tela de UI/sistema no estilo RPG com moldura verde ornamentada e tipografia clássica perguntando mudança de local/bloco",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:08:23"
+ },
+ {
+  "descricao": "Diagrama esquemático em corte transversal de caverna mostrando a base real e a falsa com setas indicativas",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:08:32"
+ },
+ {
+  "descricao": "Notas rasgadas de caderno numeradas simulando bilhetes de investigação (bilhete 1, bilhete 2) sobrepostos na tela",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:08:44"
+ },
+ {
+  "descricao": "Uso de ícones de meios de transporte cancelados com um X vermelho grande sobre o mapa (carro, avião, navio)",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:08:55"
+ },
+ {
+  "descricao": "Gráficos de HUD futuristas sobrepostos na cabeça do animal (ex: marcações de telemetria e zoom com escala)",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:09:06"
+ },
+ {
+  "descricao": "Teste visual interativo de ilusão de ótica (efeito after-effect / movimento estroboscópico/espiral estilo optical illusion em vídeo vertical)",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:09:18"
+ },
+ {
+  "descricao": "Corte transversal em 3D mostrando o elevador cortado ao meio na vertical com o mecanismo de molas e poço visível",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:09:27"
+ },
+ {
+  "descricao": "Texto na tela com tradução/legenda estilizada em inglês (THIS + no plans, a marshmallow maker, Marshmallow mode: ON) posicionado de forma artística",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:09:37"
+ },
+ {
+  "descricao": "Zoom dramático em objeto simbólico (bola de cristal)",
+  "origem": "reprovado pela sessão: Estetica especifica de anime/RPG/misterio/ilusao de otica ou tags em ingles que nao se aplicam aos anuncios corporativos em PT-BR",
+  "em": "2026-11-05T17:09:48"
+ },
+ {
+  "descricao": "Corte seco para inserção de tela de dispositivo (tablet/celular) ocupando 80% da tela",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/inovarecrm_20261105_181349: mockup de celular em destaque na cena de conversa",
+  "em": "2026-11-05T19:57:05"
+ },
+ {
+  "descricao": "Transição de rasgo de papel (paper tear transition) revelando o conteúdo ou cena seguinte.",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:13:03"
+ },
+ {
+  "descricao": "Estética de recortes de papel jornal/revista (papel rasgado com bordas irregulares e textura rugosa) sobrepostos em estilo scrapbook dinâmico.",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:13:12"
+ },
+ {
+  "descricao": "Grade de miniaturas (polaroids) de todos os presidentes preenchendo a tela no início e no fim, com zoom em destaque vermelho.",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:13:21"
+ },
+ {
+  "descricao": "Uso de interface de monitor científico/médico (gráfico de ondas/ECG com linhas de grade) para ilustrar o despertar dos sinais vitais",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:13:30"
+ },
+ {
+  "descricao": "Barra de timeline interativa animada com marcador deslizante de eras geológicas no topo",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:13:40"
+ },
+ {
+  "descricao": "Linha do tempo horizontal persistente no topo com marcador animado que avança conforme a narrativa histórica progride",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:13:51"
+ },
+ {
+  "descricao": "Carimbo de data/status inclinado",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:14:03"
+ },
+ {
+  "descricao": "Simulação 3D didática/anatômica em primeiro plano mostrando micro-organismos (bactérias) se espalhando com o respingo de água",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:14:13"
+ },
+ {
+  "descricao": "Escurecimento gradual de fundo (vinheta dramática) quando bebê age estranho",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:14:23"
+ },
+ {
+  "descricao": "Enquadramento com fundo espelhado e desfocado (Blur Background)",
+  "origem": "reprovado pela sessão: Incompativel com anuncios nativos 9:16 de agencia em Remotion (APRENDIDO.md exige design clean corporativo sem blur fantasma ou scrapbook)",
+  "em": "2026-11-05T22:14:33"
+ },
+ {
+  "descricao": "Legenda com destaque de cor em palavras-chave específicas",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/inovareagenda_20261105_223057/Video.tsx: highlight vibrante em palavras-chave na narracao",
+  "em": "2026-11-06T00:27:13"
+ },
+ {
+  "descricao": "Highlight em amarelo nas palavras-chave do texto principal ('UMA DAS MAIORES CONSTRUÇÕES' aos 3s, 'PARTE 1' repetido)",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/inovareagenda_20261105_223057/Video.tsx: highlight amarelo/ambar sincronizado em substantivos e numeros-chave",
+  "em": "2026-11-06T00:27:22"
+ },
+ {
+  "descricao": "Palavra-chave destacada em amarelo neon brilhante sobre o gameplay, sincronizada com a fala",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/inovareagenda_20261105_223057/Video.tsx: destaque de palavras-chave sincronizado com a fala",
+  "em": "2026-11-06T00:27:28"
+ },
+ {
+  "descricao": "Footer temático com trilho de trem e indicação de parte",
+  "origem": "reprovado pela sessão: Footer de trilho de trem com PARTE 1 nao serve para comerciais de SaaS/produto em Reels",
+  "em": "2026-11-06T00:27:34"
+ },
+ {
+  "descricao": "Transição com vidro quebrando em câmera lenta do quadro 1 para quadro 2",
+  "origem": "reprovado pela sessão: Transicao de vidro quebrando nao combina com tom corporativo confiavel de anuncio SaaS",
+  "em": "2026-11-06T00:27:40"
+ },
+ {
+  "descricao": "Transição de zoom com desfoque de movimento (motion blur)",
+  "origem": "aplicado pela sessão: Aplicado em postador-de-videos/remotion/src/videos/superchatia_ia_20261106_004537: palavras-chave sincronizadas na cena + destaque colorido + transicoes dinamicas",
+  "em": "2026-11-06T03:24:21"
+ },
+ {
+  "descricao": "Texto branco animado sincronizado palavra por palavra com a narração, posicionado estrategicamente sobre a ação (ex: 'PENA', 'CHUTAR', 'CAVADINHA', 'OLHAR', 'TOQUE', 'PLANETA')",
+  "origem": "aplicado pela sessão: Aplicado em postador-de-videos/remotion/src/videos/superchatia_ia_20261106_004537: palavras-chave sincronizadas na cena + destaque colorido + transicoes dinamicas",
+  "em": "2026-11-06T03:24:28"
+ },
+ {
+  "descricao": "Legenda com palavra-chave em cor diferente (verde vibrante) para destacar termo importante",
+  "origem": "aplicado pela sessão: Aplicado em postador-de-videos/remotion/src/videos/superchatia_ia_20261106_004537: palavras-chave sincronizadas na cena + destaque colorido + transicoes dinamicas",
+  "em": "2026-11-06T03:24:34"
+ },
+ {
+  "descricao": "Zoom extremo no rosto do personagem com close na testa e mão",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:24:41"
+ },
+ {
+  "descricao": "Legenda flutuante com rastreio de movimento (tracking)",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:24:48"
+ },
+ {
+  "descricao": "Documento/jornal real integrado na cena (cartaz de procurada no poste aos 7.9s)",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:24:53"
+ },
+ {
+  "descricao": "Composição de 'Foreground Framing' (Moldura de primeiro plano)",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:24:59"
+ },
+ {
+  "descricao": "Seta vermelha grossa apontando jogador livre no campo",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:04"
+ },
+ {
+  "descricao": "Foto de jornal obituário inserida como elemento gráfico na tela",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:08"
+ },
+ {
+  "descricao": "Moldura estilo TV antiga com borda neon colorida ao redor do conteúdo",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:12"
+ },
+ {
+  "descricao": "Uso de card estilo infográfico comparativo de tamanho de universo com texto estilizado em destaque",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:17"
+ },
+ {
+  "descricao": "Iluminação cinematográfica quente/dourada consistente",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:20"
+ },
+ {
+  "descricao": "Uso de enquadramento cinematográfico granulado e com tom cinematográfico dramático para recriar história de época/biografia.",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:24"
+ },
+ {
+  "descricao": "Paleta de cores verde-azulada cinematográfica (teal/cyan) dominante em todo o vídeo",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:28"
+ },
+ {
+  "descricao": "Corte dinâmico focado em reação de close-up com lente teleobjetiva dramática (estética de série de suspense/thriller como Beef/Treta)",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:32"
+ },
+ {
+  "descricao": "Palavra-chave animada surgindo letra por letra com timing da narração ('SIMPLESMENTE' aos 15s)",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:37"
+ },
+ {
+  "descricao": "Início do vídeo com ganchos em cadeia mostrando rapidamente imagens do tema antes da introdução completa",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:45"
+ },
+ {
+  "descricao": "Tomada panorâmica de braços abertos ao entardecer com silhueta e atmosfera pós-apocalíptica",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:25:54"
+ },
+ {
+  "descricao": "Contraste direto de conceitos filosóficos aplicados ao cotidiano moderno (Ex: 'A empresa que fala que é uma família, até a hora do corte')",
+  "origem": "reprovado pela sessão: Especifico de recap de anime, true crime ou futebol; nao se aplica a motion design de anuncio SaaS B2B",
+  "em": "2026-11-06T03:26:03"
+ },
+ {
+  "descricao": "Uso de ícones minimalistas para representar dados",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/futebolcom_ia2_20261106_045146/Video.tsx: badges numerados minimalistas (01, 02, 03), ondas de audio e checklist com checks sincronizados com a locucao",
+  "em": "2026-11-06T05:50:42"
+ },
+ {
+  "descricao": "Linhas vermelhas de veia/irritação estilo anime pulsando na têmpora",
+  "origem": "reprovado pela sessão: Efeito de anime nao se aplica a institucional B2C de energia solar",
+  "em": "2026-11-06T10:56:46"
+ },
+ {
+  "descricao": "Blush anime rosado (bochechas coradas) ilustrado sobreposto no rosto",
+  "origem": "reprovado pela sessão: Efeito de blush anime nao se aplica a institucional B2C de energia solar",
+  "em": "2026-11-06T10:56:55"
+ },
+ {
+  "descricao": "Efeito de rubor/vergonha exagerado nas bochechas com linhas brancas verticais (segundo 87.4)",
+  "origem": "reprovado pela sessão: Efeito de rubor anime nao se aplica a institucional B2C de energia solar",
+  "em": "2026-11-06T10:57:01"
+ },
+ {
+  "descricao": "Legenda de narração na zona inferior (safe zone)",
+  "origem": "aplicado pela sessão: Legenda Karaoke ancorada na safe zone inferior (y <= 1580) com Montserrat 900 e destaque em pilula",
+  "em": "2026-11-06T10:57:06"
+ },
+ {
+  "descricao": "Ranking numerado decrescente ('quinto lugar', 'segundo lugar', 'primeiro lugar') com legendas estilizadas em negrito sobre vídeos de curiosidades/comidas bizarras",
+  "origem": "aplicado pela sessão: Cards numerados sequenciais (01, 02, 03) sincronizados com a locucao nas Cenas 2 e 3",
+  "em": "2026-11-06T10:57:12"
+ },
+ {
+  "descricao": "B-roll analógico com colagem de fotos reais de arquivo (polaroids/recortes de jornal)",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar local",
+  "em": "2026-11-10T00:40:25"
+ },
+ {
+  "descricao": "Uso de foto impressa antiga sendo mostrada fisicamente na mão durante a cena",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar local",
+  "em": "2026-11-10T00:40:52"
+ },
+ {
+  "descricao": "Uso de cordas/amarras para segurar e moldar o cacho/inflorescência da palmeira antes do corte final.",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar local",
+  "em": "2026-11-10T00:41:07"
+ },
+ {
+  "descricao": "Grid comparativo de testes técnicos em preto e branco (estilo paper/laboratório)",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar local",
+  "em": "2026-11-10T00:41:21"
+ },
+ {
+  "descricao": "Tabela comparativa em grade mostrando ângulos de rotação do mecanismo",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar local",
+  "em": "2026-11-10T00:41:35"
+ },
+ {
+  "descricao": "Uso de termos coloquiais contemporâneos de fofoca ('o bofe', 'o babado')",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar local",
+  "em": "2026-11-10T00:41:58"
+ },
+ {
+  "descricao": "Uso de imagens/quadros progressivos de zoom aéreo revelando uma escala massiva (mina e cidade ao redor) com legendas centralizadas em destaque por palavra em cada corte.",
+  "origem": "reprovado pela sessão: Especifico de curiosidades cientificas/documentario; este projeto e anuncio vertical de SaaS comercial Agenda IA",
+  "em": "2026-11-10T08:01:59"
+ },
+ {
+  "descricao": "Hook de utilidade/alerta invertido ('se encontrar solte na hora porque ele salva a humanidade')",
+  "origem": "reprovado pela sessão: Especifico de curiosidades cientificas/documentario; este projeto e anuncio vertical de SaaS comercial Agenda IA",
+  "em": "2026-11-10T08:02:11"
+ },
+ {
+  "descricao": "Uso de imagens B-roll em tom documental/científico mostrando o processo industrial/laboratorial de extração de sangue (tubos de ensaio, jalecos, frascos azuis).",
+  "origem": "reprovado pela sessão: Especifico de curiosidades cientificas/documentario; este projeto e anuncio vertical de SaaS comercial Agenda IA",
+  "em": "2026-11-10T08:02:23"
+ },
+ {
+  "descricao": "Gancho inicial de perigo/alerta (\"se você der de cara com esse bicho estranho, solta ele na hora\") seguido de reviravolta educativa.",
+  "origem": "reprovado pela sessão: Especifico de curiosidades cientificas/documentario; este projeto e anuncio vertical de SaaS comercial Agenda IA",
+  "em": "2026-11-10T08:02:35"
+ },
+ {
+  "descricao": "Efeito scanline CRT / tela de tubo analógica em tela cheia sobre imagem histórica",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar (SOLAR_REGRAS/APRENDIDO.md exigem fotos reais do Para e apresentador real)",
+  "em": "2026-11-11T03:37:52"
+ },
+ {
+  "descricao": "Uso de fotos históricas em P&B enquadradas com borda preta grossa flutuando sobre o vídeo estilo evidência policial/true crime",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar (SOLAR_REGRAS/APRENDIDO.md exigem fotos reais do Para e apresentador real)",
+  "em": "2026-11-11T03:38:02"
+ },
+ {
+  "descricao": "Avatar 2D estilo chibi (ilustrador/narrador) sobreposto no canto inferior interagindo com gesto explicativo (dedo levantado)",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar (SOLAR_REGRAS/APRENDIDO.md exigem fotos reais do Para e apresentador real)",
+  "em": "2026-11-11T03:38:23"
+ },
+ {
+  "descricao": "Uso de luvas manuseando amostra em pó de minério cru diretamente na lavra",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar (SOLAR_REGRAS/APRENDIDO.md exigem fotos reais do Para e apresentador real)",
+  "em": "2026-11-11T03:38:36"
+ },
+ {
+  "descricao": "Apresentação em bancada de laboratório de 4 potes de vidro com pós coloridos distintos (elementos de terras raras)",
+  "origem": "reprovado pela sessão: Incompativel com anuncio institucional de energia solar (SOLAR_REGRAS/APRENDIDO.md exigem fotos reais do Para e apresentador real)",
+  "em": "2026-11-11T03:38:48"
+ },
+ {
+  "descricao": "Copo comestível de biscoito para café apresentado logo no início",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:51:12"
+ },
+ {
+  "descricao": "Estética de polaroid/fotos impressas analógicas com flash estourado para narrativa de terror",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:51:23"
+ },
+ {
+  "descricao": "Grid com 10 quadros enumerados no final do vídeo mostrando cortes rápidos de cada anime do Top 10.",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:51:34"
+ },
+ {
+  "descricao": "Uso de imagens absurdas/surreais coladas na tela superior combinadas com jogabilidade de Minecraft abaixo (ex: dentes no cabelo, luvas de combate, balões em formato de números)",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:51:45"
+ },
+ {
+  "descricao": "Zoom extremo em 3D animado simulando o ferrão da abelha perfurando a pele",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:51:56"
+ },
+ {
+  "descricao": "Fotos e vídeos antigos do jogador criança mesclados com efeitos de silhueta escura e transições rápidas (estilo documentário dramático)",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:52:08"
+ },
+ {
+  "descricao": "Uso de caixas de perguntas estilo Instagram flutuando no início do vídeo sobre o gameplay",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:52:21"
+ },
+ {
+  "descricao": "Exibição direta do console do cliente (FiveM/RAGE) com digitação do comando de conexão formatada em destaque",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:52:32"
+ },
+ {
+  "descricao": "Técnica de comportamento animal pouco conhecida demonstrada passo a passo (apanhar folhas, andar de costas e entrar na toca)",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:52:43"
+ },
+ {
+  "descricao": "Zoom extremo focado no rosto com seta verde pontiaguda e bordão em texto animado",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:52:53"
+ },
+ {
+  "descricao": "Zoom extremo macro no exato momento do bote/cuspe de veneno (segundo 7)",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:53:03"
+ },
+ {
+  "descricao": "Grade mosaico 2x5 resumindo todos os itens do top 10 na tela final durante o CTA",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:53:15"
+ },
+ {
+  "descricao": "Texto amarelo bold grande em caixa alta sobre imagens do mangá (ex: '2. NEW BARRIERS', 'PATHWAY OF SOULS')",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:53:27"
+ },
+ {
+  "descricao": "Inserção de um avatar/mascote fixo no canto da tela durante cenas de mangá.",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:53:38"
+ },
+ {
+  "descricao": "Close extremo em olhos e expressões faciais (13.2s, 66.0s) ocupando tela inteira com crop dramático",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:53:48"
+ },
+ {
+  "descricao": "Enquadramento fechado extreme close-up nos olhos com contorno vermelho dramático",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:54:00"
+ },
+ {
+  "descricao": "Filtro de cor laranja/amarelo intenso em cena dramática",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:54:13"
+ },
+ {
+  "descricao": "Mudança de paleta de cores por cena (Color Grading)",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:54:27"
+ },
+ {
+  "descricao": "Emoji 3D animado reagindo sobre a legenda",
+  "origem": "reprovado pela sessão: Estetica de anime/terror/FiveM/Minecraft/curiosidades animais nao se aplica a anuncios B2B serios de produto SaaS em Remotion",
+  "em": "2026-11-11T07:54:40"
+ },
+ {
+  "descricao": "Cliffhanger cortado no meio da frase: 'mas o que acha lá dentro muda tudo, e pensar que...' [corte abrupto]",
+  "origem": "aplicado pela sessão: JÁ TEMOS nos longos: capítulo 'Comente PARTE 2' + ganchos a cada 15 min (ab ganchos_15min)",
+  "em": "2026-11-11T08:20:13"
+ },
+ {
+  "descricao": "Palavras-chave em amarelo nas legendas brancas (ex: 'ÚNICA MORDIDA', 'APARECIA', 'ENGOLIU', 'BALANÇANDO')",
+  "origem": "aplicado pela sessão: JÁ TEMOS: legenda cinética MIX com palavra-chave amarela (montagem_ms.plano_legenda), padrão de todos os vídeos",
+  "em": "2026-11-11T08:20:38"
+ },
+ {
+  "descricao": "Legenda destacada em cor amarela vibrante com borda preta grossa e efeito de sombra em estilo anime/manhwa",
+  "origem": "aplicado pela sessão: JÁ TEMOS: legenda cinética MIX com palavra-chave amarela (montagem_ms.plano_legenda), padrão de todos os vídeos",
+  "em": "2026-11-11T08:20:38"
+ },
+ {
+  "descricao": "Justificativa cômica com 'por motivos de:'",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:49"
+ },
+ {
+  "descricao": "Narração em primeira pessoa do personagem (o crocodilo), criando identificação emocional",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:49"
+ },
+ {
+  "descricao": "Uso de gírias de nicho gamer/internet ('prota', 'pistola', 'dar a louca')",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:49"
+ },
+ {
+  "descricao": "Uso de termos coloquiais e exagerados ('refugo fedorento', 'calor brabo', 'gororoba')",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:50"
+ },
+ {
+  "descricao": "Uso de termos coloquiais carinhosos e debochados ('dona dessa bagunça', 'querida', 'babado')",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:50"
+ },
+ {
+  "descricao": "Abertura direta com vocativo inusitado ('Beleza, meus lentos').",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:50"
+ },
+ {
+  "descricao": "Adaptação fonética cômica de nomes (Rinata, Sasuk, Chico Amaro)",
+  "origem": "reprovado pela sessão: jeito de falar de UM parceiro só (1 vídeo): copiaria a voz/marca dele; nossos narradores têm persona própria",
+  "em": "2026-11-11T08:20:50"
+ },
+ {
+  "descricao": "Referência direta ao Chaves ('igual o Chaves') associada a uma animação cômica do personagem batendo a cabeça no teto do elevador",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:01"
+ },
+ {
+  "descricao": "Inserção de tutorial em formato de formulário de cadastro e tela de console FiveM (F8) no final (CTA de servidor)",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:02"
+ },
+ {
+  "descricao": "Gameplay 3D de GTA RP como background ao vivo (não é filler genérico)",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:02"
+ },
+ {
+  "descricao": "Mundo Minecraft 3D como cenário permanente (câmera se move pelo ambiente)",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:02"
+ },
+ {
+  "descricao": "Onomatopeia animada 'HAHA!' em vermelho vibrante com sombra, ocupando praticamente a tela inteira",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:02"
+ },
+ {
+  "descricao": "Animação com mão desenhando elementos progressivamente na tela",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:03"
+ },
+ {
+  "descricao": "Bordas coloridas animadas que mudam de cor a cada cena",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:03"
+ },
+ {
+  "descricao": "Background dinâmico com textura de papel amassado que muda de cor conforme o bloco do vídeo",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:03"
+ },
+ {
+  "descricao": "Montagem estilo batalha Pokémon com HUD de jogo (barra HP, níveis, nomes)",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:04"
+ },
+ {
+  "descricao": "Uso de footage cinematográfico de alta qualidade (filme/série real) ao invés de imagens estáticas ou anime",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:04"
+ },
+ {
+  "descricao": "Cortes rítmicos baseados em 'Eras' ou fases da vida (Storytelling visual)",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:04"
+ },
+ {
+  "descricao": "Transição de 'rasgar' película plástica",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:04"
+ },
+ {
+  "descricao": "Uso de infográfico 3D simplificado (cross-section)",
+  "origem": "reprovado pela sessão: fora do formato recap longo de anime/manhwa (Short de curiosidade/gameplay/servidor/footage real)",
+  "em": "2026-11-11T08:21:05"
+ },
+ {
+  "descricao": "Corte abrupto de áudio (silêncio seletivo)",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:15"
+ },
+ {
+  "descricao": "Final com loop infinito narrativo/gramatical ('exatamente como tudo começou quando...')",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:16"
+ },
+ {
+  "descricao": "Narrativa de 'jornada do produto' (do lixo ao luxo)",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:16"
+ },
+ {
+  "descricao": "Estrutura de 'Storytelling de Redenção'",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:16"
+ },
+ {
+  "descricao": "Números grandes escritos progressivamente com vírgula e centavos em fonte branca italizada gigante",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:16"
+ },
+ {
+  "descricao": "Destaque numérico grande de valor monetário (46.366) na tela na fala de valor",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:17"
+ },
+ {
+  "descricao": "Palavra-chave única e centralizada sobre fundo preto com borda destacada (ex: 'Harvard' em amarelo com contorno preto)",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:17"
+ },
+ {
+  "descricao": "Interface HUD futurista azul com mapa/scanner 3D animado",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:17"
+ },
+ {
+  "descricao": "Expressão facial 'assustadora' com sorriso forçado e olhos vazios/brancos",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:17"
+ },
+ {
+  "descricao": "Uso de 'personagens miniatura' (amigo imaginário) sobrepostos no ombro do protagonista",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:18"
+ },
+ {
+  "descricao": "Texto de destaque com cor vibrante amarela e fonte estilo Impact com borda preta grossa e efeito de velocidade (linhas cinéticas/action lines)",
+  "origem": "reprovado pela sessão: 1 vídeo só e já coberto pelo pipeline (impacto/glitch/zoom no rosto, estrutura conflito-virada) ou não combina com recap longo",
+  "em": "2026-11-11T08:21:18"
+ },
+ {
+  "descricao": "Legenda com fundo preto sólido e bordas arredondadas",
+  "origem": "reprovado pela sessão: Ja temos no kit do claude-code-video (Karaoke com caixa e destaque amarelo + moldura circular)",
+  "em": "2026-11-11T14:46:23"
+ },
+ {
+  "descricao": "Legenda com fundo preto semitransparente (estilo caixa)",
+  "origem": "reprovado pela sessão: Ja temos no kit do claude-code-video (Karaoke com caixa e destaque amarelo + moldura circular)",
+  "em": "2026-11-11T14:46:38"
+ },
+ {
+  "descricao": "Legenda com palavras destacadas em amarelo vivo alternando com branco e fundo escuro",
+  "origem": "reprovado pela sessão: Ja temos no kit do claude-code-video (Karaoke com caixa e destaque amarelo + moldura circular)",
+  "em": "2026-11-11T14:46:59"
+ },
+ {
+  "descricao": "Texto animado amarelo tracking palavras-chave da fala colado no gameplay",
+  "origem": "reprovado pela sessão: Ja temos no kit do claude-code-video (Karaoke com caixa e destaque amarelo + moldura circular)",
+  "em": "2026-11-11T14:47:15"
+ },
+ {
+  "descricao": "Janela de reação circular com borda dinâmica",
+  "origem": "reprovado pela sessão: Ja temos no kit do claude-code-video (Karaoke com caixa e destaque amarelo + moldura circular)",
+  "em": "2026-11-11T14:47:36"
+ },
+ {
+  "descricao": "Progressive accumulation of comparative items (flags + math expressions) stacked vertically as the video progresses",
+  "origem": "aplicado pela sessão: Acumulo progressivo de cards e interface simulada em disparoemmassa_ia_20261111_135247",
+  "em": "2026-11-11T19:05:05"
+ },
+ {
+  "descricao": "Interface simulada de videochamada com barra de ícones superior e contador regressivo de saldo",
+  "origem": "aplicado pela sessão: Interface simulada de sistema com status vivo em disparoemmassa_ia_20261111_135247",
+  "em": "2026-11-11T19:05:16"
+ },
+ {
+  "descricao": "Interface de tela de tablet/dispositivo com bordas neon e texto centralizado",
+  "origem": "aplicado pela sessão: Moldura de dispositivo com borda neon e status centralizado em disparoemmassa_ia_20261111_135247",
+  "em": "2026-11-11T19:05:25"
+ },
+ {
+  "descricao": "Legenda fixa no topo com contexto permanente (resumo do plot) + legenda dinâmica embaixo sincronizada com a fala",
+  "origem": "aplicado pela sessão: Pílula de contexto fixa no topo desde o frame 0 em followupia_ia_20261111_203720/Video.tsx",
+  "em": "2026-11-11T22:36:26"
+ },
+ {
+  "descricao": "Texto amarelo em caixa alta posicionado sobre partes específicas da cena (IMAGINAVA, EM CATHAY, #ITAVA, E DESPERTOU, QUE DESPERTARIA, SEM GARANTIR, RECEBER, ASSUSTADOR:, EQUIPAMENTOS, QUE ERA INVOCADOR)",
+  "origem": "reprovado pela sessão: Fonte Bangers amarela sobre elementos não serve para anúncios comerciais sérios em Remotion",
+  "em": "2026-11-11T22:36:37"
+ },
+ {
+  "descricao": "Filtro preto e branco no apresentador para quebra dramática/cômica",
+  "origem": "reprovado pela sessão: Filtro preto e branco com zoom comico no apresentador conflita com anuncio comercial corporativo B2B (VPS Blindada), onde o apresentador precisa transmitir confianca e seriedade.",
+  "em": "2026-11-12T01:52:07"
+ },
+ {
+  "descricao": "Tags/balões flutuantes rotulando fases de transformação ('Outfit 1', 'Outfit 2') com seta vermelha",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/vpsblindada_ia_20261112_000116/Video.tsx (ParticulasSuspensas, CirculoMarcadorVermelho, Tags de Fase com seta vermelha testados nos quadros do video)",
+  "em": "2026-11-12T01:52:40"
+ },
+ {
+  "descricao": "Círculo vermelho desenhado à mão livre destacando o elemento central no momento da revelação",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/vpsblindada_ia_20261112_000116/Video.tsx (ParticulasSuspensas, CirculoMarcadorVermelho, Tags de Fase com seta vermelha testados nos quadros do video)",
+  "em": "2026-11-12T01:52:49"
+ },
+ {
+  "descricao": "Uso de círculos vermelhos grossos desenhados à mão (estilo marcador) para cercar os alvos de comparação",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/vpsblindada_ia_20261112_000116/Video.tsx (ParticulasSuspensas, CirculoMarcadorVermelho, Tags de Fase com seta vermelha testados nos quadros do video)",
+  "em": "2026-11-12T01:52:57"
+ },
+ {
+  "descricao": "Overlay contínuo de poeira cósmica/partículas brilhantes suspensas",
+  "origem": "aplicado pela sessão: postador-de-videos/remotion/src/videos/vpsblindada_ia_20261112_000116/Video.tsx (ParticulasSuspensas, CirculoMarcadorVermelho, Tags de Fase com seta vermelha testados nos quadros do video)",
+  "em": "2026-11-12T01:53:07"
+ },
+ {
+  "descricao": "Abertura mostrando diretamente o objeto inusitado (moeda falsa de Oreo dentro do pacote) com uma seta vermelha apontando antes de iniciar o processo de destruição/teste.",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:33:59"
+ },
+ {
+  "descricao": "Uso de béqueres de laboratório com líquidos coloridos para demonstração científica de um conceito de cultura pop",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:04"
+ },
+ {
+  "descricao": "Uso de molde de plástico transparente engatado em abóbora em crescimento para dar formato de rosto monstruoso",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:09"
+ },
+ {
+  "descricao": "Uso de objeto flutuando (perna de frango) para criar tom cômico e bizarro na cena",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:13"
+ },
+ {
+  "descricao": "Uso de ferramenta mecânica vintage (pantógrafo Leroy) em close-top-down para criar lettering hiper-satisfatório",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:19"
+ },
+ {
+  "descricao": "Alternância de quadros dramáticos em escala de cinza com olhos destacados em cores saturadas (amarelo e verde neon) em cenas de tensão de anime.",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:25"
+ },
+ {
+  "descricao": "Raios/linhas douradas horizontais cruzando personagem",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:30"
+ },
+ {
+  "descricao": "Ângulo cenital (de cima) mostrando personagem deitada no chão em momento de colapso emocional",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:36"
+ },
+ {
+  "descricao": "Tela de cadastro/registro in-game customizada do servidor",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:44"
+ },
+ {
+  "descricao": "Overlay de ferrovia/trilhos na parte inferior da tela durante todo o vídeo",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:50"
+ },
+ {
+  "descricao": "Silhueta projetada em névoa verde (sombra gigante de monstro)",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:34:55"
+ },
+ {
+  "descricao": "Inclusão de close-up detalhado de objeto narrativo-chave (inalador para asma) estilo manwha/webtoon.",
+  "origem": "reprovado pela sessão: Efeito de anime, GTA RP ou curiosidade fisica incompativel com comercial corporativo B2B",
+  "em": "2026-11-12T02:35:00"
+ },
+ {
+  "descricao": "Legenda com fundo de cor sólida (tarja) ocupando a parte inferior da tela",
+  "origem": "reprovado pela sessão: Ja existe nos manuais EDITOR.md e APRENDIDO.md (karaoke em capsula escura na base, selo de gancho fixo no topo, transicoes diagonais/wipes, e proibicao de numeros inventados em anuncios comerciais)",
+  "em": "2026-11-12T14:02:03"
+ },
+ {
+  "descricao": "Título fixo no topo com palavra destacada em amarelo (DESTRUIU)",
+  "origem": "reprovado pela sessão: Ja existe nos manuais EDITOR.md e APRENDIDO.md (karaoke em capsula escura na base, selo de gancho fixo no topo, transicoes diagonais/wipes, e proibicao de numeros inventados em anuncios comerciais)",
+  "em": "2026-11-12T14:02:18"
+ },
+ {
+  "descricao": "Número gigante em aspas com explicação menor abaixo ('299' com 'US$ 100 MAIS BARATO')",
+  "origem": "reprovado pela sessão: Ja existe nos manuais EDITOR.md e APRENDIDO.md (karaoke em capsula escura na base, selo de gancho fixo no topo, transicoes diagonais/wipes, e proibicao de numeros inventados em anuncios comerciais)",
+  "em": "2026-11-12T14:02:29"
+ },
+ {
+  "descricao": "Transição diagonal com divisão de tela em ângulo (203s)",
+  "origem": "reprovado pela sessão: Ja existe nos manuais EDITOR.md e APRENDIDO.md (karaoke em capsula escura na base, selo de gancho fixo no topo, transicoes diagonais/wipes, e proibicao de numeros inventados em anuncios comerciais)",
+  "em": "2026-11-12T14:02:40"
+ },
+ {
+  "descricao": "Narração com quebra de quarta parede e questionamento ao autor",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:40:45"
+ },
+ {
+  "descricao": "Uso de metáforas viscerais para emoções (ex: 'meu suco de tomate ferve de ódio')",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:40:56"
+ },
+ {
+  "descricao": "Persona de pastor/pregador televisivo carismático conduzindo curiosidades científicas ('Olha pro Apóstolo', 'Põe a mão na televisão, meu irmão', 'Glória a Deus')",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:41:07"
+ },
+ {
+  "descricao": "Eskalation do sofrimento matemático com expressões ultra-complexas proporcionais ao grau de bizarrice do idioma (finalizando com fórmula algébrica insana da Dinamarca)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:41:18"
+ },
+ {
+  "descricao": "Contador/Placar digital de progresso em tempo real no canto inferior direito",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:41:28"
+ },
+ {
+  "descricao": "Divisão de tela dinâmica em duas partes (vídeo histórico ilustrativo em cima e apresentador reativo embaixo)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:41:36"
+ },
+ {
+  "descricao": "Comparação humorística inusitada com elementos populares locais (Brasília amarela voando baixo por Guarulhos)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:41:46"
+ },
+ {
+  "descricao": "Estética fotográfica analógica em formato polaroid/filme com iluminação estroboscópica e sombras duras",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:41:58"
+ },
+ {
+  "descricao": "Divisão de quadro (split-screen) mostrando a superfície da água e o mundo subaquático cristalino simultaneamente com escada submersa.",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:42:15"
+ },
+ {
+  "descricao": "Palavras-chave destacadas com cor diferente e fundo sombreado/glow centralizadas na tela em fonte pesada",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:42:27"
+ },
+ {
+  "descricao": "Zoom circular com contorno e ícone/emoji centrado destacando reações faciais específicas (ex: Rosé brava)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:42:37"
+ },
+ {
+  "descricao": "Emoji de suor/pânico flutuando acima da cabeça do personagem com texto de legenda (*panic*)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:42:49"
+ },
+ {
+  "descricao": "Zoom dramático no rosto do personagem revelado como resposta final",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:42:59"
+ },
+ {
+  "descricao": "Uso da gíria de comunidade otaku/internet 'era dentro' para o fechamento opinativo",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:43:10"
+ },
+ {
+  "descricao": "Etiquetas verdes no topo com contexto/título de cada segmento",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:43:20"
+ },
+ {
+  "descricao": "Legenda com estilo caligráfico/pincel (brush) centralizada na base",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:43:31"
+ },
+ {
+  "descricao": "Disclaimer fixo no topo: 'This video is made for entertainment purposes only' em branco sobre fundo desfocado",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:43:41"
+ },
+ {
+  "descricao": "Badge 'PARTE 1' com destaque (amarelo em fundo preto fosco) fixo no rodapé",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:43:51"
+ },
+ {
+  "descricao": "Fundo animado com múltiplos cards de anime/posts flutuando (parallax) atrás do apresentador",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:44:00"
+ },
+ {
+  "descricao": "Transição de fade branco suave para revelar personagem (50.4s-59.6s)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:44:11"
+ },
+ {
+  "descricao": "Enquadramento através de tela de alambrado para simbolizar isolamento",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:44:21"
+ },
+ {
+  "descricao": "Legenda fixa no topo durante todo o vídeo com setup/contexto da história",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:44:31"
+ },
+ {
+  "descricao": "Linhas de speed dinâmicas acompanhando movimento de soco",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:44:41"
+ },
+ {
+  "descricao": "Gradiente de cor suave cobrindo toda tela (azul-rosa, verde-rosa) por cima do anime",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:44:52"
+ },
+ {
+  "descricao": "Zoom dinâmico progressivo com corte rápido para objeto de estudo específico (livro/caderno)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:45:02"
+ },
+ {
+  "descricao": "Uso de interface de chamada de vídeo com ícones de aplicativos/serviços no topo (segundo 93 e 118)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:45:15"
+ },
+ {
+  "descricao": "Mudança de cena com overlay de cor semitransparente (vermelho/laranja)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:45:25"
+ },
+ {
+  "descricao": "Transição com linhas de velocidade diagonais em combate (frame 1492.7)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:45:35"
+ },
+ {
+  "descricao": "Balões de fala estilo manhwa/webtoon em cenas sem narração",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:45:45"
+ },
+ {
+  "descricao": "Animação 3D estilo Pixar/low-poly contando história completa sem narração",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:45:56"
+ },
+ {
+  "descricao": "Zoom lento em detalhes específicos (porta, rosto) para criar tensão",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:46:09"
+ },
+ {
+  "descricao": "Uso de enquadramento em 'primeiro plano' com desfoque nas bordas (efeito vinheta escura) para criar tensão.",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:46:20"
+ },
+ {
+  "descricao": "Divisão de tela em triângulos (split screen dinâmico)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:46:30"
+ },
+ {
+  "descricao": "Enquadramento tipo polaroid/foto com bordas brancas em cenas de memória",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:46:41"
+ },
+ {
+  "descricao": "Uso de fontes verticais estilizadas (estilo japonês)",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:46:53"
+ },
+ {
+  "descricao": "Flash de luz branca intenso ocupando tela inteira em momento depower-up",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:47:03"
+ },
+ {
+  "descricao": "Interface holográfica futurista com texto legível e design técnico/ficção científica",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:47:15"
+ },
+ {
+  "descricao": "Corte para tela preta total com texto minimalista centralizado",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:47:27"
+ },
+ {
+  "descricao": "Legenda com sombreamento e contorno robusto",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:47:39"
+ },
+ {
+  "descricao": "Encerramento com 'axé pra vocês' + gancho 'mas será que você sabe o que rolou quando...'",
+  "origem": "reprovado pela sessão: Estetica de anime/recap/meme nao aplicavel a video B2B corporativo em Remotion ou ja existente na lib Karaoke",
+  "em": "2026-11-12T14:47:51"
+ },
+ {
+  "descricao": "Uso de termos coloquiais e cômicos (ex: 'loirão três', 'azulzinho', 'waku waku') para descrever transformações lendárias de anime.",
+  "origem": "reprovado pela sessão: Incompativel com anuncios corporativos de produto",
+  "em": "2026-11-12T19:06:49"
+ },
+ {
+  "descricao": "Uso de expressões nordestinas marcadas: 'segura o forninho', 'Oxente', 'meu amor', 'arretado', 'Mainha chegou', 'Poeira, poeira', 'Muito axé'",
+  "origem": "reprovado pela sessão: Incompativel com anuncios corporativos de produto",
+  "em": "2026-11-12T19:06:59"
+ },
+ {
+  "descricao": "Legenda destacando o contraste de comportamento com circulo vermelho indicando a acao do fa",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:01"
+ },
+ {
+  "descricao": "Efeito prisma/refração luminosa em cena dramática",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:01"
+ },
+ {
+  "descricao": "Efeito de luz (lens flare) prismático nas bordas da tela",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:01"
+ },
+ {
+  "descricao": "Legenda com fundo de pincel (brushstroke) texturizado",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:02"
+ },
+ {
+  "descricao": "Legenda de palavra única sobreposta diretamente no objeto/pessoa em foco, acompanhando o movimento da câmera",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:02"
+ },
+ {
+  "descricao": "Transição de 'whip pan' (chicote) lateral",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:02"
+ },
+ {
+  "descricao": "Diagrama técnico animado de nave espacial com destaque em verde",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:02"
+ },
+ {
+  "descricao": "Abertura 'Chega mais perto do fogo, meu povo' - convite intimista de contador de histórias",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:03"
+ },
+ {
+  "descricao": "Uso de referências culturais pop inesperadas (ex: 'Moana de Motunui')",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:03"
+ },
+ {
+  "descricao": "Sincronia de efeitos sonoros de 'tensão' com a movimentação da vara",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:03"
+ },
+ {
+  "descricao": "Transição com explosão de energia laranja/amarela em tela cheia",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:03"
+ },
+ {
+  "descricao": "Brilho corporal dourado/amarelo intenso envolvendo personagem",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:04"
+ },
+ {
+  "descricao": "Efeito de 'aura' ou brilho energético ao redor dos personagens",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:04"
+ },
+ {
+  "descricao": "Badge de ano/data no canto superior direito com fundo amarelo/dourado e borda arredondada",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:04"
+ },
+ {
+  "descricao": "Uso de recortes de mangá/HQ com bordas brancas",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:05"
+ },
+ {
+  "descricao": "Animação de ilustração desenhada cobrindo toda tela sem recortes, personagens integrados ao cenário artístico",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:05"
+ },
+ {
+  "descricao": "Baú de tesouro aberto transbordando moedas de ouro brilhantes com ícones divertidos",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:05"
+ },
+ {
+  "descricao": "Personagem mitológico ciclope em pose pensativa/triste com suporte de queixo",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:06"
+ },
+ {
+  "descricao": "Divisão de tela vertical em 3 painéis mostrando personagens diferentes simultaneamente",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:06"
+ },
+ {
+  "descricao": "Uso de bordas laterais desfocadas (blur) para preencher o formato 9:16",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:06"
+ },
+ {
+  "descricao": "Filtro de cor dominante quente (laranja/vermelho) em cenas românticas/tensas",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:06"
+ },
+ {
+  "descricao": "Overlay de textura CRT/Scanlines constante",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:07"
+ },
+ {
+  "descricao": "Uso de fundo com padrão gráfico (bolinhas) e elementos decorativos flutuantes (chapéu)",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:07"
+ },
+ {
+  "descricao": "Destaque circular (círculo vermelho) em elementos específicos da imagem",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:07"
+ },
+ {
+  "descricao": "Interface UI holográfica futurista com botões interativos em ciano",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:07"
+ },
+ {
+  "descricao": "Interface de HUD tecnológica sobreposta ao anime",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:08"
+ },
+ {
+  "descricao": "Uso de filtro de cor (sépia/desaturado) para indicar flashback ou memória",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:08"
+ },
+ {
+  "descricao": "Fundos de cor sólida vibrante (cyan/turquesa) com personagens centralizados",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:08"
+ },
+ {
+  "descricao": "Inserção de elementos de memes clássicos em personagens (óculos 'deal with it')",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:09"
+ },
+ {
+  "descricao": "Páginas de mangá em tela cheia com balões de fala",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:09"
+ },
+ {
+  "descricao": "Destaque de texto específico dentro de balões de fala",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:09"
+ },
+ {
+  "descricao": "Círculo roxo neon com raios elétricos como moldura de personagem",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:09"
+ },
+ {
+  "descricao": "Legenda fixa em tarja preta semitransparente na parte inferior",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:10"
+ },
+ {
+  "descricao": "Tela dividida fixa (anime à esquerda, mapa/jogo à direita) durante todo o vídeo",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:10"
+ },
+ {
+  "descricao": "Legendas com bordas brilhantes e efeito de destaque",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:10"
+ },
+ {
+  "descricao": "Corte estilizado em close extremo nos olhos do personagem",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:11"
+ },
+ {
+  "descricao": "Teclas de teclado 3D (F6, F8, K, P, L, G) aparecendo como objetos grandes e centralizados na tela, sincronizadas com a fala do tutorial",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:11"
+ },
+ {
+  "descricao": "Mascote chibi/cartoon pequeno aparece integrado à cena (segundo 2365)",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:11"
+ },
+ {
+  "descricao": "Mascote fixo na parte inferior esquerda com animação de leve balanço",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:11"
+ },
+ {
+  "descricao": "Narração temática sci-fi: 'Comando Estelar', 'recrutas', 'tripulantes', 'segundo meus cálculos', 'aviso de navegação'",
+  "origem": "reprovado pela sessão: Efeitos de anime/recap/mangá/gameplay não se aplicam a anúncios corporativos B2B em Remotion",
+  "em": "2026-11-12T20:06:12"
+ },
+ {
+  "descricao": "Cards de status/status de habilidade no estilo RPG system (ex: [ADVENTURER], [EFFECT]) com fontes e caixas translúcidas azuis",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:18:07"
+ },
+ {
+  "descricao": "Uso de filtros de 'desespero' (rosto azulado/pálido) para enfatizar o estado emocional da personagem.",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:18:17"
+ },
+ {
+  "descricao": "Filtro de câmera analógica/VHS com grão e vinheta escura",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:18:27"
+ },
+ {
+  "descricao": "Enquadramento em contra-plongé (ângulo baixo) extremo para vilão/alienígena.",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:18:37"
+ },
+ {
+  "descricao": "Bola animada em 3D com textura realista que aumenta de tamanho na tela",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:18:46"
+ },
+ {
+  "descricao": "Overlay de partículas de brilho (glitter/sparkles)",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:18:56"
+ },
+ {
+  "descricao": "Fita de isolamento amarela animada no topo da tela durante todo o vídeo",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:19:06"
+ },
+ {
+  "descricao": "Balão de diálogo estilo HQ com texto em inglês integrado na cena",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:19:17"
+ },
+ {
+  "descricao": "Uso de 'balões de fala' dinâmicos que aparecem e somem com a ação",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:19:27"
+ },
+ {
+  "descricao": "Uso de onomatopeias visuais estilizadas (estilo mangá/manhwa) integradas à cena",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:19:38"
+ },
+ {
+  "descricao": "Simulação de cinema com plateia assistindo anime na tela grande",
+  "origem": "reprovado pela sessão: Efeitos de anime/manhwa/terror/futebol/crime nao se aplicam a anuncios corporativos B2B em Remotion",
+  "em": "2026-11-12T23:19:48"
+ },
+ {
+  "descricao": "Uso de emojis expressivos flutuantes (emoji bravo, chorando, corações) combinados com legendas dinâmicas em amarelo",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:14"
+ },
+ {
+  "descricao": "Moldura branca grossa ao redor do conteúdo do vídeo durante todo o vídeo",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:14"
+ },
+ {
+  "descricao": "Enquadramento 'Picture-in-Picture' com borda branca sobre fundo dinâmico",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:14"
+ },
+ {
+  "descricao": "Badge/placa de ranking na tela ('2º lugar')",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:14"
+ },
+ {
+  "descricao": "Ranking animado com barras coloridas horizontais mostrando animes por nota/views, com mini-imagens dos personagens",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:15"
+ },
+ {
+  "descricao": "Cenas de filme/série real como base do vídeo",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:15"
+ },
+ {
+  "descricao": "Círculo vermelho animado destacando o erro no quadro",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:15"
+ },
+ {
+  "descricao": "Círculo vermelho de destaque com zoom/foco em detalhe incorreto do produto no início",
+  "origem": "reprovado pela sessão: Efeitos de canais de anime/curiosidades/recap (moldura branca, emojis flutuantes, circulo vermelho, ranking de anime) que nao servem para anuncios institucionais/produto B2B",
+  "em": "2026-11-12T23:53:15"
+ },
+ {
+  "descricao": "Caixa de texto superior com título fixo e resumo do tema.",
+  "origem": "aplicado pela sessão: Aplicado em src/videos/inovareclone_20261112_210030/Video.tsx: cabecalho superior contextual em Montserrat ExtraBold e destaque vibrante de palavras-chave no karaoke",
+  "em": "2026-11-12T23:53:24"
+ },
+ {
+  "descricao": "Palavras destacadas em verde fluorescente no meio da frase",
+  "origem": "aplicado pela sessão: Aplicado em src/videos/inovareclone_20261112_210030/Video.tsx: cabecalho superior contextual em Montserrat ExtraBold e destaque vibrante de palavras-chave no karaoke",
+  "em": "2026-11-12T23:53:25"
+ },
+ {
+  "descricao": "Dupla camada de vídeo com desfoque de fundo (blur background) e proporção vertical preenchida",
+  "origem": "reprovado pela sessão: videos e fotos ja sao nativos 9:16 verticais sem tarjas",
+  "em": "2026-11-13T07:47:21"
+ },
+ {
+  "descricao": "Mini-janela flutuante no topo mostrando cena/meme contextualizado com o fundo satisfatório",
+  "origem": "reprovado pela sessão: video comercial B2B nao usa fundo satisfatorio nem meme",
+  "em": "2026-11-13T07:47:32"
+ },
+ {
+  "descricao": "Corte súbito para escala de cinza (preto e branco) no apresentador ao citar dado extremo/frio",
+  "origem": "reprovado pela sessão: anuncio comercial sem fatos tragicos ou mortais",
+  "em": "2026-11-13T07:47:42"
+ },
+ {
+  "descricao": "Inversão completa de cores na tela (filme/imagem em preto e branco com alto contraste)",
+  "origem": "reprovado pela sessão: video comercial B2B sem cenario apocaliptico",
+  "em": "2026-11-13T07:47:52"
+ },
+ {
+  "descricao": "Uso de bordões de personagens clássicos inseridos na fala do narrador (Chaves: 'Foi sem querer querendo')",
+  "origem": "reprovado pela sessão: narracao ja gravada e fechada no briefing",
+  "em": "2026-11-13T07:48:03"
+ }
+]

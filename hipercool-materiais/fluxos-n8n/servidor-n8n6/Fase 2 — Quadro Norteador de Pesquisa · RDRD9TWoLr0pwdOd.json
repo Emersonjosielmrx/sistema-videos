@@ -1,0 +1,1620 @@
+{
+ "updatedAt": "2026-10-03T16:09:11.099Z",
+ "createdAt": "2026-09-21T00:11:35.709Z",
+ "id": "RDRD9TWoLr0pwdOd",
+ "name": "Fase 2 — Quadro Norteador de Pesquisa",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🌐 1. INTERFACE WEB & CAPTAÇÃO\n\nDisponibiliza a interface visual responsiva e interativa no navegador para o preenchimento e coleta estruturada dos dados do Quadro Norteador de Pesquisa.\n\n* **Webhook - Carregar Formulário Web (`Webhook`)**:\n  Escuta requisições HTTP GET na rota `/form-qnp` quando o operador, SDR ou cliente acessa o link do formulário.\n\n* **Renderizar Interface HTML (`HTML`)**:\n  Compila a estrutura visual completa em HTML5 e CSS moderno (Dark Mode com tipografia limpa), contendo todos os campos de diagnóstico, validações de formulário e script assíncrono para submissão do payload.\n\n* **Responder Navegador com Formulário (`Respond to Webhook`)**:\n  Devolve o código HTML compilado com status HTTP 200 e cabeçalho `Content-Type: text/html; charset=UTF-8`, garantindo renderização instantânea no navegador.",
+    "height": 330,
+    "width": 660,
+    "color": 6
+   },
+   "id": "2426592e-c213-410b-afb1-1a823e404a7c",
+   "name": "Note - Frontend",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -144,
+    -80
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📥 2. INGESTÃO & NORMALIZAÇÃO\n\nPonto de entrada oficial dos dados submetidos pelo formulário para higienização, estruturação e geração de metadados do projeto.\n\n* **Webhook - Receber Submissão da Empresa (`Webhook`)**:\n  Escuta requisições HTTP POST na rota `/qnp` com o payload completo contendo as respostas do formulário da empresa.\n\n* **Sanitizar Dados e Gerar ID do Projeto (`Code`)**:\n  Higieniza strings, valida campos obrigatórios, padroniza o nome da empresa e gera o `project_id` único baseado no slug da empresa e timestamp (`slug-YYYYMMDD-HHMMSS`).",
+    "height": 340,
+    "width": 460,
+    "color": 4
+   },
+   "id": "a0458f0a-66a3-4dc2-86ac-111d16987f28",
+   "name": "Note - Ingestão",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1184,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🗂️ 3. GESTÃO DE DIRETÓRIOS GOOGLE DRIVE (POP 03)\n\nEstruturação automatizada do ecossistema de pastas no Google Drive corporativo seguindo o padrão oficial do POP 03.\n\n* **Google Drive - Criar Pasta Raiz do Projeto1 (`Google Drive`)**:\n  Pesquisa no Google Drive corporativo (`My Drive`) pela pasta raiz da empresa nomeada como `📁 [Nome da Empresa]`.\n\n* **If (`If`)**:\n  Avalia o resultado da busca:\n  - **True**: A pasta raiz da empresa já existe no Drive; segue direto para a criação/verificação da subpasta de briefing.\n  - **False**: A pasta da empresa ainda não existe; direciona o fluxo para a criação da pasta mestre.\n\n* **Google Drive - Criar Subpastas POP  (`Google Drive`)**:\n  Cria a pasta raiz mestre `📁 [Nome da Empresa]` no Google Drive caso ela ainda não existisse.\n\n* **Google Drive - Criar Subpastas POP 03 (`Google Drive`)**:\n  Cria ou vincula a subpasta oficial `briefing` dentro da pasta raiz da empresa, onde os relatórios estratégicos serão persistidos.",
+    "height": 460,
+    "width": 980,
+    "color": 7
+   },
+   "id": "0922cf1a-614c-4276-9974-43a61fcf32ec",
+   "name": "Note - Google Drive (POP 03)",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -704,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🧠 4. AGENTE ESTRATÉGICO & PARSER\n\nCérebro analítico e executivo do fluxo, responsável pelo diagnóstico aprofundado de mercado e elaboração dos documentos estratégicos.\n\n* **Agente IA - Diretor Estratégico (`AI Agent`)**:\n  Atua como Analista Estratégico de Marketing, Vendas e Posicionamento (POP 02/03). Processa o briefing da empresa e gera um JSON com 4 documentos completos (`briefing_md`, `estrategia_md`, `kpis_md`, `plano_acao_md`).\n\n* **Tratar e Validar JSON da IA (`Code`)**:\n  Recebe o output do modelo, limpa blocos delimitadores de código (```json), faz o parse do JSON e valida a integridade de cada um dos 4 relatórios antes da separação.",
+    "height": 340,
+    "width": 600,
+    "color": 7
+   },
+   "id": "3c4b31f7-26d2-42a7-8ff0-2ff3209025c4",
+   "name": "Note - Agente IA",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    400,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🤖 MODELO DE LINGUAGEM (LLM)\n\nMotor de inteligência artificial de alta performance conectado ao Agente Diretor Estratégico.\n\n* **OpenAI Chat Model - Claude (`ChatOpenAi`)**:\n  Conectado via gateway OmniRoute (compatível com a API OpenAI), operando o modelo `antigravity/gemini-2.5-flash` com temperatura 0.7 e timeout estendido (300s) para raciocínio profundo e geração de relatórios densos sem truncamento.",
+    "height": 370,
+    "width": 440,
+    "color": 5
+   },
+   "id": "85555b7f-4286-4fdd-be27-3db6d0ea4407",
+   "name": "Note - LLM",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    400,
+    784
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📦 5. CONSOLIDAÇÃO DOS DOCUMENTOS\n\nDesmembramento da resposta do estrategista em arquivos individuais para gravação e controle de versão.\n\n* **Separar em 4 Arquivos Markdown (`Code`)**:\n  Desmembra os dados estruturados do agente em 4 itens de fluxo independentes:\n  - `01-briefing.md`\n  - `02-estrategia.md`\n  - `03-kpis.md`\n  - `04-plano-de-acao.md`\n  Vincula o `project_id`, slug da empresa, metadados de data/hora e o conteúdo Markdown correspondente a cada arquivo.",
+    "height": 340,
+    "width": 400,
+    "color": 3
+   },
+   "id": "1ad69286-cae6-4697-adb4-c29adc4dd2b8",
+   "name": "Note - Consolidação",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1040,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🔄 6. CONTROLE DE ITERAÇÃO (LOOP)\n\nOrquestração e controle do lote de documentos, garantindo que cada relatório seja processado e persistido individualmente.\n\n* **Loop - Processar Arquivo por Arquivo (`Split in Batches`)**:\n  Processa a fila de 4 documentos um a um (batch size = 1):\n  - **Loop (cada item)**: Envia o documento para conversão binária e salvamento simultâneo no Google Drive e servidor VPS.\n  - **Done (ao concluir todos)**: Direciona para a consolidação e montagem da resposta final.",
+    "height": 340,
+    "width": 410
+   },
+   "id": "cdad50f5-fc4d-4106-b14f-151f8b53899d",
+   "name": "Note - Loop",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1472,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🚀 7. PERSISTÊNCIA DUAL (GOOGLE DRIVE & VPS SSH)\n\nPersistência redundante de cada documento gerado: armazena os arquivos tanto no Google Drive do cliente quanto no servidor Linux da agência.\n\n* **Converter Markdown em Arquivo Binário (`Convert to File`)**:\n  Transforma o conteúdo em texto puro Markdown (`content`) em payload binário pronto para transmissão e armazenamento.\n\n* **Google Drive - Criar Subpastas POP 1 (`Google Drive`)**:\n  Salva e armazena o arquivo `.md` correspondente diretamente na subpasta `briefing` no Google Drive corporativo do cliente.\n\n* **Salvar Arquivo via SSH no Servidor (`SSH`)**:\n  Transfere via SFTP/SSH e grava o arquivo físico no servidor VPS em `/root/briefing/[empresa]/[filename]` para uso imediato dos agentes locais.",
+    "height": 380,
+    "width": 540,
+    "color": 2
+   },
+   "id": "e5cbda7d-fef3-48cf-ba78-2ac417272e80",
+   "name": "Note - Persistência",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1936,
+    320
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## ✅ 8. RESPOSTA FINAL DO WEBHOOK\n\nFeedback estruturado de encerramento da execução e entrega dos metadados completos.\n\n* **Montar Resposta Final de Sucesso (`Code`)**:\n  Acionado após a conclusão do loop. Consolida e retorna o JSON com status de sucesso (`true`), `project_id`, nome da empresa, quantidade de arquivos processados e caminhos de armazenamento.",
+    "height": 285,
+    "width": 480,
+    "color": 6
+   },
+   "id": "cb5971e6-7fe9-4f24-b405-6a595a32973f",
+   "name": "Note - Resposta Final",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1920,
+    -16
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 📌 REFERÊNCIA: MODELOS HOMOLOGADOS (GATEWAY)\n\nCatálogo de modelos suportados pelo gateway OmniRoute para uso no agente:\n\n* **Linha Gemini Flash (Rápido / Operacional)**:\n  - `antigravity/gemini-2.5-flash` *(Ativo no agente)*\n  - `antigravity/gemini-2.5-flash-lite`\n  - `antigravity/gemini-2.5-flash-thinking`\n  - `antigravity/gemini-3.1-flash-lite`\n  - `antigravity/gemini-3.5-flash-low / medium / high`\n\n* **Linha Gemini Pro (Raciocínio Avançado)**:\n  - `antigravity/gemini-2.5-pro`\n  - `antigravity/gemini-3-pro-preview`\n  - `antigravity/gemini-3.1-pro-low / high`",
+    "height": 320,
+    "width": 580,
+    "color": 5
+   },
+   "id": "5d5fe167-0c30-47e1-9dc2-419e35a422c7",
+   "name": "Note - Referência Modelos",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    736,
+    -96
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responder Navegador com Formulário",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    336,
+    48
+   ],
+   "typeVersion": 1,
+   "id": "ad78ed3f-bfe3-413b-ac0c-fdfeaf9052fb"
+  },
+  {
+   "parameters": {
+    "path": "form-qnp",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Webhook - Carregar Formulário Web",
+   "type": "n8n-nodes-base.webhook",
+   "position": [
+    -96,
+    48
+   ],
+   "webhookId": "c74e2c9f-6f9e-4ef8-b404-e356b15771e1",
+   "typeVersion": 1,
+   "id": "0b813646-479f-465b-9625-5a5a60008b3c"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n<title>Questionário Estratégico de Marketing & Métricas</title>\n\n<!-- FONTE INTER -->\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap\" rel=\"stylesheet\">\n\n<style>\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\n:root {\n    --bg: #07111f;\n    --card: #0d1b2d;\n    --card-2: #10243a;\n    --border: rgba(255, 255, 255, .09);\n    --text: #f4f7fb;\n    --muted: #91a4b8;\n    --primary: #00c8ff;\n    --primary-2: #0878ff;\n    --success: #22c55e;\n    --danger: #ef4444;\n}\n\nbody {\n    font-family: 'Inter', Arial, Helvetica, sans-serif;\n    background:\n        radial-gradient(circle at 20% 0%, rgba(0, 200, 255, .12), transparent 30%),\n        radial-gradient(circle at 90% 20%, rgba(8, 120, 255, .12), transparent 30%),\n        var(--bg);\n    color: var(--text);\n    min-height: 100vh;\n}\n\n.container {\n    width: min(950px, calc(100% - 32px));\n    margin: 0 auto;\n    padding: 40px 0 80px;\n}\n\n/* HEADER */\n.header {\n    text-align: center;\n    margin-bottom: 35px;\n}\n\n.logo {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n    margin-bottom: 20px;\n    font-weight: 800;\n    font-size: 20px;\n    letter-spacing: -0.5px;\n}\n\n.logo-icon {\n    width: 38px;\n    height: 38px;\n    border-radius: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: linear-gradient(135deg, var(--primary), var(--primary-2));\n    color: #00111d;\n    font-weight: 900;\n}\n\n.header h1 {\n    font-size: clamp(28px, 4.5vw, 46px);\n    line-height: 1.1;\n    margin-bottom: 15px;\n    letter-spacing: -1.5px;\n    font-weight: 800;\n}\n\n.header h1 span {\n    background: linear-gradient(90deg, #fff, var(--primary));\n    -webkit-background-clip: text;\n    background-clip: text;\n    color: transparent;\n}\n\n.header p {\n    color: var(--muted);\n    max-width: 720px;\n    margin: auto;\n    line-height: 1.6;\n    font-size: 15px;\n}\n\n/* CARD PRINCIPAL */\n.card {\n    background: rgba(13, 27, 45, .88);\n    border: 1px solid var(--border);\n    border-radius: 24px;\n    padding: clamp(25px, 4vw, 45px);\n    box-shadow: 0 30px 80px rgba(0,0,0,.35);\n    backdrop-filter: blur(15px);\n}\n\n/* SEÇÕES */\n.section {\n    margin-top: 45px;\n    padding-top: 35px;\n    border-top: 1px solid var(--border);\n}\n\n.section:first-of-type {\n    margin-top: 0;\n    padding-top: 0;\n    border-top: none;\n}\n\n.section-number {\n    color: var(--primary);\n    font-size: 13px;\n    font-weight: 700;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    display: block;\n    margin-bottom: 6px;\n}\n\n.section h2 {\n    font-size: 24px;\n    font-weight: 700;\n    margin-bottom: 8px;\n    letter-spacing: -0.5px;\n}\n\n.section-description {\n    color: var(--muted);\n    margin-bottom: 25px;\n    font-size: 14px;\n    line-height: 1.5;\n}\n\n/* QUESTÕES E INPUTS */\n.question {\n    margin-bottom: 24px;\n}\n\n.question label {\n    display: block;\n    font-size: 14px;\n    font-weight: 600;\n    margin-bottom: 9px;\n    color: #e2e8f0;\n}\n\n.required {\n    color: var(--primary);\n}\n\ninput,\ntextarea,\nselect {\n    width: 100%;\n    background: rgba(255, 255, 255, .035);\n    border: 1px solid var(--border);\n    color: var(--text);\n    border-radius: 12px;\n    padding: 14px 15px;\n    outline: none;\n    font-size: 14px;\n    transition: all .2s ease;\n    font-family: inherit;\n}\n\ninput:focus,\ntextarea:focus,\nselect:focus {\n    border-color: var(--primary);\n    background: rgba(255, 255, 255, .06);\n    box-shadow: 0 0 0 3px rgba(0, 200, 255, .12);\n}\n\ntextarea {\n    min-height: 110px;\n    resize: vertical;\n    line-height: 1.5;\n}\n\nselect option {\n    background-color: var(--card);\n    color: var(--text);\n}\n\ninput::placeholder,\ntextarea::placeholder {\n    color: #53687b;\n}\n\n/* RADIO E CHECKBOX */\n.radio-group,\n.checkbox-group {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n    gap: 12px;\n}\n\n.option {\n    border: 1px solid var(--border);\n    background: rgba(255, 255, 255, .02);\n    border-radius: 12px;\n    padding: 14px 16px;\n    cursor: pointer;\n    transition: all .2s ease;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    color: var(--text);\n    user-select: none;\n}\n\n.option:hover {\n    background: rgba(0, 200, 255, .05);\n    border-color: rgba(0, 200, 255, .3);\n}\n\n.option input {\n    width: auto;\n    margin-right: 12px;\n    accent-color: var(--primary);\n    cursor: pointer;\n}\n\n/* GRID LAYOUT */\n.grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 20px;\n}\n\n/* BOTÃO DE ENVIO */\n.button-area {\n    margin-top: 40px;\n    padding-top: 25px;\n    border-top: 1px solid var(--border);\n}\n\nbutton {\n    width: 100%;\n    padding: 16px;\n    border: none;\n    border-radius: 12px;\n    background: linear-gradient(135deg, var(--primary-2), var(--primary));\n    color: #00121d;\n    font-size: 16px;\n    font-weight: 800;\n    cursor: pointer;\n    transition: all .2s ease;\n    font-family: inherit;\n}\n\nbutton:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 10px 30px rgba(0, 200, 255, .25);\n}\n\nbutton:disabled {\n    opacity: .6;\n    cursor: not-allowed;\n    transform: none;\n    box-shadow: none;\n}\n\n/* MENSAGENS DE SUCESSO E ERRO */\n.success {\n    display: none;\n    margin-top: 25px;\n    padding: 20px;\n    background: rgba(34, 197, 94, .1);\n    border: 1px solid rgba(34, 197, 94, .25);\n    color: #4ade80;\n    border-radius: 12px;\n    text-align: center;\n    line-height: 1.5;\n}\n\n.error {\n    display: none;\n    margin-top: 25px;\n    padding: 20px;\n    background: rgba(239, 68, 68, .1);\n    border: 1px solid rgba(239, 68, 68, .25);\n    color: #fca5a5;\n    border-radius: 12px;\n    text-align: center;\n    line-height: 1.5;\n}\n\n/* FOOTER */\n.footer {\n    text-align: center;\n    color: #53687b;\n    font-size: 12px;\n    margin-top: 30px;\n}\n\n@media(max-width:700px) {\n    .container {\n        width: min(100% - 20px, 950px);\n        padding-top: 20px;\n    }\n\n    .card {\n        padding: 20px;\n        border-radius: 18px;\n    }\n\n    .grid {\n        grid-template-columns: 1fr;\n        gap: 0;\n    }\n\n    .header h1 {\n        font-size: 30px;\n    }\n\n    .radio-group,\n    .checkbox-group {\n        grid-template-columns: 1fr;\n    }\n}\n</style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n    <header class=\"header\">\n        <div class=\"logo\">\n            <div class=\"logo-icon\">M</div>\n            MARKETING OS\n        </div>\n        <h1>\n            Questionário <span>Estratégico & Métricas</span>\n        </h1>\n        <p>\n            Olá! Este questionário foi desenvolvido para alinharmos os objetivos da sua empresa,\n            analisarmos seus números de vendas e estruturarmos uma estratégia de alta performance.\n        </p>\n    </header>\n\n    <div class=\"card\">\n\n        <form id=\"marketingForm\">\n\n            <!-- ===================================================== -->\n            <!-- 01. EMPRESA -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 01</span>\n                <h2>Sobre a empresa</h2>\n                <p class=\"section-description\">Vamos começar entendendo quem é a sua empresa.</p>\n\n                <div class=\"question\">\n                    <label>\n                        1. Qual o nome da empresa? <span class=\"required\">*</span>\n                    </label>\n                    <input type=\"text\" name=\"nome_empresa\" required placeholder=\"Digite o nome da empresa\">\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        2. Conte um pouco sobre a empresa. <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"descricao_empresa\" required placeholder=\"Conte a história da empresa, como começou, o que faz e como atua...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        3. Quem são os principais envolvidos no projeto?\n                    </label>\n                    <textarea name=\"principais_envolvidos\" placeholder=\"Nome, cargo e outras informações relevantes...\"></textarea>\n                </div>\n\n                <div class=\"grid\">\n                    <div class=\"question\">\n                        <label>4. Instagram da empresa</label>\n                        <input type=\"text\" name=\"instagram\" placeholder=\"@suaempresa\">\n                    </div>\n\n                    <div class=\"question\">\n                        <label>5. Site da empresa</label>\n                        <input type=\"url\" name=\"site\" placeholder=\"https://...\">\n                    </div>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 02. MOMENTO E ALINHAMENTO DE METAS -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 02</span>\n                <h2>Momento e Objetivos de Sucesso</h2>\n                <p class=\"section-description\">Queremos entender onde a empresa está e alinhar exatamente o que é considerado \"resultado\".</p>\n\n                <div class=\"question\">\n                    <label>6. Qual é o momento atual da empresa?</label>\n                    <div class=\"radio-group\">\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"crescimento_rapido\">\n                            Crescimento rápido\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"crescimento_leve\">\n                            Crescimento leve\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"estagnada\">\n                            Estagnada\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"queda\">\n                            Queda\n                        </label>\n                    </div>\n                </div>\n\n                <div class=\"question\">\n                    <label>7. Qual é a margem de contribuição?</label>\n                    <textarea name=\"margem_contribuicao\" placeholder=\"Se souber, informe a margem de contribuição média dos produtos/serviços.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        8. Qual é o principal objetivo estratégico com nosso trabalho? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"objetivo_principal\" required placeholder=\"Ex.: Aumentar as vendas em 30%, conquistar novos clientes, aumentar o faturamento...\"></textarea>\n                </div>\n\n                <!-- NOVAS PERGUNTAS DE ALINHAMENTO DE EXPECTATIVAS -->\n                <div class=\"question\">\n                    <label>\n                        8.1. Para considerar este projeto um SUCESSO ABSOLUTO nos próximos 3 a 6 meses, qual é a meta exata e concreta? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"meta_sucesso_concreta\" required placeholder=\"Defina um número claro. Ex.: Fechar 30 novos contratos/mês, gerar 200 leads qualificados/mês ou faturar R$ 100 mil/mês via anúncios.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>8.2. Qual é a velocidade média de resposta do seu comercial para novos leads?</label>\n                    <select name=\"tempo_resposta_comercial\">\n                        <option value=\"\">Selecione</option>\n                        <option value=\"imediato\">Imediato (Até 15 minutos)</option>\n                        <option value=\"ate_1h\">Até 1 hora</option>\n                        <option value=\"mesmo_dia\">No mesmo dia (Até 12 horas)</option>\n                        <option value=\"mais_24h\">Mais de 24 horas</option>\n                    </select>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 03. PRODUTO OU SERVIÇO -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 03</span>\n                <h2>Produto ou serviço</h2>\n                <p class=\"section-description\">Agora queremos entender profundamente aquilo que você vende.</p>\n\n                <div class=\"question\">\n                    <label>\n                        9. Quais são seus principais produtos ou serviços? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"produtos_servicos\" required placeholder=\"Liste seus principais produtos ou serviços.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        10. Me venda o seu produto ou serviço. <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"venda_produto\" required placeholder=\"Imagine que você está falando com um cliente interessado. Por que ele deveria comprar?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>11. Qual é a grande promessa do seu produto ou serviço?</label>\n                    <textarea name=\"grande_promessa\" placeholder=\"Qual é o principal benefício que o cliente recebe?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>12. Qual produto ou serviço possui maior margem de lucro?</label>\n                    <input type=\"text\" name=\"maior_margem\" placeholder=\"Produto ou serviço\">\n                </div>\n\n                <div class=\"question\">\n                    <label>13. Qual produto ou serviço possui maior demanda?</label>\n                    <input type=\"text\" name=\"maior_demanda\" placeholder=\"Produto ou serviço\">\n                </div>\n\n                <div class=\"question\">\n                    <label>14. Quais produtos ou serviços você deseja divulgar?</label>\n                    <textarea name=\"produtos_divulgar\" placeholder=\"Liste os produtos ou serviços que deseja promover.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 04. CLIENTE -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 04</span>\n                <h2>Cliente e público-alvo</h2>\n                <p class=\"section-description\">Quanto melhor conhecermos seu cliente, melhor poderemos criar a comunicação.</p>\n\n                <div class=\"question\">\n                    <label>15. Quem é o seu público-alvo?</label>\n                    <textarea name=\"publico_alvo\" placeholder=\"Idade, gênero, profissão, cargo, formação, interesses, comportamentos, localização etc.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>16. Quais são os maiores medos do seu cliente?</label>\n                    <textarea name=\"medos_cliente\" placeholder=\"Quais problemas ou situações seu cliente teme?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>17. Quais problemas seu produto ou serviço resolve?</label>\n                    <textarea name=\"problemas_resolvidos\" placeholder=\"Liste os principais problemas que você resolve.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>18. Quais são as principais objeções antes da compra?</label>\n                    <textarea name=\"objecoes\" placeholder=\"Ex.: preço, confiança, prazo, qualidade, concorrência...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>19. O que é um Lead qualificado para você?</label>\n                    <textarea name=\"lead_qualificado\" placeholder=\"Descreva as características de um lead que realmente tem potencial de compra.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 05. VENDAS E MÉTRICAS DO FUNIL -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 05</span>\n                <h2>Vendas e Métricas do Funil</h2>\n                <p class=\"section-description\">Essas informações ajudam a calcular a matemática comercial da sua empresa.</p>\n\n                <div class=\"grid\">\n                    <div class=\"question\">\n                        <label>20. Preço médio por venda (Ticket Médio)</label>\n                        <input type=\"number\" step=\"0.01\" name=\"preco_medio\" placeholder=\"R$ 0,00\">\n                    </div>\n\n                    <div class=\"question\">\n                        <label>Custo médio por venda</label>\n                        <input type=\"number\" step=\"0.01\" name=\"custo_medio_venda\" placeholder=\"R$ 0,00\">\n                    </div>\n                </div>\n\n                <!-- NOVAS PERGUNTAS DE MÉTRICAS AVANÇADAS -->\n                <div class=\"grid\">\n                    <div class=\"question\">\n                        <label>Taxa de conversão comercial (%)</label>\n                        <input type=\"text\" name=\"taxa_conversao_comercial\" placeholder=\"Ex.: De cada 10 leads, fechamos 2 (20%)\">\n                    </div>\n\n                    <div class=\"question\">\n                        <label>Tempo do ciclo de vendas</label>\n                        <input type=\"text\" name=\"ciclo_vendas\" placeholder=\"Ex.: No mesmo dia, 3 dias, 15 dias, 1 mês...\">\n                    </div>\n                </div>\n\n                <div class=\"question\">\n                    <label>Possui e utiliza algum sistema de CRM?</label>\n                    <input type=\"text\" name=\"sistema_crm\" placeholder=\"Ex.: RD Station, Pipedrive, Kommo, HubSpot, WhatsApp Web solto, Não possui...\">\n                </div>\n\n                <div class=\"question\">\n                    <label>Custo máximo aceitável por Lead/Cliente (CAC/CPL)</label>\n                    <input type=\"text\" name=\"custo_maximo_lead_cliente\" placeholder=\"Ex.: Até R$ 30,00 por lead ou R$ 200,00 por cliente conquistado.\">\n                </div>\n\n                <div class=\"question\">\n                    <label>21. Quantas vendas você fez no mês passado?</label>\n                    <input type=\"number\" name=\"vendas_mes_passado\" placeholder=\"Quantidade de vendas\">\n                </div>\n\n                <div class=\"question\">\n                    <label>22. Como funciona atualmente o seu processo de vendas?</label>\n                    <textarea name=\"processo_vendas\" placeholder=\"Explique desde o primeiro contato até o fechamento da venda.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>23. Quais estratégias de vendas ou marketing já funcionaram para sua empresa?</label>\n                    <textarea name=\"estrategias_vencedoras\" placeholder=\"Conte experiências anteriores que deram bons resultados.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 06. CONCORRÊNCIA -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 06</span>\n                <h2>Concorrência e diferenciais</h2>\n\n                <div class=\"question\">\n                    <label>\n                        24. Quais são os seus principais diferenciais? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"diferenciais\" required placeholder=\"Por que um cliente deveria escolher sua empresa em vez de um concorrente?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>25. Quem são seus principais concorrentes?</label>\n                    <textarea name=\"concorrentes\" placeholder=\"Cite concorrentes diretos ou até 3 empresas que você considera referência.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 07. SWOT -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 07</span>\n                <h2>Análise estratégica SWOT</h2>\n                <p class=\"section-description\">Não precisa conhecer a metodologia SWOT. Apenas responda de acordo com sua percepção.</p>\n\n                <div class=\"question\">\n                    <label>26. Quais são as principais forças da empresa?</label>\n                    <textarea name=\"swot_forcas\" placeholder=\"O que sua empresa faz muito bem?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>27. Quais são as principais fraquezas da empresa?</label>\n                    <textarea name=\"swot_fraquezas\" placeholder=\"O que precisa melhorar?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>28. Quais oportunidades você enxerga para a empresa?</label>\n                    <textarea name=\"swot_oportunidades\" placeholder=\"Mercados, produtos, tendências, novos públicos etc.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>29. Quais ameaças podem prejudicar a empresa?</label>\n                    <textarea name=\"swot_ameacas\" placeholder=\"Concorrência, mercado, economia, mudanças etc.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 08. ANÚNCIOS -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 08</span>\n                <h2>Publicidade e anúncios</h2>\n\n                <div class=\"question\">\n                    <label>30. Você já anunciou no Google ou Facebook/Instagram Ads?</label>\n                    <div class=\"radio-group\">\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"ja_anunciou\" value=\"sim\">\n                            Sim\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"ja_anunciou\" value=\"nao\">\n                            Não\n                        </label>\n                    </div>\n                </div>\n\n                <div class=\"question\">\n                    <label>31. Se já anunciou, como foi sua experiência?</label>\n                    <textarea name=\"experiencia_anuncios\" placeholder=\"Resultados, dificuldades, custos, experiências positivas ou negativas...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>32. Qual será o objetivo principal das campanhas?</label>\n                    <select name=\"objetivo_campanhas\">\n                        <option value=\"\">Selecione</option>\n                        <option value=\"vendas\">Vendas diretas</option>\n                        <option value=\"leads\">Geração de contatos / Leads</option>\n                        <option value=\"alcance\">Alcance</option>\n                        <option value=\"trafego\">Tráfego</option>\n                        <option value=\"envolvimento\">Envolvimento</option>\n                        <option value=\"cadastros\">Cadastros</option>\n                        <option value=\"mensagens\">Mensagens</option>\n                    </select>\n                </div>\n\n                <div class=\"question\">\n                    <label>33. Qual é sua meta de resultados com os anúncios?</label>\n                    <textarea name=\"meta_anuncios\" placeholder=\"Ex.: 50 leads por mês, 20 vendas, R$ 30 mil de faturamento...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>34. Qual será o investimento inicial nos anúncios?</label>\n                    <input type=\"number\" step=\"0.01\" name=\"investimento_anuncios\" placeholder=\"R$ 0,00\">\n                </div>\n\n                <div class=\"question\">\n                    <label>35. Você já possui contas de anúncios?</label>\n                    <textarea name=\"contas_anuncios\" placeholder=\"Google Ads, Meta Ads etc.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 09. REGIONALIZAÇÃO E PAGAMENTO -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 09</span>\n                <h2>Região e pagamento</h2>\n\n                <div class=\"question\">\n                    <label>36. Em quais regiões deseja anunciar?</label>\n                    <textarea name=\"regiao_anuncios\" placeholder=\"Estados, cidades, bairros ou regiões específicas.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>37. Quais formas de pagamento você aceita?</label>\n                    <textarea name=\"formas_pagamento\" placeholder=\"Pix, cartão, boleto, parcelamento etc.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>38. Trabalha com datas especiais ou promoções?</label>\n                    <textarea name=\"datas_promocoes\" placeholder=\"Black Friday, Natal, aniversário, Carnaval, descontos, brindes, frete grátis etc.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 10. PALAVRAS-CHAVE -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 10</span>\n                <h2>Palavras-chave</h2>\n\n                <div class=\"question\">\n                    <label>39. Palavras-chave POSITIVAS</label>\n                    <textarea name=\"palavras_positivas\" placeholder=\"Quais palavras você gostaria que acionassem seus anúncios?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>40. Palavras-chave NEGATIVAS</label>\n                    <textarea name=\"palavras_negativas\" placeholder=\"Quais palavras você NÃO quer associadas aos seus anúncios?\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 11. ESTRUTURA -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 11</span>\n                <h2>Estrutura da empresa</h2>\n\n                <div class=\"question\">\n                    <label>41. Como é a estrutura organizacional da empresa?</label>\n                    <textarea name=\"estrutura_organizacional\" placeholder=\"Descreva os principais responsáveis e departamentos.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>42. Qual é a sua posição dentro da empresa?</label>\n                    <input type=\"text\" name=\"cargo_responsavel\" placeholder=\"Ex.: proprietário, diretor, gerente...\">\n                </div>\n\n                <div class=\"question\">\n                    <label>43. Quantos funcionários trabalham na empresa?</label>\n                    <input type=\"number\" name=\"numero_funcionarios\" placeholder=\"Quantidade\">\n                </div>\n\n                <div class=\"question\">\n                    <label>44. É sempre com você que devemos manter contato?</label>\n                    <textarea name=\"contato_responsavel\" placeholder=\"Estratégias, criativos, financeiro etc. Informe quem deve ser contatado.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 12. CANAIS JÁ UTILIZADOS -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 12</span>\n                <h2>Canais já utilizados</h2>\n\n                <div class=\"checkbox-group\">\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"facebook_ads\">\n                        Facebook Ads\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_ads\">\n                        Google Ads\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_meu_negocio\">\n                        Google Meu Negócio\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_analytics\">\n                        Google Analytics\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"website\">\n                        Website\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_tag_manager\">\n                        Google Tag Manager\n                    </label>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- BOTÃO DE ENVIO E MENSAGENS -->\n            <!-- ===================================================== -->\n            <div class=\"button-area\">\n                <button type=\"submit\" id=\"submitButton\">\n                    Enviar questionário estratégico →\n                </button>\n\n                <div class=\"success\" id=\"successMessage\">\n                    ✓ Questionário e métricas enviados com sucesso! Obrigado pelas informações.\n                </div>\n\n                <div class=\"error\" id=\"errorMessage\">\n                    ⚠️ Não foi possível enviar o questionário. Tente novamente.\n                </div>\n            </div>\n\n        </form>\n\n    </div>\n\n    <div class=\"footer\">\n        MARKETING OS · Inteligência e Estratégia de Marca\n    </div>\n\n</div>\n\n<script>\nconst form = document.getElementById(\"marketingForm\");\nconst button = document.getElementById(\"submitButton\");\nconst success = document.getElementById(\"successMessage\");\nconst error = document.getElementById(\"errorMessage\");\n\n// Webhook n8n\nconst WEBHOOK_URL = \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/qnp\";\n\nform.addEventListener(\"submit\", async function(event) {\n    event.preventDefault();\n\n    button.disabled = true;\n    button.innerText = \"Enviando informações...\";\n    success.style.display = \"none\";\n    error.style.display = \"none\";\n\n    const formData = new FormData(form);\n    const data = {};\n\n    formData.forEach((value, key) => {\n        if (key === \"canais\") {\n            if (!data[key]) {\n                data[key] = [];\n            }\n            data[key].push(value);\n        } else {\n            data[key] = value;\n        }\n    });\n\n    // Data e hora do envio ISO\n    data.data_preenchimento = new Date().toISOString();\n\n    try {\n        const response = await fetch(WEBHOOK_URL, {\n            method: \"POST\",\n            headers: {\n                \"Content-Type\": \"application/json\"\n            },\n            body: JSON.stringify(data)\n        });\n\n        if (!response.ok) {\n            throw new Error(\"Erro HTTP \" + response.status);\n        }\n\n        success.style.display = \"block\";\n        form.reset();\n        button.innerText = \"Enviado com sucesso!\";\n\n        // Rola até a mensagem de sucesso\n        success.scrollIntoView({ behavior: 'smooth', block: 'center' });\n\n    } catch (err) {\n        console.error(err);\n        error.style.display = \"block\";\n        button.disabled = false;\n        button.innerText = \"Enviar questionário estratégico →\";\n\n        // Rola até a mensagem de erro\n        error.scrollIntoView({ behavior: 'smooth', block: 'center' });\n    }\n});\n</script>\n\n</body>\n</html>"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    128,
+    48
+   ],
+   "id": "c0c119b1-0cd1-49b0-af79-648b533c20b2",
+   "name": "Renderizar Interface HTML"
+  },
+  {
+   "parameters": {
+    "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n  // AI Agent normalmente retorna o resultado em \"output\"\n  let content = response.output ?? response.text ?? response.content;\n\n  // Fallback caso venha no formato OpenAI\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n    // Remove possíveis blocos markdown\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n}\n\nconst prevData = $(\"Sanitizar Dados e Gerar ID do Projeto\").first().json.data;\nconst apiKey = $(\"Sanitizar Dados e Gerar ID do Projeto\").first().json.apiKey;\n\nreturn [{\n  json: {\n    data: prevData,\n    apiKey,\n    strategistOutput: parsed\n  }\n}];"
+   },
+   "id": "9c736ab5-e279-4f71-b4c8-72ebe9ff182a",
+   "name": "Tratar e Validar JSON da IA",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    768,
+    528
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const raw = $input.first().json.body || $input.first().json;\n\nconst nomeEmpresa =\n  raw.nome_empresa ||\n  raw.nome ||\n  \"Empresa Sem Nome\";\n\nconst rawSlug = nomeEmpresa\n  .toLowerCase()\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\")\n  .replace(/[^a-z0-9]+/g, \"-\")\n  .replace(/(^-|-$)/g, \"\");\n\nconst projectId = `${rawSlug}-${Date.now()}`;\n\nconst data = {\n  // IDENTIFICAÇÃO\n  project_id: projectId,\n  data_preenchimento: raw.data_preenchimento || new Date().toISOString(),\n\n  // EMPRESA\n  nome_empresa: raw.nome_empresa || \"\",\n  descricao_empresa: raw.descricao_empresa || \"\",\n  principais_envolvidos: raw.principais_envolvidos || \"\",\n  instagram: raw.instagram || \"\",\n  site: raw.site || \"\",\n\n  // MOMENTO E OBJETIVOS\n  momento_empresa: raw.momento_empresa || \"\",\n  margem_contribuicao: raw.margem_contribuicao || \"\",\n  objetivo_principal: raw.objetivo_principal || \"\",\n  meta_sucesso_concreta: raw.meta_sucesso_concreta || \"\",\n  tempo_resposta_comercial: raw.tempo_resposta_comercial || \"\",\n\n  // PRODUTOS\n  produtos_servicos: raw.produtos_servicos || \"\",\n  venda_produto: raw.venda_produto || \"\",\n  grande_promessa: raw.grande_promessa || \"\",\n  maior_margem: raw.maior_margem || \"\",\n  maior_demanda: raw.maior_demanda || \"\",\n  produtos_divulgar: raw.produtos_divulgar || \"\",\n\n  // CLIENTE\n  publico_alvo: raw.publico_alvo || \"\",\n  medos_cliente: raw.medos_cliente || \"\",\n  problemas_resolvidos: raw.problemas_resolvidos || \"\",\n  objecoes: raw.objecoes || \"\",\n  lead_qualificado: raw.lead_qualificado || \"\",\n\n  // VENDAS\n  preco_medio: raw.preco_medio || \"\",\n  custo_medio_venda: raw.custo_medio_venda || \"\",\n  taxa_conversao_comercial: raw.taxa_conversao_comercial || \"\",\n  ciclo_vendas: raw.ciclo_vendas || \"\",\n  sistema_crm: raw.sistema_crm || \"\",\n  custo_maximo_lead_cliente: raw.custo_maximo_lead_cliente || \"\",\n  vendas_mes_passado: raw.vendas_mes_passado || \"\",\n  processo_vendas: raw.processo_vendas || \"\",\n  estrategias_vencedoras: raw.estrategias_vencedoras || \"\",\n\n  // CONCORRÊNCIA\n  diferenciais: raw.diferenciais || \"\",\n  concorrentes: raw.concorrentes || \"\",\n\n  // SWOT\n  swot_forcas: raw.swot_forcas || \"\",\n  swot_fraquezas: raw.swot_fraquezas || \"\",\n  swot_oportunidades: raw.swot_oportunidades || \"\",\n  swot_ameacas: raw.swot_ameacas || \"\",\n\n  // ANÚNCIOS\n  ja_anunciou: raw.ja_anunciou || \"\",\n  experiencia_anuncios: raw.experiencia_anuncios || \"\",\n  objetivo_campanhas: raw.objetivo_campanhas || \"\",\n  meta_anuncios: raw.meta_anuncios || \"\",\n  investimento_anuncios: raw.investimento_anuncios || \"\",\n  contas_anuncios: raw.contas_anuncios || \"\",\n\n  // REGIÃO\n  regiao_anuncios: raw.regiao_anuncios || \"\",\n  formas_pagamento: raw.formas_pagamento || \"\",\n  datas_promocoes: raw.datas_promocoes || \"\",\n\n  // PALAVRAS-CHAVE\n  palavras_positivas: raw.palavras_positivas || \"\",\n  palavras_negativas: raw.palavras_negativas || \"\",\n\n  // ESTRUTURA\n  estrutura_organizacional: raw.estrutura_organizacional || \"\",\n  cargo_responsavel: raw.cargo_responsavel || \"\",\n  numero_funcionarios: raw.numero_funcionarios || \"\",\n  contato_responsavel: raw.contato_responsavel || \"\",\n\n  // CANAIS\n  canais: raw.canais || []\n};\n\nreturn [\n  {\n    json: {\n      data,\n      project_id: projectId\n    }\n  }\n];"
+   },
+   "id": "01af3311-976e-4337-87a9-791e3fb918df",
+   "name": "Sanitizar Dados e Gerar ID do Projeto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -912,
+    544
+   ]
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "qnp",
+    "options": {}
+   },
+   "id": "f1af69a0-52f1-45b7-aef0-bee0d7341085",
+   "name": "Webhook - Receber Submissão da Empresa",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -1136,
+    544
+   ],
+   "webhookId": "brand-os-trigger-id"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=Dados da Empresa: \" + {{JSON.stringify($('Sanitizar Dados e Gerar ID do Projeto').item.json.data) }}",
+    "options": {
+     "systemMessage": "# PAPEL\n\nVocê é um ANALISTA ESTRATÉGICO DE MARKETING, VENDAS E CRESCIMENTO.\n\nSua função é analisar profundamente as respostas fornecidas pelo cliente e transformar essas informações em um diagnóstico estratégico, uma estratégia de crescimento, um sistema de KPIs e um plano de ação.\n\nVocê deve agir como um consultor estratégico experiente.\n\nNão produza respostas genéricas.\n\nTodas as recomendações devem estar relacionadas aos dados fornecidos pelo cliente.\n\n---\n\n# PRINCÍPIO FUNDAMENTAL\n\nO objetivo informado pelo cliente é o ponto central de toda a análise.\n\nVocê deve responder:\n\n1. Onde a empresa está?\n2. Onde ela quer chegar?\n3. Qual é a diferença entre o estado atual e o objetivo?\n4. O que precisa acontecer para atingir o objetivo?\n5. Quais indicadores precisam ser acompanhados?\n6. Quais ações devem ser executadas?\n7. Qual deve ser a prioridade?\n\n---\n\n# ANÁLISE FINANCEIRA E COMERCIAL\n\nSempre que existirem dados suficientes, faça os cálculos necessários.\n\nExemplos:\n\nFaturamento desejado / ticket médio = quantidade de vendas necessária.\n\nVendas necessárias / taxa de conversão = leads necessários.\n\nInvestimento / quantidade de leads = CPL.\n\nInvestimento / quantidade de clientes = CAC.\n\nFaturamento / investimento = ROAS.\n\nNunca invente números apresentados como se fossem dados reais do cliente.\n\nQuando precisar estimar, identifique claramente como:\n\n\"Estimativa estratégica\".\n\n---\n\n# ANÁLISE DO OBJETIVO\n\nAnalise:\n\n* objetivo principal;\n* meta concreta;\n* prazo;\n* situação atual;\n* capacidade comercial;\n* ticket;\n* conversão;\n* volume de vendas;\n* investimento;\n* capacidade operacional.\n\nDetermine se a meta parece:\n\n* conservadora;\n* realista;\n* agressiva;\n* incompatível com os dados atuais.\n\nExplique o motivo.\n\n---\n\n# ESTRATÉGIA\n\nA estratégia deve definir:\n\n* prioridade principal;\n* público prioritário;\n* oferta prioritária;\n* canal prioritário;\n* estratégia de aquisição;\n* estratégia de conversão;\n* estratégia comercial;\n* estratégia de retenção;\n* principais gargalos;\n* oportunidades;\n* ações de maior impacto.\n\nNão recomende executar muitos canais simultaneamente sem justificativa.\n\nPriorize.\n\n---\n\n# KPIs\n\nCrie indicadores relacionados diretamente ao objetivo.\n\nSempre que possível, separar:\n\n## KPI de negócio\n\nExemplos:\n\n* faturamento;\n* lucro;\n* número de vendas;\n* ticket médio;\n* margem;\n* CAC;\n* LTV.\n\n## KPI de marketing\n\nExemplos:\n\n* leads;\n* CPL;\n* CTR;\n* CPC;\n* taxa de conversão;\n* custo por oportunidade.\n\n## KPI comercial\n\nExemplos:\n\n* velocidade de resposta;\n* taxa de qualificação;\n* taxa de fechamento;\n* ciclo de vendas;\n* propostas enviadas;\n* vendas realizadas.\n\nPara cada KPI informe:\n\n* nome;\n* definição;\n* situação atual;\n* meta;\n* fórmula;\n* frequência de acompanhamento;\n* responsável;\n* ação corretiva quando estiver abaixo da meta.\n\n---\n\n# PLANO DE 30, 60 E 90 DIAS\n\nCrie um plano progressivo.\n\n## 0–30 dias\n\nFoco em estruturação e correção dos principais gargalos.\n\n## 31–60 dias\n\nFoco em aquisição, otimização e conversão.\n\n## 61–90 dias\n\nFoco em escala, previsibilidade e otimização.\n\nCada ação deve possuir:\n\n* prioridade;\n* objetivo;\n* ação;\n* justificativa;\n* KPI relacionado;\n* meta;\n* prazo.\n\n---\n\n# DOCUMENTOS\n\nRetorne SOMENTE JSON válido.\n\nUse exatamente esta estrutura:\n\n{\n\"briefing_md\": \"Documento Markdown completo\",\n\"estrategia_md\": \"Documento Markdown completo\",\n\"kpis_md\": \"Documento Markdown completo\",\n\"plano_acao_md\": \"Documento Markdown completo\"\n}\n\n---\n\n# BRIEFING\n\nO briefing deve conter:\n\n# Briefing Estratégico — [Empresa]\n\n## Resumo Executivo\n\n## Sobre a Empresa\n\n## Produtos e Serviços\n\n## Público-Alvo\n\n## Problemas Resolvidos\n\n## Proposta de Valor\n\n## Diferenciais\n\n## Concorrência\n\n## Situação Atual\n\n## Processo Comercial\n\n## Marketing Atual\n\n## Análise SWOT\n\n## Objetivo do Cliente\n\n## Diagnóstico Estratégico\n\n## Principais Gargalos\n\n## Oportunidades\n\n---\n\n# ESTRATÉGIA\n\nCriar:\n\n# Estratégia de Crescimento — [Empresa]\n\n## Objetivo Estratégico\n\n## Diagnóstico\n\n## Estratégia Central\n\n## Público Prioritário\n\n## Oferta Prioritária\n\n## Posicionamento\n\n## Estratégia de Aquisição\n\n## Estratégia de Conversão\n\n## Estratégia Comercial\n\n## Estratégia de Retenção\n\n## Canais Prioritários\n\n## Prioridades Estratégicas\n\n## Estratégia de 30 Dias\n\n## Estratégia de 60 Dias\n\n## Estratégia de 90 Dias\n\n---\n\n# KPIs\n\nCriar:\n\n# Sistema de KPIs — [Empresa]\n\n## Meta Principal\n\n## Matemática da Meta\n\n## KPIs de Negócio\n\n## KPIs de Marketing\n\n## KPIs Comerciais\n\n## Metas\n\n## Fórmulas\n\n## Frequência de Acompanhamento\n\n## Indicadores de Alerta\n\n## Ações Corretivas\n\n---\n\n# PLANO DE AÇÃO\n\nCriar:\n\n# Plano de Ação — [Empresa]\n\n## Prioridades\n\n## 0–30 Dias\n\n## 31–60 Dias\n\n## 61–90 Dias\n\n## Quick Wins\n\n## Projetos Estruturantes\n\n## Responsáveis\n\n## Indicadores\n\n## Critérios de Sucesso\n\n---\n\n# QUALIDADE\n\nNunca escreva:\n\n* \"Informações em processamento\"\n* \"Conteúdo a definir\"\n* \"Não informado\"\n\nNão invente fatos sobre a empresa.\n\nSe uma informação não foi fornecida, não trate uma suposição como fato.\n\nQuando necessário, faça uma recomendação baseada em hipótese e deixe claro que é uma hipótese estratégica.\n\nO documento deve ser específico para a empresa analisada.\n"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    448,
+    528
+   ],
+   "id": "b1ee6946-5604-4462-a373-5a361dead2b6",
+   "name": "Agente IA - Diretor Estratégico"
+  },
+  {
+   "parameters": {
+    "operation": "toText",
+    "sourceProperty": "content",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    1952,
+    720
+   ],
+   "id": "4b5e318c-7e59-49ae-921a-4de89a92300f",
+   "name": "Converter Markdown em Arquivo Binário"
+  },
+  {
+   "parameters": {
+    "resource": "file",
+    "path": "=/root/briefing/{{ $('Webhook - Receber Submissão da Empresa').item.json.body.nome_empresa }}",
+    "options": {
+     "fileName": "={{ $('Loop - Processar Arquivo por Arquivo').item.json.filename }}"
+    }
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    2272,
+    720
+   ],
+   "id": "57562e9e-2bcb-4a2e-8f92-bdaff5e04ff6",
+   "name": "Salvar Arquivo via SSH no Servidor",
+   "credentials": {
+    "sshPassword": {
+     "id": "8dDUhhIDCo7tLJss",
+     "name": "157.173.207.22"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const input = $input.first().json;\n\nconst data = input.data;\nconst strategistOutput = input.strategistOutput;\n\nreturn [\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"01-briefing.md\",\n      content: strategistOutput.briefing_md\n    }\n  },\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"02-estrategia.md\",\n      content: strategistOutput.estrategia_md\n    }\n  },\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"03-kpis.md\",\n      content: strategistOutput.kpis_md\n    }\n  },\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"04-plano-de-acao.md\",\n      content: strategistOutput.plano_acao_md\n    }\n  }\n];"
+   },
+   "id": "d678f017-1620-4f08-86d6-dd35a685f9ba",
+   "name": "Separar em 4 Arquivos Markdown",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1088,
+    528
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const items = $input.all();\nconst first = items[0] ? items[0].json : {};\nreturn [{\n  json: {\n    status: \"success\",\n    message: \"Quadro Norteador de Pesquisa gerado e salvo via SSH no VPS com sucesso!\",\n    project_id: first.project_id,\n    nome_empresa: first.nome_empresa,\n    total_arquivos: items.length,\n    path_servidor: `/root/briefing/${first.nome_empresa}/`\n  }\n}];"
+   },
+   "id": "c4583c56-337f-4452-8d21-1265c27b86b1",
+   "name": "Montar Resposta Final de Sucesso",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1968,
+    160
+   ]
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    1520,
+    528
+   ],
+   "id": "3b27d00b-f3ef-4000-b6a5-5bd40befb3ef",
+   "name": "Loop - Processar Arquivo por Arquivo"
+  },
+  {
+   "parameters": {
+    "model": "=antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 4096,
+     "temperature": 0.7,
+     "timeout": 300000
+    }
+   },
+   "id": "1573a1fd-94b1-4530-8860-07ea20ba2358",
+   "name": "OpenAI Chat Model - Claude",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    464,
+    992
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "=briefing",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "id": "ba9e5269-3fb3-47af-bb68-47d490245751",
+   "name": "Google Drive - Criar Subpastas POP 03",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    48,
+    528
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "fileFolder",
+    "queryString": "=📁 {{ $json.data.nome_empresa }}",
+    "filter": {
+     "driveId": {
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "mode": "list",
+      "value": "root",
+      "cachedResultName": "/ (Root folder)"
+     }
+    },
+    "options": {}
+   },
+   "id": "fe698c72-6d5b-4934-924d-c68c0eae2302",
+   "name": "Google Drive - Criar Pasta Raiz do Projeto1",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    -672,
+    544
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "26031d04-2c0c-47f1-8993-4aa07fbf93f7",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    -416,
+    544
+   ],
+   "id": "0466ea9a-1828-43a1-a1cc-46bcfb792bb0",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "name": "={{ $('Loop - Processar Arquivo por Arquivo').item.json.filename }}",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $('Google Drive - Criar Subpastas POP 03').first().json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "id": "8bb142e2-dac4-4dc0-ad1b-ed73b92451cd",
+   "name": "Google Drive - Criar Subpastas POP 1",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    2272,
+    944
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "=📁 {{ $('Sanitizar Dados e Gerar ID do Projeto').item.json.data.nome_empresa }}",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "root",
+     "cachedResultName": "/ (Root folder)"
+    },
+    "options": {}
+   },
+   "id": "ffed383b-5503-4a45-85a9-6212ca84e4bc",
+   "name": "Google Drive - Criar Subpastas POP ",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    -176,
+    672
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    320,
+    736
+   ],
+   "id": "6903c9a3-b1fa-4d3a-81ba-98c04602f9eb",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "YrEx4uMcVT5YLa8e",
+     "name": "Google Gemini(PaLM) Api account"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Webhook - Carregar Formulário Web": {
+   "main": [
+    [
+     {
+      "node": "Renderizar Interface HTML",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Renderizar Interface HTML": {
+   "main": [
+    [
+     {
+      "node": "Responder Navegador com Formulário",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tratar e Validar JSON da IA": {
+   "main": [
+    [
+     {
+      "node": "Separar em 4 Arquivos Markdown",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Sanitizar Dados e Gerar ID do Projeto": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Pasta Raiz do Projeto1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Webhook - Receber Submissão da Empresa": {
+   "main": [
+    [
+     {
+      "node": "Sanitizar Dados e Gerar ID do Projeto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Agente IA - Diretor Estratégico": {
+   "main": [
+    [
+     {
+      "node": "Tratar e Validar JSON da IA",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Converter Markdown em Arquivo Binário": {
+   "main": [
+    [
+     {
+      "node": "Salvar Arquivo via SSH no Servidor",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Google Drive - Criar Subpastas POP 1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salvar Arquivo via SSH no Servidor": {
+   "main": [
+    [
+     {
+      "node": "Loop - Processar Arquivo por Arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Separar em 4 Arquivos Markdown": {
+   "main": [
+    [
+     {
+      "node": "Loop - Processar Arquivo por Arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop - Processar Arquivo por Arquivo": {
+   "main": [
+    [
+     {
+      "node": "Montar Resposta Final de Sucesso",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Converter Markdown em Arquivo Binário",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI Chat Model - Claude": {
+   "ai_languageModel": [
+    []
+   ]
+  },
+  "Google Drive - Criar Pasta Raiz do Projeto1": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP 03",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP ",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Subpastas POP 03": {
+   "main": [
+    [
+     {
+      "node": "Agente IA - Diretor Estratégico",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Subpastas POP ": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP 03",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Agente IA - Diretor Estratégico",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "callerPolicy": "workflowsFromSameOwner",
+  "availableInMCP": true
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "pinData": {
+  "Webhook - Receber Submissão da Empresa": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "content-type": "application/json",
+      "user-agent": "Mozilla/5.0"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "nome_empresa": "Inovare Inteligência Artificial",
+      "descricao_empresa": "Empresa especializada em automação de processos empresariais, integração de agentes de IA e automação com n8n para médias e grandes empresas.",
+      "principais_envolvidos": "Rafael Pereira — Diretor e responsável pela estratégia, vendas e desenvolvimento.",
+      "instagram": "@inovareinteligenciaartificial",
+      "site": "https://inovareinteligenciaartificial.com",
+      "momento_empresa": "crescimento_rapido",
+      "margem_contribuicao": "60%",
+      "objetivo_principal": "Aumentar o faturamento através da aquisição de novos clientes corporativos para serviços de automação e agentes de inteligência artificial.",
+      "meta_sucesso_concreta": "Alcançar R$ 50.000 de faturamento mensal nos próximos 6 meses, mantendo alta margem e qualidade de entrega.",
+      "tempo_resposta_comercial": "imediato",
+      "produtos_servicos": "Automação com n8n, agentes autônomos de IA, integração de sistemas (CRMs, ERPs), automação de atendimento via WhatsApp e consultoria em IA.",
+      "venda_produto": "Transformamos gargalos operacionais e tarefas manuais em fluxos inteligentes 24/7 com agentes de IA, gerando mais eficiência e redução de custos.",
+      "grande_promessa": "Reduzir tarefas manuais e permitir que empresas utilizem IA de forma prática, segura e integrada aos seus sistemas centrais.",
+      "maior_margem": "Projetos personalizados de automação corporativa com agentes de IA.",
+      "maior_demanda": "Automação de WhatsApp e atendimento integrado com CRM.",
+      "produtos_divulgar": "Agentes de IA para atendimento e automações corporativas com n8n.",
+      "publico_alvo": "CEOs, diretores de operações e gestores de empresas de médio porte com rotinas manuais e equipes sobrecarregadas.",
+      "medos_cliente": "Investir em tecnologia sem retorno prático, vazamento de dados ou soluções complexas que a equipe não consiga manter.",
+      "problemas_resolvidos": "Processos manuais lentos, perda de leads por demora no contato, falta de integração entre ferramentas e baixa produtividade.",
+      "objecoes": "Preço, medo de projetos demorados e receio quanto à governança de dados na IA.",
+      "lead_qualificado": "Empresa faturando acima de R$ 80k/mês, com processos operacionais repetitivos claros e tomador de decisão direto.",
+      "preco_medio": 5000,
+      "custo_medio_venda": 1500,
+      "taxa_conversao_comercial": "20%",
+      "ciclo_vendas": "15 a 30 dias",
+      "sistema_crm": "Kommo / RD Station",
+      "custo_maximo_lead_cliente": "Até R$ 500 por cliente conquistado (CAC)",
+      "vendas_mes_passado": 4,
+      "processo_vendas": "Entrada do lead -> Diagnóstico estratégico de 40 min -> Apresentação de proposta com escopo em fases -> Fechamento.",
+      "estrategias_vencedoras": "Indicação direta, networking e demonstração prática de casos de uso em tempo real.",
+      "diferenciais": "Domínio técnico avançado em n8n e IA, soluções customizadas sob medida e ausência de vendor lock-in.",
+      "concorrentes": "Agências tradicionais de marketing digital e consultores freelancers generalistas.",
+      "swot_forcas": "Capacidade técnica, personalização, agilidade de entrega e visão holística de arquitetura de dados.",
+      "swot_fraquezas": "Operação comercial ainda concentrada no fundador e dependência de indicações.",
+      "swot_oportunidades": "Crescimento expressivo na busca corporativa por automação e agentes autônomos de IA.",
+      "swot_ameacas": "Proliferação de ferramentas genéricas e entrada de agências tradicionais ofertando IA superficial.",
+      "ja_anunciou": "sim",
+      "experiencia_anuncios": "Já rodou campanhas no Meta Ads com boa tração, necessitando de filtro maior de qualificação prévia.",
+      "objetivo_campanhas": "leads",
+      "meta_anuncios": "Gerar pelo menos 30 a 40 leads qualificados por mês.",
+      "investimento_anuncios": 3000,
+      "contas_anuncios": "Meta Ads e Google Ads",
+      "regiao_anuncios": "Brasil (foco em Sudeste e Sul)",
+      "formas_pagamento": "Pix, boleto e transferência bancária",
+      "datas_promocoes": "Campanhas periódicas de diagnóstico gratuito de processos.",
+      "palavras_positivas": "automação n8n, agentes de ia, eficiência operacional, integração de sistemas, redução de custos",
+      "palavras_negativas": "grátis, curso gratuito, bot pirata, spam, ferramenta barata",
+      "estrutura_organizacional": "Estrutura enxuta liderada pelo fundador com desenvolvedores parceiros por projeto.",
+      "cargo_responsavel": "Diretor / Fundador",
+      "numero_funcionarios": 3,
+      "contato_responsavel": "Rafael Pereira - Diretor Estratégico",
+      "canais": [
+       "website",
+       "facebook_ads",
+       "google_ads"
+      ],
+      "data_preenchimento": "2026-09-21T21:40:00.000Z"
+     }
+    }
+   }
+  ]
+ },
+ "versionId": "4197390c-a085-40b4-86ed-ca465edd1db9",
+ "activeVersionId": "236425f5-b51c-46ae-bfab-b3f11f8ec56b",
+ "versionCounter": 142,
+ "triggerCount": 2,
+ "shared": [
+  {
+   "updatedAt": "2026-09-21T00:11:35.709Z",
+   "createdAt": "2026-09-21T00:11:35.709Z",
+   "role": "workflow:owner",
+   "workflowId": "RDRD9TWoLr0pwdOd",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-09-27T00:20:29.205Z",
+  "createdAt": "2026-09-27T00:20:29.205Z",
+  "versionId": "236425f5-b51c-46ae-bfab-b3f11f8ec56b",
+  "workflowId": "RDRD9TWoLr0pwdOd",
+  "nodes": [
+   {
+    "id": "2426592e-c213-410b-afb1-1a823e404a7c",
+    "name": "Note - Frontend",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -144,
+     -80
+    ],
+    "parameters": {
+     "content": "## 🌐 1. INTERFACE WEB & CAPTAÇÃO\n\nDisponibiliza a interface visual responsiva e interativa no navegador para o preenchimento e coleta estruturada dos dados do Quadro Norteador de Pesquisa.\n\n* **Webhook - Carregar Formulário Web (`Webhook`)**:\n  Escuta requisições HTTP GET na rota `/form-qnp` quando o operador, SDR ou cliente acessa o link do formulário.\n\n* **Renderizar Interface HTML (`HTML`)**:\n  Compila a estrutura visual completa em HTML5 e CSS moderno (Dark Mode com tipografia limpa), contendo todos os campos de diagnóstico, validações de formulário e script assíncrono para submissão do payload.\n\n* **Responder Navegador com Formulário (`Respond to Webhook`)**:\n  Devolve o código HTML compilado com status HTTP 200 e cabeçalho `Content-Type: text/html; charset=UTF-8`, garantindo renderização instantânea no navegador.",
+     "height": 330,
+     "width": 660,
+     "color": 6
+    }
+   },
+   {
+    "id": "a0458f0a-66a3-4dc2-86ac-111d16987f28",
+    "name": "Note - Ingestão",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1184,
+     368
+    ],
+    "parameters": {
+     "content": "## 📥 2. INGESTÃO & NORMALIZAÇÃO\n\nPonto de entrada oficial dos dados submetidos pelo formulário para higienização, estruturação e geração de metadados do projeto.\n\n* **Webhook - Receber Submissão da Empresa (`Webhook`)**:\n  Escuta requisições HTTP POST na rota `/qnp` com o payload completo contendo as respostas do formulário da empresa.\n\n* **Sanitizar Dados e Gerar ID do Projeto (`Code`)**:\n  Higieniza strings, valida campos obrigatórios, padroniza o nome da empresa e gera o `project_id` único baseado no slug da empresa e timestamp (`slug-YYYYMMDD-HHMMSS`).",
+     "height": 340,
+     "width": 460,
+     "color": 4
+    }
+   },
+   {
+    "id": "0922cf1a-614c-4276-9974-43a61fcf32ec",
+    "name": "Note - Google Drive (POP 03)",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -710,
+     368
+    ],
+    "parameters": {
+     "content": "## 🗂️ 3. GESTÃO DE DIRETÓRIOS GOOGLE DRIVE (POP 03)\n\nEstruturação automatizada do ecossistema de pastas no Google Drive corporativo seguindo o padrão oficial do POP 03.\n\n* **Google Drive - Criar Pasta Raiz do Projeto1 (`Google Drive`)**:\n  Pesquisa no Google Drive corporativo (`My Drive`) pela pasta raiz da empresa nomeada como `📁 [Nome da Empresa]`.\n\n* **If (`If`)**:\n  Avalia o resultado da busca:\n  - **True**: A pasta raiz da empresa já existe no Drive; segue direto para a criação/verificação da subpasta de briefing.\n  - **False**: A pasta da empresa ainda não existe; direciona o fluxo para a criação da pasta mestre.\n\n* **Google Drive - Criar Subpastas POP  (`Google Drive`)**:\n  Cria a pasta raiz mestre `📁 [Nome da Empresa]` no Google Drive caso ela ainda não existisse.\n\n* **Google Drive - Criar Subpastas POP 03 (`Google Drive`)**:\n  Cria ou vincula a subpasta oficial `briefing` dentro da pasta raiz da empresa, onde os relatórios estratégicos serão persistidos.",
+     "height": 460,
+     "width": 980,
+     "color": 7
+    }
+   },
+   {
+    "id": "3c4b31f7-26d2-42a7-8ff0-2ff3209025c4",
+    "name": "Note - Agente IA",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     390,
+     368
+    ],
+    "parameters": {
+     "content": "## 🧠 4. AGENTE ESTRATÉGICO & PARSER\n\nCérebro analítico e executivo do fluxo, responsável pelo diagnóstico aprofundado de mercado e elaboração dos documentos estratégicos.\n\n* **Agente IA - Diretor Estratégico (`AI Agent`)**:\n  Atua como Analista Estratégico de Marketing, Vendas e Posicionamento (POP 02/03). Processa o briefing da empresa e gera um JSON com 4 documentos completos (`briefing_md`, `estrategia_md`, `kpis_md`, `plano_acao_md`).\n\n* **Tratar e Validar JSON da IA (`Code`)**:\n  Recebe o output do modelo, limpa blocos delimitadores de código (```json), faz o parse do JSON e valida a integridade de cada um dos 4 relatórios antes da separação.",
+     "height": 340,
+     "width": 600,
+     "color": 7
+    }
+   },
+   {
+    "id": "85555b7f-4286-4fdd-be27-3db6d0ea4407",
+    "name": "Note - LLM",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     390,
+     780
+    ],
+    "parameters": {
+     "content": "## 🤖 MODELO DE LINGUAGEM (LLM)\n\nMotor de inteligência artificial de alta performance conectado ao Agente Diretor Estratégico.\n\n* **OpenAI Chat Model - Claude (`ChatOpenAi`)**:\n  Conectado via gateway OmniRoute (compatível com a API OpenAI), operando o modelo `antigravity/gemini-2.5-flash` com temperatura 0.7 e timeout estendido (300s) para raciocínio profundo e geração de relatórios densos sem truncamento.",
+     "height": 370,
+     "width": 440,
+     "color": 5
+    }
+   },
+   {
+    "id": "1ad69286-cae6-4697-adb4-c29adc4dd2b8",
+    "name": "Note - Consolidação",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1030,
+     368
+    ],
+    "parameters": {
+     "content": "## 📦 5. CONSOLIDAÇÃO DOS DOCUMENTOS\n\nDesmembramento da resposta do estrategista em arquivos individuais para gravação e controle de versão.\n\n* **Separar em 4 Arquivos Markdown (`Code`)**:\n  Desmembra os dados estruturados do agente em 4 itens de fluxo independentes:\n  - `01-briefing.md`\n  - `02-estrategia.md`\n  - `03-kpis.md`\n  - `04-plano-de-acao.md`\n  Vincula o `project_id`, slug da empresa, metadados de data/hora e o conteúdo Markdown correspondente a cada arquivo.",
+     "height": 340,
+     "width": 400,
+     "color": 3
+    }
+   },
+   {
+    "id": "cdad50f5-fc4d-4106-b14f-151f8b53899d",
+    "name": "Note - Loop",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1470,
+     368
+    ],
+    "parameters": {
+     "content": "## 🔄 6. CONTROLE DE ITERAÇÃO (LOOP)\n\nOrquestração e controle do lote de documentos, garantindo que cada relatório seja processado e persistido individualmente.\n\n* **Loop - Processar Arquivo por Arquivo (`Split in Batches`)**:\n  Processa a fila de 4 documentos um a um (batch size = 1):\n  - **Loop (cada item)**: Envia o documento para conversão binária e salvamento simultâneo no Google Drive e servidor VPS.\n  - **Done (ao concluir todos)**: Direciona para a consolidação e montagem da resposta final.",
+     "height": 340,
+     "width": 410,
+     "color": 1
+    }
+   },
+   {
+    "id": "e5cbda7d-fef3-48cf-ba78-2ac417272e80",
+    "name": "Note - Persistência",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1930,
+     320
+    ],
+    "parameters": {
+     "content": "## 🚀 7. PERSISTÊNCIA DUAL (GOOGLE DRIVE & VPS SSH)\n\nPersistência redundante de cada documento gerado: armazena os arquivos tanto no Google Drive do cliente quanto no servidor Linux da agência.\n\n* **Converter Markdown em Arquivo Binário (`Convert to File`)**:\n  Transforma o conteúdo em texto puro Markdown (`content`) em payload binário pronto para transmissão e armazenamento.\n\n* **Google Drive - Criar Subpastas POP 1 (`Google Drive`)**:\n  Salva e armazena o arquivo `.md` correspondente diretamente na subpasta `briefing` no Google Drive corporativo do cliente.\n\n* **Salvar Arquivo via SSH no Servidor (`SSH`)**:\n  Transfere via SFTP/SSH e grava o arquivo físico no servidor VPS em `/root/briefing/[empresa]/[filename]` para uso imediato dos agentes locais.",
+     "height": 380,
+     "width": 540,
+     "color": 2
+    }
+   },
+   {
+    "id": "cb5971e6-7fe9-4f24-b405-6a595a32973f",
+    "name": "Note - Resposta Final",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1920,
+     16
+    ],
+    "parameters": {
+     "content": "## ✅ 8. RESPOSTA FINAL DO WEBHOOK\n\nFeedback estruturado de encerramento da execução e entrega dos metadados completos.\n\n* **Montar Resposta Final de Sucesso (`Code`)**:\n  Acionado após a conclusão do loop. Consolida e retorna o JSON com status de sucesso (`true`), `project_id`, nome da empresa, quantidade de arquivos processados e caminhos de armazenamento.",
+     "height": 285,
+     "width": 480,
+     "color": 6
+    }
+   },
+   {
+    "id": "5d5fe167-0c30-47e1-9dc2-419e35a422c7",
+    "name": "Note - Referência Modelos",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     736,
+     -96
+    ],
+    "parameters": {
+     "content": "## 📌 REFERÊNCIA: MODELOS HOMOLOGADOS (GATEWAY)\n\nCatálogo de modelos suportados pelo gateway OmniRoute para uso no agente:\n\n* **Linha Gemini Flash (Rápido / Operacional)**:\n  - `antigravity/gemini-2.5-flash` *(Ativo no agente)*\n  - `antigravity/gemini-2.5-flash-lite`\n  - `antigravity/gemini-2.5-flash-thinking`\n  - `antigravity/gemini-3.1-flash-lite`\n  - `antigravity/gemini-3.5-flash-low / medium / high`\n\n* **Linha Gemini Pro (Raciocínio Avançado)**:\n  - `antigravity/gemini-2.5-pro`\n  - `antigravity/gemini-3-pro-preview`\n  - `antigravity/gemini-3.1-pro-low / high`",
+     "height": 320,
+     "width": 580,
+     "color": 5
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responder Navegador com Formulário",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "position": [
+     336,
+     48
+    ],
+    "typeVersion": 1,
+    "id": "ad78ed3f-bfe3-413b-ac0c-fdfeaf9052fb"
+   },
+   {
+    "parameters": {
+     "path": "form-qnp",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Webhook - Carregar Formulário Web",
+    "type": "n8n-nodes-base.webhook",
+    "position": [
+     -96,
+     48
+    ],
+    "webhookId": "c74e2c9f-6f9e-4ef8-b404-e356b15771e1",
+    "typeVersion": 1,
+    "id": "0b813646-479f-465b-9625-5a5a60008b3c"
+   },
+   {
+    "parameters": {
+     "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n<title>Questionário Estratégico de Marketing & Métricas</title>\n\n<!-- FONTE INTER -->\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap\" rel=\"stylesheet\">\n\n<style>\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\n:root {\n    --bg: #07111f;\n    --card: #0d1b2d;\n    --card-2: #10243a;\n    --border: rgba(255, 255, 255, .09);\n    --text: #f4f7fb;\n    --muted: #91a4b8;\n    --primary: #00c8ff;\n    --primary-2: #0878ff;\n    --success: #22c55e;\n    --danger: #ef4444;\n}\n\nbody {\n    font-family: 'Inter', Arial, Helvetica, sans-serif;\n    background:\n        radial-gradient(circle at 20% 0%, rgba(0, 200, 255, .12), transparent 30%),\n        radial-gradient(circle at 90% 20%, rgba(8, 120, 255, .12), transparent 30%),\n        var(--bg);\n    color: var(--text);\n    min-height: 100vh;\n}\n\n.container {\n    width: min(950px, calc(100% - 32px));\n    margin: 0 auto;\n    padding: 40px 0 80px;\n}\n\n/* HEADER */\n.header {\n    text-align: center;\n    margin-bottom: 35px;\n}\n\n.logo {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n    margin-bottom: 20px;\n    font-weight: 800;\n    font-size: 20px;\n    letter-spacing: -0.5px;\n}\n\n.logo-icon {\n    width: 38px;\n    height: 38px;\n    border-radius: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: linear-gradient(135deg, var(--primary), var(--primary-2));\n    color: #00111d;\n    font-weight: 900;\n}\n\n.header h1 {\n    font-size: clamp(28px, 4.5vw, 46px);\n    line-height: 1.1;\n    margin-bottom: 15px;\n    letter-spacing: -1.5px;\n    font-weight: 800;\n}\n\n.header h1 span {\n    background: linear-gradient(90deg, #fff, var(--primary));\n    -webkit-background-clip: text;\n    background-clip: text;\n    color: transparent;\n}\n\n.header p {\n    color: var(--muted);\n    max-width: 720px;\n    margin: auto;\n    line-height: 1.6;\n    font-size: 15px;\n}\n\n/* CARD PRINCIPAL */\n.card {\n    background: rgba(13, 27, 45, .88);\n    border: 1px solid var(--border);\n    border-radius: 24px;\n    padding: clamp(25px, 4vw, 45px);\n    box-shadow: 0 30px 80px rgba(0,0,0,.35);\n    backdrop-filter: blur(15px);\n}\n\n/* SEÇÕES */\n.section {\n    margin-top: 45px;\n    padding-top: 35px;\n    border-top: 1px solid var(--border);\n}\n\n.section:first-of-type {\n    margin-top: 0;\n    padding-top: 0;\n    border-top: none;\n}\n\n.section-number {\n    color: var(--primary);\n    font-size: 13px;\n    font-weight: 700;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    display: block;\n    margin-bottom: 6px;\n}\n\n.section h2 {\n    font-size: 24px;\n    font-weight: 700;\n    margin-bottom: 8px;\n    letter-spacing: -0.5px;\n}\n\n.section-description {\n    color: var(--muted);\n    margin-bottom: 25px;\n    font-size: 14px;\n    line-height: 1.5;\n}\n\n/* QUESTÕES E INPUTS */\n.question {\n    margin-bottom: 24px;\n}\n\n.question label {\n    display: block;\n    font-size: 14px;\n    font-weight: 600;\n    margin-bottom: 9px;\n    color: #e2e8f0;\n}\n\n.required {\n    color: var(--primary);\n}\n\ninput,\ntextarea,\nselect {\n    width: 100%;\n    background: rgba(255, 255, 255, .035);\n    border: 1px solid var(--border);\n    color: var(--text);\n    border-radius: 12px;\n    padding: 14px 15px;\n    outline: none;\n    font-size: 14px;\n    transition: all .2s ease;\n    font-family: inherit;\n}\n\ninput:focus,\ntextarea:focus,\nselect:focus {\n    border-color: var(--primary);\n    background: rgba(255, 255, 255, .06);\n    box-shadow: 0 0 0 3px rgba(0, 200, 255, .12);\n}\n\ntextarea {\n    min-height: 110px;\n    resize: vertical;\n    line-height: 1.5;\n}\n\nselect option {\n    background-color: var(--card);\n    color: var(--text);\n}\n\ninput::placeholder,\ntextarea::placeholder {\n    color: #53687b;\n}\n\n/* RADIO E CHECKBOX */\n.radio-group,\n.checkbox-group {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n    gap: 12px;\n}\n\n.option {\n    border: 1px solid var(--border);\n    background: rgba(255, 255, 255, .02);\n    border-radius: 12px;\n    padding: 14px 16px;\n    cursor: pointer;\n    transition: all .2s ease;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    color: var(--text);\n    user-select: none;\n}\n\n.option:hover {\n    background: rgba(0, 200, 255, .05);\n    border-color: rgba(0, 200, 255, .3);\n}\n\n.option input {\n    width: auto;\n    margin-right: 12px;\n    accent-color: var(--primary);\n    cursor: pointer;\n}\n\n/* GRID LAYOUT */\n.grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 20px;\n}\n\n/* BOTÃO DE ENVIO */\n.button-area {\n    margin-top: 40px;\n    padding-top: 25px;\n    border-top: 1px solid var(--border);\n}\n\nbutton {\n    width: 100%;\n    padding: 16px;\n    border: none;\n    border-radius: 12px;\n    background: linear-gradient(135deg, var(--primary-2), var(--primary));\n    color: #00121d;\n    font-size: 16px;\n    font-weight: 800;\n    cursor: pointer;\n    transition: all .2s ease;\n    font-family: inherit;\n}\n\nbutton:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 10px 30px rgba(0, 200, 255, .25);\n}\n\nbutton:disabled {\n    opacity: .6;\n    cursor: not-allowed;\n    transform: none;\n    box-shadow: none;\n}\n\n/* MENSAGENS DE SUCESSO E ERRO */\n.success {\n    display: none;\n    margin-top: 25px;\n    padding: 20px;\n    background: rgba(34, 197, 94, .1);\n    border: 1px solid rgba(34, 197, 94, .25);\n    color: #4ade80;\n    border-radius: 12px;\n    text-align: center;\n    line-height: 1.5;\n}\n\n.error {\n    display: none;\n    margin-top: 25px;\n    padding: 20px;\n    background: rgba(239, 68, 68, .1);\n    border: 1px solid rgba(239, 68, 68, .25);\n    color: #fca5a5;\n    border-radius: 12px;\n    text-align: center;\n    line-height: 1.5;\n}\n\n/* FOOTER */\n.footer {\n    text-align: center;\n    color: #53687b;\n    font-size: 12px;\n    margin-top: 30px;\n}\n\n@media(max-width:700px) {\n    .container {\n        width: min(100% - 20px, 950px);\n        padding-top: 20px;\n    }\n\n    .card {\n        padding: 20px;\n        border-radius: 18px;\n    }\n\n    .grid {\n        grid-template-columns: 1fr;\n        gap: 0;\n    }\n\n    .header h1 {\n        font-size: 30px;\n    }\n\n    .radio-group,\n    .checkbox-group {\n        grid-template-columns: 1fr;\n    }\n}\n</style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n    <header class=\"header\">\n        <div class=\"logo\">\n            <div class=\"logo-icon\">M</div>\n            MARKETING OS\n        </div>\n        <h1>\n            Questionário <span>Estratégico & Métricas</span>\n        </h1>\n        <p>\n            Olá! Este questionário foi desenvolvido para alinharmos os objetivos da sua empresa,\n            analisarmos seus números de vendas e estruturarmos uma estratégia de alta performance.\n        </p>\n    </header>\n\n    <div class=\"card\">\n\n        <form id=\"marketingForm\">\n\n            <!-- ===================================================== -->\n            <!-- 01. EMPRESA -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 01</span>\n                <h2>Sobre a empresa</h2>\n                <p class=\"section-description\">Vamos começar entendendo quem é a sua empresa.</p>\n\n                <div class=\"question\">\n                    <label>\n                        1. Qual o nome da empresa? <span class=\"required\">*</span>\n                    </label>\n                    <input type=\"text\" name=\"nome_empresa\" required placeholder=\"Digite o nome da empresa\">\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        2. Conte um pouco sobre a empresa. <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"descricao_empresa\" required placeholder=\"Conte a história da empresa, como começou, o que faz e como atua...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        3. Quem são os principais envolvidos no projeto?\n                    </label>\n                    <textarea name=\"principais_envolvidos\" placeholder=\"Nome, cargo e outras informações relevantes...\"></textarea>\n                </div>\n\n                <div class=\"grid\">\n                    <div class=\"question\">\n                        <label>4. Instagram da empresa</label>\n                        <input type=\"text\" name=\"instagram\" placeholder=\"@suaempresa\">\n                    </div>\n\n                    <div class=\"question\">\n                        <label>5. Site da empresa</label>\n                        <input type=\"url\" name=\"site\" placeholder=\"https://...\">\n                    </div>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 02. MOMENTO E ALINHAMENTO DE METAS -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 02</span>\n                <h2>Momento e Objetivos de Sucesso</h2>\n                <p class=\"section-description\">Queremos entender onde a empresa está e alinhar exatamente o que é considerado \"resultado\".</p>\n\n                <div class=\"question\">\n                    <label>6. Qual é o momento atual da empresa?</label>\n                    <div class=\"radio-group\">\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"crescimento_rapido\">\n                            Crescimento rápido\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"crescimento_leve\">\n                            Crescimento leve\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"estagnada\">\n                            Estagnada\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"momento_empresa\" value=\"queda\">\n                            Queda\n                        </label>\n                    </div>\n                </div>\n\n                <div class=\"question\">\n                    <label>7. Qual é a margem de contribuição?</label>\n                    <textarea name=\"margem_contribuicao\" placeholder=\"Se souber, informe a margem de contribuição média dos produtos/serviços.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        8. Qual é o principal objetivo estratégico com nosso trabalho? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"objetivo_principal\" required placeholder=\"Ex.: Aumentar as vendas em 30%, conquistar novos clientes, aumentar o faturamento...\"></textarea>\n                </div>\n\n                <!-- NOVAS PERGUNTAS DE ALINHAMENTO DE EXPECTATIVAS -->\n                <div class=\"question\">\n                    <label>\n                        8.1. Para considerar este projeto um SUCESSO ABSOLUTO nos próximos 3 a 6 meses, qual é a meta exata e concreta? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"meta_sucesso_concreta\" required placeholder=\"Defina um número claro. Ex.: Fechar 30 novos contratos/mês, gerar 200 leads qualificados/mês ou faturar R$ 100 mil/mês via anúncios.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>8.2. Qual é a velocidade média de resposta do seu comercial para novos leads?</label>\n                    <select name=\"tempo_resposta_comercial\">\n                        <option value=\"\">Selecione</option>\n                        <option value=\"imediato\">Imediato (Até 15 minutos)</option>\n                        <option value=\"ate_1h\">Até 1 hora</option>\n                        <option value=\"mesmo_dia\">No mesmo dia (Até 12 horas)</option>\n                        <option value=\"mais_24h\">Mais de 24 horas</option>\n                    </select>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 03. PRODUTO OU SERVIÇO -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 03</span>\n                <h2>Produto ou serviço</h2>\n                <p class=\"section-description\">Agora queremos entender profundamente aquilo que você vende.</p>\n\n                <div class=\"question\">\n                    <label>\n                        9. Quais são seus principais produtos ou serviços? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"produtos_servicos\" required placeholder=\"Liste seus principais produtos ou serviços.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>\n                        10. Me venda o seu produto ou serviço. <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"venda_produto\" required placeholder=\"Imagine que você está falando com um cliente interessado. Por que ele deveria comprar?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>11. Qual é a grande promessa do seu produto ou serviço?</label>\n                    <textarea name=\"grande_promessa\" placeholder=\"Qual é o principal benefício que o cliente recebe?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>12. Qual produto ou serviço possui maior margem de lucro?</label>\n                    <input type=\"text\" name=\"maior_margem\" placeholder=\"Produto ou serviço\">\n                </div>\n\n                <div class=\"question\">\n                    <label>13. Qual produto ou serviço possui maior demanda?</label>\n                    <input type=\"text\" name=\"maior_demanda\" placeholder=\"Produto ou serviço\">\n                </div>\n\n                <div class=\"question\">\n                    <label>14. Quais produtos ou serviços você deseja divulgar?</label>\n                    <textarea name=\"produtos_divulgar\" placeholder=\"Liste os produtos ou serviços que deseja promover.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 04. CLIENTE -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 04</span>\n                <h2>Cliente e público-alvo</h2>\n                <p class=\"section-description\">Quanto melhor conhecermos seu cliente, melhor poderemos criar a comunicação.</p>\n\n                <div class=\"question\">\n                    <label>15. Quem é o seu público-alvo?</label>\n                    <textarea name=\"publico_alvo\" placeholder=\"Idade, gênero, profissão, cargo, formação, interesses, comportamentos, localização etc.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>16. Quais são os maiores medos do seu cliente?</label>\n                    <textarea name=\"medos_cliente\" placeholder=\"Quais problemas ou situações seu cliente teme?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>17. Quais problemas seu produto ou serviço resolve?</label>\n                    <textarea name=\"problemas_resolvidos\" placeholder=\"Liste os principais problemas que você resolve.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>18. Quais são as principais objeções antes da compra?</label>\n                    <textarea name=\"objecoes\" placeholder=\"Ex.: preço, confiança, prazo, qualidade, concorrência...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>19. O que é um Lead qualificado para você?</label>\n                    <textarea name=\"lead_qualificado\" placeholder=\"Descreva as características de um lead que realmente tem potencial de compra.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 05. VENDAS E MÉTRICAS DO FUNIL -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 05</span>\n                <h2>Vendas e Métricas do Funil</h2>\n                <p class=\"section-description\">Essas informações ajudam a calcular a matemática comercial da sua empresa.</p>\n\n                <div class=\"grid\">\n                    <div class=\"question\">\n                        <label>20. Preço médio por venda (Ticket Médio)</label>\n                        <input type=\"number\" step=\"0.01\" name=\"preco_medio\" placeholder=\"R$ 0,00\">\n                    </div>\n\n                    <div class=\"question\">\n                        <label>Custo médio por venda</label>\n                        <input type=\"number\" step=\"0.01\" name=\"custo_medio_venda\" placeholder=\"R$ 0,00\">\n                    </div>\n                </div>\n\n                <!-- NOVAS PERGUNTAS DE MÉTRICAS AVANÇADAS -->\n                <div class=\"grid\">\n                    <div class=\"question\">\n                        <label>Taxa de conversão comercial (%)</label>\n                        <input type=\"text\" name=\"taxa_conversao_comercial\" placeholder=\"Ex.: De cada 10 leads, fechamos 2 (20%)\">\n                    </div>\n\n                    <div class=\"question\">\n                        <label>Tempo do ciclo de vendas</label>\n                        <input type=\"text\" name=\"ciclo_vendas\" placeholder=\"Ex.: No mesmo dia, 3 dias, 15 dias, 1 mês...\">\n                    </div>\n                </div>\n\n                <div class=\"question\">\n                    <label>Possui e utiliza algum sistema de CRM?</label>\n                    <input type=\"text\" name=\"sistema_crm\" placeholder=\"Ex.: RD Station, Pipedrive, Kommo, HubSpot, WhatsApp Web solto, Não possui...\">\n                </div>\n\n                <div class=\"question\">\n                    <label>Custo máximo aceitável por Lead/Cliente (CAC/CPL)</label>\n                    <input type=\"text\" name=\"custo_maximo_lead_cliente\" placeholder=\"Ex.: Até R$ 30,00 por lead ou R$ 200,00 por cliente conquistado.\">\n                </div>\n\n                <div class=\"question\">\n                    <label>21. Quantas vendas você fez no mês passado?</label>\n                    <input type=\"number\" name=\"vendas_mes_passado\" placeholder=\"Quantidade de vendas\">\n                </div>\n\n                <div class=\"question\">\n                    <label>22. Como funciona atualmente o seu processo de vendas?</label>\n                    <textarea name=\"processo_vendas\" placeholder=\"Explique desde o primeiro contato até o fechamento da venda.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>23. Quais estratégias de vendas ou marketing já funcionaram para sua empresa?</label>\n                    <textarea name=\"estrategias_vencedoras\" placeholder=\"Conte experiências anteriores que deram bons resultados.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 06. CONCORRÊNCIA -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 06</span>\n                <h2>Concorrência e diferenciais</h2>\n\n                <div class=\"question\">\n                    <label>\n                        24. Quais são os seus principais diferenciais? <span class=\"required\">*</span>\n                    </label>\n                    <textarea name=\"diferenciais\" required placeholder=\"Por que um cliente deveria escolher sua empresa em vez de um concorrente?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>25. Quem são seus principais concorrentes?</label>\n                    <textarea name=\"concorrentes\" placeholder=\"Cite concorrentes diretos ou até 3 empresas que você considera referência.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 07. SWOT -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 07</span>\n                <h2>Análise estratégica SWOT</h2>\n                <p class=\"section-description\">Não precisa conhecer a metodologia SWOT. Apenas responda de acordo com sua percepção.</p>\n\n                <div class=\"question\">\n                    <label>26. Quais são as principais forças da empresa?</label>\n                    <textarea name=\"swot_forcas\" placeholder=\"O que sua empresa faz muito bem?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>27. Quais são as principais fraquezas da empresa?</label>\n                    <textarea name=\"swot_fraquezas\" placeholder=\"O que precisa melhorar?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>28. Quais oportunidades você enxerga para a empresa?</label>\n                    <textarea name=\"swot_oportunidades\" placeholder=\"Mercados, produtos, tendências, novos públicos etc.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>29. Quais ameaças podem prejudicar a empresa?</label>\n                    <textarea name=\"swot_ameacas\" placeholder=\"Concorrência, mercado, economia, mudanças etc.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 08. ANÚNCIOS -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 08</span>\n                <h2>Publicidade e anúncios</h2>\n\n                <div class=\"question\">\n                    <label>30. Você já anunciou no Google ou Facebook/Instagram Ads?</label>\n                    <div class=\"radio-group\">\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"ja_anunciou\" value=\"sim\">\n                            Sim\n                        </label>\n                        <label class=\"option\">\n                            <input type=\"radio\" name=\"ja_anunciou\" value=\"nao\">\n                            Não\n                        </label>\n                    </div>\n                </div>\n\n                <div class=\"question\">\n                    <label>31. Se já anunciou, como foi sua experiência?</label>\n                    <textarea name=\"experiencia_anuncios\" placeholder=\"Resultados, dificuldades, custos, experiências positivas ou negativas...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>32. Qual será o objetivo principal das campanhas?</label>\n                    <select name=\"objetivo_campanhas\">\n                        <option value=\"\">Selecione</option>\n                        <option value=\"vendas\">Vendas diretas</option>\n                        <option value=\"leads\">Geração de contatos / Leads</option>\n                        <option value=\"alcance\">Alcance</option>\n                        <option value=\"trafego\">Tráfego</option>\n                        <option value=\"envolvimento\">Envolvimento</option>\n                        <option value=\"cadastros\">Cadastros</option>\n                        <option value=\"mensagens\">Mensagens</option>\n                    </select>\n                </div>\n\n                <div class=\"question\">\n                    <label>33. Qual é sua meta de resultados com os anúncios?</label>\n                    <textarea name=\"meta_anuncios\" placeholder=\"Ex.: 50 leads por mês, 20 vendas, R$ 30 mil de faturamento...\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>34. Qual será o investimento inicial nos anúncios?</label>\n                    <input type=\"number\" step=\"0.01\" name=\"investimento_anuncios\" placeholder=\"R$ 0,00\">\n                </div>\n\n                <div class=\"question\">\n                    <label>35. Você já possui contas de anúncios?</label>\n                    <textarea name=\"contas_anuncios\" placeholder=\"Google Ads, Meta Ads etc.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 09. REGIONALIZAÇÃO E PAGAMENTO -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 09</span>\n                <h2>Região e pagamento</h2>\n\n                <div class=\"question\">\n                    <label>36. Em quais regiões deseja anunciar?</label>\n                    <textarea name=\"regiao_anuncios\" placeholder=\"Estados, cidades, bairros ou regiões específicas.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>37. Quais formas de pagamento você aceita?</label>\n                    <textarea name=\"formas_pagamento\" placeholder=\"Pix, cartão, boleto, parcelamento etc.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>38. Trabalha com datas especiais ou promoções?</label>\n                    <textarea name=\"datas_promocoes\" placeholder=\"Black Friday, Natal, aniversário, Carnaval, descontos, brindes, frete grátis etc.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 10. PALAVRAS-CHAVE -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 10</span>\n                <h2>Palavras-chave</h2>\n\n                <div class=\"question\">\n                    <label>39. Palavras-chave POSITIVAS</label>\n                    <textarea name=\"palavras_positivas\" placeholder=\"Quais palavras você gostaria que acionassem seus anúncios?\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>40. Palavras-chave NEGATIVAS</label>\n                    <textarea name=\"palavras_negativas\" placeholder=\"Quais palavras você NÃO quer associadas aos seus anúncios?\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 11. ESTRUTURA -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 11</span>\n                <h2>Estrutura da empresa</h2>\n\n                <div class=\"question\">\n                    <label>41. Como é a estrutura organizacional da empresa?</label>\n                    <textarea name=\"estrutura_organizacional\" placeholder=\"Descreva os principais responsáveis e departamentos.\"></textarea>\n                </div>\n\n                <div class=\"question\">\n                    <label>42. Qual é a sua posição dentro da empresa?</label>\n                    <input type=\"text\" name=\"cargo_responsavel\" placeholder=\"Ex.: proprietário, diretor, gerente...\">\n                </div>\n\n                <div class=\"question\">\n                    <label>43. Quantos funcionários trabalham na empresa?</label>\n                    <input type=\"number\" name=\"numero_funcionarios\" placeholder=\"Quantidade\">\n                </div>\n\n                <div class=\"question\">\n                    <label>44. É sempre com você que devemos manter contato?</label>\n                    <textarea name=\"contato_responsavel\" placeholder=\"Estratégias, criativos, financeiro etc. Informe quem deve ser contatado.\"></textarea>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- 12. CANAIS JÁ UTILIZADOS -->\n            <!-- ===================================================== -->\n            <div class=\"section\">\n                <span class=\"section-number\">Etapa 12</span>\n                <h2>Canais já utilizados</h2>\n\n                <div class=\"checkbox-group\">\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"facebook_ads\">\n                        Facebook Ads\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_ads\">\n                        Google Ads\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_meu_negocio\">\n                        Google Meu Negócio\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_analytics\">\n                        Google Analytics\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"website\">\n                        Website\n                    </label>\n\n                    <label class=\"option\">\n                        <input type=\"checkbox\" name=\"canais\" value=\"google_tag_manager\">\n                        Google Tag Manager\n                    </label>\n                </div>\n            </div>\n\n            <!-- ===================================================== -->\n            <!-- BOTÃO DE ENVIO E MENSAGENS -->\n            <!-- ===================================================== -->\n            <div class=\"button-area\">\n                <button type=\"submit\" id=\"submitButton\">\n                    Enviar questionário estratégico →\n                </button>\n\n                <div class=\"success\" id=\"successMessage\">\n                    ✓ Questionário e métricas enviados com sucesso! Obrigado pelas informações.\n                </div>\n\n                <div class=\"error\" id=\"errorMessage\">\n                    ⚠️ Não foi possível enviar o questionário. Tente novamente.\n                </div>\n            </div>\n\n        </form>\n\n    </div>\n\n    <div class=\"footer\">\n        MARKETING OS · Inteligência e Estratégia de Marca\n    </div>\n\n</div>\n\n<script>\nconst form = document.getElementById(\"marketingForm\");\nconst button = document.getElementById(\"submitButton\");\nconst success = document.getElementById(\"successMessage\");\nconst error = document.getElementById(\"errorMessage\");\n\n// Webhook n8n\nconst WEBHOOK_URL = \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/qnp\";\n\nform.addEventListener(\"submit\", async function(event) {\n    event.preventDefault();\n\n    button.disabled = true;\n    button.innerText = \"Enviando informações...\";\n    success.style.display = \"none\";\n    error.style.display = \"none\";\n\n    const formData = new FormData(form);\n    const data = {};\n\n    formData.forEach((value, key) => {\n        if (key === \"canais\") {\n            if (!data[key]) {\n                data[key] = [];\n            }\n            data[key].push(value);\n        } else {\n            data[key] = value;\n        }\n    });\n\n    // Data e hora do envio ISO\n    data.data_preenchimento = new Date().toISOString();\n\n    try {\n        const response = await fetch(WEBHOOK_URL, {\n            method: \"POST\",\n            headers: {\n                \"Content-Type\": \"application/json\"\n            },\n            body: JSON.stringify(data)\n        });\n\n        if (!response.ok) {\n            throw new Error(\"Erro HTTP \" + response.status);\n        }\n\n        success.style.display = \"block\";\n        form.reset();\n        button.innerText = \"Enviado com sucesso!\";\n\n        // Rola até a mensagem de sucesso\n        success.scrollIntoView({ behavior: 'smooth', block: 'center' });\n\n    } catch (err) {\n        console.error(err);\n        error.style.display = \"block\";\n        button.disabled = false;\n        button.innerText = \"Enviar questionário estratégico →\";\n\n        // Rola até a mensagem de erro\n        error.scrollIntoView({ behavior: 'smooth', block: 'center' });\n    }\n});\n</script>\n\n</body>\n</html>"
+    },
+    "type": "n8n-nodes-base.html",
+    "typeVersion": 1.2,
+    "position": [
+     128,
+     48
+    ],
+    "id": "c0c119b1-0cd1-49b0-af79-648b533c20b2",
+    "name": "Renderizar Interface HTML"
+   },
+   {
+    "parameters": {
+     "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n  // AI Agent normalmente retorna o resultado em \"output\"\n  let content = response.output ?? response.text ?? response.content;\n\n  // Fallback caso venha no formato OpenAI\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n    // Remove possíveis blocos markdown\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n}\n\nconst prevData = $(\"Sanitizar Dados e Gerar ID do Projeto\").first().json.data;\nconst apiKey = $(\"Sanitizar Dados e Gerar ID do Projeto\").first().json.apiKey;\n\nreturn [{\n  json: {\n    data: prevData,\n    apiKey,\n    strategistOutput: parsed\n  }\n}];"
+    },
+    "id": "9c736ab5-e279-4f71-b4c8-72ebe9ff182a",
+    "name": "Tratar e Validar JSON da IA",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     768,
+     528
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const raw = $input.first().json.body || $input.first().json;\n\nconst nomeEmpresa =\n  raw.nome_empresa ||\n  raw.nome ||\n  \"Empresa Sem Nome\";\n\nconst rawSlug = nomeEmpresa\n  .toLowerCase()\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\")\n  .replace(/[^a-z0-9]+/g, \"-\")\n  .replace(/(^-|-$)/g, \"\");\n\nconst projectId = `${rawSlug}-${Date.now()}`;\n\nconst data = {\n  // IDENTIFICAÇÃO\n  project_id: projectId,\n  data_preenchimento: raw.data_preenchimento || new Date().toISOString(),\n\n  // EMPRESA\n  nome_empresa: raw.nome_empresa || \"\",\n  descricao_empresa: raw.descricao_empresa || \"\",\n  principais_envolvidos: raw.principais_envolvidos || \"\",\n  instagram: raw.instagram || \"\",\n  site: raw.site || \"\",\n\n  // MOMENTO E OBJETIVOS\n  momento_empresa: raw.momento_empresa || \"\",\n  margem_contribuicao: raw.margem_contribuicao || \"\",\n  objetivo_principal: raw.objetivo_principal || \"\",\n  meta_sucesso_concreta: raw.meta_sucesso_concreta || \"\",\n  tempo_resposta_comercial: raw.tempo_resposta_comercial || \"\",\n\n  // PRODUTOS\n  produtos_servicos: raw.produtos_servicos || \"\",\n  venda_produto: raw.venda_produto || \"\",\n  grande_promessa: raw.grande_promessa || \"\",\n  maior_margem: raw.maior_margem || \"\",\n  maior_demanda: raw.maior_demanda || \"\",\n  produtos_divulgar: raw.produtos_divulgar || \"\",\n\n  // CLIENTE\n  publico_alvo: raw.publico_alvo || \"\",\n  medos_cliente: raw.medos_cliente || \"\",\n  problemas_resolvidos: raw.problemas_resolvidos || \"\",\n  objecoes: raw.objecoes || \"\",\n  lead_qualificado: raw.lead_qualificado || \"\",\n\n  // VENDAS\n  preco_medio: raw.preco_medio || \"\",\n  custo_medio_venda: raw.custo_medio_venda || \"\",\n  taxa_conversao_comercial: raw.taxa_conversao_comercial || \"\",\n  ciclo_vendas: raw.ciclo_vendas || \"\",\n  sistema_crm: raw.sistema_crm || \"\",\n  custo_maximo_lead_cliente: raw.custo_maximo_lead_cliente || \"\",\n  vendas_mes_passado: raw.vendas_mes_passado || \"\",\n  processo_vendas: raw.processo_vendas || \"\",\n  estrategias_vencedoras: raw.estrategias_vencedoras || \"\",\n\n  // CONCORRÊNCIA\n  diferenciais: raw.diferenciais || \"\",\n  concorrentes: raw.concorrentes || \"\",\n\n  // SWOT\n  swot_forcas: raw.swot_forcas || \"\",\n  swot_fraquezas: raw.swot_fraquezas || \"\",\n  swot_oportunidades: raw.swot_oportunidades || \"\",\n  swot_ameacas: raw.swot_ameacas || \"\",\n\n  // ANÚNCIOS\n  ja_anunciou: raw.ja_anunciou || \"\",\n  experiencia_anuncios: raw.experiencia_anuncios || \"\",\n  objetivo_campanhas: raw.objetivo_campanhas || \"\",\n  meta_anuncios: raw.meta_anuncios || \"\",\n  investimento_anuncios: raw.investimento_anuncios || \"\",\n  contas_anuncios: raw.contas_anuncios || \"\",\n\n  // REGIÃO\n  regiao_anuncios: raw.regiao_anuncios || \"\",\n  formas_pagamento: raw.formas_pagamento || \"\",\n  datas_promocoes: raw.datas_promocoes || \"\",\n\n  // PALAVRAS-CHAVE\n  palavras_positivas: raw.palavras_positivas || \"\",\n  palavras_negativas: raw.palavras_negativas || \"\",\n\n  // ESTRUTURA\n  estrutura_organizacional: raw.estrutura_organizacional || \"\",\n  cargo_responsavel: raw.cargo_responsavel || \"\",\n  numero_funcionarios: raw.numero_funcionarios || \"\",\n  contato_responsavel: raw.contato_responsavel || \"\",\n\n  // CANAIS\n  canais: raw.canais || []\n};\n\nreturn [\n  {\n    json: {\n      data,\n      project_id: projectId\n    }\n  }\n];"
+    },
+    "id": "01af3311-976e-4337-87a9-791e3fb918df",
+    "name": "Sanitizar Dados e Gerar ID do Projeto",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     -912,
+     544
+    ]
+   },
+   {
+    "parameters": {
+     "httpMethod": "POST",
+     "path": "qnp",
+     "options": {}
+    },
+    "id": "f1af69a0-52f1-45b7-aef0-bee0d7341085",
+    "name": "Webhook - Receber Submissão da Empresa",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     -1136,
+     544
+    ],
+    "webhookId": "brand-os-trigger-id"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "=Dados da Empresa: \" + {{JSON.stringify($('Sanitizar Dados e Gerar ID do Projeto').item.json.data) }}",
+     "options": {
+      "systemMessage": "# PAPEL\n\nVocê é um ANALISTA ESTRATÉGICO DE MARKETING, VENDAS E CRESCIMENTO.\n\nSua função é analisar profundamente as respostas fornecidas pelo cliente e transformar essas informações em um diagnóstico estratégico, uma estratégia de crescimento, um sistema de KPIs e um plano de ação.\n\nVocê deve agir como um consultor estratégico experiente.\n\nNão produza respostas genéricas.\n\nTodas as recomendações devem estar relacionadas aos dados fornecidos pelo cliente.\n\n---\n\n# PRINCÍPIO FUNDAMENTAL\n\nO objetivo informado pelo cliente é o ponto central de toda a análise.\n\nVocê deve responder:\n\n1. Onde a empresa está?\n2. Onde ela quer chegar?\n3. Qual é a diferença entre o estado atual e o objetivo?\n4. O que precisa acontecer para atingir o objetivo?\n5. Quais indicadores precisam ser acompanhados?\n6. Quais ações devem ser executadas?\n7. Qual deve ser a prioridade?\n\n---\n\n# ANÁLISE FINANCEIRA E COMERCIAL\n\nSempre que existirem dados suficientes, faça os cálculos necessários.\n\nExemplos:\n\nFaturamento desejado / ticket médio = quantidade de vendas necessária.\n\nVendas necessárias / taxa de conversão = leads necessários.\n\nInvestimento / quantidade de leads = CPL.\n\nInvestimento / quantidade de clientes = CAC.\n\nFaturamento / investimento = ROAS.\n\nNunca invente números apresentados como se fossem dados reais do cliente.\n\nQuando precisar estimar, identifique claramente como:\n\n\"Estimativa estratégica\".\n\n---\n\n# ANÁLISE DO OBJETIVO\n\nAnalise:\n\n* objetivo principal;\n* meta concreta;\n* prazo;\n* situação atual;\n* capacidade comercial;\n* ticket;\n* conversão;\n* volume de vendas;\n* investimento;\n* capacidade operacional.\n\nDetermine se a meta parece:\n\n* conservadora;\n* realista;\n* agressiva;\n* incompatível com os dados atuais.\n\nExplique o motivo.\n\n---\n\n# ESTRATÉGIA\n\nA estratégia deve definir:\n\n* prioridade principal;\n* público prioritário;\n* oferta prioritária;\n* canal prioritário;\n* estratégia de aquisição;\n* estratégia de conversão;\n* estratégia comercial;\n* estratégia de retenção;\n* principais gargalos;\n* oportunidades;\n* ações de maior impacto.\n\nNão recomende executar muitos canais simultaneamente sem justificativa.\n\nPriorize.\n\n---\n\n# KPIs\n\nCrie indicadores relacionados diretamente ao objetivo.\n\nSempre que possível, separar:\n\n## KPI de negócio\n\nExemplos:\n\n* faturamento;\n* lucro;\n* número de vendas;\n* ticket médio;\n* margem;\n* CAC;\n* LTV.\n\n## KPI de marketing\n\nExemplos:\n\n* leads;\n* CPL;\n* CTR;\n* CPC;\n* taxa de conversão;\n* custo por oportunidade.\n\n## KPI comercial\n\nExemplos:\n\n* velocidade de resposta;\n* taxa de qualificação;\n* taxa de fechamento;\n* ciclo de vendas;\n* propostas enviadas;\n* vendas realizadas.\n\nPara cada KPI informe:\n\n* nome;\n* definição;\n* situação atual;\n* meta;\n* fórmula;\n* frequência de acompanhamento;\n* responsável;\n* ação corretiva quando estiver abaixo da meta.\n\n---\n\n# PLANO DE 30, 60 E 90 DIAS\n\nCrie um plano progressivo.\n\n## 0–30 dias\n\nFoco em estruturação e correção dos principais gargalos.\n\n## 31–60 dias\n\nFoco em aquisição, otimização e conversão.\n\n## 61–90 dias\n\nFoco em escala, previsibilidade e otimização.\n\nCada ação deve possuir:\n\n* prioridade;\n* objetivo;\n* ação;\n* justificativa;\n* KPI relacionado;\n* meta;\n* prazo.\n\n---\n\n# DOCUMENTOS\n\nRetorne SOMENTE JSON válido.\n\nUse exatamente esta estrutura:\n\n{\n\"briefing_md\": \"Documento Markdown completo\",\n\"estrategia_md\": \"Documento Markdown completo\",\n\"kpis_md\": \"Documento Markdown completo\",\n\"plano_acao_md\": \"Documento Markdown completo\"\n}\n\n---\n\n# BRIEFING\n\nO briefing deve conter:\n\n# Briefing Estratégico — [Empresa]\n\n## Resumo Executivo\n\n## Sobre a Empresa\n\n## Produtos e Serviços\n\n## Público-Alvo\n\n## Problemas Resolvidos\n\n## Proposta de Valor\n\n## Diferenciais\n\n## Concorrência\n\n## Situação Atual\n\n## Processo Comercial\n\n## Marketing Atual\n\n## Análise SWOT\n\n## Objetivo do Cliente\n\n## Diagnóstico Estratégico\n\n## Principais Gargalos\n\n## Oportunidades\n\n---\n\n# ESTRATÉGIA\n\nCriar:\n\n# Estratégia de Crescimento — [Empresa]\n\n## Objetivo Estratégico\n\n## Diagnóstico\n\n## Estratégia Central\n\n## Público Prioritário\n\n## Oferta Prioritária\n\n## Posicionamento\n\n## Estratégia de Aquisição\n\n## Estratégia de Conversão\n\n## Estratégia Comercial\n\n## Estratégia de Retenção\n\n## Canais Prioritários\n\n## Prioridades Estratégicas\n\n## Estratégia de 30 Dias\n\n## Estratégia de 60 Dias\n\n## Estratégia de 90 Dias\n\n---\n\n# KPIs\n\nCriar:\n\n# Sistema de KPIs — [Empresa]\n\n## Meta Principal\n\n## Matemática da Meta\n\n## KPIs de Negócio\n\n## KPIs de Marketing\n\n## KPIs Comerciais\n\n## Metas\n\n## Fórmulas\n\n## Frequência de Acompanhamento\n\n## Indicadores de Alerta\n\n## Ações Corretivas\n\n---\n\n# PLANO DE AÇÃO\n\nCriar:\n\n# Plano de Ação — [Empresa]\n\n## Prioridades\n\n## 0–30 Dias\n\n## 31–60 Dias\n\n## 61–90 Dias\n\n## Quick Wins\n\n## Projetos Estruturantes\n\n## Responsáveis\n\n## Indicadores\n\n## Critérios de Sucesso\n\n---\n\n# QUALIDADE\n\nNunca escreva:\n\n* \"Informações em processamento\"\n* \"Conteúdo a definir\"\n* \"Não informado\"\n\nNão invente fatos sobre a empresa.\n\nSe uma informação não foi fornecida, não trate uma suposição como fato.\n\nQuando necessário, faça uma recomendação baseada em hipótese e deixe claro que é uma hipótese estratégica.\n\nO documento deve ser específico para a empresa analisada.\n"
+     }
+    },
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     448,
+     528
+    ],
+    "id": "b1ee6946-5604-4462-a373-5a361dead2b6",
+    "name": "Agente IA - Diretor Estratégico"
+   },
+   {
+    "parameters": {
+     "operation": "toText",
+     "sourceProperty": "content",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.convertToFile",
+    "typeVersion": 1.1,
+    "position": [
+     2000,
+     512
+    ],
+    "id": "4b5e318c-7e59-49ae-921a-4de89a92300f",
+    "name": "Converter Markdown em Arquivo Binário"
+   },
+   {
+    "parameters": {
+     "resource": "file",
+     "path": "=/root/briefing/{{ $('Webhook - Receber Submissão da Empresa').item.json.body.nome_empresa }}",
+     "options": {
+      "fileName": "={{ $('Loop - Processar Arquivo por Arquivo').item.json.filename }}"
+     }
+    },
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     2224,
+     512
+    ],
+    "id": "57562e9e-2bcb-4a2e-8f92-bdaff5e04ff6",
+    "name": "Salvar Arquivo via SSH no Servidor",
+    "credentials": {
+     "sshPassword": {
+      "id": "8dDUhhIDCo7tLJss",
+      "name": "157.173.207.22"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const input = $input.first().json;\n\nconst data = input.data;\nconst strategistOutput = input.strategistOutput;\n\nreturn [\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"01-briefing.md\",\n      content: strategistOutput.briefing_md\n    }\n  },\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"02-estrategia.md\",\n      content: strategistOutput.estrategia_md\n    }\n  },\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"03-kpis.md\",\n      content: strategistOutput.kpis_md\n    }\n  },\n  {\n    json: {\n      project_id: data.project_id,\n      nome_empresa: data.nome_empresa,\n\n      filename: \"04-plano-de-acao.md\",\n      content: strategistOutput.plano_acao_md\n    }\n  }\n];"
+    },
+    "id": "d678f017-1620-4f08-86d6-dd35a685f9ba",
+    "name": "Separar em 4 Arquivos Markdown",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1088,
+     528
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const items = $input.all();\nconst first = items[0] ? items[0].json : {};\nreturn [{\n  json: {\n    status: \"success\",\n    message: \"Quadro Norteador de Pesquisa gerado e salvo via SSH no VPS com sucesso!\",\n    project_id: first.project_id,\n    nome_empresa: first.nome_empresa,\n    total_arquivos: items.length,\n    path_servidor: `/root/briefing/${first.nome_empresa}/`\n  }\n}];"
+    },
+    "id": "c4583c56-337f-4452-8d21-1265c27b86b1",
+    "name": "Montar Resposta Final de Sucesso",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1968,
+     192
+    ]
+   },
+   {
+    "parameters": {
+     "options": {}
+    },
+    "type": "n8n-nodes-base.splitInBatches",
+    "typeVersion": 3,
+    "position": [
+     1520,
+     528
+    ],
+    "id": "3b27d00b-f3ef-4000-b6a5-5bd40befb3ef",
+    "name": "Loop - Processar Arquivo por Arquivo"
+   },
+   {
+    "parameters": {
+     "model": "=antigravity/gemini-2.5-flash",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 4096,
+      "temperature": 0.7,
+      "timeout": 300000
+     }
+    },
+    "id": "1573a1fd-94b1-4530-8860-07ea20ba2358",
+    "name": "OpenAI Chat Model - Claude",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     464,
+     992
+    ],
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "resource": "folder",
+     "name": "=briefing",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "value": "={{ $json.id }}",
+      "mode": "id"
+     },
+     "options": {}
+    },
+    "id": "ba9e5269-3fb3-47af-bb68-47d490245751",
+    "name": "Google Drive - Criar Subpastas POP 03",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     48,
+     528
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "resource": "fileFolder",
+     "queryString": "=📁 {{ $json.data.nome_empresa }}",
+     "filter": {
+      "driveId": {
+       "mode": "list",
+       "value": "My Drive"
+      },
+      "folderId": {
+       "mode": "list",
+       "value": "root",
+       "cachedResultName": "/ (Root folder)"
+      }
+     },
+     "options": {}
+    },
+    "id": "fe698c72-6d5b-4934-924d-c68c0eae2302",
+    "name": "Google Drive - Criar Pasta Raiz do Projeto1",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     -672,
+     544
+    ],
+    "alwaysOutputData": true,
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 3
+      },
+      "conditions": [
+       {
+        "id": "26031d04-2c0c-47f1-8993-4aa07fbf93f7",
+        "leftValue": "={{ $json }}",
+        "rightValue": "",
+        "operator": {
+         "type": "object",
+         "operation": "notEmpty",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.3,
+    "position": [
+     -416,
+     544
+    ],
+    "id": "0466ea9a-1828-43a1-a1cc-46bcfb792bb0",
+    "name": "If"
+   },
+   {
+    "parameters": {
+     "name": "={{ $('Loop - Processar Arquivo por Arquivo').item.json.filename }}",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "value": "={{ $('Google Drive - Criar Subpastas POP 03').first().json.id }}",
+      "mode": "id"
+     },
+     "options": {}
+    },
+    "id": "8bb142e2-dac4-4dc0-ad1b-ed73b92451cd",
+    "name": "Google Drive - Criar Subpastas POP 1",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     2224,
+     336
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "resource": "folder",
+     "name": "=📁 {{ $('Sanitizar Dados e Gerar ID do Projeto').item.json.data.nome_empresa }}",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "root",
+      "cachedResultName": "/ (Root folder)"
+     },
+     "options": {}
+    },
+    "id": "ffed383b-5503-4a45-85a9-6212ca84e4bc",
+    "name": "Google Drive - Criar Subpastas POP ",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     -176,
+     672
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   }
+  ],
+  "connections": {
+   "Webhook - Carregar Formulário Web": {
+    "main": [
+     [
+      {
+       "node": "Renderizar Interface HTML",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Renderizar Interface HTML": {
+    "main": [
+     [
+      {
+       "node": "Responder Navegador com Formulário",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Tratar e Validar JSON da IA": {
+    "main": [
+     [
+      {
+       "node": "Separar em 4 Arquivos Markdown",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Sanitizar Dados e Gerar ID do Projeto": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Pasta Raiz do Projeto1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Webhook - Receber Submissão da Empresa": {
+    "main": [
+     [
+      {
+       "node": "Sanitizar Dados e Gerar ID do Projeto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Agente IA - Diretor Estratégico": {
+    "main": [
+     [
+      {
+       "node": "Tratar e Validar JSON da IA",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Converter Markdown em Arquivo Binário": {
+    "main": [
+     [
+      {
+       "node": "Salvar Arquivo via SSH no Servidor",
+       "type": "main",
+       "index": 0
+      },
+      {
+       "node": "Google Drive - Criar Subpastas POP 1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salvar Arquivo via SSH no Servidor": {
+    "main": [
+     [
+      {
+       "node": "Loop - Processar Arquivo por Arquivo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Separar em 4 Arquivos Markdown": {
+    "main": [
+     [
+      {
+       "node": "Loop - Processar Arquivo por Arquivo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Loop - Processar Arquivo por Arquivo": {
+    "main": [
+     [
+      {
+       "node": "Montar Resposta Final de Sucesso",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Converter Markdown em Arquivo Binário",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "OpenAI Chat Model - Claude": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Agente IA - Diretor Estratégico",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Pasta Raiz do Projeto1": {
+    "main": [
+     [
+      {
+       "node": "If",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "If": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP 03",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP ",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Subpastas POP 03": {
+    "main": [
+     [
+      {
+       "node": "Agente IA - Diretor Estratégico",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Subpastas POP ": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP 03",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-09-27T00:20:29.905Z",
+    "id": 27,
+    "workflowId": "RDRD9TWoLr0pwdOd",
+    "versionId": "236425f5-b51c-46ae-bfab-b3f11f8ec56b",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-09-27T00:20:30.210Z",
+    "id": 28,
+    "workflowId": "RDRD9TWoLr0pwdOd",
+    "versionId": "236425f5-b51c-46ae-bfab-b3f11f8ec56b",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

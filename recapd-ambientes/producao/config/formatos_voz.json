@@ -1,0 +1,344 @@
+{
+ "_sobre": "Formatos com várias vozes no mesmo Short (dono 23/10/2026; ver D:/video-fila/IDEIAS_FORMATOS_COM_VOZES.md). Lido pelo recapd bin/anime_formatos.py e pelo teste hipercool-materiais/bin/formatos_voz.py. Na produção, quem sorteia o formato é o teste gradual (bin/anime_testes.py, config/testes_voz.json): só entram os aprovados com uso producao/padrao_faustao.",
+ "_legenda": "Legenda do Short de formato (dono 23/10): cada voz acende a palavra na cor_legenda (#RRGGBB) e mostra o nome_legenda pequeno em cima. Só vale com 2+ vozes no vídeo; Short solo fica igual. Sem cor = paleta pela ordem de entrada; nome_legenda vazio = sem nome.",
+ "legenda": {
+  "_sobre": "Dona 23/10, só no Short de formato com 2+ vozes: enfase = palavras importantes (número, nome, virada) maiores (enfase_escala) na cor de quem fala; impacto = 1 palavra-chave enorme no centro ~1 s com pop, nas frases de impacto do narracao_curva; no máx max_impactos_por_video, um a cada impacto_intervalo_min_s. false desliga.",
+  "enfase_ligada": true,
+  "enfase_escala": 1.3,
+  "impacto_ligado": true,
+  "max_impactos_por_video": 2,
+  "impacto_intervalo_min_s": 8
+ },
+ "regras": "Escreva em português do Brasil, falado, para um Short do MESMO tamanho da história abaixo (o número de palavras vem em TAMANHO; sem ele, 110 a 160 palavras no total).\nConte os FATOS da história abaixo (pode cortar detalhe), do começo ao fim, com gancho no início. O FOCO É A HISTÓRIA, não o narrador.\nCada fala tem no máximo 22 palavras. BORDÃO: no máximo UM por personagem no vídeo inteiro, só pra identificar quem fala\n(ex.: o Mestre Kame se apresenta \"Aqui é o Mestre Kame!\" e pronto). Falar no jeito do personagem não é encher de jargão:\no jeito vem do vocabulário e da atitude, não de repetir as frases famosas.\nO Short é um LOOP: NADA de despedida (\"boa noite\", \"tchau\", \"até a próxima\", \"fim\"). A última fala tem que deixar a\npergunta ou o gancho que leva de volta à PRIMEIRA fala, pra quem assiste não perceber onde termina.\nSem palavrão pesado, sem política, sem pedir like/inscrição, sem citar emissora, marca ou pessoa real.\nResponda SÓ um JSON: [{\"voz\": \"<uma das vozes do elenco>\", \"fala\": \"...\", \"estilo\": \"normal|grito|pergunta|calmo\"}]",
+ "vozes": {
+  "galvao_bueno": {
+   "base": "K",
+   "st": 1,
+   "cor_legenda": "#6EE66E",
+   "nome_legenda": "GALVÃO"
+  },
+  "professor_girafales": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#6EE66E",
+   "nome_legenda": "PROFESSOR"
+  },
+  "silvio_santos": {
+   "base": "K",
+   "st": 3,
+   "cor_legenda": "#FFD63C",
+   "nome_legenda": "SILVIO"
+  },
+  "cid_moreira": {
+   "base": "F",
+   "st": -3,
+   "cor_legenda": "#50BEFF",
+   "nome_legenda": "CID"
+  },
+  "faustao": {
+   "base": "K",
+   "st": 0,
+   "bordoes": [
+    "Errou!",
+    "Ô loco, meu!",
+    "Essa fera aí, meu!"
+   ],
+   "cor_legenda": "#FF9628",
+   "nome_legenda": "FAUSTÃO"
+  },
+  "chaves_chapolin": {
+   "base": "K",
+   "st": 4,
+   "cor_legenda": "#FF9628",
+   "nome_legenda": "CHAVES"
+  },
+  "quico": {
+   "base": "K",
+   "st": 0,
+   "bordoes": [
+    "Cale-se, cale-se, cale-se"
+   ],
+   "cor_legenda": "#50BEFF",
+   "nome_legenda": "QUICO"
+  },
+  "chiquinha": {
+   "base": "F",
+   "st": 0,
+   "cor_legenda": "#FF6EBE",
+   "nome_legenda": "CHIQUINHA"
+  },
+  "seu_madruga": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#BE8CFF",
+   "nome_legenda": "SEU MADRUGA"
+  },
+  "joao_grilo": {
+   "base": "K",
+   "st": 2,
+   "bordoes": [
+    "Deixe de ser mentiroso, Chicó"
+   ],
+   "cor_legenda": "#FF9628",
+   "nome_legenda": "JOÃO GRILO"
+  },
+  "chico_selton": {
+   "base": "K",
+   "st": 1,
+   "bordoes": [
+    "Não sei, só sei que foi assim",
+    "Num sei, só sei que foi assim"
+   ],
+   "cor_legenda": "#50BEFF",
+   "nome_legenda": "CHICÓ"
+  },
+  "gru_hassum": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#6EE66E",
+   "nome_legenda": "GRU"
+  },
+  "pato_donald": {
+   "base": "K",
+   "st": 0,
+   "bordoes": [
+    "Ei! Ei! Isso não é justo!"
+   ],
+   "cor_legenda": "#FFD63C",
+   "nome_legenda": "DONALD"
+  },
+  "goku": {
+   "base": "K",
+   "st": 1,
+   "cor_legenda": "#FF9628",
+   "nome_legenda": "GOKU"
+  },
+  "vegeta": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#50BEFF",
+   "nome_legenda": "VEGETA"
+  },
+  "wolverine_bardavid": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#FFD63C",
+   "nome_legenda": "WOLVERINE"
+  },
+  "trunks_crianca": {
+   "base": "F",
+   "st": 0,
+   "cor_legenda": "#BE8CFF",
+   "nome_legenda": "TRUNKS"
+  },
+  "bulma": {
+   "base": "F",
+   "st": 0,
+   "cor_legenda": "#FF6EBE",
+   "nome_legenda": "BULMA"
+  },
+  "aracy_top_therm": {
+   "base": "F",
+   "st": 0,
+   "cor_legenda": "#FF6EBE",
+   "nome_legenda": "ARACY"
+  },
+  "cell": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#6EE66E",
+   "nome_legenda": "CELL"
+  },
+  "bills": {
+   "base": "K",
+   "st": 0,
+   "cor_legenda": "#BE8CFF",
+   "nome_legenda": "BILLS"
+  }
+ },
+ "estilos": {
+  "normal": {
+   "f0_escala": 1.5,
+   "final_st": 0.0,
+   "velocidade": 1.03,
+   "st": 0
+  },
+  "grito": {
+   "f0_escala": 1.85,
+   "final_st": 0.0,
+   "velocidade": 1.08,
+   "st": 1
+  },
+  "pergunta": {
+   "f0_escala": 1.6,
+   "final_st": 2.0,
+   "velocidade": 1.03,
+   "st": 0
+  },
+  "calmo": {
+   "f0_escala": 1.2,
+   "final_st": -1.5,
+   "velocidade": 0.97,
+   "st": 0
+  }
+ },
+ "formatos": {
+  "transmissao": {
+   "nome": "Transmissão esportiva",
+   "elenco": [
+    "galvao_bueno"
+   ],
+   "como": "Galvão Bueno narra a história SOZINHO como se fosse um JOGO ao vivo: lance a lance, a empolgação crescendo, a virada narrada como gol. Sem comentarista (dona 23/10: 'pode ser só o Galvão').",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\transmissao_valentao.mp3",
+   "uso": "producao"
+  },
+  "show_do_milhao": {
+   "nome": "Show do Milhão",
+   "elenco": [
+    "silvio_santos"
+   ],
+   "como": "Silvio Santos apresenta a história como no programa dele e PARA no gancho com uma pergunta ao público de casa: o que vai acontecer? Essa pergunta é a ÚLTIMA fala e emenda na primeira (loop): nada de 'a resposta vem no próximo vídeo'. O bordão dele é o que vem no ELENCO, uma vez só.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\show_do_milhao_gato_vampiro.mp3",
+   "uso": "producao"
+  },
+  "jornal": {
+   "nome": "Jornal",
+   "elenco": [
+    "cid_moreira",
+    "faustao"
+   ],
+   "como": "Cid Moreira apresenta como telejornal, sério, abre com 'Boa noite.'; chama um repórter 'ao vivo' (o Faustão, empolgado e exagerado) que conta a parte mais louca; o Cid fecha com 'Boa noite.'. REPROVADO com essas vozes (dona 23/10).",
+   "aprovado_dono": false,
+   "amostra_aprovada": null,
+   "uso": "reprovado"
+  },
+  "videocassetadas": {
+   "nome": "Videocassetadas",
+   "elenco": [
+    "faustao"
+   ],
+   "como": "Faustão comenta a história como nas Videocassetadas, zoando cada falha do vilão ou dos personagens com comentário engraçado em palavras normais; o bordão dele é o do ELENCO, UMA vez só. É quase o PADRÃO do Faustão (dona 23/10).",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\videocassetadas_valentao.mp3",
+   "uso": "padrao_faustao"
+  },
+  "escolinha": {
+   "nome": "Escolinha",
+   "elenco": [
+    "professor_girafales",
+    "chaves_chapolin",
+    "quico",
+    "chiquinha"
+   ],
+   "como": "O Professor Girafales dá uma AULA sobre a história e faz perguntas; Chaves responde errado e engraçado, Quico se gaba, Chiquinha provoca; o professor perde a paciência e explica o certo. Cada um usa só o bordão que vem no ELENCO, uma vez só; o foco é a história.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\escolinha_gato_vampiro.mp3",
+   "uso": "producao"
+  },
+  "tribunal": {
+   "nome": "Tribunal",
+   "elenco": [
+    "professor_girafales",
+    "joao_grilo",
+    "chico_selton"
+   ],
+   "como": "Um julgamento sobre a história: o Professor Girafales é o juiz, João Grilo é o advogado esperto que defende o protagonista, Chicó é a testemunha que exagera tudo ('Não sei, só sei que foi assim'). Falar de sertanejo nos dois (cabra, home, oxe, num, vixe, arretado). Só pra vídeo específico, de briga/julgamento (dona 23/10).",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\tribunal_gato_vampiro.mp3",
+   "uso": "especifico"
+  },
+  "joao_chico": {
+   "nome": "João Grilo e Chicó",
+   "elenco": [
+    "joao_grilo",
+    "chico_selton"
+   ],
+   "como": "Chicó conta a história exagerando e mentindo, João Grilo desmascara. Falar de sertanejo de verdade, nada de português correto demais. MODELO APROVADO PELA DONA (copie o tom, não o texto): JOÃO: 'Oxe, Chicó, tu já soube do cabra que a família todinha chamava de lixo?' / CHICÓ: 'Soube, João. Eu mesmo vi, com esses dois olho...' / JOÃO: 'Deixe de ser mentiroso, Chicó!' / CHICÓ: 'Num sei, só sei que foi assim.' / JOÃO: 'E o valentão, home? O abestado apanhou?' / CHICÓ: 'Vixe, levou uma pisa arretada...' — falas curtas, um provocando o outro.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\amostras_audio\\novas_20261022\\joao_grilo_e_chico_4_dupla_sertao.mp3",
+   "uso": "producao"
+  },
+  "chaves_quico": {
+   "nome": "Chaves e Quico",
+   "elenco": [
+    "chaves_chapolin",
+    "quico"
+   ],
+   "como": "Chaves conta a história do jeito dele (confuso, se enrolando), Quico interrompe se gabando ('o meu é melhor') e implicando. Cada um usa só o bordão que vem no ELENCO, uma vez só; o foco é a história.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\chaves_quico_gato_vampiro.mp3",
+   "uso": "producao"
+  },
+  "chaves_chiquinha": {
+   "nome": "Chaves e Chiquinha",
+   "elenco": [
+    "chaves_chapolin",
+    "chiquinha"
+   ],
+   "como": "Chaves e Chiquinha contam a história juntos; Chiquinha se faz de esperta e provoca, Chaves se confunde. Cada um usa só o bordão que vem no ELENCO, uma vez só; o foco é a história.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\chaves_chiquinha_gato_vampiro.mp3",
+   "uso": "producao"
+  },
+  "trio_chaves": {
+   "nome": "Trio Chaves, Quico e Chiquinha",
+   "elenco": [
+    "chaves_chapolin",
+    "quico",
+    "chiquinha"
+   ],
+   "como": "Os três contam a história discutindo entre si como na vila: Quico se gaba, Chiquinha provoca, Chaves se confunde. Cada um usa só o bordão que vem no ELENCO, uma vez só. A última fala é uma briguinha que puxa de volta pra primeira.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\trio_chaves_valentao.mp3",
+   "uso": "producao"
+  },
+  "madruga_chaves": {
+   "nome": "Seu Madruga e Chaves",
+   "elenco": [
+    "seu_madruga",
+    "chaves_chapolin"
+   ],
+   "como": "Seu Madruga tenta contar a história e o Chaves fica atrapalhando; Seu Madruga perde a paciência. Cada um usa só o bordão que vem no ELENCO, uma vez só; o foco é a história.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\madruga_chaves_gato_vampiro.mp3",
+   "uso": "producao"
+  },
+  "fofoca": {
+   "nome": "Fofoca",
+   "elenco": [
+    "chiquinha",
+    "quico"
+   ],
+   "como": "Chiquinha e Quico contam a história como FOFOCA da vila, baixinho ('você não sabe da maior!'), exagerando e se escandalizando. Cada um usa só o bordão que vem no ELENCO, uma vez só; o foco é a história.",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\fofoca_gato_vampiro.mp3",
+   "uso": "producao"
+  },
+  "batalha": {
+   "nome": "Batalha de narradores",
+   "elenco": [
+    "cid_moreira",
+    "faustao",
+    "silvio_santos"
+   ],
+   "como": "Silvio abre explicando a batalha; Cid Moreira conta a primeira metade (sério), Faustão conta a segunda (zoeira); Silvio fecha pedindo pro público votar nos comentários: Cid ou Faustão? Só pra vídeo longo ou caso muito específico (dona 23/10).",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\batalha_valentao.mp3",
+   "uso": "especifico_longo"
+  },
+  "cameo_interrupcao": {
+   "nome": "Narrador + participação especial + interrupção",
+   "elenco": [
+    "chico_selton",
+    "pato_donald",
+    "galvao_bueno"
+   ],
+   "como": "Chicó narra sozinho; no meio, quando o vilão trapaceia, o Pato Donald interrompe furioso ('Ei! Ei! Isso não é justo!'); no clímax entra o Galvão com UMA frase só. Sem encerramento nem despedida: o Short é loop (dona 23/10: 'só não pode o Boa noite no final').",
+   "aprovado_dono": true,
+   "amostra_aprovada": "D:\\hipercool-materiais\\amostras_voz\\formatos\\cameo_interrupcao_valentao.mp3",
+   "uso": "producao"
+  }
+ }
+}

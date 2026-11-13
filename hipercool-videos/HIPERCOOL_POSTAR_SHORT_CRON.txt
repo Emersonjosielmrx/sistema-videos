@@ -1,0 +1,3 @@
+# DESATIVADO em 16/10/2026 15h: cron não existe no Windows, então isto nunca rodou.
+# Os Shorts do cap 1 sobem pela tarefa agendada HipercoolShorts2h (bin/shorts_a_cada_2h.py):
+# 2 em 16/10 e 3 em 17/10 ao longo do dia. Log: logs/shorts_2h.log

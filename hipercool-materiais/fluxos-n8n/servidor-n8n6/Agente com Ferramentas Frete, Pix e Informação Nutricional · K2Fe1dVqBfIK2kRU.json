@@ -1,0 +1,1003 @@
+{
+ "updatedAt": "2026-10-14T01:03:48.633Z",
+ "createdAt": "2026-10-13T15:08:41.957Z",
+ "id": "K2Fe1dVqBfIK2kRU",
+ "name": "Agente com Ferramentas: Frete, Pix e Informação Nutricional",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "public": true,
+    "mode": "hostedChat",
+    "authentication": "none",
+    "initialMessages": "Oi! Eu sou a Nina, do Empório Natural 🌿\nPosso calcular o frete para o seu endereço, gerar o Pix do seu pedido e consultar a informação nutricional de qualquer produto (pelo nome ou pelo código de barras).",
+    "options": {
+     "title": "Empório Natural",
+     "subtitle": "Atendimento com IA · aula de ferramentas",
+     "inputPlaceholder": "Escreva sua mensagem…",
+     "responseMode": "streaming"
+    }
+   },
+   "name": "Chat do cliente",
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.4,
+   "position": [
+    0,
+    300
+   ],
+   "id": "4604e491-080c-4f99-a72e-5717634973cf",
+   "webhookId": "6f5e1c7d-6840-4f19-bca7-568bd086d368"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "historico",
+    "key": "=chat:nina:{{ $('Chat do cliente').first().json.sessionId }}",
+    "keyType": "list",
+    "options": {}
+   },
+   "name": "Lê histórico",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    220,
+    300
+   ],
+   "id": "bc25d14f-919a-4842-a253-55bd5353c4a7",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Memória feita à mão: as últimas 12 mensagens da conversa entram no pedido para a IA\nconst ent = $('Chat do cliente').first().json;\nlet hist = $input.first().json.historico;\nif (!Array.isArray(hist)) hist = hist ? [hist] : [];\nconst linhas = hist.slice(-12).map(s => {\n  try { const m = JSON.parse(s); return (m.quem === 'cliente' ? 'Cliente: ' : 'Nina: ') + m.texto; } catch (e) { return ''; }\n}).filter(Boolean);\nconst prompt = (linhas.length ? 'CONVERSA ATÉ AGORA:\\n' + linhas.join('\\n') + '\\n\\n' : '') + 'NOVA MENSAGEM DO CLIENTE:\\n' + String(ent.chatInput || '').slice(0, 2000);\nreturn [{ json: { prompt } }];"
+   },
+   "name": "Monta contexto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    440,
+    300
+   ],
+   "id": "972a5fa8-27c4-4c11-a0b0-73f3e1ed1220"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.prompt }}",
+    "options": {
+     "systemMessage": "Você é a Nina, atendente virtual do Empório Natural, um mercado de produtos naturais com delivery em Curitiba. Fale como no WhatsApp: frases curtas, simpáticas e no máximo 2 emojis por mensagem.\n\nFERRAMENTAS (use sempre que o assunto aparecer; NUNCA invente números)\n1. Frete: se faltar o endereço completo, peça rua, número, bairro e cidade. Chame buscar_coordenadas com o endereço, pegue \"lat\" e \"lon\" do primeiro resultado e chame calcular_frete com {\"lat\": número, \"lon\": número}. Informe valor, distância e prazo. Se a busca vier vazia, peça o bairro e a cidade e tente de novo.\n2. Pix: quando o cliente quiser pagar, confirme o valor total e chame gerar_pix com {\"valor\": total, \"pedido\": \"primeiro nome do cliente\"}. Envie o código copia e cola sozinho em uma linha, para facilitar copiar.\n3. Informação nutricional: com código de barras (8 a 14 dígitos) use info_nutricional_por_codigo. Só com o nome, use buscar_produto_por_nome e depois consulte o código do resultado mais parecido. Explique em linguagem simples, por 100 g: calorias, açúcares, gorduras, sódio e proteínas, além do Nutri-Score e dos alergênicos. Avise que os dados vêm da base aberta Open Food Facts e podem variar.\n\nREGRAS\n- Não invente preço de produto: diga que um atendente confirma o valor.\n- Não dê orientação médica nem de dieta.\n- Se não conseguir resolver, diga que vai chamar um atendente humano.\n- Use o histórico da conversa (endereço, valores, nome) sem pedir de novo o que o cliente já disse.\n- Sempre termine com uma resposta em texto para o cliente, mesmo depois de usar ferramentas.\n- IMPORTANTE: não escreva nada antes de usar as ferramentas. Use todas as ferramentas necessárias primeiro, em silêncio, e só então escreva UMA única resposta final, completa, com os resultados.",
+     "maxIterations": 8,
+     "enableStreaming": true
+    },
+    "needsFallback": true
+   },
+   "name": "Nina · atendente com ferramentas",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    700,
+    300
+   ],
+   "id": "87603f0b-30af-4583-bf73-fbac35d1b138",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000
+  },
+  {
+   "parameters": {
+    "model": "kr/claude-haiku-4.5",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 4000,
+     "temperature": 0.3,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro da Nina",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    420,
+    640
+   ],
+   "id": "c7d7a45b-1133-4d79-ba1d-8a5de7a1b9be",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const ent = $('Chat do cliente').first().json;\nconst resp = String($input.first().json.output || '').trim();\nconst msgs = [{ quem: 'cliente', texto: String(ent.chatInput || '').slice(0, 2000) }];\nif (resp) msgs.push({ quem: 'nina', texto: resp.slice(0, 3000) });\nreturn msgs.map(m => ({ json: { msg: JSON.stringify({ ...m, em: new Date().toISOString() }) } }));"
+   },
+   "name": "Registra conversa",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1000,
+    300
+   ],
+   "id": "977d2d87-edef-45d0-93e5-b8c96e54f0ea"
+  },
+  {
+   "parameters": {
+    "operation": "push",
+    "list": "=chat:nina:{{ $('Chat do cliente').first().json.sessionId }}",
+    "messageData": "={{ $json.msg }}",
+    "tail": true
+   },
+   "name": "Grava histórico",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1220,
+    300
+   ],
+   "id": "1512ffb3-0f2d-4231-8000-9943c40eb4c1",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "toolDescription": "Converte o endereço do cliente em coordenadas. Devolve uma lista; use lat e lon do primeiro item. Passe o endereço completo: rua, número, bairro e cidade.",
+    "method": "GET",
+    "url": "={{ 'https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=br&q=' + encodeURIComponent($fromAI('endereco', 'Endereço completo do cliente: rua, número, bairro e cidade', 'string')) }}",
+    "options": {
+     "timeout": 40000
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "User-Agent",
+       "value": "aula-n8n-inovare/1.0 (contato: aula)"
+      }
+     ]
+    }
+   },
+   "name": "buscar_coordenadas",
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    580,
+    640
+   ],
+   "id": "9f5e3154-21ba-4b7a-b6d8-7cca6b0e136d"
+  },
+  {
+   "parameters": {
+    "name": "calcular_frete",
+    "description": "Calcula o frete e o prazo a partir das coordenadas do cliente. Entrada: JSON {\"lat\": número, \"lon\": número} vindo de buscar_coordenadas.",
+    "language": "javaScript",
+    "jsCode": "// ⚙️ Configure a loja e a tabela de frete\nconst LOJA = { nome: 'Empório Natural', lat: -25.4295, lon: -49.2713 };\nconst TAXA_MINIMA = 5.0;        // vale até KM_INCLUSOS\nconst KM_INCLUSOS = 2;\nconst POR_KM_EXTRA = 1.5;\nconst RAIO_MAXIMO_KM = 15;\nconst FATOR_RUAS = 1.3;         // a distância em linha reta vezes 1,3 aproxima o caminho pelas ruas\n\nlet dados = query;\nif (typeof dados === 'string') { try { dados = JSON.parse(dados); } catch (e) { const n = dados.match(/-?\\d+(?:\\.\\d+)?/g) || []; dados = { lat: n[0], lon: n[1] }; } }\nconst lat = Number(dados && dados.lat), lon = Number(dados && dados.lon);\nif (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) {\n  return 'Coordenadas inválidas. Use antes a ferramenta buscar_coordenadas e envie {\"lat\": número, \"lon\": número}.';\n}\nconst rad = g => g * Math.PI / 180;\nconst R = 6371;\nconst dLat = rad(lat - LOJA.lat), dLon = rad(lon - LOJA.lon);\nconst a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(LOJA.lat)) * Math.cos(rad(lat)) * Math.sin(dLon / 2) ** 2;\nconst linhaReta = 2 * R * Math.asin(Math.sqrt(a));\nconst km = Math.round(linhaReta * FATOR_RUAS * 10) / 10;\nif (km > RAIO_MAXIMO_KM) {\n  return JSON.stringify({ entrega: false, distancia_km: km, mensagem: `Fora da área de entrega (atendemos até ${RAIO_MAXIMO_KM} km). O cliente pode retirar na loja.` });\n}\nconst frete = Math.round((TAXA_MINIMA + Math.max(0, km - KM_INCLUSOS) * POR_KM_EXTRA) * 100) / 100;\nconst minutos = Math.round(20 + km * 3);\nreturn JSON.stringify({ entrega: true, distancia_km: km, frete: frete, frete_texto: 'R$ ' + frete.toFixed(2).replace('.', ','), prazo_estimado: `${minutos} a ${minutos + 15} minutos` });\n"
+   },
+   "name": "calcular_frete",
+   "type": "@n8n/n8n-nodes-langchain.toolCode",
+   "typeVersion": 1.1,
+   "position": [
+    780,
+    640
+   ],
+   "id": "f78e01c3-2fc8-4fef-8c7c-57082c21fb22"
+  },
+  {
+   "parameters": {
+    "name": "gerar_pix",
+    "description": "Gera o Pix copia e cola com o valor do pedido. Entrada: JSON {\"valor\": total em reais, \"pedido\": \"identificação curta\"}.",
+    "language": "javaScript",
+    "jsCode": "// ⚙️ Configure a chave Pix da loja (esta é de exemplo, não recebe dinheiro)\nconst CHAVE = '<SEGREDO_REMOVIDO>';\nconst NOME = 'Emporio Natural';\nconst CIDADE = 'Curitiba';\n\nlet dados = query;\nif (typeof dados === 'string') { try { dados = JSON.parse(dados); } catch (e) { const n = dados.replace(',', '.').match(/\\d+(?:\\.\\d+)?/); dados = { valor: n ? n[0] : 0 }; } }\nconst valor = Math.round(Number(String(dados && dados.valor).replace(',', '.')) * 100) / 100;\nif (!Number.isFinite(valor) || valor <= 0 || valor > 50000) return 'Valor inválido. Envie {\"valor\": número em reais, \"pedido\": \"identificação opcional\"}.';\nconst txid = String((dados && dados.pedido) || 'PED' + Date.now().toString(36)).replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***';\n\n// Pix copia e cola no padrão BR Code do Banco Central (EMV + CRC16)\nconst emv = (id, v) => { const s = String(v); return id + String(s.length).padStart(2, '0') + s; };\nfunction crc16(s) {\n  let c = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { c ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { c = (c & 0x8000) ? ((c << 1) ^ 0x1021) : (c << 1); c &= 0xFFFF; } }\n  return c.toString(16).toUpperCase().padStart(4, '0');\n}\nconst ascii = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').toUpperCase();\nlet p = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', CHAVE)) + emv('52', '0000') + emv('53', '986') + emv('54', valor.toFixed(2));\np += emv('58', 'BR') + emv('59', ascii(NOME).slice(0, 25)) + emv('60', ascii(CIDADE).slice(0, 15)) + emv('62', emv('05', txid)) + '6304';\np += crc16(p);\nreturn JSON.stringify({ valor_texto: 'R$ ' + valor.toFixed(2).replace('.', ','), pix_copia_e_cola: p, recebedor: NOME, identificador: txid });\n"
+   },
+   "name": "gerar_pix",
+   "type": "@n8n/n8n-nodes-langchain.toolCode",
+   "typeVersion": 1.1,
+   "position": [
+    980,
+    640
+   ],
+   "id": "430cf30a-5e5e-482a-b01f-245b4dcf02b2"
+  },
+  {
+   "parameters": {
+    "toolDescription": "Busca a informação nutricional de um produto pelo código de barras (EAN, 8 a 14 dígitos) na base Open Food Facts.",
+    "method": "GET",
+    "url": "={{ 'https://world.openfoodfacts.org/api/v2/product/' + String($fromAI('codigo_barras', 'Código de barras do produto, só números', 'string')).replace(/\\D/g, '') + '.json?fields=product_name,brands,quantity,nutriscore_grade,nova_group,nutriments,allergens_tags,ingredients_text_pt,ingredients_text' }}",
+    "options": {
+     "timeout": 40000
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "User-Agent",
+       "value": "aula-n8n-inovare/1.0 (contato: aula)"
+      }
+     ]
+    }
+   },
+   "name": "info_nutricional_por_codigo",
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    1180,
+    640
+   ],
+   "id": "be64d7db-0c94-416f-b5cc-3d472e779868"
+  },
+  {
+   "parameters": {
+    "toolDescription": "Procura produtos pelo nome na base Open Food Facts e devolve até 5 resultados com o código de barras de cada um.",
+    "method": "GET",
+    "url": "={{ 'https://search.openfoodfacts.org/search?page_size=5&fields=code,product_name,brands,quantity,nutriscore_grade&q=' + encodeURIComponent($fromAI('nome_produto', 'Nome do produto e, se souber, a marca', 'string')) }}",
+    "options": {
+     "timeout": 40000
+    },
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "User-Agent",
+       "value": "aula-n8n-inovare/1.0 (contato: aula)"
+      }
+     ]
+    }
+   },
+   "name": "buscar_produto_por_nome",
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    1380,
+    640
+   ],
+   "id": "8d76702d-39a9-4e3f-a945-13374d741add"
+  },
+  {
+   "parameters": {
+    "content": "# 🧰 AGENTE COM FERRAMENTAS\n\n🤔 **Ferramenta, o que é?** Uma IA sozinha só sabe conversar: ela **não sabe** a distância até a sua casa, não gera um código Pix válido e não conhece a tabela nutricional de um produto. **Ferramentas** são \"braços\" que damos à IA: ela **decide sozinha** quando usar cada uma, como um atendente que consulta o sistema.\n\n## 🧑‍💼 Conheça a Nina, do Empório Natural\nUma atendente de mercado natural com delivery que:\n🛵 calcula o **frete** pelo endereço do cliente\n💠 gera o **Pix copia e cola** com o valor do pedido\n🥗 explica a **informação nutricional** de qualquer produto\n\n## ▶️ Como testar\n1. Ative o fluxo\n2. Abra o node **Chat do cliente** e copie a URL do chat\n3. Experimente:\n   • \"qual o frete para Rua XV de Novembro, 500, Centro, Curitiba?\"\n   • \"quero pagar 87,50 no pix, meu nome é Ana\"\n   • \"quantas calorias tem a granola Mãe Terra?\"\n\n## 🔑 Todas as APIs são grátis e sem chave\n🗺️ **Nominatim** (OpenStreetMap): endereço → coordenadas\n🥫 **Open Food Facts**: base aberta de alimentos\n💠 O **Pix** é calculado no próprio fluxo (padrão do Banco Central)",
+    "height": 830,
+    "width": 760,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -900,
+    -200
+   ],
+   "id": "5b4a6d0e-da33-4344-8e8a-c9315190ce90"
+  },
+  {
+   "parameters": {
+    "content": "## 🤖 O CÉREBRO E A MEMÓRIA\n\n💬 **Chat do cliente**: uma página de chat pública que o próprio n8n cria. A resposta aparece enquanto é escrita (streaming).\n🧑‍💼 **Nina**: o agente. As instruções dela (System Message) explicam **quando** usar cada ferramenta e proíbem inventar números.\n🧠 **Cérebro da Nina**: o modelo de IA (Claude Haiku, ótimo em usar ferramentas). Se ele falhar, o **Reserva** assume em outro roteador.\n🗄️ **Lê histórico** → **Monta contexto**: antes de responder, lê as últimas 12 mensagens da conversa no Redis e coloca no pedido para a IA.\n📝 **Registra conversa** → **Grava histórico**: depois, grava a pergunta e a resposta. Assim a Nina lembra do endereço, do nome e dos valores.\n\n⚠️ **Por que memória feita à mão?** A memória pronta do n8n não grava a conversa quando o agente usa ferramenta em streaming, e aqui a resposta é em streaming. Feita à mão, ela sempre funciona e você vê exatamente o que a IA recebe.",
+    "height": 499,
+    "width": 940,
+    "color": 4
+   },
+   "name": "Nota · O agente",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -120,
+    -249
+   ],
+   "id": "abad42c2-8422-429e-b256-c0932581cb2b"
+  },
+  {
+   "parameters": {
+    "content": "## 🛠️ AS 5 FERRAMENTAS\n\n🗺️ **buscar_coordenadas** (HTTP): manda o endereço para o Nominatim e recebe latitude e longitude. O `$fromAI('endereco')` na URL é o espaço que a **IA preenche** sozinha.\n\n🛵 **calcular_frete** (Code): mede a distância até a loja (fórmula de Haversine × 1,3 para as curvas das ruas) e aplica a tabela: R$ 5 até 2 km e R$ 1,50 por km extra, até 15 km. ⚙️ A loja e os valores ficam no topo do código.\n\n💠 **gerar_pix** (Code): monta o **BR Code** oficial com o valor e calcula o CRC16. ⚙️ Troque a chave de exemplo pela da loja.\n\n🥫 **info_nutricional_por_codigo** (HTTP): consulta o produto pelo código de barras.\n\n🔎 **buscar_produto_por_nome** (HTTP): acha o código de barras pelo nome.\n\n💡 **Exercício:** criar a ferramenta **feriados** (BrasilAPI) para a Nina avisar quando a loja fecha.",
+    "height": 542,
+    "width": 700,
+    "color": 5
+   },
+   "name": "Nota · Ferramentas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1640,
+    300
+   ],
+   "id": "09c6b183-12bb-4f14-8b23-f33293767d7b"
+  },
+  {
+   "parameters": {
+    "model": "kiro/claude-haiku-4.5",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 4000,
+     "temperature": 0.3,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro da Nina",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    420,
+    820
+   ],
+   "id": "a15fe66a-5b84-4aef-9bf9-4ca3324baa36",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Chat do cliente": {
+   "main": [
+    [
+     {
+      "node": "Lê histórico",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê histórico": {
+   "main": [
+    [
+     {
+      "node": "Monta contexto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Monta contexto": {
+   "main": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro da Nina": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Nina · atendente com ferramentas": {
+   "main": [
+    [
+     {
+      "node": "Registra conversa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registra conversa": {
+   "main": [
+    [
+     {
+      "node": "Grava histórico",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "buscar_coordenadas": {
+   "ai_tool": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "calcular_frete": {
+   "ai_tool": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gerar_pix": {
+   "ai_tool": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "info_nutricional_por_codigo": {
+   "ai_tool": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "buscar_produto_por_nome": {
+   "ai_tool": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro da Nina": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Nina · atendente com ferramentas",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1800
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": null,
+ "versionId": "4b0bcd31-edd5-4c9d-927a-980c7b0533a2",
+ "activeVersionId": "4b0bcd31-edd5-4c9d-927a-980c7b0533a2",
+ "versionCounter": 33,
+ "triggerCount": 1,
+ "shared": [
+  {
+   "updatedAt": "2026-10-13T15:08:41.957Z",
+   "createdAt": "2026-10-13T15:08:41.957Z",
+   "role": "workflow:owner",
+   "workflowId": "K2Fe1dVqBfIK2kRU",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-14T01:03:48.645Z",
+  "createdAt": "2026-10-14T01:03:48.645Z",
+  "versionId": "4b0bcd31-edd5-4c9d-927a-980c7b0533a2",
+  "workflowId": "K2Fe1dVqBfIK2kRU",
+  "nodes": [
+   {
+    "parameters": {
+     "public": true,
+     "mode": "hostedChat",
+     "authentication": "none",
+     "initialMessages": "Oi! Eu sou a Nina, do Empório Natural 🌿\nPosso calcular o frete para o seu endereço, gerar o Pix do seu pedido e consultar a informação nutricional de qualquer produto (pelo nome ou pelo código de barras).",
+     "options": {
+      "title": "Empório Natural",
+      "subtitle": "Atendimento com IA · aula de ferramentas",
+      "inputPlaceholder": "Escreva sua mensagem…",
+      "responseMode": "streaming"
+     }
+    },
+    "name": "Chat do cliente",
+    "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+    "typeVersion": 1.4,
+    "position": [
+     0,
+     300
+    ],
+    "id": "4604e491-080c-4f99-a72e-5717634973cf",
+    "webhookId": "6f5e1c7d-6840-4f19-bca7-568bd086d368"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "historico",
+     "key": "=chat:nina:{{ $('Chat do cliente').first().json.sessionId }}",
+     "keyType": "list",
+     "options": {}
+    },
+    "name": "Lê histórico",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     220,
+     300
+    ],
+    "id": "bc25d14f-919a-4842-a253-55bd5353c4a7",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "// Memória feita à mão: as últimas 12 mensagens da conversa entram no pedido para a IA\nconst ent = $('Chat do cliente').first().json;\nlet hist = $input.first().json.historico;\nif (!Array.isArray(hist)) hist = hist ? [hist] : [];\nconst linhas = hist.slice(-12).map(s => {\n  try { const m = JSON.parse(s); return (m.quem === 'cliente' ? 'Cliente: ' : 'Nina: ') + m.texto; } catch (e) { return ''; }\n}).filter(Boolean);\nconst prompt = (linhas.length ? 'CONVERSA ATÉ AGORA:\\n' + linhas.join('\\n') + '\\n\\n' : '') + 'NOVA MENSAGEM DO CLIENTE:\\n' + String(ent.chatInput || '').slice(0, 2000);\nreturn [{ json: { prompt } }];"
+    },
+    "name": "Monta contexto",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     440,
+     300
+    ],
+    "id": "972a5fa8-27c4-4c11-a0b0-73f3e1ed1220"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ $json.prompt }}",
+     "options": {
+      "systemMessage": "Você é a Nina, atendente virtual do Empório Natural, um mercado de produtos naturais com delivery em Curitiba. Fale como no WhatsApp: frases curtas, simpáticas e no máximo 2 emojis por mensagem.\n\nFERRAMENTAS (use sempre que o assunto aparecer; NUNCA invente números)\n1. Frete: se faltar o endereço completo, peça rua, número, bairro e cidade. Chame buscar_coordenadas com o endereço, pegue \"lat\" e \"lon\" do primeiro resultado e chame calcular_frete com {\"lat\": número, \"lon\": número}. Informe valor, distância e prazo. Se a busca vier vazia, peça o bairro e a cidade e tente de novo.\n2. Pix: quando o cliente quiser pagar, confirme o valor total e chame gerar_pix com {\"valor\": total, \"pedido\": \"primeiro nome do cliente\"}. Envie o código copia e cola sozinho em uma linha, para facilitar copiar.\n3. Informação nutricional: com código de barras (8 a 14 dígitos) use info_nutricional_por_codigo. Só com o nome, use buscar_produto_por_nome e depois consulte o código do resultado mais parecido. Explique em linguagem simples, por 100 g: calorias, açúcares, gorduras, sódio e proteínas, além do Nutri-Score e dos alergênicos. Avise que os dados vêm da base aberta Open Food Facts e podem variar.\n\nREGRAS\n- Não invente preço de produto: diga que um atendente confirma o valor.\n- Não dê orientação médica nem de dieta.\n- Se não conseguir resolver, diga que vai chamar um atendente humano.\n- Use o histórico da conversa (endereço, valores, nome) sem pedir de novo o que o cliente já disse.\n- Sempre termine com uma resposta em texto para o cliente, mesmo depois de usar ferramentas.\n- IMPORTANTE: não escreva nada antes de usar as ferramentas. Use todas as ferramentas necessárias primeiro, em silêncio, e só então escreva UMA única resposta final, completa, com os resultados.",
+      "maxIterations": 8,
+      "enableStreaming": true
+     },
+     "needsFallback": true
+    },
+    "name": "Nina · atendente com ferramentas",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     700,
+     300
+    ],
+    "id": "87603f0b-30af-4583-bf73-fbac35d1b138",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 3000
+   },
+   {
+    "parameters": {
+     "model": "kr/claude-haiku-4.5",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 4000,
+      "temperature": 0.3,
+      "timeout": 180000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro da Nina",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     420,
+     640
+    ],
+    "id": "c7d7a45b-1133-4d79-ba1d-8a5de7a1b9be",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const ent = $('Chat do cliente').first().json;\nconst resp = String($input.first().json.output || '').trim();\nconst msgs = [{ quem: 'cliente', texto: String(ent.chatInput || '').slice(0, 2000) }];\nif (resp) msgs.push({ quem: 'nina', texto: resp.slice(0, 3000) });\nreturn msgs.map(m => ({ json: { msg: JSON.stringify({ ...m, em: new Date().toISOString() }) } }));"
+    },
+    "name": "Registra conversa",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1000,
+     300
+    ],
+    "id": "977d2d87-edef-45d0-93e5-b8c96e54f0ea"
+   },
+   {
+    "parameters": {
+     "operation": "push",
+     "list": "=chat:nina:{{ $('Chat do cliente').first().json.sessionId }}",
+     "messageData": "={{ $json.msg }}",
+     "tail": true
+    },
+    "name": "Grava histórico",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1220,
+     300
+    ],
+    "id": "1512ffb3-0f2d-4231-8000-9943c40eb4c1",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "toolDescription": "Converte o endereço do cliente em coordenadas. Devolve uma lista; use lat e lon do primeiro item. Passe o endereço completo: rua, número, bairro e cidade.",
+     "method": "GET",
+     "url": "={{ 'https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=br&q=' + encodeURIComponent($fromAI('endereco', 'Endereço completo do cliente: rua, número, bairro e cidade', 'string')) }}",
+     "options": {
+      "timeout": 40000
+     },
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "User-Agent",
+        "value": "aula-n8n-inovare/1.0 (contato: aula)"
+       }
+      ]
+     }
+    },
+    "name": "buscar_coordenadas",
+    "type": "n8n-nodes-base.httpRequestTool",
+    "typeVersion": 4.2,
+    "position": [
+     580,
+     640
+    ],
+    "id": "9f5e3154-21ba-4b7a-b6d8-7cca6b0e136d"
+   },
+   {
+    "parameters": {
+     "name": "calcular_frete",
+     "description": "Calcula o frete e o prazo a partir das coordenadas do cliente. Entrada: JSON {\"lat\": número, \"lon\": número} vindo de buscar_coordenadas.",
+     "language": "javaScript",
+     "jsCode": "// ⚙️ Configure a loja e a tabela de frete\nconst LOJA = { nome: 'Empório Natural', lat: -25.4295, lon: -49.2713 };\nconst TAXA_MINIMA = 5.0;        // vale até KM_INCLUSOS\nconst KM_INCLUSOS = 2;\nconst POR_KM_EXTRA = 1.5;\nconst RAIO_MAXIMO_KM = 15;\nconst FATOR_RUAS = 1.3;         // a distância em linha reta vezes 1,3 aproxima o caminho pelas ruas\n\nlet dados = query;\nif (typeof dados === 'string') { try { dados = JSON.parse(dados); } catch (e) { const n = dados.match(/-?\\d+(?:\\.\\d+)?/g) || []; dados = { lat: n[0], lon: n[1] }; } }\nconst lat = Number(dados && dados.lat), lon = Number(dados && dados.lon);\nif (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) {\n  return 'Coordenadas inválidas. Use antes a ferramenta buscar_coordenadas e envie {\"lat\": número, \"lon\": número}.';\n}\nconst rad = g => g * Math.PI / 180;\nconst R = 6371;\nconst dLat = rad(lat - LOJA.lat), dLon = rad(lon - LOJA.lon);\nconst a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(LOJA.lat)) * Math.cos(rad(lat)) * Math.sin(dLon / 2) ** 2;\nconst linhaReta = 2 * R * Math.asin(Math.sqrt(a));\nconst km = Math.round(linhaReta * FATOR_RUAS * 10) / 10;\nif (km > RAIO_MAXIMO_KM) {\n  return JSON.stringify({ entrega: false, distancia_km: km, mensagem: `Fora da área de entrega (atendemos até ${RAIO_MAXIMO_KM} km). O cliente pode retirar na loja.` });\n}\nconst frete = Math.round((TAXA_MINIMA + Math.max(0, km - KM_INCLUSOS) * POR_KM_EXTRA) * 100) / 100;\nconst minutos = Math.round(20 + km * 3);\nreturn JSON.stringify({ entrega: true, distancia_km: km, frete: frete, frete_texto: 'R$ ' + frete.toFixed(2).replace('.', ','), prazo_estimado: `${minutos} a ${minutos + 15} minutos` });\n"
+    },
+    "name": "calcular_frete",
+    "type": "@n8n/n8n-nodes-langchain.toolCode",
+    "typeVersion": 1.1,
+    "position": [
+     780,
+     640
+    ],
+    "id": "f78e01c3-2fc8-4fef-8c7c-57082c21fb22"
+   },
+   {
+    "parameters": {
+     "name": "gerar_pix",
+     "description": "Gera o Pix copia e cola com o valor do pedido. Entrada: JSON {\"valor\": total em reais, \"pedido\": \"identificação curta\"}.",
+     "language": "javaScript",
+     "jsCode": "// ⚙️ Configure a chave Pix da loja (esta é de exemplo, não recebe dinheiro)\nconst CHAVE = '<SEGREDO_REMOVIDO>';\nconst NOME = 'Emporio Natural';\nconst CIDADE = 'Curitiba';\n\nlet dados = query;\nif (typeof dados === 'string') { try { dados = JSON.parse(dados); } catch (e) { const n = dados.replace(',', '.').match(/\\d+(?:\\.\\d+)?/); dados = { valor: n ? n[0] : 0 }; } }\nconst valor = Math.round(Number(String(dados && dados.valor).replace(',', '.')) * 100) / 100;\nif (!Number.isFinite(valor) || valor <= 0 || valor > 50000) return 'Valor inválido. Envie {\"valor\": número em reais, \"pedido\": \"identificação opcional\"}.';\nconst txid = String((dados && dados.pedido) || 'PED' + Date.now().toString(36)).replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***';\n\n// Pix copia e cola no padrão BR Code do Banco Central (EMV + CRC16)\nconst emv = (id, v) => { const s = String(v); return id + String(s.length).padStart(2, '0') + s; };\nfunction crc16(s) {\n  let c = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { c ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { c = (c & 0x8000) ? ((c << 1) ^ 0x1021) : (c << 1); c &= 0xFFFF; } }\n  return c.toString(16).toUpperCase().padStart(4, '0');\n}\nconst ascii = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').toUpperCase();\nlet p = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', CHAVE)) + emv('52', '0000') + emv('53', '986') + emv('54', valor.toFixed(2));\np += emv('58', 'BR') + emv('59', ascii(NOME).slice(0, 25)) + emv('60', ascii(CIDADE).slice(0, 15)) + emv('62', emv('05', txid)) + '6304';\np += crc16(p);\nreturn JSON.stringify({ valor_texto: 'R$ ' + valor.toFixed(2).replace('.', ','), pix_copia_e_cola: p, recebedor: NOME, identificador: txid });\n"
+    },
+    "name": "gerar_pix",
+    "type": "@n8n/n8n-nodes-langchain.toolCode",
+    "typeVersion": 1.1,
+    "position": [
+     980,
+     640
+    ],
+    "id": "430cf30a-5e5e-482a-b01f-245b4dcf02b2"
+   },
+   {
+    "parameters": {
+     "toolDescription": "Busca a informação nutricional de um produto pelo código de barras (EAN, 8 a 14 dígitos) na base Open Food Facts.",
+     "method": "GET",
+     "url": "={{ 'https://world.openfoodfacts.org/api/v2/product/' + String($fromAI('codigo_barras', 'Código de barras do produto, só números', 'string')).replace(/\\D/g, '') + '.json?fields=product_name,brands,quantity,nutriscore_grade,nova_group,nutriments,allergens_tags,ingredients_text_pt,ingredients_text' }}",
+     "options": {
+      "timeout": 40000
+     },
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "User-Agent",
+        "value": "aula-n8n-inovare/1.0 (contato: aula)"
+       }
+      ]
+     }
+    },
+    "name": "info_nutricional_por_codigo",
+    "type": "n8n-nodes-base.httpRequestTool",
+    "typeVersion": 4.2,
+    "position": [
+     1180,
+     640
+    ],
+    "id": "be64d7db-0c94-416f-b5cc-3d472e779868"
+   },
+   {
+    "parameters": {
+     "toolDescription": "Procura produtos pelo nome na base Open Food Facts e devolve até 5 resultados com o código de barras de cada um.",
+     "method": "GET",
+     "url": "={{ 'https://search.openfoodfacts.org/search?page_size=5&fields=code,product_name,brands,quantity,nutriscore_grade&q=' + encodeURIComponent($fromAI('nome_produto', 'Nome do produto e, se souber, a marca', 'string')) }}",
+     "options": {
+      "timeout": 40000
+     },
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "User-Agent",
+        "value": "aula-n8n-inovare/1.0 (contato: aula)"
+       }
+      ]
+     }
+    },
+    "name": "buscar_produto_por_nome",
+    "type": "n8n-nodes-base.httpRequestTool",
+    "typeVersion": 4.2,
+    "position": [
+     1380,
+     640
+    ],
+    "id": "8d76702d-39a9-4e3f-a945-13374d741add"
+   },
+   {
+    "parameters": {
+     "content": "# 🧰 AGENTE COM FERRAMENTAS\n\n🤔 **Ferramenta, o que é?** Uma IA sozinha só sabe conversar: ela **não sabe** a distância até a sua casa, não gera um código Pix válido e não conhece a tabela nutricional de um produto. **Ferramentas** são \"braços\" que damos à IA: ela **decide sozinha** quando usar cada uma, como um atendente que consulta o sistema.\n\n## 🧑‍💼 Conheça a Nina, do Empório Natural\nUma atendente de mercado natural com delivery que:\n🛵 calcula o **frete** pelo endereço do cliente\n💠 gera o **Pix copia e cola** com o valor do pedido\n🥗 explica a **informação nutricional** de qualquer produto\n\n## ▶️ Como testar\n1. Ative o fluxo\n2. Abra o node **Chat do cliente** e copie a URL do chat\n3. Experimente:\n   • \"qual o frete para Rua XV de Novembro, 500, Centro, Curitiba?\"\n   • \"quero pagar 87,50 no pix, meu nome é Ana\"\n   • \"quantas calorias tem a granola Mãe Terra?\"\n\n## 🔑 Todas as APIs são grátis e sem chave\n🗺️ **Nominatim** (OpenStreetMap): endereço → coordenadas\n🥫 **Open Food Facts**: base aberta de alimentos\n💠 O **Pix** é calculado no próprio fluxo (padrão do Banco Central)",
+     "height": 830,
+     "width": 760,
+     "color": 6
+    },
+    "name": "Nota · Comece aqui",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -900,
+     -200
+    ],
+    "id": "5b4a6d0e-da33-4344-8e8a-c9315190ce90"
+   },
+   {
+    "parameters": {
+     "content": "## 🤖 O CÉREBRO E A MEMÓRIA\n\n💬 **Chat do cliente**: uma página de chat pública que o próprio n8n cria. A resposta aparece enquanto é escrita (streaming).\n🧑‍💼 **Nina**: o agente. As instruções dela (System Message) explicam **quando** usar cada ferramenta e proíbem inventar números.\n🧠 **Cérebro da Nina**: o modelo de IA (Claude Haiku, ótimo em usar ferramentas). Se ele falhar, o **Reserva** assume em outro roteador.\n🗄️ **Lê histórico** → **Monta contexto**: antes de responder, lê as últimas 12 mensagens da conversa no Redis e coloca no pedido para a IA.\n📝 **Registra conversa** → **Grava histórico**: depois, grava a pergunta e a resposta. Assim a Nina lembra do endereço, do nome e dos valores.\n\n⚠️ **Por que memória feita à mão?** A memória pronta do n8n não grava a conversa quando o agente usa ferramenta em streaming, e aqui a resposta é em streaming. Feita à mão, ela sempre funciona e você vê exatamente o que a IA recebe.",
+     "height": 499,
+     "width": 940,
+     "color": 4
+    },
+    "name": "Nota · O agente",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -120,
+     -249
+    ],
+    "id": "abad42c2-8422-429e-b256-c0932581cb2b"
+   },
+   {
+    "parameters": {
+     "content": "## 🛠️ AS 5 FERRAMENTAS\n\n🗺️ **buscar_coordenadas** (HTTP): manda o endereço para o Nominatim e recebe latitude e longitude. O `$fromAI('endereco')` na URL é o espaço que a **IA preenche** sozinha.\n\n🛵 **calcular_frete** (Code): mede a distância até a loja (fórmula de Haversine × 1,3 para as curvas das ruas) e aplica a tabela: R$ 5 até 2 km e R$ 1,50 por km extra, até 15 km. ⚙️ A loja e os valores ficam no topo do código.\n\n💠 **gerar_pix** (Code): monta o **BR Code** oficial com o valor e calcula o CRC16. ⚙️ Troque a chave de exemplo pela da loja.\n\n🥫 **info_nutricional_por_codigo** (HTTP): consulta o produto pelo código de barras.\n\n🔎 **buscar_produto_por_nome** (HTTP): acha o código de barras pelo nome.\n\n💡 **Exercício:** criar a ferramenta **feriados** (BrasilAPI) para a Nina avisar quando a loja fecha.",
+     "height": 542,
+     "width": 700,
+     "color": 5
+    },
+    "name": "Nota · Ferramentas",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1640,
+     300
+    ],
+    "id": "09c6b183-12bb-4f14-8b23-f33293767d7b"
+   },
+   {
+    "parameters": {
+     "model": "kiro/claude-haiku-4.5",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 4000,
+      "temperature": 0.3,
+      "timeout": 180000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro da Nina",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     420,
+     820
+    ],
+    "id": "a15fe66a-5b84-4aef-9bf9-4ca3324baa36",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Chat do cliente": {
+    "main": [
+     [
+      {
+       "node": "Lê histórico",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê histórico": {
+    "main": [
+     [
+      {
+       "node": "Monta contexto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Monta contexto": {
+    "main": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro da Nina": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Nina · atendente com ferramentas": {
+    "main": [
+     [
+      {
+       "node": "Registra conversa",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Registra conversa": {
+    "main": [
+     [
+      {
+       "node": "Grava histórico",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "buscar_coordenadas": {
+    "ai_tool": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_tool",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "calcular_frete": {
+    "ai_tool": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_tool",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "gerar_pix": {
+    "ai_tool": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_tool",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "info_nutricional_por_codigo": {
+    "ai_tool": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_tool",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "buscar_produto_por_nome": {
+    "ai_tool": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_tool",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro da Nina": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Nina · atendente com ferramentas",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-14T01:03:48.800Z",
+    "id": 256,
+    "workflowId": "K2Fe1dVqBfIK2kRU",
+    "versionId": "4b0bcd31-edd5-4c9d-927a-980c7b0533a2",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T01:03:48.861Z",
+    "id": 257,
+    "workflowId": "K2Fe1dVqBfIK2kRU",
+    "versionId": "4b0bcd31-edd5-4c9d-927a-980c7b0533a2",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

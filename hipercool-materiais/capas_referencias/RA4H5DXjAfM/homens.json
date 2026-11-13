@@ -1,0 +1,100 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "Aragikai Kai",
+   "principal": true,
+   "aparicoes": 36,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 536.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1636.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 380.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1252.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 816.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 2168.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Dark brown/black messy hair, blue-green eyes, typically wears dark clothing or school uniform, carries concealed weapons",
+   "protagonista": true,
+   "adulto": false
+  },
+  {
+   "personagem": "h02",
+   "nome": "Gaius",
+   "principal": false,
+   "aparicoes": 10,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 200.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 472.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 584.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1532.0
+    }
+   ],
+   "papel": "ally",
+   "visual": "White/silver hair slicked back with long ponytail, light blue eyes, white beard and mustache, blue and grey knight armor",
+   "protagonista": false,
+   "adulto": true
+  },
+  {
+   "personagem": "h03",
+   "nome": "Kai (Aragikai)",
+   "principal": false,
+   "aparicoes": 5,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 20.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2184.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1580.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 184.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 1556.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "brown hair with bangs, sharp dark eyes, silver earring on left ear",
+   "protagonista": true,
+   "adulto": false
+  }
+ ]
+}

@@ -1,0 +1,349 @@
+{
+ "video": "vpsblindada_ia_20261106_153434.mp4",
+ "conta": "vpsblindada.ia",
+ "marca": "VPS Blindada",
+ "titulo": "Como saber se suas automações pararam de funcionar",
+ "formato": "dono_abre_fecha_veo_meio",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.25,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 6.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    13.0
+   ],
+   [
+    1,
+    "dono",
+    12.42
+   ],
+   [
+    2,
+    "conversa",
+    6.77
+   ],
+   [
+    3,
+    "dono",
+    14.2
+   ],
+   [
+    4,
+    "cartao",
+    7.23
+   ]
+  ],
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Enquadramento comprometido na abertura: o apresentador está posicionado muito alto na tela, fazendo com que o cartão branco da pergunta cubra o topo da cabeça, o cabelo e o topo da testa.",
+   "como_corrigir": "Reenquadrar o apresentador na Cena 0 posicionando-o mais abaixo no eixo Y (com a mesma proporção e respiro aplicados nas Cenas 1 e 3) para que o cartão gráfico não encubra a cabeça do apresentador."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Cena final totalmente congelada. Os quadros q13, q14 e q15 são rigorosamente idênticos por quase 3 segundos, sem nenhum movimento de câmera, brilho de luz, pulso no botão ou dinamismo de motion.",
+   "como_corrigir": "Aplicar um slow zoom contínuo na câmera (escala de 100% para 105%), adicionar animação periódica de brilho reflexivo (shimmer) ou leve pulso no botão 'Chame no direct' e fazer a entrada dos textos escalonada com easing suave."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Fundo com estética de banco de imagens genérico e desfocado (pessoa em ambiente corporativo segurando tablet/celular), desconectado do universo técnico de infraestrutura VPS, servidores e automações.",
+   "como_corrigir": "Substituir a imagem de fundo por um vídeo curto estilizado em dark mode de um painel de monitoramento real (Docker, Portainer, n8n) ou terminal de comandos com leve desfoque e máscara na cor da marca."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca com jump-cut estático da Cena 0 para a Cena 1. O apresentador continua na mesma distância focal e posição, ocorrendo apenas uma troca abrupta dos elementos gráficos superiores.",
+   "como_corrigir": "Aplicar um corte de escala (punch-in zoom de aproximadamente 1.15x) na entrada da Cena 1 para disfarçar o corte contínuo e animar a entrada do título superior e do tópico 1 com slide descendente e fade."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Falta de variedade e repetição exata de molde: as cenas 0, 1 e 3 utilizam exatamente o mesmo enquadramento médio do apresentador, deixando mais da metade do Reels visualmente monótona.",
+   "como_corrigir": "Variar a escala da cena 3 (fazer um enquadramento mais fechado ou com movimento de push-in) e incluir elementos gráficos flutuantes (como selo de blindagem ou ícone do Bot Sentinela) para ilustrar a fala."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Ritmo arrastado durante a fala do apresentador (mais de 4,5 segundos no mesmo plano fixo sem nenhum suporte visual ou reforço gráfico).",
+   "como_corrigir": "Inserir uma rápida sobreposição visual ou micro-animação (ex: ícone de alerta ou quebra de fluxo) na menção a 'falhas no meu fluxo', quebrando a estagnação do plano falado."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Subtítulo 'atendimento com IA' no WhatsApp destoa do foco em infraestrutura de VPS e Bot Sentinela.",
+   "como_corrigir": "Substituir o status por 'Bot Sentinela' ou 'Monitoramento'."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Balões de conversa invertidos: o alerta do bot está como mensagem enviada e a confirmação como recebida.",
+   "como_corrigir": "Inverter a posição dos balões para o Sentinela enviar o aviso e a equipe responder."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O apresentador está totalmente desfocado/embaçado nos 2 primeiros segundos do gancho, acompanhado de um artefato gráfico azul cortado vazando sob o canto inferior esquerdo do card de pergunta. Essa perda de nitidez no rosto do dono quebra o impacto imediato e passa impressão de erro de foco ou baixa qualidade de produção logo na abertura.",
+   "como_corrigir": "Manter a filmagem do apresentador em alta resolução e foco cravado desde o primeiro frame (0.0s), aproveitando a força do contato visual direto para reter o usuário. Ajustar a máscara ou remover o elemento azul residual que vaza atrás do card branco da pergunta, garantindo acabamento gráfico impecável no gancho."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A simulação do WhatsApp inverte a lógica de quem envia a mensagem e apresenta layout visualmente estéril. O balão azul à direita (que no WhatsApp indica mensagem enviada pelo dono do celular) traz o 'Alerta Sentinela', enquanto a resposta 'Recebido' vem na esquerda em branco (como se a VPS estivesse respondendo). Além disso, em q07 mais de 60% da caixa fica vazia, e o fundo escuro com iluminação noturna quebra bruscamente a continuidade visual do escritório diurno das cenas 1 e 3.",
+   "como_corrigir": "Inverter a posição dos balões para respeitar a UX real: o Bot Sentinela envia o alerta na esquerda (balão recebido) e o operador/cliente responde na direita (balão enviado). Reduzir a altura total da janela do chat para eliminar a área vazia bege e substituir o fundo escuro de banco de imagens por um b-roll coerente com o ambiente do escritório ou manter o apresentador reagindo em segundo plano."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Corte de edição seco que inicia a Cena 3 exatamente no momento em que o apresentador está de olhos completamente fechados e com expressão desfavorável, transmitindo amadorismo na montagem de vídeo para um anúncio de agência.",
+   "como_corrigir": "Ajustar o ponto de corte (in-point) da cena 3 em alguns quadros à frente ou utilizar um corte sobre ação/gesto das mãos, garantindo que o apresentador apareça já com os olhos abertos e olhar confiante voltado para a lente."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "O cartão de encerramento permanece estático por mais de 3 segundos com estética de slide de PowerPoint/Canva. O título 'VPS Blindada' é apenas texto puro sem um símbolo/escudo visual de marca, o botão 'Chame no direct' é estático e o fundo escuro genérico perde energia no momento crucial de conversão.",
+   "como_corrigir": "Inserir o símbolo gráfico de segurança/escudo da marca junto ao nome, aplicar uma animação suave de pulso ou brilho no botão de CTA e manter dinamismo de câmera (zoom lento contínuo) para evitar a sensação de imagem estática pausada antes do fim do vídeo."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "crmchatwoot_ia_20261112_045401.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "sem_dono",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "mentoriasia_ia_20261112_063630.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261112_165224.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

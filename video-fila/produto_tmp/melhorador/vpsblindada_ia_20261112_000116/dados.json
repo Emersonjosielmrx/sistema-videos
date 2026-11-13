@@ -1,0 +1,355 @@
+{
+ "video": "vpsblindada_ia_20261112_000116.mp4",
+ "conta": "vpsblindada.ia",
+ "marca": "VPS Blindada",
+ "titulo": "Sua VPS pronta, segura e com backup automático",
+ "formato": "dono_mesma_foto",
+ "veo_total": 1,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.62,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 6.5,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.19
+   ],
+   [
+    1,
+    "imagem",
+    20.23
+   ],
+   [
+    2,
+    "conversa",
+    6.85
+   ],
+   [
+    3,
+    "dono",
+    15.22
+   ],
+   [
+    4,
+    "cartao",
+    7.38
+   ]
+  ],
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Contraste extremamente baixo na legenda karaokê ('Docker Portainer Traefik'): a palavra ativa 'Docker' está em azul-marinho escuro e 'Portainer Traefik' em cinza-escuro sobre um fundo escuro (mesa e monitores), tornando o texto praticamente ilegível no celular.",
+   "como_corrigir": "Corrigir as cores da legenda para o padrão das demais cenas: palavras não destacadas em branco puro (#FFFFFF) com contorno preto e a palavra falada destacada em azul-claro/ciano brilhante (#00C2FF), garantindo alto contraste contra o fundo escuro."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Elemento cobrindo o rosto: a legenda 'montar' está sobreposta ao queixo e à barba do apresentador, invadindo a área do rosto quando ele se inclina para a câmera.",
+   "como_corrigir": "Ajustar o enquadramento do apresentador ligeiramente para cima na cena 0 ou rebaixar a linha base da legenda em cerca de 40px (mantendo-a acima de y=1580), garantindo folga adequada entre o queixo e o texto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Dois textos brigando e redundância visual: o card de tópico exibe a frase 'perdia muito tempo' e, exatamente abaixo dele, a legenda karaokê exibe simultaneamente a mesma frase 'perdia muito tempo', gerando poluição e conflito de leitura na mesma área.",
+   "como_corrigir": "Resumir o rótulo do card em um tópico mais conciso (ex.: 'Falta de tempo') ou temporizar a entrada do segundo card para após a legenda da fala ser concluída."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Imagem com aspecto gritante de banco de imagens genérico e desconexa da narrativa: homem comemorando euforicamente em escritório, em contraste direto com o bloco '1 O problema' e a fala sobre frustração e perda de tempo tentando montar servidor sozinho.",
+   "como_corrigir": "Substituir por um b-roll ou captura dinâmica de tela com terminal/código de configuração de servidor, ou representação contextualizada de frustração técnica, aplicando movimento de câmera contínuo (Ken Burns/slow scale)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Cena parada e ritmo visual arrastado por cerca de 2 segundos entre q05 e q06: ambos os tópicos já entraram e o quadro fica totalmente congelado, sem movimento de fundo ou elementos secundários se movimentando.",
+   "como_corrigir": "Aplicar um slow zoom contínuo de 100% a 105% no fundo durante toda a cena e animar uma micro-interação (como pulso sutil ou brilho) no tópico em destaque enquanto a locução termina."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Transição seca saindo do chat e repetição idêntica do molde de enquadramento da Cena 0, gerando sensação de falta de variedade e corte seco.",
+   "como_corrigir": "Fazer um punch-in digital (zoom de 115% a 120% no plano do apresentador) na Cena 3 para diferenciar do enquadramento inicial e usar uma transição direcional suave (slide lateral ou whip) na saída da conversa de WhatsApp."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Ritmo arrastado sem suporte visual de motion design: o apresentador fala por quase 5 segundos sobre 'relatórios claros' e 'backup' sem a entrada de nenhum elemento gráfico, ícone ou card animado.",
+   "como_corrigir": "Adicionar pop-ups animados com efeito elástico/bounce ilustrando os 'relatórios claros' (mini-gráfico) e 'backup automático' sincronizados com o momento exato em que as palavras são ditas."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "A imagem de fundo mostra um homem comemorando euforicamente com os punhos para o alto em sinal de vitória, gerando total descompasso emocional com a fala da cena ('Eu adiava meu servidor próprio porque perdia muito tempo tentando montar toda a estrutura sozinho') e com o marcador '1 O problema'. Além disso, os cartões de tópicos utilizam ícones de checkmark (✓), que transmitem ideia de sucesso e resolução para listar dores/problemas.",
+   "como_corrigir": "Substituir o take de fundo por uma pessoa com expressão de frustração, dúvida ou cansaço diante do computador, coerente com a narrativa de perda de tempo e dificuldade técnica. Nos tópicos de dor, trocar o ícone de check (✓) por marcadores neutros (bullet points) ou ícones de alerta."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Falha crítica de contraste na legenda karaokê: as palavras 'Docker Portainer Traefik' aparecem renderizadas em cinza escuro/preto sem o preenchimento branco padrão, tornando o texto praticamente invisível sobre o fundo desfocado do escritório.",
+   "como_corrigir": "Corrigir a folha de estilo ou parâmetros de renderização da legenda no quadro para aplicar o padrão correto (fonte branca com borda preta nítida e destaque em azul ciano na palavra sincronizada)."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "A simulação do WhatsApp termina em corte abrupto com pergunta sem resposta: o cliente envia 'E o que já vem configurado nela?' e a cena fecha mostrando apenas o balão de digitação ('...'), deixando o diálogo incompleto na tela enquanto a locução já verbalizou a lista de ferramentas.",
+   "como_corrigir": "Fazer surgir o balão de resposta da VPS Blindada confirmando as ferramentas ('Tudo pronto com Docker, Portainer, Traefik e backup') sincronizado com a fala da locução antes do corte para a cena 3."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Incoerência semiótica grave que transmite aspecto de slide amador e meme: a locução e o badge abordam a dor e o desgaste técnico ('1 O problema' / 'perdia muito tempo tentando montar toda a estrutura sozinho'), mas a imagem de fundo mostra um homem de terno comemorando eufórico com os punhos para o ar. Além disso, foram aplicados ícones de check azul (✔) para listar frases de dor ('✔ adiava meu servidor', '✔ perdia muito tempo'), sinalizando sucesso ou benefício onde deveria haver frustração.",
+   "como_corrigir": "Na Cena 1, substituir a imagem do homem celebrando por uma imagem ou B-roll que represente a dor técnica real (ex.: desenvolvedor/empreendedor frustrado encarando logs de erro em terminal ou telas complexas de servidor). Substituir os ícones de check (✔) por marcadores neutros ou símbolos de alerta/dor (como 'x' ou traços sutis) para alinhar a carga emocional do visual com a locução."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Gancho fraco e estático nos 2 primeiros segundos, insuficiente para reter a atenção no Reels: o vídeo começa em plano médio fixo do apresentador, com iluminação comum de escritório e enquadramento tipo selfie sem nenhuma quebra de padrão, movimento de câmera ou dinamismo visual. Em um formato de alta dispersão, essa abertura sem energia visual facilita o swipe imediato antes mesmo de o usuário absorver a pergunta do card.",
+   "como_corrigir": "Na Cena 0, aplicar um corte de aproximação dinâmico (punch-in zoom de 10% a 15%) já na primeira fração de segundo ao pronunciar 'Adiando', acelerando a cadência de entrada e combinando com uma transição sonora sutil (pop/whoosh) para prender o olhar e interromper a rolagem do feed logo no início."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Falha crítica de contraste na legenda karaokê e conversa de WhatsApp interrompida sem desfecho: no momento em que a locução cita a stack técnica essencial ('Docker Portainer Traefik'), o texto da legenda perde a legibilidade, aparecendo em azul-escuro sobre fundo escuro desfocado. Somado a isso, o chat de WhatsApp simula o cliente perguntando 'E o que já vem configurado nela?' em q09 e encerra o bloco em reticências de digitação (...), sem exibir na tela a mensagem com a entrega do produto que a locução está prometendo.",
+   "como_corrigir": "Na Cena 2, ajustar o preset de cor da legenda em q08 para manter o padrão legível com texto branco, contorno preto bem definido e realce ciano vivo na palavra ativa. No componente de WhatsApp, animar a resposta final da VPS Blindada confirmando 'Docker, Portainer, Traefik e backup automático' antes do corte da cena, entregando a prova visual completa da dúvida do cliente."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261111_095525.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "disparoemmassa_ia_20261111_135247.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 8.5,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261111_203720.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 7.2,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 7.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.8
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261112_000116.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.5,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.12,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 6.5,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 5.83,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 5.88,
+   "notas": {
+    "legibilidade": 6.5,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

@@ -1,0 +1,9 @@
+{
+ "ok": false,
+ "error": "rc=1",
+ "segundos": 6641,
+ "voz_clonada": "momo",
+ "applio": "ok em 55 s",
+ "log": "2026-11-08 02:35:45,904 - INFO - [preparo] sem roteiro (/kaggle/tmp/trab/trabalho/20261107_201227_4JTCiwhKD8s/roteiro.txt) — transcrevendo e roteirizando aqui\n2026-11-08 02:37:30,526 - INFO - [preparo] libs CUDA pro Whisper: libcublas.so.12, libcublasLt.so.12, libcudnn.so.9, libcudnn_cnn.so.9, libcudnn_ops.so.9\n2026-11-08 02:37:30,960 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main \"HTTP/1.1 200 OK\"\n2026-11-08 02:37:31,688 - INFO - Processing audio with duration 03:20:21.213\n2026-11-08 02:37:43,208 - INFO - Detected language 'en' with probability 1.00\n2026-11-08 02:44:20,483 - INFO - [preparo] Whisper small (GPU) (T4 núcleos): 2978 trechos, língua en, até 12020s, em 412s\n2026-11-08 02:44:20,540 - INFO - [script] roteiro longo com tempo: 58 blocos, ~31 frases/bloco, 0s..12011s do original\n2026-11-08 02:44:52,089 - WARNING - [script] roteiro longo com tempo saiu com 58 frases pra 1803 — uso o normal\n2026-11-08 02:44:52,115 - INFO - [script] 62 blocos (block_chars=4097), ~29 frases/bloco\n2026-11-08 02:45:31,942 - INFO - [script] roteiro final: 62 frases (target_lines=1803)\n2026-11-08 02:45:31,951 - ERROR - [script] roteiro com 62 frase(s) pra 1803 pedidas — falha, não narra\n2026-11-08 02:45:31,951 - INFO - [preparo] roteiro FALHOU: ? frases sem tempo (alvo 1803, original 200 min) — He Cleared the Tower 1459 Times & Returned to a World Where \n2026-11-08 02:45:32,614 - ERROR - [preparo] roteiro não ficou pronto — vídeo não sai\n",
+ "por": "emersonia"
+}

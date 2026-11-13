@@ -1,0 +1,304 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 15-50-45.mp4",
+ "duration": 81.533333,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 712,
+  "has_webcam": true,
+  "contrast": 33.1,
+  "trimmed": {
+   "webcam_bottom": 154,
+   "content_bottom": 212
+  },
+  "divider": 670,
+  "webcam": [
+   0,
+   0,
+   720,
+   516
+  ],
+  "content": [
+   0,
+   670,
+   712,
+   1068
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto com comparações de personagens (serpente vs cachorro) e reações moderadas, mas conteúdo fragmentado e com pouco contexto visível",
+  "topic": "Comparação de personagens: serpente vs cachorro + cena de luta",
+  "channel": "manhwareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 36.36,
+    "hook": "CACHORRO GANHANDO DA SERPENTE GIGANTE?!",
+    "title": "O cachorrinho tá HUMILHANDO a serpente desse tamanho 😱🐕 #shorts #anime",
+    "description": "O criador reage a uma batalha insana entre um cachorro e uma serpente gigante e não acredita no resultado!\nQuem vocês acham que deveria ganhar essa luta?\nSe curtiu, segue pra mais reacts insanos!\n\n#shorts #react #anime #serpente #cachorro #batalha #luta #comparação #animereact #otaku #mangá #poder #ranking #hype",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#serpente",
+     "#cachorro",
+     "#batalha",
+     "#luta",
+     "#comparação",
+     "#animereact",
+     "#otaku"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "serpente vs cachorro",
+     "comparação de poder",
+     "batalha anime",
+     "ranking de poder",
+     "quem ganha",
+     "react anime",
+     "manhwa",
+     "luta épica",
+     "cachorro anime",
+     "serpente anime",
+     "react br",
+     "anime react portugues"
+    ],
+    "keywords": [
+     {
+      "t": 7.0,
+      "text": "PEGANDO PAU",
+      "emoji": "😂"
+     },
+     {
+      "t": 25.0,
+      "text": "TÁ GANHANDO",
+      "emoji": "😱"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 7.0,
+      "type": "shock"
+     },
+     {
+      "t": 25.0,
+      "type": "shock"
+     }
+    ],
+    "memes": [
+     {
+      "t": 25.0,
+      "id": 36
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Quem vocês acham que ganha: o cachorro ou a serpente? 🐕🐍",
+    "title_alternatives": [
+     "Esse CACHORRO zerou o espírito da SERPENTE gigante 🐍💀 #shorts #anime",
+     "Não é possível que o cachorrinho tá GANHANDO dela 😱🔥 #shorts #react"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   },
+   {
+    "start": 47.38,
+    "end": 81.5,
+    "hook": "ELA TACOU O FENELE NELE!",
+    "title": "O movimento dela foi LEVANTAR O VESTIDO e tacar tudo 😂💥 #shorts #anime",
+    "description": "O criador reage a uma cena onde a personagem surpreende com um golpe inesperado depois de um movimento suspeito!\nVocês esperavam essa reação dela?\nComenta aí e segue pra mais!\n\n#shorts #react #anime #luta #cena #animereact #otaku #mangá #golpe #surpresa #hype #reação #poder #personagem",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#luta",
+     "#cena",
+     "#animereact",
+     "#otaku",
+     "#golpe",
+     "#surpresa",
+     "#hype"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "cena anime",
+     "golpe inesperado",
+     "react anime",
+     "personagem feminina",
+     "luta anime",
+     "anime react br",
+     "manhwa react",
+     "reação anime",
+     "momento épico",
+     "anime engraçado",
+     "react portugues"
+    ],
+    "keywords": [
+     {
+      "t": 49.0,
+      "text": "LEVANTAR O VESTIDO",
+      "emoji": "😳"
+     },
+     {
+      "t": 53.0,
+      "text": "FENELE",
+      "emoji": "💥"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 49.0,
+      "type": "shock"
+     },
+     {
+      "t": 53.0,
+      "type": "laugh"
+     }
+    ],
+    "memes": [
+     {
+      "t": 49.0,
+      "id": 81
+     }
+    ],
+    "cta": "Comenta o que achou!",
+    "pinned_comment": "Qual foi o golpe mais inesperado que vocês já viram num anime? 😂",
+    "title_alternatives": [
+     "Ela fez O QUÊ antes de atacar?! Não acredito 😳🔥 #shorts #react",
+     "O movimento SUSPEITO dela antes do golpe final 💀😂 #shorts #anime"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_15_50_45\\2026_10_07_15_50_45_p1.mp4",
+   "duration": 14.781728000000015,
+   "keeps": 10,
+   "meta": {
+    "hook": "CACHORRO GANHANDO DA SERPENTE GIGANTE?!",
+    "title": "O cachorrinho tá HUMILHANDO a serpente desse tamanho 😱🐕 #shorts #anime",
+    "description": "O criador reage a uma batalha insana entre um cachorro e uma serpente gigante e não acredita no resultado!\nQuem vocês acham que deveria ganhar essa luta?\nSe curtiu, segue pra mais reacts insanos!\n\n#shorts #react #anime #serpente #cachorro #batalha #luta #comparação #animereact #otaku #mangá #poder #ranking #hype",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#serpente",
+     "#cachorro",
+     "#batalha",
+     "#luta",
+     "#comparação",
+     "#animereact",
+     "#otaku"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "serpente vs cachorro",
+     "comparação de poder",
+     "batalha anime",
+     "ranking de poder",
+     "quem ganha",
+     "react anime",
+     "manhwa",
+     "luta épica",
+     "cachorro anime",
+     "serpente anime",
+     "react br",
+     "anime react portugues"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Quem vocês acham que ganha: o cachorro ou a serpente? 🐕🐍",
+    "title_alternatives": [
+     "Esse CACHORRO zerou o espírito da SERPENTE gigante 🐍💀 #shorts #anime",
+     "Não é possível que o cachorrinho tá GANHANDO dela 😱🔥 #shorts #react"
+    ],
+    "work": null,
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_15_50_45\\2026_10_07_15_50_45_p1_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\lofi_fundo_podcast_paporeto_demucs_P7yrtQQb7s4.mp3",
+   "removed_pct": 59.3,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 14.78,
+    "lufs": -14.2
+   }
+  },
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_15_50_45\\2026_10_07_15_50_45_p2.mp4",
+   "duration": 13.164166000000037,
+   "keeps": 6,
+   "meta": {
+    "hook": "ELA TACOU O FENELE NELE!",
+    "title": "O movimento dela foi LEVANTAR O VESTIDO e tacar tudo 😂💥 #shorts #anime",
+    "description": "O criador reage a uma cena onde a personagem surpreende com um golpe inesperado depois de um movimento suspeito!\nVocês esperavam essa reação dela?\nComenta aí e segue pra mais!\n\n#shorts #react #anime #luta #cena #animereact #otaku #mangá #golpe #surpresa #hype #reação #poder #personagem",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#luta",
+     "#cena",
+     "#animereact",
+     "#otaku",
+     "#golpe",
+     "#surpresa",
+     "#hype"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "cena anime",
+     "golpe inesperado",
+     "react anime",
+     "personagem feminina",
+     "luta anime",
+     "anime react br",
+     "manhwa react",
+     "reação anime",
+     "momento épico",
+     "anime engraçado",
+     "react portugues"
+    ],
+    "cta": "Comenta o que achou!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Qual foi o golpe mais inesperado que vocês já viram num anime? 😂",
+    "title_alternatives": [
+     "Ela fez O QUÊ antes de atacar?! Não acredito 😳🔥 #shorts #react",
+     "O movimento SUSPEITO dela antes do golpe final 💀😂 #shorts #anime"
+    ],
+    "work": null,
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_15_50_45\\2026_10_07_15_50_45_p2_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\FNAF FUNK (Funk Remix) (128 kbps).mp3",
+   "removed_pct": 61.4,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 13.16,
+    "lufs": -14.2
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 373.6
+}

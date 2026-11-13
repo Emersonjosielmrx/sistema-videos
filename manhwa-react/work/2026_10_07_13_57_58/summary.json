@@ -1,0 +1,199 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 13-57-58.mp4",
+ "duration": 74.333333,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 5,
+  "content_x1": 710,
+  "has_webcam": true,
+  "contrast": 63.7,
+  "trimmed": {
+   "webcam_bottom": 304,
+   "content_bottom": 210
+  },
+  "divider": 666,
+  "webcam": [
+   0,
+   0,
+   720,
+   362
+  ],
+  "content": [
+   5,
+   666,
+   710,
+   1070
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React genérico a anime com pouca reação marcante, mas o comentário sobre casamento e a menina bonita gera engajamento leve.",
+  "topic": "React a anime com torneio da máfia e casamento",
+  "channel": "manhwareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 74.3,
+    "hook": "TORNEIO DA MÁFIA E CASAMENTO FORÇADO?!",
+    "title": "Torneio da máfia e ele vai CASAR com ela?! 😱🔥 #shorts #anime",
+    "description": "O criador reage a um anime com torneio da máfia e um casamento inesperado com uma menina linda!\nSerá que ela vai conseguir fugir? 😳\nComenta aí qual anime você acha que é!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #anime #torneio #mafia #casamento #otaku #animereact #reactanime #animetiktok #weeb #animebrasil #reactbr #animesbrasil",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#torneio",
+     "#mafia",
+     "#casamento",
+     "#otaku",
+     "#animereact",
+     "#reactanime",
+     "#animetiktok",
+     "#weeb",
+     "#animebrasil"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "torneio",
+     "mafia",
+     "casamento",
+     "react anime",
+     "anime react",
+     "otaku",
+     "anime brasil",
+     "react br",
+     "anime 2024",
+     "menina bonita anime",
+     "anime luta",
+     "anime romance",
+     "react anime br",
+     "shorts anime"
+    ],
+    "keywords": [
+     {
+      "t": 14.0,
+      "text": "MÁFIA",
+      "emoji": "🔫"
+     },
+     {
+      "t": 30.0,
+      "text": "CASAR",
+      "emoji": "💍"
+     },
+     {
+      "t": 34.0,
+      "text": "BONITINHA",
+      "emoji": "😍"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 9.0,
+      "type": "hype"
+     },
+     {
+      "t": 30.0,
+      "type": "shock"
+     },
+     {
+      "t": 60.0,
+      "type": "question"
+     }
+    ],
+    "memes": [
+     {
+      "t": 34.0,
+      "id": 8
+     },
+     {
+      "t": 60.0,
+      "id": 1
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Qual anime vocês acham que é esse? 🤔",
+    "title_alternatives": [
+     "Anime com MÁFIA e casamento forçado?! Não acredito 😱 #shorts #anime",
+     "Ela é LINDA mas não pode perder! React insano 🔥😍 #shorts #anime"
+    ],
+    "mood": "neutral_chill",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_13_57_58\\2026_10_07_13_57_58.mp4",
+   "duration": 34.646807000000116,
+   "keeps": 25,
+   "meta": {
+    "hook": "TORNEIO DA MÁFIA E CASAMENTO FORÇADO?!",
+    "title": "Torneio da máfia e ele vai CASAR com ela?! 😱🔥 #shorts #anime",
+    "description": "O criador reage a um anime com torneio da máfia e um casamento inesperado com uma menina linda!\nSerá que ela vai conseguir fugir? 😳\nComenta aí qual anime você acha que é!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #anime #torneio #mafia #casamento #otaku #animereact #reactanime #animetiktok #weeb #animebrasil #reactbr #animesbrasil",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#torneio",
+     "#mafia",
+     "#casamento",
+     "#otaku",
+     "#animereact",
+     "#reactanime",
+     "#animetiktok",
+     "#weeb",
+     "#animebrasil"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "torneio",
+     "mafia",
+     "casamento",
+     "react anime",
+     "anime react",
+     "otaku",
+     "anime brasil",
+     "react br",
+     "anime 2024",
+     "menina bonita anime",
+     "anime luta",
+     "anime romance",
+     "react anime br",
+     "shorts anime"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "neutral_chill",
+    "music": true,
+    "pinned_comment": "Qual anime vocês acham que é esse? 🤔",
+    "title_alternatives": [
+     "Anime com MÁFIA e casamento forçado?! Não acredito 😱 #shorts #anime",
+     "Ela é LINDA mas não pode perder! React insano 🔥😍 #shorts #anime"
+    ],
+    "work": null,
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_13_57_58\\2026_10_07_13_57_58_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Música de lore .mp3",
+   "removed_pct": 53.4,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 34.63,
+    "lufs": -14.9
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 427.0
+}

@@ -1,0 +1,63 @@
+{
+ "modelo": "argon-pro",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T16:06:29",
+ "segundos": 328,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T16:06:29",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "argon-pro",
+   "decisor": "argon-pro"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Falta total de variedade visual e ausência de demonstração do produto porque a variante 'dono_tres' mantém o apresentador no mesmo enquadramento nos 3 blocos (~27s seguidos sem tela de WhatsApp ou simulação do Hermes Call), puxando a nota de movimento (4.0-5.0) e diretor para baixo em 4 vídeos do histórico.",
+    "prova": "dados.json campo formato='dono_tres' / historico_notas (4 vídeos com dono_tres entre 5.38 e 6.5) / júri movimento cena 1 e diretor cena 2",
+    "sugestao": "Desligar a variante 'dono_tres' em variantes_desligadas ou reduzir seu peso em pesos_variantes, priorizando formatos com tela/b-roll no meio (ex.: dono_abre_fecha_veo_meio).",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Topo da cabeça/cabelo do apresentador encosta na pílula superior de etapa ('1 O problema' / '2 Como funciona' / '3 O resultado') ao longo das cenas 1, 2 e 3, deixando o enquadramento sem respiro superior.",
+    "prova": "folha.jpg quadros 4 a 10 / júri diretor cena 1",
+    "sugestao": "Aumentar o respiro superior nas cenas de dono (descer levemente o enquadramento do apresentador ou reduzir a escala/subir a pílula de etapa para não encostar no topo do cabelo).",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Cartão final (cena 4) com menor índice de movimento do vídeo (4.63%) e visual estático em relação às cenas anteriores.",
+    "prova": "dados.json juri.movimento cena 4 (4.63) / folha.jpg quadros 11 e 12 / júri movimento e diretor cena 4",
+    "sugestao": "Testar aumento de pulso_botao (ex.: de 0.06 para 0.10) ou adicionar animação de entrada escalonada dos elementos do cartão final.",
+    "repetido": true
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Abertura na cena 0 e tomadas longas de fala (>7s por bloco) mantêm escala quase constante (punchin_video atual em 0.06), gerando percepção de ritmo lento no gancho e no meio.",
+    "prova": "dados.json ajustes.punchin_video=0.06 / júri diretor cena 0 e movimento cena 2",
+    "sugestao": "Testar aumento de punchin_video (ex.: de 0.06 para 0.12) ou inserir elementos gráficos sincronizados com a fala para quebrar a monotonia visual.",
+    "repetido": true
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "A variante 'dono_tres' mantém o apresentador em 3 blocos seguidos (~27s) sem tela do produto ou variação visual, puxando as notas de movimento (4.0-5.0) e diretor para baixo de forma repetida em 4 vídeos do histórico.",
+    "prova": "dados.json campo formato='dono_tres' / historico_notas (4 vídeos com dono_tres entre 5.38 e 6.5) / júri movimento cena 1 e diretor cena 2"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Aumentar o respiro superior nas cenas do apresentador (descer levemente o enquadramento do vídeo do dono ou subir/reduzir a pílula superior de etapa) para não encostar no topo da cabeça/cabelo, e garantir a persistência da tarja escura de contraste em todas as palavras da legenda karaokê.",
+    "motivo": "O topo da cabeça do apresentador encosta na pílula de etapa ('1 O problema' / '2 Como funciona' / '3 O resultado') nas cenas 1 a 3, e a palavra 'Call' na cena 2 perdeu a tarja escura de contraste sobre a camisa azul-marinho.",
+    "prova": "folha.jpg quadros 4 a 10 / dados.json juri_problemas cenas 1 e 2 (diretor e movimento)"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

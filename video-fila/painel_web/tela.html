@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tela de vídeos</title>
+<style>
+  :root { --fundo: #000; --texto: #f2f2f2; --fraco: #9aa0a6; --verde: hsl(152 70% 45%); }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: var(--fundo); color: var(--texto); font-family: 'Segoe UI', system-ui, sans-serif; overflow: hidden; }
+  video { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+  .info { position: fixed; left: 16px; right: 16px; bottom: 16px; display: flex; gap: 12px; align-items: flex-end; justify-content: space-between;
+    pointer-events: none; text-shadow: 0 2px 8px #000; }
+  .info .t { font-size: clamp(14px, 2.2vw, 22px); font-weight: 600; max-width: 75%; }
+  .info .m { font-size: clamp(12px, 1.6vw, 15px); color: var(--fraco); margin-top: 4px; }
+  .selo { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.18); white-space: nowrap; }
+  .selo.novo { border-color: var(--verde); color: var(--verde); }
+  .topo { position: fixed; top: 12px; right: 12px; display: flex; gap: 8px; }
+  button { font: 600 13px 'Segoe UI', system-ui, sans-serif; color: var(--texto); background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.22);
+    border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+  .vazio { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--fraco); font-size: 18px; padding: 16px; text-align: center; }
+</style>
+</head>
+<body>
+<video id="v" playsinline></video>
+<div class="vazio" id="vazio">Esperando o primeiro vídeo pronto…</div>
+<div class="topo"><button id="som" hidden>Tocar com som</button><button id="pular">Pular</button></div>
+<div class="info"><div><div class="t" id="tit"></div><div class="m" id="meta"></div></div><span class="selo" id="selo"></span></div>
+<script>
+// Toca sozinho cada vídeo que fica pronto (fonte: /api/tela). Sem novidade, repete os mais recentes.
+const $ = id => document.getElementById(id);
+const v = $('v');
+const ler = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } };
+const gravar = (k, x) => { try { localStorage.setItem(k, JSON.stringify(x)); } catch (e) { /* sem armazenamento: segue */ } };
+let vistos = new Set(ler('tela:vistos', [])), lista = [], fila = [], atual = null, repete = 0;
+let primeiraVez = ler('tela:vistos', null) === null;  // 1ª vez nesta tela: só os 3 mais recentes contam como novos
+
+async function buscar() {
+  try {
+    const r = await fetch('/api/tela', {cache: 'no-store'});
+    const d = await r.json();
+    lista = d.videos || [];
+    if (primeiraVez) { lista.slice(3).forEach(x => vistos.add(x.caminho)); gravar('tela:vistos', [...vistos]); primeiraVez = false; }
+    const novos = lista.filter(x => !vistos.has(x.caminho) && !fila.some(f => f.caminho === x.caminho)).reverse();
+    fila.push(...novos);
+    if (novos.length && (!atual || atual.repeticao)) proximo();  // vídeo novo passa na frente da repetição
+    if (!atual) proximo();
+  } catch (e) { $('meta').textContent = 'sem resposta do painel; tentando de novo'; }
+}
+
+function proximo() {
+  let item = fila.shift();
+  if (item) { item.repeticao = false; }
+  else if (lista.length) { item = {...lista[repete % Math.min(lista.length, 8)], repeticao: true}; repete++; }
+  if (!item) { atual = null; $('vazio').hidden = false; return; }
+  $('vazio').hidden = true;
+  atual = item;
+  v.src = '/midia?caminho=' + encodeURIComponent(item.caminho);
+  $('tit').textContent = item.titulo || '';
+  $('meta').textContent = [item.origem, item.canal, (item.quando || '').replace('T', ' ').slice(0, 16), item.mb ? item.mb + ' MB' : ''].filter(Boolean).join(' · ');
+  $('selo').textContent = item.repeticao ? 'repetindo' : 'NOVO';
+  $('selo').className = 'selo' + (item.repeticao ? '' : ' novo');
+  tocar();
+}
+
+function tocar() {
+  v.muted = false;
+  v.play().then(() => { $('som').hidden = true; }).catch(() => { v.muted = true; v.play().catch(() => {}); $('som').hidden = false; });
+}
+
+v.addEventListener('ended', () => {
+  if (atual && !atual.repeticao) { vistos.add(atual.caminho); gravar('tela:vistos', [...vistos].slice(-500)); }
+  proximo();
+});
+v.addEventListener('error', () => setTimeout(proximo, 1500));  // arquivo foi pro Drive ou sumiu: vai pro próximo
+$('pular').onclick = () => { if (atual && !atual.repeticao) vistos.add(atual.caminho); proximo(); };
+$('som').onclick = () => { v.muted = false; v.play(); $('som').hidden = true; };
+buscar();
+setInterval(buscar, 60000);
+</script>
+</body>
+</html>

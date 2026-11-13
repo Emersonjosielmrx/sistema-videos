@@ -1,0 +1,38 @@
+[
+  {
+    "repo": "Ps23102004/unmumble",
+    "onde": "IDEIA aplicada sem dependência: ducking pela voz em recapd bin/fx_music.py add_background_music (ANIME_DUCK_VOZ=0 desliga)",
+    "quem": "CURTOS",
+    "data": "2026-11-04"
+  },
+  {
+    "repo": "Dominic485649/ffmpeg-qsv-lite",
+    "onde": "postador-de-videos\\bin\\politica.py garantir_1080: h264_qsv (Intel) antes do libx264 no PC1 (6,7 s x 10,5 s, SSIM 0,985); falhou = libx264; celulares (_upscale_celular) vêm antes; CELULAR_UPSCALE=0 desliga celulares",
+    "quem": "CURTOS",
+    "data": "2026-11-05"
+  },
+  {
+    "repo": "microsoft/playwright-mcp",
+    "onde": "já feito por HTTP: upload_http.Enviador._playlist (playlist + confere relendo); LONGO_PLAYLIST_SERIE=0",
+    "quem": "LONGOS",
+    "data": "2026-11-11"
+  },
+  {
+    "repo": "mickpletcher/yt-librarian",
+    "onde": "ideia já feita: postar_longos.PLAYLIST_SERIES / _playlist_do_longo (série em ordem); LONGO_PLAYLIST_SERIE=0",
+    "quem": "LONGOS",
+    "data": "2026-11-11"
+  },
+  {
+    "repo": "slaavass/youtube-outlier-finder",
+    "onde": "video-fila/buscar_fontes_campeas.py escrever_lista.nota (views÷inscritos/temas campeões); FONTES_NOTA_OUTLIER=0 desliga",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "DerickBeckwith/youtube-outlier-scan",
+    "onde": "video-fila/buscar_fontes_campeas.py funil no topo de FONTES_PARA_AUTORIZAR.md (achados→rosto→tratados→lista)",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  }
+]

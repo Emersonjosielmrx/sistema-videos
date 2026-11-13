@@ -1,0 +1,297 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-35-46.mp4",
+ "duration": 95.9,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 713,
+  "has_webcam": true,
+  "contrast": 68.6,
+  "trimmed": {},
+  "divider": 361,
+  "webcam": [
+   0,
+   0,
+   720,
+   361
+  ],
+  "content": [
+   0,
+   361,
+   713,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 7,
+  "reason": "React com reações genuínas e engraçadas a um vídeo de comédia absurda, com boas frases virais e ritmo constante de surpresas.",
+  "topic": "React a vídeo de comédia absurda e surreal",
+  "channel": "mundoquenaoexiste",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 13.0,
+    "hook": "EU NÃO SEI SE IA SER BOM...",
+    "title": "Ele duvidou e se arrependeu na hora 😂🔥 #shorts #react",
+    "description": "O criador começou duvidando do vídeo e não sabia o que esperar... será que valeu a pena?\nVocê também já duvidou de um vídeo e se surpreendeu?\nComenta aí e segue pra mais reacts insanos!\n\n#shorts #react #comedia #engracado #viral #humor #inesperado #surpresa #absurdo #mundoquenaoexiste #reactbr #meme #risada",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#comedia",
+     "#engracado",
+     "#viral",
+     "#humor",
+     "#inesperado",
+     "#surpresa",
+     "#absurdo",
+     "#mundoquenaoexiste"
+    ],
+    "tags": [
+     "react",
+     "comédia",
+     "vídeo engraçado",
+     "humor",
+     "absurdo",
+     "inesperado",
+     "react br",
+     "mundo que não existe",
+     "viral",
+     "surpresa",
+     "meme",
+     "risada"
+    ],
+    "keywords": [],
+    "reactions": [],
+    "memes": [],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Vocês também teriam duvidado desse vídeo?",
+    "title_alternatives": [
+     "Comecei duvidando e olha no que deu 😂💀 #shorts #react",
+     "Não acreditei no que vi nesse vídeo 😱😂 #shorts #humor"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   },
+   {
+    "start": 30.0,
+    "end": 95.9,
+    "hook": "O CARA APAGOU O FOGO COM XIXI?!",
+    "title": "O cara apagou o fogo com XIXI e eu não aguentei 😂💀 #shorts #react",
+    "description": "Esse vídeo é SURREAL! O cara apagou fogo de um jeito que ninguém esperava e depois ficou ainda mais absurdo 😂\nVocê já viu algo tão insano assim?\nComenta o momento mais bizarro e segue pro próximo react!\n\n#shorts #react #comedia #engracado #viral #humor #absurdo #inesperado #mundoquenaoexiste #reactbr #meme #risada #supercomedia #bizarro",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#comedia",
+     "#engracado",
+     "#viral",
+     "#humor",
+     "#absurdo",
+     "#inesperado",
+     "#mundoquenaoexiste",
+     "#reactbr",
+     "#meme",
+     "#risada"
+    ],
+    "tags": [
+     "react",
+     "comédia",
+     "vídeo engraçado",
+     "humor",
+     "absurdo",
+     "inesperado",
+     "react br",
+     "mundo que não existe",
+     "viral",
+     "surpresa",
+     "meme",
+     "risada",
+     "super comédia",
+     "bizarro",
+     "apagar fogo",
+     "react engraçado",
+     "vídeo viral"
+    ],
+    "keywords": [
+     {
+      "t": 41.0,
+      "text": "XIXI",
+      "emoji": "💦"
+     },
+     {
+      "t": 63.5,
+      "text": "TADALAFILA",
+      "emoji": "💊"
+     },
+     {
+      "t": 23.5,
+      "text": "SUPER COMÉDIA",
+      "emoji": "😂"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 33.0,
+      "type": "shock"
+     },
+     {
+      "t": 45.0,
+      "type": "laugh"
+     },
+     {
+      "t": 26.0,
+      "type": "hype"
+     }
+    ],
+    "memes": [
+     {
+      "t": 41.0,
+      "id": 106
+     },
+     {
+      "t": 26.0,
+      "id": 69
+     }
+    ],
+    "cta": "Segue pra mais loucura!",
+    "pinned_comment": "Qual foi o momento mais absurdo desse vídeo pra vocês? 😂",
+    "title_alternatives": [
+     "Isso é SUPER COMÉDIA e eu não tava preparado 😂🔥 #shorts #react",
+     "Ele tomou uma SUPER TADALAFILA e olha no que deu 💀😂 #shorts #humor"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "mundoquenaoexiste",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_35_46\\2026_10_07_16_35_46_p1.mp4",
+   "duration": 9.783645999999997,
+   "keeps": 4,
+   "meta": {
+    "hook": "EU NÃO SEI SE IA SER BOM...",
+    "title": "Ele duvidou e se arrependeu na hora 😂🔥 #shorts #react",
+    "description": "O criador começou duvidando do vídeo e não sabia o que esperar... será que valeu a pena?\nVocê também já duvidou de um vídeo e se surpreendeu?\nComenta aí e segue pra mais reacts insanos!\n\n#shorts #react #comedia #engracado #viral #humor #inesperado #surpresa #absurdo #mundoquenaoexiste #reactbr #meme #risada",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#comedia",
+     "#engracado",
+     "#viral",
+     "#humor",
+     "#inesperado",
+     "#surpresa",
+     "#absurdo",
+     "#mundoquenaoexiste"
+    ],
+    "tags": [
+     "react",
+     "comédia",
+     "vídeo engraçado",
+     "humor",
+     "absurdo",
+     "inesperado",
+     "react br",
+     "mundo que não existe",
+     "viral",
+     "surpresa",
+     "meme",
+     "risada"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Vocês também teriam duvidado desse vídeo?",
+    "title_alternatives": [
+     "Comecei duvidando e olha no que deu 😂💀 #shorts #react",
+     "Não acreditei no que vi nesse vídeo 😱😂 #shorts #humor"
+    ],
+    "work": null,
+    "channel": "mundoquenaoexiste"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_35_46\\2026_10_07_16_35_46_p1_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\FNAF FUNK (Funk Remix) (128 kbps).mp3",
+   "removed_pct": 24.7,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 9.77,
+    "lufs": -13.8
+   }
+  },
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_35_46\\2026_10_07_16_35_46_p2.mp4",
+   "duration": 55.13047900000011,
+   "keeps": 16,
+   "meta": {
+    "hook": "O CARA APAGOU O FOGO COM XIXI?!",
+    "title": "O cara apagou o fogo com XIXI e eu não aguentei 😂💀 #shorts #react",
+    "description": "Esse vídeo é SURREAL! O cara apagou fogo de um jeito que ninguém esperava e depois ficou ainda mais absurdo 😂\nVocê já viu algo tão insano assim?\nComenta o momento mais bizarro e segue pro próximo react!\n\n#shorts #react #comedia #engracado #viral #humor #absurdo #inesperado #mundoquenaoexiste #reactbr #meme #risada #supercomedia #bizarro",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#comedia",
+     "#engracado",
+     "#viral",
+     "#humor",
+     "#absurdo",
+     "#inesperado",
+     "#mundoquenaoexiste",
+     "#reactbr",
+     "#meme",
+     "#risada"
+    ],
+    "tags": [
+     "react",
+     "comédia",
+     "vídeo engraçado",
+     "humor",
+     "absurdo",
+     "inesperado",
+     "react br",
+     "mundo que não existe",
+     "viral",
+     "surpresa",
+     "meme",
+     "risada",
+     "super comédia",
+     "bizarro",
+     "apagar fogo",
+     "react engraçado",
+     "vídeo viral"
+    ],
+    "cta": "Segue pra mais loucura!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Qual foi o momento mais absurdo desse vídeo pra vocês? 😂",
+    "title_alternatives": [
+     "Isso é SUPER COMÉDIA e eu não tava preparado 😂🔥 #shorts #react",
+     "Ele tomou uma SUPER TADALAFILA e olha no que deu 💀😂 #shorts #humor"
+    ],
+    "work": null,
+    "channel": "mundoquenaoexiste"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_35_46\\2026_10_07_16_35_46_p2_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk da deep web (Original).mp3",
+   "removed_pct": 16.3,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 55.09,
+    "lufs": -14.0
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 453.9
+}

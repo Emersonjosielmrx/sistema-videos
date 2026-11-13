@@ -1,0 +1,13 @@
+[2:v]format=yuva420p[dv];
+[0:v][dv]overlay=0:408:shortest=1:format=auto[dvs];
+[3:v]format=yuva420p,scale=1080:1920,tpad=start_duration=2.135:start_mode=add:color=black@0.0[ov0];
+[dvs][ov0]overlay=0:0:eof_action=pass:enable='between(t,2.135,3.535)'[ovs0];
+[4:v]format=rgba,scale=200:-1,tpad=start_duration=2.235:start_mode=add:color=black@0.0[png1];
+[ovs0][png1]overlay=x=810:y='200-30*sin(min((t-2.235)*8,3.1416))':eof_action=pass:enable='between(t,2.235,3.635)'[ovs1];
+[5:v]format=rgba,scale=170:-1,tpad=start_duration=14.205:start_mode=add:color=black@0.0[png2];
+[ovs1][png2]overlay=x=825:y='215-30*sin(min((t-14.205)*8,3.1416))':eof_action=pass:enable='between(t,14.205,15.305)'[ovs2];
+[6:v]format=yuva420p,scale=1080:1920,tpad=start_duration=15.591:start_mode=add:color=black@0.0[ov3];
+[ovs2][ov3]overlay=0:0:eof_action=pass:enable='between(t,15.591,17.391)'[ovs3];
+[7:v]format=yuva420p,scale=1080:1920,tpad=start_duration=32.147:start_mode=add:color=black@0.0[ov4];
+[ovs3][ov4]overlay=0:0:eof_action=pass:enable='between(t,32.147,33.947)'[ovs4];
+[ovs4]ass='D\:/manhwa-react/work/2026_10_07_13_57_58/part1/captions.ass':fontsdir='D\:/manhwa-react/assets/fonts',format=yuv420p[vout]

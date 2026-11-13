@@ -1,0 +1,65 @@
+{
+ "name": "Hermes API - Audio Call Proxy",
+ "nodes": [
+  {
+   "parameters": {
+    "path": "hermes/webrtc/call",
+    "httpMethod": "POST",
+    "responseMode": "lastNode"
+   },
+   "id": "webhook-trigger",
+   "name": "Webhook",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 1,
+   "position": [
+    250,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://100.118.234.102:9240/inject",
+    "method": "POST",
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "phone",
+       "value": "={{ $json.body.phone }}"
+      },
+      {
+       "name": "audioBase64",
+       "value": "={{ $json.body.audioBase64 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "c1a6de9e-9d2d-4518-87d8-cb4bd5f28c2e",
+   "name": "Audio Proxy Server",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    460,
+    300
+   ]
+  }
+ ],
+ "connections": {
+  "Webhook": {
+   "main": [
+    [
+     {
+      "node": "Audio Proxy Server",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "active": false
+}

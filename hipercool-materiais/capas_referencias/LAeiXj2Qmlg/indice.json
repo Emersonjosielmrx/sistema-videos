@@ -1,0 +1,232 @@
+{
+ "video": "tmp/LAeiXj2Qmlg.mp4",
+ "passo_s": 6.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "loirinha da estalagem",
+   "principal": true,
+   "aparicoes": 25,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 4770.0
+    }
+   ],
+   "papel": "attendant at the inn where the protagonist stays",
+   "visual": "blonde hair, light eyes, inn worker attire",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "menina da vila",
+   "principal": false,
+   "aparicoes": 9,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3288.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2964.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 3168.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2904.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3216.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3258.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3288.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 3168.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 3216.0
+    }
+   ],
+   "papel": "childhood friend who plays with the protagonist in the village at the beginning",
+   "visual": "pink/magenta hair, red/pink eyes, pointed ear-like accessories or horns, energetic appearance",
+   "adulta": false,
+   "mulher": true
+  },
+  {
+   "personagem": "p03",
+   "nome": "loirinha da estalagem",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2172.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2190.0
+    }
+   ],
+   "papel": "attendant at the inn who serves food and comments on the protagonist's eating",
+   "visual": "blonde hair, appears in casual/work attire at the inn",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p04",
+   "nome": "loirinha da estalagem",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4554.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 5034.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 5040.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 4554.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 5034.0
+    }
+   ],
+   "papel": "attendant at the inn where the protagonist stays",
+   "visual": "blonde hair, appears in the inn scenes",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p05",
+   "nome": "loirinha",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 4314.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4302.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4320.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 4314.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 4302.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 4320.0
+    }
+   ],
+   "papel": "atendente da estalagem",
+   "visual": "blonde hair, light-colored eyes, no distinctive accessories",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p06",
+   "nome": "loirinha da estalagem",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3282.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2532.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3282.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 2532.0
+    }
+   ],
+   "papel": "atendente/garçonete da estalagem onde o protagonista se hospeda",
+   "visual": "blonde hair, appears in service/waitress role at the inn",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p07",
+   "nome": "apresentadora do canal",
+   "principal": false,
+   "aparicoes": 3,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2916.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 78.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 5664.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 2916.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 78.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 5664.0
+    }
+   ],
+   "papel": "apresentadora de avatar para recados do canal",
+   "visual": "long wavy brown hair, brown eyes, tan skin, wearing hair clips, a yellow scarf, and a green top",
+   "adulta": true,
+   "mulher": true
+  }
+ ]
+}

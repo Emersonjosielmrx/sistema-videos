@@ -1,0 +1,34 @@
+# Configuração do golangci-lint. Conjunto pragmático: pega bugs e higiene sem
+# afogar em nitpicks (o projeto tem ~22k linhas num pacote main só).
+# Rode com: golangci-lint run ./...   (ou: make lint)
+
+run:
+  timeout: 5m
+  build-tags:
+    - mlow
+
+linters:
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - ineffassign
+    - unused
+    - misspell
+    - bodyclose      # response bodies não fechados (temos muito http.Client)
+    - noctx          # requisições http sem context
+
+issues:
+  # Não falhar por problemas legados; foca no que é novo/tocado.
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-rules:
+    # Testes podem ser mais relaxados.
+    - path: _test\.go
+      linters:
+        - errcheck
+        - bodyclose
+
+linters-settings:
+  misspell:
+    locale: US

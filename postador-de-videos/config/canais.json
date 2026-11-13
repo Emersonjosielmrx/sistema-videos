@@ -1,0 +1,992 @@
+{
+  "_leia": "Cadastro ÚNICO dos canais (bin/canais.py). politica.py lê daqui: dono, alimentadores (livre = divide o teto; sobra = só canal vazio no dia ou depois de libera_as, hora local), max_dia (aperta o teto da política, nunca afrouxa). Outros campos são do projeto de origem (pico_hipercool, horarios_parceiro, horarios_rede) e servem pro status/medição. NÃO EDITE À MÃO: o arquivo se refaz sozinho quando os arquivos de origem mudam (politica.cadastro). Decisão do dono = DECISOES no bin/canais.py; canal novo = nos arquivos de origem (youtube_navegador, canais_reservados...).",
+  "canais": {
+    "0RW4rz4ekPpkPcZx": {
+      "slug": null,
+      "creds": [
+        "0RW4rz4ekPpkPcZx"
+      ],
+      "nome": "Inovare Manhwa esp",
+      "handle": null,
+      "channel_id": null,
+      "navegador": false,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": null,
+      "dono": "hipercool",
+      "alimentadores": {},
+      "max_dia": null,
+      "horarios_rede": null
+    },
+    "animescomia": {
+      "slug": "animescomia",
+      "creds": [
+        "KOpyXE9rBy1YirlZ"
+      ],
+      "nome": "Animescomia",
+      "handle": "@animescomia",
+      "channel_id": "UCRrz2BKdhCzy1-nAAs2E8bg",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "anime",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "11:40",
+        "17:50",
+        "21:10"
+      ],
+      "horarios_parceiro": [
+        "11:40",
+        "17:50",
+        "21:10",
+        "15:30"
+      ],
+      "reserva_dono": 1
+    },
+    "assistiainvestimentos": {
+      "slug": "assistiainvestimentos",
+      "creds": [
+        "novo_assistiainvestimentos"
+      ],
+      "nome": "Assist-IA Investimentos",
+      "handle": "@assistiainvestimentos",
+      "channel_id": "UCDkimm8rTPj8u5qKd-es3dA",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "financas",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "07:40",
+        "12:15",
+        "19:30"
+      ],
+      "horarios_parceiro": [
+        "07:40",
+        "12:15",
+        "19:30",
+        "22:05"
+      ],
+      "reserva_dono": 1
+    },
+    "bichonoturno": {
+      "slug": "bichonoturno",
+      "creds": [
+        "novo_bichonoturno"
+      ],
+      "nome": "Bicho Noturno",
+      "handle": "@bichonoturnobr",
+      "channel_id": "UC31FWzAEk7U3chngTl7VXZg",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "animais",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 2,
+      "horarios_parceiro": [
+        "12:40",
+        "22:10"
+      ]
+    },
+    "cartuchoreact": {
+      "slug": "cartuchoreact",
+      "creds": [
+        "novo_cartuchoreact",
+        "novo_ia_sem_limites_h4b"
+      ],
+      "nome": "CartuchoReact",
+      "handle": "@cartuchoreact",
+      "channel_id": "UCrskUXOpfPUkSY3HMT2c7_A",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "anime",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:30",
+        "18:10",
+        "21:40"
+      ],
+      "horarios_parceiro": [
+        "12:30",
+        "18:10",
+        "21:40"
+      ],
+      "reserva_dono": 1
+    },
+    "cenareact": {
+      "slug": "cenareact",
+      "creds": [
+        "novo_universo_ia_d6s"
+      ],
+      "nome": "CenaReact",
+      "handle": "@cenareact-f3j",
+      "channel_id": "UCrYkau_YGtx8C29qnF9xSYQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "filme_sem_voz",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ],
+      "horarios_parceiro": [
+        "12:00",
+        "21:35"
+      ],
+      "reserva_dono": 1
+    },
+    "clinicalucrativaia": {
+      "slug": "clinicalucrativaia",
+      "creds": [
+        "novo_clinicalucrativaia"
+      ],
+      "nome": "Clínica Lucrativa IA",
+      "handle": "@clinicalucrativaia",
+      "channel_id": "UCwrlsPBLGkUQG6jONETdRCQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "saude",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ],
+      "horarios_parceiro": [
+        "09:30",
+        "13:30",
+        "19:30",
+        "22:35"
+      ],
+      "reserva_dono": 1
+    },
+    "comedianoturna": {
+      "slug": "comedianoturna",
+      "creds": [
+        "novo_comedianoturna"
+      ],
+      "nome": "Comédia Noturna",
+      "handle": "@comedianoturna",
+      "channel_id": "UCoAiFiUT99wnXjgZ2d7r_AQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "humor",
+      "dono": "comentarios",
+      "alimentadores": {},
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:00",
+        "18:00",
+        "21:00"
+      ]
+    },
+    "curiosidadesnoturnas": {
+      "slug": "curiosidadesnoturnas",
+      "creds": [
+        "novo_curiosidadesnoturnas"
+      ],
+      "nome": "Curiosidades Noturnas",
+      "handle": "@curiosidadesnoturnasbr",
+      "channel_id": "UCRdCdrORHLWiki711nRgkeQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "fatos",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 2,
+      "horarios_parceiro": [
+        "12:20",
+        "22:00"
+      ]
+    },
+    "dicasfinanceirasdaia": {
+      "slug": "dicasfinanceirasdaia",
+      "creds": [
+        "novo_dicasfinanceirasdaia"
+      ],
+      "nome": "Plantão das Histórias",
+      "handle": "@dicasfinanceirasdaia",
+      "channel_id": "UC0dFPL0BhYnpfmXK-qN3hPw",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "dorama",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "08:10",
+        "12:40",
+        "20:20"
+      ],
+      "horarios_parceiro": [
+        "08:10",
+        "12:40",
+        "20:20",
+        "22:15"
+      ],
+      "reserva_dono": 1
+    },
+    "doramanoturno": {
+      "slug": "doramanoturno",
+      "creds": [
+        "novo_doramanoturno"
+      ],
+      "nome": "Dorama Noturno",
+      "handle": "@doramanoturno",
+      "channel_id": "UCCF2-yciERdJbuTnruw4jVg",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "dorama",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 1,
+      "horarios_parceiro": [
+        "12:50",
+        "18:40",
+        "22:30"
+      ]
+    },
+    "empresariointeligenteia": {
+      "slug": "empresariointeligenteia",
+      "creds": [
+        "novo_empresariointeligenteia"
+      ],
+      "nome": "Empresário Inteligente IA",
+      "handle": "@empresariointeligenteia",
+      "channel_id": "UChXUdv7NQJ7Soa73c9xwESw",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "negocios",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ],
+      "horarios_parceiro": [
+        "09:30",
+        "13:30",
+        "19:30",
+        "21:55"
+      ],
+      "reserva_dono": 1
+    },
+    "esportenoturno": {
+      "slug": "esportenoturno",
+      "creds": [
+        "novo_esportenoturno"
+      ],
+      "nome": "Esporte Noturno",
+      "handle": "@esportenoturno",
+      "channel_id": "UC9ziOepIj3qSCtR8b8v37YQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "esportes",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 5,
+      "horarios_parceiro": [
+        "12:20",
+        "14:10",
+        "18:10",
+        "20:30",
+        "21:50"
+      ]
+    },
+    "filmenoturno": {
+      "slug": "filmenoturno",
+      "creds": [
+        "novo_filmenoturno"
+      ],
+      "nome": "Filme Noturno",
+      "handle": "@filmenoturno",
+      "channel_id": "UCfP-zfZaA-n6lK7CyQl197g",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "filme_sem_voz",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 3,
+      "horarios_parceiro": [
+        "13:20",
+        "21:05",
+        "22:40"
+      ]
+    },
+    "fiodameada": {
+      "slug": "fiodameada",
+      "creds": [
+        "novo_codigo_inteligente_n7j"
+      ],
+      "nome": "Fio da Meada",
+      "handle": "@codigointeligente-n7j",
+      "channel_id": "UCh-REEcJ9Jt1lCvTr6Sdu8Q",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "curiosidades",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "19:10",
+        "21:40",
+        "23:00"
+      ],
+      "horarios_parceiro": [
+        "12:10",
+        "18:00",
+        "19:50",
+        "20:40",
+        "21:30"
+      ],
+      "reserva_dono": 1
+    },
+    "forjareact": {
+      "slug": "forjareact",
+      "creds": [
+        "novo_forjareact"
+      ],
+      "nome": "ForjaReact",
+      "handle": "@forjareact",
+      "channel_id": "UCab6vzKMQam-5ovJ9H58IuQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "manhwa",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "11:00",
+        "17:10",
+        "20:10"
+      ],
+      "horarios_parceiro": [
+        "11:00",
+        "17:10",
+        "21:45"
+      ],
+      "reserva_dono": 1
+    },
+    "gamenoturno": {
+      "slug": "gamenoturno",
+      "creds": [
+        "novo_gamenoturno"
+      ],
+      "nome": "Game Noturno",
+      "handle": "@gamenoturnobr",
+      "channel_id": "UC9Zxl8NJPG0YQkCQvWu_6BQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "jogos",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 1,
+      "horarios_parceiro": [
+        "13:10",
+        "19:00",
+        "22:25"
+      ]
+    },
+    "historiasemframes": {
+      "slug": "historiasemframes",
+      "creds": [
+        "novo_historias_em_frames",
+        "novo_ia_agora_n7h"
+      ],
+      "nome": "HistoriasEmFrames",
+      "handle": "@historiasemframes-emerson",
+      "channel_id": "UCIFvn2aqdrv8X-LYscTyjjA",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "fatos",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "13:10",
+        "20:00",
+        "22:20"
+      ],
+      "horarios_parceiro": [
+        "12:30",
+        "20:00",
+        "22:20"
+      ],
+      "reserva_dono": 1
+    },
+    "imovelemfoco": {
+      "slug": "imovelemfoco",
+      "creds": [
+        "novo_imovelemfoco"
+      ],
+      "nome": "Imóvel em Foco",
+      "handle": "@imovelemfoco",
+      "channel_id": "UCfDa2choRM5dvEyuwTPLlTA",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "imobiliario",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ],
+      "horarios_parceiro": [
+        "09:30",
+        "13:30",
+        "19:30",
+        "22:45"
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_eng": {
+      "slug": "inovare_eng",
+      "creds": [
+        "UYjkdFO3V3kjmKU5"
+      ],
+      "nome": "Inovare Manhwa eng",
+      "handle": "@inovaremanhwaverseeng",
+      "channel_id": "UCSGryZuOYBYE6oCFS7n-yUg",
+      "navegador": true,
+      "idioma": "en",
+      "fuso": "America/New_York",
+      "nicho": "viloes, traicoes, plot twists e revelacoes chocantes de anime e manhwa",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "12:50",
+        "18:20",
+        "21:50"
+      ],
+      "pico_hipercool": [
+        16,
+        21
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_french": {
+      "slug": "inovare_french",
+      "creds": [
+        "GG97QQt8lmyv0dDG"
+      ],
+      "nome": "inovare Manhwa french",
+      "handle": "@inovaremanhwafrench",
+      "channel_id": "UCRxr-mCIY4gZbgFLx0IR-eg",
+      "navegador": true,
+      "idioma": "fr",
+      "fuso": "Europe/Paris",
+      "nicho": "romance, casais, shoujo, slice of life e momentos fofos ou emocionantes de anime e manhwa",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "10:40",
+        "16:50",
+        "20:50"
+      ],
+      "pico_hipercool": [
+        17,
+        21
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_hindi": {
+      "slug": "inovare_hindi",
+      "creds": [
+        "GtuH5ezUK8eBaC60"
+      ],
+      "nome": "Inovaremanhwaversehindi",
+      "handle": "@inovaremanhwaversehindi",
+      "channel_id": "UCj3Wg1ubA13WKoOCDoDrO1A",
+      "navegador": true,
+      "idioma": "hi",
+      "fuso": "Asia/Kolkata",
+      "nicho": "lutas epicas, power-ups, transformacoes e cenas de hype de anime e manhwa (o momento em que o personagem fica absurdo de forte)",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "11:10",
+        "17:20",
+        "21:20"
+      ],
+      "pico_hipercool": [
+        17,
+        21
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_ind": {
+      "slug": "inovare_ind",
+      "creds": [
+        "nYsAKUb3DbR1QOEm"
+      ],
+      "nome": "Inovare Manga ind",
+      "handle": "@inovaremanhwaverseind",
+      "channel_id": "UCQj00Ic_N20yJp6eqSmIkXw",
+      "navegador": true,
+      "idioma": "id",
+      "fuso": "Asia/Jakarta",
+      "nicho": "isekai, reencarnacao, sistema, jogos e protagonista overpower; comparacoes de quem e mais forte e rankings de poder",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "10:20",
+        "16:30",
+        "22:30"
+      ],
+      "pico_hipercool": [
+        17,
+        22
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_ita": {
+      "slug": "inovare_ita",
+      "creds": [
+        "7zpNZNll2jlBnQ0J"
+      ],
+      "nome": "inovaremanhwaverseita",
+      "handle": "@inovaremanhwaverseita",
+      "channel_id": "UC-ibFyKECFgzroC3bntM--w",
+      "navegador": true,
+      "idioma": "it",
+      "fuso": "Europe/Rome",
+      "nicho": "comedia, momentos engracados, memes, parodias e animacoes caseiras de anime",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "11:50",
+        "17:40",
+        "20:40"
+      ],
+      "pico_hipercool": [
+        18,
+        22
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_ru": {
+      "slug": "inovare_ru",
+      "creds": [
+        "TkfzifstYEoG4jKg"
+      ],
+      "nome": "inovare manhwa verse ru",
+      "handle": "@inovaremanhwaru",
+      "channel_id": "UCn3EprJOEgidU2QsNyUvqKQ",
+      "navegador": true,
+      "idioma": "ru",
+      "fuso": "Europe/Moscow",
+      "nicho": "anime sombrio, seinen, terror, drama pesado, cenas tristes e tragedias de anime e manhwa",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "13:20",
+        "18:50",
+        "23:10"
+      ],
+      "pico_hipercool": [
+        18,
+        23
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_thai": {
+      "slug": "inovare_thai",
+      "creds": [
+        "q3mik36FjtTgFkNC"
+      ],
+      "nome": "Inovaremanhwaversethai",
+      "handle": "@inovaremanhwaversethai",
+      "channel_id": "UCmB2ZETqZTrYYEYcydim2Qw",
+      "navegador": true,
+      "idioma": "th",
+      "fuso": "Asia/Bangkok",
+      "nicho": "donghua (animacao chinesa), manhua, cultivo, artes marciais, murim e fantasia oriental",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "horarios_rede": [
+        "09:50",
+        "15:40",
+        "19:50"
+      ],
+      "pico_hipercool": [
+        18,
+        22
+      ],
+      "reserva_dono": 1
+    },
+    "inovare_viet": {
+      "slug": "inovare_viet",
+      "creds": [
+        "8ROQmZVjbpwiwMoX"
+      ],
+      "nome": "Inovaremanhwaverseviet",
+      "handle": "@inovaremanhwaverseviet",
+      "channel_id": "UCTLn9GymqU0AJ4pPUizRuzA",
+      "navegador": true,
+      "idioma": "vi",
+      "fuso": "Asia/Ho_Chi_Minh",
+      "nicho": null,
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": null,
+      "pico_hipercool": [
+        18,
+        22
+      ],
+      "reserva_dono": 1
+    },
+    "inovaremanhwabr": {
+      "slug": "inovaremanhwabr",
+      "creds": [
+        "hNQrW5ouNe0Ni5Me"
+      ],
+      "nome": "inovare manhwa br",
+      "handle": "@inovaremanhwabr",
+      "channel_id": "UCZfQc_UIPRzU35GEjfTMCGA",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "manhwa",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "13:00",
+        "19:20",
+        "22:00"
+      ],
+      "horarios_parceiro": [
+        "13:00",
+        "19:20",
+        "22:00"
+      ],
+      "reserva_dono": 1
+    },
+    "inovaremanhwaverse": {
+      "slug": "inovaremanhwaverse",
+      "creds": [
+        "novo_inovaremanhwaverse"
+      ],
+      "nome": "InovareManhwaVerse",
+      "handle": null,
+      "channel_id": "UCiPlcsKHRQK9ZmbdvzDF0DQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "manhwa",
+      "dono": "hipercool",
+      "alimentadores": {
+        "longo_recap": "livre"
+      },
+      "max_dia": null,
+      "horarios_parceiro": [
+        "13:10",
+        "19:40",
+        "23:10"
+      ],
+      "reserva_dono": 1
+    },
+    "inovareq8l": {
+      "slug": "inovareq8l",
+      "creds": [
+        "novo_inovareq8l"
+      ],
+      "nome": "Mistérios Noturnos",
+      "handle": "@Inovare-q8l",
+      "channel_id": "UCJTNPiJJax_YdwqdKVb6r8w",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "misterios",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 2,
+      "horarios_rede": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ],
+      "horarios_parceiro": [
+        "12:40",
+        "19:20",
+        "21:15"
+      ]
+    },
+    "inovareu8b": {
+      "slug": "inovareu8b",
+      "creds": [
+        "novo_inovareu8b"
+      ],
+      "nome": "Tech Noturno",
+      "handle": "@Inovare-u8b",
+      "channel_id": "UCHIg900SWxRdHsI7jEX6sTg",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "tecnologia",
+      "dono": "parceiro",
+      "alimentadores": {},
+      "max_dia": 2,
+      "horarios_rede": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ],
+      "horarios_parceiro": [
+        "13:00",
+        "19:50",
+        "21:25"
+      ]
+    },
+    "inventoreact": {
+      "slug": "inventoreact",
+      "creds": [
+        "novo_ia_agora_h3n"
+      ],
+      "nome": "InventoReact",
+      "handle": "@inventoreact",
+      "channel_id": "UClN7sup9FM11tMM1UxXBwOQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "anime",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "11:30",
+        "17:30",
+        "20:00"
+      ],
+      "horarios_parceiro": [
+        "11:30",
+        "17:30",
+        "21:00"
+      ],
+      "reserva_dono": 1
+    },
+    "leielucro": {
+      "slug": "leielucro",
+      "creds": [
+        "novo_leielucro"
+      ],
+      "nome": "Lei e Lucro",
+      "handle": "@leielucroia",
+      "channel_id": "UCy1nvnDnn70OQQX7k18mB2A",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "juridico",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ],
+      "horarios_parceiro": [
+        "09:30",
+        "13:30",
+        "19:30",
+        "22:55"
+      ],
+      "reserva_dono": 1
+    },
+    "manhwanoturno": {
+      "slug": "manhwanoturno",
+      "creds": [
+        "novo_manhwanoturno"
+      ],
+      "nome": "Manhwa Noturno",
+      "handle": null,
+      "channel_id": "UCJvdEtoogBqfBKHikARiLfw",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "manhwa",
+      "dono": "hipercool",
+      "alimentadores": {
+        "parceiro": "sobra",
+        "longo_recap": "livre"
+      },
+      "max_dia": 3,
+      "pico_hipercool": [
+        18,
+        23
+      ],
+      "horarios_parceiro": [
+        "12:20",
+        "18:30",
+        "22:10"
+      ],
+      "libera_as": "23:00",
+      "reserva_dono": 1
+    },
+    "manhwareact": {
+      "slug": "manhwareact",
+      "creds": [
+        "novo_manhwareact_ia",
+        "novo_mente_artificial_i5r"
+      ],
+      "nome": "ManhwaReact",
+      "handle": "@manhwareact-ia",
+      "channel_id": "UC5Za1hPxak0iufFcJ4UsK9w",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "anime",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:10",
+        "18:40",
+        "20:30"
+      ],
+      "horarios_parceiro": [
+        "12:10",
+        "18:40",
+        "21:20",
+        "15:30"
+      ],
+      "reserva_dono": 1
+    },
+    "mundoquenaoexiste": {
+      "slug": "mundoquenaoexiste",
+      "creds": [
+        "novo_mundoquenaoexiste"
+      ],
+      "nome": "Mundo Que Nao Existe",
+      "handle": "@mundoquenaoexiste",
+      "channel_id": "UCPTjuCzT0k82K9sE5KXdSIw",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "fatos",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:20",
+        "19:40",
+        "22:10"
+      ],
+      "horarios_parceiro": [
+        "12:20",
+        "19:40",
+        "22:10"
+      ],
+      "reserva_dono": 1
+    },
+    "vendasqueescalam": {
+      "slug": "vendasqueescalam",
+      "creds": [
+        "novo_vendasqueescalam"
+      ],
+      "nome": "Vendas que Escalam",
+      "handle": "@vendasqueescalam",
+      "channel_id": "UCdKG9omHV8Nf_DpKk-M_AMg",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "negocios",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ],
+      "horarios_parceiro": [
+        "09

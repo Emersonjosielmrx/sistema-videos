@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seu Reel editado</title><meta name="robots" content="noindex">
+<style>
+:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}
+:root[data-theme="dark"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}
+.w{max-width:900px;margin:0 auto}h1{font-size:26px}.sub{color:var(--tx2);margin-top:4px}
+.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:18px 20px;margin-top:16px}.card h2{font-size:16.5px;margin-bottom:8px}
+ol.etapas{list-style:none;display:grid;gap:6px}
+ol.etapas li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--mu);font-weight:600}
+ol.etapas li.feita{color:var(--tx)}ol.etapas li.feita .ic::after{content:" ✓";color:var(--ok)}
+ol.etapas li.agora{background:var(--cod);color:var(--tx)}ol.etapas li.agora .ic{animation:pulso 1s infinite alternate}
+@keyframes pulso{from{opacity:.4}to{opacity:1}}
+.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:8px}.barra i{display:block;height:100%;background:var(--pri);transition:width .5s}
+.res{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:18px;align-items:start}@media(max-width:720px){.res{grid-template-columns:1fr}}
+video{width:100%;max-height:72vh;border-radius:14px;background:#000;display:block}
+.bts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:9px 14px;border-radius:11px;text-decoration:none;cursor:pointer}
+.btn.pri{background:var(--pri);color:#fff;border-color:transparent}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--cod);margin:2px 2px 0 0}
+.erro{color:var(--er);font-weight:600}
+pre{white-space:pre-wrap;font:inherit;background:var(--cod);border-radius:10px;padding:10px 12px;margin-top:6px}
+</style></head><body><div class="w">
+<h1>✂️ Seu Reel editado</h1><p class="sub" id="sub">Carregando…</p>
+<div class="card" id="cand"><h2>Andamento</h2>
+  <ol class="etapas" id="et">
+    <li data-e="recebido"><span class="ic">📥</span>Pedido recebido</li>
+    <li data-e="ouvindo"><span class="ic">🎧</span>Separando o áudio e ouvindo cada palavra</li>
+    <li data-e="direcao"><span class="ic">🧠</span>IA escolhendo a frase do topo, os tópicos e a cor</li>
+    <li data-e="montando"><span class="ic">🎞️</span>Cortando pausas e vícios, legendando e mixando o som</li>
+    <li data-e="pronto"><span class="ic">🎉</span>Pronto</li>
+  </ol>
+  <div class="barra"><i id="bar" style="width:3%"></i></div>
+  <p class="sub" id="det"></p>
+</div>
+<div id="saida"></div></div>
+<script>
+(function () {
+  var job = new URLSearchParams(location.search).get('job') || '';
+  var ORDEM = ['recebido', 'ouvindo', 'direcao', 'montando', 'pronto'];
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  function desenha(s) {
+    var i = ORDEM.indexOf(s.etapa);
+    document.querySelectorAll('#et li').forEach(function (li, k) { li.className = k < i || s.etapa === 'pronto' ? 'feita' : k === i ? 'agora' : ''; });
+    var p = s.etapa === 'pronto' ? 100 : s.etapa === 'montando' ? 60 + (s.progresso || 0) * 0.38 : (i + 1) * 15;
+    document.getElementById('bar').style.width = Math.max(3, Math.min(100, p)) + '%';
+    document.getElementById('det').textContent = s.detalhe || '';
+    document.getElementById('sub').textContent = s.dados && s.dados.titulo ? s.dados.titulo : 'Seu vídeo';
+    if (s.etapa === 'erro') {
+      document.getElementById('saida').innerHTML = '<div class="card"><p class="erro">⚠️ ' + esc(s.erro || 'Algo deu errado.') + '</p><div class="bts"><a class="btn pri" href="editor-reel">Tentar de novo</a></div></div>';
+      return true;
+    }
+    if (s.etapa !== 'pronto') return false;
+    var tir = (s.tirou || []).length ? (s.tirou || []).map(function (w) { return '<span class="chip">' + esc(w) + '</span>'; }).join('') : '<span class="chip">nenhum</span>';
+    var top = (s.topicos || []).map(function (t, k) { return '<span class="chip">' + (k + 1) + ' · ' + esc(t.texto) + '</span>'; }).join('');
+    document.getElementById('saida').innerHTML =
+      '<div class="card"><div class="res"><div><video src="' + esc(s.video) + '" poster="' + esc(s.capa || '') + '" controls playsinline></video>' +
+      '<div class="bts"><a class="btn pri" href="' + esc(s.video) + '" download>⬇️ Baixar o vídeo</a>' + (s.capa ? '<a class="btn" href="' + esc(s.capa) + '" download>🖼️ Capa</a>' : '') + '</div></div>' +
+      '<div><h2>O que a IA fez</h2><p>⏱️ ' + esc(s.original) + ' s → <b>' + esc(s.duracao) + ' s</b> (' + esc(s.cortes) + ' trechos)</p>' +
+      '<p style="margin-top:8px"><b>Vícios cortados:</b><br>' + tir + '</p>' +
+      '<p style="margin-top:8px"><b>Frase do topo:</b> ' + esc(s.gancho) + '</p>' + (top ? '<p style="margin-top:8px"><b>Tópicos:</b><br>' + top + '</p>' : '') +
+      '<p style="margin-top:12px"><b>Legenda para o post</b> <button class="btn" id="cop" type="button">📋 Copiar</button></p><pre id="leg">' + esc(s.legenda_post || '') + '</pre>' +
+      '<p class="sub" style="margin-top:10px">O link do vídeo vale 7 dias: baixe e poste. Feito em ' + Math.round((s.segundos || 0) / 6) / 10 + ' min.</p></div></div></div>';
+    var cop = document.getElementById('cop');
+    if (cop) cop.onclick = function () { navigator.clipboard.writeText(document.getElementById('leg').textContent).then(function () { cop.textContent = '✅ Copiado'; }); };
+    return true;
+  }
+  function pergunta() {
+    fetch('editor-reel-status?job=' + encodeURIComponent(job)).then(function (r) { return r.json(); }).then(function (r) {
+      var s = r.status || r; if (!desenha(s || {})) setTimeout(pergunta, 3000);
+    }).catch(function () { setTimeout(pergunta, 5000); });
+  }
+  pergunta();
+})();
+</script></body></html>

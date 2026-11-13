@@ -1,0 +1,2018 @@
+{
+ "updatedAt": "2026-09-28T00:34:03.676Z",
+ "createdAt": "2026-09-21T00:15:34.806Z",
+ "id": "UiXrWzHkPX3ule4h",
+ "name": "Fase 3 — BRAND OS - Gerador Inteligente de Brandbook",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "id": "0a802032-9b10-4c8f-8e4f-9fea9e7e7169",
+   "name": "Note - Frontend",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -176,
+    -180
+   ],
+   "parameters": {
+    "content": "## 🌐 1. INTERFACE WEB & CAPTAÇÃO (BRAND OS)\n\nDisponibiliza a interface visual responsiva e interativa no navegador para o preenchimento e coleta estruturada dos dados de posicionamento da marca.\n\n* **frontend (`Webhook`)**:\n  Escuta requisições HTTP GET na rota `/brand-os` para abrir a aplicação web do formulário no navegador do cliente ou equipe.\n\n* **HTML (`HTML`)**:\n  Renderiza a interface completa em HTML5 e CSS moderno (Dark Mode com tipografia limpa), contendo todos os campos de briefing da marca, validações de formulário e script assíncrono para submissão do payload.\n\n* **Respond to Webhook (`Respond to Webhook`)**:\n  Devolve o código HTML compilado com status HTTP 200 e cabeçalho `Content-Type: text/html; charset=UTF-8`, garantindo renderização instantânea no navegador.",
+    "height": 360,
+    "width": 660,
+    "color": 6
+   }
+  },
+  {
+   "id": "f0b90fcb-47f5-4240-9ea3-059e39097681",
+   "name": "Note - Ingestão",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1392,
+    220
+   ],
+   "parameters": {
+    "content": "## 📥 2. INGESTÃO & ESTRUTURAÇÃO DE DADOS\n\nPonto de entrada oficial dos dados submetidos pelo formulário para higienização, estruturação e geração de metadados do projeto.\n\n* **Webhook - Receber Dados da Empresa (`Webhook`)**:\n  Escuta requisições HTTP POST na rota `/brandbook` com o payload completo contendo as respostas e diretrizes da marca da empresa.\n\n* **Normalizar Dados & ID Projeto (`Code`)**:\n  Higieniza strings, valida campos obrigatórios, padroniza o nome da empresa e gera o `project_id` único baseado no slug da empresa e timestamp (`slug-YYYYMMDD-HHMMSS`). Organiza o objeto `data` central para os 4 agentes especialistas.",
+    "height": 440,
+    "width": 460,
+    "color": 4
+   }
+  },
+  {
+   "id": "37eb1a92-b0b1-40b4-87d8-0dab5d7a4c24",
+   "name": "Note - Google Drive (POP 03)",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -912,
+    220
+   ],
+   "parameters": {
+    "content": "## 🗂️ 3. GESTÃO DE DIRETÓRIOS GOOGLE DRIVE (POP 03)\n\nEstruturação automatizada do ecossistema de pastas no Google Drive corporativo seguindo o padrão oficial do POP 03.\n\n* **Google Drive - Criar Pasta Raiz do Projeto1 (`Google Drive`)**:\n  Pesquisa no Google Drive corporativo (`My Drive`) pela pasta raiz da empresa nomeada como `📁 [Nome da Empresa]`.\n\n* **If (`If`)**:\n  Avalia o resultado da busca:\n  - **True**: A pasta raiz da empresa já existe no Drive; segue direto para a criação/verificação da subpasta de Brandbook.\n  - **False**: A pasta da empresa ainda não existe; direciona o fluxo para a criação da pasta mestre.\n\n* **Google Drive - Criar Subpastas POP  (`Google Drive`)**:\n  Cria a pasta raiz mestre `📁 [Nome da Empresa]` no Google Drive caso ela ainda não existisse.\n\n* **Google Drive - Criar Subpastas POP 03 (`Google Drive`)**:\n  Cria ou vincula a subpasta oficial `Brandbook` dentro da pasta raiz da empresa, onde todos os relatórios estratégicos serão persistidos.",
+    "height": 440,
+    "width": 940,
+    "color": 7
+   }
+  },
+  {
+   "id": "a015253f-bd8a-442d-b861-54acc39778df",
+   "name": "Note - Agente 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    50,
+    220
+   ],
+   "parameters": {
+    "content": "## 🧠 4. AGENTE 1: DIRETOR ESTRATÉGICO\n\nConstrói a fundação conceitual e estratégica da marca através de análise aprofundada de mercado e diferenciais competitivos.\n\n* **DIRETOR ESTRATÉGICO (`AI Agent`)**:\n  Atua como Diretor de Planejamento e Estratégia de Marca. Analisa os dados da empresa e constrói a base sólida da marca: contexto histórico, propósito central, missão, visão, valores e posicionamento competitivo de mercado.\n\n* **Parse Estrategista (`Code`)**:\n  Recebe o output do modelo, remove blocos de formatação (```json), faz o parse do JSON e valida a integridade de todas as variáveis estratégicas para os próximos estágios.",
+    "height": 440,
+    "width": 540,
+    "color": 7
+   }
+  },
+  {
+   "id": "f3b9aa8a-0500-427f-98f1-957fd2fed495",
+   "name": "Note - Agente 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    630,
+    220
+   ],
+   "parameters": {
+    "content": "## 👤 5. AGENTE 2: BRANDING & PERSONA\n\nEspecialista em comportamento do consumidor, definição de público e identidade arquetípica da marca.\n\n* **ESTRATEGISTA SÊNIOR DE BRANDING (`AI Agent`)**:\n  Define o perfil do cliente ideal (ICP), elabora a persona em profundidade (dores, desejos, objeções), constrói a Proposta Única de Valor (UVP) e mapeia os arquétipos dominantes e complementares da marca.\n\n* **Parse Branding & Persona (`Code`)**:\n  Processa, higieniza e valida o JSON estruturado gerado pelo estrategista de branding, preparando os insumos para a definição da identidade verbal.",
+    "height": 440,
+    "width": 540,
+    "color": 4
+   }
+  },
+  {
+   "id": "c37d3a44-b06c-4a33-870b-86d1ec374e14",
+   "name": "Note - Agente 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1200,
+    220
+   ],
+   "parameters": {
+    "content": "## ✍️ 6. AGENTE 3: IDENTIDADE VERBAL & COPYWRITING\n\nDesenvolve a voz institucional, diretrizes de redação publicitária e a mensagem central da marca.\n\n* **DIRETOR DE IDENTIDADE VERBAL E COPYWRITING (`AI Agent`)**:\n  Desenvolve a matriz de tom de voz (como a marca fala, o que evitar), guia de vocabulário e expressões permitidas/proibidas, mensagens-chave por pilar, narrativa de storytelling e o manifesto oficial da marca.\n\n* **Parse Copywriter (`Code`)**:\n  Executa a limpeza sintática e o parse do JSON de identidade verbal, repassando o contexto unificado para a equipe de identidade visual.",
+    "height": 440,
+    "width": 600,
+    "color": 5
+   }
+  },
+  {
+   "id": "c8a33c27-c9c1-4bbc-b798-606101fc7704",
+   "name": "Note - Agente 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1830,
+    220
+   ],
+   "parameters": {
+    "content": "## 🎨 7. AGENTE 4: IDENTIDADE VISUAL\n\nDefine todo o universo estético, conceitos de design e diretrizes técnicas de aplicação da marca.\n\n* **DIRETOR DE IDENTIDADE VISUAL (`AI Agent`)**:\n  Elabora o conceito visual da marca, diretrizes de direção de arte, paleta de cores institucional completa com códigos técnicos (HEX, RGB, CMYK), hierarquia tipográfica (títulos, corpo, suporte) e regras de uso e resguardo da logo.\n\n* **Parse Identidade Visual (`Code`)**:\n  Efetua o parse e validação dos dados de design visual, organizando os parâmetros técnicos para a fase de consolidação.",
+    "height": 440,
+    "width": 530,
+    "color": 2
+   }
+  },
+  {
+   "id": "14d0926c-80e3-457e-a54d-3f3f8043e61f",
+   "name": "Note - Consolidação",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2360,
+    220
+   ],
+   "parameters": {
+    "content": "## 📦 8. CONSOLIDAÇÃO DO BRANDBOOK\n\nReunião executiva de todos os 4 agentes especialistas e desmembramento em capítulos estruturados.\n\n* **Consolidar Brandbook & JSON de Arquivos (`Code`)**:\n  Agrega as saídas dos 4 agentes e gera uma coleção de 18+ arquivos Markdown independentes (`01_proposito.md`, `...`, `18_manifesto.md` e `README.md`), formatados e prontos para persistência em lote.",
+    "height": 440,
+    "width": 240,
+    "color": 3
+   }
+  },
+  {
+   "id": "dcfea3a9-d9e5-4415-babb-eafc038f6680",
+   "name": "Note - Loop",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2620,
+    220
+   ],
+   "parameters": {
+    "content": "## 🔄 9. CONTROLE DE ITERAÇÃO (LOOP)\n\nOrquestração e processamento sequencial de cada arquivo do Brandbook.\n\n* **Loop Over Items (`Split in Batches`)**:\n  Processa a fila de 18+ documentos um a um (batch size = 1):\n  - **Loop (cada item)**: Envia o arquivo para conversão binária e salvamento redundante no Google Drive e VPS.\n  - **Done (ao concluir todos)**: Direciona para a resposta final do webhook.",
+    "height": 440,
+    "width": 260,
+    "color": 1
+   }
+  },
+  {
+   "id": "cd0f37b1-3160-457a-90b8-47a20a875d2c",
+   "name": "Note - Persistência Dual",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2900,
+    220
+   ],
+   "parameters": {
+    "content": "## 🚀 10. PERSISTÊNCIA DUAL (DRIVE & VPS SSH)\n\nPersistência redundante de cada documento gerado: armazena os arquivos tanto no Google Drive corporativo quanto no servidor Linux da agência.\n\n* **Convert to File (`Convert to File`)**:\n  Transforma o conteúdo em texto puro Markdown (`content`) em payload binário com codificação UTF-8 pronto para transmissão e armazenamento em disco.\n\n* **Google Drive - Criar Subpastas POP 1 (`Google Drive`)**:\n  Salva e indexa o arquivo `.md` correspondente diretamente na subpasta oficial `Brandbook` no Google Drive corporativo do cliente.\n\n* **Upload a file (`SSH`)**:\n  Transfere via SFTP/SSH e grava o arquivo físico no servidor VPS em `/root/Brandbook/[Nome_Empresa]/[filename]` para uso imediato dos agentes locais.",
+    "height": 440,
+    "width": 540,
+    "color": 2
+   }
+  },
+  {
+   "id": "520a0ef9-c231-4ac7-a2f6-351d4900ed18",
+   "name": "Note - Resposta Final",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2900,
+    -70
+   ],
+   "parameters": {
+    "content": "## ✅ 11. RESPOSTA FINAL DO WEBHOOK\n\nFeedback estruturado de encerramento da execução e entrega dos metadados completos.\n\n* **Retornar Resposta do Webhook (`Code`)**:\n  Acionado após a conclusão bem-sucedida do loop. Consolida e retorna o JSON com status de sucesso (`true`), mensagem oficial de conclusão, `project_id`, nome da empresa, quantidade de arquivos e caminhos de armazenamento.",
+    "height": 260,
+    "width": 420,
+    "color": 6
+   }
+  },
+  {
+   "id": "15fab7ea-41a2-4eea-a0cf-54a89bc379cd",
+   "name": "Note - LLM",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    340,
+    1060
+   ],
+   "parameters": {
+    "content": "## 🤖 MODELO DE IA COMPARTILHADO (LLM)\n\nMotor de inteligência artificial de alta performance conectado aos 4 agentes especialistas de branding.\n\n* **OpenAI Chat Model - Claude (`ChatOpenAi`)**:\n  Conectado via gateway OmniRoute (compatível com a API OpenAI), operando com temperatura controlada e timeout estendido para raciocínio profundo, estruturação consistente de JSON e geração de diretrizes detalhadas sem cortes.",
+    "height": 340,
+    "width": 440,
+    "color": 5
+   }
+  },
+  {
+   "id": "6b9a8d29-7f0f-47e4-8814-6901cc49a64d",
+   "name": "Note - Referência Modelos",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    800,
+    1060
+   ],
+   "parameters": {
+    "content": "## 📌 REFERÊNCIA: MODELOS HOMOLOGADOS (GATEWAY)\n\nCatálogo de modelos suportados pelo gateway OmniRoute para uso nos agentes:\n\n* **Linha Gemini Flash (Rápido / Operacional)**:\n  - `antigravity/gemini-2.5-flash` *(Ativo no agente)*\n  - `antigravity/gemini-2.5-flash-lite`\n  - `antigravity/gemini-2.5-flash-thinking`\n  - `antigravity/gemini-3.1-flash-lite`\n  - `antigravity/gemini-3.5-flash-low / medium / high`\n\n* **Linha Gemini Pro / Claude (Raciocínio Avançado)**:\n  - `antigravity/gemini-2.5-pro`\n  - `antigravity/gemini-3-pro-preview`\n  - `antigravity/gemini-3.1-pro-low / high`\n  - `antigravity/claude-3-5-sonnet`",
+    "height": 340,
+    "width": 580,
+    "color": 7
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    2680,
+    460
+   ],
+   "id": "8a6c296e-7523-4f1b-85dd-f8705de8efd9",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {
+    "operation": "toText",
+    "sourceProperty": "content",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    2980,
+    460
+   ],
+   "id": "c02341b7-9033-49da-b8e1-bb547738f61b",
+   "name": "Convert to File"
+  },
+  {
+   "parameters": {
+    "resource": "file",
+    "path": "=/root/Brandbook/{{ $('Webhook - Receber Dados da Empresa').item.json.body.nome_empresa }}",
+    "options": {
+     "fileName": "={{ $('Loop Over Items').item.json.filename }}"
+    }
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    3240,
+    520
+   ],
+   "id": "775e3865-ed7d-438d-b213-7ff2b9a8b200",
+   "name": "Upload a file",
+   "credentials": {
+    "sshPassword": {
+     "id": "8dDUhhIDCo7tLJss",
+     "name": "157.173.207.22"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const items = $input.all();\nconst first = items[0] ? items[0].json : {};\nreturn [{\n  json: {\n    status: \"success\",\n    message: \"Brandbook gerado e salvo via SSH no VPS com sucesso pelo BRAND OS!\",\n    project_id: first.project_id,\n    nome_empresa: first.nome_empresa,\n    total_arquivos: items.length,\n    path_servidor: `/Brandbook/${first.project_id}/`\n  }\n}];"
+   },
+   "id": "99216f50-fcee-48df-bb2e-7c72cc0783ab",
+   "name": "Retornar Resposta do Webhook",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2980,
+    40
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const inputData = $input.first().json;\nconst data = inputData.data;\nconst strategist = inputData.strategistOutput || {};\nconst branding = inputData.brandingPersonaOutput || {};\nconst copyVerbal = inputData.copyVerbalOutput || {};\nconst visual = inputData.visualOutput || {};\n\nconst files = [];\n\nconst addFile = (filename, content, title) => {\n  const body = content || `# ${title}\\n\\nInformações em processamento para a marca ${data.nome_empresa}.`;\n  files.push({ filename, content: body });\n};\n\naddFile(\"brand-context.md\", strategist.brand_context || `# Brand Context - ${data.nome_empresa}\\n\\n${data.descricao_empresa}`, \"Brand Context\");\naddFile(\"01-empresa.md\", strategist.empresa_md, \"01 - A Empresa\");\naddFile(\"02-proposito.md\", strategist.proposito_md, \"02 - Propósito da Marca\");\naddFile(\"03-missao-visao-valores.md\", strategist.missao_visao_valores_md, \"03 - Missão, Visão e Valores\");\naddFile(\"04-posicionamento.md\", strategist.posicionamento_md, \"04 - Posicionamento no Mercado\");\naddFile(\"05-publico-alvo.md\", branding.publico_alvo_md, \"05 - Público-Alvo\");\naddFile(\"06-persona.md\", branding.persona_md, \"06 - Perfil do Cliente Ideal (Persona)\");\naddFile(\"07-proposta-de-valor.md\", branding.proposta_de_valor_md, \"07 - Proposta Única de Valor\");\naddFile(\"08-personalidade-da-marca.md\", branding.personalidade_md, \"08 - Personalidade da Marca\");\naddFile(\"09-tom-de-voz.md\", copyVerbal.tom_de_voz_md, \"09 - Tom de Voz e Comunicação\");\naddFile(\"10-arquetipos.md\", branding.arquetipos_md, \"10 - Arquétipos de Marca\");\naddFile(\"11-identidade-verbal.md\", copyVerbal.identidade_verbal_md, \"11 - Diretrizes de Identidade Verbal\");\naddFile(\"12-identidade-visual.md\", visual.identidade_visual_md, \"12 - Diretrizes de Identidade Visual\");\naddFile(\"13-paleta-de-cores.md\", visual.paleta_de_cores_md, \"13 - Paleta de Cores\");\naddFile(\"14-tipografia.md\", visual.tipografia_md, \"14 - Tipografia Institucional\");\naddFile(\"15-diretrizes-de-logo.md\", visual.diretrizes_de_logo_md, \"15 - Diretrizes de Uso da Logo\");\naddFile(\"16-mensagens-chave.md\", copyVerbal.mensagens_chave_md, \"16 - Mensagens-Chave\");\naddFile(\"17-storytelling.md\", copyVerbal.storytelling_md, \"17 - Narrativa e Storytelling\");\naddFile(\"18-manifesto.md\", copyVerbal.manifesto_md, \"18 - Manifesto da Marca\");\n\nconst readmeContent = `# Brandbook Oficial — ${data.nome_empresa}\\n\\nEste repositório contém toda a documentação estratégica.\\n\\n## Arquivo Principal\\n- brand-context.md`;\naddFile(\"README.md\", readmeContent, \"README\");\n\nreturn files.map(file => ({\n  json: {\n    project_id: data.project_id,\n    nome_empresa: data.nome_empresa,\n    filename: file.filename,\n    content: file.content,\n    file_path: `/Brandbook/${data.project_id}/${file.filename}`\n  }\n}));"
+   },
+   "id": "a6761a82-67f6-4ee4-ac7c-61f24c606dd1",
+   "name": "Consolidar Brandbook & JSON de Arquivos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2432,
+    384
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n\n  let content = response.output ?? response.text ?? response.content;\n\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n\n}\n\nconst prevNode = $(\"Parse Copywriter\").first().json;\n\nreturn [{\n  json: {\n    data: prevNode.data,\n    apiKey: prevNode.apiKey,\n    strategistOutput: prevNode.strategistOutput,\n    brandingPersonaOutput: prevNode.brandingPersonaOutput,\n    copyVerbalOutput: prevNode.copyVerbalOutput,\n    visualOutput: parsed\n  }\n}];"
+   },
+   "id": "e39ea811-4684-491d-b139-3a3cba4ea222",
+   "name": "Parse Identidade Visual",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2192,
+    384
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n\n  let content = response.output ?? response.text ?? response.content;\n\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n\n}\n\nconst prevNode = $(\"Parse Branding & Persona\").first().json;\n\nreturn [{\n  json: {\n    data: prevNode.data,\n    apiKey: prevNode.apiKey,\n    strategistOutput: prevNode.strategistOutput,\n    brandingPersonaOutput: prevNode.brandingPersonaOutput,\n    copyVerbalOutput: parsed\n  }\n}];"
+   },
+   "id": "25a5924b-85a4-4e11-b845-336cc223b42a",
+   "name": "Parse Copywriter",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1648,
+    384
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n\n  let content = response.output ?? response.text ?? response.content;\n\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n\n}\n\nconst prevNode = $(\"Parse Estrategista\").first().json;\n\nreturn [{\n  json: {\n    data: prevNode.data,\n    apiKey: prevNode.apiKey,\n    strategistOutput: prevNode.strategistOutput,\n    brandingPersonaOutput: parsed\n  }\n}];"
+   },
+   "id": "f878fe54-e5fb-426d-9f65-09ae6344ea8a",
+   "name": "Parse Branding & Persona",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    992,
+    384
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n  // AI Agent normalmente retorna o resultado em \"output\"\n  let content = response.output ?? response.text ?? response.content;\n\n  // Fallback caso venha no formato OpenAI\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n    // Remove possíveis blocos markdown\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n}\n\nconst prevData = $(\"Normalizar Dados & ID Projeto\").first().json.data;\nconst apiKey = $(\"Normalizar Dados & ID Projeto\").first().json.apiKey;\n\nreturn [{\n  json: {\n    data: prevData,\n    apiKey,\n    strategistOutput: parsed\n  }\n}];"
+   },
+   "id": "ceef9d82-9a29-4c71-84b0-90eae00f228f",
+   "name": "Parse Estrategista",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    416,
+    384
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "const raw = $input.first().json.body || $input.first().json;\n\nconst nomeEmpresa = raw.nome_empresa || raw.nome || \"Empresa Sem Nome\";\n\nconst rawSlug = nomeEmpresa\n  .toLowerCase()\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\")\n  .replace(/[^a-z0-9]+/g, \"-\")\n  .replace(/(^-|-$)/g, \"\");\n\nconst projectSlug = `${rawSlug}-${Date.now()}`;\n\nconst data = {\n  project_id: projectSlug,\n  nome_empresa: nomeEmpresa,\n  descricao_empresa: raw.descricao_empresa || \"\",\n  segmento: raw.segmento || \"Geral\",\n  produtos_servicos: raw.produtos_servicos || [],\n  publico_atual: raw.publico_atual || \"\",\n  publico_desejado: raw.publico_desejado || \"\",\n  diferenciais: raw.diferenciais || [],\n  historia_empresa: raw.historia_empresa || \"\",\n  missao_atual: raw.missao_atual || \"\",\n  visao_atual: raw.visao_atual || \"\",\n  valores_atuais: raw.valores_atuais || [],\n  concorrentes: raw.concorrentes || [],\n  objetivos_empresa: raw.objetivos_empresa || [],\n  problemas_resolvidos: raw.problemas_resolvidos || [],\n  personalidade_desejada: raw.personalidade_desejada || [],\n  cores_preferidas: raw.cores_preferidas || [],\n  restricoes: raw.restricoes || [],\n  site: raw.site || \"\",\n  redes_sociais: raw.redes_sociais || []\n};\n\nreturn [{\n  json: {\n    data,\n    apiKey: raw.openai_api_key || \"\"\n  }\n}];"
+   },
+   "id": "9bc0f94b-c065-4fb0-8f75-78b5cf16af75",
+   "name": "Normalizar Dados & ID Projeto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -1120,
+    400
+   ]
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "brand-os-generate",
+    "options": {}
+   },
+   "id": "4c6907f5-4793-42aa-8598-e9adbe361071",
+   "name": "Webhook - Receber Dados da Empresa",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -1344,
+    400
+   ],
+   "webhookId": "brand-os-trigger-id"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=Dados da Empresa: \" + {{JSON.stringify($('Normalizar Dados & ID Projeto').item.json.data) }}",
+    "options": {
+     "systemMessage": "Você é o DIRETOR ESTRATÉGICO do BRAND OS.\n\nSua função é construir a fundação estratégica completa da marca com profundidade de uma consultoria profissional de branding.\n\nVocê NÃO deve produzir conteúdo genérico, superficial ou frases vazias.\n\nUse exclusivamente as informações fornecidas sobre a empresa como base factual.\n\nQuando precisar fazer inferências estratégicas, deixe claro através do contexto e mantenha coerência com os dados fornecidos.\n\nIMPORTANTE:\n\nCada campo Markdown deve ser EXTENSO, PROFISSIONAL e PRONTO PARA SER SALVO COMO UM DOCUMENTO INDIVIDUAL.\n\nCada documento deve possuir:\n\n- Título principal\n- Introdução estratégica\n- Seções organizadas com headings Markdown\n- Análises aprofundadas\n- Explicações práticas\n- Diretrizes aplicáveis\n- Exemplos específicos para a empresa\n- Recomendações estratégicas\n\nNUNCA escreva:\n\n\"Informações em processamento\"\n\"Conteúdo a definir\"\n\"Não informado\"\n\"Sem dados suficientes\"\n\nSe algum dado estiver incompleto, faça uma inferência estratégica baseada no segmento, produtos, público e objetivos da empresa.\n\nA profundidade esperada é de uma consultoria de branding premium.\n\nRETORNE SOMENTE JSON VÁLIDO.\n\nEstrutura obrigatória:\n\n{\n  \"brand_context\": \"Markdown completo\",\n  \"empresa_md\": \"Markdown completo com no mínimo 800 palavras\",\n  \"proposito_md\": \"Markdown completo com no mínimo 600 palavras\",\n  \"missao_visao_valores_md\": \"Markdown completo com no mínimo 1000 palavras\",\n  \"posicionamento_md\": \"Markdown completo com no mínimo 1000 palavras\"\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    96,
+    384
+   ],
+   "id": "37d7fbc4-bcf2-409d-8053-84bbf670d771",
+   "name": "DIRETOR ESTRATÉGICO"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=Empresa: \" + {{ JSON.stringify($json.data) + \"\\nContexto Estratégico: \" + JSON.stringify($json.strategistOutput) }}",
+    "options": {
+     "systemMessage": "Você é um ESTRATEGISTA SÊNIOR DE BRANDING especializado em:\n\n- Público-alvo\n- ICP\n- Personas\n- Proposta de valor\n- Personalidade de marca\n- Arquétipos\n\nSua missão é transformar os dados da empresa em documentos estratégicos profundos e utilizáveis.\n\nNÃO produza conteúdo genérico.\n\nAnalise cuidadosamente:\n\n- Segmento\n- Produtos e serviços\n- Público atual\n- Público desejado\n- Problemas resolvidos\n- Diferenciais\n- Concorrentes\n- Objetivos\n- Personalidade desejada\n\nCada campo deve ser um documento Markdown completo.\n\nPara público-alvo, inclua:\n\n- Segmentação\n- ICP\n- Cargos\n- Perfil empresarial\n- Maturidade\n- Dores\n- Desejos\n- Objeções\n- Gatilhos de compra\n\nPara Persona, crie uma persona detalhada com:\n\n- Nome fictício\n- Cargo\n- Perfil\n- Rotina\n- Responsabilidades\n- Dores\n- Objetivos\n- Medos\n- Objeções\n- Critérios de decisão\n- Jornada de compra\n\nPara proposta de valor, explique:\n\n- Transformação entregue\n- Antes e depois\n- Diferenciais\n- Benefícios\n- Razões para acreditar\n\nPara personalidade, crie diretrizes práticas de comportamento da marca.\n\nPara arquétipos, defina:\n\n- Arquétipo principal\n- Arquétipo secundário\n- Justificativa\n- Comportamentos\n- Riscos\n- Aplicações práticas\n\nRETORNE SOMENTE JSON VÁLIDO:\n\n{\n  \"publico_alvo_md\": \"...\",\n  \"persona_md\": \"...\",\n  \"proposta_de_valor_md\": \"...\",\n  \"personalidade_md\": \"...\",\n  \"arquetipos_md\": \"...\"\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    672,
+    384
+   ],
+   "id": "00af6702-650b-406a-9790-050a90c2f5e7",
+   "name": "ESTRATEGISTA SÊNIOR DE BRANDING"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=\"Dados da Marca: \" + {{ JSON.stringify($json.data) + \"\\nContexto Estratégico: \" + JSON.stringify($json.strategistOutput) }}",
+    "options": {
+     "systemMessage": "Você é o DIRETOR DE IDENTIDADE VERBAL E COPYWRITING do BRAND OS.\n\nSua função é criar toda a arquitetura verbal da marca.\n\nProduza documentos profundos, específicos e aplicáveis.\n\nNÃO utilize textos genéricos de marketing.\n\nCada documento deve estar em Markdown completo.\n\nInclua exemplos reais adaptados à empresa.\n\nTOM DE VOZ deve incluir:\n\n- Características\n- Como a marca fala\n- Como não fala\n- Vocabulário recomendado\n- Vocabulário proibido\n- Exemplos antes/depois\n- Aplicação em canais\n\nIDENTIDADE VERBAL deve definir:\n\n- Linguagem\n- Ritmo\n- Vocabulário\n- Complexidade técnica\n- Personalidade verbal\n\nMENSAGENS-CHAVE deve criar:\n\n- Mensagem institucional\n- Promessa central\n- Pilares de comunicação\n- Mensagens por público\n- Headlines\n- Taglines\n- Provas\n\nSTORYTELLING deve criar:\n\n- Narrativa da origem\n- Problema do mercado\n- Transformação\n- Herói\n- Vilão\n- Jornada\n\nMANIFESTO deve ser emocional, forte, original e representar a filosofia da marca.\n\nRETORNE SOMENTE JSON VÁLIDO:\n\n{\n  \"tom_de_voz_md\": \"...\",\n  \"identidade_verbal_md\": \"...\",\n  \"mensagens_chave_md\": \"...\",\n  \"storytelling_md\": \"...\",\n  \"manifesto_md\": \"...\"\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1248,
+    384
+   ],
+   "id": "032ebe40-564f-4317-a4a8-44fe5c1eaac4",
+   "name": "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=Empresa: \" + {{JSON.stringify($json.data) + \"\\nContexto Estratégico: \" + JSON.stringify($json.strategistOutput) }}",
+    "options": {
+     "systemMessage": "Você é o DIRETOR DE IDENTIDADE VISUAL do BRAND OS.\n\nSua função é traduzir toda a estratégia da marca em diretrizes visuais profissionais.\n\nNÃO gere conteúdo superficial.\n\nCada campo deve ser um documento Markdown completo.\n\nIDENTIDADE VISUAL:\n\n- Conceito criativo\n- Território visual\n- Sensações\n- Elementos\n- Formas\n- Estilo\n- Direção de arte\n\nPALETA DE CORES:\n\nPara cada cor inclua:\n\n- Nome\n- HEX\n- RGB\n- Função\n- Significado\n- Onde utilizar\n\nTIPOGRAFIA:\n\n- Fonte primária\n- Fonte secundária\n- Alternativas\n- Hierarquia\n- Pesos\n- Uso em títulos\n- Uso em textos\n- Uso digital\n\nDIRETRIZES DE LOGO:\n\n- Área de proteção\n- Tamanho mínimo\n- Fundos permitidos\n- Fundos proibidos\n- Versões\n- Uso incorreto\n- Recomendações\n\nRETORNE SOMENTE JSON VÁLIDO:\n\n{\n  \"identidade_visual_md\": \"...\",\n  \"paleta_de_cores_md\": \"...\",\n  \"tipografia_md\": \"...\",\n  \"diretrizes_de_logo_md\": \"...\"\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1872,
+    384
+   ],
+   "id": "b474f216-e6b1-42f0-802e-3d454e0c6d3a",
+   "name": "DIRETOR DE IDENTIDADE VISUAL"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    304,
+    -48
+   ],
+   "typeVersion": 1,
+   "id": "cb708ef4-f8fa-455e-8d29-70eada52b576"
+  },
+  {
+   "parameters": {
+    "path": "form-brand-os-generate",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "frontend",
+   "type": "n8n-nodes-base.webhook",
+   "position": [
+    -128,
+    -48
+   ],
+   "webhookId": "c74e2c9f-6f9e-4ef8-b404-e356b15771e1",
+   "typeVersion": 1,
+   "id": "dc1e2854-cf0e-4f84-91bb-815e46d52315"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n  <title>Brand OS — Diagnóstico de Marca</title>\n\n  <style>\n    * {\n      box-sizing: border-box;\n      margin: 0;\n      padding: 0;\n    }\n\n    :root {\n      --bg: #07111f;\n      --card: #0d1b2d;\n      --card-2: #10243a;\n      --border: rgba(255,255,255,.09);\n      --text: #f4f7fb;\n      --muted: #91a4b8;\n      --primary: #00c8ff;\n      --primary-2: #0878ff;\n      --success: #22c55e;\n      --danger: #ef4444;\n    }\n\n    body {\n      font-family: Inter, Arial, Helvetica, sans-serif;\n      background:\n        radial-gradient(circle at 20% 0%, rgba(0,200,255,.12), transparent 30%),\n        radial-gradient(circle at 90% 20%, rgba(8,120,255,.12), transparent 30%),\n        var(--bg);\n      color: var(--text);\n      min-height: 100vh;\n    }\n\n    .container {\n      width: min(1100px, calc(100% - 32px));\n      margin: 0 auto;\n      padding: 40px 0 80px;\n    }\n\n    /* HEADER */\n\n    .header {\n      text-align: center;\n      margin-bottom: 35px;\n    }\n\n    .logo {\n      display: inline-flex;\n      align-items: center;\n      gap: 10px;\n      margin-bottom: 20px;\n      font-weight: 800;\n      font-size: 20px;\n    }\n\n    .logo-icon {\n      width: 38px;\n      height: 38px;\n      border-radius: 10px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      background: linear-gradient(135deg, var(--primary), var(--primary-2));\n      color: #00111d;\n      font-weight: 900;\n    }\n\n    .header h1 {\n      font-size: clamp(30px, 5vw, 52px);\n      line-height: 1.05;\n      margin-bottom: 15px;\n      letter-spacing: -1.5px;\n    }\n\n    .header h1 span {\n      background: linear-gradient(90deg, #fff, var(--primary));\n      -webkit-background-clip: text;\n      color: transparent;\n    }\n\n    .header p {\n      color: var(--muted);\n      max-width: 700px;\n      margin: auto;\n      line-height: 1.6;\n      font-size: 16px;\n    }\n\n    /* PROGRESS */\n\n    .progress-container {\n      margin-bottom: 30px;\n    }\n\n    .progress-top {\n      display: flex;\n      justify-content: space-between;\n      margin-bottom: 9px;\n      color: var(--muted);\n      font-size: 13px;\n    }\n\n    .progress {\n      height: 6px;\n      background: rgba(255,255,255,.08);\n      border-radius: 20px;\n      overflow: hidden;\n    }\n\n    .progress-bar {\n      height: 100%;\n      width: 20%;\n      background: linear-gradient(90deg, var(--primary-2), var(--primary));\n      transition: .3s ease;\n    }\n\n    /* FORM CARD */\n\n    .form-card {\n      background: rgba(13,27,45,.88);\n      border: 1px solid var(--border);\n      border-radius: 24px;\n      padding: clamp(20px, 4vw, 40px);\n      box-shadow: 0 30px 80px rgba(0,0,0,.25);\n      backdrop-filter: blur(15px);\n    }\n\n    .step {\n      display: none;\n      animation: fade .3s ease;\n    }\n\n    .step.active {\n      display: block;\n    }\n\n    @keyframes fade {\n      from {\n        opacity: 0;\n        transform: translateY(8px);\n      }\n      to {\n        opacity: 1;\n        transform: translateY(0);\n      }\n    }\n\n    .step-header {\n      margin-bottom: 30px;\n    }\n\n    .step-number {\n      color: var(--primary);\n      font-size: 13px;\n      font-weight: 700;\n      text-transform: uppercase;\n      letter-spacing: 1px;\n      margin-bottom: 8px;\n    }\n\n    .step-header h2 {\n      font-size: 27px;\n      margin-bottom: 8px;\n    }\n\n    .step-header p {\n      color: var(--muted);\n      line-height: 1.5;\n    }\n\n    /* GRID */\n\n    .grid {\n      display: grid;\n      grid-template-columns: repeat(2, 1fr);\n      gap: 20px;\n    }\n\n    .full {\n      grid-column: 1 / -1;\n    }\n\n    .field {\n      margin-bottom: 4px;\n    }\n\n    label {\n      display: block;\n      font-size: 14px;\n      font-weight: 600;\n      margin-bottom: 8px;\n    }\n\n    .required {\n      color: var(--primary);\n    }\n\n    input,\n    textarea,\n    select {\n      width: 100%;\n      background: rgba(255,255,255,.035);\n      border: 1px solid var(--border);\n      color: var(--text);\n      border-radius: 12px;\n      padding: 14px 15px;\n      outline: none;\n      font-size: 14px;\n      transition: .2s;\n      font-family: inherit;\n    }\n\n    input:focus,\n    textarea:focus,\n    select:focus {\n      border-color: var(--primary);\n      box-shadow: 0 0 0 3px rgba(0,200,255,.08);\n    }\n\n    textarea {\n      min-height: 115px;\n      resize: vertical;\n      line-height: 1.5;\n    }\n\n    input::placeholder,\n    textarea::placeholder {\n      color: #60758a;\n    }\n\n    /* TAG INPUT */\n\n    .tag-box {\n      background: rgba(255,255,255,.035);\n      border: 1px solid var(--border);\n      border-radius: 12px;\n      padding: 10px;\n    }\n\n    .tags {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 7px;\n      margin-bottom: 7px;\n    }\n\n    .tag {\n      display: flex;\n      align-items: center;\n      gap: 7px;\n      background: rgba(0,200,255,.1);\n      border: 1px solid rgba(0,200,255,.2);\n      color: #bcefff;\n      border-radius: 8px;\n      padding: 7px 10px;\n      font-size: 13px;\n    }\n\n    .tag button {\n      border: 0;\n      background: transparent;\n      color: #bcefff;\n      cursor: pointer;\n      font-size: 16px;\n      line-height: 1;\n    }\n\n    .tag-input {\n      border: 0;\n      background: transparent;\n      box-shadow: none !important;\n      padding: 7px;\n    }\n\n    .tag-input:focus {\n      border: 0;\n    }\n\n    .hint {\n      color: #6f8498;\n      font-size: 12px;\n      margin-top: 7px;\n    }\n\n    /* BUTTONS */\n\n    .actions {\n      display: flex;\n      justify-content: space-between;\n      gap: 15px;\n      margin-top: 35px;\n      padding-top: 25px;\n      border-top: 1px solid var(--border);\n    }\n\n    button {\n      font-family: inherit;\n    }\n\n    .btn {\n      border: 0;\n      border-radius: 12px;\n      padding: 14px 22px;\n      font-weight: 700;\n      cursor: pointer;\n      transition: .2s;\n    }\n\n    .btn-secondary {\n      background: rgba(255,255,255,.06);\n      color: var(--text);\n      border: 1px solid var(--border);\n    }\n\n    .btn-secondary:hover {\n      background: rgba(255,255,255,.1);\n    }\n\n    .btn-primary {\n      background: linear-gradient(135deg, var(--primary-2), var(--primary));\n      color: #00121d;\n      min-width: 150px;\n    }\n\n    .btn-primary:hover {\n      transform: translateY(-1px);\n      box-shadow: 0 10px 30px rgba(0,200,255,.18);\n    }\n\n    .btn-primary:disabled {\n      opacity: .6;\n      cursor: not-allowed;\n      transform: none;\n    }\n\n    /* SUCCESS */\n\n    .success {\n      display: none;\n      text-align: center;\n      padding: 60px 20px;\n    }\n\n    .success.active {\n      display: block;\n    }\n\n    .success-icon {\n      width: 75px;\n      height: 75px;\n      border-radius: 50%;\n      background: rgba(34,197,94,.12);\n      color: var(--success);\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 35px;\n      margin: 0 auto 25px;\n      border: 1px solid rgba(34,197,94,.25);\n    }\n\n    .success h2 {\n      font-size: 30px;\n      margin-bottom: 12px;\n    }\n\n    .success p {\n      color: var(--muted);\n      line-height: 1.6;\n      max-width: 550px;\n      margin: auto;\n    }\n\n    /* ERROR */\n\n    .error {\n      display: none;\n      background: rgba(239,68,68,.08);\n      border: 1px solid rgba(239,68,68,.25);\n      color: #ffb4b4;\n      border-radius: 12px;\n      padding: 14px;\n      margin-top: 20px;\n      font-size: 14px;\n      line-height: 1.5;\n    }\n\n    .error.active {\n      display: block;\n    }\n\n    /* FOOTER */\n\n    .footer {\n      text-align: center;\n      color: #53687b;\n      font-size: 12px;\n      margin-top: 25px;\n    }\n\n    /* MOBILE */\n\n    @media(max-width: 700px) {\n      .container {\n        width: min(100% - 20px, 1100px);\n        padding-top: 20px;\n      }\n\n      .grid {\n        grid-template-columns: 1fr;\n      }\n\n      .full {\n        grid-column: auto;\n      }\n\n      .form-card {\n        border-radius: 18px;\n        padding: 20px;\n      }\n\n      .actions {\n        flex-direction: column-reverse;\n      }\n\n      .btn {\n        width: 100%;\n      }\n\n      .header h1 {\n        font-size: 32px;\n      }\n    }\n  </style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n  <header class=\"header\">\n\n    <div class=\"logo\">\n      <div class=\"logo-icon\">B</div>\n      BRAND OS\n    </div>\n\n    <h1>\n      Construa o <span>DNA da sua marca</span>\n    </h1>\n\n    <p>\n      Responda algumas perguntas sobre sua empresa.\n      Essas informações serão utilizadas para construir\n      o Brand OS estratégico da sua marca com inteligência artificial.\n    </p>\n\n  </header>\n\n\n  <div class=\"progress-container\">\n\n    <div class=\"progress-top\">\n      <span id=\"progressText\">Etapa 1 de 5</span>\n      <span id=\"progressPercent\">20%</span>\n    </div>\n\n    <div class=\"progress\">\n      <div class=\"progress-bar\" id=\"progressBar\"></div>\n    </div>\n\n  </div>\n\n\n  <main class=\"form-card\">\n\n    <form id=\"brandForm\">\n\n      <!-- ========================================= -->\n      <!-- ETAPA 1 -->\n      <!-- ========================================= -->\n\n      <section class=\"step active\" data-step=\"1\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 01</div>\n          <h2>Sobre a empresa</h2>\n          <p>\n            Primeiro, vamos entender quem é sua empresa e o que ela faz.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n            <label>\n              Nome da empresa <span class=\"required\">*</span>\n            </label>\n\n            <input\n              type=\"text\"\n              id=\"nome_empresa\"\n              placeholder=\"Ex.: Inovare Inteligência Artificial\"\n              required\n            >\n          </div>\n\n\n          <div class=\"field full\">\n            <label>\n              Descrição da empresa <span class=\"required\">*</span>\n            </label>\n\n            <textarea\n              id=\"descricao_empresa\"\n              placeholder=\"Descreva brevemente sua empresa, o que ela faz e como atua no mercado.\"\n              required\n            ></textarea>\n          </div>\n\n\n          <div class=\"field full\">\n            <label>\n              Segmento <span class=\"required\">*</span>\n            </label>\n\n            <input\n              type=\"text\"\n              id=\"segmento\"\n              placeholder=\"Ex.: Tecnologia, Saúde, Educação, Marketing...\"\n              required\n            >\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>\n              Produtos e serviços\n            </label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"produtos_servicos_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"produtos_servicos_input\"\n                placeholder=\"Digite um produto/serviço e pressione Enter\"\n              >\n\n            </div>\n\n            <div class=\"hint\">\n              Você pode adicionar vários itens.\n            </div>\n\n          </div>\n\n        </div>\n\n        <div class=\"actions\">\n\n          <div></div>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 2 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"2\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 02</div>\n          <h2>Público e posicionamento</h2>\n          <p>\n            Entenda quem compra hoje e quem sua empresa deseja alcançar.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>Público atual</label>\n\n            <textarea\n              id=\"publico_atual\"\n              placeholder=\"Quem são seus clientes atualmente?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Público desejado</label>\n\n            <textarea\n              id=\"publico_desejado\"\n              placeholder=\"Quem você gostaria de atrair?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Principais diferenciais</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"diferenciais_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"diferenciais_input\"\n                placeholder=\"Digite um diferencial e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Principais concorrentes</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"concorrentes_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"concorrentes_input\"\n                placeholder=\"Digite um concorrente e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 3 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"3\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 03</div>\n          <h2>História e propósito</h2>\n          <p>\n            Agora vamos descobrir o que existe por trás da empresa.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>História da empresa</label>\n\n            <textarea\n              id=\"historia_empresa\"\n              placeholder=\"Como a empresa nasceu? Por que foi criada?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Missão atual</label>\n\n            <textarea\n              id=\"missao_atual\"\n              placeholder=\"Qual é o propósito atual da empresa?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Visão atual</label>\n\n            <textarea\n              id=\"visao_atual\"\n              placeholder=\"Onde a empresa deseja chegar?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Valores atuais</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"valores_atuais_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"valores_atuais_input\"\n                placeholder=\"Digite um valor e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 4 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"4\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 04</div>\n          <h2>Estratégia e futuro</h2>\n          <p>\n            Quais são os problemas, objetivos e características\n            que devem orientar o novo Brand OS?\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>Objetivos da empresa</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"objetivos_empresa_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"objetivos_empresa_input\"\n                placeholder=\"Digite um objetivo e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Problemas que sua empresa resolve</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"problemas_resolvidos_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"problemas_resolvidos_input\"\n                placeholder=\"Digite um problema e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Personalidade desejada da marca</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"personalidade_desejada_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"personalidade_desejada_input\"\n                placeholder=\"Ex.: Inovadora, sofisticada, humana...\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Cores preferidas</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"cores_preferidas_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"cores_preferidas_input\"\n                placeholder=\"Ex.: Azul escuro, dourado, grafite...\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Restrições / coisas que devemos evitar</label>\n\n            <textarea\n              id=\"restricoes\"\n              placeholder=\"Ex.: Não utilizar linguagem muito técnica, evitar determinadas cores...\"\n            ></textarea>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 5 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"5\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 05</div>\n          <h2>Presença digital</h2>\n          <p>\n            Por último, informe onde podemos encontrar sua marca.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>Site</label>\n\n            <input\n              type=\"url\"\n              id=\"site\"\n              placeholder=\"https://www.suaempresa.com.br\"\n            >\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Redes sociais</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"redes_sociais_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"redes_sociais_input\"\n                placeholder=\"Ex.: @suaempresa\"\n              >\n\n            </div>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary\"\n            id=\"submitBtn\"\n          >\n            Gerar meu Brand OS →\n          </button>\n\n        </div>\n\n        <div class=\"error\" id=\"errorBox\"></div>\n\n      </section>\n\n    </form>\n\n\n    <!-- ========================================= -->\n    <!-- SUCESSO -->\n    <!-- ========================================= -->\n\n    <div class=\"success\" id=\"success\">\n\n      <div class=\"success-icon\">\n        ✓\n      </div>\n\n      <h2>Informações enviadas!</h2>\n\n      <p>\n        Seu diagnóstico foi recebido com sucesso.\n        A inteligência artificial está processando as informações\n        para construir o Brand OS da sua empresa.\n      </p>\n\n    </div>\n\n  </main>\n\n\n  <div class=\"footer\">\n    BRAND OS · Inteligência Artificial para construção de marcas\n  </div>\n\n</div>\n\n\n<script>\n\n  /*\n   * ============================================\n   * CONFIGURAÇÃO\n   * ============================================\n   */\n\n  const WEBHOOK_URL =\n    \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/brand-os-generate\";\n\n\n  /*\n   * ============================================\n   * ESTADO\n   * ============================================\n   */\n\n  let currentStep = 1;\n\n  const totalSteps = 5;\n\n  const arrays = {\n\n    produtos_servicos: [],\n\n    diferenciais: [],\n\n    concorrentes: [],\n\n    valores_atuais: [],\n\n    objetivos_empresa: [],\n\n    problemas_resolvidos: [],\n\n    personalidade_desejada: [],\n\n    cores_preferidas: [],\n\n    redes_sociais: []\n\n  };\n\n\n  /*\n   * ============================================\n   * TAG SYSTEM\n   * ============================================\n   */\n\n  function setupTags(name) {\n\n    const input =\n      document.getElementById(name + \"_input\");\n\n    const container =\n      document.getElementById(name + \"_tags\");\n\n\n    input.addEventListener(\"keydown\", function(event) {\n\n      if (event.key === \"Enter\") {\n\n        event.preventDefault();\n\n        const value = input.value.trim();\n\n        if (!value) return;\n\n        arrays[name].push(value);\n\n        input.value = \"\";\n\n        renderTags(name);\n\n      }\n\n    });\n\n  }\n\n\n  function renderTags(name) {\n\n    const container =\n      document.getElementById(name + \"_tags\");\n\n    container.innerHTML = \"\";\n\n\n    arrays[name].forEach((value, index) => {\n\n      const tag =\n        document.createElement(\"div\");\n\n      tag.className = \"tag\";\n\n      tag.innerHTML = `\n        <span>${escapeHtml(value)}</span>\n\n        <button\n          type=\"button\"\n          onclick=\"removeTag('${name}', ${index})\"\n        >\n          ×\n        </button>\n      `;\n\n      container.appendChild(tag);\n\n    });\n\n  }\n\n\n  function removeTag(name, index) {\n\n    arrays[name].splice(index, 1);\n\n    renderTags(name);\n\n  }\n\n\n  function escapeHtml(value) {\n\n    return value\n      .replace(/&/g, \"&amp;\")\n      .replace(/</g, \"&lt;\")\n      .replace(/>/g, \"&gt;\")\n      .replace(/\"/g, \"&quot;\")\n      .replace(/'/g, \"&#039;\");\n\n  }\n\n\n  /*\n   * ============================================\n   * CONFIGURA TODOS OS CAMPOS DE TAG\n   * ============================================\n   */\n\n  Object.keys(arrays).forEach(setupTags);\n\n\n  /*\n   * ============================================\n   * NAVEGAÇÃO\n   * ============================================\n   */\n\n  function showStep(step) {\n\n    currentStep = step;\n\n    document\n      .querySelectorAll(\".step\")\n      .forEach(element => {\n\n        element.classList.remove(\"active\");\n\n      });\n\n\n    const active =\n      document.querySelector(\n        `.step[data-step=\"${step}\"]`\n      );\n\n    active.classList.add(\"active\");\n\n\n    const percent =\n      Math.round((step / totalSteps) * 100);\n\n\n    document.getElementById(\"progressBar\")\n      .style.width = percent + \"%\";\n\n\n    document.getElementById(\"progressText\")\n      .textContent =\n      `Etapa ${step} de ${totalSteps}`;\n\n\n    document.getElementById(\"progressPercent\")\n      .textContent =\n      percent + \"%\";\n\n\n    window.scrollTo({\n      top: 0,\n      behavior: \"smooth\"\n    });\n\n  }\n\n\n  document\n    .querySelectorAll(\".next\")\n    .forEach(button => {\n\n      button.addEventListener(\"click\", function() {\n\n        if (validateCurrentStep()) {\n\n          if (currentStep < totalSteps) {\n\n            showStep(currentStep + 1);\n\n          }\n\n        }\n\n      });\n\n    });\n\n\n  document\n    .querySelectorAll(\".prev\")\n    .forEach(button => {\n\n      button.addEventListener(\"click\", function() {\n\n        if (currentStep > 1) {\n\n          showStep(currentStep - 1);\n\n        }\n\n      });\n\n    });\n\n\n  /*\n   * ============================================\n   * VALIDAÇÃO\n   * ============================================\n   */\n\n  function validateCurrentStep() {\n\n    const activeStep =\n      document.querySelector(\n        `.step[data-step=\"${currentStep}\"]`\n      );\n\n    const requiredFields =\n      activeStep.querySelectorAll(\"[required]\");\n\n\n    for (const field of requiredFields) {\n\n      if (!field.value.trim()) {\n\n        field.focus();\n\n        field.reportValidity();\n\n        return false;\n\n      }\n\n    }\n\n    return true;\n\n  }\n\n\n  /*\n   * ============================================\n   * PEGAR VALOR\n   * ============================================\n   */\n\n  function value(id) {\n\n    const element =\n      document.getElementById(id);\n\n    return element\n      ? element.value.trim()\n      : \"\";\n\n  }\n\n\n  /*\n   * ============================================\n   * MONTA O JSON\n   * ============================================\n   */\n\n  function buildPayload() {\n\n    return {\n\n      nome_empresa:\n        value(\"nome_empresa\"),\n\n      descricao_empresa:\n        value(\"descricao_empresa\"),\n\n      segmento:\n        value(\"segmento\"),\n\n      produtos_servicos:\n        arrays.produtos_servicos,\n\n      publico_atual:\n        value(\"publico_atual\"),\n\n      publico_desejado:\n        value(\"publico_desejado\"),\n\n      diferenciais:\n        arrays.diferenciais,\n\n      historia_empresa:\n        value(\"historia_empresa\"),\n\n      missao_atual:\n        value(\"missao_atual\"),\n\n      visao_atual:\n        value(\"visao_atual\"),\n\n      valores_atuais:\n        arrays.valores_atuais,\n\n      concorrentes:\n        arrays.concorrentes,\n\n      objetivos_empresa:\n        arrays.objetivos_empresa,\n\n      problemas_resolvidos:\n        arrays.problemas_resolvidos,\n\n      personalidade_desejada:\n        arrays.personalidade_desejada,\n\n      cores_preferidas:\n        arrays.cores_preferidas,\n\n      restricoes:\n        value(\"restricoes\"),\n\n      site:\n        value(\"site\"),\n\n      redes_sociais:\n        arrays.redes_sociais\n\n    };\n\n  }\n\n\n  /*\n   * ============================================\n   * ENVIO PARA N8N\n   * ============================================\n   */\n\n  document\n    .getElementById(\"brandForm\")\n    .addEventListener(\"submit\", async function(event) {\n\n      event.preventDefault();\n\n\n      if (!validateCurrentStep()) {\n\n        return;\n\n      }\n\n\n      const submitButton =\n        document.getElementById(\"submitBtn\");\n\n      const errorBox =\n        document.getElementById(\"errorBox\");\n\n\n      errorBox.classList.remove(\"active\");\n\n      submitButton.disabled = true;\n\n      submitButton.textContent =\n        \"Enviando informações...\";\n\n\n      const payload =\n        buildPayload();\n\n\n      console.log(\n        \"Payload enviado:\",\n        payload\n      );\n\n\n      try {\n\n        const response =\n          await fetch(WEBHOOK_URL, {\n\n            method: \"POST\",\n\n            headers: {\n\n              \"Content-Type\":\n                \"application/json\"\n\n            },\n\n            body:\n              JSON.stringify(payload)\n\n          });\n\n\n        if (!response.ok) {\n\n          throw new Error(\n            `Webhook retornou HTTP ${response.status}`\n          );\n\n        }\n\n\n        /*\n         * Sucesso\n         */\n\n        document\n          .getElementById(\"brandForm\")\n          .style.display = \"none\";\n\n\n        document\n          .querySelector(\".progress-container\")\n          .style.display = \"none\";\n\n\n        document\n          .getElementById(\"success\")\n          .classList.add(\"active\");\n\n\n      } catch (error) {\n\n        console.error(error);\n\n\n        errorBox.innerHTML = `\n          <strong>Não foi possível enviar.</strong><br>\n          Verifique sua conexão ou a configuração CORS\n          do webhook do n8n.<br><br>\n          <small>${escapeHtml(error.message)}</small>\n        `;\n\n        errorBox.classList.add(\"active\");\n\n\n        submitButton.disabled = false;\n\n        submitButton.textContent =\n          \"Gerar meu Brand OS →\";\n\n      }\n\n    });\n\n\n</script>\n\n</body>\n</html>"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    64,
+    -48
+   ],
+   "id": "b812a6e3-6de7-4d26-83cd-1173dbd25fa2",
+   "name": "HTML"
+  },
+  {
+   "parameters": {
+    "model": "=antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 4096,
+     "temperature": 0.7,
+     "timeout": 300000
+    }
+   },
+   "id": "c1f8cc41-a782-4ffc-98f1-abaa4cf278f5",
+   "name": "OpenAI Chat Model - Claude",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    656,
+    1184
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "=Brandbook",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "id": "95c59e40-0bb6-4d3a-a097-d5383f2a98c0",
+   "name": "Google Drive - Criar Subpastas POP 03",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    -144,
+    384
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "fileFolder",
+    "queryString": "=📁 {{ $json.data.nome_empresa }}",
+    "filter": {
+     "driveId": {
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "mode": "list",
+      "value": "root",
+      "cachedResultName": "/ (Root folder)"
+     }
+    },
+    "options": {}
+   },
+   "id": "bf70b4ce-2755-46a0-81f7-84b610e57d24",
+   "name": "Google Drive - Criar Pasta Raiz do Projeto1",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    -864,
+    400
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "26031d04-2c0c-47f1-8993-4aa07fbf93f7",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    -608,
+    400
+   ],
+   "id": "7fbbab58-0b39-48e4-82ec-fbc7335b2066",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "resource": "folder",
+    "name": "=📁 {{ $('Normalizar Dados & ID Projeto').item.json.data.nome_empresa }}",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "root",
+     "cachedResultName": "/ (Root folder)"
+    },
+    "options": {}
+   },
+   "id": "d8d04a65-c26f-4853-8051-2169a6c83a55",
+   "name": "Google Drive - Criar Subpastas POP ",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    -368,
+    528
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "name": "={{ $('Loop Over Items').item.json.filename }}",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "={{ $('Google Drive - Criar Subpastas POP 03').first().json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "id": "f392c2e3-5590-4e4f-982e-ebd809cb7391",
+   "name": "Google Drive - Criar Subpastas POP 1",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    3240,
+    340
+   ],
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "6IQZuSnYX5sxamnr",
+     "name": "emersonjosiel2027@gmail.com"
+    }
+   },
+   "onError": "continueRegularOutput"
+  }
+ ],
+ "connections": {
+  "Loop Over Items": {
+   "main": [
+    [
+     {
+      "node": "Retornar Resposta do Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Convert to File",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Convert to File": {
+   "main": [
+    [
+     {
+      "node": "Upload a file",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Google Drive - Criar Subpastas POP 1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Upload a file": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Consolidar Brandbook & JSON de Arquivos": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Identidade Visual": {
+   "main": [
+    [
+     {
+      "node": "Consolidar Brandbook & JSON de Arquivos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Copywriter": {
+   "main": [
+    [
+     {
+      "node": "DIRETOR DE IDENTIDADE VISUAL",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Branding & Persona": {
+   "main": [
+    [
+     {
+      "node": "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Estrategista": {
+   "main": [
+    [
+     {
+      "node": "ESTRATEGISTA SÊNIOR DE BRANDING",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Normalizar Dados & ID Projeto": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Pasta Raiz do Projeto1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Webhook - Receber Dados da Empresa": {
+   "main": [
+    [
+     {
+      "node": "Normalizar Dados & ID Projeto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "DIRETOR ESTRATÉGICO": {
+   "main": [
+    [
+     {
+      "node": "Parse Estrategista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "ESTRATEGISTA SÊNIOR DE BRANDING": {
+   "main": [
+    [
+     {
+      "node": "Parse Branding & Persona",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING": {
+   "main": [
+    [
+     {
+      "node": "Parse Copywriter",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "DIRETOR DE IDENTIDADE VISUAL": {
+   "main": [
+    [
+     {
+      "node": "Parse Identidade Visual",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "frontend": {
+   "main": [
+    [
+     {
+      "node": "HTML",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI Chat Model - Claude": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "DIRETOR ESTRATÉGICO",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "ESTRATEGISTA SÊNIOR DE BRANDING",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "DIRETOR DE IDENTIDADE VISUAL",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Pasta Raiz do Projeto1": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP 03",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP ",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Subpastas POP ": {
+   "main": [
+    [
+     {
+      "node": "Google Drive - Criar Subpastas POP 03",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Drive - Criar Subpastas POP 03": {
+   "main": [
+    [
+     {
+      "node": "DIRETOR ESTRATÉGICO",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "timeSavedMode": "fixed",
+  "callerPolicy": "workflowsFromSameOwner",
+  "availableInMCP": true
+ },
+ "staticData": null,
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "pinData": {
+  "Webhook - Receber Dados da Empresa": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "content-length": "1109",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/json",
+      "origin": "null",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "45.71.241.182",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "45.71.241.182"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "nome_empresa": "Inovare Inteligência Artificial",
+      "descricao_empresa": "Empresa especializada em automação de processos, integração de agentes de IA e automação com n8n para médias e grandes empresas.",
+      "segmento": "Tecnologia e Automação de Processos",
+      "produtos_servicos": [],
+      "publico_atual": "Empresas em busca de eficiência operacional e redução de custos",
+      "publico_desejado": "CEOs, CTOs e Diretores de Operações de empresas de tecnologia e serviços",
+      "diferenciais": [],
+      "historia_empresa": "Fundada para transformar como empresas interagem com automação e IA generativa.",
+      "missao_atual": "Democratizar e acelerar a adoção de IA estratégica nas empresas.",
+      "visao_atual": "Ser referência nacional em engenharia de automação inteligente e sistemas operacionais de IA.",
+      "valores_atuais": [],
+      "concorrentes": [],
+      "objetivos_empresa": [],
+      "problemas_resolvidos": [],
+      "personalidade_desejada": [],
+      "cores_preferidas": [],
+      "restricoes": "\"Evitar jargões excessivamente acadêmicos\",\n        \"Não prometer automação sem governança\"",
+      "site": "https://inovareinteligenciaartificial.com",
+      "redes_sociais": []
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/brand-os-generate",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "versionId": "53299fa1-ff0f-4ef8-9b5d-3d5585914157",
+ "activeVersionId": "53299fa1-ff0f-4ef8-9b5d-3d5585914157",
+ "versionCounter": 51,
+ "triggerCount": 2,
+ "shared": [
+  {
+   "updatedAt": "2026-09-21T00:15:34.806Z",
+   "createdAt": "2026-09-21T00:15:34.806Z",
+   "role": "workflow:owner",
+   "workflowId": "UiXrWzHkPX3ule4h",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-09-28T00:34:03.684Z",
+  "createdAt": "2026-09-28T00:34:03.684Z",
+  "versionId": "53299fa1-ff0f-4ef8-9b5d-3d5585914157",
+  "workflowId": "UiXrWzHkPX3ule4h",
+  "nodes": [
+   {
+    "id": "0a802032-9b10-4c8f-8e4f-9fea9e7e7169",
+    "name": "Note - Frontend",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -176,
+     -180
+    ],
+    "parameters": {
+     "content": "## 🌐 1. INTERFACE WEB & CAPTAÇÃO (BRAND OS)\n\nDisponibiliza a interface visual responsiva e interativa no navegador para o preenchimento e coleta estruturada dos dados de posicionamento da marca.\n\n* **frontend (`Webhook`)**:\n  Escuta requisições HTTP GET na rota `/brand-os` para abrir a aplicação web do formulário no navegador do cliente ou equipe.\n\n* **HTML (`HTML`)**:\n  Renderiza a interface completa em HTML5 e CSS moderno (Dark Mode com tipografia limpa), contendo todos os campos de briefing da marca, validações de formulário e script assíncrono para submissão do payload.\n\n* **Respond to Webhook (`Respond to Webhook`)**:\n  Devolve o código HTML compilado com status HTTP 200 e cabeçalho `Content-Type: text/html; charset=UTF-8`, garantindo renderização instantânea no navegador.",
+     "height": 360,
+     "width": 660,
+     "color": 6
+    }
+   },
+   {
+    "id": "f0b90fcb-47f5-4240-9ea3-059e39097681",
+    "name": "Note - Ingestão",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1392,
+     220
+    ],
+    "parameters": {
+     "content": "## 📥 2. INGESTÃO & ESTRUTURAÇÃO DE DADOS\n\nPonto de entrada oficial dos dados submetidos pelo formulário para higienização, estruturação e geração de metadados do projeto.\n\n* **Webhook - Receber Dados da Empresa (`Webhook`)**:\n  Escuta requisições HTTP POST na rota `/brandbook` com o payload completo contendo as respostas e diretrizes da marca da empresa.\n\n* **Normalizar Dados & ID Projeto (`Code`)**:\n  Higieniza strings, valida campos obrigatórios, padroniza o nome da empresa e gera o `project_id` único baseado no slug da empresa e timestamp (`slug-YYYYMMDD-HHMMSS`). Organiza o objeto `data` central para os 4 agentes especialistas.",
+     "height": 440,
+     "width": 460,
+     "color": 4
+    }
+   },
+   {
+    "id": "37eb1a92-b0b1-40b4-87d8-0dab5d7a4c24",
+    "name": "Note - Google Drive (POP 03)",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -912,
+     220
+    ],
+    "parameters": {
+     "content": "## 🗂️ 3. GESTÃO DE DIRETÓRIOS GOOGLE DRIVE (POP 03)\n\nEstruturação automatizada do ecossistema de pastas no Google Drive corporativo seguindo o padrão oficial do POP 03.\n\n* **Google Drive - Criar Pasta Raiz do Projeto1 (`Google Drive`)**:\n  Pesquisa no Google Drive corporativo (`My Drive`) pela pasta raiz da empresa nomeada como `📁 [Nome da Empresa]`.\n\n* **If (`If`)**:\n  Avalia o resultado da busca:\n  - **True**: A pasta raiz da empresa já existe no Drive; segue direto para a criação/verificação da subpasta de Brandbook.\n  - **False**: A pasta da empresa ainda não existe; direciona o fluxo para a criação da pasta mestre.\n\n* **Google Drive - Criar Subpastas POP  (`Google Drive`)**:\n  Cria a pasta raiz mestre `📁 [Nome da Empresa]` no Google Drive caso ela ainda não existisse.\n\n* **Google Drive - Criar Subpastas POP 03 (`Google Drive`)**:\n  Cria ou vincula a subpasta oficial `Brandbook` dentro da pasta raiz da empresa, onde todos os relatórios estratégicos serão persistidos.",
+     "height": 440,
+     "width": 940,
+     "color": 7
+    }
+   },
+   {
+    "id": "a015253f-bd8a-442d-b861-54acc39778df",
+    "name": "Note - Agente 1",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     50,
+     220
+    ],
+    "parameters": {
+     "content": "## 🧠 4. AGENTE 1: DIRETOR ESTRATÉGICO\n\nConstrói a fundação conceitual e estratégica da marca através de análise aprofundada de mercado e diferenciais competitivos.\n\n* **DIRETOR ESTRATÉGICO (`AI Agent`)**:\n  Atua como Diretor de Planejamento e Estratégia de Marca. Analisa os dados da empresa e constrói a base sólida da marca: contexto histórico, propósito central, missão, visão, valores e posicionamento competitivo de mercado.\n\n* **Parse Estrategista (`Code`)**:\n  Recebe o output do modelo, remove blocos de formatação (```json), faz o parse do JSON e valida a integridade de todas as variáveis estratégicas para os próximos estágios.",
+     "height": 440,
+     "width": 540,
+     "color": 7
+    }
+   },
+   {
+    "id": "f3b9aa8a-0500-427f-98f1-957fd2fed495",
+    "name": "Note - Agente 2",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     630,
+     220
+    ],
+    "parameters": {
+     "content": "## 👤 5. AGENTE 2: BRANDING & PERSONA\n\nEspecialista em comportamento do consumidor, definição de público e identidade arquetípica da marca.\n\n* **ESTRATEGISTA SÊNIOR DE BRANDING (`AI Agent`)**:\n  Define o perfil do cliente ideal (ICP), elabora a persona em profundidade (dores, desejos, objeções), constrói a Proposta Única de Valor (UVP) e mapeia os arquétipos dominantes e complementares da marca.\n\n* **Parse Branding & Persona (`Code`)**:\n  Processa, higieniza e valida o JSON estruturado gerado pelo estrategista de branding, preparando os insumos para a definição da identidade verbal.",
+     "height": 440,
+     "width": 540,
+     "color": 4
+    }
+   },
+   {
+    "id": "c37d3a44-b06c-4a33-870b-86d1ec374e14",
+    "name": "Note - Agente 3",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1200,
+     220
+    ],
+    "parameters": {
+     "content": "## ✍️ 6. AGENTE 3: IDENTIDADE VERBAL & COPYWRITING\n\nDesenvolve a voz institucional, diretrizes de redação publicitária e a mensagem central da marca.\n\n* **DIRETOR DE IDENTIDADE VERBAL E COPYWRITING (`AI Agent`)**:\n  Desenvolve a matriz de tom de voz (como a marca fala, o que evitar), guia de vocabulário e expressões permitidas/proibidas, mensagens-chave por pilar, narrativa de storytelling e o manifesto oficial da marca.\n\n* **Parse Copywriter (`Code`)**:\n  Executa a limpeza sintática e o parse do JSON de identidade verbal, repassando o contexto unificado para a equipe de identidade visual.",
+     "height": 440,
+     "width": 600,
+     "color": 5
+    }
+   },
+   {
+    "id": "c8a33c27-c9c1-4bbc-b798-606101fc7704",
+    "name": "Note - Agente 4",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     1830,
+     220
+    ],
+    "parameters": {
+     "content": "## 🎨 7. AGENTE 4: IDENTIDADE VISUAL\n\nDefine todo o universo estético, conceitos de design e diretrizes técnicas de aplicação da marca.\n\n* **DIRETOR DE IDENTIDADE VISUAL (`AI Agent`)**:\n  Elabora o conceito visual da marca, diretrizes de direção de arte, paleta de cores institucional completa com códigos técnicos (HEX, RGB, CMYK), hierarquia tipográfica (títulos, corpo, suporte) e regras de uso e resguardo da logo.\n\n* **Parse Identidade Visual (`Code`)**:\n  Efetua o parse e validação dos dados de design visual, organizando os parâmetros técnicos para a fase de consolidação.",
+     "height": 440,
+     "width": 530,
+     "color": 2
+    }
+   },
+   {
+    "id": "14d0926c-80e3-457e-a54d-3f3f8043e61f",
+    "name": "Note - Consolidação",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2360,
+     220
+    ],
+    "parameters": {
+     "content": "## 📦 8. CONSOLIDAÇÃO DO BRANDBOOK\n\nReunião executiva de todos os 4 agentes especialistas e desmembramento em capítulos estruturados.\n\n* **Consolidar Brandbook & JSON de Arquivos (`Code`)**:\n  Agrega as saídas dos 4 agentes e gera uma coleção de 18+ arquivos Markdown independentes (`01_proposito.md`, `...`, `18_manifesto.md` e `README.md`), formatados e prontos para persistência em lote.",
+     "height": 440,
+     "width": 240,
+     "color": 3
+    }
+   },
+   {
+    "id": "dcfea3a9-d9e5-4415-babb-eafc038f6680",
+    "name": "Note - Loop",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2620,
+     220
+    ],
+    "parameters": {
+     "content": "## 🔄 9. CONTROLE DE ITERAÇÃO (LOOP)\n\nOrquestração e processamento sequencial de cada arquivo do Brandbook.\n\n* **Loop Over Items (`Split in Batches`)**:\n  Processa a fila de 18+ documentos um a um (batch size = 1):\n  - **Loop (cada item)**: Envia o arquivo para conversão binária e salvamento redundante no Google Drive e VPS.\n  - **Done (ao concluir todos)**: Direciona para a resposta final do webhook.",
+     "height": 440,
+     "width": 260,
+     "color": 1
+    }
+   },
+   {
+    "id": "cd0f37b1-3160-457a-90b8-47a20a875d2c",
+    "name": "Note - Persistência Dual",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2900,
+     220
+    ],
+    "parameters": {
+     "content": "## 🚀 10. PERSISTÊNCIA DUAL (DRIVE & VPS SSH)\n\nPersistência redundante de cada documento gerado: armazena os arquivos tanto no Google Drive corporativo quanto no servidor Linux da agência.\n\n* **Convert to File (`Convert to File`)**:\n  Transforma o conteúdo em texto puro Markdown (`content`) em payload binário com codificação UTF-8 pronto para transmissão e armazenamento em disco.\n\n* **Google Drive - Criar Subpastas POP 1 (`Google Drive`)**:\n  Salva e indexa o arquivo `.md` correspondente diretamente na subpasta oficial `Brandbook` no Google Drive corporativo do cliente.\n\n* **Upload a file (`SSH`)**:\n  Transfere via SFTP/SSH e grava o arquivo físico no servidor VPS em `/root/Brandbook/[Nome_Empresa]/[filename]` para uso imediato dos agentes locais.",
+     "height": 440,
+     "width": 540,
+     "color": 2
+    }
+   },
+   {
+    "id": "520a0ef9-c231-4ac7-a2f6-351d4900ed18",
+    "name": "Note - Resposta Final",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2900,
+     -70
+    ],
+    "parameters": {
+     "content": "## ✅ 11. RESPOSTA FINAL DO WEBHOOK\n\nFeedback estruturado de encerramento da execução e entrega dos metadados completos.\n\n* **Retornar Resposta do Webhook (`Code`)**:\n  Acionado após a conclusão bem-sucedida do loop. Consolida e retorna o JSON com status de sucesso (`true`), mensagem oficial de conclusão, `project_id`, nome da empresa, quantidade de arquivos e caminhos de armazenamento.",
+     "height": 260,
+     "width": 420,
+     "color": 6
+    }
+   },
+   {
+    "id": "15fab7ea-41a2-4eea-a0cf-54a89bc379cd",
+    "name": "Note - LLM",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     340,
+     1060
+    ],
+    "parameters": {
+     "content": "## 🤖 MODELO DE IA COMPARTILHADO (LLM)\n\nMotor de inteligência artificial de alta performance conectado aos 4 agentes especialistas de branding.\n\n* **OpenAI Chat Model - Claude (`ChatOpenAi`)**:\n  Conectado via gateway OmniRoute (compatível com a API OpenAI), operando com temperatura controlada e timeout estendido para raciocínio profundo, estruturação consistente de JSON e geração de diretrizes detalhadas sem cortes.",
+     "height": 340,
+     "width": 440,
+     "color": 5
+    }
+   },
+   {
+    "id": "6b9a8d29-7f0f-47e4-8814-6901cc49a64d",
+    "name": "Note - Referência Modelos",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     800,
+     1060
+    ],
+    "parameters": {
+     "content": "## 📌 REFERÊNCIA: MODELOS HOMOLOGADOS (GATEWAY)\n\nCatálogo de modelos suportados pelo gateway OmniRoute para uso nos agentes:\n\n* **Linha Gemini Flash (Rápido / Operacional)**:\n  - `antigravity/gemini-2.5-flash` *(Ativo no agente)*\n  - `antigravity/gemini-2.5-flash-lite`\n  - `antigravity/gemini-2.5-flash-thinking`\n  - `antigravity/gemini-3.1-flash-lite`\n  - `antigravity/gemini-3.5-flash-low / medium / high`\n\n* **Linha Gemini Pro / Claude (Raciocínio Avançado)**:\n  - `antigravity/gemini-2.5-pro`\n  - `antigravity/gemini-3-pro-preview`\n  - `antigravity/gemini-3.1-pro-low / high`\n  - `antigravity/claude-3-5-sonnet`",
+     "height": 340,
+     "width": 580,
+     "color": 7
+    }
+   },
+   {
+    "parameters": {
+     "options": {}
+    },
+    "type": "n8n-nodes-base.splitInBatches",
+    "typeVersion": 3,
+    "position": [
+     2680,
+     460
+    ],
+    "id": "8a6c296e-7523-4f1b-85dd-f8705de8efd9",
+    "name": "Loop Over Items"
+   },
+   {
+    "parameters": {
+     "operation": "toText",
+     "sourceProperty": "content",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.convertToFile",
+    "typeVersion": 1.1,
+    "position": [
+     2980,
+     460
+    ],
+    "id": "c02341b7-9033-49da-b8e1-bb547738f61b",
+    "name": "Convert to File"
+   },
+   {
+    "parameters": {
+     "resource": "file",
+     "path": "=/root/Brandbook/{{ $('Webhook - Receber Dados da Empresa').item.json.body.nome_empresa }}",
+     "options": {
+      "fileName": "={{ $('Loop Over Items').item.json.filename }}"
+     }
+    },
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     3240,
+     520
+    ],
+    "id": "775e3865-ed7d-438d-b213-7ff2b9a8b200",
+    "name": "Upload a file",
+    "credentials": {
+     "sshPassword": {
+      "id": "8dDUhhIDCo7tLJss",
+      "name": "157.173.207.22"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const items = $input.all();\nconst first = items[0] ? items[0].json : {};\nreturn [{\n  json: {\n    status: \"success\",\n    message: \"Brandbook gerado e salvo via SSH no VPS com sucesso pelo BRAND OS!\",\n    project_id: first.project_id,\n    nome_empresa: first.nome_empresa,\n    total_arquivos: items.length,\n    path_servidor: `/Brandbook/${first.project_id}/`\n  }\n}];"
+    },
+    "id": "99216f50-fcee-48df-bb2e-7c72cc0783ab",
+    "name": "Retornar Resposta do Webhook",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2980,
+     40
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const inputData = $input.first().json;\nconst data = inputData.data;\nconst strategist = inputData.strategistOutput || {};\nconst branding = inputData.brandingPersonaOutput || {};\nconst copyVerbal = inputData.copyVerbalOutput || {};\nconst visual = inputData.visualOutput || {};\n\nconst files = [];\n\nconst addFile = (filename, content, title) => {\n  const body = content || `# ${title}\\n\\nInformações em processamento para a marca ${data.nome_empresa}.`;\n  files.push({ filename, content: body });\n};\n\naddFile(\"brand-context.md\", strategist.brand_context || `# Brand Context - ${data.nome_empresa}\\n\\n${data.descricao_empresa}`, \"Brand Context\");\naddFile(\"01-empresa.md\", strategist.empresa_md, \"01 - A Empresa\");\naddFile(\"02-proposito.md\", strategist.proposito_md, \"02 - Propósito da Marca\");\naddFile(\"03-missao-visao-valores.md\", strategist.missao_visao_valores_md, \"03 - Missão, Visão e Valores\");\naddFile(\"04-posicionamento.md\", strategist.posicionamento_md, \"04 - Posicionamento no Mercado\");\naddFile(\"05-publico-alvo.md\", branding.publico_alvo_md, \"05 - Público-Alvo\");\naddFile(\"06-persona.md\", branding.persona_md, \"06 - Perfil do Cliente Ideal (Persona)\");\naddFile(\"07-proposta-de-valor.md\", branding.proposta_de_valor_md, \"07 - Proposta Única de Valor\");\naddFile(\"08-personalidade-da-marca.md\", branding.personalidade_md, \"08 - Personalidade da Marca\");\naddFile(\"09-tom-de-voz.md\", copyVerbal.tom_de_voz_md, \"09 - Tom de Voz e Comunicação\");\naddFile(\"10-arquetipos.md\", branding.arquetipos_md, \"10 - Arquétipos de Marca\");\naddFile(\"11-identidade-verbal.md\", copyVerbal.identidade_verbal_md, \"11 - Diretrizes de Identidade Verbal\");\naddFile(\"12-identidade-visual.md\", visual.identidade_visual_md, \"12 - Diretrizes de Identidade Visual\");\naddFile(\"13-paleta-de-cores.md\", visual.paleta_de_cores_md, \"13 - Paleta de Cores\");\naddFile(\"14-tipografia.md\", visual.tipografia_md, \"14 - Tipografia Institucional\");\naddFile(\"15-diretrizes-de-logo.md\", visual.diretrizes_de_logo_md, \"15 - Diretrizes de Uso da Logo\");\naddFile(\"16-mensagens-chave.md\", copyVerbal.mensagens_chave_md, \"16 - Mensagens-Chave\");\naddFile(\"17-storytelling.md\", copyVerbal.storytelling_md, \"17 - Narrativa e Storytelling\");\naddFile(\"18-manifesto.md\", copyVerbal.manifesto_md, \"18 - Manifesto da Marca\");\n\nconst readmeContent = `# Brandbook Oficial — ${data.nome_empresa}\\n\\nEste repositório contém toda a documentação estratégica.\\n\\n## Arquivo Principal\\n- brand-context.md`;\naddFile(\"README.md\", readmeContent, \"README\");\n\nreturn files.map(file => ({\n  json: {\n    project_id: data.project_id,\n    nome_empresa: data.nome_empresa,\n    filename: file.filename,\n    content: file.content,\n    file_path: `/Brandbook/${data.project_id}/${file.filename}`\n  }\n}));"
+    },
+    "id": "a6761a82-67f6-4ee4-ac7c-61f24c606dd1",
+    "name": "Consolidar Brandbook & JSON de Arquivos",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2432,
+     384
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n\n  let content = response.output ?? response.text ?? response.content;\n\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n\n}\n\nconst prevNode = $(\"Parse Copywriter\").first().json;\n\nreturn [{\n  json: {\n    data: prevNode.data,\n    apiKey: prevNode.apiKey,\n    strategistOutput: prevNode.strategistOutput,\n    brandingPersonaOutput: prevNode.brandingPersonaOutput,\n    copyVerbalOutput: prevNode.copyVerbalOutput,\n    visualOutput: parsed\n  }\n}];"
+    },
+    "id": "e39ea811-4684-491d-b139-3a3cba4ea222",
+    "name": "Parse Identidade Visual",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2192,
+     384
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n\n  let content = response.output ?? response.text ?? response.content;\n\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n\n}\n\nconst prevNode = $(\"Parse Branding & Persona\").first().json;\n\nreturn [{\n  json: {\n    data: prevNode.data,\n    apiKey: prevNode.apiKey,\n    strategistOutput: prevNode.strategistOutput,\n    brandingPersonaOutput: prevNode.brandingPersonaOutput,\n    copyVerbalOutput: parsed\n  }\n}];"
+    },
+    "id": "25a5924b-85a4-4e11-b845-336cc223b42a",
+    "name": "Parse Copywriter",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1648,
+     384
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n\n  let content = response.output ?? response.text ?? response.content;\n\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n\n}\n\nconst prevNode = $(\"Parse Estrategista\").first().json;\n\nreturn [{\n  json: {\n    data: prevNode.data,\n    apiKey: prevNode.apiKey,\n    strategistOutput: prevNode.strategistOutput,\n    brandingPersonaOutput: parsed\n  }\n}];"
+    },
+    "id": "f878fe54-e5fb-426d-9f65-09ae6344ea8a",
+    "name": "Parse Branding & Persona",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     992,
+     384
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const response = $input.first().json;\n\nlet parsed = {};\n\ntry {\n  // AI Agent normalmente retorna o resultado em \"output\"\n  let content = response.output ?? response.text ?? response.content;\n\n  // Fallback caso venha no formato OpenAI\n  if (!content && response.choices?.[0]?.message?.content) {\n    content = response.choices[0].message.content;\n  }\n\n  if (typeof content === \"string\") {\n    // Remove possíveis blocos markdown\n    content = content\n      .replace(/^```json\\s*/i, \"\")\n      .replace(/^```\\s*/i, \"\")\n      .replace(/```\\s*$/i, \"\")\n      .trim();\n\n    parsed = JSON.parse(content);\n  } else if (typeof content === \"object\" && content !== null) {\n    parsed = content;\n  }\n\n} catch (e) {\n  parsed = {\n    parse_error: e.message,\n    raw_response: response\n  };\n}\n\nconst prevData = $(\"Normalizar Dados & ID Projeto\").first().json.data;\nconst apiKey = $(\"Normalizar Dados & ID Projeto\").first().json.apiKey;\n\nreturn [{\n  json: {\n    data: prevData,\n    apiKey,\n    strategistOutput: parsed\n  }\n}];"
+    },
+    "id": "ceef9d82-9a29-4c71-84b0-90eae00f228f",
+    "name": "Parse Estrategista",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     416,
+     384
+    ]
+   },
+   {
+    "parameters": {
+     "jsCode": "const raw = $input.first().json.body || $input.first().json;\n\nconst nomeEmpresa = raw.nome_empresa || raw.nome || \"Empresa Sem Nome\";\n\nconst rawSlug = nomeEmpresa\n  .toLowerCase()\n  .normalize(\"NFD\")\n  .replace(/[\\u0300-\\u036f]/g, \"\")\n  .replace(/[^a-z0-9]+/g, \"-\")\n  .replace(/(^-|-$)/g, \"\");\n\nconst projectSlug = `${rawSlug}-${Date.now()}`;\n\nconst data = {\n  project_id: projectSlug,\n  nome_empresa: nomeEmpresa,\n  descricao_empresa: raw.descricao_empresa || \"\",\n  segmento: raw.segmento || \"Geral\",\n  produtos_servicos: raw.produtos_servicos || [],\n  publico_atual: raw.publico_atual || \"\",\n  publico_desejado: raw.publico_desejado || \"\",\n  diferenciais: raw.diferenciais || [],\n  historia_empresa: raw.historia_empresa || \"\",\n  missao_atual: raw.missao_atual || \"\",\n  visao_atual: raw.visao_atual || \"\",\n  valores_atuais: raw.valores_atuais || [],\n  concorrentes: raw.concorrentes || [],\n  objetivos_empresa: raw.objetivos_empresa || [],\n  problemas_resolvidos: raw.problemas_resolvidos || [],\n  personalidade_desejada: raw.personalidade_desejada || [],\n  cores_preferidas: raw.cores_preferidas || [],\n  restricoes: raw.restricoes || [],\n  site: raw.site || \"\",\n  redes_sociais: raw.redes_sociais || []\n};\n\nreturn [{\n  json: {\n    data,\n    apiKey: raw.openai_api_key || \"\"\n  }\n}];"
+    },
+    "id": "9bc0f94b-c065-4fb0-8f75-78b5cf16af75",
+    "name": "Normalizar Dados & ID Projeto",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     -1120,
+     400
+    ]
+   },
+   {
+    "parameters": {
+     "httpMethod": "POST",
+     "path": "brand-os-generate",
+     "options": {}
+    },
+    "id": "4c6907f5-4793-42aa-8598-e9adbe361071",
+    "name": "Webhook - Receber Dados da Empresa",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     -1344,
+     400
+    ],
+    "webhookId": "brand-os-trigger-id"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "=Dados da Empresa: \" + {{JSON.stringify($('Normalizar Dados & ID Projeto').item.json.data) }}",
+     "options": {
+      "systemMessage": "Você é o DIRETOR ESTRATÉGICO do BRAND OS.\n\nSua função é construir a fundação estratégica completa da marca com profundidade de uma consultoria profissional de branding.\n\nVocê NÃO deve produzir conteúdo genérico, superficial ou frases vazias.\n\nUse exclusivamente as informações fornecidas sobre a empresa como base factual.\n\nQuando precisar fazer inferências estratégicas, deixe claro através do contexto e mantenha coerência com os dados fornecidos.\n\nIMPORTANTE:\n\nCada campo Markdown deve ser EXTENSO, PROFISSIONAL e PRONTO PARA SER SALVO COMO UM DOCUMENTO INDIVIDUAL.\n\nCada documento deve possuir:\n\n- Título principal\n- Introdução estratégica\n- Seções organizadas com headings Markdown\n- Análises aprofundadas\n- Explicações práticas\n- Diretrizes aplicáveis\n- Exemplos específicos para a empresa\n- Recomendações estratégicas\n\nNUNCA escreva:\n\n\"Informações em processamento\"\n\"Conteúdo a definir\"\n\"Não informado\"\n\"Sem dados suficientes\"\n\nSe algum dado estiver incompleto, faça uma inferência estratégica baseada no segmento, produtos, público e objetivos da empresa.\n\nA profundidade esperada é de uma consultoria de branding premium.\n\nRETORNE SOMENTE JSON VÁLIDO.\n\nEstrutura obrigatória:\n\n{\n  \"brand_context\": \"Markdown completo\",\n  \"empresa_md\": \"Markdown completo com no mínimo 800 palavras\",\n  \"proposito_md\": \"Markdown completo com no mínimo 600 palavras\",\n  \"missao_visao_valores_md\": \"Markdown completo com no mínimo 1000 palavras\",\n  \"posicionamento_md\": \"Markdown completo com no mínimo 1000 palavras\"\n}"
+     }
+    },
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     96,
+     384
+    ],
+    "id": "37d7fbc4-bcf2-409d-8053-84bbf670d771",
+    "name": "DIRETOR ESTRATÉGICO"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "=Empresa: \" + {{ JSON.stringify($json.data) + \"\\nContexto Estratégico: \" + JSON.stringify($json.strategistOutput) }}",
+     "options": {
+      "systemMessage": "Você é um ESTRATEGISTA SÊNIOR DE BRANDING especializado em:\n\n- Público-alvo\n- ICP\n- Personas\n- Proposta de valor\n- Personalidade de marca\n- Arquétipos\n\nSua missão é transformar os dados da empresa em documentos estratégicos profundos e utilizáveis.\n\nNÃO produza conteúdo genérico.\n\nAnalise cuidadosamente:\n\n- Segmento\n- Produtos e serviços\n- Público atual\n- Público desejado\n- Problemas resolvidos\n- Diferenciais\n- Concorrentes\n- Objetivos\n- Personalidade desejada\n\nCada campo deve ser um documento Markdown completo.\n\nPara público-alvo, inclua:\n\n- Segmentação\n- ICP\n- Cargos\n- Perfil empresarial\n- Maturidade\n- Dores\n- Desejos\n- Objeções\n- Gatilhos de compra\n\nPara Persona, crie uma persona detalhada com:\n\n- Nome fictício\n- Cargo\n- Perfil\n- Rotina\n- Responsabilidades\n- Dores\n- Objetivos\n- Medos\n- Objeções\n- Critérios de decisão\n- Jornada de compra\n\nPara proposta de valor, explique:\n\n- Transformação entregue\n- Antes e depois\n- Diferenciais\n- Benefícios\n- Razões para acreditar\n\nPara personalidade, crie diretrizes práticas de comportamento da marca.\n\nPara arquétipos, defina:\n\n- Arquétipo principal\n- Arquétipo secundário\n- Justificativa\n- Comportamentos\n- Riscos\n- Aplicações práticas\n\nRETORNE SOMENTE JSON VÁLIDO:\n\n{\n  \"publico_alvo_md\": \"...\",\n  \"persona_md\": \"...\",\n  \"proposta_de_valor_md\": \"...\",\n  \"personalidade_md\": \"...\",\n  \"arquetipos_md\": \"...\"\n}"
+     }
+    },
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     672,
+     384
+    ],
+    "id": "00af6702-650b-406a-9790-050a90c2f5e7",
+    "name": "ESTRATEGISTA SÊNIOR DE BRANDING"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "=\"Dados da Marca: \" + {{ JSON.stringify($json.data) + \"\\nContexto Estratégico: \" + JSON.stringify($json.strategistOutput) }}",
+     "options": {
+      "systemMessage": "Você é o DIRETOR DE IDENTIDADE VERBAL E COPYWRITING do BRAND OS.\n\nSua função é criar toda a arquitetura verbal da marca.\n\nProduza documentos profundos, específicos e aplicáveis.\n\nNÃO utilize textos genéricos de marketing.\n\nCada documento deve estar em Markdown completo.\n\nInclua exemplos reais adaptados à empresa.\n\nTOM DE VOZ deve incluir:\n\n- Características\n- Como a marca fala\n- Como não fala\n- Vocabulário recomendado\n- Vocabulário proibido\n- Exemplos antes/depois\n- Aplicação em canais\n\nIDENTIDADE VERBAL deve definir:\n\n- Linguagem\n- Ritmo\n- Vocabulário\n- Complexidade técnica\n- Personalidade verbal\n\nMENSAGENS-CHAVE deve criar:\n\n- Mensagem institucional\n- Promessa central\n- Pilares de comunicação\n- Mensagens por público\n- Headlines\n- Taglines\n- Provas\n\nSTORYTELLING deve criar:\n\n- Narrativa da origem\n- Problema do mercado\n- Transformação\n- Herói\n- Vilão\n- Jornada\n\nMANIFESTO deve ser emocional, forte, original e representar a filosofia da marca.\n\nRETORNE SOMENTE JSON VÁLIDO:\n\n{\n  \"tom_de_voz_md\": \"...\",\n  \"identidade_verbal_md\": \"...\",\n  \"mensagens_chave_md\": \"...\",\n  \"storytelling_md\": \"...\",\n  \"manifesto_md\": \"...\"\n}"
+     }
+    },
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1248,
+     384
+    ],
+    "id": "032ebe40-564f-4317-a4a8-44fe5c1eaac4",
+    "name": "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "=Empresa: \" + {{JSON.stringify($json.data) + \"\\nContexto Estratégico: \" + JSON.stringify($json.strategistOutput) }}",
+     "options": {
+      "systemMessage": "Você é o DIRETOR DE IDENTIDADE VISUAL do BRAND OS.\n\nSua função é traduzir toda a estratégia da marca em diretrizes visuais profissionais.\n\nNÃO gere conteúdo superficial.\n\nCada campo deve ser um documento Markdown completo.\n\nIDENTIDADE VISUAL:\n\n- Conceito criativo\n- Território visual\n- Sensações\n- Elementos\n- Formas\n- Estilo\n- Direção de arte\n\nPALETA DE CORES:\n\nPara cada cor inclua:\n\n- Nome\n- HEX\n- RGB\n- Função\n- Significado\n- Onde utilizar\n\nTIPOGRAFIA:\n\n- Fonte primária\n- Fonte secundária\n- Alternativas\n- Hierarquia\n- Pesos\n- Uso em títulos\n- Uso em textos\n- Uso digital\n\nDIRETRIZES DE LOGO:\n\n- Área de proteção\n- Tamanho mínimo\n- Fundos permitidos\n- Fundos proibidos\n- Versões\n- Uso incorreto\n- Recomendações\n\nRETORNE SOMENTE JSON VÁLIDO:\n\n{\n  \"identidade_visual_md\": \"...\",\n  \"paleta_de_cores_md\": \"...\",\n  \"tipografia_md\": \"...\",\n  \"diretrizes_de_logo_md\": \"...\"\n}"
+     }
+    },
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1872,
+     384
+    ],
+    "id": "b474f216-e6b1-42f0-802e-3d454e0c6d3a",
+    "name": "DIRETOR DE IDENTIDADE VISUAL"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Respond to Webhook",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "position": [
+     304,
+     -48
+    ],
+    "typeVersion": 1,
+    "id": "cb708ef4-f8fa-455e-8d29-70eada52b576"
+   },
+   {
+    "parameters": {
+     "path": "form-brand-os-generate",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "frontend",
+    "type": "n8n-nodes-base.webhook",
+    "position": [
+     -128,
+     -48
+    ],
+    "webhookId": "c74e2c9f-6f9e-4ef8-b404-e356b15771e1",
+    "typeVersion": 1,
+    "id": "dc1e2854-cf0e-4f84-91bb-815e46d52315"
+   },
+   {
+    "parameters": {
+     "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n  <title>Brand OS — Diagnóstico de Marca</title>\n\n  <style>\n    * {\n      box-sizing: border-box;\n      margin: 0;\n      padding: 0;\n    }\n\n    :root {\n      --bg: #07111f;\n      --card: #0d1b2d;\n      --card-2: #10243a;\n      --border: rgba(255,255,255,.09);\n      --text: #f4f7fb;\n      --muted: #91a4b8;\n      --primary: #00c8ff;\n      --primary-2: #0878ff;\n      --success: #22c55e;\n      --danger: #ef4444;\n    }\n\n    body {\n      font-family: Inter, Arial, Helvetica, sans-serif;\n      background:\n        radial-gradient(circle at 20% 0%, rgba(0,200,255,.12), transparent 30%),\n        radial-gradient(circle at 90% 20%, rgba(8,120,255,.12), transparent 30%),\n        var(--bg);\n      color: var(--text);\n      min-height: 100vh;\n    }\n\n    .container {\n      width: min(1100px, calc(100% - 32px));\n      margin: 0 auto;\n      padding: 40px 0 80px;\n    }\n\n    /* HEADER */\n\n    .header {\n      text-align: center;\n      margin-bottom: 35px;\n    }\n\n    .logo {\n      display: inline-flex;\n      align-items: center;\n      gap: 10px;\n      margin-bottom: 20px;\n      font-weight: 800;\n      font-size: 20px;\n    }\n\n    .logo-icon {\n      width: 38px;\n      height: 38px;\n      border-radius: 10px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      background: linear-gradient(135deg, var(--primary), var(--primary-2));\n      color: #00111d;\n      font-weight: 900;\n    }\n\n    .header h1 {\n      font-size: clamp(30px, 5vw, 52px);\n      line-height: 1.05;\n      margin-bottom: 15px;\n      letter-spacing: -1.5px;\n    }\n\n    .header h1 span {\n      background: linear-gradient(90deg, #fff, var(--primary));\n      -webkit-background-clip: text;\n      color: transparent;\n    }\n\n    .header p {\n      color: var(--muted);\n      max-width: 700px;\n      margin: auto;\n      line-height: 1.6;\n      font-size: 16px;\n    }\n\n    /* PROGRESS */\n\n    .progress-container {\n      margin-bottom: 30px;\n    }\n\n    .progress-top {\n      display: flex;\n      justify-content: space-between;\n      margin-bottom: 9px;\n      color: var(--muted);\n      font-size: 13px;\n    }\n\n    .progress {\n      height: 6px;\n      background: rgba(255,255,255,.08);\n      border-radius: 20px;\n      overflow: hidden;\n    }\n\n    .progress-bar {\n      height: 100%;\n      width: 20%;\n      background: linear-gradient(90deg, var(--primary-2), var(--primary));\n      transition: .3s ease;\n    }\n\n    /* FORM CARD */\n\n    .form-card {\n      background: rgba(13,27,45,.88);\n      border: 1px solid var(--border);\n      border-radius: 24px;\n      padding: clamp(20px, 4vw, 40px);\n      box-shadow: 0 30px 80px rgba(0,0,0,.25);\n      backdrop-filter: blur(15px);\n    }\n\n    .step {\n      display: none;\n      animation: fade .3s ease;\n    }\n\n    .step.active {\n      display: block;\n    }\n\n    @keyframes fade {\n      from {\n        opacity: 0;\n        transform: translateY(8px);\n      }\n      to {\n        opacity: 1;\n        transform: translateY(0);\n      }\n    }\n\n    .step-header {\n      margin-bottom: 30px;\n    }\n\n    .step-number {\n      color: var(--primary);\n      font-size: 13px;\n      font-weight: 700;\n      text-transform: uppercase;\n      letter-spacing: 1px;\n      margin-bottom: 8px;\n    }\n\n    .step-header h2 {\n      font-size: 27px;\n      margin-bottom: 8px;\n    }\n\n    .step-header p {\n      color: var(--muted);\n      line-height: 1.5;\n    }\n\n    /* GRID */\n\n    .grid {\n      display: grid;\n      grid-template-columns: repeat(2, 1fr);\n      gap: 20px;\n    }\n\n    .full {\n      grid-column: 1 / -1;\n    }\n\n    .field {\n      margin-bottom: 4px;\n    }\n\n    label {\n      display: block;\n      font-size: 14px;\n      font-weight: 600;\n      margin-bottom: 8px;\n    }\n\n    .required {\n      color: var(--primary);\n    }\n\n    input,\n    textarea,\n    select {\n      width: 100%;\n      background: rgba(255,255,255,.035);\n      border: 1px solid var(--border);\n      color: var(--text);\n      border-radius: 12px;\n      padding: 14px 15px;\n      outline: none;\n      font-size: 14px;\n      transition: .2s;\n      font-family: inherit;\n    }\n\n    input:focus,\n    textarea:focus,\n    select:focus {\n      border-color: var(--primary);\n      box-shadow: 0 0 0 3px rgba(0,200,255,.08);\n    }\n\n    textarea {\n      min-height: 115px;\n      resize: vertical;\n      line-height: 1.5;\n    }\n\n    input::placeholder,\n    textarea::placeholder {\n      color: #60758a;\n    }\n\n    /* TAG INPUT */\n\n    .tag-box {\n      background: rgba(255,255,255,.035);\n      border: 1px solid var(--border);\n      border-radius: 12px;\n      padding: 10px;\n    }\n\n    .tags {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 7px;\n      margin-bottom: 7px;\n    }\n\n    .tag {\n      display: flex;\n      align-items: center;\n      gap: 7px;\n      background: rgba(0,200,255,.1);\n      border: 1px solid rgba(0,200,255,.2);\n      color: #bcefff;\n      border-radius: 8px;\n      padding: 7px 10px;\n      font-size: 13px;\n    }\n\n    .tag button {\n      border: 0;\n      background: transparent;\n      color: #bcefff;\n      cursor: pointer;\n      font-size: 16px;\n      line-height: 1;\n    }\n\n    .tag-input {\n      border: 0;\n      background: transparent;\n      box-shadow: none !important;\n      padding: 7px;\n    }\n\n    .tag-input:focus {\n      border: 0;\n    }\n\n    .hint {\n      color: #6f8498;\n      font-size: 12px;\n      margin-top: 7px;\n    }\n\n    /* BUTTONS */\n\n    .actions {\n      display: flex;\n      justify-content: space-between;\n      gap: 15px;\n      margin-top: 35px;\n      padding-top: 25px;\n      border-top: 1px solid var(--border);\n    }\n\n    button {\n      font-family: inherit;\n    }\n\n    .btn {\n      border: 0;\n      border-radius: 12px;\n      padding: 14px 22px;\n      font-weight: 700;\n      cursor: pointer;\n      transition: .2s;\n    }\n\n    .btn-secondary {\n      background: rgba(255,255,255,.06);\n      color: var(--text);\n      border: 1px solid var(--border);\n    }\n\n    .btn-secondary:hover {\n      background: rgba(255,255,255,.1);\n    }\n\n    .btn-primary {\n      background: linear-gradient(135deg, var(--primary-2), var(--primary));\n      color: #00121d;\n      min-width: 150px;\n    }\n\n    .btn-primary:hover {\n      transform: translateY(-1px);\n      box-shadow: 0 10px 30px rgba(0,200,255,.18);\n    }\n\n    .btn-primary:disabled {\n      opacity: .6;\n      cursor: not-allowed;\n      transform: none;\n    }\n\n    /* SUCCESS */\n\n    .success {\n      display: none;\n      text-align: center;\n      padding: 60px 20px;\n    }\n\n    .success.active {\n      display: block;\n    }\n\n    .success-icon {\n      width: 75px;\n      height: 75px;\n      border-radius: 50%;\n      background: rgba(34,197,94,.12);\n      color: var(--success);\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 35px;\n      margin: 0 auto 25px;\n      border: 1px solid rgba(34,197,94,.25);\n    }\n\n    .success h2 {\n      font-size: 30px;\n      margin-bottom: 12px;\n    }\n\n    .success p {\n      color: var(--muted);\n      line-height: 1.6;\n      max-width: 550px;\n      margin: auto;\n    }\n\n    /* ERROR */\n\n    .error {\n      display: none;\n      background: rgba(239,68,68,.08);\n      border: 1px solid rgba(239,68,68,.25);\n      color: #ffb4b4;\n      border-radius: 12px;\n      padding: 14px;\n      margin-top: 20px;\n      font-size: 14px;\n      line-height: 1.5;\n    }\n\n    .error.active {\n      display: block;\n    }\n\n    /* FOOTER */\n\n    .footer {\n      text-align: center;\n      color: #53687b;\n      font-size: 12px;\n      margin-top: 25px;\n    }\n\n    /* MOBILE */\n\n    @media(max-width: 700px) {\n      .container {\n        width: min(100% - 20px, 1100px);\n        padding-top: 20px;\n      }\n\n      .grid {\n        grid-template-columns: 1fr;\n      }\n\n      .full {\n        grid-column: auto;\n      }\n\n      .form-card {\n        border-radius: 18px;\n        padding: 20px;\n      }\n\n      .actions {\n        flex-direction: column-reverse;\n      }\n\n      .btn {\n        width: 100%;\n      }\n\n      .header h1 {\n        font-size: 32px;\n      }\n    }\n  </style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n  <header class=\"header\">\n\n    <div class=\"logo\">\n      <div class=\"logo-icon\">B</div>\n      BRAND OS\n    </div>\n\n    <h1>\n      Construa o <span>DNA da sua marca</span>\n    </h1>\n\n    <p>\n      Responda algumas perguntas sobre sua empresa.\n      Essas informações serão utilizadas para construir\n      o Brand OS estratégico da sua marca com inteligência artificial.\n    </p>\n\n  </header>\n\n\n  <div class=\"progress-container\">\n\n    <div class=\"progress-top\">\n      <span id=\"progressText\">Etapa 1 de 5</span>\n      <span id=\"progressPercent\">20%</span>\n    </div>\n\n    <div class=\"progress\">\n      <div class=\"progress-bar\" id=\"progressBar\"></div>\n    </div>\n\n  </div>\n\n\n  <main class=\"form-card\">\n\n    <form id=\"brandForm\">\n\n      <!-- ========================================= -->\n      <!-- ETAPA 1 -->\n      <!-- ========================================= -->\n\n      <section class=\"step active\" data-step=\"1\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 01</div>\n          <h2>Sobre a empresa</h2>\n          <p>\n            Primeiro, vamos entender quem é sua empresa e o que ela faz.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n            <label>\n              Nome da empresa <span class=\"required\">*</span>\n            </label>\n\n            <input\n              type=\"text\"\n              id=\"nome_empresa\"\n              placeholder=\"Ex.: Inovare Inteligência Artificial\"\n              required\n            >\n          </div>\n\n\n          <div class=\"field full\">\n            <label>\n              Descrição da empresa <span class=\"required\">*</span>\n            </label>\n\n            <textarea\n              id=\"descricao_empresa\"\n              placeholder=\"Descreva brevemente sua empresa, o que ela faz e como atua no mercado.\"\n              required\n            ></textarea>\n          </div>\n\n\n          <div class=\"field full\">\n            <label>\n              Segmento <span class=\"required\">*</span>\n            </label>\n\n            <input\n              type=\"text\"\n              id=\"segmento\"\n              placeholder=\"Ex.: Tecnologia, Saúde, Educação, Marketing...\"\n              required\n            >\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>\n              Produtos e serviços\n            </label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"produtos_servicos_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"produtos_servicos_input\"\n                placeholder=\"Digite um produto/serviço e pressione Enter\"\n              >\n\n            </div>\n\n            <div class=\"hint\">\n              Você pode adicionar vários itens.\n            </div>\n\n          </div>\n\n        </div>\n\n        <div class=\"actions\">\n\n          <div></div>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 2 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"2\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 02</div>\n          <h2>Público e posicionamento</h2>\n          <p>\n            Entenda quem compra hoje e quem sua empresa deseja alcançar.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>Público atual</label>\n\n            <textarea\n              id=\"publico_atual\"\n              placeholder=\"Quem são seus clientes atualmente?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Público desejado</label>\n\n            <textarea\n              id=\"publico_desejado\"\n              placeholder=\"Quem você gostaria de atrair?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Principais diferenciais</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"diferenciais_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"diferenciais_input\"\n                placeholder=\"Digite um diferencial e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Principais concorrentes</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"concorrentes_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"concorrentes_input\"\n                placeholder=\"Digite um concorrente e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 3 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"3\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 03</div>\n          <h2>História e propósito</h2>\n          <p>\n            Agora vamos descobrir o que existe por trás da empresa.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>História da empresa</label>\n\n            <textarea\n              id=\"historia_empresa\"\n              placeholder=\"Como a empresa nasceu? Por que foi criada?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Missão atual</label>\n\n            <textarea\n              id=\"missao_atual\"\n              placeholder=\"Qual é o propósito atual da empresa?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Visão atual</label>\n\n            <textarea\n              id=\"visao_atual\"\n              placeholder=\"Onde a empresa deseja chegar?\"\n            ></textarea>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Valores atuais</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"valores_atuais_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"valores_atuais_input\"\n                placeholder=\"Digite um valor e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 4 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"4\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 04</div>\n          <h2>Estratégia e futuro</h2>\n          <p>\n            Quais são os problemas, objetivos e características\n            que devem orientar o novo Brand OS?\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>Objetivos da empresa</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"objetivos_empresa_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"objetivos_empresa_input\"\n                placeholder=\"Digite um objetivo e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Problemas que sua empresa resolve</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"problemas_resolvidos_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"problemas_resolvidos_input\"\n                placeholder=\"Digite um problema e pressione Enter\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Personalidade desejada da marca</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"personalidade_desejada_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"personalidade_desejada_input\"\n                placeholder=\"Ex.: Inovadora, sofisticada, humana...\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Cores preferidas</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"cores_preferidas_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"cores_preferidas_input\"\n                placeholder=\"Ex.: Azul escuro, dourado, grafite...\"\n              >\n\n            </div>\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Restrições / coisas que devemos evitar</label>\n\n            <textarea\n              id=\"restricoes\"\n              placeholder=\"Ex.: Não utilizar linguagem muito técnica, evitar determinadas cores...\"\n            ></textarea>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button type=\"button\" class=\"btn btn-primary next\">\n            Continuar →\n          </button>\n\n        </div>\n\n      </section>\n\n\n      <!-- ========================================= -->\n      <!-- ETAPA 5 -->\n      <!-- ========================================= -->\n\n      <section class=\"step\" data-step=\"5\">\n\n        <div class=\"step-header\">\n          <div class=\"step-number\">Etapa 05</div>\n          <h2>Presença digital</h2>\n          <p>\n            Por último, informe onde podemos encontrar sua marca.\n          </p>\n        </div>\n\n        <div class=\"grid\">\n\n          <div class=\"field full\">\n\n            <label>Site</label>\n\n            <input\n              type=\"url\"\n              id=\"site\"\n              placeholder=\"https://www.suaempresa.com.br\"\n            >\n\n          </div>\n\n\n          <div class=\"field full\">\n\n            <label>Redes sociais</label>\n\n            <div class=\"tag-box\">\n\n              <div class=\"tags\" id=\"redes_sociais_tags\"></div>\n\n              <input\n                class=\"tag-input\"\n                id=\"redes_sociais_input\"\n                placeholder=\"Ex.: @suaempresa\"\n              >\n\n            </div>\n\n          </div>\n\n        </div>\n\n\n        <div class=\"actions\">\n\n          <button type=\"button\" class=\"btn btn-secondary prev\">\n            ← Voltar\n          </button>\n\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary\"\n            id=\"submitBtn\"\n          >\n            Gerar meu Brand OS →\n          </button>\n\n        </div>\n\n        <div class=\"error\" id=\"errorBox\"></div>\n\n      </section>\n\n    </form>\n\n\n    <!-- ========================================= -->\n    <!-- SUCESSO -->\n    <!-- ========================================= -->\n\n    <div class=\"success\" id=\"success\">\n\n      <div class=\"success-icon\">\n        ✓\n      </div>\n\n      <h2>Informações enviadas!</h2>\n\n      <p>\n        Seu diagnóstico foi recebido com sucesso.\n        A inteligência artificial está processando as informações\n        para construir o Brand OS da sua empresa.\n      </p>\n\n    </div>\n\n  </main>\n\n\n  <div class=\"footer\">\n    BRAND OS · Inteligência Artificial para construção de marcas\n  </div>\n\n</div>\n\n\n<script>\n\n  /*\n   * ============================================\n   * CONFIGURAÇÃO\n   * ============================================\n   */\n\n  const WEBHOOK_URL =\n    \"https://webhookn8n6.inovareinteligenciaartificial.com/webhook/brand-os-generate\";\n\n\n  /*\n   * ============================================\n   * ESTADO\n   * ============================================\n   */\n\n  let currentStep = 1;\n\n  const totalSteps = 5;\n\n  const arrays = {\n\n    produtos_servicos: [],\n\n    diferenciais: [],\n\n    concorrentes: [],\n\n    valores_atuais: [],\n\n    objetivos_empresa: [],\n\n    problemas_resolvidos: [],\n\n    personalidade_desejada: [],\n\n    cores_preferidas: [],\n\n    redes_sociais: []\n\n  };\n\n\n  /*\n   * ============================================\n   * TAG SYSTEM\n   * ============================================\n   */\n\n  function setupTags(name) {\n\n    const input =\n      document.getElementById(name + \"_input\");\n\n    const container =\n      document.getElementById(name + \"_tags\");\n\n\n    input.addEventListener(\"keydown\", function(event) {\n\n      if (event.key === \"Enter\") {\n\n        event.preventDefault();\n\n        const value = input.value.trim();\n\n        if (!value) return;\n\n        arrays[name].push(value);\n\n        input.value = \"\";\n\n        renderTags(name);\n\n      }\n\n    });\n\n  }\n\n\n  function renderTags(name) {\n\n    const container =\n      document.getElementById(name + \"_tags\");\n\n    container.innerHTML = \"\";\n\n\n    arrays[name].forEach((value, index) => {\n\n      const tag =\n        document.createElement(\"div\");\n\n      tag.className = \"tag\";\n\n      tag.innerHTML = `\n        <span>${escapeHtml(value)}</span>\n\n        <button\n          type=\"button\"\n          onclick=\"removeTag('${name}', ${index})\"\n        >\n          ×\n        </button>\n      `;\n\n      container.appendChild(tag);\n\n    });\n\n  }\n\n\n  function removeTag(name, index) {\n\n    arrays[name].splice(index, 1);\n\n    renderTags(name);\n\n  }\n\n\n  function escapeHtml(value) {\n\n    return value\n      .replace(/&/g, \"&amp;\")\n      .replace(/</g, \"&lt;\")\n      .replace(/>/g, \"&gt;\")\n      .replace(/\"/g, \"&quot;\")\n      .replace(/'/g, \"&#039;\");\n\n  }\n\n\n  /*\n   * ============================================\n   * CONFIGURA TODOS OS CAMPOS DE TAG\n   * ============================================\n   */\n\n  Object.keys(arrays).forEach(setupTags);\n\n\n  /*\n   * ============================================\n   * NAVEGAÇÃO\n   * ============================================\n   */\n\n  function showStep(step) {\n\n    currentStep = step;\n\n    document\n      .querySelectorAll(\".step\")\n      .forEach(element => {\n\n        element.classList.remove(\"active\");\n\n      });\n\n\n    const active =\n      document.querySelector(\n        `.step[data-step=\"${step}\"]`\n      );\n\n    active.classList.add(\"active\");\n\n\n    const percent =\n      Math.round((step / totalSteps) * 100);\n\n\n    document.getElementById(\"progressBar\")\n      .style.width = percent + \"%\";\n\n\n    document.getElementById(\"progressText\")\n      .textContent =\n      `Etapa ${step} de ${totalSteps}`;\n\n\n    document.getElementById(\"progressPercent\")\n      .textContent =\n      percent + \"%\";\n\n\n    window.scrollTo({\n      top: 0,\n      behavior: \"smooth\"\n    });\n\n  }\n\n\n  document\n    .querySelectorAll(\".next\")\n    .forEach(button => {\n\n      button.addEventListener(\"click\", function() {\n\n        if (validateCurrentStep()) {\n\n          if (currentStep < totalSteps) {\n\n            showStep(currentStep + 1);\n\n          }\n\n        }\n\n      });\n\n    });\n\n\n  document\n    .querySelectorAll(\".prev\")\n    .forEach(button => {\n\n      button.addEventListener(\"click\", function() {\n\n        if (currentStep > 1) {\n\n          showStep(currentStep - 1);\n\n        }\n\n      });\n\n    });\n\n\n  /*\n   * ============================================\n   * VALIDAÇÃO\n   * ============================================\n   */\n\n  function validateCurrentStep() {\n\n    const activeStep =\n      document.querySelector(\n        `.step[data-step=\"${currentStep}\"]`\n      );\n\n    const requiredFields =\n      activeStep.querySelectorAll(\"[required]\");\n\n\n    for (const field of requiredFields) {\n\n      if (!field.value.trim()) {\n\n        field.focus();\n\n        field.reportValidity();\n\n        return false;\n\n      }\n\n    }\n\n    return true;\n\n  }\n\n\n  /*\n   * ============================================\n   * PEGAR VALOR\n   * ============================================\n   */\n\n  function value(id) {\n\n    const element =\n      document.getElementById(id);\n\n    return element\n      ? element.value.trim()\n      : \"\";\n\n  }\n\n\n  /*\n   * ============================================\n   * MONTA O JSON\n   * ============================================\n   */\n\n  function buildPayload() {\n\n    return {\n\n      nome_empresa:\n        value(\"nome_empresa\"),\n\n      descricao_empresa:\n        value(\"descricao_empresa\"),\n\n      segmento:\n        value(\"segmento\"),\n\n      produtos_servicos:\n        arrays.produtos_servicos,\n\n      publico_atual:\n        value(\"publico_atual\"),\n\n      publico_desejado:\n        value(\"publico_desejado\"),\n\n      diferenciais:\n        arrays.diferenciais,\n\n      historia_empresa:\n        value(\"historia_empresa\"),\n\n      missao_atual:\n        value(\"missao_atual\"),\n\n      visao_atual:\n        value(\"visao_atual\"),\n\n      valores_atuais:\n        arrays.valores_atuais,\n\n      concorrentes:\n        arrays.concorrentes,\n\n      objetivos_empresa:\n        arrays.objetivos_empresa,\n\n      problemas_resolvidos:\n        arrays.problemas_resolvidos,\n\n      personalidade_desejada:\n        arrays.personalidade_desejada,\n\n      cores_preferidas:\n        arrays.cores_preferidas,\n\n      restricoes:\n        value(\"restricoes\"),\n\n      site:\n        value(\"site\"),\n\n      redes_sociais:\n        arrays.redes_sociais\n\n    };\n\n  }\n\n\n  /*\n   * ============================================\n   * ENVIO PARA N8N\n   * ============================================\n   */\n\n  document\n    .getElementById(\"brandForm\")\n    .addEventListener(\"submit\", async function(event) {\n\n      event.preventDefault();\n\n\n      if (!validateCurrentStep()) {\n\n        return;\n\n      }\n\n\n      const submitButton =\n        document.getElementById(\"submitBtn\");\n\n      const errorBox =\n        document.getElementById(\"errorBox\");\n\n\n      errorBox.classList.remove(\"active\");\n\n      submitButton.disabled = true;\n\n      submitButton.textContent =\n        \"Enviando informações...\";\n\n\n      const payload =\n        buildPayload();\n\n\n      console.log(\n        \"Payload enviado:\",\n        payload\n      );\n\n\n      try {\n\n        const response =\n          await fetch(WEBHOOK_URL, {\n\n            method: \"POST\",\n\n            headers: {\n\n              \"Content-Type\":\n                \"application/json\"\n\n            },\n\n            body:\n              JSON.stringify(payload)\n\n          });\n\n\n        if (!response.ok) {\n\n          throw new Error(\n            `Webhook retornou HTTP ${response.status}`\n          );\n\n        }\n\n\n        /*\n         * Sucesso\n         */\n\n        document\n          .getElementById(\"brandForm\")\n          .style.display = \"none\";\n\n\n        document\n          .querySelector(\".progress-container\")\n          .style.display = \"none\";\n\n\n        document\n          .getElementById(\"success\")\n          .classList.add(\"active\");\n\n\n      } catch (error) {\n\n        console.error(error);\n\n\n        errorBox.innerHTML = `\n          <strong>Não foi possível enviar.</strong><br>\n          Verifique sua conexão ou a configuração CORS\n          do webhook do n8n.<br><br>\n          <small>${escapeHtml(error.message)}</small>\n        `;\n\n        errorBox.classList.add(\"active\");\n\n\n        submitButton.disabled = false;\n\n        submitButton.textContent =\n          \"Gerar meu Brand OS →\";\n\n      }\n\n    });\n\n\n</script>\n\n</body>\n</html>"
+    },
+    "type": "n8n-nodes-base.html",
+    "typeVersion": 1.2,
+    "position": [
+     64,
+     -48
+    ],
+    "id": "b812a6e3-6de7-4d26-83cd-1173dbd25fa2",
+    "name": "HTML"
+   },
+   {
+    "parameters": {
+     "model": "=antigravity/gemini-2.5-flash",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 4096,
+      "temperature": 0.7,
+      "timeout": 300000
+     }
+    },
+    "id": "c1f8cc41-a782-4ffc-98f1-abaa4cf278f5",
+    "name": "OpenAI Chat Model - Claude",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     656,
+     1184
+    ],
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "resource": "folder",
+     "name": "=Brandbook",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "value": "={{ $json.id }}",
+      "mode": "id"
+     },
+     "options": {}
+    },
+    "id": "95c59e40-0bb6-4d3a-a097-d5383f2a98c0",
+    "name": "Google Drive - Criar Subpastas POP 03",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     -144,
+     384
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "resource": "fileFolder",
+     "queryString": "=📁 {{ $json.data.nome_empresa }}",
+     "filter": {
+      "driveId": {
+       "mode": "list",
+       "value": "My Drive"
+      },
+      "folderId": {
+       "mode": "list",
+       "value": "root",
+       "cachedResultName": "/ (Root folder)"
+      }
+     },
+     "options": {}
+    },
+    "id": "bf70b4ce-2755-46a0-81f7-84b610e57d24",
+    "name": "Google Drive - Criar Pasta Raiz do Projeto1",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     -864,
+     400
+    ],
+    "alwaysOutputData": true,
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 3
+      },
+      "conditions": [
+       {
+        "id": "26031d04-2c0c-47f1-8993-4aa07fbf93f7",
+        "leftValue": "={{ $json }}",
+        "rightValue": "",
+        "operator": {
+         "type": "object",
+         "operation": "notEmpty",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.3,
+    "position": [
+     -608,
+     400
+    ],
+    "id": "7fbbab58-0b39-48e4-82ec-fbc7335b2066",
+    "name": "If"
+   },
+   {
+    "parameters": {
+     "resource": "folder",
+     "name": "=📁 {{ $('Normalizar Dados & ID Projeto').item.json.data.nome_empresa }}",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "root",
+      "cachedResultName": "/ (Root folder)"
+     },
+     "options": {}
+    },
+    "id": "d8d04a65-c26f-4853-8051-2169a6c83a55",
+    "name": "Google Drive - Criar Subpastas POP ",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     -368,
+     528
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "name": "={{ $('Loop Over Items').item.json.filename }}",
+     "driveId": {
+      "__rl": true,
+      "mode": "list",
+      "value": "My Drive"
+     },
+     "folderId": {
+      "__rl": true,
+      "value": "={{ $('Google Drive - Criar Subpastas POP 03').first().json.id }}",
+      "mode": "id"
+     },
+     "options": {}
+    },
+    "id": "f392c2e3-5590-4e4f-982e-ebd809cb7391",
+    "name": "Google Drive - Criar Subpastas POP 1",
+    "type": "n8n-nodes-base.googleDrive",
+    "typeVersion": 3,
+    "position": [
+     3240,
+     340
+    ],
+    "credentials": {
+     "googleDriveOAuth2Api": {
+      "id": "6IQZuSnYX5sxamnr",
+      "name": "emersonjosiel2027@gmail.com"
+     }
+    },
+    "onError": "continueRegularOutput"
+   }
+  ],
+  "connections": {
+   "Loop Over Items": {
+    "main": [
+     [
+      {
+       "node": "Retornar Resposta do Webhook",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Convert to File",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Convert to File": {
+    "main": [
+     [
+      {
+       "node": "Upload a file",
+       "type": "main",
+       "index": 0
+      },
+      {
+       "node": "Google Drive - Criar Subpastas POP 1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Upload a file": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Consolidar Brandbook & JSON de Arquivos": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Parse Identidade Visual": {
+    "main": [
+     [
+      {
+       "node": "Consolidar Brandbook & JSON de Arquivos",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Parse Copywriter": {
+    "main": [
+     [
+      {
+       "node": "DIRETOR DE IDENTIDADE VISUAL",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Parse Branding & Persona": {
+    "main": [
+     [
+      {
+       "node": "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Parse Estrategista": {
+    "main": [
+     [
+      {
+       "node": "ESTRATEGISTA SÊNIOR DE BRANDING",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Normalizar Dados & ID Projeto": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Pasta Raiz do Projeto1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Webhook - Receber Dados da Empresa": {
+    "main": [
+     [
+      {
+       "node": "Normalizar Dados & ID Projeto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "DIRETOR ESTRATÉGICO": {
+    "main": [
+     [
+      {
+       "node": "Parse Estrategista",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "ESTRATEGISTA SÊNIOR DE BRANDING": {
+    "main": [
+     [
+      {
+       "node": "Parse Branding & Persona",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING": {
+    "main": [
+     [
+      {
+       "node": "Parse Copywriter",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "DIRETOR DE IDENTIDADE VISUAL": {
+    "main": [
+     [
+      {
+       "node": "Parse Identidade Visual",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "frontend": {
+    "main": [
+     [
+      {
+       "node": "HTML",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "HTML": {
+    "main": [
+     [
+      {
+       "node": "Respond to Webhook",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "OpenAI Chat Model - Claude": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "DIRETOR ESTRATÉGICO",
+       "type": "ai_languageModel",
+       "index": 0
+      },
+      {
+       "node": "ESTRATEGISTA SÊNIOR DE BRANDING",
+       "type": "ai_languageModel",
+       "index": 0
+      },
+      {
+       "node": "DIRETOR DE IDENTIDADE VERBAL E COPYWRITING",
+       "type": "ai_languageModel",
+       "index": 0
+      },
+      {
+       "node": "DIRETOR DE IDENTIDADE VISUAL",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Pasta Raiz do Projeto1": {
+    "main": [
+     [
+      {
+       "node": "If",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "If": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP 03",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP ",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Subpastas POP ": {
+    "main": [
+     [
+      {
+       "node": "Google Drive - Criar Subpastas POP 03",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Drive - Criar Subpastas POP 03": {
+    "main": [
+     [
+      {
+       "node": "DIRETOR ESTRATÉGICO",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-09-28T00:34:03.911Z",
+    "id": 31,
+    "workflowId": "UiXrWzHkPX3ule4h",
+    "versionId": "53299fa1-ff0f-4ef8-9b5d-3d5585914157",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-09-28T00:34:03.982Z",
+    "id": 32,
+    "workflowId": "UiXrWzHkPX3ule4h",
+    "versionId": "53299fa1-ff0f-4ef8-9b5d-3d5585914157",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

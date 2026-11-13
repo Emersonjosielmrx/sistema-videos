@@ -1,0 +1,27 @@
+{
+  "_leia": "Ramos que compram o Hermes, pelo código CNAE (atividade principal da empresa na Receita). 'nivel': 'barato' = cabe no Start (199) e o dono decide rápido; 'caro' = operação de volume, perfil Pro/Scale/Enterprise. Empresa grande de ramo 'barato' sobe para 'caro' pelo porte (ver captar_cnpj.py). Os códigos são conferidos contra a tabela oficial (Cnaes.zip) a cada rodada: código errado aparece no aviso.",
+
+  "imobiliarias":        {"nivel": "barato", "por_que": "ligar rápido para o lead do portal, reativar quem procurou imóvel, confirmar visita", "cnaes": ["6821801", "6821802", "6822600"]},
+  "clinicas_consultorios": {"nivel": "barato", "por_que": "confirmar e remarcar consulta, reativar paciente, reduzir falta", "cnaes": ["8630503", "8630504", "8630501", "8630502", "8650004", "8650003", "8650002"]},
+  "estetica":            {"nivel": "barato", "por_que": "agenda cheia de WhatsApp, confirmação de horário, retorno de cliente", "cnaes": ["9602502"]},
+  "veterinarias":        {"nivel": "barato", "por_que": "lembrete de vacina e retorno, confirmação de consulta", "cnaes": ["7500100"]},
+  "autoescolas":         {"nivel": "barato", "por_que": "retorno de quem pediu preço, aviso de aula e exame", "cnaes": ["8599601"]},
+  "escolas_idiomas_cursos": {"nivel": "barato", "por_que": "matrícula, rematrícula, cobrança de mensalidade", "cnaes": ["8593700", "8599604", "8599603", "8599699"]},
+  "academias":           {"nivel": "barato", "por_que": "reativar aluno que parou, renovação de plano", "cnaes": ["9313100"]},
+  "contabilidade":       {"nivel": "barato", "por_que": "cobrar documento do cliente todo mês, lembrete de prazo", "cnaes": ["6920601"]},
+  "corretoras_seguros":  {"nivel": "barato", "por_que": "renovação de apólice, cotação, venda ativa", "cnaes": ["6622300"]},
+  "concessionarias_revendas": {"nivel": "barato", "por_que": "retorno de lead de veículo, agendamento de test drive e revisão", "cnaes": ["4511101", "4511102"]},
+  "agencias_viagem":     {"nivel": "barato", "por_que": "retorno de orçamento, venda de pacote", "cnaes": ["7911200"]},
+
+  "cobranca":            {"nivel": "caro", "por_que": "ligação em massa é o negócio deles", "cnaes": ["8291100"]},
+  "teleatendimento":     {"nivel": "caro", "por_que": "call center: troca de operador por IA em volume", "cnaes": ["8220200"]},
+  "financeiras_credito": {"nivel": "caro", "por_que": "oferta de crédito, correspondente bancário, cobrança", "cnaes": ["6436100", "6619302", "6613400"]},
+  "consorcios":          {"nivel": "caro", "por_que": "venda ativa de cota, cobrança de parcela", "cnaes": ["6493000"]},
+  "planos_saude":        {"nivel": "caro", "por_que": "venda, retenção e agendamento em volume", "cnaes": ["6550200"]},
+  "hospitais":           {"nivel": "caro", "por_que": "central de marcação e confirmação em volume", "cnaes": ["8610101", "8610102"]},
+  "provedores_internet": {"nivel": "caro", "por_que": "venda, cobrança e retenção de assinante", "cnaes": ["6110803", "6190601"]},
+  "incorporadoras":      {"nivel": "caro", "por_que": "lançamento: muito lead para qualificar rápido", "cnaes": ["4110700"]},
+  "escolas_faculdades":  {"nivel": "caro", "por_que": "captação de aluno e rematrícula em volume", "cnaes": ["8531700", "8513900", "8520100"]},
+  "agencias_marketing":  {"nivel": "caro", "por_que": "revendem para os clientes deles (canal)", "cnaes": ["7311400", "7319003", "7319002", "7319004"]},
+  "software_ti":         {"nivel": "caro", "por_que": "vendas B2B e suporte; também podem integrar e revender", "cnaes": ["6201501", "6202300", "6203100", "6204000", "6311900"]}
+}

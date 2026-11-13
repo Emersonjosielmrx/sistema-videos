@@ -1,0 +1,16 @@
+{
+  "name": "hermes-qa",
+  "version": "1.0.0",
+  "description": "QA suite Playwright do Hermes Call — roda contra beta em prod, captura screenshots, segura regressão",
+  "private": true,
+  "scripts": {
+    "qa:smoke": "playwright test --grep @smoke",
+    "qa:sec": "playwright test --grep @security",
+    "qa:e2e": "playwright test --grep @e2e",
+    "qa:regression": "playwright test --grep @regression",
+    "qa:all": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

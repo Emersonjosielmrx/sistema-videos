@@ -1,0 +1,11 @@
+Narrador (voz clonada): ludmilla
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_esportenoturno  |  título: FALÊNCIA CHOCANTE: DEMITIU CENTENAS e ACABOU COM tudo
+Vídeo: D:\hipercool-materiais\animes recap\shorts\bioware_cap1_20261024\video.mp4
+
+frase 0: francisca +0% | clima engracado | tom +0 | index 0.64 | protect 0.22 | vol 0.79 | Chega mais, minha tropa, é o poder!
+frase 1: francisca -17% | clima triste | tom -1 | index 0.55 | protect 0.28 | vol 0.65 | O estúdio que criou Mass Effect e Dragon Age simplesmente acabou.
+frase 2: francisca +5% | clima normal | tom +0 | index 0.5 | protect 0.28 | vol 0.83 | Nesta semana, a BioWare fechou as portas e cortou cerca de quatrocentos empregos.
+frase 3: francisca -15% | clima tensao | tom -1 | index 0.5 | protect 0.22 | vol 0.68 | Eles ainda cancelaram o próximo Mass Effect, papo reto.
+frase 4: francisca -13% | clima epico | tom -1 | index 0.4 | protect 0.37 | vol 0.81 | Tudo isso rolou só dois meses depois de a empresa ser comprada por uma grana absurda e...

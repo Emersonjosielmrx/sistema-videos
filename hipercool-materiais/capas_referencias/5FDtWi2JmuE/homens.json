@@ -1,0 +1,112 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "Siang Ho",
+   "principal": true,
+   "aparicoes": 63,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2940.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2948.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1688.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3092.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 2404.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3536.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Black short hair with straight bangs, dark eyes, wearing casual shirts like blue or beige",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h02",
+   "nome": "Siang Ho",
+   "principal": false,
+   "aparicoes": 34,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3596.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2508.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 3832.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3636.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3652.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3772.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "dark/black hair, dark eyes, casual clothing (hoodies, t-shirts), becomes more muscular as story progresses, gets a buzz cut/shaved head partway through",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h03",
+   "nome": "Siang Ho",
+   "principal": false,
+   "aparicoes": 23,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 516.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 276.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 288.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 940.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 8.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 148.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Black medium-length hair parted in the middle, dark eyes, light facial stubble, often wearing casual clothes or outdoor survival gear",
+   "protagonista": true,
+   "adulto": true
+  }
+ ]
+}

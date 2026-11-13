@@ -1,0 +1,29 @@
+{
+ "formato": "recap de anime legendado com música dramática",
+ "descricao": "Sequência rápida de cenas-chave de anime com legendas em português descrevendo a trama (torneio, máfia, casamento). Música épica/tensa de fundo. Ritmo acelerado, cuts a cada 2-3 segundos.",
+ "replicavel": true,
+ "como_fazer": "1. Selecionar anime da base de 86k painéis de manhwa ou buscar frames no Pexels/domínio público de animes clássicos. 2. Montar storyline dramática (3-5 beats: apresentação→conflito→tensão→clímax). 3. Gerar legendas curtas e impactantes com LLM (estilo 'ELA O LARGOU', 'LIDERANDO', 'ISSO SIGNIFICA QUE SEGUIRÁ'). 4. Sincronizar frames com legendas usando ffmpeg, overlays animados (raio, fogo) nos momentos de tensão. 5. Adicionar trilha épica/dramática da biblioteca de 341 músicas. 6. Exportar em 9:16, 30-60 segundos.",
+ "ferramentas": [
+  "ffmpeg",
+  "LLM (roteiro/legendas)",
+  "overlays animados",
+  "biblioteca de músicas",
+  "86k painéis manhwa"
+ ],
+ "fonte_de_material": "86 mil painéis de manhwa próprios; frames de animes de domínio público; Pexels; ou geração IA (Veo 3) para cenas genéricas estilo anime",
+ "esforco": "baixo",
+ "potencial": 8,
+ "por_que_viraliza": "Mistura nostalgia de anime + storytelling acelerado + música épica cria loop de 'preciso saber o final'",
+ "exemplo_roteiro": "Frame 1: 'ELE FOI DESAFIADO PELA MÁFIA' [homem de terno, fundo vermelho]\nFrame 2: 'PARA GANHAR A MÃO DELA EM CASAMENTO' [garota chorando]\nFrame 3: 'MAS O TORNEIO É MORTAL' [luta épica]\nFrame 4: 'E ELE NÃO PODE PERDER' [close no rosto determinado]\nFrame 5: 'O QUE ELE VAI FAZER?' [tela preta, suspense]",
+ "nicho_canal": "manhwareact",
+ "tags": [
+  "anime recap",
+  "torneio anime",
+  "anime legendado",
+  "storytelling rápido",
+  "anime dramático",
+  "shorts anime"
+ ],
+ "video": "2026-10-07 13-57-58.mp4",
+ "data": "2026-10-12"
+}

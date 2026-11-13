@@ -1,0 +1,30 @@
+services:
+  activator:
+    build: .
+    container_name: whatsapp-activator
+    # Rede da própria máquina: a API fica só em 127.0.0.1 e o Hermes é alcançado em
+    # localhost, sem publicar porta para fora.
+    network_mode: host
+    volumes:
+      # Acesso ao Docker da máquina para criar os celulares virtuais. Quem controla este
+      # serviço controla o Docker da máquina: por isso a API tem senha e não sai de 127.0.0.1.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # APK do WhatsApp (baixar antes, de whatsapp.com/android)
+      - ./apk:/app/apk:ro
+      # Sessões (qual celular virtual é de qual número) e telas de diagnóstico
+      - ./data:/app/data
+    devices:
+      # Virtualização. Sem /dev/kvm na máquina o Android não liga e este serviço nem sobe.
+      - /dev/kvm:/dev/kvm
+    environment:
+      - PORT=${PORT:-8090}
+      - LISTEN_ADDR=127.0.0.1
+      - ACTIVATOR_TOKEN=${ACTIVATOR_TOKEN:?defina ACTIVATOR_TOKEN no .env}
+      - HERMES_URL=${HERMES_URL:-http://localhost:8080}
+      - HERMES_TOKEN=${HERMES_TOKEN:?defina HERMES_TOKEN no .env}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

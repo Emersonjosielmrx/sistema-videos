@@ -1,0 +1,189 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 15-48-37.mp4",
+ "duration": 83.166667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 720,
+  "has_webcam": true,
+  "contrast": 68.2,
+  "trimmed": {
+   "webcam_bottom": 301,
+   "content_bottom": 212
+  },
+  "divider": 663,
+  "webcam": [
+   0,
+   0,
+   720,
+   362
+  ],
+  "content": [
+   0,
+   663,
+   720,
+   1068
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto com pouca reação do criador, mas o tema de anime com kaijus e mechas tem apelo para o público de manhwa/anime",
+  "topic": "Novo anime de Kaiju com mechas e viagem no tempo",
+  "channel": "manhwareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 83.166667,
+    "hook": "ESSE ANIME DE KAIJU É INSANO!",
+    "title": "Esse novo anime de KAIJU vai ser ABSURDO 😱🔥 #shorts #anime",
+    "description": "O criador reagiu a um novo anime de Kaiju com mechas e uma história de viagem no tempo insana! O protagonista Jack acorda e descobre ruínas e mechas destruídas por toda parte 😱\nVocê já conhecia esse anime? Comenta aí!\nSe curtiu, segue pra mais reacts de anime!\n\n#shorts #react #anime #kaiju #mecha #novoanime #temporada #animebrasileiro #reactanime #otaku #animereact #animes2025 #japones #animenovo #hype",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#kaiju",
+     "#mecha",
+     "#novoanime",
+     "#reactanime",
+     "#otaku",
+     "#animes2025"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "kaiju",
+     "mecha",
+     "novo anime",
+     "react anime",
+     "otaku",
+     "anime 2025",
+     "anime novo",
+     "temporada anime",
+     "anime react",
+     "viagem no tempo",
+     "ruinas",
+     "Jack",
+     "anime legendado",
+     "anime dublado",
+     "react br"
+    ],
+    "keywords": [
+     {
+      "t": 17.0,
+      "text": "KAIJU",
+      "emoji": "🦖"
+     },
+     {
+      "t": 60.0,
+      "text": "RUÍNAS",
+      "emoji": "💥"
+     },
+     {
+      "t": 76.8,
+      "text": "BACANA",
+      "emoji": "🔥"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 76.8,
+      "type": "hype"
+     }
+    ],
+    "memes": [
+     {
+      "t": 60.0,
+      "id": 7
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Vocês já conheciam esse anime de Kaiju? Qual o nome? 👇",
+    "title_alternatives": [
+     "Novo anime de KAIJU com MECHAS destruídas?! 😱🔥 #shorts #anime",
+     "Reagindo a esse anime INSANO de Kaiju pela primeira vez 🦖💥 #shorts #react"
+    ],
+    "mood": "neutral_chill",
+    "music": false
+   }
+  ],
+  "remove": [
+   {
+    "start": 21.0,
+    "end": 27.0,
+    "why": "Criador repete 'a história do Kaiju' e hesita sem acrescentar nada ('ah... só assim né')"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_15_48_37\\2026_10_07_15_48_37.mp4",
+   "duration": 12.529980200000082,
+   "keeps": 13,
+   "meta": {
+    "hook": "ESSE ANIME DE KAIJU É INSANO!",
+    "title": "Esse novo anime de KAIJU vai ser ABSURDO 😱🔥 #shorts #anime",
+    "description": "O criador reagiu a um novo anime de Kaiju com mechas e uma história de viagem no tempo insana! O protagonista Jack acorda e descobre ruínas e mechas destruídas por toda parte 😱\nVocê já conhecia esse anime? Comenta aí!\nSe curtiu, segue pra mais reacts de anime!\n\n#shorts #react #anime #kaiju #mecha #novoanime #temporada #animebrasileiro #reactanime #otaku #animereact #animes2025 #japones #animenovo #hype",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#kaiju",
+     "#mecha",
+     "#novoanime",
+     "#reactanime",
+     "#otaku",
+     "#animes2025"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "kaiju",
+     "mecha",
+     "novo anime",
+     "react anime",
+     "otaku",
+     "anime 2025",
+     "anime novo",
+     "temporada anime",
+     "anime react",
+     "viagem no tempo",
+     "ruinas",
+     "Jack",
+     "anime legendado",
+     "anime dublado",
+     "react br"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "neutral_chill",
+    "music": false,
+    "pinned_comment": "Vocês já conheciam esse anime de Kaiju? Qual o nome? 👇",
+    "title_alternatives": [
+     "Novo anime de KAIJU com MECHAS destruídas?! 😱🔥 #shorts #anime",
+     "Reagindo a esse anime INSANO de Kaiju pela primeira vez 🦖💥 #shorts #react"
+    ],
+    "work": null,
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_15_48_37\\2026_10_07_15_48_37_thumb.jpg",
+   "music": null,
+   "removed_pct": 84.9,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 12.53,
+    "lufs": -13.9
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 189.9
+}

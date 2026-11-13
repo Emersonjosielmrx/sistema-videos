@@ -1,0 +1,71 @@
+{
+ "modelo": "cw/claude-sonnet-5-5",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T19:10:45",
+ "segundos": 74,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T19:10:45",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "cw/claude-sonnet-5-5",
+   "decisor": "cw/claude-sonnet-5-5"
+  },
+  "achados": [
+   {
+    "tipo": "CERTEZA",
+    "problema": "Formato dono_tres (dono nos 3 blocos, ~27 s do mesmo plano frontal, sem nenhuma tela do produto/WhatsApp) é a causa do 'parado/sem prova do produto'. Não é falta de zoom: o movimento por cena é ALTO (10–14%) nas cenas de dono, então aumentar kenburns_zoom não resolve. O que falta é ELEMENTO/tela do produto entrando junto com a fala.",
+    "prova": "dados.json: formato=dono_tres; juri.movimento cenas 1-3 = 14,18 / 10,14 / 12,87; juri_problemas diretor cena 2 ('27 segundos no mesmo enquadramento'); folha quadros 3–10 praticamente o mesmo plano",
+    "sugestao": "Colocar peso menor ou desligar a variante dono_tres em pesos_variantes/variantes_desligadas (ex.: dono_tres: 0.3). Se mantiver, propor ideia_codigo: mock de celular/WhatsApp (com selo 'Simulação') ou ícone de ligação entrando e deslizando na cena 2 ('dispara ligações no WhatsApp com voz real clonada'). Não mexer em kenburns_zoom.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Padrão recorrente: dono_tres é o formato que mais repete nota baixa em movimento/diretor. Os três vídeos dono_tres têm movimento 4,0–5,0 e diretor 4–6; a mesma queixa ('mesmo plano, sem tela de produto') aparece também em dono_tres_veo_final. Vale mais que o caso isolado deste vídeo.",
+    "prova": "historico_notas: inovarecom_20261028_153713 (dono_tres, mov 4,0, nota 6,5), disparoemmassa_20261029_031327 (dono_tres, mov 4,5, diretor 4,0, nota 5,62), este (mov 5,0, nota 5,5); dono_tres_veo_final: sintetizerisada 5,5, disparoemmassa 5,75 e 5,5 (mov 4,0–5,0). placar_formatos mostra dono_tres sem nenhum registro de vitória (0,0)",
+    "sugestao": "Testar A/B: rodar 3–5 vídeos com dono_tres desligado (variantes_desligadas=['dono_tres']) ou com peso baixo e comparar nota de movimento/diretor contra dono_abre_fecha_veo_meio (notas 6,0–7,0 no histórico).",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Headroom apertado: o balão verde de título + a pílula de etapa ('1 O problema', '2 Como funciona', '3 O resultado') ficam colados no topo da cabeça do apresentador. A régua é o topo do cabelo, e no quadro 3–10 a cabeça encosta/entra na área da pílula.",
+    "prova": "folha quadros 3–10 (pílula logo acima da cabeça); juri_problemas diretor cena 1 (headroom estrangulado)",
+    "sugestao": "Descer a posição do dono ~8–10% (ou reduzir a escala) nas cenas dono_tres, ou subir/encolher o balão do título, garantindo folga visível entre a pílula e o cabelo. Conferir o quadro pelo topo da cabeça, não pelos olhos.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Abertura: a caixa 'Pergunta frequente' nos quadros 1–2 já aparece, mas o plano segue estático sem elemento de quebra de padrão nos primeiros 1,5 s.",
+    "prova": "folha quadros 1–2; juri_problemas diretor cena 0 (gancho); movimento cena 0 = 11,41 (medida alta, então não é falta de zoom)",
+    "sugestao": "Testar como experimento (não certeza): fazer a pergunta entrar com animação junto com a fala, ou um elemento visual da dor (notificações acumuladas/contatos parados) deslizando na cena 0. Ligar/afinar botão de elemento em vez de aumentar zoom.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Cartão final (cena 4) com movimento baixo (4,63%), quase só brilho do botão, e corte brusco vindo do dono.",
+    "prova": "juri.movimento cena 4 = 4,63; folha quadro 12; ajustes: pulso_botao 0,06 e brilho_botao 1 já ligados",
+    "sugestao": "Como teste: subir pulso_botao de 0,06 para ~0,10 e conferir o período do pulso contra o espaço entre os quadros do júri (pode cair na mesma fase e parecer parado). Alternativa: manter o dono desfocado ao fundo do cartão.",
+    "repetido": true
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "Achado de FORMATO repetido: dono_tres mantém ~27 s do mesmo plano frontal, sem tela do produto, e é o formato que mais repete nota baixa em movimento e diretor. O movimento por cena já é alto (10–14%), então zoom não resolve. Peso baixo é a mudança pequena e reversível, sem desligar o formato por completo, e as views seguem decidindo.",
+    "prova": "Três vídeos dono_tres com movimento 4,0–5,0 e diretor 4–6 (notas 6,5, 5,62 e 5,5). Este vídeo: movimento 5,0, diretor 6,0, nota 5,5; o diretor critica '27 segundos no mesmo enquadramento'. O placar de dono_tres está zerado, sem nenhuma vitória. dono_abre_fecha_veo_meio tem notas de 6,0–7,0 no histórico."
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Nas cenas de dono, fazer entrar junto com a fala um elemento do produto (mock de celular/WhatsApp com selo 'Simulação', ou ícone de ligação) deslizando na cena 2. Também descer o dono 8–10% ou encolher o balão do título e a pílula de etapa, para dar folga visível entre a pílula e o topo do cabelo (conferir pelo topo da cabeça).",
+    "motivo": "Resolve a causa real do 'parado/sem prova do produto' e o headroom apertado, mas exige programação e não cabe em nenhuma ação permitida. Fica anotada para o humano.",
+    "prova": "Quadros 3–10 mostram praticamente o mesmo plano, com a pílula colada na cabeça. O diretor aponta headroom estrangulado na cena 1 e 27 s no mesmo enquadramento na cena 2.",
+    "vetada": "Vetada para aplicação automática. É grande e exige programação, e a própria mudança diz que não cabe em nenhuma ação permitida, então só pode ficar anotada para um humano. Também mistura duas ideias: um mock de celular/WhatsApp, que precisa de selo 'Simulação' e respeito às regras de fatos, e um ajuste de posição do dono em 8–10%, que mexe em zona segura e no rosto do dono. A parte do headroom está em linguagem vaga ('descer 8–10% ou encolher o balão'), com duas alternativas sem decisão. Pode ser registrada como ideia para revisão humana, mas não aplicada."
+   }
+  ],
+  "aprovadas": 1
+ }
+}

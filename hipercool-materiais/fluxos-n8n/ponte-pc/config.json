@@ -1,0 +1,12 @@
+{
+ "n8n": "https://n8n6.inovareinteligenciaartificial.com",
+ "token": "<SEGREDO_REMOVIDO>",
+ "maquina": "pc1",
+ "intervalo_s": 20,
+ "acoes_liberadas": [
+  "saude",
+  "imagem_flow",
+  "montar_video",
+  "guardar_para_postar"
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "pautas": [
+  {
+   "id": "dor_ar_condicionado_casa",
+   "tipo": "dor",
+   "ideia": "Família paraense passa calor evitando ligar o ar-condicionado por medo do valor da fatura, mas pode gerar a própria energia com o projeto residencial da MS Energy.",
+   "pergunta_cliente": "Consigo instalar na minha casa para usar o ar sem medo da conta?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "dor_freezer_comercio",
+   "tipo": "dor",
+   "ideia": "Dono de mercadinho vê o lucro do mês ir embora para manter freezers e balcões refrigerados ligados, resolvendo isso com a instalação de energia solar da MS Energy.",
+   "pergunta_cliente": "Energia solar aguenta os freezers do meu comércio?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "objecao_tempo_empresa",
+   "tipo": "objecao",
+   "ideia": "Cliente tem receio de contratar aventureiros no setor elétrico e descobre a segurança de fechar com a MS Energy, que tem quase dez anos de mercado no Pará.",
+   "pergunta_cliente": "A empresa de vocês já tem experiência aqui no Pará?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "caso_de_uso_propriedade_rural",
+   "tipo": "caso_de_uso",
+   "ideia": "Produtor rural no interior do Pará reduz os custos pesados de bombeamento de água e maquinário instalando o sistema solar da MS Energy.",
+   "pergunta_cliente": "Vocês instalam energia solar em fazenda e sítio?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "antes_depois_comercio_verao",
+   "tipo": "antes_depois",
+   "ideia": "Comerciante que antes sofria com as oscilações do custo da energia agora opera o negócio com tranquilidade após o projeto solar da MS Energy.",
+   "pergunta_cliente": "Vale a pena trocar a energia convencional pelo sistema solar no comércio?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "dor_industria_custo_fixo",
+   "tipo": "dor",
+   "ideia": "Indústria regional enfrenta custos operacionais altíssimos com maquinário pesado e encontra alívio instalando o sistema solar dimensionado pela MS Energy.",
+   "pergunta_cliente": "Vocês atendem indústrias com consumo muito alto?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "caso_de_uso_padaria_fornos",
+   "tipo": "caso_de_uso",
+   "ideia": "Padaria paraense com alto consumo de energia em fornos e refrigeração passa a produzir com suporte do sistema instalado pela MS Energy.",
+   "pergunta_cliente": "Dá para colocar energia solar no meu tipo de negócio?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "pergunta_frequente_quem_faz_tu",
+   "tipo": "pergunta_frequente",
+   "ideia": "Deixa claro que o cliente não precisa contratar terceiros, pois a MS Energy cuida de todo o projeto, da instalação e da manutenção.",
+   "pergunta_cliente": "A mesma empresa faz o projeto e a instalação das placas?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "dor_casa_familia_cresceu",
+   "tipo": "dor",
+   "ideia": "Casa que aumentou o consumo de eletrodomésticos com a família reunida tem a conta equilibrada após o projeto residencial da MS Energy.",
+   "pergunta_cliente": "Consigo reduzir o peso da conta de luz na minha casa?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "antes_depois_produtor_rural",
+   "tipo": "antes_depois",
+   "ideia": "Propriedade rural que antes dependia exclusivamente da rede elétrica cara passa a gerar energia limpa no campo com a MS Energy.",
+   "pergunta_cliente": "Como fica a conta de energia do sítio depois da instalação?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "objecao_empresa_sem_suporte",
+   "tipo": "objecao",
+   "ideia": "Combate o receio de ficar sem assistência após a compra destacando que a MS Energy tem quase dez anos de atuação local e faz manutenção contínua.",
+   "pergunta_cliente": "Se der algum problema depois de instalar, quem me atende?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "caso_de_uso_clinica_escritorio",
+   "tipo": "caso_de_uso",
+   "ideia": "Consultório ou escritório no Pará mantém ambientes climatizados o dia inteiro sem surpresas no fim do mês graças ao sistema da MS Energy.",
+   "pergunta_cliente": "Energia solar serve para pequenas salas comerciais e clínicas?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "pergunta_frequente_onde_atende",
+   "tipo": "pergunta_frequente",
+   "ideia": "Informa os clientes de diversas cidades paraenses que a MS Energy atende residências, comércios, indústrias e áreas rurais no estado do Pará.",
+   "pergunta_cliente": "Vocês atendem no interior do Pará ou só na capital?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "dor_inseguranca_reajuste_luz",
+   "tipo": "dor",
+   "ideia": "Consumidor paraense vive apreensivo a cada novo aumento na conta de luz e encontra estabilidade gerando a própria energia com a MS Energy.",
+   "pergunta_cliente": "Instalando energia solar eu fico livre desses aumentos constantes da conta?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "como_funciona_manutencao_preve",
+   "tipo": "como_funciona",
+   "ideia": "Mostra como o serviço de manutenção da MS Energy cuida dos sistemas já instalados para manter as placas solares sempre operando direito.",
+   "pergunta_cliente": "Como funciona a manutenção do sistema solar depois que ele é instalado?",
+   "criada": "2026-10-25T23:24:58"
+  },
+  {
+   "id": "antes_depois_galpao_comercial",
+   "tipo": "antes_depois",
+   "ideia": "Galpão que tinha a conta de energia como um dos maiores gargalos orçamentários transforma o custo fixo com a instalação solar da MS Energy.",
+   "pergunta_cliente": "Consigo instalar energia solar no telhado do meu galpão?",
+   "criada": "2026-10-25T23:24:58"
+  }
+ ]
+}

@@ -1,0 +1,690 @@
+{
+ "conta": "emersonjosiel2030",
+ "pergunta": "Responda apenas com a palavra: FUNCIONOU",
+ "requests": [
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=aPya6c&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2585613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,\"95a4c0abcba24364\",null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,null,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,139500000],[1793069219,327000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22aPya6c%22%2C%22%5B%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=ku4Jyf&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2685613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,null,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,72000000],[1793069219,399000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22ku4Jyf%22%2C%22%5B%5C%22pt%5C%22%2Cnull%2Cnull%2Cnull%2C14%2Cnull%2Cnull%2C%5B32%5D%2Cnull%2C%5B%5D%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/rolldown-runtime-hePW80VL.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/react-Cvdyeg_0.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/jsx-runtime-DevdQ9lA.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/Box-BW8JPv0h.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/mountIsland-zc6C4Bsp.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/IconButton-CA5EbwP1.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/SearchModalDialog-BCh_HY_U.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport/fine-allowlist",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app\",\"referrer\":\"\",\"violated-directive\":\"script-src-elem\",\"effective-directive\":\"script-src-elem\",\"original-policy\":\"script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://www.googleadservices.com/pagead/conversion/ https://www.googletagmanager.com/gtag/js https://www.googletagmanager.com/gtag/destination https://www.googletagmanager.com/gtm.js https://www.google.com/js/bg/ https://www.gstatic.com/external_hosted/highlightjs/highlight.pack.js https://www.gstatic.com/monaco_editor/ https://fonts.gstatic.com/s/e/notoemoji/search/wrapper.js https://www.youtube.com/iframe_api https://translate.google.com/translate_a/element.js https://www-onepick-opensocial.googleusercontent.com/gadgets/js/rpc.js https://www.google.com/tools/feedback/chat_load.js https://www.google.com/tools/feedback/help_api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.gstatic.com/feedback/js/ https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://maps.googleapis.com/maps/api/js https://gemini.gstatic.com/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://maps.googleapis.com/maps-api-v3/api/js/ https://maps.googleapis.com/maps/vt https://maps.googleapis.com/maps/api/js/ https://maps.googleapis.com/maps/api/place/js/ https://www.youtube.com/s/player/ https://translate.googleapis.com/_/translate_http/_/js/;report-uri /_/BardChatUi/cspreport/fine-allowlist\",\"disposition\":\"report\",\"blocked-uri\":\"https://www.gstatic.com/bg3/boq-bard-web/islands/assets/dist-BgrLlKA9.js\",\"status-code\":200,\"script-sample\":\"\"}}",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://play.google.com/log?hasfast=true&auth=SAPISIDHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID1PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID3PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82&authuser=0&format=json",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "[[1,null,null,null,null,null,null,null,null,null,[null,null,null,null,\"pt\",null,\"boq_gemini-web-uiserver_20261026.01_p0\",null,null,[3,0]]],1957,[[1793069219525,null,null,null,null,null,null,\"[null,null,null,null,[null,null,null,null,\\\"gemini-web-uiserver\\\",null,null,3,null,\\\"boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O\\\",1],null,null,null,null,null,null,null,null,null,[336032,[7,676500000],\\\"12952415393919286915\\\",1],null,null,[null,null,2]]\",null,null,null,null,null,null,10800,[null,[\"CAMSqQYdoQHfkqcQBNb7BgTEBgOi3AUD64G8EgOn1dwGAtbSBQPaIRYEFtF2Abv2BgKv/QMC2bsEAvzPCwPLQwOcigUCtvUGAqSSBeJtAh0CgQQOywIChhYCkcgFql0CvAPxBJb/BeEEjWoP6XsKlHcCgj4F8YcFAuNuAsAbA/6+BgK6kgaDEgKcqwUCzxECuJ4GAvxZAvk9BJixBgKwbgWfOAHrcADiiwUCtPKzBAK7KgS1AwKTjgaz9wUJz18DlqMFgTrUFwPuCAPQWhao+wUEsgzMnQac9AYDi2wF1NUGApZELP8RBf1iApiHBgXYNQTrUAOZG7kGBMAFhBID4FoMno0GA7m3BgLN3QYH8woF7CIE8RUDtBIFlCgElBaTbwW2EgPjQwLDFQHdZwTtBQ+njAYA4r0GANLHBgWoDYIFqQYDvQAChw4D8AMDwhIN+wgDzRQAPQCPdgDoCQA7A/IvA9QjA9oZAP2CBgHIogYDux0DiSAFyToEvREA4wACswABqFcDAAPFLAScGbIkvhoro2QE0x4EtjUF5DsE5UkD7CgE5DEEnw4E00GaBsdoA/KbBgShbwTnHgK8BNguBL44AoMdBf0tApCDBgPkDwLqEssDBM8B8gQExxSxBMtHBNshBPllBbgMAo1xA6zzBv5IBbwCAqRvnCCnLwWTAQWDBgCSQATGBQODLgSkAwR7AMMeAogjAvA1A+ITDvQ+BfIlBDwFg0wD0Q0E9wMCnisEqhoEgl8E+UwEwwUEFgT+BQSSFQWfAfwAwwAE9AoBHgP6BJEABPIYAsMuBJwWAqEnBOYnBc8CAtcGBeEMBJc6BP4qBJsmBMQGBaUtBKwfBNEIBIUBBPIIBMgIBaIjA+QiBPINvxAFXgDmCQQzBP8GBYQViAIFlgMEpgIElw0F5kcExyQElgEE8QPCEASNV7YTAvEPAJcEBOYNA4UVA+UDBJUOA7kDBZgCAjryRwSQQgSBBAOACgSKKgDjJwWQQQSHCQAGANwsBf0CAhUCjw0AtzMDLgUMzBcE7RYAtQMD9DAEp88GBvnBBgC3A7lQAMEWAq3K9AIF+6geodaUBg==\"]],null,null,null,null,1]],1793069219532,null,null,null,null,null,null,null,null,null,null,null,null,null,[[null,[null,null,null,null,null,null,null,null,null,null,null,null,103135050]],9]]",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=L5adhe&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2785613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,680400000],[1793069220,80000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22L5adhe%22%2C%22%5B%5Bnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C1%5D%2Cnull%2C%5B265%5D%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=ESY5D&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2885613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[2,861099999],[1793069222,941000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22ESY5D%22%2C%22%5Bnull%2C%5B5%5D%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate?bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2985613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,\"95a4c0abcba24364\",null,null,0,[4,33,5,6,8,16,19,20,4,33,5,6,8,16,19,20],null,null,2,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,839099999],[1793069223,780000000]]]",
+    "referer": "https://gemini.google.com/",
+    "x-goog-ext-525005358-jspb": "[\"B81DC6D8-ED08-4943-A178-344FF97701D3\",1]",
+    "x-goog-ext-73010990-jspb": "[0,0,0]",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5Bnull%2C%22%5B%5B%5C%22Responda%20apenas%20com%20a%20palavra%3A%20FUNCIONOU%5C%22%2C0%2Cnull%2Cnull%2Cnull%2Cnull%2C0%5D%2C%5B%5C%22pt%5C%22%5D%2Cnull%2C%5C%22!9_Sl9JDNAAalv-uthb9Cn_n1hlAZ6_Q7AEABEArZ1CTq04a_yYLjRL1EphElHtAzGg5TUTt8V5cDuUH-sndmniwcBeqSdfE_VMvU3Vu6Xi4D4RY5wTfyvE3mAgAAAWdSAAAAHGgBB34AS5KV_sHFVHkLZ4x6wqE0mg7N_xNpjsOMC5CUZ1ew5zxmouyWix9GbFQ2EuqBvdINwe70_tz8WZEU_f24pD-UlbwKaQvJ2kpyQTobipkEM3pnsgs5uJpsmj1Cxqlm8pqJy34I21bRi8aKzEzLexPDwL1OEdLjVanfrJSwGf8o7cnYwptTKAoBHyly-_8Ffyy6-XRNcGNH5SAyrdkBsAoytqEyFGVK8SitxgEtaglH-ki_SLwyggADTNBuq52ii5AjaWU7OCEp3xi72v41Y8NXVxfVunLHLmmydRWsq4EpQfe7OarzLerHFUeuaszEkQIQ_5zZjX-iFVXf3ISiknVstc1Fi8aJgfOrv6fB__vjyt1KbVBuRZfaeqI0-R0yL7luoxGpKyeu4LVv_xRxDmW95f6OHmM_FXKyOCFLoNUuP2L8glfJtKNjOKZIymQzEp9EPhMhyQHc5mEnTnrE7AeFtdro8JZm75ewY7BdAijP2g973MdJIAtTw0E4uscU7opbkSTCx2NzMYP5OTTFQ-hcJAfWL10H8oRuFJIqDcsfc8iWO0r8l4jWYO_tAOBW9FOWDErYB6GHZSbHdjFB4iN8DrjVzCWbeRjvOr40XsK3ZPKto85PB_V0YrOoUyTqn_hmdoiLu1Pl-NOxGKo_dAswdED1ElskZv55Z_mHLWLlUeHN0DBaaf33HdwR7zX_0y9e42E4_Bddej7az__ROrYiJzoDevBVALUxIx5tX8Riw0m22DI2S4eoYTbU6iwv_74KT_Y2_qkxQ6V5ufAi-mCY4nNbasamkoKo48Z5xF3SLpbpCoSPE_fkmDjMzahJ8bC8oj72f34-s9-GAxw7HhY0TvheLCi5U5fXq1WnYvDdLf-oVyVm-_Hbl5dqslQHgg8N1H31fmOZ1uePzVm5O_9XsT4tAmF7ep2fDlXGmTfT9kx8Yhx-MDAznzj_0ZNK3skxR-Fequ40yKQrLo8KJMazcL3tr84xpJpysZLOnTIqRRJ8gDsKRYvanEjJJ2wKZNvXuwg0nkaH9Hd_sRuFXfJks1d8lQlq9V29RUV6zyjYPyQxJ92iAzZ9_fhtUuaEY04smOk6ONsNz4UACH7ujmYsZOXZNsh3mubMB4bxnIAvTvujg_H6svx6TMLeuRs2g-NvQk1_hiwl6Fihe3PrXHQeJaY35fAuQoi5IykGc0QytuNsNlqE2a5sj4hMsnf-g-jmQbqDyU_u3n8vqT5aD61pNdDKbTfTaJMIbY442uptRB3yhrV94t5fd-HQuUQvuhjNka2g6qeWfXCl86oFRoqyC9S38ISmQsRsWO32qjVWPPMkHRm_xubTl2mRSUbak8KuKC79m-jEZQioJBe8RlmYN_Pel9yOTroEhoH8Iig3IaHY89qrdkue4G3H7znp-6r02wuRkLJY4RHiBVBBrOAj7zVrxzNeHoIy8aWLiJ5CnNeSLrvKK47ej_zPiYL6LrGTZOp1Jig75fSraI0CF1iDoEWcs0u4pU25A0ktnQW1Z1gTwmQ9N-6e-mdGlD27YrXkpQI%5C%22%2C%5C%223f3af99e5a91c33174dd87534f375ae0%5C%22%2Cnull%2C%5B1%5D%2C1%2Cnull%2Cnull%2C1%2C0%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C%5B%5B0%5D%5D%2C0%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C1%2Cnull%2Cnull%2C%5B4%2C16%2C19%5D%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C%5B1%5D%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C0%2Cnull%2Cnull%2Cnull%2C0%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C%5C%22B81DC6D8-ED08-4943-A178-344FF97701D3%5C%22%2Cnull%2C%5B%5D%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C0%2C2%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C8%2C1%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C1%2Cnull%2Cnull%2Cnull%2Cnull%2C0%2Cnull%2C1%5D%22%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": true
+  },
+  {
+   "url": "https://play.google.com/log?hasfast=true&auth=SAPISIDHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID1PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID3PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82&authuser=0&format=json",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "[[1,null,null,null,null,null,null,null,null,null,[null,null,null,null,\"pt\",null,\"53\",null,[[[\"Not:A-Brand\",\"8\"],[\"Chromium\",\"156\"],[\"Google Chrome\",\"156\"]],0,\"Windows\",\"10.0.0\",\"x86\",\"\",\"156.0.8078.48\"],[3,0]]],1828,[[1793069223800,null,null,null,null,null,null,\"[[[\\\"/client_streamz/bg/frs\\\",null,[\\\"mk\\\"],[[[[\\\"_\\\"]],[null,1680]]]],[\\\"/client_streamz/bg/ec\\\",null,[\\\"en\\\",\\\"mk\\\"],[[[[\\\"k\\\"],[\\\"_\\\"]],[1]],[[[\\\"n\\\"],[\\\"_\\\"]],[1]],[[[\\\"u\\\"],[\\\"_\\\"]],[2]]]],[\\\"/client_streamz/bg/el\\\",null,[\\\"en\\\",\\\"mk\\\"],[[[[\\\"k\\\"],[\\\"_\\\"]],[null,0.39990234375]],[[[\\\"u\\\"],[\\\"_\\\"]],[null,14]],[[[\\\"u\\\"],[\\\"_\\\"]],[null,8.900146484375]],[[[\\\"n\\\"],[\\\"_\\\"]],[null,29.299999982118607]]]]]]\",null,null,null,null,null,null,10800,null,null,null,null,null,2]],1793069223802]",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-WC57KJ50ZZ&gtm=45je6an1h1v9134258191z89113054662za20gzb9113054662zd9113054662xf1&_p=1793069209936&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=EAAAAAQ&cid=513211482.1793068640&frm=0&ir=1&ngs=1&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.48%7CGoogle%2520Chrome%3B156.0.8078.48&uam=&uamb=0&uap=Windows&uapv=10.0.0&uaw=0&ul=pt-br&tag_exp=115938466~115938468~118012009~118897920~118897930~120213116~120385422~120412528~120469145~120469153~121246026~121246034&dl=https%3A%2F%2Fgemini.google-b197145817.com%2Fapp%2F&sid=1793068639&sct=1&seg=1&dt=Google%20Gemini&_s=2&tfd=15118",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "en=356556&ep.page_locale=default&ep.user_agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F156.0.0.0%20Safari%2F537.36&ep.is_eea=false&ep.hashed_uid=b99aa672cebee0cbeb96a4d5e6ea86612e315843782541550e6dec3c1c602f61&ep.user_onboarding_status=available&ep.event_type=INTERACTION&_et=8556\r\nen=356556&ep.page_locale=default&ep.user_agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F156.0.0.0%20Safari%2F537.36&ep.is_eea=false&ep.hashed_uid=b99aa672cebee0cbeb96a4d5e6ea86612e315843782541550e6dec3c1c602f61&ep.user_onboarding_status=available&ep.event_type=INTERACTION&_et=517",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=PCck7e&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3085613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[1,639300000],[1793069225,419000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22PCck7e%22%2C%22%5B%5C%22r_1d6ac837a49a42c9%5C%22%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3185613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[3,135299999],[1793069228,555000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22VxUbXb%22%2C%22%5B%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3285613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,323300000],[1793069228,878000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22VxUbXb%22%2C%22%5B%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3385613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,263900000],[1793069229,142000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22VxUbXb%22%2C%22%5B%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3485613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,null,null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,134900000],[1793069229,277000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22VxUbXb%22%2C%22%5B%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=aPya6c&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3585613&rt=c",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "x-same-domain": "1",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-arch": "\"x86\"",
+    "x-goog-ext-73010989-jspb": "[0]",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    "x-goog-ext-525001261-jspb": "[1,null,null,null,\"95a4c0abcba24364\",null,null,null,[4,33,5,6,8,16,19,20],null,null,null,null,null,8,1,\"E04ED351-8F20-44AA-B838-29DFAC8636BC\",[\"boq_gemini-web-uiserver_20261026.01_p0\"],null,[[null,489500000],[1793069229,766000000]]]",
+    "referer": "https://gemini.google.com/",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "f.req=%5B%5B%5B%22aPya6c%22%2C%22%5B%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AIaPT3OuXU8tOx5FUGRWppCTpipS%3A1793069380777&",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://play.google.com/log?hasfast=true&auth=SAPISIDHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID1PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID3PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82&authuser=0&format=json",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "[[1,null,null,null,null,null,null,null,null,null,[null,null,null,null,\"pt\",null,\"boq_gemini-web-uiserver_20261026.01_p0\",null,[[[\"Not:A-Brand\",\"8\"],[\"Chromium\",\"156\"],[\"Google Chrome\",\"156\"]],0,\"Windows\",\"10.0.0\",\"x86\",\"\",\"156.0.8078.48\"],[3,0]]],1957,[[1793069230040,null,null,null,null,null,null,\"[null,null,null,null,[null,null,null,null,\\\"gemini-web-uiserver\\\",null,null,3,null,\\\"boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O\\\",1],null,null,null,null,null,null,null,null,null,[248461,[6,357399999],\\\"12527560109445835007\\\",1],null,null,[null,null,2]]\",null,null,null,null,null,null,10800,[null,[\"CAMSqQYdoQHfkqcQBNb7BgTEBgOi3AUD64G8EgOn1dwGAtbSBQPaIRYEFtF2Abv2BgKv/QMC2bsEAvzPCwPLQwOcigUCtvUGAqSSBeJtAh0CgQQOywIChhYCkcgFql0CvAPxBJb/BeEEjWoP6XsKlHcCgj4F8YcFAuNuAsAbA/6+BgK6kgaDEgKcqwUCzxECuJ4GAvxZAvk9BJixBgKwbgWfOAHrcADiiwUCtPKzBAK7KgS1AwKTjgaz9wUJz18DlqMFgTrUFwPuCAPQWhao+wUEsgzMnQac9AYDi2wF1NUGApZELP8RBf1iApiHBgXYNQTrUAOZG7kGBMAFhBID4FoMno0GA7m3BgLN3QYH8woF7CIE8RUDtBIFlCgElBaTbwW2EgPjQwLDFQHdZwTtBQ+njAYA4r0GANLHBgWoDYIFqQYDvQAChw4D8AMDwhIN+wgDzRQAPQCPdgDoCQA7A/IvA9QjA9oZAP2CBgHIogYDux0DiSAFyToEvREA4wACswABqFcDAAPFLAScGbIkvhoro2QE0x4EtjUF5DsE5UkD7CgE5DEEnw4E00GaBsdoA/KbBgShbwTnHgK8BNguBL44AoMdBf0tApCDBgPkDwLqEssDBM8B8gQExxSxBMtHBNshBPllBbgMAo1xA6zzBv5IBbwCAqRvnCCnLwWTAQWDBgCSQATGBQODLgSkAwR7AMMeAogjAvA1A+ITDvQ+BfIlBDwFg0wD0Q0E9wMCnisEqhoEgl8E+UwEwwUEFgT+BQSSFQWfAfwAwwAE9AoBHgP6BJEABPIYAsMuBJwWAqEnBOYnBc8CAtcGBeEMBJc6BP4qBJsmBMQGBaUtBKwfBNEIBIUBBPIIBMgIBaIjA+QiBPINvxAFXgDmCQQzBP8GBYQViAIFlgMEpgIElw0F5kcExyQElgEE8QPCEASNV7YTAvEPAJcEBOYNA4UVA+UDBJUOA7kDBZgCAjryRwSQQgSBBAOACgSKKgDjJwWQQQSHCQAGANwsBf0CAhUCjw0AtzMDLgUMzBcE7RYAtQMD9DAEp88GBvnBBgC3A7lQAMEWAq3K9AIF+6geodaUBg==\"]],null,null,null,null,2]],1793069230043,null,null,null,null,null,null,null,null,null,null,null,null,null,[[null,[null,null,null,null,null,null,null,null,null,null,null,null,103135050]],9]]",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/cspreport",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "application/csp-report",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "{\"csp-report\":{\"document-uri\":\"https://gemini.google.com/app/9fdde59f204f413d\",\"referrer\":\"\",\"violated-directive\":\"manifest-src\",\"effective-directive\":\"manifest-src\",\"original-policy\":\"report-uri /_/BardChatUi/cspreport;default-src 'none';script-src * 'unsafe-inline' 'unsafe-eval' blob: data: https://www.gstatic.com/bg3/boq-bard-web/;object-src * 'unsafe-inline' 'unsafe-eval';worker-src * 'unsafe-inline' 'unsafe-eval';style-src 'report-sample' 'unsafe-inline' https://www.gstatic.com https://gemini.gstatic.com https://fonts.googleapis.com https://gstatic.com/uservoice/surveys/resources/ https://www.gstatic.com/bg3/boq-bard-web/;font-src data: https://fonts.gstatic.com https://www.gstatic.com https://www.gstatic.com/bg3/boq-bard-web/;child-src 'self' https://*.google.com https://*.scf.usercontent.goog https://www.youtube.com https://www.youtube-nocookie.com https://docs.google.com/picker/v2/home blob:;frame-src 'self' https://*.google.com https://*.scf.usercontent.goog https://www.youtube.com https://www.youtube-nocookie.com https://docs.google.com/picker/v2/home blob: https://www.googletagmanager.com https://bid.g.doubleclick.net https://td.doubleclick.net https://*.fls.doubleclick.net;media-src https://*.google.com https://*.googleusercontent.com https://*.gstatic.com https://*.youtube.com https://*.youtube-nocookie.com https://*.ytimg.com https://*.ggpht.com https://bard.datacommons.org blob: https://*.googlevideo.com https://labs.google https://storage.googleapis.com https://*.googleapis.com;form-action https://ogs.google.com https://onegoogle-autopush.sandbox.google.com https://onegoogle-staging.sandbox.google.com https://onegoogle-dev.corp.google.com https://studio.firebase.google.com/run.api;manifest-src 'none';img-src https://*.google.com https://*.googleusercontent.com https://*.gstatic.com https://*.youtube.com https://*.youtube-nocookie.com https://*.ytimg.com https://*.ggpht.com https://bard.datacommons.org blob: data: https://labs.google https://*.googleapis.com https://www.gstatic.com/bg3/boq-bard-web/ https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com https://ad.doubleclick.net https://adservice.google.com https://ade.googlesyndication.com https://tpc.googlesyndication.com https://google.ad https://www.google.ad https://google.ae https://www.google.ae https://google.com.af https://www.google.com.af https://google.com.ag https://www.google.com.ag https://google.com.ai https://www.google.com.ai https://google.al https://www.google.al https://google.am https://www.google.am https://google.co.ao https://www.google.co.ao https://google.com.ar https://www.google.com.ar https://google.as https://www.google.as https://google.at https://www.google.at https://google.com.au https://www.google.com.au https://google.az https://www.google.az https://google.ba https://www.google.ba https://google.com.bd https://www.google.com.bd https://google.be https://www.google.be https://google.bf https://www.google.bf https://google.bg https://www.google.bg https://google.com.bh https://www.google.com.bh https://google.bi https://www.google.bi https://google.bj https://www.google.bj https://google.com.bn https://www.google.com.bn https://google.com.bo https://www.google.com.bo https://google.com.br https://www.google.com.br https://google.bs https://www.google.bs https://google.bt https://www.google.bt https://google.co.bw https://www.google.co.bw https://google.by https://www.google.by https://google.com.bz https://www.google.com.bz https://google.ca https://www.google.ca https://google.cd https://www.google.cd https://google.cf https://www.google.cf https://google.cg https://www.google.cg https://google.ch https://www.google.ch https://google.ci https://www.google.ci https://google.co.ck https://www.google.co.ck https://google.cl https://www.google.cl https://google.cm https://www.google.cm https://google.cn https://www.google.cn https://google.com.cn https://www.google.com.cn https://google.com.co https://www.google.com.co https://google.co.cr https://www.google.co.cr https://google.com.cu https://www.google.com.cu https://google.cv https://www.google.cv https://google.com.cy https://www.google.com.cy https://google.cz https://www.google.cz https://google.de https://www.google.de https://google.dj https://www.google.dj https://google.dk https://www.google.dk https://google.dm https://www.google.dm https://google.com.do https://www.google.com.do https://google.dz https://www.google.dz https://google.com.ec https://www.google.com.ec https://google.ee https://www.google.ee https://google.com.eg https://www.google.com.eg https://google.es https://www.google.es https://google.com.et https://www.google.com.et https://google.fi https://www.google.fi https://google.com.fj https://www.google.com.fj https://google.fm https://www.google.fm https://google.fr https://www.google.fr https://google.ga https://www.google.ga https://google.co.uk https://www.google.co.uk https://google.ge https://www.google.ge https://google.gg https://www.google.gg https://google.com.gh https://www.google.com.gh https://google.com.gi https://www.google.com.gi https://google.gl https://www.google.gl https://google.gm https://www.google.gm https://google.gp https://www.google.gp https://google.gr https://www.google.gr https://google.com.gt https://www.google.com.gt https://google.gy https://www.google.gy https://google.com.hk https://www.google.com.hk https://google.hk https://www.google.hk https://google.hn https://www.google.hn https://google.hr https://www.google.hr https://google.ht https://www.google.ht https://google.hu https://www.google.hu https://google.co.id https://www.google.co.id https://google.ie https://www.google.ie https://google.co.il https://www.google.co.il https://google.im https://www.google.im https://google.co.im https://www.google.co.im https://google.co.in https://www.google.co.in https://google.iq https://www.google.iq https://google.is https://www.google.is https://google.it https://www.google.it https://google.co.je https://www.google.co.je https://google.je https://www.google.je https://google.com.jm https://www.google.com.jm https://google.jo https://www.google.jo https://google.co.jp https://www.google.co.jp https://google.co.ke https://www.google.co.ke https://google.kg https://www.google.kg https://google.com.kh https://www.google.com.kh https://google.ki https://www.google.ki https://google.co.kr https://www.google.co.kr https://google.com.kw https://www.google.com.kw https://google.kz https://www.google.kz https://google.la https://www.google.la https://google.com.lb https://www.google.com.lb https://google.li https://www.google.li https://google.lk https://www.google.lk https://google.co.ls https://www.google.co.ls https://google.lt https://www.google.lt https://google.lu https://www.google.lu https://google.lv https://www.google.lv https://google.com.ly https://www.google.com.ly https://google.co.ma https://www.google.co.ma https://google.md https://www.google.md https://google.me https://www.google.me https://google.mg https://www.google.mg https://google.mk https://www.google.mk https://google.ml https://www.google.ml https://google.com.mm https://www.google.com.mm https://google.mn https://www.google.mn https://google.ms https://www.google.ms https://google.com.mt https://www.google.com.mt https://google.mu https://www.google.mu https://google.mv https://www.google.mv https://google.mw https://www.google.mw https://google.com.mx https://www.google.com.mx https://google.com.my https://www.google.com.my https://google.co.mz https://www.google.co.mz https://google.com.na https://www.google.com.na https://google.ne https://www.google.ne https://google.com.ng https://www.google.com.ng https://google.ng https://www.google.ng https://google.com.ni https://www.google.com.ni https://google.nl https://www.google.nl https://google.no https://www.google.no https://google.com.np ht",
+   "has_pergunta": false
+  },
+  {
+   "url": "https://play.google.com/log?hasfast=true&auth=SAPISIDHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID1PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82+SAPISID3PHASH+dcd4f83ae2937023c25a5d19c57e5fa37ec25f82&authuser=0&format=json",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua-full-version-list": "\"Not:A-Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"156.0.8078.48\", \"Google Chrome\";v=\"156.0.8078.48\"",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "referer": "https://gemini.google.com/",
+    "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+    "sec-ch-ua-bitness": "\"64\"",
+    "sec-ch-ua-model": "\"\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-form-factors": "\"Desktop\"",
+    "sec-ch-ua-wow64": "?0",
+    "sec-ch-ua-arch": "\"x86\"",
+    "sec-ch-ua-full-version": "\"156.0.8078.48\"",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua-platform-version": "\"10.0.0\""
+   },
+   "post": "[[1,null,null,null,null,null,null,null,null,null,[null,null,null,null,\"pt\",null,\"boq_gemini-web-uiserver_20261026.01_p0\",null,[[[\"Not:A-Brand\",\"8\"],[\"Chromium\",\"156\"],[\"Google Chrome\",\"156\"]],0,\"Windows\",\"10.0.0\",\"x86\",\"\",\"156.0.8078.48\"],[3,0]]],1957,[[1793069242957,null,null,null,null,null,null,\"[[4395630592,42637736,31079440],null,null,null,[null,null,\\\"gemini.google.com\\\",\\\"gemini-web-uiserver-app\\\",\\\"gemini-web-uiserver\\\",\\\"/app\\\",null,3,\\\"mvq342l1h9erkzn1577\\\",\\\"boq-gemini-web-uiserver.BardChatUi.pt.mYKuuPX9BtI.2018.O\\\",1],null,null,[1,0,2,5,5,5,87,87,554,786,1250,3846,3847,3858],[null,1200,null,1200,554],[3,353,2,377,12,163,4,204,12,342],[1200,1200],null,[[[\\\"\\\",\\\"app\\\",100]]],[null,[1200,554,646],null,[1200,null,null,554,0,0,646],[554,5,0,82,467]],null,null,null,[null,1000,2]]\",null,null,null,null,null,null,10800,[null,[\"CAMSqQYdoQHfkqcQBNb7BgTEBgOi3AUD64G8EgOn1dwGAtbSBQPaIRYEFtF2Abv2BgKv/QMC2bsEAvzPCwPLQwOcigUCtvUGAqSSBeJtAh0CgQQOywIChhYCkcgFql0CvAPxBJb/BeEEjWoP6XsKlHcCgj4F8YcFAuNuAsAbA/6+BgK6kgaDEgKcqwUCzxECuJ4GAvxZAvk9BJixBgKwbgWfOAHrcADiiwUCtPKzBAK7KgS1AwKTjgaz9wUJz18DlqMFgTrUFwPuCAPQWhao+wUEsgzMnQac9AYDi2wF1NUGApZELP8RBf1iApiHBgXYNQTrUAOZG7kGBMAFhBID4FoMno0GA7m3BgLN3QYH8woF7CIE8RUDtBIFlCgElBaTbwW2EgPjQwLDFQHdZwTtBQ+njAYA4r0GANLHBgWoDYIFqQYDvQAChw4D8AMDwhIN+wgDzRQAPQCPdgDoCQA7A/IvA9QjA9oZAP2CBgHIogYDux0DiSAFyToEvREA4wACswABqFcDAAPFLAScGbIkvhoro2QE0x4EtjUF5DsE5UkD7CgE5DEEnw4E00GaBsdoA/KbBgShbwTnHgK8BNguBL44AoMdBf0tApCDBgPkDwLqEssDBM8B8gQExxSxBMtHBNshBPllBbgMAo1xA6zzBv5IBbwCAqRvnCCnLwWTAQWDBgCSQATGBQODLgSkAwR7AMMeAogjAvA1A+ITDvQ+BfIlBDwFg0wD0Q0E9wMCnisEqhoEgl8E+UwEwwUEFgT+BQSSFQWfAfwAwwAE9AoBHgP6BJEABPIYAsMuBJwWAqEnBOYnBc8CAtcGBeEMBJc6BP4qBJsmBMQGBaUtBKwfBNEIBIUBBPIIBMgIBaIjA+QiBPINvxAFXgDmCQQzBP8GBYQViAIFlgMEpgIElw0F5kcExyQElgEE8QPCEASNV7YTAvEPAJcEBOYNA4UVA+UDBJUOA7kDBZgCAjryRwSQQgSBBAOACgSKKgDjJwWQQQSHCQAGANwsBf0CAhUCjw0AtzMDLgUMzBcE7RYAtQMD9DAEp88GBvnBBgC3A7lQAMEWAq3K9AIF+6geodaUBg==\"]],null,null,null,null,3]],1793069242959,null,null,null,null,null,null,null,null,null,null,null,null,null,[[null,[null,null,null,null,null,null,null,null,null,null,null,null,103135050]],9]]",
+   "has_pergunta": false
+  }
+ ],
+ "page_tokens": {
+  "at": "AIaPT3OuXU8tOx5FUGRWppCTpipS:1793069380777",
+  "f_sid": "-1960119104220107803",
+  "bl": "boq_gemini-web-uiserver_20261026.01_p0",
+  "f_req_id": "BardChatUi"
+ },
+ "enviado": true,
+ "respostas": [
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=o30O0e&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=1785613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n1067\n[[\"wrb.fr\",\"o30O0e\",\"[[[\\\"me\\\",1,[\\\"113141126390871842604\\\",[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[null,[\\\"me\\\"]]],[[[true,0,true,null,null,null,null,null,\\\"113141126390871842604\\\",null,null,true,null,null,1],\\\"Emerson2030\\\",null,\\\"Emerson2030\\\",null,null,null,null,null,null,null,null,\\\"Emerson2030\\\",null,null,\\\"Emerson2030\\\"]],[[[true,0,true,null,null,null,null,null,\\\"113141126390871842604\\\",null,null,null,null,null,1],\\\"https://lh3.googleusercontent.com/a/ACg8ocL-ttKUDq5fpvlG6GfyIUxk6hRzyXQFKtCMDlM2nFi1I4gC2A\\\\u003dmo\\\",true,\\\"EhUxMTMxNDExMjYzOTA4NzE4NDI2MDQoATDP88zRAQ\\\\u003d\\\\u003d\\\",null,null,true,\\\"5D4037\\\"]],null,null,null,null,null,[[[null,0,true,null,null,null,null,null,\\\"113141126390871842604\\\",null,null,true,null,null,1],\\\"emersonjosiel2030@gmail.com\\\",null,null,null,null,null,null,1,[true]]],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,\\\"%EgMCAwkaAgEH\\\"],null,[]]]]\",null,null,null,\"generic\"],[\"di\",77],[\"af.httprm\",77,\"-64083490864633218\",34]]\n26\n[[\"e\",4,null,null,1105]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=ozz5Z&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=1885613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n454\n[[\"wrb.fr\",\"ozz5Z\",\"[[[[null,\\\"1\\\",447],null,0],[[null,\\\"1\\\",448],null,0],[[null,\\\"1\\\",702],null,0],[[null,\\\"1\\\",961],null,0],[[null,\\\"1\\\",960],null,0],[[null,\\\"1\\\",1062],null,0],[[null,\\\"1\\\",1240],null,0],[[null,\\\"1\\\",1237],null,0],[[null,\\\"1\\\",1238],null,0],[[null,\\\"1\\\",1239],null,0],[[null,\\\"1\\\",1241],null,0],[[null,\\\"1\\\",1492],null,0],[[null,\\\"1\\\",1493],null,0]]]\",null,null,null,\"generic\"],[\"di\",109],[\"af.httprm\",109,\"-1917889265754795716\",34]]\n25\n[[\"e\",4,null,null,490]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=K4WWud&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=1985613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n426\n[[\"wrb.fr\",\"K4WWud\",\"[[\\\"Paragominas - PA, Brasil\\\",\\\"SWML_DESCRIPTION_FROM_YOUR_INTERNET_ADDRESS\\\",false,null,\\\"//www.google.com/maps/vt/data\\\\u003dDSv2J8KHskwrCx36i-Y2rv-Fcy8fNHNPpZfBcISBTnyxkVg-fEG5Oyibw7_gONuL6fo51pg_xlveO_yF-cYjsPyzvkJYVphe86e8-57T-trC2kQOAw-4dgOM6rkArkpeGs46y2ntDZg5iQifuRUtFjCjaHxIpFtntJMIAvdH_lRrebBuZkF2lQtWlNdoe8MB\\\"]]\",null,null,null,\"generic\"],[\"di\",54],[\"af.httprm\",54,\"194260866043399633\",34]]\n25\n[[\"e\",4,null,null,462]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=cCSu7&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2185613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n106\n[[\"wrb.fr\",\"cCSu7\",\"[]\",null,null,null,\"generic\"],[\"di\",145],[\"af.httprm\",145,\"8382888459376634175\",34]]\n25\n[[\"e\",4,null,null,142]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=CNgdBe&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2085613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n130\n[[\"wrb.fr\",\"CNgdBe\",\"[null,null,null,null,[2]]\",null,null,null,\"generic\"],[\"di\",171],[\"af.httprm\",171,\"6334524974043324502\",34]]\n25\n[[\"e\",4,null,null,166]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=CNgdBe&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2285613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n131\n[[\"wrb.fr\",\"CNgdBe\",\"[null,null,null,null,[2]]\",null,null,null,\"generic\"],[\"di\",193],[\"af.httprm\",192,\"-3924796877170172783\",33]]\n25\n[[\"e\",4,null,null,167]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=I4z33b&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2385613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n108\n[[\"wrb.fr\",\"I4z33b\",\"[]\",null,null,null,\"generic\"],[\"di\",205],[\"af.httprm\",204,\"-4280327881422497035\",33]]\n25\n[[\"e\",4,null,null,144]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=CNgdBe&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2485613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n298\n[[\"wrb.fr\",\"CNgdBe\",\"[null,null,null,[[1,\\\"Organizar suas ideias\\\",\\\"Agrupe conversas por tema e use suas fontes como base.\\\"],[3,\\\"Estudar e aprender\\\",\\\"Tenha aulas personalizadas e acompanhe seu progresso.\\\"]]]\",null,null,null,\"generic\"],[\"di\",208],[\"af.httprm\",208,\"-2302006961114283930\",33]]\n25\n[[\"e\",4,null,null,334]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=aPya6c&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2585613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n115\n[[\"wrb.fr\",\"aPya6c\",\"[false,0,[]]\",null,null,null,\"generic\"],[\"di\",77],[\"af.httprm\",77,\"3043834052307721856\",33]]\n25\n[[\"e\",4,null,null,151]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=ku4Jyf&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2685613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n108\n[[\"wrb.fr\",\"ku4Jyf\",\"[]\",null,null,null,\"generic\"],[\"di\",104],[\"af.httprm\",103,\"-8141169725433054738\",33]]\n25\n[[\"e\",4,null,null,144]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=L5adhe&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2785613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n109\n[[\"wrb.fr\",\"L5adhe\",\"[1]\",null,null,null,\"generic\"],[\"di\",106],[\"af.httprm\",106,\"-8687023788808516167\",33]]\n25\n[[\"e\",4,null,null,145]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=PCck7e&source-path=%2Fapp&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3085613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n106\n[[\"wrb.fr\",\"PCck7e\",\"[]\",null,null,null,\"generic\"],[\"di\",35],[\"af.httprm\",35,\"-5526943299543671563\",34]]\n25\n[[\"e\",4,null,null,142]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3185613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n123\n[[\"wrb.fr\",\"VxUbXb\",\"[null,null,null,0]\",null,null,null,\"generic\"],[\"di\",124],[\"af.httprm\",123,\"8506905775707366922\",34]]\n25\n[[\"e\",4,null,null,159]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate?bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=2985613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n177\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],{\\\"18\\\":\\\"r_1d6ac837a49a42c9\\\",\\\"21\\\":[\\\"TtVlNbBTa56XAOvFlQ5e5XoVKTkgcgmRPYVrWKa27Q0\\\"],\\\"44\\\":true}]\"]]\n5591\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],null,null,[[\\\"rc_13d24190f1879715\\\",[\\\"FUNCIONOU\\\"],null,null,null,null,null,null,[1],\\\"pt\\\",null,null,[null,null,null,null,null,null,null,[]],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[],null,null,null,null,null,null,null,null,[]]],[\\\"Paragominas - PA, Brasil\\\",\\\"SWML_DESCRIPTION_FROM_YOUR_INTERNET_ADDRESS\\\",false,null,\\\"//www.google.com/maps/vt/data\\\\u003dDSv2J8KHskwrCx36i-Y2rv-Fcy8fNHNPpZfBcISBTnyxkVg-fEG5Oyibw7_gONuL6fo51pg_xlveO_yF-cYjsPyzvkJYVphe86e8-57T-trC2kQOAw-4dgOM6rkArkpeGs46y2ntDZg5iQifuRUtFjCjaHxIpFtntJMIAvdH_lRrebBuZkF2lQtWlNdoe8MB\\\"],null,null,\\\"BR\\\",null,null,null,null,null,false,null,null,null,null,\\\"pt-PT\\\",null,null,null,true,[null,[false,false,false],[false,true,false,false,false,false],false,[[[\\\"Academic - Other\\\",2.2052665E-4],[\\\"Coding\\\",0.050960857],[\\\"Creative - Other\\\",4.3072374E-4],[\\\"Creative Writing\\\",5.6355743E-4],[\\\"Customer Support\\\",0.018538564],[\\\"Daily Life Expert - Other\\\",0.0010421423],[\\\"Daily Life Personal - Other\\\",0.0030592561],[\\\"Data Analysis\\\",9.460196E-4],[\\\"Emotional Support\\\",0.0016175545],[\\\"Engagement - Other\\\",0.04854289],[\\\"Events\\\",2.681408E-4],[\\\"Finance / Accounting\\\",0.0026228852],[\\\"Fitness\\\",1.1147667E-5],[\\\"Games\\\",0.0040693297],[\\\"General Info Seeking\\\",0.010318935],[\\\"Government / Law\\\",4.5359478E-4],[\\\"HR / Career Management\\\",0.013150472],[\\\"Health\\\",0.0045892564],[\\\"Life Organizer\\\",4.0801064E-4],[\\\"Lifelong Learning\\\",0.009925297],[\\\"Marketing \\\\u0026 Advertising\\\",0.0038676122],[\\\"Meals / Nutrition\\\",1.4766052E-4],[\\\"Media / Entertainment\\\",0.0034119114],[\\\"Multimodal Generation\\\",0.005512483],[\\\"News / Status\\\",4.859614E-4],[\\\"Personal Finance\\\",0.001119543],[\\\"Professional - Other\\\",0.118463755],[\\\"Sales / Order Fulfillment\\\",0.0021037634],[\\\"School Work\\\",0.34434605],[\\\"Shopping\\\",0.0046440605],[\\\"Social / Roleplay\\\",0.0053674593],[\\\"Sports\\\",9.395899E-5],[\\\"Teaching\\\",0.0012002907],[\\\"Travel\\\",8.980377E-5],[\\\"Troubleshoot Issues\\\",0.12791464]],[[\\\"Action Execution / Device Control - Other\\\",6.953593E-4],[\\\"Advice \\\\u0026 Opinion - Other\\\",0.0024003112],[\\\"Analyze Image Files\\\",0.5419581],[\\\"Audio Generation\\\",1.0163914E-4],[\\\"Brainstorming\\\",4.7813295E-4],[\\\"Casual Interaction / Chat - Other\\\",0.016621953],[\\\"Casual Topic Chat\\\",0.0017587953],[\\\"Classification\\\",3.4817978E-4],[\\\"Code - Other\\\",0.0015324996],[\\\"Code Debugging\\\",0.0021668144],[\\\"Code Explanation / QA\\\",0.0032182],[\\\"Code Generation\\\",0.003586522],[\\\"Compile\\\",1.4546186E-4],[\\\"Comprehension / QA\\\",0.608984],[\\\"Continue / Add More\\\",0.0010772188],[\\\"Device / App Control\\\",4.0270766E-5],[\\\"Find Image\\\",3.9741653E-6],[\\\"Game\\\",0.0012876844],[\\\"Image Edit\\\",0.0022656713],[\\\"Image Generation\\\",0.0020642213],[\\\"Image Understanding - Other\\\",0.0012605793],[\\\"Information Gathering - Other\\\",0.0068138535],[\\\"Mathematical Reasoning\\\",0.0692166],[\\\"Media Execution\\\",7.6370445E-5],[\\\"Multimodal Generation - Other\\\",8.0603873E-4],[\\\"Perspective\\\",0.0017095926],[\\\"Procedural Instruction\\\",0.0022829075],[\\\"Proofreading / Grammar\\\",0.0029189484],[\\\"Quiz / Test\\\",0.013782966],[\\\"Reasoning \\\\u0026 Games - Other\\\",0.0018496017],[\\\"Recommendation\\\",0.0029030184],[\\\"Share Sentiment\\\",0.0010601383],[\\\"Simple Pleasantries\\\",0.008833876],[\\\"Simple Search\\\",0.0027272305],[\\\"Subjective Rewrite / Revision\\\",0.10842421],[\\\"Synthesize Broad Topic\\\",5.0238747E-4],[\\\"Task Planning\\\",1.4128453E-4],[\\\"Text Analysis - Other\\\",9.153098E-4],[\\\"Text Extraction\\\",0.011591406],[\\\"Text Summarization\\\",0.010711368],[\\\"Translation - Other\\\",0.0021051762],[\\\"Translation, En to Non-En\\\",0.0018741569],[\\\"Translation, Non-En to En\\\",0.084483124],[\\\"Video Generation\\\",1.5370531E-5],[\\\"Visual Referencing\\\",0.0020616131],[\\\"Writing \\\\u0026 Rewriting - Other\\\",0.009626594],[\\\"Writing From Scratch\\\",0.050501294]],[[\\\"Output List\\\",0.0037514216],[\\\"Output Outline\\\",1.1568061E-4],[\\\"Output Table\\\",9.213691E-5],[\\\"Output Citations\\\",1.0882426E-5],[\\\"Output Format\\\",0.0021992978],[\\\"Change Length\\\",0.09540032],[\\\"Change Ordering\\\",1.6138707E-4],[\\\"Change Structure\\\",9.6726976E-4],[\\\"Adopt Persona\\\",0.004023789],[\\\"Change Tone\\\",0.0063643456],[\\\"Rhyme\\\",1.9401523E-5],[\\\"Change to Specific Audience\\\",0.0038107631],[\\\"Change Tone / Style\\\",0.0027367352],[\\\"Rephrase\\\",0.0061431793],[\\\"Simplify / Condense\\\",0.021334348],[\\\"Factual / Logical Correction\\\",5.86452E-4],[\\\"Attribute-Specific Correction\\\",0.002911788],[\\\"Pushback Circumvention\\\",3.6664354E-4],[\\\"Constraint Re-Statement\\\",8.5723633E-4],[\\\"Exact Resubmission\\\",0.0047028204],[\\\"Expand / Elaborate\\\",0.008571348],[\\\"Revise\\\",0.0037034154]],[[\\\"Positive\\\",0.024010494],[\\\"Negative\\\",0.03022181]]]],null,[[[[null,[null,0,\\\"FUNCIONOU\\\"]]]]],null,null,null,null,null,null,null,null,null,null,null,null,\\\"95a4c0abcba24364\\\",null,null,\\\"4 Argon\\\",true,[[[[1004,\\\"Mais longa\\\",5,null,[\\\"expand\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/expand/default/24px.svg\\\",null,true]],[1005,\\\"Mais curta\\\",6,null,[\\\"compress\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/compress/default/24px.svg\\\",null,true]],[1003,\\\"Personalizar\\\",3,null,[\\\"personal_recommendations\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/personal_recommendations/default/24px.svg\\\",null,true]],[1001,\\\"Tentar de novo\\\",1,null,[\\\"refresh\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/refresh/default/24px.svg\\\",null,true]]]],[\\\"Responder agora\\\",null,2]],null,2,null,null,null,null,null,null,null,null,null,null,null,8,1]\"]]\n5591\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],null,null,[[\\\"rc_13d24190f1879715\\\",[\\\"FUNCIONOU\\\"],null,null,null,null,null,null,[1],\\\"pt\\\",null,null,[null,null,null,null,null,null,null,[]],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[],null,null,null,null,null,null,null,null,[]]],[\\\"Paragominas - PA, Brasil\\\",\\\"SWML_DESCRIPTION_FROM_YOUR_INTERNET_ADDRESS\\\",false,null,\\\"//www.google.com/maps/vt/data\\\\u003dDSv2J8KHskwrCx36i-Y2rv-Fcy8fNHNPpZfBcISBTnyxkVg-fEG5Oyibw7_gONuL6fo51pg_xlveO_yF-cYjsPyzvkJYVphe86e8-57T-trC2kQOAw-4dgOM6rkArkpeGs46y2ntDZg5iQifuRUtFjCjaHxIpFtntJMIAvdH_lRrebBuZkF2lQtWlNdoe8MB\\\"],null,null,\\\"BR\\\",null,null,null,null,null,false,null,null,null,null,\\\"pt-PT\\\",null,null,null,true,[null,[false,false,false],[false,true,false,false,false,false],false,[[[\\\"Academic - Other\\\",2.2052665E-4],[\\\"Coding\\\",0.050960857],[\\\"Creative - Other\\\",4.3072374E-4],[\\\"Creative Writing\\\",5.6355743E-4],[\\\"Customer Support\\\",0.018538564],[\\\"Daily Life Expert - Other\\\",0.0010421423],[\\\"Daily Life Personal - Other\\\",0.0030592561],[\\\"Data Analysis\\\",9.460196E-4],[\\\"Emotional Support\\\",0.0016175545],[\\\"Engagement - Other\\\",0.04854289],[\\\"Events\\\",2.681408E-4],[\\\"Finance / Accounting\\\",0.0026228852],[\\\"Fitness\\\",1.1147667E-5],[\\\"Games\\\",0.0040693297],[\\\"General Info Seeking\\\",0.010318935],[\\\"Government / Law\\\",4.5359478E-4],[\\\"HR / Career Management\\\",0.013150472],[\\\"Health\\\",0.0045892564],[\\\"Life Organizer\\\",4.0801064E-4],[\\\"Lifelong Learning\\\",0.009925297],[\\\"Marketing \\\\u0026 Advertising\\\",0.0038676122],[\\\"Meals / Nutrition\\\",1.4766052E-4],[\\\"Media / Entertainment\\\",0.0034119114],[\\\"Multimodal Generation\\\",0.005512483],[\\\"News / Status\\\",4.859614E-4],[\\\"Personal Finance\\\",0.001119543],[\\\"Professional - Other\\\",0.118463755],[\\\"Sales / Order Fulfillment\\\",0.0021037634],[\\\"School Work\\\",0.34434605],[\\\"Shopping\\\",0.0046440605],[\\\"Social / Roleplay\\\",0.0053674593],[\\\"Sports\\\",9.395899E-5],[\\\"Teaching\\\",0.0012002907],[\\\"Travel\\\",8.980377E-5],[\\\"Troubleshoot Issues\\\",0.12791464]],[[\\\"Action Execution / Device Control - Other\\\",6.953593E-4],[\\\"Advice \\\\u0026 Opinion - Other\\\",0.0024003112],[\\\"Analyze Image Files\\\",0.5419581],[\\\"Audio Generation\\\",1.0163914E-4],[\\\"Brainstorming\\\",4.7813295E-4],[\\\"Casual Interaction / Chat - Other\\\",0.016621953],[\\\"Casual Topic Chat\\\",0.0017587953],[\\\"Classification\\\",3.4817978E-4],[\\\"Code - Other\\\",0.0015324996],[\\\"Code Debugging\\\",0.0021668144],[\\\"Code Explanation / QA\\\",0.0032182],[\\\"Code Generation\\\",0.003586522],[\\\"Compile\\\",1.4546186E-4],[\\\"Comprehension / QA\\\",0.608984],[\\\"Continue / Add More\\\",0.0010772188],[\\\"Device / App Control\\\",4.0270766E-5],[\\\"Find Image\\\",3.9741653E-6],[\\\"Game\\\",0.0012876844],[\\\"Image Edit\\\",0.0022656713],[\\\"Image Generation\\\",0.0020642213],[\\\"Image Understanding - Other\\\",0.0012605793],[\\\"Information Gathering - Other\\\",0.0068138535],[\\\"Mathematical Reasoning\\\",0.0692166],[\\\"Media Execution\\\",7.6370445E-5],[\\\"Multimodal Generation - Other\\\",8.0603873E-4],[\\\"Perspective\\\",0.0017095926],[\\\"Procedural Instruction\\\",0.0022829075],[\\\"Proofreading / Grammar\\\",0.0029189484],[\\\"Quiz / Test\\\",0.013782966],[\\\"Reasoning \\\\u0026 Games - Other\\\",0.0018496017],[\\\"Recommendation\\\",0.0029030184],[\\\"Share Sentiment\\\",0.0010601383],[\\\"Simple Pleasantries\\\",0.008833876],[\\\"Simple Search\\\",0.0027272305],[\\\"Subjective Rewrite / Revision\\\",0.10842421],[\\\"Synthesize Broad Topic\\\",5.0238747E-4],[\\\"Task Planning\\\",1.4128453E-4],[\\\"Text Analysis - Other\\\",9.153098E-4],[\\\"Text Extraction\\\",0.011591406],[\\\"Text Summarization\\\",0.010711368],[\\\"Translation - Other\\\",0.0021051762],[\\\"Translation, En to Non-En\\\",0.0018741569],[\\\"Translation, Non-En to En\\\",0.084483124],[\\\"Video Generation\\\",1.5370531E-5],[\\\"Visual Referencing\\\",0.0020616131],[\\\"Writing \\\\u0026 Rewriting - Other\\\",0.009626594],[\\\"Writing From Scratch\\\",0.050501294]],[[\\\"Output List\\\",0.0037514216],[\\\"Output Outline\\\",1.1568061E-4],[\\\"Output Table\\\",9.213691E-5],[\\\"Output Citations\\\",1.0882426E-5],[\\\"Output Format\\\",0.0021992978],[\\\"Change Length\\\",0.09540032],[\\\"Change Ordering\\\",1.6138707E-4],[\\\"Change Structure\\\",9.6726976E-4],[\\\"Adopt Persona\\\",0.004023789],[\\\"Change Tone\\\",0.0063643456],[\\\"Rhyme\\\",1.9401523E-5],[\\\"Change to Specific Audience\\\",0.0038107631],[\\\"Change Tone / Style\\\",0.0027367352],[\\\"Rephrase\\\",0.0061431793],[\\\"Simplify / Condense\\\",0.021334348],[\\\"Factual / Logical Correction\\\",5.86452E-4],[\\\"Attribute-Specific Correction\\\",0.002911788],[\\\"Pushback Circumvention\\\",3.6664354E-4],[\\\"Constraint Re-Statement\\\",8.5723633E-4],[\\\"Exact Resubmission\\\",0.0047028204],[\\\"Expand / Elaborate\\\",0.008571348],[\\\"Revise\\\",0.0037034154]],[[\\\"Positive\\\",0.024010494],[\\\"Negative\\\",0.03022181]]]],null,[[[[null,[null,0,\\\"FUNCIONOU\\\"]]]]],null,null,null,null,null,null,null,null,null,null,null,null,\\\"95a4c0abcba24364\\\",null,null,\\\"4 Argon\\\",true,[[[[1004,\\\"Mais longa\\\",5,null,[\\\"expand\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/expand/default/24px.svg\\\",null,true]],[1005,\\\"Mais curta\\\",6,null,[\\\"compress\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/compress/default/24px.svg\\\",null,true]],[1003,\\\"Personalizar\\\",3,null,[\\\"personal_recommendations\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/personal_recommendations/default/24px.svg\\\",null,true]],[1001,\\\"Tentar de novo\\\",1,null,[\\\"refresh\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/refresh/default/24px.svg\\\",null,true]]]],[\\\"Responder agora\\\",null,2]],null,2,null,null,null,null,null,null,null,null,null,null,null,8,1]\"]]\n5607\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],null,null,[[\\\"rc_13d24190f1879715\\\",[\\\"FUNCIONOU\\\"],null,null,null,null,null,null,[2],\\\"pt\\\",null,null,[null,null,null,null,null,null,null,[]],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[],null,null,null,null,null,null,null,null,[]]],[\\\"Paragominas - PA, Brasil\\\",\\\"SWML_DESCRIPTION_FROM_YOUR_INTERNET_ADDRESS\\\",false,null,\\\"//www.google.com/maps/vt/data\\\\u003dDSv2J8KHskwrCx36i-Y2rv-Fcy8fNHNPpZfBcISBTnyxkVg-fEG5Oyibw7_gONuL6fo51pg_xlveO_yF-cYjsPyzvkJYVphe86e8-57T-trC2kQOAw-4dgOM6rkArkpeGs46y2ntDZg5iQifuRUtFjCjaHxIpFtntJMIAvdH_lRrebBuZkF2lQtWlNdoe8MB\\\"],null,null,\\\"BR\\\",null,null,null,null,null,true,null,null,null,null,\\\"pt-PT\\\",null,null,null,true,[null,[false,false,false],[false,true,false,false,false,false],false,[[[\\\"Academic - Other\\\",2.2052665E-4],[\\\"Coding\\\",0.050960857],[\\\"Creative - Other\\\",4.3072374E-4],[\\\"Creative Writing\\\",5.6355743E-4],[\\\"Customer Support\\\",0.018538564],[\\\"Daily Life Expert - Other\\\",0.0010421423],[\\\"Daily Life Personal - Other\\\",0.0030592561],[\\\"Data Analysis\\\",9.460196E-4],[\\\"Emotional Support\\\",0.0016175545],[\\\"Engagement - Other\\\",0.04854289],[\\\"Events\\\",2.681408E-4],[\\\"Finance / Accounting\\\",0.0026228852],[\\\"Fitness\\\",1.1147667E-5],[\\\"Games\\\",0.0040693297],[\\\"General Info Seeking\\\",0.010318935],[\\\"Government / Law\\\",4.5359478E-4],[\\\"HR / Career Management\\\",0.013150472],[\\\"Health\\\",0.0045892564],[\\\"Life Organizer\\\",4.0801064E-4],[\\\"Lifelong Learning\\\",0.009925297],[\\\"Marketing \\\\u0026 Advertising\\\",0.0038676122],[\\\"Meals / Nutrition\\\",1.4766052E-4],[\\\"Media / Entertainment\\\",0.0034119114],[\\\"Multimodal Generation\\\",0.005512483],[\\\"News / Status\\\",4.859614E-4],[\\\"Personal Finance\\\",0.001119543],[\\\"Professional - Other\\\",0.118463755],[\\\"Sales / Order Fulfillment\\\",0.0021037634],[\\\"School Work\\\",0.34434605],[\\\"Shopping\\\",0.0046440605],[\\\"Social / Roleplay\\\",0.0053674593],[\\\"Sports\\\",9.395899E-5],[\\\"Teaching\\\",0.0012002907],[\\\"Travel\\\",8.980377E-5],[\\\"Troubleshoot Issues\\\",0.12791464]],[[\\\"Action Execution / Device Control - Other\\\",6.953593E-4],[\\\"Advice \\\\u0026 Opinion - Other\\\",0.0024003112],[\\\"Analyze Image Files\\\",0.5419581],[\\\"Audio Generation\\\",1.0163914E-4],[\\\"Brainstorming\\\",4.7813295E-4],[\\\"Casual Interaction / Chat - Other\\\",0.016621953],[\\\"Casual Topic Chat\\\",0.0017587953],[\\\"Classification\\\",3.4817978E-4],[\\\"Code - Other\\\",0.0015324996],[\\\"Code Debugging\\\",0.0021668144],[\\\"Code Explanation / QA\\\",0.0032182],[\\\"Code Generation\\\",0.003586522],[\\\"Compile\\\",1.4546186E-4],[\\\"Comprehension / QA\\\",0.608984],[\\\"Continue / Add More\\\",0.0010772188],[\\\"Device / App Control\\\",4.0270766E-5],[\\\"Find Image\\\",3.9741653E-6],[\\\"Game\\\",0.0012876844],[\\\"Image Edit\\\",0.0022656713],[\\\"Image Generation\\\",0.0020642213],[\\\"Image Understanding - Other\\\",0.0012605793],[\\\"Information Gathering - Other\\\",0.0068138535],[\\\"Mathematical Reasoning\\\",0.0692166],[\\\"Media Execution\\\",7.6370445E-5],[\\\"Multimodal Generation - Other\\\",8.0603873E-4],[\\\"Perspective\\\",0.0017095926],[\\\"Procedural Instruction\\\",0.0022829075],[\\\"Proofreading / Grammar\\\",0.0029189484],[\\\"Quiz / Test\\\",0.013782966],[\\\"Reasoning \\\\u0026 Games - Other\\\",0.0018496017],[\\\"Recommendation\\\",0.0029030184],[\\\"Share Sentiment\\\",0.0010601383],[\\\"Simple Pleasantries\\\",0.008833876],[\\\"Simple Search\\\",0.0027272305],[\\\"Subjective Rewrite / Revision\\\",0.10842421],[\\\"Synthesize Broad Topic\\\",5.0238747E-4],[\\\"Task Planning\\\",1.4128453E-4],[\\\"Text Analysis - Other\\\",9.153098E-4],[\\\"Text Extraction\\\",0.011591406],[\\\"Text Summarization\\\",0.010711368],[\\\"Translation - Other\\\",0.0021051762],[\\\"Translation, En to Non-En\\\",0.0018741569],[\\\"Translation, Non-En to En\\\",0.084483124],[\\\"Video Generation\\\",1.5370531E-5],[\\\"Visual Referencing\\\",0.0020616131],[\\\"Writing \\\\u0026 Rewriting - Other\\\",0.009626594],[\\\"Writing From Scratch\\\",0.050501294]],[[\\\"Output List\\\",0.0037514216],[\\\"Output Outline\\\",1.1568061E-4],[\\\"Output Table\\\",9.213691E-5],[\\\"Output Citations\\\",1.0882426E-5],[\\\"Output Format\\\",0.0021992978],[\\\"Change Length\\\",0.09540032],[\\\"Change Ordering\\\",1.6138707E-4],[\\\"Change Structure\\\",9.6726976E-4],[\\\"Adopt Persona\\\",0.004023789],[\\\"Change Tone\\\",0.0063643456],[\\\"Rhyme\\\",1.9401523E-5],[\\\"Change to Specific Audience\\\",0.0038107631],[\\\"Change Tone / Style\\\",0.0027367352],[\\\"Rephrase\\\",0.0061431793],[\\\"Simplify / Condense\\\",0.021334348],[\\\"Factual / Logical Correction\\\",5.86452E-4],[\\\"Attribute-Specific Correction\\\",0.002911788],[\\\"Pushback Circumvention\\\",3.6664354E-4],[\\\"Constraint Re-Statement\\\",8.5723633E-4],[\\\"Exact Resubmission\\\",0.0047028204],[\\\"Expand / Elaborate\\\",0.008571348],[\\\"Revise\\\",0.0037034154]],[[\\\"Positive\\\",0.024010494],[\\\"Negative\\\",0.03022181]]]],null,[[[[null,[null,0,\\\"FUNCIONOU\\\"]]]]],null,null,null,null,null,null,null,null,null,null,null,null,\\\"95a4c0abcba24364\\\",null,null,\\\"4 Argon\\\",true,[[[[1004,\\\"Mais longa\\\",5,null,[\\\"expand\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/expand/default/24px.svg\\\",null,true]],[1005,\\\"Mais curta\\\",6,null,[\\\"compress\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/compress/default/24px.svg\\\",null,true]],[1003,\\\"Personalizar\\\",3,null,[\\\"personal_recommendations\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/personal_recommendations/default/24px.svg\\\",null,true]],[1001,\\\"Tentar de novo\\\",1,null,[\\\"refresh\\\",\\\"https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/refresh/default/24px.svg\\\",null,true]]]],[\\\"Responder agora\\\",null,2]],null,2,null,null,null,null,null,null,null,null,null,null,null,8,1,null,null,null,3]\"]]\n132\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],{\\\"11\\\":[\\\"Confirmação de Funcionamento\\\"],\\\"44\\\":true}]\"]]\n133\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],{\\\"26\\\":\\\"AwAAAAAAAAAQANM7mBjXKZT5Gjy0Fxo\\\",\\\"44\\\":true}]\"]]\n137\n[[\"wrb.fr\",null,\"[null,[\\\"c_9fdde59f204f413d\\\",\\\"r_1d6ac837a49a42c9\\\"],{\\\"44\\\":true,\\\"46\\\":[\\\"c_9fdde59f204f413d\\\",\\\"\\\"],\\\"52\\\":[]}]\"]]\n59\n[[\"di\",5073],[\"af.httprm\",5073,\"4809113988528930354\",34]]\n28\n[[\"e\",10,null,null,17491]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3285613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n124\n[[\"wrb.fr\",\"VxUbXb\",\"[null,null,null,0]\",null,null,null,\"generic\"],[\"di\",157],[\"af.httprm\",156,\"-1752479507108848826\",33]]\n25\n[[\"e\",4,null,null,160]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3385613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n123\n[[\"wrb.fr\",\"VxUbXb\",\"[null,null,null,0]\",null,null,null,\"generic\"],[\"di\",116],[\"af.httprm\",115,\"4378950062048080953\",33]]\n25\n[[\"e\",4,null,null,159]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=VxUbXb&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3485613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n124\n[[\"wrb.fr\",\"VxUbXb\",\"[null,null,null,0]\",null,null,null,\"generic\"],[\"di\",175],[\"af.httprm\",175,\"-5178046167865673559\",33]]\n25\n[[\"e\",4,null,null,160]]\n"
+  },
+  {
+   "url": "https://gemini.google.com/_/BardChatUi/data/batchexecute?rpcids=aPya6c&source-path=%2Fapp%2F9fdde59f204f413d&bl=boq_gemini-web-uiserver_20261026.01_p0&f.sid=-1960119104220107803&hl=pt&_reqid=3585613&rt=c",
+   "status": 200,
+   "body": ")]}'\n\n118\n[[\"wrb.fr\",\"aPya6c\",\"[false,0,[]]\",null,null,null,\"generic\"],[\"di\",101],[\"af.httprm\",101,\"-2349981659841630089\",33]]\n25\n[[\"e\",4,null,null,154]]\n"
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+{
+  "_leia": "Renomeie para config.json. 'chaves' = senhas que o proxy da VPS manda (x-api-key) para a ponte aceitar o pedido; invente uma longa. 'tunel.host' = nome do Host da VPS no seu ~/.ssh/config.",
+  "porta": 20160,
+  "chaves": ["INVENTE_UMA_CHAVE_LONGA_AQUI"],
+  "tunel": { "host": "minha-vps", "porta_vps": 20160 }
+}

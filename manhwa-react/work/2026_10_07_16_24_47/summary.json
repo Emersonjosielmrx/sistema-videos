@@ -1,0 +1,177 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-24-47.mp4",
+ "duration": 73.366667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 714,
+  "has_webcam": true,
+  "contrast": 66.2,
+  "trimmed": {},
+  "divider": 361,
+  "webcam": [
+   0,
+   0,
+   720,
+   361
+  ],
+  "content": [
+   0,
+   361,
+   714,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto a anime novo com poucas falas do criador, mas tem reação genuína à cena da espada e comentários sobre o cenário medieval.",
+  "topic": "React a anime novo com cena de espada",
+  "channel": "manhwareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 73.366667,
+    "hook": "ELA CORTOU A ESPADA COM OUTRA!",
+    "title": "Esse anime novo vai ser INSANO! 🔥 Cortou a espada de madeira?! #shorts #anime",
+    "description": "Reagindo a um anime novo que promete muito! A protagonista cortou uma espada de madeira com outra espada de madeira, e o cenário mistura medieval com moderno 🤯\nVocês já viram esse anime? Comentem aí!\nSiga pra mais reacts de anime da temporada!\n\n#shorts #react #anime #animenovo #temporada #espada #medieval #otaku #animebrasileiro #reactanime #weeb #japones #animereact #mangá #novelight",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#animenovo",
+     "#temporada",
+     "#espada",
+     "#medieval",
+     "#otaku",
+     "#animebrasileiro",
+     "#reactanime"
+    ],
+    "tags": [
+     "react",
+     "anime novo",
+     "anime temporada",
+     "espada de madeira",
+     "medieval",
+     "react anime",
+     "anime brasileiro",
+     "otaku",
+     "anime 2025",
+     "protagonista forte",
+     "cena epica anime",
+     "anime react br",
+     "anime hype",
+     "weeb",
+     "reação anime"
+    ],
+    "keywords": [
+     {
+      "t": 46.96,
+      "text": "CORTOU",
+      "emoji": "⚔️"
+     },
+     {
+      "t": 54.48,
+      "text": "MEDIEVAL MODERNO",
+      "emoji": "🏰"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 46.96,
+      "type": "shock"
+     },
+     {
+      "t": 30.0,
+      "type": "hype"
+     }
+    ],
+    "memes": [
+     {
+      "t": 46.96,
+      "id": 7
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Qual anime novo dessa temporada vocês mais querem ver react?",
+    "title_alternatives": [
+     "Ela CORTOU a espada de madeira com outra?! 😱⚔️ #shorts #anime",
+     "Anime novo que mistura medieval com moderno! 🔥🏰 #shorts #react"
+    ],
+    "mood": "neutral_chill",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_24_47\\2026_10_07_16_24_47.mp4",
+   "duration": 17.507750000000048,
+   "keeps": 11,
+   "meta": {
+    "hook": "ELA CORTOU A ESPADA COM OUTRA!",
+    "title": "Esse anime novo vai ser INSANO! 🔥 Cortou a espada de madeira?! #shorts #anime",
+    "description": "Reagindo a um anime novo que promete muito! A protagonista cortou uma espada de madeira com outra espada de madeira, e o cenário mistura medieval com moderno 🤯\nVocês já viram esse anime? Comentem aí!\nSiga pra mais reacts de anime da temporada!\n\n#shorts #react #anime #animenovo #temporada #espada #medieval #otaku #animebrasileiro #reactanime #weeb #japones #animereact #mangá #novelight",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#animenovo",
+     "#temporada",
+     "#espada",
+     "#medieval",
+     "#otaku",
+     "#animebrasileiro",
+     "#reactanime"
+    ],
+    "tags": [
+     "react",
+     "anime novo",
+     "anime temporada",
+     "espada de madeira",
+     "medieval",
+     "react anime",
+     "anime brasileiro",
+     "otaku",
+     "anime 2025",
+     "protagonista forte",
+     "cena epica anime",
+     "anime react br",
+     "anime hype",
+     "weeb",
+     "reação anime"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "neutral_chill",
+    "music": true,
+    "pinned_comment": "Qual anime novo dessa temporada vocês mais querem ver react?",
+    "title_alternatives": [
+     "Ela CORTOU a espada de madeira com outra?! 😱⚔️ #shorts #anime",
+     "Anime novo que mistura medieval com moderno! 🔥🏰 #shorts #react"
+    ],
+    "work": null,
+    "channel": "manhwareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_24_47\\2026_10_07_16_24_47_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Grandpa_s House - The Legend of Zelda_ The Wind Waker.mp3",
+   "removed_pct": 76.1,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 17.51,
+    "lufs": -13.9
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 446.6
+}

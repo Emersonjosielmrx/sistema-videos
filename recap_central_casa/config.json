@@ -1,0 +1,18 @@
+{
+ "kaggle": {
+  "username": "emersonjosiel",
+  "key": "36a716fef7ec6d446de5ff0a907fc369",
+  "kernel": "emersonjosiel/recap-longo",
+  "dataset": "emersonjosiel/recap-worker-conf"
+ },
+ "telegram": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "chat_id": 7911666809
+ },
+ "pagina": "recap-5a857ed863",
+ "empresa": "Inovare (Hermes Call) - recap longo",
+ "saida": "casa-pc1",
+ "so_gpus": true,
+ "kaggle_bin": "D:\\recap_central_casa\\venv\\Scripts\\kaggle.exe",
+ "rclone_bin": "D:\\tools\\rclone.exe"
+}

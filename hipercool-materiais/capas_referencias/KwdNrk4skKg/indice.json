@@ -1,0 +1,219 @@
+{
+ "video": "tmp/KwdNrk4skKg.mp4",
+ "passo_s": 6.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "Selena",
+   "principal": true,
+   "aparicoes": 80,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2520.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 2148.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1908.0
+    }
+   ],
+   "papel": "assistente da clínica veterinária de Ojin",
+   "visual": "blonde hair, light blue/green eyes, wears a dark green hood/capelet",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "Selena",
+   "principal": false,
+   "aparicoes": 24,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 4308.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4356.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4176.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 4578.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 4764.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 4428.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 4356.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 4176.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 4578.0
+    }
+   ],
+   "papel": "assistente da clínica veterinária",
+   "visual": "long pink hair, light green eyes, wearing a reddish/burgundy dress",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p03",
+   "nome": "Selena",
+   "principal": false,
+   "aparicoes": 11,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3450.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4278.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2778.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 5046.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 5040.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3450.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 4278.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2778.0
+    }
+   ],
+   "papel": "assistente veterinária contratada por Ojin",
+   "visual": "light brown/beige hair with side-swept bangs, green/teal eyes, human ears, no visible horns or tail, wears purple/violet clothing with white accents",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p04",
+   "nome": "Selena",
+   "principal": false,
+   "aparicoes": 9,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 5136.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 5070.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 5172.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 5130.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 5064.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 5220.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 5136.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 5070.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 5130.0
+    }
+   ],
+   "papel": "assistente da clínica veterinária e especialista em animais",
+   "visual": "dark grey/black shoulder-length hair with a blue hair clip, brown eyes, yellow long-sleeved shirt",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p05",
+   "nome": "Selena",
+   "principal": false,
+   "aparicoes": 7,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 654.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 210.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 216.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 240.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 204.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 654.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 210.0
+    }
+   ],
+   "papel": "Assistente da clínica veterinária e especialista em animais",
+   "visual": "Brown hair with straight bangs, green eyes, wearing a pink headscarf or hooded cloth and light-colored clothes",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  }
+ ]
+}

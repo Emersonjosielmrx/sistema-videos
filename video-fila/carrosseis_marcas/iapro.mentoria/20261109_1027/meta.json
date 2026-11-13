@@ -1,0 +1,25 @@
+{
+ "conta": "iapro.mentoria",
+ "marca": "IA Pro Mentoria",
+ "capa": "Onde a IA guarda o conhecimento?",
+ "slides": [
+  {
+   "titulo": "Redes neurais artificiais",
+   "texto": "A IA usa estruturas inspiradas no cérebro humano, formadas por conexões que processam dados e encontram padrões complexos automaticamente."
+  },
+  {
+   "titulo": "O poder dos padrões",
+   "texto": "Em vez de memorizar fatos, o sistema aprende a reconhecer repetições em enormes volumes de informações para gerar respostas coerentes."
+  },
+  {
+   "titulo": "Pesos e conexões",
+   "texto": "Cada conexão entre os neurônios artificiais recebe um peso numérico que define sua importância na hora de tomar decisões."
+  },
+  {
+   "titulo": "Ajuste contínuo",
+   "texto": "Durante o treinamento, a IA corrige seus próprios erros ajustando esses pesos até que as previsões fiquem mais precisas."
+  }
+ ],
+ "legenda": "Entender a base da inteligência artificial ajuda a aproveitar melhor todo o seu potencial prático no dia a dia.",
+ "gerado_em": "2026-11-09T10:48:05"
+}

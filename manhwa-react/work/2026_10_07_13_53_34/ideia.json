@@ -1,0 +1,30 @@
+{
+ "formato": "recap narrativo de anime com legendas dinâmicas",
+ "descricao": "Narração contínua resumindo episódio/arco de anime, com frames estratégicos sincronizados e legendas amarelas destacando palavras-chave. Ritmo rápido, foco em plot twists e momentos de poder.",
+ "replicavel": true,
+ "como_fazer": "1) LLM gera roteiro recap de 45-60s de anime isekai/sistema (usando sinopses públicas ou wikis); 2) TTS português (edge-tts ou ElevenLabs) narra o roteiro; 3) buscar frames do anime em repositórios públicos ou gerar cenas similares com Veo 3 (personagens genéricos, estilo anime); 4) ffmpeg sincroniza frames com narração, adiciona legendas com palavras-chave em amarelo (estilo do vídeo); 5) trilha épica de fundo (das 341 disponíveis); 6) overlay de fogo/raio nos momentos de clímax",
+ "ferramentas": [
+  "LLM",
+  "TTS",
+  "Veo 3",
+  "ffmpeg",
+  "trilhas de música",
+  "overlays animados"
+ ],
+ "fonte_de_material": "frames de anime de domínio público/wikis, ou geração de cenas estilo anime com Veo 3, sinopses de MyAnimeList/AniList para roteiro",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "Recap rápido de anime pouco conhecido desperta curiosidade, legendas dinâmicas prendem atenção, cliffhanger no final gera comentários perguntando o nome",
+ "exemplo_roteiro": "Jack era o noob do servidor, mas descobriu uma skill QUEBRADA de farm de poções. Enquanto todos riam dele, ele treinava em segredo. Quando voltou pra cidade, os mesmos jogadores que zombavam IMPLORARAM pra comprar dele. Até o toxic do servidor teve que AJOELHAR. Quer saber o nome desse anime? Comenta 'NOME' aqui embaixo!",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "anime recap",
+  "isekai",
+  "anime desconhecido",
+  "sistema de jogo",
+  "underdog",
+  "plot twist"
+ ],
+ "video": "2026-10-07 13-53-34.mp4",
+ "data": "2026-10-12"
+}

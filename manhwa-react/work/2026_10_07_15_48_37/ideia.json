@@ -1,0 +1,30 @@
+{
+ "formato": "recap narrado de anime com legendas destacadas",
+ "descricao": "Narração dramatica resumindo plot de anime (Kaiju/mecha/viagem no tempo), com cenas do anime + legendas amarelas destacando palavras-chave, ritmo rapido, gancho de suspense.",
+ "replicavel": true,
+ "como_fazer": "1) Escolher anime de dominio publico ou usar trailer/cenas promocionais (ou gerar frames com IA se original). 2) Escrever roteiro de recap com LLM (Gemini/Claude) focado em plot twist. 3) Gerar narração TTS (ElevenLabs/edge-tts) com tom dramatico. 4) Cortar/editar cenas com ffmpeg, adicionar legendas amarelas (estilo Hormozi) em palavras-chave. 5) Adicionar trilha tensa (das 341) e SFX de impacto. 6) Exportar vertical 9:16.",
+ "ferramentas": [
+  "ffmpeg",
+  "TTS",
+  "LLM (roteiro)",
+  "overlays de legendas",
+  "trilhas",
+  "SFX"
+ ],
+ "fonte_de_material": "trailers oficiais de anime no YouTube, cenas promocionais, Veo 3 para gerar cenas originais de mecha/kaiju se necessario, ou usar paineis de manhwa adaptados",
+ "esforco": "baixo",
+ "potencial": 8,
+ "por_que_viraliza": "Gancho de plot twist + legendas destacadas prendem atenção, nicho de anime tem engajamento alto e compartilhamento por curiosidade",
+ "exemplo_roteiro": "Jack acordou achando que tudo foi um sonho... mas ao sair viu RUÍNAS por toda parte. Mechas DESTRUÍDOS espalhados pelo chão. Sua emoção DESPEDAÇOU... ele tinha VOLTADO NO TEMPO. O exército foi ANIQUILADO. O que aconteceu enquanto ele dormia?",
+ "nicho_canal": "novo canal: AnimeRecapBR",
+ "tags": [
+  "anime recap",
+  "kaiju",
+  "mecha",
+  "plot twist",
+  "viagem no tempo",
+  "suspense"
+ ],
+ "video": "2026-10-07 15-48-37.mp4",
+ "data": "2026-10-12"
+}

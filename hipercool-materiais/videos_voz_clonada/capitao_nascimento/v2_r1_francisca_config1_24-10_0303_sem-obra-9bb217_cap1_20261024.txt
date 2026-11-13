@@ -1,0 +1,20 @@
+Narrador (voz clonada): capitao_nascimento
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_codigo_inteligente_n7j  |  título: ELE FOI HUMILHADO mas SALVOU a tropa com PODER SECRETO
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-9bb217_cap1_20261024\video.mp4
+
+frase abertura: trecho ORIGINAL  | clima normal | tom +0 | index None | protect None | vol None | missao dada e missao cumprida — Missão dada é missão cumprida https://www.youtube.com/watc
+frase 0: francisca +4% | clima engracado | tom +0 | index 0.55 | protect 0.28 | vol 0.66 | O malandro do Carlos fecha a tampa do barril por fora e deixa a tropa trancada a duzentos 
+frase 1: francisca -15% | clima tensao | tom -1 | index 0.54 | protect 0.28 | vol 0.67 | Os infelizes batem na tampa desesperados enquanto o sujeito se despide na chuva pesada.
+frase 2: kokoro x1.13 | clima acao | tom +1 | index 0.73 | protect 0.22 | vol 0.71 | A água subterrânea arrebenta a terra e cobre o corpo desse aspirante a herói.
+frase 3: francisca -15% | clima tensao | tom -1 | index 0.37 | protect 0.41 | vol 0.83 | O barril sobe na marra, mas uma rocha despenca e acerta a lata em cheio.
+frase 4: francisca -15% | clima tensao | tom -1 | index 0.38 | protect 0.41 | vol 0.75 | A tropa instrumento para fora e o barril fica preso numa corda maldita.
+frase 5: kokoro x1.13 | clima acao | tom +1 | index 0.4 | protect 0.4 | vol 0.76 | Os caras unem forças e arrebentam essa nhaca de corda, mas batem num cano de aço.
+frase 6: francisca -7% | clima normal | tom +0 | index 0.4 | protect 0.36 | vol 0.74 | O tal do Carlos surge chutando a lata por cima para ajudar na missão.
+frase 7: francisca -17% | clima triste | tom -1 | index 0.38 | protect 0.4 | vol 0.73 | O infeliz enfraquece, mas tapa o buraco com o próprio braço pra salvar a tropa.
+frase 8: francisca -15% | clima tensao | tom -1 | index 0.46 | protect 0.28 | vol 0.74 | O maldito do barril sobe rápido e o Carlos fica para trás.
+frase 9: kokoro x1.13 | clima acao | tom +1 | index 0.47 | protect 0.28 | vol 0.71 | O braço do malandro enrosca na corda e a lata puxa ele pra superfície à força.
+frase 10: francisca -15% | clima tensao | tom -1 | index 0.49 | protect 0.28 | vol 0.74 | A equipe de resgate joga o guindaste, mas a lata começa a vazar de novo.
+frase 11: francisca -13% | clima epico | tom -1 | index 0.51 | protect 0.28 | vol 0.77 | O Carlos abre a tampa na marra e o filho dele acenando lá de dentro.
+frase 12: francisca -15% | clima tensao | tom -1 | index 0.74 | protect 0.22 | vol 0.79 | E o guindaste puxa todo mundo e pai e filho se abraçam no final dessa operação, mas...

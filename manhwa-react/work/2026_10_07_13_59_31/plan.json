@@ -1,0 +1,37 @@
+{
+ "out_w": 1080,
+ "out_h": 1920,
+ "webcam": {
+  "crop": [
+   0,
+   0,
+   720,
+   544
+  ],
+  "out_h": 816
+ },
+ "divider_out": 816,
+ "band": {
+  "y": 816,
+  "h": 0
+ },
+ "seam": {
+  "y": 816,
+  "overlap": 56,
+  "edge": "tear",
+  "style": "electric"
+ },
+ "content": {
+  "crop": [
+   70,
+   667,
+   570,
+   612
+  ],
+  "scale": [
+   1080,
+   1160
+  ],
+  "out_y": 760
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "conta": "jornalcomia",
+ "marca": "Jornal com IA",
+ "capa": "Como a inteligência artificial escreve textos?",
+ "slides": [
+  {
+   "titulo": "Previsão de palavras",
+   "texto": "A inteligência artificial analisa milhões de frases anteriores para calcular qual palavra deve vir logo em seguida em uma conversa."
+  },
+  {
+   "titulo": "Padrões da linguagem",
+   "texto": "O sistema não pensa como um ser humano, mas reconhece estruturas matemáticas escondidas na forma como escrevemos diariamente."
+  },
+  {
+   "titulo": "Contexto e memória",
+   "texto": "Durante uma resposta longa, o modelo usa o histórico recente para manter o assunto coerente do início até o ponto final."
+  },
+  {
+   "titulo": "Evolução constante",
+   "texto": "Cada novo dado processado ajuda a refinar essa habilidade de gerar respostas fluidas para diferentes tipos de perguntas feitas pelos usuários."
+  }
+ ],
+ "legenda": "Descubra como os modelos de linguagem processam palavras para gerar respostas completas.\nComente abaixo o que você gostaria de ver no próximo post.",
+ "gerado_em": "2026-10-27T12:38:15"
+}

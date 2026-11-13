@@ -1,0 +1,16 @@
+{
+  "name": "qa-hermes-call",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suite de QA que simula o cliente na UI do Hermes Call (Playwright + verificacao semantica via Gemini visao no proxy OmniRoute).",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report reports/html",
+    "smoke": "playwright test tests/smoke.spec.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.0"
+  }
+}

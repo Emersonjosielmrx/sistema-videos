@@ -1,0 +1,19 @@
+import subprocess
+def add_shake_to_video(in_mp4, out_mp4, intensity=10, freq=12):
+    # Tremor usando crop dinâmico com decaimento exponencial
+    # x = (in_w-out_w)/2 + intensity * exp(-2*t) * sin(2*PI*freq*t)
+    # y = (in_h-out_h)/2 + intensity * exp(-2*t) * cos(2*PI*freq*t)
+    cw, ch = 720, 1280
+    pad_w, pad_h = cw + 40, ch + 40
+    fc = (
+        f"[0:v]scale={pad_w}:{pad_h}:force_original_aspect_ratio=decrease,"
+        f"pad={pad_w}:{pad_h}:(ow-iw)/2:(oh-ih)/2,"
+        f"crop={cw}:{ch}:'(in_w-{cw})/2+{intensity}*exp(-1.5*t)*sin(2*PI*{freq}*t)':'(in_h-{ch})/2+{intensity}*exp(-1.5*t)*cos(2*PI*{freq}*t)'[vout]"
+    )
+    subprocess.run([
+        "ffmpeg", "-y", "-i", in_mp4,
+        "-filter_complex", fc,
+        "-map", "[vout]", "-map", "0:a",
+        "-c:v", "libx264", "-crf", "20", "-preset", "veryfast",
+        "-c:a", "copy", out_mp4
+    ], capture_output=True)

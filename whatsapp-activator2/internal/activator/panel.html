@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WhatsApp Activator</title>
+<style>
+:root{--bg:#0b141a;--card:#1f2c34;--border:#2a3942;--text:#e9edef;--muted:#8696a0;--green:#00a884;--red:#ea4335;--blue:#53bdeb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:16px}
+h1{font-size:1.3rem;margin-bottom:16px;color:var(--green)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;max-width:520px}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+input,select{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;margin-bottom:12px}
+input:focus{outline:none;border-color:var(--green)}
+.row{display:flex;gap:8px}
+.row>*{flex:1}
+button{padding:10px 20px;border:none;border-radius:8px;font-size:.95rem;cursor:pointer;font-weight:600;transition:opacity .2s}
+button:hover{opacity:.85}
+button:disabled{opacity:.4;cursor:not-allowed}
+.btn-go{background:var(--green);color:#fff;width:100%}
+.btn-sm{background:var(--border);color:var(--text);padding:8px 14px;font-size:.85rem}
+.btn-red{background:var(--red);color:#fff}
+.status{margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;font-size:.9rem;line-height:1.5;display:none}
+.status.show{display:block}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.8rem;font-weight:600}
+.badge-ok{background:#0d5e3d;color:#82e8b4}
+.badge-wait{background:#5e4b0d;color:#e8cf82}
+.badge-err{background:#5e0d0d;color:#e88282}
+.badge-run{background:#0d3c5e;color:#82c8e8}
+.screen-img{max-width:100%;border-radius:8px;margin-top:8px;border:1px solid var(--border)}
+.sessions{max-width:520px}
+.sess-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;cursor:pointer;transition:border-color .2s}
+.sess-item:hover{border-color:var(--green)}
+.sess-item h3{font-size:.95rem;margin-bottom:4px}
+.sess-item .meta{font-size:.8rem;color:var(--muted)}
+.sms-box{display:none;margin-top:12px}
+.sms-box.show{display:block}
+.hidden{display:none}
+.log{font-family:monospace;font-size:.8rem;color:var(--muted);margin-top:8px;max-height:200px;overflow-y:auto;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<h1>WhatsApp Activator</h1>
+
+<div class="card" id="tokenCard">
+  <label>Token de acesso</label>
+  <input type="password" id="token" placeholder="Cole o token aqui">
+  <button class="btn-go" onclick="saveToken()">Entrar</button>
+</div>
+
+<div class="hidden" id="main">
+  <div class="card">
+    <label>Numero do WhatsApp (com DDI)</label>
+    <input type="tel" id="phone" placeholder="5591999999999">
+    <div class="row">
+      <div>
+        <label>Nome da linha</label>
+        <input type="text" id="name" placeholder="(opcional)">
+      </div>
+      <div>
+        <label>Nome no perfil</label>
+        <input type="text" id="profile" placeholder="Atendimento">
+      </div>
+    </div>
+    <button class="btn-go" id="btnActivate" onclick="activate()">Ativar numero</button>
+    <div class="status" id="activateStatus"></div>
+  </div>
+
+  <div class="card sms-box" id="smsBox">
+    <label>Codigo SMS (6 digitos)</label>
+    <div class="row">
+      <input type="text" id="smsCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}">
+      <button class="btn-sm" onclick="sendSMS()">Enviar codigo</button>
+    </div>
+    <div class="status" id="smsStatus"></div>
+  </div>
+
+  <div class="card" id="screenCard" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <label style="margin:0">Tela do celular virtual</label>
+      <button class="btn-sm" onclick="refreshScreen()">Atualizar tela</button>
+    </div>
+    <img class="screen-img" id="screenImg" alt="tela" style="cursor:pointer" onclick="tapScreen(event)">
+    <div style="font-size:.8rem;color:var(--muted);margin:6px 0">Clique na imagem para tocar no celular.</div>
+    <div class="row">
+      <input type="text" id="typeText" placeholder="texto para digitar no celular">
+      <button class="btn-sm" onclick="typeText()">Digitar</button>
+    </div>
+    <div class="row">
+      <button class="btn-sm" onclick="key('voltar')">Voltar</button>
+      <button class="btn-sm" onclick="key('apagar')">Apagar</button>
+      <button class="btn-sm" onclick="key('enter')">Enter</button>
+    </div>
+    <div class="status" id="tapStatus"></div>
+  </div>
+
+  <h1 style="margin-top:24px">Sessoes</h1>
+  <button class="btn-sm" onclick="loadSessions()" style="margin-bottom:12px">Atualizar lista</button>
+  <div class="sessions" id="sessionsList"></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let TOKEN = localStorage.getItem('wa_token') || '';
+let currentId = '';
+let pollTimer = null;
+
+function api(method, path, body) {
+  const opts = {method, headers: {'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json'}};
+  if (body) opts.body = JSON.stringify(body);
+  return fetch('/api/' + path, opts).then(r => r.json().then(d => ({ok: r.ok, status: r.status, data: d})));
+}
+
+function saveToken() {
+  TOKEN = $('token').value.trim();
+  if (!TOKEN) return;
+  localStorage.setItem('wa_token', TOKEN);
+  $('tokenCard').classList.add('hidden');
+  $('main').classList.remove('hidden');
+  loadSessions();
+}
+
+function badge(state) {
+  const map = {
+    creating_emulator: ['Ligando o celular...', 'run'],
+    installing_whatsapp: ['Instalando WhatsApp...', 'run'], entering_phone: ['Abrindo cadastro...', 'run'],
+    awaiting_number: ['Esperando numero', 'wait'], awaiting_sms: ['Esperando SMS', 'wait'],
+    pairing: ['Pareando...', 'run'], checking: ['Conferindo...', 'run'],
+    completed: ['Ativado', 'ok'], error: ['Erro', 'err'],
+    waking: ['Acordando...', 'run']
+  };
+  const [label, cls] = map[state] || [state, 'run'];
+  return '<span class="badge badge-' + cls + '">' + label + '</span>';
+}
+
+async function activate() {
+  const phone = $('phone').value.trim();
+  if (!phone) return;
+  $('btnActivate').disabled = true;
+  const s = $('activateStatus');
+  s.className = 'status show';
+  s.innerHTML = 'Iniciando ativacao...';
+
+  const r = await api('POST', 'activate', {
+    phone: phone,
+    name: $('name').value.trim() || undefined,
+    profile_name: $('profile').value.trim() || undefined
+  });
+
+  if (!r.ok) {
+    s.innerHTML = '<span class="badge badge-err">Erro</span> ' + (r.data.error || JSON.stringify(r.data));
+    $('btnActivate').disabled = false;
+    return;
+  }
+  currentId = r.data.id;
+  s.innerHTML = badge(r.data.state) + ' ID: ' + r.data.id;
+  startPoll();
+}
+
+function startPoll() {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(pollStatus, 3000);
+  pollStatus();
+}
+
+async function pollStatus() {
+  if (!currentId) return;
+  const r = await api('GET', 'activate/' + currentId);
+  if (!r.ok) return;
+  const d = r.data;
+  const s = $('activateStatus');
+  s.className = 'status show';
+  let html = badge(d.state);
+  if (d.notice) html += '<br><span style="color:var(--muted)">' + d.notice + '</span>';
+  if (d.error) html += '<br><span style="color:var(--red)">' + d.error + '</span>';
+  if (d.pairing_code) html += '<br>Codigo de pareamento: <b>' + d.pairing_code + '</b>';
+  s.innerHTML = html;
+
+  if (d.state === 'awaiting_sms') {
+    $('smsBox').classList.add('show');
+  } else {
+    $('smsBox').classList.remove('show');
+  }
+
+  if (d.job) {
+    $('screenCard').style.display = '';
+    refreshScreen();
+  }
+
+  if (d.state === 'completed' || d.state === 'error') {
+    clearInterval(pollTimer);
+    pollTimer = null;
+    $('btnActivate').disabled = false;
+  }
+}
+
+async function sendSMS() {
+  if (!currentId) return;
+  const code = $('smsCode').value.trim();
+  if (!/^\d{6}$/.test(code)) {$('smsStatus').className='status show'; $('smsStatus').textContent='Codigo deve ter 6 digitos'; return;}
+  const r = await api('POST', 'activate/' + currentId + '/sms', {code});
+  $('smsStatus').className = 'status show';
+  $('smsStatus').textContent = r.ok ? 'Codigo enviado!' : (r.data.error || 'Erro');
+}
+
+function refreshScreen() {
+  if (!currentId) return;
+  $('screenImg').src = '/api/activate/' + currentId + '/tela?png=1&token=' + encodeURIComponent(TOKEN) + '&_t=' + Date.now();
+  $('screenImg').onerror = () => { $('screenImg').alt = 'Celular nao esta ligado'; };
+}
+
+async function control(body) {
+  if (!currentId) return;
+  const r = await fetch('/api/activate/' + currentId + '/toque', {method: 'POST', headers: {'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+  const s = $('tapStatus');
+  if (r.ok) { s.className = 'status'; } else { s.className = 'status show'; s.textContent = (await r.json().catch(() => ({}))).error || 'Erro'; }
+  setTimeout(refreshScreen, 700);
+}
+function tapScreen(e) {
+  const img = $('screenImg');
+  if (!img.naturalWidth) return;
+  const rect = img.getBoundingClientRect();
+  const x = Math.round((e.clientX - rect.left) * img.naturalWidth / rect.width);
+  const y = Math.round((e.clientY - rect.top) * img.naturalHeight / rect.height);
+  control({x, y});
+}
+function typeText() { const t = $('typeText').value.trim(); if (t) { control({digitar: t}); $('typeText').value = ''; } }
+function key(k) { control({tecla: k}); }
+
+async function loadSessions() {
+  const r = await api('GET', 'activate');
+  if (!r.ok) return;
+  const el = $('sessionsList');
+  const list = r.data.sessions || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted)">Nenhuma sessao</div>'; return; }
+  el.innerHTML = list.map(s => {
+    const phone = s.phone ? s.phone.replace(/(\d{2})(\d{2})(\d+)(\d{4})/, '+$1 ($2) $3-$4') : '?';
+    return '<div class="sess-item" onclick="selectSession(\'' + s.id + '\')">' +
+      '<h3>' + (s.name || 'Sem nome') + ' ' + badge(s.state) + '</h3>' +
+      '<div class="meta">' + phone + ' &middot; ' + s.id + '</div></div>';
+  }).join('');
+}
+
+function selectSession(id) {
+  currentId = id;
+  $('activateStatus').className = 'status show';
+  $('activateStatus').innerHTML = 'Carregando sessao ' + id + '...';
+  $('screenCard').style.display = '';
+  startPoll();
+}
+
+// init
+if (TOKEN) {
+  $('tokenCard').classList.add('hidden');
+  $('main').classList.remove('hidden');
+  loadSessions();
+}
+
+// tela: auth header
+const origSrc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+$('screenImg').addEventListener('error', function(){}, true);
+</script>
+</body>
+</html>

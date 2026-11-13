@@ -1,0 +1,18 @@
+Narrador (voz clonada): fatos_desconhecidos
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_historias_em_frames  |  título: NINGUÉM ESPERAVA essa TRAIÇÃO pelo PODER SUPREMO! 🇧🇷
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-223ebb_cap1_20261030\video.mp4
+
+frase 0: francisca +2% | clima normal | tom +1 | index 0.35 | protect 0.39 | vol 0.67 | Tudo na presidência começa quando Deodoro proclama a República e logo passa o comando pro 
+frase 1: francisca +6% | clima normal | tom -1 | index 0.41 | protect 0.37 | vol 0.74 | Aí vem Prudente de Morais como primeiro civil, seguido por Campos Sales e por Rodrigues Al
+frase 2: francisca -3% | clima tensao | tom -1 | index 0.36 | protect 0.41 | vol 0.69 | Só que aí o negócio fica tenso: Afonso Pena morre no cargo, Nilo Peçanha assume, passa por
+frase 3: francisca -11% | clima terror | tom -2 | index 0.53 | protect 0.28 | vol 0.76 | Pra piorar a situação, o eleito morre de gripe espanhola, então Delfim Moreira entra, segu
+frase 4: kokoro x1.34 | clima acao | tom +1 | index 0.52 | protect 0.28 | vol 0.76 | E aí, quem derruba Washington Luís do poder?
+frase 5: francisca -1% | clima epico | tom -1 | index 0.5 | protect 0.28 | vol 0.79 | Ele mesmo, minha gente, Getúlio Vargas assume e fica quinze anos direto, até José Linhares
+frase 6: francisca -3% | clima tensao | tom -1 | index 0.48 | protect 0.28 | vol 0.74 | Só que ninguém esperava o que veio depois na política brasileira.
+frase 7: francisca -7% | clima vilao | tom -8 | index 0.53 | protect 0.22 | vol 0.77 | Getúlio volta, tira a própria vida pra entrar na história, Café Filho assume e você não va
+frase 8: kokoro x1.34 | clima acao | tom +1 | index 0.5 | protect 0.22 | vol 0.74 | De repente Jânio Quadros renuncia, Mazzilli passa a faixa, Jango cai no golpe de 64 e come
+frase 9: francisca -6% | clima engracado | tom -2 | index 0.5 | protect 0.22 | vol 0.75 | Caramba!
+frase 10: francisca -5% | clima triste | tom -1 | index 0.4 | protect 0.38 | vol 0.68 | O mais louco é que Tancredo morre antes da posse, Sarney governa, Collor renuncia no impea
+frase 11: francisca -1% | clima epico | tom -1 | index 0.37 | protect 0.38 | vol 0.73 | Aí Fernando Henrique se reelege, vêm Lula, Dilma como primeira mulher, Temer, Bolsonaro e 

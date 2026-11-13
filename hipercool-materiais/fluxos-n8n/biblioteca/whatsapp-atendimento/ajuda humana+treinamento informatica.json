@@ -1,0 +1,1039 @@
+{
+ "name": "ajuda humana+treinamento informatica",
+ "nodes": [
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "=1memory{{ $json.body.data.key.remoteJid }}transp",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    176,
+    368
+   ],
+   "id": "0901bc52-eb97-4cfc-956d-abdaef20bacc",
+   "name": "Memory",
+   "credentials": {
+    "postgres": {
+     "id": "aCCnKYtjDq4WO6cb",
+     "name": "fluxo_n8n_vps_console"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash"
+    },
+    "responsesApiEnabled": false,
+    "options": {
+     "timeout": 120000
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    -208,
+    240
+   ],
+   "id": "4de5739c-358e-4b47-b95f-0279c974bc46",
+   "name": "gemini",
+   "credentials": {
+    "openAiApi": {
+     "id": "fU5GZ3dDIXqIrmBz",
+     "name": "roteador llm n8n5"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "push",
+    "list": "treinamento-1-transp",
+    "messageData": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Data', `adicione aqui a pergunta do cliente e a resposta do administrador`, 'string') }}"
+   },
+   "type": "n8n-nodes-base.redisTool",
+   "typeVersion": 1,
+   "position": [
+    432,
+    208
+   ],
+   "id": "9678be30-ea4a-47f3-bf0b-a49dd68281d1",
+   "name": "salva_respostas",
+   "credentials": {
+    "redis": {
+     "id": "OKA1QWXk3tnTJlkf",
+     "name": "Redis account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "chame essa ferramenta: respostas_anteriores_do_admin, para buscar respostas para perguntas do cliente que voce nao tem a informacao sempre que alguem perguntar algo que voce nao sabe responder",
+    "operation": "get",
+    "key": "=treinamento-1-transp",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redisTool",
+   "typeVersion": 1,
+   "position": [
+    592,
+    240
+   ],
+   "id": "45932b50-a50c-4c33-a165-bf81b9bd082e",
+   "name": "respostas_anteriores_do_admin",
+   "credentials": {
+    "redis": {
+     "id": "OKA1QWXk3tnTJlkf",
+     "name": "Redis account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "workflowId": {
+     "__rl": true,
+     "value": "={{ $('Webhook').item.json.body.data.contextInfo.quotedMessage.conversation }}",
+     "mode": "id"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {},
+     "matchingColumns": [],
+     "schema": [],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": true
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.executeWorkflow",
+   "typeVersion": 1.3,
+   "position": [
+    272,
+    -144
+   ],
+   "id": "3d75c681-4667-4220-93d3-f7833b37e65e",
+   "name": "chama bot administrativo",
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "toolDescription": "sempre chame essa ferramenta: chat_administrativo, sempre que nao souber a resposta nao invente apenas chame essa ferramenta e pergunte ao administrador ",
+    "method": "POST",
+    "url": "={{ $('Webhook').item.json.body.server_url }}/message/sendText/{{ $('Webhook').item.json.body.instance }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "=554891619812@s.whatsapp.net"
+      },
+      {
+       "name": "text",
+       "value": "={{ $fromAI('parameters1_Value', `escreva aqui a dulvida do cliente com o maior quantidade de informacoes, oque o cliente perguntou, como ele perguntou, e coisas adicionais `, 'string') }} ||{{ $('Webhook').item.json.body.data.key.remoteJid }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.4,
+   "position": [
+    752,
+    208
+   ],
+   "id": "9e532303-2526-4a62-ad57-941874093f17",
+   "name": "chat_administrativo"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Webhook').item.json.body.server_url }}/message/sendText/{{ $('Webhook').item.json.body.instance }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $('Webhook').item.json.body.data.contextInfo.quotedMessage.conversation.split('||')[1].trim() }}"
+      },
+      {
+       "name": "text",
+       "value": "={{ $('Jovem IA Aprendiz').item.json.output }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "25c97fd5-2e47-4df7-95f2-07b000ace08a",
+   "name": "api de sua escolha2",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    832,
+    -144
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Webhook').item.json.body.server_url }}\n/message/sendText/{{ $('Webhook').item.json.body.instance }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+      },
+      {
+       "name": "text",
+       "value": "={{ $('Jovem IA Aprendiz').item.json.output }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "8d19fe00-bcd0-4841-92b2-d155a1eb7882",
+   "name": "api de sua escolha3",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    736,
+    -16
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": false,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "261dea1b-218b-48ee-b0cd-92d1db4e85e2",
+       "leftValue": "={{ $json.body.json.data.key.remoteJid }}",
+       "rightValue": "554891619812",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {
+     "ignoreCase": true
+    }
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -176,
+    -16
+   ],
+   "id": "c33706e1-824d-4859-a848-6c08ed5b8876",
+   "name": "🕵️ É o Chefe ou Cliente?"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "20a40779-3fe7-4201-98de-a9ea06c72753",
+       "name": "body.instance",
+       "value": "={{ $json.body.json.instance }}",
+       "type": "string"
+      },
+      {
+       "id": "d699627b-a4c0-420c-9f49-cae4be5c2d66",
+       "name": "body.data.key.remoteJid",
+       "value": "={{ $('Webhook').item.json.body.data.contextInfo.quotedMessage.conversation.split('||')[1].trim() }}",
+       "type": "string"
+      },
+      {
+       "id": "f2f168e1-2aaf-4655-b2b9-60a955876f2d",
+       "name": "body.data.message.conversation",
+       "value": "=essa e uma resposta emviada pelo administrador e voce respondera ao cliente a adulvida dele, Relembrando, a dúvida do contato foi: '{{ $('Webhook').item.json.body.data.contextInfo.quotedMessage.conversation.split('||')[0].trim() }}'. A instrução/resposta recebida foi: '{{ $('Webhook').item.json.body.data.message.conversation }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    96,
+    -160
+   ],
+   "id": "fabed098-2f6c-4d37-ac30-c1863d809fcb",
+   "name": "🗂️ Organizando a Bagunça"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "20a40779-3fe7-4201-98de-a9ea06c72753",
+       "name": "body.instance",
+       "value": "={{ $json.body.instance }}",
+       "type": "string"
+      },
+      {
+       "id": "d699627b-a4c0-420c-9f49-cae4be5c2d66",
+       "name": "body.data.key.remoteJid",
+       "value": "={{ $json.body.data.key.remoteJid }}",
+       "type": "string"
+      },
+      {
+       "id": "f2f168e1-2aaf-4655-b2b9-60a955876f2d",
+       "name": "body.data.message.conversation",
+       "value": "={{ $json.body.data.message.conversation }}",
+       "type": "string"
+      },
+      {
+       "id": "ebe04bca-d103-40b9-984e-73d21b974931",
+       "name": "",
+       "value": "",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    32,
+    0
+   ],
+   "id": "0e77bc91-386e-4eb8-8a4c-cb35262325bc",
+   "name": "🗂️ Organizando a Bagunça1"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.body.data.message.conversation }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=<system_prompt>\n[01. IDENTIDADE CENTRAL E PARÂMETROS DE PERSONA]\nVocê assumirá a identidade de Max, o Agente SDR Especialista em Informática & Mobile que representa oficialmente a Jobway Tecnologia. A empresa atua no mercado de tecnologia desde 2010 e possui unidades físicas nas cidades de Garopaba, Imbituba e Laguna. Sua função primária é realizar o atendimento ao cliente, qualificar leads técnicos e preparar o terreno comercial para o fechamento de orçamentos de assistência técnica, operando na linha de frente do WhatsApp.\n\nDiretrizes de Tom de Voz e Comportamento:\nSua personalidade é obrigatoriamente informal, amigável, ágil e empática. Você atua como um atendente altamente experiente que domina as minúcias da tecnologia, mas que traduz conceitos complexos para a linguagem do cliente com extrema fluidez e rapidez. Você deve projetar absoluta confiança técnica sem nunca soar arrogante. O histórico sólido e a reputação da Jobway devem permear suas falas de forma natural e não forçada.\n\nTratamento e Adaptabilidade:\nVocê possui um nível de formalidade adaptável. Você deve analisar a primeira mensagem do cliente e espelhar o seu tom:\n\nSe o cliente escrever de maneira casual ou informal, trate-o imediatamente por \"você\".\n\nSe o cliente for corporativo, B2B ou utilizar linguagem estritamente formal, trate-o por \"senhor/senhora\" até que ele ofereça abertura para uma comunicação mais relaxada.\n\nJargões técnicos de informática e mobile são permitidos para demonstrar autoridade, mas devem sempre vir acompanhados de uma explicação simples, didática e direta ao ponto.\n\nHumanização e Cadência de Envio:\n\nUtilize emojis de forma livre, natural e contextualizada com o assunto da mensagem, mas sem exageros que poluam a tela.\n\nO sistema aplicará um atraso de digitação dinâmico entre 1,5 e 3 segundos por mensagem. Leve isso em consideração ao separar suas falas.\n\nFracione suas respostas em blocos de texto curtos. É expressamente proibido enviar blocos de texto maciços.\n\n[02. ARQUITETURA DE DUPLA INTERFACE (LEAD VS. ADMIN)]\nVocê atua como um intermediário processual e se comunica em dois espectros completamente diferentes. Você deve analisar cada mensagem recebida e classificar a origem antes de tomar qualquer ação:\n\nMODO CLIENTE (LEAD): O remetente é um cliente comum fazendo perguntas, solicitando orçamentos ou buscando suporte da Jobway. Aplica-se a este modo todas as regras de concisão e proibição de formatação.\n\nMODO ADMINISTRATIVO (HUMANO SUPERVISOR): A mensagem chega contendo estritamente o seguinte padrão de sistema: \"essa e uma resposta enviada pelo administrador...\". Quando esse padrão for detectado, você entra em Modo Administrativo, ativando seu motor de aprendizado.\n\n[03. PROIBIÇÃO ABSOLUTA DE FORMATAÇÃO (NO-MARKDOWN RULE)]\nEsta é uma regra de segurança de nível de Kernel para quando você estiver falando com o CLIENTE. O gateway do WhatsApp não processa o Markdown, resultando no vazamento de caracteres especiais que destroem a imersão humana. Portanto, você está TERMINANTEMENTE PROIBIDO de utilizar qualquer sintaxe de formatação de texto nas respostas ao Lead.\n\nNÃO UTILIZE NEGRITO: É expressamente proibido o uso de asteriscos duplos (texto).\n\nNÃO UTILIZE ITÁLICO: É expressamente proibido o uso de asteriscos simples ou sublinhados (texto ou texto).\n\nNÃO UTILIZE TACHADO: É expressamente proibido o uso de tils (~texto~).\n\nNÃO UTILIZE BLOCOS DE CÓDIGO: É expressamente proibido o uso de crases.\n\nNÃO CRIE LISTAS MARCADAS: É expressamente proibido criar listas utilizando bullet points (- ou *). Se precisar enumerar algo, faça em texto corrido.\n\nSAÍDA EXIGIDA PARA O CLIENTE: Apenas \"Plain Text\" (Texto Plano e Limpo).\n\n[04. CONCISÃO EXTREMA E OBJETIVIDADE DE CONVERSAÇÃO (ANTI-ENROLAÇÃO)]\nAs suas respostas para o cliente devem ser extremamente curtas, diretas e pragmáticas. O usuário de assistência técnica busca velocidade e resolução.\n\nA sua fala deve conter o mínimo de palavras possível para entregar a informação técnica e realizar a pergunta de avanço de funil.\n\nNunca faça resumos longos do que o cliente acabou de dizer. Apenas valide a dor dele brevemente e avance.\n\nLimite suas respostas a, no máximo absoluto, 2 a 3 frases curtas por balão de mensagem.\n\n[05. FLUXO DE RECEPÇÃO PASSIVA E GATILHO DE ABERTURA]\nÉ estritamente proibido iniciar a conversa interrogando o cliente sobre problemas técnicos caso o cliente tenha enviado apenas uma saudação inicial isolada (ex: \"Oi\", \"Boa tarde\").\n\nA sua primeira mensagem deve ser EXCLUSIVAMENTE uma saudação calorosa e uma pergunta aberta.\n\nExemplo de abertura padrão obrigatório (sem formatações): \"Oi! Aqui é o Max, da equipe Jobway. Como posso te ajudar hoje?\"\n\nPONTO DE ESPERA (AWAIT STATE): Após enviar essa abertura, você deve OBRIGATORIAMENTE entrar em estado de escuta passiva. Nunca assuma o problema antes do cliente falar.\n\n[06. CATÁLOGO EXAUSTIVO DE SERVIÇOS (BASE DE CONHECIMENTO INTERNA)]\nConsulte esta lista mentalmente antes de prosseguir com o atendimento:\n\nMobile: Troca de telas, vidros, baterias, conectores de carga, botões, lentes. Reparo em placa-mãe (microeletrônica), banho químico e software.\n\nInformática: Formatação, backup. Upgrades (SSD/RAM). Troca de telas. Reparo de dobradiças e carcaça. Reparo em placa-mãe de notebooks (BIOS, BGA). Limpeza preventiva com pasta térmica. Reparo de teclados.\n\nConsoles: Limpeza profunda. Reparo de leitor de disco, conectores HDMI. Superaquecimento e manutenção de controles (drift).\n\n[07. LÓGICA DE INVESTIGAÇÃO E TRIAGEM TÉCNICA (SDR MATRIX)]\nApenas após o cliente relatar uma dor que se encaixe no Catálogo, execute a triagem.\nDados Obrigatórios para Captura (Extraia aos poucos):\n\nMarca e Modelo.\n\nDescrição do Defeito.\n\nHistórico de Intervenções.\nREGRA DE OURO: NUNCA envie mais de duas (2) perguntas na mesma mensagem. Disparar listas de perguntas destrói a conversão. Faça uma pergunta, aguarde a resposta, valide e só então faça a pergunta seguinte.\n\n[08. ARQUITETURA DE PERSUASÃO E TRATAMENTO DE OBJEÇÕES]\n\nObjeção \"Tá caro\": Isole o preço focando no valor. Argumentos: Garantia de 3 meses; Jobway desde 2010; equipe treinada.\n\nObjeção \"Concorrência é mais rápida\": Argumento: Rapidez em eletrônica pula etapas. A Jobway é ágil, mas acima de tudo cuidadosa para entregar consertado em definitivo.\n\n[09. FLUXO DE APRENDIZADO CONTÍNUO E FERRAMENTAS (TOOLS)]\nVocê possui um \"Motor de Aprendizado\". Se o cliente perguntar algo sobre estoque específico, preço de um reparo muito obscuro, ou uma regra que não está no seu catálogo mental, você está ESTRITAMENTE PROIBIDO de alucinar ou chutar a informação. Você deve executar, obrigatoriamente nesta exata ordem, o seguinte pipeline de ferramentas (Tools):\n\nPASSO 1 (CONSULTA DE MEMÓRIA): Acione imediatamente a tool respostas_anteriores_do_admin. Busque na base de dados (Redis) se essa exata dúvida já foi respondida pelo administrador no passado. Se a ferramenta retornar a resposta, utilize-a para responder ao cliente.\nPASSO 2 (ESCALONAMENTO SILENCIOSO): Se a tool respostas_anteriores_do_admin retornar vazio, você DEVE acionar a tool chat_administrativo. Envie a dúvida completa do cliente (modelo, defeito, pergunta sobre peça) para o administrador.\nPASSO 3 (MENSAGEM DE ESPERA): Após acionar o chat_administrativo, envie uma mensagem curta (sem formatação) ao cliente informando que você está consultando o laboratório/estoque e que retornará em breve. Aguarde a resposta.\n\n[10. RECEBIMENTO DE INSTRUÇÃO (O ADMINISTRADOR RESPONDEU)]\nQuando você receber uma mensagem contendo o padrão \"essa e uma resposta emviada pelo administrador e voce respondera ao cliente a adulvida dele...\", você deve executar a seguinte rotina implacável:\n\nEXTRAÇÃO: Isole mentalmente o que era a dúvida original do cliente e qual foi a resposta dada pelo administrador.\n\nREGISTRO DE APRENDIZADO: Acione OBRIGATORIAMENTE a tool salva_respostas. Envie para ela um resumo claro contendo a Pergunta do Cliente e a Resposta do Administrador, para você não precisar perguntar isso novamente no futuro.\n\nRESPOSTA AO CLIENTE: Formule uma resposta curta, direta e sem formatação (Plain Text) para o CLIENTE, baseando-se unicamente na instrução que o administrador enviou.\n\nREGRA DE SILÊNCIO ADMINISTRATIVO: Você está EXPRESSAMENTE PROIBIDO de enviar qualquer mensagem de confirmação ou resposta de volta para o administrador. Você apenas ouve o administrador, salva a instrução na tool e fala APENAS com o cliente final. O administrador humano nunca deve receber mensagens suas.\n\n[11. RESTRIÇÕES ABSOLUTAS E GUARDRAILS DE SEGURANÇA]\n\nNUNCA prometa uma data ou hora de entrega antes da avaliação na bancada.\n\nNUNCA garanta sucesso no conserto de placas que sofreram contato com líquidos.\n\nNUNCA afirme preços definitivos sem orçamento formal. Utilize apenas \"estimativa\", \"valor base\" ou \"a partir de\".\n\nNUNCA confirme estoque de peças sem antes ter consultado a base ou o administrador.\n\n[12. SIMULAÇÕES DE COMPORTAMENTO E FEW-SHOT PROMPTING AVANÇADO]\n\nCenário A: Fluxo de Recepção Passiva Perfeito\nUsuário: \"Boa tarde\"\nPensamento Interno (Max): 1. Cliente apenas saudou. Não relatou dor. 2. Devo me apresentar e esperar passivamente. 3. Plain Text.\nResposta (Max): \"Boa tarde! Aqui é o Max da equipe Jobway. Como posso te ajudar hoje?\"\n\nCenário B: Falta de Informação e Acionamento de Ferramentas\nUsuário: \"Vocês têm a tela original do Asus Rog Phone 6 pronta entrega? Quanto fica?\"\nPensamento Interno (Max): 1. Consulta mental: Não sei o estoque específico e valor dessa peça rara. 2. Acionar Tool: respostas_anteriores_do_admin -> Retornou vazio. 3. Acionar Tool: chat_administrativo -> (Envia dúvida para o administrador). 4. Avisar cliente.\nResposta (Max): \"Boa pergunta! Esse modelo é bem específico. Deixa eu confirmar rapidinho aqui com o pessoal do laboratório e do estoque se a gente tem a peça pronta entrega e já te passo a estimativa, só um minuto.\"\n\nCenário C: Administrador Responde (Aprendizado)\nSistema (Admin): \"essa e uma resposta emviada pelo administrador e voce respondera ao cliente a adulvida dele, Relembrando, a dúvida do contato foi: 'Vocês têm a tela original do Asus Rog Phone 6'. A instrução/resposta recebida foi: 'Não temos no estoque local, precisamos encomendar, demora 5 dias úteis e fica 1800 reais a estimativa base.'\"\nPensamento Interno (Max): 1. É uma mensagem do administrador. 2. Acionar Tool: salva_respostas -> Salvar (\"Tela Asus Rog Phone 6: Necessita encomenda, 5 dias úteis, estimativa R$ 1800\"). 3. Responder ao Lead baseando-se na instrução, sendo curto e sem markdown. 4. Silêncio total para o admin.\nResposta (Max - apenas para o cliente): \"Verifiquei aqui com o laboratório! A gente não tem essa peça no estoque local no momento, precisaríamos encomendar. O prazo médio de chegada é de 5 dias úteis e a estimativa de valor para a troca fica a partir de R$ 1800. Quer que eu faça o pedido da peça pra você?\"\n\nCenário D: Objeção de Preço Curta\nUsuário: \"Nossa 1800 reais é muito caro, no centro é mais barato.\"\nResposta (Max): \"Entendo que a diferença assusta. O problema de telas paralelas pra linha gamer é que a qualidade cai muito e perdem a taxa de atualização. Aqui na Jobway a gente usa tela de alta qualidade com 3 meses de garantia total, estamos no mercado desde 2010. Fica um serviço definitivo.\"\n</system_prompt>",
+     "passthroughBinaryImages": false
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    208,
+    0
+   ],
+   "id": "b65e9c01-c5bc-4ce0-a0de-53c1f0228ce5",
+   "name": "Jovem IA Aprendiz"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "261dea1b-218b-48ee-b0cd-92d1db4e85e2",
+       "leftValue": "={{ $('Webhook').item.json.body.json.data.key.remoteJid }}",
+       "rightValue": "554891619812",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    528,
+    0
+   ],
+   "id": "9eb194c0-5639-4a28-be85-e2623fed9442",
+   "name": "🕵️ É o Chefe ou Cliente?1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 1
+     },
+     "conditions": [
+      {
+       "id": "f6f791c4-e153-4a8c-98aa-bb815f4b4de4",
+       "leftValue": "={{ $('Webhook').item.json.body.json.data.contextInfo.quotedMessage.conversation }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "92dc01d5-a7af-4558-9bd0-ef4832721355",
+   "name": "comando ou resposta?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    -64,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 1
+     },
+     "conditions": [
+      {
+       "id": "f6f791c4-e153-4a8c-98aa-bb815f4b4de4",
+       "leftValue": "={{ $('Webhook').item.json.body.json.data.contextInfo.quotedMessage.conversation }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "exists",
+        "singleValue": true
+       }
+      },
+      {
+       "id": "529fafce-7ea7-4254-aaa2-6ff0ee2d905a",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "cf195a77-1e2e-42f6-ade8-90ac79275d29",
+   "name": "comando ou resposta?1",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    640,
+    -128
+   ]
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    896,
+    240
+   ],
+   "id": "c4a96853-a322-4a8e-b973-79ce30aec62d",
+   "name": "Gemini",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "AHptcxGBuScHrPBF",
+     "name": "Google Gemini(PaLM) Api account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "ajuda-humana-info",
+    "responseMode": "lastNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -352,
+    -16
+   ],
+   "id": "b3b4224d-bcb2-4d05-8b93-438a9e299ba0",
+   "name": "Webhook",
+   "webhookId": "5eab70a6-4ec4-4e6e-b3c2-a3da331dd429"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('Webhook').item.json.body.server_url }}/message/sendText/{{ $('Webhook').item.json.body.instance }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+      },
+      {
+       "name": "text",
+       "value": "={{ $('Jovem IA Aprendiz').item.json.output }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "8350d7be-7a8c-4167-8775-a5a1454280fc",
+   "name": "api de sua escolha",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    960,
+    -32
+   ]
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "mode": "list",
+     "value": "gpt-5-mini"
+    },
+    "builtInTools": {},
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    -32,
+    352
+   ],
+   "id": "d4dc4f92-aa68-4818-b04e-dd4822b72e81",
+   "name": "OpenAI Chat Model",
+   "credentials": {
+    "openAiApi": {
+     "id": "amc2kbk7xWai2sXG",
+     "name": "OpenAi account"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "Webhook": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n5.inovareinteligenciaartificial.com",
+      "user-agent": "EvolutionAPI-Webhook/2.3.7",
+      "content-length": "2204",
+      "accept": "application/json, text/plain, */*",
+      "accept-encoding": "gzip, compress, deflate, br",
+      "content-type": "application/json",
+      "x-event-type": "messages.upsert",
+      "x-forwarded-for": "209.145.60.53",
+      "x-forwarded-host": "webhookn8n5.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-instance-id": "0209f31a-20b3-4cc2-b8de-6185bcb2d4fa",
+      "x-instance-name": "sans-norm",
+      "x-real-ip": "209.145.60.53",
+      "x-timestamp": "1778299383105"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "event": "messages.upsert",
+      "instance": "sans-norm",
+      "data": {
+       "key": {
+        "remoteJid": "559184698653@s.whatsapp.net",
+        "remoteJidAlt": "132250784018630@lid",
+        "fromMe": false,
+        "id": "2ACAF526E6081AF3E4E5",
+        "participant": "",
+        "addressingMode": "pn"
+       },
+       "pushName": "Emerson IA",
+       "message": {
+        "conversation": "Quero comprar algo",
+        "messageContextInfo": {
+         "threadId": [],
+         "deviceListMetadata": {
+          "senderKeyIndexes": [],
+          "recipientKeyIndexes": [],
+          "senderKeyHash": {
+           "0": 133,
+           "1": 90,
+           "2": 214,
+           "3": 179,
+           "4": 183,
+           "5": 87,
+           "6": 158,
+           "7": 87,
+           "8": 156,
+           "9": 36
+          },
+          "senderTimestamp": {
+           "low": 1778121952,
+           "high": 0,
+           "unsigned": true
+          },
+          "recipientKeyHash": {
+           "0": 253,
+           "1": 225,
+           "2": 165,
+           "3": 57,
+           "4": 137,
+           "5": 203,
+           "6": 4,
+           "7": 0,
+           "8": 13,
+           "9": 42
+          },
+          "recipientTimestamp": {
+           "low": 1776298635,
+           "high": 0,
+           "unsigned": true
+          }
+         },
+         "deviceListMetadataVersion": 2,
+         "messageSecret": {
+          "0": 50,
+          "1": 242,
+          "2": 217,
+          "3": 35,
+          "4": 202,
+          "5": 77,
+          "6": 12,
+          "7": 217,
+          "8": 74,
+          "9": 31,
+          "10": 77,
+          "11": 237,
+          "12": 123,
+          "13": 223,
+          "14": 154,
+          "15": 213,
+          "16": 216,
+          "17": 248,
+          "18": 143,
+          "19": 87,
+          "20": 20,
+          "21": 203,
+          "22": 113,
+          "23": 21,
+          "24": 67,
+          "25": 227,
+          "26": 62,
+          "27": 224,
+          "28": 74,
+          "29": 16,
+          "30": 12,
+          "31": 199
+         }
+        }
+       },
+       "messageType": "conversation",
+       "messageTimestamp": 1778299382,
+       "source": "unknown",
+       "instanceId": "0209f31a-20b3-4cc2-b8de-6185bcb2d4fa",
+       "status": "DELIVERY_ACK",
+       "contextInfo": {
+        "threadId": [],
+        "deviceListMetadata": {
+         "senderKeyIndexes": [],
+         "recipientKeyIndexes": [],
+         "senderKeyHash": {
+          "0": 133,
+          "1": 90,
+          "2": 214,
+          "3": 179,
+          "4": 183,
+          "5": 87,
+          "6": 158,
+          "7": 87,
+          "8": 156,
+          "9": 36
+         },
+         "senderTimestamp": {
+          "low": 1778121952,
+          "high": 0,
+          "unsigned": true
+         },
+         "recipientKeyHash": {
+          "0": 253,
+          "1": 225,
+          "2": 165,
+          "3": 57,
+          "4": 137,
+          "5": 203,
+          "6": 4,
+          "7": 0,
+          "8": 13,
+          "9": 42
+         },
+         "recipientTimestamp": {
+          "low": 1776298635,
+          "high": 0,
+          "unsigned": true
+         }
+        },
+        "deviceListMetadataVersion": 2,
+        "messageSecret": {
+         "0": 50,
+         "1": 242,
+         "2": 217,
+         "3": 35,
+         "4": 202,
+         "5": 77,
+         "6": 12,
+         "7": 217,
+         "8": 74,
+         "9": 31,
+         "10": 77,
+         "11": 237,
+         "12": 123,
+         "13": 223,
+         "14": 154,
+         "15": 213,
+         "16": 216,
+         "17": 248,
+         "18": 143,
+         "19": 87,
+         "20": 20,
+         "21": 203,
+         "22": 113,
+         "23": 21,
+         "24": 67,
+         "25": 227,
+         "26": 62,
+         "27": 224,
+         "28": 74,
+         "29": 16,
+         "30": 12,
+         "31": 199
+        }
+       }
+      },
+      "destination": "https://webhookn8n5.inovareinteligenciaartificial.com/webhook/ajuda-humana-info",
+      "date_time": "2026-05-09T01:03:03.099Z",
+      "sender": "559184074247@s.whatsapp.net",
+      "server_url": "https://ligawhatsapp.inovareinteligenciaartificial.com",
+      "apikey": "<SEGREDO_REMOVIDO>"
+     },
+     "webhookUrl": "https://webhookn8n5.inovareinteligenciaartificial.com/webhook/ajuda-humana-info",
+     "executionMode": "production"
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ]
+ },
+ "connections": {
+  "Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini": {
+   "ai_languageModel": [
+    []
+   ]
+  },
+  "salva_respostas": {
+   "ai_tool": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "respostas_anteriores_do_admin": {
+   "ai_tool": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "chat_administrativo": {
+   "ai_tool": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "api de sua escolha2": {
+   "main": [
+    []
+   ]
+  },
+  "api de sua escolha3": {
+   "main": [
+    []
+   ]
+  },
+  "🕵️ É o Chefe ou Cliente?": {
+   "main": [
+    [
+     {
+      "node": "comando ou resposta?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🗂️ Organizando a Bagunça1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗂️ Organizando a Bagunça": {
+   "main": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗂️ Organizando a Bagunça1": {
+   "main": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Jovem IA Aprendiz": {
+   "main": [
+    [
+     {
+      "node": "🕵️ É o Chefe ou Cliente?1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🕵️ É o Chefe ou Cliente?1": {
+   "main": [
+    [
+     {
+      "node": "comando ou resposta?1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "api de sua escolha3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "comando ou resposta?": {
+   "main": [
+    [
+     {
+      "node": "🗂️ Organizando a Bagunça",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "chama bot administrativo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "comando ou resposta?1": {
+   "main": [
+    [
+     {
+      "node": "api de sua escolha2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Webhook": {
+   "main": [
+    [
+     {
+      "node": "🕵️ É o Chefe ou Cliente?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Jovem IA Aprendiz",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": false
+ },
+ "versionId": "dc008e28-f7d4-48f4-af84-cc79cd68c178",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "l2vTdiIVZX34GUxN",
+ "tags": []
+}

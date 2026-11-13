@@ -1,0 +1,148 @@
+{
+ "_leia": "24/10 (dona): um Instagram por GRUPO de produtos da Fabrica de Automacao (nao um por item). Ordem = ordem de criacao pelo bin\\instagram_criar.py. produto = id em D:\\veo\\beta\\pos_producao\\assets\\produtos.json (o card do comercial). Grupo que ja tem conta em marcas_instagram.json e pulado.",
+ "grupos": [
+  {
+   "produto": "disparo_massa",
+   "nome": "Disparo em Massa IA",
+   "arroba": "disparoemmassa",
+   "itens": [
+    "Disparo em Massa Inteligente",
+    "Rotacao de APIs/Instancias",
+    "Cartao de Aniversario Automatico",
+    "Envio de Pix"
+   ]
+  },
+  {
+   "produto": "follow_up",
+   "nome": "Follow-up IA",
+   "arroba": "followupia",
+   "itens": [
+    "Follow-up de Vendas",
+    "Recuperacao de Carrinho",
+    "Verificacao de Pagamento"
+   ]
+  },
+  {
+   "produto": "vps_infra",
+   "nome": "VPS Blindada",
+   "arroba": "vpsblindada",
+   "itens": [
+    "Setup VPS Docker+Portainer+Traefik",
+    "n8n Self-Hosted",
+    "Backup Automatico",
+    "Bot Sentinela",
+    "Redis",
+    "Sistema Vacuum",
+    "Relatorios Diarios/Semanais",
+    "Automacao de Contratos",
+    "Acionador via Siri"
+   ]
+  },
+  {
+   "produto": "fabrica_conteudo",
+   "nome": "Fábrica de Marketing IA",
+   "arroba": "fabricademarketing",
+   "itens": [
+    "Full Post",
+    "Blog SEO",
+    "Podcast IA",
+    "Resposta a Comentarios Multi-Canal",
+    "Automacao de Reacoes"
+   ]
+  },
+  {
+   "produto": "crm_chatwoot",
+   "nome": "CRM Chatwoot IA",
+   "arroba": "crmchatwoot",
+   "itens": [
+    "CRM personalizado a partir do Chatwoot",
+    "Integracao Chatwoot",
+    "Integracao CRM",
+    "Tickets/Helpdesk"
+   ]
+  },
+  {
+   "produto": "treinamentos",
+   "nome": "Treinamentos e Mentorias IA",
+   "arroba": "mentoriasia",
+   "itens": [
+    "Treinamento Vibe Coding",
+    "Consultoria de Otimizacao",
+    "Pack de Prompts Validados",
+    "Mapa Mental/Documentacao"
+   ]
+  },
+  {
+   "produto": "landing_page",
+   "nome": "Landing Page e Comunicação",
+   "arroba": "landingpageia",
+   "itens": [
+    "Landing Page Pronta",
+    "Video Demo do Fluxo"
+   ]
+  },
+  {
+   "produto": "gestao_grupos",
+   "nome": "Gestão de Grupos IA",
+   "arroba": "gestaodegrupos",
+   "itens": [
+    "Boas-Vindas",
+    "Moderacao",
+    "Resumo/Atas",
+    "Bot Condicional",
+    "Prompt Dinamico",
+    "Resumidor de Links",
+    "Agente Sniper"
+   ]
+  },
+  {
+   "produto": "agente_tarefas",
+   "nome": "Agentes de IA",
+   "arroba": "agentesdeia",
+   "itens": [
+    "Agente Pessoal de Tarefas",
+    "Agente Secretaria",
+    "Agente Agendador",
+    "Agente Sales Coach",
+    "RAG",
+    "Visao Computacional",
+    "Voz Clonada",
+    "Orquestrador Multi-Agentes",
+    "Roteador de LLMs",
+    "Filtro Anti-Alucinacao"
+   ]
+  },
+  {
+   "produto": "superchat",
+   "nome": "SuperChat IA",
+   "arroba": "superchatia",
+   "itens": [
+    "Atendimento Multi-Canal Telegram/Instagram/Face/Whats"
+   ]
+  },
+  {
+   "produto": "avatar_ia",
+   "nome": "Avatar IA",
+   "arroba": "avataria",
+   "itens": [
+    "Avatar IA"
+   ]
+  },
+  {
+   "produto": "vitrine_ia",
+   "nome": "Vitrine IA",
+   "arroba": "vitrineia",
+   "itens": [
+    "Bot que conhece os produtos da loja"
+   ]
+  },
+  {
+   "produto": "inovare_claw",
+   "nome": "Inovare Claw",
+   "arroba": "inovareclaw",
+   "itens": [
+    "Agente de IA estilo Hermes/OpenClaw"
+   ]
+  }
+ ]
+}

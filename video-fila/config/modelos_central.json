@@ -1,0 +1,80 @@
+{
+ "_leia": "modo: argon | opus | ambos | auto. auto = Opus quando a dona NÃO está num chat (sessão do VS Code ativa nos últimos 'chat_min' minutos) E há cota CC (cota_claude.atual com_cota >= 1); senão Argon. Os conjuntos vão por papel para os melhoradores das linhas (env CENTRAL_MODELOS). Nunca Kiro.",
+ "modo": "argon",
+ "chat_min": 30,
+ "conjuntos": {
+  "argon": {
+   "analista": [
+    "gemini-4-argon",
+    "cw/claude-sonnet-5-5",
+    "agy/gemini-3.8-flash-high",
+    "argon-pro"
+   ],
+   "decisor": [
+    "gemini-4-argon",
+    "cw/claude-sonnet-5-5",
+    "agy/gemini-3.8-flash-high",
+    "argon-pro"
+   ],
+   "revisor": [
+    "gemini-4-argon",
+    "cw/claude-sonnet-5-5",
+    "agy/gemini-3.8-flash-high",
+    "argon-pro"
+   ],
+   "propositor": [
+    "gemini-4-argon",
+    "cw/claude-sonnet-5-5",
+    "agy/gemini-3.8-flash-high",
+    "argon-pro"
+   ],
+   "critico": [
+    "gemini-4-argon",
+    "cw/claude-sonnet-5-5",
+    "agy/gemini-3.8-flash-high",
+    "argon-pro"
+   ],
+   "implementador": [
+    "gemini-4-argon",
+    "cw/claude-sonnet-5-5",
+    "agy/gemini-3.8-flash-high",
+    "argon-pro"
+   ]
+  },
+  "opus": {
+   "analista": [
+    "agy/gemini-3.8-flash-high",
+    "antigravity/gemini-3-flash"
+   ],
+   "decisor": [
+    "cc/claude-opus-5-5",
+    "gemini-4-argon",
+    "agy/gemini-3.8-flash-high"
+   ],
+   "revisor": [
+    "cc/claude-opus-5-5",
+    "agy/gemini-3.8-flash-high"
+   ]
+  },
+  "ambos": {
+   "analista": [
+    "agy/gemini-3.8-flash-high",
+    "antigravity/gemini-3-flash"
+   ],
+   "decisor": [
+    "gemini-4-argon",
+    "argon-pro",
+    "agy/gemini-3.8-flash-high"
+   ],
+   "revisor": [
+    "cc/claude-opus-5-5",
+    "agy/gemini-3.8-flash-high"
+   ]
+  }
+ },
+ "_dona_29out": "dona 29/10 16:40: conjunto argon = gweb/gemini-3.1-pro -> argon-pro -> argon-flash nos 3 papéis, SEM Gemini puro (teste em D:\u000bideo-fila\\linhas\\PRODUTOS\teste_modelos). Antes: modelos_central.antes_29out.json",
+ "_dona_29out_noite": "dona 29/10 21:30: conjunto argon = gemini-4-argon (Argon puro) -> cw/claude-sonnet-5-5 (Sonnet web) -> argon-pro; implementador = argon-pro -> Argon puro -> Sonnet web; argon-flash saiu. Se TODOS falharem, registra em D:\\video-fila\\estado\\central\\modelos_esgotados.jsonl (para pôr mais modelos). Antes: modelos_central.antes_fila_argon_sonnet.json",
+ "_fable_30out": "30/10 00h (Fable): agy/gemini-3.8-flash-high no FIM de cada papel do conjunto argon — só entra quando Argon, Sonnet web e Argon Pro falharem (29/10 23:59 os 3 falharam e os Cortes ficaram sem decisão). Ordem da dona mantida. Desfazer: modelos_central.json.antes_fallback_30out",
+ "kiro_liberado": true,
+ "_dona_30out": "dona 30/10 09:40: 'não adianta usar Gemini 3.1 como failback do Argon pois usam as mesmas cotas; o Argon, o Sonnet web, aí pode colocar o Kiro Sonnet 4.5, depois o Gemini 3.8 e o Argon Pro de volta' -> todos os papéis do conjunto argon nessa ordem; kiro_liberado=true (o central e as linhas deixam o Kiro passar). Antes: modelos_central.json.antes_kiro_30out"
+}

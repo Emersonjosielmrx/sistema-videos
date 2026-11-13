@@ -1,0 +1,11 @@
+Narrador (voz clonada): ijax
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_cartuchoreact  |  título: O CORTE DE CABELO PROIBIDO! ELE DESCOBRIU O SEGREDO mais forte
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-f958fc_cap1_20261024\video.mp4
+
+frase 0: francisca +22% | clima engracado | tom -1 | index 0.49 | protect 0.28 | vol 0.81 | O cara chega pra cortar o cabelo e já reclama da tesoura que parece um rato comendo madeir
+frase 1: francisca +13% | clima normal | tom +0 | index 0.46 | protect 0.28 | vol 0.73 | Ele avisa que cortar errado estraga toda a experiência de ir à barbearia, né.
+frase 2: francisca +4% | clima tensao | tom -1 | index 0.55 | protect 0.28 | vol 0.73 | O barbeiro garante que tem razão e corta o cabelo dele como se fosse manteiga pura.
+frase 3: francisca +32% | clima engracado | tom +2 | index 0.49 | protect 0.28 | vol 0.76 | O cliente acha ótimo e pede pra cortar bem embaixo do queixo também, rapidinho.
+frase 4: francisca -4% | clima terror | tom -2 | index 0.53 | protect 0.22 | vol 0.75 | Só que aí ele olha pro lado e pergunta que diachos é aquilo no pescoço dele, bem na hora e

@@ -1,0 +1,14 @@
+[0:a]atrim=start=47.380:end=51.210,asetpts=PTS-STARTPTS[a0];
+[0:a]atrim=start=51.530:end=52.970,asetpts=PTS-STARTPTS[a1];
+[0:a]atrim=start=66.010:end=68.672,asetpts=PTS-STARTPTS[a2];
+[0:a]atrim=start=73.341:end=73.841,asetpts=PTS-STARTPTS[a3];
+[0:a]atrim=start=75.170:end=78.545,asetpts=PTS-STARTPTS[a4];
+[0:a]atrim=start=79.111:end=80.467,asetpts=PTS-STARTPTS[a5];
+[a0][a1][a2][a3][a4][a5]concat=n=6:v=0:a=1[acat];
+[1:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-12dB,adelay=0|0[sfx1];
+[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-9.0dB,adelay=1619|1619[sfx2];
+[3:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-12dB,adelay=10664|10664[sfx3];
+[4:a]aformat=sample_rates=48000:channel_layouts=stereo,loudnorm=I=-30:TP=-3:LRA=7,afade=t=in:d=1.5[mus];
+[acat]asplit=2[voice][sc];
+[mus][sc]sidechaincompress=threshold=0.02:ratio=8:attack=30:release=500:makeup=1[musd];
+[voice][sfx1][sfx2][sfx3][musd]amix=inputs=5:normalize=0:duration=first[amix]

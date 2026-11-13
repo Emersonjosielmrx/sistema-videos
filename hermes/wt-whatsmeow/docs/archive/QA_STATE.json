@@ -1,0 +1,116 @@
+{
+  "startedAt": "2026-07-23T22:31:00Z",
+  "phase": "P6_regression",
+  "phaseStartedAt": "2026-07-24T12:40:00Z",
+  "lastAutoWake": "2026-07-24T12:40:00Z",
+  "lastAction": "Diagnóstico do deploy (a pedido do usuário): deploy NUNCA esteve quebrado — deploy-beta.js roda de primeira (build 20260724-1229 no ar, channel=beta). O que travava era a regression acusando bugs REAIS de backend. Corrigidos e deployados 5 bugs: (1) spaHandler servia index.html HTML 200 pra QUALQUER /api/* sem handler → agora 404; (2) /api/auth/me sem features.tabs → adicionado featuresForPlan; (3) cupom fora da allowlist aceito (backdoor free-trial) → valida HERMES_FREE_COUPONS+TESTE_GRATIS, 400 no resto; (4) rate-limit login threshold 8→5; (5) payload 5MB dava 500 → middleware withMaxBodySize 1MB (413). Também corrigido smoke test que batia em 6 rotas fantasma (/api/calls/recent, /api/chat/sessions, /api/crm/deals, /api/agenda/events, /api/phone-numbers, /api/meet/sessions) → trocadas pelas reais. Regression final: 20 passed, 0 failed, 2 skipped (rate-limit).",
+  "hourlyCron": {
+    "lastRun": "2026-07-24T12:40:00Z",
+    "completedRuns": 12
+  },
+  "phases": {
+    "P1_harness": {
+      "goal": "Playwright suite + cache de contas + helpers",
+      "status": "completed",
+      "artifacts": [
+        "tests/playwright.config.ts",
+        "tests/helpers/qa.ts",
+        "tests/helpers/accounts.ts",
+        "tests/global-setup.ts",
+        "tests/regression.sh",
+        "tests/e2e/01-smoke-routes.spec.ts",
+        "tests/e2e/02-security.spec.ts"
+      ]
+    },
+    "P2_smoke": {
+      "goal": "38 telas × 6 personas — abrir, ver erro, capturar",
+      "status": "in_progress",
+      "filesInProgress": [
+        "tests/e2e/02-ui-smoke.spec.ts",
+        "tests/e2e/04-button-walker.spec.ts (clica cada botão visível, skip destrutivos)",
+        "tests/e2e/05-settings-walker.spec.ts (12 sub-abas settings, latência <5s)"
+      ]
+    },
+    "P3_security": {
+      "goal": "auth bypass, IDOR, cupom, webhook, injection",
+      "status": "completed",
+      "completed": [
+        "SEC-2 auth bypass",
+        "SEC-3 token inválido",
+        "SEC-4 cupom (bug corrigido: allowlist)",
+        "SEC-5 webhook",
+        "SEC-6 SQL inj",
+        "SEC-7 path traversal",
+        "SEC-8 rate-limit (bug corrigido: threshold 5)",
+        "SEC-9 admin bypass gates",
+        "SEC-10 payload gigante (bug corrigido: 413)",
+        "SEC-11 tipo errado",
+        "SEC-12 JSON malformado",
+        "SEC-13 prototype pollution",
+        "SEC-14 CRLF injection",
+        "SEC-15 cross-tenant /me"
+      ],
+      "note": "todos 14 cenários SEC passam na regression (20 passed total)"
+    },
+    "P4_e2e_flows": {
+      "goal": "6 fluxos completos de uso real",
+      "status": "in_progress",
+      "completed": ["flow 1: signup→tag→contatos→agente→campanha→start (tests/e2e/03-campaign-flow.spec.ts)"],
+      "pending": ["whatsapp-connect", "agent-configure", "live-monitor", "billing"]
+    },
+    "P5_fixes": {
+      "goal": "aplicar correções dos bugs achados pelo QA",
+      "status": "completed",
+      "completed": [
+        "P0-1 brute-force (rate-limit login, threshold ajustado 8→5)",
+        "P0-2 plan enforcement (403 por feature.tab)",
+        "P1-2 frontend login redirect",
+        "BUG-3 spaHandler: /api/* sem handler agora retorna 404 (não HTML 200)",
+        "BUG-4 /api/auth/me agora inclui features.tabs",
+        "BUG-5 cupom valida allowlist (HERMES_FREE_COUPONS + TESTE_GRATIS)",
+        "BUG-6 withMaxBodySize 1MB (payload gigante → 413, não 500)"
+      ],
+      "pending": ["P1-1 nginx/traefik /login rewrite (VPS usa Traefik, não nginx — patch em deploy/PATCH_NGINX_P1-1.md desatualizado, precisa ajuste pra Traefik)"],
+      "deployMethod": "VPS via Docker (node deploy/deploy-beta.js). Build na VPS 62.171.128.241 via SFTP+docker build. Traefik roteia :443→:8080."
+    },
+    "P6_regression": {
+      "goal": "suite roda a cada 30min e passa 100%",
+      "status": "in_progress",
+      "lastResult": "2026-07-24T12:39Z — 20 passed, 0 failed, 2 skipped (rate-limit em criação de conta)"
+    },
+    "P7_stress": {
+      "goal": "50 contatos, 100 msg, 10 campanhas",
+      "status": "in_progress",
+      "completed": [
+        "tests/stress/01-volume.spec.ts: 50 contatos sequencial, 20 GETs paralelos, 10 chat sessions paralelas, /api/billing latência"
+      ]
+    },
+    "P8_demo": {
+      "goal": "roteiro de demo 15min testado",
+      "status": "in_progress",
+      "completed": ["docs/demo/roteiro-15min.md (15min, 8 seções, plano B se algo falhar)"]
+    },
+    "P9_promote": {
+      "goal": "promover beta → stable após QA passar",
+      "status": "pending",
+      "blockedBy": "usuário validar na tela e rodar `node deploy/promote-stable.js`. QA já passa 100%, deploy no ar."
+    }
+  },
+  "bugs": {
+    "P0": [
+      "P0-1 — Brute-force. FIX em internal/auth/store.go: login_attempts + checkLoginRateLimit, threshold 5 falhas/10min por (email,ip). ✅ Deployado + validado (SEC-8 passa).",
+      "P0-2 — Plan enforcement. FIX em cmd/server/authmw.go: moduleForPath + planAllowsTab → 403 plan_forbidden. ✅ Deployado."
+    ],
+    "P1": [
+      "P1-1 — /login cai na landing/SPA. VPS usa Traefik (não nginx). Patch precisa reescrita pra Traefik. Workaround: /?action=login.",
+      "P1-2 — Login modal não redireciona. FIX em LoginScreen.tsx: window.location.assign('/dashboard'). ✅ Deployado."
+    ],
+    "P2": [
+      "BUG-3 — spaHandler servia HTML 200 pra /api/* inexistente. FIX em httpapi.go. ✅ Deployado + validado.",
+      "BUG-4 — /api/auth/me sem features. FIX em auth_handlers.go. ✅ Deployado + validado.",
+      "BUG-5 — cupom fora da allowlist aceito. FIX em billing_api.go. ✅ Deployado + validado (SEC-4 passa).",
+      "BUG-6 — payload 5MB → 500. FIX withMaxBodySize em httpapi.go. ✅ Deployado + validado (SEC-10 passa)."
+    ],
+    "P3": []
+  }
+}

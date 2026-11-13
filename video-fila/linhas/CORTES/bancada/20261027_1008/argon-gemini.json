@@ -1,0 +1,13 @@
+{
+ "modelo": "argon-gemini",
+ "segundos": 509,
+ "erro": "success API Error: 502 Hibrido: argon 500: {\"error\": {\"message\": \"Todas as contas est\\u00e3o bloqueadas\", \"type\": \"server_error\"}}. This is a server-side issue, usually temporary — try again in a moment. If it persists, check your inference gateway (157.173.207.22:20133).",
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [],
+ "resposta": {}
+}

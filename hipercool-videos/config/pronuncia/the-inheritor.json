@@ -1,0 +1,34 @@
+{
+ "_leia": "Como o TTS deve FALAR cada nome desta obra (bin/elenco.aplicar_pronuncia). Vale só no texto que vai pra voz: a legenda, o karaokê e o SEO continuam com o nome escrito certo. Por quê: a transcrição Groq do áudio do cap 10 saiu 'o Ezeu esquentou de vez' (Yeseul, pela Thalita) e 'Você disse que é Yueni, né?' (Ye-Eun, pelo Andrew) — cada voz lia o nome coreano de um jeito e nem a transcrição do YouTube reconhecia. O edge-tts escapa o texto (mkssml), então <phoneme> não funciona: só reescrever o nome do jeito que se fala. Chave = a língua do TEXTO ('pt' no pipeline normal, 'hi'/'th'/... no idiomas.py). Língua sem mapa aqui não é mexida (respelling português numa voz hindi seria pior). 'por_voz' = ajuste fino quando UMA voz específica erra o nome mesmo com o mapa da língua. A troca é por palavra inteira e ignora maiúsculas, do nome mais longo pro mais curto (Inhyuk antes de Hyuk).",
+ "pt": {
+  "Joo Inhyuk": "Jú In-hiúk",
+  "Joo In-hyuk": "Jú In-hiúk",
+  "Inhyuk": "In-hiúk",
+  "In-hyuk": "In-hiúk",
+  "Hyuk": "Hiúk",
+  "Joo": "Jú",
+  "Noh Yeseul": "Nô Iê-sol",
+  "Yeseul": "Iê-sol",
+  "Ye-seul": "Iê-sol",
+  "Noh": "Nô",
+  "Ye-Eun": "Iê-un",
+  "Yeeun": "Iê-un",
+  "Han Sihyun": "Han Si-hiun",
+  "Han Si-hyun": "Han Si-hiun",
+  "Sihyun": "Si-hiun",
+  "Si-hyun": "Si-hiun"
+ },
+ "en": {
+  "Joo Inhyuk": "Joo In-hyook",
+  "Inhyuk": "In-hyook",
+  "In-hyuk": "In-hyook",
+  "Hyuk": "Hyook",
+  "Noh Yeseul": "No Yeh-sool",
+  "Yeseul": "Yeh-sool",
+  "Ye-seul": "Yeh-sool",
+  "Ye-Eun": "Yeh-oon",
+  "Han Sihyun": "Hahn See-hyun",
+  "Sihyun": "See-hyun"
+ },
+ "por_voz": {}
+}

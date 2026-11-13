@@ -1,0 +1,27 @@
+{
+  "estrutura_padrao": [
+    "Inovare-Assets",
+    "Inovare-Exports",
+    "Inovare-Backups",
+    "Inovare-Videos",
+    "Inovare-Thumbs"
+  ],
+  "contas": {
+    "fabrica": {
+      "dry_run": true
+    },
+    "mundosolar1995": {
+      "dry_run": true
+    },
+    "canalalucinaai": {
+      "dry_run": true
+    },
+    "seebotsia": {
+      "dry_run": true
+    },
+    "emersonjosiel649": {
+      "dry_run": true
+    }
+  },
+  "ultima_execucao": "2026-07-02T16:19:42.100357+00:00"
+}

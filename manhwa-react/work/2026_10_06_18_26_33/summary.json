@@ -1,0 +1,221 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-06 18-26-33.mp4",
+ "duration": 54.8,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 720,
+  "has_webcam": true,
+  "contrast": 68.0,
+  "trimmed": {},
+  "divider": 361,
+  "webcam": [
+   0,
+   0,
+   720,
+   361
+  ],
+  "content": [
+   0,
+   361,
+   720,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 8,
+  "reason": "React engraçado e dinâmico de casal lidando com barata, com transformação cômica em 'Power Ranger ninja' e reviravolta final hilária.",
+  "topic": "Casal vs barata com transformação ridícula",
+  "channel": "mundoquenaoexiste",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 54.8,
+    "hook": "ELE SE VESTIU PRA ENFRENTAR UMA BARATA",
+    "title": "Ele virou POWER RANGER pra enfrentar uma barata 😂🪳 #shorts #react",
+    "description": "O cara tem tanto pavor de barata que se vestiu inteiro tipo ninja Power Ranger pra enfrentar o bichinho... e quando ficou pronto, a barata SUMIU 😂🪳\nVocês também têm esse medo ou são corajosos? Comenta aí!\nSegue pra mais reacts absurdos!\n\n#shorts #react #barata #medo #powerranger #ninja #casal #humor #engraçado #viral #comédia #transformação #absurdo #casalcomédia #medodebarata",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#barata",
+     "#medo",
+     "#powerranger",
+     "#ninja",
+     "#casal",
+     "#humor",
+     "#engraçado",
+     "#viral",
+     "#comédia",
+     "#transformação"
+    ],
+    "tags": [
+     "react",
+     "barata",
+     "medo de barata",
+     "casal engraçado",
+     "power ranger",
+     "ninja",
+     "transformação",
+     "humor",
+     "comédia",
+     "viral",
+     "react engraçado",
+     "casal",
+     "absurdo",
+     "medo",
+     "shorts",
+     "react brasileiro",
+     "situação absurda",
+     "vídeo engraçado"
+    ],
+    "keywords": [
+     {
+      "t": 9.0,
+      "text": "TRANSFORMAÇÃO",
+      "emoji": "🦸"
+     },
+     {
+      "t": 34.34,
+      "text": "POWER RANGER",
+      "emoji": "⚡"
+     },
+     {
+      "t": 41.54,
+      "text": "SUMIU",
+      "emoji": "😱"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 13.5,
+      "type": "hype"
+     },
+     {
+      "t": 41.54,
+      "type": "shock"
+     },
+     {
+      "t": 50.22,
+      "type": "laugh"
+     }
+    ],
+    "memes": [
+     {
+      "t": 16.0,
+      "id": 27
+     },
+     {
+      "t": 48.78,
+      "id": 14
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Vocês enfrentam barata na mão ou também viram Power Ranger? 🪳😂",
+    "title_alternatives": [
+     "Se vestiu de NINJA pra enfrentar uma barata e olha no que deu 🪳😂 #shorts #react",
+     "A barata SUMIU depois que ele virou Power Ranger 💀🪳 #shorts #humor"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {
+   "1": "content",
+   "2": "content",
+   "3": "content",
+   "4": "content",
+   "6": "content",
+   "7": "content",
+   "10": "content",
+   "11": "content",
+   "12": "content",
+   "14": "content",
+   "15": "content",
+   "17": "content",
+   "18": "content",
+   "19": "content",
+   "20": "content",
+   "21": "content",
+   "22": "content",
+   "23": "content",
+   "24": "content",
+   "25": "content"
+  },
+  "highlights": false
+ },
+ "base": null,
+ "channel": "mundoquenaoexiste",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_06_18_26_33\\2026_10_06_18_26_33.mp4",
+   "duration": 53.205896,
+   "keeps": 3,
+   "meta": {
+    "hook": "ELE SE VESTIU PRA ENFRENTAR UMA BARATA",
+    "title": "Ele virou POWER RANGER pra enfrentar uma barata 😂🪳 #shorts #react",
+    "description": "O cara tem tanto pavor de barata que se vestiu inteiro tipo ninja Power Ranger pra enfrentar o bichinho... e quando ficou pronto, a barata SUMIU 😂🪳\nVocês também têm esse medo ou são corajosos? Comenta aí!\nSegue pra mais reacts absurdos!\n\n#shorts #react #barata #medo #powerranger #ninja #casal #humor #engraçado #viral #comédia #transformação #absurdo #casalcomédia #medodebarata",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#barata",
+     "#medo",
+     "#powerranger",
+     "#ninja",
+     "#casal",
+     "#humor",
+     "#engraçado",
+     "#viral",
+     "#comédia",
+     "#transformação"
+    ],
+    "tags": [
+     "react",
+     "barata",
+     "medo de barata",
+     "casal engraçado",
+     "power ranger",
+     "ninja",
+     "transformação",
+     "humor",
+     "comédia",
+     "viral",
+     "react engraçado",
+     "casal",
+     "absurdo",
+     "medo",
+     "shorts",
+     "react brasileiro",
+     "situação absurda",
+     "vídeo engraçado"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Vocês enfrentam barata na mão ou também viram Power Ranger? 🪳😂",
+    "title_alternatives": [
+     "Se vestiu de NINJA pra enfrentar uma barata e olha no que deu 🪳😂 #shorts #react",
+     "A barata SUMIU depois que ele virou Power Ranger 💀🪳 #shorts #humor"
+    ],
+    "work": null,
+    "channel": "mundoquenaoexiste"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_06_18_26_33\\2026_10_06_18_26_33_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk das Winx.mp3",
+   "removed_pct": 2.9,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 53.17,
+    "lufs": -14.0
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 352.1
+}

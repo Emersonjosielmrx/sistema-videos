@@ -1,0 +1,1380 @@
+{
+ "dias": 7,
+ "roteiros": 527,
+ "homografos": {
+  "povo": 38,
+  "jogo": 63,
+  "novos": 13,
+  "gosto": 19,
+  "esse": 174,
+  "para": 962,
+  "logo": 172,
+  "pelo": 124,
+  "ele": 1356,
+  "corpo": 113,
+  "novo": 96,
+  "começo": 20,
+  "governo": 8,
+  "sobre": 72,
+  "rosto": 34,
+  "pelos": 29,
+  "ovo": 12,
+  "jogos": 12,
+  "almoço": 6,
+  "olho": 20,
+  "acordo": 10,
+  "medo": 48,
+  "posto": 3,
+  "copos": 1,
+  "ovos": 8,
+  "ossos": 4,
+  "olhos": 59,
+  "soco": 11,
+  "cobra": 33,
+  "este": 7,
+  "coco": 4,
+  "forma": 46,
+  "pode": 44,
+  "copo": 5,
+  "sede": 6,
+  "cerca": 13,
+  "esforço": 7,
+  "choro": 3,
+  "corte": 8,
+  "troco": 5,
+  "torre": 5,
+  "piloto": 9,
+  "osso": 2,
+  "porto": 1,
+  "apoio": 5,
+  "poço": 3,
+  "cortes": 2,
+  "bolo": 5,
+  "sexta": 1,
+  "toco": 2,
+  "colher": 1,
+  "lobos": 2,
+  "lobo": 3
+ },
+ "siglas": {
+  "GTA": 28,
+  "RP": 22,
+  "FPS": 12,
+  "VIP": 6,
+  "DNA": 3,
+  "HKPC": 2,
+  "RTX": 2,
+  "FIFA": 3,
+  "TV": 8,
+  "GTRP": 8,
+  "IP": 6,
+  "VI": 1,
+  "AJ": 6,
+  "CEO": 2,
+  "RPG": 3,
+  "EA": 1,
+  "RR": 1,
+  "CECOT": 1,
+  "AI": 4,
+  "MEKA": 1,
+  "SEGA": 2,
+  "DVD": 1,
+  "QI": 1,
+  "PC": 1,
+  "NPC": 3,
+  "XP": 1,
+  "GG": 2,
+  "IPI": 1,
+  "MC": 2,
+  "DBZ": 1
+ },
+ "estrangeiras": {
+  "Duke": 2,
+  "Bright": 6,
+  "Hmp": 6,
+  "Jack": 41,
+  "Hong": 3,
+  "Kong": 3,
+  "William": 4,
+  "Neymar": 8,
+  "Royale": 1,
+  "Kit": 9,
+  "Yuri": 3,
+  "Kang": 8,
+  "Hmph": 1,
+  "Andy": 1,
+  "Baka": 2,
+  "Switch": 1,
+  "PlayStation": 5,
+  "Yokoi": 1,
+  "Boy": 2,
+  "Sasuke": 8,
+  "Mike": 1,
+  "Asher": 5,
+  "Black": 3,
+  "Cash": 2,
+  "Kingsley": 1,
+  "Amberlock": 1,
+  "Orby": 1,
+  "Peaky": 6,
+  "Calaya": 1,
+  "Kamen": 1,
+  "Shock": 1,
+  "Washington": 1,
+  "Kimberly": 1,
+  "Kim": 4,
+  "Wills": 1,
+  "Shmondenko": 1,
+  "Anatoly": 1,
+  "Karma": 2,
+  "Tomoko": 5,
+  "Kiko": 5,
+  "Nick": 3,
+  "Catherine": 3,
+  "Jenny": 1,
+  "Moyu": 2,
+  "Thrust": 1,
+  "Rocket": 1,
+  "Shai": 1,
+  "Playstation": 1,
+  "Kepler": 1,
+  "Sony": 5,
+  "Kai": 2,
+  "Dijk": 2,
+  "Kepa": 1,
+  "Frank": 1,
+  "Heath": 1,
+  "Shino": 1,
+  "Sakura": 4,
+  "Yeo": 3,
+  "Yeong": 1,
+  "Kenjaku": 2,
+  "ReSwitched": 1,
+  "Twitch": 2,
+  "Hanako": 15,
+  "Kazumi": 6,
+  "May": 2,
+  "Pokémon": 3,
+  "Wang": 1,
+  "BioWare": 2,
+  "Kaguya": 4,
+  "Shirogane": 4,
+  "Cyrilo": 1,
+  "Toy": 1,
+  "Story": 1,
+  "Mary": 8,
+  "Wellington": 1,
+  "Kyoto": 2,
+  "Sheryl": 5,
+  "Musk": 1,
+  "Wilson": 1,
+  "Riley": 1,
+  "Kenny": 1,
+  "Belly": 7,
+  "Toshiro": 3,
+  "Hyorinmaru": 1,
+  "Judy": 1,
+  "Yamazak": 1,
+  "Kanté": 1,
+  "Plankton": 1,
+  "Wars": 2,
+  "Mickey": 2,
+  "The": 8,
+  "Try": 4,
+  "Sask": 1,
+  "Hokage": 1,
+  "Kakashi": 1,
+  "Amy": 14,
+  "Danny": 2,
+  "Koichi": 2,
+  "Esch": 2,
+  "Keila": 5,
+  "Sylvie": 3,
+  "Hokages": 2,
+  "Okawa": 1,
+  "Makima": 57,
+  "Aki": 94,
+  "Power": 67,
+  "Nyako": 2,
+  "Meowy": 1,
+  "Kobeni": 13,
+  "Kobni": 5,
+  "Makama": 9,
+  "Rengoku": 1,
+  "Kishibe": 17,
+  "Eki": 8,
+  "Sawa": 6,
+  "Olly": 3,
+  "Kenu": 2,
+  "Ashley": 7,
+  "Sukuna": 3,
+  "Kana": 2,
+  "Bumpy": 7,
+  "Brother": 1,
+  "Powell": 1,
+  "Tung": 1,
+  "Deng": 1,
+  "Xiaoping": 1,
+  "Shenzhen": 1,
+  "Yang": 2,
+  "Komodo": 1,
+  "Shais": 3,
+  "Rey": 1,
+  "Nyanko": 3,
+  "Kurama": 1,
+  "Hyuga": 1,
+  "King": 2,
+  "Billy": 1,
+  "Young": 2,
+  "Kyung": 1,
+  "Won": 1,
+  "Nike": 1,
+  "Weal": 3,
+  "Weghorst": 1,
+  "ADMs": 1,
+  "Kiruko": 1,
+  "Tyler": 2,
+  "Yamal": 2,
+  "Shirley": 1,
+  "TikTok": 1,
+  "Akali": 3,
+  "Facebook": 1,
+  "Jjang": 1,
+  "Yanyan": 4,
+  "Shen": 6,
+  "Hang": 3,
+  "Brooke": 5,
+  "Wilder": 1,
+  "Jong": 1,
+  "Lindsay": 2,
+  "Bioware": 1,
+  "Rockstar": 1,
+  "Walmart": 1,
+  "Caitlyn": 1,
+  "Adebayor": 2,
+  "City": 1,
+  "Shikamaru": 1,
+  "Kimmich": 1,
+  "Akira": 1,
+  "Toriyama": 1,
+  "Goku": 40,
+  "Kaioh": 2,
+  "Trunks": 5,
+  "Saiyajin": 4,
+  "Whis": 3,
+  "Bills": 5,
+  "Yamcha": 1,
+  "Monaka": 1,
+  "Sephiroth": 1,
+  "Kuririn": 1,
+  "Saiyajins": 1,
+  "Broly": 1,
+  "Walker": 1,
+  "Boateng": 1,
+  "Lyrton": 1,
+  "Kaoma": 1,
+  "Kanata": 4
+ },
+ "numeros": {
+  "f8": 26,
+  "5m": 2,
+  "e1": 2,
+  "f6": 2,
+  "ps5": 1,
+  "e3": 1,
+  "cph4": 1
+ },
+ "exemplos": {
+  "povo": [
+   "A mulher tava usando a roupa da minha própria mãe, meu povo",
+   "A verdade sem roupa e crua é que os estádios são barulhentos demais, e os atletas tapam a ",
+   "Aê meu povo, liga o som da nave que os americanos inventaram um jeito maluco de fazer aper"
+  ],
+  "jogo": [
+   ", então abre logo o celular do jogo e busca pelo nome certo",
+   "A dona da plataforma não precisa inventar o melhor jogo do mercado",
+   "Acontece que na Copa do Mundo de dois mil e vinte e dois, num jogo entre Argentina e Holan"
+  ],
+  "GTA": [
+   ", mas cê perde um carro exclusivo se errar na cidade Marésia do GTA RP",
+   "A Rockstar tá tomando um hate infeliz por causa de uns errinhos bem patéticos no trailer d",
+   "Agora o GTA VI chega no dia dezenove de novembro, depois de custar mais de um bilhão de dó"
+  ],
+  "RP": [
+   ", mas cê perde um carro exclusivo se errar na cidade Marésia do GTA RP",
+   "Atenção, garotinho, no GTA RP a vida é outra",
+   "Dispersem-se, almas perdidas, pois eu revelo o segredo pra rodar GTA RP num computador fra"
+  ],
+  "novos": [
+   "A folgada ainda joga dinheiro pra ela comprar óculos novos e comete o erro fatal de deboch",
+   "Além disso, novos recrutas já recebem um veículo VIP de alto desempenho logo na chegada, b",
+   "Chega encarando esses infelizes e pergunta se eles tão contratando novos guerreiros pra es"
+  ],
+  "gosto": [
+   "A Makima colocou o próprio pirulito na boca dele e disse que ele nunca ia esquecer aquele ",
+   "Aproveitando um momento de descuido ele morde um pãozinho e acha o gosto horrível",
+   "Ele avisa que vai ter que comer outros humanos pra tirar aquele gosto ruim da boca"
+  ],
+  "esse": [
+   ", quer dizer, até esse nanico achou a glória numa vidinha patética dessas, mas aposto que ",
+   "A coitada mal conseguia falar e andava descalça na montanha só pra buscar água pra esse in",
+   "A lâmina corta esse fio bem na parte mais larga dele"
+  ],
+  "para": [
+   "A Adidas desenha um uniforme especial para o Real Madrid usando plástico reciclado dos oce",
+   "A Comore olha para a piscina e pensa exatamente a mesma coisa que o Otani tinha pensado an",
+   "A Hanako cisma que o pirralho está fingindo choro só para aproveitar a situação"
+  ],
+  "FPS": [
+   "Aperta F8 no teclado, digita FPS, puxa a barra pros cinquenta por cento e marca duas opçõe",
+   "Clica em aplicar e manda outro comando no F8: digita FPS espaço um",
+   "Depois aperte F8 no teclado, digite o comando de FPS e confirme no Enter"
+  ],
+  "f8": [
+   "Abre logo o FiveM, aperta F8 e digita o IP marizerp",
+   "Aperta F8 no teclado, digita FPS, puxa a barra pros cinquenta por cento e marca duas opçõe",
+   "Aí cê aperta F8 no teclado, digita o IP do servidor e dá enter pra entrar na cidade, caram"
+  ],
+  "logo": [
+   ", então abre logo o celular do jogo e busca pelo nome certo",
+   "A Hanako pede para segurar o bebê e logo solta um elogio esquisito sobre o cheiro de leite",
+   "A criatura engole a cabeça e some logo antes dos outros membros do esquadrão chegarem"
+  ],
+  "Duke": [
+   "O primeiro é o Duke, um dos mais ligeiros, custando só um milhão na lojinha"
+  ],
+  "VIP": [
+   "Além disso, novos recrutas já recebem um veículo VIP de alto desempenho logo na chegada, b",
+   "Ele ensina o passo a passo para entrar e garantir um carro VIP",
+   "Mas olha só, ele já chama a galera pra jogar junto na cidade do Marizique com direito a ca"
+  ],
+  "pelo": [
+   ", então abre logo o celular do jogo e busca pelo nome certo",
+   "A Power se vira pro demônio morcego e cobra o gato de volta pelo acordo",
+   "A barata sobrevive semanas sem a cabeça porque respira pelo corpo todo"
+  ],
+  "ele": [
+   ", afinal, depois de mil anos sem guerra, o tédio bateu e ele quis ficar fraco de propósito",
+   "A Airi ajuda ele e diz que tem inveja do Denji porque ele não tem talento pra caçar demôni",
+   "A Comore flagra o pensamento dele e grita que ele é um mente criativa"
+  ],
+  "corpo": [
+   "A alma da garota permanece na Terra por um tempo e observa o próprio corpo coberto por um ",
+   "A barata sobrevive semanas sem a cabeça porque respira pelo corpo todo",
+   "A cabeça continua viva e cresce outro corpo inteiro, provando que"
+  ],
+  "novo": [
+   "A calmaria termina quando ela decide apresentar o novo namorado para a mãe",
+   "A equipe de resgate joga o guindaste, mas a lata começa a vazar de novo",
+   "A faxineira aparece de novo, avisa que todo mundo já foi e sugere que ela faça o mesmo"
+  ],
+  "começo": [
+   "Ele me engole inteiro de uma vez, mas depois de um tempo eu começo a acordar",
+   "Ele sai da prisão de sua vida inteira e acaba sendo atrosem roupa por um ônibus escolar lo",
+   "Eu acordei achando que ia curtir meu dia, mas olhei pras minhas mãos e vi meus dedos podre"
+  ],
+  "governo": [
+   "A garota começa a se afastar após surgir suspeitas sobre o sistema de casamento do governo",
+   "A garota do governo começa a gostar de verdade do jovem mestre e a situação fica complicad",
+   "A garota escolhida pelo governo descobre tudo e decide ajudar o garoto a viver o romance s"
+  ],
+  "sobre": [
+   "A Hanako pede para segurar o bebê e logo solta um elogio esquisito sobre o cheiro de leite",
+   "A Makima aproveita pra contar também sobre o passado sofrido do Aki",
+   "A garota começa a se afastar após surgir suspeitas sobre o sistema de casamento do governo"
+  ],
+  "rosto": [
+   "A Makima chega bem perto do rosto dele e pergunta se ele faz um favor pra ela",
+   "A criatura hesita, mas vai embora depois de gravar o rosto do salvador na alma",
+   "A expressão fria no rosto do cara deixa a mulher completamente aterrorizada"
+  ],
+  "pelos": [
+   "A parada é o seguinte: a pele dele tá tão dura que quebra uma faca ao meio e ainda faz ele",
+   "Agora contemplem a maldita tilápia, o peixe mais criado em cativeiro pelos frágeis humanos",
+   "Bastava um chip no meu cérebro pra minha mãe me rastrear e ver tudo pelos meus olhos"
+  ],
+  "Bright": [
+   "Pelos poderes de Bright Moon, meu povo, o urutal faz uma loucura total e nem constrói ninh",
+   "Pelos poderes de Bright Moon, meus rebeldes, craques do futebol brasileiro como Neymar, Ro",
+   "Pelos poderes de Bright Moon, segura essa, meu povo"
+  ],
+  "ovo": [
+   "A garota cismou de cutucar o ovo e de lá de dentro saiu uma tartaruga que começou a cresce",
+   "Coitado do Itachi, tentou fritar um ovo e só conseguiu passar raiva na cozinha",
+   "Começamos a nos afastar, mas ele pisou em um ovo por descuido"
+  ],
+  "jogos": [
+   "A BioWare nasceu em 1995 no Canadá, criada por três médicos apaixonados por jogos, o que j",
+   "A Epic Games tenta desafiar a Steam em 2018 com uma loja mais barata e jogos exclusivos",
+   "Em poucos dias, surge até uma loja pirata com jogos de graça para o console"
+  ],
+  "Hmp": [
+   "Hmp"
+  ],
+  "Jack": [
+   "A gente entrou naquela cabana escura, e quem tava esperando não era o Jack, mas sim o irmã",
+   "A noite despencou sobre nós, o Jack não apareceu, e eu dei a ideia de girar a maldita garr",
+   "Aceitei a ajuda do Jack para achar meu marido, mas ele furou o pneu do meu carro de propós"
+  ],
+  "almoço": [
+   "Até que, depois do almoço, Ria decide caminhar pelo jardim e escuta um som estranho",
+   "Enquanto o Aki prepara o almoço, alguém bate com força na porta e quebra a fechadura quand",
+   "O peixe-pescador carrega uma lanterninha pendurada na testa pra enganar o almoço no escuro"
+  ],
+  "olho": [
+   "A Himeno começa a explicar como funciona o poder do contrato com o demônio fantasma e blá ",
+   "Arranho a porta sem parar e olho pro fio vermelho na minha pata",
+   "Aí a terceira mulher grita pra ele parar, mas nosso queridinho pisca o olho porque a fila "
+  ],
+  "DNA": [
+   "Aí resolvem fazer no método tradicional com o DNA dos dois, hein"
+  ],
+  "acordo": [
+   "A Power se vira pro demônio morcego e cobra o gato de volta pelo acordo",
+   "Atenção, seus desocupados, a Microsoft ofereceu um acordo de saída voluntária pra quase se",
+   "Ela aceitou o acordo imediatamente para buscar sua vingança"
+  ],
+  "medo": [
+   "A Makima explica que o medo dos humanos é o que alimenta o poder dessas criaturas",
+   "A Power solta que os fracos tão com medo dela de tão forte que ela é",
+   "A menina acha que ele gosta de alguém que nem existe de verdade, com medo de virar geleia "
+  ],
+  "HKPC": [
+   "Ah, o site HKPC de Hong Kong mostra prateleiras cheias de RTX 5090 que custam o aluguel do"
+  ],
+  "Hong": [
+   "A Inglaterra mandou navios de guerra, venceu o conflito e tomou Hong Kong",
+   "Ah, o site HKPC de Hong Kong mostra prateleiras cheias de RTX 5090 que custam o aluguel do"
+  ],
+  "Kong": [
+   "A Inglaterra mandou navios de guerra, venceu o conflito e tomou Hong Kong",
+   "Ah, o site HKPC de Hong Kong mostra prateleiras cheias de RTX 5090 que custam o aluguel do"
+  ],
+  "RTX": [
+   "Ah, o site HKPC de Hong Kong mostra prateleiras cheias de RTX 5090 que custam o aluguel do"
+  ],
+  "posto": [
+   "Eles tiram digital do vidro enquanto o Daniel para num posto de gasolina com os reféns",
+   "No dia seguinte, aparece um piloto metido no posto onde eu trabalho chorando as pitangas"
+  ],
+  "William": [
+   "O frentista William exige que ele liberte a moça e chega perto pra abrir a porta",
+   "Só que o Daniel taca gasolina direto no William e arrasta a Disa de volta pro carro"
+  ],
+  "FIFA": [
+   "Ele exige que a FIFA aumente o tamanho das traves para facilitar os gols",
+   "Enzo Fernandez avalia o próprio desempenho na sua carta do FIFA"
+  ],
+  "Neymar": [
+   "Carvajal também respondeu à altura quando sofreu uma entrada de Neymar",
+   "Em um jogo decisivo pro Santos fugir do rebaixamento contra o Flamengo, o time tomava três",
+   "O Neymar encarou lesões seguidas por causa das festas, Ronaldinho deixou a bola em segundo"
+  ],
+  "Royale": [
+   "Fala, minha tropa, o moleque pega um pedaço de instrumento no chão e grita Fortnite Battle"
+  ],
+  "copos": [
+   "Acontece que eu afundo copos cheios de terra nelas pra deixar o buraco certinho quando sec"
+  ],
+  "ovos": [
+   "Do nada, eu afundo nove ovos caipiras na areia, jogo cimento e boto barras de aço",
+   "Ela fica trancada lá dentro para chocar os ovos em segurança",
+   "No último pneu, eu cavo buracos na mão, jogo cimento com pedras e ovos pra endurecer, tudo"
+  ],
+  "ossos": [
+   "A junta é cheia de um líquido grosso que gruda tudo, e os ossos resistem até não dar mais",
+   "No fim da tarde, o rapaz fica encarando o nada e tenta bater papo com ossos antigos",
+   "Os ossos quebrados se consertaram sozinhos e o infeliz achou que podia virar dublê pulando"
+  ],
+  "olhos": [
+   "A Makama tá no santuário com os prisioneiros sentados em fileiras e com os olhos vendados",
+   "A comemoração dura pouco, pois uma nave desconhecida surge do nada e estilhaça a nossa cri",
+   "A diferentão se livrou das correntes num piscar de olhos, emergiu linda e maravilhosa nada"
+  ],
+  "soco": [
+   "A garota pede perdão pela confusão toda e até pelo soco que deu nele no passado, mas o jov",
+   "Assim que o velório acaba, ela vem até mim e me dá um soco no estômago",
+   "Ele brincou dizendo que achariam que ela era sua irmã mais nova por ser baixinha, e levou "
+  ],
+  "Kit": [
+   "Ele finge que não vê Kit e sai depressa para fazer uma ligação no celular",
+   "Furiosa com a traição, Kit abandona Minho para trás",
+   "Kit confronta Minho e revela que viu os dois juntos pela janela na noite anterior"
+  ],
+  "Yuri": [
+   "E aí, meus humanos, saca só esse Zé Mané do Yuri tentando estudar com a Aninha, mas no meu",
+   "Nesse momento, Yuri percebe que o cachorro sumiu e acaba escutando a conversa escondida",
+   "Yuri corre até Kit para contar sobre a conversa suspeita que acabou de ouvir"
+  ],
+  "Kang": [
+   "Aterrorizado com tanta violência, Kang desmaia no chão",
+   "Ele olha nos olhos de Kang e pede em voz baixa para aprender a plantar batatas doces",
+   "Kang chegou ao local para ensinar ciência aos detentos"
+  ],
+  "Hmph": [
+   "Hmph"
+  ],
+  "cobra": [
+   "A Garota da Cobra sente um perigo real e chama a serpente gigante",
+   "A Kobeni atira no espadachim e bota a Garota da Cobra contra a parede",
+   "A Power se vira pro demônio morcego e cobra o gato de volta pelo acordo"
+  ],
+  "Andy": [
+   "Puxa vida, turma, imagine só cair num lugar onde tem centenas de mulheres e nenhum homem p"
+  ],
+  "Baka": [
+   "Baka, ele volta pro quarto e enrola os braços e as pernas pra disfarçar a troca",
+   "Baka, é claro que ela volta pra cama dele e solta um gemidinho que deixa esse garoto probl"
+  ],
+  "Switch": [
+   "Acontece que esse tal de Switch 2 é bem mais fraco que um PlayStation 5, mas a Nintendo fa"
+  ],
+  "PlayStation": [
+   "Acontece que esse tal de Switch 2 é bem mais fraco que um PlayStation 5, mas a Nintendo fa",
+   "Mas olha, o golpe de verdade veio logo depois quando a Sony subiu no palco pra falar do ta",
+   "O PlayStation 5 digital custa seiscentos dólares lá fora"
+  ],
+  "Yokoi": [
+   "Ora essa, a resposta começa em 1889 com um baralho, e passa por um tal de Gunpei Yokoi, o "
+  ],
+  "Boy": [
+   "Em 1989, o Game Boy tinha tela sem cor, enquanto os rivais tinham tela colorida, mas a bat",
+   "Ora essa, a resposta começa em 1889 com um baralho, e passa por um tal de Gunpei Yokoi, o "
+  ],
+  "5m": [
+   "E se não sabe como entrar nessa joça, abra o 5M, aperte F8, digite conect espaçojogar",
+   "Para acessar o servidor pelo 5M, abra o console apertando F8 e digite o comando de conexão"
+  ],
+  "TV": [
+   "A Power conserta a cabeça dele dando um tapa igual a uma TV antiga e o Denji volta a si",
+   "De volta em casa, o garoto ligou a TV e viu a própria cara estampada no país inteiro",
+   "Ele assistia às apresentações na TV e decidiu que esse seria o seu futuro"
+  ],
+  "e1": [
+   "E1 diz que conhecia o passado problemático dele e avisa que isso arruinaria qualquer chanc",
+   "Ela se apresenta como E1, funcionária de uma agência de idols"
+  ],
+  "Sasuke": [
+   "Com tanta invocação diferente, o Sasuke podia muito bem virar um treinador Pokémon",
+   "Eita, o maluco parecia abandonado pior que briga minha com o Sasuke",
+   "Na luta contra o Danzo, o Sasuke invoca um falcão gigante para enfrentar o velho"
+  ],
+  "Mike": [
+   "Antes de qualquer explicação, o silêncio engole a linha por falta de créditos, deixando Mi"
+  ],
+  "Asher": [
+   "Asher Black acorda na escola poucos dias antes da prova de aptidão",
+   "Asher precisa criar um vínculo com ela antes disso",
+   "Ela tenta tomar o celular dele, acaba tropeçando em Asher e é segurada por ele"
+  ],
+  "Black": [
+   "Asher Black acorda na escola poucos dias antes da prova de aptidão",
+   "Na volta pro futuro, o Zamasu e o Black se fundem virando um apelão gigante",
+   "O Zamasu e o Black Goku continuam lá querendo acabar com os mortais"
+  ],
+  "Cash": [
+   "Durante a aula, Cash Kingsley tira fotos escondidas da professora",
+   "Mas Asher conhece o futuro de Cash"
+  ],
+  "Kingsley": [
+   "Durante a aula, Cash Kingsley tira fotos escondidas da professora"
+  ],
+  "Amberlock": [
+   "Mas a sua maior preocupação é Amberlock Hert, uma aluna genial e isolada"
+  ],
+  "Orby": [
+   "Ao sair da escola, ele vai até uma região afastada onde sabe que surgirá o Orby Ponte, um "
+  ],
+  "Peaky": [
+   "Por ordem dos Peaky Blinders, ele mandou as regras do técnico às favas e jogou do próprio ",
+   "Por ordem dos Peaky Blinders, eles saíram para proteger o menino e mostrar quem realmente ",
+   "Por ordem dos Peaky Blinders, esta mulher joga sardinhas na panela, mexe com força e joga "
+  ],
+  "este": [
+   "Escuta bem o que eu tenho a dizer, este pequeno menino com apenas meia hora de vida foi ab",
+   "Este homem passou trinta anos sobrevivendo em um mundo de fantasia brutal",
+   "Lembrando de como foi trazido para este mundo, ele decidiu que ia superar seus limites"
+  ],
+  "coco": [
+   "Acontece que ele estava preocupado demais com a opinião da moça ao lado, gastando força à ",
+   "Acontece que o coco bateu no poste, ricocheteou e voltou direto para a mão dele",
+   "Jack dá uma mordida e percebe que aquilo na verdade é feito de manga, maracujá, gelatina d"
+  ],
+  "Calaya": [
+   "Calaya descobre que está grávida do próprio melhor amigo"
+  ],
+  "forma": [
+   "A garota ficou confusa e sem entender por que ele a abandonaria daquela forma",
+   "A história começa três anos após a Terra entrar de forma repentina em uma era de ressurgim",
+   "A mãe se levantou exibindo uma forma física perfeita e o namorado a seguiu para a cozinha "
+  ],
+  "pode": [
+   "A diferença de preço existe e pode ser calculada em cerca de dez por cento a mais",
+   "A polícia avisa que qualquer mentira agora pode atrapalhar o resgate de Lucas",
+   "A água fria invade tudo, mas o tolo acha que pode desafiar o inevitável"
+  ],
+  "Kamen": [
+   "Desde criança, o prota passa os dias praticando os golpes e as transformações do seu ídolo"
+  ],
+  "Shock": [
+   "Só que, de repente, surge uma onda de crimes com ladrões mascarados da tal organização Sho"
+  ],
+  "copo": [
+   "Ele só queria beber um copo d'água, mas acabou engasgando e indo de arrasta",
+   "Eles já passaram do limite seguro e o professor até deixa cair o copo no chão de nervoso",
+   "Na festa da empresa, um copo quebrou e ele entrou em pânico total correndo pro quarto"
+  ],
+  "sede": [
+   "Acontece que o nosso anjo sofrido rasteja até a outra, que saca logo a ideia e abraça o co",
+   "Ela exige achar algo pra desviver porque tá com sede de suco de tomate",
+   "Ela renasceu com uma nova chance e sede de vingança"
+  ],
+  "cerca": [
+   "A ciência nos mostra que o oxigênio é um agente oxidante lento que, em suma, leva cerca de",
+   "A diferença de preço existe e pode ser calculada em cerca de dez por cento a mais",
+   "A torre de controle libera um cantinho isolado e a polícia já cerca a turma toda"
+  ],
+  "Washington": [
+   "O condado de Washington guarda o mistério de um homem conhecido como o desviver de memória"
+  ],
+  "Kimberly": [
+   "Em 1979, um jovem escapa de um pesadelo real após o sumiço misterioso de Kimberly Kim Will"
+  ],
+  "Kim": [
+   "Chega mais, minha tropa, que na Coreia do Norte o líder Kim Jong-un mudou todas as regras ",
+   "Ele leva Kim para a clínica para entender o que diabos está acontecendo",
+   "Em 1979, um jovem escapa de um pesadelo real após o sumiço misterioso de Kimberly Kim Will"
+  ],
+  "Wills": [
+   "Em 1979, um jovem escapa de um pesadelo real após o sumiço misterioso de Kimberly Kim Will"
+  ],
+  "GTRP": [
+   ", escute bem, mortal, porque eu não vou repetir os erros que cê comete nessa cidade do GTR",
+   "Fala, pessoal, beleza, o maluco entra pela primeira vez no GTRP e já ganha uma roupinha bá",
+   "O cara começa defendendo que o GTRP é muito melhor que o GTA online"
+  ],
+  "Shmondenko": [
+   "Ele é o Vladimir Shmondenko, famoso na internet toda como Anatoly"
+  ],
+  "Anatoly": [
+   "Ele é o Vladimir Shmondenko, famoso na internet toda como Anatoly"
+  ],
+  "esforço": [
+   "Amy tenta imitar os movimentos desajeitada e cada posição exige um esforço enorme dela",
+   "Bradin já pensa em desistir de novo, só que ela faz todas as repetições tranquilamente, se",
+   "Ele diz que ela trabalhou duro para agradar, mas que o esforço não bastou"
+  ],
+  "Karma": [
+   "Ele pergunta se o Karma acha legal demorar tanto tempo para sacar a arma e atirar",
+   "O colega avisa o Karma que precisa usar avental e pergunta se ele não sabia disso"
+  ],
+  "choro": [
+   "A Hanako cisma que o pirralho está fingindo choro só para aproveitar a situação",
+   "A mulher elogia a atitude fingindo muita bondade enquanto segura o choro por dentro",
+   "Veja bem, essa garota nasceu com uma força absurda, capaz de lançar um médico pelos ares l"
+  ],
+  "Tomoko": [
+   "A Tomoko entra em pânico total e corre para o banheiro para puxar papel higiênico sem para",
+   "A Tomoko passa pela maior vergonha da vida dela e ainda precisa se humilhar para um garoto",
+   "Até que um colega da escola aparece, reconhece a Tomoko e troca algumas palavras rápidas c"
+  ],
+  "Kiko": [
+   "As duas saem para passear e a Kiko fica super animada para saber os detalhes do suposto ro",
+   "Ela faz essa loucura pra convencer a prima Kiko de que tem um namorado misterioso e invent",
+   "Enquanto a Kiko vai comprar alguma coisa, a Tomoko fica aflita pensando em que mentira vai"
+  ],
+  "Nick": [
+   "Acontece que o tal do Nick abriu a válvula sem dó nem piedade, mandando um mar inteiro de ",
+   "O olhar do Nick ficou mais vazio que camarim de artista esquecido, enfeitiçado na hora",
+   "Pescoço pra frente, o Nick virou a própria metralhadora humana disparando tiro dentro d'ág"
+  ],
+  "Catherine": [
+   "Ele aceitou na hora principalmente por causa da Catherine",
+   "Ele quase foi atacado e ainda virou motivo de piada para a Catherine",
+   "Um grupo suspeito apareceu e a garota chamada Catherine o convidou para se juntar a eles"
+  ],
+  "Jenny": [
+   "Jenny ouve um som estranho, olha para o lado e vê uma criatura gigantesca devorando pessoa"
+  ],
+  "Moyu": [
+   "Depois foi a vez de Lin Moyu entrar no círculo",
+   "Lin Moyu havia despertado a classe oculta de necromante, a mais rara de todas"
+  ],
+  "Thrust": [
+   "A segunda é a Thrust, equipada com propulsores de ar comprimido"
+  ],
+  "Rocket": [
+   "A Rocket é o modelo de um lugar exclusivo para convidados"
+  ],
+  "Shai": [
+   "Shai sempre foi obcecada pela morte e se apaixonou instantaneamente ao conhecer demônios"
+  ],
+  "corte": [
+   "Aproveitando a chance, o demônio espada ataca a guarda aberta dele e desfere um corte",
+   "Ele desvia dos ataques, sobe nela e dá um corte com a serra pequenininha da cabeça dele",
+   "Eles conseguem fazer um corte de leve no rosto dele e ganham nota dez pelo golpe"
+  ],
+  "Playstation": [
+   "Ah, mon ami, veja bem o que dizem sobre o próximo Playstation 6"
+  ],
+  "Kepler": [
+   "Segundo o vazador Kepler, essa belezinha viria com trinta gigas de memória de vídeo"
+  ],
+  "Sony": [
+   "A Sony reage rápido para conter a brecha de segurança",
+   "Dito isso, a Sony ainda não anunciou preço nenhum",
+   "Faça a conta rápida sobre os lançamentos da Sony nos Estados Unidos"
+  ],
+  "Kai": [
+   "Kai estava apenas participando de um teste para iniciantes",
+   "Kai estava decidido a sobreviver por causa do sacrifício de seus irmãos"
+  ],
+  "Dijk": [
+   "Na quinta posição, Van Dijk cobra contra Kepa, que escolhe ficar parado no canto direito",
+   "Van Dijk manda um foguete exatamente no canto escolhido pelo goleiro e marca o gol com hum"
+  ],
+  "Kepa": [
+   "Na quinta posição, Van Dijk cobra contra Kepa, que escolhe ficar parado no canto direito"
+  ],
+  "Frank": [
+   "Depois ela leva todos a um restaurante e apresenta uma senhora que escondeu Anne Frank na "
+  ],
+  "Heath": [
+   "Na base da manga e do asfalto, ele moldou habilidades que nenhum quartel em Small Heath co"
+  ],
+  "Shino": [
+   "O Shino aparece e arrasta o Naruto à força para a última competição"
+  ],
+  "f6": [
+   "Cê cancela os movimentos no F6 e já resgata um carro no cadastro inicial",
+   "Tipo, aperta F6 no teclado pra mexer nas animações e puxar o celular rapidinho"
+  ],
+  "Sakura": [
+   "A Sakura também leva uma espadada do mesmo Madara e sai viva",
+   "Ele concorda que Sakura ficou muito bonita com o novo visual",
+   "Mas no caso da Sakura a história foi completamente diferente"
+  ],
+  "Yeo": [
+   "O Ro Yeo joga aquela confissão na lata da Seon e não sai mais da cabeça dela",
+   "Quando sai para jogar o lixo, ela grita o nome do Ro Yeo no meio da rua, bem na hora em qu",
+   "Só que o próprio Ro Yeo entra na sala cheio de curativos"
+  ],
+  "Yeong": [
+   "A irmã So Yeong aparece no banheiro para ver o que tá acontecendo"
+  ],
+  "Kenjaku": [
+   "E no mangá original, o Mahito olha desconfiado para o Kenjaku logo em seguida",
+   "Mas a verdade é que o Kenjaku tem uma técnica de antigravidade na manga"
+  ],
+  "IP": [
+   "Abre logo o FiveM, aperta F8 e digita o IP marizerp",
+   "Aí cê aperta F8 no teclado, digita o IP do servidor e dá enter pra entrar na cidade, caram",
+   "E pra trombar comigo nessa cidade chamada Maresia, joga o IP no FiveM e brota na pista por"
+  ],
+  "VI": [
+   "Agora o GTA VI chega no dia dezenove de novembro, depois de custar mais de um bilhão de dó"
+  ],
+  "ReSwitched": [
+   "Eles publicam o ReSwitched, um desbloqueio que funciona no modelo normal, nos Slim e até n"
+  ],
+  "ps5": [
+   "Eles publicam o ReSwitched, um desbloqueio que funciona no modelo normal, nos Slim e até n"
+  ],
+  "Twitch": [
+   "A Twitch fatura quase dois bilhões de dólares por ano"
+  ],
+  "e3": [
+   "Ouvinte infeliz, em maio de 1995, na feira E3, a Sega lançou o Saturn por trezentos e nove"
+  ],
+  "AJ": [
+   "AJ ainda não consegue esconder o que sente ao olhar para ela",
+   "AJ briga com o próprio amigo para tentar conquistar Brooke no verão",
+   "AJ e Mo sacam todas as economias da conta para disputar a lanchonete da piscina"
+  ],
+  "troco": [
+   "Ele perdeu os setenta reais em mercadoria e mais os trinta de troco que entregou",
+   "Mais tarde, Kimmich deu o troco em Cucurella em campo",
+   "Muita gente junta o valor roubado com os setenta em doces e mais os trinta de troco, achan"
+  ],
+  "torre": [
+   "A torre de controle libera um cantinho isolado e a polícia já cerca a turma toda",
+   "Em solo a torre aciona bombeiros e médicos pro pior cenário possível deste negócio",
+   "O piloto acorda bem na hora, mantém a calma e avisa a torre de controle"
+  ],
+  "piloto": [
+   "Apesar disso, o piloto acelera ao máximo antes mesmo de ter certeza de que o gancho prende",
+   "Eu não podia derramar uma gota, tipo, o velho tava me treinando pra ser piloto e eu nem sa",
+   "Logo depois o piloto apaga e dorme profundamente na cabine"
+  ],
+  "Hanako": [
+   "A Hanako cisma que o pirralho está fingindo choro só para aproveitar a situação",
+   "A Hanako conclui que o moleque guarda memórias bizarras de alguma vida passada",
+   "A Hanako fica apavorada com a cena, mas as outras acham que ele só quer chupeta"
+  ],
+  "Kazumi": [
+   "Como o neném reclama de calor, a Olívia e a Kazumi correm para ligar o ventilador na tomad",
+   "Hanako tenta puxar Kazumi com toda força, mas não consegue tirá-la do lugar",
+   "Kazumi faz a dancinha constrangida antes de agarrar a perna de Hanako com muita força"
+  ],
+  "May": [
+   "Alguém solta que os olhos da May são coloridos como um arco-íris e pergunta de qual país e",
+   "O colega percebe que ele também nunca viu os olhos da May"
+  ],
+  "Pokémon": [
+   "A franquia que mais fatura em toda a história não é Star Wars nem o Mickey, mas sim o Poké",
+   "Com tanta invocação diferente, o Sasuke podia muito bem virar um treinador Pokémon"
+  ],
+  "CEO": [
+   "Ele quis ajudar a CEO, mas ela riu dele e o chamou de fraco",
+   "Vendo aquilo, a CEO apareceu de repente, se ajoelhou no chão e pediu o protagonista em cas"
+  ],
+  "Wang": [
+   "Dominic Wang desperta como guerreiro de classe A e recebe muitos elogios enquanto provoca "
+  ],
+  "BioWare": [
+   "A BioWare nasceu em 1995 no Canadá, criada por três médicos apaixonados por jogos, o que j",
+   "Nesta semana, a BioWare fechou as portas e cortou cerca de quatrocentos empregos"
+  ],
+  "Kaguya": [
+   "Isso só faz Kaguya se apaixonar ainda mais, e os dois acabam se entregando ao momento",
+   "Kaguya e Shirogane finalmente deram o passo que faltava e agora estão namorando",
+   "Kaguya se desespera porque sabe que ele vai para a América e tem medo da distância"
+  ],
+  "Shirogane": [
+   "Ao entender o medo dela, Shirogane a tranquiliza e promete que isso nunca vai acontecer",
+   "Kaguya e Shirogane finalmente deram o passo que faltava e agora estão namorando",
+   "O clima esquenta e eles se beijam, mas Shirogane percebe que ela ainda não está pronta"
+  ],
+  "Cyrilo": [
+   "A terceira regra envolve o marido dela, sendo terminantemente proibido chamá-lo de Cyrilo,"
+  ],
+  "Toy": [
+   "Ele quer saber se brinquedos desviver em Toy Story continuam visitando crianças"
+  ],
+  "Story": [
+   "Ele quer saber se brinquedos desviver em Toy Story continuam visitando crianças"
+  ],
+  "RPG": [
+   "A virada aconteceu quando ele testou um RPG de realidade virtual em mundo aberto",
+   "Ele acumulou uma dívida monumental de um bilhão por causa de um RPG",
+   "Eles viraram referência em RPG fazendo sucesso com Mass Effect e Dragon Age, mas olha que "
+  ],
+  "EA": [
+   "Eles viraram referência em RPG fazendo sucesso com Mass Effect e Dragon Age, mas olha que "
+  ],
+  "Mary": [
+   "Alguns dias depois, Mary avisa que vai se casar e pergunta o que ele acha disso",
+   "Apesar de tudo, ele consegue embarcar em um avião e chega a tempo no casamento de Mary",
+   "Curiosa com a presença dele, Mary decide visitar a casa e se surpreende ao ver o enorme tu"
+  ],
+  "Wellington": [
+   "O bispo José Wellington, da Assembleia de Deus, junta uma frota de carros de luxo e propri"
+  ],
+  "RR": [
+   "O quarto da lista é o RR Soares, o rosto da Igreja Internacional da Graça, que comanda uma"
+  ],
+  "Kyoto": [
+   "A Nintendo surge em Kyoto no ano de dezoito oitenta e nove fabricando cartas de baralho tr",
+   "Enquanto isso, dois caçadores esperam a Makama chegar na estação de trem de Kyoto"
+  ],
+  "Sheryl": [
+   "Mas Sheryl agora não leva desaforo para casa",
+   "Memórias invadem sua cabeça revelando que ela agora é Sheryl, filha biológica da poderosa ",
+   "Mesmo sendo da família, Sheryl vivia isolada e era tratada como uma simples fonte do mesmo"
+  ],
+  "Musk": [
+   "A vida pessoal de Elon Musk é tão agitada quanto seus negócios"
+  ],
+  "Wilson": [
+   "Ele foi casado com a escritora Justine Wilson por oito anos e teve cinco filhos com ela"
+  ],
+  "Riley": [
+   "Depois, ele se casou duas vezes com a atriz Talulah Riley, terminando em dois divórcios"
+  ],
+  "Kenny": [
+   "O prota recebe tratamento de princesa e ganha um ônix maneiro da esposa do Kenny"
+  ],
+  "CECOT": [
+   "O CECOT é uma prisão de segurança máxima em El Salvador onde a luz do sol nunca entra e a "
+  ],
+  "osso": [
+   "Em primeiro lugar fica a costela bovina, a mais raiz de todas, com osso e gordura cozinhan",
+   "Você puxa o dedo e parece que vai quebrar, mas o osso nem sai do lugar, meu caro freguês"
+  ],
+  "Belly": [
+   "A avó ainda cortou a fala de Belly e permitiu que falassem mal dela sem intervir",
+   "A mãe insistiu num divórcio, mas Belly deixou claro que isso jamais vai acontecer",
+   "Ao ver o primo tratando Belly com desprezo, o suco de tomate de Christian ferveu e ele dec"
+  ],
+  "Toshiro": [
+   "O Toshiro corta a conversa e pergunta se o visitante veio fazer interrogatório ou pegar o ",
+   "O Toshiro responde que detesta sol e calor",
+   "O prota chega de repente no meio da lanchonete e dá de cara com o Toshiro bem ali"
+  ],
+  "Hyorinmaru": [
+   "As meninas explicam que, ao ver o pessoal trabalhando duro, o garoto se ofereceu pra produ"
+  ],
+  "Judy": [
+   "Diante da determinação de Richard, Judy decide apoiar o plano do marido"
+  ],
+  "porto": [
+   "Outro trabalhador lembra que eles lidam com os carregamentos pesados do porto"
+  ],
+  "Yamazak": [
+   "Nasceu um menino com um olho reverso no clã Yamazak"
+  ],
+  "Kanté": [
+   "Acontece que esse tal de Kanté é tão tímido que um colega precisa empurrar a taça pra mão "
+  ],
+  "Plankton": [
+   "Atenção, criaturas insignificantes deste planeta insignificante, preparem-se para testemun"
+  ],
+  "apoio": [
+   "Alguém do lado de fora bate na porta e a convida para um grupo de apoio",
+   "Depois eu apoio uma caixa de cerveja contra o pino pra ver a grade ficar solta",
+   "Ela vai até a casa de Zoe e recebe apoio e incentivo do pai da garota para aceitar sua nov"
+  ],
+  "Wars": [
+   "A franquia que mais fatura em toda a história não é Star Wars nem o Mickey, mas sim o Poké"
+  ],
+  "Mickey": [
+   "A franquia que mais fatura em toda a história não é Star Wars nem o Mickey, mas sim o Poké"
+  ],
+  "The": [
+   "The prompt contains sensitive words that violate Google's [Generative AI Prohibited Use po",
+   "The prompt could not be submitted"
+  ],
+  "AI": [
+   "The prompt contains sensitive words that violate Google's [Generative AI Prohibited Use po"
+  ],
+  "Try": [
+   "Try rephrasing the prompt"
+  ],
+  "Sask": [
+   "O povo sempre diz que o Sask faz sucesso com as garotas, mas nenhuma nunca pediu pra ter u"
+  ],
+  "MEKA": [
+   "Mandando ver com força e velocidade insanas, ele parece até o meu MEKA atropelando a defes"
+  ],
+  "Hokage": [
+   "Enquanto isso, a galera da direita sempre chega ao cargo de Hokage"
+  ],
+  "Kakashi": [
+   "O cara conclui então que a Sakura e o Kakashi já estão com os dias contados"
+  ],
+  "Amy": [
+   "A pressão de Shirley e os comentários na live fazem Amy entrar em pânico e desligar tudo",
+   "Amy avisa que tem uma arma caso ele seja algum mente criativa",
+   "Amy corre atrás dele, mas o cara já fugiu de carro"
+  ],
+  "Danny": [
+   "Danny está do lado de fora disfarçado de funcionário de inspeção de telhados",
+   "Na garagem, Danny bate o olho no carro e tem certeza de que ela é a motorista"
+  ],
+  "Koichi": [
+   "Koichi continua falando com a Mei mesmo percebendo o clima estranho",
+   "Koichi precisa dar um fim na professora para encerrar toda a tragédia"
+  ],
+  "Esch": [
+   "Esch sempre foi alguém especial para ele durante todos esses anos, mesmo vivendo lá na cob",
+   "Tudo começa quando Jden assume os novos filhos de Esch, o Impedestle de Invoras, e o rapaz"
+  ],
+  "Keila": [
+   "Keila não se abalou e rebateu as provocações com firmeza",
+   "Keila sofria bullying por pesar quase cem quilos, mas nunca deixou isso abalar sua autoest",
+   "Keila tentou aconselhá-la a focar apenas em seus projetos e na competição"
+  ],
+  "Sylvie": [
+   "A situação despertou a inveja imediata e o ciúme de Sylvie",
+   "O sucesso estrondoso alimentou ainda mais o rancor e a inveja de Sylvie",
+   "Sylvie tentou diminuir a conquista com piadas maldosas sobre o tamanho da roupa"
+  ],
+  "Hokages": [
+   "Depois que o Hiruzen sai do cargo, os Hokages que assumem sempre encaram uma pilha gigante",
+   "Todo o trabalho atrasado dele simplesmente sobra para os próximos Hokages resolverem"
+  ],
+  "poço": [
+   "Ela se lembra de ter bebido a água misteriosa de um poço que lhe deu esse poder bizarro",
+   "O plano começa quando os aldeões se aproximam do poço e o principal agressor bebe da mesma",
+   "Um dia, ele é atingido de surpresa e acorda pendurado sobre um poço de lixo tóxico mistura"
+  ],
+  "SEGA": [
+   "Beleza, turma, a SEGA jogou todas as fichas no Dreamcast em mil novecentos e noventa e ins",
+   "Sabe, às vezes é preciso correr antes de andar, e a SEGA tomou um tombo financeiro monumen"
+  ],
+  "Okawa": [
+   "O presidente Isao Okawa limpou a barra da empresa com uma grana preta antes de bater as bo"
+  ],
+  "DVD": [
+   "Inspirados por filmes clássicos, eles começam a imitar gestos de famosos até encontrarem u"
+  ],
+  "Makima": [
+   "A Himeno chega perto dizendo que viu que ele gosta da Makima",
+   "A Makima aproveita a chance, pega na mão dele e começa a dar em cima do rapaz",
+   "A Makima aproveita pra contar também sobre o passado sofrido do Aki"
+  ],
+  "Aki": [
+   "A Himeno conta que foi ela quem mandando ver o Aki no vício do fumo",
+   "A Himeno disse que tava tudo bem, mas o Aki não achou nada bem",
+   "A Himeno pergunta o que o Aki acha dos novatos e ele diz que eles vão desviver em um ano o"
+  ],
+  "Power": [
+   "A Makima diz que a Power é bem sensata pra um demônio",
+   "A Power acorda nos braços do Denji segurando a gaiola do gatinho dela",
+   "A Power aproveita e fatia o demônio com um golpe só"
+  ],
+  "Nyako": [
+   "Agora ela odeia demônios também porque um sequestrou o gato dela chamado Nyako",
+   "Ela lembra de quando encontrou o Nyako na floresta logo depois de virar demônio"
+  ],
+  "Meowy": [
+   "É a Power e o Meowy chegando pra morar com eles a partir de hoje"
+  ],
+  "Kobeni": [
+   "A Himeno testa também mandando a Kobeni fazer um sinal de paz antes de descer as escadas",
+   "A Kobeni atira no espadachim e bota a Garota da Cobra contra a parede",
+   "A Kobeni começa a tremer e diz que todos vão desviver de fome"
+  ],
+  "Kobni": [
+   "A Kobni acusa o rapaz de defender os demônios e pra piorar tenta atacar o colega",
+   "A Kobni insiste que a culpa é do Denji e que jogá-lo pro monstro resolve tudo",
+   "Enquanto os dois discutem, a Kobni entra no quarto totalmente surtida com uma faca na mão"
+  ],
+  "cortes": [
+   "O IPI também pesa no preço, embora já tenha tido alíquotas de até cinquenta por cento e so",
+   "O rival começa a acertar cortes fortes no Denji, mas não é o bastante para derrubá-lo"
+  ],
+  "Makama": [
+   "A Makama sai toda suja de suco de tomate e avisa que tem quatro corpos de atiradores lá de",
+   "A Makama tá no santuário com os prisioneiros sentados em fileiras e com os olhos vendados",
+   "A garota da cobra entra em contato com os outros times para confirmar se a Makama desviver"
+  ],
+  "Rengoku": [
+   "O suco de tomate nas roupas dela pertence aos inimigos que se juntaram ao clube Rengoku e "
+  ],
+  "Kishibe": [
+   "A Power vai pra cima dele por trás, mas o Kishibe corta a garganta dela enquanto deixa o D",
+   "Aki pergunta pro Kishibe qual é o plano de invasão",
+   "Do lado de fora, o Kishibe encontra o chefe de polícia e o líder de outra divisão"
+  ],
+  "QI": [
+   "Ela fala que eles vão usar a inteligência pra enganar o velho e vencer fácil, e o Denji co"
+  ],
+  "Eki": [
+   "Ele chama o Eki pra entrar na onda dele, mas o Eki manda ele ir direto ao ponto sobre o co",
+   "Lendo as cartas, o Eki viu que várias falavam sobre largar tudo pra viver uma vida um pouc",
+   "O Eki entra na cela e encara fixamente o único olho visível no canto escuro da sala"
+  ],
+  "Sawa": [
+   "A Sawa fica em choque e tenta atacar mas o Kobeni já está nas costas dela",
+   "A Sawa manda o demônio cobra cuspir o demônio fantasma engolido",
+   "Com uma faca no pescoço a Sawa desiste de lutar e se rende de vez"
+  ],
+  "Olly": [
+   "A garotinha chamada Olly segurava um copelho de pelúcia e dizia ser tia do aniversariante ",
+   "Olly o corrigiu na mesma hora, afirmando que ela não era neta, mas sim sua tia",
+   "Ouvindo tudo, Olly usou um talismán mágico para derrubar um dos fofoqueiros no meio do sal"
+  ],
+  "Kenu": [
+   "A garotinha chamada Olly segurava um copelho de pelúcia e dizia ser tia do aniversariante ",
+   "Ao entrar no escritório, Kenu reclamou dos escândalos que manchavam a reputação da família"
+  ],
+  "Ashley": [
+   "Ashley percebe na hora que aquilo era apenas uma forma de humilhação e recusa a proposta",
+   "Isso cria a oportunidade perfeita para Ashley ir embora",
+   "Nesse momento, a rival aparece acusando Ashley de tentar roubar o Jaden dela"
+  ],
+  "Sukuna": [
+   "Durante a luta insana contra o Sukuna, nosso herói leva dezenas de golpes e acaba com o pe",
+   "Ele dá de cara com o Sukuna e diz bem-vindo",
+   "O cara pergunta se esse é mesmo o hospedeiro do Sukuna e se pode dissecá-lo do jeito que q"
+  ],
+  "Kana": [
+   "Maguru e Kana são dois irmãos que perderam os pais para os monstros e juraram destruir tod",
+   "Sua irmã Kana continua com exatamente o mesmo rosto de antes"
+  ],
+  "bolo": [
+   "Com o plano descoberto, o traste exige que ela coma o bolo ou sai de casa, e ela taca o bo",
+   "Ela volta pra casa e o traste aparece com um bolo de chocolate, mas ela recusa e diz que v",
+   "Ele insiste pro bicho comer o bolo e ameaça terminar, mas ela joga na cara que ouviu a con"
+  ],
+  "Bumpy": [
+   "Bumpy aparece no meio da tensão e entrega uma carta fria como gelo ao delegado provocador",
+   "Bumpy e o advogado caminham pelo corredor cercado por vários negros inocentes presos",
+   "Bumpy exige ver Cecil, Brother e os garotos que apanharam bastante"
+  ],
+  "Brother": [
+   "Bumpy exige ver Cecil, Brother e os garotos que apanharam bastante"
+  ],
+  "Powell": [
+   "No dia seguinte, o deputado Powell lidera uma multidão de negros que invade o saguão da de"
+  ],
+  "Tung": [
+   "Depois da invasão japonesa e de uma guerra civil, os comunistas de Mao Tsé-Tung venceram e"
+  ],
+  "Deng": [
+   "Com a morte de Mao, o novo líder Deng Xiaoping permitiu negócios próprios e abriu o país p"
+  ],
+  "Xiaoping": [
+   "Com a morte de Mao, o novo líder Deng Xiaoping permitiu negócios próprios e abriu o país p"
+  ],
+  "Shenzhen": [
+   "Cidades como Shenzhen explodiram em população e centenas de milhões de chineses saíram da "
+  ],
+  "PC": [
+   "Se a sua máquina for mais fraca, tipo um PC da xepa, vai travar tudo, então bota logo as o"
+  ],
+  "Yang": [
+   "A mãe aceita isso de bom grado e Yang percebe que ela não voltaria mais",
+   "O menino se afasta por vontade própria após ouvir a conversa, mas Yang o segura e afirma q"
+  ],
+  "Komodo": [
+   "Naquela mesma noite, ela apelida o jovem mestre de Moto porque ele se parece com um dragão"
+  ],
+  "Shais": [
+   "As negociações começaram e Shais exigiu ouro e prata em troca de comida constante",
+   "Shais Rey comprou uma caixa de salgadinhos pela internet e encontrou um anel misterioso es",
+   "Vendo a oportunidade, Shais mentiu que fazia parte de uma organização poderosa cheia de re"
+  ],
+  "Rey": [
+   "Shais Rey comprou uma caixa de salgadinhos pela internet e encontrou um anel misterioso es"
+  ],
+  "Nyanko": [
+   "Além de ser completamente viciada, ela não tem o menor senso de higiene e o caça-níquel da",
+   "Até que certa noite, Nyanko sente que seus pulmões chegaram ao limite e só teria mais algu",
+   "Quando o dinheiro fica curto e ela precisa fazer o maço render até conseguir outro trabalh"
+  ],
+  "sexta": [
+   "Até o Pain enfia barras de ferro no Naruto, que ainda tanka e desperta a sexta cauda da Ku"
+  ],
+  "Kurama": [
+   "Até o Pain enfia barras de ferro no Naruto, que ainda tanka e desperta a sexta cauda da Ku"
+  ],
+  "Hyuga": [
+   "O prodígio do clã Hyuga acaba caindo assim do nada"
+  ],
+  "King": [
+   "O homem se apresenta como King Tian, o novo professor da turma",
+   "O valentão diz que estudar não serve para nada e que quer ser grande como o próprio King T"
+  ],
+  "toco": [
+   "Esse toco curto não dobra, fica espetando e mostra a largura inteira do fio, dando a impre",
+   "O que sobra é apenas um toco de ponta reta"
+  ],
+  "Billy": [
+   "A esposa pergunta aos colegas quem gostaria de ir com a rival para o grupo Billy"
+  ],
+  "Young": [
+   "Ela descobre com a amiga que o Jin Young é popular e nunca liga para garota nenhuma",
+   "O Jin Young começa a seguir a garota para se acostumar com a presença feminina"
+  ],
+  "Kyung": [
+   "Então ele decide que precisa manter o controle perto da Soo-Kyung"
+  ],
+  "Won": [
+   "A Soo-Won acha tudo isso bem divertido e resolve começar a provocar o rapaz"
+  ],
+  "Nike": [
+   "Contudo, o atleta manteve a honra de um guerreiro e não revidou, fazendo ela ir à polícia "
+  ],
+  "Weal": [
+   "Ele acessa a sua antiga conta no jogo, chamada de Weal",
+   "Mas ele decide colocar o Weal à venda por dois mil",
+   "O Weal não era uma conta qualquer"
+  ],
+  "Weghorst": [
+   "O tal do Weghorst entrou no finalzinho, marcou dois gols e ainda chamou a esposa de Messi "
+  ],
+  "ADMs": [
+   "Os caras já vinham armados como os próprios ADMs"
+  ],
+  "NPC": [
+   "Chegando no ponto indicado, ele troca uma ideia com o NPC e compra cinco chaves",
+   "Ele já não era um NPC qualquer, mas sim o NPC do cara"
+  ],
+  "Kiruko": [
+   "Num mundo destruído por monstros devoradores de gente, Maru e Kiruko tentam sobreviver na "
+  ],
+  "Tyler": [
+   "Nesse mundo repleto de monstros bizarros, Tyler era considerado o mais fraco de todos",
+   "Trancado no quarto, Tyler treinava incansavelmente, mas o seu ki nunca aumentava"
+  ],
+  "XP": [
+   "O jeito certo é chegar de boa na base inimiga e pedir um trampo pra farmar XP"
+  ],
+  "GG": [
+   "Olha só, faltou pouco pro chão virar um caos total, mas ela já chama ele de novo porque a ",
+   "com pra entrar na partida, GG, mas antes me diz se"
+  ],
+  "IPI": [
+   "O IPI também pesa no preço, embora já tenha tido alíquotas de até cinquenta por cento e so"
+  ],
+  "cph4": [
+   "Ele pede para o professor aplicar todo o CPH4 restante para atingir cem por cento da capac"
+  ],
+  "Yamal": [
+   "Olha pro Apóstolo aqui, meu irmão: todo aniversário o Lamine Yamal faz um pedido antes de ",
+   "Põe a mão na televisão, porque o pedido daquele trem foi atendido na hora: o Yamal fez um "
+  ],
+  "Shirley": [
+   "A pressão de Shirley e os comentários na live fazem Amy entrar em pânico e desligar tudo"
+  ],
+  "MC": [
+   "O MC Leozinho colocou o país inteiro pra dançar o funk Ela Só Pensa em Beijar em 2006",
+   "O primeiro lugar vai para MC Créu"
+  ],
+  "TikTok": [
+   "O protagonista desviver deitado na cama vendo TikTok e reencarnou como uma amoeba em outro"
+  ],
+  "colher": [
+   "Aí que tá, ele mexe a sopa com a colher e dá de cara com um olho humano no prato"
+  ],
+  "Akali": [
+   "A Akali vai embora e vira motivo de piada na hora da saída, com vários carrões esperando a",
+   "Aí a Akali se aproxima porque o infeliz é justamente o alvo número um que ela precisa cola",
+   "Enquanto isso, a Akali manda investigar quem diabos é o novato de verdade"
+  ],
+  "Facebook": [
+   "Ela pergunta se ele tem Instagram e o maluco trava, pergunta do Facebook e trava de novo"
+  ],
+  "Jjang": [
+   "No meio da confusão, o tal de Jjang-gu brota oferecendo carona pro novato"
+  ],
+  "Yanyan": [
+   "Ao descer, Yanyan virou o centro das atenções com sua beleza impressionante",
+   "Mas Yanyan se importava com ele bem mais do que demonstrava",
+   "Yanyan ainda ofereceu dinheiro para que ele fugisse da cidade em segurança"
+  ],
+  "Shen": [
+   "Ao ver Shen dormindo, Xiao Hang mandou acordá-lo, mas ele continuava apagado como uma pedr",
+   "De repente, as luzes se apageram, o colar de Shen brilhou intensamente e disparou contra X",
+   "Dentro do hotel, o chefe da família anunciou que finalmente se desfazeria de Shen"
+  ],
+  "Hang": [
+   "Ao ver Shen dormindo, Xiao Hang mandou acordá-lo, mas ele continuava apagado como uma pedr",
+   "De repente, as luzes se apageram, o colar de Shen brilhou intensamente e disparou contra X",
+   "Para piorar, o jovem promissor Xiao Hang chegou ao hotel chamando a atenção de todos"
+  ],
+  "Brooke": [
+   "AJ briga com o próprio amigo para tentar conquistar Brooke no verão",
+   "Depois do expediente, Brooke toma a iniciativa e faz um convite direto",
+   "Durante o papo, Brooke confessa que o outro cara beija muito bem"
+  ],
+  "Wilder": [
+   "Ele coloca à venda propriedades milionárias, como a antiga casa do ator Gene Wilder por se"
+  ],
+  "Jong": [
+   "Chega mais, minha tropa, que na Coreia do Norte o líder Kim Jong-un mudou todas as regras "
+  ],
+  "Lindsay": [
+   "No hospital, Lindsay alega que tentou terminar mas o Eddie a agrediu",
+   "Os policiais encontram Lindsay relaxada e impecável no apartamento, bem diferente da supos"
+  ],
+  "Bioware": [
+   "Olha só, a Bioware tomou um tombo feio com aquele Dragon Age de 2024"
+  ],
+  "Rockstar": [
+   "A Rockstar tá tomando um hate infeliz por causa de uns errinhos bem patéticos no trailer d"
+  ],
+  "Walmart": [
+   "O Walmart perde dinheiro porque clientes abrem os frascos de esmalte para testar nas unhas"
+  ],
+  "Caitlyn": [
+   "Caitlyn, por favor, não complica e cobre isso aí para continuarem a aula"
+  ],
+  "lobos": [
+   "Dito isso, agora o tigre estava atrás dele, mas os lobos já estavam cansados daquele compo",
+   "Escuta bem o que eu tenho a dizer, este pequeno menino com apenas meia hora de vida foi ab"
+  ],
+  "lobo": [
+   "Acontece que o lobo sentiu o cheiro e saiu correndo para atacar o humano, mas lentamente g",
+   "Ele estava prestes a devorar o infeliz, mas o lobo deu um passo à frente para proteger o g"
+  ],
+  "Adebayor": [
+   "Mas veja bem, com o placar empatado em dois a dois, Adebayor mandando ver um gol de cabeça",
+   "Minha gente, segura o forninho porque Emmanuel Adebayor foi chutado do Arsenal um dia ante"
+  ],
+  "City": [
+   "Oxente, o homem ficou tão confuso e magulado que nem na área de imprensa pôde entrar, e aí"
+  ],
+  "Shikamaru": [
+   "O Shikamaru também deu o azar de ir pro combate com a Temari"
+  ],
+  "Kimmich": [
+   "Mais tarde, Kimmich deu o troco em Cucurella em campo"
+  ],
+  "Akira": [
+   "O Akira Toriyama decide voltar a criar histórias de Dragon Ball"
+  ],
+  "Toriyama": [
+   "O Akira Toriyama decide voltar a criar histórias de Dragon Ball"
+  ],
+  "Goku": [
+   "A nova forma do Goku acaba bem na hora H",
+   "Acontece que surge um Goku maligno do nada",
+   "Anos depois, o Goku nasce e é endiferentão pra Terra"
+  ],
+  "Kaioh": [
+   "Kaioh",
+   "Kaioh e desafia o Goku pra uma luta"
+  ],
+  "Trunks": [
+   "Nosso garoto Trunks ganha uma forma nova que ninguém explica direito",
+   "O Trunks mete a espada no Zamasu — parecendo o Sephiroth",
+   "O Trunks volta pra outra timeline onde ele já existe"
+  ],
+  "Saiyajin": [
+   "Ele avisa que vai destruir o planeta se ninguém achar o Super Saiyajin Deus",
+   "Ele tem uma visão sobre um tal de Super Saiyajin Deus",
+   "Eles fazem o ritual e o Goku se transforma no Super Saiyajin Deus"
+  ],
+  "Whis": [
+   "O Goku larga a lavoura pra ir treinar com o Whis também",
+   "O Vegeta convence o Whis a treinar ele no planeta do Bills",
+   "Whis usa a função desfazer e o Goku acaba com o Freeza"
+  ],
+  "Bills": [
+   "Aí entra o Monaka, o mais forte que o Bills já enfrentou",
+   "Ele é irmão do Bills e deus da destruição do Sexto Universo",
+   "O Bills dá um jeito de revogar a destruição da Terra"
+  ],
+  "Yamcha": [
+   "O exército inteiro apanha feio — parecendo o Yamcha no começo de DBZ"
+  ],
+  "DBZ": [
+   "O exército inteiro apanha feio — parecendo o Yamcha no começo de DBZ"
+  ],
+  "Monaka": [
+   "Aí entra o Monaka, o mais forte que o Bills já enfrentou"
+  ],
+  "Sephiroth": [
+   "O Trunks mete a espada no Zamasu — parecendo o Sephiroth"
+  ],
+  "Kuririn": [
+   "Ele e o Kuririn voltam a treinar juntos pra pegar ritmo"
+  ],
+  "Saiyajins": [
+   "O Freeza manda o cara brigar com os Saiyajins"
+  ],
+  "Broly": [
+   "O Goku vai treinar o Broly e a paz reina"
+  ],
+  "Walker": [
+   "O Walker surge em disparada e executa um corte perfeito de bicicleta"
+  ],
+  "Boateng": [
+   "O Neuer sai da área igual a um maluco e o Boateng salva tudo em cima da linha"
+  ],
+  "Lyrton": [
+   "Oi pessoal, o Lyrton dos Teclados vendeu três milhões de discos no ano 2000 com o Morango "
+  ],
+  "Kaoma": [
+   "A banda Kaoma transformou a música Chorando Se Foi no maior sucesso de lambada dos anos oi"
+  ],
+  "Kanata": [
+   "Comendo a comida preparada por Tsutsumi, Kanata percebeu que ela não era tão fria quanto p",
+   "Depois de ver que o medidor de afeto da garota que gostava estava negativo, Kanata decidiu",
+   "Frustrado após as aulas, Kanata passou por um parquinho de infância e encontrou uma garoti"
+  ]
+ }
+}

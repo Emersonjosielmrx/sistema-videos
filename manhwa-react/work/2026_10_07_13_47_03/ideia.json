@@ -1,0 +1,29 @@
+{
+ "formato": "Recap de cena bizarra de anime com legendas motivacionais irônicas",
+ "descricao": "Pega uma cena absurda/over de anime (treino maluco, poder exagerado), recorta frames-chave, adiciona legendas curtas e impactantes em cada corte, com música épica de fundo. O contraste entre o absurdo visual e a narração séria/motivacional gera o humor.",
+ "replicavel": true,
+ "como_fazer": "1) Extrair 4-6 frames de cenas icônicas de Baki ou outros animes de luta via pipeline de recap. 2) Escrever legendas curtas e irônicas com LLM ('ENVOLVIA', 'OITO VEZES MAIOR', 'VER PRESO NO') que aumentam a tensão. 3) Montar no ffmpeg: cada frame 1-2s, transições rápidas, overlay de legenda estilo Hormozi (amarelo, bold, sombra). 4) Adicionar trilha épica/tensa do banco de 341 músicas. 5) Opcional: SFX de impacto nos cortes. 6) Exportar vertical 9:16.",
+ "ferramentas": [
+  "ffmpeg",
+  "pipeline de recap anime",
+  "overlays de legenda Hormozi",
+  "banco de trilhas",
+  "LLM para roteiro"
+ ],
+ "fonte_de_material": "Frames extraídos de episódios de anime via pipeline de recap (Baki, Kengan Ashura, Hajime no Ippo, etc.) - uso transformativo educacional/comentário",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "O absurdo visual dos animes de luta + legendas que amplificam o ridículo criam um loop de 'isso é sério?' que prende e gera compartilhamento por humor involuntário",
+ "exemplo_roteiro": "Frame 1: Baki olhando sério - 'ENVOLVIA'\nFrame 2: Tigre gigante vs. grilo musculoso - 'OITO VEZES MAIOR'\nFrame 3: Baki sofrendo - 'VER PRESO NO'\nFrame 4: Close intenso - 'ATÉ ELE COMEÇOU A ALUCINAR'\n[Música épica de tensão crescente]",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "baki",
+  "anime absurdo",
+  "treino impossível",
+  "alucinação",
+  "motivação irônica",
+  "over the top"
+ ],
+ "video": "2026-10-07 13-47-03.mp4",
+ "data": "2026-10-12"
+}

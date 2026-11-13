@@ -1,0 +1,3587 @@
+{
+ "id": "AnuncioShotstV2x",
+ "name": "Vídeo de Anúncio com IA · Shotstack (sem servidor de vídeo) - V2",
+ "active": false,
+ "nodes": [
+  {
+   "parameters": {
+    "path": "anuncio-video-ss",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página do anúncio (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    192
+   ],
+   "id": "ba58d3f7-7176-47d8-a6a0-5c1bea1cbd44",
+   "webhookId": "648c6b40-8b0c-48e3-83be-22e8ef01a8d7"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Entrega a página do formulário. Cada foto é reduzida no navegador (JPEG até 2048 px) e sobe para o próprio n8n\n// (webhook anuncio-video-ss-foto), que guarda no Redis por 30 dias e devolve o código da foto.\nconst PAGINA = \"<!DOCTYPE html><html lang=\\\"pt-BR\\\"><head><meta charset=\\\"UTF-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\">\\n<title>Vídeo de anúncio com IA</title><meta name=\\\"robots\\\" content=\\\"noindex\\\">\\n<style>\\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}\\n@media (prefers-color-scheme:dark){:root:not([data-theme=\\\"light\\\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}\\n:root[data-theme=\\\"dark\\\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}\\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\\nbody{font-family:system-ui,-apple-system,\\\"Segoe UI\\\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\\n.w{max-width:800px;margin:0 auto}h1{font-size:28px;line-height:1.2}.sub{color:var(--tx2);margin-top:6px}\\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-top:16px}.card h2{font-size:17px;margin-bottom:6px}\\n.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.passos div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:13px;color:var(--tx2)}.passos b{display:block;color:var(--tx)}\\n.exemplos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}\\n.drop{border:2px dashed var(--borda);border-radius:14px;padding:22px 16px;text-align:center;cursor:pointer;color:var(--tx2);margin-top:12px}\\n.drop.on{border-color:var(--pri);background:var(--cod)}.drop b{color:var(--tx);display:block;font-size:16px;margin-bottom:2px}\\n.grade{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}@media(max-width:600px){.grade{grid-template-columns:repeat(3,1fr)}}\\n.ft{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--cod);border:1px solid var(--borda)}\\n.ft img{width:100%;height:100%;object-fit:cover;display:block}.ft .n{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;border-radius:99px;padding:1px 7px}\\n.ft .tira{position:absolute;right:5px;top:5px;border:0;background:rgba(0,0,0,.65);color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px}\\n.ft .est{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);color:#fff;font-size:11.5px;text-align:center;padding:3px}\\n.ft .est i{display:block;height:3px;background:var(--pri);margin-top:2px}\\nlabel{display:block;font-weight:600;font-size:14px;margin-top:12px}label small{font-weight:400;color:var(--mu)}\\nselect,input[type=text],input[type=tel],textarea{width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}\\ntextarea{min-height:110px;resize:vertical}\\n.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.tres{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 12px}\\n.chks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}\\n.chks label{margin:0;font-weight:500;display:flex;gap:8px;align-items:flex-start;background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:10px}\\n.chks label input{margin-top:4px}.chks small{display:block;color:var(--mu);font-weight:400}\\n.corlinha{display:flex;gap:10px;align-items:center;margin-top:6px}.corlinha input[type=color]{width:52px;height:40px;border:1px solid var(--borda);border-radius:10px;background:none;padding:2px}\\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px 20px;border-radius:14px;cursor:pointer}\\n.btn.sec{background:var(--sup);color:var(--tx);border:1px solid var(--borda);font-size:14px;padding:9px 14px}\\n.btn[disabled]{opacity:.5;cursor:default}\\n.erro{color:var(--er);font-weight:600;margin-top:12px}.ok{color:var(--ok);font-weight:600}\\n.logo{display:flex;align-items:center;gap:12px;margin-top:10px}.logo img{height:48px;max-width:140px;object-fit:contain;background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 50%/12px 12px;border-radius:8px}\\n@media(max-width:600px){.duas,.tres,.chks,.passos{grid-template-columns:1fr}}\\n</style></head><body><div class=\\\"w\\\">\\n<h1>🎬 Vídeo de anúncio com IA</h1>\\n<p class=\\\"sub\\\">Mande as <b>fotos</b> do que você vende e a IA faz um <b>vídeo de anúncio pronto para Reels, TikTok e Status</b>: roteiro de venda, narração, movimento nas fotos, legenda animada, preço na tela, trilha e o seu contato no final. E ainda ganha uma <b>página do anúncio</b> com botão de WhatsApp.</p>\\n<div class=\\\"passos\\\"><div><b>1. Fotos</b>de 3 a 15 (do celular serve)</div><div><b>2. Conte</b>o que é, preço e detalhes</div><div><b>3. A IA faz</b>uns 2 a 4 minutos</div><div><b>4. Poste</b>vídeo, legenda e página</div></div>\\n\\n<div class=\\\"card\\\"><h2>1. As fotos</h2>\\n  <p class=\\\"sub\\\">A IA olha cada foto, escolhe a ordem e o movimento de câmera. Fotos deitadas viram uma \\\"passeada\\\" pela cena no vídeo em pé.</p>\\n  <div class=\\\"exemplos\\\"><button class=\\\"btn sec\\\" type=\\\"button\\\" id=\\\"ex-ap\\\">🏠 Usar exemplo: apartamento</button><button class=\\\"btn sec\\\" type=\\\"button\\\" id=\\\"ex-hb\\\">🍔 Usar exemplo: hamburgueria</button></div>\\n  <div class=\\\"drop\\\" id=\\\"drop\\\"><b>📤 Toque para escolher as fotos</b>ou arraste aqui (JPG, PNG, WEBP ou HEIC do iPhone · até 25 MB cada)</div>\\n  <input type=\\\"file\\\" id=\\\"arquivos\\\" accept=\\\"image/*,.heic,.heif\\\" multiple hidden>\\n  <div class=\\\"grade\\\" id=\\\"grade\\\"></div>\\n  <p class=\\\"sub\\\" id=\\\"info\\\">Nenhuma foto ainda.</p>\\n  <label>Logo <small>(opcional · PNG com fundo transparente fica melhor)</small></label>\\n  <div class=\\\"logo\\\"><button class=\\\"btn sec\\\" type=\\\"button\\\" id=\\\"logo-bt\\\">🏷️ Escolher logo</button><img id=\\\"logo-img\\\" alt=\\\"\\\" hidden><button class=\\\"btn sec\\\" type=\\\"button\\\" id=\\\"logo-tira\\\" hidden>Remover</button><span class=\\\"sub\\\" id=\\\"logo-info\\\"></span></div>\\n  <input type=\\\"file\\\" id=\\\"logo-arq\\\" accept=\\\"image/png,image/jpeg,image/webp\\\" hidden>\\n</div>\\n\\n<form class=\\\"card\\\" id=\\\"form\\\"><h2>2. O que você está anunciando</h2>\\n  <div class=\\\"duas\\\">\\n    <div><label for=\\\"tipo\\\">Tipo</label><select id=\\\"tipo\\\"><option value=\\\"imovel\\\">🏠 Imóvel</option><option value=\\\"produto\\\" selected>🛍️ Produto</option><option value=\\\"comida\\\">🍔 Restaurante / comida</option><option value=\\\"veiculo\\\">🚗 Carro ou moto</option><option value=\\\"servico\\\">🧰 Serviço</option><option value=\\\"evento\\\">🎉 Evento</option><option value=\\\"outro\\\">✨ Outro</option></select></div>\\n    <div><label for=\\\"marca\\\">Nome do negócio <small>(vai no final)</small></label><input type=\\\"text\\\" id=\\\"marca\\\" maxlength=\\\"50\\\" placeholder=\\\"Ex.: Imobiliária Vista Alta\\\"></div>\\n  </div>\\n  <label for=\\\"titulo\\\">O que é *</label><input type=\\\"text\\\" id=\\\"titulo\\\" maxlength=\\\"90\\\" placeholder=\\\"Ex.: Apartamento 3 quartos com varanda gourmet\\\" required>\\n  <div class=\\\"duas\\\">\\n    <div><label for=\\\"preco\\\">Preço <small>(opcional, do seu jeito)</small></label><input type=\\\"text\\\" id=\\\"preco\\\" maxlength=\\\"40\\\" placeholder=\\\"Ex.: R$ 890 mil · a partir de R$ 39,90\\\"></div>\\n    <div><label for=\\\"oferta\\\">Oferta ou condição <small>(opcional)</small></label><input type=\\\"text\\\" id=\\\"oferta\\\" maxlength=\\\"200\\\" placeholder=\\\"Ex.: entrada facilitada · frete grátis até sexta\\\"></div>\\n  </div>\\n  <label for=\\\"detalhes\\\">Detalhes e diferenciais * <small>(a IA usa SÓ o que você escrever aqui)</small></label>\\n  <textarea id=\\\"detalhes\\\" maxlength=\\\"1500\\\" placeholder=\\\"Ex.: 98 m², 3 quartos (1 suíte), 2 vagas, varanda gourmet com churrasqueira, vista para a cidade, prédio com piscina e academia, perto do metrô.\\\"></textarea>\\n  <label for=\\\"publico\\\">Para quem é <small>(opcional)</small></label><input type=\\\"text\\\" id=\\\"publico\\\" maxlength=\\\"200\\\" placeholder=\\\"Ex.: famílias que querem morar perto do metrô\\\">\\n  <div class=\\\"tres\\\">\\n    <div><label for=\\\"whatsapp\\\">WhatsApp com DDD</label><input type=\\\"tel\\\" id=\\\"whatsapp\\\" placeholder=\\\"(11) 98888-7777\\\"></div>\\n    <div><label for=\\\"instagram\\\">Instagram</label><input type=\\\"text\\\" id=\\\"instagram\\\" placeholder=\\\"@seunegocio\\\"></div>\\n    <div><label for=\\\"site\\\">Site <small>(opcional)</small></label><input type=\\\"text\\\" id=\\\"site\\\" placeholder=\\\"seusite.com.br\\\"></div>\\n  </div>\\n  <label for=\\\"endereco\\\">Endereço ou bairro <small>(opcional · vira \\\"Como chegar\\\" na página)</small></label><input type=\\\"text\\\" id=\\\"endereco\\\" maxlength=\\\"160\\\">\\n\\n  <h2 style=\\\"margin-top:20px\\\">3. Como você quer o vídeo</h2>\\n  <div class=\\\"tres\\\">\\n    <div><label for=\\\"duracao\\\">Duração <small>(com o cartão final)</small></label><select id=\\\"duracao\\\"><option value=\\\"15\\\">Curto · até ~20 s</option><option value=\\\"30\\\" selected>Médio · ~30 s</option><option value=\\\"60\\\">Longo · ~60 s</option></select></div>\\n    <div><label for=\\\"formato\\\">Formato</label><select id=\\\"formato\\\"><option value=\\\"vertical\\\">Em pé 9:16 (Reels, TikTok, Status)</option><option value=\\\"quadrado\\\">Quadrado 1:1 (feed)</option><option value=\\\"deitado\\\">Deitado 16:9 (YouTube, site)</option></select></div>\\n    <div><label for=\\\"voz\\\">Voz</label><select id=\\\"voz\\\"><option value=\\\"pt-BR-ThalitaMultilingualNeural\\\">Thalita · feminina ⭐</option><option value=\\\"pt-BR-FranciscaNeural\\\">Francisca · feminina</option><option value=\\\"en-US-AndrewMultilingualNeural\\\">Andrew · masculina (sotaque leve)</option><option value=\\\"en-US-BrianMultilingualNeural\\\">Brian · masculina (sotaque leve)</option></select></div>\\n  </div>\\n  <div class=\\\"duas\\\">\\n    <div><label for=\\\"clima\\\">Clima da trilha</label><select id=\\\"clima\\\"><option value=\\\"auto\\\">🤖 A IA escolhe</option><option value=\\\"elegante\\\">✨ Elegante</option><option value=\\\"animado\\\">🎉 Animado</option><option value=\\\"urgente\\\">⚡ Urgente (oferta)</option><option value=\\\"emocional\\\">💛 Emocional</option><option value=\\\"calmo\\\">🌿 Calmo</option><option value=\\\"tropical\\\">🌴 Tropical</option><option value=\\\"latino\\\">💃 Latino</option><option value=\\\"chill\\\">😎 Chill</option></select></div>\\n    <div><label>Cor de destaque <small>(manchete, preço e legenda)</small></label><div class=\\\"corlinha\\\"><input type=\\\"color\\\" id=\\\"cor\\\" value=\\\"#c9a227\\\"><label style=\\\"margin:0;font-weight:500\\\"><input type=\\\"checkbox\\\" id=\\\"cor-ia\\\" checked> a IA escolhe</label></div></div>\\n  </div>\\n  <div class=\\\"chks\\\">\\n    <label><input type=\\\"checkbox\\\" id=\\\"legendas\\\" checked><span>Legenda animada<small>a palavra falada em destaque</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"versao_musica\\\" checked><span>Versão só com música<small>sem narração, para Stories</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"cartao_final\\\" checked><span>Cartão final com contato<small>marca, chamada, WhatsApp e @</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"manter_ordem\\\"><span>Manter a ordem das fotos<small>senão a IA monta a melhor história</small></span></label>\\n  </div>\\n  <p class=\\\"erro\\\" id=\\\"erro\\\" role=\\\"alert\\\"></p>\\n  <button class=\\\"btn\\\" type=\\\"submit\\\" id=\\\"enviar\\\" style=\\\"width:100%;margin-top:16px\\\">🎬 Criar o vídeo do anúncio</button>\\n</form></div>\\n<script>\\n(function () {\\n  var EXURL = {\\\"apartamento\\\": [\\\"https://files.catbox.moe/lofjjm.jpg\\\", \\\"https://files.catbox.moe/zs3gzu.jpg\\\", \\\"https://files.catbox.moe/u3ca8g.jpg\\\", \\\"https://files.catbox.moe/yuif3s.jpg\\\", \\\"https://files.catbox.moe/9nfm29.jpg\\\"], \\\"hamburguer\\\": [\\\"https://files.catbox.moe/mudpbx.jpg\\\", \\\"https://files.catbox.moe/lj04p7.jpg\\\", \\\"https://files.catbox.moe/k4t93w.jpg\\\", \\\"https://files.catbox.moe/ismue4.jpg\\\"]};\\n  var el = function (s) { return document.querySelector(s); };\\n  var FOTOS = [], LOGO = '', enviando = 0;\\n  var EX = {\\n    ap: { fotos: [1, 2, 3, 4, 5], pasta: 'apartamento', campos: { tipo: 'imovel', marca: 'Vista Alta Imóveis', titulo: 'Apartamento 3 quartos com varanda gourmet e vista', preco: 'R$ 890 mil', oferta: 'Entrada facilitada em até 36 vezes',\\n      detalhes: '98 m² no 12º andar, 3 quartos sendo 1 suíte master, sala ampla com janelas do chão ao teto, cozinha planejada com ilha, varanda gourmet com churrasqueira e vista para a cidade, 2 vagas, prédio novo com portaria 24 horas, piscina e academia.',\\n      publico: 'famílias que querem conforto e vista perto do centro', whatsapp: '11988887777', instagram: '@vistaalta.imoveis', site: '', endereco: 'Rua das Palmeiras, 450 - Centro, São Paulo - SP' } },\\n    hb: { fotos: [1, 2, 3, 4], pasta: 'hamburguer', campos: { tipo: 'comida', marca: 'Brasa Burger', titulo: 'Combo Brasa: burger artesanal + fritas + milkshake', preco: 'R$ 49,90', oferta: 'Toda terça o milkshake sai pela metade do preço',\\n      detalhes: 'Hambúrguer artesanal de 180 g na brasa, cheddar derretido e bacon crocante no pão brioche; fritas rústicas com molho de cheddar; milkshake de chocolate com brownie. Delivery no bairro e salão aberto de terça a domingo, das 18h às 23h.',\\n      publico: 'quem ama hambúrguer de verdade', whatsapp: '11977776666', instagram: '@brasaburger', site: '', endereco: 'Av. Brasil, 1200 - Jardins, São Paulo - SP' } }\\n  };\\n  function desenha() {\\n    el('#grade').innerHTML = FOTOS.map(function (f, i) {\\n      return '<div class=\\\"ft\\\"><img src=\\\"' + f.url + '\\\" alt=\\\"Foto ' + (i + 1) + '\\\"><span class=\\\"n\\\">' + (i + 1) + '</span>' + (f.id ? '<button class=\\\"tira\\\" type=\\\"button\\\" data-i=\\\"' + i + '\\\" aria-label=\\\"Remover foto\\\">×</button>' : '<div class=\\\"est\\\">' + (f.erro ? '⚠️ ' + f.erro : 'enviando ' + (f.pct || 0) + '%') + (f.erro ? '' : '<i style=\\\"width:' + (f.pct || 0) + '%\\\"></i>') + '</div>') + '</div>';\\n    }).join('');\\n    var ok = FOTOS.filter(function (f) { return f.id; }).length;\\n    el('#info').innerHTML = ok ? '✅ <b>' + ok + '</b> foto' + (ok > 1 ? 's' : '') + ' pronta' + (ok > 1 ? 's' : '') + (enviando ? ' · enviando ' + enviando + '…' : '') + (ok < 3 ? ' · mande pelo menos 3' : '') : (enviando ? 'Enviando…' : 'Nenhuma foto ainda.');\\n  }\\n  el('#grade').addEventListener('click', function (e) { var b = e.target.closest('.tira'); if (!b) return; FOTOS.splice(Number(b.dataset.i), 1); desenha(); });\\n  // a foto vai em JPEG de até 2048 px (o logo em PNG de até 800 px, para manter o fundo transparente): sobe rápido e\\n  // ocupa pouco no Redis; se o navegador não abrir o arquivo, vai o original\\n  function encolhe(arq, logo, pronto) {\\n    var img = new Image(), u = URL.createObjectURL(arq), lado = logo ? 800 : 2048;\\n    img.onload = function () {\\n      var r = Math.min(1, lado / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');\\n      c.width = Math.round(img.naturalWidth * r); c.height = Math.round(img.naturalHeight * r);\\n      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(u);\\n      c.toBlob(function (b) { pronto(b || arq, b ? (logo ? '.png' : '.jpg') : ''); }, logo ? 'image/png' : 'image/jpeg', 0.88);\\n    };\\n    img.onerror = function () { URL.revokeObjectURL(u); pronto(arq, ''); };\\n    img.src = u;\\n  }\\n  function envia(arq, aoTerminar, aoProgresso, logo) {\\n    encolhe(arq, !!logo, function (arquivo, ext) {\\n      var nome = ext ? String(arq.name || 'foto').replace(/\\\\.[^.]+$/, '') + ext : (arq.name || 'foto.jpg');\\n      var fd = new FormData(); fd.append('arquivo', arquivo, nome);\\n      var x = new XMLHttpRequest(); x.open('POST', 'anuncio-video-ss-foto');  // o n8n guarda a foto (Redis, 30 dias) e devolve o código\\n      x.upload.onprogress = function (e) { if (e.lengthComputable && aoProgresso) aoProgresso(Math.round(e.loaded / e.total * 100)); };\\n      x.onload = function () { var r = {}; try { r = JSON.parse(x.responseText); } catch (e) {} aoTerminar(x.status === 200 && r.ok ? null : (r.erro || 'não deu para enviar'), r); };\\n      x.onerror = function () { aoTerminar('falha de conexão'); };\\n      x.send(fd);\\n    });\\n  }\\n  function fila(arqs) {\\n    var lista = Array.prototype.slice.call(arqs, 0, Math.max(0, 15 - FOTOS.length));\\n    if (arqs.length > lista.length) el('#erro').textContent = 'Máximo de 15 fotos.';\\n    (function proxima(i) {\\n      if (i >= lista.length) return;\\n      var f = { url: URL.createObjectURL(lista[i]), pct: 0 }; FOTOS.push(f); enviando++; desenha();\\n      envia(lista[i], function (erro, r) { enviando--; if (erro) f.erro = erro; else f.id = r.id; desenha(); proxima(i + 1); }, function (p) { f.pct = p; desenha(); });\\n    })(0);\\n  }\\n  var drop = el('#drop'), inp = el('#arquivos');\\n  drop.addEventListener('click', function () { inp.click(); });\\n  ['dragover', 'dragenter'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('on'); }); });\\n  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });\\n  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files.length) fila(e.dataTransfer.files); });\\n  inp.addEventListener('change', function () { if (inp.files.length) fila(inp.files); inp.value = ''; });\\n  el('#logo-bt').addEventListener('click', function () { el('#logo-arq').click(); });\\n  el('#logo-arq').addEventListener('change', function () {\\n    var a = el('#logo-arq').files[0]; if (!a) return;\\n    el('#logo-info').textContent = 'enviando…';\\n    envia(a, function (erro, r) {\\n      if (erro) { el('#logo-info').textContent = '⚠️ ' + erro; return; }\\n      LOGO = r.id; el('#logo-img').src = URL.createObjectURL(a); el('#logo-img').hidden = false; el('#logo-tira').hidden = false;\\n      el('#logo-info').textContent = '✅ pronto';\\n    }, null, true);\\n  });\\n  el('#logo-tira').addEventListener('click', function () { LOGO = ''; el('#logo-img').hidden = true; el('#logo-tira').hidden = true; el('#logo-info').textContent = ''; });\\n  function exemplo(k) {\\n    var e = EX[k];\\n    FOTOS = e.fotos.map(function (n) { return { id: 'exemplo-' + e.pasta + '-' + n, url: EXURL[e.pasta][n - 1] }; });\\n    Object.keys(e.campos).forEach(function (c) { el('#' + c).value = e.campos[c]; });\\n    el('#erro').textContent = ''; desenha();\\n  }\\n  el('#ex-ap').addEventListener('click', function () { exemplo('ap'); });\\n  el('#ex-hb').addEventListener('click', function () { exemplo('hb'); });\\n  el('#form').addEventListener('submit', function (e) {\\n    e.preventDefault(); el('#erro').textContent = '';\\n    if (enviando) { el('#erro').textContent = 'Espere as fotos terminarem de enviar.'; return; }\\n    var ids = FOTOS.filter(function (f) { return f.id; }).map(function (f) { return f.id; });\\n    if (ids.length < 3) { el('#erro').textContent = 'Mande pelo menos 3 fotos (ou use um exemplo).'; return; }\\n    var d = { fotos: ids, logo: LOGO };\\n    ['tipo', 'marca', 'titulo', 'preco', 'oferta', 'detalhes', 'publico', 'whatsapp', 'instagram', 'site', 'endereco', 'duracao', 'formato', 'voz', 'clima'].forEach(function (c) { d[c] = el('#' + c).value; });\\n    ['legendas', 'versao_musica', 'cartao_final', 'manter_ordem'].forEach(function (c) { d[c] = el('#' + c).checked; });\\n    if (!el('#cor-ia').checked) d.cor = el('#cor').value;\\n    var bt = el('#enviar'); bt.disabled = true; bt.textContent = 'Começando…';\\n    fetch('anuncio-video-ss', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {\\n      if (!r.ok) { el('#erro').textContent = (r.erros || ['Não deu para começar.']).join(' '); bt.disabled = false; bt.textContent = '🎬 Criar o vídeo do anúncio'; return; }\\n      location.href = r.link;\\n    }).catch(function () { el('#erro').textContent = 'Falha de conexão.'; bt.disabled = false; bt.textContent = '🎬 Criar o vídeo do anúncio'; });\\n  });\\n  desenha();\\n})();\\n</script></body></html>\\n\";\nreturn [{ json: { html: PAGINA } }];\n"
+   },
+   "name": "🧾 Monta a página do formulário",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    192
+   ],
+   "id": "4ee37165-8e98-4d94-8429-b33fae581b63"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    192
+   ],
+   "id": "0f768ada-e236-4687-b2db-bcdf528085b2"
+  },
+  {
+   "parameters": {
+    "path": "anuncio-video-ss-ver",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página de andamento (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    768,
+    192
+   ],
+   "id": "ceff7972-b1c3-4dab-a2f9-f837970024e3",
+   "webhookId": "f21ac78e-ae6a-4e31-a0ba-caff072651d2"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Seu anúncio com IA</title><meta name=\"robots\" content=\"noindex\">\n<style>\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:960px;margin:0 auto}h1{font-size:26px}.sub{color:var(--tx2);margin-top:4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:18px 20px;margin-top:16px}.card h2{font-size:16.5px;margin-bottom:8px}\nol.etapas{list-style:none;display:grid;gap:6px}\nol.etapas li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--mu);font-weight:600}\nol.etapas li.feita{color:var(--tx)}ol.etapas li.feita .ic::after{content:\" ✓\";color:var(--ok)}\nol.etapas li.agora{background:var(--cod);color:var(--tx)}ol.etapas li.agora .ic{animation:pulso 1s infinite alternate}\n@keyframes pulso{from{opacity:.4}to{opacity:1}}\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:8px}.barra i{display:block;height:100%;background:var(--pri);transition:width .5s}\n.res{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:18px;align-items:start}@media(max-width:720px){.res{grid-template-columns:1fr}}\nvideo{width:100%;max-height:72vh;border-radius:14px;background:#000;display:block}\n.bts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}\n.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:9px 14px;border-radius:11px;text-decoration:none;cursor:pointer}\n.btn.pri{background:var(--pri);color:#fff;border-color:transparent}.btn.wa{background:#1fa855;color:#fff;border-color:transparent}\ntable{width:100%;border-collapse:collapse;font-size:13.5px}td,th{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda);vertical-align:top}\n.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--cod);margin:2px 2px 0 0}\n.erro{color:var(--er);font-weight:600}\npre{white-space:pre-wrap;font:inherit;background:var(--cod);border-radius:10px;padding:10px 12px;margin-top:6px}\n.pg{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.pg img{width:120px;height:120px;border-radius:10px;background:#fff;padding:6px}\n.num{font-size:28px;font-weight:800}\nul.lista{margin:6px 0 0 18px}ul.lista li{margin-top:3px}\n</style></head><body><div class=\"w\">\n<h1>🎬 Seu anúncio com IA</h1><p class=\"sub\" id=\"sub\">Carregando…</p>\n<div class=\"card\" id=\"andamento\"><h2>Andamento</h2><ol class=\"etapas\" id=\"etapas\"></ol><div class=\"barra\"><i id=\"barra\" style=\"width:3%\"></i></div><p class=\"sub\" id=\"detalhe\"></p></div>\n<div id=\"resultado\"></div>\n</div>\n<script>\n(function () {\n  var JOB = new URLSearchParams(location.search).get('job');\n  var el = function (s) { return document.querySelector(s); };\n  var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;'); };\n  var ETAPAS = [['recebido', '📥', 'Pedido recebido'], ['fotos', '👀', 'IA olhando as fotos'], ['estrategia', '🧭', 'Estrategista pensando no anúncio'], ['roteiro', '✍️', 'Roteirista escrevendo'],\n    ['revisao', '🔍', 'Revisora conferindo os fatos'], ['direcao', '🎬', 'Diretor escolhendo movimentos e trilha'], ['narrando', '🎙️', 'Narrando'], ['montando', '🎞️', 'Montando o vídeo'], ['pronto', '✅', 'Pronto!']];\n  var FORMATO = { vertical: 'Em pé 9:16', quadrado: 'Quadrado 1:1', deitado: 'Deitado 16:9' };\n  var mostrouFinal = false;\n  function bloco(titulo, id, texto) { return texto ? '<b style=\"display:block;margin-top:10px\">' + titulo + '</b><pre id=\"' + id + '\">' + esc(texto) + '</pre><div class=\"bts\" style=\"margin-top:6px\"><button class=\"btn\" data-copiar=\"#' + id + '\">📋 Copiar</button></div>' : ''; }\n  function desenha(s) {\n    var i = ETAPAS.findIndex(function (e) { return e[0] === s.etapa; });\n    el('#etapas').innerHTML = ETAPAS.map(function (e, k) { return '<li class=\"' + (k < i || s.etapa === 'pronto' ? 'feita' : k === i ? 'agora' : '') + '\"><span class=\"ic\">' + e[1] + '</span>' + e[2] + '</li>'; }).join('');\n    var pct = s.etapa === 'pronto' ? 100 : s.etapa === 'montando' ? 60 + (s.progresso || 0) * 0.4 : Math.max(3, i / 8 * 60);\n    el('#barra').style.width = pct + '%';\n    el('#detalhe').textContent = s.detalhe || '';\n    if (s.op) el('#sub').textContent = (s.dados ? s.dados.titulo + ' · ' : '') + FORMATO[s.op.formato] + ' · ' + s.op.duracao + ' s · voz ' + s.op.voz.split('-')[2].replace(/Multilingual|Neural/g, '');\n    if (s.etapa === 'erro') { el('#andamento').insertAdjacentHTML('beforeend', '<p class=\"erro\">⚠️ ' + esc(s.erro || 'Algo deu errado.') + '</p><p class=\"bts\"><a class=\"btn pri\" href=\"anuncio-video-ss\">Tentar de novo</a></p>'); return true; }\n    if (s.etapa === 'pronto' && !mostrouFinal) {\n      mostrouFinal = true;\n      var r = s.redes || {}, e = s.estrategia || {}, rv = s.revisao || {};\n      var qr = s.pagina ? 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&data=' + encodeURIComponent(s.pagina) : '';\n      var zap = s.pagina ? 'https://wa.me/?text=' + encodeURIComponent((r.status_whatsapp || s.dados.titulo) + ' ' + s.pagina) : '';\n      el('#resultado').innerHTML = '<div class=\"card\"><h2>🎉 Anúncio pronto · ' + Math.round(s.duracao || 0) + ' s · ' + esc(s.tamanho_mb) + ' MB</h2><div class=\"res\"><video controls playsinline poster=\"' + esc(s.capa) + '\" src=\"' + esc(s.video) + '\"></video><div>'\n        + '<div class=\"bts\" style=\"margin-top:0\"><a class=\"btn pri\" href=\"' + esc(s.video) + '\" download=\"anuncio-' + JOB + '.mp4\">⬇️ Baixar vídeo narrado</a>' + (s.video_musica ? '<a class=\"btn\" href=\"' + esc(s.video_musica) + '\" download=\"anuncio-' + JOB + '-musica.mp4\">🎵 Baixar só com música</a>' : '') + '<a class=\"btn\" href=\"' + esc(s.capa) + '\" download>🖼️ Capa</a><a class=\"btn\" href=\"anuncio-video-ss\">🎬 Fazer outro</a></div>'\n        + (s.video_musica ? '<p class=\"sub\" style=\"margin-top:6px\">A versão só com música é para Stories e lugares sem som.</p>' : '')\n        + (s.pagina ? '<div class=\"card\" style=\"margin-top:14px\"><h2>📄 Página do anúncio (fica no ar 30 dias)</h2><div class=\"pg\"><img src=\"' + esc(qr) + '\" alt=\"QR Code da página\"><div><a class=\"btn pri\" href=\"' + esc(s.pagina) + '\" target=\"_blank\" rel=\"noopener\">Abrir a página</a>'\n          + '<div class=\"bts\"><button class=\"btn\" data-texto=\"' + esc(s.pagina) + '\">📋 Copiar link</button><a class=\"btn wa\" href=\"' + esc(zap) + '\" target=\"_blank\" rel=\"noopener\">💬 Mandar no WhatsApp</a></div><p class=\"sub\" style=\"margin-top:8px\">👀 Visitas: <b>' + (s.visitas || 0) + '</b> (volte aqui para ver)</p></div></div></div>' : '')\n        + '<p class=\"sub\" style=\"margin-top:10px\">Os vídeos ficam guardados no Shotstack. Feito em ' + Math.round((s.segundos || 0) / 60 * 10) / 10 + ' min.</p></div></div></div>'\n        + '<div class=\"card\"><h2>📣 Para postar (gerado pela IA)</h2>' + bloco('Legenda do Reels / TikTok', 'leg', (r.legenda || '') + (r.hashtags && r.hashtags.length ? '\\n\\n' + r.hashtags.map(function (h) { return '#' + h; }).join(' ') : ''))\n        + bloco('Título para YouTube Shorts', 'tit', r.titulo_shorts) + bloco('Status do WhatsApp', 'sta', r.status_whatsapp) + bloco(s.dados && /imóvel|carro/.test(s.dados.tipo) ? 'Anúncio para portais (OLX, ZAP, Webmotors)' : 'Anúncio para marketplace', 'por', r.texto_portal) + '</div>'\n        + '<div class=\"card\"><h2>🧭 A estratégia da IA</h2><p><b>Público:</b> ' + esc(e.publico) + '</p><p style=\"margin-top:4px\"><b>Ângulo:</b> ' + esc(e.angulo) + '</p><p style=\"margin-top:4px\"><b>Gancho:</b> ' + esc(e.gancho) + '</p>'\n        + (e.beneficios && e.beneficios.length ? '<ul class=\"lista\">' + e.beneficios.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>' : '') + (e.objecao ? '<p style=\"margin-top:6px\"><b>Dúvida que o vídeo responde:</b> ' + esc(e.objecao) + '</p>' : '')\n        + '<p class=\"sub\" style=\"margin-top:8px\">Trilha: <span class=\"chip\">' + esc(s.clima) + '</span> Cor: <span class=\"chip\" style=\"background:' + esc(s.cor) + ';color:#fff\">' + esc(s.cor) + '</span></p></div>'\n        + '<div class=\"card\"><h2>🔍 Revisão de fidelidade</h2><b>No roteiro do vídeo</b>' + (rv.problemas && rv.problemas.length ? '<p>A revisora ajustou <b>' + (rv.trocas || 0) + '</b> trecho(s):</p><ul class=\"lista\">' + rv.problemas.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' : '<p>' + (rv.revisou ? '✅ Nada inventado: o roteiro bate com os seus dados.' : 'A revisão não respondeu desta vez; confira o roteiro abaixo.') + '</p>')\n        + '<b style=\"display:block;margin-top:10px\">Nos textos para postar</b>' + (rv.problemas_textos && rv.problemas_textos.length ? '<ul class=\"lista\">' + rv.problemas_textos.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' : '<p>' + (rv.textos_revisados ? '✅ Textos conferidos com os seus dados.' : 'A revisão dos textos não respondeu desta vez; confira antes de postar.') + '</p>') + '</div>'\n        + '<div class=\"card\"><h2>📝 Roteiro e edição</h2><table><tr><th>#</th><th>Foto</th><th>Narração</th><th>Na tela</th><th>Edição</th></tr>' + (s.roteiro || []).map(function (c) { return '<tr><td>' + c.n + '</td><td>' + (Number(c.foto) + 1) + '</td><td>' + esc(c.texto) + '</td><td>' + esc(c.texto_tela) + '</td><td><span class=\"chip\">' + esc(c.movimento) + '</span><span class=\"chip\">' + esc(c.transicao) + '</span>' + (c.selo_preco ? '<span class=\"chip\">💲 preço</span>' : '') + '</td></tr>'; }).join('') + '</table></div>';\n      return true;\n    }\n    return false;\n  }\n  function busca() {\n    fetch('anuncio-video-ss-status?job=' + encodeURIComponent(JOB || '')).then(function (r) { return r.json(); }).then(function (s) {\n      if (!s.etapa) { el('#sub').textContent = 'Trabalho não encontrado (o link vale 3 dias).'; return; }\n      if (!desenha(s)) setTimeout(busca, 3000);\n    }).catch(function () { setTimeout(busca, 5000); });\n  }\n  document.addEventListener('click', function (e) {\n    var b = e.target.closest('[data-copiar],[data-texto]'); if (!b) return;\n    navigator.clipboard.writeText(b.dataset.texto || el(b.dataset.copiar).textContent).then(function () { b.textContent = '✅ Copiado'; });\n  });\n  busca();\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega o andamento",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1008,
+    192
+   ],
+   "id": "135ebe70-4b12-492d-acb7-89ce3a66095b"
+  },
+  {
+   "parameters": {
+    "path": "anuncio-video-ss-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Consulta status (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    416
+   ],
+   "id": "2fce791e-a340-44a9-a59f-4800f06f37ca",
+   "webhookId": "1e0548d4-9baa-4f40-ad86-1603e73dd45d"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=anv:{{ String($json.query.job || '').replace(/[^a-z0-9]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o status",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    416
+   ],
+   "id": "0245a599-be24-45d1-bed6-80bb3318a603",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// O status traz o código da página do anúncio; com ele dá para ler quantas visitas a página teve.\nlet s = {};\ntry { s = JSON.parse($input.first().json.status || '{}'); } catch (e) {}\nreturn [{ json: { s, chave: '<SEGREDO_REMOVIDO>' + String(s.anuncio || 'nenhum').replace(/[^a-z0-9-]/g, '') + ':visitas' } }];"
+   },
+   "name": "🧩 Separa o anúncio do status",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    416
+   ],
+   "id": "117fc7d1-3a40-41ed-9c3a-94faea66d3cd"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "visitas",
+    "key": "={{ $json.chave }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê as visitas",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    720,
+    416
+   ],
+   "id": "b0ea3e62-5c24-4311-9819-4c5dc46aaaae",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify(Object.assign({}, $('🧩 Separa o anúncio do status').first().json.s, { visitas: Number($json.visitas) || 0 })) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde o status",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    416
+   ],
+   "id": "6a63ca90-4dc4-46b4-a11c-c570eefd74f4"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "anuncio-video-ss",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Pedido do anúncio (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    864
+   ],
+   "id": "1beaf5cd-40d3-4af5-9482-fffb780649e0",
+   "webhookId": "c3ae1f1b-4bd9-439f-8e53-0ffb13a5ef64"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere o pedido: fotos, textos e escolhas. Cria o código do trabalho (job) e o da página pública do anúncio.\nlet b = $('🔔 Pedido do anúncio (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst crypto = require('crypto');\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u0008\\u000b-\\u001f\\u007f<>{}\\\\]/g, ' ').replace(/[ \\t]+/g, ' ').trim().slice(0, max);\nconst TIPOS = { imovel: 'imóvel', produto: 'produto', comida: 'restaurante / comida', veiculo: 'carro ou moto', servico: 'serviço', evento: 'evento', outro: 'outro' };\nconst CLIMAS = ['auto', 'elegante', 'animado', 'urgente', 'emocional', 'calmo', 'tropical', 'latino', 'chill'];\nconst DURACOES = { 15: { cenas: '3 a 4', palavras: 23 }, 30: { cenas: '5 a 7', palavras: 56 }, 60: { cenas: '8 a 12', palavras: 118 } };\nconst FORMATOS = ['vertical', 'quadrado', 'deitado'];\nconst VOZES = ['pt-BR-ThalitaMultilingualNeural', 'pt-BR-FranciscaNeural', 'en-US-AndrewMultilingualNeural', 'en-US-BrianMultilingualNeural'];\nconst ID_FOTO = /^([a-f0-9]{12}\\.(jpg|png|webp)|exemplo-[a-z0-9]{3,30}-\\d{1,2})$/;\n// todas as fotos passam pelo endereço do próprio n8n (webhook anuncio-video-ss-arquivo): as enviadas pela página\n// ficam no Redis e as de exemplo o n8n busca no catbox.moe (o wsrv.nl nem sempre alcança o catbox)\nconst fotos = [...new Set((Array.isArray(b.fotos) ? b.fotos : []).map(String).filter(f => ID_FOTO.test(f)))].slice(0, 15);\nconst logoId = /^[a-f0-9]{12}\\.(jpg|png|webp)$/.test(String(b.logo || '')) ? String(b.logo) : '';\nconst tipo = TIPOS[b.tipo] ? b.tipo : 'produto';\nconst dados = {\n  tipo, tipo_txt: TIPOS[tipo], marca: limpa(b.marca, 50), titulo: limpa(b.titulo, 90), preco: limpa(b.preco, 40),\n  detalhes: limpa(b.detalhes, 1500), oferta: limpa(b.oferta, 200), publico: limpa(b.publico, 200),\n  whatsapp: String(b.whatsapp || '').replace(/\\D/g, '').slice(0, 15),\n  instagram: limpa(b.instagram, 40).replace(/^@/, '').replace(/[^a-zA-Z0-9._]/g, ''),\n  site: limpa(b.site, 120).replace(/\\s/g, ''), endereco: limpa(b.endereco, 160),\n};\nconst erros = [];\nif (fotos.length < 3) erros.push('Envie pelo menos 3 fotos (ou use um dos exemplos).');\nif (dados.titulo.length < 3) erros.push('Diga o que você está anunciando.');\nif (dados.detalhes.length < 10) erros.push('Conte os detalhes e os diferenciais (pelo menos uma frase).');\nif (dados.whatsapp && dados.whatsapp.length < 10) erros.push('O WhatsApp precisa ter DDD.');\nif (dados.whatsapp.length >= 10 && dados.whatsapp.length <= 11) dados.whatsapp = '55' + dados.whatsapp;\nconst op = {\n  clima: CLIMAS.includes(b.clima) ? b.clima : 'auto', duracao: DURACOES[b.duracao] ? Number(b.duracao) : 30,\n  formato: FORMATOS.includes(b.formato) ? b.formato : 'vertical', voz: VOZES.includes(b.voz) ? b.voz : VOZES[0],\n  cor: /^#[0-9a-fA-F]{6}$/.test(b.cor || '') ? String(b.cor).toUpperCase() : '',\n  legendas: b.legendas !== false, versao_musica: b.versao_musica !== false, cartao_final: b.cartao_final !== false, manter_ordem: b.manter_ordem === true,\n};\nconst job = 'a' + Date.now().toString(36) + crypto.randomBytes(2).toString('hex');\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 32);\nconst anuncio = (slug(dados.titulo) || 'anuncio') + '-' + crypto.randomBytes(2).toString('hex');\nconst base0 = String($('🔔 Pedido do anúncio (POST)').first().json.webhookUrl || '').split('/webhook/')[0];\nconst base = base0;\nconst arquivo = `${base}/webhook/anuncio-video-ss-arquivo?id=`;\nconst paraUrl = f => arquivo + f;\nreturn [{ json: {\n  valido: erros.length === 0, erros, job, anuncio, fotos: fotos.map(paraUrl), logo: logoId ? paraUrl(logoId) : '', arquivo, dados, op, alvo: DURACOES[op.duracao], criado_em: Date.now(),\n  link: `${base}/webhook/anuncio-video-ss-ver?job=${job}`, pagina: `${base}/webhook/anuncio-ss/${anuncio}/anuncio-shotstack`,\n  chave_limite: '<SEGREDO_REMOVIDO>' + new Date().toISOString().slice(0, 13),\n} }];"
+   },
+   "name": "🧩 Confere o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    336,
+    864
+   ],
+   "id": "13c64f66-22ee-4c82-8224-214d1580d1b0"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "={{ $json.chave_limite }}",
+    "expire": true,
+    "ttl": 3600
+   },
+   "name": "🧮 Conta pedidos da hora",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    672,
+    864
+   ],
+   "id": "fa03791d-c9c8-4a39-9d11-abfc4e3acd25",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "c97a4345-2dce-454d-9b79-c02522bac69a",
+       "leftValue": "={{ $('🧩 Confere o pedido').first().json.valido && Number(Object.values($json)[0]) <= 30 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Pode começar?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    992,
+    864
+   ],
+   "id": "7915f6e6-b5dc-4dbf-a3e1-e74f9e227ef9"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erros: $('🧩 Confere o pedido').first().json.valido ? ['Muitos anúncios nesta hora. Tente daqui a pouco.'] : $('🧩 Confere o pedido').first().json.erros }) }}",
+    "options": {
+     "responseCode": 400,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Recusa o pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    992,
+    1072
+   ],
+   "id": "49b5f0e2-a67e-4b80-9db8-d1bb1419a521"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'recebido', detalhe: 'Pedido conferido: ' + $('🧩 Confere o pedido').first().json.fotos.length + ' fotos', op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: recebido",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1328,
+    864
+   ],
+   "id": "eee61e0f-ee5d-497d-8648-e90fd7d639fb",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, link: $('🧩 Confere o pedido').first().json.link }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde com o link",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1664,
+    864
+   ],
+   "id": "68e0067f-c765-4266-9711-e4c70bdf3817"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'fotos', detalhe: 'Mostrando ' + $('🧩 Confere o pedido').first().json.fotos.length + ' fotos para a IA', op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: olhando as fotos",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1664,
+    1504
+   ],
+   "id": "df3a201a-2935-4684-b93e-62ad80bcf544",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta o pedido para a IA com visão: cada foto vai como miniatura de 512 px (feita pelo wsrv.nl), com o tamanho e a orientação.\nconst v = $('🧩 Confere o pedido').first().json;\nconst medidas = $('🌐 Mede a foto (wsrv.nl)').all();\nconst fotos = [];\nfor (let i = 0; i < v.fotos.length; i++) {\n  const m = (medidas[i] && medidas[i].json) || {};\n  const w = Number(m.width) || 0, h = Number(m.height) || 0;\n  let b64 = '';\n  try { b64 = (await this.helpers.getBinaryDataBuffer(i, 'data')).toString('base64'); } catch (e) {}\n  fotos.push({ i, id: v.fotos[i], largura: w, altura: h, orientacao: !w || !h ? 'quadrada' : h > w * 1.1 ? 'vertical' : w > h * 1.1 ? 'deitada' : 'quadrada', b64 });\n}\nif (!fotos.some(f => f.b64)) throw new Error('Não consegui abrir as fotos (o wsrv.nl não respondeu ou o endereço da foto não abre).');\nconst conteudo = [{ type: 'text', text: `Você vai ver ${fotos.length} fotos de um anúncio de ${v.dados.tipo_txt}: \"${v.dados.titulo}\". Analise CADA foto, na ordem (foto 0, 1, 2...).\nPara cada foto devolva:\n- i: o número da foto\n- descricao: o que aparece, em 1 frase objetiva\n- ambiente: ex. fachada, sala, cozinha, quarto, banheiro, varanda, área comum, produto inteiro, detalhe do produto, pessoa usando, prato, bebida, salão, carro por fora, interior do carro\n- destaque: o detalhe mais atraente para vender o que aparece\n- foco: {x, y} = o ponto de interesse principal (0 a 1; x da esquerda para a direita, y de cima para baixo)\n- qualidade: 1 a 5 (nitidez, luz, enquadramento)\n- problemas: escura, tremida, torta, cortada, com placa/documento/rosto de terceiro, marca d'água, ou \"nenhum\"\n- uso: abertura, meio, final ou descartar\nNão invente o que não aparece.\nRETORNE SOMENTE JSON: {\"fotos\":[{\"i\":0,\"descricao\":\"\",\"ambiente\":\"\",\"destaque\":\"\",\"foco\":{\"x\":0.5,\"y\":0.5},\"qualidade\":4,\"problemas\":\"nenhum\",\"uso\":\"meio\"}]}` }];\nfor (const f of fotos) {\n  conteudo.push({ type: 'text', text: `FOTO ${f.i} (${f.orientacao}${f.largura ? `, ${f.largura}x${f.altura}` : ''})` + (f.b64 ? '' : ' — não abriu, descreva como \"foto indisponível\"') });\n  if (f.b64) conteudo.push({ type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + f.b64 } });\n}\nreturn [{ json: { fotos: fotos.map(({ b64, ...f }) => f),\n  corpo: JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 3500, temperature: 0.2, messages: [{ role: 'user', content: conteudo }] }) } }];\n"
+   },
+   "name": "🧩 Prepara as fotos para a IA",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    992,
+    1504
+   ],
+   "id": "8dc6de0c-e490-4152-a92e-4d950036e045",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}",
+    "options": {
+     "timeout": 180000
+    }
+   },
+   "name": "👀 IA olha as fotos",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    672,
+    1504
+   ],
+   "id": "04831bdf-6488-4501-9658-0926b17a3638",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Lê o que a IA viu em cada foto. Se a visão falhar, segue com o básico (o centro da foto como ponto de interesse).\nconst prep = $('🧩 Prepara as fotos para a IA').first().json;\nconst v = $('🧩 Confere o pedido').first().json;\nlet lidas = [];\ntry {\n  const r = $('👀 IA olha as fotos').first().json;\n  const j = parseJSON(r.choices ? r.choices[0].message.content : '');\n  lidas = j && Array.isArray(j.fotos) ? j.fotos : [];\n} catch (e) {}\nconst num = (x, d) => { const n = Number(x); return Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : d; };\nconst fotos = (prep.fotos || []).map(f => {\n  const l = lidas.find(x => Number(x.i) === f.i) || {};\n  const medidos = [];  // sem medir brilho/nitidez: a IA com visão avisa foto escura ou tremida em \"problemas\"\n  return {\n    i: f.i, id: f.id, orientacao: f.orientacao, largura: f.largura, altura: f.altura,\n    descricao: String(l.descricao || 'foto ' + (f.i + 1)).slice(0, 220), ambiente: String(l.ambiente || '').slice(0, 40),\n    destaque: String(l.destaque || '').slice(0, 160), foco: { x: num(l.foco && l.foco.x, 0.5), y: num(l.foco && l.foco.y, 0.5) },\n    qualidade: Math.min(5, Math.max(1, Math.round(Number(l.qualidade) || 3))),\n    problemas: [String(l.problemas || '').replace(/^nenhum\\.?$/i, '')].concat(medidos).filter(Boolean).join(', '),\n    uso: ['abertura', 'meio', 'final', 'descartar'].includes(l.uso) ? l.uso : 'meio',\n  };\n});\nconst linha = f => `FOTO ${f.i} | ${f.orientacao} | ${f.ambiente || '-'} | ${f.descricao} | destaque: ${f.destaque || '-'} | qualidade ${f.qualidade}/5${f.problemas ? ' | problemas: ' + f.problemas : ''} | uso sugerido: ${f.uso}`;\nconst texto = fotos.map(linha).join('\\n');\nconst d = v.dados;\nconst texto_estrategista = `TIPO: ${d.tipo_txt}\nO QUE ESTÁ ANUNCIANDO: ${d.titulo}\nMARCA / NEGÓCIO: ${d.marca || '-'}\nPREÇO: ${d.preco || 'não informado'}\nOFERTA / CONDIÇÃO: ${d.oferta || 'nenhuma'}\nPÚBLICO (segundo o dono): ${d.publico || 'não informado'}\nENDEREÇO / REGIÃO: ${d.endereco || 'não informado'}\nDETALHES DO DONO:\n${d.detalhes}\n\nVÍDEO: ${v.op.duracao} s · formato ${v.op.formato} · clima pedido: ${v.op.clima}${v.op.manter_ordem ? ' · o dono quer as fotos NA ORDEM em que enviou' : ''}\n\nFOTOS (o que a IA com visão viu):\n${texto}`;\nreturn [{ json: { fotos, texto, viu: lidas.length > 0, texto_estrategista } }];"
+   },
+   "name": "🧩 Lê o que a IA viu",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    336,
+    1504
+   ],
+   "id": "88b49d82-b418-498e-b359-63fea34cc5dd"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'estrategia', detalhe: ($('🧩 Lê o que a IA viu').first().json.viu ? 'A IA descreveu ' + $('🧩 Lê o que a IA viu').first().json.fotos.length + ' fotos' : 'A visão não respondeu: seguindo com o básico'), op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: estratégia",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    1504
+   ],
+   "id": "b99d5e25-fc64-4f15-aa7b-ce5314660906",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('🧩 Lê o que a IA viu').first().json.texto_estrategista }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é ESTRATEGISTA DE ANÚNCIOS EM VÍDEO (Reels, TikTok, Status do WhatsApp) para pequenos negócios brasileiros. Recebe o que está sendo anunciado, os dados do dono e a descrição de cada foto. Monte a estratégia do vídeo.\n\nREGRAS\n- FIEL: use SÓ o que o dono informou e o que aparece nas fotos. Nunca invente preço, metragem, quantidade, prazo, garantia, desconto ou característica.\n- Sem promessas proibidas ou exageradas: nada de \"valorização garantida\", \"o melhor do mundo\", \"100% seguro\", \"cura\".\n- publico: quem compra isso (1 frase). angulo: a ideia central que vende (desejo ou dor), 1 frase.\n- gancho: a primeira frase do vídeo (até 12 palavras), pergunta ou afirmação que faça a pessoa parar de rolar a tela.\n- beneficios: 3 benefícios concretos tirados dos detalhes e das fotos. prova: algo dos dados que dá confiança (ou vazio).\n- objecao: a dúvida mais comum de quem vê o anúncio e como o vídeo responde.\n- cta: chamada final curta (ex.: \"Chame no WhatsApp\", \"Agende sua visita\", \"Peça agora\").\n- tom: como falar (ex.: elegante e acolhedor; animado e direto).\n- clima: UM entre elegante, animado, urgente, emocional, calmo, tropical, latino, chill.\n- cor: cor de destaque em hex que combine com o produto e as fotos.\n- titulo_abertura: até 28 caracteres para o começo do vídeo (sem emoji).\n- ordem_fotos: números das fotos na melhor ordem de história (abertura forte, detalhes, final que vende). Pode deixar de fora foto ruim ou repetida.\n- destaques_pagina: 4 a 6 tópicos curtos (até 60 caracteres) para a página do anúncio, só com fatos do dono.\nPortuguês do Brasil com todos os acentos.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"publico\":\"\",\"angulo\":\"\",\"gancho\":\"\",\"beneficios\":[\"\",\"\",\"\"],\"prova\":\"\",\"objecao\":\"\",\"cta\":\"\",\"tom\":\"\",\"clima\":\"\",\"cor\":\"#000000\",\"titulo_abertura\":\"\",\"ordem_fotos\":[0,1,2],\"destaques_pagina\":[\"\"]}"
+    }
+   },
+   "name": "🤖 Estrategista de anúncio",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    0,
+    1984
+   ],
+   "id": "8ab82019-47f0-4136-99f4-6876746f2860",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 3000,
+     "temperature": 0.6,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro da estrategista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    0,
+    2208
+   ],
+   "id": "9a21fcf6-0b3d-4ab8-9c07-1c138aec87ae",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 3000,
+     "temperature": 0.6,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro da estrategista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    0,
+    2384
+   ],
+   "id": "b80f6f2a-0116-40f1-98ad-53e2f42deae8",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Lê a estratégia e já prepara o pedido da roteirista. Se a IA falhar, usa uma estratégia simples (fotos pela qualidade).\nconst v = $('🧩 Confere o pedido').first().json;\nconst vis = $('🧩 Lê o que a IA viu').first().json;\nlet e = null;\ntry { e = parseJSON($('🤖 Estrategista de anúncio').first().json.output); } catch (x) {}\ne = e || {};\nconst n = vis.fotos.length;\nconst limpa = (s, m) => String(s || '').replace(/[<>{}\\\\]/g, '').replace(/\\s+/g, ' ').trim().slice(0, m);\nconst validas = (Array.isArray(e.ordem_fotos) ? e.ordem_fotos : []).map(Number).filter((i, k, a) => Number.isInteger(i) && i >= 0 && i < n && a.indexOf(i) === k);\nconst porQualidade = vis.fotos.filter(f => f.uso !== 'descartar').sort((a, b) => (b.uso === 'abertura') - (a.uso === 'abertura') || b.qualidade - a.qualidade || a.i - b.i).map(f => f.i);\nlet ordem = v.op.manter_ordem ? vis.fotos.map(f => f.i) : (validas.length >= Math.min(3, n) ? validas : porQualidade);\nif (ordem.length < Math.min(3, n)) ordem = vis.fotos.map(f => f.i);\nconst CLIMAS = ['elegante', 'animado', 'urgente', 'emocional', 'calmo', 'tropical', 'latino', 'chill'];\nconst est = {\n  ia: !!e.angulo,\n  publico: limpa(e.publico, 200) || v.dados.publico || 'quem procura ' + v.dados.titulo,\n  angulo: limpa(e.angulo, 240), gancho: limpa(e.gancho, 160),\n  beneficios: (Array.isArray(e.beneficios) ? e.beneficios : []).map(b => limpa(b, 140)).filter(Boolean).slice(0, 4),\n  prova: limpa(e.prova, 160), objecao: limpa(e.objecao, 200),\n  cta: limpa(e.cta, 60) || (v.dados.whatsapp ? 'Chame no WhatsApp' : 'Fale com a gente'),\n  tom: limpa(e.tom, 100), clima: CLIMAS.includes(e.clima) ? e.clima : 'animado',\n  cor: /^#[0-9a-fA-F]{6}$/.test(e.cor || '') ? String(e.cor).toUpperCase() : '',\n  titulo_abertura: limpa(e.titulo_abertura, 30),\n  destaques: (Array.isArray(e.destaques_pagina) ? e.destaques_pagina : []).map(b => limpa(b, 90)).filter(Boolean).slice(0, 6),\n  ordem,\n};\nconst d = v.dados;\nconst fatos = { tipo: d.tipo_txt, titulo: d.titulo, marca: d.marca, preco: d.preco || null, oferta: d.oferta || null, detalhes: d.detalhes,\n  endereco: d.endereco || null, contato: [d.whatsapp ? 'WhatsApp' : '', d.instagram ? 'Instagram @' + d.instagram : '', d.site].filter(Boolean).join(', ') || null };\nconst linhas = ordem.map(i => vis.fotos[i]).map(f => `FOTO ${f.i} | ${f.orientacao} | ${f.ambiente || '-'} | ${f.descricao} | destaque: ${f.destaque || '-'}`);\nconst texto_roteirista = `DADOS DO DONO (a ÚNICA fonte de fatos):\n${JSON.stringify(fatos, null, 1)}\n\nESTRATÉGIA:\n${JSON.stringify({ publico: est.publico, angulo: est.angulo, gancho: est.gancho, beneficios: est.beneficios, prova: est.prova, objecao: est.objecao, cta: est.cta, tom: est.tom }, null, 1)}\n\nFOTOS NA ORDEM DA HISTÓRIA (use o número da foto em \"foto\"):\n${linhas.join('\\n')}\n\nALVO: cerca de ${v.alvo.palavras} palavras em ${v.alvo.cenas} cenas (vídeo de ${v.op.duracao} s).${v.op.manter_ordem ? '\\nIMPORTANTE: mantenha as fotos exatamente nessa ordem.' : ''}`;\nreturn [{ json: { ...est, texto_roteirista } }];"
+   },
+   "name": "🧩 Lê a estratégia",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    336,
+    1984
+   ],
+   "id": "ac08560d-9017-4b7e-a67e-3939c1a261b9"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'roteiro', detalhe: ($('🧩 Lê a estratégia').first().json.angulo ? 'Ângulo: ' + $('🧩 Lê a estratégia').first().json.angulo.slice(0, 90) : 'Estratégia simples (a IA não respondeu)'), op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: roteiro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    672,
+    1984
+   ],
+   "id": "49a65e19-d2fd-4754-b8b3-0f6b7cb4a9b1",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('🧩 Lê a estratégia').first().json.texto_roteirista }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é ROTEIRISTA DE ANÚNCIOS EM VÍDEO curtos (Reels, TikTok, Status do WhatsApp). Recebe os dados do dono, a estratégia e as fotos na ordem da história. Escreva a NARRAÇÃO cena por cena. Cada cena mostra UMA foto.\n\nREGRAS\n- 1ª cena = o GANCHO (pode melhorar o da estratégia), para segurar quem está rolando a tela.\n- Cenas do meio: um benefício ou detalhe por cena, ligado ao que a FOTO daquela cena mostra. A fala e o texto_tela de cada cena falam do que aparece NAQUELA foto (foto do milkshake = fala do milkshake).\n- Última cena = chamada para ação com o contato (ex.: \"Chama no WhatsApp e agenda sua visita\"). Se houver oferta, diga a condição exatamente como o dono escreveu.\n- \"foto\" = número da foto que aparece na cena. Siga a ordem dada; pode repetir a melhor foto no final.\n- \"texto\" = fala da cena: 6 a 18 palavras, frase falada e natural, com TODOS os acentos. Sem emojis, sem listas, sem siglas difíceis de falar.\n- \"texto_tela\" = até 24 caracteres escritos na cena (ex.: \"Varanda gourmet\", \"3 suítes\", \"Frete grátis\"). Não repita a fala inteira.\n- Preço: se o dono informou, fale o preço UMA vez, igual ao dele (pode escrever por extenso na fala). Se não informou, não fale de preço.\n- FIEL: nada de inventar característica, número, prazo, garantia ou desconto. Não use \"o melhor\", \"único\", \"imperdível\" sem prova.\n- Total de palavras perto do alvo e quantidade de cenas dentro da faixa pedida. Tom: o da estratégia.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"segmentos\":[{\"foto\":0,\"texto\":\"\",\"texto_tela\":\"\"}],\"cta\":\"\"}"
+    }
+   },
+   "name": "🤖 Roteirista do anúncio",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    992,
+    1984
+   ],
+   "id": "1592734b-d366-40d5-b509-c5fb192fb8a5",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "kr/claude-sonnet-4.5",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 3000,
+     "temperature": 0.8,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro da roteirista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    992,
+    2208
+   ],
+   "id": "8e53fb73-9923-4384-b529-1f9efd6d09bc",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 3000,
+     "temperature": 0.8,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro da roteirista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    992,
+    2384
+   ],
+   "id": "e7601f6d-6294-4907-b98b-566f6ffb12ca",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Confere o roteiro (cada cena com uma foto válida e uma fala curta) e prepara o pedido da revisora. Sem roteiro = erro claro.\nconst v = $('🧩 Confere o pedido').first().json;\nconst est = $('🧩 Lê a estratégia').first().json;\nconst n = $('🧩 Lê o que a IA viu').first().json.fotos.length;\nconst bruto = String($('🤖 Roteirista do anúncio').first().json.output || '');\nlet j = null;\ntry { j = parseJSON(bruto); } catch (e) {}\n// plano B: JSON quebrado? pega cada cena \"foto ... texto ... texto_tela\" pelo padrão\nif (!j || !Array.isArray(j.segmentos)) {\n  const achados = [...bruto.matchAll(/\"foto\"\\s*:\\s*\"?(\\d+)\"?[\\s\\S]*?\"texto\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"(?:[\\s\\S]*?\"texto_tela\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\")?/g)]\n    .map(m => ({ foto: Number(m[1]), texto: m[2].replace(/\\\\\"/g, '\"'), texto_tela: (m[3] || '').replace(/\\\\\"/g, '\"') }));\n  if (achados.length) j = { segmentos: achados };\n}\nconst limpa = s => String(s ?? '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}*#_<>{}\\\\]/gu, '').replace(/\\s+/g, ' ').trim();\nconst segs = (j && Array.isArray(j.segmentos) ? j.segmentos : []).map((s, k) => {\n  const f = Number(s.foto);\n  return { n: k + 1, foto: Number.isInteger(f) && f >= 0 && f < n ? f : est.ordem[k % est.ordem.length],\n    texto: limpa(s.texto).slice(0, 240), texto_tela: limpa(s.texto_tela).slice(0, 32) };\n}).filter(s => s.texto.split(' ').length >= 3).slice(0, 16);\nsegs.forEach((s, k) => { s.n = k + 1; });\nif (segs.length < 2) return [{ json: { ok: false, erro: 'A IA roteirista não devolveu um roteiro válido. Tente de novo.' } }];\nconst d = v.dados;\nconst texto_revisora = `DADOS DO DONO (a ÚNICA fonte de verdade):\n${JSON.stringify({ tipo: d.tipo_txt, titulo: d.titulo, marca: d.marca, preco: d.preco || 'NÃO INFORMADO (não pode aparecer preço)', oferta: d.oferta || 'nenhuma', detalhes: d.detalhes, endereco: d.endereco || null, tem_whatsapp: !!d.whatsapp, instagram: d.instagram || null }, null, 1)}\n\nROTEIRO PARA REVISAR:\n${JSON.stringify(segs.map(s => ({ n: s.n, texto: s.texto, texto_tela: s.texto_tela })), null, 1)}`;\nreturn [{ json: { ok: true, segmentos: segs, palavras: segs.reduce((t, s) => t + s.texto.split(' ').length, 0), texto_revisora } }];"
+   },
+   "name": "🧩 Confere o roteiro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1328,
+    1984
+   ],
+   "id": "fad97e99-d71f-4d75-9b2a-d35b33d5849c"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "778beccb-7b5d-48d8-ab53-169c06718d49",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Roteiro ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1664,
+    1984
+   ],
+   "id": "71427054-3b1a-4a28-8ffc-eadf9055d791"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'revisao', detalhe: $('🧩 Confere o roteiro').first().json.segmentos.length + ' cenas, ' + $('🧩 Confere o roteiro').first().json.palavras + ' palavras', op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: revisão",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1664,
+    2800
+   ],
+   "id": "6042cc8f-c4ad-4c68-8200-38f79386981a",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('🧩 Confere o roteiro').first().json.texto_revisora }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é REVISORA DE ANÚNCIOS. Confere se o roteiro do vídeo é FIEL aos dados do dono e se está bem escrito. Recebe os DADOS DO DONO (a única fonte de verdade) e o ROTEIRO (fala e texto na tela de cada cena).\n\nVERIFIQUE\n1. Fatos: todo número, preço, medida, quantidade, prazo, condição, garantia e característica citado precisa estar nos dados do dono. O que não estiver, corrija (tire ou troque por algo dos dados).\n2. Preço: se aparece, tem de ser exatamente o do dono, e no máximo uma vez na fala. Se o dono não informou preço, nenhuma cena pode falar de preço.\n3. Promessas proibidas ou exageradas sem prova (\"o melhor\", \"único\", \"garantido\", \"valoriza com certeza\", \"cura\") → suavize.\n4. Português: acentos, concordância, frases naturais para falar em voz alta; texto_tela com até 24 caracteres.\n5. A última cena chama para a ação (contato).\nMude SÓ o necessário: corrija ou TIRE. NÃO acrescente informação nova (horário, endereço, detalhes que faltaram) e NÃO aumente as falas: cada fala corrigida fica com o mesmo tamanho ou menor. Fala que já está certa volta igual.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"aprovado\":true,\"problemas\":[\"o que estava errado e como ficou\"],\"segmentos\":[{\"n\":1,\"texto\":\"\",\"texto_tela\":\"\"}]}\nEm \"segmentos\" devolva TODAS as cenas, já corrigidas. Se estiver tudo certo, \"problemas\" fica vazio."
+    }
+   },
+   "name": "🤖 Revisora de fidelidade",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1328,
+    2800
+   ],
+   "id": "8bbb8af0-19a4-409c-a0b2-521a8bb69449",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "kr/claude-haiku-4.5",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 3000,
+     "temperature": 0.2,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro da revisora",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1328,
+    3024
+   ],
+   "id": "6bba7103-2b44-4797-8bb2-d383af308ca9",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 3000,
+     "temperature": 0.2,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro da revisora",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1328,
+    3200
+   ],
+   "id": "a9b56149-29f5-45be-8243-1bf3be32b146",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Aplica a revisão de fidelidade (troca só o que a revisora corrigiu e guarda a lista do que ela mudou) e prepara os pedidos do diretor e do copywriter.\nconst v = $('🧩 Confere o pedido').first().json;\nconst vis = $('🧩 Lê o que a IA viu').first().json;\nconst est = $('🧩 Lê a estratégia').first().json;\nconst rot = $('🧩 Confere o roteiro').first().json;\nlet r = null;\ntry { r = parseJSON($('🤖 Revisora de fidelidade').first().json.output); } catch (e) {}\nconst limpa = s => String(s ?? '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}*#_<>{}\\\\]/gu, '').replace(/\\s+/g, ' ').trim();\nconst corr = r && Array.isArray(r.segmentos) ? r.segmentos : [];\nlet trocas = 0;\nconst segmentos = rot.segmentos.map(s => {\n  const c = corr.find(x => Number(x.n) === s.n);\n  if (!c) return s;\n  const texto = limpa(c.texto), tela = limpa(c.texto_tela);\n  // a revisora só corrige: fala que cresceu demais (ela acrescentou coisa) fica a original, para o vídeo não passar da duração\n  const nAntes = s.texto.split(' ').length, nDepois = texto.split(' ').length;\n  const cabe = nDepois >= 3 && nDepois <= Math.max(nAntes + 3, Math.ceil(nAntes * 1.25));\n  const novo = { ...s, texto: cabe ? texto.slice(0, 240) : s.texto, texto_tela: tela ? tela.slice(0, 32) : s.texto_tela };\n  if (novo.texto !== s.texto || novo.texto_tela !== s.texto_tela) trocas++;\n  return novo;\n});\nconst problemas = (r && Array.isArray(r.problemas) ? r.problemas : []).map(p => limpa(p).slice(0, 180)).filter(Boolean).slice(0, 8);\nif (trocas && !problemas.length) problemas.push(`Ajustou a redação de ${trocas} trecho(s)`);\nconst d = v.dados;\nconst fone = d.whatsapp ? d.whatsapp.replace(/^55/, '').replace(/^(\\d{2})(\\d{4,5})(\\d{4})$/, '($1) $2-$3') : '';\nconst cenas = segmentos.map(s => { const f = vis.fotos[s.foto] || {}; return { n: s.n, foto: s.foto, orientacao_da_foto: f.orientacao, ambiente: f.ambiente, foco_da_visao: f.foco, fala: s.texto, texto_na_tela: s.texto_tela }; });\nconst texto_diretor = `FORMATO DO VÍDEO: ${v.op.formato === 'vertical' ? 'EM PÉ 9:16' : v.op.formato === 'quadrado' ? 'QUADRADO 1:1' : 'DEITADO 16:9'}\nCLIMA PEDIDO PELO DONO: ${v.op.clima}${v.op.clima === 'auto' ? ' (você escolhe; a estratégia sugeriu ' + est.clima + ')' : ''}\nTEM PREÇO PARA O SELO: ${d.preco ? 'sim, \"' + d.preco + '\"' : 'não'}\nO QUE ESTÁ ANUNCIANDO: ${d.tipo_txt} · ${d.titulo}\nTOM: ${est.tom || '-'}\n\nCENAS:\n${JSON.stringify(cenas, null, 1)}`;\nconst texto_copy = `DADOS DO DONO (a ÚNICA fonte de fatos):\n${JSON.stringify({ tipo: d.tipo_txt, titulo: d.titulo, marca: d.marca, preco: d.preco || null, oferta: d.oferta || null, detalhes: d.detalhes, endereco: d.endereco || null, contatos: { whatsapp: fone || null, instagram: d.instagram ? '@' + d.instagram : null, site: d.site || null } }, null, 1)}\n\nESTRATÉGIA: ${JSON.stringify({ publico: est.publico, angulo: est.angulo, beneficios: est.beneficios, cta: est.cta, tom: est.tom })}\n\nROTEIRO DO VÍDEO: ${segmentos.map(s => s.texto).join(' ')}`;\nreturn [{ json: { segmentos, revisou: !!r, aprovado: !!(r && r.aprovado), trocas, problemas,\n  palavras: segmentos.reduce((t, s) => t + s.texto.split(' ').length, 0), texto_diretor, texto_copy } }];"
+   },
+   "name": "🧩 Aplica a revisão",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    992,
+    2800
+   ],
+   "id": "7a49d1cc-32c2-4c70-a2a1-c34b93b2ac8b"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'direcao', detalhe: ($('🧩 Aplica a revisão').first().json.trocas ? 'A revisora ajustou ' + $('🧩 Aplica a revisão').first().json.trocas + ' trecho(s)' : 'Revisão: nada inventado'), op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: direção",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    672,
+    2800
+   ],
+   "id": "0383bc32-62ef-4c96-b99d-cd7d38532167",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('🧩 Aplica a revisão').first().json.texto_diretor }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é DIRETOR DE EDIÇÃO de anúncios em vídeo feitos com fotos. Para cada cena escolha o movimento de câmera, o ponto de foco, a transição de entrada e se o selo de preço aparece.\n\nMOVIMENTOS: zoom_in (aproxima do detalhe: produto, prato, acabamento) · zoom_out (revela o ambiente) · pan_dir / pan_esq (passeia pela foto na horizontal: use em FOTO DEITADA num vídeo EM PÉ, para mostrar o ambiente inteiro) · pan_cima / pan_baixo (foto em pé num vídeo deitado) · parado (quase sem movimento, para foto com texto ou logo).\nFOCO: {x, y} de 0 a 1 = o ponto mais importante da foto (comece pelo que a visão indicou; ajuste se a fala da cena falar de outra parte).\nTRANSIÇÕES: fade, dissolve (elegante, calmo) · slideleft, slideright, smoothleft, smoothright (ritmo, animado) · circleopen, radial (revelação) · zoomin, wipeleft, wiperight (oferta, urgência) · fadeblack (pausa dramática). A 1ª cena não precisa de transição.\n\nREGRAS\n- Varie movimento e transição; não repita o mesmo movimento três vezes seguidas.\n- selo_preco: true em 1 ou 2 cenas (a que fala do preço e/ou a última), só se houver preço.\n- trilha: UMA entre elegante, animado, urgente, emocional, calmo, tropical, latino, chill (combine com o produto e o tom).\n- cor: cor de destaque em hex (manchete, selo e legenda) que combine com as fotos.\n- titulo_abertura (até 28 caracteres) e cta_final (até 30 caracteres, ex.: \"Agende sua visita\").\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"trilha\":\"\",\"cor\":\"#000000\",\"titulo_abertura\":\"\",\"cta_final\":\"\",\"cenas\":[{\"n\":1,\"movimento\":\"\",\"foco\":{\"x\":0.5,\"y\":0.5},\"transicao\":\"\",\"selo_preco\":false}]}"
+    }
+   },
+   "name": "🤖 Diretor de edição",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    336,
+    2800
+   ],
+   "id": "ee9211ad-48ab-4873-9963-7dc4fe2142b3",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 2500,
+     "temperature": 0.6,
+     "timeout": 120000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro do diretor",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    336,
+    3024
+   ],
+   "id": "5e6dafb9-5c9c-412d-9ec7-79300dba38d4",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 2500,
+     "temperature": 0.6,
+     "timeout": 120000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro do diretor",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    336,
+    3200
+   ],
+   "id": "11282d71-1aaf-4874-b6c6-3cec4439550e",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('🧩 Aplica a revisão').first().json.texto_copy }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é COPYWRITER DE REDES SOCIAIS para pequenos negócios brasileiros. Recebe os dados do dono, a estratégia e o roteiro do vídeo de anúncio. Escreva os textos para postar e divulgar, FIÉIS aos dados (não invente preço, desconto, prazo ou característica).\n- legenda: legenda do Reels/TikTok, 300 a 800 caracteres, parágrafos curtos, 2 a 4 emojis, termina com chamada para ação e o contato.\n- hashtags: 10 a 12, misturando produto, nicho e cidade/bairro (se houver), sem o símbolo #.\n- titulo_shorts: até 90 caracteres, curiosidade + palavra que as pessoas buscam.\n- status_whatsapp: até 120 caracteres para acompanhar o vídeo no Status.\n- mensagem_whatsapp: a mensagem que o CLIENTE envia ao tocar no botão do WhatsApp da página (curta, em primeira pessoa, citando o anúncio).\n- descricao_pagina: 2 parágrafos para a página do anúncio, com os fatos do dono.\n- texto_portal: se for imóvel ou veículo, um anúncio completo para portais (OLX, ZAP, Webmotors): título + descrição + lista das características do dono; se for outra coisa, um anúncio para marketplace (título + descrição).\n- Contatos: use EXATAMENTE os contatos dos dados (o WhatsApp é um número de telefone; o Instagram é um @). Não invente contato.\nPortuguês do Brasil com todos os acentos.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"legenda\":\"\",\"hashtags\":[\"\"],\"titulo_shorts\":\"\",\"status_whatsapp\":\"\",\"mensagem_whatsapp\":\"\",\"descricao_pagina\":\"\",\"texto_portal\":\"\"}"
+    }
+   },
+   "name": "🤖 Copywriter de redes",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    0,
+    2800
+   ],
+   "id": "7513f6be-bdaa-4e82-a8cb-2cd364eac996",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "kr/claude-haiku-4.5",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 3500,
+     "temperature": 0.8,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro do copywriter",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    0,
+    3024
+   ],
+   "id": "1ab84f66-4764-43ad-afac-336e68bf4d9b",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 3500,
+     "temperature": 0.8,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro do copywriter",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    0,
+    3200
+   ],
+   "id": "06680e22-7997-4a38-8c22-7c3f0158cdce",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Lê os textos que a copywriter escreveu e prepara o pedido da revisora dos textos (com os contatos certos).\nconst v = $('🧩 Confere o pedido').first().json;\nconst est = $('🧩 Lê a estratégia').first().json;\nlet c = null, dir = null;\ntry { c = parseJSON($('🤖 Copywriter de redes').first().json.output); } catch (e) {}\ntry { dir = parseJSON($('🤖 Diretor de edição').first().json.output); } catch (e) {}\nc = c || {}; dir = dir || {};\nconst d = v.dados;\nconst fone = d.whatsapp ? d.whatsapp.replace(/^55/, '').replace(/^(\\d{2})(\\d{4,5})(\\d{4})$/, '($1) $2-$3') : '';\nconst textos = {\n  legenda: String(c.legenda || ''), hashtags: Array.isArray(c.hashtags) ? c.hashtags.map(String) : [], titulo_shorts: String(c.titulo_shorts || ''),\n  status_whatsapp: String(c.status_whatsapp || ''), mensagem_whatsapp: String(c.mensagem_whatsapp || ''),\n  descricao_pagina: String(c.descricao_pagina || ''), texto_portal: String(c.texto_portal || ''),\n  destaques_pagina: (est.destaques || []).map(String),\n  titulo_abertura: String(dir.titulo_abertura || est.titulo_abertura || ''), cta_final: String(dir.cta_final || est.cta || ''),\n};\nconst texto_revisora = `DADOS DO DONO (a ÚNICA fonte de verdade):\n${JSON.stringify({ tipo: d.tipo_txt, titulo: d.titulo, marca: d.marca, preco: d.preco || null, oferta: d.oferta || null, detalhes: d.detalhes, endereco: d.endereco || null, contatos: { whatsapp: fone || null, instagram: d.instagram ? '@' + d.instagram : null, site: d.site || null } }, null, 1)}\n\nTEXTOS PARA REVISAR:\n${JSON.stringify(textos, null, 1)}`;\nreturn [{ json: { ok: !!textos.legenda, textos, texto_revisora } }];"
+   },
+   "name": "🧩 Lê os textos de redes",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    3632
+   ],
+   "id": "023500bf-7e8a-4d58-b2ca-cdc6d786e835"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('🧩 Lê os textos de redes').first().json.texto_revisora }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é REVISORA DE TEXTOS DE ANÚNCIO. Confere os textos de redes sociais contra os DADOS DO DONO (a única fonte de verdade) e corrige o que estiver errado.\n\nVERIFIQUE\n1. Fatos: características, materiais, números, preço, condição, prazo e endereço precisam estar nos dados do dono. O que não estiver, tire ou troque por algo dos dados (ex.: \"pé-direito alto\" ou \"bancada de mármore\" que o dono não escreveu = tirar; o que só aparece na foto também não vale).\n2. Hashtags, destaques_pagina, titulo_abertura e cta_final seguem a mesma regra (ex.: #lançamento só se o dono disse que é lançamento).\n3. Contatos: use EXATAMENTE os contatos dados. O WhatsApp é um NÚMERO de telefone; o Instagram é um @. Nunca troque um pelo outro nem invente contato.\n4. Promessas exageradas ou sem prova (\"o melhor\", \"único\", \"garantido\", \"valoriza com certeza\") → suavize.\n5. Português correto, com acentos. Mantenha o tamanho, o estilo, os emojis e as quebras de linha.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown, com TODOS os campos (já corrigidos; o que estiver certo, repita igual):\n{\"problemas\":[\"o que estava errado e como ficou\"],\"legenda\":\"\",\"hashtags\":[\"\"],\"titulo_shorts\":\"\",\"status_whatsapp\":\"\",\"mensagem_whatsapp\":\"\",\"descricao_pagina\":\"\",\"texto_portal\":\"\",\"destaques_pagina\":[\"\"],\"titulo_abertura\":\"\",\"cta_final\":\"\"}\n(titulo_abertura até 28 caracteres e cta_final até 30 aparecem escritos no vídeo: mesma regra de fatos, ex. \"em dobro\" só se o dono disse.)"
+    }
+   },
+   "name": "🤖 Revisora dos textos",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    336,
+    3632
+   ],
+   "id": "081524d8-f0ad-4cda-9f74-23d881a4e791",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "kr/claude-sonnet-4.5",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 4000,
+     "temperature": 0.2,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro da revisora dos textos",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    336,
+    3856
+   ],
+   "id": "c545ff0d-5b6f-4e80-80b7-403a7c21ca0c",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 4000,
+     "temperature": 0.2,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro da revisora dos textos",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    336,
+    4032
+   ],
+   "id": "f0eabee4-55d9-466e-a1a3-0fd06d1c5e8f",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Junta o roteiro revisado + a direção + os textos de redes revisados e deixa tudo pronto para montar o filme na Shotstack.\nconst v = $('🧩 Confere o pedido').first().json;\nconst vis = $('🧩 Lê o que a IA viu').first().json;\nconst est = $('🧩 Lê a estratégia').first().json;\nconst rev = $('🧩 Aplica a revisão').first().json;\nconst lidos = $('🧩 Lê os textos de redes').first().json.textos;\nlet d = null, rt = null;\ntry { d = parseJSON($('🤖 Diretor de edição').first().json.output); } catch (e) {}\ntry { rt = parseJSON($('🤖 Revisora dos textos').first().json.output); } catch (e) {}\nd = d || {};\n// a revisora devolve todos os textos corrigidos; o que ela não devolver fica como a copywriter escreveu\nconst c = Object.fromEntries(Object.keys(lidos).map(k => [k, rt && (Array.isArray(rt[k]) ? rt[k].length : String(rt[k] || '').trim()) ? rt[k] : lidos[k]]));\nconst problemas_textos = (rt && Array.isArray(rt.problemas) ? rt.problemas : []).map(p => String(p).replace(/[<>{}\\\\]/g, '').trim().slice(0, 180)).filter(Boolean).slice(0, 8);\nconst MOV = ['zoom_in', 'zoom_out', 'pan_esq', 'pan_dir', 'pan_cima', 'pan_baixo', 'parado'];\nconst TRANS = ['fade', 'dissolve', 'fadeblack', 'fadewhite', 'slideleft', 'slideright', 'wipeleft', 'wiperight', 'smoothleft', 'smoothright', 'circleopen', 'radial', 'zoomin', 'hblur', 'pixelize'];\nconst CLIMAS = ['elegante', 'animado', 'urgente', 'emocional', 'calmo', 'tropical', 'latino', 'chill'];\nconst COR_TIPO = { imovel: '#C9A227', produto: '#2563EB', comida: '#EA580C', veiculo: '#DC2626', servico: '#0D9488', evento: '#9333EA', outro: '#F59E0B' };\nconst num = (x, def) => { const n = Number(x); return Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : def; };\nconst limpa = (s, m) => String(s || '').replace(/[<>{}\\\\]/g, '').trim().slice(0, m);\nconst cenasD = Array.isArray(d.cenas) ? d.cenas : [];\nconst vertical = v.op.formato === 'vertical', deitado = v.op.formato === 'deitado';\nlet selos = 0;\nconst segmentos = rev.segmentos.map((s, k) => {\n  const f = vis.fotos[s.foto] || vis.fotos[0];\n  const x = cenasD.find(y => Number(y.n) === s.n) || {};\n  let mov = MOV.includes(x.movimento) ? x.movimento : '';\n  // padrão: foto deitada em vídeo em pé passeia na horizontal; foto em pé em vídeo deitado passeia na vertical; o resto aproxima/afasta\n  if (!mov) mov = vertical && f.orientacao === 'deitada' ? (k % 2 ? 'pan_esq' : 'pan_dir') : deitado && f.orientacao === 'vertical' ? (k % 2 ? 'pan_cima' : 'pan_baixo') : (k % 2 ? 'zoom_out' : 'zoom_in');\n  const selo = !!v.dados.preco && x.selo_preco === true && selos < 2;\n  if (selo) selos++;\n  return { ...s, movimento: mov, foco: { x: num(x.foco && x.foco.x, f.foco.x), y: num(x.foco && x.foco.y, f.foco.y) },\n    transicao: TRANS.includes(x.transicao) ? x.transicao : (k % 3 === 1 ? 'slideleft' : 'fade'), selo_preco: selo };\n});\n// a última cena precisa chamar para a ação; se a IA esqueceu, entra uma cena curta de chamada com a foto da abertura\nconst CHAMADA = /whats|chama|chame|agend|pe[çc]a|fale|visite|compre|garanta|reserve|encomend|ligue|link|mensagem|direct/i;\nconst ultimaCena = segmentos[segmentos.length - 1];\nif (!CHAMADA.test(ultimaCena.texto) && segmentos.length < 16) {\n  const fala = /whats/i.test(est.cta) || !v.dados.whatsapp ? est.cta : est.cta + ' pelo WhatsApp';\n  const f0 = est.ordem[0];\n  segmentos.push({ n: ultimaCena.n + 1, foto: f0, texto: fala.replace(/[.!]*$/, '') + '!', texto_tela: '', movimento: 'zoom_out',\n    foco: (vis.fotos[f0] || vis.fotos[0]).foco, transicao: 'fade', selo_preco: false, extra: 'chamada automática' });\n}\n// o preço informado aparece pelo menos numa cena do meio\nif (v.dados.preco && !segmentos.some(s => s.selo_preco)) segmentos[Math.min(segmentos.length - 1, Math.floor(segmentos.length / 2))].selo_preco = true;\n// cena com selo de preço não repete o preço na manchete\nconst semEspaco = t => String(t || '').toLowerCase().replace(/\\s/g, '');\nfor (const s of segmentos) {\n  if (s.selo_preco && (/r\\$/i.test(s.texto_tela) || (v.dados.preco && semEspaco(s.texto_tela).includes(semEspaco(v.dados.preco).replace(/^r\\$/, ''))))) s.texto_tela = '';\n}\nconst clima = v.op.clima !== 'auto' ? v.op.clima : (CLIMAS.includes(d.trilha) ? d.trilha : est.clima);\nconst cor = v.op.cor || (/^#[0-9a-fA-F]{6}$/.test(d.cor || '') ? String(d.cor).toUpperCase() : '') || est.cor || COR_TIPO[v.dados.tipo];\nconst fone = v.dados.whatsapp ? v.dados.whatsapp.replace(/^55/, '').replace(/^(\\d{2})(\\d{4,5})(\\d{4})$/, '($1) $2-$3') : '';\nconst contatos = [fone && 'WhatsApp ' + fone, v.dados.instagram && '@' + v.dados.instagram, !fone && v.dados.site].filter(Boolean);\nconst titulo = limpa(c.titulo_abertura, 30) || limpa(d.titulo_abertura, 30) || est.titulo_abertura || limpa(v.dados.titulo, 30);\nconst cta = limpa(c.cta_final, 34) || limpa(d.cta_final, 34) || est.cta;\nconst redes = {\n  legenda: limpa(c.legenda, 2200),\n  hashtags: (Array.isArray(c.hashtags) ? c.hashtags : []).map(h => String(h).replace(/[#\\s]/g, '')).filter(Boolean).slice(0, 15),\n  titulo_shorts: limpa(c.titulo_shorts, 100), status_whatsapp: limpa(c.status_whatsapp, 200),\n  mensagem_whatsapp: limpa(c.mensagem_whatsapp, 220) || `Olá! Vi o anúncio \"${v.dados.titulo}\" e quero mais informações.`,\n  descricao_pagina: limpa(c.descricao_pagina, 1600), texto_portal: limpa(c.texto_portal, 3000),\n};\nconst destaques = (Array.isArray(c.destaques_pagina) ? c.destaques_pagina : []).map(x => limpa(x, 90)).filter(Boolean).slice(0, 6);\nreturn [{ json: {\n  segmentos, clima, cor, titulo, cta, contatos, redes, destaques, problemas_textos, direcao_ia: cenasD.length > 0, copy_ia: !!c.legenda, textos_revisados: !!rt,\n  narrar: JSON.stringify({ job: v.job, voz: v.op.voz, taxa: '+10%', segmentos: segmentos.map(s => ({ n: s.n, texto: s.texto })) }),\n} }];"
+   },
+   "name": "🧩 Junta tudo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    672,
+    3632
+   ],
+   "id": "7cf8d497-32f1-47c3-b1a6-37385f67be4e"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'narrando', detalhe: 'Mandando para a Shotstack · voz ' + $('🧩 Confere o pedido').first().json.op.voz.split('-')[2].replace(/Multilingual|Neural/g, '') + ' · trilha ' + $('🧩 Junta tudo').first().json.clima, op: $('🧩 Confere o pedido').first().json.op, dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo, tipo: $('🧩 Confere o pedido').first().json.dados.tipo_txt } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: narrando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    992,
+    3632
+   ],
+   "id": "2decaf08-bd66-4c15-8294-4c07c18f31b7",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "amount": 8
+   },
+   "name": "⏳ Espera 8 segundos",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    992,
+    4448
+   ],
+   "id": "1ad19cbc-c4dc-4b7e-9c9a-06d08f879829",
+   "webhookId": "373e8b17-b3b0-46c0-a87f-d551cb4919c8"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê o andamento dos vídeos no Shotstack e decide se o laço continua (o só com música pode terminar depois do narrado).\nconst v = $('🧩 Confere o pedido').first().json;\nconst p = $('🧩 Guarda os projetos').first().json;\nconst a = ($('🎬 Shotstack: como está o narrado?').first().json || {}).response || {};\nconst b = p.musica ? (($input.first().json || {}).response || {}) : { status: 'done' };\nconst PASSOS = { queued: 10, fetching: 25, generating: 40, preprocessing: 55, rendering: 70, saving: 90, done: 100, failed: 100 };\nconst NOMES = { 10: 'na fila do Shotstack', 25: 'baixando as fotos e a trilha', 40: 'gerando a voz', 55: 'preparando as cenas', 70: 'montando o vídeo', 90: 'salvando', 100: 'terminando a versão só com música' };\nconst passo = m => PASSOS[m.status] || 10;\nconst passou = (Date.now() - p.inicio) / 1000;\nlet estado = 'montando', erro = '';\nif (a.status === 'failed') { estado = 'erro'; erro = a.error || 'o Shotstack não conseguiu montar o vídeo'; }\nelse if (a.status === 'done' && (b.status === 'done' || b.status === 'failed')) estado = 'pronto';\nelse if (passou > 900) { estado = 'erro'; erro = 'O Shotstack demorou mais de 15 minutos. Tente de novo.'; }\n// o Shotstack às vezes volta de \"gerando a voz\" para \"na fila\": a porcentagem segue o relógio (nunca desce) e só\n// encosta em 99 quando os dois vídeos terminaram\nconst progresso = estado === 'montando' ? Math.min(95, Math.round(5 + passou / 1.6)) : 99;\nconst status = { job: v.job, etapa: 'montando', progresso, detalhe: `🎞️ ${NOMES[passo(a)]} · ${progresso}%`, op: v.op, dados: { titulo: v.dados.titulo, tipo: v.dados.tipo_txt } };\n// o \"url\" do andamento some em 24 h; o CDN do Shotstack guarda para sempre (endereço montado com o dono e o código do render)\nconst cdn = (m, ext) => m.owner && m.id ? `https://cdn.shotstack.io/au/${p.ambiente}/${m.owner}/${m.id}${ext}` : '';\nreturn [{ json: {\n  estado, erro, terminou: estado !== 'montando', pronto: estado === 'pronto',\n  video: cdn(a, '.mp4') || a.url || '', capa: cdn(a, '-poster.jpg') || a.poster || '',\n  video_musica: b.status === 'done' && p.musica ? (cdn(b, '.mp4') || b.url || '') : '',\n  duracao: Number(a.duration) || 0, tamanho_mb: 0, status: JSON.stringify(status),\n} }];\n"
+   },
+   "name": "🧩 Atualiza o andamento",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    32,
+    4448
+   ],
+   "id": "18ac488f-0d20-4561-bfa9-0c04882f113d"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ $('🧩 Atualiza o andamento').item.json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: montando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    4448
+   ],
+   "id": "120eb653-f798-47d3-8055-6965f2cbe76c",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "11520b56-6313-4563-8fbb-99c71d58f16b",
+       "leftValue": "={{ $('🧩 Atualiza o andamento').item.json.terminou }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Terminou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    0,
+    4896
+   ],
+   "id": "b0213535-72a7-491b-b9e4-0806847c4d1c"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "3c6e6d7b-0223-4425-9db6-d969d8477bd3",
+       "leftValue": "={{ $('🧩 Atualiza o andamento').item.json.pronto }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Ficou pronto?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    336,
+    4896
+   ],
+   "id": "da7256f3-1d1d-4c1d-8d8b-40250158e3c8"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta o que a página pública do anúncio mostra (fica no ar 30 dias). Os vídeos são os links da Shotstack (7 dias);\n// as fotos e a capa ficam no Redis por 30 dias e o próprio n8n entrega.\nconst v = $('🧩 Confere o pedido').first().json;\nconst ed = $('🧩 Junta tudo').first().json;\nconst est = $('🧩 Lê a estratégia').first().json;\nconst st = $('🧩 Atualiza o andamento').first().json;\nlet capa = st.capa;\ntry {\n  const c = $('🧩 Prepara a capa').first().json;\n  if (c.ok) capa = v.arquivo + c.id;\n} catch (e) {}\nconst d = v.dados;\nconst anuncio = {\n  id: v.anuncio, job: v.job, criado_em: new Date().toISOString(), tipo: d.tipo, tipo_txt: d.tipo_txt,\n  marca: d.marca, titulo: d.titulo, preco: d.preco, oferta: d.oferta, detalhes: d.detalhes, endereco: d.endereco,\n  whatsapp: d.whatsapp, instagram: d.instagram, site: d.site, cor: ed.cor,\n  descricao: ed.redes.descricao_pagina || d.detalhes, destaques: ed.destaques && ed.destaques.length ? ed.destaques : est.destaques, mensagem_whatsapp: ed.redes.mensagem_whatsapp,\n  fotos: v.fotos, video: st.video || '', video_musica: st.video_musica || '', capa: capa || '',\n};\nreturn [{ json: { ok: true, arquivos: { video: anuncio.video, video_musica: anuncio.video_musica, capa: anuncio.capa }, anuncio: JSON.stringify(anuncio), chave: '<SEGREDO_REMOVIDO>' + v.anuncio } }];\n"
+   },
+   "name": "🧩 Prepara a página",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    992,
+    4896
+   ],
+   "id": "8aa90341-c33f-4b14-8c54-f687ca1d4c38"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "={{ $json.chave }}",
+    "value": "={{ $json.anuncio }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "💾 Guarda o anúncio",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1328,
+    4896
+   ],
+   "id": "b46a6f55-f0d1-4ddb-82f4-497ac23f154e",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Grava o resultado: os 2 vídeos, a capa, a página do anúncio, a estratégia, a revisão e os textos para postar.\nconst v = $('🧩 Confere o pedido').first().json;\nconst st = $('🧩 Atualiza o andamento').first().json;\nconst ed = $('🧩 Junta tudo').first().json;\nconst rev = $('🧩 Aplica a revisão').first().json;\nconst est = $('🧩 Lê a estratégia').first().json;\nlet pg = null;\ntry { pg = $('🧩 Prepara a página').first().json; } catch (e) {}\nif (st.estado !== 'pronto') {\n  return [{ json: { status: JSON.stringify({ job: v.job, etapa: 'erro', op: v.op, erro: 'A montagem falhou: ' + String(st.erro || 'sem detalhe').slice(-220) }) } }];\n}\nconst arq = (pg && pg.arquivos) || { video: st.video, video_musica: st.video_musica, capa: st.capa };\nreturn [{ json: { status: JSON.stringify({\n  job: v.job, etapa: 'pronto', op: v.op, dados: { titulo: v.dados.titulo, tipo: v.dados.tipo_txt, preco: v.dados.preco },\n  video: arq.video, video_musica: arq.video_musica || '', capa: arq.capa || '',\n  duracao: st.duracao, tamanho_mb: st.tamanho_mb, segundos: Math.round((Date.now() - v.criado_em) / 1000),\n  pagina: pg && pg.ok ? v.pagina : '', anuncio: v.anuncio, redes: ed.redes, clima: ed.clima, cor: ed.cor,\n  revisao: { problemas: rev.problemas, trocas: rev.trocas, revisou: rev.revisou, problemas_textos: ed.problemas_textos, textos_revisados: ed.textos_revisados },\n  estrategia: { publico: est.publico, angulo: est.angulo, gancho: est.gancho, beneficios: est.beneficios, objecao: est.objecao },\n  roteiro: ed.segmentos.map(s => ({ n: s.n, foto: s.foto, texto: s.texto, texto_tela: s.texto_tela, movimento: s.movimento, transicao: s.transicao, selo_preco: s.selo_preco })),\n}) } }];\n"
+   },
+   "name": "🎉 Resultado final",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1664,
+    4896
+   ],
+   "id": "74af5af7-43ed-4200-b1da-73866f072475"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ $json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: pronto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1664,
+    5120
+   ],
+   "id": "569453c7-6c15-464b-ae58-6d1c190d9e51",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": ":id/anuncio-shotstack",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página pública do anúncio (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    5664
+   ],
+   "id": "3ffee39e-54e5-4d3f-91c4-874d7795386a",
+   "webhookId": "anuncio-ss"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "anuncio",
+    "key": "=anuncio:{{ String($json.params.id || '').replace(/[^a-z0-9-]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o anúncio",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    272,
+    5664
+   ],
+   "id": "93ab70bc-acb1-4d1e-98cb-6990b4c0a1a7",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Desenha a página pública do anúncio: vídeo, fotos, preço, destaques e botão de WhatsApp. Sem anúncio = aviso amigável (404).\nconst g = $('🔔 Página pública do anúncio (GET)').first().json;\nconst id = String((g.params || {}).id || '').replace(/[^a-z0-9-]/g, '');\nlet a = null;\ntry { a = JSON.parse($('📖 Lê o anúncio').first().json.anuncio || 'null'); } catch (e) {}\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst cabeca = (titulo, extra) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>${esc(titulo)}</title>${extra || ''}`;\nif (!a) {\n  return [{ json: { existe: false, codigo: 404, html: cabeca('Anúncio não encontrado', '<meta name=\"robots\" content=\"noindex\">') + `<style>body{font-family:system-ui,sans-serif;background:#f6f6f4;color:#18181b;display:grid;place-items:center;min-height:100vh;margin:0;padding:16px;text-align:center}\n@media (prefers-color-scheme:dark){body{background:#0e0e0f;color:#f4f4f5}}</style></head><body><div><h1 style=\"font-size:26px\">📭 Anúncio não encontrado</h1><p style=\"margin-top:8px;opacity:.75\">O link pode estar errado ou o anúncio passou de 30 dias.</p></div></body></html>` } }];\n}\n// cores: a da marca, com contraste garantido para texto e botão\nconst lum = h => { const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(x => x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4)); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };\nconst contraste = (x, y) => (Math.max(lum(x), lum(y)) + 0.05) / (Math.min(lum(x), lum(y)) + 0.05);\nconst escurece = (h, f) => '#' + [1, 3, 5].map(i => Math.round(parseInt(h.slice(i, i + 2), 16) * f).toString(16).padStart(2, '0')).join('');\nconst clareia = (h, f) => '#' + [1, 3, 5].map(i => { const v = parseInt(h.slice(i, i + 2), 16); return Math.round(v + (255 - v) * f).toString(16).padStart(2, '0'); }).join('');\nconst cor = /^#[0-9a-fA-F]{6}$/.test(a.cor || '') ? a.cor : '#2563EB';\nlet corClara = cor, f = 1;\nwhile (contraste(corClara, '#ffffff') < 4.5 && f > 0.15) { f -= 0.08; corClara = escurece(cor, f); }\nlet corEscura = cor, k = 0;\nwhile (contraste(corEscura, '#0e0e0f') < 4.5 && k < 0.95) { k += 0.08; corEscura = clareia(cor, k); }\nconst sobreCor = contraste(cor, '#111111') >= contraste(cor, '#ffffff') ? '#111111' : '#ffffff';\nconst host = (g.headers || {}).host || '';\nconst url = host ? `https://${host}/webhook/anuncio-ss/${id}/anuncio-shotstack` : '';\nconst msg = a.mensagem_whatsapp || `Olá! Vi o anúncio \"${a.titulo}\" e quero mais informações.`;\nconst wa = a.whatsapp ? `https://wa.me/${a.whatsapp}?text=${encodeURIComponent(msg)}` : '';\nconst mapa = a.endereco ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.endereco)}` : '';\nconst site = a.site ? (/^https?:\\/\\//.test(a.site) ? a.site : 'https://' + a.site) : '';\nconst fotos = Array.isArray(a.fotos) ? a.fotos : [];\nconst capa = a.capa || fotos[0] || '';\nconst desc = String(a.descricao || a.detalhes || '').trim();\nconst resumo = desc.replace(/\\s+/g, ' ').slice(0, 170);\nconst detalhes = String(a.detalhes || '').split(/\\n|;|•/).map(s => s.trim()).filter(s => s.length > 1);\nconst destaques = (a.destaques || []).filter(Boolean);\nconst titulo = a.titulo + (a.preco ? ' · ' + a.preco : '');\nconst og = `<meta name=\"description\" content=\"${esc(resumo)}\"><meta property=\"og:type\" content=\"website\"><meta property=\"og:title\" content=\"${esc(titulo)}\">\n<meta property=\"og:description\" content=\"${esc(resumo)}\">${capa ? `<meta property=\"og:image\" content=\"${esc(capa)}\">` : ''}${url ? `<meta property=\"og:url\" content=\"${esc(url)}\">` : ''}<meta name=\"twitter:card\" content=\"summary_large_image\">`;\nconst html = cabeca(titulo, og) + `<style>\n:root{color-scheme:light;--fundo:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--borda:rgba(0,0,0,.1);--cor:${corClara};--botao:${cor};--sobre:${sobreCor}}\n@media (prefers-color-scheme:dark){:root{color-scheme:dark;--fundo:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--cor:${corEscura}}}\n*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--fundo);color:var(--tx);line-height:1.55;padding-bottom:90px}\n.w{max-width:980px;margin:0 auto;padding:16px}\n.topo{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:22px;align-items:start;margin-top:8px}\n@media(max-width:760px){.topo{grid-template-columns:1fr}}\nvideo{width:100%;border-radius:18px;background:#000;display:block;max-height:78vh}\n.etq{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--cor)}\nh1{font-size:30px;line-height:1.15;margin-top:6px}.marca{color:var(--tx2);margin-top:4px;font-weight:600}\n.preco{display:inline-block;margin-top:14px;background:var(--botao);color:var(--sobre);font-weight:800;font-size:24px;padding:8px 16px;border-radius:12px}\n.oferta{margin-top:10px;font-weight:700;color:var(--cor)}\n.bts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}\n.bt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:15px;padding:12px 18px;border-radius:14px;border:1px solid var(--borda);color:var(--tx);background:var(--sup);cursor:pointer;font-family:inherit}\n.bt.wa{background:#1fa855;color:#fff;border-color:transparent}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:18px 20px;margin-top:18px}.card h2{font-size:18px;margin-bottom:10px}\nul.dest{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}@media(max-width:600px){ul.dest{grid-template-columns:1fr}}\nul.dest li{background:var(--fundo);border:1px solid var(--borda);border-radius:12px;padding:10px 12px;font-weight:600}\nul.dest li::before{content:\"✓ \";color:var(--cor);font-weight:800}\n.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}@media(max-width:600px){.galeria{grid-template-columns:1fr 1fr}}\n.galeria button{border:0;padding:0;background:none;cursor:zoom-in;border-radius:12px;overflow:hidden;aspect-ratio:4/3}\n.galeria img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}.galeria button:hover img{transform:scale(1.04)}\n.desc p+p{margin-top:10px}.det li{margin-left:18px;margin-top:4px}\n.zoom{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9}\n.zoom.on{display:flex}.zoom img{max-width:94vw;max-height:86vh;border-radius:10px}\n.zoom .x,.zoom .ant,.zoom .prox{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;font-size:26px;width:48px;height:48px;border-radius:50%;cursor:pointer}\n.zoom .x{top:16px;right:16px}.zoom .ant{left:12px}.zoom .prox{right:12px}\n.barra{position:fixed;left:0;right:0;bottom:0;background:var(--sup);border-top:1px solid var(--borda);padding:10px 16px;display:none;gap:10px;align-items:center;justify-content:space-between;z-index:5}\n@media(max-width:760px){.barra{display:flex}}\n.rodape{text-align:center;color:var(--tx2);font-size:13px;margin-top:26px}\n</style></head><body><div class=\"w\">\n<div class=\"topo\">\n  <div>${a.video ? `<video controls playsinline preload=\"metadata\" poster=\"${esc(capa)}\" src=\"${esc(a.video)}\"></video>` : (capa ? `<img src=\"${esc(capa)}\" alt=\"\" style=\"width:100%;border-radius:18px\">` : '')}</div>\n  <div>\n    <span class=\"etq\">${esc(a.tipo_txt || 'anúncio')}</span>\n    <h1>${esc(a.titulo)}</h1>${a.marca ? `<p class=\"marca\">${esc(a.marca)}</p>` : ''}\n    ${a.preco ? `<span class=\"preco\">${esc(a.preco)}</span>` : ''}${a.oferta ? `<p class=\"oferta\">🔥 ${esc(a.oferta)}</p>` : ''}\n    <div class=\"bts\">\n      ${wa ? `<a class=\"bt wa\" href=\"${esc(wa)}\" target=\"_blank\" rel=\"noopener\" data-ev=\"whatsapp\">💬 Chamar no WhatsApp</a>` : ''}\n      ${a.instagram ? `<a class=\"bt\" href=\"https://instagram.com/${esc(a.instagram)}\" target=\"_blank\" rel=\"noopener\">📸 @${esc(a.instagram)}</a>` : ''}\n      ${mapa ? `<a class=\"bt\" href=\"${esc(mapa)}\" target=\"_blank\" rel=\"noopener\">📍 Como chegar</a>` : ''}\n      ${site ? `<a class=\"bt\" href=\"${esc(site)}\" target=\"_blank\" rel=\"noopener\">🌐 Site</a>` : ''}\n      <button class=\"bt\" id=\"compartilhar\" type=\"button\">🔗 Compartilhar</button>\n    </div>\n    ${a.endereco ? `<p style=\"margin-top:14px;color:var(--tx2)\">📍 ${esc(a.endereco)}</p>` : ''}\n  </div>\n</div>\n${destaques.length ? `<div class=\"card\"><h2>⭐ Destaques</h2><ul class=\"dest\">${destaques.map(d => `<li>${esc(d)}</li>`).join('')}</ul></div>` : ''}\n${fotos.length ? `<div class=\"card\"><h2>📷 Fotos (${fotos.length})</h2><div class=\"galeria\">${fotos.map((u, i) => `<button type=\"button\" data-i=\"${i}\" aria-label=\"Ampliar foto ${i + 1}\"><img src=\"${esc(u)}\" alt=\"Foto ${i + 1}\" loading=\"lazy\"></button>`).join('')}</div></div>` : ''}\n${desc ? `<div class=\"card desc\"><h2>📝 Sobre</h2>${desc.split(/\\n{2,}|\\n/).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('')}</div>` : ''}\n${detalhes.length > 1 ? `<div class=\"card\"><h2>📋 Detalhes</h2><ul class=\"det\">${detalhes.map(d => `<li>${esc(d)}</li>`).join('')}</ul></div>` : ''}\n<p class=\"rodape\">Anúncio criado com IA${a.marca ? ' para ' + esc(a.marca) : ''}.</p>\n</div>\n<div class=\"zoom\" id=\"zoom\"><button class=\"x\" type=\"button\" aria-label=\"Fechar\">×</button><button class=\"ant\" type=\"button\" aria-label=\"Anterior\">‹</button><img alt=\"\"><button class=\"prox\" type=\"button\" aria-label=\"Próxima\">›</button></div>\n<div class=\"barra\">${a.preco ? `<b style=\"font-size:18px\">${esc(a.preco)}</b>` : `<b>${esc(a.titulo).slice(0, 28)}</b>`}${wa ? `<a class=\"bt wa\" href=\"${esc(wa)}\" target=\"_blank\" rel=\"noopener\">💬 WhatsApp</a>` : ''}</div>\n<script>\n(function () {\n  var F = ${JSON.stringify(fotos)}, z = document.getElementById('zoom'), img = z.querySelector('img'), atual = 0;\n  function mostra(i) { atual = (i + F.length) % F.length; img.src = F[atual]; z.classList.add('on'); }\n  document.querySelectorAll('.galeria button').forEach(function (b) { b.addEventListener('click', function () { mostra(Number(b.dataset.i)); }); });\n  z.querySelector('.x').addEventListener('click', function () { z.classList.remove('on'); });\n  z.querySelector('.ant').addEventListener('click', function () { mostra(atual - 1); });\n  z.querySelector('.prox').addEventListener('click', function () { mostra(atual + 1); });\n  z.addEventListener('click', function (e) { if (e.target === z) z.classList.remove('on'); });\n  document.addEventListener('keydown', function (e) { if (!z.classList.contains('on')) return; if (e.key === 'Escape') z.classList.remove('on'); if (e.key === 'ArrowLeft') mostra(atual - 1); if (e.key === 'ArrowRight') mostra(atual + 1); });\n  document.getElementById('compartilhar').addEventListener('click', function () {\n    var dados = { title: document.title, url: location.href };\n    if (navigator.share) { navigator.share(dados).catch(function () {}); return; }\n    navigator.clipboard.writeText(location.href).then(function () { document.getElementById('compartilhar').textContent = '✅ Link copiado'; });\n  });\n})();\n</script></body></html>`;\nreturn [{ json: { existe: true, codigo: 200, html, chave_visitas: '<SEGREDO_REMOVIDO>' + id + ':visitas' } }];"
+   },
+   "name": "📱 Desenha a página do anúncio",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    528,
+    5664
+   ],
+   "id": "96cd2878-c19f-4a25-a4d0-38c32323c15f"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "e8d68519-cd2e-484f-aafa-6dda80903658",
+       "leftValue": "={{ $json.existe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 O anúncio existe?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    784,
+    5664
+   ],
+   "id": "65cfed36-8593-4d7b-816a-4cffd4f7381b"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "={{ $json.chave_visitas }}",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "🧮 Conta a visita",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1040,
+    5568
+   ],
+   "id": "29651974-d369-4d5b-831f-badb36193fc5",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $('📱 Desenha a página do anúncio').first().json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega a página do anúncio",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1312,
+    5568
+   ],
+   "id": "603aa36a-ee9d-44b9-b0b9-f7eb411eeb3c"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseCode": 404,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Página não encontrada",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1040,
+    5808
+   ],
+   "id": "eccf091e-8efb-464a-98cf-bd97ed410612"
+  },
+  {
+   "parameters": {
+    "content": "## 0️⃣ AS PÁGINAS 📄 (o que o dono vê no navegador)\n🔔 **Página do anúncio** (/webhook/anuncio-video-ss): o formulário. 🧾 **Monta a página do formulário**: cada foto é reduzida no próprio celular (JPEG até 2048 px) e sobe por 🔔 **Recebe a foto** (/webhook/anuncio-video-ss-foto) ➜ 💾 fica guardada no **Redis por 30 dias** ➜ volta o código da foto.\n🔔 **Entrega a foto** (/webhook/anuncio-video-ss-arquivo?id=...) devolve a imagem: é esse endereço que a IA, a Shotstack e a página do anúncio usam. Não precisa de servidor de arquivos.\n🔔 **Página de andamento** (/webhook/anuncio-video-ss-ver?job=...) mostra as etapas ao vivo e o resultado · 🔔 **Consulta status**: lê do Redis o que cada etapa gravou e junta 📖 **as visitas** da página do anúncio.",
+    "height": 614,
+    "width": 2120,
+    "color": 7
+   },
+   "name": "Nota · Páginas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    0
+   ],
+   "id": "89fd505f-143c-459e-9d38-261fc5a30345"
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ RECEBE O PEDIDO 📥 ➡️ (siga as setas: esta linha anda para a direita)\n🧩 **Confere o pedido**: só aceita fotos enviadas pela página (ou de exemplo), limpa os textos e cria dois códigos: o do **trabalho** (job) e o da **página do anúncio** · 🧮 **Conta pedidos da hora** + 🚦 **Pode começar?** (no máximo 30 por hora) · 💾 **Status** grava a etapa · 📤 responde na hora com o link do andamento (a página não fica travada esperando a IA).",
+    "height": 584,
+    "width": 2120,
+    "color": 5
+   },
+   "name": "Nota · Etapa 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    688
+   ],
+   "id": "9a318179-08a8-4d42-8260-9d4449e56cc2"
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ A IA OLHA AS FOTOS 👀 ⬅️ (esta linha anda para a esquerda)\n🧩 **Lista as fotos** ➜ 🌐 **Mede a foto** e 🌐 **Baixa a miniatura** pelo **wsrv.nl** (serviço grátis de imagens: diz largura/altura e faz a miniatura de 512 px, girada como o celular mostrou) ➜ 🧩 monta o pedido com todas as fotos ➜ 👀 **IA olha as fotos** (visão): descreve cada uma, diz o ambiente, o destaque, o **ponto de interesse** (para onde a câmera anda), se está escura ou tremida e se serve para abrir, para o meio ou para descartar · 🧩 **Lê o que a IA viu** (se a visão falhar, segue com o centro da foto).",
+    "height": 384,
+    "width": 2120,
+    "color": 4
+   },
+   "name": "Nota · Etapa 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    1328
+   ],
+   "id": "fff24dd9-284f-4e8e-9ef4-71bdee51fe05"
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ ESTRATÉGIA E ROTEIRO 🧭✍️ ➡️\n🤖 **Estrategista de anúncio**: público, ângulo de venda, gancho, 3 benefícios, objeção, chamada, clima da trilha, cor, título de abertura e a **ordem das fotos** que conta a melhor história.\n🤖 **Roteirista do anúncio**: a fala de cada cena (uma foto por cena), com gancho no começo e contato no final, no tamanho certo para 15, 30 ou 60 s · 🧩 **Confere o roteiro** conserta JSON quebrado · 🚦 sem roteiro ➜ ⚠️ erro na página.\n🧠 cada agente tem cérebro principal + 🛟 reserva (se o principal falhar, ele usa a reserva sozinho).",
+    "height": 793,
+    "width": 2130,
+    "color": 6
+   },
+   "name": "Nota · Etapa 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -112,
+    1776
+   ],
+   "id": "20497570-5006-4da8-946e-a322c25a4de2"
+  },
+  {
+   "parameters": {
+    "content": "## 4️⃣ REVISÃO, DIREÇÃO E TEXTOS DE REDES 🔍🎬📣 ⬅️\n🤖 **Revisora de fidelidade**: compara cada fala com os DADOS DO DONO e corrige o que a IA tiver inventado (preço, metragem, promessa) · 🧩 **Aplica a revisão** guarda a lista do que mudou (aparece para o dono).\n🤖 **Diretor de edição**: movimento de câmera por foto (zoom ou panorâmica), foco, transição, selo de preço, trilha e cor · 🤖 **Copywriter de redes**: legenda com hashtags, título para Shorts, Status do WhatsApp, mensagem do botão e texto para portais (OLX, ZAP) ou marketplace.",
+    "height": 764,
+    "width": 2130,
+    "color": 3
+   },
+   "name": "Nota · Etapa 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -112,
+    2624
+   ],
+   "id": "60f568c1-5a33-462b-83ba-99ff5e927c88"
+  },
+  {
+   "parameters": {
+    "content": "## 5️⃣ REVISA OS TEXTOS 📣 ➡️\n🧩 **Lê os textos de redes** ➜ 🤖 **Revisora dos textos**: confere legenda, hashtags, Status, título, descrição e destaques da página e texto para portais contra os DADOS DO DONO (tira o que foi inventado e põe os contatos certos: WhatsApp é número, Instagram é @).\n🧩 **Junta tudo**: roteiro revisado + direção + textos revisados ➜ 💾 grava a etapa ➜ 🧩 **Monta o filme (Shotstack)**.",
+    "height": 764,
+    "width": 2120,
+    "color": 5
+   },
+   "name": "Nota · Etapa 5",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    3440
+   ],
+   "id": "c8392acf-62d5-4cf4-8376-29a39eac197a"
+  },
+  {
+   "parameters": {
+    "content": "## 6️⃣ MONTA NO SHOTSTACK E ACOMPANHA 🎬🔁 ⬅️\n🧩 **Monta o filme**: cada trecho do roteiro vira uma **voz** (ElevenLabs, gerada pelo próprio Shotstack) com um apelido; a **foto** (zoom ou panorâmica), a **manchete**, o **selo de preço** e a **legenda** da cena ficam presos ao tempo dessa voz. A legenda usa o **texto exato do roteiro** (as palavras sobem uma a uma), então nunca sai palavra errada. No fim, 3 s de **cartão final** (foto desfocada, marca, chamada, preço, WhatsApp e @); trilha baixinha embaixo de tudo. A **versão só com música** é a mesma edição com a voz no zero (o Shotstack não cobra a voz de novo) ➜ 🎬 **Shotstack: cria o vídeo** ➜ 🧩 **Guarda os projetos**.\n🔁 **Laço**: ⏳ espera 8 s ➜ 🎬 **como está o narrado?** ➜ 🎬 **como está o só música?** ➜ 🧩 **Atualiza o andamento** (a porcentagem aparece na página) ➜ 💾 grava.",
+    "height": 384,
+    "width": 2120,
+    "color": 4
+   },
+   "name": "Nota · Etapa 6",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    4272
+   ],
+   "id": "be9e2ec4-421a-4cce-bc62-209424d23345"
+  },
+  {
+   "parameters": {
+    "content": "## 7️⃣ GUARDA A PÁGINA E ENTREGA 🎉 ➡️\n🚦 **Terminou?** não ➜ volta para a espera · sim ➜ 🚦 **Ficou pronto?** (ou deu erro no Shotstack) ➜ 🌐 **Baixa a capa** ➜ 💾 guarda no Redis (**30 dias**, é a prévia da página no WhatsApp) ➜ 🧩 **Prepara a página** ➜ 💾 **Guarda o anúncio** no Redis (30 dias) ➜ 🎉 **Resultado final**: vídeos, capa, link e QR da página, estratégia, revisões, roteiro e textos para postar ➜ 💾 **Status: pronto**.\n♾️ Os **vídeos** ficam no CDN do Shotstack (cdn.shotstack.io) **sem prazo**: o link da página não quebra.",
+    "height": 604,
+    "width": 2120,
+    "color": 6
+   },
+   "name": "Nota · Etapa 7",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    4720
+   ],
+   "id": "8b33a459-c661-41b2-a3c4-5e7dde821afd"
+  },
+  {
+   "parameters": {
+    "content": "## 8️⃣ A PÁGINA PÚBLICA DO ANÚNCIO 🌐 (/webhook/anuncio-ss/CÓDIGO/anuncio-shotstack)\n🔔 **Página pública do anúncio** (o caminho `:id/anuncio-shotstack` com identificador fixo \"anuncio\" deixa o endereço limpo) ➜ 📖 **Lê o anúncio** ➜ 📱 **Desenha a página**: vídeo, galeria com zoom, preço, destaques, descrição, botões de WhatsApp (com a mensagem pronta), Instagram, mapa e compartilhar; cores com contraste garantido e **prévia bonita no WhatsApp** (og:image = a capa) ➜ 🚦 **existe?** sim ➜ 🧮 **Conta a visita** ➜ 📤 entrega · não ➜ 📤 página \"não encontrado\" (404).",
+    "height": 624,
+    "width": 2120,
+    "color": 7
+   },
+   "name": "Nota · Página pública",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -96,
+    5376
+   ],
+   "id": "15a714fe-8af9-4e63-abcb-be950a2bc4e6"
+  },
+  {
+   "parameters": {
+    "content": "## 🎬 QUEM FAZ O VÍDEO: SHOTSTACK (API, sem servidor seu)\nO n8n só manda um JSON (a \"edição\") e o **Shotstack** devolve o MP4: foto com movimento, voz ElevenLabs em português, legenda, textos, trilha e transições, guardado para sempre no CDN dele. Nada de ffmpeg ou servidor de vídeo.\n🔑 **Chave**: crie a conta grátis em **shotstack.io** (entra com Google) ➜ menu **API Keys** ➜ copie a chave **SANDBOX** ➜ no n8n crie a credencial **Header Auth** com nome `x-api-key` e o valor da chave ➜ escolha ela nos 3 nodes 🎬.\n💰 **Grátis**: o **sandbox** renderiza **de graça e sem limite**, com a marca \"Shotstack\". A **voz** gasta créditos (≈ 0,2 por anúncio de 30 s) dos **10 créditos** que a conta ganha ao criar ≈ 50 anúncios. Sem marca d'água: troque `AMBIENTE` para `'v1'` no 🧩 **Monta o filme** e use a chave de **produção** (cada minuto de vídeo gasta 1 crédito).\n🧰 **wsrv.nl** (grátis, sem chave) faz as miniaturas e mede as fotos. As fotos ficam no seu Redis.\n🎵 8 trilhas da Biblioteca de Áudio do YouTube (uso livre) já hospedadas no catbox: elegante, animado, urgente, emocional, calmo, tropical, latino, chill (troque os links no 🧩 **Monta o filme**).\n🎙️ Vozes: Thalita ➜ Sarah, Francisca ➜ Laura, Andrew ➜ Chris, Brian ➜ Brian (vozes ElevenLabs falando português).",
+    "height": 403,
+    "width": 660,
+    "color": 5
+   },
+   "name": "Nota · Oficina",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2112,
+    0
+   ],
+   "id": "bcfcfd6e-1c20-49f2-96d7-34a45d47496a"
+  },
+  {
+   "parameters": {
+    "content": "## 🆘 SE DER ERRO\n🔴 **Foto não sobe** ➜ máximo 25 MB por foto e 15 fotos (JPG, PNG ou WEBP); confira se o Redis está ligado.\n🔴 **\"A IA roteirista não devolveu um roteiro válido\"** ➜ o modelo falhou: tente de novo (a 🛟 reserva já entra sozinha quando o principal dá erro).\n🔴 **Parado em \"olhando as fotos\"** ➜ o wsrv.nl não abriu as fotos: abra o node 🌐 **Baixa a miniatura** na execução para ver o motivo.\n🔴 **\"O Shotstack recusou o vídeo\"** ➜ a mensagem diz o motivo: chave errada ou de outro ambiente (sandbox x produção), **créditos acabaram** (a voz gasta créditos mesmo no sandbox: veja em shotstack.io ➜ Plans & Billing) ou foto que ele não conseguiu baixar (ASSET_UNREACHABLE).\n🔴 **Vídeo sem a versão só música** ➜ veja o erro no node 🎬 **como está o só música?**.\n🔴 **A página do anúncio diz \"não encontrado\"** ➜ passou de 30 dias ou o link está incompleto.\n🔎 **Onde parou?** Aba **Executions** ➜ a execução vermelha ➜ o node com ⚠️ mostra o motivo.",
+    "height": 522,
+    "width": 660,
+    "color": 3
+   },
+   "name": "Nota · Se der erro",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2112,
+    448
+   ],
+   "id": "aa5d2c84-bb56-4341-867f-404053ef06ab"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'erro', op: $('🧩 Confere o pedido').first().json.op, erro: String($json.erro || ($json.error && ($json.error.message || $json.error.description)) || $json.message || 'Falha inesperada').slice(0, 300) }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "⚠️ Marca erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2208,
+    1232
+   ],
+   "id": "7928ef90-e208-417d-bdfe-41afb01eac8d",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## ⚠️ QUANDO ALGO FALHA\nAs fotos não abriram, a Shotstack recusou o vídeo, o roteiro ou a revisão deram erro? A saída de erro deles vem para cá: 💾 **Marca erro** grava o motivo e a página mostra para a pessoa, em vez de ficar girando para sempre.",
+    "height": 413,
+    "width": 660,
+    "color": 3
+   },
+   "name": "Nota · Erro",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2112,
+    1008
+   ],
+   "id": "7eb39cfa-5e07-4a3b-ab12-d19793f85c65"
+  },
+  {
+   "parameters": {
+    "content": "# 🎬 VÍDEO DE ANÚNCIO COM IA (FOTOS → REELS NARRADO) · VERSÃO SHOTSTACK\n\n🎯 **O que faz:** o dono manda **3 a 15 fotos** do que vende (imóvel, produto, prato, carro, serviço, evento) e recebe:\n🎞️ um **vídeo de anúncio** de 15, 30 ou 60 s, em pé (Reels, TikTok, Status), quadrado ou deitado\n🧭 com **estratégia de venda** (gancho, benefícios, chamada) e **roteiro** escrito pela IA\n🔍 **revisado 2 vezes** (roteiro e textos): a IA não pode inventar preço, característica nem contato\n🎙️ **narração** com voz neural e **legenda animada** que acende junto com a fala\n📸 **movimento de câmera** em cada foto (zoom no detalhe, panorâmica no ambiente)\n💲 **selo de preço**, manchetes, logo e **cartão final** com WhatsApp e @\n🎵 **trilha** que abaixa quando a voz fala + **versão só com música** para Stories\n📣 **textos para postar**: legenda com hashtags, título para Shorts, Status, texto para portais\n🌐 uma **página do anúncio** (30 dias) com vídeo, fotos, botão de WhatsApp, QR e contador de visitas\n\n## 🧰 ANTES DE USAR NO SEU n8n\n1️⃣ **IA**: nos 6 nodes 🧠 e nos 6 🛟 escolha a SUA credencial OpenAI (ou de um roteador compatível) e, em **Model**, um modelo que ela tenha (ex.: `gpt-4o-mini`). No node 👀 **IA olha as fotos** troque o endereço por `https://api.openai.com/v1/chat/completions`, escolha a mesma credencial e, no 🧩 **Prepara as fotos para a IA**, troque o `model` por um modelo com visão (ex.: `gpt-4o-mini`). ⚠️ Não deixe o endereço que veio no fluxo: suas chaves e as fotos dos clientes iriam para o servidor de outra pessoa.\n2️⃣ **Redis**: crie uma credencial Redis (Redis Cloud tem plano grátis) e escolha ela em todos os nodes 📖 e 💾.\n3️⃣ **Endereço público**: o seu n8n precisa abrir pela internet em **https** (a API de vídeo e o wsrv.nl baixam as fotos por ele). n8n local no PC não funciona; em servidor próprio, configure `WEBHOOK_URL`.\n4️⃣ **Ative o fluxo** (botão **Active/Publish** lá em cima): sem isso as páginas dão erro 404.\n5️⃣ Se algum node 🧩 der erro `crypto is not defined`, o seu n8n precisa liberar o módulo: variável `NODE_FUNCTION_ALLOW_BUILTIN=crypto`.\n\n## ▶️ COMO USAR (pela página)\n1️⃣ Abra **/webhook/anuncio-video-ss** no navegador\n2️⃣ Envie as fotos ou toque em **🏠 Usar exemplo: apartamento** (ou 🍔 hamburgueria)\n3️⃣ Preencha o que é, o preço e os detalhes ➜ **🎬 Criar o vídeo do anúncio**\n4️⃣ Acompanhe as etapas e baixe o vídeo (2 a 4 min)\n\n## 🧪 SÓ QUER VER FUNCIONANDO?\nUse o **TESTE RÁPIDO** aqui embaixo: 1 clique, com as fotos de exemplo.\n\n## 🧱 QUEM FAZ O QUÊ\n🧠 **n8n (este fluxo)**: decide tudo, chama as 6 IAs (estrategista, roteirista, 2 revisoras, diretor e copywriter), a visão e acompanha\n🎬 **Shotstack** (API na internet): narra com voz ElevenLabs, dá movimento às fotos, escreve na tela, põe legenda e trilha e guarda o MP4 para sempre no CDN dele · 💾 as fotos ficam no seu **Redis** · 🌐 **wsrv.nl** faz as miniaturas\n🔑 **Precisa de:** uma IA compatível com OpenAI, Redis e a chave grátis da Shotstack (veja a nota 🎬 QUEM FAZ O VÍDEO). **Não precisa de servidor de vídeo.**\n\n## 🔎 LEGENDA DOS ÍCONES\n🔔 recebe um pedido (webhook) · 📤 responde · 🧪 teste manual · ⏰ relógio\n🧩 código · ✏️ campos · 🚦 decisão sim/não · 🔀 escolhe o caminho · 🔁 laço\n📖 lê do Redis · 💾 grava no Redis · 🧮 soma · 🗂️ lista · 🗑️ apaga\n🤖 agente de IA · 🧠 cérebro (modelo) · 🛟 cérebro reserva\n🌐 chama outro serviço · ⏳ espera · 🎨 desenha imagem · 📸 Instagram\n🎬 Shotstack · 👀 IA com visão · 📱 desenha a página",
+    "height": 1102,
+    "width": 1240,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1408,
+    0
+   ],
+   "id": "710cfcf0-7699-4391-bae9-65a8305867b1"
+  },
+  {
+   "parameters": {},
+   "name": "🧪 Teste rápido (clique no ▶️)",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    -1296,
+    1424
+   ],
+   "id": "f10ce8e6-afd3-4829-a07c-115cb0de7dc4"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "e162d24c-4f16-4425-944d-f63cf0ad7610",
+       "name": "fotos",
+       "value": "exemplo-apartamento-1, exemplo-apartamento-2, exemplo-apartamento-3, exemplo-apartamento-4, exemplo-apartamento-5",
+       "type": "string"
+      },
+      {
+       "id": "3f2af4e4-2096-48ab-8b4c-5c079f791b74",
+       "name": "tipo",
+       "value": "imovel",
+       "type": "string"
+      },
+      {
+       "id": "cc1ae15b-1585-47c8-92fc-387da2496506",
+       "name": "marca",
+       "value": "Vista Alta Imóveis",
+       "type": "string"
+      },
+      {
+       "id": "e72b3a89-869f-437d-bbb9-23744d611be5",
+       "name": "titulo",
+       "value": "Apartamento 3 quartos com varanda gourmet e vista",
+       "type": "string"
+      },
+      {
+       "id": "d5e9f3ae-308e-406e-b567-c7e0e74d9c43",
+       "name": "preco",
+       "value": "R$ 890 mil",
+       "type": "string"
+      },
+      {
+       "id": "10fa4ced-687f-4521-9aa4-6d2a461d9d50",
+       "name": "oferta",
+       "value": "Entrada facilitada em até 36 vezes",
+       "type": "string"
+      },
+      {
+       "id": "d1cfceda-89e4-47e1-ae75-d0f868611073",
+       "name": "detalhes",
+       "value": "98 m² no 12º andar, 3 quartos sendo 1 suíte master, sala ampla com janelas do chão ao teto, cozinha planejada com ilha, varanda gourmet com churrasqueira e vista para a cidade, 2 vagas, prédio com portaria 24 horas, piscina e academia.",
+       "type": "string"
+      },
+      {
+       "id": "57111479-7987-4b9f-aa71-2d6fc1974989",
+       "name": "whatsapp",
+       "value": "11988887777",
+       "type": "string"
+      },
+      {
+       "id": "011bcb2c-251d-4a89-b56d-691d87db40a6",
+       "name": "instagram",
+       "value": "@vistaalta.imoveis",
+       "type": "string"
+      },
+      {
+       "id": "f500f1e6-68b7-4f52-ada1-8cc75bf44920",
+       "name": "endereco",
+       "value": "Rua das Palmeiras, 450 - Centro, São Paulo - SP",
+       "type": "string"
+      },
+      {
+       "id": "a569a5a9-3f16-4542-bfe3-fb4f308a1952",
+       "name": "duracao",
+       "value": 30,
+       "type": "number"
+      },
+      {
+       "id": "eb8b5e0f-ac65-4fd6-8946-8380d0caed31",
+       "name": "formato",
+       "value": "vertical",
+       "type": "string"
+      },
+      {
+       "id": "03eaee5d-311b-48f4-871d-9fbc1dc50b43",
+       "name": "voz",
+       "value": "pt-BR-ThalitaMultilingualNeural",
+       "type": "string"
+      },
+      {
+       "id": "126174f3-95c4-427e-bdd0-f4402e6be5c3",
+       "name": "clima",
+       "value": "auto",
+       "type": "string"
+      },
+      {
+       "id": "fdb00d7b-d732-4333-a69f-4b1b2a273aa4",
+       "name": "cor",
+       "value": "",
+       "type": "string"
+      },
+      {
+       "id": "1fc0a091-53db-439b-aafa-c2a66eed13fc",
+       "name": "legendas",
+       "value": true,
+       "type": "boolean"
+      },
+      {
+       "id": "de241f73-f675-4d43-9998-3c65e65d23e5",
+       "name": "versao_musica",
+       "value": true,
+       "type": "boolean"
+      },
+      {
+       "id": "36727e3b-baed-40c8-8a57-147224dab41b",
+       "name": "cartao_final",
+       "value": true,
+       "type": "boolean"
+      },
+      {
+       "id": "0457b3b5-f230-40d9-96ea-dff5987b7824",
+       "name": "manter_ordem",
+       "value": false,
+       "type": "boolean"
+      },
+      {
+       "id": "cc871cda-7728-4fa7-b8d9-82a14e164fde",
+       "name": "endereco_do_n8n",
+       "value": "={{ $execution.resumeUrl.split('/webhook-waiting')[0] }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "✏️ Escolhas do teste (mude à vontade)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -1008,
+    1424
+   ],
+   "id": "97f7ef01-f504-4464-9404-f0e74fb29071"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.endereco_do_n8n }}/webhook/anuncio-video-ss",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ fotos: String($json.fotos).split(',').map(f => f.trim()).filter(Boolean), tipo: $json.tipo, marca: $json.marca, titulo: $json.titulo, preco: $json.preco, oferta: $json.oferta, detalhes: $json.detalhes, whatsapp: $json.whatsapp, instagram: $json.instagram, endereco: $json.endereco, duracao: $json.duracao, formato: $json.formato, voz: $json.voz, clima: $json.clima, cor: $json.cor, legendas: $json.legendas, versao_musica: $json.versao_musica, cartao_final: $json.cartao_final, manter_ordem: $json.manter_ordem }) }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 30000
+    }
+   },
+   "name": "🌐 Manda para o gerador",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -704,
+    1424
+   ],
+   "id": "c7df5f50-e096-49f8-823a-b3d5c2e6fa42"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O gerador respondeu na hora com o link da página de andamento.\nconst r = $input.first().json;\nif (!r.ok) throw new Error('O gerador recusou o teste: ' + (r.erros || [r.message || 'sem resposta']).join(' '));\nreturn [{ json: { '👉 abra para ver ao vivo': r.link, job: String(r.link).split('job=')[1] } }];"
+   },
+   "name": "👉 Acompanhe ao vivo (abra o link)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -400,
+    1424
+   ],
+   "id": "aaffe611-e950-4ec9-9d71-d878738be3b4"
+  },
+  {
+   "parameters": {
+    "amount": 15
+   },
+   "name": "⏳ Espera 15 segundos",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    -400,
+    1680
+   ],
+   "id": "cfd551b5-5398-4ffd-8292-7fee568a0030",
+   "webhookId": "59e98671-cb2e-4a19-86ed-0561747d855e"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('✏️ Escolhas do teste (mude à vontade)').first().json.endereco_do_n8n }}/webhook/anuncio-video-ss-status?job={{ $('👉 Acompanhe ao vivo (abra o link)').first().json.job }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 30000
+    }
+   },
+   "name": "🌐 Pergunta como está o teste",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -704,
+    1680
+   ],
+   "id": "b2902dd6-9c1c-4e75-9cbc-33f6ff055779",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "f5f46506-82d0-4ac9-9565-07a2d6ea8d52",
+       "leftValue": "={{ ['pronto', 'erro'].includes($json.etapa) || $runIndex >= 40 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 O teste terminou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -1008,
+    1680
+   ],
+   "id": "9f1715e2-c65c-41a1-98e5-74f689c0666c"
+  },
+  {
+   "parameters": {
+    "jsCode": "// pronto = mostra os links · erro = o node fica vermelho com o motivo\nconst s = $input.first().json;\nif (s.etapa === 'pronto') return [{ json: { '✅': 'Anúncio pronto em ' + s.segundos + ' s', '🎬 vídeo narrado': s.video, '🎵 só com música': s.video_musica, '🖼️ capa': s.capa,\n  '🌐 página do anúncio': s.pagina, '📣 legenda para postar': (s.redes || {}).legenda, '🔍 a revisora ajustou': ((s.revisao || {}).problemas || []).join(' | ') || 'nada',\n  'duração (s)': s.duracao, cenas: (s.roteiro || []).length } }];\nif (s.etapa === 'erro') throw new Error('O gerador parou com erro: ' + s.erro);\nthrow new Error('Passou de 10 minutos sem terminar (última etapa: ' + (s.etapa || '?') + '). Veja na aba Executions.');"
+   },
+   "name": "🎉 Resultado do teste",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -1296,
+    1680
+   ],
+   "id": "4cb9346b-a95e-4b9e-849f-f8124d3480ec"
+  },
+  {
+   "parameters": {
+    "content": "## 🧪 TESTE RÁPIDO (1 clique, com as fotos de exemplo)\n1️⃣ Passe o mouse no node **🧪 Teste rápido** e clique no ▶️ (ou no botão **Execute workflow** lá embaixo)\n2️⃣ No node **👉 Acompanhe ao vivo**, abra o link que aparece: é a página com as etapas acendendo\n3️⃣ Em 2 a 4 minutos o node **🎉 Resultado do teste** mostra o vídeo, a versão só música e a **página do anúncio** ✅\n✏️ Para testar outra coisa, mude os campos em **✏️ Escolhas do teste** (as opções estão na nota 🎛️ aqui embaixo).\n💡 O teste chama o fluxo pelo mesmo endereço que a página usa. Para ver cada node trabalhando, abra a aba **Executions**.",
+    "height": 733,
+    "width": 1240,
+    "color": 4
+   },
+   "name": "Nota · Teste rápido",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1408,
+    1152
+   ],
+   "id": "afe6c1ea-a0ad-4c92-9211-deb0fba52fb5"
+  },
+  {
+   "parameters": {
+    "content": "## 🎛️ OPÇÕES (para mudar no ✏️ Escolhas do teste)\n📸 **fotos**: lista separada por vírgula · exemplos: `exemplo-apartamento-1` a `-5` · `exemplo-hamburguer-1` a `-4` (ou códigos de fotos enviadas pela página)\n🏷️ **tipo**: `imovel` · `produto` · `comida` · `veiculo` · `servico` · `evento` · `outro`\n⏱️ **duracao**: `15` · `30` · `60` (segundos)\n📐 **formato**: `vertical` (9:16) · `quadrado` (1:1) · `deitado` (16:9)\n🎙️ **voz**: `pt-BR-ThalitaMultilingualNeural` · `pt-BR-FranciscaNeural` · `en-US-AndrewMultilingualNeural` · `en-US-BrianMultilingualNeural`\n🎵 **clima**: `auto` (a IA escolhe) · `elegante` · `animado` · `urgente` · `emocional` · `calmo` · `tropical` · `latino` · `chill`\n🎨 **cor**: vazio = a IA escolhe, ou ex. `#C9A227`\n✅ **legendas**, **versao_musica**, **cartao_final**, **manter_ordem**: `true` ou `false`\n🔗 **endereco_do_n8n**: descobre sozinho (não precisa mexer)",
+    "height": 373,
+    "width": 1240,
+    "color": 7
+   },
+   "name": "Nota · Opções",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1408,
+    1920
+   ],
+   "id": "3342e845-e011-4099-8b64-090563330d47"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "anuncio-video-ss-foto",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Recebe a foto (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    -508
+   ],
+   "id": "023d5782-d1b1-4a20-9710-21f842ef0dfb",
+   "webhookId": "c6464355-beea-42d2-85e8-f77968f05dad"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere a foto que a página mandou (JPG, PNG ou WEBP de até 25 MB) e prepara para guardar no Redis (30 dias).\n// O \"código\" da foto é aleatório; o endereço público é /webhook/anuncio-video-ss-arquivo?id=<código>.\nconst it = $input.first();\nconst chave = Object.keys(it.binary || {})[0];\nif (!chave) return [{ json: { ok: false, erro: 'Nenhuma foto chegou.' } }];\nconst arq = it.binary[chave];\nconst EXT = { 'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };\nconst ext = EXT[String(arq.mimeType || '').toLowerCase()];\nif (!ext) return [{ json: { ok: false, erro: /heic|heif/i.test(arq.mimeType + arq.fileName) ? 'Foto HEIC: abra no celular e mande de novo (o iPhone converte para JPG).' : 'Formato não aceito. Envie JPG, PNG ou WEBP.' } }];\nconst buf = await this.helpers.getBinaryDataBuffer(0, chave);\nif (buf.length > 25e6) return [{ json: { ok: false, erro: 'Foto maior que 25 MB.' } }];\nconst id = require('crypto').randomBytes(6).toString('hex') + '.' + ext;\nreturn [{ json: { ok: true, id, b64: buf.toString('base64') } }];\n"
+   },
+   "name": "🧩 Confere a foto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    320,
+    -508
+   ],
+   "id": "ed5436c2-8f3a-43ca-be2b-4077013aaad4"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "228c053d-572b-4b6a-92e2-2050e0733477",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Foto ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    640,
+    -508
+   ],
+   "id": "2c91186a-9ea8-4643-b8db-c2077477f359"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anvss:foto:{{ $json.id }}",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "💾 Guarda a foto (30 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    960,
+    -628
+   ],
+   "id": "7a85122f-4322-4217-bc9b-667342cf65aa",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($('🧩 Confere a foto').first().json.ok ? { ok: true, id: $('🧩 Confere a foto').first().json.id } : { ok: false, erro: $('🧩 Confere a foto').first().json.erro }) }}",
+    "options": {
+     "responseCode": "={{ $('🧩 Confere a foto').first().json.ok ? 200 : 400 }}",
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde a foto",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1280,
+    -508
+   ],
+   "id": "1bf8599e-0a69-4acf-9170-cd325aa240d9"
+  },
+  {
+   "parameters": {
+    "path": "anuncio-video-ss-arquivo",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Entrega a foto (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    -208
+   ],
+   "id": "69f9fc45-fdfb-47c7-86ee-2a3936c2be37",
+   "webhookId": "16e6d6d4-a711-4800-b8cb-b6f38ee4cb05"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "foto",
+    "key": "=anvss:foto:{{ String($json.query.id || '').replace(/[^a-z0-9.-]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê a foto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    320,
+    -208
+   ],
+   "id": "ad7e9dcf-be39-4988-956e-44812d70b25e",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Transforma a foto guardada no Redis (texto base64) de volta em arquivo, para o webhook entregar como imagem.\n// As fotos de exemplo (exemplo-apartamento-1...) vêm do catbox.moe e são entregues pelo mesmo endereço: assim quem lê\n// as fotos (wsrv.nl, a API de vídeo, a página) só precisa alcançar este n8n.\nconst EXEMPLOS = {\"apartamento\": [\"https://files.catbox.moe/lofjjm.jpg\", \"https://files.catbox.moe/zs3gzu.jpg\", \"https://files.catbox.moe/u3ca8g.jpg\", \"https://files.catbox.moe/yuif3s.jpg\", \"https://files.catbox.moe/9nfm29.jpg\"], \"hamburguer\": [\"https://files.catbox.moe/mudpbx.jpg\", \"https://files.catbox.moe/lj04p7.jpg\", \"https://files.catbox.moe/k4t93w.jpg\", \"https://files.catbox.moe/ismue4.jpg\"]};\nconst id = String($('🔔 Entrega a foto (GET)').first().json.query.id || '');\nconst MIME = { jpg: 'image/jpeg', png: 'image/png', webp: 'image/webp' };\n// as trilhas (trilha-elegante...) também passam por aqui: o catbox derruba downloads de alguns servidores na nuvem\nconst TRILHAS = {\"animado\": \"https://files.catbox.moe/qpmdb1.mp3\", \"calmo\": \"https://files.catbox.moe/xoym41.mp3\", \"chill\": \"https://files.catbox.moe/2rqu0z.mp3\", \"elegante\": \"https://files.catbox.moe/yb6h1l.mp3\", \"emocional\": \"https://files.catbox.moe/tomvef.mp3\", \"latino\": \"https://files.catbox.moe/kic00y.mp3\", \"tropical\": \"https://files.catbox.moe/x14vcg.mp3\", \"urgente\": \"https://files.catbox.moe/2gttp6.mp3\"};\nconst ex = /^exemplo-([a-z]+)-(\\d{1,2})$/.exec(id);\nconst tr = /^trilha-([a-z]+)$/.exec(id);\nif (ex || tr) {\n  const url = ex ? (EXEMPLOS[ex[1]] || [])[Number(ex[2]) - 1] : TRILHAS[tr[1]];\n  if (!url) return [{ json: { existe: false } }];\n  const dados = await this.helpers.httpRequest({ url, encoding: 'arraybuffer', timeout: 60000 });\n  const bin = ex ? await this.helpers.prepareBinaryData(Buffer.from(dados), id + '.jpg', 'image/jpeg')\n    : await this.helpers.prepareBinaryData(Buffer.from(dados), id + '.mp3', 'audio/mpeg');\n  return [{ json: { existe: true }, binary: { data: bin } }];\n}\n// do Redis: fotos enviadas pela página e capas (código.jpg) e, na versão ffmpeg, as vozes e os textos de cada vídeo\nconst b64 = String($input.first().json.foto || '');\nif (!/^([a-f0-9]{12}\\.(jpg|png|webp)|(voz|textos)-[a-z0-9-]{4,60}\\.(mp3|ass))$/.test(id) || !b64) return [{ json: { existe: false } }];\nconst TIPO = { ...MIME, mp3: 'audio/mpeg', ass: 'text/plain' };\nconst binario = await this.helpers.prepareBinaryData(Buffer.from(b64, 'base64'), id, TIPO[id.split('.').pop()]);\nreturn [{ json: { existe: true }, binary: { data: binario } }];\n"
+   },
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    640,
+    -208
+   ],
+   "id": "be795346-f3d4-479e-85a8-62137cdf32d2"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "512f69f2-b305-46b1-9a75-2f45942c9b62",
+       "leftValue": "={{ $json.existe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 A foto existe?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    960,
+    -208
+   ],
+   "id": "fcd8d780-911c-44a7-835d-4a44927c7556"
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=86400"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega a imagem",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1280,
+    -308
+   ],
+   "id": "3d24193d-2c9f-4789-855b-85b38b00c538"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "foto não encontrada (passou de 30 dias?)",
+    "options": {
+     "responseCode": 404
+    }
+   },
+   "name": "📤 Foto não encontrada",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1280,
+    -108
+   ],
+   "id": "b9e18123-5cca-463f-90e0-3ef1e76a6cf1"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Uma linha por foto, para medir e baixar a miniatura de cada uma.\nreturn $('🧩 Confere o pedido').first().json.fotos.map((url, i) => ({ json: { i, url } }));\n"
+   },
+   "name": "🧩 Lista as fotos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1488,
+    1344
+   ],
+   "id": "0640e0b9-1906-4ab9-bb09-167ed887cc10"
+  },
+  {
+   "parameters": {
+    "url": "=https://wsrv.nl/?url={{ encodeURIComponent($json.url) }}&output=json",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🌐 Mede a foto (wsrv.nl)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1168,
+    1344
+   ],
+   "id": "983b7d9e-b632-4b3f-8da7-17f74c90bc49",
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "url": "=https://wsrv.nl/?url={{ encodeURIComponent($('🧩 Lista as fotos').item.json.url) }}&w=512&h=512&fit=inside&output=jpg&q=72",
+    "options": {
+     "response": {
+      "response": {
+       "responseFormat": "file"
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🌐 Baixa a miniatura (wsrv.nl)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1168,
+    1664
+   ],
+   "id": "0a143ac1-64bd-49ae-a616-65904cf47928",
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta a edição para o Shotstack: cada trecho do roteiro vira uma voz (ElevenLabs, gerada pelo próprio Shotstack) com\n// apelido \"v1\", \"v2\"...; a foto, a manchete, o selo de preço e a legenda de cada cena ficam presos ao tempo dessa voz.\n// No fim, 3 s de silêncio seguram o cartão final. A versão só com música é a MESMA edição com a voz no volume zero\n// e sem legenda (o Shotstack reaproveita a voz já gerada, sem cobrar de novo).\nconst v = $('🧩 Confere o pedido').first().json;\nconst ed = $('🧩 Junta tudo').first().json;\n// ambiente do Shotstack: 'stage' = sandbox (render grátis, com marca d'água) · 'v1' = produção (gasta créditos, sem marca)\n// Trocou para 'v1'? Troque também a chave na credencial (a de produção é outra).\nconst AMBIENTE = 'stage';\nconst FORMATOS = { vertical: [1080, 1920], quadrado: [1080, 1080], deitado: [1920, 1080] };\nconst [W, H] = FORMATOS[v.op.formato] || FORMATOS.vertical;\nconst vertical = H > W;\nconst k = Math.min(W, H) / 1080;\n// vozes da página -> vozes do ElevenLabs que falam português (o Shotstack não tem as vozes da Microsoft)\nconst VOZES = { 'pt-BR-ThalitaMultilingualNeural': 'Sarah', 'pt-BR-FranciscaNeural': 'Laura', 'en-US-AndrewMultilingualNeural': 'Chris', 'en-US-BrianMultilingualNeural': 'Brian' };\nconst TRILHAS = {\n  animado: 'https://files.catbox.moe/qpmdb1.mp3', calmo: 'https://files.catbox.moe/xoym41.mp3', chill: 'https://files.catbox.moe/2rqu0z.mp3',\n  elegante: 'https://files.catbox.moe/yb6h1l.mp3', emocional: 'https://files.catbox.moe/tomvef.mp3', latino: 'https://files.catbox.moe/kic00y.mp3',\n  tropical: 'https://files.catbox.moe/x14vcg.mp3', urgente: 'https://files.catbox.moe/2gttp6.mp3',\n};\nconst SILENCIO = 'https://files.catbox.moe/6v3qjd.mp3';\nconst clara = c => { const n = parseInt(String(c).slice(1), 16); return ((n >> 16) * 299 + ((n >> 8) & 255) * 587 + (n & 255) * 114) / 1000 > 150; };\nconst cor = /^#[0-9A-Fa-f]{6}$/.test(ed.cor || '') ? ed.cor : '#F59E0B';\nconst corTexto = clara(cor) ? '#111111' : '#FFFFFF';\nconst destaque = clara(cor) ? cor : '#FFD400';\nconst limpa = s => String(s || '').replace(/[\\u{1F000}-\\u{1FAFF}☀-➿️‍]/gu, '').trim();\nconst foto = u => /\\.(jpe?g|png)$/i.test(u) && !/\\?/.test(u) ? u : 'https://wsrv.nl/?url=' + encodeURIComponent(u) + '&w=2560&h=2560&fit=inside&output=jpg&q=90';\n// movimento de câmera do diretor -> efeito do Shotstack\nconst EFEITO = { zoom_in: 'zoomInSlow', zoom_out: 'zoomOutSlow', pan_esq: 'slideLeftSlow', pan_dir: 'slideRightSlow', pan_cima: 'slideUpSlow', pan_baixo: 'slideDownSlow', parado: undefined };\nconst TRANS = { fade: 'fade', fadeblack: 'fade', fadewhite: 'fade', dissolve: 'fade', slideleft: 'slideLeft', slideright: 'slideRight', wipeleft: 'wipeLeft',\n  wiperight: 'wipeRight', smoothleft: 'carouselLeft', smoothright: 'carouselRight', circleopen: 'zoom', radial: 'zoom', zoomin: 'zoom', hblur: 'fade', pixelize: 'fade' };\n\n// caixa de texto (manchete, preço, contatos): rich-text com fundo colorido e cantos arredondados\nfunction texto(t, alias, y, tam, fundo, corT, peso) {\n  return {\n    asset: { type: 'rich-text', text: limpa(t),\n      font: { family: 'Montserrat', size: Math.round(tam * k), weight: peso || 800, color: corT || corTexto },\n      ...(fundo ? { background: { color: fundo, borderRadius: Math.round(18 * k), wrap: true, padding: Math.round(20 * k) } }\n        : { stroke: { width: 3, color: '#000000' } }),\n      align: { horizontal: 'center', vertical: 'middle' }, animation: { preset: 'fadeIn', duration: 0.4 } },\n    start: alias, length: alias, width: Math.round(W * 0.9), height: Math.round(tam * k * 2.4), position: 'center', offset: { x: 0, y: y },\n  };\n}\n\nfunction edicao(muda) {\n  const vozes = [], fotos = [], textos = [], legendas = [];\n  ed.segmentos.forEach((s, i) => {\n    const a = 'v' + (i + 1), alias = 'alias://' + a;\n    vozes.push({ alias: a, asset: { type: 'audio', prompt: limpa(s.texto), model: 'elevenlabs-multilingual-v2',\n      options: { voice: VOZES[v.op.voz] || 'Sarah', language: 'pt' }, volume: muda ? 0 : 1 }, start: 'auto', length: 'auto' });\n    const ef = EFEITO[s.movimento];\n    fotos.push({ asset: { type: 'image', src: foto(v.fotos[s.foto] || v.fotos[0]) }, start: alias, length: alias, fit: 'crop',\n      ...(ef ? { effect: ef } : {}), transition: { in: i ? (TRANS[s.transicao] || 'fade') : 'fade' } });\n    if (s.texto_tela) textos.push(texto(s.texto_tela, alias, vertical ? 0.36 : 0.36, vertical ? 62 : 54, cor));\n    if (s.selo_preco && v.dados.preco) textos.push(texto(v.dados.preco, alias, vertical ? -0.08 : -0.02, vertical ? 84 : 64, cor));\n    // legenda com o texto EXATO do roteiro (a transcrição automática do Shotstack ouviu \"switch\" no lugar de \"suíte\"):\n    // as palavras sobem uma a uma no ritmo médio da voz (~15 letras por segundo)\n    // fala longa = letra menor, para caber na caixa (com 64 px uma fala de 110 letras dava 6 linhas e cortava)\n    const n = limpa(s.texto).length, tam = (vertical ? 64 : 50) * (n <= 60 ? 1 : n <= 100 ? 0.82 : 0.7);\n    if (!muda && v.op.legendas) legendas.push({ asset: { type: 'rich-text', text: limpa(s.texto),\n      font: { family: 'Montserrat', size: Math.round(tam * k), weight: 800, color: '#FFFFFF' },\n      stroke: { width: 5, color: '#000000' }, align: { horizontal: 'center', vertical: 'middle' },\n      animation: { preset: 'ascend', style: 'word', duration: Math.max(0.6, Math.round(limpa(s.texto).length / 15 * 0.85 * 10) / 10) } },\n      start: alias, length: alias, width: Math.round(W * 0.88), height: Math.round(H * (vertical ? 0.24 : 0.3)), position: 'bottom', offset: { x: 0, y: vertical ? 0.1 : 0.04 } });\n  });\n  if (v.op.cartao_final) {\n    vozes.push({ alias: 'fim', asset: { type: 'audio', src: SILENCIO }, start: 'auto', length: 'auto' });\n    const fim = 'alias://fim';\n    const f0 = v.fotos[ed.segmentos[0].foto] || v.fotos[0];\n    fotos.push({ asset: { type: 'image', src: 'https://wsrv.nl/?url=' + encodeURIComponent(f0) + `&w=${W}&h=${H}&fit=cover&blur=14&mod=0.5&output=jpg&q=80` },\n      start: fim, length: fim, fit: 'crop', effect: 'zoomInSlow', transition: { in: 'fade' } });\n    textos.push(texto(v.dados.marca || v.dados.titulo, fim, 0.28, vertical ? 72 : 58, null, '#FFFFFF'));\n    if (ed.cta) textos.push(texto(ed.cta, fim, 0.1, vertical ? 66 : 54, cor));\n    if (v.dados.preco) textos.push(texto(v.dados.preco, fim, -0.05, vertical ? 60 : 48, null, '#FFFFFF'));\n    (ed.contatos || []).slice(0, 3).forEach((c, j) => textos.push(texto(c, fim, -0.18 - j * 0.075, vertical ? 46 : 38, null, '#FFFFFF', 700)));\n  }\n  const tracks = [];\n  if (v.logo) tracks.push({ clips: [{ asset: { type: 'image', src: 'https://wsrv.nl/?url=' + encodeURIComponent(v.logo) + '&w=600&h=600&fit=inside&output=png' }, start: 0, length: 'end', fit: 'contain', scale: vertical ? 0.16 : 0.12, position: 'topRight', offset: { x: -0.03, y: -0.02 } }] });\n  if (legendas.length) tracks.push({ clips: legendas });\n  if (textos.length) tracks.push({ clips: textos });\n  tracks.push({ clips: fotos }, { clips: vozes });   // no Shotstack a primeira trilha fica por cima\n  return {\n    timeline: { background: '#000000', soundtrack: { src: TRILHAS[ed.clima] || TRILHAS.elegante, effect: 'fadeOut', volume: muda ? 0.8 : 0.12 },\n      fonts: [{ src: 'https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr70w-.ttf' }], tracks },   // Montserrat 800\n    output: { format: 'mp4', fps: 30, size: { width: W, height: H }, poster: { capture: 1.2 } },\n  };\n}\n\nconst pedidos = [{ json: { versao: 'narrado', ambiente: AMBIENTE, corpo: JSON.stringify(edicao(false)) } }];\nif (v.op.versao_musica) pedidos.push({ json: { versao: 'musica', ambiente: AMBIENTE, corpo: JSON.stringify(edicao(true)) } });\nreturn pedidos;\n"
+   },
+   "name": "🧩 Monta o filme (Shotstack)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1328,
+    3632
+   ],
+   "id": "94df9604-c43f-48ce-ae95-f92ac5721c35"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://api.shotstack.io/edit/{{ $json.ambiente }}/render",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Shotstack: cria o vídeo",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1008,
+    3632
+   ],
+   "id": "690b8f6a-f473-4ac2-bb6a-74e83e08e2c3",
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "SjCl7TFaI1BYM4oD",
+     "name": "Shotstack (x-api-key)"
+    }
+   },
+   "onError": "continueErrorOutput",
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 3000
+  },
+  {
+   "parameters": {
+    "jsCode": "// Guarda o código de cada vídeo que o Shotstack aceitou (o narrado e, se pediu, o só com música) para o laço perguntar o andamento.\nconst pedidos = $('🧩 Monta o filme (Shotstack)').all().map(x => x.json);\nconst p = { inicio: Date.now(), ambiente: pedidos[0].ambiente };\n$input.all().forEach((it, i) => {\n  const r = it.json || {};\n  if (r.success && r.response && r.response.id) p[pedidos[i].versao] = r.response.id;\n});\nif (!p.narrado) {\n  const r = $input.first().json || {};\n  const motivo = (r.response && (r.response.error || r.response.message)) || r.message || (r.error && r.error.message) || 'sem resposta';\n  throw new Error('O Shotstack recusou o vídeo: ' + String(motivo).slice(0, 240));\n}\nreturn [{ json: p }];\n"
+   },
+   "name": "🧩 Guarda os projetos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1328,
+    4448
+   ],
+   "id": "de960122-3e79-4133-9abf-ab9f6ec04895",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "url": "=https://api.shotstack.io/edit/{{ $('🧩 Guarda os projetos').first().json.ambiente }}/render/{{ $('🧩 Guarda os projetos').first().json.narrado || $('🧩 Guarda os projetos').first().json.narrado }}",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Shotstack: como está o narrado?",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    672,
+    4448
+   ],
+   "id": "c9589cb9-35f4-4b95-8780-11b8be6ee9eb",
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "SjCl7TFaI1BYM4oD",
+     "name": "Shotstack (x-api-key)"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "=https://api.shotstack.io/edit/{{ $('🧩 Guarda os projetos').first().json.ambiente }}/render/{{ $('🧩 Guarda os projetos').first().json.musica || $('🧩 Guarda os projetos').first().json.narrado }}",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Shotstack: como está o só música?",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    352,
+    4448
+   ],
+   "id": "6e497b8c-b80d-408f-bd0b-7afb91fcf754",
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "SjCl7TFaI1BYM4oD",
+     "name": "Shotstack (x-api-key)"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('🧩 Atualiza o andamento').first().json.capa }}",
+    "options": {
+     "response": {
+      "response": {
+       "responseFormat": "file"
+      }
+     },
+     "timeout": 120000
+    }
+   },
+   "name": "🌐 Baixa a capa",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    672,
+    4896
+   ],
+   "id": "266082b1-d354-41c3-b952-079250051043",
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000
+  },
+  {
+   "parameters": {
+    "jsCode": "// A Shotstack apaga o vídeo e a capa em 7 dias; a capa (prévia da página no WhatsApp) fica guardada no Redis por 30 dias.\nconst it = $input.first();\nconst chave = Object.keys(it.binary || {})[0];\nif (!chave) return [{ json: { ok: false } }];\nconst buf = await this.helpers.getBinaryDataBuffer(0, chave);\nreturn [{ json: { ok: true, id: require('crypto').randomBytes(6).toString('hex') + '.jpg', b64: buf.toString('base64') } }];\n"
+   },
+   "name": "🧩 Prepara a capa",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    992,
+    5096
+   ],
+   "id": "0af07882-b824-431b-826e-540f490b62ae"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=anvss:foto:{{ $json.ok ? $json.id : 'sem-capa' }}",
+    "value": "={{ $json.b64 || '' }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "💾 Guarda a capa (30 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1312,
+    5096
+   ],
+   "id": "588aeab1-30c1-4aad-8aab-062426a207b5",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "onError": "continueRegularOutput"
+  }
+ ],
+ "connections": {
+  "🔔 Página do anúncio (GET)": {
+   "main": [
+    [
+     {
+      "node": "🧾 Monta a página do formulário",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Página de andamento (GET)": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Consulta status (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o status": {
+   "main": [
+    [
+     {
+      "node": "🧩 Separa o anúncio do status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Separa o anúncio do status": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê as visitas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê as visitas": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido do anúncio (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o pedido": {
+   "main": [
+    [
+     {
+      "node": "🧮 Conta pedidos da hora",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧮 Conta pedidos da hora": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pode começar?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pode começar?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: recebido",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: recebido": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde com o link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde com o link": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: olhando as fotos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara as fotos para a IA": {
+   "main": [
+    [
+     {
+      "node": "👀 IA olha as fotos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "👀 IA olha as fotos": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê o que a IA viu",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê o que a IA viu": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: estratégia",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro da estrategista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Estrategista de anúncio",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro da estrategista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Estrategista de anúncio",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 Status: estratégia": {
+   "main": [
+    [
+     {
+      "node": "🤖 Estrategista de anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Estrategista de anúncio": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê a estratégia",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Lê a estratégia",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê a estratégia": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro da roteirista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Roteirista do anúncio",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro da roteirista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Roteirista do anúncio",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 Status: roteiro": {
+   "main": [
+    [
+     {
+      "node": "🤖 Roteirista do anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Roteirista do anúncio": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Confere o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o roteiro": {
+   "main": [
+    [
+     {
+      "node": "🚦 Roteiro ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Roteiro ok?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: revisão",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro da revisora": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Revisora de fidelidade",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro da revisora": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Revisora de fidelidade",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 Status: revisão": {
+   "main": [
+    [
+     {
+      "node": "🤖 Revisora de fidelidade",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Revisora de fidelidade": {
+   "main": [
+    [
+     {
+      "node": "🧩 Aplica a revisão",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Aplica a revisão",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Aplica a revisão": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: direção",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro do diretor": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Diretor de edição",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro do diretor": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Diretor de edição",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 Status: direção": {
+   "main": [
+    [
+     {
+      "node": "🤖 Diretor de edição",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro do copywriter": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Copywriter de redes",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro do copywriter": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Copywriter de redes",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "🤖 Diretor de edição": {
+   "main": [
+    [
+     {
+      "node": "🤖 Copywriter de redes",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 Copywriter de redes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Copywriter de redes": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê os textos de redes",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Lê os textos de redes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro da revisora dos textos": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Revisora dos textos",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro da revisora dos textos": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Revisora dos textos",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "🧩 Lê os textos de redes": {
+   "main": [
+    [
+     {
+      "node": "🤖 Revisora dos textos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Revisora dos textos": {
+   "main": [
+    [
+     {
+      "node": "🧩 Junta tudo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Junta tudo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Junta tudo": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: narrando",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Atualiza o andamento": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: montando",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: montando": {
+   "main": [
+    [
+     {
+      "node": "🚦 Terminou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Terminou?": {
+   "main": [
+    [
+     {
+      "node": "🚦 Ficou pronto?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 8 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Ficou pronto?": {
+   "main": [
+    [
+     {
+      "node": "🌐 Baixa a capa",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🎉 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara a página": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o anúncio": {
+   "main": [
+    [
+     {
+      "node": "🎉 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎉 Resultado final": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Página pública do anúncio (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o anúncio": {
+   "main": [
+    [
+     {
+      "node": "📱 Desenha a página do anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📱 Desenha a página do anúncio": {
+   "main": [
+    [
+     {
+      "node": "🚦 O anúncio existe?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 O anúncio existe?": {
+   "main": [
+    [
+     {
+      "node": "🧮 Conta a visita",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Página não encontrada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧮 Conta a visita": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página do anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧪 Teste rápido (clique no ▶️)": {
+   "main": [
+    [
+     {
+      "node": "✏️ Escolhas do teste (mude à vontade)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "✏️ Escolhas do teste (mude à vontade)": {
+   "main": [
+    [
+     {
+      "node": "🌐 Manda para o gerador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Manda para o gerador": {
+   "main": [
+    [
+     {
+      "node": "👉 Acompanhe ao vivo (abra o link)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "👉 Acompanhe ao vivo (abra o link)": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 15 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 15 segundos": {
+   "main": [
+    [
+     {
+      "node": "🌐 Pergunta como está o teste",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Pergunta como está o teste": {
+   "main": [
+    [
+     {
+      "node": "🚦 O teste terminou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 O teste terminou?": {
+   "main": [
+    [
+     {
+      "node": "🎉 Resultado do teste",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 15 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧾 Monta a página do formulário": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Recebe a foto (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere a foto": {
+   "main": [
+    [
+     {
+      "node": "🚦 Foto ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Foto ok?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda a foto (30 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Responde a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda a foto (30 dias)": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Entrega a foto (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê a foto": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "🚦 A foto existe?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 A foto existe?": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Foto não encontrada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: olhando as fotos": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lista as fotos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lista as fotos": {
+   "main": [
+    [
+     {
+      "node": "🌐 Mede a foto (wsrv.nl)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Mede a foto (wsrv.nl)": {
+   "main": [
+    [
+     {
+      "node": "🌐 Baixa a miniatura (wsrv.nl)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Baixa a miniatura (wsrv.nl)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara as fotos para a IA",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: narrando": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta o filme (Shotstack)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta o filme (Shotstack)": {
+   "main": [
+    [
+     {
+      "node": "🎬 Shotstack: cria o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Shotstack: cria o vídeo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Guarda os projetos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Guarda os projetos": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 8 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 8 segundos": {
+   "main": [
+    [
+     {
+      "node": "🎬 Shotstack: como está o narrado?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Shotstack: como está o narrado?": {
+   "main": [
+    [
+     {
+      "node": "🎬 Shotstack: como está o só música?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Shotstack: como está o só música?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Atualiza o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Baixa a capa": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara a capa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara a capa": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda a capa (30 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda a capa (30 dias)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "binaryMode": "separate"
+ },
+ "versionCounter": 35,
+ "versionMetadata": {
+  "name": null,
+  "description": null
+ }
+}

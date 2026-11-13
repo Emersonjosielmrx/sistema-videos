@@ -1,0 +1,996 @@
+{
+ "tracos": {
+  "chars": {
+   "cima": 43.572,
+   "baixo": 41.564,
+   "parceiros_cima_maior": 35,
+   "parceiros_cima_menor": 21
+  },
+  "palavras": {
+   "cima": 8.043,
+   "baixo": 7.676,
+   "parceiros_cima_maior": 33,
+   "parceiros_cima_menor": 20
+  },
+  "% maiúsculas": {
+   "cima": 0.186,
+   "baixo": 0.214,
+   "parceiros_cima_maior": 26,
+   "parceiros_cima_menor": 30
+  },
+  "palavra TODA maiúscula": {
+   "cima": 0.765,
+   "baixo": 0.923,
+   "parceiros_cima_maior": 18,
+   "parceiros_cima_menor": 23
+  },
+  "tem ?": {
+   "cima": 0.113,
+   "baixo": 0.13,
+   "parceiros_cima_maior": 13,
+   "parceiros_cima_menor": 21
+  },
+  "tem !": {
+   "cima": 0.229,
+   "baixo": 0.202,
+   "parceiros_cima_maior": 25,
+   "parceiros_cima_menor": 16
+  },
+  "tem emoji": {
+   "cima": 0.255,
+   "baixo": 0.254,
+   "parceiros_cima_maior": 12,
+   "parceiros_cima_menor": 11
+  },
+  "tem número": {
+   "cima": 0.092,
+   "baixo": 0.085,
+   "parceiros_cima_maior": 21,
+   "parceiros_cima_menor": 16
+  },
+  "hashtags": {
+   "cima": 1.729,
+   "baixo": 1.974,
+   "parceiros_cima_maior": 19,
+   "parceiros_cima_menor": 23
+  },
+  "começa com pergunta": {
+   "cima": 0.08,
+   "baixo": 0.08,
+   "parceiros_cima_maior": 11,
+   "parceiros_cima_menor": 20
+  },
+  "você/you": {
+   "cima": 0.048,
+   "baixo": 0.046,
+   "parceiros_cima_maior": 12,
+   "parceiros_cima_menor": 11
+  },
+  "ele/ela/he/she": {
+   "cima": 0.196,
+   "baixo": 0.202,
+   "parceiros_cima_maior": 23,
+   "parceiros_cima_menor": 23
+  },
+  "parte N": {
+   "cima": 0.01,
+   "baixo": 0.015,
+   "parceiros_cima_maior": 2,
+   "parceiros_cima_menor": 8
+  }
+ },
+ "parceiros": {
+  "sobanalisee": {
+   "n": 82,
+   "mediana": 17000.0,
+   "corte_cima": 178000,
+   "corte_baixo": 1600,
+   "exemplos_cima": [
+    "Does shaving make hair grow back thicker?",
+    "Why is the bottom of a plastic bottle shaped like that?",
+    "Why does chili make your mouth burn?"
+   ],
+   "exemplos_baixo": [
+    "Paradoxo de Simpson está escondendo alguma coisa",
+    "Efeito Espectador/Bystander Effect",
+    "Why the word is on the tip of your tongue"
+   ]
+  },
+  "https://www.youtube.com/channel/UC8SqOfxuoCHNn2V2irOXFsQ/shorts": {
+   "n": 989,
+   "mediana": 17000,
+   "corte_cima": 82000,
+   "corte_baixo": 3800,
+   "exemplos_cima": [
+    "The older brother smiled when the boy disappeared into the river.",
+    "She turned herself in to the police #dramas",
+    "You won't believe what he did to his daughter."
+   ],
+   "exemplos_baixo": [
+    "A MULHER MAIS VELHA RECUSOU DESISTIR DO GRANDE AMOR",
+    "A HERDEIRA ENLOUQUECEU APÓS SER REJEITADA PELO PRESIDENTE BILIONARIO",
+    "A ESPOSA SÓ PENSAVA NO DIVÓRCIO MAS ELE NÃO DESISTIA DELA"
+   ]
+  },
+  "oalfredo": {
+   "n": 430,
+   "mediana": 87500.0,
+   "corte_cima": 1800000,
+   "corte_baixo": 30000,
+   "exemplos_cima": [
+    "Questões Questionáveis Desenhos",
+    "Questionable Issues 4",
+    "Difference in Size of Animal Bones"
+   ],
+   "exemplos_baixo": [
+    "Você Percebeu em Operação Big Hero",
+    "Water That Cuts Steel #curiosities",
+    "Some Movie Babies Were Never Real #funfacts"
+   ]
+  },
+  "inusifatos": {
+   "n": 35,
+   "mediana": 1600,
+   "corte_cima": 4500,
+   "corte_baixo": 1100,
+   "exemplos_cima": [
+    "Os PRESOS estão ISOLADOS na PRISÃO mais PERIGOSA do MUNDO! CECOT, O Inferno em El Salvador",
+    "Quando CÃES POLICIAIS esquecem que ESTÃO em SERVIÇO 😂👮‍♂️",
+    "ELON MUSK’S MULTI-MILLION DOLLAR PRIVATE JET! ✈️"
+   ],
+   "exemplos_baixo": [
+    "O Lugar mais PERIGOSO dos ESTADOS UNIDOS (fuja daqui)",
+    "O BRASIL vai QUEBRAR em 2027?",
+    "BUROCRACIA pra ter CARRO no BRASIL"
+   ]
+  },
+  "king_chan01": {
+   "n": 257,
+   "mediana": 46000,
+   "corte_cima": 427000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "HE DIED THOUSANDS OF TIMES AT THE HANDS OF HEROES! #manhwa #anime #plottwist",
+    "This DEMON adopted a HUMAN BABY out of CURIOSITY! #manhwa #anime #plottwist",
+    "He just wanted to be NORMAL but he became the CRUELEST! #manhwa #anime #lookism"
+   ],
+   "exemplos_baixo": [
+    "💯😔 ELE DEVOROU O CORAÇÃO DO HERÓI! 😱 #manhwa #editfavmanhwa #anime",
+    "This fighter KNOCKED OUT a RED DRAGON 👊🐲 #manhwa #anime #plottwist",
+    "Ele se tornou uma pintura ASSOMBRADA... Sem nem saber! #manhwa #editfavmanhwa #anime #webt"
+   ]
+  },
+  "xiuliamelo": {
+   "n": 120,
+   "mediana": 327500.0,
+   "corte_cima": 4500000,
+   "corte_baixo": 41000,
+   "exemplos_cima": [
+    "She just touched the iceberg that sank the Titanic 😳 #curiosities",
+    "Por que sereias mais gordas ficam em aquários menores? 😳 #curiosidades",
+    "Os bastidores do clipe de Jenna Ortega e Sabrina Carpenter 🎬 #curiosidades"
+   ],
+   "exemplos_baixo": [
+    "This is why your cat's tongue feels like sandpaper 😳 #funfacts",
+    "Why do Chinese schools teach children to do this? 😳 #curiosities",
+    "O esforço desse homem pela noite de filme 😂 #curiosidades"
+   ]
+  },
+  "pontocuriosoytt": {
+   "n": 293,
+   "mediana": 33000,
+   "corte_cima": 640000,
+   "corte_baixo": 8400,
+   "exemplos_cima": [
+    "Why is it necessary to release water from the dam?",
+    "See how this man handled a kangaroo",
+    "Why people keep losing this bar game"
+   ],
+   "exemplos_baixo": [
+    "The man who fooled Google Maps",
+    "Why is liquid nitrogen poured on the ground?",
+    "Georgian grape vodka"
+   ]
+  },
+  "carlosmerchanat": {
+   "n": 3060,
+   "mediana": 28000.0,
+   "corte_cima": 342000,
+   "corte_baixo": 5400,
+   "exemplos_cima": [
+    "When a lagoon, pond, or flooded area begins to dry up, the African lungfish.",
+    "How livestock manure can be turned into cooking gas",
+    "Never place a footing directly on the ground, because this mistake can cause moisture."
+   ],
+   "exemplos_baixo": [
+    "Una razón por la que las plantas florecen después de introducir clavos en su tallo #planta",
+    "Cómo hice una mesa pequeña de madera paso a paso | Proyecto DIY fácil #jardin #plantas #ag",
+    "Did you know that there is a cannon that moves around the entire pasture, completely on it"
+   ]
+  },
+  "https://www.youtube.com/channel/UCJ4ZMyMwgcHYgpJogOJrYiQ/shorts": {
+   "n": 1656,
+   "mediana": 122000.0,
+   "corte_cima": 1900000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "Boy was humiliated #movies #movierecap",
+    "THE MAN'S HEAD TURNED INTO IRON #cinema #movie #series #movierecap",
+    "RECRIOU EM MINIATURA UMA DAS MAIORES CONSTRUÇÕES #filme #cinema #resumindofilmes #resumode"
+   ],
+   "exemplos_baixo": [
+    "ELA EMPURRA O PRÓPRIO FILHO #filmesrecap #recapfilme #shorts",
+    "TODOS SÃO VIGIADOS 24 HORAS POR DIA #filme #resumindofilmes #filmesrecap",
+    "ELE NASCEU CEGO MAS SABE ANDAR PELA FLORESTA #filme #resumindofilmes #filmesrecap"
+   ]
+  },
+  "futtres": {
+   "n": 198,
+   "mediana": 350500.0,
+   "corte_cima": 2800000,
+   "corte_baixo": 48000,
+   "exemplos_cima": [
+    "Momento raro! O Ronaldo verdadeiro zomba do Ronaldo falso 😅",
+    "Moments of revenge in soccer 😡💀",
+    "Esse garoto teve a coragem de desafiar o Ronaldo 🤫🔥"
+   ],
+   "exemplos_baixo": [
+    "How Neymar ignored the doctors and risked his entire career 😳😢",
+    "Moments of Disrespect Between Players and Ball Boys 💔😢",
+    "Por que Messi não toca em mulheres? 😂😨"
+   ]
+  },
+  "https://www.youtube.com/channel/UCOHGNd14T45bHhvFfTI-B1Q/shorts": {
+   "n": 767,
+   "mediana": 94000,
+   "corte_cima": 908000,
+   "corte_baixo": 19000,
+   "exemplos_cima": [
+    "The little girl could see valuable items and made her father buy her a jade cat.",
+    "Every time this woman feels pain, she spits out gold coins.",
+    "The girl used her tears to heal her brother's disability."
+   ],
+   "exemplos_baixo": [
+    "Soldados alemães enfrentam um inimigo mortal #filmes #melhorfilme#filme #shorts",
+    "Garoto rico se perde de sua família e vira escravo #filmes #melhorfilme#filme #shorts",
+    "The woman showed all her power."
+   ]
+  },
+  "https://www.youtube.com/channel/UCoj3c_Mw_zTLCZt9bshd__w/shorts": {
+   "n": 1736,
+   "mediana": 357000.0,
+   "corte_cima": 1900000,
+   "corte_baixo": 33000,
+   "exemplos_cima": [
+    "That's a low blow, Anya 😂",
+    "If you make noise in her library... ☠️",
+    "Haikyuu versão feminina…  🏐"
+   ],
+   "exemplos_baixo": [
+    "Mineta went to spy on the girls and...",
+    "It was a mistake to teach Kazuma this skill... 😂",
+    "I didn't miss it... #anime #animeedit #edit #shorts #viral #fyp"
+   ]
+  },
+  "eduardoflix": {
+   "n": 719,
+   "mediana": 39000,
+   "corte_cima": 639000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "The food looked like a work of art",
+    "They were in intense training",
+    "Red things were forbidden inside the village."
+   ],
+   "exemplos_baixo": [
+    "He found a camera inside the toy.",
+    "ele estava procurando a familia dele",
+    "eles estavam criando dinossauros"
+   ]
+  },
+  "shortsadabr": {
+   "n": 1265,
+   "mediana": 76000,
+   "corte_cima": 2500000,
+   "corte_baixo": 20000,
+   "exemplos_cima": [
+    "A Corrente Humana que Salvou um Cachorro e Seu Dono! 😲❤️",
+    "Eles Quebraram a Parede e Encontraram um... 😲",
+    "Esse Xadrez em 3D é ABSURDO 😳♟️"
+   ],
+   "exemplos_baixo": [
+    "A tradição militar mais dolorosa do mundo!😱",
+    "Como os estádios conseguem ter gramados perfeitos? 🌱⚽",
+    "O Perigo Escondido nos Recibos Que Você Toca Todos os Dias!"
+   ]
+  },
+  "coralxoficial": {
+   "n": 135,
+   "mediana": 41000,
+   "corte_cima": 520000,
+   "corte_baixo": 14000,
+   "exemplos_cima": [
+    "TOP 4 BIZARRE Sea Creatures That Actually Exist!😱",
+    "😱4 ANIMALS That Exist in BRAZIL You Didn't Know About!🔥",
+    "4 Dogs That WOULD DESTROY a JAGUAR!😱"
+   ],
+   "exemplos_baixo": [
+    "MOMENTOS incríveis no REINO ANIMAL!😳",
+    "Moments in the animal kingdom that should never have happened!",
+    "TOP 4 ANIMALS THAT WOULD DEFEAT DINOSAURS!😱"
+   ]
+  },
+  "projeto7curioso": {
+   "n": 620,
+   "mediana": 17000.0,
+   "corte_cima": 208000,
+   "corte_baixo": 2700,
+   "exemplos_cima": [
+    "HE CREATED THE BEST SONG IN THE WORLD IN JUST ONE DAY",
+    "Trump Says This Is His Final Warning to Alexandre and Lula 😱",
+    "The most powerful and wealthy women in the world."
+   ],
+   "exemplos_baixo": [
+    "Neymar Passou de TODOS os limites só Porque tem GRANA",
+    "Veja porque Han de Velozes e Furiosos esta SEMPRE comendo algo 😱",
+    "6 Cantoras com MAIS Grana no Bolso do Brasil 💸🤑"
+   ]
+  },
+  "crystalcine": {
+   "n": 138,
+   "mediana": 22000.0,
+   "corte_cima": 98000,
+   "corte_baixo": 3100,
+   "exemplos_cima": [
+    "movie I had to save my daughter! shorts",
+    "I created the world's most lethal rifle! #movie #movies #shorts",
+    "My dog knew what was going to happen! #movie #movies #shorts"
+   ],
+   "exemplos_baixo": [
+    "I just wanted to save my family! #movie #movies #shorts",
+    "A toxic snow decimated the population! #movie #movies #shorts",
+    "Eu fui atacado durante meu teste para CNH! #filme #filmes #shorts"
+   ]
+  },
+  "https://www.youtube.com/channel/UCrQEaKmguE65TOO4EedWHzA/shorts": {
+   "n": 73,
+   "mediana": 57000,
+   "corte_cima": 787000,
+   "corte_baixo": 13000,
+   "exemplos_cima": [
+    "🎯 O Soldado Novato Que Provou Ser um Atirador Incrível",
+    "O Movimento Mais Mortal da Patinação Artística 😱⛸️",
+    "Yuta_Mio_thinks_baby_Rina_is_not_great_but🧐😎🥳#shorts_#viral_#trending_#dramasakuraschoolsi"
+   ],
+   "exemplos_baixo": [
+    "O Assassino Que Queria Ser Lembrado Antes de Morrer 😈",
+    "O Mendigo Que Previu Uma Enchente e Surpreendeu o Rei 😱👑",
+    "Jangan menertawakannya, Polisi robot super 😎👮🏻#sakuraschoolsimulator #shorts #youtubeshort"
+   ]
+  },
+  "https://www.youtube.com/channel/UCDP44AK1qd0xpAuArni_nbQ/shorts": {
+   "n": 167,
+   "mediana": 357000,
+   "corte_cima": 1200000,
+   "corte_baixo": 65000,
+   "exemplos_cima": [
+    "No dia do casamento, eu fiz meu marido vestir um vestido de noiva.",
+    "Suas filhas trigêmeas acabaram sendo as pequenas bênçãos enviadas a ela do céu.",
+    "No palco da competição de dança, minha irmã mais nova copiou minha coreografia! 😱"
+   ],
+   "exemplos_baixo": [
+    "Eu montei todo esse teatro só para me divorciar. 🎭",
+    "Eu Entreguei os Papéis do Divórcio ao Meu Marido no Dia do Nosso Casamento 💔📄",
+    "Eu dei o posto de capitão ao meu marido, e o que aconteceu como resultado?"
+   ]
+  },
+  "curiosidadesemtela": {
+   "n": 396,
+   "mediana": 2000.0,
+   "corte_cima": 34000,
+   "corte_baixo": 247,
+   "exemplos_cima": [
+    "Some birds choose to build their nests near wasps.",
+    "Some birds put snake skin in their nests to scare off predators!",
+    "The hornbill female locks herself in the nest until the right time comes!"
+   ],
+   "exemplos_baixo": [
+    "The 4,000-year-old pyramids built by termites!",
+    "The Brazilian guinea pig's teeth never stop growing!",
+    "O tatu bolinha não é um inseto?"
+   ]
+  },
+  "ansaketv": {
+   "n": 1118,
+   "mediana": 24000.0,
+   "corte_cima": 161000,
+   "corte_baixo": 4500,
+   "exemplos_cima": [
+    "💘 Kaguya Acabou Indo LONGE DEMAIS com o Shirogane?! (Kaguya-sama wa Kokurasetai)",
+    "👾 They Live in a World Where HUMANS Are Just Prey... | Tengoku Daimakyou - Post-Apocalypti",
+    "🚬 This Cat Girl Smokes Even from the TRASH... and She Won't Stop! | Chainsmoker Cat"
+   ],
+   "exemplos_baixo": [
+    "Essa Ninja deu de cara com uma Assassina da Cidade? 😨🐱‍👤 (Ninja to Koroshiya no Futarigura",
+    "Sung Derrotou Elfo de Gelo Poderoso em Solo Leveling? 🧝‍♂️🧊 (Ore dake Level Up na Ken)",
+    "Kirishima Encontrou Yakuza Mascarado em Yakuza Fiance? 🤬👊 (Raise Wa Tanin ga ii)"
+   ]
+  },
+  "edumontalvao4665": {
+   "n": 662,
+   "mediana": 1000000.0,
+   "corte_cima": 5500000,
+   "corte_baixo": 91000,
+   "exemplos_cima": [
+    "essa professora tem um segredo",
+    "essa mãe era muito incrível.",
+    "ele vai mostrar todo seu talento."
+   ],
+   "exemplos_baixo": [
+    "o que tem dentro desse porão?",
+    "as formigas começaram uma batalha",
+    "ele era muito poderoso e forte."
+   ]
+  },
+  "viral.cut.t": {
+   "n": 37,
+   "mediana": 92000,
+   "corte_cima": 1400000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "She Hid Her Secret to Dance Ballet #netflix #bestmovies #primevideo",
+    "They destroyed everything without knowing who I really was #movietips #netflix #bestmovies",
+    "My super powerful pig was taken away #netflix #bestmovies #primevideo"
+   ],
+   "exemplos_baixo": [
+    "The Woman Discovered Her Own Husband Was the Bottom in the Relationship #netflix #bestmovi",
+    "I entered a town where it was impossible to leave #netflix #bestmovies #primevideo",
+    "minha mãe me fez raspar todo o cabelo #netflix #melhoresfilmes #primevideo"
+   ]
+  },
+  "ramenashi_1108": {
+   "n": 337,
+   "mediana": 39000,
+   "corte_cima": 640000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "Name: inuyashiki #anime #otaku #animeedit #inuyashiki",
+    "Name: Toriko #anime #animeedit #otaku #toriko",
+    "Wasteful Days of High School Girls #anime #animeedit #otaku #wastefuldaysofhighschool"
+   ],
+   "exemplos_baixo": [
+    "A human appeared from space for the first time #anime #otaku #animeedit",
+    "Name: Dog & Scissors #anime #anime #otaku #animeedit #dogandscissors",
+    "This guy is forced to study at an all-girls school!! #anime #otaku #animeedit"
+   ]
+  },
+  "https://www.youtube.com/channel/UCGk8PIaZgPZPOgDkbRzeFbQ/shorts": {
+   "n": 1286,
+   "mediana": 12000.0,
+   "corte_cima": 98000,
+   "corte_baixo": 2100,
+   "exemplos_cima": [
+    "O SEGREDO OCULTO DA MÃE #ftv #filmes #cena #dorama #kdrama",
+    "O MARIDO M4TOU SUA FAMÍLIA #ftv #filmes #cena #dorama #kdrama",
+    "Ela ajudou a faxineira sem saber que ela era a gerente #dorama #kdrama #filmes #series"
+   ],
+   "exemplos_baixo": [
+    "A mulher descobriu que o médico era o seu ex #dorama #kdrama #filmes #series",
+    "O HOMEM SALVOU O MUNDO DA INVASÃO ALIENÍGENAS #dorama #kdrama #filmes #series",
+    "AMY CONSEGUE ESCAPAR DA POLÍCIA E DESCOBRE OQ ACONTECEU COM SEU PAI #dorama #kdrama #filme"
+   ]
+  },
+  "https://www.youtube.com/channel/UCSJ6_grRhGTfH8FZWy9ofew/shorts": {
+   "n": 388,
+   "mediana": 120500.0,
+   "corte_cima": 676000,
+   "corte_baixo": 22000,
+   "exemplos_cima": [
+    "Everyone Ignored Her Father… Until the Delivery Guy Noticed the Danger 😨",
+    "Mr. Bean Became a Barber by Accident... And Everything Went Wrong! 😂✂️",
+    "😭❤️ **This Teacher Changed Her Students' Lives Forever!**"
+   ],
+   "exemplos_baixo": [
+    "😱 Ela Salvou o Chefe Que a Humilhava… Mas o Final na Ilha Deserta Chocou Todo Mundo! 🏝️🔥",
+    "😱 Ela Arrombou a Porta do Quarto do Irmão Autista… O Que Aconteceu Depois Fez Todos Chorar",
+    "This Dog Used to Steal Money to Help a Boy 😭🐶"
+   ]
+  },
+  "carecanomultiverso": {
+   "n": 147,
+   "mediana": 18000,
+   "corte_cima": 116000,
+   "corte_baixo": 2800,
+   "exemplos_cima": [
+    "essa é a mais forte de todas #anime #manhwa #manga #manhwareccomendation #manhua",
+    "Sukuna tricked Yuji and stole Megumi's body. #anime #manga #sukuna #jujutsukaisen #megumi",
+    "He Was Reborn Evil and Became Unstoppable #anime #manhwa #manga #manhwarecommendation #man"
+   ],
+   "exemplos_baixo": [
+    "O Caçador Mais Inútil Ganhou a Sorte Máxima #anime #manhwa #animemomentos #editfavmanhwa #",
+    "Ele Renasceu no Corpo do Amigo #anime #manga #manhwa #manifestation #reencarnación",
+    "Sistema lhe deu uma Segunda Chance #manhwa #anime #animemomentos #editfavmanhwa #manga"
+   ]
+  },
+  "olaranjo1": {
+   "n": 250,
+   "mediana": 37000.0,
+   "corte_cima": 350000,
+   "corte_baixo": 7300,
+   "exemplos_cima": [
+    "The saddest fate of the Panda in Jujutsu Kaisen… 🐼💔",
+    "Yuji's Family Tree That Nobody Quite Understood",
+    "The TRUTH about why Naoya waited to fight Maki"
+   ],
+   "exemplos_baixo": [
+    "Um fã escalou o elenco \"perfeito\" pro live action de Jujutsu Kaisen 🎬",
+    "Top 20 Plot Twists from Attack on Titan (Part 2) — Nobles, King Fritz, and Dina Fritz Expl",
+    "Did this Chinese animation die before it even started? Huanhuan Shaonü 🤡"
+   ]
+  },
+  "https://www.youtube.com/channel/UCQ1X71snvUD7OKA3B8S3n6Q/shorts": {
+   "n": 1945,
+   "mediana": 227000,
+   "corte_cima": 952000,
+   "corte_baixo": 48000,
+   "exemplos_cima": [
+    "Nezuko visitando Sasuke e Itachi",
+    "Anya rejects Fiona as her new mother",
+    "Como a Nezuko engravidou"
+   ],
+   "exemplos_baixo": [
+    "Novo trailer de Naruto (Road of Naruto)",
+    "Daqui um tempo vai existir anime de tudo",
+    "O verdadeiro vilão de Naruto é o Kakashi"
+   ]
+  },
+  "100ANIMEE": {
+   "n": 771,
+   "mediana": 32000,
+   "corte_cima": 156000,
+   "corte_baixo": 9900,
+   "exemplos_cima": [
+    "#anime #viral #animeshorts",
+    "#anime #viral #animeshorts",
+    "#anime #viral #animeshorts"
+   ],
+   "exemplos_baixo": [
+    "#anime #viral #animeshorts",
+    "#anime #viral #animeshorts",
+    "#anime #viral #masamunekunnorevenge"
+   ]
+  },
+  "guilhermesouza-i5x": {
+   "n": 225,
+   "mediana": 33000,
+   "corte_cima": 901000,
+   "corte_baixo": 4300,
+   "exemplos_cima": [
+    "Two brothers wait for their mother in the car… unaware that something dangerous is approac",
+    "Even though she had the power of death, the mother couldn't save her own daughter!!",
+    "A very dangerous war is about to happen between the red ants and the black ants"
+   ],
+   "exemplos_baixo": [
+    "A armadilha que dizimou um exército inteiro",
+    "Um Líquido Misterioso Surgiu no Esgoto… e Criou Monstros",
+    "Mataram a Amiga Dele sem Saber Quem Ele Era… e Pagaram Caro"
+   ]
+  },
+  "https://www.youtube.com/channel/UCbYDJCicgdEOFPtgJLppCfw/shorts": {
+   "n": 220,
+   "mediana": 19500.0,
+   "corte_cima": 89000,
+   "corte_baixo": 5600,
+   "exemplos_cima": [
+    "This Sprinter Ran So Fast He Woke Up From The Matrix!",
+    "They found out he knew he was in the Matrix!",
+    "Yane's friend is even worse than she is!"
+   ],
+   "exemplos_baixo": [
+    "Sasaki is blind and Yamada has Alzheimer's!",
+    "Serafina grew bored with everyday life!",
+    "Esse ladrão de tumbas voltou 15 anos no tempo!"
+   ]
+  },
+  "fatoviralof": {
+   "n": 44,
+   "mediana": 3050.0,
+   "corte_cima": 863000,
+   "corte_baixo": 827,
+   "exemplos_cima": [
+    "How Are Fuel Tankers Made? #curiosity #curious",
+    "How do they recover old tires? #curiosity #curious",
+    "How are tires restored? #curiosity #curious"
+   ],
+   "exemplos_baixo": [
+    "Os famosos kani-kamis de caranguejos são realmente feitos de caranguejo? #viralvideo #vira",
+    "Milhares de ossos são cozido todos os dias! #viralvideo ##viralshorts",
+    "Por que as refeições escolares gratuitas da Coreia do Sul são famosas no mundo? #viralvide"
+   ]
+  },
+  "andreu.edit1": {
+   "n": 137,
+   "mediana": 109000,
+   "corte_cima": 1800000,
+   "corte_baixo": 14000,
+   "exemplos_cima": [
+    "#bestmovies #movie #netflixrecommendation #summary #newmovies",
+    "#bestmovies #movie #netflixrecommendation #summary #newmovies #netflixcelebrities",
+    "#melhoresfilmes #movie #filmesnovos #resumo #dicanetflix #marvel #filmes"
+   ],
+   "exemplos_baixo": [
+    "#bestmovies #newmovies #recap #netflixrecommendation #movie #movies",
+    "#movie #netflixrecommendation #newmovies #recap #film",
+    "#movie #film #netflixrecommendation #newmovies"
+   ]
+  },
+  "papodebixo": {
+   "n": 1276,
+   "mediana": 4500.0,
+   "corte_cima": 29000,
+   "corte_baixo": 1300,
+   "exemplos_cima": [
+    "One-Hit Wonder Singers PT.3",
+    "The five richest pastors in Brazil #pastor #wealth #luxury #money #curiosities",
+    "One-Hit Wonders: Singers and Bands PT. 4"
+   ],
+   "exemplos_baixo": [
+    "esse é o panda vermelho #animal #curiosidades #panda",
+    "foca #focas",
+    "O CACHORRO MAIS PODEROSO DO MUNDO! #cachorro #pets #kangal"
+   ]
+  },
+  "narradramaa": {
+   "n": 1283,
+   "mediana": 12000,
+   "corte_cima": 98000,
+   "corte_baixo": 2100,
+   "exemplos_cima": [
+    "O SEGREDO OCULTO DA MÃE #ftv #filmes #cena #dorama #kdrama",
+    "O MARIDO M4TOU SUA FAMÍLIA #ftv #filmes #cena #dorama #kdrama",
+    "Ela ajudou a faxineira sem saber que ela era a gerente #dorama #kdrama #filmes #series"
+   ],
+   "exemplos_baixo": [
+    "A mulher descobriu que o médico era o seu ex #dorama #kdrama #filmes #series",
+    "O HOMEM SALVOU O MUNDO DA INVASÃO ALIENÍGENAS #dorama #kdrama #filmes #series",
+    "AMY CONSEGUE ESCAPAR DA POLÍCIA E DESCOBRE OQ ACONTECEU COM SEU PAI #dorama #kdrama #filme"
+   ]
+  },
+  "https://www.youtube.com/channel/UCHCxgkOUs9jw0ngpEtNb3xg/shorts": {
+   "n": 1400,
+   "mediana": 42000.0,
+   "corte_cima": 333000,
+   "corte_baixo": 6000,
+   "exemplos_cima": [
+    "A HINATA invocou a KURAMA!",
+    "THE ANGIEST EXTRA IN NARUTO!",
+    "The real reason for the little lines on Boruto and Himawari's cheeks!"
+   ],
+   "exemplos_baixo": [
+    "His servant pleaded for help, and he became the defender of the slave shop!",
+    "A GRANDE GINCANA de KONOHA!",
+    "Ele teve que TREINAR pra poder AGUENTAR ELA!"
+   ]
+  },
+  "japafishinglife": {
+   "n": 1113,
+   "mediana": 49000,
+   "corte_cima": 549000,
+   "corte_baixo": 12000,
+   "exemplos_cima": [
+    "I baited a whole tilapia to see what would happen #fish #amazonfish #bamboofishing #fishin",
+    "5 CHEAP MEATS FOR BBQ #meat #curiosities #food #culinary #barbecue #steakhouse",
+    "ANZÓL PROIBIDO POR PEGAR DEMAIS  #pesca #pescaria #fishing #pescacombambu #peixe #dicadepe"
+   ],
+   "exemplos_baixo": [
+    "FENOMENO QUE AFETA A PESCARIA   #pescaria  #pesca #peixesamazonicos #tucunare #dicadepesca",
+    "I went fishing in Balneário Camboriú and made ceviche! #fishing #fishingtips #sportfishing",
+    "LUAS PEIXE DE COURO PRIMAVERA #pintado #surubim #pescador #pesca  #pescaria"
+   ]
+  },
+  "drameela": {
+   "n": 771,
+   "mediana": 128000,
+   "corte_cima": 829000,
+   "corte_baixo": 22000,
+   "exemplos_cima": [
+    "Um homem pode fazer qualquer coisa por sua adorável namorada zumbi #dorama #kdrama #filmes",
+    "She has fake eyebrows #dorama #kdrama #movies #series",
+    "Everyone's strength has decreased a hundredfold #dorama #kdrama #movies #series"
+   ],
+   "exemplos_baixo": [
+    "The man suddenly gains a celestial eye. #dorama #kdrama #movies #series",
+    "Ele se casou secretamente com a melhor amiga da irmã dele #dorama #kdrama #filmes #series",
+    "The mistress mocked the fat wife #dorama #kdrama #movies #series"
+   ]
+  },
+  "https://www.youtube.com/channel/UCK9vMOZaWjfSwQFiBPQt6iA/shorts": {
+   "n": 186,
+   "mediana": 24000.0,
+   "corte_cima": 120000,
+   "corte_baixo": 2700,
+   "exemplos_cima": [
+    "Revenge Begins! Hajime Kashimo activates his FINAL form against Sukuna after Satoru Gojo's",
+    "Shoko was sacrificed for Gojo? The saddest return of Satoru Gojo #jujutsukaisen #gojo #sho",
+    "GOJO IS BACK... BUT AS A CHILD?! Yuji is in shock! #jujutsukaisen #Otaku #gojo #yujiitador"
+   ],
+   "exemplos_baixo": [
+    "GOKU DOMINA o Instinto Superior BASE enquanto VEGETA APANHA tentando usar o Hakai! #dragon",
+    "Fingiram um Romance para Enganar o Inimigo, Mas Acabaram Cercados pelo Rei dos Vampiros! #",
+    "Ela Tentou Ser Fofa e Passou a MAIOR VERGONHA da Vida Dela no Elevador! #manhwa #otaku #re"
+   ]
+  },
+  "levisaosensei": {
+   "n": 962,
+   "mediana": 37000.0,
+   "corte_cima": 633000,
+   "corte_baixo": 7200,
+   "exemplos_cima": [
+    "These two twin brothers were adopted through perfect synchronization.",
+    "They helped each other and became friends in the animal kingdom.",
+    "He Ate Too Many Sweets Thinking He’d Get a Gold Armor Too"
+   ],
+   "exemplos_baixo": [
+    "Esse garoto foi abandonado na floresta por ser fraco.",
+    "This girl ended up becoming the villainess of a game.",
+    "This boy was terrified that he accidentally killed a cat"
+   ]
+  },
+  "https://www.youtube.com/channel/UCRKSO0AInMtfM7rDgurjyyw/shorts": {
+   "n": 107,
+   "mediana": 19000,
+   "corte_cima": 800000,
+   "corte_baixo": 1800,
+   "exemplos_cima": [
+    "goodbye cinderella #movie",
+    "a new destiny #series #movie",
+    "Counterattack #series"
+   ],
+   "exemplos_baixo": [
+    "#series #filmes",
+    "Prejudice #series #filmee",
+    "#movie"
+   ]
+  },
+  "ultravoxfilmes01": {
+   "n": 300,
+   "mediana": 30000.0,
+   "corte_cima": 354000,
+   "corte_baixo": 1900,
+   "exemplos_cima": [
+    "He paid billions to be young again #movie #viral #movie #foryou #shorts",
+    "The co-pilot was shocked to see the pilot's condition #movie #viral #film #foryou #shorts",
+    "He wanted to build the fastest plane in the world #movie #viral #movie #foryou #shorts"
+   ],
+   "exemplos_baixo": [
+    "Ela percebeu que a amiga era uma psicopata #filmes #viral #foryou #movie  #shorts",
+    "O homem agiu rápido para salvar a mulher e o bebê #filme #series  #viral #fyp",
+    "Ela foi resgatada por um robô mais depois teve que fugir dele #filmes #movie #serie #short"
+   ]
+  },
+  "danielarecapsbr": {
+   "n": 58,
+   "mediana": 3700.0,
+   "corte_cima": 530000,
+   "corte_baixo": 898,
+   "exemplos_cima": [
+    "Eu era surda mais percebi isso rápido #doramascoreanos #drama",
+    "Meu pai me fez treinar mais #doramacoreano #drama",
+    "Eu acordei com o meu corpo estranho #doramascoreanos #drama"
+   ],
+   "exemplos_baixo": [
+    "Você acredita que o amor salva?! #filmesnovos #shots",
+    "Qual opção você escolheria por ele?! #filmesnovos #shots",
+    "Essa super mulher perdeu suas memórias #filmes #series #shots"
+   ]
+  },
+  "canalutopia": {
+   "n": 2876,
+   "mediana": 165000.0,
+   "corte_cima": 1900000,
+   "corte_baixo": 27000,
+   "exemplos_cima": [
+    "THE NEW WAY TO STOP CARS! #interesting #curiosity #curiosities",
+    "A COSTLY MISTAKE! #interesting #curiosity #facts",
+    "GOODBYE ARM CAST! #interesting #curiosity #curiosities"
+   ],
+   "exemplos_baixo": [
+    "WHICH CANDLE GOES OUT FIRST?",
+    "O BANHEIRO DRONE!",
+    "People who eat hair!"
+   ]
+  },
+  "kaijinre": {
+   "n": 235,
+   "mediana": 44000,
+   "corte_cima": 278000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "💪 The Nerd Only Needed to TAKE OFF her Hoodie to END his NARCISSISM! #manhwa #manga #anime",
+    "🗿 Part 8. He Spent YEARS Seeing Girls as ROCKS?! #manhwa #manga #anime",
+    "✋ A HAND appeared in space and DESTROYED Earth... #manhwa #manga #webcomicsapp"
+   ],
+   "exemplos_baixo": [
+    "🦠 Part 18. He DIED and Became MOLD in Another World?! #manhwa #manga #webcomicsapp",
+    "🎖️ Part 3. A DEADLY Soldier... SENT To A Classroom! #manhwa #manga #anime",
+    "🎖️ Part 4. A DEADLY Soldier... SENT To A Classroom! #manhwa #manga #anime"
+   ]
+  },
+  "grananerd-k3r": {
+   "n": 101,
+   "mediana": 165,
+   "corte_cima": 962,
+   "corte_baixo": 18,
+   "exemplos_cima": [
+    "O PS5 FOI DESBLOQUEADO 🔓 e a Sony reagiu #shorts",
+    "Por que NINGUÉM larga a Steam? Nem pagando menos #shorts",
+    "A Nintendo já vendeu arroz e teve até táxi 🚕 #shorts"
+   ],
+   "exemplos_baixo": [
+    "O bitcoin consome a energia de UM PAÍS INTEIRO 🌍 #shorts",
+    "A PIZZA mais cara da história custou 10.000 bitcoins 🍕 #shorts",
+    "Minerar Bitcoin em casa compensa? A conta com a luz do Brasil #shorts"
+   ]
+  },
+  "https://www.youtube.com/channel/UCfNljj-_RGszVHd-QYsKgtg/shorts": {
+   "n": 501,
+   "mediana": 43,
+   "corte_cima": 6300,
+   "corte_baixo": 6,
+   "exemplos_cima": [
+    "#scene #viral #fyp #clips #foryou",
+    "#foryou #clips #viral #fyp #scene",
+    "#scene #clips #viral #fyp #foryou"
+   ],
+   "exemplos_baixo": [
+    "#foryou #viral #filmes #cortes #cenas",
+    "#viral #experiment #filme #foryou",
+    "#cinema #trend #foryou #acao"
+   ]
+  },
+  "nerdcf.animes": {
+   "n": 1739,
+   "mediana": 358000,
+   "corte_cima": 1900000,
+   "corte_baixo": 33000,
+   "exemplos_cima": [
+    "That's a low blow, Anya 😂",
+    "If you make noise in her library... ☠️",
+    "Haikyuu versão feminina…  🏐"
+   ],
+   "exemplos_baixo": [
+    "It was a mistake to teach Kazuma this skill... 😂",
+    "I didn't miss it... #anime #animeedit #edit #shorts #viral #fyp",
+    "Inosuke quase partiu para próxima vida 🤣 #anime #demonslayer #kimetsunoyaiba #shorts #tanj"
+   ]
+  },
+  "cidademaresiarp": {
+   "n": 97,
+   "mediana": 3200,
+   "corte_cima": 12000,
+   "corte_baixo": 1400,
+   "exemplos_cima": [
+    "How to play GTA RP on a low-end PC 🚀🔥 #gta #gtarp #gtaonline #shorts #fivem #gta5 #gtav #g",
+    "o GTA RP é muito melhor que o Online... #gta #gtarp #gtaonline #shorts #fivem #gta5 #gtav ",
+    "How to steal locked cars in GTA RP!! #gta #gtarp #gtaonline #shorts #fivem #gta5 #gtav #gt"
+   ],
+   "exemplos_baixo": [
+    "Have you played the Battle Royale in GTA RP yet? #gta #gtarp #gtaonline #shorts #fivem #gt",
+    "chegaram 3 mil animações aqui na cidade #gta #gtarp #gtaonline #shorts #fivem #gta5 #gtav ",
+    "esse é o policial mais doido do GTA RP 😂 #gta #gtarp #gtaonline #shorts #fivem #gta5 #gtav"
+   ]
+  },
+  "jresumos": {
+   "n": 383,
+   "mediana": 34000,
+   "corte_cima": 444000,
+   "corte_baixo": 3000,
+   "exemplos_cima": [
+    "In this school colors were forbidden but one day everything changed!",
+    "At this zoo, the animals were actually people! #shorts",
+    "I accidentally stepped on a honey badger! #shorts"
+   ],
+   "exemplos_baixo": [
+    "How a simple budget cut triggered a global catastrophe!",
+    "ERA MINHA PRIMEIRA VEZ CONTRABANDEANDO!",
+    "ELE FOI ATRAS DO ASSASSINO! #shorts #filmes #melhorfilme"
+   ]
+  },
+  "projetopipocayt": {
+   "n": 88,
+   "mediana": 73000.0,
+   "corte_cima": 1200000,
+   "corte_baixo": 10000,
+   "exemplos_cima": [
+    "🍿 Popcorn in Minutes | Kung Fu Monster: They Tortured the Monster… Not Knowing It Was Harm",
+    "🍿 Pipoca em Minutos | ONE: High School Heroes - O Aluno Que Virou Justiceiro! #series #kdr",
+    "🍿 Popcorn in Minutes | Grimm: Mermaids Need Human Men to Have Children! 😱 #series #movie"
+   ],
+   "exemplos_baixo": [
+    "🍿 Pipoca em Minutos | Filme : Monster Trucks (Resumo) #filme  #movie",
+    "🍿 Pipoca em Minutos | Diabolik: O Plano Perfeito Para Escapar da Morte! #filme #diabolik",
+    "Filme : Oito Mulheres e um Segredo #filme #movie #resumindofilmes"
+   ]
+  },
+  "digofatos": {
+   "n": 249,
+   "mediana": 109000,
+   "corte_cima": 2500000,
+   "corte_baixo": 36000,
+   "exemplos_cima": [
+    "How to win at Rock, Paper, Scissors - animation",
+    "she kidnapped the boy - animation",
+    "he finally got his revenge - animation"
+   ],
+   "exemplos_baixo": [
+    "This cat found a lot of money 🐱💵 #shorts",
+    "The penguin that went grocery shopping alone - animation",
+    "He SAVED a SQUIRREL 🐿️🤍 #shorts"
+   ]
+  },
+  "historiasdofranck": {
+   "n": 38,
+   "mediana": 262.5,
+   "corte_cima": 1200,
+   "corte_baixo": 9,
+   "exemplos_cima": [
+    "A Geometria Errada dos Pinheiros,  #curiosidades #relatosbizarros #youtubeshorts #terrorym",
+    "História: A Esposa do Lado Errado. #shots #youtubeshorts #contodeterror #historias #terror",
+    "História: A regra do terceiro apito. #contodeterror #terror #youtubeshorts #historias # #s"
+   ],
+   "exemplos_baixo": [
+    "Mundo misterioso: Cinco minutos sem gravidade. #shots #youtubeshorts #historias #misterio ",
+    "História: Se a luz fosse lenta. #shots #youtubeshorts #historias #misterio #mundomisterios",
+    "Mundo curioso: Sete dias sem sol. #shots #youtubeshorts #mundo #misterios"
+   ]
+  },
+  "zetafilmes-kr": {
+   "n": 360,
+   "mediana": 54000.0,
+   "corte_cima": 1400000,
+   "corte_baixo": 11000,
+   "exemplos_cima": [
+    "The new teacher taught the school bully a lesson.",
+    "All the scientists on the island were frightened by this red smoke. What does this smoke c",
+    "Trapped in the barrel, the father challenged the waters to save his son and everyone else."
+   ],
+   "exemplos_baixo": [
+    "A group of bullies broke into the girl's grandmother's house, she's not going to let it go",
+    "She married a rich executive and didn't know who he was.",
+    "He found a loophole to make money in this place."
+   ]
+  },
+  "avidamaravilha": {
+   "n": 463,
+   "mediana": 107000,
+   "corte_cima": 4200000,
+   "corte_baixo": 12000,
+   "exemplos_cima": [
+    "The magical waterfall in China 😱",
+    "How handball balls are cleaned 🤾‍♂️🟢",
+    "Duck feeding hack with grubs 🥚🪱🦆"
+   ],
+   "exemplos_baixo": [
+    "O conceito de estratégia....",
+    "Essa mulher teve 69 filhos",
+    "Why were betting apps banned?"
+   ]
+  },
+  "richan-anime": {
+   "n": 37,
+   "mediana": 61000,
+   "corte_cima": 1600000,
+   "corte_baixo": 15000,
+   "exemplos_cima": [
+    "Jotaro almost met his end... #anime #animesummary",
+    "He was humiliated by his girlfriend... #anime #animerecap",
+    "The Little Girl Who Made a Cannibal Back Down... #anime #animesummary"
+   ],
+   "exemplos_baixo": [
+    "This baby is sketchy... #anime",
+    "He merged with the cat... #anime #shorts",
+    "He Was Reincarnated Into a Game... #anime #shorts"
+   ]
+  }
+ }
+}

@@ -1,0 +1,1709 @@
+{
+ "_leia": "Dona 26/10: 'continue fazendo continuamente, vá fazendo esses vídeos com muitos dubladores; a troca tem que ser criativa e cada um tem um jeito de narrar'. Com continuo=true, TODO longo novo sai com revezamento de por_video narradores, os próximos da ordem (cursor anda a cada vídeo, volta ao começo no fim). Só entram vozes que já estão no Drive (vozes_no_drive.json, subir_vozes.py); começa com pelo menos minimo vozes lá. Cada bloco é reescrito no jeito do narrador (linguagem_v2) e a troca é uma cena escrita pela IA (anime_tts.revezar). São vídeos de AVALIAÇÃO: não vão pra canal (postar_longos pula TESTE_NARRADORES.txt) até a dona escolher os narradores.",
+ "continuo": true,
+ "por_video": 10,
+ "minimo": 6,
+ "base": "misto",
+ "ordem": [
+  "mangaticos",
+  "akali_lol",
+  "asuka_langley_evangelion",
+  "braum_lol",
+  "doinsuka",
+  "drezin",
+  "guugou",
+  "ijax",
+  "iki",
+  "jubertim",
+  "kkvirjao",
+  "mattz",
+  "mike",
+  "momo",
+  "omelhormanhwa",
+  "pie",
+  "porao",
+  "solem8037",
+  "solemsun",
+  "apostolo_valdemiro_santiago",
+  "ashe_overwatch",
+  "ashley_graham_re4_remake",
+  "cassidy_overwatch",
+  "chamber_valorant",
+  "cintilante_she_ra_flavia_saddy",
+  "d_va_overwatch",
+  "husk_hazbin_hotel",
+  "jett_valorant",
+  "kratos_ascension",
+  "kratos_god_of_war_2018",
+  "mulher_maravilha",
+  "naruto",
+  "sett_lol",
+  "verosika_helluva_boss_fandub",
+  "alex_madagascar",
+  "aracy_top_therm",
+  "baby_familia_dinossauro",
+  "bills",
+  "bulma",
+  "buzz_lightyear",
+  "chapolin_colorado",
+  "chico_selton",
+  "chiquinha",
+  "cid_moreira",
+  "dinho_mamonas_assassinas",
+  "dino_da_silva_sauro_familia_dinossauro",
+  "fatos_desconhecidos",
+  "galvao_bueno",
+  "gretchen",
+  "hanako_san_yo_kai_watch",
+  "harry_potter",
+  "homem_de_ferro_tony_stark",
+  "ivete_sangalo",
+  "jessie_toy_story",
+  "kay_o_valorant",
+  "ludmilla",
+  "lula_molusco",
+  "mc_melody_brazilian_singer_v2_500",
+  "moana",
+  "patrick_estrela",
+  "pica_pau",
+  "puss_in_boots_gato_de_botas_portuguese_d",
+  "seu_madruga",
+  "seu_sirigueijo_peter_griffin",
+  "thomas_shelby_peaky_blinders",
+  "vegeta",
+  "walter_white_breaking_bad",
+  "woody",
+  "chaves",
+  "chaves_chapolin"
+ ],
+ "cursor": 783,
+ "videos": [
+  {
+   "pid": "20261026_111528_5-vQopGwQ8Y",
+   "vozes": [
+    "mangaticos",
+    "akali_lol",
+    "asuka_langley_evangelion",
+    "braum_lol",
+    "doinsuka",
+    "drezin",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261026_120336_KJ5FcMf85Zo",
+   "vozes": [
+    "ijax",
+    "iki",
+    "jubertim",
+    "kkvirjao",
+    "mangaticos",
+    "akali_lol",
+    "asuka_langley_evangelion",
+    "braum_lol",
+    "doinsuka"
+   ]
+  },
+  {
+   "pid": "20261026_124345_YZNYmnqVZWI",
+   "vozes": [
+    "asuka_langley_evangelion",
+    "braum_lol",
+    "doinsuka",
+    "drezin",
+    "guugou",
+    "ijax",
+    "iki",
+    "jubertim"
+   ]
+  },
+  {
+   "pid": "20261026_131535_H9beLaBQYBU",
+   "vozes": [
+    "ijax",
+    "iki",
+    "jubertim",
+    "kkvirjao",
+    "mattz",
+    "mike",
+    "momo",
+    "omelhormanhwa",
+    "pie",
+    "porao"
+   ]
+  },
+  {
+   "pid": "20261026_135850_6d2aEsFp6Qk",
+   "vozes": [
+    "kkvirjao",
+    "mattz",
+    "mike",
+    "momo",
+    "omelhormanhwa",
+    "pie",
+    "porao",
+    "solem8037",
+    "solemsun",
+    "apostolo_valdemiro_santiago"
+   ]
+  },
+  {
+   "pid": "20261026_160237_PFbuZNbc6cA",
+   "vozes": [
+    "mangaticos",
+    "akali_lol",
+    "asuka_langley_evangelion",
+    "braum_lol",
+    "doinsuka",
+    "drezin",
+    "guugou",
+    "ijax"
+   ]
+  },
+  {
+   "pid": "20261026_165315_5FDtWi2JmuE",
+   "vozes": [
+    "iki",
+    "jubertim",
+    "kkvirjao",
+    "mattz",
+    "mike",
+    "momo",
+    "omelhormanhwa",
+    "pie",
+    "porao",
+    "solem8037"
+   ]
+  },
+  {
+   "pid": "20261026_171006_hJaAZWXA7i4",
+   "vozes": [
+    "solemsun",
+    "apostolo_valdemiro_santiago",
+    "ashe_overwatch",
+    "ashley_graham_re4_remake",
+    "cassidy_overwatch",
+    "chamber_valorant",
+    "cintilante_she_ra_flavia_saddy",
+    "d_va_overwatch",
+    "husk_hazbin_hotel",
+    "jett_valorant"
+   ]
+  },
+  {
+   "pid": "20261026_173333_ayO1dhJWeb4",
+   "vozes": [
+    "kratos_ascension",
+    "kratos_god_of_war_2018",
+    "mulher_maravilha",
+    "naruto",
+    "sett_lol",
+    "verosika_helluva_boss_fandub",
+    "alex_madagascar",
+    "aracy_top_therm",
+    "baby_familia_dinossauro",
+    "bills"
+   ]
+  },
+  {
+   "pid": "20261026_174744_RA4H5DXjAfM",
+   "vozes": [
+    "bulma",
+    "buzz_lightyear",
+    "chapolin_colorado",
+    "chico_selton",
+    "chiquinha",
+    "cid_moreira",
+    "dinho_mamonas_assassinas",
+    "dino_da_silva_sauro_familia_dinossauro",
+    "fatos_desconhecidos",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261026_180046_gF-1j3NGxq8",
+   "vozes": [
+    "gretchen",
+    "hanako_san_yo_kai_watch",
+    "harry_potter",
+    "homem_de_ferro_tony_stark",
+    "ivete_sangalo",
+    "jessie_toy_story",
+    "kay_o_valorant",
+    "ludmilla",
+    "lula_molusco",
+    "mc_melody_brazilian_singer_v2_500"
+   ]
+  },
+  {
+   "pid": "20261026_195151_KwdNrk4skKg",
+   "vozes": [
+    "moana",
+    "patrick_estrela",
+    "pica_pau",
+    "puss_in_boots_gato_de_botas_portuguese_d",
+    "seu_madruga",
+    "seu_sirigueijo_peter_griffin",
+    "thomas_shelby_peaky_blinders",
+    "vegeta",
+    "walter_white_breaking_bad",
+    "woody"
+   ]
+  },
+  {
+   "pid": "20261026_202211_actvN3DSLLI",
+   "vozes": [
+    "mangaticos",
+    "akali_lol",
+    "asuka_langley_evangelion",
+    "braum_lol",
+    "doinsuka",
+    "drezin",
+    "guugou",
+    "ijax"
+   ]
+  },
+  {
+   "pid": "20261026_221109_PFbuZNbc6cA",
+   "vozes": [
+    "iki",
+    "jubertim",
+    "kkvirjao",
+    "mattz",
+    "mike",
+    "momo",
+    "omelhormanhwa",
+    "pie",
+    "porao",
+    "solem8037"
+   ]
+  },
+  {
+   "pid": "20261026_232524_BTG0NRDWHB0",
+   "vozes": [
+    "solemsun",
+    "apostolo_valdemiro_santiago",
+    "ashe_overwatch",
+    "ashley_graham_re4_remake",
+    "cassidy_overwatch",
+    "chamber_valorant",
+    "cintilante_she_ra_flavia_saddy",
+    "d_va_overwatch",
+    "husk_hazbin_hotel",
+    "jett_valorant"
+   ]
+  },
+  {
+   "pid": "20261027_014213_RA4H5DXjAfM",
+   "vozes": [
+    "kratos_ascension",
+    "kratos_god_of_war_2018",
+    "mulher_maravilha",
+    "naruto",
+    "sett_lol",
+    "verosika_helluva_boss_fandub",
+    "alex_madagascar",
+    "aracy_top_therm",
+    "baby_familia_dinossauro",
+    "bills"
+   ]
+  },
+  {
+   "pid": "20261027_015026_C6YGjXsJFTI",
+   "vozes": [
+    "bulma",
+    "buzz_lightyear",
+    "chapolin_colorado",
+    "chico_selton",
+    "chiquinha",
+    "cid_moreira",
+    "dinho_mamonas_assassinas",
+    "dino_da_silva_sauro_familia_dinossauro",
+    "fatos_desconhecidos",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261027_020039_RRrhPp_qeCA",
+   "vozes": [
+    "gretchen",
+    "hanako_san_yo_kai_watch",
+    "harry_potter",
+    "homem_de_ferro_tony_stark",
+    "ivete_sangalo",
+    "jessie_toy_story",
+    "kay_o_valorant",
+    "ludmilla",
+    "lula_molusco",
+    "mc_melody_brazilian_singer_v2_500"
+   ]
+  },
+  {
+   "pid": "20261027_034201_OLYsz-zu7Rs",
+   "vozes": [
+    "moana",
+    "patrick_estrela",
+    "pica_pau",
+    "puss_in_boots_gato_de_botas_portuguese_d",
+    "seu_madruga",
+    "seu_sirigueijo_peter_griffin",
+    "thomas_shelby_peaky_blinders",
+    "vegeta",
+    "walter_white_breaking_bad",
+    "woody"
+   ]
+  },
+  {
+   "pid": "20261027_082355_cLF1aexIye0",
+   "vozes": [
+    "solemsun",
+    "mike",
+    "guugou",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261027_084845_2jtdp4vB1WQ",
+   "vozes": [
+    "mangaticos",
+    "momo",
+    "guugou",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261027_111210_UYU3JWS5zu4",
+   "vozes": [
+    "fatos_desconhecidos",
+    "moana",
+    "momo",
+    "mc_melody_brazilian_singer_v2_500",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_154337_CCJQvNP-23Y",
+   "vozes": [
+    "solemsun",
+    "cassidy_overwatch",
+    "chaves_chapolin",
+    "galvao_bueno",
+    "cid_moreira"
+   ]
+  },
+  {
+   "pid": "20261029_102326_LAeiXj2Qmlg",
+   "vozes": [
+    "porao",
+    "hanako_san_yo_kai_watch",
+    "harry_potter",
+    "homem_de_ferro_tony_stark",
+    "ivete_sangalo",
+    "jessie_toy_story",
+    "kay_o_valorant",
+    "ludmilla",
+    "lula_molusco",
+    "mc_melody_brazilian_singer_v2_500"
+   ]
+  },
+  {
+   "pid": "20261029_145053_u7tN75GsgZw",
+   "vozes": [
+    "mike",
+    "cassidy_overwatch",
+    "chaves_chapolin",
+    "chapolin_colorado",
+    "alex_madagascar"
+   ]
+  },
+  {
+   "pid": "20261026_235959_LAeiXj2Qmlg",
+   "vozes": [
+    "solemsun",
+    "momo",
+    "guugou",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_000200_P-djtsSY2Co",
+   "vozes": [
+    "mangaticos",
+    "mike",
+    "guugou",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_000400_yKfgs7SXOb0",
+   "vozes": [
+    "mike",
+    "walter_white_breaking_bad",
+    "chiquinha",
+    "mulher_maravilha",
+    "bulma"
+   ]
+  },
+  {
+   "pid": "20261027_000500_bXe7-vR7o5M",
+   "vozes": [
+    "mangaticos",
+    "vegeta",
+    "solemsun",
+    "thomas_shelby_peaky_blinders",
+    "momo"
+   ]
+  },
+  {
+   "pid": "20261027_000600_SNhb31ZuuFA",
+   "vozes": [
+    "solemsun",
+    "moana",
+    "iki",
+    "vegeta",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261027_000700_ssMbrCz0fhE",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mangaticos",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261027_000800_VgQUQTmYLeQ",
+   "vozes": [
+    "mike",
+    "momo",
+    "iki",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261027_000900_X90-SNMMCdg",
+   "vozes": [
+    "mangaticos",
+    "thomas_shelby_peaky_blinders",
+    "mike",
+    "walter_white_breaking_bad",
+    "momo"
+   ]
+  },
+  {
+   "pid": "20261027_001000_XNKCOSdfMrU",
+   "vozes": [
+    "fatos_desconhecidos",
+    "mangaticos",
+    "guugou",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_001100_4wufdzeZKgs",
+   "vozes": [
+    "solemsun",
+    "guugou",
+    "mike",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261027_001200_6d2aEsFp6Qk",
+   "vozes": [
+    "momo",
+    "mc_melody_brazilian_singer_v2_500",
+    "solemsun",
+    "walter_white_breaking_bad",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_000300_GFrKL-1J_xQ",
+   "vozes": [
+    "fatos_desconhecidos",
+    "vegeta",
+    "solemsun",
+    "thomas_shelby_peaky_blinders",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261027_001300_nV2aNVwUL-A",
+   "vozes": [
+    "guugou",
+    "iki",
+    "momo",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261030_072348_G1_iPga6nLg",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "iki",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261027_000100_G1_iPga6nLg",
+   "vozes": [
+    "guugou",
+    "mangaticos",
+    "iki",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261027_000050_SNhb31ZuuFA",
+   "vozes": [
+    "guugou",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261027_000001_PREVIA01nov",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "guugou",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261101_120036_4Y3ZaEwC0dg",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mangaticos",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_000003_PREVIA3nov",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mike",
+    "iki",
+    "seu_madruga"
+   ]
+  },
+  {
+   "pid": "20261101_134126_DshSnbY3y8s",
+   "vozes": [
+    "porao",
+    "fatos_desconhecidos",
+    "mangaticos",
+    "guugou",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261027_001600_KbLvZJy0B3Q",
+   "vozes": [
+    "porao",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261101_141751_FVIlwkhGR9I",
+   "vozes": [
+    "momo",
+    "cid_moreira",
+    "mangaticos",
+    "mattz",
+    "guugou",
+    "pica_pau"
+   ]
+  },
+  {
+   "pid": "20261101_151857_zREImGspScw",
+   "vozes": [
+    "momo",
+    "iki",
+    "cid_moreira",
+    "solemsun",
+    "moana",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261101_161548_749vA8HjKNI",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261101_163146_XTEJF976SLs",
+   "vozes": [
+    "momo",
+    "mike",
+    "guugou",
+    "chaves_chapolin"
+   ]
+  },
+  {
+   "pid": "20261101_170128_Qb7JI4aZJrQ",
+   "vozes": [
+    "porao",
+    "solemsun",
+    "iki",
+    "mangaticos",
+    "mike",
+    "pica_pau"
+   ]
+  },
+  {
+   "pid": "20261101_171631_GRVG4ryf4fE",
+   "vozes": [
+    "momo",
+    "guugou",
+    "walter_white_breaking_bad",
+    "mike",
+    "cid_moreira",
+    "iki",
+    "seu_madruga"
+   ]
+  },
+  {
+   "pid": "20261101_173153_FX1yfmNEI8o",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mangaticos",
+    "solemsun",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261101_175802_CpDHf713inQ",
+   "vozes": [
+    "porao",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261101_180724_SsMmrKRTjyY",
+   "vozes": [
+    "momo",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261101_182106_pV3ZACHRs10",
+   "vozes": [
+    "momo",
+    "iki",
+    "guugou",
+    "mike",
+    "vegeta",
+    "mattz",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261101_183055_XS7FgcPtqDk",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "iki",
+    "guugou",
+    "thomas_shelby_peaky_blinders",
+    "moana",
+    "chapolin_colorado"
+   ]
+  },
+  {
+   "pid": "20261027_000001_PREVIA5nov",
+   "vozes": [
+    "momo",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261027_000000_ANIME_fQTiy7",
+   "vozes": [
+    "porao",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261027_000002_ANIME_q5Sv63",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_000003_ANIME_asv0DQ",
+   "vozes": [
+    "momo",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261027_000004_ANIME_yqCTzf",
+   "vozes": [
+    "porao",
+    "guugou",
+    "iki",
+    "mangaticos",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261027_000005_ANIME_g-JGmh",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mattz",
+    "woody",
+    "buzz_lightyear",
+    "ivete_sangalo",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261027_000006_ANIME_xshdHp",
+   "vozes": [
+    "momo",
+    "iki",
+    "mattz",
+    "lula_molusco",
+    "mulher_maravilha",
+    "woody",
+    "chapolin_colorado"
+   ]
+  },
+  {
+   "pid": "20261027_000007_ANIME_waaQja",
+   "vozes": [
+    "momo",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261104_084003_8DoaQV1SJIc",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mangaticos",
+    "guugou",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261104_091020_bX7kyJWkQTc",
+   "vozes": [
+    "porao",
+    "solemsun",
+    "vegeta",
+    "guugou",
+    "walter_white_breaking_bad",
+    "mangaticos",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261104_104357_Lmwys95pPQE",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mike",
+    "iki",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261104_123056_C3-yoO8wlU4",
+   "vozes": [
+    "momo",
+    "mike",
+    "solemsun",
+    "guugou",
+    "iki",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261104_145551_uASBc5rNf2M",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "thomas_shelby_peaky_blinders",
+    "solemsun",
+    "mc_melody_brazilian_singer_v2_500",
+    "guugou",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261104_204250_9OSXs52aICI",
+   "vozes": [
+    "momo",
+    "mike",
+    "iki",
+    "seu_madruga"
+   ]
+  },
+  {
+   "pid": "20261104_211447_6rPpPzEFaYM",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mike",
+    "mangaticos",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261105_013609_2VM8tIi_79M",
+   "vozes": [
+    "momo",
+    "guugou",
+    "solemsun",
+    "mike",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261105_182852_PDPOK7xOyas",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261105_232019_BxIZfQ8h8Ew",
+   "vozes": [
+    "porao",
+    "iki",
+    "mangaticos",
+    "solemsun",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261106_063435_mzhXJNkndXI",
+   "vozes": [
+    "momo",
+    "mike",
+    "guugou",
+    "solemsun",
+    "mangaticos",
+    "chaves_chapolin"
+   ]
+  },
+  {
+   "pid": "20261106_104452_8pWoAFAT49w",
+   "vozes": [
+    "momo",
+    "guugou",
+    "iki",
+    "mike",
+    "mangaticos",
+    "chapolin_colorado"
+   ]
+  },
+  {
+   "pid": "20261106_191840_oBhCOA3jXKM",
+   "vozes": [
+    "porao",
+    "iki",
+    "guugou",
+    "mike",
+    "solemsun",
+    "pica_pau"
+   ]
+  },
+  {
+   "pid": "20261106_225404_L4mXm0XIEks",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "mc_melody_brazilian_singer_v2_500",
+    "mangaticos",
+    "vegeta",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261106_230654_992lhmyh64g",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mattz",
+    "iki",
+    "thomas_shelby_peaky_blinders",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261107_013545_G673hGLwAwc",
+   "vozes": [
+    "momo",
+    "mike",
+    "mc_melody_brazilian_singer_v2_500",
+    "solemsun",
+    "moana",
+    "iki",
+    "seu_madruga"
+   ]
+  },
+  {
+   "pid": "20261107_020106_jcQ9GQz5CG4",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "walter_white_breaking_bad",
+    "bulma",
+    "woody",
+    "jessie_toy_story",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261107_045700_vhYPP5qfqCg",
+   "vozes": [
+    "momo",
+    "iki",
+    "solemsun",
+    "guugou",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261107_060613_VgQUQTmYLeQ",
+   "vozes": [
+    "porao",
+    "guugou",
+    "solemsun",
+    "mike",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261107_074730_u7awk1vrxmA",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "guugou",
+    "mike",
+    "mc_melody_brazilian_singer_v2_500",
+    "thomas_shelby_peaky_blinders",
+    "chapolin_colorado"
+   ]
+  },
+  {
+   "pid": "20261107_081358_W71m8v71ZsM",
+   "vozes": [
+    "momo",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261107_113244_vhYPP5qfqCg",
+   "vozes": [
+    "momo",
+    "iki",
+    "solemsun",
+    "mike",
+    "moana",
+    "cid_moreira",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261107_121032_VgQUQTmYLeQ",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "walter_white_breaking_bad",
+    "ivete_sangalo",
+    "mulher_maravilha",
+    "alex_madagascar",
+    "chaves_chapolin"
+   ]
+  },
+  {
+   "pid": "20261107_125921_4JTCiwhKD8s",
+   "vozes": [
+    "porao",
+    "guugou",
+    "iki",
+    "solemsun",
+    "mangaticos",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261107_132708_xttnbRfoRxw",
+   "vozes": [
+    "momo",
+    "guugou",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261107_135505_82Pzd4S1yvY",
+   "vozes": [
+    "momo",
+    "iki",
+    "vegeta",
+    "mike",
+    "mattz",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261107_140932_u7awk1vrxmA",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "iki",
+    "mike",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261107_165858_W71m8v71ZsM",
+   "vozes": [
+    "porao",
+    "guugou",
+    "mc_melody_brazilian_singer_v2_500",
+    "mike",
+    "thomas_shelby_peaky_blinders",
+    "iki",
+    "chapolin_colorado"
+   ]
+  },
+  {
+   "pid": "20261107_183203_vhYPP5qfqCg",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "vegeta",
+    "buzz_lightyear",
+    "lula_molusco",
+    "ludmilla",
+    "seu_madruga"
+   ]
+  },
+  {
+   "pid": "20261107_184134_dLd0uCJVaEc",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261107_194256_VgQUQTmYLeQ",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mike",
+    "mangaticos",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261107_201227_4JTCiwhKD8s",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mangaticos",
+    "iki",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261107_204710_xttnbRfoRxw",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261107_210238_AxnmJZXPQL0",
+   "vozes": [
+    "porao",
+    "mangaticos",
+    "moana",
+    "guugou",
+    "walter_white_breaking_bad",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261107_215003_NquCkTR3za4",
+   "vozes": [
+    "momo",
+    "mike",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261108_192536_u7awk1vrxmA",
+   "vozes": [
+    "momo",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261108_201513_VgQUQTmYLeQ",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mattz",
+    "mike",
+    "cid_moreira",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261108_210713_dLd0uCJVaEc",
+   "vozes": [
+    "porao",
+    "mike",
+    "guugou",
+    "iki",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261108_221551_AxnmJZXPQL0",
+   "vozes": [
+    "porao",
+    "solemsun",
+    "mattz",
+    "iki",
+    "moana",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261108_232312_HZRTnl9uykk",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "guugou",
+    "solemsun",
+    "mike",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261109_151419_n_NwO2_X_5Q",
+   "vozes": [
+    "momo",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261109_153514_V4msWWPktbU",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261109_154804_wAWZvc-XkM8",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "guugou",
+    "iki",
+    "cid_moreira",
+    "mattz",
+    "pica_pau"
+   ]
+  },
+  {
+   "pid": "20261109_173816_lynfA6VwYPc",
+   "vozes": [
+    "momo",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261109_184440_PReloN5HWSI",
+   "vozes": [
+    "momo",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261109_192747_pnX8RlSn7Yk",
+   "vozes": [
+    "porao",
+    "mike",
+    "cid_moreira",
+    "solemsun",
+    "thomas_shelby_peaky_blinders",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261109_194510_8m6TEKqvxfY",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261109_195720_L4mXm0XIEks",
+   "vozes": [
+    "momo",
+    "guugou",
+    "vegeta",
+    "solemsun",
+    "walter_white_breaking_bad",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261109_201507_992lhmyh64g",
+   "vozes": [
+    "porao",
+    "mangaticos",
+    "mike",
+    "guugou",
+    "iki",
+    "pica_pau"
+   ]
+  },
+  {
+   "pid": "20261109_203104_VgQUQTmYLeQ",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "cid_moreira",
+    "mangaticos",
+    "moana",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261109_213850_r77umNwvRKU",
+   "vozes": [
+    "momo",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261109_215156_mrpNi2jlk0k",
+   "vozes": [
+    "momo",
+    "mike",
+    "guugou",
+    "chaves_chapolin"
+   ]
+  },
+  {
+   "pid": "20261109_220324_McmTVgI6efk",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261109_225729_5oxuVYcxks8",
+   "vozes": [
+    "porao",
+    "fatos_desconhecidos",
+    "moana",
+    "bulma",
+    "lula_molusco",
+    "alex_madagascar",
+    "seu_madruga"
+   ]
+  },
+  {
+   "pid": "20261109_234642_82ge1YYkUyA",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261110_015215_KTe13kwBSFc",
+   "vozes": [
+    "momo",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261110_030322_ukz1eN12VPA",
+   "vozes": [
+    "porao",
+    "solemsun",
+    "iki",
+    "mangaticos",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261110_034616__PrMa8HClUM",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mattz",
+    "mike",
+    "mc_melody_brazilian_singer_v2_500",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261110_040640_BxGFwx_rul8",
+   "vozes": [
+    "momo",
+    "iki",
+    "mangaticos",
+    "guugou",
+    "mike"
+   ]
+  },
+  {
+   "pid": "20261111_011018_oBhCOA3jXKM",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261111_030208__-3Fd7lJWkQ",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "solemsun",
+    "mike",
+    "guugou",
+    "chaves_chapolin"
+   ]
+  },
+  {
+   "pid": "20261111_043552_PFsXz-tGt2M",
+   "vozes": [
+    "porao",
+    "iki",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261111_123950_AXR1lZb1P-o",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "vegeta",
+    "mike",
+    "cid_moreira",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261111_142904_UYU3JWS5zu4",
+   "vozes": [
+    "momo",
+    "iki",
+    "thomas_shelby_peaky_blinders",
+    "guugou",
+    "walter_white_breaking_bad",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261111_174232_Rwk7Np2A7Zg",
+   "vozes": [
+    "porao",
+    "guugou",
+    "walter_white_breaking_bad",
+    "jessie_toy_story",
+    "mulher_maravilha",
+    "ivete_sangalo",
+    "pica_pau"
+   ]
+  },
+  {
+   "pid": "20261111_195755_GMuCrqDRe9A",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "mike",
+    "mangaticos",
+    "thomas_shelby_peaky_blinders",
+    "moana",
+    "chapolin_colorado"
+   ]
+  },
+  {
+   "pid": "20261111_215310_Tv4TcuPT9JI",
+   "vozes": [
+    "momo",
+    "iki",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261111_220731_S6LISaC7K6A",
+   "vozes": [
+    "porao",
+    "guugou",
+    "mike",
+    "mangaticos",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261111_222939_Tv828JN1ZcM",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "mike",
+    "solemsun",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261111_224226_hjNH-wf1jgI",
+   "vozes": [
+    "momo",
+    "iki",
+    "mike",
+    "guugou",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261111_230827_XYDK10mfxd0",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "mattz",
+    "iki",
+    "cid_moreira",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261112_004638_KAA_csRv7NU",
+   "vozes": [
+    "porao",
+    "guugou",
+    "mc_melody_brazilian_singer_v2_500",
+    "mangaticos",
+    "vegeta",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261112_065203_0Io4fQN_qSM",
+   "vozes": [
+    "momo",
+    "solemsun",
+    "vegeta",
+    "mike",
+    "walter_white_breaking_bad",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261112_072858_PDPOK7xOyas",
+   "vozes": [
+    "momo",
+    "guugou",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261112_074957_dLd0uCJVaEc",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "solemsun"
+   ]
+  },
+  {
+   "pid": "20261027_000000_PReloN5HWSI",
+   "vozes": [
+    "porao",
+    "guugou",
+    "iki",
+    "mike",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261027_000001_pnX8RlSn7Yk",
+   "vozes": [
+    "momo",
+    "mangaticos",
+    "iki",
+    "mike",
+    "guugou",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261027_000002_oLBasz5H1-4",
+   "vozes": [
+    "momo",
+    "mike",
+    "thomas_shelby_peaky_blinders",
+    "guugou",
+    "mc_melody_brazilian_singer_v2_500",
+    "iki",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261027_000020_LUQDew946Ps",
+   "vozes": [
+    "momo",
+    "mike",
+    "mangaticos",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261027_000021_kP0KdA-s128",
+   "vozes": [
+    "momo",
+    "iki"
+   ]
+  },
+  {
+   "pid": "20261027_000022_AP_c0bbMmRI",
+   "vozes": [
+    "porao",
+    "guugou",
+    "mc_melody_brazilian_singer_v2_500",
+    "woody",
+    "ludmilla",
+    "buzz_lightyear",
+    "chiquinha"
+   ]
+  },
+  {
+   "pid": "20261027_000012_KQMPGyt6PxA",
+   "vozes": [
+    "momo",
+    "iki",
+    "mc_melody_brazilian_singer_v2_500",
+    "guugou",
+    "thomas_shelby_peaky_blinders",
+    "mangaticos"
+   ]
+  },
+  {
+   "pid": "20261027_000013_e2nIzNGXvmA",
+   "vozes": [
+    "porao",
+    "mangaticos",
+    "mike",
+    "iki",
+    "guugou"
+   ]
+  },
+  {
+   "pid": "20261027_000014_8fM6Ay7OJho",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "iki",
+    "mike",
+    "thomas_shelby_peaky_blinders",
+    "mc_melody_brazilian_singer_v2_500",
+    "chiquinha"
+   ]
+  }
+ ],
+ "_obs": [
+  "26/10 14:35: cursor voltou a 0 — os 4 primeiros vídeos (5-vQo, KJ5F, YZNY, H9be) caíram em sessões sem voz clonada (venv do Kaggle quebrado)"
+ ],
+ "ruins": [
+  "patrick_estrela",
+  "kratos_god_of_war_2018",
+  "kratos_ascension"
+ ],
+ "_ruins_31_10": "Dona 31/10: Kratos grave demais pra narrar longo (continua só como voz de monstro/vilão em config/longo.json personagens.vozes_monstro).",
+ "atrativas": [
+  "porao",
+  "mike",
+  "mangaticos",
+  "omelhormanhwa",
+  "iki",
+  "kkvirjao"
+ ],
+ "_leia_ruins": "28/10 dona: ruins = nunca entram (Patrick Estrela). atrativas = a 1a voz do longo sai sempre delas (rodizio) e as outras atrativas sorteadas vem logo depois. Lista inicial = narradores de manhwa parceiros mais conhecidos (escolha da sessao, a dona pode trocar; o melhorador deve ajustar pelas views).",
+ "grupos": {
+  "_leia": "dona 29/10: 1º narrador (resumo e começo) só dos 'resumo'; 2º dos 'secundarios'; do 3º em diante mulheres e engraçados ('terciarios', = o resto da ordem). Normalmente só primários; às vezes primários + secundários; de vez em quando com terciários. Toda semana pelo menos 1 vídeo de cada primário e secundário (escolhe quem foi menos usado nos últimos 7 dias). 'modos' = chance de cada tipo de vídeo.",
+  "resumo": [
+   "momo",
+   "mike",
+   "guugou",
+   "mangaticos",
+   "iki",
+   "solemsun",
+   "fatos_desconhecidos"
+  ],
+  "primarios": [
+   "momo",
+   "mike",
+   "guugou",
+   "mangaticos",
+   "iki",
+   "solemsun"
+  ],
+  "secundarios": [
+   "vegeta",
+   "cid_moreira",
+   "walter_white_breaking_bad",
+   "thomas_shelby_peaky_blinders",
+   "mattz",
+   "moana",
+   "mc_melody_brazilian_singer_v2_500"
+  ],
+  "terciarios": [
+   "mulher_maravilha",
+   "ludmilla",
+   "ivete_sangalo",
+   "bulma",
+   "jessie_toy_story",
+   "lula_molusco",
+   "buzz_lightyear",
+   "woody",
+   "alex_madagascar"
+  ],
+  "participacao_especial": [
+   "galvao_bueno",
+   "chaves",
+   "chaves_chapolin",
+   "chapolin_colorado",
+   "seu_madruga",
+   "chiquinha",
+   "pica_pau",
+   "gretchen"
+  ],
+  "_31_10": "Dona 31/10 (CCJQvNP-23Y): principal saía em ~1 min e trocava demais; Galvão de narrador = chiado. Agora: 1º narrador >=35% do vídeo, máx. 5 principais, participacao_especial = só 3 frases no meio de um bloco (anime_tts.revezar, lista igual em config/longo.json ANIME_PARTICIPACAO). Cid Moreira subiu pra secundários; Cassidy (grave) saiu. Vegeta e Cid = bons 2º narradores.",
+  "modos": {
+   "solo": 0.2,
+   "dupla": 0.15,
+   "so_primarios": 0.3,
+   "primarios_secundarios": 0.2,
+   "com_terciarios": 0.08,
+   "mistura_grande": 0.07
+  },
+  "_vegeta": "29/10 dona: 'Vegeta é um excelente dublador, põe ele como uma das prioridades do segundo'",
+  "_leia_modos_30_10": "Fable 30/10 (dona: vídeos SOLO, misturas com mais e com menos narradores, outros só com os da fila 1): solo = 1 primário; dupla = 2 primários; so_primarios = 4; primarios_secundarios; com_terciarios; mistura_grande = 6-7 vozes. Só-primários somam 65%. O modo vai no pedido.json (narradores_modo) pra comparar pelas views."
+ },
+ "_modo": "mistura_grande"
+}

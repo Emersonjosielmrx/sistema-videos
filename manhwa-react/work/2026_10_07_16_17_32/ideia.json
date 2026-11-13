@@ -1,0 +1,31 @@
+{
+ "formato": "recap de cenas de filme/série com narração IA questionadora",
+ "descricao": "Montagem de cenas-chave de um filme/série com narração IA fazendo perguntas retóricas e comentários que instigam o espectador a opinar ('você faria esse acordo?'). Ritmo: cena → provocação → próxima cena.",
+ "replicavel": false,
+ "como_fazer": "1. Identificar filme/série com cenas impactantes ou dilemas morais. 2. Usar Playwright ou download manual para capturar clipes (3-8s cada). 3. Escrever roteiro com LLM: perguntas provocativas sobre as escolhas dos personagens. 4. Gerar narração com TTS (edge-tts ou ElevenLabs). 5. Montar no ffmpeg: clipes + narração + trilha de suspense + legendas estilo Hormozi. 6. Adicionar overlays (fogo, raio) nos momentos de tensão.",
+ "ferramentas": [
+  "Playwright",
+  "ffmpeg",
+  "TTS",
+  "LLM",
+  "overlays animados",
+  "trilhas",
+  "legendas Hormozi"
+ ],
+ "fonte_de_material": "clipes de filmes/séries (direitos autorais impedem replicação legal para canais novos; só funciona em canais já monetizados com fair use arriscado)",
+ "esforco": "medio",
+ "potencial": 3,
+ "por_que_viraliza": "dilemas morais + perguntas diretas ao espectador geram engajamento nos comentários, mas risco altíssimo de copyright strike",
+ "exemplo_roteiro": "Cena 1: casal no lago verde.\nNarração: 'Tudo parecia perfeito... mas e se um acordo mudasse tudo?'\nCena 2: foto no celular (possível vítima).\nNarração: 'Você aceitaria um acordo sabendo que alguém vai morrer?'\nCena 3: corpo no chão.\nNarração: 'Pois é... o preço foi alto demais.'",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "dilema moral",
+  "react filme",
+  "acordo perigoso",
+  "suspense",
+  "plot twist",
+  "fair use arriscado"
+ ],
+ "video": "2026-10-07 16-17-32.mp4",
+ "data": "2026-10-12"
+}

@@ -1,0 +1,44 @@
+{
+  "nome": "MS Energy",
+  "slogan": "Energia que transforma",
+  "slogan_alt": "Sua conta de luz nunca mais será a mesma",
+  "cores": {
+    "primaria": "#F59E0B",
+    "primaria_rgb": [245, 158, 11],
+    "secundaria": "#1E3A5F",
+    "secundaria_rgb": [30, 58, 95],
+    "accent": "#10B981",
+    "accent_rgb": [16, 185, 129],
+    "branco": "#FFFFFF",
+    "preto": "#111827"
+  },
+  "fontes": {
+    "titulo": "Impact",
+    "subtitulo": "Arial Bold",
+    "corpo": "Arial"
+  },
+  "watermark": {
+    "texto": "@MSEnergySolar",
+    "posicao": "bottom_right",
+    "opacidade": 0.7
+  },
+  "cta": {
+    "padrao": "ORÇAMENTO GRÁTIS ☀️",
+    "alternativas": [
+      "Link na bio!",
+      "Chama no WhatsApp!",
+      "Simule sua economia!",
+      "Peça seu orçamento!"
+    ]
+  },
+  "hashtags": [
+    "#energiasolar", "#solar", "#msenergy", "#economiaenergia",
+    "#sustentabilidade", "#painelsolar", "#energia", "#contadeluz",
+    "#energialimpa", "#fotovoltaica"
+  ],
+  "contato": {
+    "whatsapp": "",
+    "instagram": "@msenergy",
+    "site": ""
+  }
+}

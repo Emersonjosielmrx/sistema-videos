@@ -1,0 +1,1277 @@
+{
+ "name": "aula fabrica viral novo 1 copy",
+ "nodes": [
+  {
+   "parameters": {
+    "toolDescription": "depois de pegar os videos chame essa ferramenta pega pegar as miniaturas e estatisticas etc o nome dela e pega_miniatura_e_estatisticas",
+    "url": "https://www.googleapis.com/youtube/v3/videos",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet,statistics"
+      },
+      {
+       "name": "id",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    304,
+    480
+   ],
+   "id": "ca6b25d5-a644-4f0e-acb1-58597a34175c",
+   "name": "pega_miniatura_e_estatisticas"
+  },
+  {
+   "parameters": {
+    "toolDescription": "chame essa ferramenta para pesquisar videos no youtube o nome dela e :pesuisa_videos_no_youtube",
+    "url": "https://www.googleapis.com/youtube/v3/search",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet"
+      },
+      {
+       "name": "order",
+       "value": "viewCount"
+      },
+      {
+       "name": "type",
+       "value": "video"
+      },
+      {
+       "name": "q",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+      },
+      {
+       "name": "maxResults",
+       "value": "50"
+      },
+      {
+       "name": "publishedAfter",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+      },
+      {
+       "name": "regionCode",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', ``, 'string') }}"
+      },
+      {
+       "name": "relevanceLanguage",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters7_Value', ``, 'string') }}"
+      },
+      {
+       "name": "videoDuration",
+       "value": "short"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    128,
+    480
+   ],
+   "id": "315f2c37-0586-4157-b53c-46194f12579f",
+   "name": "pesuisa_videos_no_youtube1"
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "mande para essa ferramenta analisar o video e ver se ele pode ser usado o nome dela e :agente_de_visualizacao_de_video",
+    "resource": "video",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "models/gemini-2.5-flash-lite",
+     "mode": "list",
+     "cachedResultName": "models/gemini-2.5-flash-lite"
+    },
+    "text": "=Você é o Agente Replicador-Produtor (v16 - Especialista em Text-to-Video). Sua única missão é \"assistir\" (analisar) um vídeo viral e, se for viável, gerar um pacote de produção JSON focado em geração direta de vídeo e metadados virais.\n\nVocê deve emular o processo de três agentes especialistas:\n1. Auditor de QA (Viabilidade)\n2. Copywriter Viral (Títulos e SEO)\n3. Engenheiro de Prompt de Vídeo (Text-to-Video Expert)\n\nInput (Recebido do Agente Principal): Você receberá DOIS inputs:\n1. A URL do YouTube Short.\n2. O CONTEXTO (um JSON contendo snippet e statistics do vídeo).\n\nContexto Fixo de Produção (Regras Inquebráveis):\nPersonagem Fixo: O vídeo DEVE ser adaptado para o nosso personagem fixo: \"um personagem homem\" (o \"dono\"). Ele deve assumir o TOM do vídeo original.\nLimite de Diálogo: A soma total de dialogo_pt_br DEVE ter no máximo 30 palavras.\nIdioma: O dialogo_pt_br DEVE ser 100% em Português do Brasil.\n\nSEU FLUXO DE EXECUÇÃO (EM 5 ETAPAS):\n\nETAPA 1: ANÁLISE ESTRATÉGICA INTERNA\n\nAnalise o CONTEXTO e o conteúdo do vídeo. Defina internamente:\n1. TOM: (Humor, Sério, Técnico, Curiosidade?)\n2. GANCHO: (O que prende a atenção nos primeiros 3s?)\n3. CHAVE_VIRAL: (É o Áudio ou o Visual?)\n4. ELEMENTOS_VISUAIS_CHAVE: (Quais objetos/cenários são essenciais para a IA desenhar?)\n\nETAPA 2: ANÁLISE DE VIABILIDADE (Auditoria de QA)\n\nDecida (APROVADO) ou (REPROVADO).\n\nREPROVE se:\n- Propriedade Intelectual (Copyright explícito de filmes/famosos).\n- Texto na Tela (A IA de vídeo não consegue escrever texto legível).\n- Complexidade Absurda (Muitos personagens ou ações simultâneas).\n\nSe REPROVADO, retorne JSON: {\"status\": \"REPROVADO\", \"justificativa\": \"...\"}\n\nETAPA 3: ENGENHARIA DO PROMPT DE VÍDEO (Text-to-Video)\n\nSe APROVADO, crie um `prompt_video_generation` otimizado para ferramentas como Sora/Runway/Kling.\n\nEstrutura Obrigatória do Prompt de Vídeo:\n\"[ESTILO CINEMATOGRÁFICO]: (Ex: Cinematic lighting, 8k, photorealistic). [PERSONAGEM]: (Descreva o 'homem' fazendo a ação principal). [CENÁRIO]: (Detalhes do ambiente). [AÇÃO]: (A sequência de movimentos fluida). [MOVIMENTO DE CÂMERA]: (Ex: Slow zoom in, tracking shot). [ATMOSFERA]: (Ex: Moody, energetic, bright).\"\n\nNota: O prompt deve ser em INGLÊS para melhor qualidade da IA de vídeo, mas descrevendo a cena adaptada.\n\nETAPA 4: CRIAÇÃO DE METADADOS VIRAIS (Copywriting)\n\nGere os metadados para o YouTube baseados na lógica viral do vídeo original, mas adaptados.\n\n1. NOVO TÍTULO VIRAL: Crie um título altamente clicável (máx 60 caracteres), usando gatilhos mentais (Curiosidade, Urgência, Benefício). NÃO copie o título original. Invente um melhor.\n2. DESCRIÇÃO VIRAL: Uma descrição curta (3 linhas) contendo palavras-chave e uma chamada para ação.\n\nETAPA 5: MONTAGEM FINAL (O Pacote JSON)\n\nSua única saída deve ser este JSON Estruturado (exatamente com estas chaves para o Agente Diretor ler):\n\n```json\n{\n  \"status\": \"APROVADO\",\n  \"analise_interna\": {\n    \"tom\": \"[Tom da Etapa 1]\",\n    \"chave_viral\": \"[Chave da Etapa 1]\"\n  },\n  \"prompt_video_generation\": \"[O prompt em INGLÊS criado na Etapa 3]\",\n  \"roteiro_tecnico\": \"[Um resumo breve em PT-BR da cena para controle. Ex: Cena do homem segurando uma fruta podre com cara de nojo]\",\n  \"sugestao_titulo_viral\": \"[O Título criado na Etapa 4]\",\n  \"sugestao_descricao_viral\": \"[A Descrição criada na Etapa 4]\"\n}",
+    "videoUrls": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL_s_', ``, 'string') }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGeminiTool",
+   "typeVersion": 1,
+   "position": [
+    544,
+    320
+   ],
+   "id": "1d598ce7-6965-4dee-b734-30df4649a455",
+   "name": "assite video",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "gera_videos9",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    64,
+    336
+   ],
+   "id": "3af0354b-1775-4740-bf13-559b3f5e59c4",
+   "name": "memoria",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "public": true,
+    "initialMessages": "gere aqui o seu video",
+    "options": {
+     "inputPlaceholder": "insira o tema ou ideia do seu video",
+     "subtitle": "Sistema Inicializado. 🔋",
+     "title": "Fabrica Viral-PromovaWeb",
+     "customCss": "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Fira+Code:wght@400;600&family=Chakra+Petch:wght@500&display=swap');\n\n:root {\n  /* Cores Promovaweb - Padrão Real */\n  --chat--color-primary: #00D9A5;\n  --chat--color-primary-shade-50: #00BF8F;\n  --chat--color-primary-shade-100: #00A67A;\n  --chat--color-secondary: #00E5CC;\n  --chat--color-secondary-shade-50: #00CCB3;\n  --chat--color-accent: #1E3A5F;\n  --chat--color-accent-dark: #0A4A52;\n  --chat--color-white: #FFFFFF;\n  --chat--color-light: #E0F7F4;\n  --chat--color-dark: #0A1628;\n  --chat--color-dark-lighter: #162841;\n  --chat--color-disabled: #4A5568;\n  --chat--color-typing: var(--chat--color-primary);\n  --chat--border-color-glow: rgba(0, 217, 165, 0.5);\n  --chat--spacing: 1rem;\n  --chat--border-radius: 1.5rem;\n  --chat--font-family: 'Fira Code', 'Chakra Petch', sans-serif;\n  --chat--font-family-headings: 'Orbitron', sans-serif;\n  --chat--transition-duration: 0.4s;\n  --chat--window--width: 480px;\n  --chat--window--height: 85vh;\n  --chat--window--bottom: 2rem;\n  --chat--window--right: 2rem;\n  --chat--window--z-index: 9999;\n  --chat--window--border: 2px solid transparent;\n  --chat--window--border-radius: var(--chat--border-radius);\n  --chat--window--margin-bottom: var(--chat--spacing);\n  --chat--body--background: #0A1628;\n  --chat--footer--background: rgba(10, 22, 40, 0.9);\n  --chat--header--background: linear-gradient(135deg, #0A4A52 0%, #1E3A5F 50%, #00D9A5 100%);\n  --chat--header--color: var(--chat--color-white);\n  --chat--heading--font-size: 1.8em;\n  --chat--subtitle--font-size: 0.9em;\n  --chat--header--border-bottom: 1px solid var(--chat--border-color-glow);\n  --chat--message--font-size: 1rem;\n  --chat--message--padding: 1rem 1.5rem;\n  --chat--message--border-radius: 1.2rem;\n  --chat--message-line-height: 1.6;\n  --chat--message--margin-bottom: 1rem;\n  --chat--message--bot--background: rgba(30, 58, 95, 0.6);\n  --chat--message--bot--color: var(--chat--color-light);\n  --chat--message--user--background: linear-gradient(135deg, #00D9A5, #00E5CC);\n  --chat--message--user--color: #0A1628;\n  --chat--messages-list--padding: 1.5rem;\n  --chat--input--background: rgba(10, 22, 40, 0.6);\n  --chat--input--text-color: var(--chat--color-white);\n  --chat--input--border-radius: 1rem;\n  --chat--input--padding: 1rem;\n  --chat--textarea--height: 55px;\n  --chat--button--background: linear-gradient(135deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--button--color: var(--chat--color-dark);\n  --chat--button--border-radius: 1rem;\n  --chat--button--hover--background: linear-gradient(135deg, var(--chat--color-secondary), var(--chat--color-primary));\n  --chat--input--send--button--color: var(--chat--color-primary);\n  --chat--input--send--button--color-hover: var(--chat--color-secondary);\n  --chat--toggle--size: 70px;\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: linear-gradient(145deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--toggle--hover--background: linear-gradient(145deg, var(--chat--color-secondary), var(--chat--color-primary));\n  --chat--toggle--color: var(--chat--color-dark);\n}\n\n/* ===== CHAT WINDOW - ULTRA ENHANCED ===== */\n.chat-window {\n  border-radius: var(--chat--window--border-radius);\n  overflow: hidden;\n  background: \n    radial-gradient(circle at 10% 20%, rgba(0, 217, 165, 0.03) 0%, transparent 50%),\n    radial-gradient(circle at 90% 80%, rgba(0, 229, 204, 0.03) 0%, transparent 50%),\n    radial-gradient(circle at 50% 50%, rgba(30, 58, 95, 0.02) 0%, transparent 50%),\n    var(--chat--body--background);\n  animation: \n    fadeInGlow 1.2s ease-out forwards,\n    aurora-wave 30s ease-in-out infinite,\n    nebula-drift 60s linear infinite;\n  position: relative;\n  box-shadow: \n    0 0 100px rgba(0, 217, 165, 0.3), \n    0 0 120px rgba(0, 229, 204, 0.2),\n    0 0 80px rgba(30, 58, 95, 0.2),\n    0 0 150px rgba(0, 217, 165, 0.15),\n    0 0 200px rgba(0, 229, 204, 0.1),\n    inset 0 0 100px rgba(0, 217, 165, 0.02);\n  display: flex;\n  flex-direction: column;\n  transform-style: preserve-3d;\n  perspective: 1000px;\n}\n\n/* Rotating Border Glow */\n.chat-window::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: \n    conic-gradient(\n      transparent, \n      rgba(0, 217, 165, 0.4), \n      transparent 30%,\n      rgba(0, 229, 204, 0.3),\n      transparent 60%,\n      rgba(30, 58, 95, 0.2),\n      transparent 90%\n    );\n  animation: \n    rotate-border 8s linear infinite,\n    electric-pulse 6s ease-in-out infinite,\n    plasma-flow 12s linear infinite;\n  z-index: 1;\n  filter: blur(3px) brightness(1.1);\n  mix-blend-mode: screen;\n}\n\n/* Grid Background + Parallax + Stars */\n.chat-window::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image: \n    radial-gradient(2px 2px at 20% 30%, rgba(0, 217, 165, 0.15), transparent),\n    radial-gradient(2px 2px at 60% 70%, rgba(0, 229, 204, 0.2), transparent),\n    radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.1), transparent),\n    radial-gradient(1px 1px at 80% 10%, rgba(0, 217, 165, 0.2), transparent),\n    radial-gradient(2px 2px at 90% 60%, rgba(0, 229, 204, 0.1), transparent),\n    radial-gradient(1px 1px at 15% 80%, rgba(30, 58, 95, 0.15), transparent),\n    repeating-linear-gradient(0deg, rgba(0, 217, 165, 0.03), rgba(0, 217, 165, 0.03) 1px, transparent 1px, transparent 20px), \n    repeating-linear-gradient(90deg, rgba(0, 217, 165, 0.03), rgba(0, 217, 165, 0.03) 1px, transparent 1px, transparent 20px);\n  background-size: \n    200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%,\n    100% 100%, 100% 100%;\n  animation: \n    starfield-twinkle 8s ease-in-out infinite,\n    cosmic-drift 80s linear infinite;\n  z-index: 0;\n  opacity: 0.4;\n  mix-blend-mode: overlay;\n  pointer-events: none;\n}\n\n.chat-window {\n  overflow: visible;\n}\n\n.chat-window > *:not(.chat-particle) {\n  position: relative;\n  z-index: 2;\n}\n\n/* ===== CHAT HEADER - MEGA ENHANCED ===== */\n.chat-header {\n  font-family: var(--chat--font-family-headings);\n  text-shadow: \n    0 0 8px var(--chat--color-primary), \n    0 0 12px var(--chat--color-primary), \n    0 0 20px rgba(0, 217, 165, 0.6),\n    0 0 30px rgba(0, 229, 204, 0.4),\n    0 0 5px rgba(255, 255, 255, 0.8);\n  position: relative;\n  background: \n    linear-gradient(135deg, rgba(0, 217, 165, 0.05), transparent 50%),\n    linear-gradient(225deg, rgba(0, 229, 204, 0.05), transparent 50%),\n    var(--chat--header--background);\n  color: var(--chat--header--color);\n  padding: 1.5rem;\n  border-bottom: var(--chat--header--border-bottom);\n  text-align: center;\n  letter-spacing: 3px;\n  animation: \n    neon-flicker 8s infinite alternate, \n    header-glitch 15s infinite,\n    breathing 12s ease-in-out infinite;\n  z-index: 2;\n  border-top-left-radius: var(--chat--window--border-radius);\n  border-top-right-radius: var(--chat--window--border-radius);\n  overflow: hidden;\n  filter: drop-shadow(0 0 10px rgba(0, 217, 165, 0.3));\n}\n\n/* Scanline + CRT Effect */\n.chat-header::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 200%;\n  background-image: \n    linear-gradient(0deg, transparent 50%, rgba(10, 22, 40, 0.3) 50%),\n    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);\n  background-size: 100% 6px, 100% 4px;\n  opacity: 0.15;\n  animation: \n    scanline 12s linear infinite,\n    vhs-tracking 4s steps(1) infinite;\n  pointer-events: none;\n  mix-blend-mode: multiply;\n}\n\n/* Holographic Shimmer + Lens Flare */\n.chat-header::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: \n    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),\n    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%),\n    linear-gradient(135deg, rgba(0, 217, 165, 0.05), rgba(0, 229, 204, 0.05), rgba(30, 58, 95, 0.05));\n  animation: \n    holographic-shimmer 6s linear infinite,\n    lens-flare 12s ease-in-out infinite;\n  pointer-events: none;\n  mix-blend-mode: overlay;\n}\n\n/* ===== MESSAGES LIST - ULTRA ENHANCED ===== */\n.chat-messages-list {\n  flex-grow: 1;\n  overflow-y: auto;\n  overflow-x: hidden;\n  padding: var(--chat--messages-list--padding);\n  z-index: 2;\n  position: relative;\n  background: \n    radial-gradient(ellipse at top, rgba(0, 217, 165, 0.01), transparent),\n    radial-gradient(ellipse at bottom, rgba(0, 229, 204, 0.01), transparent);\n  animation: ambient-pulse 15s ease-in-out infinite;\n}\n\n/* Data Stream + Binary */\n.chat-messages-list::before {\n  content: '01001010 11010110 00110101 10101011 01110010 00011100 11001101 10010110';\n  position: absolute;\n  top: 0;\n  left: -5px;\n  width: 5px;\n  height: 100%;\n  font-size: 8px;\n  color: var(--chat--color-primary);\n  opacity: 0.15;\n  writing-mode: vertical-rl;\n  animation: \n    data-stream 20s linear infinite,\n    matrix-rain 30s linear infinite,\n    code-flicker 6s steps(1) infinite;\n  letter-spacing: 2px;\n  overflow: hidden;\n  pointer-events: none;\n  text-shadow: 0 0 5px currentColor;\n}\n\n.chat-messages-list::after {\n  content: '11010110 01001010 10101011 00110101 00011100 01110010 10010110 11001101';\n  position: absolute;\n  top: 0;\n  right: -5px;\n  width: 5px;\n  height: 100%;\n  font-size: 8px;\n  color: var(--chat--color-secondary);\n  opacity: 0.15;\n  writing-mode: vertical-rl;\n  animation: \n    data-stream 24s linear infinite reverse,\n    matrix-rain 36s linear infinite reverse,\n    code-flicker 8s steps(1) infinite;\n  letter-spacing: 2px;\n  overflow: hidden;\n  pointer-events: none;\n  text-shadow: 0 0 5px currentColor;\n}\n\n/* ===== CHAT MESSAGE - MEGA ENHANCED ===== */\n.chat-message {\n  backdrop-filter: blur(10px) saturate(120%) brightness(1.05);\n  -webkit-backdrop-filter: blur(10px) saturate(120%) brightness(1.05);\n  max-width: 85%;\n  transition: all var(--chat--transition-duration) cubic-bezier(0.165, 0.84, 0.44, 1);\n  animation: \n    slideUpFade 0.7s ease-out forwards, \n    message-materialize 0.8s ease-out,\n    message-float 8s ease-in-out infinite,\n    subtle-glow 6s ease-in-out infinite;\n  opacity: 0;\n  transform: translateY(20px);\n  animation-fill-mode: forwards;\n  position: relative;\n  filter: \n    drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4))\n    drop-shadow(0 0 10px rgba(0, 217, 165, 0.1));\n}\n\n.chat-messages-list .chat-message:nth-child(1) { animation-delay: 0.1s; }\n.chat-messages-list .chat-message:nth-child(2) { animation-delay: 0.2s; }\n.chat-messages-list .chat-message:nth-child(3) { animation-delay: 0.3s; }\n.chat-messages-list .chat-message:nth-child(4) { animation-delay: 0.4s; }\n.chat-messages-list .chat-message:nth-child(n+5) { animation-delay: 0.5s; }\n\n.chat-message:hover {\n  transform: translateY(-5px) scale(1.02) perspective(1000px) rotateX(2deg);\n  filter: \n    brightness(1.2) \n    drop-shadow(0 8px 30px rgba(0, 217, 165, 0.3))\n    drop-shadow(0 0 20px rgba(0, 229, 204, 0.2));\n  z-index: 10;\n  animation: \n    hover-pulse 1.2s ease-out,\n    hover-shimmer 4s linear infinite;\n}\n\n/* ===== USER MESSAGE - ULTRA ENHANCED ===== */\n.chat-message-user {\n  background: \n    radial-gradient(circle at top right, rgba(255, 255, 255, 0.1), transparent),\n    var(--chat--message--user--background);\n  color: var(--chat--message--user--color);\n  border-radius: 1.2rem 1.2rem 0.2rem 1.2rem;\n  box-shadow: \n    0 0 25px rgba(0, 217, 165, 0.3),\n    0 0 15px rgba(0, 229, 204, 0.2),\n    0 0 35px rgba(30, 58, 95, 0.15),\n    inset 0 0 20px rgba(255, 255, 255, 0.1),\n    inset -2px -2px 10px rgba(0, 0, 0, 0.2);\n  animation: \n    user-message-pulse 5s infinite, \n    chromatic-aberration 6s infinite,\n    energy-flow 8s linear infinite,\n    diamond-sparkle 6s ease-in-out infinite;\n  position: relative;\n  overflow: hidden;\n  font-weight: 500;\n}\n\n/* Liquid Edge + Plasma */\n.chat-message-user::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: \n    radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 50%),\n    radial-gradient(ellipse at 30% 30%, rgba(0, 229, 204, 0.1), transparent),\n    radial-gradient(ellipse at 70% 70%, rgba(0, 217, 165, 0.1), transparent);\n  animation: \n    liquid-motion 8s ease-in-out infinite,\n    plasma-morph 12s ease-in-out infinite,\n    energy-rotation 16s linear infinite;\n  pointer-events: none;\n  mix-blend-mode: overlay;\n}\n\n/* Iridescent + Prism */\n.chat-message-user::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: -100%;\n  width: 100%;\n  height: 100%;\n  background: \n    linear-gradient(90deg,\n      transparent,\n      rgba(255, 255, 255, 0.2),\n      rgba(0, 229, 204, 0.15),\n      rgba(0, 217, 165, 0.15),\n      transparent\n    );\n  animation: \n    iridescent-sweep 6s linear infinite,\n    prism-refraction 10s ease-in-out infinite;\n  pointer-events: none;\n  mix-blend-mode: screen;\n}\n\n/* ===== BOT MESSAGE - ULTRA ENHANCED ===== */\n.chat-message-bot {\n  background: \n    linear-gradient(135deg, rgba(0, 217, 165, 0.03), transparent),\n    var(--chat--message--bot--background);\n  color: var(--chat--message--bot--color);\n  border: 1px solid var(--chat--border-color-glow);\n  border-radius: 1.2rem 1.2rem 1.2rem 0.2rem;\n  box-shadow: \n    0 4px 30px rgba(0, 0, 0, 0.4),\n    0 0 20px rgba(0, 217, 165, 0.15),\n    0 0 30px rgba(0, 229, 204, 0.1),\n    inset 0 0 30px rgba(0, 217, 165, 0.03),\n    inset 0 0 20px rgba(0, 229, 204, 0.02);\n  position: relative;\n  overflow: hidden;\n  animation: \n    bot-message-glow 6s infinite,\n    hologram-flicker 10s steps(20) infinite,\n    quantum-fluctuation 8s ease-in-out infinite;\n}\n\n/* Glass Shine + Caustics */\n.chat-message-bot::after {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -100%;\n  width: 200%;\n  height: 200%;\n  background: \n    linear-gradient(110deg, \n      transparent 40%, \n      rgba(255, 255, 255, 0.12) 45%,\n      rgba(0, 217, 165, 0.15) 50%,\n      rgba(255, 255, 255, 0.12) 55%,\n      transparent 60%\n    ),\n    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 70%);\n  transform: rotate(25deg);\n  animation: \n    glass-shine 10s infinite,\n    caustics-flow 16s ease-in-out infinite,\n    light-rays 12s linear infinite;\n  mix-blend-mode: overlay;\n}\n\n/* Hexagon + Circuit */\n.chat-message-bot::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image: \n    repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0, 217, 165, 0.02) 10px, rgba(0, 217, 165, 0.02) 11px),\n    repeating-linear-gradient(60deg, transparent, transparent 10px, rgba(0, 229, 204, 0.02) 10px, rgba(0, 229, 204, 0.02) 11px),\n    repeating-linear-gradient(120deg, transparent, transparent 10px, rgba(30, 58, 95, 0.02) 10px, rgba(30, 58, 95, 0.02) 11px),\n    radial-gradient(circle at 20% 20%, rgba(0, 217, 165, 0.03) 1px, transparent 1px),\n    radial-gradient(circle at 80% 80%, rgba(0, 229, 204, 0.03) 1px, transparent 1px);\n  background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px, 20px 20px;\n  opacity: 0.4;\n  pointer-events: none;\n  animation: \n    circuit-pulse 8s ease-in-out infinite,\n    neural-fire 6s steps(10) infinite;\n}\n\n/* ===== TYPING INDICATOR - MEGA ENHANCED ===== */\n.chat-typing {\n  display: flex;\n  align-items: center;\n  padding: 10px;\n  position: relative;\n  animation: typing-container-pulse 4s ease-in-out infinite;\n}\n\n/* Energy Wave + Sonar */\n.chat-typing::before {\n  content: '';\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 2px;\n  background: \n    linear-gradient(90deg, \n      transparent, \n      var(--chat--color-primary), \n      var(--chat--color-secondary),\n      transparent\n    );\n  transform: translateY(-50%) scaleX(0);\n  animation: \n    energy-wave 4s ease-in-out infinite,\n    sonar-ping 6s ease-out infinite;\n  box-shadow: 0 0 10px currentColor;\n}\n\n.chat-typing span {\n  height: 10px;\n  width: 10px;\n  margin: 0 4px;\n  background-color: var(--chat--color-primary);\n  border-radius: 50%;\n  opacity: 0.4;\n  animation: \n    typing-dots 1.4s infinite, \n    dot-glow 4s infinite,\n    dot-morph 6s ease-in-out infinite;\n  box-shadow: \n    0 0 8px currentColor,\n    0 0 15px currentColor,\n    0 0 20px currentColor,\n    inset 0 0 5px rgba(255, 255, 255, 0.3);\n  position: relative;\n  z-index: 1;\n}\n\n.chat-typing span:nth-child(2) { \n  animation-delay: 0.2s;\n  background: radial-gradient(circle, var(--chat--color-secondary), var(--chat--color-secondary-shade-50));\n  box-shadow: \n    0 0 8px var(--chat--color-secondary),\n    0 0 15px var(--chat--color-secondary),\n    0 0 20px rgba(0, 229, 204, 0.5);\n}\n\n.chat-typing span:nth-child(3) { \n  animation-delay: 0.4s;\n  background: radial-gradient(circle, var(--chat--color-primary), var(--chat--color-primary-shade-50));\n  box-shadow: \n    0 0 8px var(--chat--color-primary),\n    0 0 15px var(--chat--color-primary),\n    0 0 20px rgba(0, 217, 165, 0.5);\n}\n\n/* Particle Emanation */\n.chat-typing span::after {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 100%;\n  height: 100%;\n  background: radial-gradient(circle, currentColor, transparent);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n  animation: \n    particle-emanate 3s infinite,\n    ring-expand 4s ease-out infinite;\n  opacity: 0;\n}\n\n.chat-typing span:nth-child(2)::after { \n  animation-delay: 0.2s;\n}\n\n.chat-typing span:nth-child(3)::after { \n  animation-delay: 0.4s;\n}\n\n/* ===== FOOTER - ULTRA ENHANCED ===== */\n.chat-footer {\n  background: \n    linear-gradient(180deg, rgba(0, 217, 165, 0.02), transparent),\n    var(--chat--footer--background);\n  padding: var(--chat--spacing);\n  backdrop-filter: blur(10px) brightness(1.05) saturate(120%);\n  -webkit-backdrop-filter: blur(10px) brightness(1.05) saturate(120%);\n  z-index: 2;\n  border-bottom-left-radius: var(--chat--window--border-radius);\n  border-bottom-right-radius: var(--chat--window--border-radius);\n  position: relative;\n  overflow: hidden;\n  animation: footer-breathe 8s ease-in-out infinite;\n}\n\n/* Ambient Light + Spectrum */\n.chat-footer::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 2px;\n  background: \n    linear-gradient(90deg,\n      var(--chat--color-primary),\n      var(--chat--color-secondary),\n      var(--chat--color-primary)\n    );\n  background-size: 200% 100%;\n  animation: \n    ambient-light 6s linear infinite,\n    spectrum-shift 10s linear infinite;\n  box-shadow: \n    0 0 10px currentColor,\n    0 2px 20px currentColor;\n}\n\n/* ===== INPUT - MEGA ENHANCED ===== */\n.chat-input {\n  background-image: \n    radial-gradient(circle at top left, rgba(0, 217, 165, 0.03), transparent),\n    linear-gradient(var(--chat--input--background), var(--chat--input--background)),\n    linear-gradient(100deg, \n      var(--chat--color-primary), \n      var(--chat--color-secondary),\n      var(--chat--color-primary)\n    );\n  background-origin: border-box;\n  background-clip: padding-box, padding-box, border-box;\n  border: 2px solid transparent;\n  background-size: 100% 100%, 100% 100%, 300% 100%;\n  animation: \n    move-border 8s linear infinite,\n    input-glow-pulse 6s ease-in-out infinite,\n    border-flow 12s linear infinite;\n  color: var(--chat--input--text-color);\n  height: var(--chat--textarea--height);\n  padding: var(--chat--input--padding);\n  border-radius: var(--chat--input--border-radius);\n  width: 100%;\n  transition: all 0.3s ease;\n  position: relative;\n  box-shadow: \n    0 0 10px rgba(0, 217, 165, 0.15),\n    0 0 20px rgba(0, 229, 204, 0.08),\n    inset 0 0 10px rgba(0, 0, 0, 0.4),\n    inset 0 0 20px rgba(0, 217, 165, 0.01);\n}\n\n.chat-input:focus {\n  outline: none;\n  box-shadow: \n    0 0 25px var(--chat--color-primary), \n    0 0 40px rgba(0, 217, 165, 0.3),\n    0 0 60px rgba(0, 229, 204, 0.2),\n    0 0 80px rgba(30, 58, 95, 0.15),\n    inset 0 0 20px rgba(0, 217, 165, 0.2),\n    inset 0 0 30px rgba(0, 229, 204, 0.08);\n  animation: \n    input-ripple 1.2s ease-out, \n    move-border 8s linear infinite,\n    focus-burst 1s ease-out,\n    active-shimmer 4s linear infinite;\n  transform: scale(1.005);\n}\n\n/* ===== TOGGLE BUTTON - MEGA ENHANCED ===== */\n.chat-toggle {\n  width: var(--chat--toggle--size);\n  height: var(--chat--toggle--size);\n  border-radius: var(--chat--toggle--border-radius);\n  background: \n    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent),\n    var(--chat--toggle--background);\n  color: var(--chat--toggle--color);\n  box-shadow: \n    0 0 35px rgba(0, 217, 165, 0.5), \n    0 0 45px rgba(0, 229, 204, 0.3),\n    0 0 60px rgba(30, 58, 95, 0.2),\n    0 0 80px rgba(0, 217, 165, 0.3),\n    inset 0 0 20px rgba(255, 255, 255, 0.15),\n    inset 0 0 30px rgba(0, 217, 165, 0.08);\n  transition: all var(--chat--transition-duration) ease-in-out;\n  animation: \n    float 8s infinite ease-in-out, \n    pulse-wave 4s infinite,\n    rotate-slow 40s linear infinite,\n    color-cycle 12s linear infinite;\n  border: 2px solid var(--chat--color-primary);\n  position: relative;\n  overflow: visible;\n  filter: drop-shadow(0 0 10px rgba(0, 217, 165, 0.4));\n  font-weight: 700;\n}\n\n/* Pulse Wave Rings */\n.chat-toggle::before {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 100%;\n  height: 100%;\n  border: 2px solid var(--chat--color-primary);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n  animation: \n    pulse-ring 4s infinite,\n    ripple-effect 6s ease-out infinite;\n  opacity: 0;\n  box-shadow: 0 0 20px currentColor;\n}\n\n.chat-toggle::after {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 100%;\n  height: 100%;\n  border: 2px solid var(--chat--color-secondary);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n  animation: \n    pulse-ring 4s infinite 1s,\n    ripple-effect 6s ease-out infinite 1s;\n  opacity: 0;\n  box-shadow: 0 0 20px currentColor;\n}\n\n.chat-toggle:hover {\n  background: \n    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent),\n    var(--chat--toggle--hover--background);\n  box-shadow: \n    0 0 55px rgba(0, 229, 204, 0.6), \n    0 0 65px rgba(0, 217, 165, 0.5),\n    0 0 90px rgba(30, 58, 95, 0.4),\n    0 0 100px rgba(0, 229, 204, 0.3),\n    0 0 120px rgba(0, 217, 165, 0.2),\n    inset 0 0 30px rgba(255, 255, 255, 0.2),\n    inset 0 0 40px rgba(0, 217, 165, 0.15);\n  transform: scale(1.15) rotate(-15deg);\n  animation: \n    float 8s infinite ease-in-out paused, \n    toggle-burst 1.2s ease-out,\n    hover-shake 0.6s ease-in-out,\n    supernova-flash 1.6s ease-out;\n}\n\n/* ===== SCROLLBAR - ULTRA ENHANCED ===== */\n.chat-messages-list::-webkit-scrollbar { \n  width: 10px;\n}\n\n.chat-messages-list::-webkit-scrollbar-track { \n  background: \n    linear-gradient(180deg, rgba(0, 217, 165, 0.03), rgba(0, 229, 204, 0.03));\n  position: relative;\n  border-radius: 10px;\n}\n\n.chat-messages-list::-webkit-scrollbar-thumb {\n  background: \n    radial-gradient(circle at top, rgba(255, 255, 255, 0.15), transparent),\n    linear-gradient(180deg, \n      var(--chat--color-primary), \n      var(--chat--color-secondary), \n      var(--chat--color-primary)\n    );\n  border-radius: 10px;\n  box-shadow: \n    0 0 12px var(--chat--color-primary),\n    0 0 20px rgba(0, 217, 165, 0.4),\n    0 0 30px rgba(0, 229, 204, 0.2),\n    inset 0 0 10px rgba(255, 255, 255, 0.2),\n    inset 0 0 15px rgba(0, 217, 165, 0.15);\n  border: 2px solid var(--chat--color-dark);\n  position: relative;\n  animation: \n    scrollbar-glow 4s infinite,\n    scrollbar-shimmer 6s linear infinite;\n}\n\n.chat-messages-list::-webkit-scrollbar-thumb:hover { \n  background: \n    radial-gradient(circle at top, rgba(255, 255, 255, 0.2), transparent),\n    linear-gradient(180deg, \n      var(--chat--color-secondary), \n      var(--chat--color-primary), \n      var(--chat--color-secondary)\n    );\n  box-shadow: \n    0 0 16px var(--chat--color-secondary),\n    0 0 30px rgba(0, 229, 204, 0.5),\n    0 0 45px rgba(0, 217, 165, 0.3),\n    inset 0 0 15px rgba(255, 255, 255, 0.3),\n    inset 0 0 20px rgba(0, 229, 204, 0.2);\n  animation: \n    scrollbar-glow 2s infinite,\n    scrollbar-burst 1s ease-out;\n}\n\n/* ===== MICRO-INTERACTIONS ===== */\n.chat-message:active {\n  transform: scale(0.98);\n  transition: transform 0.1s;\n  animation: click-flash 0.6s ease-out;\n}\n\n.chat-input:hover {\n  box-shadow: \n    0 0 15px rgba(0, 217, 165, 0.2),\n    0 0 25px rgba(0, 229, 204, 0.15),\n    inset 0 0 15px rgba(0, 0, 0, 0.4);\n  transform: scale(1.002);\n}\n\n.chat-messages-list {\n  transform-style: preserve-3d;\n  perspective: 1000px;\n}\n\n/* Text Shimmer */\n@keyframes text-shimmer {\n  0% { background-position: -100% 0; }\n  100% { background-position: 200% 0; }\n}\n\n.chat-header h1,\n.chat-header h2 {\n  background: \n    linear-gradient(90deg,\n      var(--chat--color-white) 20%,\n      var(--chat--color-primary) 40%,\n      var(--chat--color-secondary) 50%,\n      var(--chat--color-primary) 60%,\n      var(--chat--color-white) 80%\n    );\n  background-size: 200% auto;\n  background-clip: text;\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  animation: \n    text-shimmer 6s linear infinite,\n    text-float 8s ease-in-out infinite;\n}\n\n/* Enhanced Depth */\n.chat-window {\n  box-shadow: \n    0 0 100px rgba(0, 217, 165, 0.3), \n    0 0 120px rgba(0, 229, 204, 0.2),\n    0 0 80px rgba(30, 58, 95, 0.15),\n    0 0 150px rgba(0, 217, 165, 0.12),\n    0 20px 60px rgba(0, 0, 0, 0.4),\n    0 40px 100px rgba(0, 0, 0, 0.25),\n    0 60px 140px rgba(0, 0, 0, 0.15),\n    inset 0 0 100px rgba(0, 217, 165, 0.01);\n}\n\n/* ===== ALL ANIMATIONS - OPTIMIZED ===== */\n\n@keyframes animated-gradient {\n  0% { background-position: 0% 50%; }\n  50% { background-position: 100% 50%; }\n  100% { background-position: 0% 50%; }\n}\n\n@keyframes rotate-border { \n  from { transform: rotate(0deg); } \n  to { transform: rotate(360deg); } \n}\n\n@keyframes move-border { \n  from { background-position: 0% 0%; } \n  to { background-position: 300% 0%; } \n}\n\n@keyframes fadeInGlow {\n  from { \n    opacity: 0; \n    transform: scale(0.95); \n    box-shadow: 0 0 20px rgba(0, 217, 165, 0.15); \n  }\n  to { \n    opacity: 1; \n    transform: scale(1); \n    box-shadow: \n      0 0 100px rgba(0, 217, 165, 0.3), \n      0 0 120px rgba(0, 229, 204, 0.2); \n  }\n}\n\n@keyframes slideUpFade {\n  from { opacity: 0; transform: translateY(20px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n@keyframes user-message-pulse {\n  0% { \n    box-shadow: \n      0 0 25px rgba(0, 217, 165, 0.3),\n      0 0 15px rgba(0, 229, 204, 0.2); \n  }\n  50% { \n    box-shadow: \n      0 0 40px rgba(0, 229, 204, 0.4), \n      0 0 50px rgba(0, 217, 165, 0.5),\n      0 0 15px rgba(0, 217, 165, 0.3) inset; \n  }\n  100% { \n    box-shadow: \n      0 0 25px rgba(0, 217, 165, 0.3),\n      0 0 15px rgba(0, 229, 204, 0.2); \n  }\n}\n\n@keyframes neon-flicker {\n  0%, 100% { \n    text-shadow: \n      0 0 5px var(--chat--color-primary), \n      0 0 10px var(--chat--color-primary), \n      0 0 20px rgba(0, 217, 165, 0.6), \n      0 0 40px rgba(0, 229, 204, 0.4); \n  }\n  50% { \n    text-shadow: \n      0 0 10px var(--chat--color-primary), \n      0 0 20px var(--chat--color-primary-shade-50), \n      0 0 30px rgba(0, 229, 204, 0.6), \n      0 0 50px rgba(0, 217, 165, 0.5),\n      0 0 60px rgba(0, 217, 165, 0.4); \n  }\n}\n\n@keyframes glass-shine {\n  0% { left: -150%; }\n  100% { left: 150%; }\n}\n\n@keyframes typing-dots {\n  0%, 75%, 100% { transform: translateY(0); opacity: 0.4; }\n  25% { transform: translateY(-8px); opacity: 1; }\n}\n\n@keyframes float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-15px); }\n}\n\n@keyframes scanline {\n  0% { transform: translateY(-100%); }\n  100% { transform: translateY(0); }\n}\n\n@keyframes holographic-shimmer {\n  0% { transform: translateX(-100%) translateY(-100%); }\n  100% { transform: translateX(100%) translateY(100%); }\n}\n\n@keyframes header-glitch {\n  0%, 95%, 100% { transform: translateX(0); }\n  96% { transform: translateX(-1px); }\n  97% { transform: translateX(1px); }\n  98% { transform: translateX(-1px); }\n  99% { transform: translateX(0); }\n}\n\n@keyframes data-stream {\n  0% { transform: translateY(-100%); opacity: 0; }\n  10% { opacity: 0.15; }\n  90% { opacity: 0.15; }\n  100% { transform: translateY(100%); opacity: 0; }\n}\n\n@keyframes message-materialize {\n  0% { \n    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);\n    filter: blur(10px);\n  }\n  100% { \n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);\n    filter: blur(0);\n  }\n}\n\n@keyframes chromatic-aberration {\n  0%, 100% { filter: none; }\n  50% { filter: drop-shadow(1px 0 0 rgba(0, 217, 165, 0.2)) drop-shadow(-1px 0 0 rgba(0, 229, 204, 0.2)); }\n}\n\n@keyframes liquid-motion {\n  0%, 100% { transform: translate(0, 0) scale(1); }\n  25% { transform: translate(30%, -30%) scale(1.05); }\n  50% { transform: translate(-30%, 30%) scale(0.95); }\n  75% { transform: translate(20%, 20%) scale(1.02); }\n}\n\n@keyframes iridescent-sweep {\n  0% { left: -100%; }\n  100% { left: 200%; }\n}\n\n@keyframes bot-message-glow {\n  0%, 100% { border-color: rgba(0, 217, 165, 0.4); }\n  50% { border-color: rgba(0, 229, 204, 0.6); }\n}\n\n@keyframes energy-wave {\n  0% { transform: translateY(-50%) scaleX(0); opacity: 0; }\n  50% { transform: translateY(-50%) scaleX(1); opacity: 1; }\n  100% { transform: translateY(-50%) scaleX(0); opacity: 0; }\n}\n\n@keyframes dot-glow {\n  0%, 100% { box-shadow: 0 0 8px currentColor; }\n  50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }\n}\n\n@keyframes particle-emanate {\n  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }\n  100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }\n}\n\n@keyframes ambient-light {\n  0% { background-position: 0% 0%; }\n  100% { background-position: 200% 0%; }\n}\n\n@keyframes input-ripple {\n  0% { box-shadow: 0 0 0 0 rgba(0, 217, 165, 0.6); }\n  100% { box-shadow: 0 0 0 20px rgba(0, 217, 165, 0); }\n}\n\n@keyframes pulse-wave {\n  0%, 100% { box-shadow: 0 0 35px rgba(0, 217, 165, 0.5), 0 0 45px rgba(0, 229, 204, 0.3); }\n  50% { box-shadow: 0 0 50px rgba(0, 229, 204, 0.7), 0 0 60px rgba(0, 217, 165, 0.5); }\n}\n\n@keyframes pulse-ring {\n  0% { \n    width: 100%; \n    height: 100%; \n    opacity: 0.7; \n  }\n  100% { \n    width: 200%; \n    height: 200%; \n    opacity: 0; \n  }\n}\n\n@keyframes toggle-burst {\n  0% { transform: scale(1.15) rotate(-15deg); }\n  50% { transform: scale(1.2) rotate(-18deg); }\n  100% { transform: scale(1.15) rotate(-15deg); }\n}\n\n@keyframes scrollbar-glow {\n  0%, 100% { box-shadow: 0 0 12px var(--chat--color-primary); }\n  50% { box-shadow: 0 0 20px var(--chat--color-secondary), 0 0 30px rgba(0, 229, 204, 0.5); }\n}\n\n@keyframes aurora-wave {\n  0% { background-position: 0% 0%; }\n  50% { background-position: 100% 100%; }\n  100% { background-position: 0% 0%; }\n}\n\n@keyframes nebula-drift {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(20deg); }\n}\n\n@keyframes electric-pulse {\n  0%, 100% { filter: brightness(1.1) blur(3px); }\n  50% { filter: brightness(1.3) blur(2px); }\n}\n\n@keyframes plasma-flow {\n  0% { background-position: 0% 50%; }\n  100% { background-position: 200% 50%; }\n}\n\n@keyframes starfield-twinkle {\n  0%, 100% { opacity: 0.3; }\n  50% { opacity: 0.6; }\n}\n\n@keyframes cosmic-drift {\n  0% { transform: translate(0, 0); }\n  100% { transform: translate(30px, 30px); }\n}\n\n@keyframes breathing {\n  0%, 100% { transform: scale(1); }\n  50% { transform: scale(1.005); }\n}\n\n@keyframes vhs-tracking {\n  0%, 95%, 100% { transform: translateX(0); }\n  97% { transform: translateX(1px); }\n}\n\n@keyframes lens-flare {\n  0%, 100% { opacity: 0; }\n  50% { opacity: 0.2; }\n}\n\n@keyframes ambient-pulse {\n  0%, 100% { opacity: 1; }\n  50% { opacity: 0.98; }\n}\n\n@keyframes matrix-rain {\n  0% { opacity: 0.15; }\n  50% { opacity: 0.3; }\n  100% { opacity: 0.15; }\n}\n\n@keyframes code-flicker {\n  0%, 95%, 100% { opacity: 0.15; }\n  97% { opacity: 0.35; }\n}\n\n@keyframes message-float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-1px); }\n}\n\n@keyframes subtle-glow {\n  0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 217, 165, 0.1)); }\n  50% { filter: drop-shadow(0 0 8px rgba(0, 229, 204, 0.15)); }\n}\n\n@keyframes hover-pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.02); }\n  100% { transform: scale(1.02); }\n}\n\n@keyframes hover-shimmer {\n  0% { filter: brightness(1.2) hue-rotate(0deg); }\n  100% { filter: brightness(1.2) hue-rotate(5deg); }\n}\n\n@keyframes energy-flow {\n  0% { background-position: 0% 50%; }\n  100% { background-position: 200% 50%; }\n}\n\n@keyframes diamond-sparkle {\n  0%, 100% { filter: brightness(1); }\n  50% { filter: brightness(1.15); }\n}\n\n@keyframes plasma-morph {\n  0%, 100% { border-radius: 50%; }\n  50% { border-radius: 45%; }\n}\n\n@keyframes energy-rotation {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n@keyframes prism-refraction {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(15deg); }\n}\n\n@keyframes hologram-flicker {\n  0%, 95%, 100% { opacity: 1; }\n  97% { opacity: 0.9; }\n}\n\n@keyframes quantum-fluctuation {\n  0%, 100% { transform: translateX(0); }\n  50% { transform: translateX(0.3px); }\n}\n\n@keyframes caustics-flow {\n  0% { transform: rotate(25deg) translateX(0); }\n  100% { transform: rotate(25deg) translateX(30px); }\n}\n\n@keyframes light-rays {\n  0% { opacity: 0.08; }\n  50% { opacity: 0.15; }\n  100% { opacity: 0.08; }\n}\n\n@keyframes circuit-pulse {\n  0%, 100% { opacity: 0.4; }\n  50% { opacity: 0.6; }\n}\n\n@keyframes neural-fire {\n  0%, 100% { filter: brightness(1); }\n  50% { filter: brightness(1.1); }\n}\n\n@keyframes typing-container-pulse {\n  0%, 100% { transform: scale(1); }\n  50% { transform: scale(1.005); }\n}\n\n@keyframes sonar-ping {\n  0% { opacity: 0; }\n  50% { opacity: 0.4; }\n  100% { opacity: 0; }\n}\n\n@keyframes dot-morph {\n  0%, 100% { border-radius: 50%; }\n  50% { border-radius: 40%; }\n}\n\n@keyframes ring-expand {\n  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }\n  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }\n}\n\n@keyframes footer-breathe {\n  0%, 100% { transform: scaleY(1); }\n  50% { transform: scaleY(1.002); }\n}\n\n@keyframes spectrum-shift {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(15deg); }\n}\n\n@keyframes input-glow-pulse {\n  0%, 100% { filter: brightness(1); }\n  50% { filter: brightness(1.05); }\n}\n\n@keyframes border-flow {\n  from { background-position: 0% 0%; }\n  to { background-position: 300% 0%; }\n}\n\n@keyframes focus-burst {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.008); }\n  100% { transform: scale(1.005); }\n}\n\n@keyframes active-shimmer {\n  0% { filter: brightness(1.05) hue-rotate(0deg); }\n  100% { filter: brightness(1.05) hue-rotate(8deg); }\n}\n\n@keyframes rotate-slow {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n@keyframes color-cycle {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(30deg); }\n}\n\n@keyframes ripple-effect {\n  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }\n  100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }\n}\n\n@keyframes hover-shake {\n  0%, 100% { transform: scale(1.15) rotate(-15deg); }\n  25% { transform: scale(1.15) rotate(-15.5deg); }\n  75% { transform: scale(1.15) rotate(-14.5deg); }\n}\n\n@keyframes supernova-flash {\n  0% { filter: brightness(1); }\n  50% { filter: brightness(1.5); }\n  100% { filter: brightness(1); }\n}\n\n@keyframes scrollbar-shimmer {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(15deg); }\n}\n\n@keyframes scrollbar-burst {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.03); }\n  100% { transform: scale(1); }\n}\n\n@keyframes click-flash {\n  0% { filter: brightness(1); }\n  50% { filter: brightness(1.3); }\n  100% { filter: brightness(1); }\n}\n\n@keyframes text-float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-0.5px); }\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    0,
+    0
+   ],
+   "id": "c885d8ab-cdda-48e5-8cb3-b99800db2d56",
+   "name": "tema personalizado",
+   "webhookId": "6c9e20bd-1895-4df3-beeb-88ef18f67c3d"
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -160,
+    160
+   ],
+   "id": "b7585a4f-bfcf-4b15-a343-6a3c48bd2fd5",
+   "name": "tempo programado"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "b6e0dac0-bfbb-4af5-970c-3a47a66694cf",
+       "name": "chatInput",
+       "value": "=proximo video baseado nso temas usados o anteriormente, mais sempre bucando nas ferramentas e que seja diferente do anterior",
+       "type": "string"
+      },
+      {
+       "id": "e1b01647-a2f3-4148-a9e9-f8404d027815",
+       "name": "",
+       "value": "",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    16,
+    160
+   ],
+   "id": "20d945a5-33ec-4247-b37d-bb2892a6308b",
+   "name": "mensagem do sistema"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2b6a5222-e744-4540-9791-adee231d0ed7",
+       "leftValue": "={{ $('segura na mao de deus e vai').item.json.done }}",
+       "rightValue": "true",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1504,
+    416
+   ],
+   "id": "aa5e1613-cfd3-498a-96ef-bd750c0318f6",
+   "name": "Já Acabou, VEO?"
+  },
+  {
+   "parameters": {
+    "amount": 1,
+    "unit": "minutes"
+   },
+   "id": "acd00575-f484-4c5c-962c-e4f270f1b4e9",
+   "name": "Momento de Reflexão",
+   "type": "n8n-nodes-base.wait",
+   "position": [
+    992,
+    144
+   ],
+   "typeVersion": 1.1,
+   "webhookId": "f19bf1a8-11bc-47d9-9013-37500b69b012"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://{{ $('dados').item.json.API_ENDPOINT }}/v1/projects/{{ $('dados').item.json.PROJECT_ID }}/locations/{{ $('dados').item.json.LOCATION }}/publishers/google/models/{{ $('dados').item.json.MODEL_VERSION }}:fetchPredictOperation\n",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      },
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('dados').item.json.ACCESS_TOKEN }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"operationName\": \"{{ $json.name }}\"\n}\n",
+    "options": {}
+   },
+   "id": "d86a6af8-6ae3-4975-97e0-852128761f42",
+   "name": "segura na mao de deus e vai",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    1184,
+    144
+   ],
+   "typeVersion": 4.2
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2b6a5222-e744-4540-9791-adee231d0ed7",
+       "leftValue": "={{ $json.response.videos[0].bytesBase64Encoded }}",
+       "rightValue": "true",
+       "operator": {
+        "type": "string",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1360,
+    144
+   ],
+   "id": "2c18a8f8-5122-40b0-a559-5d086c82f770",
+   "name": "Tem Vídeo Aí?1"
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "response_videos",
+    "options": {}
+   },
+   "id": "71277542-c341-497d-85c9-fd184923f97a",
+   "name": "Empacotador1",
+   "type": "n8n-nodes-base.convertToFile",
+   "position": [
+    1632,
+    144
+   ],
+   "typeVersion": 1.1,
+   "retryOnFail": true
+  },
+  {
+   "parameters": {
+    "name": "={{ $('Ze da Copia').first().json.output.split(' || ')[1] }}.mp4",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "=1r6AovG1pSuN_jisqgY77cQqaRAVcMQr-",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    1792,
+    144
+   ],
+   "id": "6c7808b0-1407-4881-b497-0272fdedb667",
+   "name": "para postagem geral1",
+   "alwaysOutputData": false,
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "RGk0JxLNR6U0NAVz",
+     "name": "Google Drive fabrica"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash"
+    },
+    "responsesApiEnabled": false,
+    "options": {
+     "timeout": 9999999
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    -128,
+    336
+   ],
+   "id": "d91e8197-b63e-43a4-aa3c-f7794b86b4c1",
+   "name": "roteador-llm",
+   "credentials": {
+    "openAiApi": {
+     "id": "ob35iy2RaZh4DG2K",
+     "name": "roteador vps nova"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://{{ $json.API_ENDPOINT }}/v1/projects/{{ $json.PROJECT_ID }}/locations/{{ $json.LOCATION }}/publishers/google/models/{{ $json.MODEL_VERSION }}:predictLongRunning",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      },
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $json.ACCESS_TOKEN }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"endpoint\": \"projects/n8n-project-440404/locations/us-central1/publishers/google/models/veo-3.1-generate-preview\",\n  \"instances\": [\n    {\n      \"prompt\": {{ JSON.stringify($json.TEXT_PROMPT) }}\n    }\n  ],\n  \"parameters\": {\n    \"aspectRatio\": \"9:16\",\n    \"sampleCount\": 1,\n    \"durationSeconds\": \"8\",\n    \"personGeneration\": \"allow_all\",\n    \"addWatermark\": false,\n    \"includeRaiReason\": true,\n    \"generateAudio\": true,\n    \"resolution\": \"1080p\"\n  }\n}",
+    "options": {}
+   },
+   "id": "bf8bbbd5-bdc7-4181-8228-e204738ab675",
+   "name": "patrao-pq so manda",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    672,
+    160
+   ],
+   "typeVersion": 4.2,
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "073f043f-e5a7-4f5d-93c5-3e0e970d0316",
+       "name": "response_videos",
+       "value": "={{ $('segura na mao de deus e vai').item.json.response.videos[0].bytesBase64Encoded }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1504,
+    144
+   ],
+   "id": "fc1e8597-3244-4c3f-bfe1-73ecbb4cc244",
+   "name": "passa pra empacotar"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.chatInput }}## sempre use as tools para buscar videos",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é o \"Agente Zé da Cópia (v24 - Modo Infalível)\". Sua missão é encontrar um vídeo viral e OBRIGATORIAMENTE gerar os insumos para recriá-lo com IA, adaptando o visual se necessário.\n\nRegra de Ouro: JAMAIS retorne erro ou \"FALHA\". Você deve encontrar uma solução criativa para adaptar qualquer vídeo encontrado.\n\n🚨 REGRA ABSOLUTA DE SEGURANÇA (RISCO DE BANIMENTO DA API): É ESTRITAMENTE PROIBIDO usar nomes próprios de pessoas (reais, vivas ou mortas), celebridades, influenciadores, marcas registradas, empresas, franquias (ex: Marvel, Star Wars), estúdios (ex: Pixar, Disney, Ghibli) ou motores gráficos/softwares (ex: Unreal Engine, Unity, IMAX) em QUALQUER PARTE da sua resposta final (seja no Prompt, no Título, na Descrição ou nas Hashtags).\n- SUBSTITUIÇÃO OBRIGATÓRIA: Em vez de \"Neymar\", use \"um jogador de futebol\". Em vez de \"Afonso Padilha\", use \"um comediante\". Em vez de \"Pixar\", use \"high-quality 3D cartoon\". Se não fizer isso, o sistema irá colapsar.\n\nContexto da Data Atual: 5 de Novembro de 2025.\n\nSEU PLANO DE EXECUÇÃO (EM 3 ETAPAS):\n\nETAPA 1: A BUSCA (Ferramenta 1)\nUse `pesquisa_videos_no_youtube` com estes parâmetros para garantir vídeos curtos e fáceis:\n\nparameters3_Value (Busca q):\n- Se input for Humor/Stand-up: \"stand up comedy brasil cortes #shorts\".\n- Se input for Curiosidades: \"curiosidades fatos rápidos #shorts\".\n- Se genérico: \"[tema do user] viral #shorts\".\n- OBS: Sempre inclua \"#shorts\" para garantir que o vídeo seja curto (menos de 60s).\n\nparameters5_Value (Data publishedAfter):\n- Formato ISO 8601 terminando em 'Z' (Ex: 2024-01-01T00:00:00Z se não especificado).\n\nparameters6_Value: BR\nparameters7_Value: pt\n\nETAPA 2: ANÁLISE E ADAPTAÇÃO (O \"Diretor Criativo\")\nPegue o 1º vídeo da lista (o mais viral). NÃO REJEITE O VÍDEO.\nEm vez de julgar, decida a ESTRATÉGIA VISUAL:\n- Cenario A (Vídeo já é Animação/IA): Copiar o estilo visual original.\n- Cenario B (Vídeo é Pessoa Real/Difícil): CRIAR um Personagem/Avatar genérico para substituir a pessoa. \n    * Exemplo: Se o vídeo é de um comediante famoso contando uma piada, seu prompt de vídeo NÃO pode ter o nome dele. Será apenas: \"A funny high-quality 3D cartoon character holding a microphone on a stage\".\n\nETAPA 3: GERAÇÃO DE CONTEÚDO (Saída Obrigatória)\nGere os 3 textos abaixo baseados na estratégia decidida:\n\n1. PROMPT_VIDEO_HIBRIDO (Inglês + Instrução de Áudio):\nCrie um prompt visual denso para ferramentas como Kling/Runway/Veo.\n- Instrução Visual: Descreva um visual que SEJA POSSÍVEL gerar com IA. Se o original for complexo, descreva um \"3D Cartoon\" ou \"Cinematic Avatar\" em um ambiente controlado. O objetivo é ter uma imagem limpa. (Prompt em INGLÊS). SEM MARCAS OU NOMES.\n- Instrução de Áudio: \"AUDIO INSTRUCTION: The character performs a lip-sync to Brazilian Portuguese audio.\"\n\n2. NOVO_TITULO_VIRAL (PT-BR):\nTítulo curto, impactante e com CAPS LOCK. (Ex: \"A VERDADE SOBRE OS GATOS 😱\"). NENHUM NOME PRÓPRIO AQUI.\n\n3. DESCRICAO_VIRAL_LONGA (PT-BR):\n- Gancho (Pergunta ou afirmação polêmica).\n- Resumo rápido (NUNCA cite quem é o autor do vídeo original. Chame de \"este cara\", \"nosso personagem\" ou \"este comediante\").\n- Hashtags: #shorts #viral #ai #[tema genérico, sem nomes de pessoas].\n\nREGRA CRÍTICA: Retorne APENAS o prompt final. Não inclua saudações ou explicações. O prompt deve conter as instruções exatas para o gerador de vídeo renderizar as palavras escritas na tela e aplicar todas as dinâmicas solicitadas.\n\nPara construir este prompt, selecione aleatoriamente e misture fluidamente:\n- 1 item da CATEGORIA 1 (Câmera)\n- 1 item da CATEGORIA 2 (Psicologia)\n- 1 item da CATEGORIA 3 (Física)\n- 1 item da CATEGORIA 4 (Ambiente)\n- 2 itens da CATEGORIA 5 (Renderização)\n- 1 item da CATEGORIA 6 (Texto na Tela) - OBRIGATÓRIO RENDERIZAR O TEXTO.\n- 1 item da CATEGORIA 7 (Ação Inicial) - NO PRIMEIRO SEGUNDO.\n- 1 item da CATEGORIA 8 (Ritmo)\n- 1 item da CATEGORIA 9 (Foco Magnético)\n- 1 item da CATEGORIA 10 (Contraste de Cor)\n\nCATEGORIA 1: Drone FPV em alta velocidade, Macro extremo, Zoom infinito, Dolly zoom, SnorriCam, Panorâmica 360, Câmera lenta extrema, Eye-tracking, Time-lapse, Transição invisível, Visão de inseto, Visão de satélite, Dutch angle dinâmico, Hyperlapse, Rack focus, Câmera presa a partícula, Movimento de pêndulo, Rastreamento Z, Câmera tremida, Visão isométrica para FPV.\nCATEGORIA 2: ASMR visual, Quebra drástica de expectativa, Contraste de escala extremo, Tensão sem impacto, Simetria perfeita, Megalofobia, Talassofobia, Loop visual, Destruição satisfatória, Ilusão de ótica, Restauração mágica, Fusão bizarra, Espaços liminares, Sensação de queda, Fluidos densos, Weirdcore, Paradoxos visuais, Revelação oculta, Morphing imperceptível, Desconforto orgânico/mecânico.\nCATEGORIA 3: Gravidade invertida, Líquidos como vidro, Sólidos derretendo instantaneamente, Tempo parcialmente congelado, Objetos pesados flutuando, Fogo escuro, Luz tangível, Sombras físicas, Ecos visuais, Superfícies ondulando, Crescimento explosivo, Escala interna impossível, Vento colorido, Buraco negro de bolso, Desintegração em pássaros, Espelhos de dimensões, Chuva para cima, Glitch físico, Montagem visual, Transmutação.\nCATEGORIA 4: Metrópole cyberpunk chuvosa, Fundo do oceano bioluminescente, Deserto de vidro, Floresta alienígena, Castelo no vulcão, Cidade steampunk voadora, Ruínas cibernéticas, Interior de buraco de minhoca, Quarto anos 90 no espaço, Estádio de gelo colossal, Laboratório retrofuturista, Biblioteca infinita mágica, Metrô com fungos gigantes, Templo submerso, Fractal 3D, Caverna de galáxias, Megacomplexo com névoa, Oásis em Júpiter, Fábrica de montanhas, Purgatório branco infinito.\nCATEGORIA 5: Renderização 3D de última geração, Renderização fisicamente baseada, 8k, Iluminação volumétrica, Ray tracing, Textura hiper-realista, Color grading cinematográfico, Bokeh, Iluminação global, Subsurface scattering, Física de partículas, Ambient occlusion, Fotorrealismo extremo, Formato ultra-wide 70mm, Lente anamórfica 35mm, HDR dinâmico, Efeitos práticos, Chiaroscuro, Aberração cromática, Estilo câmera de cinema high-end.\nCATEGORIA 6: Texto renderizado na tela: \"POV: Você encontrou um bug na Matrix\", Texto renderizado: \"Apenas 1% consegue ver o final\", Texto renderizado: \"Não pisque\", Texto neon: \"O que a NASA esconde?\", Texto grande: \"Espere até o final...\", Letreiro: \"Urgente: Anomalia\", Texto legenda: \"Foi assim que mudou...\", Texto tremido: \"Isso não deveria ser gravado\", Texto central: \"A física quebrou\", Balão HQ: \"Eles chegaram\", Texto vermelho: \"ALERTA\", Cronômetro: \"03..02..01\", Texto: \"O segredo do oceano\", Texto: \"Teria coragem?\", Texto: \"Satisfatório\", Documentário: \"Arquivo Confidencial\", Gameplay: \"Nível 99\", Texto negrito: \"Ilusão definitiva\", Texto emoji: \"Isso é real?\", Texto viral: \"Testando o impossível\".\nCATEGORIA 7: Vidro quebrando na câmera, Olhos abrindo repentinamente, Explosão silenciosa de cores, Queda livre imediata, Impacto gigante no chão, Luzes apagando para neon, Câmera engolida, Transição água para ar, Parede desmoronando, Colisão com a lente, Pulo repentino, Fogo acendendo do nada, Rosto virando bruscamente, Chão desaparecendo, Raio no centro, Zoom in de 0 a 100, Porta arrombada, Tsunami cobrindo o sol, Despertar de criatura, Derretimento em 1 segundo.\nCATEGORIA 8 (RITMO): Speed ramp repentino (rápido para câmera lenta), Simulação de falha de VHS travando a imagem, Efeito de rebobinar rápido, Stutter effect (imagem piscando), Transição por chicote de câmera (Whip pan), Parada dramática no ar (Freeze frame), Flash branco de transição, Efeito Vertigo acelerado, Simulação de frame rate baixo (Stop motion), Aceleração geométrica exponencial.\nCATEGORIA 9 (FOCO MAGNÉTICO): Contato visual direto e intenso com a lente, Rosto hiper-realista emergindo das sombras, Mão gigante tentando agarrar a câmera, Olho humano colossal no fundo do cenário, Sorriso estranho no fundo do cenário, Criatura camuflada se revelando de repente, Multidão parada olhando na mesma direção, Reflexo no espelho com vida própria, Objeto inanimado ganhando rosto, Silhueta humanoide distorcida no horizonte.\nCATEGORIA 10 (CONTRASTE DE COR): Laranja vibrante contra azul profundo (Teal & Orange), Preto absoluto rasgado por neon rosa, Monocromático com apenas um elemento vermelho sangue, Branco ofuscante com sombras purpuras, Bioluminescência verde em escuridão total, Inversão de cores repentina, Ouro líquido brilhando em ambiente cinza chumbo, Tons pastéis quebrando para cores saturadas radioativas, Silhuetas totalmente pretas contra um pôr do sol alienígena magenta, Filtro infravermelho simulado (Folhas brancas, céu negro).\n\nO prompt final deve ser um parágrafo único, cinematográfico e absurdamente magnético, pronto para colar no gerador de vídeo. Comece descrevendo o texto que deve ser gerado na tela.\n\nETAPA 4: SAÍDA FINAL (String Única)\n\nSua resposta deve ser APENAS a linha abaixo preenchida. Não escreva explicações antes ou depois.\n\n[PROMPT_VIDEO_HIBRIDO] || [NOVO_TITULO_VIRAL] || [DESCRICAO_VIRAL_LONGA]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    160,
+    160
+   ],
+   "id": "253af2e8-dcf5-4d0c-ae17-5d695d88a146",
+   "name": "Ze da Copia"
+  },
+  {
+   "parameters": {
+    "content": "## 🕵️ Agente: Zé da Cópia (v20)\n\n**Missão:**\n1. Buscar vídeos virais no Brasil.\n2. Validar viabilidade (Sem texto/copyright).\n3. Gerar PACOTE ÚNICO.\n\n**Saída (String única):**\n`Prompt VEO (EN)` || `Título Viral (PT)` || `Descrição SEO (PT)`",
+    "height": 220,
+    "width": 420,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    896,
+    656
+   ],
+   "id": "dd50063e-724e-4790-86df-a463ed8c5d88",
+   "name": "Nota Agente Ze"
+  },
+  {
+   "parameters": {
+    "errorMessage": "=erro na geracao de imagem: {{ $json.error.message }}"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    1664,
+    432
+   ],
+   "id": "df6c1552-8fa6-467d-8d79-1627719145a3",
+   "name": "deu ruim",
+   "alwaysOutputData": true,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "39f3968a-73e7-4e55-8621-93c49060b0b4",
+       "leftValue": "={{ $json.error }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notExists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    832,
+    160
+   ],
+   "id": "25da0cf4-6502-4c3f-aefe-33c8bc3abcf5",
+   "name": "se deu ruim"
+  },
+  {
+   "parameters": {
+    "content": "![Video tutorial](https://i.postimg.cc/HkDDZSTm/promovaweb-og-1.png)",
+    "height": 480,
+    "width": 1312,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    144,
+    -352
+   ],
+   "typeVersion": 1,
+   "id": "ecf06363-8857-4d50-bd90-5327846dd147",
+   "name": "Sticky Note12"
+  },
+  {
+   "parameters": {
+    "content": "# 🕵️‍♂️ **AGENTE MESTRE: ZÉ DA CÓPIA (v20)** 🤖\n\n## 🎯 **MISSÃO PRINCIPAL:**\n1. 🔎 **Caçar** vídeos virais no Brasil (Youtube).\n2. 🛡️ **Validar** segurança (Sem Copyright/Texto).\n3. 📦 **Gerar** o Pacote de Replicação.\n\n## 📤 **SAÍDA MÁGICA (Split):**\nO Agente entrega tudo em uma linha só, separada por ` || `:\n\n`PROMPT VEO (Inglês)`  **||** `TÍTULO VIRAL (PT)`  **||** `DESCRIÇÃO SEO (PT)`",
+    "height": 260,
+    "width": 440,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -400,
+    464
+   ],
+   "id": "f7c06974-248f-4ed7-a833-12599d51b35e",
+   "name": "Nota Agente Ze1"
+  },
+  {
+   "parameters": {
+    "content": "# ⏳ **SALA DE ESPERA DO VEO** 🔄\n\nO vídeo leva cerca de **60 a 90 segundos** para nascer. 🐣\n\n## ⚙️ **COMO FUNCIONA O LOOP:**\n\n1️⃣ **Início:** Manda fazer (`predictLongRunning`). 🚀\n2️⃣ **Pausa:** O fluxo dorme por **1 Minuto** (`Wait`). ☕\n3️⃣ **Checagem:** Pergunta \"Tá pronto?\" (`fetchPredictOperation`). 🧐\n4️⃣ **Decisão (`If`):**\n   - 🔴 Se `done: false` ➔ Volta e espera mais.\n   - 🟢 Se `done: true` ➔ **SUCESSO!** Libera o arquivo. 🎉",
+    "height": 328,
+    "width": 572,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    864,
+    288
+   ],
+   "id": "95fac166-be43-4355-92cd-0d378f291314",
+   "name": "Nota Loop VEO1"
+  },
+  {
+   "parameters": {
+    "content": "# 📦 **EXPEDIÇÃO FINAL & UPLOAD** 🚀\n\nAqui transformamos os dados em **PUBLICAÇÃO**! ✨\n\n## 🧩 **O QUE VAI PARA O YOUTUBE?**\n\n🎥 **O VÍDEO (Arquivo):**\nO Base64 vira arquivo `.mp4` no node `Empacotador`.\n\n🏷️ **O TÍTULO (Clickbait):**\nPegamos a **Parte 2** da resposta do Zé:\n`{{ $('Ze da Copia').first().json.output.split(' || ')[1] }}`\n\n📝 **A DESCRIÇÃO (SEO):**\nPegamos a **Parte 3** da resposta do Zé:\n`{{ $('Ze da Copia').first().json.output.split(' || ')[2] }}`",
+    "height": 428,
+    "width": 576,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1488,
+    -304
+   ],
+   "id": "9622c2b4-ac7f-4eb5-9922-f49ce132edae",
+   "name": "Nota Variaveis Finais1"
+  },
+  {
+   "parameters": {
+    "content": "# 🛠️ **ARSENAL DE FERRAMENTAS OPCIONAIS** 🧰\n\n\n\n\n\nO Zé usa **3 Armas Secretas** para trabalhar:\n\n1️⃣ **🔍 Busca YouTube (API):**\nVarre o Youtube BR atrás de *Shorts* recentes sobre o tema.\n\n2️⃣ **📊 Contexto & Stats:**\nPega os dados cruciais: *Views, Likes e Thumbnail*.\n\n3️⃣ **👁️ Visão (Gemini):**\nO \"Olho que Tudo Vê\". Ele assiste o vídeo frame a frame para decidir:\n**APROVADO** ✅ ou **REPROVADO** ❌.",
+    "height": 356,
+    "width": 784,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    64,
+    432
+   ],
+   "id": "e5d668fd-8a65-4bfb-bc43-0265d8aee143",
+   "name": "Nota Ferramentas"
+  },
+  {
+   "parameters": {
+    "content": "# 🎮 **CENTRAL DE COMANDO** 🚦\n\nVocê tem **2 Formas** de acordar o Zé:\n\n1️⃣ **Chat Manual (Você Manda):**\nDigite o tema direto: *\"memes de gato\"*, *\"tech news\"* ou *\"fofoca\"*.\n\n2️⃣ **Automático (Relógio):** ⏰\nO `Schedule Trigger` acorda o Zé a cada **X Horas**.\nEle usa o tema definido no nó `Mensagem do Sistema` (Ex: \"comédia stand-up\").",
+    "height": 320,
+    "width": 496,
+    "color": 7
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1488,
+    592
+   ],
+   "id": "628b8232-f989-4356-83af-3ed0e1c1801a",
+   "name": "Nota Inputs"
+  },
+  {
+   "parameters": {
+    "content": "# 🧠 **MEMÓRIA DE LONGO PRAZO** 💾\n\nO Zé não tem amnésia! Graças ao **Postgres**, ele lembra:\n\n1️⃣ **Histórico:** O que ele já buscou antes.\n2️⃣ **Contexto:** Se você pediu para mudar o tom na última conversa.\n3️⃣ **Continuidade:** Evita que ele repita o mesmo vídeo duas vezes seguidas.\n\n**Conexão:** `Window Buffer` (Últimas 50 mensagens).",
+    "height": 300,
+    "width": 336
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    544,
+    544
+   ],
+   "id": "11cbbee0-86f8-4ce8-99c2-928234d6e805",
+   "name": "Nota Memoria"
+  },
+  {
+   "parameters": {
+    "content": "# ⚙️ **CONFIGURAÇÃO GOOGLE CLOUD** ☁️\n\nPara o **VEO** e o **Agente** funcionarem, você precisa destas chaves:\n\n## 🔑 **ACESSO VEO (Vertex AI):**\n1️⃣ **[Project ID (Dashboard)](https://console.cloud.google.com/home/dashboard)**\n   *O ID do seu projeto no Google Cloud.*\n\n2️⃣ **[Gerar Token (Playground)](https://developers.google.com/oauthplayground/)**\n   *Para autenticação temporária (Bearer Token).*\n\n## 📺 **ACESSO YOUTUBE:**\n3️⃣ **[Ativar API de Dados](https://console.cloud.google.com/apis/library/youtube.googleapis.com)**\n   *Permite ao Zé fazer pesquisas.*",
+    "height": 468,
+    "width": 420,
+    "color": 2
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -448,
+    -320
+   ],
+   "id": "a715ff27-fb10-43d5-adf3-a2de8b335bd5",
+   "name": "Nota Config Google Pro"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "5cedc3de-6221-4d7e-a6c8-82f4cb9cf0e9",
+       "name": "PROJECT_ID",
+       "type": "string",
+       "value": "=project-56c85062-e38d-4048-8bd"
+      },
+      {
+       "id": "90019751-e2d5-4764-9bf9-e13916dcc528",
+       "name": "MODEL_VERSION",
+       "type": "string",
+       "value": "veo-3.1-generate-preview"
+      },
+      {
+       "id": "67ab205c-82b3-4263-99c4-c906a0ca6ae9",
+       "name": "LOCATION",
+       "type": "string",
+       "value": "us-central1"
+      },
+      {
+       "id": "413415fb-60c5-4d0d-ac45-1e6178a55227",
+       "name": "TEXT_PROMPT",
+       "type": "string",
+       "value": "={{ $json.output.split(' || ')[0] }}"
+      },
+      {
+       "id": "bf0910e1-b757-4852-9341-a7792161f89b",
+       "name": "ACCESS_TOKEN",
+       "type": "string",
+       "value": "=<SEGREDO_REMOVIDO>"
+      },
+      {
+       "id": "17954335-b96b-4813-9c4a-20817d675448",
+       "name": "API_ENDPOINT",
+       "type": "string",
+       "value": "us-central1-aiplatform.googleapis.com"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "b8178bac-d1e2-44bf-9bd1-2b651929739a",
+   "name": "dados",
+   "type": "n8n-nodes-base.set",
+   "position": [
+    512,
+    160
+   ],
+   "typeVersion": 3.4
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "afda2e75-73ba-4165-8bea-ec4d4e49aaec",
+       "name": "output",
+       "value": "video postado com sucesso",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1888,
+    288
+   ],
+   "id": "5677b648-a3f4-4f6c-89d5-cf2cde48320d",
+   "name": "responde chat"
+  },
+  {
+   "parameters": {
+    "resource": "video",
+    "operation": "upload",
+    "title": "={{ $('Ze da Copia').first().json.output.split(' || ')[1] }}",
+    "regionCode": "BR",
+    "categoryId": "24",
+    "binaryProperty": "={{ Object.keys($binary)[0] }}",
+    "options": {
+     "description": "={{ $('Ze da Copia').first().json.output.split(' || ')[2] }}",
+     "notifySubscribers": true,
+     "privacyStatus": "public"
+    }
+   },
+   "type": "n8n-nodes-base.youTube",
+   "typeVersion": 1,
+   "position": [
+    1744,
+    288
+   ],
+   "id": "b8863527-74e8-4af1-ba97-5ee0122e0866",
+   "name": "youtube",
+   "credentials": {
+    "youTubeOAuth2Api": {
+     "id": "7jDLXpQYNGvbhigD",
+     "name": "en4487017(danca"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// ==========================================================\n// 🔑 ROTADOR GEMINI v6 - VARIÁVEL ÚNICA PARA TODOS OS NODES\n// ==========================================================\n// USE EM TODOS OS AGENTES:\n//   API Key: {{ $('roteador').first().json.randomKey }}\n//   Modelo:  {{ $('roteador').first().json.randomModel }}\n//\n// IMPORTANTE: Como cada node avalia a expressão separadamente,\n// mas o valor já vem definido do code, todos vão usar o mesmo.\n// Se precisar de chaves DIFERENTES por agente, use:\n//   Agente 1: {{ $('roteador').first().json.key1 }}\n//   Agente 2: {{ $('roteador').first().json.key2 }}\n//   Agente 3: {{ $('roteador').first().json.key3 }}\n//   ... até key10\n// ==========================================================\n\nconst fs = require('fs');\nconst path = require('path');\n\n// ==========================================================\n// CAPTURA O NOME DO NODE ANTERIOR\n// ==========================================================\nconst nodeAnterior = \n    items[0]?.json?.nodeOrigem ??      // se o agente passou manualmente\n    $prevNode?.name ??                  // variável built-in do n8n\n    $input?.first()?.$node?.name ??     // outra forma de acessar\n    'desconhecido';\n\nconst PASTAS_CONFIG = [\n    '/root/209.145.60.53/root/n8n_videos',\n    '/tmp/youtubevideos'\n];\nconst CONFIG_FILENAME = 'gemini_config.json';\n\nfunction getConfigPath() {\n    for (const pasta of PASTAS_CONFIG) {\n        const caminho = path.join(pasta, CONFIG_FILENAME);\n        if (fs.existsSync(caminho)) return caminho;\n    }\n    for (const pasta of PASTAS_CONFIG) {\n        if (fs.existsSync(pasta)) return path.join(pasta, CONFIG_FILENAME);\n    }\n    return path.join(PASTAS_CONFIG[0], CONFIG_FILENAME);\n}\n\nconst chavesConfigPadrao = [\n  { nome: \"empressinovare@gmail.com\",              key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"vendeafiliados3@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersongenc@gmail.com\",                 key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"aulasrevolution@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"solarmundo195@gmail.com\",               key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"mundosolar1995@gmail.com\",              key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"seebotsia@gmail.com\",                   key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"murilodoctor192@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersongencshin@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"gameoftroneskingsroadbrasil@gmail.com\", key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"en1653964@gmail.com\",                   key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovaremanhwaverse@gmail.com\",          key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"fabricadeautomacoesia@gmail.com\",       key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersonjosielmrx1995@gmail.com\",        key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"emersonjosiel649@gmail.com\",            key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"fabricadeautomacoes0@gmail.com\",        key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"andreluizdias384@gmail.com\",            key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovaremanhwabr@gmail.com\",             key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"msenergypara@gmail.com\",                key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovarecap@gmail.com\",                  key: \"<SEGREDO_REMOVIDO>\" },\n  { nome: \"inovaremultiatendimento@gmail.com\",     key: \"<SEGREDO_REMOVIDO>\" }\n];\n\nconst modelosPadrao = [\n    \"gemini-2.5-flash-lite\",\n    \"gemini-2.0-flash-exp\",\n    \"gemini-exp-1206\",\n    \"gemini-2.5-pro\"\n];\n\nfunction criarConfigPadrao() {\n    return {\n        chaves: chavesConfigPadrao,\n        modelos: modelosPadrao,\n        config: {\n            modo_rotacao: \"sequencial\",\n            rotacionar_modelos: false,\n            chamadas_por_chave: 1\n        }\n    };\n}\n\nfunction carregarConfig() {\n    const CONFIG_PATH = getConfigPath();\n    try {\n        if (fs.existsSync(CONFIG_PATH)) {\n            const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));\n            if (!config.chaves || config.chaves.length === 0) config.chaves = chavesConfigPadrao;\n            if (!config.modelos) config.modelos = modelosPadrao;\n            if (!config.config) config.config = criarConfigPadrao().config;\n            return config;\n        }\n    } catch (err) {}\n    const config = criarConfigPadrao();\n    salvarConfig(config);\n    return config;\n}\n\nfunction salvarConfig(config) {\n    const CONFIG_PATH = getConfigPath();\n    try {\n        const dir = path.dirname(CONFIG_PATH);\n        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });\n        fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2), 'utf8');\n    } catch (err) {}\n}\n\nconst configExterno = carregarConfig();\nconst chavesConfig = configExterno.chaves;\nconst modelos = configExterno.modelos;\nconst cfg = configExterno.config || {};\n\nconst MODO_ROTACAO = cfg.modo_rotacao || \"sequencial\";\nconst ROTACIONAR_MODELOS = cfg.rotacionar_modelos || false;\nconst CHAMADAS_POR_CHAVE = cfg.chamadas_por_chave || 1;\n\nconst memoria = $getWorkflowStaticData('global');\n\nif (!memoria.rotador) {\n    memoria.rotador = {\n        chaveIndex: 0,\n        modeloIndex: 0,\n        contadorChamadas: 0,\n        totalChamadas: 0,\n        ultimaAtualizacao: Date.now()\n    };\n}\n\nlet estado = memoria.rotador;\n\nfunction proximaChaveSequencial() {\n    estado.chaveIndex = (estado.chaveIndex + 1) % chavesConfig.length;\n    return chavesConfig[estado.chaveIndex];\n}\n\nfunction proximaChaveRandom() {\n    estado.chaveIndex = Math.floor(Math.random() * chavesConfig.length);\n    return chavesConfig[estado.chaveIndex];\n}\n\nfunction proximaChaveBalanceada() {\n    estado.contadorChamadas++;\n    if (estado.contadorChamadas >= CHAMADAS_POR_CHAVE) {\n        estado.contadorChamadas = 0;\n        estado.chaveIndex = (estado.chaveIndex + 1) % chavesConfig.length;\n    }\n    return chavesConfig[estado.chaveIndex];\n}\n\nfunction selecionarChave() {\n    switch (MODO_ROTACAO) {\n        case \"random\": return proximaChaveRandom();\n        case \"balanceado\": return proximaChaveBalanceada();\n        case \"sequencial\":\n        default: return proximaChaveSequencial();\n    }\n}\n\nfunction selecionarModelo() {\n    if (ROTACIONAR_MODELOS && estado.chaveIndex === 0) {\n        estado.modeloIndex = (estado.modeloIndex + 1) % modelos.length;\n    }\n    return modelos[estado.modeloIndex];\n}\n\n// ==========================================================\n// GERAR 10 CHAVES DIFERENTES EMBARALHADAS\n// ==========================================================\nfunction shuffleArray(array) {\n    const arr = [...array];\n    for (let i = arr.length - 1; i > 0; i--) {\n        const j = Math.floor(Math.random() * (i + 1));\n        [arr[i], arr[j]] = [arr[j], arr[i]];\n    }\n    return arr;\n}\n\n// Embaralha todas as chaves\nconst chavesEmbaralhadas = shuffleArray(chavesConfig);\n\n// Pool embaralhado (todas as 21 chaves em ordem aleatória)\nconst poolEmbaralhado = chavesEmbaralhadas.map(c => c.key);\n\n// Modelos embaralhados também\nconst modelosEmbaralhados = shuffleArray(modelos);\n\n// Pega 10 chaves diferentes\nconst chavesDiferentes = {};\nfor (let i = 0; i < 10; i++) {\n    chavesDiferentes[`key${i + 1}`] = chavesEmbaralhadas[i].key;\n}\n\n// Pega 10 modelos random\nconst modelosRandom = {};\nfor (let i = 0; i < 10; i++) {\n    const idx = Math.floor(Math.random() * modelos.length);\n    modelosRandom[`model${i + 1}`] = modelos[idx];\n}\n\nconst chaveSelecionada = selecionarChave();\nconst modeloSelecionado = selecionarModelo();\n\nestado.totalChamadas++;\nestado.ultimaAtualizacao = Date.now();\nmemoria.rotador = estado;\n\n// ==========================================================\n// OUTPUT\n// ==========================================================\nreturn [\n    {\n        json: {\n            // CAMPO FIXO (sequencial - rotaciona a cada execução)\n            apiKey: chaveSelecionada.key,\n            modelName: modeloSelecionado,\n            \n            // =====================================================\n            // POOL EMBARALHADO - use índices fixos, chaves mudam!\n            // {{ $('roteador').first().json.pool[0] }}\n            // {{ $('roteador').first().json.pool[1] }}\n            // {{ $('roteador').first().json.pool[2] }}\n            // ... até pool[20]\n            // =====================================================\n            pool: poolEmbaralhado,\n            \n            // =====================================================\n            // MODELOS EMBARALHADOS\n            // {{ $('roteador').first().json.modelos[0] }}\n            // {{ $('roteador').first().json.modelos[1] }}\n            // ... até modelos[3]\n            // =====================================================\n            modelos: modelosEmbaralhados,\n            \n            // Atalhos key1-key10 e model1-model10\n            ...chavesDiferentes,\n            ...modelosRandom,\n            \n            // =====================================================\n            // ORIGEM - NOME DO NODE ANTERIOR\n            // Use: {{ $('roteador').first().json.origemErro }}\n            // =====================================================\n            origemErro: nodeAnterior,\n            \n            // DEBUG\n            debug: {\n                chaveNome: chaveSelecionada.nome,\n                chaveIndex: estado.chaveIndex,\n                totalChaves: chavesConfig.length,\n                modeloIndex: estado.modeloIndex,\n                totalModelos: modelos.length,\n                modoRotacao: MODO_ROTACAO,\n                totalChamadas: estado.totalChamadas,\n                configPath: getConfigPath()\n            }\n        }\n    }\n];"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -528,
+    160
+   ],
+   "id": "a4a70ff2-5720-4825-8029-0c175ed5ba54",
+   "name": "roteador"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "5cedc3de-6221-4d7e-a6c8-82f4cb9cf0e9",
+       "name": "PROJECT_ID",
+       "type": "string",
+       "value": "=gen-lang-client-0374612417"
+      },
+      {
+       "id": "90019751-e2d5-4764-9bf9-e13916dcc528",
+       "name": "MODEL_VERSION",
+       "type": "string",
+       "value": "veo-3.1-generate-preview"
+      },
+      {
+       "id": "67ab205c-82b3-4263-99c4-c906a0ca6ae9",
+       "name": "LOCATION",
+       "type": "string",
+       "value": "us-central1"
+      },
+      {
+       "id": "413415fb-60c5-4d0d-ac45-1e6178a55227",
+       "name": "TEXT_PROMPT",
+       "type": "string",
+       "value": "={{ $json.output.split(' || ')[0] }}"
+      },
+      {
+       "id": "bf0910e1-b757-4852-9341-a7792161f89b",
+       "name": "ACCESS_TOKEN",
+       "type": "string",
+       "value": "=<SEGREDO_REMOVIDO>"
+      },
+      {
+       "id": "17954335-b96b-4813-9c4a-20817d675448",
+       "name": "API_ENDPOINT",
+       "type": "string",
+       "value": "us-central1-aiplatform.googleapis.com"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "74b28e72-c54b-4ea9-8949-224715ef2734",
+   "name": "dados1",
+   "type": "n8n-nodes-base.set",
+   "position": [
+    -464,
+    304
+   ],
+   "typeVersion": 3.4
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    224,
+    304
+   ],
+   "id": "52798bbd-b32b-4064-8ac8-1fd07590002e",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "H7M9faZrMKxj36dE",
+     "name": "922-inovarecap"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "deactivate",
+    "workflowId": {
+     "__rl": true,
+     "value": "yW6QxTv3aGsilHMH",
+     "mode": "list",
+     "cachedResultName": "aula fabrica viral novo 1 (#yW6QxTv3aGsilHMH)"
+    },
+    "requestOptions": {}
+   },
+   "type": "n8n-nodes-base.n8n",
+   "typeVersion": 1,
+   "position": [
+    2080,
+    304
+   ],
+   "id": "fa92acf6-8eed-497b-a22a-07f09861a41c",
+   "name": "Deactivate a workflow",
+   "credentials": {
+    "n8nApi": {
+     "id": "cICv12I2Pb1KCxr8",
+     "name": "n8n server test"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "key": "errosvideo",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1840,
+    432
+   ],
+   "id": "8602e5f3-9f08-4d00-a3d0-d7f06fc7f4a7",
+   "name": "Redis",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "1d61bb1a-0ba5-459d-a28d-2096e684409d",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1968,
+    432
+   ],
+   "id": "ff7353f0-68d4-4ccb-980b-0a0c77aba462",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "errosvideo",
+    "value": "1"
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2080,
+    528
+   ],
+   "id": "49d41b00-1e71-42de-b6e5-e5f92419cbf2",
+   "name": "Redis1",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "tempo programado": [
+   {
+    "json": {
+     "timestamp": "2025-10-28T13:50:35.004-03:00",
+     "Readable date": "October 28th 2025, 1:50:35 pm",
+     "Readable time": "1:50:35 pm",
+     "Day of week": "Tuesday",
+     "Year": "2025",
+     "Month": "October",
+     "Day of month": "28",
+     "Hour": "13",
+     "Minute": "50",
+     "Second": "35",
+     "Timezone": "America/Sao_Paulo (UTC-03:00)"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "pega_miniatura_e_estatisticas": {
+   "ai_tool": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pesuisa_videos_no_youtube1": {
+   "ai_tool": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "assite video": {
+   "ai_tool": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "memoria": {
+   "ai_memory": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "tema personalizado": {
+   "main": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "tempo programado": {
+   "main": [
+    [
+     {
+      "node": "mensagem do sistema",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "mensagem do sistema": {
+   "main": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Já Acabou, VEO?": {
+   "main": [
+    [
+     {
+      "node": "deu ruim",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Momento de Reflexão",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Momento de Reflexão": {
+   "main": [
+    [
+     {
+      "node": "segura na mao de deus e vai",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "segura na mao de deus e vai": {
+   "main": [
+    [
+     {
+      "node": "Tem Vídeo Aí?1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tem Vídeo Aí?1": {
+   "main": [
+    [
+     {
+      "node": "passa pra empacotar",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Já Acabou, VEO?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Empacotador1": {
+   "main": [
+    [
+     {
+      "node": "para postagem geral1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "roteador-llm": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "patrao-pq so manda": {
+   "main": [
+    [
+     {
+      "node": "se deu ruim",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "passa pra empacotar": {
+   "main": [
+    [
+     {
+      "node": "Empacotador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ze da Copia": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "deu ruim": {
+   "main": [
+    [
+     {
+      "node": "Redis",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se deu ruim": {
+   "main": [
+    [
+     {
+      "node": "Momento de Reflexão",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "deu ruim",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "patrao-pq so manda",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "youtube": {
+   "main": [
+    [
+     {
+      "node": "responde chat",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Ze da Copia",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Redis": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "Deactivate a workflow",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Redis1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "0d05f574-eed7-4ea9-9fca-592dec073ee3",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "u0ZdQFcB78Vhh9Pg",
+ "tags": []
+}

@@ -1,0 +1,26 @@
+{
+  "_nota": "Gatilhos de som por palavra DO NARRADOR (porte do manhwa-react/assets/gatilhos_palavras.json, adaptado para narracao de manhwa: sons cinematograficos em vez de memes). 'regex' casa com a palavra normalizada (minusculas, sem acento). 'sons' sao trechos de nomes de arquivo em assets/sfx, sfx_extras e sfx_memes (ordem = preferencia). 'emoji' aparece pequeno no canto. Editavel.",
+  "cooldown_s": 6.0,
+  "max_por_video": 10,
+  "gain_db": -10,
+  "max_duracao_s": 2.6,
+  "gatilhos": [
+    {"nome": "soco", "regex": "^(soco|socos|socou|murro|murros|pancada|porrada|golpe|golpes|golpeou|chute|chutou)$", "sons": ["punch", "Punches", "thud"], "emoji": "👊"},
+    {"nome": "tapa", "regex": "^(tapa|tapao|bofetada|estapeou)$", "sons": ["Hard slap", "Cartoon Slap"], "emoji": "✋"},
+    {"nome": "vidro", "regex": "^(vidro|vidros|espatifou|estilhacou|estilhacos)$", "sons": ["glass_break", "Glass Breaking"], "emoji": "💥"},
+    {"nome": "tiro", "regex": "^(tiro|tiros|atirou|disparo|disparou|pistola|revolver)$", "sons": ["Headshot", "Tiro"], "emoji": "🔫"},
+    {"nome": "explosao", "regex": "^(explosao|explodiu|explodir|bomba)$", "sons": ["explosion", "big explosao"], "emoji": "💥"},
+    {"nome": "espada", "regex": "^(espada|espadas|lamina|katana)$", "sons": ["sword-slash", "swordhit"], "emoji": "⚔️"},
+    {"nome": "tensao", "regex": "^(medo|tensao|tenso|tensa|assustada|assustado|assustador|panico|perigo|perigoso|perigosa)$", "sons": ["heartbeat", "Heartbeat"], "emoji": "😨"},
+    {"nome": "choque", "regex": "^(chocada|chocado|choque|surpresa|surpreso|inacreditavel|caramba|nossa)$", "sons": ["Cinematic Boom", "deep_boom"], "emoji": "😳"},
+    {"nome": "dinheiro", "regex": "^(dinheiro|grana|reais|milhoes|milhao|fortuna)$", "sons": ["Cash Register"], "emoji": "💸"},
+    {"nome": "magia", "regex": "^(magia|magica|magico|feitico|aura|brilho|brilhou)$", "sons": ["magic_sparkle", "Magic_Wand"], "emoji": "✨"},
+    {"nome": "beijo", "regex": "^(beijo|beijou|beijar|beijaram|beijos)$", "sons": ["kiss_smooch"], "emoji": "💋"},
+    {"nome": "corou", "regex": "^(corou|corada|corado|envergonhada|envergonhado|vergonha|timida|timido)$", "sons": ["Anime Wow"], "emoji": "😳"},
+    {"nome": "trovao", "regex": "^(trovao|raio|raios|tempestade)$", "sons": ["thunder"], "emoji": "⚡"},
+    {"nome": "celular", "regex": "^(celular|mensagem|notificacao|whatsapp)$", "sons": ["Samsung Notification", "Iphone SMS"], "emoji": "📱"},
+    {"nome": "foto", "regex": "^(foto|fotos|fotografou|camera)$", "sons": ["Camera Shutter"], "emoji": "📸"},
+    {"nome": "suspiro", "regex": "^(suspirou|suspiro|ofegante|ofegou)$", "sons": ["crowd_gasp"], "emoji": "😮"}
+  ],
+  "bloqueio_nomes": ["pika", "mamar", "caralho", "fuck", "nigga", "xereca", "puta", "cu ", "earrape", "cheirao", "menininho", "tyler1", "nice shot", "machine gun"]
+}

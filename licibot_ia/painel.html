@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LiciBot · Painel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%93%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D1117; --bg2:#111827; --vidro:rgba(17,24,39,.62); --borda:rgba(148,163,184,.14); --borda2:rgba(16,185,129,.35);
+  --txt:#E5E7EB; --txt2:#94A3B8; --txt3:#64748B; --verde:#10B981; --verde2:#34D399; --verde3:#059669;
+  --azul:#38BDF8; --amarelo:#FBBF24; --vermelho:#F87171; --roxo:#A78BFA; --sombra:0 10px 40px rgba(0,0,0,.45);
+}
+:root[data-tema="claro"]{
+  --bg:#F3F6F9; --bg2:#FFFFFF; --vidro:rgba(255,255,255,.78); --borda:rgba(15,23,42,.10); --borda2:rgba(5,150,105,.35);
+  --txt:#0F172A; --txt2:#475569; --txt3:#94A3B8; --sombra:0 10px 30px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 Inter,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:-20% -10% auto -10%;height:70vh;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 60% at 20% 20%,rgba(16,185,129,.18),transparent 70%),
+             radial-gradient(50% 50% at 85% 10%,rgba(56,189,248,.10),transparent 70%)}
+a{color:var(--verde2);text-decoration:none} a:hover{text-decoration:underline}
+button,select,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:1500px;margin:0 auto;padding:18px 16px 60px}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding:18px 20px;border-radius:20px;
+  background:linear-gradient(120deg,rgba(16,185,129,.20),rgba(56,189,248,.08) 60%,transparent);border:1px solid var(--borda2);
+  backdrop-filter:blur(14px);box-shadow:var(--sombra);animation:entra .5s ease both}
+.hero h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--verde),var(--verde3));
+  box-shadow:0 0 22px rgba(16,185,129,.55);font-size:18px}
+.sub{color:var(--txt2);font-size:13px;margin-top:4px}
+.estado{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pilula{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid var(--borda);
+  background:var(--vidro);backdrop-filter:blur(10px);font-size:12.5px;color:var(--txt2);white-space:nowrap}
+.ponto{width:9px;height:9px;border-radius:50%;background:var(--txt3)}
+.ponto.on{background:var(--verde);box-shadow:0 0 0 0 rgba(16,185,129,.7);animation:pulsa 1.6s infinite}
+.ponto.warn{background:var(--amarelo)} .ponto.err{background:var(--vermelho)}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:11px;border:1px solid var(--borda);cursor:pointer;
+  background:var(--vidro);backdrop-filter:blur(10px);transition:.18s;font-weight:600;font-size:13px;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);border-color:var(--borda2);box-shadow:0 6px 18px rgba(16,185,129,.18)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.pri{background:linear-gradient(135deg,var(--verde),var(--verde3));border-color:transparent;color:#fff;box-shadow:0 6px 20px rgba(16,185,129,.35)}
+.btn.perigo{border-color:rgba(248,113,113,.4);color:var(--vermelho)}
+.btn.peq{padding:5px 10px;font-size:12px;border-radius:9px}
+
+/* interruptor */
+.sw{position:relative;width:46px;height:26px;border-radius:999px;background:rgba(100,116,139,.45);cursor:pointer;transition:.2s;flex:none;border:0}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.sw.on{background:var(--verde);box-shadow:0 0 16px rgba(16,185,129,.5)} .sw.on::after{left:23px}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:12px;margin:16px 0}
+.card{position:relative;overflow:hidden;padding:15px 16px;border-radius:16px;background:var(--vidro);border:1px solid var(--borda);
+  backdrop-filter:blur(14px);box-shadow:var(--sombra);transition:.22s;animation:entra .5s ease both}
+.card:hover{transform:translateY(-4px);border-color:var(--borda2)}
+.card::after{content:"";position:absolute;width:140px;height:140px;right:-50px;top:-60px;border-radius:50%;
+  background:radial-gradient(circle,rgba(16,185,129,.28),transparent 70%);opacity:0;transition:.3s}
+.card:hover::after{opacity:1}
+.card .r{font-size:11.5px;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.card .v{font-size:25px;font-weight:800;margin-top:4px;letter-spacing:-.02em}
+.card .d{font-size:12px;color:var(--txt3);margin-top:2px}
+.card.destaque .v{color:var(--verde2);text-shadow:0 0 18px rgba(16,185,129,.35)}
+
+/* painel de controle */
+.controle{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;margin-bottom:16px}
+.caixa{padding:15px 16px;border-radius:16px;background:var(--vidro);border:1px solid var(--borda);backdrop-filter:blur(14px);box-shadow:var(--sombra);animation:entra .55s ease both}
+.caixa h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2)}
+.linha{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--borda)}
+.linha:last-child{border-bottom:0}
+.linha label{color:var(--txt2);font-size:13px}
+.campo{width:120px;padding:6px 9px;border-radius:9px;border:1px solid var(--borda);background:var(--bg2);text-align:right}
+select.campo{text-align:left}
+.etapa{font-size:12.5px;color:var(--txt2);margin-top:8px;min-height:18px}
+.barra{height:6px;border-radius:99px;background:rgba(100,116,139,.25);overflow:hidden;margin-top:8px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--verde),var(--azul));box-shadow:0 0 12px rgba(16,185,129,.6);transition:width .6s}
+
+/* abas */
+.abas{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.aba{padding:8px 14px;border-radius:11px;cursor:pointer;color:var(--txt2);border:1px solid transparent;font-weight:600;font-size:13px;transition:.15s}
+.aba:hover{color:var(--txt);background:var(--vidro)}
+.aba.on{color:var(--txt);background:var(--vidro);border-color:var(--borda2);box-shadow:0 0 18px rgba(16,185,129,.15)}
+.aba .n{display:inline-block;margin-left:6px;padding:0 7px;border-radius:99px;background:rgba(16,185,129,.18);color:var(--verde2);font-size:11.5px}
+
+/* barra de ferramentas da tabela */
+.ferr{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.busca{flex:1;min-width:220px;padding:9px 13px;border-radius:12px;border:1px solid var(--borda);background:var(--vidro);backdrop-filter:blur(10px)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:5px 11px;border-radius:99px;border:1px solid var(--borda);cursor:pointer;font-size:12px;color:var(--txt2);background:var(--vidro)}
+.chip.on{border-color:var(--borda2);color:var(--verde2);background:rgba(16,185,129,.12)}
+
+/* tabela */
+.tab{border-radius:16px;border:1px solid var(--borda);background:var(--vidro);backdrop-filter:blur(14px);overflow:auto;max-height:70vh;box-shadow:var(--sombra)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--borda);vertical-align:top}
+thead th{position:sticky;top:0;background:var(--bg2);z-index:2;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--txt2);cursor:pointer;user-select:none;white-space:nowrap}
+thead th:hover{color:var(--txt)}
+thead tr.filt th{top:34px;cursor:default;padding:5px 6px;text-transform:none}
+thead tr.filt input,thead tr.filt select{width:100%;min-width:60px;padding:4px 6px;border-radius:7px;border:1px solid var(--borda);background:var(--bg);font-size:12px}
+tbody tr{cursor:pointer;transition:background .12s}
+tbody tr:hover{background:rgba(16,185,129,.07)}
+tbody tr.sel{background:rgba(16,185,129,.13)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.obj{min-width:280px;max-width:460px}
+td.obj .o{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+td.obj .org{color:var(--txt3);font-size:12px;margin-top:2px}
+.tag{display:inline-block;padding:2px 8px;border-radius:7px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.t-MEI{background:rgba(16,185,129,.16);color:var(--verde2)} .t-CPF{background:rgba(56,189,248,.16);color:var(--azul)}
+.t-AMIGO_SOLAR{background:rgba(251,191,36,.16);color:var(--amarelo)} .t-DESCARTADO{background:rgba(248,113,113,.14);color:var(--vermelho)}
+.t-x{background:rgba(148,163,184,.15);color:var(--txt2)}
+.nota{display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;font-weight:800;font-size:13px;
+  background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(100,116,139,.22) 0);position:relative}
+.nota::before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--bg2)}
+.nota span{position:relative}
+.prazo.urg{color:var(--vermelho);font-weight:700} .prazo.perto{color:var(--amarelo);font-weight:600}
+.vazio{padding:40px;text-align:center;color:var(--txt3)}
+.rod{display:flex;justify-content:space-between;color:var(--txt3);font-size:12px;margin-top:8px}
+
+/* detalhe */
+.det{position:fixed;top:0;right:0;width:min(720px,100%);height:100%;background:var(--bg2);border-left:1px solid var(--borda2);
+  box-shadow:-20px 0 60px rgba(0,0,0,.5);transform:translateX(105%);transition:transform .28s ease;z-index:20;overflow:auto}
+.det.on{transform:none}
+.det .top{position:sticky;top:0;background:var(--bg2);padding:16px 18px 12px;border-bottom:1px solid var(--borda);z-index:2}
+.det .corpo{padding:14px 18px 40px}
+.det h2{margin:0;font-size:17px;line-height:1.35}
+.det .acoes{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.det .bloco{margin:14px 0;padding:12px 14px;border-radius:13px;border:1px solid var(--borda);background:var(--vidro)}
+.det .bloco h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2)}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px 14px}
+.kv div b{display:block;font-size:11px;color:var(--txt3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.lista{margin:0;padding-left:18px} .lista li{margin:3px 0}
+pre{white-space:pre-wrap;word-break:break-word;font-size:12px;color:var(--txt2);margin:0;max-height:340px;overflow:auto}
+textarea{width:100%;min-height:70px;padding:9px;border-radius:10px;border:1px solid var(--borda);background:var(--bg)}
+.fundo{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:19;display:none} .fundo.on{display:block}
+
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;padding:11px 18px;border-radius:12px;
+  background:var(--bg2);border:1px solid var(--borda2);box-shadow:var(--sombra);transition:.25s;z-index:40;font-weight:600}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.log{font:12px/1.5 ui-monospace,Consolas,monospace;white-space:pre-wrap;padding:12px 14px;max-height:70vh;overflow:auto}
+.log .w{color:var(--amarelo)} .log .e{color:var(--vermelho)} .log .s{color:var(--verde2)}
+
+.campo.largo{width:min(260px,52vw);text-align:left}.campo.curto{width:58px}
+.avisos{margin-bottom:16px}
+.grade-av{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}
+.sub2{font-size:12px;font-weight:700;color:var(--verde2);text-transform:uppercase;letter-spacing:.06em;margin:4px 0 2px}
+.dica{font-size:12px;color:var(--txt3);margin:6px 0 2px;line-height:1.5}
+.faixa{display:flex;gap:6px}.faixa .campo{width:110px}
+.linha.col{flex-direction:column;align-items:stretch}.linha.col label{width:100%}
+.marcas{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}.marcas.ufs{justify-content:flex-start;margin-top:6px}
+.marca{padding:4px 10px;border-radius:99px;border:1px solid var(--borda);cursor:pointer;font-size:12px;color:var(--txt2);background:var(--bg2);user-select:none;transition:.15s}
+.marca.on{border-color:var(--borda2);color:var(--verde2);background:rgba(16,185,129,.14);box-shadow:0 0 10px rgba(16,185,129,.15)}
+.marcas.ufs .marca{padding:3px 8px;min-width:38px;text-align:center}
+.modelos .melhor{color:var(--verde2);font-weight:700}
+@media (max-width:900px){.grade-av{grid-template-columns:1fr}}
+.cadeia{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.elo{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:11px;border:1px solid var(--borda);background:var(--bg2)}
+.elo .num{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:800;background:rgba(16,185,129,.18);color:var(--verde2)}
+.elo .nm{flex:1}.elo .fixo{font-size:11px;color:var(--txt3)}
+.elo button{border:1px solid var(--borda);background:var(--vidro);color:var(--txt2);border-radius:7px;width:26px;height:24px;cursor:pointer}
+.elo button:disabled{opacity:.3;cursor:default}
+.sim-grade{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:14px;align-items:start}
+.cen{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.cen .card .v{font-size:22px}
+.grafico{width:100%;height:240px;display:block}
+.nota-sim{font-size:12px;color:var(--txt3);line-height:1.55;margin-top:10px}
+@media (max-width:900px){.sim-grade{grid-template-columns:1fr}.cen{grid-template-columns:1fr}}
+@keyframes entra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pulsa{0%{box-shadow:0 0 0 0 rgba(16,185,129,.6)}70%{box-shadow:0 0 0 9px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+@media (max-width:700px){.wrap{padding:12px 10px 50px}.hero{padding:14px}.hero h1{font-size:17px}.logo{width:30px;height:30px;font-size:15px}.cards{grid-template-columns:1fr 1fr;gap:8px}.card{padding:11px 12px}.card .v{font-size:19px}.card .r{font-size:10.5px}.controle{grid-template-columns:1fr}.campo{width:100px}td.obj{min-width:220px}.det .top{padding:12px}.det .corpo{padding:10px 12px 40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <h1><span class="logo">📑</span> LiciBot · Painel de controle</h1>
+      <div class="sub" id="sub">carregando…</div>
+    </div>
+    <div class="estado">
+      <span class="pilula"><span class="ponto" id="pRobo"></span><span id="tRobo">—</span></span>
+      <span class="pilula"><span class="ponto" id="pIA"></span><span id="tIA">—</span></span>
+      <button class="btn peq" id="bTema" title="tema claro/escuro">◐</button>
+      <a class="btn peq" href="/sair" title="sair deste aparelho">Sair</a>
+    </div>
+  </header>
+
+  <section class="cards" id="cards"></section>
+
+  <section class="controle">
+    <div class="caixa">
+      <h3>Varredura</h3>
+      <div class="linha"><label>Agendamento automático (a cada 6 h)</label><button class="sw" id="swCron" aria-label="agendamento"></button></div>
+      <div class="linha"><label>Rodar agora</label>
+        <span style="display:flex;gap:6px">
+          <button class="btn pri peq" id="bVarrer">▶ Completa</button>
+          <button class="btn peq" id="bVarrerSemIA" title="só PNCP, não gasta Opus">Sem IA</button>
+          <button class="btn perigo peq" id="bParar">■ Parar</button>
+        </span></div>
+      <div class="etapa" id="etapa"></div>
+      <div class="barra"><i id="barra" style="width:0"></i></div>
+    </div>
+    <div class="caixa">
+      <h3>Inteligência artificial</h3>
+      <div class="linha col"><label>Modelos grátis, em ordem <small>(falhou ou sem cota → passa ao próximo; o Gemini sempre fecha a fila)</small></label>
+        <div id="cadeia" class="cadeia"></div></div>
+      <div class="linha"><label>Versão do prompt</label><select class="campo aj largo" data-k="LLM_PROMPT" id="selPrompt"></select></div>
+      <div class="linha"><label>Análises por varredura (0 = sem teto)</label><input class="campo aj" data-k="IA_MAX_POR_VARREDURA" type="number" min="0"></div>
+      <div class="linha"><label>Esforço (pensar mais = mais tokens)</label>
+        <select class="campo aj" data-k="LLM_EFFORT"><option>low</option><option>medium</option><option>high</option><option>xhigh</option><option>max</option></select></div>
+      <div class="linha"><label>Análises ao mesmo tempo</label><input class="campo aj" data-k="LLM_PARALELO" type="number" min="1" max="6"></div>
+      <div class="linha"><label>Texto enviado por edital (caracteres)</label><input class="campo aj" data-k="IA_TEXTO_MAX_CHARS" type="number" step="5000"></div>
+    </div>
+    <div class="caixa">
+      <h3>Finanças</h3>
+      <div class="linha"><label>MEI já faturado no ano (R$)</label><input class="campo aj" data-k="MEI_FATURADO_ANO" type="number" step="100"></div>
+      <div class="linha"><label>Comissão AMIGO_SOLAR (%)</label><input class="campo aj" data-k="COMISSAO_AMIGO_SOLAR" data-pct="1" type="number" step="0.5" min="0" max="100"></div>
+      <div class="linha"><label>Ler documentos até (R$ estimado)</label><input class="campo aj" data-k="DOCS_ATE_VALOR" type="number" step="10000"></div>
+      <div class="linha"><label>Buscar o que fecha em até (dias)</label><input class="campo aj" data-k="DIAS_A_FRENTE" type="number" min="5" max="120"></div>
+      <div class="linha"><label>Ajustes da IA e finanças</label><button class="btn peq pri" id="bSalvar">💾 Salvar</button></div>
+    </div>
+  </section>
+
+  <section class="caixa avisos" id="cxAvisos">
+    <h3>📨 Telegram e avisos</h3>
+    <div class="grade-av">
+      <div>
+        <div class="sub2">Para onde</div>
+        <div class="linha"><label>Token do bot</label><input class="campo largo av" data-a="tg_token" placeholder="123456789:AA..." autocomplete="off"></div>
+        <div class="linha"><label>Chat (número ou @canal)</label><input class="campo largo av" data-a="tg_chat" placeholder="7911666809"></div>
+        <div class="linha"><label id="tgEstado">—</label><button class="btn peq" id="bTestarTg">📨 Testar envio</button></div>
+        <div class="dica">Crie um bot no <b>@BotFather</b> (/newbot), cole o token aqui, mande "oi" para o bot e clique em Testar. O token fica só na VPS; aqui aparece mascarado.</div>
+        <div class="sub2" style="margin-top:12px">Quais avisos</div>
+        <div class="linha"><label>Oportunidade nova (nos filtros ao lado)</label><button class="sw av" data-a="oportunidade"></button></div>
+        <div class="linha"><label>⏰ Lembrete: "vou participar" fecha em 24 h</label><button class="sw av" data-a="lembrete_prazo"></button></div>
+        <div class="linha"><label>❌ Erro na varredura</label><button class="sw av" data-a="erro"></button></div>
+        <div class="linha"><label>🔋 IA sem crédito</label><button class="sw av" data-a="sem_credito"></button></div>
+        <div class="linha"><label>📊 Resumo diário às</label><span style="display:flex;gap:8px;align-items:center"><input class="campo curto av" data-a="hora_resumo" type="number" min="0" max="23">h<button class="sw av" data-a="resumo_diario"></button></span></div>
+        <div class="linha"><label>🌙 Silêncio das … às …</label><span style="display:flex;gap:6px;align-items:center"><input class="campo curto av" data-a="silencio_de" type="number" min="0" max="23">h às<input class="campo curto av" data-a="silencio_ate" type="number" min="0" max="23">h</span></div>
+      </div>
+      <div>
+        <div class="sub2">Avisar só as que…</div>
+        <div class="linha"><label>Nota mínima</label><input class="campo aj" data-k="NOTIFICAR_SCORE_MIN" type="number" min="0" max="100"></div>
+        <div class="linha"><label>Sobra no bolso pelo menos (R$)</label><input class="campo av" data-a="liquido_min" type="number" step="500" min="0"></div>
+        <div class="linha"><label>Investimento (custo) de … até … R$</label><span class="faixa"><input class="campo av" data-a="invest_min" type="number" step="500" min="0" placeholder="0"><input class="campo av" data-a="invest_max" type="number" step="500" min="0" placeholder="sem limite"></span></div>
+        <div class="linha"><label>Valor da licitação de … até … R$</label><span class="faixa"><input class="campo av" data-a="valor_min" type="number" step="1000" min="0" placeholder="0"><input class="campo av" data-a="valor_max" type="number" step="1000" min="0" placeholder="sem limite"></span></div>
+        <div class="linha"><label>Carteiras</label><span class="marcas" data-a="carteiras" data-op="MEI,CPF,AMIGO_SOLAR"></span></div>
+        <div class="linha"><label>Tipo</label><span class="marcas" data-a="tipos" data-op="produto:📦 Produto,servico:🛠 Serviço,obra:⚡ Obra"></span></div>
+        <div class="linha col"><label>Estados <small>(nenhum marcado = Brasil todo)</small>
+            <span style="float:right"><a href="#" id="ufVizinhas">GO + vizinhos</a> · <a href="#" id="ufTodas">Brasil todo</a></span></label>
+          <span class="marcas ufs" data-a="ufs"></span></div>
+        <div class="linha"><label>Máximo por mensagem</label><input class="campo aj" data-k="NOTIFICAR_MAX" type="number" min="1" max="50"></div>
+        <div class="linha"><label id="avPrevia">—</label>
+          <span style="display:flex;gap:6px"><button class="btn peq pri" id="bSalvarAv">💾 Salvar avisos</button><button class="btn peq" id="bAvisar">📣 Avisar agora</button></span></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="abas" id="abas"></nav>
+  <div id="conteudo"></div>
+</div>
+
+<div class="fundo" id="fundo"></div>
+<aside class="det" id="det"></aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const brl=v=>v==null||v===''?'—':Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const num=v=>v==null?'—':Number(v).toLocaleString('pt-BR');
+const dt=s=>s?s.slice(8,10)+'/'+s.slice(5,7)+' '+s.slice(11,16):'—';
+let R=null, ABA=localStorage.getItem('lb_aba')||'oportunidades', DADOS=[], ORD={k:'nota_final',d:-1}, FILT={}, CHIP='todas', SEL=null;
+
+async function api(rota,corpo){
+  const op=corpo===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json','X-Painel':'1'},body:JSON.stringify(corpo)};
+  const r=await fetch(rota,op); if(r.status===401){location.href='/';throw 'auth'}
+  const j=await r.json(); if(!r.ok&&corpo!==undefined)throw j.msg||j.erro||r.status; return j}
+function toast(m,ok=true){const t=$('toast');t.textContent=m;t.style.borderColor=ok?'':'var(--vermelho)';t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3800)}
+async function acao(rota,corpo,depois){try{const j=await api(rota,corpo);toast(j.msg||'ok');if(depois)depois();carregarResumo()}catch(e){if(e!=='auth')toast('Erro: '+e,false)}}
+
+/* ── resumo ─────────────────────────────── */
+async function carregarResumo(){
+  try{R=await api('api/resumo')}catch(e){if(e!=='auth')$('sub').textContent='sem conexão: '+e;return}
+  const v=R.varredura, ag=R.agendamento, u=R.ultima, mt=R.modo_tokens||{};
+  $('sub').textContent=`IA: ${R.modelo_nome} · atualizado ${dt(R.agora)}`+(u?` · última varredura ${dt(u.inicio)}${u.fim?'':' (rodando)'}`:'');
+  $('pRobo').className='ponto'+(v.rodando?' on':ag.ligado?'':' warn');
+  $('tRobo').textContent=v.rodando?'varrendo agora':ag.ligado?'agendado (6/6 h)':'agendamento desligado';
+  const esg=mt.modo==='esgotado';
+  $('pIA').className='ponto'+(esg?' err':' on');
+  $('tIA').textContent=esg?'Opus sem crédito agora':'Opus disponível'+(mt.resta_5h!=null?` · ${Math.round(mt.resta_5h)}% da janela`:'');
+  const cart=k=>(R.por_carteira||[]).find(x=>x.carteira===k)||{n:0,liq:0};
+  const c=[
+    ['Oportunidades abertas',num(R.oportunidades),`${num(R.boas)} com nota ≥ ${R.ajustes.NOTIFICAR_SCORE_MIN}`,1],
+    ['Líquido MEI',brl(cart('MEI').liq),`${num(cart('MEI').n)} licitações`,1],
+    ['Líquido CPF',brl(cart('CPF').liq),`${num(cart('CPF').n)} licitações`],
+    ['Comissão solar',brl(cart('AMIGO_SOLAR').liq),`${num(cart('AMIGO_SOLAR').n)} usinas/obras do parceiro`],
+    ['Fecham em 48 h',num(R.fecha_48h),'abertas e não ignoradas'],
+    ['Vou participar',num(R.participar),'marcadas por você'],
+    ['Fila da IA',num(R.fila_ia),`+ ${num(R.fila_docs)} baixando documentos`],
+    ['Última leitura',R.ultima_leitura?num(R.ultima_leitura.lidos):'—',R.ultima_leitura?`${num(R.ultima_leitura.filtrados)} passaram no filtro`:''],
+    ['Tokens 24 h',num(R.tokens_24h),`${num(R.tokens_total)} no total`],
+  ];
+  $('cards').innerHTML=c.map((x,i)=>`<div class="card${x[3]?' destaque':''}" style="animation-delay:${i*40}ms"><div class="r">${x[0]}</div><div class="v">${x[1]}</div><div class="d">${esc(x[2])}</div></div>`).join('');
+  $('swCron').classList.toggle('on',ag.ligado);
+  $('bVarrer').disabled=$('bVarrerSemIA').disabled=v.rodando; $('bParar').disabled=!v.rodando;
+  $('etapa').textContent=v.rodando?('▶ '+(v.etapa||'iniciando…')):(u?`Última: ${dt(u.inicio)} → ${u.fim?dt(u.fim):'—'} · lidas ${num(u.lidos)}, analisadas ${num(u.analisados)}, avisos ${num(u.notificados)}${u.erro?' · '+u.erro:''}`:'Nenhuma varredura ainda');
+  $('barra').style.width=v.rodando?(/Estágio 3/.test(v.etapa)?'85%':/Estágio 2/.test(v.etapa)?'55%':'20%'):'0';
+  document.querySelectorAll('.aj').forEach(el=>{if(document.activeElement!==el&&!el.dataset.mudou){const v=R.ajustes[el.dataset.k];el.value=v==null?'':el.dataset.pct?+(v*100).toFixed(2):v}});
+  $('tgEstado').innerHTML=R.telegram?'✅ Telegram configurado':'⚪ Telegram ainda não configurado';
+  desenharAbas();
+}
+
+/* ── abas e tabelas ─────────────────────── */
+const ABAS=[['oportunidades','Oportunidades'],['decididas','Minhas decisões'],['fila','Fila'],['descartadas','Descartadas'],['encerradas','Encerradas'],['todas','Todas'],['varreduras','Varreduras'],['cnaes','CNAEs'],['simulacao','💹 Simulação'],['modelos','Modelos de IA'],['log','Log']];
+function contagem(a){if(!R)return'';const s=R.por_status;return{oportunidades:R.oportunidades,fila:(s.novo||0)+(s.enriquecido||0)+(s.sem_analise||0),participar:R.participar}[a]}
+function desenharAbas(){$('abas').innerHTML=ABAS.map(([k,n])=>{const c=contagem(k);return`<span class="aba${k===ABA?' on':''}" data-a="${k}">${n}${c?`<span class="n">${num(c)}</span>`:''}</span>`}).join('');
+  document.querySelectorAll('.aba').forEach(a=>a.onclick=()=>{ABA=a.dataset.a;try{localStorage.setItem('lb_aba',ABA)}catch(e){};FILT={};CHIP='todas';desenharAbas();carregarAba()})}
+
+const COLS={
+  edital:[
+    {k:'nota_final',n:'Nota',t:'n',f:r=>notaHtml(r.nota_final)},
+    {k:'carteira',n:'Carteira',t:'c',f:r=>`<span class="tag t-${esc(r.carteira||'x')}">${esc(r.carteira||r.status)}</span>`},
+    {k:'objeto_compra',n:'Objeto / órgão',t:'s',cls:'obj',f:r=>`<div class="o">${esc(r.objeto_compra)}</div><div class="org">${esc(r.razao_social)}</div>`},
+    {k:'margem_estimada',n:'Sobra',t:'n',cls:'num',f:r=>brl(r.margem_estimada)},
+    {k:'custo_estimado',n:'Investe',t:'n',cls:'num',f:r=>brl(r.custo_estimado)},
+    {k:'tipo',n:'Tipo',t:'c',f:r=>({produto:'📦 produto',servico:'🛠 serviço',obra:'⚡ obra'})[r.tipo]||''},
+    {k:'valor_estimado',n:'Estimado',t:'n',cls:'num',f:r=>r.valor_estimado?brl(r.valor_estimado):'sigiloso'},
+    {k:'data_encerramento',n:'Fecha',t:'d',f:r=>prazoHtml(r.data_encerramento)},
+    {k:'uf',n:'UF',t:'c'},
+    {k:'municipio',n:'Município',t:'s'},
+    {k:'gaveta',n:'Gaveta',t:'c'},
+    {k:'modalidade_nome',n:'Modalidade',t:'c'},
+    {k:'score_viabilidade',n:'Viab.',t:'n',cls:'num'},
+    {k:'score_pagador',n:'Pagador',t:'n',cls:'num',f:r=>r.score_pagador!=null?Math.round(r.score_pagador*100)+'%':'—'},
+    {k:'exclusivo_me_epp',n:'ME/EPP',t:'c',f:r=>r.exclusivo_me_epp?'✔':''},
+    {k:'cnae_sugerido',n:'CNAE',t:'c'},
+    {k:'decisao',n:'Decisão',t:'c',f:r=>r.decisao==='participar'?'⭐ participar':r.decisao==='ignorar'?'🚫 ignorar':''},
+  ],
+  fila:[
+    {k:'pre_nota',n:'Pré-nota',t:'n',cls:'num'},
+    {k:'status',n:'Situação',t:'c',f:r=>`<span class="tag t-x">${{novo:'baixando docs',enriquecido:'esperando IA',sem_analise:'IA falhou'}[r.status]||r.status}</span>`},
+    {k:'objeto_compra',n:'Objeto / órgão',t:'s',cls:'obj',f:r=>`<div class="o">${esc(r.objeto_compra)}</div><div class="org">${esc(r.razao_social)}</div>`},
+    {k:'valor_estimado',n:'Estimado',t:'n',cls:'num',f:r=>r.valor_estimado?brl(r.valor_estimado):'sigiloso'},
+    {k:'data_encerramento',n:'Fecha',t:'d',f:r=>prazoHtml(r.data_encerramento)},
+    {k:'uf',n:'UF',t:'c'},{k:'gaveta',n:'Gaveta',t:'c'},{k:'modalidade_nome',n:'Modalidade',t:'c'},
+    {k:'kw_match',n:'Casou com',t:'s'},
+    {k:'tentativas_ia',n:'Tent.',t:'n',cls:'num'},
+    {k:'ultimo_erro',n:'Último erro',t:'s'},
+  ],
+  varreduras:[
+    {k:'id',n:'#',t:'n',cls:'num'},{k:'inicio',n:'Início',t:'d',f:r=>dt(r.inicio)},{k:'fim',n:'Fim',t:'d',f:r=>r.fim?dt(r.fim):'rodando'},
+    {k:'leitura',n:'Leitura',t:'c',f:r=>r.leitura==='incremental'?'⚡ incremental':r.leitura==='completa'?'📚 completa':''},{k:'lidos',n:'Lidas',t:'n',cls:'num',f:r=>num(r.lidos)},{k:'filtrados',n:'Filtro',t:'n',cls:'num'},{k:'novos',n:'Novas',t:'n',cls:'num'},
+    {k:'analisados',n:'IA',t:'n',cls:'num'},{k:'falhas_ia',n:'Falhas IA',t:'n',cls:'num'},{k:'tokens',n:'Tokens',t:'n',cls:'num',f:r=>num(r.tokens)},
+    {k:'notificados',n:'Avisos',t:'n',cls:'num'},{k:'erro',n:'Erro',t:'s'}],
+  cnaes:[
+    {k:'cnae_codigo',n:'CNAE',t:'c'},{k:'cnae_descricao',n:'Descrição',t:'s'},{k:'total_oportunidades',n:'Oportunidades',t:'n',cls:'num'},
+    {k:'valor_total',n:'Estimado',t:'n',cls:'num',f:r=>brl(r.valor_total)},{k:'margem_total',n:'Líquido',t:'n',cls:'num',f:r=>brl(r.margem_total)},
+    {k:'nota_media',n:'Nota média',t:'n',cls:'num'}],
+};
+function colsDaAba(){return ABA==='fila'?COLS.fila:ABA==='varreduras'?COLS.varreduras:ABA==='cnaes'?COLS.cnaes:COLS.edital}
+function notaHtml(n){if(n==null)return'—';const p=Math.max(0,Math.min(100,n)),c=p>=60?'var(--verde)':p>=45?'var(--amarelo)':'var(--vermelho)';return`<span class="nota" style="--p:${p};--c:${c}"><span>${Math.round(p)}</span></span>`}
+function horas(s){return s?(new Date(s.replace(' ','T'))-new Date())/36e5:1e9}
+function prazoHtml(s){const h=horas(s);const cls=h<24?'urg':h<72?'perto':'';const rel=h<0?'fechou':h<24?`${Math.round(h)} h`:`${Math.round(h/24)} d`;return`<span class="prazo ${cls}">${dt(s)}<br><small>${rel}</small></span>`}
+
+async function carregarAba(){
+  const box=$('conteudo');
+  if(ABA==='simulacao'){montarSimulacao();return}
+  if(ABA==='modelos'){const c=await api('api/comparacoes');box.innerHTML=`<div class="caixa" style="margin-bottom:12px"><h3>Comparação com o Opus (gabarito)</h3>
+    <div class="dica">Cada linha é um teste: o modelo analisou licitações que o Opus já tinha analisado. <b>ajuste</b> = editais usados para melhorar o prompt; <b>prova</b> = editais diferentes, só para medir (é o número que vale). Riscos/exigências achados = quantos dos que o Opus apontou o modelo também encontrou.</div></div>
+    <div class="tab modelos"><table><thead><tr><th>Quando</th><th>Modelo</th><th>Prompt</th><th>Grupo</th><th>Respondeu</th><th>Mesma carteira</th><th>Mesma decisão</th><th>Riscos achados</th><th>Exigências achadas</th><th>Dif. viabilidade</th><th>Riscos/edital</th><th>Tempo</th><th>Tokens</th></tr></thead><tbody>
+    ${c.map(x=>`<tr style="cursor:default"><td>${x.em}</td><td>${esc(x.nome)}</td><td>${x.prompt}</td><td>${x.grupo}</td><td>${x.respondeu}</td><td class="num">${x.mesma_carteira??'—'}%</td><td class="num">${x.mesmo_lado??'—'}%</td><td class="num">${x.cob_riscos!=null?x.cob_riscos+'%':'—'}</td><td class="num">${x.cob_exig!=null?x.cob_exig+'%':'—'}</td><td class="num">${x.dif_viab??'—'}</td><td class="num">${x.riscos} <small>(Opus ${x.riscos_opus})</small></td><td class="num">${x.seg}s</td><td class="num">${num(x.tokens)}</td></tr>`).join('')||'<tr><td colspan="13" class="vazio">Nenhuma comparação ainda.</td></tr>'}
+    </tbody></table></div>`;return}
+  if(ABA==='log'){const l=await api('api/log');box.innerHTML=`<div class="tab"><div class="log">${l.map(x=>{const c=/ERROR|Traceback/.test(x)?'e':/WARNING/.test(x)?'w':/▶|→/.test(x)?'s':'';return`<span class="${c}">${esc(x)}</span>`}).join('\n')}</div></div>`;return}
+  box.innerHTML='<div class="vazio">carregando…</div>';
+  DADOS=ABA==='varreduras'?await api('api/execucoes'):ABA==='cnaes'?await api('api/cnaes'):await api('api/editais?aba='+ABA);
+  if(ABA==='fila')ORD={k:'pre_nota',d:-1};else if(ABA==='varreduras')ORD={k:'id',d:-1};else if(ABA==='cnaes')ORD={k:'margem_total',d:-1};else if(!colsDaAba().find(c=>c.k===ORD.k))ORD={k:'nota_final',d:-1};
+  montarTabela();
+}
+
+function montarTabela(){
+  const cols=colsDaAba(), box=$('conteudo'), ed=!['varreduras','cnaes'].includes(ABA);
+  const chips=ed&&ABA!=='fila'?['todas','MEI','CPF','AMIGO_SOLAR','produto','servico','obra','48h','perto','lucro','participar']:[];
+  box.innerHTML=`<div class="ferr"><input class="busca" id="q" placeholder="Buscar em tudo (objeto, órgão, município, CNAE…)">
+    <div class="chips">${chips.map(c=>`<span class="chip${c===CHIP?' on':''}" data-c="${c}">${{todas:'Todas','48h':'⏰ Fecham em 48 h',participar:'⭐ Vou participar',produto:'📦 Só produto',servico:'🛠 Só serviço',obra:'⚡ Obra',perto:'📍 GO + vizinhos',lucro:'💰 Maior lucro'}[c]||c}</span>`).join('')}</div>
+    <button class="btn peq" id="bCsv">⬇ CSV</button></div>
+    <div class="tab"><table><thead><tr>${cols.map(c=>`<th data-k="${c.k}">${c.n}<span id="o_${c.k}"></span></th>`).join('')}</tr>
+    <tr class="filt">${cols.map(c=>`<th>${filtroHtml(c)}</th>`).join('')}</tr></thead><tbody id="corpo"></tbody></table></div>
+    <div class="rod"><span id="cont"></span><span>Clique no título para ordenar · filtros: <code>&gt;50</code>, <code>&lt;10000</code>, <code>10-60</code></span></div>`;
+  document.querySelectorAll('thead tr:first-child th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;ORD=ORD.k===k?{k,d:-ORD.d}:{k,d:['s','c'].includes(cols.find(c=>c.k===k).t)?1:-1};desenhar()});
+  document.querySelectorAll('[data-f]').forEach(el=>{el.value=FILT[el.dataset.f]||'';el.oninput=()=>{FILT[el.dataset.f]=el.value;desenhar()}});
+  document.querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{CHIP=ch.dataset.c;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===ch));desenhar()});
+  $('q').oninput=desenhar;
+  $('bCsv').onclick=()=>{if(ed)location.href='api/editais?formato=csv&aba='+ABA;else baixarCsv(cols)};
+  desenhar();
+}
+function filtroHtml(c){
+  if(c.t==='c'){const vals=[...new Set(DADOS.map(r=>r[c.k]).filter(v=>v!=null&&v!==''))].sort();
+    return`<select data-f="${c.k}"><option value="">todos</option>${vals.map(v=>`<option>${esc(v)}</option>`).join('')}</select>`}
+  return`<input data-f="${c.k}" placeholder="${c.t==='n'?'>0':'filtrar'}">`}
+function passa(v,f,t){
+  if(!f)return true;
+  if(t==='n'){const x=Number(v);if(v==null||isNaN(x))return false;let m;
+    if(m=f.match(/^\s*>=?\s*(-?[\d.]+)/))return x>=Number(m[1]);if(m=f.match(/^\s*<=?\s*(-?[\d.]+)/))return x<=Number(m[1]);
+    if(m=f.match(/^\s*(-?[\d.]+)\s*-\s*(-?[\d.]+)/))return x>=Number(m[1])&&x<=Number(m[2]);return String(v).includes(f)}
+  if(t==='c')return String(v??'')===f;
+  return String(v??'').toLowerCase().includes(f.toLowerCase())}
+function filtrados(){
+  const cols=colsDaAba(), q=($('q')?.value||'').toLowerCase();
+  return DADOS.filter(r=>{
+    if(CHIP==='48h'&&horas(r.data_encerramento)>48)return false;
+    if(['produto','servico','obra'].includes(CHIP)&&r.tipo!==CHIP)return false;
+    if(CHIP==='perto'&&!((AV&&AV.vizinhas&&AV.vizinhas.GO)||[]).includes(r.uf))return false;
+    if(CHIP==='participar'&&r.decisao!=='participar')return false;
+    if(['MEI','CPF','AMIGO_SOLAR'].includes(CHIP)&&r.carteira!==CHIP)return false;
+    if(q&&!Object.values(r).some(v=>String(v??'').toLowerCase().includes(q)))return false;
+    return cols.every(c=>passa(r[c.k],FILT[c.k],c.t))
+  }).sort((a,b)=>{const ord=CHIP==='lucro'?{k:'margem_estimada',d:-1}:ORD;const x=a[ord.k],y=b[ord.k];if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;
+    return(typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y),'pt-BR'))*ord.d})}
+function desenhar(){
+  const cols=colsDaAba(), linhas=filtrados(), corpo=$('corpo'); if(!corpo)return;
+  cols.forEach(c=>{const o=$('o_'+c.k);if(o)o.textContent=c.k===ORD.k?(ORD.d>0?' ▲':' ▼'):''});
+  const ed=!['varreduras','cnaes'].includes(ABA);
+  corpo.innerHTML=linhas.length?linhas.slice(0,1500).map(r=>`<tr${ed?` data-n="${esc(r.numero_controle)}"`:''} class="${r.numero_controle===SEL?'sel':''}">${cols.map(c=>`<td class="${c.cls||''}">${c.f?c.f(r):esc(r[c.k]??'')}</td>`).join('')}</tr>`).join('')
+    :`<tr><td colspan="${cols.length}" class="vazio">${DADOS.length?'Nada com esses filtros.':'Nada aqui ainda.'}</td></tr>`;
+  if(ed)corpo.querySelectorAll('tr[data-n]').forEach(tr=>tr.onclick=()=>abrir(tr.dataset.n));
+  $('cont').textContent=`${num(linhas.length)} de ${num(DADOS.length)}`+(linhas.length>1500?' (mostrando 1.500; use os filtros)':'');
+}
+function baixarCsv(cols){const linhas=filtrados();const s=[cols.map(c=>c.n).join(';'),...linhas.map(r=>cols.map(c=>`"${String(r[c.k]??'').replace(/"/g,'""')}"`).join(';'))].join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+s],{type:'text/csv'}));a.download=`licibot_${ABA}.csv`;a.click()}
+
+/* ── detalhe ───────────────────────────── */
+async function abrir(n){
+  SEL=n;desenhar();const d=$('det');d.innerHTML='<div class="corpo vazio">carregando…</div>';d.classList.add('on');$('fundo').classList.add('on');
+  let e;try{e=await api('api/edital?n='+encodeURIComponent(n))}catch(x){return}
+  const ia=e.ia||{}, fin=ia.financas||{};
+  const li=s=>(s||'').split('\n').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')||'<li>—</li>';
+  d.innerHTML=`<div class="top">
+    <div style="display:flex;gap:10px;align-items:flex-start;justify-content:space-between">
+      <div style="display:flex;gap:12px;align-items:flex-start">${notaHtml(e.nota_final)}<div><h2>${esc(e.objeto_compra)}</h2>
+      <div class="sub">${esc(e.razao_social)} · ${esc(e.municipio)}/${esc(e.uf)}</div></div></div>
+      <button class="btn peq" id="fechar">✕</button></div>
+    <div class="acoes">
+      <button class="btn peq ${e.decisao==='participar'?'pri':''}" data-dec="participar">⭐ Vou participar</button>
+      <button class="btn peq ${e.decisao==='ignorar'?'perigo':''}" data-dec="ignorar">🚫 Ignorar</button>
+      ${e.decisao?'<button class="btn peq" data-dec="">↺ Limpar decisão</button>':''}
+      <button class="btn peq" id="bReana">🔄 Reanalisar</button>
+      <a class="btn peq" href="${esc(e.link_pncp)}" target="_blank" rel="noopener">PNCP ↗</a>
+      ${e.link_sistema?`<a class="btn peq" href="${esc(e.link_sistema)}" target="_blank" rel="noopener">Sistema de compras ↗</a>`:''}
+    </div></div>
+  <div class="corpo">
+    <div class="bloco"><h4>Análise do Opus</h4>
+      <p style="margin:0 0 8px"><span class="tag t-${esc(e.carteira||'x')}">${esc(e.carteira||e.status)}</span> ${esc(e.resumo_ia||'Ainda não analisado.')}</p>
+      ${ia.motivo_descarte?`<p style="color:var(--vermelho);margin:4px 0 0">Motivo do descarte: ${esc(ia.motivo_descarte)}</p>`:''}</div>
+    <div class="bloco"><h4>Dinheiro</h4><div class="kv">
+      <div><b>Estimado</b>${brl(e.valor_estimado)}</div><div><b>Lance esperado</b>${brl(e.valor_lance)}</div>
+      <div><b>Custo estimado</b>${brl(e.custo_estimado)}</div><div><b>Líquido</b><span style="color:var(--verde2);font-weight:700">${brl(e.margem_estimada)}</span></div>
+      <div><b>Líquido MEI</b>${brl(e.liquido_mei)}</div><div><b>Líquido CPF</b>${brl(e.liquido_cpf)}</div>
+      <div><b>Desconto usado</b>${fin.desconto_usado!=null?Math.round(fin.desconto_usado*100)+'%':'—'}</div>
+      <div><b>Custo (IA)</b>${ia.custo_percentual!=null?Math.round(ia.custo_percentual*100)+'%':'—'}</div>
+      <div><b>Prazo de execução</b>${ia.prazo_execucao_meses!=null?ia.prazo_execucao_meses+' mês(es)':'—'}</div></div></div>
+    <div class="bloco"><h4>Ficha</h4><div class="kv">
+      <div><b>Fecha</b>${prazoHtml(e.data_encerramento)}</div><div><b>Modalidade</b>${esc(e.modalidade_nome)} ${e.srp?'(SRP)':''}</div>
+      <div><b>Disputa</b>${esc(e.modo_disputa||'—')}</div><div><b>Gaveta</b>${esc(e.gaveta)}</div>
+      <div><b>Exclusivo ME/EPP</b>${e.exclusivo_me_epp?'sim':'não'}</div><div><b>Aceita pessoa física</b>${e.aceita_pf==null?'não informado':e.aceita_pf?'sim':'não'}</div>
+      <div><b>Entrega remota</b>${e.entrega_remota?'sim':'não'}</div><div><b>Exige presença</b>${e.exige_presencial?'sim — '+esc(ia.local_presencial||''):'não'}</div>
+      <div><b>CNAE</b>${esc(e.cnae_sugerido||'—')}</div><div><b>Bom pagador</b>${e.score_pagador!=null?Math.round(e.score_pagador*100)+'%':'—'}</div>
+      <div><b>Viabilidade</b>${e.score_viabilidade??'—'}</div><div><b>Número PNCP</b>${esc(e.numero_controle)}</div>
+      <div><b>Amparo</b>${esc(e.amparo_legal||'—')}</div><div><b>Casou com</b>${esc(e.kw_match||'—')}</div></div></div>
+    <div class="bloco"><h4>Exigências de habilitação</h4><ul class="lista">${li(e.exigencias)}</ul></div>
+    <div class="bloco"><h4>Riscos</h4><ul class="lista">${li(e.riscos)}</ul></div>
+    <div class="bloco"><h4>Minha anotação</h4><textarea id="anot" placeholder="ex.: pedi cotação ao fornecedor X">${esc(e.anotacao||'')}</textarea>
+      <div style="margin-top:6px"><button class="btn peq" id="bAnot">💾 Salvar anotação</button></div></div>
+    <div class="bloco"><h4>Itens (${e.itens.length})</h4><div style="overflow:auto"><table><thead><tr><th>#</th><th>Descrição</th><th>Qtd</th><th>Unit.</th><th>Total</th><th>Benefício</th><th>Vencedor</th></tr></thead><tbody>
+      ${e.itens.map(i=>`<tr style="cursor:default${(ia.itens_que_atendemos||[]).includes(i.numero_item)?';background:rgba(16,185,129,.08)':''}"><td>${i.numero_item}</td><td>${esc(i.descricao)}</td><td class="num">${num(i.quantidade)} ${esc(i.unidade||'')}</td><td class="num">${brl(i.valor_unitario)}</td><td class="num">${brl(i.valor_total)}</td><td>${esc(i.tipo_beneficio_nome||'')}</td><td class="num">${i.valor_homologado!=null?brl(i.valor_homologado):''}</td></tr>`).join('')}
+      </tbody></table></div><div class="sub">Linhas em verde = itens que o Opus disse que atendemos.</div></div>
+    <div class="bloco"><h4>Documentos lidos (${num(e.tam_docs)} caracteres)</h4><pre>${esc(e.docs_lidos||'—')}</pre></div>
+    <div class="bloco"><h4>Início do texto dos documentos</h4><pre>${esc(e.texto_inicio||'—')}</pre></div>
+    <div class="bloco"><h4>Técnico</h4><div class="kv"><div><b>Modelo</b>${esc(e.modelo_ia||'—')}</div><div><b>Tokens</b>${num(e.tokens_ia)}</div>
+      <div><b>Situação</b>${esc(e.status)}</div><div><b>Tentativas IA</b>${e.tentativas_ia}</div><div><b>Avisado</b>${e.notificado?'sim':'não'}</div>
+      <div><b>Último erro</b>${esc(e.ultimo_erro||'—')}</div></div></div>
+  </div>`;
+  $('fechar').onclick=fechar;
+  d.querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>acao('api/decisao',{n,decisao:b.dataset.dec||null},()=>{abrir(n);carregarAba()}));
+  $('bReana').onclick=()=>{if(confirm('Mandar este edital de novo para a IA? Gasta tokens na próxima varredura.'))acao('api/reanalisar',{n},()=>abrir(n))};
+  $('bAnot').onclick=()=>acao('api/decisao',{n,decisao:e.decisao,anotacao:$('anot').value});
+}
+function fechar(){$('det').classList.remove('on');$('fundo').classList.remove('on');SEL=null;desenhar()}
+$('fundo').onclick=fechar;document.addEventListener('keydown',ev=>{if(ev.key==='Escape')fechar()});
+
+/* ── controles ─────────────────────────── */
+$('swCron').onclick=()=>{const lig=!$('swCron').classList.contains('on');if(!lig&&!confirm('Desligar a varredura automática?'))return;acao('api/agendamento',{ligado:lig})};
+$('bVarrer').onclick=()=>{if(confirm('Rodar a varredura completa agora? Usa o Opus nos editais da fila (até o teto por varredura).'))acao('api/varrer',{sem_ia:false})};
+$('bVarrerSemIA').onclick=()=>acao('api/varrer',{sem_ia:true});
+$('bParar').onclick=()=>{if(confirm('Parar a varredura em andamento?'))acao('api/parar',{})};
+document.querySelectorAll('.aj').forEach(el=>el.oninput=()=>{el.dataset.mudou='1';el.style.borderColor='var(--amarelo)'});
+$('bSalvar').onclick=()=>{const d={};if($('cadeia').dataset.mudou)d.LLM_CADEIA=CADEIA;document.querySelectorAll('.aj').forEach(el=>{if(el.dataset.mudou)d[el.dataset.k]=el.type==='number'?Number(el.value)/(el.dataset.pct?100:1):el.value});
+  if(!Object.keys(d).length)return toast('Nada mudou');
+  acao('api/ajustes',d,()=>document.querySelectorAll('.aj').forEach(el=>{delete el.dataset.mudou;el.style.borderColor=''}))};
+$('bAvisar').onclick=()=>{if(!R.telegram&&!R.webhook)return toast('Nenhum canal configurado (Telegram/webhook)',false);acao('api/avisar',{})};
+$('bTema').onclick=()=>{const t=document.documentElement.dataset.tema==='claro'?'':'claro';document.documentElement.dataset.tema=t;try{localStorage.setItem('lb_tema',t)}catch(e){}};
+try{if(localStorage.getItem('lb_tema'))document.documentElement.dataset.tema=localStorage.getItem('lb_tema')}catch(e){}
+
+
+/* ── modelos e avisos ─────────────────── */
+let AV=null, OPC=null;
+async function carregarOpcoes(){
+  OPC=await api('api/opcoes');
+  desenharCadeia((R&&R.cadeia)||Object.keys(OPC.modelos));
+  $('selPrompt').innerHTML=Object.entries(OPC.prompts).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');
+  if(R){$('selPrompt').value=R.ajustes.LLM_PROMPT||'v2'}
+}
+function marcasHtml(el,valores){
+  const ops=el.dataset.a==='ufs'?AV.ufs_todas.map(u=>[u,u]):el.dataset.op.split(',').map(x=>x.split(':')).map(([k,n])=>[k,n||k]);
+  el.innerHTML=ops.map(([k,n])=>`<span class="marca${valores.includes(k)?' on':''}" data-v="${k}">${esc(n)}</span>`).join('');
+  el.querySelectorAll('.marca').forEach(m=>m.onclick=()=>{m.classList.toggle('on');previaAvisos()});
+}
+async function carregarAvisos(){
+  AV=await api('api/avisos');
+  document.querySelectorAll('.av').forEach(el=>{const k=el.dataset.a,v=AV[k];
+    if(el.classList.contains('sw'))el.classList.toggle('on',!!v);
+    else el.value=(v===0&&/max$/.test(k))?'':(v??'')});
+  document.querySelectorAll('.marcas').forEach(el=>marcasHtml(el,AV[el.dataset.a]||[]));
+  previaAvisos();
+}
+function lerAvisos(){
+  const d={};
+  document.querySelectorAll('.av').forEach(el=>{const k=el.dataset.a;
+    if(el.classList.contains('sw'))d[k]=el.classList.contains('on');
+    else if(el.type==='number')d[k]=el.value===''?0:Number(el.value);
+    else d[k]=el.value.trim()});
+  document.querySelectorAll('.marcas').forEach(el=>d[el.dataset.a]=[...el.querySelectorAll('.marca.on')].map(m=>m.dataset.v));
+  return d;
+}
+let _prev=null;
+async function previaAvisos(){
+  if(!AV)return;
+  if(!_prev)_prev=await api('api/editais?aba=oportunidades');
+  const f=lerAvisos(), nota=Number(document.querySelector('[data-k=NOTIFICAR_SCORE_MIN]').value||0);
+  const n=_prev.filter(r=>f.carteiras.includes(r.carteira)&&f.tipos.includes(r.tipo)&&(!f.ufs.length||f.ufs.includes(r.uf))
+    &&(r.nota_final||0)>=nota&&(r.margem_estimada||0)>=(f.liquido_min||0)
+    &&(!f.invest_min||(r.custo_estimado||0)>=f.invest_min)&&(!f.invest_max||(r.custo_estimado||0)<=f.invest_max)
+    &&(!f.valor_min||(r.valor_estimado||0)>=f.valor_min)&&(!f.valor_max||(r.valor_estimado||0)<=f.valor_max)).length;
+  $('avPrevia').innerHTML=`Hoje <b style="color:var(--verde2)">${num(n)}</b> das ${num(_prev.length)} abertas passam nesses filtros`;
+}
+document.querySelectorAll('.av').forEach(el=>{
+  if(el.classList.contains('sw'))el.onclick=()=>{el.classList.toggle('on');previaAvisos()};
+  else el.oninput=previaAvisos});
+document.querySelector('[data-k=NOTIFICAR_SCORE_MIN]').addEventListener('input',previaAvisos);
+$('ufVizinhas').onclick=ev=>{ev.preventDefault();const viz=AV.vizinhas.GO;document.querySelectorAll('.ufs .marca').forEach(m=>m.classList.toggle('on',viz.includes(m.dataset.v)));previaAvisos()};
+$('ufTodas').onclick=ev=>{ev.preventDefault();document.querySelectorAll('.ufs .marca').forEach(m=>m.classList.remove('on'));previaAvisos()};
+$('bSalvarAv').onclick=async()=>{
+  const d=lerAvisos(); const nota=document.querySelector('[data-k=NOTIFICAR_SCORE_MIN]'), mx=document.querySelector('[data-k=NOTIFICAR_MAX]');
+  try{await api('api/ajustes',{NOTIFICAR_SCORE_MIN:Number(nota.value),NOTIFICAR_MAX:Number(mx.value)});[nota,mx].forEach(el=>{delete el.dataset.mudou;el.style.borderColor=''})}catch(e){return toast('Erro: '+e,false)}
+  await acao('api/avisos',d,carregarAvisos)};
+$('bTestarTg').onclick=async()=>{
+  const d=lerAvisos();
+  if((d.tg_token&&!d.tg_token.includes('…'))||d.tg_chat!==AV.tg_chat){try{await api('api/avisos',{tg_token:d.tg_token,tg_chat:d.tg_chat})}catch(e){return toast('Erro: '+e,false)}}
+  acao('api/testar_telegram',{},carregarAvisos)};
+
+/* ── cadeia de modelos grátis ─────────── */
+let CADEIA=[];
+function desenharCadeia(lista){
+  CADEIA=[...lista];
+  const nomes=(OPC&&OPC.modelos)||{};
+  const box=$('cadeia'); if(!box)return;
+  box.innerHTML=CADEIA.map((m,i)=>{const ult=m==='gemini-fila';
+    return `<div class="elo"><span class="num">${i+1}</span><span class="nm">${esc(nomes[m]||m)}</span>
+      ${ult?'<span class="fixo">garantia · sempre tem crédito</span>':''}
+      <button data-i="${i}" data-d="-1" ${i===0||ult?'disabled':''} title="subir">▲</button>
+      <button data-i="${i}" data-d="1" ${i>=CADEIA.length-2||ult?'disabled':''} title="descer">▼</button></div>`}).join('');
+  box.querySelectorAll('button[data-d]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i,j=i+(+b.dataset.d);[CADEIA[i],CADEIA[j]]=[CADEIA[j],CADEIA[i]];
+    desenharCadeia(CADEIA);box.dataset.mudou='1'});
+}
+
+/* ── simulação ─────────────────────────── */
+const SIM_PADRAO={capital:10000,margem_min:15,dias:90,realismo:30,horas_mes:120,valor_hora:80,pagamento_extra_dias:0,carteiras:['MEI','CPF'],tipos:['produto','servico'],reinvestir:true};
+let SIM=Object.assign({},SIM_PADRAO);try{Object.assign(SIM,JSON.parse(localStorage.getItem('lb_sim')||'{}'))}catch(e){}
+function montarSimulacao(){
+  const box=$('conteudo');
+  const campo=(k,rot,dica,ext='')=>`<div class="linha"><label>${rot}${dica?`<br><small style="color:var(--txt3)">${dica}</small>`:''}</label><input class="campo sim" data-s="${k}" type="number" value="${SIM[k]}" ${ext}></div>`;
+  const marcas=(k,ops)=>`<span class="marcas" data-s="${k}">${ops.map(([v,n])=>`<span class="marca${SIM[k].includes(v)?' on':''}" data-v="${v}">${n}</span>`).join('')}</span>`;
+  box.innerHTML=`<div class="sim-grade">
+   <div class="caixa"><h3>💹 Se eu investir…</h3>
+    ${campo('capital','Dinheiro para investir (R$)','o que você tem para comprar produtos/ferramentas','step="500" min="100"')}
+    ${campo('margem_min','Margem mínima que o robô aceita (%)','abaixo disso ele não dá lance','step="1" min="0"')}
+    ${campo('dias','Período (dias)','licitações que fecham nesse prazo','step="15" min="15" max="365"')}
+    ${campo('realismo','Realismo da chance de ganhar (%)','30% = chance da IA × 0,3; suba quando houver histórico','step="5" min="1" max="100"')}
+    ${campo('horas_mes','Suas horas por mês para serviços','diagramação, vídeo, transcrição','step="10" min="0"')}
+    ${campo('valor_hora','Quanto vale 1 h sua (R$)','estima as horas de cada serviço','step="10" min="10"')}
+    ${campo('pagamento_extra_dias','Atraso extra no pagamento (dias)','prudência: órgão que atrasa','step="5" min="0"')}
+    <div class="linha"><label>Carteiras</label>${marcas('carteiras',[['MEI','MEI'],['CPF','CPF']])}</div>
+    <div class="linha"><label>Tipo</label>${marcas('tipos',[['produto','📦 Produto'],['servico','🛠 Serviço']])}</div>
+    <div class="linha"><label>Reinvestir o que voltar</label><button class="sw ${SIM.reinvestir?'on':''}" id="swReinv"></button></div>
+    <div style="margin-top:10px;display:flex;gap:8px"><button class="btn pri" id="bSimular">▶ Simular</button><button class="btn" id="bSimPadrao">↺ Padrão</button></div>
+    <div class="nota-sim">O robô dá o lance que <b>ele mesmo</b> daria no automático: cobre o custo, os impostos da carteira e a margem mínima, e fica 1% abaixo do preço que os vencedores costumam cobrar. Só disputa se esse lance ganha. O dinheiro só sai quando ganha; a reserva garante pagar se ganhar todas da mesma semana. Pagamento: federal ~15 dias, estadual ~35, municipal ~45 depois da entrega. AMIGO_SOLAR fica fora (o investimento é do parceiro).</div>
+   </div>
+   <div id="simRes"><div class="caixa vazio">Ajuste ao lado e clique em Simular.</div></div></div>`;
+  box.querySelectorAll('.marcas[data-s] .marca').forEach(m=>m.onclick=()=>m.classList.toggle('on'));
+  $('swReinv').onclick=()=>$('swReinv').classList.toggle('on');
+  $('bSimPadrao').onclick=()=>{SIM=Object.assign({},SIM_PADRAO);try{localStorage.removeItem('lb_sim')}catch(e){};montarSimulacao()};
+  $('bSimular').onclick=rodarSimulacao;
+  rodarSimulacao();
+}
+async function rodarSimulacao(){
+  document.querySelectorAll('.sim').forEach(el=>SIM[el.dataset.s]=Number(el.value));
+  document.querySelectorAll('.marcas[data-s]').forEach(el=>SIM[el.dataset.s]=[...el.querySelectorAll('.marca.on')].map(m=>m.dataset.v));
+  SIM.reinvestir=$('swReinv').classList.contains('on');
+  try{localStorage.setItem('lb_sim',JSON.stringify(SIM))}catch(e){}
+  const pedido={capital:SIM.capital,margem_min:SIM.margem_min/100,dias:SIM.dias,realismo:SIM.realismo/100,horas_mes:SIM.horas_mes,
+    valor_hora:SIM.valor_hora,pagamento_extra_dias:SIM.pagamento_extra_dias,carteiras:SIM.carteiras,tipos:SIM.tipos,reinvestir:SIM.reinvestir};
+  $('simRes').innerHTML='<div class="caixa vazio">calculando…</div>';
+  let d;try{d=await api('api/simular',pedido)}catch(e){$('simRes').innerHTML=`<div class="caixa vazio">Erro: ${esc(e)}</div>`;return}
+  const r=d.resumo, pct=v=>(v*100).toLocaleString('pt-BR',{maximumFractionDigits:0})+'%';
+  const meses=Math.max(1,r.dias_ate_receber_tudo/30);
+  $('simRes').innerHTML=`
+   <div class="cen">
+    <div class="card"><div class="r">Pessimista</div><div class="v">${brl(r.lucro_pessimista)}</div><div class="d">metade das vitórias esperadas</div></div>
+    <div class="card destaque"><div class="r">Esperado</div><div class="v">${brl(r.lucro_esperado)}</div><div class="d">${pct(r.retorno_sobre_capital)} do capital · ~${pct(r.retorno_ao_mes)} ao mês</div></div>
+    <div class="card"><div class="r">Se ganhar todas</div><div class="v">${brl(r.lucro_se_ganhar_todas)}</div><div class="d">teto, improvável</div></div>
+   </div>
+   <div class="cards" style="margin-top:0">
+    <div class="card"><div class="r">Disputa</div><div class="v">${r.licitacoes}</div><div class="d">deve ganhar ~${r.vitorias_esperadas.toLocaleString('pt-BR')} (chance média ${pct(r.chance_media)})</div></div>
+    <div class="card"><div class="r">Gasta em média</div><div class="v">${brl(r.investido_total)}</div><div class="d">só nas que ganhar</div></div>
+    <div class="card"><div class="r">Reserva máxima</div><div class="v">${brl(r.pico_preso)}</div><div class="d">dinheiro preso no pior momento</div></div>
+    <div class="card"><div class="r">Tudo recebido em</div><div class="v">${r.dias_ate_receber_tudo} dias</div><div class="d">~${meses.toLocaleString('pt-BR',{maximumFractionDigits:1})} mês(es)</div></div>
+   </div>
+   <div class="caixa" style="margin-bottom:12px"><h3>Seu dinheiro no tempo (esperado)</h3>${grafico(d.linha_tempo,d.parametros.capital)}</div>
+   <div class="caixa" style="margin-bottom:12px"><h3>Por que ficaram de fora</h3>${Object.entries(r.fora_por_motivo).map(([k,v])=>`<div class="linha"><label>${esc(k)}</label><b>${v}</b></div>`).join('')||'—'}</div>
+   <div class="tab"><table><thead><tr><th>Fecha</th><th>Objeto</th><th>Tipo</th><th>Custo</th><th>Lance do robô</th><th>Preço provável</th><th>Lucro se ganhar</th><th>Chance</th><th>Esperado</th><th>Dias preso</th></tr></thead><tbody>
+   ${d.escolhidas.sort((a,b)=>b.lucro_esperado-a.lucro_esperado).map(o=>`<tr data-n="${esc(o.numero)}"><td>${dt(o.fecha)}</td><td class="obj"><div class="o">${esc(o.objeto)}</div><div class="org">${esc(o.orgao)} · ${esc(o.uf)}</div></td><td>${o.tipo==='produto'?'📦':'🛠'}</td><td class="num">${brl(o.custo)}</td><td class="num">${brl(o.lance_robo)}</td><td class="num">${brl(o.preco_provavel)}</td><td class="num">${brl(o.lucro)}</td><td class="num">${pct(o.chance)}</td><td class="num" style="color:var(--verde2)">${brl(o.lucro_esperado)}</td><td class="num">${o.dias_preso}</td></tr>`).join('')||'<tr><td colspan="10" class="vazio">Nenhuma licitação cabe nesses parâmetros.</td></tr>'}
+   </tbody></table></div>`;
+  $('simRes').querySelectorAll('tr[data-n]').forEach(tr=>tr.onclick=()=>abrir(tr.dataset.n));
+}
+function grafico(pts,capital){
+  if(!pts.length)return '<div class="vazio">sem movimento</div>';
+  const W=800,H=240,P=36,TOPO=34, xs=pts.map(p=>p.dia), max=Math.max(capital,...pts.map(p=>p.patrimonio))*1.05;
+  const x=d=>P+(d-Math.min(0,...xs))/(Math.max(1,...xs)-Math.min(0,...xs))*(W-P-8), y=v=>H-P+8-(v/max)*(H-P-8-TOPO);
+  const linha=k=>'M'+[[0,k==='preso'?0:capital],...pts.map(p=>[p.dia,p[k]])].map(([d,v])=>`${x(d).toFixed(1)},${y(v).toFixed(1)}`).join('L');
+  return `<svg class="grafico" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+   <line x1="${P}" x2="${W}" y1="${y(capital)}" y2="${y(capital)}" stroke="var(--txt3)" stroke-dasharray="4 4"/>
+   <text x="${P+4}" y="${y(capital)-5}" fill="var(--txt3)" font-size="11">capital inicial ${brl(capital)}</text>
+   <path d="${linha('preso')}" fill="none" stroke="var(--amarelo)" stroke-width="2"/>
+   <path d="${linha('patrimonio')}" fill="none" stroke="var(--verde)" stroke-width="2.5"/>
+   <rect x="${P}" y="6" width="12" height="3" fill="var(--verde)"/><text x="${P+18}" y="12" fill="var(--verde2)" font-size="11">patrimônio (caixa + preso)</text>
+   <rect x="${P+190}" y="6" width="12" height="3" fill="var(--amarelo)"/><text x="${P+208}" y="12" fill="var(--amarelo)" font-size="11">dinheiro preso em entregas</text>
+   <text x="${P}" y="${H-6}" fill="var(--txt3)" font-size="11">hoje</text>
+   <text x="${W-8}" y="${H-6}" text-anchor="end" fill="var(--txt3)" font-size="11">dia ${Math.max(...xs)}</text></svg>`;
+}
+
+carregarResumo().then(()=>Promise.all([carregarOpcoes(),carregarAvisos()])).then(carregarAba);
+setInterval(carregarResumo,15000);
+</script>
+</body>
+</html>

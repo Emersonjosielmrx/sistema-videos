@@ -1,0 +1,108 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "blonde knight",
+   "principal": true,
+   "aparicoes": 13,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3978.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3426.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4344.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3510.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3990.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3420.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "messy blond hair, light blue eyes, high-collared black and gold armor under a blue cloak",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h02",
+   "nome": "Black-haired protagonist",
+   "principal": false,
+   "aparicoes": 11,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3030.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3516.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2544.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 960.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 1134.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1632.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Messy black hair covering part of his face, sharp red eyes, wearing a black athletic tracksuit with white shoulder stripes",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h03",
+   "nome": "Elderly grey-haired man with mustache",
+   "principal": false,
+   "aparicoes": 7,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3492.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1194.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2250.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1212.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 1140.0
+    }
+   ],
+   "papel": "supporting character",
+   "visual": "Grey/white slicked-back hair, prominent white mustache, stern facial wrinkles, dark suit with tie",
+   "protagonista": false,
+   "adulto": true
+  }
+ ]
+}

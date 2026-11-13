@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "gemini-argon": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-I", "D:\\gemini-argo\\mcp_argon.py"],
+      "env": {}
+    }
+  }
+}

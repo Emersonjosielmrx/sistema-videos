@@ -1,0 +1,29 @@
+{
+ "formato": "recap de anime com legendas palavra-chave destacadas",
+ "descricao": "Sequência de cenas do anime com legendas rápidas destacando palavras-chave em amarelo, contando a história do protagonista de forma acelerada e visual. Sem narração, só música de fundo.",
+ "replicavel": true,
+ "como_fazer": "1. Extrair cenas do anime usando clipes curtos (3-5s cada) ou gerar frames com IA (Veo 3) baseados em sinopse; 2. Escrever roteiro resumido do enredo com LLM (3-8 frases curtas); 3. Adicionar legendas sincronizadas com ffmpeg, destacando palavras-chave em amarelo/neon com overlays animados; 4. Sobrepor trilha épica/tensa dos 341 recursos; 5. Acelerar ritmo com cortes rápidos (1-2s por cena) usando ffmpeg; 6. Exportar em formato vertical 9:16",
+ "ferramentas": [
+  "ffmpeg",
+  "LLM para roteiro",
+  "Veo 3 (ou clipes fair use)",
+  "overlays animados",
+  "trilhas de música"
+ ],
+ "fonte_de_material": "Clipes curtos do anime (fair use <10s total), ou gerar cenas similares com Veo 3 baseado em descrição da sinopse, ou usar painéis de manhwa se houver versão mangá",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "Formato de recap rápido cria curiosidade e urgência para assistir o anime completo, com legendas dinâmicas prendendo atenção",
+ "exemplo_roteiro": "Frame 1: [Personagem criança] 'Ele REENCARNADO de outro mundo'\nFrame 2: [Personagem sorrindo] 'DEVERIA começar do ZERO'\nFrame 3: [Cena de fazenda] 'Para ENFRENTAR qualquer ameaça'\nFrame 4: [Luz brilhante] 'Mas herdou o poder INTEIRO de Jenny'\nFrame 5: [Cena de batalha] 'E se tornou o PALADINO mais forte'",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "anime recap",
+  "paladino",
+  "isekai",
+  "reencarnacao",
+  "power up",
+  "anime legendado"
+ ],
+ "video": "2026-10-07 13-59-31.mp4",
+ "data": "2026-10-12"
+}

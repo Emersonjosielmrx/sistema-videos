@@ -1,0 +1,49 @@
+Onda 0: tira contato e marca do video, e limpa o roteamento
+
+O YouTube suspendeu 22 canais em 04/09/2026 por spam e praticas enganosas.
+O slide de produto com o numero de WhatsApp e o cartao "Siga @InovareStories"
+estao entre as causas apontadas (SPAM_BANIMENTO_2026-09-04.md e LEIA.txt do
+postador). Isto tira o contato e a marca de dentro do video.
+
+Pipeline (AB-03)
+- pos_producao/config.yaml: pipeline agora e so loudnorm + crop + legendas.
+  propaganda_inteligente e branding_watermark sairam. O @ do canal de destino
+  e gravado na hora de postar, pela rede (mr/rede.py::rebrand).
+
+Card e propaganda (IM-01)
+- cta_card.py: sem telefone, sem endereco e sem "OFERECIDO POR". Layout v5,
+  que invalida os 88 cards em cache (tinham o numero). A variante com contato
+  so sai passando contato="...", que ninguem passa.
+- cta_builder.py: a voz nao diz mais "Chama no WhatsApp que ta na tela", e o
+  texto entrou na chave do cache -- era so (produto, voz), entao os 38 audios
+  ja gravados continuariam falando o numero.
+- plugins/propaganda_inteligente.py: numero fora do slide e da fala.
+- plugins/branding_watermark.py + assets/branding.json: sem "@InovareStories"
+  (estava escrito no codigo tambem, nao so na config); config vazia agora faz
+  o plugin devolver o video intacto.
+
+Vozes (IM-03)
+- edge_tts_veo.py: Francisca e Antonio sairam; entram as edge Multilingual
+  aprovadas (12 vozes x 10 variacoes), voz fixa por md5 e erro se alguem pedir
+  voz proibida. Mesma troca em voz_config.json, _tts_helper.py e voz_whatsapp.py.
+
+Roteamento e metadados (AB-06)
+- roteamento.py: dos 19 handles, 18 estavam suspensos. Agora devolve [] para o
+  diretor da rede escolher o canal; sem hash() e sem o "or True" que tornava o
+  caminho de "nao sei" inalcancavel. _DIRETO/_POOL_HUMOR ficaram vazios so para
+  nao quebrar a tarefa AgendadorVO3 enquanto ela nao for desarmada.
+- publicar.py: sem "1-2 emojis", sem "5 hashtags", sem o CTA com seta e sem a
+  cauda "#shorts #ia #viral #brasil"; filtro que apaga telefone, link, @ e
+  convite a sair do YouTube, mantendo o nome do produto. Grava
+  <video>.postar.json (era um so por pasta, sobrescrito) e marca sintetico=true.
+
+Enquadramento (defeito antigo achado na validacao)
+- plugins/crop_9_16.py: quando o video ja era 9:16 (todo clipe do Veo), ele
+  emoldurava antes de escalar e o conteudo ficava num quadrinho, com ~45% da
+  tela em preto. Agora so redimensiona.
+
+Validado: video de teste renderizado e quadros vistos (sem marca, sem slide,
+sem cartao); 3 cards gerados e olhados; filtro de contato testado; roteamento
+rodado 2x com resultado igual; validate.py verde.
+Nao validado: audio real -- o servico edge-tts responde 403 a este PC e os
+proxies dao timeout, com qualquer voz, inclusive a antiga.

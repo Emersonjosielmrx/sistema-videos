@@ -1,0 +1,12 @@
+# Coloque isto em  C:\Users\<voce>\.ssh\config  (crie o arquivo se não existir).
+# Os scripts chamam a VPS pelo apelido "hermes-bloqueio". Use EXATAMENTE esse nome e nada no código precisa mudar.
+Host hermes-bloqueio
+    HostName IP_DA_SUA_VPS
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+
+# Criar a chave (uma vez, no PowerShell):   ssh-keygen -t ed25519
+# Mandar a chave para a VPS:               type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh root@IP_DA_SUA_VPS "cat >> ~/.ssh/authorized_keys"
+# Testar (não pode pedir senha):           ssh -o BatchMode=yes hermes-bloqueio echo ok

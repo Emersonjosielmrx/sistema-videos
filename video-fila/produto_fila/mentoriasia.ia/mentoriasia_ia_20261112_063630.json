@@ -1,0 +1,143 @@
+{
+ "conta": "mentoriasia.ia",
+ "produto": "treinamentos",
+ "marca": "Treinamentos e Mentorias IA",
+ "titulo": "Como aplicar IA na prática no seu negócio",
+ "legenda": "Aprenda a aplicar inteligência artificial de forma prática na sua empresa.\nTreinamento de Vibe Coding, consultoria de otimização, pack de prompts validados e mapa mental.\nSaiba mais no link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "IA na prática para empresas",
+  "pergunta_cliente": "Quer aplicar IA na sua rotina mas não sabe por onde começar?",
+  "blocos": [
+   {
+    "rotulo": "O desafio",
+    "fala": "Eu tentava usar inteligência artificial, mas faltava método e direção prática para a minha rotina.",
+    "visual": "imagem",
+    "cenario_en": "modern and tidy Brazilian office, bright natural lighting, professional setting",
+    "destaques": [
+     "usar inteligência artificial",
+     "direção prática"
+    ],
+    "conversa": [],
+    "prompt_en": "modern and tidy Brazilian office, bright natural lighting, professional setting, no people in focus"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O método traz treinamento Vibe Coding, consultoria de otimização, pack de prompts validados e mapa mental completo.",
+    "visual": "veo",
+    "prompt_en": "a professional working focused on a laptop in a tidy modern office, warm daylight, side angle view, cinematic corporate look",
+    "destaques": [
+     "treinamento Vibe Coding",
+     "consultoria de otimização"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Como funciona a mentoria de IA?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Inclui treinamento de Vibe Coding, consultoria de otimização e mapa mental."
+     },
+     {
+      "de": "cliente",
+      "texto": "Tem materiais prontos para aplicar?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, você recebe o pack de prompts validados para montar suas automações."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Com esse apoio, passei a montar minhas próprias automações com IA com total segurança.",
+    "visual": "apresentador",
+    "cenario_en": "modern and tidy Brazilian office, bright natural lighting, professional setting",
+    "destaques": [
+     "montar minhas próprias",
+     "automações com IA"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261112_081032_2.png"
+   }
+  ],
+  "legenda": "Aprenda a aplicar inteligência artificial de forma prática na sua empresa.\nTreinamento de Vibe Coding, consultoria de otimização, pack de prompts validados e mapa mental.\nSaiba mais no link no perfil.",
+  "titulo": "Como aplicar IA na prática no seu negócio",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "entregas_treinamento",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 267,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\mentoriasia.ia_20261112_063630\\dono_3.mp4",
+ "duracao_s": 32.52,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-12T10:17:52",
+ "variante": "dono_abre_fecha_veo_meio",
+ "cenas_dono_feitas": [
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.73,
+   "fala": "Quer aplicar IA na sua rotina mas não sabe por onde começar?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.73,
+   "fim": 12.59,
+   "fala": "Eu tentava usar inteligência artificial, mas faltava método e direção prática para a minha rotina.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 12.59,
+   "fim": 20.89,
+   "fala": "O método traz treinamento Vibe Coding, consultoria de otimização, pack de prompts validados e mapa mental completo.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 20.89,
+   "fim": 28.57,
+   "fala": "Com esse apoio, passei a montar minhas próprias automações com IA com total segurança.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.57,
+   "fim": 32.52,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.75,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 6.0,
+   "diretor": 6.0
+  },
+  "graves": 2,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

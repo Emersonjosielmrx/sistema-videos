@@ -1,0 +1,49 @@
+{
+ "modelo": "argon-flash",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T16:00:58",
+ "segundos": 711,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T16:00:58",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "argon-flash",
+   "decisor": "argon-flash"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "A variante dono_tres repete o mesmo plano médio frontal do apresentador ao longo de todas as cenas de fala (cenas 0 a 3, mais de 26 segundos) sem intercalar telas do produto ou demonstração do WhatsApp, gerando monotonia visual e derrubando as notas de movimento e diretor.",
+    "prova": "dados.json formato 'dono_tres', quadros 1 a 10 da folha e repetição em 4 vídeos do historico_notas (followupia, inovarecom 2x, disparoemmassa)",
+    "sugestao": "Reduzir o peso da variante dono_tres em pesos_variantes ou desligá-la em variantes_desligadas como teste, priorizando formatos que intercalem telas demonstrativas ou b-rolls (como dono_abre_fecha_veo_meio).",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "A pílula de etapa superior ('1 O problema', '2 Como funciona', '3 O resultado') encosta diretamente no topo da cabeça (cabelo) do apresentador, estrangulando o headroom e gerando sobreposição indevida.",
+    "prova": "quadros 4, 5, 6, 9 e 10 da folha",
+    "sugestao": "Reduzir a escala do apresentador em cerca de 10% ou ajustar a folga superior (folga_dono) para garantir respiro livre entre o topo do cabelo e os elementos gráficos superiores.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.4,
+    "motivo": "Reduzir a frequência da variante dono_tres para diminuir a monotonia de mais de 26 segundos no mesmo enquadramento frontal estático e favorecer formatos com demonstração visual do produto.",
+    "prova": "dados.json formato 'dono_tres', quadros 1 a 10 da folha e repetição em 4 vídeos do historico_notas (followupia, inovarecom 2x, disparoemmassa)"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Ajustar no template Remotion a escala do apresentador ou a posição Y da pílula de etapa para manter respiro livre (headroom) acima do cabelo.",
+    "motivo": "Não há botão numérico para escala ou respiro superior (folga_dono regula tempo de fala em segundos, não espaço visual); a correção de sobreposição requer ajuste no código do layout.",
+    "prova": "quadros 4, 5, 6, 9 e 10 da folha"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

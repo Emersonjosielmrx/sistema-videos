@@ -1,0 +1,350 @@
+{
+ "name": "Gerador de Landing Page por IA",
+ "nodes": [
+  {
+   "parameters": {
+    "path": "landing-page",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Formulario GET",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    208,
+    208
+   ],
+   "webhookId": "lp-form-get-001",
+   "id": "node-form-get"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Gerador de Landing Page por IA</title>\n<style>\n*{box-sizing:border-box;margin:0;padding:0}\n:root{--bg:#07111f;--card:#0d1b2d;--border:rgba(255,255,255,.09);--text:#f4f7fb;--muted:#91a4b8;--primary:#7c3aed;--primary2:#6d28d9}\nbody{font-family:Inter,system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(124,58,237,.12),transparent 30%),radial-gradient(circle at 90% 20%,rgba(109,40,217,.12),transparent 30%),var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}\n.container{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;padding:48px;max-width:660px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,0.3)}\n.logo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:20px;font-weight:800;font-size:18px}\n.logo-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary),var(--primary2));font-size:20px}\nh1{font-size:clamp(26px,4vw,36px);text-align:center;margin-bottom:8px;letter-spacing:-1px}\nh1 span{background:linear-gradient(90deg,#fff,var(--primary));-webkit-background-clip:text;color:transparent}\n.subtitle{color:var(--muted);text-align:center;margin-bottom:36px;font-size:15px;line-height:1.5}\n.field{margin-bottom:20px}\nlabel{display:block;color:rgba(255,255,255,0.85);font-size:13px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}\ninput,textarea,select{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:inherit;transition:border-color .2s,box-shadow .2s;outline:none}\ninput:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,58,237,0.25)}\ninput::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}\ntextarea{resize:vertical;min-height:80px}\nselect{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff50' d='M6 8L1 3h10z'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center}\nselect option{background:#1a1a2e;color:#fff}\n.row{display:flex;gap:16px}\n.row .field{flex:1}\n.btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:12px;letter-spacing:.3px}\n.btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(124,58,237,0.4)}\n.btn:active{transform:translateY(0)}\n.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}\n.loading{display:none;text-align:center;color:var(--muted);margin-top:20px;font-size:14px}\n.loading.show{display:block}\n.spinner{display:inline-block;width:18px;height:18px;border:2.5px solid rgba(255,255,255,0.15);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}\n@keyframes spin{to{transform:rotate(360deg)}}\n.required::after{content:' *';color:#f87171;font-size:11px}\n.result{display:none;text-align:center;margin-top:24px;padding:24px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:16px}\n.result.show{display:block}\n.result h3{color:#22c55e;margin-bottom:8px;font-size:18px}\n.result a{color:var(--primary);font-weight:600;font-size:16px;word-break:break-all}\n@media(max-width:520px){.row{flex-direction:column;gap:0}.container{padding:28px 20px}}\n</style>\n</head>\n<body>\n<div class=\"container\">\n<div class=\"logo\"><div class=\"logo-icon\">&#9889;</div>Landing Page AI</div>\n<h1>Crie sua <span>Landing Page</span> com IA</h1>\n<p class=\"subtitle\">Preencha os dados do seu negocio e nossa IA criara uma pagina profissional e responsiva em segundos</p>\n<form id=\"f\">\n<div class=\"field\"><label class=\"required\">Nome da Empresa</label><input name=\"empresa\" placeholder=\"Ex: Tech Solutions\" required></div>\n<div class=\"field\"><label class=\"required\">Segmento / Nicho</label><input name=\"segmento\" placeholder=\"Ex: Consultoria de TI, Barbearia, Restaurante...\" required></div>\n<div class=\"field\"><label class=\"required\">Descricao do Negocio</label><textarea name=\"descricao\" placeholder=\"O que sua empresa faz? Qual o diferencial? Quem e o publico-alvo?\" rows=\"3\" required></textarea></div>\n<div class=\"field\"><label class=\"required\">Servicos / Produtos</label><textarea name=\"servicos\" placeholder=\"Liste os principais servicos ou produtos separados por virgula...\" rows=\"2\" required></textarea></div>\n<div class=\"row\">\n<div class=\"field\"><label>Cor Principal</label><select name=\"cor\"><option value=\"azul\">Azul</option><option value=\"roxo\" selected>Roxo</option><option value=\"verde\">Verde</option><option value=\"vermelho\">Vermelho</option><option value=\"laranja\">Laranja</option><option value=\"rosa\">Rosa</option><option value=\"preto\">Preto / Dark</option><option value=\"dourado\">Dourado / Luxo</option></select></div>\n<div class=\"field\"><label>Estilo</label><select name=\"estilo\"><option value=\"moderno\" selected>Moderno</option><option value=\"minimalista\">Minimalista</option><option value=\"corporativo\">Corporativo</option><option value=\"criativo\">Criativo / Bold</option><option value=\"elegante\">Elegante / Luxo</option></select></div>\n</div>\n<div class=\"row\">\n<div class=\"field\"><label>WhatsApp</label><input name=\"whatsapp\" placeholder=\"(11) 99999-9999\"></div>\n<div class=\"field\"><label>Email</label><input name=\"email\" type=\"email\" placeholder=\"contato@empresa.com\"></div>\n</div>\n<div class=\"field\"><label>Endereco</label><input name=\"endereco\" placeholder=\"Rua, numero - Cidade/UF (opcional)\"></div>\n<div class=\"field\"><label>Extras</label><textarea name=\"extras\" placeholder=\"Horario, redes sociais, slogan, qualquer info extra...\" rows=\"2\"></textarea></div>\n<button type=\"submit\" class=\"btn\" id=\"btn\">&#10024; Gerar Minha Landing Page</button>\n<div class=\"loading\" id=\"loading\"><span class=\"spinner\"></span>A IA esta construindo sua pagina... Aguarde ate 60 segundos.</div>\n<div class=\"result\" id=\"result\"><h3>&#10004; Landing Page Criada!</h3><p style=\"color:var(--muted);margin-bottom:12px\">Sua pagina esta pronta. Clique no link abaixo:</p><a id=\"link\" href=\"#\" target=\"_blank\"></a></div>\n</form>\n</div>\n<script>\ndocument.getElementById('f').addEventListener('submit',function(e){\n  e.preventDefault();\n  var btn=document.getElementById('btn'),ld=document.getElementById('loading'),res=document.getElementById('result');\n  btn.disabled=true;btn.textContent='Gerando...';ld.classList.add('show');res.classList.remove('show');\n  var fd=new FormData(this),data={};fd.forEach(function(v,k){data[k]=v;});\n  fetch(window.location.href,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})\n  .then(function(r){return r.json();})\n  .then(function(d){\n    ld.classList.remove('show');\n    if(d.url){res.classList.add('show');var a=document.getElementById('link');a.href=d.url;a.textContent=d.url;btn.textContent='Gerar Outra';btn.disabled=false;}\n    else{alert(d.error||'Erro ao gerar.');btn.disabled=false;btn.textContent='\\u2728 Gerar Minha Landing Page';}\n  })\n  .catch(function(){ld.classList.remove('show');alert('Erro de conexao.');btn.disabled=false;btn.textContent='\\u2728 Gerar Minha Landing Page';});\n});\n</script>\n</body>\n</html>"
+   },
+   "name": "HTML Formulario",
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    432,
+    208
+   ],
+   "id": "node-html-form"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde Formulario",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    640,
+    208
+   ],
+   "id": "node-respond-form"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "landing-page",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Recebe Dados POST",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    208,
+    512
+   ],
+   "webhookId": "lp-form-post-001",
+   "id": "node-form-post"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ (function() {\n  const b = $json.body;\n  return \"Crie uma landing page COMPLETA e PROFISSIONAL em HTML puro (um unico arquivo com CSS e JS inline) para:\\n\\n\" +\n    \"EMPRESA: \" + (b.empresa || \"\") + \"\\n\" +\n    \"SEGMENTO: \" + (b.segmento || \"\") + \"\\n\" +\n    \"DESCRICAO: \" + (b.descricao || \"\") + \"\\n\" +\n    \"SERVICOS: \" + (b.servicos || \"\") + \"\\n\" +\n    \"COR PRINCIPAL: \" + (b.cor || \"roxo\") + \"\\n\" +\n    \"ESTILO: \" + (b.estilo || \"moderno\") + \"\\n\" +\n    \"WHATSAPP: \" + (b.whatsapp || \"nao informado\") + \"\\n\" +\n    \"EMAIL: \" + (b.email || \"nao informado\") + \"\\n\" +\n    \"ENDERECO: \" + (b.endereco || \"nao informado\") + \"\\n\" +\n    \"EXTRAS: \" + (b.extras || \"nenhum\");\n})() }}",
+    "options": {
+     "systemMessage": "Voce e um expert em web design e desenvolvimento front-end especializado em criar landing pages de alta conversao.\n\nREGRAS ABSOLUTAS:\n1. Retorne APENAS codigo HTML puro. Nenhuma explicacao, nenhum markdown, nenhum bloco de codigo. O primeiro caractere DEVE ser < e o ultimo DEVE ser >.\n\n2. O HTML deve ser um documento COMPLETO iniciando com <!DOCTYPE html> contendo TODO o CSS inline em <style> e TODO o JS inline em <script>.\n\n3. SECOES OBRIGATORIAS (nesta ordem):\n   - Navegacao fixa no topo com links para cada secao e menu hamburger no mobile\n   - Hero section com titulo impactante, subtitulo, botao CTA e gradiente de fundo\n   - Secao \"Sobre Nos\" com texto descritivo e diferenciais\n   - Secao \"Servicos/Produtos\" com cards em grid responsivo (3 colunas desktop, 1 mobile)\n   - Secao \"Numeros\" com estatisticas/contadores visuais (ex: +500 clientes, 10 anos, etc)\n   - Secao \"Depoimentos\" com 3 depoimentos REALISTAS inventados com nomes brasileiros\n   - Secao \"FAQ\" com 4 perguntas frequentes em acordeao (toggle)\n   - Secao \"Contato\" com informacoes de contato e formulario visual\n   - Footer completo com links, redes e copyright\n\n4. DESIGN:\n   - Usar Google Fonts (importar Inter ou Poppins via <link> no head)\n   - Paleta de cores baseada na cor principal com gradientes e tons complementares\n   - Cards com border-radius, box-shadow e hover effects\n   - Animacoes fade-in ao scroll usando IntersectionObserver\n   - Botoes com hover transform e shadow\n   - Espacamento generoso (padding 60px+ entre secoes)\n\n5. Se tiver WhatsApp, incluir botao flutuante no canto inferior direito com link wa.me (limpar formatacao do numero)\n6. Icones usando emojis unicode - NAO usar CDN de icones\n7. 100% responsivo com mobile-first approach\n8. Meta tags completas (description, viewport, charset, og:title, og:description)\n9. Scroll suave (scroll-behavior: smooth)\n10. Minimo 800 linhas de codigo\n\nNAO inclua: markdown, explicacoes, comentarios sobre o codigo, blocos ```. APENAS o HTML puro."
+    }
+   },
+   "name": "Agente Gerador de Landing Page",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 1.7,
+   "position": [
+    448,
+    512
+   ],
+   "id": "node-agent",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 60000,
+     "temperature": 0.7,
+     "timeout": 300000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Gemini via Omniroute",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    400,
+    720
+   ],
+   "id": "node-gemini-lm",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const raw = $input.first().json;\nlet html = raw.output || raw.text || '';\n\n// Clean markdown if Gemini wrapped it\nhtml = html.replace(/^```html?\\s*\\n?/i, '').replace(/\\n?```\\s*$/i, '').trim();\n\n// Find HTML start if there's preamble text\nif (!html.startsWith('<')) {\n  const idx = html.indexOf('<!');\n  if (idx > -1) html = html.substring(idx);\n  else if (html.indexOf('<html') > -1) html = html.substring(html.indexOf('<html'));\n}\n\n// Generate unique page ID\nconst pageId = 'lp-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 8);\n\n// Store in workflow static data\nconst staticData = $getWorkflowStaticData('global');\nif (!staticData.pages) staticData.pages = {};\nstaticData.pages[pageId] = {\n  html: html,\n  empresa: $('Recebe Dados POST').first().json.body.empresa || 'Empresa',\n  createdAt: new Date().toISOString()\n};\n\n// Limit stored pages to last 50\nconst keys = Object.keys(staticData.pages);\nif (keys.length > 50) {\n  const sorted = keys.sort((a, b) => {\n    const ta = staticData.pages[a].createdAt || '';\n    const tb = staticData.pages[b].createdAt || '';\n    return ta.localeCompare(tb);\n  });\n  for (let i = 0; i < sorted.length - 50; i++) {\n    delete staticData.pages[sorted[i]];\n  }\n}\n\nconst viewUrl = 'https://n8n6.inovareinteligenciaartificial.com/webhook/landing-page-view?id=' + pageId;\n\nreturn [{ json: { pageId, viewUrl, url: viewUrl, success: true } }];"
+   },
+   "name": "Salva e Gera Link",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    704,
+    512
+   ],
+   "id": "node-save"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ url: $json.viewUrl, success: true }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde com Link",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    944,
+    512
+   ],
+   "id": "node-respond-link"
+  },
+  {
+   "parameters": {
+    "path": "landing-page-view",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Viewer GET",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    240,
+    928
+   ],
+   "webhookId": "lp-viewer-001",
+   "id": "node-viewer-get"
+  },
+  {
+   "parameters": {
+    "jsCode": "const input = $input.first().json;\nconst pageId = input.query ? input.query.id : \"\";\nconst staticData = $getWorkflowStaticData(\"global\");\nconst pages = staticData.pages || {};\n\nif (pageId && pages[pageId]) {\n  return [{ json: { html: pages[pageId].html } }];\n}\n\nconst errorPage = \"<\" + \"!DOCTYPE html><html><head><meta charset=UTF-8><title>404</title>\" +\n  \"<style>body{font-family:system-ui;background:#07111f;color:#f4f7fb;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}\" +\n  \"h1{font-size:72px;color:#7c3aed}p{color:#91a4b8;margin:16px 0}a{color:#7c3aed}</style></head>\" +\n  \"<body><div><h1>404</h1><p>Landing page nao encontrada.</p>\" +\n  \"<a href=/webhook/landing-page>Criar nova</a></div></body></html>\";\nreturn [{ json: { html: errorPage } }];"
+   },
+   "name": "Busca Pagina",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    464,
+    928
+   ],
+   "id": "node-retrieve"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Serve Landing Page",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    672,
+    928
+   ],
+   "id": "node-respond-viewer"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 60000,
+     "temperature": 0.7,
+     "timeout": 300000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Gemini via Omniroute",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    400,
+    912
+   ],
+   "id": "9d10e0b1-2ea5-4dcc-9050-c16a97bc52c2",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "Formulario GET": {
+   "main": [
+    [
+     {
+      "node": "HTML Formulario",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML Formulario": {
+   "main": [
+    [
+     {
+      "node": "Responde Formulario",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Recebe Dados POST": {
+   "main": [
+    [
+     {
+      "node": "Agente Gerador de Landing Page",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Agente Gerador de Landing Page": {
+   "main": [
+    [
+     {
+      "node": "Salva e Gera Link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva e Gera Link": {
+   "main": [
+    [
+     {
+      "node": "Responde com Link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Viewer GET": {
+   "main": [
+    [
+     {
+      "node": "Busca Pagina",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Pagina": {
+   "main": [
+    [
+     {
+      "node": "Serve Landing Page",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini via Omniroute": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Agente Gerador de Landing Page",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Gemini via Omniroute": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Agente Gerador de Landing Page",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "5dce31bc-edee-4b5c-bd47-bb1d39f0055c",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "NVN9SerdPbcSiHgJ",
+ "tags": []
+}

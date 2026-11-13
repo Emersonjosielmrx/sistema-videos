@@ -1,0 +1,1009 @@
+{
+  "backend_orphans": [
+    {
+      "method": "GET",
+      "path": "/api/auth/providers",
+      "handler": "handleAuthProviders",
+      "norm": "/api/auth/providers",
+      "line": 26
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/google",
+      "handler": "handleGoogleLogin",
+      "norm": "/api/auth/google",
+      "line": 27
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/google/callback",
+      "handler": "handleGoogleCallback",
+      "norm": "/api/auth/google/callback",
+      "line": 28
+    },
+    {
+      "method": "GET",
+      "path": "/api/version",
+      "handler": "handleVersion",
+      "norm": "/api/version",
+      "line": 30
+    },
+    {
+      "method": "GET",
+      "path": "/api/config",
+      "handler": "handleConfig",
+      "norm": "/api/config",
+      "line": 31
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/pair-code",
+      "handler": "handleSessionPairCode",
+      "norm": "/api/sessions/*/pair-code",
+      "line": 38
+    },
+    {
+      "method": "POST",
+      "path": "/api/calls/{callID}/bridge",
+      "handler": "handleCallBridgeStart",
+      "norm": "/api/calls/*/bridge",
+      "line": 47
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/calls/{callID}/bridge",
+      "handler": "handleCallBridgeStop",
+      "norm": "/api/calls/*/bridge",
+      "line": 48
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/image",
+      "handler": "handleSendImage",
+      "norm": "/api/sessions/*/messages/image",
+      "line": 52
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/audio",
+      "handler": "handleSendAudio",
+      "norm": "/api/sessions/*/messages/audio",
+      "line": 53
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/video",
+      "handler": "handleSendVideo",
+      "norm": "/api/sessions/*/messages/video",
+      "line": 54
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/document",
+      "handler": "handleSendDocument",
+      "norm": "/api/sessions/*/messages/document",
+      "line": 55
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/location",
+      "handler": "handleSendLocation",
+      "norm": "/api/sessions/*/messages/location",
+      "line": 56
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/contact",
+      "handler": "handleSendContact",
+      "norm": "/api/sessions/*/messages/contact",
+      "line": 57
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/poll",
+      "handler": "handleSendPoll",
+      "norm": "/api/sessions/*/messages/poll",
+      "line": 58
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/link-preview",
+      "handler": "handleSendLinkPreview",
+      "norm": "/api/sessions/*/messages/link-preview",
+      "line": 59
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/messages/react",
+      "handler": "handleReact",
+      "norm": "/api/sessions/*/messages/react",
+      "line": 60
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/messages/edit",
+      "handler": "handleEditMessage",
+      "norm": "/api/sessions/*/messages/edit",
+      "line": 61
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/seen",
+      "handler": "handleMarkSeen",
+      "norm": "/api/sessions/*/messages/seen",
+      "line": 63
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/typing",
+      "handler": "handleTyping",
+      "norm": "/api/sessions/*/messages/typing",
+      "line": 64
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/contacts/check",
+      "handler": "handleCheckNumber",
+      "norm": "/api/sessions/*/contacts/check",
+      "line": 67
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/contacts/{jid}",
+      "handler": "handleContactInfo",
+      "norm": "/api/sessions/*/contacts/*",
+      "line": 68
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/contacts/{jid}/picture",
+      "handler": "handleContactPicture",
+      "norm": "/api/sessions/*/contacts/*/picture",
+      "line": 69
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/contacts/{jid}/block",
+      "handler": "handleBlock",
+      "norm": "/api/sessions/*/contacts/*/block",
+      "line": 70
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/contacts/{jid}/unblock",
+      "handler": "handleBlock",
+      "norm": "/api/sessions/*/contacts/*/unblock",
+      "line": 71
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/blocklist",
+      "handler": "handleBlocklist",
+      "norm": "/api/sessions/*/blocklist",
+      "line": 72
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups",
+      "handler": "handleCreateGroup",
+      "norm": "/api/sessions/*/groups",
+      "line": 75
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/groups",
+      "handler": "handleListGroups",
+      "norm": "/api/sessions/*/groups",
+      "line": 76
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/join",
+      "handler": "handleJoinGroup",
+      "norm": "/api/sessions/*/groups/join",
+      "line": 77
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/groups/join-info",
+      "handler": "handleGroupJoinInfo",
+      "norm": "/api/sessions/*/groups/join-info",
+      "line": 78
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/groups/{gid}",
+      "handler": "handleGroupInfo",
+      "norm": "/api/sessions/*/groups/*",
+      "line": 79
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/leave",
+      "handler": "handleLeaveGroup",
+      "norm": "/api/sessions/*/groups/*/leave",
+      "line": 80
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/groups/{gid}/participants",
+      "handler": "handleGroupParticipants",
+      "norm": "/api/sessions/*/groups/*/participants",
+      "line": 81
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/participants/add",
+      "handler": "handleGroupParticipantChange",
+      "norm": "/api/sessions/*/groups/*/participants/add",
+      "line": 82
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/participants/remove",
+      "handler": "handleGroupParticipantChange",
+      "norm": "/api/sessions/*/groups/*/participants/remove",
+      "line": 83
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/participants/promote",
+      "handler": "handleGroupParticipantChange",
+      "norm": "/api/sessions/*/groups/*/participants/promote",
+      "line": 84
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/participants/demote",
+      "handler": "handleGroupParticipantChange",
+      "norm": "/api/sessions/*/groups/*/participants/demote",
+      "line": 85
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/subject",
+      "handler": "handleGroupSubject",
+      "norm": "/api/sessions/*/groups/*/subject",
+      "line": 86
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/description",
+      "handler": "handleGroupDescription",
+      "norm": "/api/sessions/*/groups/*/description",
+      "line": 87
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/picture",
+      "handler": "handleGroupPicture",
+      "norm": "/api/sessions/*/groups/*/picture",
+      "line": 88
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/groups/{gid}/invite",
+      "handler": "handleGroupInvite",
+      "norm": "/api/sessions/*/groups/*/invite",
+      "line": 89
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/invite/revoke",
+      "handler": "handleGroupInviteRevoke",
+      "norm": "/api/sessions/*/groups/*/invite/revoke",
+      "line": 90
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/settings/announce",
+      "handler": "handleGroupAnnounce",
+      "norm": "/api/sessions/*/groups/*/settings/announce",
+      "line": 91
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/settings/locked",
+      "handler": "handleGroupLocked",
+      "norm": "/api/sessions/*/groups/*/settings/locked",
+      "line": 92
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/settings/approval",
+      "handler": "handleGroupApprovalMode",
+      "norm": "/api/sessions/*/groups/*/settings/approval",
+      "line": 93
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/groups/{gid}/settings/add-mode",
+      "handler": "handleGroupAddMode",
+      "norm": "/api/sessions/*/groups/*/settings/add-mode",
+      "line": 94
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/groups/{gid}/requests",
+      "handler": "handleGroupRequests",
+      "norm": "/api/sessions/*/groups/*/requests",
+      "line": 95
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/requests/approve",
+      "handler": "handleGroupRequestChange",
+      "norm": "/api/sessions/*/groups/*/requests/approve",
+      "line": 96
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/groups/{gid}/requests/reject",
+      "handler": "handleGroupRequestChange",
+      "norm": "/api/sessions/*/groups/*/requests/reject",
+      "line": 97
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/channels",
+      "handler": "handleListChannels",
+      "norm": "/api/sessions/*/channels",
+      "line": 100
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/channels/{id}",
+      "handler": "handleChannelInfo",
+      "norm": "/api/sessions/*/channels/*",
+      "line": 101
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/channels/{id}/messages",
+      "handler": "handleChannelMessages",
+      "norm": "/api/sessions/*/channels/*/messages",
+      "line": 102
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/channels/{id}/follow",
+      "handler": "handleChannelFollow",
+      "norm": "/api/sessions/*/channels/*/follow",
+      "line": 103
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/channels/{id}/unfollow",
+      "handler": "handleChannelFollow",
+      "norm": "/api/sessions/*/channels/*/unfollow",
+      "line": 104
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/channels/{id}/mute",
+      "handler": "handleChannelMute",
+      "norm": "/api/sessions/*/channels/*/mute",
+      "line": 105
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/channels/{id}/unmute",
+      "handler": "handleChannelMute",
+      "norm": "/api/sessions/*/channels/*/unmute",
+      "line": 106
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/presence",
+      "handler": "handleSetPresence",
+      "norm": "/api/sessions/*/presence",
+      "line": 109
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/presence/{jid}/subscribe",
+      "handler": "handleSubscribePresence",
+      "norm": "/api/sessions/*/presence/*/subscribe",
+      "line": 110
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/profile",
+      "handler": "handleGetProfile",
+      "norm": "/api/sessions/*/profile",
+      "line": 113
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/profile/status",
+      "handler": "handleSetProfileStatus",
+      "norm": "/api/sessions/*/profile/status",
+      "line": 114
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/profile/qr",
+      "handler": "handleContactQR",
+      "norm": "/api/sessions/*/profile/qr",
+      "line": 115
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/privacy",
+      "handler": "handleGetPrivacy",
+      "norm": "/api/sessions/*/privacy",
+      "line": 118
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/privacy",
+      "handler": "handleSetPrivacy",
+      "norm": "/api/sessions/*/privacy",
+      "line": 119
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/privacy/status",
+      "handler": "handleGetStatusPrivacy",
+      "norm": "/api/sessions/*/privacy/status",
+      "line": 120
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/disappearing",
+      "handler": "handleSetDefaultDisappearing",
+      "norm": "/api/sessions/*/disappearing",
+      "line": 123
+    },
+    {
+      "method": "PUT",
+      "path": "/api/sessions/{sid}/chats/{chatId}/disappearing",
+      "handler": "handleSetChatDisappearing",
+      "norm": "/api/sessions/*/chats/*/disappearing",
+      "line": 124
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/contacts/{jid}/business",
+      "handler": "handleBusinessProfile",
+      "norm": "/api/sessions/*/contacts/*/business",
+      "line": 127
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/status/text",
+      "handler": "handleStatusText",
+      "norm": "/api/sessions/*/status/text",
+      "line": 130
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/status/image",
+      "handler": "handleStatusImage",
+      "norm": "/api/sessions/*/status/image",
+      "line": 131
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/status/video",
+      "handler": "handleStatusVideo",
+      "norm": "/api/sessions/*/status/video",
+      "line": 132
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/status/audio",
+      "handler": "handleStatusAudio",
+      "norm": "/api/sessions/*/status/audio",
+      "line": 133
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/chats",
+      "handler": "handleListChats",
+      "norm": "/api/sessions/*/chats",
+      "line": 136
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/chats/{chatId}/messages",
+      "handler": "handleChatMessages",
+      "norm": "/api/sessions/*/chats/*/messages",
+      "line": 137
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/webhook",
+      "handler": "handleSetWebhook",
+      "norm": "/api/sessions/*/webhook",
+      "line": 141
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/{sid}/webhook",
+      "handler": "handleGetWebhook",
+      "norm": "/api/sessions/*/webhook",
+      "line": 142
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/{sid}/webhook",
+      "handler": "handleDeleteWebhook",
+      "norm": "/api/sessions/*/webhook",
+      "line": 143
+    },
+    {
+      "method": "GET",
+      "path": "/api/chatwoot/resolve",
+      "handler": "handleChatwootResolve",
+      "norm": "/api/chatwoot/resolve",
+      "line": 150
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/chatwoot/groups/{gid}/open",
+      "handler": "handleChatwootOpenGroup",
+      "norm": "/api/sessions/*/chatwoot/groups/*/open",
+      "line": 152
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/chatwoot/channels/{id}/open",
+      "handler": "handleChatwootOpenChannel",
+      "norm": "/api/sessions/*/chatwoot/channels/*/open",
+      "line": 153
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/poll-vote",
+      "handler": "handlePollVote",
+      "norm": "/api/sessions/*/messages/poll-vote",
+      "line": 162
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/{sid}/messages/event-response",
+      "handler": "handleEventResponse",
+      "norm": "/api/sessions/*/messages/event-response",
+      "line": 164
+    },
+    {
+      "method": "GET",
+      "path": "/recordings/{id}",
+      "handler": "handleRecording",
+      "norm": "/recordings/*",
+      "line": 172
+    },
+    {
+      "method": "POST",
+      "path": "/api/agent/call",
+      "handler": "handleAgentCall",
+      "norm": "/api/agent/call",
+      "line": 177
+    },
+    {
+      "method": "POST",
+      "path": "/api/agent/hangup",
+      "handler": "handleAgentHangup",
+      "norm": "/api/agent/hangup",
+      "line": 178
+    },
+    {
+      "method": "GET",
+      "path": "/api/agent/status",
+      "handler": "handleAgentStatus",
+      "norm": "/api/agent/status",
+      "line": 179
+    },
+    {
+      "method": "GET",
+      "path": "/api/agent/connect",
+      "handler": "handleAgentConnect",
+      "norm": "/api/agent/connect",
+      "line": 180
+    },
+    {
+      "method": "GET",
+      "path": "/api/diagnostics",
+      "handler": "handleListDiagnostics",
+      "norm": "/api/diagnostics",
+      "line": 230
+    },
+    {
+      "method": "POST",
+      "path": "/api/rag/search",
+      "handler": "handleRAGSearch",
+      "norm": "/api/rag/search",
+      "line": 242
+    },
+    {
+      "method": "GET",
+      "path": "/api/followup/campaigns",
+      "handler": "handleFollowupCampaigns",
+      "norm": "/api/followup/campaigns",
+      "line": 270
+    },
+    {
+      "method": "POST",
+      "path": "/api/followup/campaigns",
+      "handler": "handleFollowupCampaigns",
+      "norm": "/api/followup/campaigns",
+      "line": 271
+    },
+    {
+      "method": "PUT",
+      "path": "/api/followup/campaigns/{id}",
+      "handler": "handleFollowupCampaignByID",
+      "norm": "/api/followup/campaigns/*",
+      "line": 272
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/followup/campaigns/{id}",
+      "handler": "handleFollowupCampaignByID",
+      "norm": "/api/followup/campaigns/*",
+      "line": 273
+    },
+    {
+      "method": "GET",
+      "path": "/api/followup/campaigns/{id}/steps",
+      "handler": "handleFollowupSteps",
+      "norm": "/api/followup/campaigns/*/steps",
+      "line": 274
+    },
+    {
+      "method": "POST",
+      "path": "/api/followup/campaigns/{id}/steps",
+      "handler": "handleFollowupSteps",
+      "norm": "/api/followup/campaigns/*/steps",
+      "line": 275
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/followup/steps/{id}",
+      "handler": "handleFollowupDeleteStep",
+      "norm": "/api/followup/steps/*",
+      "line": 276
+    },
+    {
+      "method": "GET",
+      "path": "/api/followup/contacts",
+      "handler": "handleFollowupContacts",
+      "norm": "/api/followup/contacts",
+      "line": 277
+    },
+    {
+      "method": "POST",
+      "path": "/api/followup/contacts",
+      "handler": "handleFollowupContacts",
+      "norm": "/api/followup/contacts",
+      "line": 278
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/followup/contacts/{id}",
+      "handler": "handleFollowupContactByID",
+      "norm": "/api/followup/contacts/*",
+      "line": 279
+    },
+    {
+      "method": "PUT",
+      "path": "/api/followup/contacts/{id}/status",
+      "handler": "handleFollowupContactStatus",
+      "norm": "/api/followup/contacts/*/status",
+      "line": 280
+    },
+    {
+      "method": "PUT",
+      "path": "/api/followup/contacts/{id}/profile",
+      "handler": "handleFollowupContactProfile",
+      "norm": "/api/followup/contacts/*/profile",
+      "line": 281
+    },
+    {
+      "method": "GET",
+      "path": "/api/followup/tags",
+      "handler": "handleFollowupTags",
+      "norm": "/api/followup/tags",
+      "line": 282
+    },
+    {
+      "method": "POST",
+      "path": "/api/followup/tags",
+      "handler": "handleFollowupTags",
+      "norm": "/api/followup/tags",
+      "line": 283
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/followup/tags/{id}",
+      "handler": "handleFollowupDeleteTag",
+      "norm": "/api/followup/tags/*",
+      "line": 284
+    },
+    {
+      "method": "GET",
+      "path": "/api/followup/logs",
+      "handler": "handleFollowupLogs",
+      "norm": "/api/followup/logs",
+      "line": 288
+    },
+    {
+      "method": "POST",
+      "path": "/api/followup/webhook",
+      "handler": "handleFollowupWebhook",
+      "norm": "/api/followup/webhook",
+      "line": 289
+    },
+    {
+      "method": "GET",
+      "path": "/api/followup/rules",
+      "handler": "handleFollowupRules",
+      "norm": "/api/followup/rules",
+      "line": 291
+    },
+    {
+      "method": "POST",
+      "path": "/api/followup/rules",
+      "handler": "handleFollowupRules",
+      "norm": "/api/followup/rules",
+      "line": 292
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/followup/rules/{id}",
+      "handler": "handleFollowupRuleByID",
+      "norm": "/api/followup/rules/*",
+      "line": 293
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/agenda/professionals/{id}",
+      "handler": "handleAgendaDeleteProfessional",
+      "norm": "/api/agenda/professionals/*",
+      "line": 307
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/agenda/blocks/{id}",
+      "handler": "handleAgendaDeleteBlock",
+      "norm": "/api/agenda/blocks/*",
+      "line": 310
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/agenda/waitlist/{id}",
+      "handler": "handleAgendaDeleteWaitlist",
+      "norm": "/api/agenda/waitlist/*",
+      "line": 313
+    },
+    {
+      "method": "POST",
+      "path": "/api/catalog/products/{id}/restore",
+      "handler": "handleCatalogRestore",
+      "norm": "/api/catalog/products/*/restore",
+      "line": 328
+    },
+    {
+      "method": "GET",
+      "path": "/api/catalog/stock/critical",
+      "handler": "handleCatalogStockCritical",
+      "norm": "/api/catalog/stock/critical",
+      "line": 330
+    },
+    {
+      "method": "GET",
+      "path": "/api/catalog/stock/report",
+      "handler": "handleCatalogStockReport",
+      "norm": "/api/catalog/stock/report",
+      "line": 331
+    },
+    {
+      "method": "GET",
+      "path": "/api/catalog/stock/history/{id}",
+      "handler": "handleCatalogStockHistory",
+      "norm": "/api/catalog/stock/history/*",
+      "line": 332
+    },
+    {
+      "method": "POST",
+      "path": "/api/catalog/stock/adjust",
+      "handler": "handleCatalogStockAdjust",
+      "norm": "/api/catalog/stock/adjust",
+      "line": 333
+    },
+    {
+      "method": "GET",
+      "path": "/api/catalog/images/{productId}",
+      "handler": "handleCatalogImagesList",
+      "norm": "/api/catalog/images/*",
+      "line": 334
+    },
+    {
+      "method": "POST",
+      "path": "/api/catalog/images/upload/{productId}",
+      "handler": "handleCatalogUploadImage",
+      "norm": "/api/catalog/images/upload/*",
+      "line": 336
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/catalog/images/{id}",
+      "handler": "handleCatalogDeleteImage",
+      "norm": "/api/catalog/images/*",
+      "line": 337
+    },
+    {
+      "method": "PUT",
+      "path": "/api/catalog/images/{id}/main",
+      "handler": "handleCatalogSetMainImage",
+      "norm": "/api/catalog/images/*/main",
+      "line": 338
+    },
+    {
+      "method": "POST",
+      "path": "/api/catalog/public/view/{id}",
+      "handler": "handleCatalogPublicView",
+      "norm": "/api/catalog/public/view/*",
+      "line": 342
+    },
+    {
+      "method": "POST",
+      "path": "/api/demo/voice",
+      "handler": "handleDemoVoice",
+      "norm": "/api/demo/voice",
+      "line": 345
+    },
+    {
+      "method": "GET",
+      "path": "/api/demo/clip",
+      "handler": "handleDemoClip",
+      "norm": "/api/demo/clip",
+      "line": 347
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/me/preferences",
+      "handler": "handleUIPreferences",
+      "norm": "/api/users/me/preferences",
+      "line": 353
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/me/preferences",
+      "handler": "handleUIPreferences",
+      "norm": "/api/users/me/preferences",
+      "line": 354
+    },
+    {
+      "method": "POST",
+      "path": "/api/crm/stage-action",
+      "handler": "handleStageAction",
+      "norm": "/api/crm/stage-action",
+      "line": 356
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/garimpo-avatars",
+      "handler": "handleGarimpoAvatarsToggle",
+      "norm": "/api/settings/garimpo-avatars",
+      "line": 360
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/garimpo-avatars",
+      "handler": "handleGarimpoAvatarsToggle",
+      "norm": "/api/settings/garimpo-avatars",
+      "line": 361
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/subscribe",
+      "handler": "handleBillingSubscribe",
+      "norm": "/api/billing/subscribe",
+      "line": 365
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/check",
+      "handler": "handleBillingCheck",
+      "norm": "/api/billing/check",
+      "line": 366
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/coupon",
+      "handler": "handleBillingCoupon",
+      "norm": "/api/billing/coupon",
+      "line": 367
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/webhook",
+      "handler": "handleBillingWebhook",
+      "norm": "/api/billing/webhook",
+      "line": 368
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat-control/pause",
+      "handler": "handleChatControlPause",
+      "norm": "/api/chat-control/pause",
+      "line": 377
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat-control/resume",
+      "handler": "handleChatControlResume",
+      "norm": "/api/chat-control/resume",
+      "line": 378
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat-control/status",
+      "handler": "handleChatControlStatus",
+      "norm": "/api/chat-control/status",
+      "line": 379
+    },
+    {
+      "method": "POST",
+      "path": "/api/agent-profiles/{id}/ensure-audio",
+      "handler": "handleEnsureAgentProfileAudio",
+      "norm": "/api/agent-profiles/*/ensure-audio",
+      "line": 439
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/eleven/keys",
+      "handler": "handleElevenKeys",
+      "norm": "/api/settings/eleven/keys",
+      "line": 458
+    },
+    {
+      "method": "GET",
+      "path": "/chat",
+      "handler": "handleConsolePage",
+      "norm": "/chat",
+      "line": 466
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin-list",
+      "handler": "handleGetAdminList",
+      "norm": "/api/admin-list",
+      "line": 473
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-list",
+      "handler": "handleAddAdmin",
+      "norm": "/api/admin-list",
+      "line": 474
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin-list/remove",
+      "handler": "handleRemoveAdmin",
+      "norm": "/api/admin-list/remove",
+      "line": 475
+    }
+  ],
+  "ui_broken": [
+    "/api",
+    "/api-docs.html",
+    "/api-keys",
+    "/api.anthropic.com",
+    "/api.elevenlabs.io",
+    "/api.groq.com/openai",
+    "/api.meu-proxy.com/v1",
+    "/api.openai.com",
+    "/api.seu-claw.com",
+    "/api.telegram.org/bot*/getMe",
+    "/api.ts",
+    "/api/crm/move.",
+    "/api/rag/ingest-conversations.",
+    "/api/sessions/*/chats/*",
+    "/api/whatsapp/sync-app-state",
+    "/chat/ManagerChat"
+  ]
+}

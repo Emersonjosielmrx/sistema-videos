@@ -1,0 +1,1376 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovare AI - Plataforma de Agentes Autônomos Enterprise</title>
+    
+    <!-- SEO & OpenGraph Meta Tags -->
+    <meta name="description" content="Configure um agente de IA no seu WhatsApp em minutos. Atendimento 24h, CRM integrado e follow-up automático. Escale suas vendas com a Inovare AI.">
+    <meta property="og:title" content="Inovare AI - Plataforma de Agentes Autônomos">
+    <meta property="og:description" content="O funcionário perfeito que nunca dorme. Atendimento, CRM e Piloto Automático de Vendas no WhatsApp.">
+    <meta property="og:image" content="https://i.postimg.cc/25jW9WFk/image.png">
+    <meta property="og:type" content="website">
+    
+    <!-- Schema Markup JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Inovare AI",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "0",
+        "highPrice": "899",
+        "priceCurrency": "BRL"
+      },
+      "description": "Plataforma de agentes de Inteligência Artificial para atendimento e vendas automáticas no WhatsApp."
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/landing.css">
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <style>
+        :root {
+            --selection-bg: rgba(37, 211, 102, 0.3);
+            --selection-color: #fff;
+        }
+        ::selection {
+            background-color: var(--selection-bg);
+            color: var(--selection-color);
+        }
+        .hero-reveal { will-change: transform, opacity, filter; }
+        @keyframes scroll-line {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        /* Loader Overlay */
+        #page-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000000; z-index: 99999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        .loader-logo { width: 150px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.95); } }
+        
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            border: 2px solid var(--accent); border-radius: 50%;
+            pointer-events: none; z-index: 100000;
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s;
+            mix-blend-mode: difference;
+            display: none; /* fallback */
+        }
+        @media (pointer: fine) { .custom-cursor { display: block; } }
+        .cursor-hover { width: 50px; height: 50px; background-color: rgba(37, 211, 102, 0.2); }
+        
+        /* Reading Progress Bar */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; width: 0%; height: 4px;
+            background: linear-gradient(90deg, var(--accent), #128C7E);
+            z-index: 999999; transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div id="page-loader">
+        <img src="https://i.postimg.cc/25jW9WFk/image.png" alt="Carregando..." class="loader-logo">
+    </div>
+
+    <!-- Background Particles Container -->
+    <div class="particles-container" id="particles-container"></div>
+
+    <!-- Reading Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <!-- Animated Background -->
+    <div class="noise-overlay"></div>
+    <div class="bg-animation">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            <img src="https://i.postimg.cc/25jW9WFk/image.png" alt="Inovare Logo" style="height: 35px; width: auto; object-fit: contain;">
+        </a>
+        <div class="nav-links">
+            <a href="#features">Vantagens</a>
+            <a href="#pricing">Planos</a>
+            <a href="https://wa.me/5591984698653" target="_blank">Contato</a>
+        </div>
+        <div>
+            <a href="login.html" class="btn-login">Entrar</a>
+            <a href="cadastro.html" class="btn-primary">Criar Conta</a>
+        </div>
+    </nav>
+
+    <!-- GSAP 4-Frame Hero Section -->
+    <main class="hero-scrub-container relative" style="height: 400vh; position: relative;">
+        <div class="sticky top-0 h-screen w-full overflow-hidden" style="position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; background: var(--bg-darker);">
+            
+            <!-- BACKGROUND IMAGES SEQUENCE -->
+            <div class="absolute inset-0 z-0 flex items-center justify-center" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; display: flex; align-items: center; justify-content: center;">
+                <div class="absolute inset-0 z-10" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, var(--bg-darker) 0%, transparent 50%, var(--bg-darker) 100%); z-index: 10; pointer-events: none;"></div>
+                
+                <img src="assets/frame1.png" class="hero-frame" style="width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: transform 0.5s;">
+                <img src="assets/frame2.png" class="hero-frame" style="width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: transform 0.5s;">
+                <img src="assets/frame3.png" class="hero-frame" style="width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: transform 0.5s;">
+                <img src="assets/frame4.png" class="hero-frame" style="width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: transform 0.5s;">
+            </div>
+
+            <!-- OVERLAY CONTENT (Text Layers) -->
+            <div class="relative z-10 w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center px-6 text-center" style="position: relative; z-index: 10; width: 100%; height: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; padding: 0 5%; text-align: center;">
+                
+                <!-- Frame 1 Text -->
+                <div class="hero-text-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none;">
+                    <h1 class="font-display text-white" style="font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800;">
+                        <div class="block">A plataforma definitiva de</div>
+                        <div class="block text-outline" style="color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.8);">agentes autônomos.</div>
+                    </h1>
+                    <p class="font-light" style="font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto;">
+                        Orquestre e conecte Inteligências Artificiais avançadas ao seu funil de vendas e suporte no WhatsApp. Sem limites.
+                    </p>
+                </div>
+
+                <!-- Frame 2 Text -->
+                <div class="hero-text-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; opacity: 0;">
+                    <h1 class="font-display text-white" style="font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800;">
+                        <div class="block text-gradient">Uma Inteligência que</div>
+                        <div class="block">Ouve, Enxerga e Assiste.</div>
+                    </h1>
+                    <p class="font-light" style="font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto;">
+                        Recursos multimodais impressionantes. Transcrição de áudio, análise de imagens e vídeos em tempo real para um atendimento perfeito.
+                    </p>
+                </div>
+
+                <!-- Frame 3 Text -->
+                <div class="hero-text-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; opacity: 0;">
+                    <h1 class="font-display text-white" style="font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800;">
+                        <div class="block">Atendimento Humanizado</div>
+                        <div class="block text-outline" style="color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.8);">com Voz Real.</div>
+                    </h1>
+                    <p class="font-light" style="font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto;">
+                        Clonagem de voz, simulação de digitação e mensagens em áudio sintéticas que seus clientes juram ser uma pessoa real.
+                    </p>
+                </div>
+
+                <!-- Frame 4 Text -->
+                <div class="hero-text-layer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; opacity: 0;">
+                    <h1 class="font-display text-white" style="font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800;">
+                        <div class="block">Ela decide, te avisa e</div>
+                        <div class="block text-gradient">pergunta o que não sabe.</div>
+                    </h1>
+                    <p class="font-light" style="font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto;">
+                        Uma inteligência autossuficiente que gerencia fluxos, sabe quando chamar um humano e aprende com a sua operação.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; pointer-events: auto;">
+                        <a href="cadastro.html" class="beam-btn-wrapper">
+                            <span class="beam-btn-border"></span>
+                            <span class="beam-btn-inner">Comece Agora <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SCROLL HINT -->
+            <div class="scroll-hint" style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 20; opacity: 0.6; pointer-events: none;">
+                <span style="font-size: 10px; font-family: monospace; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);">Scroll to Explore</span>
+                <div style="width: 1px; height: 30px; background: rgba(255,255,255,0.2); overflow: hidden; position: relative;">
+                    <div class="animate-scroll-line" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff; animation: scroll-line 1.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Marquee de Integrações -->
+    <div class="marquee-container" style="overflow: hidden; white-space: nowrap; padding: 2rem 0; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="marquee-content" style="display: inline-block; animation: marquee 20s linear infinite;">
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-brands fa-stripe"></i> Stripe</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-money-bill-transfer"></i> Asaas</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-robot"></i> OpenAI</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-brain"></i> Groq</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-plug"></i> n8n</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-comments"></i> Chatwoot</span>
+            <!-- Duplicated for seamless loop -->
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-brands fa-stripe"></i> Stripe</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-money-bill-transfer"></i> Asaas</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-robot"></i> OpenAI</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-brain"></i> Groq</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-plug"></i> n8n</span>
+            <span style="font-size: 1.5rem; color: var(--text-muted); margin-right: 4rem; opacity: 0.7;"><i class="fa-solid fa-comments"></i> Chatwoot</span>
+        </div>
+    </div>
+    <style>
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    </style>    <!-- IA Introduction & Video Section -->
+    <section id="presentation" class="section" style="padding-top: 2rem;">
+        
+        <!-- Typewriter Effect -->
+        <div style="margin-bottom: 4rem; text-align: center; max-width: 900px; margin-inline: auto;">
+            <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 600; line-height: 1.5; min-height: 80px;">
+                <span style="color: #fff;">Eu sou a IA Inovare. Meu objetivo é</span> <span id="typing-container" style="color: var(--secondary);"></span><span class="cursor" style="color: var(--secondary); animation: blink 1s infinite;">|</span>
+            </div>
+        </div>
+
+        <style>
+            @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        </style>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var phrases = [
+                    "reunir tudo em um só lugar.",
+                    "oferecer um Chatbot super inteligente.",
+                    "enviar campanhas em massa.",
+                    "controlar seus vendedores.",
+                    "fazer vendas automáticas por você."
+                ];
+                var currentPhraseIndex = 0;
+                var charIndex = 0;
+                var isDeleting = false;
+                var typingContainer = document.getElementById("typing-container");
+                var typingSpeed = 50;
+                var deletingSpeed = 30;
+                var delayBetweenPhrases = 2000;
+                var started = false;
+
+                var observer = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting && !started) {
+                        started = true;
+                        typeWriterLoop();
+                    }
+                }, { threshold: 0.5 });
+
+                observer.observe(typingContainer);
+
+                function typeWriterLoop() {
+                    var currentPhrase = phrases[currentPhraseIndex];
+                    
+                    if (isDeleting) {
+                        typingContainer.textContent = currentPhrase.substring(0, charIndex - 1);
+                        charIndex--;
+                    } else {
+                        typingContainer.textContent = currentPhrase.substring(0, charIndex + 1);
+                        charIndex++;
+                    }
+
+                    var speed = isDeleting ? deletingSpeed : typingSpeed;
+
+                    if (!isDeleting && charIndex === currentPhrase.length) {
+                        speed = delayBetweenPhrases;
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                        speed = 500;
+                    }
+
+                    setTimeout(typeWriterLoop, speed);
+                }
+            });
+        </script>
+
+        <!-- Hosted MP4 Video -->
+        <div class="reveal delay-200" style="max-width: 1000px; margin: 0 auto; position: relative; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 20px 40px rgba(0,0,0,0.6); overflow: hidden;">
+            <video id="hero-video-player" width="100%" autoplay loop muted playsinline style="display: block; width: 100%; height: auto;">
+                <source src="https://inovareinteligenciaartificial.com/wp-content/uploads/2024/08/Video-do-WhatsApp-de-2024-08-25-as-10.43.09_cfa5b3cd.mp4" type="video/mp4">
+                Seu navegador não suporta a reprodução de vídeos.
+            </video>
+            <button onclick="toggleVideoMute()" id="mute-btn" style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.6); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); transition: background 0.3s; z-index: 10;">
+                <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+        </div>
+        <script>
+            function toggleVideoMute() {
+                const vid = document.getElementById('hero-video-player');
+                const btn = document.getElementById('mute-btn');
+                vid.muted = !vid.muted;
+                if(vid.muted) {
+                    btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+                } else {
+                    btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+                }
+            }
+        </script>
+
+    </section>
+
+    <!-- O Funcionário Perfeito (Hook) -->
+    <section id="hook-text" class="section bg-darker">
+        <div class="reveal delay-100" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <i class="fa-solid fa-user-tie" style="font-size: 3rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
+            <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem; line-height: 1.3;">O Funcionário Perfeito</h2>
+            <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
+                Você já pensou em ter um funcionário inteligente, experiente e educado, especialista na sua área, que não precisa ser motivado e está <strong>disponível 24 horas, 7 dias por semana</strong>?
+            </p>
+            <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; margin-top: 1rem;">
+                Tudo isso sem salário, férias ou direitos trabalhistas. Agora você pode, por menos do que o preço de um café por dia. Um investimento inteligente para o seu negócio.
+            </p>
+        </div>
+    </section>
+
+    <!-- Como Funciona (How it Works) -->
+    <section id="how-it-works" class="section">
+        <h2 class="section-title">Como Funciona a Inovare AI</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Implementação rápida e sem atritos. Nossa IA entra no ar e começa a qualificar seus clientes enquanto você foca na estratégia.
+        </p>
+
+        <div class="features-grid reveal delay-100">
+            <div class="feature-card glass" style="text-align: center;">
+                <div style="font-size: 3rem; color: var(--accent); font-weight: 800; margin-bottom: 1rem; opacity: 0.3;">01</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Conecte seus Canais</h3>
+                <p style="color: var(--text-muted); line-height: 1.5;">Plugue seu número de WhatsApp, Instagram e Facebook em nossa plataforma em minutos. A IA entra no ar imediatamente.</p>
+            </div>
+            <div class="feature-card glass" style="text-align: center;">
+                <div style="font-size: 3rem; color: var(--accent); font-weight: 800; margin-bottom: 1rem; opacity: 0.3;">02</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Deixe a IA Trabalhar</h3>
+                <p style="color: var(--text-muted); line-height: 1.5;">Nossos fluxos cuidam de agendamentos, orçamentos, vendas e tiram as dúvidas dos seus clientes de forma 100% automática.</p>
+            </div>
+            <div class="feature-card glass" style="text-align: center;">
+                <div style="font-size: 3rem; color: var(--accent); font-weight: 800; margin-bottom: 1rem; opacity: 0.3;">03</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Escale e Otimize</h3>
+                <p style="color: var(--text-muted); line-height: 1.5;">Acompanhe tudo pelo painel centralizado, feche as vendas complexas e veja seu faturamento multiplicar com facilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segmentos (Nichos) -->
+    <section id="nichos" class="section bg-darker">
+        <h2 class="section-title">A Inovare AI se adapta ao seu negócio</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Configuramos o seu agente para falar com a sua voz, conhecer os seus produtos e resolver os problemas específicos do seu setor.
+        </p>
+
+        <div class="features-grid reveal delay-100">
+            <div class="feature-card glass">
+                <i class="fa-solid fa-user-doctor feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Médicos e Clínicas</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Confirmação de consultas, triagem inicial por sintomas e recuperação de pacientes sumidos. Desafogue sua recepção.
+                </p>
+            </div>
+            <div class="feature-card glass">
+                <i class="fa-solid fa-graduation-cap feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Escolas e Cursos</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Respostas imediatas sobre matrículas, mensalidades e bolsas. A secretaria para de responder as mesmas dúvidas o dia todo.
+                </p>
+            </div>
+            <div class="feature-card glass">
+                <i class="fa-solid fa-car feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Concessionárias e Corretoras</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Leads de test drive ou imóveis chegam pré-qualificados (orçamento e interesse) prontos para a equipe de vendas fechar.
+                </p>
+            </div>
+            <div class="feature-card glass">
+                <i class="fa-solid fa-shop feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">E-commerce e Lojas</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Status de pedido em tempo real, envio de catálogo interativo e recuperação automática de carrinhos abandonados.
+                </p>
+            </div>
+            <div class="feature-card glass">
+                <i class="fa-solid fa-spa feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Salões e Estética</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Agenda sempre cheia sem cliente esperando na linha. Lembretes automáticos 24h antes para zerar as faltas.
+                </p>
+            </div>
+            <div class="feature-card glass">
+                <i class="fa-solid fa-briefcase feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Consultorias e B2B</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Triagem de leads corporativos, agendamento de reuniões e envio de propostas formatadas automaticamente em PDF.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <h2 class="section-title">Engenharia de Alta Performance</h2>
+        <div class="features-grid">
+            <div class="feature-card flashlight-card reveal delay-100" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-brands fa-whatsapp feature-icon"></i>
+                <h3>Integração Nativa WhatsApp</h3>
+                <p>Conecte instâncias de WhatsApp com leitura via QR Code instantânea. Todo o tráfego gerido por nossa API robusta em tempo real.</p>
+            </div>
+            <div class="feature-card flashlight-card reveal delay-200" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-solid fa-brain feature-icon"></i>
+                <h3>RAG & Long Term Memory</h3>
+                <p>Injete FAQs, planilhas de preço e dados contextuais da sua empresa. O agente consulta o RAG antes de responder cada mensagem.</p>
+            </div>
+            <div class="feature-card flashlight-card reveal delay-300" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-solid fa-shield-halved feature-icon"></i>
+                <h3>Guardrails Absolutos</h3>
+                <p>Trave descontos indevidos e evite alucinações. Nossa arquitetura permite criar regras restritas (Guardrails) para limitar o comportamento da IA.</p>
+            </div>
+            <div class="feature-card flashlight-card reveal delay-400" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-solid fa-khanda feature-icon"></i>
+                <h3>Arena de Benchmark</h3>
+                <p>Teste OpenAI, Groq e Gemini simultaneamente na nossa Arena de Gladiadores para descobrir qual motor de IA gera o melhor resultado.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Features Section -->
+    <section id="enterprise" class="section bg-darker">
+        <h2 class="section-title">Poder Ilimitado com o Plano Enterprise</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin: 0 auto 3rem auto; font-size: 1.1rem;">
+            Fazemos a construção personalizada do seu agente IA e treinamento de inteligência artificial para atender às necessidades específicas da sua empresa, <strong>a partir de 1 salário mínimo</strong>.
+        </p>
+        <div class="features-grid">
+            <div class="feature-card flashlight-card reveal delay-100" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-solid fa-users-gear feature-icon"></i>
+                <h3>Multi-Atendimento (Chatwoot)</h3>
+                <p>Atenda várias pessoas simultaneamente, em diferentes dispositivos, utilizando apenas um número de WhatsApp. Inclui Chat Interno para a equipe.</p>
+            </div>
+            <div class="feature-card flashlight-card reveal delay-200" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-solid fa-filter feature-icon"></i>
+                <h3>Triagem e Follow-up em Massa</h3>
+                <p>Automações n8n para triagem inteligente de novos leads e envio de mensagens em massa programadas para campanhas de marketing.</p>
+            </div>
+            <div class="feature-card flashlight-card reveal delay-300" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-regular fa-calendar-check feature-icon"></i>
+                <h3>Agendamento & Respostas Rápidas</h3>
+                <p>Agende mensagens para clientes escolhendo data e horário. Cadastre respostas rápidas e crie etiquetas (tags) personalizadas para organização.</p>
+            </div>
+            <div class="feature-card flashlight-card reveal delay-400" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
+                <i class="fa-solid fa-list-check feature-icon"></i>
+                <h3>Protocolos & Avaliações</h3>
+                <p>Gere números de protocolo automáticos e ative a pesquisa de satisfação para avaliar o atendimento da sua equipe.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Human vs Bot Comparison -->
+    <section id="comparative" class="section">
+        <h2 class="section-title">O Custo da Tecnologia: Tradicional vs Inovare AI</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Entenda a matemática da escala. Veja por que a substituição parcial de atendimento humano por Inteligência Artificial é o maior salto de lucratividade da década.
+        </p>
+
+        <div class="comparison-container reveal">
+            <div class="comp-table">
+                <div class="comp-header">
+                    <div class="comp-col">Critério</div>
+                    <div class="comp-col human-col">Atendimento Humano</div>
+                    <div class="comp-col bot-col text-gradient" style="font-weight: 800;">Agente Inovare AI</div>
+                </div>
+                
+                <div class="comp-row">
+                    <div class="comp-col font-medium">Disponibilidade</div>
+                    <div class="comp-col human-col text-red-400">8h/dia, 5 dias/semana</div>
+                    <div class="comp-col bot-col text-green-400">24/7 (Feriados Inclusos)</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">Custo Mensal Estimado</div>
+                    <div class="comp-col human-col text-red-400">~ R$ 2.500 (Salário + Encargos)</div>
+                    <div class="comp-col bot-col text-green-400">A partir de R$ 199,00</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">Capacidade Simultânea</div>
+                    <div class="comp-col human-col text-red-400">~ 3 a 5 clientes</div>
+                    <div class="comp-col bot-col text-green-400">Centenas de clientes simultâneos</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">Tempo de Resposta</div>
+                    <div class="comp-col human-col text-red-400">Minutos a horas (Forma Fila)</div>
+                    <div class="comp-col bot-col text-green-400">Instantâneo (Zero Fila)</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">Controle Emocional (NPS)</div>
+                    <div class="comp-col human-col text-red-400">Pode variar com o cansaço</div>
+                    <div class="comp-col bot-col text-green-400">100% de Paciência e Polidez</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">Curva de Aprendizado</div>
+                    <div class="comp-col human-col text-red-400">Meses de Treinamento</div>
+                    <div class="comp-col bot-col text-green-400">Imediato (Base de Conhecimento)</div>
+                </div>
+            </div>
+            
+            <!-- Explícito: Custo de Ferramentas Isoladas -->
+            <div style="margin-top: 3rem; background: rgba(255,0,0,0.05); border: 1px solid rgba(255,0,0,0.2); border-radius: 12px; padding: 2rem;">
+                <h3 style="color: #fff; text-align: center; margin-bottom: 1.5rem;">O Custo Real de Ferramentas Isoladas (Modelo Tradicional)</h3>
+                <ul style="list-style: none; padding: 0; max-width: 500px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem; line-height: 2;">
+                    <li style="display: flex; justify-content: space-between;"><span>Atendimento e CRM (Zendesk p/ 3 usuários):</span> <span class="text-red-400">~R$ 1.950,00</span></li>
+                    <li style="display: flex; justify-content: space-between;"><span>Inteligência Artificial (Intercom):</span> <span class="text-red-400">~R$ 1.200,00</span></li>
+                    <li style="display: flex; justify-content: space-between;"><span>Automação de Processos (Zapier):</span> <span class="text-red-400">~R$ 580,00</span></li>
+                    <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 1rem;"><span>API Oficial de WhatsApp:</span> <span class="text-red-400">~R$ 300,00</span></li>
+                    <li style="display: flex; justify-content: space-between; font-weight: bold; color: #fff; font-size: 1.3rem;"><span>TOTAL MENSAL ESTIMADO:</span> <span class="text-red-400">R$ 4.030,00</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos (Quem usa não volta atrás) -->
+    <section id="testimonials" class="section">
+        <h2 class="section-title">Quem usa, não volta atrás</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Veja como empresas reais estão revolucionando o atendimento e cortando custos operacionais com a Inovare AI.
+        </p>
+
+        <div class="features-grid reveal delay-100">
+            <div class="feature-card glass" style="padding: 2rem;">
+                <div style="color: #fbbf24; margin-bottom: 1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="color: var(--text-muted); font-style: italic; line-height: 1.6; margin-bottom: 1.5rem;">
+                    "Minha recepcionista respondia 150 mensagens por dia. Hoje a IA resolve confirmações, planos de saúde aceitos e triagem inicial. Ela agora foca no que realmente precisa de atenção humana."
+                </p>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://randomuser.me/api/portraits/men/85.jpg" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent);">
+                    <div>
+                        <h4 style="color: #fff; font-size: 1rem; margin: 0;">Rafael Souza</h4>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Clínica de Ortopedia</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="feature-card glass" style="padding: 2rem;">
+                <div style="color: #fbbf24; margin-bottom: 1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="color: var(--text-muted); font-style: italic; line-height: 1.6; margin-bottom: 1.5rem;">
+                    "Leads de test drive agora chegam qualificados: o agente já perguntou o modelo, orçamento e o melhor horário. Minha equipe só entra para fechar. Nossa taxa de conversão explodiu."
+                </p>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent);">
+                    <div>
+                        <h4 style="color: #fff; font-size: 1rem; margin: 0;">Carlos Henrique</h4>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Gerente de Concessionária</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card glass" style="padding: 2rem;">
+                <div style="color: #fbbf24; margin-bottom: 1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="color: var(--text-muted); font-style: italic; line-height: 1.6; margin-bottom: 1.5rem;">
+                    "O assistente responde no exato tom da minha clínica e envia lembretes 24h antes. O follow-up automático ainda trouxe de volta vários clientes que tinham sumido há meses."
+                </p>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent);">
+                    <div>
+                        <h4 style="color: #fff; font-size: 1rem; margin: 0;">Mariana Costa</h4>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Clínica de Estética</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Table Section -->
+    <section id="roi-table" class="section bg-darker">
+        <h2 class="section-title">Projeção de Economia em Escala (ROI)</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Compare o custo completo de operar com um time humano (Salário + Encargos de 70%) versus o sistema Inovare.
+        </p>
+
+        <div class="comparison-container reveal">
+            <div class="comp-table" style="max-width: 1100px;">
+                <div class="comp-header">
+                    <div class="comp-col">Período</div>
+                    <div class="comp-col human-col">1 Salário Base</div>
+                    <div class="comp-col human-col">Salário + Encargos</div>
+                    <div class="comp-col human-col text-red-400">Operação 24/7 (Mín. 4)</div>
+                    <div class="comp-col bot-col text-gradient" style="font-weight: 800;">Sistema Inovare</div>
+                </div>
+                
+                <div class="comp-row">
+                    <div class="comp-col font-medium">1 Mês</div>
+                    <div class="comp-col human-col text-muted">R$ 1.500,00</div>
+                    <div class="comp-col human-col text-muted">R$ 3.000,00</div>
+                    <div class="comp-col human-col text-red-400 font-medium">R$ 12.000,00</div>
+                    <div class="comp-col bot-col text-green-400">Fração do Custo</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">1 Ano</div>
+                    <div class="comp-col human-col text-muted">R$ 18.000,00</div>
+                    <div class="comp-col human-col text-muted">R$ 36.000,00</div>
+                    <div class="comp-col human-col text-red-400 font-medium">R$ 144.000,00</div>
+                    <div class="comp-col bot-col text-green-400">Valor Fixo e Previsível</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">5 Anos</div>
+                    <div class="comp-col human-col text-muted">R$ 90.000,00</div>
+                    <div class="comp-col human-col text-muted">R$ 180.000,00</div>
+                    <div class="comp-col human-col text-red-400 font-medium">R$ 720.000,00</div>
+                    <div class="comp-col bot-col text-green-400">Economia Massiva</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-col font-medium">10 Anos</div>
+                    <div class="comp-col human-col text-muted">R$ 180.000,00</div>
+                    <div class="comp-col human-col text-muted">R$ 360.000,00</div>
+                    <div class="comp-col human-col text-red-400 font-medium">R$ 1.440.000,00</div>
+                    <div class="comp-col bot-col text-green-400" style="font-weight: 800;">Zero Passivo Trabalhista</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatwoot Section -->
+    <section id="chatwoot" class="section" style="background: rgba(255,255,255,0.01);">
+        <h2 class="section-title">Painel de Atendimento Centralizado (Chatwoot)</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            A inteligência artificial atende 80% das demandas, e a sua equipe humana assume o resto em um painel unificado e profissional.
+        </p>
+
+        <div class="features-grid reveal delay-100">
+            <div class="feature-card glass">
+                <i class="fa-solid fa-users-gear feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">Multi-Atendimento</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Conecte vários atendentes humanos ao mesmo número de WhatsApp. Distribua conversas, transfira departamentos e tenha controle total em tempo real.
+                </p>
+            </div>
+            
+            <div class="feature-card glass">
+                <i class="fa-solid fa-list-check feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">Caixa de Entrada Universal</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Acompanhe todas as conversas do WhatsApp Web API num único painel colaborativo. Organize filas de espera e adicione notas internas invisíveis para o cliente.
+                </p>
+            </div>
+
+            <div class="feature-card glass">
+                <i class="fa-solid fa-robot feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">Handoff Perfeito (IA para Humano)</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Quando o robô não sabe ou a demanda exige atenção especial, ele avisa a equipe no Chatwoot e o humano assume exatamente de onde o bot parou.
+                </p>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- Before / After Slider -->
+        <div class="reveal delay-150" style="max-width: 800px; margin: 3rem auto 0 auto; position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="position: relative; width: 100%; height: 350px; background: #0a1930;">
+                <div style="position: absolute; top:0; left:0; width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: flex-end; padding: 2rem; background: url('https://images.unsplash.com/photo-1590650046522-7988358461db?auto=format&fit=crop&q=80&w=800') center/cover;">
+                    <div style="background: rgba(0,0,0,0.8); padding: 1rem 2rem; border-radius: 8px; border: 1px solid rgba(37,211,102,0.3);"><h3 style="color: #25D366; margin: 0; font-size: 1.2rem;">DEPOIS (Caixa Organizada)</h3></div>
+                </div>
+                <div id="slider-before" style="position: absolute; top:0; left:0; width: 50%; height: 100%; overflow: hidden; display: flex; align-items: flex-end; justify-content: flex-start; padding: 2rem; background: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800') center/cover;">
+                    <div style="background: rgba(0,0,0,0.8); padding: 1rem 2rem; border-radius: 8px; border: 1px solid rgba(255,95,86,0.3);"><h3 style="color: #ff5f56; margin: 0; font-size: 1.2rem; min-width: 250px;">ANTES (Caos no Celular)</h3></div>
+                </div>
+                <input type="range" min="0" max="100" value="50" oninput="document.getElementById('slider-before').style.width = this.value + '%'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10;">
+                <div style="position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: #fff; pointer-events: none; z-index: 5;" id="slider-line">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.5);"><i class="fa-solid fa-arrows-left-right"></i></div>
+                </div>
+            </div>
+            <script>
+                const range = document.querySelector('input[type="range"]');
+                const line = document.getElementById('slider-line');
+                range.addEventListener('input', (e) => {
+                    line.style.left = e.target.value + '%';
+                });
+            </script>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;" class="reveal delay-200">
+            <a href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20gostaria%20de%20testar%20gratuitamente%20o%20painel%20Chatwoot." target="_blank" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: #000; font-weight: bold;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem; color: #25D366;"></i> Agendar Teste Grátis do Chatwoot
+            </a>
+        </div>
+    </section>
+
+    <!-- Piloto Automático de Vendas e Reputação -->
+    <section id="automation" class="section bg-darker">
+        <h2 class="section-title">Piloto Automático de Vendas e Reputação</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Não deixe dinheiro na mesa nem avaliações passarem em branco. Nossa IA persegue resultados ativamente para você.
+        </p>
+
+        <div class="features-grid reveal delay-100">
+            <div class="feature-card glass">
+                <i class="fa-solid fa-star feature-icon" style="color: #fbbf24;"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Gestor de Reputação (NPS e Reviews)</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    Receba mais avaliações 5 estrelas no Google Meu Negócio. A IA envia pedidos de avaliação automaticamente logo após a finalização de um bom atendimento.
+                </p>
+            </div>
+            
+            <div class="feature-card glass">
+                <i class="fa-solid fa-rotate-left feature-icon" style="color: var(--accent);"></i>
+                <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Follow-up Implacável</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">
+                    O cliente parou de responder no meio do orçamento? A IA agenda retornos automáticos horas ou dias depois para reaquecer o lead e fechar a venda, sem você precisar lembrar.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem Section (From PDF Page 4) -->
+    <section id="ecosystem" class="section">
+        <h2 class="section-title">Ecossistema de Soluções e Produtos</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Módulos, funcionalidades e habilidades avançadas exclusivas (Expansões Opcionais) disponíveis na plataforma Inovare AI para transformar completamente a sua operação.
+        </p>
+
+        <!-- Terminal Animation -->
+        <div class="terminal-box reveal delay-100" style="background: #0d1117; border-radius: 8px; border: 1px solid #30363d; max-width: 800px; margin: 0 auto 3rem auto; font-family: monospace; text-align: left; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="background: #161b22; padding: 10px; display: flex; gap: 8px; border-bottom: 1px solid #30363d;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></div>
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></div>
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></div>
+            </div>
+            <div style="padding: 20px; color: #c9d1d9; font-size: 0.9rem; line-height: 1.5; min-height: 150px;">
+                <span style="color: #7ee787;">inovare@admin:~$</span> npm run start:agent<br>
+                <span id="term-line1" style="opacity: 0;">[INFO] Conectando instâncias de WhatsApp... [OK]</span><br>
+                <span id="term-line2" style="opacity: 0;">[INFO] Carregando Memória Longo Prazo... [OK]</span><br>
+                <span id="term-line3" style="opacity: 0; color: #25D366;">[SUCCESS] Agente Online e aguardando leads na porta 3000.</span><br>
+                <span id="term-cursor" style="opacity: 0; display: inline-block; width: 8px; height: 15px; background: #fff; animation: blink 1s infinite;"></span>
+            </div>
+        </div>
+        
+        <script>
+            // Simple terminal animation sequence
+            setTimeout(() => { document.getElementById('term-line1').style.opacity = '1'; }, 2000);
+            setTimeout(() => { document.getElementById('term-line2').style.opacity = '1'; }, 3500);
+            setTimeout(() => { document.getElementById('term-line3').style.opacity = '1'; }, 5000);
+            setTimeout(() => { document.getElementById('term-cursor').style.opacity = '1'; }, 5500);
+        </script>
+
+        <!-- Ecosystem Filter -->
+        <div class="reveal delay-100" style="max-width: 800px; margin: 0 auto 2rem auto; position: relative;">
+            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+            <input type="text" id="eco-filter" onkeyup="filterEcosystem()" placeholder="Pesquisar funcionalidades (ex: Integração, Áudio, NPS...)" style="width: 100%; padding: 1rem 1rem 1rem 3rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-darker); color: #fff; font-size: 1rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+        </div>
+        <script>
+            function filterEcosystem() {
+                const input = document.getElementById('eco-filter');
+                const filter = input.value.toLowerCase();
+                const lists = document.querySelectorAll('.eco-list li');
+                lists.forEach(li => {
+                    const text = li.textContent || li.innerText;
+                    if(text.toLowerCase().indexOf(filter) > -1) {
+                        li.style.display = "";
+                    } else {
+                        li.style.display = "none";
+                    }
+                });
+            }
+        </script>
+
+        <div class="ecosystem-container reveal delay-200">
+            <!-- Módulos e Funcionalidades -->
+            <div class="eco-column">
+                <h3 class="eco-title"><i class="fa-solid fa-cubes"></i> Módulos e Funcionalidades</h3>
+                <ul class="eco-list">
+                    <li><i class="fa-brands fa-whatsapp"></i> Integração Oficial com WhatsApp</li>
+                    <li><i class="fa-solid fa-users"></i> Múltiplos Atendentes no mesmo número</li>
+                    <li><i class="fa-solid fa-link"></i> Integração Nativa com CRM e ERP</li>
+                    <li><i class="fa-solid fa-traffic-light"></i> Triagem Inteligente Automática</li>
+                    <li><i class="fa-solid fa-masks-theater"></i> Análise de Sentimento da IA</li>
+                    <li><i class="fa-solid fa-bag-shopping"></i> Mapeamento de Interesse em Produtos</li>
+                    <li><i class="fa-solid fa-file-pen"></i> Resumo de Conversas para Vendedores</li>
+                    <li><i class="fa-solid fa-file-pdf"></i> Respostas Baseadas em PDF/Documentos</li>
+                    <li><i class="fa-solid fa-rotate-left"></i> Automação de Follow-Up Estratégico</li>
+                    <li><i class="fa-solid fa-cart-shopping"></i> Recuperação Automática de Carrinho</li>
+                    <li><i class="fa-solid fa-file-invoice-dollar"></i> Geração de Propostas e Orçamentos</li>
+                    <li><i class="fa-solid fa-bell"></i> Alertas de Novos Leads Quentes</li>
+                    <li><i class="fa-solid fa-clipboard-list"></i> Captação e Preenchimento de Formulários</li>
+                    <li><i class="fa-regular fa-calendar-check"></i> Agendamento de Consultas e Reuniões</li>
+                    <li><i class="fa-solid fa-clock"></i> Lembretes Automatizados de Compromissos</li>
+                    <li><i class="fa-solid fa-box"></i> Rastreamento e Status de Pedidos</li>
+                    <li><i class="fa-solid fa-ticket"></i> Criação e Gestão de Tickets de Suporte</li>
+                    <li><i class="fa-solid fa-moon"></i> Automação de Avisos (Fora de Expediente)</li>
+                    <li><i class="fa-solid fa-money-bill-wave"></i> Gestão de Cobranças e Vencimentos</li>
+                    <li><i class="fa-solid fa-file-invoice"></i> Emissão Automática de 2ª Via de Boleto</li>
+                    <li><i class="fa-solid fa-star"></i> Pesquisa de Satisfação Automática (NPS)</li>
+                    <li><i class="fa-solid fa-rocket"></i> Estrutura para Disparo de Campanhas</li>
+                    <li><i class="fa-solid fa-folder-tree"></i> Organização de Filas por Departamento</li>
+                    <li><i class="fa-solid fa-dice"></i> Distribuição Automática de Leads</li>
+                    <li><i class="fa-solid fa-tags"></i> Segmentação Automática via Tags</li>
+                    <li><i class="fa-solid fa-bolt"></i> Respostas Rápidas Padronizadas</li>
+                    <li><i class="fa-solid fa-magnifying-glass"></i> Auditoria Completa do Histórico</li>
+                    <li><i class="fa-solid fa-chart-line"></i> Relatórios de Produtividade</li>
+                </ul>
+            </div>
+
+            <!-- Habilidades Avançadas -->
+            <div class="eco-column">
+                <h3 class="eco-title"><i class="fa-solid fa-brain"></i> Habilidades Avançadas (Multimodal)</h3>
+                <ul class="eco-list highlight-list">
+                    <li><i class="fa-solid fa-microphone-lines"></i> Transcrição e Compreensão de Áudios</li>
+                    <li><i class="fa-solid fa-camera"></i> Análise e Interpretação de Imagens e Fotos</li>
+                    <li><i class="fa-solid fa-video"></i> Análise e Processamento de Vídeos Recebidos</li>
+                    <li><i class="fa-solid fa-wave-square"></i> Respostas em Áudio com Clonagem de Voz</li>
+                    <li><i class="fa-solid fa-layer-group"></i> Quebra Estratégica de Mensagens</li>
+                    <li><i class="fa-solid fa-hourglass-half"></i> Atraso Inteligente de Digitação</li>
+                    <li><i class="fa-solid fa-comment-dots"></i> Exibição de "Gravando Áudio..." ou "Digitando..."</li>
+                    <li><i class="fa-solid fa-memory"></i> Memória Persistente de Longo Prazo</li>
+                    <li><i class="fa-solid fa-sliders"></i> Ajuste Dinâmico de Personalidade e Tom</li>
+                    <li><i class="fa-solid fa-file-contract"></i> Geração de Contratos em Tempo Real</li>
+                    <li><i class="fa-solid fa-gear"></i> Conversão e Manipulação de Mídia (FFmpeg)</li>
+                    <li><i class="fa-solid fa-globe"></i> Pesquisa em Tempo Real na Internet</li>
+                </ul>
+            </div>
+            
+            <!-- Recursos Adicionais e Controle -->
+            <div class="eco-column" style="grid-column: 1 / -1; margin-top: 2rem;">
+                <h3 class="eco-title" style="text-align: center;"><i class="fa-solid fa-shield-halved"></i> Controle Absoluto da Operação</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div class="glass" style="padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <i class="fa-solid fa-eye" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;">Visualizar Atendimento</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Administradores podem visualizar todas as conversas como "espiões".</p>
+                    </div>
+                    <div class="glass" style="padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <i class="fa-solid fa-comments" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;">Chat Interno</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Crie chats privados com sua equipe de trabalho para facilitar a comunicação.</p>
+                    </div>
+                    <div class="glass" style="padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <i class="fa-solid fa-star-half-stroke" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;">Avaliação de Atendentes</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Avalie sua equipe para medir a satisfação final do cliente.</p>
+                    </div>
+                    <div class="glass" style="padding: 1.5rem; border-radius: 12px; text-align: center;">
+                        <i class="fa-solid fa-hashtag" style="color: var(--accent); font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h4 style="color: #fff; margin-bottom: 0.5rem;">Sistema de Protocolo</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Geração de números de protocolo únicos na mensagem inicial ou final.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding e Suporte Especializado -->
+    <section id="onboarding" class="section">
+        <h2 class="section-title">Como entregamos o seu projeto</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 800px; margin-inline: auto;">
+            Nosso compromisso não termina na venda. Oferecemos um processo completo de implementação para garantir o seu sucesso absoluto.
+        </p>
+
+        <div class="accordion-container reveal delay-100" style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <details class="glass" style="margin-bottom: 1rem; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border); cursor: pointer; transition: background 0.3s;" open>
+                <summary style="font-size: 1.2rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 1rem; outline: none;">
+                    <i class="fa-solid fa-handshake-angle" style="color: var(--accent);"></i> 1. Onboarding Especialista
+                </summary>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem; margin-top: 1rem; margin-bottom: 0;">
+                    Nossa equipe técnica configura toda a infraestrutura, conecta suas APIs oficiais e treina a base de conhecimento (RAG) com os dados da sua empresa.
+                </p>
+            </details>
+            <details class="glass" style="margin-bottom: 1rem; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border); cursor: pointer; transition: background 0.3s;">
+                <summary style="font-size: 1.2rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 1rem; outline: none;">
+                    <i class="fa-solid fa-graduation-cap" style="color: var(--accent);"></i> 2. Treinamento da Equipe
+                </summary>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem; margin-top: 1rem; margin-bottom: 0;">
+                    Realizamos workshops práticos com seus vendedores e atendentes para que eles dominem o painel Chatwoot e aproveitem ao máximo a parceria IA-Humano.
+                </p>
+            </details>
+            <details class="glass" style="padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border); cursor: pointer; transition: background 0.3s;">
+                <summary style="font-size: 1.2rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 1rem; outline: none;">
+                    <i class="fa-solid fa-chart-line" style="color: var(--accent);"></i> 3. Otimização Contínua
+                </summary>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem; margin-top: 1rem; margin-bottom: 0;">
+                    Reuniões periódicas de alinhamento e ajustes nos prompts da IA para cobrir novas dúvidas de clientes e garantir a maior taxa de conversão possível.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <h2 class="section-title">Planos do Sistema de Agentes (SaaS)</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin: 0 auto 3rem auto; font-size: 1.1rem;">
+            Escolha a inteligência certa para a sua operação. Construção personalizada do seu agente IA com acesso completo ao painel de configurações.
+        </p>
+        <div style="display: flex; justify-content: center; margin-bottom: 3rem; position: relative; z-index: 10;">
+            <div style="background: rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); display: flex; gap: 0.5rem; position: relative;">
+                <button onclick="setPricing('monthly')" id="tab-monthly" style="background: var(--accent); color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s;">Mensal</button>
+                <button onclick="setPricing('yearly')" id="tab-yearly" style="background: transparent; color: var(--text-muted); border: none; padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s;">Anual (-20%)</button>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Plano Básico -->
+            <div class="price-card reveal delay-100">
+                <h3>Básico</h3>
+                <div class="price-value" id="price-basic">R$ 199<span>/mês</span></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-check"></i> 1 Instância WhatsApp</li>
+                    <li><i class="fa-solid fa-check"></i> Criação de até 3 Agentes de IA</li>
+                    <li><i class="fa-solid fa-check"></i> Engenharia de Prompt (RAG) Básica</li>
+                    <li><i class="fa-solid fa-check"></i> Integração Simples via API</li>
+                    <li><i class="fa-solid fa-check"></i> Chatbots Arena (Testes AB)</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte via Ticket</li>
+                </ul>
+                <a href="cadastro.html" class="btn-outline">Assinar Plano Básico</a>
+            </div>
+
+            <!-- Plano Profissional -->
+            <div class="price-card reveal delay-200">
+                <h3>Profissional</h3>
+                <div class="price-value" id="price-pro">R$ 399<span>/mês</span></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-check"></i> 3 Instâncias WhatsApp</li>
+                    <li><i class="fa-solid fa-check"></i> Criação Ilimitada de Agentes</li>
+                    <li><i class="fa-solid fa-check"></i> RAG & Long Term Memory Avançado</li>
+                    <li><i class="fa-solid fa-check"></i> Guardrails Éticos Absolutos</li>
+                    <li><i class="fa-solid fa-check"></i> Etapas de Funil Avançadas</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte Prioritário (WhatsApp)</li>
+                </ul>
+                <a href="cadastro.html" class="btn-outline">Assinar Plano Profissional</a>
+            </div>
+
+            <!-- Plano Enterprise -->
+            <div class="price-card vip reveal delay-300">
+                <div style="position: absolute; top: -12px; right: -12px; background: #25D366; color: #000; font-size: 0.8rem; font-weight: bold; padding: 0.4rem 1rem; border-radius: 20px; box-shadow: 0 4px 10px rgba(37,211,102,0.4);">TESTE GRÁTIS DISPONÍVEL</div>
+                <h3>Enterprise</h3>
+                <div class="price-value" style="font-size: 2.2rem; margin-top: 0.5rem; margin-bottom: 2.3rem;">Sob Consulta</div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-check"></i> Instâncias WhatsApp Ilimitadas</li>
+                    <li><i class="fa-solid fa-check"></i> Modelos Fine-Tuned (Customizados)</li>
+                    <li><i class="fa-solid fa-check"></i> Automação N8N Dedicada Exclusiva</li>
+                    <li><i class="fa-solid fa-check"></i> Onboarding e Treinamento de Equipe</li>
+                    <li><i class="fa-solid fa-check"></i> Painel White-label (Sua Marca)</li>
+                    <li><i class="fa-solid fa-check"></i> SLAs de Performance Garantidos</li>
+                    <li><i class="fa-solid fa-check"></i> Gerente de Conta Exclusivo</li>
+                </ul>
+                <a href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20gostaria%20de%20um%20teste%20gr%C3%A1tis%20do%20SDR%20Personalizado%20(Plano%20Enterprise)." target="_blank" class="btn-primary glow-pulse" style="background: #25D366; color: #000;"><i class="fa-brands fa-whatsapp"></i> Teste Grátis do SDR</a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: var(--text-muted);">
+            <p style="font-size: 0.9rem; margin-bottom: 1rem;"><i class="fa-solid fa-lock" style="color: #25D366;"></i> Pagamento 100% Seguro via Asaas e Stripe</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; opacity: 0.6; filter: grayscale(100%);">
+                <i class="fa-brands fa-cc-visa" style="font-size: 2rem;"></i>
+                <i class="fa-brands fa-cc-mastercard" style="font-size: 2rem;"></i>
+                <i class="fa-brands fa-pix" style="font-size: 2rem;"></i>
+            </div>
+        </div>
+        <script>
+            function setPricing(period) {
+                const btnM = document.getElementById('tab-monthly');
+                const btnY = document.getElementById('tab-yearly');
+                const pB = document.getElementById('price-basic');
+                const pP = document.getElementById('price-pro');
+                
+                if(period === 'monthly') {
+                    btnM.style.background = 'var(--accent)';
+                    btnM.style.color = '#fff';
+                    btnY.style.background = 'transparent';
+                    btnY.style.color = 'var(--text-muted)';
+                    pB.innerHTML = 'R$ 199<span>/mês</span>';
+                    pP.innerHTML = 'R$ 399<span>/mês</span>';
+                } else {
+                    btnY.style.background = 'var(--accent)';
+                    btnY.style.color = '#fff';
+                    btnM.style.background = 'transparent';
+                    btnM.style.color = 'var(--text-muted)';
+                    // 20% off yearly logic
+                    pB.innerHTML = 'R$ 159<span>/mês</span> <div style="font-size:1rem;color:var(--text-muted);">(cobrado anualmente)</div>';
+                    pP.innerHTML = 'R$ 319<span>/mês</span> <div style="font-size:1rem;color:var(--text-muted);">(cobrado anualmente)</div>';
+                }
+            }
+        </script>
+    </section>
+
+    <!-- Hosting Plans Section -->
+    <section id="hosting" class="section bg-darker">
+        <h2 class="section-title">Infraestrutura: Servidor Próprio</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin: 0 auto 3rem auto; font-size: 1.1rem;">
+            Para quem precisa da infraestrutura completa. Todos os planos incluem a contratação das ferramentas essenciais como <strong>n8n, Chatwoot e API de WhatsApp Oficial</strong>.
+        </p>
+        <div class="pricing-grid">
+            <div class="price-card reveal delay-100">
+                <h3>Cloud</h3>
+                <div class="price-value">R$ 0,00<span>/mês</span></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-check"></i> Instalação na Nuvem (Base)</li>
+                    <li><i class="fa-solid fa-check"></i> n8n Incluído</li>
+                    <li><i class="fa-solid fa-check"></i> Chatwoot Incluído</li>
+                    <li><i class="fa-solid fa-check"></i> API WhatsApp Oficial</li>
+                </ul>
+                <a href="https://wa.me/5591984698653" target="_blank" class="btn-outline">Consultar Cloud</a>
+            </div>
+
+            <div class="price-card reveal delay-200">
+                <h3>Premium</h3>
+                <div class="price-value">R$ 499,00<span>/mês</span></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-check"></i> Servidor de Alta Performance</li>
+                    <li><i class="fa-solid fa-check"></i> n8n Incluído</li>
+                    <li><i class="fa-solid fa-check"></i> Chatwoot Incluído</li>
+                    <li><i class="fa-solid fa-check"></i> API WhatsApp Oficial</li>
+                    <li><i class="fa-solid fa-check"></i> Backups Diários</li>
+                </ul>
+                <a href="https://wa.me/5591984698653" target="_blank" class="btn-outline">Assinar Premium</a>
+            </div>
+
+            <div class="price-card vip reveal delay-300">
+                <h3>Servidor</h3>
+                <div class="price-value">R$ 899,00<span>/mês</span></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-check"></i> Servidor Dedicado Exclusivo</li>
+                    <li><i class="fa-solid fa-check"></i> n8n & Chatwoot Isolados</li>
+                    <li><i class="fa-solid fa-check"></i> API WhatsApp Oficial Limitless</li>
+                    <li><i class="fa-solid fa-check"></i> IPs Dedicados</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte Infra VIP</li>
+                </ul>
+                <a href="https://wa.me/5591984698653" target="_blank" class="btn-primary">Assinar Servidor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section" style="background: linear-gradient(135deg, var(--bg-darker) 0%, #0a1930 100%); text-align: center; padding: 6rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="reveal">
+            <h2 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: #fff; margin-bottom: 1.5rem;">Pronto para transformar seu atendimento?</h2>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 3rem auto; line-height: 1.6;">
+                Em 5 minutos seu agente pode estar configurado e pronto para capturar leads. Experimente a Inovare AI sem compromisso.
+            </p>
+            <a href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20gostaria%20de%20um%20teste%20gr%C3%A1tis%20do%20SDR%20Personalizado%20(Plano%20Enterprise)." target="_blank" class="btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem; background: #25D366; color: #000;">
+                <i class="fa-brands fa-whatsapp"></i> Fazer Teste Grátis no WhatsApp
+            </a>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem;">
+                <i class="fa-solid fa-check" style="color: #25D366;"></i> Sem compromisso &nbsp;&bull;&nbsp; <i class="fa-solid fa-check" style="color: #25D366;"></i> Atendimento Humano &nbsp;&bull;&nbsp; <i class="fa-solid fa-check" style="color: #25D366;"></i> Implantação Rápida
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section bg-darker">
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <div class="faq-accordion reveal delay-200">
+            <div class="faq-item">
+                <div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+                    Como é o acesso? <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>O acesso de conexão é feito diretamente na sua API de WhatsApp contratada e no seu painel de configurações da sua IA.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+                    Como funciona a ferramenta do Chatwoot? <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>Caso o cliente queira, temos profissionais que têm treinamento da ferramenta que indicamos.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+                    O que eu ganho ao indicar vocês? <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>A sua mensalidade do mês será por nossa conta, independente do valor do plano que seu indicado contratar.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+                    O que preciso para instalar? <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>Você não precisa instalar nada. Tudo será armazenado em nuvem nos nossos servidores.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+                    Tem suporte para tirar dúvidas? <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-content">
+                    <p>Sim, temos uma equipe especializada para te ajudar via WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Inovare AI - Todos os direitos reservados. Arquitetura Premium para Negócios de Alta Conversão.</p>
+    </footer>
+
+    <!-- Gatilhos Mentais Extremistas: Pop-up Exit Intent -->
+    <div id="exit-intent-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100000; justify-content: center; align-items: center;">
+        <div style="background: var(--bg-darker); padding: 3rem; border-radius: 12px; border: 1px solid var(--accent); max-width: 500px; text-align: center; position: relative;">
+            <button onclick="document.getElementById('exit-intent-popup').style.display='none'" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 style="color: #fff; margin-bottom: 1rem;">Espere! Não saia ainda...</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Que tal um <strong>Teste Gratuito</strong> para ver a Inovare AI funcionando no seu negócio na prática?</p>
+            <p style="color: #fbbf24; font-weight: bold; margin-bottom: 2rem;" id="countdown-timer">Oferta expira em: 05:00</p>
+            <a href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20vi%20a%20oferta%20antes%20de%20sair%20e%20quero%20o%20teste%20gr%C3%A1tis!" target="_blank" class="btn-primary" style="background: #25D366; color: #000; width: 100%; display: flex; justify-content: center; gap: 0.5rem;"><i class="fa-brands fa-whatsapp"></i> Pegar meu Teste Grátis</a>
+        </div>
+    </div>
+
+    <!-- Gatilhos Mentais Extremistas: Social Proof Toast -->
+    <div id="social-proof-toast" style="position: fixed; bottom: -100px; left: 20px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; display: flex; align-items: center; gap: 1rem; z-index: 99998; transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" alt="User">
+        <div>
+            <p style="color: #fff; font-size: 0.9rem; margin: 0; font-weight: bold;">Carlos de São Paulo</p>
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">acabou de assinar o Plano Servidor</p>
+        </div>
+    </div>
+
+    <!-- Gatilhos Mentais Extremistas: ROI Modal -->
+    <div id="roi-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100000; justify-content: center; align-items: center;">
+        <div style="background: var(--bg-darker); padding: 3rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); max-width: 500px; text-align: center; position: relative;">
+            <button onclick="document.getElementById('roi-modal').style.display='none'" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 style="color: #fff; margin-bottom: 1rem;">Calcule sua Economia</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Quantos atendentes humanos você tem hoje?</p>
+            <input type="number" id="roi-input" value="3" min="1" max="100" style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff; font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem;">
+            <div style="background: rgba(37,211,102,0.1); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(37,211,102,0.3);">
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Sua economia projetada no ano:</p>
+                <h3 id="roi-result" style="color: #25D366; font-size: 2rem; margin: 0;">R$ 126.000,00</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Buttons (WA + ROI) -->
+    <div style="position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 1rem; z-index: 99997;">
+        <button onclick="document.getElementById('roi-modal').style.display='flex'; calculateROI();" class="float-btn" style="width: 60px; height: 60px; border-radius: 50%; background: #0a1930; color: #fff; border: 1px solid var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fa-solid fa-calculator" style="font-size: 1.5rem;"></i>
+        </button>
+        <a href="https://wa.me/5591984698653" target="_blank" class="float-wa" style="position: static; margin: 0; box-shadow: 0 4px 15px rgba(37,211,102,0.5);">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Chatbot Widget Placeholder (Bottom Left) -->
+    <div id="chatbot-widget" style="position: fixed; bottom: 30px; left: 30px; z-index: 99996; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; transition: transform 0.3s; animation: float-up 2s ease forwards;">
+        <style>@keyframes float-up { 0% { transform: translateY(100px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }</style>
+        <div style="background: var(--bg-darker); border: 1px solid var(--accent); padding: 1rem; border-radius: 12px; border-bottom-left-radius: 0; box-shadow: 0 10px 25px rgba(0,0,0,0.5); max-width: 250px; position: relative;">
+            <button onclick="document.getElementById('chatbot-widget').style.display='none'" style="position: absolute; top: -10px; right: -10px; background: #ff5f56; border: none; width: 20px; height: 20px; border-radius: 50%; color: white; cursor: pointer; font-size: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5);">&times;</button>
+            <p style="font-size: 0.9rem; color: #fff; margin: 0; line-height: 1.4;">Olá! Eu sou a IA da Inovare. Como posso te ajudar a escalar hoje?</p>
+        </div>
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--primary-glow); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fa-solid fa-robot" style="font-size: 1.5rem; color: #fff;"></i>
+        </div>
+    </div>
+
+    <!-- MAIN SCRIPT LOGIC -->
+    <script>
+        // Custom Cursor & Progress Bar & Loader & ROI & Social Proof
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                }, 100);
+            }
+        });
+        
+        // Failsafe timeout
+        setTimeout(() => {
+            const loader = document.getElementById('page-loader');
+            if (loader && loader.style.display !== 'none') {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        }, 2000);
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const pb = document.getElementById('progress-bar');
+            if (pb) pb.style.width = scrolled + '%';
+        });
+
+        const cursor = document.getElementById('custom-cursor');
+        if (cursor) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, button, .feature-card, .price-card, .faq-item').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+            });
+        }
+
+        // Exit Intent Pop-up
+        let exitIntentShown = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !exitIntentShown) {
+                exitIntentShown = true;
+                const popup = document.getElementById('exit-intent-popup');
+                if(popup) popup.style.display = 'flex';
+                startCountdown();
+            }
+        });
+
+        function startCountdown() {
+            let time = 300; // 5 minutos
+            const cd = document.getElementById('countdown-timer');
+            if(!cd) return;
+            const timer = setInterval(() => {
+                time--;
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                cd.innerText = `Oferta expira em: 0${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (time <= 0) clearInterval(timer);
+            }, 1000);
+        }
+
+        // Social Proof Toast
+        setTimeout(() => {
+            const toast = document.getElementById('social-proof-toast');
+            if (toast) {
+                toast.style.bottom = '20px';
+                setTimeout(() => { toast.style.bottom = '-100px'; }, 6000);
+            }
+        }, 8000);
+
+        // ROI Calculator
+        function calculateROI() {
+            const input = document.getElementById('roi-input');
+            const result = document.getElementById('roi-result');
+            if(input && result) {
+                const employees = parseInt(input.value) || 0;
+                const savings = employees * 42000;
+                result.innerText = `R$ ${savings.toLocaleString('pt-BR')},00`;
+            }
+        }
+        document.getElementById('roi-input')?.addEventListener('input', calculateROI);
+
+        // JS para o IntersectionObserver Reveal das demais seções
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+            
+            // GSAP Scroll Sequence Animations
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                const frames = document.querySelectorAll('.hero-frame');
+                const texts = document.querySelectorAll('.hero-text-layer');
+                const totalFrames = frames.length;
+
+                if(frames.length > 0 && texts.length > 0) {
+                    // Estado Inicial
+                    gsap.set(frames[0], { opacity: 0.5, scale: 1 });
+                    gsap.set(texts[0], { opacity: 1, filter: "blur(0px)", y: 0 });
+
+                    // Ocultar os outros frames e textos
+                    for(let i=1; i<totalFrames; i++){
+                        gsap.set(frames[i], { opacity: 0, scale: 1.1 });
+                        gsap.set(texts[i], { opacity: 0, filter: "blur(15px)", y: 50 });
+                    }
+
+                    gsap.to({}, {
+                        scrollTrigger: {
+                            trigger: ".hero-scrub-container",
+                            start: "top top",
+                            end: "bottom bottom",
+                            scrub: 1,
+                            onUpdate: (self) => {
+                                let progress = self.progress;
+                                
+                                // Ocultar dica de scroll no final
+                                const hint = document.querySelector('.scroll-hint');
+                                if(hint) {
+                                    if(progress > 0.9) hint.style.opacity = 0;
+                                    else hint.style.opacity = 0.6;
+                                }
+
+                                let segment = 1 / (totalFrames - 1);
+                                let currentIdx = Math.min(Math.floor(progress / segment), totalFrames - 2);
+                                if(progress === 1) currentIdx = totalFrames - 2;
+                                
+                                let segmentProgress = (progress - (currentIdx * segment)) / segment;
+                                
+                                frames.forEach((f, i) => {
+                                    if (i === currentIdx) {
+                                        // Fade Out
+                                        gsap.set(f, { opacity: 0.5 * (1 - segmentProgress), scale: 1 + (0.1 * segmentProgress) });
+                                        gsap.set(texts[i], { 
+                                            opacity: 1 - segmentProgress, 
+                                            filter: `blur(${segmentProgress * 15}px)`,
+                                            y: -50 * segmentProgress
+                                        });
+                                    } else if (i === currentIdx + 1) {
+                                        // Fade In
+                                        gsap.set(f, { opacity: 0.5 * segmentProgress, scale: 1.1 - (0.1 * segmentProgress) });
+                                        gsap.set(texts[i], { 
+                                            opacity: segmentProgress, 
+                                            filter: `blur(${(1-segmentProgress) * 15}px)`,
+                                            y: 50 * (1 - segmentProgress)
+                                        });
+                                    } else {
+                                        // Escondidos
+                                        gsap.set(f, { opacity: 0 });
+                                        gsap.set(texts[i], { opacity: 0 });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Particles Background Logic
+            const particlesContainer = document.getElementById('particles-container');
+            if (particlesContainer) {
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    const size = Math.random() * 5 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                    particle.style.animationDelay = (Math.random() * 5) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            // Simple 3D Tilt Effect for Price Cards
+            const tiltCards = document.querySelectorAll('.price-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10;
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    card.style.transition = 'transform 0.5s ease';
+                });
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

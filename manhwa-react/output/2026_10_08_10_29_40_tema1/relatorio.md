@@ -1,0 +1,146 @@
+# Relatorio - 2026-10-08 10-29-40_tema1.mp4
+
+- Duracao original: 963.9s
+- Status: rejected
+- Canal: fiodameada
+- Transcricao: groq:whisper-large-v3
+- Editorial: score=2 usable=False - Conversa política opinativa sobre eleições brasileiras, sem valor educacional claro, sem reações fortes e com alto risco de desmonetização por tema político polarizante.
+- Assunto: Opinião política sobre eleições brasileiras e comportamento do eleitor | Obra: None
+
+## Transcricao (CRIADOR = legendado; CONTEUDO = audio do video reagido)
+
+- [00:00.00] **creator**: Seja nas caixinhas, ou seja por compra de voto, cabresto, seja lá o que for.
+- [00:07.84] **creator**: Então, o que resta é o seguinte, se sul, sudeste, centro-oeste não tiver uma votação massiva,
+- [00:15.20] **creator**: ficar esse pessoal com nojinho, porque eu tava... eu tava fazendo umas pesquisas aqui no...
+- [00:23.60] **creator**: Sim, dependendo de onde você coloca, sim.
+- [00:53.60] **creator**: É, em todo... vamos dizer assim, depende de onde é a urna, depende de várias coisas,
+- [01:22.80] **creator**: De uma forma geral, né?
+- [01:24.80] **creator**: Estatística de...
+- [01:28.80] **creator**: De meia, né?
+- [01:30.80] **creator**: De forma geral, é claro que o
+- [01:32.80] **creator**: PL sempre vai...
+- [01:34.80] **creator**: Sempre vai tá mais votado, né?
+- [01:36.80] **creator**: Nessas regiões
+- [01:38.80] **creator**: mais desenvolvidas.
+- [01:40.80] **creator**: Cara, é aquilo que a gente tá falando.
+- [01:42.80] **creator**: Se não acontecer nada...
+- [01:44.80] **creator**: Nada sobrenatural.
+- [01:54.80] **creator**: É, mas...
+- [02:12.40] **creator**: É, ainda mais aqui no país, na República das Bananas, é complicado. Eu não arrisco nenhum palpite, né? Pra mim tudo é possível.
+- [02:24.80] **creator**: N d n d pra dizer assim ah n isso aqui n d pra bater o p Porque da vez a gente acreditou que iria n E dessa vez eu n vou arriscar no palpite Da vez eu n acreditei n umas cagadas que o Bolsonaro fez Eu achei que N me surpreendeu j ele perdendo o primeiro turno
+- [03:26.00] **creator**: É... garantido... nada está. Agora, me preocupa o comportamento do povinho brasileiro, que às vezes eu fico na dúvida se acordou pra vida, se ainda continua acreditando em mentira, porque, porra, agora eles soltaram o arsenal de mentira com força, não?
+- [03:52.00] **creator**: Ah, não, eu vejo tanta coisa, olha, a mina comparando o Brasil com...
+- [03:59.32] **creator**: com os países, né, do Oriente Médio.
+- [04:02.64] **creator**: E assim, olha, as mulheres não perceberam lá quando elas perderam o direito de votar.
+- [04:07.84] **creator**: Aham.
+- [04:08.84] **creator**: É, o cara chamou esse fenômeno lá de...
+- [04:16.04] **creator**: Falso Bolsonaro, irmão, não lembro o que o cara chamou desse fenômeno.
+- [04:19.04] **creator**: Mas é, aquelas mentiras muito escrachadas, é...
+- [04:22.52] **creator**: Ah, o Bolsonaro vai pegar os gays, vai matar todos os gays.
+- [04:26.36] **creator**: Aham.
+- [04:27.36] **creator**: Entendeu?
+- [04:28.36] **creator**: Ah, vai acabar com o Bolsa Família, ah, vai... vai... entendeu?
+- [04:33.44] **creator**: Ah, vai fazer tal coisa.
+- [04:40.44] **creator**: Agora, é difícil acreditar que nos dias de hoje, as pessoas acreditem nisso,
+- [04:46.44] **creator**: Mas aí quando você vê esse número expressivo, como é que você tem perdido no primeiro turno? Cara, eu acho um absurdo.
+- [04:54.44] **creator**: Mas sabe o que as pessoas acreditam Te dizer por qu Porque todo mundo tem o seu grau de influ De imbecilidade N eu n vou dizer nem de imbecilidade
+- [05:08.80] **creator**: É que é diferente tu ouvir uma mentira de uma pessoa que tu não conhece de uma pessoa que tu conhece.
+- [05:15.60] **creator**: Entende? Por exemplo, vamos colocar... tu tem um... vamos colocar duas pessoas em cenários diferentes.
+- [05:23.60] **creator**: É... vou colocar duas mentiras pra equilibrar a situação, né?
+- [05:29.60] **creator**: Ahn.
+- [05:30.60] **creator**: Uma pessoa... tu pega uma pessoa pobre, que ela acompanha um conteúdo de alguém no Instagram de baixíssima qualidade,
+- [05:41.60] **creator**: Que a pessoa simplesmente apoia o governo, ou porque ela tem algum candidato preferido que é do PT, ou porque ela ganha alguma coisa.
+- [05:53.60] **creator**: E aí, tipo assim, o grau de influência que aquela pessoa tem é aquela pessoa que ela acompanha. Ela vê aquela pessoa falar verdades durante quatro anos.
+- [06:06.60] **creator**: Mas, mas... até concordo em partes pelo seguinte, não é possível hoje. Eu não vou nem falar do que dizem, do que deixam de dizer, mas vai, vamos lá. Eu conhecendo ou não conhecendo a pessoa, vai, vamos lá.
+- [06:35.60] **creator**: É... o Emerson chega pra mim e fala que...
+- [06:42.40] **creator**: Deixa eu dar um exemplo absurdo aqui.
+- [06:45.40] **creator**: Vamo... vamo colocar o Luiz, que tem um grau de influência aqui.
+- [06:50.40] **creator**: Se ele dissesse assim...
+- [06:52.40] **creator**: Olha, pessoal, infelizmente a gente recebeu uma...
+- [06:56.40] **creator**: O Luiz não, porque o Luiz ele é muito...
+- [06:59.40] **creator**: Ele é muito... pé no chão pra ser uma pessoa assim.
+- [07:03.40] **creator**: É, mas o que eu tô querendo dizer é o seguinte, vai. Vamos no Lula, que é o mais mentiroso, acho que de todos os políticos que tem nesse país, é o que mais mente.
+- [07:12.40] **creator**: Ele mesmo se contradiz, e hoje tá tudo filmado. Eu não tô falando de ninguém que falou dele, que falou que ele mentiu. Ele mesmo, você vendo as falas dele, você vê ele mentindo e ele se desdizendo.
+- [07:26.40] **creator**: N poss que a pessoa n tenha discernimento pra enxergar isso isso que ela me conforma P pode ser meu irm Se o meu irm estiver mentindo pra mim
+- [07:38.00] **creator**: e um dia ele falar uma coisa e no dia seguinte ele falar completamente diferente sobre a mesma coisa,
+- [07:45.00] **creator**: pô, vamos sacar que o cara tá mentindo, porra.
+- [07:48.00] **creator**: Não tem muita ciência. Não precisa ser um gênio.
+- [07:53.00] **creator**: E hoje em dia tá tudo gravado, tá tudo filmado, porra.
+- [07:57.00] **creator**: E ele mesmo, pior ele confessando aquele vídeo histórico dele lá, falando quando ele viajava, contando as mentiras lá, os números que ele inflava, que aqui no Brasil tinha 50 milhões de pessoas passando fome...
+- [08:11.24] **creator**: Ele inflava não, ele criava do nada.
+- [08:14.66] **creator**: É, ele criava, ele mesmo falou, ele mesmo confessa. Ele gravou um vídeo confessando. Porra, não é possível, não dá pra entender, sinceramente.
+- [08:24.16] **creator**: Quando eu falo que esse porra aí precisa ser estudado, precisa ser estudado, porque não é possível.
+- [08:33.16] **creator**: É, cara, é aquele caso, né? Você tem uma... uma...
+- [08:42.16] **creator**: Como é que eu vou dizer? Você tem... o exemplo que eu acabei de dar é de um grau de influência.
+- [08:51.16] **creator**: Por exemplo, vai ter pessoas, vamo colocar, tem pessoas, é... sem conhecimento dos dois lados.
+- [09:03.16] **creator**: E tem pessoas sensatas dos dois lados, eu acredito, né?
+- [09:09.16] **creator**: Por algum motivo, as sensatas do lado do PT não votam no PL. É só isso que me surpreende, entendeu?
+- [09:16.16] **creator**: Entendeu? Mas... é só essa a minha surpresa, entendeu? Porque a... é... tipo assim... eu acho que todos os dois, acho que os candidatos são... é... ruins.
+- [09:33.16] **creator**: Ah.
+- [09:34.16] **creator**: Aí você tenta votar no menos pior...
+- [09:37.16] **creator**: Exatamente.
+- [09:38.16] **creator**: Eu não entendo porque que as pessoas acham que o Lula é menos pior, as pessoas sensatas
+- [09:44.28] **creator**: não... é só isso que eu não entendo.
+- [09:46.98] **creator**: Entende?
+- [09:47.98] **creator**: Só isso que eu não entendo.
+- [09:48.98] **creator**: Por que que as pessoas sensatas do lado PT acham que ele é menos pior, entendeu?
+- [09:55.20] **creator**: É esse argumento que, na minha opinião, não faz sentido.
+- [10:01.00] **creator**: Entende?
+- [10:02.00] **creator**: Existe... Existe as duas correntes, por exemplo, eu penso o seguinte...
+- [10:07.00] **creator**: O cara já teve aí, somando a eleição dele, a reeleição, o Dio, meu cacete, a 4, já são 18 anos, o cara não entregou o que ele prometeu.
+- [10:17.00] **creator**: Então, porra, eu prefiro testar um cara que ainda não sei o que vai acontecer do que um cara que eu já sei que não vai entregar.
+- [10:24.00] **creator**: Eu penso da mesma maneira.
+- [10:26.00] **creator**: Também, só que tem um bando de gente aí que pensa o seguinte,
+- [10:30.00] **creator**: ah, mas eu sei que ele não vai entregar, mas sei que ele não vai fazer merda maior do que ele já fez.
+- [10:35.00] **creator**: Um grande engano, porque dessa vez ele conseguiu fazer muito mais merda do que os governos.
+- [10:42.00] **creator**: Então, é complicado. Complicado.
+- [10:45.00] **creator**: Eu acho que tem... do meio do PT...
+- [10:49.00] **creator**: Eu acho que tá muito fragmentado entre as pessoas sensatas...
+- [10:57.00] **creator**: Eu não digo as pessoas que acreditam em bestial que a gente acabou de falar,
+- [11:03.00] **creator**: Bolsonaro vai matar os gays, vai tirar todos os direitos das mulheres,
+- [11:08.00] **creator**: eu não digo entre as pessoas que acreditam nisso aí, que essas aí tem dos dois lados, né?
+- [11:12.00] **creator**: Mas entre as pessoas sensatas h muitas pessoas h v grupos de pessoas H o grupo que ele sensato mas ele tem medo que o Bolsonaro que deu o maior reajuste pro Bolsa Fam
+- [11:55.95] **creator**: Pois é. Aí você tem vários outros sensatos. Por exemplo, na Bahia, o PT é majoritariamente PT.
+- [12:04.95] **creator**: Aham. Aí o cara tava falando, olha, o cara tinha que votar e tinha que ficar lá.
+- [12:12.95] **creator**: Aham. Entendeu? Fazendo campanha, fazendo número.
+- [12:16.95] **creator**: Aí por que ele tinha que ficar lá, fazendo campanha e fazendo número? Porque senão ele perdia o emprego dele na prefeitura.
+- [12:24.95] **creator**: Entende? Que também é PT. Então, assim, é... esse cara, ele é o... ele é sensato, ele sabe que não é o melhor. Mas pra ele não resta muita opção. Entende?
+- [12:42.95] **creator**: Aí tem o sensato, que ele é sensato no sentido da minoria. Ele não está pensando na maioria, ele está pensando apenas na classe dele.
+- [12:51.95] **creator**: Por exemplo ele trabalha no MST n Ele trabalha com um neg de sem terra Entendeu A pra ele o mundo dele aquele a mesma quest do Bolsa Fam
+- [13:08.90] **creator**: Ele não quer saber se é bom pra todo mundo. Ele quer saber se é bom pra minoria dele.
+- [13:13.90] **creator**: E o PT querendo ou não, ele é um governo muito de agregar minorias, entendeu?
+- [13:18.90] **creator**: Perdendo no geral. O PT sempre perde no geral, né?
+- [13:23.90] **creator**: Tipo assim, vou... a população toda que se ferrem, mas a minoria que eu vou ajudar.
+- [13:29.90] **creator**: E essa minoria, é... acaba muitas vezes fazendo muito barulho.
+- [13:35.90] **creator**: E aí essas pessoas... então assim, tem vários grupos de pessoas sensatas que votam por vários motivos diferentes.
+- [13:44.90] **creator**: Ou porque estão beneficiando de alguma forma...
+- [13:47.90] **creator**: Ó, é... por exemplo, uma coisa que eu vou te dizer, ó. É... serviço social. Você sabe que eu fiz serviço social?
+- [13:56.90] **creator**: Você fez serviço? Não.
+- [13:58.90] **creator**: Fiz serviço social. De formação sou assistente social.
+- [14:04.90] **creator**: É sério?
+- [14:05.90] **creator**: Uma coisa... de verdade. Uma coisa...
+- [14:07.90] **creator**: É sério?
+- [14:08.90] **creator**: Aí...
+- [14:09.90] **creator**: Falando sério.
+- [14:10.90] **creator**: Tô falando sério, não tem nada a ver com nada que eu já trabalhei, mas...
+- [14:13.90] **creator**: Mas... é porque, tipo assim, eu queria fazer uma faculdade, né? Tipo assim, eu passei algumas faculdades, mas eu queria trabalhar, e eu queria trabalhar e queria estudar.
+- [14:27.62] **creator**: E a a faculdade que eu tinha era servi social e o que eu queria fazer mesmo era psicologia na Mas o que tinha mais pr era servi social
+- [14:37.85] **creator**: Na faculdade você já aprendia que o PT era bom. Não, sério, sério, na faculdade... Pô, aí...
+- [14:46.85] **creator**: Fácula... Fácula, diz.
+- [14:48.85] **creator**: Não, mas sabe por quê?
+- [14:50.85] **creator**: Não, mas tinha...
+- [14:52.85] **creator**: Mas tinha lógica, tu sabe por quê?
+- [14:54.85] **creator**: É...
+- [14:55.85] **creator**: Porque todo emprego de serviço social, quem deu...
+- [15:00.85] **creator**: Foi o PT.
+- [15:01.85] **creator**: O PT, é lógico.
+- [15:02.85] **creator**: Tu tá entendendo? Tipo assim, da nossa classe...
+- [15:06.85] **creator**: Quem... é...
+- [15:09.85] **creator**: Quem levantou o serviço social, quem tornou...
+- [15:13.85] **creator**: Aham.
+- [15:28.85] **creator**: Então, mas aí que tá. Mas aí tem uma explicação pra isso.
+- [15:32.85] **creator**: Se você pegar os fundadores do PC,
+- [15:37.85] **creator**: que saíram, que abandonaram o barco,
+- [15:40.85] **creator**: Esqueci o nome. Até um deles ficou muito famoso recentemente, que ele participou do impeachment da Dilma.
+- [15:49.97] **creator**: Não lembro o nome dele. Só... Ele trabalhou muito junto com a Ana... com a Julainha Pascoal lá pelo impeachment da Dilma.
+- [15:58.29] **creator**: Se você pegar entrevistas desses caras que saíram do PP, né?

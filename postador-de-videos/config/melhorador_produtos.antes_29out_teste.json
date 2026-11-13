@@ -1,0 +1,46 @@
+{
+ "_leia": "MELHORADOR automático da linha PRODUTOS (produto\\melhorador.py). DESLIGADO até o dono dar o sinal (LIGAR_MELHORADOR.bat em D:\\video-fila\\linhas\\PRODUTOS). modo 'ensaio' = só propõe e anota; 'aplicar' = aplica com backup e vigia.",
+ "ligado": false,
+ "modo": "ensaio",
+ "cadeia": {
+  "analista": [
+   "gemini-4-argon",
+   "agy/gemini-3.8-flash-high",
+   "gemini/gemini-3.5-flash"
+  ],
+  "decisor": [
+   "gemini-4-argon",
+   "agy/gemini-3.8-flash-high",
+   "gemini/gemini-3.5-flash"
+  ],
+  "revisor": [
+   "gemini-4-argon",
+   "agy/gemini-3.8-flash-high",
+   "gemini/gemini-3.5-flash"
+  ]
+ },
+ "_cadeia": "27/10 15:00 dono: 'por hora usar o Argon com fallback Gemini 3.8'. Revisor = mesma lista: o _chamar põe por último o modelo que decidiu (revisor fica no Gemini quando o Argon decidiu). Antes: melhorador_produtos.antes_argon.json",
+ "modelos_desligados": [
+  "antigravity/claude-opus-4-6-thinking",
+  "argon-kiro",
+  "argon-opus",
+  "argon-pro",
+  "cc/claude-opus-5-5",
+  "kr/claude-sonnet-4.5"
+ ],
+ "_modelos_desligados": "Dono 27/10: por agora NADA de Opus nem Kiro (nem híbridos com eles); só Argon (se houver) e Gemini.",
+ "cc_custo_pontos": 6,
+ "cc_certeza": 1.5,
+ "indisponivel_h": 2,
+ "max_mudancas": 2,
+ "desfazer_se_cair": 0.5,
+ "max_regras": 20,
+ "pausa_min": 30,
+ "conversa": {
+  "cadeia": [
+   "agy/gemini-3.8-flash-high",
+   "gemini/gemini-3.5-flash"
+  ],
+  "_leia": "modelo do chat da dona com o melhorador (CONVERSAR_MELHORADOR.bat); dono 27/10: Gemini por agora, modelo novo de código será testado depois"
+ }
+}

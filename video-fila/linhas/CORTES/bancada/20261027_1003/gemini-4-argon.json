@@ -1,0 +1,42 @@
+{
+ "modelo": "gemini-4-argon",
+ "segundos": 122,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Garanta títulos exclusivos e sem erros ortográficos no topo, proibindo sobreposições com outros textos ou tarjas da fonte.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "Nos testes do lote, o júri apontou falhas recorrentes nos títulos do topo e sobreposições gráficas. Em sem-obra-8a49d5 (q01), houve sobreposição total de dois títulos no topo, enquanto em sem-obra-110e14 (q01) o título superior apresentou erro ortográfico ('SOCOMANDO').",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Garanta títulos exclusivos e sem erros ortográficos no topo, proibindo sobreposições com outros textos ou tarjas da fonte.",
+    "porque": "Evita conflitos visuais e erros crassos como em sem-obra-8a49d5 (q01) e sem-obra-110e14 (q01)."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Corrigir posicionamento de elementos de engajamento para não cobrir rostos",
+    "tipo": "CERTEZA",
+    "prova": "Em sem-obra-8a49d5 (q11 e q15), o botão vermelho 'INSCREVA-SE' ficou centralizado exatamente sobre o rosto e a cabeça do personagem.",
+    "onde": "pipeline/overlays ou gerador de elementos visuais",
+    "como_testar": "Verificar se o posicionamento de selos e botões de inscrição respeita a zona segura fora do rosto dos personagens."
+   }
+  ],
+  "mural": [
+   "Linha CORTES reforçando o rigor com a formatação e unicidade de títulos no topo."
+  ]
+ }
+}

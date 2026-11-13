@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vídeo de anúncio com IA</title><meta name="robots" content="noindex">
+<style>
+:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}
+:root[data-theme="dark"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}
+*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}
+.w{max-width:800px;margin:0 auto}h1{font-size:28px;line-height:1.2}.sub{color:var(--tx2);margin-top:6px}
+.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-top:16px}.card h2{font-size:17px;margin-bottom:6px}
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.passos div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:13px;color:var(--tx2)}.passos b{display:block;color:var(--tx)}
+.exemplos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.drop{border:2px dashed var(--borda);border-radius:14px;padding:22px 16px;text-align:center;cursor:pointer;color:var(--tx2);margin-top:12px}
+.drop.on{border-color:var(--pri);background:var(--cod)}.drop b{color:var(--tx);display:block;font-size:16px;margin-bottom:2px}
+.grade{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}@media(max-width:600px){.grade{grid-template-columns:repeat(3,1fr)}}
+.ft{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--cod);border:1px solid var(--borda)}
+.ft img{width:100%;height:100%;object-fit:cover;display:block}.ft .n{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;border-radius:99px;padding:1px 7px}
+.ft .tira{position:absolute;right:5px;top:5px;border:0;background:rgba(0,0,0,.65);color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px}
+.ft .est{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);color:#fff;font-size:11.5px;text-align:center;padding:3px}
+.ft .est i{display:block;height:3px;background:var(--pri);margin-top:2px}
+label{display:block;font-weight:600;font-size:14px;margin-top:12px}label small{font-weight:400;color:var(--mu)}
+select,input[type=text],input[type=tel],textarea{width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}
+textarea{min-height:110px;resize:vertical}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.tres{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 12px}
+.chks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.chks label{margin:0;font-weight:500;display:flex;gap:8px;align-items:flex-start;background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:10px}
+.chks label input{margin-top:4px}.chks small{display:block;color:var(--mu);font-weight:400}
+.corlinha{display:flex;gap:10px;align-items:center;margin-top:6px}.corlinha input[type=color]{width:52px;height:40px;border:1px solid var(--borda);border-radius:10px;background:none;padding:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px 20px;border-radius:14px;cursor:pointer}
+.btn.sec{background:var(--sup);color:var(--tx);border:1px solid var(--borda);font-size:14px;padding:9px 14px}
+.btn[disabled]{opacity:.5;cursor:default}
+.erro{color:var(--er);font-weight:600;margin-top:12px}.ok{color:var(--ok);font-weight:600}
+.logo{display:flex;align-items:center;gap:12px;margin-top:10px}.logo img{height:48px;max-width:140px;object-fit:contain;background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 50%/12px 12px;border-radius:8px}
+@media(max-width:600px){.duas,.tres,.chks,.passos{grid-template-columns:1fr}}
+</style></head><body><div class="w">
+<h1>🎬 Vídeo de anúncio com IA</h1>
+<p class="sub">Mande as <b>fotos</b> do que você vende e a IA faz um <b>vídeo de anúncio pronto para Reels, TikTok e Status</b>: roteiro de venda, narração, movimento nas fotos, legenda animada, preço na tela, trilha e o seu contato no final. E ainda ganha uma <b>página do anúncio</b> com botão de WhatsApp.</p>
+<div class="passos"><div><b>1. Fotos</b>de 3 a 15 (do celular serve)</div><div><b>2. Conte</b>o que é, preço e detalhes</div><div><b>3. A IA faz</b>uns 2 a 4 minutos</div><div><b>4. Poste</b>vídeo, legenda e página</div></div>
+
+<div class="card"><h2>1. As fotos</h2>
+  <p class="sub">A IA olha cada foto, escolhe a ordem e o movimento de câmera. Fotos deitadas viram uma "passeada" pela cena no vídeo em pé.</p>
+  <div class="exemplos"><button class="btn sec" type="button" id="ex-ap">🏠 Usar exemplo: apartamento</button><button class="btn sec" type="button" id="ex-hb">🍔 Usar exemplo: hamburgueria</button></div>
+  <div class="drop" id="drop"><b>📤 Toque para escolher as fotos</b>ou arraste aqui (JPG, PNG, WEBP ou HEIC do iPhone · até 25 MB cada)</div>
+  <input type="file" id="arquivos" accept="image/*,.heic,.heif" multiple hidden>
+  <div class="grade" id="grade"></div>
+  <p class="sub" id="info">Nenhuma foto ainda.</p>
+  <label>Logo <small>(opcional · PNG com fundo transparente fica melhor)</small></label>
+  <div class="logo"><button class="btn sec" type="button" id="logo-bt">🏷️ Escolher logo</button><img id="logo-img" alt="" hidden><button class="btn sec" type="button" id="logo-tira" hidden>Remover</button><span class="sub" id="logo-info"></span></div>
+  <input type="file" id="logo-arq" accept="image/png,image/jpeg,image/webp" hidden>
+</div>
+
+<form class="card" id="form"><h2>2. O que você está anunciando</h2>
+  <div class="duas">
+    <div><label for="tipo">Tipo</label><select id="tipo"><option value="imovel">🏠 Imóvel</option><option value="produto" selected>🛍️ Produto</option><option value="comida">🍔 Restaurante / comida</option><option value="veiculo">🚗 Carro ou moto</option><option value="servico">🧰 Serviço</option><option value="evento">🎉 Evento</option><option value="outro">✨ Outro</option></select></div>
+    <div><label for="marca">Nome do negócio <small>(vai no final)</small></label><input type="text" id="marca" maxlength="50" placeholder="Ex.: Imobiliária Vista Alta"></div>
+  </div>
+  <label for="titulo">O que é *</label><input type="text" id="titulo" maxlength="90" placeholder="Ex.: Apartamento 3 quartos com varanda gourmet" required>
+  <div class="duas">
+    <div><label for="preco">Preço <small>(opcional, do seu jeito)</small></label><input type="text" id="preco" maxlength="40" placeholder="Ex.: R$ 890 mil · a partir de R$ 39,90"></div>
+    <div><label for="oferta">Oferta ou condição <small>(opcional)</small></label><input type="text" id="oferta" maxlength="200" placeholder="Ex.: entrada facilitada · frete grátis até sexta"></div>
+  </div>
+  <label for="detalhes">Detalhes e diferenciais * <small>(a IA usa SÓ o que você escrever aqui)</small></label>
+  <textarea id="detalhes" maxlength="1500" placeholder="Ex.: 98 m², 3 quartos (1 suíte), 2 vagas, varanda gourmet com churrasqueira, vista para a cidade, prédio com piscina e academia, perto do metrô."></textarea>
+  <label for="publico">Para quem é <small>(opcional)</small></label><input type="text" id="publico" maxlength="200" placeholder="Ex.: famílias que querem morar perto do metrô">
+  <div class="tres">
+    <div><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" placeholder="(11) 98888-7777"></div>
+    <div><label for="instagram">Instagram</label><input type="text" id="instagram" placeholder="@seunegocio"></div>
+    <div><label for="site">Site <small>(opcional)</small></label><input type="text" id="site" placeholder="seusite.com.br"></div>
+  </div>
+  <label for="endereco">Endereço ou bairro <small>(opcional · vira "Como chegar" na página)</small></label><input type="text" id="endereco" maxlength="160">
+
+  <h2 style="margin-top:20px">3. Como você quer o vídeo</h2>
+  <div class="tres">
+    <div><label for="duracao">Duração <small>(com o cartão final)</small></label><select id="duracao"><option value="15">Curto · até ~20 s</option><option value="30" selected>Médio · ~30 s</option><option value="60">Longo · ~60 s</option></select></div>
+    <div><label for="formato">Formato</label><select id="formato"><option value="vertical">Em pé 9:16 (Reels, TikTok, Status)</option><option value="quadrado">Quadrado 1:1 (feed)</option><option value="deitado">Deitado 16:9 (YouTube, site)</option></select></div>
+    <div><label for="voz">Voz</label><select id="voz"><option value="pt-BR-ThalitaMultilingualNeural">Thalita · feminina ⭐</option><option value="pt-BR-FranciscaNeural">Francisca · feminina</option><option value="en-US-AndrewMultilingualNeural">Andrew · masculina (sotaque leve)</option><option value="en-US-BrianMultilingualNeural">Brian · masculina (sotaque leve)</option></select></div>
+  </div>
+  <div class="duas">
+    <div><label for="clima">Clima da trilha</label><select id="clima"><option value="auto">🤖 A IA escolhe</option><option value="elegante">✨ Elegante</option><option value="animado">🎉 Animado</option><option value="urgente">⚡ Urgente (oferta)</option><option value="emocional">💛 Emocional</option><option value="calmo">🌿 Calmo</option><option value="tropical">🌴 Tropical</option><option value="latino">💃 Latino</option><option value="chill">😎 Chill</option></select></div>
+    <div><label>Cor de destaque <small>(manchete, preço e legenda)</small></label><div class="corlinha"><input type="color" id="cor" value="#c9a227"><label style="margin:0;font-weight:500"><input type="checkbox" id="cor-ia" checked> a IA escolhe</label></div></div>
+  </div>
+  <div class="chks">
+    <label><input type="checkbox" id="legendas" checked><span>Legenda animada<small>a palavra falada em destaque</small></span></label>
+    <label><input type="checkbox" id="versao_musica" checked><span>Versão só com música<small>sem narração, para Stories</small></span></label>
+    <label><input type="checkbox" id="cartao_final" checked><span>Cartão final com contato<small>marca, chamada, WhatsApp e @</small></span></label>
+    <label><input type="checkbox" id="manter_ordem"><span>Manter a ordem das fotos<small>senão a IA monta a melhor história</small></span></label>
+  </div>
+  <p class="erro" id="erro" role="alert"></p>
+  <button class="btn" type="submit" id="enviar" style="width:100%;margin-top:16px">🎬 Criar o vídeo do anúncio</button>
+</form></div>
+<script>
+(function () {
+  var EXURL = {"apartamento": ["https://files.catbox.moe/lofjjm.jpg", "https://files.catbox.moe/zs3gzu.jpg", "https://files.catbox.moe/u3ca8g.jpg", "https://files.catbox.moe/yuif3s.jpg", "https://files.catbox.moe/9nfm29.jpg"], "hamburguer": ["https://files.catbox.moe/mudpbx.jpg", "https://files.catbox.moe/lj04p7.jpg", "https://files.catbox.moe/k4t93w.jpg", "https://files.catbox.moe/ismue4.jpg"]};
+  var el = function (s) { return document.querySelector(s); };
+  var FOTOS = [], LOGO = '', enviando = 0;
+  var EX = {
+    ap: { fotos: [1, 2, 3, 4, 5], pasta: 'apartamento', campos: { tipo: 'imovel', marca: 'Vista Alta Imóveis', titulo: 'Apartamento 3 quartos com varanda gourmet e vista', preco: 'R$ 890 mil', oferta: 'Entrada facilitada em até 36 vezes',
+      detalhes: '98 m² no 12º andar, 3 quartos sendo 1 suíte master, sala ampla com janelas do chão ao teto, cozinha planejada com ilha, varanda gourmet com churrasqueira e vista para a cidade, 2 vagas, prédio novo com portaria 24 horas, piscina e academia.',
+      publico: 'famílias que querem conforto e vista perto do centro', whatsapp: '11988887777', instagram: '@vistaalta.imoveis', site: '', endereco: 'Rua das Palmeiras, 450 - Centro, São Paulo - SP' } },
+    hb: { fotos: [1, 2, 3, 4], pasta: 'hamburguer', campos: { tipo: 'comida', marca: 'Brasa Burger', titulo: 'Combo Brasa: burger artesanal + fritas + milkshake', preco: 'R$ 49,90', oferta: 'Toda terça o milkshake sai pela metade do preço',
+      detalhes: 'Hambúrguer artesanal de 180 g na brasa, cheddar derretido e bacon crocante no pão brioche; fritas rústicas com molho de cheddar; milkshake de chocolate com brownie. Delivery no bairro e salão aberto de terça a domingo, das 18h às 23h.',
+      publico: 'quem ama hambúrguer de verdade', whatsapp: '11977776666', instagram: '@brasaburger', site: '', endereco: 'Av. Brasil, 1200 - Jardins, São Paulo - SP' } }
+  };
+  function desenha() {
+    el('#grade').innerHTML = FOTOS.map(function (f, i) {
+      return '<div class="ft"><img src="' + f.url + '" alt="Foto ' + (i + 1) + '"><span class="n">' + (i + 1) + '</span>' + (f.id ? '<button class="tira" type="button" data-i="' + i + '" aria-label="Remover foto">×</button>' : '<div class="est">' + (f.erro ? '⚠️ ' + f.erro : 'enviando ' + (f.pct || 0) + '%') + (f.erro ? '' : '<i style="width:' + (f.pct || 0) + '%"></i>') + '</div>') + '</div>';
+    }).join('');
+    var ok = FOTOS.filter(function (f) { return f.id; }).length;
+    el('#info').innerHTML = ok ? '✅ <b>' + ok + '</b> foto' + (ok > 1 ? 's' : '') + ' pronta' + (ok > 1 ? 's' : '') + (enviando ? ' · enviando ' + enviando + '…' : '') + (ok < 3 ? ' · mande pelo menos 3' : '') : (enviando ? 'Enviando…' : 'Nenhuma foto ainda.');
+  }
+  el('#grade').addEventListener('click', function (e) { var b = e.target.closest('.tira'); if (!b) return; FOTOS.splice(Number(b.dataset.i), 1); desenha(); });
+  // a foto vai em JPEG de até 2048 px (o logo em PNG de até 800 px, para manter o fundo transparente): sobe rápido e
+  // ocupa pouco no Redis; se o navegador não abrir o arquivo, vai o original
+  function encolhe(arq, logo, pronto) {
+    var img = new Image(), u = URL.createObjectURL(arq), lado = logo ? 800 : 2048;
+    img.onload = function () {
+      var r = Math.min(1, lado / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * r); c.height = Math.round(img.naturalHeight * r);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(u);
+      c.toBlob(function (b) { pronto(b || arq, b ? (logo ? '.png' : '.jpg') : ''); }, logo ? 'image/png' : 'image/jpeg', 0.88);
+    };
+    img.onerror = function () { URL.revokeObjectURL(u); pronto(arq, ''); };
+    img.src = u;
+  }
+  function envia(arq, aoTerminar, aoProgresso, logo) {
+    encolhe(arq, !!logo, function (arquivo, ext) {
+      var nome = ext ? String(arq.name || 'foto').replace(/\.[^.]+$/, '') + ext : (arq.name || 'foto.jpg');
+      var fd = new FormData(); fd.append('arquivo', arquivo, nome);
+      var x = new XMLHttpRequest(); x.open('POST', 'anuncio-video-j2v-foto');  // o n8n guarda a foto (Redis, 30 dias) e devolve o código
+      x.upload.onprogress = function (e) { if (e.lengthComputable && aoProgresso) aoProgresso(Math.round(e.loaded / e.total * 100)); };
+      x.onload = function () { var r = {}; try { r = JSON.parse(x.responseText); } catch (e) {} aoTerminar(x.status === 200 && r.ok ? null : (r.erro || 'não deu para enviar'), r); };
+      x.onerror = function () { aoTerminar('falha de conexão'); };
+      x.send(fd);
+    });
+  }
+  function fila(arqs) {
+    var lista = Array.prototype.slice.call(arqs, 0, Math.max(0, 15 - FOTOS.length));
+    if (arqs.length > lista.length) el('#erro').textContent = 'Máximo de 15 fotos.';
+    (function proxima(i) {
+      if (i >= lista.length) return;
+      var f = { url: URL.createObjectURL(lista[i]), pct: 0 }; FOTOS.push(f); enviando++; desenha();
+      envia(lista[i], function (erro, r) { enviando--; if (erro) f.erro = erro; else f.id = r.id; desenha(); proxima(i + 1); }, function (p) { f.pct = p; desenha(); });
+    })(0);
+  }
+  var drop = el('#drop'), inp = el('#arquivos');
+  drop.addEventListener('click', function () { inp.click(); });
+  ['dragover', 'dragenter'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('on'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });
+  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files.length) fila(e.dataTransfer.files); });
+  inp.addEventListener('change', function () { if (inp.files.length) fila(inp.files); inp.value = ''; });
+  el('#logo-bt').addEventListener('click', function () { el('#logo-arq').click(); });
+  el('#logo-arq').addEventListener('change', function () {
+    var a = el('#logo-arq').files[0]; if (!a) return;
+    el('#logo-info').textContent = 'enviando…';
+    envia(a, function (erro, r) {
+      if (erro) { el('#logo-info').textContent = '⚠️ ' + erro; return; }
+      LOGO = r.id; el('#logo-img').src = URL.createObjectURL(a); el('#logo-img').hidden = false; el('#logo-tira').hidden = false;
+      el('#logo-info').textContent = '✅ pronto';
+    }, null, true);
+  });
+  el('#logo-tira').addEventListener('click', function () { LOGO = ''; el('#logo-img').hidden = true; el('#logo-tira').hidden = true; el('#logo-info').textContent = ''; });
+  function exemplo(k) {
+    var e = EX[k];
+    FOTOS = e.fotos.map(function (n) { return { id: 'exemplo-' + e.pasta + '-' + n, url: EXURL[e.pasta][n - 1] }; });
+    Object.keys(e.campos).forEach(function (c) { el('#' + c).value = e.campos[c]; });
+    el('#erro').textContent = ''; desenha();
+  }
+  el('#ex-ap').addEventListener('click', function () { exemplo('ap'); });
+  el('#ex-hb').addEventListener('click', function () { exemplo('hb'); });
+  el('#form').addEventListener('submit', function (e) {
+    e.preventDefault(); el('#erro').textContent = '';
+    if (enviando) { el('#erro').textContent = 'Espere as fotos terminarem de enviar.'; return; }
+    var ids = FOTOS.filter(function (f) { return f.id; }).map(function (f) { return f.id; });
+    if (ids.length < 3) { el('#erro').textContent = 'Mande pelo menos 3 fotos (ou use um exemplo).'; return; }
+    var d = { fotos: ids, logo: LOGO };
+    ['tipo', 'marca', 'titulo', 'preco', 'oferta', 'detalhes', 'publico', 'whatsapp', 'instagram', 'site', 'endereco', 'duracao', 'formato', 'voz', 'clima'].forEach(function (c) { d[c] = el('#' + c).value; });
+    ['legendas', 'versao_musica', 'cartao_final', 'manter_ordem'].forEach(function (c) { d[c] = el('#' + c).checked; });
+    if (!el('#cor-ia').checked) d.cor = el('#cor').value;
+    var bt = el('#enviar'); bt.disabled = true; bt.textContent = 'Começando…';
+    fetch('anuncio-video-j2v', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r.ok) { el('#erro').textContent = (r.erros || ['Não deu para começar.']).join(' '); bt.disabled = false; bt.textContent = '🎬 Criar o vídeo do anúncio'; return; }
+      location.href = r.link;
+    }).catch(function () { el('#erro').textContent = 'Falha de conexão.'; bt.disabled = false; bt.textContent = '🎬 Criar o vídeo do anúncio'; });
+  });
+  desenha();
+})();
+</script></body></html>

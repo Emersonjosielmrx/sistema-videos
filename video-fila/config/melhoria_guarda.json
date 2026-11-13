@@ -1,0 +1,65 @@
+{
+ "ligado": true,
+ "nota": "24/10 (Fase 0) guarda dos pedidos de origem melhoria: painel_ia.py guarda (hook PreToolUse em Bash|PowerShell|Read|Grep|Glob). Cada item é uma regex Python (sem diferenciar maiúscula). Comentários (?#...) no começo: o 1º texto livre é o motivo; (?#exec) = só vale quando o trecho EXECUTA algo (não quando só lê/mostra: cat, grep, ls, echo, Get-Content...); (?#fora_aspas) = testa sem o que está entre aspas; (?#grep) = testa o padrão da ferramenta Grep. Antes de testar, tira o corpo de heredoc/here-string que é só texto, as aspas de echo/Write-Host e strings com mais de 200 caracteres (menos de python -c e outros interpretadores). 'permitir' apaga o trecho que casou antes das outras listas (vence o bloqueio só naquele trecho). 'segredos' vale também pro caminho do Read/Grep/Glob. 'bloquear_aplicar' só vale no aplicar. 'suspeito' não bloqueia: só anota no pedido (campo suspeitos) pra auditoria. Testes: D:\\video-fila\\testes\\teste_guarda.py.",
+ "segredos": [
+  "(?#pasta secrets)(?:^|[\\\\/\\s\\\"'=])secrets(?:[\\\\/\\\"'\\s]|$)",
+  "(?#chave do gateway)claude_proxy\\.json",
+  "(?#monitor_opus.py tem chave escrita)monitor_opus\\.py",
+  "(?#settings da pasta Trocar Modelo)Trocar[ _-]Modelo[\\\\/]+settings_[^\\\\/]*",
+  "(?#arquivo .env)(?<![\\w.$-])\\.env(?![\\w-])(?!(?:\\.[\\w-]+)*\\.(?:example|sample|template)\\b)",
+  "(?#cookies)cookie",
+  "(?#dados do navegador)Login Data|User Data",
+  "(?#chave SSH)[\\\\/]\\.ssh(?:[\\\\/]|$)|\\bid_(?:rsa|ed25519|ecdsa)\\b",
+  "(?#registro do painel com conteúdo de cookies)estado[\\\\/]+painel_ia[\\\\/]+[^\\\\/\\s]*\\.jsonl"
+ ],
+ "permitir": [
+  "(?#append no VIGIA_DIARIO)>>\\s*\\S*VIGIA_DIARIO\\.md\\S*",
+  "(?#append no VIGIA_DIARIO)\\btee\\s+(?:-a|--append)\\s+\\S*VIGIA_DIARIO\\.md\\S*",
+  "(?#append no VIGIA_DIARIO)\\bAdd-Content\\b[^|;\\n]*?VIGIA_DIARIO\\.md\\S*",
+  "(?#append no VIGIA_DIARIO)\\bOut-File\\b(?=[^|;\\n]*-Append\\b)[^|;\\n]*?VIGIA_DIARIO\\.md\\S*",
+  "(?#arquivo temporário)(?:^|\\s)[12]?>>?\\s*\\S*(?:/tmp/|\\\\Temp\\\\|/Temp/|\\$env:TEMP|%TEMP%)\\S*",
+  "(?#só consulta tarefa)\\bGet-ScheduledTask(?:Info)?\\b|\\bschtasks(?:\\.exe)?\\s+/query\\b"
+ ],
+ "bloquear": [
+  "(?#instalar/desinstalar pacote — pip/venv/npm)\\bpip[0-9.]*(?:\\.exe)?\\s+(?:install|uninstall|download)\\b|-m\\s+pip\\s+(?:install|uninstall|download)\\b|\\buv\\s+(?:pip\\s+(?:install|uninstall)|add|remove|sync|venv)\\b|-m\\s+(?:venv|virtualenv|ensurepip)\\b|\\bvirtualenv\\b|\\bconda\\s+(?:install|remove|create|update)\\b|\\bnpm\\s+(?:install|i|uninstall|ci|update|add)\\b|\\b(?:winget|choco|scoop)\\s+(?:install|uninstall|upgrade)\\b",
+  "(?#fora_aspas)(?#mover/renomear/apagar arquivo pelo terminal — regra nunca apagar; o desfazer não volta)(?:^|[;&|({`]|\\$\\(|\\b(?:do|then|else|xargs|exec|sudo|nohup|-exec|call)\\s+)\\s*(?:rm|mv|del|erase|ren|rename|rmdir|rd|move|unlink|shred|ri|mi|rni)(?:\\.exe)?(?=\\s)",
+  "(?#fora_aspas)(?#mover/renomear/apagar arquivo pelo terminal — regra nunca apagar; o desfazer não volta)\\b(?:Move-Item|Remove-Item|Rename-Item|Clear-Content|Clear-Item)\\b|\\bfind\\b[^\\n]*\\s-delete\\b",
+  "(?#mover/renomear/apagar arquivo por código — regra nunca apagar; o desfazer não volta)\\bshutil\\.(?:move|rmtree)\\b|\\bos\\.(?:remove|unlink|rename|replace|rmdir|removedirs)\\s*\\(|\\.unlink\\s*\\(|\\.rmdir\\s*\\(|\\bsend2trash\\b|\\.rename\\s*\\(|\\[(?:System\\.)?IO\\.(?:File|Directory)\\]::(?:Delete|Move)",
+  "(?#rclone que move/apaga — só vale rclone copy + check)\\brclone\\s+(?:move|moveto|delete|deletefile|purge|rmdir|rmdirs|sync|cleanup|dedupe)\\b",
+  "(?#tarefa agendada é da dona — não parar/rodar/mudar)\\bschtasks\\b|\\b[a-z]+-ScheduledTask\\w*\\b",
+  "(?#matar processo/serviço — nunca matar pythonw)\\btaskkill\\b|\\bStop-Process\\b|\\bspps\\b|\\bwmic\\b[^\\n]*\\b(?:delete|terminate)\\b|\\b(?:Stop|Restart|Start|Set|Suspend)-Service\\b|\\bsc(?:\\.exe)?\\s+(?:stop|start|delete|config)\\b|\\bnet\\s+(?:stop|start)\\b|\\b(?:shutdown|Restart-Computer|Stop-Computer|logoff)\\b|\\bwsl(?:\\.exe)?\\s+--(?:shutdown|terminate)",
+  "(?#fora_aspas)(?#matar processo/serviço — nunca matar pythonw)(?:^|[;&|({`]|\\$\\(|\\b(?:do|then|else|xargs|exec|sudo|nohup|-exec|call)\\s+)\\s*(?:kill|pkill|killall|tskill)(?:\\.exe)?(?=\\s)",
+  "(?#exec)(?#rodar rotina que posta/agenda — só as tarefas da dona rodam)(?<![a-z])(?:rede_hora_em_hora|postar_\\w*|parceiro_diario\\w*|rede|\\w*upload(?!s\\b)\\w*|\\w*publish\\w*)\\.(?:py|pyw|bat|cmd|ps1|exe|sh)\\b|\\b(?:import|from)\\s+[\\w.]*(?:postar_|parceiro_diario|\\brede\\b|upload(?!s\\b)|publish)|-m\\s+[\\w.]*(?:postar_|parceiro_diario|\\brede\\b|upload(?!s\\b)|publish)|\\bfila(?:\\.py)?[\\\"']?\\s+ciclo\\b",
+  "(?#ler variáveis de ambiente — tem token)(?:^|[;&|({])\\s*(?:printenv|set|export\\s+-p|declare\\s+-x|env)\\s*(?=$|[;&|)>])|\\b(?:Get-ChildItem|gci|dir|ls|Get-Item|gi)\\s+env:|\\[Environment\\]::GetEnvironmentVariables|\\$env:\\w*(?:TOKEN|KEY|SECRET|PASS|AUTH)\\w*|\\$\\{?\\w*(?:TOKEN|API_?KEY|SECRET|PASSWORD|AUTH)\\w*|\\bos\\.environ\\b[^\\n]*(?:TOKEN|KEY|SECRET|PASS|AUTH)|print\\s*\\(\\s*(?:dict\\s*\\()?\\s*os\\.environ\\s*\\)?\\s*\\)|\\bos\\.environ\\.(?:items|copy)\\s*\\(|(?:/[cC]|-c)\\s+['\\\"]?set\\s*['\\\"]?\\s*$|(?:^|[;&|({])\\s*export\\s*$|\\bos\\.getenv\\b|\\bos\\.environ\\b|GetEnvironmentVariables?\\b|-Path\\s+['\\\"]?Env:|\\bprocess\\.env\\b|ANTHROPIC_AUTH_TOKEN",
+  "(?#gravar por cima de mídia com .save/imwrite)\\A(?=[\\s\\S]*(?:\\bPIL\\b|\\bImage\\b|\\bcv2\\b|imageio|moviepy|pydub|\\.(?:jpe?g|png|webp|gif|bmp|tiff?|heic|mp4|mov|mkv|webm|avi|m4v|wav|mp3|m4a|flac|ogg|aac|opus)\\b))(?=[\\s\\S]*(?:\\.save\\s*\\(|\\bimwrite\\s*\\(|write_videofile\\s*\\(|\\.export\\s*\\())",
+  "(?#ffmpeg -y sobrescreve mídia)\\bffmpeg(?:\\.exe)?\\b(?=[^\\n]*\\s-y\\b)(?=[^\\n]*\\.(?:jpe?g|png|webp|gif|bmp|tiff?|heic|mp4|mov|mkv|webm|avi|m4v|wav|mp3|m4a|flac|ogg|aac|opus)\\b)",
+  "(?#exec)(?#fora_aspas)(?#script que recorta/move fotos ou mídia)(?<![a-z])(?:recortar|mover)_\\w*|(?:^|\\s)--(?:mover|recortar|apagar|deletar|remover|limpar)\\w*",
+  "(?#git push/reset/clean é proibido)\\bgit\\s+(?:push|reset\\s+--hard|clean\\s+-\\w*f|checkout\\s+--\\s|restore\\b|stash\\s+(?:drop|clear))",
+  "(?#mudar configuração do Windows)\\bsetx\\b|\\breg(?:\\.exe)?\\s+(?:add|delete|import)\\b|\\b(?:Set|New|Remove)-ItemProperty\\b|\\bSet-ExecutionPolicy\\b|\\bnetsh\\b|\\bbcdedit\\b|\\b(?:Set|New)-NetFirewall\\w*",
+  "(?#mandar mensagem pelo Telegram — só o sistema avisa)api\\.telegram\\.org|\\bavisos\\.enviar\\s*\\(",
+  "(?#procurar token/senha no conteúdo dos arquivos)\\b(?:grep|egrep|rg|findstr|Select-String|sls)\\b[^\\n]*(?:auth_token|api[_-]?key|password|senha|bearer|client_secret|refresh_token|access_token)",
+  "(?#grep)(?#procurar token/senha no conteúdo dos arquivos)auth_token|api[_-]?key|password|senha|bearer|client_secret|refresh_token|access_token",
+  "(?#robocopy que move/espelha/apaga)\\brobocopy\\b[^\\n]*\\s/(?:MOVE?|MIR|PURGE)\\b",
+  "(?#git que apaga/volta arquivo)\\bgit\\b[^\\n]*\\s(?:rm|mv|checkout\\s+(?!-b)\\S|restore|stash(?!\\s+list))\\b",
+  "(?#ação no painel :8790 pelo terminal — só a dona clica)(?:127\\.0\\.0\\.1|localhost):8790/api/(?:tarefa_rodar|controle|ia_acao|ia_pedir|ia_corrigir_todos|abrir)\\b|X-Painel",
+  "(?#POST/PUT/DELETE no painel :8790 — só leitura GET é liberada, achado 19)(?i:(?:-X\\s*(?:POST|PUT|DELETE|PATCH)|--data|--json|\\s-d\\s|-Method\\s+['\\\"]?(?:Post|Put|Delete|Patch)|\\.(?:post|put|delete|patch)\\s*\\(|method\\s*=\\s*['\\\"](?:POST|PUT|DELETE|PATCH))[^\\n]*(?:127\\.0\\.0\\.1|localhost):8790|(?:127\\.0\\.0\\.1|localhost):8790[^\\n]*(?:-X\\s*(?:POST|PUT|DELETE|PATCH)|--data|--json|\\s-d\\s|-Method\\s+['\\\"]?(?:Post|Put|Delete|Patch)|\\.(?:post|put|delete|patch)\\s*\\(|method\\s*=\\s*['\\\"](?:POST|PUT|DELETE|PATCH)))",
+  "(?#comando escondido em base64)\\s-(?:EncodedCommand|enc|ec|e)\\s+[A-Za-z0-9+/=]{16,}"
+ ],
+ "bloquear_aplicar": [
+  "(?#fora_aspas)(?#escrever arquivo pelo terminal com > ou >> escapa do backup; use Edit/Write)(?:^|[^-=>\\w])[12&]?>{1,2}(?!&)\\s*(?!(?:/dev/null|\\$null|nul)(?:\\s|$|[;&|)]))[^\\s;&|)]",
+  "(?#fora_aspas)(?#escrever arquivo pelo terminal com Set-Content/Out-File/Add-Content/tee escapa do backup)\\b(?:Set-Content|Out-File|Add-Content|Tee-Object)\\b|(?:^|[|;&])\\s*tee\\b|\\bNew-Item\\b[^\\n]*-Value\\b",
+  "(?#edição no lugar pelo terminal com sed -i escapa do backup)\\bsed\\s+(?:-[a-zA-Z]+\\s+)*-[a-zA-Z]*i|\\bperl\\s+-\\w*i",
+  "(?#fora_aspas)(?#copiar por cima pelo terminal escapa do backup)(?:^|[;&|({`]|\\$\\(|\\b(?:do|then|else|xargs|exec|sudo|nohup|-exec|call)\\s+)\\s*(?:cp|copy|xcopy|robocopy|Copy-Item|cpi)(?:\\.exe)?(?=\\s)",
+  "(?#escrever arquivo por código no terminal escapa do backup)\\bopen\\s*\\([^)]*,\\s*(?:mode\\s*=\\s*)?[rbt]?[\\\"'][rbt]*[wax]|\\.write_(?:text|bytes)\\s*\\(|\\bshutil\\.copy\\w*\\s*\\(|\\[(?:System\\.)?IO\\.File\\]::(?:Write|Append|Copy)\\w*"
+ ],
+ "suspeito": [
+  "(?#fora_aspas)(?#abriu processo separado — pode ficar rodando)(?:^|[;&|({])\\s*(?:start|nohup|setsid)\\s|\\b(?:Start-Process|saps)\\b|\\bpythonw(?:\\.exe)?[\\\"']?\\s+\\S+\\.pyw?\\b",
+  "(?#chamada que muda algo — POST/PUT/DELETE)\\bcurl\\b[^\\n]*(?:-X\\s*(?:POST|PUT|DELETE|PATCH)|--data\\b|\\s-d\\s|\\s-F\\s|--form\\b)|\\bInvoke-(?:RestMethod|WebRequest)\\b[^\\n]*-Method\\s+(?:Post|Put|Delete|Patch)",
+  "(?#exec)(?#comando em outra máquina — ssh)\\bssh\\b|\\bscp\\b",
+  "(?#mexeu no git)\\bgit\\s+(?:commit|checkout|merge|rebase|stash|branch\\s+-[dD]|tag|add)\\b",
+  "(?#exec)(?#baixou do YouTube — risco de bloqueio do IP)\\byt-dlp\\b|\\byt_dlp\\b",
+  "(?#rclone copy — conferir com rclone check)\\brclone\\s+copy\\b",
+  "(?#mexeu em banco de dados)\\b(?:sqlite3|psql)\\b[^\\n]*\\b(?:UPDATE|DELETE|INSERT|DROP|ALTER)\\b|\\.execute\\s*\\([^)]*\\b(?:UPDATE|DELETE\\s+FROM|INSERT\\s+INTO|DROP|ALTER)\\b",
+  "(?#exec)(?#rodou script .bat/.cmd/.ps1)\\.(?:bat|cmd|ps1)\\b"
+ ]
+}

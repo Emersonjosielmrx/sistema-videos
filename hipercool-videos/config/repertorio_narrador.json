@@ -1,0 +1,1579 @@
+{
+ "_leia": "Repertório do narrador: moldes de piada, jargão do nicho e apelidos, extraídos de 87 vídeos reais de canais BR de recap de manhwa (KkVirjao 64 vídeos / 849.791 palavras + mikemanhwa 23 vídeos / 1.349.037 palavras = 2.198.828 palavras), em D:/hipercool-materiais/referencias_narradores/<canal>/textos/. TODO item tem 'exemplo_real' copiado do corpus — nada aqui foi inventado nem é 'no estilo de'. Complementa config/dicionario_seguro.json (que é só segurança) e config/gatilhos_narracao.json (que é só som). Usado pelo prompt de gerar_recap em bin/narration.py. 16/10 (2ª leva): entraram os moldes dos dois canais MAIORES — MomoManhwa (332 vídeos, 10,2 mi de palavras) e oporaodacidadela (244, 6,0 mi) —, com destaque pro 'dá-lhe + golpe inventado', que conta luta sem descrever ferimento. 18/10 (v2.0, leva 3): entraram 19 moldes novos tirados dos 11 canais que faltavam (Doinsuka, DrezinNimes, Jubertim, iJaxManhwa, mangaticos, solem_sun, Solem_8037, omelhormanhwa, SR.GUUGOU, MattzManhwa, IkiManhwa — ~57 milhões de palavras; análise canal a canal em D:/hipercool-materiais/referencias_narradores/ANALISE_LINGUAGEM.md), exemplos conferidos literalmente no corpus. 'nosso garoto' saiu do nao_usar: o iJaxManhwa usa ~21 mil vezes, então é do nicho e não marca só do Momo. Desde 18/10 bin/narration.py também lê 'aberturas' (1 fórmula sorteada por capítulo), 'fechamentos' (só os de onde='fala_final', sem pedido de like) e 'roteiro_automatico_proibido' (vai pro PROIBIDO do prompt). O molde 'comentar o quadro' (MattzManhwa) ficou de fora: bate na regra do dono de 16/10 de o narrador não falar do desenho. v2.1 (19/10): oporaodacidadela (244 vídeos, 6,0 milhões de palavras) — 5 moldes (eu_confesso, aguardem_que_vem, entrar_na_obra, como_sempre, veredito_ao_publico), abertura mundo_ironico e 4 itens no nao_usar; exemplos conferidos literalmente no corpus.",
+ "_dono": "Arquivo novo, criado em 2026-10-16. Só este repertório mexe aqui.",
+ "versao": "2.1",
+ "atualizado_em": "2026-10-19",
+ "dose": {
+  "_conta": "Os 9 moldes de piada somam ~4.190 ocorrências em 2.198.828 palavras = 1,9 por mil palavras. Esse número é TETO: entre 1/3 e 1/2 das ocorrências é fala de personagem que o narrador apenas lê, então a piada DO NARRADOR fica em 1,0 a 1,3 por mil. Um capítulo nosso tem ~60 locuções de ~18 palavras = ~1.080 palavras. Logo: 1,0-1,3/mil x 1,08 = 1 a 1,4 piada por capítulo na média dos canais, e 2,1 no teto absoluto.",
+  "piadas_por_capitulo": {
+   "minimo": 2,
+   "maximo": 3,
+   "equivale_a_por_mil": "1,9 a 2,8 — já no teto dos dois canais"
+  },
+  "regra": "2 a 3 piadas por capítulo, cada uma de um molde DIFERENTE. Nunca 4 ou mais: o prompt antigo pedia '2-4', o que dá até 3,7/mil, acima do que os canais de referência fazem. O ganho não é volume, é variedade de molde.",
+  "usos_de_apelido_por_capitulo": {
+   "alvo": 4,
+   "_conta": "apelidos somam 7.923 ocorrências = 3,603/mil, quase o DOBRO de todos os moldes de piada juntos. 3,603/mil x 1,08 = ~3,9 usos por capítulo. O apelido é o leito do rio; a piada é a pedra."
+  },
+  "jargao": "Não tem dose: é vocabulário obrigatório. Toda vez que a cena tiver sistema, rank, dungeon, cultivo ou torre, usar o termo do nicho em vez do genérico. Única trava de volume: no máximo 1 bloco de leitura de caixa de sistema por capítulo (o mikemanhwa passa minutos recitando 'Objetivo especial... Probabilidade de sucesso 87%' — isso mata o ritmo no nosso formato).",
+  "eufemismo_de_morte_por_video": {
+   "maximo": 3,
+   "motivo": "'foi de Vasco' é ótimo mas vira tique se repetir; alternar com 'já era'."
+  }
+ },
+ "sorteio": {
+  "_leia": "REGRA QUE NÃO SE QUEBRA: o repertório existe para NÃO repetir a mesma piada em todo vídeo. O sorteio é sem reposição e com janela de bloqueio entre capítulos seguidos da mesma obra.",
+  "estado": {
+   "arquivo": "logs/repertorio_usado.json",
+   "formato": {
+    "<obra>": {
+     "ultimos_moldes": [
+      "id",
+      "id",
+      "id"
+     ],
+     "ultimas_referencias_pop": [
+      "goku"
+     ],
+     "apelidos_fixos": {
+      "<personagem>": "<apelido>"
+     }
+    }
+   },
+   "nota": "Se o arquivo não existir, tratar como primeira vez (nada bloqueado) e criá-lo ao fim do capítulo."
+  },
+  "regras": [
+   "1. Janela de bloqueio: um molde usado no capítulo N não pode ser sorteado em N+1 nem em N+2. Ou seja, guardar os ids dos 2 capítulos anteriores em 'ultimos_moldes' e removê-los da urna.",
+   "2. Sorteio sem reposição: embaralhar os moldes elegíveis (respeitando 'situacao' da cena) e consumir da lista. Quando a urna esvaziar, reembaralhar TUDO menos os ids dos 2 últimos capítulos.",
+   "3. Dois moldes do mesmo capítulo nunca podem ter o mesmo id. Se o sorteio devolver repetido, puxar o próximo da urna.",
+   "4. 'coitado_do' é exceção de contagem (pode aparecer 2x no mesmo capítulo porque é o molde nº1 do nicho), mas NÃO pode ser o único molde de humor em 2 capítulos seguidos.",
+   "5. Referência pop: no máximo 1 por capítulo e a MESMA referência (goku, naruto, flash, batman, xadrez, npc) não volta por 5 capítulos — guardar em 'ultimas_referencias_pop'.",
+   "6. APELIDO É O CONTRÁRIO: uma vez escolhido o apelido de um personagem, ele FIXA para a obra inteira e não entra em sorteio nenhum. Gravar em 'apelidos_fixos' e reusar. Variedade aqui seria erro: o espectador precisa reconhecer o personagem.",
+   "7. Jargão não se sorteia: escolhe-se pelo TEMA da obra. Os blocos 'murim_e_cultivo' e 'sistema_e_painel'/'dungeon_e_torre' não se misturam no mesmo recap — são subgêneros diferentes.",
+   "8. Se o capítulo não deu brecha para piada boa, usar 'meta_piada' (plano B, risco zero) em vez de forçar um molde que não cabe."
+  ]
+ },
+ "moldes_piada": [
+  {
+   "id": "coitado_do",
+   "nome": "Coitado do ___ (pena fingida de quem está apanhando)",
+   "situacao": [
+    "vilao_apanhando",
+    "figurante_se_dando_mal",
+    "personagem_perdendo_discussao"
+   ],
+   "molde": "Coitado do <apelido>, <o que acabou de acontecer com ele>.",
+   "variacao_forte": "Explicar o coitado logo depois: 'eu falo coitado porque <motivo>'.",
+   "exemplo_real": "Coitado do figurante foi de Vasco.",
+   "exemplo_real_2": "o coitado do Lenk, [risadas] a resistência física dele é um lixo",
+   "canal": "mikemanhwa 1,145/mil; KkVirjao 0,181/mil",
+   "frequencia_por_mil": 0.772,
+   "max_por_capitulo": 2,
+   "travas": [
+    "nunca sobre deficiência, peso ou traço de corpo",
+    "a explicação do 'coitado' não pode descrever violência gráfica"
+   ]
+  },
+  {
+   "id": "comparacao_banal",
+   "nome": "___ que nem um(a) / parece um(a) <coisa banal do cotidiano>",
+   "situacao": [
+    "postura_ridicula",
+    "personagem_caido",
+    "correndo_torto",
+    "paralisado",
+    "nervoso"
+   ],
+   "molde": "<personagem> <ação> que nem <coisa doméstica e mundana>.",
+   "exemplo_real": "ele tô travado que nem uma estátua pensando, será que ela realmente tava acordada esse tempo todo?",
+   "exemplo_real_2": "Ele parece um rato no meio de todo mundo. Ninguém vai levar a sério dessa forma que ele tá fazendo.",
+   "canal": "KkVirjao (assinatura dele: 'que nem um' 0,228/mil contra 0,004/mil no mikemanhwa); 'parece um' é neutro nos dois (0,073/mil)",
+   "frequencia_por_mil": 0.236,
+   "max_por_capitulo": 1,
+   "travas": [
+    "o segundo termo descreve o que o personagem FAZ, nunca como ele É",
+    "proibido comparar corpo — os canais fazem ('parece uma geladeira de duas portas', 'tá parecendo um abacate') e nós não"
+   ]
+  },
+  {
+   "id": "tipo_um_so_que",
+   "nome": "É tipo um(a) ___, só que ___ (explica a regra do mundo e já tira sarro dela)",
+   "situacao": [
+    "sistema_apresentado",
+    "guilda_apresentada",
+    "hierarquia_apresentada",
+    "ritual_apresentado"
+   ],
+   "molde": "É tipo <coisa mansa do cotidiano brasileiro>, só que <a diferença que é a piada>.",
+   "exemplo_real": "É tipo um Tinder da vida, só que no Tinder tu consegue ver a foto dos outros.",
+   "exemplo_real_2": "é literalmente um canhão, só que sem proteção nenhuma",
+   "canal": "os dois, em dose baixa",
+   "frequencia_por_mil": 0.002,
+   "max_por_capitulo": 1,
+   "valor": "O mais valioso da lista: resolve exposição E faz graça na mesma frase, que é exatamente o que um recap precisa. Usar na locução em que o sistema/organização aparece pela primeira vez.",
+   "travas": [
+    "referência de coisa mansa (app, loja, fila de banco, grupo de WhatsApp, condomínio)",
+    "nada de política, religião ou marca que soe propaganda"
+   ]
+  },
+  {
+   "id": "referencia_pop",
+   "nome": "Meteu o especial do ___ / virou o ___ / parecendo o ___",
+   "situacao": [
+    "golpe_especial",
+    "explosao_de_poder",
+    "velocidade",
+    "plano_armado"
+   ],
+   "molde": "<personagem> <ação> — parecendo o <personagem pop com 10+ anos de estrada>.",
+   "variacao_rebaixada": "Dar emprego mundano ao figurante derrotado: 'o bicho era entregador de iFood mesmo'.",
+   "exemplo_real": "ele colocou o pé à frente e meteu o especial do Goku. Sequência de soco e lapa forte.",
+   "exemplo_real_2": "Bicho, é o xadrez quarta dimensão aqui, viu?",
+   "canal": "KkVirjao 0,233/mil; mikemanhwa 0,075/mil",
+   "frequencia_por_mil": 0.136,
+   "max_por_capitulo": 1,
+   "lista_permitida": [
+    "goku",
+    "naruto",
+    "batman",
+    "flash",
+    "xadrez quarta dimensão",
+    "npc",
+    "ifood",
+    "300 de qi"
+   ],
+   "travas": [
+    "só referência com 10+ anos de estrada — nada de meme do mês, senão o vídeo envelhece em semanas",
+    "nunca pessoa real (os canais citam jogador de futebol; a gente não)"
+   ]
+  },
+  {
+   "id": "literal_com_repeticao",
+   "nome": "Expressão figurada que na cena é LITERAL, e o narrador repete",
+   "situacao": [
+    "reviravolta_visual",
+    "o_desenho_realiza_a_expressao"
+   ],
+   "molde": "<expressão figurada>. Literalmente <a mesma expressão>.",
+   "exemplo_real": "Perdeu a cabeça o lobinho. Literalmente perdeu a cabeça o lobinho.",
+   "exemplo_real_2": "o nome do bar é crescente, literalmente. É porque o bar cresce, tá ligado?",
+   "canal": "KkVirjao 0,349/mil; mikemanhwa 0,047/mil (mas a maioria é muleta de fala, não piada)",
+   "frequencia_por_mil": 0.03,
+   "max_por_capitulo": 1,
+   "expressoes_permitidas": [
+    "ficou sem chão",
+    "caiu do céu",
+    "virou pó",
+    "perdeu a linha",
+    "foi pro espaço",
+    "subiu pelas paredes",
+    "ficou no chinelo"
+   ],
+   "travas": [
+    "ÚNICO molde com trava dura: o exemplo real favorito dos canais é decapitação ('perdeu a cabeça literalmente') — isso é violência explícita e o dicionário já barra",
+    "nunca com expressão que descreva mutilação"
+   ]
+  },
+  {
+   "id": "toma_ai",
+   "nome": "O narrador entrega o golpe como presente: 'Toma aí ___' / 'Resposta errada. Toma ___'",
+   "situacao": [
+    "clímax",
+    "vilao_finalmente_apanha",
+    "valentao_derrotado"
+   ],
+   "molde": "Toma aí <o golpe nomeado por som> pra tu <aprender / ficar esperto>.",
+   "exemplo_real": "Toma essa cabeçada aí só para ficar esperto. Essa cabeçada foi tão forte que chegou a fazer o...",
+   "exemplo_real_2": "Toma aí as mulher bombada na cara dele.",
+   "canal": "mikemanhwa 0,079/mil; KkVirjao 0,056/mil",
+   "frequencia_por_mil": 0.07,
+   "max_por_capitulo": 1,
+   "golpes_nomeados_por_som": [
+    "lapada",
+    "bicuda",
+    "pedrada",
+    "chinelada",
+    "cabeçada",
+    "tapão",
+    "cascudo",
+    "voadora"
+   ],
+   "travas": [
+    "o golpe é nomeado por SOM, nunca por dano — nada de sangue, osso, corte ou arma",
+    "vocativo final ('otário') só para vilão, e nunca palavrão"
+   ]
+  },
+  {
+   "id": "parabens_ironico",
+   "nome": "Parabéns. Continua assim, ___ (ironia quando o personagem faz besteira)",
+   "situacao": [
+    "personagem_faz_besteira",
+    "plano_sai_pela_culatra"
+   ],
+   "molde": "Parabéns. Continua assim, <apelido de vilão>.",
+   "exemplo_real": "Ei, parabéns. Continuou assim, otário.",
+   "canal": "os dois",
+   "frequencia_por_mil": 0.055,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só para vilão ou figurante, nunca para o protagonista"
+   ]
+  },
+  {
+   "id": "xingamento_com_porque",
+   "nome": "Xingamento leve do figurante + o PORQUÊ na frase seguinte",
+   "situacao": [
+    "decisao_idiota_na_cara_do_espectador",
+    "caiu_na_armadilha_obvia",
+    "confiou_em_quem_traiu"
+   ],
+   "molde": "Esse bicho é <adjetivo leve>. <motivo curto, 1 frase>.",
+   "exemplo_real": "Rapaz, esse bicho é burro. Se eu fosse o mestre do prota...",
+   "exemplo_real_2": "E quando a flecha cai no chão eles pensam: 'Ah, esse bicho é trouxa, pô!' Errou, acertou, foi no chão.",
+   "canal": "KkVirjao 0,653/mil; mikemanhwa 0,150/mil — seguir a dose do mikemanhwa, que é o canal maior e mais limpo",
+   "frequencia_por_mil": 0.15,
+   "max_por_capitulo": 1,
+   "adjetivos_permitidos": [
+    "burro",
+    "otário",
+    "trouxa",
+    "besta",
+    "bocó",
+    "lerdo",
+    "sem noção",
+    "cara de pau"
+   ],
+   "travas": [
+    "A GRAÇA É O PORQUÊ, não o xingamento: sem a justificativa vira só grosseria",
+    "só figurante ou vilão — nunca o protagonista nem personagem feminina",
+    "o adjetivo é sobre a DECISÃO, nunca sobre corpo, raça, religião ou deficiência",
+    "os canais misturam isso com palavrão o tempo todo: a gente tira o palavrão e fica o adjetivo + motivo"
+   ]
+  },
+  {
+   "id": "pelo_amor_de",
+   "nome": "Exasperação de quem assiste junto, dirigida AO personagem",
+   "situacao": [
+    "personagem_repete_o_mesmo_erro",
+    "cena_arrastada",
+    "narrador_cansou"
+   ],
+   "molde": "Pelo amor de <variação>, <o que o personagem devia fazer>.",
+   "exemplo_real": "Meu Deus do céu, bicho. Deixa eu respirar pelo amor de Jeová.",
+   "exemplo_real_2": "Ó, presta atenção, pelo amor de Deus, não vai fazer merda de novo",
+   "canal": "KkVirjao 0,155/mil; mikemanhwa 0,033/mil — e já catalogado para o MomoManhwa, ou seja é padrão do nicho inteiro",
+   "frequencia_por_mil": 0.08,
+   "max_por_capitulo": 1,
+   "variacoes": [
+    "pelo amor de Deus",
+    "pelo amor de Jeová",
+    "pelo amor de tudo que é mais sagrado"
+   ],
+   "travas": [
+    "a troca do santo é a piada, mas não pode virar deboche de crença — na dúvida, usar 'pelo amor de tudo que é mais sagrado'",
+    "dirigir AO personagem, não ao espectador",
+    "nunca duas seguidas"
+   ]
+  },
+  {
+   "id": "meta_piada",
+   "nome": "O narrador comenta a piada — a da obra ou a dele mesmo",
+   "situacao": [
+    "trocadilho_da_obra_nao_funciona_em_portugues",
+    "a_propria_tirada_saiu_fraca",
+    "plano_B_quando_nao_deu_brecha"
+   ],
+   "molde": "<a tirada>. Ô piada sem graça, velho.",
+   "exemplo_real": "o nome do bar é crescente, literalmente. É porque o bar cresce, tá ligado? Ô piada sem graça,",
+   "exemplo_real_2": "Difícil narrar esse roteiro, hein, cara? É cada piada nessa obra.",
+   "canal": "KkVirjao 0,074/mil; mikemanhwa 0,033/mil",
+   "frequencia_por_mil": 0.02,
+   "max_por_capitulo": 1,
+   "valor": "A piada mais barata, mais segura e mais humana da lista — e a que mais cria intimidade. Único molde sem contraindicação. É o plano B oficial.",
+   "travas": []
+  },
+  {
+   "id": "brabo_repetido",
+   "nome": "___ é brabo. ___ é brabo. (repetição imediata, como quem ficou sem palavra)",
+   "situacao": [
+    "personagem_mostra_poder",
+    "painel_de_impacto"
+   ],
+   "molde": "<apelido> é brabo. <apelido> é brabo.",
+   "exemplo_real": "mas o bicho é brabo demais, molecada. No mesmo instante, ela caiu de joelhos.",
+   "exemplo_real_2": "rei da guerra filho, o bicho é brabo. Para quem gosta de obra de verdadeira ação, pancadaria honesta",
+   "canal": "mikemanhwa 735 ocorrências (0,56/mil); KkVirjao só 31",
+   "frequencia_por_mil": 0.35,
+   "max_por_capitulo": 1,
+   "valor": "Substitui bem as frases prontas que o prompt já proíbe ('é de cair o queixo', 'a tensão subiu pra cem por cento').",
+   "travas": []
+  },
+  {
+   "id": "falar_com_o_autor",
+   "nome": "Falar COM o autor da obra no meio da narração",
+   "situacao": [
+    "obra_preguicosa",
+    "conveniencia_de_roteiro",
+    "morte_off_screen",
+    "pulo_de_evolucao"
+   ],
+   "molde": "Pera aí, autor, <a reclamação>.",
+   "exemplo_real": "O autor matou o coitado e ainda off screen.",
+   "exemplo_real_2": "Rapaz, o velho ganhou o hack aqui. Nós nem vimos nada, pô. Pera aí, autor, pelo menos mostra a evolução",
+   "canal": "mikemanhwa 106; KkVirjao 4 (+ 'roteirista' 16 no Kk); mangaticos culpa o autor pelo azar do prota: 'tanto lugar para cair... acho que o ADM dessa obra aqui não é muito fã do protagonista não'",
+   "frequencia_por_mil": 0.05,
+   "max_por_capitulo": 1,
+   "valor": "Vira piada de nicho sem ofender ninguém real — o 'autor' aqui é figura abstrata, não pessoa nomeada.",
+   "travas": [
+    "nunca nomear o autor real da obra"
+   ]
+  },
+  {
+   "id": "anuncio_de_apelido",
+   "nome": "O narrador ANUNCIA que vai apelidar porque o nome é difícil",
+   "situacao": [
+    "primeira_aparicao_de_nome_comprido"
+   ],
+   "molde": "Cara, esse nome tá gigante. Vou chamar só de <apelido>, que é mais fácil.",
+   "exemplo_real": "Cara, esse nome tá gigante, velho. Na moral, vou ter que dar um apelido para elas",
+   "exemplo_real_2": "E o que tava comandando tudo isso era um de óculos ali, que eu vou chamar só de quatro, que é muito mais fácil.",
+   "canal": "os dois; e também Jubertim ('Rapaziada, vou chamar a alma de Xixizi de agora em diante'), mangaticos ('eu vou chamar ele só de Yu ou de Prota porque é muito difícil') e solem_sun (personagem pela cor do cabelo) — prática do nicho",
+   "frequencia_por_mil": 0.01,
+   "max_por_capitulo": 1,
+   "valor": "O anúncio é a piada E resolve um problema real do recap: o espectador não decora nome coreano comprido. Depois disso o apelido FIXA (ver sorteio, regra 6).",
+   "travas": [
+    "o apelido vem de roupa, cor de cabelo, função, arma ou bordão — nunca de corpo",
+    "nunca apelidar personagem feminina por aparência"
+   ]
+  },
+  {
+   "id": "da_lhe_golpe",
+   "nome": "Dá-lhe ___ (locutor de luta, com golpe inventado em -ada/-ão)",
+   "situacao": [
+    "luta",
+    "golpe",
+    "alguem_apanhando",
+    "ataque_do_protagonista"
+   ],
+   "molde": "Dá-lhe uma <golpe inventado: cabeçada, rabada, prensada, chutão, mordidão> e <o que acontece>.",
+   "porque_vale": "Conta a pancadaria SEM descrever ferimento — resolve de graça a regra de não ter violência explícita. Troca 'ele deu um soco e quebrou a costela' por comédia de locutor esportivo.",
+   "exemplo_real": "o cavalo apareceu do lado do cara e deu-lhe uma cabeçada, rapaz, foi explodido na parede",
+   "exemplo_real_2": "No ódio, ela dá-lhe uma rabada e não foi da boa. O garoto fica todo acabado",
+   "canal": "MomoManhwa (~5.500 ocorrências, 0,62 por mil)",
+   "dose": "metade da dose dele, ~0,3 por mil (1 a cada 2 capítulos), pra não virar tique",
+   "travas": [
+    "o golpe inventado nunca é escatológico nem sexual",
+    "nada de sangue, osso, corte ou arma no mesmo período"
+   ]
+  },
+  {
+   "id": "apelido_por_traco",
+   "nome": "Apelido por traço visível (o verdinho, o Velhão, a Ruiva, o tiozinho)",
+   "situacao": [
+    "figurante_novo",
+    "nome_dificil",
+    "personagem_que_aparece_e_some"
+   ],
+   "molde": "<o/a> <traço visível com diminutivo ou aumentativo> — e mantém esse apelido até o fim do trecho.",
+   "porque_vale": "Faz graça e resolve acessibilidade ao mesmo tempo: nome coreano que o público não vai guardar vira um apelido que ele guarda na hora. Use já na primeira aparição.",
+   "exemplo_real": "quem mais chama a atenção de todos claramente é ele, o espadachim verdinho Gale",
+   "exemplo_real_2": "O cabelinho vermelho, porém, fala que pelo visto vai ter que desenhar pro idiota entender",
+   "canal": "MomoManhwa (3.484 ocorrências, 0,34 por mil)",
+   "dose": "1 apelido novo por figurante que importa",
+   "travas": [
+    "o traço é ROUPA, COR DE CABELO, ARMA, IDADE ou FUNÇÃO — nunca peso, corpo, deficiência, raça ou traço de rosto",
+    "o canal de referência usa 'o gordinho' e 'o Carequinha': isso nós NÃO usamos"
+   ]
+  },
+  {
+   "id": "comentar_a_propria_piada",
+   "nome": "Comentar a própria piada ruim",
+   "situacao": [
+    "depois_de_piada_fraca",
+    "referencia_velha"
+   ],
+   "molde": "<a piada>. <reconhece que foi ruim: 'piada de 2010, viu', 'desculpa essa'>.",
+   "porque_vale": "Transforma piada fraca em piada sobre a piada; o público perdoa e ainda acha graça.",
+   "exemplo_real": "Nossa, garoto tá no rap do mudinho, rapaz. Meu Deus, piada de 2010, velho.",
+   "canal": "MomoManhwa",
+   "dose": "no máximo 1 por capítulo, e só quando a piada antes dela for mesmo fraca",
+   "travas": [
+    "não vira desculpa por tudo: usar uma vez e seguir a história"
+   ]
+  },
+  {
+   "id": "cosplay_de",
+   "nome": "Fazendo cosplay de ___ (a situação vira fantasia de coisa banal)",
+   "situacao": [
+    "personagem_espremido_ou_apertado",
+    "personagem_disfarcado",
+    "papel_inesperado"
+   ],
+   "molde": "<personagem> <situação> — fazendo cosplay de <coisa banal do cotidiano>.",
+   "exemplo_real": "pegar um trem pela manhã bem cedinho, porque quem sabe sabe que você se sente fazendo um cosplay de sardinha",
+   "canal": "Doinsuka (17x em 273 mil palavras)",
+   "frequencia_por_mil": 0.06,
+   "max_por_capitulo": 1,
+   "travas": [
+    "nunca sobre corpo, roupa sensual ou aparência",
+    "a Doinsuka faz 'cosplay de churrasco' pra quem levou espadada: só serve sem descrever o golpe"
+   ]
+  },
+  {
+   "id": "que_surpresa",
+   "nome": "Que surpresa (ironia quando o óbvio acontece)",
+   "situacao": [
+    "o_obvio_acontece",
+    "previsivel_se_confirma"
+   ],
+   "molde": "<o fato que todo mundo previu>. Que surpresa, se você não me dissesse eu não ia acreditar.",
+   "exemplo_real": "e olha só quem diria, a que tá com nota zero é a borrinha. Que surpresa, se você não me dissesse eu, olha, eu não iria acreditar",
+   "canal": "Doinsuka (11x)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "só quando o público realmente previu — em fato inesperado a ironia não funciona"
+   ]
+  },
+  {
+   "id": "vulgo",
+   "nome": "Vulgo ___ (traduz o nome bonito pro que a coisa é de verdade)",
+   "situacao": [
+    "plano_ou_lugar_com_nome_pomposo",
+    "desculpa_do_personagem"
+   ],
+   "molde": "<nome bonito / intenção nobre>, vulgo <o que é na real>.",
+   "exemplo_real": "planejando gastar todo o seu dinheiro com diversão, vulgo action figures e jogo de waifu 2D",
+   "canal": "Doinsuka (6x)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "o 'vulgo' rebaixa a SITUAÇÃO, nunca a pessoa (a Doinsuka faz 'vulgo garotas tábua' — isso não)"
+   ]
+  },
+  {
+   "id": "por_motivos_de",
+   "nome": "Por motivos de: ___ (desculpa meta, sem verbo)",
+   "situacao": [
+    "nome_impronunciavel",
+    "narrador_pula_algo"
+   ],
+   "molde": "<o que o narrador não vai fazer> por motivos de: <motivo curto e honesto>.",
+   "exemplo_real": "esse moço aqui tem um nome muito esquisito que eu não vou falar aqui por motivos de: é impossível",
+   "canal": "Doinsuka (7x)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "casa com anuncio_de_apelido: na 1ª aparição do nome difícil, já dar o apelido",
+    "nunca pra insinuar cena sexual que 'não vai ser mostrada' (a Doinsuka usa assim; nós não)"
+   ]
+  },
+  {
+   "id": "calma_fingida",
+   "nome": "Hê, que legal (ironia seca depois de fala absurda de vilão)",
+   "situacao": [
+    "vilao_anuncia_plano_absurdo",
+    "fala_dramatica_demais"
+   ],
+   "molde": "<fala absurda do vilão>. Hê, que legal. <reação do outro personagem>.",
+   "exemplo_real": "Vai me ajudar a trazer o demônio de volta à vida. Hê, que legal. Alexia revira os olhos. É sério isso, mano?",
+   "canal": "DrezinNimes; a Doinsuka faz o mesmo descrevendo o absurdo como 'um negócio muito suave, muito de boa'",
+   "max_por_capitulo": 1,
+   "travas": [
+    "depois de ameaça ou plano, nunca depois de cena de ferimento ou morte"
+   ]
+  },
+  {
+   "id": "desmentir_personagem",
+   "nome": "Desmentir o personagem na hora (ele afirma X, o narrador nega)",
+   "situacao": [
+    "elogio_imerecido",
+    "personagem_se_gaba",
+    "fachada"
+   ],
+   "molde": "<personagem> diz que <X>. É nada. <apelido> não é <X> coisa nenhuma, não.",
+   "exemplo_real": "A Corrada agradece e diz que ele é um cavalheiro. É nada, mano. Esse moleque aí não é cavaleiro coisa nenhuma, não.",
+   "canal": "DrezinNimes",
+   "max_por_capitulo": 1,
+   "travas": [
+    "nunca desmentir algo que a obra confirma depois (vira informação errada)"
+   ]
+  },
+  {
+   "id": "bronca_ao_personagem",
+   "nome": "Bronca de tia falando COM o personagem (minha filha / meu filho / calma lá)",
+   "situacao": [
+    "pergunta_obvia",
+    "personagem_fraqueja_sem_motivo",
+    "personagem_repete_erro"
+   ],
+   "molde": "<fato>. <bronca curta>, minha filha / meu filho.",
+   "exemplo_real": "a mina caiu do lado da máquina, não é possível. Simplesmente, faz um esforço aí, minha filha.",
+   "exemplo_real_2": "O cara aprendeu a lição, viu? Eu espero que tenha aprendido. Se não aprendeu, filho, será que vai sobrar uma terceira vez? Eu acho que não.",
+   "canal": "DrezinNimes ('minha filha' 371x, 'meu filho' 121x, 'calma lá' 161x); omelhormanhwa",
+   "max_por_capitulo": 1,
+   "travas": [
+    "'meu filho' com homem na mesma medida que 'minha filha' com mulher — não pode virar bronca só em personagem feminina",
+    "não é o tique 'filho' no fim de toda frase do Momo (ver nao_usar)"
+   ]
+  },
+  {
+   "id": "aquele_classico",
+   "nome": "Nomear o clichê do gênero (aquele clássico ___ / discursinho de protagonista)",
+   "situacao": [
+    "cena_cliche",
+    "discurso_motivacional",
+    "tesouro_escondido_previsivel"
+   ],
+   "molde": "<fato> — aquele clássico <nome do clichê>.",
+   "exemplo_real": "Todos indo para aquele clássico episódio da praia.",
+   "exemplo_real_2": "e ele começa com seu discursinho de protagonista",
+   "exemplo_real_3": "é um clichê máximo, né? Se tem uma cachoeira, tem um tesouro, uma caverna escondida atrás",
+   "canal": "DrezinNimes (22x), iJaxManhwa, mangaticos — 3 canais: é do nicho",
+   "max_por_capitulo": 1,
+   "travas": [
+    "carinho com o gênero, nunca desprezo pela obra (o público gosta do clichê)"
+   ]
+  },
+  {
+   "id": "resumindo",
+   "nome": "Resumindo: ___ (fecha explicação enrolada com a conclusão seca)",
+   "situacao": [
+    "conversa_enrolada",
+    "explicacao_longa",
+    "plano_complicado"
+   ],
+   "molde": "<o que foi dito, rápido>. Resumindo: <conclusão curta e engraçada>.",
+   "exemplo_real": "ele falou que ia ser gostoso tomar o chá, mas ele preferiria tomar um vinho. Resumindo, não mudou nada, ficou só pior",
+   "exemplo_real_2": "conhecidos por caçar caçadores criminais. Resumindo, o prota estava muito lascado",
+   "canal": "mangaticos (1.063x)",
+   "frequencia_por_mil": 0.15,
+   "max_por_capitulo": 1,
+   "travas": []
+  },
+  {
+   "id": "bla_bla_bla",
+   "nome": "Blá blá blá (pula a explicação chata sem perder o fio)",
+   "situacao": [
+    "dialogo_tecnico_longo",
+    "sermao",
+    "regra_que_nao_importa"
+   ],
+   "molde": "<personagem> começa a explicar <assunto> e blá blá blá; o que importa é que <fato que interessa>.",
+   "exemplo_real": "ela começou a entrar num negócio teórico de alquimia que é um monte de blá blá blá, é conversa de especialista",
+   "exemplo_real_2": "ficou explicando monte de coisa e blá blá blá, e para resumir ele era meio que a espada do prota",
+   "canal": "mangaticos (471x)",
+   "max_por_capitulo": 1,
+   "valor": "Também é ferramenta de RITMO: encurta trecho de diálogo longo sem cara de corte.",
+   "travas": [
+    "nunca em fala que move a trama — só em explicação que o público não precisa"
+   ]
+  },
+  {
+   "id": "pacote_completo",
+   "nome": "O pacote completo da ___ (lista de desgraças fechada com rótulo)",
+   "situacao": [
+    "personagem_na_pior",
+    "passado_tragico_cliche",
+    "apresentacao_de_azarado"
+   ],
+   "molde": "<desgraça 1>, <desgraça 2>, <desgraça 3>: o pacote completo da <desgraça / de drama de ___>.",
+   "exemplo_real": "roupas rasgadas, sujo, cheio de hematomas e o pacote completo da desgraça",
+   "exemplo_real_2": "a mãe faliu, o pai com câncer, o pacote completo de drama de caçador",
+   "canal": "mangaticos",
+   "max_por_capitulo": 1,
+   "travas": [
+    "a lista é de SITUAÇÃO (dívida, azar, roupa rasgada), nunca de ferimento detalhado",
+    "nunca sobre aparência, roupa ou corpo de personagem — no teste de 18/10 saiu 'o pacote completo da tentação' sobre a roupa dela: isso não"
+   ]
+  },
+  {
+   "id": "relaxem_e_ilusao",
+   "nome": "Relaxem, meu povo, é só um sonho/ilusão (acalma o público depois do susto falso da obra)",
+   "situacao": [
+    "morte_que_era_sonho",
+    "ilusao",
+    "visao_do_futuro"
+   ],
+   "molde": "<o susto>. Relaxem, meu povo, isso daí é apenas <um sonho / uma ilusão>.",
+   "exemplo_real": "no fim também não sobrou nada para ele. Relaxem, meu povo, isso daí é apenas uma ilusão que o administrador havia mostrado",
+   "canal": "mangaticos ('meu povo' 752x)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "só DEPOIS de a obra revelar que era sonho/ilusão — nunca adiantar a revelação"
+   ]
+  },
+  {
+   "id": "diminutivo_deboche",
+   "nome": "Diminutivo de deboche (principezinho, carinha, perdidinho)",
+   "situacao": [
+    "arrogante_rebaixado",
+    "capanga_sem_nome",
+    "personagem_confuso"
+   ],
+   "molde": "<o/aquele> <substantivo>-zinho <ação>.",
+   "exemplo_real": "o que deixou ele mais uma vez perdidinho",
+   "exemplo_real_2": "mas alguns segundos depois outro carinha aparece na sua carruagem luxuosa",
+   "canal": "iJaxManhwa ('carinha' 1.612x, 'perdidinho' 129x, 'principezinho', 'papinha de neném')",
+   "max_por_capitulo": 1,
+   "travas": [
+    "o diminutivo cai sobre o PAPEL ou a atitude (príncipe arrogante, capanga), nunca sobre corpo",
+    "não é o 'protinha' (afeto pelo prota fraco, já nos apelidos)"
+   ]
+  },
+  {
+   "id": "giria_de_reacao",
+   "nome": "Gíria de reação dentro do fato (deu ruim / tá lascado / tremendo na base / que doideira)",
+   "situacao": [
+    "personagem_percebe_o_perigo",
+    "plano_falha",
+    "virada_inesperada",
+    "poder_absurdo"
+   ],
+   "molde": "<fato>, e o <apelido> percebe que deu ruim / tá lascado / fica tremendo na base.",
+   "exemplo_real": "aquela empregada de antes bem nas suas costas derruba um prato e o nosso garoto encara ela e percebe que deu ruim",
+   "exemplo_real_2": "e não é que nosso amigo conseguiu convocar um humano? Caramba, que doideira.",
+   "variacoes": [
+    "deu ruim",
+    "tá lascado",
+    "tremendo na base",
+    "isso é muito roubado",
+    "olha só",
+    "que doideira"
+   ],
+   "canal": "iJaxManhwa (tremendo na base 131x, lascado 113x, muito roubado 86x, deu ruim 56x); omelhormanhwa (olha só 1.167x, que doideira 37x)",
+   "max_por_capitulo": 2,
+   "travas": []
+  },
+  {
+   "id": "manda_a_real",
+   "nome": "Manda a real: ___ (o narrador reconta a fala dura do personagem, seca e direta)",
+   "situacao": [
+    "verdade_dura",
+    "decisao_firme",
+    "ultimato"
+   ],
+   "molde": "<personagem> <gesto> e manda a real: <fala curta em português de rua>.",
+   "exemplo_real": "o cara aponta para o mapa e manda a real: se os aristocratas tivessem conseguido reunir o exército de boa, eles iriam...",
+   "canal": "omelhormanhwa (163x); mesma família da fala 'dublada' do DrezinNimes",
+   "max_por_capitulo": 1,
+   "travas": [
+    "só quando o NARRADOR reconta (painel sem balão ou com várias pessoas falando); balão de fala continua sendo voz do personagem (ordem do dono, 16/10)"
+   ]
+  },
+  {
+   "id": "a_parada_e_o_seguinte",
+   "nome": "A parada é o seguinte: ___ (explica regra do sistema/mundo sem cara de aula)",
+   "situacao": [
+    "sistema_apresentado",
+    "regra_nova",
+    "missao_explicada"
+   ],
+   "molde": "A parada é o seguinte: <regra em 1 frase>.",
+   "exemplo_real": "ele logo lembra que tá sem verba e pergunta qual será o pedido. A parada é o seguinte: esse departamento tem detectado vários aparecimentos de torres",
+   "canal": "omelhormanhwa (84x)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "não usar no mesmo capítulo que tipo_um_so_que (mesma função)"
+   ]
+  },
+  {
+   "id": "sera_que_esse_cara",
+   "nome": "Será que esse cara ___? Ou será que ___? (pergunta do narrador no meio da cena)",
+   "situacao": [
+    "poder_misterioso",
+    "identidade_escondida",
+    "virada_prestes_a_acontecer"
+   ],
+   "molde": "<fato misterioso>. Será que <hipótese 1>? Ou será que <hipótese 2>?",
+   "exemplo_real": "Roman ativou uma barreira, defendendo aquele ataque extremamente fácil. Será que esse cara tá usando um artefato? Ou será que ele mesmo fez uma barreira?",
+   "canal": "omelhormanhwa ('será que' 0,84/mil, o maior dos 15 canais)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "as hipóteses saem do que a cena mostra — nunca revelar a resposta antes da obra"
+   ]
+  },
+  {
+   "id": "virar_comida",
+   "nome": "Ameaça em imagem de comida (virar churrasco / virar geleia)",
+   "situacao": [
+    "ameaca_de_fogo",
+    "monstro_quer_devorar"
+   ],
+   "molde": "<ameaça>, e o <apelido> com medo de virar <comida>.",
+   "exemplo_real": "ameaçado de virar churrasco, o bicho...",
+   "exemplo_real_2": "para não virar geleia frita",
+   "canal": "SR.GUUGOU; Doinsuka ('o cara sempre acaba fazendo cosplay de churrasco')",
+   "max_por_capitulo": 1,
+   "travas": [
+    "a comida é a AMEAÇA, nunca a descrição do ferimento ou do corpo queimado"
+   ]
+  },
+  {
+   "id": "eu_confesso",
+   "nome": "Eu confesso que ___ (o narrador admite a própria reação à cena)",
+   "situacao": [
+    "cena_engracada",
+    "personagem_dando_pena",
+    "trecho_confuso_da_obra"
+   ],
+   "molde": "<fato da cena>. Galera, eu confesso que <reação curta do narrador: ri, senti dó, não entendi nada>.",
+   "exemplo_real": "Essa parte aqui é pura filosofia, galera. E eu confesso que eu não estava entendendo é mais nada. Nem o protagonista não tava entendendo.",
+   "exemplo_real_2": "A Júlia que tava vendo isso, ela ficou meio com ciúmes. Galera, eu confesso que eu senti um pouco de dó dela",
+   "canal": "oporaodacidadela ('eu confesso' 183x em 6,0 milhões de palavras)",
+   "frequencia_por_mil": 0.03,
+   "max_por_capitulo": 1,
+   "travas": [
+    "a reação é sobre a HISTÓRIA (pena, riso, confusão), nunca sobre corpo ou roupa",
+    "não inventar bastidor ('quando eu li isso ontem...'): só a reação"
+   ]
+  },
+  {
+   "id": "aguardem_que_vem",
+   "nome": "Aguardem aí, vocês vão ver (promessa de virada sem spoiler)",
+   "situacao": [
+    "prota_subestimado",
+    "virada_prestes_a_acontecer",
+    "confronto_comecando"
+   ],
+   "molde": "<situação tensa>. Fala sério, né, galera? <opinião curta>. Mas aguardem aí, vocês vão ver.",
+   "exemplo_real": "Fala sério, né, galera? Essa obra aqui é muito boa. Mas aguardem aí, vocês vão ver.",
+   "canal": "oporaodacidadela ('aguardem' 26x)",
+   "frequencia_por_mil": 0.004,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só quando a virada acontece NESTE capítulo — prometer o que não vem é mentir pro público"
+   ]
+  },
+  {
+   "id": "entrar_na_obra",
+   "nome": "Deu vontade de entrar nessa obra e ___ (o narrador quer intervir)",
+   "situacao": [
+    "personagem_teimoso_ou_chato",
+    "personagem_fazendo_besteira"
+   ],
+   "molde": "<personagem> <atitude irritante>. Nessa hora deu vontade de entrar nessa obra aí e <ação leve: dar uns petelecos, puxar a orelha> nesse <apelido>.",
+   "exemplo_real": "ele fica resmungando como sempre nessa hora deu vontade de entrar nessa obra aí e dar uns petelecos nesse João para ele largar a mão de ser chato",
+   "canal": "oporaodacidadela",
+   "max_por_capitulo": 1,
+   "travas": [
+    "ação leve e cômica (peteleco, cascudo, puxão de orelha) — nunca violência de verdade nem contra mulher/criança"
+   ]
+  },
+  {
+   "id": "como_sempre",
+   "nome": "___ como sempre (piada recorrente com o hábito do personagem)",
+   "situacao": [
+    "personagem_repete_mania",
+    "azar_recorrente",
+    "timing_comico"
+   ],
+   "molde": "<personagem> <faz de novo a mania dele>, como sempre. <tirada curta>.",
+   "exemplo_real": "E foi aí que eles perceberam que o Gobang continuou lerdo como sempre. Ele só ficou mais forte.",
+   "exemplo_real_2": "Nesse momento, Shinio, mãe de Kaito, entrou e deu um tapa no filho, como sempre no momento perfeito.",
+   "canal": "oporaodacidadela ('como sempre' 223x)",
+   "frequencia_por_mil": 0.037,
+   "max_por_capitulo": 1,
+   "travas": [
+    "a mania tem de ter aparecido antes na obra — senão o 'como sempre' não faz sentido",
+    "nunca sobre deficiência, peso ou traço de corpo"
+   ]
+  },
+  {
+   "id": "veredito_ao_publico",
+   "nome": "Esse cara aqui não vale nada, galera (veredito do narrador pro público)",
+   "situacao": [
+    "vilao_mesquinho",
+    "personagem_traindo_ou_humilhando"
+   ],
+   "molde": "<atitude do personagem>. Esse <apelido> aqui não vale nada, galera. Fala sério. <reação curta>.",
+   "exemplo_real": "Esse cara aqui não vale nada, galera. Fala sério. Dá raiva desse maluco.",
+   "canal": "oporaodacidadela ('não vale nada, galera' 10x; 'fala sério' 136x)",
+   "max_por_capitulo": 1,
+   "travas": [
+    "o veredito é sobre a atitude na trama, nunca sobre corpo, origem ou deficiência",
+    "no exemplo real o motivo é o vilão zombar de alguém que 'mal consegue andar': a zombaria fica com o vilão, o narrador fica do lado de quem é zombado"
+   ]
+  },
+  {
+   "id": "res_peito",
+   "nome": "RES-peito (trocadilho de quem tenta disfarçar que reparou)",
+   "situacao": [
+    "mulher_bonita_em_cena",
+    "heroi_constrangido"
+   ],
+   "molde": "<fato com a personagem>. E aqui é só RES-peito, galera. Muito RES-peito.",
+   "exemplo_real": "Ela infla o peito toda arrogante. E aqui é só RES-peito, galera.",
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
+    "o fato da cena continua na mesma frase ou na seguinte (a piada é tempero, não troca a história)"
+   ]
+  },
+  {
+   "id": "beleza_da_moca",
+   "nome": "Elogio malicioso da beleza da moça (o narrador perde o foco)",
+   "situacao": [
+    "mulher_bonita_em_cena"
+   ],
+   "molde": "<fato com a personagem>. Gente, que mulherão. Foco, foco, voltando pra história.",
+   "exemplo_real": "A ruiva entra no salão e todo mundo para. Que mulherão. Foco, foco.",
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
+    "o fato da cena continua na mesma frase ou na seguinte (a piada é tempero, não troca a história)"
+   ]
+  },
+  {
+   "id": "heroi_sortudo",
+   "nome": "Inveja do herói rodeado de mulher bonita",
+   "situacao": [
+    "mulheres_perto_do_heroi"
+   ],
+   "molde": "<o herói cercado das moças>. Esse cara nasceu virado pra lua, não é possível.",
+   "exemplo_real": "O príncipe vive cercado de bruxa linda. Esse cara nasceu virado pra lua.",
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
+    "o fato da cena continua na mesma frase ou na seguinte (a piada é tempero, não troca a história)"
+   ]
+  },
+  {
+   "id": "olho_no_lugar_errado",
+   "nome": "Personagem (ou o narrador) olhando onde não devia",
+   "situacao": [
+    "mulher_bonita_em_cena",
+    "heroi_constrangido"
+   ],
+   "molde": "<fato>. E o <apelido> tentando olhar pro rosto dela, tentando, coitado.",
+   "exemplo_real": "Ela chega pertinho dele. E o nosso garoto tentando olhar só pro rosto dela, tentando.",
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
+    "o fato da cena continua na mesma frase ou na seguinte (a piada é tempero, não troca a história)"
+   ]
+  }
+ ],
+ "jargao": {
+  "_leia": "Vocabulário do nicho por tema. Hoje o prompt de gerar_recap só tem UMA palavra de nicho ('guilda', dentro de um exemplo) e não existe glossário nenhum em config/ — este bloco é o buraco central que estava faltando. Escolher o tema pela obra; murim_e_cultivo não se mistura com sistema_e_painel/dungeon_e_torre.",
+  "sistema_e_painel": [
+   {
+    "termo": "o sistema diz/avisa que ___",
+    "quando": "sempre que houver caixa do sistema — põe a informação na boca do sistema em vez de explicar por conta própria",
+    "exemplo_real": "Se o próprio sistema já diz que tá com 100% concluído, com isso não há mais perigo naquela vila, né?",
+    "ocorrencias": 779
+   },
+   {
+    "termo": "uma notificação do sistema surge dizendo que ___",
+    "quando": "pop-up na tela: tempo restante, inimigos restantes, missão desbloqueada",
+    "exemplo_real": "Uma notificação do sistema então surge dizendo que os inimigos restantes são 14 e que o tempo restante é 16 horas",
+    "ocorrencias": 33
+   },
+   {
+    "termo": "Tipo de missão: ___. Objetivo: ___. Recompensa: ___",
+    "quando": "tela de missão/status — ler os campos em voz neutra e rápida e SÓ DEPOIS reagir; dá sensação de jogo",
+    "exemplo_real": "25º andar. Tipo de missão. Objetivo de fuga. Objetivo especial, proteger o NPC",
+    "ocorrencias": 553,
+    "trava": "no máximo 1 bloco desses por capítulo"
+   },
+   {
+    "termo": "missão dada é missão cumprida",
+    "quando": "o protagonista recebe tarefa",
+    "exemplo_real": "E vocês estão ligado que missão dada é missão cumprida, né?",
+    "ocorrencias": 553
+   },
+   {
+    "termo": "ativando habilidade ___ / desbloqueia a habilidade ___",
+    "quando": "todo poder nomeado — o nicho SEMPRE dá nome e condição ao poder, nunca diz 'ele usou seu poder'",
+    "exemplo_real": "o sistema até diz que ela ganhou uma habilidade ali, uma habilidade chamada adquirida de olhos de falcão",
+    "ocorrencias": 669
+   },
+   {
+    "termo": "a janela de status dele mostra ___",
+    "quando": "ficha de personagem — entrega nome, classe e nível de alguém novo em 1 locução",
+    "exemplo_real": "ele comenta que ela consegue ver a janela de status em cima da cabeça dela... que ela é nível 257",
+    "ocorrencias": 12
+   },
+   {
+    "termo": "nível ___ / subir de nível",
+    "quando": "medida de força padrão; usar número concreto sempre que a cena der",
+    "exemplo_real": "é literalmente para poder subir de nível e não para pegar dinheiro",
+    "ocorrencias": 1221
+   },
+   {
+    "termo": "upar / farmar ___",
+    "quando": "comentário do narrador sobre grind e treino — encurta explicação longa",
+    "exemplo_real": "Caraca, o cara quer farmar aura mesmo, hein, filho.",
+    "ocorrencias": 9
+   },
+   {
+    "termo": "o hack / ganhou o hack",
+    "quando": "poder absurdamente desequilibrado — é piada e jargão ao mesmo tempo",
+    "exemplo_real": "Rapaz, o velho ganhou o hack aqui. Nós nem vimos nada, pô.",
+    "ocorrencias": 107
+   },
+   {
+    "termo": "isso é muito roubado",
+    "quando": "comentário do narrador quando o poder do prota é desequilibrado — irmão do 'ganhou o hack'",
+    "exemplo_real": "já que ele tem cura e energia infinita, o que é muito roubado",
+    "ocorrencias": 86,
+    "corpus": "iJaxManhwa (13,4 mi de palavras)"
+   },
+   {
+    "termo": "buff / inventário / pedra de atributo",
+    "quando": "itens e bônus — 'buff' explica em 1 palavra o que seria uma frase inteira",
+    "exemplo_real": "o moniped tira uma bolsa ali que tava no seu inventário",
+    "ocorrencias": 44
+   },
+   {
+    "termo": "penalidade: se ___, a penalidade é ___",
+    "quando": "regra dura do sistema (morrer, falhar, atrasar) — cria risco real",
+    "exemplo_real": "a penalidade para a morte é uma queda permanente de nível de todas as habilidades e status",
+    "ocorrencias": 40
+   },
+   {
+    "termo": "é só tutorial / saiu do tutorial",
+    "quando": "começo de arco de sistema — marca que o pior ainda vem",
+    "exemplo_real": "é só tutorial. É todo mundo NPC",
+    "ocorrencias": 37
+   },
+   {
+    "termo": "o jogador ___",
+    "quando": "obras em que o sistema trata o protagonista como jogador",
+    "exemplo_real": "Notificação do sistema. Parabéns ao jogador por ativar a missão oculta",
+    "ocorrencias": 161
+   }
+  ],
+  "rank_e_cacador": [
+   {
+    "termo": "rank F / C / B / A / S / SS",
+    "quando": "classificação de caçador, item, monstro, espada — SEMPRE em inglês, letra colada, nunca traduzir",
+    "exemplo_real": "shinu yong caçador de rank B remoção do líder da guilda adiada por enquanto",
+    "ocorrencias": 347
+   },
+   {
+    "termo": "caçador (nunca 'hunter')",
+    "quando": "profissão de quem entra em dungeon — sempre com rank junto",
+    "exemplo_real": "o caçador chamado Minsuki de rank C que participou de 12 investidas em Dungeons até agora",
+    "ocorrencias": 160
+   },
+   {
+    "termo": "despertado / despertar",
+    "quando": "mundo moderno com portais — separa quem pode entrar na dungeon de quem não pode",
+    "exemplo_real": "apenas um despertado de rank global consegue fazer tal coisa, esconder o seu nível de poder",
+    "ocorrencias": 138
+   },
+   {
+    "termo": "guilda / associação",
+    "quando": "'guilda' para o grupo, 'associação' para o órgão oficial que dá missão, paga e registra rank",
+    "exemplo_real": "a sua guilda não quer que esse incidente se espalhe para o público",
+    "ocorrencias": 254
+   }
+  ],
+  "dungeon_e_torre": [
+   {
+    "termo": "dungeon (preferir a 'masmorra')",
+    "quando": "na VOZ do narrador o natural é dungeon; 'masmorra' é a palavra da tradução oficial. No KkVirjao a diferença é brutal: dungeon 47 x masmorra 3",
+    "exemplo_real": "nasceu aqui uma dungeon misteriosa, pô. E aí o povo não consegue entrar",
+    "ocorrencias": 199
+   },
+   {
+    "termo": "quebra de dungeon",
+    "quando": "nome exato do evento em que os monstros vazam pra cidade — usar o termo",
+    "exemplo_real": "ele comenta que valeu a pena gastar milhões para causar aquela quebra de dungeon e fazer o chefe sair",
+    "ocorrencias": 10
+   },
+   {
+    "termo": "portal / portal dimensional",
+    "quando": "abertura entre os mundos",
+    "exemplo_real": "quando uma masmorra é negligenciada por muito tempo, os monstros lá dentro rompem o portal e atravessam para o nosso mundo",
+    "ocorrencias": 106
+   },
+   {
+    "termo": "o Xº andar / escalar a torre",
+    "quando": "obra de torre — o andar com número é o medidor de progresso, diga o número",
+    "exemplo_real": "a cada cinco andares a dificuldade dispara. Em resumo, é como um andar de boss",
+    "ocorrencias": 1146
+   },
+   {
+    "termo": "andar do boss / chefe final",
+    "quando": "inimigo de fim de fase — 'chefe' sozinho é ambíguo (patrão), preferir estas formas",
+    "exemplo_real": "Eles concluíram até o andar do boss. Isso aqui não é brincadeira",
+    "ocorrencias": 39
+   },
+   {
+    "termo": "mob de nível baixo",
+    "quando": "secundário descartável em cena com cara de jogo — mas 'figurante' é 100x mais usado, use figurante como padrão",
+    "exemplo_real": "Nome: Flut, classe mob de nível baixo, habitate área do chefe final",
+    "ocorrencias": 8
+   }
+  ],
+  "magia_e_poder": [
+   {
+    "termo": "aura / aura de batalha",
+    "quando": "energia visível de espadachim e cavaleiro — era o maior termo que faltava no nosso vocabulário",
+    "exemplo_real": "Adrian, isto aqui é a aura de batalha. A aura de batalha que os orques possuíam está se reunindo em um só lugar",
+    "ocorrencias": 554
+   },
+   {
+    "termo": "mana / coração de mana / pedra de mana",
+    "quando": "magia em fantasia ocidental — 'coração de mana' é o órgão de poder",
+    "exemplo_real": "um simples coração de mana não deveria conseguir bloquear uma corrente de mana",
+    "ocorrencias": 555
+   },
+   {
+    "termo": "núcleo (mágico / de alma)",
+    "quando": "ponto fraco de golem, ou medida de poder de uma pessoa",
+    "exemplo_real": "O ponto fraco dos golens é o núcleo mágico no corpo deles",
+    "ocorrencias": 78
+   },
+   {
+    "termo": "artefato",
+    "quando": "item mágico com efeito nomeado — sempre dizer o efeito junto",
+    "exemplo_real": "aquele artefato possui habilidade de aumentar o seu poder mágico por um período de tempo",
+    "ocorrencias": 95
+   },
+   {
+    "termo": "elixir / pílula",
+    "quando": "item de avanço instantâneo — sempre junto da consequência física",
+    "exemplo_real": "Normalmente quando alguém toma um elixir ou pílula de alto nível, a energia interna dessa pessoa deveria estar surgindo pelo seu corpo",
+    "ocorrencias": 71
+   }
+  ],
+  "murim_e_cultivo": [
+   {
+    "termo": "cultivo / cultivar",
+    "quando": "manhua e murim — é o treino",
+    "exemplo_real": "ele diz que esteve cultivando a 300 e tantos anos",
+    "ocorrencias": 93
+   },
+   {
+    "termo": "energia interna / circulação",
+    "quando": "o recurso e a técnica de movê-lo",
+    "exemplo_real": "a energia interna que a pessoa adquiriu através do elixir explode e a pessoa tem que circular essa energia",
+    "ocorrencias": 83
+   },
+   {
+    "termo": "seita / clã / patriarca / ancião / discípulo",
+    "quando": "estrutura de poder em murim e família nobre",
+    "exemplo_real": "como o discípulo mais jovem do líder da seita dos mendigos",
+    "ocorrencias": 641
+   },
+   {
+    "termo": "jovem mestre / vossa alteza",
+    "quando": "VOCATIVOS do nicho — é assim que criados falam com o protagonista nobre",
+    "exemplo_real": "Jovem mestre, por favor, experimente isso. Essa é uma nova seda que acabamos de receber",
+    "ocorrencias": 1035
+   },
+   {
+    "termo": "Murim / Aliança Murim",
+    "quando": "obra de artes marciais chinesa/coreana — sem tradução, com maiúscula",
+    "exemplo_real": "trabalharia como líder da Aliança Murim, que é respeitada por todo o povo de Murim",
+    "ocorrencias": 98
+   }
+  ],
+  "enredo_e_personagem": [
+   {
+    "termo": "regressão / regressor / reencarnou / renasceu",
+    "quando": "abertura de obra de regressão — o gancho é sempre 'ele voltou sabendo o que vai acontecer'. Vocabulário de ABERTURA: 1 vez por obra, não por capítulo",
+    "exemplo_real": "Isso é uma regressão inútil. Mas espera, eu ainda tenho as memórias dos 13 anos que passei aqui",
+    "ocorrencias": 36
+   },
+   {
+    "termo": "vingança / traição / humilhado / subestimado",
+    "quando": "motor do enredo — o nicho nomeia o motivo cedo e repete",
+    "exemplo_real": "É o cicatriz quem vai ter a sua primeira vingança contra ele",
+    "ocorrencias": 202
+   },
+   {
+    "termo": "rei demônio / lord demônio / exército demoníaco",
+    "quando": "antagonista supremo de fantasia — 'rei demônio' é o padrão; 'lorde' solto não existe",
+    "exemplo_real": "o segundo general do exército demoníaco pergunta se o rei demônio não voltou até agora",
+    "ocorrencias": 143
+   },
+   {
+    "termo": "solta a bomba de que ___",
+    "quando": "revelação grande feita por um personagem",
+    "exemplo_real": "o convidado segura o cabo da espada reluzente e solta a bomba de que aquela peça é o terceiro item lendário existente no mundo inteiro",
+    "ocorrencias": 9,
+    "corpus": "SR.GUUGOU (2,7 mi de palavras)"
+   }
+  ],
+  "eufemismos_do_nicho": [
+   {
+    "termo": "foi de Vasco (= morreu)",
+    "quando": "TODA morte. É o eufemismo do próprio nicho: engraçado, entendido pelo público e seguro para o YouTube. Resolve melhor do que 'partiu'/'encontrou o fim' do config/dicionario_seguro.json, que soam artificiais",
+    "exemplo_real": "do jeito que ele pegou a chave de fenda no estômago, coitado do figurante foi de Vasco",
+    "ocorrencias": 76,
+    "max_por_video": 3
+   },
+   {
+    "termo": "já era (= acabou pra ele)",
+    "quando": "desfecho rápido de luta ou de plano — mais curto que qualquer eufemismo do dicionário",
+    "exemplo_real": "porque até onde ele se lembra, o mundo já era",
+    "ocorrencias": 179
+   },
+   {
+    "termo": "ketchup (= sangue)",
+    "quando": "toda cena com sangue. O nicho inteiro já usa; é o eufemismo mais seguro E mais engraçado para o nosso problema de monetização",
+    "exemplo_real": "O maluco tá até vazando um ketchup pelas bocas ali. É doido.",
+    "ocorrencias": 117
+   }
+  ]
+ },
+ "apelidos": {
+  "_leia": "Apelidos por TIPO de personagem. Uma vez escolhido, FIXA para a obra inteira (sorteio, regra 6). Somados, apelidos dão 3,603/mil — quase o dobro de todos os moldes de piada juntos: é o que o narrador de verdade repete o tempo todo. Trava geral: o traço vem de ROUPA, COR DE CABELO, FUNÇÃO, ARMA ou BORDÃO — nunca de corpo, peso, deficiência, raça ou religião. Os canais usam 'Gordola', 'o alejado', 'Quatro Olhos', 'a peituda', 'Nerdola': o molde serve, esses alvos não.",
+  "protagonista": [
+   {
+    "apelido": "o prota / o nosso prota",
+    "exemplo_real": "o nosso prota já sai ali disparado atrás do Goxan",
+    "ocorrencias": 2288
+   },
+   {
+    "apelido": "o protinha",
+    "quando": "protagonista ainda fraco — diminutivo dá afeto sem elogiar nem ofender",
+    "exemplo_real": "O protinha mostra a tinta dele. Qual foi, parça?",
+    "ocorrencias": 875
+   },
+   {
+    "apelido": "o brabo / nosso brabo",
+    "quando": "quando ele mostra força",
+    "exemplo_real": "E a cena muda pro nosso brabo chegando com espadão",
+    "ocorrencias": 766
+   },
+   {
+    "apelido": "o menino",
+    "exemplo_real": "o menino limpa ali o ketchup da boca e já começa a cantar de novo",
+    "ocorrencias": 1091
+   },
+   {
+    "apelido": "nosso ___ (nosso loirinho, nosso mago, nosso espadachim)",
+    "quando": "o 'nosso' põe o espectador do lado dele sem precisar dizer que ele é legal; o substantivo troca conforme a cena. É a forma mais produtiva dos dois canais",
+    "exemplo_real": "Óbvio que nosso loirinho tá...",
+    "ocorrencias": 1558
+   }
+  ],
+  "qualquer_personagem_em_acao_absurda": [
+   {
+    "apelido": "o maluco",
+    "quando": "ação impulsiva ou absurda de QUALQUER personagem. Único apelido forte que os dois canais usam na mesma dose: é vocabulário do nicho, não assinatura. Não tem alvo — 'maluco' é o que a pessoa FEZ",
+    "exemplo_real": "Aí o maluco pegou e travou. O cara não mexe",
+    "ocorrencias": 1346
+   },
+   {
+    "apelido": "o bicho",
+    "quando": "serve para tudo: monstro, vilão, protagonista, velho. A palavra mais usada do corpus inteiro",
+    "exemplo_real": "Oxá, o bicho tá flutuando. Que negócio doido é esse aqui mesmo?",
+    "ocorrencias": 4324
+   }
+  ],
+  "figurante_sem_nome": [
+   {
+    "apelido": "o figurante",
+    "quando": "QUALQUER personagem secundário sem nome. Resolve de uma vez o problema de nomear NPC e já é piada meta: o narrador admite que o cara não importa. Empate raro entre os canais (0,43 x 0,45/mil) = padrão do nicho",
+    "exemplo_real": "O figurante tava em crise",
+    "ocorrencias": 934
+   },
+   {
+    "apelido": "o figurante medroso / o figurante <traço de função>",
+    "exemplo_real": "O figurante medroso tá ali. Ei, pô, rapaz, bicho, eu tô com um mau pressentimento, sabe?",
+    "ocorrencias": 934
+   },
+   {
+    "apelido": "o coitado / o coitado do ___",
+    "quando": "quem está levando a pior na cena, inclusive o vilão apanhando. O deboche mais seguro do material: não ataca característica nenhuma, só a situação",
+    "exemplo_real": "Aí o coitado desmaiou aqui. O tio dele ficou olhando",
+    "ocorrencias": 1284
+   },
+   {
+    "apelido": "NPC",
+    "quando": "quando o secundário é descartável ou a cena tem cara de jogo; serve também ao contrário ('ela não é um NPC inútil')",
+    "exemplo_real": "Não parece NPC. A reação, como eles conversam",
+    "ocorrencias": 38
+   }
+  ],
+  "aliado_ou_coadjuvante": [
+   {
+    "apelido": "o loirinho / o de óculos / o do bigode",
+    "quando": "traço de aparência NEUTRA (cabelo, acessório) — nunca corpo",
+    "exemplo_real": "E o que tava comandando tudo isso era um de óculos ali, que eu vou chamar só de quatro, que é muito mais fácil.",
+    "ocorrencias": 249
+   },
+   {
+    "apelido": "o <função> velho <adjetivo> (o mago velho diferenciado, o espadachim velho brabo)",
+    "quando": "empilhar função + 'velho' + adjetivo é assinatura do mikemanhwa e funciona bem",
+    "exemplo_real": "Na moral, meu amigo, o nosso mago velho diferenciado é bom demais, rapaziada.",
+    "ocorrencias": 512
+   },
+   {
+    "apelido": "o velho",
+    "exemplo_real": "O velho é brabo. O velho é brabo. É exatamente por caras como ele que estávamos esperando",
+    "ocorrencias": 63
+   }
+  ],
+  "vilao_ou_valentao": [
+   {
+    "apelido": "o otário / o trouxa / o besta",
+    "quando": "SÓ vilão e valentão, e sempre com o motivo na frase seguinte (ver molde xingamento_com_porque)",
+    "exemplo_real": "Ei, parabéns. Continuou assim, otário.",
+    "ocorrencias": 757
+   },
+   {
+    "apelido": "o chefão / o bichão",
+    "quando": "antagonista de peso ou chefe de fase",
+    "exemplo_real": "o bicho é brabo demais, molecada",
+    "ocorrencias": 185
+   }
+  ],
+  "monstro": [
+   {
+    "apelido": "o bicho / o bichinho / o monstrengo",
+    "quando": "'bichinho' para monstro pequeno ou derrotado — o diminutivo cai sobre o papel, nunca sobre o corpo",
+    "exemplo_real": "essa brodinha vai matar o coitado do dragão de susto. O bichinho fica pensando papai",
+    "ocorrencias": 185
+   }
+  ],
+  "nobreza_e_murim": [
+   {
+    "apelido": "jovem mestre / vossa alteza / o patriarca / o ancião",
+    "quando": "só em obra de murim ou nobreza — em manhwa moderno de dungeon não aparece, não misture",
+    "exemplo_real": "o patriarca dá um salto e começa a caminhar pelo ar",
+    "ocorrencias": 1150
+   }
+  ]
+ },
+ "nao_usar": [
+  {
+   "item": "hunter",
+   "motivo": "13 ocorrências e TODAS são citação de Hunter x Hunter. A palavra do público é CAÇADOR (160)."
+  },
+  {
+   "item": "skill",
+   "motivo": "4 ocorrências, todas dentro de 'Ultimate Skill' lido da tela. A palavra é HABILIDADE (669)."
+  },
+  {
+   "item": "quest",
+   "motivo": "4 ocorrências, só dentro de caixa do sistema. A palavra é MISSÃO (553)."
+  },
+  {
+   "item": "level",
+   "motivo": "7 ocorrências contra NÍVEL 1.221. Mas o verbo sobrevive: 'upar'."
+  },
+  {
+   "item": "xp",
+   "motivo": "8 contra EXPERIÊNCIA 154."
+  },
+  {
+   "item": "ranque / classificação",
+   "motivo": "'ranque' 0 ocorrências; 'classificação' 17 e nunca nesse sentido. Rank fica em inglês com a letra colada."
+  },
+  {
+   "item": "cheat / trapaça / overpower / dropar",
+   "motivo": "1, 2, 1 e 0 ocorrências. O nicho diz HACK (107)."
+  },
+  {
+   "item": "lorde (solto)",
+   "motivo": "8 ocorrências, só existe colado em 'lord demônio'. O padrão é REI DEMÔNIO (143)."
+  },
+  {
+   "item": "webtoon / manhwa dentro da narração falada",
+   "motivo": "0 ocorrências na fala. Existem só em título e tag (já está certo em config/seo_palavras.json). Não dizer 'neste webtoon' no meio do recap."
+  },
+  {
+   "item": "besta para monstro",
+   "motivo": "armadilha: das 155 ocorrências, a maioria é a ARMA (besta de atirar) ou xingamento leve. Para monstro o público ouve BICHO (4.324) e MONSTRO (707)."
+  },
+  {
+   "item": "bandidão",
+   "motivo": "está no prompt atual de gerar_recap e tem 0 ocorrências nos dois canais. Ninguém fala isso."
+  },
+  {
+   "item": "exterminador",
+   "motivo": "eufemismo de 'assassino' em config/dicionario_seguro.json, 0 ocorrências no corpus. Ninguém fala isso."
+  },
+  {
+   "item": "velhote / moça",
+   "motivo": "63 e 26 ocorrências, listados no prompt atual no mesmo nível de apelidos 20x a 80x mais frequentes — isso desequilibra a saída do modelo."
+  },
+  {
+   "item": "'partida' como eufemismo de morte",
+   "motivo": "as 47 ocorrências são partida de jogo ou ir embora. O nicho resolve melhor e com graça: 'foi de Vasco'."
+  },
+  {
+   "item": "'líquido escorrendo' como eufemismo de sangue",
+   "motivo": "0 ocorrências. O nicho diz KETCHUP (117)."
+  },
+  {
+   "item": "hipérbole 'mais ___ que ___'",
+   "motivo": "os 182 casos são fala do mangá, não do narrador ('Eu sou muito mais forte que todos vocês juntos'). Não existe esse molde na voz do narrador."
+  },
+  {
+   "item": "'literalmente' como tique",
+   "motivo": "360 ocorrências, mas a maioria é muleta de fala sem graça. Só o molde literal_com_repeticao tem valor."
+  },
+  {
+   "item": "gado",
+   "motivo": "64 ocorrências, quase tudo KkVirjao. Jargão de internet com carga machista — fora pelo critério de não atrair bloqueio."
+  },
+  {
+   "item": "apelidos por corpo e deficiência",
+   "motivo": "'Gordola', 'o alejado', 'Quatro Olhos', 'a peituda', 'Nerdola', 'o gordão' e o diminutivo 'gordinho' (212 ocorrências somadas) são frequentes nos dois canais. Proibidos aqui."
+  },
+  {
+   "item": "palavrão e violência explícita dos canais",
+   "motivo": "os dois soltam palavrão o tempo todo (as legendas vêm com [__] censurado) e o KkVirjao faz piada com tiro. Pegamos os termos, não o registro."
+  },
+  {
+   "item": "aumentar a quantidade de piada",
+   "motivo": "a conta mostra o contrário: os canais fazem ~1,9/mil no teto e o prompt já pedia 2-4 por capítulo (1,9 a 3,7/mil). O que falta é molde com variável, não volume."
+  },
+  {
+   "item": "'filho' / 'fi' como vírgula no fim da frase",
+   "motivo": "11.898 + 3.853 ocorrências no MomoManhwa: é o tique mais audível dele. Copiar soa imitação."
+  },
+  {
+   "item": "palavrão, mesmo bipado",
+   "motivo": "o MomoManhwa solta 2.262 vezes (a legenda marca [ __ ]). Custa monetização e o humor dele funciona sem."
+  },
+  {
+   "item": "malícia sexual ('rei da sugadinha', 'virou uma gostosa')",
+   "motivo": "recorrente no canal de referência e proibido no nosso: é o que gerou a advertência de 16/10."
+  },
+  {
+   "item": "'o gordinho' / 'o Carequinha'",
+   "motivo": "o apelido por traço é bom, mas os canais apelidam por peso e por careca: no nosso, só roupa, cor de cabelo, arma, idade ou função."
+  },
+  {
+   "item": "nosso protinho",
+   "motivo": "marca do iJaxManhwa. 'o protinha' (nos apelidos) é outra coisa e pode."
+  },
+  {
+   "item": "'pessoas' como vocativo / 'é nós' / apelido de fã de outro canal ('meus Drezin Nimes', 'mutatos')",
+   "motivo": "assinaturas de Doinsuka, omelhormanhwa, DrezinNimes e mangaticos — copiar soa imitação."
+  },
+  {
+   "item": "bastidor inventado ('eu traduzo página por página', 'fui pra BGS')",
+   "motivo": "iJaxManhwa e MattzManhwa pedem like contando o próprio trabalho; num canal automático seria mentira."
+  },
+  {
+   "item": "densidade de 'pergunta se ele realmente / começa a rir / fica sem entender nada / sorri e diz'",
+   "motivo": "bordões do 'modo livro' (Jubertim: 1.396x, 2.449x, 1.102x e 2.140x). No máximo 1 de cada a cada ~10 min de vídeo."
+  },
+  {
+   "item": "'criando uma atmosfera ___', abertura descritiva de cenário, adjetivo redundante",
+   "motivo": "marcas de roteiro automático (Solem_8037, IkiManhwa) — ver 'roteiro_automatico_proibido'."
+  },
+  {
+   "item": "densidade de 'pergunta se por acaso'",
+   "motivo": "marca do oporaodacidadela (1.504x, 0,25/mil). No máximo 1 vez por capítulo."
+  },
+  {
+   "item": "despedida 'Do mais é isso aí. Valeu e até mais pessoal'",
+   "motivo": "assinatura do oporaodacidadela (110x)."
+  },
+  {
+   "item": "'vocês pediram muito e eu trouxe' / 'teve alguns comentários perguntando se...'",
+   "motivo": "o Porão abre e fecha citando pedido/comentário do público; num canal automático seria inventado."
+  },
+  {
+   "item": "'se é que vocês me entendem' e malícia parecida",
+   "motivo": "o Porão usa pra insinuar coisa sexual (roupa tirada, corpo); no hipercool é proibido."
+  }
+ ],
+ "aberturas": {
+  "_leia": "Fórmulas de abertura medidas na leva 3 (18/10). Lido por bin/narration.py desde 18/10: sorteia 1 por capítulo (sem repetir as dos 2 capítulos anteriores da obra) e manda pro prompt e pra reescrita da abertura. As de no_capitulo=false ficam fora do capítulo: falam de like ou fazem promessa, e todo capítulo entra no compilado (se repetiriam a cada ~5 min).",
+  "formulas": [
+   {
+    "id": "comeca_no_pior_momento",
+    "molde": "Tá vendo esse cara aqui? É o <nome>: <lista curta e cômica da situação dele>. E pra completar, <o conflito deste capítulo>.",
+    "exemplo_real": "tá vendo esse cara aqui o nome dele é um ex-treinador ginasta virgem órfão e desempregado lascado E para completar agora preso no inferno",
+    "canal": "omelhormanhwa",
+    "quando": "o canal original segue com 'como ele chegou lá? Tudo começa com...' — isso só no 1º capítulo da obra"
+   },
+   {
+    "id": "gancho_primeiro",
+    "molde": "Esse <papel do prota> <situação em 1-2 frases>. Só que mal sabia ele que <a virada deste capítulo>.",
+    "exemplo_real": "Esse príncipe teve o reino destruído e acabou como vassalo de um nobre [...] Só que mal sabia ele que isso faria viajar entre o passado e o presente, até mesmo trazendo de volta relíquias antigas.",
+    "canal": "iJaxManhwa ('mal sabia ele' 102x; no original vem 'Mas antes, deixa o seu like' depois — no capítulo não)"
+   },
+   {
+    "id": "trailer",
+    "molde": "<prota> precisava <X>, mas recebeu <o pior>. O que ninguém sabia era que <segredo>. Agora <consequência>.",
+    "exemplo_real": "Lu Yan precisava despertar uma classe poderosa para salvar sua irmã, mas acabou recebendo a classe considerada a mais inútil de todas, necromante. O que ninguém sabia era que, naquele mesmo instante, ele despertaria uma segunda vez",
+    "canal": "IkiManhwa"
+   },
+   {
+    "id": "segunda_pessoa",
+    "molde": "Imagina você ser <situação do prota>...",
+    "exemplo_real": "Fala, mano. Imagina você ser um fracassado completo na sua vida, morar num barraco abandonado, ter que comer miojo com sal",
+    "canal": "DrezinNimes; omelhormanhwa ('imagina acordar...')"
+   },
+   {
+    "id": "pergunta_hipotetica",
+    "molde": "E se <premissa em forma de pergunta>?",
+    "exemplo_real": "E se tudo que você vivenciasse fosse uma ilusão e você pudesse reescrever seu destino?",
+    "canal": "omelhormanhwa"
+   },
+   {
+    "id": "aviso_de_perfil",
+    "molde": "Só assista se você gosta de prota que <traço forte>... então se envolve sabendo.",
+    "exemplo_real": "só assista esse vídeo se você gostar de protagonista que não tem frescura. [...] E não tem pena de figurante. Na verdade, ele não tem pena de ninguém, então se envolve sabendo.",
+    "canal": "MattzManhwa",
+    "no_capitulo": false
+   },
+   {
+    "id": "premissa_merece_like",
+    "molde": "No vídeo de hoje temos <premissa absurda> — eu acho que só isso já merece um like, não é mesmo?",
+    "exemplo_real": "no vídeo de hoje temos um gato que vira uma garota eu acho que só isso já merece um like não é mesmo",
+    "canal": "SR.GUUGOU",
+    "quando": "só quando a premissa é absurda de verdade",
+    "no_capitulo": false
+   },
+   {
+    "id": "mundo_ironico",
+    "molde": "<ano/lugar>, o <mundo> em que <coisa boa exagerada com piada do cotidiano BR>. Mas é claro que <a desgraça da premissa> e <reação boba da humanidade>.",
+    "exemplo_real": "2050 o ano em que a Terra finalmente se livrou das filas do banco e que todos viviam em paz com suas TVs holográficas Mas é claro o universo não ia deixar isso durar por muito tempo",
+    "canal": "oporaodacidadela",
+    "quando": "obra com mundo/época diferente (futuro, outro mundo, apocalipse); só no 1º capítulo da obra"
+   }
+  ]
+ },
+ "fechamentos": {
+  "_leia": "Fórmulas de fechamento medidas na leva 3 (18/10). onde='fala_final': lido por bin/narration.py desde 18/10 — sorteia 1 por capítulo pra última locução, sempre terminando em pergunta/especulação (sem pedido de like). onde='fim_do_video': pedidos de like/comentário que NÃO entram na narração (todo capítulo vai inteiro pro compilado e o pedido se repetiria a cada ~5 min). Desde 18/10 viram um trecho À PARTE colado no fim do vídeo pronto: no vertical, um clip a mais depois do último painel (hiper-pipeline.py); no compilado, um trecho no fim (hiper-longo.py), com a fala do último capítulo. narration.gerar_cta_fim sorteia 1 por capítulo e guarda em _cta_fim no cache da narração. promessa=true fica fora (a próxima parte sai de qualquer jeito, prometer seria mentira). Três canais de roteiro automático (Solem_8037, SR.GUUGOU, IkiManhwa) terminam sem fechamento nenhum: oportunidade perdida.",
+  "formulas": [
+   {
+    "id": "gancho_especulacao",
+    "onde": "fala_final",
+    "molde": "<o gancho da última cena>. E <pergunta concreta sobre o que vem>? Só no próximo capítulo.",
+    "exemplo_real": "E em que ano ele vai aparecer? ou que ele vai precisar fazer só na próxima parte do vídeo.",
+    "canal": "iJaxManhwa; é o fechamento padrão que o hipercool já usava"
+   },
+   {
+    "id": "falar_com_o_personagem",
+    "onde": "fala_final",
+    "molde": "<o que o personagem acabou de fazer>. <fala direta com ele, de tia/amigo>... será que <o que vem>? Eu acho que <aposta>.",
+    "exemplo_real": "O cara aprendeu a lição, viu? Eu espero que tenha aprendido. Se não aprendeu, filho, será que vai sobrar uma terceira vez? Eu acho que não.",
+    "canal": "omelhormanhwa"
+   },
+   {
+    "id": "cta_escondido_na_ultima_cena",
+    "onde": "fim_do_video",
+    "molde": "<última cena>. E na mente dele/dela só passa uma coisa: o like nesse vídeo e a inscrição no canal.",
+    "exemplo_real": "deixando a vicemestra completamente em choque. E na mente dela só se passa uma coisa, que é o like nesse vídeo e sua inscrição no canal",
+    "exemplo_real_2": "Ele estava procurando por outra coisa, mas nunca esperou capturar um alvo tão irrelevante. Mas o que não é irrelevante é o seu like nesse vídeo e sua inscrição no canal.",
+    "canal": "iJaxManhwa",
+    "valor": "O melhor CTA visto nos 15 canais: é piada, não quebra a imersão e só pega quem ficou até o fim. Gerar a partir da última fala do capítulo."
+   },
+   {
+    "id": "palavra_secreta",
+    "onde": "fim_do_video",
+    "molde": "Se você chegou até aqui, comenta a palavra <palavra tirada do capítulo> pra eu saber que viu até o final.",
+    "exemplo_real": "o final do vídeo, comenta a palavra aí, doce para ganhar um coração e eu saber que você é brabo",
+    "canal": "DrezinNimes (84x); mangaticos ('Adão e Eva') — prática do nicho",
+    "valor": "retenção + comentário ao mesmo tempo"
+   },
+   {
+    "id": "meta_de_likes",
+    "onde": "fim_do_video",
+    "promessa": true,
+    "molde": "Se vocês querem a próxima parte, a meta pra esse vídeo são <N> likes.",
+    "exemplo_real": "se vocês gostaram dessa obra e querem a próxima parte, a meta para esse vídeo são 5.000 likes",
+    "canal": "iJaxManhwa (175x 'a meta'); solem_sun (77x); MattzManhwa ('a cada 10.000 inscritos acrescentados aqui no canal, eu vou adicionar 20 capítulos ao nosso especial')",
+    "quando": "obras em série; testar e medir"
+   },
+   {
+    "id": "like_mesmo_assim",
+    "onde": "fim_do_video",
+    "molde": "Se gostou, deixa o like; e se não gostou, deixa o like mesmo assim, vai que melhora.",
+    "exemplo_real": "e se não gostaram deixa o like mesmo assim vai que melhora né",
+    "canal": "mangaticos"
+   },
+   {
+    "id": "ameaca_de_brincadeira",
+    "onde": "fim_do_video",
+    "molde": "Deixa o like, que não vai cair o teu dedo / eu não aguento mais implorar pelo like.",
+    "exemplo_real": "nesse like e não vai cair o teu dedo",
+    "exemplo_real_2": "não aguento mais implorar pelo like",
+    "canal": "Doinsuka"
+   },
+   {
+    "id": "susto_falso_desmentido",
+    "onde": "fala_final",
+    "molde": "<parece que o prota perdeu / se deu mal>... Brincadeira, eu me nego a acreditar que <isso>. Será que <como ele vira o jogo>?",
+    "exemplo_real": "Brincadeira, eu não acredito. Eu não, eu me nego a acreditar que o prota perdeu esse maluco.",
+    "canal": "MattzManhwa (no original emenda 'deixa o like' — no capítulo não)",
+    "quando": "só quando a última cena é mesmo o prota em desvantagem"
+   },
+   {
+    "id": "opiniao_e_shipar",
+    "onde": "fala_final",
+    "molde": "<opinião curta sobre o capítulo> + <aposta sobre casal ou rumo da história, em forma de pergunta>.",
+    "exemplo_real": "aquela mecânica ruiva ali poderia facilmente se tornar a namorada dele com certeza ela ia ser bem útil na história",
+    "canal": "omelhormanhwa",
+    "trava": "casal sem nada explícito (advertência de 16/10)"
+   },
+   {
+    "id": "comenta_quais_partes",
+    "onde": "fim_do_video",
+    "molde": "Se curtiram e querem mais partes, comenta aí embaixo.",
+    "exemplo_real": "E se vocês curtiram esse manhwa aí e quiser mais partes dele, comenta aí embaixo, já deixa o like.",
+    "canal": "Jubertim"
+   },
+   {
+    "id": "gancho_refem",
+    "onde": "fim_do_video",
+    "promessa": true,
+    "molde": "<gancho da próxima cena>... mas eu só conto o que aconteceu se vocês deixarem o like.",
+    "exemplo_real": "essa pessoa é a mi Mas eu só posso contar o que aconteceu Se vocês deixarem o like e se inscreverem",
+    "canal": "SR.GUUGOU",
+    "quando": "usar pouco"
+   },
+   {
+    "id": "em_que_posso_melhorar",
+    "onde": "fim_do_video",
+    "molde": "Deixa um comentário dizendo em que eu posso melhorar.",
+    "exemplo_real": "deixando um comentário dizendo que eu posso estar melhorando eu ficarei muito grato a vocês",
+    "canal": "solem_sun"
+   }
+  ]
+ },
+ "roteiro_automatico_proibido": {
+  "_leia": "Marcas que entregam roteiro gerado/lido sem personalidade — medidas nos canais Solem_8037, SR.GUUGOU, IkiManhwa e no 'modo livro' do Jubertim (18/10). É o nível que o nosso roteiro, também automático, tem de superar. Lido por bin/narration.py desde 18/10 (vai na seção PROIBIDO do prompt).",
+  "itens": [
+   {
+    "item": "'criando uma atmosfera ___'",
+    "exemplo_real": "Sob um céu escuro, um prédio antigo e dilapidado permanece em silêncio, criando uma atmosfera sombria e tensa.",
+    "canal": "Solem_8037"
+   },
+   {
+    "item": "abrir descrevendo o cenário/painel em vez da história",
+    "exemplo_real": "Uma figura caminha pelo pátio em ruínas, suas botas pesadas pisando firmemente no chão de pedra rachada.",
+    "canal": "Solem_8037; IkiManhwa ('A noite na cidade segue calma em frente à loja de conveniência 24 horas')"
+   },
+   {
+    "item": "adjetivo empilhado ou redundante",
+    "exemplo_real": "sentindo o peso da autoridade autoritária daquela supervisora",
+    "exemplo_real_2": "O calor ardente da receita explode em sua boca e queima com intensidade extrema.",
+    "canal": "Solem_8037; IkiManhwa"
+   },
+   {
+    "item": "reação física em fila ('arregala os olhos', 'fica em choque', 'entra em pânico' mais de 1x por bloco)",
+    "exemplo_real": "Chung Shin recua com os olhos arregalados, completamente chocado com a brutalidade imposta pela mulher naquela situação.",
+    "canal": "Solem_8037; SR.GUUGOU ('arregala os olhos' 643x)"
+   },
+   {
+    "item": "'Tudo começa com...' como abertura padrão",
+    "canal": "SR.GUUGOU (56 de 80 vídeos); Solem_8037"
+   },
+   {
+    "item": "terminar no meio da cena, sem fechamento",
+    "canal": "Solem_8037; SR.GUUGOU; IkiManhwa"
+   }
+  ]
+ }
+}

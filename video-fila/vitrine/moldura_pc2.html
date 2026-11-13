@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Telão PC2</title>
+<!-- dona 23/10/2026: os primeiros 20% da esquerda do monitor do PC2 têm falha — ficam PRETOS de cima a baixo e o
+     painel ocupa só os 80% da direita. Mudar a faixa: trocar 20vw nos lugares abaixo.
+     Botões (dona 23/10, ficam lembrados):
+       "Espelhar"  inverte as letras pra aparecerem certas na filmagem;
+       "Câmera"    cores pra câmera (filmando a TV o verde/ciano sobre preto ficava lavado): branco forte, destaque
+                   amarelo, letra mais grossa e maior, bordas brancas, sem degradê/transparência. Vem ligado. -->
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  #painel { position: fixed; top: 0; left: 20vw; width: 80vw; height: 100vh; border: 0; background: #000; }
+  /* espelhado (dona 23/10: "bem maior, um dado por vez"): o painel sai e entra um dado gigante girando */
+  body.espelhado #painel { display: none; }
+  #um { display: none; position: fixed; top: 0; left: 20vw; width: 80vw; height: 100vh; background: #000;
+        transform: scaleX(-1); flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        font-family: 'Arial Black', Arial, sans-serif; color: #fff; padding: 0 4vw; box-sizing: border-box; }
+  body.espelhado #um { display: flex; }
+  #um .num { font-size: 34vh; line-height: 1; font-weight: 900; color: #ffd60a; letter-spacing: -.03em; }
+  #um .num.texto { font-size: 15vh; line-height: 1.05; }
+  #um .rot { font-size: 9vh; line-height: 1.1; font-weight: 900; margin-top: 3vh; }
+  #um .sub { font-size: 6vh; line-height: 1.1; font-weight: 700; margin-top: 2vh; color: #ddd; }
+  .botoes { position: fixed; right: 12px; bottom: 12px; z-index: 9; display: flex; gap: 8px; }
+  .botoes button { padding: 10px 16px; font: 700 16px sans-serif; color: #fff; background: rgba(40, 40, 40, .55);
+                   border: 1px solid rgba(255, 255, 255, .35); border-radius: 8px; cursor: pointer; opacity: .55; }
+  .botoes button:hover { opacity: 1; }
+</style>
+</head>
+<body>
+<iframe id="painel" src="painel.html?tela=pc2"></iframe>
+<div id="um"><div class="num"></div><div class="rot"></div><div class="sub"></div></div>
+<div class="botoes">
+  <button id="camera" type="button"></button>
+  <button id="espelhar" type="button"></button>
+</div>
+<script>
+  // cores pra câmera: entra dentro do painel (mesma origem) e é reaplicado a cada recarga dele
+  const CSS_CAMERA = `
+    :root { --background: 0 0% 0% !important; --foreground: 0 0% 100% !important; --card: 0 0% 0% !important;
+            --primary: 50 100% 55% !important; --muted: 0 0% 25% !important; --muted-foreground: 0 0% 92% !important;
+            --border: 0 0% 100% !important; --warn: 30 100% 60% !important; --info: 50 100% 55% !important;
+            --destructive: 0 100% 62% !important; --violet: 50 100% 55% !important; }
+    html { font-size: 112% !important; }
+    body { background: #000 !important; color: #fff !important; font-weight: 700 !important; }
+    body * { text-shadow: none !important; box-shadow: none !important; }
+    b, h1, h2, h3, strong, .hora, .relogio { font-weight: 900 !important; }
+    .relogio { background: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important;
+               color: hsl(50 100% 55%) !important; }
+    .hero { background: #000 !important; border: 3px solid #fff !important; }
+    .card, .item { background: #000 !important; border: 3px solid #fff !important; }
+    .badge { border-width: 2px !important; font-weight: 800 !important; }
+    .prog > i { background: hsl(50 100% 55%) !important; }
+  `;
+  function lido(chave, padrao) { try { const v = localStorage.getItem(chave); return v === null ? padrao : v === "1"; } catch (e) { return padrao; } }
+  function guardar(chave, on) { try { localStorage.setItem(chave, on ? "1" : "0"); } catch (e) {} }
+  let espelho = lido("telao_espelhado", false), camera = lido("telao_camera", true);
+  const ifr = document.getElementById("painel");
+  function aplicarCamera() {
+    try {
+      const doc = ifr.contentDocument;
+      if (!doc || !doc.head) return;
+      let st = doc.getElementById("modo_camera");
+      if (camera && !st) { st = doc.createElement("style"); st.id = "modo_camera"; st.textContent = CSS_CAMERA; doc.head.appendChild(st); }
+      if (!camera && st) st.remove();
+    } catch (e) {}
+  }
+  function marcar() {
+    document.body.classList.toggle("espelhado", espelho);
+    document.getElementById("espelhar").textContent = espelho ? "↔ Normal" : "↔ Espelhar";
+    document.getElementById("camera").textContent = camera ? "🎥 Cores normais" : "🎥 Cores pra câmera";
+    aplicarCamera();
+  }
+  ifr.addEventListener("load", aplicarCamera);
+  setInterval(aplicarCamera, 3000);  // o painel se refaz sozinho: garante que o estilo continua lá
+  document.getElementById("espelhar").addEventListener("click", function () { espelho = !espelho; guardar("telao_espelhado", espelho); marcar(); });
+  document.getElementById("camera").addEventListener("click", function () { camera = !camera; guardar("telao_camera", camera); marcar(); });
+  marcar();
+
+  // ── um dado por vez (modo espelhado), dos mesmos dados do painel (painel.json, o PC1 manda a cada 2 min) ──
+  let dados = null, slides = [], vez = 0;
+  const fmt = n => Number(n).toLocaleString("pt-BR");
+  const curto = (t, n) => { t = String(t || ""); return t.length > n ? t.slice(0, n - 1) + "…" : t; };
+  async function carregar() {
+    try { dados = await (await fetch("painel.json?t=" + Date.now(), { cache: "no-store" })).json(); montar(); } catch (e) {}
+    if (!document.querySelector("#um .num").textContent) { vez = -1; mostrar(); }  // 1ª vez: já mostra, sem esperar 7 s
+  }
+  function montar() {
+    const d = dados || {}, s = [];
+    s.push({ num: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }), rot: "agora", relogio: true });
+    const hoje = d.hoje || {}, total = Object.values(hoje).reduce((a, b) => a + (+b || 0), 0);
+    if (total) s.push({ num: fmt(total), rot: "vídeos saíram hoje" });
+    for (const [k, v] of Object.entries(hoje)) s.push({ num: fmt(v), rot: k, sub: "hoje" });
+    for (const [k, v] of Object.entries(d.agendados || {})) s.push({ num: fmt(v), rot: "agendados", sub: k });
+    for (const m of (d.milviews || []).slice(0, 3)) s.push({ num: fmt(m.views), rot: "views", sub: curto(m.canal, 30) });
+    for (const i of (d.inscritos || []).slice(0, 3)) s.push({ num: "+" + fmt(i.ganhou || 1), rot: "inscrito" + ((i.ganhou || 1) > 1 ? "s" : ""), sub: curto(i.canal, 30) });
+    const prox = (d.proximos || [])[0];
+    if (prox) s.push({ num: prox.hora, rot: "próximo vídeo", sub: curto(prox.canal, 30) });
+    const saiu = (d.saidos || [])[0];
+    if (saiu) s.push({ num: saiu.hora, rot: "último que saiu", sub: curto(saiu.canal, 30) });
+    slides = s;
+  }
+  function mostrar() {
+    if (!espelho || !slides.length) return;
+    vez = (vez + 1) % slides.length;
+    const x = slides[vez], el = document.getElementById("um");
+    const num = x.relogio ? new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) : x.num;
+    el.querySelector(".num").textContent = num;
+    el.querySelector(".num").classList.toggle("texto", String(num).length > 6);
+    el.querySelector(".rot").textContent = x.rot || "";
+    el.querySelector(".sub").textContent = x.sub || "";
+  }
+  carregar(); setInterval(carregar, 60000); setInterval(mostrar, 7000);
+  document.getElementById("espelhar").addEventListener("click", function () { vez = -1; mostrar(); });
+</script>
+<!-- dona 27/10: medidor de CPU/RAM DESTA máquina (o telao_win.py serve /saude.json, medido a cada 5 s) -->
+<div id="saude" style="position:fixed;right:12px;top:10px;z-index:9;padding:8px 14px;border-radius:10px;
+     background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.35);font:800 22px Arial,sans-serif;color:#fff"></div>
+<script>
+  async function saude() {
+    try {
+      const s = await (await fetch("/saude.json", { cache: "no-store" })).json();
+      const cor = v => v >= 85 ? "#3ddc84" : v >= 50 ? "#ffd60a" : "#ff5a5a";  // verde = trabalhando no máximo
+      document.getElementById("saude").innerHTML = s.cpu == null ? "" :
+        `${(s.maquina || "").toUpperCase()} · CPU <span style="color:${cor(s.cpu)}">${s.cpu}%</span>` +
+        ` · RAM <span style="color:${cor(s.ram)}">${s.ram}%</span>` + (s.ffmpeg ? ` · ${s.ffmpeg} render` : "");
+    } catch (e) { /* telão antigo sem /saude.json */ }
+  }
+  saude(); setInterval(saude, 5000);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+ "conta": "iapro.mentoria",
+ "marca": "IA Pro Mentoria",
+ "capa": "Como a IA toma decisões?",
+ "slides": [
+  {
+   "titulo": "Dados são a base",
+   "texto": "A inteligência artificial analisa grandes volumes de informações para reconhecer padrões. É a partir desses dados que ela constrói seu conhecimento inicial para qualquer tarefa."
+  },
+  {
+   "titulo": "Algoritmos guiam o processo",
+   "texto": "Diferentes algoritmos funcionam como um conjunto de regras que a IA segue. Eles definem como os dados serão processados e quais critérios serão usados para chegar a uma conclusão."
+  },
+  {
+   "titulo": "Reconhecimento de padrões",
+   "texto": "Após processar os dados, a IA identifica similaridades e diferenças. Este reconhecimento de padrões permite que ela categorize informações e preveja possíveis resultados com base no que aprendeu."
+  },
+  {
+   "titulo": "Ajustes e aprendizado contínuo",
+   "texto": "A cada nova interação, a IA avalia suas próprias decisões. Com o tempo, ela aprimora seus algoritmos, tornando suas respostas e análises mais precisas e eficientes a cada uso."
+  }
+ ],
+ "legenda": "Você já se perguntou como a inteligência artificial chega às suas conclusões?\nDesvendamos o processo por trás das decisões da IA.\nCompartilhe com um amigo que ama IA!",
+ "gerado_em": "2026-11-10T09:10:23"
+}

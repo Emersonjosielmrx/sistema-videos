@@ -1,0 +1,21 @@
+{
+  "_leia": "Indicações entre canais (dona 23/10/2026: 'pode fazer a questão das colabs'). Duplas PEQUENAS do mesmo assunto: um canal indica o outro com uma linha na descrição (antes das hashtags) e no fim do comentário fixado, com o @ do parceiro. Nunca a rede inteira ligada (foi o padrão de rede que pesou no 04/09): cada canal em no máximo 1 dupla, só pt, e o parceiro precisa estar saudável na hora (suspenso/desativado/pausado = a linha não entra). Família Inovare e canais da rede antiga ficam fora. 'ligado': false desliga tudo. Código: bin/indicacoes.py.",
+  "ligado": true,
+  "duplas": [
+    ["curiosidadesnoturnas", "mundoquenaoexiste"],
+    ["assistiainvestimentos", "dicasfinanceirasdaia"],
+    ["filmenoturno", "doramanoturno"],
+    ["gamenoturno", "cartuchoreact"]
+  ],
+  "frases_descricao": [
+    "Curtiu? O {handle} tem mais vídeos assim.",
+    "Mais desse assunto no canal parceiro {handle}.",
+    "Se gostou, dá uma olhada no {handle} também.",
+    "Tem mais conteúdo assim no {handle}."
+  ],
+  "frases_comentario": [
+    "Quem curtiu vai gostar do {handle} também 👀",
+    "Mais vídeos assim no canal parceiro {handle}!",
+    "Indicação do dia: {handle} 🔥"
+  ]
+}

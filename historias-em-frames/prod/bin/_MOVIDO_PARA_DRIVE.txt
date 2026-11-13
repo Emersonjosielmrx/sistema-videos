@@ -1,0 +1,4 @@
+ITENS MOVIDOS PARA O GOOGLE DRIVE (manhwa-drive)
+2026-10-25: arquivos de backup de codigo (_ESTAVEL_*, _PRE_*, *.bak_*, *.antes_*) -> manhwa-drive:arquivo_codigo_20261025/historias-em-frames/prod/bin
+Recuperar: D:/tools/rclone.exe copy "manhwa-drive:arquivo_codigo_20261025/historias-em-frames/prod/bin" "D:/historias-em-frames/prod/bin" --transfers 8 --progress
+

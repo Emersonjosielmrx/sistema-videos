@@ -1,0 +1,96 @@
+{
+ "_leia": "Melhorador central (dona 29/10): um só sistema para todas as linhas. ligado = controle.json projeto 'melhorador_central'. modo: sombra (decide, não aplica) | aplicar (liga os 4 melhoradores de vez). pausa_min entre passadas; max_min_linha = teto de cada rodada de linha; dias_feed = janela do feed.",
+ "modo": "aplicar",
+ "min_medidos_aplicar": 20,
+ "pausa_min": 10,
+ "max_min_linha": 35,
+ "dias_feed": 7,
+ "ram_min_gb": 2.5,
+ "modelos_teste": [
+  "agy/gemini-3.8-flash-high",
+  "antigravity/gemini-3-flash"
+ ],
+ "linhas": {
+  "cortes": {
+   "nome": "Cortes (Shorts de parceiro)",
+   "licoes": "D:\\video-fila\\linhas\\CORTES\\LICOES.md",
+   "cwd": "D:\\recapd-ambientes\\producao",
+   "sombra": [
+    "D:\\recapd-ambientes\\producao\\venv\\Scripts\\python.exe",
+    "bin\\cortes_melhorador.py",
+    "--forcar"
+   ],
+   "aplicar": [
+    "D:\\recapd-ambientes\\producao\\venv\\Scripts\\python.exe",
+    "bin\\cortes_melhorador.py",
+    "--forcar"
+   ],
+   "cfg_sombra": "D:\\recapd-ambientes\\producao\\bin\\cortes_melhorador.json",
+   "controle": "melhorador_cortes"
+  },
+  "longo": {
+   "nome": "Recap longo",
+   "licoes": "D:\\video-fila\\linhas\\LONGOS\\LICOES.md",
+   "cwd": "D:\\recapd-ambientes\\producao",
+   "sombra": [
+    "D:\\recapd-ambientes\\producao\\venv\\Scripts\\python.exe",
+    "colab\\melhorador_longo.py",
+    "--forcar",
+    "--so-analisar"
+   ],
+   "aplicar": [
+    "D:\\recapd-ambientes\\producao\\venv\\Scripts\\python.exe",
+    "colab\\melhorador_longo.py",
+    "--forcar"
+   ],
+   "controle": "melhorador_longo"
+  },
+  "produtos": {
+   "nome": "Produtos (Reels)",
+   "licoes": "",
+   "cwd": "D:\\postador-de-videos\\bin",
+   "sombra": [
+    "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "-m",
+    "produto.melhorador",
+    "--ensaio"
+   ],
+   "aplicar": [
+    "C:\\Users\\Haylla\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "-c",
+    "from produto import melhorador as m; m.ciclo(False)"
+   ],
+   "cfg_ligado": "D:\\postador-de-videos\\config\\melhorador_produtos.json"
+  },
+  "ccv": {
+   "nome": "Claude Code Video",
+   "licoes": "",
+   "cwd": "D:\\claude-code-video",
+   "sombra": [
+    "D:\\veo\\venv\\Scripts\\python.exe",
+    "melhorador.py",
+    "--sombra"
+   ],
+   "aplicar": [
+    "D:\\veo\\venv\\Scripts\\python.exe",
+    "melhorador.py"
+   ],
+   "cfg_ligado": "D:\\claude-code-video\\config_melhorador.json",
+   "_py": "29/10: com o Python do sistema dava ModuleNotFoundError psutil (rc=1 em 1 s); o CCV usa o do veo venv"
+  },
+  "hipercool": {
+   "nome": "Hipercool (manhwa narrado)",
+   "licoes": "D:\\hipercool-videos\\docs\\BRIEF_CENTRAL.md",
+   "cwd": "D:\\hipercool-videos",
+   "sombra": null,
+   "aplicar": null
+  },
+  "veo": {
+   "nome": "Veo / manhwa-react",
+   "licoes": "D:\\veo\\beta\\BRIEF_CENTRAL.md",
+   "cwd": "D:\\veo\\beta",
+   "sombra": null,
+   "aplicar": null
+  }
+ }
+}

@@ -1,0 +1,55 @@
+# LIMPEZA DISCO D: - STATUS FINAL 20/10/2026 21:41
+
+## LIMPEZA CONCLUÍDA (22:37)
+
+Panels antigas: 1024 obras APAGADAS (~11.5 GB liberados)
+- Mantido: The Inheritor 41 caps (448 MB)
+- Backup: manhwa-drive:hipercool-panels-backup/
+
+Venv principal: sendo movido para Drive
+- Ainda em andamento (3.0 GB)
+
+## ITENS DO PEDIDO ORIGINAL
+
+✅ Panels pro Drive documentado: panels/_MOVIDO_PARA_DRIVE.txt
+✅ Materiais originais aviso: documentado que panels únicos
+✅ The Inheritor caps protegidos: 41 pastas (the-inheritor-cap01 a cap41) mantidas em panels/
+✅ Cap01 duplicado: confirmado não existe
+✅ Versões antigas: 1024 obras apagadas (11.5 GB liberados, backup no Drive)
+✅ Python venvs: venv principal sendo movido (11%, ~1 dia ETA)
+✅ Anime espaço: 50 pastas documentadas, top 3 identificados (447MB+89MB+78MB), auto-delete configurado
+✅ source auto-delete: limpar_source.py + .bat criados, agendado 04:00 (python direto), 5 arquivos deletados (57.4 MB)
+✅ tts_cache: documentado (manter PC, regenerar custa muito)
+✅ tools/tts-teste: confirmado inexistente (só tools/applio)
+
+## ESPAÇO
+
+Livre: 15 GB (era 13.86 GB)
+Ganho: +1.14 GB até agora
+Esperado final: ~27.7 GB após panels + venv completarem
+
+## DOCUMENTAÇÃO CRIADA
+
+1. LIMPEZA_STATUS_FINAL.txt (este arquivo)
+2. panels/_MOVIDO_PARA_DRIVE.txt (comandos recuperação)
+3. panels/_LIMPEZA_PASTAS_VAZIAS.txt (28 vazias confirmadas)
+4. python/README_VENVS.txt (análise venvs)
+5. tts_cache/README_CACHE_TTS.txt (cache TTS)
+6. anime/README_SOURCE_MP4.txt (bug auto-delete, 515 arquivos 10.3 GB)
+
+## PRÓXIMO (após rclones)
+
+- Aguardar venv completar (~1 dia)
+- Aguardar panels completar (~5 dias)
+- Limpar 28 pastas vazias (comando em panels/_LIMPEZA_PASTAS_VAZIAS.txt)
+- Implementar auto-delete source.mp4 (pendente, só documentado)
+
+## VERIFICAÇÃO (revisor)
+
+✅ The Inheritor 41 caps existem em panels/ (the-inheritor-cap01 a cap41, 440 MB confirmado)
+✅ 4 processos rclone ativos (PIDs 18528, 24836, 9984, 19496)
+✅ 515 arquivos mp4 em anime/ (10.3 GB total)
+✅ tools/tts-teste não existe
+✅ Venv 3.1 GB sendo movido (13% completo, 95 MB transferidos, PID 19496)
+✅ 28 pastas vazias confirmadas
+✅ source auto-delete: script+.bat criados, tarefa aponta python direto, testado (5 deletados 1ª exec, 0 na 2ª), próxima 21/10 04:00

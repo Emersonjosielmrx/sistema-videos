@@ -1,0 +1,7 @@
+{
+ "_doc": "28/10 (dona): narradora edge (Francisca) é voz ruim -> a fala dela vira BASE (pronúncia + tempo de cada palavra) e o RVC troca o timbre por uma voz clonada. Público dos produtos = dono de negócio adulto (quem compra): nada de voz jovem/meme nem de pessoa real famosa (soaria como endosso). A voz é sorteada por vídeo e gravada no .json (o júri e as views comparam).",
+ "_regra": "28/10 DONA: voz edge PURA (Thalita, Antonio, Francisca...) NUNCA no vídeo; edge só como base com clone em cima. Clone falhou no PC2 e no PC1 = o vídeo não sai (video.gerar levanta erro).",
+ "vozes": ["fatos_desconhecidos", "moana", "pica_pau"],
+ "_vozes_doc": "fatos_desconhecidos e moana = dona 28/10 ('excelente voz'); pica_pau = dona 28/10 ('Pica-Pau também é bom pra comerciais')",
+ "prazo_s": 1800
+}

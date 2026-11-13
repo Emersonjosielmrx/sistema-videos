@@ -1,0 +1,82 @@
+{
+  "_comentario": "Aparência fixa do protagonista pros animes mais comuns (o resto vem do SEO: protagonista_visual). Sempre ADULTO, sem emblemas/símbolos da franquia e sem uniforme escolar (limites das capas).",
+  "one_piece": {
+    "protagonista": "adult man in his twenties with black messy hair, straw hat, red vest, blue shorts, confident smile, scar under left eye",
+    "genero": "M",
+    "estilo": "shonen",
+    "generos": [
+      "acao",
+      "aventura",
+      "pirata"
+    ]
+  },
+  "naruto": {
+    "protagonista": "adult man in his twenties with spiky blonde hair, orange and black jacket, plain metal forehead protector without any symbol, blue eyes, determined expression",
+    "genero": "M",
+    "estilo": "shonen",
+    "generos": [
+      "acao",
+      "ninja",
+      "fantasia"
+    ]
+  },
+  "demon_slayer": {
+    "protagonista": "adult man in his twenties with dark red hair, black and green checkered haori, scar on forehead, kind determined eyes",
+    "genero": "M",
+    "estilo": "shonen",
+    "generos": [
+      "acao",
+      "fantasia",
+      "demonio"
+    ]
+  },
+  "attack_on_titan": {
+    "protagonista": "adult man in his twenties with short brown hair, green hooded military cloak, intense green eyes, serious expression",
+    "genero": "M",
+    "estilo": "seinen",
+    "generos": [
+      "acao",
+      "apocalipse",
+      "titan"
+    ]
+  },
+  "my_hero_academia": {
+    "protagonista": "adult man in his twenties with messy green hair, green hero costume, freckles, determined expression",
+    "genero": "M",
+    "estilo": "shonen",
+    "generos": [
+      "acao",
+      "super_heroi",
+      "escola"
+    ]
+  },
+  "sword_art_online": {
+    "protagonista": "adult man in his twenties with spiky black hair, black coat with red lining, dual swords, serious expression",
+    "genero": "M",
+    "estilo": "isekai",
+    "generos": [
+      "acao",
+      "isekai",
+      "fantasia",
+      "jogo"
+    ]
+  },
+  "jujutsu_kaisen": {
+    "protagonista": "adult man in his twenties with pink spiky hair, red hoodie under a dark high-collar jacket, fierce grin, intense eyes",
+    "genero": "M",
+    "estilo": "shonen",
+    "generos": [
+      "acao",
+      "fantasia",
+      "maldicao"
+    ]
+  },
+  "_default": {
+    "protagonista": "adult anime hero in his twenties with determined expression and dynamic pose",
+    "genero": "M",
+    "estilo": "shonen",
+    "generos": [
+      "acao"
+    ]
+  }
+}

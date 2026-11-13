@@ -1,0 +1,474 @@
+{
+  "d:\\hipercool-refactor\\client\\src\\App.tsx": [
+    "/api",
+    "/api/settings/ai/credentials"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\analytics\\AgendaAnalytics.tsx": [
+    "/api",
+    "/api/analytics/agenda"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\analytics\\BlocksAnalytics.tsx": [
+    "/api",
+    "/api/analytics/blocks"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\analytics\\CatalogAnalytics.tsx": [
+    "/api",
+    "/api/analytics/catalog"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\analytics\\CRMAnalytics.tsx": [
+    "/api",
+    "/api/analytics/crm",
+    "/api/analytics/crm/funnel",
+    "/api/analytics/crm/kpis",
+    "/api/analytics/crm/win-loss"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\analytics\\FollowUpAnalytics.tsx": [
+    "/api",
+    "/api/analytics/followup"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\analytics\\TagsAnalytics.tsx": [
+    "/api",
+    "/api/analytics/tags"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\auth\\LoginScreen.tsx": [
+    "/api/auth/login"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\catalog\\SubscriptionTab.tsx": [
+    "/api",
+    "/api/ai-cost",
+    "/api/billing"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\chat\\ManagerChat.tsx": [
+    "/api",
+    "/api/chat/audio",
+    "/api/chat/clear",
+    "/api/chat/messages",
+    "/api/chat/send",
+    "/api/chat/threads"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\crm\\CollectedDataTab.tsx": [
+    "/api",
+    "/api/contacts/collected"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\crm\\SplitPaneCRM.tsx": [
+    "/api",
+    "/api/crm/board"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\crm\\WhatsAppExtractorTab.tsx": [
+    "/api",
+    "/api/contacts/tags",
+    "/api/contacts/tags/bulk",
+    "/api/crm/board",
+    "/api/crm/move",
+    "/api/followup/blacklist",
+    "/api/sessions",
+    "/api/sessions/*",
+    "/api/sessions/*/messages",
+    "/api/whatsapp/chats",
+    "/api/whatsapp/sync-app-state"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\domain\\session\\ChatwootDialog.tsx": [
+    "/api/sessions/*/chatwoot/webhook"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\layout\\Sidebar.tsx": [
+    "/chat/ManagerChat"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AdvancedLab.tsx": [
+    "/api",
+    "/api/agents",
+    "/api/agents/*",
+    "/api/agents/*/test",
+    "/api/agents/generate",
+    "/api/whatsapp/instances"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AgendaSettings.tsx": [
+    "/api",
+    "/api/agenda/config/*",
+    "/api/agenda/config/blocked_dates",
+    "/api/agenda/config/blocked_days"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AgentChatSettings.tsx": [
+    "/api.seu-claw.com"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AgentChatTest.tsx": [
+    "/api",
+    "/api/agents/*",
+    "/api/agents/*/evaluate",
+    "/api/agents/*/test",
+    "/api/agents/*/wargame"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AgentOrchestratorFlow.tsx": [
+    "/api",
+    "/api/orchestration"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AgentRagPanel.tsx": [
+    "/api",
+    "/api/rag/documents",
+    "/api/rag/documents/*",
+    "/api/rag/ingest-conversations",
+    "/api/rag/ingest-conversations."
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AgentTrainerPanel.tsx": [
+    "/api",
+    "/api/agent-profiles",
+    "/api/training/estimate",
+    "/api/training/jobs",
+    "/api/training/jobs/*",
+    "/api/training/jobs/*/cancel",
+    "/api/training/prompts",
+    "/api/training/prompts/*",
+    "/api/training/prompts/*/activate"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AICredentialsSettings.tsx": [
+    "/api",
+    "/api-keys",
+    "/api.meu-proxy.com/v1",
+    "/api/ai/test",
+    "/api/credentials",
+    "/api/credentials/*",
+    "/api/settings/ai/credentials"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\AISettings.tsx": [
+    "/api/ai-cost",
+    "/api/settings/budget"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\APIKeysSettings.tsx": [
+    "/api",
+    "/api/keys",
+    "/api/keys/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\BusinessProfileSettings.tsx": [
+    "/api",
+    "/api/profile"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\CallAISettings.tsx": [
+    "/api",
+    "/api/settings/call-ai"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\ChatMonitor.tsx": [
+    "/api",
+    "/api/agent-profiles"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\DualAgentSettings.tsx": [
+    "/api",
+    "/api.anthropic.com",
+    "/api/settings/attendant"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\EasyAgentWizard.tsx": [
+    "/api",
+    "/api.openai.com",
+    "/api/agent-profiles",
+    "/api/agents",
+    "/api/agents/*",
+    "/api/agents/generate",
+    "/api/agents/refine",
+    "/api/ai/models",
+    "/api/ai/test",
+    "/api/credentials",
+    "/api/settings",
+    "/api/whatsapp/instances"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\EasyFollowUpWizard.tsx": [
+    "/api",
+    "/api/followup/sequences"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\EasyManagerWizard.tsx": [
+    "/api",
+    "/api/settings",
+    "/api/settings/manager"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\EasySettingsWizard.tsx": [
+    "/api",
+    "/api-keys",
+    "/api.telegram.org/bot*/getMe",
+    "/api/ai/models",
+    "/api/ai/test",
+    "/api/chat/send",
+    "/api/settings/easy-wizard-ai",
+    "/api/settings/easy-wizard-partial",
+    "/api/tts/generate",
+    "/api/tts/test"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\GlobalRagManager.tsx": [
+    "/api",
+    "/api/agent-profiles",
+    "/api/agents",
+    "/api/rag/documents",
+    "/api/rag/documents/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\LeadCaptureTab.tsx": [
+    "/api",
+    "/api/leads/capture",
+    "/api/leads/export"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\ManagerAgentSettings.tsx": [
+    "/api",
+    "/api.anthropic.com",
+    "/api/settings/manager"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\N8nSettings.tsx": [
+    "/api",
+    "/api/n8n"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\PromisesManagerTab.tsx": [
+    "/api",
+    "/api/scheduled_calls",
+    "/api/scheduled_calls/*",
+    "/api/scheduled_calls/*/now"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\ScheduleSettings.tsx": [
+    "/api",
+    "/api/settings/schedule"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\SpecializedAgents.tsx": [
+    "/api",
+    "/api/agent-profiles",
+    "/api/agent-profiles/*",
+    "/api/agents"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\VoiceSettings.tsx": [
+    "/api",
+    "/api.elevenlabs.io",
+    "/api.groq.com/openai",
+    "/api.openai.com",
+    "/api/ai/models",
+    "/api/stt/test",
+    "/api/tts/test",
+    "/api/tts/voices"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\components\\settings\\WorkspaceSettings.tsx": [
+    "/api",
+    "/api/projects",
+    "/api/projects/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\lib\\auth.ts": [
+    "/api.ts",
+    "/api/auth/login",
+    "/api/auth/me",
+    "/api/auth/register"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\lib\\event-stream.ts": [
+    "/api/events"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\lib\\webrtc.ts": [
+    "/api",
+    "/api/sessions/*/calls/*/webrtc"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\AgendaPage.tsx": [
+    "/api",
+    "/api/agenda/*",
+    "/api/agenda/appointments",
+    "/api/agenda/appointments/*",
+    "/api/agenda/appointments/*/status"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\AnalyticsPage.tsx": [
+    "/api",
+    "/api/analytics/conversion"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\BlocksPage.tsx": [
+    "/api",
+    "/api/followup/blacklist"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\CampaignsPage.tsx": [
+    "/api",
+    "/api/campaigns/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\CatalogPage.tsx": [
+    "/api",
+    "/api/catalog/*",
+    "/api/catalog/products",
+    "/api/catalog/products/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\ChatPage.tsx": [
+    "/api",
+    "/api/sessions",
+    "/api/sessions/*/chats/*",
+    "/api/sessions/*/messages",
+    "/api/sessions/*/messages/text",
+    "/api/whatsapp/chats"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\ContactsPage.tsx": [
+    "/api",
+    "/api/contacts/*",
+    "/api/contacts/bulk",
+    "/api/contacts/export",
+    "/api/contacts/tags",
+    "/api/contacts/tags/bulk"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\CostPage.tsx": [
+    "/api",
+    "/api/ai-cost",
+    "/api/ai-cost/reset",
+    "/api/settings/budget"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\CostsHubPage.tsx": [
+    "/api"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\CRMPage.tsx": [
+    "/api",
+    "/api/crm/board",
+    "/api/crm/move",
+    "/api/crm/move.",
+    "/api/crm/stages",
+    "/api/crm/stages/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\DashboardPage.tsx": [
+    "/api",
+    "/api/transcripts"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\FollowUpPage.tsx": [
+    "/api",
+    "/api/followup/sequences",
+    "/api/followup/sequences/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\LogsPage.tsx": [
+    "/api/logs"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\MeetingAIPage.tsx": [
+    "/api",
+    "/api/agent-profiles",
+    "/api/meet/turn"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\ProfilePage.tsx": [
+    "/api",
+    "/api/profile",
+    "/api/whatsapp/status"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\RecordingsPage.tsx": [
+    "/api/recordings/*/audio"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\ROIPanel.tsx": [
+    "/api",
+    "/api/transcripts"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\SettingsPage.tsx": [
+    "/api-docs.html"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\TagsPage.tsx": [
+    "/api",
+    "/api/contacts/tags",
+    "/api/contacts/tags/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\pages\\TranscriptsPage.tsx": [
+    "/api",
+    "/api/transcripts"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\aimodels.ts": [
+    "/api",
+    "/api/ai/default-prompts",
+    "/api/ai/models",
+    "/api/ai/test"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\broadcast.ts": [
+    "/api",
+    "/api/analytics/calls",
+    "/api/audios",
+    "/api/audios/*",
+    "/api/contact-lists",
+    "/api/contact-lists/*",
+    "/api/contact-lists/*/append",
+    "/api/contacts/stats",
+    "/api/sessions/*/broadcast",
+    "/api/sessions/*/broadcast/*",
+    "/api/sessions/*/broadcast/*/pause",
+    "/api/sessions/*/broadcast/*/resume",
+    "/api/settings/campaign-defaults",
+    "/api/tts/generate"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\calls.ts": [
+    "/api",
+    "/api/sessions/*/calls",
+    "/api/sessions/*/calls/*",
+    "/api/sessions/*/calls/*/accept",
+    "/api/sessions/*/calls/*/reject"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\campaigns.ts": [
+    "/api",
+    "/api/campaigns",
+    "/api/campaigns/*/results"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\chatwoot.ts": [
+    "/api",
+    "/api/sessions/*/chatwoot"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\contacts.ts": [
+    "/api",
+    "/api/contacts/search",
+    "/api/mass-call",
+    "/api/mass-call/*",
+    "/api/sessions/*/contacts"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\dashboard.ts": [
+    "/api",
+    "/api/dashboard"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\history.ts": [
+    "/api",
+    "/api/sessions/*/history"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\massmsg.ts": [
+    "/api",
+    "/api/mass-message",
+    "/api/mass-message/*"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\security.ts": [
+    "/api",
+    "/api/2fa/disable",
+    "/api/2fa/enable",
+    "/api/2fa/setup",
+    "/api/2fa/verify",
+    "/api/access-list",
+    "/api/access-list/entry",
+    "/api/access-list/entry/remove",
+    "/api/access-list/mode",
+    "/api/analytics",
+    "/api/analytics/weekly",
+    "/api/audit-log",
+    "/api/contacts/leads",
+    "/api/contacts/leads/single",
+    "/api/contacts/notes",
+    "/api/contacts/notes/*",
+    "/api/contacts/tags",
+    "/api/contacts/tags/*",
+    "/api/contacts/tags/assign",
+    "/api/contacts/tags/by-contact",
+    "/api/contacts/tags/unassign",
+    "/api/conversations",
+    "/api/conversations/clear",
+    "/api/recordings",
+    "/api/recordings/*",
+    "/api/security/ip-whitelist",
+    "/api/security/sessions",
+    "/api/security/sessions/revoke",
+    "/api/security/sessions/revoke-all",
+    "/api/settings/rate-limit",
+    "/api/settings/schedule"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\sessions.ts": [
+    "/api",
+    "/api/sessions",
+    "/api/sessions/*",
+    "/api/sessions/*/logout",
+    "/api/sessions/*/pair",
+    "/api/sessions/*/pair-passkey",
+    "/api/sessions/*/proxy",
+    "/api/sessions/*/recording"
+  ],
+  "d:\\hipercool-refactor\\client\\src\\services\\settings.ts": [
+    "/api",
+    "/api/ai-cost",
+    "/api/credentials",
+    "/api/credentials/*",
+    "/api/settings",
+    "/api/settings/agent-chat",
+    "/api/settings/agent-chat/create-group",
+    "/api/settings/ai",
+    "/api/settings/budget",
+    "/api/settings/call-ai",
+    "/api/settings/telegram",
+    "/api/settings/telegram/test",
+    "/api/settings/voice",
+    "/api/settings/webhook",
+    "/api/settings/webhook/test"
+  ]
+}

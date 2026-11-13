@@ -1,0 +1,71 @@
+{
+ "modelo": "gweb/gemini-3.1-pro",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T15:10:37",
+ "segundos": 545,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T15:10:37",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "gweb/gemini-3.1-pro",
+   "decisor": "gweb/gemini-3.1-pro"
+  },
+  "achados": [
+   {
+    "tipo": "CERTEZA",
+    "problema": "Nota de movimento cronicamente baixa em 11 dos 12 vídeos do histórico (média 4.8) mesmo com medida de movimento alta nas cenas do dono (10.14% a 14.18% neste vídeo): no formato dono_tres, as cenas 0 a 3 repetem o mesmo enquadramento sem elementos gráficos se mexendo junto com a fala nem telas de demonstração do produto.",
+    "prova": "historico_notas (movimento <= 5.0 em 11 de 12 vídeos) / juri.movimento (cenas 0 a 3 entre 10.14% e 14.18%, nota movimento 5.0) / juri_problemas cenas 1 e 2",
+    "sugestao": "Adicionar elementos visuais animados sincronizados com a fala nas cenas de dono (cards/prints de simulação de chamada WhatsApp entrando com slide/pop ou destaques dinâmicos) e aumentar punchin_video de 0.06 para 0.12 entre blocos.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Falha de legibilidade e corte na legenda karaokê na cena 2: a palavra 'Call' aparece em verde-escuro sem tarja/borda de contraste diretamente sobre a camisa azul-marinho do apresentador, e 'Hermes' sai cortada, deixando o nome da marca invisível.",
+    "prova": "dados.json juri_problemas cena 2 (movimento grave e diretor grave)",
+    "sugestao": "Garantir que a caixa/tarja escura de fundo ou contorno preto espesso persista em todas as palavras da legenda karaokê (especialmente palavras destacadas em cor da marca) e corrigir o cálculo de largura da linha para não cortar 'Hermes Call'.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Topo da cabeça (cabelo) do apresentador encostando na pílula superior de etapa ('1 O problema') junto à faixa fixa verde, deixando o enquadramento sem respiro superior.",
+    "prova": "dados.json juri_problemas cena 1 (diretor media: headroom estrangulado)",
+    "sugestao": "Aumentar folga_dono (atualmente 0.45) ou deslocar o enquadramento do apresentador para baixo/reduzir escala em ~10% quando houver faixa fixa + pílula de etapa no topo.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho inicial nos primeiros 2 segundos (cena 0) e transição entre etapas ('1 O problema' para '2 Como funciona') acontecem em corte seco sem animação na pílula superior nem quebra visual.",
+    "prova": "dados.json juri_problemas cena 0 (diretor grave) e cena 2 (movimento media)",
+    "sugestao": "Testar animação de entrada/troca na pílula superior de tópico (slide lateral com easing) combinada a um punch-in e elemento visual da dor nos primeiros 1.5s da cena 0.",
+    "repetido": true
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Cartão final (cena 4) com movimento mais baixo do vídeo (4.63%) e corte brusco do apresentador para tela chapada.",
+    "prova": "juri.movimento cena 4 (4.63%) / juri_problemas cena 4",
+    "sugestao": "Testar entrada escalonada (staggered slide/fade) dos elementos do cartão final e aumentar pulso_botao de 0.06 para 0.10.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "ajuste",
+    "alvo": "punchin_video",
+    "valor": 0.12,
+    "motivo": "Nota de movimento cronicamente baixa em 11 de 12 vídeos; aumentar a aproximação lenta nas cenas de vídeo (dono/Veo) do valor atual (0.06) para o teto seguro (0.12) dá mais dinamismo às cenas consecutivas do apresentador.",
+    "prova": "historico_notas (movimento <= 5.0 em 11 de 12 vídeos) e juri_problemas cenas 1 e 2",
+    "vetada": "Veto: dobrar punchin_video de 0.06 para o teto (0.12) agrava diretamente um problema confirmado pelo juri neste mesmo video na Cena 1 ('Headroom estrangulado no enquadramento: o conjunto da faixa fixa verde superior com a pilula de etapa encosta diretamente no topo da cabeca do apresentador'). Aumentar o zoom/aproximacao nas cenas do dono vai cortar ou comprimir ainda mais o topo da cabeca/rosto contra a pilula superior."
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Garantir tarja escura ou contorno espesso de alto contraste em todas as palavras da legenda karaokê (inclusive destaques na cor da marca), corrigir cálculo de largura de linha para não cortar termos compostos como 'Hermes Call', e adicionar cards/elementos visuais animados sincronizados com a fala nas cenas de dono.",
+    "motivo": "Evitar que palavras destacadas fiquem invisíveis sobre a roupa escura ou saiam cortadas na legenda, além de enriquecer visualmente as cenas longas de apresentador.",
+    "prova": "dados.json juri_problemas cena 2 (movimento grave e diretor grave) e cena 1"
+   }
+  ],
+  "aprovadas": 1
+ }
+}

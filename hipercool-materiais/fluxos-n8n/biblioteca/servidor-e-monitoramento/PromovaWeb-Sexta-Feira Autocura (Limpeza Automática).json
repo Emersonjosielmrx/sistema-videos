@@ -1,0 +1,249 @@
+{
+ "name": "PromovaWeb-Sexta-Feira: 🤖 Autocura (Limpeza Automática)",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "tool-autocura",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "067fb62c-4443-49ab-a581-5dbb6902776c",
+   "name": "🔌 Webhook (MCP/Manual)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    160,
+    544
+   ],
+   "webhookId": "684c87bf-1f8b-4d41-8e05-97209a7dbccf"
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "echo \"=== Containers ===\" && docker container prune -f 2>&1 | tail -1 && echo \"=== Images ===\" && docker image prune -af 2>&1 | tail -1 && echo \"=== System ===\" && docker system prune -af --volumes 2>&1 | tail -2"
+   },
+   "id": "ce6ed0f6-98d3-4011-b67b-22764f01899c",
+   "name": "🧹 Clean VPS1",
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    544,
+    400
+   ],
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "Ak1qrzt01yCEr238",
+     "name": "SSH VPS1 Inovare (209.145.60.53)"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "id": "2f2bf286-f014-4eab-807a-dcb8bec153f6",
+   "name": "🔀 Combine Results",
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    848,
+    608
+   ]
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "echo \"=== Containers ===\" && docker container prune -f 2>&1 | tail -1 && echo \"=== Images ===\" && docker image prune -af 2>&1 | tail -1 && echo \"=== System ===\" && docker system prune -af --volumes 2>&1 | tail -2"
+   },
+   "id": "33b7d409-d13c-408c-9e2e-bb34e933b4c0",
+   "name": "🧹 Clean VPS2",
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    544,
+    608
+   ],
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "xvjyiGDy9PIuvVIB",
+     "name": "SSH VPS2 Inovare (157.173.207.22)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "authentication": "privateKey",
+    "command": "CONTAINER=$(docker ps -q -f name=postegresp2_postgres | head -1) && docker exec $CONTAINER psql -U postgres -d n8n_queue -c \"TRUNCATE TABLE execution_data;\" 2>&1 && docker exec $CONTAINER psql -U postgres -d n8n_queue -c \"VACUUM FULL execution_data;\" 2>&1"
+   },
+   "id": "bb2ccca1-29f9-4b30-a36d-1daf476ebf27",
+   "name": "💾 VACUUM DB",
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    544,
+    800
+   ],
+   "credentials": {
+    "sshPrivateKey": {
+     "id": "Ak1qrzt01yCEr238",
+     "name": "SSH VPS1 Inovare (209.145.60.53)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const log = [];\nconst vps1 = $('🧹 Clean VPS1').first().json;\nif (vps1.stdout) {\n  log.push('VPS1:');\n  vps1.stdout.split('\\n').filter(l => l.trim() && !l.startsWith('===')).forEach(l => log.push('  ' + l));\n}\nconst vps2 = $('🧹 Clean VPS2').first().json;\nif (vps2.stdout) {\n  log.push('VPS2:');\n  vps2.stdout.split('\\n').filter(l => l.trim() && !l.startsWith('===')).forEach(l => log.push('  ' + l));\n}\nconst vacuum = $('💾 VACUUM DB').first().json;\nif (vacuum.code === 0) log.push('VACUUM n8n DB: OK');\n\nconst text = '*Autocura PromovaWeb*\\n\\n' + (log.length > 0 ? log.join('\\n') : 'Nada para limpar');\n\nreturn [{ json: {\n  success: true,\n  log,\n  timestamp: new Date().toISOString(),\n  telegram_payload: { chat_id: 7988990790, text, parse_mode: 'Markdown' }\n} }];"
+   },
+   "id": "e4dbfc5a-eff0-4467-b5a0-8de46996142f",
+   "name": "📋 Gerar Relatorio",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1152,
+    608
+   ],
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.telegram.org/bot8895370974:AAEj7M7EoL18MGcoblc4yr5leGdQsB_iAcc/sendMessage",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($json.telegram_payload) }}",
+    "options": {
+     "timeout": 10000
+    }
+   },
+   "id": "48aa9e77-1828-4f1e-b6e0-06f88e0aa133",
+   "name": "📱 Telegram Notify",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1152,
+    800
+   ],
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "id": "0f147e23-2c83-4382-aa6b-deef230fec5e",
+   "name": "📤 Response Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1152,
+    1008
+   ]
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "🔌 Webhook (MCP/Manual)": {
+   "main": [
+    [
+     {
+      "node": "🧹 Clean VPS1",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "🧹 Clean VPS2",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "💾 VACUUM DB",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧹 Clean VPS1": {
+   "main": [
+    [
+     {
+      "node": "🔀 Combine Results",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Combine Results": {
+   "main": [
+    [
+     {
+      "node": "📋 Gerar Relatorio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧹 Clean VPS2": {
+   "main": [
+    [
+     {
+      "node": "🔀 Combine Results",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 VACUUM DB": {
+   "main": [
+    [
+     {
+      "node": "🔀 Combine Results",
+      "type": "main",
+      "index": 2
+     }
+    ]
+   ]
+  },
+  "📋 Gerar Relatorio": {
+   "main": [
+    [
+     {
+      "node": "📱 Telegram Notify",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📱 Telegram Notify": {
+   "main": [
+    [
+     {
+      "node": "📤 Response Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": true
+ },
+ "versionId": "be0484a8-f6e6-4bd7-b0f9-2c0c7fc5b1a9",
+ "meta": {
+  "aiBuilderAssisted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "Mx9opavXJwv6Xhwz",
+ "tags": []
+}

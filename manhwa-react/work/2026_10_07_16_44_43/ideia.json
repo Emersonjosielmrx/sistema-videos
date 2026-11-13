@@ -1,0 +1,28 @@
+{
+ "formato": "resumo de filme com legendas + música tensa",
+ "descricao": "Resumo visual de filme/série com cenas-chave legendadas em português, música de suspense, sem narração. Estrutura: 3-5 cenas impactantes + texto explicativo sobreposto + trilha que amplifica a tensão.",
+ "replicavel": false,
+ "como_fazer": "1. Selecionar filme de domínio público ou usar apenas descrição textual das cenas (evitar copyright). 2. Gerar imagens estáticas das cenas-chave com IA (Gemini/Pollinations) baseadas na sinopse. 3. Adicionar legendas hardcoded com ffmpeg (estilo branco, sombra preta). 4. Sobrepor trilha tensa do acervo de 341 músicas. 5. Cortar para 30-50s com ffmpeg, ritmo de 3-5s por cena. 6. Opcional: usar Veo 3 para gerar pequenos clipes dramáticos em vez de imagens estáticas.",
+ "ferramentas": [
+  "ffmpeg",
+  "geracao_de_imagem_IA",
+  "Veo_3",
+  "biblioteca_de_musica"
+ ],
+ "fonte_de_material": "Gerar imagens IA baseadas em sinopses de filmes famosos OU usar filmes de domínio público (pré-1928 nos EUA, ou licença Creative Commons). Descrições textuais vêm de Wikipedia/IMDb.",
+ "esforco": "medio",
+ "potencial": 6,
+ "por_que_viraliza": "Suspense + revelação de plot twist + curiosidade sobre filmes famosos gera retenção alta e compartilhamento de 'você precisa assistir isso'.",
+ "exemplo_roteiro": "ESPALHEI SANGUE FALSO PELA CASA\nDEPOIS ESCONDI TUDO NUMA MALA\nE DEIXEI MEU MARIDO COMO PRINCIPAL SUSPEITO\nELE SÓ CONSEGUIU ENTRAR NUMA VIATURA\nFilme: Garota Exemplar",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "resumo_de_filme",
+  "plot_twist",
+  "suspense",
+  "garota_exemplar",
+  "filme_explicado",
+  "thriller"
+ ],
+ "video": "2026-10-07 16-44-43.mp4",
+ "data": "2026-10-12"
+}

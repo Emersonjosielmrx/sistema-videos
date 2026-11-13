@@ -1,0 +1,92 @@
+{
+ "video": "D:\\recapd-ambientes\\producao\\workspace\\anime\\6g2biJlLrEg_When_an_S_Rank_CHIMERA_Builds_a_Comfy_Ho\\source.mp4",
+ "passo_s": 3.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "garota de cabelo castanho",
+   "principal": false,
+   "aparicoes": 41,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3183.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1272.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1101.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1008.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3186.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1119.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3183.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1101.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1008.0
+    }
+   ],
+   "papel": "personagem principal",
+   "visual": "light brown/taupe wavy hair with ahoge, orange/amber eyes, white collar/outfit",
+   "adulta": false,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "mulher de cabelo escuro",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1227.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1896.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1356.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1227.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1896.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1356.0
+    }
+   ],
+   "papel": "personagem principal",
+   "visual": "dark gray short hair, dark eyes, no ears/horns/tail, no signature accessory",
+   "adulta": false,
+   "mulher": true
+  }
+ ]
+}

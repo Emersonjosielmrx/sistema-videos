@@ -1,0 +1,628 @@
+{
+  "_leia": "Shorts de parceiros (TODOS os tipos de vídeo: manhwa/anime/dorama/fatos/esportes/filme_sem_voz e mais). Rodízio automático entre fontes/nichos. Quem usa: bin/parceiro_diario.py (producao/postar/status). ligado=false para TUDO. Cada canal pt recebe um vídeo DIFERENTE. 'horario' = hora local de publicação agendada.",
+  "ligado": true,
+  "fontes": [
+    {
+      "url": "https://www.youtube.com/@kaijinre/shorts",
+      "tipo": "manhwa",
+      "nome": "kaijinre",
+      "cobertura": "kaijinre"
+    },
+    {
+      "url": "https://www.youtube.com/@king_chan01/shorts",
+      "tipo": "manhwa",
+      "nome": "king_chan01",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@richan-anime/shorts",
+      "tipo": "anime",
+      "nome": "richan",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@ansaketv/shorts",
+      "tipo": "anime",
+      "nome": "ansaketv",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@nerdcf.animes/shorts",
+      "tipo": "anime",
+      "nome": "nerdcf",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@100ANIMEE/shorts",
+      "tipo": "anime",
+      "nome": "100animee",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCQ1X71snvUD7OKA3B8S3n6Q/shorts",
+      "tipo": "anime",
+      "nome": "a_UCQ1X71",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCHCxgkOUs9jw0ngpEtNb3xg/shorts",
+      "tipo": "anime",
+      "nome": "a_UCHCxgk",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCbYDJCicgdEOFPtgJLppCfw/shorts",
+      "tipo": "anime",
+      "nome": "a_UCbYDJC",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCoj3c_Mw_zTLCZt9bshd__w/shorts",
+      "tipo": "anime",
+      "nome": "a_UCoj3c_",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCK9vMOZaWjfSwQFiBPQt6iA/shorts",
+      "tipo": "anime",
+      "nome": "a_UCK9vMO",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@drameela/shorts",
+      "tipo": "dorama",
+      "nome": "drameela",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCDP44AK1qd0xpAuArni_nbQ/shorts",
+      "tipo": "dorama",
+      "nome": "d_UCDP44A",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCSJ6_grRhGTfH8FZWy9ofew/shorts",
+      "tipo": "dorama",
+      "nome": "d_UCSJ6_g",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UC8SqOfxuoCHNn2V2irOXFsQ/shorts",
+      "tipo": "dorama",
+      "nome": "d_UC8SqOf",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCrQEaKmguE65TOO4EedWHzA/shorts",
+      "tipo": "dorama",
+      "nome": "d_UCrQEaK",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCJ4ZMyMwgcHYgpJogOJrYiQ/shorts",
+      "tipo": "dorama",
+      "nome": "d_UCJ4ZMy",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCGk8PIaZgPZPOgDkbRzeFbQ/shorts",
+      "tipo": "dorama",
+      "nome": "d_UCGk8PI",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCOHGNd14T45bHhvFfTI-B1Q/shorts",
+      "tipo": "dorama",
+      "nome": "d_UCOHGNd",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@olaranjo1/shorts",
+      "tipo": "anime",
+      "nome": "olaranjo1",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@animax_97/shorts",
+      "tipo": "anime",
+      "nome": "animax_97",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@jresumos/shorts",
+      "tipo": "dorama",
+      "nome": "jresumos",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@andreu.edit1/shorts",
+      "tipo": "filme_sem_voz",
+      "nome": "andreu_edit1",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCRKSO0AInMtfM7rDgurjyyw/shorts",
+      "tipo": "filme_sem_voz",
+      "nome": "f_UCRKSO0",
+      "cobertura": "auto",
+      "_obs": "lista do dono 17/10 (tipo filme); 18/10 entrou no nicho do Filme Noturno — dry-run ok"
+    },
+    {
+      "url": "https://www.youtube.com/@inusifatos/shorts",
+      "tipo": "fatos",
+      "nome": "inusifatos",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@xiuliamelo/shorts",
+      "tipo": "fatos",
+      "nome": "xiuliamelo",
+      "cobertura": "auto",
+      "nichos": [
+        "curiosidades"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/@carlosmerchanat/shorts",
+      "tipo": "fatos",
+      "nome": "carlosmerchanat",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@canalutopia/shorts",
+      "tipo": "fatos",
+      "nome": "canalutopia",
+      "cobertura": "auto",
+      "nichos": [
+        "curiosidades"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/@thalisshortsbr/shorts",
+      "tipo": "fatos",
+      "nome": "thalisshortsbr",
+      "cobertura": "auto",
+      "nichos": [
+        "historia_mitologia"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/@futtres/shorts",
+      "tipo": "esportes",
+      "nome": "futtres",
+      "cobertura": "auto"
+    },
+    {
+      "url": "https://www.youtube.com/@fabioindaia2006/shorts",
+      "tipo": "esportes",
+      "nome": "fabioindaia2006",
+      "cobertura": "auto"
+    }
+  ],
+  "_fontes_obs": "18/10: rodízio entre nichos (dono: 'todos os tipos de vídeo, não só manhwa'). Tipos: manhwa, anime, dorama, filme_sem_voz, fatos, esportes. Cobertura 'auto' = detecção de legenda por visão; 'kaijinre' = molde específico.",
+  "fonte": "https://www.youtube.com/@kaijinre/shorts",
+  "por_dia": 1,
+  "fila_alvo": 4,
+  "_por_dia_obs": "dono 18/10: canais BRASILEIROS 3 por dia (mín 1, máx 3; cada um tem por_dia/fila_alvo/3 horários próprios); canal sem post no dia é agendado pros próximos minutos. Estes valores globais valem só pras línguas.",
+  "max_por_rodada": 12,
+  "linguas_por_fonte": 3,
+  "disco_min_gb": 2.5,
+  "pt": [
+    {
+      "canal": "novo_manhwanoturno",
+      "nome": "Manhwa Noturno",
+      "handle": "@manhwanoturno",
+      "nicho": "manhwa",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:20",
+        "18:30",
+        "22:10"
+      ],
+      "horario": "12:20",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true
+    },
+    {
+      "canal": "novo_doramanoturno",
+      "nome": "Dorama Noturno",
+      "handle": "@doramanoturno",
+      "nicho": "dorama",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:50",
+        "18:40",
+        "22:30"
+      ],
+      "horario": "12:50",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "_obs": "18/10: canais Noturno logo depois do Manhwa Noturno (que tem que ser o 1º): no empate de fila a produção serve primeiro quem vem antes na lista"
+    },
+    {
+      "canal": "novo_curiosidadesnoturnas",
+      "nome": "Curiosidades Noturnas",
+      "handle": "@curiosidadesnoturnasbr",
+      "nicho": "fatos",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:20",
+        "19:10",
+        "22:40"
+      ],
+      "horario": "12:20",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true
+    },
+    {
+      "canal": "novo_filmenoturno",
+      "nome": "Filme Noturno",
+      "handle": "@filmenoturno",
+      "nicho": "filme_sem_voz",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "13:20",
+        "19:30",
+        "23:00"
+      ],
+      "horario": "13:20",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true
+    },
+    {
+      "canal": "novo_manhwareact_ia",
+      "nome": "ManhwaReact",
+      "handle": "@manhwareact-ia",
+      "nicho": "anime",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:10",
+        "18:40",
+        "20:30",
+        "15:30"
+      ],
+      "horario": "12:10",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true,
+      "_obs": "17/10: não posta (ManhwaReact: login vencido; Animescomia: só API, proibida) — religar quando consertar"
+    },
+    {
+      "canal": "KOpyXE9rBy1YirlZ",
+      "nome": "Animescomia",
+      "handle": "@animescomia",
+      "nicho": "anime",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "11:40",
+        "17:50",
+        "21:10",
+        "15:30"
+      ],
+      "horario": "11:40",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true,
+      "_obs": "17/10: não posta (ManhwaReact: login vencido; Animescomia: só API, proibida) — religar quando consertar"
+    },
+    {
+      "canal": "hNQrW5ouNe0Ni5Me",
+      "nome": "inovare manhwa br",
+      "handle": "@inovaremanhwabr",
+      "nicho": "manhwa",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "13:00",
+        "19:20",
+        "22:00"
+      ],
+      "horario": "13:00",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_universo_ia_d6s",
+      "nome": "CenaReact",
+      "handle": "@cenareact-f3j",
+      "nicho": "filme_sem_voz",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:00",
+        "19:00",
+        "21:30",
+        "15:30"
+      ],
+      "horario": "12:00",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true,
+      "_obs": "18/10: desligado do parceiro — dono: dorama só no Dorama Noturno"
+    },
+    {
+      "canal": "novo_ia_agora_h3n",
+      "nome": "InventoReact",
+      "handle": "@inventoreact",
+      "nicho": "anime",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "11:30",
+        "17:30",
+        "21:00"
+      ],
+      "horario": "11:30",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_cartuchoreact",
+      "nome": "CartuchoReact",
+      "handle": "@cartuchoreact",
+      "nicho": "anime",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:30",
+        "18:10",
+        "21:40"
+      ],
+      "horario": "12:30",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_forjareact",
+      "nome": "ForjaReact",
+      "handle": "@forjareact",
+      "nicho": "manhwa",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "11:00",
+        "17:10",
+        "20:10"
+      ],
+      "horario": "11:00",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_mundoquenaoexiste",
+      "nome": "Mundo Que Nao Existe",
+      "handle": "@mundoquenaoexiste",
+      "nicho": "fatos",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "12:20",
+        "19:40",
+        "22:10"
+      ],
+      "horario": "12:20",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_historias_em_frames",
+      "nome": "HistoriasEmFrames",
+      "handle": "@historiasemframes-emerson",
+      "nicho": "historia_mitologia",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "13:10",
+        "20:00",
+        "22:20"
+      ],
+      "horario": "13:10",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_codigo_inteligente_n7j",
+      "nome": "Fio da Meada",
+      "handle": "@codigointeligente-n7j",
+      "nicho": "curiosidades",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "19:10",
+        "21:40",
+        "23:00"
+      ],
+      "horario": "19:10",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_assistiainvestimentos",
+      "nome": "Assist-IA Investimentos",
+      "handle": "@assistiainvestimentos",
+      "nicho": "financas",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "07:40",
+        "12:15",
+        "19:30"
+      ],
+      "horario": "07:40",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_dicasfinanceirasdaia",
+      "nome": "Dicas financeiras da ia",
+      "handle": "@dicasfinanceirasdaia",
+      "nicho": "financas",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "08:10",
+        "12:40",
+        "20:20"
+      ],
+      "horario": "08:10",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": true,
+      "teste_rede": true
+    },
+    {
+      "canal": "novo_inovaremanhwaverse",
+      "nome": "InovareManhwaVerse",
+      "handle": "@inovaremanhwaverse",
+      "nicho": "manhwa",
+      "fuso": "America/Sao_Paulo",
+      "horarios": [
+        "13:10",
+        "19:40",
+        "23:10"
+      ],
+      "horario": "11:00",
+      "por_dia": 3,
+      "fila_alvo": 6,
+      "ativo": false,
+      "teste_rede": true,
+      "_obs": "18/10: suspenso no postador (rede_canais/canais.json) — não produzir"
+    }
+  ],
+  "idiomas": {
+    "hi": {
+      "canal": "GtuH5ezUK8eBaC60",
+      "nome": "Inovaremanhwaversehindi",
+      "fuso": "Asia/Kolkata",
+      "ativo": true,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ]
+    },
+    "id": {
+      "canal": "nYsAKUb3DbR1QOEm",
+      "nome": "inovaremanhwaverseind",
+      "fuso": "Asia/Jakarta",
+      "ativo": true,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ]
+    },
+    "it": {
+      "canal": "7zpNZNll2jlBnQ0J",
+      "nome": "inovaremanhwaverseita",
+      "fuso": "Europe/Rome",
+      "ativo": true,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ]
+    },
+    "ru": {
+      "canal": "TkfzifstYEoG4jKg",
+      "nome": "inovare manhwa verse ru",
+      "fuso": "Europe/Moscow",
+      "ativo": true,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ]
+    },
+    "th": {
+      "canal": "q3mik36FjtTgFkNC",
+      "nome": "Inovaremanhwaversethai",
+      "fuso": "Asia/Bangkok",
+      "ativo": true,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ]
+    },
+    "vi": {
+      "canal": "8ROQmZVjbpwiwMoX",
+      "nome": "inovaremanhwaverseviet",
+      "fuso": "Asia/Ho_Chi_Minh",
+      "ativo": true,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ]
+    },
+    "en": {
+      "canal": "UYjkdFO3V3kjmKU5",
+      "nome": "Inovare Manhwa eng",
+      "fuso": "America/New_York",
+      "ativo": false,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ],
+      "_obs": "18/10 23:15: desligado — advertências no canal (fr: 2 de direitos autorais; en: diretrizes)"
+    },
+    "fr": {
+      "canal": "GG97QQt8lmyv0dDG",
+      "nome": "inovare Manhwa french",
+      "fuso": "Europe/Paris",
+      "ativo": false,
+      "por_dia": 3,
+      "horarios": [
+        "11:30",
+        "16:30",
+        "20:30"
+      ],
+      "handle": "@inovaremanhwafrench",
+      "_obs": "18/10 23:15: desligado — advertências no canal (fr: 2 de direitos autorais; en: diretrizes)"
+    }
+  },
+  "_teste_rede": "Dono 17/10: postar manhwa/dorama do parceiro nos 12 canais de react, 4 por canal/dia, pra comparar com os reacts; se forem tão bem, trocamos. Entradas com teste_rede=true. Pra encerrar o teste: ativo=false nelas.",
+  "narradores": {
+    "_leia": "Voz do narrador por nicho do parceiro (dono 18/10: 'todos os tipos de vídeo, ramificar pra cada nicho'). Só Multilingual aprovadas; Antonio/Francisca/Isabella PROIBIDAS. Voz fixa por nicho.",
+    "manhwa": "pt-BR-ThalitaMultilingualNeural",
+    "anime": "en-US-BrianMultilingualNeural",
+    "dorama": "en-US-AvaMultilingualNeural",
+    "filme": "en-US-BrianMultilingualNeural",
+    "fatos": "en-US-EmmaMultilingualNeural",
+    "esportes": "en-US-BrianMultilingualNeural",
+    "filme_sem_voz": "en-US-BrianMultilingualNeural",
+    "curiosidades": "en-US-EmmaMultilingualNeural",
+    "satisfatorios": "en-US-EmmaMultilingualNeural",
+    "natureza": "en-US-AvaMultilingualNeural",
+    "quiz": "en-US-AndrewMultilingualNeural",
+    "info_errada": "en-US-EmmaMultilingualNeural",
+    "ia_futuro": "en-US-BrianMultilingualNeural",
+    "motivacao": "en-US-AndrewMultilingualNeural",
+    "financas": "en-US-BrianMultilingualNeural",
+    "historia_mitologia": "en-US-AvaMultilingualNeural"
+  },
+  "tipo_fonte": "manhwa",
+  "_linguas_obs": "17/10 13:25: línguas pausadas (ainda saem com o borrão antigo e roubam render do teste dos 12 canais pt)"
+}

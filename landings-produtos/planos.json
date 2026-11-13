@@ -1,0 +1,110 @@
+{
+ "_leia": "28/10 (dona): preços e seções no estilo da landing oficial do Hermes Call. Preços APROVADOS pela dona em 28/10 (Claw, landing, mentorias ditados por ela; os outros da proposta, sem correção). Únicos números: os preços e o custo de atendente (~R$ 2.500), que já está na landing oficial. 'atendente': true = mostra a comparação com atendimento humano.",
+ "produtos": {
+  "follow-up": {
+   "objetivos": ["chamar de volta quem sumiu.", "recuperar carrinho abandonado.", "confirmar o pagamento sozinha.", "não deixar nenhum orçamento parado."],
+   "gancho": ["O vendedor que nunca esquece", "Imagine alguém que lembra de cada cliente que pediu preço e sumiu, chama de novo no momento certo e com tom humano, todos os dias, sem cansar. É isso que o Follow-up IA faz no seu WhatsApp."],
+   "atendente": true,
+   "comparativo": [["Quem chama o cliente de volta", "O vendedor, quando lembra", "A IA, em toda conversa parada"], ["Insistência", "Desiste no 2º contato", "Segue a sequência que você definiu"], ["Pagamento", "Confere o Pix na mão", "Confere e avisa sozinha"]],
+   "planos": [["Essencial", "R$ 149", "/mês", ["Follow-up de vendas automático", "Recuperação de carrinho", "1 número de WhatsApp"]], ["Profissional", "R$ 297", "/mês", ["Tudo do Essencial", "Verificação de pagamento (Pix)", "Sequências personalizadas por etapa", "Suporte prioritário no WhatsApp"]]]
+  },
+  "agenda": {
+   "objetivos": ["marcar consultas 24 horas.", "confirmar e lembrar cada horário.", "remarcar sem conflito.", "acabar com horário duplicado."],
+   "gancho": ["A recepcionista que não fecha", "O cliente manda mensagem às 22h e já sai com o horário marcado. A Agenda IA confirma, lembra e remarca sozinha, para a sua agenda não ter buraco."],
+   "atendente": true,
+   "comparativo": [["Horário de atendimento", "Horário comercial", "24 horas, todos os dias"], ["Confirmação e lembrete", "Ligação manual", "Automático no WhatsApp"], ["Conflito de horário", "Pode acontecer", "A agenda não deixa duplicar"]],
+   "planos": [["Essencial", "R$ 129", "/mês", ["Agendamento 24h pelo WhatsApp", "Confirmação e lembrete", "1 agenda"]], ["Profissional", "R$ 249", "/mês", ["Tudo do Essencial", "Comprovante personalizado", "Remarcação automática", "Suporte prioritário no WhatsApp"]]]
+  },
+  "vitrine": {
+   "objetivos": ["mostrar o catálogo inteiro.", "recomendar o produto certo.", "responder na hora.", "fechar a venda no WhatsApp."],
+   "gancho": ["O vendedor que conhece todo o estoque", "Ele sabe cada produto, tamanho e foto do seu catálogo, responde na hora e indica o item certo para cada cliente, enquanto a sua equipe cuida do resto."],
+   "atendente": true,
+   "comparativo": [["Tempo de resposta", "Horas, quando tem fila", "Na hora"], ["Conhecimento do catálogo", "Depende de quem atende", "O catálogo inteiro, sempre"], ["Fotos e vídeos do produto", "Procura e manda na mão", "Envia sozinha"]],
+   "planos": [["Essencial", "R$ 179", "/mês", ["Catálogo inteligente", "Fotos e vídeos dos produtos", "1 número de WhatsApp"]], ["Profissional", "R$ 349", "/mês", ["Tudo do Essencial", "Recomendação de produto", "Leitura de PDFs e planilhas", "Suporte prioritário no WhatsApp"]]]
+  },
+  "superchat": {
+   "objetivos": ["juntar WhatsApp, Instagram, Facebook e Telegram.", "atender 24 horas com IA.", "pausar quando o vendedor assume.", "entender áudio e texto."],
+   "gancho": ["Uma caixa só para todos os canais", "Nada de mensagem perdida no Direct ou cliente esperando no WhatsApp: tudo chega no mesmo lugar, a IA atende e a sua equipe entra quando quiser."],
+   "atendente": true,
+   "comparativo": [["Canais", "Um app aberto para cada rede", "Todos numa caixa só"], ["Fora do horário", "Mensagem sem resposta", "A IA atende 24h"], ["Quem respondeu quem", "Ninguém sabe", "Histórico de cada conversa"]],
+   "planos": [["Essencial", "R$ 199", "/mês", ["Caixa única de mensagens", "IA atendendo 24h", "Áudio e texto"]], ["Profissional", "R$ 399", "/mês", ["Tudo do Essencial", "Pausa automática quando o vendedor fala", "Mais canais conectados", "Suporte prioritário no WhatsApp"]]]
+  },
+  "crm": {
+   "objetivos": ["guardar o histórico de cada cliente.", "mostrar o funil de vendas.", "organizar tickets e suporte.", "ajudar sua equipe com IA."],
+   "gancho": ["Planilha não é CRM", "Com o CRM Chatwoot IA cada cliente tem histórico, etiqueta e etapa no funil. Ninguém recomeça do zero e o suporte para de virar bagunça."],
+   "atendente": false,
+   "comparativo": [["Histórico do cliente", "Espalhado em planilhas", "Tudo numa tela"], ["Etapa da venda", "Ninguém sabe", "Funil com etapas"], ["Suporte", "Pedido perdido no chat", "Tickets organizados"]],
+   "planos": [["Essencial", "R$ 197", "/mês", ["CRM personalizado (Chatwoot)", "Funil, etiquetas e histórico", "Implantação: R$ 497 (uma vez)"]], ["Profissional", "R$ 397", "/mês", ["Tudo do Essencial", "Tickets e helpdesk", "Integrações e relatórios", "Implantação: R$ 497 (uma vez)"]]]
+  },
+  "disparo": {
+   "objetivos": ["falar com seus clientes de uma vez.", "personalizar cada mensagem.", "distribuir o envio entre números.", "programar a promoção."],
+   "gancho": ["A promoção sai sozinha", "Em vez de mandar mensagem um por um o dia inteiro, você programa o disparo, cada cliente recebe a mensagem com o próprio nome e o envio é distribuído entre vários números."],
+   "atendente": false,
+   "comparativo": [["Enviar a promoção", "Um por um, o dia todo", "Programado, sozinho"], ["Mensagem", "Igual para todos", "Com o nome de cada contato"], ["Números usados", "Um só número", "Rotação entre vários"]],
+   "planos": [["Essencial", "R$ 147", "/mês", ["Disparo inteligente", "Mensagem personalizada", "Envio programado"]], ["Profissional", "R$ 297", "/mês", ["Tudo do Essencial", "Rotação de instâncias", "Aniversário automático e envio de Pix", "Suporte prioritário no WhatsApp"]]]
+  },
+  "vps": {
+   "objetivos": ["rodar o seu n8n próprio.", "fazer backup automático.", "vigiar os erros por você.", "deixar seu servidor blindado."],
+   "gancho": ["Servidor próprio sem dor de cabeça", "Você recebe a VPS pronta com Docker, Portainer, Traefik e n8n próprio, com backup automático e um robô sentinela avisando quando algo dá errado."],
+   "atendente": false,
+   "comparativo": [["Onde roda a automação", "Na nuvem dos outros", "No seu servidor"], ["Montagem", "Você aprende sozinho", "Entregue pronta"], ["Erro de madrugada", "Você descobre depois", "O bot sentinela avisa"]],
+   "planos": [["VPS Blindada", "R$ 149", "/mês", ["Setup VPS blindado (Docker, Portainer, Traefik)", "n8n self-hosted", "Backup automático e bot sentinela", "Configuração inicial: R$ 297 (uma vez)"]]]
+  },
+  "marketing": {
+   "objetivos": ["criar e publicar seus posts.", "escrever artigos com SEO.", "gravar podcasts com IA.", "responder os comentários."],
+   "gancho": ["Suas redes não param mais", "A Fábrica de Marketing IA cria e publica os posts, escreve para o blog e ainda responde os comentários, para o cliente não esquecer de você quando a rotina aperta."],
+   "atendente": false,
+   "comparativo": [["Postar todo dia", "Quando sobra tempo", "Todo dia, sozinho"], ["Blog e SEO", "Fica para depois", "Artigos publicados"], ["Comentários", "Sem resposta", "Respondidos pela IA"]],
+   "planos": [["Essencial", "R$ 297", "/mês", ["Full Post (criação e publicação)", "Resposta a comentários", "1 rede social"]], ["Profissional", "R$ 597", "/mês", ["Tudo do Essencial", "Blog com SEO", "Podcast com IA", "Mais redes conectadas"]]]
+  },
+  "mentoria": {
+   "objetivos": ["te ensinar Vibe Coding.", "te dar prompts validados.", "destravar o seu projeto.", "criar seus fluxos com você."],
+   "gancho": ["IA que vira ferramenta de verdade", "Treinamento, pack de prompts e mentoria para você sair da teoria e montar as suas próprias soluções com IA no dia a dia do negócio."],
+   "atendente": false,
+   "comparativo": [["Aprender sozinho", "Vídeos soltos na internet", "Caminho direto com quem faz"], ["Travou no projeto", "Dias procurando a solução", "Mentoria de 20 min resolve"], ["Prompts", "Tentativa e erro", "Pack validado"]],
+   "planos": [["Pack de Prompts", "R$ 97", "", ["Prompts validados para o seu negócio"]], ["Treinamento", "R$ 97", "", ["Treinamento de Vibe Coding", "Mapa mental e documentação"]], ["Mentoria rápida", "R$ 97", "/20 min", ["Consertos e direcionamento do seu projeto"]], ["Mentoria / criação de fluxos", "R$ 397", "/hora", ["Mentoria individual ou criação de fluxos", "A 1ª hora individual sai pela metade"]], ["Turma semanal em grupo", "R$ 99", "/mês", ["Mentoria em grupo toda semana"]]]
+  },
+  "landing-page": {
+   "objetivos": ["transformar visita em cliente.", "mostrar o vídeo do seu produto.", "levar direto para o seu WhatsApp.", "carregar rápido no celular."],
+   "gancho": ["Seu cliente chega e entende na hora", "Página rápida, em HTML puro (sem WordPress), com vídeo de demonstração, texto que vende e o botão que leva direto para o seu WhatsApp."],
+   "atendente": false,
+   "comparativo": [["Para onde vai o cliente", "Perfil bagunçado ou site lento", "Página rápida e direta"], ["Tecnologia", "WordPress pesado", "HTML puro"], ["Contato", "Formulário esquecido", "Botão direto no WhatsApp"]],
+   "planos": [["Landing automática", "a partir de R$ 99", "", ["Página pronta em HTML", "Você recebe os arquivos prontos para hospedar"]], ["Landing personalizada", "a partir de R$ 199", "", ["Feita para o seu negócio, em HTML", "O valor varia com a hospedagem e o número de imagens"]]]
+  },
+  "grupos": {
+   "objetivos": ["dar boas-vindas aos novos membros.", "moderar o grupo.", "resumir as conversas.", "responder só quando chamado."],
+   "gancho": ["O moderador que não dorme", "Boas-vindas para quem entra, link suspeito fora, resumo das conversas e um bot que só fala quando alguém chama: seu grupo organizado sem você vigiar."],
+   "atendente": false,
+   "comparativo": [["Spam e link suspeito", "Você apaga na mão", "Moderação automática"], ["Membro novo", "Sem orientação", "Recebe boas-vindas"], ["Centenas de mensagens", "Ninguém lê", "Resumo e atas"]],
+   "planos": [["Essencial", "R$ 97", "/mês", ["Boas-vindas", "Moderação", "1 grupo"]], ["Profissional", "R$ 197", "/mês", ["Tudo do Essencial", "Resumo e atas", "Agente Sniper (responde quando chamado)", "Mais grupos"]]]
+  },
+  "agentes": {
+   "objetivos": ["ser a sua secretária.", "agendar por você.", "treinar seus vendedores.", "entender áudio, imagem e PDF."],
+   "gancho": ["Uma equipe de IA trabalhando por você", "Secretária, agendador, coach de vendas e agente pessoal que entendem áudio, imagem, PDF e vídeo e executam as tarefas repetitivas do seu dia."],
+   "atendente": true,
+   "comparativo": [["Tarefas repetitivas", "Tomam horas do seu dia", "Feitas pelos agentes"], ["Áudio, imagem e PDF", "Você lê e responde", "A IA entende e age"], ["Disponível", "Horário comercial", "24 horas"]],
+   "planos": [["Essencial", "R$ 247", "/mês", ["Agente Secretária", "Visão e documentos", "1 agente"]], ["Profissional", "R$ 497", "/mês", ["Tudo do Essencial", "Sales Coach", "Multi-agentes", "Suporte prioritário no WhatsApp"]]]
+  },
+  "avatar": {
+   "objetivos": ["gravar vídeos por você.", "falar português natural.", "postar todo dia.", "usar a sua voz clonada."],
+   "gancho": ["Você aparece sem precisar gravar", "Um avatar digital seu, com a sua voz clonada, fala em português natural e grava os vídeos das suas redes, sem cenário e sem cansaço."],
+   "atendente": false,
+   "comparativo": [["Gravar vídeo", "Cenário, tempo e regravação", "O avatar grava"], ["Frequência", "Quando dá", "Postagem diária"], ["Voz", "Você precisa estar lá", "Sua voz clonada"]],
+   "planos": [["Essencial", "R$ 397", "/mês", ["Seu avatar digital", "Português natural", "Vídeos para as suas redes"]], ["Profissional", "R$ 797", "/mês", ["Tudo do Essencial", "Voz clonada", "Postagem diária"]]]
+  },
+  "cardapio": {
+   "objetivos": ["mostrar seu cardápio com fotos.", "receber o pedido pronto.", "cuidar do delivery e da retirada.", "atender com IA no pico."],
+   "gancho": ["O pedido chega pronto", "O cliente escolhe no cardápio digital com fotos e o pedido chega certinho no seu WhatsApp, sem anotar à mão nem errar na hora do pico."],
+   "atendente": true,
+   "comparativo": [["Cardápio", "Foto mandada no WhatsApp", "Digital, com fotos"], ["Pedido", "Anotado à mão", "Chega pronto"], ["Hora do pico", "Fila e erro", "A IA atende junto"]],
+   "planos": [["Essencial", "R$ 79", "/mês", ["Cardápio digital com fotos", "Pedido no WhatsApp"]], ["Profissional", "R$ 149", "/mês", ["Tudo do Essencial", "Delivery e retirada", "Atendimento com IA"]]]
+  },
+  "claw": {
+   "objetivos": ["executar tarefas de verdade.", "pesquisar e organizar.", "se integrar às suas ferramentas.", "trabalhar sob o seu controle."],
+   "gancho": ["Uma IA que faz, não só conversa", "O Inovare Claw pesquisa, organiza, responde e executa as tarefas por você, integrado às suas ferramentas e sempre sob o seu controle."],
+   "atendente": false,
+   "comparativo": [["Assistente comum", "Só conversa", "Executa a tarefa"], ["Integração", "Copiar e colar", "Integrado às ferramentas"], ["Controle", "Caixa-preta", "Sob o seu controle"]],
+   "planos": [["Claw", "R$ 199", "/mês", ["Agente autônomo", "Tokens de IA por conta do cliente"]], ["Claw com tokens", "R$ 497", "/mês", ["Agente autônomo", "Tokens de IA inclusos"]]]
+  }
+ }
+}

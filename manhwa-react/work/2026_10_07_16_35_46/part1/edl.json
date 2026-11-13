@@ -1,0 +1,293 @@
+{
+ "part": [
+  0.0,
+  13.0
+ ],
+ "keeps": [
+  [
+   0.646521,
+   2.880542
+  ],
+  [
+   3.8870000000000005,
+   5.057479
+  ],
+  [
+   5.931938,
+   8.697624999999999
+  ],
+  [
+   9.124083,
+   12.737542
+  ]
+ ],
+ "duration_out": 9.783645999999997,
+ "zoom": [
+  [
+   0.0,
+   2.384,
+   1
+  ],
+  [
+   3.553,
+   7.703,
+   2
+  ],
+  [
+   7.553,
+   9.336,
+   1
+  ]
+ ],
+ "content_zoom": [],
+ "keywords": [],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 7.283645999999997,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 7.283645999999997,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_part2.mov",
+   "dur": 2.0,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\FNAF FUNK (Funk Remix) (128 kbps).mp3",
+ "meta": {
+  "hook": "EU NÃO SEI SE IA SER BOM...",
+  "title": "Ele duvidou e se arrependeu na hora 😂🔥 #shorts #react",
+  "description": "O criador começou duvidando do vídeo e não sabia o que esperar... será que valeu a pena?\nVocê também já duvidou de um vídeo e se surpreendeu?\nComenta aí e segue pra mais reacts insanos!\n\n#shorts #react #comedia #engracado #viral #humor #inesperado #surpresa #absurdo #mundoquenaoexiste #reactbr #meme #risada",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#comedia",
+   "#engracado",
+   "#viral",
+   "#humor",
+   "#inesperado",
+   "#surpresa",
+   "#absurdo",
+   "#mundoquenaoexiste"
+  ],
+  "tags": [
+   "react",
+   "comédia",
+   "vídeo engraçado",
+   "humor",
+   "absurdo",
+   "inesperado",
+   "react br",
+   "mundo que não existe",
+   "viral",
+   "surpresa",
+   "meme",
+   "risada"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Vocês também teriam duvidado desse vídeo?",
+  "title_alternatives": [
+   "Comecei duvidando e olha no que deu 😂💀 #shorts #react",
+   "Não acreditei no que vi nesse vídeo 😱😂 #shorts #humor"
+  ],
+  "work": null,
+  "channel": "mundoquenaoexiste"
+ },
+ "channel": "mundoquenaoexiste",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_c13cff_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Vamo",
+   "s": 0.0,
+   "e": 0.7334789999999999,
+   "p": 0.9,
+   "lip": 0.009678771170544088,
+   "speaker": "creator"
+  },
+  {
+   "w": "ver",
+   "s": 0.7334789999999999,
+   "e": 0.9334790000000001,
+   "p": 0.9,
+   "lip": 0.01184866290043172,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 0.9334790000000001,
+   "e": 1.133479,
+   "p": 0.9,
+   "lip": 0.010894367513313153,
+   "speaker": "creator"
+  },
+  {
+   "w": "dramazinho.",
+   "s": 1.133479,
+   "e": 2.2340210000000003,
+   "p": 0.9,
+   "lip": 0.006706872627333326,
+   "speaker": "creator"
+  },
+  {
+   "w": "Rapaz,",
+   "s": 3.552562,
+   "e": 3.932562,
+   "p": 0.9,
+   "lip": 0.009982526057198605,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 3.932562,
+   "e": 4.0325619999999995,
+   "p": 0.9,
+   "lip": 0.01241786429689313,
+   "speaker": "creator"
+  },
+  {
+   "w": "negócio",
+   "s": 4.0325619999999995,
+   "e": 4.212562,
+   "p": 0.9,
+   "lip": 0.010211557736951957,
+   "speaker": "creator"
+  },
+  {
+   "w": "aqui",
+   "s": 4.212562,
+   "e": 4.372562,
+   "p": 0.9,
+   "lip": 0.010823573970900073,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 4.372562,
+   "e": 4.472562,
+   "p": 0.9,
+   "lip": 0.011466791223838686,
+   "speaker": "creator"
+  },
+  {
+   "w": "assim,",
+   "s": 4.472562,
+   "e": 4.712562,
+   "p": 0.9,
+   "lip": 0.011076373905215407,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 4.712562,
+   "e": 4.792562,
+   "p": 0.9,
+   "lip": 0.010410227544808554,
+   "speaker": "creator"
+  },
+  {
+   "w": "senhora",
+   "s": 4.792562,
+   "e": 5.112562,
+   "p": 0.9,
+   "lip": 0.013429448394383068,
+   "speaker": "creator"
+  },
+  {
+   "w": "velha,",
+   "s": 5.112562,
+   "e": 5.632562,
+   "p": 0.9,
+   "lip": 0.007842216185804678,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 5.632562,
+   "e": 5.812562,
+   "p": 0.9,
+   "lip": 0.0018243766771332004,
+   "speaker": "creator"
+  },
+  {
+   "w": "Eu",
+   "s": 6.286103999999998,
+   "e": 6.526103999999998,
+   "p": 0.9,
+   "lip": 0.009519512803225938,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 6.526103999999998,
+   "e": 6.606103999999998,
+   "p": 0.9,
+   "lip": 0.011552296953321932,
+   "speaker": "creator"
+  },
+  {
+   "w": "sei",
+   "s": 6.586103999999997,
+   "e": 6.746103999999997,
+   "p": 0.9,
+   "lip": 0.008378892027661285,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 6.746103999999997,
+   "e": 7.046103999999998,
+   "p": 0.9,
+   "lip": 0.006576310639173702,
+   "speaker": "creator"
+  },
+  {
+   "w": "realmente",
+   "s": 7.046103999999998,
+   "e": 8.026103999999998,
+   "p": 0.9,
+   "lip": 0.011949591100087201,
+   "speaker": "creator"
+  },
+  {
+   "w": "ia",
+   "s": 8.026103999999998,
+   "e": 8.226103999999998,
+   "p": 0.9,
+   "lip": 0.017316065852256944,
+   "speaker": "creator"
+  },
+  {
+   "w": "ser",
+   "s": 8.226103999999998,
+   "e": 8.446103999999998,
+   "p": 0.9,
+   "lip": 0.01096095789201064,
+   "speaker": "creator"
+  },
+  {
+   "w": "bom...",
+   "s": 8.446103999999998,
+   "e": 9.186103999999998,
+   "p": 0.9,
+   "lip": 0.009105903244699265,
+   "speaker": "creator"
+  }
+ ]
+}

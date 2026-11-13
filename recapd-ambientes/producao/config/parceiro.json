@@ -1,0 +1,1985 @@
+{
+ "_leia": "Shorts de parceiros (TODOS os tipos de vídeo: manhwa/anime/dorama/fatos/esportes/filme_sem_voz e mais). Rodízio automático entre fontes/nichos. Quem usa: bin/parceiro_diario.py (producao/postar/status). ligado=false para TUDO. Cada canal pt recebe um vídeo DIFERENTE. 'horario' = hora local de publicação agendada.",
+ "ligado": true,
+ "fontes": [
+  {
+   "url": "https://www.youtube.com/@kaijinre/shorts",
+   "tipo": "manhwa",
+   "nome": "kaijinre",
+   "cobertura": "kaijinre",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@king_chan01/shorts",
+   "tipo": "manhwa",
+   "nome": "king_chan01",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 0.2). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@richan-anime/shorts",
+   "tipo": "anime",
+   "nome": "richan",
+   "cobertura": "auto",
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@ansaketv/shorts",
+   "tipo": "anime",
+   "nome": "ansaketv",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@nerdcf.animes/shorts",
+   "tipo": "anime",
+   "nome": "nerdcf",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 0.4). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@100ANIMEE/shorts",
+   "tipo": "anime",
+   "nome": "100animee",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCQ1X71snvUD7OKA3B8S3n6Q/shorts",
+   "tipo": "anime",
+   "nome": "a_UCQ1X71",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCHCxgkOUs9jw0ngpEtNb3xg/shorts",
+   "tipo": "anime",
+   "nome": "a_UCHCxgk",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "30/10 (dona: 'parceiro que não dá views, aí sim cortamos'): 4 Shorts medidos, 0 com 500+, máx 8 no placar de 48 h (21 dias). Peso 0.4 = ~2x menos vez no rodízio do nicho. Desfazer: apagar 'peso'. Backup: parceiro.json.bak_20261030_virais"
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCbYDJCicgdEOFPtgJLppCfw/shorts",
+   "tipo": "anime",
+   "nome": "a_UCbYDJC",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 0.4). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCoj3c_Mw_zTLCZt9bshd__w/shorts",
+   "tipo": "anime",
+   "nome": "a_UCoj3c_",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCK9vMOZaWjfSwQFiBPQt6iA/shorts",
+   "tipo": "anime",
+   "nome": "a_UCK9vMO",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@drameela/shorts",
+   "tipo": "dorama",
+   "nome": "drameela",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 0.4). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCDP44AK1qd0xpAuArni_nbQ/shorts",
+   "tipo": "dorama",
+   "nome": "d_UCDP44A",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCSJ6_grRhGTfH8FZWy9ofew/shorts",
+   "tipo": "dorama",
+   "nome": "d_UCSJ6_g",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UC8SqOfxuoCHNn2V2irOXFsQ/shorts",
+   "tipo": "dorama",
+   "nome": "d_UC8SqOf",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCrQEaKmguE65TOO4EedWHzA/shorts",
+   "tipo": "dorama",
+   "nome": "d_UCrQEaK",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCJ4ZMyMwgcHYgpJogOJrYiQ/shorts",
+   "tipo": "dorama",
+   "nome": "d_UCJ4ZMy",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 0.4). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCGk8PIaZgPZPOgDkbRzeFbQ/shorts",
+   "tipo": "dorama",
+   "nome": "d_UCGk8PI",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCOHGNd14T45bHhvFfTI-B1Q/shorts",
+   "tipo": "dorama",
+   "nome": "d_UCOHGNd",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@olaranjo1/shorts",
+   "tipo": "anime",
+   "nome": "olaranjo1",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@animax_97/shorts",
+   "tipo": "anime",
+   "nome": "animax_97",
+   "cobertura": "auto",
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@jresumos/shorts",
+   "tipo": "dorama",
+   "nome": "jresumos",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 0.4). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@andreu.edit1/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "andreu_edit1",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCRKSO0AInMtfM7rDgurjyyw/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "f_UCRKSO0",
+   "cobertura": "auto",
+   "_obs": "lista do dono 17/10 (tipo filme); 18/10 entrou no nicho do Filme Noturno — dry-run ok"
+  },
+  {
+   "url": "https://www.youtube.com/@inusifatos/shorts",
+   "tipo": "fatos",
+   "nome": "inusifatos",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@xiuliamelo/shorts",
+   "tipo": "fatos",
+   "nome": "xiuliamelo",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ],
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@carlosmerchanat/shorts",
+   "tipo": "fatos",
+   "nome": "carlosmerchanat",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@canalutopia/shorts",
+   "tipo": "fatos",
+   "nome": "canalutopia",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades",
+    "misterios"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@thalisshortsbr/shorts",
+   "tipo": "fatos",
+   "nome": "thalisshortsbr",
+   "cobertura": "auto",
+   "nichos": [
+    "historia_mitologia"
+   ],
+   "peso": 3,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 3 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@futtres/shorts",
+   "tipo": "esportes",
+   "nome": "futtres",
+   "cobertura": "auto",
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@fabioindaia2006/shorts",
+   "tipo": "esportes",
+   "nome": "fabioindaia2006",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@s_otturno/shorts",
+   "tipo": "anime",
+   "nome": "s_otturno",
+   "cobertura": "auto",
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@indicaanimes1/shorts",
+   "tipo": "anime",
+   "nome": "indicaanimes1",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@animedemais/shorts",
+   "tipo": "anime",
+   "nome": "animedemais",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@ddedits5/shorts",
+   "tipo": "anime",
+   "nome": "ddedits5",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@ramenashi_1108/shorts",
+   "tipo": "anime",
+   "nome": "ramenashi_1108",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@delsitoshorts/shorts",
+   "tipo": "anime",
+   "nome": "delsitoshorts",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@narradramaa/shorts",
+   "tipo": "dorama",
+   "nome": "narradramaa",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@zetafilmes-kr/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "zetafilmes-kr",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@ultravoxfilmes01/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "ultravoxfilmes01",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@gplottwist09/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "gplottwist09",
+   "cobertura": "auto",
+   "peso": 3,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 3 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@projetopipocayt/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "projetopipocayt",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@edumontalvao4665/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "edumontalvao4665",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@viral.cut.t/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "viral_cut_t",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@eduardoflix/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "eduardoflix",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@sobanalisee/shorts",
+   "tipo": "fatos",
+   "nome": "sobanalisee",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ],
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@papodebixo/shorts",
+   "tipo": "fatos",
+   "nome": "papodebixo",
+   "cobertura": "auto",
+   "nichos": [
+    "animais",
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@historiasdofranck/shorts",
+   "tipo": "fatos",
+   "nome": "historiasdofranck",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@curiosidadesemtela/shorts",
+   "tipo": "fatos",
+   "nome": "curiosidadesemtela",
+   "cobertura": "auto",
+   "nichos": [
+    "animais",
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@oalfredo/shorts",
+   "tipo": "fatos",
+   "nome": "oalfredo",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ],
+   "peso": 2,
+   "_peso_obs": "05/11 foco: mediana >1000 views no Studio (analise_shorts_foco) -> peso 2 (2x mais vez). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@shortsadabr/shorts",
+   "tipo": "fatos",
+   "nome": "shortsadabr",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ],
+   "peso": 3,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 3 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@avidamaravilha/shorts",
+   "tipo": "fatos",
+   "nome": "avidamaravilha",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@fatoviralof/shorts",
+   "tipo": "fatos",
+   "nome": "fatoviralof",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ],
+   "peso": 3,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 3 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@coralxoficial/shorts",
+   "tipo": "fatos",
+   "nome": "coralxoficial",
+   "cobertura": "auto",
+   "nichos": [
+    "animais",
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@digofatos/shorts",
+   "tipo": "fatos",
+   "nome": "digofatos",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@projeto7curioso/shorts",
+   "tipo": "fatos",
+   "nome": "projeto7curioso",
+   "cobertura": "auto",
+   "nichos": [
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@entendenciabr/shorts",
+   "tipo": "fatos",
+   "nome": "entendenciabr",
+   "cobertura": "auto",
+   "nichos": [
+    "historia_mitologia",
+    "tecnologia"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@vorin25/shorts",
+   "tipo": "fatos",
+   "nome": "vorin25",
+   "cobertura": "auto",
+   "nichos": [
+    "historia_mitologia"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@historyinsyncbrasil/shorts",
+   "tipo": "fatos",
+   "nome": "historyinsyncbrasil",
+   "cobertura": "auto",
+   "nichos": [
+    "historia_mitologia"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@caosmetria/shorts",
+   "tipo": "fatos",
+   "nome": "caosmetria",
+   "cobertura": "auto",
+   "nichos": [
+    "historia_mitologia",
+    "misterios"
+   ],
+   "peso": 3,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 3 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@grananerd-k3r/shorts",
+   "tipo": "financas",
+   "nome": "grananerd-k3r",
+   "cobertura": "auto",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 0.2). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@japafishinglife/shorts",
+   "tipo": "pesca",
+   "nome": "japafishinglife",
+   "cobertura": "auto",
+   "nichos": [
+    "animais"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@cidademaresiarp/shorts",
+   "tipo": "jogos",
+   "nome": "cidademaresiarp",
+   "cobertura": "auto",
+   "peso": 0.4,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.4 (era 0.5). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/channel/UCfNljj-_RGszVHd-QYsKgtg/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "cineverso",
+   "cobertura": "auto"
+  },
+  {
+   "url": "https://www.youtube.com/@danielarecapsbr/shorts",
+   "tipo": "manhwa",
+   "nome": "danielarecapsbr",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@carecanomultiverso/shorts",
+   "tipo": "manhwa",
+   "nome": "carecanomultiverso",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@levisaosensei/shorts",
+   "tipo": "anime",
+   "nome": "levisaosensei",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@shounenanimes5/shorts",
+   "tipo": "anime",
+   "nome": "shounenanimes5",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@xackal777/shorts",
+   "tipo": "anime",
+   "nome": "xackal777",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@topanimes2373/shorts",
+   "tipo": "anime",
+   "nome": "topanimes2373",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "peso": 3,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 3 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@ryukmovies/shorts",
+   "tipo": "anime",
+   "nome": "ryukmovies",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@animeeditsvnx/shorts",
+   "tipo": "anime",
+   "nome": "animeeditsvnx",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@nerddaybr/shorts",
+   "tipo": "anime",
+   "nome": "nerddaybr",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@nerdrudimentar/shorts",
+   "tipo": "anime",
+   "nome": "nerdrudimentar",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@allonegeek/shorts",
+   "tipo": "anime",
+   "nome": "allonegeek",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@crystalcine/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "crystalcine",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@guilhermesouza-i5x/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "guilhermesouza-i5x",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10"
+  },
+  {
+   "url": "https://www.youtube.com/@pontocuriosoytt/shorts",
+   "tipo": "jogos",
+   "nome": "pontocuriosoytt",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "peso": 0.1,
+   "_peso_obs": "05/11 analise_shorts_foco: mediana Studio -> peso 0.1 (era 1). Desfazer: apagar peso."
+  },
+  {
+   "url": "https://www.youtube.com/@kaiquebelgames/shorts",
+   "tipo": "fatos",
+   "nome": "kaiquebelgames",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "nichos": [
+    "curiosidades"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@nucleotech_ofc/shorts",
+   "tipo": "fatos",
+   "nome": "nucleotech_ofc",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "nichos": [
+    "curiosidades",
+    "tecnologia"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@conspiracoessecretas/shorts",
+   "tipo": "fatos",
+   "nome": "conspiracoessecretas",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "nichos": [
+    "curiosidades",
+    "misterios"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@explicaaii1/shorts",
+   "tipo": "fatos",
+   "nome": "explicaaii1",
+   "cobertura": "auto",
+   "_obs": "lista da dona 28/10",
+   "nichos": [
+    "curiosidades",
+    "tecnologia"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@neithkpop/shorts",
+   "tipo": "dorama",
+   "nome": "neithkpop",
+   "cobertura": "auto",
+   "_obs": "08/11 dona: parceiro autorizado novo"
+  },
+  {
+   "url": "https://www.youtube.com/@exploramundofc/shorts",
+   "tipo": "fatos",
+   "nome": "exploramundofc",
+   "cobertura": "auto",
+   "_obs": "08/11 dona: parceiro autorizado novo"
+  },
+  {
+   "url": "https://www.youtube.com/@segurancaexplicada/shorts",
+   "tipo": "fatos",
+   "nome": "segurancaexplicada",
+   "cobertura": "auto",
+   "_obs": "08/11 dona: parceiro autorizado novo"
+  },
+  {
+   "url": "https://www.youtube.com/@fatosdesconhecidos/shorts",
+   "tipo": "fatos",
+   "nome": "fatosdesconhecidos",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 3,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@tinocandotv/shorts",
+   "tipo": "fatos",
+   "nome": "tinocandotv",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2.5,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@Tio_San/shorts",
+   "tipo": "anime",
+   "nome": "Tio_San",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@spotniks/shorts",
+   "tipo": "financas",
+   "nome": "spotniks",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@Batimaanimes/shorts",
+   "tipo": "anime",
+   "nome": "Batimaanimes",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@NodeHatVencendoFilmes/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "NodeHatVencendoFilmes",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@DerrotandoFilmes/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "DerrotandoFilmes",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@OssosPerdidos/shorts",
+   "tipo": "fatos",
+   "nome": "OssosPerdidos",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@FocanaHistória/shorts",
+   "tipo": "fatos",
+   "nome": "FocanaHistória",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@Clark69/shorts",
+   "tipo": "anime",
+   "nome": "Clark69",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@GuilhermeAnalisa/shorts",
+   "tipo": "fatos",
+   "nome": "GuilhermeAnalisa",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@UniversoNarrado/shorts",
+   "tipo": "fatos",
+   "nome": "UniversoNarrado",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@SOLUCIONANDOFILMES/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "SOLUCIONANDOFILMES",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@DrakeZando/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "DrakeZando",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@passoapassoempreendedoroficial/shorts",
+   "tipo": "financas",
+   "nome": "passoapassoempreendedoroficial",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@ChapéusdePalha/shorts",
+   "tipo": "anime",
+   "nome": "ChapéusdePalha",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@skyroxalex/shorts",
+   "tipo": "fatos",
+   "nome": "skyroxalex",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@HoradaHistóriaConversaToon/shorts",
+   "tipo": "anime",
+   "nome": "HoradaHistóriaConversaToon",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@ManhwaDoKawa/shorts",
+   "tipo": "manhwa",
+   "nome": "ManhwaDoKawa",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@filmesnostalgicos/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "filmesnostalgicos",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@liandracarla26/shorts",
+   "tipo": "fatos",
+   "nome": "liandracarla26",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@curiosomercado/shorts",
+   "tipo": "financas",
+   "nome": "curiosomercado",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@Animenokokoro/shorts",
+   "tipo": "anime",
+   "nome": "Animenokokoro",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@buyandholdbrasil/shorts",
+   "tipo": "financas",
+   "nome": "buyandholdbrasil",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@Historiadosgrandes/shorts",
+   "tipo": "financas",
+   "nome": "Historiadosgrandes",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@SubsoloGeek/shorts",
+   "tipo": "anime",
+   "nome": "SubsoloGeek",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@Orff_/shorts",
+   "tipo": "dorama",
+   "nome": "Orff_",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@desvendandofilme/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "desvendandofilme",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@RubyRomances/shorts",
+   "tipo": "manhwa",
+   "nome": "RubyRomances",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@resumodetela/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "resumodetela",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@AbreviandoDoramas/shorts",
+   "tipo": "dorama",
+   "nome": "AbreviandoDoramas",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@rebobinarecap/shorts",
+   "tipo": "anime",
+   "nome": "rebobinarecap",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@RecapandoManhwa/shorts",
+   "tipo": "manhwa",
+   "nome": "RecapandoManhwa",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@DIÁRIODOSPESADELOS/shorts",
+   "tipo": "fatos",
+   "nome": "DIÁRIODOSPESADELOS",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@zackdfilms/shorts",
+   "tipo": "fatos",
+   "nome": "zackdfilms",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 3,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@dailydoseofinternet/shorts",
+   "tipo": "fatos",
+   "nome": "dailydoseofinternet",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 3,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@beamazed/shorts",
+   "tipo": "fatos",
+   "nome": "beamazed",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@chills/shorts",
+   "tipo": "fatos",
+   "nome": "chills",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2.5,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@coldfusion/shorts",
+   "tipo": "financas",
+   "nome": "coldfusion",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@nukestop5/shorts",
+   "tipo": "fatos",
+   "nome": "nukestop5",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@slappedham/shorts",
+   "tipo": "fatos",
+   "nome": "slappedham",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@kpophmkshorts/shorts",
+   "tipo": "dorama",
+   "nome": "kpophmkshorts",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2.5,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@top5s/shorts",
+   "tipo": "fatos",
+   "nome": "top5s",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@score90/shorts",
+   "tipo": "esportes",
+   "nome": "score90",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@magnatesmedia/shorts",
+   "tipo": "financas",
+   "nome": "magnatesmedia",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@howmoneyworks/shorts",
+   "tipo": "financas",
+   "nome": "howmoneyworks",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@storyrecapped/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "storyrecapped",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 2,
+   "_peso_obs": "09/11 dona: prioridade aos parceiros novos maiores (1 mi+ inscritos). Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@bingecentral/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "bingecentral",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@danielccmovie/shorts",
+   "tipo": "filme_sem_voz",
+   "nome": "danielccmovie",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@gtashorttv/shorts",
+   "tipo": "jogos",
+   "nome": "gtashorttv",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)"
+  },
+  {
+   "url": "https://www.youtube.com/@BTNDocumentaries/shorts",
+   "tipo": "fatos",
+   "nome": "BTNDocumentaries",
+   "cobertura": "auto",
+   "_obs": "09/11 dona: autorizado (CANAIS_DARK_PARA_CONTATO.md)",
+   "peso": 0,
+   "_peso_obs": "09/11: canal sem aba de Shorts (só vídeo longo) — fora do rodízio de Shorts; serve pros cortes de longos. Desfazer: apagar peso"
+  },
+  {
+   "url": "https://www.youtube.com/@ecommercenapratica/shorts",
+   "tipo": "negocios",
+   "nome": "Ecommerce na Prática",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)",
+   "nichos": [
+    "imobiliario"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@Elementar/shorts",
+   "tipo": "negocios",
+   "nome": "Elementar",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)",
+   "nichos": [
+    "imobiliario"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@sebrae/shorts",
+   "tipo": "negocios",
+   "nome": "Sebrae",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)",
+   "nichos": [
+    "imobiliario"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@tuasaude/shorts",
+   "tipo": "saude",
+   "nome": "Tua Saúde",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)"
+  },
+  {
+   "url": "https://www.youtube.com/@OlaCiencia/shorts",
+   "tipo": "saude",
+   "nome": "Olá, Ciência!",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)"
+  },
+  {
+   "url": "https://www.youtube.com/@MinutoDaTerra/shorts",
+   "tipo": "saude",
+   "nome": "Minuto da Terra",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)"
+  },
+  {
+   "url": "https://www.youtube.com/@ProfessorBaroni/shorts",
+   "tipo": "imobiliario",
+   "nome": "Professor Baroni",
+   "cobertura": "auto",
+   "peso": 2,
+   "_obs": "12/11 dona: parceiro AUTORIZADO p/ os canais novos (público com dinheiro)",
+   "nichos": [
+    "imobiliario"
+   ]
+  },
+  {
+   "url": "https://www.youtube.com/@mostrandojustica/shorts",
+   "tipo": "juridico",
+   "nome": "Mostrando justiça",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (direito, 434 mil; dono não aparece: não (audiências reais))"
+  },
+  {
+   "url": "https://www.youtube.com/@BlogAbriMinhaEmpresa/shorts",
+   "tipo": "juridico",
+   "nome": "Blog Abri Minha Empresa",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (contabil, 372 mil; dono não aparece: não (animação/voz em off))"
+  },
+  {
+   "url": "https://www.youtube.com/@canaldaeconet/shorts",
+   "tipo": "juridico",
+   "nome": "Econet Editora",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (contabil, 281 mil; dono não aparece: não (gráficos/equipe))"
+  },
+  {
+   "url": "https://www.youtube.com/@tvmigalhas/shorts",
+   "tipo": "juridico",
+   "nome": "Migalhas",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (direito, 268 mil; dono não aparece: não (cortes de tribunais))"
+  },
+  {
+   "url": "https://www.youtube.com/@direitodesenhado/shorts",
+   "tipo": "juridico",
+   "nome": "Direito Desenhado",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (direito, 192 mil; dono não aparece: não (animação))"
+  },
+  {
+   "url": "https://www.youtube.com/@AcordoCertoOficial/shorts",
+   "tipo": "juridico",
+   "nome": "Acordo Certo",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (contabil, 131 mil; dono não aparece: não (animação))"
+  },
+  {
+   "url": "https://www.youtube.com/@contabeis/shorts",
+   "tipo": "juridico",
+   "nome": "Contábeis",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (contabil, 108 mil; dono não aparece: não (portal))"
+  },
+  {
+   "url": "https://www.youtube.com/@RevisaoAnimada/shorts",
+   "tipo": "juridico",
+   "nome": "Revisão Animada",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (direito, 94,8 mil; dono não aparece: não (mão desenhando))"
+  },
+  {
+   "url": "https://www.youtube.com/@conselhodesentença/shorts",
+   "tipo": "juridico",
+   "nome": "Conselho de Sentença",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (direito, 64,3 mil; dono não aparece: não (júri real))"
+  },
+  {
+   "url": "https://www.youtube.com/@ContabilizeiBr/shorts",
+   "tipo": "juridico",
+   "nome": "Contabilizei",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (contabil, 51,8 mil; dono não aparece: não (empresa))"
+  },
+  {
+   "url": "https://www.youtube.com/@Cortesdoconsumidor/shorts",
+   "tipo": "juridico",
+   "nome": "Cortes do consumidor",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (direito, 11,3 mil; dono não aparece: não (cortes))"
+  },
+  {
+   "url": "https://www.youtube.com/@JornalContabil/shorts",
+   "tipo": "juridico",
+   "nome": "Rede Jornal Contábil",
+   "cobertura": "auto",
+   "peso": 1,
+   "_obs": "13/11 dona: parceiro AUTORIZADO p/ o Lei e Lucro (contabil, 9,82 mil; dono não aparece: não (boletins))"
+  }
+ ],
+ "_fontes_obs": "18/10: rodízio entre nichos (dono: 'todos os tipos de vídeo, não só manhwa'). Tipos: manhwa, anime, dorama, filme_sem_voz, fatos, esportes. Cobertura 'auto' = detecção de legenda por visão; 'kaijinre' = molde específico.",
+ "fonte": "https://www.youtube.com/@kaijinre/shorts",
+ "por_dia": 1,
+ "fila_alvo": 4,
+ "_por_dia_obs": "dono 18/10: canais BRASILEIROS 3 por dia (mín 1, máx 3; cada um tem por_dia/fila_alvo/3 horários próprios); canal sem post no dia é agendado pros próximos minutos. Estes valores globais valem só pras línguas.",
+ "max_por_rodada": 12,
+ "linguas_por_fonte": 3,
+ "virais_fracos": {
+  "modo": "desligado",
+  "_modo_obs": "01/11 DESLIGADO (dona: 'cada vídeo é pra ser único, não pode ser o mesmo vídeo indo pra mais de um canal nosso'): a versão nova do viral repetia a mesma fonte em outro canal. 30/10 15:20: ensaio ok (plano com 13 virais; fonte na lista do parceiro em 11/13; teste em memória do postar: a versão viral passa a regra da fonte repetida e sai antes, a cópia comum continua segurada) -> ligado com no máximo 3 por dia. Voltar pra 'ensaio' ou 'desligado' a qualquer momento.",
+  "min_views_48h": 1500,
+  "janela_dias": 12,
+  "max_canais_por_viral": 3,
+  "max_por_dia": 3,
+  "max_por_rodada": 1,
+  "aceitar_outro_nicho": true,
+  "parado_max_dias": 4,
+  "fracos": {
+   "janela_dias": 21,
+   "min_medidos": 5,
+   "mediana_max": 100,
+   "pct500_max": 10
+  }
+ },
+ "_virais_fracos_obs": "30/10 (dona: 'postar nos canais que não dão views os vídeos que viralizam nos outros'): bin/virais_fracos.py. Short nosso com >= min_views_48h no placar de 48 h -> versão NOVA da mesma fonte (anime_auto --id: outro roteiro/narração/título, nunca o mesmo arquivo) pro canal fraco pt (mediana < 100 views e <= 10% com 500+, n >= 5 em 21 dias) + línguas fracas; o postar sobe essa versão antes do Short comum e ela pode repetir fonte (exceção da regra 'nunca a mesma fonte em 2 canais'). modo: desligado | ensaio (só registra em logs/virais_fracos.jsonl) | ligado. Ver: python bin/virais_fracos.py --ensaio",
+ "disco_min_gb": 2.5,
+ "pt": [
+  {
+   "canal": "novo_manhwanoturno",
+   "nome": "Manhwa Noturno",
+   "handle": "@manhwanoturno",
+   "nicho": "manhwa",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:20",
+    "18:30",
+    "22:10"
+   ],
+   "horario": "12:20",
+   "por_dia": 1,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_doramanoturno",
+   "nome": "Dorama Noturno",
+   "handle": "@doramanoturno",
+   "nicho": "dorama",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:50",
+    "18:40",
+    "22:30"
+   ],
+   "horario": "12:50",
+   "por_dia": 1,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_obs": "18/10: canais Noturno logo depois do Manhwa Noturno (que tem que ser o 1º): no empate de fila a produção serve primeiro quem vem antes na lista",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_curiosidadesnoturnas",
+   "nome": "Curiosidades Noturnas",
+   "handle": "@curiosidadesnoturnasbr",
+   "nicho": "fatos",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:20",
+    "22:00"
+   ],
+   "horario": "12:20",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+  },
+  {
+   "canal": "novo_filmenoturno",
+   "nome": "Filme Noturno",
+   "handle": "@filmenoturno",
+   "nicho": "filme_sem_voz",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "13:20",
+    "20:10",
+    "22:40"
+   ],
+   "horario": "13:20",
+   "por_dia": 3,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
+   "nichos_foco": {
+    "esportes": 480.5
+   }
+  },
+  {
+   "canal": "novo_manhwareact_ia",
+   "nome": "ManhwaReact",
+   "handle": "@manhwareact-ia",
+   "nicho": "anime",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:10",
+    "18:40",
+    "20:30",
+    "15:30"
+   ],
+   "horario": "12:10",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_obs": "17/10: não posta (ManhwaReact: login vencido; Animescomia: só API, proibida) — religar quando consertar",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "KOpyXE9rBy1YirlZ",
+   "nome": "Animescomia",
+   "handle": "@animescomia",
+   "nicho": "anime",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "11:40",
+    "17:50",
+    "21:10",
+    "15:30"
+   ],
+   "horario": "11:40",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_obs": "17/10: não posta (ManhwaReact: login vencido; Animescomia: só API, proibida) — religar quando consertar",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "nome": "inovare manhwa br",
+   "handle": "@inovaremanhwabr",
+   "nicho": "manhwa",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "13:00",
+    "19:20",
+    "22:00"
+   ],
+   "horario": "13:00",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "nichos_foco": {
+    "manhwa": 248.0
+   }
+  },
+  {
+   "canal": "novo_universo_ia_d6s",
+   "nome": "CenaReact",
+   "handle": "@cenareact-f3j",
+   "nicho": "filme_sem_voz",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:00",
+    "20:10"
+   ],
+   "horario": "12:00",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_obs": "18/10: desligado do parceiro — dono: dorama só no Dorama Noturno",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
+   "nichos_foco": {
+    "pesca": 1159.0,
+    "jogos": 394.0,
+    "dorama": 316.0,
+    "financas": 196.0
+   }
+  },
+  {
+   "canal": "novo_ia_agora_h3n",
+   "nome": "InventoReact",
+   "handle": "@inventoreact",
+   "nicho": "anime",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "11:30",
+    "17:30",
+    "21:00"
+   ],
+   "horario": "11:30",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "nichos_foco": {
+    "anime": 1152.0
+   }
+  },
+  {
+   "canal": "novo_cartuchoreact",
+   "nome": "CartuchoReact",
+   "handle": "@cartuchoreact",
+   "nicho": "anime",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:30",
+    "18:10",
+    "21:40"
+   ],
+   "horario": "12:30",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_g1": "21/10: canal que rende (placar 48 h) -> estoque 9, produz antes",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_forjareact",
+   "nome": "ForjaReact",
+   "handle": "@forjareact",
+   "nicho": "manhwa",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "11:00",
+    "17:10",
+    "20:10"
+   ],
+   "horario": "11:00",
+   "por_dia": 1,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_mundoquenaoexiste",
+   "nome": "Mundo Que Nao Existe",
+   "handle": "@mundoquenaoexiste",
+   "nicho": "fatos",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:20",
+    "19:40",
+    "22:10"
+   ],
+   "horario": "12:20",
+   "por_dia": 1,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_g1": "21/10: canal que rende (placar 48 h) -> estoque 9, produz antes",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_historias_em_frames",
+   "nome": "HistoriasEmFrames",
+   "handle": "@historiasemframes-emerson",
+   "nicho": "fatos",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:30",
+    "20:00",
+    "22:20"
+   ],
+   "horario": "13:10",
+   "por_dia": 3,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "nichos_foco": {
+    "fatos": 1256.5,
+    "pesca": 1000.0,
+    "jogos": 214.5,
+    "manhwa": 204.0
+   },
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+  },
+  {
+   "canal": "novo_codigo_inteligente_n7j",
+   "nome": "Fio da Meada",
+   "handle": "@codigointeligente-n7j",
+   "nicho": "curiosidades",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:10",
+    "18:00",
+    "19:50",
+    "20:40",
+    "21:30"
+   ],
+   "horario": "19:10",
+   "por_dia": 5,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_g1": "21/10: canal que rende (placar 48 h) -> estoque 9, produz antes",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "nichos_foco": {
+    "fatos": 1385.5
+   },
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+  },
+  {
+   "canal": "novo_assistiainvestimentos",
+   "nome": "Assist-IA Investimentos",
+   "handle": "@assistiainvestimentos",
+   "nicho": "financas",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "07:40",
+    "12:15",
+    "19:30"
+   ],
+   "horario": "07:40",
+   "por_dia": 1,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_dicasfinanceirasdaia",
+   "nome": "Plantão das Histórias",
+   "nome_antigo": "Dicas financeiras da ia",
+   "handle": "@dicasfinanceirasdaia",
+   "nicho": "dorama",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "08:10",
+    "12:40",
+    "20:20",
+    "22:15"
+   ],
+   "horario": "08:10",
+   "por_dia": 4,
+   "fila_alvo": 21,
+   "ativo": true,
+   "teste_rede": true,
+   "_g1": "21/10: canal que rende (placar 48 h) -> estoque 9, produz antes",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "nichos_foco": {
+    "esportes": 1545.0,
+    "dorama": 1125.0,
+    "anime": 458.0
+   },
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+  },
+  {
+   "canal": "novo_inovaremanhwaverse",
+   "nome": "InovareManhwaVerse",
+   "handle": "@inovaremanhwaverse",
+   "nicho": "manhwa",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "13:10",
+    "19:40",
+    "23:10"
+   ],
+   "horario": "11:00",
+   "por_dia": 3,
+   "fila_alvo": 6,
+   "ativo": false,
+   "teste_rede": true,
+   "_obs": "18/10: suspenso no postador (rede_canais/canais.json) — não produzir"
+  },
+  {
+   "canal": "novo_esportenoturno",
+   "nome": "Esporte Noturno",
+   "handle": "@esportenoturno",
+   "nicho": "esportes",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:20",
+    "14:10",
+    "18:10",
+    "20:30",
+    "21:50"
+   ],
+   "horario": "12:20",
+   "por_dia": 5,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_obs": "21/10: canal novo pros gêneros de parceiro sem canal (dono)",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "nichos_foco": {
+    "pesca": 1300.0,
+    "esportes": 1283.0,
+    "fatos": 1174.0
+   },
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+  },
+  {
+   "canal": "novo_bichonoturno",
+   "nome": "Bicho Noturno",
+   "handle": "@bichonoturnobr",
+   "nicho": "animais",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:40",
+    "22:10"
+   ],
+   "horario": "12:40",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_obs": "21/10: canal novo pros gêneros de parceiro sem canal (dono)",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco",
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
+   "nichos_foco": {
+    "pesca": 25.5
+   }
+  },
+  {
+   "canal": "novo_gamenoturno",
+   "nome": "Game Noturno",
+   "handle": "@gamenoturnobr",
+   "nicho": "jogos",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "13:10",
+    "19:00",
+    "22:40"
+   ],
+   "horario": "13:10",
+   "por_dia": 1,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_obs": "21/10: canal novo pros gêneros de parceiro sem canal (dono)",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_inovareq8l",
+   "nome": "Mistérios Noturnos",
+   "handle": "@Inovare-q8l",
+   "nicho": "misterios",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "12:40",
+    "19:20",
+    "22:50"
+   ],
+   "horario": "12:40",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_obs": "29/10: canal de tema novo (dona: temas que os parceiros têm e nós não)",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_inovareu8b",
+   "nome": "Tech Noturno",
+   "handle": "@Inovare-u8b",
+   "nicho": "tecnologia",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "13:00",
+    "19:50",
+    "23:10"
+   ],
+   "horario": "13:00",
+   "por_dia": 2,
+   "fila_alvo": 21,
+   "ativo": true,
+   "_obs": "29/10: canal de tema novo (dona: temas que os parceiros têm e nós não)",
+   "_foco_05nov": "05/11 dona (\"ajuste tudo pros vídeos corretos irem pros canais corretos\"): analise_shorts_foco.py (1.038 Shorts, Studio) — o CANAL pesa mais que o tipo. Vivos: Esporte 1280, Fio 1258 (med views); Dicas: dorama 1540 x finanças 18; HistoriasEmFrames: fatos 585; mortos (<10 em quase tudo): Dorama/Manhwa Noturno, Assist-IA, Forja, Game. Backup: parceiro.json.bak_20261105_foco"
+  },
+  {
+   "canal": "novo_empresariointeligenteia",
+   "nome": "Empresário Inteligente IA",
+   "handle": "@empresariointeligenteia",
+   "nicho": "negocios",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "09:30",
+    "13:30",
+    "19:30"
+   ],
+   "horario": "09:30",
+   "por_dia": 2,
+   "fila_alvo": 4,
+   "ativo": true,
+   "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
+   "nicho_fixo": true
+  },
+  {
+   "canal": "novo_clinicalucrativaia",
+   "nome": "Clínica Lucrativa IA",
+   "handle": "@clinicalucrativaia",
+   "nicho": "saude",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "09:30",
+    "13:30",
+    "19:30"
+   ],
+   "horario": "09:30",
+   "por_dia": 2,
+   "fila_alvo": 4,
+   "ativo": true,
+   "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
+   "nicho_fixo": true
+  },
+  {
+   "canal": "novo_imovelemfoco",
+   "nome": "Imóvel em Foco",
+   "handle": "@imovelemfoco",
+   "nicho": "imobiliario",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "09:30",
+    "13:30",
+    "19:30"
+   ],
+   "horario": "09:30",
+   "por_dia": 2,
+   "fila_alvo": 4,
+   "ativo": true,
+   "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
+   "nicho_fixo": true
+  },
+  {
+   "canal": "novo_vendasqueescalam",
+   "nome": "Vendas que Escalam",
+   "handle": "@vendasqueescalam",
+   "nicho": "negocios",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "09:30",
+    "13:30",
+    "19:30"
+   ],
+   "horario": "09:30",
+   "por_dia": 2,
+   "fila_alvo": 4,
+   "ativo": true,
+   "_obs": "12/11 dona: canal NOVO (público que compra automação); conta = a do Kaggle, YouTube pelo MESMO IP",
+   "nicho_fixo": true
+  },
+  {
+   "canal": "novo_leielucro",
+   "nome": "Lei e Lucro",
+   "handle": "@leielucroia",
+   "nicho": "juridico",
+   "fuso": "America/Sao_Paulo",
+   "horarios": [
+    "09:30",
+    "13:30",
+    "19:30"
+   ],
+   "horario": "09:30",
+   "por_dia": 2,
+   "fila_alvo": 4,
+   "ativo": true,
+   "nicho_fixo": true,
+   "_obs": "13/11 dona: canal NOVO (advocacia/contabilidade); conta emersonjosiel2035 = a do Kaggle, YouTube pelo MESMO IP (rnprmtfo-14)"
+  }
+ ],
+ "idiomas": {
+  "hi": {
+   "canal": "GtuH5ezUK8eBaC60",
+   "nome": "Inovaremanhwaversehindi",
+   "fuso": "Asia/Kolkata",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "fila_alvo": 2,
+   "_g1": "21/10: mediana 0 view em 48 h (placar) -> 1/dia e estoque 2; antes 3/dia e 6"
+  },
+  "id": {
+   "canal": "nYsAKUb3DbR1QOEm",
+   "nome": "inovaremanhwaverseind",
+   "fuso": "Asia/Jakarta",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "fila_alvo": 2,
+   "_g1": "21/10: mediana 0 view em 48 h (placar) -> 1/dia e estoque 2; antes 3/dia e 6"
+  },
+  "it": {
+   "canal": "7zpNZNll2jlBnQ0J",
+   "nome": "inovaremanhwaverseita",
+   "fuso": "Europe/Rome",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "fila_alvo": 2,
+   "_g1": "21/10: mediana 0 view em 48 h (placar) -> 1/dia e estoque 2; antes 3/dia e 6"
+  },
+  "ru": {
+   "canal": "TkfzifstYEoG4jKg",
+   "nome": "inovare manhwa verse ru",
+   "fuso": "Europe/Moscow",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "fila_alvo": 2,
+   "_g1": "21/10: mediana 0 view em 48 h (placar) -> 1/dia e estoque 2; antes 3/dia e 6"
+  },
+  "th": {
+   "canal": "q3mik36FjtTgFkNC",
+   "nome": "Inovaremanhwaversethai",
+   "fuso": "Asia/Bangkok",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "fila_alvo": 2,
+   "_g1": "21/10: mediana 0 view em 48 h (placar) -> 1/dia e estoque 2; antes 3/dia e 6"
+  },
+  "vi": {
+   "canal": "8ROQmZVjbpwiwMoX",
+   "nome": "inovaremanhwaverseviet",
+   "fuso": "Asia/Ho_Chi_Minh",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "fila_alvo": 2,
+   "_g1": "21/10: mediana 0 view em 48 h (placar) -> 1/dia e estoque 2; antes 3/dia e 6"
+  },
+  "en": {
+   "canal": "UYjkdFO3V3kjmKU5",
+   "nome": "Inovare Manhwa eng",
+   "fuso": "America/New_York",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "_obs": "18/10 23:15: desligado — advertências no canal (fr: 2 de direitos autorais; en: diretrizes)",
+   "fila_alvo": 1,
+   "_obs_11nov": "11/11 dona: religar inglês e francês — volta com 1/dia (tinham advertência em 18/10: fr direitos autorais, en diretrizes); subir só se não vier aviso novo"
+  },
+  "fr": {
+   "canal": "GG97QQt8lmyv0dDG",
+   "nome": "inovare Manhwa french",
+   "fuso": "Europe/Paris",
+   "ativo": true,
+   "por_dia": 1,
+   "horarios": [
+    "11:30",
+    "16:30",
+    "20:30"
+   ],
+   "handle": "@inovaremanhwafrench",
+   "_obs": "18/10 23:15: desligado — advertências no canal (fr: 2 de direitos autorais; en: diretrizes)",
+   "fila_alvo": 1,
+   "_obs_11nov": "11/11 dona: religar inglês e francês — volta com 1/dia (tinham advertência em 18/10: fr direitos autorais, en diretrizes); subir só se não vier aviso novo"
+  }
+ },
+ "_teste_rede": "Dono 17/10: postar manhwa/dorama do parceiro nos 12 canais de react, 4 por canal/dia, pra comparar com os reacts; se forem tão bem, trocamos. Entradas com teste_rede=true. Pra encerrar o teste: ativo=false nelas.",
+ "narradores": {
+  "_leia": "Voz do narrador por nicho do parceiro (dono 18/10: 'todos os tipos de vídeo, ramificar pra cada nicho'). Só Multilingual aprovadas; Antonio PROIBIDA (Francisca/Isabella liberadas pelo dono em 16/10; Francisca = base da voz clonada). Voz fixa por nicho.",
+  "manhwa": "pt-BR-ThalitaMultilingualNeural",
+  "anime": "en-US-AndrewMultilingualNeural",
+  "dorama": "en-US-AvaMultilingualNeural",
+  "filme": "en-US-BrianMultilingualNeural",
+  "fatos": "en-US-EmmaMultilingualNeural",
+  "esportes": "en-US-BrianMultilingualNeural",
+  "filme_sem_voz": "en-US-BrianMultilingualNeural",
+  "curiosidades": "en-US-EmmaMultilingualNeural",
+  "satisfatorios": "en-US-EmmaMultilingualNeural",
+  "natureza": "en-US-AvaMultilingualNeural",
+  "quiz": "en-US-AndrewMultilingualNeural",
+  "info_errada": "en-US-EmmaMultilingualNeural",
+  "ia_futuro": "en-US-BrianMultilingualNeural",
+  "motivacao": "en-US-AndrewMultilingualNeural",
+  "financas": "en-US-BrianMultilingualNeural",
+  "historia_mitologia": "en-US-AvaMultilingualNeural"
+ },
+ "tipo_fonte": "manhwa",
+ "_linguas_obs": "17/10 13:25: línguas pausadas (ainda saem com o borrão antigo e roubam render do teste dos 12 canais pt)",
+ "_reserva_obs": "02/11 dona: TODO projeto mantém reserva de 1 SEMANA (7 dias x por_dia) — se a produção parar 1 semana, os canais seguem postando. fila_alvo pt = 7 x por_dia (antes 6-9). Doc: hipercool docs/MELHORIAS_PARA_TODOS_OS_PROJETOS.md (Novidades 02/11).",
+ "_nichos_foco_obs": "13/11 05:40 analise_shorts_foco.py --aplicar: tipo com mediana >= 100 views NO canal (Studio). Recalcular: rodar de novo."
+}

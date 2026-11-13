@@ -1,0 +1,2064 @@
+{
+ "name": "disparo e folow up remarketing em massa evoluion rei dos cartuchos",
+ "nodes": [
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE public.instancias_para_disparo_novo2 (\n    \"nome da isntacia\" TEXT,\n    \"numero da instancia\" TEXT, -- Usando BIGINT para números grandes e NOT NULL por ser ID\n    \"tokem da isntacia\" TEXT,\n    \"etapa\" TEXT,\n    \"hora da ultima mensagem\" TEXT,\n    PRIMARY KEY (\"numero da instancia\")\n);\n\n-- Explicações:\n-- TEXT: Para campos de texto sem limite de tamanho definido (nome, token).\n-- BIGINT: Para o número da instância, que será o identificador único (ID). É um número inteiro grande.\n-- VARCHAR(255): Para a etapa, um texto com um limite de tamanho.\n-- TIMESTAMP WITH TIME ZONE: O tipo ideal para armazenar data e hora, pois considera fusos horários.\n-- PRIMARY KEY: Define \"numero da instancia\" como a chave primária, o que garante que cada valor seja único e não nulo.",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    12032,
+    1872
+   ],
+   "id": "104363e7-7f12-4432-8e44-dfb47c8c036f",
+   "name": "criacao de tabela para disparo",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE public.instancias_para_disparo_novo4 (\n    disparo TEXT PRIMARY KEY,\n    \"nome da isntacia\" TEXT,\n    \"numero da instancia\" TEXT,\n    \"tokem da isntacia\" TEXT,\n    \"etapa\" TEXT,\n    \"hora da ultima mensagem\" TEXT\n);",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    12416,
+    1872
+   ],
+   "id": "21fca416-68f0-42d6-9eb7-dc67a0635c48",
+   "name": "criacao de tabela para disparo1",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://ligawhatsapp.inovareinteligenciaartificial.com/message/sendText/{{ $('pega instancia que estao na hora1').item.json['nome da isntacia'] }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('pega instancia que estao na hora1').item.json['tokem da isntacia'] }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $('pega numero1').item.json.remoteJid }}"
+      },
+      {
+       "name": "text",
+       "value": "={{ $json.output.replaceAll(\"\\\"\",\"\") }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ parseInt(Math.random() * 1520+10200) }}"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "3633dae9-cb47-4e25-a1b3-d408678a7426",
+   "name": "emvia mensagem1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    12960,
+    2576
+   ],
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "numero da instancia"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    11840,
+    2576
+   ],
+   "id": "9b0d221f-e189-4208-b99e-a93585e51081",
+   "name": "pega instancia que estao na hora1",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "e39a7e05-f373-42b4-9b44-da092cc207f0",
+   "name": "verifica_instancias_ativas2",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    10656,
+    2576
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Código para N8N - Code Node\n// Filtra apenas instâncias com connectionStatus \"open\"\n// Exclui ownerJid que contém: 984698653, 984074247, 985685106\n// e extrai os campos: name, ownerJid e token\n\nconst inputData = $input.all();\nconst result = [];\n\n// Lista de números a serem excluídos (apenas os dígitos relevantes)\nconst excludedNumbers = ['84698653', '84074247', '85685106'];\n\n// Processa cada item de entrada\ninputData.forEach(item => {\n  const data = item.json;\n  \n  // Verifica se é um array ou objeto único\n  const items = Array.isArray(data) ? data : [data];\n  \n  // Filtra e mapeia os dados\n  items.forEach(instance => {\n    // Verifica se o connectionStatus é \"open\"\n    if (instance.connectionStatus === \"open\") {\n      // Verifica se o ownerJid NÃO contém nenhum dos números excluídos\n      const shouldExclude = excludedNumbers.some(num => \n        instance.ownerJid && instance.ownerJid.includes(num)\n      );\n      \n      // Se não deve excluir, adiciona ao resultado\n      if (!shouldExclude) {\n        result.push({\n          name: instance.name,\n          ownerJid: instance.ownerJid,\n          token: instance.token\n        });\n      }\n    }\n  });\n});\n\n// Retorna os dados filtrados\nreturn result.map(item => ({ json: item }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    11296,
+    2576
+   ],
+   "id": "591b8075-dce6-44e5-912f-7f5e9aa51bff",
+   "name": "organiza e filtra1",
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    11440,
+    2576
+   ],
+   "id": "efd7e572-4fe4-49b0-b8b4-055d9626ab39",
+   "name": "Loop Over Items2"
+  },
+  {
+   "parameters": {
+    "channels": "envionovo",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redisTrigger",
+   "typeVersion": 1,
+   "position": [
+    10320,
+    2448
+   ],
+   "id": "1c128676-ed4a-4093-97a8-f8754c1dd1c7",
+   "name": "iniciado por repeticao1",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {}
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    10320,
+    2576
+   ],
+   "id": "28fbf713-7886-4b4a-8a8e-78deb365fbcd",
+   "name": "hora de comeco padrao1"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "key": "contemvio",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    11552,
+    2432
+   ],
+   "id": "a51d3701-8c50-4595-930b-9bcd89dd88cd",
+   "name": "verifica se foi setado1",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "fe9d221f-ca30-45b3-aeae-78bb71f5a89a",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    11696,
+    2432
+   ],
+   "id": "8232e474-1bbe-49ba-bd19-3656cd51cd18",
+   "name": "se esta vazio1"
+  },
+  {
+   "parameters": {
+    "operation": "publish",
+    "channel": "envionovo",
+    "messageData": "=envionovo"
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    11888,
+    2432
+   ],
+   "id": "c25a7c70-ac42-4a43-9c90-200aaa158739",
+   "name": "reinicia fluxo1",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "contemvio",
+    "expire": true,
+    "ttl": 600
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    12032,
+    2432
+   ],
+   "id": "1fa4e112-9413-4005-be1e-cb76d89c62b5",
+   "name": "seta impedimento de repeticao1",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    12208,
+    2432
+   ],
+   "id": "f8ba7674-58f1-4c59-a186-b247a40c80d4",
+   "name": "logica de diminuicao de tempo de emvio"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    12528,
+    2576
+   ],
+   "id": "e17f545e-fc90-47f3-9acd-69d226e66a66",
+   "name": "mudanca de etapas"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName",
+       "value": "={{ $json.name }}"
+      },
+      {
+       "column": "token_instancia",
+       "condition": "IS NULL"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    11936,
+    2048
+   ],
+   "id": "d0a2afd0-fff7-413a-868e-9a2132ab05fe",
+   "name": "pega numero na fila1",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d622184c-83bc-4e96-9159-0244340670b3",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    12000,
+    2576
+   ],
+   "id": "87bc817f-4c9c-4575-b4d9-cc1d5f0cf34e",
+   "name": "se tem dados3"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    12240,
+    2032
+   ],
+   "id": "1e55d400-8b34-433d-a78f-5da7f70382cf",
+   "name": "Loop Over Items3"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.id }}",
+      "token_instancia": "<SEGREDO_REMOVIDO>"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    12352,
+    2208
+   ],
+   "id": "87018dab-e933-4905-a37a-ac2ffedc6f61",
+   "name": "instancia ao numero dela",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "7ee0b76f-64bc-4c4b-b241-04203fda4674",
+   "name": "verifica_instancias_ativas3",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    11504,
+    1920
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Código para N8N - Code Node\n// Filtra apenas instâncias com connectionStatus \"open\"\n// Exclui ownerJid que contém: 984698653, 984074247, 985685106\n// e extrai os campos: name, ownerJid e token\n\nconst inputData = $input.all();\nconst result = [];\n\n// Lista de números a serem excluídos (apenas os dígitos relevantes)\nconst excludedNumbers = ['84698653', '84074247', '85685106'];\n\n// Processa cada item de entrada\ninputData.forEach(item => {\n  const data = item.json;\n  \n  // Verifica se é um array ou objeto único\n  const items = Array.isArray(data) ? data : [data];\n  \n  // Filtra e mapeia os dados\n  items.forEach(instance => {\n    // Verifica se o connectionStatus é \"open\"\n    if (instance.connectionStatus === \"open\") {\n      // Verifica se o ownerJid NÃO contém nenhum dos números excluídos\n      const shouldExclude = excludedNumbers.some(num => \n        instance.ownerJid && instance.ownerJid.includes(num)\n      );\n      \n      // Se não deve excluir, adiciona ao resultado\n      if (!shouldExclude) {\n        result.push({\n          name: instance.name,\n          ownerJid: instance.ownerJid,\n          token: instance.token\n        });\n      }\n    }\n  });\n});\n\n// Retorna os dados filtrados\nreturn result.map(item => ({ json: item }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    11680,
+    1920
+   ],
+   "id": "77789b21-2ccc-46f2-9c17-87a6f1c755e3",
+   "name": "organiza e filtra2",
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    11824,
+    1920
+   ],
+   "id": "02450561-e5ac-41b1-a405-165360777307",
+   "name": "Loop Over Items4"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    11312,
+    1920
+   ],
+   "id": "229a3add-936b-48e1-8f05-d450a798356f",
+   "name": "When clicking ‘Execute workflow’"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "29cdd409-5af0-4bcb-a484-5920b6f7f34a",
+       "leftValue": "={{$('pega numero na fila1').item.json}}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    12048,
+    2048
+   ],
+   "id": "f008cdd5-8150-4c49-a2b8-f0235bcb546e",
+   "name": "If1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    12416,
+    2448
+   ],
+   "id": "0d758817-7e78-4907-9b37-3ed1dd621753",
+   "name": "instancia selecionada"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d622184c-83bc-4e96-9159-0244340670b3",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    12304,
+    2576
+   ],
+   "id": "bd53a849-f23a-4294-8dba-ae027735640c",
+   "name": "se tem dados6"
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome da isntacia": "={{ $('pega instancia que estao na hora1').item.json['nome da isntacia'] }}",
+      "numero da instancia": "={{ $('pega instancia que estao na hora1').item.json['numero da instancia'] }}",
+      "tokem da isntacia": "={{ $('pega instancia que estao na hora1').item.json['tokem da isntacia'] }}",
+      "hora da ultima mensagem": "={{ $now.format('X') }}"
+     },
+     "matchingColumns": [
+      "numero da instancia"
+     ],
+     "schema": [
+      {
+       "id": "nome da isntacia",
+       "displayName": "nome da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "numero da instancia",
+       "displayName": "numero da instancia",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "tokem da isntacia",
+       "displayName": "tokem da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false,
+       "removed": true
+      },
+      {
+       "id": "hora da ultima mensagem",
+       "displayName": "hora da ultima mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    13072,
+    2768
+   ],
+   "id": "c5c6f7c3-5b05-479e-adf8-882c2e8c6cee",
+   "name": "bolean de erro",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "mode": "list",
+     "value": ""
+    }
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    10480,
+    2576
+   ],
+   "id": "e1148c39-ac62-4ddc-a37f-23dde5c0611e",
+   "name": "emvio do html",
+   "credentials": {
+    "postgres": {
+     "id": "WdqJSostdEnQWRQF",
+     "name": "wuzapi"
+    }
+   },
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName"
+      },
+      {
+       "column": "etapa",
+       "condition": "IS NULL"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    12160,
+    2576
+   ],
+   "id": "dadf71f9-cb4b-4bc5-8816-939aa30c62d9",
+   "name": "numeros do html",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "key": "tempo de emvio",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    11616,
+    2576
+   ],
+   "id": "73fc93c6-1860-41f5-bd8d-fefd2e4168f0",
+   "name": "tempo de emvio que vai procurar na busca vem do html",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    10464,
+    2768
+   ],
+   "id": "db0baafd-5138-41ab-8555-082555301e69",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    11392,
+    2784
+   ],
+   "id": "bbb3bd98-c6d5-4c15-9e58-08523a50c1df",
+   "name": "Sticky Note1"
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    11936,
+    2784
+   ],
+   "id": "bb1e5da3-a63a-4047-8ed6-ff57a282e960",
+   "name": "Sticky Note2"
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome da isntacia": "={{ $('pega instancia que estao na hora1').item.json['nome da isntacia'] }}",
+      "numero da instancia": "={{ $('pega instancia que estao na hora1').item.json['numero da instancia'] }}",
+      "tokem da isntacia": "={{ $('pega instancia que estao na hora1').item.json['tokem da isntacia'] }}",
+      "hora da ultima mensagem": "={{ $now.format('X') }}"
+     },
+     "matchingColumns": [
+      "numero da instancia"
+     ],
+     "schema": [
+      {
+       "id": "nome da isntacia",
+       "displayName": "nome da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "numero da instancia",
+       "displayName": "numero da instancia",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "tokem da isntacia",
+       "displayName": "tokem da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false,
+       "removed": true
+      },
+      {
+       "id": "hora da ultima mensagem",
+       "displayName": "hora da ultima mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    13136,
+    2560
+   ],
+   "id": "4ae54d9f-5189-4c0f-9800-ca9d41a61f10",
+   "name": "atualiza tempo de quem emviou ",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "raspagem_empresas_energia_solar",
+     "mode": "list",
+     "cachedResultName": "raspagem_empresas_energia_solar"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "enviado": true,
+      "data_envio": "={{ $now }}",
+      "numero": "={{ $('se tem dados1').item.json.numero }}"
+     },
+     "matchingColumns": [
+      "numero"
+     ],
+     "schema": [
+      {
+       "id": "numero",
+       "displayName": "numero",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "nome_grupo",
+       "displayName": "nome_grupo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "lista",
+       "displayName": "lista",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data_cadastro",
+       "displayName": "data_cadastro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance",
+       "displayName": "instance",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "enviado",
+       "displayName": "enviado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data_envio",
+       "displayName": "data_envio",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    13360,
+    2560
+   ],
+   "id": "22c425a1-e52d-45d6-a733-045383fa54dd",
+   "name": "deleta da lista",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    13024,
+    2928
+   ],
+   "id": "12a04987-7997-455b-bfa3-ba23f3d754fb",
+   "name": "Sticky Note3"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "ultima_interacao": "={{ $now.format('X') }}",
+      "id": "={{ $('se tem dados1').item.json.numero }}_{{ $('Loop Over Items1').item.json.name }}1",
+      "remoteJid": "={{ $('se tem dados1').item.json.numero }}@s.whatsapp.net",
+      "instanceName": "={{ $('Loop Over Items1').item.json.name }}",
+      "numero_instancia": "={{ $('Loop Over Items1').item.json.ownerJid.split(\"@\")[0] }}",
+      "token_instancia": "<SEGREDO_REMOVIDO>"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    12224,
+    1872
+   ],
+   "id": "3c5809b7-dec1-4985-b7b7-63df8aae56ea",
+   "name": "cadastra numero para a instancia1",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome da isntacia": "={{ $json.name }}",
+      "numero da instancia": "={{ $json.ownerJid }}",
+      "tokem da isntacia": "={{ $json.token }}",
+      "hora_da_ultima_mensagem": "={{ $now.format('X') }}"
+     },
+     "matchingColumns": [
+      "numero da instancia"
+     ],
+     "schema": [
+      {
+       "id": "nome da isntacia",
+       "displayName": "nome da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "numero da instancia",
+       "displayName": "numero da instancia",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "tokem da isntacia",
+       "displayName": "tokem da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false,
+       "removed": true
+      },
+      {
+       "id": "hora_da_ultima_mensagem",
+       "displayName": "hora_da_ultima_mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": false,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    11696,
+    2176
+   ],
+   "id": "04d5a257-3edc-4ab5-ace6-3f3f5c4da39f",
+   "name": "cadastra intancias novas",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    11552,
+    2128
+   ],
+   "id": "4755162e-9cf8-4f24-83a3-724a8fb6dce6",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Código para N8N - Code Node\n// Filtra apenas instâncias com connectionStatus \"open\"\n// Exclui ownerJid que contém: 984698653, 984074247, 985685106\n// e extrai os campos: name, ownerJid e token\n\nconst inputData = $input.all();\nconst result = [];\n\n// Lista de números a serem excluídos (apenas os dígitos relevantes)\nconst excludedNumbers = ['84698653', '84074247', '85685106'];\n\n// Processa cada item de entrada\ninputData.forEach(item => {\n  const data = item.json;\n  \n  // Verifica se é um array ou objeto único\n  const items = Array.isArray(data) ? data : [data];\n  \n  // Filtra e mapeia os dados\n  items.forEach(instance => {\n    // Verifica se o connectionStatus é \"open\"\n    if (instance.connectionStatus === \"open\") {\n      // Verifica se o ownerJid NÃO contém nenhum dos números excluídos\n      const shouldExclude = excludedNumbers.some(num => \n        instance.ownerJid && instance.ownerJid.includes(num)\n      );\n      \n      // Se não deve excluir, adiciona ao resultado\n      if (!shouldExclude) {\n        result.push({\n          name: instance.name,\n          ownerJid: instance.ownerJid,\n          token: instance.token\n        });\n      }\n    }\n  });\n});\n\n// Retorna os dados filtrados\nreturn result.map(item => ({ json: item }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    11440,
+    2128
+   ],
+   "id": "4f02542d-9458-4ea3-9479-510b6b27d331",
+   "name": "Code",
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "011df566-61dd-4716-b657-4722f8dbfc9b",
+   "name": "verifica_instancias1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    11328,
+    2128
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## vincula numero a instancia",
+    "height": 544,
+    "width": 1238,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    11280,
+    1840
+   ],
+   "id": "6443eaa4-c6b3-43f6-a877-da68f8bafca6",
+   "name": "Sticky Note4"
+  },
+  {
+   "parameters": {
+    "content": "##  cadastra a instancia",
+    "height": 288,
+    "width": 646,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    11280,
+    2080
+   ],
+   "id": "d57b066a-ffc1-4429-abd5-f41856d70289",
+   "name": "Sticky Note5"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3,
+   "position": [
+    12656,
+    3104
+   ],
+   "id": "75663f9e-2ddc-4a1f-ac36-ec8362a20a6e",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    12656,
+    3264
+   ],
+   "id": "682afea5-3d4b-4fe9-ba60-bfd333847707",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZJfAiyeq1C4zMECh",
+     "name": "teste2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    10928,
+    2928
+   ],
+   "id": "1374cdf1-a8d1-4c70-a6ff-b62f666b9559",
+   "name": "dividir ana luana"
+  },
+  {
+   "parameters": {
+    "content": "##  adicionar etiqueta no banco"
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    13584,
+    2608
+   ],
+   "id": "67fc81c5-23f3-4ad9-ae6e-dfa219af0c92",
+   "name": "Sticky Note6"
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "emvia mensagem1": {
+   "main": [
+    [
+     {
+      "node": "atualiza tempo de quem emviou ",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "bolean de erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pega instancia que estao na hora1": {
+   "main": [
+    [
+     {
+      "node": "se tem dados3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "verifica_instancias_ativas2": {
+   "main": [
+    [
+     {
+      "node": "dividir ana luana",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "organiza e filtra1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items2": {
+   "main": [
+    [
+     {
+      "node": "verifica se foi setado1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "tempo de emvio que vai procurar na busca vem do html",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "iniciado por repeticao1": {
+   "main": [
+    [
+     {
+      "node": "emvio do html",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "hora de comeco padrao1": {
+   "main": [
+    [
+     {
+      "node": "emvio do html",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica se foi setado1": {
+   "main": [
+    [
+     {
+      "node": "se esta vazio1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se esta vazio1": {
+   "main": [
+    [
+     {
+      "node": "reinicia fluxo1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "reinicia fluxo1": {
+   "main": [
+    [
+     {
+      "node": "seta impedimento de repeticao1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "seta impedimento de repeticao1": {
+   "main": [
+    [
+     {
+      "node": "logica de diminuicao de tempo de emvio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "mudanca de etapas": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se tem dados3": {
+   "main": [
+    [
+     {
+      "node": "numeros do html",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pega numero na fila1": {
+   "main": [
+    [
+     {
+      "node": "If1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items3": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items4",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "instancia ao numero dela",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "instancia ao numero dela": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancias_ativas3": {
+   "main": [
+    [
+     {
+      "node": "organiza e filtra2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "organiza e filtra2": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items4": {
+   "main": [
+    [],
+    [
+     {
+      "node": "pega numero na fila1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "When clicking ‘Execute workflow’": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancias_ativas3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Loop Over Items4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "instancia selecionada": {
+   "main": [
+    [
+     {
+      "node": "mudanca de etapas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se tem dados6": {
+   "main": [
+    [
+     {
+      "node": "instancia selecionada",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "emvio do html": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancias_ativas2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "numeros do html": {
+   "main": [
+    [
+     {
+      "node": "se tem dados6",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "tempo de emvio que vai procurar na busca vem do html": {
+   "main": [
+    [
+     {
+      "node": "pega instancia que estao na hora1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "atualiza tempo de quem emviou ": {
+   "main": [
+    [
+     {
+      "node": "deleta da lista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "deleta da lista": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cadastra intancias novas": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [],
+    [
+     {
+      "node": "cadastra intancias novas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancias1": {
+   "main": [
+    [
+     {
+      "node": "Code",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "emvia mensagem1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dividir ana luana": {
+   "main": [
+    [
+     {
+      "node": "organiza e filtra1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "339ddb83-dc34-4c9e-8882-d6ab88b8d07a",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "x1xpr24nPK8hoX2M",
+ "tags": [
+  {
+   "updatedAt": "2025-02-24T01:20:28.048Z",
+   "createdAt": "2025-02-24T01:20:28.048Z",
+   "id": "K65ckcR1hrrvIYET",
+   "name": "envio-massa"
+  }
+ ]
+}

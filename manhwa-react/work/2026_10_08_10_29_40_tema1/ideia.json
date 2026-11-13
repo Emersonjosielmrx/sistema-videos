@@ -1,0 +1,26 @@
+{
+ "formato": "comentário político falado direto na webcam",
+ "descricao": "Criador dá opinião política direta olhando pra câmera, sem edição pesada, só ele falando. Formato vlog de opinião crua sobre eleições/política brasileira.",
+ "replicavel": false,
+ "como_fazer": "Não replicável sem pessoa real. Alternativa: usar TTS + avatar gerado por IA (mas perde autenticidade e credibilidade em conteúdo político). Formato depende de presença humana real e opinião pessoal para ter peso.",
+ "ferramentas": [
+  "webcam",
+  "TTS (se tentar versão IA)",
+  "avatar IA (fraco)"
+ ],
+ "fonte_de_material": "Opinião pessoal do criador; depende de contexto político atual e posicionamento individual",
+ "esforco": "baixo",
+ "potencial": 2,
+ "por_que_viraliza": "Opinião política polariza e gera engajamento por concordância/discordância, mas só funciona com pessoa real conhecida.",
+ "exemplo_roteiro": "Se o Sul e Sudeste não votarem massivo, já era. O pessoal fica com nojinho mas é o que tem. Depende da região, da urna, mas estatisticamente o PL domina nessas áreas. É matemática, gente.",
+ "nicho_canal": "novo canal: OpiniãoDiretaBR (mas não recomendado - conteúdo político exige responsabilidade, verificação e pessoa real)",
+ "tags": [
+  "política",
+  "opinião",
+  "eleições",
+  "webcam-direto",
+  "não-replicável"
+ ],
+ "video": "2026-10-08 10-29-40_tema1.mp4",
+ "data": "2026-10-12"
+}

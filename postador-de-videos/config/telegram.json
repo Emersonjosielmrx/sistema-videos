@@ -1,0 +1,20 @@
+{
+  "_leia": "Bot do Telegram que avisa o dono sobre os canais do YouTube (bin/notificar_telegram.py, tarefa NotificarTelegram a cada 5 min). Nao compartilhar o token.",
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "chat_id": 7911666809,
+  "ativo": true,
+  "notificar": {
+    "comentarios": true,
+    "inscritos": true,
+    "mil_views": true,
+    "resumo_diario": true
+  },
+  "auto_resposta": {
+    "_leia": "Se o dono nao responder um comentario em 'horas' depois do aviso, a IA responde no lugar dele (mesmo idioma, informal, pelo titulo/descricao do video) e avisa no Telegram. So comentarios com ate 'idade_max_h' (os que contam pro algoritmo); no maximo 'max_dia' por dia (cota da API: 52 unidades cada). Pula se o canal ja respondeu (Studio ou Telegram). 03/11 dona: minutos=2 (vale no lugar de horas) e a resposta SEMPRE pede pra compartilhar o video.",
+    "ativo": true,
+    "horas": 2,
+    "idade_max_h": 72,
+    "max_dia": 30,
+    "minutos": 2
+  }
+}

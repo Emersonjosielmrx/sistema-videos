@@ -1,0 +1,144 @@
+{
+ "pautas": [
+  {
+   "id": "falta_tempo_postar",
+   "tipo": "dor",
+   "ideia": "O dono do negócio atende clientes o dia todo e não consegue alimentar as redes, mas a automação leva o conteúdo da ideia até a postagem sem exigir a presença dele.",
+   "pergunta_cliente": "Consigo manter o feed atualizado mesmo sem tempo de entrar no aplicativo?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "medo_perder_controle",
+   "tipo": "objecao",
+   "ideia": "O empresário tem receio de que a automação publique algo fora do tom da empresa, mas o sistema cuida de todo o fluxo da ideia até o post final mantendo o alinhamento da marca.",
+   "pergunta_cliente": "O conteúdo postado vai parecer feito por alguém que realmente entende da minha empresa?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "fluxo_completo_post",
+   "tipo": "como_funciona",
+   "ideia": "Mostra como o sistema recebe um tema inicial e cuida de todas as etapas seguintes, finalizando com a publicação feita de forma automática.",
+   "pergunta_cliente": "Como funciona desde o momento em que tenho um tema até a postagem ir ao ar?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "loja_local_blog_seo",
+   "tipo": "caso_de_uso",
+   "ideia": "Um comércio de bairro precisa ser achado em buscas da internet e ganha presença orgânica com blog posts otimizados para SEO criados no piloto automático.",
+   "pergunta_cliente": "Como esses artigos ajudam meu negócio a aparecer quando alguém busca no Google?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "duvida_comentarios_esquecidos",
+   "tipo": "pergunta_frequente",
+   "ideia": "O gestor quer saber se potenciais clientes ficam no vácuo nas redes e descobre que o agente de respostas atende os comentários automaticamente.",
+   "pergunta_cliente": "O que acontece quando deixam dúvidas nos comentários dos meus posts?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "rotina_antes_depois",
+   "tipo": "antes_depois",
+   "ideia": "Mostra a virada de passar a noite bolando artes e textos para ter todo o fluxo de posts, blog, podcast e respostas funcionando de forma automatizada.",
+   "pergunta_cliente": "O que muda na minha rotina de trabalho usando essa plataforma?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "comentarios_sem_resposta",
+   "tipo": "dor",
+   "ideia": "Pessoas interessadas comentam pedindo detalhes do serviço enquanto o dono está ocupado operando o negócio, e o agente responde a todos no ato.",
+   "pergunta_cliente": "Dá para responder quem comenta nas postagens mesmo enquanto estou atendendo?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "formato_podcast_sem_estudio",
+   "tipo": "objecao",
+   "ideia": "O gestor acha que precisaria de estúdio e microfone profissional para ter um podcast, mas a ferramenta automatiza a geração do formato em áudio.",
+   "pergunta_cliente": "Preciso gravar com a minha própria voz para ter episódios em áudio do meu negócio?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "explicacao_agente_respostas",
+   "tipo": "como_funciona",
+   "ideia": "Demonstração prática de um seguidor comentando em uma publicação e o agente de respostas respondendo na hora para não perder o contato comercial.",
+   "pergunta_cliente": "O agente de respostas realmente atende quem comenta na minha página?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "prestador_servico_conteudo",
+   "tipo": "caso_de_uso",
+   "ideia": "Um prestador de serviços sem equipe de marketing passa a ter posts no ar, artigos com SEO e podcast produzidos sem contratar terceiros.",
+   "pergunta_cliente": "Consigo manter vários canais ativos sendo o único responsável pela empresa?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "alcance_pesquisa_google",
+   "tipo": "dor",
+   "ideia": "A empresa depende apenas do alcance instável das redes sociais, mas passa a captar buscas orgânicas com os blog posts focados em SEO.",
+   "pergunta_cliente": "Como faço para atrair pessoas que pesquisam soluções no Google sem depender só de posts?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "duvida_full_post",
+   "tipo": "pergunta_frequente",
+   "ideia": "O empresário pergunta se precisa subir a arte e a legenda manualmente e descobre que a automação vai do ponto inicial até a postagem final.",
+   "pergunta_cliente": "A postagem é feita direto na minha rede ou eu preciso agendar manualmente?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "visibilidade_multicanal",
+   "tipo": "antes_depois",
+   "ideia": "Mostra a transição de um negócio com perfil parado e site mudo para uma marca presente com postagens frequentes, blog otimizado e episódios de podcast.",
+   "pergunta_cliente": "Como meu negócio passa a ser visto pelos clientes depois de usar o sistema?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "complexidade_tecnologica",
+   "tipo": "objecao",
+   "ideia": "O pequeno empresário receia não saber mexer em ferramentas difíceis, mas a automação cuida de ponta a ponta desde a ideia até o conteúdo publicado.",
+   "pergunta_cliente": "Quem não entende de tecnologia consegue usar a ferramenta no dia a dia?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "geracao_podcast_automatica",
+   "tipo": "como_funciona",
+   "ideia": "Apresenta como o formato de podcast é estruturado e produzido de forma automática dentro do pacote de conteúdo da empresa.",
+   "pergunta_cliente": "Como o conteúdo é transformado em podcast de forma automática?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "clinica_atendimento_comentario",
+   "tipo": "caso_de_uso",
+   "ideia": "Uma clínica recebe dezenas de dúvidas em postagens durante consultas e o agente de respostas orienta os pacientes nos comentários instantaneamente.",
+   "pergunta_cliente": "Consigo tirar dúvidas rápidas nos comentários sem tirar a atenção do atendimento presencial?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "bloqueio_criativo_constante",
+   "tipo": "dor",
+   "ideia": "O profissional trava na hora de criar algo novo para a semana, mas a automação parte de uma ideia simples e entrega o post publicado.",
+   "pergunta_cliente": "O que a ferramenta faz quando eu não sei exatamente o que postar na semana?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "duvida_conteudo_seo",
+   "tipo": "pergunta_frequente",
+   "ideia": "O dono da empresa quer entender o impacto do blog com SEO e descobre que o artigo é estruturado de forma automatizada para indexação.",
+   "pergunta_cliente": "Os artigos de blog já vêm preparados para as ferramentas de busca?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "atendimento_fora_horario",
+   "tipo": "antes_depois",
+   "ideia": "O contraste entre perder interessados que comentam de noite e ter um agente que responde aos comentários em tempo integral.",
+   "pergunta_cliente": "As dúvidas deixadas fora do horário comercial continuam sendo respondidas?",
+   "criada": "2026-10-26T06:27:31"
+  },
+  {
+   "id": "autoridade_formato_audio",
+   "tipo": "caso_de_uso",
+   "ideia": "Uma consultoria utiliza a automação de podcast para distribuir conteúdo em áudio e reforçar a imagem de especialista no mercado.",
+   "pergunta_cliente": "Como o formato de podcast ajuda a posicionar minha empresa como referência?",
+   "criada": "2026-10-26T06:27:31"
+  }
+ ]
+}

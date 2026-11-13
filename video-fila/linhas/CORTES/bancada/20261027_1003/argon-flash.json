@@ -1,0 +1,42 @@
+{
+ "modelo": "argon-flash",
+ "segundos": 506,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Mantenha um único título no topo, sem sobrepor outros textos ou elementos visuais da tela e com grafia e ortografia rigorosamente corretas.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "O lote evidenciou falhas repetidas de sobreposição de elementos no topo e obstrução visual de rostos. Nos Shorts sem-obra-8a49d5 (q01) e sem-obra-c853c4 (q01), ocorreram sobreposições diretas de títulos no topo tornando a leitura confusa. Além disso, botões e marcas d'água cobriram diretamente rostos e expressões faciais em sem-obra-8a49d5 (q11, q15) e sem-obra-777e60 (q04, q06), violando as regras da linha.",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Mantenha um único título no topo, sem sobrepor outros textos ou elementos visuais da tela e com grafia e ortografia rigorosamente corretas.",
+    "porque": "Evita a colisão e sobreposição de títulos no topo observada em sem-obra-8a49d5 (q01) e sem-obra-c853c4 (q01)."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Impedir que botões de engajamento, marcas d'água e elementos visuais sobreponham rostos de personagens",
+    "tipo": "CERTEZA",
+    "prova": "Em sem-obra-8a49d5 (q11 e q15), o botão 'INSCREVA-SE' cobriu diretamente o rosto das pessoas no sofá; em sem-obra-777e60 (q04 e q06), a marca d'água '@doramanoturno' cobriu olhos, testa e boca dos personagens.",
+    "onde": "parceiro_marca.py / anime_montar.py (posicionamento de marcas d'água e overlays de engajamento)",
+    "como_testar": "Renderizar vídeos do lote e verificar se botões e marcas d'água respeitam a zona segura, evitando as caixas delimitadoras de rostos detectadas e eliminando @ da tela."
+   }
+  ],
+  "mural": [
+   "Aviso para as linhas LONGOS e PRODUTOS: reforçar restrições de layout para impedir que botões de engajamento e marcas d'água cubram expressões faciais ou olhos de personagens."
+  ]
+ }
+}

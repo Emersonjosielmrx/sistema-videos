@@ -1,0 +1,406 @@
+{
+ "part": [
+  0.0,
+  65.5
+ ],
+ "keeps": [
+  [
+   0.46277100000000004,
+   3.821438
+  ],
+  [
+   5.232687,
+   6.396771
+  ],
+  [
+   12.532458,
+   13.324458
+  ],
+  [
+   25.537542,
+   27.780832999999998
+  ],
+  [
+   29.627312,
+   30.308562
+  ],
+  [
+   34.049146,
+   35.064604
+  ],
+  [
+   40.0,
+   40.574250000000006
+  ],
+  [
+   50.707229,
+   51.60052100000001
+  ],
+  [
+   53.498833,
+   54.336062000000005
+  ],
+  [
+   55.709521,
+   57.045646000000005
+  ],
+  [
+   61.671937,
+   62.59704200000001
+  ],
+  [
+   64.08308299999999,
+   65.5
+  ]
+ ],
+ "duration_out": 15.237668000000047,
+ "zoom": [
+  [
+   0.297,
+   2.767,
+   1
+  ],
+  [
+   5.597,
+   7.447,
+   2
+  ],
+  [
+   11.363,
+   13.08,
+   1
+  ],
+  [
+   14.018,
+   15.228,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   12.80000000000002,
+   13.95000000000002
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 12.850000000000021,
+   "text": "AJOELHADA",
+   "emoji": "😂"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 12.737668000000047,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 8.9714165,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_glitch.mov",
+   "dur": 0.566667,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 12.737668000000047,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_subscribe.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 12.750000000000021,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 12.750000000000021,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_emojirain.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 12.850000000000021,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f602_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  }
+ ],
+ "music": null,
+ "meta": {
+  "hook": "ELE VIROU O ÚNICO COM POÇÕES!",
+  "title": "Ele aprendeu a fazer poções e TODOS queriam comprar dele 😱🧪 #shorts #anime",
+  "description": "O cara era zoado por todo mundo, mas depois de treinar e aprender a fabricar poções, ele se tornou o ÚNICO jogador com essa habilidade! Agora todos querem comprar dele 🔥\nVocês já viram esse anime? Comenta aí o nome se souber!\nSegue pra mais reacts de anime!\n\n#shorts #react #anime #isekai #poções #farm #sistema #npc #jogador #overpower #otaku #animereact #reactanime #animebrasileiro",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#anime",
+   "#isekai",
+   "#poções",
+   "#farm",
+   "#sistema",
+   "#npc",
+   "#overpower",
+   "#otaku"
+  ],
+  "tags": [
+   "react",
+   "anime",
+   "react anime",
+   "anime isekai",
+   "sistema",
+   "farm",
+   "poções",
+   "jogador overpower",
+   "npc",
+   "anime legendado",
+   "react anime br",
+   "anime brasileiro",
+   "protagonista forte",
+   "anime novo",
+   "anime 2024",
+   "otaku"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "funny_lighthearted",
+  "music": false,
+  "pinned_comment": "Alguém sabe o nome desse anime? Comenta aí! 👇",
+  "title_alternatives": [
+   "Todo mundo ZOAVA ele, até ele virar o ÚNICO com poções 🧪😱 #shorts #anime",
+   "Ele fabricou poções e o servidor INTEIRO ficou de joelhos 😂🔥 #shorts #react"
+  ],
+  "work": null,
+  "channel": "manhwareact"
+ },
+ "channel": "manhwareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1458_56_7.png",
+  "overlap": 56,
+  "y": 518,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_ff2d55_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "ver,",
+   "s": 0.29722899999999997,
+   "e": 0.537229,
+   "p": 0.9,
+   "lip": 0.011919502817883973,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 0.537229,
+   "e": 0.817229,
+   "p": 0.9,
+   "lip": 0.01581423657588816,
+   "speaker": "creator"
+  },
+  {
+   "w": "anime",
+   "s": 0.817229,
+   "e": 1.117229,
+   "p": 0.9,
+   "lip": 0.014182304682131218,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 1.117229,
+   "e": 1.297229,
+   "p": 0.9,
+   "lip": 0.013071213437613615,
+   "speaker": "creator"
+  },
+  {
+   "w": "acho",
+   "s": 1.297229,
+   "e": 1.397229,
+   "p": 0.9,
+   "lip": 0.01362086112473535,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 1.397229,
+   "e": 1.537229,
+   "p": 0.9,
+   "lip": 0.01025279331056079,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 1.537229,
+   "e": 1.617229,
+   "p": 0.9,
+   "lip": 0.007700529225920779,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 1.617229,
+   "e": 1.697229,
+   "p": 0.9,
+   "lip": 0.007450449841514097,
+   "speaker": "creator"
+  },
+  {
+   "w": "assisti.",
+   "s": 1.677229,
+   "e": 2.617229,
+   "p": 0.9,
+   "lip": 0.006938522192191206,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ó,",
+   "s": 5.597209000000001,
+   "e": 5.857208999999999,
+   "p": 0.9,
+   "lip": 0.01071661362675808,
+   "speaker": "creator"
+  },
+  {
+   "w": "parece",
+   "s": 5.857208999999999,
+   "e": 6.277209000000001,
+   "p": 0.9,
+   "lip": 0.007871430850821152,
+   "speaker": "creator"
+  },
+  {
+   "w": "ser",
+   "s": 6.277209000000001,
+   "e": 6.4172090000000015,
+   "p": 0.9,
+   "lip": 0.00952082225786036,
+   "speaker": "creator"
+  },
+  {
+   "w": "um",
+   "s": 6.4172090000000015,
+   "e": 6.497209000000002,
+   "p": 0.9,
+   "lip": 0.007747277226931956,
+   "speaker": "creator"
+  },
+  {
+   "w": "anime",
+   "s": 6.437209000000001,
+   "e": 6.617209000000001,
+   "p": 0.9,
+   "lip": 0.006448780694724875,
+   "speaker": "creator"
+  },
+  {
+   "w": "bacana.",
+   "s": 6.617209000000001,
+   "e": 7.2972090000000005,
+   "p": 0.9,
+   "lip": 0.005622065653132906,
+   "speaker": "creator"
+  },
+  {
+   "w": "do...",
+   "s": 9.25475,
+   "e": 9.594750000000003,
+   "p": 0.9,
+   "lip": 0.0020467689168693496,
+   "speaker": "creator"
+  },
+  {
+   "w": "exigiu",
+   "s": 11.363459000000018,
+   "e": 11.559521000000023,
+   "p": 0.9,
+   "lip": 0.0015788733382582872,
+   "speaker": "creator"
+  },
+  {
+   "w": "ele,",
+   "s": 11.590000000000023,
+   "e": 11.790000000000019,
+   "p": 0.9,
+   "lip": 0.002208685942201335,
+   "speaker": "creator"
+  },
+  {
+   "w": "mas",
+   "s": 11.790000000000019,
+   "e": 11.93000000000002,
+   "p": 0.9,
+   "lip": 0.0022930958602985748,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 11.93000000000002,
+   "e": 12.050000000000024,
+   "p": 0.9,
+   "lip": 0.002749161919890953,
+   "speaker": "creator"
+  },
+  {
+   "w": "ao-olhar",
+   "s": 12.050000000000024,
+   "e": 12.350000000000021,
+   "p": 0.9,
+   "lip": 0.002620064941874353,
+   "speaker": "creator",
+   "w_orig": "sobreolhar"
+  },
+  {
+   "w": "a",
+   "s": 12.350000000000021,
+   "e": 12.430000000000021,
+   "p": 0.9,
+   "lip": 0.0025868732359000204,
+   "speaker": "creator"
+  },
+  {
+   "w": "multidão,",
+   "s": 12.43000000000002,
+   "e": 12.850000000000021,
+   "p": 0.9,
+   "lip": 0.002141865026994963,
+   "speaker": "creator"
+  },
+  {
+   "w": "ele",
+   "s": 12.850000000000021,
+   "e": 12.930000000000021,
+   "p": 0.9,
+   "lip": 0.0014681175979965183,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ajoelhada,",
+   "s": 14.017668000000048,
+   "e": 14.917668000000054,
+   "p": 0.9,
+   "lip": 0.008258980082633358,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 14.917668000000054,
+   "e": 15.07766800000005,
+   "p": 0.9,
+   "lip": 0.009339613634042652,
+   "speaker": "creator"
+  }
+ ]
+}

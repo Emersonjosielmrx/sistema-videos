@@ -1,0 +1,142 @@
+{
+ "conta": "gestaodegrupos.ia",
+ "produto": "gestao_grupos",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Boas-vindas no automático nos seus grupos de WhatsApp",
+ "legenda": "Recepcionar cada novo membro manualmente toma um tempo precioso da sua rotina. Com o Gestão de Grupos IA, seus grupos de WhatsApp contam com boas-vindas, moderação e resumo das conversas tudo no automático. Conheça mais no link no perfil. 💬\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Boas-vindas no WhatsApp",
+  "pergunta_cliente": "Cansado de digitar boas-vindas para cada pessoa que entra no grupo?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Recepcionar cada membro novo manualmente toma o seu tempo e atrasa o começo da conversa no grupo.",
+    "visual": "imagem",
+    "prompt_en": "A Brazilian business owner seen from the side in a tidy, well lit modern office, holding a smartphone, warm professional lighting, realistic commercial photography, no readable text or screens",
+    "cenario_en": "A tidy, well lit modern Brazilian office desk, clean workspace",
+    "real_tema": "Falta de tempo para recepcionar novos membros no grupo",
+    "destaques": [
+     "toma o seu tempo",
+     "atrasa o começo"
+    ],
+    "conversa": []
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Gestão de Grupos IA envia as boas-vindas no automático e o bot responde só quando chamado.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "Envio automático de boas-vindas e bot condicional",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Olá pessoal, acabei de entrar no grupo!"
+     },
+     {
+      "de": "empresa",
+      "texto": "Seja bem-vindo! Aqui estão as orientações da nossa comunidade. Precisando de ajuda, é só me chamar."
+     },
+     {
+      "de": "cliente",
+      "texto": "Bot, como funcionam os resumos das conversas?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Eu gero atas e resumos das conversas para você acompanhar tudo com facilidade."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Seus grupos de WhatsApp ficam no automático, com moderação ativa e resumo das conversas para você focar no negócio.",
+    "visual": "imagem",
+    "prompt_en": "A Brazilian entrepreneur seen from the back looking out a bright office window, calm posture, tidy and well lit workspace, realistic commercial photography, no text or logos",
+    "cenario_en": "A bright, tidy and well lit contemporary office in Brazil",
+    "real_tema": "Grupos de WhatsApp funcionando no automático",
+    "destaques": [
+     "grupos de WhatsApp",
+     "focar no negócio"
+    ],
+    "conversa": []
+   }
+  ],
+  "legenda": "Recepcionar cada novo membro manualmente toma um tempo precioso da sua rotina. Com o Gestão de Grupos IA, seus grupos de WhatsApp contam com boas-vindas, moderação e resumo das conversas tudo no automático. Conheça mais no link no perfil. 💬",
+  "titulo": "Boas-vindas no automático nos seus grupos de WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "boas_vindas_manual",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 37,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": null,
+ "duracao_s": 31.79,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+editor",
+ "gerado_em": "2026-10-30T20:03:04",
+ "variante": "sem_dono",
+ "cenas_dono_feitas": [],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 0,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.04,
+   "fala": "Cansado de digitar boas-vindas para cada pessoa que entra no grupo?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.04,
+   "fim": 12.04,
+   "fala": "Recepcionar cada membro novo manualmente toma o seu tempo e atrasa o começo da conversa no grupo.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 12.04,
+   "fim": 19.76,
+   "fala": "O Gestão de Grupos IA envia as boas-vindas no automático e o bot responde só quando chamado.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 19.76,
+   "fim": 27.85,
+   "fala": "Seus grupos de WhatsApp ficam no automático, com moderação ativa e resumo das conversas para você focar no negócio.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 27.85,
+   "fim": 31.79,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.75,
+  "notas": {
+   "legibilidade": 9.0,
+   "movimento": 6.0,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 3,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

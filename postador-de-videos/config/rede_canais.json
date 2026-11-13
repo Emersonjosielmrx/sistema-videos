@@ -1,0 +1,802 @@
+{
+  "_leia": "Mapa da rede de canais (fonte unica). 1 entrada por CANAL REAL do YouTube (yt_id). creds = ids em D:/credenciais-canais/youtube_canais.json (o 1o e o principal; os outros sao aliases do MESMO canal e contam juntos no ledger/cota). status: ativo | pausado | suspenso | hipercool (canal do projeto hipercool, a rede nao usa). horarios = horario de Brasilia (o agendador aprende qual rende mais por canal). Usado por: politica.py (aliases + pausados), manhwa-react mr/rede.py (distribuicao, agentes por canal, agendamento) e bin/painel_canais.py (painel).",
+  "padrao": {
+    "max_dia": 1,
+    "idioma": "pt-BR",
+    "pais": "BR",
+    "categoria": "24",
+    "jitter_min": 15,
+    "explorar": 0.25
+  },
+  "canais": [
+    {
+      "slug": "manhwareact",
+      "yt_id": "UC5Za1hPxak0iufFcJ4UsK9w",
+      "nome": "ManhwaReact",
+      "handle": "@manhwareact-ia",
+      "creds": [
+        "novo_manhwareact_ia",
+        "novo_mente_artificial_i5r"
+      ],
+      "status": "ativo",
+      "cor": "#FF2D55",
+      "categoria": "1",
+      "nicho": "react de anime da temporada, isekai, light novel e manhwa adaptado (Re:Zero, Slime, Mushoku Tensei, Oshi no Ko, Solo Leveling, Frieren) e animacoes de anime",
+      "persona": "otaku que acompanha a temporada e le a light novel; fala como fa, empolgado, sem spoiler pesado no titulo",
+      "tags_base": [
+        "react anime",
+        "anime",
+        "manhwa",
+        "isekai",
+        "anime react",
+        "reagindo anime"
+      ],
+      "horarios": [
+        "12:10",
+        "18:40",
+        "20:30"
+      ]
+    },
+    {
+      "slug": "animescomia",
+      "yt_id": "UCRrz2BKdhCzy1-nAAs2E8bg",
+      "nome": "Animescomia",
+      "handle": "@animescomia",
+      "creds": [
+        "KOpyXE9rBy1YirlZ"
+      ],
+      "status": "ativo",
+      "cor": "#FF7A00",
+      "categoria": "1",
+      "nicho": "anime shonen classico e de luta: Dragon Ball, Naruto, One Piece, Bleach, Jujutsu Kaisen, Demon Slayer; batalhas, transformacoes, poder, parodias e animacoes caseiras de anime",
+      "persona": "fa de shonen raiz, hypado com luta e transformacao, linguagem de quem cresceu vendo Dragon Ball na TV",
+      "tags_base": [
+        "anime",
+        "shonen",
+        "dragon ball",
+        "anime de luta",
+        "react anime",
+        "animes"
+      ],
+      "horarios": [
+        "11:40",
+        "17:50",
+        "21:10"
+      ]
+    },
+    {
+      "slug": "inovaremanhwabr",
+      "yt_id": "UCZfQc_UIPRzU35GEjfTMCGA",
+      "nome": "inovare manhwa br",
+      "handle": "@inovaremanhwabr",
+      "creds": [
+        "hNQrW5ouNe0Ni5Me"
+      ],
+      "status": "ativo",
+      "cor": "#2DD4BF",
+      "categoria": "1",
+      "nicho": "manhwa, webtoon, manhua e donghua: cultivo/murim, regressao, sistema, rank S, vilas e reis demonios, protagonista overpower; recaps e cenas de manhwa e animacoes chinesas",
+      "persona": "leitor de manhwa que maratona capitulos de madrugada; fala de sistema, rank, regressao com naturalidade",
+      "tags_base": [
+        "manhwa",
+        "webtoon",
+        "manhwa recap",
+        "manhua",
+        "donghua",
+        "manhwa br"
+      ],
+      "horarios": [
+        "13:00",
+        "19:20",
+        "22:00"
+      ]
+    },
+    {
+      "slug": "cenareact",
+      "yt_id": "UCrYkau_YGtx8C29qnF9xSYQ",
+      "nome": "CenaReact",
+      "handle": "@cenareact-f3j",
+      "creds": [
+        "novo_universo_ia_d6s"
+      ],
+      "status": "ativo",
+      "cor": "#FFB800",
+      "categoria": "24",
+      "nicho": "filmes, series, novelas, sitcoms e desenhos adultos (Family Guy, Simpsons, Malcolm, Loki, Marvel, Harry Potter), cenas iconicas, trailers e cenas pesadas de series brasileiras",
+      "persona": "quem comenta filme e serie com o sofa e a pipoca; reage com humor e opiniao sincera",
+      "tags_base": [
+        "react filme",
+        "react serie",
+        "cenas de filmes",
+        "series",
+        "filmes",
+        "cena iconica"
+      ],
+      "horarios": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ]
+    },
+    {
+      "slug": "inventoreact",
+      "yt_id": "UClN7sup9FM11tMM1UxXBwOQ",
+      "nome": "InventoReact",
+      "handle": "@inventoreact",
+      "creds": [
+        "novo_ia_agora_h3n"
+      ],
+      "status": "ativo",
+      "cor": "#00D1FF",
+      "categoria": "28",
+      "nicho": "inventos, gadgets, experiencias caseiras, construcao, casas e veiculos diferentes, curiosidades do mundo (povos, culturas, lugares), produtos baratos que prometem muito",
+      "persona": "curioso pratico que testa a ideia na cabeca: vale a pena ou e furada?",
+      "tags_base": [
+        "inventos",
+        "gadgets",
+        "curiosidades",
+        "vale a pena",
+        "react inventos",
+        "tecnologia"
+      ],
+      "horarios": [
+        "11:30",
+        "17:30",
+        "20:00"
+      ],
+      "verificado": false,
+      "nota_verificacao": "16/10: sem a verificacao unica por telefone. O completo wKiGkUQ6bBc (13/10) foi removido por ser muito longo (>15 min) e o Studio recusa video relacionado. Dono: Configuracoes do canal > verificar por telefone; depois apagar verificado/nota_verificacao."
+    },
+    {
+      "slug": "cartuchoreact",
+      "yt_id": "UCrskUXOpfPUkSY3HMT2c7_A",
+      "nome": "CartuchoReact",
+      "handle": "@cartuchoreact",
+      "creds": [
+        "novo_cartuchoreact",
+        "novo_ia_sem_limites_h4b"
+      ],
+      "status": "ativo",
+      "cor": "#8B5CFF",
+      "categoria": "20",
+      "nicho": "games retro e atuais, consoles, desbloqueios, hacks, emuladores, chips, achados de feira, colecionaveis, nostalgia gamer",
+      "persona": "gamer da era PS2/Xbox 360 que conhece desbloqueio e feira do rolo",
+      "tags_base": [
+        "games",
+        "retrogaming",
+        "console",
+        "nostalgia gamer",
+        "react games",
+        "videogame"
+      ],
+      "horarios": [
+        "12:30",
+        "18:10",
+        "21:40"
+      ]
+    },
+    {
+      "slug": "forjareact",
+      "yt_id": "UCab6vzKMQam-5ovJ9H58IuQ",
+      "nome": "ForjaReact",
+      "handle": "@forjareact",
+      "creds": [
+        "novo_forjareact"
+      ],
+      "status": "ativo",
+      "cor": "#FF7A1A",
+      "categoria": "26",
+      "nicho": "forja de espadas, cutelaria, ferreiro, marcenaria, restauracao, artesanato, oficios, construcoes e armas/armaduras feitas a mao",
+      "persona": "admirador de oficio bem feito; repara no detalhe, na tecnica e no acabamento",
+      "tags_base": [
+        "forja",
+        "cutelaria",
+        "ferreiro",
+        "feito a mao",
+        "restauracao",
+        "oficios"
+      ],
+      "horarios": [
+        "11:00",
+        "17:10",
+        "20:10"
+      ]
+    },
+    {
+      "slug": "mundoquenaoexiste",
+      "yt_id": "UCPTjuCzT0k82K9sE5KXdSIw",
+      "nome": "Mundo Que Nao Existe",
+      "handle": "@mundoquenaoexiste",
+      "creds": [
+        "novo_mundoquenaoexiste"
+      ],
+      "status": "ativo",
+      "cor": "#C13CFF",
+      "categoria": "24",
+      "nicho": "coisas que parecem impossiveis ou de outro mundo: videos de IA, situacoes absurdas, 'e se...', cenas surreais, bichos fofos, ilusoes, objetos e casas que parecem mentira",
+      "persona": "quem olha e duvida que e real; tom de espanto e brincadeira",
+      "tags_base": [
+        "isso existe",
+        "surreal",
+        "impossivel",
+        "videos de ia",
+        "absurdo",
+        "e se"
+      ],
+      "horarios": [
+        "12:20",
+        "19:40",
+        "22:10"
+      ]
+    },
+    {
+      "slug": "historiasemframes",
+      "yt_id": "UCIFvn2aqdrv8X-LYscTyjjA",
+      "nome": "HistoriasEmFrames",
+      "handle": "@historiasemframes-emerson",
+      "creds": [
+        "novo_historias_em_frames",
+        "novo_ia_agora_n7h"
+      ],
+      "status": "ativo",
+      "cor": "#E8B04B",
+      "categoria": "24",
+      "nicho": "historias curtas narradas e ilustradas de superacao, drama familiar, fe, romance e reviravoltas emocionantes; tambem reacts a cenas muito emocionantes",
+      "persona": "narrador que conta historia de vida com emocao e gancho no primeiro segundo",
+      "tags_base": [
+        "historias",
+        "historia emocionante",
+        "superacao",
+        "historias narradas",
+        "drama",
+        "reflexao"
+      ],
+      "horarios": [
+        "13:10",
+        "20:00",
+        "22:20"
+      ]
+    },
+    {
+      "slug": "fiodameada",
+      "yt_id": "UCh-REEcJ9Jt1lCvTr6Sdu8Q",
+      "nome": "Fio da Meada",
+      "handle": "@codigointeligente-n7j",
+      "creds": [
+        "novo_codigo_inteligente_n7j"
+      ],
+      "status": "ativo",
+      "cor": "#4B6BE8",
+      "categoria": "24",
+      "nicho": "historias de misterio, terror, suspense, segredos revelados, comedia e casos intrigantes contados quadro a quadro",
+      "persona": "contador de causo que puxa o fio devagar e solta a revelacao no final",
+      "tags_base": [
+        "historias",
+        "misterio",
+        "terror",
+        "suspense",
+        "historias narradas",
+        "segredo revelado"
+      ],
+      "horarios": [
+        "19:10",
+        "21:40",
+        "23:00"
+      ],
+      "sintetico_padrao": true
+    },
+    {
+      "slug": "assistiainvestimentos",
+      "yt_id": "UCDkimm8rTPj8u5qKd-es3dA",
+      "nome": "Assist-IA Investimentos",
+      "handle": "@assistiainvestimentos",
+      "creds": [
+        "novo_assistiainvestimentos"
+      ],
+      "status": "ativo",
+      "cor": "#22C55E",
+      "categoria": "27",
+      "nicho": "investimento com IA, cripto, trader, mercado financeiro, dinheiro, historias de quem saiu do zero e aprendeu a investir; animes/filmes sobre trader e dinheiro",
+      "persona": "investidor que usa IA no dia a dia e explica sem prometer ganho; tom calmo e honesto",
+      "regras": "Regras do dono (obrigatorio): nunca usar a palavra 'robo' ou 'bot' - sempre 'a IA' (no feminino: 'a IA analisa', 'ela'); nunca prometer lucro, ganho garantido nem dizer que a IA preve o mercado; nada de 'fique rico'. Pode falar de estudo, risco e disciplina.",
+      "tags_base": [
+        "investimentos",
+        "ia",
+        "cripto",
+        "trader",
+        "educacao financeira",
+        "dinheiro"
+      ],
+      "horarios": [
+        "07:40",
+        "12:15",
+        "19:30"
+      ]
+    },
+    {
+      "slug": "dicasfinanceirasdaia",
+      "yt_id": "UC0dFPL0BhYnpfmXK-qN3hPw",
+      "nome": "Plantão das Histórias",
+      "nome_antigo": "Dicas financeiras da ia",
+      "handle": "@dicasfinanceirasdaia",
+      "creds": [
+        "novo_dicasfinanceirasdaia"
+      ],
+      "status": "ativo",
+      "cor": "#16A34A",
+      "categoria": "27",
+      "nicho": "financas pessoais, economia, quanto custa, vale a pena financeiramente, golpes e armadilhas com dinheiro, historias de quem enriqueceu do zero, consumo e precos",
+      "persona": "amigo que entende de dinheiro e fala simples; transforma qualquer historia numa licao financeira",
+      "regras": "Nunca prometer ganho garantido; sem 'fique rico rapido'; usar 'a IA' e nunca 'robo'.",
+      "tags_base": [
+        "dicas financeiras",
+        "educacao financeira",
+        "dinheiro",
+        "economia",
+        "financas pessoais",
+        "investir"
+      ],
+      "horarios": [
+        "08:10",
+        "12:40",
+        "20:20"
+      ]
+    },
+    {
+      "slug": "inovare_french",
+      "yt_id": "UCRxr-mCIY4gZbgFLx0IR-eg",
+      "nome": "inovare Manhwa french",
+      "handle": "@inovaremanhwafrench",
+      "creds": [
+        "GG97QQt8lmyv0dDG"
+      ],
+      "status": "pausado",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: pausado - 12/10: ADVERTENCIA POR DIREITOS AUTORAIS (strike de 27/09) - o Studio trava o upload nessa tela. Dono: ler no Studio, decidir (curso/contranotificacao) e voltar status para ativo",
+      "categoria": "1",
+      "horarios": [
+        "10:40",
+        "16:50",
+        "20:50"
+      ],
+      "cor": "#E11D48",
+      "nicho": "romance, casais, shoujo, slice of life e momentos fofos ou emocionantes de anime e manhwa",
+      "persona": "romantica assumida que torce pelo casal e se emociona; fala de quimica, ciume e confissao",
+      "tags_base": [
+        "romance anime",
+        "anime romance",
+        "casal anime",
+        "shoujo",
+        "anime fofo",
+        "manhwa romance"
+      ],
+      "nota": "2026-10-18 23:15: VOLTOU a pausado — fr com 2 advertências de direitos autorais (27/09 e 18/10; a 3ª derruba o canal e os associados), en com advertências de diretrizes (upload bloqueado). 2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_hindi",
+      "yt_id": "UCj3Wg1ubA13WKoOCDoDrO1A",
+      "nome": "Inovaremanhwaversehindi",
+      "handle": "@inovaremanhwaversehindi",
+      "creds": [
+        "GtuH5ezUK8eBaC60"
+      ],
+      "status": "hipercool",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: ativo",
+      "categoria": "1",
+      "horarios": [
+        "11:10",
+        "17:20",
+        "21:20"
+      ],
+      "cor": "#E11D48",
+      "nicho": "lutas epicas, power-ups, transformacoes e cenas de hype de anime e manhwa (o momento em que o personagem fica absurdo de forte)",
+      "persona": "hypado de luta que vibra com cada transformacao; frases curtas e intensas",
+      "tags_base": [
+        "luta anime",
+        "anime de luta",
+        "transformacao",
+        "power up",
+        "cena epica anime",
+        "anime hype"
+      ],
+      "nota": "2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_ind",
+      "yt_id": "UCQj00Ic_N20yJp6eqSmIkXw",
+      "nome": "Inovare Manga ind",
+      "handle": "@inovaremanhwaverseind",
+      "creds": [
+        "nYsAKUb3DbR1QOEm"
+      ],
+      "status": "hipercool",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: ativo",
+      "categoria": "1",
+      "horarios": [
+        "10:20",
+        "16:30",
+        "22:30"
+      ],
+      "cor": "#E11D48",
+      "nicho": "isekai, reencarnacao, sistema, jogos e protagonista overpower; comparacoes de quem e mais forte e rankings de poder",
+      "persona": "gamer que analisa nivel, status e poder do protagonista; adora comparar quem ganha de quem",
+      "tags_base": [
+        "isekai",
+        "reencarnacao",
+        "anime overpower",
+        "quem e mais forte",
+        "ranking anime",
+        "anime sistema"
+      ],
+      "nota": "2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_eng",
+      "yt_id": "UCSGryZuOYBYE6oCFS7n-yUg",
+      "nome": "Inovare Manhwa eng",
+      "handle": "@inovaremanhwaverseeng",
+      "creds": [
+        "UYjkdFO3V3kjmKU5"
+      ],
+      "status": "hipercool",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "29/10: dono viu no Studio que o envio voltou; status hipercool igual às outras línguas | 13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: pausado - 12/10: YouTube bloqueou envios - \"Muitos avisos: devido as advertencias relacionadas as diretrizes da comunidade, nao e possivel enviar videos\". Dono: ver no Studio; voltar status para ativo quando liberar",
+      "categoria": "1",
+      "horarios": [
+        "12:50",
+        "18:20",
+        "21:50"
+      ],
+      "cor": "#E11D48",
+      "nicho": "viloes, traicoes, plot twists e revelacoes chocantes de anime e manhwa",
+      "persona": "detetive de plot twist que repara na traicao antes de todo mundo; tom de suspense",
+      "tags_base": [
+        "plot twist anime",
+        "vilao anime",
+        "traicao anime",
+        "anime chocante",
+        "reviravolta",
+        "anime suspense"
+      ],
+      "nota": "2026-10-18 23:15: VOLTOU a pausado — fr com 2 advertências de direitos autorais (27/09 e 18/10; a 3ª derruba o canal e os associados), en com advertências de diretrizes (upload bloqueado). 2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_ita",
+      "yt_id": "UC-ibFyKECFgzroC3bntM--w",
+      "nome": "inovaremanhwaverseita",
+      "handle": "@inovaremanhwaverseita",
+      "creds": [
+        "7zpNZNll2jlBnQ0J"
+      ],
+      "status": "hipercool",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: ativo",
+      "categoria": "1",
+      "horarios": [
+        "11:50",
+        "17:40",
+        "20:40"
+      ],
+      "cor": "#E11D48",
+      "nicho": "comedia, momentos engracados, memes, parodias e animacoes caseiras de anime",
+      "persona": "zoeiro que transforma cena de anime em piada; humor brasileiro e leve",
+      "tags_base": [
+        "anime engracado",
+        "comedia anime",
+        "meme anime",
+        "parodia anime",
+        "anime humor",
+        "zueira anime"
+      ],
+      "nota": "2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_ru",
+      "yt_id": "UCn3EprJOEgidU2QsNyUvqKQ",
+      "nome": "inovare manhwa verse ru",
+      "handle": "@inovaremanhwaru",
+      "creds": [
+        "TkfzifstYEoG4jKg"
+      ],
+      "status": "hipercool",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: ativo",
+      "categoria": "1",
+      "horarios": [
+        "13:20",
+        "18:50",
+        "23:10"
+      ],
+      "cor": "#E11D48",
+      "nicho": "anime sombrio, seinen, terror, drama pesado, cenas tristes e tragedias de anime e manhwa",
+      "persona": "fa de seinen que gosta do lado pesado; reage com seriedade e empatia",
+      "tags_base": [
+        "anime sombrio",
+        "seinen",
+        "anime triste",
+        "anime terror",
+        "drama anime",
+        "cena triste anime"
+      ],
+      "nota": "2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_thai",
+      "yt_id": "UCmB2ZETqZTrYYEYcydim2Qw",
+      "nome": "Inovaremanhwaversethai",
+      "handle": "@inovaremanhwaversethai",
+      "creds": [
+        "q3mik36FjtTgFkNC"
+      ],
+      "status": "hipercool",
+      "idioma": "pt-BR",
+      "pais": "BR",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: ativo",
+      "categoria": "1",
+      "horarios": [
+        "09:50",
+        "15:40",
+        "19:50"
+      ],
+      "cor": "#E11D48",
+      "nicho": "donghua (animacao chinesa), manhua, cultivo, artes marciais, murim e fantasia oriental",
+      "persona": "fa de donghua e cultivo que explica reinos, seitas e niveis de cultivo com naturalidade",
+      "tags_base": [
+        "donghua",
+        "manhua",
+        "cultivo",
+        "anime chines",
+        "murim",
+        "artes marciais"
+      ],
+      "nota": "2026-10-05: dono reativou para react nacional (pt-BR), 1/dia"
+    },
+    {
+      "slug": "inovare_esp",
+      "yt_id": null,
+      "nome": "Inovare Manhwa esp",
+      "handle": null,
+      "creds": [
+        "0RW4rz4ekPpkPcZx"
+      ],
+      "status": "suspenso",
+      "idioma": "es",
+      "pausa": "13/10: canal passou para o HIPERCOOL (pedido do dono: os inovaremanhwa de outras linguas sao do hipercool, a rede de react nao posta mais aqui) | antes: suspenso - 2026-10-04: API respondeu 'The YouTube account of the authenticated user is suspended'"
+    },
+    {
+      "slug": "inovareq8l",
+      "yt_id": "UCJTNPiJJax_YdwqdKVb6r8w",
+      "nome": "Mistérios Noturnos",
+      "handle": "@Inovare-q8l",
+      "creds": [
+        "novo_inovareq8l"
+      ],
+      "status": "parceiro",
+      "categoria": "24",
+      "nicho": "misterios",
+      "persona": "narrador brasileiro empolgado que conta a história completa",
+      "tags_base": [
+        "manhwa",
+        "recap",
+        "anime",
+        "reencarnação",
+        "sistema",
+        "história completa"
+      ],
+      "horarios": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ],
+      "nota": "29/10: canal novo do projeto rede (adicionar_canal.py)",
+      "pausa": "29/10: canal de TEMA dos Shorts de parceiros (dona escolheu mistérios/tecnologia) — a rede de react não posta aqui"
+    },
+    {
+      "slug": "inovareu8b",
+      "yt_id": "UCHIg900SWxRdHsI7jEX6sTg",
+      "nome": "Tech Noturno",
+      "handle": "@Inovare-u8b",
+      "creds": [
+        "novo_inovareu8b"
+      ],
+      "status": "parceiro",
+      "categoria": "24",
+      "nicho": "tecnologia",
+      "persona": "narrador brasileiro empolgado que conta a história completa",
+      "tags_base": [
+        "manhwa",
+        "recap",
+        "anime",
+        "reencarnação",
+        "sistema",
+        "história completa"
+      ],
+      "horarios": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ],
+      "nota": "29/10: canal novo do projeto rede (adicionar_canal.py)",
+      "pausa": "29/10: canal de TEMA dos Shorts de parceiros (dona escolheu mistérios/tecnologia) — a rede de react não posta aqui"
+    },
+    {
+      "slug": "comedianoturna",
+      "yt_id": "UCoAiFiUT99wnXjgZ2d7r_AQ",
+      "nome": "Comédia Noturna",
+      "handle": "@comedianoturna",
+      "creds": [
+        "novo_comedianoturna"
+      ],
+      "status": "comentarios",
+      "categoria": "24",
+      "nicho": "humor",
+      "persona": "personagens famosos zoando comentários engraçados da internet",
+      "tags_base": [
+        "comentários engraçados",
+        "humor",
+        "chaves",
+        "meme",
+        "zueira",
+        "internet não perdoa"
+      ],
+      "horarios": [
+        "12:00",
+        "18:00",
+        "21:00"
+      ],
+      "nota": "01/11: canal novo do projeto rede (adicionar_canal.py)",
+      "pausa": "01/11: canal do projeto comentarios (D:\u000bideos-comentarios) — a rede de react não posta aqui"
+    },
+    {
+      "slug": "empresariointeligenteia",
+      "yt_id": "UChXUdv7NQJ7Soa73c9xwESw",
+      "nome": "Empresário Inteligente IA",
+      "handle": "@empresariointeligenteia",
+      "creds": [
+        "novo_empresariointeligenteia"
+      ],
+      "status": "ativo",
+      "cor": "#1D4ED8",
+      "categoria": "27",
+      "nicho": "gestao de pequenas e medias empresas, IA aplicada a negocios, automacao, vendas, atendimento, produtividade do dono",
+      "persona": "consultor pratico que mostra como o dono de negocio usa IA e automacao pra vender mais e trabalhar menos",
+      "regras": "Nunca prometer ganho garantido; sem promessa milagrosa; usar 'a IA' e nunca 'robo'; nada de conselho medico individual.",
+      "tags_base": [
+        "empreendedorismo",
+        "gestao de empresas",
+        "dono de negocio",
+        "inteligencia artificial",
+        "automacao",
+        "pequenas empresas"
+      ],
+      "horarios": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ]
+    },
+    {
+      "slug": "clinicalucrativaia",
+      "yt_id": "UCwrlsPBLGkUQG6jONETdRCQ",
+      "nome": "Clínica Lucrativa IA",
+      "handle": "@clinicalucrativaia",
+      "creds": [
+        "novo_clinicalucrativaia"
+      ],
+      "status": "ativo",
+      "cor": "#0D9488",
+      "categoria": "27",
+      "nicho": "curiosidades de saude, gestao e marketing de clinicas e consultorios, agendamento e atendimento automatico",
+      "persona": "especialista em saude e em gestao de clinicas que explica de forma simples e mostra como a IA libera a agenda",
+      "regras": "Nunca prometer ganho garantido; sem promessa milagrosa; usar 'a IA' e nunca 'robo'; nada de conselho medico individual.",
+      "tags_base": [
+        "saude",
+        "clinica",
+        "consultorio",
+        "dentista",
+        "medico",
+        "gestao de clinica"
+      ],
+      "horarios": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ]
+    },
+    {
+      "slug": "imovelemfoco",
+      "yt_id": "UCfDa2choRM5dvEyuwTPLlTA",
+      "nome": "Imóvel em Foco",
+      "handle": "@imovelemfoco",
+      "creds": [
+        "novo_imovelemfoco"
+      ],
+      "status": "ativo",
+      "cor": "#B45309",
+      "categoria": "27",
+      "nicho": "mercado imobiliario, investimento em imoveis, fundos imobiliarios, financiamento, leilao, vida de corretor",
+      "persona": "corretor experiente que explica o mercado e mostra como automacao e IA trazem mais clientes",
+      "regras": "Nunca prometer ganho garantido; sem promessa milagrosa; usar 'a IA' e nunca 'robo'; nada de conselho medico individual.",
+      "tags_base": [
+        "imoveis",
+        "mercado imobiliario",
+        "corretor de imoveis",
+        "investimento em imoveis",
+        "fundos imobiliarios",
+        "financiamento"
+      ],
+      "horarios": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ]
+    },
+    {
+      "slug": "vendasqueescalam",
+      "yt_id": "UCdKG9omHV8Nf_DpKk-M_AMg",
+      "nome": "Vendas que Escalam",
+      "handle": "@vendasqueescalam",
+      "creds": [
+        "novo_vendasqueescalam"
+      ],
+      "status": "ativo",
+      "cor": "#7C3AED",
+      "categoria": "27",
+      "nicho": "vendas, marketing, atendimento no WhatsApp, funil, follow-up e automacao comercial pra empresas",
+      "persona": "vendedor de alta performance que ensina tecnicas e mostra como automatizar o follow-up",
+      "regras": "Nunca prometer ganho garantido; sem promessa milagrosa; usar 'a IA' e nunca 'robo'; nada de conselho medico individual.",
+      "tags_base": [
+        "vendas",
+        "marketing",
+        "whatsapp",
+        "atendimento",
+        "funil de vendas",
+        "automacao comercial"
+      ],
+      "horarios": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ]
+    },
+    {
+      "slug": "leielucro",
+      "yt_id": "UCy1nvnDnn70OQQX7k18mB2A",
+      "nome": "Lei e Lucro",
+      "handle": "@leielucroia",
+      "creds": [
+        "novo_leielucro"
+      ],
+      "status": "ativo",
+      "cor": "#1F4E79",
+      "categoria": "27",
+      "nicho": "direito do dia a dia, contabilidade, impostos, abrir empresa e automação pra escritórios de advocacia e contabilidade",
+      "persona": "consultor que explica direito e contas em linguagem simples e mostra como o escritório ganha tempo com automação",
+      "regras": "Nunca dar parecer jurídico ou contábil individual; sempre 'consulte um advogado/contador'; sem promessa de ganho; usar 'a IA' e nunca 'robô'.",
+      "tags_base": [
+        "direito",
+        "advocacia",
+        "contabilidade",
+        "impostos",
+        "empresa",
+        "automacao para escritorios"
+      ],
+      "horarios": [
+        "09:30",
+        "13:30",
+        "19:30"
+      ]
+    }
+  ],
+  "a_verificar": {
+    "_leia": "vazio: n7h = HistoriasEmFrames e h4b = CartuchoReact (confirmado pelo dono 05/10)"
+  }
+}

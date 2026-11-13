@@ -1,0 +1,27 @@
+{
+ "formato": "recap de cena de anime com legendas sincronizadas + música",
+ "descricao": "Mostra uma sequência de ação de anime (4-6 frames-chave) com legendas descritivas sincronizadas batendo com a ação, música de fundo intensa, sem narração falada. Ritmo rápido, cada legenda dura 0.8-1.2s.",
+ "replicavel": true,
+ "como_fazer": "1) Escolher cena icônica de anime usando pipeline de recap (extrair 4-6 frames da sequência). 2) Escrever legendas curtas e impactantes para cada momento ('E COLOCADA', 'POR DENTRO', 'DESMONTA', 'PEGA'). 3) Montar no ffmpeg: cada frame dura 1s, aplicar zoom sutil (scale e zoompan), adicionar legendas com drawtext em fonte bold/outline branco. 4) Adicionar trilha épica/tensa das 341 disponíveis. 5) Aplicar overlay de intensidade (raio/fogo) no momento climático. 6) Exportar 9:16, 10-15s.",
+ "ferramentas": [
+  "ffmpeg",
+  "pipeline de recap de anime",
+  "overlays animados",
+  "341 trilhas"
+ ],
+ "fonte_de_material": "frames extraídos de episódios de anime via pipeline de recap (cenas de domínio público ou fair use para análise), ou usar screencaps de anime de sites de fandom",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "Revela uma sequência de ação surpreendente em câmera lenta narrativa, gerando curiosidade sobre qual anime é e vontade de compartilhar a cena épica.",
+ "exemplo_roteiro": "Frame 1 (0-1s): 'E COLOCADA' — espada de madeira surge\nFrame 2 (1-2s): 'POR DENTRO' — close nos olhos determinados\nFrame 3 (2-3.5s): 'DESMONTA' — espada corta outra espada ao meio\nFrame 4 (3.5-5s): 'PEGA' — personagem vitoriosa, slow zoom out\n[Trilha: épica crescente]",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "anime",
+  "cena épica",
+  "espada",
+  "ação",
+  "recap"
+ ],
+ "video": "2026-10-07 16-24-47.mp4",
+ "data": "2026-10-12"
+}

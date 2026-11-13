@@ -1,0 +1,359 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-21-21.mp4",
+ "duration": 154.466667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 720,
+  "has_webcam": true,
+  "contrast": 67.5,
+  "trimmed": {},
+  "divider": 360,
+  "webcam": [
+   0,
+   0,
+   720,
+   360
+  ],
+  "content": [
+   0,
+   360,
+   720,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 6,
+  "reason": "React a histórias curtas animadas (manhwa/manhua) com lição moral, criador comenta e reage mas há muitos silêncios e pouco conteúdo aproveitável.",
+  "topic": "Histórias curtas animadas com lição moral",
+  "channel": "historiasemframes",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 45.24,
+    "hook": "ELA NÃO SABIA QUE ERA A FILHA",
+    "title": "Ela atropelou a própria filha sem saber... 😱 #shorts #react",
+    "description": "O criador reage a uma história curta animada onde uma mulher causa um acidente sem imaginar que a vítima era sua própria filha. E ainda aparece outro idiota piorando tudo!\nVocê já viu uma história dessas que te deixou sem palavras?\nSegue pra mais reacts a histórias com lição de vida!\n\n#shorts #react #historiacurta #licaodevida #animacao #manhwa #drama #moral #acidente #reagindo #viral #historiaanimada #reflexao",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#historiacurta",
+     "#licaodevida",
+     "#animacao",
+     "#manhwa",
+     "#drama",
+     "#moral",
+     "#acidente",
+     "#reagindo",
+     "#viral",
+     "#historiaanimada",
+     "#reflexao"
+    ],
+    "tags": [
+     "react",
+     "história curta",
+     "lição de vida",
+     "animação",
+     "manhwa",
+     "drama",
+     "moral",
+     "história animada",
+     "reagindo",
+     "shorts",
+     "história moral",
+     "acidente",
+     "reflexão",
+     "viral",
+     "história triste",
+     "react brasil",
+     "histórias curtas animadas",
+     "react emocionante"
+    ],
+    "keywords": [
+     {
+      "t": 10.0,
+      "text": "CARAMBA",
+      "emoji": "😱"
+     },
+     {
+      "t": 37.0,
+      "text": "IDIOTA",
+      "emoji": "🤦"
+     },
+     {
+      "t": 43.5,
+      "text": "HISTÓRIA MORAL",
+      "emoji": "📖"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 10.0,
+      "type": "shock"
+     },
+     {
+      "t": 37.0,
+      "type": "angry"
+     },
+     {
+      "t": 43.5,
+      "type": "question"
+     }
+    ],
+    "memes": [
+     {
+      "t": 10.0,
+      "id": 7
+     },
+     {
+      "t": 37.0,
+      "id": 5
+     }
+    ],
+    "cta": "Segue pra mais histórias!",
+    "pinned_comment": "Qual história curta animada mais te marcou? 🤔",
+    "title_alternatives": [
+     "A mãe causou o acidente e não sabia quem era a vítima 😨 #shorts #drama",
+     "Essa história curta vai te deixar sem palavras 😱 #shorts #react"
+    ],
+    "mood": "tense_dramatic",
+    "music": true
+   },
+   {
+    "start": 91.72,
+    "end": 154.466667,
+    "hook": "MÉDICO NA AMBULÂNCIA? NO BRASIL NEM PENSAR",
+    "title": "No Brasil nem enfermeiro vai na ambulância 😂🇧🇷 #shorts #react",
+    "description": "O criador reage a mais uma história curta animada e compara com a realidade brasileira: médico na ambulância? Aqui mal vai um socorrista!\nTodas essas histórias têm uma lição no final. Qual te marcou mais?\nSegue pra mais reacts assim!\n\n#shorts #react #brasil #ambulancia #historiacurta #licaodevida #animacao #drama #moral #reagindo #viral #comparacao #realidade #saude",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#brasil",
+     "#ambulancia",
+     "#historiacurta",
+     "#licaodevida",
+     "#animacao",
+     "#drama",
+     "#moral",
+     "#reagindo",
+     "#viral",
+     "#comparacao",
+     "#realidade",
+     "#saude"
+    ],
+    "tags": [
+     "react",
+     "brasil",
+     "ambulância",
+     "história curta",
+     "lição de vida",
+     "animação",
+     "drama",
+     "moral",
+     "reagindo",
+     "shorts",
+     "saúde brasil",
+     "realidade brasileira",
+     "react brasil",
+     "história animada",
+     "viral",
+     "comparação",
+     "socorrista",
+     "enfermeiro"
+    ],
+    "keywords": [
+     {
+      "t": 92.22,
+      "text": "MÉDICO NA AMBULÂNCIA?",
+      "emoji": "🚑"
+     },
+     {
+      "t": 116.22,
+      "text": "BABACA",
+      "emoji": "🤦"
+     },
+     {
+      "t": 150.22,
+      "text": "LIÇÃO",
+      "emoji": "📖"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 92.22,
+      "type": "shock"
+     },
+     {
+      "t": 116.22,
+      "type": "angry"
+     }
+    ],
+    "memes": [
+     {
+      "t": 92.22,
+      "id": 52
+     }
+    ],
+    "cta": "Comenta a sua história!",
+    "pinned_comment": "Na sua cidade, quem vai na ambulância? Médico ou só socorrista? 🚑",
+    "title_alternatives": [
+     "Aqui no Brasil mal vai socorrista na ambulância 😅 #shorts #react",
+     "Essas histórias sempre têm uma lição no final 📖 #shorts #react"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 0.0,
+    "end": 4.0,
+    "why": "Criador hesitando 'vamos ver... coreano né? ou chinês né?' — teste/introdução sem valor"
+   }
+  ],
+  "speakers": {
+   "6": "creator"
+  },
+  "highlights": false
+ },
+ "base": null,
+ "channel": "historiasemframes",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_21_21\\2026_10_07_16_21_21_p1.mp4",
+   "duration": 17.375832000000024,
+   "keeps": 10,
+   "meta": {
+    "hook": "ELA NÃO SABIA QUE ERA A FILHA",
+    "title": "Ela atropelou a própria filha sem saber... 😱 #shorts #react",
+    "description": "O criador reage a uma história curta animada onde uma mulher causa um acidente sem imaginar que a vítima era sua própria filha. E ainda aparece outro idiota piorando tudo!\nVocê já viu uma história dessas que te deixou sem palavras?\nSegue pra mais reacts a histórias com lição de vida!\n\n#shorts #react #historiacurta #licaodevida #animacao #manhwa #drama #moral #acidente #reagindo #viral #historiaanimada #reflexao",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#historiacurta",
+     "#licaodevida",
+     "#animacao",
+     "#manhwa",
+     "#drama",
+     "#moral",
+     "#acidente",
+     "#reagindo",
+     "#viral",
+     "#historiaanimada",
+     "#reflexao"
+    ],
+    "tags": [
+     "react",
+     "história curta",
+     "lição de vida",
+     "animação",
+     "manhwa",
+     "drama",
+     "moral",
+     "história animada",
+     "reagindo",
+     "shorts",
+     "história moral",
+     "acidente",
+     "reflexão",
+     "viral",
+     "história triste",
+     "react brasil",
+     "histórias curtas animadas",
+     "react emocionante"
+    ],
+    "cta": "Segue pra mais histórias!",
+    "mood": "tense_dramatic",
+    "music": true,
+    "pinned_comment": "Qual história curta animada mais te marcou? 🤔",
+    "title_alternatives": [
+     "A mãe causou o acidente e não sabia quem era a vítima 😨 #shorts #drama",
+     "Essa história curta vai te deixar sem palavras 😱 #shorts #react"
+    ],
+    "work": null,
+    "channel": "historiasemframes"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_21_21\\2026_10_07_16_21_21_p1_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\phonk_football_anime_infraction_27jILMV2-fw.mp3",
+   "removed_pct": 61.6,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 17.3,
+    "lufs": -14.5
+   }
+  },
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_21_21\\2026_10_07_16_21_21_p2.mp4",
+   "duration": 21.512105000000048,
+   "keeps": 8,
+   "meta": {
+    "hook": "MÉDICO NA AMBULÂNCIA? NO BRASIL NEM PENSAR",
+    "title": "No Brasil nem enfermeiro vai na ambulância 😂🇧🇷 #shorts #react",
+    "description": "O criador reage a mais uma história curta animada e compara com a realidade brasileira: médico na ambulância? Aqui mal vai um socorrista!\nTodas essas histórias têm uma lição no final. Qual te marcou mais?\nSegue pra mais reacts assim!\n\n#shorts #react #brasil #ambulancia #historiacurta #licaodevida #animacao #drama #moral #reagindo #viral #comparacao #realidade #saude",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#brasil",
+     "#ambulancia",
+     "#historiacurta",
+     "#licaodevida",
+     "#animacao",
+     "#drama",
+     "#moral",
+     "#reagindo",
+     "#viral",
+     "#comparacao",
+     "#realidade",
+     "#saude"
+    ],
+    "tags": [
+     "react",
+     "brasil",
+     "ambulância",
+     "história curta",
+     "lição de vida",
+     "animação",
+     "drama",
+     "moral",
+     "reagindo",
+     "shorts",
+     "saúde brasil",
+     "realidade brasileira",
+     "react brasil",
+     "história animada",
+     "viral",
+     "comparação",
+     "socorrista",
+     "enfermeiro"
+    ],
+    "cta": "Comenta a sua história!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Na sua cidade, quem vai na ambulância? Médico ou só socorrista? 🚑",
+    "title_alternatives": [
+     "Aqui no Brasil mal vai socorrista na ambulância 😅 #shorts #react",
+     "Essas histórias sempre têm uma lição no final 📖 #shorts #react"
+    ],
+    "work": null,
+    "channel": "historiasemframes"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_21_21\\2026_10_07_16_21_21_p2_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk da deep web (Original).mp3",
+   "removed_pct": 65.7,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 21.49,
+    "lufs": -14.0
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 1414.9
+}

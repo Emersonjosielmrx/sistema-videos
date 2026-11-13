@@ -1,0 +1,78 @@
+{
+  "cohere": [
+    {
+      "key": "wdF2i1EJHOWEOY8rRQawfBdHYbtYSLSaybB4O1fR",
+      "status": "OK"
+    }
+  ],
+  "deepinfra": [
+    {
+      "key": "g84jpppig9mu3HwejTVnjZSzfRMaNxhr",
+      "status": "OK"
+    }
+  ],
+  "fireworks": [
+    {
+      "key": "fw_3ZMnqhLeh2ND1Uxx8Un6UeCJ",
+      "status": "OK"
+    }
+  ],
+  "together": [
+    {
+      "key": "fb5046edcf5be91aec51c96f3c8d14228ee94aab9af2107ad834e7b75d80ab14",
+      "status": "OK"
+    }
+  ],
+  "mistral": [
+    {
+      "key": "ritXk4RdWummwHYaC45pOI4tHzbStlzB",
+      "status": "HTTP401"
+    },
+    {
+      "key": "cqfewgeWpUPEHn499A1klxlWZqFaTrhH",
+      "status": "HTTP401"
+    },
+    {
+      "key": "fzjNotm3JHZJbEjnuC7hdeiZ0ofTNtU1",
+      "status": "HTTP401"
+    },
+    {
+      "key": "YvsfWbdVwaObppzjMjAre4ViNAla5mBL",
+      "status": "HTTP401"
+    },
+    {
+      "key": "tC1P0pS60zKuJH6YCb8PeNPGJEJ12CWk",
+      "status": "HTTP401"
+    },
+    {
+      "key": "ZL7vflvXXiru56V2z9GevpjjOh9CoFxo",
+      "status": "HTTP401"
+    }
+  ],
+  "novita": [
+    {
+      "key": "39d60e14-1027-45fd-8713-ee7ef6521038",
+      "status": "OK"
+    },
+    {
+      "key": "99eb40c6-7152-40c9-8a52-f23632ad33c9",
+      "status": "OK"
+    },
+    {
+      "key": "95d81859-3f80-411c-9709-afa83449dca5",
+      "status": "OK"
+    },
+    {
+      "key": "c00b18c6-0df2-4c94-8056-c8c0a4bb144c",
+      "status": "OK"
+    },
+    {
+      "key": "51fc0818-7bcb-4015-8648-878ed0a1773e",
+      "status": "OK"
+    },
+    {
+      "key": "793f2747-3754-401f-911e-19183ba64eca",
+      "status": "OK"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+2026-10-24 10:58:35,634 - INFO - [vertical] queimando música dinâmica...
+2026-10-24 10:59:02,571 - INFO - [vertical] gancho: ELE NÃO SABIA O SEGREDO
+2026-10-24 10:59:02,571 - INFO - [vertical] queimando legendas...
+2026-10-24 11:00:31,779 - INFO - [vertical] master: -20.07 LUFS -> -14
+2026-10-24 11:00:31,882 - INFO - [vertical] PRONTO: D:\recapd-ambientes\producao\workspace\anime\G1LPGCWrjDY_He_kidnapped_a_baby_out_of_curiosity__an\final_anime_short.mp4
+2026-10-24 11:00:32,370 - INFO - [auto|cleanup] Limpando arquivos temporários em D:\recapd-ambientes\producao\workspace\anime\G1LPGCWrjDY_He_kidnapped_a_baby_out_of_curiosity__an...
+2026-10-24 11:00:32,484 - INFO - [auto|cleanup] Limpeza concluída.
+2026-10-24 11:00:51,304 - INFO - [auto] nome extraído via LLM: 'He kidnapped a baby out of curiosity… and ended up' -> 'sem-obra-645442'
+[publish] alvo: D:\hipercool-materiais\animes recap\shorts\sem-obra-645442_cap1_20261024
+[publish] vídeo: D:\hipercool-materiais\anime\G1LPGCWrjDY_He_kidnapped_a_baby_out_of_curiosity__an\final_anime_short.mp4 (14.1 MB)
+[publish] probe: 32.6s @ 720x1280
+[seo] estilo=busca | ELE ADOTOU UM BEBÊ e se tornou o PAI MAIS FORTE e agora TODOS o temem 👑
+[publish] metadata: D:\hipercool-materiais\animes recap\shorts\sem-obra-645442_cap1_20261024\metadata.json
+[publish] vídeo copiado: D:\hipercool-materiais\animes recap\shorts\sem-obra-645442_cap1_20261024\video.mp4
+[publish] postar.json: D:\hipercool-materiais\animes recap\shorts\sem-obra-645442_cap1_20261024\postar.json
+[11:03:08]   capa IA: imagem pela reserva (flow/nano-banana-2.1)
+[2026-10-24T14:03:15Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:03:20Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 90698153), trocando combo...
+[2026-10-24T14:03:25Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 90698154), trocando combo...
+[2026-10-24T14:03:32Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 90698155), trocando combo...
+[2026-10-24T14:03:47Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:03:59Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:04:12Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:04:17Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 90698159), trocando combo...
+[2026-10-24T14:04:31Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:04:34Z]   ⏳ Proxy http://<USUARIO>:<SEGREDO_REMOVIDO>@p.we... resposta inválida, fallback direto...
+[2026-10-24T14:04:55Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[11:06:18]   capa IA: pose transformacao reprovada na checagem ({'letras': False, 'sangue': False, 'adultos': False, 'dividida': False, 'anatomia': False, 'figurantes': False})
+[11:08:38]   capa IA: imagem pela reserva (flow/nano-banana-2.1)
+[2026-10-24T14:08:51Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[11:09:50]   capa IA: pose transformacao reprovada na checagem ({'letras': False, 'sangue': False, 'adultos': False, 'dividida': False, 'anatomia': False, 'figurantes': False})
+[11:12:22]   capa IA: imagem pela reserva (flow/nano-banana-2.1)
+[2026-10-24T14:12:26Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 90698134), trocando combo...
+[2026-10-24T14:12:39Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[11:12:59]   capa IA: pose duelo_espadas reprovada na checagem ({'letras': False, 'sangue': False, 'adultos': False, 'dividida': False, 'anatomia': False, 'figurantes': False})
+[11:15:07]   capa IA: imagem pela reserva (flow/nano-banana-2.1)
+[2026-10-24T14:15:12Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 14), trocando combo...
+[2026-10-24T14:15:22Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 14659620), trocando combo...
+[2026-10-24T14:15:34Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 17), trocando combo...
+[2026-10-24T14:15:45Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 19), trocando combo...
+[2026-10-24T14:16:00Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:16:07Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 23), trocando combo...
+[2026-10-24T14:16:29Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:16:35Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 25297132), trocando combo...
+[2026-10-24T14:16:57Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 26538643), trocando combo...
+[2026-10-24T14:17:30Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[11:19:06]   capa IA: pose duelo_espadas reprovada na checagem ({'letras': False, 'sangue': False, 'adultos': False, 'dividida': False, 'anatomia': False, 'figurantes': False})
+[11:23:20]   capa IA: imagem pela reserva (flow/nano-banana-2.1)
+[2026-10-24T14:23:24Z]   ⏳ Gemini LLM HTTP 429 (model=gemini-3.8-flash, key 90698087), trocando combo...
+[11:24:38]   capa IA: pose confronto_boss reprovada na checagem ({'letras': False, 'sangue': False, 'adultos': False, 'dividida': False, 'anatomia': False, 'figurantes': False})
+[11:26:24]   capa IA: imagem pela reserva (flow/nano-banana-2.1)
+[2026-10-24T14:26:41Z]   ✗ Gemini LLM HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try
+[2026-10-24T14:28:42Z]   ✗ Gemini LLM curl error (http://nduqzpyq-rotate:3n43tqu...): Command '['curl', '-sS', '--max-time', '120', '-x', 'http://<USUARIO>:<SEGREDO_REMOVIDO>@p.webshare.io:80', '-H', 'Conte
+[11:29:25]   capa IA: pose confronto_boss reprovada na checagem ({'letras': False, 'sangue': False, 'adultos': False, 'dividida': False, 'anatomia': False, 'figurantes': False})
+[11:29:25]   capa IA: todas as tentativas reprovadas — sem capa
+[publish] capa (frame): D:\hipercool-materiais\animes recap\shorts\sem-obra-645442_cap1_20261024\capa.jpg
+
+============================================================
+TÍTULO:    ELE ADOTOU UM BEBÊ e se tornou o PAI MAIS FORTE e agora TODOS o temem 👑
+THUMB:     O PAI MAIS FORTE
+TAGS (28):  anime recap, resumo anime, anime completo, anime dublado, anime recap pt br, recap anime português, recap completo, resumo completo...
+DIR:       D:\hipercool-materiais\animes recap\shorts\sem-obra-645442_cap1_20261024
+============================================================
+2026-10-24 11:29:31,165 - INFO - [auto|short] publish OK — postar.json gerado
+2026-10-24 11:29:31,202 - INFO - [idiomas] 0/0 línguas: {}
+2026-10-24 11:29:31,203 - INFO - [auto|cleanup] Limpando arquivos temporários em D:\recapd-ambientes\producao\workspace\anime\G1LPGCWrjDY_He_kidnapped_a_baby_out_of_curiosity__an...
+2026-10-24 11:29:31,206 - INFO - [auto|cleanup] Limpeza concluída.
+2026-10-24 11:29:31,206 - INFO - [auto|short] PRONTO: D:\recapd-ambientes\producao\workspace\anime\G1LPGCWrjDY_He_kidnapped_a_baby_out_of_curiosity__an
+2026-10-24 11:29:36,530 - INFO - >>> SHORT — discover...
+2026-10-24 11:30:48,986 - INFO - [discover_canal] 1251 Shorts em https://www.youtube.com/@shortsadabr/shorts (1251 resumos sem parte)
+2026-10-24 11:30:49,009 - INFO - [auto] 5 candidatos short novos. Engine=local
+2026-10-24 11:30:49,011 - INFO - ===== Milhares De Pessoas Devolveram Isso Sem Saber Usar! 😳🐭 (18,000,000 views) =====
+2026-10-24 11:30:49,012 - INFO - [auto] legenda do YouTube pulada (23 falhas seguidas; testa de novo a cada 2 h) — vai pro Whisper
+2026-10-24 11:30:49,013 - INFO - [auto] baixando vídeo-fonte...
+2026-10-24 11:32:56,517 - INFO - [fetch] Whisper transcreveu (model=tiny, lang=pt, 516 chars)
+2026-10-24 11:32:56,526 - INFO - [fetch] tempos do Whisper viraram legenda_tempos.json (roteiro com tempo)
+2026-10-24 11:33:58,226 - INFO - [parceiro] marcas fixas achadas: [[288, 940, 440, 1034]] (candidatas: [[288, 940, 440, 1034]])
+2026-10-24 11:34:07,675 - INFO - [hardsub] legenda detectada: y_frac=0.730 h_frac=0.180
+2026-10-24 11:34:07,676 - INFO - [parceiro] legenda (visão): [0.72, 0.9199999999999999]
+2026-10-24 11:35:10,066 - INFO - [parceiro] canal novo coberto: 684 quadros -> source_reed.mp4 (ok) | tarja legenda | placa None
+2026-10-24 11:35:10,068 - INFO - [auto|parceiro] canal novo (auto): tarja=TODO MUNDO DEVOLVEU ISSO SEM SABER USAR | {'tarja': [908, 1189], 'placa': None, 'H': 1280} | nossa legenda em 0.6826
+2026-10-24 11:35:10,169 - INFO - [auto|short] Duração do original: 22.8s -> Alvo: 3 linhas.
+2026-10-24 11:35:10,351 - INFO - [auto|short] narrador escolhido pelo nicho: ivete_sangalo — {'nicho': 'esportes', 'encaixe': 3, 'usos_no_nicho': 1, 'usos': 2, 'bonus_views': 0, 'candidatos': 24}
+2026-10-24 11:35:12,302 - INFO - [script] roteiro com tempo: 3 frases, 0s..19s do original
+2026-10-24 11:35:14,393 - INFO - [auto|short] gancho de retorno: «Pois é, meu amor, o povo tava fazendo confusão todinha só porque não sabia usar a belezura da forma certa!» -> «Pois é, meu amor, o povo tava fazendo confusão todinha só porque não sabia usar a belezura da forma certa, e aí cê me pergunta, será que é possível que...»
+2026-10-24 11:35:14,394 - INFO - [auto|short] roteiro curto: 3 frases
+2026-10-24 11:35:15,970 - INFO - [auto|short] fonte VERTICAL (720x1280) — native.
+2026-10-24 11:35:15,973 - INFO - [auto|short] voz clonada: ivete_sangalo (francisca, config 1)
+2026-10-24 11:35:16,329 - INFO - ===== Disparando formato: short (vertical) =====
+2026-10-24 11:35:21,775 - INFO - [curva] impactos (llm): [2] de 3 frases
+2026-10-24 11:35:23,214 - INFO - [climas] (llm) {'engracado': 2, 'tensao': 1}
+[2026-10-24T14:35:23Z]   -> edge-tts direct voice=pt-BR-FranciscaNeural text='Minha gente, olha só que babado, tanta gente devolvendo um s'
+[2026-10-24T14:35:36Z]   [OK] wrote audio_0.wav (1339 KB)
+2026-10-24 11:35:36,756 - INFO - [clone v2] frase 0: engracado francisca +3% tom+0
+[2026-10-24T14:35:36Z]   -> edge-tts direct voice=pt-BR-FranciscaNeural text='Acontece que o problema não era o sabonete, era a mão da cri'
+[2026-10-24T14:35:39Z]   [OK] wrote audio_1.wav (1182 KB)
+2026-10-24 11:35:39,567 - INFO - [clone v2] frase 1: engracado francisca +9% tom+0
+[2026-10-24T14:35:39Z]   -> edge-tts direct voice=pt-BR-FranciscaNeural text='Pois é, meu amor, o povo tava fazendo confusão todinha só po'
+[2026-10-24T14:35:42Z]   [OK] wrote audio_2.wav (1988 KB)
+2026-10-24 11:35:42,999 - INFO - [clone v2] frase 2: tensao francisca -15% tom-1 fim-0.50st

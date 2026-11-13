@@ -1,0 +1,22 @@
+{
+ "_leia": "verificadores Gemini do vídeo de produto (cópia do lapidar do D:\\claude-code-video, 26/10). nota < reprovar_abaixo ou grave de roteiro_marca = vídeo vai para _revisar; o resto entra na fila e os problemas viram aprendizado (logs\\produto_lapidar.jsonl).",
+ "ligado": true,
+ "gateway": "http://157.173.207.22:20133",
+ "chave": "<SEGREDO_REMOVIDO>",
+ "modelo": "agy/gemini-3.8-flash-high",
+ "reprovar_abaixo": 4.5,
+ "editor": {
+  "ligado": true,
+  "rodadas": 4,
+  "alvo": 9,
+  "por_rodada": 1,
+  "modelo_reserva": "agy/gemini-3.8-flash-high",
+  "modelo": "argon-gemini",
+  "argon_prazo_min": 30,
+  "modelo_reserva2": "gemini/gemini-3.5-flash",
+  "gemini_prazo_min": 35
+ },
+ "_editor": "26/10: depois do molde, o editor Gemini refaz em Remotion (produto\\editor.py) + corretor até 'rodadas'; fica a versão de maior nota. por_rodada = quantos vídeos por execução do diário passam pelo editor (cada um leva ~1–3 h).",
+ "_argon": "27/10 13:00 (dono: 'mude o Gemini 3.8 pelo Argon e meça'): editor/corretor = argon-gemini; roteirista = gemini-4-argon (agentes.MODELO_ROTEIRO). Júri e revisor de fatos seguem no Gemini 3.8 (régua). Voltar: config\\produto_lapidar.antes_argon.json",
+ "argon_prazo_roteiro_s": 180
+}

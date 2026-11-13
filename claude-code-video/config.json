@@ -1,0 +1,123 @@
+{
+ "_leia": "pontos = % que sobra numa conta Claude Pro (a menor entre janela de 5 h e semanal); livre = soma das contas. Custos são estimativa inicial e são recalibrados pelo log estado/consumo.jsonl.",
+ "ligado": true,
+ "modo": "editor",
+ "_modo": "editor = o Claude Code escreve a edição em Remotion e confere quadros (25/10, pedido do dono); molde = antigo (Claude só escolhe efeito)",
+ "reserva_dono": 40,
+ "margem_certeza": 1.5,
+ "custo_video_zero": 45,
+ "custo_adicional": 4,
+ "custo_so_roteiro": 4,
+ "roteiro_reserva": "argon-gemini",
+ "modelo": "agy/gemini-3.8-flash-high",
+ "modelos_etapa": {
+  "roteiro": "argon-gemini",
+  "plano": null,
+  "revisao": null,
+  "editar": "hx-maos-gemini"
+ },
+ "lapidar": {
+  "ligado": true,
+  "modelo": "agy/gemini-3.8-flash-high",
+  "alvo": 9,
+  "rodadas": 3,
+  "prazo_correcao_s": 2700,
+  "modelo_corretor": "hx-maos-gemini"
+ },
+ "_lapidar": "depois do render: 4 verificadores Gemini em paralelo (legibilidade, movimento, roteiro_marca, diretor) dão nota; corretor Gemini conserta e re-renderiza até média >= alvo sem grave, ou até 'rodadas'; fica a melhor versão. -high = raciocínio no máximo",
+ "_modelos_etapa": "null = o modelo padrão acima; senão um modelo do OmniRoute (ex.: antigravity/gemini-3.8-flash-tiered). Escolher pelo estado/avaliacao_etapas.json",
+ "gateway": "http://157.173.207.22:20133",
+ "chave": "<SEGREDO_REMOVIDO>",
+ "videos_por_dia": 10,
+ "solar_por_conta_dia": 2,
+ "_prioridade": "01/11 (dona): solar primeiro (solar_por_conta_dia cada), depois produto que não teve vídeo no dia, depois entretenimento (gerar.escolher_proximo). videos_por_dia 6 -> 10 para sobrar vaga aos produtos.",
+ "contas": [
+  "advance_novoestrela",
+  "globosolarenergiag",
+  "msenergycap",
+  "futebolcom.ia2",
+  "inovarecom.ia",
+  "sintetizerisada",
+  "disparoemmassa.ia",
+  "followupia.ia",
+  "vpsblindada.ia",
+  "fabricademarketing.ia"
+ ],
+ "ram_livre_min_gb": 1.5,
+ "entretenimento": {
+  "contas": [
+   "fakenews.ia4",
+   "canalhistoriacomia",
+   "recenas.ia"
+  ]
+ },
+ "_entretenimento": "26/10 (dono): vídeos de entretenimento nos temas dos canais, alternando com os anúncios. Contas de tema do marcas_instagram.json (curiosidades, histórias e mistérios, filmes e séries). Manual remotion/EDITOR_ENTRETENIMENTO.md, júri VERIFICADORES_ENTRETENIMENTO, caderno APRENDIDO_ENTRETENIMENTO.md",
+ "mandar_telegram": false,
+ "_mandar_telegram": "26/10 19h: PROMPT_LINHAS manda NÃO avisar por vídeo; o dono vê a lista no chat e a linha PRODUTOS posta os que passam na trava",
+ "referencias": {"ligado": true},
+ "_referencias": "28/10: o editor estuda um vídeo que deu certo (referencia.py adicionar <mp4|link> --tipo ... --analisar); sem referência analisada do tipo, segue como antes",
+ "elencos_anuncio": [
+  {"nome": "turma do Chaves", "vozes": {"Chaves": "<SEGREDO_REMOVIDO>", "Seu Madruga": "seu_madruga",
+    "Professor Girafales": "professor_girafales", "Quico": "quico", "Chiquinha": "chiquinha"},
+   "jeito": "comédia de vila: Seu Madruga preguiçoso fugindo do trabalho e do aluguel, Chaves ingênuo e atrapalhado, Quico mimado e exibido, Chiquinha esperta e chantagista, Girafales formal que perde a paciência"},
+  {"nome": "Chapolin", "vozes": {"Chapolin": "chapolin_colorado", "Chaves": "<SEGREDO_REMOVIDO>"},
+   "jeito": "herói atrapalhado que chega para salvar o dia ('não contavam com a minha astúcia')"},
+  {"nome": "Fatos Desconhecidos", "vozes": {"Narrador": "fatos_desconhecidos"},
+   "jeito": "narrador de curiosidade que prende: revela o detalhe que ninguém sabe"},
+  {"nome": "Cid Moreira", "vozes": {"Narrador": "cid_moreira"}, "jeito": "voz solene de telejornal, notícia importante"},
+  {"nome": "Silvio e Faustão", "vozes": {"Silvio Santos": "silvio_santos", "Faustão": "faustao"},
+   "jeito": "apresentadores de auditório: animação, bordão, prêmio e pressa"},
+  {"nome": "Galvão Bueno", "vozes": {"Galvão": "galvao_bueno"}, "jeito": "narração de gol: o resultado vira final de Copa"},
+  {"nome": "Capitão Nascimento", "vozes": {"Capitão Nascimento": "capitao_nascimento"},
+   "jeito": "bronca de BOPE em quem perde cliente/tempo: 'pede pra sair'"},
+  {"nome": "Pica-Pau", "vozes": {"Pica-Pau": "pica_pau"},
+   "jeito": "anarquia e deboche: apronta com quem perde tempo/dinheiro e dá a risada no fim (dona 28/10: boa pra comercial adulto)"},
+  {"nome": "João Grilo", "vozes": {"João Grilo": "joao_grilo"}, "jeito": "malandro do sertão que dá um jeito em tudo"}
+ ],
+ "_elencos_anuncio": "28/10 (dona): anúncio com voz clonada de quem ADULTO conhece (quem compra); nada de personagem de jogo/anime/influencer jovem. Rodízio pelo menos usado. Bordões gravados (não clonados) em hipercool-materiais\\assets\\bordoes (bordoes.py). [] = volta à voz neural",
+ "vivo": true,
+ "_vivo": "28/10: camadas.py prepara cada foto (profundidade, camadas, recorte, fundo limpo) para lib/vivo.tsx",
+ "prazo_editor_s": 5400,
+ "prazo_roteiro_s": 600,
+ "cadeia_modelos": [
+  {
+   "modelo": "argon-gemini",
+   "prazos": {
+    "roteiro": 300,
+    "roteiro_entretenimento": 300,
+    "editar": 2700,
+    "corrigir": 1500,
+    "consertar_render": 600,
+    "aprender": 300
+   },
+   "padrao": 600,
+   "tambem": [
+    "hx-maos-gemini",
+    "gemini-4-argon"
+   ]
+  },
+  {
+   "modelo": "agy/gemini-3.8-flash-high",
+   "prazos": {
+    "roteiro": 300,
+    "roteiro_entretenimento": 300,
+    "editar": 3600,
+    "corrigir": 1800,
+    "consertar_render": 600,
+    "aprender": 300,
+    "verificar_legibilidade": 600,
+    "verificar_movimento": 600,
+    "verificar_roteiro_marca": 600,
+    "verificar_diretor": 600,
+    "verificar_historia": 600,
+    "verificar_retencao": 600,
+    "verificar_censura": 600,
+    "referencia": 1800
+   },
+   "padrao": 600
+  },
+  {
+   "modelo": "gemini/gemini-3.5-flash"
+  }
+ ]
+}

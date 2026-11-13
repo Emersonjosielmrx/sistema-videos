@@ -1,0 +1,1185 @@
+{
+  "descricao": "Blocklist de copyright para o modo seguro do YouTube. Trilhas que provavelmente geram Content ID / reivindicacao. Naruto e Re:Zero FORAM EXCLUIDAS (usuario confirmou uso livre). Efeitos < 8s nao bloqueiam.",
+  "gerado_de": "D:\\hipercool-materiais\\assets\\trilhas",
+  "regra_isencao": [
+    "Naruto e Re:Zero: sempre liberadas (nao entram aqui).",
+    "Arquivos em assets/sfx_prioridade/: sempre liberados (ja vieram de quem usa).",
+    "Arquivos em _curadoria/_aprovados/: sempre liberados (curados e aprovados).",
+    "tipo=efeito_curto (<8s): nao bloqueia (muito curto pra reivindicacao)."
+  ],
+  "total_bloqueados": 165,
+  "total_efeitos_curtos_liberados": 1,
+  "isentos_naruto_rezero": [
+    "Naruto - Konohamaru_s Theme (128 kbps).mp3",
+    "Naruto - Naruto_s Daily Life.mp3",
+    "Naruto Music_ Loneliness (128 kbps).mp3",
+    "Naruto OST 2 - Afternoon of Konoha (128 kbps).mp3",
+    "Naruto OST 2 - Hinata vs Neji (128 kbps).mp3",
+    "Naruto Theme - The Raising Fighting Spirit.mp3",
+    "rezero_creepy_theme.mp3"
+  ],
+  "blocklist": [
+    {
+      "arquivo": "1_2_3_4 (Originally Performed By Method Man)(MP3_320K).mp3",
+      "motivo": "nome: snoop dog|post malone|bob marley|mick jagger|teriyaki|tokyo drift|method man",
+      "duracao_seg": 174.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "A Forest Hike - Kirby Triple Deluxe Soundtrack.mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 117.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "AUTOMOTIVO SUPER MARIO WORLD 2 (INSTRUMENTAL) (128 kbps).mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 142.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Angst.mp3",
+      "motivo": "AUDIO/FP: Myuu (artista) - possivel monetizado",
+      "duracao_seg": 100.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Animal Crossing Isabelle Singing HD.mp3",
+      "motivo": "nome: animal crossing|isabelle",
+      "duracao_seg": 98.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "B.J.Thomas - Raindrops Keep Fallin_ On My Head.mp3",
+      "motivo": "nome: b\\.j\\.?thomas|raindrops keep",
+      "duracao_seg": 179.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Baby (Netflix) - Bad Choices.mp3",
+      "motivo": "nome: baby \\(netflix\\)|netflix",
+      "duracao_seg": 136.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Battle! Rival Gladion - Pokemon Sun & Moon Music Extended.mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 630.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Battle! VS Wild Pokémon (Pokémon Omega Ruby & Alpha Sapphire OST).mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 103.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "BlazBlue_ Cross Tag Battle OST - Night Walker (Linne_s Theme).mp3",
+      "motivo": "nome: blazblue",
+      "duracao_seg": 300.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Bully - Soundtrack Main Theme(MP3_320K).mp3",
+      "motivo": "nome: bully",
+      "duracao_seg": 228.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Bully - Walk Theme - [Music] (HD)(MP3_320K).mp3",
+      "motivo": "nome: bully",
+      "duracao_seg": 285.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "C418 - Subwoofer Lullaby - Minecraft Volume Alpha (128 kbps).mp3",
+      "motivo": "nome: minecraft|c418",
+      "duracao_seg": 208.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "C418 - Wet Hands - Minecraft Volume Alpha (128 kbps).mp3",
+      "motivo": "nome: minecraft|c418",
+      "duracao_seg": 90.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Chespirito - Winky Dink.mp3",
+      "motivo": "nome: chespirito|winky dink",
+      "duracao_seg": 95.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Chris Rae - Liquid Latin.mp3",
+      "motivo": "nome: chris rae|chris rea",
+      "duracao_seg": 187.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Club Penguin - Pizza Parlor Theme (Charlie_s Here) [FULL High Quality].mp3",
+      "motivo": "nome: club penguin",
+      "duracao_seg": 167.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Coda- Tires On Fire.mp3",
+      "motivo": "AUDIO/FP: nome: banda comercial",
+      "duracao_seg": 126.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Crash Bandicoot 3 - Warped - Theme.mp3",
+      "motivo": "nome: crash bandicoot|twinsanity",
+      "duracao_seg": 172.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Crash Twinsanity Soundtrack_ N.Sanity Island(MP3_320K).mp3",
+      "motivo": "nome: crash bandicoot|twinsanity",
+      "duracao_seg": 165.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Cxdy _ Hollow Bells(MP3_320K).mp3",
+      "motivo": "AUDIO/FP: Cxdy - produtor trap comercial",
+      "duracao_seg": 144.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "DELTARUNE - BAD GUYS (Susie x Lancer battle) Remix [Kamex].mp3",
+      "motivo": "nome: deltarune",
+      "duracao_seg": 246.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "DOOM OST_ E1M1-At Doom_s Gate HELL YEAH!!!!!.mp3",
+      "motivo": "AUDIO/FP: DOOM OST (id Software)",
+      "duracao_seg": 100.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Deltarune Chapter 2 OST_ 07 - A Simple Diversion.mp3",
+      "motivo": "nome: deltarune",
+      "duracao_seg": 29.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Deltarune OST_ 10 - Rude Buster.mp3",
+      "motivo": "nome: deltarune",
+      "duracao_seg": 75.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Despicable Me (Soundtrack) - Door Bell Rings(MP3_320K).mp3",
+      "motivo": "nome: despicable me",
+      "duracao_seg": 22.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Despicable Me (Soundtrack) - Happy Gru(MP3_320K).mp3",
+      "motivo": "nome: despicable me",
+      "duracao_seg": 42.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Despicable Me (Soundtrack) - Meet The Girls (Reprise)(MP3_320K).mp3",
+      "motivo": "nome: despicable me",
+      "duracao_seg": 28.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Despicable Me Theme - Movie version - Instrumental - No ads(MP3_320K).mp3",
+      "motivo": "nome: despicable me",
+      "duracao_seg": 79.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Dragon ball Z musica de fundo 21 (128 kbps).mp3",
+      "motivo": "nome: dragon ?ball",
+      "duracao_seg": 71.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Dragon ball Z musica de fundo 7 (128 kbps).mp3",
+      "motivo": "nome: dragon ?ball",
+      "duracao_seg": 272.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Drop It Like Its Hot Instrumental -Snoop Dog-(MP3_320K).mp3",
+      "motivo": "nome: snoop dog|post malone|bob marley|mick jagger|teriyaki|tokyo drift|method man",
+      "duracao_seg": 188.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Dustystaytrue - Never Change (Official Music Video).mp3",
+      "motivo": "nome: dustystaytrue",
+      "duracao_seg": 160.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "FNAF FUNK (Funk Remix) (128 kbps).mp3",
+      "motivo": "nome: \\bfnaf\\b|security breach",
+      "duracao_seg": 138.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "FNAF_ Security Breach OST - DJ Music Man Boss Theme (clean + reverb).mp3",
+      "motivo": "nome: \\bfnaf\\b|security breach",
+      "duracao_seg": 207.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Fail - Titanic en flauta  Titanic flute fail.mp3",
+      "motivo": "nome: titanic",
+      "duracao_seg": 172.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Flower Garden - Yoshi_s Island.mp3",
+      "motivo": "nome: yoshi",
+      "duracao_seg": 174.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Funk da deep web (Original).mp3",
+      "motivo": "nome: automotivo|funk d[ao]|funk das|fnaf funk|winx",
+      "duracao_seg": 46.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Funk das Winx.mp3",
+      "motivo": "nome: automotivo|funk d[ao]|funk das|fnaf funk|winx",
+      "duracao_seg": 77.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "GTA San Andreas Opening Intro(MP3_320K).mp3",
+      "motivo": "nome: \\bgta\\b",
+      "duracao_seg": 104.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "GTA San Andreas Theme⎪Fingerstyle guitar cover(MP3_320K).mp3",
+      "motivo": "nome: \\bgta\\b",
+      "duracao_seg": 142.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Ginga Force OST - Bust a Move! [BOSS].mp3",
+      "motivo": "nome: ginga force",
+      "duracao_seg": 335.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Goblins from Mars - Cold Blooded Love (ft. Krista Marina).mp3",
+      "motivo": "nome: goblins from mars",
+      "duracao_seg": 181.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Gourmet Race (Beta Mix) - Kirby Super Star.mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 75.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Grand Theft Auto IV Theme Song _[best quality]_(MP3_320K).mp3",
+      "motivo": "nome: grand theft",
+      "duracao_seg": 171.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Grandpa_s House - The Legend of Zelda_ The Wind Waker.mp3",
+      "motivo": "nome: zelda",
+      "duracao_seg": 57.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "HDBeenDope - BYRD (Official Music Video).mp3",
+      "motivo": "nome: hdbeendope",
+      "duracao_seg": 128.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Honeycomb Highway - Sonic Lost World [OST].mp3",
+      "motivo": "nome: \\bsonic\\b",
+      "duracao_seg": 178.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Hot Action Cop - Going Down On It(MP3_320K).mp3",
+      "motivo": "nome: hot action cop",
+      "duracao_seg": 290.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "In The Zipper (Nella Cerniera) - Bruno Theme - JoJo_s Bizarre Adventure OST.mp3",
+      "motivo": "nome: jojo|bizarre|giorno|narancia|stardust|dio\\b",
+      "duracao_seg": 120.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Ivan B - Make It Ourselves (ft. Hendersin) (Prod. Tido Vegas).mp3",
+      "motivo": "AUDIO/FP: Ivan B (rapper)",
+      "duracao_seg": 198.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "JJBA - Dark Rebirth (Theme of DIO).mp3",
+      "motivo": "nome: jojo|bizarre|giorno|narancia|stardust|dio\\b",
+      "duracao_seg": 145.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "JoJo_s Bizarre Adventure Golden Wind- Narancia theme『Aereo da caccia』.mp3",
+      "motivo": "nome: jojo|bizarre|giorno|narancia|stardust|dio\\b",
+      "duracao_seg": 123.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "JoJo_s Bizarre Adventure_ Golden Wind OST - Giorno_s Theme『il vento d_oro』.mp3",
+      "motivo": "nome: jojo|bizarre|giorno|narancia|stardust|dio\\b",
+      "duracao_seg": 337.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Josuke theme but it_s only the good part.mp3",
+      "motivo": "AUDIO/FP: JoJo P4 'Great Days' (Warner JP)",
+      "duracao_seg": 96.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Karakuri Spirits (MEIKAI ARRANGE).mp3",
+      "motivo": "AUDIO/FP: arranjo OST jogo/doujin",
+      "duracao_seg": 168.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "King Dedede_s Theme - Kirby_s Return to Dream Land.mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 110.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Kirby & The Amazing Mirror - Rainbow Route (Area 1).mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 83.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Lost Woods - The Legend of Zelda_ Ocarina Of Time (128 kbps).mp3",
+      "motivo": "nome: zelda",
+      "duracao_seg": 77.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "METAL SONIC REMIX - Sonic CD_Mania (Stardust Speedway Bad Future JP).mp3",
+      "motivo": "nome: \\bsonic\\b",
+      "duracao_seg": 189.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Marcelo D2- Desabafo INSTRUMENTAL_____[Official] Download Link_(MP3_320K).mp3",
+      "motivo": "nome: marcelo d2|seu jorge|sikeira|siqueira",
+      "duracao_seg": 202.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Married Life.mp3",
+      "motivo": "AUDIO/FP: Up / Michael Giacchino (OST filme)",
+      "duracao_seg": 250.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Master Reset - Music Theme _ Experiência Resident Evil 4 (128 kbps).mp3",
+      "motivo": "nome: resident evil",
+      "duracao_seg": 241.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Mega Man X - Spark Mandrill (No Console Limitations).mp3",
+      "motivo": "nome: mega ?man",
+      "duracao_seg": 312.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Megaman X7 - Decisive Battle - vs Boss.mp3",
+      "motivo": "nome: mega ?man",
+      "duracao_seg": 108.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Meta Knight_s Revenge - Kirby Super Star.mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 127.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Metal - Kirby Air Ride.mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 128.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Metallic Madness Zone Act 2 - Sonic Mania [OST].mp3",
+      "motivo": "nome: \\bsonic\\b",
+      "duracao_seg": 166.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 DUB Edition OST - Loading Song _09(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 89.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 DUB Edition Soundtrack - Loading Music _1(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 39.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 DUB Edition Soundtrack 11(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 219.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 DUB Edition Soundtrack Game Theme _1(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 121.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 DUB Edition Soundtrack Game Theme _2(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 124.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 DUB Edition Soundtrack Game Theme _3(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 123.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 3 Loading Theme 16(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 303.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Midnight Club 5 - Menu Soundtrack(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 174.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "MÚSICA QUE O PIUZINHO USA NOS VÍDEOS! (128 kbps).mp3",
+      "motivo": "AUDIO/FP: FP: Raptile - Fight Back",
+      "duracao_seg": 196.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Música tema do Pai de Família.mp3",
+      "motivo": "nome: pai de fam[ií]lia|family guy",
+      "duracao_seg": 258.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Not The King. 👑 - Ice Tea (320 kbps).mp3",
+      "motivo": "AUDIO/FP: lançamento comercial",
+      "duracao_seg": 133.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "OST Stardust Crusaders [World] Track 19 - Travelers Who Rest.mp3",
+      "motivo": "nome: jojo|bizarre|giorno|narancia|stardust|dio\\b",
+      "duracao_seg": 61.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Overdrive.mp3",
+      "motivo": "AUDIO/FP: Taku Iwasaki (OST anime)",
+      "duracao_seg": 226.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Overworld Theme - New Super Mario Bros.mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 181.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Passion of the Tridental Mages_ [Light MetaS] (Morpho Medley #2 - Kirby Star Allies).mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 364.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Plants vs Zombies Soundtrack. [Day Stage](MP3_320K).mp3",
+      "motivo": "nome: plants vs",
+      "duracao_seg": 139.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Plants vs Zombies Soundtrack. [Mini Games].mp3",
+      "motivo": "nome: plants vs",
+      "duracao_seg": 106.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Pokémon Omega Ruby & Alpha Sapphire - Rival Battle Music (HQ).mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 107.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Pokémon Sun & Moon - Team Skull Grunt Battle Music (HQ).mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 300.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Pokémon Sword  Shield  Bede Battle Music HiTech Remix.mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 188.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Pokémon Sword & Shield - Wild Pokémon Music (HQ).mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 300.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Post Malone - Insane (Instrumental)(MP3_320K).mp3",
+      "motivo": "nome: snoop dog|post malone|bob marley|mick jagger|teriyaki|tokyo drift|method man",
+      "duracao_seg": 169.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Ratatouille Soundtrack-1 Le Festin (Camille)(MP3_320K).mp3",
+      "motivo": "nome: ratatouille",
+      "duracao_seg": 170.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Real Big (Instrumental) _ Games _ Midnight Club 3 DUB Edition(MP3_320K).mp3",
+      "motivo": "nome: midnight club",
+      "duracao_seg": 217.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Red Dead Redemption 2 Official Soundtrack - House Building Theme _ HD (With Visualizer) (128 kbps).mp3",
+      "motivo": "nome: red dead",
+      "duracao_seg": 220.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Ren and Stimpy - Spindlelegs.mp3",
+      "motivo": "nome: ren and stimpy",
+      "duracao_seg": 145.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Ren and Stimpy - Tom Fool.mp3",
+      "motivo": "nome: ren and stimpy",
+      "duracao_seg": 150.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Resident Evil 2_ Save Room (128 kbps).mp3",
+      "motivo": "nome: resident evil",
+      "duracao_seg": 114.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Resident Evil 3 Save Room Theme (128 kbps).mp3",
+      "motivo": "nome: resident evil",
+      "duracao_seg": 156.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Resident Evil 4 Remake - The Drive (128 kbps).mp3",
+      "motivo": "nome: resident evil",
+      "duracao_seg": 288.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "STANDING HERE, I REALIZE but in HD and Extended.mp3",
+      "motivo": "nome: standing here.*realize",
+      "duracao_seg": 63.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Sad Emotional Piano Music - Gaming Background Music (HD).mp3",
+      "motivo": "AUDIO/FP: FP: Pia Mia - Touch",
+      "duracao_seg": 207.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Shadow Strike - Kirby Triple Deluxe.mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 82.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Sleeplessness - The Brothers Record (320 kbps).mp3",
+      "motivo": "AUDIO/FP: The Brothers Record (artista lofi)",
+      "duracao_seg": 434.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Snoop Dogg _ The Doors - Riders On The Storm (Fredwreck Remix) (NFS Underground 2 OST) [HQ](MP3_320K).mp3",
+      "motivo": "nome: snoop dog|post malone|bob marley|mick jagger|teriyaki|tokyo drift|method man",
+      "duracao_seg": 372.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Sonic  Green Hill Zone  Ear rape edition.mp3",
+      "motivo": "nome: \\bsonic\\b",
+      "duracao_seg": 112.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Sonic Mania - Green Hill Zone Act 2 (Deep _ Electro House Remix).mp3",
+      "motivo": "nome: \\bsonic\\b",
+      "duracao_seg": 198.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Sonic Mania OST - Egg Reverie Boss Battle.mp3",
+      "motivo": "nome: \\bsonic\\b",
+      "duracao_seg": 225.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Spanish Flea (Herb Albert) - Comedy Background.mp3",
+      "motivo": "AUDIO/FP: Herb Alpert - Spanish Flea (1965)",
+      "duracao_seg": 126.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "SpongeBob -Tomfoolery.mp3",
+      "motivo": "nome: spongebob",
+      "duracao_seg": 126.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "SpongeBob Music_ Merry as a Grig.mp3",
+      "motivo": "nome: spongebob",
+      "duracao_seg": 150.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Steven Universe(MP3_320K).mp3",
+      "motivo": "nome: steven universe",
+      "duracao_seg": 134.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Sudden Changes Sans Song [OverSave-Tale].mp3",
+      "motivo": "AUDIO/FP: Undertale (Toby Fox) remix",
+      "duracao_seg": 118.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Super Mario 64 DS Music - Metal Wario.mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 152.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Super Mario World (OST) - 3. Map 2 (Overworld).mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 44.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Super Mario World Music - Map 4_ Star Road (128 kbps).mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 30.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Super Street Fighter II OST Ken Theme (128 kbps).mp3",
+      "motivo": "nome: street fighter",
+      "duracao_seg": 197.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "TOUCHGRIND BMX Official Soundtrack [HQ]   Download(MP3_320K).mp3",
+      "motivo": "nome: touchgrind",
+      "duracao_seg": 65.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "The Last Of us - Theme song (128 kbps).mp3",
+      "motivo": "nome: last of us",
+      "duracao_seg": 190.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "The Show - Castle Crashers.mp3",
+      "motivo": "nome: castle crashers",
+      "duracao_seg": 171.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "The Walking Dead Original Soundtrack  - Theme Song (128 kbps).mp3",
+      "motivo": "nome: walking dead",
+      "duracao_seg": 88.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Third Eye(MP3_320K).mp3",
+      "motivo": "AUDIO/FP: FP: Scott Gaddy - Third Eye",
+      "duracao_seg": 101.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Title Screen - Mario Kart DS [OST].mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 150.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Tokyo Drift - Teriyaki Boyz.mp3",
+      "motivo": "nome: snoop dog|post malone|bob marley|mick jagger|teriyaki|tokyo drift|method man",
+      "duracao_seg": 257.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story - Buzz Revealed(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 67.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story - You_ve Got a Friend in Me (Instrumental)(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 126.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story - You_ve Got a Friend in Me(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 125.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story 2 (Soundtrack) - The Cleaner(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 110.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story 3 (Soundtrack) - Escape _(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 58.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story 3 (Soundtrack) - The Witch(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 92.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Toy Story soundtrack - 07. Buzz(MP3_320K).mp3",
+      "motivo": "nome: toy story",
+      "duracao_seg": 100.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Track 15 - Vlad To The Bone (Final Boss Phase 2) - Skeleton Boomerang_ Vampire Hunter Mode.mp3",
+      "motivo": "AUDIO/FP: OST jogo Skeleton Boomerang",
+      "duracao_seg": 201.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "UP OST - 02 - We_re in the Club Now(MP3_320K).mp3",
+      "motivo": "nome: \\bup ost\\b|up with end|we_re in the club",
+      "duracao_seg": 44.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "UP OST - 22 - Up with End Credits(MP3_320K).mp3",
+      "motivo": "nome: \\bup ost\\b|up with end|we_re in the club",
+      "duracao_seg": 459.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale - Megalovania.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 313.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale - Papyrus Theme Song - Bonetrousle.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 237.2,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale - VS Mad Mew Mew (Epic Orchestral Cover).mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 146.9,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 009 - Enemy Approaching.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 56.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 010 - Ghost Fight.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 56.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 022 - Snowdin Town.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 76.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 053 - Stronger Monsters.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 63.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 068 - Death by Glamour.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 134.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 072 - Song That Might Play When You Fight Sans.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 62.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale OST_ 085 - Fallen Down (Reprise) (128 kbps).mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 150.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale Omega Flowey Finale Theme.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 196.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale Ost_ 089 - SAVE the World.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 113.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale Ost_ 096 - Last Goodbye.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 135.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Undertale Sound Effect - Taking Damage.mp3",
+      "motivo": "nome: undertale",
+      "duracao_seg": 1.4,
+      "tipo": "efeito_curto",
+      "bloquear": false
+    },
+    {
+      "arquivo": "Vs HoOh Remix Pokemon HGSS Kamex.mp3",
+      "motivo": "nome: pok[eé]mon",
+      "duracao_seg": 208.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Y2mate.mx - Creative Exercise - Mario Paint (128 kbps).mp3",
+      "motivo": "nome: \\bmario\\b",
+      "duracao_seg": 119.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Y2mate.mx - Kirby dream land theme song (128 kbps).mp3",
+      "motivo": "nome: kirby",
+      "duracao_seg": 157.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Y2mate.mx - Plants vs. Zombies (Main Theme) (128 kbps).mp3",
+      "motivo": "nome: plants vs",
+      "duracao_seg": 87.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "[1000 Subs Special][1_3] - Stardust Crusader [Twix_s Remix V2].mp3",
+      "motivo": "nome: jojo|bizarre|giorno|narancia|stardust|dio\\b",
+      "duracao_seg": 255.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "[Official] Celeste Original Soundtrack - 02 - First Steps (320 kbps).mp3",
+      "motivo": "nome: celeste",
+      "duracao_seg": 218.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "away - minecraft lofi _ extended (320 kbps).mp3",
+      "motivo": "nome: minecraft|c418",
+      "duracao_seg": 266.5,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "dragon ball music.mp3",
+      "motivo": "nome: dragon ?ball",
+      "duracao_seg": 111.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "hxh_returned_theme.mp3",
+      "motivo": "AUDIO/FP: FP: ATLXS - Passo Bem Solto (funk/phonk comercial)",
+      "duracao_seg": 116.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "jungle_survival_theme.mp3",
+      "motivo": "AUDIO/FP: The Last of Us main theme (G. Santaolalla)",
+      "duracao_seg": 154.1,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "meruem_sad_theme.mp3",
+      "motivo": "nome: meruem",
+      "duracao_seg": 223.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "musica CPF cancelado  sikeira junior  !!!.mp3",
+      "motivo": "nome: marcelo d2|seu jorge|sikeira|siqueira",
+      "duracao_seg": 153.8,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "neutral_chill.mp3",
+      "motivo": "AUDIO/FP: Naruto OST - Hinata vs Neji",
+      "duracao_seg": 193.7,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "sad_emotional.mp3",
+      "motivo": "AUDIO/FP: Naruto OST - Sadness and Sorrow (Toshio Masuda)",
+      "duracao_seg": 160.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "sudden change sans theme (remix by Kaeny).mp3",
+      "motivo": "AUDIO/FP: Undertale (Toby Fox) remix",
+      "duracao_seg": 168.4,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "tense_dramatic.mp3",
+      "motivo": "AUDIO/FP: Higurashi OST",
+      "duracao_seg": 101.3,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "toke-velozes-furioso-direto-mp3cut.mp3",
+      "motivo": "nome: velozes|furioso",
+      "duracao_seg": 15.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "yt1s.com - What So Not  Touched Slumberjack Edit.mp3",
+      "motivo": "nome: what so not|slumberjack",
+      "duracao_seg": 219.0,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "砕月 - We Are Japanese Goblin (Instrumental).mp3",
+      "motivo": "nome: japanese goblin|we are japanese",
+      "duracao_seg": 244.6,
+      "tipo": "trilha",
+      "bloquear": true
+    },
+    {
+      "arquivo": "Ｈｅｎｋｋｉ - Ｗｏａｈ．．．(Crash Bandicoot theme Lo-FI remix).mp3",
+      "motivo": "nome: crash bandicoot|twinsanity",
+      "duracao_seg": 160.9,
+      "tipo": "trilha",
+      "bloquear": true
+    }
+  ]
+}

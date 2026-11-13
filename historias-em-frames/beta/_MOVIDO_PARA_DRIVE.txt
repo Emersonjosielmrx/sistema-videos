@@ -1,0 +1,8 @@
+ITENS MOVIDOS PARA O GOOGLE DRIVE (manhwa-drive)
+2026-10-25: pasta bin_bkp_20261022 (backup de codigo, ~3.5 MB) -> manhwa-drive:arquivo_codigo_20261025/historias-em-frames/beta/bin_bkp_20261022
+Recuperar: D:\tools\rclone.exe copy "manhwa-drive:arquivo_codigo_20261025/historias-em-frames/beta/bin_bkp_20261022" "D:\historias-em-frames$p\bin_bkp_20261022" --transfers 8 --progress
+
+ITENS MOVIDOS PARA O GOOGLE DRIVE (manhwa-drive)
+2026-10-25: pasta bin_bkp_20261022 (backup de codigo, ~3.5 MB) -> manhwa-drive:arquivo_codigo_20261025/historias-em-frames/beta/bin_bkp_20261022
+Recuperar: D:/tools/rclone.exe copy "manhwa-drive:arquivo_codigo_20261025/historias-em-frames/beta/bin_bkp_20261022" "D:/historias-em-frames/beta/bin_bkp_20261022" --transfers 8 --progress
+

@@ -1,0 +1,18 @@
+Narrador (voz clonada): narrador_chris
+Voz base: edge Francisca
+Config 2 (timbre forte, como as amostras aprovadas): index_rate 0,80, protect 0,33, volume_envelope 0,80 em todas as frases
+Canal: novo_esportenoturno  |  título: ELE NUNCA ATENDIA A PRÓPRIA MÃE e agora PERDEU TUDO com essa história
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-a06744_cap1_20261028\video.mp4
+
+frase 0: francisca +6% | clima normal | tom +0 | index 0.8 | protect 0.33 | vol 0.8 | Todo santo dia essa mãe liga pro próprio filho.
+frase 1: francisca +7% | clima normal | tom +0 | index 0.8 | protect 0.33 | vol 0.8 | Ele sempre corta o assunto dizendo que tá ocupado demais pra falar.
+frase 2: francisca -3% | clima tensao | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | Certa noite o celular toca de novo e ele simplesmente ignora a chamada.
+frase 3: francisca -3% | clima tensao | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | Só que na manhã seguinte vem a notícia mais pesada da vida dele.
+frase 4: francisca -5% | clima triste | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | A mãe dele foi parar às pressas no hospital.
+frase 5: francisca -5% | clima triste | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | Desesperado, ele corre até o quarto e segura a mão dela em prantos.
+frase 6: francisca -5% | clima triste | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | Ele pede perdão e fala que devia ter atendido aquela ligação.
+frase 7: francisca -5% | clima triste | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | Ela abre os olhos bem devagar e sussurra que só queria ouvir a voz dele.
+frase 8: francisca +0% | clima engracado | tom +0 | index 0.8 | protect 0.33 | vol 0.8 | Olha isso.
+frase 9: francisca -5% | clima normal | tom +0 | index 0.8 | protect 0.33 | vol 0.8 | E aí, o que você faria no lugar dele?
+frase 10: francisca -1% | clima epico | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | O tempo não volta atrás e certas conversas não podem ficar pra depois.
+frase 11: francisca -5% | clima triste | tom -1 | index 0.8 | protect 0.33 | vol 0.8 | Se a sua mãe ainda tá por perto, não espera amanhã pra ligar pra ela, antes que você acabe

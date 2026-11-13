@@ -1,0 +1,330 @@
+{
+ "_leia": "24/10 (dono): cada Instagram com sua cor em carrossel, imagem e video, e sua pasta publica no Drive (empresas/<conta>/entrada; o postado vai para usados). cor = principal (faixas, botao), apoio = segunda cor, texto = cor da letra sobre a principal. produto = id em D:\\veo\\beta\\pos_producao\\assets\\produtos.json. Ver docs\\PASTAS_EMPRESAS.md",
+ "contas": {
+  "msenergysolar.pa": {
+   "marca": "MS Energy",
+   "cliente": true,
+   "cor": "#C81E37",
+   "apoio": "#111114",
+   "texto": "#FFFFFF",
+   "tema": "energia solar no Pará",
+   "pasta_id": "1D0u7dJSJu9kLGGT-JDH7xowJnBUsfhdw",
+   "link": "https://drive.google.com/drive/folders/1D0u7dJSJu9kLGGT-JDH7xowJnBUsfhdw"
+  },
+  "advance_novoestrela": {
+   "marca": "Advance Solar",
+   "cliente": true,
+   "cor": "#F59E0B",
+   "apoio": "#0F172A",
+   "texto": "#0F172A",
+   "tema": "energia solar em Castanhal-PA",
+   "_obs": "29/10 (dona): empresa de energia solar como a MS Energy; conta pessoal do Luiz Carlos Souza (sem token da API: posta por HTTP com o cofre ig_advance_novoestrela). Carrossel: D:\\ms-energy\\bin\\carrossel_advance.py",
+   "pasta_id": "1rTP0lremUFJ7FNmiWIJ6vGXFhCXwhuh2",
+   "link": "https://drive.google.com/drive/folders/1rTP0lremUFJ7FNmiWIJ6vGXFhCXwhuh2"
+  },
+  "inovarecom.ia": {
+   "marca": "Hermes Call",
+   "produto": "hermes_call",
+   "cor": "#25D366",
+   "apoio": "#075E54",
+   "texto": "#FFFFFF",
+   "pasta_id": "1M1s82wiksYow2mu4b9T1AhFaQd6ixcwj",
+   "link": "https://drive.google.com/drive/folders/1M1s82wiksYow2mu4b9T1AhFaQd6ixcwj"
+  },
+  "futebolcom.ia2": {
+   "marca": "Cardápio Digital",
+   "produto": "cardapio_digital",
+   "cor": "#E11D48",
+   "apoio": "#FACC15",
+   "texto": "#FFFFFF",
+   "pasta_id": "1EQwX-Tt5gbzcyJbBM5HzM-4CekxjOH6U",
+   "link": "https://drive.google.com/drive/folders/1EQwX-Tt5gbzcyJbBM5HzM-4CekxjOH6U"
+  },
+  "sintetizerisada": {
+   "marca": "Agenda IA",
+   "produto": "agenda_ia",
+   "cor": "#FFA94D",
+   "apoio": "#1F2937",
+   "texto": "#1F2937",
+   "pasta_id": "1Tt8B5WqfH2U303KUCnavLZV8Nn7-WPWN",
+   "link": "https://drive.google.com/drive/folders/1Tt8B5WqfH2U303KUCnavLZV8Nn7-WPWN"
+  },
+  "videocassetadascom.ia": {
+   "marca": "Cassetadas com IA",
+   "cor": "#FFC300",
+   "apoio": "#6C2BD9",
+   "texto": "#111111",
+   "tema": "humor",
+   "pasta_id": "12CJhVamHB6P-PguKdx_UGk94cbq_Nxn9",
+   "link": "https://drive.google.com/drive/folders/12CJhVamHB6P-PguKdx_UGk94cbq_Nxn9"
+  },
+  "_lucrocomia_": {
+   "marca": "Lucro com IA",
+   "cor": "#16A34A",
+   "apoio": "#EAB308",
+   "texto": "#FFFFFF",
+   "tema": "finanças",
+   "pasta_id": "1SI8pJYxSU9EwNFYCGvtHPB4sMa5gzrOh",
+   "link": "https://drive.google.com/drive/folders/1SI8pJYxSU9EwNFYCGvtHPB4sMa5gzrOh"
+  },
+  "iapro.mentoria": {
+   "marca": "IA Pro Mentoria",
+   "cor": "#2563EB",
+   "apoio": "#22D3EE",
+   "texto": "#FFFFFF",
+   "tema": "aulas de IA",
+   "pasta_id": "1-IxpOTGdeEBqornEixoCTDdOG2G32USa",
+   "link": "https://drive.google.com/drive/folders/1-IxpOTGdeEBqornEixoCTDdOG2G32USa"
+  },
+  "recenas.ia": {
+   "marca": "Recenas",
+   "cor": "#DC2626",
+   "apoio": "#111111",
+   "texto": "#FFFFFF",
+   "tema": "filmes e séries",
+   "pasta_id": "1xG05ZC6oCFdPDjRa4IljovhBH77UEJEG",
+   "link": "https://drive.google.com/drive/folders/1xG05ZC6oCFdPDjRa4IljovhBH77UEJEG"
+  },
+  "fakenews.ia4": {
+   "marca": "Fato ou Fake",
+   "cor": "#F97316",
+   "apoio": "#1E293B",
+   "texto": "#FFFFFF",
+   "tema": "curiosidades",
+   "pasta_id": "13CvtrdQtMJr0OXy8Y8g7-UB26kTLAuKZ",
+   "link": "https://drive.google.com/drive/folders/13CvtrdQtMJr0OXy8Y8g7-UB26kTLAuKZ"
+  },
+  "jornalcomia": {
+   "marca": "Jornal com IA",
+   "cor": "#0EA5E9",
+   "apoio": "#0F172A",
+   "texto": "#FFFFFF",
+   "tema": "notícias de IA",
+   "pasta_id": "12wU1PCj5alsBzwGtI55dcql69-DYfjMJ",
+   "link": "https://drive.google.com/drive/folders/12wU1PCj5alsBzwGtI55dcql69-DYfjMJ"
+  },
+  "canalhistoriacomia": {
+   "marca": "História com IA",
+   "cor": "#B45309",
+   "apoio": "#1C1917",
+   "texto": "#FFFFFF",
+   "tema": "histórias e mistérios",
+   "pasta_id": "1IEKlKghplUc472kUP1iu2upzQopHeqLS",
+   "link": "https://drive.google.com/drive/folders/1IEKlKghplUc472kUP1iu2upzQopHeqLS"
+  },
+  "disparoemmassa.ia": {
+   "marca": "Disparo em Massa IA",
+   "produto": "disparo_massa",
+   "itens": [
+    "Disparo em Massa Inteligente",
+    "Rotacao de APIs/Instancias",
+    "Cartao de Aniversario Automatico",
+    "Envio de Pix"
+   ],
+   "cor": "#22C55E",
+   "apoio": "#111827",
+   "texto": "#FFFFFF",
+   "pasta_id": "1wd1jQT--_4qUs6m3_aPTnYOWL54K13UV",
+   "link": "https://drive.google.com/drive/folders/1wd1jQT--_4qUs6m3_aPTnYOWL54K13UV"
+  },
+  "followupia.ia": {
+   "marca": "Follow-up IA",
+   "produto": "follow_up",
+   "itens": [
+    "Follow-up de Vendas",
+    "Recuperacao de Carrinho",
+    "Verificacao de Pagamento"
+   ],
+   "cor": "#4ECDC4",
+   "apoio": "#111827",
+   "texto": "#FFFFFF",
+   "pasta_id": "1NksXkaHMDlcIZyPR97qIKz4-ICW15Pni",
+   "link": "https://drive.google.com/drive/folders/1NksXkaHMDlcIZyPR97qIKz4-ICW15Pni"
+  },
+  "vpsblindada.ia": {
+   "marca": "VPS Blindada",
+   "produto": "vps_infra",
+   "itens": [
+    "Setup VPS Docker+Portainer+Traefik",
+    "n8n Self-Hosted",
+    "Backup Automatico",
+    "Bot Sentinela",
+    "Redis",
+    "Sistema Vacuum",
+    "Relatorios Diarios/Semanais",
+    "Automacao de Contratos",
+    "Acionador via Siri"
+   ],
+   "cor": "#0EA5E9",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "fabricademarketing.ia": {
+   "marca": "Fábrica de Marketing IA",
+   "produto": "fabrica_conteudo",
+   "itens": [
+    "Full Post",
+    "Blog SEO",
+    "Podcast IA",
+    "Resposta a Comentarios Multi-Canal",
+    "Automacao de Reacoes"
+   ],
+   "cor": "#F472B6",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "crmchatwoot.ia": {
+   "marca": "CRM Chatwoot IA",
+   "produto": "crm_chatwoot",
+   "itens": [
+    "CRM personalizado a partir do Chatwoot",
+    "Integracao Chatwoot",
+    "Integracao CRM",
+    "Tickets/Helpdesk"
+   ],
+   "cor": "#1F93FF",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "mentoriasia.ia": {
+   "marca": "Treinamentos e Mentorias IA",
+   "produto": "treinamentos",
+   "itens": [
+    "Treinamento Vibe Coding",
+    "Consultoria de Otimizacao",
+    "Pack de Prompts Validados",
+    "Mapa Mental/Documentacao"
+   ],
+   "cor": "#2563EB",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "landingpageia.ia": {
+   "marca": "Landing Page e Comunicação",
+   "produto": "landing_page",
+   "itens": [
+    "Landing Page Pronta",
+    "Video Demo do Fluxo"
+   ],
+   "cor": "#F59E0B",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "gestaodegrupos.ia": {
+   "marca": "Gestão de Grupos IA",
+   "produto": "gestao_grupos",
+   "itens": [
+    "Boas-Vindas",
+    "Moderacao",
+    "Resumo/Atas",
+    "Bot Condicional",
+    "Prompt Dinamico",
+    "Resumidor de Links",
+    "Agente Sniper"
+   ],
+   "cor": "#14B8A6",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "agentesdeia.ia": {
+   "marca": "Agentes de IA",
+   "produto": "agente_tarefas",
+   "itens": [
+    "Agente Pessoal de Tarefas",
+    "Agente Secretaria",
+    "Agente Agendador",
+    "Agente Sales Coach",
+    "RAG",
+    "Visao Computacional",
+    "Voz Clonada",
+    "Orquestrador Multi-Agentes",
+    "Roteador de LLMs",
+    "Filtro Anti-Alucinacao"
+   ],
+   "cor": "#10B981",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "inovareclone": {
+   "marca": "Inovare Clone",
+   "produto": "avatar_ia",
+   "cor": "#8B5CF6",
+   "apoio": "#1F2937",
+   "texto": "#FFFFFF"
+  },
+  "inovarecrm": {
+   "marca": "Inovare CRM",
+   "produto": "crm_chatwoot",
+   "cor": "#0284C7",
+   "apoio": "#0F172A",
+   "texto": "#FFFFFF"
+  },
+  "inovaresites": {
+   "marca": "Inovare Sites",
+   "produto": "landing_page",
+   "cor": "#EC4899",
+   "apoio": "#18181B",
+   "texto": "#FFFFFF"
+  },
+  "inovareagenda": {
+   "marca": "Inovare Agenda",
+   "produto": "agenda_ia",
+   "cor": "#F59E0B",
+   "apoio": "#1F2937",
+   "texto": "#FFFFFF"
+  },
+  "superchatia.ia": {
+   "marca": "SuperChat IA",
+   "produto": "superchat",
+   "itens": [
+    "Atendimento Multi-Canal Telegram/Instagram/Face/Whats"
+   ],
+   "cor": "#5B6CFF",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "vitrineia_inovare": {
+   "marca": "Vitrine IA",
+   "produto": "vitrine_ia",
+   "itens": [
+    "Bot que conhece os produtos da loja"
+   ],
+   "cor": "#A78BFA",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "inovareclaw.ia": {
+   "marca": "Inovare Claw",
+   "produto": "inovare_claw",
+   "itens": [
+    "Agente de IA estilo Hermes/OpenClaw"
+   ],
+   "cor": "#7C3AED",
+   "apoio": "#111827",
+   "texto": "#FFFFFF"
+  },
+  "globosolarenergiag": {
+   "marca": "Globo Solar",
+   "cliente": true,
+   "cor": "#EA3A21",
+   "apoio": "#1A222D",
+   "texto": "#FFFFFF",
+   "tema": "energia solar em Concórdia do Pará",
+   "_obs": "31/10: cores medidas no avatar e nos Reels da própria conta (logo 3D ardósia #1A222D + tarja laranja-avermelhada #EA3A21). Carrossel: D:\\ms-energy\\bin\\carrossel_globo.py",
+   "pasta_id": "1dYM8scGjqmDwUe3MFW7or6v1qQhhdvWW",
+   "link": "https://drive.google.com/drive/folders/1dYM8scGjqmDwUe3MFW7or6v1qQhhdvWW"
+  },
+  "acai_oprecioso": {
+   "marca": "Açaí O PRECIOSO",
+   "cliente": true,
+   "cor": "#7D167B",
+   "apoio": "#7AAD0D",
+   "texto": "#FFFFFF",
+   "tema": "açaí nativo puro (litro, 500 ml e tigela) em Paragominas-PA",
+   "cofre": "ig_acai_no_litro",
+   "_obs": "05/11 dona: pasta igual às solares + pasta de ideias (textos/ideias que eles tenham). Posts: ms-energy\bin\u0007cai.py",
+   "pasta_id": "1hAu584YvbsWZ3rg9ANARePf_WeaF4_33",
+   "link": "https://drive.google.com/drive/folders/1hAu584YvbsWZ3rg9ANARePf_WeaF4_33"
+  }
+ }
+}

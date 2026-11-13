@@ -1,0 +1,659 @@
+{
+  "titulo_video": "O Guerreiro Regressou - O Caos Está Apenas Começando!",
+  "tags": [
+    "manhwa",
+    "recaps",
+    "guerreiro",
+    "ação",
+    "drama"
+  ],
+  "locucoes": [
+    {
+      "painel": 1,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "O clima esquentou e a tensão no ar tornou-se insuportável!"
+    },
+    {
+      "painel": 2,
+      "persona": "Soldado",
+      "gender": "M",
+      "text": "Rei, parece que você está tendo dificuldades."
+    },
+    {
+      "painel": 3,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Vem cá um pouquinho."
+    },
+    {
+      "painel": 4,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Huh?! O que você-?!"
+    },
+    {
+      "painel": 5,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Kyaaa!!"
+    },
+    {
+      "painel": 6,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Prepare-se, pois o segundo capítulo começa de forma avassaladora."
+    },
+    {
+      "painel": 7,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Em uma casa isolada na noite, um som estranho ecoa pelo ambiente."
+    },
+    {
+      "painel": 8,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Daron mantém a seriedade, pois sabe que algo está prestes a quebrar."
+    },
+    {
+      "painel": 9,
+      "persona": "Intruso",
+      "gender": "M",
+      "text": "Que diabos você está fazendo? Seu merda!"
+    },
+    {
+      "painel": 10,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Calma, deixa eu explicar o que tá rolando!"
+    },
+    {
+      "painel": 11,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "Cala a boca e encara a realidade!"
+    },
+    {
+      "painel": 12,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "FIQUE LONGE DA REI!!!"
+    },
+    {
+      "painel": 13,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Eles avançam com fúria cega, mas Daron não vacila diante do ataque."
+    },
+    {
+      "painel": 14,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "AHHH!! DARON, VOCÊ TÁ INDO LONGE DEMAIS!!"
+    },
+    {
+      "painel": 15,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "HUHHH~? O DARON ERA TÃO FORTE ASSIM?"
+    },
+    {
+      "painel": 16,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Agora, os inimigos estão em choque absoluto com o que acabaram de ver."
+    },
+    {
+      "painel": 17,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Soldados surgem das sombras e a situação rapidamente se complica."
+    },
+    {
+      "painel": 18,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "A formação está pronta e, enfim, a capitã faz sua entrada."
+    },
+    {
+      "painel": 19,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Aquela armadura brilha intensamente, como se tivesse poder próprio!"
+    },
+    {
+      "painel": 20,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "A precisão dos movimentos dela é simplesmente impecável."
+    },
+    {
+      "painel": 21,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "A capitã Katrin encara toda a cena com sangue frio."
+    },
+    {
+      "painel": 22,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Sua trajetória não é de brincadeira, ela é da elite absoluta!"
+    },
+    {
+      "painel": 23,
+      "persona": "Soldado",
+      "gender": "M",
+      "text": "Aquela lady não é a capitã dos cavaleiros?"
+    },
+    {
+      "painel": 24,
+      "persona": "Jovem",
+      "gender": "F",
+      "text": "Não acredito que eles chegaram aqui agora!"
+    },
+    {
+      "painel": 25,
+      "persona": "Cavaleiro",
+      "gender": "M",
+      "text": "É como foi relatado, há um monte de homens sujos presentes."
+    },
+    {
+      "painel": 26,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "Eu vi tudo, não adianta tentar esconder o plano!"
+    },
+    {
+      "painel": 27,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "O cerco está fechando e não há mais para onde fugir."
+    },
+    {
+      "painel": 28,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "O quê? Uma mulher de armadura no comando?"
+    },
+    {
+      "painel": 29,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "Segurem eles agora mesmo!"
+    },
+    {
+      "painel": 30,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "Não, isso não pode estar acontecendo!"
+    },
+    {
+      "painel": 31,
+      "persona": "Guarda",
+      "gender": "M",
+      "text": "Você tá desrespeitando nossa querida capitã Katrin!"
+    },
+    {
+      "painel": 32,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "A autópsia revelou que foram espancados com uma espada alada."
+    },
+    {
+      "painel": 33,
+      "persona": "Cavaleiro",
+      "gender": "M",
+      "text": "Capitão, a xícara de chá tava impregnada com uma poção mágica."
+    },
+    {
+      "painel": 34,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "As provas contra Daron começam a aparecer aos montes!"
+    },
+    {
+      "painel": 35,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "Isso foi armação! Tudo isso foi um plano do Daron!"
+    },
+    {
+      "painel": 36,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "MALDITA, VOCÊ VAI PAGAR POR ISSO!"
+    },
+    {
+      "painel": 37,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "Se ele for pego agora, definitivamente vai receber a pena de morte!"
+    },
+    {
+      "painel": 38,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Com um chute certeiro, a justiça é finalmente aplicada."
+    },
+    {
+      "painel": 39,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "Levem eles daqui imediatamente!"
+    },
+    {
+      "painel": 40,
+      "persona": "Inimigo",
+      "gender": "M",
+      "text": "CAPITÃ KATRIN, VOCÊ VAI SE ARREPENDER!"
+    },
+    {
+      "painel": 41,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "A investigação vai revelar toda a sujeira de vocês."
+    },
+    {
+      "painel": 42,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "Enfrentarão a pena de morte, sem exceções."
+    },
+    {
+      "painel": 43,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Entendo perfeitamente o que deve ser feito."
+    },
+    {
+      "painel": 44,
+      "persona": "Katrin",
+      "gender": "F",
+      "text": "Por favor, tome muito cuidado com tudo agora."
+    },
+    {
+      "painel": 45,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Eles se despedem, mas um clima estranho ainda permanece no ar."
+    },
+    {
+      "painel": 46,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Então é isso que vai acontecer no fim."
+    },
+    {
+      "painel": 47,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Podemos transar em paz agora, né?"
+    },
+    {
+      "painel": 48,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Surge então uma escolha obrigatória diante daquela poção mágica."
+    },
+    {
+      "painel": 49,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Será que o destino dela como santa é mesmo inevitável?"
+    },
+    {
+      "painel": 50,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "A respiração está pesada, indicando que o futuro dela mudou."
+    },
+    {
+      "painel": 51,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "KYAAAA!! PARA COM ISSO AGORA!"
+    },
+    {
+      "painel": 52,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Daron não quer desperdiçar nenhum segundo sequer com hesitações."
+    },
+    {
+      "painel": 53,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Ela vai virar uma vaca, então vou aproveitar tudo!"
+    },
+    {
+      "painel": 54,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "O cordão é puxado e um desejo incontrolável domina o local."
+    },
+    {
+      "painel": 55,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "O que você está fazendo?! Não esperava isso!"
+    },
+    {
+      "painel": 56,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Aquele ambiente fechado esconde, agora, segredos obscuros."
+    },
+    {
+      "painel": 57,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "A euforia toma conta e eles parecem perder a razão."
+    },
+    {
+      "painel": 58,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Sobre o sofá vermelho, a história escreve seu ápice."
+    },
+    {
+      "painel": 59,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "GAHHH!! ESSAS CENAS TÃO ME DEIXANDO LOUCO!"
+    },
+    {
+      "painel": 60,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "ESPERE...! NÃO CHUPE ELES ASSIM! SÃO SENSÍVEIS..."
+    },
+    {
+      "painel": 61,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "A interação é intensa e o clima não esfria um instante!"
+    },
+    {
+      "painel": 62,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Isso... eu não consigo parar de sentir isso!"
+    },
+    {
+      "painel": 63,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Você está sentindo o prazer pulsar assim?"
+    },
+    {
+      "painel": 64,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Ahhh! É demais, eu não aguento mais!"
+    },
+    {
+      "painel": 65,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Responde pra mim, você quer mais?"
+    },
+    {
+      "painel": 66,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Uhhhh!! Eu não sei o que fazer!"
+    },
+    {
+      "painel": 67,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Pare...!! Uhhhh...!!"
+    },
+    {
+      "painel": 68,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Caralho! Já tá gozando de novo com isso?"
+    },
+    {
+      "painel": 69,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Tenho que treinar você com meu pau, princesa."
+    },
+    {
+      "painel": 70,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Nossa!! Eu não imaginava que chegaria a esse ponto!"
+    },
+    {
+      "painel": 71,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Por que isso é... tão grande assim?"
+    },
+    {
+      "painel": 72,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Ele ficou assim porque seu corpo tá me pedindo!"
+    },
+    {
+      "painel": 73,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "E-espera! Camisinha, camisinha! Você precisa usar!"
+    },
+    {
+      "painel": 74,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Aqui, feliz? Vamos rápido com isso agora!"
+    },
+    {
+      "painel": 75,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Uhh... finalmente, mas por favor, seja gentil."
+    },
+    {
+      "painel": 76,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Você era virgem?! D-devagarinho, eu vou entrar."
+    },
+    {
+      "painel": 77,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "O efeito visual reflete perfeitamente a confusão mental dela."
+    },
+    {
+      "painel": 78,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Uhhh!! Sua buceta virgem é coisa de louco!!!"
+    },
+    {
+      "painel": 79,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Hahh! Isso dói, mas é tão bom!"
+    },
+    {
+      "painel": 80,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Vai gozar de novo? Você tem uma buceta safada!"
+    },
+    {
+      "painel": 81,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Eu disse pra você ser gentil, seu bruto!"
+    },
+    {
+      "painel": 82,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Por favor, seja um pouco mais gentil comigo."
+    },
+    {
+      "painel": 83,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Keugh... sua buceta é maravilhosa demais!"
+    },
+    {
+      "painel": 84,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Eu acho que vou gozar de novo!"
+    },
+    {
+      "painel": 85,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Tô gozando!! Ahhh, não para!"
+    },
+    {
+      "painel": 86,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Uhhhh sua buceta é tão apertada!"
+    },
+    {
+      "painel": 87,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "O movimento não para, enquanto a sincronia torna-se total!"
+    },
+    {
+      "painel": 88,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Hoo~ gozei muito com você, princesa!"
+    },
+    {
+      "painel": 89,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Como foi? Essa é a minha porra, guarde bem."
+    },
+    {
+      "painel": 90,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "Engo... o que? A gala costuma sair tanto assim?"
+    },
+    {
+      "painel": 91,
+      "persona": "Rei",
+      "gender": "F",
+      "text": "A-agora que você acabou, pode ir embora."
+    },
+    {
+      "painel": 92,
+      "persona": "Daron",
+      "gender": "M",
+      "text": "Mas ainda não tô satisfeito, e então?"
+    }
+  ],
+  "descriptions": [
+    "Cena intensa entre personagens",
+    "Personagem com expressão de nervosismo diz: \"Rei, parece que você está tendo dificuldades.\"",
+    "Mão agarra personagem que se mostra surpresa e diz: \"Vem cá um pouquinho.\"",
+    "Personagem reage com espanto ao ser tocada por trás e diz: \"Huh?! O que você-?!\"",
+    "Cena intensa entre personagens com balão de exclamação: \"Kyaaa!!\"",
+    "O título do quadrinho exibe letras decorativas sobre um pergaminho enrolado.",
+    "Uma casa isolada aparece iluminada à noite enquanto um balão emite um som agudo.",
+    "Um homem mantém uma expressão séria e atenta com marcas de impacto acima dele.",
+    "Homens abrem a porta abruptamente gritando: \"Que diabos você está fazendo?\" e \"Seu merda!\".",
+    "Cena intensa entre personagens, enquanto o protagonista tenta se explicar verbalmente.",
+    "Personagem grita com indignação perante cena intensa entre personagens em ambiente interno.",
+    "Balão de fala exibe o alerta enfático: \"FIQUE LONGE DA REI!!!\".",
+    "Dois homens avançam agressivamente com expressões de fúria em direção a um terceiro.",
+    "Som de impacto ocorre em ambiente fechado enquanto alguém grita: \"AHHH!!\" e \"DARON, VOCÊ TÁ INDO LONGE DEMAIS!!\".",
+    "Daron permanece de pé enquanto duas pessoas estão caídas no chão, e a mulher pensa: \"HUHHH~? O DARON ERA TÃO FORTE ASSIM?\".",
+    "Rapaz e garota olham surpresos em um ambiente de madeira.",
+    "Soldados com elmos e armaduras metálicas se alinham diante de um cenário escuro.",
+    "Soldados de armadura permanecem em formação, enquanto uma figura central se posiciona no centro.",
+    "Personagem em armadura brilha intensamente, focando a cena em seu detalhe superior.",
+    "Personagem se move e vira de costas, focando na região inferior em destaque.",
+    "A capitã encara o espectador ladeada por dois soldados em posição de alerta.",
+    "A capitã é retratada em poses de combate e em pé, ilustrando sua trajetória profissional.",
+    "Balão de fala pergunta: \"Aquela lady não é a capitã dos cavaleiros?\"",
+    "Uma jovem observa espantada a chegada da capitã e seus soldados no recinto.",
+    "A capitã observa homens enquanto um indivíduo fala: \"É como foi relatado, há um monte de homens sujos presentes.\"",
+    "Personagem aponta o dedo para homem enquanto explica uma armação anterior.",
+    "Grupo esconde-se atrás de arbustos enquanto soldados observam o local por trás.",
+    "Homem expressa confusão e surpresa ao ver uma mulher de armadura à sua frente.",
+    "Mulher de armadura ordena em voz alta: \"Segurem eles!\" com expressão de comando.",
+    "Homem reage com choque e medo enquanto é contido por guardas armados.",
+    "Homem discute com cavaleiro e mulher enquanto um guarda diz: \"Você tá desrespeitando nossa querida capitã Katrin!\"",
+    "Capitã fala: \"Do que ouvi do Daron, a autópsia dos 20 corpos revelou que eles parecem ter sido espancados antes com a espada de um cavaleiro alado.\"",
+    "Cavaleiro segura xícara e diz: \"Capitão, a xícara de chá tava impregnada com uma poção mágica.\"",
+    "Balão de fala descreve evidências de incriminação contra Daron usando uma poção mágica.",
+    "Homem ajoelhado grita: \"Isso foi armação! Tudo isso foi um plano do Daron!\", enquanto guardas respondem: \"Seu desgraçado! Nos siga obedientemente!\"",
+    "Homem ajoelhado grita \"MALDITO!\" para mulher de costas, enquanto soldado se aproxima.",
+    "Mulher de expressão séria pensa: \"Se ele for pego agora, definitivamente vai receber a pena de morte!\"",
+    "Mulher levanta a perna, chutando o rosto do homem que expressa dor.",
+    "Mulher levanta a perna, diz \"Levem eles\", enquanto soldado responde \"Sim senhora!\".",
+    "Homem exclama \"CAPITÃ KATRIN!\" e a mulher de costas responde \"O QUE É?\".",
+    "Homem pergunta: \"Hmm... o que vai acontecer com esses caras agora?\" e mulher responde sobre investigação.",
+    "Mulher de cabelos loiros declara: \"Enfrentaram a pena de morte.\" com expressão séria.",
+    "Homem olha fixamente para a mulher loira e diz: \"Entendo...\" com semblante pensativo.",
+    "Mulher de cabelos loiros vira o rosto e diz: \"Por favor, tome cuidado.\" com expressão preocupada.",
+    "Homem e mulher observam alguém saindo pela porta, com o homem fazendo gesto de despedida.",
+    "Rapaz gesticula e diz: \"Então é isso que vai acontecer.\" e moça responde: \"Ah... okay...\"",
+    "Rapaz diz: \"Podemos transar em paz.\" e moça reage surpresa: \"Por que isso aconteceria?!\"",
+    "Cena intensa entre personagens com diálogo sobre uma poção mágica e uma escolha obrigatória.",
+    "Texto informativo sobre o destino da personagem como uma santa no futuro.",
+    "Cena intensa entre personagens com respiração ofegante e legenda explicativa sobre o futuro da moça.",
+    "Homem abraça pessoa enquanto ela grita \"KYAAAA!!\" com expressão de choque [shake].",
+    "Personagem deitado em sofá vermelho respira ofegante com expressão facial intensa [pulse].",
+    "Texto diz: \"...ela acabará se tornando uma vaca de qualquer jeito, então eu vou aproveitar enquanto posso.\"",
+    "Mão puxa cordão de amarração em um cenário de luzes quentes [zoom_slow].",
+    "Cena intensa entre personagens com expressão de surpresa [zoom_fast].",
+    "Cena intensa entre personagens em um ambiente fechado",
+    "Cena intensa entre personagens com expressões de euforia",
+    "Cena intensa entre personagens sobre uma superfície vermelha",
+    "Personagem diz: \"GAHHH!! SEUS cena intensaS TÃO ME DEIXANDO COM TESÃO!!\" em close",
+    "Garota diz: \"ESPERE...! NÃO CHUPE ELES ASSIM! SÃO SENSÍVEIS...\" enquanto personagem reage intensamente",
+    "Personagens interagem intensamente em um sofá com balões de fala de conteúdo cena intensa.",
+    "Cena intensa entre personagens em um sofá vermelho com balão de fala expressando prazer.",
+    "Cena intensa entre personagens, acompanhada de pergunta sobre sensações físicas em balão de fala.",
+    "Cena intensa entre personagens em um ambiente fechado, com exclamações de satisfação e diálogo.",
+    "Cena intensa entre personagens com troca de perguntas e comandos em balões de fala.",
+    "Cena intensa entre personagens, acompanhada pelo som \"Uhhhh!!\".",
+    "Personagem com expressão de sofrimento diz: \"Pare...!! Uhhhh...!!\", enquanto outro responde: \"Eu vou me desculpar por isso, então...!!\".",
+    "Cena intensa entre personagens, acompanhada pelo som \"Kueugh...!!!\" e fala: \"Caralho! Já tá gozando de novo?\".",
+    "Personagem segura o cós da própria calça e diz: \"Tenho que treinar você com meu pau.\"",
+    "Personagem com expressão de choque exclama \"Nossa!!\" ao olhar para o lado.",
+    "Personagem expressa surpresa enquanto pergunta: \"Por que isso é... tão grande?!\"",
+    "Cena intensa entre personagens, enquanto um balão diz: \"Ele ficou assim porque eu tô fazendo seu corpo encher de tesão!\"",
+    "Personagem pede responsabilidade enquanto a outra grita: \"E-espera! Camisinha, camisinha!\"",
+    "Personagem diz: \"Aqui, feliz? Vamos rápido com isso!\" e outra responde: \"Uhh... okay.\"",
+    "Personagem diz: \"Uhh... finalmente vou transar com você!\" e completa: \"Por favor, seja gentil.\"",
+    "Cena intensa entre personagens, com balão dizendo: \"Como esperado, você era virgem?! Não tô aguentando mais, vou enfiar, tá ok?! D-devagarinho.\"",
+    "A imagem mostra apenas um efeito visual de texto abstrato em tons de azul.",
+    "Cena intensa entre personagens, com balão dizendo: \"Uhhh!! Uhh! Sua buceta virgem é coisa de louco!!!\"",
+    "Cena intensa entre personagens, com balões de fala emitindo sons de exclamação \"Uhh!\" e \"Hahh!\".",
+    "Cena intensa entre personagens, com balão dizendo: \"Vai gozar de novo? Você realmente tem uma buceta safada, hein?\"",
+    "Personagem expressa prazer intenso enquanto mãos interagem com ela, dizendo: \"Eu disse pra você ser gentil!!\".",
+    "Cena intensa entre personagens em um sofá vermelho, com pedido de \"por favor, seja um pouco mais gentil\".",
+    "Cena intensa entre personagens com exclamação de prazer, dizendo: \"Keugh... sua buceta é maravilhosa...!\".",
+    "Cena intensa entre personagens, onde uma pessoa diz: \"Eu acho que vou gozar!!!\".",
+    "Cena intensa entre personagens acompanhada por um grito de \"Tô gozando!!\".",
+    "Cena intensa entre personagens, um balão diz: \"Uhhhh sua buceta é tão apertada!\"",
+    "Cena intensa entre personagens com foco em movimento e interação física.",
+    "Cena intensa entre personagens, um balão diz: \"Hoo~ gozei muito!\"",
+    "Personagem segura uma sacola, personagem diz: \"Como foi? Essa é a minha porra.\"",
+    "Personagem com expressão surpresa, um balão diz: \"Engo... o que?\" e outro: \"A gala costuma sair tanto assim?\"",
+    "Personagens conversam, garota pede para o rapaz ir embora: \"A-agora que você acabou, vá embora.\"",
+    "Cena intensa entre personagens, rapaz diz: \"Mas ainda não tô satisfeito, e então?\""
+  ],
+  "_revised": true
+}

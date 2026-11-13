@@ -1,0 +1,24 @@
+{
+ "width": 720,
+ "height": 1280,
+ "content_x0": 0,
+ "content_x1": 712,
+ "has_webcam": true,
+ "contrast": 74.8,
+ "trimmed": {
+  "webcam_bottom": 62
+ },
+ "divider": 667,
+ "webcam": [
+  0,
+  0,
+  720,
+  605
+ ],
+ "content": [
+  0,
+  667,
+  712,
+  1280
+ ]
+}

@@ -1,0 +1,199 @@
+18:14:31 | canalalucinaai@gmail.com       | PULADA | VqCw
+18:14:31 | canalanimescomia@gmail.com     | PULADA | kPBA
+18:15:09 | canalhistoriacomia@gmail.com   | OK | 8Gvg
+18:16:10 | emersonjosiel0@gmail.com       | FALHA | Locator.check: Clicking the checkbox did not change its state
+Call log:
+  - waiting for locator("input[type=\"checkbox\"]").first
+    - locator resolved to <input tabindex="0" type="checkbox" id="mat-mdc-checkbox-0-input" class="mdc-checkbox__native-control" aria-label="Confirmo que tenho pelo menos 18 anos e que sou um desenvolvedor que usa o serviço com fins profissionais ou comerciais para criar produtos para usuários maiores de 18 anos"/>
+  - attempting click action
+    - scrolling into view if needed
+    - done scrolling
+    - forcing action
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+    - navigations have finished
+
+18:17:21 | emersonjosiel2026@gmail.com    | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:18:22 | emersonjosiel2027@gmail.com    | OK | nXYw
+18:19:22 | emersonjosiel2029@gmail.com    | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:20:27 | emersonjosiel2030@gmail.com    | OK | I7jA
+18:22:17 | emersonjosiel2031@gmail.com    | OK | h3Tw
+18:23:30 | emersonjosiel2032@gmail.com    | FALHA | Locator.check: Clicking the checkbox did not change its state
+Call log:
+  - waiting for locator("input[type=\"checkbox\"]").first
+    - locator resolved to <input tabindex="0" type="checkbox" id="mat-mdc-checkbox-0-input" class="mdc-checkbox__native-control" aria-label="Confirmo que tenho pelo menos 18 anos e que sou um desenvolvedor que usa o serviço com fins profissionais ou comerciais para criar produtos para usuários maiores de 18 anos"/>
+  - attempting click action
+    - scrolling into view if needed
+    - done scrolling
+    - forcing action
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+    - navigations have finished
+
+18:25:16 | emersonjosiel2033@gmail.com    | OK | 5yNQ
+18:27:00 | empressinovare@gmail.com       | OK | an2A
+18:28:31 | entrevistacomia@gmail.com      | FALHA | Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Create API key\"), button:has-text(\"Criar chave\"), button:has-text(\"Get API key\")").first
+    - locator resolved to <button ms-button="" aria-disabled="false" class="ms-button-primary" _ngcontent-ng-c2567681482="" data-test-id="create-api-key-button" jslog="278847;track:generic_click,impression">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    44 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+18:29:38 | fabricadeautomacoesia@gmail.com | OK | eewA
+18:31:02 | filmescomia00@gmail.com        | OK | q_ng
+18:32:53 | inovaremanhwabr@gmail.com      | FALHA | Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Create API key\"), button:has-text(\"Criar chave\"), button:has-text(\"Get API key\")").first
+    - locator resolved to <button ms-button="" aria-disabled="false" class="ms-button-primary" _ngcontent-ng-c2567681482="" data-test-id="create-api-key-button" jslog="278847;track:generic_click,impression">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    38 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+
+18:34:26 | inovaremanhwaverseesp@gmail.com | OK | -Eig
+18:35:51 | inovaremanhwaversefrench@gmail.com | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:37:09 | inovaremanhwaversehindi@gmail.com | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:38:16 | inovaremanhwaverseind@gmail.com | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:40:01 | inovaremanhwaverseing@gmail.com | FALHA | Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Create API key\"), button:has-text(\"Criar chave\"), button:has-text(\"Get API key\")").first
+    - locator resolved to <button ms-button="" aria-disabled="false" class="ms-button-primary" _ngcontent-ng-c2567681482="" data-test-id="create-api-key-button" jslog="278847;track:generic_click,impression">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    50 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+18:41:13 | inovaremanhwaverseita@gmail.com | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:42:52 | inovaremanhwaverserussian@gmail.com | OK | 7NNw
+18:44:45 | inovaremanhwaversethai@gmail.com | FALHA | Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Create API key\"), button:has-text(\"Criar chave\"), button:has-text(\"Get API key\")").first
+    - locator resolved to <button ms-button="" aria-disabled="false" class="ms-button-primary" _ngcontent-ng-c2567681482="" data-test-id="create-api-key-button" jslog="278847;track:generic_click,impression">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    32 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="cdk-overlay-backdrop dialog-backdrop-blur-overlay cdk-overlay-backdrop-showing"></div> from <div class="cdk-overlay-container">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+18:46:52 | jornalcomia@gmail.com          | OK | L9BQ
+18:47:27 | msenergypara@gmail.com         | FALHA | Locator.all: Target page, context or browser has been closed
+18:48:23 | rezaulkarimul355@gmail.com     | FALHA | Locator.check: Clicking the checkbox did not change its state
+Call log:
+  - waiting for locator("input[type=\"checkbox\"]").first
+    - locator resolved to <input tabindex="0" type="checkbox" id="mat-mdc-checkbox-0-input" class="mdc-checkbox__native-control" aria-label="I acknowledge that I am at least 18 years old, and that I am a developer using the service for professional or business purposes to build products for users 18+"/>
+  - attempting click action
+    - scrolling into view if needed
+    - done scrolling
+    - forcing action
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+    - navigations have finished
+
+18:49:22 | inovaremanhwaverse2@gmail.com  | FALHA | Locator.check: Clicking the checkbox did not change its state
+Call log:
+  - waiting for locator("input[type=\"checkbox\"]").first
+    - locator resolved to <input tabindex="0" type="checkbox" id="mat-mdc-checkbox-0-input" class="mdc-checkbox__native-control" aria-label="Confirmo que tenho pelo menos 18 anos e que sou um desenvolvedor que usa o serviço com fins profissionais ou comerciais para criar produtos para usuários maiores de 18 anos"/>
+  - attempting click action
+    - scrolling into view if needed
+    - done scrolling
+    - forcing action
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+    - navigations have finished
+
+18:50:03 | maiteanajessicajesus@gmail.com | FALHA | botao criar nao encontrado (https://aistudio.google.com/docs/available-regions)
+18:50:32 | gabriellyvitoriaisabelaaraujo@gmail.com | FALHA | Locator.all: Target page, context or browser has been closed
+18:51:25 | simonerebecaluizasilva@gmail.com | FALHA | Locator.check: Clicking the checkbox did not change its state
+Call log:
+  - waiting for locator("input[type=\"checkbox\"]").first
+    - locator resolved to <input tabindex="0" type="checkbox" id="mat-mdc-checkbox-0-input" class="mdc-checkbox__native-control" aria-label="Confirmo que tenho pelo menos 18 anos e que sou um desenvolvedor que usa o serviço com fins profissionais ou comerciais para criar produtos para usuários maiores de 18 anos"/>
+  - attempting click action
+    - scrolling into view if needed
+    - done scrolling
+    - forcing action
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+    - navigations have finished
+

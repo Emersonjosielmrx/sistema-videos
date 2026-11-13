@@ -1,0 +1,349 @@
+{
+ "comment": "anúncio atesteloc01",
+ "resolution": "custom",
+ "width": 1080,
+ "height": 1920,
+ "quality": "high",
+ "scenes": [
+  {
+   "comment": "cena 1",
+   "elements": [
+    {
+     "type": "image",
+     "src": "https://files.catbox.moe/lofjjm.jpg",
+     "resize": "cover",
+     "position": "center-center",
+     "duration": -2,
+     "zoom": 3,
+     "pan": "top"
+    },
+    {
+     "type": "text",
+     "text": "Vista para a cidade",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 192,
+     "width": 1080,
+     "height": 307,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "66px",
+      "color": "#111111",
+      "background-color": "#C9A227",
+      "padding": "14px 26px",
+      "border-radius": "16px",
+      "max-width": "929px"
+     }
+    },
+    {
+     "type": "voice",
+     "model": "azure",
+     "voice": "pt-BR-ThalitaMultilingualNeural",
+     "text": "Imagine acordar com essa vista todos os dias.",
+     "speed": 1.08,
+     "extra-time": 0.35
+    }
+   ]
+  },
+  {
+   "comment": "cena 2",
+   "elements": [
+    {
+     "type": "image",
+     "src": "https://files.catbox.moe/zs3gzu.jpg",
+     "resize": "cover",
+     "position": "center-center",
+     "duration": -2,
+     "pan": "right",
+     "pan-distance": 0.15
+    },
+    {
+     "type": "text",
+     "text": "Sala ampla",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 192,
+     "width": 1080,
+     "height": 307,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "66px",
+      "color": "#111111",
+      "background-color": "#C9A227",
+      "padding": "14px 26px",
+      "border-radius": "16px",
+      "max-width": "929px"
+     }
+    },
+    {
+     "type": "voice",
+     "model": "azure",
+     "voice": "pt-BR-ThalitaMultilingualNeural",
+     "text": "Sala ampla com janelas do chão ao teto e muita luz natural.",
+     "speed": 1.08,
+     "extra-time": 0.35
+    }
+   ],
+   "transition": {
+    "style": "slideleft",
+    "duration": 0.5
+   }
+  },
+  {
+   "comment": "cena 3",
+   "elements": [
+    {
+     "type": "image",
+     "src": "https://files.catbox.moe/u3ca8g.jpg",
+     "resize": "cover",
+     "position": "center-center",
+     "duration": -2,
+     "zoom": -3,
+     "pan": "right"
+    },
+    {
+     "type": "text",
+     "text": "98 m² · 3 quartos",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 192,
+     "width": 1080,
+     "height": 307,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "66px",
+      "color": "#111111",
+      "background-color": "#C9A227",
+      "padding": "14px 26px",
+      "border-radius": "16px",
+      "max-width": "929px"
+     }
+    },
+    {
+     "type": "text",
+     "text": "R$ 890 mil",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 1075,
+     "width": 1080,
+     "height": 230,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "84px",
+      "color": "#111111",
+      "background-color": "#C9A227",
+      "padding": "10px 30px",
+      "border-radius": "999px"
+     }
+    },
+    {
+     "type": "voice",
+     "model": "azure",
+     "voice": "pt-BR-ThalitaMultilingualNeural",
+     "text": "São noventa e oito metros quadrados, três quartos e uma suíte master.",
+     "speed": 1.08,
+     "extra-time": 0.35
+    }
+   ],
+   "transition": {
+    "style": "fade",
+    "duration": 0.5
+   }
+  },
+  {
+   "comment": "cena 4",
+   "elements": [
+    {
+     "type": "image",
+     "src": "https://files.catbox.moe/9nfm29.jpg",
+     "resize": "cover",
+     "position": "center-center",
+     "duration": -2,
+     "zoom": 3
+    },
+    {
+     "type": "voice",
+     "model": "azure",
+     "voice": "pt-BR-ThalitaMultilingualNeural",
+     "text": "Chame no WhatsApp e agende sua visita hoje!",
+     "speed": 1.08,
+     "extra-time": 0.35
+    }
+   ],
+   "transition": {
+    "style": "fade",
+    "duration": 0.5
+   }
+  },
+  {
+   "comment": "cartão final",
+   "duration": 3,
+   "transition": {
+    "style": "fadeblack",
+    "duration": 0.5
+   },
+   "elements": [
+    {
+     "type": "image",
+     "src": "https://wsrv.nl/?url=https%3A%2F%2Ffiles.catbox.moe%2Flofjjm.jpg&w=1080&h=1920&fit=cover&blur=14&mod=0.5&output=jpg&q=80",
+     "resize": "cover",
+     "position": "center-center",
+     "duration": -2,
+     "zoom": 1
+    },
+    {
+     "type": "text",
+     "text": "Vista Alta Imóveis",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 384,
+     "width": 1080,
+     "height": 269,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "76px",
+      "color": "#FFFFFF"
+     }
+    },
+    {
+     "type": "text",
+     "text": "Agende sua visita",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 730,
+     "width": 1080,
+     "height": 269,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "70px",
+      "color": "#111111",
+      "background-color": "#C9A227",
+      "padding": "14px 30px",
+      "border-radius": "18px"
+     }
+    },
+    {
+     "type": "text",
+     "text": "R$ 890 mil",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 1018,
+     "width": 1080,
+     "height": 192,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "800",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "64px",
+      "color": "#FFFFFF"
+     }
+    },
+    {
+     "type": "text",
+     "text": "WhatsApp (11) 98888-7777",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 1267,
+     "width": 1080,
+     "height": 134,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "700",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "50px",
+      "color": "#FFFFFF"
+     }
+    },
+    {
+     "type": "text",
+     "text": "@vistaalta.imoveis",
+     "duration": -2,
+     "fade-in": 0.3,
+     "position": "custom",
+     "x": 0,
+     "y": 1411,
+     "width": 1080,
+     "height": 134,
+     "settings": {
+      "font-family": "Montserrat",
+      "font-weight": "700",
+      "text-align": "center",
+      "vertical-position": "center",
+      "horizontal-position": "center",
+      "font-size": "50px",
+      "color": "#FFFFFF"
+     }
+    }
+   ]
+  }
+ ],
+ "elements": [
+  {
+   "type": "audio",
+   "src": "https://files.catbox.moe/yb6h1l.mp3",
+   "volume": 0.12,
+   "duration": -2
+  },
+  {
+   "type": "subtitles",
+   "language": "pt-BR",
+   "settings": {
+    "style": "boxed-word",
+    "font-family": "Montserrat",
+    "font-weight": "800",
+    "font-size": 82,
+    "word-color": "#111111",
+    "box-color": "#C9A227",
+    "line-color": "#FFFFFF",
+    "outline-color": "#000000",
+    "outline-width": 3,
+    "max-words-per-line": 3,
+    "position": "mid-bottom-center"
+   }
+  }
+ ]
+}

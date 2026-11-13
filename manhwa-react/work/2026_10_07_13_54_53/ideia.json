@@ -1,0 +1,29 @@
+{
+ "formato": "legenda sincronizada com painéis de anime/manhwa + música dramática",
+ "descricao": "Sequência de painéis estáticos de anime/manhwa com legendas sincronizadas contando uma história/curiosidade, sem narração, só música de fundo tensa. Cada painel aparece no timing exato da palavra-chave da legenda.",
+ "replicavel": true,
+ "como_fazer": "1) Escolher curiosidade/lore de anime popular (ex.: censura, cena polêmica, backstory). 2) Escrever roteiro de 4-6 frases curtas e impactantes com LLM. 3) Selecionar 4-6 painéis do manhwa/anime dos 86 mil disponíveis que ilustrem cada frase. 4) Usar ffmpeg para montar vídeo: cada painel dura 2-3s, adicionar zoom sutil (scale + zoompan). 5) Sobrepor legendas amarelas estilo Hormozi (ass/srt) sincronizadas palavra por palavra. 6) Adicionar trilha tensa/épica das 341 disponíveis e SFX de tensão (whoosh, impacto) nos momentos-chave.",
+ "ferramentas": [
+  "ffmpeg",
+  "86mil painéis manhwa",
+  "legendas estilo Hormozi",
+  "341 trilhas",
+  "800 SFX"
+ ],
+ "fonte_de_material": "banco de 86 mil painéis de manhwa próprio + screenshots de anime de domínio público ou fair use educacional (análise/crítica)",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "Revela informação oculta/polêmica (censura) que o fã já conhece mas quer compartilhar + edição dinâmica prende até o final",
+ "exemplo_roteiro": "Kumi havia ENFRENTADO o monstro / Em VÁRIAS pequenas lutas / Desenvolvendo profundo RESPEITO por isso / Mas ninguém esperava o que viria / A cena foi CENSURADA em 12 países",
+ "nicho_canal": "manhwareact",
+ "tags": [
+  "anime censurado",
+  "baki",
+  "curiosidade anime",
+  "cena proibida",
+  "lore anime",
+  "edit anime"
+ ],
+ "video": "2026-10-07 13-54-53.mp4",
+ "data": "2026-10-12"
+}

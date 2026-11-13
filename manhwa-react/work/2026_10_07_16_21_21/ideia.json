@@ -1,0 +1,32 @@
+{
+ "formato": "recap narrado de dramas curtos asiáticos com lição moral",
+ "descricao": "Narração contínua em português resumindo história curta asiática (drama/animação) com reviravolta e moral, legendas palavra-por-palavra sincronizadas, cortes rápidos entre cenas-chave.",
+ "replicavel": true,
+ "como_fazer": "1) Gerar roteiro de história moral curta (3 atos, reviravolta, lição) com LLM. 2) Criar storyboard: 8-12 cenas-chave descritas. 3) Gerar cada cena com Veo 3 (personagens asiáticos, cenários modernos/tradicionais) ou Pollinations para frames estáticos + zoom/pan no ffmpeg. 4) Narrar roteiro com edge-tts (voz brasileira, ritmo 1.1x) ou ElevenLabs. 5) Sincronizar legendas palavra-por-palavra (ffmpeg + ass) estilo Hormozi. 6) Adicionar trilha emocional (suspense → drama) + SFX de impacto nas reviravoltas. 7) Overlay de emoji/símbolo nos momentos-chave (choque, ironia).",
+ "ferramentas": [
+  "LLM",
+  "Veo 3",
+  "Pollinations",
+  "edge-tts",
+  "ffmpeg",
+  "overlays legendas Hormozi",
+  "trilhas",
+  "SFX"
+ ],
+ "fonte_de_material": "geração completa por IA: Veo 3 para clipes de drama (prompt detalhado de personagens/cenários asiáticos) ou Pollinations/Gemini para ilustrações estáticas animadas com ffmpeg (ken burns effect)",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "reviravolta inesperada + lição moral universal geram engajamento emocional e comentários debatendo a ética dos personagens",
+ "exemplo_roteiro": "Uma mãe rica bloqueia uma ambulância no trânsito, furiosa. Mas ela não sabia: a paciente crítica lá dentro era sua própria filha. Minutos depois, ao chegar no hospital, ela descobre a verdade. Enquanto isso, um homem arrogante também bloqueou a ambulância por orgulho. Agora os dois carregarão essa culpa para sempre. MORAL: Nunca sabemos quem estamos prejudicando com nossas atitudes.",
+ "nicho_canal": "novo canal: DramaKarma",
+ "tags": [
+  "história moral",
+  "drama asiático",
+  "reviravolta",
+  "lição de vida",
+  "karma instantâneo",
+  "recap narrado"
+ ],
+ "video": "2026-10-07 16-21-21.mp4",
+ "data": "2026-10-12"
+}

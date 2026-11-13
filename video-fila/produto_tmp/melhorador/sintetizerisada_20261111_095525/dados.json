@@ -1,0 +1,363 @@
+{
+ "video": "sintetizerisada_20261111_095525.mp4",
+ "conta": "sintetizerisada",
+ "marca": "Agenda IA",
+ "titulo": "Remarcação de última hora sem buraco na agenda",
+ "formato": "dono_mesma_foto",
+ "veo_total": 1,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.25,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 4.0,
+   "roteiro_marca": 6.0,
+   "diretor": 4.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    11.91
+   ],
+   [
+    1,
+    "dono",
+    11.04
+   ],
+   [
+    2,
+    "conversa",
+    6.69
+   ],
+   [
+    3,
+    "imagem",
+    21.06
+   ],
+   [
+    4,
+    "cartao",
+    5.65
+   ]
+  ],
+  "graves": 8,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A legenda karaokê 'para remarcar e' apresenta texto inativo com preenchimento em cinza escuro/preto e borda escura sobre fundo escuro desfocado, perdendo completamente o contraste e tornando a leitura quase invisível na tela do celular.",
+   "como_corrigir": "Ajustar o estilo da legenda para manter o preenchimento das palavras inativas sempre em branco (#FFFFFF) com contorno preto sólido e apenas a palavra falada destacada em laranja, assim como padronizado nas demais cenas."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "No simulador de WhatsApp, o texto 'Pode ser às 14h.' surge prematuramente no canto inferior esquerdo com opacidade muito baixa e sem o balão branco de fundo, gerando um texto fantasma acinzentado de baixíssimo contraste sobre o fundo bege.",
+   "como_corrigir": "Ajustar o timing de entrada da mensagem para que o balão branco e o texto 'Pode ser às 14h.' apareçam juntos apenas no frame correto (como ocorre em q09.jpg), evitando renderização parcial ou texto transparente sem fundo de apoio."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Cena parada no gancho inicial: o fundo com o apresentador está totalmente congelado em uma imagem estática por quase 4 segundos (q01 a q03), sem movimento de lábios, respiração ou câmera, transmitindo a sensação de vídeo travado no momento mais crítico de retenção.",
+   "como_corrigir": "Substituir a foto congelada por vídeo contínuo do apresentador falando a pergunta ou gesticulando, além de aplicar uma animação suave de entrada (slide down + pop) e um leve push-in contínuo (zoom digital de 100% para 105%) no cartão da pergunta."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca e jump cut entre cena 0 e cena 1: ambas utilizam o mesmo plano médio do apresentador na recepção. Ao trocar de cena, o apresentador 'salta' bruscamente no mesmo enquadramento sem mudança de câmera ou transição gráfica.",
+   "como_corrigir": "Criar diferenciação de escala na transição: aplicar um punch-in (corte para plano mais fechado a 115%) na entrada da cena 1 ou utilizar uma transição dinâmica de corte com transição rápida de slide lateral/zoom whip."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Ritmo arrastado com plano falado estático por quase 7 segundos (de 4.5s a 11.5s): o apresentador permanece no mesmo ângulo fixo sem cortes de respiro, b-rolls ou dinamismo de câmera.",
+   "como_corrigir": "Adicionar um corte com punch-in de escala aos 8 segundos ou inserir elementos gráficos de apoio (ícones flutuantes de relógio/agenda vazia com animação de pop) sincronizados com as palavras-chave faladas."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Falha na animação e continuidade do chat: o primeiro balão de mensagem do cliente ('Preciso mudar meu atendimento...') que estava em q07 desaparece repentinamente em q08, deixando a resposta da IA solta no meio da tela com resquício de texto fantasma no rodapé ('Pode ser às 14h.').",
+   "como_corrigir": "Programar a animação de chat para empilhar as mensagens: a mensagem do cliente deve deslizar para cima mantendo-se visível enquanto a resposta da IA entra suavemente de baixo para cima com efeito de typing prévio e bounce sutil."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Imagem com cara de banco de imagem genérico, 100% estática e incoerente com o roteiro: a foto do barbeiro com a mão no rosto expressando cansaço/dor de cabeça é estática (sem efeito Ken Burns/zoom) e contrasta negativamente com a mensagem de alívio e sucesso ('O resultado / Hoje minha recepção trabalha vinte e quatro horas com a agenda sempre em dia').",
+   "como_corrigir": "Substituir a foto por um b-roll em vídeo de um profissional tranquilo e satisfeito atendendo um cliente, e aplicar movimento contínuo de câmera com zoom suave de 3% a 5% ao longo do bloco."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "A imagem mostra um profissional estressado e com dor de cabeça no bloco 'O resultado', contradizendo a fala de alívio e agenda sempre em dia.",
+   "como_corrigir": "Substituir por imagem de profissional relaxado, sorridente ou atendendo com tranquilidade."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "A mensagem inicial do cliente desapareceu do chat e há texto fantasma semitransparente vazando no rodapé da simulação.",
+   "como_corrigir": "Preservar a mensagem anterior no topo e corrigir o efeito de fade-in da mensagem seguinte."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "A cena encerra com a IA apenas digitando, sem exibir a confirmação final da remarcação prometida na fala.",
+   "como_corrigir": "Adicionar o balão final da IA confirmando o agendamento para amanhã às 14h."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Grave contradição de direção de arte entre áudio/texto e imagem: enquanto a narração e os tópicos afirmam 'O resultado: recepção 24 horas com a agenda sempre em dia', a imagem de fundo mostra um profissional com expressão de extremo estresse, exaustão e dor de cabeça, segurando o nariz em desespero. Isso destrói o sentimento de alívio e sucesso que a solução deveria passar.",
+   "como_corrigir": "Na Cena 3, substituir a imagem do barbeiro estressado por uma cena positiva de resultado: o profissional relaxado, sorrindo, atendendo um cliente com calma ou conferindo o celular tranquilo em um ambiente organizado."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos não retém atenção e parece slide estático: o apresentador ao fundo está excessivamente desfocado e sem expressão marcante, enquanto o cartão de pergunta cobre a tela estaticamente. Há ainda um vazamento/glitch gráfico de sobra laranja desalinhada na borda inferior esquerda do cartão de pergunta.",
+   "como_corrigir": "Na Cena 0, trazer o apresentador em foco nítido e em primeiro plano desde o segundo zero, falando com energia direta para a lente para criar conexão humana imediata. Limpar os vazamentos visuais das caixas laranjas de fundo e animar o cartão com entrada ágil para gerar quebra de padrão (pattern interrupt)."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A simulação do WhatsApp quebra o realismo e parece slide amador: a primeira mensagem do cliente ('Preciso mudar meu atendimento...') que aparecia em q07 some subitamente em q08, e aparece um texto fantasma semitransparente ('Pode ser às 14h.') antes da hora no canto inferior esquerdo do balão.",
+   "como_corrigir": "Na Cena 2, construir a simulação com histórico acumulativo e rolagem vertical suave (scroll nativo de aplicativo), mantendo os balões anteriores visíveis, e corrigir os keyframes de opacidade para que balões futuros não fiquem visíveis como sombras antes de serem enviados."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Ritmo visual monótono e enquadramento distante: o plano é fixo e aberto por mais de 6 segundos, deixando um balcão vazio e frio ocupando 40% da parte inferior da tela, sem cortes de câmera ou recursos dinâmicos para sustentar o interesse.",
+   "como_corrigir": "Na Cena 1, aplicar um corte para enquadramento mais fechado (plano médio/close) ou um punch-in sutil de câmera enfatizando as palavras de dor ('tempo' e 'horários vagos'), reduzindo a área vazia do balcão."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "vpsblindada_ia_20261106_153434.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261110_045334.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261110_061444.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 6.5,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261110_100550.mp4",
+   "conta": "followupia.ia",
+   "formato": "cinco_veo",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 3.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261110_143858.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261111_045015.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 7.62,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.5,
+    "roteiro_marca": 10.0,
+    "diretor": 7.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261111_095525.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

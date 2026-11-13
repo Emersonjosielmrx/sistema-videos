@@ -1,0 +1,33 @@
+{
+  "escaneado_em": "2026-07-02T16:19:41.459398+00:00",
+  "total_contas": 5,
+  "contas_ok": 0,
+  "total_chaves": 0,
+  "resultados": [
+    {
+      "conta": "fabrica",
+      "status": "sessao_expirada",
+      "chaves": []
+    },
+    {
+      "conta": "mundosolar1995",
+      "status": "sessao_expirada",
+      "chaves": []
+    },
+    {
+      "conta": "canalalucinaai",
+      "status": "sessao_expirada",
+      "chaves": []
+    },
+    {
+      "conta": "seebotsia",
+      "status": "sessao_expirada",
+      "chaves": []
+    },
+    {
+      "conta": "emersonjosiel649",
+      "status": "sessao_expirada",
+      "chaves": []
+    }
+  ]
+}

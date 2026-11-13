@@ -1,0 +1,845 @@
+{
+ "part": [
+  55.0,
+  161.2
+ ],
+ "keeps": [
+  [
+   61.4,
+   61.708833000000006
+  ],
+  [
+   65.39697899999999,
+   65.90218800000001
+  ],
+  [
+   67.12925,
+   67.630396
+  ],
+  [
+   67.88743699999999,
+   68.852896
+  ],
+  [
+   69.35952099999999,
+   69.861125
+  ],
+  [
+   70.44741699999999,
+   72.0
+  ],
+  [
+   74.0,
+   77.308271
+  ],
+  [
+   78.331313,
+   80.952854
+  ],
+  [
+   81.394521,
+   81.894542
+  ],
+  [
+   82.882646,
+   83.6
+  ],
+  [
+   90.1,
+   91.26147900000001
+  ],
+  [
+   91.46208299999999,
+   93.83
+  ],
+  [
+   94.68999600000001,
+   95.70339600000001
+  ],
+  [
+   96.093021,
+   97.12791700000001
+  ],
+  [
+   97.48225,
+   98.33275
+  ],
+  [
+   99.15452099999999,
+   100.33
+  ],
+  [
+   100.67,
+   107.71225000000001
+  ],
+  [
+   109.486375,
+   113.486125
+  ],
+  [
+   116.84106299999999,
+   117.49139600000001
+  ],
+  [
+   118.869958,
+   119.37085400000001
+  ],
+  [
+   128.43920799999998,
+   128.95233299999998
+  ],
+  [
+   131.826458,
+   133.402687
+  ],
+  [
+   133.68295799999999,
+   134.18712499999998
+  ],
+  [
+   136.168542,
+   136.94968699999998
+  ],
+  [
+   138.343208,
+   138.900396
+  ],
+  [
+   140.963896,
+   143.21347899999998
+  ],
+  [
+   143.307562,
+   143.825708
+  ],
+  [
+   144.264333,
+   145.071146
+  ],
+  [
+   146.27531199999999,
+   146.77908299999999
+  ],
+  [
+   148.37935399999998,
+   148.889187
+  ],
+  [
+   149.330333,
+   149.848333
+  ],
+  [
+   150.812458,
+   151.599458
+  ],
+  [
+   151.712125,
+   152.23147899999998
+  ],
+  [
+   157.35,
+   158.69
+  ],
+  [
+   159.07001,
+   161.01245799999998
+  ]
+ ],
+ "duration_out": 44.90572300000014,
+ "zoom": [
+  [
+   3.035,
+   4.085,
+   1
+  ],
+  [
+   10.982,
+   11.632,
+   2
+  ],
+  [
+   13.261,
+   16.175,
+   1
+  ],
+  [
+   19.086,
+   23.236,
+   2
+  ],
+  [
+   23.086,
+   25.546,
+   1
+  ],
+  [
+   26.382,
+   29.392,
+   2
+  ],
+  [
+   32.006,
+   33.076,
+   1
+  ],
+  [
+   35.667,
+   37.883,
+   2
+  ],
+  [
+   41.623,
+   44.906,
+   1
+  ]
+ ],
+ "content_zoom": [
+  [
+   22.465692000000143,
+   23.615692000000145
+  ],
+  [
+   31.8155880000002,
+   32.9655880000002
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 22.515692000000143,
+   "text": "ERRADO",
+   "emoji": "⚠️"
+  },
+  {
+   "t": 31.8655880000002,
+   "text": "CARAMBA",
+   "emoji": "😱"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 3.134834000000069,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Outros efeitos sonoros\\Efeitos Sonoros\\Boowomp sound effect that they play on Spongebob when something sad happens.mp3"
+  },
+  {
+   "t": 15.921421000000095,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\MK Finish Him - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 22.515692000000143,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 24.77569200000015,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Outros efeitos sonoros\\Computador\\Windows Error - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 31.8655880000002,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\MK Get Over Here - Efeitos Sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 42.40572300000014,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 2.8,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_watchtoend.mov",
+   "dur": 1.7,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 3.134834000000069,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f622_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 4.0515005000000714,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_glitch.mov",
+   "dur": 0.566667,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 11.198687500000089,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_glitch.mov",
+   "dur": 0.566667,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 15.821421000000095,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 15.921421000000095,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.4,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 22.415692000000142,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 22.515692000000143,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_26a0_fe0f_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 24.77569200000015,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f643_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 31.7655880000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 31.7655880000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 31.8655880000002,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 42.40572300000014,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\rezero_creepy_theme.mp3",
+ "meta": {
+  "hook": "ESSA MULHER É O CAPETA DO CINEMA",
+  "title": "Assisti o filme e essa mulher é PERTURBADORA 😈💀 #shorts #react",
+  "description": "Continuando o react desse filme insano! Essa personagem é de arrepiar 😱\nO marido já começa errado, mas ela leva tudo a outro nível...\nJá assistiram? Comentem o que acharam!\nSegue pra mais reacts de filmes!\n\n#shorts #react #filme #suspense #cinema #garotaexemplar #gonegirl #thriller #hollywood #drama #cena #reacao #filmes #reactbr",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#filme",
+   "#suspense",
+   "#cinema",
+   "#garotaexemplar",
+   "#thriller",
+   "#drama"
+  ],
+  "tags": [
+   "react",
+   "filme",
+   "garota exemplar",
+   "gone girl",
+   "suspense",
+   "thriller",
+   "cinema",
+   "react filme",
+   "mulher vingativa",
+   "cena de filme",
+   "hollywood",
+   "drama",
+   "reação",
+   "react br",
+   "filmes de suspense",
+   "react filmes"
+  ],
+  "cta": "Comenta o que achou!",
+  "mood": "tense_dramatic",
+  "music": true,
+  "pinned_comment": "Quem é mais errado nesse filme: o marido ou a esposa? 🤔",
+  "title_alternatives": [
+   "O marido JÁ começa errado mas ela é PIOR 😈🔥 #shorts #react",
+   "Esse filme dá uma RAIVA dela 💀 Vocês já viram? #shorts #suspense"
+  ],
+  "work": "GAROTA EXEMPLAR",
+  "channel": "cenareact"
+ },
+ "channel": "cenareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\fire_ffb800_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "fire"
+ },
+ "words": [
+  {
+   "w": "É,",
+   "s": 3.0348340000000746,
+   "e": 3.1148340000000747,
+   "p": 0.9,
+   "lip": 0.011590984806921707,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 3.0548340000000707,
+   "e": 3.1348340000000707,
+   "p": 0.9,
+   "lip": 0.01319304048953228,
+   "speaker": "creator"
+  },
+  {
+   "w": "coitado",
+   "s": 3.134834000000069,
+   "e": 3.7348340000000775,
+   "p": 0.9,
+   "lip": 0.017257053543069365,
+   "speaker": "creator"
+  },
+  {
+   "w": "do",
+   "s": 3.7348340000000775,
+   "e": 3.934834000000066,
+   "p": 0.9,
+   "lip": 0.025903932571606652,
+   "speaker": "creator"
+  },
+  {
+   "w": "Tô",
+   "s": 10.982021000000088,
+   "e": 11.062021000000088,
+   "p": 0.9,
+   "lip": 0.010143813256134991,
+   "speaker": "creator"
+  },
+  {
+   "w": "te",
+   "s": 11.04202100000009,
+   "e": 11.242021000000094,
+   "p": 0.9,
+   "lip": 0.009314028345831518,
+   "speaker": "creator"
+  },
+  {
+   "w": "falando",
+   "s": 11.18201600000009,
+   "e": 11.482021000000088,
+   "p": 0.9,
+   "lip": 0.009356219308784223,
+   "speaker": "creator"
+  },
+  {
+   "w": "Eu",
+   "s": 13.261417000000108,
+   "e": 13.441412000000113,
+   "p": 0.9,
+   "lip": 0.013629084229483869,
+   "speaker": "creator"
+  },
+  {
+   "w": "vi",
+   "s": 13.441412000000113,
+   "e": 13.54141700000011,
+   "p": 0.9,
+   "lip": 0.013905095647431174,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 13.54141700000011,
+   "e": 13.721417000000116,
+   "p": 0.9,
+   "lip": 0.020292601857170946,
+   "speaker": "creator"
+  },
+  {
+   "w": "filme.",
+   "s": 13.721417000000116,
+   "e": 14.021417000000113,
+   "p": 0.9,
+   "lip": 0.020192611346404227,
+   "speaker": "creator"
+  },
+  {
+   "w": "Realmente",
+   "s": 14.021417000000113,
+   "e": 14.461417000000111,
+   "p": 0.9,
+   "lip": 0.01922045866997626,
+   "speaker": "creator"
+  },
+  {
+   "w": "essa",
+   "s": 14.461417000000111,
+   "e": 14.66141300000011,
+   "p": 0.9,
+   "lip": 0.016110205924055956,
+   "speaker": "creator"
+  },
+  {
+   "w": "mulher",
+   "s": 14.66141300000011,
+   "e": 15.011417000000108,
+   "p": 0.9,
+   "lip": 0.0157279147690077,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 15.011417000000108,
+   "e": 15.091417000000108,
+   "p": 0.9,
+   "lip": 0.01767747082628756,
+   "speaker": "creator"
+  },
+  {
+   "w": "capeta.",
+   "s": 15.061421000000095,
+   "e": 16.024817000000112,
+   "p": 0.9,
+   "lip": 0.010679672011341835,
+   "speaker": "creator"
+  },
+  {
+   "w": "não,",
+   "s": 19.08569200000015,
+   "e": 19.235692000000142,
+   "p": 0.9,
+   "lip": 0.018344344882600425,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 19.235692000000142,
+   "e": 19.31569200000014,
+   "p": 0.9,
+   "lip": 0.02068043533352112,
+   "speaker": "creator"
+  },
+  {
+   "w": "marido",
+   "s": 19.295692000000145,
+   "e": 19.69569200000015,
+   "p": 0.9,
+   "lip": 0.015954942082763508,
+   "speaker": "creator"
+  },
+  {
+   "w": "ele",
+   "s": 19.69569200000015,
+   "e": 19.91569200000015,
+   "p": 0.9,
+   "lip": 0.006155259704932303,
+   "speaker": "creator"
+  },
+  {
+   "w": "já",
+   "s": 19.91569200000015,
+   "e": 20.575688000000156,
+   "p": 0.9,
+   "lip": 0.009626813014223343,
+   "speaker": "creator"
+  },
+  {
+   "w": "começa",
+   "s": 20.575688000000156,
+   "e": 21.39568800000015,
+   "p": 0.9,
+   "lip": 0.010164623255493013,
+   "speaker": "creator"
+  },
+  {
+   "w": "sendo...",
+   "s": 21.39568800000015,
+   "e": 22.97569200000015,
+   "p": 0.9,
+   "lip": 0.012173864229937015,
+   "speaker": "creator"
+  },
+  {
+   "w": "De",
+   "s": 22.515692000000143,
+   "e": 22.735692000000142,
+   "p": 0.9,
+   "lip": 0.013569951384957502,
+   "speaker": "creator"
+  },
+  {
+   "w": "qualquer",
+   "s": 22.735692000000142,
+   "e": 23.075688000000156,
+   "p": 0.9,
+   "lip": 0.016542614811534,
+   "speaker": "creator"
+  },
+  {
+   "w": "forma,",
+   "s": 23.075688000000156,
+   "e": 23.515692000000143,
+   "p": 0.9,
+   "lip": 0.019160843719104995,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 23.515692000000143,
+   "e": 23.59569200000014,
+   "p": 0.9,
+   "lip": 0.016825811596539737,
+   "speaker": "creator"
+  },
+  {
+   "w": "homem",
+   "s": 23.535687000000152,
+   "e": 23.755692000000153,
+   "p": 0.9,
+   "lip": 0.017279332488768298,
+   "speaker": "creator"
+  },
+  {
+   "w": "já",
+   "s": 23.755692000000153,
+   "e": 24.035687000000152,
+   "p": 0.9,
+   "lip": 0.015928516265618108,
+   "speaker": "creator"
+  },
+  {
+   "w": "começa",
+   "s": 24.035687000000152,
+   "e": 24.495692000000147,
+   "p": 0.9,
+   "lip": 0.01252336258650022,
+   "speaker": "creator"
+  },
+  {
+   "w": "sendo",
+   "s": 24.495692000000147,
+   "e": 24.77569200000015,
+   "p": 0.9,
+   "lip": 0.01725784663663908,
+   "speaker": "creator"
+  },
+  {
+   "w": "errado.",
+   "s": 24.77569200000015,
+   "e": 25.39568800000015,
+   "p": 0.9,
+   "lip": 0.01293664787235221,
+   "speaker": "creator"
+  },
+  {
+   "w": "Mesmo",
+   "s": 26.38156700000016,
+   "e": 27.421567000000167,
+   "p": 0.9,
+   "lip": 0.018461250416347504,
+   "speaker": "creator"
+  },
+  {
+   "w": "sem",
+   "s": 27.421567000000167,
+   "e": 27.60156700000016,
+   "p": 0.9,
+   "lip": 0.017206911352844,
+   "speaker": "creator"
+  },
+  {
+   "w": "prova,",
+   "s": 27.60156700000016,
+   "e": 28.02156700000016,
+   "p": 0.9,
+   "lip": 0.016935442365979977,
+   "speaker": "creator"
+  },
+  {
+   "w": "quanto",
+   "s": 28.02156700000016,
+   "e": 28.301567000000162,
+   "p": 0.9,
+   "lip": 0.014589275023623898,
+   "speaker": "creator"
+  },
+  {
+   "w": "mais",
+   "s": 28.301567000000162,
+   "e": 28.581567000000163,
+   "p": 0.9,
+   "lip": 0.014292874615136798,
+   "speaker": "creator"
+  },
+  {
+   "w": "com",
+   "s": 28.581567000000163,
+   "e": 28.84156700000017,
+   "p": 0.9,
+   "lip": 0.012867953126129195,
+   "speaker": "creator"
+  },
+  {
+   "w": "prova.",
+   "s": 28.84156700000017,
+   "e": 29.24156700000016,
+   "p": 0.9,
+   "lip": 0.008736634057435907,
+   "speaker": "creator"
+  },
+  {
+   "w": "Oh,",
+   "s": 32.00558800000019,
+   "e": 32.2455880000002,
+   "p": 0.9,
+   "lip": 0.008557797161627032,
+   "speaker": "creator"
+  },
+  {
+   "w": "caramba!",
+   "s": 32.2455880000002,
+   "e": 32.9255780000002,
+   "p": 0.9,
+   "lip": 0.005685989282081321,
+   "speaker": "creator"
+  },
+  {
+   "w": "vem",
+   "s": 35.66687900000014,
+   "e": 35.84687900000014,
+   "p": 0.9,
+   "lip": 0.017507567200395743,
+   "speaker": "creator"
+  },
+  {
+   "w": "investigar",
+   "s": 35.84687900000014,
+   "e": 36.366879000000154,
+   "p": 0.9,
+   "lip": 0.013237235902262412,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 36.366879000000154,
+   "e": 36.54686900000016,
+   "p": 0.9,
+   "lip": 0.0094679645176387,
+   "speaker": "creator"
+  },
+  {
+   "w": "casa...",
+   "s": 36.54686900000016,
+   "e": 37.73279600000015,
+   "p": 0.9,
+   "lip": 0.0032466224974263985,
+   "speaker": "creator"
+  },
+  {
+   "w": "pessoal,",
+   "s": 41.62327500000015,
+   "e": 41.93327500000015,
+   "p": 0.9,
+   "lip": 0.012691241581830241,
+   "speaker": "creator"
+  },
+  {
+   "w": "assistam",
+   "s": 41.93327500000015,
+   "e": 42.43327500000015,
+   "p": 0.9,
+   "lip": 0.00644987465935765,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 42.43327500000015,
+   "e": 42.67327500000016,
+   "p": 0.9,
+   "lip": 0.0077537709844088315,
+   "speaker": "creator"
+  },
+  {
+   "w": "filme,",
+   "s": 42.67327500000016,
+   "e": 42.75327500000016,
+   "p": 0.9,
+   "lip": 0.008230869841106334,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 42.73326500000016,
+   "e": 42.83327500000016,
+   "p": 0.9,
+   "lip": 0.00952139116319475,
+   "speaker": "creator"
+  },
+  {
+   "w": "filme",
+   "s": 42.83327500000016,
+   "e": 42.96327500000015,
+   "p": 0.9,
+   "lip": 0.008842439773212949,
+   "speaker": "creator"
+  },
+  {
+   "w": "bom.",
+   "s": 42.96327500000015,
+   "e": 43.73326500000016,
+   "p": 0.9,
+   "lip": 0.012392414815141146,
+   "speaker": "creator"
+  },
+  {
+   "w": "Dá",
+   "s": 43.73326500000016,
+   "e": 43.97326500000017,
+   "p": 0.9,
+   "lip": 0.01535821679521836,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 43.97326500000017,
+   "e": 44.05326500000017,
+   "p": 0.9,
+   "lip": 0.017912101686618876,
+   "speaker": "creator"
+  },
+  {
+   "w": "raiva",
+   "s": 44.05326500000015,
+   "e": 44.31326500000014,
+   "p": 0.9,
+   "lip": 0.015804651412045352,
+   "speaker": "creator"
+  },
+  {
+   "w": "dela.",
+   "s": 44.31326500000014,
+   "e": 44.90572300000014,
+   "p": 0.9,
+   "lip": 0.010816604620672368,
+   "speaker": "creator"
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "modelo": "argon-kiro",
+ "segundos": 36,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Proibir sobreposição de títulos ou tarjas no topo que cubram rostos ou colidam com outros elementos gráficos.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "No lote atual, há falhas repetidas de sobreposição gráfica e cobertura de rostos: em sem-obra-c853c4 (q16) e sem-obra-110e14 (q14), a tarja/hook cobre os rostos dos personagens sem justificativa de legenda da fonte; além disso, em sem-obra-8a49d5 (q01) e sem-obra-777e60 (q01), ocorrem colisões e sobreposições de títulos no topo da tela.",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Proibir sobreposição de títulos ou tarjas no topo que cubram rostos ou colidam com outros elementos gráficos.",
+    "porque": "Evita colisão de textos e obstrução de rostos recorrente em sem-obra-8a49d5, sem-obra-110e14 e sem-obra-c853c4."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Ajustar posicionamento automático de tarjas e marcas d'água",
+    "tipo": "CERTEZA",
+    "prova": "Os shorts sem-obra-c853c4 (q16) e sem-obra-777e60 (q04) apresentam tarjas e marcas d'água posicionadas diretamente sobre os olhos e rostos dos personagens.",
+    "onde": "pipeline/composicao.py",
+    "como_testar": "Validar se a renderização de tarjas e marcas d'água evita coordenadas centrais e áreas de rostos mapeadas."
+   }
+  ],
+  "mural": [
+   "Linha Cortes: atenção estrita ao posicionamento de tarjas e marcas d'água para preservar as expressões faciais dos personagens."
+  ]
+ }
+}

@@ -1,0 +1,58 @@
+﻿=== PROCESSOS PYTHON ===
+PID=14940 Name=python CPU=0 WS=0.0MB Path=C:\projetos-navegador\venv\Scripts\python.exe
+PID=17084 Name=python CPU=12.109375 WS=59.5MB Path=C:\Program Files\Python313\python.exe
+
+=== COMMANDLINES ===
+PID=14940 CMD=C:\projetos-navegador\venv\Scripts\python.exe -u C:\projetos-navegador\_bot_wrapper.py
+PID=17084 CMD=C:\projetos-navegador\venv\Scripts\python.exe -u C:\projetos-navegador\_bot_wrapper.py
+
+=== LOG FILES ===
+bot_output.log Size=17925 Modified=08/05/2026 08:20:47
+bot_stderr.log Size=0 Modified=08/04/2026 16:15:30
+bot_stdout.log Size=0 Modified=08/04/2026 16:15:30
+launcher_output.log Size=112 Modified=08/05/2026 08:14:00
+_bot_output.log Size=0 Modified=08/04/2026 15:50:08
+
+=== bot_output.log ===
+[2026-08-05 08:19:41] [HEALTH] comoseriasecomia com 4 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:19:47] COOLDOWN comoseriasecomia: 5s (3 erros)
+[2026-08-05 08:19:48] ERRO comoseriasecomia/lCSNLQU-ACI: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:19:48] [HEALTH] comoseriasecomia com 5 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:19:52] ERRO comoseriasecomia/cMNu1uqwH2c: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:19:52] [HEALTH] comoseriasecomia com 6 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:19:56] ERRO comoseriasecomia/watch?v=Bhz: Page.goto: net::ERR_ABORTED at https://www.youtube
+[2026-08-05 08:19:56] PROXY BLACKLIST: idx=20 (port=18120) por 300s
+[2026-08-05 08:19:56] Proxy falhou para comoseriasecomia â€” nao conta como falha da conta
+[2026-08-05 08:19:56] ERRO comoseriasecomia/watch?v=d9z: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:19:56] [HEALTH] comoseriasecomia com 7 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:19:58] COOLDOWN comoseriasecomia: 10s (4 erros)
+[2026-08-05 08:19:59] COOLDOWN comoseriasecomia: 5s (3 erros)
+[2026-08-05 08:20:05] ERRO comoseriasecomia/watch?v=u3q: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:20:05] [HEALTH] comoseriasecomia com 8 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:20:08] ERRO comoseriasecomia/8_G2RGQ1RPo: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:20:08] [HEALTH] comoseriasecomia com 9 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:20:09] ERRO comoseriasecomia/-Ocmr6ftIgo: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:20:09] [HEALTH] comoseriasecomia com 10 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:20:13] COOLDOWN comoseriasecomia: 5s (3 erros)
+[2026-08-05 08:20:13] ERRO comoseriasecomia/BCWSmFQ3VK0: Keyboard.press: Target page, context or browser ha
+[2026-08-05 08:20:13] Chrome morreu para comoseriasecomia â€” saindo do lote (nao Ã© ban)
+[2026-08-05 08:20:18] ERRO comoseriasecomia/WzqcO_FXFjE: Page.goto: Target page, context or browser has bee
+[2026-08-05 08:20:18] Chrome morreu para comoseriasecomia â€” saindo do lote (nao Ã© ban)
+[2026-08-05 08:20:19] ERRO inovaremanhwaversefrench/watch?v=Bhz: Page.evaluate: Execution context was destroyed, mo
+[2026-08-05 08:20:37] ERRO inovaremanhwaversefrench/watch?v=8v7: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:20:38] ERRO inovaremanhwaversefrench/iLpQp2_jJI8: Page.goto: Navigation to "https://www.youtube.com/
+[2026-08-05 08:20:38] [HEALTH] inovaremanhwaversefrench com 3 falhas seguidas â€” cooldown 1h
+[2026-08-05 08:20:42] OK [L] @Fabiocomia/tN5dtj8EXWQ <- inovaremanhwaversefrench (pt)
+[2026-08-05 08:20:47] ERRO inovaremanhwaversefrench/watch?v=Hs1: Page.goto: Navigation to "https://www.youtube.com/
+
+=== launcher_output.log ===
+=== LAUNCHER START 08/05/2026 08:14:00 ===
+WMI ReturnValue=0 PID=14940
+SUCCESS: Bot lancado com PID 14940
+
+=== engage.log ===
+(not found)
+
+=== stats.json ===
+(not found)
+

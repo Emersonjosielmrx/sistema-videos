@@ -1,0 +1,12 @@
+[0:a]atrim=start=0.596:end=6.224,asetpts=PTS-STARTPTS[a0];
+[0:a]atrim=start=7.109:end=25.267,asetpts=PTS-STARTPTS[a1];
+[a0][a1]concat=n=2:v=0:a=1[acat];
+[1:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-12dB,adelay=0|0[sfx1];
+[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-12dB,adelay=7518|7518[sfx2];
+[3:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-9.0dB,adelay=10518|10518[sfx3];
+[4:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-12dB,adelay=12518|12518[sfx4];
+[5:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=-12dB,adelay=21285|21285[sfx5];
+[6:a]aformat=sample_rates=48000:channel_layouts=stereo,loudnorm=I=-30:TP=-3:LRA=7,afade=t=in:d=1.5[mus];
+[acat]asplit=2[voice][sc];
+[mus][sc]sidechaincompress=threshold=0.02:ratio=8:attack=30:release=500:makeup=1[musd];
+[voice][sfx1][sfx2][sfx3][sfx4][sfx5][musd]amix=inputs=7:normalize=0:duration=first[amix]

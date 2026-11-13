@@ -1,0 +1,29 @@
+{
+ "pose": "capa_do_parceiro_melhorada",
+ "ref": "D:\\recapd-ambientes\\producao\\workspace\\cache\\capa_ia_anime\\parceiro_nV2aNVwUL-A.jpg",
+ "source_url": "https://www.youtube.com/watch?v=nV2aNVwUL-A",
+ "texto": "ELE VIROU A FORMIGA MAIS FORTE",
+ "formato": "16:9",
+ "checagem": {
+  "letras": false,
+  "sangue": false,
+  "adultos": true,
+  "dividida": false,
+  "exposto": false,
+  "ele": [
+   3,
+   608,
+   321,
+   747
+  ],
+  "ela": [
+   318,
+   442,
+   458,
+   510
+  ],
+  "anatomia": false,
+  "figurantes": true
+ },
+ "prompt": "Recreate and IMPROVE the attached YouTube thumbnail as a brand-new 16:9 anime thumbnail. Keep the SAME main character(s) from it - same face, hair, eyes, outfit and weapon - so fans instantly recognize the story. Make it more striking: one single dramatic scene (never a split screen or panels), the hero large in the frame, cinematic lighting, vibrant colors, strong contrast, sharp clean anime art. Add one or two gorgeous, attractive ADULT anime women that fit this story's world (same era, setting and clothing style) close to the hero, alluring but fully clothed, nothing exposed. Story premise (Portuguese, context only - never write it): Ele renasceu como uma formiga nível 1 com um poder absurdo e conquistou a rainha. Remove ALL text, letters, logos, channel marks and watermarks. Left third of the image less busy."
+}

@@ -1,0 +1,47 @@
+# docker-compose para rodar o Hermes Call localmente ou numa VPS simples.
+# A PRODUÇÃO não usa este arquivo (roda via systemd, publicada com ops/publicar.sh).
+# Este compose é uma alternativa direta (Postgres + app) pra subir rápido.
+#
+# Antes de subir, crie um .env ao lado deste arquivo (o .env NÃO vai pro git) com:
+#   POSTGRES_PASSWORD=<senha forte>
+#   HERMES_JWT_SECRET=<32+ caracteres aleatórios>
+#   HERMES_ADMIN_EMAIL=<seu e-mail>   HERMES_ADMIN_PASSWORD=<senha do admin>
+# Suba com:  docker compose up -d
+# A imagem vem do Docker Hub; troque a tag conforme o canal (:latest | :next | :vX.Y.Z).
+
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-hermes}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD num .env ao lado deste arquivo}
+      POSTGRES_DB: wacalls_main
+    volumes:
+      - hermes_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-hermes} -d wacalls_main"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: fabricadeautomacoesia/hermes-call:latest
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WACALLS_PG_URL: postgres://${POSTGRES_USER:-hermes}:${POSTGRES_PASSWORD}@db:5432/wacalls_main?sslmode=disable
+      PORT: "8080"
+      # Sem estes o servidor recusa subir (segurança):
+      HERMES_JWT_SECRET: ${HERMES_JWT_SECRET:?defina HERMES_JWT_SECRET no .env}
+      HERMES_ADMIN_EMAIL: ${HERMES_ADMIN_EMAIL:-admin@hermescall.com}
+      HERMES_ADMIN_PASSWORD: ${HERMES_ADMIN_PASSWORD:?defina HERMES_ADMIN_PASSWORD no .env}
+      # Opcionais (ver README): HERMES_TELEGRAM_TOKEN, HERMES_AI_*
+    ports:
+      - "8080:8080"
+      - "50000:50000/udp"
+
+volumes:
+  hermes_pg:

@@ -1,0 +1,153 @@
+{
+ "_leia": "Melhorador do recap LONGO (dona 26/10: 'cópia do sistema de melhoria só pro vídeo longo, faz o que o chat faz: vê o vídeo feito e faz o próximo melhor/mais viral; fica pronto e só liga no meu sinal'). LIGAR/DESLIGAR = controle.json projeto 'melhorador_longo' etapa 'producao' (painel :8790). Modelos em ordem; o 1º que responder vale. Nada de Opus nem Kiro por agora (dona 27/10). Gemini tem histórico de quebrar o sistema: por isso ele só mexe nas ALAVANCAS abaixo (chave, tipo e faixa conferidos pelo código) e código vira PROPOSTA (PROPOSTAS.md) pra uma sessão forte ou a dona decidir.",
+ "proibidos": [
+  "kiro"
+ ],
+ "lote": 3,
+ "experimento": {
+  "_leia": "28/10 teste A/B: decide quando cada lado tem 'videos_por_lado' vídeos analisados. B vence se a nota do júri subir >= 'nota_min' E (sem views ainda OU views/h de B >= A); ou se as views/h de B forem >= 'views_fator' x A com nota sem cair mais que 0.5. Render de B > 'render_max' x A = B perde (tempo). Vencedor B = vira alavanca global (vigiada como as outras).",
+  "videos_por_lado": 2,
+  "nota_min": 0.3,
+  "views_fator": 1.3,
+  "render_max": 1.4
+ },
+ "max_mudancas_por_lote": 2,
+ "piora_desfaz": 1.0,
+ "videos_para_julgar_mudanca": 2,
+ "alavancas": {
+  "longo.json:cta.ligado": {
+   "tipo": "bool"
+  },
+  "longo.json:cta.depois_da_frase": {
+   "tipo": "int",
+   "min": 2,
+   "max": 8
+  },
+  "longo.json:mascote.ligado": {
+   "tipo": "bool"
+  },
+  "longo.json:mascote.max": {
+   "tipo": "int",
+   "min": 0,
+   "max": 15
+  },
+  "longo.json:capitulos.a_cada_s": {
+   "tipo": "int",
+   "min": 180,
+   "max": 900
+  },
+  "longo.json:capitulos.max": {
+   "tipo": "int",
+   "min": 4,
+   "max": 30
+  },
+  "longo.json:efeitos.ANIME_FX_MOV": {
+   "tipo": "str",
+   "valores": [
+    "0",
+    "1"
+   ]
+  },
+  "longo.json:resumo.ligado": {
+   "tipo": "bool"
+  },
+  "longo.json:resumo.max": {
+   "tipo": "int",
+   "min": 4,
+   "max": 10
+  },
+  "longo.json:mascote.fala": {
+   "tipo": "bool"
+  },
+  "longo.json:mascote.tom": {
+   "tipo": "str",
+   "valores": [
+    "+6%,+22Hz",
+    "+0%,+0Hz",
+    "+10%,+35Hz",
+    "+4%,+12Hz"
+   ]
+  },
+  "longo.json:mascote.voz": {
+   "tipo": "str",
+   "valores": [
+    "pt-BR-FranciscaNeural",
+    "pt-BR-ThalitaMultilingualNeural"
+   ]
+  },
+  "teste_narradores.json:por_video": {
+   "tipo": "int",
+   "min": 2,
+   "max": 12
+  },
+  "teste_narradores.json:continuo": {
+   "tipo": "bool"
+  }
+ },
+ "camadas": {
+  "_leia": "27/10 (dona): 'analista' = júri por amostra com QUADROS (precisa ler imagem) — Gemini 3.8. 'decisor' = Argon puro com prazo curto (3º número, s) e, se demorar/falhar, Gemini 3.8 (2 rotas). Nada de Opus/Kiro (modelos_desligados) até a dona liberar. | 06/11 dona (\"coloque o Opus 5.5 Antigravity e fique monitorando o que ele não vê\"): decisor e código = ag-opus-5-5 (Antigravity, não gasta a cota do Claude), Gemini 3.8 de reserva; analista com quadros segue Gemini. | 06/11 22:45 (chat dos Shorts, dona viajando): Antigravity responde 'This version of Antigravity is no longer supported' / ag-opus-5-5 0 de 232 OK no dia — gemini/gemini-3.5-flash (AI Studio pelo OmniRoute, testado OK com imagem) na frente; os do Antigravity ficam de reserva pra quando voltarem.",
+  "analista": [
+   [
+    "gemini/gemini-3.5-flash",
+    40
+   ],
+   [
+    "agy/gemini-3.8-flash-high",
+    30
+   ],
+   [
+    "antigravity/gemini-3.8-flash-tiered",
+    40
+   ]
+  ],
+  "decisor": [
+   [
+    "gemini/gemini-3.5-flash",
+    60,
+    900
+   ],
+   [
+    "ag-opus-5-5",
+    60,
+    900
+   ],
+   [
+    "antigravity/gemini-3.8-flash-tiered",
+    30,
+    900
+   ],
+   [
+    "agy/gemini-3.8-flash-high",
+    30,
+    900
+   ]
+  ]
+ },
+ "modelos_desligados": [
+  "kiro",
+  "kr/",
+  "sonnet",
+  "argon-opus",
+  "argon-kiro",
+  "argon-pro",
+  "cc/claude-opus",
+  "opus-auto",
+  "argon-opus"
+ ],
+ "_leia_modelos": "Dona 27/10 15:40: nada de Opus nem Kiro (nem híbridos com eles) em etapa automática — só Argon (prazo curto: 3º número = segundos) com fallback Gemini 3.8. Testes 27/10 (COMPARACAO_MODELOS.md): Argon puro = melhor em análise/decisão e texto criativo; Gemini 3.8 = código. Voltar Opus/Kiro só quando a dona liberar (tirar de modelos_desligados).",
+ "codigo": {
+  "_leia": "Dona 27/10: o melhorador conserta código sozinho (caixa isolada -> diff pequeno e válido -> real com backup -> pacote pras GPUs -> vigiado; nota cai = volta o backup). 'modelo' = o modelo de código que a dona vai passar (trocar aqui). texto=true manda o arquivo no prompt (Argon puro); false = com ferramentas.",
+  "ligado": true,
+  "modelo": "ag-opus-5-5",
+  "texto": false,
+  "turnos": 40,
+  "max_linhas": 60,
+  "pastas": [
+   "bin",
+   "colab",
+   "config"
+  ],
+  "reserva": "agy/gemini-3.8-flash-high"
+ },
+ "_modelos_desligados_06nov": "06/11: \"opus\" saiu da lista para liberar SÓ o ag-opus-5-5 (Antigravity). cc/claude-opus e opus-auto (cota do Claude da dona) continuam proibidos."
+}

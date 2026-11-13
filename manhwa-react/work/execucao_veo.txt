@@ -1,0 +1,41 @@
+  MOVIDO   D:\veo\beta\chrome_gen_canalalucinaai -> D:\logins-google\cofre\perfis\canalalucinaai__google
+  MOVIDO   D:\veo\beta\chrome_gen_conta5 -> D:\logins-google\cofre\perfis\fabiovideoseducativos
+  MOVIDO   D:\veo\beta\chrome_gen_emerson -> D:\logins-google\cofre\perfis\emersonjosiel649
+  MOVIDO   D:\veo\beta\chrome_gen_filmescomia -> D:\logins-google\cofre\perfis\filmescomia00
+  MOVIDO   D:\veo\beta\chrome_gen_mundosolar -> D:\logins-google\cofre\perfis\mundosolar1995
+  MOVIDO   D:\veo\beta\chrome_gen_nova_225153 -> D:\logins-google\cofre\perfis\emersonjosiel2029
+  MOVIDO   D:\veo\beta\profiles\chrome_gen_nova_1785463299 -> D:\logins-google\cofre\perfis\emersonjosiel2030
+  MOVIDO   D:\veo\beta\profiles\chrome_gen_nova_1785463629 -> D:\logins-google\cofre\perfis\inovaremanhwabr
+  MOVIDO   D:\veo\beta\profiles\chrome_gen_nova_1785464200 -> D:\logins-google\cofre\perfis\inovaremanhwaverseing
+  MOVIDO   D:\veo\beta\profiles\chrome_gen_nova_1786128033 -> D:\logins-google\cofre\perfis\emersonjosiel2027
+  MOVIDO   D:\veo\beta\profiles\chrome_gen_nova_1786130581 -> D:\logins-google\cofre\perfis\jogoscomia
+  APAGADO  D:\veo\beta$NEWPROF -> D:\logins-google\cofre\perfis\emersonjosiel2026
+  APAGADO  D:\veo\beta$profile -> 
+  APAGADO  D:\veo\beta\chrome_gen_conta6 -> D:\logins-google\cofre\perfis\fabricadeautomacoes0
+  APAGADO  D:\veo\beta\chrome_gen_conta7 -> D:\logins-google\cofre\perfis\jogoscomia
+  APAGADO  D:\veo\beta\chrome_gen_conta8 -> D:\logins-google\cofre\perfis\fabricadeautomacoesia
+  APAGADO  D:\veo\beta\chrome_gen_conta9 -> 
+  APAGADO  D:\veo\beta\chrome_gen_inovaremanhwabr -> 
+  APAGADO  D:\veo\beta\chrome_gen_mundosolar1995 -> D:\logins-google\cofre\perfis\mundosolar1995
+  APAGADO  D:\veo\beta\chrome_gen_nova_224751 -> D:\logins-google\cofre\perfis\emersonjosiel2027
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1785463455 -> D:\logins-google\cofre\perfis\inovaremanhwaverseesp
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1785463797 -> 
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1786126074 -> D:\logins-google\cofre\perfis\emersonjosiel2026
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1786128564 -> D:\logins-google\cofre\perfis\emersonjosiel2029
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1786128712 -> D:\logins-google\cofre\perfis\emersonjosiel2030
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1786128902 -> D:\logins-google\cofre\perfis\inovaremanhwaverseesp
+  APAGADO  D:\veo\beta\profiles\chrome_gen_nova_1786130990 -> 
+  APAGADO  D:\veo\experimental\chrome_gen_canalalucinaai -> 
+  APAGADO  D:\veo\experimental\chrome_gen_mundosolar -> 
+Traceback (most recent call last):
+  File "D:\logins-google\migrar_para_cofre.py", line 160, in <module>
+    feitos = executar(plano, so)
+  File "D:\logins-google\migrar_para_cofre.py", line 139, in executar
+    shutil.rmtree(de)
+    ~~~~~~~~~~~~~^^^^
+  File "C:\Users\Haylla\AppData\Local\Programs\Python\Python313\Lib\shutil.py", line 780, in rmtree
+    onexc(os.lstat, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Haylla\AppData\Local\Programs\Python\Python313\Lib\shutil.py", line 778, in rmtree
+    st = os.lstat(path)
+FileNotFoundError: [WinError 2] O sistema n�o pode encontrar o arquivo especificado: 'D:\\veo\\experimental\\chrome_gen_seebotsia'

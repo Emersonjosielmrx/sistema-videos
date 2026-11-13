@@ -1,0 +1,15 @@
+Pasta de SEGREDOS do Genspark / 1min. Vem vazia de propósito. Nunca mande estes arquivos pra ninguém.
+
+1min.key
+    Uma linha só com a chave de API do 1min.ai.
+    Onde criar: app.1min.ai > menu da equipe (canto) > API > New API Key.
+    (Para várias contas em rodízio, o umin\criar_contas.py grava as chaves em umin\umin_contas.json sozinho.)
+
+captcha.key   (OPCIONAL, só se um dia o Genspark passar a exigir reCAPTCHA no modo puro)
+    Uma linha: capsolver:CAP-xxxxxxxx   ou   2captcha:xxxxxxxx
+
+genspark_recaptcha.json   (OPCIONAL; sem ele usa a sitekey padrão que está no genspark_api.py)
+    {"sitekey": "6Lf...", "action": "ai_chat"}
+
+Os cookies de cada conta do Genspark NÃO ficam aqui: ficam em ..\cookies\<conta>.json e são criados por
+    python genspark_http_puro.py capturar --conta <apelido>

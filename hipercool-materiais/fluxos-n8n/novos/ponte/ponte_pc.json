@@ -1,0 +1,1325 @@
+{
+ "name": "🌉 Ponte PC ↔ n8n (fila para os geradores e postadores do PC, sem chave)",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🌉 Ponte PC ↔ n8n\nO n8n não alcança o PC (e não deve: nada de porta aberta). Então o PC é que pergunta: o trabalhador do PC busca o próximo pedido a cada 20 s em **/webhook/ponte-pc/proximo**, faz com o que já existe lá (Flow/Nano Banana, ffmpeg, caixa de saída dos postadores) e devolve em **/resultado**.\n\nLigar no PC: `D:\\hipercool-materiais\\fluxos-n8n\\ponte-pc\\LIGAR_PONTE.bat`. Token: `ponte-pc\\config.json`.\n\nNada é postado daqui: \"guardar_para_postar\" só deixa o vídeo na caixa de saída para aprovação.",
+    "height": 320,
+    "width": 620,
+    "color": 4
+   },
+   "id": "84440313-70bd-538c-9755-f04a02b0a207",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -60,
+    -420
+   ]
+  },
+  {
+   "parameters": {
+    "path": "ponte-pc",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "39ba8427-ec74-527d-a2a9-76aa73b150fc",
+   "name": "🔔 Página da ponte (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "595fbf26-d08c-5d94-ba4a-126f1dda0f95"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "visto",
+    "key": "ponte:visto",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "9cc26992-f6c5-5ccc-b0e8-dc58c73ebe19",
+   "name": "📖 Lê o sinal do PC",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    0
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Página da ponte: PC online?, pedir uma ação e acompanhar.\n// ── Moldura das páginas (mesmo visual em todos os fluxos grátis) ──\nfunction pagina(titulo, corpo, script) {\n  const css = `\n:root{--fundo:#f6f5f2;--cartao:#fff;--texto:#1d1d1b;--suave:#6b6b66;--linha:#e3e1db;--acento:#0f766e;--acento2:#115e59;--erro:#b42318;--ok:#067647}\n@media (prefers-color-scheme:dark){:root{--fundo:#121412;--cartao:#1b1e1c;--texto:#ecebe7;--suave:#a3a39d;--linha:#2c302d;--acento:#2dd4bf;--acento2:#5eead4;--erro:#f97066;--ok:#47cd89}}\n*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif}\nmain{max-width:760px;margin:0 auto;padding:20px 16px 48px}h1{font-size:1.45rem;margin:.2em 0 .1em}h2{font-size:1.1rem;margin:1.2em 0 .5em}\n.sub{color:var(--suave);margin:0 0 18px}.cartao{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:12px 0}\nlabel{display:block;font-weight:600;margin:12px 0 6px}textarea,input,select{width:100%;padding:11px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);color:var(--texto);font:inherit}\ntextarea{min-height:120px;resize:vertical}.linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}\nbutton,.botao{display:inline-block;background:var(--acento);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 1rem system-ui,sans-serif;cursor:pointer;text-decoration:none;margin-top:14px}\n@media (prefers-color-scheme:dark){button,.botao{color:#04211e}}\nbutton[disabled]{opacity:.55;cursor:wait}.botao.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}\n.aviso{color:var(--suave);font-size:.9rem}.erro{color:var(--erro);font-weight:600}.ok{color:var(--ok);font-weight:600}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.grade img,.grade video{width:100%;border-radius:10px;border:1px solid var(--linha);background:#000}\nvideo,audio{width:100%;margin-top:10px;border-radius:10px}pre{white-space:pre-wrap;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:12px;font-size:.9rem}\n.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0}.barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .6s}\n.selo{display:inline-block;font-size:.78rem;border:1px solid var(--linha);border-radius:99px;padding:2px 9px;color:var(--suave);margin:2px 4px 2px 0}\nfooter{color:var(--suave);font-size:.82rem;margin-top:28px}`;\n  return '<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n    '<meta name=\"robots\" content=\"noindex\"><title>' + titulo + '</title><style>' + css + '</style></head><body><main>' + corpo +\n    '<footer>Feito com serviços grátis e sem chave (Hugging Face, Pollinations, Bing/Google Tradutor). Pode demorar ou falhar quando eles estão cheios.</footer>' +\n    '</main>' + (script ? '<script>' + script + '</script>' : '') + '</body></html>';\n}\nconst escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\nlet visto = null;\ntry { visto = JSON.parse($input.first().json.visto || 'null'); } catch (e) { visto = null; }\nconst ACOES = {\"saude\": \"Saúde do PC (memória, disco, hora)\", \"imagem_flow\": \"Imagem no Google Flow / Nano Banana (contas do PC, 0 crédito)\", \"montar_video\": \"Montar vídeo no ffmpeg do PC (filme da fábrica grátis: vertical ou deitado)\", \"guardar_para_postar\": \"Guardar vídeo na caixa de saída do PC (os postadores postam com aprovação)\"};\nconst online = visto && Date.now() - Date.parse(visto.quando) < 3 * 60e3;\nconst corpo = `\n<h1>🌉 Ponte PC ↔ n8n</h1>\n<p class=\"sub\">O n8n deixa o pedido numa fila; o trabalhador do PC busca, faz com os geradores que já existem no PC\n(Flow/Nano Banana, ffmpeg...) e devolve o resultado. Sem abrir porta no PC e sem instalar nada no servidor.</p>\n<div class=\"cartao\"><b>PC:</b> ${online ? '<span class=\"ok\">online</span> (' + escHtml(visto.maquina) + ', visto ' +\n  new Date(visto.quando).toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' }) + ')'\n  : '<span class=\"erro\">fora do ar</span>' + (visto ? ' (último sinal ' + new Date(visto.quando).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) + ')' : '') +\n  ' — no PC: <code>D:\\\\hipercool-materiais\\\\fluxos-n8n\\\\ponte-pc\\\\LIGAR_PONTE.bat</code>'}</div>\n<div class=\"cartao\">\n  <label for=\"token\">Token da ponte</label><input id=\"token\" type=\"password\" placeholder=\"está em ponte-pc\\\\config.json no PC\">\n  <label for=\"acao\">Ação</label><select id=\"acao\">${Object.entries(ACOES).map(([k, v]) => '<option value=\"' + k + '\">' + escHtml(v) + '</option>').join('')}</select>\n  <label for=\"dados\">Dados (JSON)</label><textarea id=\"dados\">{\"prompt\": \"casa moderna com placas solares, fim de tarde\", \"formato\": \"9:16\"}</textarea>\n  <button id=\"ir\">Mandar para o PC</button>\n  <p id=\"estado\" class=\"aviso\"></p>\n  <div id=\"saida\"></div>\n</div>\n<div class=\"cartao aviso\">Outros fluxos: <code>POST /webhook/ponte-pc/pedido</code> com cabeçalho <code>X-Ponte-Token</code> e\n<code>{\"acao\":\"imagem_flow\",\"dados\":{...}}</code> → <code>{\"id\",\"status_url\"}</code>; depois <code>GET /webhook/ponte-pc/status?id=</code>.</div>`;\nconst script = `\nconst $ = id => document.getElementById(id);\n$('ir').onclick = async () => {\n  let dados; try { dados = JSON.parse($('dados').value || '{}'); } catch (e) { $('estado').textContent = 'JSON dos dados inválido'; return; }\n  $('ir').disabled = true; $('estado').className = 'aviso'; $('estado').textContent = 'Enviando...';\n  try {\n    const r = await fetch('ponte-pc/pedido', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Ponte-Token': $('token').value },\n      body: JSON.stringify({ acao: $('acao').value, dados, origem: 'página' }) });\n    const j = await r.json();\n    if (!j.ok) throw new Error(j.erro || 'falhou');\n    $('estado').textContent = 'Na fila (' + j.id + '). Esperando o PC...';\n    const olha = async () => {\n      const s = await (await fetch('ponte-pc/status?id=' + j.id, { cache: 'no-store' })).json();\n      $('estado').textContent = 'Situação: ' + s.etapa + (s.maquina ? ' (' + s.maquina + ')' : '') + (s.mensagem ? ' — ' + s.mensagem : '');\n      if (s.etapa === 'pronto' || s.etapa === 'erro') {\n        $('estado').className = s.etapa === 'pronto' ? 'ok' : 'erro';\n        if (s.arquivo) $('saida').innerHTML = /\\\\.(png|jpe?g|webp)$/.test(s.arquivo) ? '<img src=\"' + s.arquivo + '\" style=\"max-width:100%;border-radius:10px\">'\n          : /\\\\.(mp4|webm)$/.test(s.arquivo) ? '<video controls src=\"' + s.arquivo + '\"></video>' : '<a class=\"botao\" href=\"' + s.arquivo + '\">Baixar</a>';\n        $('ir').disabled = false; return;\n      }\n      setTimeout(olha, 4000);\n    };\n    olha();\n  } catch (e) { $('estado').className = 'erro'; $('estado').textContent = 'Não deu: ' + e.message; $('ir').disabled = false; }\n};`;\nreturn [{ json: { html: pagina('Ponte PC', corpo, script) } }];\n"
+   },
+   "id": "104b86e2-3a81-5c74-994e-9a427aadce3a",
+   "name": "🧩 Monta a página",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "f55d9e53-94cb-56e0-a6b9-126226c09978",
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "path": "ponte-pc/pedido",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "f910ec90-e044-563d-b7e7-3f8d36ff8a2c",
+   "name": "🔔 Pedido para o PC (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    260
+   ],
+   "webhookId": "5ed9cf64-aae4-549f-8bdd-e79db027bdb8"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Recebe um pedido para o PC (de outro fluxo ou da página). Só ações conhecidas; exige o token da ponte.\nconst TOKEN = \"16b91f15ba1d735cd0327b3764c39ed7\";\nconst ACOES = {\"saude\": \"Saúde do PC (memória, disco, hora)\", \"imagem_flow\": \"Imagem no Google Flow / Nano Banana (contas do PC, 0 crédito)\", \"montar_video\": \"Montar vídeo no ffmpeg do PC (filme da fábrica grátis: vertical ou deitado)\", \"guardar_para_postar\": \"Guardar vídeo na caixa de saída do PC (os postadores postam com aprovação)\"};\nconst ent = $input.first().json;\nconst b = ent.body || {};\nconst h = ent.headers || {};\nconst base = (h['x-forwarded-proto'] || 'https') + '://' + (h['x-forwarded-host'] || h.host);\nif (String(h['x-ponte-token'] || b.token || '') !== TOKEN) return [{ json: { ok: false, codigo: 401, erro: 'token da ponte errado' } }];\nconst acao = String(b.acao || '');\nif (!ACOES[acao]) return [{ json: { ok: false, codigo: 400, erro: 'ação desconhecida: ' + acao + ' (use: ' + Object.keys(ACOES).join(', ') + ')' } }];\nconst id = (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).toLowerCase();\nconst pedido = { id, acao, dados: b.dados || {}, origem: String(b.origem || 'página').slice(0, 60), criado: new Date().toISOString() };\nconst status = { id, acao, descricao: ACOES[acao], etapa: 'na_fila', criado: pedido.criado, origem: pedido.origem };\nreturn [{ json: { ok: true, id, pedido: JSON.stringify(pedido), status: JSON.stringify(status),\n  status_url: base + '/webhook/ponte-pc/status?id=' + id } }];\n"
+   },
+   "id": "b1da6058-06be-5a22-a6c0-b27db7de0d75",
+   "name": "🧩 Confere o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    260
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "17832040-b2ee-5409-8d22-4b8dde81face",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "f820c02d-40ba-5bd3-9777-871a5a218a96",
+   "name": "🚦 Pedido ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    480,
+    260
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ponte:job:{{ $json.id }}",
+    "value": "={{ $json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "9de8bfad-f1bf-5b42-ab9b-b9c9fb58727a",
+   "name": "💾 Status: na fila",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    720,
+    180
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "push",
+    "list": "ponte:fila",
+    "messageData": "={{ $('🧩 Confere o pedido').first().json.pedido }}",
+    "tail": true
+   },
+   "id": "8e442b40-d66e-515a-bcdd-7260f03119b6",
+   "name": "📥 Põe na fila",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    960,
+    180
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, id: $('🧩 Confere o pedido').first().json.id, status_url: $('🧩 Confere o pedido').first().json.status_url }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "c2bea9c3-e6bc-5a58-98f8-146e314e240e",
+   "name": "📤 Responde com o id",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1200,
+    180
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 400
+    }
+   },
+   "id": "340a870d-8617-51ef-863d-0f7791fc232b",
+   "name": "📤 Recusa o pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    360
+   ]
+  },
+  {
+   "parameters": {
+    "path": "ponte-pc/proximo",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "0aa6ab04-49cb-597c-a0ff-2f373a0df8ea",
+   "name": "🔔 O PC pede trabalho (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    560
+   ],
+   "webhookId": "eeecffe6-7669-532d-846e-e9d88987bb95"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O PC pergunta se tem trabalho. Confere o token e marca o PC como \"online\" (para a página mostrar).\nconst TOKEN = \"16b91f15ba1d735cd0327b3764c39ed7\";\nconst ent = $input.first().json;\nconst h = ent.headers || {};\nconst q = ent.query || {};\nconst ok = String(h['x-ponte-token'] || q.token || '') === TOKEN;\nconst maquina = String(q.maquina || 'pc').replace(/[^a-z0-9-]/gi, '').slice(0, 30) || 'pc';\nreturn [{ json: { ok, maquina, visto: JSON.stringify({ maquina, quando: new Date().toISOString(), versao: String(q.versao || '') }) } }];\n"
+   },
+   "id": "296e1862-b21d-56c2-9b92-826eb48c7d68",
+   "name": "🧩 Confere o PC",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    560
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "97d6d991-69ea-5725-9c7d-7fc06eb4a4d1",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "c92916bd-9fef-583f-9b7c-dba187915f26",
+   "name": "🚦 Token certo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    480,
+    560
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "ponte:visto",
+    "value": "={{ $json.visto }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 86400
+   },
+   "id": "27c4135d-f624-5ffc-88af-ff9c458d119c",
+   "name": "💾 Sinal do PC (online)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    720,
+    480
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "pop",
+    "list": "ponte:fila",
+    "tail": false,
+    "propertyName": "pedido",
+    "options": {}
+   },
+   "id": "7acc5df3-119e-5f94-b914-8d752f2e85b6",
+   "name": "📤 Tira da fila",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    960,
+    480
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Devolve ao PC o próximo pedido da fila (ou \"vazio\") e prepara o status \"o PC pegou\".\nconst tirado = $input.first().json.pedido;\nconst maquina = $('🧩 Confere o PC').first().json.maquina;\nif (!tirado) return [{ json: { vazio: true, resposta: JSON.stringify({ vazio: true }) } }];\nlet p = {};\ntry { p = typeof tirado === 'string' ? JSON.parse(tirado) : tirado; } catch (e) { return [{ json: { vazio: true, resposta: '{\"vazio\":true}' } }]; }\nreturn [{ json: { vazio: false, id: p.id, resposta: JSON.stringify(p),\n  status: JSON.stringify({ id: p.id, acao: p.acao, etapa: 'no_pc', maquina, pegou: new Date().toISOString(), criado: p.criado, origem: p.origem }) } }];\n"
+   },
+   "id": "3390ce25-4f28-529a-b212-c5dde988b7d3",
+   "name": "🧩 Entrega o trabalho",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "38ff498f-7144-5c03-b5d2-c053ee04dec6",
+       "leftValue": "={{ !$json.vazio }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "e78304c9-b163-5847-93c2-51e050679296",
+   "name": "🚦 Tem trabalho?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1440,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ponte:job:{{ $json.id }}",
+    "value": "={{ $json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "7492015f-7dd9-5234-b2bd-7cddec5b96f9",
+   "name": "💾 Status: no PC",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1680,
+    400
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $('🧩 Entrega o trabalho').first().json.resposta }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "f787274f-f322-5b93-b3c4-fd024764c1ca",
+   "name": "📤 Responde o trabalho",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1920,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: 'token da ponte errado' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 401
+    }
+   },
+   "id": "0551a9f7-6827-5ebc-8f8b-99abf417ce50",
+   "name": "📤 Token errado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    660
+   ]
+  },
+  {
+   "parameters": {
+    "path": "ponte-pc/resultado",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "de384a72-f7c9-5aac-b871-f549f14ae704",
+   "name": "🔔 O PC devolve (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    860
+   ],
+   "webhookId": "e7e0f4d5-f2ce-545e-a71e-920f5c569a04"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O PC devolve o resultado: guarda o arquivo (se houver, até ~15 MB) e o status final com o link.\nconst TOKEN = \"16b91f15ba1d735cd0327b3764c39ed7\";\nconst ent = $input.first().json;\nconst b = ent.body || {};\nconst h = ent.headers || {};\nconst base = (h['x-forwarded-proto'] || 'https') + '://' + (h['x-forwarded-host'] || h.host);\nif (String(h['x-ponte-token'] || b.token || '') !== TOKEN) return [{ json: { ok: false, codigo: 401, erro: 'token da ponte errado' } }];\nconst id = String(b.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');\nif (!id) return [{ json: { ok: false, codigo: 400, erro: 'sem id' } }];\nlet nome = '';\nlet b64 = '';\nif (b.arquivo_b64) {\n  const ext = String(b.extensao || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 5) || 'bin';\n  nome = id + '-resultado.' + ext;\n  b64 = String(b.arquivo_b64);\n  if (b64.length > 21e6) return [{ json: { ok: false, codigo: 413, erro: 'arquivo grande demais para a ponte (máx. ~15 MB)' } }];\n}\nconst status = { id, acao: String(b.acao || ''), etapa: b.ok ? 'pronto' : 'erro', maquina: String(b.maquina || ''),\n  terminou: new Date().toISOString(), mensagem: String(b.mensagem || '').slice(0, 1000), dados: b.dados || {},\n  arquivo: nome ? base + '/webhook/ponte-pc/arquivo?id=' + nome : null };\nreturn [{ json: { ok: true, id, nome, b64, tem_arquivo: !!nome, status: JSON.stringify(status) } }];\n"
+   },
+   "id": "05067f48-c6ec-526c-a867-c5f7e80a588e",
+   "name": "🧩 Confere o resultado",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    860
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "3391f1d9-27aa-52f0-8214-58e3c695d59e",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "aa787740-4ff2-55b5-aac8-55d984d8aed4",
+   "name": "🚦 Resultado ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    480,
+    860
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "8683b31b-1e2f-5b0f-b150-703adb3a0e39",
+       "leftValue": "={{ $json.tem_arquivo }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "3f13fcb3-ae83-528a-8b4a-c6e9b0fd353b",
+   "name": "🚦 Veio arquivo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    720,
+    780
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ponte:arq:{{ $json.nome }}",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "3eb26150-a306-55c3-adf4-5188b85d68cd",
+   "name": "💾 Guarda o arquivo (7 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    960,
+    700
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ponte:job:{{ $('🧩 Confere o resultado').first().json.id }}",
+    "value": "={{ $('🧩 Confere o resultado').first().json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 604800
+   },
+   "id": "e8747e70-955d-5e5e-8fa0-ac199003a533",
+   "name": "💾 Status final",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1200,
+    780
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "13c99678-7edb-5843-9063-9e13ff572b90",
+   "name": "📤 Responde ok",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1440,
+    780
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 400
+    }
+   },
+   "id": "1a9c9862-0d9b-5861-8125-5dfd05a74c51",
+   "name": "📤 Recusa o resultado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    960
+   ]
+  },
+  {
+   "parameters": {
+    "path": "ponte-pc/status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "404e716b-9a90-558a-b706-429c34c51278",
+   "name": "🔔 Status do pedido (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1160
+   ],
+   "webhookId": "c3fff0ec-2ffe-563b-900a-57e81e208076"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=ponte:job:{{ String($json.query.id || '').toLowerCase().replace(/[^a-z0-9]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "f85ccb9f-1bf1-5b3a-84a6-4a7cb6faaf75",
+   "name": "📖 Lê o status",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    1160
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.status || JSON.stringify({ etapa: 'desconhecido' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "20e9d165-3c72-5c9f-b4a6-85eb7e77be9e",
+   "name": "📤 Responde o status",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    1160
+   ]
+  },
+  {
+   "parameters": {
+    "path": "ponte-pc/arquivo",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "5b5c11c2-0ac5-5f4a-ad97-86f07eec89fe",
+   "name": "🔔 Arquivo do PC (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1360
+   ],
+   "webhookId": "9356c972-e926-58ca-a48c-6096b03da9a6"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "dado",
+    "key": "=ponte:arq:{{ String($json.query.id || '').toLowerCase().replace(/[^a-z0-9.-]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "3b7902b0-7458-51a3-8f33-11e0db8a193b",
+   "name": "📖 Lê o arquivo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    1360
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Devolve o arquivo guardado no Redis (texto base64) como arquivo de verdade, para o webhook entregar.\nconst id = String(($('🔔 Arquivo do PC (GET)').first().json.query || {}).id || '');\nconst b64 = String($input.first().json.dado || '');\nconst TIPOS = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', mp3: 'audio/mpeg',\n  mp4: 'video/mp4', webm: 'video/webm', json: 'application/json', txt: 'text/plain' };\nconst ext = (id.split('.').pop() || '').toLowerCase();\nif (!/^[a-z0-9-]{4,80}\\.[a-z0-9]{2,5}$/.test(id) || !b64 || !TIPOS[ext]) return [{ json: { existe: false } }];\nconst bin = await this.helpers.prepareBinaryData(Buffer.from(b64, 'base64'), id, TIPOS[ext]);\nreturn [{ json: { existe: true }, binary: { data: bin } }];\n"
+   },
+   "id": "045c24c9-afa6-55a4-af02-949c0fc3b0c3",
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    1360
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "4175b162-c819-5042-813a-49e8053a265f",
+       "leftValue": "={{ $json.existe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "b26522ee-fc43-5866-ab96-d8ced5f3956d",
+   "name": "🚦 O arquivo existe?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    720,
+    1360
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=604800"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       },
+       {
+        "name": "Access-Control-Expose-Headers",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "de84d5f6-96fb-5dc2-bd89-3cd70130ff3b",
+   "name": "📤 Entrega o arquivo",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    1280
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "Arquivo não encontrado (valem 7 dias).",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 404
+    }
+   },
+   "id": "d8197ebc-2d23-5532-b0bd-ee14182d6eb5",
+   "name": "📤 Arquivo não encontrado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    1460
+   ]
+  }
+ ],
+ "connections": {
+  "🔔 Página da ponte (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o sinal do PC",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o sinal do PC": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta a página": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido para o PC (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o pedido": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pedido ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pedido ok?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: na fila",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: na fila": {
+   "main": [
+    [
+     {
+      "node": "📥 Põe na fila",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📥 Põe na fila": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde com o id",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 O PC pede trabalho (GET)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o PC",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o PC": {
+   "main": [
+    [
+     {
+      "node": "🚦 Token certo?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Token certo?": {
+   "main": [
+    [
+     {
+      "node": "💾 Sinal do PC (online)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Token errado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Sinal do PC (online)": {
+   "main": [
+    [
+     {
+      "node": "📤 Tira da fila",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Tira da fila": {
+   "main": [
+    [
+     {
+      "node": "🧩 Entrega o trabalho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Entrega o trabalho": {
+   "main": [
+    [
+     {
+      "node": "🚦 Tem trabalho?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Tem trabalho?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: no PC",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Responde o trabalho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: no PC": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o trabalho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 O PC devolve (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o resultado": {
+   "main": [
+    [
+     {
+      "node": "🚦 Resultado ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Resultado ok?": {
+   "main": [
+    [
+     {
+      "node": "🚦 Veio arquivo?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Veio arquivo?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o arquivo (7 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Status final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o arquivo (7 dias)": {
+   "main": [
+    [
+     {
+      "node": "💾 Status final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status final": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde ok",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Status do pedido (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o status": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Arquivo do PC (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o arquivo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "🚦 O arquivo existe?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 O arquivo existe?": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Arquivo não encontrado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

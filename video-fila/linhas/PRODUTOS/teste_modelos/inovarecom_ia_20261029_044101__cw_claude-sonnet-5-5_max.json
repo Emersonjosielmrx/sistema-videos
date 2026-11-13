@@ -1,0 +1,72 @@
+{
+ "modelo": "cw/claude-sonnet-5-5",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T19:30:44",
+ "segundos": 366,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T19:30:44",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "cw/claude-sonnet-5-5",
+   "decisor": "cw/claude-sonnet-5-5"
+  },
+  "achados": [
+   {
+    "tipo": "CERTEZA",
+    "problema": "Formato dono_tres (dono nos 3 blocos, ~27 s do mesmo plano, sem nenhuma tela do produto/WhatsApp) é a causa da nota baixa de movimento e do 'pitch teórico'. Aparece em 4 vídeos do histórico (20261028_153713 mov 4.0, disparoemmassa_20261029_031327 mov 4.5, dono_tres_veo_final 4.0–5.0, e este, mov 5.0), sempre com 'movimento' e 'diretor' entre as notas mais baixas. O movimento medido nas cenas do dono é ALTO (10–14%), então o que falta não é zoom, é ELEMENTO novo entrando junto com a fala.",
+    "prova": "dados.json formato=dono_tres; juri movimento cenas 1-3 = 14.18/10.14/12.87; historico_notas (4+ vídeos dono_tres*, movimento 4.0–5.0); placar_formatos dono_tres [0,0] e pesos_variantes vazio; quadros 3 a 10 (mesmo plano do dono sem tela do produto)",
+    "sugestao": "Reduzir o peso da variante dono_tres em pesos_variantes (ex.: 0.3) ou desligá-la em variantes_desligadas para esta conta. NÃO aumentar kenburns_zoom. Na cena 2 ('Como funciona'), propor ideia_codigo: mockup de celular com chamada de WhatsApp (selo 'Simulação') entrando junto com a fala 'WhatsApp com voz real clonada'.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Sobreposição antecipada do cartão final (Hermes Call / @inovarecom.ia / Link no perfil) em semitransparência por cima do rosto do dono, junto com glitch, no quadro 11; sem legenda e sem pílula de etapa nesse quadro. Texto de marca ilegível por cima do rosto: é cobertura sobre a cabeça/rosto, não só olhos.",
+    "prova": "quadro 11 da folha (marca d'água central sobre o apresentador + linhas de glitch na parte inferior, texto menor ilegível)",
+    "sugestao": "Conferir no vídeo real o trecho de ~0,6 s da troca dono→cartão (efeito_transicao glitch + fade do cartão sobrepostos). Fazer o cartão entrar só depois que o dono sair (sem fade com transparência sobre o rosto), ou encurtar o fade para o glitch cobrir sozinho a troca.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Possível headroom apertado: a faixa verde superior com a pílula de etapa fica encostada no topo da cabeça (cabelo) do apresentador nos quadros 3 a 10. Apontado pelo júri; a régua é o topo do cabelo, então vale conferir nos quadros.",
+    "prova": "juri_problemas diretor cena 1 (headroom); quadros 3 a 10 (rótulo + pílula sobre a área da cabeça)",
+    "sugestao": "Medir a distância entre a base da pílula e o topo do cabelo no vídeo real. Se encostar/cobrir, descer o enquadramento do dono ou subir a faixa/pílula em ~60–80 px.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho dos 2 primeiros segundos: abre com o dono lendo a caixinha 'Pergunta frequente' sem elemento visual da dor. O júri classificou como grave, mas é gosto de ritmo/abertura, não certeza.",
+    "prova": "quadros 1 e 2; juri_problemas diretor cena 0",
+    "sugestao": "TESTE A/B: abrir com um elemento da dor entrando (ex.: contador de 'contatos parados' ou notificações acumuladas) junto com a primeira fala, comparar retenção com a abertura atual.",
+    "repetido": true
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Cartão final (cena 4, movimento 4.63%, abaixo do limite de 4% de certeza? Não: está acima, então NÃO é cena parada). Sugestão de teste apenas: manter o dono ao fundo desfocado sob o CTA em vez de fundo verde chapado.",
+    "prova": "juri movimento cena 4 = 4.63; quadro 12; ajustes pulso_botao 0.06 e brilho_botao 1 já ligados",
+    "sugestao": "Teste: entrada escalonada dos elementos do cartão (título, 'Chame no direct', @) em vez de tudo junto. Não mexer em pulso/brilho, que já estão ligados.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.4,
+    "motivo": "O formato dono_tres (dono nos 3 blocos, ~27 s do mesmo plano, sem tela do produto) aparece em 4 vídeos do histórico com nota de movimento baixa (4.0–5.0) e crítica de 'pitch teórico'. O movimento medido nas cenas do dono já é alto (10–14%), então o problema é a falta de elemento novo na tela, não de zoom. Achado de FORMATO: a 1ª escolha é peso baixo da variante, não botão de zoom/pulso. Peso 0.4 reduz a frequência sem eliminar o formato, o que é reversível e permite as views decidirem.",
+    "prova": "dados.json formato=dono_tres; juri movimento cenas 1-3 = 14.18/10.14/12.87; nota movimento 5.0, diretor 6.0; histórico com 4+ vídeos dono_tres* com movimento 4.0–5.0; pesos_variantes vazio e vigiando vazio (nada mexido recentemente nesse assunto).",
+    "vetada": "sem revisor disponível"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "1) Cartão final: fazer o cartão (Hermes Call / @inovarecom.ia / Link no perfil) entrar só depois que o dono sair da tela, sem fade semitransparente sobre o rosto junto com o glitch (quadro 11), ou encurtar o fade para o glitch cobrir sozinho a troca; regra fixa: o rosto do dono nunca é coberto. 2) Cena 2 ('Como funciona'): mockup de celular com chamada de WhatsApp (selo 'Simulação') entrando junto com a fala sobre a voz clonada, para dar elemento novo em formatos com dono. 3) Conferir no vídeo real a distância entre a pílula de etapa e o topo do cabelo (quadros 3 a 10); se encostar, descer o enquadramento do dono ou subir a faixa/pílula em ~60–80 px.",
+    "motivo": "Os três pontos exigem mudança de programação (ordem/tempo da transição do cartão, novo elemento visual, posição da faixa/pílula) e não cabem em nenhum botão numérico. O ponto 1 toca regra fixa (rosto do dono nunca coberto), por isso vai para revisão humana. Os pontos 2 e 3 complementam a redução do peso do dono_tres sem mexer em zoom.",
+    "prova": "quadro 11 (marca d'água do cartão sobre o apresentador + glitch); quadros 3 a 10 (pílula perto do topo da cabeça); juri_problemas diretor cena 1 (headroom); achados CERTEZA do analista.",
+    "vetada": "sem revisor disponível"
+   }
+  ],
+  "aprovadas": 0
+ }
+}

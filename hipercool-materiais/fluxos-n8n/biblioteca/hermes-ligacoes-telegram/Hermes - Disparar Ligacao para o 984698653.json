@@ -1,0 +1,148 @@
+{
+ "name": "Hermes - Disparar Ligacao para o 984698653",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "trigger-wf-1",
+   "name": "Manual Execute",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    200,
+    200
+   ]
+  },
+  {
+   "parameters": {
+    "method": "GET",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "responseFormat": "json"
+    }
+   },
+   "id": "get-sessions",
+   "name": "Pegar Sessoes",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    400,
+    200
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "set-sid",
+       "name": "sessao",
+       "value": "={{ $json.sessions.find(x => x.paired)?.id || $json.sessions[0]?.id }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "set-sid",
+   "name": "Extrair SID Ativa",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    600,
+    200
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=`https://hermesv6.inovareinteligenciaartificial.com/api/sessions/${$json.sessao}/calls`",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "phone",
+       "value": "5591984698653"
+      },
+      {
+       "name": "isVideo",
+       "value": false
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "responseFormat": "json"
+    }
+   },
+   "id": "make-call",
+   "name": "Fazer Ligacao",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    800,
+    200
+   ]
+  }
+ ],
+ "connections": {
+  "Manual Execute": {
+   "main": [
+    [
+     {
+      "node": "Pegar Sessoes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pegar Sessoes": {
+   "main": [
+    [
+     {
+      "node": "Extrair SID Ativa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Extrair SID Ativa": {
+   "main": [
+    [
+     {
+      "node": "Fazer Ligacao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ }
+}

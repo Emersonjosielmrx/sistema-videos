@@ -1,0 +1,2275 @@
+{
+ "updatedAt": "2026-09-30T00:53:53.195Z",
+ "createdAt": "2026-09-18T16:24:54.696Z",
+ "id": "99e92dfb-6835-4a7e-88d7-7daf372813d8",
+ "name": "monitorar vps - limpa imagem e container",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "hours",
+       "hoursInterval": 10
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -1488,
+    240
+   ],
+   "id": "e6315669-33d5-4102-ad97-499115132373",
+   "name": "Schedule Trigger"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "8452d718-c249-49ab-9bed-421b1e5c6b52",
+       "leftValue": "={{(() => {\n  const output = $json.stdout;\n\n  const linha = output\n    .split('\\n')\n    .find(l => l.includes('/dev/sda1'));\n\n  if (!linha) return null;\n\n  const match = linha.match(/(\\d+)%/);\n\n  return match ? parseInt(match[1], 10) : null;\n})()}}",
+       "rightValue": 60,
+       "operator": {
+        "type": "number",
+        "operation": "gte"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -496,
+    240
+   ],
+   "id": "7644d625-cfa9-4e1c-947f-e236e3c6932a",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "d753e012-2d01-46d4-8694-a577ef2024d2",
+       "name": "url_evolution",
+       "value": "https://ligawhatsapp.inovareinteligenciaartificial.com",
+       "type": "string"
+      },
+      {
+       "id": "7a3149d7-8b06-4658-a5e6-795cffe7371c",
+       "name": "apikey_evolution",
+       "value": "29A6CBA349DE-4E92-97C5-6A12B7F8EEE5",
+       "type": "string"
+      },
+      {
+       "id": "06246722-6c29-4c0c-b817-6c2658dac666",
+       "name": "instancia",
+       "value": "pessoal",
+       "type": "string"
+      },
+      {
+       "id": "fdeb7e4b-843f-487d-a04e-aa5375566018",
+       "name": "UrlPortainer",
+       "value": "https://painel3.inovareinteligenciaartificial.com",
+       "type": "string"
+      },
+      {
+       "id": "e990450f-0865-4b65-8eb4-a23ed029470e",
+       "name": "LoginPortainer",
+       "value": "admin",
+       "type": "string"
+      },
+      {
+       "id": "15def61f-7b6a-4a0b-953d-c3da4e714f01",
+       "name": "SenhaPortainer",
+       "value": "sW5pgAG9obRu",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -944,
+    240
+   ],
+   "id": "31e4d973-8427-49ae-8562-439229c762d0",
+   "name": "dados3"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('dados3').item.json.url_evolution }}/message/sendText/{{ $('dados3').item.json.instancia }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('dados3').item.json.apikey_evolution }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "5522998908709"
+      },
+      {
+       "name": "text",
+       "value": "=🚨🚨🚨Atenção HD da VPS em {{(() => {\n  const output = $json.stdout; // Captura o campo stdout\n  const match = output.match(/\\d+%/); // Encontra a primeira ocorrência de número seguido de %\n  return match ? match[0] : null;\n})()}}\n"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "2d790649-d21d-425c-8330-9a5e83423e50",
+   "name": "sendText14",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -240,
+    -16
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('dados3').item.json.url_evolution }}/message/sendText/{{ $('dados3').item.json.instancia }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('dados3').item.json.apikey_evolution }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "5511954875252"
+      },
+      {
+       "name": "text",
+       "value": "=🚨🚨🚨Atenção HD da VPS em {{(() => {\n  const output = $json.stdout; // Captura o campo stdout\n  const match = output.match(/\\d+%/); // Encontra a primeira ocorrência de número seguido de %\n  return match ? match[0] : null;\n})()}}\n"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "7825ab46-d9ea-48aa-9b73-578330b93238",
+   "name": "sendText",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -240,
+    160
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/auth",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"username\": \"{{ $('dados3').item.json.LoginPortainer }}\",\n  \"password\": \"{{ $('dados3').item.json.SenhaPortainer }}\"\n}\n",
+    "options": {}
+   },
+   "id": "f7b29acc-dca9-4105-8fa8-8aed92385fbc",
+   "name": "Paga Token",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -208,
+    464
+   ]
+  },
+  {
+   "parameters": {
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/json?all=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    32,
+    464
+   ],
+   "id": "0dc8008e-e333-4fa8-8424-3ff40a98c2b0",
+   "name": "Busca Conteineres Vazios"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.State }}",
+       "rightValue": "exited",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    256,
+    464
+   ],
+   "id": "6da81578-b2bf-467e-90e6-f09410420084",
+   "name": "Filtra Conteineres Vazios"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    480,
+    464
+   ],
+   "id": "14dc0d1a-b41f-4ec6-a551-e2428f2a96a3",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/{{ $json.Id }}?force=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    736,
+    480
+   ],
+   "id": "9a16844c-4548-4697-873f-b9f5e1c1ba02",
+   "name": "Deleta Conteiner Vazio"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/docker/1/images?withUsage=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    32,
+    784
+   ],
+   "id": "7453fb2f-b169-4839-8d46-6e45317d3980",
+   "name": "Busca Imagens"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.used }}",
+       "rightValue": "exited",
+       "operator": {
+        "type": "boolean",
+        "operation": "false",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    272,
+    784
+   ],
+   "id": "b375508d-f3d3-4932-9df5-1e2bfcd81dc5",
+   "name": "Filtra imagens não usadas"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    464,
+    784
+   ],
+   "id": "38a759eb-c7bc-4300-bd4c-0eaabb97185f",
+   "name": "Loop Over Items1"
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/images/{{ $json.id }}?force=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    704,
+    800
+   ],
+   "id": "8f1adea3-dae4-4bbd-bbbf-36bdc3a46df4",
+   "name": "Deleta imagem não usada"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.Image }}",
+       "rightValue": "pgvector/pgvector",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      },
+      {
+       "id": "b990ee8b-a77b-44b7-b08b-4a6fe4068356",
+       "leftValue": "={{ $json.State }}",
+       "rightValue": "running",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    192,
+    64
+   ],
+   "id": "6455ad47-d14e-4611-9cdc-c5a6e2681ce2",
+   "name": "Filtra Conteineres pgvector/pgvector"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/{{ $json.Id }}/logs?stdout=true&stderr=true&tail=100",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    432,
+    64
+   ],
+   "id": "b0c06747-7b84-4a45-a4d4-b419c97cce8b",
+   "name": "Busca log"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.data }}",
+    "options": {
+     "systemMessage": "Atue como técnico especialista em docker\nAnalise esse log é me fale um resumo com 100 caracteres"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 1.7,
+   "position": [
+    656,
+    64
+   ],
+   "id": "7b2f9f22-fe28-440a-a44a-5172f26eea88",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.0-flash",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    704,
+    288
+   ],
+   "id": "9a9b7146-b6ef-4266-b264-49a3df7365a1",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "Jz9BMPy38M5NPx5w",
+     "name": "gemini Inovarecliente1@gmail.com"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://apiwhats.winiciuspereira.co/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('dados').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "=5522998908709"
+      },
+      {
+       "name": "Body",
+       "value": "=🚨🚨🚨Atenção HD da VPS em {{(() => {\n  const output = $json.stdout; // Captura o campo stdout\n  const match = output.match(/\\d+%/); // Encontra a primeira ocorrência de número seguido de %\n  return match ? match[0] : null;\n})()}}\n"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    16,
+    240
+   ],
+   "id": "78215b86-1e17-4c5f-8643-472e413892df",
+   "name": "envia resposta",
+   "retryOnFail": true,
+   "maxTries": 5
+  },
+  {
+   "parameters": {
+    "operation": "getAll",
+    "bucketName": "inovare",
+    "returnAll": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.s3",
+   "typeVersion": 1,
+   "position": [
+    -1168,
+    -336
+   ],
+   "id": "10fc6c8a-4357-48e3-9c5c-b94f934f29be",
+   "name": "Get many files",
+   "credentials": {
+    "s3": {
+     "id": "8WUpAYVmH5mnlw5J",
+     "name": "S3 account"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "de977f66-94f6-4cca-83ea-b6bcdbf6166c",
+       "leftValue": "={{ $json.LastModified.toDateTime().format('X').toNumber() }}",
+       "rightValue": "={{ $now.minus(7, \"days\") .format('X').toNumber() }}",
+       "operator": {
+        "type": "number",
+        "operation": "lt"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -976,
+    -336
+   ],
+   "id": "2e028768-176e-47b1-ac94-9ccd53756807",
+   "name": "If1"
+  },
+  {
+   "parameters": {
+    "operation": "delete",
+    "bucketName": "inovare",
+    "fileKey": "={{ $json.Key }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.s3",
+   "typeVersion": 1,
+   "position": [
+    -560,
+    -288
+   ],
+   "id": "e89db0cd-272c-44af-86d4-7107703192ce",
+   "name": "Delete a file",
+   "credentials": {
+    "s3": {
+     "id": "8WUpAYVmH5mnlw5J",
+     "name": "S3 account"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    -768,
+    -432
+   ],
+   "id": "337ee57f-9921-4d4a-8d75-1e420d6cf5bd",
+   "name": "Loop Over Items2"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    -400,
+    -288
+   ],
+   "id": "c84ab7af-ec67-4308-8caa-d756b9f6e01d",
+   "name": "Wait",
+   "webhookId": "5a4fe07d-99a7-45fd-b0c5-773684887489"
+  },
+  {
+   "parameters": {
+    "operation": "getAll",
+    "bucketName": "inovare",
+    "options": {
+     "folderKey": "id_do_video||canal||432997.mp4"
+    }
+   },
+   "type": "n8n-nodes-base.s3",
+   "typeVersion": 1,
+   "position": [
+    -1168,
+    768
+   ],
+   "id": "d7c34347-926f-479c-a84e-aabcde869d72",
+   "name": "Get many files1",
+   "credentials": {
+    "s3": {
+     "id": "8WUpAYVmH5mnlw5J",
+     "name": "S3 account"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "command": "du -h -d 1 /var/lib/docker/volumes | sort -hr"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    -720,
+    32
+   ],
+   "id": "e3f8ff5f-9a14-4c68-bdaa-1ac0d89aae7e",
+   "name": "Execute a command",
+   "credentials": {
+    "sshPassword": {
+     "id": "gcRbjY7M1cBAmA83",
+     "name": "vps final 53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/json?all=true",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+      }
+     ]
+    },
+    "options": {
+     "lowercaseHeaders": false
+    }
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    32,
+    1088
+   ],
+   "id": "62e19efd-fa5d-4ae9-8c2d-873ce7d366ee",
+   "name": "Busca Conteineres Vazios1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+       "leftValue": "={{ $json.Labels['com.docker.stack.namespace'] }}",
+       "rightValue": "postegresp2",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      },
+      {
+       "id": "71e7c7e8-4837-479a-8101-af4a0121bb8d",
+       "leftValue": "={{ $json.State }}",
+       "rightValue": "running",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    256,
+    1088
+   ],
+   "id": "4becb4fb-878b-4c27-baa9-0c680bff6aa5",
+   "name": "Filtra Conteineres Vazios1"
+  },
+  {
+   "parameters": {
+    "command": "=docker exec {{ $json.Labels['com.docker.swarm.task.name'] }} \\\npsql -U postgres -d n8n_queue -c \"TRUNCATE TABLE execution_data;\""
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    480,
+    1088
+   ],
+   "id": "22faae19-301a-47a7-9d83-702ba188e8ac",
+   "name": "Execute a command1",
+   "credentials": {
+    "sshPassword": {
+     "id": "gcRbjY7M1cBAmA83",
+     "name": "vps final 53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "command": "=docker exec {{ $('Filtra Conteineres Vazios1').item.json.Labels['com.docker.swarm.task.name'] }} \\\npsql -U postgres -d n8n_queue -c \"VACUUM FULL execution_data;\""
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    672,
+    1088
+   ],
+   "id": "dd2d3734-c2b7-486f-8fe7-2be591e56967",
+   "name": "Execute a command2",
+   "credentials": {
+    "sshPassword": {
+     "id": "gcRbjY7M1cBAmA83",
+     "name": "vps final 53"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "command": "df -h"
+   },
+   "type": "n8n-nodes-base.ssh",
+   "typeVersion": 1,
+   "position": [
+    -752,
+    256
+   ],
+   "id": "93ca5363-1fbd-49d9-95b3-9f0fb618d3c1",
+   "name": "Execute a command3",
+   "credentials": {
+    "sshPassword": {
+     "id": "8dDUhhIDCo7tLJss",
+     "name": "157.173.207.22"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "dados3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "Paga Token",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados3": {
+   "main": [
+    [
+     {
+      "node": "Execute a command3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Paga Token": {
+   "main": [
+    [
+     {
+      "node": "Busca Conteineres Vazios",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Busca Imagens",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Conteineres Vazios": {
+   "main": [
+    [
+     {
+      "node": "Filtra Conteineres Vazios",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra Conteineres Vazios": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [],
+    [
+     {
+      "node": "Deleta Conteiner Vazio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Deleta Conteiner Vazio": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Imagens": {
+   "main": [
+    [
+     {
+      "node": "Filtra imagens não usadas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra imagens não usadas": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items1": {
+   "main": [
+    [],
+    [
+     {
+      "node": "Deleta imagem não usada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Deleta imagem não usada": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra Conteineres pgvector/pgvector": {
+   "main": [
+    [
+     {
+      "node": "Busca log",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Get many files": {
+   "main": [
+    [
+     {
+      "node": "If1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items2": {
+   "main": [
+    [],
+    [
+     {
+      "node": "Delete a file",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Delete a file": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Busca Conteineres Vazios1": {
+   "main": [
+    [
+     {
+      "node": "Filtra Conteineres Vazios1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filtra Conteineres Vazios1": {
+   "main": [
+    [
+     {
+      "node": "Execute a command1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a command1": {
+   "main": [
+    [
+     {
+      "node": "Execute a command2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a command3": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "staticData": {
+  "node:Schedule Trigger": {
+   "recurrenceRules": [
+    20
+   ]
+  }
+ },
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "pinData": {
+  "Schedule Trigger": [
+   {
+    "json": {
+     "timestamp": "2026-02-25T10:58:33.921-03:00",
+     "Readable date": "February 25th 2026, 10:58:33 am",
+     "Readable time": "10:58:33 am",
+     "Day of week": "Wednesday",
+     "Year": "2026",
+     "Month": "February",
+     "Day of month": "25",
+     "Hour": "10",
+     "Minute": "58",
+     "Second": "33",
+     "Timezone": "America/Sao_Paulo (UTC-03:00)"
+    }
+   }
+  ]
+ },
+ "versionId": "8be75dce-1f19-48f0-b559-2cc2a74a0c2f",
+ "activeVersionId": "8be75dce-1f19-48f0-b559-2cc2a74a0c2f",
+ "versionCounter": 32,
+ "triggerCount": 1,
+ "shared": [
+  {
+   "updatedAt": "2026-09-19T19:58:39.298Z",
+   "createdAt": "2026-09-19T19:58:39.298Z",
+   "role": "workflow:owner",
+   "workflowId": "99e92dfb-6835-4a7e-88d7-7daf372813d8",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [
+  {
+   "updatedAt": "2026-09-19T23:41:51.570Z",
+   "createdAt": "2026-09-19T23:41:51.570Z",
+   "id": "RecBDn8n5000001",
+   "name": "Recuperado - BD n8n5"
+  }
+ ],
+ "activeVersion": {
+  "updatedAt": "2026-09-30T00:53:55.382Z",
+  "createdAt": "2026-09-30T00:53:53.202Z",
+  "versionId": "8be75dce-1f19-48f0-b559-2cc2a74a0c2f",
+  "workflowId": "99e92dfb-6835-4a7e-88d7-7daf372813d8",
+  "nodes": [
+   {
+    "parameters": {
+     "rule": {
+      "interval": [
+       {
+        "field": "hours",
+        "hoursInterval": 10
+       }
+      ]
+     }
+    },
+    "type": "n8n-nodes-base.scheduleTrigger",
+    "typeVersion": 1.2,
+    "position": [
+     -1488,
+     240
+    ],
+    "id": "e6315669-33d5-4102-ad97-499115132373",
+    "name": "Schedule Trigger"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "8452d718-c249-49ab-9bed-421b1e5c6b52",
+        "leftValue": "={{(() => {\n  const output = $json.stdout;\n\n  const linha = output\n    .split('\\n')\n    .find(l => l.includes('/dev/sda1'));\n\n  if (!linha) return null;\n\n  const match = linha.match(/(\\d+)%/);\n\n  return match ? parseInt(match[1], 10) : null;\n})()}}",
+        "rightValue": 60,
+        "operator": {
+         "type": "number",
+         "operation": "gte"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     -496,
+     240
+    ],
+    "id": "7644d625-cfa9-4e1c-947f-e236e3c6932a",
+    "name": "If"
+   },
+   {
+    "parameters": {
+     "assignments": {
+      "assignments": [
+       {
+        "id": "d753e012-2d01-46d4-8694-a577ef2024d2",
+        "name": "url_evolution",
+        "value": "https://ligawhatsapp.inovareinteligenciaartificial.com",
+        "type": "string"
+       },
+       {
+        "id": "7a3149d7-8b06-4658-a5e6-795cffe7371c",
+        "name": "apikey_evolution",
+        "value": "29A6CBA349DE-4E92-97C5-6A12B7F8EEE5",
+        "type": "string"
+       },
+       {
+        "id": "06246722-6c29-4c0c-b817-6c2658dac666",
+        "name": "instancia",
+        "value": "pessoal",
+        "type": "string"
+       },
+       {
+        "id": "fdeb7e4b-843f-487d-a04e-aa5375566018",
+        "name": "UrlPortainer",
+        "value": "https://painel3.inovareinteligenciaartificial.com",
+        "type": "string"
+       },
+       {
+        "id": "e990450f-0865-4b65-8eb4-a23ed029470e",
+        "name": "LoginPortainer",
+        "value": "admin",
+        "type": "string"
+       },
+       {
+        "id": "15def61f-7b6a-4a0b-953d-c3da4e714f01",
+        "name": "SenhaPortainer",
+        "value": "sW5pgAG9obRu",
+        "type": "string"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+     -944,
+     240
+    ],
+    "id": "31e4d973-8427-49ae-8562-439229c762d0",
+    "name": "dados3"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('dados3').item.json.url_evolution }}/message/sendText/{{ $('dados3').item.json.instancia }}",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "accept",
+        "value": "application/json, text/plain, */*"
+       },
+       {
+        "name": "apikey",
+        "value": "={{ $('dados3').item.json.apikey_evolution }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "bodyParameters": {
+      "parameters": [
+       {
+        "name": "number",
+        "value": "5522998908709"
+       },
+       {
+        "name": "text",
+        "value": "=🚨🚨🚨Atenção HD da VPS em {{(() => {\n  const output = $json.stdout; // Captura o campo stdout\n  const match = output.match(/\\d+%/); // Encontra a primeira ocorrência de número seguido de %\n  return match ? match[0] : null;\n})()}}\n"
+       },
+       {
+        "name": "delay",
+        "value": "={{ 1200 }}"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "id": "2d790649-d21d-425c-8330-9a5e83423e50",
+    "name": "sendText14",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.1,
+    "position": [
+     -240,
+     -16
+    ]
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('dados3').item.json.url_evolution }}/message/sendText/{{ $('dados3').item.json.instancia }}",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "accept",
+        "value": "application/json, text/plain, */*"
+       },
+       {
+        "name": "apikey",
+        "value": "={{ $('dados3').item.json.apikey_evolution }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "bodyParameters": {
+      "parameters": [
+       {
+        "name": "number",
+        "value": "5511954875252"
+       },
+       {
+        "name": "text",
+        "value": "=🚨🚨🚨Atenção HD da VPS em {{(() => {\n  const output = $json.stdout; // Captura o campo stdout\n  const match = output.match(/\\d+%/); // Encontra a primeira ocorrência de número seguido de %\n  return match ? match[0] : null;\n})()}}\n"
+       },
+       {
+        "name": "delay",
+        "value": "={{ 1200 }}"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "id": "7825ab46-d9ea-48aa-9b73-578330b93238",
+    "name": "sendText",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.1,
+    "position": [
+     -240,
+     160
+    ]
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/auth",
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={\n  \"username\": \"{{ $('dados3').item.json.LoginPortainer }}\",\n  \"password\": \"{{ $('dados3').item.json.SenhaPortainer }}\"\n}\n",
+     "options": {}
+    },
+    "id": "f7b29acc-dca9-4105-8fa8-8aed92385fbc",
+    "name": "Paga Token",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     -208,
+     464
+    ]
+   },
+   {
+    "parameters": {
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/json?all=true",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Authorization",
+        "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+       }
+      ]
+     },
+     "options": {
+      "lowercaseHeaders": false
+     }
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     32,
+     464
+    ],
+    "id": "0dc8008e-e333-4fa8-8424-3ff40a98c2b0",
+    "name": "Busca Conteineres Vazios"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+        "leftValue": "={{ $json.State }}",
+        "rightValue": "exited",
+        "operator": {
+         "type": "string",
+         "operation": "equals",
+         "name": "filter.operator.equals"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.filter",
+    "typeVersion": 2.2,
+    "position": [
+     256,
+     464
+    ],
+    "id": "6da81578-b2bf-467e-90e6-f09410420084",
+    "name": "Filtra Conteineres Vazios"
+   },
+   {
+    "parameters": {
+     "options": {}
+    },
+    "type": "n8n-nodes-base.splitInBatches",
+    "typeVersion": 3,
+    "position": [
+     480,
+     464
+    ],
+    "id": "14dc0d1a-b41f-4ec6-a551-e2428f2a96a3",
+    "name": "Loop Over Items"
+   },
+   {
+    "parameters": {
+     "method": "DELETE",
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/{{ $json.Id }}?force=true",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Authorization",
+        "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+       }
+      ]
+     },
+     "options": {
+      "lowercaseHeaders": false
+     }
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     736,
+     480
+    ],
+    "id": "9a16844c-4548-4697-873f-b9f5e1c1ba02",
+    "name": "Deleta Conteiner Vazio"
+   },
+   {
+    "parameters": {
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/docker/1/images?withUsage=true",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Authorization",
+        "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+       }
+      ]
+     },
+     "options": {
+      "lowercaseHeaders": false
+     }
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     32,
+     784
+    ],
+    "id": "7453fb2f-b169-4839-8d46-6e45317d3980",
+    "name": "Busca Imagens"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+        "leftValue": "={{ $json.used }}",
+        "rightValue": "exited",
+        "operator": {
+         "type": "boolean",
+         "operation": "false",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.filter",
+    "typeVersion": 2.2,
+    "position": [
+     272,
+     784
+    ],
+    "id": "b375508d-f3d3-4932-9df5-1e2bfcd81dc5",
+    "name": "Filtra imagens não usadas"
+   },
+   {
+    "parameters": {
+     "options": {}
+    },
+    "type": "n8n-nodes-base.splitInBatches",
+    "typeVersion": 3,
+    "position": [
+     464,
+     784
+    ],
+    "id": "38a759eb-c7bc-4300-bd4c-0eaabb97185f",
+    "name": "Loop Over Items1"
+   },
+   {
+    "parameters": {
+     "method": "DELETE",
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/images/{{ $json.id }}?force=true",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Authorization",
+        "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+       }
+      ]
+     },
+     "options": {
+      "lowercaseHeaders": false
+     }
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     704,
+     800
+    ],
+    "id": "8f1adea3-dae4-4bbd-bbbf-36bdc3a46df4",
+    "name": "Deleta imagem não usada"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+        "leftValue": "={{ $json.Image }}",
+        "rightValue": "pgvector/pgvector",
+        "operator": {
+         "type": "string",
+         "operation": "contains"
+        }
+       },
+       {
+        "id": "b990ee8b-a77b-44b7-b08b-4a6fe4068356",
+        "leftValue": "={{ $json.State }}",
+        "rightValue": "running",
+        "operator": {
+         "type": "string",
+         "operation": "equals",
+         "name": "filter.operator.equals"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.filter",
+    "typeVersion": 2.2,
+    "position": [
+     192,
+     64
+    ],
+    "id": "6455ad47-d14e-4611-9cdc-c5a6e2681ce2",
+    "name": "Filtra Conteineres pgvector/pgvector"
+   },
+   {
+    "parameters": {
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/{{ $json.Id }}/logs?stdout=true&stderr=true&tail=100",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Authorization",
+        "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+       }
+      ]
+     },
+     "options": {
+      "lowercaseHeaders": false
+     }
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     432,
+     64
+    ],
+    "id": "b0c06747-7b84-4a45-a4d4-b419c97cce8b",
+    "name": "Busca log"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ $json.data }}",
+     "options": {
+      "systemMessage": "Atue como técnico especialista em docker\nAnalise esse log é me fale um resumo com 100 caracteres"
+     }
+    },
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 1.7,
+    "position": [
+     656,
+     64
+    ],
+    "id": "7b2f9f22-fe28-440a-a44a-5172f26eea88",
+    "name": "AI Agent"
+   },
+   {
+    "parameters": {
+     "modelName": "models/gemini-2.0-flash",
+     "options": {}
+    },
+    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+    "typeVersion": 1,
+    "position": [
+     704,
+     288
+    ],
+    "id": "9a9b7146-b6ef-4266-b264-49a3df7365a1",
+    "name": "Google Gemini Chat Model",
+    "credentials": {
+     "googlePalmApi": {
+      "id": "Jz9BMPy38M5NPx5w",
+      "name": "gemini Inovarecliente1@gmail.com"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "https://apiwhats.winiciuspereira.co/chat/send/text",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $('dados').item.json.token }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "bodyParameters": {
+      "parameters": [
+       {
+        "name": "Phone",
+        "value": "=5522998908709"
+       },
+       {
+        "name": "Body",
+        "value": "=🚨🚨🚨Atenção HD da VPS em {{(() => {\n  const output = $json.stdout; // Captura o campo stdout\n  const match = output.match(/\\d+%/); // Encontra a primeira ocorrência de número seguido de %\n  return match ? match[0] : null;\n})()}}\n"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     16,
+     240
+    ],
+    "id": "78215b86-1e17-4c5f-8643-472e413892df",
+    "name": "envia resposta",
+    "retryOnFail": true,
+    "maxTries": 5
+   },
+   {
+    "parameters": {
+     "operation": "getAll",
+     "bucketName": "inovare",
+     "returnAll": true,
+     "options": {}
+    },
+    "type": "n8n-nodes-base.s3",
+    "typeVersion": 1,
+    "position": [
+     -1168,
+     -336
+    ],
+    "id": "10fc6c8a-4357-48e3-9c5c-b94f934f29be",
+    "name": "Get many files",
+    "credentials": {
+     "s3": {
+      "id": "8WUpAYVmH5mnlw5J",
+      "name": "S3 account"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "de977f66-94f6-4cca-83ea-b6bcdbf6166c",
+        "leftValue": "={{ $json.LastModified.toDateTime().format('X').toNumber() }}",
+        "rightValue": "={{ $now.minus(7, \"days\") .format('X').toNumber() }}",
+        "operator": {
+         "type": "number",
+         "operation": "lt"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     -976,
+     -336
+    ],
+    "id": "2e028768-176e-47b1-ac94-9ccd53756807",
+    "name": "If1"
+   },
+   {
+    "parameters": {
+     "operation": "delete",
+     "bucketName": "inovare",
+     "fileKey": "={{ $json.Key }}",
+     "options": {}
+    },
+    "type": "n8n-nodes-base.s3",
+    "typeVersion": 1,
+    "position": [
+     -560,
+     -288
+    ],
+    "id": "e89db0cd-272c-44af-86d4-7107703192ce",
+    "name": "Delete a file",
+    "credentials": {
+     "s3": {
+      "id": "8WUpAYVmH5mnlw5J",
+      "name": "S3 account"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "options": {}
+    },
+    "type": "n8n-nodes-base.splitInBatches",
+    "typeVersion": 3,
+    "position": [
+     -768,
+     -432
+    ],
+    "id": "337ee57f-9921-4d4a-8d75-1e420d6cf5bd",
+    "name": "Loop Over Items2"
+   },
+   {
+    "parameters": {},
+    "type": "n8n-nodes-base.wait",
+    "typeVersion": 1.1,
+    "position": [
+     -400,
+     -288
+    ],
+    "id": "c84ab7af-ec67-4308-8caa-d756b9f6e01d",
+    "name": "Wait",
+    "webhookId": "5a4fe07d-99a7-45fd-b0c5-773684887489"
+   },
+   {
+    "parameters": {
+     "operation": "getAll",
+     "bucketName": "inovare",
+     "options": {
+      "folderKey": "id_do_video||canal||432997.mp4"
+     }
+    },
+    "type": "n8n-nodes-base.s3",
+    "typeVersion": 1,
+    "position": [
+     -1168,
+     768
+    ],
+    "id": "d7c34347-926f-479c-a84e-aabcde869d72",
+    "name": "Get many files1",
+    "credentials": {
+     "s3": {
+      "id": "8WUpAYVmH5mnlw5J",
+      "name": "S3 account"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "command": "du -h -d 1 /var/lib/docker/volumes | sort -hr"
+    },
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     -720,
+     32
+    ],
+    "id": "e3f8ff5f-9a14-4c68-bdaa-1ac0d89aae7e",
+    "name": "Execute a command",
+    "credentials": {
+     "sshPassword": {
+      "id": "gcRbjY7M1cBAmA83",
+      "name": "vps final 53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "url": "={{ $('dados3').item.json.UrlPortainer }}/api/endpoints/1/docker/containers/json?all=true",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Authorization",
+        "value": "=Bearer {{ $('Paga Token').item.json.jwt }}"
+       }
+      ]
+     },
+     "options": {
+      "lowercaseHeaders": false
+     }
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     32,
+     1088
+    ],
+    "id": "62e19efd-fa5d-4ae9-8c2d-873ce7d366ee",
+    "name": "Busca Conteineres Vazios1"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "strict",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "7f9e3b65-00fa-4105-9c64-d8df353ccac6",
+        "leftValue": "={{ $json.Labels['com.docker.stack.namespace'] }}",
+        "rightValue": "postegresp2",
+        "operator": {
+         "type": "string",
+         "operation": "contains"
+        }
+       },
+       {
+        "id": "71e7c7e8-4837-479a-8101-af4a0121bb8d",
+        "leftValue": "={{ $json.State }}",
+        "rightValue": "running",
+        "operator": {
+         "type": "string",
+         "operation": "equals",
+         "name": "filter.operator.equals"
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.filter",
+    "typeVersion": 2.2,
+    "position": [
+     256,
+     1088
+    ],
+    "id": "4becb4fb-878b-4c27-baa9-0c680bff6aa5",
+    "name": "Filtra Conteineres Vazios1"
+   },
+   {
+    "parameters": {
+     "command": "=docker exec {{ $json.Labels['com.docker.swarm.task.name'] }} \\\npsql -U postgres -d n8n_queue -c \"TRUNCATE TABLE execution_data;\""
+    },
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     480,
+     1088
+    ],
+    "id": "22faae19-301a-47a7-9d83-702ba188e8ac",
+    "name": "Execute a command1",
+    "credentials": {
+     "sshPassword": {
+      "id": "gcRbjY7M1cBAmA83",
+      "name": "vps final 53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "command": "=docker exec {{ $('Filtra Conteineres Vazios1').item.json.Labels['com.docker.swarm.task.name'] }} \\\npsql -U postgres -d n8n_queue -c \"VACUUM FULL execution_data;\""
+    },
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     672,
+     1088
+    ],
+    "id": "dd2d3734-c2b7-486f-8fe7-2be591e56967",
+    "name": "Execute a command2",
+    "credentials": {
+     "sshPassword": {
+      "id": "gcRbjY7M1cBAmA83",
+      "name": "vps final 53"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "command": "df -h"
+    },
+    "type": "n8n-nodes-base.ssh",
+    "typeVersion": 1,
+    "position": [
+     -752,
+     256
+    ],
+    "id": "93ca5363-1fbd-49d9-95b3-9f0fb618d3c1",
+    "name": "Execute a command3",
+    "credentials": {
+     "sshPassword": {
+      "id": "8dDUhhIDCo7tLJss",
+      "name": "157.173.207.22"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Schedule Trigger": {
+    "main": [
+     [
+      {
+       "node": "dados3",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "If": {
+    "main": [
+     [
+      {
+       "node": "Paga Token",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "dados3": {
+    "main": [
+     [
+      {
+       "node": "Execute a command3",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Paga Token": {
+    "main": [
+     [
+      {
+       "node": "Busca Conteineres Vazios",
+       "type": "main",
+       "index": 0
+      },
+      {
+       "node": "Busca Imagens",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Busca Conteineres Vazios": {
+    "main": [
+     [
+      {
+       "node": "Filtra Conteineres Vazios",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Filtra Conteineres Vazios": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Loop Over Items": {
+    "main": [
+     [],
+     [
+      {
+       "node": "Deleta Conteiner Vazio",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Deleta Conteiner Vazio": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Busca Imagens": {
+    "main": [
+     [
+      {
+       "node": "Filtra imagens não usadas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Filtra imagens não usadas": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Loop Over Items1": {
+    "main": [
+     [],
+     [
+      {
+       "node": "Deleta imagem não usada",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Deleta imagem não usada": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Filtra Conteineres pgvector/pgvector": {
+    "main": [
+     [
+      {
+       "node": "Busca log",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Google Gemini Chat Model": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "AI Agent",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Get many files": {
+    "main": [
+     [
+      {
+       "node": "If1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "If1": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items2",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Loop Over Items2": {
+    "main": [
+     [],
+     [
+      {
+       "node": "Delete a file",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Delete a file": {
+    "main": [
+     [
+      {
+       "node": "Wait",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Wait": {
+    "main": [
+     [
+      {
+       "node": "Loop Over Items2",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Busca Conteineres Vazios1": {
+    "main": [
+     [
+      {
+       "node": "Filtra Conteineres Vazios1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Filtra Conteineres Vazios1": {
+    "main": [
+     [
+      {
+       "node": "Execute a command1",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Execute a command1": {
+    "main": [
+     [
+      {
+       "node": "Execute a command2",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Execute a command3": {
+    "main": [
+     [
+      {
+       "node": "If",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": "Version 8be75dce",
+  "description": "",
+  "autosaved": true,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-09-30T00:53:55.364Z",
+    "id": 39,
+    "workflowId": "99e92dfb-6835-4a7e-88d7-7daf372813d8",
+    "versionId": "8be75dce-1f19-48f0-b559-2cc2a74a0c2f",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

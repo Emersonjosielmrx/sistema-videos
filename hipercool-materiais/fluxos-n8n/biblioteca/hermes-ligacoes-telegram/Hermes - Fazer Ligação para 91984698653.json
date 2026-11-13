@@ -1,0 +1,158 @@
+{
+ "name": "Hermes - Fazer Ligação para 91984698653",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "e2ba3473-b3c0-4f51-b8ba-0a4a589ddc6e",
+   "name": "When clicking \"Execute Workflow\"",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    220,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "method": "GET",
+    "url": "https://hermesv6.inovareinteligenciaartificial.com/api/sessions",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "responseFormat": "json"
+    }
+   },
+   "id": "55c4dff4-93ff-4e78-8386-beeeeb0a68d0",
+   "name": "Check Sessions",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    440,
+    280
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "2be83748-038c-4a37-9759-90656cbdfc12",
+       "name": "sid",
+       "value": "={{ $json.sessions.find(x => x.paired)?.id || $json.sessions[0]?.id }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "1be5527a-e479-4ebc-b3a2-9ac93f443bdf",
+   "name": "Get Matched SID",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    640,
+    280
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=`https://hermesv6.inovareinteligenciaartificial.com/api/sessions/${$json.sid}/calls`",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "x-api-key",
+       "value": "hk_36cb6ed13d0c5a1c72179e0b608025fd"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "phone",
+       "value": "5591984698653"
+      },
+      {
+       "name": "isVideo",
+       "value": false
+      }
+     ]
+    },
+    "options": {
+     "ignoreResponseCode": true,
+     "responseFormat": "json"
+    }
+   },
+   "id": "67b7fcc8-132d-4bb8-8d08-bc23a1a09d31",
+   "name": "Make Phone Call",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    860,
+    280
+   ],
+   "onError": "continueRegularOutput"
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "When clicking \"Execute Workflow\"": {
+   "main": [
+    [
+     {
+      "node": "Check Sessions",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Check Sessions": {
+   "main": [
+    [
+     {
+      "node": "Get Matched SID",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Get Matched SID": {
+   "main": [
+    [
+     {
+      "node": "Make Phone Call",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "692eb321-df62-4113-911e-28beee0f6eb9",
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "id": "1",
+ "tags": []
+}

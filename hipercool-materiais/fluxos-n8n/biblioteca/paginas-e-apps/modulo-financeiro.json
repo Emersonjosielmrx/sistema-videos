@@ -1,0 +1,2217 @@
+{
+ "name": "modulo-financeiro",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "modulo-financeiro",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -176,
+    352
+   ],
+   "id": "c216b4b6-554b-4944-8e70-e1db39b2fed4",
+   "name": "📨 Receptor WhatsApp",
+   "webhookId": "0148befb-8d5b-4b96-bac1-ec1c518ca8cd"
+  },
+  {
+   "parameters": {
+    "mode": "raw",
+    "jsonOutput": "={{ $('Webhook').item.json.body }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    800,
+    352
+   ],
+   "id": "6329d9ae-07f6-46c9-b992-a1924a820128",
+   "name": "🧹 Formatador de Dados"
+  },
+  {
+   "parameters": {
+    "content": "# 🚀 MÓDULO FINANCEIRO VIA WHATSAPP\n\n💰 **Sistema completo** de gestão financeira por WhatsApp.\n\n🔄 **Fluxo Principal**:\n📨 Mensagem WhatsApp → 🔀 Identifica protocolo → 🗄️ Valida cadastro → ⏰ Checa vencimento → 📋 Classifica mídia (texto/áudio/imagem) → 🤖 IA classifica intenção → 🧠 Processa financeiro/SQL/consulta → 📤 Responde via WhatsApp\n\n🤖 **4 Agentes IA**: Classificador, Financeiro, SQL Mágico, Consultor\n💎 **Modelos**: Google Gemini + Groq (áudio)\n💬 **Canais**: Texto, Áudio (Whisper), Imagem (Vision)\n\n⚠️ **Status**: INATIVO (em desenvolvimento)",
+    "height": 400,
+    "width": 1080,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -224,
+    96
+   ],
+   "typeVersion": 1,
+   "id": "f372a387-9293-4b23-9189-0c955b6407f1",
+   "name": "📌 Visão Geral do Módulo"
+  },
+  {
+   "parameters": {
+    "content": "## 📨 RECEPÇÃO E VALIDAÇÃO\n\n1️⃣ Webhook recebe POST do WhatsApp\n2️⃣ Detecta protocolo (LID vs JID)\n3️⃣ Consulta cadastro na tabela WuzAPI\n4️⃣ Verifica vencimento da licença\n5️⃣ Formata dados para processamento\n\n✅ Licença válida → processa mensagem\n❌ Licença vencida → bloqueia",
+    "height": 280,
+    "width": 376,
+    "color": 2
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -208,
+    512
+   ],
+   "typeVersion": 1,
+   "id": "0eb83796-134d-4be2-a0fa-2f3bc91a033e",
+   "name": "📝 Webhook e Validação"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "cadastro_wuzapi",
+     "mode": "list",
+     "cachedResultName": "cadastro_wuzapi"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "whatsapp",
+       "value": "={{ $json.numero.split(\"@\")[0] }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    400,
+    352
+   ],
+   "id": "4d501bdd-0715-4f9b-93de-1d1b5fb77d81",
+   "name": "🗄️ Consulta Cadastro WuzAPI",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "3de8d3e7-2a2d-46dc-a0b8-fc7729f49a86",
+       "leftValue": "={{ new Date($('Postgres').item.json.vencimento).toDateTime().format('X').toNumber() }}",
+       "rightValue": "={{ $now.minus(2, 'days').format('X').toNumber() }}",
+       "operator": {
+        "type": "number",
+        "operation": "gt"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    592,
+    352
+   ],
+   "id": "e98f65df-e37a-48f8-8e61-10a59a6a8911",
+   "name": "⏰ Fiscal de Vencimento"
+  },
+  {
+   "parameters": {
+    "dataToSave": {
+     "values": [
+      {
+       "key": "=contato",
+       "value": "={{ $json.event.Info.Chat }}"
+      },
+      {
+       "key": "Type",
+       "value": "={{ $json.event.Info.Type }}"
+      },
+      {
+       "key": "=Instance",
+       "value": "={{ $('Webhook').item.json.body.instanceName }}"
+      },
+      {
+       "key": "event",
+       "value": "={{ $json.event.Message.keys()[0] }}"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.executionData",
+   "typeVersion": 1,
+   "position": [
+    912,
+    -32
+   ],
+   "id": "a6649e6b-c02e-470c-8ce5-53330b16a0b6",
+   "name": "📊 Registro de Execução"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('text1').item.json.text }}",
+    "hasOutputParser": true,
+    "options": {
+     "systemMessage": "=Atue como um assistente financeiro pessoal. Sua tarefa é analisar um lançamento financeiro informado pelo usuário (por exemplo: \"paguei o aluguel com pix hoje\", \"recebi meu salário\", etc.) e classificá-lo de acordo com o seguinte plano de contas:\n\nbash\nCopiar\nEditar\n1.1.01\tSalário\n1.1.02\tHora extra\n1.1.03\t13º Salário\n1.1.04\tFérias\n1.1.05\tOutros\n2.1.01\tAluguel\n2.1.02\tCondomínio\n2.1.03\tPrestação da casa\n2.1.04\tSeguro da casa\n2.2.01\tPrestação do carro\n2.2.02\tSeguro do carro\n2.2.03\tEstacionamento\n2.3.01\tSeguro saúde\n2.3.02\tPlano de saúde\n2.3.03\tPlano funerário \n2.4.01\tColégio\n2.4.02\tFaculdade\n2.4.03\tCurso\n2.5.01\tIPTU\n2.5.02\tMEI\n3.1.01\tLuz\n3.1.02\tÁgua\n3.1.03\tTelefone\n3.1.04\tTelefone Celular\n3.1.07\tInternet\n3.2.01\tMetrô\n3.2.02\tÔnibus\n3.2.03\tCombustível\n3.2.04\tEstacionamento\n3.3.01\tMercado\n3.3.02\tQuitanda\n3.3.03\tPadaria\n3.4.01\tMedicamentos\n3.5.01\tCabeleireiro\n3.5.02\tManicure\n3.5.03\tEsteticista\n3.5.04\tAcademia\n3.5.05\tClube\n3.6.01\tAnuidade do Cartão\n4.1.01\tMédico\n4.1.02\tDentista\n4.1.03\tHospital\n4.1.04\tFarmácia\n4.2.01\tCarro\n4.2.02\tCasa\n4.3.01\tCurso\n4.3.02\tUniforme\n5.1.01\tViagens\n5.1.02\tCinema/teatro\n5.1.03\tAlimentação\n5.2.01\tRoupas\n5.2.02\tCalçados\n5.2.03\tAcessórios\n5.3.01\tPresentes\n5.3.02\tOferta\n5.3.03\tDízimo\n5.3.04\tEmprestimo\n5.3.05\tInvestimento\n\n\n🧾 INSTRUÇÕES DE RESPOSTA:\nVocê deve responder apenas com um JSON no seguinte formato:\n\njson\nCopiar\nEditar\n{\n  \"descricao\": \"...\",            // Texto livre do lançamento (copiado ou adaptado do que o usuário disse)\n  \"valor\": 0.00,                 // Valor numérico do lançamento (substitua pelo valor correto)\n  \"data\": \"YYYY-MM-DD\",         // Data do lançamento no formato ISO (ex: \"2025-07-15\")\n  \"tipo\": \"entrada\" | \"saida\",  // \"entrada\" para ganhos ou recebimentos, \"saida\" para despesas\n  \"categoria_codigo\": \"...\",    // Código do plano de contas correspondente (ex: \"1.1.01\")\n  \"categoria_nome\": \"...\",      // Nome da categoria correspondente (ex: \"Salário\")\n  \"forma_pagamento\": \"...\",     // Forma de pagamento usada (ex: \"pix\", \"dinheiro\", \"cartao\", \"boleto\")\n  \"observacoes\": \"...\"          // Qualquer informação complementar (opcional, mas útil)\n}\n\n\n📌 IMPORTANTE:\nNão explique nada. Apenas retorne o JSON.\n\nSempre use o código e o nome corretos do plano de contas.\n\nInterprete a intenção do usuário com base no contexto e nas palavras usadas.\n\nSe o usuario não falar a data, considerar a data {{$now}}.\n\nSeja preciso e conciso.\n\n"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 1.7,
+   "position": [
+    2432,
+    -16
+   ],
+   "id": "6e3f7ded-cd42-4fe4-9ae2-4df0ffd9fa72",
+   "name": "🧠 Agente Financeiro",
+   "retryOnFail": true,
+   "maxTries": 5
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "ac2e7b24-d2e6-472b-a9b3-d2ce9c5ca6b3",
+       "name": "planodecontas",
+       "value": "={{ $('AI Agent').item.json.output.categoria_codigo }} {{ $('AI Agent').item.json.output.categoria_nome }}",
+       "type": "string"
+      },
+      {
+       "id": "70232526-af32-45c7-bf4c-fb8e34d634fd",
+       "name": "valor",
+       "value": "={{ $('AI Agent').item.json.output.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }}",
+       "type": "string"
+      },
+      {
+       "id": "0baa7118-ed7d-47cf-a44e-f34091502e8a",
+       "name": "data",
+       "value": "={{ $('AI Agent').item.json.output.data.toDateTime().format('dd/MM/yyyy') }}",
+       "type": "string"
+      },
+      {
+       "id": "d5a97d84-91e5-4188-92c9-651779b5938b",
+       "name": "historico",
+       "value": "={{ $('text1').item.json.text }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2944,
+    -16
+   ],
+   "id": "d4e46420-bcdf-4758-b0ae-f40d3ae487df",
+   "name": "✏️ Compositor de Resposta"
+  },
+  {
+   "parameters": {
+    "content": "## 📋 CLASSIFICAÇÃO DE MÍDIA\n\n💬 **Texto** → direto para IA\n🎙️ **Áudio** → Base64 → Groq Whisper → texto\n🖼️ **Imagem** → Gemini Vision → análise → texto\n\n📝 Todos os caminhos convergem no Unificador de Texto",
+    "height": 240,
+    "width": 500,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    1152,
+    64
+   ],
+   "typeVersion": 1,
+   "id": "4ea78800-48f7-4d9c-93b3-a0861259d31c",
+   "name": "📝 Processamento de Mídia"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "cfd364b2-f9b2-404a-a090-4017e547eeae",
+          "leftValue": "={{ $('format').item.json.event.Message.keys()[0] }}",
+          "rightValue": "conversation",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "conversation"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "cb286666-6ccb-46ff-9060-ec38db51ec56",
+          "leftValue": "={{ $('format').item.json.event.Message.keys()[0] }}",
+          "rightValue": "extendedTextMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "extendedTextMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "75bc849e-115e-4913-9d57-c35cb5678c7f",
+          "leftValue": "={{ $('format').item.json.event.Message.keys()[0] }}",
+          "rightValue": "audioMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "audioMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "f6a66565-ce70-4d72-82a6-3f95c67ff476",
+          "leftValue": "={{ $('format').item.json.event.Message.keys()[0] }}",
+          "rightValue": "imageMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "imageMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "d83c5c24-2fc7-4f3e-b505-563863f1e2bd",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "documentMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "documentMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "d259ca11-e0cc-4402-bd2b-4c6b42631ca4",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "videoMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "videoMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "d4e45110-c639-4957-8bb5-56f80ffa02c4",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "contactMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "contactMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "ebec0863-d413-4215-ac38-be6d9502b0b2",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "reactionMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "reactionMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "5477a0a0-74a4-4b0d-a6e1-daa34b490a83",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "stickerMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "stickerMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "d53af02a-6bef-4297-9c87-a7f496a36874",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "interactiveMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "interactiveMessage"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "565fc598-1d90-413e-b39a-a1f5b3af90a4",
+          "leftValue": "={{ $json.event.Message.keys()[0] }}",
+          "rightValue": "pollCreationMessage",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "pollCreationMessage"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "id": "8f4a40e2-b95e-4d82-bff9-7f005983e585",
+   "name": "📋 Classificador de Mídia",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3,
+   "position": [
+    960,
+    192
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "5f76b5a6-cbb6-4a0b-937d-1ccaae64c7e8",
+       "name": "base64",
+       "value": "={{ $('format').item.json.base64 }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "9faf11f7-f774-4ca3-8741-7c1c65eac3bc",
+   "name": "🔧 Preparador Base64",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1248,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "base64",
+    "binaryPropertyName": "mp4",
+    "options": {
+     "fileName": "data.mp4"
+    }
+   },
+   "id": "3c98221b-e6ae-4948-ba25-6e1e444e6285",
+   "name": "🔄 Conversor de Arquivo",
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    1440,
+    368
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.groq.com/openai/v1/audio/transcriptions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "groqApi",
+    "sendBody": true,
+    "contentType": "multipart-form-data",
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "model",
+       "value": "whisper-large-v3"
+      },
+      {
+       "name": "temperature",
+       "value": "0"
+      },
+      {
+       "name": "response_format",
+       "value": "json"
+      },
+      {
+       "name": "language",
+       "value": "pt"
+      },
+      {
+       "parameterType": "formBinaryData",
+       "name": "file",
+       "inputDataFieldName": "mp4"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "93103f84-a350-4c00-98c4-a07ac76424c1",
+   "name": "🎙️ Transcritor Whisper",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1632,
+    368
+   ],
+   "credentials": {
+    "groqApi": {
+     "id": "uPXsZfV5qWML6ZYl",
+     "name": "Groq account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "0dbe0f22-0422-460d-af80-66804955def9",
+       "name": "text",
+       "value": "={{ $json.text }}{{ $json.candidates[0].content.parts[0].text }}{{ $('format').item.json.event.Message.conversation }}{{ $('format').item.json.event.RawMessage.extendedTextMessage.text }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1760,
+    192
+   ],
+   "id": "6d1211e5-2dde-46b1-b50c-48eebdc07fc6",
+   "name": "💬 Unificador de Texto"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Postgres').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('format').first().json.event.Info.Chat }}"
+      },
+      {
+       "name": "Body",
+       "value": "=Historico: {{ $json.historico }}\nData: {{ $json.data }}\nTipo: {{ $('AI Agent').item.json.output.tipo }}\nValor: *{{ $json.valor }}*\nForma de pagamento: {{ $('AI Agent').item.json.output.forma_pagamento }}\nPlano de contas: {{ $json.planodecontas }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    3184,
+    -16
+   ],
+   "id": "2f49eefe-c5e6-4598-b3d5-5b4a14fe49f1",
+   "name": "📤 Mensageiro WhatsApp"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    2432,
+    192
+   ],
+   "id": "d7538b58-bad1-4a3e-bd80-16922fe5f47d",
+   "name": "💎 Cérebro Gemini Financeiro",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+   "typeVersion": 1,
+   "position": [
+    2656,
+    240
+   ],
+   "id": "afeadcc5-805d-4caf-a949-331be97f9e2f",
+   "name": "🔢 Calculadora Financeira"
+  },
+  {
+   "parameters": {
+    "options": {
+     "prompt": "==Instruções:\nVocê deve gerar um JSON VÁLIDO com os seguintes campos obrigatórios:\n\n- descricao (string): breve descrição do evento financeiro.\n- valor (número): valor monetário com ponto decimal.\n- data (string): data no formato YYYY-MM-DD.\n- tipo (string): apenas \"entrada\" ou \"saida\".\n- categoria_codigo (string): código da categoria, exemplo: \"1.1.01\".\n- categoria_nome (string): nome da categoria.\n- forma_pagamento (string): forma de pagamento, exemplo: \"pix\", \"dinheiro\", \"boleto\", etc.\n- observacoes (string): observações gerais.\n\nRespeite rigorosamente o formato e os tipos de dados acima. Use **aspas duplas** nos nomes de campos e valores string. Não inclua comentários ou explicações fora do JSON.\n\n--------------\n{instructions}\n--------------\n\nCompletion esperada:\n--------------\n{completion}\n--------------\n\nA completion acima **não atendeu** aos critérios das instruções.\n\nErro encontrado:\n--------------\n{error}\n--------------\n\nTente novamente. Responda **apenas** com um JSON válido e completo conforme descrito nas instruções acima."
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+   "typeVersion": 1,
+   "position": [
+    3008,
+    144
+   ],
+   "id": "bc49b707-8b4b-48da-b51c-6dbeeee6b5fc",
+   "name": "📐 Parser de Saída"
+  },
+  {
+   "parameters": {
+    "jsonSchemaExample": "{\n  \"descricao\": \"Salário empresa X\",\n  \"valor\": 3500.00,\n  \"data\": \"2025-07-15\",\n  \"tipo\": \"entrada\",\n  \"categoria_codigo\": \"1.1.01\",\n  \"categoria_nome\": \"Salário\",\n  \"forma_pagamento\": \"pix\",\n  \"observacoes\": \"Referente ao mês de junho\"\n}"
+   },
+   "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+   "typeVersion": 1.2,
+   "position": [
+    3184,
+    272
+   ],
+   "id": "e2c6e79f-b3de-44fc-88f9-d73dae9e15e0",
+   "name": "📋 Formatador Estruturado"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    3024,
+    272
+   ],
+   "id": "a0149140-b38a-45c6-bac2-7fd7bb35fd63",
+   "name": "💎 Cérebro Gemini Parser",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.dateTimeTool",
+   "typeVersion": 2,
+   "position": [
+    2768,
+    256
+   ],
+   "id": "e5de249e-6dac-4ba3-bf65-66b378740ebe",
+   "name": "📅 Relógio Financeiro"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.toolThink",
+   "typeVersion": 1,
+   "position": [
+    2896,
+    256
+   ],
+   "id": "7406dd04-148e-4995-81af-cc2447176b69",
+   "name": "💭 Pensador Estratégico"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "financeiro",
+     "mode": "list",
+     "cachedResultName": "financeiro"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "valor": "={{ $('AI Agent').item.json.output.valor }}",
+      "descricao": "={{ $('AI Agent').item.json.output.descricao }}",
+      "data": "={{ $('AI Agent').item.json.output.data }}",
+      "tipo": "={{ $('AI Agent').item.json.output.tipo }}",
+      "categoria_codigo": "={{ $('AI Agent').item.json.output.categoria_codigo }}",
+      "categoria_nome": "={{ $('AI Agent').item.json.output.categoria_nome }}",
+      "forma_pagamento": "={{ $('AI Agent').item.json.output.forma_pagamento }}",
+      "criado_em": "={{ $now }}",
+      "atualizado_em": "={{ $now }}",
+      "grupo": "={{ $('Postgres').item.json.instancia }}",
+      "instancia": "={{ $('Postgres').item.json.instancia }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "descricao",
+       "displayName": "descricao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "valor",
+       "displayName": "valor",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data",
+       "displayName": "data",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "tipo",
+       "displayName": "tipo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "categoria_codigo",
+       "displayName": "categoria_codigo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "categoria_nome",
+       "displayName": "categoria_nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "forma_pagamento",
+       "displayName": "forma_pagamento",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "criado_em",
+       "displayName": "criado_em",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "atualizado_em",
+       "displayName": "atualizado_em",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "grupo",
+       "displayName": "grupo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "instancia",
+       "displayName": "instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2736,
+    -16
+   ],
+   "id": "990830f7-fb4f-4a77-b5c1-2d41ff69bc32",
+   "name": "💾 Gravador Financeiro",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "=financeiro-{{ $('Postgres').item.json.instancia }}",
+    "sessionTTL": 259200,
+    "contextWindowLength": 20
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+   "typeVersion": 1.5,
+   "position": [
+    2560,
+    208
+   ],
+   "id": "200ef518-225b-4cea-b45e-cd68302425eb",
+   "name": "🧠 Memória Redis Financeiro",
+   "credentials": {
+    "redis": {
+     "id": "zETZyGtAmnHSpmzs",
+     "name": "Redis account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "googlePalmApi",
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "contents.parts[0].text",
+       "value": "=Vou de enviar a imagem de uma despeça para fazer lançamento no financeiro.\n\nanalizar a imagem e responda em portugues.\n\nDescreva o valor total da despesa.\na data.\nUma breve descrição do que é.\n"
+      },
+      {
+       "name": "contents.parts[1].inlineData.mime_type",
+       "value": "={{ $('format').item.json.event.Message.imageMessage.mimetype }}"
+      },
+      {
+       "name": "contents.parts[1].inlineData.data",
+       "value": "={{ $('format').item.json.base64 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "99c56007-5c83-462a-911f-486d19b0f5cb",
+   "name": "👁️ Analisador de Imagem",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    1408,
+    608
+   ],
+   "retryOnFail": true,
+   "maxTries": 5,
+   "waitBetweenTries": 5000,
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.output }}",
+          "rightValue": "#LANCAMENTO_FINANCEIRO",
+          "operator": {
+           "type": "string",
+           "operation": "contains"
+          },
+          "id": "5766101f-19db-41e8-81dd-fa9bec866471"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "#LANCAMENTO_FINANCEIRO"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "dab203e0-0990-406f-ad90-2b52f7606d10",
+          "leftValue": "={{ $json.output }}",
+          "rightValue": "=#PERGUNTA",
+          "operator": {
+           "type": "string",
+           "operation": "contains"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "#PERGUNTA"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "34a9778d-57bc-41f5-add0-e449b74c6819",
+          "leftValue": "={{ $json.output }}",
+          "rightValue": "#ETAPA_QUALIFICACAO",
+          "operator": {
+           "type": "string",
+           "operation": "contains"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "QUALIFICACAO"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "d72ab930-bf1f-40b3-99f6-b4bee991535a",
+          "leftValue": "={{ $json.output }}",
+          "rightValue": "#ETAPA_COLETA_DADOS",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "COLETA_DADOS"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 1
+        },
+        "conditions": [
+         {
+          "id": "f3e048b0-9947-4e06-8b05-56cec98e8c6b",
+          "leftValue": "={{ $json.output }}",
+          "rightValue": "#ETAPA_CONTRATO",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "=CONTRATO"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "id": "a3af2525-e20a-476f-b484-4661b95e0014",
+   "name": "🎯 Roteador de Intenção",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3,
+   "position": [
+    2192,
+    128
+   ]
+  },
+  {
+   "parameters": {
+    "model": "qwen/qwen3.6-27b",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+   "typeVersion": 1,
+   "position": [
+    1904,
+    416
+   ],
+   "id": "1581567f-2ede-41b5-91fb-0303afc2aa33",
+   "name": "⚡ Cérebro Groq",
+   "credentials": {
+    "groqApi": {
+     "id": "uPXsZfV5qWML6ZYl",
+     "name": "Groq account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 🤖 AGENTES INTELIGENTES\n\n🎯 **Classificador** (Groq+Gemini): Identifica intenção\n🧠 **Financeiro** (Gemini): Categoriza lançamentos\n🤖 **SQL Mágico** (Gemini): Gera e executa queries\n📊 **Consultor** (Gemini): Analisa resultados\n\n📐 Output parser garante JSON válido\n🧠 Memória Redis/PostgreSQL para contexto",
+    "height": 280,
+    "width": 500,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    1664,
+    32
+   ],
+   "typeVersion": 1,
+   "id": "700c521f-0cba-4301-bb58-3c85f276100f",
+   "name": "📝 Agentes IA"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.text }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=<PAPEL>\n🔎 Agente de Classificação de Intenção Financeira\n</PAPEL>\n<pErSoNa>\n💳 Um(a) especialista em triagem de interações financeiras. Sua função é analisar friamente a frase do usuário e identificar se ele está fornecendo dados para um registro contábil (Input de Dados) ou se está fazendo uma consulta/pedido de ajuda (Dúvida/Interação), sem adicionar informações extras.\n</pErSoNa>\n<OBJETIVO>\n✅ Analisar a entrada do usuário e classificar a intenção em apenas duas categorias possíveis: Lançamento Financeiro ou Pergunta.\n✅ Para ser um \"Lançamento Financeiro\", o texto OBRIGATORIAMENTE deve conter (explicitamente ou por contexto) uma **Descrição** (o que foi/origem) e um **Valor** (numérico ou quantitativo).\n✅ Qualquer outra interação que não contenha dados suficientes para um registro ou que seja um pedido de informação deve ser classificada como \"Pergunta\".\n</OBJETIVO>\n<Criterios_de_Classificacao>\n💰 Lançamento Financeiro: O usuário informou uma ação de entrada ou saída de dinheiro. O texto contém elementos que permitem identificar \"O QUE\" e \"QUANTO\" (Ex: \"Gastei 50 no mercado\", \"Recebi 1000 de pix\").\n❓ Pergunta: O usuário está fazendo uma consulta sobre saldo, pedindo relatórios, perguntando categorias, dúvidas sobre o sistema ou qualquer interação que não seja um registro de transação (Ex: \"Quanto gastei esse mês?\", \"Qual a categoria de Uber?\", \"Como funciona?\").\n</Criterios_de_Classificacao>\n<Regras_Importantes>\n⚠ Seu único objetivo é analisar e retornar APENAS o comando referente à classificação correta.\n⚠ Não forneça explicações, não gere JSON, apenas a resposta correspondente. #CLASSIFICACAO_(Se não seguir essa regra -5 pontos).\n⚠ Se o usuário fornecer apenas o valor sem descrição (\"100 reais\") ou apenas a descrição sem valor (\"Fui no mercado\"), classifique como #PERGUNTA (pois o agente de lançamento não consegue processar sem os dois dados, então o usuário precisa ser questionado).\n</Regras_Importantes>\n<Comandos_de_Resposta>\n💰 Lançamento: #LANCAMENTO_FINANCEIRO\n❓ Pergunta: #PERGUNTA\n</Comandos_de_Resposta>\n<Exemplos_de_Funcionamento>\n📌 Caso 1 – Usuário informa gasto completo:\n💬 Usuário: \"Paguei 100 reais de gasolina hoje.\"\n🔎 Resposta do Agente: #LANCAMENTO_FINANCEIRO\n📌 Caso 2 – Usuário informa recebimento:\n💬 Usuário: \"Caiu o pix do aluguel, valor 1200.\"\n🔎 Resposta do Agente: #LANCAMENTO_FINANCEIRO\n📌 Caso 3 – Usuário faz uma pergunta sobre gastos:\n💬 Usuário: \"Quanto eu já gastei com mercado este mês?\"\n🔎 Resposta do Agente: #PERGUNTA\n📌 Caso 4 – Usuário pede ajuda sobre categorias:\n💬 Usuário: \"Em qual categoria eu coloco ração de cachorro?\"\n🔎 Resposta do Agente: #PERGUNTA\n📌 Caso 5 – Usuário informa dados incompletos (Falta valor):\n💬 Usuário: \"Acabei de pagar a conta de luz.\"\n🔎 Resposta do Agente: #PERGUNTA\n(Nota: É pergunta/interação pois o bot precisará perguntar \"Qual foi o valor?\" antes de passar para o agente de lançamento).\n📌 Caso 6 – Usuário informa dados incompletos (Falta descrição):\n💬 Usuário: \"Gastei 50,00.\"\n🔎 Resposta do Agente: #PERGUNTA\n(Nota: O bot precisará perguntar \"Com o que você gastou?\" antes de processar).\n📌 Caso 7 – Usuário mistura contexto com valor:\n💬 Usuário: \"Nossa, o cinema tava caro, paguei 80 conto nos ingressos.\"\n🔎 Resposta do Agente: #LANCAMENTO_FINANCEIRO\n📌 Caso 8 – Usuário descrição e valor:\n💬 Usuário: \"padaria 6,50\"\n🔎 Resposta do Agente: #LANCAMENTO_FINANCEIRO\n</Exemplos_de_Funcionamento>\nUse Arrow Up and Arrow Down to select a turn, Enter to jump to it, and Escape to return to the chat."
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    1904,
+    192
+   ],
+   "id": "5b7da038-c58b-4b61-ad5d-588f526ab691",
+   "name": "🤖 Classificador Inteligente"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    2048,
+    416
+   ],
+   "id": "66ff070c-b504-44f9-9774-c065d7d1f808",
+   "name": "💎 Olho Gemini Classificador",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    2288,
+    656
+   ],
+   "id": "01d82ba2-1eb4-4d6f-a43d-1ba052e18d2d",
+   "name": "💎 Cérebro Gemini SQL",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('text1').item.json.text }}",
+    "options": {
+     "systemMessage": "=Baseado na estrutura da tabela \"financeiro\":\nCREATE TABLE \"financeiro\" (\"id\" SERIAL NOT NULL, \"descricao\" TEXT, \"valor\" NUMERIC(12,2), \"data\" DATE, \"tipo\" VARCHAR(10), \"categoria_codigo\" VARCHAR(10), \"categoria_nome\" TEXT, \"forma_pagamento\" TEXT, \"criado_em\" TIMESTAMP, \"atualizado_em\" TIMESTAMP, \"grupo\" TEXT, \"instancia\" TEXT, PRIMARY KEY (\"id\"));\nInformações de Tempo (Use estes valores):\nData de hoje: {{ $now.toFormat('yyyy-MM-dd') }}\nMês atual: {{ $now.month }}\nAno atual: {{ $now.year }}\nRegras de Negócio:\nSe a pergunta for \"quanto\" ou \"total\", use sempre COALESCE(SUM(valor), 0).\nPara \"Gasto\", \"Despesa\" ou \"Saída\", use: (tipo ILIKE 'SAIDA' OR tipo ILIKE 'despesa').\nPara \"Ganho\", \"Receita\" ou \"Entrada\", use: (tipo ILIKE 'ENTRADA' OR tipo ILIKE 'receita').\nFiltro de \"Este mês\" e \"Até agora\": data >= '{{ $now.toFormat('yyyy-MM-01') }}' AND data <= '{{ $now.toFormat('yyyy-MM-dd') }}'.\nRegras obrigatórias:\nFiltro de instância fixo: WHERE instancia = '{{ $('Postgres').item.json.instancia }}'\nRetorne APENAS o código SQL puro.\nNão use markdown (```).\nInicie diretamente com SELECT.\nPergunta do usuário: \"{{ $('text1').item.json.text }}\""
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    2320,
+    432
+   ],
+   "id": "9d85b183-4836-4882-b479-aeca464840b6",
+   "name": "🤖 Agente SQL Mágico",
+   "retryOnFail": true
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "{{ $json.output }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2880,
+    432
+   ],
+   "id": "b6439e0d-b15a-4724-83f9-5a0c063a5cb7",
+   "name": "🗄️ Executor SQL",
+   "alwaysOutputData": false,
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "d1f7c2d3-d2b8-4e30-9e03-5daeba943126",
+       "name": "output",
+       "value": "={{ $json.output.replaceAll(\"```\",\"\") }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2672,
+    432
+   ],
+   "id": "ec51b164-3c2a-4ee1-8771-43dda5af9892",
+   "name": "🔧 Ajustador de Query"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=<banco_de_dados>\n{{ $json.data.toJsonString() }}\n\n</banco_de_dados>\n\nBaseado nessa informação\n\nresponda de forma resumida a pergunta do usuario\n\n{{ $('text1').item.json.text }}",
+    "options": {
+     "systemMessage": "=Atue como consultor financeiro experiente e responda sempre de forma simples para que ate uma pessoa simples possa entender.\n\nSempre considere a data e as informações do banco de dados\n\nConsidere essas informação para pensar e responder sobre data\nInformações de Tempo (Use estes valores):\nData de hoje: {{ $now.toFormat('yyyy-MM-dd') }}\nmês passado: {{ $now.minus(1, 'month').toFormat('yyyy-MM-dd') }}\nsemana passada: {{ $now.minus(7, 'days').toFormat('yyyy-MM-dd') }}\nMês atual: {{ $now.month }}\nAno atual: {{ $now.year }}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    3328,
+    432
+   ],
+   "id": "c448005a-701d-4f89-b2ea-56acc689cf44",
+   "name": "🤖 Consultor de Dados",
+   "retryOnFail": true
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    3264,
+    608
+   ],
+   "id": "402782c1-eb23-4843-8291-7709d787c80e",
+   "name": "💎 Cérebro Gemini Consultor",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "aggregate": "aggregateAllItemData",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.aggregate",
+   "typeVersion": 1,
+   "position": [
+    3088,
+    432
+   ],
+   "id": "b42f088d-ece6-4d8a-b712-7dad799511da",
+   "name": "📦 Agregador de Resultados"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "={{ $('Postgres').item.json.instancia }}",
+    "contextWindowLength": 10
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+   "typeVersion": 1.5,
+   "position": [
+    3424,
+    656
+   ],
+   "id": "97c50a24-eab2-4de6-b11a-a23ea0a21f16",
+   "name": "🧠 Memória Redis Consultor",
+   "credentials": {
+    "redis": {
+     "id": "zETZyGtAmnHSpmzs",
+     "name": "Redis account 2"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+   "typeVersion": 1,
+   "position": [
+    3600,
+    672
+   ],
+   "id": "0122c856-d81e-408f-ba49-7b99ccc4eb81",
+   "name": "🔢 Calculadora Consultor"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.dateTimeTool",
+   "typeVersion": 2,
+   "position": [
+    3712,
+    656
+   ],
+   "id": "7ff391d0-9c0d-44fb-8c1c-9dd33ff2cfc3",
+   "name": "📅 Relógio Consultor"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Postgres').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('format').first().json.event.Info.Chat }}"
+      },
+      {
+       "name": "Body",
+       "value": "={{ $json.output }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    3680,
+    432
+   ],
+   "id": "9db89716-54cb-4390-9cd8-67020a6f1293",
+   "name": "📤 Entrega Final WhatsApp"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "8d30089b-a034-4f1c-aeeb-61e2e1df0277",
+       "leftValue": "={{ $json.body.event.Info.Chat }}",
+       "rightValue": "@lid",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -16,
+    352
+   ],
+   "id": "64dab1ff-b651-400a-97e4-707cd2801430",
+   "name": "🔀 Detector de Protocolo"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "05eb48eb-31c4-48a1-bc02-2908fc5aa9b7",
+       "name": "numero",
+       "value": "={{ $json.body.event.Info.SenderAlt.split(\":\")[0] }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    192,
+    256
+   ],
+   "id": "59d1773a-8b23-4e2c-bf3c-7ba59e599170",
+   "name": "🏷️ Extrator de LID"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "05eb48eb-31c4-48a1-bc02-2908fc5aa9b7",
+       "name": "numero",
+       "value": "={{ $json.body.event.Info.Chat.split(\":\")[0] }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    192,
+    432
+   ],
+   "id": "490d2c66-0aa3-486b-94c2-de4779067d9b",
+   "name": "🆔 Extrator de JID"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "IA_financeiro3",
+    "contextWindowLength": 10
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    2384,
+    688
+   ],
+   "id": "02b51e3d-5cdc-42ed-86e4-2f65bd01f8c2",
+   "name": "🧠 Memória PostgreSQL",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+   "typeVersion": 1,
+   "position": [
+    2496,
+    688
+   ],
+   "id": "93c5c0bb-e3e8-48c9-8eba-9994b32b9f83",
+   "name": "🔢 Calculadora SQL"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.dateTimeTool",
+   "typeVersion": 2,
+   "position": [
+    2624,
+    688
+   ],
+   "id": "012c5964-ff63-44e5-8587-f24c91431e6d",
+   "name": "📅 Relógio SQL"
+  },
+  {
+   "parameters": {
+    "content": "## 📤 RESPOSTAS\n\n✏️ Compõe mensagem formatada\n📤 Envia via WuzAPI (HTTP)\n📦 Agrega e consolida dados\n\n💡 Duas saídas: resposta rápida (classificação) e resposta completa (consulta)",
+    "height": 220,
+    "width": 400,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2736,
+    576
+   ],
+   "id": "sticky-wf2-response",
+   "name": "📝 Respostas e Entregas"
+  }
+ ],
+ "pinData": {
+  "Webhook": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "go-resty/2.16.5 (https://github.com/go-resty/resty)",
+      "content-length": "2168",
+      "accept": "application/json",
+      "accept-encoding": "gzip",
+      "content-type": "application/json",
+      "x-forwarded-for": "45.39.15.202",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "45.39.15.202"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "event": {
+       "Info": {
+        "AddressingMode": "",
+        "BroadcastListOwner": "",
+        "BroadcastRecipients": null,
+        "Category": "",
+        "Chat": "122793148580017@lid",
+        "DeviceSentMeta": null,
+        "Edit": "",
+        "ID": "3EB03F8CE62C9422FF1847",
+        "IsFromMe": false,
+        "IsGroup": false,
+        "MediaType": "",
+        "MsgBotInfo": {
+         "EditSenderTimestampMS": "0001-01-01T00:00:00Z",
+         "EditTargetID": "",
+         "EditType": ""
+        },
+        "MsgMetaInfo": {
+         "DeprecatedLIDSession": null,
+         "TargetChat": "",
+         "TargetID": "",
+         "TargetSender": "",
+         "ThreadMessageID": "",
+         "ThreadMessageSenderJID": ""
+        },
+        "Multicast": false,
+        "PushName": "Rafael S Pereira",
+        "RecipientAlt": "",
+        "Sender": "122793148580017:14@lid",
+        "SenderAlt": "5522998908709:14@s.whatsapp.net",
+        "ServerID": 0,
+        "Timestamp": "2026-08-20T21:46:54-03:00",
+        "Type": "text",
+        "VerifiedName": {
+         "Certificate": {
+          "details": "CN7w+5GEv4TxYxIGc21iOndhIhBSYWZhZWwgUyBQZXJlaXJh",
+          "signature": "GDAy+fx+cayrZSQmzG2WvQDZCD1L/Z9e5z7m7E1rzrk5fhMGH3ydYpZRDNGiMhZuQx0xWUEvVoyYxry5oMXSBA=="
+         },
+         "Details": {
+          "issuer": "smb:wa",
+          "serial": 7197334912452458000,
+          "verifiedName": "Rafael S Pereira"
+         }
+        }
+       },
+       "IsBotInvoke": false,
+       "IsDocumentWithCaption": false,
+       "IsEdit": false,
+       "IsEphemeral": false,
+       "IsLottieSticker": false,
+       "IsViewOnce": false,
+       "IsViewOnceV2": false,
+       "IsViewOnceV2Extension": false,
+       "Message": {
+        "conversation": "padaria 51,90",
+        "messageContextInfo": {
+         "deviceListMetadata": {
+          "receiverAccountType": 0,
+          "recipientKeyHash": "cuGAFNScL4rYMw==",
+          "recipientTimestamp": 1787164927,
+          "senderAccountType": 1,
+          "senderKeyHash": "c9HweDMT9umvzQ==",
+          "senderTimestamp": 1786963165
+         },
+         "deviceListMetadataVersion": 2,
+         "limitSharingV2": {
+          "initiatedByMe": false,
+          "trigger": 0
+         },
+         "messageSecret": "xhyZ2D66RbuV4ceDrRQxVR816Zma/jWDk6aqT/OMaRw="
+        }
+       },
+       "NewsletterMeta": null,
+       "RawMessage": {
+        "conversation": "padaria 51,90",
+        "messageContextInfo": {
+         "deviceListMetadata": {
+          "receiverAccountType": 0,
+          "recipientKeyHash": "cuGAFNScL4rYMw==",
+          "recipientTimestamp": 1787164927,
+          "senderAccountType": 1,
+          "senderKeyHash": "c9HweDMT9umvzQ==",
+          "senderTimestamp": 1786963165
+         },
+         "deviceListMetadataVersion": 2,
+         "limitSharingV2": {
+          "initiatedByMe": false,
+          "trigger": 0
+         },
+         "messageSecret": "xhyZ2D66RbuV4ceDrRQxVR816Zma/jWDk6aqT/OMaRw="
+        }
+       },
+       "RetryCount": 0,
+       "SourceWebMsg": null,
+       "UnavailableRequestID": ""
+      },
+      "instanceName": "s22-bus-5106",
+      "type": "Message",
+      "userID": "b0e78456d310d7705cebd185a4df250a"
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/modulo-financeiro",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "📨 Receptor WhatsApp": {
+   "main": [
+    [
+     {
+      "node": "🔀 Detector de Protocolo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧹 Formatador de Dados": {
+   "main": [
+    [
+     {
+      "node": "📊 Registro de Execução",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "📋 Classificador de Mídia",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗄️ Consulta Cadastro WuzAPI": {
+   "main": [
+    [
+     {
+      "node": "⏰ Fiscal de Vencimento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏰ Fiscal de Vencimento": {
+   "main": [
+    [
+     {
+      "node": "🧹 Formatador de Dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Agente Financeiro": {
+   "main": [
+    [
+     {
+      "node": "💾 Gravador Financeiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "✏️ Compositor de Resposta": {
+   "main": [
+    [
+     {
+      "node": "📤 Mensageiro WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📋 Classificador de Mídia": {
+   "main": [
+    [
+     {
+      "node": "💬 Unificador de Texto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💬 Unificador de Texto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🔧 Preparador Base64",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "👁️ Analisador de Imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔧 Preparador Base64": {
+   "main": [
+    [
+     {
+      "node": "🔄 Conversor de Arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔄 Conversor de Arquivo": {
+   "main": [
+    [
+     {
+      "node": "🎙️ Transcritor Whisper",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎙️ Transcritor Whisper": {
+   "main": [
+    [
+     {
+      "node": "💬 Unificador de Texto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💬 Unificador de Texto": {
+   "main": [
+    [
+     {
+      "node": "🤖 Classificador Inteligente",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💎 Cérebro Gemini Financeiro": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔢 Calculadora Financeira": {
+   "ai_tool": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📐 Parser de Saída": {
+   "ai_outputParser": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "ai_outputParser",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📋 Formatador Estruturado": {
+   "ai_outputParser": [
+    [
+     {
+      "node": "📐 Parser de Saída",
+      "type": "ai_outputParser",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💎 Cérebro Gemini Parser": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "📐 Parser de Saída",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📅 Relógio Financeiro": {
+   "ai_tool": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💭 Pensador Estratégico": {
+   "ai_tool": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Gravador Financeiro": {
+   "main": [
+    [
+     {
+      "node": "✏️ Compositor de Resposta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Memória Redis Financeiro": {
+   "ai_memory": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "👁️ Analisador de Imagem": {
+   "main": [
+    [
+     {
+      "node": "💬 Unificador de Texto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⚡ Cérebro Groq": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Classificador Inteligente",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Classificador Inteligente": {
+   "main": [
+    [
+     {
+      "node": "🎯 Roteador de Intenção",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💎 Olho Gemini Classificador": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Classificador Inteligente",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "🎯 Roteador de Intenção": {
+   "main": [
+    [
+     {
+      "node": "🧠 Agente Financeiro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 Agente SQL Mágico",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💎 Cérebro Gemini SQL": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Agente SQL Mágico",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Agente SQL Mágico": {
+   "main": [
+    [
+     {
+      "node": "🔧 Ajustador de Query",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔧 Ajustador de Query": {
+   "main": [
+    [
+     {
+      "node": "🗄️ Executor SQL",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💎 Cérebro Gemini Consultor": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Consultor de Dados",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🗄️ Executor SQL": {
+   "main": [
+    [
+     {
+      "node": "📦 Agregador de Resultados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📦 Agregador de Resultados": {
+   "main": [
+    [
+     {
+      "node": "🤖 Consultor de Dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔢 Calculadora Consultor": {
+   "ai_tool": [
+    [
+     {
+      "node": "🤖 Consultor de Dados",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📅 Relógio Consultor": {
+   "ai_tool": [
+    [
+     {
+      "node": "🤖 Consultor de Dados",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Consultor de Dados": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega Final WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Detector de Protocolo": {
+   "main": [
+    [
+     {
+      "node": "🏷️ Extrator de LID",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🆔 Extrator de JID",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🏷️ Extrator de LID": {
+   "main": [
+    [
+     {
+      "node": "🗄️ Consulta Cadastro WuzAPI",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🆔 Extrator de JID": {
+   "main": [
+    [
+     {
+      "node": "🗄️ Consulta Cadastro WuzAPI",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📅 Relógio SQL": {
+   "ai_tool": [
+    [
+     {
+      "node": "🤖 Agente SQL Mágico",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔢 Calculadora SQL": {
+   "ai_tool": [
+    [
+     {
+      "node": "🤖 Agente SQL Mágico",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "fe414809-d0ef-4b4a-8238-f485a5bec72e",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "CrfQTqKyJ3BmFXDF",
+ "tags": [
+  {
+   "updatedAt": "2026-08-21T00:17:50.015Z",
+   "createdAt": "2026-08-21T00:17:50.015Z",
+   "id": "zZep8aR8JfSco1LF",
+   "name": "bot-financeiro"
+  }
+ ]
+}

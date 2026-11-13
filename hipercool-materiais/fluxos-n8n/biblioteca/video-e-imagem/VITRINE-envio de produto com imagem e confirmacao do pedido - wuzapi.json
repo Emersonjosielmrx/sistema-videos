@@ -1,0 +1,1251 @@
+{
+ "name": "VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi",
+ "nodes": [
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $('Webhook').item.json.body.event.RawMessage.conversation }}\n",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é um atendente de loja. Faça o atendimento do cliente de forma direta, sem perguntar nada, apenas encontre o produto que ele deseja. Sempre consulte a tool `busca_produto` quando ele citar qualquer item.\n\nREGRAS DE BUSCA:\n1. Extraia apenas a palavra-chave principal e suas características básicas.\n2. Envie a palavra SEMPRE no SINGULAR para a tool (Ex: pediu \"casas disponíveis\" -> envie \"casa\". Pediu \"casas 2 quartos\" -> envie \"casa 2 quartos\").\n3. Se a tool não retornar nada, MODIFIQUE A PALAVRA (use sinônimos ou simplifique, tirando adjetivos) e chame a tool novamente.\n\nFALLBACK (DESISTÊNCIA):\nSe você tentar buscar 5 vezes seguidas com palavras e sinônimos diferentes e a tool continuar retornando sem resultados, pare de buscar. Informe ao cliente de forma educada que não encontrou nenhum produto com aquelas características no momento e ofereça ajuda com outra coisa.\n\nvoce e um atendente de loja, faca o atendimento do cliente sem perguntar nada apenas encontre o produto que pelo deseja sempre consulte a tool agente_busca_produto quando ele citar qualquer produto para ver se ele existe entao em toda mensagem chame essa tool, CASO NAO ACHE MODIFIQUE A PALAVRA E TENTE NOVAMENTE E SEMPRE BUSQUE NO SINGULAR EX: SE A PESSOA PEDIU AS CASAS DISPONIVEIS VOCE DEVE BUSCAR: CASA, SE A PESSOA PEDIU CASAS 2 QUARTOS VOCE BUSCA :CASA 2 QUARTOS, SE PEDIU CASA COM PISCINA USE CASA PISCINA"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    3280,
+    32
+   ],
+   "id": "c23f2970-80a1-4cec-8dce-3c746c26282b",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "={{ $('Webhook').item.json.body.event.Info.Chat }}3",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    3344,
+    256
+   ],
+   "id": "bf0e1c0f-8734-4d9d-9ee5-a2d088eaef4e",
+   "name": "memoria",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-3-flash-preview",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    3232,
+    256
+   ],
+   "id": "b8bfea0c-3a53-4aea-8bf5-cdf9dff7dd36",
+   "name": "gemini",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "cI7TnfCtTjIrpXE2",
+     "name": "919-emersongenshin"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "imagens_produtos",
+     "mode": "list",
+     "cachedResultName": "imagens_produtos"
+    },
+    "where": {
+     "values": [
+      {
+       "column": "produto_id",
+       "value": "={{ $json.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2816,
+    448
+   ],
+   "id": "2c9dbfde-072c-469e-a7d6-1613b13ef5b6",
+   "name": "Select rows from a table",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "uBbz1mxdUcuGjTk4",
+     "name": "Postgres account 3"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "produto"
+      },
+      {
+       "name": "urlevo"
+      },
+      {
+       "name": "token"
+      },
+      {
+       "name": "instancia"
+      },
+      {
+       "name": "number"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    2288,
+    448
+   ],
+   "id": "a711254d-2354-4de2-be39-8930c3d3a7c3",
+   "name": "When Executed by Another Workflow"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT *\nFROM infos_produtos\nWHERE (nome ILIKE '%' || '{{ $json.produto_limpo }}' || '%'\nOR descricao ILIKE '%' || '{{ $json.produto_limpo }}' || '%')\nAND empresa = 'Imobiliária Horizonte'\nLIMIT 5;",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2624,
+    448
+   ],
+   "id": "c6a867bf-3448-4e74-a67e-132057e0e600",
+   "name": "Execute a SQL query",
+   "credentials": {
+    "postgres": {
+     "id": "uBbz1mxdUcuGjTk4",
+     "name": "Postgres account 3"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "710e9239-ecf9-4861-bdbd-068d2520d94f",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    2736,
+    32
+   ],
+   "id": "a6e5b471-e3f1-4242-b4a6-7d3e41f46e6f",
+   "name": "Webhook",
+   "webhookId": "710e9239-ecf9-4861-bdbd-068d2520d94f"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    2992,
+    448
+   ],
+   "id": "f0c07dad-8ceb-421d-8f01-c833604f6725",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {
+    "amount": 1
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3280,
+    624
+   ],
+   "id": "abd1eb1e-c5bb-4e0f-928d-84287be5b2f0",
+   "name": "Wait",
+   "webhookId": "8d87ee2b-e656-42fa-bf6f-c0ee382b7f6a"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "infos_produtos",
+     "mode": "list",
+     "cachedResultName": "infos_produtos"
+    },
+    "limit": 5,
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('Execute a SQL query').item.json.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    3136,
+    448
+   ],
+   "id": "15bbaa1b-fbfe-4f0c-8535-434008ef4677",
+   "name": "Select rows from a table1",
+   "credentials": {
+    "postgres": {
+     "id": "uBbz1mxdUcuGjTk4",
+     "name": "Postgres account 3"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "description": "acione essa tool para buscar o produto informado pelo cliente o nome dela e : busca_produto ",
+    "workflowId": {
+     "__rl": true,
+     "value": "OJ8Rxj2YN8jKgxmS",
+     "mode": "id",
+     "cachedResultUrl": "/workflow/OJ8Rxj2YN8jKgxmS"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "produto": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('produto', `produto informado pelo cliente \ncolocar a palavra no singular`, 'string') }}",
+      "urlevo": "https://wuzapi.inovareinteligenciaartificial.com",
+      "instancia": "={{ $('Webhook').item.json.body.instanceName }}",
+      "number": "={{ $('Webhook').item.json.body.event.Info.Chat }}",
+      "token": "<SEGREDO_REMOVIDO>"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "produto",
+       "displayName": "produto",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string"
+      },
+      {
+       "id": "urlevo",
+       "displayName": "urlevo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string"
+      },
+      {
+       "id": "token",
+       "displayName": "token",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string"
+      },
+      {
+       "id": "instancia",
+       "displayName": "instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string"
+      },
+      {
+       "id": "number",
+       "displayName": "number",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string"
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+   "typeVersion": 2.2,
+   "position": [
+    3680,
+    368
+   ],
+   "id": "d4a6fb2d-47e2-41b4-8dee-ae1d8fb5607c",
+   "name": "busca_produto"
+  },
+  {
+   "parameters": {
+    "toolDescription": "esse agente deve buscar o produto e retornar as informacoes dele para o agente principal",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você deve adaptar o que o usuário pedir até achar um produto no banco. Sempre consulte a tool `busca_produto`.\n\nETAPAS DE TENTATIVA:\nTentativa 1: Busque o termo exato no SINGULAR (ex: pediu \"casas\", busque \"casa\").\nTentativa 2: Se falhar, busque apenas a categoria do produto (ex: pediu \"casa com piscina grande\", busque apenas \"casa piscina\").\nTentativa 3: Se falhar, use um sinônimo direto.\n\nContinue adaptando a palavra e chamando a tool até que ela retorne os dados de um produto válido.\n\nvoce deve adaptar oque o usuario pedir para buscar ate achar um produto, caso a busca nao retonar nada deve acionar a tool de novo com uma palavra diferente adaptada para ver se tras o produto, e sempre consulte a tool busca_produto, CASO NAO ACHE MODIFIQUE A PALAVRA E TENTE NOVAMENTE E SEMPRE BUSQUE NO SINGULAR EX: SE A PESSOA PEDIU AS CASAS DISPONIVEIS VOCE DEVE BUSCAR: CASA, SE A PESSOA PEDIU CASAS 2 QUARTOS VOCE BUSCA :CASA 2 QUARTOS, SE PEDIU CASA COM PISCINA USE CASA PISCINA",
+     "maxIterations": 5
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    3488,
+    224
+   ],
+   "id": "77ed16cb-ca0b-4df2-8fa2-c1643d687711",
+   "name": "agente_busca_produto"
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash"
+    },
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.2,
+   "position": [
+    3440,
+    368
+   ],
+   "id": "f1a24865-f610-4e74-acad-ff701d786fbe",
+   "name": "OpenAI",
+   "credentials": {
+    "openAiApi": {
+     "id": "vP7SrznVbVFu6NeZ",
+     "name": "roteador llm n8n"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash"
+    },
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.2,
+   "position": [
+    3088,
+    272
+   ],
+   "id": "541b51d8-8507-4d5b-b621-fdc205decc22",
+   "name": "OpenAI1",
+   "credentials": {
+    "openAiApi": {
+     "id": "vP7SrznVbVFu6NeZ",
+     "name": "roteador llm n8n"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-3-flash-preview",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    3536,
+    368
+   ],
+   "id": "5febdf29-4c94-4af7-a7f6-7688f74c6ed5",
+   "name": "gemini2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "cI7TnfCtTjIrpXE2",
+     "name": "919-emersongenshin"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('When Executed by Another Workflow').item.json.urlevo }}/chat/send/image",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('When Executed by Another Workflow').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('When Executed by Another Workflow').item.json.number }}"
+      },
+      {
+       "name": "Caption",
+       "value": "={{ $('Execute a SQL query').item.json.nome }}"
+      },
+      {
+       "name": "Image",
+       "value": "={{ $json.url_imagem }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    3104,
+    624
+   ],
+   "id": "e0ef386b-448a-4e84-8e38-efcaaf19f7ad",
+   "name": "envia imagem",
+   "retryOnFail": true,
+   "maxTries": 5,
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wuzapi.inovareinteligenciaartificial.com/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('consulta_instancia_wuzapi').item.json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('Webhook').item.json.body.event.Info.Chat }}"
+      },
+      {
+       "name": "Body",
+       "value": "={{ $json.output }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    3552,
+    32
+   ],
+   "id": "68519bee-401c-4e35-a1e7-be6ee1f2c5da",
+   "name": "envia resposta",
+   "retryOnFail": true,
+   "maxTries": 5
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "d49e22dd-3db6-4135-9fbe-4123ff056528",
+       "name": "e-commerce",
+       "value": "",
+       "type": "string"
+      },
+      {
+       "id": "ff3b246e-9f56-47a8-a4b5-1e267731062b",
+       "name": "AutoPrime Veículos",
+       "value": "",
+       "type": "string"
+      },
+      {
+       "id": "5e5f9ad3-44c7-403d-ba40-009ea36620e4",
+       "name": "Imobiliária Horizonte",
+       "value": "",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    2768,
+    624
+   ],
+   "id": "ca44b27d-f96e-4bcc-9893-d9e7dd705ead",
+   "name": "empresas"
+  },
+  {
+   "parameters": {
+    "content": "## 🎯 resumo\n**Dinâmica da Vitrine Virtual:**\n1. Cliente entra em contato via WhatsApp.\n2. Agente (Gemini) entende a intenção e identifica o nicho (Imobiliária, Veículos, E-commerce).\n3. Agente aciona a ferramenta de busca no banco de dados.\n4. Sistema retorna fotos reais e descrição detalhada dos produtos no WhatsApp.",
+    "height": 228,
+    "width": 420,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2000,
+    -48
+   ],
+   "id": "48665809-e835-4ac3-b266-27c3aaa33122",
+   "name": "Sticky Note1"
+  },
+  {
+   "parameters": {
+    "content": "## 🧠 Cérebro do Agente e Memória\n\n- **Gatilho:** Recebe as mensagens via Webhook (Wuzapi).\n- **Memória:** O nó `PostgresChatMemory` garante que a IA lembre do contexto da conversa (ID da sessão atrelado ao número do WhatsApp do cliente).\n- **IA Principal:** Gemini gerencia o fluxo, responde de forma conversacional e aciona a tool de busca de produtos de forma autônoma.",
+    "height": 268,
+    "width": 400,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2000,
+    208
+   ],
+   "id": "f07256b6-9be9-4b84-aa7b-f39812e4769b",
+   "name": "Sticky Note2"
+  },
+  {
+   "parameters": {
+    "content": "## 🗄️ Integração com Banco (Postgres)\n\n- **Tool Workflow:** A IA aciona o sub-workflow `busca_produto` adaptando as palavras-chave do cliente.\n- **Consultas SQL:**\n  1. Busca as informações de texto na tabela `infos_produtos` (ex: nicho de Imobiliária).\n  2. Usa o ID do produto retornado para puxar a galeria de URLs na tabela `imagens_produtos`.",
+    "height": 248,
+    "width": 420,
+    "color": 2
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    3456,
+    496
+   ],
+   "id": "fea6d430-bb18-401b-a3cb-7f60ba70d6bb",
+   "name": "Sticky Note3"
+  },
+  {
+   "parameters": {
+    "content": "## 📤 Disparo das Respostas\n\n- **Envio de Imagens:** Um loop (`Loop Over Items`) itera sobre os resultados do banco e dispara as requisições HTTP de imagem uma a uma, com um nó `Wait` para respeitar o delay.\n- **Envio de Texto:** O nó final repassa a descrição formatada e humanizada diretamente para a API do WhatsApp.",
+    "height": 232,
+    "width": 400,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    3760,
+    32
+   ],
+   "id": "033c9b8b-648d-4f6e-8869-fc14449abd18",
+   "name": "Sticky Note5"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "users",
+     "mode": "list",
+     "cachedResultName": "users"
+    },
+    "where": {
+     "values": [
+      {
+       "column": "name",
+       "value": "={{ $('Webhook').item.json.body.instanceName }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2960,
+    32
+   ],
+   "id": "9a6143a3-9f06-45c6-805f-d43e74523c4b",
+   "name": "consulta_instancia_wuzapi",
+   "credentials": {
+    "postgres": {
+     "id": "WdqJSostdEnQWRQF",
+     "name": "wuzapi"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "c025d6d2-44a1-4851-a711-edd6303c9af5",
+       "name": "adm",
+       "value": "559184698653",
+       "type": "string"
+      },
+      {
+       "id": "540099d4-01ce-4529-a8d0-7d2cfb4deeab",
+       "name": "url",
+       "value": "https://wuzapi.inovareinteligenciaartificial.com",
+       "type": "string"
+      },
+      {
+       "id": "29b090cd-2916-44ec-812e-4dce9f91fe83",
+       "name": "Token",
+       "value": "={{ $('consulta_instancia_wuzapi').item.json.token }}",
+       "type": "string"
+      },
+      {
+       "id": "af9e1fad-55da-49d4-b5a6-17710aed5ea9",
+       "name": "Chat",
+       "value": "={{ $('Webhook').item.json.body.event.Info.Chat }}",
+       "type": "string"
+      },
+      {
+       "id": "e738e4ee-3421-4432-a938-6a31f7f9ce5c",
+       "name": "SenderAlt",
+       "value": "={{ $('Webhook').item.json.body.event.Info.SenderAlt }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    3136,
+    32
+   ],
+   "id": "91d58c6a-8614-4528-b4ce-76956931a867",
+   "name": "dados"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "-- Criar tabela de produtos\nCREATE TABLE IF NOT EXISTS infos_produtos (\n    id SERIAL PRIMARY KEY,\n    nome VARCHAR(255) NOT NULL,\n    descricao TEXT,\n    preco NUMERIC(10,2),\n    estoque INTEGER,\n    ativo BOOLEAN DEFAULT true,\n    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    empresa TEXT\n);\n\n-- Criar tabela de imagens\nCREATE TABLE IF NOT EXISTS imagens_produtos (\n    id SERIAL PRIMARY KEY,\n    produto_id INTEGER NOT NULL,\n    url_imagem TEXT NOT NULL,\n    principal BOOLEAN DEFAULT false,\n    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    CONSTRAINT fk_produto \n        FOREIGN KEY (produto_id) \n        REFERENCES infos_produtos2(id) \n        ON DELETE CASCADE\n);\n\n-- Inserir produtos\nINSERT INTO infos_produtos (id, nome, descricao, preco, estoque, ativo, criado_em, empresa) VALUES\n(1, 'Camisa Social', 'Camisa social masculina manga longa', 129.90, 25, true, '2026-03-11 00:45:58.525407', 'e-commerce'),\n(2, 'Calça Jeans', 'Calça jeans masculina azul', 189.90, 15, true, '2026-03-11 00:45:58.525407', 'e-commerce'),\n(3, 'Tênis Casual', 'Tênis confortável para uso diário', 249.90, 10, true, '2026-03-11 00:45:58.525407', 'e-commerce'),\n(4, 'Toyota Corolla XEI 2022', 'Sedan automático, motor 2.0 flex', 129900.00, 3, true, '2026-03-13 00:33:48.650291', 'AutoPrime Veículos'),\n(5, 'Volkswagen T-Cross Comfortline 2023', 'SUV compacto 1.0 TSI turbo', 139500.00, 2, true, '2026-03-13 00:33:48.650291', 'AutoPrime Veículos'),\n(6, 'Chevrolet Onix Premier 2021', 'Hatch completo 1.0 turbo', 89900.00, 4, true, '2026-03-13 00:33:48.650291', 'AutoPrime Veículos'),\n(7, 'Honda Civic Touring 2020', 'Sedan premium 1.5 turbo', 134900.00, 1, true, '2026-03-13 00:33:48.650291', 'AutoPrime Veículos'),\n(8, 'Casa 3 Quartos com Piscina', 'Casa ampla com piscina', 420000.00, 1, true, '2026-03-13 00:34:38.604308', 'Imobiliária Horizonte'),\n(9, 'Apartamento Centro 2 Quartos', 'Apartamento moderno', 280000.00, 1, true, '2026-03-13 00:34:38.604308', 'Imobiliária Horizonte'),\n(10, 'Terreno Residencial 360m²', 'Terreno plano', 95000.00, 5, true, '2026-03-13 00:34:38.604308', 'Imobiliária Horizonte'),\n(11, 'Cobertura Duplex Vista Mar', 'Cobertura de luxo', 1250000.00, 1, true, '2026-03-13 00:34:38.604308', 'Imobiliária Horizonte');\n\n-- Inserir imagens\nINSERT INTO imagens_produtos (id, produto_id, url_imagem, principal, criado_em) VALUES\n(1, 1, 'https://img.ibxk.com.br/materias/5866/21577.jpg', true, '2026-03-11 00:46:50.981863'),\n(2, 1, 'https://img.freepik.com/fotos-gratis/arara.jpg', false, '2026-03-11 00:46:50.981863'),\n(3, 2, 'https://site.com/imagens/calca1.jpg', true, '2026-03-11 00:46:50.981863'),\n(4, 2, 'https://site.com/imagens/calca2.jpg', false, '2026-03-11 00:46:50.981863'),\n(5, 3, 'https://img.freepik.com/icone-tenis.jpg', true, '2026-03-11 00:46:50.981863'),\n(6, 1, 'https://upload.wikimedia.org/toyota.jpg', true, '2026-03-13 00:37:59.77618'),\n(7, 2, 'https://upload.wikimedia.org/tcross.jpg', true, '2026-03-13 00:37:59.77618'),\n(8, 3, 'https://images.unsplash.com/photo-1', true, '2026-03-13 00:37:59.77618'),\n(9, 4, 'https://images.unsplash.com/photo-2', true, '2026-03-13 00:37:59.77618'),\n(10, 5, 'https://images.unsplash.com/photo-3', true, '2026-03-13 00:38:47.652512'),\n(11, 6, 'https://images.unsplash.com/photo-4', true, '2026-03-13 00:38:47.652512'),\n(12, 7, 'https://images.unsplash.com/photo-5', true, '2026-03-13 00:38:47.652512'),\n(13, 8, 'https://images.unsplash.com/photo-6', true, '2026-03-13 00:38:47.652512');",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2576,
+    624
+   ],
+   "id": "2617ee98-f8bc-45a0-8cdb-33b291d0abb6",
+   "name": "criar_tabela",
+   "credentials": {
+    "postgres": {
+     "id": "uBbz1mxdUcuGjTk4",
+     "name": "Postgres account 3"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "let produto = $input.item.json.produto || \"\";\nlet limpo = produto.toLowerCase().trim();\n\n// Remove 's' no final para plurais simples (ex: casas -> casa)\nif (limpo.endsWith('s')) {\n  limpo = limpo.slice(0, -1);\n}\n\n$input.item.json.produto_limpo = limpo;\nreturn $input.item;"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2448,
+    448
+   ],
+   "id": "f55ccf12-1e68-4120-90b5-91ced6c181e5",
+   "name": "Limpa e Singulariza"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    2976,
+    848
+   ],
+   "typeVersion": 1,
+   "id": "fbe510d8-198a-4056-bffb-e40b93821b1e"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-br\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Admin - Vitrine IA</title>\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css\">\n    <style>\n        .modal { transition: opacity 0.25s ease; }\n        body.modal-active { overflow-x: hidden; overflow-y: visible !important; }\n    </style>\n</head>\n<body class=\"bg-gray-100 min-h-screen font-sans\">\n\n    <header class=\"bg-slate-800 text-white shadow-md p-4\">\n        <div class=\"container mx-auto flex justify-between items-center\">\n            <div class=\"flex items-center gap-3\">\n                <div class=\"bg-indigo-500 p-2 rounded-lg\"><i class=\"fas fa-store\"></i></div>\n                <h1 class=\"text-xl font-bold tracking-tight\">PromovaWeb <span class=\"font-light opacity-50 text-sm\">| Inventory Control</span></h1>\n            </div>\n            <button onclick=\"toggleModal('modal-produto')\" class=\"bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2\">\n                <i class=\"fas fa-plus\"></i> Novo Produto\n            </button>\n        </div>\n    </header>\n\n    <main class=\"container mx-auto py-8 px-4\">\n        \n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 mb-8\">\n            <div class=\"bg-white p-6 rounded-xl shadow-sm border-l-4 border-indigo-500\">\n                <p class=\"text-gray-500 text-sm font-medium uppercase\">Total de Produtos</p>\n                <h3 class=\"text-3xl font-bold text-gray-800\" id=\"stat-total\">0</h3>\n            </div>\n            <div class=\"bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500\">\n                <p class=\"text-gray-500 text-sm font-medium uppercase\">Ativos no Agente</p>\n                <h3 class=\"text-3xl font-bold text-gray-800\" id=\"stat-ativos\">0</h3>\n            </div>\n            <div class=\"bg-white p-6 rounded-xl shadow-sm border-l-4 border-amber-500\">\n                <p class=\"text-gray-500 text-sm font-medium uppercase\">Empresas Conectadas</p>\n                <h3 class=\"text-3xl font-bold text-gray-800\">3</h3>\n            </div>\n        </div>\n\n        <div class=\"bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200\">\n            <div class=\"p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50\">\n                <h2 class=\"font-bold text-gray-700 uppercase text-sm tracking-widest\">Lista de Inventário</h2>\n                <div class=\"relative\">\n                    <input type=\"text\" placeholder=\"Buscar produto...\" class=\"pl-10 pr-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none\">\n                    <i class=\"fas fa-search absolute left-3 top-3 text-gray-400 text-xs\"></i>\n                </div>\n            </div>\n            <div class=\"overflow-x-auto\">\n                <table class=\"w-full text-left border-collapse\">\n                    <thead>\n                        <tr class=\"text-xs uppercase text-gray-400 bg-gray-50\">\n                            <th class=\"p-4 font-semibold\">ID</th>\n                            <th class=\"p-4 font-semibold\">Produto</th>\n                            <th class=\"p-4 font-semibold\">Empresa</th>\n                            <th class=\"p-4 font-semibold\">Preço</th>\n                            <th class=\"p-4 font-semibold\">Estoque</th>\n                            <th class=\"p-4 font-semibold\">Status</th>\n                            <th class=\"p-4 font-semibold text-center\">Ações</th>\n                        </tr>\n                    </thead>\n                    <tbody id=\"lista-produtos\" class=\"divide-y divide-gray-100 text-gray-700\">\n                        </tbody>\n                </table>\n            </div>\n        </div>\n    </main>\n\n    <div id=\"modal-produto\" class=\"modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50\">\n        <div class=\"modal-overlay absolute w-full h-full bg-gray-900 opacity-50\"></div>\n        <div class=\"modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-xl shadow-2xl z-50 overflow-y-auto\">\n            <div class=\"p-6\">\n                <div class=\"flex justify-between items-center pb-3\">\n                    <p class=\"text-2xl font-bold text-gray-800\" id=\"modal-title\">Novo Produto</p>\n                    <button onclick=\"toggleModal('modal-produto')\" class=\"text-gray-400 hover:text-gray-600 transition\">\n                        <i class=\"fas fa-times\"></i>\n                    </button>\n                </div>\n                \n                <form id=\"productForm\" class=\"space-y-4\">\n                    <input type=\"hidden\" id=\"prod-id\">\n                    <div>\n                        <label class=\"block text-xs font-bold uppercase text-gray-500 mb-1\">Nome</label>\n                        <input type=\"text\" id=\"prod-nome\" required class=\"w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none\">\n                    </div>\n                    <div>\n                        <label class=\"block text-xs font-bold uppercase text-gray-500 mb-1\">Empresa</label>\n                        <select id=\"prod-empresa\" class=\"w-full p-2.5 border rounded-lg outline-none\">\n                            <option value=\"Imobiliária Horizonte\">Imobiliária Horizonte</option>\n                            <option value=\"AutoPrime Veículos\">AutoPrime Veículos</option>\n                            <option value=\"e-commerce\">E-commerce</option>\n                        </select>\n                    </div>\n                    <div class=\"grid grid-cols-2 gap-4\">\n                        <div>\n                            <label class=\"block text-xs font-bold uppercase text-gray-500 mb-1\">Preço (R$)</label>\n                            <input type=\"number\" step=\"0.01\" id=\"prod-preco\" required class=\"w-full p-2.5 border rounded-lg outline-none\">\n                        </div>\n                        <div>\n                            <label class=\"block text-xs font-bold uppercase text-gray-500 mb-1\">Estoque</label>\n                            <input type=\"number\" id=\"prod-estoque\" required class=\"w-full p-2.5 border rounded-lg outline-none\">\n                        </div>\n                    </div>\n                    <div>\n                        <label class=\"block text-xs font-bold uppercase text-gray-500 mb-1\">Descrição</label>\n                        <textarea id=\"prod-desc\" rows=\"3\" class=\"w-full p-2.5 border rounded-lg outline-none\"></textarea>\n                    </div>\n                    <div class=\"flex items-center gap-2 py-2\">\n                        <input type=\"checkbox\" id=\"prod-ativo\" checked class=\"w-4 h-4 text-indigo-600\">\n                        <label class=\"text-sm font-medium text-gray-700\">Disponível para o Agente</label>\n                    </div>\n                    \n                    <button type=\"submit\" class=\"w-full bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700 transition shadow-lg\">\n                        Salvar Alterações\n                    </button>\n                </form>\n            </div>\n        </div>\n    </div>\n\n    <script>\n        // Dados Fictícios (Baseado no seu SQL) caso o n8n não retorne nada\n        const fallbackData = [\n            { id: 4, nome: 'Toyota Corolla XEI 2022', empresa: 'AutoPrime Veículos', preco: 129900.00, estoque: 3, ativo: true, descricao: 'Sedan automático' },\n            { id: 8, nome: 'Casa 3 Quartos com Piscina', empresa: 'Imobiliária Horizonte', preco: 420000.00, estoque: 1, ativo: true, descricao: 'Casa ampla com piscina' },\n            { id: 1, nome: 'Camisa Social', empresa: 'e-commerce', preco: 129.90, estoque: 25, ativo: true, descricao: 'Camisa masculina manga longa' }\n        ];\n\n        let produtosAtuais = [];\n\n        // Inicialização\n        window.onload = () => {\n            carregarProdutos();\n        };\n\n        async function carregarProdutos() {\n            // Aqui você faria o fetch para o seu webhook de \"Listar\" do n8n\n            // const res = await fetch('SUA_URL_WEBHOOK_GET');\n            // const data = await res.json();\n            \n            // Simulando que se o array vier vazio, usamos o fictício\n            produtosAtuais = fallbackData; \n            renderizarTabela();\n        }\n\n        function renderizarTabela() {\n            const tbody = document.getElementById('lista-produtos');\n            tbody.innerHTML = '';\n\n            produtosAtuais.forEach(p => {\n                const tr = document.createElement('tr');\n                tr.className = \"hover:bg-gray-50 transition border-b border-gray-100\";\n                tr.innerHTML = `\n                    <td class=\"p-4 text-xs font-mono text-gray-400\">#${p.id}</td>\n                    <td class=\"p-4\">\n                        <div class=\"font-bold text-gray-800\">${p.nome}</div>\n                        <div class=\"text-xs text-gray-400 truncate w-48\">${p.descricao}</div>\n                    </td>\n                    <td class=\"p-4 text-sm\">${p.empresa}</td>\n                    <td class=\"p-4 font-bold text-indigo-600\">R$ ${p.preco.toLocaleString('pt-BR')}</td>\n                    <td class=\"p-4 text-sm text-center\">${p.estoque}</td>\n                    <td class=\"p-4\">\n                        <span class=\"px-2 py-1 rounded-full text-[10px] font-bold uppercase ${p.ativo ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}\">\n                            ${p.ativo ? 'Ativo' : 'Inativo'}\n                        </span>\n                    </td>\n                    <td class=\"p-4 text-center\">\n                        <button onclick=\"editarProduto(${p.id})\" class=\"text-indigo-600 hover:text-indigo-900 p-2 rounded-lg hover:bg-indigo-50\">\n                            <i class=\"fas fa-edit\"></i>\n                        </button>\n                        <button onclick=\"deletarProduto(${p.id})\" class=\"text-red-400 hover:text-red-600 p-2\">\n                            <i class=\"fas fa-trash\"></i>\n                        </button>\n                    </td>\n                `;\n                tbody.appendChild(tr);\n            });\n\n            // Atualiza Stats\n            document.getElementById('stat-total').innerText = produtosAtuais.length;\n            document.getElementById('stat-ativos').innerText = produtosAtuais.filter(p => p.ativo).length;\n        }\n\n        function editarProduto(id) {\n            const p = produtosAtuais.find(item => item.id === id);\n            if (!p) return;\n\n            document.getElementById('modal-title').innerText = \"Editar Produto\";\n            document.getElementById('prod-id').value = p.id;\n            document.getElementById('prod-nome').value = p.nome;\n            document.getElementById('prod-empresa').value = p.empresa;\n            document.getElementById('prod-preco').value = p.preco;\n            document.getElementById('prod-estoque').value = p.estoque;\n            document.getElementById('prod-desc').value = p.descricao;\n            document.getElementById('prod-ativo').checked = p.ativo;\n\n            toggleModal('modal-produto');\n        }\n\n        function toggleModal(modalID) {\n            const modal = document.getElementById(modalID);\n            modal.classList.toggle('opacity-0');\n            modal.classList.toggle('pointer-events-none');\n            document.body.classList.toggle('modal-active');\n            \n            if (modal.classList.contains('opacity-0')) {\n                document.getElementById('productForm').reset();\n                document.getElementById('prod-id').value = '';\n                document.getElementById('modal-title').innerText = \"Novo Produto\";\n            }\n        }\n\n        document.getElementById('productForm').onsubmit = async (e) => {\n            e.preventDefault();\n            \n            const prodId = document.getElementById('prod-id').value;\n            const payload = {\n                id: prodId || Date.now(), // Simula ID se for novo\n                nome: document.getElementById('prod-nome').value,\n                empresa: document.getElementById('prod-empresa').value,\n                preco: parseFloat(document.getElementById('prod-preco').value),\n                estoque: parseInt(document.getElementById('prod-estoque').value),\n                descricao: document.getElementById('prod-desc').value,\n                ativo: document.getElementById('prod-ativo').checked\n            };\n\n            // Lógica de atualização local para exemplo\n            if (prodId) {\n                const index = produtosAtuais.findIndex(p => p.id == prodId);\n                produtosAtuais[index] = payload;\n            } else {\n                produtosAtuais.push(payload);\n            }\n\n            // AQUI VOCÊ ENVIA PARA O n8n (POST ou PUT)\n            console.log(\"Enviando para n8n:\", payload);\n            \n            renderizarTabela();\n            toggleModal('modal-produto');\n            alert(\"Banco de dados atualizado com sucesso!\");\n        };\n\n        function deletarProduto(id) {\n            if(confirm(\"Deseja remover este produto do catálogo do Agente?\")) {\n                produtosAtuais = produtosAtuais.filter(p => p.id !== id);\n                renderizarTabela();\n            }\n        }\n    </script>\n</body>\n</html>"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    2816,
+    848
+   ],
+   "id": "39b4d987-132d-4bc5-a41e-e7626c884f52",
+   "name": "HTML1"
+  },
+  {
+   "parameters": {
+    "path": "conectar-gerenciamento",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Webhook1",
+   "type": "n8n-nodes-base.webhook",
+   "position": [
+    2352,
+    848
+   ],
+   "webhookId": "4f2787c6-78e8-4d98-a313-609aa7f62d68",
+   "typeVersion": 1,
+   "id": "9f6cde7f-9355-4aa8-ba1e-c3264df8baf6"
+  },
+  {
+   "parameters": {
+    "content": "## painel de gerenciamento do banco",
+    "height": 224,
+    "width": 864,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2320,
+    784
+   ],
+   "id": "5f9638cd-0830-4598-ad19-1d6f13d07fbb",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "infos_produtos",
+     "mode": "list",
+     "cachedResultName": "infos_produtos"
+    },
+    "limit": 5,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2656,
+    848
+   ],
+   "id": "380ec6b9-cd44-4578-9522-e414616bcdd4",
+   "name": "Select rows from a table2",
+   "credentials": {
+    "postgres": {
+     "id": "uBbz1mxdUcuGjTk4",
+     "name": "Postgres account 3"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "imagens_produtos",
+     "mode": "list",
+     "cachedResultName": "imagens_produtos"
+    },
+    "where": {
+     "values": [
+      {
+       "column": "produto_id",
+       "value": "={{ $json.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2496,
+    848
+   ],
+   "id": "ae340fd4-c91d-4c2b-b9ab-1ec3a2fbd73c",
+   "name": "Select rows from a table3",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "uBbz1mxdUcuGjTk4",
+     "name": "Postgres account 3"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "When Executed by Another Workflow": [
+   {
+    "json": {
+     "produto": "apartamento",
+     "urlevo": "https://wuzapi.inovareinteligenciaartificial.com",
+     "token": "<SEGREDO_REMOVIDO>",
+     "instancia": "s22-bus-5106",
+     "number": "5522998908709@s.whatsapp.net"
+    }
+   }
+  ],
+  "Webhook": [
+   {
+    "json": {
+     "headers": {
+      "host": "interface.inovareinteligenciaartificial.com",
+      "user-agent": "axios/1.12.0",
+      "content-length": "2187",
+      "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+      "accept-encoding": "gzip, compress, deflate, br",
+      "content-type": "application/json",
+      "x-forwarded-for": "172.18.0.1",
+      "x-forwarded-host": "interface.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "933ed04b6698",
+      "x-real-ip": "172.18.0.1"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "event": {
+       "Info": {
+        "AddressingMode": "",
+        "BroadcastListOwner": "",
+        "BroadcastRecipients": null,
+        "Category": "",
+        "Chat": "5522998908709@s.whatsapp.net",
+        "DeviceSentMeta": null,
+        "Edit": "",
+        "ID": "3EB06EC6BBDD8238034B85",
+        "IsFromMe": false,
+        "IsGroup": false,
+        "MediaType": "",
+        "MsgBotInfo": {
+         "EditSenderTimestampMS": "0001-01-01T00:00:00Z",
+         "EditTargetID": "",
+         "EditType": ""
+        },
+        "MsgMetaInfo": {
+         "DeprecatedLIDSession": null,
+         "TargetChat": "",
+         "TargetID": "",
+         "TargetSender": "",
+         "ThreadMessageID": "",
+         "ThreadMessageSenderJID": ""
+        },
+        "Multicast": false,
+        "PushName": "Rafael S Pereira",
+        "RecipientAlt": "",
+        "Sender": "5522998908709:3@s.whatsapp.net",
+        "SenderAlt": "122793148580017:3@lid",
+        "ServerID": 0,
+        "Timestamp": "2026-03-19T21:17:16-03:00",
+        "Type": "text",
+        "VerifiedName": {
+         "Certificate": {
+          "details": "CN7w+5GEv4TxYxIGc21iOndhIhBSYWZhZWwgUyBQZXJlaXJh",
+          "signature": "GDAy+fx+cayrZSQmzG2WvQDZCD1L/Z9e5z7m7E1rzrk5fhMGH3ydYpZRDNGiMhZuQx0xWUEvVoyYxry5oMXSBA=="
+         },
+         "Details": {
+          "issuer": "smb:wa",
+          "serial": 7197334912452458000,
+          "verifiedName": "Rafael S Pereira"
+         }
+        }
+       },
+       "IsBotInvoke": false,
+       "IsDocumentWithCaption": false,
+       "IsEdit": false,
+       "IsEphemeral": false,
+       "IsLottieSticker": false,
+       "IsViewOnce": false,
+       "IsViewOnceV2": false,
+       "IsViewOnceV2Extension": false,
+       "Message": {
+        "conversation": "quais as casas tem?",
+        "messageContextInfo": {
+         "deviceListMetadata": {
+          "receiverAccountType": 0,
+          "recipientKeyHash": "NxC1p5+ltllOLg==",
+          "recipientTimestamp": 1772181162,
+          "senderAccountType": 1,
+          "senderKeyHash": "Fid5ei4TLVJkyw==",
+          "senderTimestamp": 1773319578
+         },
+         "deviceListMetadataVersion": 2,
+         "limitSharingV2": {
+          "initiatedByMe": false,
+          "trigger": 0
+         },
+         "messageSecret": "Y1w1wxmg+VU+fI0Bjb74KI+TGKRqNe/7N55epr164f4="
+        }
+       },
+       "NewsletterMeta": null,
+       "RawMessage": {
+        "conversation": "quais as casas tem?",
+        "messageContextInfo": {
+         "deviceListMetadata": {
+          "receiverAccountType": 0,
+          "recipientKeyHash": "NxC1p5+ltllOLg==",
+          "recipientTimestamp": 1772181162,
+          "senderAccountType": 1,
+          "senderKeyHash": "Fid5ei4TLVJkyw==",
+          "senderTimestamp": 1773319578
+         },
+         "deviceListMetadataVersion": 2,
+         "limitSharingV2": {
+          "initiatedByMe": false,
+          "trigger": 0
+         },
+         "messageSecret": "Y1w1wxmg+VU+fI0Bjb74KI+TGKRqNe/7N55epr164f4="
+        }
+       },
+       "RetryCount": 0,
+       "SourceWebMsg": null,
+       "UnavailableRequestID": ""
+      },
+      "instanceName": "s22-bus-5106",
+      "type": "Message",
+      "userID": "b0e78456d310d7705cebd185a4df250a"
+     },
+     "webhookUrl": "https://interface.inovareinteligenciaartificial.com/webhook/710e9239-ecf9-4861-bdbd-068d2520d94f",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "memoria": {
+   "ai_memory": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "When Executed by Another Workflow": {
+   "main": [
+    [
+     {
+      "node": "Limpa e Singulariza",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Execute a SQL query": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Webhook": {
+   "main": [
+    [
+     {
+      "node": "consulta_instancia_wuzapi",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "envia imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "envia resposta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_produto": {
+   "ai_tool": [
+    [
+     {
+      "node": "agente_busca_produto",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "agente_busca_produto": {
+   "ai_tool": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "agente_busca_produto",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "OpenAI1": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini2": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "agente_busca_produto",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "envia imagem": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_instancia_wuzapi": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Limpa e Singulariza": {
+   "main": [
+    [
+     {
+      "node": "Execute a SQL query",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Webhook1": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table2": {
+   "main": [
+    [
+     {
+      "node": "HTML1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table3": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "5acbe0e1-bf69-4ff2-b65f-42add4e70ab9",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "OJ8Rxj2YN8jKgxmS",
+ "tags": []
+}

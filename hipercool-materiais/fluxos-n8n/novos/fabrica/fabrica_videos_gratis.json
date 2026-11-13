@@ -1,0 +1,1916 @@
+{
+ "name": "🎬 Fábrica de vídeos grátis sem chave (tema → roteiro → imagens → voz → vídeo)",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🎬 Fábrica de vídeos grátis\nAbra **/webhook/gratis-video**: tema → roteiro → imagens → voz → vídeo.\n\nTudo grátis e sem chave: roteiro na IA do **Pollinations** (1 resposta a cada 30 s por IP), imagens no **FLUX do Hugging Face** (reserva Pollinations), voz neural do **Bing Tradutor** (só vozes aprovadas), montagem 16:9 no Space **Tim13ekd/video-ffmpeg** (1280x720) ou 9:16 **no navegador** de quem abre o resultado (canvas + gravador do próprio navegador).\n\nArquivos e status no Redis por 3 dias. Até 12 vídeos por hora. O Code do n8n para em 60 s: por isso as imagens vão uma por vez e a montagem espera em nó HTTP.",
+    "height": 400,
+    "width": 640,
+    "color": 4
+   },
+   "id": "773e3435-81a8-58ca-8476-4c8c069ecd1b",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -60,
+    -520
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-video",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "9679d9e3-131d-549b-81a3-b21d2ead22c3",
+   "name": "🔔 Página da fábrica (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "6574bd5a-68bf-5217-98b3-2e912252f863"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Formulário da fábrica de vídeos grátis.\n// ── Moldura das páginas (mesmo visual em todos os fluxos grátis) ──\nfunction pagina(titulo, corpo, script) {\n  const css = `\n:root{--fundo:#f6f5f2;--cartao:#fff;--texto:#1d1d1b;--suave:#6b6b66;--linha:#e3e1db;--acento:#0f766e;--acento2:#115e59;--erro:#b42318;--ok:#067647}\n@media (prefers-color-scheme:dark){:root{--fundo:#121412;--cartao:#1b1e1c;--texto:#ecebe7;--suave:#a3a39d;--linha:#2c302d;--acento:#2dd4bf;--acento2:#5eead4;--erro:#f97066;--ok:#47cd89}}\n*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif}\nmain{max-width:760px;margin:0 auto;padding:20px 16px 48px}h1{font-size:1.45rem;margin:.2em 0 .1em}h2{font-size:1.1rem;margin:1.2em 0 .5em}\n.sub{color:var(--suave);margin:0 0 18px}.cartao{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:12px 0}\nlabel{display:block;font-weight:600;margin:12px 0 6px}textarea,input,select{width:100%;padding:11px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);color:var(--texto);font:inherit}\ntextarea{min-height:120px;resize:vertical}.linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}\nbutton,.botao{display:inline-block;background:var(--acento);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 1rem system-ui,sans-serif;cursor:pointer;text-decoration:none;margin-top:14px}\n@media (prefers-color-scheme:dark){button,.botao{color:#04211e}}\nbutton[disabled]{opacity:.55;cursor:wait}.botao.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}\n.aviso{color:var(--suave);font-size:.9rem}.erro{color:var(--erro);font-weight:600}.ok{color:var(--ok);font-weight:600}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.grade img,.grade video{width:100%;border-radius:10px;border:1px solid var(--linha);background:#000}\nvideo,audio{width:100%;margin-top:10px;border-radius:10px}pre{white-space:pre-wrap;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:12px;font-size:.9rem}\n.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0}.barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .6s}\n.selo{display:inline-block;font-size:.78rem;border:1px solid var(--linha);border-radius:99px;padding:2px 9px;color:var(--suave);margin:2px 4px 2px 0}\nfooter{color:var(--suave);font-size:.82rem;margin-top:28px}`;\n  return '<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n    '<meta name=\"robots\" content=\"noindex\"><title>' + titulo + '</title><style>' + css + '</style></head><body><main>' + corpo +\n    '<footer>Feito com serviços grátis e sem chave (Hugging Face, Pollinations, Bing/Google Tradutor). Pode demorar ou falhar quando eles estão cheios.</footer>' +\n    '</main>' + (script ? '<script>' + script + '</script>' : '') + '</body></html>';\n}\nconst escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\nconst corpo = `\n<h1>🎬 Fábrica de vídeos grátis</h1>\n<p class=\"sub\">Você dá o tema; a IA escreve o roteiro, gera as imagens, narra e monta o vídeo. Tudo grátis e sem chave\n(Pollinations, Hugging Face e Bing Tradutor). Leva de 2 a 8 minutos.</p>\n<div class=\"cartao\">\n  <label for=\"tema\">Tema do vídeo</label>\n  <textarea id=\"tema\" maxlength=\"300\" style=\"min-height:80px\">3 curiosidades sobre o Sol que quase ninguém sabe</textarea>\n  <div class=\"linha\">\n    <div><label for=\"tipo\">Tipo</label><select id=\"tipo\">\n      <option value=\"curiosidades\">Curiosidades</option><option value=\"historia\">História narrada</option>\n      <option value=\"dicas\">Dicas / passo a passo</option><option value=\"noticia\">Explicação de notícia</option>\n      <option value=\"produto\">Apresentação de produto/serviço</option></select></div>\n    <div><label for=\"duracao\">Duração</label><select id=\"duracao\"><option value=\"30\">~30 s</option>\n      <option value=\"45\" selected>~45 s</option><option value=\"60\">~60 s</option></select></div>\n    <div><label for=\"estilo\">Estilo das imagens</label><select id=\"estilo\"><option value=\"foto\">Foto realista</option>\n      <option value=\"cinema\">Cinema</option><option value=\"ilustracao\">Ilustração</option><option value=\"anime\">Anime</option>\n      <option value=\"3d\">3D animação</option></select></div>\n  </div>\n  <div class=\"linha\">\n    <div><label for=\"voz\">Voz</label><select id=\"voz\"><option value=\"thalita\">Thalita</option><option value=\"andrew\">Andrew</option>\n      <option value=\"brian\">Brian</option><option value=\"emma\">Emma</option><option value=\"google\">Google (reserva)</option></select></div>\n    <div><label for=\"velocidade\">Ritmo</label><select id=\"velocidade\"><option value=\"0\">Normal</option>\n      <option value=\"10\" selected>Um pouco rápido</option><option value=\"20\">Rápido (Shorts)</option></select></div>\n    <div><label for=\"modo\">Formato</label><select id=\"modo\">\n      <option value=\"navegador\">Vertical 9:16 (montado no seu navegador)</option>\n      <option value=\"nuvem\">Deitado 16:9 (montado na nuvem, pronto)</option></select></div>\n  </div>\n  <button id=\"ir\">Criar vídeo</button>\n  <p id=\"estado\" class=\"aviso\"></p>\n</div>\n<div class=\"cartao aviso\"><b>Como sai:</b> deitado 16:9 vem pronto (montador grátis do Hugging Face, 1280x720, legenda\npalavra a palavra). Vertical 9:16 é montado no seu navegador na página do resultado (deixe a aba aberta e à vista\ndurante a montagem). Outros fluxos: <code>POST</code> aqui com <code>{\"tema\":\"...\",\"modo\":\"nuvem\"}</code> → <code>{\"link\":\"...\"}</code>.</div>`;\nconst script = `\nconst $ = id => document.getElementById(id);\n$('ir').onclick = async () => {\n  $('ir').disabled = true; $('estado').className = 'aviso'; $('estado').textContent = 'Enviando...';\n  try {\n    const corpo = {}; for (const k of ['tema', 'tipo', 'duracao', 'estilo', 'voz', 'velocidade', 'modo']) corpo[k] = $(k).value;\n    const r = await fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });\n    const j = await r.json();\n    if (!j.ok) throw new Error(j.erro || 'falhou');\n    $('estado').className = 'ok'; $('estado').innerHTML = 'Começou! Abrindo o andamento... <a href=\"' + j.link + '\">' + j.link + '</a>';\n    location.href = j.link;\n  } catch (e) { $('estado').className = 'erro'; $('estado').textContent = 'Não deu: ' + e.message; $('ir').disabled = false; }\n};`;\nreturn [{ json: { html: pagina('Fábrica de vídeos grátis', corpo, script) } }];\n"
+   },
+   "id": "ff9285a8-81ba-56e3-b3a5-987248cc6c16",
+   "name": "🧩 Monta a página",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "7833f598-df50-5550-ba3d-dbe701e2ee4e",
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-video",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "225a7187-234a-5cae-a8ff-cd0eff9aa48e",
+   "name": "🔔 Pedido de vídeo (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    300
+   ],
+   "webhookId": "0e55c6dc-9b21-5e52-8d90-9ea01dd31217"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere o pedido e prepara o trabalho (job). Formato: nuvem = 16:9 pronto; navegador = 9:16 montado na página.\nconst ent = $input.first().json;\nconst b = ent.body || {};\nconst h = ent.headers || {};\nconst base = (h['x-forwarded-proto'] || 'https') + '://' + (h['x-forwarded-host'] || h.host);\nconst tema = String(b.tema || '').replace(/\\s+/g, ' ').trim().slice(0, 300);\nif (tema.length < 3) return [{ json: { ok: false, erro: 'Escreva o tema do vídeo (pelo menos 3 letras).' } }];\nconst modo = b.modo === 'nuvem' ? 'nuvem' : 'navegador';\nconst duracao = [30, 45, 60].includes(Number(b.duracao)) ? Number(b.duracao) : 45;\nconst voz = ['thalita', 'andrew', 'brian', 'emma', 'google'].includes(b.voz) ? b.voz : 'thalita';\nconst velocidade = Math.max(-20, Math.min(30, Number(b.velocidade ?? 10) || 0));\nconst TIPOS = {\n  curiosidades: 'vídeo de curiosidades: fatos surpreendentes e verdadeiros, um por cena',\n  historia: 'história narrada com começo, conflito e desfecho surpreendente',\n  dicas: 'dicas práticas ou passo a passo, uma dica por cena',\n  noticia: 'explicação simples de um assunto/notícia, sem inventar fatos',\n  produto: 'apresentação de produto ou serviço: problema, solução, benefícios e chamada para ação' };\nconst tipo = TIPOS[b.tipo] ? b.tipo : 'curiosidades';\nconst ESTILOS = {\n  foto: 'photorealistic photo, natural light, high detail', cinema: 'cinematic film still, dramatic lighting, depth of field',\n  ilustracao: 'digital illustration, clean shapes, vibrant colors', anime: 'anime style illustration, detailed, vibrant colors',\n  '3d': '3D animated movie style, soft lighting, cute' };\nconst estilo = ESTILOS[b.estilo] ? b.estilo : 'foto';\nconst job = (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).toLowerCase();\nreturn [{ json: { ok: true, job, base, tema, modo, formato: modo === 'nuvem' ? '16:9' : '9:16', duracao, voz, velocidade,\n  tipo, tipo_txt: TIPOS[tipo], estilo, estilo_img: ESTILOS[estilo],\n  link: base + '/webhook/gratis-video-ver?id=' + job, arquivo: base + '/webhook/gratis-video-arquivo?id=' + job + '-',\n  chave_limite: '<SEGREDO_REMOVIDO>' + new Date().toISOString().slice(0, 13) } }];\n"
+   },
+   "id": "3e9bac71-19ac-56c2-8951-1e0bb372d54b",
+   "name": "🧩 Confere o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "71b06cb9-6dbf-56d1-ade8-5870dd12d5b3",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "d0c2601d-6b09-5c57-8ac0-239af1d6d8ec",
+   "name": "🚦 Pedido ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    480,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $('🧩 Confere o pedido').first().json.erro || 'Muitos vídeos nesta hora. Tente daqui a pouco.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 400
+    }
+   },
+   "id": "aa000c42-3445-580b-b3f1-c64cddb4cd0b",
+   "name": "📤 Recusa o pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    520
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "={{ $json.chave_limite }}",
+    "expire": true,
+    "ttl": 3600
+   },
+   "id": "fca335f5-b023-5432-b3da-43c77594ce66",
+   "name": "🧮 Conta pedidos da hora",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    720,
+    300
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "1d165a68-2b08-5a8e-8875-9bb6f9d6b86b",
+       "leftValue": "={{ Number(Object.values($json)[0]) <= 12 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "fd37841e-ba14-5367-81a0-1ef2a1bcac6c",
+   "name": "🚦 Pode começar?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    960,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, tema: $('🧩 Confere o pedido').first().json.tema, modo: $('🧩 Confere o pedido').first().json.modo, etapa: 'recebido', detalhe: \"Pedido recebido\", pct: 5 }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "4663abb5-8055-5ce9-91e5-b617a567af4a",
+   "name": "💾 Status: recebido",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1200,
+    220
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, job: $('🧩 Confere o pedido').first().json.job, link: $('🧩 Confere o pedido').first().json.link }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "cece6565-93c4-50b3-85e7-b283b9fc8796",
+   "name": "📤 Responde com o link",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1440,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, tema: $('🧩 Confere o pedido').first().json.tema, modo: $('🧩 Confere o pedido').first().json.modo, etapa: 'roteiro', detalhe: \"A IA grátis está escrevendo o roteiro\", pct: 12 }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "9092f2df-6cea-50c9-a0fb-ba4e707fe703",
+   "name": "💾 Status: roteiro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1680,
+    220
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Escreve o roteiro com a IA grátis (Pollinations). Uma chamada só: o limite sem chave é 1 resposta a cada 30 s.\n// Curiosidades, notícia e dicas vêm ancoradas no texto da Wikipédia (a IA grátis inventa fatos sem isso).\n// ── Texto por IA grátis e sem chave (Pollinations, modelo openai-fast) ──\n// Limite sem chave: 1 resposta a cada 30 s por IP. Quem chama em sequência precisa esperar (nó ⏳ de 31 s).\n// Sem chave o \"response_format\" dá 400: o JSON é pedido no texto e lido com lerJson (tolera ```json e texto em volta).\n// O modelo grátis \"pensa\" antes de responder: sem reasoning_effort low ele estoura o limite e devolve 400\n// (output_token_limit_exceeded); \"minimal\" não existe e \"medium\" também estoura.\nasync function perguntaIA(helpers, mensagens, emJson = false, tentativas = 1) {\n  let ultimo = '';\n  for (let t = 0; t < tentativas; t++) {\n    try {\n      const r = await helpers.httpRequest({ method: 'POST', url: 'https://text.pollinations.ai/openai', json: true, timeout: 50000,\n        // seed aleatória: sem ela o Pollinations devolve do cache a MESMA resposta para o mesmo pedido\n        body: { model: 'openai', messages: mensagens, reasoning_effort: 'low', max_tokens: 6000, seed: Math.floor(Math.random() * 1e9) } });\n      const txt = r && r.choices && r.choices[0] && r.choices[0].message && r.choices[0].message.content;\n      if (txt) return emJson ? lerJson(txt) : String(txt).trim();\n      ultimo = 'resposta vazia';\n    } catch (e) {\n      ultimo = String((e.response && e.response.body && JSON.stringify(e.response.body)) || e.message || e).slice(0, 200);\n    }\n  }\n  throw new Error('IA grátis (Pollinations) não respondeu: ' + ultimo);\n}\n\nfunction lerJson(txt) {\n  const s = String(txt).replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '').trim();\n  try { return JSON.parse(s); } catch (e) { /* tenta achar o bloco */ }\n  const i = s.indexOf('{'), j = s.lastIndexOf('}');\n  if (i >= 0 && j > i) return JSON.parse(s.slice(i, j + 1));\n  throw new Error('a IA não devolveu JSON');\n}\n\n// ── Fatos de verdade, grátis e sem chave: API pública da Wikipédia em português ──\n// A IA grátis inventa números e fatos; com o texto da Wikipédia no pedido ela só usa o que está lá.\nasync function fatosWikipedia(helpers, tema) {\n  const PARE = /\\b(curiosidades?|sobre|que|quase|ningu[eé]m|sabe|sabia|voc[eê]|os|as|o|a|um|uma|de|do|da|dos|das|e|em|no|na|nos|nas|para|por|com|fatos?|incr[ií]veis|segredos?|coisas?|explica[cç][aã]o|not[ií]cia|dicas?|como|porque|por que|\\d+)\\b/gi;\n  const busca = tema.replace(PARE, ' ').replace(/[^\\p{L}\\p{N} -]/gu, ' ').replace(/\\s+/g, ' ').trim() || tema;\n  const cab = { 'User-Agent': 'n8n-fluxos-gratis/1.0 (biblioteca de fluxos sem chave)' };\n  const s = await helpers.httpRequest({ json: true, timeout: 15000, headers: cab,\n    url: 'https://pt.wikipedia.org/w/api.php?action=query&list=search&format=json&srlimit=1&srsearch=' + encodeURIComponent(busca) });\n  const titulo = (((s || {}).query || {}).search || []).map(x => x.title)[0];\n  if (!titulo) return { fonte: '', texto: '' };\n  const e = await helpers.httpRequest({ json: true, timeout: 15000, headers: cab,\n    url: 'https://pt.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exsectionformat=plain&format=json&exchars=3500&titles=' +\n      encodeURIComponent(titulo) });\n  const pag = Object.values(((e || {}).query || {}).pages || {})[0] || {};\n  const texto = String(pag.extract || '').replace(/\\n{2,}/g, '\\n').trim().slice(0, 3500);\n  return { fonte: texto ? 'Wikipédia: ' + titulo : '', texto };\n}\n\nconst v = $('🧩 Confere o pedido').first().json;\nconst nCenas = Math.max(5, Math.min(10, Math.round(v.duracao / 6)));\nconst palavras = Math.round(v.duracao * 2.5);\nlet ref = { fonte: '', texto: '' };\nif (['curiosidades', 'noticia', 'dicas'].includes(v.tipo)) {\n  try { ref = await fatosWikipedia(this.helpers, v.tema); } catch (e) { ref = { fonte: '', texto: '' }; }\n}\nconst sistema = `Você é roteirista de vídeos curtos em português do Brasil para YouTube Shorts, Reels e TikTok.\nResponda SOMENTE um JSON válido, sem markdown, neste formato:\n{\"titulo\":\"\",\"descricao\":\"\",\"hashtags\":[\"#...\"],\"cenas\":[{\"fala\":\"\",\"imagem\":\"\"}]}\nRegras:\n- Exatamente ${nCenas} cenas. A 1ª fala é o GANCHO: prende nos primeiros 3 segundos (pergunta ou fato surpreendente VERDADEIRO).\n- \"fala\": o que o narrador diz na cena, 8 a 22 palavras, frase natural para ouvir, com acentos, sem emojis, sem listas,\n  sem parênteses. Somando todas as falas, cerca de ${palavras} palavras. A última fala fecha a ideia e convida a seguir para\n  mais vídeos, sem citar nome de canal.\n- \"imagem\": descrição EM INGLÊS da imagem da cena (máx. 45 palavras), mostrando exatamente o assunto da fala, composição\n  ${v.formato === '9:16' ? 'vertical (portrait)' : 'horizontal (landscape)'}, estilo: ${v.estilo_img}. Sem texto, letras,\n  números escritos, logotipos ou marcas d'água na imagem. Sem pessoas famosas reais. Mesmos personagens com a mesma aparência\n  em todas as cenas quando houver personagem. A imagem da última cena também mostra o assunto do vídeo (nada de pessoa\n  posando, colagem ou grade de fotos).\n- ${ref.texto ? 'Use SOMENTE fatos que estão no TEXTO DE REFERÊNCIA. Não invente números nem fatos fora dele.'\n    : 'Fatos verdadeiros e conferíveis. Se não tiver certeza de um número, não use número.'}\n- Nada de frase sem sentido ou exagero falso.\n- \"titulo\": até 90 caracteres, 2 a 4 palavras-chave em MAIÚSCULAS, no máximo 1 emoji, desperta curiosidade, sem \"#shorts\".\n- \"descricao\": 2 ou 3 frases sobre o vídeo e uma pergunta para o público comentar.\n- \"hashtags\": 3 a 6 hashtags específicas do assunto (nada genérico como #shorts #viral #ia #fyp).`;\nconst pedido = `Tema: ${v.tema}\\nTipo: ${v.tipo_txt}\\nDuração alvo: ${v.duracao} segundos.` +\n  (ref.texto ? `\\n\\nTEXTO DE REFERÊNCIA (${ref.fonte}):\\n${ref.texto}` : '');\ntry {\n  const r = await perguntaIA(this.helpers, [{ role: 'system', content: sistema }, { role: 'user', content: pedido }], true);\n  const cenas = (Array.isArray(r.cenas) ? r.cenas : [])\n    .map(c => ({ fala: String(c.fala || '').replace(/\\s+/g, ' ').trim(), imagem: String(c.imagem || '').replace(/\\s+/g, ' ').trim() }))\n    .filter(c => c.fala.length > 3);\n  if (cenas.length < 3) throw new Error('roteiro veio com poucas cenas');\n  for (const c of cenas) if (!c.imagem) c.imagem = v.tema + ', ' + v.estilo_img;\n  return [{ json: { ok: true, titulo: String(r.titulo || v.tema).slice(0, 100), descricao: String(r.descricao || '').slice(0, 900),\n    hashtags: limpaHashtags(r.hashtags), cenas: cenas.slice(0, 12), fonte: ref.fonte, referencia: ref.texto } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: String(e.message || e).slice(0, 250), fonte: ref.fonte, referencia: ref.texto } }];\n}\n\nfunction limpaHashtags(h) {\n  return (Array.isArray(h) ? h : String(h || '').split(/\\s+/))\n    .map(t => '#' + String(t).replace(/^#+/, '').replace(/[^\\p{L}\\p{N}_]/gu, '')).filter(t => t.length > 2)\n    .filter(t => !/^#(shorts|viral|ia|fyp|foryou|parati)$/i.test(t)).slice(0, 6);\n}\n"
+   },
+   "id": "6b6d07a4-3ea2-5fd1-b28f-2584eaddd675",
+   "name": "🧠 Escreve o roteiro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1920,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "25ada2bd-86e9-536d-aa66-b1c43a80eccf",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "575df01c-2f6c-5162-8d34-7273fadf1220",
+   "name": "🚦 Roteiro ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2160,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "amount": 35
+   },
+   "id": "581ae74a-f573-5cc3-965d-516c4064dec2",
+   "name": "⏳ Espera 35 s (limite da IA grátis)",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    2400,
+    420
+   ],
+   "webhookId": "080ff092-3b2e-5c7a-9f61-f3409d381089"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Escreve o roteiro com a IA grátis (Pollinations). Uma chamada só: o limite sem chave é 1 resposta a cada 30 s.\n// Curiosidades, notícia e dicas vêm ancoradas no texto da Wikipédia (a IA grátis inventa fatos sem isso).\n// ── Texto por IA grátis e sem chave (Pollinations, modelo openai-fast) ──\n// Limite sem chave: 1 resposta a cada 30 s por IP. Quem chama em sequência precisa esperar (nó ⏳ de 31 s).\n// Sem chave o \"response_format\" dá 400: o JSON é pedido no texto e lido com lerJson (tolera ```json e texto em volta).\n// O modelo grátis \"pensa\" antes de responder: sem reasoning_effort low ele estoura o limite e devolve 400\n// (output_token_limit_exceeded); \"minimal\" não existe e \"medium\" também estoura.\nasync function perguntaIA(helpers, mensagens, emJson = false, tentativas = 1) {\n  let ultimo = '';\n  for (let t = 0; t < tentativas; t++) {\n    try {\n      const r = await helpers.httpRequest({ method: 'POST', url: 'https://text.pollinations.ai/openai', json: true, timeout: 50000,\n        // seed aleatória: sem ela o Pollinations devolve do cache a MESMA resposta para o mesmo pedido\n        body: { model: 'openai', messages: mensagens, reasoning_effort: 'low', max_tokens: 6000, seed: Math.floor(Math.random() * 1e9) } });\n      const txt = r && r.choices && r.choices[0] && r.choices[0].message && r.choices[0].message.content;\n      if (txt) return emJson ? lerJson(txt) : String(txt).trim();\n      ultimo = 'resposta vazia';\n    } catch (e) {\n      ultimo = String((e.response && e.response.body && JSON.stringify(e.response.body)) || e.message || e).slice(0, 200);\n    }\n  }\n  throw new Error('IA grátis (Pollinations) não respondeu: ' + ultimo);\n}\n\nfunction lerJson(txt) {\n  const s = String(txt).replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '').trim();\n  try { return JSON.parse(s); } catch (e) { /* tenta achar o bloco */ }\n  const i = s.indexOf('{'), j = s.lastIndexOf('}');\n  if (i >= 0 && j > i) return JSON.parse(s.slice(i, j + 1));\n  throw new Error('a IA não devolveu JSON');\n}\n\n// ── Fatos de verdade, grátis e sem chave: API pública da Wikipédia em português ──\n// A IA grátis inventa números e fatos; com o texto da Wikipédia no pedido ela só usa o que está lá.\nasync function fatosWikipedia(helpers, tema) {\n  const PARE = /\\b(curiosidades?|sobre|que|quase|ningu[eé]m|sabe|sabia|voc[eê]|os|as|o|a|um|uma|de|do|da|dos|das|e|em|no|na|nos|nas|para|por|com|fatos?|incr[ií]veis|segredos?|coisas?|explica[cç][aã]o|not[ií]cia|dicas?|como|porque|por que|\\d+)\\b/gi;\n  const busca = tema.replace(PARE, ' ').replace(/[^\\p{L}\\p{N} -]/gu, ' ').replace(/\\s+/g, ' ').trim() || tema;\n  const cab = { 'User-Agent': 'n8n-fluxos-gratis/1.0 (biblioteca de fluxos sem chave)' };\n  const s = await helpers.httpRequest({ json: true, timeout: 15000, headers: cab,\n    url: 'https://pt.wikipedia.org/w/api.php?action=query&list=search&format=json&srlimit=1&srsearch=' + encodeURIComponent(busca) });\n  const titulo = (((s || {}).query || {}).search || []).map(x => x.title)[0];\n  if (!titulo) return { fonte: '', texto: '' };\n  const e = await helpers.httpRequest({ json: true, timeout: 15000, headers: cab,\n    url: 'https://pt.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exsectionformat=plain&format=json&exchars=3500&titles=' +\n      encodeURIComponent(titulo) });\n  const pag = Object.values(((e || {}).query || {}).pages || {})[0] || {};\n  const texto = String(pag.extract || '').replace(/\\n{2,}/g, '\\n').trim().slice(0, 3500);\n  return { fonte: texto ? 'Wikipédia: ' + titulo : '', texto };\n}\n\nconst v = $('🧩 Confere o pedido').first().json;\nconst nCenas = Math.max(5, Math.min(10, Math.round(v.duracao / 6)));\nconst palavras = Math.round(v.duracao * 2.5);\nlet ref = { fonte: '', texto: '' };\nif (['curiosidades', 'noticia', 'dicas'].includes(v.tipo)) {\n  try { ref = await fatosWikipedia(this.helpers, v.tema); } catch (e) { ref = { fonte: '', texto: '' }; }\n}\nconst sistema = `Você é roteirista de vídeos curtos em português do Brasil para YouTube Shorts, Reels e TikTok.\nResponda SOMENTE um JSON válido, sem markdown, neste formato:\n{\"titulo\":\"\",\"descricao\":\"\",\"hashtags\":[\"#...\"],\"cenas\":[{\"fala\":\"\",\"imagem\":\"\"}]}\nRegras:\n- Exatamente ${nCenas} cenas. A 1ª fala é o GANCHO: prende nos primeiros 3 segundos (pergunta ou fato surpreendente VERDADEIRO).\n- \"fala\": o que o narrador diz na cena, 8 a 22 palavras, frase natural para ouvir, com acentos, sem emojis, sem listas,\n  sem parênteses. Somando todas as falas, cerca de ${palavras} palavras. A última fala fecha a ideia e convida a seguir para\n  mais vídeos, sem citar nome de canal.\n- \"imagem\": descrição EM INGLÊS da imagem da cena (máx. 45 palavras), mostrando exatamente o assunto da fala, composição\n  ${v.formato === '9:16' ? 'vertical (portrait)' : 'horizontal (landscape)'}, estilo: ${v.estilo_img}. Sem texto, letras,\n  números escritos, logotipos ou marcas d'água na imagem. Sem pessoas famosas reais. Mesmos personagens com a mesma aparência\n  em todas as cenas quando houver personagem. A imagem da última cena também mostra o assunto do vídeo (nada de pessoa\n  posando, colagem ou grade de fotos).\n- ${ref.texto ? 'Use SOMENTE fatos que estão no TEXTO DE REFERÊNCIA. Não invente números nem fatos fora dele.'\n    : 'Fatos verdadeiros e conferíveis. Se não tiver certeza de um número, não use número.'}\n- Nada de frase sem sentido ou exagero falso.\n- \"titulo\": até 90 caracteres, 2 a 4 palavras-chave em MAIÚSCULAS, no máximo 1 emoji, desperta curiosidade, sem \"#shorts\".\n- \"descricao\": 2 ou 3 frases sobre o vídeo e uma pergunta para o público comentar.\n- \"hashtags\": 3 a 6 hashtags específicas do assunto (nada genérico como #shorts #viral #ia #fyp).`;\nconst pedido = `Tema: ${v.tema}\\nTipo: ${v.tipo_txt}\\nDuração alvo: ${v.duracao} segundos.` +\n  (ref.texto ? `\\n\\nTEXTO DE REFERÊNCIA (${ref.fonte}):\\n${ref.texto}` : '');\ntry {\n  const r = await perguntaIA(this.helpers, [{ role: 'system', content: sistema }, { role: 'user', content: pedido }], true);\n  const cenas = (Array.isArray(r.cenas) ? r.cenas : [])\n    .map(c => ({ fala: String(c.fala || '').replace(/\\s+/g, ' ').trim(), imagem: String(c.imagem || '').replace(/\\s+/g, ' ').trim() }))\n    .filter(c => c.fala.length > 3);\n  if (cenas.length < 3) throw new Error('roteiro veio com poucas cenas');\n  for (const c of cenas) if (!c.imagem) c.imagem = v.tema + ', ' + v.estilo_img;\n  return [{ json: { ok: true, titulo: String(r.titulo || v.tema).slice(0, 100), descricao: String(r.descricao || '').slice(0, 900),\n    hashtags: limpaHashtags(r.hashtags), cenas: cenas.slice(0, 12), fonte: ref.fonte, referencia: ref.texto } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: String(e.message || e).slice(0, 250), fonte: ref.fonte, referencia: ref.texto } }];\n}\n\nfunction limpaHashtags(h) {\n  return (Array.isArray(h) ? h : String(h || '').split(/\\s+/))\n    .map(t => '#' + String(t).replace(/^#+/, '').replace(/[^\\p{L}\\p{N}_]/gu, '')).filter(t => t.length > 2)\n    .filter(t => !/^#(shorts|viral|ia|fyp|foryou|parati)$/i.test(t)).slice(0, 6);\n}\n"
+   },
+   "id": "016989d7-5a4e-5267-ac02-45e8ead91c30",
+   "name": "🧠 Escreve o roteiro (2ª tentativa)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2640,
+    420
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "5a6fdcfe-1734-55b3-9894-4fdce114bc79",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "ee5ac795-c657-563a-a380-415a3aaed086",
+   "name": "🚦 Roteiro ok? (2ª)",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2880,
+    420
+   ]
+  },
+  {
+   "parameters": {
+    "amount": 31
+   },
+   "id": "97e09b63-0e04-51a2-ad56-c38806439545",
+   "name": "⏳ Espera 31 s (antes da revisão)",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    2400,
+    60
+   ],
+   "webhookId": "11c495e1-2f70-5a1f-bb0d-bd6f0a637e2d"
+  },
+  {
+   "parameters": {
+    "jsCode": "// 2ª passada: revisora de fatos (IA grátis, depois da espera de 31 s). Se falhar, segue com o roteiro como estava.\n// ── Texto por IA grátis e sem chave (Pollinations, modelo openai-fast) ──\n// Limite sem chave: 1 resposta a cada 30 s por IP. Quem chama em sequência precisa esperar (nó ⏳ de 31 s).\n// Sem chave o \"response_format\" dá 400: o JSON é pedido no texto e lido com lerJson (tolera ```json e texto em volta).\n// O modelo grátis \"pensa\" antes de responder: sem reasoning_effort low ele estoura o limite e devolve 400\n// (output_token_limit_exceeded); \"minimal\" não existe e \"medium\" também estoura.\nasync function perguntaIA(helpers, mensagens, emJson = false, tentativas = 1) {\n  let ultimo = '';\n  for (let t = 0; t < tentativas; t++) {\n    try {\n      const r = await helpers.httpRequest({ method: 'POST', url: 'https://text.pollinations.ai/openai', json: true, timeout: 50000,\n        // seed aleatória: sem ela o Pollinations devolve do cache a MESMA resposta para o mesmo pedido\n        body: { model: 'openai', messages: mensagens, reasoning_effort: 'low', max_tokens: 6000, seed: Math.floor(Math.random() * 1e9) } });\n      const txt = r && r.choices && r.choices[0] && r.choices[0].message && r.choices[0].message.content;\n      if (txt) return emJson ? lerJson(txt) : String(txt).trim();\n      ultimo = 'resposta vazia';\n    } catch (e) {\n      ultimo = String((e.response && e.response.body && JSON.stringify(e.response.body)) || e.message || e).slice(0, 200);\n    }\n  }\n  throw new Error('IA grátis (Pollinations) não respondeu: ' + ultimo);\n}\n\nfunction lerJson(txt) {\n  const s = String(txt).replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '').trim();\n  try { return JSON.parse(s); } catch (e) { /* tenta achar o bloco */ }\n  const i = s.indexOf('{'), j = s.lastIndexOf('}');\n  if (i >= 0 && j > i) return JSON.parse(s.slice(i, j + 1));\n  throw new Error('a IA não devolveu JSON');\n}\n\nconst rot = $('🧠 Escreve o roteiro').first().json.ok ? $('🧠 Escreve o roteiro').first().json\n  : $('🧠 Escreve o roteiro (2ª tentativa)').first().json;\nconst sistema = `Você é REVISORA DE FATOS de roteiros de vídeos curtos em português do Brasil.\nRecebe um JSON de roteiro${rot.referencia ? ' e um TEXTO DE REFERÊNCIA' : ''}. Confira cada \"fala\": toda afirmação falsa,\nduvidosa, sem sentido, exagerada ou com número errado deve ser TROCADA por um fato verdadeiro${rot.referencia ? ' DO TEXTO DE REFERÊNCIA' : ''}\nsobre o mesmo tema, com o mesmo tamanho (8 a 22 palavras). Corrija também português e acentos.\nMantenha o gancho na 1ª fala (pergunta ou fato surpreendente verdadeiro) e o convite a seguir na última.\nSe trocar uma fala, troque também a \"imagem\" (em inglês) dela para mostrar o novo assunto.\nMantenha o mesmo número de cenas. Devolva SOMENTE o JSON completo corrigido, no mesmo formato, sem markdown.`;\nconst entrada = JSON.stringify({ titulo: rot.titulo, descricao: rot.descricao, hashtags: rot.hashtags, cenas: rot.cenas });\ntry {\n  const r = await perguntaIA(this.helpers, [{ role: 'system', content: sistema },\n    { role: 'user', content: entrada + (rot.referencia ? '\\n\\nTEXTO DE REFERÊNCIA (' + rot.fonte + '):\\n' + rot.referencia : '') }], true);\n  const novas = (Array.isArray(r.cenas) ? r.cenas : []).map((c, i) => ({\n    fala: String(c.fala || '').replace(/\\s+/g, ' ').trim(),\n    imagem: String(c.imagem || (rot.cenas[i] || {}).imagem || '').replace(/\\s+/g, ' ').trim() })).filter(c => c.fala.length > 3);\n  if (novas.length < Math.min(3, rot.cenas.length)) throw new Error('revisão veio incompleta');\n  return [{ json: { ...rot, ok: true, revisado: true, titulo: String(r.titulo || rot.titulo).slice(0, 100),\n    descricao: String(r.descricao || rot.descricao).slice(0, 900), cenas: novas.slice(0, 12) } }];\n} catch (e) {\n  return [{ json: { ...rot, ok: true, revisado: false, aviso_revisao: String(e.message || e).slice(0, 150) } }];\n}\n"
+   },
+   "id": "09d5d132-6089-53f5-89d3-a94b43364270",
+   "name": "🔎 Revisa os fatos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2640,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, tema: $('🧩 Confere o pedido').first().json.tema, etapa: 'erro', erro: String($json.erro || 'Falha inesperada').slice(0, 300) }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "b999f938-27b2-5506-a674-baf1e1b70e33",
+   "name": "⚠️ Marca erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3120,
+    620
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, tema: $('🧩 Confere o pedido').first().json.tema, modo: $('🧩 Confere o pedido').first().json.modo, etapa: 'imagens', detalhe: \"Gerando as imagens das cenas (uma por vez)\", pct: 30 }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "bc02fb85-6eb8-581b-ab99-e5a6a90f07f6",
+   "name": "💾 Status: imagens",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2640,
+    140
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Um item por cena para gerar as imagens uma por vez (o Code do n8n para em 60 s).\nconst v = $('🧩 Confere o pedido').first().json;\nconst r = $('🔎 Revisa os fatos').first().json;\nconst semente = Math.floor(Math.random() * 1e8);\n// sufixo fixo: o Pollinations às vezes devolve colagem/grade de retratos quando a cena não tem assunto claro\nconst SUFIXO = ', ' + v.estilo_img + ', single scene, one subject, no collage, no grid, no text, no watermark';\nreturn r.cenas.map((c, i) => ({ json: { job: v.job, n: i + 1, prompt: c.imagem + SUFIXO, formato: v.formato, semente: semente + i } }));\n"
+   },
+   "id": "bc5eeb50-3923-5508-938a-e85adcdae4c2",
+   "name": "🧩 Separa as cenas",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2880,
+    140
+   ]
+  },
+  {
+   "parameters": {
+    "batchSize": 1,
+    "options": {}
+   },
+   "id": "f4bb7e5f-7eaa-5409-b7af-48c74af19103",
+   "name": "🔁 Uma cena por vez",
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    3120,
+    140
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Gera a imagem de UMA cena (FLUX do Hugging Face; reserva Pollinations).\n// ── Spaces do Hugging Face pela API pública do Gradio (sem chave; cota grátis por IP) ──\n// Chamada curta (cabe nos 60 s do Code). Para espera longa, use dois nós HTTP: POST .../call/<rota> e\n// GET .../call/<rota>/<event_id> (texto), e depois gradioLe() num Code.\nasync function gradioChama(helpers, espaco, rota, dados, limite = 50000) {\n  const base = 'https://' + espaco + '.hf.space/gradio_api/call/' + rota;\n  const r = await helpers.httpRequest({ method: 'POST', url: base, body: { data: dados }, json: true, timeout: 20000 });\n  const ev = r && r.event_id;\n  if (!ev) throw new Error(espaco + ': sem event_id');\n  return gradioLe(String(await helpers.httpRequest({ url: base + '/' + ev, timeout: limite, json: false })), espaco);\n}\n\n// Lê a resposta (SSE) da 2ª chamada: devolve o JSON final ou dá erro com o motivo.\nfunction gradioLe(txt, espaco = 'Hugging Face') {\n  txt = String(txt || '');\n  if (!txt.includes('event: complete')) {\n    const m = /event: error\\s*\\ndata: (.*)/.exec(txt);\n    const motivo = m && m[1] !== 'null' ? m[1].slice(0, 200) : 'recusou (a cota grátis do Hugging Face acabou ou a fila está cheia; tente mais tarde)';\n    throw new Error(espaco + ': ' + motivo);\n  }\n  const linhas = txt.split('\\n').filter(l => l.startsWith('data:'));\n  return JSON.parse(linhas[linhas.length - 1].slice(5));\n}\n\nconst urlDe = d => { const m = /\"url\":\\s*\"([^\"]+)\"/.exec(JSON.stringify(d)); return m ? m[1] : null; };\n\n// Arquivos para o Space: o Gradio não aceita link de fora nem base64 nas entradas de arquivo, só o caminho de um\n// upload (POST .../gradio_api/upload, multipart). O upload tem que ser pelo nó HTTP do n8n (n8nlib.http_envia_arquivo):\n// o httpRequest do Code manda o binário como UTF-8 e estraga o arquivo (testado 30/10: 512 bytes viraram 768).\nconst arquivoGradio = (caminho, nome) => ({ path: caminho, orig_name: nome, meta: { _type: 'gradio.FileData' } });\nfunction caminhoDoUpload(txt) {\n  try { const l = JSON.parse(String(txt || '')); return Array.isArray(l) && l[0] ? l[0] : null; } catch (e) { return null; }\n}\n// ── Imagens grátis e sem chave ──\n// FLUX.1-schnell no Hugging Face (melhor, sem marca; cota grátis por IP acaba rápido) e Pollinations (reserva, selo\n// \"pollinations.ai\" no canto; limita pedidos seguidos por IP: 402/429 = esperar e tentar de novo).\n// Precisa de gradio.js antes (gradioChama, urlDe).\nconst TAMANHOS = { '9:16': [576, 1024], '16:9': [1024, 576], '1:1': [768, 768], '4:5': [768, 960], '3:4': [672, 896] };\n\nasync function imagemFlux(helpers, prompt, formato, semente) {\n  const [w, h] = TAMANHOS[formato] || TAMANHOS['9:16'];\n  const d = await gradioChama(helpers, 'black-forest-labs-flux-1-schnell', 'infer', [prompt, semente || 0, !semente, w, h, 4]);\n  const url = urlDe(d);\n  if (!url) throw new Error('FLUX: sem imagem');\n  const img = Buffer.from(await helpers.httpRequest({ url, encoding: 'arraybuffer', timeout: 30000 }));\n  return { img, tipo: 'image/webp', ext: 'webp', motor: 'flux-schnell (Hugging Face)' };\n}\n\nasync function imagemPollinations(helpers, prompt, formato, semente, tentativas = 3) {\n  const [w, h] = TAMANHOS[formato] || TAMANHOS['9:16'];\n  const url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?width=' + w + '&height=' + h +\n    '&model=flux&seed=' + (semente || Math.floor(Math.random() * 1e6));\n  let ultimo = '';\n  for (let t = 0; t < tentativas; t++) {\n    try {\n      const img = Buffer.from(await helpers.httpRequest({ url, encoding: 'arraybuffer', timeout: 25000 }));\n      if (img.length > 2000) return { img, tipo: 'image/jpeg', ext: 'jpg', motor: 'pollinations (flux)', url };\n      ultimo = 'imagem vazia';\n    } catch (e) {\n      ultimo = String(e.message || e).slice(0, 100);\n    }\n    await new Promise(r => setTimeout(r, 6000 * (t + 1)));\n  }\n  throw new Error('Pollinations: ' + ultimo);\n}\n\n// Tenta FLUX e depois Pollinations. Devolve { img (Buffer), tipo, ext, motor, aviso }.\nasync function geraImagem(helpers, prompt, formato, semente, usarHF = true) {\n  let aviso = '';\n  if (usarHF) {\n    try {\n      return await imagemFlux(helpers, prompt, formato, semente);\n    } catch (e) {\n      aviso = String(e.message || e).slice(0, 160);\n    }\n  }\n  const r = await imagemPollinations(helpers, prompt, formato, semente);\n  r.aviso = aviso;\n  return r;\n}\n\nconst it = $input.first().json;\ntry {\n  const r = await geraImagem(this.helpers, it.prompt, it.formato, it.semente);\n  return [{ json: { ...it, ok: true, motor: r.motor, aviso: r.aviso || '', ext: r.ext, tipo: r.tipo, b64: r.img.toString('base64') } }];\n} catch (e) {\n  return [{ json: { ...it, ok: false, erro: String(e.message || e).slice(0, 200) } }];\n}\n"
+   },
+   "id": "c8ed9e3f-5ae7-5030-b5c6-e60225ce98c3",
+   "name": "🖼️ Gera a imagem da cena",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    3360,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "0d43f4e7-ca40-51d6-b94f-4de7d633843a",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "663ce163-67f6-5ce5-bc4e-7b46621ab1ce",
+   "name": "🚦 Saiu a imagem?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    3600,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gvf:{{ $json.job }}-img{{ $json.n }}.{{ $json.ext }}",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "76fbd837-dede-549d-954e-e5a788b0c9e2",
+   "name": "💾 Guarda a imagem (3 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3840,
+    220
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Volta para o loop com o que a montagem precisa (a imagem em base64 segue junto para subir ao montador).\nconst g = $('🖼️ Gera a imagem da cena').first().json;\nreturn [{ json: { n: g.n, ok: g.ok, ext: g.ext || '', tipo: g.tipo || '', motor: g.motor || '', erro: g.erro || '', b64: g.b64 || '' } }];\n"
+   },
+   "id": "9931f5c8-c607-577e-b271-03eaee0feadb",
+   "name": "🧹 Resumo da cena",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    4080,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, tema: $('🧩 Confere o pedido').first().json.tema, modo: $('🧩 Confere o pedido').first().json.modo, etapa: 'narrando', detalhe: \"Narrando com voz neural\", pct: 65 }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "bbbbaa32-3c3d-5c33-a30e-c785af1d506c",
+   "name": "💾 Status: narrando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3360,
+    -60
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Narra o roteiro inteiro (voz neural do Bing; reserva Google) e divide o tempo entre as cenas pelo tamanho das falas.\n// ── Vozes grátis e sem chave ──\n// 1º Bing Tradutor (voz NEURAL da Microsoft): pega os códigos da página pública do tradutor e pede o áudio como o\n//    próprio site faz. MP3 16 kHz 32 kbps -> segundos = bytes × 8 ÷ 32000.\n//    Só as vozes Multilingual aprovadas pela dona (Antonio e Francisca são PROIBIDAS em todos os projetos).\n// 2º Google Tradutor (reserva, voz mais robótica): MP3 24 kHz 64 kbps -> segundos = bytes × 8 ÷ 64000.\nconst UA_VOZ = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36 Edg/141.0';\nconst VOZES_BING = {\n  thalita: ['pt-BR-ThalitaMultilingualNeural', 'Female'], andrew: ['en-US-AndrewMultilingualNeural', 'Male'],\n  brian: ['en-US-BrianMultilingualNeural', 'Male'], emma: ['en-US-EmmaMultilingualNeural', 'Female'] };\n\nfunction limpaFala(s) {\n  return String(s || '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}\\u{200D}]/gu, '')\n    .replace(/[*_#`~|<>]/g, ' ').replace(/\\s+/g, ' ').trim();\n}\n\nfunction pedacos(texto, max) {\n  const out = [];\n  let resto = texto;\n  while (resto.length > max) {\n    let corte = Math.max(resto.lastIndexOf('. ', max), resto.lastIndexOf('! ', max), resto.lastIndexOf('? ', max));\n    if (corte < max * 0.4) corte = Math.max(corte, resto.lastIndexOf(', ', max), resto.lastIndexOf('; ', max));\n    if (corte < max * 0.3) corte = resto.lastIndexOf(' ', max);\n    if (corte < 1) corte = max;\n    out.push(resto.slice(0, corte + 1).trim());\n    resto = resto.slice(corte + 1).trim();\n  }\n  if (resto) out.push(resto);\n  return out;\n}\n\nconst escXml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nasync function vozBing(helpers, texto, voz, velocidade) {\n  const pag = await helpers.httpRequest({ url: 'https://www.bing.com/translator', returnFullResponse: true, timeout: 20000,\n    headers: { 'User-Agent': UA_VOZ, 'Accept-Language': 'pt-BR,pt;q=0.9' } });\n  const h = String(pag.body || '');\n  const ig = /IG:\"([^\"]+)\"/.exec(h);\n  const iid = /data-iid=\"(translator\\.\\d+)\"/.exec(h);\n  const ab = /params_AbusePreventionHelper\\s*=\\s*\\[(\\d+),\"([^\"]+)\",(\\d+)\\]/.exec(h);\n  if (!ig || !ab) throw new Error('Bing: a página do tradutor não trouxe os códigos');\n  const sc = (pag.headers && (pag.headers['set-cookie'] || pag.headers['Set-Cookie'])) || [];\n  const cookie = [].concat(sc).map(c => String(c).split(';')[0]).join('; ');\n  const [nomeVoz, genero] = VOZES_BING[voz] || VOZES_BING.thalita;\n  const taxa = Math.max(-50, Math.min(100, Number(velocidade) || 0));\n  const partes = [];\n  for (const p of pedacos(texto, 900)) {\n    const ssml = \"<speak version='1.0' xml:lang='pt-BR'><voice xml:lang='pt-BR' xml:gender='\" + genero + \"' name='\" + nomeVoz +\n      \"'><prosody rate='\" + (taxa >= 0 ? '+' : '') + taxa + \"%'>\" + escXml(p) + '</prosody></voice></speak>';\n    const corpo = 'ssml=' + encodeURIComponent(ssml) + '&token=' + encodeURIComponent(ab[2]) + '&key=' + ab[1];\n    const audio = await helpers.httpRequest({ method: 'POST', timeout: 30000, encoding: 'arraybuffer', body: corpo,\n      url: 'https://www.bing.com/tfettts?isVertical=1&&IG=' + ig[1] + '&IID=' + (iid ? iid[1] : 'translator.5023') + '.1',\n      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': UA_VOZ, Cookie: cookie,\n        Referer: 'https://www.bing.com/translator', Origin: 'https://www.bing.com' } });\n    const b = Buffer.from(audio);\n    if (b.length < 800) throw new Error('Bing: áudio vazio');\n    partes.push(b);\n  }\n  const mp3 = Buffer.concat(partes);\n  return { mp3, motor: 'bing-' + nomeVoz, segundos: Math.round(mp3.length * 8 / 32000 * 100) / 100 };\n}\n\nasync function vozGoogle(helpers, texto) {\n  const partes = [];\n  for (const p of pedacos(texto, 180)) {\n    let b = null;\n    for (let t = 0; t < 3 && !b; t++) {\n      try {\n        const d = await helpers.httpRequest({ timeout: 20000, encoding: 'arraybuffer', headers: { 'User-Agent': UA_VOZ },\n          url: 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=pt-BR&q=' + encodeURIComponent(p) });\n        b = Buffer.from(d);\n      } catch (e) {\n        await new Promise(r => setTimeout(r, 1200 * (t + 1)));\n      }\n    }\n    if (!b || b.length < 500) throw new Error('Google: sem áudio');\n    partes.push(b);\n  }\n  const mp3 = Buffer.concat(partes);\n  return { mp3, motor: 'google-tradutor', segundos: Math.round(mp3.length * 8 / 64000 * 100) / 100 };\n}\n\n// Tenta a voz neural; se falhar, a do Google. Devolve { mp3, motor, segundos, aviso }.\nasync function narra(helpers, texto, voz, velocidade) {\n  const fala = limpaFala(texto);\n  if (!fala) throw new Error('texto vazio');\n  if (voz !== 'google') {\n    try {\n      return await vozBing(helpers, fala, voz, velocidade);\n    } catch (e) {\n      const r = await vozGoogle(helpers, fala);\n      r.aviso = 'voz neural indisponível agora (' + String(e.message || e).slice(0, 120) + '); usada a voz do Google';\n      return r;\n    }\n  }\n  return await vozGoogle(helpers, fala);\n}\n\nconst v = $('🧩 Confere o pedido').first().json;\nconst rot = $('🔎 Revisa os fatos').first().json;\nconst imgs = $input.all().map(i => i.json).sort((a, b) => a.n - b.n);\nif (!imgs.some(i => i.ok)) return [{ json: { ok: false, erro: 'Nenhuma imagem saiu (geradores grátis cheios). Tente mais tarde.' } }];\nconst falas = rot.cenas.map(c => limpaFala(c.fala));\ntry {\n  const r = await narra(this.helpers, falas.join(' '), v.voz, v.velocidade);\n  const pesos = falas.map(f => f.length + 12);\n  const soma = pesos.reduce((a, b) => a + b, 0);\n  let t = 0;\n  const cenas = falas.map((fala, i) => {\n    // cena sem imagem usa a imagem que saiu mais perto\n    const proprio = imgs.find(x => x.n === i + 1 && x.ok);\n    const outra = proprio || imgs.filter(x => x.ok).sort((a, b) => Math.abs(a.n - (i + 1)) - Math.abs(b.n - (i + 1)))[0];\n    const ini = t;\n    t += r.segundos * pesos[i] / soma;\n    return { n: i + 1, fala, ini: Math.round(ini * 100) / 100, fim: Math.round(t * 100) / 100,\n      img: v.arquivo + 'img' + outra.n + '.' + outra.ext, img_n: outra.n };\n  });\n  // as imagens (base64) seguem junto: o montador da nuvem precisa delas e o loop não é lido depois\n  return [{ json: { ok: true, b64: r.mp3.toString('base64'), segundos: r.segundos, motor: r.motor, aviso: r.aviso || '', cenas,\n    texto: falas.join(' '), imgs } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: 'A narração falhou: ' + String(e.message || e).slice(0, 200) } }];\n}\n"
+   },
+   "id": "f900667a-d016-5415-8098-f578b8243a62",
+   "name": "🎙️ Narra o roteiro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    3360,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d64033d3-1b81-579a-a42b-aecf96fb4465",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "54be7957-6251-5c26-b64b-82c34bd7a194",
+   "name": "🚦 Saiu a voz?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    3600,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gvf:{{ $('🧩 Confere o pedido').first().json.job }}-voz.mp3",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "8e2ccda1-3c68-5227-a7bd-667e072d41f8",
+   "name": "💾 Guarda a voz (3 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3840,
+    -20
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "c890ae21-a265-5aab-8b15-30d839a9bfe4",
+       "leftValue": "={{ $('🧩 Confere o pedido').first().json.modo === 'nuvem' }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "457b147e-de28-5780-b5b4-58043362ee71",
+   "name": "🚦 Montar na nuvem (16:9)?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    4080,
+    -20
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, tema: $('🧩 Confere o pedido').first().json.tema, modo: $('🧩 Confere o pedido').first().json.modo, etapa: 'montando', detalhe: \"Montando o vídeo no montador grátis do Hugging Face\", pct: 80 }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "04ce3ede-669e-583b-b139-ef564c52c43b",
+   "name": "💾 Status: montando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    4320,
+    -160
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "executeOnce": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Um item por arquivo (imagens das cenas + voz), com o binário, para o nó HTTP subir ao montador grátis.\nconst voz = $('🎙️ Narra o roteiro').first().json;\nconst imgs = voz.imgs.filter(i => i.ok && i.b64);\nconst saida = [];\nfor (const c of voz.cenas) {\n  const im = imgs.find(x => x.n === c.img_n);\n  if (!im) continue;\n  const nome = 'cena' + c.n + '.' + im.ext;\n  saida.push({ json: { tipo: 'img', n: c.n, nome },\n    binary: { data: await this.helpers.prepareBinaryData(Buffer.from(im.b64, 'base64'), nome, im.tipo) } });\n}\nsaida.push({ json: { tipo: 'voz', n: 0, nome: 'voz.mp3' },\n  binary: { data: await this.helpers.prepareBinaryData(Buffer.from(voz.b64, 'base64'), 'voz.mp3', 'audio/mpeg') } });\nreturn saida;\n"
+   },
+   "id": "bbc9409c-13f8-575d-93c3-53e2f29e8b62",
+   "name": "🧩 Prepara os arquivos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    4560,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://tim13ekd-video-ffmpeg.hf.space/gradio_api/upload",
+    "sendBody": true,
+    "contentType": "multipart-form-data",
+    "bodyParameters": {
+     "parameters": [
+      {
+       "parameterType": "formBinaryData",
+       "name": "files",
+       "inputDataFieldName": "data"
+      }
+     ]
+    },
+    "options": {
+     "timeout": 60000,
+     "response": {
+      "response": {
+       "responseFormat": "text",
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "de42ccba-4e6c-53d9-a7b1-cf66c9d995eb",
+   "name": "🌐 Sobe os arquivos ao montador",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    4800,
+    -160
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta os caminhos dos arquivos já enviados ao montador grátis (Space Tim13ekd/video-ffmpeg, 1280x720) e monta o pedido.\n// O Space divide as palavras IGUALMENTE entre as imagens e escreve cada trecho numa linha só: com 6 imagens e 80\n// palavras a legenda estourava a tela. Por isso cada imagem entra repetida (mesmo arquivo, sem novo envio) em trechos\n// de ~4 palavras, na proporção das palavras de cada cena.\n// ── Spaces do Hugging Face pela API pública do Gradio (sem chave; cota grátis por IP) ──\n// Chamada curta (cabe nos 60 s do Code). Para espera longa, use dois nós HTTP: POST .../call/<rota> e\n// GET .../call/<rota>/<event_id> (texto), e depois gradioLe() num Code.\nasync function gradioChama(helpers, espaco, rota, dados, limite = 50000) {\n  const base = 'https://' + espaco + '.hf.space/gradio_api/call/' + rota;\n  const r = await helpers.httpRequest({ method: 'POST', url: base, body: { data: dados }, json: true, timeout: 20000 });\n  const ev = r && r.event_id;\n  if (!ev) throw new Error(espaco + ': sem event_id');\n  return gradioLe(String(await helpers.httpRequest({ url: base + '/' + ev, timeout: limite, json: false })), espaco);\n}\n\n// Lê a resposta (SSE) da 2ª chamada: devolve o JSON final ou dá erro com o motivo.\nfunction gradioLe(txt, espaco = 'Hugging Face') {\n  txt = String(txt || '');\n  if (!txt.includes('event: complete')) {\n    const m = /event: error\\s*\\ndata: (.*)/.exec(txt);\n    const motivo = m && m[1] !== 'null' ? m[1].slice(0, 200) : 'recusou (a cota grátis do Hugging Face acabou ou a fila está cheia; tente mais tarde)';\n    throw new Error(espaco + ': ' + motivo);\n  }\n  const linhas = txt.split('\\n').filter(l => l.startsWith('data:'));\n  return JSON.parse(linhas[linhas.length - 1].slice(5));\n}\n\nconst urlDe = d => { const m = /\"url\":\\s*\"([^\"]+)\"/.exec(JSON.stringify(d)); return m ? m[1] : null; };\n\n// Arquivos para o Space: o Gradio não aceita link de fora nem base64 nas entradas de arquivo, só o caminho de um\n// upload (POST .../gradio_api/upload, multipart). O upload tem que ser pelo nó HTTP do n8n (n8nlib.http_envia_arquivo):\n// o httpRequest do Code manda o binário como UTF-8 e estraga o arquivo (testado 30/10: 512 bytes viraram 768).\nconst arquivoGradio = (caminho, nome) => ({ path: caminho, orig_name: nome, meta: { _type: 'gradio.FileData' } });\nfunction caminhoDoUpload(txt) {\n  try { const l = JSON.parse(String(txt || '')); return Array.isArray(l) && l[0] ? l[0] : null; } catch (e) { return null; }\n}\n\nconst ESPACO = 'tim13ekd-video-ffmpeg';\nconst voz = $('🎙️ Narra o roteiro').first().json;\nconst itens = $('🧩 Prepara os arquivos').all().map(i => i.json);\nconst respostas = $input.all().map(i => i.json);\ntry {\n  const caminhos = itens.map((it, k) => ({ ...it, caminho: caminhoDoUpload(respostas[k] && respostas[k].data) }));\n  const falhou = caminhos.filter(c => !c.caminho);\n  if (falhou.length) throw new Error('o envio de ' + falhou.length + ' arquivo(s) ao montador falhou: ' +\n    String((respostas.find(r => !caminhoDoUpload(r.data)) || {}).data || (respostas[0] || {}).error || '').slice(0, 120));\n  const porCena = Object.fromEntries(caminhos.filter(c => c.tipo === 'img').map(c => [c.n, arquivoGradio(c.caminho, c.nome)]));\n  const audio = caminhos.find(c => c.tipo === 'voz');\n  const palavrasCena = voz.cenas.map(c => c.fala.split(/\\s+/).filter(Boolean).length);\n  const total = palavrasCena.reduce((a, b) => a + b, 0);\n  const N = Math.max(voz.cenas.length, Math.ceil(total / 4.5));\n  const quantas = palavrasCena.map(w => Math.max(1, Math.round(w * N / total)));\n  const imagens = [];\n  voz.cenas.forEach((c, i) => { for (let k = 0; k < quantas[i]; k++) imagens.push(porCena[c.n] || Object.values(porCena)[0]); });\n  const dados = [imagens, voz.texto, Math.round(voz.segundos / total * 1000) / 1000,\n    Math.round(voz.segundos / imagens.length * 1000) / 1000, 0.12, 50, 0.86, arquivoGradio(audio.caminho, 'voz.mp3'),\n    'Highlight', 'DejaVu Sans Bold'];\n  return [{ json: { ok: true, trechos: imagens.length, url_chamada: 'https://' + ESPACO + '.hf.space/gradio_api/call/generate_slideshow_with_audio',\n    corpo: { data: dados } } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: String(e.message || e).slice(0, 220) } }];\n}\n"
+   },
+   "id": "2d8a6ac6-96f5-5464-b1ea-709f2bd9d877",
+   "name": "🧩 Monta o pedido da montagem",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    5040,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "5a7ff496-e748-562e-ab8f-246304f8f901",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "3e18aaf7-48e5-59ec-ac0b-e3732f759837",
+   "name": "🚦 Subiu?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    5280,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.url_chamada }}",
+    "options": {
+     "timeout": 30000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($json.corpo) }}"
+   },
+   "id": "52f58f61-799c-5da6-94ad-0b757a320693",
+   "name": "🌐 Pede a montagem",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    5520,
+    -240
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('🧩 Monta o pedido da montagem').first().json.url_chamada }}/{{ $json.event_id || 'sem-evento' }}",
+    "options": {
+     "timeout": 600000,
+     "response": {
+      "response": {
+       "responseFormat": "text",
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "7b6c090a-892b-570a-826d-e4c6ee9d1d61",
+   "name": "🌐 Espera a montagem (até 10 min)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    5760,
+    -240
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê a resposta do montador e baixa o MP4 pronto.\n// ── Spaces do Hugging Face pela API pública do Gradio (sem chave; cota grátis por IP) ──\n// Chamada curta (cabe nos 60 s do Code). Para espera longa, use dois nós HTTP: POST .../call/<rota> e\n// GET .../call/<rota>/<event_id> (texto), e depois gradioLe() num Code.\nasync function gradioChama(helpers, espaco, rota, dados, limite = 50000) {\n  const base = 'https://' + espaco + '.hf.space/gradio_api/call/' + rota;\n  const r = await helpers.httpRequest({ method: 'POST', url: base, body: { data: dados }, json: true, timeout: 20000 });\n  const ev = r && r.event_id;\n  if (!ev) throw new Error(espaco + ': sem event_id');\n  return gradioLe(String(await helpers.httpRequest({ url: base + '/' + ev, timeout: limite, json: false })), espaco);\n}\n\n// Lê a resposta (SSE) da 2ª chamada: devolve o JSON final ou dá erro com o motivo.\nfunction gradioLe(txt, espaco = 'Hugging Face') {\n  txt = String(txt || '');\n  if (!txt.includes('event: complete')) {\n    const m = /event: error\\s*\\ndata: (.*)/.exec(txt);\n    const motivo = m && m[1] !== 'null' ? m[1].slice(0, 200) : 'recusou (a cota grátis do Hugging Face acabou ou a fila está cheia; tente mais tarde)';\n    throw new Error(espaco + ': ' + motivo);\n  }\n  const linhas = txt.split('\\n').filter(l => l.startsWith('data:'));\n  return JSON.parse(linhas[linhas.length - 1].slice(5));\n}\n\nconst urlDe = d => { const m = /\"url\":\\s*\"([^\"]+)\"/.exec(JSON.stringify(d)); return m ? m[1] : null; };\n\n// Arquivos para o Space: o Gradio não aceita link de fora nem base64 nas entradas de arquivo, só o caminho de um\n// upload (POST .../gradio_api/upload, multipart). O upload tem que ser pelo nó HTTP do n8n (n8nlib.http_envia_arquivo):\n// o httpRequest do Code manda o binário como UTF-8 e estraga o arquivo (testado 30/10: 512 bytes viraram 768).\nconst arquivoGradio = (caminho, nome) => ({ path: caminho, orig_name: nome, meta: { _type: 'gradio.FileData' } });\nfunction caminhoDoUpload(txt) {\n  try { const l = JSON.parse(String(txt || '')); return Array.isArray(l) && l[0] ? l[0] : null; } catch (e) { return null; }\n}\n\nconst ev = $('🌐 Pede a montagem').first().json;\ntry {\n  if (!ev || !ev.event_id) throw new Error('o montador não aceitou o pedido (' + JSON.stringify(ev).slice(0, 120) + ')');\n  const d = gradioLe($input.first().json.data, 'montador');\n  const url = urlDe(d);\n  if (!url) throw new Error('o montador respondeu sem vídeo: ' + JSON.stringify(d).slice(0, 150));\n  const mp4 = Buffer.from(await this.helpers.httpRequest({ url, encoding: 'arraybuffer', timeout: 50000 }));\n  if (mp4.length < 20000) throw new Error('vídeo vazio');\n  return [{ json: { ok: true, b64: mp4.toString('base64'), bytes: mp4.length } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: String(e.message || e).slice(0, 250) } }];\n}\n"
+   },
+   "id": "e7e31704-7db5-55c7-89df-79b811145546",
+   "name": "🧩 Lê o vídeo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    6000,
+    -240
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "6180ba57-09cc-546a-b26c-402e6d6c8707",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "dc299eae-9356-54cb-aa7f-6acc2bf73526",
+   "name": "🚦 Saiu o vídeo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    6240,
+    -240
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gvf:{{ $('🧩 Confere o pedido').first().json.job }}-video.mp4",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "c2a29661-02f1-545f-8866-4c6c112c2454",
+   "name": "💾 Guarda o vídeo (3 dias)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    6480,
+    -320
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta o status final: links, textos para postar e o \"filme\" para o montador do navegador.\nconst v = $('🧩 Confere o pedido').first().json;\nconst rot = $('🔎 Revisa os fatos').first().json;\nconst voz = $('🎙️ Narra o roteiro').first().json;\nlet video = null;\nlet aviso = voz.aviso || '';\nif (v.modo === 'nuvem') {\n  const lv = $('🧩 Lê o vídeo').isExecuted ? $('🧩 Lê o vídeo').first().json : { ok: false, erro: 'montador não rodou' };\n  const sm = $('🧩 Monta o pedido da montagem').isExecuted ? $('🧩 Monta o pedido da montagem').first().json\n    : { ok: false, erro: 'não chegou a montar o pedido' };\n  if (lv.ok) video = v.arquivo + 'video.mp4';\n  else aviso = 'O montador grátis da nuvem falhou (' + String((sm.ok ? lv.erro : sm.erro) || '').slice(0, 160) +\n    '). Monte aqui no navegador.';\n}\nconst imgs = voz.imgs;\nconst motores = [...new Set(imgs.filter(i => i.ok).map(i => i.motor))];\nconst [largura, altura] = v.formato === '16:9' ? [1280, 720] : [720, 1280];\nreturn [{ json: { job: v.job, etapa: 'pronto', pct: 100, tema: v.tema, modo: v.modo, formato: v.formato,\n  titulo: rot.titulo, descricao: rot.descricao, hashtags: rot.hashtags, video, aviso, fonte: rot.fonte || '',\n  revisado: !!rot.revisado,\n  voz: v.arquivo + 'voz.mp3', segundos: voz.segundos, motor_voz: voz.motor, motores_imagem: motores,\n  imagens: imgs.filter(i => i.ok).sort((a, b) => a.n - b.n).map(i => v.arquivo + 'img' + i.n + '.' + i.ext),\n  filme: { largura, altura, voz: v.arquivo + 'voz.mp3', total: Math.round((voz.segundos + 0.6) * 100) / 100,\n    gancho: rot.titulo, cenas: voz.cenas.map(c => ({ img: c.img, ini: c.ini, fim: c.fim, fala: c.fala })) } } }];\n"
+   },
+   "id": "888ded12-0107-5e6a-b4bf-11c336b1e813",
+   "name": "🧩 Resultado final",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    6720,
+    -20
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=gv:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify($json) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "id": "d7487e3c-3afb-52c7-84ef-5cecbad652ee",
+   "name": "💾 Status: pronto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    6960,
+    -20
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "gratis-video-ver",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "906550eb-f3dd-50b7-afee-581013d8840c",
+   "name": "🔔 Página do vídeo (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    900
+   ],
+   "webhookId": "123e3d6d-159f-543b-908c-d2025ede7b88"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Página do andamento e do resultado. No modo \"navegador\" o vídeo vertical é montado aqui mesmo (canvas + gravador do\n// navegador): nada para instalar no servidor e nenhuma chave.\n// ── Moldura das páginas (mesmo visual em todos os fluxos grátis) ──\nfunction pagina(titulo, corpo, script) {\n  const css = `\n:root{--fundo:#f6f5f2;--cartao:#fff;--texto:#1d1d1b;--suave:#6b6b66;--linha:#e3e1db;--acento:#0f766e;--acento2:#115e59;--erro:#b42318;--ok:#067647}\n@media (prefers-color-scheme:dark){:root{--fundo:#121412;--cartao:#1b1e1c;--texto:#ecebe7;--suave:#a3a39d;--linha:#2c302d;--acento:#2dd4bf;--acento2:#5eead4;--erro:#f97066;--ok:#47cd89}}\n*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif}\nmain{max-width:760px;margin:0 auto;padding:20px 16px 48px}h1{font-size:1.45rem;margin:.2em 0 .1em}h2{font-size:1.1rem;margin:1.2em 0 .5em}\n.sub{color:var(--suave);margin:0 0 18px}.cartao{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:12px 0}\nlabel{display:block;font-weight:600;margin:12px 0 6px}textarea,input,select{width:100%;padding:11px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);color:var(--texto);font:inherit}\ntextarea{min-height:120px;resize:vertical}.linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}\nbutton,.botao{display:inline-block;background:var(--acento);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 1rem system-ui,sans-serif;cursor:pointer;text-decoration:none;margin-top:14px}\n@media (prefers-color-scheme:dark){button,.botao{color:#04211e}}\nbutton[disabled]{opacity:.55;cursor:wait}.botao.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}\n.aviso{color:var(--suave);font-size:.9rem}.erro{color:var(--erro);font-weight:600}.ok{color:var(--ok);font-weight:600}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.grade img,.grade video{width:100%;border-radius:10px;border:1px solid var(--linha);background:#000}\nvideo,audio{width:100%;margin-top:10px;border-radius:10px}pre{white-space:pre-wrap;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:12px;font-size:.9rem}\n.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0}.barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .6s}\n.selo{display:inline-block;font-size:.78rem;border:1px solid var(--linha);border-radius:99px;padding:2px 9px;color:var(--suave);margin:2px 4px 2px 0}\nfooter{color:var(--suave);font-size:.82rem;margin-top:28px}`;\n  return '<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n    '<meta name=\"robots\" content=\"noindex\"><title>' + titulo + '</title><style>' + css + '</style></head><body><main>' + corpo +\n    '<footer>Feito com serviços grátis e sem chave (Hugging Face, Pollinations, Bing/Google Tradutor). Pode demorar ou falhar quando eles estão cheios.</footer>' +\n    '</main>' + (script ? '<script>' + script + '</script>' : '') + '</body></html>';\n}\nconst escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\nconst q = $input.first().json.query || {};\nconst job = String(q.id || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 40);\nconst corpo = `\n<h1>🎬 Seu vídeo</h1>\n<p class=\"sub\" id=\"tema\">Carregando...</p>\n<div class=\"cartao\" id=\"andamento\">\n  <b id=\"etapa\">Na fila...</b>\n  <div class=\"barra\"><i id=\"barra\"></i></div>\n  <p class=\"aviso\" id=\"detalhe\">Leva de 2 a 8 minutos. Pode deixar esta página aberta.</p>\n</div>\n<div id=\"resultado\" hidden>\n  <div class=\"cartao\">\n    <h2>Vídeo</h2>\n    <p id=\"aviso\" class=\"aviso\"></p>\n    <video id=\"video\" controls playsinline hidden></video>\n    <a id=\"baixar_video\" class=\"botao\" hidden download=\"video.mp4\">Baixar vídeo</a>\n    <div id=\"montador\" hidden>\n      <p class=\"aviso\">Montado aqui no seu navegador: aperte o botão e deixe esta aba aberta e à vista até terminar\n      (leva o tempo do vídeo). Funciona melhor no Chrome ou Edge do computador.</p>\n      <canvas id=\"tela\" style=\"width:100%;max-width:340px;border-radius:12px;background:#000;display:block;margin:auto\"></canvas>\n      <button id=\"montar\">🎬 Montar o vídeo</button>\n      <div class=\"barra\"><i id=\"barra_montagem\"></i></div>\n      <p id=\"estado_montagem\" class=\"aviso\"></p>\n      <video id=\"video_montado\" controls playsinline hidden></video>\n      <a id=\"baixar_montado\" class=\"botao\" hidden>Baixar vídeo</a>\n    </div>\n  </div>\n  <div class=\"cartao\">\n    <h2>Para postar</h2>\n    <label>Título</label><pre id=\"titulo\"></pre><button class=\"botao sec\" data-copiar=\"titulo\">Copiar título</button>\n    <label>Descrição</label><pre id=\"descricao\"></pre><button class=\"botao sec\" data-copiar=\"descricao\">Copiar descrição</button>\n  </div>\n  <div class=\"cartao\"><h2>Narração</h2><audio id=\"voz\" controls></audio><p class=\"aviso\" id=\"info\"></p></div>\n  <div class=\"cartao\"><h2>Cenas</h2><div class=\"grade\" id=\"cenas\"></div></div>\n  <a class=\"botao sec\" href=\"gratis-video\">Fazer outro vídeo</a>\n</div>`;\nconst script = `\nconst JOB = ${JSON.stringify(job)};\nconst $ = id => document.getElementById(id);\nconst ETAPAS = { recebido: [5, 'Pedido recebido'], roteiro: [12, 'Escrevendo o roteiro (IA grátis)'],\n  imagens: [30, 'Gerando as imagens das cenas'], narrando: [65, 'Narrando com voz neural'],\n  montando: [80, 'Montando o vídeo na nuvem grátis'], pronto: [100, 'Pronto!'], erro: [100, 'Não deu certo'] };\nlet filme = null;\nasync function olha() {\n  if (!JOB) { $('etapa').textContent = 'Link sem código do vídeo.'; return; }\n  try {\n    const r = await fetch('gratis-video-status?id=' + JOB, { cache: 'no-store' });\n    const s = await r.json();\n    if (s.tema) $('tema').textContent = s.tema;\n    const e = ETAPAS[s.etapa] || [3, 'Na fila...'];\n    $('etapa').textContent = e[1]; $('barra').style.width = (s.pct || e[0]) + '%';\n    if (s.detalhe) $('detalhe').textContent = s.detalhe;\n    if (s.etapa === 'pronto') return mostra(s);\n    if (s.etapa === 'erro') { $('detalhe').className = 'erro'; $('detalhe').textContent = s.erro || 'Falhou.'; return; }\n    if (s.etapa === 'desconhecido') { $('detalhe').textContent = 'Vídeo não encontrado (os links valem 3 dias).'; return; }\n  } catch (e) { /* tenta de novo */ }\n  setTimeout(olha, 3000);\n}\nfunction mostra(s) {\n  $('andamento').hidden = true; $('resultado').hidden = false;\n  $('titulo').textContent = s.titulo || '';\n  $('descricao').textContent = (s.descricao || '') + '\\\\n\\\\n' + (s.hashtags || []).join(' ');\n  $('voz').src = s.voz;\n  $('info').textContent = 'Voz: ' + (s.motor_voz || '') + ' · ' + s.segundos + ' s · imagens: ' + (s.motores_imagem || []).join(', ') +\n    (s.fonte ? ' · fatos conferidos na ' + s.fonte : '') + (s.revisado ? ' · roteiro revisado' : '');\n  $('cenas').innerHTML = (s.imagens || []).map(u => '<a href=\"' + u + '\" target=\"_blank\"><img loading=\"lazy\" src=\"' + u + '\"></a>').join('');\n  if (s.aviso) $('aviso').textContent = s.aviso;\n  filme = s.filme;\n  if (s.video) { $('video').src = s.video; $('video').hidden = false; $('baixar_video').href = s.video; $('baixar_video').hidden = false; }\n  else { $('montador').hidden = false; preparaTela(); }\n}\ndocument.addEventListener('click', ev => {\n  const alvo = ev.target.getAttribute && ev.target.getAttribute('data-copiar');\n  if (!alvo) return;\n  const t = $(alvo).textContent;\n  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(\n    () => { ev.target.textContent = 'Copiado!'; }, () => { window.prompt('Copie:', t); });\n});\n// ── montador do navegador ──\nconst imagens = {};\nfunction carregaImg(url) {\n  return new Promise((ok, falha) => {\n    const i = new Image(); i.crossOrigin = 'anonymous';\n    i.onload = () => ok(i); i.onerror = () => falha(new Error('imagem não carregou'));\n    i.src = url;\n  });\n}\nasync function preparaTela() {\n  const tela = $('tela'); tela.width = filme.largura; tela.height = filme.altura;\n  try {\n    for (const c of filme.cenas) if (!imagens[c.img]) imagens[c.img] = await carregaImg(c.img);\n    desenha(tela.getContext('2d'), 0.4, filme.total);\n  } catch (e) { $('estado_montagem').textContent = 'Não carregou as imagens: ' + e.message; }\n}\nfunction pintaCena(ctx, img, i, p, W, H, alfa) {\n  if (!img) return;\n  const z = i % 2 === 0 ? 1.04 + 0.12 * p : 1.16 - 0.12 * p;\n  const s = Math.max(W / img.width, H / img.height) * z;\n  const w = img.width * s, h = img.height * s;\n  const d = [[1, 0], [-1, 0], [0, 1], [0, -1]][i % 4];\n  const fx = (w - W) / 2, fy = (h - H) / 2;\n  ctx.globalAlpha = alfa;\n  ctx.drawImage(img, -fx + d[0] * fx * (p - 0.5) * 0.8, -fy + d[1] * fy * (p - 0.5) * 0.8, w, h);\n  ctx.globalAlpha = 1;\n}\nfunction fonte(px) { return '900 ' + px + 'px \"Arial Black\", \"Segoe UI Black\", Impact, system-ui, sans-serif'; }\nfunction quebra(ctx, texto, max) {\n  const linhas = []; let linha = '';\n  for (const p of texto.split(' ')) {\n    const t = linha ? linha + ' ' + p : p;\n    if (ctx.measureText(t).width > max && linha) { linhas.push(linha); linha = p; } else linha = t;\n  }\n  if (linha) linhas.push(linha);\n  return linhas;\n}\nfunction caixaTopo(ctx, texto, W, H, alfa) {\n  const px = Math.round(Math.min(W, H) * 0.06);\n  ctx.font = fonte(px);\n  const linhas = quebra(ctx, texto.toUpperCase(), W * 0.84).slice(0, 3);\n  const alto = linhas.length * px * 1.25 + px * 0.8, y0 = H * 0.07;\n  ctx.globalAlpha = alfa;\n  ctx.fillStyle = 'rgba(0,0,0,.6)';\n  if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(W * 0.05, y0, W * 0.9, alto, px * 0.5); ctx.fill(); } else ctx.fillRect(W * 0.05, y0, W * 0.9, alto);\n  ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';\n  linhas.forEach((l, k) => ctx.fillText(l, W / 2, y0 + px * 0.4 + k * px * 1.25));\n  ctx.globalAlpha = 1;\n}\nfunction legenda(ctx, fala, frac, W, H) {\n  const palavras = fala.toUpperCase().split(/\\\\s+/).filter(Boolean);\n  if (!palavras.length) return;\n  const grupos = []; let g = [];\n  for (const p of palavras) { if (g.length >= 4 || (g.join(' ') + ' ' + p).length > 24) { grupos.push(g); g = []; } g.push(p); }\n  if (g.length) grupos.push(g);\n  const totalLetras = palavras.join('').length;\n  let alvo = Math.max(0, Math.min(1, frac)) * totalLetras, k = 0, soma = 0;\n  for (; k < palavras.length - 1; k++) { soma += palavras[k].length; if (soma > alvo) break; }\n  let gi = 0, conta = 0;\n  for (; gi < grupos.length; gi++) { if (k < conta + grupos[gi].length) break; conta += grupos[gi].length; }\n  gi = Math.min(gi, grupos.length - 1);\n  const atual = k - conta;\n  const px = Math.round(Math.min(W, H) * (W < H ? 0.085 : 0.075));\n  ctx.font = fonte(px); ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.lineJoin = 'round';\n  const grupo = grupos[gi];\n  const esp = ctx.measureText(' ').width;\n  const larguras = grupo.map(p => ctx.measureText(p).width);\n  const total = larguras.reduce((a, b) => a + b, 0) + esp * (grupo.length - 1);\n  const escala = Math.min(1, (W * 0.9) / total);\n  if (escala < 1) ctx.font = fonte(Math.round(px * escala));\n  let x = (W - total * escala) / 2;\n  const y = H * (W < H ? 0.73 : 0.83);\n  grupo.forEach((p, j) => {\n    ctx.lineWidth = Math.max(4, px * 0.18); ctx.strokeStyle = '#000'; ctx.strokeText(p, x, y);\n    ctx.fillStyle = j === atual ? '#FFE14D' : '#fff'; ctx.fillText(p, x, y);\n    x += (larguras[j] + esp) * escala;\n  });\n}\nfunction desenha(ctx, t, total) {\n  const W = filme.largura, H = filme.altura, cs = filme.cenas;\n  let i = cs.findIndex(c => t < c.fim); if (i < 0) i = cs.length - 1;\n  const c = cs[i];\n  const fim = i === cs.length - 1 ? total : c.fim;\n  const p = Math.max(0, Math.min(1, (t - c.ini) / Math.max(0.5, fim - c.ini)));\n  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);\n  pintaCena(ctx, imagens[c.img], i, p, W, H, 1);\n  if (i > 0 && t - c.ini < 0.35) pintaCena(ctx, imagens[cs[i - 1].img], i - 1, 1, W, H, 1 - (t - c.ini) / 0.35);\n  if (t < 2.8 && filme.gancho) caixaTopo(ctx, filme.gancho, W, H, Math.min(1, (2.8 - t) / 0.4));\n  legenda(ctx, c.fala, (t - c.ini) / Math.max(0.3, c.fim - c.ini), W, H);\n  ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.fillRect(0, H - 8, W, 8);\n  ctx.fillStyle = '#2dd4bf'; ctx.fillRect(0, H - 8, W * Math.min(1, t / total), 8);\n}\n$('montar').onclick = async () => {\n  $('montar').disabled = true; $('estado_montagem').className = 'aviso';\n  try {\n    if (!window.MediaRecorder || !$('tela').captureStream) throw new Error('este navegador não grava vídeo; use Chrome ou Edge');\n    $('estado_montagem').textContent = 'Carregando imagens e voz...';\n    for (const c of filme.cenas) if (!imagens[c.img]) imagens[c.img] = await carregaImg(c.img);\n    const AC = window.AudioContext || window.webkitAudioContext; const ac = new AC();\n    const som = await ac.decodeAudioData(await (await fetch(filme.voz)).arrayBuffer());\n    const destino = ac.createMediaStreamDestination(); const fonteSom = ac.createBufferSource();\n    fonteSom.buffer = som; fonteSom.connect(destino);\n    const tela = $('tela'); const ctx = tela.getContext('2d');\n    const fluxo = tela.captureStream(30); destino.stream.getAudioTracks().forEach(t => fluxo.addTrack(t));\n    const tipos = ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'];\n    const tipo = tipos.find(t => MediaRecorder.isTypeSupported(t)) || '';\n    const rec = new MediaRecorder(fluxo, tipo ? { mimeType: tipo, videoBitsPerSecond: 6000000, audioBitsPerSecond: 128000 } : {});\n    const partes = []; rec.ondataavailable = e => { if (e.data && e.data.size) partes.push(e.data); };\n    const parou = new Promise(ok => { rec.onstop = ok; });\n    const total = Math.max(filme.total, som.duration + 0.5);\n    desenha(ctx, 0, total);\n    rec.start(1000);\n    const t0 = ac.currentTime + 0.1; fonteSom.start(t0);\n    $('estado_montagem').textContent = 'Montando... deixe a aba à vista.';\n    await new Promise(ok => {\n      const passo = () => {\n        const t = Math.max(0, ac.currentTime - t0);\n        desenha(ctx, t, total); $('barra_montagem').style.width = Math.min(100, t / total * 100) + '%';\n        if (t >= total) ok(); else requestAnimationFrame(passo);\n      };\n      requestAnimationFrame(passo);\n    });\n    rec.stop(); await parou; ac.close();\n    const ext = (tipo || 'video/webm').includes('mp4') ? 'mp4' : 'webm';\n    const url = URL.createObjectURL(new Blob(partes, { type: ext === 'mp4' ? 'video/mp4' : 'video/webm' }));\n    $('video_montado').src = url; $('video_montado').hidden = false;\n    $('baixar_montado').href = url; $('baixar_montado').download = 'video-' + JOB + '.' + ext; $('baixar_montado').hidden = false;\n    $('estado_montagem').className = 'ok';\n    $('estado_montagem').textContent = 'Pronto! Arquivo ' + ext.toUpperCase() + (ext === 'webm' ? ' (o YouTube aceita; para o Instagram, converta para MP4).' : '.');\n  } catch (e) { $('estado_montagem').className = 'erro'; $('estado_montagem').textContent = 'Não deu: ' + e.message; }\n  $('montar').disabled = false;\n};\nolha();`;\nreturn [{ json: { html: pagina('Seu vídeo — fábrica grátis', corpo, script) } }];\n"
+   },
+   "id": "720e50a7-f6df-567c-9b6a-9a0bcad22121",
+   "name": "🧩 Monta a página do vídeo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    900
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "d17a1484-ccc0-5c0a-9c65-4a0d7dd5573b",
+   "name": "📤 Entrega a página do vídeo",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    900
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-video-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "2fcd0d14-7ba2-5158-bf7f-0184b1c13203",
+   "name": "🔔 Consulta status (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1100
+   ],
+   "webhookId": "45db825f-c3b2-5cae-9558-df8a623f670d"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=gv:{{ String($json.query.id || '').toLowerCase().replace(/[^a-z0-9]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "982d9c16-ff1e-56db-9458-94ded6290b8e",
+   "name": "📖 Lê o status",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    1100
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.status || JSON.stringify({ etapa: 'desconhecido' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "867ee9e4-3f9c-5454-8956-6663ecdf6107",
+   "name": "📤 Responde o status",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    1100
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-video-arquivo",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "3b925a94-0847-5788-b27f-29a8ad0098af",
+   "name": "🔔 Entrega arquivo (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1300
+   ],
+   "webhookId": "93535709-22ec-5214-bca4-fcbab04ea6b0"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "dado",
+    "key": "=gvf:{{ String($json.query.id || '').toLowerCase().replace(/[^a-z0-9.-]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "7ad274ce-70da-593d-b934-b4921410f654",
+   "name": "📖 Lê o arquivo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    240,
+    1300
+   ],
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Devolve o arquivo guardado no Redis (texto base64) como arquivo de verdade, para o webhook entregar.\nconst id = String(($('🔔 Entrega arquivo (GET)').first().json.query || {}).id || '');\nconst b64 = String($input.first().json.dado || '');\nconst TIPOS = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', mp3: 'audio/mpeg',\n  mp4: 'video/mp4', webm: 'video/webm', json: 'application/json', txt: 'text/plain' };\nconst ext = (id.split('.').pop() || '').toLowerCase();\nif (!/^[a-z0-9-]{4,80}\\.[a-z0-9]{2,5}$/.test(id) || !b64 || !TIPOS[ext]) return [{ json: { existe: false } }];\nconst bin = await this.helpers.prepareBinaryData(Buffer.from(b64, 'base64'), id, TIPOS[ext]);\nreturn [{ json: { existe: true }, binary: { data: bin } }];\n"
+   },
+   "id": "f054fc78-aad2-5215-8020-25a6b0da54cb",
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    480,
+    1300
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "70747ecd-3fe7-58e5-96b4-04477cfd37f0",
+       "leftValue": "={{ $json.existe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "235fee90-fc13-54ad-a2ab-5fc082e473ce",
+   "name": "🚦 O arquivo existe?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    720,
+    1300
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=259200"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       },
+       {
+        "name": "Access-Control-Expose-Headers",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "13991977-5372-5fc6-838d-74fb0e975be7",
+   "name": "📤 Entrega o arquivo",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    1220
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "Arquivo não encontrado (os links valem 3 dias).",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 404
+    }
+   },
+   "id": "57dede88-e1c7-5877-a3fc-d43b66d3304b",
+   "name": "📤 Arquivo não encontrado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    960,
+    1400
+   ]
+  }
+ ],
+ "connections": {
+  "🔔 Página da fábrica (GET)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta a página": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido de vídeo (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o pedido": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pedido ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pedido ok?": {
+   "main": [
+    [
+     {
+      "node": "🧮 Conta pedidos da hora",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧮 Conta pedidos da hora": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pode começar?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pode começar?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: recebido",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: recebido": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde com o link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde com o link": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: roteiro": {
+   "main": [
+    [
+     {
+      "node": "🧠 Escreve o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Escreve o roteiro": {
+   "main": [
+    [
+     {
+      "node": "🚦 Roteiro ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Roteiro ok?": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 31 s (antes da revisão)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 35 s (limite da IA grátis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 35 s (limite da IA grátis)": {
+   "main": [
+    [
+     {
+      "node": "🧠 Escreve o roteiro (2ª tentativa)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Escreve o roteiro (2ª tentativa)": {
+   "main": [
+    [
+     {
+      "node": "🚦 Roteiro ok? (2ª)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Roteiro ok? (2ª)": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 31 s (antes da revisão)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 31 s (antes da revisão)": {
+   "main": [
+    [
+     {
+      "node": "🔎 Revisa os fatos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔎 Revisa os fatos": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: imagens",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: imagens": {
+   "main": [
+    [
+     {
+      "node": "🧩 Separa as cenas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Separa as cenas": {
+   "main": [
+    [
+     {
+      "node": "🔁 Uma cena por vez",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔁 Uma cena por vez": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: narrando",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "🎙️ Narra o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🖼️ Gera a imagem da cena",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🖼️ Gera a imagem da cena": {
+   "main": [
+    [
+     {
+      "node": "🚦 Saiu a imagem?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Saiu a imagem?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda a imagem (3 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧹 Resumo da cena",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda a imagem (3 dias)": {
+   "main": [
+    [
+     {
+      "node": "🧹 Resumo da cena",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧹 Resumo da cena": {
+   "main": [
+    [
+     {
+      "node": "🔁 Uma cena por vez",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎙️ Narra o roteiro": {
+   "main": [
+    [
+     {
+      "node": "🚦 Saiu a voz?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Saiu a voz?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda a voz (3 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda a voz (3 dias)": {
+   "main": [
+    [
+     {
+      "node": "🚦 Montar na nuvem (16:9)?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Montar na nuvem (16:9)?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: montando",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: montando": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara os arquivos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara os arquivos": {
+   "main": [
+    [
+     {
+      "node": "🌐 Sobe os arquivos ao montador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Sobe os arquivos ao montador": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta o pedido da montagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta o pedido da montagem": {
+   "main": [
+    [
+     {
+      "node": "🚦 Subiu?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Subiu?": {
+   "main": [
+    [
+     {
+      "node": "🌐 Pede a montagem",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Pede a montagem": {
+   "main": [
+    [
+     {
+      "node": "🌐 Espera a montagem (até 10 min)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Espera a montagem (até 10 min)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê o vídeo": {
+   "main": [
+    [
+     {
+      "node": "🚦 Saiu o vídeo?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Saiu o vídeo?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o vídeo (3 dias)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o vídeo (3 dias)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Resultado final": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Página do vídeo (GET)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta a página do vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta a página do vídeo": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página do vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Consulta status (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o status": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Entrega arquivo (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o arquivo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "🚦 O arquivo existe?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 O arquivo existe?": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Arquivo não encontrado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

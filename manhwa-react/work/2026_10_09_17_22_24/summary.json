@@ -1,0 +1,66 @@
+{
+ "video": "1-COLOQUE-AQUI\\2026-10-09 17-22-24.mp4",
+ "duration": 1043.666667,
+ "layout": {
+  "width": 1920,
+  "height": 1080,
+  "mode": "pip",
+  "pip_corner": "top_right",
+  "content_x0": 0,
+  "content_x1": 1920,
+  "has_webcam": true,
+  "contrast": 1.5,
+  "trimmed": {},
+  "divider": 0,
+  "webcam": [
+   1134,
+   2,
+   1914,
+   334
+  ],
+  "content": [
+   0,
+   0,
+   1920,
+   1080
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": false,
+  "score": 2,
+  "reason": "Gravação de workshop/aula sobre Brand Book e automação de marketing, sem reações de react a conteúdo externo — é conteúdo educacional próprio do criador, não um react.",
+  "topic": "Workshop de Brand Book e identidade visual para agências de marketing",
+  "channel": "inventoreact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 1043.666667,
+    "hook": "",
+    "title": "",
+    "description": "",
+    "hashtags": [],
+    "tags": [],
+    "keywords": [],
+    "cta": "",
+    "mood": "neutral_chill",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 108.0,
+    "end": 122.0,
+    "why": "Criador perguntando se estão vivos, respondendo gatinha, silêncios longos sem conteúdo útil"
+   }
+  ],
+  "speakers": {},
+  "highlights": true
+ },
+ "base": null,
+ "channel": "inventoreact",
+ "outputs": [],
+ "status": "rejected"
+}

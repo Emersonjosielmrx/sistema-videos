@@ -1,0 +1,20 @@
+http:
+  routers:
+    videos-http:
+      rule: "Host(`videos.opus-sem-limites.com.br`)"
+      service: videos-svc
+      entryPoints:
+        - web
+    videos:
+      rule: "Host(`videos.opus-sem-limites.com.br`)"
+      service: videos-svc
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: le
+  services:
+    # painel :8790 do PC1, que chega por túnel SSH reverso (D:\video-fila\tunel_painel.py) em 127.0.0.1:8099
+    videos-svc:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8099/"

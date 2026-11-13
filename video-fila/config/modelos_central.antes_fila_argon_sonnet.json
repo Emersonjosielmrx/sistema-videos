@@ -1,0 +1,70 @@
+{
+ "_leia": "modo: argon | opus | ambos | auto. auto = Opus quando a dona NÃO está num chat (sessão do VS Code ativa nos últimos 'chat_min' minutos) E há cota CC (cota_claude.atual com_cota >= 1); senão Argon. Os conjuntos vão por papel para os melhoradores das linhas (env CENTRAL_MODELOS). Nunca Kiro.",
+ "modo": "argon",
+ "chat_min": 30,
+ "conjuntos": {
+  "argon": {
+   "analista": [
+    "gweb/gemini-3.1-pro",
+    "argon-pro",
+    "argon-flash"
+   ],
+   "decisor": [
+    "gweb/gemini-3.1-pro",
+    "argon-pro",
+    "argon-flash"
+   ],
+   "revisor": [
+    "gweb/gemini-3.1-pro",
+    "argon-pro",
+    "argon-flash"
+   ],
+   "propositor": [
+    "gweb/gemini-3.1-pro",
+    "argon-pro",
+    "argon-flash"
+   ],
+   "critico": [
+    "gweb/gemini-3.1-pro",
+    "argon-pro",
+    "argon-flash"
+   ],
+   "implementador": [
+    "argon-pro",
+    "gweb/gemini-3.1-pro",
+    "argon-flash"
+   ]
+  },
+  "opus": {
+   "analista": [
+    "agy/gemini-3.8-flash-high",
+    "antigravity/gemini-3-flash"
+   ],
+   "decisor": [
+    "cc/claude-opus-5-5",
+    "gemini-4-argon",
+    "agy/gemini-3.8-flash-high"
+   ],
+   "revisor": [
+    "cc/claude-opus-5-5",
+    "agy/gemini-3.8-flash-high"
+   ]
+  },
+  "ambos": {
+   "analista": [
+    "agy/gemini-3.8-flash-high",
+    "antigravity/gemini-3-flash"
+   ],
+   "decisor": [
+    "gemini-4-argon",
+    "argon-pro",
+    "agy/gemini-3.8-flash-high"
+   ],
+   "revisor": [
+    "cc/claude-opus-5-5",
+    "agy/gemini-3.8-flash-high"
+   ]
+  }
+ },
+ "_dona_29out": "dona 29/10 16:40: conjunto argon = gweb/gemini-3.1-pro -> argon-pro -> argon-flash nos 3 papéis, SEM Gemini puro (teste em D:\u000bideo-fila\\linhas\\PRODUTOS\teste_modelos). Antes: modelos_central.antes_29out.json"
+}

@@ -1,0 +1,49 @@
+{
+ "modelo": "hx-revisor-gemini",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T19:04:45",
+ "segundos": 678,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T19:04:45",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "hx-revisor-gemini",
+   "decisor": "hx-revisor-gemini"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Monotonia visual gerada pela variante de formato 'dono_tres', mantendo mais de 26 segundos contínuos no mesmo plano do apresentador (cenas 0, 1, 2 e 3) sem nenhuma inserção de tela do produto, b-roll ou simulação, problema que se repete em múltiplos vídeos do histórico com notas baixas de movimento.",
+    "prova": "dados.json campo formato 'dono_tres', histórico de notas (3+ vídeos com formato dono_tres/dono_tres_veo_final com nota de movimento entre 4.0 e 5.0) e folha.jpg quadros 1 a 11",
+    "sugestao": "Reduzir o peso ou desligar a variante 'dono_tres' em 'variantes_desligadas', priorizando formatos que alternem o apresentador com demonstrações ou telas do produto (como dono_abre_fecha_veo_meio).",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Sobreposição gráfica semi-transparente no centro da imagem sobre o apresentador com texto ilegível antes do cartão final, poluindo a imagem e invadindo o corpo do apresentador.",
+    "prova": "folha.jpg quadro 11 (marca d'água/card semi-transparente com duas linhas de texto ilegível sobrepostas ao apresentador)",
+    "sugestao": "Corrigir a camada de renderização ou transição para evitar a sobreposição fantasma/semi-transparente de texto ilegível sobre o apresentador no quadro 11 antes da entrada do cartão final.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "O conjunto gráfico superior com a pílula de etapa ('1 O problema', '2 Como funciona', '3 O resultado') encosta diretamente no topo da cabeça/cabelo do apresentador, violando a regra de respiro no topo da cabeça.",
+    "prova": "folha.jpg quadros 3 a 10 e júri diretor cena 1",
+    "sugestao": "Reduzir em cerca de 10% a escala do vídeo do apresentador ou posicioná-lo ligeiramente mais abaixo no enquadramento para abrir respiro entre o cabelo e os grafismos superiores.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "Reduzir a frequência do formato dono_tres devido à monotonia visual gerada por mais de 26 segundos contínuos no mesmo plano do apresentador sem b-roll ou demonstração do produto, priorizando formatos mais dinâmicos.",
+    "prova": "dados.json campo formato 'dono_tres', histórico de notas baixas de movimento (entre 4.0 e 5.0) e folha.jpg quadros 1 a 11"
+   }
+  ],
+  "aprovadas": 1
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-41-59.mp4",
+ "duration": 143.633333,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 720,
+  "has_webcam": true,
+  "contrast": 75.4,
+  "trimmed": {},
+  "divider": 361,
+  "webcam": [
+   0,
+   0,
+   720,
+   361
+  ],
+  "content": [
+   0,
+   361,
+   720,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React a recap de manhwa/dorama coreano com confusão de nomes gera comentários, mas a reação do criador é fraca e o conteúdo é fragmentado.",
+  "topic": "React a recap de manhwa/dorama coreano com confusão de identidades",
+  "channel": "inovaremanhwabr",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 90.0,
+    "hook": "O DRAMA TODO POR CAUSA DE UM NOME ERRADO",
+    "title": "Trocaram o nome e deu ESSE caos todo 😂🤦 #shorts #manhwa",
+    "description": "O criador reage a um recap onde o gerente confunde a identidade da protagonista e cria o maior drama!\nVocê acredita que tudo isso aconteceu só por causa de um nome trocado?\nComenta aí se já viu uma confusão assim num dorama ou manhwa!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #manhwa #dorama #coreano #confusão #identidade #recap #webtoon #anime #reactbr #drama #engraçado #viral #reactmanhwa",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#manhwa",
+     "#dorama",
+     "#coreano",
+     "#confusão",
+     "#identidade",
+     "#recap",
+     "#webtoon",
+     "#drama",
+     "#reactbr",
+     "#engraçado"
+    ],
+    "tags": [
+     "react",
+     "manhwa",
+     "dorama coreano",
+     "recap manhwa",
+     "confusão de identidade",
+     "react br",
+     "webtoon",
+     "drama coreano",
+     "react dorama",
+     "nome trocado",
+     "gerente confundiu",
+     "cozinheira",
+     "chefe",
+     "react engraçado",
+     "manhwa portugues",
+     "shorts react",
+     "react viral"
+    ],
+    "keywords": [
+     {
+      "t": 1.0,
+      "text": "EXTRAVAGANTES",
+      "emoji": "✨"
+     },
+     {
+      "t": 30.0,
+      "text": "CARAMBA",
+      "emoji": "😳"
+     },
+     {
+      "t": 55.5,
+      "text": "NÃO",
+      "emoji": "😱"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 6.0,
+      "type": "question"
+     },
+     {
+      "t": 30.0,
+      "type": "shock"
+     },
+     {
+      "t": 55.5,
+      "type": "shock"
+     }
+    ],
+    "memes": [
+     {
+      "t": 14.0,
+      "id": 2
+     },
+     {
+      "t": 55.5,
+      "id": 33
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Você já viu um drama inteiro acontecer só por causa de um nome trocado? 😂",
+    "title_alternatives": [
+     "Confundiram o nome e olha o que aconteceu 😱🔥 #shorts #manhwa",
+     "Esse gerente DESTRUIU tudo por trocar um nome 🤦😂 #shorts #react"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 17.0,
+    "end": 30.0,
+    "why": "Frase confusa e sem sentido do criador ('Não sabia o nome, eu troco o nome')"
+   },
+   {
+    "start": 105.0,
+    "end": 116.8,
+    "why": "Criador lendo/repetindo narração do conteúdo de forma confusa e inaudível, parece retake"
+   }
+  ],
+  "speakers": {
+   "9": "content"
+  },
+  "highlights": false
+ },
+ "base": null,
+ "channel": "inovaremanhwabr",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_41_59\\2026_10_07_16_41_59.mp4",
+   "duration": 28.73519100000013,
+   "keeps": 17,
+   "meta": {
+    "hook": "O DRAMA TODO POR CAUSA DE UM NOME ERRADO",
+    "title": "Trocaram o nome e deu ESSE caos todo 😂🤦 #shorts #manhwa",
+    "description": "O criador reage a um recap onde o gerente confunde a identidade da protagonista e cria o maior drama!\nVocê acredita que tudo isso aconteceu só por causa de um nome trocado?\nComenta aí se já viu uma confusão assim num dorama ou manhwa!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #manhwa #dorama #coreano #confusão #identidade #recap #webtoon #anime #reactbr #drama #engraçado #viral #reactmanhwa",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#manhwa",
+     "#dorama",
+     "#coreano",
+     "#confusão",
+     "#identidade",
+     "#recap",
+     "#webtoon",
+     "#drama",
+     "#reactbr",
+     "#engraçado"
+    ],
+    "tags": [
+     "react",
+     "manhwa",
+     "dorama coreano",
+     "recap manhwa",
+     "confusão de identidade",
+     "react br",
+     "webtoon",
+     "drama coreano",
+     "react dorama",
+     "nome trocado",
+     "gerente confundiu",
+     "cozinheira",
+     "chefe",
+     "react engraçado",
+     "manhwa portugues",
+     "shorts react",
+     "react viral"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Você já viu um drama inteiro acontecer só por causa de um nome trocado? 😂",
+    "title_alternatives": [
+     "Confundiram o nome e olha o que aconteceu 😱🔥 #shorts #manhwa",
+     "Esse gerente DESTRUIU tudo por trocar um nome 🤦😂 #shorts #react"
+    ],
+    "work": null,
+    "channel": "inovaremanhwabr"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_41_59\\2026_10_07_16_41_59_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\FNAF FUNK (Funk Remix) (128 kbps).mp3",
+   "removed_pct": 68.1,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 28.63,
+    "lufs": -13.9
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 603.2
+}

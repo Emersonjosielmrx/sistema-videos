@@ -1,0 +1,29 @@
+{
+ "out_w": 1080,
+ "out_h": 1920,
+ "webcam": null,
+ "divider_out": 0,
+ "band": {
+  "y": 0,
+  "h": 0
+ },
+ "seam": {
+  "y": 0,
+  "overlap": 0,
+  "edge": "tear",
+  "style": null
+ },
+ "content": {
+  "crop": [
+   581,
+   0,
+   608,
+   1080
+  ],
+  "scale": [
+   1080,
+   1920
+  ],
+  "out_y": 0
+ }
+}

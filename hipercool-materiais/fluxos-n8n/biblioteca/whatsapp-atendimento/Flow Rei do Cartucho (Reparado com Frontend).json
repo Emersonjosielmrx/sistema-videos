@@ -1,0 +1,2058 @@
+{
+ "id": "Q2kKYkilBhJA6mTX",
+ "name": "Flow Rei do Cartucho (Reparado com Frontend)",
+ "active": false,
+ "isArchived": false,
+ "versionId": "1e5efd6b-258b-42b9-906d-1b84c8228566",
+ "activeVersionId": null,
+ "triggerCount": 0,
+ "createdAt": "2026-04-30T23:28:13.465Z",
+ "updatedAt": "2026-04-30T23:30:32.787Z",
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "availableInMCP": true
+ },
+ "connections": {
+  "emvia mensagem1": {
+   "main": [
+    [
+     {
+      "node": "atualiza tempo de quem emviou ",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "bolean de erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pega instancia que estao na hora1": {
+   "main": [
+    [
+     {
+      "node": "se tem dados3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancias_ativas2": {
+   "main": [
+    [
+     {
+      "node": "dividir ana luana",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "organiza e filtra1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items2": {
+   "main": [
+    [
+     {
+      "node": "verifica se foi setado1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "tempo de emvio que vai procurar na busca vem do html",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "iniciado por repeticao1": {
+   "main": [
+    [
+     {
+      "node": "emvio do html",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "hora de comeco padrao1": {
+   "main": [
+    [
+     {
+      "node": "emvio do html",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica se foi setado1": {
+   "main": [
+    [
+     {
+      "node": "se esta vazio1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se esta vazio1": {
+   "main": [
+    [
+     {
+      "node": "reinicia fluxo1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "reinicia fluxo1": {
+   "main": [
+    [
+     {
+      "node": "seta impedimento de repeticao1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "seta impedimento de repeticao1": {
+   "main": [
+    [
+     {
+      "node": "logica de diminuicao de tempo de emvio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "mudanca de etapas": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se tem dados3": {
+   "main": [
+    [
+     {
+      "node": "numeros do html",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pega numero na fila1": {
+   "main": [
+    [
+     {
+      "node": "If1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items3": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items4",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "instancia ao numero dela",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "instancia ao numero dela": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancias_ativas3": {
+   "main": [
+    [
+     {
+      "node": "organiza e filtra2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "organiza e filtra2": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items4": {
+   "main": [
+    [],
+    [
+     {
+      "node": "pega numero na fila1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "When clicking ‘Execute workflow’": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancias_ativas3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If1": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Loop Over Items4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "instancia selecionada": {
+   "main": [
+    [
+     {
+      "node": "mudanca de etapas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se tem dados6": {
+   "main": [
+    [
+     {
+      "node": "instancia selecionada",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "emvio do html": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancias_ativas2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "numeros do html": {
+   "main": [
+    [
+     {
+      "node": "se tem dados6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "tempo de emvio que vai procurar na busca vem do html": {
+   "main": [
+    [
+     {
+      "node": "pega instancia que estao na hora1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "atualiza tempo de quem emviou ": {
+   "main": [
+    [
+     {
+      "node": "deleta da lista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "deleta da lista": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cadastra intancias novas": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Loop Over Items": {
+   "main": [
+    [],
+    [
+     {
+      "node": "cadastra intancias novas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code": {
+   "main": [
+    [
+     {
+      "node": "Loop Over Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancias1": {
+   "main": [
+    [
+     {
+      "node": "Code",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "emvia mensagem1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dividir ana luana": {
+   "main": [
+    [
+     {
+      "node": "organiza e filtra1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Dashboard Frontend": {
+   "main": [
+    {
+     "node": "Respond to Webhook",
+     "type": "main",
+     "index": 0
+    }
+   ]
+  },
+  "Recebe Dados do Painel": {
+   "main": [
+    {
+     "node": "Parser Fila de Contatos",
+     "type": "main",
+     "index": 0
+    }
+   ]
+  }
+ },
+ "nodes": [
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE public.instancias_para_disparo_novo2 (\n    \"nome da isntacia\" TEXT,\n    \"numero da instancia\" TEXT, -- Usando BIGINT para números grandes e NOT NULL por ser ID\n    \"tokem da isntacia\" TEXT,\n    \"etapa\" TEXT,\n    \"hora da ultima mensagem\" TEXT,\n    PRIMARY KEY (\"numero da instancia\")\n);\n\n-- Explicações:\n-- TEXT: Para campos de texto sem limite de tamanho definido (nome, token).\n-- BIGINT: Para o número da instância, que será o identificador único (ID). É um número inteiro grande.\n-- VARCHAR(255): Para a etapa, um texto com um limite de tamanho.\n-- TIMESTAMP WITH TIME ZONE: O tipo ideal para armazenar data e hora, pois considera fusos horários.\n-- PRIMARY KEY: Define \"numero da instancia\" como a chave primária, o que garante que cada valor seja único e não nulo.",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    752,
+    32
+   ],
+   "id": "4a18b8f4-92e0-4f55-901e-583dee5c81b9",
+   "name": "criacao de tabela para disparo"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE public.instancias_para_disparo_novo4 (\n    disparo TEXT PRIMARY KEY,\n    \"nome da isntacia\" TEXT,\n    \"numero da instancia\" TEXT,\n    \"tokem da isntacia\" TEXT,\n    \"etapa\" TEXT,\n    \"hora da ultima mensagem\" TEXT\n);",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1136,
+    32
+   ],
+   "id": "dad8d058-8cde-4562-a087-a69fb83f10b3",
+   "name": "criacao de tabela para disparo1"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://ligawhatsapp.inovareinteligenciaartificial.com/message/sendText/{{ $('pega instancia que estao na hora1').item.json['nome da isntacia'] }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('pega instancia que estao na hora1').item.json['tokem da isntacia'] }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $('pega numero1').item.json.remoteJid }}"
+      },
+      {
+       "name": "text",
+       "value": "={{ $json.output.replaceAll(\"\\\"\",\"\") }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ parseInt(Math.random() * 1520+10200) }}"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "cc7cf354-3e9e-49bb-b004-4bf90154c9c2",
+   "name": "emvia mensagem1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    1680,
+    736
+   ],
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "numero da instancia"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    560,
+    736
+   ],
+   "id": "380cb5f5-b831-4a49-acda-b5da5a9e844d",
+   "name": "pega instancia que estao na hora1"
+  },
+  {
+   "parameters": {
+    "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "59a6cb02-0009-4fe2-81fe-f18285028d5d",
+   "name": "verifica_instancias_ativas2",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    -624,
+    736
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Código para N8N - Code Node\n// Filtra apenas instâncias com connectionStatus \"open\"\n// Exclui ownerJid que contém: 984698653, 984074247, 985685106\n// e extrai os campos: name, ownerJid e token\n\nconst inputData = $input.all();\nconst result = [];\n\n// Lista de números a serem excluídos (apenas os dígitos relevantes)\nconst excludedNumbers = ['84698653', '84074247', '85685106'];\n\n// Processa cada item de entrada\ninputData.forEach(item => {\n  const data = item.json;\n  \n  // Verifica se é um array ou objeto único\n  const items = Array.isArray(data) ? data : [data];\n  \n  // Filtra e mapeia os dados\n  items.forEach(instance => {\n    // Verifica se o connectionStatus é \"open\"\n    if (instance.connectionStatus === \"open\") {\n      // Verifica se o ownerJid NÃO contém nenhum dos números excluídos\n      const shouldExclude = excludedNumbers.some(num => \n        instance.ownerJid && instance.ownerJid.includes(num)\n      );\n      \n      // Se não deve excluir, adiciona ao resultado\n      if (!shouldExclude) {\n        result.push({\n          name: instance.name,\n          ownerJid: instance.ownerJid,\n          token: instance.token\n        });\n      }\n    }\n  });\n});\n\n// Retorna os dados filtrados\nreturn result.map(item => ({ json: item }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    16,
+    736
+   ],
+   "id": "e57b8d5e-ba18-450e-b9d0-3fe5bf91749d",
+   "name": "organiza e filtra1",
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    160,
+    736
+   ],
+   "id": "dd397ccd-d4f3-49a5-97af-a523f85d36ac",
+   "name": "Loop Over Items2"
+  },
+  {
+   "parameters": {
+    "channels": "envionovo",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redisTrigger",
+   "typeVersion": 1,
+   "position": [
+    -960,
+    608
+   ],
+   "id": "2adc6a99-d6ff-489d-a9eb-a31dd11f69c3",
+   "name": "iniciado por repeticao1"
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {}
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -960,
+    736
+   ],
+   "id": "bf309bc4-0c75-4ca8-834d-aec9af8912ec",
+   "name": "hora de comeco padrao1"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "key": "contemvio",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    272,
+    592
+   ],
+   "id": "6c99bdef-1eea-4a4b-be8d-73de2f861d32",
+   "name": "verifica se foi setado1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "fe9d221f-ca30-45b3-aeae-78bb71f5a89a",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    416,
+    592
+   ],
+   "id": "08cb3082-2539-4978-b265-bcff343518c3",
+   "name": "se esta vazio1"
+  },
+  {
+   "parameters": {
+    "operation": "publish",
+    "channel": "envionovo",
+    "messageData": "=envionovo"
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    608,
+    592
+   ],
+   "id": "92857a85-0704-43e9-bdef-6f8aeefcd3af",
+   "name": "reinicia fluxo1"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "contemvio",
+    "expire": true,
+    "ttl": 600
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    752,
+    592
+   ],
+   "id": "e031c038-5c32-4199-9806-1e7f2917c528",
+   "name": "seta impedimento de repeticao1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    928,
+    592
+   ],
+   "id": "3706508a-6158-48b1-aef1-b0d483ea2b9f",
+   "name": "logica de diminuicao de tempo de emvio"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1248,
+    736
+   ],
+   "id": "f1a95d82-e285-4795-8672-6a46edf9f99f",
+   "name": "mudanca de etapas"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName",
+       "value": "={{ $json.name }}"
+      },
+      {
+       "column": "token_instancia",
+       "condition": "IS NULL"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    656,
+    208
+   ],
+   "id": "c338738b-0b27-4ea0-87b8-507bf3d02c50",
+   "name": "pega numero na fila1",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d622184c-83bc-4e96-9159-0244340670b3",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    720,
+    736
+   ],
+   "id": "c3bb9a36-c9a2-4f56-9786-ab70fef83974",
+   "name": "se tem dados3"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    960,
+    192
+   ],
+   "id": "66a80954-00c7-4ae7-8975-40ae3ff5080b",
+   "name": "Loop Over Items3"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.id }}",
+      "token_instancia": "<SEGREDO_REMOVIDO>"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1072,
+    368
+   ],
+   "id": "11044dad-8afe-4207-ac3a-20d26a8917e4",
+   "name": "instancia ao numero dela"
+  },
+  {
+   "parameters": {
+    "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "bacaf4af-f9c3-4899-b1c1-ed707cc84749",
+   "name": "verifica_instancias_ativas3",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    224,
+    80
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Código para N8N - Code Node\n// Filtra apenas instâncias com connectionStatus \"open\"\n// Exclui ownerJid que contém: 984698653, 984074247, 985685106\n// e extrai os campos: name, ownerJid e token\n\nconst inputData = $input.all();\nconst result = [];\n\n// Lista de números a serem excluídos (apenas os dígitos relevantes)\nconst excludedNumbers = ['84698653', '84074247', '85685106'];\n\n// Processa cada item de entrada\ninputData.forEach(item => {\n  const data = item.json;\n  \n  // Verifica se é um array ou objeto único\n  const items = Array.isArray(data) ? data : [data];\n  \n  // Filtra e mapeia os dados\n  items.forEach(instance => {\n    // Verifica se o connectionStatus é \"open\"\n    if (instance.connectionStatus === \"open\") {\n      // Verifica se o ownerJid NÃO contém nenhum dos números excluídos\n      const shouldExclude = excludedNumbers.some(num => \n        instance.ownerJid && instance.ownerJid.includes(num)\n      );\n      \n      // Se não deve excluir, adiciona ao resultado\n      if (!shouldExclude) {\n        result.push({\n          name: instance.name,\n          ownerJid: instance.ownerJid,\n          token: instance.token\n        });\n      }\n    }\n  });\n});\n\n// Retorna os dados filtrados\nreturn result.map(item => ({ json: item }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    400,
+    80
+   ],
+   "id": "54de93ee-d964-4b03-b9c4-0eb6388800b4",
+   "name": "organiza e filtra2",
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    544,
+    80
+   ],
+   "id": "8f0e0bbe-b104-4698-93bc-3fef0ef59679",
+   "name": "Loop Over Items4"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    32,
+    80
+   ],
+   "id": "b292e86d-b040-43e2-83cc-ea310a8f78fe",
+   "name": "When clicking ‘Execute workflow’"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "29cdd409-5af0-4bcb-a484-5920b6f7f34a",
+       "leftValue": "={{$('pega numero na fila1').item.json}}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    768,
+    208
+   ],
+   "id": "376f3f59-c398-4b2e-abdd-c656929a8706",
+   "name": "If1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1136,
+    608
+   ],
+   "id": "6d1f8b62-3fa9-495e-a91a-e4c0dc29fc37",
+   "name": "instancia selecionada"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d622184c-83bc-4e96-9159-0244340670b3",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1024,
+    736
+   ],
+   "id": "12134682-89f4-447e-8cee-1b332d311e6f",
+   "name": "se tem dados6"
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome da isntacia": "={{ $('pega instancia que estao na hora1').item.json['nome da isntacia'] }}",
+      "numero da instancia": "={{ $('pega instancia que estao na hora1').item.json['numero da instancia'] }}",
+      "tokem da isntacia": "={{ $('pega instancia que estao na hora1').item.json['tokem da isntacia'] }}",
+      "hora da ultima mensagem": "={{ $now.format('X') }}"
+     },
+     "matchingColumns": [
+      "numero da instancia"
+     ],
+     "schema": [
+      {
+       "id": "nome da isntacia",
+       "displayName": "nome da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "numero da instancia",
+       "displayName": "numero da instancia",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "tokem da isntacia",
+       "displayName": "tokem da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false,
+       "removed": true
+      },
+      {
+       "id": "hora da ultima mensagem",
+       "displayName": "hora da ultima mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1792,
+    928
+   ],
+   "id": "25208c50-bdb1-4dbf-b5da-fc079e245d09",
+   "name": "bolean de erro"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "mode": "list",
+     "value": ""
+    }
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -800,
+    736
+   ],
+   "id": "1ca1d33f-f0c6-48e5-bb19-87f5ec87d046",
+   "name": "emvio do html",
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName"
+      },
+      {
+       "column": "etapa",
+       "condition": "IS NULL"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    880,
+    736
+   ],
+   "id": "60d208d1-c7d3-4cea-a0b2-b591c404f024",
+   "name": "numeros do html"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "key": "tempo de emvio",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    336,
+    736
+   ],
+   "id": "772e54c3-732b-454c-9a24-b4b031d94a0d",
+   "name": "tempo de emvio que vai procurar na busca vem do html"
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    928
+   ],
+   "id": "82b22f0b-3b95-4521-a7a0-30af8b5b3486",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    112,
+    944
+   ],
+   "id": "b1b0f72e-e292-43f8-af9c-7ef2749cb6f9",
+   "name": "Sticky Note1"
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    656,
+    944
+   ],
+   "id": "d29d7f7a-68f0-4b64-8183-83514b2e4e3c",
+   "name": "Sticky Note2"
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome da isntacia": "={{ $('pega instancia que estao na hora1').item.json['nome da isntacia'] }}",
+      "numero da instancia": "={{ $('pega instancia que estao na hora1').item.json['numero da instancia'] }}",
+      "tokem da isntacia": "={{ $('pega instancia que estao na hora1').item.json['tokem da isntacia'] }}",
+      "hora da ultima mensagem": "={{ $now.format('X') }}"
+     },
+     "matchingColumns": [
+      "numero da instancia"
+     ],
+     "schema": [
+      {
+       "id": "nome da isntacia",
+       "displayName": "nome da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "numero da instancia",
+       "displayName": "numero da instancia",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "tokem da isntacia",
+       "displayName": "tokem da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false,
+       "removed": true
+      },
+      {
+       "id": "hora da ultima mensagem",
+       "displayName": "hora da ultima mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1856,
+    720
+   ],
+   "id": "1fada40a-2ca1-4981-8066-62e6dd4bce04",
+   "name": "atualiza tempo de quem emviou "
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "raspagem_empresas_energia_solar",
+     "mode": "list",
+     "cachedResultName": "raspagem_empresas_energia_solar"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "enviado": true,
+      "data_envio": "={{ $now }}",
+      "numero": "={{ $('se tem dados1').item.json.numero }}"
+     },
+     "matchingColumns": [
+      "numero"
+     ],
+     "schema": [
+      {
+       "id": "numero",
+       "displayName": "numero",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "nome_grupo",
+       "displayName": "nome_grupo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "lista",
+       "displayName": "lista",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data_cadastro",
+       "displayName": "data_cadastro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance",
+       "displayName": "instance",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "enviado",
+       "displayName": "enviado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data_envio",
+       "displayName": "data_envio",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2080,
+    720
+   ],
+   "id": "7743700e-80b6-47e4-b756-30e7c3eab810",
+   "name": "deleta da lista",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "content": "## vem do html",
+    "height": 80,
+    "width": 150
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1744,
+    1088
+   ],
+   "id": "c2351c82-fcf1-46c8-8d3e-7ced82261ade",
+   "name": "Sticky Note3"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "ultima_interacao": "={{ $now.format('X') }}",
+      "id": "={{ $('se tem dados1').item.json.numero }}_{{ $('Loop Over Items1').item.json.name }}1",
+      "remoteJid": "={{ $('se tem dados1').item.json.numero }}@s.whatsapp.net",
+      "instanceName": "={{ $('Loop Over Items1').item.json.name }}",
+      "numero_instancia": "={{ $('Loop Over Items1').item.json.ownerJid.split(\"@\")[0] }}",
+      "token_instancia": "<SEGREDO_REMOVIDO>"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    944,
+    32
+   ],
+   "id": "5dcdab97-0deb-4371-8ab7-594b1a92030f",
+   "name": "cadastra numero para a instancia1"
+  },
+  {
+   "parameters": {
+    "operation": "upsert",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancias_para_disparo_novo2",
+     "mode": "list",
+     "cachedResultName": "instancias_para_disparo_novo2"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome da isntacia": "={{ $json.name }}",
+      "numero da instancia": "={{ $json.ownerJid }}",
+      "tokem da isntacia": "={{ $json.token }}",
+      "hora_da_ultima_mensagem": "={{ $now.format('X') }}"
+     },
+     "matchingColumns": [
+      "numero da instancia"
+     ],
+     "schema": [
+      {
+       "id": "nome da isntacia",
+       "displayName": "nome da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "numero da instancia",
+       "displayName": "numero da instancia",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "tokem da isntacia",
+       "displayName": "tokem da isntacia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": false,
+       "removed": true
+      },
+      {
+       "id": "hora_da_ultima_mensagem",
+       "displayName": "hora_da_ultima_mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": false,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    416,
+    336
+   ],
+   "id": "9b8aefec-1cd9-44b6-8882-d6cf99a9db5f",
+   "name": "cadastra intancias novas"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    272,
+    288
+   ],
+   "id": "389fe909-b994-46c0-9e82-239a96e9d079",
+   "name": "Loop Over Items"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Código para N8N - Code Node\n// Filtra apenas instâncias com connectionStatus \"open\"\n// Exclui ownerJid que contém: 984698653, 984074247, 985685106\n// e extrai os campos: name, ownerJid e token\n\nconst inputData = $input.all();\nconst result = [];\n\n// Lista de números a serem excluídos (apenas os dígitos relevantes)\nconst excludedNumbers = ['84698653', '84074247', '85685106'];\n\n// Processa cada item de entrada\ninputData.forEach(item => {\n  const data = item.json;\n  \n  // Verifica se é um array ou objeto único\n  const items = Array.isArray(data) ? data : [data];\n  \n  // Filtra e mapeia os dados\n  items.forEach(instance => {\n    // Verifica se o connectionStatus é \"open\"\n    if (instance.connectionStatus === \"open\") {\n      // Verifica se o ownerJid NÃO contém nenhum dos números excluídos\n      const shouldExclude = excludedNumbers.some(num => \n        instance.ownerJid && instance.ownerJid.includes(num)\n      );\n      \n      // Se não deve excluir, adiciona ao resultado\n      if (!shouldExclude) {\n        result.push({\n          name: instance.name,\n          ownerJid: instance.ownerJid,\n          token: instance.token\n        });\n      }\n    }\n  });\n});\n\n// Retorna os dados filtrados\nreturn result.map(item => ({ json: item }));"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    160,
+    288
+   ],
+   "id": "aa90f852-d44e-4b07-b1c2-85f04f3b24f4",
+   "name": "Code",
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "url": "https://ligawhatsapp.inovareinteligenciaartificial.com/instance/fetchInstances",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "apikey",
+       "value": "7d9f40fd0f6e1b29b2c8f2dfb2104172"
+      }
+     ]
+    },
+    "options": {
+     "redirect": {
+      "redirect": {}
+     }
+    }
+   },
+   "id": "aafc7f5a-1284-4f44-92f1-f03a6b9a4eca",
+   "name": "verifica_instancias1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    48,
+    288
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## vincula numero a instancia",
+    "height": 544,
+    "width": 1238,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    0,
+    0
+   ],
+   "id": "cfc23e7b-b30f-4195-ac19-632d07831a33",
+   "name": "Sticky Note4"
+  },
+  {
+   "parameters": {
+    "content": "##  cadastra a instancia",
+    "height": 288,
+    "width": 646,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    0,
+    240
+   ],
+   "id": "b838bee1-c003-406f-8cba-28d5d528a148",
+   "name": "Sticky Note5"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3,
+   "position": [
+    1376,
+    1264
+   ],
+   "id": "6a6bb8c5-7581-443d-8539-d34a0fb94915",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    1376,
+    1424
+   ],
+   "id": "51e8327f-82ce-43df-8ab4-96c6d74a857d",
+   "name": "Google Gemini Chat Model"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -352,
+    1088
+   ],
+   "id": "348a0c14-b9c3-45e7-a2f4-00878fa01cb4",
+   "name": "dividir ana luana"
+  },
+  {
+   "parameters": {
+    "content": "##  adicionar etiqueta no banco"
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2304,
+    768
+   ],
+   "id": "da91d221-2fc7-4a97-969d-5935f5db4a7f",
+   "name": "Sticky Note6"
+  },
+  {
+   "parameters": {
+    "path": "painel-admin-rei",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "webhook-dashboard-html",
+   "name": "Dashboard Frontend",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 1,
+   "position": [
+    200,
+    1500
+   ],
+   "webhookId": "painel-admin-rei-id"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Rei do Cartucho - Ultra Admin Dashboard</title>\n    <!-- Fontes Premium -->\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700&display=swap\" rel=\"stylesheet\">\n    <style>\n        :root {\n            --surface-master: #0a0f18; /* Deep core dark */\n            --surface-elevated: #111827; /* Cards */\n            --surface-glass: rgba(17, 24, 39, 0.7);\n            --primary-glow: #3b82f6; \n            --primary-accent: #2563eb;\n            --success-neon: #10b981;\n            --error-neon: #ef4444;\n            --warning-neon: #f59e0b;\n            --text-pure: #ffffff;\n            --text-dimmed: #9ca3af;\n            --border-subtle: #1f2937;\n            --radius-hard: 16px;\n            --transit-fast: 0.2s ease-out;\n            --transit-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);\n        }\n        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;}\n        body { background-color: var(--surface-master); color: var(--text-pure); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; }\n        .cyber-grid {\n            position: fixed; top: 0; left: 0; right: 0; bottom: 0;\n            background-image: linear-gradient(rgba(31, 41, 55, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(31, 41, 55, 0.15) 1px, transparent 1px);\n            background-size: 40px 40px; z-index: -1;\n            mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);\n            -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);\n        }\n        header { background: var(--surface-glass); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }\n        .brand h1 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(135deg, var(--text-pure), var(--primary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }\n        .hero-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 3rem; max-width: 1600px; margin: 0 auto; width: 100%; }\n        .kpi-card { background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-hard); padding: 2rem; position: relative; overflow: hidden; transition: var(--transit-smooth); }\n        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-color: var(--primary-accent); }\n        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary-glow); }\n        .kpi-card.success::before { background: var(--success-neon); }\n        .kpi-card.error::before { background: var(--error-neon); }\n        .kpi-title { color: var(--text-dimmed); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 600; }\n        .kpi-value { font-size: 3.5rem; font-weight: 800; font-family: 'Outfit', sans-serif; }\n        .form-section { padding: 0 3rem; margin: 0 auto 4rem auto; max-width: 1600px; width: 100%; }\n        .form-panel { background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-hard); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }\n        .form-group { display: flex; flex-direction: column; gap: 0.75rem; }\n        .form-group label { color: var(--text-dimmed); font-size: 0.9rem; font-weight: 600; }\n        .form-group textarea, .form-group input { background: var(--surface-master); border: 1px solid var(--border-subtle); color: var(--text-pure); padding: 1rem; border-radius: 8px; font-size: 1rem; outline: none; transition: var(--transit-fast); }\n        .form-group textarea:focus, .form-group input:focus { border-color: var(--primary-glow); }\n        .btn-core { background: var(--primary-accent); color: white; border: none; padding: 1.2rem; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: var(--transit-fast); grid-column: span 2; }\n        .btn-core:hover { background: var(--primary-glow); transform: scale(1.02); }\n    </style>\n</head>\n<body>\n    <div class=\"cyber-grid\"></div>\n    <header>\n        <div class=\"brand\"><h1>ðŸ‘‘ Rei do Cartucho | Mass Protocol</h1></div>\n        <div style=\"font-weight:600; color: var(--success-neon);\">Status: Online</div>\n    </header>\n    <main>\n        <section class=\"hero-kpis\">\n            <div class=\"kpi-card success\">\n                <div class=\"kpi-title\">Disparos ConcluÃ­dos</div>\n                <div class=\"kpi-value\" id=\"kpi-sent\">0</div>\n            </div>\n            <div class=\"kpi-card error\">\n                <div class=\"kpi-title\">Falhas de Entrega</div>\n                <div class=\"kpi-value\" id=\"kpi-failed\">0</div>\n            </div>\n        </section>\n        <section class=\"form-section\">\n            <h2 style=\"margin-bottom: 1.5rem; font-family:'Outfit'\">Orquestrador de Campanha</h2>\n            <form class=\"form-panel\" action=\"/webhook/setup-fila-rei\" method=\"POST\" target=\"_blank\">\n                <div class=\"form-group\" style=\"grid-column:span 2;\">\n                    <label>Base de NÃºmeros (Separados por vÃ­rgula)</label>\n                    <textarea name=\"numeros\" rows=\"5\" placeholder=\"5511999999999, 551155555555...\"></textarea>\n                </div>\n                <div class=\"form-group\" style=\"grid-column:span 2;\">\n                    <label>Mensagem Base</label>\n                    <textarea name=\"mensagem\" rows=\"3\" placeholder=\"OlÃ¡! Somos o Rei do Cartucho...\"></textarea>\n                </div>\n                <div class=\"form-group\">\n                    <label>Hora MÃ¡xima (Cut-off format: 23:00)</label>\n                    <input type=\"time\" name=\"horaMax\" value=\"23:00\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Tempo de Disparo (Delay Ms)</label>\n                    <input type=\"number\" name=\"delay\" value=\"12000\" min=\"5000\">\n                </div>\n                <button type=\"submit\" class=\"btn-core\">INJETAR NA FILA</button>\n            </form>\n        </section>\n    </main>\n</body>\n</html>",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html"
+       }
+      ]
+     }
+    }
+   },
+   "id": "respond-dashboard-html",
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1,
+   "position": [
+    400,
+    1500
+   ]
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "setup-fila-rei",
+    "responseMode": "lastNode",
+    "options": {}
+   },
+   "id": "webhook-setup-fila-html",
+   "name": "Recebe Dados do Painel",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 1,
+   "position": [
+    200,
+    1700
+   ],
+   "webhookId": "setup-fila-rei-id"
+  },
+  {
+   "parameters": {
+    "jsCode": "const body = $input.item.json.body;\nif(!body) return { json: { success: false } };\nlet nums = [];\nif(body.numeros) nums = body.numeros.split(',').map(n => n.trim()).filter(n => n);\n\nconst items = nums.map(n => ({\n  json: { \n    remoteJid: n,\n    mensagem: body.mensagem,\n    horaMax: body.horaMax,\n    delay: body.delay\n  }\n}));\nreturn items;"
+   },
+   "id": "setup-fila-logic",
+   "name": "Parser Fila de Contatos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    400,
+    1700
+   ]
+  }
+ ],
+ "activeVersion": null,
+ "tags": [],
+ "meta": {
+  "templateCredsSetupCompleted": true
+ },
+ "parentFolderId": null,
+ "scopes": [
+  "workflow:create",
+  "workflow:delete",
+  "workflow:execute",
+  "workflow:execute-chat",
+  "workflow:list",
+  "workflow:move",
+  "workflow:publish",
+  "workflow:read",
+  "workflow:share",
+  "workflow:unpublish",
+  "workflow:unshare",
+  "workflow:update",
+  "workflow:updateRedactionSetting"
+ ],
+ "canExecute": true
+}

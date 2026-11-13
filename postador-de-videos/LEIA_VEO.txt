@@ -1,0 +1,98 @@
+# Limpeza de Vídeos Veo (Sistema de Detecção)
+
+## Objetivo
+Limpar vídeos brutos do Veo removendo propaganda (slide WhatsApp) e marca @InovareStories, mantendo apenas o clipe original + legenda embutida.
+
+## Detector de Logo TikTok
+
+### Funcionamento
+- Template: D:\postador-de-videos\config\marca_tiktok.png (logo recortada de robos_desastrad_20260729_123452)
+- Método: OpenCV matchTemplate (TM_CCOEFF_NORMED), 1 fps, várias escalas (0.25-0.7)
+- Limiar calibrado: 0.57 (15/10/2026)
+  - Vídeos COM marca: 0.65-0.70
+  - Vídeos LIMPOS: ≤0.52 (amostra 14 vídeos)
+- Resultado: campo "nota_tiktok" no JSON (0.0-1.0)
+
+### Ação do Sistema
+- nota_tiktok >= 0.57 → marca "revisar" no JSON + aprovado: false
+- nota_tiktok < 0.57 → aprovado automaticamente (se formato conhecido)
+
+### Aprovação Manual
+Para vídeos marcados "revisar":
+1. Extrair quadros: ffmpeg -i video.mp4 -vf fps=1 quadros/q_%03d.png
+2. Inspecionar visualmente (logo pode aparecer só no ÚLTIMO quadro)
+3. Aprovar ou rejeitar: manhwareact.py rede --aprovar (ou --rejeitar)
+
+## Correlação Início/Fim (Informativo)
+
+### O Que É
+Vídeos com correlação < 0.10 geralmente são MONTAGENS (2+ cenas Veo diferentes).
+
+### Verificação 15/10/2026
+Dos 3 vídeos com correlação baixa verificados:
+- 2 eram montagens (corr 0.030 e 0.094)
+- 1 era cena única (corr 0.545)
+- NENHUM tinha logo TikTok (notas 0.42-0.46)
+
+### Decisão: Não Bloquear por Correlação
+Motivo: As montagens detectadas são LIMPAS (só marca Grok Veo, sem propaganda). Adicionar regra de correlação bloquearia vídeos limpos desnecessariamente.
+
+Sistema atual:
+- Detector logo TikTok (limiar 0.57) = filtro principal
+- Correlação baixa = informativa, não requer ação
+- Conferência visual de amostra antes de aprovar lotes
+
+## Formatos Conhecidos
+
+### Cru (720x1280, ~8s)
+- Clipe Veo puro (sem marca, legenda, propaganda, cartão)
+- Ação: apenas upscale para 1080x1920
+- Aprovado automaticamente
+
+### Cheio (1080x1920, ~15.4s)
+- Clipe 720x1280 no meio (ou 720x960 com faixas cinzas)
+- Marca @InovareStories em cima
+- Legenda embutida
+- ~7.5-13.4s: SLIDE PROPAGANDA (produto + WhatsApp)
+- Final: cartão "Siga @InovareStories"
+- Ação: recorta quadro + legenda, corta antes do slide
+
+### Outros Formatos
+- Marcados "revisar" no JSON
+- Não aprovados automaticamente (aguarda manhwareact.py rede --aprovar)
+
+## Arquivos Gerados
+
+Para cada vídeo limpo:
+- <nome>.mp4 (1080x1920, clipe limpo)
+- <nome>.json (metadados):
+  - fala: transcrição (Groq whisper-large-v3 ou whisper local)
+  - duracao: segundos do clipe limpo
+  - duracao_bruto: segundos do vídeo original
+  - layout: "cru", "cheio" ou "34"
+  - corte: onde termina o clipe (antes do slide)
+  - nota_tiktok: similaridade com logo TikTok (0.0-1.0)
+  - aprovado: true/false
+  - revisar: motivo (quando nota_tiktok >= 0.57 ou formato desconhecido)
+
+## Diretórios
+
+- Brutos: D:\hipercool-materiais\veo\veo_videos_iniciais (226 vídeos em 16/10)
+- Backup Drive: manhwa-drive:videos-backup/veo/brutos_veo_videos_iniciais
+- Limpos: D:\hipercool-materiais\veo\limpos (179 JSONs em 16/10)
+
+## Execução
+
+Manual:
+  python bin/limpar_veo.py [--max N] [--drive] [arquivo.mp4 ...]
+
+Automática:
+  Task Scheduler: 06:40 diariamente
+  - Processa locais (--max 50)
+  - Processa do Drive (15/dia)
+
+## Histórico
+
+- 15/10/2026: Detector logo TikTok calibrado (limiar 0.57)
+- 15/10/2026 23:38: Verificação correlação baixa (decisão: não bloquear)
+- 16/10/2026: 179 JSONs limpos, 157 processados pela rede, 1 rejeitado (robos_desastrad)

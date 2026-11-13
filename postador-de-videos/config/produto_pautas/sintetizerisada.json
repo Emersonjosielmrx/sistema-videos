@@ -1,0 +1,95 @@
+{
+ "pautas": [
+  {
+   "id": "fluxo_whatsapp",
+   "tipo": "como_funciona",
+   "ideia": "O cliente manda mensagem no WhatsApp e a IA agenda, confirma e reagenda sozinha sem você precisar abrir o aplicativo.",
+   "pergunta_cliente": "O cliente precisa baixar algum aplicativo ou é direto no WhatsApp?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "desistencia_cima_hora",
+   "tipo": "caso_de_uso",
+   "ideia": "Quando um cliente precisa remarcar de última hora, a própria IA reagenda sozinha direto pelo WhatsApp sem deixar buraco na agenda.",
+   "pergunta_cliente": "O que acontece quando o cliente precisa remarcar a consulta?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "esquecimento_consulta",
+   "tipo": "dor",
+   "ideia": "Profissionais perdem tempo ligando para lembrar clientes, mas a IA confirma sozinha pelo WhatsApp de forma automática.",
+   "pergunta_cliente": "O sistema manda mensagem para confirmar se o cliente realmente vai?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "atendimento_durante_servico",
+   "tipo": "caso_de_uso",
+   "ideia": "Enquanto você está com a mão na massa atendendo um cliente, a IA agenda o próximo direto no WhatsApp sem você parar o trabalho.",
+   "pergunta_cliente": "Como atendo quem me chama enquanto estou no meio de um procedimento?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "medo_configuracao_complexa",
+   "tipo": "objecao",
+   "ideia": "Donos de negócio temem sistemas complicados, mas o atendimento acontece de forma simples direto no WhatsApp com a IA agendando sozinha.",
+   "pergunta_cliente": "É muito complicado de usar no dia a dia?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "tempo_resposta_lento",
+   "tipo": "dor",
+   "ideia": "A demora para responder no WhatsApp faz o cliente procurar o concorrente, mas com agendamentos automáticos com IA a resposta é imediata.",
+   "pergunta_cliente": "Se eu demorar para responder o WhatsApp, o cliente vai para outro lugar?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "remarcacao_madrugada",
+   "tipo": "caso_de_uso",
+   "ideia": "O cliente desiste à noite e a IA reagenda sozinha direto no WhatsApp, sem você precisar intervir no dia seguinte.",
+   "pergunta_cliente": "O próprio cliente consegue mudar o horário se tiver um imprevisto à noite?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "confusao_de_horarios",
+   "tipo": "antes_depois",
+   "ideia": "Antes os horários batiam e causavam atritos; depois da IA, tudo é marcado sem conflito e sem duplo agendamento.",
+   "pergunta_cliente": "Minha agenda vai parar de ficar desorganizada e com horários batendo?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "necessidade_pessoa_fisica",
+   "tipo": "objecao",
+   "ideia": "Achar que só um humano consegue organizar horários cai por terra quando a IA agenda, confirma e reagenda sozinha no WhatsApp.",
+   "pergunta_cliente": "Uma inteligência artificial realmente dá conta de organizar toda a minha agenda?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "procedimento_reagendamento",
+   "tipo": "como_funciona",
+   "ideia": "A IA gerencia pedidos de alteração direto na conversa do WhatsApp, reagendando sem gerar conflito com outros horários.",
+   "pergunta_cliente": "Como funciona quando o cliente pede para trocar de dia?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "recuperacao_horario_vago",
+   "tipo": "dor",
+   "ideia": "Horários vagos por cancelamento repentino são resolvidos quando a IA confirma atendimentos com antecedência direto no WhatsApp.",
+   "pergunta_cliente": "Como faço para diminuir os buracos na agenda causados por faltas?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "autonomia_ia",
+   "tipo": "pergunta_frequente",
+   "ideia": "Dúvidas sobre a autonomia do sistema são sanadas sabendo que a IA agenda, confirma e reagenda sozinha.",
+   "pergunta_cliente": "Eu preciso aprovar cada agendamento ou a IA faz tudo sozinha?",
+   "criada": "2026-10-25T08:08:45"
+  },
+  {
+   "id": "sobrecarga_mensagens",
+   "tipo": "dor",
+   "ideia": "Ficar sobrecarregado respondendo dezenas de mensagens repetitivas acaba com agendamentos automáticos com IA direto no WhatsApp.",
+   "pergunta_cliente": "Como me livro de passar o dia inteiro digitando horário vago no WhatsApp?",
+   "criada": "2026-10-25T08:08:45"
+  }
+ ]
+}

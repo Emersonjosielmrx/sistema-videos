@@ -1,0 +1,700 @@
+{
+ "part": [
+  1552.0,
+  1640.0
+ ],
+ "keeps": [
+  [
+   1552.473396,
+   1555.535604
+  ],
+  [
+   1557.2493120000001,
+   1572.085104
+  ],
+  [
+   1572.4746670000002,
+   1587.750021
+  ],
+  [
+   1588.4868750000003,
+   1590.238292
+  ],
+  [
+   1590.6144370000002,
+   1593.6552709999999
+  ],
+  [
+   1594.3252080000002,
+   1597.454833
+  ],
+  [
+   1599.6699999999998,
+   1602.93
+  ],
+  [
+   1603.71,
+   1619.737458
+  ],
+  [
+   1620.0914790000002,
+   1639.999875
+  ]
+ ],
+ "duration_out": 80.29108399999882,
+ "zoom": [
+  [
+   11.753,
+   13.423,
+   1
+  ],
+  [
+   25.683,
+   29.833,
+   2
+  ],
+  [
+   29.683,
+   31.133,
+   1
+  ],
+  [
+   38.92,
+   43.07,
+   2
+  ],
+  [
+   42.92,
+   47.07,
+   1
+  ],
+  [
+   46.92,
+   51.07,
+   2
+  ],
+  [
+   50.92,
+   55.07,
+   1
+  ],
+  [
+   54.92,
+   55.075,
+   2
+  ],
+  [
+   75.871,
+   76.881,
+   1
+  ]
+ ],
+ "content_zoom": [
+  [
+   15.822895999999627,
+   16.97289599999963
+  ],
+  [
+   37.82033399999905,
+   38.97033399999905
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 15.872895999999628,
+   "text": "SEMPRE PERDE",
+   "emoji": "📉"
+  },
+  {
+   "t": 37.87033399999905,
+   "text": "NINGUÉM LUCRA",
+   "emoji": "😨"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 15.872895999999628,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Camera Shot _[Efeito sonoro](MP3_320K).mp3"
+  },
+  {
+   "t": 37.87033399999905,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Nice Shot! - Wii Sports Golf Announcer Voice.mp3"
+  },
+  {
+   "t": 77.79108399999882,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 2.8,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_watchtoend.mov",
+   "dur": 1.7,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 15.772895999999628,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 15.772895999999628,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 15.872895999999628,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f4c9_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 37.770333999999046,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 37.770333999999046,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_anger.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 37.87033399999905,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f628_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 77.79108399999882,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\phonk_drift_atmospheric_infraction_LHae9zvUfug.mp3",
+ "meta": {
+  "hook": "DAY TRADE NUNCA DÁ CERTO — A PROVA",
+  "title": "Testei day trade com IA e o resultado é assustador 😨📉 #shorts #daytrade",
+  "description": "Ele calculou a matemática do day trade com a IA e testou todas as estratégias consagradas. Resultado? Sempre perde no final!\nOs especialistas já diziam: no longo prazo ninguém lucra com day trade.\nVocê ainda acredita em day trade? Comenta! 👇\n\n#shorts #react #daytrade #trading #ia #investimento #cripto #perda #estrategia #bolsa #mercadofinanceiro #dinheiro #bot #automacao #verdade",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#daytrade",
+   "#trading",
+   "#ia",
+   "#bolsa"
+  ],
+  "tags": [
+   "react",
+   "day trade",
+   "day trade nao funciona",
+   "perda",
+   "bolsa",
+   "trading",
+   "inteligencia artificial",
+   "investimento",
+   "cripto",
+   "estrategia",
+   "mercado financeiro",
+   "dinheiro",
+   "bot",
+   "automacao",
+   "backtest",
+   "matematica"
+  ],
+  "cta": "Comenta se você já perdeu!",
+  "mood": "tense_dramatic",
+  "music": true,
+  "pinned_comment": "Você já perdeu dinheiro com day trade? Conta aí 👇",
+  "title_alternatives": [
+   "A IA provou: day trade SEMPRE perde no final 📉😱 #shorts #trading",
+   "Calculei a matemática do day trade com IA — o resultado assusta 🧮💀 #shorts #daytrade"
+  ],
+  "work": "BOT DE TRADING COM IA",
+  "channel": "assistiainvestimentos"
+ },
+ "channel": "assistiainvestimentos",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1368_56_7.png",
+  "overlap": 56,
+  "y": 608,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_22c55e_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "aposta,",
+   "s": 11.752895999999737,
+   "e": 12.432895999999573,
+   "p": 0.9,
+   "lip": 0.004675934574004344,
+   "speaker": "creator"
+  },
+  {
+   "w": "porque",
+   "s": 12.432895999999573,
+   "e": 12.632895999999619,
+   "p": 0.9,
+   "lip": 0.008826950003251458,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 12.632895999999619,
+   "e": 12.712895999999773,
+   "p": 0.9,
+   "lip": 0.010323700670154175,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 12.712895999999773,
+   "e": 12.892915999999559,
+   "p": 0.9,
+   "lip": 0.009738954440544918,
+   "speaker": "creator"
+  },
+  {
+   "w": "seguinte...",
+   "s": 12.892915999999559,
+   "e": 13.272895999999719,
+   "p": 0.9,
+   "lip": 0.007259466760281187,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 25.683332999999493,
+   "e": 26.40333299999952,
+   "p": 0.9,
+   "lip": 0.005307409367472524,
+   "speaker": "creator"
+  },
+  {
+   "w": "tem",
+   "s": 26.40333299999952,
+   "e": 26.863332999999557,
+   "p": 0.9,
+   "lip": 0.015541670659247732,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma,",
+   "s": 26.863332999999557,
+   "e": 27.183332999999493,
+   "p": 0.9,
+   "lip": 0.014799668758142275,
+   "speaker": "creator"
+  },
+  {
+   "w": "tipo",
+   "s": 27.183332999999493,
+   "e": 27.40333299999952,
+   "p": 0.9,
+   "lip": 0.014580819783182644,
+   "speaker": "creator"
+  },
+  {
+   "w": "assim,",
+   "s": 27.40333299999952,
+   "e": 27.563332999999375,
+   "p": 0.9,
+   "lip": 0.013497820866289815,
+   "speaker": "creator"
+  },
+  {
+   "w": "as",
+   "s": 27.563332999999375,
+   "e": 27.64333299999953,
+   "p": 0.9,
+   "lip": 0.0114874269590106,
+   "speaker": "creator"
+  },
+  {
+   "w": "estratégias",
+   "s": 27.64333299999953,
+   "e": 28.14333299999953,
+   "p": 0.9,
+   "lip": 0.011526597253327532,
+   "speaker": "creator"
+  },
+  {
+   "w": "consagradas",
+   "s": 28.14333299999953,
+   "e": 28.923332999999502,
+   "p": 0.9,
+   "lip": 0.009696843852425944,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 28.923332999999502,
+   "e": 29.083332999999584,
+   "p": 0.9,
+   "lip": 0.00854105770572081,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 29.083332999999584,
+   "e": 29.24333299999944,
+   "p": 0.9,
+   "lip": 0.01183335661305562,
+   "speaker": "creator"
+  },
+  {
+   "w": "pessoal",
+   "s": 29.24333299999944,
+   "e": 29.343312999999625,
+   "p": 0.9,
+   "lip": 0.011065574067759187,
+   "speaker": "creator"
+  },
+  {
+   "w": "utiliza,",
+   "s": 29.343312999999625,
+   "e": 29.843312999999625,
+   "p": 0.9,
+   "lip": 0.008766375560374,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 29.843312999999625,
+   "e": 30.00335299999938,
+   "p": 0.9,
+   "lip": 0.006585636522781593,
+   "speaker": "creator"
+  },
+  {
+   "w": "Que",
+   "s": 29.983332999999448,
+   "e": 30.983332999999448,
+   "p": 0.9,
+   "lip": 0.002171682761871835,
+   "speaker": "creator"
+  },
+  {
+   "w": "Vamos",
+   "s": 38.92039699999873,
+   "e": 39.22041699999863,
+   "p": 0.9,
+   "lip": 0.005052875519027741,
+   "speaker": "creator"
+  },
+  {
+   "w": "utilizar",
+   "s": 39.22041699999863,
+   "e": 39.78039699999863,
+   "p": 0.9,
+   "lip": 0.014797509597635133,
+   "speaker": "creator"
+  },
+  {
+   "w": "tal...",
+   "s": 39.78039699999863,
+   "e": 41.095229999998764,
+   "p": 0.9,
+   "lip": 0.006867996846871576,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 41.095229999998764,
+   "e": 41.645229999998946,
+   "p": 0.9,
+   "lip": 0.007364803696848207,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 41.645229999998946,
+   "e": 41.80522999999903,
+   "p": 0.9,
+   "lip": 0.011369498935425536,
+   "speaker": "creator"
+  },
+  {
+   "w": "colocar",
+   "s": 41.80522999999903,
+   "e": 42.085229999999,
+   "p": 0.9,
+   "lip": 0.011813807381668828,
+   "speaker": "creator"
+  },
+  {
+   "w": "tanto",
+   "s": 42.085229999999,
+   "e": 42.40522999999894,
+   "p": 0.9,
+   "lip": 0.009990507224827413,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 42.40522999999894,
+   "e": 42.56522999999879,
+   "p": 0.9,
+   "lip": 0.009928352326622591,
+   "speaker": "creator"
+  },
+  {
+   "w": "perda,",
+   "s": 42.56522999999879,
+   "e": 43.04522999999881,
+   "p": 0.9,
+   "lip": 0.009633964295922172,
+   "speaker": "creator"
+  },
+  {
+   "w": "tanto",
+   "s": 43.04522999999881,
+   "e": 43.26522999999884,
+   "p": 0.9,
+   "lip": 0.008321423176626642,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 43.26522999999884,
+   "e": 43.4452299999989,
+   "p": 0.9,
+   "lip": 0.006760958260588171,
+   "speaker": "creator"
+  },
+  {
+   "w": "lucro,",
+   "s": 43.4452299999989,
+   "e": 44.35522999999898,
+   "p": 0.9,
+   "lip": 0.00603845911480813,
+   "speaker": "creator"
+  },
+  {
+   "w": "aí",
+   "s": 44.35522999999898,
+   "e": 44.625229999998965,
+   "p": 0.9,
+   "lip": 0.009557011506515146,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 44.625229999998965,
+   "e": 45.005229999999074,
+   "p": 0.9,
+   "lip": 0.014088065882873329,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 45.005229999999074,
+   "e": 45.16522999999893,
+   "p": 0.9,
+   "lip": 0.010642095797426233,
+   "speaker": "creator"
+  },
+  {
+   "w": "sair",
+   "s": 45.16522999999893,
+   "e": 45.505229999999074,
+   "p": 0.9,
+   "lip": 0.013013310697492078,
+   "speaker": "creator"
+  },
+  {
+   "w": "ali",
+   "s": 45.505229999999074,
+   "e": 45.68522999999891,
+   "p": 0.9,
+   "lip": 0.01498936822016014,
+   "speaker": "creator"
+  },
+  {
+   "w": "com",
+   "s": 45.68522999999891,
+   "e": 45.84522999999899,
+   "p": 0.9,
+   "lip": 0.012485272302748842,
+   "speaker": "creator"
+  },
+  {
+   "w": "20%",
+   "s": 45.84522999999899,
+   "e": 46.505229999999074,
+   "p": 0.9,
+   "lip": 0.014379109484338168,
+   "speaker": "creator"
+  },
+  {
+   "w": "ou",
+   "s": 46.505229999999074,
+   "e": 47.145229999998946,
+   "p": 0.9,
+   "lip": 0.013126890309860795,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 47.145229999998946,
+   "e": 47.56520999999907,
+   "p": 0.9,
+   "lip": 0.010862705415473364,
+   "speaker": "creator"
+  },
+  {
+   "w": "tentar",
+   "s": 47.56520999999907,
+   "e": 47.80522999999903,
+   "p": 0.9,
+   "lip": 0.014091518879454458,
+   "speaker": "creator"
+  },
+  {
+   "w": "conseguir",
+   "s": 47.80522999999903,
+   "e": 48.20522999999889,
+   "p": 0.9,
+   "lip": 0.010856266212837385,
+   "speaker": "creator"
+  },
+  {
+   "w": "75%",
+   "s": 48.20522999999889,
+   "e": 48.985229999998865,
+   "p": 0.9,
+   "lip": 0.00884872871136994,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 48.985229999998865,
+   "e": 49.32522999999901,
+   "p": 0.9,
+   "lip": 0.008362951541320928,
+   "speaker": "creator"
+  },
+  {
+   "w": "lucro.",
+   "s": 49.32522999999901,
+   "e": 49.76522999999884,
+   "p": 0.9,
+   "lip": 0.008020808098297817,
+   "speaker": "creator"
+  },
+  {
+   "w": "Repetindo",
+   "s": 50.28522999999882,
+   "e": 51.66522999999893,
+   "p": 0.9,
+   "lip": 0.015561618941700472,
+   "speaker": "creator"
+  },
+  {
+   "w": "essa",
+   "s": 51.66522999999893,
+   "e": 51.92522999999892,
+   "p": 0.9,
+   "lip": 0.028557418509748068,
+   "speaker": "creator"
+  },
+  {
+   "w": "operação",
+   "s": 51.92522999999892,
+   "e": 52.625229999998965,
+   "p": 0.9,
+   "lip": 0.026398750569865584,
+   "speaker": "creator"
+  },
+  {
+   "w": "em",
+   "s": 52.625229999998965,
+   "e": 52.78522999999882,
+   "p": 0.9,
+   "lip": 0.01804093985098856,
+   "speaker": "creator"
+  },
+  {
+   "w": "cada",
+   "s": 52.78522999999882,
+   "e": 53.28522999999882,
+   "p": 0.9,
+   "lip": 0.021139984410358546,
+   "speaker": "creator"
+  },
+  {
+   "w": "vez",
+   "s": 53.28522999999882,
+   "e": 53.9452299999989,
+   "p": 0.9,
+   "lip": 0.01342402107270678,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 53.9452299999989,
+   "e": 54.56520999999907,
+   "p": 0.9,
+   "lip": 0.0032374197448165978,
+   "speaker": "creator"
+  },
+  {
+   "w": "haver",
+   "s": 54.56520999999907,
+   "e": 54.78522999999882,
+   "p": 0.9,
+   "lip": 0.001282339488126615,
+   "speaker": "creator"
+  },
+  {
+   "w": "um",
+   "s": 54.78522999999882,
+   "e": 54.92522999999892,
+   "p": 0.9,
+   "lip": 0.002508112875959328,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 75.87122899999872,
+   "e": 76.01120899999887,
+   "p": 0.9,
+   "lip": 0.001457115291509497,
+   "speaker": "creator"
+  },
+  {
+   "w": "você",
+   "s": 76.01120899999887,
+   "e": 76.27118899999891,
+   "p": 0.9,
+   "lip": 0.0022655158926937545,
+   "speaker": "creator"
+  },
+  {
+   "w": "entrar...",
+   "s": 76.27118899999891,
+   "e": 76.7312089999989,
+   "p": 0.9,
+   "lip": 0.0021361708228334417,
+   "speaker": "creator"
+  }
+ ]
+}

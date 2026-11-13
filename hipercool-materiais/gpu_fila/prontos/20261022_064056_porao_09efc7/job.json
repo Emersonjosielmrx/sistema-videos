@@ -1,0 +1,16 @@
+{
+ "tom": -10,
+ "index_rate": 0.38,
+ "protect": 0.38,
+ "volume_envelope": 0.75,
+ "f0_escala": 1.0,
+ "final_st": 0.0,
+ "formant": null,
+ "voz": "porao",
+ "origem": "teste e2e 22/10 (peça 6)",
+ "pedido_em": "2026-10-22T06:40:56",
+ "entrada_original": "D:\\hipercool-materiais\\amostras_voz\\kaggle_conversor\\teste_e2e\\narracao_base.wav",
+ "pronto_em": "2026-10-22T09:01:24",
+ "resumo": "OK (fcpe, 96 s)",
+ "notebook": "conversor-rvc-20261022-0841"
+}

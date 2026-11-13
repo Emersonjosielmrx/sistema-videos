@@ -1,0 +1,17 @@
+Sessão 20261020_1035 - NÃO FEZ NADA
+
+Motivo da chamada: parceiro-producao rc=1 às 10:21:03
+
+Análise:
+- 29 shorts produzidos hoje (madrugada funcionou bem)
+- Erro: pool de 97 proxies edge-TTS esgotado (Microsoft rate-limit)
+- Última atividade: 10:34:18 (5h atrás)
+- Sistema parado: nenhum processo rodando
+- Código edge_tts_engine.py:310-311 AINDA TEM bypass VOZ_CLONADA (correções anteriores não pegaram)
+
+Decisão: NÃO MEXER
+- Outra sessão tentou corrigir 4x hoje (falhou)
+- Rate-limit é temporário (volta sozinho)
+- Sem certeza = não mexa
+
+Estado: sistema aguardando proxies se recuperarem

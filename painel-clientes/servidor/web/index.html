@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel de Resultados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.441.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+/* visual do painel :8790 (efeitos do Hermes Call); a cor principal vira a cor do cliente aberto */
+:root {
+  --background: 0 0% 0%; --foreground: 0 0% 95%; --card: 0 0% 4%; --primary: 152 70% 45%;
+  --secondary: 220 13% 22%; --muted: 220 13% 22%; --muted-foreground: 220 10% 75%; --accent: 152 30% 24%;
+  --destructive: 0 72% 55%; --border: 220 13% 28%; --warn: 38 92% 55%; --info: 199 89% 60%; --ok: 152 70% 45%;
+  --radius: 0.625rem;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: hsl(var(--background)); color: hsl(var(--foreground));
+  font-size: 14px; line-height: 1.5; overflow: hidden; }
+::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--muted-foreground) / .3); border-radius: 10px; }
+a { color: hsl(var(--primary)); text-decoration: none; } a:hover { text-decoration: underline; }
+svg.lucide { width: 18px; height: 18px; stroke-width: 2; flex-shrink: 0; }
+.glass { background: hsl(var(--card) / .6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / .5); border-radius: 16px; }
+.anim-in { animation: fadeup .5s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / .45); } 50% { box-shadow: 0 0 0 6px hsl(var(--primary) / 0); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes shimmer { from { background-position: -400px 0; } to { background-position: 400px 0; } }
+
+.shell { display: flex; height: 100vh; overflow: hidden; }
+aside.side { width: 270px; flex-shrink: 0; padding: 16px 0 16px 16px; }
+aside.side .in { height: 100%; display: flex; flex-direction: column; padding: 12px; overflow: hidden; }
+.brand { display: flex; align-items: center; gap: 10px; padding: 8px 8px 18px; }
+.brand .logo { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0;
+  background: linear-gradient(135deg, hsl(152 70% 45% / .25), hsl(152 70% 45% / .05)); border: 1px solid hsl(152 70% 45% / .35); color: hsl(152 70% 45%); }
+.brand .logo svg.lucide { width: 24px; height: 24px; }
+.brand b { font-size: 18px; font-weight: 800; letter-spacing: -.02em; background: linear-gradient(to right, #34d399, #059669);
+  -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.1; }
+.brand small { display: block; color: hsl(var(--muted-foreground)); font-size: 11px; margin-top: 3px; }
+nav.menu { flex: 1; overflow-y: auto; min-height: 0; }
+nav.menu .grp { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: hsl(var(--muted-foreground) / .7); padding: 12px 14px 6px; font-weight: 700; }
+nav.menu button { display: flex; align-items: center; gap: 10px; width: 100%; border: 0; background: none; color: hsl(var(--muted-foreground));
+  font: 500 13.5px 'Plus Jakarta Sans', sans-serif; padding: 9px 12px; border-radius: 14px; cursor: pointer; transition: all .2s; text-align: left; }
+nav.menu button:hover { color: hsl(var(--foreground)); background: hsl(var(--muted) / .5); transform: translateX(4px); }
+nav.menu button.active { background: hsl(var(--primary) / .12); color: hsl(var(--primary)); }
+nav.menu button .cor { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
+nav.menu button span.n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.side-foot { border-top: 1px solid hsl(var(--border) / .5); padding: 12px 8px 2px; font-size: 11.5px; color: hsl(var(--muted-foreground)); display: flex; gap: 8px; align-items: center; }
+main.main { flex: 1; min-width: 0; overflow-y: auto; padding: 16px 24px 48px; }
+.topbar { display: none; }
+.sozinho aside.side { display: none; }  /* o cliente só vê o dele: sem menu */
+
+.hero { position: relative; overflow: hidden; border-radius: 18px; padding: 20px 24px; margin-bottom: 14px;
+  background: linear-gradient(135deg, hsl(var(--primary) / .16), hsl(var(--background)) 60%);
+  border: 1px solid hsl(var(--primary) / .25); box-shadow: 0 0 24px -6px hsl(var(--primary) / .35); }
+.hero .bg-ic { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); opacity: .07; animation: float 6s ease-in-out infinite; color: hsl(var(--primary)); }
+.hero .bg-ic svg.lucide { width: 120px; height: 120px; }
+.hero .row { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.hero h1 { font-size: 24px; font-weight: 800; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.hero p { color: hsl(var(--muted-foreground)); font-size: 13px; margin-top: 2px; }
+.hero .acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+.frase { font-size: 17px; font-weight: 600; margin: 4px 0 14px; line-height: 1.45; }
+.frase b { color: hsl(var(--primary)); font-size: 22px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; border: 1px solid transparent; white-space: nowrap; }
+.b-ok { background: hsl(var(--ok) / .12); color: hsl(var(--ok)); border-color: hsl(var(--ok) / .25); }
+.b-bad { background: hsl(var(--destructive) / .12); color: hsl(var(--destructive)); border-color: hsl(var(--destructive) / .25); }
+.b-warn { background: hsl(var(--warn) / .12); color: hsl(var(--warn)); border-color: hsl(var(--warn) / .25); }
+.b-mut { background: hsl(var(--muted) / .5); color: hsl(var(--muted-foreground)); border-color: hsl(var(--border) / .5); }
+.b-pri { background: hsl(var(--primary) / .12); color: hsl(var(--primary)); border-color: hsl(var(--primary) / .3); }
+.ig-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.ig-post { padding: 0; overflow: hidden; border-radius: 14px; }
+.ig-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; font-size: 13.5px; }
+.ig-midia { position: relative; background: #000; }
+.ig-trilho { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; aspect-ratio: 4 / 5; scrollbar-width: none; }
+.ig-trilho::-webkit-scrollbar { display: none; }
+.ig-trilho > * { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: center; }
+.ig-pts { position: absolute; bottom: 8px; left: 0; right: 0; display: flex; justify-content: center; gap: 4px; }
+.ig-pts i { width: 6px; height: 6px; border-radius: 50%; background: #fff6; }
+.ig-pts i.on { background: #fff; }
+.ig-leg { padding: 10px 12px; font-size: 13px; line-height: 1.45; max-height: 150px; overflow-y: auto; }
+.ig-acoes { display: flex; gap: 8px; padding: 0 12px 12px; }
+.ig-acoes .btn { flex: 1; justify-content: center; }
+h2.tit { font-size: 15px; font-weight: 700; margin: 24px 0 10px; color: hsl(var(--foreground) / .9); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+h2.tit svg.lucide { color: hsl(var(--primary)); width: 17px; height: 17px; }
+h2.tit .acoes { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+.mini { font-size: 12px; color: hsl(var(--muted-foreground)); font-weight: 500; }
+.grid { display: grid; gap: 14px; } .grid > * { min-width: 0; }
+.g-stats { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.g-2 { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+.card { padding: 18px; }
+.card h3 { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.card h3 svg.lucide { color: hsl(var(--primary)); width: 16px; height: 16px; }
+.stat { position: relative; overflow: hidden; padding: 18px; transition: all .3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; }
+.stat:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.6), 0 0 20px -6px hsl(var(--primary) / .4); }
+.stat .blob { position: absolute; top: -32px; right: -32px; width: 96px; height: 96px; border-radius: 50%; background: hsl(var(--primary) / .14); filter: blur(28px); transition: transform .3s; }
+.stat:hover .blob { transform: scale(1.5); }
+.stat .ic { position: relative; display: inline-flex; border-radius: 12px; background: hsl(var(--primary) / .15); padding: 9px; box-shadow: 0 0 20px -5px hsl(var(--primary) / .35); color: hsl(var(--primary)); width: fit-content; }
+.stat .lb { position: relative; font-size: 12.5px; color: hsl(var(--muted-foreground)); font-weight: 600; margin-top: 10px; }
+.stat .vl { position: relative; font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+.stat .sub { position: relative; font-size: 11.5px; color: hsl(var(--muted-foreground)); margin-top: 2px; }
+.stat .delta { position: relative; font-size: 12px; font-weight: 700; margin-top: 4px; }
+.delta.up { color: hsl(var(--ok)); } .delta.down { color: hsl(var(--destructive)); } .delta.eq { color: hsl(var(--muted-foreground)); }
+.stat.off { opacity: .75; } .stat.off .ic { background: hsl(var(--muted) / .5); color: hsl(var(--muted-foreground)); box-shadow: none; }
+.stat.off .vl { font-size: 15px; color: hsl(var(--muted-foreground)); font-weight: 700; }
+.stat .fonte { position: absolute; top: 14px; right: 14px; color: hsl(var(--muted-foreground) / .7); cursor: help; }
+.stat .fonte svg.lucide { width: 15px; height: 15px; }
+.canais { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 2px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; background: hsl(var(--muted) / .35); border: 1px solid hsl(var(--border) / .6); color: hsl(var(--foreground));
+  font: 600 12.5px 'Plus Jakarta Sans', sans-serif; padding: 7px 12px; border-radius: 10px; cursor: pointer; transition: all .2s; white-space: nowrap; }
+.btn:hover { border-color: hsl(var(--primary) / .5); color: hsl(var(--primary)); background: hsl(var(--primary) / .08); }
+.btn.on { background: hsl(var(--primary) / .15); color: hsl(var(--primary)); border-color: hsl(var(--primary) / .4); }
+.btn.prim { background: hsl(var(--primary)); color: #fff; border-color: hsl(var(--primary)); }
+.btn.prim:hover { filter: brightness(1.1); color: #fff; }
+.btn.peq { padding: 3px 8px; font-size: 11.5px; border-radius: 8px; }
+.btn svg.lucide { width: 15px; height: 15px; }
+input, select, textarea { background: hsl(var(--background) / .6); border: 1px solid hsl(var(--border) / .6); color: hsl(var(--foreground)); border-radius: 10px;
+  padding: 7px 10px; font: 13px 'Plus Jakarta Sans', sans-serif; outline: none; min-width: 0; }
+input:focus, select:focus, textarea:focus { border-color: hsl(var(--primary) / .7); box-shadow: 0 0 0 3px hsl(var(--primary) / .15); }
+.periodo { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.periodo label { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.tabela { padding: 0; overflow: hidden; }
+.tbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 12px 14px; border-bottom: 1px solid hsl(var(--border) / .4); }
+.tbar .busca { position: relative; flex: 1; min-width: 170px; max-width: 360px; }
+.tbar .busca svg.lucide { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: hsl(var(--muted-foreground)); }
+.tbar .busca input { width: 100%; padding-left: 32px; }
+.tbar .cont { font-size: 12px; color: hsl(var(--muted-foreground)); margin-left: auto; }
+.tw { overflow: auto; max-height: 70vh; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+thead th { position: sticky; top: 0; z-index: 2; background: hsl(0 0% 6%); text-align: left; padding: 9px 10px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: .05em; color: hsl(var(--muted-foreground)); font-weight: 700; white-space: nowrap; border-bottom: 1px solid hsl(var(--border) / .5); cursor: pointer; user-select: none; }
+thead th:hover { color: hsl(var(--foreground)); } thead th.sorted { color: hsl(var(--primary)); }
+thead th .ar { display: inline-block; width: 10px; margin-left: 3px; }
+thead tr.frow th { top: 37px; padding: 6px 6px 8px; cursor: default; text-transform: none; letter-spacing: 0; z-index: 1; }
+thead tr.frow input, thead tr.frow select { width: 100%; min-width: 70px; padding: 5px 7px; font-size: 12px; border-radius: 8px; }
+tbody td { padding: 9px 10px; border-bottom: 1px solid hsl(var(--border) / .25); vertical-align: top; }
+tbody tr:hover td { background: hsl(var(--primary) / .05); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.nw { white-space: nowrap; } td .t2 { font-size: 11.5px; color: hsl(var(--muted-foreground)); }
+td.txt { min-width: 220px; max-width: 420px; overflow-wrap: anywhere; }
+.mais { padding: 10px; text-align: center; border-top: 1px solid hsl(var(--border) / .3); }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11.5px; margin: 1px; background: hsl(var(--primary) / .14); color: hsl(var(--foreground)); white-space: nowrap; }
+.vazio { padding: 18px; text-align: center; color: hsl(var(--muted-foreground)); font-size: 13px; border: 1px dashed hsl(var(--border) / .6); border-radius: 14px; }
+.chart { width: 100%; height: auto; display: block; }
+.legenda { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: hsl(var(--muted-foreground)); margin-top: 6px; }
+.legenda i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.skel { height: 120px; border-radius: 16px; background: linear-gradient(90deg, hsl(0 0% 5%) 0, hsl(0 0% 9%) 40%, hsl(0 0% 5%) 80%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
+.err { color: hsl(var(--destructive)); font-size: 13px; padding: 10px 0; }
+.fontes { display: grid; gap: 8px; }
+.fonte-l { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; }
+.fonte-l .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; background: hsl(var(--ok)); box-shadow: 0 0 8px hsl(var(--ok) / .7); }
+.fonte-l .dot.bad { background: hsl(var(--destructive)); box-shadow: 0 0 8px hsl(var(--destructive) / .7); }
+.como { font-size: 12.5px; color: hsl(var(--muted-foreground)); line-height: 1.7; }
+.como b { color: hsl(var(--foreground)); }
+dialog { margin: auto; border: 1px solid hsl(var(--primary) / .3); background: hsl(var(--card)); color: hsl(var(--foreground)); border-radius: 16px; padding: 22px; width: min(560px, 94vw);
+  box-shadow: 0 0 30px -6px hsl(var(--primary) / .35), 0 20px 40px rgba(0,0,0,.6); max-height: 92vh; overflow: auto; }
+dialog::backdrop { background: rgba(0,0,0,.65); backdrop-filter: blur(4px); }
+dialog h4 { font-size: 16px; color: hsl(var(--primary)); margin-bottom: 6px; }
+dialog p { font-size: 12.5px; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+.form label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: hsl(var(--muted-foreground)); font-weight: 600; }
+.form label.lg { grid-column: 1 / -1; }
+.form input, .form select, .form textarea { width: 100%; color: hsl(var(--foreground)); }
+dialog .acts { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; flex-wrap: wrap; }
+#toast { position: fixed; right: 20px; bottom: 20px; z-index: 300; display: flex; flex-direction: column; gap: 8px; }
+#toast div { background: hsl(var(--card)); border: 1px solid hsl(var(--primary) / .4); border-radius: 12px; padding: 10px 14px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.5); animation: fadeup .3s both; max-width: 380px; }
+#toast div.bad { border-color: hsl(var(--destructive) / .6); }
+/* entrada (sem chave) */
+.entrada { position: fixed; inset: 0; display: none; place-items: center; padding: 16px; z-index: 200; background: radial-gradient(circle at 30% 20%, hsl(152 70% 45% / .12), transparent 60%), #000; }
+.entrada .caixa { width: min(420px, 100%); padding: 26px; }
+.entrada h1 { font-size: 22px; font-weight: 800; margin: 10px 0 4px; }
+.entrada p { color: hsl(var(--muted-foreground)); font-size: 13px; margin-bottom: 14px; }
+.entrada input { width: 100%; margin-bottom: 12px; }
+/* modo TV: gira os números em tela cheia, como o telão */
+#tv { position: fixed; inset: 0; z-index: 250; display: none; background: radial-gradient(circle at 20% 10%, hsl(var(--primary) / .22), transparent 55%), #000;
+  padding: 5vh 6vw; flex-direction: column; cursor: pointer; }
+#tv.on { display: flex; }
+#tv .topo { display: flex; justify-content: space-between; align-items: center; gap: 2vw; }
+#tv .topo b { font-size: 4.2vh; font-weight: 800; } #tv .topo span { font-size: 2.4vh; color: hsl(var(--muted-foreground)); }
+#tv .quadro { flex: 1; display: flex; flex-direction: column; justify-content: center; animation: fadeup .6s both; }
+#tv .rot { font-size: 3.6vh; color: hsl(var(--muted-foreground)); font-weight: 600; }
+#tv .gig { font-size: 22vh; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: hsl(var(--primary)); text-shadow: 0 0 40px hsl(var(--primary) / .45); }
+#tv .gig.m { font-size: 13vh; }
+#tv .dl { font-size: 3.4vh; margin-top: 1.5vh; font-weight: 700; }
+#tv .lista { display: grid; gap: 1.6vh; margin-top: 2vh; }
+#tv .lista div { font-size: 3.4vh; padding: 1.6vh 2vw; border-radius: 2vh; background: hsl(var(--card) / .7); border: 1px solid hsl(var(--primary) / .25); }
+#tv .lista small { color: hsl(var(--muted-foreground)); font-size: 2.6vh; margin-left: 1vw; }
+#tv .pontos { display: flex; gap: 1vw; justify-content: center; } #tv .pontos i { width: 1.2vh; height: 1.2vh; border-radius: 50%; background: hsl(var(--muted)); }
+#tv .pontos i.on { background: hsl(var(--primary)); box-shadow: 0 0 10px hsl(var(--primary)); }
+.so-print { display: none; }
+/* tela simples (dona 30/10): visualizações gigante, curtidas grande, contatos discreto */
+.simples-per { justify-content: center; }
+.grande, .medio { position: relative; overflow: hidden; text-align: center; padding: 30px 20px 26px; margin-bottom: 14px; }
+.grande { border: 1px solid hsl(var(--primary) / .45); box-shadow: 0 0 40px -10px hsl(var(--primary) / .55); background: linear-gradient(160deg, hsl(var(--primary) / .22), hsl(var(--card) / .6) 70%); }
+.grande .blob { position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: hsl(var(--primary) / .25); filter: blur(50px); }
+.g-rot { position: relative; display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; color: hsl(var(--muted-foreground)); }
+.g-rot svg.lucide { width: 22px; height: 22px; color: hsl(var(--primary)); }
+.g-num { position: relative; font-size: clamp(54px, 13vw, 104px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; color: hsl(var(--primary)); text-shadow: 0 0 30px hsl(var(--primary) / .45); margin: 6px 0; }
+.g-num.off { font-size: 40px; color: hsl(var(--muted-foreground)); text-shadow: none; }
+.m-num { font-size: clamp(40px, 9vw, 64px); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; margin: 4px 0; }
+.medio .g-rot svg.lucide { color: #ff4d6d; }
+.g-frase { position: relative; font-size: 16px; color: hsl(var(--foreground) / .85); max-width: 560px; margin: 0 auto; }
+.g-frase b { color: hsl(var(--primary)); }
+.cmp { position: relative; display: inline-block; margin-top: 10px; padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 700; }
+.cmp.up { background: hsl(var(--ok) / .14); color: hsl(var(--ok)); } .cmp.down { background: hsl(var(--destructive) / .14); color: hsl(var(--destructive)); }
+.cmp.eq { background: hsl(var(--muted) / .5); color: hsl(var(--muted-foreground)); }
+.discreto { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; color: hsl(var(--muted-foreground)); margin: 4px 0 2px; }
+.discreto svg.lucide { width: 15px; height: 15px; }
+.posts-s { display: grid; gap: 10px; }
+.post-s { display: flex; align-items: center; gap: 14px; padding: 14px 16px; color: hsl(var(--foreground)); transition: all .25s; }
+a.post-s:hover { text-decoration: none; transform: translateY(-2px); border-color: hsl(var(--primary) / .5); }
+.post-s .pos { font-size: 22px; font-weight: 800; color: hsl(var(--primary)); width: 34px; flex-shrink: 0; }
+.post-s .capa { width: 56px; height: 70px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: hsl(var(--muted) / .5); border: 1px solid hsl(var(--border) / .5); }
+.post-s .leg { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.post-s .nums { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; font-weight: 700; font-size: 15px; white-space: nowrap; }
+.post-s .nums span { display: inline-flex; align-items: center; gap: 5px; } .post-s .nums svg.lucide { width: 15px; height: 15px; color: hsl(var(--muted-foreground)); }
+#qr-caixa { background: #fff; border-radius: 14px; padding: 10px; width: min(300px, 80vw); margin: 6px auto 12px; }
+#qr-caixa svg { width: 100%; height: auto; display: block; }
+#status-img { display: block; width: min(260px, 70vw); margin: 4px auto 8px; border-radius: 14px; border: 1px solid hsl(var(--border) / .6); }
+
+@media (max-width: 900px) {
+  body { overflow: auto; } .shell { display: block; height: auto; overflow: visible; }
+  aside.side { position: fixed; inset: 0 auto 0 0; z-index: 60; width: 285px; padding: 10px; transform: translateX(-105%); transition: transform .3s; }
+  aside.side.open { transform: none; } aside.side .in { background: hsl(var(--card) / .97); }
+  .topbar { display: flex; position: sticky; top: 0; z-index: 40; align-items: center; gap: 10px; padding: 10px 14px; background: hsl(var(--background) / .75);
+    backdrop-filter: blur(16px); border-bottom: 1px solid hsl(var(--border) / .5); }
+  .topbar b { font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sozinho .topbar .menu-btn { display: none; }
+  main.main { padding: 12px 14px 48px; overflow: visible; }
+  .g-2 { grid-template-columns: minmax(0, 1fr); } .g-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .stat { min-height: 124px; padding: 14px; } .stat .vl { font-size: 22px; }
+  .hero { padding: 16px; } .hero h1 { font-size: 19px; } .hero .bg-ic { display: none; }
+  .frase { font-size: 15px; } .frase b { font-size: 19px; }
+  .tw { max-height: none; } .form { grid-template-columns: 1fr; }
+}
+@media print {
+  @page { margin: 12mm; }
+  :root { --background: 0 0% 100%; --foreground: 0 0% 8%; --card: 0 0% 100%; --muted-foreground: 220 9% 35%; --border: 220 13% 80%; }
+  body { overflow: visible; background: #fff; color: #111; font-size: 12px; }
+  .shell { display: block; height: auto; } aside.side, .topbar, .periodo, .acoes, .tbar, thead tr.frow, .mais, .no-print, #toast, #tv { display: none !important; }
+  main.main { overflow: visible; padding: 0; } .so-print { display: block; }
+  .glass { backdrop-filter: none; background: #fff; border: 1px solid #ddd; box-shadow: none !important; }
+  .hero { box-shadow: none; background: #fff; border: 2px solid hsl(var(--primary)); }
+  .stat, .card, tr { break-inside: avoid; } .stat:hover { transform: none; } .stat .blob { display: none; }
+  .tw { max-height: none; overflow: visible; } thead th { position: static; background: #f3f4f6; color: #333; }
+  .g-stats { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="entrada" id="entrada"><div class="glass caixa">
+  <div class="brand" style="padding:0"><div class="logo"><i data-lucide="bar-chart-3"></i></div><div><b>Painel de Resultados</b><small>clientes e produtos</small></div></div>
+  <h1>Entrar</h1><p id="entrada-msg">Digite seu usuário e senha.</p>
+  <input id="entrada-usuario" type="text" placeholder="usuário" autocomplete="username" autocapitalize="none">
+  <input id="entrada-chave" type="password" placeholder="senha" autocomplete="current-password">
+  <button class="btn prim" id="entrada-ir"><i data-lucide="log-in"></i>Entrar</button>
+</div></div>
+
+<div class="shell" id="shell" style="display:none">
+  <aside class="side" id="side"><div class="glass in">
+    <div class="brand"><div class="logo"><i data-lucide="bar-chart-3"></i></div><div><b>Painel de Resultados</b><small>clientes e produtos</small></div></div>
+    <nav class="menu" id="menu"></nav>
+    <div class="side-foot"><i data-lucide="shield-check"></i><span id="papel"></span><button class="btn peq" id="sair" style="margin-left:auto">sair</button></div>
+  </div></aside>
+  <main class="main" id="main">
+    <div class="topbar"><button class="btn menu-btn" id="abre-menu"><i data-lucide="menu"></i></button><b id="top-nome">Painel de Resultados</b></div>
+    <section id="sec-geral" style="display:none"></section>
+    <section id="sec-cliente" style="display:none"></section>
+  </main>
+</div>
+
+<div id="tv" title="clique ou Esc para sair"></div>
+
+<dialog id="dlg-camp"><h4 id="camp-tit">Nova campanha</h4>
+  <p>Os números do anúncio (investido, alcance, cliques, resultados) estão no Gerenciador de Anúncios ou em "Ver insights" do post impulsionado. Ao salvar, a campanha ganha um link rastreado próprio: use ele no anúncio para saber quantas pessoas vieram dela.</p>
+  <div class="form" id="camp-form">
+    <label class="lg">Nome da campanha<input name="nome" required placeholder="ex.: Promoção de açaí 500 ml — outubro"></label>
+    <label>Onde roda<select name="plataforma"><option>Instagram (impulsionar post)</option><option>Meta Ads (Instagram/Facebook)</option><option>Google Ads</option><option>TikTok Ads</option><option>Panfleto / outro</option></select></label>
+    <label>Objetivo<select name="objetivo"><option>Mensagens (WhatsApp/Direct)</option><option>Visitas ao perfil ou site</option><option>Pedidos / vendas</option><option>Alcance / divulgação</option></select></label>
+    <label>Início<input name="inicio" type="date" required></label>
+    <label>Fim<input name="fim" type="date"></label>
+    <label>Orçamento (R$)<input name="orcamento" inputmode="decimal" placeholder="ex.: 150,00"></label>
+    <label>Investido até agora (R$)<input name="gasto" inputmode="decimal" placeholder="ex.: 87,40"></label>
+    <label>Alcance (do anúncio)<input name="alcance" inputmode="numeric"></label>
+    <label>Impressões<input name="impressoes" inputmode="numeric"></label>
+    <label>Cliques no link<input name="cliques" inputmode="numeric"></label>
+    <label>Resultados (do anúncio)<input name="resultados" inputmode="numeric" placeholder="ex.: conversas iniciadas"></label>
+    <label class="lg">Tipo de resultado<input name="resultado_tipo" placeholder="ex.: conversas por mensagem iniciadas"></label>
+    <label class="lg" id="camp-destino-l">Link rastreado vai para<input name="destino" placeholder="https://wa.me/..."></label>
+    <label class="lg">Observações<textarea name="obs" rows="2"></textarea></label>
+  </div>
+  <div class="acts"><button class="btn" data-fecha>cancelar</button><button class="btn prim" id="camp-salvar"><i data-lucide="save"></i>salvar</button></div>
+</dialog>
+
+<dialog id="dlg-csv"><h4>Importar do Gerenciador de Anúncios</h4>
+  <p>No Gerenciador de Anúncios: Campanhas → escolha o período → Exportar → "Exportar dados da tabela" (CSV). Escolha o arquivo aqui. Campanha que já existe (mesmo nome) tem os números atualizados.</p>
+  <div class="form"><label class="lg">Arquivo CSV<input type="file" id="csv-arq" accept=".csv,text/csv"></label>
+  <label class="lg">ou cole o conteúdo<textarea id="csv-txt" rows="5" placeholder="Nome da campanha,Início dos relatórios,Término dos relatórios,Valor usado (BRL),Alcance,..."></textarea></label></div>
+  <div class="acts"><button class="btn" data-fecha>cancelar</button><button class="btn prim" id="csv-ir"><i data-lucide="upload"></i>importar</button></div>
+</dialog>
+
+<dialog id="dlg-link"><h4>Novo link rastreado</h4>
+  <p>Cada clique é contado antes de levar a pessoa para o destino. Use um link diferente em cada lugar (bio, story, anúncio, panfleto com QR code) para saber de onde vêm os contatos.</p>
+  <div class="form"><label class="lg">Nome (onde vai ser usado)<input id="link-nome" placeholder="ex.: Link da bio do Instagram"></label>
+  <label class="lg">Destino<input id="link-destino" placeholder="https://wa.me/55..."></label>
+  <label class="lg">Código (opcional, vai no fim do link)<input id="link-cod" placeholder="ex.: bio"></label></div>
+  <div class="acts"><button class="btn" data-fecha>cancelar</button><button class="btn prim" id="link-salvar"><i data-lucide="link"></i>criar link</button></div>
+</dialog>
+
+<dialog id="dlg-pessoa"><h4 id="pes-tit">Pessoa</h4><p id="pes-sub"></p>
+  <div class="form"><label class="lg">Situação<select id="pes-status"></select></label>
+  <label class="lg">Anotação<textarea id="pes-nota" rows="3" placeholder="ex.: pediu orçamento de 4 placas, retornar segunda"></textarea></label>
+  <label class="lg">É a mesma pessoa que… <span style="font-weight:500">(ex.: o @ do Instagram e o telefone do pedido) — passa a contar 1 vez só</span>
+    <select id="pes-junta"><option value="">não, é outra pessoa</option></select></label>
+  <div class="lg" id="pes-juntadas" style="grid-column:1/-1"></div></div>
+  <div class="acts"><button class="btn" data-fecha>cancelar</button><button class="btn prim" id="pes-salvar"><i data-lucide="save"></i>salvar</button></div>
+</dialog>
+<dialog id="dlg-zap"><h4>WhatsApp no status — <span id="zap-nome"></span></h4>
+  <div id="zap-corpo"></div>
+  <div class="acts"><button class="btn" data-fecha>fechar</button></div>
+</dialog>
+<dialog id="dlg-status"><h4>Imagem para o status</h4>
+  <p>Pronta no tamanho do status do WhatsApp. No celular, toque em "compartilhar" e escolha WhatsApp → Meu status.</p>
+  <img id="status-img" alt="Imagem com os resultados para o status">
+  <div class="acts"><button class="btn" data-fecha>fechar</button><button class="btn" id="status-baixar"><i data-lucide="download"></i>baixar imagem</button>
+    <button class="btn prim" id="status-compartilhar"><i data-lucide="share-2"></i>compartilhar</button></div>
+</dialog>
+<div id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const fmt = n => n == null || n === '' || isNaN(n) ? '—' : Number(n).toLocaleString('pt-BR');
+const brl = n => n == null || isNaN(n) ? '—' : 'R$ ' + Number(n).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const norm = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const urlOk = u => /^https?:\/\//i.test(u || '') ? u : null;
+const ico = n => `<i data-lucide="${n}"></i>`;
+const icones = () => { try { window.lucide && lucide.createIcons(); } catch (e) {} };
+const FUSO = 'America/Belem';
+const dataHora = iso => iso ? new Date(iso).toLocaleString('pt-BR', {timeZone: FUSO, day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'}) : '—';
+const dataCurta = iso => iso ? new Date(iso).toLocaleString('pt-BR', {timeZone: FUSO, day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'}) : '—';
+const dia = s => s ? `${s.slice(8, 10)}/${s.slice(5, 7)}/${s.slice(0, 4)}` : '—';
+const hojeISO = () => new Date().toLocaleDateString('sv-SE', {timeZone: FUSO});
+const somaDias = (s, n) => { const d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+function lerLS(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+function gravarLS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function apagarLS(k) { try { localStorage.removeItem(k); } catch (e) {} }
+function toast(msg, ruim) { const d = document.createElement('div'); d.className = ruim ? 'bad' : ''; d.textContent = msg; $('toast').appendChild(d); setTimeout(() => d.remove(), 6000); }
+
+let CHAVE = null, EU = null, ATUAL = null, DADOS = null;
+async function api(p, opt = {}) {
+  opt.headers = Object.assign({'X-Chave': CHAVE || ''}, opt.headers || {});
+  try {
+    const r = await fetch('/api/' + p, opt);
+    const j = await r.json().catch(() => ({erro: 'resposta inválida do painel'}));
+    if (r.status === 401) { entrar(null, 'Chave inválida ou expirada. Peça um link novo.'); }
+    return j;
+  } catch (e) { return {erro: 'sem conexão com o painel'}; }
+}
+const post = (p, corpo) => api(p, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(corpo)});
+
+// ───────────── cor do cliente → --primary (clareia se for escura demais no fundo preto) ─────────────
+function corHSL(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '152 70% 45%';
+  const n = parseInt(m[1], 16), r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b); let h = 0, s = 0, l = (mx + mn) / 2;
+  if (mx !== mn) { const d = mx - mn; s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn);
+    h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h /= 6; }
+  return `${Math.round(h * 360)} ${Math.round(Math.max(s, .55) * 100)}% ${Math.round(Math.min(Math.max(l, .55), .66) * 100)}%`;
+}
+function aplicarCor(hex) { document.documentElement.style.setProperty('--primary', corHSL(hex)); }
+
+// ───────────── tabela que ordena, filtra e exporta (a mesma do painel :8790) ─────────────
+class Tabela {
+  constructor(el, cols, o = {}) {
+    this.el = typeof el === 'string' ? $(el) : el; this.cols = cols; this.o = o; this.linhas = []; this.limite = o.porPagina || 100;
+    const s = (o.chave && lerLS('tab:' + o.chave)) || {};
+    this.ordem = s.ordem || o.ordem || null; this.filtros = s.filtros || {}; this.busca = s.busca || '';
+  }
+  valor(c, r) { return c.valor ? c.valor(r) : r[c.k]; }
+  salvar() { if (this.o.chave) gravarLS('tab:' + this.o.chave, {ordem: this.ordem, filtros: this.filtros, busca: this.busca}); }
+  set(linhas) { this.linhas = linhas || []; this.montar(); this.atualizar(); }
+  montar() {
+    const cats = {};
+    this.cols.filter(c => c.tipo === 'cat').forEach(c => { const cont = {}; this.linhas.forEach(r => { const v = String(this.valor(c, r) ?? '—'); cont[v] = (cont[v] || 0) + 1; });
+      cats[c.k] = Object.entries(cont).sort((a, b) => b[1] - a[1]); });
+    const ph = c => c.tipo === 'num' ? '>10, <5, 1-9' : c.tipo === 'data' ? '>2026-10-01' : 'contém...';
+    this.el.innerHTML = `<div class="tbar"><div class="busca">${ico('search')}<input type="search" placeholder="buscar em todas as colunas" value="${esc(this.busca)}"></div>
+      <button class="btn limpar">${ico('filter-x')}limpar filtros</button><button class="btn csv">${ico('download')}exportar CSV</button><span class="cont"></span></div>
+      <div class="tw"><table><thead><tr>${this.cols.map((c, i) => `<th data-i="${i}" class="${c.tipo === 'num' ? 'num' : ''}" title="clique para ordenar">${esc(c.t)}<span class="ar"></span></th>`).join('')}</tr>
+      <tr class="frow">${this.cols.map(c => `<th>${c.semFiltro ? '' : c.tipo === 'cat' ? `<select data-k="${esc(c.k)}"><option value="">todos</option>${cats[c.k].map(([v, n]) =>
+        `<option value="${esc(v)}"${this.filtros[c.k] === v ? ' selected' : ''}>${esc(v)} (${n})</option>`).join('')}</select>` :
+        `<input data-k="${esc(c.k)}" placeholder="${ph(c)}" value="${esc(this.filtros[c.k] || '')}">`}</th>`).join('')}</tr></thead><tbody></tbody></table></div><div class="mais"></div>`;
+    let t;
+    this.el.querySelector('.busca input').oninput = e => { clearTimeout(t); t = setTimeout(() => { this.busca = e.target.value; this.salvar(); this.atualizar(); }, 180); };
+    this.el.querySelectorAll('.frow input').forEach(inp => inp.oninput = () => { clearTimeout(t); t = setTimeout(() => { this.filtros[inp.dataset.k] = inp.value; this.salvar(); this.atualizar(); }, 220); });
+    this.el.querySelectorAll('.frow select').forEach(s => s.onchange = () => { this.filtros[s.dataset.k] = s.value; this.salvar(); this.atualizar(); });
+    this.el.querySelectorAll('thead tr:first-child th').forEach(th => th.onclick = () => {
+      const c = this.cols[th.dataset.i], o = this.ordem, desc = c.tipo === 'num' || c.tipo === 'data' ? -1 : 1;
+      this.ordem = !o || o.k !== c.k ? {k: c.k, d: desc} : o.d === desc ? {k: c.k, d: -o.d} : null; this.salvar(); this.atualizar(); });
+    this.el.querySelector('.limpar').onclick = () => { this.filtros = {}; this.busca = ''; this.ordem = this.o.ordem || null; this.salvar(); this.montar(); this.atualizar(); };
+    this.el.querySelector('.csv').onclick = () => this.csv();
+  }
+  passa(r) {
+    if (this.busca) { const b = norm(this.busca); if (!this.cols.some(c => norm(this.valor(c, r)).includes(b))) return false; }
+    for (const [k, f] of Object.entries(this.filtros)) {
+      if (!f) continue; const c = this.cols.find(x => x.k === k); if (!c) continue; const v = this.valor(c, r);
+      if (c.tipo === 'cat') { if (String(v ?? '—') !== f) return false; }
+      else if (c.tipo === 'num') { if (!numPassa(v, f)) return false; }
+      else if (c.tipo === 'data' && /^[<>]=?/.test(f.trim())) { const m = f.trim().match(/^([<>]=?)\s*(.*)$/), s = String(v || '');
+        if (!s || !({'>': s > m[2], '>=': s >= m[2], '<': s < m[2], '<=': s <= m[2]})[m[1]]) return false; }
+      else if (!norm(v).includes(norm(f))) return false;
+    }
+    return true;
+  }
+  filtradas() {
+    let ls = this.linhas.filter(r => this.passa(r));
+    if (this.ordem) { const c = this.cols.find(x => x.k === this.ordem.k), d = this.ordem.d;
+      if (c) ls = ls.slice().sort((a, b) => { const va = this.valor(c, a), vb = this.valor(c, b);
+        if (va == null || va === '') return 1; if (vb == null || vb === '') return -1;
+        return (typeof va === 'number' && typeof vb === 'number' ? va - vb : String(va).localeCompare(String(vb), 'pt-BR', {numeric: true})) * d; }); }
+    return ls;
+  }
+  atualizar() {
+    const ls = this.filtradas(), vis = ls.slice(0, this.limite);
+    this.el.querySelectorAll('thead tr:first-child th').forEach(th => { const c = this.cols[th.dataset.i], on = this.ordem && this.ordem.k === c.k;
+      th.classList.toggle('sorted', !!on); th.querySelector('.ar').textContent = on ? (this.ordem.d > 0 ? '▲' : '▼') : ''; });
+    this.el.querySelector('tbody').innerHTML = vis.length ? vis.map((r, i) => `<tr data-i="${this.linhas.indexOf(r)}">${this.cols.map(c => `<td class="${c.tipo === 'num' ? 'num' : ''} ${c.cls || ''}">${c.html ? c.html(r) : esc(this.valor(c, r) ?? '—')}</td>`).join('')}</tr>`).join('')
+      : `<tr><td colspan="${this.cols.length}"><div class="vazio">${this.linhas.length ? 'nada com esses filtros' : esc(this.o.vazio || 'nada aqui ainda')}</div></td></tr>`;
+    this.el.querySelector('.cont').textContent = `${fmt(ls.length)} de ${fmt(this.linhas.length)}`;
+    const mais = this.el.querySelector('.mais');
+    mais.innerHTML = ls.length > vis.length ? `<button class="btn">mostrar mais (faltam ${fmt(ls.length - vis.length)})</button>` : '';
+    mais.style.display = mais.innerHTML ? '' : 'none';
+    if (mais.firstChild) mais.firstChild.onclick = () => { this.limite += this.o.porPagina || 100; this.atualizar(); };
+    if (this.o.aoClicar) this.el.querySelectorAll('tbody [data-acao]').forEach(b => b.onclick = ev => { ev.stopPropagation();
+      this.o.aoClicar(b.dataset.acao, this.linhas[+b.closest('tr').dataset.i], b); });
+    icones();
+  }
+  csv() {
+    const ls = this.filtradas(), q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const txt = [this.cols.filter(c => !c.semCsv).map(c => q(c.t)).join(';'), ...ls.map(r => this.cols.filter(c => !c.semCsv).map(c => q(c.csv ? c.csv(r) : this.valor(c, r))).join(';'))].join('\r\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + txt], {type: 'text/csv;charset=utf-8'}));
+    a.download = `${this.o.chave || 'tabela'}_${hojeISO()}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+}
+function numPassa(v, f) {
+  if (v == null || v === '' || isNaN(v)) return false; v = Number(v); const s = f.replace(/\s/g, '').replace(',', '.');
+  let m = s.match(/^(-?\d+(?:\.\d+)?)-(-?\d+(?:\.\d+)?)$/); if (m) return v >= +m[1] && v <= +m[2];
+  m = s.match(/^(>=|<=|>|<|=)?(-?\d+(?:\.\d+)?)$/); if (!m) return true;
+  return ({'>': v > +m[2], '>=': v >= +m[2], '<': v < +m[2], '<=': v <= +m[2], '=': v === +m[2]})[m[1] || '='];
+}
+const TAB = {};
+function tab(id, cols, o) { const el = $(id); if (!TAB[id] || TAB[id].el !== el) TAB[id] = new Tabela(el, cols, {chave: id, ...o}); return TAB[id]; }
+
+// ───────────── gráficos (SVG simples) ─────────────
+// desenhados na largura real do quadro (W = largura do elemento): texto não estica e as datas não se embolam
+function barras(dias, series, cores, W = 600) {
+  const tot = dias.map(d => Object.values(series).reduce((a, s) => a + (s[d] || 0), 0));
+  if (!dias.length || !tot.some(Boolean)) return '<div class="vazio">nenhum contato no período</div>';
+  const H = 180, pad = 18, passo = (W - pad) / dias.length, bw = Math.max(3, Math.min(26, passo - 4)), mx = Math.max(1, ...tot);
+  const cada = Math.max(1, Math.ceil(dias.length / Math.max(2, Math.floor(W / 48))));
+  let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}">`;
+  dias.forEach((d, i) => {
+    let y = H - pad - 4; const x = pad / 2 + i * passo + (passo - bw) / 2;
+    Object.entries(series).forEach(([nome, s]) => { const v = s[d] || 0; if (!v) return; const hh = v / mx * (H - pad - 26);
+      y -= hh; svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${hh.toFixed(1)}" rx="${Math.min(4, bw / 2)}" fill="${cores[nome] || 'hsl(var(--primary))'}"><title>${dia(d)} · ${esc(nome)}: ${fmt(v)}</title></rect>`; });
+    if (tot[i] && passo >= 16) svg += `<text x="${(x + bw / 2).toFixed(1)}" y="${(y - 4).toFixed(1)}" text-anchor="middle" font-size="11" fill="hsl(0 0% 80%)">${fmt(tot[i])}</text>`;
+    if (i % cada === 0) svg += `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 3}" text-anchor="middle" font-size="10" fill="hsl(220 10% 60%)">${d.slice(8, 10)}/${d.slice(5, 7)}</text>`;
+  });
+  return `${svg}</svg><div class="legenda">${Object.keys(series).filter(n => Object.keys(series[n]).length).map(n => `<span><i style="background:${cores[n] || 'hsl(var(--primary))'}"></i>${esc(n)}</span>`).join('')}</div>`;
+}
+function linhas(serie, campos, W = 600) {
+  // serie: [{dia, campo: n|null}], campos: [[campo, nome, cor]]; dia sem número fica sem ponto (não vira zero)
+  const ativos = campos.filter(([k]) => serie.some(r => r[k] != null && r[k] !== 0));
+  if (!ativos.length) return '<div class="vazio">sem números diários no período</div>';
+  const H = 180, pad = 20, mx = Math.max(1, ...ativos.flatMap(([k]) => serie.map(r => r[k] || 0)));
+  const X = i => pad + i * ((W - 2 * pad) / Math.max(1, serie.length - 1)), Y = v => H - pad - 4 - v / mx * (H - 2 * pad - 10);
+  const cada = Math.max(1, Math.ceil(serie.length / Math.max(2, Math.floor(W / 48))));
+  let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}">`;
+  for (const [k, nome, cor] of ativos) {
+    const pts = serie.map((r, i) => r[k] == null ? null : [X(i), Y(r[k]), r]).filter(Boolean);
+    svg += `<polyline fill="none" stroke="${cor}" stroke-width="2.4" stroke-linejoin="round" points="${pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" style="filter:drop-shadow(0 0 4px ${cor})"/>`;
+    pts.forEach(([x, y, r]) => svg += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${serie.length > 60 ? 1.6 : 3}" fill="${cor}"><title>${dia(r.dia)} · ${esc(nome)}: ${fmt(r[k])}</title></circle>`);
+  }
+  serie.forEach((r, i) => { if (i % cada === 0) svg += `<text x="${X(i).toFixed(1)}" y="${H - 3}" text-anchor="middle" font-size="10" fill="hsl(220 10% 60%)">${r.dia.slice(8, 10)}/${r.dia.slice(5, 7)}</text>`; });
+  return `${svg}</svg><div class="legenda">${ativos.map(([, n, c]) => `<span><i style="background:${c}"></i>${esc(n)}</span>`).join('')}</div>`;
+}
+
+// ───────────── entrada e menu ─────────────
+function entrar(chave, msg) {
+  if (!chave) { apagarLS('pc_chave'); CHAVE = null; $('shell').style.display = 'none'; $('entrada').style.display = 'grid';
+    if (msg) $('entrada-msg').textContent = msg; icones(); return; }
+  CHAVE = chave; gravarLS('pc_chave', chave); iniciar();
+}
+// 30/10: usuário + senha (POST /api/entrar devolve a chave). Sem usuário, o campo vale como chave (links antigos).
+$('entrada-ir').onclick = async () => {
+  const u = $('entrada-usuario').value.trim(), s = $('entrada-chave').value.trim();
+  if (!s) return;
+  if (!u) return entrar(s);
+  try {
+    const r = await fetch('/api/entrar', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                          body: JSON.stringify({usuario: u, senha: s})});
+    const d = await r.json();
+    if (r.ok && d.chave) return entrar(d.chave);
+    $('entrada-msg').textContent = d.erro || 'Usuário ou senha incorretos.';
+  } catch (e) { $('entrada-msg').textContent = 'Sem conexão. Tente de novo.'; }
+};
+$('entrada-chave').onkeydown = e => { if (e.key === 'Enter') $('entrada-ir').click(); };
+$('entrada-usuario').onkeydown = e => { if (e.key === 'Enter') $('entrada-chave').focus(); };
+$('sair').onclick = () => entrar(null, 'Você saiu. Digite seu usuário e senha para entrar de novo.');
+$('abre-menu').onclick = () => $('side').classList.toggle('open');
+document.querySelectorAll('[data-fecha]').forEach(b => b.onclick = () => b.closest('dialog').close());
+
+async function iniciar() {
+  const eu = await api('eu');
+  if (!eu || eu.erro || !eu.clientes) { if (CHAVE) entrar(null, eu && eu.erro ? eu.erro : 'Não deu para entrar.'); return; }
+  EU = eu; $('entrada').style.display = 'none'; $('shell').style.display = '';
+  document.body.classList.toggle('sozinho', eu.papel !== 'admin' && eu.clientes.length === 1);
+  $('papel').textContent = eu.papel === 'admin' ? 'administração' : 'acesso do cliente';
+  const grupo = (t, ls) => ls.length ? `<div class="grp">${t}</div>` + ls.map(c => `<button data-id="${esc(c.id)}"><span class="cor" style="background:${esc(c.cor || '#10b981')};color:${esc(c.cor || '#10b981')}"></span><span class="n">${esc(c.nome)}</span></button>`).join('') : '';
+  $('menu').innerHTML = (eu.papel === 'admin' ? `<button data-id="geral">${ico('layout-dashboard')}<span class="n">Visão geral</span></button>` : '') +
+    grupo('Clientes', eu.clientes.filter(c => c.tipo !== 'produto')) + grupo('Produtos', eu.clientes.filter(c => c.tipo === 'produto'));
+  $('menu').querySelectorAll('button').forEach(b => b.onclick = () => { abrir(b.dataset.id); $('side').classList.remove('open'); });
+  icones();
+  const h = new URLSearchParams(location.hash.slice(1)).get('c');
+  abrir(h && (h === 'geral' || eu.clientes.some(c => c.id === h)) ? h : (eu.papel === 'admin' ? 'geral' : eu.clientes[0].id));
+}
+function abrir(id) {
+  ATUAL = id; history.replaceState(null, '', '#c=' + encodeURIComponent(id));
+  document.querySelectorAll('#menu button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  $('sec-geral').style.display = id === 'geral' ? '' : 'none'; $('sec-cliente').style.display = id === 'geral' ? 'none' : '';
+  $('main').scrollTop = 0; window.scrollTo(0, 0);
+  if (id === 'geral') { aplicarCor('#10b981'); $('top-nome').textContent = 'Visão geral'; carregarGeral(); }
+  else { const c = EU.clientes.find(x => x.id === id); aplicarCor(c && c.cor); $('top-nome').textContent = c ? c.nome : ''; carregarCliente(); }
+}
+
+// ───────────── período ─────────────
+const PERIODOS = [['7', '7 dias'], ['30', '30 dias'], ['mes', 'Este mês'], ['mespassado', 'Mês passado'], ['90', '90 dias']];
+// 12/11 (dona): "desde que se tornou cliente" — usa o cliente_desde do cliente aberto (na visão geral: o mais antigo)
+function clienteDesde() {
+  const cs = (EU && EU.clientes) || [];
+  const c = ATUAL ? cs.find(x => x.id === ATUAL) : null;
+  if (c) return c.cliente_desde || null;
+  const ds = cs.map(x => x.cliente_desde).filter(Boolean).sort();
+  return ds[0] || null;
+}
+function periodoAtual() {
+  const p = lerLS('pc_periodo') || {q: '30'}, h = hojeISO();
+  if (p.q === 'desde') { const d = clienteDesde(); if (d) return {de: d, ate: h, q: 'desde'}; }
+  if (p.q === 'mes') return {de: h.slice(0, 8) + '01', ate: h, q: p.q};
+  if (p.q === 'mespassado') { const ini = somaDias(h.slice(0, 8) + '01', -1).slice(0, 8) + '01'; return {de: ini, ate: somaDias(h.slice(0, 8) + '01', -1), q: p.q}; }
+  if (p.q === 'livre' && p.de && p.ate) return {de: p.de, ate: p.ate, q: 'livre'};
+  const n = +p.q || 30; return {de: somaDias(h, -(n - 1)), ate: h, q: String(n)};
+}
+function barraPeriodo(alvo, recarregar) {
+  const p = periodoAtual(), desde = clienteDesde();
+  const lista = desde ? [...PERIODOS, ['desde', `Desde que é cliente (${desde.slice(8, 10)}/${desde.slice(5, 7)})`]] : PERIODOS;
+  $(alvo).innerHTML = lista.map(([q, n]) => `<button class="btn ${p.q === q ? 'on' : ''}" data-q="${q}">${n}</button>`).join('') +
+    `<label>de</label><input type="date" class="de" value="${p.de}"><label>até</label><input type="date" class="ate" value="${p.ate}"><button class="btn ir">${ico('filter')}aplicar</button>`;
+  $(alvo).querySelectorAll('[data-q]').forEach(b => b.onclick = () => { gravarLS('pc_periodo', {q: b.dataset.q}); recarregar(); });
+  $(alvo).querySelector('.ir').onclick = () => { const de = $(alvo).querySelector('.de').value, ate = $(alvo).querySelector('.ate').value;
+    if (de && ate) { gravarLS('pc_periodo', {q: 'livre', de, ate}); recarregar(); } };
+}
+
+// ───────────── visão geral (administração) ─────────────
+async function carregarGeral() {
+  const sec = $('sec-geral'), p = periodoAtual();
+  sec.innerHTML = `<div class="hero anim-in"><div class="bg-ic">${ico('layout-dashboard')}</div><div class="row"><div><h1>${ico('layout-dashboard')}Visão geral</h1>
+    <p>Todos os clientes e produtos de ${dia(p.de)} a ${dia(p.ate)} — clique numa linha para abrir</p></div></div></div>
+    <div class="periodo" id="per-geral"></div><div class="grid g-stats" id="geral-cards"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+    <h2 class="tit">${ico('table')}Clientes e produtos</h2><div class="glass tabela" id="t-geral"></div>`;
+  barraPeriodo('per-geral', carregarGeral); icones();
+  const d = await api(`geral?de=${p.de}&ate=${p.ate}`);
+  if (d.erro) { $('geral-cards').innerHTML = `<div class="err">${esc(d.erro)}</div>`; return; }
+  const soma = k => d.linhas.reduce((a, l) => a + (l[k] || 0), 0);
+  const cl = d.linhas.filter(l => l.tipo !== 'produto'), pr = d.linhas.filter(l => l.tipo === 'produto');
+  $('geral-cards').innerHTML = statSimples('users', 'Pessoas que entraram em contato', fmt(soma('pessoas')), `${fmt(cl.reduce((a, l) => a + (l.pessoas || 0), 0))} nos clientes · ${fmt(pr.reduce((a, l) => a + (l.pessoas || 0), 0))} nos produtos`) +
+    statSimples('mouse-pointer-click', 'Toques no link da bio', fmt(soma('toques_bio')), 'contas com Instagram conectado') +
+    statSimples('link', 'Cliques nos links rastreados', fmt(soma('cliques')), 'todas as campanhas') +
+    statSimples('globe', 'Visitas aos sites', fmt(soma('visitas')), 'site do cliente e páginas dos produtos') +
+    statSimples('shopping-bag', 'Pedidos pelo site', fmt(soma('pedidos')), brl(soma('faturamento'))) +
+    statSimples('alert-triangle', 'Fontes com problema', fmt(d.linhas.filter(l => l.fontes_erro.length).length), 'ver a última coluna', d.linhas.some(l => l.fontes_erro.length) ? 'warn' : '');
+  tab('t-geral', [
+    {k: 'nome', t: 'cliente / produto', html: r => `<b style="color:${esc(r.cor || '')}">●</b> <b>${esc(r.nome)}</b>`},
+    {k: 'tipo', t: 'tipo', tipo: 'cat'},
+    {k: 'pessoas', t: 'pessoas em contato', tipo: 'num', html: r => fmtN(r.pessoas)},
+    {k: 'toques_bio', t: 'toques na bio', tipo: 'num', html: r => fmtN(r.toques_bio)},
+    {k: 'cliques', t: 'cliques rastreados', tipo: 'num', html: r => fmtN(r.cliques)},
+    {k: 'visitas', t: 'visitas ao site', tipo: 'num', html: r => fmtN(r.visitas)},
+    {k: 'pedidos', t: 'pedidos', tipo: 'num', html: r => fmtN(r.pedidos)},
+    {k: 'faturamento', t: 'vendido', tipo: 'num', html: r => r.faturamento == null ? '<span class="t2">—</span>' : brl(r.faturamento)},
+    {k: 'alcance', t: 'alcance IG', tipo: 'num', html: r => fmtN(r.alcance)},
+    {k: 'seguidores', t: 'seguidores', tipo: 'num', html: r => fmtN(r.seguidores)},
+    {k: 'gasto', t: 'investido', tipo: 'num', html: r => r.gasto == null ? '<span class="t2">—</span>' : brl(r.gasto)},
+    {k: 'atualizado_em', t: 'atualizado', tipo: 'data', html: r => esc(dataCurta(r.atualizado_em)), cls: 'nw'},
+    {k: 'fontes_erro', t: 'o que falta conectar', valor: r => r.fontes_erro.join(' · '), html: r => r.fontes_erro.length ? r.fontes_erro.map(f => `<div class="t2" style="color:hsl(var(--warn))">${esc(f)}</div>`).join('') : '<span class="badge b-ok">tudo ok</span>', cls: 'txt'},
+    {k: 'abrir', t: '', semFiltro: true, semCsv: true, html: r => `<button class="btn peq" data-acao="abrir">${ico('arrow-right')}abrir</button>`},
+  ], {ordem: {k: 'pessoas', d: -1}, aoClicar: (a, r) => abrir(r.id)}).set(d.linhas);
+}
+const fmtN = v => v == null ? '<span class="t2">—</span>' : fmt(v);
+const pessoasTxt = n => `${fmt(n)} ${n === 1 ? 'pessoa' : 'pessoas'}`;
+function statSimples(icone, rot, valor, sub, cls = '') {
+  return `<div class="glass stat anim-in ${cls}"><div class="blob"></div><div class="ic">${ico(icone)}</div><div class="lb">${esc(rot)}</div><div><div class="vl">${valor}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></div>`;
+}
+
+// ───────────── um cliente ─────────────
+const ICONE = {pessoas: 'users', toques_bio: 'mouse-pointer-click', cliques: 'link', visitas: 'globe', pedidos: 'shopping-bag', faturamento: 'wallet',
+  alcance: 'radio-tower', visualizacoes: 'eye', curtidas: 'heart', visitas_perfil: 'user-search', seguidores: 'user-plus', gasto: 'megaphone', custo_contato: 'badge-dollar-sign'};
+const IG_CARDS = ['toques_bio', 'alcance', 'visualizacoes', 'curtidas', 'visitas_perfil', 'seguidores'];
+const CORES_CANAL = {'Direct do Instagram': '#e879f9', 'Comentário no Instagram': '#a78bfa', 'WhatsApp da loja': '#22c55e', 'Pedido no site': '#f59e0b'};
+
+function delta(c) {
+  if (c.valor == null || c.anterior == null || c.id === 'seguidores') return '';
+  const dif = c.valor - c.anterior; if (!c.anterior && !dif) return `<div class="delta eq">igual ao período anterior</div>`;
+  const pct = c.anterior ? Math.round(dif / c.anterior * 100) : null, ruim = c.id === 'custo_contato' ? dif > 0 : dif < 0;
+  const txt = (c.fmt === 'brl' ? brl(Math.abs(dif)) : fmt(Math.abs(dif))) + (pct != null ? ` (${Math.abs(pct)}%)` : '');
+  return `<div class="delta ${!dif ? 'eq' : ruim ? 'down' : 'up'}">${dif > 0 ? '▲ +' : dif < 0 ? '▼ −' : ''}${!dif ? 'igual ao período anterior' : txt + ' vs. antes'}</div>`;
+}
+function cardHTML(c) {
+  const fonte = `<span class="fonte" title="${esc('De onde vem: ' + c.fonte)}">${ico('info')}</span>`;
+  if (!c.conectado) return `<div class="glass stat off anim-in">${fonte}<div class="ic">${ico(ICONE[c.id] || 'circle')}</div><div class="lb">${esc(c.titulo)}</div><div><div class="vl">não conectado</div><div class="sub">${esc(c.motivo || '')}</div></div></div>`;
+  // sem número no período (ex.: antes de a coleta começar) é "—", não 0: zero seria um número que ninguém mediu
+  const v = c.valor == null ? '—' : c.fmt === 'brl' ? brl(c.valor) : fmt(c.valor);
+  return `<div class="glass stat anim-in">${fonte}<div class="blob"></div><div class="ic">${ico(ICONE[c.id] || 'circle')}</div><div class="lb">${esc(c.titulo)}</div>
+    <div><div class="vl">${v}</div>${c.sub ? `<div class="sub">${esc(c.sub)}</div>` : ''}${delta(c)}</div></div>`;
+}
+
+// ───────────── publicações para aprovação (dona 05/11: "o mais parecido com como vai ficar no Instagram") ─────────────
+async function arqURL(cli, id, nome) {
+  try {
+    const r = await fetch(`/api/aprovacao/arquivo?cliente=${encodeURIComponent(cli)}&id=${encodeURIComponent(id)}&nome=${encodeURIComponent(nome)}`,
+      {headers: {'X-Chave': CHAVE || ''}});
+    return r.ok ? URL.createObjectURL(await r.blob()) : '';
+  } catch (e) { return ''; }
+}
+async function carregarAprov(cli, adm) {
+  const box = $('aprov'); if (!box) return;
+  const j = await api('aprovacao?cliente=' + encodeURIComponent(cli));
+  const itens = (j.itens || []).filter(i => i.status !== 'postado' || adm);
+  if (!itens.length) { box.innerHTML = ''; return; }
+  const ROT = {pendente: ['b-pri', 'esperando aprovação'], aprovado: ['b-ok', 'aprovado'], recusado: ['b-bad', 'recusado'], postado: ['b-ok', 'postado']};
+  const conta = (EU.clientes.find(x => x.id === cli)?.instagram || [''])[0];
+  box.innerHTML = `<h2 class="tit">${ico('check-square')}Publicações para aprovar <span class="mini">${itens.filter(i => i.status === 'pendente').length} esperando · veja como vai ficar no Instagram</span></h2>
+    <div class="ig-grade">${itens.map(i => `<div class="glass ig-post" data-id="${esc(i.id)}">
+      <div class="ig-top"><b>@${esc(conta)}</b><span class="badge ${ROT[i.status]?.[0] || ''}">${ROT[i.status]?.[1] || esc(i.status)}</span></div>
+      <div class="ig-midia"><div class="ig-trilho">${i.arquivos.map(() => '<div class="skel" style="height:100%"></div>').join('')}</div>
+        ${i.arquivos.length > 1 ? `<div class="ig-pts">${i.arquivos.map((_, k) => `<i class="${k ? '' : 'on'}"></i>`).join('')}</div>` : ''}</div>
+      <div class="ig-leg"><b>${esc(conta)}</b> ${esc(i.legenda).replace(/\n/g, '<br>')}</div>
+      ${i.obs ? `<div class="mini" style="margin:6px 12px">Obs.: ${esc(i.obs)}</div>` : ''}
+      ${i.link ? `<div style="margin:6px 12px"><a href="${esc(i.link)}" target="_blank" rel="noopener">ver no Instagram</a></div>` : ''}
+      ${i.status === 'pendente' || (adm && i.status !== 'postado') ? `<div class="ig-acoes no-print">
+        <button class="btn prim" data-a="aprovar">${ico('check')}Aprovar</button><button class="btn" data-a="recusar">${ico('x')}Pedir mudança</button></div>` : ''}
+    </div>`).join('')}</div>`;
+  box.querySelectorAll('.ig-post').forEach(async el => {
+    const i = itens.find(x => x.id === el.dataset.id), tr = el.querySelector('.ig-trilho');
+    const urls = await Promise.all(i.arquivos.map(n => arqURL(cli, i.id, n)));
+    tr.innerHTML = urls.map((u, k) => /\.mp4$/i.test(i.arquivos[k]) ? `<video src="${u}" controls playsinline muted loop></video>` : `<img src="${u}" alt="">`).join('');
+    const pts = el.querySelectorAll('.ig-pts i');
+    tr.onscroll = () => { const k = Math.round(tr.scrollLeft / tr.clientWidth); pts.forEach((p, n) => p.classList.toggle('on', n === k)); };
+    el.querySelectorAll('[data-a]').forEach(b => b.onclick = async () => {
+      const obs = b.dataset.a === 'recusar' ? (prompt('O que você quer mudar nesta publicação?') || '') : '';
+      if (b.dataset.a === 'recusar' && !obs) return;
+      const r = await post('aprovacao/decidir', {cliente: cli, id: i.id, acao: b.dataset.a, obs});
+      if (r.erro) alert(r.erro); else carregarAprov(cli, adm);
+    });
+  });
+}
+
+async function carregarCliente() {
+  const sec = $('sec-cliente'), c = EU.clientes.find(x => x.id === ATUAL), p = periodoAtual(), adm = EU.papel === 'admin';
+  sec.innerHTML = `<div class="hero anim-in"><div class="bg-ic">${ico(c.tipo === 'produto' ? 'package' : 'store')}</div><div class="row"><div>
+      <h1>${esc(c.nome)} <span class="badge b-pri">${c.tipo === 'produto' ? 'produto' : 'cliente'}</span></h1>
+      <p id="cli-sub">${esc([c.cidade, (c.instagram || []).map(x => '@' + x).join(', ')].filter(Boolean).join(' · '))}</p></div>
+      <div class="acoes no-print"><button class="btn prim" id="b-status">${ico('image')}imagem para o status</button>
+      <button class="btn" id="b-zap">${ico('message-circle')}<span id="b-zap-t">conectar WhatsApp</span></button>
+      <button class="btn" id="b-tv">${ico('tv')}modo TV</button><button class="btn" id="b-print">${ico('printer')}PDF</button>
+      ${adm && c.link_cliente ? `<button class="btn" id="b-link-cli">${ico('share-2')}link do cliente</button>` : ''}</div></div></div>
+    <div class="so-print" style="margin-bottom:8px;font-size:12px;color:#555">Relatório gerado em ${esc(dataHora(new Date().toISOString()))}</div>
+    <div class="periodo simples-per no-print" id="per-simples"></div>
+    <div id="simples"><div class="skel" style="height:220px"></div></div>
+    ${(c.historico || []).length ? `<h2 class="tit">${ico('history')}O que fizemos no seu Instagram <span class="mini">cada ação com data e hora</span></h2>
+    <div class="glass tabela"><table><thead><tr><th>Quando</th><th>O que foi feito</th><th></th></tr></thead><tbody>
+    ${[...c.historico].reverse().map(h => `<tr><td style="white-space:nowrap">${esc(dataHora(h.em))}</td><td>${esc(h.o_que)}</td>
+      <td>${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener">abrir</a>` : ''}</td></tr>`).join('')}</tbody></table></div>` : ''}
+    <div id="aprov"></div>
+    <div class="no-print" style="text-align:center;margin:22px 0 6px"><button class="btn" id="b-det">${ico('list')}<span id="b-det-t">ver todos os detalhes</span></button></div>
+    <div id="detalhes" style="display:none">
+    <div class="periodo" id="per-cli"></div>
+    <div id="frase" class="frase"></div>
+    <div class="grid g-stats" id="cards"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+    <div class="canais" id="canais"></div>
+    <div class="grid g-2" style="margin-top:14px">
+      <div class="glass card"><h3>${ico('bar-chart-3')}Pessoas que entraram em contato, por dia</h3><div id="g-contatos"><div class="skel"></div></div></div>
+      <div class="glass card"><h3>${ico('activity')}Instagram, site e links, por dia</h3><div id="g-dia"><div class="skel"></div></div></div>
+    </div>
+    <h2 class="tit">${ico('users')}Pessoas que entraram em contato <span class="mini" id="pes-mini"></span></h2><div class="glass tabela" id="t-pessoas"></div>
+    <h2 class="tit">${ico('megaphone')}Campanhas e impulsionamentos <span class="mini">contatos durante a campanha comparados com o mesmo número de dias antes dela</span>
+      ${adm ? `<span class="acoes no-print"><button class="btn" id="b-csv">${ico('upload')}importar CSV do Gerenciador</button><button class="btn prim" id="b-camp">${ico('plus')}nova campanha</button></span>` : ''}</h2>
+    <div class="glass tabela" id="t-camp"></div>
+    <h2 class="tit">${ico('link')}Links rastreados <span class="mini">cada clique é contado antes de abrir o WhatsApp/site</span>
+      ${adm ? `<span class="acoes no-print"><button class="btn" id="b-link">${ico('plus')}novo link</button></span>` : ''}</h2>
+    <div class="glass tabela" id="t-links"></div>
+    <div id="bloco-pedidos"></div><div id="bloco-posts"></div>
+    <h2 class="tit">${ico('database')}De onde vêm os números</h2>
+    <div class="grid g-2"><div class="glass card"><div class="fontes" id="fontes"></div></div>
+      <div class="glass card como"><b>Pessoas que entraram em contato</b>: cada pessoa conta uma vez no período, mesmo que tenha mandado várias mensagens ou falado por mais de um canal (Direct, comentário, WhatsApp da loja, pedido no site).
+      <b>Toques no link da bio</b>: número do próprio Instagram. <b>Cliques rastreados</b>: links /r/ deste painel. <b>Visitas ao site</b>: pessoas diferentes por dia no site, sem robôs.
+      <b>Campanhas</b>: os números do anúncio vêm do Gerenciador de Anúncios; "contatos durante" conta quem falou com a empresa nos dias da campanha, e "antes" o mesmo número de dias antes dela.
+      Número que não tem de onde vir aparece como <b>não conectado</b>, nunca inventado.</div></div></div>`;
+  barraPeriodo('per-cli', carregarCliente); barraSimples(); icones();
+  const verDet = on => { $('detalhes').style.display = on ? '' : 'none'; $('b-det-t').textContent = on ? 'esconder os detalhes' : 'ver todos os detalhes'; gravarLS('pc_detalhes', on); };
+  verDet(!!lerLS('pc_detalhes'));
+  $('b-det').onclick = () => verDet($('detalhes').style.display === 'none');
+  carregarAprov(c.id, adm);
+  $('b-print').onclick = () => window.print(); $('b-tv').onclick = abrirTV;
+  $('b-status').onclick = abrirStatus;
+  $('b-zap').onclick = abrirZap;
+  api(`whatsapp?cliente=${encodeURIComponent(c.id)}`).then(z => {  // o botão já diz se está conectado
+    if (ATUAL === c.id && z && z.estado === 'conectado' && $('b-zap-t')) $('b-zap-t').textContent = 'WhatsApp conectado ✓'; });
+  if ($('b-link-cli')) $('b-link-cli').onclick = () => copiar(c.link_cliente, 'Link do cliente copiado — quem abrir vê só os números deste cliente.');
+  if ($('b-camp')) $('b-camp').onclick = () => abrirCampanha(null);
+  if ($('b-csv')) $('b-csv').onclick = () => { $('csv-arq').value = ''; $('csv-txt').value = ''; $('dlg-csv').showModal(); };
+  if ($('b-link')) $('b-link').onclick = () => { $('link-nome').value = ''; $('link-cod').value = ''; $('link-destino').value = c.whatsapp || c.site || ''; $('dlg-link').showModal(); };
+  const d = await api(`painel?cliente=${encodeURIComponent(ATUAL)}&de=${p.de}&ate=${p.ate}`);
+  if (ATUAL !== c.id) return;  // trocou de cliente enquanto carregava
+  if (d.erro) { $('cards').innerHTML = `<div class="err">${esc(d.erro)}</div>`; $('simples').innerHTML = `<div class="err">${esc(d.erro)}</div>`; return; }
+  DADOS = d; desenharCliente(d);
+}
+
+// ───────────── tela simples (dona 30/10): visualizações em 1º, curtidas em 2º, contatos discreto; leigo entende ─────────────
+const PER_SIMPLES = [['7', '7 dias'], ['30', '30 dias'], ['mes', 'Este mês'], ['mespassado', 'Mês passado']];
+function barraSimples() {
+  const p = periodoAtual();
+  const desdeS = clienteDesde();  // 12/11 (dona): "desde que se tornou cliente"
+  $('per-simples').innerHTML = (desdeS ? [...PER_SIMPLES, ['desde', `Desde que é cliente (${desdeS.slice(8, 10)}/${desdeS.slice(5, 7)})`]] : PER_SIMPLES)
+    .map(([q, n]) => `<button class="btn ${p.q === q ? 'on' : ''}" data-q="${q}">${n}</button>`).join('');
+  $('per-simples').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { gravarLS('pc_periodo', {q: b.dataset.q}); carregarCliente(); });
+}
+function comparacao(c, dias) {
+  if (c.valor == null || c.anterior == null || !c.anterior) return '';
+  const pct = Math.round((c.valor - c.anterior) / c.anterior * 100);
+  // tela do cliente: só mostra quando cresceu (conta começando a postar ficaria com "-89%" em vermelho); queda fica nos detalhes
+  if (pct <= 0) return '';
+  return `<div class="cmp ${pct > 0 ? 'up' : 'down'}">${pct > 0 ? '▲' : '▼'} ${Math.abs(pct)}% ${pct > 0 ? 'a mais' : 'a menos'} que nos ${dias} dias anteriores</div>`;
+}
+function topPosts(d) {
+  const de = d.periodo.de, ate = somaDias(d.periodo.ate, 1);
+  const noPer = d.posts.filter(p => p.em && p.em.slice(0, 10) >= de && p.em.slice(0, 10) < ate);
+  const base = noPer.length ? noPer : d.posts;
+  const chave = p => (p.visualizacoes || 0) * 1000 + (p.curtidas || 0);
+  return {lista: base.slice().sort((a, b) => chave(b) - chave(a)).slice(0, 5), doPeriodo: !!noPer.length};
+}
+function desenharSimples(d) {
+  const cs = Object.fromEntries(d.cards.map(x => [x.id, x])), v = cs.visualizacoes, cu = cs.curtidas, pe = cs.pessoas;
+  const per = `de ${dia(d.periodo.de)} a ${dia(d.periodo.ate)}`;
+  let h = '';
+  if (!v.conectado && !cu.conectado) {
+    h += `<div class="glass grande anim-in"><div class="g-rot">${ico('eye')}Visualizações</div><div class="g-num off">em breve</div>
+      <div class="g-frase">O Instagram ainda está sendo ligado ao painel. Assim que ligar, as visualizações e curtidas aparecem aqui.</div></div>`;
+  } else {
+    h += `<div class="glass grande anim-in"><div class="blob"></div><div class="g-rot">${ico('eye')}Visualizações</div>
+      <div class="g-num">${v.valor == null ? '—' : fmt(v.valor)}</div>
+      <div class="g-frase">${!v.valor ? `Ainda sem visualizações ${per}.` : /publicados/.test(v.fonte)
+        ? `Os posts publicados ${per} foram vistos <b>${fmt(v.valor)}</b> ${v.valor === 1 ? 'vez' : 'vezes'}.`
+        : `Seu Instagram foi visto <b>${fmt(v.valor)}</b> ${v.valor === 1 ? 'vez' : 'vezes'} ${per}.`}</div>
+      ${comparacao(v, d.periodo.dias)}</div>`;
+  }
+  // dona 30/10: só as visualizações em destaque; curtidas e contatos ficam discretos, uma linha cada
+  if (cu.conectado) h += `<div class="discreto">${ico('heart')}${cu.valor == null ? '—' : fmt(cu.valor)} ${cu.valor === 1 ? 'curtida' : 'curtidas'}${cu.sub ? ' · ' + esc(cu.sub) : ''}</div>`;
+  h += `<div class="discreto">${ico('message-circle')}${fmt(pe.valor)} ${pe.valor === 1 ? 'pessoa falou' : 'pessoas falaram'} com você pelo Instagram ou pelo site ${per}</div>`;
+  const temSerie = d.serie_dia.some(r => r.visualizacoes);
+  if (temSerie) {
+    const serie = Object.fromEntries(d.serie_dia.filter(r => r.visualizacoes).map(r => [r.dia, r.visualizacoes]));
+    h += `<div class="glass card anim-in" style="margin-top:14px"><h3>${ico('bar-chart-3')}Visualizações por dia</h3><div id="g-simples"></div></div>`;
+    setTimeout(() => { const el = $('g-simples'); if (el) el.innerHTML = barras(d.serie_contatos.dias, {'Visualizações': serie}, {'Visualizações': 'hsl(var(--primary))'}, Math.max(260, el.clientWidth || 600)); }, 0);
+  }
+  const tp = topPosts(d);
+  if (tp.lista.length) {
+    h += `<h2 class="tit">${ico('trophy')}${tp.doPeriodo ? 'Seus posts mais vistos no período' : 'Seus posts mais vistos'}</h2><div class="posts-s">` +
+      tp.lista.map((p, i) => `<a class="glass post-s anim-in" ${urlOk(p.link) ? `href="${esc(p.link)}" target="_blank" rel="noopener"` : ''}>
+        <div class="pos">${i + 1}º</div>${urlOk(p.capa) ? `<img class="capa" src="${esc(p.capa)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'capa vazia'}))">` : '<div class="capa vazia"></div>'}<div class="leg">${esc(p.legenda || '(post sem legenda)')}<div class="t2">${esc(p.tipo || 'post')} · ${esc(dataCurta(p.em))}</div></div>
+        <div class="nums"><span>${ico('eye')}${p.visualizacoes == null ? '—' : fmt(p.visualizacoes)}</span></div></a>`).join('') + '</div>';
+  }
+  $('simples').innerHTML = h; icones();
+}
+
+// ───────────── WhatsApp do cliente ligado no Hermes Call (dona 30/10): vídeo postado no Instagram vai pro status ─────────────
+let ZAPt = null, ZAPcli = null;
+const svgQR = txt => { try { const q = qrcode(0, 'L'); q.addData(txt); q.make(); return q.createSvgTag({cellSize: 6, margin: 3, scalable: true}); }
+  catch (e) { return '<div class="err">Não deu para desenhar o código.</div>'; } };
+function abrirZap() {
+  ZAPcli = ATUAL; const c = EU.clientes.find(x => x.id === ATUAL);
+  $('zap-nome').textContent = c ? c.nome : ''; $('zap-corpo').innerHTML = '<div class="skel" style="height:120px"></div>';
+  $('dlg-zap').showModal(); atualizarZap();
+}
+$('dlg-zap').addEventListener('close', () => { clearTimeout(ZAPt); ZAPt = null; });
+async function atualizarZap() {
+  clearTimeout(ZAPt); if (!$('dlg-zap').open) return;
+  const z = await api(`whatsapp?cliente=${encodeURIComponent(ZAPcli)}`);
+  desenharZap(z || {estado: 'erro', erro: 'sem resposta'});
+  // enquanto espera o celular, confere a cada 2,5 s (o QR troca sozinho a cada ~20 s)
+  if (['qr', 'codigo', 'gerando'].includes(z && z.estado)) ZAPt = setTimeout(atualizarZap, 2500);
+}
+async function conectarZap(numero) {
+  $('zap-corpo').innerHTML = `<div class="como" style="text-align:center;padding:20px">${ico('loader')} gerando o código…</div>`; icones();
+  const r = await post('whatsapp/conectar', {cliente: ZAPcli, numero: numero || ''});
+  if (r.erro && !r.estado) { desenharZap({estado: 'erro', erro: r.erro}); return; }
+  atualizarZap();
+}
+function desenharZap(z) {
+  const adm = EU.papel === 'admin', ultimo = z.ultimo_status_em ? `<div class="mini" style="margin-top:8px">Último vídeo no status: ${esc(dataCurta(z.ultimo_status_em))} · ${fmt(z.status_enviados || 0)} enviado(s)</div>` : '';
+  let h = '';
+  if (z.estado === 'sem_chave') {
+    h = adm ? `<p>Falta ligar o painel ao Hermes Call (1 vez só). O passo a passo está em <code>D:\\painel-clientes\\segredos\\COMO_LIGAR_O_WHATSAPP.txt</code>.</p>`
+      : `<p>Em breve: estamos preparando a ligação com o seu WhatsApp.</p>`;
+  } else if (z.estado === 'conectado') {
+    h = `<div style="text-align:center;padding:6px 0 4px"><div style="font-size:44px">✅</div><div style="font-size:18px;font-weight:800">WhatsApp conectado</div>
+      <div class="mini">${z.numero ? '+' + esc(z.numero) : ''}${z.online === false ? ' · celular sem conexão agora' : ''}</div>
+      <p style="margin-top:10px">Os vídeos novos que postarmos no Instagram também vão aparecer no seu <b>status do WhatsApp</b>.</p>${ultimo}
+      ${z.ultimo_erro ? `<div class="err">Último erro: ${esc(z.ultimo_erro)}</div>` : ''}</div>
+      <div class="acts"><button class="btn" id="zap-sair">${ico('log-out')}desconectar</button></div>`;
+  } else if (z.estado === 'qr') {
+    h = `<p><b>No celular:</b> abra o WhatsApp → toque nos <b>3 pontinhos</b> (ou Configurações no iPhone) → <b>Aparelhos conectados</b> → <b>Conectar um aparelho</b> e aponte a câmera para o código.</p>
+      <div id="qr-caixa">${svgQR(z.qr)}</div><div class="mini" style="text-align:center">O código troca sozinho a cada 20 segundos. Está com o painel aberto no próprio celular? <a href="#" id="zap-num-l">Conecte pelo número</a>.</div>`;
+  } else if (z.estado === 'codigo') {
+    h = `<p><b>No celular:</b> WhatsApp → <b>3 pontinhos</b> → <b>Aparelhos conectados</b> → <b>Conectar um aparelho</b> → <b>Conectar com número de telefone</b> e digite:</p>
+      <div style="text-align:center;font-size:38px;font-weight:800;letter-spacing:.12em;margin:10px 0;color:hsl(var(--primary))">${esc(z.codigo)}</div><div class="mini" style="text-align:center">Esperando o celular… esta tela muda sozinha quando conectar.</div>`;
+  } else if (z.estado === 'gerando') {
+    h = `<div class="como" style="text-align:center;padding:20px">${ico('loader')} gerando o código…</div>`;
+  } else {
+    h = `${z.estado === 'erro' ? `<div class="err">${esc(z.erro || 'erro')}</div>` : ''}
+      <p>Conecte o WhatsApp do seu celular: todo vídeo novo que postarmos no seu Instagram também vai para o seu <b>status</b>, sem você fazer nada.</p>${ultimo}
+      <div class="acts" style="justify-content:center"><button class="btn prim" id="zap-qr">${ico('qr-code')}mostrar o QR code</button></div>
+      <div class="mini" style="text-align:center;margin-top:12px">Está com o painel aberto no próprio celular? Conecte pelo número:</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:6px;flex-wrap:wrap"><input id="zap-num" inputmode="tel" placeholder="(91) 9 9999-9999" style="width:190px"><button class="btn" id="zap-num-ir">${ico('smartphone')}pedir código</button></div>`;
+  }
+  $('zap-corpo').innerHTML = h; icones();
+  if ($('zap-qr')) $('zap-qr').onclick = () => conectarZap('');
+  if ($('zap-num-ir')) $('zap-num-ir').onclick = () => { const n = $('zap-num').value.replace(/\D/g, ''); if (n.length < 10) return toast('Digite o número com DDD', true); conectarZap(n); };
+  if ($('zap-num-l')) $('zap-num-l').onclick = e => { e.preventDefault(); clearTimeout(ZAPt); desenharZap({estado: 'desconectado'}); };
+  if ($('zap-sair')) $('zap-sair').onclick = async () => { if (!confirm('Desconectar o WhatsApp? Os vídeos param de ir para o status.')) return;
+    await post('whatsapp/desconectar', {cliente: ZAPcli}); atualizarZap(); };
+}
+
+// ───────────── imagem para o status do WhatsApp (1080x1920) ─────────────
+let STATUS_BLOB = null;
+async function abrirStatus() {
+  if (!DADOS) return;
+  try { await document.fonts.ready; } catch (e) {}
+  const d = DADOS, cs = Object.fromEntries(d.cards.map(x => [x.id, x])), cor = d.cliente.cor || '#10b981';
+  const cv = document.createElement('canvas'); cv.width = 1080; cv.height = 1920; const g = cv.getContext('2d');
+  const fundo = g.createLinearGradient(0, 0, 1080, 1920); fundo.addColorStop(0, cor); fundo.addColorStop(.55, '#0b0b12'); fundo.addColorStop(1, '#000');
+  g.fillStyle = fundo; g.fillRect(0, 0, 1080, 1920);
+  const F = (peso, tam) => `${peso} ${tam}px 'Plus Jakarta Sans', system-ui, sans-serif`;
+  const txt = (t, x, y, peso, tam, c = '#fff', al = 'center') => { g.font = F(peso, tam); g.fillStyle = c; g.textAlign = al; g.fillText(t, x, y); };
+  const caber = (t, peso, tamMax, larg) => { let s = tamMax; g.font = F(peso, s); while (g.measureText(t).width > larg && s > 40) { s -= 4; g.font = F(peso, s); } return s; };
+  txt(d.cliente.nome, 540, 210, 800, caber(d.cliente.nome, 800, 84, 940));
+  txt('Resultados no Instagram', 540, 290, 600, 48, 'rgba(255,255,255,.8)');
+  txt(`${dia(d.periodo.de)} a ${dia(d.periodo.ate)}`, 540, 360, 600, 42, 'rgba(255,255,255,.65)');
+  const v = cs.visualizacoes, cu = cs.curtidas, pe = cs.pessoas;
+  // dona 30/10: só as visualizações em destaque (curtidas e contatos ficam pequenos embaixo)
+  const vTxt = v.conectado && v.valor != null ? fmt(v.valor) : '—';
+  g.fillStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.roundRect(80, 520, 920, 820, 56); g.fill();
+  txt('👁', 540, 720, 400, 130);
+  txt(vTxt, 540, 1010, 800, caber(vTxt, 800, 300, 860));
+  txt('visualizações', 540, 1150, 700, 80, 'rgba(255,255,255,.9)');
+  const extras = [cu.conectado && cu.valor ? `${fmt(cu.valor)} ${cu.valor === 1 ? 'curtida' : 'curtidas'}` : '',
+    pe.valor ? `${fmt(pe.valor)} ${pe.valor === 1 ? 'pessoa' : 'pessoas'} em contato` : ''].filter(Boolean).join(' · ');
+  if (extras) txt(extras, 540, 1500, 600, 42, 'rgba(255,255,255,.6)');
+  txt('Obrigado por acompanhar! 🙏', 540, 1760, 700, 52, '#fff');
+  STATUS_BLOB = await new Promise(r => cv.toBlob(r, 'image/png'));
+  $('status-img').src = URL.createObjectURL(STATUS_BLOB);
+  const arq = new File([STATUS_BLOB], 'resultados.png', {type: 'image/png'});
+  $('status-compartilhar').style.display = navigator.canShare && navigator.canShare({files: [arq]}) ? '' : 'none';
+  $('dlg-status').showModal(); icones();
+}
+$('status-compartilhar').onclick = async () => {
+  try { await navigator.share({files: [new File([STATUS_BLOB], 'resultados.png', {type: 'image/png'})], title: 'Resultados no Instagram'}); }
+  catch (e) { if (e.name !== 'AbortError') toast('Não deu para compartilhar — use "baixar imagem"', true); }
+};
+$('status-baixar').onclick = () => { const a = document.createElement('a'); a.href = $('status-img').src; a.download = `resultados_${hojeISO()}.png`; a.click(); };
+
+function desenharCliente(d) {
+  const adm = EU.papel === 'admin', cs = Object.fromEntries(d.cards.map(x => [x.id, x])), pe = cs.pessoas;
+  $('cli-sub').textContent = [d.cliente.cidade, (d.cliente.instagram || []).map(x => '@' + x).join(', '),
+    `de ${dia(d.periodo.de)} a ${dia(d.periodo.ate)}`, d.atualizado_em ? 'atualizado ' + dataCurta(d.atualizado_em) : ''].filter(Boolean).join(' · ');
+  const dif = pe.valor - pe.anterior;
+  $('frase').innerHTML = `De ${dia(d.periodo.de)} a ${dia(d.periodo.ate)}, <b>${fmt(pe.valor)}</b> ${pe.valor === 1 ? 'pessoa entrou' : 'pessoas entraram'} em contato com ${esc(d.cliente.nome)}` +
+    (pe.anterior != null ? ` <span class="mini">(${dif > 0 ? `+${fmt(dif)} a mais que` : dif < 0 ? `${fmt(Math.abs(dif))} a menos que` : 'o mesmo que'} os ${d.periodo.dias} dias anteriores)</span>` : '') +
+    (cs.toques_bio.conectado && cs.toques_bio.valor ? `, e o link da bio foi tocado <b>${fmt(cs.toques_bio.valor)}</b> ${cs.toques_bio.valor === 1 ? 'vez' : 'vezes'}.` : '.');
+  // cartões: some o que não existe para este cliente (sem loja, sem site, sem campanha); o Instagram desligado vira um cartão só
+  const igOff = IG_CARDS.every(k => !cs[k].conectado) && (d.cliente.instagram || []).length;
+  const mostra = d.cards.filter(x => {
+    if (IG_CARDS.includes(x.id)) return x.conectado || (igOff && x.id === 'toques_bio');
+    if (!x.conectado) return x.id === 'cliques' && adm;
+    return true;
+  }).map(x => igOff && x.id === 'toques_bio' ? {...x, titulo: 'Instagram', motivo: x.motivo} : x);
+  $('cards').innerHTML = mostra.map(cardHTML).join('');
+  $('canais').innerHTML = Object.entries(d.por_canal).filter(([, n]) => n).map(([k, n]) => `<span class="badge b-pri" style="border-color:${CORES_CANAL[k]}55;color:${CORES_CANAL[k]}">${esc(k)}: ${fmt(n)}</span>`).join('');
+  const larg = el => Math.max(260, Math.round(el.clientWidth || 600));
+  $('g-contatos').innerHTML = barras(d.serie_contatos.dias, d.serie_contatos.series, CORES_CANAL, larg($('g-contatos')));
+  $('g-dia').innerHTML = linhas(d.serie_dia, [['alcance', 'alcance no Instagram', '#e879f9'], ['toques_link', 'toques no link da bio', '#22d3ee'],
+    ['visitas_perfil', 'visitas ao perfil', '#a78bfa'], ['visitas_site', 'visitas ao site', '#f59e0b'], ['cliques', 'cliques nos links rastreados', '#34d399']], larg($('g-dia')));
+  const esperando = d.pessoas.filter(x => x.respondido === 0 || x.respondido === false).length;
+  $('pes-mini').innerHTML = esc(`${fmt(d.pessoas.length)} no período · ${fmt(d.pessoas.filter(x => x.novo).length)} pela primeira vez`) +
+    (esperando ? ` · <span class="badge b-warn">${fmt(esperando)} esperando resposta no Direct</span>` : '');
+  tab('t-pessoas', [
+    {k: 'nome', t: 'pessoa', valor: r => `${r.nome} ${r.contato}`, csv: r => r.contato && r.contato !== r.nome ? `${r.nome} (${r.contato})` : r.nome,
+      html: r => `<b>${esc(r.nome)}</b>${r.contato && r.contato !== r.nome ? `<div class="t2">${esc(r.contato)}</div>` : ''}${r.novo ? ' <span class="badge b-ok">nova</span>' : ''}${(r.juntadas || []).length ? ` <span class="badge b-mut" title="registros juntados nesta pessoa">${ico('combine')}juntada</span>` : ''}`},    {k: 'canais', t: 'por onde', tipo: 'cat', valor: r => r.canais.join(' + '), html: r => r.canais.map(x => `<span class="tag" style="background:${CORES_CANAL[x]}33">${esc(x)}</span>`).join('')},
+    {k: 'ultimo_em', t: 'último contato', tipo: 'data', html: r => esc(dataCurta(r.ultimo_em)), csv: r => dataHora(r.ultimo_em), cls: 'nw'},
+    {k: 'primeiro_em', t: 'primeiro contato', tipo: 'data', html: r => esc(dataCurta(r.primeiro_em)), csv: r => dataHora(r.primeiro_em), cls: 'nw'},
+    {k: 'mensagens', t: 'contatos no período', tipo: 'num'},
+    {k: 'texto', t: 'última mensagem', cls: 'txt', html: r => esc(r.texto || '—')},
+    {k: 'respondido', t: 'respondido', tipo: 'cat', valor: r => r.respondido == null ? '—' : r.respondido ? 'sim' : 'esperando resposta',
+      html: r => r.respondido == null ? '<span class="t2">—</span>' : r.respondido ? '<span class="badge b-ok">sim</span>' : '<span class="badge b-warn">esperando</span>'},
+    {k: 'status', t: 'situação', tipo: 'cat', html: r => `<span class="badge ${r.status === 'virou cliente' ? 'b-ok' : r.status === 'sem interesse' ? 'b-mut' : r.status === 'novo' ? 'b-pri' : 'b-warn'}">${esc(r.status)}</span>`},
+    {k: 'nota', t: 'anotação', cls: 'txt'},
+    {k: 'acao', t: '', semFiltro: true, semCsv: true, html: r => `<button class="btn peq" data-acao="editar">${ico('pencil')}situação</button>${urlOk(r.ref) ? ` <a class="btn peq" href="${esc(r.ref)}" target="_blank" rel="noopener">${ico('external-link')}abrir</a>` : ''}`},
+  ], {ordem: {k: 'ultimo_em', d: -1}, porPagina: 30, vazio: 'ninguém entrou em contato neste período', aoClicar: (a, r) => abrirPessoa(r)}).set(d.pessoas);
+  tab('t-camp', [
+    {k: 'nome', t: 'campanha', html: r => `<b>${esc(r.nome)}</b>${r.ativa ? ' <span class="badge b-ok">rodando</span>' : ''}<div class="t2">${esc([r.plataforma, r.objetivo].filter(Boolean).join(' · '))}</div>`},
+    {k: 'inicio', t: 'período', tipo: 'data', html: r => `${dia(r.inicio)}<div class="t2">até ${r.fim ? dia(r.fim) : 'hoje'} · ${r.dias} dia(s)</div>`, csv: r => `${r.inicio} a ${r.fim || 'hoje'}`, cls: 'nw'},
+    {k: 'gasto', t: 'investido', tipo: 'num', html: r => r.gasto == null ? '—' : brl(r.gasto)},
+    {k: 'alcance', t: 'alcance (anúncio)', tipo: 'num', html: r => fmtN(r.alcance)},
+    {k: 'cliques', t: 'cliques (anúncio)', tipo: 'num', html: r => fmtN(r.cliques)},
+    {k: 'resultados', t: 'resultados (anúncio)', tipo: 'num', html: r => r.resultados == null ? '—' : `${fmt(r.resultados)}<div class="t2">${esc(r.resultado_tipo || '')}</div>`},
+    {k: 'contatos_durante', t: 'pessoas em contato durante', tipo: 'num', html: r => `<b>${fmt(r.contatos_durante)}</b><div class="t2">${fmt(r.contatos_novos)} ${r.contatos_novos === 1 ? 'nova' : 'novas'}</div>`},
+    {k: 'contatos_antes', t: 'mesmo nº de dias antes', tipo: 'num'},
+    {k: 'variacao', t: 'diferença', tipo: 'num', html: r => `<b class="delta ${r.variacao > 0 ? 'up' : r.variacao < 0 ? 'down' : 'eq'}">${r.variacao > 0 ? '+' : ''}${fmt(r.variacao)}</b>`},
+    {k: 'custo_por_contato', t: 'custo por pessoa', tipo: 'num', html: r => r.custo_por_contato == null ? '—' : brl(r.custo_por_contato)},
+    {k: 'cliques_link', t: 'cliques no link rastreado', tipo: 'num', html: r => r.link_codigo ? `${fmt(r.cliques_link)}<div class="t2">${pessoasTxt(r.pessoas_link)}</div>` : '—'},
+    {k: 'acao', t: '', semFiltro: true, semCsv: true, html: r => (r.link_codigo ? `<button class="btn peq" data-acao="copiar">${ico('copy')}link</button> ` : '') +
+      (adm ? `<button class="btn peq" data-acao="editar">${ico('pencil')}editar</button> <button class="btn peq" data-acao="apagar">${ico('trash-2')}</button>` : '')},
+  ], {ordem: {k: 'inicio', d: -1}, vazio: adm ? 'nenhuma campanha ainda — clique em "nova campanha" ou importe o CSV do Gerenciador de Anúncios' : 'nenhuma campanha neste painel ainda',
+    aoClicar: (a, r) => a === 'copiar' ? copiar(`${location.origin}/r/${r.link_codigo}`, 'Link rastreado da campanha copiado') : a === 'editar' ? abrirCampanha(r) : apagarCampanha(r)}).set(d.campanhas);
+  tab('t-links', [
+    {k: 'nome', t: 'onde é usado', html: r => `<b>${esc(r.nome)}</b>${r.campanha ? `<div class="t2">campanha: ${esc(r.campanha)}</div>` : ''}`},
+    {k: 'url', t: 'link', html: r => `<code style="font-size:12px">${esc(r.url.replace(/^https?:\/\//, ''))}</code>`},
+    {k: 'destino', t: 'vai para', cls: 'txt', html: r => `<span class="t2">${esc(r.destino)}</span>`},
+    {k: 'cliques_periodo', t: 'cliques no período', tipo: 'num', html: r => `<b>${fmt(r.cliques_periodo)}</b><div class="t2">${pessoasTxt(r.pessoas_periodo)}</div>`},
+    {k: 'cliques_total', t: 'cliques desde o início', tipo: 'num'},
+    {k: 'criado_em', t: 'criado', tipo: 'data', html: r => esc(dataCurta(r.criado_em)), cls: 'nw'},
+    {k: 'acao', t: '', semFiltro: true, semCsv: true, html: r => `<button class="btn peq" data-acao="copiar">${ico('copy')}copiar</button>` + (adm ? ` <button class="btn peq" data-acao="apagar">${ico('trash-2')}</button>` : '')},
+  ], {ordem: {k: 'cliques_periodo', d: -1}, vazio: 'nenhum link rastreado ainda', aoClicar: (a, r) => a === 'copiar' ? copiar(r.url, 'Link copiado') : apagarLink(r)}).set(d.links);
+  if (d.cliente.loja) {
+    $('bloco-pedidos').innerHTML = `<h2 class="tit">${ico('shopping-bag')}Pedidos pelo site <span class="mini">${fmt(d.pedidos.length)} no período (inclui cancelados, que não entram no total vendido)</span></h2><div class="glass tabela" id="t-pedidos"></div>`;
+    tab('t-pedidos', [
+      {k: 'em', t: 'quando', tipo: 'data', html: r => esc(dataCurta(r.em)), csv: r => dataHora(r.em), cls: 'nw'},
+      {k: 'id', t: 'nº', tipo: 'num'},
+      {k: 'nome', t: 'cliente', html: r => `<b>${esc(r.nome)}</b><div class="t2">${esc(r.telefone)}</div>`},
+      {k: 'itens', t: 'itens', cls: 'txt'},
+      {k: 'total', t: 'total', tipo: 'num', html: r => brl(r.total)},
+      {k: 'pagamento', t: 'pagamento', tipo: 'cat'}, {k: 'cupom', t: 'cupom', tipo: 'cat'},
+      {k: 'entrega', t: 'entrega', tipo: 'cat'}, {k: 'status', t: 'situação', tipo: 'cat'},
+      {k: 'avaliacao', t: 'nota', tipo: 'num', html: r => r.avaliacao ? '★'.repeat(r.avaliacao) : '—'},
+    ], {ordem: {k: 'em', d: -1}, porPagina: 30, vazio: 'nenhum pedido pelo site neste período'}).set(d.pedidos);
+  } else $('bloco-pedidos').innerHTML = '';
+  if ((d.cliente.instagram || []).length) {
+    $('bloco-posts').innerHTML = `<h2 class="tit">${ico('image')}Posts do Instagram <span class="mini">números de cada post (os dos últimos 90 dias são atualizados a cada 6 h)</span></h2><div class="glass tabela" id="t-posts"></div>`;
+    tab('t-posts', [
+      {k: 'em', t: 'postado', tipo: 'data', html: r => esc(dataCurta(r.em)), csv: r => dataHora(r.em), cls: 'nw'},
+      {k: 'tipo', t: 'tipo', tipo: 'cat'},
+      {k: 'legenda', t: 'legenda', cls: 'txt', html: r => (urlOk(r.capa) ? `<img src="${esc(r.capa)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" style="width:40px;height:50px;object-fit:cover;border-radius:6px;float:left;margin-right:8px">` : '') +
+        (urlOk(r.link) ? `<a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.legenda || '(sem legenda)')}</a>` : esc(r.legenda))},
+      {k: 'visualizacoes', t: 'visualizações', tipo: 'num', html: r => fmtN(r.visualizacoes)}, {k: 'alcance', t: 'alcance', tipo: 'num', html: r => fmtN(r.alcance)},
+      {k: 'curtidas', t: 'curtidas', tipo: 'num', html: r => fmtN(r.curtidas)}, {k: 'comentarios', t: 'comentários', tipo: 'num', html: r => fmtN(r.comentarios)},
+      {k: 'compartilhamentos', t: 'compart.', tipo: 'num', html: r => fmtN(r.compartilhamentos)}, {k: 'salvos', t: 'salvos', tipo: 'num', html: r => fmtN(r.salvos)},
+    ], {ordem: {k: 'em', d: -1}, porPagina: 15, vazio: 'os posts aparecem quando o Instagram estiver conectado'}).set(d.posts);
+  } else $('bloco-posts').innerHTML = '';
+  const NOMES = {loja: 'Sistema de pedidos da loja', whatsapp_loja: 'WhatsApp da loja', site: 'Visitas ao site'};
+  $('fontes').innerHTML = d.fontes.length ? d.fontes.map(f => `<div class="fonte-l"><span class="dot ${f.ok ? '' : 'bad'}"></span><div><b>${esc(NOMES[f.fonte] || f.fonte.replace('instagram:', 'Instagram @'))}</b>
+      <div class="t2">${esc(f.detalhe)} · ${esc(dataCurta(f.em))}</div></div></div>`).join('') : '<div class="vazio">nenhuma fonte enviou dados ainda</div>';
+  desenharSimples(d);
+  icones();
+}
+
+// ───────────── ações ─────────────
+function copiar(txt, msg) {
+  const ok = () => toast(msg || 'copiado');
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(ok, () => prompt('Copie o link:', txt));
+  else prompt('Copie o link:', txt);
+}
+let PES = null;
+function abrirPessoa(r) {
+  PES = r; $('pes-tit').textContent = r.nome; $('pes-sub').textContent = `${r.canais.join(' + ')} · último contato ${dataCurta(r.ultimo_em)}`;
+  $('pes-status').innerHTML = (DADOS.status_opcoes || []).map(s => `<option ${s === r.status ? 'selected' : ''}>${esc(s)}</option>`).join('');
+  $('pes-nota').value = r.nota || '';
+  const outras = (DADOS.pessoas || []).filter(x => x.pessoa !== r.pessoa).sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  $('pes-junta').innerHTML = '<option value="">não, é outra pessoa</option>' + outras.map(x =>
+    `<option value="${esc(x.pessoa)}">${esc(x.nome)}${x.contato && x.contato !== x.nome ? ' — ' + esc(x.contato) : ''}</option>`).join('');
+  $('pes-juntadas').innerHTML = (r.juntadas || []).length ? `<div class="mini" style="margin-bottom:4px">Registros juntados nesta pessoa:</div>` +
+    r.juntadas.map(j => `<div style="display:flex;gap:8px;align-items:center;margin:3px 0"><code style="font-size:12px">${esc(j.replace(/^ig:/, '@').replace(/^tel:/, '+'))}</code>
+      <button class="btn peq" data-separar="${esc(j)}">${ico('split')}separar</button></div>`).join('') : '';
+  $('pes-juntadas').querySelectorAll('[data-separar]').forEach(b => b.onclick = async () => {
+    const x = await post('pessoa/juntar', {cliente: ATUAL, pessoa: b.dataset.separar, separar: true});
+    if (x.erro) return toast(x.erro, true);
+    $('dlg-pessoa').close(); toast('Separado: volta a contar como outra pessoa'); carregarCliente();
+  });
+  icones(); $('dlg-pessoa').showModal();
+}
+$('pes-salvar').onclick = async () => {
+  const r = await post('pessoa', {cliente: ATUAL, pessoa: PES.pessoa, status: $('pes-status').value, nota: $('pes-nota').value});
+  if (r.erro) return toast(r.erro, true);
+  const com = $('pes-junta').value;
+  if (com) {
+    const j = await post('pessoa/juntar', {cliente: ATUAL, pessoa: PES.pessoa, com});
+    if (j.erro) return toast(j.erro, true);
+  }
+  $('dlg-pessoa').close(); toast(com ? 'Salvo e juntado: agora conta como 1 pessoa' : 'Salvo'); carregarCliente();
+};
+let CAMP = null;
+function abrirCampanha(r) {
+  CAMP = r; const f = $('camp-form'), c = EU.clientes.find(x => x.id === ATUAL);
+  $('camp-tit').textContent = r ? 'Editar campanha' : 'Nova campanha';
+  f.querySelectorAll('[name]').forEach(el => { const v = r ? r[el.name] : null;
+    el.value = el.name === 'destino' ? (c.whatsapp || c.site || '') : v == null ? (el.tagName === 'SELECT' ? el.options[0].value : '') : String(v).replace(/^(\d+)\.(\d+)$/, '$1,$2'); });
+  if (!r) f.querySelector('[name=inicio]').value = hojeISO();
+  $('camp-destino-l').style.display = r && r.link_codigo ? 'none' : '';
+  $('dlg-camp').showModal();
+}
+$('camp-salvar').onclick = async () => {
+  const corpo = {cliente: ATUAL}; $('camp-form').querySelectorAll('[name]').forEach(el => corpo[el.name] = el.value);
+  if (CAMP) corpo.id = CAMP.id;
+  if (!corpo.nome || !corpo.inicio) return toast('Preencha o nome e a data de início', true);
+  const r = await post('campanha', corpo);
+  if (r.erro) return toast(r.erro, true);
+  $('dlg-camp').close(); toast(r.link_codigo && !CAMP ? `Campanha salva. Link rastreado: ${location.origin}/r/${r.link_codigo}` : 'Campanha salva'); carregarCliente();
+};
+async function apagarCampanha(r) {
+  if (!confirm(`Apagar a campanha "${r.nome}"? (o link rastreado continua funcionando)`)) return;
+  const x = await post('campanha/apagar', {id: r.id}); if (x.erro) return toast(x.erro, true); toast('Campanha apagada'); carregarCliente();
+}
+async function apagarLink(r) {
+  if (!confirm(`Apagar o link "${r.nome}"? Quem clicar nele depois vai ver "link não encontrado".`)) return;
+  const x = await post('link/apagar', {codigo: r.codigo}); if (x.erro) return toast(x.erro, true); toast('Link apagado'); carregarCliente();
+}
+$('link-salvar').onclick = async () => {
+  const r = await post('link', {cliente: ATUAL, nome: $('link-nome').value, destino: $('link-destino').value.trim(), codigo: $('link-cod').value.trim()});
+  if (r.erro) return toast(r.erro, true);
+  $('dlg-link').close(); copiar(`${location.origin}/r/${r.codigo}`, `Link criado e copiado: ${location.origin}/r/${r.codigo}`); carregarCliente();
+};
+$('csv-ir').onclick = async () => {
+  let txt = $('csv-txt').value; const arq = $('csv-arq').files[0];
+  if (arq) txt = await arq.text();
+  if (!txt.trim()) return toast('Escolha o arquivo CSV', true);
+  const r = await post('campanhas/importar', {cliente: ATUAL, csv: txt});
+  if (r.erro) return toast(r.erro + (r.colunas ? ' — colunas do arquivo: ' + r.colunas.join(', ') : ''), true);
+  $('dlg-csv').close(); toast(`Importado: ${r.criadas} nova(s), ${r.atualizadas} atualizada(s), ${r.ignoradas} ignorada(s)`); carregarCliente();
+};
+
+// ───────────── modo TV (gira como o telão) ─────────────
+let TVi = 0, TVt = null;
+function quadrosTV() {
+  const d = DADOS; if (!d) return [];
+  const cs = Object.fromEntries(d.cards.map(x => [x.id, x])), q = [];
+  const big = (rot, v, dl, m) => `<div class="rot">${esc(rot)}</div><div class="gig ${m ? 'm' : ''}">${v}</div>${dl ? `<div class="dl">${dl}</div>` : ''}`;
+  const dlt = c => c.anterior == null ? '' : c.valor > c.anterior ? `▲ +${fmt(c.valor - c.anterior)} em relação aos ${d.periodo.dias} dias anteriores` : c.valor < c.anterior ? `${fmt(c.anterior - c.valor)} a menos que os ${d.periodo.dias} dias anteriores` : '';
+  // dona 30/10: abre com visualizações, depois curtidas; contatos vem depois e só se tiver
+  for (const k of ['visualizacoes', 'seguidores', 'toques_bio', 'cliques', 'visitas', 'pedidos', 'faturamento', 'alcance'])
+    if (cs[k] && cs[k].conectado && cs[k].valor) q.push(big(cs[k].id === 'visualizacoes' ? `Visualizações — ${d.periodo.dias} dias` : cs[k].titulo,
+      cs[k].fmt === 'brl' ? brl(cs[k].valor) : fmt(cs[k].valor), dlt(cs[k]) || cs[k].sub, cs[k].fmt === 'brl'));
+  if (cs.pessoas.valor || !q.length) q.push(big(`Pessoas que entraram em contato — ${d.periodo.dias} dias`, fmt(cs.pessoas.valor), dlt(cs.pessoas), true));
+  const ult = d.pessoas.slice(0, 5);
+  if (ult.length) q.push(`<div class="rot">Últimos contatos</div><div class="lista">${ult.map(p => `<div>${esc(p.nome)}<small>${esc(p.canais.join(' + '))} · ${esc(dataCurta(p.ultimo_em))}</small></div>`).join('')}</div>`);
+  const camp = d.campanhas.find(x => x.ativa) || d.campanhas[0];
+  if (camp) q.push(big(`Campanha: ${camp.nome}`, fmt(camp.contatos_durante), `pessoas em contato durante a campanha (${camp.variacao >= 0 ? '+' : ''}${fmt(camp.variacao)} vs. antes)${camp.custo_por_contato ? ' · ' + brl(camp.custo_por_contato) + ' por pessoa' : ''}`, true));
+  const top = d.posts.filter(p => p.visualizacoes).sort((a, b) => b.visualizacoes - a.visualizacoes).slice(0, 3);
+  if (top.length) q.push(`<div class="rot">Posts mais vistos</div><div class="lista">${top.map(p => `<div>${esc((p.legenda || '').slice(0, 70))}<small>${fmt(p.visualizacoes)} visualizações</small></div>`).join('')}</div>`);
+  return q;
+}
+function desenharTV() {
+  const q = quadrosTV(); if (!q.length) return;
+  TVi = TVi % q.length;
+  $('tv').innerHTML = `<div class="topo"><b>${esc(DADOS.cliente.nome)}</b><span>${dia(DADOS.periodo.de)} a ${dia(DADOS.periodo.ate)}</span></div>
+    <div class="quadro">${q[TVi]}</div><div class="pontos">${q.map((_, i) => `<i class="${i === TVi ? 'on' : ''}"></i>`).join('')}</div>`;
+  TVi++;
+}
+function abrirTV() {
+  if (!DADOS) return; TVi = 0; $('tv').classList.add('on'); desenharTV(); clearInterval(TVt); TVt = setInterval(desenharTV, 9000);
+  try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); } catch (e) {}
+}
+function fecharTV() { $('tv').classList.remove('on'); clearInterval(TVt); try { document.fullscreenElement && document.exitFullscreen(); } catch (e) {} }
+$('tv').onclick = fecharTV;
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('tv').classList.contains('on')) fecharTV(); });
+
+// ───────────── atualiza sozinho a cada 5 min (telão/modo TV não fica com número velho) ─────────────
+// só com a aba visível e sem ninguém mexendo: diálogo aberto ou campo com o cursor não são atropelados
+setInterval(() => {
+  if (!CHAVE || !EU || document.hidden || document.querySelector('dialog[open]')) return;
+  const foco = document.activeElement; if (foco && /^(INPUT|TEXTAREA|SELECT)$/.test(foco.tagName)) return;
+  if (ATUAL === 'geral') carregarGeral();
+  else if (ATUAL) recarregarQuieto();
+}, 5 * 60 * 1000);
+async function recarregarQuieto() {
+  // sem esqueleto piscando: busca e redesenha por cima (o modo TV continua girando com os números novos)
+  const p = periodoAtual(), alvo = ATUAL;
+  const d = await api(`painel?cliente=${encodeURIComponent(alvo)}&de=${p.de}&ate=${p.ate}`);
+  if (alvo !== ATUAL || !d || d.erro) return;
+  const y = $('main').scrollTop, wy = window.scrollY;
+  DADOS = d; desenharCliente(d); $('main').scrollTop = y; window.scrollTo(0, wy);
+}
+
+// ───────────── início: chave do link (#k=...) sai da barra de endereço na hora ─────────────
+(function () {
+  const h = new URLSearchParams(location.hash.slice(1)), k = h.get('k');
+  if (k) { h.delete('k'); history.replaceState(null, '', location.pathname + (h.toString() ? '#' + h.toString() : '')); entrar(k); return; }
+  const salvo = lerLS('pc_chave'); if (salvo) { CHAVE = salvo; iniciar(); } else entrar(null);
+})();
+</script>
+</body>
+</html>

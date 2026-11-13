@@ -1,0 +1,1312 @@
+{
+ "name": "maquina de reels",
+ "nodes": [
+  {
+   "parameters": {
+    "toolDescription": "depois de pegar os videos chame essa ferramenta pega pegar as miniaturas e estatisticas etc o nome dela e pega_miniatura_e_estatisticas",
+    "url": "https://www.googleapis.com/youtube/v3/videos",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet,statistics"
+      },
+      {
+       "name": "id",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    304,
+    480
+   ],
+   "id": "c4959b23-f8f5-471f-9a41-d25d38f05ea4",
+   "name": "pega_miniatura_e_estatisticas"
+  },
+  {
+   "parameters": {
+    "toolDescription": "chame essa ferramenta para pesquisar videos no youtube o nome dela e :pesuisa_videos_no_youtube",
+    "url": "https://www.googleapis.com/youtube/v3/search",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet"
+      },
+      {
+       "name": "order",
+       "value": "viewCount"
+      },
+      {
+       "name": "type",
+       "value": "video"
+      },
+      {
+       "name": "q",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+      },
+      {
+       "name": "maxResults",
+       "value": "50"
+      },
+      {
+       "name": "publishedAfter",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+      },
+      {
+       "name": "regionCode",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', ``, 'string') }}"
+      },
+      {
+       "name": "relevanceLanguage",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters7_Value', ``, 'string') }}"
+      },
+      {
+       "name": "videoDuration",
+       "value": "short"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    128,
+    480
+   ],
+   "id": "51b322ab-bb91-49d0-a277-0de24f92230e",
+   "name": "pesuisa_videos_no_youtube1"
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "mande para essa ferramenta analisar o video e ver se ele pode ser usado o nome dela e :agente_de_visualizacao_de_video",
+    "resource": "video",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "models/gemini-2.5-flash-lite",
+     "mode": "list",
+     "cachedResultName": "models/gemini-2.5-flash-lite"
+    },
+    "text": "=Você é o Agente Replicador-Produtor (v16 - Especialista em Text-to-Video). Sua única missão é \"assistir\" (analisar) um vídeo viral e, se for viável, gerar um pacote de produção JSON focado em geração direta de vídeo e metadados virais.\n\nVocê deve emular o processo de três agentes especialistas:\n1. Auditor de QA (Viabilidade)\n2. Copywriter Viral (Títulos e SEO)\n3. Engenheiro de Prompt de Vídeo (Text-to-Video Expert)\n\nInput (Recebido do Agente Principal): Você receberá DOIS inputs:\n1. A URL do YouTube Short.\n2. O CONTEXTO (um JSON contendo snippet e statistics do vídeo).\n\nContexto Fixo de Produção (Regras Inquebráveis):\nPersonagem Fixo: O vídeo DEVE ser adaptado para o nosso personagem fixo: \"um personagem homem\" (o \"dono\"). Ele deve assumir o TOM do vídeo original.\nLimite de Diálogo: A soma total de dialogo_pt_br DEVE ter no máximo 30 palavras.\nIdioma: O dialogo_pt_br DEVE ser 100% em Português do Brasil.\n\nSEU FLUXO DE EXECUÇÃO (EM 5 ETAPAS):\n\nETAPA 1: ANÁLISE ESTRATÉGICA INTERNA\n\nAnalise o CONTEXTO e o conteúdo do vídeo. Defina internamente:\n1. TOM: (Humor, Sério, Técnico, Curiosidade?)\n2. GANCHO: (O que prende a atenção nos primeiros 3s?)\n3. CHAVE_VIRAL: (É o Áudio ou o Visual?)\n4. ELEMENTOS_VISUAIS_CHAVE: (Quais objetos/cenários são essenciais para a IA desenhar?)\n\nETAPA 2: ANÁLISE DE VIABILIDADE (Auditoria de QA)\n\nDecida (APROVADO) ou (REPROVADO).\n\nREPROVE se:\n- Propriedade Intelectual (Copyright explícito de filmes/famosos).\n- Texto na Tela (A IA de vídeo não consegue escrever texto legível).\n- Complexidade Absurda (Muitos personagens ou ações simultâneas).\n\nSe REPROVADO, retorne JSON: {\"status\": \"REPROVADO\", \"justificativa\": \"...\"}\n\nETAPA 3: ENGENHARIA DO PROMPT DE VÍDEO (Text-to-Video)\n\nSe APROVADO, crie um `prompt_video_generation` otimizado para ferramentas como Sora/Runway/Kling.\n\nEstrutura Obrigatória do Prompt de Vídeo:\n\"[ESTILO CINEMATOGRÁFICO]: (Ex: Cinematic lighting, 8k, photorealistic). [PERSONAGEM]: (Descreva o 'homem' fazendo a ação principal). [CENÁRIO]: (Detalhes do ambiente). [AÇÃO]: (A sequência de movimentos fluida). [MOVIMENTO DE CÂMERA]: (Ex: Slow zoom in, tracking shot). [ATMOSFERA]: (Ex: Moody, energetic, bright).\"\n\nNota: O prompt deve ser em INGLÊS para melhor qualidade da IA de vídeo, mas descrevendo a cena adaptada.\n\nETAPA 4: CRIAÇÃO DE METADADOS VIRAIS (Copywriting)\n\nGere os metadados para o YouTube baseados na lógica viral do vídeo original, mas adaptados.\n\n1. NOVO TÍTULO VIRAL: Crie um título altamente clicável (máx 60 caracteres), usando gatilhos mentais (Curiosidade, Urgência, Benefício). NÃO copie o título original. Invente um melhor.\n2. DESCRIÇÃO VIRAL: Uma descrição curta (3 linhas) contendo palavras-chave e uma chamada para ação.\n\nETAPA 5: MONTAGEM FINAL (O Pacote JSON)\n\nSua única saída deve ser este JSON Estruturado (exatamente com estas chaves para o Agente Diretor ler):\n\n```json\n{\n  \"status\": \"APROVADO\",\n  \"analise_interna\": {\n    \"tom\": \"[Tom da Etapa 1]\",\n    \"chave_viral\": \"[Chave da Etapa 1]\"\n  },\n  \"prompt_video_generation\": \"[O prompt em INGLÊS criado na Etapa 3]\",\n  \"roteiro_tecnico\": \"[Um resumo breve em PT-BR da cena para controle. Ex: Cena do homem segurando uma fruta podre com cara de nojo]\",\n  \"sugestao_titulo_viral\": \"[O Título criado na Etapa 4]\",\n  \"sugestao_descricao_viral\": \"[A Descrição criada na Etapa 4]\"\n}",
+    "videoUrls": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL_s_', ``, 'string') }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGeminiTool",
+   "typeVersion": 1,
+   "position": [
+    448,
+    480
+   ],
+   "id": "6c335341-25ae-4508-af20-a4796dc7ba36",
+   "name": "assite video",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "gera_videos9",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    64,
+    336
+   ],
+   "id": "e334b128-e1fd-4c25-8cf8-169d6f1ac5fa",
+   "name": "memoria",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "public": true,
+    "initialMessages": "gere aqui o seu video",
+    "options": {
+     "inputPlaceholder": "insira o tema ou ideia do seu video",
+     "subtitle": "Sistema Inicializado. 🔋",
+     "title": "maquina de reels-PromovaWeb",
+     "customCss": "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Fira+Code:wght@400;600&family=Chakra+Petch:wght@500&display=swap');\n\n:root {\n  /* Cores Promovaweb - Padrão Real */\n  --chat--color-primary: #00D9A5;\n  --chat--color-primary-shade-50: #00BF8F;\n  --chat--color-primary-shade-100: #00A67A;\n  --chat--color-secondary: #00E5CC;\n  --chat--color-secondary-shade-50: #00CCB3;\n  --chat--color-accent: #1E3A5F;\n  --chat--color-accent-dark: #0A4A52;\n  --chat--color-white: #FFFFFF;\n  --chat--color-light: #E0F7F4;\n  --chat--color-dark: #0A1628;\n  --chat--color-dark-lighter: #162841;\n  --chat--color-disabled: #4A5568;\n  --chat--color-typing: var(--chat--color-primary);\n  --chat--border-color-glow: rgba(0, 217, 165, 0.5);\n  --chat--spacing: 1rem;\n  --chat--border-radius: 1.5rem;\n  --chat--font-family: 'Fira Code', 'Chakra Petch', sans-serif;\n  --chat--font-family-headings: 'Orbitron', sans-serif;\n  --chat--transition-duration: 0.4s;\n  --chat--window--width: 480px;\n  --chat--window--height: 85vh;\n  --chat--window--bottom: 2rem;\n  --chat--window--right: 2rem;\n  --chat--window--z-index: 9999;\n  --chat--window--border: 2px solid transparent;\n  --chat--window--border-radius: var(--chat--border-radius);\n  --chat--window--margin-bottom: var(--chat--spacing);\n  --chat--body--background: #0A1628;\n  --chat--footer--background: rgba(10, 22, 40, 0.9);\n  --chat--header--background: linear-gradient(135deg, #0A4A52 0%, #1E3A5F 50%, #00D9A5 100%);\n  --chat--header--color: var(--chat--color-white);\n  --chat--heading--font-size: 1.8em;\n  --chat--subtitle--font-size: 0.9em;\n  --chat--header--border-bottom: 1px solid var(--chat--border-color-glow);\n  --chat--message--font-size: 1rem;\n  --chat--message--padding: 1rem 1.5rem;\n  --chat--message--border-radius: 1.2rem;\n  --chat--message-line-height: 1.6;\n  --chat--message--margin-bottom: 1rem;\n  --chat--message--bot--background: rgba(30, 58, 95, 0.6);\n  --chat--message--bot--color: var(--chat--color-light);\n  --chat--message--user--background: linear-gradient(135deg, #00D9A5, #00E5CC);\n  --chat--message--user--color: #0A1628;\n  --chat--messages-list--padding: 1.5rem;\n  --chat--input--background: rgba(10, 22, 40, 0.6);\n  --chat--input--text-color: var(--chat--color-white);\n  --chat--input--border-radius: 1rem;\n  --chat--input--padding: 1rem;\n  --chat--textarea--height: 55px;\n  --chat--button--background: linear-gradient(135deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--button--color: var(--chat--color-dark);\n  --chat--button--border-radius: 1rem;\n  --chat--button--hover--background: linear-gradient(135deg, var(--chat--color-secondary), var(--chat--color-primary));\n  --chat--input--send--button--color: var(--chat--color-primary);\n  --chat--input--send--button--color-hover: var(--chat--color-secondary);\n  --chat--toggle--size: 70px;\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: linear-gradient(145deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--toggle--hover--background: linear-gradient(145deg, var(--chat--color-secondary), var(--chat--color-primary));\n  --chat--toggle--color: var(--chat--color-dark);\n}\n\n/* ===== CHAT WINDOW - ULTRA ENHANCED ===== */\n.chat-window {\n  border-radius: var(--chat--window--border-radius);\n  overflow: hidden;\n  background: \n    radial-gradient(circle at 10% 20%, rgba(0, 217, 165, 0.03) 0%, transparent 50%),\n    radial-gradient(circle at 90% 80%, rgba(0, 229, 204, 0.03) 0%, transparent 50%),\n    radial-gradient(circle at 50% 50%, rgba(30, 58, 95, 0.02) 0%, transparent 50%),\n    var(--chat--body--background);\n  animation: \n    fadeInGlow 1.2s ease-out forwards,\n    aurora-wave 30s ease-in-out infinite,\n    nebula-drift 60s linear infinite;\n  position: relative;\n  box-shadow: \n    0 0 100px rgba(0, 217, 165, 0.3), \n    0 0 120px rgba(0, 229, 204, 0.2),\n    0 0 80px rgba(30, 58, 95, 0.2),\n    0 0 150px rgba(0, 217, 165, 0.15),\n    0 0 200px rgba(0, 229, 204, 0.1),\n    inset 0 0 100px rgba(0, 217, 165, 0.02);\n  display: flex;\n  flex-direction: column;\n  transform-style: preserve-3d;\n  perspective: 1000px;\n}\n\n/* Rotating Border Glow */\n.chat-window::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: \n    conic-gradient(\n      transparent, \n      rgba(0, 217, 165, 0.4), \n      transparent 30%,\n      rgba(0, 229, 204, 0.3),\n      transparent 60%,\n      rgba(30, 58, 95, 0.2),\n      transparent 90%\n    );\n  animation: \n    rotate-border 8s linear infinite,\n    electric-pulse 6s ease-in-out infinite,\n    plasma-flow 12s linear infinite;\n  z-index: 1;\n  filter: blur(3px) brightness(1.1);\n  mix-blend-mode: screen;\n}\n\n/* Grid Background + Parallax + Stars */\n.chat-window::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image: \n    radial-gradient(2px 2px at 20% 30%, rgba(0, 217, 165, 0.15), transparent),\n    radial-gradient(2px 2px at 60% 70%, rgba(0, 229, 204, 0.2), transparent),\n    radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.1), transparent),\n    radial-gradient(1px 1px at 80% 10%, rgba(0, 217, 165, 0.2), transparent),\n    radial-gradient(2px 2px at 90% 60%, rgba(0, 229, 204, 0.1), transparent),\n    radial-gradient(1px 1px at 15% 80%, rgba(30, 58, 95, 0.15), transparent),\n    repeating-linear-gradient(0deg, rgba(0, 217, 165, 0.03), rgba(0, 217, 165, 0.03) 1px, transparent 1px, transparent 20px), \n    repeating-linear-gradient(90deg, rgba(0, 217, 165, 0.03), rgba(0, 217, 165, 0.03) 1px, transparent 1px, transparent 20px);\n  background-size: \n    200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%,\n    100% 100%, 100% 100%;\n  animation: \n    starfield-twinkle 8s ease-in-out infinite,\n    cosmic-drift 80s linear infinite;\n  z-index: 0;\n  opacity: 0.4;\n  mix-blend-mode: overlay;\n  pointer-events: none;\n}\n\n.chat-window {\n  overflow: visible;\n}\n\n.chat-window > *:not(.chat-particle) {\n  position: relative;\n  z-index: 2;\n}\n\n/* ===== CHAT HEADER - MEGA ENHANCED ===== */\n.chat-header {\n  font-family: var(--chat--font-family-headings);\n  text-shadow: \n    0 0 8px var(--chat--color-primary), \n    0 0 12px var(--chat--color-primary), \n    0 0 20px rgba(0, 217, 165, 0.6),\n    0 0 30px rgba(0, 229, 204, 0.4),\n    0 0 5px rgba(255, 255, 255, 0.8);\n  position: relative;\n  background: \n    linear-gradient(135deg, rgba(0, 217, 165, 0.05), transparent 50%),\n    linear-gradient(225deg, rgba(0, 229, 204, 0.05), transparent 50%),\n    var(--chat--header--background);\n  color: var(--chat--header--color);\n  padding: 1.5rem;\n  border-bottom: var(--chat--header--border-bottom);\n  text-align: center;\n  letter-spacing: 3px;\n  animation: \n    neon-flicker 8s infinite alternate, \n    header-glitch 15s infinite,\n    breathing 12s ease-in-out infinite;\n  z-index: 2;\n  border-top-left-radius: var(--chat--window--border-radius);\n  border-top-right-radius: var(--chat--window--border-radius);\n  overflow: hidden;\n  filter: drop-shadow(0 0 10px rgba(0, 217, 165, 0.3));\n}\n\n/* Scanline + CRT Effect */\n.chat-header::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 200%;\n  background-image: \n    linear-gradient(0deg, transparent 50%, rgba(10, 22, 40, 0.3) 50%),\n    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);\n  background-size: 100% 6px, 100% 4px;\n  opacity: 0.15;\n  animation: \n    scanline 12s linear infinite,\n    vhs-tracking 4s steps(1) infinite;\n  pointer-events: none;\n  mix-blend-mode: multiply;\n}\n\n/* Holographic Shimmer + Lens Flare */\n.chat-header::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: \n    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),\n    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%),\n    linear-gradient(135deg, rgba(0, 217, 165, 0.05), rgba(0, 229, 204, 0.05), rgba(30, 58, 95, 0.05));\n  animation: \n    holographic-shimmer 6s linear infinite,\n    lens-flare 12s ease-in-out infinite;\n  pointer-events: none;\n  mix-blend-mode: overlay;\n}\n\n/* ===== MESSAGES LIST - ULTRA ENHANCED ===== */\n.chat-messages-list {\n  flex-grow: 1;\n  overflow-y: auto;\n  overflow-x: hidden;\n  padding: var(--chat--messages-list--padding);\n  z-index: 2;\n  position: relative;\n  background: \n    radial-gradient(ellipse at top, rgba(0, 217, 165, 0.01), transparent),\n    radial-gradient(ellipse at bottom, rgba(0, 229, 204, 0.01), transparent);\n  animation: ambient-pulse 15s ease-in-out infinite;\n}\n\n/* Data Stream + Binary */\n.chat-messages-list::before {\n  content: '01001010 11010110 00110101 10101011 01110010 00011100 11001101 10010110';\n  position: absolute;\n  top: 0;\n  left: -5px;\n  width: 5px;\n  height: 100%;\n  font-size: 8px;\n  color: var(--chat--color-primary);\n  opacity: 0.15;\n  writing-mode: vertical-rl;\n  animation: \n    data-stream 20s linear infinite,\n    matrix-rain 30s linear infinite,\n    code-flicker 6s steps(1) infinite;\n  letter-spacing: 2px;\n  overflow: hidden;\n  pointer-events: none;\n  text-shadow: 0 0 5px currentColor;\n}\n\n.chat-messages-list::after {\n  content: '11010110 01001010 10101011 00110101 00011100 01110010 10010110 11001101';\n  position: absolute;\n  top: 0;\n  right: -5px;\n  width: 5px;\n  height: 100%;\n  font-size: 8px;\n  color: var(--chat--color-secondary);\n  opacity: 0.15;\n  writing-mode: vertical-rl;\n  animation: \n    data-stream 24s linear infinite reverse,\n    matrix-rain 36s linear infinite reverse,\n    code-flicker 8s steps(1) infinite;\n  letter-spacing: 2px;\n  overflow: hidden;\n  pointer-events: none;\n  text-shadow: 0 0 5px currentColor;\n}\n\n/* ===== CHAT MESSAGE - MEGA ENHANCED ===== */\n.chat-message {\n  backdrop-filter: blur(10px) saturate(120%) brightness(1.05);\n  -webkit-backdrop-filter: blur(10px) saturate(120%) brightness(1.05);\n  max-width: 85%;\n  transition: all var(--chat--transition-duration) cubic-bezier(0.165, 0.84, 0.44, 1);\n  animation: \n    slideUpFade 0.7s ease-out forwards, \n    message-materialize 0.8s ease-out,\n    message-float 8s ease-in-out infinite,\n    subtle-glow 6s ease-in-out infinite;\n  opacity: 0;\n  transform: translateY(20px);\n  animation-fill-mode: forwards;\n  position: relative;\n  filter: \n    drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4))\n    drop-shadow(0 0 10px rgba(0, 217, 165, 0.1));\n}\n\n.chat-messages-list .chat-message:nth-child(1) { animation-delay: 0.1s; }\n.chat-messages-list .chat-message:nth-child(2) { animation-delay: 0.2s; }\n.chat-messages-list .chat-message:nth-child(3) { animation-delay: 0.3s; }\n.chat-messages-list .chat-message:nth-child(4) { animation-delay: 0.4s; }\n.chat-messages-list .chat-message:nth-child(n+5) { animation-delay: 0.5s; }\n\n.chat-message:hover {\n  transform: translateY(-5px) scale(1.02) perspective(1000px) rotateX(2deg);\n  filter: \n    brightness(1.2) \n    drop-shadow(0 8px 30px rgba(0, 217, 165, 0.3))\n    drop-shadow(0 0 20px rgba(0, 229, 204, 0.2));\n  z-index: 10;\n  animation: \n    hover-pulse 1.2s ease-out,\n    hover-shimmer 4s linear infinite;\n}\n\n/* ===== USER MESSAGE - ULTRA ENHANCED ===== */\n.chat-message-user {\n  background: \n    radial-gradient(circle at top right, rgba(255, 255, 255, 0.1), transparent),\n    var(--chat--message--user--background);\n  color: var(--chat--message--user--color);\n  border-radius: 1.2rem 1.2rem 0.2rem 1.2rem;\n  box-shadow: \n    0 0 25px rgba(0, 217, 165, 0.3),\n    0 0 15px rgba(0, 229, 204, 0.2),\n    0 0 35px rgba(30, 58, 95, 0.15),\n    inset 0 0 20px rgba(255, 255, 255, 0.1),\n    inset -2px -2px 10px rgba(0, 0, 0, 0.2);\n  animation: \n    user-message-pulse 5s infinite, \n    chromatic-aberration 6s infinite,\n    energy-flow 8s linear infinite,\n    diamond-sparkle 6s ease-in-out infinite;\n  position: relative;\n  overflow: hidden;\n  font-weight: 500;\n}\n\n/* Liquid Edge + Plasma */\n.chat-message-user::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: \n    radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 50%),\n    radial-gradient(ellipse at 30% 30%, rgba(0, 229, 204, 0.1), transparent),\n    radial-gradient(ellipse at 70% 70%, rgba(0, 217, 165, 0.1), transparent);\n  animation: \n    liquid-motion 8s ease-in-out infinite,\n    plasma-morph 12s ease-in-out infinite,\n    energy-rotation 16s linear infinite;\n  pointer-events: none;\n  mix-blend-mode: overlay;\n}\n\n/* Iridescent + Prism */\n.chat-message-user::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: -100%;\n  width: 100%;\n  height: 100%;\n  background: \n    linear-gradient(90deg,\n      transparent,\n      rgba(255, 255, 255, 0.2),\n      rgba(0, 229, 204, 0.15),\n      rgba(0, 217, 165, 0.15),\n      transparent\n    );\n  animation: \n    iridescent-sweep 6s linear infinite,\n    prism-refraction 10s ease-in-out infinite;\n  pointer-events: none;\n  mix-blend-mode: screen;\n}\n\n/* ===== BOT MESSAGE - ULTRA ENHANCED ===== */\n.chat-message-bot {\n  background: \n    linear-gradient(135deg, rgba(0, 217, 165, 0.03), transparent),\n    var(--chat--message--bot--background);\n  color: var(--chat--message--bot--color);\n  border: 1px solid var(--chat--border-color-glow);\n  border-radius: 1.2rem 1.2rem 1.2rem 0.2rem;\n  box-shadow: \n    0 4px 30px rgba(0, 0, 0, 0.4),\n    0 0 20px rgba(0, 217, 165, 0.15),\n    0 0 30px rgba(0, 229, 204, 0.1),\n    inset 0 0 30px rgba(0, 217, 165, 0.03),\n    inset 0 0 20px rgba(0, 229, 204, 0.02);\n  position: relative;\n  overflow: hidden;\n  animation: \n    bot-message-glow 6s infinite,\n    hologram-flicker 10s steps(20) infinite,\n    quantum-fluctuation 8s ease-in-out infinite;\n}\n\n/* Glass Shine + Caustics */\n.chat-message-bot::after {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -100%;\n  width: 200%;\n  height: 200%;\n  background: \n    linear-gradient(110deg, \n      transparent 40%, \n      rgba(255, 255, 255, 0.12) 45%,\n      rgba(0, 217, 165, 0.15) 50%,\n      rgba(255, 255, 255, 0.12) 55%,\n      transparent 60%\n    ),\n    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 70%);\n  transform: rotate(25deg);\n  animation: \n    glass-shine 10s infinite,\n    caustics-flow 16s ease-in-out infinite,\n    light-rays 12s linear infinite;\n  mix-blend-mode: overlay;\n}\n\n/* Hexagon + Circuit */\n.chat-message-bot::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image: \n    repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0, 217, 165, 0.02) 10px, rgba(0, 217, 165, 0.02) 11px),\n    repeating-linear-gradient(60deg, transparent, transparent 10px, rgba(0, 229, 204, 0.02) 10px, rgba(0, 229, 204, 0.02) 11px),\n    repeating-linear-gradient(120deg, transparent, transparent 10px, rgba(30, 58, 95, 0.02) 10px, rgba(30, 58, 95, 0.02) 11px),\n    radial-gradient(circle at 20% 20%, rgba(0, 217, 165, 0.03) 1px, transparent 1px),\n    radial-gradient(circle at 80% 80%, rgba(0, 229, 204, 0.03) 1px, transparent 1px);\n  background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px, 20px 20px;\n  opacity: 0.4;\n  pointer-events: none;\n  animation: \n    circuit-pulse 8s ease-in-out infinite,\n    neural-fire 6s steps(10) infinite;\n}\n\n/* ===== TYPING INDICATOR - MEGA ENHANCED ===== */\n.chat-typing {\n  display: flex;\n  align-items: center;\n  padding: 10px;\n  position: relative;\n  animation: typing-container-pulse 4s ease-in-out infinite;\n}\n\n/* Energy Wave + Sonar */\n.chat-typing::before {\n  content: '';\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 2px;\n  background: \n    linear-gradient(90deg, \n      transparent, \n      var(--chat--color-primary), \n      var(--chat--color-secondary),\n      transparent\n    );\n  transform: translateY(-50%) scaleX(0);\n  animation: \n    energy-wave 4s ease-in-out infinite,\n    sonar-ping 6s ease-out infinite;\n  box-shadow: 0 0 10px currentColor;\n}\n\n.chat-typing span {\n  height: 10px;\n  width: 10px;\n  margin: 0 4px;\n  background-color: var(--chat--color-primary);\n  border-radius: 50%;\n  opacity: 0.4;\n  animation: \n    typing-dots 1.4s infinite, \n    dot-glow 4s infinite,\n    dot-morph 6s ease-in-out infinite;\n  box-shadow: \n    0 0 8px currentColor,\n    0 0 15px currentColor,\n    0 0 20px currentColor,\n    inset 0 0 5px rgba(255, 255, 255, 0.3);\n  position: relative;\n  z-index: 1;\n}\n\n.chat-typing span:nth-child(2) { \n  animation-delay: 0.2s;\n  background: radial-gradient(circle, var(--chat--color-secondary), var(--chat--color-secondary-shade-50));\n  box-shadow: \n    0 0 8px var(--chat--color-secondary),\n    0 0 15px var(--chat--color-secondary),\n    0 0 20px rgba(0, 229, 204, 0.5);\n}\n\n.chat-typing span:nth-child(3) { \n  animation-delay: 0.4s;\n  background: radial-gradient(circle, var(--chat--color-primary), var(--chat--color-primary-shade-50));\n  box-shadow: \n    0 0 8px var(--chat--color-primary),\n    0 0 15px var(--chat--color-primary),\n    0 0 20px rgba(0, 217, 165, 0.5);\n}\n\n/* Particle Emanation */\n.chat-typing span::after {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 100%;\n  height: 100%;\n  background: radial-gradient(circle, currentColor, transparent);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n  animation: \n    particle-emanate 3s infinite,\n    ring-expand 4s ease-out infinite;\n  opacity: 0;\n}\n\n.chat-typing span:nth-child(2)::after { \n  animation-delay: 0.2s;\n}\n\n.chat-typing span:nth-child(3)::after { \n  animation-delay: 0.4s;\n}\n\n/* ===== FOOTER - ULTRA ENHANCED ===== */\n.chat-footer {\n  background: \n    linear-gradient(180deg, rgba(0, 217, 165, 0.02), transparent),\n    var(--chat--footer--background);\n  padding: var(--chat--spacing);\n  backdrop-filter: blur(10px) brightness(1.05) saturate(120%);\n  -webkit-backdrop-filter: blur(10px) brightness(1.05) saturate(120%);\n  z-index: 2;\n  border-bottom-left-radius: var(--chat--window--border-radius);\n  border-bottom-right-radius: var(--chat--window--border-radius);\n  position: relative;\n  overflow: hidden;\n  animation: footer-breathe 8s ease-in-out infinite;\n}\n\n/* Ambient Light + Spectrum */\n.chat-footer::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 2px;\n  background: \n    linear-gradient(90deg,\n      var(--chat--color-primary),\n      var(--chat--color-secondary),\n      var(--chat--color-primary)\n    );\n  background-size: 200% 100%;\n  animation: \n    ambient-light 6s linear infinite,\n    spectrum-shift 10s linear infinite;\n  box-shadow: \n    0 0 10px currentColor,\n    0 2px 20px currentColor;\n}\n\n/* ===== INPUT - MEGA ENHANCED ===== */\n.chat-input {\n  background-image: \n    radial-gradient(circle at top left, rgba(0, 217, 165, 0.03), transparent),\n    linear-gradient(var(--chat--input--background), var(--chat--input--background)),\n    linear-gradient(100deg, \n      var(--chat--color-primary), \n      var(--chat--color-secondary),\n      var(--chat--color-primary)\n    );\n  background-origin: border-box;\n  background-clip: padding-box, padding-box, border-box;\n  border: 2px solid transparent;\n  background-size: 100% 100%, 100% 100%, 300% 100%;\n  animation: \n    move-border 8s linear infinite,\n    input-glow-pulse 6s ease-in-out infinite,\n    border-flow 12s linear infinite;\n  color: var(--chat--input--text-color);\n  height: var(--chat--textarea--height);\n  padding: var(--chat--input--padding);\n  border-radius: var(--chat--input--border-radius);\n  width: 100%;\n  transition: all 0.3s ease;\n  position: relative;\n  box-shadow: \n    0 0 10px rgba(0, 217, 165, 0.15),\n    0 0 20px rgba(0, 229, 204, 0.08),\n    inset 0 0 10px rgba(0, 0, 0, 0.4),\n    inset 0 0 20px rgba(0, 217, 165, 0.01);\n}\n\n.chat-input:focus {\n  outline: none;\n  box-shadow: \n    0 0 25px var(--chat--color-primary), \n    0 0 40px rgba(0, 217, 165, 0.3),\n    0 0 60px rgba(0, 229, 204, 0.2),\n    0 0 80px rgba(30, 58, 95, 0.15),\n    inset 0 0 20px rgba(0, 217, 165, 0.2),\n    inset 0 0 30px rgba(0, 229, 204, 0.08);\n  animation: \n    input-ripple 1.2s ease-out, \n    move-border 8s linear infinite,\n    focus-burst 1s ease-out,\n    active-shimmer 4s linear infinite;\n  transform: scale(1.005);\n}\n\n/* ===== TOGGLE BUTTON - MEGA ENHANCED ===== */\n.chat-toggle {\n  width: var(--chat--toggle--size);\n  height: var(--chat--toggle--size);\n  border-radius: var(--chat--toggle--border-radius);\n  background: \n    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent),\n    var(--chat--toggle--background);\n  color: var(--chat--toggle--color);\n  box-shadow: \n    0 0 35px rgba(0, 217, 165, 0.5), \n    0 0 45px rgba(0, 229, 204, 0.3),\n    0 0 60px rgba(30, 58, 95, 0.2),\n    0 0 80px rgba(0, 217, 165, 0.3),\n    inset 0 0 20px rgba(255, 255, 255, 0.15),\n    inset 0 0 30px rgba(0, 217, 165, 0.08);\n  transition: all var(--chat--transition-duration) ease-in-out;\n  animation: \n    float 8s infinite ease-in-out, \n    pulse-wave 4s infinite,\n    rotate-slow 40s linear infinite,\n    color-cycle 12s linear infinite;\n  border: 2px solid var(--chat--color-primary);\n  position: relative;\n  overflow: visible;\n  filter: drop-shadow(0 0 10px rgba(0, 217, 165, 0.4));\n  font-weight: 700;\n}\n\n/* Pulse Wave Rings */\n.chat-toggle::before {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 100%;\n  height: 100%;\n  border: 2px solid var(--chat--color-primary);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n  animation: \n    pulse-ring 4s infinite,\n    ripple-effect 6s ease-out infinite;\n  opacity: 0;\n  box-shadow: 0 0 20px currentColor;\n}\n\n.chat-toggle::after {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 100%;\n  height: 100%;\n  border: 2px solid var(--chat--color-secondary);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n  animation: \n    pulse-ring 4s infinite 1s,\n    ripple-effect 6s ease-out infinite 1s;\n  opacity: 0;\n  box-shadow: 0 0 20px currentColor;\n}\n\n.chat-toggle:hover {\n  background: \n    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent),\n    var(--chat--toggle--hover--background);\n  box-shadow: \n    0 0 55px rgba(0, 229, 204, 0.6), \n    0 0 65px rgba(0, 217, 165, 0.5),\n    0 0 90px rgba(30, 58, 95, 0.4),\n    0 0 100px rgba(0, 229, 204, 0.3),\n    0 0 120px rgba(0, 217, 165, 0.2),\n    inset 0 0 30px rgba(255, 255, 255, 0.2),\n    inset 0 0 40px rgba(0, 217, 165, 0.15);\n  transform: scale(1.15) rotate(-15deg);\n  animation: \n    float 8s infinite ease-in-out paused, \n    toggle-burst 1.2s ease-out,\n    hover-shake 0.6s ease-in-out,\n    supernova-flash 1.6s ease-out;\n}\n\n/* ===== SCROLLBAR - ULTRA ENHANCED ===== */\n.chat-messages-list::-webkit-scrollbar { \n  width: 10px;\n}\n\n.chat-messages-list::-webkit-scrollbar-track { \n  background: \n    linear-gradient(180deg, rgba(0, 217, 165, 0.03), rgba(0, 229, 204, 0.03));\n  position: relative;\n  border-radius: 10px;\n}\n\n.chat-messages-list::-webkit-scrollbar-thumb {\n  background: \n    radial-gradient(circle at top, rgba(255, 255, 255, 0.15), transparent),\n    linear-gradient(180deg, \n      var(--chat--color-primary), \n      var(--chat--color-secondary), \n      var(--chat--color-primary)\n    );\n  border-radius: 10px;\n  box-shadow: \n    0 0 12px var(--chat--color-primary),\n    0 0 20px rgba(0, 217, 165, 0.4),\n    0 0 30px rgba(0, 229, 204, 0.2),\n    inset 0 0 10px rgba(255, 255, 255, 0.2),\n    inset 0 0 15px rgba(0, 217, 165, 0.15);\n  border: 2px solid var(--chat--color-dark);\n  position: relative;\n  animation: \n    scrollbar-glow 4s infinite,\n    scrollbar-shimmer 6s linear infinite;\n}\n\n.chat-messages-list::-webkit-scrollbar-thumb:hover { \n  background: \n    radial-gradient(circle at top, rgba(255, 255, 255, 0.2), transparent),\n    linear-gradient(180deg, \n      var(--chat--color-secondary), \n      var(--chat--color-primary), \n      var(--chat--color-secondary)\n    );\n  box-shadow: \n    0 0 16px var(--chat--color-secondary),\n    0 0 30px rgba(0, 229, 204, 0.5),\n    0 0 45px rgba(0, 217, 165, 0.3),\n    inset 0 0 15px rgba(255, 255, 255, 0.3),\n    inset 0 0 20px rgba(0, 229, 204, 0.2);\n  animation: \n    scrollbar-glow 2s infinite,\n    scrollbar-burst 1s ease-out;\n}\n\n/* ===== MICRO-INTERACTIONS ===== */\n.chat-message:active {\n  transform: scale(0.98);\n  transition: transform 0.1s;\n  animation: click-flash 0.6s ease-out;\n}\n\n.chat-input:hover {\n  box-shadow: \n    0 0 15px rgba(0, 217, 165, 0.2),\n    0 0 25px rgba(0, 229, 204, 0.15),\n    inset 0 0 15px rgba(0, 0, 0, 0.4);\n  transform: scale(1.002);\n}\n\n.chat-messages-list {\n  transform-style: preserve-3d;\n  perspective: 1000px;\n}\n\n/* Text Shimmer */\n@keyframes text-shimmer {\n  0% { background-position: -100% 0; }\n  100% { background-position: 200% 0; }\n}\n\n.chat-header h1,\n.chat-header h2 {\n  background: \n    linear-gradient(90deg,\n      var(--chat--color-white) 20%,\n      var(--chat--color-primary) 40%,\n      var(--chat--color-secondary) 50%,\n      var(--chat--color-primary) 60%,\n      var(--chat--color-white) 80%\n    );\n  background-size: 200% auto;\n  background-clip: text;\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  animation: \n    text-shimmer 6s linear infinite,\n    text-float 8s ease-in-out infinite;\n}\n\n/* Enhanced Depth */\n.chat-window {\n  box-shadow: \n    0 0 100px rgba(0, 217, 165, 0.3), \n    0 0 120px rgba(0, 229, 204, 0.2),\n    0 0 80px rgba(30, 58, 95, 0.15),\n    0 0 150px rgba(0, 217, 165, 0.12),\n    0 20px 60px rgba(0, 0, 0, 0.4),\n    0 40px 100px rgba(0, 0, 0, 0.25),\n    0 60px 140px rgba(0, 0, 0, 0.15),\n    inset 0 0 100px rgba(0, 217, 165, 0.01);\n}\n\n/* ===== ALL ANIMATIONS - OPTIMIZED ===== */\n\n@keyframes animated-gradient {\n  0% { background-position: 0% 50%; }\n  50% { background-position: 100% 50%; }\n  100% { background-position: 0% 50%; }\n}\n\n@keyframes rotate-border { \n  from { transform: rotate(0deg); } \n  to { transform: rotate(360deg); } \n}\n\n@keyframes move-border { \n  from { background-position: 0% 0%; } \n  to { background-position: 300% 0%; } \n}\n\n@keyframes fadeInGlow {\n  from { \n    opacity: 0; \n    transform: scale(0.95); \n    box-shadow: 0 0 20px rgba(0, 217, 165, 0.15); \n  }\n  to { \n    opacity: 1; \n    transform: scale(1); \n    box-shadow: \n      0 0 100px rgba(0, 217, 165, 0.3), \n      0 0 120px rgba(0, 229, 204, 0.2); \n  }\n}\n\n@keyframes slideUpFade {\n  from { opacity: 0; transform: translateY(20px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n@keyframes user-message-pulse {\n  0% { \n    box-shadow: \n      0 0 25px rgba(0, 217, 165, 0.3),\n      0 0 15px rgba(0, 229, 204, 0.2); \n  }\n  50% { \n    box-shadow: \n      0 0 40px rgba(0, 229, 204, 0.4), \n      0 0 50px rgba(0, 217, 165, 0.5),\n      0 0 15px rgba(0, 217, 165, 0.3) inset; \n  }\n  100% { \n    box-shadow: \n      0 0 25px rgba(0, 217, 165, 0.3),\n      0 0 15px rgba(0, 229, 204, 0.2); \n  }\n}\n\n@keyframes neon-flicker {\n  0%, 100% { \n    text-shadow: \n      0 0 5px var(--chat--color-primary), \n      0 0 10px var(--chat--color-primary), \n      0 0 20px rgba(0, 217, 165, 0.6), \n      0 0 40px rgba(0, 229, 204, 0.4); \n  }\n  50% { \n    text-shadow: \n      0 0 10px var(--chat--color-primary), \n      0 0 20px var(--chat--color-primary-shade-50), \n      0 0 30px rgba(0, 229, 204, 0.6), \n      0 0 50px rgba(0, 217, 165, 0.5),\n      0 0 60px rgba(0, 217, 165, 0.4); \n  }\n}\n\n@keyframes glass-shine {\n  0% { left: -150%; }\n  100% { left: 150%; }\n}\n\n@keyframes typing-dots {\n  0%, 75%, 100% { transform: translateY(0); opacity: 0.4; }\n  25% { transform: translateY(-8px); opacity: 1; }\n}\n\n@keyframes float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-15px); }\n}\n\n@keyframes scanline {\n  0% { transform: translateY(-100%); }\n  100% { transform: translateY(0); }\n}\n\n@keyframes holographic-shimmer {\n  0% { transform: translateX(-100%) translateY(-100%); }\n  100% { transform: translateX(100%) translateY(100%); }\n}\n\n@keyframes header-glitch {\n  0%, 95%, 100% { transform: translateX(0); }\n  96% { transform: translateX(-1px); }\n  97% { transform: translateX(1px); }\n  98% { transform: translateX(-1px); }\n  99% { transform: translateX(0); }\n}\n\n@keyframes data-stream {\n  0% { transform: translateY(-100%); opacity: 0; }\n  10% { opacity: 0.15; }\n  90% { opacity: 0.15; }\n  100% { transform: translateY(100%); opacity: 0; }\n}\n\n@keyframes message-materialize {\n  0% { \n    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);\n    filter: blur(10px);\n  }\n  100% { \n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);\n    filter: blur(0);\n  }\n}\n\n@keyframes chromatic-aberration {\n  0%, 100% { filter: none; }\n  50% { filter: drop-shadow(1px 0 0 rgba(0, 217, 165, 0.2)) drop-shadow(-1px 0 0 rgba(0, 229, 204, 0.2)); }\n}\n\n@keyframes liquid-motion {\n  0%, 100% { transform: translate(0, 0) scale(1); }\n  25% { transform: translate(30%, -30%) scale(1.05); }\n  50% { transform: translate(-30%, 30%) scale(0.95); }\n  75% { transform: translate(20%, 20%) scale(1.02); }\n}\n\n@keyframes iridescent-sweep {\n  0% { left: -100%; }\n  100% { left: 200%; }\n}\n\n@keyframes bot-message-glow {\n  0%, 100% { border-color: rgba(0, 217, 165, 0.4); }\n  50% { border-color: rgba(0, 229, 204, 0.6); }\n}\n\n@keyframes energy-wave {\n  0% { transform: translateY(-50%) scaleX(0); opacity: 0; }\n  50% { transform: translateY(-50%) scaleX(1); opacity: 1; }\n  100% { transform: translateY(-50%) scaleX(0); opacity: 0; }\n}\n\n@keyframes dot-glow {\n  0%, 100% { box-shadow: 0 0 8px currentColor; }\n  50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }\n}\n\n@keyframes particle-emanate {\n  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }\n  100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }\n}\n\n@keyframes ambient-light {\n  0% { background-position: 0% 0%; }\n  100% { background-position: 200% 0%; }\n}\n\n@keyframes input-ripple {\n  0% { box-shadow: 0 0 0 0 rgba(0, 217, 165, 0.6); }\n  100% { box-shadow: 0 0 0 20px rgba(0, 217, 165, 0); }\n}\n\n@keyframes pulse-wave {\n  0%, 100% { box-shadow: 0 0 35px rgba(0, 217, 165, 0.5), 0 0 45px rgba(0, 229, 204, 0.3); }\n  50% { box-shadow: 0 0 50px rgba(0, 229, 204, 0.7), 0 0 60px rgba(0, 217, 165, 0.5); }\n}\n\n@keyframes pulse-ring {\n  0% { \n    width: 100%; \n    height: 100%; \n    opacity: 0.7; \n  }\n  100% { \n    width: 200%; \n    height: 200%; \n    opacity: 0; \n  }\n}\n\n@keyframes toggle-burst {\n  0% { transform: scale(1.15) rotate(-15deg); }\n  50% { transform: scale(1.2) rotate(-18deg); }\n  100% { transform: scale(1.15) rotate(-15deg); }\n}\n\n@keyframes scrollbar-glow {\n  0%, 100% { box-shadow: 0 0 12px var(--chat--color-primary); }\n  50% { box-shadow: 0 0 20px var(--chat--color-secondary), 0 0 30px rgba(0, 229, 204, 0.5); }\n}\n\n@keyframes aurora-wave {\n  0% { background-position: 0% 0%; }\n  50% { background-position: 100% 100%; }\n  100% { background-position: 0% 0%; }\n}\n\n@keyframes nebula-drift {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(20deg); }\n}\n\n@keyframes electric-pulse {\n  0%, 100% { filter: brightness(1.1) blur(3px); }\n  50% { filter: brightness(1.3) blur(2px); }\n}\n\n@keyframes plasma-flow {\n  0% { background-position: 0% 50%; }\n  100% { background-position: 200% 50%; }\n}\n\n@keyframes starfield-twinkle {\n  0%, 100% { opacity: 0.3; }\n  50% { opacity: 0.6; }\n}\n\n@keyframes cosmic-drift {\n  0% { transform: translate(0, 0); }\n  100% { transform: translate(30px, 30px); }\n}\n\n@keyframes breathing {\n  0%, 100% { transform: scale(1); }\n  50% { transform: scale(1.005); }\n}\n\n@keyframes vhs-tracking {\n  0%, 95%, 100% { transform: translateX(0); }\n  97% { transform: translateX(1px); }\n}\n\n@keyframes lens-flare {\n  0%, 100% { opacity: 0; }\n  50% { opacity: 0.2; }\n}\n\n@keyframes ambient-pulse {\n  0%, 100% { opacity: 1; }\n  50% { opacity: 0.98; }\n}\n\n@keyframes matrix-rain {\n  0% { opacity: 0.15; }\n  50% { opacity: 0.3; }\n  100% { opacity: 0.15; }\n}\n\n@keyframes code-flicker {\n  0%, 95%, 100% { opacity: 0.15; }\n  97% { opacity: 0.35; }\n}\n\n@keyframes message-float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-1px); }\n}\n\n@keyframes subtle-glow {\n  0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 217, 165, 0.1)); }\n  50% { filter: drop-shadow(0 0 8px rgba(0, 229, 204, 0.15)); }\n}\n\n@keyframes hover-pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.02); }\n  100% { transform: scale(1.02); }\n}\n\n@keyframes hover-shimmer {\n  0% { filter: brightness(1.2) hue-rotate(0deg); }\n  100% { filter: brightness(1.2) hue-rotate(5deg); }\n}\n\n@keyframes energy-flow {\n  0% { background-position: 0% 50%; }\n  100% { background-position: 200% 50%; }\n}\n\n@keyframes diamond-sparkle {\n  0%, 100% { filter: brightness(1); }\n  50% { filter: brightness(1.15); }\n}\n\n@keyframes plasma-morph {\n  0%, 100% { border-radius: 50%; }\n  50% { border-radius: 45%; }\n}\n\n@keyframes energy-rotation {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n@keyframes prism-refraction {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(15deg); }\n}\n\n@keyframes hologram-flicker {\n  0%, 95%, 100% { opacity: 1; }\n  97% { opacity: 0.9; }\n}\n\n@keyframes quantum-fluctuation {\n  0%, 100% { transform: translateX(0); }\n  50% { transform: translateX(0.3px); }\n}\n\n@keyframes caustics-flow {\n  0% { transform: rotate(25deg) translateX(0); }\n  100% { transform: rotate(25deg) translateX(30px); }\n}\n\n@keyframes light-rays {\n  0% { opacity: 0.08; }\n  50% { opacity: 0.15; }\n  100% { opacity: 0.08; }\n}\n\n@keyframes circuit-pulse {\n  0%, 100% { opacity: 0.4; }\n  50% { opacity: 0.6; }\n}\n\n@keyframes neural-fire {\n  0%, 100% { filter: brightness(1); }\n  50% { filter: brightness(1.1); }\n}\n\n@keyframes typing-container-pulse {\n  0%, 100% { transform: scale(1); }\n  50% { transform: scale(1.005); }\n}\n\n@keyframes sonar-ping {\n  0% { opacity: 0; }\n  50% { opacity: 0.4; }\n  100% { opacity: 0; }\n}\n\n@keyframes dot-morph {\n  0%, 100% { border-radius: 50%; }\n  50% { border-radius: 40%; }\n}\n\n@keyframes ring-expand {\n  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }\n  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }\n}\n\n@keyframes footer-breathe {\n  0%, 100% { transform: scaleY(1); }\n  50% { transform: scaleY(1.002); }\n}\n\n@keyframes spectrum-shift {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(15deg); }\n}\n\n@keyframes input-glow-pulse {\n  0%, 100% { filter: brightness(1); }\n  50% { filter: brightness(1.05); }\n}\n\n@keyframes border-flow {\n  from { background-position: 0% 0%; }\n  to { background-position: 300% 0%; }\n}\n\n@keyframes focus-burst {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.008); }\n  100% { transform: scale(1.005); }\n}\n\n@keyframes active-shimmer {\n  0% { filter: brightness(1.05) hue-rotate(0deg); }\n  100% { filter: brightness(1.05) hue-rotate(8deg); }\n}\n\n@keyframes rotate-slow {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n@keyframes color-cycle {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(30deg); }\n}\n\n@keyframes ripple-effect {\n  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }\n  100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }\n}\n\n@keyframes hover-shake {\n  0%, 100% { transform: scale(1.15) rotate(-15deg); }\n  25% { transform: scale(1.15) rotate(-15.5deg); }\n  75% { transform: scale(1.15) rotate(-14.5deg); }\n}\n\n@keyframes supernova-flash {\n  0% { filter: brightness(1); }\n  50% { filter: brightness(1.5); }\n  100% { filter: brightness(1); }\n}\n\n@keyframes scrollbar-shimmer {\n  0% { filter: hue-rotate(0deg); }\n  100% { filter: hue-rotate(15deg); }\n}\n\n@keyframes scrollbar-burst {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.03); }\n  100% { transform: scale(1); }\n}\n\n@keyframes click-flash {\n  0% { filter: brightness(1); }\n  50% { filter: brightness(1.3); }\n  100% { filter: brightness(1); }\n}\n\n@keyframes text-float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-0.5px); }\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    0,
+    0
+   ],
+   "id": "98607363-6536-411a-a931-e4cdd20d7f93",
+   "name": "tema personalizado",
+   "webhookId": "a1f05de7-72fd-4da1-8149-1244d34267be"
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "hours"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -144,
+    160
+   ],
+   "id": "67fbb17e-04d3-4704-b477-c8761e907f7d",
+   "name": "tempo programado"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "b6e0dac0-bfbb-4af5-970c-3a47a66694cf",
+       "name": "chatInput",
+       "value": "=proximo video baseado nso temas usados o anteriormente, mais sempre bucando nas ferramentas e que seja diferente do anterior",
+       "type": "string"
+      },
+      {
+       "id": "e1b01647-a2f3-4148-a9e9-f8404d027815",
+       "name": "",
+       "value": "",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    16,
+    160
+   ],
+   "id": "9386d0a1-1752-455d-bffa-b014833e0667",
+   "name": "mensagem do sistema"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2b6a5222-e744-4540-9791-adee231d0ed7",
+       "leftValue": "={{ $('segura na mao de deus e vai').item.json.done }}",
+       "rightValue": "true",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1472,
+    432
+   ],
+   "id": "3e002e21-f8f6-4b34-bd20-4b47c2d53d4b",
+   "name": "Já Acabou, VEO?"
+  },
+  {
+   "parameters": {
+    "amount": 1,
+    "unit": "minutes"
+   },
+   "id": "3e65cf55-2545-472d-a294-cbb4d278e52d",
+   "name": "Momento de Reflexão",
+   "type": "n8n-nodes-base.wait",
+   "position": [
+    1008,
+    144
+   ],
+   "typeVersion": 1.1,
+   "webhookId": "849a3d35-47b3-4414-ae4b-bbbe25f94320"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://{{ $('dados').item.json.API_ENDPOINT }}/v1/projects/{{ $('dados').item.json.PROJECT_ID }}/locations/{{ $('dados').item.json.LOCATION }}/publishers/google/models/{{ $('dados').item.json.MODEL_VERSION }}:fetchPredictOperation\n",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      },
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $('dados').item.json.ACCESS_TOKEN }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"operationName\": \"{{ $json.name }}\"\n}\n",
+    "options": {}
+   },
+   "id": "16ff1179-6c60-444b-af11-7101b63e8cf7",
+   "name": "segura na mao de deus e vai",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    1184,
+    144
+   ],
+   "typeVersion": 4.2
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2b6a5222-e744-4540-9791-adee231d0ed7",
+       "leftValue": "={{ $json.response.videos[0].bytesBase64Encoded }}",
+       "rightValue": "true",
+       "operator": {
+        "type": "string",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1360,
+    144
+   ],
+   "id": "51696473-039b-4797-a60e-5a16aa41eca3",
+   "name": "Tem Vídeo Aí?1"
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "response_videos",
+    "options": {}
+   },
+   "id": "dab39db4-3234-4ddc-9f61-b9bc21c2b72d",
+   "name": "Empacotador1",
+   "type": "n8n-nodes-base.convertToFile",
+   "position": [
+    1632,
+    144
+   ],
+   "typeVersion": 1.1,
+   "retryOnFail": true
+  },
+  {
+   "parameters": {
+    "name": "={{ $('reels viral').first().json.output.split(' || ')[1] }}.mp4",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "value": "=1r6AovG1pSuN_jisqgY77cQqaRAVcMQr-",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    1808,
+    144
+   ],
+   "id": "e67f52e7-30b1-427d-a791-a85fe15eea40",
+   "name": "para postagem geral1",
+   "alwaysOutputData": false,
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "RGk0JxLNR6U0NAVz",
+     "name": "Google Drive fabrica"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": {
+     "__rl": true,
+     "value": "gemini-2.5-flash",
+     "mode": "list",
+     "cachedResultName": "gemini-2.5-flash"
+    },
+    "responsesApiEnabled": false,
+    "options": {
+     "timeout": 9999999
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1.3,
+   "position": [
+    -128,
+    336
+   ],
+   "id": "c86e3614-aa36-41cc-8828-fc25391b3dff",
+   "name": "roteador-llm",
+   "credentials": {
+    "openAiApi": {
+     "id": "ob35iy2RaZh4DG2K",
+     "name": "roteador vps nova"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://{{ $json.API_ENDPOINT }}/v1/projects/{{ $json.PROJECT_ID }}/locations/{{ $json.LOCATION }}/publishers/google/models/{{ $json.MODEL_VERSION }}:predictLongRunning",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      },
+      {
+       "name": "Authorization",
+       "value": "=Bearer {{ $json.ACCESS_TOKEN }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"endpoint\": \"projects/n8n-project-440404/locations/us-central1/publishers/google/models/veo-3.1-generate-preview\",\n  \"instances\": [\n    {\n      \"prompt\": {{ JSON.stringify($json.TEXT_PROMPT) }}\n    }\n  ],\n  \"parameters\": {\n    \"aspectRatio\": \"9:16\",\n    \"sampleCount\": 1,\n    \"durationSeconds\": \"8\",\n    \"personGeneration\": \"allow_all\",\n    \"addWatermark\": false,\n    \"includeRaiReason\": true,\n    \"generateAudio\": true,\n    \"resolution\": \"1080p\"\n  }\n}",
+    "options": {}
+   },
+   "id": "2fa5cea3-af92-4a09-86f3-26822c9182b2",
+   "name": "patrao-pq so manda",
+   "type": "n8n-nodes-base.httpRequest",
+   "position": [
+    672,
+    160
+   ],
+   "typeVersion": 4.2,
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "073f043f-e5a7-4f5d-93c5-3e0e970d0316",
+       "name": "response_videos",
+       "value": "={{ $('segura na mao de deus e vai').item.json.response.videos[0].bytesBase64Encoded }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1504,
+    144
+   ],
+   "id": "2c097ce2-c240-43f1-af2a-d352459842bc",
+   "name": "passa pra empacotar"
+  },
+  {
+   "parameters": {
+    "content": "## 🕵️ Agente: Zé da Cópia (v20)\n\n**Missão:**\n1. Buscar vídeos virais no Brasil.\n2. Validar viabilidade (Sem texto/copyright).\n3. Gerar PACOTE ÚNICO.\n\n**Saída (String única):**\n`Prompt VEO (EN)` || `Título Viral (PT)` || `Descrição SEO (PT)`",
+    "height": 220,
+    "width": 420,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    896,
+    656
+   ],
+   "id": "2d1e6d55-8c99-43af-9abe-fc232df5944c",
+   "name": "Nota Agente Ze"
+  },
+  {
+   "parameters": {
+    "errorMessage": "=erro na geracao de imagem: {{ $json.error.message }}"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    1632,
+    448
+   ],
+   "id": "367b139b-9994-489d-a6f4-eec61d723106",
+   "name": "deu ruim",
+   "alwaysOutputData": true,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "39f3968a-73e7-4e55-8621-93c49060b0b4",
+       "leftValue": "={{ $json.error }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notExists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    832,
+    160
+   ],
+   "id": "41469d2e-7ecd-400e-b2c5-bc3c3b84358b",
+   "name": "se deu ruim"
+  },
+  {
+   "parameters": {
+    "content": "# ⏳ **SALA DE ESPERA DO VEO** 🔄\n\nO vídeo leva cerca de **60 a 90 segundos** para nascer. 🐣\n\n## ⚙️ **COMO FUNCIONA O LOOP:**\n\n1️⃣ **Início:** Manda fazer (`predictLongRunning`). 🚀\n2️⃣ **Pausa:** O fluxo dorme por **1 Minuto** (`Wait`). ☕\n3️⃣ **Checagem:** Pergunta \"Tá pronto?\" (`fetchPredictOperation`). 🧐\n4️⃣ **Decisão (`If`):**\n   - 🔴 Se `done: false` ➔ Volta e espera mais.\n   - 🟢 Se `done: true` ➔ **SUCESSO!** Libera o arquivo. 🎉",
+    "height": 328,
+    "width": 572,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    864,
+    288
+   ],
+   "id": "d306a403-798a-4f76-b35a-a47bccee7e1b",
+   "name": "Nota Loop VEO1"
+  },
+  {
+   "parameters": {
+    "content": "# 🛠️ **ARSENAL DE FERRAMENTAS OPCIONAIS** 🧰\n\n\n\n\n\nO Zé usa **3 Armas Secretas** para trabalhar:\n\n1️⃣ **🔍 Busca YouTube (API):**\nVarre o Youtube BR atrás de *Shorts* recentes sobre o tema.\n\n2️⃣ **📊 Contexto & Stats:**\nPega os dados cruciais: *Views, Likes e Thumbnail*.\n\n3️⃣ **👁️ Visão (Gemini):**\nO \"Olho que Tudo Vê\". Ele assiste o vídeo frame a frame para decidir:\n**APROVADO** ✅ ou **REPROVADO** ❌.",
+    "height": 356,
+    "width": 784,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    64,
+    432
+   ],
+   "id": "1ea8cf7d-32f0-422e-8370-18fd46cb85f3",
+   "name": "Nota Ferramentas"
+  },
+  {
+   "parameters": {
+    "content": "# 🔐 **AS CHAVES DO CASTELO (APIs)** ☁️\nPara o **VEO** e o **Agente** funcionarem, você precisa destas chaves:\n\n## 🔑 **ACESSO VEO (Vertex AI):**\n1️⃣ **[Project ID (Dashboard)](https://console.cloud.google.com/home/dashboard)**\n   *O ID do seu projeto no Google Cloud.*\n\n2️⃣ **[Gerar Token (Playground)](https://developers.google.com/oauthplayground/)**\n   *Para autenticação temporária (Bearer Token).*\n\n## 📺 **ACESSO YOUTUBE:**\n3️⃣ **[Ativar API de Dados](https://console.cloud.google.com/apis/library/youtube.googleapis.com)**\n   *Permite ao Zé fazer pesquisas.*",
+    "height": 468,
+    "width": 420,
+    "color": 7
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -608,
+    -32
+   ],
+   "id": "02cef486-7a5d-4410-8ca6-a311f3f4ef79",
+   "name": "Nota Config Google Pro"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "5cedc3de-6221-4d7e-a6c8-82f4cb9cf0e9",
+       "name": "PROJECT_ID",
+       "type": "string",
+       "value": "=project-56c85062-e38d-4048-8bd"
+      },
+      {
+       "id": "90019751-e2d5-4764-9bf9-e13916dcc528",
+       "name": "MODEL_VERSION",
+       "type": "string",
+       "value": "veo-3.1-generate-preview"
+      },
+      {
+       "id": "67ab205c-82b3-4263-99c4-c906a0ca6ae9",
+       "name": "LOCATION",
+       "type": "string",
+       "value": "us-central1"
+      },
+      {
+       "id": "413415fb-60c5-4d0d-ac45-1e6178a55227",
+       "name": "TEXT_PROMPT",
+       "type": "string",
+       "value": "={{ $json.output.split(' || ')[0] }}"
+      },
+      {
+       "id": "bf0910e1-b757-4852-9341-a7792161f89b",
+       "name": "ACCESS_TOKEN",
+       "type": "string",
+       "value": "=<SEGREDO_REMOVIDO>"
+      },
+      {
+       "id": "17954335-b96b-4813-9c4a-20817d675448",
+       "name": "API_ENDPOINT",
+       "type": "string",
+       "value": "us-central1-aiplatform.googleapis.com"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "dd846c87-9edc-45ff-910e-9d7ef22e1e6d",
+   "name": "dados",
+   "type": "n8n-nodes-base.set",
+   "position": [
+    512,
+    160
+   ],
+   "typeVersion": 3.4
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    224,
+    304
+   ],
+   "id": "ecc2c644-ca87-4440-afec-4dd92d85d66f",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "H7M9faZrMKxj36dE",
+     "name": "922-inovarecap"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "upload",
+    "bucketName": "inovare",
+    "fileName": "={{ $binary.data.fileName.replaceAll(\" \",\"\").urlEncode() }}",
+    "additionalFields": {}
+   },
+   "type": "n8n-nodes-base.s3",
+   "typeVersion": 1,
+   "position": [
+    2848,
+    160
+   ],
+   "id": "beca2942-cfcd-4dd8-809b-d78bdad3eb16",
+   "name": "Upload a file",
+   "credentials": {
+    "s3": {
+     "id": "8WUpAYVmH5mnlw5J",
+     "name": "S3 account"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "createReel",
+    "reelVideoUrl": "=https://minioapi2.inovareinteligenciaartificial.com/inovare/{{$('baixa video').item.binary.data.fileName.replaceAll(\" \",\"\").urlEncode() }}",
+    "reelCaption": "={{$('baixa video').item.binary.data.fileName.replaceAll(\" \",\"\").urlEncode()}}",
+    "reelAdditionalOptions": {}
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    3168,
+    160
+   ],
+   "id": "4f41fa53-5993-4fd6-ba85-f41ef6429a50",
+   "name": "dicasfinanceiras.ia2",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "iJicG9daX4VnTgOH",
+     "name": "Instagram msenergycap"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "publishPost",
+    "creationId": "={{ $json.id }}"
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    3536,
+    160
+   ],
+   "id": "8329f70c-e6e0-4249-ba4b-e0be85376a7c",
+   "name": "dicasfinanceiras.ia3",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "iJicG9daX4VnTgOH",
+     "name": "Instagram msenergycap"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "resource": "story",
+    "storyMediaType": "VIDEO",
+    "storyVideoUrl": "=https://minioapi2.inovareinteligenciaartificial.com/inovare/{{$('baixa video').item.binary.data.fileName.replaceAll(\" \",\"\").urlEncode()}}",
+    "storyAdditionalOptions": {}
+   },
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    2992,
+    160
+   ],
+   "id": "b3a09d26-7f08-41f8-9918-33bc73fa47c5",
+   "name": "dicasfinanceiras.ia25",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "iJicG9daX4VnTgOH",
+     "name": "Instagram msenergycap"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "download",
+    "fileId": {
+     "__rl": true,
+     "value": "={{ $json.id }}",
+     "mode": "id"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    2704,
+    160
+   ],
+   "id": "df47de1e-86f6-4e6c-97b0-e7b259b8455e",
+   "name": "baixa video",
+   "credentials": {
+    "googleDriveOAuth2Api": {
+     "id": "RGk0JxLNR6U0NAVz",
+     "name": "Google Drive fabrica"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.chatInput }}## sempre use as tools para buscar videos",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é o \"Agente Zé do Reel (v24 - Modo Infalível)\". Sua missão é encontrar um vídeo viral e OBRIGATORIAMENTE gerar os insumos para recriá-lo com IA, adaptando o visual se necessário, com foco total no Instagram Reels.\n\nRegra de Ouro: JAMAIS retorne erro ou \"FALHA\". Você deve encontrar uma solução criativa para adaptar qualquer vídeo encontrado.\n\n🚨 REGRA DE VIDA OU MORTE: A API do gerador de vídeos bloqueia QUALQUER prompt que contenha nomes próprios.\nÉ ESTRITAMENTE PROIBIDO ESCREVER:\n\nNomes de pessoas reais (ex: Afonso Padilha, Whindersson, Thiago Ventura, etc).\n\nNomes de marcas, estúdios ou softwares (ex: D!sney, P!xar, Unr3al Eng!ne, M4rvel - NÃO USE NEM AS VERSÕES CORRETAS DESSAS PALAVRAS).\nSEMPRE use descrições genéricas: \"um comediante\", \"um homem\", \"estilo cartoon 3D de alta qualidade\", \"estilo animação de cinema\".\n\nContexto da Data Atual: 5 de Novembro de 2025.\n\nSEU PLANO DE EXECUÇÃO (EM 3 ETAPAS):\n\nETAPA 1: A BUSCA (Ferramenta 1)\nUse pesquisa_videos_no_youtube com estes parâmetros para garantir vídeos curtos e fáceis (a busca continua no YouTube para encontrar o material bruto):\nparameters3_Value (Busca q):\n\nHumor/Stand-up: \"stand up comedy brasil cortes #shorts\".\n\nCuriosidades: \"curiosidades fatos rápidos #shorts\".\n\nGenérico: \"[tema do user] viral #shorts\".\n\nOBS: Sempre inclua \"#shorts\".\nparameters5_Value (Data publishedAfter): Formato ISO 8601 terminando em 'Z'.\nparameters6_Value: BR\nparameters7_Value: pt\n\nETAPA 2: ANÁLISE E ADAPTAÇÃO (O \"Diretor Criativo\")\nPegue o 1º vídeo da lista. Decida a ESTRATÉGIA VISUAL:\n\nCenario A (Animação/IA): Copiar o estilo visual original genérico.\n\nCenario B (Pessoa Real): CRIAR um Personagem/Avatar genérico. Exemplo: \"A funny high-quality 3D cartoon character holding a microphone on a stage\".\n\nETAPA 3: GERAÇÃO DE CONTEÚDO (Saída Obrigatória)\nGere os 3 textos abaixo:\n\nPROMPT_VIDEO_HIBRIDO (Inglês + Instrução de Áudio):\n\nInstrução Visual: Descreva um visual possível para IA (\"3D Cartoon\" ou \"Cinematic Avatar\"). Prompt em INGLÊS. ZERO MARCAS OU NOMES. OBRIGATÓRIO: Adicione a instrução de formato vertical no final do prompt visual (\"Vertical 9:16 Aspect Ratio\" ou \"--ar 9:16\").\n\nInstrução de Áudio: \"AUDIO INSTRUCTION: The character performs a lip-sync to Brazilian Portuguese audio.\"\n\nNOVO_TITULO_VIRAL (PT-BR):\nTítulo curto, impactante e com CAPS LOCK. ZERO NOMES.\n\nDESCRICAO_VIRAL_LONGA (PT-BR):\n\nGancho (Pergunta/afirmação).\n\nResumo rápido (Chame de \"este cara\" ou \"nosso personagem\").\n\nChamada para Ação (CTA) do Instagram: (ex: \"Salva esse Reel para não esquecer\", \"Manda no direct para aquele amigo\", \"Comenta aqui embaixo\").\n\nFormatação: Use emojis e pule linhas para facilitar a leitura no feed.\n\nHashtags: #reels #reelsbrasil #explorar #instagramreels #ai #[tema genérico]. ZERO NOMES.\n\nREGRA CRÍTICA: Retorne APENAS o prompt final.\nPara construir o PROMPT_VIDEO_HIBRIDO, selecione aleatoriamente e misture fluidamente:\n\n1 item da CATEGORIA 1 (Câmera)\n\n1 item da CATEGORIA 2 (Psicologia)\n\n1 item da CATEGORIA 3 (Física)\n\n1 item da CATEGORIA 4 (Ambiente)\n\n2 itens da CATEGORIA 5 (Renderização)\n\n1 item da CATEGORIA 6 (Texto na Tela) - OBRIGATÓRIO RENDERIZAR O TEXTO.\n\n1 item da CATEGORIA 7 (Ação Inicial) - NO PRIMEIRO SEGUNDO.\n\n1 item da CATEGORIA 8 (Ritmo)\n\n1 item da CATEGORIA 9 (Foco Magnético)\n\n1 item da CATEGORIA 10 (Contraste de Cor)\n\nCATEGORIA 1: Drone FPV em alta velocidade, Macro extremo, Zoom infinito, Dolly zoom, SnorriCam, Panorâmica 360, Câmera lenta extrema, Eye-tracking, Time-lapse, Transição invisível.\nCATEGORIA 2: ASMR visual, Quebra drástica de expectativa, Contraste de escala extremo, Tensão sem impacto, Simetria perfeita, Megalofobia, Talassofobia, Loop visual, Destruição satisfatória, Ilusão de ótica.\nCATEGORIA 3: Gravidade invertida, Líquidos como vidro, Sólidos derretendo instantaneamente, Tempo parcialmente congelado, Objetos pesados flutuando, Fogo escuro, Luz tangível, Sombras físicas, Ecos visuais.\nCATEGORIA 4: Metrópole cyberpunk chuvosa, Fundo do oceano bioluminescente, Deserto de vidro, Floresta alienígena, Castelo no vulcão, Cidade steampunk voadora, Ruínas cibernéticas, Interior de buraco de minhoca.\nCATEGORIA 5: Renderização 3D de última geração, Renderização fisicamente baseada, 8k, Iluminação volumétrica, Ray tracing, Textura hiper-realista, Color grading cinematográfico, Bokeh, Iluminação global, Subsurface scattering.\nCATEGORIA 6: Texto renderizado na tela: \"POV: Você encontrou um bug\", Texto renderizado: \"Apenas 1% consegue ver\", Texto renderizado: \"Não pisque\", Texto neon: \"O que escondem?\", Texto grande: \"Espere até o final...\", Letreiro: \"Urgente: Anomalia\", Texto legenda: \"Foi assim que mudou...\", Texto tremido: \"Isso não deveria ser gravado\".\nCATEGORIA 7: Vidro quebrando na câmera, Olhos abrindo repentinamente, Explosão silenciosa de cores, Queda livre imediata, Impacto gigante no chão, Luzes apagando para neon, Câmera engolida, Transição água para ar.\nCATEGORIA 8 (RITMO): Speed ramp repentino, Simulação de falha de VHS, Efeito de rebobinar rápido, Stutter effect (imagem piscando), Transição por chicote de câmera (Whip pan), Parada dramática no ar.\nCATEGORIA 9 (FOCO MAGNÉTICO): Contato visual direto e intenso com a lente, Rosto hiper-realista emergindo das sombras, Mão gigante tentando agarrar a câmera, Olho humano colossal no fundo do cenário, Sorriso estranho.\nCATEGORIA 10 (CONTRASTE DE COR): Laranja vibrante contra azul profundo, Preto absoluto rasgado por neon rosa, Monocromático com elemento vermelho sangue, Branco ofuscante com sombras purpuras, Bioluminescência verde.\n\nETAPA 4: SAÍDA FINAL (String Única)\nSua resposta deve ser APENAS a linha abaixo preenchida. Não escreva explicações.\n[PROMPT_VIDEO_HIBRIDO] || [NOVO_TITULO_VIRAL] || [DESCRICAO_VIRAL_LONGA]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    160,
+    160
+   ],
+   "id": "3a5e01d9-a1be-4011-bb19-daf3e6ce1073",
+   "name": "reels viral"
+  },
+  {
+   "parameters": {
+    "workflowId": {
+     "__rl": true,
+     "value": "yW6QxTv3aGsilHMH",
+     "mode": "list",
+     "cachedResultUrl": "/workflow/yW6QxTv3aGsilHMH",
+     "cachedResultName": "maquina de reels"
+    },
+    "workflowInputs": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $json.id }}",
+      "decrição": "={{ $('reels viral').item.json.output.split('||')[1].trim() }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      },
+      {
+       "id": "decrição",
+       "displayName": "decrição",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "canBeUsedToMatch": true,
+       "type": "string",
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": true
+    },
+    "options": {
+     "waitForSubWorkflow": false
+    }
+   },
+   "type": "n8n-nodes-base.executeWorkflow",
+   "typeVersion": 1.3,
+   "position": [
+    2000,
+    144
+   ],
+   "id": "ca03d8fe-0fed-4139-8c5e-9e2ce37d4c93",
+   "name": "Call 'maquina de reels'"
+  },
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "id"
+      },
+      {
+       "name": "decrição"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    2528,
+    160
+   ],
+   "id": "b97566a8-b970-4f8a-a073-fdd7796b2a70",
+   "name": "posta video"
+  },
+  {
+   "parameters": {
+    "content": "# 🎥 **ESTÚDIO DE RENDERIZAÇÃO VERTICAL** ⏳\n\nO VEO está assando o seu Reel em altíssima qualidade (Média: 60s - 90s).\n\n## 🔄 **CICLO DE ESPERA CHIQUE:**\n1️⃣ **Ordem de Produção:** Envia o prompt em inglês (Proporção 9:16).\n2️⃣ **Pausa para o Café:** O fluxo aguarda 1 minuto de forma elegante.\n3️⃣ **Controle de Qualidade:** Pergunta se a renderização finalizou.\n4️⃣ **Entrega:** Se `done: true`, a obra de arte está pronta para o Insta! 💎",
+    "height": 300,
+    "width": 500,
+    "color": 5
+   },
+   "id": "01d8ded4-aeb0-4f69-abf4-f981c9931c7b",
+   "name": "Nota Renderização",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1904,
+    640
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 🧰 **ARSENAL DO CRIADOR DE CONTEÚDO** 🛠️\n\nAs 3 ferramentas de ouro do Zé do Reel:\n\n1️⃣ **Radar de Tendências (YouTube API):** Encontra a matéria-prima original.\n2️⃣ **Análise de Engajamento:** Extrai as métricas e miniaturas do vídeo base.\n3️⃣ **Olho Clínico (Gemini Vision):** Analisa frame a frame para garantir que o novo Reel será perfeitamente adaptado, magnético e seguro (Zero Copyright).",
+    "height": 300,
+    "width": 550,
+    "color": 3
+   },
+   "id": "93b71818-d92b-4210-b248-f2ceda9f971c",
+   "name": "Nota Arsenal",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1344,
+    656
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 🚀 **COMO INICIAR A PRODUÇÃO** 🕹️\n\nEscolha como acionar a Fábrica:\n\n1️⃣ **Modo VIP (Manual via Chat):**\nPeça exatamente o que quer com estilo: *\"Reel viral sobre IA\", \"Dica de finanças magnética\"*.\n\n2️⃣ **Modo Piloto Automático (Cron):** ⏱️\nO relógio trabalha por você! Dispara a cada X horas usando o tema base configurado, garantindo o feed sempre cheio.",
+    "height": 280,
+    "width": 480,
+    "color": 4
+   },
+   "id": "8cac2674-77a2-45ab-a7c2-024e5d372188",
+   "name": "Nota Gatilhos",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -448,
+    528
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 📱 **PUBLICAÇÃO DIRETA NO INSTAGRAM** 🌐\n\nO grand finale da automação:\n\n1️⃣ **Download Premium:** Baixa o MP4 renderizado.\n2️⃣ **Hospedagem S3:** Joga o vídeo para a nuvem Inovare.\n3️⃣ **API do Instagram:** Cria o Container do Reel e publica na conta automaticamente com as hashtags otimizadas! 🔥",
+    "height": 276,
+    "width": 716,
+    "color": 7
+   },
+   "id": "c95bff00-8cea-4511-99a1-348aaa56d473",
+   "name": "Nota Publicacao Insta",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2320,
+    352
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 🧠 **MEMÓRIA DE ENGAJAMENTO** 💾\n\nO algoritmo agradece! O Zé sabe exatamente o que já postou (Postgres).\n\n1️⃣ **Evita Flop:** Nunca repete o mesmo formato ou tema seguido.\n2️⃣ **Personalização:** Lembra do seu tom de voz e estilo de CTA para os comentários.\n3️⃣ **Contexto:** Mantém o histórico afiado das últimas 50 interações.",
+    "height": 280,
+    "width": 420
+   },
+   "id": "18a4e4b6-a75c-4498-9afa-05af35d010d1",
+   "name": "Nota Memoria1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    480,
+    624
+   ]
+  },
+  {
+   "parameters": {
+    "amount": 30
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    3360,
+    160
+   ],
+   "id": "9b7ef01f-426b-4104-b9e4-50d08d441e89",
+   "name": "Wait",
+   "webhookId": "1208f9d4-f227-4dce-8fd2-7a2566c32b2b"
+  }
+ ],
+ "pinData": {
+  "tempo programado": [
+   {
+    "json": {
+     "timestamp": "2025-10-28T13:50:35.004-03:00",
+     "Readable date": "October 28th 2025, 1:50:35 pm",
+     "Readable time": "1:50:35 pm",
+     "Day of week": "Tuesday",
+     "Year": "2025",
+     "Month": "October",
+     "Day of month": "28",
+     "Hour": "13",
+     "Minute": "50",
+     "Second": "35",
+     "Timezone": "America/Sao_Paulo (UTC-03:00)"
+    }
+   }
+  ],
+  "posta video": [
+   {
+    "json": {
+     "id": "1G1In_caId9nP3Xi6SCHcsEAxU0mY78ui",
+     "decrição": "O TRABALHO DE 350 MIL! A MAIOR LOUCURA QUE JÁ VIU! 😂"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "pega_miniatura_e_estatisticas": {
+   "ai_tool": [
+    [
+     {
+      "node": "reels viral",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pesuisa_videos_no_youtube1": {
+   "ai_tool": [
+    [
+     {
+      "node": "reels viral",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "assite video": {
+   "ai_tool": [
+    [
+     {
+      "node": "reels viral",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "memoria": {
+   "ai_memory": [
+    [
+     {
+      "node": "reels viral",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "tema personalizado": {
+   "main": [
+    [
+     {
+      "node": "reels viral",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "tempo programado": {
+   "main": [
+    [
+     {
+      "node": "mensagem do sistema",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "mensagem do sistema": {
+   "main": [
+    [
+     {
+      "node": "reels viral",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Já Acabou, VEO?": {
+   "main": [
+    [
+     {
+      "node": "deu ruim",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Momento de Reflexão",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Momento de Reflexão": {
+   "main": [
+    [
+     {
+      "node": "segura na mao de deus e vai",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "segura na mao de deus e vai": {
+   "main": [
+    [
+     {
+      "node": "Tem Vídeo Aí?1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tem Vídeo Aí?1": {
+   "main": [
+    [
+     {
+      "node": "passa pra empacotar",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Já Acabou, VEO?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Empacotador1": {
+   "main": [
+    [
+     {
+      "node": "para postagem geral1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "roteador-llm": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "reels viral",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "patrao-pq so manda": {
+   "main": [
+    [
+     {
+      "node": "se deu ruim",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "passa pra empacotar": {
+   "main": [
+    [
+     {
+      "node": "Empacotador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "deu ruim": {
+   "main": [
+    []
+   ]
+  },
+  "se deu ruim": {
+   "main": [
+    [
+     {
+      "node": "Momento de Reflexão",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "deu ruim",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "patrao-pq so manda",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "reels viral",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Upload a file": {
+   "main": [
+    [
+     {
+      "node": "dicasfinanceiras.ia25",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dicasfinanceiras.ia2": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "dicasfinanceiras.ia3": {
+   "main": [
+    [],
+    []
+   ]
+  },
+  "para postagem geral1": {
+   "main": [
+    [
+     {
+      "node": "Call 'maquina de reels'",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "baixa video": {
+   "main": [
+    [
+     {
+      "node": "Upload a file",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "reels viral": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dicasfinanceiras.ia25": {
+   "main": [
+    [
+     {
+      "node": "dicasfinanceiras.ia2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Call 'maquina de reels'": {
+   "main": [
+    []
+   ]
+  },
+  "posta video": {
+   "main": [
+    [
+     {
+      "node": "baixa video",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "dicasfinanceiras.ia3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "2ec66541-07f6-4e4b-aae2-f3f96b3b68c3",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "yW6QxTv3aGsilHMH",
+ "tags": []
+}

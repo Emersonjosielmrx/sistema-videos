@@ -1,0 +1,4675 @@
+{
+ "updatedAt": "2026-10-20T08:35:41.661Z",
+ "createdAt": "2026-10-19T20:43:29.695Z",
+ "id": "0pnt0gzV8rHsmXkN",
+ "name": "Editor de Vídeo com IA · Recap narrado (transcrição, roteiro, narração, efeitos e legenda)",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "path": "video-ia",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página do editor (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    -444
+   ],
+   "id": "36146ce4-0f88-4eea-891a-cc8e46ee2ed3",
+   "webhookId": "bdd569ae-6843-4d5f-95d9-4583a590c093"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O vídeo vai DIRETO para a oficina (não passa pelo n8n). O passe prova que veio desta página e vale 3 horas.\nconst crypto = require('crypto');\nconst SEGREDO = \"7dee93bc35f932e64604d2abe7f458fa3275dfa489f8c6ab\";\nconst validade = String(Math.floor(Date.now() / 1000) + 3 * 3600);\nconst passe = validade + '.' + crypto.createHmac('sha256', SEGREDO).update(validade).digest('hex').slice(0, 32);\nconst PAGINA = \"<!DOCTYPE html><html lang=\\\"pt-BR\\\"><head><meta charset=\\\"UTF-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\">\\n<title>Editor de vídeo com IA</title><meta name=\\\"robots\\\" content=\\\"noindex\\\">\\n<style>\\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9}\\n@media (prefers-color-scheme:dark){:root:not([data-theme=\\\"light\\\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325}}\\n:root[data-theme=\\\"dark\\\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325}\\n*{box-sizing:border-box;margin:0;padding:0}\\nbody{font-family:system-ui,-apple-system,\\\"Segoe UI\\\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\\n.w{max-width:760px;margin:0 auto}h1{font-size:28px}.sub{color:var(--tx2);margin-top:6px}\\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-top:16px}.card h2{font-size:17px;margin-bottom:6px}\\n.drop{border:2px dashed var(--borda);border-radius:14px;padding:26px 16px;text-align:center;cursor:pointer;color:var(--tx2)}\\n.drop.on{border-color:var(--pri);background:var(--cod)}\\n.drop b{color:var(--tx);display:block;font-size:16px;margin-bottom:4px}\\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:12px}.barra i{display:block;height:100%;width:0;background:var(--pri);transition:width .2s}\\nvideo{width:100%;max-height:300px;border-radius:12px;background:#000;margin-top:12px}\\nlabel{display:block;font-weight:600;font-size:14px;margin-top:12px}label small{font-weight:400;color:var(--mu)}\\nselect,input[type=text]{width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}\\n.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}\\n.chks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}\\n.chks label{margin:0;font-weight:500;display:flex;gap:8px;align-items:flex-start;background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:10px}\\n.chks label input{margin-top:4px}.chks small{display:block;color:var(--mu);font-weight:400}\\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px 20px;border-radius:14px;cursor:pointer}\\n.btn.sec{background:var(--sup);color:var(--tx);border:1px solid var(--borda);font-size:14px;padding:9px 14px}\\n.btn[disabled]{opacity:.5;cursor:default}\\n.erro{color:#c0262d;font-weight:600;margin-top:12px}.ok{color:#15803d;font-weight:600;margin-top:10px}\\n.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.passos div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:13px;color:var(--tx2)}.passos b{display:block;color:var(--tx)}\\n@media(max-width:600px){.duas,.chks,.passos{grid-template-columns:1fr}}\\n</style></head><body><div class=\\\"w\\\">\\n<h1>🎬 Editor de vídeo com IA</h1>\\n<p class=\\\"sub\\\">Mande um vídeo e a IA faz um <b>recap narrado</b>: assiste, escreve um roteiro novo, narra com voz própria, corta as cenas, põe <b>efeitos, transições e legenda animada</b>. Igual aos canais de recap.</p>\\n<div class=\\\"passos\\\"><div><b>1. Envie</b>até 400 MB / 20 min</div><div><b>2. Escolha</b>formato, voz e efeitos</div><div><b>3. A IA edita</b>uns 2 a 5 minutos</div><div><b>4. Baixe</b>com título e tags</div></div>\\n\\n<div class=\\\"card\\\"><h2>1. O vídeo</h2>\\n  <div class=\\\"drop\\\" id=\\\"drop\\\"><b>📤 Toque para escolher o vídeo</b>ou arraste aqui (MP4, MOV, MKV, WEBM)</div>\\n  <input type=\\\"file\\\" id=\\\"arquivo\\\" accept=\\\"video/*\\\" hidden>\\n  <div class=\\\"barra\\\" id=\\\"barra-wrap\\\" hidden><i id=\\\"barra\\\"></i></div>\\n  <p class=\\\"sub\\\" id=\\\"info\\\"></p>\\n  <video id=\\\"previa\\\" controls hidden></video>\\n  <p style=\\\"margin-top:12px\\\"><button class=\\\"btn sec\\\" id=\\\"exemplo\\\" type=\\\"button\\\">🎞️ Usar o vídeo de exemplo (Sintel, filme livre da Blender)</button></p>\\n</div>\\n\\n<form class=\\\"card\\\" id=\\\"form\\\"><h2>2. Como você quer o vídeo</h2>\\n  <div class=\\\"duas\\\">\\n    <div><label for=\\\"formato\\\">Formato</label><select id=\\\"formato\\\"><option value=\\\"deitado\\\">Deitado 16:9 (YouTube)</option><option value=\\\"vertical_desfocado\\\">Em pé 9:16 com fundo desfocado (Shorts/Reels)</option><option value=\\\"vertical_recorte\\\">Em pé 9:16 recortado no centro</option></select></div>\\n    <div><label for=\\\"duracao\\\">Tamanho do recap</label><select id=\\\"duracao\\\"><option value=\\\"curto\\\">Curto (~45 s)</option><option value=\\\"medio\\\">Médio (~1 min e meio)</option><option value=\\\"longo\\\">Longo (~3 min)</option></select></div>\\n    <div><label for=\\\"estilo\\\">Estilo do roteiro</label><select id=\\\"estilo\\\"><option value=\\\"dramatico\\\">Recap dramático (suspense)</option><option value=\\\"engracado\\\">Engraçado</option><option value=\\\"curioso\\\">Curiosidades</option><option value=\\\"direto\\\">Resumo direto</option></select></div>\\n    <div><label for=\\\"idioma\\\">Idioma da narração</label><select id=\\\"idioma\\\"><option value=\\\"pt\\\">Português</option><option value=\\\"en\\\">Inglês</option><option value=\\\"es\\\">Espanhol</option></select></div>\\n    <div><label for=\\\"voz\\\">Voz</label><select id=\\\"voz\\\">\\n      <option value=\\\"en-US-AndrewMultilingualNeural\\\">Andrew · masculina ⭐</option><option value=\\\"en-US-BrianMultilingualNeural\\\">Brian · masculina</option>\\n      <option value=\\\"en-AU-WilliamMultilingualNeural\\\">William · masculina</option><option value=\\\"fr-FR-RemyMultilingualNeural\\\">Remy · masculina</option>\\n      <option value=\\\"de-DE-FlorianMultilingualNeural\\\">Florian · masculina</option><option value=\\\"it-IT-GiuseppeMultilingualNeural\\\">Giuseppe · masculina</option>\\n      <option value=\\\"pt-BR-ThalitaMultilingualNeural\\\">Thalita · feminina</option><option value=\\\"pt-BR-FranciscaNeural\\\">Francisca · feminina (nativa)</option>\\n      <option value=\\\"en-US-AvaMultilingualNeural\\\">Ava · feminina</option><option value=\\\"en-US-EmmaMultilingualNeural\\\">Emma · feminina</option>\\n      <option value=\\\"de-DE-SeraphinaMultilingualNeural\\\">Seraphina · feminina</option><option value=\\\"fr-FR-VivienneMultilingualNeural\\\">Vivienne · feminina</option></select></div>\\n    <div><label for=\\\"cor\\\">Cor do destaque da legenda</label><select id=\\\"cor\\\"><option value=\\\"#FFD400\\\">Amarelo</option><option value=\\\"#22D3EE\\\">Azul claro</option><option value=\\\"#F472B6\\\">Rosa</option><option value=\\\"#4ADE80\\\">Verde</option><option value=\\\"#FB923C\\\">Laranja</option></select></div>\\n  </div>\\n  <label>Efeitos</label>\\n  <div class=\\\"chks\\\">\\n    <label><input type=\\\"checkbox\\\" id=\\\"espelhar\\\" checked><span>Espelhar a imagem<small>deixa diferente do original</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"saturacao\\\" checked><span>Cores mais vivas<small>saturação e contraste</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"legendas\\\" checked><span>Legenda animada<small>palavra falada em destaque</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"granulado\\\"><span>Granulado de filme<small>textura leve</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"som_original\\\"><span>Som original baixinho<small>de fundo, embaixo da narração</small></span></label>\\n  </div>\\n  <div class=\\\"duas\\\"><div><label for=\\\"titulo\\\">Título na abertura <small>(vazio = a IA cria)</small></label><input type=\\\"text\\\" id=\\\"titulo\\\" maxlength=\\\"50\\\"></div>\\n  <div><label for=\\\"cta\\\">Chamada no final <small>(vazio = a IA cria)</small></label><input type=\\\"text\\\" id=\\\"cta\\\" maxlength=\\\"40\\\" placeholder=\\\"Ex.: Siga para a parte 2!\\\"></div></div>\\n  <p class=\\\"erro\\\" id=\\\"erro\\\" role=\\\"alert\\\"></p>\\n  <button class=\\\"btn\\\" type=\\\"submit\\\" id=\\\"enviar\\\" style=\\\"width:100%;margin-top:16px\\\" disabled>🎬 Editar com IA</button>\\n</form></div>\\n<script>\\n(function () {\\n  var PASSE = '__PASSE__', ORIGEM = '';\\n  var el = function (s) { return document.querySelector(s); };\\n  function pronto(origem, texto, url) { ORIGEM = origem; el('#info').innerHTML = texto; el('#enviar').disabled = false; if (url) { el('#previa').src = url; el('#previa').hidden = false; } }\\n  el('#exemplo').addEventListener('click', function () { pronto('exemplo-sintel', '✅ Vídeo de exemplo: <b>Sintel (trailer)</b>, 52 s · licença Creative Commons BY (Blender Foundation).', '/videos/arquivo/exemplos/sintel.mp4'); });\\n  var drop = el('#drop'), inp = el('#arquivo');\\n  drop.addEventListener('click', function () { inp.click(); });\\n  ['dragover', 'dragenter'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('on'); }); });\\n  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });\\n  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files[0]) envia(e.dataTransfer.files[0]); });\\n  inp.addEventListener('change', function () { if (inp.files[0]) envia(inp.files[0]); });\\n  function envia(f) {\\n    if (f.size > 400 * 1024 * 1024) { el('#info').textContent = '⚠️ Arquivo maior que 400 MB.'; return; }\\n    el('#enviar').disabled = true; el('#barra-wrap').hidden = false; el('#info').textContent = 'Enviando ' + f.name + '…';\\n    var fd = new FormData(); fd.append('arquivo', f);\\n    var x = new XMLHttpRequest(); x.open('POST', '/videos/enviar'); x.setRequestHeader('X-Passe', PASSE);\\n    x.upload.onprogress = function (e) { if (e.lengthComputable) { el('#barra').style.width = (e.loaded / e.total * 100) + '%'; el('#info').textContent = 'Enviando… ' + Math.round(e.loaded / e.total * 100) + '%'; } };\\n    x.onload = function () {\\n      var r = {}; try { r = JSON.parse(x.responseText); } catch (e) {}\\n      if (x.status !== 200) { el('#info').textContent = '⚠️ ' + (r.detail || 'Não deu para enviar.'); return; }\\n      if (!r.tem_video) { el('#info').textContent = '⚠️ Esse arquivo não tem imagem de vídeo.'; return; }\\n      pronto(r.id, '✅ Enviado: ' + Math.round(r.duracao) + ' s, ' + r.largura + '×' + r.altura + (r.tem_audio ? ', com áudio' : ', sem áudio'), URL.createObjectURL(f));\\n    };\\n    x.onerror = function () { el('#info').textContent = '⚠️ Falha de conexão no envio.'; };\\n    x.send(fd);\\n  }\\n  el('#form').addEventListener('submit', function (e) {\\n    e.preventDefault(); el('#erro').textContent = '';\\n    var d = { origem: ORIGEM };\\n    ['formato', 'duracao', 'estilo', 'idioma', 'voz', 'cor', 'titulo', 'cta'].forEach(function (k) { d[k] = el('#' + k).value; });\\n    ['espelhar', 'saturacao', 'legendas', 'granulado', 'som_original'].forEach(function (k) { d[k] = el('#' + k).checked; });\\n    var bt = el('#enviar'); bt.disabled = true; bt.textContent = 'Começando…';\\n    fetch('video-ia', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {\\n      if (!r.ok) { el('#erro').textContent = (r.erros || ['Não deu para começar.']).join(' '); bt.disabled = false; bt.textContent = '🎬 Editar com IA'; return; }\\n      location.href = r.link;\\n    }).catch(function () { el('#erro').textContent = 'Falha de conexão.'; bt.disabled = false; bt.textContent = '🎬 Editar com IA'; });\\n  });\\n})();\\n</script></body></html>\\n\";\nreturn [{ json: { html: PAGINA.replace('__PASSE__', passe) } }];"
+   },
+   "name": "🔐 Gera o passe de envio",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    -444
+   ],
+   "id": "57d1c8ec-7647-4307-8074-afce31e1f4df"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    -444
+   ],
+   "id": "7dac4e46-7b41-460f-bbd3-bcf0009451e9"
+  },
+  {
+   "parameters": {
+    "path": "video-ia-ver",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página de andamento (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    760,
+    -444
+   ],
+   "id": "b6447934-ea8d-4a52-a14e-260e95fe2ee5",
+   "webhookId": "59fe324a-05d0-4a62-a8ee-3c406470bb42"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Seu vídeo com IA</title><meta name=\"robots\" content=\"noindex\">\n<style>\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:900px;margin:0 auto}h1{font-size:26px}.sub{color:var(--tx2);margin-top:4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:18px 20px;margin-top:16px}.card h2{font-size:16.5px;margin-bottom:8px}\nol.etapas{list-style:none;display:grid;gap:6px}\nol.etapas li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--mu);font-weight:600}\nol.etapas li.feita{color:var(--tx)}ol.etapas li.feita .ic::after{content:\" ✓\";color:var(--ok)}\nol.etapas li.agora{background:var(--cod);color:var(--tx)}ol.etapas li.agora .ic{animation:pulso 1s infinite alternate}\n@keyframes pulso{from{opacity:.4}to{opacity:1}}\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:8px}.barra i{display:block;height:100%;background:var(--pri);transition:width .5s}\nvideo{width:100%;max-height:70vh;border-radius:12px;background:#000}\n.bts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}\n.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:9px 14px;border-radius:11px;text-decoration:none;cursor:pointer}\n.btn.pri{background:var(--pri);color:#fff;border-color:transparent}\ntable{width:100%;border-collapse:collapse;font-size:13.5px}td,th{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda);vertical-align:top}\n.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--cod);margin:2px 2px 0 0}\n.erro{color:var(--er);font-weight:600}\npre{white-space:pre-wrap;font:inherit;background:var(--cod);border-radius:10px;padding:10px 12px;margin-top:6px}\n</style></head><body><div class=\"w\">\n<h1>🎬 Seu vídeo com IA</h1><p class=\"sub\" id=\"sub\">Carregando…</p>\n<div class=\"card\" id=\"andamento\"><h2>Andamento</h2><ol class=\"etapas\" id=\"etapas\"></ol><div class=\"barra\"><i id=\"barra\" style=\"width:3%\"></i></div><p class=\"sub\" id=\"detalhe\"></p></div>\n<div id=\"resultado\"></div>\n</div>\n<script>\n(function () {\n  var JOB = new URLSearchParams(location.search).get('job');\n  var el = function (s) { return document.querySelector(s); };\n  var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;'); };\n  var ETAPAS = [['recebido', '📥', 'Pedido recebido'], ['preparando', '✂️', 'Separando o áudio e as cenas'], ['ouvindo', '👂', 'Ouvindo a fala (Whisper)'], ['olhando', '👀', 'IA olhando as cenas'],\n    ['roteiro', '✍️', 'Roteirista escrevendo'], ['direcao', '🎬', 'Diretor escolhendo efeitos e transições'], ['narrando', '🎙️', 'Narrando'], ['montando', '🎞️', 'Montando o vídeo'], ['pronto', '✅', 'Pronto!']];\n  var mostrouFinal = false;\n  function desenha(s) {\n    var i = ETAPAS.findIndex(function (e) { return e[0] === s.etapa; });\n    el('#etapas').innerHTML = ETAPAS.map(function (e, k) { return '<li class=\"' + (k < i || s.etapa === 'pronto' ? 'feita' : k === i ? 'agora' : '') + '\"><span class=\"ic\">' + e[1] + '</span>' + e[2] + '</li>'; }).join('');\n    var pct = s.etapa === 'pronto' ? 100 : s.etapa === 'montando' ? 60 + (s.progresso || 0) * 0.4 : Math.max(3, i / 8 * 60);\n    el('#barra').style.width = pct + '%';\n    el('#detalhe').textContent = s.detalhe || '';\n    el('#sub').textContent = s.op ? ({ deitado: 'Deitado 16:9', vertical_desfocado: 'Em pé 9:16 (fundo desfocado)', vertical_recorte: 'Em pé 9:16 (recorte)' }[s.op.formato] + ' · ' + ({ curto: 'curto', medio: 'médio', longo: 'longo' }[s.op.duracao]) + ' · voz ' + s.op.voz.split('-')[2].replace(/Multilingual|Neural/g, '')) : '';\n    if (s.etapa === 'erro') { el('#andamento').insertAdjacentHTML('beforeend', '<p class=\"erro\">⚠️ ' + esc(s.erro || 'Algo deu errado.') + '</p><p class=\"bts\"><a class=\"btn pri\" href=\"video-ia\">Tentar de novo</a></p>'); return true; }\n    if (s.etapa === 'pronto' && !mostrouFinal) {\n      mostrouFinal = true;\n      var seo = s.seo || {};\n      el('#resultado').innerHTML = '<div class=\"card\"><h2>🎉 Vídeo pronto · ' + Math.round(s.duracao || 0) + ' s · ' + esc(s.tamanho_mb) + ' MB</h2><video controls playsinline poster=\"' + esc(s.capa) + '\" src=\"' + esc(s.video) + '\"></video>'\n        + '<div class=\"bts\"><a class=\"btn pri\" href=\"' + esc(s.video) + '\" download=\"video-ia-' + JOB + '.mp4\">⬇️ Baixar o vídeo</a><a class=\"btn\" href=\"' + esc(s.capa) + '\" download>🖼️ Baixar a capa</a><a class=\"btn\" href=\"video-ia\">🎬 Fazer outro</a></div>'\n        + '<p class=\"sub\" style=\"margin-top:8px\">O arquivo fica disponível por 48 horas.</p></div>'\n        + (seo.titulo ? '<div class=\"card\"><h2>🔎 Para postar (gerado pela IA)</h2><b>Título</b><pre id=\"seo-t\">' + esc(seo.titulo) + '</pre><b style=\"display:block;margin-top:8px\">Descrição</b><pre id=\"seo-d\">' + esc(seo.descricao) + '\\n\\n' + esc((seo.hashtags || []).join(' ')) + '</pre>'\n          + '<b style=\"display:block;margin-top:8px\">Tags</b><div>' + (seo.tags || []).map(function (t) { return '<span class=\"chip\">' + esc(t) + '</span>'; }).join('') + '</div>'\n          + '<div class=\"bts\"><button class=\"btn\" data-copiar=\"#seo-t\">📋 Copiar título</button><button class=\"btn\" data-copiar=\"#seo-d\">📋 Copiar descrição</button></div></div>' : '')\n        + '<div class=\"card\"><h2>📝 Roteiro e edição</h2><table><tr><th>#</th><th>Cena</th><th>Narração</th><th>Efeito</th></tr>' + (s.roteiro || []).map(function (r) { return '<tr><td>' + r.n + '</td><td>' + Number(r.inicio).toFixed(1) + ' s</td><td>' + esc(r.texto) + '</td><td><span class=\"chip\">' + esc(r.efeito) + '</span><span class=\"chip\">' + esc(r.transicao) + '</span></td></tr>'; }).join('') + '</table>'\n        + '<p class=\"sub\" style=\"margin-top:8px\">Feito em ' + Math.round((s.segundos || 0) / 60 * 10) / 10 + ' min · ' + (s.roteiro || []).length + ' trechos narrados.</p></div>';\n      return true;\n    }\n    return false;\n  }\n  function busca() {\n    fetch('video-ia-status?job=' + JOB).then(function (r) { return r.json(); }).then(function (s) {\n      if (!s.etapa) { el('#sub').textContent = 'Trabalho não encontrado.'; return; }\n      if (!desenha(s)) setTimeout(busca, 3000);\n    }).catch(function () { setTimeout(busca, 5000); });\n  }\n  document.addEventListener('click', function (e) { var b = e.target.closest('[data-copiar]'); if (b) navigator.clipboard.writeText(el(b.dataset.copiar).textContent).then(function () { b.textContent = '✅ Copiado'; }); });\n  busca();\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega o andamento",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1000,
+    -444
+   ],
+   "id": "56ba544d-c90f-4fc5-b634-a22aa2226c76"
+  },
+  {
+   "parameters": {
+    "path": "video-ia-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Consulta status (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    1280,
+    -444
+   ],
+   "id": "cb9c47ea-b452-4957-8157-34bd3325aca1",
+   "webhookId": "03a2da4d-c5ae-4464-ad5f-9d9014a05aa7"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=vid:{{ String($json.query.job || '').replace(/[^a-z0-9]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o status",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1520,
+    -444
+   ],
+   "id": "328535f5-9a0e-4027-af5c-1b03aa088ae8",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.status || '{}' }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde o status",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1760,
+    -444
+   ],
+   "id": "f0a5ada6-c82c-4d51-969d-3b6b0d237e43"
+  },
+  {
+   "parameters": {
+    "path": "video-ia",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "name": "🔔 Pedido de edição (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "id": "e59f556c-2ac5-4575-83e9-c34f548df192",
+   "webhookId": "5f0e2ef3-d674-422f-b5cb-646f233f0432"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere as escolhas e cria o código do trabalho. O vídeo já foi enviado direto para a oficina (fora do n8n).\nlet b = $('🔔 Pedido de edição (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst crypto = require('crypto');\nconst VOZES = ['en-US-AndrewMultilingualNeural', 'en-US-BrianMultilingualNeural', 'en-AU-WilliamMultilingualNeural', 'de-DE-FlorianMultilingualNeural',\n  'fr-FR-RemyMultilingualNeural', 'it-IT-GiuseppeMultilingualNeural', 'ko-KR-HyunsuMultilingualNeural', 'pt-BR-ThalitaMultilingualNeural',\n  'pt-BR-FranciscaNeural', 'en-US-AvaMultilingualNeural', 'en-US-EmmaMultilingualNeural', 'de-DE-SeraphinaMultilingualNeural', 'fr-FR-VivienneMultilingualNeural'];\nconst FORMATOS = ['deitado', 'vertical_desfocado', 'vertical_recorte'];\nconst ESTILOS = { dramatico: 'recap dramático, com suspense e ganchos', engracado: 'recap engraçado, com comentários irônicos e leves', curioso: 'curiosidades e detalhes que ninguém percebeu', direto: 'resumo direto e claro, sem enrolação' };\nconst DURACOES = { curto: { segundos: 45, palavras: 115, trechos: '6 a 8' }, medio: { segundos: 90, palavras: 230, trechos: '10 a 14' }, longo: { segundos: 180, palavras: 460, trechos: '18 a 26' } };\nconst IDIOMAS = { pt: 'português do Brasil', en: 'inglês', es: 'espanhol' };\nconst limpa = (v, max) => String(v ?? '').replace(/[<>{}\\\\]/g, '').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst origem = String(b.origem || '');\nconst erros = [];\nif (!/^([a-f0-9]{12}\\.[a-z0-9]{2,5}|exemplo-[a-z0-9]{3,30})$/.test(origem)) erros.push('Envie um vídeo (ou use o de exemplo) antes de começar.');\nconst op = {\n  formato: FORMATOS.includes(b.formato) ? b.formato : 'deitado',\n  estilo: ESTILOS[b.estilo] ? b.estilo : 'dramatico',\n  duracao: DURACOES[b.duracao] ? b.duracao : 'curto',\n  idioma: IDIOMAS[b.idioma] ? b.idioma : 'pt',\n  voz: VOZES.includes(b.voz) ? b.voz : 'en-US-AndrewMultilingualNeural',\n  espelhar: b.espelhar !== false, saturacao: b.saturacao !== false, granulado: b.granulado === true,\n  legendas: b.legendas !== false, som_original: b.som_original === true,\n  cor: /^#[0-9a-fA-F]{6}$/.test(b.cor || '') ? b.cor.toUpperCase() : '#FFD400',\n  titulo: limpa(b.titulo, 50), cta: limpa(b.cta, 40),\n};\nconst job = 'v' + Date.now().toString(36) + crypto.randomBytes(2).toString('hex');\nconst base = String($('🔔 Pedido de edição (POST)').first().json.webhookUrl || '').split('/webhook/')[0];\nreturn [{ json: { valido: erros.length === 0, erros, job, origem, op, criado_em: Date.now(),\n  estilo_txt: ESTILOS[op.estilo], alvo: DURACOES[op.duracao], idioma_txt: IDIOMAS[op.idioma],\n  link: `${base}/webhook/video-ia-ver?job=${job}`, publico: `${base}/videos/arquivo` } }];"
+   },
+   "name": "🧩 Confere o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    330,
+    0
+   ],
+   "id": "40f6c24b-6941-4278-b4bb-96218d07520d"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "74c9703e-ba93-46f8-be9e-fc387f92d60a",
+       "leftValue": "={{ $json.valido }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Pode começar?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    660,
+    0
+   ],
+   "id": "7e3e1da4-31fe-4659-8052-6cb6e0db0ad6"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erros: $('🧩 Confere o pedido').first().json.erros }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     },
+     "responseCode": 400
+    }
+   },
+   "name": "📤 Recusa o pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    660,
+    200
+   ],
+   "id": "c495e614-c560-4d3e-8a7d-dd8ebdb53cb2"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'recebido', detalhe: '', op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: recebido",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    990,
+    0
+   ],
+   "id": "bf860353-df08-43bf-8677-4de73dcc65c2",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, link: $('🧩 Confere o pedido').first().json.link }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde com o link",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1320,
+    0
+   ],
+   "id": "964dcd15-bb77-457c-a7fc-f02dabd01b4e"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'preparando', detalhe: '', op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: preparando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1650,
+    0
+   ],
+   "id": "f064b11f-019a-4800-9f02-5d65e10bbf44",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://video-oficina:8000/videos/api/preparar",
+    "options": {
+     "timeout": 900000
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ origem: $('🧩 Confere o pedido').first().json.origem, job: $('🧩 Confere o pedido').first().json.job }) }}"
+   },
+   "name": "🛠️ Oficina: prepara o vídeo",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1650,
+    644
+   ],
+   "id": "97271b19-0063-4330-9f9a-f4199bee2f1e",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'ouvindo', detalhe: 'Vídeo de ' + Math.round($('🛠️ Oficina: prepara o vídeo').first().json.duracao) + ' s · ' + $('🛠️ Oficina: prepara o vídeo').first().json.cortes.length + ' cortes de cena · ' + ($('🛠️ Oficina: prepara o vídeo').first().json.recorte ? 'tarjas pretas removidas' : 'sem tarjas'), op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: ouvindo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1320,
+    644
+   ],
+   "id": "5972b901-7a33-451c-9f60-8d50a164fad0",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d3964d38-ff48-4fea-bdd5-cb32330289b4",
+       "leftValue": "={{ !!$('🛠️ Oficina: prepara o vídeo').first().json.audio }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Tem áudio?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    990,
+    644
+   ],
+   "id": "bed04fb2-c624-4260-a1ae-07dd13f9af6b"
+  },
+  {
+   "parameters": {
+    "method": "GET",
+    "url": "=http://video-oficina:8000/videos/arquivo/{{ $('🛠️ Oficina: prepara o vídeo').first().json.audio }}",
+    "options": {
+     "timeout": 120000,
+     "response": {
+      "response": {
+       "responseFormat": "file"
+      }
+     }
+    }
+   },
+   "name": "🌐 Baixa o áudio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    660,
+    644
+   ],
+   "id": "6578668a-1277-416d-8b42-944f4ec56ff9",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/audio/transcriptions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "options": {
+     "timeout": 180000
+    },
+    "sendBody": true,
+    "contentType": "multipart-form-data",
+    "bodyParameters": {
+     "parameters": [
+      {
+       "parameterType": "formBinaryData",
+       "name": "file",
+       "inputDataFieldName": "data"
+      },
+      {
+       "name": "model",
+       "value": "groq/whisper-large-v3-turbo"
+      },
+      {
+       "name": "response_format",
+       "value": "verbose_json"
+      }
+     ]
+    }
+   },
+   "name": "👂 Whisper: transcreve o áudio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    330,
+    644
+   ],
+   "id": "b04ca7f9-bda3-453a-a5cb-c9f1255a4b2a",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Deixa a transcrição do Whisper enxuta: \"12.4 | frase\" (segundo | texto) (a IA roteirista usa os tempos para escolher as cenas).\nlet r = {};\ntry { if ($('👂 Whisper: transcreve o áudio').isExecuted) r = $('👂 Whisper: transcreve o áudio').first().json || {}; } catch (e) {}\nif (typeof r.data === 'string') { try { r = JSON.parse(r.data); } catch (e) {} }\nconst segs = Array.isArray(r.segments) ? r.segments : [];\nconst linhas = segs.map(s => `${Number(s.start).toFixed(1)} | ${String(s.text || '').trim()}`).filter(l => l.length > 8);\nlet texto = linhas.join('\\n');\nif (texto.length > 24000) texto = texto.slice(0, 24000) + '\\n[...]';\nreturn [{ json: { tem_fala: linhas.length > 0, idioma_original: r.language || '', fala: texto || '(o vídeo não tem fala; use só as cenas)' } }];"
+   },
+   "name": "🧩 Organiza a fala",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    644
+   ],
+   "id": "d2da9814-4257-469d-9f62-e4fa7c9916a7"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'olhando', detalhe: ($('🧩 Organiza a fala').first().json.tem_fala ? 'Fala transcrita (' + $('🧩 Organiza a fala').first().json.idioma_original + ')' : 'Vídeo sem fala: a IA vai se guiar pelas imagens'), op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: olhando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    1117
+   ],
+   "id": "f065acd6-24a6-45e6-94cb-547250f5181b",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta o pedido para a IA com visão: até 12 quadros do vídeo, cada um com o segundo em que aparece.\nconst prep = $('🛠️ Oficina: prepara o vídeo').first().json;\nconst quadros = (prep.quadros || []).slice(0, 12);\nconst conteudo = [{ type: 'text', text: `Estas são ${quadros.length} imagens de um vídeo, em ordem. Os segundos de cada uma: ${quadros.map((q, i) => `imagem ${i + 1} = ${q.t}s`).join(', ')}.\nDescreva cada imagem em 1 frase objetiva (quem aparece, o que faz, clima). Não invente nomes.\nRETORNE SOMENTE JSON: {\"cenas\":[{\"t\":0,\"descricao\":\"\"}]}` }];\nfor (const q of quadros) conteudo.push({ type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + q.b64 } });\nreturn [{ json: { tem_quadros: quadros.length > 0, corpo: JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 2000, temperature: 0.2, messages: [{ role: 'user', content: conteudo }] }) } }];"
+   },
+   "name": "🧩 Prepara as cenas para a IA",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    330,
+    1117
+   ],
+   "id": "7e45704c-83ff-44e9-a845-c20ee1f0754c"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "options": {
+     "timeout": 180000
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}"
+   },
+   "name": "👀 IA olha as cenas",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    660,
+    1117
+   ],
+   "id": "1c796341-5008-4be1-81e4-5dc481833592",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Lê o que a IA viu em cada cena. Se a visão falhar, segue só com a fala.\nlet cenas = [];\ntry {\n  const r = $('👀 IA olha as cenas').first().json;\n  const txt = r.choices ? r.choices[0].message.content : '';\n  const j = parseJSON(txt);\n  cenas = (j && Array.isArray(j.cenas) ? j.cenas : []).map(c => `${Number(c.t).toFixed(1)} | ${String(c.descricao || '').trim()}`);\n} catch (e) {}\nconst prep = $('🛠️ Oficina: prepara o vídeo').first().json;\nconst pretos = (prep.pretos || []).map(([a, b]) => `de ${a} a ${b}`).join('; ');\nreturn [{ json: { cenas: cenas.join('\\n') || '(sem descrição das cenas)', pretos: pretos || 'nenhum', duracao: prep.duracao } }];"
+   },
+   "name": "🧩 Lê o que a IA viu",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    990,
+    1117
+   ],
+   "id": "5a422d6f-0d4d-4d82-8e80-f9df25536773"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'roteiro', detalhe: 'A IA descreveu ' + $('🛠️ Oficina: prepara o vídeo').first().json.quadros.length + ' cenas', op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: roteiro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1320,
+    1117
+   ],
+   "id": "319f5516-7749-477c-8995-1b9a34e5c219",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'IDIOMA DA NARRAÇÃO: ' + $('🧩 Confere o pedido').first().json.idioma_txt + '\\nESTILO: ' + $('🧩 Confere o pedido').first().json.estilo_txt + '\\nALVO: ' + $('🧩 Confere o pedido').first().json.alvo.palavras + ' palavras em ' + $('🧩 Confere o pedido').first().json.alvo.trechos + ' trechos (cerca de ' + $('🧩 Confere o pedido').first().json.alvo.segundos + ' s de narração)\\nDURAÇÃO DO VÍDEO: ' + $('🧩 Lê o que a IA viu').first().json.duracao + ' s\\nTRECHOS EM TELA PRETA (evite): ' + $('🧩 Lê o que a IA viu').first().json.pretos + '\\n\\nCENAS:\\n' + $('🧩 Lê o que a IA viu').first().json.cenas + '\\n\\nFALA ORIGINAL:\\n' + $('🧩 Organiza a fala').first().json.fala }}",
+    "options": {
+     "systemMessage": "Você é ROTEIRISTA de um canal de RECAP (vídeos que recontam histórias com narração própria).\nRecebe a fala original do vídeo com os segundos, a descrição das cenas com os segundos, a duração e os trechos de tela preta.\nEscreva um roteiro NOVO de narração, no idioma e no estilo pedidos.\n\nREGRAS\n- Reconte com suas palavras; não traduza frase por frase. Pode comentar, criar suspense e explicar.\n- O 1º trecho é um GANCHO forte (pergunta ou afirmação surpreendente) para segurar quem assiste.\n- Cada trecho tem \"inicio\" (segundos) = o momento do vídeo cuja imagem combina com o que é narrado. Use a fala e as cenas para escolher. Siga a ordem do vídeo (inicio crescente) e fuja dos trechos pretos.\n- Nas listas de fala e cenas, o número antes da barra é o segundo do vídeo (ex.: \"14.9 | ...\" = segundo 14.9).\n- \"inicio\" é um NÚMERO em segundos (ex.: 14.9), sem letras.\n- Cada trecho com 12 a 28 palavras, frases faladas e naturais, com TODOS os acentos do idioma. Sem emojis, sem marcações, sem listas.\n- Total de palavras perto do alvo e quantidade de trechos dentro da faixa pedida.\n- O último trecho fecha a história ou deixa um gancho para a próxima parte.\n- Não invente nomes de personagens que não aparecem na fala.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"titulo\":\"título curto do vídeo\",\"segmentos\":[{\"inicio\":0,\"texto\":\"\"}]}"
+    },
+    "needsFallback": true
+   },
+   "name": "🤖 Roteirista",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1650,
+    1117
+   ],
+   "id": "531049ae-6688-4080-b03c-c2761a2ee3be",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 6000,
+     "temperature": 0.85,
+     "timeout": 240000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro da roteirista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1650,
+    1337
+   ],
+   "id": "6aabb66d-b5ef-41e8-8ee6-911353ecbca9",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 6000,
+     "temperature": 0.85,
+     "timeout": 240000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro da roteirista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1650,
+    1517
+   ],
+   "id": "b5fe209f-2def-4d84-8c06-c17cddb0ea1a",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Confere o roteiro: trechos em ordem, dentro do vídeo, sem texto vazio. Sem roteiro = erro claro.\nconst v = $('🧩 Confere o pedido').first().json;\nconst dur = Number($('🧩 Lê o que a IA viu').first().json.duracao) || 0;\nlet j = null;\n// a IA às vezes escreve \"inicio\": 14.9s (copiando o formato das cenas) — tira o \"s\" para o JSON valer\nconst bruto = String($('🤖 Roteirista').first().json.output || '').replace(/(\"inicio\"\\s*:\\s*)(\\d+)(?:[.,](\\d+))?\\s*s\\b/g, (m, a, i, d) => a + i + (d ? '.' + d : ''));\ntry { j = parseJSON(bruto); } catch (e) {}\n// plano B: JSON quebrado? pega cada trecho \"inicio ... texto\" pelo padrão\nif (!j || !Array.isArray(j.segmentos)) {\n  const achados = [...bruto.matchAll(/\"inicio\"\\s*:\\s*\"?(\\d+(?:[.,]\\d+)?)[^\"]*?\"texto\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"/g)].map(m => ({ inicio: Number(m[1].replace(',', '.')), texto: m[2].replace(/\\\\\"/g, '\"') }));\n  const tit = (bruto.match(/\"titulo\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"/) || [])[1] || '';\n  if (achados.length) j = { titulo: tit, segmentos: achados };\n}\nconst limpa = s => String(s ?? '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}*#_<>]/gu, '').replace(/\\s+/g, ' ').trim();\nconst segs = (j && Array.isArray(j.segmentos) ? j.segmentos : []).map((s, i) => ({\n  n: i + 1, inicio: Math.max(0, Math.min(Number(s.inicio) || 0, Math.max(0, dur - 2))), texto: limpa(s.texto).slice(0, 400),\n})).filter(s => s.texto.split(' ').length >= 3).slice(0, 30);\nsegs.forEach((s, i) => { s.n = i + 1; });\nif (segs.length < 2) return [{ json: { ok: false, erro: 'A IA roteirista não devolveu um roteiro válido. Tente de novo.' } }];\nreturn [{ json: { ok: true, titulo: limpa(j.titulo).slice(0, 60), segmentos: segs, palavras: segs.reduce((n, s) => n + s.texto.split(' ').length, 0) } }];"
+   },
+   "name": "🧩 Confere o roteiro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1650,
+    1970
+   ],
+   "id": "2ce1d587-a980-4705-9db1-115dc525f253"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "9f135ab2-9443-4e32-bd09-c1bf75f87deb",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Roteiro ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1320,
+    1970
+   ],
+   "id": "3216d152-9c57-45ff-84a9-02540e8d5eb0"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'direcao', detalhe: $('🧩 Confere o roteiro').first().json.segmentos.length + ' trechos, ' + $('🧩 Confere o roteiro').first().json.palavras + ' palavras', op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: direção",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    990,
+    1970
+   ],
+   "id": "fc104205-d744-4f46-8a36-2728c4a4c088",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'IDIOMA: ' + $('🧩 Confere o pedido').first().json.idioma_txt + '\\nROTEIRO:\\n' + JSON.stringify($('🧩 Confere o roteiro').first().json.segmentos.map(s => ({ n: s.n, texto: s.texto })), null, 1) }}",
+    "options": {
+     "systemMessage": "Você é DIRETOR DE EDIÇÃO de vídeos de recap. Para cada trecho do roteiro escolha 1 efeito e 1 transição de entrada que combinem com a emoção do texto.\n\nEFEITOS: zoom_in (revelação, tensão crescendo) · zoom_out (calma, conclusão) · tremor (ação, impacto, susto) · flash (virada, surpresa, momento épico) · pb (lembrança, passado, tristeza) · lento (drama, emoção forte) · nenhum (narração neutra)\nTRANSIÇÕES: fade, dissolve (calmo) · fadeblack, radial (mistério) · fadewhite, circleopen (revelação) · slideleft, slideright, wipeleft, wiperight, smoothleft (ação, ritmo) · pixelize, hblur, zoomin, squeezeh (impacto)\n\nREGRAS\n- Varie: não repita a mesma transição em seguida; no máximo 1 efeito igual a cada 3 trechos.\n- 1º trecho com zoom_in ou flash; último com zoom_out ou nenhum; \"pb\" só para lembrança ou passado.\n- Crie também titulo_abertura (até 40 caracteres, chamativo) e cta (até 30 caracteres, ex.: \"Siga para a parte 2!\"), no idioma da narração, sem emojis.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"titulo_abertura\":\"\",\"cta\":\"\",\"segmentos\":[{\"n\":1,\"efeito\":\"\",\"transicao\":\"\"}]}"
+    },
+    "needsFallback": true
+   },
+   "name": "🤖 Diretor de edição",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    660,
+    1970
+   ],
+   "id": "58c9800f-402a-423d-bfb1-3a5cf89ae847",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 2500,
+     "temperature": 0.7,
+     "timeout": 120000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro do diretor",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    660,
+    2190
+   ],
+   "id": "dc85cb0e-c5da-49c7-95e5-c298b9372603",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 2500,
+     "temperature": 0.7,
+     "timeout": 120000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro do diretor",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    660,
+    2370
+   ],
+   "id": "020b6fca-c9e8-472b-ae49-b4d102b79bcb",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'IDIOMA: ' + $('🧩 Confere o pedido').first().json.idioma_txt + '\\nROTEIRO: ' + $('🧩 Confere o roteiro').first().json.segmentos.map(s => s.texto).join(' ') }}",
+    "options": {
+     "systemMessage": "Você é ESPECIALISTA EM SEO de vídeos curtos de recap (YouTube Shorts, Reels, TikTok). Recebe o roteiro.\n- titulo: até 90 caracteres, provocação/curiosidade + palavras que as pessoas buscam. NÃO use o nome do filme, série ou obra (evita bloqueio por direitos autorais).\n- descricao: 2 a 4 frases convidando a assistir, sem contar o final.\n- tags: 10 termos de busca. hashtags: 3 a 5, sem o símbolo #.\nTudo no idioma da narração.\nRETORNE SOMENTE JSON VÁLIDO: {\"titulo\":\"\",\"descricao\":\"\",\"tags\":[\"\"],\"hashtags\":[\"\"]}"
+    },
+    "needsFallback": true
+   },
+   "name": "🤖 Especialista em SEO",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    330,
+    1970
+   ],
+   "id": "23f7a933-8153-456c-8c16-f9ef089e84c3",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 1500,
+     "temperature": 0.8,
+     "timeout": 120000,
+     "maxRetries": 3
+    }
+   },
+   "name": "🧠 Cérebro do SEO",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    330,
+    2190
+   ],
+   "id": "7e9906e4-7e93-4ff6-b0e1-354c75677310",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 1500,
+     "temperature": 0.8,
+     "timeout": 120000,
+     "maxRetries": 1
+    }
+   },
+   "name": "🛟 Reserva · Cérebro do SEO",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    330,
+    2370
+   ],
+   "id": "a4b6b7c9-3217-4aa5-a56e-29edd43a4abd",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Junta o roteiro com as escolhas do diretor de edição (efeito e transição de cada trecho) e o texto de SEO.\nconst v = $('🧩 Confere o pedido').first().json;\nconst rot = $('🧩 Confere o roteiro').first().json;\nlet dir = null, seo = null;\ntry { dir = parseJSON($('🤖 Diretor de edição').first().json.output); } catch (e) {}\ntry { seo = parseJSON($('🤖 Especialista em SEO').first().json.output); } catch (e) {}\nconst EFEITOS = ['nenhum', 'zoom_in', 'zoom_out', 'tremor', 'flash', 'pb', 'lento'];\nconst TRANS = ['fade', 'fadeblack', 'fadewhite', 'wipeleft', 'wiperight', 'slideleft', 'slideright', 'circleopen', 'circleclose', 'radial', 'pixelize', 'dissolve', 'smoothleft', 'smoothright', 'zoomin', 'hblur', 'distance', 'diagtl', 'squeezeh'];\nconst reserva = ['zoom_in', 'nenhum', 'zoom_out', 'flash', 'nenhum', 'tremor'];\nconst transReserva = ['fade', 'slideleft', 'fadeblack', 'circleopen', 'wipeleft', 'dissolve', 'radial'];\nconst plano = dir && Array.isArray(dir.segmentos) ? dir.segmentos : [];\nconst segmentos = rot.segmentos.map((s, i) => {\n  const p = plano.find(x => Number(x.n) === s.n) || {};\n  return { ...s, efeito: EFEITOS.includes(p.efeito) ? p.efeito : reserva[i % reserva.length], transicao: TRANS.includes(p.transicao) ? p.transicao : transReserva[i % transReserva.length] };\n});\nconst txt = (s, m) => String(s ?? '').replace(/[<>{}\\\\]/g, '').trim().slice(0, m);\nconst titulo = v.op.titulo || txt(dir && dir.titulo_abertura, 50) || rot.titulo;\nconst cta = v.op.cta || txt(dir && dir.cta, 40) || (v.op.idioma === 'pt' ? 'Siga para mais!' : v.op.idioma === 'es' ? '¡Sígueme para más!' : 'Follow for more!');\nconst SEO = seo ? { titulo: txt(seo.titulo, 100), descricao: txt(seo.descricao, 900), tags: (Array.isArray(seo.tags) ? seo.tags : []).map(t => txt(t, 40)).slice(0, 15),\n  hashtags: (Array.isArray(seo.hashtags) ? seo.hashtags : []).map(t => '#' + String(t).replace(/[^\\p{L}\\p{N}_]/gu, '')).slice(0, 5) } : null;\nreturn [{ json: { segmentos, titulo, cta, seo: SEO,\n  narrar: JSON.stringify({ job: v.job, voz: v.op.voz, segmentos: segmentos.map(s => ({ n: s.n, texto: s.texto })) }) } }];"
+   },
+   "name": "🧩 Junta roteiro e edição",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1970
+   ],
+   "id": "a4c38bec-cfda-4f6e-9aa8-4af1bfe54b98"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'narrando', detalhe: 'Voz ' + $('🧩 Confere o pedido').first().json.op.voz.split('-')[2].replace(/Multilingual|Neural/g, ''), op: $('🧩 Confere o pedido').first().json.op }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: narrando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    2794
+   ],
+   "id": "0f7a119a-5ade-46ac-bd07-9f086757bbfb",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://video-oficina:8000/videos/api/narrar",
+    "options": {
+     "timeout": 600000
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $('🧩 Junta roteiro e edição').first().json.narrar }}"
+   },
+   "name": "🛠️ Oficina: narra o roteiro",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    330,
+    2794
+   ],
+   "id": "a3f61606-3448-439b-a430-0d1653b5629c",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta cada trecho com a duração da narração e o tempo de cada palavra (a legenda acompanha a voz) e monta o pedido final.\nconst v = $('🧩 Confere o pedido').first().json;\nconst ed = $('🧩 Junta roteiro e edição').first().json;\nconst nar = $('🛠️ Oficina: narra o roteiro').first().json;\nconst porN = Object.fromEntries((nar.trechos || []).filter(t => !t.erro && t.duracao).map(t => [t.n, t]));\nconst segmentos = ed.segmentos.filter(s => porN[s.n]).map(s => ({ ...s, duracao: porN[s.n].duracao, palavras: porN[s.n].palavras }));\nif (segmentos.length < 2) return [{ json: { ok: false, erro: 'A narração falhou. Tente de novo em instantes.' } }];\nconst op = v.op;\nreturn [{ json: { ok: true, narrados: segmentos.length, falharam: ed.segmentos.length - segmentos.length,\n  corpo: JSON.stringify({ job: v.job, origem: v.origem, formato: op.formato, segmentos,\n    opcoes: { espelhar: op.espelhar, saturacao: op.saturacao, granulado: op.granulado, legendas: op.legendas, som_original: op.som_original,\n      cor: op.cor, titulo: ed.titulo, cta: ed.cta } }) } }];"
+   },
+   "name": "🧩 Monta o pedido de edição",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    660,
+    2794
+   ],
+   "id": "ef2d406a-9c99-4b4e-a9bc-7c108fb5ae26"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "3fc1a7c2-b656-4fed-8c98-345c99ddf14e",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Narração ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    990,
+    2794
+   ],
+   "id": "b312c15c-13d8-4649-8ad7-6498ee037f99"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://video-oficina:8000/videos/api/montar",
+    "options": {
+     "timeout": 60000
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $('🧩 Monta o pedido de edição').first().json.corpo }}"
+   },
+   "name": "🛠️ Oficina: monta o vídeo",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1320,
+    2794
+   ],
+   "id": "305b2be4-5a67-4456-a139-a5ea69c70c99",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "amount": 8,
+    "unit": "seconds"
+   },
+   "name": "⏳ Espera 8 segundos",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    1650,
+    2794
+   ],
+   "id": "97b63635-e0f0-4233-9cab-2ba49dbf076a",
+   "webhookId": "ca2f67e3-2bb7-4d8d-83c3-a87a57417cca"
+  },
+  {
+   "parameters": {
+    "method": "GET",
+    "url": "=http://video-oficina:8000/videos/api/status/{{ $('🧩 Confere o pedido').first().json.job }}",
+    "options": {
+     "timeout": 120000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "name": "🛠️ Oficina: como está?",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1650,
+    3238
+   ],
+   "id": "f7bfa6cb-5d3a-460b-b59f-1ed3182d97d5",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê o andamento da montagem na oficina e decide se o laço continua.\nconst st = $input.first().json || {};\nconst v = $('🧩 Confere o pedido').first().json;\nconst estado = st.estado || 'desconhecido';\nconst status = { job: v.job, etapa: 'montando', progresso: Number(st.progresso) || 0,\n  detalhe: `🎞️ ${st.etapa || 'montando'} · ${Number(st.progresso) || 0}%`, op: v.op };\nreturn [{ json: { ...st, estado, terminou: estado !== 'montando', status: JSON.stringify(status) } }];"
+   },
+   "name": "🧩 Atualiza o andamento",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1320,
+    3238
+   ],
+   "id": "a0c0a519-702e-4868-a04d-2f6a43b1e11c"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ $('🧩 Atualiza o andamento').item.json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: montando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    990,
+    3238
+   ],
+   "id": "7e142c77-6dc2-4567-9bbb-a3ca53520238",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "6a81679c-2fd0-43ca-9648-71d72aec6d2e",
+       "leftValue": "={{ $('🧩 Atualiza o andamento').item.json.terminou }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Terminou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    660,
+    3238
+   ],
+   "id": "bf1c0ddc-8189-4d2b-82a8-ed895f627f9d"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Grava o resultado: link do vídeo e da capa, roteiro com os efeitos e os textos para postar.\nconst v = $('🧩 Confere o pedido').first().json;\nconst st = $('🧩 Atualiza o andamento').item.json;\nconst ed = $('🧩 Junta roteiro e edição').first().json;\nif (st.estado !== 'pronto') {\n  return [{ json: { status: JSON.stringify({ job: v.job, etapa: 'erro', op: v.op,\n    erro: st.estado === 'erro' ? 'A montagem falhou: ' + String(st.erro || '').slice(-220) : 'A oficina perdeu este trabalho (reiniciou?). Tente de novo.' }) } }];\n}\nreturn [{ json: { status: JSON.stringify({\n  job: v.job, etapa: 'pronto', op: v.op, video: `${v.publico}/${st.video}`, capa: `${v.publico}/${st.capa}`,\n  duracao: st.info ? st.info.duracao : 0, tamanho_mb: st.tamanho_mb, segundos: Math.round((Date.now() - v.criado_em) / 1000),\n  seo: ed.seo, titulo: ed.titulo, roteiro: ed.segmentos.map(s => ({ n: s.n, inicio: s.inicio, texto: s.texto, efeito: s.efeito, transicao: s.transicao })),\n}) } }];"
+   },
+   "name": "🎉 Resultado final",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    330,
+    3238
+   ],
+   "id": "5f9a438e-cd04-4047-b938-d2d6666a8bb2"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ $json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: pronto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    3238
+   ],
+   "id": "a3309195-0ea9-44b3-9d8c-4e7d06399440",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 🛠️ A OFICINA DE VÍDEO (serviço à parte)\nVídeo é pesado demais para passar dentro do n8n. Quem corta, narra e monta é um serviço com **ffmpeg** e **edge-tts** que roda ao lado do n8n, na mesma VPS. O n8n só manda ordens por HTTP (nodes 🛠️):\n📮 internos (só o n8n alcança): `http://video-oficina:8000/videos/api/preparar` · `/narrar` · `/montar` · `/status/<job>`\n🌍 públicos: `/videos/enviar` (só com o passe) · `/videos/arquivo/...` (baixar) · `/videos/saude` (está viva?)\n🧹 apaga sozinha os arquivos com mais de 48 h (os vídeos de exemplo ficam).",
+    "height": 343,
+    "width": 660,
+    "color": 5
+   },
+   "name": "Nota · Oficina",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2100,
+    -628
+   ],
+   "id": "d7efe64b-d741-4df3-bac2-87ba7601bd41"
+  },
+  {
+   "parameters": {
+    "content": "## 🆘 SE DER ERRO\n🔴 **\"Passe de envio inválido ou vencido\"** ➜ a página ficou aberta mais de 3 h: recarregue.\n🔴 **Parado em \"preparando\"** ➜ a oficina pode estar fora do ar: abra **/videos/saude** (tem que aparecer `\"ok\":true`).\n🔴 **\"A IA roteirista não devolveu um roteiro válido\"** ➜ o modelo falhou: tente de novo (a 🛟 reserva já entra sozinha quando o principal dá erro).\n🔴 **Vídeo recusado** ➜ limites: até 400 MB, até 20 minutos, MP4, MOV, MKV ou WEBM.\n🔴 **\"vídeo não encontrado (passou de 48 h?)\"** ➜ a oficina já apagou o arquivo: envie de novo.\n🔎 **Onde parou?** Aba **Executions** ➜ a execução vermelha ➜ o node com ⚠️ mostra o motivo.",
+    "height": 463,
+    "width": 660,
+    "color": 3
+   },
+   "name": "Nota · Se der erro",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2100,
+    -245
+   ],
+   "id": "1162fa37-5407-4ac3-9b77-6fb441a73d86"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'erro', op: $('🧩 Confere o pedido').first().json.op, erro: String($json.erro || ($json.error && ($json.error.message || $json.error.description)) || $json.message || 'Falha inesperada').slice(0, 300) }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "⚠️ Marca erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2200,
+    1970
+   ],
+   "id": "7f3e1b87-c4d2-4203-bee8-6ff70c808c7c",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "# 🎬 EDITOR DE VÍDEO COM IA (RECAP NARRADO)\n\n🎯 **O que faz:** você manda um vídeo e recebe um **recap pronto para postar**, como os canais que recontam filmes e animes:\n🗣️ roteiro **novo** escrito pela IA (não é tradução)\n🎙️ narração com voz neural (Thalita, Francisca, Andrew…)\n✂️ cenas cortadas na hora certa, **espelhadas**, com cores mais vivas e **sem tela preta**\n💥 **efeitos** (zoom, tremor, flash, preto e branco, câmera lenta) e **transições** escolhidos por uma IA diretora\n💬 **legenda animada** com a palavra falada em destaque\n🏷️ título, descrição e tags para postar (sem o nome da obra)\n📐 deitado 16:9 ou em pé 9:16\n\n## ▶️ COMO USAR (pela página)\n1️⃣ Abra **/webhook/video-ia** no navegador\n2️⃣ Envie um vídeo ou toque em **🎞️ Usar o vídeo de exemplo**\n3️⃣ Escolha formato, voz e efeitos ➜ **🎬 Editar com IA**\n4️⃣ Acompanhe as etapas e baixe o vídeo (fica 48 h)\n\n## 🧪 SÓ QUER VER FUNCIONANDO?\nUse o **TESTE RÁPIDO** aqui embaixo: 1 clique, sem enviar vídeo nenhum.\n\n## 🧱 QUEM FAZ O QUÊ\n🧠 **n8n (este fluxo)**: decide tudo, chama as IAs e acompanha\n🛠️ **Oficina de vídeo** (serviço à parte, com ffmpeg): corta, narra, aplica efeitos e monta\n🔑 **Precisa de:** credencial do roteador de IA (tipo OpenAI), Redis e a oficina rodando\n\n## 🔎 LEGENDA DOS ÍCONES\n🔔 recebe um pedido (webhook) · 📤 responde · 🧪 teste manual · ⏰ relógio\n🧩 código · ✏️ campos · 🚦 decisão sim/não · 🔀 escolhe o caminho · 🔁 laço\n📖 lê do Redis · 💾 grava no Redis · 🧮 soma · 🗂️ lista · 🗑️ apaga\n🤖 agente de IA · 🧠 cérebro (modelo) · 🛟 cérebro reserva\n🌐 chama outro serviço · ⏳ espera · 🎨 desenha imagem · 📸 Instagram\n🛠️ oficina de vídeo · 👂 transcreve a fala · 👀 IA com visão",
+    "height": 1042,
+    "width": 1240,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1400,
+    -628
+   ],
+   "id": "81fd23a7-2dbe-43df-a4fa-5dec4b046415"
+  },
+  {
+   "parameters": {},
+   "name": "🧪 Teste rápido (clique no ▶️)",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    -1300,
+    727
+   ],
+   "id": "bce9898a-59f7-44fb-bd95-e330f7400b90"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "3ae8e131-23fe-4d2b-ab1e-4bb0afb1ac1d",
+       "name": "video",
+       "value": "exemplo-sintel",
+       "type": "string"
+      },
+      {
+       "id": "e7184b89-be3e-4b31-bfcd-db9362c13668",
+       "name": "formato",
+       "value": "vertical_desfocado",
+       "type": "string"
+      },
+      {
+       "id": "316ebad5-cfd2-46f4-b89e-b5b4c16c272f",
+       "name": "duracao",
+       "value": "curto",
+       "type": "string"
+      },
+      {
+       "id": "82fce56b-bc4f-499b-ab89-18834e9d9b15",
+       "name": "estilo",
+       "value": "dramatico",
+       "type": "string"
+      },
+      {
+       "id": "c4d42ba8-8d7a-458f-9db4-ab14a311bec7",
+       "name": "idioma",
+       "value": "pt",
+       "type": "string"
+      },
+      {
+       "id": "5a54b913-f6b1-4d6e-9594-c7256fb7d7e6",
+       "name": "voz",
+       "value": "pt-BR-ThalitaMultilingualNeural",
+       "type": "string"
+      },
+      {
+       "id": "c90f18c5-45b7-4b56-af81-789a361461cf",
+       "name": "cor",
+       "value": "#FFD400",
+       "type": "string"
+      },
+      {
+       "id": "3883b3d6-80d7-4872-846e-efdef23902ea",
+       "name": "legendas",
+       "value": true,
+       "type": "boolean"
+      },
+      {
+       "id": "227b87d3-91cb-4b6f-b62f-20bfb0088eed",
+       "name": "espelhar",
+       "value": true,
+       "type": "boolean"
+      },
+      {
+       "id": "3c962472-80eb-4472-8e52-88f933ca46c1",
+       "name": "som_original",
+       "value": false,
+       "type": "boolean"
+      },
+      {
+       "id": "4e62019b-2aee-4702-933b-929efae3149b",
+       "name": "endereco_do_n8n",
+       "value": "={{ $execution.resumeUrl.split('/webhook-waiting')[0] }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "✏️ Escolhas do teste (mude à vontade)",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -1000,
+    727
+   ],
+   "id": "1a9e2a1f-7926-4da1-b44b-32f49fe05cce"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.endereco_do_n8n }}/webhook/video-ia",
+    "options": {
+     "timeout": 30000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ origem: $json.video, formato: $json.formato, duracao: $json.duracao, estilo: $json.estilo, idioma: $json.idioma, voz: $json.voz, cor: $json.cor, legendas: $json.legendas, espelhar: $json.espelhar, som_original: $json.som_original }) }}"
+   },
+   "name": "🌐 Manda para o editor",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -700,
+    727
+   ],
+   "id": "4de253c3-8478-4256-9a59-177a56a76890",
+   "onError": "stopWorkflow"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O editor respondeu na hora com o link da página de andamento.\nconst r = $input.first().json;\nif (!r.ok) throw new Error('O editor recusou o teste: ' + (r.erros || [r.message || 'sem resposta']).join(' '));\nreturn [{ json: { '👉 abra para ver ao vivo': r.link, job: String(r.link).split('job=')[1] } }];"
+   },
+   "name": "👉 Acompanhe ao vivo (abra o link)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -400,
+    727
+   ],
+   "id": "2970f097-1614-42eb-9c45-a3008c10250d"
+  },
+  {
+   "parameters": {
+    "amount": 15,
+    "unit": "seconds"
+   },
+   "name": "⏳ Espera 15 segundos",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    -400,
+    987
+   ],
+   "id": "d48c9a52-6ea1-4139-b3a5-5c115aba83de",
+   "webhookId": "cc2673df-6781-4427-bc9c-420d67c215c8"
+  },
+  {
+   "parameters": {
+    "method": "GET",
+    "url": "={{ $('✏️ Escolhas do teste (mude à vontade)').first().json.endereco_do_n8n }}/webhook/video-ia-status?job={{ $('👉 Acompanhe ao vivo (abra o link)').first().json.job }}",
+    "options": {
+     "timeout": 30000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "name": "🌐 Pergunta como está o teste",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -700,
+    987
+   ],
+   "id": "e9bf8635-062f-4bb9-ae8c-81f91d2c1b45",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "668d8ecc-8330-4f49-93b1-76ca216ebfbe",
+       "leftValue": "={{ ['pronto', 'erro'].includes($json.etapa) || $runIndex >= 40 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 O teste terminou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -1000,
+    987
+   ],
+   "id": "638e7212-4e9e-4f28-ac0e-ce8b6bb94861"
+  },
+  {
+   "parameters": {
+    "jsCode": "// pronto = mostra os links · erro = o node fica vermelho com o motivo\nconst s = $input.first().json;\nif (s.etapa === 'pronto') return [{ json: { '✅': 'Vídeo pronto em ' + s.segundos + ' s', '🎬 vídeo': s.video, '🖼️ capa': s.capa,\n  '🏷️ título para postar': s.seo && s.seo.titulo, 'duração do vídeo (s)': s.duracao, trechos: (s.roteiro || []).length } }];\nif (s.etapa === 'erro') throw new Error('O editor parou com erro: ' + s.erro);\nthrow new Error('Passou de 10 minutos sem terminar (última etapa: ' + (s.etapa || '?') + '). Veja na aba Executions.');"
+   },
+   "name": "🎉 Resultado do teste",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -1300,
+    987
+   ],
+   "id": "86b55fd7-cc59-43d2-af30-f65d1fe9b321"
+  },
+  {
+   "parameters": {
+    "content": "## 🧪 TESTE RÁPIDO (1 clique, sem enviar vídeo)\n1️⃣ Passe o mouse no node **🧪 Teste rápido** e clique no ▶️ (ou no botão **Execute workflow** lá embaixo)\n2️⃣ No node **👉 Acompanhe ao vivo**, abra o link que aparece: é a página com as etapas acendendo\n3️⃣ Em 2 a 3 minutos o node **🎉 Resultado do teste** mostra o link do vídeo pronto ✅\n✏️ Para testar outro jeito, mude os campos em **✏️ Escolhas do teste** (as opções estão na nota 🎛️ aqui embaixo).\n💡 O teste chama o fluxo pelo mesmo endereço que a página usa. Para ver cada node trabalhando, abra a aba **Executions**.",
+    "height": 733,
+    "width": 1240,
+    "color": 4
+   },
+   "name": "Nota · Teste rápido",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1400,
+    454
+   ],
+   "id": "9d0b4877-7e22-47d2-9f7c-4afd20c00bce"
+  },
+  {
+   "parameters": {
+    "content": "## 🎛️ OPÇÕES (para mudar no ✏️ Escolhas do teste)\n🎞️ **video**: `exemplo-sintel` (trailer de 52 s, filme livre da Blender) ou o código de um vídeo enviado pela página\n📐 **formato**: `deitado` (16:9) · `vertical_desfocado` (9:16 com fundo borrado) · `vertical_recorte` (9:16 cortando as laterais)\n⏱️ **duracao**: `curto` (~45 s) · `medio` (~90 s) · `longo` (~3 min)\n🎭 **estilo**: `dramatico` · `engracado` · `curioso` · `direto`\n🌎 **idioma**: `pt` · `en` · `es`\n🎙️ **voz**: `pt-BR-ThalitaMultilingualNeural` · `pt-BR-FranciscaNeural` · `en-US-AndrewMultilingualNeural` · `en-US-BrianMultilingualNeural` · `en-US-AvaMultilingualNeural` · `en-US-EmmaMultilingualNeural` (as Multilingual falam qualquer idioma)\n🎨 **cor**: cor da palavra em destaque na legenda (ex.: `#FFD400`)\n✅ **legendas**, **espelhar**, **som_original**: `true` ou `false`\n🔗 **endereco_do_n8n**: descobre sozinho (não precisa mexer)",
+    "height": 403,
+    "width": 1240,
+    "color": 7
+   },
+   "name": "Nota · Opções",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1400,
+    1227
+   ],
+   "id": "6731e2c3-54cd-4e7a-be6b-4d8c502b7801"
+  },
+  {
+   "parameters": {
+    "content": "## 0️⃣ AS PÁGINAS 📄 (o que a pessoa vê no navegador)\n🔔 **Página do editor** (/webhook/video-ia): o formulário. Antes de entregar, 🔐 **Gera o passe de envio** (assinatura que vale 3 h): o vídeo vai **direto para a oficina**, sem passar pelo n8n, e o passe prova que veio desta página.\n🔔 **Página de andamento** (/webhook/video-ia-ver?job=...) mostra as etapas ao vivo · 🔔 **Consulta status**: a página pergunta a cada 3 s e lê do Redis o que cada etapa gravou.",
+    "height": 384,
+    "width": 2120,
+    "color": 7
+   },
+   "name": "Nota · Páginas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    -628
+   ],
+   "id": "21b21853-beef-4ce6-8e5c-eca9e03beaad"
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ RECEBE O PEDIDO 📥 ➡️ (siga as setas: esta linha anda para a direita)\nA página manda as escolhas (vídeo, formato, voz, estilo). O fluxo confere tudo e **responde na hora** com o link do andamento: a pessoa não fica com a página travada enquanto a IA trabalha.\n🧩 **Confere o pedido**: só aceita opções da lista e cria o código do trabalho (**job**) · 🚦 **Pode começar?** não ➜ 📤 recusa com o motivo · 💾 **Status: …** grava a etapa no Redis (é assim que a página sabe onde o vídeo está)",
+    "height": 584,
+    "width": 2120,
+    "color": 7
+   },
+   "name": "Nota · Etapa 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    -184
+   ],
+   "id": "b72c4988-1025-4940-a710-6597ccc44c9f"
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ PREPARA E OUVE O VÍDEO 👂 ⬅️ (esta linha anda para a esquerda)\n🛠️ **Oficina: prepara o vídeo**: separa o áudio, acha os **cortes de cena**, os trechos de **tela preta** e as **tarjas pretas** (para cortar fora) e tira até 12 fotos das cenas.\n🚦 **Tem áudio?** sim ➜ 🌐 **Baixa o áudio** ➜ 👂 **Whisper** (pelo roteador de IA) escreve tudo o que é falado, com o segundo de cada frase · não ➜ segue só com as imagens · 🧩 **Organiza a fala** deixa em linhas \"segundo | frase\"",
+    "height": 384,
+    "width": 2120,
+    "color": 5
+   },
+   "name": "Nota · Etapa 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    460
+   ],
+   "id": "825f5e1b-9e41-4105-89f3-3709510d9a4b"
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ OLHA AS CENAS E ESCREVE O ROTEIRO 👀✍️ ➡️\n🧩 **Prepara as cenas** manda as fotos para uma IA com visão ➜ 👀 **IA olha as cenas** descreve cada uma (quem aparece, o que acontece).\n🤖 **Roteirista** recebe a fala + as cenas e escreve um recap **novo** (não é tradução): gancho forte no começo e cada trecho marcado com o segundo da imagem que combina, fugindo da tela preta.\n🧠 cérebro principal + 🛟 reserva: se o principal falhar, o agente usa a reserva sozinho.",
+    "height": 793,
+    "width": 2120,
+    "color": 4
+   },
+   "name": "Nota · Etapa 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    904
+   ],
+   "id": "4a89231c-1769-4822-9513-233e627415e6"
+  },
+  {
+   "parameters": {
+    "content": "## 4️⃣ CONFERE, DIRIGE E CRIA O SEO 🎬🏷️ ⬅️\n🧩 **Confere o roteiro**: a IA às vezes erra o JSON (vírgula sobrando, \"14.9s\" no lugar de 14.9); aqui ele é consertado ou lido trecho por trecho · 🚦 **Roteiro ok?** não ➜ ⚠️ erro na página.\n🤖 **Diretor de edição** escolhe 1 efeito (zoom, tremor, flash, preto e branco, câmera lenta) e 1 transição por trecho, conforme a emoção do texto, mais o título de abertura e a chamada final.\n🤖 **Especialista em SEO**: título, descrição, tags e hashtags (sem o nome da obra) · 🧩 **Junta roteiro e edição**.",
+    "height": 793,
+    "width": 2120,
+    "color": 6
+   },
+   "name": "Nota · Etapa 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    1757
+   ],
+   "id": "c7ccca3f-9a6e-49c9-a81c-bb5380052045"
+  },
+  {
+   "parameters": {
+    "content": "## 5️⃣ NARRA E MANDA MONTAR 🎙️🎞️ ➡️\n🛠️ **Oficina: narra o roteiro** com voz neural (edge-tts) e devolve o tempo de **cada palavra**: é isso que faz a legenda acender junto com a voz.\n🧩 **Monta o pedido de edição** junta trechos + áudios + efeitos + opções ➜ 🚦 **Narração ok?** ➜ 🛠️ **Oficina: monta o vídeo** começa a montagem (ffmpeg) em segundo plano e responde na hora ➜ ⏳ **Espera 8 segundos**.",
+    "height": 384,
+    "width": 2120,
+    "color": 5
+   },
+   "name": "Nota · Etapa 5",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    2610
+   ],
+   "id": "cc73b9ee-6c50-4bf3-a79a-c4e7f25639bb"
+  },
+  {
+   "parameters": {
+    "content": "## 6️⃣ ACOMPANHA ATÉ FICAR PRONTO 🔁✅ ⬅️\n🔁 **Laço**: 🛠️ **Oficina: como está?** ➜ 🧩 **Atualiza o andamento** (a porcentagem aparece na página) ➜ 💾 grava ➜ 🚦 **Terminou?** não ➜ volta para a espera de 8 s.\nsim ➜ 🎉 **Resultado final**: link do vídeo, capa, roteiro com os efeitos e os textos para postar ➜ a página mostra o player e o botão de baixar (o arquivo fica 48 h).",
+    "height": 384,
+    "width": 2120,
+    "color": 4
+   },
+   "name": "Nota · Etapa 6",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -100,
+    3054
+   ],
+   "id": "b17b91db-c8e1-4188-a6a6-3f2b2aa797ac"
+  },
+  {
+   "parameters": {
+    "content": "## ⚠️ QUANDO ALGO FALHA\nA oficina (preparar, narrar, montar), o roteiro ou a narração deram erro? A saída de erro deles vem para cá: 💾 **Marca erro** grava o motivo e a página mostra para a pessoa, em vez de ficar girando para sempre.",
+    "height": 413,
+    "width": 660,
+    "color": 3
+   },
+   "name": "Nota · Erro",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2100,
+    1757
+   ],
+   "id": "227e4498-6142-4490-ba1c-beabd6105ccd"
+  }
+ ],
+ "connections": {
+  "🔔 Página do editor (GET)": {
+   "main": [
+    [
+     {
+      "node": "🔐 Gera o passe de envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔐 Gera o passe de envio": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Página de andamento (GET)": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Consulta status (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o status": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido de edição (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o pedido": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pode começar?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pode começar?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: recebido",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: recebido": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde com o link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde com o link": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: preparando",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: preparando": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina: prepara o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina: prepara o vídeo": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: ouvindo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: ouvindo": {
+   "main": [
+    [
+     {
+      "node": "🚦 Tem áudio?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Tem áudio?": {
+   "main": [
+    [
+     {
+      "node": "🌐 Baixa o áudio",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Organiza a fala",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Baixa o áudio": {
+   "main": [
+    [
+     {
+      "node": "👂 Whisper: transcreve o áudio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "👂 Whisper: transcreve o áudio": {
+   "main": [
+    [
+     {
+      "node": "🧩 Organiza a fala",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Organiza a fala": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: olhando",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: olhando": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara as cenas para a IA",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara as cenas para a IA": {
+   "main": [
+    [
+     {
+      "node": "👀 IA olha as cenas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "👀 IA olha as cenas": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê o que a IA viu",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê o que a IA viu": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro da roteirista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Roteirista",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro da roteirista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Roteirista",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 Status: roteiro": {
+   "main": [
+    [
+     {
+      "node": "🤖 Roteirista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Roteirista": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Confere o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o roteiro": {
+   "main": [
+    [
+     {
+      "node": "🚦 Roteiro ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Roteiro ok?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: direção",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro do diretor": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Diretor de edição",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro do diretor": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Diretor de edição",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "💾 Status: direção": {
+   "main": [
+    [
+     {
+      "node": "🤖 Diretor de edição",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 Cérebro do SEO": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Especialista em SEO",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛟 Reserva · Cérebro do SEO": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "🤖 Especialista em SEO",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "🤖 Diretor de edição": {
+   "main": [
+    [
+     {
+      "node": "🤖 Especialista em SEO",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 Especialista em SEO",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Especialista em SEO": {
+   "main": [
+    [
+     {
+      "node": "🧩 Junta roteiro e edição",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Junta roteiro e edição",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Junta roteiro e edição": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: narrando",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: narrando": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina: narra o roteiro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina: narra o roteiro": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta o pedido de edição",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta o pedido de edição": {
+   "main": [
+    [
+     {
+      "node": "🚦 Narração ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Narração ok?": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina: monta o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina: monta o vídeo": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 8 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 8 segundos": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina: como está?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina: como está?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Atualiza o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Atualiza o andamento": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: montando",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: montando": {
+   "main": [
+    [
+     {
+      "node": "🚦 Terminou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Terminou?": {
+   "main": [
+    [
+     {
+      "node": "🎉 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 8 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎉 Resultado final": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧪 Teste rápido (clique no ▶️)": {
+   "main": [
+    [
+     {
+      "node": "✏️ Escolhas do teste (mude à vontade)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "✏️ Escolhas do teste (mude à vontade)": {
+   "main": [
+    [
+     {
+      "node": "🌐 Manda para o editor",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Manda para o editor": {
+   "main": [
+    [
+     {
+      "node": "👉 Acompanhe ao vivo (abra o link)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "👉 Acompanhe ao vivo (abra o link)": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 15 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 15 segundos": {
+   "main": [
+    [
+     {
+      "node": "🌐 Pergunta como está o teste",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Pergunta como está o teste": {
+   "main": [
+    [
+     {
+      "node": "🚦 O teste terminou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 O teste terminou?": {
+   "main": [
+    [
+     {
+      "node": "🎉 Resultado do teste",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 15 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": null,
+ "versionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+ "activeVersionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+ "versionCounter": 18,
+ "triggerCount": 4,
+ "shared": [
+  {
+   "updatedAt": "2026-10-19T20:43:29.695Z",
+   "createdAt": "2026-10-19T20:43:29.695Z",
+   "role": "workflow:owner",
+   "workflowId": "0pnt0gzV8rHsmXkN",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-20T08:35:41.667Z",
+  "createdAt": "2026-10-20T08:35:41.667Z",
+  "versionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+  "workflowId": "0pnt0gzV8rHsmXkN",
+  "nodes": [
+   {
+    "parameters": {
+     "path": "video-ia",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "🔔 Página do editor (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     -444
+    ],
+    "id": "36146ce4-0f88-4eea-891a-cc8e46ee2ed3",
+    "webhookId": "bdd569ae-6843-4d5f-95d9-4583a590c093"
+   },
+   {
+    "parameters": {
+     "jsCode": "// O vídeo vai DIRETO para a oficina (não passa pelo n8n). O passe prova que veio desta página e vale 3 horas.\nconst crypto = require('crypto');\nconst SEGREDO = \"7dee93bc35f932e64604d2abe7f458fa3275dfa489f8c6ab\";\nconst validade = String(Math.floor(Date.now() / 1000) + 3 * 3600);\nconst passe = validade + '.' + crypto.createHmac('sha256', SEGREDO).update(validade).digest('hex').slice(0, 32);\nconst PAGINA = \"<!DOCTYPE html><html lang=\\\"pt-BR\\\"><head><meta charset=\\\"UTF-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\">\\n<title>Editor de vídeo com IA</title><meta name=\\\"robots\\\" content=\\\"noindex\\\">\\n<style>\\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9}\\n@media (prefers-color-scheme:dark){:root:not([data-theme=\\\"light\\\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325}}\\n:root[data-theme=\\\"dark\\\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325}\\n*{box-sizing:border-box;margin:0;padding:0}\\nbody{font-family:system-ui,-apple-system,\\\"Segoe UI\\\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\\n.w{max-width:760px;margin:0 auto}h1{font-size:28px}.sub{color:var(--tx2);margin-top:6px}\\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-top:16px}.card h2{font-size:17px;margin-bottom:6px}\\n.drop{border:2px dashed var(--borda);border-radius:14px;padding:26px 16px;text-align:center;cursor:pointer;color:var(--tx2)}\\n.drop.on{border-color:var(--pri);background:var(--cod)}\\n.drop b{color:var(--tx);display:block;font-size:16px;margin-bottom:4px}\\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:12px}.barra i{display:block;height:100%;width:0;background:var(--pri);transition:width .2s}\\nvideo{width:100%;max-height:300px;border-radius:12px;background:#000;margin-top:12px}\\nlabel{display:block;font-weight:600;font-size:14px;margin-top:12px}label small{font-weight:400;color:var(--mu)}\\nselect,input[type=text]{width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}\\n.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}\\n.chks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}\\n.chks label{margin:0;font-weight:500;display:flex;gap:8px;align-items:flex-start;background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:10px}\\n.chks label input{margin-top:4px}.chks small{display:block;color:var(--mu);font-weight:400}\\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px 20px;border-radius:14px;cursor:pointer}\\n.btn.sec{background:var(--sup);color:var(--tx);border:1px solid var(--borda);font-size:14px;padding:9px 14px}\\n.btn[disabled]{opacity:.5;cursor:default}\\n.erro{color:#c0262d;font-weight:600;margin-top:12px}.ok{color:#15803d;font-weight:600;margin-top:10px}\\n.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.passos div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:13px;color:var(--tx2)}.passos b{display:block;color:var(--tx)}\\n@media(max-width:600px){.duas,.chks,.passos{grid-template-columns:1fr}}\\n</style></head><body><div class=\\\"w\\\">\\n<h1>🎬 Editor de vídeo com IA</h1>\\n<p class=\\\"sub\\\">Mande um vídeo e a IA faz um <b>recap narrado</b>: assiste, escreve um roteiro novo, narra com voz própria, corta as cenas, põe <b>efeitos, transições e legenda animada</b>. Igual aos canais de recap.</p>\\n<div class=\\\"passos\\\"><div><b>1. Envie</b>até 400 MB / 20 min</div><div><b>2. Escolha</b>formato, voz e efeitos</div><div><b>3. A IA edita</b>uns 2 a 5 minutos</div><div><b>4. Baixe</b>com título e tags</div></div>\\n\\n<div class=\\\"card\\\"><h2>1. O vídeo</h2>\\n  <div class=\\\"drop\\\" id=\\\"drop\\\"><b>📤 Toque para escolher o vídeo</b>ou arraste aqui (MP4, MOV, MKV, WEBM)</div>\\n  <input type=\\\"file\\\" id=\\\"arquivo\\\" accept=\\\"video/*\\\" hidden>\\n  <div class=\\\"barra\\\" id=\\\"barra-wrap\\\" hidden><i id=\\\"barra\\\"></i></div>\\n  <p class=\\\"sub\\\" id=\\\"info\\\"></p>\\n  <video id=\\\"previa\\\" controls hidden></video>\\n  <p style=\\\"margin-top:12px\\\"><button class=\\\"btn sec\\\" id=\\\"exemplo\\\" type=\\\"button\\\">🎞️ Usar o vídeo de exemplo (Sintel, filme livre da Blender)</button></p>\\n</div>\\n\\n<form class=\\\"card\\\" id=\\\"form\\\"><h2>2. Como você quer o vídeo</h2>\\n  <div class=\\\"duas\\\">\\n    <div><label for=\\\"formato\\\">Formato</label><select id=\\\"formato\\\"><option value=\\\"deitado\\\">Deitado 16:9 (YouTube)</option><option value=\\\"vertical_desfocado\\\">Em pé 9:16 com fundo desfocado (Shorts/Reels)</option><option value=\\\"vertical_recorte\\\">Em pé 9:16 recortado no centro</option></select></div>\\n    <div><label for=\\\"duracao\\\">Tamanho do recap</label><select id=\\\"duracao\\\"><option value=\\\"curto\\\">Curto (~45 s)</option><option value=\\\"medio\\\">Médio (~1 min e meio)</option><option value=\\\"longo\\\">Longo (~3 min)</option></select></div>\\n    <div><label for=\\\"estilo\\\">Estilo do roteiro</label><select id=\\\"estilo\\\"><option value=\\\"dramatico\\\">Recap dramático (suspense)</option><option value=\\\"engracado\\\">Engraçado</option><option value=\\\"curioso\\\">Curiosidades</option><option value=\\\"direto\\\">Resumo direto</option></select></div>\\n    <div><label for=\\\"idioma\\\">Idioma da narração</label><select id=\\\"idioma\\\"><option value=\\\"pt\\\">Português</option><option value=\\\"en\\\">Inglês</option><option value=\\\"es\\\">Espanhol</option></select></div>\\n    <div><label for=\\\"voz\\\">Voz</label><select id=\\\"voz\\\">\\n      <option value=\\\"en-US-AndrewMultilingualNeural\\\">Andrew · masculina ⭐</option><option value=\\\"en-US-BrianMultilingualNeural\\\">Brian · masculina</option>\\n      <option value=\\\"en-AU-WilliamMultilingualNeural\\\">William · masculina</option><option value=\\\"fr-FR-RemyMultilingualNeural\\\">Remy · masculina</option>\\n      <option value=\\\"de-DE-FlorianMultilingualNeural\\\">Florian · masculina</option><option value=\\\"it-IT-GiuseppeMultilingualNeural\\\">Giuseppe · masculina</option>\\n      <option value=\\\"pt-BR-ThalitaMultilingualNeural\\\">Thalita · feminina</option><option value=\\\"pt-BR-FranciscaNeural\\\">Francisca · feminina (nativa)</option>\\n      <option value=\\\"en-US-AvaMultilingualNeural\\\">Ava · feminina</option><option value=\\\"en-US-EmmaMultilingualNeural\\\">Emma · feminina</option>\\n      <option value=\\\"de-DE-SeraphinaMultilingualNeural\\\">Seraphina · feminina</option><option value=\\\"fr-FR-VivienneMultilingualNeural\\\">Vivienne · feminina</option></select></div>\\n    <div><label for=\\\"cor\\\">Cor do destaque da legenda</label><select id=\\\"cor\\\"><option value=\\\"#FFD400\\\">Amarelo</option><option value=\\\"#22D3EE\\\">Azul claro</option><option value=\\\"#F472B6\\\">Rosa</option><option value=\\\"#4ADE80\\\">Verde</option><option value=\\\"#FB923C\\\">Laranja</option></select></div>\\n  </div>\\n  <label>Efeitos</label>\\n  <div class=\\\"chks\\\">\\n    <label><input type=\\\"checkbox\\\" id=\\\"espelhar\\\" checked><span>Espelhar a imagem<small>deixa diferente do original</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"saturacao\\\" checked><span>Cores mais vivas<small>saturação e contraste</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"legendas\\\" checked><span>Legenda animada<small>palavra falada em destaque</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"granulado\\\"><span>Granulado de filme<small>textura leve</small></span></label>\\n    <label><input type=\\\"checkbox\\\" id=\\\"som_original\\\"><span>Som original baixinho<small>de fundo, embaixo da narração</small></span></label>\\n  </div>\\n  <div class=\\\"duas\\\"><div><label for=\\\"titulo\\\">Título na abertura <small>(vazio = a IA cria)</small></label><input type=\\\"text\\\" id=\\\"titulo\\\" maxlength=\\\"50\\\"></div>\\n  <div><label for=\\\"cta\\\">Chamada no final <small>(vazio = a IA cria)</small></label><input type=\\\"text\\\" id=\\\"cta\\\" maxlength=\\\"40\\\" placeholder=\\\"Ex.: Siga para a parte 2!\\\"></div></div>\\n  <p class=\\\"erro\\\" id=\\\"erro\\\" role=\\\"alert\\\"></p>\\n  <button class=\\\"btn\\\" type=\\\"submit\\\" id=\\\"enviar\\\" style=\\\"width:100%;margin-top:16px\\\" disabled>🎬 Editar com IA</button>\\n</form></div>\\n<script>\\n(function () {\\n  var PASSE = '__PASSE__', ORIGEM = '';\\n  var el = function (s) { return document.querySelector(s); };\\n  function pronto(origem, texto, url) { ORIGEM = origem; el('#info').innerHTML = texto; el('#enviar').disabled = false; if (url) { el('#previa').src = url; el('#previa').hidden = false; } }\\n  el('#exemplo').addEventListener('click', function () { pronto('exemplo-sintel', '✅ Vídeo de exemplo: <b>Sintel (trailer)</b>, 52 s · licença Creative Commons BY (Blender Foundation).', '/videos/arquivo/exemplos/sintel.mp4'); });\\n  var drop = el('#drop'), inp = el('#arquivo');\\n  drop.addEventListener('click', function () { inp.click(); });\\n  ['dragover', 'dragenter'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('on'); }); });\\n  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });\\n  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files[0]) envia(e.dataTransfer.files[0]); });\\n  inp.addEventListener('change', function () { if (inp.files[0]) envia(inp.files[0]); });\\n  function envia(f) {\\n    if (f.size > 400 * 1024 * 1024) { el('#info').textContent = '⚠️ Arquivo maior que 400 MB.'; return; }\\n    el('#enviar').disabled = true; el('#barra-wrap').hidden = false; el('#info').textContent = 'Enviando ' + f.name + '…';\\n    var fd = new FormData(); fd.append('arquivo', f);\\n    var x = new XMLHttpRequest(); x.open('POST', '/videos/enviar'); x.setRequestHeader('X-Passe', PASSE);\\n    x.upload.onprogress = function (e) { if (e.lengthComputable) { el('#barra').style.width = (e.loaded / e.total * 100) + '%'; el('#info').textContent = 'Enviando… ' + Math.round(e.loaded / e.total * 100) + '%'; } };\\n    x.onload = function () {\\n      var r = {}; try { r = JSON.parse(x.responseText); } catch (e) {}\\n      if (x.status !== 200) { el('#info').textContent = '⚠️ ' + (r.detail || 'Não deu para enviar.'); return; }\\n      if (!r.tem_video) { el('#info').textContent = '⚠️ Esse arquivo não tem imagem de vídeo.'; return; }\\n      pronto(r.id, '✅ Enviado: ' + Math.round(r.duracao) + ' s, ' + r.largura + '×' + r.altura + (r.tem_audio ? ', com áudio' : ', sem áudio'), URL.createObjectURL(f));\\n    };\\n    x.onerror = function () { el('#info').textContent = '⚠️ Falha de conexão no envio.'; };\\n    x.send(fd);\\n  }\\n  el('#form').addEventListener('submit', function (e) {\\n    e.preventDefault(); el('#erro').textContent = '';\\n    var d = { origem: ORIGEM };\\n    ['formato', 'duracao', 'estilo', 'idioma', 'voz', 'cor', 'titulo', 'cta'].forEach(function (k) { d[k] = el('#' + k).value; });\\n    ['espelhar', 'saturacao', 'legendas', 'granulado', 'som_original'].forEach(function (k) { d[k] = el('#' + k).checked; });\\n    var bt = el('#enviar'); bt.disabled = true; bt.textContent = 'Começando…';\\n    fetch('video-ia', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {\\n      if (!r.ok) { el('#erro').textContent = (r.erros || ['Não deu para começar.']).join(' '); bt.disabled = false; bt.textContent = '🎬 Editar com IA'; return; }\\n      location.href = r.link;\\n    }).catch(function () { el('#erro').textContent = 'Falha de conexão.'; bt.disabled = false; bt.textContent = '🎬 Editar com IA'; });\\n  });\\n})();\\n</script></body></html>\\n\";\nreturn [{ json: { html: PAGINA.replace('__PASSE__', passe) } }];"
+    },
+    "name": "🔐 Gera o passe de envio",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     240,
+     -444
+    ],
+    "id": "57d1c8ec-7647-4307-8074-afce31e1f4df"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      }
+     }
+    },
+    "name": "📤 Entrega a página",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     480,
+     -444
+    ],
+    "id": "7dac4e46-7b41-460f-bbd3-bcf0009451e9"
+   },
+   {
+    "parameters": {
+     "path": "video-ia-ver",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "🔔 Página de andamento (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     760,
+     -444
+    ],
+    "id": "b6447934-ea8d-4a52-a14e-260e95fe2ee5",
+    "webhookId": "59fe324a-05d0-4a62-a8ee-3c406470bb42"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Seu vídeo com IA</title><meta name=\"robots\" content=\"noindex\">\n<style>\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:900px;margin:0 auto}h1{font-size:26px}.sub{color:var(--tx2);margin-top:4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:18px 20px;margin-top:16px}.card h2{font-size:16.5px;margin-bottom:8px}\nol.etapas{list-style:none;display:grid;gap:6px}\nol.etapas li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--mu);font-weight:600}\nol.etapas li.feita{color:var(--tx)}ol.etapas li.feita .ic::after{content:\" ✓\";color:var(--ok)}\nol.etapas li.agora{background:var(--cod);color:var(--tx)}ol.etapas li.agora .ic{animation:pulso 1s infinite alternate}\n@keyframes pulso{from{opacity:.4}to{opacity:1}}\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:8px}.barra i{display:block;height:100%;background:var(--pri);transition:width .5s}\nvideo{width:100%;max-height:70vh;border-radius:12px;background:#000}\n.bts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}\n.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:9px 14px;border-radius:11px;text-decoration:none;cursor:pointer}\n.btn.pri{background:var(--pri);color:#fff;border-color:transparent}\ntable{width:100%;border-collapse:collapse;font-size:13.5px}td,th{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda);vertical-align:top}\n.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--cod);margin:2px 2px 0 0}\n.erro{color:var(--er);font-weight:600}\npre{white-space:pre-wrap;font:inherit;background:var(--cod);border-radius:10px;padding:10px 12px;margin-top:6px}\n</style></head><body><div class=\"w\">\n<h1>🎬 Seu vídeo com IA</h1><p class=\"sub\" id=\"sub\">Carregando…</p>\n<div class=\"card\" id=\"andamento\"><h2>Andamento</h2><ol class=\"etapas\" id=\"etapas\"></ol><div class=\"barra\"><i id=\"barra\" style=\"width:3%\"></i></div><p class=\"sub\" id=\"detalhe\"></p></div>\n<div id=\"resultado\"></div>\n</div>\n<script>\n(function () {\n  var JOB = new URLSearchParams(location.search).get('job');\n  var el = function (s) { return document.querySelector(s); };\n  var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;'); };\n  var ETAPAS = [['recebido', '📥', 'Pedido recebido'], ['preparando', '✂️', 'Separando o áudio e as cenas'], ['ouvindo', '👂', 'Ouvindo a fala (Whisper)'], ['olhando', '👀', 'IA olhando as cenas'],\n    ['roteiro', '✍️', 'Roteirista escrevendo'], ['direcao', '🎬', 'Diretor escolhendo efeitos e transições'], ['narrando', '🎙️', 'Narrando'], ['montando', '🎞️', 'Montando o vídeo'], ['pronto', '✅', 'Pronto!']];\n  var mostrouFinal = false;\n  function desenha(s) {\n    var i = ETAPAS.findIndex(function (e) { return e[0] === s.etapa; });\n    el('#etapas').innerHTML = ETAPAS.map(function (e, k) { return '<li class=\"' + (k < i || s.etapa === 'pronto' ? 'feita' : k === i ? 'agora' : '') + '\"><span class=\"ic\">' + e[1] + '</span>' + e[2] + '</li>'; }).join('');\n    var pct = s.etapa === 'pronto' ? 100 : s.etapa === 'montando' ? 60 + (s.progresso || 0) * 0.4 : Math.max(3, i / 8 * 60);\n    el('#barra').style.width = pct + '%';\n    el('#detalhe').textContent = s.detalhe || '';\n    el('#sub').textContent = s.op ? ({ deitado: 'Deitado 16:9', vertical_desfocado: 'Em pé 9:16 (fundo desfocado)', vertical_recorte: 'Em pé 9:16 (recorte)' }[s.op.formato] + ' · ' + ({ curto: 'curto', medio: 'médio', longo: 'longo' }[s.op.duracao]) + ' · voz ' + s.op.voz.split('-')[2].replace(/Multilingual|Neural/g, '')) : '';\n    if (s.etapa === 'erro') { el('#andamento').insertAdjacentHTML('beforeend', '<p class=\"erro\">⚠️ ' + esc(s.erro || 'Algo deu errado.') + '</p><p class=\"bts\"><a class=\"btn pri\" href=\"video-ia\">Tentar de novo</a></p>'); return true; }\n    if (s.etapa === 'pronto' && !mostrouFinal) {\n      mostrouFinal = true;\n      var seo = s.seo || {};\n      el('#resultado').innerHTML = '<div class=\"card\"><h2>🎉 Vídeo pronto · ' + Math.round(s.duracao || 0) + ' s · ' + esc(s.tamanho_mb) + ' MB</h2><video controls playsinline poster=\"' + esc(s.capa) + '\" src=\"' + esc(s.video) + '\"></video>'\n        + '<div class=\"bts\"><a class=\"btn pri\" href=\"' + esc(s.video) + '\" download=\"video-ia-' + JOB + '.mp4\">⬇️ Baixar o vídeo</a><a class=\"btn\" href=\"' + esc(s.capa) + '\" download>🖼️ Baixar a capa</a><a class=\"btn\" href=\"video-ia\">🎬 Fazer outro</a></div>'\n        + '<p class=\"sub\" style=\"margin-top:8px\">O arquivo fica disponível por 48 horas.</p></div>'\n        + (seo.titulo ? '<div class=\"card\"><h2>🔎 Para postar (gerado pela IA)</h2><b>Título</b><pre id=\"seo-t\">' + esc(seo.titulo) + '</pre><b style=\"display:block;margin-top:8px\">Descrição</b><pre id=\"seo-d\">' + esc(seo.descricao) + '\\n\\n' + esc((seo.hashtags || []).join(' ')) + '</pre>'\n          + '<b style=\"display:block;margin-top:8px\">Tags</b><div>' + (seo.tags || []).map(function (t) { return '<span class=\"chip\">' + esc(t) + '</span>'; }).join('') + '</div>'\n          + '<div class=\"bts\"><button class=\"btn\" data-copiar=\"#seo-t\">📋 Copiar título</button><button class=\"btn\" data-copiar=\"#seo-d\">📋 Copiar descrição</button></div></div>' : '')\n        + '<div class=\"card\"><h2>📝 Roteiro e edição</h2><table><tr><th>#</th><th>Cena</th><th>Narração</th><th>Efeito</th></tr>' + (s.roteiro || []).map(function (r) { return '<tr><td>' + r.n + '</td><td>' + Number(r.inicio).toFixed(1) + ' s</td><td>' + esc(r.texto) + '</td><td><span class=\"chip\">' + esc(r.efeito) + '</span><span class=\"chip\">' + esc(r.transicao) + '</span></td></tr>'; }).join('') + '</table>'\n        + '<p class=\"sub\" style=\"margin-top:8px\">Feito em ' + Math.round((s.segundos || 0) / 60 * 10) / 10 + ' min · ' + (s.roteiro || []).length + ' trechos narrados.</p></div>';\n      return true;\n    }\n    return false;\n  }\n  function busca() {\n    fetch('video-ia-status?job=' + JOB).then(function (r) { return r.json(); }).then(function (s) {\n      if (!s.etapa) { el('#sub').textContent = 'Trabalho não encontrado.'; return; }\n      if (!desenha(s)) setTimeout(busca, 3000);\n    }).catch(function () { setTimeout(busca, 5000); });\n  }\n  document.addEventListener('click', function (e) { var b = e.target.closest('[data-copiar]'); if (b) navigator.clipboard.writeText(el(b.dataset.copiar).textContent).then(function () { b.textContent = '✅ Copiado'; }); });\n  busca();\n})();\n</script></body></html>\n",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      }
+     }
+    },
+    "name": "📤 Entrega o andamento",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1000,
+     -444
+    ],
+    "id": "56ba544d-c90f-4fc5-b634-a22aa2226c76"
+   },
+   {
+    "parameters": {
+     "path": "video-ia-status",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "🔔 Consulta status (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     1280,
+     -444
+    ],
+    "id": "cb9c47ea-b452-4957-8157-34bd3325aca1",
+    "webhookId": "03a2da4d-c5ae-4464-ad5f-9d9014a05aa7"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "status",
+     "key": "=vid:{{ String($json.query.job || '').replace(/[^a-z0-9]/g, '') }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "📖 Lê o status",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1520,
+     -444
+    ],
+    "id": "328535f5-9a0e-4027-af5c-1b03aa088ae8",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.status || '{}' }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "📤 Responde o status",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1760,
+     -444
+    ],
+    "id": "f0a5ada6-c82c-4d51-969d-3b6b0d237e43"
+   },
+   {
+    "parameters": {
+     "path": "video-ia",
+     "responseMode": "responseNode",
+     "options": {},
+     "httpMethod": "POST"
+    },
+    "name": "🔔 Pedido de edição (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     0
+    ],
+    "id": "e59f556c-2ac5-4575-83e9-c34f548df192",
+    "webhookId": "5f0e2ef3-d674-422f-b5cb-646f233f0432"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Confere as escolhas e cria o código do trabalho. O vídeo já foi enviado direto para a oficina (fora do n8n).\nlet b = $('🔔 Pedido de edição (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst crypto = require('crypto');\nconst VOZES = ['en-US-AndrewMultilingualNeural', 'en-US-BrianMultilingualNeural', 'en-AU-WilliamMultilingualNeural', 'de-DE-FlorianMultilingualNeural',\n  'fr-FR-RemyMultilingualNeural', 'it-IT-GiuseppeMultilingualNeural', 'ko-KR-HyunsuMultilingualNeural', 'pt-BR-ThalitaMultilingualNeural',\n  'pt-BR-FranciscaNeural', 'en-US-AvaMultilingualNeural', 'en-US-EmmaMultilingualNeural', 'de-DE-SeraphinaMultilingualNeural', 'fr-FR-VivienneMultilingualNeural'];\nconst FORMATOS = ['deitado', 'vertical_desfocado', 'vertical_recorte'];\nconst ESTILOS = { dramatico: 'recap dramático, com suspense e ganchos', engracado: 'recap engraçado, com comentários irônicos e leves', curioso: 'curiosidades e detalhes que ninguém percebeu', direto: 'resumo direto e claro, sem enrolação' };\nconst DURACOES = { curto: { segundos: 45, palavras: 115, trechos: '6 a 8' }, medio: { segundos: 90, palavras: 230, trechos: '10 a 14' }, longo: { segundos: 180, palavras: 460, trechos: '18 a 26' } };\nconst IDIOMAS = { pt: 'português do Brasil', en: 'inglês', es: 'espanhol' };\nconst limpa = (v, max) => String(v ?? '').replace(/[<>{}\\\\]/g, '').replace(/\\s+/g, ' ').trim().slice(0, max);\nconst origem = String(b.origem || '');\nconst erros = [];\nif (!/^([a-f0-9]{12}\\.[a-z0-9]{2,5}|exemplo-[a-z0-9]{3,30})$/.test(origem)) erros.push('Envie um vídeo (ou use o de exemplo) antes de começar.');\nconst op = {\n  formato: FORMATOS.includes(b.formato) ? b.formato : 'deitado',\n  estilo: ESTILOS[b.estilo] ? b.estilo : 'dramatico',\n  duracao: DURACOES[b.duracao] ? b.duracao : 'curto',\n  idioma: IDIOMAS[b.idioma] ? b.idioma : 'pt',\n  voz: VOZES.includes(b.voz) ? b.voz : 'en-US-AndrewMultilingualNeural',\n  espelhar: b.espelhar !== false, saturacao: b.saturacao !== false, granulado: b.granulado === true,\n  legendas: b.legendas !== false, som_original: b.som_original === true,\n  cor: /^#[0-9a-fA-F]{6}$/.test(b.cor || '') ? b.cor.toUpperCase() : '#FFD400',\n  titulo: limpa(b.titulo, 50), cta: limpa(b.cta, 40),\n};\nconst job = 'v' + Date.now().toString(36) + crypto.randomBytes(2).toString('hex');\nconst base = String($('🔔 Pedido de edição (POST)').first().json.webhookUrl || '').split('/webhook/')[0];\nreturn [{ json: { valido: erros.length === 0, erros, job, origem, op, criado_em: Date.now(),\n  estilo_txt: ESTILOS[op.estilo], alvo: DURACOES[op.duracao], idioma_txt: IDIOMAS[op.idioma],\n  link: `${base}/webhook/video-ia-ver?job=${job}`, publico: `${base}/videos/arquivo` } }];"
+    },
+    "name": "🧩 Confere o pedido",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     330,
+     0
+    ],
+    "id": "40f6c24b-6941-4278-b4bb-96218d07520d"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "74c9703e-ba93-46f8-be9e-fc387f92d60a",
+        "leftValue": "={{ $json.valido }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "🚦 Pode começar?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     660,
+     0
+    ],
+    "id": "7e3e1da4-31fe-4659-8052-6cb6e0db0ad6"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false, erros: $('🧩 Confere o pedido').first().json.erros }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      },
+      "responseCode": 400
+     }
+    },
+    "name": "📤 Recusa o pedido",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     660,
+     200
+    ],
+    "id": "c495e614-c560-4d3e-8a7d-dd8ebdb53cb2"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'recebido', detalhe: '', op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: recebido",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     990,
+     0
+    ],
+    "id": "bf860353-df08-43bf-8677-4de73dcc65c2",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true, link: $('🧩 Confere o pedido').first().json.link }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "📤 Responde com o link",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1320,
+     0
+    ],
+    "id": "964dcd15-bb77-457c-a7fc-f02dabd01b4e"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'preparando', detalhe: '', op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: preparando",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1650,
+     0
+    ],
+    "id": "f064b11f-019a-4800-9f02-5d65e10bbf44",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://video-oficina:8000/videos/api/preparar",
+     "options": {
+      "timeout": 900000
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ origem: $('🧩 Confere o pedido').first().json.origem, job: $('🧩 Confere o pedido').first().json.job }) }}"
+    },
+    "name": "🛠️ Oficina: prepara o vídeo",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     1650,
+     644
+    ],
+    "id": "97271b19-0063-4330-9f9a-f4199bee2f1e",
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'ouvindo', detalhe: 'Vídeo de ' + Math.round($('🛠️ Oficina: prepara o vídeo').first().json.duracao) + ' s · ' + $('🛠️ Oficina: prepara o vídeo').first().json.cortes.length + ' cortes de cena · ' + ($('🛠️ Oficina: prepara o vídeo').first().json.recorte ? 'tarjas pretas removidas' : 'sem tarjas'), op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: ouvindo",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1320,
+     644
+    ],
+    "id": "5972b901-7a33-451c-9f60-8d50a164fad0",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "d3964d38-ff48-4fea-bdd5-cb32330289b4",
+        "leftValue": "={{ !!$('🛠️ Oficina: prepara o vídeo').first().json.audio }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "🚦 Tem áudio?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     990,
+     644
+    ],
+    "id": "bed04fb2-c624-4260-a1ae-07dd13f9af6b"
+   },
+   {
+    "parameters": {
+     "method": "GET",
+     "url": "=http://video-oficina:8000/videos/arquivo/{{ $('🛠️ Oficina: prepara o vídeo').first().json.audio }}",
+     "options": {
+      "timeout": 120000,
+      "response": {
+       "response": {
+        "responseFormat": "file"
+       }
+      }
+     }
+    },
+    "name": "🌐 Baixa o áudio",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     660,
+     644
+    ],
+    "id": "6578668a-1277-416d-8b42-944f4ec56ff9",
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://157.173.207.22:20128/v1/audio/transcriptions",
+     "authentication": "predefinedCredentialType",
+     "nodeCredentialType": "openAiApi",
+     "options": {
+      "timeout": 180000
+     },
+     "sendBody": true,
+     "contentType": "multipart-form-data",
+     "bodyParameters": {
+      "parameters": [
+       {
+        "parameterType": "formBinaryData",
+        "name": "file",
+        "inputDataFieldName": "data"
+       },
+       {
+        "name": "model",
+        "value": "groq/whisper-large-v3-turbo"
+       },
+       {
+        "name": "response_format",
+        "value": "verbose_json"
+       }
+      ]
+     }
+    },
+    "name": "👂 Whisper: transcreve o áudio",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     330,
+     644
+    ],
+    "id": "b04ca7f9-bda3-453a-a5cb-c9f1255a4b2a",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Deixa a transcrição do Whisper enxuta: \"12.4 | frase\" (segundo | texto) (a IA roteirista usa os tempos para escolher as cenas).\nlet r = {};\ntry { if ($('👂 Whisper: transcreve o áudio').isExecuted) r = $('👂 Whisper: transcreve o áudio').first().json || {}; } catch (e) {}\nif (typeof r.data === 'string') { try { r = JSON.parse(r.data); } catch (e) {} }\nconst segs = Array.isArray(r.segments) ? r.segments : [];\nconst linhas = segs.map(s => `${Number(s.start).toFixed(1)} | ${String(s.text || '').trim()}`).filter(l => l.length > 8);\nlet texto = linhas.join('\\n');\nif (texto.length > 24000) texto = texto.slice(0, 24000) + '\\n[...]';\nreturn [{ json: { tem_fala: linhas.length > 0, idioma_original: r.language || '', fala: texto || '(o vídeo não tem fala; use só as cenas)' } }];"
+    },
+    "name": "🧩 Organiza a fala",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     0,
+     644
+    ],
+    "id": "d2da9814-4257-469d-9f62-e4fa7c9916a7"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'olhando', detalhe: ($('🧩 Organiza a fala').first().json.tem_fala ? 'Fala transcrita (' + $('🧩 Organiza a fala').first().json.idioma_original + ')' : 'Vídeo sem fala: a IA vai se guiar pelas imagens'), op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: olhando",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     0,
+     1117
+    ],
+    "id": "f065acd6-24a6-45e6-94cb-547250f5181b",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "// Monta o pedido para a IA com visão: até 12 quadros do vídeo, cada um com o segundo em que aparece.\nconst prep = $('🛠️ Oficina: prepara o vídeo').first().json;\nconst quadros = (prep.quadros || []).slice(0, 12);\nconst conteudo = [{ type: 'text', text: `Estas são ${quadros.length} imagens de um vídeo, em ordem. Os segundos de cada uma: ${quadros.map((q, i) => `imagem ${i + 1} = ${q.t}s`).join(', ')}.\nDescreva cada imagem em 1 frase objetiva (quem aparece, o que faz, clima). Não invente nomes.\nRETORNE SOMENTE JSON: {\"cenas\":[{\"t\":0,\"descricao\":\"\"}]}` }];\nfor (const q of quadros) conteudo.push({ type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + q.b64 } });\nreturn [{ json: { tem_quadros: quadros.length > 0, corpo: JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 2000, temperature: 0.2, messages: [{ role: 'user', content: conteudo }] }) } }];"
+    },
+    "name": "🧩 Prepara as cenas para a IA",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     330,
+     1117
+    ],
+    "id": "7e45704c-83ff-44e9-a845-c20ee1f0754c"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://157.173.207.22:20128/v1/chat/completions",
+     "authentication": "predefinedCredentialType",
+     "nodeCredentialType": "openAiApi",
+     "options": {
+      "timeout": 180000
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ $json.corpo }}"
+    },
+    "name": "👀 IA olha as cenas",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     660,
+     1117
+    ],
+    "id": "1c796341-5008-4be1-81e4-5dc481833592",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Lê o que a IA viu em cada cena. Se a visão falhar, segue só com a fala.\nlet cenas = [];\ntry {\n  const r = $('👀 IA olha as cenas').first().json;\n  const txt = r.choices ? r.choices[0].message.content : '';\n  const j = parseJSON(txt);\n  cenas = (j && Array.isArray(j.cenas) ? j.cenas : []).map(c => `${Number(c.t).toFixed(1)} | ${String(c.descricao || '').trim()}`);\n} catch (e) {}\nconst prep = $('🛠️ Oficina: prepara o vídeo').first().json;\nconst pretos = (prep.pretos || []).map(([a, b]) => `de ${a} a ${b}`).join('; ');\nreturn [{ json: { cenas: cenas.join('\\n') || '(sem descrição das cenas)', pretos: pretos || 'nenhum', duracao: prep.duracao } }];"
+    },
+    "name": "🧩 Lê o que a IA viu",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     990,
+     1117
+    ],
+    "id": "5a422d6f-0d4d-4d82-8e80-f9df25536773"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'roteiro', detalhe: 'A IA descreveu ' + $('🛠️ Oficina: prepara o vídeo').first().json.quadros.length + ' cenas', op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: roteiro",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1320,
+     1117
+    ],
+    "id": "319f5516-7749-477c-8995-1b9a34e5c219",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'IDIOMA DA NARRAÇÃO: ' + $('🧩 Confere o pedido').first().json.idioma_txt + '\\nESTILO: ' + $('🧩 Confere o pedido').first().json.estilo_txt + '\\nALVO: ' + $('🧩 Confere o pedido').first().json.alvo.palavras + ' palavras em ' + $('🧩 Confere o pedido').first().json.alvo.trechos + ' trechos (cerca de ' + $('🧩 Confere o pedido').first().json.alvo.segundos + ' s de narração)\\nDURAÇÃO DO VÍDEO: ' + $('🧩 Lê o que a IA viu').first().json.duracao + ' s\\nTRECHOS EM TELA PRETA (evite): ' + $('🧩 Lê o que a IA viu').first().json.pretos + '\\n\\nCENAS:\\n' + $('🧩 Lê o que a IA viu').first().json.cenas + '\\n\\nFALA ORIGINAL:\\n' + $('🧩 Organiza a fala').first().json.fala }}",
+     "options": {
+      "systemMessage": "Você é ROTEIRISTA de um canal de RECAP (vídeos que recontam histórias com narração própria).\nRecebe a fala original do vídeo com os segundos, a descrição das cenas com os segundos, a duração e os trechos de tela preta.\nEscreva um roteiro NOVO de narração, no idioma e no estilo pedidos.\n\nREGRAS\n- Reconte com suas palavras; não traduza frase por frase. Pode comentar, criar suspense e explicar.\n- O 1º trecho é um GANCHO forte (pergunta ou afirmação surpreendente) para segurar quem assiste.\n- Cada trecho tem \"inicio\" (segundos) = o momento do vídeo cuja imagem combina com o que é narrado. Use a fala e as cenas para escolher. Siga a ordem do vídeo (inicio crescente) e fuja dos trechos pretos.\n- Nas listas de fala e cenas, o número antes da barra é o segundo do vídeo (ex.: \"14.9 | ...\" = segundo 14.9).\n- \"inicio\" é um NÚMERO em segundos (ex.: 14.9), sem letras.\n- Cada trecho com 12 a 28 palavras, frases faladas e naturais, com TODOS os acentos do idioma. Sem emojis, sem marcações, sem listas.\n- Total de palavras perto do alvo e quantidade de trechos dentro da faixa pedida.\n- O último trecho fecha a história ou deixa um gancho para a próxima parte.\n- Não invente nomes de personagens que não aparecem na fala.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"titulo\":\"título curto do vídeo\",\"segmentos\":[{\"inicio\":0,\"texto\":\"\"}]}"
+     },
+     "needsFallback": true
+    },
+    "name": "🤖 Roteirista",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1650,
+     1117
+    ],
+    "id": "531049ae-6688-4080-b03c-c2761a2ee3be",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3-flash",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 6000,
+      "temperature": 0.85,
+      "timeout": 240000,
+      "maxRetries": 3
+     }
+    },
+    "name": "🧠 Cérebro da roteirista",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1650,
+     1337
+    ],
+    "id": "6aabb66d-b5ef-41e8-8ee6-911353ecbca9",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 6000,
+      "temperature": 0.85,
+      "timeout": 240000,
+      "maxRetries": 1
+     }
+    },
+    "name": "🛟 Reserva · Cérebro da roteirista",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1650,
+     1517
+    ],
+    "id": "b5fe209f-2def-4d84-8c06-c17cddb0ea1a",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Confere o roteiro: trechos em ordem, dentro do vídeo, sem texto vazio. Sem roteiro = erro claro.\nconst v = $('🧩 Confere o pedido').first().json;\nconst dur = Number($('🧩 Lê o que a IA viu').first().json.duracao) || 0;\nlet j = null;\n// a IA às vezes escreve \"inicio\": 14.9s (copiando o formato das cenas) — tira o \"s\" para o JSON valer\nconst bruto = String($('🤖 Roteirista').first().json.output || '').replace(/(\"inicio\"\\s*:\\s*)(\\d+)(?:[.,](\\d+))?\\s*s\\b/g, (m, a, i, d) => a + i + (d ? '.' + d : ''));\ntry { j = parseJSON(bruto); } catch (e) {}\n// plano B: JSON quebrado? pega cada trecho \"inicio ... texto\" pelo padrão\nif (!j || !Array.isArray(j.segmentos)) {\n  const achados = [...bruto.matchAll(/\"inicio\"\\s*:\\s*\"?(\\d+(?:[.,]\\d+)?)[^\"]*?\"texto\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"/g)].map(m => ({ inicio: Number(m[1].replace(',', '.')), texto: m[2].replace(/\\\\\"/g, '\"') }));\n  const tit = (bruto.match(/\"titulo\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"/) || [])[1] || '';\n  if (achados.length) j = { titulo: tit, segmentos: achados };\n}\nconst limpa = s => String(s ?? '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}*#_<>]/gu, '').replace(/\\s+/g, ' ').trim();\nconst segs = (j && Array.isArray(j.segmentos) ? j.segmentos : []).map((s, i) => ({\n  n: i + 1, inicio: Math.max(0, Math.min(Number(s.inicio) || 0, Math.max(0, dur - 2))), texto: limpa(s.texto).slice(0, 400),\n})).filter(s => s.texto.split(' ').length >= 3).slice(0, 30);\nsegs.forEach((s, i) => { s.n = i + 1; });\nif (segs.length < 2) return [{ json: { ok: false, erro: 'A IA roteirista não devolveu um roteiro válido. Tente de novo.' } }];\nreturn [{ json: { ok: true, titulo: limpa(j.titulo).slice(0, 60), segmentos: segs, palavras: segs.reduce((n, s) => n + s.texto.split(' ').length, 0) } }];"
+    },
+    "name": "🧩 Confere o roteiro",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1650,
+     1970
+    ],
+    "id": "2ce1d587-a980-4705-9db1-115dc525f253"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "9f135ab2-9443-4e32-bd09-c1bf75f87deb",
+        "leftValue": "={{ $json.ok }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "🚦 Roteiro ok?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     1320,
+     1970
+    ],
+    "id": "3216d152-9c57-45ff-84a9-02540e8d5eb0"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'direcao', detalhe: $('🧩 Confere o roteiro').first().json.segmentos.length + ' trechos, ' + $('🧩 Confere o roteiro').first().json.palavras + ' palavras', op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: direção",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     990,
+     1970
+    ],
+    "id": "fc104205-d744-4f46-8a36-2728c4a4c088",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'IDIOMA: ' + $('🧩 Confere o pedido').first().json.idioma_txt + '\\nROTEIRO:\\n' + JSON.stringify($('🧩 Confere o roteiro').first().json.segmentos.map(s => ({ n: s.n, texto: s.texto })), null, 1) }}",
+     "options": {
+      "systemMessage": "Você é DIRETOR DE EDIÇÃO de vídeos de recap. Para cada trecho do roteiro escolha 1 efeito e 1 transição de entrada que combinem com a emoção do texto.\n\nEFEITOS: zoom_in (revelação, tensão crescendo) · zoom_out (calma, conclusão) · tremor (ação, impacto, susto) · flash (virada, surpresa, momento épico) · pb (lembrança, passado, tristeza) · lento (drama, emoção forte) · nenhum (narração neutra)\nTRANSIÇÕES: fade, dissolve (calmo) · fadeblack, radial (mistério) · fadewhite, circleopen (revelação) · slideleft, slideright, wipeleft, wiperight, smoothleft (ação, ritmo) · pixelize, hblur, zoomin, squeezeh (impacto)\n\nREGRAS\n- Varie: não repita a mesma transição em seguida; no máximo 1 efeito igual a cada 3 trechos.\n- 1º trecho com zoom_in ou flash; último com zoom_out ou nenhum; \"pb\" só para lembrança ou passado.\n- Crie também titulo_abertura (até 40 caracteres, chamativo) e cta (até 30 caracteres, ex.: \"Siga para a parte 2!\"), no idioma da narração, sem emojis.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"titulo_abertura\":\"\",\"cta\":\"\",\"segmentos\":[{\"n\":1,\"efeito\":\"\",\"transicao\":\"\"}]}"
+     },
+     "needsFallback": true
+    },
+    "name": "🤖 Diretor de edição",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     660,
+     1970
+    ],
+    "id": "58c9800f-402a-423d-bfb1-3a5cf89ae847",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 2500,
+      "temperature": 0.7,
+      "timeout": 120000,
+      "maxRetries": 3
+     }
+    },
+    "name": "🧠 Cérebro do diretor",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     660,
+     2190
+    ],
+    "id": "dc85cb0e-c5da-49c7-95e5-c298b9372603",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 2500,
+      "temperature": 0.7,
+      "timeout": 120000,
+      "maxRetries": 1
+     }
+    },
+    "name": "🛟 Reserva · Cérebro do diretor",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     660,
+     2370
+    ],
+    "id": "020b6fca-c9e8-472b-ae49-b4d102b79bcb",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'IDIOMA: ' + $('🧩 Confere o pedido').first().json.idioma_txt + '\\nROTEIRO: ' + $('🧩 Confere o roteiro').first().json.segmentos.map(s => s.texto).join(' ') }}",
+     "options": {
+      "systemMessage": "Você é ESPECIALISTA EM SEO de vídeos curtos de recap (YouTube Shorts, Reels, TikTok). Recebe o roteiro.\n- titulo: até 90 caracteres, provocação/curiosidade + palavras que as pessoas buscam. NÃO use o nome do filme, série ou obra (evita bloqueio por direitos autorais).\n- descricao: 2 a 4 frases convidando a assistir, sem contar o final.\n- tags: 10 termos de busca. hashtags: 3 a 5, sem o símbolo #.\nTudo no idioma da narração.\nRETORNE SOMENTE JSON VÁLIDO: {\"titulo\":\"\",\"descricao\":\"\",\"tags\":[\"\"],\"hashtags\":[\"\"]}"
+     },
+     "needsFallback": true
+    },
+    "name": "🤖 Especialista em SEO",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     330,
+     1970
+    ],
+    "id": "23f7a933-8153-456c-8c16-f9ef089e84c3",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 1500,
+      "temperature": 0.8,
+      "timeout": 120000,
+      "maxRetries": 3
+     }
+    },
+    "name": "🧠 Cérebro do SEO",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     330,
+     2190
+    ],
+    "id": "7e9906e4-7e93-4ff6-b0e1-354c75677310",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 1500,
+      "temperature": 0.8,
+      "timeout": 120000,
+      "maxRetries": 1
+     }
+    },
+    "name": "🛟 Reserva · Cérebro do SEO",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     330,
+     2370
+    ],
+    "id": "a4b6b7c9-3217-4aa5-a56e-29edd43a4abd",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Junta o roteiro com as escolhas do diretor de edição (efeito e transição de cada trecho) e o texto de SEO.\nconst v = $('🧩 Confere o pedido').first().json;\nconst rot = $('🧩 Confere o roteiro').first().json;\nlet dir = null, seo = null;\ntry { dir = parseJSON($('🤖 Diretor de edição').first().json.output); } catch (e) {}\ntry { seo = parseJSON($('🤖 Especialista em SEO').first().json.output); } catch (e) {}\nconst EFEITOS = ['nenhum', 'zoom_in', 'zoom_out', 'tremor', 'flash', 'pb', 'lento'];\nconst TRANS = ['fade', 'fadeblack', 'fadewhite', 'wipeleft', 'wiperight', 'slideleft', 'slideright', 'circleopen', 'circleclose', 'radial', 'pixelize', 'dissolve', 'smoothleft', 'smoothright', 'zoomin', 'hblur', 'distance', 'diagtl', 'squeezeh'];\nconst reserva = ['zoom_in', 'nenhum', 'zoom_out', 'flash', 'nenhum', 'tremor'];\nconst transReserva = ['fade', 'slideleft', 'fadeblack', 'circleopen', 'wipeleft', 'dissolve', 'radial'];\nconst plano = dir && Array.isArray(dir.segmentos) ? dir.segmentos : [];\nconst segmentos = rot.segmentos.map((s, i) => {\n  const p = plano.find(x => Number(x.n) === s.n) || {};\n  return { ...s, efeito: EFEITOS.includes(p.efeito) ? p.efeito : reserva[i % reserva.length], transicao: TRANS.includes(p.transicao) ? p.transicao : transReserva[i % transReserva.length] };\n});\nconst txt = (s, m) => String(s ?? '').replace(/[<>{}\\\\]/g, '').trim().slice(0, m);\nconst titulo = v.op.titulo || txt(dir && dir.titulo_abertura, 50) || rot.titulo;\nconst cta = v.op.cta || txt(dir && dir.cta, 40) || (v.op.idioma === 'pt' ? 'Siga para mais!' : v.op.idioma === 'es' ? '¡Sígueme para más!' : 'Follow for more!');\nconst SEO = seo ? { titulo: txt(seo.titulo, 100), descricao: txt(seo.descricao, 900), tags: (Array.isArray(seo.tags) ? seo.tags : []).map(t => txt(t, 40)).slice(0, 15),\n  hashtags: (Array.isArray(seo.hashtags) ? seo.hashtags : []).map(t => '#' + String(t).replace(/[^\\p{L}\\p{N}_]/gu, '')).slice(0, 5) } : null;\nreturn [{ json: { segmentos, titulo, cta, seo: SEO,\n  narrar: JSON.stringify({ job: v.job, voz: v.op.voz, segmentos: segmentos.map(s => ({ n: s.n, texto: s.texto })) }) } }];"
+    },
+    "name": "🧩 Junta roteiro e edição",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1970
+    ],
+    "id": "a4c38bec-cfda-4f6e-9aa8-4af1bfe54b98"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'narrando', detalhe: 'Voz ' + $('🧩 Confere o pedido').first().json.op.voz.split('-')[2].replace(/Multilingual|Neural/g, ''), op: $('🧩 Confere o pedido').first().json.op }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: narrando",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     0,
+     2794
+    ],
+    "id": "0f7a119a-5ade-46ac-bd07-9f086757bbfb",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://video-oficina:8000/videos/api/narrar",
+     "options": {
+      "timeout": 600000
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ $('🧩 Junta roteiro e edição').first().json.narrar }}"
+    },
+    "name": "🛠️ Oficina: narra o roteiro",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     330,
+     2794
+    ],
+    "id": "a3f61606-3448-439b-a430-0d1653b5629c",
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Junta cada trecho com a duração da narração e o tempo de cada palavra (a legenda acompanha a voz) e monta o pedido final.\nconst v = $('🧩 Confere o pedido').first().json;\nconst ed = $('🧩 Junta roteiro e edição').first().json;\nconst nar = $('🛠️ Oficina: narra o roteiro').first().json;\nconst porN = Object.fromEntries((nar.trechos || []).filter(t => !t.erro && t.duracao).map(t => [t.n, t]));\nconst segmentos = ed.segmentos.filter(s => porN[s.n]).map(s => ({ ...s, duracao: porN[s.n].duracao, palavras: porN[s.n].palavras }));\nif (segmentos.length < 2) return [{ json: { ok: false, erro: 'A narração falhou. Tente de novo em instantes.' } }];\nconst op = v.op;\nreturn [{ json: { ok: true, narrados: segmentos.length, falharam: ed.segmentos.length - segmentos.length,\n  corpo: JSON.stringify({ job: v.job, origem: v.origem, formato: op.formato, segmentos,\n    opcoes: { espelhar: op.espelhar, saturacao: op.saturacao, granulado: op.granulado, legendas: op.legendas, som_original: op.som_original,\n      cor: op.cor, titulo: ed.titulo, cta: ed.cta } }) } }];"
+    },
+    "name": "🧩 Monta o pedido de edição",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     660,
+     2794
+    ],
+    "id": "ef2d406a-9c99-4b4e-a9bc-7c108fb5ae26"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "3fc1a7c2-b656-4fed-8c98-345c99ddf14e",
+        "leftValue": "={{ $json.ok }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "🚦 Narração ok?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     990,
+     2794
+    ],
+    "id": "b312c15c-13d8-4649-8ad7-6498ee037f99"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://video-oficina:8000/videos/api/montar",
+     "options": {
+      "timeout": 60000
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ $('🧩 Monta o pedido de edição').first().json.corpo }}"
+    },
+    "name": "🛠️ Oficina: monta o vídeo",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     1320,
+     2794
+    ],
+    "id": "305b2be4-5a67-4456-a139-a5ea69c70c99",
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "amount": 8,
+     "unit": "seconds"
+    },
+    "name": "⏳ Espera 8 segundos",
+    "type": "n8n-nodes-base.wait",
+    "typeVersion": 1.1,
+    "position": [
+     1650,
+     2794
+    ],
+    "id": "97b63635-e0f0-4233-9cab-2ba49dbf076a",
+    "webhookId": "ca2f67e3-2bb7-4d8d-83c3-a87a57417cca"
+   },
+   {
+    "parameters": {
+     "method": "GET",
+     "url": "=http://video-oficina:8000/videos/api/status/{{ $('🧩 Confere o pedido').first().json.job }}",
+     "options": {
+      "timeout": 120000,
+      "response": {
+       "response": {
+        "neverError": true
+       }
+      }
+     }
+    },
+    "name": "🛠️ Oficina: como está?",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     1650,
+     3238
+    ],
+    "id": "f7bfa6cb-5d3a-460b-b59f-1ed3182d97d5",
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Lê o andamento da montagem na oficina e decide se o laço continua.\nconst st = $input.first().json || {};\nconst v = $('🧩 Confere o pedido').first().json;\nconst estado = st.estado || 'desconhecido';\nconst status = { job: v.job, etapa: 'montando', progresso: Number(st.progresso) || 0,\n  detalhe: `🎞️ ${st.etapa || 'montando'} · ${Number(st.progresso) || 0}%`, op: v.op };\nreturn [{ json: { ...st, estado, terminou: estado !== 'montando', status: JSON.stringify(status) } }];"
+    },
+    "name": "🧩 Atualiza o andamento",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1320,
+     3238
+    ],
+    "id": "a0c0a519-702e-4868-a04d-2f6a43b1e11c"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ $('🧩 Atualiza o andamento').item.json.status }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: montando",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     990,
+     3238
+    ],
+    "id": "7e142c77-6dc2-4567-9bbb-a3ca53520238",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "6a81679c-2fd0-43ca-9648-71d72aec6d2e",
+        "leftValue": "={{ $('🧩 Atualiza o andamento').item.json.terminou }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "🚦 Terminou?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     660,
+     3238
+    ],
+    "id": "bf1c0ddc-8189-4d2b-82a8-ed895f627f9d"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Grava o resultado: link do vídeo e da capa, roteiro com os efeitos e os textos para postar.\nconst v = $('🧩 Confere o pedido').first().json;\nconst st = $('🧩 Atualiza o andamento').item.json;\nconst ed = $('🧩 Junta roteiro e edição').first().json;\nif (st.estado !== 'pronto') {\n  return [{ json: { status: JSON.stringify({ job: v.job, etapa: 'erro', op: v.op,\n    erro: st.estado === 'erro' ? 'A montagem falhou: ' + String(st.erro || '').slice(-220) : 'A oficina perdeu este trabalho (reiniciou?). Tente de novo.' }) } }];\n}\nreturn [{ json: { status: JSON.stringify({\n  job: v.job, etapa: 'pronto', op: v.op, video: `${v.publico}/${st.video}`, capa: `${v.publico}/${st.capa}`,\n  duracao: st.info ? st.info.duracao : 0, tamanho_mb: st.tamanho_mb, segundos: Math.round((Date.now() - v.criado_em) / 1000),\n  seo: ed.seo, titulo: ed.titulo, roteiro: ed.segmentos.map(s => ({ n: s.n, inicio: s.inicio, texto: s.texto, efeito: s.efeito, transicao: s.transicao })),\n}) } }];"
+    },
+    "name": "🎉 Resultado final",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     330,
+     3238
+    ],
+    "id": "5f9a438e-cd04-4047-b938-d2d6666a8bb2"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ $json.status }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "💾 Status: pronto",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     0,
+     3238
+    ],
+    "id": "a3309195-0ea9-44b3-9d8c-4e7d06399440",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "content": "## 🛠️ A OFICINA DE VÍDEO (serviço à parte)\nVídeo é pesado demais para passar dentro do n8n. Quem corta, narra e monta é um serviço com **ffmpeg** e **edge-tts** que roda ao lado do n8n, na mesma VPS. O n8n só manda ordens por HTTP (nodes 🛠️):\n📮 internos (só o n8n alcança): `http://video-oficina:8000/videos/api/preparar` · `/narrar` · `/montar` · `/status/<job>`\n🌍 públicos: `/videos/enviar` (só com o passe) · `/videos/arquivo/...` (baixar) · `/videos/saude` (está viva?)\n🧹 apaga sozinha os arquivos com mais de 48 h (os vídeos de exemplo ficam).",
+     "height": 343,
+     "width": 660,
+     "color": 5
+    },
+    "name": "Nota · Oficina",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2100,
+     -628
+    ],
+    "id": "d7efe64b-d741-4df3-bac2-87ba7601bd41"
+   },
+   {
+    "parameters": {
+     "content": "## 🆘 SE DER ERRO\n🔴 **\"Passe de envio inválido ou vencido\"** ➜ a página ficou aberta mais de 3 h: recarregue.\n🔴 **Parado em \"preparando\"** ➜ a oficina pode estar fora do ar: abra **/videos/saude** (tem que aparecer `\"ok\":true`).\n🔴 **\"A IA roteirista não devolveu um roteiro válido\"** ➜ o modelo falhou: tente de novo (a 🛟 reserva já entra sozinha quando o principal dá erro).\n🔴 **Vídeo recusado** ➜ limites: até 400 MB, até 20 minutos, MP4, MOV, MKV ou WEBM.\n🔴 **\"vídeo não encontrado (passou de 48 h?)\"** ➜ a oficina já apagou o arquivo: envie de novo.\n🔎 **Onde parou?** Aba **Executions** ➜ a execução vermelha ➜ o node com ⚠️ mostra o motivo.",
+     "height": 463,
+     "width": 660,
+     "color": 3
+    },
+    "name": "Nota · Se der erro",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2100,
+     -245
+    ],
+    "id": "1162fa37-5407-4ac3-9b77-6fb441a73d86"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=vid:{{ $('🧩 Confere o pedido').first().json.job }}",
+     "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'erro', op: $('🧩 Confere o pedido').first().json.op, erro: String($json.erro || ($json.error && ($json.error.message || $json.error.description)) || $json.message || 'Falha inesperada').slice(0, 300) }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 259200
+    },
+    "name": "⚠️ Marca erro",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2200,
+     1970
+    ],
+    "id": "7f3e1b87-c4d2-4203-bee8-6ff70c808c7c",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "content": "# 🎬 EDITOR DE VÍDEO COM IA (RECAP NARRADO)\n\n🎯 **O que faz:** você manda um vídeo e recebe um **recap pronto para postar**, como os canais que recontam filmes e animes:\n🗣️ roteiro **novo** escrito pela IA (não é tradução)\n🎙️ narração com voz neural (Thalita, Francisca, Andrew…)\n✂️ cenas cortadas na hora certa, **espelhadas**, com cores mais vivas e **sem tela preta**\n💥 **efeitos** (zoom, tremor, flash, preto e branco, câmera lenta) e **transições** escolhidos por uma IA diretora\n💬 **legenda animada** com a palavra falada em destaque\n🏷️ título, descrição e tags para postar (sem o nome da obra)\n📐 deitado 16:9 ou em pé 9:16\n\n## ▶️ COMO USAR (pela página)\n1️⃣ Abra **/webhook/video-ia** no navegador\n2️⃣ Envie um vídeo ou toque em **🎞️ Usar o vídeo de exemplo**\n3️⃣ Escolha formato, voz e efeitos ➜ **🎬 Editar com IA**\n4️⃣ Acompanhe as etapas e baixe o vídeo (fica 48 h)\n\n## 🧪 SÓ QUER VER FUNCIONANDO?\nUse o **TESTE RÁPIDO** aqui embaixo: 1 clique, sem enviar vídeo nenhum.\n\n## 🧱 QUEM FAZ O QUÊ\n🧠 **n8n (este fluxo)**: decide tudo, chama as IAs e acompanha\n🛠️ **Oficina de vídeo** (serviço à parte, com ffmpeg): corta, narra, aplica efeitos e monta\n🔑 **Precisa de:** credencial do roteador de IA (tipo OpenAI), Redis e a oficina rodando\n\n## 🔎 LEGENDA DOS ÍCONES\n🔔 recebe um pedido (webhook) · 📤 responde · 🧪 teste manual · ⏰ relógio\n🧩 código · ✏️ campos · 🚦 decisão sim/não · 🔀 escolhe o caminho · 🔁 laço\n📖 lê do Redis · 💾 grava no Redis · 🧮 soma · 🗂️ lista · 🗑️ apaga\n🤖 agente de IA · 🧠 cérebro (modelo) · 🛟 cérebro reserva\n🌐 chama outro serviço · ⏳ espera · 🎨 desenha imagem · 📸 Instagram\n🛠️ oficina de vídeo · 👂 transcreve a fala · 👀 IA com visão",
+     "height": 1042,
+     "width": 1240,
+     "color": 6
+    },
+    "name": "Nota · Comece aqui",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1400,
+     -628
+    ],
+    "id": "81fd23a7-2dbe-43df-a4fa-5dec4b046415"
+   },
+   {
+    "parameters": {},
+    "name": "🧪 Teste rápido (clique no ▶️)",
+    "type": "n8n-nodes-base.manualTrigger",
+    "typeVersion": 1,
+    "position": [
+     -1300,
+     727
+    ],
+    "id": "bce9898a-59f7-44fb-bd95-e330f7400b90"
+   },
+   {
+    "parameters": {
+     "assignments": {
+      "assignments": [
+       {
+        "id": "3ae8e131-23fe-4d2b-ab1e-4bb0afb1ac1d",
+        "name": "video",
+        "value": "exemplo-sintel",
+        "type": "string"
+       },
+       {
+        "id": "e7184b89-be3e-4b31-bfcd-db9362c13668",
+        "name": "formato",
+        "value": "vertical_desfocado",
+        "type": "string"
+       },
+       {
+        "id": "316ebad5-cfd2-46f4-b89e-b5b4c16c272f",
+        "name": "duracao",
+        "value": "curto",
+        "type": "string"
+       },
+       {
+        "id": "82fce56b-bc4f-499b-ab89-18834e9d9b15",
+        "name": "estilo",
+        "value": "dramatico",
+        "type": "string"
+       },
+       {
+        "id": "c4d42ba8-8d7a-458f-9db4-ab14a311bec7",
+        "name": "idioma",
+        "value": "pt",
+        "type": "string"
+       },
+       {
+        "id": "5a54b913-f6b1-4d6e-9594-c7256fb7d7e6",
+        "name": "voz",
+        "value": "pt-BR-ThalitaMultilingualNeural",
+        "type": "string"
+       },
+       {
+        "id": "c90f18c5-45b7-4b56-af81-789a361461cf",
+        "name": "cor",
+        "value": "#FFD400",
+        "type": "string"
+       },
+       {
+        "id": "3883b3d6-80d7-4872-846e-efdef23902ea",
+        "name": "legendas",
+        "value": true,
+        "type": "boolean"
+       },
+       {
+        "id": "227b87d3-91cb-4b6f-b62f-20bfb0088eed",
+        "name": "espelhar",
+        "value": true,
+        "type": "boolean"
+       },
+       {
+        "id": "3c962472-80eb-4472-8e52-88f933ca46c1",
+        "name": "som_original",
+        "value": false,
+        "type": "boolean"
+       },
+       {
+        "id": "4e62019b-2aee-4702-933b-929efae3149b",
+        "name": "endereco_do_n8n",
+        "value": "={{ $execution.resumeUrl.split('/webhook-waiting')[0] }}",
+        "type": "string"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "name": "✏️ Escolhas do teste (mude à vontade)",
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+     -1000,
+     727
+    ],
+    "id": "1a9e2a1f-7926-4da1-b44b-32f49fe05cce"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $json.endereco_do_n8n }}/webhook/video-ia",
+     "options": {
+      "timeout": 30000,
+      "response": {
+       "response": {
+        "neverError": true
+       }
+      }
+     },
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ origem: $json.video, formato: $json.formato, duracao: $json.duracao, estilo: $json.estilo, idioma: $json.idioma, voz: $json.voz, cor: $json.cor, legendas: $json.legendas, espelhar: $json.espelhar, som_original: $json.som_original }) }}"
+    },
+    "name": "🌐 Manda para o editor",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     -700,
+     727
+    ],
+    "id": "4de253c3-8478-4256-9a59-177a56a76890",
+    "onError": "stopWorkflow"
+   },
+   {
+    "parameters": {
+     "jsCode": "// O editor respondeu na hora com o link da página de andamento.\nconst r = $input.first().json;\nif (!r.ok) throw new Error('O editor recusou o teste: ' + (r.erros || [r.message || 'sem resposta']).join(' '));\nreturn [{ json: { '👉 abra para ver ao vivo': r.link, job: String(r.link).split('job=')[1] } }];"
+    },
+    "name": "👉 Acompanhe ao vivo (abra o link)",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     -400,
+     727
+    ],
+    "id": "2970f097-1614-42eb-9c45-a3008c10250d"
+   },
+   {
+    "parameters": {
+     "amount": 15,
+     "unit": "seconds"
+    },
+    "name": "⏳ Espera 15 segundos",
+    "type": "n8n-nodes-base.wait",
+    "typeVersion": 1.1,
+    "position": [
+     -400,
+     987
+    ],
+    "id": "d48c9a52-6ea1-4139-b3a5-5c115aba83de",
+    "webhookId": "cc2673df-6781-4427-bc9c-420d67c215c8"
+   },
+   {
+    "parameters": {
+     "method": "GET",
+     "url": "={{ $('✏️ Escolhas do teste (mude à vontade)').first().json.endereco_do_n8n }}/webhook/video-ia-status?job={{ $('👉 Acompanhe ao vivo (abra o link)').first().json.job }}",
+     "options": {
+      "timeout": 30000,
+      "response": {
+       "response": {
+        "neverError": true
+       }
+      }
+     }
+    },
+    "name": "🌐 Pergunta como está o teste",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     -700,
+     987
+    ],
+    "id": "e9bf8635-062f-4bb9-ae8c-81f91d2c1b45",
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "668d8ecc-8330-4f49-93b1-76ca216ebfbe",
+        "leftValue": "={{ ['pronto', 'erro'].includes($json.etapa) || $runIndex >= 40 }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "🚦 O teste terminou?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     -1000,
+     987
+    ],
+    "id": "638e7212-4e9e-4f28-ac0e-ce8b6bb94861"
+   },
+   {
+    "parameters": {
+     "jsCode": "// pronto = mostra os links · erro = o node fica vermelho com o motivo\nconst s = $input.first().json;\nif (s.etapa === 'pronto') return [{ json: { '✅': 'Vídeo pronto em ' + s.segundos + ' s', '🎬 vídeo': s.video, '🖼️ capa': s.capa,\n  '🏷️ título para postar': s.seo && s.seo.titulo, 'duração do vídeo (s)': s.duracao, trechos: (s.roteiro || []).length } }];\nif (s.etapa === 'erro') throw new Error('O editor parou com erro: ' + s.erro);\nthrow new Error('Passou de 10 minutos sem terminar (última etapa: ' + (s.etapa || '?') + '). Veja na aba Executions.');"
+    },
+    "name": "🎉 Resultado do teste",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     -1300,
+     987
+    ],
+    "id": "86b55fd7-cc59-43d2-af30-f65d1fe9b321"
+   },
+   {
+    "parameters": {
+     "content": "## 🧪 TESTE RÁPIDO (1 clique, sem enviar vídeo)\n1️⃣ Passe o mouse no node **🧪 Teste rápido** e clique no ▶️ (ou no botão **Execute workflow** lá embaixo)\n2️⃣ No node **👉 Acompanhe ao vivo**, abra o link que aparece: é a página com as etapas acendendo\n3️⃣ Em 2 a 3 minutos o node **🎉 Resultado do teste** mostra o link do vídeo pronto ✅\n✏️ Para testar outro jeito, mude os campos em **✏️ Escolhas do teste** (as opções estão na nota 🎛️ aqui embaixo).\n💡 O teste chama o fluxo pelo mesmo endereço que a página usa. Para ver cada node trabalhando, abra a aba **Executions**.",
+     "height": 733,
+     "width": 1240,
+     "color": 4
+    },
+    "name": "Nota · Teste rápido",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1400,
+     454
+    ],
+    "id": "9d0b4877-7e22-47d2-9f7c-4afd20c00bce"
+   },
+   {
+    "parameters": {
+     "content": "## 🎛️ OPÇÕES (para mudar no ✏️ Escolhas do teste)\n🎞️ **video**: `exemplo-sintel` (trailer de 52 s, filme livre da Blender) ou o código de um vídeo enviado pela página\n📐 **formato**: `deitado` (16:9) · `vertical_desfocado` (9:16 com fundo borrado) · `vertical_recorte` (9:16 cortando as laterais)\n⏱️ **duracao**: `curto` (~45 s) · `medio` (~90 s) · `longo` (~3 min)\n🎭 **estilo**: `dramatico` · `engracado` · `curioso` · `direto`\n🌎 **idioma**: `pt` · `en` · `es`\n🎙️ **voz**: `pt-BR-ThalitaMultilingualNeural` · `pt-BR-FranciscaNeural` · `en-US-AndrewMultilingualNeural` · `en-US-BrianMultilingualNeural` · `en-US-AvaMultilingualNeural` · `en-US-EmmaMultilingualNeural` (as Multilingual falam qualquer idioma)\n🎨 **cor**: cor da palavra em destaque na legenda (ex.: `#FFD400`)\n✅ **legendas**, **espelhar**, **som_original**: `true` ou `false`\n🔗 **endereco_do_n8n**: descobre sozinho (não precisa mexer)",
+     "height": 403,
+     "width": 1240,
+     "color": 7
+    },
+    "name": "Nota · Opções",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1400,
+     1227
+    ],
+    "id": "6731e2c3-54cd-4e7a-be6b-4d8c502b7801"
+   },
+   {
+    "parameters": {
+     "content": "## 0️⃣ AS PÁGINAS 📄 (o que a pessoa vê no navegador)\n🔔 **Página do editor** (/webhook/video-ia): o formulário. Antes de entregar, 🔐 **Gera o passe de envio** (assinatura que vale 3 h): o vídeo vai **direto para a oficina**, sem passar pelo n8n, e o passe prova que veio desta página.\n🔔 **Página de andamento** (/webhook/video-ia-ver?job=...) mostra as etapas ao vivo · 🔔 **Consulta status**: a página pergunta a cada 3 s e lê do Redis o que cada etapa gravou.",
+     "height": 384,
+     "width": 2120,
+     "color": 7
+    },
+    "name": "Nota · Páginas",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     -628
+    ],
+    "id": "21b21853-beef-4ce6-8e5c-eca9e03beaad"
+   },
+   {
+    "parameters": {
+     "content": "## 1️⃣ RECEBE O PEDIDO 📥 ➡️ (siga as setas: esta linha anda para a direita)\nA página manda as escolhas (vídeo, formato, voz, estilo). O fluxo confere tudo e **responde na hora** com o link do andamento: a pessoa não fica com a página travada enquanto a IA trabalha.\n🧩 **Confere o pedido**: só aceita opções da lista e cria o código do trabalho (**job**) · 🚦 **Pode começar?** não ➜ 📤 recusa com o motivo · 💾 **Status: …** grava a etapa no Redis (é assim que a página sabe onde o vídeo está)",
+     "height": 584,
+     "width": 2120,
+     "color": 7
+    },
+    "name": "Nota · Etapa 1",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     -184
+    ],
+    "id": "b72c4988-1025-4940-a710-6597ccc44c9f"
+   },
+   {
+    "parameters": {
+     "content": "## 2️⃣ PREPARA E OUVE O VÍDEO 👂 ⬅️ (esta linha anda para a esquerda)\n🛠️ **Oficina: prepara o vídeo**: separa o áudio, acha os **cortes de cena**, os trechos de **tela preta** e as **tarjas pretas** (para cortar fora) e tira até 12 fotos das cenas.\n🚦 **Tem áudio?** sim ➜ 🌐 **Baixa o áudio** ➜ 👂 **Whisper** (pelo roteador de IA) escreve tudo o que é falado, com o segundo de cada frase · não ➜ segue só com as imagens · 🧩 **Organiza a fala** deixa em linhas \"segundo | frase\"",
+     "height": 384,
+     "width": 2120,
+     "color": 5
+    },
+    "name": "Nota · Etapa 2",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     460
+    ],
+    "id": "825f5e1b-9e41-4105-89f3-3709510d9a4b"
+   },
+   {
+    "parameters": {
+     "content": "## 3️⃣ OLHA AS CENAS E ESCREVE O ROTEIRO 👀✍️ ➡️\n🧩 **Prepara as cenas** manda as fotos para uma IA com visão ➜ 👀 **IA olha as cenas** descreve cada uma (quem aparece, o que acontece).\n🤖 **Roteirista** recebe a fala + as cenas e escreve um recap **novo** (não é tradução): gancho forte no começo e cada trecho marcado com o segundo da imagem que combina, fugindo da tela preta.\n🧠 cérebro principal + 🛟 reserva: se o principal falhar, o agente usa a reserva sozinho.",
+     "height": 793,
+     "width": 2120,
+     "color": 4
+    },
+    "name": "Nota · Etapa 3",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     904
+    ],
+    "id": "4a89231c-1769-4822-9513-233e627415e6"
+   },
+   {
+    "parameters": {
+     "content": "## 4️⃣ CONFERE, DIRIGE E CRIA O SEO 🎬🏷️ ⬅️\n🧩 **Confere o roteiro**: a IA às vezes erra o JSON (vírgula sobrando, \"14.9s\" no lugar de 14.9); aqui ele é consertado ou lido trecho por trecho · 🚦 **Roteiro ok?** não ➜ ⚠️ erro na página.\n🤖 **Diretor de edição** escolhe 1 efeito (zoom, tremor, flash, preto e branco, câmera lenta) e 1 transição por trecho, conforme a emoção do texto, mais o título de abertura e a chamada final.\n🤖 **Especialista em SEO**: título, descrição, tags e hashtags (sem o nome da obra) · 🧩 **Junta roteiro e edição**.",
+     "height": 793,
+     "width": 2120,
+     "color": 6
+    },
+    "name": "Nota · Etapa 4",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     1757
+    ],
+    "id": "c7ccca3f-9a6e-49c9-a81c-bb5380052045"
+   },
+   {
+    "parameters": {
+     "content": "## 5️⃣ NARRA E MANDA MONTAR 🎙️🎞️ ➡️\n🛠️ **Oficina: narra o roteiro** com voz neural (edge-tts) e devolve o tempo de **cada palavra**: é isso que faz a legenda acender junto com a voz.\n🧩 **Monta o pedido de edição** junta trechos + áudios + efeitos + opções ➜ 🚦 **Narração ok?** ➜ 🛠️ **Oficina: monta o vídeo** começa a montagem (ffmpeg) em segundo plano e responde na hora ➜ ⏳ **Espera 8 segundos**.",
+     "height": 384,
+     "width": 2120,
+     "color": 5
+    },
+    "name": "Nota · Etapa 5",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     2610
+    ],
+    "id": "cc73b9ee-6c50-4bf3-a79a-c4e7f25639bb"
+   },
+   {
+    "parameters": {
+     "content": "## 6️⃣ ACOMPANHA ATÉ FICAR PRONTO 🔁✅ ⬅️\n🔁 **Laço**: 🛠️ **Oficina: como está?** ➜ 🧩 **Atualiza o andamento** (a porcentagem aparece na página) ➜ 💾 grava ➜ 🚦 **Terminou?** não ➜ volta para a espera de 8 s.\nsim ➜ 🎉 **Resultado final**: link do vídeo, capa, roteiro com os efeitos e os textos para postar ➜ a página mostra o player e o botão de baixar (o arquivo fica 48 h).",
+     "height": 384,
+     "width": 2120,
+     "color": 4
+    },
+    "name": "Nota · Etapa 6",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -100,
+     3054
+    ],
+    "id": "b17b91db-c8e1-4188-a6a6-3f2b2aa797ac"
+   },
+   {
+    "parameters": {
+     "content": "## ⚠️ QUANDO ALGO FALHA\nA oficina (preparar, narrar, montar), o roteiro ou a narração deram erro? A saída de erro deles vem para cá: 💾 **Marca erro** grava o motivo e a página mostra para a pessoa, em vez de ficar girando para sempre.",
+     "height": 413,
+     "width": 660,
+     "color": 3
+    },
+    "name": "Nota · Erro",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     2100,
+     1757
+    ],
+    "id": "227e4498-6142-4490-ba1c-beabd6105ccd"
+   }
+  ],
+  "connections": {
+   "🔔 Página do editor (GET)": {
+    "main": [
+     [
+      {
+       "node": "🔐 Gera o passe de envio",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🔐 Gera o passe de envio": {
+    "main": [
+     [
+      {
+       "node": "📤 Entrega a página",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🔔 Página de andamento (GET)": {
+    "main": [
+     [
+      {
+       "node": "📤 Entrega o andamento",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🔔 Consulta status (GET)": {
+    "main": [
+     [
+      {
+       "node": "📖 Lê o status",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "📖 Lê o status": {
+    "main": [
+     [
+      {
+       "node": "📤 Responde o status",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🔔 Pedido de edição (POST)": {
+    "main": [
+     [
+      {
+       "node": "🧩 Confere o pedido",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Confere o pedido": {
+    "main": [
+     [
+      {
+       "node": "🚦 Pode começar?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🚦 Pode começar?": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: recebido",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "📤 Recusa o pedido",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "💾 Status: recebido": {
+    "main": [
+     [
+      {
+       "node": "📤 Responde com o link",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "📤 Responde com o link": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: preparando",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "💾 Status: preparando": {
+    "main": [
+     [
+      {
+       "node": "🛠️ Oficina: prepara o vídeo",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛠️ Oficina: prepara o vídeo": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: ouvindo",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⚠️ Marca erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "💾 Status: ouvindo": {
+    "main": [
+     [
+      {
+       "node": "🚦 Tem áudio?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🚦 Tem áudio?": {
+    "main": [
+     [
+      {
+       "node": "🌐 Baixa o áudio",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "🧩 Organiza a fala",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🌐 Baixa o áudio": {
+    "main": [
+     [
+      {
+       "node": "👂 Whisper: transcreve o áudio",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "👂 Whisper: transcreve o áudio": {
+    "main": [
+     [
+      {
+       "node": "🧩 Organiza a fala",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Organiza a fala": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: olhando",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "💾 Status: olhando": {
+    "main": [
+     [
+      {
+       "node": "🧩 Prepara as cenas para a IA",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Prepara as cenas para a IA": {
+    "main": [
+     [
+      {
+       "node": "👀 IA olha as cenas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "👀 IA olha as cenas": {
+    "main": [
+     [
+      {
+       "node": "🧩 Lê o que a IA viu",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Lê o que a IA viu": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: roteiro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧠 Cérebro da roteirista": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "🤖 Roteirista",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛟 Reserva · Cérebro da roteirista": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "🤖 Roteirista",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   },
+   "💾 Status: roteiro": {
+    "main": [
+     [
+      {
+       "node": "🤖 Roteirista",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🤖 Roteirista": {
+    "main": [
+     [
+      {
+       "node": "🧩 Confere o roteiro",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "🧩 Confere o roteiro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Confere o roteiro": {
+    "main": [
+     [
+      {
+       "node": "🚦 Roteiro ok?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🚦 Roteiro ok?": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: direção",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⚠️ Marca erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧠 Cérebro do diretor": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "🤖 Diretor de edição",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛟 Reserva · Cérebro do diretor": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "🤖 Diretor de edição",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   },
+   "💾 Status: direção": {
+    "main": [
+     [
+      {
+       "node": "🤖 Diretor de edição",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧠 Cérebro do SEO": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "🤖 Especialista em SEO",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛟 Reserva · Cérebro do SEO": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "🤖 Especialista em SEO",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   },
+   "🤖 Diretor de edição": {
+    "main": [
+     [
+      {
+       "node": "🤖 Especialista em SEO",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "🤖 Especialista em SEO",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🤖 Especialista em SEO": {
+    "main": [
+     [
+      {
+       "node": "🧩 Junta roteiro e edição",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "🧩 Junta roteiro e edição",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Junta roteiro e edição": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: narrando",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "💾 Status: narrando": {
+    "main": [
+     [
+      {
+       "node": "🛠️ Oficina: narra o roteiro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛠️ Oficina: narra o roteiro": {
+    "main": [
+     [
+      {
+       "node": "🧩 Monta o pedido de edição",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⚠️ Marca erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Monta o pedido de edição": {
+    "main": [
+     [
+      {
+       "node": "🚦 Narração ok?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🚦 Narração ok?": {
+    "main": [
+     [
+      {
+       "node": "🛠️ Oficina: monta o vídeo",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⚠️ Marca erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛠️ Oficina: monta o vídeo": {
+    "main": [
+     [
+      {
+       "node": "⏳ Espera 8 segundos",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⚠️ Marca erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "⏳ Espera 8 segundos": {
+    "main": [
+     [
+      {
+       "node": "🛠️ Oficina: como está?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🛠️ Oficina: como está?": {
+    "main": [
+     [
+      {
+       "node": "🧩 Atualiza o andamento",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧩 Atualiza o andamento": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: montando",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "💾 Status: montando": {
+    "main": [
+     [
+      {
+       "node": "🚦 Terminou?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🚦 Terminou?": {
+    "main": [
+     [
+      {
+       "node": "🎉 Resultado final",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⏳ Espera 8 segundos",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🎉 Resultado final": {
+    "main": [
+     [
+      {
+       "node": "💾 Status: pronto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🧪 Teste rápido (clique no ▶️)": {
+    "main": [
+     [
+      {
+       "node": "✏️ Escolhas do teste (mude à vontade)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "✏️ Escolhas do teste (mude à vontade)": {
+    "main": [
+     [
+      {
+       "node": "🌐 Manda para o editor",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🌐 Manda para o editor": {
+    "main": [
+     [
+      {
+       "node": "👉 Acompanhe ao vivo (abra o link)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "👉 Acompanhe ao vivo (abra o link)": {
+    "main": [
+     [
+      {
+       "node": "⏳ Espera 15 segundos",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "⏳ Espera 15 segundos": {
+    "main": [
+     [
+      {
+       "node": "🌐 Pergunta como está o teste",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🌐 Pergunta como está o teste": {
+    "main": [
+     [
+      {
+       "node": "🚦 O teste terminou?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "🚦 O teste terminou?": {
+    "main": [
+     [
+      {
+       "node": "🎉 Resultado do teste",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "⏳ Espera 15 segundos",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-20T08:35:41.865Z",
+    "id": 318,
+    "workflowId": "0pnt0gzV8rHsmXkN",
+    "versionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-20T08:35:41.931Z",
+    "id": 319,
+    "workflowId": "0pnt0gzV8rHsmXkN",
+    "versionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-20T08:35:43.219Z",
+    "id": 320,
+    "workflowId": "0pnt0gzV8rHsmXkN",
+    "versionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-20T08:35:43.296Z",
+    "id": 321,
+    "workflowId": "0pnt0gzV8rHsmXkN",
+    "versionId": "d6cd8b81-6424-4a17-8cd0-3e591326cf6a",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

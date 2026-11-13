@@ -1,0 +1,661 @@
+=== CMD ===
+ffmpeg -y -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_0.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_1.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_2.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_3.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_4.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_5.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_6.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_7.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_8.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_9.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_10.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_11.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_12.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_13.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_14.mp4 -i D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_15.mp4 -filter_complex [0:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v0];[1:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v1];[2:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v2];[3:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v3];[4:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v4];[5:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v5];[6:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v6];[7:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v7];[8:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v8];[9:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v9];[10:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v10];[11:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v11];[12:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v12];[13:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.600,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v13];[14:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v14];[15:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v15];[0:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.1000,atrim=0:5.1000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.1667,atrim=0:3.1667,asetpts=PTS-STARTPTS[a1];[2:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.4100,atrim=0:6.4100,asetpts=PTS-STARTPTS[a2];[3:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.5333,atrim=0:2.5333,asetpts=PTS-STARTPTS[a3];[4:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.8500,atrim=0:2.8500,asetpts=PTS-STARTPTS[a4];[5:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=4.9000,atrim=0:4.9000,asetpts=PTS-STARTPTS[a5];[6:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.2160,atrim=0:5.2160,asetpts=PTS-STARTPTS[a6];[7:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.8100,atrim=0:3.8100,asetpts=PTS-STARTPTS[a7];[8:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=4.3333,atrim=0:4.3333,asetpts=PTS-STARTPTS[a8];[9:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=4.6000,atrim=0:4.6000,asetpts=PTS-STARTPTS[a9];[10:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.3667,atrim=0:3.3667,asetpts=PTS-STARTPTS[a10];[11:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.5333,atrim=0:2.5333,asetpts=PTS-STARTPTS[a11];[12:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.7150,atrim=0:3.7150,asetpts=PTS-STARTPTS[a12];[13:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.0800,atrim=0:5.0800,asetpts=PTS-STARTPTS[a13];[14:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.5667,atrim=0:5.5667,asetpts=PTS-STARTPTS[a14];[15:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.8667,atrim=0:5.8667,asetpts=PTS-STARTPTS[a15];[v0][v1]concat=n=2:v=1:a=0,fps=30[vx1];[a0][a1]concat=n=2:v=0:a=1[ax1];[vx1][v2]concat=n=2:v=1:a=0,fps=30[vx2];[ax1][a2]concat=n=2:v=0:a=1[ax2];[vx2][v3]concat=n=2:v=1:a=0,fps=30[vx3];[ax2][a3]concat=n=2:v=0:a=1[ax3];[vx3][v4]concat=n=2:v=1:a=0,fps=30[vx4];[ax3][a4]concat=n=2:v=0:a=1[ax4];[vx4][v5]concat=n=2:v=1:a=0,fps=30[vx5];[ax4][a5]concat=n=2:v=0:a=1[ax5];[vx5][v6]concat=n=2:v=1:a=0,fps=30[vx6];[ax5][a6]concat=n=2:v=0:a=1[ax6];[vx6][v7]concat=n=2:v=1:a=0,fps=30[vx7];[ax6][a7]concat=n=2:v=0:a=1[ax7];[vx7][v8]concat=n=2:v=1:a=0,fps=30[vx8];[ax7][a8]concat=n=2:v=0:a=1[ax8];[vx8][v9]concat=n=2:v=1:a=0,fps=30[vx9];[ax8][a9]concat=n=2:v=0:a=1[ax9];[vx9][v10]concat=n=2:v=1:a=0,fps=30[vx10];[ax9][a10]concat=n=2:v=0:a=1[ax10];[vx10][v11]concat=n=2:v=1:a=0,fps=30[vx11];[ax10][a11]concat=n=2:v=0:a=1[ax11];[vx11][v12]concat=n=2:v=1:a=0,fps=30[vx12];[ax11][a12]concat=n=2:v=0:a=1[ax12];[vx12][v13]concat=n=2:v=1:a=0,fps=30[vx13];[ax12][a13]concat=n=2:v=0:a=1[ax13];[vx13][v14]xfade=transition=slideup:duration=0.420:offset=57.194[vx14];[ax13][a14]acrossfade=d=0.420[ax14];[vx14][v15]concat=n=2:v=1:a=0,fps=30[vx15];[ax14][a15]concat=n=2:v=0:a=1[ax15] -map [vx15] -map [ax15] -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 192k -ar 44100 -ac 2 -movflags +faststart -pix_fmt yuv420p D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\_xfseg_00.mp4
+
+=== FILTER_COMPLEX ===
+[0:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v0];[1:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v1];[2:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v2];[3:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v3];[4:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v4];[5:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v5];[6:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v6];[7:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v7];[8:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v8];[9:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v9];[10:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v10];[11:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v11];[12:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v12];[13:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.600,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v13];[14:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v14];[15:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v15];[0:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.1000,atrim=0:5.1000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.1667,atrim=0:3.1667,asetpts=PTS-STARTPTS[a1];[2:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=6.4100,atrim=0:6.4100,asetpts=PTS-STARTPTS[a2];[3:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.5333,atrim=0:2.5333,asetpts=PTS-STARTPTS[a3];[4:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.8500,atrim=0:2.8500,asetpts=PTS-STARTPTS[a4];[5:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=4.9000,atrim=0:4.9000,asetpts=PTS-STARTPTS[a5];[6:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.2160,atrim=0:5.2160,asetpts=PTS-STARTPTS[a6];[7:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.8100,atrim=0:3.8100,asetpts=PTS-STARTPTS[a7];[8:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=4.3333,atrim=0:4.3333,asetpts=PTS-STARTPTS[a8];[9:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=4.6000,atrim=0:4.6000,asetpts=PTS-STARTPTS[a9];[10:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.3667,atrim=0:3.3667,asetpts=PTS-STARTPTS[a10];[11:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.5333,atrim=0:2.5333,asetpts=PTS-STARTPTS[a11];[12:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=3.7150,atrim=0:3.7150,asetpts=PTS-STARTPTS[a12];[13:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.0800,atrim=0:5.0800,asetpts=PTS-STARTPTS[a13];[14:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.5667,atrim=0:5.5667,asetpts=PTS-STARTPTS[a14];[15:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=5.8667,atrim=0:5.8667,asetpts=PTS-STARTPTS[a15];[v0][v1]concat=n=2:v=1:a=0,fps=30[vx1];[a0][a1]concat=n=2:v=0:a=1[ax1];[vx1][v2]concat=n=2:v=1:a=0,fps=30[vx2];[ax1][a2]concat=n=2:v=0:a=1[ax2];[vx2][v3]concat=n=2:v=1:a=0,fps=30[vx3];[ax2][a3]concat=n=2:v=0:a=1[ax3];[vx3][v4]concat=n=2:v=1:a=0,fps=30[vx4];[ax3][a4]concat=n=2:v=0:a=1[ax4];[vx4][v5]concat=n=2:v=1:a=0,fps=30[vx5];[ax4][a5]concat=n=2:v=0:a=1[ax5];[vx5][v6]concat=n=2:v=1:a=0,fps=30[vx6];[ax5][a6]concat=n=2:v=0:a=1[ax6];[vx6][v7]concat=n=2:v=1:a=0,fps=30[vx7];[ax6][a7]concat=n=2:v=0:a=1[ax7];[vx7][v8]concat=n=2:v=1:a=0,fps=30[vx8];[ax7][a8]concat=n=2:v=0:a=1[ax8];[vx8][v9]concat=n=2:v=1:a=0,fps=30[vx9];[ax8][a9]concat=n=2:v=0:a=1[ax9];[vx9][v10]concat=n=2:v=1:a=0,fps=30[vx10];[ax9][a10]concat=n=2:v=0:a=1[ax10];[vx10][v11]concat=n=2:v=1:a=0,fps=30[vx11];[ax10][a11]concat=n=2:v=0:a=1[ax11];[vx11][v12]concat=n=2:v=1:a=0,fps=30[vx12];[ax11][a12]concat=n=2:v=0:a=1[ax12];[vx12][v13]concat=n=2:v=1:a=0,fps=30[vx13];[ax12][a13]concat=n=2:v=0:a=1[ax13];[vx13][v14]xfade=transition=slideup:duration=0.420:offset=57.194[vx14];[ax13][a14]acrossfade=d=0.420[ax14];[vx14][v15]concat=n=2:v=1:a=0,fps=30[vx15];[ax14][a15]concat=n=2:v=0:a=1[ax15]
+
+=== STDERR ===
+ffmpeg version 8.1.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+
+  libavutil      60. 26.102 / 60. 26.102
+
+  libavcodec     62. 28.102 / 62. 28.102
+
+  libavformat    62. 12.102 / 62. 12.102
+
+  libavdevice    62.  3.102 / 62.  3.102
+
+  libavfilter    11. 14.102 / 11. 14.102
+
+  libswscale      9.  5.102 /  9.  5.102
+
+  libswresample   6.  3.102 /  6.  3.102
+
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_0.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.10, start: 0.000000, bitrate: 2408 kb/s
+
+  Stream #0:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 2206 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #1, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_1.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:03.17, start: 0.000000, bitrate: 2837 kb/s
+
+  Stream #1:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 2635 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #1:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #2, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_2.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:06.41, start: 0.000000, bitrate: 2140 kb/s
+
+  Stream #2:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 1942 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #2:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #3, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_3.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:02.53, start: 0.000000, bitrate: 2802 kb/s
+
+  Stream #3:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 2598 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #3:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #4, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_4.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:02.85, start: 0.000000, bitrate: 1968 kb/s
+
+  Stream #4:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 1775 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #4:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #5, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_5.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.90, start: 0.000000, bitrate: 3777 kb/s
+
+  Stream #5:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 3575 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #5:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #6, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_6.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.22, start: 0.000000, bitrate: 3859 kb/s
+
+  Stream #6:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 3668 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #6:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #7, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_7.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:03.81, start: 0.000000, bitrate: 3951 kb/s
+
+  Stream #7:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 3759 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #7:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #8, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_8.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.33, start: 0.000000, bitrate: 3505 kb/s
+
+  Stream #8:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 3303 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #8:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #9, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_9.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.60, start: 0.000000, bitrate: 4502 kb/s
+
+  Stream #9:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 4300 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #9:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #10, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_10.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:03.37, start: 0.000000, bitrate: 4490 kb/s
+
+  Stream #10:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 4279 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #10:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 199 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #11, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_11.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:02.53, start: 0.000000, bitrate: 2891 kb/s
+
+  Stream #11:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 2686 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #11:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #12, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_12.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:03.72, start: 0.000000, bitrate: 4633 kb/s
+
+  Stream #12:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 4445 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #12:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 194 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #13, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_13.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:04.48, start: 0.000000, bitrate: 3752 kb/s
+
+  Stream #13:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 3561 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #13:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 191 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #14, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_14.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.57, start: 0.000000, bitrate: 3196 kb/s
+
+  Stream #14:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 2991 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #14:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 196 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #15, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\clip_15.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:05.87, start: 0.000000, bitrate: 2729 kb/s
+
+  Stream #15:0[0x1](und): Video: h264 (Constrained Baseline) (avc1 / 0x31637661), yuv420p(progressive), 720x1280, 2526 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #15:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Stream mapping:
+
+  Stream #0:0 (h264) -> format:default
+
+  Stream #0:1 (aac) -> aresample:default
+
+  Stream #1:0 (h264) -> format:default
+
+  Stream #1:1 (aac) -> aresample:default
+
+  Stream #2:0 (h264) -> format:default
+
+  Stream #2:1 (aac) -> aresample:default
+
+  Stream #3:0 (h264) -> format:default
+
+  Stream #3:1 (aac) -> aresample:default
+
+  Stream #4:0 (h264) -> format:default
+
+  Stream #4:1 (aac) -> aresample:default
+
+  Stream #5:0 (h264) -> format:default
+
+  Stream #5:1 (aac) -> aresample:default
+
+  Stream #6:0 (h264) -> format:default
+
+  Stream #6:1 (aac) -> aresample:default
+
+  Stream #7:0 (h264) -> format:default
+
+  Stream #7:1 (aac) -> aresample:default
+
+  Stream #8:0 (h264) -> format:default
+
+  Stream #8:1 (aac) -> aresample:default
+
+  Stream #9:0 (h264) -> format:default
+
+  Stream #9:1 (aac) -> aresample:default
+
+  Stream #10:0 (h264) -> format:default
+
+  Stream #10:1 (aac) -> aresample:default
+
+  Stream #11:0 (h264) -> format:default
+
+  Stream #11:1 (aac) -> aresample:default
+
+  Stream #12:0 (h264) -> format:default
+
+  Stream #12:1 (aac) -> aresample:default
+
+  Stream #13:0 (h264) -> format:default
+
+  Stream #13:1 (aac) -> aresample:default
+
+  Stream #14:0 (h264) -> format:default
+
+  Stream #14:1 (aac) -> aresample:default
+
+  Stream #15:0 (h264) -> format:default
+
+  Stream #15:1 (aac) -> aresample:default
+
+  fps:default -> Stream #0:0 (libx264)
+
+  concat:out:a0 -> Stream #0:1 (aac)
+
+Press [q] to stop, [?] for help
+
+[libx264 @ 0000000002bd1040] using SAR=1/1
+
+[libx264 @ 0000000002bd1040] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+
+[libx264 @ 0000000002bd1040] profile High, level 3.1, 4:2:0, 8-bit
+
+[libx264 @ 0000000002bd1040] 264 - core 165 r3223 0480cb0 - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=2 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=6 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=12 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=30 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+
+Output #0, mp4, to 'D:\recapd-ambientes\producao\workspace\anime\QllsNZMZ-II_He_is_trying_to_survive_on_a_strange_pla\clipes_vertical\_xfseg_00.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 720x1280 [SAR 1:1 DAR 9:16], q=2-31, 30 fps, 15360 tbn
+
+    Metadata:
+
+      encoder         : Lavc62.28.102 libx264
+
+    Side data:
+
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s
+
+    Metadata:
+
+      encoder         : Lavc62.28.102 aac
+
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.51    
+frame=    5 fps=4.8 q=29.0 size=       0KiB time=00:00:00.10 bitrate=   3.8kbits/s speed=0.097x elapsed=0:00:01.03    
+frame=   26 fps= 17 q=29.0 size=       0KiB time=00:00:00.80 bitrate=   0.5kbits/s speed=0.509x elapsed=0:00:01.57    
+frame=   51 fps= 24 q=29.0 size=     256KiB time=00:00:01.63 bitrate=1284.2kbits/s speed=0.761x elapsed=0:00:02.14    
+frame=   79 fps= 29 q=29.0 size=     512KiB time=00:00:02.56 bitrate=1634.3kbits/s speed=0.938x elapsed=0:00:02.73    
+frame=  106 fps= 32 q=29.0 size=     512KiB time=00:00:03.43 bitrate=1221.8kbits/s speed=1.04x elapsed=0:00:03.28    
+frame=  136 fps= 35 q=29.0 size=     768KiB time=00:00:04.40 bitrate=1430.0kbits/s speed=1.12x elapsed=0:00:03.93    
+frame=  158 fps= 34 q=29.0 size=     768KiB time=00:00:05.13 bitrate=1225.7kbits/s speed=1.12x elapsed=0:00:04.58    
+frame=  182 fps= 35 q=29.0 size=    1024KiB time=00:00:05.93 bitrate=1413.9kbits/s speed=1.13x elapsed=0:00:05.24    
+frame=  203 fps= 35 q=29.0 size=    1280KiB time=00:00:06.60 bitrate=1588.8kbits/s speed=1.13x elapsed=0:00:05.82    
+frame=  223 fps= 35 q=29.0 size=    1280KiB time=00:00:07.33 bitrate=1429.9kbits/s speed=1.15x elapsed=0:00:06.37    
+frame=  246 fps= 36 q=29.0 size=    1536KiB time=00:00:07.96 bitrate=1579.5kbits/s speed=1.15x elapsed=0:00:06.91    
+frame=  269 fps= 36 q=29.0 size=    1792KiB time=00:00:08.90 bitrate=1649.5kbits/s speed=1.18x elapsed=0:00:07.51    
+frame=  294 fps= 37 q=29.0 size=    2048KiB time=00:00:09.66 bitrate=1735.6kbits/s speed= 1.2x elapsed=0:00:08.04    
+frame=  328 fps= 38 q=29.0 size=    2048KiB time=00:00:10.86 bitrate=1544.0kbits/s speed=1.26x elapsed=0:00:08.64    
+frame=  370 fps= 40 q=29.0 size=    2304KiB time=00:00:12.00 bitrate=1572.9kbits/s speed= 1.3x elapsed=0:00:09.20    
+frame=  393 fps= 40 q=29.0 size=    2304KiB time=00:00:12.93 bitrate=1459.4kbits/s speed=1.32x elapsed=0:00:09.83    
+frame=  416 fps= 40 q=29.0 size=    2560KiB time=00:00:13.70 bitrate=1530.8kbits/s speed=1.32x elapsed=0:00:10.41    
+frame=  444 fps= 40 q=29.0 size=    2560KiB time=00:00:14.60 bitrate=1436.4kbits/s speed=1.33x elapsed=0:00:10.99    
+frame=  459 fps= 40 q=29.0 size=    2816KiB time=00:00:15.23 bitrate=1514.4kbits/s speed=1.32x elapsed=0:00:11.56    
+frame=  483 fps= 40 q=29.0 size=    2816KiB time=00:00:16.03 bitrate=1438.8kbits/s speed=1.32x elapsed=0:00:12.11    
+frame=  508 fps= 40 q=29.0 size=    3072KiB time=00:00:16.86 bitrate=1492.1kbits/s speed=1.33x elapsed=0:00:12.65    
+frame=  537 fps= 41 q=29.0 size=    3328KiB time=00:00:17.73 bitrate=1537.4kbits/s speed=1.34x elapsed=0:00:13.19    
+frame=  545 fps= 40 q=29.0 size=    3328KiB time=00:00:18.10 bitrate=1506.3kbits/s speed=1.31x elapsed=0:00:13.76    
+frame=  564 fps= 39 q=29.0 size=    3328KiB time=00:00:18.63 bitrate=1463.1kbits/s speed= 1.3x elapsed=0:00:14.35    
+frame=  587 fps= 39 q=29.0 size=    3584KiB time=00:00:19.50 bitrate=1505.7kbits/s speed=1.29x elapsed=0:00:15.14    
+frame=  610 fps= 39 q=29.0 size=    3584KiB time=00:00:20.20 bitrate=1453.5kbits/s speed=1.28x elapsed=0:00:15.77    
+frame=  631 fps= 39 q=29.0 size=    3840KiB time=00:00:20.86 bitrate=1507.6kbits/s speed=1.27x elapsed=0:00:16.38    
+frame=  653 fps= 38 q=29.0 size=    4096KiB time=00:00:21.50 bitrate=1560.7kbits/s speed=1.26x elapsed=0:00:17.05    
+frame=  666 fps= 37 q=29.0 size=    4096KiB time=00:00:22.13 bitrate=1516.0kbits/s speed=1.24x elapsed=0:00:17.78    
+frame=  683 fps= 37 q=29.0 size=    4352KiB time=00:00:22.70 bitrate=1570.6kbits/s speed=1.24x elapsed=0:00:18.33    
+frame=  693 fps= 37 q=29.0 size=    4352KiB time=00:00:23.03 bitrate=1547.8kbits/s speed=1.22x elapsed=0:00:18.87    
+frame=  716 fps= 36 q=29.0 size=    4608KiB time=00:00:23.66 bitrate=1595.0kbits/s speed= 1.2x elapsed=0:00:19.72    
+frame=  734 fps= 36 q=29.0 size=    4864KiB time=00:00:24.36 bitrate=1635.3kbits/s speed=1.19x elapsed=0:00:20.43    
+frame=  755 fps= 36 q=29.0 size=    5120KiB time=00:00:25.10 bitrate=1671.1kbits/s speed=1.18x elapsed=0:00:21.21    
+frame=  773 fps= 35 q=29.0 size=    5120KiB time=00:00:25.60 bitrate=1638.4kbits/s speed=1.17x elapsed=0:00:21.93    
+frame=  785 fps= 35 q=29.0 size=    5376KiB time=00:00:26.10 bitrate=1687.4kbits/s speed=1.16x elapsed=0:00:22.52    
+frame=  801 fps= 35 q=29.0 size=    5376KiB time=00:00:26.60 bitrate=1655.7kbits/s speed=1.15x elapsed=0:00:23.07    
+frame=  817 fps= 34 q=29.0 size=    5632KiB time=00:00:27.06 bitrate=1704.6kbits/s speed=1.14x elapsed=0:00:23.72    
+frame=  831 fps= 34 q=29.0 size=    5632KiB time=00:00:27.63 bitrate=1669.6kbits/s speed=1.13x elapsed=0:00:24.39    
+frame=  850 fps= 34 q=29.0 size=    5888KiB time=00:00:28.26 bitrate=1706.4kbits/s speed=1.13x elapsed=0:00:24.93    
+frame=  863 fps= 34 q=29.0 size=    6144KiB time=00:00:28.70 bitrate=1753.7kbits/s speed=1.13x elapsed=0:00:25.46    
+frame=  884 fps= 34 q=29.0 size=    6400KiB time=00:00:29.40 bitrate=1783.3kbits/s speed=1.13x elapsed=0:00:26.00    
+frame=  910 fps= 34 q=29.0 size=    6400KiB time=00:00:30.26 bitrate=1732.2kbits/s speed=1.14x elapsed=0:00:26.55    
+frame=  932 fps= 34 q=29.0 size=    6656KiB time=00:00:31.00 bitrate=1758.9kbits/s speed=1.14x elapsed=0:00:27.12    
+frame=  955 fps= 35 q=29.0 size=    6912KiB time=00:00:31.73 bitrate=1784.4kbits/s speed=1.15x elapsed=0:00:27.67    
+frame=  976 fps= 35 q=29.0 size=    7168KiB time=00:00:32.46 bitrate=1808.6kbits/s speed=1.15x elapsed=0:00:28.20    
+frame= 1010 fps= 35 q=29.0 size=    7424KiB time=00:00:33.56 bitrate=1811.9kbits/s speed=1.17x elapsed=0:00:28.72    
+frame= 1042 fps= 36 q=29.0 size=    7424KiB time=00:00:34.46 bitrate=1764.5kbits/s speed=1.17x elapsed=0:00:29.33    
+frame= 1065 fps= 35 q=29.0 size=    7680KiB time=00:00:35.43 bitrate=1775.6kbits/s speed=1.18x elapsed=0:00:30.00    
+frame= 1095 fps= 36 q=29.0 size=    7936KiB time=00:00:36.30 bitrate=1791.0kbits/s speed=1.19x elapsed=0:00:30.58    
+frame= 1116 fps= 36 q=29.0 size=    8192KiB time=00:00:36.96 bitrate=1815.4kbits/s speed=1.18x elapsed=0:00:31.26    
+frame= 1140 fps= 36 q=29.0 size=    8192KiB time=00:00:37.83 bitrate=1773.8kbits/s speed=1.18x elapsed=0:00:31.93    
+frame= 1164 fps= 36 q=29.0 size=    8448KiB time=00:00:38.56 bitrate=1794.5kbits/s speed=1.18x elapsed=0:00:32.59    
+frame= 1187 fps= 36 q=29.0 size=    8704KiB time=00:00:39.50 bitrate=1805.2kbits/s speed=1.19x elapsed=0:00:33.25    
+frame= 1210 fps= 36 q=29.0 size=    8960KiB time=00:00:40.23 bitrate=1824.4kbits/s speed=1.19x elapsed=0:00:33.89    
+frame= 1235 fps= 36 q=29.0 size=    8960KiB time=00:00:41.10 bitrate=1785.9kbits/s speed=1.19x elapsed=0:00:34.55    
+frame= 1246 fps= 35 q=29.0 size=    9216KiB time=00:00:41.46 bitrate=1820.7kbits/s speed=1.18x elapsed=0:00:35.15    
+frame= 1266 fps= 35 q=29.0 size=    9472KiB time=00:00:41.93 bitrate=1850.4kbits/s speed=1.17x elapsed=0:00:35.76    
+frame= 1286 fps= 35 q=29.0 size=    9728KiB time=00:00:42.66 bitrate=1867.8kbits/s speed=1.17x elapsed=0:00:36.43    
+frame= 1311 fps= 35 q=29.0 size=    9984KiB time=00:00:43.53 bitrate=1878.8kbits/s speed=1.17x elapsed=0:00:37.14    
+frame= 1336 fps= 35 q=29.0 size=   10240KiB time=00:00:44.40 bitrate=1889.3kbits/s speed=1.18x elapsed=0:00:37.78    
+frame= 1355 fps= 35 q=29.0 size=   10496KiB time=00:00:45.06 bitrate=1907.9kbits/s speed=1.17x elapsed=0:00:38.37    
+frame= 1382 fps= 35 q=29.0 size=   10496KiB time=00:00:45.86 bitrate=1874.6kbits/s speed=1.18x elapsed=0:00:39.03    
+frame= 1405 fps= 35 q=29.0 size=   10752KiB time=00:00:46.76 bitrate=1883.4kbits/s speed=1.18x elapsed=0:00:39.64    
+frame= 1427 fps= 35 q=29.0 size=   11008KiB time=00:00:47.43 bitrate=1901.2kbits/s speed=1.18x elapsed=0:00:40.24    
+frame= 1449 fps= 36 q=29.0 size=   11008KiB time=00:00:48.23 bitrate=1869.6kbits/s speed=1.18x elapsed=0:00:40.79    
+frame= 1471 fps= 36 q=29.0 size=   11264KiB time=00:00:48.93 bitrate=1885.7kbits/s speed=1.18x elapsed=0:00:41.33    
+frame= 1488 fps= 36 q=29.0 size=   11520KiB time=00:00:49.53 bitrate=1905.2kbits/s speed=1.18x elapsed=0:00:41.85    
+frame= 1510 fps= 36 q=29.0 size=   11776KiB time=00:00:50.26 bitrate=1919.2kbits/s speed=1.18x elapsed=0:00:42.51    
+frame= 1526 fps= 35 q=29.0 size=   12032KiB time=00:00:50.76 bitrate=1941.6kbits/s speed=1.18x elapsed=0:00:43.08    
+frame= 1547 fps= 35 q=29.0 size=   12032KiB time=00:00:51.46 bitrate=1915.2kbits/s speed=1.18x elapsed=0:00:43.68    
+frame= 1563 fps= 35 q=29.0 size=   12288KiB time=00:00:52.03 bitrate=1934.6kbits/s speed=1.18x elapsed=0:00:44.22    
+frame= 1585 fps= 35 q=26.0 size=   12544KiB time=00:00:52.73 bitrate=1948.7kbits/s speed=1.18x elapsed=0:00:44.75    
+frame= 1609 fps= 36 q=29.0 size=   12800KiB time=00:00:53.56 bitrate=1957.5kbits/s speed=1.18x elapsed=0:00:45.28    
+frame= 1635 fps= 36 q=29.0 size=   13056KiB time=00:00:54.43 bitrate=1964.9kbits/s speed=1.19x elapsed=0:00:45.81    
+frame= 1668 fps= 36 q=29.0 size=   13312KiB time=00:00:55.53 bitrate=1963.7kbits/s speed= 1.2x elapsed=0:00:46.32    
+frame= 1669 fps= 35 q=29.0 size=   13312KiB time=00:00:55.56 bitrate=1962.5kbits/s speed=1.17x elapsed=0:00:47.46    

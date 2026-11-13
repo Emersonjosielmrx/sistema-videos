@@ -1,0 +1,6694 @@
+{
+ "name": "backend-plataforma",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "backend-plataforma",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -6912,
+    176
+   ],
+   "id": "a3e29b8c-4ff6-4965-9da3-9083f18f0ec0",
+   "name": "Webhook",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $json.body.email }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6688,
+    928
+   ],
+   "id": "ff0024a7-2038-46e2-922c-4945eaa41705",
+   "name": "consulta_usuario",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "293334f1-cdfe-48bc-ba0a-32df7ffe6aec",
+       "leftValue": "={{$('consulta_usuario')}}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "empty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6320,
+    928
+   ],
+   "id": "30b0df0f-3bfb-4055-b571-6a47d4face9b",
+   "name": "se_nao_cadastrado"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook4",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5872,
+    832
+   ],
+   "typeVersion": 1,
+   "id": "b3fc104f-14ad-4c1a-9f71-56798d8e60ef"
+  },
+  {
+   "parameters": {
+    "errorMessage": "E-mail já cadastrado"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    -6096,
+    1024
+   ],
+   "id": "81854a31-d4d7-45ee-8041-1c40875dd6d7",
+   "name": "Stop and Error"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $json.body.email }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6880,
+    1488
+   ],
+   "id": "da96c48f-dfed-4eee-b5f3-fc970dce9033",
+   "name": "consulta_usuario1",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook1",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -4096,
+    2992
+   ],
+   "typeVersion": 1,
+   "id": "8f8ba6c7-887e-458d-a924-29802973d523"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6512,
+    1488
+   ],
+   "id": "bfb2da5e-74f7-446e-8f63-7b551d7247d3",
+   "name": "verifica_instancia_existe"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $('consulta_usuario1').item.json.senha }}",
+       "rightValue": "={{ $('login').item.json.body.password }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6288,
+    1392
+   ],
+   "id": "a6a51670-9be0-4206-9f8b-b185ebe49f1a",
+   "name": "verifica_senha"
+  },
+  {
+   "parameters": {
+    "errorMessage": "Não existe essa Instancia!"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    -2800,
+    2800
+   ],
+   "id": "c71919cf-4b44-4e62-a41f-26b8665c5569",
+   "name": "Stop and Error1"
+  },
+  {
+   "parameters": {
+    "errorMessage": "Token invalido!"
+   },
+   "type": "n8n-nodes-base.stopAndError",
+   "typeVersion": 1,
+   "position": [
+    -3344,
+    2944
+   ],
+   "id": "216738b3-45e4-49f0-82a0-03f5f40c3d9f",
+   "name": "Stop and Error2"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"output\": \"Senha invalida!\"\n}",
+    "options": {
+     "responseCode": 500,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook2",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -6064,
+    1488
+   ],
+   "typeVersion": 1,
+   "id": "6b1eca38-e521-4398-ac14-9629d6fa86c5"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"output\": \"E-mail não cadastrado\"\n}",
+    "options": {
+     "responseCode": 500,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook3",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -6288,
+    1584
+   ],
+   "typeVersion": 1,
+   "id": "319734f5-b671-4daa-b87d-8bd7ea5392a1"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"status\": \"success\"\n}",
+    "options": {
+     "responseCode": 200,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -6064,
+    1296
+   ],
+   "typeVersion": 1,
+   "id": "1cd096dc-b866-4d64-b7e2-42946e6a09fc"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $('Webhook').item.json.body.email }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -4096,
+    -144
+   ],
+   "id": "ba198a2a-5019-4808-9fdb-ffb870b4f51c",
+   "name": "consulta_usuario2",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"status\": \"success\"\n}",
+    "options": {
+     "responseCode": 200,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook6",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3728,
+    -144
+   ],
+   "typeVersion": 1,
+   "id": "557afa28-ba69-42d6-9c14-fb87495c92d1"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "cadastro",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "26b3e63e-db74-4186-8be6-68d8fe0d1743"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "cadastro"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "f23a6fa4-2af8-4fb2-b357-beb8f71d1a0a",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "login",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "login"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "20e5b96e-9414-45be-99f7-2072dc1942e8",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "consulta",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "consulta"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "consulta_dashboard",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "9228436f-8819-4b51-9100-5842713daff2"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "consulta_dashboard"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "91d44ff7-6496-47ee-8c03-11f7ca047f3d",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "crm",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "crm"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "8518a25c-c9cd-4937-b58e-cb4e4865024b",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "conhecimento",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "conhecimento"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b8460666-006c-4f51-a3cc-e435129ba71a",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "chat",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "chat"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "7dcfaf5b-4fa2-4f8c-92fc-72b3c20472b0",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "followup",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "followup"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "f889e05e-9559-4eaa-a00f-07428ea52023",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "prompt",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "prompt"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b598941b-a8dd-44f3-a88e-e3215d8ed5ad",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "save_prompt",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "save_prompt"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "3c894bb8-d0b8-4d1d-a232-2e2b4fdea46a",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "obter_status_whatsapp",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "status"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a79d21d1-f0f6-4016-9090-09d469de730d",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "=qrcode",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "qrcode"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b5562951-16be-47e1-bb66-b349bae3fbfd",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "pairing_code",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "pairing_code"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "565ad767-4ae0-4122-ac1b-bbb79e2e9eac",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "novo_conhecimento",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "novo_conhecimento"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "fdfc39ce-1f53-4fa9-912f-71fe352e11c0",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "deletar_conhecimento",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "deletar_conhecimento"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "26b20a51-eb28-4508-91a9-77c9bf3f0e8c",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "edit_kamban",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "edit_kamban"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "32746358-4a05-43b4-9914-ad015743f700",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "listar_agentes",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "listar_agentes"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "d44b15fa-8af9-4f34-a535-e8d08a99daca",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "=executar_teste_agente",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "executar_teste_agente"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "f907a8c3-c1b1-424b-abf3-df6bbb48c2bc",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "salvar_rascunho_agente",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "salvar_rascunho_agente"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "424bdb55-93ae-43a2-9910-cda6906f08e2",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "iniciou_teste_agente",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "iniciou_teste_agente"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "99638f52-fd00-4af9-924e-76d6120b4ce1",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "carregar_dados_criador_agente",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "carregar_dados_criador_agente"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "2dfcda84-cbd7-41cd-9978-57267221613e",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "listar_agentes",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "listar_agentes"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "8db2f5e9-f059-4f0a-b263-740159ba3207",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": " listar_agentes_prontos",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": " listar_agentes_prontos"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "763fe2d3-ac0f-40ff-94fd-57474aa42c7d",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "click_save_agent_btn",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "click_save_agent_btn"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "4236fe40-fda9-4b4c-9622-4e4cd4155f7f",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "erro_frontend_perfil",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "erro_frontend_perfil"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "24803556-c751-4886-8210-9d63bb26b1f2",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": " carregar_dados_criacao_agente",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": " carregar_dados_criacao_agente"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "4710fb1c-886c-4a07-916b-bc4a50146ee3",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "obter_dados_perfil",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "obter_dados_perfil"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "77f10d14-3032-4a92-b5c8-b9b552d27291",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "obter_status_whatsapp",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "obter_status_whatsapp"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "058f57c1-1b53-413d-9d04-f08f496b76cf",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": " busca agentes",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "da54c2d0-eacd-4032-9ce7-555149a661ac",
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "consultar_dados_iniciais",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "consultar_dados_iniciais"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    -4560,
+    512
+   ],
+   "id": "2b320eaf-01c3-4e5d-a670-963a183a591d",
+   "name": "Switch"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT \n  c.id,\n  c.whatsapp,\n  c.data,\n  c.hora_cadastro,\n  c.credito_gasto,\n\n  f.whatsapp,\n  f.token_limit,\n  f.plano,\n  f.sum_tokens,\n  f.vencimento\n\nFROM \n  contagem_creditos c\nLEFT JOIN \n  cadastro_wuzapi f \n  ON f.whatsapp = c.whatsapp\nWHERE \n  c.whatsapp = '{{ $json.whatsapp }}';",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -3728,
+    48
+   ],
+   "id": "50846765-74db-4859-91db-710acc64c081",
+   "name": "Postgres3",
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "7f223bd7-1272-4130-aebc-3f96a3037a89",
+       "name": "whatsapp",
+       "value": "={{ $('Postgres').item.json.whatsapp }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -4096,
+    48
+   ],
+   "id": "47489e45-ce3b-4547-bd62-b19e57ad450b",
+   "name": "Edit Fields3"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      dash: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -3504,
+    48
+   ],
+   "id": "55c66207-57f6-41e9-bd13-afda81b9bbdf",
+   "name": "Code3"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook7",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3280,
+    48
+   ],
+   "typeVersion": 1,
+   "id": "881c831f-e068-4df8-afd0-baa0e477d0fe"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "da3d3cb4-eca3-41fc-bbe7-0cbcc635a36e",
+       "name": "nome",
+       "value": "={{ $json.instancia }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -4096,
+    240
+   ],
+   "id": "a971c80c-6b29-4462-ac8a-1c579b2016c8",
+   "name": "Edit Fields"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      kamban: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -3504,
+    240
+   ],
+   "id": "ddf2c62f-3c40-4faa-bfc8-263451931ec7",
+   "name": "Code"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName",
+       "value": "={{ $('Edit Fields').item.json.nome }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -3728,
+    240
+   ],
+   "id": "fd8fab63-f771-4f90-8ca2-91c21dd033f6",
+   "name": "Postgres4",
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook8",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3280,
+    240
+   ],
+   "typeVersion": 1,
+   "id": "e7f66b66-232c-4200-a9d3-37c63e2b6f48"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $('Postgres').item.json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook9",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -4096,
+    1200
+   ],
+   "typeVersion": 1,
+   "id": "45abeadd-c438-4937-8cad-8e34da839ef0"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=n8n_vectors_{{ $json.nome }}",
+     "mode": "name"
+    },
+    "returnAll": true,
+    "options": {
+     "outputColumns": [
+      "id",
+      "text"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -3728,
+    432
+   ],
+   "id": "1a5aa881-5748-47c3-b069-8fc795af6c0b",
+   "name": "Postgres1",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "da3d3cb4-eca3-41fc-bbe7-0cbcc635a36e",
+       "name": "nome",
+       "value": "={{ $json.instancia }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -4096,
+    432
+   ],
+   "id": "04c75678-4380-4b92-b669-a6b0a12a2359",
+   "name": "Edit Fields1"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      conhecimento: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -3504,
+    432
+   ],
+   "id": "fdd63754-34be-4e3e-b265-9c473a3e5d6f",
+   "name": "Code1"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook10",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3280,
+    432
+   ],
+   "typeVersion": 1,
+   "id": "d99475dd-fb27-4971-b2c2-3b65b8c3de2a"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "da3d3cb4-eca3-41fc-bbe7-0cbcc635a36e",
+       "name": "nome",
+       "value": "={{ $json.instancia }}",
+       "type": "string"
+      },
+      {
+       "id": "cfa5d6e2-0333-40b6-830c-e26cf66662f2",
+       "name": "numero",
+       "value": "={{ $('Webhook').item.json.body.numero }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -4096,
+    624
+   ],
+   "id": "6d3eece6-8dae-4602-9d71-5044cfa7c576",
+   "name": "Edit Fields2"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      allContacts: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -3504,
+    624
+   ],
+   "id": "8e52788b-0ade-4aa3-a320-be0dce038313",
+   "name": "Code2"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName",
+       "value": "={{ $('Edit Fields2').item.json.nome }}"
+      }
+     ]
+    },
+    "sort": {
+     "values": [
+      {
+       "column": "ultima_interacao",
+       "direction": "DESC"
+      }
+     ]
+    },
+    "options": {
+     "outputColumns": [
+      "remoteJid",
+      "atendimentoHumano",
+      "pushname",
+      "ProfilePicture",
+      "etapa"
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -3728,
+    624
+   ],
+   "id": "e3dd533a-68de-45c6-9dac-b4594aaf2de2",
+   "name": "Select rows from a table",
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook11",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3280,
+    624
+   ],
+   "typeVersion": 1,
+   "id": "699a2360-7e2b-4624-bd79-b4d14f457406"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "cadastro_wuzapi",
+     "mode": "list",
+     "cachedResultName": "cadastro_wuzapi"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "split_time_ms": "={{ $('Webhook').item.json.body.split_time_ms }}",
+      "whatsapp": "={{ $('Webhook').item.json.body.whatsapp }}",
+      "gemini": "={{ $('Webhook').item.json.body.gemini }}",
+      "groq": "={{ $('Webhook').item.json.body.groq }}",
+      "etapas": "={{ $('Webhook').item.json.body.etapas }}",
+      "split_message": "={{ $('Webhook').item.json.body.split_message }}",
+      "prompt_mode": "={{ $('Webhook').item.json.body.prompt_mode }}",
+      "mode": "={{ $('Webhook').item.json.body.mode }}",
+      "whatsapp_testador": "={{ $('Webhook').item.json.body.whatsapp_testador }}",
+      "nome_agente": "={{ $('Webhook').item.json.body.nome_agente }}",
+      "contexto": "={{ $('Webhook').item.json.body.contexto }}",
+      "linguagem": "={{ $('Webhook').item.json.body.linguagem }}",
+      "exemplos": "={{ $('Webhook').item.json.body.exemplos }}",
+      "objetivo": "={{ $('Webhook').item.json.body.objetivo }}",
+      "restricoes": "={{ $('Webhook').item.json.body.restricoes }}",
+      "prompt_completo": "={{ $('Webhook').item.json.body.prompt_completo }}"
+     },
+     "matchingColumns": [
+      "whatsapp"
+     ],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "dataCadastro",
+       "displayName": "dataCadastro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instancia",
+       "displayName": "instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "vencimento",
+       "displayName": "vencimento",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token",
+       "displayName": "token",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "gemini",
+       "displayName": "gemini",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "groq",
+       "displayName": "groq",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "nome_agente",
+       "displayName": "nome_agente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "contexto",
+       "displayName": "contexto",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "linguagem",
+       "displayName": "linguagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "objetivo",
+       "displayName": "objetivo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "exemplos",
+       "displayName": "exemplos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "restricoes",
+       "displayName": "restricoes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "whatsapp_testador",
+       "displayName": "whatsapp_testador",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "mode",
+       "displayName": "mode",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "prompt_mode",
+       "displayName": "prompt_mode",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "prompt_completo",
+       "displayName": "prompt_completo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "validador",
+       "displayName": "validador",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "split_message",
+       "displayName": "split_message",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "split_time_ms",
+       "displayName": "split_time_ms",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "sum_tokens",
+       "displayName": "sum_tokens",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_limit",
+       "displayName": "token_limit",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "plano",
+       "displayName": "plano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapas",
+       "displayName": "etapas",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -4096,
+    816
+   ],
+   "id": "577734a1-de22-4249-856d-ab2a61cdf249",
+   "name": "Update rows in a table",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "mLv3efdf7Htyw0FM",
+     "name": "Postgres pgvector2"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "http://wuzapi.inovareinteligenciaartificial.com/session/status",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -4096,
+    1008
+   ],
+   "id": "bf75e405-4891-4350-9cdd-39dbe94914a1",
+   "name": "HTTP Request"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json.data }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook12",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3728,
+    1008
+   ],
+   "typeVersion": 1,
+   "id": "66af087f-9143-4ba8-af12-ad962a3ce36c"
+  },
+  {
+   "parameters": {
+    "url": "https://api.xpopdigital.com.br/session/status",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -3504,
+    1392
+   ],
+   "id": "a8c4031d-b202-42c1-9b9d-9c081ac9381e",
+   "name": "HTTP Request2"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.xpopdigital.com.br/session/connect",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{\n  \"Subscribe\": [\n    \"Message\"\n  ],\n  \"Immediate\": true\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -4096,
+    1392
+   ],
+   "id": "d0a8f30e-20b3-4a45-b5c9-d6f3e188d32b",
+   "name": "HTTP Request3"
+  },
+  {
+   "parameters": {
+    "amount": 1
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    -3728,
+    1392
+   ],
+   "id": "7084674b-2296-4503-a650-9ff662a7986c",
+   "name": "Wait",
+   "webhookId": "14e09a55-bd5e-4e53-b99c-9ad2fa030937"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json.data }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook13",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3280,
+    1392
+   ],
+   "typeVersion": 1,
+   "id": "9bf37468-4e88-45e7-9baa-384c2cc91ebc"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.xpopdigital.com.br/session/pairphone",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('Postgres').item.json.whatsapp }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -4096,
+    1584
+   ],
+   "id": "f7826603-2259-494f-a441-f96b763e8d17",
+   "name": "HTTP Request1"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json.data }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook14",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3728,
+    1584
+   ],
+   "typeVersion": 1,
+   "id": "f8ce7c6a-a705-47ba-a26d-af8183c41008"
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -2384,
+    2464
+   ],
+   "id": "7082984e-a5e7-4ea1-9f4b-9b5b4957daf4",
+   "name": "Embeddings Google Gemini",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ed3gq5PQFWTvJxeM",
+     "name": "Google Gemini(PaLM) Api mundosolar1995"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "mode": "insert",
+    "tableName": "=n8n_vectors_{{ $('Postgres').first().json.instancia }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+   "typeVersion": 1.1,
+   "position": [
+    -2352,
+    2240
+   ],
+   "id": "52df102c-97a6-4f7c-a1fd-e4a0cb79bfb5",
+   "name": "Postgres PGVector Store1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+   "typeVersion": 1,
+   "position": [
+    -2176,
+    2672
+   ],
+   "id": "b4373c95-aa3c-42c5-9bd2-3f0208de9095",
+   "name": "Recursive Character Text Splitter1"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+   "typeVersion": 1,
+   "position": [
+    -2256,
+    2464
+   ],
+   "id": "40e2f0c5-648d-4dd8-a0f2-cd2adcad7f5c",
+   "name": "Default Data Loader"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "e785e7ec-0b0f-49fb-bf85-1fe05ae357dc",
+       "name": "text",
+       "value": "={{ $('Webhook').item.json.body.text }}{{ $json.text }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -2608,
+    2240
+   ],
+   "id": "ca219de6-21b1-4dce-8f6d-f7c906482c5b",
+   "name": "Edit Fields4"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "99d64cbf-e439-4599-a416-477f36b6361d",
+       "leftValue": "={{ $('Webhook').item.json.body.text }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -4096,
+    1808
+   ],
+   "id": "bdfe1984-dfba-4f70-88d9-9e4567a507cd",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "data",
+    "binaryPropertyName": "mp4",
+    "options": {
+     "fileName": "data.mp4"
+    }
+   },
+   "id": "c32e943d-8d42-4a08-aad5-23d0d3254c8a",
+   "name": "base64-mp4",
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    -3056,
+    2448
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.groq.com/openai/v1/audio/transcriptions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "groqApi",
+    "sendBody": true,
+    "contentType": "multipart-form-data",
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "model",
+       "value": "whisper-large-v3"
+      },
+      {
+       "name": "temperature",
+       "value": "0"
+      },
+      {
+       "name": "response_format",
+       "value": "json"
+      },
+      {
+       "name": "language",
+       "value": "pt"
+      },
+      {
+       "parameterType": "formBinaryData",
+       "name": "file",
+       "inputDataFieldName": "mp4"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "72c641ea-8213-4b27-82b5-627ff6b9dd1b",
+   "name": "transcreve_audio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -2832,
+    2448
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "binaryToPropery",
+    "binaryPropertyName": "audio",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.extractFromFile",
+   "typeVersion": 1,
+   "position": [
+    -3280,
+    2448
+   ],
+   "id": "fde78df3-26bd-4992-ada6-a58c8026b2f5",
+   "name": "Extract from File"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 3.2,
+   "position": [
+    -3728,
+    2448
+   ],
+   "id": "3b26fd71-15a6-4547-9057-87aa11dd8c82",
+   "name": "Merge"
+  },
+  {
+   "parameters": {
+    "keep": "lastItems"
+   },
+   "type": "n8n-nodes-base.limit",
+   "typeVersion": 1,
+   "position": [
+    -3504,
+    2448
+   ],
+   "id": "a00b4026-91c8-43d3-9f52-12f46bb5e370",
+   "name": "Limit"
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=n8n_vectors_{{ $('Postgres').item.json.instancia }}",
+     "mode": "name"
+    },
+    "deleteCommand": "delete",
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('Webhook').item.json.body.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -4096,
+    2608
+   ],
+   "id": "9ec16b31-f69c-4a75-8c4f-6bb7bca52c05",
+   "name": "Delete table or rows",
+   "credentials": {
+    "postgres": {
+     "id": "mLv3efdf7Htyw0FM",
+     "name": "Postgres pgvector2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook15",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1888,
+    2240
+   ],
+   "typeVersion": 1,
+   "id": "0e3b10a6-9808-4791-a918-68737c3de512"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook16",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -3728,
+    3040
+   ],
+   "typeVersion": 1,
+   "id": "78f3b506-b46b-45bd-8ef9-f512238cd39c"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('Webhook').item.json.body.kamban_data.contactCell }}",
+      "etapa": "={{ $('Webhook').item.json.body.kamban_data.action }}",
+      "pushname": "={{ $('Webhook').item.json.body.kamban_data.contactName }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ProfilePicture",
+       "displayName": "ProfilePicture",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "sobrenome",
+       "displayName": "sobrenome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cidade",
+       "displayName": "cidade",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "estado",
+       "displayName": "estado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "pais",
+       "displayName": "pais",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "valor_venda",
+       "displayName": "valor_venda",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_id",
+       "displayName": "item_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_name",
+       "displayName": "item_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cta",
+       "displayName": "cta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ctwaclid",
+       "displayName": "ctwaclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_url",
+       "displayName": "source_url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data_criacao",
+       "displayName": "data_criacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_id",
+       "displayName": "source_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "id_transacao",
+       "displayName": "id_transacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbclid",
+       "displayName": "fbclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fpb",
+       "displayName": "fpb",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_medium",
+       "displayName": "utm_medium",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_source",
+       "displayName": "utm_source",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_id",
+       "displayName": "utm_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_content",
+       "displayName": "utm_content",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_term",
+       "displayName": "utm_term",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_campaign",
+       "displayName": "utm_campaign",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbc",
+       "displayName": "fbc",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "user_agent",
+       "displayName": "user_agent",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nomeEmpresa",
+       "displayName": "nomeEmpresa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome_completo",
+       "displayName": "nome_completo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "pushname",
+       "displayName": "pushname",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -4096,
+    3184
+   ],
+   "id": "4da87277-ff7b-47c3-b5fe-ede95cd8eaf0",
+   "name": "Update rows in a table1",
+   "credentials": {
+    "postgres": {
+     "id": "mLv3efdf7Htyw0FM",
+     "name": "Postgres pgvector2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.xpopdigital.com.br/user/avatar",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('Webhook').item.json.body.kamban_data.contactCell.split(\"_\")[0] }}"
+      },
+      {
+       "name": "Preview",
+       "value": "={{ true }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -3728,
+    3616
+   ],
+   "id": "6e4cff41-3174-430e-aa56-358c15634325",
+   "name": "envia resposta"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('Webhook').item.json.body.kamban_data.contactCell }}",
+      "ProfilePicture": "={{ $json.data.url }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ProfilePicture",
+       "displayName": "ProfilePicture",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "sobrenome",
+       "displayName": "sobrenome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cidade",
+       "displayName": "cidade",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "estado",
+       "displayName": "estado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "pais",
+       "displayName": "pais",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "valor_venda",
+       "displayName": "valor_venda",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_id",
+       "displayName": "item_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "item_name",
+       "displayName": "item_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cta",
+       "displayName": "cta",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ctwaclid",
+       "displayName": "ctwaclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_url",
+       "displayName": "source_url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data_criacao",
+       "displayName": "data_criacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "source_id",
+       "displayName": "source_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "id_transacao",
+       "displayName": "id_transacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbclid",
+       "displayName": "fbclid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fpb",
+       "displayName": "fpb",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_medium",
+       "displayName": "utm_medium",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_source",
+       "displayName": "utm_source",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_id",
+       "displayName": "utm_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_content",
+       "displayName": "utm_content",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_term",
+       "displayName": "utm_term",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "utm_campaign",
+       "displayName": "utm_campaign",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fbc",
+       "displayName": "fbc",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "user_agent",
+       "displayName": "user_agent",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nomeEmpresa",
+       "displayName": "nomeEmpresa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -3504,
+    3616
+   ],
+   "id": "fa51e743-e0cb-4f02-8886-a66590c83eb1",
+   "name": "Update rows in a table2"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.body.history[0].content }}",
+    "options": {
+     "systemMessage": "=You are a helpful assistant {{ $json.body.agentConfig.instructions }}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    -4112,
+    2000
+   ],
+   "id": "fcdaf29f-3c2f-4cac-aa69-81ae813b3ed3",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "rule": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "8bc3495b-0ac2-43f1-951e-585064c200a3",
+          "leftValue": "={{ $json.body.agentConfig.baseModelId }}",
+          "rightValue": "inovare_atlas_v3",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       }
+      }
+     ]
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.modelSelector",
+   "typeVersion": 1,
+   "position": [
+    -4224,
+    2224
+   ],
+   "id": "6fc20b20-aac2-4ff5-82d9-c6f85741d781",
+   "name": "Model Selector"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -4208,
+    2432
+   ],
+   "id": "52346c7b-c15f-4089-a0d3-df03510c23a4",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "uPxbiILhcGXPHmbk",
+     "name": "(canalhistoriacomia@gmail.com)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -4080,
+    2432
+   ],
+   "id": "13a3a9a8-ed67-471f-9110-015a3eb1396a",
+   "name": "Google Gemini Chat Model1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ed3gq5PQFWTvJxeM",
+     "name": "Google Gemini(PaLM) Api mundosolar1995"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": true,\n  \"data\": {\n    \"response\": {{ $json.output.toJsonString() }}\n    \n  }\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.4,
+   "position": [
+    -3728,
+    2640
+   ],
+   "id": "80d5aab6-0f43-471f-8876-19ac736b786f",
+   "name": "Respond to Webhook17"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "={{ $('Webhook').item.json.headers['x-real-ip'] }}"
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    -3936,
+    2224
+   ],
+   "id": "8f8665e5-f179-4c4f-8987-cb90a0fd98f0",
+   "name": "Postgres Chat Memory",
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agentes",
+     "mode": "list",
+     "cachedResultName": "agentes"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "name": "={{ $('Webhook').item.json.body.agentConfig.name }}",
+      "userId": "={{ $('Webhook').item.json.body.userId }}",
+      "baseModelId": "={{ $('Webhook').item.json.body.agentConfig.baseModelId }}",
+      "data_criacao": "={{ $now }}",
+      "data_alteracao": "={{ $now }}",
+      "instructions": "={{ $('Webhook').item.json.body.agentConfig.instructions }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "userId",
+       "displayName": "userId",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "name",
+       "displayName": "name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "baseModelId",
+       "displayName": "baseModelId",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "instructions",
+       "displayName": "instructions",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "data_criacao",
+       "displayName": "data_criacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "data_alteracao",
+       "displayName": "data_alteracao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -4096,
+    2800
+   ],
+   "id": "890ec32e-9752-4a5e-a5ab-336d0059894c",
+   "name": "Insert rows in a table",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": true,\n  \"message\": \"Rascunho do agente salvo com sucesso!\"\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.4,
+   "position": [
+    -3728,
+    3232
+   ],
+   "id": "25bcb29b-7dd6-428c-a15e-712253490852",
+   "name": "Respond to Webhook18"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "backend-plataforma",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -4848,
+    624
+   ],
+   "id": "a997b54d-aefe-4547-a783-03671ba91a12",
+   "name": "Webhook49",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f",
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $('Webhook9').item.json.body.userId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -2464,
+    496
+   ],
+   "id": "d79d2a97-4f49-41b5-93fb-f48e19ceb3f3",
+   "name": "consulta_usuario3",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": true,\n  \"data\": {\n    \"name\": \"Nome do Usuário Exemplo\",\n    \"email\": \"usuario@email.com\",\n    \"avatar\": \"https://url.para.imagem/avatar.png\",\n    \"notifications\": {\n      \"updates\": true,\n      \"usageAlerts\": true\n    }\n  }\n}",
+    "options": {}
+   },
+   "name": "Respond to Webhook19",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -2224,
+    496
+   ],
+   "typeVersion": 1,
+   "id": "3334caf3-4d01-44a4-904c-6d666caec55a"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://webhookreserva.inovareinteligenciaartificial.com/webhook/{{ $json.body.action }}",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.body }}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -6704,
+    176
+   ],
+   "id": "3a6bf7db-25b8-48e4-95dc-389622cf9dc3",
+   "name": "HTTP Request4",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json.data }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook21",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -6512,
+    176
+   ],
+   "typeVersion": 1,
+   "id": "447abf98-d6cf-4869-bee8-e5f83b94c9e9"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      instancias: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -6080,
+    1856
+   ],
+   "id": "60852052-faad-46f7-ba3d-0bfdb003542f",
+   "name": "Code4"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancia",
+     "mode": "list",
+     "cachedResultName": "instancia"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "userId",
+       "value": "={{ $('consultar_dados_iniciais').item.json.body.userId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6304,
+    1856
+   ],
+   "id": "55d562ac-299d-491d-a170-629049d9a42d",
+   "name": "Select rows from a table1",
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook20",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5856,
+    1856
+   ],
+   "typeVersion": 1,
+   "id": "22404622-a856-4238-bd10-4b55c1998119"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "consultar_dados_iniciais",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -7152,
+    1984
+   ],
+   "id": "ea3e2610-f6f6-421f-9011-a29671176a9c",
+   "name": "consultar_dados_iniciais",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $json.body.userId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6944,
+    1984
+   ],
+   "id": "0d646e3e-bb65-42d3-9cf1-93f204363a77",
+   "name": "consulta_usuario4",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6752,
+    1984
+   ],
+   "id": "9073d782-c666-4179-8e7a-9f3c2b044d05",
+   "name": "verifica_instancia_existe1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $('consulta_usuario4').item.json.senha }}",
+       "rightValue": "={{ $('consultar_dados_iniciais').item.json.body.password }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6528,
+    1888
+   ],
+   "id": "559458af-14a6-449f-9eea-137a8d6446bd",
+   "name": "verifica_senha1"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $json.body.userId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6960,
+    2368
+   ],
+   "id": "1bfcd51f-30d9-4a48-9c42-2418d68e3f83",
+   "name": "consulta_usuario5",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6768,
+    2368
+   ],
+   "id": "825538c6-40f6-445a-8d1d-d1d9f913d30f",
+   "name": "verifica_instancia_existe2"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $('consulta_usuario5').item.json.senha }}",
+       "rightValue": "={{ $('criar_instancia').item.json.body.password }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6544,
+    2272
+   ],
+   "id": "73f4af16-e644-4eaf-8b69-304770fe95d0",
+   "name": "verifica_senha2"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/user/check",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "pessoal"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"Phone\": [\"{{ $('criar_instancia').item.json.body.phone }}\"]\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -6304,
+    2256
+   ],
+   "id": "7dcc2c91-7b0a-4923-8b5d-a7c2904d527c",
+   "name": "valida_whatsapp",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "097bd1b1-b906-4d18-8380-3ced55d13ac5",
+       "leftValue": "={{ $json.data.Users[0].IsInWhatsapp }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6112,
+    2256
+   ],
+   "id": "591347e9-2fe1-43e6-84bd-7acfc63f2cb3",
+   "name": "If1"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "{\"message\":\"O numero informado não tem whatsapp.\"}",
+    "options": {
+     "responseCode": 500
+    }
+   },
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.4,
+   "position": [
+    -5824,
+    2352
+   ],
+   "id": "2e56a93c-98f5-4121-b317-aa6e1a3ac89f",
+   "name": "Respond to Webhook23"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancia",
+     "mode": "list",
+     "cachedResultName": "instancia"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "phone",
+       "value": "={{ $json.data.Users[0].JID.split(\"@\")[0] }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -5872,
+    2176
+   ],
+   "id": "afd7c858-adb0-4fbf-ad1d-3eb6bb9bab10",
+   "name": "Postgres",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "fc56a9c7-d08c-4fb2-b4ff-ce97b359fc5e",
+       "leftValue": "={{$json}}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "empty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -5712,
+    2176
+   ],
+   "id": "0739edbe-7576-4f4d-b907-c571d64f03d3",
+   "name": "If2"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "criar_instancia",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -7168,
+    2368
+   ],
+   "id": "1ac397b2-f354-4fbe-90e5-70ede1b72d3c",
+   "name": "criar_instancia",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancia",
+     "mode": "list",
+     "cachedResultName": "instancia"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "userId": "={{ $('criar_instancia').item.json.body.userId }}",
+      "name": "={{ $('criar_instancia').item.json.body.name }}",
+      "token": "<SEGREDO_REMOVIDO>",
+      "phone": "={{ $('valida_whatsapp').item.json.data.Users[0].JID.split(\"@\")[0] }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "userId",
+       "displayName": "userId",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "name",
+       "displayName": "name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "phone",
+       "displayName": "phone",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "token",
+       "displayName": "token",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -5488,
+    2128
+   ],
+   "id": "2c73db23-436d-4933-9776-d01ffaf0a641",
+   "name": "Postgres2",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/admin/users",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "authorization",
+       "value": "H4Zbhw72PBKdTIgS"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "name",
+       "value": "={{ $json.name }}"
+      },
+      {
+       "name": "token",
+       "value": "={{ $json.token }}"
+      },
+      {
+       "name": "events",
+       "value": "Message"
+      },
+      {
+       "name": "webhook",
+       "value": "https://automacaoapi.xpopdigital.com.br/webhook/wuzapi-geral"
+      },
+      {
+       "name": "s3Config.enabled",
+       "value": "={{ true }}"
+      },
+      {
+       "name": "s3Config.pathStyle",
+       "value": "={{ true }}"
+      },
+      {
+       "name": "s3Config.mediaDelivery",
+       "value": "base64"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -5328,
+    2128
+   ],
+   "id": "82b9eebd-6560-4169-8905-cf3dc7ca7b3d",
+   "name": "add_instance",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n\"data\": { \"success\": true, \"instanceId\": \"{{ $('Postgres2').item.json.id }}\" }\n}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "name": "Respond to Webhook22",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5088,
+    1952
+   ],
+   "typeVersion": 1,
+   "id": "2d18fe9f-b9f8-4531-8386-8192cd942793"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "login",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -7104,
+    1488
+   ],
+   "id": "2bfac3f0-347e-4eb3-8bca-de60fcfa81bd",
+   "name": "login",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/session/status",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('consulta_usuario6').item.json.token }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -5712,
+    2624
+   ],
+   "id": "a9253225-0d35-40d1-96df-869114f8017c",
+   "name": "HTTP Request5"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/session/connect",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $json.token }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{\n  \"Subscribe\": [\n    \"Message\"\n  ],\n  \"Immediate\": true\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -6128,
+    2624
+   ],
+   "id": "3f93ad69-b695-471b-b6e1-a6251d6454bf",
+   "name": "HTTP Request6",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "amount": 1
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    -5936,
+    2624
+   ],
+   "id": "98b56c5a-d8ab-4383-9389-267631e227b4",
+   "name": "Wait1",
+   "webhookId": "14e09a55-bd5e-4e53-b99c-9ad2fa030937"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\"data\": {\"qrcode\": \"{{ $json.data.qrcode }}\"}}",
+    "options": {}
+   },
+   "name": "Respond to Webhook24",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5488,
+    2624
+   ],
+   "typeVersion": 1,
+   "id": "39492877-f650-496f-ab88-63634a8c3cc9"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.xpopdigital.com.br/session/pairphone",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('Postgres').item.json.whatsapp }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -7024,
+    2976
+   ],
+   "id": "af7b858a-4ef5-42b3-9c56-82197c4f0d74",
+   "name": "HTTP Request7"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json.data }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook25",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -6672,
+    2976
+   ],
+   "typeVersion": 1,
+   "id": "b1b69adb-46a6-4812-ba8c-0c66912502dd"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "gera_qr_code",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -7472,
+    2752
+   ],
+   "id": "fab221bd-f04b-45b8-af59-c7c7773d7f28",
+   "name": "gera_qr_code",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancia",
+     "mode": "list",
+     "cachedResultName": "instancia"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('gera_qr_code').item.json.body.instanceId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6576,
+    2640
+   ],
+   "id": "28ad85e5-ffd9-4785-b7d8-66a237d5e486",
+   "name": "consulta_usuario6",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $json.body.userId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -7232,
+    2752
+   ],
+   "id": "893c968a-7ace-4a83-b3f2-a1452496aa15",
+   "name": "consulta_usuario7",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $json }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "exists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -7040,
+    2752
+   ],
+   "id": "967d43b7-c9ee-4242-97fd-16a386303434",
+   "name": "verifica_instancia_existe3"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $('consulta_usuario7').item.json.senha }}",
+       "rightValue": "={{ $('gera_qr_code').item.json.body.password }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6816,
+    2656
+   ],
+   "id": "fcd0c6eb-12e2-4f3e-8604-4290f42c1323",
+   "name": "verifica_senha3"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfa4b819-f955-4717-be10-90120c283a0c",
+       "leftValue": "={{ $('gera_qr_code').item.json.body.userId }}",
+       "rightValue": "={{ $json.userId }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6352,
+    2640
+   ],
+   "id": "b642035c-5e2b-43e0-a4af-a62602c04c97",
+   "name": "verifica_senha4"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "nome": "={{ $('cadastra_usuario').item.json.body.name }}",
+      "username": "={{ $('cadastra_usuario').item.json.body.username }}",
+      "data_nascimento": "={{ DateTime.fromFormat($('cadastra_usuario').item.json.body['birth-date'], 'dd/MM/yyyy').toISODate() }}",
+      "email": "={{ $('cadastra_usuario').item.json.body.email }}",
+      "senha": "<SEGREDO_REMOVIDO>",
+      "nome_empresa": "={{ $('cadastra_usuario').item.json.body['company-name'] }}",
+      "cargo": "={{ $('cadastra_usuario').item.json.body['job-title'] }}",
+      "pais": "={{ $('cadastra_usuario').item.json.body.country }}",
+      "telefone_admin": "={{ $('cadastra_usuario').item.json.body['admin-phone'] }}",
+      "plano_servico": "={{ $('cadastra_usuario').item.json.body['service-plan'] }}",
+      "codigo_cupom": "={{ $('cadastra_usuario').item.json.body['coupon-code'] }}",
+      "data_cadastro": "={{ $now }}",
+      "imagem_perfil_base64": "={{ $('cadastra_usuario').item.json.body.profileImageBase64 }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "username",
+       "displayName": "username",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data_nascimento",
+       "displayName": "data_nascimento",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "email",
+       "displayName": "email",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "senha",
+       "displayName": "senha",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "nome_empresa",
+       "displayName": "nome_empresa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "cargo",
+       "displayName": "cargo",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "pais",
+       "displayName": "pais",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "telefone_admin",
+       "displayName": "telefone_admin",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "plano_servico",
+       "displayName": "plano_servico",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "codigo_cupom",
+       "displayName": "codigo_cupom",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "termos",
+       "displayName": "termos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "imagem_perfil_base64",
+       "displayName": "imagem_perfil_base64",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data_cadastro",
+       "displayName": "data_cadastro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6096,
+    832
+   ],
+   "id": "5bd532ad-76bd-458c-b83a-6731ac8250a9",
+   "name": "cadastra_usuario1",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "cadastra_usuario",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -6912,
+    928
+   ],
+   "id": "6c94dbac-db46-4fe5-ad52-4a5b698677df",
+   "name": "cadastra_usuario",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "usuarios",
+     "mode": "list",
+     "cachedResultName": "usuarios"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "email",
+       "value": "={{ $json.body.email }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6752,
+    496
+   ],
+   "id": "955e1fed-6905-45f4-b599-7022e6539388",
+   "name": "consulta_usuario8",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "293334f1-cdfe-48bc-ba0a-32df7ffe6aec",
+       "leftValue": "={{$('consulta_usuario8')}}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "empty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -6560,
+    496
+   ],
+   "id": "0b810ced-de55-45fb-be26-3c2ebe4954d7",
+   "name": "se_nao_cadastrado1"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n\"data\": { \"success\": true }\n}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "name": "Respond to Webhook5",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5200,
+    288
+   ],
+   "typeVersion": 1,
+   "id": "d5560597-62b4-4e2b-91bb-1639e92dbdef"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "deletar_instancia",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -6976,
+    496
+   ],
+   "id": "08c6468f-f5de-4fec-8bbb-081fa014db31",
+   "name": "deletar_instancia",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancia",
+     "mode": "list",
+     "cachedResultName": "instancia"
+    },
+    "deleteCommand": "delete",
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('deletar_instancia').item.json.body.instanceId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -5600,
+    288
+   ],
+   "id": "11e293b6-cf81-4c05-a17b-0539eca77c4f",
+   "name": "deletar_instancia1",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "DELETE",
+    "url": "=https://wuzapi.inovareinteligenciaartificial.com/admin/users/{{ $('If4').first().json.id }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "authorization",
+       "value": "=H4Zbhw72PBKdTIgS"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -5424,
+    288
+   ],
+   "id": "827c5e52-5612-4b93-b341-bd4200460c66",
+   "name": "add_instance1"
+  },
+  {
+   "parameters": {
+    "url": "https://wuzapi.inovareinteligenciaartificial.com/admin/users",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "authorization",
+       "value": "H4Zbhw72PBKdTIgS"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -6224,
+    352
+   ],
+   "id": "9a85ed80-dd85-4ea9-975a-e507750a4e99",
+   "name": "get_instance"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "62c894f1-8417-4838-b3a7-3df9b85be30b",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -5456,
+    672
+   ],
+   "id": "c7419235-dd75-4e18-886a-7bb6876ed9da",
+   "name": "If3"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "instancia",
+     "mode": "list",
+     "cachedResultName": "instancia"
+    },
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('deletar_instancia').item.json.body.instanceId }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -6400,
+    352
+   ],
+   "id": "5a284a65-3c00-4730-8a4c-f1c3fa5e56cd",
+   "name": "deletar_instancia2",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "7D0zSPbzjb7Ic2Ok",
+     "name": "este n8n reserva"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "fieldToSplitOut": "data",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitOut",
+   "typeVersion": 1,
+   "position": [
+    -6048,
+    352
+   ],
+   "id": "76f65b21-987d-4ceb-8019-726566a044fe",
+   "name": "Split Out"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2465f543-a0cb-4fce-a001-748d8e443129",
+       "leftValue": "={{ $('deletar_instancia2').item.json.name }}",
+       "rightValue": "={{ $json.name }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    -5840,
+    352
+   ],
+   "id": "a9fc795a-bb2f-47ee-aca8-7f6af75bc545",
+   "name": "If4"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n\"data\": { \"success\": false,  \"message\": \"{{ $json.error.message }}\"}\n}",
+    "options": {}
+   },
+   "name": "Respond to Webhook26",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5088,
+    2208
+   ],
+   "typeVersion": 1,
+   "id": "b8aa8e22-502c-497a-8e7b-3bd6d7fbcbff"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={ \"success\": face, \"message\": \"{{ $json.error.message }}\" }",
+    "options": {}
+   },
+   "name": "Respond to Webhook27",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5440,
+    2368
+   ],
+   "typeVersion": 1,
+   "id": "b04d8e77-8953-4bba-9558-6a919feefd26"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n\"data\": { \"success\": false,  \"message\": \"{{ $json.error.message }}\"}\n}",
+    "options": {}
+   },
+   "name": "Respond to Webhook28",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -5584,
+    496
+   ],
+   "typeVersion": 1,
+   "id": "67c42fed-b864-4403-b2e7-b346f117e7be"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n\"data\": { \"success\": true }\n}",
+    "options": {
+     "responseCode": 200
+    }
+   },
+   "name": "Respond to Webhook29",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -6416,
+    720
+   ],
+   "typeVersion": 1,
+   "id": "ad048e62-80b2-4703-a6d0-03865d3bf65a"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "status_whatsapp",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -6896,
+    720
+   ],
+   "id": "68d2ca19-1be4-43e4-8f24-195efa302e6b",
+   "name": "status_whatsapp",
+   "webhookId": "3340dd08-8344-44f2-b502-594a1cf7307f"
+  },
+  {
+   "parameters": {
+    "url": "http://wuzapi.inovareinteligenciaartificial.com/session/status",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $('Webhook').item.json.body.apikey }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -6656,
+    720
+   ],
+   "id": "7fcdc949-6e2f-4904-8afa-4a2449a0d55f",
+   "name": "HTTP Request8"
+  },
+  {
+   "parameters": {
+    "url": "http://wuzapi.inovareinteligenciaartificial.com/session/status",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "token",
+       "value": "={{ $json.token }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -6160,
+    2032
+   ],
+   "id": "66e51888-ac29-4afe-ad1c-4429623e96d5",
+   "name": "HTTP Request9"
+  },
+  {
+   "parameters": {},
+   "id": "a973d29c-4c1a-4463-814c-a82352aa607b",
+   "name": "ativado pelo erro",
+   "type": "n8n-nodes-base.errorTrigger",
+   "typeVersion": 1,
+   "position": [
+    -5024,
+    -672
+   ]
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -4560,
+    -480
+   ],
+   "id": "5c3be024-cfa0-418d-b4ac-a1931a050c3c",
+   "name": "Google Gemini Chat Model2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "MmwUfggDuBe6Wors",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://wuzapi.inovareinteligenciaartificial.com/chat/send/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "=s22-bus-5106"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "=559184698653"
+      },
+      {
+       "name": "Body",
+       "value": "=erro: *{{ $('ativado pelo erro').item.json.workflow.name }}*\n \nnóde(\n{{ $('ativado pelo erro').item.json.execution.lastNodeExecuted }})\n\na mensgem \n*{{ $('ativado pelo erro').item.json.execution.error.message }}*\n\nlink da execução:https://n8nreserva.{{ $('ativado pelo erro').item.json.execution.url.split('https://')[1].split('Interface.')[1] }}\n\n\ncomo resolver:\n{{ $json.output }}\n\n"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -4224,
+    -672
+   ],
+   "id": "ba0cefc6-8ae6-4216-9135-65c4b4a6ddcf",
+   "name": "WUZAP1",
+   "retryOnFail": true,
+   "maxTries": 5
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "workflowId": {
+     "__rl": true,
+     "value": "={{ $json.workflow.id }}",
+     "mode": "id"
+    },
+    "requestOptions": {}
+   },
+   "type": "n8n-nodes-base.n8n",
+   "typeVersion": 1,
+   "position": [
+    -4848,
+    -672
+   ],
+   "id": "ae028062-8253-4e0d-a54e-d6d180b14822",
+   "name": "Get a workflow",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "1",
+    "contextWindowLength": 50
+   },
+   "id": "42f61a57-74e6-444d-b171-61855b6fdc8c",
+   "name": "memoria do jarvis usar qualquer chave1",
+   "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+   "typeVersion": 1.2,
+   "position": [
+    -4224,
+    -512
+   ]
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=mensagem de erro:{{ $('ativado pelo erro').item.json.execution.error.message }}\nstack do erro:{{ $('ativado pelo erro').item.json.execution.error.stack }}\n\nnome do nó que parou: {{ $('ativado pelo erro').item.json.execution.lastNodeExecuted }}\ntipo do nó:{{ $json.execution.error.node.type }}\n\nfluxo comppleto:{{ JSON.stringify($('Get a workflow').item.json) }}\n# sempre responda em portugues ou voçe sera punido",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "me diga como resolver esse erro do n8n com as informaçoes que vou te passar que a mensagem de erro, o ultimo nó, o tipo de nó e a stack do erro e me ofereça detalhadamento todas as possiveis soluçoes"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.1,
+   "position": [
+    -4496,
+    -672
+   ],
+   "id": "7b868d44-ce6e-4bf2-b05e-9c19ecbf6d16",
+   "name": "AI Agent2"
+  },
+  {
+   "parameters": {
+    "amount": 3
+   },
+   "id": "30c72055-db5a-432a-acb4-7de1f7a68ef2",
+   "name": "Wait3",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    -4672,
+    -672
+   ],
+   "webhookId": "3ef7d97b-27e3-49fa-988d-fbd1f6ce6a34"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -4384,
+    -416
+   ],
+   "id": "6fc2aae2-f234-4437-9c04-8a3c31d9a75e",
+   "name": "Google Gemini Chat Model4",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "F2MxbzE7F2f76l55",
+     "name": "(jornalcomia@gmail.com)"
+    }
+   }
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "Webhook": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario": {
+   "main": [
+    [
+     {
+      "node": "se_nao_cadastrado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se_nao_cadastrado": {
+   "main": [
+    [
+     {
+      "node": "cadastra_usuario1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Stop and Error",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario1": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancia_existe",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancia_existe": {
+   "main": [
+    [
+     {
+      "node": "verifica_senha",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Respond to Webhook3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_senha": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Respond to Webhook2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario2": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch": {
+   "main": [
+    [],
+    [],
+    [
+     {
+      "node": "consulta_usuario2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Edit Fields3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Edit Fields",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Edit Fields1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Edit Fields2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [
+     {
+      "node": "Respond to Webhook9",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Update rows in a table",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "HTTP Request",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "HTTP Request3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "HTTP Request1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Delete table or rows",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Update rows in a table1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Insert rows in a table",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+     {
+      "node": "consulta_usuario3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [],
+    [],
+    [
+     {
+      "node": "Respond to Webhook1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres3": {
+   "main": [
+    [
+     {
+      "node": "Code3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields3": {
+   "main": [
+    [
+     {
+      "node": "Postgres3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code3": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook7",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields": {
+   "main": [
+    [
+     {
+      "node": "Postgres4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook8",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres4": {
+   "main": [
+    [
+     {
+      "node": "Code",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres1": {
+   "main": [
+    [
+     {
+      "node": "Code1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields1": {
+   "main": [
+    [
+     {
+      "node": "Postgres1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook10",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields2": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code2": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook11",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table": {
+   "main": [
+    [
+     {
+      "node": "Code2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook12",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request2": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook13",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request3": {
+   "main": [
+    [
+     {
+      "node": "Wait",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook14",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Embeddings Google Gemini": {
+   "ai_embedding": [
+    [
+     {
+      "node": "Postgres PGVector Store1",
+      "type": "ai_embedding",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres PGVector Store1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook15",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Recursive Character Text Splitter1": {
+   "ai_textSplitter": [
+    [
+     {
+      "node": "Default Data Loader",
+      "type": "ai_textSplitter",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Default Data Loader": {
+   "ai_document": [
+    [
+     {
+      "node": "Postgres PGVector Store1",
+      "type": "ai_document",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields4": {
+   "main": [
+    [
+     {
+      "node": "Postgres PGVector Store1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields4",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Merge",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "base64-mp4": {
+   "main": [
+    [
+     {
+      "node": "transcreve_audio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "transcreve_audio": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Extract from File": {
+   "main": [
+    [
+     {
+      "node": "base64-mp4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Merge": {
+   "main": [
+    [
+     {
+      "node": "Limit",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Limit": {
+   "main": [
+    [
+     {
+      "node": "Extract from File",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Delete table or rows": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook16",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Update rows in a table1": {
+   "main": [
+    [
+     {
+      "node": "envia resposta",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "envia resposta": {
+   "main": [
+    [
+     {
+      "node": "Update rows in a table2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Model Selector": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Model Selector",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model1": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Model Selector",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook17",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres Chat Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Insert rows in a table": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook18",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario3": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook19",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request4": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook21",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code4": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook20",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Select rows from a table1": {
+   "main": [
+    [
+     {
+      "node": "Code4",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "HTTP Request9",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consultar_dados_iniciais": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario4": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancia_existe1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancia_existe1": {
+   "main": [
+    [
+     {
+      "node": "verifica_senha1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_senha1": {
+   "main": [
+    [
+     {
+      "node": "Select rows from a table1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario5": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancia_existe2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancia_existe2": {
+   "main": [
+    [
+     {
+      "node": "verifica_senha2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_senha2": {
+   "main": [
+    [
+     {
+      "node": "valida_whatsapp",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "valida_whatsapp": {
+   "main": [
+    [
+     {
+      "node": "If1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If1": {
+   "main": [
+    [
+     {
+      "node": "Postgres",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Respond to Webhook23",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres": {
+   "main": [
+    [
+     {
+      "node": "If2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criar_instancia": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If2": {
+   "main": [
+    [
+     {
+      "node": "Postgres2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Respond to Webhook27",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Postgres2": {
+   "main": [
+    [
+     {
+      "node": "add_instance",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "add_instance": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook22",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Respond to Webhook26",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "login": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request5": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook24",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request6": {
+   "main": [
+    [
+     {
+      "node": "Wait1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait1": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request7": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook25",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gera_qr_code": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario7",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario7": {
+   "main": [
+    [
+     {
+      "node": "verifica_instancia_existe3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_instancia_existe3": {
+   "main": [
+    [
+     {
+      "node": "verifica_senha3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_senha3": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario6": {
+   "main": [
+    [
+     {
+      "node": "verifica_senha4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica_senha4": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cadastra_usuario1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "cadastra_usuario": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consulta_usuario8": {
+   "main": [
+    [
+     {
+      "node": "se_nao_cadastrado1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se_nao_cadastrado1": {
+   "main": [
+    [
+     {
+      "node": "deletar_instancia2",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "deletar_instancia": {
+   "main": [
+    [
+     {
+      "node": "consulta_usuario8",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "deletar_instancia1": {
+   "main": [
+    [
+     {
+      "node": "add_instance1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "add_instance1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook5",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "get_instance": {
+   "main": [
+    [
+     {
+      "node": "Split Out",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "deletar_instancia2": {
+   "main": [
+    [
+     {
+      "node": "get_instance",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If3": {
+   "main": [
+    []
+   ]
+  },
+  "Split Out": {
+   "main": [
+    [
+     {
+      "node": "If4",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If4": {
+   "main": [
+    [
+     {
+      "node": "deletar_instancia1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "status_whatsapp": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request8",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTTP Request8": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook29",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "ativado pelo erro": {
+   "main": [
+    [
+     {
+      "node": "Get a workflow",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model2": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent2",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Get a workflow": {
+   "main": [
+    [
+     {
+      "node": "Wait3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "memoria do jarvis usar qualquer chave1": {
+   "ai_memory": [
+    [
+     {
+      "node": "AI Agent2",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent2": {
+   "main": [
+    [
+     {
+      "node": "WUZAP1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait3": {
+   "main": [
+    [
+     {
+      "node": "AI Agent2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model4": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent2",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Webhook49": {
+   "main": [
+    [
+     {
+      "node": "Switch",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1",
+  "callerPolicy": "workflowsFromSameOwner",
+  "availableInMCP": false
+ },
+ "versionId": "a53e1d7e-0507-4d24-b7f4-68dd1dbdc4d8",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "5cYbs2bIILnahMjF",
+ "tags": []
+}

@@ -1,0 +1,315 @@
+=== CMD ===
+ffmpeg -y -threads 2 -filter_threads 2 -i D:\historias-em-frames\prod\workspace\tmp\intro.mp4 -i D:\historias-em-frames\prod\workspace\tmp\clip_000.mp4 -i D:\historias-em-frames\prod\workspace\tmp\clip_001.mp4 -i D:\historias-em-frames\prod\workspace\tmp\clip_002.mp4 -i D:\historias-em-frames\prod\workspace\tmp\clip_003.mp4 -i D:\historias-em-frames\prod\workspace\tmp\clip_004.mp4 -filter_complex [0:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v1];[2:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v2];[3:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v3];[4:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v4];[5:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v5];[0:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.3000,atrim=0:2.3000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=10.1000,atrim=0:10.1000,asetpts=PTS-STARTPTS[a1];[2:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=10.3880,atrim=0:10.3880,asetpts=PTS-STARTPTS[a2];[3:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=10.3880,atrim=0:10.3880,asetpts=PTS-STARTPTS[a3];[4:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=11.3480,atrim=0:11.3480,asetpts=PTS-STARTPTS[a4];[5:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=9.9000,atrim=0:9.9000,asetpts=PTS-STARTPTS[a5];[v0][v1]xfade=transition=revealright:duration=0.420:offset=1.880[vx1];[a0][a1]acrossfade=d=0.420[ax1];[vx1][v2]xfade=transition=horzopen:duration=0.420:offset=11.560[vx2];[ax1][a2]acrossfade=d=0.420[ax2];[vx2][v3]xfade=transition=smoothdown:duration=0.420:offset=21.528[vx3];[ax2][a3]acrossfade=d=0.420[ax3];[vx3][v4]xfade=transition=fade:duration=0.420:offset=31.496[vx4];[ax3][a4]acrossfade=d=0.420[ax4];[vx4][v5]xfade=transition=diagtl:duration=0.420:offset=42.424[vx5];[ax4][a5]acrossfade=d=0.420[ax5] -map [vx5] -map [ax5] -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 192k -ar 44100 -ac 2 -movflags +faststart -pix_fmt yuv420p -threads 2 D:\historias-em-frames\prod\workspace\tmp\_xfseg_00.mp4
+
+=== FILTER_COMPLEX ===
+[0:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v1];[2:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v2];[3:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v3];[4:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v4];[5:v]format=yuv420p,fps=30,scale=720:1280,setsar=1,tpad=stop_mode=clone:stop_duration=0.500,settb=AVTB,setpts=PTS-STARTPTS[v5];[0:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=2.3000,atrim=0:2.3000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=10.1000,atrim=0:10.1000,asetpts=PTS-STARTPTS[a1];[2:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=10.3880,atrim=0:10.3880,asetpts=PTS-STARTPTS[a2];[3:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=10.3880,atrim=0:10.3880,asetpts=PTS-STARTPTS[a3];[4:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=11.3480,atrim=0:11.3480,asetpts=PTS-STARTPTS[a4];[5:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=stereo,apad=whole_dur=9.9000,atrim=0:9.9000,asetpts=PTS-STARTPTS[a5];[v0][v1]xfade=transition=revealright:duration=0.420:offset=1.880[vx1];[a0][a1]acrossfade=d=0.420[ax1];[vx1][v2]xfade=transition=horzopen:duration=0.420:offset=11.560[vx2];[ax1][a2]acrossfade=d=0.420[ax2];[vx2][v3]xfade=transition=smoothdown:duration=0.420:offset=21.528[vx3];[ax2][a3]acrossfade=d=0.420[ax3];[vx3][v4]xfade=transition=fade:duration=0.420:offset=31.496[vx4];[ax3][a4]acrossfade=d=0.420[ax4];[vx4][v5]xfade=transition=diagtl:duration=0.420:offset=42.424[vx5];[ax4][a5]acrossfade=d=0.420[ax5]
+
+=== STDERR ===
+ffmpeg version 8.1.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+
+  libavutil      60. 26.102 / 60. 26.102
+
+  libavcodec     62. 28.102 / 62. 28.102
+
+  libavformat    62. 12.102 / 62. 12.102
+
+  libavdevice    62.  3.102 / 62.  3.102
+
+  libavfilter    11. 14.102 / 11. 14.102
+
+  libswscale      9.  5.102 /  9.  5.102
+
+  libswresample   6.  3.102 /  6.  3.102
+
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\historias-em-frames\prod\workspace\tmp\intro.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:01.80, start: 0.000000, bitrate: 899 kb/s
+
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 720x1280 [SAR 1:1 DAR 9:16], 881 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 2 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #1, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\historias-em-frames\prod\workspace\tmp\clip_000.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:09.60, start: 0.000000, bitrate: 1843 kb/s
+
+  Stream #1:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280 [SAR 1:1 DAR 9:16], 1659 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #1:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 176 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #2, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\historias-em-frames\prod\workspace\tmp\clip_001.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:09.89, start: 0.000000, bitrate: 464 kb/s
+
+  Stream #2:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 720x1280 [SAR 1:1 DAR 9:16], 271 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #2:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 185 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #3, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\historias-em-frames\prod\workspace\tmp\clip_002.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:09.89, start: 0.000000, bitrate: 303 kb/s
+
+  Stream #3:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280 [SAR 1:1 DAR 9:16], 108 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #3:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 186 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #4, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\historias-em-frames\prod\workspace\tmp\clip_003.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:10.85, start: 0.000000, bitrate: 1545 kb/s
+
+  Stream #4:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 720x1280 [SAR 1:1 DAR 9:16], 1352 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #4:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 184 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Input #5, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\historias-em-frames\prod\workspace\tmp\clip_004.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Duration: 00:00:09.40, start: 0.000000, bitrate: 245 kb/s
+
+  Stream #5:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 720x1280 [SAR 1:1 DAR 9:16], 61 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+
+    Metadata:
+
+      handler_name    : VideoHandler
+
+      encoder         : Lavc62.28.102 libx264
+
+  Stream #5:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 175 kb/s (default)
+
+    Metadata:
+
+      handler_name    : SoundHandler
+
+Stream mapping:
+
+  Stream #0:0 (h264) -> format:default
+
+  Stream #0:1 (aac) -> aresample:default
+
+  Stream #1:0 (h264) -> format:default
+
+  Stream #1:1 (aac) -> aresample:default
+
+  Stream #2:0 (h264) -> format:default
+
+  Stream #2:1 (aac) -> aresample:default
+
+  Stream #3:0 (h264) -> format:default
+
+  Stream #3:1 (aac) -> aresample:default
+
+  Stream #4:0 (h264) -> format:default
+
+  Stream #4:1 (aac) -> aresample:default
+
+  Stream #5:0 (h264) -> format:default
+
+  Stream #5:1 (aac) -> aresample:default
+
+  xfade:default -> Stream #0:0 (libx264)
+
+  acrossfade:default -> Stream #0:1 (aac)
+
+Press [q] to stop, [?] for help
+
+[swscaler @ 0000000010141500] deprecated pixel format used, make sure you did set range correctly
+
+[swscaler @ 000000001032aa40] deprecated pixel format used, make sure you did set range correctly
+
+[swscaler @ 0000000010519800] deprecated pixel format used, make sure you did set range correctly
+
+[libx264 @ 0000000002811840] using SAR=1/1
+
+[libx264 @ 0000000002811840] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+
+[libx264 @ 0000000002811840] profile High, level 3.1, 4:2:0, 8-bit
+
+[libx264 @ 0000000002811840] 264 - core 165 r3223 0480cb0 - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=2 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=6 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=2 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=30 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+
+Output #0, mp4, to 'D:\historias-em-frames\prod\workspace\tmp\_xfseg_00.mp4':
+
+  Metadata:
+
+    major_brand     : isom
+
+    minor_version   : 512
+
+    compatible_brands: isomiso2avc1mp41
+
+    encoder         : Lavf62.12.102
+
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(pc, progressive), 720x1280 [SAR 1:1 DAR 9:16], q=2-31, 30 fps, 15360 tbn
+
+    Metadata:
+
+      encoder         : Lavc62.28.102 libx264
+
+    Side data:
+
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s
+
+    Metadata:
+
+      encoder         : Lavc62.28.102 aac
+
+[mp4 @ 000000000074e940] Starting second pass: moving the moov atom to the beginning of the file
+
+[out#0/mp4 @ 0000000000e33600] video:162KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 1.189412%
+
+frame=   40 fps= 21 q=-1.0 Lsize=     164KiB time=00:00:00.04 bitrate=28856.7kbits/s speed=0.0248x elapsed=0:00:01.87    
+
+[libx264 @ 0000000002811840] frame I:1     Avg QP: 3.13  size:   224
+
+[libx264 @ 0000000002811840] frame P:12    Avg QP:18.21  size:  5796
+
+[libx264 @ 0000000002811840] frame B:27    Avg QP:18.03  size:  3520
+
+[libx264 @ 0000000002811840] consecutive B-frames:  2.5% 20.0%  7.5% 70.0%
+
+[libx264 @ 0000000002811840] mb I  I16..4: 100.0%  0.0%  0.0%
+
+[libx264 @ 0000000002811840] mb P  I16..4: 11.4% 37.2%  0.9%  P16..4: 18.2%  1.4%  1.0%  0.0%  0.0%    skip:30.0%
+
+[libx264 @ 0000000002811840] mb B  I16..4: 11.1%  4.2%  0.0%  B16..8:  9.2%  0.8%  0.0%  direct:25.6%  skip:49.1%  L0:49.3% L1:41.0% BI: 9.8%
+
+[libx264 @ 0000000002811840] 8x8 transform intra:50.6% inter:80.0%
+
+[libx264 @ 0000000002811840] coded y,uvDC,uvAC intra: 5.3% 25.5% 0.8% inter: 2.7% 32.8% 0.0%
+
+[libx264 @ 0000000002811840] i16 v,h,dc,p: 57% 21%  8% 15%
+
+[libx264 @ 0000000002811840] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 47% 19% 30%  1%  1%  1%  1%  0%  0%
+
+[libx264 @ 0000000002811840] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 56% 23%  7%  2%  3%  2%  3%  2%  3%
+
+[libx264 @ 0000000002811840] i8c dc,h,v,p: 68% 15% 16%  1%
+
+[libx264 @ 0000000002811840] Weighted P-Frames: Y:83.3% UV:66.7%
+
+[libx264 @ 0000000002811840] ref P L0: 97.7%  2.3%
+
+[libx264 @ 0000000002811840] ref B L0: 86.6% 13.4%
+
+[libx264 @ 0000000002811840] ref B L1: 93.4%  6.6%
+
+[libx264 @ 0000000002811840] kb/s:988.92
+
+[aac @ 000000000290e200] Qavg: 65536.000
+
+Exiting normally, received signal 15.
+

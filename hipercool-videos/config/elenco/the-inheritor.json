@@ -1,0 +1,117 @@
+{
+ "_leia": "Vozes fixas desta obra (bin/elenco.py). Pode editar à mão: edge = {voice, rate, pitch} (vozes em EDGE_F/EDGE_M; PROIBIDAS: Antonio, Francisca, Isabella); gemini = nome da voz. papel: protagonista | par | personagem | figurante. apelidos = outros nomes que a IA usa. 15/10: gemini = as vozes que a obra já tinha no registro antigo (re-render no Gemini não muda nada).",
+ "obra": "the-inheritor",
+ "narrador": {
+  "genero": "F",
+  "edge": {
+   "voice": "pt-BR-ThalitaMultilingualNeural",
+   "rate": "+5%",
+   "pitch": "+0Hz"
+  },
+  "gemini": "Kore"
+ },
+ "personagens": {
+  "Joo Inhyuk": {
+   "papel": "protagonista",
+   "genero": "M",
+   "apelidos": [
+    "Inhyuk",
+    "Joo",
+    "Joo In-hyuk",
+    "In-hyuk"
+   ],
+   "edge": {
+    "voice": "en-US-AndrewMultilingualNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz"
+   },
+   "gemini": "Sadachbia"
+  },
+  "Noh Yeseul": {
+   "papel": "par",
+   "genero": "F",
+   "apelidos": [
+    "Yeseul",
+    "Noh",
+    "Ye-seul"
+   ],
+   "edge": {
+    "voice": "en-US-AvaMultilingualNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz"
+   },
+   "gemini": "Leda"
+  },
+  "Professora": {
+   "papel": "personagem",
+   "genero": "F",
+   "apelidos": [
+    "Han Sihyun",
+    "Sihyun",
+    "Professora Han",
+    "Han Si-hyun"
+   ],
+   "edge": {
+    "voice": "de-DE-SeraphinaMultilingualNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz"
+   },
+   "gemini": "Aoede"
+  },
+  "velhote|M": {
+   "papel": "figurante",
+   "genero": "M",
+   "apelidos": [],
+   "edge": {
+    "voice": "it-IT-GiuseppeMultilingualNeural",
+    "rate": "-6%",
+    "pitch": "+12Hz"
+   },
+   "gemini": "Algenib"
+  },
+  "jovem|M": {
+   "papel": "figurante",
+   "genero": "M",
+   "apelidos": [],
+   "edge": {
+    "voice": "ko-KR-HyunsuMultilingualNeural",
+    "rate": "-4%",
+    "pitch": "-14Hz"
+   },
+   "gemini": "Puck"
+  },
+  "Vizinha": {
+   "papel": "personagem",
+   "genero": "F",
+   "apelidos": [],
+   "edge": {
+    "voice": "en-US-EmmaMultilingualNeural",
+    "rate": "+0%",
+    "pitch": "+0Hz"
+   },
+   "gemini": "Achernar"
+  },
+  "homem desconhecido|M": {
+   "papel": "figurante",
+   "genero": "M",
+   "apelidos": [],
+   "edge": {
+    "voice": "it-IT-GiuseppeMultilingualNeural",
+    "rate": "+18%",
+    "pitch": "+6Hz"
+   },
+   "gemini": "Orus"
+  },
+  "mulher desconhecida|F": {
+   "papel": "figurante",
+   "genero": "F",
+   "apelidos": [],
+   "edge": {
+    "voice": "pt-BR-FranciscaNeural",
+    "rate": "-14%",
+    "pitch": "+20Hz"
+   },
+   "gemini": "Sulafat"
+  }
+ }
+}

@@ -1,0 +1,178 @@
+{
+ "_leia": "Banco de palavras de busca pro agente de SEO (bin/seo.py). Fonte: autocompletar da busca do YouTube em pt-BR (suggestqueries, 15/10/2026) + lista do dono. Título NUNCA leva o nome da obra (risco de direitos autorais): provocação + o máximo de palavras buscadas que tenham a ver com a história. Gêneros da obra em config/fila.json obras[].generos. Atualize rodando a pesquisa de novo (docs/seo_titulos.md).",
+ "sempre": ["manhwa", "manhwa recap", "resumo manhwa", "manhwa completo", "manhwa dublado", "manhwa recap pt br", "recap manhwa português"],
+ "padroes_reais": [
+  "ele foi humilhado mas se tornou o mais forte",
+  "ele foi humilhado por ser pobre / fraco / feio",
+  "ele foi humilhado e traído mas voltou como o bilionário mais cobiçado",
+  "ele foi humilhado mas ganhou um poder infinito e agora todas elas querem ele",
+  "ele foi traído pela namorada / pela família",
+  "ele reencarnou como vilão / dragão / monstro rank SSS",
+  "ele despertou o sistema de dinheiro infinito",
+  "ele despertou a pior classe SSS",
+  "ele despertou o poder de roubar as habilidades mais fortes",
+  "ele voltou no tempo",
+  "ele escondia ser o homem mais rico do mundo",
+  "manhwa romance completo",
+  "manhwa harem romance"
+ ],
+ "generos": {
+  "romance": ["romance", "manhwa romance", "romance completo", "namorada", "casamento", "primeiro amor", "garota", "ciúmes", "triângulo amoroso"],
+  "harem": ["harém", "manhwa harem", "todas elas querem ele", "garotas", "mais cobiçado", "harem romance"],
+  "drama": ["humilhado", "traído", "segredo", "proibido", "vingança", "família", "chocante"],
+  "faculdade": ["faculdade", "universidade", "professora", "aluno", "romance escolar"],
+  "escolar": ["romance escolar", "escola", "colegial", "academia", "bullying"],
+  "familia": ["família", "herança", "herdeiro", "pai", "traído pela família"],
+  "fantasia": ["magia", "mago", "outro mundo", "isekai", "dragão", "rei demônio", "espada", "academia de magia"],
+  "acao": ["luta", "o mais forte", "overpower", "invencível", "poder infinito", "rank SSS", "batalha"],
+  "sistema": ["sistema", "despertou o sistema", "sistema de dinheiro", "nível máximo", "habilidade", "classe SSS", "talento"],
+  "reencarnacao": ["reencarnou", "reencarnação", "reencarnou como vilão", "isekai", "outro mundo", "renasceu"],
+  "regressao": ["voltou no tempo", "voltou ao passado", "regressão", "segunda chance"],
+  "apocalipse": ["apocalipse", "apocalipse zumbi", "fim do mundo", "sobrevivência", "masmorra", "caçador"],
+  "murim": ["murim", "cultivo", "artes marciais", "clã", "espadachim", "seita"],
+  "rico": ["bilionário", "milionário", "o homem mais rico do mundo", "magnata", "dinheiro infinito", "CEO"],
+  "genio": ["gênio", "talento", "o gênio que", "prodígio"],
+  "selado": ["selado", "poder selado", "poder escondido", "subestimado", "fracassado", "lixo"],
+  "realeza": ["rei", "imperador", "príncipe", "duque", "vilã", "princesa"]
+ },
+ "estilos_titulo": {
+  "busca": "frase no padrão do que o público digita (ver padroes_reais), com 3-5 palavras buscadas da história, tom de 'ele foi X mas Y'",
+  "provocacao": "provocação sensual/curiosa (ex.: ELE VIU TUDO, HERANÇA PROIBIDA, ELA É SUA?!) + 2-3 palavras buscadas da história",
+  "curiosidade": "pergunta ou revelação chocante do capítulo + 2-3 palavras buscadas da história",
+  "ate_y": "molde 'Ele era X… até Y' (Solem_8037, SR.GUUGOU, IkiManhwa, oporaodacidadela: 'He was a lonely NERD… until he became the JUDGE of a Waifu Battle Royale'): condição baixa do prota + reticências + a virada do capítulo, 2-3 palavras buscadas em MAIÚSCULAS",
+  "segunda_pessoa": "título falando COM quem assiste, como se fosse com ele (omelhormanhwa: 'Você Está Sendo Caçado Pelo Próprio Sistema E Não Sabe!'): 'Você ...' + a premissa do capítulo + 2-3 palavras buscadas"
+ },
+ "_leia_idiomas": "Mesmo metodo do pt (autocompletar da busca do YouTube, suggestqueries), mas com hl/gl e sementes de cada canal (16/10/2026). Existe porque o banco pt entrava no prompt de SEO de todas as linguas: saiu Short em hindi com a tag \"manhwa recap pt br\" e titulo em hindi com a palavra \"Completo\". So entram termos que o autocompletar daquele idioma devolveu. Em th a grafia que o YouTube usa e \u0e21\u0e31\u0e07\u0e2e\u0e27\u0e32 (nao \u0e21\u0e31\u0e19\u0e2e\u0e27\u0e32). O it tem pouquissimo volume nesse nicho: genero sem termo nenhum ficou de fora (escolar, familia, faculdade, reencarnacao, realeza) e o mesmo vale pra harem/selado em th e faculdade em vi. Refazer com docs/seo_titulos.md.",
+ "idiomas": {
+  "hi": {
+   "sempre": ["manhwa recap hindi", "manhwa explained in hindi", "manhwa hindi explanation", "manhwa in hindi explain", "manhwa recap in hindi dubbed", "manhwa recap full hindi", "manhwa hindi", "manhwa recap"],
+   "padroes_reais": ["manhwa explained in hindi poor to rich", "weak to strong manhwa explained in hindi", "manhwa explained in hindi reborn as baby", "manhwa recap reincarnation in hindi", "manhwa recap system hindi", "manhwa with op mc explained in hindi", "school revenge manhwa explained in hindi", "family revenge manhwa explained in hindi", "girlfriend revenge manhwa explained in hindi", "manhwa recap apocalypse hindi", "manhwa recap in hindi harem", "cultivation manhwa recap in hindi"],
+   "generos": {
+    "romance": ["manhwa romance", "manhwa romance school", "manhwa romance fantasy", "manhwa romance modern", "manhwa explained in hindi love story", "manhwa romance recap"],
+    "harem": ["manhwa harem", "manhwa harem op mc", "manhwa harem system", "manhwa harem hindi", "manhwa harem recap", "manhwa harem academy", "manhwa recap in hindi harem"],
+    "drama": ["manhwa revenge", "manhwa revenge on bullies", "manhwa revenge on family", "manhwa revenge on ex", "manhwa explained in hindi revenge", "manhwa revenge school", "manhwa family regret", "psycho revenge manhwa explained in hindi"],
+    "faculdade": ["manhwa college romance", "manhwa college"],
+    "escolar": ["manhwa school", "manhwa school bully", "manhwa school revenge", "manhwa school fight", "manhwa school life", "manhwa school love story", "manhwa explained in hindi school bully", "high school revenge manhwa explained in hindi"],
+    "familia": ["manhwa family", "manhwa family revenge", "manhwa family regret", "family manhwa explained in hindi", "manhwa reincarnation noble family", "manhwa strongest family"],
+    "fantasia": ["manhwa magic", "manhwa magic academy", "manhwa magic school", "manhwa magic hindi", "manhwa magic swordsman", "manhwa magic romance", "manhwa magic reincarnation"],
+    "acao": ["manhwa strongest", "manhwa strongest mc", "manhwa op mc", "manhwa strongest swordsman", "manhwa strongest hunter", "manhwa king of violence", "manhwa with op mc explained in hindi"],
+    "sistema": ["manhwa system", "manhwa system leveling", "manhwa system money", "manhwa system rich", "manhwa system harem", "manhwa system cultivation", "manhwa explained in hindi system", "manhwa system murim"],
+    "reencarnacao": ["manhwa reincarnation", "manhwa reincarnation as a villain", "manhwa reincarnation as a baby", "manhwa reincarnation revenge", "manhwa explained in hindi reborn", "reborn manhwa hindi", "manhwa reincarnation in another world"],
+    "regressao": ["manhwa time travel", "time travel manhwa explained in hindi", "manhwa recap time travel", "manhwa murim regression", "manhwa apocalypse regression", "manhwa strongest player 100th regression"],
+    "apocalipse": ["manhwa apocalypse", "manhwa apocalypse hindi", "manhwa apocalypse zombie", "manhwa apocalypse system", "manhwa apocalypse survival", "manhwa apocalypse harem", "manhwa recap apocalypse hindi", "manhwa apocalypse betrayed"],
+    "murim": ["manhwa murim", "manhwa murim explained in hindi", "manhwa murim system", "manhwa murim martial arts", "manhwa murim demon", "cultivation manhwa recap in hindi", "manhwa system cultivation"],
+    "rico": ["manhwa rich mc", "manhwa rich system", "manhwa rich mc system", "manhwa richest person", "manhwa explained in hindi poor to rich", "manhwa system money", "manhwa rich girl poor boy"],
+    "genio": ["manhwa genius mc", "manhwa genius", "manhwa magic academy", "manhwa magic academy genius blinker", "manhwa genius actor"],
+    "selado": ["manhwa weak to strong", "manhwa weak to strong mc", "weak to strong manhwa explained in hindi", "manhwa mc weak to strong school", "weak to strong murim manhwa", "manhwa strongest abandoned son", "manhwa strongest level 1"],
+    "realeza": ["manhwa king", "manhwa kingdom", "manhwa king hindi", "manhwa kingdom building", "manhwa king of the arena", "manhwa kingdom romance", "manhwa reincarnation prince"]
+   }
+  },
+  "id": {
+   "sempre": ["alur cerita manhwa", "manhwa recap indonesia", "rangkuman manhwa", "review manhwa", "manhwa recap bahasa indonesia", "manhwa recap sub indo", "alur cerita manhwa full", "alur cerita manhwa sampai tamat"],
+   "padroes_reais": ["dia dihina miskin ternyata kaya", "dia dihina dan dicerai istri kini dia ceo", "dia dihina sebagai sampah", "dia bereinkarnasi ke dunia fantasi dan menjadi penjahat ulung", "dikhianati istrinya dia bereinkarnasi dan membalikkan takdir", "keluarga hancur dia kembali ke masa lalu", "alur cerita dia kembali ke masa lalu untuk membalas dendam", "terkuat di dunia tapi tak bisa selamatkan keluarga", "mendapatkan sistem kekayaan", "manhwa dikira lemah ternyata overpower", "manhwa pura pura lemah padahal overpower", "manhwa kembali ke masa lalu untuk balas dendam"],
+   "generos": {
+    "romance": ["manhwa romantis", "manhwa romantis kiss", "manhwa romantis kerajaan", "rekomendasi manhwa romantis", "cerita manhwa romantis", "alur cerita manhwa romantis"],
+    "harem": ["manhwa harem", "manhwa harem op mc", "manhwa harem system", "manhwa harem terbaik", "manhwa harem isekai", "manhwa harem school", "manhwa harem romance"],
+    "drama": ["manhwa balas dendam", "manhwa balas dendam bully", "manhwa balas dendam sekolah", "manhwa balas dendam ke mantan", "manhwa balas dendam sistem", "manhwa dibuang keluarga", "balas dendam karena dibully"],
+    "faculdade": ["manhwa kuliah", "manhwa kuliah di luar negeri"],
+    "escolar": ["manhwa sekolah", "manhwa sekolah overpower", "manhwa sekolah bully", "manhwa sekolah balas dendam", "manhwa sekolah sihir", "manhwa anak sekolahan", "manhwa petarung sekolah", "manhwa sekolah mc op"],
+    "familia": ["manhwa keluarga", "manhwa keluarga bangsawan", "manhwa keluarga kerajaan", "manhwa dibuang keluarga", "alur cerita manhwa keluarga"],
+    "fantasia": ["manhwa sihir", "manhwa akademi sihir", "manhwa sekolah sihir", "manhwa penyihir", "manhwa jenius sihir", "manhwa sihir terlarang", "manhwa penyihir terkuat"],
+    "acao": ["manhwa terkuat", "manhwa overpower", "alur cerita manhwa overpower", "manhwa hunter terkuat", "manhwa assassin terkuat", "manhwa mage terkuat", "manhwa kultivator terkuat"],
+    "sistema": ["manhwa sistem", "manhwa sistem kekayaan", "manhwa sistem op", "manhwa sistem kaya", "manhwa sistem harem", "manhwa sistem leveling", "manhwa sistem serangan balik", "manhwa sistem terkuat"],
+    "reencarnacao": ["manhwa reinkarnasi", "manhwa reinkarnasi overpower", "manhwa reinkarnasi jadi bangsawan", "manhwa reinkarnasi jadi villain", "manhwa reinkarnasi balas dendam", "manhwa reinkarnasi jadi monster", "manhwa reinkarnasi jadi naga", "manhwa reinkarnasi ke masa lalu"],
+    "regressao": ["manhwa kembali ke masa lalu", "manhwa kembali ke masa lalu untuk balas dendam", "manhwa kembali ke masa lalu sebelum kiamat", "manhwa mc kembali ke masa lalu", "kembali ke masa lalu untuk mengubah masa depan"],
+    "apocalipse": ["manhwa kiamat zombie", "manhwa survival zombie", "manhwa zombie king", "alur cerita manhwa apocalypse", "manhwa apocalypse", "review manhwa apocalypse"],
+    "murim": ["manhwa murim", "manhwa murim overpower", "manhwa murim system", "manhwa murim balas dendam", "manhwa murim reinkarnasi", "manhwa murim login", "manhwa murim mc op"],
+    "rico": ["manhwa miliarder", "manhwa sistem miliarder", "manhwa jadi miliarder", "manhwa kaya raya", "manhwa orang kaya", "manhwa cucu miliarder", "manhwa sistem kekayaan", "manhwa bisnis"],
+    "genio": ["manhwa jenius", "manhwa jenius investasi", "manhwa jenius bela diri", "manhwa jenius sihir", "manhwa genius academy", "manhwa genius mc"],
+    "selado": ["manhwa lemah jadi kuat", "manhwa dikira lemah", "manhwa dikira lemah ternyata overpower", "manhwa pura pura lemah", "manhwa mc lemah", "manhwa hunter lemah", "manhwa pangeran lemah"],
+    "realeza": ["manhwa raja", "manhwa raja iblis", "manhwa raja neraka", "manhwa raja bayangan", "manhwa keluarga kerajaan", "manhwa raja naga", "manhwa raja harem"]
+   }
+  },
+  "it": {
+   "sempre": ["manhwa italiano", "manhwa recap ita", "manhwa ita", "riassunto manga italiano", "manga riassunto completo in italiano"],
+   "padroes_reais": ["manhwa più forte al mondo", "manhwa ritorno al passato ita", "manhwa arti marziali in italiano", "manhwa miliardario in italiano", "manhwa vendetta italiano", "manhwa sistema italiano", "manhwa romance italiano"],
+   "generos": {
+    "romance": ["manhwa romantico", "manhwa romance italiano"],
+    "harem": ["manhwa harem", "manhwa harem isekai", "manhwa harem school", "manhwa harem apocalypse"],
+    "drama": ["manhwa vendetta italiano", "manhwa vendetta italiana"],
+    "fantasia": ["manhwa magia", "manga magia"],
+    "acao": ["manhwa più forte al mondo", "manhwa più forte"],
+    "sistema": ["manhwa sistema", "manhwa sistema italiano"],
+    "regressao": ["manhwa ritorno al passato ita"],
+    "apocalipse": ["manhwa apocalypse", "manhwa apocalypse zombie", "manhwa apocalypse romance", "manhwa apocalypse system"],
+    "murim": ["manhwa arti marziali ita", "manhwa arti marziali in italiano"],
+    "rico": ["manhwa miliardario in italiano"],
+    "genio": ["manhwa genio", "manhwa genio militare"],
+    "selado": ["manhwa debolezza"]
+   }
+  },
+  "ru": {
+   "sempre": ["манхва", "манхва пересказ", "пересказ манхвы", "манхва озвучка", "манхва обзор", "манхва озвучка все главы"],
+   "padroes_reais": ["его унижали в школе отправили в кому но он вернулся чтобы отомстить", "его унижали и избивали но он получил кольцо бесконечности и стал богом", "его унижали всей семьёй но переродившись всё изменилось", "он переродился в тело отброса", "он переродился в младенца и получил сильнейшую систему", "она предала его но он вернулся в прошлое", "его предала девушка но он вернулся в прошлое", "он обанкротился но получил систему богатства", "он был нищим но получил систему", "он был слабаком но получил систему", "после предательства сестер он получил систему"],
+   "generos": {
+    "romance": ["манхва романтика", "манхва романтика школа", "манхва романтика исекай", "манхва про любовь", "манхва средневековье романтика", "манхва пересказ романтика"],
+    "harem": ["манхва гарем", "манхва гаремник", "манхва гарем злодея", "манхва пересказ гарем"],
+    "drama": ["манхва месть", "манхва месть аристократа", "манхва месть психопата", "манги про месть", "манхва пересказ про драки"],
+    "faculdade": ["манхва университета"],
+    "escolar": ["манхва школа", "манхва школа романтика", "манхва школа драки", "манхва старшая школа чеболей", "манхва озвучка школа"],
+    "familia": ["манхва про семью", "манхва про брак", "манхва про детей", "манхва семья тиранов одержима мной"],
+    "fantasia": ["манхва магия", "манхва сильнейший профессор магии", "манхва гений магической академии"],
+    "acao": ["манхва сильнейший", "манхва сильнейший мечник", "манхва сильнейший по выживанию", "манхва где гг сильнейший", "манхва сильнейший во все времена", "манхва гг имба"],
+    "sistema": ["манхва система", "манхва система богатства", "манхва система денег", "манхва система всемогущего дизайнера", "манхва абсолютная система богатства", "манхва система актера", "манхва озвучка система"],
+    "reencarnacao": ["манхва перерождение", "манхва перерождение в другом мире", "манхва перерождение в монстра", "манхва перерождение в злодейку", "манхва про перерождение с системой", "манхва перерождение в ребенка", "манхва озвучка перерождение"],
+    "regressao": ["он вернулся в прошлое", "вернулся в прошлое", "она предала его но он вернулся в прошлое"],
+    "apocalipse": ["манхва апокалипсис", "манхва про зомби апокалипсис", "манхва апокалипсис наступил", "манхва апокалипсис жара", "манхва пересказ апокалипсис", "манхва пересказ зомби"],
+    "murim": ["манхва мурим", "манхва озвучка мурим", "манхва сильнейший мечник"],
+    "rico": ["манхва миллиардер", "манга про миллиардера", "манхва про бизнес", "манхва система богатства", "манхва система денег"],
+    "genio": ["манхва гений", "манхва гений магической академии"],
+    "selado": ["манхва слабый герой", "манхва где гг слабый но становится сильным", "он был слабаком но получил систему"],
+    "realeza": ["манхва король", "манхва король демонов", "манхва король монстров", "манхва король меча", "манхва король гоблинов", "манхва король рыцарь вернувшийся с богом"]
+   }
+  },
+  "th": {
+   "sempre": ["สปอยมังฮวา", "สรุปมังฮวา", "มังฮวา", "สปอยมังงะ", "มังฮวาเกาหลี", "สปอยมังฮวา จบ", "สปอยมังฮวาเกาหลี"],
+   "padroes_reais": ["เขาเกิดใหม่เป็นวายร้าย", "เขาเกิดใหม่เป็นวายร้าย โค่นฮีโร่ทั้งหมด", "เขาเกิดใหม่พร้อมระบบโชคลาภ", "เขาเกิดใหม่ในยุคโบราณ", "ได้รับระบบเศรษฐี", "ได้รับระบบเกมเปลี่ยนชะตาชีวิต", "ได้รับระบบกอบกู้ตระกูล", "ย้อนเวลากลับไปแก้ไขอดีต", "มังฮวา วันสิ้นโลก ได้ยินเสียงสิ่งของ"],
+   "generos": {
+    "romance": ["มังฮวา โรแมนติก", "มังฮวา โรแมนซ์แฟนตาซี", "สปอยมังฮวาโรแมนติก", "สปอยมังฮวารัก"],
+    "drama": ["มังฮวา แก้แค้น", "มังงะเเก้เเค้น"],
+    "faculdade": ["มังงะมหาลัย"],
+    "escolar": ["มังฮวา โรงเรียน", "มังฮวา โรงเรียนเวทมนต์", "มังงะในรั้วโรงเรียน"],
+    "familia": ["มังงะ ครอบครัว"],
+    "fantasia": ["มังฮวา เวทมนตร์", "มังฮวา โรงเรียนเวทมนต์", "มังงะ เวทย์มนต์"],
+    "acao": ["มังฮวาพระเอกเทพ", "สปอยมังฮวาต่อสู้", "แข็งแกร่งที่สุดในโลก", "มังฮวา ฮันเตอร์"],
+    "sistema": ["มังฮวา ระบบ", "ได้รับระบบ", "ได้รับระบบเศรษฐี"],
+    "reencarnacao": ["มังฮวา เกิดใหม่", "มังฮวา เกิดใหม่เป็นตัวร้าย", "มังฮวาเกาหลี เกิดใหม่", "สปอยมังฮวา เกิดใหม่", "เขาเกิดใหม่เป็นวายร้าย"],
+    "regressao": ["มังฮวา ย้อนเวลา", "ย้อนเวลากลับไปแก้ไขอดีต"],
+    "apocalipse": ["มังฮวา วันสิ้นโลก", "มังฮวา ซอมบี้", "สปอยมังงะวันสิ้นโลก", "มังฮวา วันสิ้นโลกซอมบี้"],
+    "murim": ["มังฮวา มูริม", "มังฮวา ยุทธภพ", "มังงะ มูริม"],
+    "rico": ["มังฮวา มหาเศรษฐี", "สปอยมังงะพระเอกรวย", "ได้รับระบบเศรษฐี"],
+    "genio": ["มังฮวา อัจฉริยะ", "มังงะนักเรียนอัจฉริยะ"],
+    "realeza": ["มังฮวา ราชาดาบ", "มังงะ ราชวงศ์", "มังงะ อาณาจักร"]
+   }
+  },
+  "vi": {
+   "sempre": ["tóm tắt manhwa", "review manhwa", "manhwa recap", "tóm tắt truyện tranh manhwa", "review manhwa full", "manhwa vietsub", "manhwa hay"],
+   "padroes_reais": ["bị coi thường là phế vật không thể thức tỉnh", "bị coi thường vì thân phận hạ đẳng", "bị coi thường là nhà nghèo", "bị coi thường huỷ hôn ước", "quay ngược thời gian trở về quá khứ", "mạnh nhất thế giới nhưng giả danh hạng thấp", "nhận được hệ thống thần hào", "nhận được hệ thống giữa lúc khốn cùng", "nhận được hệ thống game thay đổi vận mệnh", "nhận được hệ thống tiêu tiền"],
+   "generos": {
+    "romance": ["manhwa ngôn tình", "manhwa ngôn tình học đường", "manhwa ngôn tình tổng tài", "manhwa ngôn tình chiếm hữu", "manhwa ngôn tình hiện đại", "manhwa ngôn tình hoàng gia"],
+    "harem": ["manhwa harem", "manhwa harem ngược", "manhwa harem school", "manhwa harem isekai", "manhwa harem romance"],
+    "drama": ["manhwa trả thù", "manhwa trả thù học đường", "review manhwa trả thù"],
+    "escolar": ["manhwa học đường", "manhwa học đường đánh nhau", "manhwa học đường tình cảm", "manhwa học đường hệ thống", "manhwa học đường hàn quốc", "manhwa học viện"],
+    "familia": ["manhwa gia đình", "manhwa cha con"],
+    "fantasia": ["manhwa ma pháp", "manhwa học viện ma pháp", "manhwa nữ ma pháp"],
+    "acao": ["manhwa mạnh nhất thế giới", "manhwa mạnh nhất", "mạnh nhất thế giới tu tiên", "manhwa võ thuật"],
+    "sistema": ["manhwa hệ thống", "manhwa hệ thống làm giàu", "truyện manhwa hệ thống", "manhwa học đường hệ thống"],
+    "reencarnacao": ["manhwa tái sinh", "manhwa chuyển sinh", "review manhwa tái sinh"],
+    "regressao": ["manhwa hồi quy", "review manhwa hồi quy", "manhwa hoạn quan hồi quy", "quay ngược thời gian trở về quá khứ"],
+    "apocalipse": ["manhwa tận thế", "manhwa tận thế zombie", "manhwa ngày tận thế", "manhwa tận thế băng giá", "manhwa mạt thế"],
+    "murim": ["manhwa võ lâm", "manhwa kiếm hiệp", "manhwa võ thuật", "mạnh nhất thế giới tu tiên"],
+    "rico": ["manhwa tài phiệt", "manhwa kinh doanh", "tỷ phú", "nhận được hệ thống thần hào"],
+    "genio": ["manhwa thiên tài", "manhwa thiên tài tốc biến", "manhwa giấu nghề", "manhwa main giấu nghề"],
+    "selado": ["manhwa giấu nghề", "bị coi thường là phế vật", "mạnh nhất thế giới nhưng giả danh hạng thấp"],
+    "realeza": ["manhwa hoàng gia", "manhwa vua thăng cấp", "tóm tắt truyện tranh manhwa hoàng gia", "manhwa ngôn tình hoàng gia"]
+   }
+  }
+ }
+}

@@ -1,0 +1,196 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-40-19.mp4",
+ "duration": 84.966667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 720,
+  "has_webcam": true,
+  "contrast": 64.8,
+  "trimmed": {},
+  "divider": 361,
+  "webcam": [
+   0,
+   0,
+   720,
+   361
+  ],
+  "content": [
+   0,
+   361,
+   720,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto e com poucas reações marcantes sobre anime de romance da temporada, mas funcional como Short rápido.",
+  "topic": "React a anime de romance da temporada",
+  "channel": "inovare_french",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 84.966667,
+    "hook": "ANIME DE ROMANCE NOVO DA TEMPORADA!",
+    "title": "Esse anime de romance vai dar NAMORO? 😍🔥 #shorts #animeromance",
+    "description": "O criador reage a um novo anime de romance da temporada e já prevê: vai dar namoro! 💕\nVocê também ama esse tipo de anime? Comenta aí qual é o seu favorito!\nSegue pra mais reacts de romance e momentos fofos de anime!\n\n#shorts #react #anime #romance #animeromance #temporada #casais #fofo #animenovo #otaku #weeb #reactanime #momentosfofosdeanime",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#romance",
+     "#animeromance",
+     "#temporada",
+     "#casais",
+     "#fofo",
+     "#animenovo",
+     "#otaku"
+    ],
+    "tags": [
+     "react",
+     "anime romance",
+     "anime da temporada",
+     "romance anime",
+     "anime novo",
+     "vai dar namoro",
+     "react anime",
+     "momentos fofos anime",
+     "casal anime",
+     "anime legendado",
+     "otaku",
+     "weeb",
+     "anime 2025",
+     "react romance",
+     "anime fofo",
+     "shorts anime",
+     "anime brasil",
+     "cenas romanticas anime"
+    ],
+    "keywords": [
+     {
+      "t": 30.0,
+      "text": "ROMANCE",
+      "emoji": "💕"
+     },
+     {
+      "t": 45.24,
+      "text": "BORRADO",
+      "emoji": "😂"
+     },
+     {
+      "t": 52.56,
+      "text": "VAI DAR NAMORO",
+      "emoji": "😍"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 45.24,
+      "type": "laugh"
+     },
+     {
+      "t": 52.56,
+      "type": "love"
+     },
+     {
+      "t": 78.56,
+      "type": "love"
+     }
+    ],
+    "memes": [
+     {
+      "t": 52.56,
+      "id": 8
+     },
+     {
+      "t": 78.56,
+      "id": 147
+     }
+    ],
+    "cta": "Segue pra mais react!",
+    "pinned_comment": "Qual anime de romance da temporada vocês estão acompanhando? 💕",
+    "title_alternatives": [
+     "Reagindo ao anime de romance mais FOFO da temporada 😍💕 #shorts #anime",
+     "Já sei que VAI DAR NAMORO nesse anime! 💘🔥 #shorts #animeromance"
+    ],
+    "mood": "romantic_sexy",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "inovare_french",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_40_19\\2026_10_07_16_40_19.mp4",
+   "duration": 25.77208400000005,
+   "keeps": 14,
+   "meta": {
+    "hook": "ANIME DE ROMANCE NOVO DA TEMPORADA!",
+    "title": "Esse anime de romance vai dar NAMORO? 😍🔥 #shorts #animeromance",
+    "description": "O criador reage a um novo anime de romance da temporada e já prevê: vai dar namoro! 💕\nVocê também ama esse tipo de anime? Comenta aí qual é o seu favorito!\nSegue pra mais reacts de romance e momentos fofos de anime!\n\n#shorts #react #anime #romance #animeromance #temporada #casais #fofo #animenovo #otaku #weeb #reactanime #momentosfofosdeanime",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#romance",
+     "#animeromance",
+     "#temporada",
+     "#casais",
+     "#fofo",
+     "#animenovo",
+     "#otaku"
+    ],
+    "tags": [
+     "react",
+     "anime romance",
+     "anime da temporada",
+     "romance anime",
+     "anime novo",
+     "vai dar namoro",
+     "react anime",
+     "momentos fofos anime",
+     "casal anime",
+     "anime legendado",
+     "otaku",
+     "weeb",
+     "anime 2025",
+     "react romance",
+     "anime fofo",
+     "shorts anime",
+     "anime brasil",
+     "cenas romanticas anime"
+    ],
+    "cta": "Segue pra mais react!",
+    "mood": "romantic_sexy",
+    "music": true,
+    "pinned_comment": "Qual anime de romance da temporada vocês estão acompanhando? 💕",
+    "title_alternatives": [
+     "Reagindo ao anime de romance mais FOFO da temporada 😍💕 #shorts #anime",
+     "Já sei que VAI DAR NAMORO nesse anime! 💘🔥 #shorts #animeromance"
+    ],
+    "work": null,
+    "channel": "inovare_french"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_40_19\\2026_10_07_16_40_19_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Love Aside - Patrick Patrikios.mp3",
+   "removed_pct": 69.7,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 25.77,
+    "lufs": -13.9
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 463.0
+}

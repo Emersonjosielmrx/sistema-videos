@@ -1,0 +1,56 @@
+{
+ "modelo": "gemini-4-argon",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T20:44:21",
+ "segundos": 213,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T20:44:21",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "gemini-4-argon",
+   "decisor": "gemini-4-argon"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "A variante 'dono_tres' mantém o apresentador no mesmo enquadramento nos 3 blocos (cenas 0 a 3, mais de 26s seguidos), sem alternar com tela de demonstração do produto ou simulação de WhatsApp, o que se repete com notas baixas no histórico (5.5 a 6.5 em 3 vídeos com 'dono_tres').",
+    "prova": "dados.json formato 'dono_tres' / historico_notas (3 vídeos com formato dono_tres) / quadros 1 a 11 da folha.jpg / júri movimento e diretor graves nas cenas 1 e 2",
+    "sugestao": "Diminuir o peso da variante 'dono_tres' em 'pesos_variantes' ou desligá-la em 'variantes_desligadas', priorizando formatos que intercalem o dono com telas ou simulações do produto.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "O conjunto de faixa superior ('CONTATOS PARADOS NA BASE?') mais a pílula de etapa ('1 O problema', '2 Como funciona', '3 O resultado') encosta diretamente no topo da cabeça/cabelo do apresentador.",
+    "prova": "quadros 3 a 10 da folha.jpg / júri diretor cena 1",
+    "sugestao": "Aumentar 'folga_dono' (atualmente em 0.45) ou subir a posição da faixa superior e da pílula de etapa para abrir espaço acima do cabelo do apresentador.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Falta entrada de elementos visuais dinâmicos acompanhando a fala nas cenas longas do apresentador e no início do vídeo (movimento das cenas é alto, entre 10.14% e 14.18%, mas o júri sente falta de dinamismo visual e quebra de padrão).",
+    "prova": "dados.json juri.movimento (10.14% a 14.18% nas cenas 0 a 3) / júri diretor cena 0 e movimento cena 2",
+    "sugestao": "Testar a adição de elementos gráficos sincronizados com a fala (como pop-up de chamada WhatsApp ou selo visual nas cenas de explicação) ou aumentar levemente 'punchin_video' (atualmente 0.06).",
+    "repetido": true
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.3,
+    "motivo": "A variante 'dono_tres' mantém o apresentador no mesmo enquadramento nos 3 blocos sem mostrar tela ou demonstração do produto, repetindo notas baixas (5.5 a 6.5 em 3 vídeos).",
+    "prova": "dados.json formato 'dono_tres' / historico_notas (3 vídeos com formato dono_tres) / quadros 1 a 11 da folha.jpg / júri movimento e diretor graves nas cenas 1 e 2"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Ajustar a posição vertical da faixa superior e da pílula de etapa nas cenas do dono para abrir espaço acima da cabeça/cabelo do apresentador sem encostar nele.",
+    "motivo": "A faixa superior e a pílula de etapa encostam diretamente no topo do cabelo do apresentador.",
+    "prova": "quadros 3 a 10 da folha.jpg / júri diretor cena 1"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

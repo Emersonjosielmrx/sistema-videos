@@ -1,0 +1,21 @@
+{
+  "executado_em": "2026-10-21T21:21:26.380706+00:00",
+  "modo": "dry_run",
+  "resultados": {
+    "youtube": {
+      "modulo": "youtube",
+      "dry_run": true,
+      "total_contas": 73
+    },
+    "cloudflare": {
+      "modulo": "cloudflare",
+      "dry_run": true,
+      "total_contas": 73
+    },
+    "gemini": {
+      "modulo": "gemini",
+      "dry_run": true,
+      "total_contas": 73
+    }
+  }
+}

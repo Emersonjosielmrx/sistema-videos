@@ -1,0 +1,28 @@
+{
+ "formato": "teoria de anime com painéis + legendas word-by-word + música",
+ "descricao": "Vídeo de teoria sobre poder/lore de personagem usando painéis sequenciais do anime/manhwa com legendas destacando palavras-chave em amarelo, sem narração, só música de tensão.",
+ "replicavel": true,
+ "como_fazer": "1) Selecionar 4-6 painéis impactantes do manhwa (dos 86 mil disponíveis) que ilustrem a teoria; 2) Escrever roteiro da teoria em 3-5 frases curtas; 3) Gerar legendas com palavras-chave em amarelo usando overlays animados; 4) Adicionar zoom/movimento nos painéis com ffmpeg (ken burns effect); 5) Colocar trilha de suspense/épica das 341 disponíveis; 6) Renderizar em 9:16 com transições rápidas (2-3s por painel)",
+ "ferramentas": [
+  "ffmpeg",
+  "overlays animados",
+  "painéis manhwa",
+  "trilhas musicais"
+ ],
+ "fonte_de_material": "86 mil painéis de manhwa já disponíveis, seleção manual ou por LLM dos momentos-chave que sustentam a teoria",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "Teorias geram engajamento nos comentários e o formato word-by-word com painéis impactantes prende até o final por curiosidade",
+ "exemplo_roteiro": "ISSO MUDA TUDO SOBRE O YUJIRO...\nMAS QUANDO OLHOU\nOS SOLDADOS FICARAM\nPARALISADOS DE MEDO\nELE VIU O DEMON BACK\nDO AVÔ DELE TAMBÉM",
+ "nicho_canal": "manhwareact",
+ "tags": [
+  "teoria anime",
+  "demon back",
+  "lore",
+  "mistério",
+  "plot twist",
+  "baki"
+ ],
+ "video": "2026-10-07 13-48-56.mp4",
+ "data": "2026-10-12"
+}

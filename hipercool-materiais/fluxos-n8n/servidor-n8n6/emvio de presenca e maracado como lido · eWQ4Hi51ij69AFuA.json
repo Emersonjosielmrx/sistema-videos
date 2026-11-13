@@ -1,0 +1,366 @@
+{
+ "updatedAt": "2026-10-15T01:04:57.162Z",
+ "createdAt": "2026-10-15T01:02:19.741Z",
+ "id": "eWQ4Hi51ij69AFuA",
+ "name": "emvio de presenca e maracado como lido",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "inputSource": "passthrough"
+   },
+   "id": "252c2b66-1da2-4b15-bdd6-7aefbd85f24b",
+   "typeVersion": 1.1,
+   "name": "Start",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "position": [
+    -336,
+    -64
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "abf4f578-f820-4e06-a070-5e55fc9ea0ae",
+       "name": "message",
+       "value": "={{ $('Mensagem').item.json.message }}",
+       "type": "string"
+      },
+      {
+       "id": "6a26cdd8-76a1-4944-bad4-d280e9f2ba2f",
+       "name": "body_data_contextInfo_quotedMessage_conversation",
+       "value": "={{ $json.body.data.contextInfo.quotedMessage.conversation }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    288,
+    -80
+   ],
+   "id": "2624d3f9-a4a1-4199-97e5-c923c9e8cbde",
+   "name": "Return"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('unificador_de_dados_webhook_e_chat').first().json['url da evolution'] }}/chat/markread",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('unificador_de_dados_webhook_e_chat').first().json['chave do numero que vai emviar(api key)'] }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "{\"Id\":[\"AABBCCDD112233\",\"IIOOPPLL43332\"]\",\"Chat\":\"5491155553934.0:1@s.whatsapp.net\"}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -112,
+    -80
+   ],
+   "id": "1de63039-cad7-4ec2-bf7f-5f0a888c0fdf",
+   "name": "marca como lida",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('unificador_de_dados_webhook_e_chat').first().json['url da evolution'] }}/chat/presence",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Token",
+       "value": "={{ $('unificador_de_dados_webhook_e_chat').first().json['chave do numero que vai emviar(api key)'] }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "Phone",
+       "value": "={{ $('unificador_de_dados_webhook_e_chat').first().json.remoteJid }}"
+      },
+      {
+       "name": "State",
+       "value": "composing"
+      },
+      {
+       "name": "Media"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    112,
+    -80
+   ],
+   "id": "e03aaf4d-9a3e-4dba-927e-1cb5e57710de",
+   "name": "emvia presenca",
+   "onError": "continueRegularOutput"
+  }
+ ],
+ "connections": {
+  "marca como lida": {
+   "main": [
+    [
+     {
+      "node": "emvia presenca",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Start": {
+   "main": [
+    [
+     {
+      "node": "marca como lida",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "emvia presenca": {
+   "main": [
+    [
+     {
+      "node": "Return",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": {},
+ "versionId": "f58aeefd-0efc-4587-9985-6c634975653f",
+ "activeVersionId": "f58aeefd-0efc-4587-9985-6c634975653f",
+ "versionCounter": 13,
+ "triggerCount": 0,
+ "shared": [
+  {
+   "updatedAt": "2026-10-15T01:02:19.741Z",
+   "createdAt": "2026-10-15T01:02:19.741Z",
+   "role": "workflow:owner",
+   "workflowId": "eWQ4Hi51ij69AFuA",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-15T01:05:34.311Z",
+  "createdAt": "2026-10-15T01:04:57.165Z",
+  "versionId": "f58aeefd-0efc-4587-9985-6c634975653f",
+  "workflowId": "eWQ4Hi51ij69AFuA",
+  "nodes": [
+   {
+    "parameters": {
+     "inputSource": "passthrough"
+    },
+    "id": "252c2b66-1da2-4b15-bdd6-7aefbd85f24b",
+    "typeVersion": 1.1,
+    "name": "Start",
+    "type": "n8n-nodes-base.executeWorkflowTrigger",
+    "position": [
+     -336,
+     -64
+    ]
+   },
+   {
+    "parameters": {
+     "assignments": {
+      "assignments": [
+       {
+        "id": "abf4f578-f820-4e06-a070-5e55fc9ea0ae",
+        "name": "message",
+        "value": "={{ $('Mensagem').item.json.message }}",
+        "type": "string"
+       },
+       {
+        "id": "6a26cdd8-76a1-4944-bad4-d280e9f2ba2f",
+        "name": "body_data_contextInfo_quotedMessage_conversation",
+        "value": "={{ $json.body.data.contextInfo.quotedMessage.conversation }}",
+        "type": "string"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+     288,
+     -80
+    ],
+    "id": "2624d3f9-a4a1-4199-97e5-c923c9e8cbde",
+    "name": "Return"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('unificador_de_dados_webhook_e_chat').first().json['url da evolution'] }}/chat/markread",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $('unificador_de_dados_webhook_e_chat').first().json['chave do numero que vai emviar(api key)'] }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "bodyParameters": {
+      "parameters": [
+       {
+        "name": "{\"Id\":[\"AABBCCDD112233\",\"IIOOPPLL43332\"]\",\"Chat\":\"5491155553934.0:1@s.whatsapp.net\"}"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     -112,
+     -80
+    ],
+    "id": "1de63039-cad7-4ec2-bf7f-5f0a888c0fdf",
+    "name": "marca como lida",
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "={{ $('unificador_de_dados_webhook_e_chat').first().json['url da evolution'] }}/chat/presence",
+     "sendHeaders": true,
+     "headerParameters": {
+      "parameters": [
+       {
+        "name": "Token",
+        "value": "={{ $('unificador_de_dados_webhook_e_chat').first().json['chave do numero que vai emviar(api key)'] }}"
+       }
+      ]
+     },
+     "sendBody": true,
+     "bodyParameters": {
+      "parameters": [
+       {
+        "name": "Phone",
+        "value": "={{ $('unificador_de_dados_webhook_e_chat').first().json.remoteJid }}"
+       },
+       {
+        "name": "State",
+        "value": "composing"
+       },
+       {
+        "name": "Media"
+       }
+      ]
+     },
+     "options": {}
+    },
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     112,
+     -80
+    ],
+    "id": "e03aaf4d-9a3e-4dba-927e-1cb5e57710de",
+    "name": "emvia presenca",
+    "onError": "continueRegularOutput"
+   }
+  ],
+  "connections": {
+   "marca como lida": {
+    "main": [
+     [
+      {
+       "node": "emvia presenca",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Start": {
+    "main": [
+     [
+      {
+       "node": "marca como lida",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "emvia presenca": {
+    "main": [
+     [
+      {
+       "node": "Return",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": "Version f58aeefd",
+  "description": "",
+  "autosaved": true,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-15T01:05:34.294Z",
+    "id": 268,
+    "workflowId": "eWQ4Hi51ij69AFuA",
+    "versionId": "f58aeefd-0efc-4587-9985-6c634975653f",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

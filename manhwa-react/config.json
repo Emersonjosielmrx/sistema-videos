@@ -1,0 +1,477 @@
+{
+  "channel": {
+    "name": "ManhwaReact",
+    "handle": "@ManhwaReact",
+    "language": "pt",
+    "niche": "react de manhwa, manga, anime e videos virais"
+  },
+  "paths": {
+    "ffmpeg": "D:/hipercool-materiais/bin/ffmpeg.exe",
+    "ffprobe": "D:/hipercool-materiais/bin/ffprobe.exe",
+    "claude_cli": "C:/Users/Haylla/.vscode/extensions/anthropic.claude-code-2.1.285-win32-x64/resources/native-binary/claude.exe",
+    "whisper_models": "D:/hipercool-materiais/models/whisper",
+    "whisper_models_fallback": "D:/recapd-ambientes/producao/models",
+    "assets": "D:/hipercool-materiais/assets",
+    "sfx_library": "D:/hipercool-materiais/assets/sfx",
+    "music_library": "D:/hipercool-materiais/assets/trilhas",
+    "inbox": "D:/manhwa-react/1-COLOQUE-AQUI",
+    "work": "D:/manhwa-react/work",
+    "output": "D:/manhwa-react/output",
+    "ready": "D:/hipercool-materiais/manhwa-react/shorts",
+    "ready_cortes": "D:/hipercool-materiais/manhwa-react/cortes",
+    "ready_grandes": "D:/hipercool-materiais/manhwa-react/grandes",
+    "bases": "D:/manhwa-react/bases",
+    "groq_keys": "D:/postador-de-videos/secrets/groq_keys.json",
+    "overlays_library": "D:/hipercool-materiais/assets/overlays/elemental",
+    "proxy_secrets": "D:/manhwa-react/secrets_proxy.json",
+    "channels_dir": "D:/manhwa-react/canais",
+    "photos_dir": "D:/fotos para videos/fotos/Fotos minhas retrato",
+    "sfx_memes_library": "D:/hipercool-materiais/assets/sfx_memes",
+    "sfx_memes_index": "D:/hipercool-materiais/assets/sfx_memes_categorized.json",
+    "memes_library": "D:/hipercool-materiais/assets/memes_img",
+    "sfx_extras_library": "D:/hipercool-materiais/assets/sfx_extras",
+    "musicgen_python": "D:/recapd-ambientes/producao/venv/Scripts/python.exe",
+    "musicgen_script": "D:/recapd-ambientes/producao/bin/musicgen_local.py",
+    "omniroute_secrets": "D:/historias-em-frames/secrets/omniroute.json",
+    "_leia_saida": "Saida final de cada projeto fica em D:/hipercool-materiais/<projeto>/ (pedido do usuario 2-10-2026): shorts/, cortes/, grandes/ por canal."
+  },
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "crf": 17,
+    "preset": "veryfast",
+    "audio_bitrate": "192k",
+    "max_duration": 90,
+    "threads": 2,
+    "lookahead": 20
+  },
+  "layout": {
+    "webcam_bottom_trim": 0.1,
+    "webcam_max_share": 0.45,
+    "content_top_bias": 0.4,
+    "ui_strip_detect": true
+  },
+  "audio": {
+    "denoise_model": "bd",
+    "denoise_mix": 1.0,
+    "highpass_hz": 80,
+    "deesser": true,
+    "compressor": "acompressor=threshold=-20dB:ratio=3:attack=5:release=90:makeup=3",
+    "target_lufs": -14.0,
+    "true_peak": -1.0,
+    "lra": 11,
+    "content_audio_gain_db": 0.0,
+    "voice_eq": "highshelf=f=4500:g=2:width_type=q:width=0.7,equalizer=f=250:width_type=q:width=1.2:g=-1.5"
+  },
+  "transcribe": {
+    "model": "small",
+    "compute_type": "int8",
+    "cpu_threads": 4,
+    "beam_size": 3,
+    "vad_min_silence_ms": 250,
+    "engine": "groq",
+    "groq_model": "whisper-large-v3"
+  },
+  "cuts": {
+    "enabled": true,
+    "silence_db": -40,
+    "min_silence": 0.35,
+    "margin_before": 0.12,
+    "margin_after": 0.2,
+    "pause_keep": 0.18,
+    "min_segment": 0.3,
+    "remove_fillers": true,
+    "filler_regex": "^(e+h*|Ã©+h*|hum+|hmm+|hm+|ah+n?|Ã£h*|uh+|hÃ£+)$",
+    "filler_min_duration": 0.22,
+    "remove_retakes": true,
+    "retake_similarity": 0.8,
+    "split_silence": 2.5
+  },
+  "captions": {
+    "enabled": true,
+    "font": "Montserrat ExtraBold",
+    "font_size": 74,
+    "max_words": 3,
+    "max_chunk_seconds": 1.4,
+    "primary_color": "&H00FFFFFF",
+    "highlight_color": "&H0000D7FF",
+    "outline_color": "&H00000000",
+    "outline": 6,
+    "shadow": 2,
+    "y_offset_from_divider": -120,
+    "pop_in": true,
+    "uppercase": true,
+    "keyword_font_size": 150
+  },
+  "overlays": {
+    "hook": true,
+    "hook_font": "Luckiest Guy",
+    "hook_font_size": 92,
+    "hook_seconds": 2.6,
+    "hook_color": "&H0000D7FF",
+    "watermark": true,
+    "watermark_text": "@ManhwaReact",
+    "progress_bar": true,
+    "progress_color": "&H0000D7FF",
+    "cta": true,
+    "cta_text": "SEGUE pra mais reacts",
+    "cta_seconds": 2.5,
+    "keywords": true,
+    "punch_in": true,
+    "punch_in_zoom": 1.1,
+    "punch_in_zoom2": 1.18,
+    "zoom_mode": "speech",
+    "cta_overlay": "fx_subscribe",
+    "keyword_overlay": "fx_impact",
+    "hook_overlay": null,
+    "like_overlay": "fx_likeburst",
+    "like_at": 0.45,
+    "content_zoom": 1.12,
+    "webcam_grade": "eq=contrast=1.05:saturation=1.12:brightness=0.01",
+    "watchtoend_overlay": "fx_watchtoend",
+    "watchtoend_at": 2.8,
+    "part2_overlay": "fx_part2",
+    "comment_overlay": "fx_comment",
+    "cut_mask_overlay": "fx_glitch",
+    "shake_px": 10,
+    "emoji_keywords": true,
+    "reactions": true,
+    "word_triggers": true,
+    "foley": true,
+    "memes": true,
+    "memes_max": 2,
+    "meme_width_pct": 0.62,
+    "meme_seconds": 2.2,
+    "webcam_denoise": "hqdn3d=1.5:1.5:3:3",
+    "sharpen": "cas=0.35",
+    "vignette": "vignette=angle=PI/5:mode=forward"
+  },
+  "sfx": {
+    "enabled": true,
+    "hook": "whoosh",
+    "keyword": "pop",
+    "cut": null,
+    "gain_db": -12,
+    "cta": "cta",
+    "like": "like",
+    "memes": true,
+    "meme_gain_db": -9
+  },
+  "music": {
+    "enabled": true,
+    "lufs": -30,
+    "duck": true,
+    "default_mood": "neutral_chill",
+    "blocklist": "D:/hipercool-materiais/_curadoria/copyright_blocklist.json",
+    "respect_editorial": true,
+    "safe_only": false,
+    "prefer_priority": true,
+    "prefer_generated": false,
+    "prefer_generated_nota": "04/11: MusicGen-small tem pesos CC-BY-NC (nao comercial) - nao usar em canal monetizado (pesquisador 04/11, area_trilha_sfx)"
+  },
+  "editorial": {
+    "use_llm": true,
+    "min_score": 5,
+    "fix_transcript": true,
+    "timeout": 240,
+    "model": null,
+    "providers": [
+      "proxy:sonnet",
+      "proxy:opus",
+      "cli"
+    ],
+    "models": {
+      "opus": "antigravity/claude-opus-4-6-thinking",
+      "sonnet": "kr/claude-sonnet-4.5",
+      "haiku": "kr/claude-haiku-4.5"
+    },
+    "trim_to_max": true
+  },
+  "lips": {
+    "sample_fps": 15,
+    "threshold": 0.0014,
+    "pad": 0.4
+  },
+  "thumb": {
+    "enabled": true,
+    "font": "LuckiestGuy-Regular.ttf",
+    "font_size": 120,
+    "webcam_zoom": 1.25
+  },
+  "channels": [
+    {
+      "slug": "manhwareact",
+      "name": "ManhwaReact",
+      "handle": "@ManhwaReact",
+      "color": "#FF2D55",
+      "niche": "anime, manhwa, manga, animacoes e cenas de anime",
+      "tagline": "Reagindo a anime, manhwa e animacoes",
+      "description": "Reacts rapidos e sinceros a cenas de anime, manhwa, manga e animacoes. Re:Zero, isekai, shonen e o que estiver bombando. Novos Shorts todo dia. Comenta qual obra voce quer ver aqui!",
+      "keywords": [
+        "react anime",
+        "react manhwa",
+        "manhwa",
+        "anime",
+        "manga",
+        "re zero",
+        "isekai",
+        "shorts anime",
+        "otaku",
+        "reagindo anime"
+      ],
+      "photo": 19,
+      "youtube_id": "novo_mente_artificial_i5r"
+    },
+    {
+      "slug": "cenareact",
+      "name": "CenaReact",
+      "handle": "@CenaReact",
+      "color": "#FFB800",
+      "niche": "filmes, series, cenas iconicas, trailers e sitcoms",
+      "tagline": "Reagindo a cenas de filmes e series",
+      "description": "Reagindo as cenas mais marcantes de filmes e series: comedia, drama, terror e trailers. Um Short por dia com reacao sincera e sem enrolacao. Comenta qual cena merece um react!",
+      "keywords": [
+        "react filme",
+        "react serie",
+        "cenas de filmes",
+        "series",
+        "filmes",
+        "sitcom",
+        "trailer",
+        "reagindo filme",
+        "cenas iconicas",
+        "shorts filmes"
+      ],
+      "photo": 13,
+      "youtube_id": "novo_universo_ia_d6s"
+    },
+    {
+      "slug": "inventoreact",
+      "name": "InventoReact",
+      "handle": "@InventoReact",
+      "color": "#00D1FF",
+      "niche": "inventos, gadgets, tecnologia, construcao, curiosidades do mundo (povos, culturas, lugares) e tudo que e util ou absurdo (games retro vao para cartuchoreact, forja/oficios para forjareact)",
+      "tagline": "Reagindo a inventos, gadgets e curiosidades",
+      "description": "Inventos, gadgets, construcoes malucas, oficios e curiosidades do mundo todo com react sincero. Vale a pena ou e furada? Novos Shorts todo dia. Manda nos comentarios o que voce quer ver testado!",
+      "keywords": [
+        "react inventos",
+        "gadgets",
+        "tecnologia",
+        "curiosidades",
+        "inventos",
+        "construcao",
+        "forja",
+        "react gadgets",
+        "shorts curiosidades",
+        "vale a pena"
+      ],
+      "photo": 29,
+      "youtube_id": "novo_ia_agora_h3n"
+    },
+    {
+      "slug": "cartuchoreact",
+      "name": "CartuchoReact",
+      "handle": "@CartuchoReact",
+      "color": "#8B5CFF",
+      "niche": "games retro, consoles, desbloqueios, hacks, emuladores, chips e achados de feira, colecionaveis e nostalgia gamer",
+      "tagline": "Reagindo a games retrÃ´, consoles e hacks",
+      "description": "Consoles desbloqueados, hacks, achados da Feira do Rolo, PS2, Xbox 360, Nintendo e tudo que marcou a infÃ¢ncia gamer, com react sincero. Vale a pena ou Ã© furada? Novos Shorts todo dia. Comenta qual console vocÃª quer ver aqui!",
+      "keywords": [
+        "react games",
+        "games retro",
+        "ps2",
+        "xbox 360",
+        "desbloqueio",
+        "console",
+        "nintendo",
+        "emulador",
+        "feira do rolo",
+        "nostalgia gamer",
+        "retrogaming",
+        "videogame antigo"
+      ],
+      "photo": "D:/fotos para videos/fotos/Fotos minhas retrato/Screenshot_20250710_194914_Photos.jpg",
+      "arte": {
+        "perfil": "Retro gaming neon artwork: glowing purple and green CRT scanlines, floating pixel-art game cartridges, classic gamepads and old console silhouettes around the edges, synthwave grid, dark background, empty dark circle in the center",
+        "banner": "Wide cinematic synthwave retro gaming room at night: old CRT television glowing, shelves full of game cartridges, retro consoles and gamepads, purple and green neon light, moody atmosphere, no people"
+      }
+    },
+    {
+      "slug": "forjareact",
+      "name": "ForjaReact",
+      "handle": "@ForjaReact",
+      "color": "#FF7A1A",
+      "niche": "forja de espadas, cutelaria, marcenaria, restauracao, artesanato, oficios e construcoes feitas a mao",
+      "tagline": "Reagindo a forja, ofÃ­cios e construÃ§Ãµes incrÃ­veis",
+      "description": "Forja de espadas, cutelaria, marcenaria, restauraÃ§Ã£o e construÃ§Ãµes feitas Ã  mÃ£o, com react sincero de quem fica de boca aberta com cada detalhe. Ficou bom ou nÃ£o? Novos Shorts todo dia. Comenta o que vocÃª quer ver sendo feito!",
+      "keywords": [
+        "react forja",
+        "forja",
+        "cutelaria",
+        "espada",
+        "ferreiro",
+        "marcenaria",
+        "restauraÃ§Ã£o",
+        "artesanato",
+        "feito Ã  mÃ£o",
+        "ofÃ­cios",
+        "oficina",
+        "react construÃ§Ã£o"
+      ],
+      "photo": "D:/fotos para videos/fotos/fotos retrato novo para videos/epocas/WhatsAppImage2025-07-10at16.33.58.jpg",
+      "arte": {
+        "perfil": "Blacksmith forge artwork: glowing orange red-hot steel blade on an anvil, flying sparks and embers, dark smoky background, dramatic cinematic lighting, empty dark circle in the center",
+        "banner": "Wide cinematic blacksmith workshop: roaring forge fire, anvil with a red-hot sword, hammer, sparks flying, hanging tools, stone and wood walls, warm orange light, dark atmosphere, no people"
+      }
+    }
+  ],
+  "default_channel": "inventoreact",
+  "aulas": {
+    "_leia": "Gravacao deitada que o divisor de temas (mr/temas.py) marca como AULA (workshop/palestra do dono, sem video reagido): vai para este canal fixo (completo + cortes), sem o agente do canal reescrever o texto. Decisao do dono em 12/10: Fio da Meada.",
+    "canal": "fiodameada",
+    "contexto": "ATENCAO: esta gravacao NAO e react. E uma AULA/WORKSHOP do proprio criador (ele ensina, mostra a tela e responde alunos ao vivo). Avalie pelo valor do que e ensinado (nao rejeite por nao ter video reagido). Titulos e textos no estilo de aula/dica pratica, sem a palavra REACT, sem citar alunos pelo nome e sem link de curso. Linhas CONTEUDO podem ser alunos ou a tela."
+  },
+  "publish": {
+    "_leia": "Postagem no YouTube via D:/postador-de-videos (youtube_poster + politica). youtube_id de cada canal = id em D:/credenciais-canais/youtube_canais.json. Horarios locais; jitter em minutos por video.",
+    "projeto": "manhwa-react",
+    "postador_bin": "D:/postador-de-videos/bin",
+    "posted_dir": "D:/hipercool-materiais/_postados/react",
+    "max_por_canal_dia": 2,
+    "horarios": [
+      "12:00",
+      "19:00"
+    ],
+    "jitter_min": 20,
+    "antecedencia_min": 30,
+    "thumbnail": true,
+    "comentario": true
+  },
+  "band": {
+    "enabled": false,
+    "height": 64,
+    "show_work": true
+  },
+  "divider": {
+    "style": "electric",
+    "height": 160,
+    "overlap": 56,
+    "edge": "tear",
+    "opacity": 1.0,
+    "per_channel": {
+      "manhwareact": "electric",
+      "cenareact": "fire",
+      "inventoreact": "electric"
+    }
+  },
+  "validate": {
+    "enabled": true,
+    "cleanup": true
+  },
+  "ideas": {
+    "enabled": true,
+    "tier": "sonnet",
+    "dir": "D:/manhwa-react/ideias"
+  },
+  "hyperframes": {
+    "enabled": true
+  },
+  "channels_outros": [
+    {
+      "slug": "mundoquenaoexiste",
+      "name": "Mundo Que NÃ£o Existe",
+      "handle": "@MundoQueNaoExiste",
+      "color": "#C13CFF",
+      "projeto": "D:/veo",
+      "niche": "videos curtos gerados com IA (Veo): situacoes absurdas, e se, animais fofos, ficcao e cenas impossiveis",
+      "tagline": "VÃ­deos feitos com IA de um mundo que nÃ£o existe",
+      "description": "SituaÃ§Ãµes absurdas, \"e se...\" impossÃ­veis, bichos fofos e cenas que nunca aconteceram, tudo criado com inteligÃªncia artificial. Nada aqui Ã© real, e Ã© por isso que Ã© tÃ£o bom. Novos vÃ­deos todo dia. Comenta o que a IA deveria criar no prÃ³ximo!",
+      "keywords": [
+        "vÃ­deos de ia",
+        "inteligÃªncia artificial",
+        "veo",
+        "vÃ­deo gerado por ia",
+        "e se",
+        "absurdo",
+        "surreal",
+        "fofo",
+        "impossÃ­vel",
+        "ia criativa",
+        "shorts ia",
+        "mundo paralelo"
+      ],
+      "photo": "D:/fotos para videos/fotos/fotos retrato novo para videos/epocas/87ea1888-a73e-483b-976f-fabfadae599d (1).jpg",
+      "pill": "VÃDEO NOVO TODO DIA",
+      "nota": "videos 100% gerados por IA: marcar 'Conteudo alterado ou sintetico' no upload (regra do YouTube). A rede antiga de canais de IA foi suspensa por volume e repeticao: poucos videos por dia, sem repetir o mesmo video em canais diferentes.",
+      "arte": {
+        "perfil": "Surreal dreamlike digital artwork: floating islands, a giant jellyfish swimming in the sky, glitching pixels, magenta and cyan glow, empty dark circle in the center",
+        "banner": "Wide surreal impossible world panorama: an upside-down waterfall, a whale flying over a small city, floating islands, cat-shaped clouds, subtle glitch effect, magenta and cyan neon glow, dreamlike, no people"
+      }
+    },
+    {
+      "slug": "fiodameada",
+      "name": "Fio da Meada",
+      "handle": "@FioDaMeada",
+      "color": "#E8B04B",
+      "projeto": "D:/historias-em-frames",
+      "niche": "historias narradas e ilustradas: superacao, misterio, terror, fe, romance, fantasia",
+      "tagline": "HistÃ³rias ilustradas que prendem atÃ© o fim",
+      "description": "HistÃ³rias de superaÃ§Ã£o, mistÃ©rio, terror, fÃ© e romance contadas quadro a quadro, com ilustraÃ§Ãµes e narraÃ§Ã£o. ComeÃ§ou, nÃ£o dÃ¡ pra parar. Novas histÃ³rias toda semana. Comenta qual histÃ³ria vocÃª quer ouvir!",
+      "keywords": [
+        "histÃ³rias",
+        "histÃ³rias narradas",
+        "histÃ³rias ilustradas",
+        "superaÃ§Ã£o",
+        "mistÃ©rio",
+        "terror",
+        "histÃ³ria de fÃ©",
+        "romance",
+        "fantasia",
+        "contos",
+        "narraÃ§Ã£o",
+        "histÃ³ria real"
+      ],
+      "photo": "D:/fotos para videos/fotos/fotos retrato novo para videos/epocas/e7efbfa5-8379-4dc0-ace6-328f64d6ca30.jpg",
+      "pill": "HISTÃ“RIA NOVA TODA SEMANA",
+      "nota": "o historias-em-frames hoje marca os videos com @InovareStories (env STORIES_WATERMARK); trocar para @FioDaMeada quando o canal existir.",
+      "arte": {
+        "perfil": "Old open storybook with a glowing golden thread unraveling out of the pages into tiny illustrated scenes of a castle, a forest and a full moon, warm amber light, dark background, painterly illustration, empty dark circle in the center",
+        "banner": "Wide cinematic painterly panorama of a giant open storybook whose pages turn into illustrated scenes: a dark forest, a castle on a cliff, a stormy sea and a starry sky, a glowing golden thread weaving through all of them, amber and deep blue tones, no people"
+      }
+    }
+  ],
+  "imagem": {
+    "modelo": "antigravity/gemini-3.1-flash-image"
+  },
+  "channels_descartados": [
+    {
+      "slug": "passaportereact",
+      "name": "PassaporteReact",
+      "handle": "@PassaporteReact",
+      "color": "#18C29C",
+      "niche": "culturas, povos, costumes, comidas tipicas, lugares, viagens, natureza e curiosidades do mundo",
+      "tagline": "Reagindo a povos, lugares e culturas do mundo",
+      "description": "Costumes, povos, comidas, lugares e curiosidades do mundo inteiro, com react sincero e respeitoso. Cada Short Ã© uma viagem rÃ¡pida para um jeito diferente de viver. Novos Shorts todo dia. Comenta qual lugar ou cultura vocÃª quer conhecer!",
+      "keywords": [
+        "react viagem",
+        "culturas",
+        "povos",
+        "costumes",
+        "curiosidades do mundo",
+        "lugares incrÃ­veis",
+        "viagem",
+        "natureza",
+        "comida tÃ­pica",
+        "documentÃ¡rio",
+        "mundo",
+        "react cultura"
+      ],
+      "photo": "D:/fotos para videos/fotos/Fotos minhas retrato/Screenshot_20250710_020236_Photos.jpg",
+      "arte": {
+        "perfil": "Vibrant world travel artwork: stylized glowing globe with teal flight routes, paper airplane trails, tiny famous landmarks silhouettes around the edges, warm golden sunset, empty dark circle in the center",
+        "banner": "Wide cinematic travel panorama blending desert dunes, tropical rainforest, snowy mountains, ancient temples and a colorful street market into one landscape, teal and golden light, no people"
+      },
+      "descartado": "2026-10-02: o usuario nao criou (ja tinha um canal); tema culturas/povos fica no InventoReact"
+    }
+  ]
+}

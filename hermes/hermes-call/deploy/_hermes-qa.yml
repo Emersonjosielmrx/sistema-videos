@@ -1,0 +1,13 @@
+http:
+  routers:
+    hermes-qa:
+      rule: "Host(`hermescall-qa.opus-sem-limites.com.br`)"
+      service: hermes-qa-svc
+      entryPoints: [web, websecure]
+      tls:
+        certResolver: le
+  services:
+    hermes-qa-svc:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8092/"

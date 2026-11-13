@@ -1,0 +1,1320 @@
+{
+  "_leia": "Reuso no TikTok/Instagram de video que ja saiu em outra rede (catalogo: bin/catalogo.py). Cada video vai para a 1a conta cujo 'temas' bate com o COMECO do nome do arquivo ou cujo 'canais' tem o canal de origem do react (pasta em _postados/react/<canal>); ou cujo 'postados_em' tem o canal do YouTube onde o video saiu (16/10); se nenhuma bater, para a 1a que aceita o 'projeto' (hipercool, veo, recapd, historias-em-frames, manhwa-react). Video sem conta nao sai (ex.: AssistIA, financas, cena/invento/games react: mapear aqui se quiser). max_por_conta_dia evita rajada (em 02/09 sairam 148 num dia). TikTok (15/10): o Chrome de cada conta abre so na hora do post e fecha logo depois (Chrome aberto o dia todo = ~650 MB cada). 'cofre' = apelido em D:/logins-google/cofre; 'porta' = perfil D:/logins-google/chrome-profiles/<conta> nessa porta (canalalucinaai: o login do TikTok esta em cofre/perfis/canalalucinaai, nao no __google do cofre).",
+  "_veo_so_limpo": "true = video do Veo so sai na versao LIMPA (D:/hipercool-materiais/veo/limpos, sem o slide de propaganda/WhatsApp que derrubou os canais do Veo no YouTube) e o COMPLETO sem versao limpa e pulado; false = reaproveita o COMPLETO como antes. LIGADO nas duas redes em 16/10 (decisao do dono: so a versao limpa; contato so na bio).",
+  "reserva_veo": {
+    "_leia": "Dono 18/10: cada conta posta 1 a 3 por dia como no YouTube e nunca para; sem video proprio, completa com Veo limpo (bin/reserva_veo.py): 1o o Veo que ja saiu no YouTube e sobra em outra conta, 2o limpo aprovado que nunca saiu (esse e tirado do YouTube depois de postado). deixar_pro_youtube = quantos limpos aprovados mais novos ficam guardados para a rede do YouTube. ligado=false volta a postar so o video da propria conta.",
+    "ligado": true,
+    "deixar_pro_youtube": 10
+  },
+  "tiktok": {
+    "proxy_webshare": true,
+    "_proxy_webshare": "dono 19/10: cada conta do TikTok sai por 1 IP fixo da Webshare (bin/proxy_tiktok.py, mapa em config/proxy_tiktok.json); so os dominios do TikTok passam pelo proxy (PAC), o YouTube do mesmo perfil continua direto. false = tudo pela internet de casa. Conta com \"sem_proxy\": true = sempre pela internet de casa (dono 19/10: deixar uma quantidade segura sem proxy -> 5, o mesmo tanto de contas que cada IP do proxy tem; as que mais importam pro publico BR).",
+    "veo_so_limpo": true,
+    "max_por_conta_dia": 3,
+    "intervalo_s": 90,
+    "duracao_max_s": 180,
+    "bytes_max": 200000000,
+    "contas": {
+      "jornalcomia": {
+        "cofre": "jornalcomia",
+        "temas": [
+          "noticias_de_ia",
+          "tech_news"
+        ],
+        "_obs_arroba": "23/10: TikTok @jornal.ia3 (lido na conta logada do Chrome do postador, cofre jornalcomia)",
+        "maquina": [
+          "acer",
+          "pc2",
+          "x200ma",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "jornalcomia",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "fabricadeautomacoesia": {
+        "cofre": "fabricadeautomacoesia",
+        "temas": [
+          "vendas_com_ia",
+          "dicas_de_negocio",
+          "produtividade"
+        ],
+        "_obs_arroba": "23/10: TikTok @fabricadeautomacoesia (lido na conta logada do Chrome do postador, cofre fabricadeautomacoesia)",
+        "_obs_email_cheio": "28/10: caixa do Gmail CHEIA (dono) — não recebe e-mail, então o código de verificação do TikTok nunca chega; login TikTok em máquina nova (Desktop/PC2) falha. Só funciona onde já está logada; liberar espaço no Gmail antes de tentar de novo",
+        "maquina": [
+          "desktop"
+        ],
+        "perfil_remoto": "fabricadeautomacoesia",
+        "projetos": [
+          "veo"
+        ],
+        "_obs_reserva": "29/10 Fable: só tinha 1 vídeo (temas vendas_com_ia/dicas_de_negocio/produtividade). Reserva: Veo (projetos), repartido."
+      },
+      "canalhistoriacomia": {
+        "cofre": "canalhistoriacomia",
+        "temas": [
+          "alienigenas",
+          "e_se",
+          "segredos_do_oce",
+          "oceano"
+        ],
+        "projetos": [
+          "historias-em-frames"
+        ],
+        "_obs_arroba": "23/10: TikTok @histria.com.ia35 (lido na conta logada do Chrome do postador, cofre canalhistoriacomia)",
+        "maquina": [
+          "x200ma",
+          "pc2",
+          "desktop",
+          "acer",
+          "sti"
+        ],
+        "perfil_remoto": "canalhistoriacomia",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "emersonjosiel2026": {
+        "cofre": "emersonjosiel2026",
+        "canais": [
+          "inventoreact"
+        ],
+        "postados_em": [
+          "InventoReact"
+        ],
+        "_obs": "16/10: TikTok @emerson202686 (logado pelo Google do cofre) = conteudo do InventoReact; 18/10: + Shorts de parceiro do canal (ok do dono)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "sti",
+          "desktop"
+        ],
+        "perfil_remoto": "emersonjosiel2026"
+      },
+      "emersonjosiel2027": {
+        "cofre": "emersonjosiel2027",
+        "canais": [
+          "historiasemframes"
+        ],
+        "postados_em": [
+          "HistoriasEmFrames"
+        ],
+        "_obs": "16/10: TikTok @emerson2026586 = HistoriasEmFrames (react); 18/10: + Shorts de parceiro do canal (ok do dono)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "sti",
+          "desktop"
+        ],
+        "perfil_remoto": "emersonjosiel2027"
+      },
+      "emersonjosiel2029": {
+        "cofre": "emersonjosiel2029",
+        "canais": [
+          "cenareact"
+        ],
+        "postados_em": [
+          "CenaReact"
+        ],
+        "_obs": "16/10: TikTok @emerson2029452 = CenaReact (antes ia pro entrevistacomia); 18/10: + Shorts de parceiro do canal (ok do dono)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosiel2029"
+      },
+      "emersonjosiel2030": {
+        "cofre": "emersonjosiel2030",
+        "canais": [
+          "cartuchoreact"
+        ],
+        "postados_em": [
+          "CartuchoReact"
+        ],
+        "_obs": "16/10: TikTok @emerson20308 = CartuchoReact; 18/10: + Shorts de parceiro do canal (ok do dono)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosiel2030"
+      },
+      "emersonjosiel2033": {
+        "cofre": "emersonjosiel2033",
+        "canais": [
+          "assistiainvestimentos"
+        ],
+        "postados_em": [
+          "Assist-IA Investimentos",
+          "AssistIA Investimentos"
+        ],
+        "_obs": "16/10: TikTok @emerson20332 = AssistIA Investimentos; 18/10: + Shorts de parceiro do canal (ok do dono)",
+        "maquina": [
+          "pc2",
+          "desktop",
+          "sti",
+          "x200ma",
+          "acer"
+        ],
+        "perfil_remoto": "emersonjosiel2033"
+      },
+      "inovaremanhwaverse2": {
+        "cofre": "inovaremanhwaverse2",
+        "postados_em": [
+          "Manhwa Noturno"
+        ],
+        "_obs": "16/10: TikTok @inovaremanhwavers5 = o mesmo que sai no canal Manhwa Noturno (hipercool pt)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverse2",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou",
+        "_proxy": "12/11 dona: postagem só pelo proxy (tirada a marca sem_proxy de 23/10)"
+      },
+      "entrevistacomia": {
+        "cofre": "entrevistacomia",
+        "temas": [
+          "stand-up",
+          "humor_de_ia",
+          "cassetadas_ia",
+          "robos_desastrad",
+          "fofos_e_absurdo"
+        ],
+        "_obs_arroba": "23/10: TikTok @entrevista.com.ia (lido na conta logada do Chrome do postador, cofre entrevistacomia)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "entrevistacomia",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "3dfabricadeautomacoesia": {
+        "porta": 9251,
+        "temas": [
+          "aulas_ia",
+          "cerebro_digital"
+        ]
+      },
+      "inovaremanhwaverseita": {
+        "cofre": "inovaremanhwaverseita",
+        "postados_em": [
+          "inovaremanhwaverseita"
+        ],
+        "projetos": [
+          "recapd",
+          "hipercool"
+        ],
+        "_obs": "18/10: + Shorts de parceiro de inovare manhwa br e Animescomia (ok do dono)",
+        "_obs_19_10": "19/10: ManhwaReact saiu daqui pro TikTok do proprio canal (emersonjosiel2032); inovare manhwa br idem (inovaremanhwabr); 20h: Animescomia idem (canalanimescomia) e este TikTok passou a levar o conteudo do canal italiano (como hindi/russo/tailandes)",
+        "_obs_arroba": "23/10: TikTok @emerson.cunha52 (lido na conta logada do Chrome do postador, cofre inovaremanhwaverseita)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverseita"
+      },
+      "canalalucinaai": {
+        "porta": 9222,
+        "projetos": [
+          "veo"
+        ],
+        "_obs_arroba": "23/10: TikTok @alucinaai8 (lido na conta logada do Chrome do postador, porta 9222)"
+      },
+      "doramanoturno": {
+        "cofre": "maiteanajessicajesus",
+        "sem_proxy": true,
+        "postados_em": [
+          "Dorama Noturno"
+        ],
+        "_obs": "18/10: TikTok do Dorama Noturno pelo Google da conta do cofre (o dono loga); deslogado = aviso no Telegram",
+        "_obs_arroba": "23/10: TikTok @user6824946137963 (lido na conta logada do Chrome do postador, cofre maiteanajessicajesus)",
+        "maquina": [
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti",
+          "acer"
+        ],
+        "perfil_remoto": "maiteanajessicajesus",
+        "_sem_proxy": "12/11 dona: EXCEÇÃO — segue postando por casa por enquanto (das que mais crescem; trocar o IP de conta logada é sinal ruim)"
+      },
+      "curiosidadesnoturnas": {
+        "cofre": "gabriellyvitoriaisabelaaraujo",
+        "postados_em": [
+          "Curiosidades Noturnas"
+        ],
+        "_obs": "18/10: TikTok do Curiosidades Noturnas pelo Google da conta do cofre (o dono loga); deslogado = aviso no Telegram",
+        "_obs_arroba": "23/10: TikTok @user6683121267961 (lido na conta logada do Chrome do postador, cofre gabriellyvitoriaisabelaaraujo)",
+        "maquina": [
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti",
+          "acer"
+        ],
+        "perfil_remoto": "gabriellyvitoriaisabelaaraujo",
+        "_proxy": "12/11 dona: postagem só pelo proxy (tirada a marca sem_proxy de 23/10)"
+      },
+      "filmenoturno": {
+        "cofre": "simonerebecaluizasilva",
+        "sem_proxy": true,
+        "postados_em": [
+          "Filme Noturno"
+        ],
+        "_obs": "18/10: TikTok do Filme Noturno pelo Google da conta do cofre (o dono loga); deslogado = aviso no Telegram",
+        "_obs_arroba": "23/10: TikTok @user5680256157009 (lido na conta logada do Chrome do postador, cofre simonerebecaluizasilva)",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "simonerebecaluizasilva",
+        "_sem_proxy": "12/11 dona: EXCEÇÃO — segue postando por casa por enquanto (das que mais crescem; trocar o IP de conta logada é sinal ruim)"
+      },
+      "emersonjosiel2032": {
+        "cofre": "emersonjosiel2032",
+        "canais": [
+          "manhwareact"
+        ],
+        "postados_em": [
+          "ManhwaReact",
+          "ManhwaReact-ia"
+        ],
+        "_obs": "19/10: TikTok @emerson20324 = ManhwaReact (Google do canal); antes ia pro TikTok do Italiano",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "desktop",
+          "pc2",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosiel2032",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou",
+        "_proxy": "12/11 dona: postagem só pelo proxy (tirada a marca sem_proxy de 23/10)"
+      },
+      "emersonjosiel2031": {
+        "cofre": "emersonjosiel2031",
+        "postados_em": [
+          "Fio da Meada"
+        ],
+        "_obs": "19/10: TikTok @emerson203184 = Fio da Meada (Google do canal)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosiel2031",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "inovaremanhwaversehindi": {
+        "cofre": "inovaremanhwaversehindi",
+        "postados_em": [
+          "Inovaremanhwaversehindi"
+        ],
+        "_obs": "19/10: TikTok @inovaremanhwavers2 = canal hindi",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaversehindi"
+      },
+      "inovaremanhwaverserussian": {
+        "cofre": "inovaremanhwaverserussian",
+        "postados_em": [
+          "inovare manhwa verse ru"
+        ],
+        "_obs": "19/10: TikTok @emerson.josiel.cu = canal russo",
+        "maquina": [
+          "x200ma",
+          "pc2",
+          "desktop",
+          "acer",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverserussian"
+      },
+      "inovaremanhwaversethai": {
+        "cofre": "inovaremanhwaversethai",
+        "postados_em": [
+          "Inovaremanhwaversethai"
+        ],
+        "_obs": "19/10: TikTok @inovaremanhwavers6 = canal tailandes",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaversethai"
+      },
+      "inovaremanhwaverse": {
+        "cofre": "inovaremanhwaverse",
+        "postados_em": [
+          "InovareManhwaVerse"
+        ],
+        "_obs": "19/10: TikTok @inovaremanhwavers; canal YouTube suspenso -> o que saiu nele + Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverse",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "inovaremanhwaversefrench": {
+        "cofre": "inovaremanhwaversefrench",
+        "_obs": "19/10: TikTok @inovare.frech SO com Veo de reserva: o conteudo do canal YouTube frances tomou 2 strikes de direitos autorais",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaversefrench",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "inovaremanhwaverseesp": {
+        "cofre": "inovaremanhwaverseesp",
+        "_obs": "19/10: TikTok @inovaremanhwaverseesp; canal YouTube sem conteudo -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "pc2",
+          "acer",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverseesp",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "gameoftroneskingsroadbrasil": {
+        "cofre": "gameoftroneskingsroadbrasil",
+        "_obs": "19/10: TikTok @gameoftroneskings; sem canal nosso -> Veo de reserva (dono: postar em todos os TikToks)",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "gameoftroneskingsroadbrasil",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "filmescomia1": {
+        "cofre": "filmescomia1",
+        "_obs": "19/10: TikTok @filmescomia7 (YouTube bloqueado: só TikTok) -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "filmescomia1"
+      },
+      "aulasrevolution": {
+        "cofre": "aulasrevolution",
+        "_obs": "19/10: TikTok @mentoria.com.ia -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "desktop",
+          "pc2",
+          "sti"
+        ],
+        "perfil_remoto": "aulasrevolution"
+      },
+      "e4487017": {
+        "cofre": "e4487017",
+        "_obs": "19/10: TikTok @msica.e.dana.ia -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "e4487017"
+      },
+      "inovarecap": {
+        "cofre": "inovarecap",
+        "_obs": "19/10: TikTok @inovare.cap -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovarecap",
+        "postados_em": [
+          "Inovare"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)"
+      },
+      "emersonjosielmrx1995": {
+        "cofre": "emersonjosielmrx1995",
+        "_obs": "19/10: TikTok @fatos.e.curiosida65 -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosielmrx1995"
+      },
+      "en1653964": {
+        "cofre": "en1653964",
+        "_obs": "19/10: TikTok @emersonn598 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "en1653964",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "vendeafiliados3": {
+        "cofre": "vendeafiliados3",
+        "_obs": "19/10: TikTok @vendeafiliados criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti",
+          "acer"
+        ],
+        "perfil_remoto": "vendeafiliados3",
+        "postados_em": [
+          "DicasFinanceirasDaIA",
+          "Dicas financeiras da ia"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "murilodoctor192": {
+        "cofre": "murilodoctor192",
+        "_obs": "19/10: TikTok @doctor19252 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "murilodoctor192",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "emersongencshin": {
+        "cofre": "emersongencshin",
+        "_obs": "19/10: TikTok @emersonjosiel105 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersongencshin",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "solarmundo195": {
+        "cofre": "solarmundo195",
+        "_obs": "19/10: TikTok @mundosolar8 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "solarmundo195",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "revolutionemerson1": {
+        "cofre": "revolutionemerson1",
+        "_obs": "19/10: TikTok @revolutionemerson criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "revolutionemerson1",
+        "postados_em": [
+          "Esporte Noturno"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)"
+      },
+      "revolutionemerson2": {
+        "cofre": "revolutionemerson2",
+        "_obs": "19/10: TikTok @revolutionemerso9 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "revolutionemerson2",
+        "postados_em": [
+          "Bicho Noturno"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)"
+      },
+      "revolutionemerson3": {
+        "cofre": "revolutionemerson3",
+        "_obs": "19/10: TikTok @revolutionemerso8 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "revolutionemerson3",
+        "postados_em": [
+          "Mistérios Noturnos"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "empressinovare": {
+        "cofre": "empressinovare",
+        "_obs": "19/10: TikTok @dicas.financeiras77 (sem canal nosso no YT) -> Veo de reserva",
+        "maquina": [
+          "pc2",
+          "desktop",
+          "sti",
+          "x200ma",
+          "acer"
+        ],
+        "perfil_remoto": "empressinovare"
+      },
+      "jogoscomia": {
+        "cofre": "jogoscomia",
+        "_obs": "19/10: TikTok @jogos.com.ia8 -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "jogoscomia",
+        "postados_em": [
+          "Game Noturno"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)"
+      },
+      "inovaremultiatendimento": {
+        "cofre": "inovaremultiatendimento",
+        "_obs": "19/10: TikTok @plataforma.multia -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremultiatendimento"
+      },
+      "emersonjosiel1995": {
+        "cofre": "emersonjosiel1995",
+        "_obs": "19/10: TikTok @motivao.ia74 -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosiel1995"
+      },
+      "fabricadeautomacoes0": {
+        "cofre": "fabricadeautomacoes0",
+        "_obs": "19/10: TikTok @fbrica.de.automae -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "fabricadeautomacoes0",
+        "projetos": [
+          "veo"
+        ],
+        "_obs_reserva": "29/10 Fable: estava 'vazia' (sem fonte). Agora recebe Veo de reserva (projetos), repartido com as outras contas que aceitam veo (catalogo._conta)."
+      },
+      "fabiovideoseducativos": {
+        "cofre": "fabiovideoseducativos",
+        "_obs": "19/10: TikTok @fabioyoutube -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "fabiovideoseducativos"
+      },
+      "mundosolar1995": {
+        "cofre": "mundosolar1995",
+        "_obs": "19/10: TikTok @video.cassetadas0 -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "mundosolar1995",
+        "postados_em": [
+          "Comedia Noturna",
+          "Comédia Noturna"
+        ],
+        "_obs_comedia": "02/11 (dona: faça as pendentes): conta de humor -> recebe os Shorts do Comédia Noturna; sem Short novo = Veo de reserva como antes"
+      },
+      "seebotsia": {
+        "cofre": "seebotsia",
+        "_obs": "19/10: TikTok @re.cenas.ia -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "desktop",
+          "pc2",
+          "sti"
+        ],
+        "perfil_remoto": "seebotsia",
+        "postados_em": [
+          "Tech Noturno"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)"
+      },
+      "emersonjosiel649": {
+        "cofre": "emersonjosiel649",
+        "_obs": "19/10: TikTok @emerson.josiel -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersonjosiel649"
+      },
+      "emersongenc": {
+        "cofre": "emersongenc",
+        "_obs": "19/10: TikTok @emersonjosiel378 criado (mesma situacao das 8 liberadas pelo dono) -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "emersongenc",
+        "postados_em": [
+          "ForjaReact"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "inovaremanhwabr": {
+        "cofre": "inovaremanhwabr",
+        "canais": [
+          "inovaremanhwabr"
+        ],
+        "postados_em": [
+          "inovare manhwa br",
+          "inovaremanhwabr"
+        ],
+        "_obs": "19/10: TikTok @inovaremanhwabr4 = conteudo do canal inovare manhwa br (antes ia pro TikTok do Italiano)",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "sti",
+          "desktop"
+        ],
+        "perfil_remoto": "inovaremanhwabr"
+      },
+      "canalanimescomia": {
+        "cofre": "canalanimescomia",
+        "canais": [
+          "animescomia"
+        ],
+        "postados_em": [
+          "Animescomia"
+        ],
+        "_obs": "19/10: TikTok @animescomia criado (dono: 'faca os tik toks das que ainda estao sem') = conteudo do canal Animescomia (antes ia pro TikTok do Italiano)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "canalanimescomia",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "mentoriaiapro": {
+        "cofre": "mentoriaiapro",
+        "_obs": "19/10: TikTok @iapro518 criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "x200ma",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "mentoriaiapro"
+      },
+      "aulacomia": {
+        "cofre": "aulacomia",
+        "_obs": "19/10: TikTok @aulacomia criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "aulacomia"
+      },
+      "comoseriasecomia": {
+        "cofre": "comoseriasecomia",
+        "_obs": "19/10: TikTok @comoseriasecomia criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "comoseriasecomia",
+        "postados_em": [
+          "MundoQueNaoExiste",
+          "Mundo Que Nao Existe"
+        ],
+        "_obs_postados_em": "04/11 23:50 dona ('por que não posta no TikTok o mesmo do Instagram?'): canal sem conta TikTok ligada -> esta conta (vazia)",
+        "pausada": "12/11 08:54: MORTA — 0 views em 7 dias e todos os vídeos em 0 (leitura 2026-11-12T07:45); dona 11/11 autorizou"
+      },
+      "rezaulkarimul355": {
+        "cofre": "rezaulkarimul355",
+        "_obs": "19/10: TikTok @rezaulkarimul criado a pedido do dono -> Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "rezaulkarimul355"
+      },
+      "emersonjosiel0": {
+        "cofre": "emersonjosiel0",
+        "_obs": "19/10: TikTok @emersonjosiel2027 (logou pelo Google do cofre) -> Veo de reserva",
+        "maquina": [
+          "acer",
+          "pc2",
+          "desktop",
+          "sti",
+          "x200ma"
+        ],
+        "perfil_remoto": "emersonjosiel0"
+      },
+      "inovaremanhwaverseviet": {
+        "cofre": "inovaremanhwaverseviet",
+        "postados_em": [
+          "YouTube inovaremanhwaverseviet",
+          "inovaremanhwaverseviet",
+          "Inovaremanhwaverseviet"
+        ],
+        "_obs": "19/10: TikTok @inovaremanhwavers83 criado = conteudo do canal vietnamita (como hindi/russo/tailandes)",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverseviet"
+      },
+      "inovaremanhwaverseind": {
+        "cofre": "inovaremanhwaverseind",
+        "postados_em": [
+          "YouTube inovaremanhwaverseind",
+          "inovaremanhwaverseind",
+          "Inovare Manga ind"
+        ],
+        "_obs": "19/10: TikTok @inovaremanga325 criado = conteudo do canal indonesio",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverseind"
+      },
+      "inovaremanhwaverseing": {
+        "cofre": "inovaremanhwaverseing",
+        "_obs": "19/10: TikTok @emersoncunha2737 criado; canal YouTube ingles com advertencia (uploads bloqueados) -> so Veo de reserva",
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2",
+          "desktop",
+          "sti"
+        ],
+        "perfil_remoto": "inovaremanhwaverseing"
+      }
+    },
+    "veo_comercial": {
+      "ligado": true,
+      "a_cada": 3,
+      "_leia": "dono 16/10: 1 a cada 3 do Veo NESTA conta vai com propaganda montada segura na hora (bin/comercial_veo.py: card v6 sem contato + checagem por visao de telefone/URL/@/QR; produto nunca repete o ultimo da conta). ligado=false volta a ser so limpo."
+    },
+    "parceiro_produto": {
+      "ligado": true,
+      "a_cada": 3,
+      "_leia": "dono 26/10 (linha CORTES): 1 a cada 3 Shorts de parceiro NESTA conta vai com 3-4 s de produto nosso no meio (recapd bin/cortes_produto.py: trecho de demonstracao do Reel do produto + frase do narrador so com o nome + checagem de contato por visao). Teste A/B: formato produto_meio no tiktok_auto_posted.json; resultado em D:/video-fila/linhas/CORTES/TESTES.md. ligado=false desliga."
+    },
+    "intervalo_conta_min": 90,
+    "remoto_com_proxy": true,
+    "_remoto_com_proxy": "04/11 dona: maquinas (desktop/x200ma/acer) postam pelo IP Webshare da conta (tunel reverso do proxy_tiktok); sem PROXY_OK la = nao posta por la. PC2 fora (SEM_PROXY_REMOTO). | 04/11 05:50 DESLIGADO: suspeita de Chrome esquecido no desktop (porta 9460) postando na conta errada (aviso do claude-78). | 04/11 19:40 RELIGADO: trava tiktok_relogar.conferir_conta lê o @ antes de cada post (registro sem @ repetido); sem o remoto as rodadas caíram de 10-16 para 0-3 posts."
+  },
+  "instagram": {
+    "veo_so_limpo": true,
+    "max_por_conta_dia": 2,
+    "intervalo_s": 60,
+    "duracao_max_s": 90,
+    "bytes_max": 100000000,
+    "contas": {
+      "videocassetadascom.ia": {
+        "temas": [
+          "cassetadas_ia",
+          "robos_desastrad",
+          "fofos_e_absurdo",
+          "humor_de_ia",
+          "stand-up"
+        ],
+        "parceiro_de": [
+          "Mundo Que Nao Existe",
+          "MundoQueNaoExiste"
+        ],
+        "_obs_parceiro": "18/10 (dono: libera parceiro no TikTok/Insta): Shorts de parceiro desses canais, por tema (anime / finanças / IA-absurdo)",
+        "maquina": [
+          "x200ma",
+          "acer"
+        ],
+        "perfil_remoto": "ig_videocassetadascom.ia"
+      },
+      "_lucrocomia_": {
+        "temas": [
+          "dicas_financeir",
+          "financas",
+          "vendas_com_ia",
+          "dicas_de_negocio"
+        ],
+        "parceiro_de": [],
+        "_obs_parceiro": "18/10 (dono: libera parceiro no TikTok/Insta): Shorts de parceiro desses canais, por tema (anime / finanças / IA-absurdo)",
+        "parceiro_de_antes": [
+          "Assist-IA Investimentos",
+          "AssistIA Investimentos",
+          "Dicas financeiras da ia",
+          "DicasFinanceirasDaIA"
+        ],
+        "_obs_11nov": "11/11: Assist-IA saiu daqui — é o canal da emerson20332.ia (AssistIA Investimentos); estava duplicado e esta, por vir antes na lista, levava 86 de 92 | 'Dicas financeiras da ia' = nome ANTIGO do Plantão das Histórias (@dicasfinanceirasdaia renomeado) — histórias iam pra conta de finanças; agora o Plantão é da emerson2029452 | sem Assist-IA/Dicas ficou 0 vídeos → InventoReact (invenções/negócio, exclusivo)",
+        "postados_em": [
+          "InventoReact"
+        ]
+      },
+      "iapro.mentoria": {
+        "temas": [
+          "aulas_ia",
+          "produtividade",
+          "cerebro_digital"
+        ],
+        "maquina": [
+          "x200ma",
+          "acer",
+          "pc2"
+        ],
+        "perfil_remoto": "ig_iapro.mentoria"
+      },
+      "inovarecom.ia": {
+        "projetos": [
+          "veo"
+        ],
+        "maquina": [
+          "x200ma",
+          "acer"
+        ],
+        "perfil_remoto": "ig_inovarecom.ia"
+      },
+      "recenas.ia": {
+        "cofre": "ig_recenas.ia",
+        "postados_em": [
+          "CenaReact",
+          "Filme Noturno"
+        ],
+        "_obs_dorama": "01/11: Dorama Noturno saiu daqui -> conta própria doramanoturno",
+        "_obs": "19/10 (dono: todas as contas de insta postando): sem token, posta pelo navegador (bin/instagram_login.py + instagram_cdp_poster)",
+        "maquina": [
+          "pc2"
+        ],
+        "perfil_remoto": "ig_recenas.ia"
+      },
+      "fakenews.ia4": {
+        "cofre": "ig_fakenews.ia4",
+        "postados_em": [
+          "Curiosidades Noturnas",
+          "Fio da Meada"
+        ],
+        "_obs": "19/10: pelo navegador; curiosidades/fatos"
+      },
+      "futebolcom.ia2": {
+        "cofre": "ig_futebolcom.ia2",
+        "_obs": "19/10: pelo navegador; sem canal de esportes ainda -> Veo de reserva",
+        "maquina": [
+          "pc2"
+        ],
+        "perfil_remoto": "ig_futebolcom.ia2"
+      },
+      "sintetizerisada": {
+        "cofre": "ig_sintetizerisada",
+        "_obs": "19/10: pelo navegador; sem canal do tema -> Veo de reserva",
+        "maquina": [
+          "pc2"
+        ],
+        "perfil_remoto": "ig_sintetizerisada",
+        "postados_em": [
+          "Comedia Noturna",
+          "Comédia Noturna"
+        ],
+        "_obs_comedia": "02/11 (dona: faça as pendentes): conta de humor -> recebe os Shorts do Comédia Noturna; sem Short novo = Veo de reserva como antes"
+      },
+      "msenergysolar.pa": {
+        "projetos": [
+          "ms-energy"
+        ],
+        "cofre": "ig_msenergy_novo",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 24/10 (instagram_criar.py)",
+        "repostar_de": [
+          "ms-energy"
+        ],
+        "sem_proxy": "12/11 dona: solares postam pelo IP de casa"
+      },
+      "jornalcomia": {
+        "temas": [
+          "noticias_de_ia",
+          "tech_news"
+        ],
+        "cofre": "ig_jornalcomia",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 24/10 (instagram_criar.py); mesmo conteúdo do TikTok jornalcomia",
+        "maquina": [
+          "x200ma",
+          "acer"
+        ],
+        "perfil_remoto": "ig_jornalcomia"
+      },
+      "canalhistoriacomia": {
+        "temas": [
+          "alienigenas",
+          "e_se",
+          "segredos_do_oce",
+          "oceano"
+        ],
+        "projetos": [
+          "historias-em-frames"
+        ],
+        "cofre": "ig_canalhistoriacomia",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 24/10 (instagram_criar.py); mesmo conteúdo do TikTok canalhistoriacomia",
+        "maquina": [
+          "x200ma"
+        ],
+        "perfil_remoto": "ig_canalhistoriacomia",
+        "postados_em_antes": null,
+        "postados_em": [
+          "HistoriasEmFrames"
+        ],
+        "_obs_11nov": "11/11 dona ('sim, faça todas' — ligar vídeos de parceiro nas contas sem vídeo): canal exclusivo, nenhuma outra conta IG usa"
+      },
+      "disparoemmassa.ia": {
+        "produto": "disparo_massa",
+        "cofre": "ig_disparoemmassa.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 25/10 (instagram_criar.py)"
+      },
+      "followupia.ia": {
+        "produto": "follow_up",
+        "cofre": "ig_followupia.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 25/10 (instagram_criar.py)"
+      },
+      "vpsblindada.ia": {
+        "produto": "vps_infra",
+        "cofre": "ig_vpsblindada.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 25/10 (instagram_criar.py)"
+      },
+      "fabricademarketing.ia": {
+        "produto": "fabrica_conteudo",
+        "cofre": "ig_fabricademarketing.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 25/10 (instagram_criar.py)"
+      },
+      "crmchatwoot.ia": {
+        "produto": "crm_chatwoot",
+        "cofre": "ig_crmchatwoot.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 26/10 (instagram_criar.py)"
+      },
+      "mentoriasia.ia": {
+        "produto": "treinamentos",
+        "cofre": "ig_mentoriasia.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 27/10 (instagram_criar.py)"
+      },
+      "landingpageia.ia": {
+        "produto": "landing_page",
+        "cofre": "ig_landingpageia.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 27/10 (instagram_criar.py)"
+      },
+      "gestaodegrupos.ia": {
+        "produto": "gestao_grupos",
+        "cofre": "ig_gestaodegrupos.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 27/10 (instagram_criar.py)"
+      },
+      "agentesdeia.ia": {
+        "produto": "agente_tarefas",
+        "cofre": "ig_agentesdeia.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 27/10 (instagram_criar.py)"
+      },
+      "inovareclone": {
+        "produto": "avatar_ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "27/10: token API (maiteanajessicajesus@gmail.com)"
+      },
+      "inovarecrm": {
+        "produto": "crm_chatwoot",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "27/10: token API (gabriellyvitoriaisabelaaraujo@gmail.com)"
+      },
+      "inovaresites": {
+        "produto": "landing_page",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "27/10: token API (simonerebecaluizasilva@gmail.com)"
+      },
+      "inovareagenda": {
+        "produto": "agenda_ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "27/10: token API (revolutionemerson1@gmail.com)"
+      },
+      "superchatia.ia": {
+        "produto": "superchat",
+        "cofre": "ig_superchatia.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 28/10 (instagram_criar.py)"
+      },
+      "vitrineia_inovare": {
+        "produto": "vitrine_ia",
+        "cofre": "ig_vitrineia.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 29/10 (instagram_criar.py)"
+      },
+      "inovareclaw.ia": {
+        "produto": "inovare_claw",
+        "cofre": "ig_inovareclaw.ia",
+        "sem_veo": false,
+        "max_dia": 5,
+        "_obs": "criada 30/10 (instagram_criar.py)"
+      },
+      "emerson2029452": {
+        "canais": [
+          "cenareact"
+        ],
+        "postados_em": [
+          "Plantão das Histórias"
+        ],
+        "cofre": "ig_emerson2029452",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 30/10 (instagram_criar.py); mesmo conteúdo do TikTok emersonjosiel2029",
+        "postados_em_antes": [
+          "CenaReact"
+        ],
+        "_obs_11nov": "11/11 dona ('sim, faça todas' — ligar vídeos de parceiro nas contas sem vídeo): canal exclusivo, nenhuma outra conta IG usa"
+      },
+      "emerson20308.ia": {
+        "canais": [
+          "cartuchoreact"
+        ],
+        "postados_em": [
+          "CartuchoReact"
+        ],
+        "cofre": "ig_emerson20308",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 30/10 (instagram_criar.py); mesmo conteúdo do TikTok emersonjosiel2030"
+      },
+      "emerson20332.ia": {
+        "canais": [
+          "assistiainvestimentos"
+        ],
+        "postados_em": [
+          "Assist-IA Investimentos",
+          "AssistIA Investimentos"
+        ],
+        "cofre": "ig_emerson20332",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 31/10 (instagram_criar.py); mesmo conteúdo do TikTok emersonjosiel2033"
+      },
+      "inovaremanhwavers5": {
+        "postados_em": [
+          "Manhwa Noturno"
+        ],
+        "cofre": "ig_inovaremanhwavers5",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 31/10 (instagram_criar.py); mesmo conteúdo do TikTok inovaremanhwaverse2"
+      },
+      "entrevistacomia": {
+        "temas": [
+          "stand-up",
+          "humor_de_ia",
+          "cassetadas_ia",
+          "robos_desastrad",
+          "fofos_e_absurdo"
+        ],
+        "cofre": "ig_entrevistacomia",
+        "sem_veo": false,
+        "_obs_reserva": "01/11: os temas dela são do Veo e a 1a conta com os mesmos temas (videocassetadascom.ia) pegava tudo; com sem_veo=true ficava 0 posts. Agora recebe Veo de reserva.",
+        "max_dia": 5,
+        "_obs": "criada 31/10 (instagram_criar.py); mesmo conteúdo do TikTok entrevistacomia",
+        "postados_em_antes": null,
+        "postados_em": [
+          "Bicho Noturno"
+        ],
+        "_obs_11nov": "11/11 dona ('sim, faça todas' — ligar vídeos de parceiro nas contas sem vídeo): canal exclusivo, nenhuma outra conta IG usa"
+      },
+      "doramanoturno": {
+        "postados_em": [
+          "Dorama Noturno"
+        ],
+        "cofre": "ig_doramanoturno",
+        "sem_veo": false,
+        "_obs_reserva": "01/11: o Dorama Noturno ia para recenas.ia (1a da lista); tirado de lá. Sem Short novo do canal no dia = Veo de reserva (nunca sem postagem).",
+        "max_dia": 5,
+        "_obs": "criada 31/10 (instagram_criar.py); mesmo conteúdo do TikTok doramanoturno"
+      },
+      "emerson.josiel.cu": {
+        "postados_em": [
+          "inovare manhwa verse ru"
+        ],
+        "cofre": "ig_emerson.josiel.cu",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 02/11 (instagram_criar.py); mesmo conteúdo do TikTok inovaremanhwaverserussian"
+      },
+      "inovaremanhwabr4": {
+        "canais": [
+          "inovaremanhwabr"
+        ],
+        "postados_em": [
+          "inovare manhwa br",
+          "inovaremanhwabr"
+        ],
+        "cofre": "ig_inovaremanhwabr4",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 02/11 (instagram_criar.py); mesmo conteúdo do TikTok inovaremanhwabr"
+      },
+      "canalanimescomiaanimescomia": {
+        "canais": [
+          "animescomia"
+        ],
+        "postados_em": [
+          "Animescomia"
+        ],
+        "cofre": "ig_animescomia",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 02/11 (instagram_criar.py); mesmo conteúdo do TikTok canalanimescomia"
+      },
+      "emersoncunha2737": {
+        "cofre": "ig_emersoncunha2737",
+        "sem_veo": true,
+        "max_dia": 5,
+        "_obs": "criada 03/11 (instagram_criar.py); mesmo conteúdo do TikTok inovaremanhwaverseing",
+        "postados_em_antes": null,
+        "postados_em": [
+          "ManhwaReact"
+        ],
+        "_obs_11nov": "11/11 dona ('sim, faça todas' — ligar vídeos de parceiro nas contas sem vídeo): canal exclusivo, nenhuma outra conta IG usa"
+      }
+    },
+    "veo_comercial": {
+      "ligado": true,
+      "a_cada": 3,
+      "_leia": "dono 16/10: 1 a cada 3 do Veo NESTA conta vai com propaganda montada segura na hora (bin/comercial_veo.py: card v6 sem contato + checagem por visao de telefone/URL/@/QR; produto nunca repete o ultimo da conta). ligado=false volta a ser so limpo."
+    },
+    "intervalo_conta_min": 90
+  }
+}

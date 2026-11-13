@@ -1,0 +1,29 @@
+{
+  "_doc": "Ambientes do bot Veo/Flow, em ordem de PRIORIDADE (menor numero = mais importante). O supervisor.py usa isto pra decidir quem roda e quem pausa quando falta recurso. 'ativo': false = supervisor nao liga esse ambiente (ex.: prod ainda vazio).",
+  "ambientes": [
+    {
+      "nome": "prod",
+      "prioridade": 1,
+      "pasta": "prod",
+      "ativo": false,
+      "headless": false,
+      "obs": "Producao estavel. HOJE VAZIO — ativar so quando promovermos uma versao provada."
+    },
+    {
+      "nome": "beta",
+      "prioridade": 2,
+      "pasta": "beta",
+      "ativo": true,
+      "headless": false,
+      "obs": "A que roda agora (versao restaurada). E a LIVE ate termos prod."
+    },
+    {
+      "nome": "experimental",
+      "prioridade": 3,
+      "pasta": "experimental",
+      "ativo": false,
+      "headless": false,
+      "obs": "Onde testamos melhorias. DESATIVADO em 12/10/2026: os perfis de Chrome dela (deslogados) foram apagados na migracao para o cofre e ela usa as MESMAS portas da beta (9250/9260/9270) — ligada, abriria Chromes vazios no lugar das contas da beta."
+    }
+  ]
+}

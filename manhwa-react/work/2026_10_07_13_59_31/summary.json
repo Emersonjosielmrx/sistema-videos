@@ -1,0 +1,117 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 13-59-31.mp4",
+ "duration": 87.766667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 712,
+  "has_webcam": true,
+  "contrast": 74.8,
+  "trimmed": {
+   "webcam_bottom": 62
+  },
+  "divider": 667,
+  "webcam": [
+   0,
+   0,
+   720,
+   605
+  ],
+  "content": [
+   0,
+   667,
+   712,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": false,
+  "score": 3,
+  "reason": "Reações genéricas e repetitivas ('bacana' 4x), sem emoção forte, sem conteúdo visível do anime e muitos silêncios longos tornando o vídeo vazio.",
+  "topic": "React genérico a anime do Paladino",
+  "channel": "manhwareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 55.0,
+    "hook": "ESSE ANIME É ULTRA POWER!",
+    "title": "Esse anime do Paladino é ABSURDO demais 🔥 #shorts #anime",
+    "description": "O criador reage ao anime do Paladino e explica por que ele ficou ultra power!\nVocê já assistiu esse anime? Conta nos comentários!\nSe curtiu, segue o canal pra mais reacts!\n\n#shorts #react #anime #paladino #isekai #animebrasileiro #otaku #animereact #power #recomendacao #temporada #fantasy #protagonista #ultrapower",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#anime",
+     "#paladino",
+     "#isekai",
+     "#otaku",
+     "#animebrasileiro",
+     "#power"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "paladino",
+     "isekai",
+     "ultra power",
+     "anime react",
+     "otaku",
+     "recomendação anime",
+     "anime brasileiro",
+     "protagonista forte",
+     "fantasia",
+     "temporada anime",
+     "react anime"
+    ],
+    "keywords": [
+     {
+      "t": 30.0,
+      "text": "ULTRA POWER",
+      "emoji": "💪"
+     }
+    ],
+    "reactions": [],
+    "memes": [],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Qual anime do Paladino vocês acham que ele tá falando? 🤔",
+    "title_alternatives": [
+     "Ele ficou ULTRA POWER nesse anime do Paladino 💪 #shorts #anime",
+     "Se você NÃO assistiu esse anime, ASSISTE! 🔥 #shorts #paladino"
+    ],
+    "mood": "calm_chill",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 54.77,
+    "end": 60.07,
+    "why": "Silêncio longo sem conteúdo"
+   },
+   {
+    "start": 60.83,
+    "end": 64.06,
+    "why": "Silêncio longo sem conteúdo"
+   },
+   {
+    "start": 67.48,
+    "end": 73.24,
+    "why": "Silêncio longo sem conteúdo"
+   },
+   {
+    "start": 73.24,
+    "end": 76.85,
+    "why": "Silêncio longo sem conteúdo"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "manhwareact",
+ "outputs": [],
+ "status": "rejected"
+}

@@ -1,0 +1,78 @@
+{
+ "tratadas": {
+  "manhwa-react": {
+   "8e1dce": "nao 18/10/2026: extras_rede.py ja passa ab= e le teste_ab",
+   "7765a5": "feito 18/10/2026: cópias distribuídas pelo recursos.py em 18/10 (12 módulos comuns)",
+   "c328be": "feito 21/10/2026",
+   "a3e381": "feito 21/10/2026",
+   "f286ca": "nao 21/10/2026: react é gravado pelo dono (voz própria)",
+   "54be4b": "nao 21/10/2026: react é gravado pelo dono (voz própria)",
+   "a43d34": "nao 21/10/2026: react é gravado pelo dono (fala própria)",
+   "b6adf9": "nao 22/10/2026: central no politica.py",
+   "8c7869": "nao 22/10/2026: ordem de fila interna do hipercool; a rede tem a propria ordem",
+   "309fb6": "nao 22/10/2026: mr nao congela ultimo quadro com -ss; frames extraidos no meio e tolerantes a falha",
+   "5a71ce": "feito 22/10/2026: sys.stdout/stderr.reconfigure utf-8 no manhwareact.py (22/10)",
+   "066d45": "nao 22/10/2026: react usa o vídeo/voz real; não gera narração TTS",
+   "582dba": "nao 22/10/2026: react usa o vídeo/voz real; não gera narração TTS"
+  },
+  "historias": {
+   "7765a5": "feito 18/10/2026: cópias distribuídas pelo recursos.py em 18/10 (12 módulos comuns)",
+   "54be4b": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "c328be": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "f286ca": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "d75e0c": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "a43d34": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "a3e381": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "63eefa": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "8e7f1f": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "31437b": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "c6dbf6": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "b6adf9": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "8c7869": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "309fb6": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "5a71ce": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "cc5052": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "e73ac5": "nao 21/10/2026: projeto parado pelo dono; reavaliar ao religar",
+   "066d45": "feito 22/10/2026: story_pipeline.py: microcortes na geração e na fala que vem do cache (22/10)"
+  },
+  "recapd": {
+   "7765a5": "feito 18/10/2026: cópias distribuídas pelo recursos.py em 18/10 (12 módulos comuns)",
+   "8e1dce": "nao 18/10/2026: nenhum código daqui usa capas_teste_ab/teste_ab_capa (grep 18/10); o bug era só do historias",
+   "c328be": "feito 21/10/2026",
+   "a3e381": "feito 21/10/2026",
+   "f286ca": "feito 21/10/2026",
+   "cc5052": "feito 21/10/2026",
+   "e73ac5": "feito 22/10/2026: anime_auto.py:520-574 + anime_script.cta_fim (conferido 22/10)",
+   "b6adf9": "nao 22/10/2026: central no politica.py",
+   "8c7869": "nao 22/10/2026: ordem de fila interna do hipercool",
+   "309fb6": "nao 22/10/2026: recapd congela com tpad=stop_mode=clone (fx_clips), imune ao -ss",
+   "5a71ce": "nao 22/10/2026: entradas do recapd ja nascem com PYTHONUTF8=1 (cron_parceiro.bat e ENV do controlador) antes do python abrir",
+   "d75e0c": "nao 22/10/2026: censura_visual so e usado pelo hiper-pipeline LEGADO de julho no recapd; o fluxo vivo (parceiro/anime) usa anime_revisao no video pronto. Se o legado reviver, portar da versao do hipercool (19/10)"
+  },
+  "hipercool": {
+   "74b954": "nao 18/10/2026: hipercool já tem o compilado 16:9 (bin/hiper-longo.py); a ideia veio daqui",
+   "fa0246": "nao 18/10/2026: hipercool já tem bin/metricas.py; a ideia veio daqui",
+   "8e1dce": "nao 18/10/2026: nenhum código daqui usa capas_teste_ab/teste_ab_capa (grep 18/10); o bug era só do historias",
+   "c328be": "feito 21/10/2026",
+   "b6adf9": "nao 22/10/2026: central no politica.py (cota_restante conta pelo ledger pra todos)",
+   "31437b": "feito 22/10/2026: gatilhos do fx_foley alinhados ao mr/foley.py (22/10)",
+   "582dba": "feito 22/10/2026: elenco._microcortes ligado por padrão (pt, línguas, 16:9) após teste do cap 14 aprovado pela dona 22/10"
+  },
+  "postador": {
+   "066d45": "nao 22/10/2026: só posta; não gera narração",
+   "582dba": "nao 22/10/2026: só posta; não gera narração"
+  },
+  "veo": {
+   "066d45": "nao 22/10/2026: a fala principal é gerada pelo Veo com a boca sincronizada (cortar o áudio dessincroniza); edge só no CTA de 1 frase",
+   "582dba": "nao 22/10/2026: a fala principal é gerada pelo Veo com a boca sincronizada (cortar dessincroniza); edge só no CTA de 1 frase"
+  }
+ },
+ "checado": {
+  "hipercool": "2026-11-12T10:17:41",
+  "historias": "2026-11-12T10:17:41",
+  "manhwa-react": "2026-11-12T10:17:41",
+  "recapd": "2026-11-12T10:17:41",
+  "postador": "2026-11-12T10:17:41",
+  "veo": "2026-11-12T10:17:41"
+ }
+}

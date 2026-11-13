@@ -1,0 +1,110 @@
+{
+ "hx-socorro-kiro": {
+  "numero_yt": {
+   "ok": 15,
+   "total": 15,
+   "tempo": 295,
+   "turnos": 7,
+   "erro": "",
+   "falhas": []
+  },
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 320,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 418,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-maos-kiro": {
+  "numero_yt": {
+   "ok": 13,
+   "total": 15,
+   "tempo": 161,
+   "turnos": 4,
+   "erro": "",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 598,
+   "turnos": 16,
+   "erro": "",
+   "falhas": []
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 461,
+   "turnos": 9,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-plano-kiro": {
+  "numero_yt": {
+   "ok": 11,
+   "total": 15,
+   "tempo": 122,
+   "turnos": 8,
+   "erro": "",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('Nenhuma visualização') == 0",
+    "n('Sem visualizações') == 0",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 177,
+   "turnos": 12,
+   "erro": "",
+   "falhas": []
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 134,
+   "turnos": 6,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-revisor-kiro": {
+  "numero_yt": {
+   "ok": 13,
+   "total": 15,
+   "tempo": 81,
+   "turnos": 5,
+   "erro": "",
+   "falhas": [
+    "n('4,1 mi de inscritos') == 4100000",
+    "n('2 meses atrás') == 2"
+   ]
+  },
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 109,
+   "turnos": 6,
+   "erro": "",
+   "falhas": []
+  }
+ },
+ "hx-erro-kiro": {}
+}

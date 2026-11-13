@@ -1,0 +1,71 @@
+{
+ "modelo": "agy/gemini-3.8-flash-high",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T14:40:39",
+ "segundos": 716,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T14:40:39",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "agy/gemini-3.8-flash-high",
+   "decisor": "agy/gemini-3.8-flash-high"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Monotonia visual e ausência de elementos gráficos em movimento: mais de 26 segundos no mesmo enquadramento estático do apresentador sem b-roll, tela de WhatsApp ou demonstração do produto, penalizando sistematicamente a nota de movimento.",
+    "prova": "histórico de notas (11 de 12 vídeos com movimento 4.0-5.0) / júri movimento cena 1 / júri diretor cena 2",
+    "sugestao": "Testar a inserção de elemento gráfico animado que entra ou desliza durante a fala (ex.: mockup de smartphone simulando chamada com voz clonada) em vez de aumentar kenburns_zoom, já que a movimentação do dono já mede entre 10% e 14%.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Headroom estrangulado com elemento sobre a cabeça do apresentador: a faixa verde superior e as pílulas de etapa ('1 O problema', '2 Como funciona', '3 O resultado') encostam e sobrepõem o topo do cabelo ao longo de quase todo o vídeo.",
+    "prova": "quadros 3, 4, 5, 6, 7, 8, 9 e 10 da folha.jpg / júri diretor cena 1",
+    "sugestao": "Ajustar o parâmetro 'folga_dono' ou reduzir a escala do vídeo do apresentador em 10% a 15% para garantir respiro visível entre o topo do cabelo e a pílula de etapa.",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Sobreposição de texto sobre o rosto do dono e transição defeituosa: no quadro 11, o texto do cartão final ('Hermes Call', arroba e link) é projetado diretamente por cima da face do apresentador, com tela esbranquiçada e artefatos visuais.",
+    "prova": "quadro 11 da folha.jpg",
+    "sugestao": "Corrigir a transição da cena 3 para o cartão final, eliminando a sobreposição de opacidade que vaza os elementos do cartão sobre o apresentador antes do corte.",
+    "repetido": false
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Falha crítica de legibilidade na legenda karaokê: a caixa escura de contraste sumiu na palavra 'Call', que aparece em verde escuro sobre a camisa azul escura, além do corte da palavra 'Hermes'.",
+    "prova": "dados.json (júri movimento cena 2 e diretor cena 2)",
+    "sugestao": "Garantir a persistência da tarja escura sob todas as palavras da legenda e adicionar contorno/borda de alto contraste para destacar termos da marca contra roupas escuras.",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Gancho inicial nos primeiros 2 segundos com leitura estática da pergunta, sem quebra de padrão visual ou impacto imediato para reter o scroll.",
+    "prova": "quadros 1 e 2 da folha.jpg / júri diretor cena 0",
+    "sugestao": "Testar corte com punch-in dinâmico (zoom digital de 10% a 15%) nos primeiros 1,5s acompanhado de efeito sonoro de alerta ao surgir a caixinha de pergunta.",
+    "repetido": false
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "regra_editor",
+    "alvo": "",
+    "valor": "Garantir respiro (headroom) do apresentador: posicionar o vídeo mais abaixo ou reduzir a escala em 10% a 15% para que a faixa superior e as pílulas de etapa não encostem nem sobreponham o topo do cabelo.",
+    "motivo": "Faixa verde superior e pílulas de etapa encostam e sobrepõem o topo do cabelo do apresentador ao longo de quase todo o vídeo; problema de enquadramento repetido e confirmado no júri.",
+    "prova": "quadros 3, 4, 5, 6, 7, 8, 9 e 10 da folha.jpg / júri diretor cena 1",
+    "vetada": "Python: regra mexe em assunto de segurança/fatos: 10%"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "",
+    "valor": "Corrigir a transição da cena 3 para o cartão final, eliminando a sobreposição de opacidade que vaza os elementos e textos do cartão sobre o apresentador antes do corte.",
+    "motivo": "Violação da regra fixa de que o rosto do dono nunca pode ser coberto. No quadro 11, a transição defeituosa projeta os textos do cartão final diretamente sobre a face do apresentador.",
+    "prova": "quadro 11 da folha.jpg"
+   }
+  ],
+  "aprovadas": 1
+ }
+}

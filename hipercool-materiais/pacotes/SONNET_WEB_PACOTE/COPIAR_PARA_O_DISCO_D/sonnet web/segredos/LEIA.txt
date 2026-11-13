@@ -1,0 +1,7 @@
+Pasta de SEGREDOS do Sonnet web. Vem vazia de propósito.
+
+cookies.json é criado sozinho pelo pegar_cookies.py. Formato (para referência, NÃO preencha à mão):
+{
+  "sua_conta@gmail.com": {"cookie": "<SEGREDO_REMOVIDO>", "expira": 1795000000, "em": "2026-11-03 10:00", "maquina": "pc1"}
+}
+A sessão do claude.ai dura ~4 semanas. O zelador_sonnet.py renova antes de vencer.

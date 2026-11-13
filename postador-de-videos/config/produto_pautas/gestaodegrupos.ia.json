@@ -1,0 +1,137 @@
+{
+ "pautas": [
+  {
+   "id": "boas_vindas_manual",
+   "tipo": "dor",
+   "ideia": "Você perde tempo mandando mensagem para cada cliente novo que entra na comunidade, mas o sistema envia as boas-vindas no automático.",
+   "pergunta_cliente": "Consigo recepcionar quem entra no grupo sem precisar digitar toda vez?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "bot_invasivo",
+   "tipo": "objecao",
+   "ideia": "O receio de colocar um robô que atrapalha o fluxo do chat é resolvido com o bot condicional, que só responde quando é chamado.",
+   "pergunta_cliente": "O bot vai ficar interrompendo a conversa dos membros toda hora?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "resumo_conversas",
+   "tipo": "como_funciona",
+   "ideia": "Para não precisar ler centenas de mensagens acumuladas no dia, o recurso de atas gera um resumo direto no grupo.",
+   "pergunta_cliente": "Como funciona essa função de resumo das conversas?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "spam_links",
+   "tipo": "dor",
+   "ideia": "Pessoas entram no seu grupo para enviar links indesejados e você resolve isso aplicando a moderação automática.",
+   "pergunta_cliente": "Tem como barrar links e mensagens indevidas sozinho?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "vendas_sniper",
+   "tipo": "caso_de_uso",
+   "ideia": "Quando surge uma oportunidade clara de compra no meio do bate-papo, o Agente Sniper atua de forma certeira no grupo.",
+   "pergunta_cliente": "O que exatamente faz esse Agente Sniper no grupo?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "leitura_links",
+   "tipo": "como_funciona",
+   "ideia": "Membros compartilham artigos e páginas externas longas, e o resumidor de links extrai os pontos principais automaticamente.",
+   "pergunta_cliente": "Ele consegue resumir o conteúdo de links que mandam lá dentro?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "respostas_personalizadas",
+   "tipo": "caso_de_uso",
+   "ideia": "Para adaptar o tom de voz e as orientações conforme o contexto da comunidade, você utiliza o prompt dinâmico.",
+   "pergunta_cliente": "Dá para personalizar o jeito e as regras que o bot responde?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "caos_vs_organizacao",
+   "tipo": "antes_depois",
+   "ideia": "De um grupo com conversas perdidas e spam constante para um ambiente organizado com moderação ativa e atas automáticas.",
+   "pergunta_cliente": "Meu grupo hoje é uma bagunça, o que muda na prática com a ferramenta?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "perda_tempo_moderando",
+   "tipo": "dor",
+   "ideia": "O dono do negócio passa o dia vigiando o WhatsApp em vez de focar nas vendas, mas a moderação automática assume essa tarefa.",
+   "pergunta_cliente": "Preciso continuar monitorando o grupo o dia todo?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "regras_grupo_novatos",
+   "tipo": "caso_de_uso",
+   "ideia": "Evite desrespeito às normas logo de início disparando as regras nas boas-vindas automáticas assim que o membro entra.",
+   "pergunta_cliente": "Ele já avisa as regras pro cliente assim que ele entra?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "medo_perder_controle",
+   "tipo": "objecao",
+   "ideia": "O medo de perder a governança da comunidade acaba ao configurar o prompt dinâmico com os limites que você define.",
+   "pergunta_cliente": "Eu consigo limitar o que a IA pode ou não falar no grupo?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "perdeu_o_fio_da_meada",
+   "tipo": "dor",
+   "ideia": "Clientes cobram posicionamento sobre discussões longas e você se atualiza rapidamente por meio das atas automáticas.",
+   "pergunta_cliente": "Como fico sabendo do que rolou no grupo sem ler tudo?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "resumo_links_externos",
+   "tipo": "caso_de_uso",
+   "ideia": "Facilite o consumo de materiais recomendados na comunidade usando o resumidor de links direto no chat.",
+   "pergunta_cliente": "Se eu mandar o link de um artigo, ele faz um resumo pros membros?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "atendimento_solicitado",
+   "tipo": "como_funciona",
+   "ideia": "O membro marca ou aciona o bot condicional e recebe a resposta imediata com base no prompt dinâmico configurado.",
+   "pergunta_cliente": "Como o cliente faz para tirar dúvidas com o bot no grupo?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "silencio_comercial",
+   "tipo": "antes_depois",
+   "ideia": "De dúvidas comerciais que ficavam sem resposta a intervenções pontuais do Agente Sniper gerando interesse.",
+   "pergunta_cliente": "Como o Agente Sniper ajuda a movimentar os interessados no grupo?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "seguranca_grupo",
+   "tipo": "pergunta_frequente",
+   "ideia": "Veja como a moderação protege o ambiente removendo comportamentos fora do combinado de forma automática.",
+   "pergunta_cliente": "A moderação funciona de verdade contra mensagens ofensivas ou spam?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "duvida_geral_recursos",
+   "tipo": "pergunta_frequente",
+   "ideia": "Apresentação de como boas-vindas, moderação, resumo de conversas e bot sob demanda operam integrados.",
+   "pergunta_cliente": "Quais tarefas exatamente esse sistema consegue rodar no automático?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "trabalho_bruto_vs_gestao",
+   "tipo": "antes_depois",
+   "ideia": "De horas gastas dando 'olá', apagando lixo e lendo mensagens para grupos de WhatsApp rodando no automático.",
+   "pergunta_cliente": "Quanto do meu trabalho operacional com grupos eu consigo eliminar?",
+   "criada": "2026-10-30T19:50:03"
+  },
+  {
+   "id": "complexidade_uso",
+   "tipo": "objecao",
+   "ideia": "Mesmo sem equipe técnica, o sistema mantém seus grupos no automático com bot condicional e moderação simples de aplicar.",
+   "pergunta_cliente": "É muito complicado de usar no dia a dia do meu negócio?",
+   "criada": "2026-10-30T19:50:03"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "_sobre": "Teste gradual de formatos e vozes nos Shorts reais (dona 23/10/2026). Lido por bin/anime_testes.py; o vigia é D:/video-fila/avaliar_testes_voz.py (relatório em D:/video-fila/TESTES_VOZ_RELATORIO.md). ligado=false para o sorteio na hora (nenhum Short novo em teste); o controle 'solo' continua só anotado no postar.json.",
+ "ligado": true,
+ "fracao": 0.15,
+ "_fracao": "parte dos Shorts de parceiro com voz clonada que vira teste (0,15 = ~3-5 por dia)",
+ "parte_formatos": 0.67,
+ "_parte_formatos": "dos testes, quanto é formato (o resto é voz nova sozinha)",
+ "fracao_promovidos": 0.15,
+ "_fracao_promovidos": "parte A MAIS que vai pros itens promovidos (os que já renderam = aparecem mais vezes)",
+ "min_medidas": 5,
+ "margem": 0.1,
+ "_promocao": "promovido: >= min_medidas vídeos medidos em 48 h e taxa de vitória >= a do solo + margem; pausado: <= solo - margem",
+ "min_semelhanca": 0.6,
+ "ruins_pausa": 2,
+ "falhas_pausa": 3,
+ "_falhas_pausa": "o pipeline ou a IA do formato quebrou com o item (não saiu) falhas_pausa vezes (e mais que os ok) = pausado",
+ "_qualidade": "o Short pronto é transcrito: < min_semelhanca das palavras, 'circunflexo' ou erro da IA = ruim; ruins_pausa ruins (e metade ou mais) = pausado",
+ "pausados": {},
+ "_pausados": "item -> motivo, ex.: {\"formato:fofoca\": \"dona 24/10: não gostei\"}",
+ "pessoas_reais": [
+  "apostolo_valdemiro_santiago", "cid_moreira", "dinho_mamonas_assassinas", "ei_nerd", "faustao",
+  "fatos_desconhecidos", "galvao_bueno", "gretchen", "ivete_sangalo", "ludmilla", "luiz_carlos_persy", "lula",
+  "marilia_mendonca", "mc_melody_brazilian_singer_v2_500", "narrador_do_canal_fala_serio", "silvio_santos"
+ ],
+ "_pessoas_reais": "voz de pessoa real: nunca entra como VOZ em teste e, no elenco de um Short EM TESTE (formato com Silvio/Faustão/Galvão...), marca 'conteúdo alterado ou sintético' no YouTube",
+ "marcar_sintetico_solo": false,
+ "_marcar_sintetico_solo": "true = marca também o Short NORMAL narrado por pessoa real desta lista (decisão da dona; os 16 narradores parceiros não estão na lista)"
+}

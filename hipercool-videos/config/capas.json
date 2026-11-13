@@ -1,0 +1,15 @@
+{
+ "_leia": "Personagens de cada obra pra capa redesenhada (bin/capa_ia.py). ele/ela = aparência em inglês pro gerador de imagem (tirada dos painéis pela visão do Gemini em 15/10; ajuste à vontade). outras = outras mulheres da obra (entram nas poses de harém). epoca = true se o manhwa for de época (roupa de época chamativa).",
+ "the-inheritor": {
+  "ele": "a Korean man in his early twenties, medium build, short dark navy-blue hair with soft bangs, dark eyes, clean-shaven, white long-sleeved button shirt",
+  "ela": "an adult Korean woman in her mid twenties, long straight dark brown hair with soft bangs, fair skin, delicate features, curvy athletic body with a full bust",
+  "frase_compilado": "ELE HERDOU UMA GAROTA DO PAI?!",
+  "epoca": false,
+  "outras": [
+   {
+    "nome": "Han Sihyun (professora)",
+    "desc": "a mature Korean woman in her early thirties, wavy honey-brown shoulder-length hair parted to the side, warm brown eyes, glossy pink lips, voluptuous figure, confident teasing smile"
+   }
+  ]
+ }
+}

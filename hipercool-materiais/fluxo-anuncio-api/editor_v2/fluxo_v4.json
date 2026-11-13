@@ -1,0 +1,2225 @@
+{
+ "name": "Editor de Reels com IA · V4 MIX (legenda MIX + cards da propaganda: pergunta, aula, cartão final)",
+ "nodes": [
+  {
+   "parameters": {
+    "path": "editor-reel-v4",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página do editor (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "id": "0c5df48e-2d17-508e-8c86-356884eb7352",
+   "webhookId": "ab93edfd-3a12-5754-b09d-72b8eb28efb0"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Editor de Reels com IA · V4 MIX</title><meta name=\"robots\" content=\"noindex\">\n<style>\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:760px;margin:0 auto}h1{font-size:28px;line-height:1.2}.sub{color:var(--tx2);margin-top:6px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-top:16px}.card h2{font-size:17px;margin-bottom:6px}\n.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.passos div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:13px;color:var(--tx2)}.passos b{display:block;color:var(--tx)}\n.drop{border:2px dashed var(--borda);border-radius:14px;padding:26px 16px;text-align:center;cursor:pointer;color:var(--tx2);margin-top:12px}\n.drop.on{border-color:var(--pri);background:var(--cod)}.drop b{color:var(--tx);display:block;font-size:16px;margin-bottom:2px}\nvideo{width:100%;max-height:360px;border-radius:12px;background:#000;margin-top:12px;display:block}\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:10px}.barra i{display:block;height:100%;width:0;background:var(--pri);transition:width .3s}\nlabel{display:block;font-weight:600;font-size:14px;margin-top:12px}label small{font-weight:400;color:var(--mu)}\nselect,input[type=text],textarea{width:100%;margin-top:6px;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}\ntextarea{min-height:90px;resize:vertical}\n.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}\n.chks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}\n.chks label{margin:0;font-weight:500;display:flex;gap:8px;align-items:flex-start;background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:10px}\n.chks label input{margin-top:4px}.chks small{display:block;color:var(--mu);font-weight:400}\n.corlinha{display:flex;gap:10px;align-items:center;margin-top:6px}.corlinha input[type=color]{width:52px;height:40px;border:1px solid var(--borda);border-radius:10px;background:none;padding:2px}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:14px 20px;border-radius:14px;cursor:pointer}\n.btn.sec{background:var(--sup);color:var(--tx);border:1px solid var(--borda);font-size:14px;padding:9px 14px}\n.btn[disabled]{opacity:.5;cursor:default}\n.erro{color:var(--er);font-weight:600;margin-top:12px}.ok{color:var(--ok);font-weight:600}\n@media(max-width:600px){.duas,.chks,.passos{grid-template-columns:1fr}}\n</style></head><body><div class=\"w\">\n<h1>✂️ Editor de Reels com IA · V4 MIX</h1>\n<p class=\"sub\">Mande o <b>vídeo que você gravou</b> (falando do seu produto ou serviço) e a IA devolve um <b>Reel pronto para o Instagram</b>: corta as pausas e os \"né\", \"é\", \"tipo\", põe <b>legenda animada</b> com a palavra falada acesa, <b>frase de impacto</b> no topo, <b>tópicos</b>, trilha baixinha e o seu <b>@ no final</b>.</p>\n<div class=\"passos\"><div><b>1. Grave</b>em pé, falando, até 1min30</div><div><b>2. Envie</b>e conte o que é</div><div><b>3. A IA edita</b>uns 2 minutos</div><div><b>4. Poste</b>vídeo + legenda prontos</div></div>\n\n<div class=\"card\"><h2>1. O vídeo</h2>\n  <p class=\"sub\">MP4 ou MOV do celular, até 120 MB. Grave em pé (9:16); se for deitado, a IA põe em pé com fundo desfocado.</p>\n  <div><button class=\"btn sec\" type=\"button\" id=\"ex\">🎬 Usar vídeo de exemplo</button></div>\n  <div class=\"drop\" id=\"drop\"><b>📤 Toque para escolher o vídeo</b>ou arraste aqui</div>\n  <input type=\"file\" id=\"arq\" accept=\"video/*\" hidden>\n  <video id=\"prev\" controls playsinline hidden></video>\n  <div class=\"barra\" id=\"barra\" hidden><i></i></div>\n  <p class=\"sub\" id=\"info\">Nenhum vídeo ainda.</p>\n</div>\n\n<form class=\"card\" id=\"form\"><h2>2. Sobre o vídeo</h2>\n  <div class=\"duas\">\n    <div><label for=\"tipo\">Tipo</label><select id=\"tipo\"><option value=\"imovel\">🏠 Imóvel</option><option value=\"produto\" selected>🛍️ Produto</option><option value=\"comida\">🍔 Restaurante / comida</option><option value=\"veiculo\">🚗 Carro ou moto</option><option value=\"servico\">🧰 Serviço</option><option value=\"evento\">🎉 Evento</option><option value=\"outro\">✨ Outro</option></select></div>\n    <div><label for=\"marca\">Nome do negócio <small>(vai no final)</small></label><input type=\"text\" id=\"marca\" maxlength=\"50\" placeholder=\"Ex.: Imobiliária Vista Alta\"></div>\n  </div>\n  <label for=\"titulo\">O que aparece no vídeo *</label><input type=\"text\" id=\"titulo\" maxlength=\"90\" placeholder=\"Ex.: Apartamento 3 quartos com varanda\" required>\n  <label for=\"detalhes\">Detalhes <small>(opcional: ajuda a IA a escrever a legenda do post)</small></label><textarea id=\"detalhes\" maxlength=\"1000\"></textarea>\n  <div class=\"duas\">\n    <div><label for=\"instagram\">Instagram</label><input type=\"text\" id=\"instagram\" placeholder=\"@seunegocio\"></div>\n    <div><label for=\"trilha\">Trilha</label><select id=\"trilha\"><option value=\"auto\">🤖 A IA escolhe</option><option value=\"nenhuma\">🔇 Sem trilha</option><option value=\"elegante\">✨ Elegante</option><option value=\"animado\">🎉 Animado</option><option value=\"urgente\">⚡ Urgente</option><option value=\"emocional\">💛 Emocional</option><option value=\"calmo\">🌿 Calmo</option><option value=\"tropical\">🌴 Tropical</option><option value=\"latino\">💃 Latino</option><option value=\"chill\">😎 Chill</option></select></div>\n  </div>\n  <label>Cor de destaque <small>(topo, palavra acesa, cartão)</small></label><div class=\"corlinha\"><input type=\"color\" id=\"cor\" value=\"#c9a227\"><label style=\"margin:0;font-weight:500\"><input type=\"checkbox\" id=\"cor-ia\" checked> a IA escolhe</label></div>\n  <div class=\"chks\">\n    <label><input type=\"checkbox\" id=\"cortar_pausas\" checked><span>Cortar as pausas<small>silêncio maior que meio segundo</small></span></label>\n    <label><input type=\"checkbox\" id=\"cortar_vicios\" checked><span>Cortar os vícios<small>\"né\", \"é\", \"ãh\", \"tipo\"...</small></span></label>\n    <label><input type=\"checkbox\" id=\"legendas\" checked><span>Legenda animada<small>a palavra falada acende</small></span></label>\n    <label><input type=\"checkbox\" id=\"cartao_final\" checked><span>Cartão final<small>marca, chamada e @</small></span></label>\n  </div>\n  <p class=\"erro\" id=\"erro\" role=\"alert\"></p>\n  <button class=\"btn\" type=\"submit\" id=\"enviar\" style=\"width:100%;margin-top:16px\">✂️ Editar o meu Reel</button>\n</form></div>\n<script>\n(function () {\n  var el = function (s) { return document.querySelector(s); };\n  var VIDEO = '', enviando = false;\n  function novoId() { var a = new Uint8Array(6); window.crypto.getRandomValues(a); return Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }\n  var envioAtual = null;\n  function envia(arq) {\n    if (arq.size > 120e6) { el('#info').textContent = '⚠️ Vídeo maior que 120 MB.'; return; }\n    el('#prev').src = URL.createObjectURL(arq); el('#prev').hidden = false;\n    var id = novoId(), vez = 0, meu = {}; envioAtual = meu;\n    enviando = true; VIDEO = ''; el('#barra').hidden = false; el('#barra i').style.width = '0%'; el('#info').textContent = 'Enviando…';\n    var fim = function (ok, msg) { if (envioAtual !== meu) return; enviando = false;\n      el('#info').innerHTML = ok ? '<span class=\"ok\">✅ Vídeo pronto para editar</span> (' + Math.max(1, Math.round(arq.size / 1e6)) + ' MB)' : '';\n      if (!ok) el('#info').textContent = '⚠️ ' + msg; if (ok) VIDEO = id; };\n    // a conexão caiu: antes de mandar de novo, confere se o vídeo já tinha chegado\n    var caiu = function (motivo) { if (envioAtual !== meu) return;\n      if (++vez >= 5) return fim(false, motivo + '. Confira a internet e escolha o vídeo de novo.');\n      el('#info').textContent = '⚠️ ' + motivo + ' — tentando de novo (' + (vez + 1) + '/5)…';\n      setTimeout(function () { andamento(0, true); }, 1500 * vez); };\n    var manda = function () { if (envioAtual !== meu) return;\n      var fd = new FormData(); fd.append('video', arq, arq.name || 'video.mp4');\n      var x = new XMLHttpRequest(); x.open('POST', 'editor-reel-v4-video?id=' + id);\n      x.upload.onprogress = function (e) { if (e.lengthComputable && envioAtual === meu) { var p = Math.round(e.loaded / e.total * 100); el('#barra i').style.width = p + '%'; el('#info').textContent = 'Enviando ' + p + '%' + (p === 100 ? ' · guardando…' : ''); } };\n      x.onload = function () { var r = {}; try { r = JSON.parse(x.responseText); } catch (e) {}\n        if (x.status === 200 && r.ok) andamento(0, false);\n        else if (x.status >= 500 || !x.status) caiu('o servidor não respondeu');\n        else fim(false, r.erro || 'não deu para enviar'); };\n      x.onerror = function () { caiu('a conexão caiu'); };\n      x.onabort = x.onerror;\n      x.send(fd); };\n    // o n8n guarda o vídeo no armazenamento do ffmpeg na nuvem (alguns segundos): pergunta até ficar pronto\n    var andamento = function (n, conferindo) { if (envioAtual !== meu) return;\n      fetch('editor-reel-v4-video-status?id=' + id, { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (r) {\n        if (envioAtual !== meu) return;\n        if (r.pronto) return fim(true);\n        if (r.erro) return fim(false, r.erro);\n        if (conferindo) return manda();\n        el('#info').textContent = 'Guardando o vídeo…';\n        if (n < 90) setTimeout(function () { andamento(n + 1, false); }, 2000); else fim(false, 'demorou demais para guardar o vídeo; escolha de novo');\n      }).catch(function () { if (conferindo) return manda(); if (n < 90) setTimeout(function () { andamento(n + 1, false); }, 3000); else fim(false, 'a conexão caiu'); }); };\n    manda();\n  }\n  var drop = el('#drop'), inp = el('#arq');\n  drop.addEventListener('click', function () { inp.click(); });\n  ['dragover', 'dragenter'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('on'); }); });\n  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });\n  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files.length) envia(e.dataTransfer.files[0]); });\n  inp.addEventListener('change', function () { if (inp.files.length) envia(inp.files[0]); inp.value = ''; });\n  el('#ex').addEventListener('click', function () {\n    VIDEO = 'exemplo'; el('#prev').src = 'https://files.catbox.moe/gx64ow.mp4'; el('#prev').hidden = false; el('#barra').hidden = true;\n    el('#info').innerHTML = '<span class=\"ok\">✅ Vídeo de exemplo</span> (40 s com pausas e \"né, é\" para cortar)';\n    el('#tipo').value = 'imovel'; el('#marca').value = 'Vista Alta Imóveis'; el('#titulo').value = 'Apartamento 3 quartos com varanda gourmet';\n    el('#instagram').value = '@vistaalta.imoveis'; el('#detalhes').value = '3 quartos (1 suíte), sala ampla com janelas do chão ao teto, varanda gourmet com churrasqueira e vista para a cidade.';\n  });\n  el('#form').addEventListener('submit', function (e) {\n    e.preventDefault(); el('#erro').textContent = '';\n    if (enviando) { el('#erro').textContent = 'Espere o vídeo terminar de enviar.'; return; }\n    if (!VIDEO) { el('#erro').textContent = 'Envie o vídeo (ou use o exemplo).'; return; }\n    var d = { video: VIDEO };\n    ['tipo', 'marca', 'titulo', 'detalhes', 'instagram', 'trilha'].forEach(function (c) { d[c] = el('#' + c).value; });\n    ['cortar_pausas', 'cortar_vicios', 'legendas', 'cartao_final'].forEach(function (c) { d[c] = el('#' + c).checked; });\n    if (!el('#cor-ia').checked) d.cor = el('#cor').value;\n    var bt = el('#enviar'); bt.disabled = true; bt.textContent = 'Começando…';\n    (function pede(n) { fetch('editor-reel-v4', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {\n      if (!r.ok) { el('#erro').textContent = (r.erros || ['Não deu para começar.']).join(' '); bt.disabled = false; bt.textContent = '✂️ Editar o meu Reel'; return; }\n      location.href = r.link;\n    }).catch(function () { if (n < 3) { bt.textContent = 'A conexão caiu, tentando de novo…'; setTimeout(function () { pede(n + 1); }, 2000); return; }\n      el('#erro').textContent = 'Falha de conexão. Confira a internet e tente de novo.'; bt.disabled = false; bt.textContent = '✂️ Editar o meu Reel'; }); })(0);\n  });\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    300,
+    0
+   ],
+   "id": "24baf6e7-5153-5755-be78-73bfec90c5ff"
+  },
+  {
+   "parameters": {
+    "path": "editor-reel-v4-ver",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Página de andamento (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    220
+   ],
+   "id": "f48fdbd6-5374-5b11-b0da-e47e803bfe79",
+   "webhookId": "833a7c61-4c3f-5cae-b907-e829acd808cd"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Seu Reel editado</title><meta name=\"robots\" content=\"noindex\">\n<style>\n:root{color-scheme:light;--plano:#f6f6f4;--sup:#fff;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#c2410c;--cod:#efeee9;--ok:#15803d;--er:#b42318}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e0f;--sup:#1a1a1c;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.12);--pri:#f97316;--cod:#232325;--ok:#4ade80;--er:#ff8a80}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:900px;margin:0 auto}h1{font-size:26px}.sub{color:var(--tx2);margin-top:4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:18px;padding:18px 20px;margin-top:16px}.card h2{font-size:16.5px;margin-bottom:8px}\nol.etapas{list-style:none;display:grid;gap:6px}\nol.etapas li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--mu);font-weight:600}\nol.etapas li.feita{color:var(--tx)}ol.etapas li.feita .ic::after{content:\" ✓\";color:var(--ok)}\nol.etapas li.agora{background:var(--cod);color:var(--tx)}ol.etapas li.agora .ic{animation:pulso 1s infinite alternate}\n@keyframes pulso{from{opacity:.4}to{opacity:1}}\n.barra{height:8px;background:var(--cod);border-radius:99px;overflow:hidden;margin-top:8px}.barra i{display:block;height:100%;background:var(--pri);transition:width .5s}\n.res{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:18px;align-items:start}@media(max-width:720px){.res{grid-template-columns:1fr}}\nvideo{width:100%;max-height:72vh;border-radius:14px;background:#000;display:block}\n.bts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}\n.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:9px 14px;border-radius:11px;text-decoration:none;cursor:pointer}\n.btn.pri{background:var(--pri);color:#fff;border-color:transparent}\n.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--cod);margin:2px 2px 0 0}\n.erro{color:var(--er);font-weight:600}\npre{white-space:pre-wrap;font:inherit;background:var(--cod);border-radius:10px;padding:10px 12px;margin-top:6px}\n</style></head><body><div class=\"w\">\n<h1>✂️ Seu Reel editado</h1><p class=\"sub\" id=\"sub\">Carregando…</p>\n<div class=\"card\" id=\"cand\"><h2>Andamento</h2>\n  <ol class=\"etapas\" id=\"et\">\n    <li data-e=\"recebido\"><span class=\"ic\">📥</span>Pedido recebido</li>\n    <li data-e=\"ouvindo\"><span class=\"ic\">🎧</span>Separando o áudio e ouvindo cada palavra</li>\n    <li data-e=\"direcao\"><span class=\"ic\">🧠</span>IA escolhendo a frase do topo, os tópicos e a cor</li>\n    <li data-e=\"montando\"><span class=\"ic\">🎞️</span>Cortando pausas e vícios, legendando e mixando o som</li>\n    <li data-e=\"pronto\"><span class=\"ic\">🎉</span>Pronto</li>\n  </ol>\n  <div class=\"barra\"><i id=\"bar\" style=\"width:3%\"></i></div>\n  <p class=\"sub\" id=\"det\"></p>\n</div>\n<div id=\"saida\"></div></div>\n<script>\n(function () {\n  var job = new URLSearchParams(location.search).get('job') || '';\n  var ORDEM = ['recebido', 'ouvindo', 'direcao', 'montando', 'pronto'];\n  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>\"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]; }); };\n  function desenha(s) {\n    var i = ORDEM.indexOf(s.etapa);\n    document.querySelectorAll('#et li').forEach(function (li, k) { li.className = k < i || s.etapa === 'pronto' ? 'feita' : k === i ? 'agora' : ''; });\n    var p = s.etapa === 'pronto' ? 100 : s.etapa === 'montando' ? 60 + (s.progresso || 0) * 0.38 : (i + 1) * 15;\n    document.getElementById('bar').style.width = Math.max(3, Math.min(100, p)) + '%';\n    document.getElementById('det').textContent = s.detalhe || '';\n    document.getElementById('sub').textContent = s.dados && s.dados.titulo ? s.dados.titulo : 'Seu vídeo';\n    if (s.etapa === 'erro') {\n      document.getElementById('saida').innerHTML = '<div class=\"card\"><p class=\"erro\">⚠️ ' + esc(s.erro || 'Algo deu errado.') + '</p><div class=\"bts\"><a class=\"btn pri\" href=\"editor-reel-v4\">Tentar de novo</a></div></div>';\n      return true;\n    }\n    if (s.etapa !== 'pronto') return false;\n    var tir = (s.tirou || []).length ? (s.tirou || []).map(function (w) { return '<span class=\"chip\">' + esc(w) + '</span>'; }).join('') : '<span class=\"chip\">nenhum</span>';\n    var top = (s.topicos || []).map(function (t, k) { return '<span class=\"chip\">' + (k + 1) + ' · ' + esc(t.texto) + '</span>'; }).join('');\n    document.getElementById('saida').innerHTML =\n      '<div class=\"card\"><div class=\"res\"><div><video src=\"' + esc(s.video) + '\" poster=\"' + esc(s.capa || '') + '\" controls playsinline></video>' +\n      '<div class=\"bts\"><a class=\"btn pri\" href=\"' + esc(s.video) + '\" download>⬇️ Baixar o vídeo</a>' + (s.capa ? '<a class=\"btn\" href=\"' + esc(s.capa) + '\" download>🖼️ Capa</a>' : '') + '</div></div>' +\n      '<div><h2>O que a IA fez</h2><p>⏱️ ' + esc(s.original) + ' s → <b>' + esc(s.duracao) + ' s</b> (' + esc(s.cortes) + ' trechos)</p>' +\n      '<p style=\"margin-top:8px\"><b>Vícios cortados:</b><br>' + tir + '</p>' +\n      '<p style=\"margin-top:8px\"><b>Frase do topo:</b> ' + esc(s.gancho) + '</p>' + (top ? '<p style=\"margin-top:8px\"><b>Tópicos:</b><br>' + top + '</p>' : '') +\n      '<p style=\"margin-top:12px\"><b>Legenda para o post</b> <button class=\"btn\" id=\"cop\" type=\"button\">📋 Copiar</button></p><pre id=\"leg\">' + esc(s.legenda_post || '') + '</pre>' +\n      '<p class=\"sub\" style=\"margin-top:10px\">O link do vídeo vale 7 dias: baixe e poste. Feito em ' + Math.round((s.segundos || 0) / 6) / 10 + ' min.</p></div></div></div>';\n    var cop = document.getElementById('cop');\n    if (cop) cop.onclick = function () { navigator.clipboard.writeText(document.getElementById('leg').textContent).then(function () { cop.textContent = '✅ Copiado'; }); };\n    return true;\n  }\n  function pergunta() {\n    fetch('editor-reel-v4-status?job=' + encodeURIComponent(job)).then(function (r) { return r.json(); }).then(function (r) {\n      var s = r.status || r; if (!desenha(s || {})) setTimeout(pergunta, 3000);\n    }).catch(function () { setTimeout(pergunta, 5000); });\n  }\n  pergunta();\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Entrega o andamento",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    300,
+    220
+   ],
+   "id": "1596473d-a384-5715-b95b-0a713ef9b345"
+  },
+  {
+   "parameters": {
+    "path": "editor-reel-v4-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Consulta status (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    440
+   ],
+   "id": "9c781344-c650-57b9-8515-51c564e89eaa",
+   "webhookId": "676568ae-825e-54e0-8a9a-d7829d3a0b6c"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=ed4:{{ String($json.query.job || '').replace(/[^a-z0-9]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o status",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    440
+   ],
+   "id": "ad6b68f9-4778-54bf-8e64-f03b84b6a086",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.status || JSON.stringify({ etapa: 'recebido', detalhe: 'Começando…' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde o status",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    600,
+    440
+   ],
+   "id": "b5d26a74-6895-55f2-8fbb-218729b592e2"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "editor-reel-v4-video",
+    "responseMode": "responseNode",
+    "options": {
+     "binaryPropertyName": "video"
+    }
+   },
+   "name": "🔔 Recebe o vídeo (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    700
+   ],
+   "id": "63d8ba13-ac8c-5937-867e-4cb3aba03617",
+   "webhookId": "f960e288-a77d-599f-baff-02724e78c574"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere o vídeo que a página mandou e sobe direto para o armazenamento temporário do Very Good FFmpeg (1 hora):\n// é de lá que o ffmpeg na nuvem lê o vídeo para extrair o áudio e para editar.\nconst it = $input.first();\nconst chave = Object.keys(it.binary || {})[0];\nif (!chave) return [{ json: { ok: false, erro: 'Nenhum vídeo chegou.' } }];\nconst arq = it.binary[chave];\nconst mime = String(arq.mimeType || '').toLowerCase();\nif (!/^video\\/(mp4|quicktime|webm|x-m4v|3gpp)/.test(mime) && !/\\.(mp4|mov|m4v|webm|3gp)$/i.test(arq.fileName || ''))\n  return [{ json: { ok: false, erro: 'Formato não aceito. Envie MP4, MOV ou WEBM (o vídeo do celular serve).' } }];\n// tamanho pelo cabeçalho do envio: ler o arquivo inteiro derrubava a memória do n8n com vídeo grande\nconst tam = Number(($('🔔 Recebe o vídeo (POST)').first().json.headers || {})['content-length']) || 0;\nif (tam > 120e6) return [{ json: { ok: false, erro: 'Vídeo maior que 120 MB. Grave mais curto (até 1 minuto e meio).' } }];\nreturn [{ json: { ok: true, tamanho: tam, nome: arq.fileName || 'video.mp4', mime: mime || 'video/mp4' }, binary: { video: arq } }];\n"
+   },
+   "name": "🧩 Confere o vídeo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    660,
+    700
+   ],
+   "id": "f8ff3c3a-440e-5d7c-8492-19f24f9c9dba",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "7cb23b3c-71ad-4701-9f1f-87bfde863ebc",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Vídeo ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    960,
+    700
+   ],
+   "id": "c6544d2e-6bfe-5001-8e32-84df34d28678"
+  },
+  {
+   "parameters": {
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "method": "POST",
+    "url": "https://verygoodffmpeg.com/api/tmp-file",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Very Good FFmpeg: pede um lugar",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1260,
+    580
+   ],
+   "id": "9fa0f1bb-548e-5624-8308-b7c1ce4184c7",
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000,
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "XSLXddmgLA1TsuPp",
+     "name": "Very Good FFmpeg (Bearer)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// O pedido de lugar devolve só o endereço: aqui o vídeo (binário) volta para o item, junto com o endereço de envio.\nconst r = ($input.first().json || {}).data || {};\nif (!r.upload_url) return [{ json: { semLugar: true } }];\nreturn [{ json: { upload_url: r.upload_url, download_url: r.download_url }, binary: $('🧩 Confere o vídeo').first().binary }];\n"
+   },
+   "name": "🧩 Junta o vídeo e o lugar",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1410,
+    460
+   ],
+   "id": "4272f80c-403f-533e-9e1a-f8d1230e9c25"
+  },
+  {
+   "parameters": {
+    "method": "PUT",
+    "url": "={{ $json.upload_url }}",
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "video",
+    "options": {
+     "timeout": 600000
+    }
+   },
+   "name": "🌐 Sobe o vídeo",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1560,
+    580
+   ],
+   "id": "d1fbff73-1278-53d3-a901-b03b6ef2be4c",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere se o vídeo subiu e devolve o código do envio para a página (o endereço de leitura vale 1 hora).\nconst lugar = $('🧩 Junta o vídeo e o lugar').first().json || {};\nconst subiu = $input.first().json || {};\nif (lugar.semLugar || !lugar.download_url) return [{ json: { ok: false, erro: 'Não deu para guardar o vídeo agora (o ffmpeg na nuvem não respondeu). Tente de novo.' } }];\nif (subiu.error) return [{ json: { ok: false, erro: 'O envio do vídeo falhou. Tente de novo.' } }];\nconst id = require('crypto').randomBytes(6).toString('hex');\nreturn [{ json: { ok: true, id, url: lugar.download_url } }];\n"
+   },
+   "name": "🧩 Lê o envio",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1860,
+    580
+   ],
+   "id": "fa85a18a-4d8f-559d-941f-e7b9a95db887"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "e153bf86-c271-4c7a-97e2-10a64ca73cf8",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Subiu?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2010,
+    580
+   ],
+   "id": "a1f0c187-7191-50bb-a38e-50dcd0a877b6"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:video:{{ $('🔔 Recebe o vídeo (POST)').first().json.query.id }}",
+    "value": "={{ $json.url }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 3500
+   },
+   "name": "💾 Guarda o endereço (1 hora)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2160,
+    580
+   ],
+   "id": "518cadd3-e0a5-5fba-9a9a-840d6f123d6a",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "editor-reel-v4-arquivo",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Entrega um arquivo (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1000
+   ],
+   "id": "9b26d5fa-b846-569d-a603-2c7ab79a1a1f",
+   "webhookId": "76789cd9-ba6e-56b7-8795-e7e8a2d96cac"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "arquivo",
+    "key": "=ed4:arq:{{ String($json.query.id || '').replace(/[^a-z0-9.-]/g, '') }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o arquivo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    1000
+   ],
+   "id": "b7d78328-7554-53cd-a6d1-82c7463abccc",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Entrega pelo endereço do próprio n8n: as trilhas (trilha-elegante...) e o arquivo de textos (.ass) de cada edição.\n// O ffmpeg na nuvem baixa daqui (o catbox derruba downloads de servidores na nuvem).\nconst TRILHAS = {\"animado\": \"https://files.catbox.moe/qpmdb1.mp3\", \"calmo\": \"https://files.catbox.moe/xoym41.mp3\", \"chill\": \"https://files.catbox.moe/2rqu0z.mp3\", \"elegante\": \"https://files.catbox.moe/yb6h1l.mp3\", \"emocional\": \"https://files.catbox.moe/tomvef.mp3\", \"latino\": \"https://files.catbox.moe/kic00y.mp3\", \"tropical\": \"https://files.catbox.moe/x14vcg.mp3\", \"urgente\": \"https://files.catbox.moe/2gttp6.mp3\"};\nconst id = String($('🔔 Entrega um arquivo (GET)').first().json.query.id || '');\nconst tr = /^trilha-([a-z]+)$/.exec(id);\nif (tr && TRILHAS[tr[1]]) {\n  const d = await this.helpers.httpRequest({ url: TRILHAS[tr[1]], encoding: 'arraybuffer', timeout: 60000 });\n  return [{ json: { existe: true }, binary: { data: await this.helpers.prepareBinaryData(Buffer.from(d), id + '.mp3', 'audio/mpeg') } }];\n}\nif (id === 'exemplo.mp4') {   // o vídeo de exemplo também passa por aqui\n  const d = await this.helpers.httpRequest({ url: \"https://files.catbox.moe/gx64ow.mp4\", encoding: 'arraybuffer', timeout: 60000 });\n  return [{ json: { existe: true }, binary: { data: await this.helpers.prepareBinaryData(Buffer.from(d), id, 'video/mp4') } }];\n}\nconst b64 =String($input.first().json.arquivo || '');\nif (!/^textos-[a-z0-9]{6,40}\\.ass$/.test(id) || !b64) return [{ json: { existe: false } }];\nreturn [{ json: { existe: true }, binary: { data: await this.helpers.prepareBinaryData(Buffer.from(b64, 'base64'), id, 'text/plain') } }];\n"
+   },
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    600,
+    1000
+   ],
+   "id": "5dd190c7-aa14-5bf8-a288-3643808c0c28"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "da7ae6bb-6c23-4cbe-9a14-770055bfa067",
+       "leftValue": "={{ $json.existe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Existe?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    900,
+    1000
+   ],
+   "id": "b3783229-62d2-5526-8578-95725399ba5a"
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {}
+   },
+   "name": "📤 Entrega o arquivo",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1200,
+    920
+   ],
+   "id": "8ea33978-7716-55b6-b65c-a4316f5c5cc0"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "não encontrado",
+    "options": {
+     "responseCode": 404
+    }
+   },
+   "name": "📤 Não encontrado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1200,
+    1080
+   ],
+   "id": "50c4fcb1-a330-5efb-9736-b9ce814b755e"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "editor-reel-v4",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Pedido de edição (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1400
+   ],
+   "id": "c3ac4eba-8131-5361-b18e-e9e9d50d0537",
+   "webhookId": "bd4ee5c4-27fc-5bb9-afaa-142ddfdf0bd1"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Confere o pedido: o vídeo já enviado (código), os dados do negócio e as escolhas. Cria o código do trabalho (job).\nlet b = $('🔔 Pedido de edição (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst crypto = require('crypto');\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u0008\\u000b-\\u001f\\u007f<>{}\\\\]/g, ' ').replace(/[ \\t]+/g, ' ').trim().slice(0, max);\nconst TIPOS = { imovel: 'imóvel', produto: 'produto', comida: 'restaurante / comida', veiculo: 'carro ou moto', servico: 'serviço', evento: 'evento', outro: 'outro' };\nconst TRILHAS = ['auto', 'nenhuma', 'elegante', 'animado', 'urgente', 'emocional', 'calmo', 'tropical', 'latino', 'chill'];\nconst video = /^[a-f0-9]{12}$/.test(String(b.video || '')) ? String(b.video) : (b.video === 'exemplo' ? 'exemplo' : '');\nconst tipo = TIPOS[b.tipo] ? b.tipo : 'produto';\nconst dados = {\n  tipo, tipo_txt: TIPOS[tipo], marca: limpa(b.marca, 50), titulo: limpa(b.titulo, 90), detalhes: limpa(b.detalhes, 1000),\n  instagram: limpa(b.instagram, 40).replace(/^@/, '').replace(/[^a-zA-Z0-9._]/g, ''),\n};\nconst erros = [];\nif (!video) erros.push('Envie o vídeo (ou use o exemplo).');\nif (dados.titulo.length < 3) erros.push('Diga o que está sendo mostrado no vídeo.');\nconst op = {\n  cor: /^#[0-9a-fA-F]{6}$/.test(b.cor || '') ? String(b.cor).toUpperCase() : '',\n  trilha: TRILHAS.includes(b.trilha) ? b.trilha : 'auto',\n  legendas: b.legendas !== false, cartao_final: b.cartao_final !== false,\n  cortar_pausas: b.cortar_pausas !== false, cortar_vicios: b.cortar_vicios !== false,\n};\nconst job = 'e' + Date.now().toString(36) + crypto.randomBytes(2).toString('hex');\nconst base = String($('🔔 Pedido de edição (POST)').first().json.webhookUrl || '').split('/webhook/')[0];\nreturn [{ json: {\n  valido: erros.length === 0, erros, job, video_id: video, dados, op, criado_em: Date.now(),\n  exemplo: video === 'exemplo' ? `${base}/webhook/editor-reel-v4-arquivo?id=exemplo.mp4` : '',   // passa pelo n8n (o catbox derruba downloads da nuvem)\n  link: `${base}/webhook/editor-reel-v4-ver?job=${job}`, arquivo: `${base}/webhook/editor-reel-v4-arquivo?id=`,\n  chave_limite: '<SEGREDO_REMOVIDO>' + new Date().toISOString().slice(0, 13),\n} }];\n"
+   },
+   "name": "🧩 Confere o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    300,
+    1400
+   ],
+   "id": "c9b5aed1-e083-5d82-937f-026eda507455"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "={{ $json.chave_limite }}",
+    "expire": true,
+    "ttl": 3600
+   },
+   "name": "🧮 Conta pedidos da hora",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    600,
+    1400
+   ],
+   "id": "fd2d1678-046f-515d-b3e3-a7dc4e3b1f93",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "55d10800-9e6b-4c30-8fea-40e7fb67c0a4",
+       "leftValue": "={{ $('🧩 Confere o pedido').first().json.valido && Number(Object.values($json)[0]) <= 30 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Pode começar?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    900,
+    1400
+   ],
+   "id": "a8091319-aad3-5310-ba75-214b72bd72e1"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erros: $('🧩 Confere o pedido').first().json.valido ? ['Muitas edições nesta hora. Tente daqui a pouco.'] : $('🧩 Confere o pedido').first().json.erros }) }}",
+    "options": {
+     "responseCode": 400,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Recusa o pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1200,
+    1560
+   ],
+   "id": "91ab696d-6131-5588-9505-7bc4f1801579"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'recebido', detalhe: 'Pedido conferido', dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: recebido",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1200,
+    1400
+   ],
+   "id": "648da737-1b6f-5369-81f2-19c631682b47",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, link: $('🧩 Confere o pedido').first().json.link }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde com o link",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1500,
+    1400
+   ],
+   "id": "39bb4ddd-4beb-5dc1-b506-9b97c5312dfb"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "url",
+    "key": "=ed4:video:{{ $('🧩 Confere o pedido').first().json.video_id || 'nenhum' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o endereço do vídeo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1800,
+    1400
+   ],
+   "id": "5e0dfe8c-55a9-5e17-a1c4-5566a12203e3",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Endereço do vídeo: o de exemplo (público) ou o que a página enviou (guardado no Redis com validade de 1 hora).\nconst v = $('🧩 Confere o pedido').first().json;\nconst url = v.exemplo || String(($input.first().json || {}).url || '');\nif (!url) throw new Error('O vídeo enviado expirou (vale 1 hora). Envie de novo.');\nreturn [{ json: { ...v, video_url: url } }];\n"
+   },
+   "name": "🧩 Pega o vídeo",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2100,
+    1400
+   ],
+   "id": "41a48d86-d888-5a26-a82f-7cdb0189e88a",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'ouvindo', detalhe: 'Separando o áudio do vídeo', dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: ouvindo",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    1700
+   ],
+   "id": "e531b8d2-3bcd-5114-88bc-05695d112f7c",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Primeiro trabalho no ffmpeg na nuvem: tira o áudio (para a transcrição) e um quadro (para a IA ver o vídeo, para\n// o fundo do cartão final e para saber se o vídeo é em pé ou deitado). A duração vem da transcrição.\nconst v = $('🧩 Pega o vídeo').first().json;\nreturn [{ json: { corpo: JSON.stringify({\n  input_files: { 'in_video.mp4': v.video_url },\n  output_files: [`audio-${v.job}.mp3`, `quadro-${v.job}.jpg`],\n  machine: 'cpu', timeout_seconds: 300,\n  ffmpeg_commands: [\n    `-i inputs/in_video.mp4 -vn -ac 1 -ar 16000 -b:a 48k outputs/audio-${v.job}.mp3`,\n    // até 720 px no lado maior, mantendo a proporção (em pé x deitado)\n    `-ss 1 -i inputs/in_video.mp4 -frames:v 1 -vf \"scale='if(gt(iw,ih),720,-2)':'if(gt(iw,ih),-2,720)'\" -q:v 3 outputs/quadro-${v.job}.jpg`,\n  ],\n}) } }];\n"
+   },
+   "name": "🧩 Pede áudio e quadro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    300,
+    1700
+   ],
+   "id": "f5b1dc09-a498-552e-a7d5-a0f193781bb7"
+  },
+  {
+   "parameters": {
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "method": "POST",
+    "url": "https://verygoodffmpeg.com/api/ffmpeg",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Very Good FFmpeg: separa o áudio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    600,
+    1700
+   ],
+   "id": "804cf39f-0d16-5f48-9e6f-a13acc09bbab",
+   "onError": "continueErrorOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000,
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "XSLXddmgLA1TsuPp",
+     "name": "Very Good FFmpeg (Bearer)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "amount": 5
+   },
+   "name": "⏳ Espera 5 segundos",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    900,
+    1700
+   ],
+   "id": "fd154539-7bb8-5aed-8165-06938c3824aa",
+   "webhookId": "cbb434b8-bb15-5047-8df8-737f4788e039"
+  },
+  {
+   "parameters": {
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "url": "=https://verygoodffmpeg.com/api/jobs/{{ $('🎬 Very Good FFmpeg: separa o áudio').first().json.data.id }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Very Good FFmpeg: separou?",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1200,
+    1700
+   ],
+   "id": "9aeec137-0834-52d6-b7ea-27ba8e71d3a0",
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000,
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "XSLXddmgLA1TsuPp",
+     "name": "Very Good FFmpeg (Bearer)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "a0b2c14e-e3c3-4f50-b913-81ffc92f2cfb",
+       "leftValue": "={{ !['queued', 'running'].includes(($json.data || {}).status) }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Separou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1500,
+    1700
+   ],
+   "id": "99725f19-e794-55fc-b827-53876ce950fd"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê o resultado da extração: endereço do áudio e do quadro (valem 7 dias) e o tamanho do quadro (em pé ou deitado).\nconst v = $('🧩 Pega o vídeo').first().json;\nconst m = ($input.first().json || {}).data || {};\nconst o = m.output_files || {};\nconst audio = o[`audio-${v.job}.mp3`], quadro = o[`quadro-${v.job}.jpg`];\nif (m.status !== 'succeeded' || !audio || !quadro) throw new Error('Não consegui abrir o vídeo: ' + String(m.error_message || m.status || 'sem resposta').slice(0, 200));\nconst bin = await this.helpers.httpRequest({ url: quadro, encoding: 'arraybuffer', timeout: 60000 });\nconst buf = Buffer.from(bin);\n// largura e altura do JPEG (marcador SOF0/SOF2)\nlet w = 0, h = 0;\nfor (let i = 2; i < buf.length - 9; ) {\n  if (buf[i] !== 0xFF) { i++; continue; }\n  const mk = buf[i + 1];\n  if (mk >= 0xC0 && mk <= 0xC3) { h = buf.readUInt16BE(i + 5); w = buf.readUInt16BE(i + 7); break; }\n  i += 2 + buf.readUInt16BE(i + 2);\n}\nreturn [{ json: { audio, quadro, largura: w, altura: h, b64: buf.toString('base64') } }];\n"
+   },
+   "name": "🧩 Lê a extração",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1800,
+    1700
+   ],
+   "id": "3c35a24d-eefe-5e18-b27d-c5f99030fb6d",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.audio }}",
+    "options": {
+     "response": {
+      "response": {
+       "responseFormat": "file"
+      }
+     },
+     "timeout": 120000
+    }
+   },
+   "name": "🌐 Baixa o áudio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2100,
+    1700
+   ],
+   "id": "1b4e8e66-4bf6-5dbc-9a3f-62cfeb1a175d",
+   "onError": "continueErrorOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000
+  },
+  {
+   "parameters": {
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "method": "POST",
+    "url": "https://api.deepgram.com/v1/listen?model=nova-3&language=pt-BR&punctuate=true&filler_words=true",
+    "sendBody": true,
+    "contentType": "binaryData",
+    "inputDataFieldName": "data",
+    "options": {
+     "timeout": 300000
+    }
+   },
+   "name": "🎧 Deepgram: transcreve",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2400,
+    1700
+   ],
+   "id": "578a4a0f-3892-5ffa-8511-f4dc969f1041",
+   "onError": "continueErrorOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000,
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "geS91JlCJqQvmGVc",
+     "name": "Deepgram (Token)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'direcao', detalhe: 'Ouvi ' + (((($('🎧 Deepgram: transcreve').first().json.results || {}).channels || [{}])[0].alternatives || [{}])[0].words || []).length + ' palavras', dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: direção",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    0,
+    2000
+   ],
+   "id": "21d46d76-3f68-5d8c-a31c-093540e2ddf9",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta o pedido para a IA diretora: o que a pessoa falou (com o número de cada palavra), um quadro do vídeo e os dados\n// do negócio. A IA devolve a frase de abertura, o gancho do topo, os tópicos numerados (em que palavra cada um começa),\n// as PALAVRAS-CHAVE (destacadas na legenda, com som e emoji), a chamada do cartão final, a cor, a trilha e o post.\nconst v = $('🧩 Pega o vídeo').first().json;\nconst ex = $('🧩 Lê a extração').first().json;\nconst dg = $('🎧 Deepgram: transcreve').first().json;\nconst VICIOS = /^(n[ée]|é+|eh+|ãh+|ah+|hum+|hm+|tipo|então|assim|uh+|ahn|aham|mm+)$/i;\nconst alt = (((dg.results || {}).channels || [])[0] || {}).alternatives || [];\nconst palavras = ((alt[0] || {}).words || []).map(w => String(w.punctuated_word || w.word));\n// numeração igual à do montador (que tira os vícios antes de numerar)\nconst ficam = v.op.cortar_vicios ? palavras.filter(w => !VICIOS.test(w.replace(/[.,!?;:]/g, ''))) : palavras;\nconst numerado = ficam.map((w, i) => `[${i}]${w}`).join(' ');\nconst d = v.dados;\nconst EMOJIS = '💡 ☀ ⚡ 🔋 💰 💸 🏠 ✅ 🔥 👉 📉 📈 🤝 😍 🚀 🛠 👷 📍 ⭐ 🎉 💪 ❤ 🌱 🕒 📞 🍔 🚗 🏡 💎 👀 🤑 🆕 🔑 📦 🌞 💯 👏 😎 🧾 📲';\nconst texto = `O QUE É: ${d.tipo_txt} — ${d.titulo}\nNEGÓCIO: ${d.marca || '-'} · Instagram: ${d.instagram ? '@' + d.instagram : '-'}\nDETALHES DO DONO: ${d.detalhes || '-'}\n\nFALA DO VÍDEO (cada palavra com o número dela):\n${numerado || '(o vídeo não tem fala)'}\n\nVocê é EDITOR DE REELS para pequenos negócios (estilo dos melhores criadores do Instagram). Com base na fala e no\nquadro do vídeo, devolva:\n- abertura: frase forte que aparece GRANDE no meio da tela nos 2 primeiros segundos (até 34 letras), curiosidade ou\n  benefício; pode ser a PERGUNTA que o público costuma fazer (termine com \"?\"); use SÓ o que foi falado/mostrado\n- rosto: onde está o ROSTO da pessoa principal no quadro, como [topo, base] em fração da ALTURA da imagem (0 = topo,\n  1 = base; ex.: [0.18, 0.36]); null se não houver rosto\n- rosto_x: onde está o CENTRO do rosto na LARGURA da imagem (0 = esquerda, 1 = direita; ex.: 0.62); null se não houver\n- oferta: frase curta para o cartão final (até 34 letras) com o que a empresa oferece, tirada da fala ou dos detalhes\n- servicos: até 3 serviços/produtos curtos separados por \" • \" (só os que aparecem na fala ou nos detalhes)\n- gancho: frase curta que fica fixa no topo (até 30 letras)\n- topicos: 2 a 4 tópicos curtos (até 22 letras) na ordem da fala, cada um com \"palavra\" = o número da palavra em que\n  o assunto começa (use os números entre colchetes). Sem fala: lista vazia.\n- destaques: 3 a 6 PALAVRAS-CHAVE da fala (benefício, número, lugar, produto, resultado), cada uma com \"palavra\" = o\n  número dela e \"emoji\" = UM destes: ${EMOJIS}. Espalhe ao longo do vídeo (não duas seguidas).\n- cartao: chamada do cartão final (até 24 letras), ex.: \"Agende sua visita\", \"Peça pelo direct\"\n- cor: cor da marca em hexadecimal que combine com o vídeo (ex.: \"#C9A227\")\n- trilha: uma de elegante, animado, urgente, emocional, calmo, tropical, latino, chill\n- legenda_post: legenda para o Instagram (até 600 letras, com 3 a 6 hashtags no fim)\nREGRAS: não invente preço, número, prazo nem promessa que não foi dita. Português do Brasil com acentos.\nRETORNE SOMENTE JSON: {\"rosto\":[0,0],\"rosto_x\":0.5,\"abertura\":\"\",\"oferta\":\"\",\"servicos\":\"\",\"gancho\":\"\",\"topicos\":[{\"palavra\":0,\"texto\":\"\"}],\"destaques\":[{\"palavra\":0,\"emoji\":\"\"}],\"cartao\":\"\",\"cor\":\"#000000\",\"trilha\":\"\",\"legenda_post\":\"\"}`;\nreturn [{ json: { corpo: JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 2500, temperature: 0.5,\n  messages: [{ role: 'user', content: [{ type: 'text', text: texto }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + ex.b64 } }] }] }) } }];\n"
+   },
+   "name": "🧩 Prepara o pedido à IA",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    300,
+    2000
+   ],
+   "id": "e97bfe64-c00e-5a7b-9a5b-8ad0e6259ca5"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}",
+    "options": {
+     "timeout": 180000
+    }
+   },
+   "name": "🧠 IA diretora",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    600,
+    2000
+   ],
+   "id": "c62023c6-8c39-51ca-b5e4-7c0814dff601",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê o que a IA diretora devolveu. Se a IA falhar, segue com o básico (título no topo, sem tópicos nem destaques).\nfunction parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\nconst v = $('🧩 Pega o vídeo').first().json;\nlet r = null;\ntry { const x = $input.first().json; r = parseJSON(x.choices ? x.choices[0].message.content : ''); } catch (e) {}\nr = r || {};\nconst limpa = (s, m) => String(s || '').replace(/[<>{}\\\\]/g, '').trim().slice(0, m);\nconst TRILHAS = ['elegante', 'animado', 'urgente', 'emocional', 'calmo', 'tropical', 'latino', 'chill'];\n// emojis que existem como imagem no Google (fonts.gstatic.com/s/e/notoemoji/latest/<código>/512.png) — conferidos 01/11\nconst EMOJI = { '💡': '1f4a1', '☀': '2600', '⚡': '26a1', '🔋': '1f50b', '💰': '1f4b0', '💸': '1f4b8', '🏠': '1f3e0', '✅': '2705',\n  '🔥': '1f525', '👉': '1f449', '📉': '1f4c9', '📈': '1f4c8', '🤝': '1f91d', '😍': '1f60d', '🚀': '1f680', '🛠': '1f6e0',\n  '👷': '1f477', '📍': '1f4cd', '⭐': '2b50', '🎉': '1f389', '💪': '1f4aa', '❤': '2764', '🌱': '1f331', '🕒': '1f552',\n  '📞': '1f4de', '🍔': '1f354', '🚗': '1f697', '🏡': '1f3e1', '💎': '1f48e', '👀': '1f440', '🤑': '1f911', '🆕': '1f195',\n  '🔑': '1f511', '📦': '1f4e6', '🌞': '1f31e', '💯': '1f4af', '👏': '1f44f', '😎': '1f60e', '🧾': '1f9fe', '📲': '1f4f2' };\nconst destaques = (Array.isArray(r.destaques) ? r.destaques : [])\n  .map(t => ({ palavra: parseInt(t.palavra, 10), emoji: EMOJI[String(t.emoji || '').replace(/[️‍]/g, '').trim()] || '' }))\n  .filter(t => t.palavra >= 0).sort((a, b) => a.palavra - b.palavra)\n  .filter((t, i, l) => i === 0 || t.palavra - l[i - 1].palavra > 2).slice(0, 6);\nreturn [{ json: {\n  ia: !!r.gancho,\n  abertura: limpa(r.abertura, 44) || limpa(r.gancho, 40) || limpa(v.dados.titulo, 40),\n  gancho: limpa(r.gancho, 40) || limpa(v.dados.titulo, 40),\n  rosto: Array.isArray(r.rosto) && r.rosto.length === 2 && r.rosto.every(x => Number(x) >= 0 && Number(x) <= 1) &&\n    Number(r.rosto[1]) - Number(r.rosto[0]) > 0.03 ? r.rosto.map(Number) : null,\n  rosto_x: r.rosto_x !== null && r.rosto_x !== '' && Number(r.rosto_x) >= 0 && Number(r.rosto_x) <= 1 ? Number(r.rosto_x) : null,\n  oferta: limpa(r.oferta, 40),\n  servicos: limpa(r.servicos, 70),\n  topicos: (Array.isArray(r.topicos) ? r.topicos : []).map(t => ({ palavra: Math.max(0, parseInt(t.palavra, 10) || 0), texto: limpa(t.texto, 26) }))\n    .filter(t => t.texto).sort((a, b) => a.palavra - b.palavra).slice(0, 4),\n  destaques,\n  cartao: limpa(r.cartao, 28) || 'Chame no direct',\n  cor: /^#[0-9a-fA-F]{6}$/.test(r.cor || '') ? String(r.cor).toUpperCase() : '',\n  trilha: v.op.trilha !== 'auto' ? v.op.trilha : (TRILHAS.includes(r.trilha) ? r.trilha : 'elegante'),\n  legenda_post: limpa(r.legenda_post, 2200),\n} }];\n"
+   },
+   "name": "🧩 Lê a direção",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    900,
+    2000
+   ],
+   "id": "31798f42-4c12-5381-a248-5d55fed061e9"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Monta a EDIÇÃO do vídeo que a pessoa gravou — versão com mais recursos de edição:\n//  cortes   — tira silêncios (> 0,35 s) e vícios (\"né\", \"é\", \"tipo\"...) pelo tempo de cada palavra; fala lenta ganha\n//             ritmo (1,06x, sem mudar o tom da voz)\n//  imagem   — 1080x1920; \"jump cut\" de zoom a cada frase (alterna perto/longe), zoom de impacto na abertura, cor e\n//             nitidez realçadas, vinheta leve; vídeo deitado vira em pé com fundo desfocado\n//  textos   — frase de ABERTURA grande no meio (2 s), gancho fixo no topo, tópicos numerados que entram deslizando,\n//             flash na troca de tópico, legenda karaokê com a palavra falada pulando e as PALAVRAS-CHAVE na cor de\n//             destaque, chamada \"Siga @\" no meio, barrinha de progresso e cartão final animado\n//  som      — voz limpa (tira chiado, compressor) a -14 LUFS, trilha que abaixa quando fala, efeitos: impacto na\n//             abertura, whoosh nos tópicos e no cartão final, pop nas palavras-chave\n//  NIVEL 3  — + emoji que pula na tela em cada palavra-chave, zoom rápido na palavra-chave e glitch na troca de tópico\n// Tudo vira UM comando ffmpeg que roda na nuvem (Very Good FFmpeg).\nconst NIVEL = 4;\nconst v = $('🧩 Pega o vídeo').first().json;\nconst ia = $('🧩 Lê a direção').first().json;            // abertura, gancho, tópicos, destaques, cartão, cor, trilha\nconst dg = $('🎧 Deepgram: transcreve').first().json;     // palavras com tempo\nconst ex = $('🧩 Lê a extração').first().json;            // quadro: largura e altura (em pé ou deitado)\nconst info = { largura: ex.largura, altura: ex.altura, duracao: Number((dg.metadata || {}).duration) || 0 };\nconst W = 1080, H = 1920, FPS = 30, k = 1.5;               // 1080p; tamanhos das letras pensados em 720p (k = 1,5)\nconst FIM = v.op.cartao_final ? 3.2 : 0;                  // cartão final (s)\nconst ABRE = 1.9;                                         // frase de abertura no meio da tela (s)\nconst TRILHAS = ['animado', 'calmo', 'chill', 'elegante', 'emocional', 'latino', 'tropical', 'urgente'];\nconst VICIOS = /^(n[ée]|é+|eh+|ãh+|ah+|hum+|hm+|tipo|então|assim|uh+|ahn|aham|mm+)$/i;\nconst limpa = s => String(s || '').replace(/[\\u{1F000}-\\u{1FAFF}☀-➿️‍]/gu, '').replace(/[{}\\\\]/g, '').replace(/\\n/g, ' ').trim();\nconst clara = c => { const n = parseInt(String(c).slice(1), 16); return ((n >> 16) * 299 + ((n >> 8) & 255) * 587 + (n & 255) * 114) / 1000 > 150; };\nconst cor = /^#[0-9A-Fa-f]{6}$/.test(v.op.cor || ia.cor || '') ? (v.op.cor || ia.cor) : '#F59E0B';\nconst corTexto = clara(cor) ? '#111111' : '#FFFFFF';\nconst destaque = clara(cor) ? cor : '#FFD400';            // palavra falada / palavra-chave: precisa aparecer sobre o vídeo\nconst ass = c => '&H00' + c.slice(5, 7) + c.slice(3, 5) + c.slice(1, 3) + '&';\nconst t2 = x => { x = Math.max(0, x); return `${Math.floor(x / 3600)}:${String(Math.floor(x % 3600 / 60)).padStart(2, '0')}:${(x % 60).toFixed(2).padStart(5, '0')}`; };\nconst n2 = x => x.toFixed(2);\n// ── V6: os cards viram desenhos SVG (cantos redondos, degradê, brilho, borda clara e sombra) que o ffmpeg da nuvem lê\n// (librsvg, testado 03/11); o .ass fica só com os textos por cima. Cada card = SVG + lugar + tempo + animação de entrada.\nconst SVGC = NIVEL >= 6;\nconst tom = (c, p) => '#' + [1, 3, 5].map(j => { const x = parseInt(c.slice(j, j + 2), 16); return Math.round(p >= 0 ? x + (255 - x) * p : x * (1 + p)).toString(16).padStart(2, '0'); }).join('');\nconst MG = 48;                                            // folga em volta do card para a sombra\nconst DY = 46, DX = 70;                                   // quanto o card (e o texto dele) anda ao entrar, em 0,25 s\nconst defs = (c1, c2, sombra, op = 0.5, vertical = false) => `<defs><linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"${vertical ? 0 : 1}\" y2=\"1\"><stop offset=\"0\" stop-color=\"${c1}\"/><stop offset=\"1\" stop-color=\"${c2}\"/></linearGradient>` +\n  `<linearGradient id=\"b\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#fff\" stop-opacity=\".36\"/><stop offset=\".5\" stop-color=\"#fff\" stop-opacity=\"0\"/></linearGradient>` +\n  `<filter id=\"s\" x=\"-30%\" y=\"-40%\" width=\"160%\" height=\"200%\"><feDropShadow dx=\"0\" dy=\"12\" stdDeviation=\"14\" flood-color=\"${sombra}\" flood-opacity=\"${op}\"/></filter></defs>`;\nconst R = (w, h, r, extra) => `<rect width=\"${Math.round(w)}\" height=\"${Math.round(h)}\" rx=\"${Math.round(r)}\" ${extra}/>`;\nconst contorno = (w, h, r, op = 0.35) => `<rect x=\"1.5\" y=\"1.5\" width=\"${Math.round(w - 3)}\" height=\"${Math.round(h - 3)}\" rx=\"${Math.round(Math.max(0, r - 1.5))}\" fill=\"none\" stroke=\"#fff\" stroke-opacity=\"${op}\" stroke-width=\"3\"/>`;\nconst pilula = (w, h, r, c, sombra = '#000', op = 0.5) => defs(tom(c, 0.25), tom(c, -0.2), sombra, op) +\n  R(w, h, r, 'fill=\"url(#g)\" filter=\"url(#s)\"') + R(w, h, r, 'fill=\"url(#b)\"') + contorno(w, h, r);\nconst cards = [];\nconst card = (x, y, w, h, a, b, corpo, anim = 'sobe', saida = 0) => {\n  const L = Math.round(w + 2 * MG), A = Math.round(h + 2 * MG);\n  cards.push({ svg: `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${L}\" height=\"${A}\" viewBox=\"${-MG} ${-MG} ${L} ${A}\">${corpo}</svg>`,\n    x: Math.round(x - MG), y: Math.round(y - MG), w: L, h: A, a, b, anim, saida });\n};\n// texto que entra junto com o card (mesmo caminho e tempo)\nconst mv = (x, y, anim) => anim === 'esq' ? `\\\\move(${Math.round(x - DX)},${Math.round(y)},${Math.round(x)},${Math.round(y)},0,250)`\n  : anim === 'sobe' ? `\\\\move(${Math.round(x)},${Math.round(y + DY)},${Math.round(x)},${Math.round(y)},0,250)` : `\\\\pos(${Math.round(x)},${Math.round(y)})`;\n\n// ── 1) cortes ────────────────────────────────────────────────────────────────────────────────────────────────\nconst alt = (((dg.results || {}).channels || [])[0] || {}).alternatives || [];\nconst palavras = ((alt[0] || {}).words || []).map(w => ({ w: limpa(w.punctuated_word || w.word), s: +w.start, e: +w.end }));\nconst dur = Number(info.duracao) || (palavras.length ? palavras[palavras.length - 1].e + 0.5 : 0);\nif (!dur) throw new Error('Não consegui ler o vídeo enviado.');\nconst falou = palavras.length >= 3;\nconst tirar = v.op.cortar_vicios ? palavras.filter(p => VICIOS.test(p.w.replace(/[.,!?;:]/g, ''))) : [];\nconst fica = palavras.filter(p => !tirar.includes(p));\nconst MARGEM = 0.08, PAUSA_MAX = v.op.cortar_pausas ? 0.35 : 99;\nlet trechos = [];\nif (falou && fica.length) {\n  let ini = Math.max(0, fica[0].s - MARGEM), fim = fica[0].e + MARGEM;\n  for (let i = 1; i < fica.length; i++) {\n    const p = fica[i], ant = fica[i - 1];\n    const tirouNoMeio = tirar.some(t => t.s >= ant.e - 0.01 && t.e <= p.s + 0.01);\n    if (p.s - ant.e > PAUSA_MAX || tirouNoMeio) {\n      trechos.push([ini, fim]);\n      ini = Math.max(fim, p.s - MARGEM);\n    }\n    fim = p.e + MARGEM;\n  }\n  trechos.push([ini, Math.min(dur, fim + 0.25)]);\n} else {\n  trechos = [[0, Math.min(dur, 59)]];   // sem fala: usa o vídeo inteiro (até 59 s)\n}\ntrechos = trechos.filter(([a, b]) => b - a > 0.2);\n// ritmo: fala lenta (< 2,7 palavras/s) fica 6% mais rápida, sem mudar o tom (atempo)\nconst falaOrig = trechos.reduce((s, [a, b]) => s + b - a, 0);\nconst SP = falou && fica.length / Math.max(1, falaOrig) < 2.7 ? 1.06 : 1;\nif (SVGC) {   // V6: vídeo comprido demais não dá mais erro: fica só o começo (até ~88 s editado), cortado no fim de uma palavra\n  const MAXF = (88 - FIM) * SP;\n  let soma = 0;\n  const cabem = [];\n  for (const [a, b] of trechos) {\n    if (soma + (b - a) <= MAXF) { cabem.push([a, b]); soma += b - a; continue; }\n    const ult = fica.filter(p => p.s >= a && p.e <= a + (MAXF - soma)).pop();\n    if (ult && MAXF - soma > 1.5) cabem.push([a, ult.e + MARGEM]);\n    break;\n  }\n  trechos = cabem;\n}\n// tempo novo de cada palavra (depois dos cortes e do ritmo); i = número da palavra (o mesmo que a IA usou)\nconst novo = [], juntas = [];\nlet ac = 0;\nfor (const [a, b] of trechos) {\n  fica.forEach((p, i) => { if (p.s >= a - 0.01 && p.e <= b + 0.01) novo.push({ w: p.w, i, s: (ac + p.s - a) / SP, e: (ac + p.e - a) / SP }); });\n  ac += b - a;\n  juntas.push(ac / SP);\n}\nconst fala = ac / SP, total = fala + FIM;\nif (total > 90) throw new Error(`O vídeo editado ficou com ${Math.round(total)} s. Envie até 1 minuto e meio de fala.`);\nconst tempoDa = idx => { const p = novo.find(x => x.i >= idx); return p ? p.s : null; };\n\n// tópicos e palavras-chave no tempo novo\nconst topicos = (Array.isArray(ia.topicos) ? ia.topicos : []).slice(0, 4).map(tp => ({ ...tp, t: tempoDa(Number(tp.palavra) || 0) }))\n  .filter(tp => tp.t !== null && tp.t < fala - 0.8);\nconst chaves = (Array.isArray(ia.destaques) ? ia.destaques : []).map(d => ({ ...d, p: novo.find(x => x.i === d.palavra) }))\n  .filter(d => d.p && d.p.s > ABRE * 0.5 && d.p.s < fala - 0.6);\nconst ehChave = new Set(chaves.map(d => d.p.i));\n\n// planos (jump cut de zoom): uma troca a cada frase / corte, de 1,6 s a 4,5 s\nconst bordas = new Set(juntas.slice(0, -1).map(t => +t.toFixed(2)));\nnovo.forEach((p, j) => { if (/[.!?,;:]$/.test(p.w) && novo[j + 1]) bordas.add(+((p.e + novo[j + 1].s) / 2).toFixed(2)); });\nconst planos = [];\nlet ini = 0;\nfor (const b of [...[...bordas].filter(x => x > 0 && x < fala).sort((x, y) => x - y), fala]) {\n  if (b - ini >= 1.6) { planos.push([ini, b]); ini = b; }\n}\nif (ini < fala) { if (planos.length) planos[planos.length - 1][1] = fala; else planos.push([0, fala]); }\nconst cenas = [];\nplanos.forEach(([a, b]) => { const n = Math.ceil((b - a) / 4.5); for (let q = 0; q < n; q++) cenas.push([a + (b - a) * q / n, a + (b - a) * (q + 1) / n]); });\n\n// ── 2) imagem ────────────────────────────────────────────────────────────────────────────────────────────────\n// V6: vídeo deitado com rosto conhecido = corte EM PÉ centrado na pessoa (como um editor faria), em vez da faixa no meio\n// com fundo desfocado; daí em diante ele é tratado como vídeo em pé\nconst deitadoOrig = Number(info.largura) > Number(info.altura) * 1.05;\nconst corta = SVGC && deitadoOrig && typeof ia.rosto_x === 'number';\nconst deitado = deitadoOrig && !corta;\nconst cortaX = corta ? Math.round(Math.min(Math.max(ia.rosto_x * (Number(info.largura) * H / Number(info.altura)) - W / 2, 0),\n  Number(info.largura) * H / Number(info.altura) - W)) : 0;\nconst f = [];\ntrechos.forEach(([a, b], i) => {\n  const d = b - a;\n  const base = corta ? `scale=-2:${H},crop=${W}:${H}:${cortaX}:0` : deitado\n    ? `split=2[bg${i}][fg${i}];[bg${i}]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=20:2[bgb${i}];[fg${i}]scale=${W}:-2[fgs${i}];[bgb${i}][fgs${i}]overlay=(W-w)/2:(H-h)/2`\n    : `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}`;\n  f.push(`[0:v]trim=${a.toFixed(3)}:${b.toFixed(3)},setpts=PTS-STARTPTS,fps=${FPS},${base},setsar=1,format=yuv420p[c${i}]`);\n  f.push(`[0:a]atrim=${a.toFixed(3)}:${b.toFixed(3)},asetpts=PTS-STARTPTS,aresample=48000,afade=t=in:d=0.02,afade=t=out:st=${Math.max(0, d - 0.03).toFixed(3)}:d=0.03[s${i}]`);\n});\nconst n = trechos.length;\nf.push(`${trechos.map((_, i) => `[c${i}][s${i}]`).join('')}concat=n=${n}:v=1:a=1[cv0][ca0]`);\n// zoom: impacto na abertura (1,22 -> 1,0 em 0,4 s) + nível alternado por plano com leve aproximação contínua\nconst fz = deitado || corta ? 0.5 : 1;   // vídeo deitado cortado em pé já vem aproximado: zoom pela metade\nconst NIV = [0, 0.14, 0.06, 0.2];\nlet Z = `1+0.22*max(0,1-t/0.4)` + cenas.map(([a, b], q) =>\n  `+gte(t,${n2(a)})*lt(t,${n2(b)})*(${(NIV[q % 4] * fz).toFixed(3)}+0.03*(t-${n2(a)})/${n2(Math.max(0.1, b - a))})`).join('');\nif (NIVEL >= 3) Z += chaves.map(c => `+gte(t,${n2(c.p.s)})*lt(t,${n2(c.p.s + 0.45)})*${(0.08 * fz).toFixed(3)}`).join('');\nf.push(`[cv0]setpts=(PTS-STARTPTS)/${SP},fps=${FPS},eq=contrast=1.06:saturation=1.16:brightness=0.012,` +\n  `scale=w='2*trunc(${W}*(${Z})/2)':h=-2:eval=frame,crop=${W}:${H}:(in_w-${W})/2:(in_h-${H})*${corta ? 0.12 : 0.35},` +\n  `unsharp=5:5:0.45,vignette=angle=PI/6,setsar=1,format=yuv420p[cvz]`);\nf.push(SP === 1 ? `[ca0]anull[ca]` : `[ca0]atempo=${SP}[ca]`);\nif (FIM) {\n  f.push(`[1:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=18:2,eq=brightness=${NIVEL >= 4 ? -0.32 : -0.18},loop=loop=${Math.round(FIM * FPS)}:size=1:start=0,setpts=N/${FPS}/TB,fps=${FPS},setsar=1,format=yuv420p,trim=0:${FIM}[fimv]`);\n  f.push(`[cvz][fimv]concat=n=2:v=1:a=0[vb0]`);\n  f.push(`[ca]apad=pad_dur=${FIM}[fala]`);\n} else {\n  f.push(`[cvz]null[vb0]`);\n  f.push(`[ca]anull[fala]`);\n}\n// glitch (só nível 3) na troca de tópico: separa as cores por 0,15 s\nconst trocas = topicos.map(tp => tp.t).filter(t => t > 0.5);\nif (NIVEL >= 3 && trocas.length) {\n  f.push(`[vb0]rgbashift=rh=-18:bh=18:enable='${trocas.map(t => `between(t,${n2(t)},${n2(t + 0.15)})`).join('+')}'[vb]`);\n} else {\n  f.push(`[vb0]null[vb]`);\n}\n// emojis (só nível 3): pulam ao lado da legenda em cada palavra-chave\nconst emojis = NIVEL >= 3 ? chaves.filter(c => c.emoji).slice(0, 5) : [];\nlet atual = 'vass';\nf.push(SVGC ? '__CARDS__' : `[vb]ass={{in_textos}}:fontsdir=inputs[vass]`);   // V6: os cards entram aqui (por baixo dos textos)\nemojis.forEach((c, q) => {\n  const a = c.p.s, b = Math.min(a + 1.5, fala);\n  const y = Math.round(H * 0.5);\n  f.push(`[${3 + q}:v]scale=240:240,format=rgba,fade=t=in:st=${n2(a)}:d=0.12:alpha=1,fade=t=out:st=${n2(b - 0.2)}:d=0.2:alpha=1[e${q}]`);\n  f.push(`[${atual}][e${q}]overlay=x=${W - 300}:y='${y}-70*max(0,1-(t-${n2(a)})/0.22)':enable='between(t,${n2(a)},${n2(b)})'[ve${q}]`);\n  atual = `ve${q}`;\n});\n// out_range=tv: a foto do cartão final (JPEG) deixava o vídeo marcado como yuvj420p; celular/Instagram querem yuv420p\nf.push(`[${atual}]scale=out_range=tv,format=yuv420p,split=2[vid][vcapa]`);\nf.push(`[vcapa]trim=start=1.0,setpts=PTS-STARTPTS[capa]`);\n\n// ── 3) som ───────────────────────────────────────────────────────────────────────────────────────────────────\nf.push(`[fala]highpass=f=80,afftdn=nr=10:nf=-40,acompressor=threshold=0.08:ratio=3:attack=8:release=150:makeup=1.5,loudnorm=I=-14:TP=-1.5:LRA=9,asplit=2[f1][f2]`);\nif (v.op.trilha !== 'nenhuma') {\n  f.push(`[2:a]aresample=48000,aloop=loop=-1:size=2e9,atrim=0:${total.toFixed(2)},volume=0.22,afade=t=out:st=${Math.max(0, total - 1.5).toFixed(2)}:d=1.5[tr]`);\n  f.push(`[tr][f1]sidechaincompress=threshold=0.04:ratio=10:attack=15:release=350[trb]`);\n  f.push(`[trb][f2]amix=inputs=2:normalize=0:duration=longest[mix0]`);\n} else {\n  f.push(`[f1]anull[mix0]`);\n  f.push(`[f2]anullsink`);\n}\n// efeitos sonoros feitos no próprio ffmpeg (sem arquivo): impacto, whoosh e pop\nconst SOM = {\n  impacto: `sine=f=65:r=48000:d=0.45,afade=t=out:st=0.05:d=0.4,volume=0.9`,\n  whoosh: `anoisesrc=d=0.5:c=pink:r=48000:a=0.5,highpass=f=300,lowpass=f=5000,afade=t=in:d=0.3:curve=exp,afade=t=out:st=0.3:d=0.2,volume=0.35`,\n  pop: `sine=f=1100:r=48000:d=0.09,afade=t=out:st=0.01:d=0.08,volume=0.3`,\n};\nconst efeitos = [{ s: 'impacto', t: 0 }, ...trocas.map(t => ({ s: 'whoosh', t: t - 0.3 })), ...chaves.map(c => ({ s: 'pop', t: c.p.s }))];\nif (FIM) efeitos.push({ s: 'whoosh', t: fala - 0.3 });\nefeitos.forEach((e, q) => {\n  const ms = Math.max(0, Math.round(e.t * 1000));\n  f.push(`${SOM[e.s]},aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,adelay=${ms}|${ms}[x${q}]`);\n});\nf.push(`[mix0]${efeitos.map((_, q) => `[x${q}]`).join('')}amix=inputs=${efeitos.length + 1}:normalize=0:duration=first,alimiter=limit=0.95[aud]`);\n\n// ── 4) textos (.ass) ──────────────────────────────────────────────────────────────────────────────────────────\nconst fs = x => Math.round(x * k);\nconst grupos = [];\nlet cur = [];\nfor (const p of novo) {\n  cur.push(p);\n  if (cur.length >= 3 || cur.map(x => x.w).join(' ').length >= 18 || /[.!?,:]$/.test(p.w)) { grupos.push(cur); cur = []; }\n}\nif (cur.length) grupos.push(cur);\nconst ev = [];\nlet mixModo = '';\nconst abertura = limpa(ia.abertura || ia.gancho || v.dados.titulo).toUpperCase();\nconst gancho = limpa(ia.gancho || v.dados.titulo).toUpperCase();\nconst yT = Math.round(H * 0.17);\nif (NIVEL >= 4) {\n  // ═══ V4: legenda MIX + cards dos nossos vídeos de propaganda (D:\\ms-energy\\bin\\montagem_ms.py, aprovados 01/11) ═══\n  const rr = (x0, y0, x1, y1, r) => {\n    [x0, y0, x1, y1, r] = [x0, y0, x1, y1, r].map(Math.round);\n    return `m ${x0 + r} ${y0} l ${x1 - r} ${y0} b ${x1} ${y0} ${x1} ${y0} ${x1} ${y0 + r} l ${x1} ${y1 - r} b ${x1} ${y1} ${x1} ${y1} ${x1 - r} ${y1} ` +\n      `l ${x0 + r} ${y1} b ${x0} ${y1} ${x0} ${y1} ${x0} ${y1 - r} l ${x0} ${y0 + r} b ${x0} ${y0} ${x0} ${y0} ${x0 + r} ${y0}`;\n  };\n  const roda = (cx, cy, r) => { const q = r * 0.5523, a = [cx, cy, r, q].map(Math.round); [cx, cy, r] = a; const c = a[3];\n    return `m ${cx} ${cy - r} b ${cx + c} ${cy - r} ${cx + r} ${cy - c} ${cx + r} ${cy} b ${cx + r} ${cy + c} ${cx + c} ${cy + r} ${cx} ${cy + r} ` +\n      `b ${cx - c} ${cy + r} ${cx - r} ${cy + c} ${cx - r} ${cy} b ${cx - r} ${cy - c} ${cx - c} ${cy - r} ${cx} ${cy - r}`; };\n  const LARG = { 'Montserrat Black': 0.70, 'Luckiest Guy': 0.66, 'Bangers': 0.48, 'Anton': 0.46 };\n  // largura média por letra (medida); texto com minúsculas é ~15% mais estreito que em CAIXA ALTA\n  const larg = (t, sz, fn) => String(t).length * sz * (LARG[fn] || 0.65) * (/[a-zà-ú]/.test(String(t)) ? 0.78 : 1);\n  const quebra = (t, sz, fn, max) => { const ls = []; let l = ''; for (const p of String(t).split(/\\s+/)) { const c = l ? l + ' ' + p : p; if (l && larg(c, sz, fn) > max) { ls.push(l); l = p; } else l = c; } if (l) ls.push(l); return ls; };\n  const desenho = (camada, a, b, cor1, caminho, extra = '') =>\n    `Dialogue: ${camada},${t2(a)},${t2(b)},Mix,,0,0,0,,{\\\\an7\\\\pos(0,0)\\\\bord0\\\\shad0\\\\1c${ass(cor1)}${extra}\\\\p1}${caminho}{\\\\p0}`;\n  const texto = (camada, a, b, x, y, an, sz, cor1, txt, extra = '', fn = 'Montserrat Black', anim = '') =>\n    `Dialogue: ${camada},${t2(a)},${t2(b)},Mix,,0,0,0,,{\\\\an${an}${anim ? mv(x, y, anim) : `\\\\pos(${Math.round(x)},${Math.round(y)})`}\\\\fn${fn}\\\\fs${Math.round(sz)}\\\\bord0\\\\shad0\\\\1c${ass(cor1)}${extra}}${txt}`;\n  const sobe = SVGC ? 'sobe' : '', esq = SVGC ? 'esq' : '';   // V6: o texto entra junto com o card\n  const fimAbre = Math.min(2.6, fala);                     // gancho de 0 a 2,6 s, como no montar() do PC\n  // rosto (a IA mede no quadro) levado para a tela final, com folga para cabelo e queixo como o rosto_faixa do PC\n  let rosto = null;\n  if (Array.isArray(ia.rosto)) {\n    const sw = Number(info.largura) || W, sh = Number(info.altura) || H;\n    const yTela = fr => deitado ? (H - W * sh / sw) / 2 + fr * W * sh / sw\n      : fr * sh * Math.max(W / sw, H / sh) - (sh * Math.max(W / sw, H / sh) - H) / 2;\n    const t0 = yTela(ia.rosto[0]), b0 = yTela(ia.rosto[1]), fh = b0 - t0;\n    rosto = [Math.max(0, t0 - fh * 0.45), Math.min(H, b0 + fh * 0.15)];\n  }\n  // altura do card: o lugar livre que menos encosta no rosto, nunca sobre a legenda (_y_pergunta do PC)\n  const yLivre = alto => {\n    if (!rosto) return 225;\n    const [ft, fb] = rosto, lim = H * 0.64 - 18 - alto;\n    const c = [225, 105, fb + 30, ft - 30 - alto].filter(y => y >= 0 && y <= lim);\n    return (c.length ? c : [105]).sort((p, q) => Math.max(0, Math.min(p + alto, fb) - Math.max(p, ft)) - Math.max(0, Math.min(q + alto, fb) - Math.max(q, ft)) || (p !== 225) - (q !== 225))[0];\n  };\n  // abertura: PERGUNTA vira o card branco \"responder comentário\" do Instagram; frase vira a faixa arredondada na cor da marca\n  const abre = limpa(ia.abertura || ia.gancho || v.dados.titulo);\n  if (abre.endsWith('?')) {\n    const fq = 81, linhas = quebra(abre, fq, 'Montserrat Black', W - 240), ROT = 'Pergunta que a gente sempre recebe';\n    const lg = Math.max(...linhas.map(l => larg(l, fq, 'Montserrat Black')), larg(ROT, 36, 'Montserrat Black') + 84);\n    const altoC = 99 + 99 * linhas.length + 30;\n    const x0 = (W - lg) / 2 - 45, y0 = yLivre(altoC + 36), x1 = x0 + lg + 90, y1 = y0 + altoC;\n    const fad = '\\\\fad(150,220)';\n    if (SVGC) {   // balão branco com bico, brilho de cima para baixo, sombra e bolinha da marca em degradê\n      const w = x1 - x0, h = y1 - y0;\n      card(x0, y0, w, h + 36, 0, fimAbre, defs('#FFFFFF', '#F3F4F8', '#000', 0.45, true) +\n        `<g filter=\"url(#s)\">${R(w, h, 46, 'fill=\"#F3F4F8\"')}<path d=\"M 84 ${Math.round(h - 4)} L 142 ${Math.round(h - 4)} L 93 ${Math.round(h + 36)} Z\" fill=\"#F3F4F8\"/></g>` +\n        R(w, h, 46, 'fill=\"url(#g)\"') + `<circle cx=\"64\" cy=\"50\" r=\"23\" fill=\"${tom(cor, -0.15)}\"/><circle cx=\"64\" cy=\"50\" r=\"23\" fill=\"url(#b)\"/>` +\n        `<circle cx=\"64\" cy=\"50\" r=\"21\" fill=\"none\" stroke=\"#fff\" stroke-opacity=\".5\" stroke-width=\"2\"/>`, 'sobe', 0.22);\n    } else {\n      ev.push(desenho(8, 0, fimAbre, '#000000', rr(x0 + 5, y0 + 9, x1 + 5, y1 + 9, 42), `\\\\1a&H88&\\\\blur10${fad}`));\n      ev.push(desenho(9, 0, fimAbre, '#FFFFFF', rr(x0, y0, x1, y1, 42) + ` m ${Math.round(x0 + 87)} ${Math.round(y1 - 1)} l ${Math.round(x0 + 138)} ${Math.round(y1 - 1)} l ${Math.round(x0 + 93)} ${Math.round(y1 + 36)}`, `\\\\1a&H08&${fad}`));\n      ev.push(desenho(10, 0, fimAbre, cor, roda(x0 + 64, y0 + 50, 22), fad));\n    }\n    ev.push(texto(10, 0, fimAbre, x0 + 104, y0 + 50, 4, 36, '#696973', ROT, fad, undefined, sobe));\n    linhas.forEach((l, q) => ev.push(texto(10, 0, fimAbre, W / 2, y0 + 93 + q * 99, 8, fq, '#16161A', l, fad, undefined, sobe)));\n  } else if (abertura) {\n    const fz2 = 90, linhas = quebra(abertura, fz2, 'Montserrat Black', W - 210), alto = 111 * linhas.length;\n    const lg = Math.max(...linhas.map(l => larg(l, fz2, 'Montserrat Black')));\n    const x0 = (W - lg) / 2 - 51, y0 = yLivre(alto + 54);\n    const fad = '\\\\fad(120,220)';\n    if (SVGC) card(x0, y0, lg + 102, alto + 54, 0, fimAbre, pilula(lg + 102, alto + 54, 44, cor), 'sobe', 0.22);\n    else {\n      ev.push(desenho(8, 0, fimAbre, '#000000', rr(x0 + 5, y0 + 9, x0 + lg + 107, y0 + alto + 63, 39), `\\\\1a&H88&\\\\blur10${fad}`));\n      ev.push(desenho(9, 0, fimAbre, cor, rr(x0, y0, x0 + lg + 102, y0 + alto + 54, 39), `\\\\1a&H14&${fad}`));\n    }\n    linhas.forEach((l, q) => ev.push(texto(10, 0, fimAbre, W / 2, y0 + 24 + q * 111, 8, fz2, corTexto, l, fad, undefined, sobe)));\n  }\n  // faixa de título fixa (layout \"aula\") + etiqueta da etapa (círculo com o número + texto) trocando com os tópicos\n  const fb = 63, lb = quebra(gancho, fb, 'Montserrat Black', W - 230).slice(0, 2), caixaH = 78 * lb.length + 42;\n  const lwb = Math.max(...lb.map(l => larg(l, fb, 'Montserrat Black')), 200), bx0 = Math.max(30, (W - lwb) / 2 - 39), by0 = 54;\n  if (gancho && fala > fimAbre) {\n    if (SVGC) card(bx0, by0, W - 2 * bx0, caixaH, fimAbre, fala, pilula(W - 2 * bx0, caixaH, Math.min(40, caixaH / 2), cor), 'sobe');\n    else ev.push(desenho(3, fimAbre, fala, cor, rr(bx0, by0, W - bx0, by0 + caixaH, 21), '\\\\1a&H0A&\\\\fad(250,0)'));\n    lb.forEach((l, q) => ev.push(texto(4, fimAbre, fala, W / 2, by0 + 21 + q * 78, 8, fb, corTexto, l, '\\\\fad(250,0)', undefined, sobe)));\n  }\n  const ey = by0 + caixaH + 21, eh = SVGC ? 66 : 60;\n  topicos.forEach((tp, i) => {\n    const a = Math.max(tp.t, fimAbre), b = topicos[i + 1] ? topicos[i + 1].t : fala, tx = limpa(tp.texto);\n    if (b - a <= 0.8) return;\n    const x1 = bx0 + eh + larg(tx, 33, 'Montserrat Black') + 45, fad = '\\\\fad(200,0)';\n    if (SVGC) {   // etiqueta de vidro escuro com a bolinha do número em degradê da marca\n      const w = x1 - bx0, r = eh / 2;\n      card(bx0, ey, w, eh, a, b, defs(tom(cor, 0.3), tom(cor, -0.2), '#000', 0.45) +\n        R(w, eh, r, 'fill=\"#10131B\" fill-opacity=\".86\" filter=\"url(#s)\"') + R(w, eh, r, 'fill=\"url(#b)\" fill-opacity=\".5\"') + contorno(w, eh, r, 0.18) +\n        `<circle cx=\"${r}\" cy=\"${r}\" r=\"${Math.round(eh * 0.37)}\" fill=\"url(#g)\"/><circle cx=\"${r}\" cy=\"${r}\" r=\"${Math.round(eh * 0.37)}\" fill=\"url(#b)\"/>`, 'esq');\n    } else {\n      ev.push(desenho(3, a, b, '#14181E', rr(bx0, ey, x1, ey + eh, 30), `\\\\1a&H22&${fad}`));\n      ev.push(desenho(4, a, b, cor, roda(bx0 + 30, ey + 30, 21), fad));\n    }\n    ev.push(texto(5, a, b, bx0 + eh / 2, ey + eh / 2 + 1, 5, 33, corTexto, String(i + 1), fad, undefined, esq));\n    ev.push(texto(5, a, b, bx0 + eh + 12, ey + eh / 2 + 1, 4, 33, '#FFFFFF', tx, fad, undefined, esq));\n  });\n  // legenda MIX: palavras curtas se juntam à próxima forte; cada bloco tem desenho, cor, fonte, giro, pop e lugar próprios\n  if (v.op.legendas && novo.length) {\n    const CURTAS = new Set('a o e é de do da dos das em no na nos nas um uma que com pra para por se seu sua te eu ao à os as ou mas não já tem vai só isso essa esse ela ele me mais muito quem como'.split(' '));\n    const FORTES = new Set('conta luz economia economizar grátis solar sol energia orçamento telhado parcela zero nunca erro verdade mito noite dinheiro inversor placas painéis calor chuva hoje agora novo nova melhor resultado segredo sempre promoção desconto instalação projeto cliente casa'.split(' '));\n    const CORES = ['#3CC8FF', '#FFD60A', '#FF50AA', '#FF4632', '#4678FF', '#3CE678', '#FF961E', '#FFFFFF'];\n    const QUENTES = ['#FFD60A', '#FF4632', '#FF50AA', '#FF961E'];\n    const FONTES = ['Luckiest Guy', 'Bangers', 'Anton', 'Montserrat Black'];\n    const CONT = '#0E1228';\n    const LUGARES = [[0.50, 0.74], [0.32, 0.68], [0.68, 0.80], [0.38, 0.84], [0.64, 0.70], [0.50, 0.80]];\n    const GIROS = [-7, 5, -3, 8, -5, 3, -8, 6];\n    const clarear = c => '#' + [1, 3, 5].map(j => { const x = parseInt(c.slice(j, j + 2), 16); return Math.round(x + (255 - x) * 0.55).toString(16).padStart(2, '0'); }).join('');\n    let sem = 0; for (const ch of String(v.job)) sem = (sem * 31 + ch.charCodeAt(0)) >>> 0;\n    const rnd = () => { sem = (sem * 1664525 + 1013904223) >>> 0; return sem / 4294967296; };\n    const pick = l => l[Math.floor(rnd() * l.length)];\n    const blocos = [];\n    let pre = [];\n    for (const p of novo) {\n      const lw = p.w.replace(/[.,!?;:\"']/g, '').toLowerCase();\n      if (CURTAS.has(lw) && pre.length < 3) { pre.push(p); continue; }\n      blocos.push({ cima: pre.map(x => x.w), forte: p, s: pre.length ? pre[0].s : p.s, e: p.e });\n      pre = [];\n    }\n    if (pre.length) blocos.push({ cima: pre.slice(0, -1).map(x => x.w), forte: pre[pre.length - 1], s: pre[0].s, e: pre[pre.length - 1].e });\n    blocos.forEach((bl, i) => { const prox = blocos[i + 1] ? blocos[i + 1].s : bl.e + 0.5; bl.e = Math.min(Math.max(Math.min(prox, bl.e + 0.5), bl.s + 0.3), fala); });\n    const peso = bl => { const w = bl.forte.w.replace(/[.,!?;:\"']/g, ''); return ehChave.has(bl.forte.i) || FORTES.has(w.toLowerCase()) || /[!?]$/.test(bl.forte.w) ? 3 : (w.length >= 7 ? 2 : 1); };\n    // um adesivo (palavra) = várias camadas do .ass: brilho, borda branca, borda escura e preenchimento em 2 tons (degradê)\n    const adesivo = (a, b, x, y, sz, fn, c, giro, des, pop, txt, rastro) => {\n      const out = [], s = Math.max(4, Math.round(sz / 9)), base = `\\\\an5\\\\pos(${Math.round(x)},${Math.round(y)})\\\\fn${fn}\\\\fs${Math.round(sz)}\\\\frz${giro}\\\\shad0`;\n      const p = pop ? `\\\\fscx${Math.round(pop * 100)}\\\\fscy${Math.round(pop * 100)}\\\\t(0,130,\\\\fscx100\\\\fscy100)` : '';\n      const al = rastro ? '\\\\alpha&HA6&' : '';\n      const L = (cam, extra) => out.push(`Dialogue: ${cam},${t2(a)},${t2(b)},Mix,,0,0,0,,{${base}${p}${extra}${al}}${txt}`);\n      if (des === 'caixa') {\n        out.push(`Dialogue: 12,${t2(a)},${t2(b)},MixCaixa,,0,0,0,,{${base}${p}\\\\1c&HFFFFFF&\\\\3c${ass(c === '#FFFFFF' ? '#FF4632' : c)}\\\\bord${Math.round(sz * 0.13)}\\\\shad${s}\\\\4a&H70&${al}}${txt}`);\n        return out;\n      }\n      if (des !== 'recorte') L(10, `\\\\bord${Math.round(s * (des === 'contorno_duplo' ? 3.4 : 2.4))}\\\\blur${Math.round(s * 1.6)}\\\\3c${ass(c)}\\\\1a&HFF&\\\\3a&H55&`);\n      if (des === 'contorno_duplo') L(11, `\\\\bord${s + Math.max(3, Math.round(s / 2)) + s}\\\\3c&HFFFFFF&\\\\1a&HFF&`);\n      if (des === 'recorte') L(11, `\\\\bord${s + Math.max(8, Math.round(sz / 6))}\\\\3c&HFFFFFF&\\\\1c&HFFFFFF&\\\\shad${Math.round(s * 1.3)}\\\\4c&H000000&\\\\4a&H66&`);\n      const sombra = des === 'sombra' ? `\\\\shad${Math.round(s * 1.4)}\\\\4c&H000000&\\\\4a&H60&` : '';\n      const borda = des === 'recorte' ? Math.max(3, Math.round(sz / 14)) : s;\n      L(12, `\\\\bord${borda}\\\\3c${ass(CONT)}${sombra}\\\\clip(0,0,${W},${Math.round(y)})\\\\1c${ass(clarear(c))}`);\n      L(12, `\\\\bord${borda}\\\\3c${ass(CONT)}${sombra}\\\\clip(0,${Math.round(y)},${W},${H})\\\\1c${ass(c)}`);\n      return out;\n    };\n    // modo como no PC (escolher_mix): 'inteligente' (desenho e efeitos seguem o peso da palavra) ou 'livre' (sorteado)\n    mixModo = rnd() < 0.5 ? 'inteligente' : 'livre';\n    let ant = null, antEv = [], antRastro = false, antCaixa = null;\n    blocos.forEach((bl, n) => {\n      const pz = peso(bl);\n      const livre = mixModo === 'livre';\n      const ops = livre ? ['degrade', 'sombra', 'contorno_duplo', 'recorte', 'caixa']\n        : { 3: ['recorte', 'caixa', 'contorno_duplo'], 2: ['recorte', 'contorno_duplo', 'sombra', 'degrade'], 1: ['degrade', 'sombra', 'recorte'] }[pz];\n      const c = livre ? pick(CORES) : (pz === 3 ? pick(QUENTES) : CORES[(n * 3) % CORES.length]);\n      const popK = livre ? pick([1.18, 1.35, 1.40]) : { 3: 1.40, 2: 1.35, 1: 1.18 }[pz];\n      const giro = GIROS[n % 8] * (livre ? pick([1, 1, 1.7]) : (pz === 3 && rnd() < 0.5 ? 1.7 : 1));\n      const des = pick(ops.filter(d => d !== ant).length ? ops.filter(d => d !== ant) : ops);\n      const sub = des !== 'caixa' && (livre ? rnd() < 0.25 : pz >= 2 && rnd() < (pz === 3 ? 0.5 : 0.25));\n      let rastro = n > 0 && (livre ? rnd() < 0.35 : bl.s - blocos[n - 1].e < 0.25 && !antRastro && rnd() < 0.5);\n      const fn = FONTES[n % FONTES.length], txt = bl.forte.w.replace(/[.,!?;:\"']/g, '').toUpperCase();\n      let sz = { 1: 92, 2: 110, 3: 138 }[pz] * k;\n      const maxL = W * (des === 'degrade' || des === 'sombra' ? 0.80 : 0.72);\n      if (larg(txt, sz, fn) > maxL) sz = Math.max(60, sz * maxL / larg(txt, sz, fn));\n      const w = larg(txt, sz, fn) + (des === 'caixa' ? sz * 0.5 : sz * 0.3);\n      // lugar: gira pela lista; se cair no rosto vai para o próximo; nenhum livre = embaixo do rosto (como o PC)\n      const altoB = sz * (bl.cima.length ? 2.0 : 1.2);\n      let x, y;\n      for (let t = 0; t <= LUGARES.length; t++) {\n        if (t === LUGARES.length) { x = W / 2; y = Math.min(H * 0.90 - sz / 2, (rosto ? rosto[1] + 30 : H * 0.70) + altoB - sz / 2); break; }\n        const [fx, fy] = LUGARES[(n + t) % LUGARES.length];\n        x = Math.min(Math.max(fx * W, 39 + w / 2), W - 39 - w / 2); y = Math.min(fy * H, H * 0.90 - sz / 2);\n        const topo = y - altoB + sz / 2, base = y + sz / 2;\n        if (!rosto || base < rosto[0] - 15 || topo > rosto[1] + 45) break;\n      }\n      // rastro só se a palavra anterior NÃO encosta na nova (_encostam do PC): em cima dela embola as duas\n      const caixa = [x - w / 2, y - sz * 1.4, x + w / 2, y + sz * 0.6], f2 = 30;\n      if (rastro && antCaixa && !(antCaixa[2] + f2 < caixa[0] || caixa[2] + f2 < antCaixa[0] || antCaixa[3] + f2 < caixa[1] || caixa[3] + f2 < antCaixa[1])) rastro = false;\n      const evs = [];\n      if (rastro) antEv.forEach(e1 => evs.push(e1.replace(/^Dialogue: (\\d+),[^,]+,[^,]+,/, (m, cam) => `Dialogue: ${Math.max(1, cam - 6)},${t2(bl.s)},${t2(bl.e)},`).replace(/\\}/, '\\\\alpha&HA6&}')));\n      const a = bl.s, b = bl.e;\n      evs.push(...adesivo(a, Math.min(a + 0.13, b), x, y, sz, fn, c, giro, des, popK, txt));\n      evs.push(...adesivo(Math.min(a + 0.13, b), b, x, y, sz, fn, c, giro, des, 0, txt));\n      const meus = adesivo(a, b, x, y, sz, fn, c, giro, des, 0, txt);\n      if (sub) evs.push(`Dialogue: 12,${t2(a)},${t2(b)},Mix,,0,0,0,,{\\\\an7\\\\pos(0,0)\\\\org(${Math.round(x)},${Math.round(y)})\\\\frz${giro}\\\\bord0\\\\shad0\\\\1c${ass(c)}\\\\p1}${rr(x - w * 0.38, y + sz * 0.5, x + w * 0.38, y + sz * 0.5 + 15, 7)}{\\\\p0}`);\n      const cimaTxt = bl.cima.map(t => t.replace(/[.,]/g, '')).join(' ').toUpperCase();\n      if (cimaTxt) {\n        const fn2 = FONTES[(n + 1) % FONTES.length], sz2 = Math.max(60, sz * 0.55);\n        const des2 = des !== 'caixa' && rnd() < 0.35 ? 'caixa' : (des === 'caixa' ? 'recorte' : des);\n        const w2 = larg(cimaTxt, sz2, fn2);\n        const x2 = Math.min(Math.max(x + (n % 2 ? -1 : 1) * w * 0.12, 39 + w2 / 2), W - 39 - w2 / 2), y2 = y - sz * 0.82;\n        const c2 = CORES[(n * 3 + 2) % CORES.length];\n        evs.push(...adesivo(a, b, x2, y2, sz2, fn2, c2, giro, des2, popK, cimaTxt));\n        meus.push(...adesivo(a, b, x2, y2, sz2, fn2, c2, giro, des2, 0, cimaTxt));\n      }\n      ev.push(...evs);\n      ant = des; antEv = meus; antRastro = rastro; antCaixa = caixa;\n    });\n  }\n  // cartão final (como o dos vídeos de propaganda): marca, oferta, serviços, botão em pílula na cor da marca, @ e link\n  if (FIM) {\n    const a = fala + 0.15, b = total, fad = '\\\\fad(250,0)';\n    const marca = limpa(v.dados.marca || v.dados.titulo).toUpperCase();\n    const fm = Math.min(114, (W - 105) / Math.max(1, marca.length * 0.70));\n    ev.push(texto(6, a, b, W / 2, H * 0.27, 5, fm, '#FFFFFF', marca, `\\\\bord6\\\\3c${ass(cor)}\\\\3a&H60&\\\\blur4\\\\fscx50\\\\fscy50\\\\t(0,220,\\\\fscx106\\\\fscy106)\\\\t(220,320,\\\\fscx100\\\\fscy100)`));\n    let y = H * 0.355;\n    if (ia.oferta) quebra(limpa(ia.oferta), 66, 'Montserrat Black', W - 150).slice(0, 2).forEach(l => { ev.push(texto(6, a + 0.2, b, W / 2, y, 8, 66, '#FFFFFF', l, fad)); y += 80; });\n    if (ia.servicos) { ev.push(texto(6, a + 0.3, b, W / 2, y + 10, 8, 42, '#E1E1E1', limpa(ia.servicos), fad)); y += 70; }\n    const bt = limpa(ia.cartao || 'Chame no direct'), fbt = Math.min(66, (W - 255) / Math.max(1, bt.length * 0.70)), lbt = larg(bt, fbt, 'Montserrat Black');\n    const yb = Math.max(y + 60, H * 0.50);\n    const pulsa = [0, 1, 2, 3].map(q => `\\\\t(${q * 700},${q * 700 + 350},\\\\fscx106\\\\fscy106)\\\\t(${q * 700 + 350},${q * 700 + 700},\\\\fscx100\\\\fscy100)`).join('');\n    if (SVGC) {\n      // painel de vidro escuro atrás de tudo, com friso na cor da marca; botão em pílula com brilho colorido que pulsa junto\n      const py0 = H * 0.27 - 120, py1 = yb + 320, pw = W - 120;\n      card(60, py0, pw, py1 - py0, a, b, defs('#000', '#000', '#000', 0.55) + R(pw, py1 - py0, 54, 'fill=\"#0B0E18\" fill-opacity=\".62\" filter=\"url(#s)\"') +\n        R(pw, py1 - py0, 54, 'fill=\"url(#b)\" fill-opacity=\".45\"') + contorno(pw, py1 - py0, 54, 0.2) +\n        `<rect x=\"${Math.round(pw * 0.36)}\" y=\"0\" width=\"${Math.round(pw * 0.28)}\" height=\"7\" rx=\"3.5\" fill=\"${cor}\"/>`, 'fica');\n      const bw = lbt + 132, bh = 132;\n      card((W - bw) / 2, yb - 27, bw, bh, a + 0.4, b, pilula(bw, bh, 66, cor, cor, 0.75), 'pulsa');\n    } else {\n      ev.push(desenho(5, a + 0.4, b, '#000000', rr((W - lbt) / 2 - 66 + 5, yb - 27 + 9, (W + lbt) / 2 + 66 + 5, yb + 105 + 9, 66), `\\\\1a&H88&\\\\blur10${fad}`));\n      ev.push(desenho(6, a + 0.4, b, cor, rr((W - lbt) / 2 - 66, yb - 27, (W + lbt) / 2 + 66, yb + 105, 66), fad));\n    }\n    ev.push(texto(7, a + 0.4, b, W / 2, yb + 39, 5, fbt, corTexto, bt, fad + pulsa));\n    if (v.dados.instagram) ev.push(texto(6, a + 0.55, b, W / 2, yb + 190, 5, 54, '#FFFFFF', 'Instagram @' + limpa(v.dados.instagram), fad));\n    ev.push(texto(6, a + 0.7, b, W / 2, yb + 265, 5, 42, destaque, 'Link no perfil', fad));\n  }\n} else {\n// abertura: frase grande no meio, entra crescendo\nif (abertura) ev.push(`Dialogue: 6,${t2(0)},${t2(Math.min(ABRE, fala))},Abertura,,0,0,0,,{\\\\an5\\\\pos(${W / 2},${Math.round(H * 0.4)})\\\\fscx40\\\\fscy40\\\\t(0,160,\\\\fscx108\\\\fscy108)\\\\t(160,260,\\\\fscx100\\\\fscy100)\\\\fad(0,180)}${abertura}`);\nconst gancho = limpa(ia.gancho || v.dados.titulo).toUpperCase();\nif (gancho) ev.push(`Dialogue: 3,${t2(ABRE)},${t2(fala)},Gancho,,0,0,0,,{\\\\an8\\\\move(${W / 2},${-fs(60)},${W / 2},${Math.round(H * 0.06)},0,250)}${gancho}`);\n// tópicos numerados entrando da esquerda + flash na troca\nconst yT = Math.round(H * 0.17);\ntopicos.forEach((tp, i) => {\n  const a = Math.max(tp.t, i === 0 ? ABRE : 0), b = topicos[i + 1] ? topicos[i + 1].t : fala;\n  if (b - a > 0.8) ev.push(`Dialogue: 2,${t2(a)},${t2(b)},Topico,,0,0,0,,{\\\\an7\\\\move(${-W / 2},${yT},${fs(50)},${yT},0,250)}{\\\\c${ass(destaque)}}${i + 1}{\\\\c&HFFFFFF&}  ${limpa(tp.texto)}`);\n});\ntrocas.forEach(t => ev.push(`Dialogue: 7,${t2(t)},${t2(t + 0.18)},Barra,,0,0,0,,{\\\\an7\\\\pos(0,0)\\\\bord0\\\\shad0\\\\1c&HFFFFFF&\\\\1a&H40&\\\\fad(0,160)\\\\p1}m 0 0 l ${W} 0 ${W} ${H} 0 ${H}{\\\\p0}`));\n// legenda karaokê: o grupo aparece; a palavra falada acende e pula; palavras-chave na cor de destaque e maiores\nif (v.op.legendas && novo.length) {\n  grupos.forEach((g, gi) => {\n    const fimG = Math.min(gi + 1 < grupos.length ? grupos[gi + 1][0].s : g[g.length - 1].e + 0.4, g[g.length - 1].e + 0.6, fala);\n    g.forEach((p, j) => {\n      const a = Math.max(p.s, 0), b = j + 1 < g.length ? g[j + 1].s : fimG;\n      if (b - a < 0.02) return;\n      // só as palavras em maiúscula (o código de cor {\\c...} tem de ficar minúsculo)\n      const txt = g.map((x, q) => {\n        const W1 = x.w.toUpperCase(), chave = ehChave.has(x.i);\n        if (q === j) return `{\\\\c${ass(destaque)}\\\\t(0,90,\\\\fscx${chave ? 132 : 120}\\\\fscy${chave ? 132 : 120})\\\\t(90,180,\\\\fscx${chave ? 122 : 110}\\\\fscy${chave ? 122 : 110})}${W1}{\\\\r}`;\n        return chave ? `{\\\\c${ass(destaque)}}${W1}{\\\\r}` : W1;\n      }).join(' ');\n      ev.push(`Dialogue: 1,${t2(a)},${t2(b)},Legenda,,0,0,0,,${j === 0 ? '{\\\\fscx90\\\\fscy90\\\\t(0,120,\\\\fscx100\\\\fscy100)}' : ''}${txt}`);\n    });\n  });\n}\n}\n// \"Siga @\" no meio do vídeo\nif (v.dados.instagram && fala > 12) {\n  const a = fala * 0.45, b = Math.min(fala * 0.45 + 3, fala - 1), y = Math.round(H * 0.27);\n  if (SVGC) {   // pílula da marca vinda da esquerda (o estilo Siga desenhava uma caixa quadrada)\n    const txt = 'Siga @' + limpa(v.dados.instagram), sz = fs(38), w = txt.length * sz * 0.64 + 72, h = sz + 40;\n    card(fs(40), y - h / 2, w, h, a, b, pilula(w, h, h / 2, cor), 'esq', 0.25);\n    ev.push(`Dialogue: 5,${t2(a)},${t2(b)},Mix,,0,0,0,,{\\\\an4${mv(fs(40) + 32, y, 'esq')}\\\\fnMontserrat Black\\\\fs${sz}\\\\bord0\\\\shad0\\\\1c${ass(corTexto)}\\\\fad(0,250)}${txt}`);\n  } else {\n    ev.push(`Dialogue: 2,${t2(a)},${t2(b)},Siga,,0,0,0,,{\\\\an4\\\\move(${-W / 2},${y},${fs(50)},${y},0,300)\\\\fad(0,250)}Siga @${limpa(v.dados.instagram)}`);\n  }\n}\n// barrinha de progresso no topo\nconst P = 40;\nfor (let i = 0; i < P; i++) {\n  const a = fala * i / P, b = fala * (i + 1) / P, larg = Math.round(W * (i + 1) / P);\n  ev.push(`Dialogue: 4,${t2(a)},${t2(b)},Barra,,0,0,0,,{\\\\p1}m 0 0 l ${larg} 0 ${larg} ${fs(9)} 0 ${fs(9)}{\\\\p0}`);\n}\n// cartão final animado (a V4 desenha o dela no bloco acima)\nif (FIM && NIVEL < 4) {\n  const a = fala + 0.15, b = total;\n  const pos = (y, extra = '') => `{\\\\an5\\\\pos(${W / 2},${Math.round(H * y)})\\\\fad(250,0)${extra}}`;\n  const pulsa = [0, 1, 2, 3].map(q => `\\\\t(${q * 700},${q * 700 + 350},\\\\fscx108\\\\fscy108)\\\\t(${q * 700 + 350},${q * 700 + 700},\\\\fscx100\\\\fscy100)`).join('');\n  ev.push(`Dialogue: 2,${t2(a)},${t2(b)},Marca,,0,0,0,,${pos(0.33, '\\\\fscx50\\\\fscy50\\\\t(0,220,\\\\fscx106\\\\fscy106)\\\\t(220,320,\\\\fscx100\\\\fscy100)')}${limpa(v.dados.marca || v.dados.titulo).toUpperCase()}`);\n  if (ia.cartao) ev.push(`Dialogue: 2,${t2(a + 0.3)},${t2(b)},Chamada,,0,0,0,,${pos(0.47, pulsa)}${limpa(ia.cartao)}`);\n  if (v.dados.instagram) ev.push(`Dialogue: 2,${t2(a + 0.45)},${t2(b)},Contato,,0,0,0,,${pos(0.6)}@${limpa(v.dados.instagram)}`);\n  ev.push(`Dialogue: 2,${t2(a + 0.6)},${t2(b)},Link,,0,0,0,,${pos(0.68)}Link no perfil`);\n}\nconst estilo = (nome, tam, prim, borda, fundo, bs, out, sh, alinh, mv, extra = '') =>\n  `Style: ${nome},Montserrat Black,${fs(tam)},${prim},${prim},${borda},${fundo},-1,0,0,0,100,100,${extra || 0},0,${bs},${fs(out)},${fs(sh)},${alinh},${fs(50)},${fs(50)},${mv},1`;\nconst cab = `[Script Info]\\nScriptType: v4.00+\\nPlayResX: ${W}\\nPlayResY: ${H}\\nWrapStyle: 0\\nScaledBorderAndShadow: yes\\n\\n[V4+ Styles]\\n` +\n  'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\\n' +\n  estilo('Abertura', 62, ass(corTexto), ass(cor), '&H80000000&', 3, 24, 6, 5, 0, 1) + '\\n' +\n  estilo('Gancho', 56, ass(corTexto), ass(cor), '&H80000000&', 3, 20, 4, 8, Math.round(H * 0.06), 1) + '\\n' +\n  estilo('Topico', 40, '&H00FFFFFF&', '&H28101010&', '&H00000000&', 3, 16, 0, 7, Math.round(H * 0.17)) + '\\n' +\n  estilo('Legenda', 74, '&H00FFFFFF&', '&H00000000&', '&H96000000&', 1, 7, 3, 2, Math.round(H * 0.2)) + '\\n' +\n  estilo('Siga', 38, ass(corTexto), ass(cor), '&H00000000&', 3, 16, 0, 4, 0) + '\\n' +\n  estilo('Barra', 10, ass(cor), ass(cor), ass(cor), 1, 0, 0, 7, 0) + '\\n' +\n  estilo('Marca', 78, '&H00FFFFFF&', '&H00000000&', '&H96000000&', 1, 5, 3, 5, 0, 2) + '\\n' +\n  estilo('Chamada', 62, ass(corTexto), ass(cor), '&H80000000&', 3, 22, 4, 5, 0) + '\\n' +\n  estilo('Contato', 50, '&H00FFFFFF&', '&H00000000&', '&H96000000&', 1, 4, 2, 5, 0) + '\\n' +\n  estilo('Link', 40, ass(destaque), '&H00000000&', '&H96000000&', 1, 4, 2, 5, 0) + '\\n' +\n  estilo('Mix', 60, '&H00FFFFFF&', '&H000E1228&', '&H00000000&', 1, 0, 0, 5, 0) + '\\n' +\n  estilo('MixCaixa', 60, '&H00FFFFFF&', '&H000E1228&', '&H00000000&', 3, 10, 0, 5, 0) + '\\n\\n' +\n  '[Events]\\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\\n';\nconst textos = cab + ev.join('\\n') + '\\n';\n\n// V6: cada card é um SVG (lido 1 vez e repetido com loop) que entra com fade e anda junto com o texto dele; o botão do\n// cartão final pulsa; tudo por baixo do .ass\nif (SVGC) {\n  const fc = [], base = 3 + emojis.length;\n  let cur = 'vb';\n  cards.forEach((c, i) => {\n    const A = n2(c.a), B = n2(c.b), p = `max(0,1-(t-${A})/0.25)`;\n    const sai = c.saida ? `,fade=t=out:st=${n2(Math.max(c.a, c.b - c.saida))}:d=${n2(c.saida)}:alpha=1` : '';\n    const pul = c.anim === 'pulsa' ? `,scale=w='2*trunc(iw*(1+0.06*(1-abs(2*mod(max(0,t-${A})/0.7,1)-1)))/2)':h=-2:eval=frame` : '';\n    fc.push(`[${base + i}:v]format=rgba,loop=loop=${Math.ceil(c.b * FPS) + 2}:size=1:start=0,setpts=N/${FPS}/TB,fade=t=in:st=${A}:d=0.22:alpha=1${sai}${pul}[k${i}]`);\n    const x = c.anim === 'esq' ? `${c.x}-${DX}*${p}` : c.anim === 'pulsa' ? `${c.x + c.w / 2}-overlay_w/2` : `${c.x}`;\n    const y = c.anim === 'sobe' ? `${c.y}+${DY}*${p}` : c.anim === 'pulsa' ? `${c.y + c.h / 2}-overlay_h/2` : `${c.y}`;\n    fc.push(`[${cur}][k${i}]overlay=x='${x}':y='${y}':eof_action=pass:enable='between(t,${A},${B})'[vk${i}]`);\n    cur = `vk${i}`;\n  });\n  fc.push(`[${cur}]ass={{in_textos}}:fontsdir=inputs[vass]`);\n  f[f.indexOf('__CARDS__')] = fc.join(';');\n}\n\n// ── 5) pedido para o Very Good FFmpeg (um trabalho: vídeo, capa) ─────────────────────────────────────────────\nconst input_files = {\n  'in_video.mp4': v.video_url,\n  'in_fundo.jpg': ex.quadro,\n  'in_trilha.mp3': v.arquivo + 'trilha-' + (TRILHAS.includes(ia.trilha) ? ia.trilha : 'elegante'),\n  'in_textos.ass': v.arquivo + 'textos-' + v.job + '.ass',\n  'in_fonte.ttf': 'https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvC70w-.ttf',\n};\nif (NIVEL >= 4) {   // fontes da legenda MIX (Google Fonts); a Impact da versão do PC vira Anton\n  input_files['in_f1.ttf'] = 'https://fonts.gstatic.com/s/luckiestguy/v25/_gP_1RrxsjcxVyin9l9n_j2RSg.ttf';\n  input_files['in_f2.ttf'] = 'https://fonts.gstatic.com/s/bangers/v25/FeVQS0BTqb0h60ACL5k.ttf';\n  input_files['in_f3.ttf'] = 'https://fonts.gstatic.com/s/anton/v27/1Ptgg87LROyAm0K0.ttf';\n}\nemojis.forEach((c, q) => { input_files[`in_e${q}.png`] = `https://fonts.gstatic.com/s/e/notoemoji/latest/${c.emoji}/512.png`; });\nconst enc = `-c:v libx264 -preset veryfast -crf 22 -pix_fmt yuv420p -color_range tv -r ${FPS} -c:a aac -b:a 160k -ar 48000 -movflags +faststart`;\nconst entradasEmoji = emojis.map((_, q) => `-loop 1 -framerate ${FPS} -t ${total.toFixed(2)} -i inputs/in_e${q}.png `).join('');\ncards.forEach((c, i) => { input_files[`in_c${i}.svg`] = v.arquivo + `cards-${v.job}-${i}.svg`; });   // V6: o n8n entrega cada card\nconst entradasCards = cards.map((_, i) => `-i inputs/in_c${i}.svg `).join('');\nconst cmd = `-i inputs/in_video.mp4 -loop 1 -i inputs/in_fundo.jpg -i inputs/in_trilha.mp3 ${entradasEmoji}${entradasCards}-filter_complex \"${f.join(';').replace(/\\{\\{in_textos\\}\\}/g, 'inputs/in_textos.ass')}\" ` +\n  `-map \"[vid]\" -map \"[aud]\" ${enc} -t ${total.toFixed(2)} outputs/editado-${v.job}.mp4 -map \"[capa]\" -frames:v 1 -q:v 3 -update 1 outputs/capa-${v.job}.jpg`;\nreturn [{ json: {\n  corpo: JSON.stringify({ input_files, output_files: [`editado-${v.job}.mp4`, `capa-${v.job}.jpg`], machine: 'cpu', timeout_seconds: 300, ffmpeg_commands: [cmd] }),\n  textos: Buffer.from(textos, 'utf8').toString('base64'),\n  cards: Buffer.from(JSON.stringify(cards.map(c => c.svg)), 'utf8').toString('base64'), qtd_cards: cards.length,\n  total: Math.round(total * 100) / 100, original: Math.round(dur * 100) / 100, cortes: n, tirou: tirar.map(t => t.w),\n  fala: novo.map(p => p.w).join(' '), ritmo: SP, planos: cenas.length, palavras_chave: chaves.map(c => c.p.w), emojis: emojis.length, legenda_mix: mixModo,\n} }];\n"
+   },
+   "name": "🧩 Monta a edição",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    2300
+   ],
+   "id": "03706e11-7211-5129-8f6f-45bab52922d3",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'montando', detalhe: 'Cortei ' + $('🧩 Monta a edição').first().json.original + ' s para ' + $('🧩 Monta a edição').first().json.total + ' s', dados: { titulo: $('🧩 Confere o pedido').first().json.dados.titulo } }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: montando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    2300
+   ],
+   "id": "f01d57f7-71ed-5d07-959e-9d41587ff3b1",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:arq:textos-{{ $('🧩 Pega o vídeo').first().json.job }}.ass",
+    "value": "={{ $('🧩 Monta a edição').first().json.textos }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 86400
+   },
+   "name": "💾 Guarda os textos (1 dia)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    600,
+    2300
+   ],
+   "id": "d6d8edc5-ca90-5be8-a9ea-b3377d5a92a1",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "method": "POST",
+    "url": "https://verygoodffmpeg.com/api/ffmpeg",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $('🧩 Monta a edição').first().json.corpo }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Very Good FFmpeg: edita",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    900,
+    2300
+   ],
+   "id": "04b9e89d-8c51-5797-a798-132d3e62e07d",
+   "onError": "continueErrorOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000,
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "XSLXddmgLA1TsuPp",
+     "name": "Very Good FFmpeg (Bearer)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Guarda o código do trabalho que o ffmpeg na nuvem aceitou.\nconst r = $input.first().json || {};\nif (!(r.data && r.data.id)) throw new Error('O ffmpeg na nuvem recusou a edição: ' + String(r.message || r.errorCode || 'sem resposta').slice(0, 240));\nreturn [{ json: { id: r.data.id, inicio: Date.now() } }];\n"
+   },
+   "name": "🧩 Guarda o trabalho",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    2300
+   ],
+   "id": "e3ff189d-d434-5a10-858f-32b8746e8207",
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "amount": 8
+   },
+   "name": "⏳ Espera 8 segundos",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    1500,
+    2300
+   ],
+   "id": "d65de7b8-de4e-5ab0-9db8-6de35a2a0093",
+   "webhookId": "55cf80ba-d3c3-5e07-a73c-4d1e773622ba"
+  },
+  {
+   "parameters": {
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "url": "=https://verygoodffmpeg.com/api/jobs/{{ $('🧩 Guarda o trabalho').first().json.id }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 60000
+    }
+   },
+   "name": "🎬 Very Good FFmpeg: como está?",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1800,
+    2300
+   ],
+   "id": "a6cd3716-cf3d-5f5d-ae1d-14c2b43dc8b9",
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000,
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "XSLXddmgLA1TsuPp",
+     "name": "Very Good FFmpeg (Bearer)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Lê o andamento da edição no Very Good FFmpeg e decide se o laço continua.\nconst v = $('🧩 Pega o vídeo').first().json;\nconst p = $('🧩 Guarda o trabalho').first().json;\nconst m = ($input.first().json || {}).data || {};\nconst passou = (Date.now() - p.inicio) / 1000;\nlet estado = 'montando', erro = '';\nif (['failed', 'error', 'timed_out', 'cancelled', 'canceled'].includes(m.status)) { estado = 'erro'; erro = m.error_message || 'o ffmpeg na nuvem não conseguiu editar o vídeo'; }\nelse if (m.status === 'succeeded') estado = 'pronto';\nelse if (passou > 900) { estado = 'erro'; erro = 'A edição demorou mais de 15 minutos. Tente de novo.'; }\nconst o = m.output_files || {};\nconst progresso = estado === 'montando' ? Math.min(95, Math.round(10 + passou * 1.5)) : 99;\nconst status = { job: v.job, etapa: 'montando', progresso, detalhe: `🎞️ ${m.status === 'running' ? 'cortando, legendando e mixando o som' : 'na fila do ffmpeg na nuvem'} · ${progresso}%` };\nreturn [{ json: { estado, erro, terminou: estado !== 'montando', pronto: estado === 'pronto',\n  video: o[`editado-${v.job}.mp4`] || '', capa: o[`capa-${v.job}.jpg`] || '', status: JSON.stringify(status) } }];\n"
+   },
+   "name": "🧩 Atualiza o andamento",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2100,
+    2300
+   ],
+   "id": "f21b77bb-0081-56b8-81f8-9be49419fed6"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Pega o vídeo').first().json.job }}",
+    "value": "={{ $json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: progresso",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2400,
+    2300
+   ],
+   "id": "1c36c231-f372-52fa-a426-68402bb68d0d",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "0468fa61-1c44-4e3d-be0e-db9382507934",
+       "leftValue": "={{ $('🧩 Atualiza o andamento').first().json.terminou }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Terminou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2700,
+    2300
+   ],
+   "id": "acf61d5d-9946-59c5-b655-8e9d57890755"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Grava o resultado: o vídeo editado (link vale 7 dias), a capa, quanto encurtou e a legenda para o post.\nconst v = $('🧩 Pega o vídeo').first().json;\nconst st = $('🧩 Atualiza o andamento').first().json;\nconst mo = $('🧩 Monta a edição').first().json;\nconst ia = $('🧩 Lê a direção').first().json;\nif (!st.pronto) return [{ json: { status: JSON.stringify({ job: v.job, etapa: 'erro', erro: 'A edição falhou: ' + String(st.erro || '').slice(-220) }) } }];\nreturn [{ json: { status: JSON.stringify({\n  job: v.job, etapa: 'pronto', video: st.video, capa: st.capa, duracao: mo.total, original: mo.original,\n  cortes: mo.cortes, tirou: mo.tirou, gancho: ia.gancho, topicos: ia.topicos, legenda_post: ia.legenda_post,\n  segundos: Math.round((Date.now() - v.criado_em) / 1000), dados: { titulo: v.dados.titulo },\n}) } }];\n"
+   },
+   "name": "🎉 Resultado final",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    3000,
+    2300
+   ],
+   "id": "5ad7be6e-de71-58eb-a786-0092a6479ea9"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Pega o vídeo').first().json.job }}",
+    "value": "={{ $json.status }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "💾 Status: pronto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3300,
+    2300
+   ],
+   "id": "ed3ae05b-f9a0-5bb7-b1dc-10e4a49b3532",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:{{ $('🧩 Confere o pedido').first().json.job }}",
+    "value": "={{ JSON.stringify({ job: $('🧩 Confere o pedido').first().json.job, etapa: 'erro', erro: String($json.erro || ($json.error && ($json.error.message || $json.error.description || $json.error)) || $json.message || 'Falha inesperada').slice(0, 300) }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 259200
+   },
+   "name": "⚠️ Marca erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3300,
+    1700
+   ],
+   "id": "ae47aa42-314b-58eb-bfb7-2856ae88cb0b",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "# ✂️ EDITOR DE REELS COM IA · V4 MIX (VÍDEO GRAVADO → REEL PRONTO)\n🆕 **Esta versão:** legenda MIX + cards da propaganda: pergunta, aula, cartão final. Sai em **1080x1920**.\n\n🎯 **O que faz:** a pessoa manda o vídeo que **gravou falando** do produto/serviço (celular, até 1min30) e recebe um **Reel pronto para o Instagram**, no mesmo estilo dos nossos vídeos de produto:\n✂️ **corta as pausas** (silêncio maior que meio segundo) e os **vícios** (\"né\", \"é\", \"ãh\", \"tipo\"...) pelo tempo exato de cada palavra\n🔝 **frase de impacto** fixa no topo, na cor da marca · 🔢 **tópicos numerados** que entram quando o assunto muda\n💬 **legenda karaokê**: 3 palavras por vez e a palavra falada **acesa** na cor da marca\n📏 **barrinha de progresso** no topo · 🎬 zoom leve alternado a cada corte (cara de edição) · 📱 vídeo deitado vira em pé com fundo desfocado\n🏷️ **cartão final**: marca, chamada (\"Agende sua visita\"), @ e \"Link no perfil\"\n🎵 **trilha** que **abaixa** quando a pessoa fala · 🔊 som no padrão do Instagram (**-14 LUFS**)\n📣 **legenda do post** pronta, com hashtags\n\n## ▶️ COMO USAR\n1️⃣ Abra **/webhook/editor-reel-v4** · 2️⃣ envie o vídeo (ou **🎬 Usar vídeo de exemplo**) · 3️⃣ diga o que é ➜ **✂️ Editar o meu Reel** · 4️⃣ em ~2 min baixe o vídeo e copie a legenda\n\n## 🧰 ANTES DE USAR NO SEU n8n\n1️⃣ **Very Good FFmpeg** (ffmpeg na nuvem, **sem marca d'água**): conta grátis em **verygoodffmpeg.com** (entra com Google, **sem cartão**, 2 GB grátis ≈ 100 edições) ➜ **Create API key** ➜ credencial **Header Auth**: nome `Authorization`, valor `Bearer ` + a chave ➜ escolha nos nodes 🎬.\n2️⃣ **Deepgram** (ouve cada palavra): conta grátis em **deepgram.com** (Google, **sem cartão**, US$ 200 de crédito ≈ 45 mil minutos) ➜ **Create API key** ➜ credencial **Header Auth**: nome `Authorization`, valor `Token ` + a chave ➜ escolha no node 🎧.\n3️⃣ **IA**: no node 🧠 **IA diretora** troque o endereço por `https://api.openai.com/v1/chat/completions` e escolha a SUA credencial OpenAI; no 🧩 **Prepara o pedido à IA** troque o `model` por um com visão (ex.: `gpt-4o-mini`). ⚠️ Não deixe o endereço que veio: suas chaves e os vídeos dos clientes iriam para o servidor de outra pessoa.\n4️⃣ **Redis**: credencial Redis (Redis Cloud tem plano grátis) em todos os 📖 e 💾.\n5️⃣ O n8n precisa abrir pela internet em **https** e aceitar envio de até ~120 MB (`N8N_PAYLOAD_SIZE_MAX`). **Ative o fluxo** (Active/Publish).\n\n## 🔎 LEGENDA DOS ÍCONES\n🔔 recebe um pedido · 📤 responde · 🧩 código · 🚦 decisão · 📖 lê do Redis · 💾 grava no Redis · 🧮 soma · 🎬 ffmpeg na nuvem · 🎧 transcrição · 🧠 IA · 🌐 baixa/sobe arquivo · ⏳ espera",
+    "height": 1180,
+    "width": 1280,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1400,
+    -60
+   ],
+   "id": "4c6f078b-f864-5e05-a6be-29a8df4886e2"
+  },
+  {
+   "parameters": {
+    "content": "## 0️⃣ PÁGINAS E ENVIO DO VÍDEO 📄\n🔔 **Página do editor** (/webhook/editor-reel-v4): o formulário · 🔔 **Página de andamento** (/webhook/editor-reel-v4-ver?job=...) · 🔔 **Consulta status** lê do Redis.\n📤 **Envio**: o navegador manda o vídeo para 🔔 **Recebe o vídeo** ➜ 🎬 **pede um lugar** no armazenamento do ffmpeg na nuvem (vale **1 hora**) ➜ 🌐 **sobe** ➜ 💾 guarda o endereço no Redis ➜ devolve o código do vídeo.\n📂 🔔 **Entrega um arquivo** (/webhook/editor-reel-v4-arquivo?id=...): o ffmpeg na nuvem baixa daqui a **trilha** e o arquivo de **textos** (.ass) de cada edição.",
+    "height": 1260,
+    "width": 2300,
+    "color": 7
+   },
+   "name": "Nota · Páginas e envio",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -60,
+    -100
+   ],
+   "id": "fef50004-e1ba-56f2-a3cd-d46be6bfef6f"
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ PEDIDO ➜ 2️⃣ OUVIR ➜ 3️⃣ DIREÇÃO ➜ 4️⃣ EDIÇÃO 🔁\n1️⃣ 🧩 **Confere o pedido** (no máximo 30 por hora) ➜ responde o link da página de andamento ➜ 🧩 **Pega o vídeo** (o enviado ou o exemplo).\n2️⃣ 🎬 **separa o áudio** e tira um **quadro** do vídeo (ffmpeg na nuvem) ➜ 🎧 **Deepgram** devolve **cada palavra com o tempo** e marca os vícios (\"né\", \"é\").\n3️⃣ 🧠 **IA diretora** lê a fala numerada e olha o quadro: escreve a **frase do topo**, os **tópicos** (com a palavra em que cada um começa), a **chamada** do cartão, a **cor**, a **trilha** e a **legenda do post**.\n4️⃣ 🧩 **Monta a edição**: calcula os cortes (pausas e vícios), o novo tempo de cada palavra, escreve os textos (.ass) e UM comando **ffmpeg** ➜ 🎬 **edita** na nuvem ➜ 🔁 laço de 8 s até ficar pronto ➜ 🎉 **Resultado**: vídeo (link vale **7 dias**), capa, o que foi cortado e a legenda do post.\n⚠️ Qualquer falha vai para 💾 **Marca erro** e aparece na página.",
+    "height": 1340,
+    "width": 3600,
+    "color": 4
+   },
+   "name": "Nota · Etapas",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -60,
+    1300
+   ],
+   "id": "295fe800-b743-54c1-a1ce-74d68776bbb5"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify(/^[a-f0-9]{12}$/.test(String($('🔔 Recebe o vídeo (POST)').first().json.query.id || '')) ? { ok: true, id: $('🔔 Recebe o vídeo (POST)').first().json.query.id } : { ok: false, erro: 'Atualize a página (F5) e envie de novo.' }) }}",
+    "options": {
+     "responseCode": "={{ /^[a-f0-9]{12}$/.test(String($('🔔 Recebe o vídeo (POST)').first().json.query.id || '')) ? 200 : 400 }}",
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde já: o vídeo chegou",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    220,
+    820
+   ],
+   "id": "501c783b-bcaf-5071-bd7f-d89ac3124de3"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "71d87b17-801b-5ee6-be12-53ce761c630a",
+       "leftValue": "={{ /^[a-f0-9]{12}$/.test(String($('🔔 Recebe o vídeo (POST)').first().json.query.id || '')) }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "🚦 Tem o código do vídeo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    440,
+    820
+   ],
+   "id": "250aaceb-9345-54dc-a545-216f8a26d214"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=ed4:videoerro:{{ $('🔔 Recebe o vídeo (POST)').first().json.query.id }}",
+    "value": "={{ $json.erro || ($json.error ? 'Não deu para guardar o vídeo agora. Tente de novo; se repetir, envie um vídeo menor (até 120 MB).' : 'Não deu para enviar. Tente de novo.') }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 3500
+   },
+   "name": "💾 Guarda o erro do envio",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2160,
+    820
+   ],
+   "id": "92a5ae06-faeb-547c-9d08-9dba9e9ad825",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "editor-reel-v4-video-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "🔔 Andamento do envio (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1060
+   ],
+   "id": "ff11bb92-c614-5f2b-b421-765f487aa4b6",
+   "webhookId": "824dd421-5fb2-5456-892c-b3e624e15844"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "url",
+    "key": "=ed4:video:{{ String($('🔔 Andamento do envio (GET)').first().json.query.id || '').replace(/[^a-f0-9]/g, '').slice(0, 12) }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o endereço do envio",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    300,
+    1060
+   ],
+   "id": "08dbf206-f38a-5dec-8606-f17c5130f3c3",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "erro",
+    "key": "=ed4:videoerro:{{ String($('🔔 Andamento do envio (GET)').first().json.query.id || '').replace(/[^a-f0-9]/g, '').slice(0, 12) }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "📖 Lê o erro do envio",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    600,
+    1060
+   ],
+   "id": "da41654d-4bcb-54b1-abf5-0fa06d3b0fba",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ pronto: !!$('📖 Lê o endereço do envio').first().json.url, erro: $json.erro || '' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "📤 Responde o andamento do envio",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    900,
+    1060
+   ],
+   "id": "84cdef01-d88f-5905-b943-d04871134102"
+  }
+ ],
+ "connections": {
+  "🔔 Página do editor (GET)": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Página de andamento (GET)": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Consulta status (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o status": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Recebe o vídeo (POST)": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde já: o vídeo chegou",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o vídeo": {
+   "main": [
+    [
+     {
+      "node": "🚦 Vídeo ok?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Guarda o erro do envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Vídeo ok?": {
+   "main": [
+    [
+     {
+      "node": "🎬 Very Good FFmpeg: pede um lugar",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Guarda o erro do envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Very Good FFmpeg: pede um lugar": {
+   "main": [
+    [
+     {
+      "node": "🧩 Junta o vídeo e o lugar",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Junta o vídeo e o lugar": {
+   "main": [
+    [
+     {
+      "node": "🌐 Sobe o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Sobe o vídeo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê o envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê o envio": {
+   "main": [
+    [
+     {
+      "node": "🚦 Subiu?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Subiu?": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda o endereço (1 hora)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💾 Guarda o erro do envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda o endereço (1 hora)": {
+   "main": [
+    []
+   ]
+  },
+  "🔔 Entrega um arquivo (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o arquivo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "🚦 Existe?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Existe?": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Não encontrado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido de edição (POST)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Confere o pedido": {
+   "main": [
+    [
+     {
+      "node": "🧮 Conta pedidos da hora",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧮 Conta pedidos da hora": {
+   "main": [
+    [
+     {
+      "node": "🚦 Pode começar?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Pode começar?": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: recebido",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Recusa o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: recebido": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde com o link",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde com o link": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o endereço do vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o endereço do vídeo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Pega o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Pega o vídeo": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: ouvindo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: ouvindo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Pede áudio e quadro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Pede áudio e quadro": {
+   "main": [
+    [
+     {
+      "node": "🎬 Very Good FFmpeg: separa o áudio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Very Good FFmpeg: separa o áudio": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 5 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 5 segundos": {
+   "main": [
+    [
+     {
+      "node": "🎬 Very Good FFmpeg: separou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Very Good FFmpeg: separou?": {
+   "main": [
+    [
+     {
+      "node": "🚦 Separou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Separou?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê a extração",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 5 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê a extração": {
+   "main": [
+    [
+     {
+      "node": "🌐 Baixa o áudio",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Baixa o áudio": {
+   "main": [
+    [
+     {
+      "node": "🎧 Deepgram: transcreve",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎧 Deepgram: transcreve": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: direção",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: direção": {
+   "main": [
+    [
+     {
+      "node": "🧩 Prepara o pedido à IA",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Prepara o pedido à IA": {
+   "main": [
+    [
+     {
+      "node": "🧠 IA diretora",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧠 IA diretora": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê a direção",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê a direção": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta a edição",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta a edição": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: montando",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: montando": {
+   "main": [
+    [
+     {
+      "node": "💾 Guarda os textos (1 dia)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Guarda os textos (1 dia)": {
+   "main": [
+    [
+     {
+      "node": "🎬 Very Good FFmpeg: edita",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Very Good FFmpeg: edita": {
+   "main": [
+    [
+     {
+      "node": "🧩 Guarda o trabalho",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Guarda o trabalho": {
+   "main": [
+    [
+     {
+      "node": "⏳ Espera 8 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⚠️ Marca erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏳ Espera 8 segundos": {
+   "main": [
+    [
+     {
+      "node": "🎬 Very Good FFmpeg: como está?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Very Good FFmpeg: como está?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Atualiza o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Atualiza o andamento": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: progresso",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "💾 Status: progresso": {
+   "main": [
+    [
+     {
+      "node": "🚦 Terminou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Terminou?": {
+   "main": [
+    [
+     {
+      "node": "🎉 Resultado final",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "⏳ Espera 8 segundos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎉 Resultado final": {
+   "main": [
+    [
+     {
+      "node": "💾 Status: pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📤 Responde já: o vídeo chegou": {
+   "main": [
+    [
+     {
+      "node": "🚦 Tem o código do vídeo?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Tem o código do vídeo?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Confere o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Andamento do envio (GET)": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o endereço do envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o endereço do envio": {
+   "main": [
+    [
+     {
+      "node": "📖 Lê o erro do envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📖 Lê o erro do envio": {
+   "main": [
+    [
+     {
+      "node": "📤 Responde o andamento do envio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500
+ }
+}

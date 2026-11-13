@@ -1,0 +1,297 @@
+{
+ "name": "🎙️ Narrador grátis sem chave (voz neural do Bing, Google de reserva)",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🎙️ Narrador grátis\nAbra **/webhook/gratis-voz** no navegador: escreve o texto, escolhe a voz e baixa o MP3.\n\nOutros fluxos: **POST /webhook/gratis-voz** com `{\"texto\":\"...\",\"voz\":\"thalita\",\"velocidade\":0}`.\n\nSem chave e sem instalar nada: a voz neural vem da página pública do Bing Tradutor; se ela falhar, usa a do Google Tradutor. Vozes (só as Multilingual aprovadas): thalita, andrew, brian, emma; e google.",
+    "height": 300,
+    "width": 520,
+    "color": 4
+   },
+   "id": "ea70baac-dbb2-5c00-a726-1c6ce012afd0",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -40,
+    -360
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-voz",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "debf8342-43ed-5ec1-93fe-41d9ba56d72c",
+   "name": "🔔 Página do narrador (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "6e66ed16-f240-593b-8d99-66259efeb9b6"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Página do narrador: escreve o texto, escolhe a voz e ouve/baixa o MP3.\n// ── Moldura das páginas (mesmo visual em todos os fluxos grátis) ──\nfunction pagina(titulo, corpo, script) {\n  const css = `\n:root{--fundo:#f6f5f2;--cartao:#fff;--texto:#1d1d1b;--suave:#6b6b66;--linha:#e3e1db;--acento:#0f766e;--acento2:#115e59;--erro:#b42318;--ok:#067647}\n@media (prefers-color-scheme:dark){:root{--fundo:#121412;--cartao:#1b1e1c;--texto:#ecebe7;--suave:#a3a39d;--linha:#2c302d;--acento:#2dd4bf;--acento2:#5eead4;--erro:#f97066;--ok:#47cd89}}\n*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif}\nmain{max-width:760px;margin:0 auto;padding:20px 16px 48px}h1{font-size:1.45rem;margin:.2em 0 .1em}h2{font-size:1.1rem;margin:1.2em 0 .5em}\n.sub{color:var(--suave);margin:0 0 18px}.cartao{background:var(--cartao);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:12px 0}\nlabel{display:block;font-weight:600;margin:12px 0 6px}textarea,input,select{width:100%;padding:11px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);color:var(--texto);font:inherit}\ntextarea{min-height:120px;resize:vertical}.linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}\nbutton,.botao{display:inline-block;background:var(--acento);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 1rem system-ui,sans-serif;cursor:pointer;text-decoration:none;margin-top:14px}\n@media (prefers-color-scheme:dark){button,.botao{color:#04211e}}\nbutton[disabled]{opacity:.55;cursor:wait}.botao.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}\n.aviso{color:var(--suave);font-size:.9rem}.erro{color:var(--erro);font-weight:600}.ok{color:var(--ok);font-weight:600}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.grade img,.grade video{width:100%;border-radius:10px;border:1px solid var(--linha);background:#000}\nvideo,audio{width:100%;margin-top:10px;border-radius:10px}pre{white-space:pre-wrap;background:var(--fundo);border:1px solid var(--linha);border-radius:10px;padding:12px;font-size:.9rem}\n.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin:10px 0}.barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .6s}\n.selo{display:inline-block;font-size:.78rem;border:1px solid var(--linha);border-radius:99px;padding:2px 9px;color:var(--suave);margin:2px 4px 2px 0}\nfooter{color:var(--suave);font-size:.82rem;margin-top:28px}`;\n  return '<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n    '<meta name=\"robots\" content=\"noindex\"><title>' + titulo + '</title><style>' + css + '</style></head><body><main>' + corpo +\n    '<footer>Feito com serviços grátis e sem chave (Hugging Face, Pollinations, Bing/Google Tradutor). Pode demorar ou falhar quando eles estão cheios.</footer>' +\n    '</main>' + (script ? '<script>' + script + '</script>' : '') + '</body></html>';\n}\nconst escHtml = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\nconst corpo = `\n<h1>🎙️ Narrador grátis</h1>\n<p class=\"sub\">Voz neural da Microsoft (a do Bing Tradutor), sem chave e sem pagar. Se ela falhar, sai a voz do Google.</p>\n<div class=\"cartao\">\n  <label for=\"texto\">Texto para narrar</label>\n  <textarea id=\"texto\" maxlength=\"5000\" placeholder=\"Cole aqui o roteiro do vídeo...\">Você sabia que o Sol entrega à Terra, em uma hora, mais energia do que o mundo inteiro usa em um ano?</textarea>\n  <div class=\"linha\">\n    <div><label for=\"voz\">Voz</label><select id=\"voz\">\n      <option value=\"thalita\">Thalita (feminina)</option>\n      <option value=\"andrew\">Andrew (masculina)</option>\n      <option value=\"brian\">Brian (masculina)</option>\n      <option value=\"emma\">Emma (feminina)</option>\n      <option value=\"google\">Google Tradutor (reserva)</option></select></div>\n    <div><label for=\"vel\">Velocidade</label><select id=\"vel\">\n      <option value=\"-10\">Mais devagar</option><option value=\"0\" selected>Normal</option>\n      <option value=\"10\">Um pouco rápida</option><option value=\"20\">Rápida (Shorts)</option></select></div>\n  </div>\n  <button id=\"ir\">Gerar narração</button>\n  <p id=\"estado\" class=\"aviso\"></p>\n  <audio id=\"som\" controls hidden></audio>\n  <a id=\"baixar\" class=\"botao sec\" hidden download=\"narracao.mp3\">Baixar MP3</a>\n</div>\n<div class=\"cartao aviso\">Usa em outros fluxos: <code>POST</code> neste mesmo endereço com <code>{\"texto\":\"...\",\"voz\":\"thalita\",\"velocidade\":0}</code> → devolve o MP3 (cabeçalhos <code>X-Motor</code> e <code>X-Segundos</code>).</div>`;\nconst script = `\nconst $ = id => document.getElementById(id);\n$('ir').onclick = async () => {\n  const texto = $('texto').value.trim();\n  if (!texto) { $('estado').textContent = 'Escreva um texto.'; return; }\n  $('ir').disabled = true; $('estado').className = 'aviso'; $('estado').textContent = 'Gerando a voz...';\n  try {\n    const r = await fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ texto, voz: $('voz').value, velocidade: Number($('vel').value) }) });\n    if (!r.ok || !(r.headers.get('content-type') || '').includes('audio')) {\n      const j = await r.json().catch(() => ({}));\n      throw new Error(j.erro || ('erro ' + r.status));\n    }\n    const url = URL.createObjectURL(await r.blob());\n    $('som').src = url; $('som').hidden = false; $('som').play().catch(() => {});\n    $('baixar').href = url; $('baixar').hidden = false;\n    const aviso = decodeURIComponent(r.headers.get('X-Aviso') || '');\n    $('estado').className = aviso ? 'aviso' : 'ok';\n    $('estado').textContent = 'Pronto: ' + (r.headers.get('X-Segundos') || '?') + ' s, voz ' + (r.headers.get('X-Motor') || '') + (aviso ? ' — ' + aviso : '');\n  } catch (e) {\n    $('estado').className = 'erro'; $('estado').textContent = 'Não deu: ' + e.message;\n  }\n  $('ir').disabled = false;\n};`;\nreturn [{ json: { html: pagina('Narrador grátis', corpo, script) } }];\n"
+   },
+   "id": "7be498aa-aea6-5400-b1df-da1e28539e14",
+   "name": "🧩 Monta a página",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "d2109d5f-4179-5dd9-81d0-637154de2d4b",
+   "name": "📤 Entrega a página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    480,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "path": "gratis-voz",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "90d197f5-af42-502d-a815-1b4afec2928f",
+   "name": "🔔 Pedido de voz (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    260
+   ],
+   "webhookId": "97eba9e1-d1cc-59ef-b7dd-820e218faf85"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Narra o texto do pedido (POST {texto, voz, velocidade}) e devolve o MP3.\n// ── Vozes grátis e sem chave ──\n// 1º Bing Tradutor (voz NEURAL da Microsoft): pega os códigos da página pública do tradutor e pede o áudio como o\n//    próprio site faz. MP3 16 kHz 32 kbps -> segundos = bytes × 8 ÷ 32000.\n//    Só as vozes Multilingual aprovadas pela dona (Antonio e Francisca são PROIBIDAS em todos os projetos).\n// 2º Google Tradutor (reserva, voz mais robótica): MP3 24 kHz 64 kbps -> segundos = bytes × 8 ÷ 64000.\nconst UA_VOZ = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36 Edg/141.0';\nconst VOZES_BING = {\n  thalita: ['pt-BR-ThalitaMultilingualNeural', 'Female'], andrew: ['en-US-AndrewMultilingualNeural', 'Male'],\n  brian: ['en-US-BrianMultilingualNeural', 'Male'], emma: ['en-US-EmmaMultilingualNeural', 'Female'] };\n\nfunction limpaFala(s) {\n  return String(s || '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}\\u{200D}]/gu, '')\n    .replace(/[*_#`~|<>]/g, ' ').replace(/\\s+/g, ' ').trim();\n}\n\nfunction pedacos(texto, max) {\n  const out = [];\n  let resto = texto;\n  while (resto.length > max) {\n    let corte = Math.max(resto.lastIndexOf('. ', max), resto.lastIndexOf('! ', max), resto.lastIndexOf('? ', max));\n    if (corte < max * 0.4) corte = Math.max(corte, resto.lastIndexOf(', ', max), resto.lastIndexOf('; ', max));\n    if (corte < max * 0.3) corte = resto.lastIndexOf(' ', max);\n    if (corte < 1) corte = max;\n    out.push(resto.slice(0, corte + 1).trim());\n    resto = resto.slice(corte + 1).trim();\n  }\n  if (resto) out.push(resto);\n  return out;\n}\n\nconst escXml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nasync function vozBing(helpers, texto, voz, velocidade) {\n  const pag = await helpers.httpRequest({ url: 'https://www.bing.com/translator', returnFullResponse: true, timeout: 20000,\n    headers: { 'User-Agent': UA_VOZ, 'Accept-Language': 'pt-BR,pt;q=0.9' } });\n  const h = String(pag.body || '');\n  const ig = /IG:\"([^\"]+)\"/.exec(h);\n  const iid = /data-iid=\"(translator\\.\\d+)\"/.exec(h);\n  const ab = /params_AbusePreventionHelper\\s*=\\s*\\[(\\d+),\"([^\"]+)\",(\\d+)\\]/.exec(h);\n  if (!ig || !ab) throw new Error('Bing: a página do tradutor não trouxe os códigos');\n  const sc = (pag.headers && (pag.headers['set-cookie'] || pag.headers['Set-Cookie'])) || [];\n  const cookie = [].concat(sc).map(c => String(c).split(';')[0]).join('; ');\n  const [nomeVoz, genero] = VOZES_BING[voz] || VOZES_BING.thalita;\n  const taxa = Math.max(-50, Math.min(100, Number(velocidade) || 0));\n  const partes = [];\n  for (const p of pedacos(texto, 900)) {\n    const ssml = \"<speak version='1.0' xml:lang='pt-BR'><voice xml:lang='pt-BR' xml:gender='\" + genero + \"' name='\" + nomeVoz +\n      \"'><prosody rate='\" + (taxa >= 0 ? '+' : '') + taxa + \"%'>\" + escXml(p) + '</prosody></voice></speak>';\n    const corpo = 'ssml=' + encodeURIComponent(ssml) + '&token=' + encodeURIComponent(ab[2]) + '&key=' + ab[1];\n    const audio = await helpers.httpRequest({ method: 'POST', timeout: 30000, encoding: 'arraybuffer', body: corpo,\n      url: 'https://www.bing.com/tfettts?isVertical=1&&IG=' + ig[1] + '&IID=' + (iid ? iid[1] : 'translator.5023') + '.1',\n      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': UA_VOZ, Cookie: cookie,\n        Referer: 'https://www.bing.com/translator', Origin: 'https://www.bing.com' } });\n    const b = Buffer.from(audio);\n    if (b.length < 800) throw new Error('Bing: áudio vazio');\n    partes.push(b);\n  }\n  const mp3 = Buffer.concat(partes);\n  return { mp3, motor: 'bing-' + nomeVoz, segundos: Math.round(mp3.length * 8 / 32000 * 100) / 100 };\n}\n\nasync function vozGoogle(helpers, texto) {\n  const partes = [];\n  for (const p of pedacos(texto, 180)) {\n    let b = null;\n    for (let t = 0; t < 3 && !b; t++) {\n      try {\n        const d = await helpers.httpRequest({ timeout: 20000, encoding: 'arraybuffer', headers: { 'User-Agent': UA_VOZ },\n          url: 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=pt-BR&q=' + encodeURIComponent(p) });\n        b = Buffer.from(d);\n      } catch (e) {\n        await new Promise(r => setTimeout(r, 1200 * (t + 1)));\n      }\n    }\n    if (!b || b.length < 500) throw new Error('Google: sem áudio');\n    partes.push(b);\n  }\n  const mp3 = Buffer.concat(partes);\n  return { mp3, motor: 'google-tradutor', segundos: Math.round(mp3.length * 8 / 64000 * 100) / 100 };\n}\n\n// Tenta a voz neural; se falhar, a do Google. Devolve { mp3, motor, segundos, aviso }.\nasync function narra(helpers, texto, voz, velocidade) {\n  const fala = limpaFala(texto);\n  if (!fala) throw new Error('texto vazio');\n  if (voz !== 'google') {\n    try {\n      return await vozBing(helpers, fala, voz, velocidade);\n    } catch (e) {\n      const r = await vozGoogle(helpers, fala);\n      r.aviso = 'voz neural indisponível agora (' + String(e.message || e).slice(0, 120) + '); usada a voz do Google';\n      return r;\n    }\n  }\n  return await vozGoogle(helpers, fala);\n}\n\nconst b = $input.first().json.body || {};\nconst texto = String(b.texto || '').slice(0, 5000);\ntry {\n  const r = await narra(this.helpers, texto, String(b.voz || 'thalita'), Number(b.velocidade) || 0);\n  const bin = await this.helpers.prepareBinaryData(r.mp3, 'narracao.mp3', 'audio/mpeg');\n  return [{ json: { ok: true, motor: r.motor, segundos: r.segundos, aviso: encodeURIComponent(r.aviso || '') }, binary: { data: bin } }];\n} catch (e) {\n  return [{ json: { ok: false, erro: 'Não consegui gerar a voz agora: ' + String(e.message || e).slice(0, 200) } }];\n}\n"
+   },
+   "id": "1eb80568-cc7c-51f0-b723-a62a95f3382b",
+   "name": "🎙️ Narra (Bing → Google)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    260
+   ]
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "8833d5a7-4fd8-512b-a62c-4563d03c020a",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "047fd490-a389-564f-abff-1e80cac476b1",
+   "name": "🚦 Saiu o áudio?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    480,
+    260
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       },
+       {
+        "name": "Access-Control-Expose-Headers",
+        "value": "*"
+       },
+       {
+        "name": "X-Motor",
+        "value": "={{ $json.motor }}"
+       },
+       {
+        "name": "X-Segundos",
+        "value": "={{ $json.segundos }}"
+       },
+       {
+        "name": "X-Aviso",
+        "value": "={{ $json.aviso }}"
+       }
+      ]
+     }
+    }
+   },
+   "id": "57e59400-590c-54e7-a030-5a37dc72b8fb",
+   "name": "📤 Entrega o MP3",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    180
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 503
+    }
+   },
+   "id": "11982358-be5d-5c48-91b0-0352d6606027",
+   "name": "📤 Responde o erro",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    720,
+    360
+   ]
+  }
+ ],
+ "connections": {
+  "🔔 Página do narrador (GET)": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta a página": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Pedido de voz (POST)": {
+   "main": [
+    [
+     {
+      "node": "🎙️ Narra (Bing → Google)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎙️ Narra (Bing → Google)": {
+   "main": [
+    [
+     {
+      "node": "🚦 Saiu o áudio?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🚦 Saiu o áudio?": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega o MP3",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Responde o erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1500,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

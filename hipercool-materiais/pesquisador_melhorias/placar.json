@@ -1,0 +1,42 @@
+{
+  "argon": {
+    "pedidos": 2,
+    "web_sim": 2,
+    "repos": 66,
+    "existem": 66,
+    "novos": 66,
+    "exclusivos": 33
+  },
+  "gemini": {
+    "pedidos": 2,
+    "web_sim": 2,
+    "repos": 58,
+    "existem": 58,
+    "novos": 58,
+    "exclusivos": 26
+  },
+  "opus46": {
+    "pedidos": 1,
+    "web_sim": 1,
+    "repos": 15,
+    "existem": 15,
+    "novos": 15,
+    "exclusivos": 6
+  },
+  "opus55": {
+    "pedidos": 1,
+    "web_sim": 1,
+    "repos": 18,
+    "existem": 18,
+    "novos": 18,
+    "exclusivos": 10
+  },
+  "sonnet": {
+    "pedidos": 1,
+    "web_sim": 1,
+    "repos": 27,
+    "existem": 26,
+    "novos": 26,
+    "exclusivos": 9
+  }
+}

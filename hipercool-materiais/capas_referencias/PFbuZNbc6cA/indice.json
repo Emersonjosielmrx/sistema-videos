@@ -1,0 +1,253 @@
+{
+ "video": "tmp/PFbuZNbc6cA.mp4",
+ "passo_s": 6.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "Mia",
+   "principal": true,
+   "aparicoes": 57,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3216.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3120.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2616.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1374.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3072.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3588.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3216.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 2616.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1374.0
+    }
+   ],
+   "papel": "Membro da tribo primitiva e aliada do protagonista Chen",
+   "visual": "Long green hair, yellow eyes, pointed elf-like ears, leaf-like or primitive clothing, wooden/vine headband",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "Mia",
+   "principal": false,
+   "aparicoes": 16,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 4056.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4032.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2736.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1584.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 2718.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 2766.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 4056.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1584.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2718.0
+    }
+   ],
+   "papel": "Membro da tribo primitiva e ajudante do protagonista",
+   "visual": "Blonde hair, green eyes, wearing black dark horns on her head, primitive hide top",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p03",
+   "nome": "Mia",
+   "principal": false,
+   "aparicoes": 11,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3282.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3270.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 3012.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1548.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3240.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 3246.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3282.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 3270.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 3012.0
+    }
+   ],
+   "papel": "Membro da tribo primitiva e par romântico/interesse do protagonista",
+   "visual": "Blonde hair tied in a ponytail with bang strands framing her face, blue eyes, green-and-white patterned primitive top",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p04",
+   "nome": "Mia",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3000.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1584.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4428.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3000.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1584.0
+    }
+   ],
+   "papel": "Membro da tribo e assistente do protagonista na fabricação de ferramentas",
+   "visual": "Brownish-red hair styled in a bun, light skin, dark brown/hazel eyes",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p05",
+   "nome": "Mia",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 186.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 384.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 186.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 384.0
+    }
+   ],
+   "papel": "Membro da tribo primitiva e ajudante de Chen",
+   "visual": "Dark mess-styled hair, dark eyes, wearing primitive clothing",
+   "adulta": false,
+   "mulher": false,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p06",
+   "nome": "Mia",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2628.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3066.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 3384.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 3204.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 3066.0
+    }
+   ],
+   "papel": "Member of the primitive tribe who shows romantic interest in Chen and has natural talent for tool construction",
+   "visual": "reddish-brown/auburn hair in twin braids, yellow/amber eyes, no animal features, wears primitive tribal clothing",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  }
+ ]
+}

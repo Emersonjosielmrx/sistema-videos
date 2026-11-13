@@ -1,0 +1,15 @@
+VÍDEOS COM A VOZ CLONADA — REGISTRO POR NARRADOR
+
+Desde 21/10/2026 (pedido do dono: "por que não abre só o vídeo feito em vez de copiar") esta pasta NÃO guarda mais
+cópia dos vídeos. Cada Short com voz clonada deixa só um .txt na subpasta do narrador: base, configuração, cada frase
+e o caminho do vídeo. O vídeo é o da fila: D:\hipercool-materiais\animes recap\shorts\<pasta>\video.mp4 (depois de
+postado, vai pro backup do Drive).
+
+O vigia (tarefa VozClonadaVigia) abre na tela o vídeo da fila assim que ele fica pronto. No painel
+(http://localhost:8790, aba Voz clonada) o botão "ver" toca o vídeo.
+
+Como funciona: recapd-ambientes\producao\bin\anime_voz_clonada.py escolhe o narrador pelo encaixe com o nicho do vídeo
+(config\narradores_nichos.json) e alterna Config 1 e 2. Estado: _rodizio.json; histórico: _historico.jsonl.
+A narração: anime_tts.preparar_clone -> voz_clonada.py lote.
+
+Os .mp4 antigos nas subpastas (até 21/10) são cópias de vídeos que ainda estão na fila ou no Drive.

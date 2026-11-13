@@ -1,0 +1,23 @@
+{
+ "_leia": "02/11 dona: versionamento do SEO (título, tags, descrição) dos LONGOS. 'ativa_longo' = a versão que o postar_longos usa agora; cada longo postado grava 'seo_versao' no colab\\longos_postados.json pra comparar views/horas/retenção por versão. Mudou o prompt de título? Crie uma versão NOVA aqui (nunca edite uma que já foi ao ar) e troque 'ativa_longo'. Campos: estilos_titulo = troca o de config\\seo_palavras.json (null = usa o de lá); estilos = quais estilos o Thompson pode escolher (null = todos); triade = regra humilhação->virada->vingança (null = segue o A/B do render.json).",
+ "ativa_longo": "v1_palavras",
+ "versoes": {
+  "v1_palavras": {
+   "usada": "26/10 a 29/10 (e de novo desde 02/11)",
+   "descricao": "como era antes de 30/10: frase no jeito que o público digita ('ELE FOI X MAS Y') com 3-5 palavras buscadas; sem tríade e sem título em forma de pergunta. Dona 02/11: 'o que estava antes, com foco em palavras que as pessoas querem, era melhor'.",
+   "estilos_titulo": {
+    "busca": "frase no padrão do que o público digita (ver padroes_reais), com 3-5 palavras buscadas da história, tom de 'ele foi X mas Y'",
+    "provocacao": "provocação curiosa/chocante (ex.: ELE PERDEU TUDO, O PODER PROIBIDO, NINGUÉM ESPERAVA) + 2-3 palavras buscadas da história"
+   },
+   "estilos": ["busca", "provocacao"],
+   "triade": false
+  },
+  "v2_triade_pergunta": {
+   "usada": "30/10 a 02/11",
+   "descricao": "seo_palavras.json de 30/10 (provocação sem 'ELE FOI'/'NINGUÉM ESPERAVA') + tríade humilhação->virada->vingança + estilo curiosidade (títulos em pergunta: 'Como esse...?', 'O QUE ACONTECEU quando...?', 'E se ele...?').",
+   "estilos_titulo": null,
+   "estilos": null,
+   "triade": null
+  }
+ }
+}

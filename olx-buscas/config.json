@@ -1,0 +1,21 @@
+{
+  "_leia": "bot_token/chat_id = bot PRÓPRIO das buscas (BotFather). Sem eles, os avisos vão pelo bot geral e os comandos /add /lista ficam desligados.",
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "chat_id": "7911666809",
+  "intervalo_min": 5,
+  "pausa_entre_buscas_s": 8,
+  "cep": "68625016",
+  "_cep": "CEP de entrega da dona (Paragominas-PA). Frete real pela API da OLX; teto e ranking valem pelo TOTAL (preço + frete).",
+  "frete_estimado": 50,
+  "max_paginas": 5,
+  "modelo_ia": "gemini-fila",
+  "_modelos": "modelos_texto = ordem para ler/julgar anúncios (dona 04/11: Sonnet web 1º, Argon reserva). modelo_ia = só fotos (Gemini enxerga).",
+  "modelos_texto": ["sonnet-fila", "gemini/gemini-4-argon", "gemini-fila"],
+  "modelo_assistente": "sonnet-fila",
+  "avisar_incerto": true,
+  "chat_ligado": true,
+  "chat_max_dia": 20,
+  "chat_max_por_conversa": 4,
+  "chat_intervalo_s": 180,
+  "chat_ciclo_min": 10
+}

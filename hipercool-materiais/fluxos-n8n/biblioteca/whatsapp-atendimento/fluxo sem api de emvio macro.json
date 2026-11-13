@@ -1,0 +1,600 @@
+{
+ "name": "fluxo sem api de emvio macro",
+ "nodes": [
+  {
+   "parameters": {
+    "url": "https://trigger.macrodroid.com/0afa2060-ead5-403e-b79e-17f7d28576c0/testen8n",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "mensagem_vinda_do_n8n",
+       "value": "={{ $json.output }}"
+      },
+      {
+       "name": "numero",
+       "value": "={{ $('dados').item.json.numero }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1248,
+    16
+   ],
+   "id": "0693c88d-efd7-4193-a7fd-8e206f2e47f2",
+   "name": "HTTP Request"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.mensagem }}",
+    "options": {
+     "systemMessage": "=Seu Papel: Você é um Assistente de Simulação de Atendimento.\n\nSeu Objetivo: Simular, em tempo real, uma conversa de atendimento ao cliente para qualquer empresa e qualquer cenário que o usuário propor.\n\nInstruções Principais:\n\nAdaptação Imediata: O usuário definirá o cenário na primeira mensagem dele (ex: \"Quero cancelar minha conta na Empresa X\", \"Estou ligando para a Pizzaria Y para pedir uma pizza\", \"Meu produto da Loja Z veio quebrado\").\n\nNão Faça Perguntas de Configuração: NÃO pergunte \"Qual empresa você quer simular?\" ou \"Qual o problema?\". Assuma que a primeira mensagem do usuário JÁ É o início da simulação.\n\nInicie o Atendimento Imediatamente: Assim que o usuário definir o cenário, sua primeira resposta já deve ser no papel do atendente daquela empresa, iniciando o procedimento padrão para aquela solicitação.\n\nMantenha o Personagem: Aja como um atendente real daquela empresa (seja suporte técnico, vendas, cancelamento, etc.) até que o usuário decida parar a simulação.\n\nSeja Reativo: Conduza o diálogo de forma fluida, respondendo às solicitações do usuário dentro do cenário proposto.\n\nExemplo de Interação:\n\nUsuário: \"Alô, eu tô ligando pra NetFlix porque minha fatura veio errada.\"\n\nSua Resposta (Incorreta): \"Entendido. Vamos simular que sou um atendente da Netflix. Qual o erro na fatura?\"\n\nSua Resposta (Correta): \"Olá, bom dia! Aqui é [Seu Nome de Atendente] do atendimento Netflix. Entendo sua preocupação com a fatura. Para eu verificar o que aconteceu, você pode me confirmar o e-mail cadastrado na conta, por favor?\"   nuca responda mais que 50 tokens"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    912,
+    16
+   ],
+   "id": "2f6c4ee8-5ae5-4874-8ae6-577c6649e5b0",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "9d4650be-9d9a-4b0e-8ef0-60907405c5e1",
+       "name": "numero",
+       "value": "={{ $json.body.json.event.Info.Chat.split('@')[0] }}",
+       "type": "string"
+      },
+      {
+       "id": "0dd16ed0-dbf2-43b5-8a31-6b2d71978d97",
+       "name": "mensagem",
+       "value": "={{ $json.body.chatInput }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    752,
+    16
+   ],
+   "id": "9ae38f01-8479-48d4-b771-d9db9e57064d",
+   "name": "dados"
+  },
+  {
+   "parameters": {
+    "content": "# 🚀 **COMO INICIAR A SIMULAÇÃO** 🕹️\n\nEscolha como interagir com o robô:\n\n1️⃣ **Modo Interface VIP (Chat):**\nAcesse o chat com design \"Cyberpunk/Neon\". A primeira mensagem deve ser o seu número de telefone. A partir daí, basta propor um cenário, como: *\"Quero cancelar meu plano na operadora X\"*.\n\n2️⃣ **Modo Integração (Webhook):** 📡\nO fluxo está preparado para receber mensagens automáticas via Webhook (configurado para o endpoint `filtradoteste`). Ele processa dados vindos do **Wuzapi** (WhatsApp) e identifica automaticamente o remetente e a mensagem.",
+    "height": 424,
+    "width": 480,
+    "color": 4
+   },
+   "id": "fddf4d91-b10c-4436-bb7f-6aa659e7b9f4",
+   "name": "Nota Gatilhos",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -128,
+    -304
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 🧠 **O CÉREBRO DO ATENDIMENTO** 🤖\n\nO **Agente de IA** atua sob regras rígidas de simulação:\n\n1️⃣ **Adaptação Instantânea:** Ele não faz perguntas de configuração. Se você disser que está ligando para uma pizzaria, a primeira resposta dele já será: *\"Olá! Obrigado por ligar para a [Pizzaria], em que posso ajudar?\"*.\n2️⃣ **Manutenção de Personagem:** Ele age como um atendente real (suporte, vendas ou cancelamento) até o fim da interação.\n3️⃣ **Respostas Ultra-Rápidas:** Configurado para ser direto e fluido, limitando as respostas a no máximo **50 tokens** para simular um chat real e dinâmico.\n4️⃣ **Motor de Inteligência:** Utiliza o modelo **Google Gemini** para garantir um processamento de linguagem natural natural e criativo.",
+    "height": 440,
+    "width": 480,
+    "color": 4
+   },
+   "id": "ef80d7b2-0e6f-423d-ac58-d0af54e0e347",
+   "name": "Nota Gatilhos1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    896,
+    -512
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 💾 **MEMÓRIA PERSISTENTE** 🏛️\n\nO sistema não \"esquece\" o que foi dito durante a simulação graças ao node **Postgres Chat Memory**:\n\n1️⃣ **Histórico por Usuário:** A memória é filtrada pelo número de telefone (`{{ $json.numero }}`). Isso permite que várias pessoas usem o simulador ao mesmo tempo sem cruzar as conversas.\n2\t**Continuidade:** Se o usuário parar de digitar e voltar depois, a IA lembrará exatamente em que ponto do atendimento eles pararam, mantendo o contexto da \"reclamação\" ou \"compra\".",
+    "height": 440,
+    "width": 480,
+    "color": 4
+   },
+   "id": "d0e94a88-5e91-4321-a963-e6618ee96dd9",
+   "name": "Nota Gatilhos2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1488,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 🧰 **ARSENAL TÉCNICO & DADOS** 🛠️\n\nPara que o fluxo funcione, ele organiza as informações no node **\"dados\"**:\n\n1️⃣ **Normalização:** Ele limpa o ID do WhatsApp (removendo o `@s.whatsapp.net`) e isola o número puro.\n2️⃣ **Captura de Input:** Separa o texto da mensagem para que o Agente de IA possa processar apenas o conteúdo relevante.",
+    "height": 440,
+    "width": 448,
+    "color": 4
+   },
+   "id": "b7fe2b9f-8000-4ab1-aa4e-1740cdf4e9d9",
+   "name": "Nota Gatilhos3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    400,
+    -512
+   ]
+  },
+  {
+   "parameters": {
+    "content": "# 📱 **ENTREGA DA RESPOSTA (MACRODROID)** 📡\n\nO fechamento do ciclo de comunicação acontece via **HTTP Request**:\n\n1️⃣ **Envio Externo:** Assim que a IA gera a resposta, o n8n dispara um gatilho para o **MacroDroid** em um servidor externo.\n2️⃣ **Parâmetros de Saída:** O fluxo envia o número do destinatário e a `mensagem_vinda_do_n8n`.\n3️⃣ **Ação Final:** O MacroDroid recebe esses dados e envia a mensagem de volta para o WhatsApp do usuário, completando a simulação de forma automatizada.",
+    "height": 440,
+    "width": 480,
+    "color": 4
+   },
+   "id": "226efcf5-8d31-4530-847e-177d76a64293",
+   "name": "Nota Gatilhos4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1488,
+    -512
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "9d4650be-9d9a-4b0e-8ef0-60907405c5e1",
+       "name": "body.json.event.Info.Chat",
+       "value": "=5591984698653",
+       "type": "string"
+      },
+      {
+       "id": "0dd16ed0-dbf2-43b5-8a31-6b2d71978d97",
+       "name": "body.chatInput",
+       "value": "={{ $json.chatInput }}",
+       "type": "string"
+      },
+      {
+       "id": "d1d9617b-2476-4429-a9c0-d8009675b4c0",
+       "name": "",
+       "value": "",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    640,
+    176
+   ],
+   "id": "2f2b3c0d-6ee1-4949-8ffd-9103ae111f08",
+   "name": "dados1"
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "=4",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    1056,
+    160
+   ],
+   "id": "32329e72-99a6-4816-a551-d33b56079207",
+   "name": "Memory",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    912,
+    160
+   ],
+   "id": "199e290b-7a80-4458-9a61-574a77974671",
+   "name": "Gemini ",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "filtradoteste2",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    464,
+    -128
+   ],
+   "id": "0b8c735b-0b84-4ae4-8a3f-388797e9307b",
+   "name": "notificação",
+   "webhookId": "83e28f8f-8754-486a-b8e1-e7bd397c4b98"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "9d4650be-9d9a-4b0e-8ef0-60907405c5e1",
+       "name": "body.json.event.Info.Chat",
+       "value": "={{ $json.body.canal }}",
+       "type": "string"
+      },
+      {
+       "id": "0dd16ed0-dbf2-43b5-8a31-6b2d71978d97",
+       "name": "body.chatInput",
+       "value": "={{ $json.body.titulo }}",
+       "type": "string"
+      },
+      {
+       "id": "d1d9617b-2476-4429-a9c0-d8009675b4c0",
+       "name": "",
+       "value": "",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    640,
+    -128
+   ],
+   "id": "ab441a49-69f8-45c5-bc07-9161480a2652",
+   "name": "dados2"
+  },
+  {
+   "parameters": {
+    "public": true,
+    "initialMessages": "a primeira mensagem deve ser o numero de telefone no formato 5522998908704",
+    "options": {
+     "inputPlaceholder": "digite sua mensagem aqui",
+     "subtitle": "beta 0.1",
+     "title": "whatsapp sem api promova",
+     "customCss": "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Fira+Code:wght@400;600&family=Chakra+Petch:wght@500&display=swap');\n\n:root {\n  --chat--color-primary: #00ffff;\n  --chat--color-primary-shade-50: #00e6e6;\n  --chat--color-primary-shade-100: #00cccc;\n  --chat--color-secondary: #ff00ff;\n  --chat--color-secondary-shade-50: #e600e6;\n  --chat--color-white: #f0f8ff;\n  --chat--color-light: #d1f7ff;\n  --chat--color-dark: #0a0218;\n  --chat--color-disabled: #3a3a3a;\n  --chat--color-typing: var(--chat--color-primary);\n  --chat--border-color-glow: rgba(0, 255, 255, 0.5);\n  --chat--spacing: 1rem;\n  --chat--border-radius: 1.5rem;\n  --chat--font-family: 'Fira Code', 'Chakra Petch', sans-serif;\n  --chat--font-family-headings: 'Orbitron', sans-serif;\n  --chat--transition-duration: 0.4s;\n  --chat--window--width: 480px;\n  --chat--window--height: 85vh;\n  --chat--window--bottom: 2rem;\n  --chat--window--right: 2rem;\n  --chat--window--z-index: 9999;\n  --chat--window--border: 2px solid transparent;\n  --chat--window--border-radius: var(--chat--border-radius);\n  --chat--window--margin-bottom: var(--chat--spacing);\n  --chat--body--background: #0a0218;\n  --chat--footer--background: rgba(10, 2, 24, 0.8);\n  --chat--header--background: linear-gradient(135deg, var(--chat--color-secondary), #1e0033 50%, var(--chat--color-primary));\n  --chat--header--color: var(--chat--color-white);\n  --chat--heading--font-size: 1.8em;\n  --chat--subtitle--font-size: 0.9em;\n  --chat--header--border-bottom: 1px solid var(--chat--border-color-glow);\n  --chat--message--font-size: 1rem;\n  --chat--message--padding: 1rem 1.5rem;\n  --chat--message--border-radius: 1.2rem;\n  --chat--message-line-height: 1.6;\n  --chat--message--margin-bottom: 1rem;\n  --chat--message--bot--background: rgba(20, 20, 40, 0.6);\n  --chat--message--bot--color: var(--chat--color-light);\n  --chat--message--user--background: linear-gradient(135deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--message--user--color: #ffffff;\n  --chat--messages-list--padding: 1.5rem;\n  --chat--input--background: rgba(0, 0, 0, 0.4);\n  --chat--input--text-color: var(--chat--color-white);\n  --chat--input--border-radius: 1rem;\n  --chat--input--padding: 1rem;\n  --chat--textarea--height: 55px;\n  --chat--button--background: linear-gradient(135deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--button--color: var(--chat--color-white);\n  --chat--button--border-radius: 1rem;\n  --chat--button--hover--background: linear-gradient(135deg, var(--chat--color-secondary), var(--chat--color-primary));\n  --chat--input--send--button--color: var(--chat--color-primary);\n  --chat--input--send--button--color-hover: var(--chat--color-secondary);\n  --chat--toggle--size: 70px;\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: linear-gradient(145deg, var(--chat--color-primary), var(--chat--color-secondary));\n  --chat--toggle--hover--background: linear-gradient(145deg, var(--chat--color-secondary), var(--chat--color-primary));\n  --chat--toggle--color: var(--chat--color-white);\n}\n\n.chat-window {\n  border-radius: var(--chat--window--border-radius);\n  overflow: hidden;\n  background: var(--chat--body--background);\n  animation: fadeInGlow 1.2s ease-out forwards;\n  position: relative;\n  box-shadow: 0 0 100px rgba(0, 255, 255, 0.4), 0 0 120px rgba(255, 0, 255, 0.3);\n  display: flex;\n  flex-direction: column;\n}\n\n.chat-window::before {\n  content: '';\n  position: absolute;\n  top: -50%;\n  left: -50%;\n  width: 200%;\n  height: 200%;\n  background: conic-gradient(transparent, var(--chat--border-color-glow), transparent 30%);\n  animation: rotate-border 6s linear infinite;\n  z-index: 1;\n}\n\n.chat-window::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image: repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.05), rgba(0, 255, 255, 0.05) 1px, transparent 1px, transparent 20px), repeating-linear-gradient(90deg, rgba(0, 255, 255, 0.05), rgba(0, 255, 255, 0.05) 1px, transparent 1px, transparent 20px);\n  animation: background-pan 60s linear infinite;\n  z-index: 0;\n  opacity: 0.5;\n}\n\n.chat-header {\n  font-family: var(--chat--font-family-headings);\n  text-shadow: 0 0 8px var(--chat--color-primary), 0 0 12px var(--chat--color-primary), 0 0 20px var(--chat--color-secondary);\n  position: relative;\n  background: var(--chat--header--background);\n  color: var(--chat--header--color);\n  padding: 1.5rem;\n  border-bottom: var(--chat--header--border-bottom);\n  text-align: center;\n  letter-spacing: 3px;\n  animation: neon-flicker 4s infinite alternate;\n  z-index: 2;\n  border-top-left-radius: var(--chat--window--border-radius);\n  border-top-right-radius: var(--chat--window--border-radius);\n}\n\n.chat-header::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 200%;\n  background-image: linear-gradient(0deg, transparent 50%, rgba(10, 2, 26, 0.5) 50%);\n  background-size: 100% 6px;\n  opacity: 0.2;\n  animation: scanline 8s linear infinite;\n}\n\n.chat-messages-list {\n    flex-grow: 1;\n    overflow-y: auto;\n    padding: var(--chat--messages-list--padding);\n    z-index: 2;\n}\n\n.chat-message {\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  max-width: 85%;\n  transition: all var(--chat--transition-duration) cubic-bezier(0.165, 0.84, 0.44, 1);\n  animation: slideUpFade 0.7s ease-out forwards;\n  opacity: 0;\n  transform: translateY(20px);\n  animation-fill-mode: forwards;\n}\n\n.chat-messages-list .chat-message:nth-child(1) { animation-delay: 0.1s; }\n.chat-messages-list .chat-message:nth-child(2) { animation-delay: 0.2s; }\n.chat-messages-list .chat-message:nth-child(3) { animation-delay: 0.3s; }\n.chat-messages-list .chat-message:nth-child(4) { animation-delay: 0.4s; }\n\n\n.chat-message:hover {\n  transform: translateY(-5px) scale(1.02);\n  filter: brightness(1.25);\n}\n\n.chat-message-user {\n  background: var(--chat--message--user--background);\n  color: var(--chat--message--user--color);\n  border-radius: 1.2rem 1.2rem 0.2rem 1.2rem;\n  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);\n  animation: user-message-pulse 2.5s infinite;\n}\n\n.chat-message-bot {\n  background: var(--chat--message--bot--background);\n  color: var(--chat--message--bot--color);\n  border: 1px solid var(--chat--border-color-glow);\n  border-radius: 1.2rem 1.2rem 1.2rem 0.2rem;\n  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);\n  position: relative;\n  overflow: hidden;\n}\n\n.chat-message-bot::after {\n    content: '';\n    position: absolute;\n    top: -50%;\n    left: -100%;\n    width: 200%;\n    height: 200%;\n    background: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);\n    transform: rotate(25deg);\n    animation: glass-shine 5s infinite;\n}\n\n.chat-typing {\n  display: flex;\n  align-items: center;\n  padding: 10px;\n}\n.chat-typing span {\n  height: 10px;\n  width: 10px;\n  margin: 0 4px;\n  background-color: var(--chat--color-primary);\n  border-radius: 50%;\n  opacity: 0.4;\n  animation: typing-dots 1.4s infinite;\n  box-shadow: 0 0 8px var(--chat--color-primary);\n}\n.chat-typing span:nth-child(2) { animation-delay: 0.2s; }\n.chat-typing span:nth-child(3) { animation-delay: 0.4s; }\n\n.chat-footer {\n    background: var(--chat--footer--background);\n    padding: var(--chat--spacing);\n    backdrop-filter: blur(10px);\n    -webkit-backdrop-filter: blur(10px);\n    z-index: 2;\n    border-bottom-left-radius: var(--chat--window--border-radius);\n    border-bottom-right-radius: var(--chat--window--border-radius);\n}\n\n.chat-input {\n  background-image: linear-gradient(var(--chat--input--background), var(--chat--input--background)),\n                    linear-gradient(100deg, var(--chat--color-secondary), var(--chat--color-primary), var(--chat--color-secondary));\n  background-origin: border-box;\n  background-clip: padding-box, border-box;\n  border: 2px solid transparent;\n  background-size: 200% 100%;\n  animation: move-border 4s linear infinite;\n  color: var(--chat--input--text-color);\n  height: var(--chat--textarea--height);\n  padding: var(--chat--input--padding);\n  border-radius: var(--chat--input--border-radius);\n  width: 100%;\n  transition: all 0.3s ease;\n}\n.chat-input:focus {\n    outline: none;\n    box-shadow: 0 0 25px var(--chat--color-primary), inset 0 0 20px rgba(0, 255, 255, 0.25);\n}\n\n.chat-toggle {\n  width: var(--chat--toggle--size);\n  height: var(--chat--toggle--size);\n  border-radius: var(--chat--toggle--border-radius);\n  background: var(--chat--toggle--background);\n  color: var(--chat--toggle--color);\n  box-shadow: 0 0 35px rgba(0, 255, 255, 0.7), 0 0 45px rgba(255, 0, 255, 0.5);\n  transition: all var(--chat--transition-duration) ease-in-out;\n  animation: float 4s infinite ease-in-out;\n  border: 2px solid var(--chat--color-primary);\n}\n\n.chat-toggle:hover {\n  background: var(--chat--toggle--hover--background);\n  box-shadow: 0 0 55px rgba(255, 0, 255, 0.8), 0 0 65px rgba(0, 255, 255, 0.6);\n  transform: scale(1.1) rotate(-15deg);\n  animation-play-state: paused;\n}\n\n.chat-messages-list::-webkit-scrollbar { width: 10px; }\n.chat-messages-list::-webkit-scrollbar-track { background: transparent; }\n.chat-messages-list::-webkit-scrollbar-thumb {\n  background: var(--chat--color-primary);\n  border-radius: 10px;\n  box-shadow: 0 0 12px var(--chat--color-primary);\n  border: 2px solid var(--chat--color-dark);\n}\n.chat-messages-list::-webkit-scrollbar-thumb:hover { background: var(--chat--color-secondary); box-shadow: 0 0 16px var(--chat--color-secondary); }\n\n@keyframes animated-gradient {\n  0% { background-position: 0% 50%; }\n  50% { background-position: 100% 50%; }\n  100% { background-position: 0% 50%; }\n}\n@keyframes rotate-border { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }\n@keyframes move-border { from { background-position: 0% 0%; } to { background-position: 200% 0%; } }\n@keyframes fadeInGlow {\n  from { opacity: 0; transform: scale(0.95); box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); }\n  to { opacity: 1; transform: scale(1); box-shadow: 0 0 100px rgba(0, 255, 255, 0.4), 0 0 120px rgba(255, 0, 255, 0.3); }\n}\n@keyframes slideUpFade {\n  from { opacity: 0; transform: translateY(20px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n@keyframes user-message-pulse {\n  0% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); }\n  50% { box-shadow: 0 0 40px rgba(255, 0, 255, 0.5), 0 0 15px var(--chat--color-secondary) inset; }\n  100% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); }\n}\n@keyframes neon-flicker {\n    0%, 100% { text-shadow: 0 0 5px var(--chat--color-primary), 0 0 10px var(--chat--color-primary), 0 0 20px var(--chat--color-secondary), 0 0 40px var(--chat--color-secondary); }\n    50% { text-shadow: 0 0 10px var(--chat--color-primary), 0 0 20px var(--chat--color-primary-shade-50), 0 0 30px var(--chat--color-secondary-shade-50), 0 0 50px var(--chat--color-secondary); }\n}\n@keyframes glass-shine {\n    0% { left: -150%; }\n    100% { left: 150%; }\n}\n@keyframes typing-dots {\n  0%, 75%, 100% { transform: translateY(0); opacity: 0.4; }\n  25% { transform: translateY(-8px); opacity: 1; }\n}\n@keyframes float {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-15px); }\n}\n@keyframes scanline {\n  0% { transform: translateY(-100%); }\n  100% { transform: translateY(0); }\n}\n@keyframes background-pan {\n  0% { background-position: 0 0; }\n  100% { background-position: 200px 200px; }\n}"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    464,
+    176
+   ],
+   "id": "425ace0e-dfd6-4f7a-8681-7a31cc622415",
+   "name": "chat de teste",
+   "webhookId": "d6a431dc-496f-4014-9bec-ff432f746900"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "filtradoteste",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    464,
+    16
+   ],
+   "id": "60b79b82-b4c0-45ed-aa9a-4ad8d4357464",
+   "name": "api normal1",
+   "webhookId": "83e28f8f-8754-486a-b8e1-e7bd397c4b98"
+  }
+ ],
+ "pinData": {
+  "notificação": [
+   {
+    "json": {
+     "headers": {
+      "host": "interface.inovareinteligenciaartificial.com",
+      "user-agent": "macrodroid/5.57.6",
+      "content-length": "298",
+      "accept-encoding": "gzip",
+      "content-type": "application/json; charset=utf-8",
+      "x-forwarded-for": "191.36.139.143",
+      "x-forwarded-host": "interface.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "933ed04b6698",
+      "x-real-ip": "191.36.139.143"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "titulo": "oi",
+      "ticker": "{not_ticker}",
+      "sub_texto": "{not_sub_text}",
+      "linhas_texto": "{not_text_lines}",
+      "texto_grande": "{not_text_big}",
+      "botoes_acao": "{not_action_names}",
+      "timestamp": "{not_timestamp}",
+      "nome_app": "{not_app_name}",
+      "canal": "91984698653"
+     },
+     "webhookUrl": "https://interface.inovareinteligenciaartificial.com/webhook/filtradoteste",
+     "executionMode": "production"
+    }
+   }
+  ],
+  "api normal1": [
+   {
+    "json": {
+     "headers": {
+      "host": "interface.inovareinteligenciaartificial.com",
+      "user-agent": "axios/1.12.0",
+      "content-length": "2201",
+      "accept": "application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7",
+      "accept-encoding": "gzip, compress, deflate, br",
+      "content-type": "application/json",
+      "x-forwarded-for": "172.18.0.1",
+      "x-forwarded-host": "interface.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "9a99c93f5322",
+      "x-real-ip": "172.18.0.1"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "json": {
+       "event": {
+        "Info": {
+         "AddressingMode": "",
+         "BroadcastListOwner": "",
+         "BroadcastRecipients": null,
+         "Category": "",
+         "Chat": "5522998908709@s.whatsapp.net",
+         "DeviceSentMeta": null,
+         "Edit": "",
+         "ID": "3EB0C2C2DAFDF6C787CB47",
+         "IsFromMe": false,
+         "IsGroup": false,
+         "MediaType": "",
+         "MsgBotInfo": {
+          "EditSenderTimestampMS": "0001-01-01T00:00:00Z",
+          "EditTargetID": "",
+          "EditType": ""
+         },
+         "MsgMetaInfo": {
+          "DeprecatedLIDSession": null,
+          "TargetChat": "",
+          "TargetID": "",
+          "TargetSender": "",
+          "ThreadMessageID": "",
+          "ThreadMessageSenderJID": ""
+         },
+         "Multicast": false,
+         "PushName": "Rafael S Pereira",
+         "RecipientAlt": "",
+         "Sender": "5522998908709:84@s.whatsapp.net",
+         "SenderAlt": "122793148580017:84@lid",
+         "ServerID": 0,
+         "Timestamp": "2025-11-01T22:51:41-03:00",
+         "Type": "text",
+         "VerifiedName": {
+          "Certificate": {
+           "details": "CN7w+5GEv4TxYxIGc21iOndhIhBSYWZhZWwgUyBQZXJlaXJh",
+           "signature": "GDAy+fx+cayrZSQmzG2WvQDZCD1L/Z9e5z7m7E1rzrk5fhMGH3ydYpZRDNGiMhZuQx0xWUEvVoyYxry5oMXSBA=="
+          },
+          "Details": {
+           "issuer": "smb:wa",
+           "serial": 7197334912452458000,
+           "verifiedName": "Rafael S Pereira"
+          }
+         }
+        },
+        "IsBotInvoke": false,
+        "IsDocumentWithCaption": false,
+        "IsEdit": false,
+        "IsEphemeral": false,
+        "IsLottieSticker": false,
+        "IsViewOnce": false,
+        "IsViewOnceV2": false,
+        "IsViewOnceV2Extension": false,
+        "Message": {
+         "conversation": "oi",
+         "messageContextInfo": {
+          "deviceListMetadata": {
+           "receiverAccountType": 0,
+           "recipientKeyHash": "E4OoWr1okJegag==",
+           "recipientTimestamp": 1760050383,
+           "senderAccountType": 0,
+           "senderKeyHash": "ju1KKd6T5rfvEQ==",
+           "senderTimestamp": 1761512126
+          },
+          "deviceListMetadataVersion": 2,
+          "limitSharingV2": {
+           "initiatedByMe": false,
+           "trigger": 0
+          },
+          "messageSecret": "Aqmr/YQd++WtCl7punKbVuPB4EXY1CqRmBQAlxpCPfU="
+         }
+        },
+        "NewsletterMeta": null,
+        "RawMessage": {
+         "conversation": "oi",
+         "messageContextInfo": {
+          "deviceListMetadata": {
+           "receiverAccountType": 0,
+           "recipientKeyHash": "E4OoWr1okJegag==",
+           "recipientTimestamp": 1760050383,
+           "senderAccountType": 0,
+           "senderKeyHash": "ju1KKd6T5rfvEQ==",
+           "senderTimestamp": 1761512126
+          },
+          "deviceListMetadataVersion": 2,
+          "limitSharingV2": {
+           "initiatedByMe": false,
+           "trigger": 0
+          },
+          "messageSecret": "Aqmr/YQd++WtCl7punKbVuPB4EXY1CqRmBQAlxpCPfU="
+         }
+        },
+        "RetryCount": 0,
+        "SourceWebMsg": null,
+        "UnavailableRequestID": ""
+       },
+       "token": "<SEGREDO_REMOVIDO>",
+       "type": "Message"
+      },
+      "action": "wuzapi",
+      "chatInput": "oi",
+      "token": "<SEGREDO_REMOVIDO>",
+      "instanceName": "s22-bus-5106"
+     },
+     "webhookUrl": "https://Interface.inovareinteligenciaartificial.com/webhook/filtradoteste",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "HTTP Request",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados1": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Memory": {
+   "ai_memory": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gemini ": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "notificação": {
+   "main": [
+    [
+     {
+      "node": "dados2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados2": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "chat de teste": {
+   "main": [
+    [
+     {
+      "node": "dados1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "api normal1": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "177b7e68-3652-4798-8fb2-8440d6d2227c",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "PhRSNcn5hjprqQAW",
+ "tags": []
+}

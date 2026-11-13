@@ -1,0 +1,265 @@
+{
+ "resumo": "COMO O VEO CHEGA AS REDES (hoje, 15/10/2026):\n1) Caminho ANTIGO (ainda agendado, mas sem canal): AgendadorVO3 05:00 (agendar_vo3.py: pos_final -> roteamento.py -> publishAt em 5 slots) e PostadorDeVideos 06:40 etapas 1-2 (postar_tudo_hoje.py le D:\\veo\\beta\\logs\\video_cache.json e roteia por Gemini; postar_pos_final.py drena pos_final) -> politica.postar_youtube -> youtube_poster.py (Data API) ou youtube_web_poster.py (Studio no Chrome). Os dois fazem round-robin entre os \"canais ativos\"; como todos os canais vivos estao reservados a rede (politica._reservas le rede_canais.json), os pools dao 0 e nada sobe (postar_tudo_20261015.log: \"Pools: 0 canais IA\"). pos_final esta vazio (0 .pos.json), video_cache tem 2 videos de 12/10 nao aprovados. Geracao do veo PAUSADA (logs\\PAUSE_SYSTEM, manual, 12/10).\n2) Caminho NOVO (ativo desde 15/10): limpar_veo.py (etapa 2a + manual) tira marca/slide de WhatsApp dos brutos -> D:\\hipercool-materiais\\veo\\limpos (152 aprovados automaticamente, 6 rejeitados por logo do TikTok) -> mr/rede.py (tarefa ManhwaReact-Rede de hora em hora + etapa 2b) trata 'veo' como 3a fonte: so inventoreact e manhwareact, nota fixa = nota_min 6 (pega a vaga que sobra), 1 video/canal/dia, troca o @ (rebrand), agente do canal reescreve titulo/descricao/tags, revisor, upload private+publishAt so nas proximas 3 h, sintetico=True. Primeiro veo limpo subiu 15/10 19:20 no InventoReact (publicados.json, marca_trocada true).\n3) Reuso TikTok/Instagram (etapas 3/3b): catalogo.py escolhe o que ja saiu no YouTube; veo_so_limpo=false nas duas redes -> ainda sobe COMPLETO (com WhatsApp e \"Siga @InovareStories\"): 9 no TikTok em 15/10 e 2 no Instagram em 14/10. Legenda do TikTok e template aleatorio com #fyp #viral.\n4) Hipercool (HipercoolPostagem a cada 20 min) usa a mesma politica/ledger nos canais inovare* e InovareManhwaVerse.\nBANIMENTO 04/09 (22 canais pt): postagem automatica ate uploadLimitExceeded (ex.: 30/07 102 OK + 31 limites; 24/08 105 OK + 20 limites), round-robin em 20+ canais, rajada em hora fixa, mesmo projeto OAuth/varios canais por conta, titulos/descricoes template \"#shorts #ia #viral\", slide de WhatsApp + cartao @InovareStories em todo video, CTA de WhatsApp na descricao, MEGA ENGAGE (likes falsos) em 06/08 com contas da rede, mesmo video em varios canais, 204 TikToks em 22/08 e 148 em 02/09, Shorts de IA muito parecidos.\nO QUE FOI CORRIGIDO: politica central (parada geral, bloqueio por canal, ledger, aprovacao, canais reservados); rede com 1/canal/dia, janela de 3 h, horarios por canal com jitter, nunca o mesmo video em 2 canais, agente por canal (sem #fyp/#viral, sem links, max 2 emojis), revisor, declaracao de IA para veo/historias; veo so na versao limpa no YouTube; detector de logo do TikTok; MEGA ENGAGE desabilitado; canais suspensos bloqueados.\nO QUE CONTINUA: politica.json afrouxada em 14/10 para 10/canal/dia, 50/dia e intervalo 0 h (LEIA.txt ainda diz 3/12/2h); caminho antigo so dormente (codigo e tarefas intactos, sem --sintetico, titulos template); COMPLETO ainda no TikTok/Instagram; roteamento.py/publicar.py apontam para 20 handles suspensos e anexam CTA de WhatsApp na descricao; projeto OAuth compartilhado e 5 dos 12 canais ativos ainda sobem pela API; hipercool subiu 8 videos em 42 min no InovareManhwaVerse em 15/10 e o mesmo recap em 7-8 canais (0-5 views); aprovacao humana e na pratica automatica.\nDECLARACAO DE CONTEUDO SINTETICO: so quando o chamador passa sintetico (API: status.containsSyntheticMedia; Studio: VIDEO_HAS_ALTERED_CONTENT_YES). A rede passa True para veo/historias e nada para react; hipercool passa True; os scripts antigos do veo nunca passaram (os VO3 banidos subiram sem a declaracao).\nCANAIS SADIOS PARA O VEO: os 12 ativos de rede_canais.json; hoje so inventoreact e manhwareact recebem veo. Melhores candidatos a mais: mundoquenaoexiste (nicho \"videos de IA, situacoes absurdas, e se...\"), inventoreact (curiosidades/inventos) e, com as regras do dono, dicasfinanceirasdaia/assistiainvestimentos. Limites: 1 veo/canal/dia e poucos por dia na rede toda, sempre limpo, sintetico=True, titulo pelo agente, sem WhatsApp/links, medir 48 h antes de escalar (ainda nao ha nenhuma medida de 'veo limpo' em aprendizado_global.json). Fora: hipercool (reservados; InovareManhwaVerse com recursos avancados negados ate 14/11), eng/french pausados por strikes, esp suspenso.",
+ "fatos": [
+  {
+   "fato": "Volume pre-banimento: o postador subia ate bater o limite diario do YouTube, centenas por dia. 30/07: 102 OK e 31 'LIMITE'; 31/07: 65; 07/08: 58; 26/08: 52 (postar_tudo_*.log). pos_final: 23/08 75 OK/26 limites, 24/08 105 OK/20 limites, 25/08 82 OK (postar_pos_final_*.log). 02/07: 43 agendados e 24 limites.",
+   "evidencia": "D:\\postador-de-videos\\logs\\postar_tudo_20260730.log (grep ' OK '=102, 'LIMITE'=31); logs\\postar_pos_final_20260824.log ('OK #'=105); _backup_2026-09-24\\bin\\postar_tudo_hoje.py:5 'posta round-robin ate CADA canal devolver o' e :329 '--limite-canal' default None"
+  },
+  {
+   "fato": "Round-robin entre todos os canais ativos continua no codigo dos 3 scripts antigos; agendar_vo3 tem tetos de 8 a 45 por canal/dia, 5 slots (12h,18h,21h,00h,03h) e 'sweep' que posta imediato o que sobrou.",
+   "evidencia": "bin\\postar_tudo_hoje.py:334-402 'round-robin por categoria'; bin\\postar_pos_final.py:297-310 _candidatos(giro); bin\\agendar_vo3.py:17 slots, :53-81 CAPS_DIARIOS ('empresainovare': 45, '_default': 8), :253-266 sweep imediato"
+  },
+  {
+   "fato": "Rajada em hora fixa: PostadorDeVideos 06:40 e AgendadorVO3 05:00 seguem HABILITADOS (state Ready, ultima execucao 15/10), mas hoje nao acham canal: todos os canais vivos estao reservados a rede e os pools dao 0.",
+   "evidencia": "Get-ScheduledTask: PostadorDeVideos Ready last=15/10 06:40; AgendadorVO3 Ready last=15/10 05:00; bin\\politica.py:175-188 _reservas() inclui todo cred de rede_canais.json; :197-201 canais_ativos exclui reservados; logs\\postar_tudo_20261015.log 'Pools: 0 canais IA | 0 canais manga'; logs\\agendar_vo3_2026-10-15.log 'Coletados: 0 videos v2'"
+  },
+  {
+   "fato": "Mesmo projeto OAuth em (quase) todos os canais, e varios canais na mesma conta Google: antes clientId 43266821547 em todos; hoje projeto 100689820764 compartilhado pelos canais novos. 5 dos 12 canais ativos ainda sobem pela Data API (usar=false): manhwareact, animescomia, forjareact, mundoquenaoexiste, fiodameada.",
+   "evidencia": "SPAM_BANIMENTO_2026-09-04.md:128-131; D:\\manhwa-react\\HANDOFF_REDE.md:86-88 'quase todos os canais novos usam o projeto Google 100689820764'; config\\youtube_navegador.json canais.*.usar; bin\\politica.py:454-455 escolhe POSTER_WEB so se _usar_navegador"
+  },
+  {
+   "fato": "Titulos/descricoes por template nos scripts antigos: '{persona} - {tema} #shorts' + '#shorts #ia #viral #brasil'; o roteador Gemini pede 'titulo viral ... pode 1 emoji, com #shorts'; o fallback do veo poe ' 🔥' e '#shorts #ia #<canal> #viral #brasil'; o LLM do veo pede '1-2 emojis'.",
+   "evidencia": "bin\\postar_pos_final.py:194-196; bin\\agendar_vo3.py:166,177,182; bin\\postar_tudo_hoje.py:58,160-167,172; D:\\veo\\beta\\publicar.py:55,82,87-89"
+  },
+  {
+   "fato": "Slide de propaganda com WhatsApp fixo no codigo e cartao/marca @InovareStories em todo video COMPLETO; o LEIA diz que foi isso que derrubou os canais do Veo.",
+   "evidencia": "D:\\veo\\beta\\pos_producao\\cta_card.py:155 whatsapp = \"91 98469-8653\"; :200-202 'OFERECIDO POR'; pos_producao\\assets\\branding.json:2-7 handle/cta_texto/watermark '@InovareStories'; plugins\\branding_watermark.py:24-26; LEIA.txt:101-103; bin\\limpar_veo.py:7-9"
+  },
+  {
+   "fato": "CTA na descricao: publicar.py anexa '👉 {cta}' a descricao do postar.json, com cta=formula.get('cta') vindo do cron; o teste do modulo usa 'Chama no WhatsApp que ta na tela'. O texto real das formulas nao foi encontrado em logs (nenhum json de formulas/vencedoras com campo cta).",
+   "evidencia": "D:\\veo\\beta\\publicar.py:70-71 e :153-155; D:\\veo\\beta\\cron_gerar_video_llm.py:1567-1570 'cta=formula.get(\"cta\") or \"\"'"
+  },
+  {
+   "fato": "Engajamento falso: MEGA ENGAGE (D:\\projetos-navegador) rodou em 06/08 com contas da propria rede; 22 canais cairam em 04/09 e o esp (que participou) apareceu suspenso em 04/10. Tarefa MegaEngageMonitor esta Disabled (ultima execucao 17/07/2026).",
+   "evidencia": "D:\\manhwa-react\\HANDOFF_REDE.md:215-222; REDE_ESTADO_E_PENDENCIAS.md:51-53; Get-ScheduledTask MegaEngageMonitor Disabled last=17/07/2026"
+  },
+  {
+   "fato": "Mesmo video em varios canais foi 'o padrao que derrubou a rede antiga'; a rede nova garante 1 canal por video (set usados). O hipercool repetiu o padrao em 13/10 (mesma parte em 7-8 canais, 0-5 views): aprendizado_global mostra 'recap hipercool' mediana 1 view (n=6) contra 'react' mediana 195 (n=16).",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:11-12 e :269-276; LEIA.txt:131-136; D:\\postador-de-videos\\_analise\\aprendizado_global.json por_origem"
+  },
+  {
+   "fato": "TikTok tambem teve rajadas: 204 posts em 22/08 e 148 em 02/09 (hoje max_por_conta_dia 3 e intervalo 90 s).",
+   "evidencia": "logs\\tiktok_auto_posted.json (contagem por timestamp); config\\reuso_plataformas.json tiktok.max_por_conta_dia=3, _leia 'em 02/09 sairam 148 num dia'"
+  },
+  {
+   "fato": "Politica central existe e e aplicada antes de cada upload: parada geral (PARADO.json), bloqueio por canal (canais_status.json), cota do dia pelo ledger, aprovacao humana, canal reservado, intervalo minimo via publishAt. Hoje nao ha PARADO.json nem POSTAGEM_DESLIGADA.json.",
+   "evidencia": "bin\\politica.py:386-403 checar_upload; :418-425 tratar_erro; bin\\youtube_poster.py:237-248; bin\\youtube_web_poster.py:10; ls config\\ sem PARADO.json/POSTAGEM_DESLIGADA.json"
+  },
+  {
+   "fato": "Os valores da politica foram AFROUXADOS em 14/10 11:55: politica.json = 10 uploads/canal/dia, 50/dia, intervalo 0 h (padrao do codigo e 3/12/2h). O log das 06:55 de 14/10 ainda mostrava 3/20/2. O hipercool documenta que zerou o intervalo porque o agendamento pelo Studio so funciona em pt/en. LEIA.txt ainda anuncia 3/12/2h.",
+   "evidencia": "config\\politica.json:3-5 (mtime 14/10 11:55); bin\\politica.py:48-54 PADRAO; logs\\postar_auto.log (14/10 06:55 'max_uploads_por_canal_dia: 3 ... intervalo_min_horas_mesmo_canal: 2'); D:\\hipercool-videos\\docs\\correcoes_pendentes.md:32; LEIA.txt:172-175"
+  },
+  {
+   "fato": "Ledger (04/10-15/10): 146 uploads; pico 22/dia em 14 e 15/10; em 15/10 o InovareManhwaVerse (hipercool, pt) recebeu 10 uploads, 8 deles entre 05:27 e 06:09 (3-4 min de intervalo), todos publicos imediatos.",
+   "evidencia": "logs\\uploads_ledger.jsonl (registros ts 2026-10-15T05:27:14 ... 06:09:13, canal 'InovareManhwaVerse', publish_at None, arquivos the-inheritor_cap1_parte01..08.mp4)"
+  },
+  {
+   "fato": "canais_status.json: suspensos 22 (21 de 04/09 + 'Inovare Manhwa esp' em 04/10), token_morto 10 (todos com token renovado, por isso o CLI mostra 0 bloqueados), desativados 5, liberados 1 (inovaremanhwaverseviet). rede_canais.json: 20 canais = 12 ativo, 5 hipercool, 2 pausado (eng: 'Muitos avisos', french: strike), 1 suspenso (esp).",
+   "evidencia": "config\\canais_status.json (listas); config\\rede_canais.json canais[].status; logs\\postar_auto.log 'Bloqueados em suspensos: 22 / token_morto: 0 / desativados: 4'"
+  },
+  {
+   "fato": "roteamento.py do veo aponta para 21 handles: 20 estao suspensos (aulas-la, recenasia, dacaemusicacomia, videocassetadasia, cerebrodigitalpiadareal, curiosidadesefatosia, fofoseabsurdos, fakenewsia, inovareinteligenciaartificial, ia-pro-mentoria e os 10 do _POOL_HUMOR); so animescomia esta vivo (e reservado a rede). publicar.py ainda grava esses handles no campo 'canais' do postar.json. O sorteio usa hash() (muda a cada processo).",
+   "evidencia": "D:\\veo\\beta\\roteamento.py:15-35, :60 'abs(hash(...))'; D:\\veo\\beta\\publicar.py:127-134; config\\canais_status.json suspensos; bin\\agendar_vo3.py:185-202 rotear_itens -> filtrar_ativos descarta bloqueados"
+  },
+  {
+   "fato": "Declaracao de conteudo sintetico/alterado: API manda status.containsSyntheticMedia so com --sintetico; Studio clica VIDEO_HAS_ALTERED_CONTENT_YES so com --sintetico e, se nao marcar, apenas avisa. A rede passa sintetico=True para veo e historias e False para react (sem clique); hipercool passa True; postar_tudo_hoje/postar_pos_final/agendar_vo3 nunca passam (VO3 antigos subiram sem declarar; o poster de antes de 24/09 nem tinha o campo). Tambem marca 'nao e para criancas'; categoria/idioma sao ignorados pelo navegador.",
+   "evidencia": "bin\\youtube_poster.py:145-152,251-253; bin\\youtube_web_poster.py:580-585,387-388,714-716,768-769; D:\\manhwa-react\\mr\\rede.py:145,162,183,923-926,536-537; D:\\hipercool-videos\\bin\\postar_hipercool.py:352-353; bin\\postar_tudo_hoje.py:224-226; bin\\postar_pos_final.py:273-275; bin\\agendar_vo3.py:278-280; _backup_2026-09-24\\bin\\youtube_poster.py:72-75"
+  },
+  {
+   "fato": "Caminho novo do veo: limpar_veo gera a versao limpa (720x1280 cru -> upscale; 1080x1920 -> crop 900x1600 sem a marca e corte antes do slide detectado pelo brilho parado), transcreve a fala, roda detector da logo do TikTok (limiar 0,57) e aprova sozinho os de formato conhecido. Estoque: 152 aprovados, 6 rejeitados (TikTok), 1 ja postado.",
+   "evidencia": "bin\\limpar_veo.py:97-123 limpar(), :126-140 nota_tiktok, :199-214 aprovacao automatica; D:\\hipercool-materiais\\veo\\limpos\\*.json (contagem: aprovado 152, rejeitado marca TikTok 6)"
+  },
+  {
+   "fato": "Na rede, 'veo' entra so em canais_veo_limpo=['inventoreact','manhwareact'] (padrao do codigo; config.json do manhwa-react nao tem chave 'rede'), sem passar pelo diretor: nota fixa = nota_min 6 -> fica atras de qualquer react com nota >= 6; precisa_marca sempre True (rebrand com o @ do canal); _arquivar_veo so marca posted_url no json; max_dia 1 por canal; upload so se publica nas proximas 3 h; jitter de +-15 min; trava rede.lock de 90 min.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:34-44 REDE_PADRAO, :47-50 _rc, :165-188 inventario, :247-250 e :272 distribuir, :313-316 precisa_marca, :636-640 _arquivar_veo, :559-574 escolher_horario, :668-689 Trava, :846-849 e :897-900 janela; config\\rede_canais.json padrao.max_dia=1, jitter_min=15"
+  },
+  {
+   "fato": "Primeiro veo limpo publicado pela rede: 15/10 19:20, InventoReact, publish 20:00 BRT, titulo 'ET no Brasil: veio dominar, mas teve que pagar boleto no Pix 👽💸 #shorts #alienigenas', marca_trocada true, script rede.",
+   "evidencia": "D:\\hipercool-materiais\\_postados\\react\\publicados.json chave 'veo:alienigenas_20260806_074758'; logs\\uploads_ledger.jsonl 2026-10-15T19:20:42 (youtube_web_poster.py)"
+  },
+  {
+   "fato": "Agente do canal da rede: titulo ate 70 chars, max 2 emojis, termina com #shorts + 1 hashtag; descricao sem links, sem #fyp/#viral, 3-5 hashtags; para sintetico acrescenta 'Historia e imagens criadas com inteligencia artificial.'; revisor barra nome da obra, palavras que derrubam anuncio e regras do dono; tags limitadas a 15/450 chars.",
+   "evidencia": "D:\\manhwa-react\\mr\\rede.py:431-451 AGENTE_INSTR, :454-456 PROIBIDO_*, :459-475 revisar, :526-550 _validar_meta"
+  },
+  {
+   "fato": "Reuso TikTok/Instagram ainda usa o COMPLETO: veo_so_limpo=false nas duas redes ('Desligado ate o dono decidir'); catalogo so troca pela versao limpa quando a flag esta true. Em 15/10 o TikTok tentou/postou 9 COMPLETO (jornalcomia, canalalucinaai, fabricadeautomacoesia) e em 14/10 o Instagram postou 2 COMPLETO (_lucrocomia_). Legenda do TikTok = random.choice de 8 frases com #viral #fyp; Instagram = '{tema} 🤯 #ia #inteligenciaartificial #viral #reels #brasil'.",
+   "evidencia": "config\\reuso_plataformas.json tiktok.veo_so_limpo=false, instagram.veo_so_limpo=false, _veo_so_limpo; bin\\catalogo.py:234-238,255-261; logs\\tiktok_auto_posted.json (9 *_COMPLETO.mp4 em 2026-10-15); logs\\instagram_auto_posted.json; bin\\tiktok_cdp_poster.py:21-30,318; bin\\postar_insta_auto.py:44-46; logs\\tiktok_20261015.log"
+  },
+  {
+   "fato": "Aprovacao humana esta ligada (exigir_aprovacao_humana true), mas na pratica e automatica: limpar_veo aprova os limpos de formato conhecido; a rede herda aprovacao no rebrand; o hipercool se auto-aprova com '--aprovado'. aprovacoes.json: 365 entradas (358 aprovados, 7 rejeitados).",
+   "evidencia": "config\\politica.json:6; bin\\limpar_veo.py:210-214; D:\\manhwa-react\\mr\\rede.py:919-922; D:\\hipercool-videos\\bin\\postar_hipercool.py:345; config\\aprovacoes.json"
+  },
+  {
+   "fato": "Nao ha tarefa agendada para o worker de pos-producao do veo (worker_noite) nem para o supervisor; as tarefas CronVeo* e VeoProducaoDiaria7h estao Disabled; a geracao esta pausada desde 12/10 17:46 (motivo 'manual'); video_cache.json tem 2 entradas (12/10), nenhuma postada.",
+   "evidencia": "Get-ScheduledTask (nenhum nome com noite/worker/supervisor; CronVeoCanalAlucinaAI/MundoSolar/Outra/SeeBotsIA Disabled; VeoProducaoDiaria7h Disabled last=31/08); D:\\veo\\beta\\logs\\PAUSE_SYSTEM; D:\\veo\\beta\\logs\\video_cache.json"
+  },
+  {
+   "fato": "Medicao 48 h entre projetos existe (notificar_telegram.medir_48h -> aprendizado_global.json, origem 'veo limpo' derivada de publicados.json) e alimenta o agente (memoria_rede), mas ainda nao ha nenhuma amostra de 'veo limpo' (so react n=16, recap hipercool n=6, react completo n=1).",
+   "evidencia": "bin\\notificar_telegram.py:598-664; D:\\manhwa-react\\mr\\rede.py:413-427; _analise\\aprendizado_global.json por_origem (atualizado 2026-10-16T02:29Z)"
+  },
+  {
+   "fato": "Os 730 videos de pos_final nao podem ser repostados (muitos ja sairam nos canais suspensos); pos_final\\completo tem 21 mp4 no PC e o resto foi para o Drive; catalogo marca a pasta como SUSPENSOS.",
+   "evidencia": "D:\\manhwa-react\\REDE_ESTADO_E_PENDENCIAS.md:92-93; bin\\catalogo.py:61 'SUSPENSOS = ...pos_final\\completo  # VO3 antigo: muitos passaram pelos canais suspensos'; ls pos_final\\completo = 21 mp4"
+  }
+ ],
+ "problemas": [
+  {
+   "titulo": "politica.json afrouxada: 10 uploads/canal/dia, 50/dia e intervalo 0 h (desde 14/10 11:55), contra o padrao 3/12/2h e contra o que o LEIA.txt e a contestacao prometem",
+   "evidencia": "config\\politica.json:3-5; bin\\politica.py:48-54; LEIA.txt:172-175; CONTESTACAO_YOUTUBE_2026-09-22.md:144-146; D:\\hipercool-videos\\docs\\correcoes_pendentes.md:32 ('politica.json e global')",
+   "impacto": "Qualquer script (antigo, hipercool, manual) pode subir 10 videos colados num canal; em 15/10 o InovareManhwaVerse ja recebeu 8 em 42 min (ledger). E o mesmo padrao de volume do banimento, agora permitido pela config.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Caminho antigo (postar_tudo_hoje, postar_pos_final, agendar_vo3) continua agendado e intacto: round-robin, sem --sintetico, titulos template, roteamento para canais suspensos; so nao posta porque os pools estao vazios",
+   "evidencia": "Get-ScheduledTask PostadorDeVideos/AgendadorVO3 Ready; bin\\postar_tudo_auto.bat:16-24; bin\\postar_tudo_hoje.py:334-402; bin\\agendar_vo3.py:53-81,253-266; postar-hoje.cmd:10",
+   "impacto": "Basta um canal sair de rede_canais.json/canais_reservados.json ou entrar uma credencial nova com tem_upload para o VO3 voltar a subir em rajada as 06:40 com '#shorts #ia #viral', sem declaracao de IA e ate 10/canal/dia.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "TikTok e Instagram ainda reaproveitam o COMPLETO (slide com WhatsApp + 'Siga @InovareStories') e usam legenda template aleatoria com #fyp #viral",
+   "evidencia": "config\\reuso_plataformas.json veo_so_limpo=false (2x); bin\\catalogo.py:234-238; logs\\tiktok_auto_posted.json (9 COMPLETO em 15/10); logs\\instagram_auto_posted.json (2 COMPLETO em 14/10); bin\\tiktok_cdp_poster.py:21-30,318; bin\\postar_insta_auto.py:44-46",
+   "impacto": "O conteudo que derrubou os canais do YouTube continua saindo nas outras redes, com legenda generica; risco de spam/golpe no TikTok/Instagram e de ligar as contas entre si.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Projeto OAuth compartilhado (100689820764) e 5 dos 12 canais ativos ainda sobem pela Data API (contra a regra 'Google so pelo navegador')",
+   "evidencia": "D:\\manhwa-react\\HANDOFF_REDE.md:86-88; config\\youtube_navegador.json usar=false em manhwareact, animescomia, forjareact, mundoquenaoexiste, fiodameada; bin\\politica.py:454-455",
+   "impacto": "Um projeto so ligando varios canais foi apontado como marcador de rede coordenada; se o projeto for sinalizado, os 5 caem juntos (ManhwaReact e Animescomia sao os que mais rendem).",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "roteamento.py e publicar.py do veo apontam para 20 handles suspensos, anexam CTA (WhatsApp) na descricao e usam hash() nao deterministico",
+   "evidencia": "D:\\veo\\beta\\roteamento.py:15-35,60; D:\\veo\\beta\\publicar.py:70-71,127-134; config\\canais_status.json suspensos",
+   "impacto": "Quando a geracao voltar, cada postar.json nasce com canal morto e CTA de WhatsApp na descricao (texto que o YouTube le como golpe/spam); o sorteio por hash() muda entre execucoes.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Hipercool repete padroes do banimento com a mesma politica: 8 uploads em 42 min no InovareManhwaVerse (15/10) e a mesma parte do recap em 7-8 canais (13/10) com 0-5 views; o canal pt ja teve recursos avancados negados ate 14/11",
+   "evidencia": "logs\\uploads_ledger.jsonl (15/10 05:27-06:09, canal InovareManhwaVerse); LEIA.txt:131-136; bin\\youtube_studio_extras.py:37-40; _analise\\aprendizado_global.json ('recap hipercool' mediana 1)",
+   "impacto": "As contas inovare* sao da mesma familia dos canais que cairam; uma nova suspensao dispara a parada geral e para a rede inteira (parar_tudo_ao_detectar_suspensao).",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Aprovacao 'humana' e automatica para o veo: limpar_veo aprova sozinho 152 limpos; parte dos brutos de 8 s veio do TikTok (6 pegos pelo detector) e a origem dos demais nao foi confirmada",
+   "evidencia": "bin\\limpar_veo.py:35-39,199-214; LEIA.txt:111-114; D:\\hipercool-materiais\\veo\\limpos\\*.json (6 'marca/logo do TikTok')",
+   "impacto": "Risco de subir reupload de terceiros (spam/direitos) e de sobrar propaganda num corte errado sem ninguem ver; o detector so cobre a logo padrao do TikTok.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Nenhuma medicao do desempenho do veo limpo ainda; o veo entra com nota fixa 6 (ultima prioridade) so em 2 canais",
+   "evidencia": "_analise\\aprendizado_global.json por_origem (sem 'veo limpo'); D:\\manhwa-react\\mr\\rede.py:43,249-250,272; publicados.json (1 veo em 15/10)",
+   "impacto": "Nao da para saber se o formato Veo de 8 s rende; decisao de escalar fica no escuro; 152 limpos tendem a ficar parados (rede_sem_video.json mostra inventoreact sem video bom em 15/10 mesmo com veo disponivel, porque a vaga foi reservada a um react).",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "LEIA.txt e HANDOFF desatualizados sobre limites (3/12/2h) e canais 'ativos' (lista de 19 inclui os inovare* que passaram ao hipercool em 13/10)",
+   "evidencia": "LEIA.txt:172-175; D:\\manhwa-react\\HANDOFF_REDE.md:81-110 vs config\\rede_canais.json status hipercool/pausado",
+   "impacto": "Proximo agente confia em limites que nao valem e pode liberar algo achando que a politica segura.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Ciclo das 06:40 de 15/10 nao registrou 'Fim TikTok' e a tarefa PostadorDeVideos terminou com resultado 2147943467 (0x8007042B); o TikTok falhou em tiktok_cdp_poster.py:67 e 'nenhum Chrome disponivel'",
+   "evidencia": "logs\\postar_auto.log (ultima linha '15/10 06:40:04 Inicio TikTok'); logs\\tiktok_20261015.log; Get-ScheduledTaskInfo LastTaskResult=2147943467",
+   "impacto": "Etapas 3b (Instagram), 4 (limpar_usados) e o resumo da politica nao rodaram em 15/10; falhas silenciosas no reuso.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Comentarios da rede falham toda hora (403 insufficientPermissions no Inovare Manga ind; 404 videoNotFound no InventoReact wKiGkUQ6bBc)",
+   "evidencia": "D:\\manhwa-react\\logs\\rede_20261015.log linhas 7,15,23,...; logs\\manhwa_react_20261015.log",
+   "impacto": "O 'primeiro comentario do canal' (unico engajamento permitido) nao sai nesses canais e o log enche de ruido.",
+   "liga_banimento": false
+  }
+ ],
+ "oportunidades": [
+  {
+   "titulo": "Piso de seguranca no codigo da politica (nao so no json)",
+   "fonte": "D:\\postador-de-videos\\bin\\politica.py:89-92 (politica()) e :317-340; valores de referencia em SPAM_BANIMENTO_2026-09-04.md:81-95",
+   "como_adaptar": "Em politica() aplicar clamp: max_uploads_por_canal_dia <= 4, intervalo >= 1 h, max total <= 20, independente do json; ou permitir politica por projeto (bloco 'hipercool' com seus limites de fila.json) para o hipercool nao afrouxar a regra global. Avisar no Telegram (checar_logs) quando o json pedir acima do piso.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Desarmar o caminho antigo do veo",
+   "fonte": "D:\\postador-de-videos\\bin\\postar_tudo_auto.bat:16-24; bin\\agendar_vo3_auto.bat; Task Scheduler AgendadorVO3",
+   "como_adaptar": "Tirar as etapas 1-2 do .bat (ou envolver com 'if exist config\\VEO_ANTIGO_LIGADO.json'), desabilitar a tarefa AgendadorVO3 e mover postar_tudo_hoje/postar_pos_final/agendar_vo3 para _legado\\; o unico caminho do veo passa a ser limpar_veo -> rede. Se algum deles ficar, forcar sintetico=True e privacy private+publishAt.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Reuso TikTok/Instagram so com a versao limpa e legenda pela fala",
+   "fonte": "D:\\postador-de-videos\\config\\reuso_plataformas.json (veo_so_limpo); bin\\catalogo.py:234-261 versao_limpa(); json dos limpos (campo 'fala', 'tema'); D:\\manhwa-react\\mr\\rede.py:487-523 adaptar()",
+   "como_adaptar": "Com o OK da dona, veo_so_limpo=true nas duas redes (COMPLETO sem limpo e pulado). Trocar random.choice(DESCRIPTIONS) do tiktok_cdp_poster por legenda gerada do campo 'fala'/'tema' do json do limpo (ou do titulo do publicados.json), sem #fyp/#viral e com declaracao de IA; mesmo para postar_insta_auto.legenda().",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Declarar IA em tudo que e sintetico, em todos os caminhos",
+   "fonte": "bin\\youtube_poster.py:151-152; bin\\youtube_web_poster.py:584-585 e :387-388; D:\\manhwa-react\\mr\\rede.py:926",
+   "como_adaptar": "Nos scripts que restarem do veo passar sintetico=True; no web poster tratar 'opcao de conteudo alterado nao ficou marcada' como falha (nao aviso) quando sintetico=True; na rede manter False so para react gravado de verdade.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Migrar os 5 canais que ainda sobem pela API para o navegador",
+   "fonte": "D:\\postador-de-videos\\config\\youtube_navegador.json (usar/perfil_existe); bin\\youtube_web_poster.py --logar <slug> e --checar; regra da dona 'Google/YouTube so pelo navegador'",
+   "como_adaptar": "Logar os perfis yt_manhwareact, yt_animescomia, yt_forjareact, yt_mundoquenaoexiste, yt_fiodameada (perfil_existe false hoje) e marcar usar=true; deixar a Data API so para leitura (metricas/comentarios). Elimina o projeto OAuth compartilhado como elo entre canais.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Limpar roteamento.py/publicar.py do veo",
+   "fonte": "D:\\veo\\beta\\roteamento.py:15-62; D:\\veo\\beta\\publicar.py:70-71,127-134; regra do hipercool 'voz fixa por md5, nunca hash()' (D:\\hipercool-videos\\docs\\MELHORIAS_PARA_TODOS_OS_PROJETOS.md)",
+   "como_adaptar": "Apontar personas para slugs de rede_canais.json (ou nao preencher 'canais' e deixar a rede decidir), trocar hash() por md5, e parar de anexar '👉 {cta}' na descricao (CTA de WhatsApp nunca em texto; no maximo 'link na bio' ou nada). publicar.py passa a escrever o json no formato que o limpar_veo/rede leem (fala, tema).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Veo em mais canais da rede, com teto global e nota do diretor",
+   "fonte": "D:\\manhwa-react\\mr\\rede.py:43 canais_veo_limpo, :249-250 nota fixa, :241-277 distribuir(); config\\rede_canais.json nichos (mundoquenaoexiste: 'videos de IA, situacoes absurdas, e se...')",
+   "como_adaptar": "Colocar 'rede' no config.json do manhwa-react com canais_veo_limpo = inventoreact, manhwareact, mundoquenaoexiste (e dicasfinanceirasdaia/assistiainvestimentos so para a persona Dicas Financeiras, com as regras do dono); acrescentar 'veo_max_dia_rede' (ex.: 3) e mandar o veo pelo diretor (notas por nicho) em vez de nota fixa 6, mantendo 1/canal/dia e nunca o mesmo video em 2 canais.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Dedupe de Shorts parecidos antes de subir",
+   "fonte": "D:\\manhwa-react\\mr\\memoria.py (hash de quadros + trigramas de texto)",
+   "como_adaptar": "No inventario da fonte 'veo', descartar limpos cuja fala tenha trigramas quase iguais a outro ja postado nos ultimos 30 dias (mesma persona repete frases: 'O oceano esconde...') e cujo hash de quadros bata com video ja publicado; registra em limpos\\<nome>.json revisar='duplicado'.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "SEO sem template para o veo: Thompson por estilo de titulo + palavras buscadas",
+   "fonte": "D:\\hipercool-videos\\bin\\seo.py (Thompson por estilo; autocompletar publico) e docs\\MELHORIAS_PARA_TODOS_OS_PROJETOS.md; D:\\manhwa-react\\mr\\rede.py:323-343 ESTRATEGIAS",
+   "como_adaptar": "Para fonte 'veo', alimentar o agente do canal com 2-3 sugestoes do autocompletar (suggestqueries, permitido) sobre o tema da fala e registrar o braco de titulo usado; o aprendizado de 48 h ja existe (rede_aprendizado/aprendizado_global).",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Medir o veo limpo antes de escalar",
+   "fonte": "bin\\notificar_telegram.py:598-664 medir_48h (origem 'veo limpo' ja prevista); _analise\\aprendizado_global.json; bin\\painel_canais.py",
+   "como_adaptar": "Regra operacional: manter 1 veo/dia na rede ate ter n>=10 medidas de 'veo limpo'; so ampliar canais/teto se mediana de 48 h >= 50% da mediana do react no mesmo canal. Expor 'veo limpo' no resumo diario do Telegram.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Alerta de volume e de politica no Telegram",
+   "fonte": "bin\\notificar_telegram.py (checar_logs/avisos_projetos); logs\\uploads_ledger.jsonl",
+   "como_adaptar": "A cada rodada: avisar se algum canal passou de 3 uploads no dia, se dois uploads do mesmo canal sairam com menos de 1 h, ou se politica.json difere do padrao de seguranca. Teria pego o afrouxamento de 14/10 e a rajada de 15/10.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Extras do Studio para os veo limpos (comentario fixado, capa A/B)",
+   "fonte": "D:\\postador-de-videos\\bin\\youtube_studio_extras.py (comentar_fixar, teste_ab); D:\\hipercool-videos\\bin\\capa_ia.py",
+   "como_adaptar": "Depois que o video abre, usar comentar_fixar com o 'comentario' que o agente ja gera (hoje a rede comenta pela API e falha com 403 em alguns canais) e, quando o canal estiver verificado, teste A/B de 2-3 capas geradas a partir de um quadro do proprio Veo.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Atualizar LEIA.txt/HANDOFF com a realidade da politica e dos caminhos",
+   "fonte": "D:\\postador-de-videos\\LEIA.txt:162-181; D:\\manhwa-react\\HANDOFF_REDE.md:81-110,154-166",
+   "como_adaptar": "Registrar os valores reais de politica.json (e quem pode muda-los), que ela e global, que o caminho antigo esta dormente e como desliga-lo, e a lista atual de canais ativos/hipercool/pausados.",
+   "esforco": "P"
+  }
+ ],
+ "perguntas_abertas": [
+  "A dona autoriza veo_so_limpo=true no TikTok e no Instagram (hoje o COMPLETO com WhatsApp ainda sai; config\\reuso_plataformas.json diz 'desligado ate o dono decidir')?",
+  "Quem afrouxou config\\politica.json para 10/50/0 h em 14/10 11:55 (o hipercool documenta o intervalo 0): voltar para 3/12/2 h para todos ou separar limites por projeto?",
+  "Os recursos dos 22 canais suspensos foram enviados? Algum voltou? (o checklist de LISTA_CANAIS_SUSPENSOS_COM_EMAILS.md esta todo desmarcado; inovaremanhwaverseviet aparece como 'liberado')",
+  "Qual texto de CTA (formula.cta) foi realmente anexado as descricoes dos VO3 postados antes do banimento? Nao achei json de formulas/vencedoras com o campo cta em D:\\veo\\beta\\logs.",
+  "Dos brutos de 8 s em veo_videos_iniciais, quantos sao realmente gerados pela dona e quantos vieram do TikTok/terceiros? O detector pegou 6; a origem dos outros 152 limpos aprovados automaticamente nao foi confirmada quadro a quadro.",
+  "A dona quer o veo em mais canais da rede (mundoquenaoexiste e os financeiros) e com que teto diario na rede toda?",
+  "Pode migrar ManhwaReact, Animescomia, ForjaReact, MundoQueNaoExiste e Fio da Meada para upload pelo navegador (precisa logar os perfis), tirando o projeto OAuth compartilhado do caminho?",
+  "O que aconteceu no ciclo das 06:40 de 15/10 (sem 'Fim TikTok', LastTaskResult 0x8007042B, erro em tiktok_cdp_poster.py:67 e 'nenhum Chrome disponivel')? As etapas Instagram/limpar_usados rodaram?",
+  "Os 8 uploads em 42 min no InovareManhwaVerse (15/10) sao intencionais na fila do hipercool? O canal pt nao deveria ter o mesmo espacamento dos canais de lingua?",
+  "Quando (e se) a geracao do veo voltar (PAUSE_SYSTEM desde 12/10), a saida deve continuar indo para video_cache/postar.json (caminho antigo) ou direto para limpos\\ + json no formato da rede?"
+ ]
+}

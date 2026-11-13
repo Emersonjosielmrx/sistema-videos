@@ -1,0 +1,543 @@
+{
+ "part": [
+  91.72,
+  154.466667
+ ],
+ "keeps": [
+  [
+   92.870854,
+   93.321042
+  ],
+  [
+   106.329437,
+   111.933604
+  ],
+  [
+   112.667875,
+   116.76902100000001
+  ],
+  [
+   116.896812,
+   120.168937
+  ],
+  [
+   124.17383299999999,
+   126.523812
+  ],
+  [
+   131.377042,
+   132.405562
+  ],
+  [
+   141.5975,
+   142.13591699999998
+  ],
+  [
+   150.299104,
+   154.466667
+  ]
+ ],
+ "duration_out": 21.512105000000048,
+ "zoom": [
+  [
+   1.481,
+   5.631,
+   1
+  ],
+  [
+   5.481,
+   5.911,
+   2
+  ],
+  [
+   6.506,
+   10.656,
+   1
+  ],
+  [
+   10.506,
+   14.656,
+   2
+  ],
+  [
+   14.506,
+   15.644,
+   1
+  ],
+  [
+   17.545,
+   21.512,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   9.556480000000018,
+   10.706480000000019
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 9.606480000000019,
+   "text": "BABACA",
+   "emoji": "🤦"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 9.606480000000019,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\MK Get Over Here - Efeitos Sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 15.473793000000043,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\39- MORRI.mp3"
+  },
+  {
+   "t": 19.012105000000048,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 9.50648000000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 9.50648000000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_anger.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 9.606480000000019,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f926_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 15.473793000000043,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_2620_fe0f_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 19.012105000000048,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_subscribe.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk da deep web (Original).mp3",
+ "meta": {
+  "hook": "MÉDICO NA AMBULÂNCIA? NO BRASIL NEM PENSAR",
+  "title": "No Brasil nem enfermeiro vai na ambulância 😂🇧🇷 #shorts #react",
+  "description": "O criador reage a mais uma história curta animada e compara com a realidade brasileira: médico na ambulância? Aqui mal vai um socorrista!\nTodas essas histórias têm uma lição no final. Qual te marcou mais?\nSegue pra mais reacts assim!\n\n#shorts #react #brasil #ambulancia #historiacurta #licaodevida #animacao #drama #moral #reagindo #viral #comparacao #realidade #saude",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#brasil",
+   "#ambulancia",
+   "#historiacurta",
+   "#licaodevida",
+   "#animacao",
+   "#drama",
+   "#moral",
+   "#reagindo",
+   "#viral",
+   "#comparacao",
+   "#realidade",
+   "#saude"
+  ],
+  "tags": [
+   "react",
+   "brasil",
+   "ambulância",
+   "história curta",
+   "lição de vida",
+   "animação",
+   "drama",
+   "moral",
+   "reagindo",
+   "shorts",
+   "saúde brasil",
+   "realidade brasileira",
+   "react brasil",
+   "história animada",
+   "viral",
+   "comparação",
+   "socorrista",
+   "enfermeiro"
+  ],
+  "cta": "Comenta a sua história!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Na sua cidade, quem vai na ambulância? Médico ou só socorrista? 🚑",
+  "title_alternatives": [
+   "Aqui no Brasil mal vai socorrista na ambulância 😅 #shorts #react",
+   "Essas histórias sempre têm uma lição no final 📖 #shorts #react"
+  ],
+  "work": null,
+  "channel": "historiasemframes"
+ },
+ "channel": "historiasemframes",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1490_56_7.png",
+  "overlap": 56,
+  "y": 486,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_e8b04b_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "que",
+   "s": 1.4807510000000121,
+   "e": 1.660751000000019,
+   "p": 0.9,
+   "lip": 0.019708968423476525,
+   "speaker": "creator"
+  },
+  {
+   "w": "um",
+   "s": 1.660751000000019,
+   "e": 1.8007510000000195,
+   "p": 0.9,
+   "lip": 0.018183180184557283,
+   "speaker": "creator"
+  },
+  {
+   "w": "médico",
+   "s": 1.8007510000000195,
+   "e": 2.200751000000011,
+   "p": 0.9,
+   "lip": 0.014786696995618683,
+   "speaker": "creator"
+  },
+  {
+   "w": "numa",
+   "s": 2.200751000000011,
+   "e": 2.480751000000012,
+   "p": 0.9,
+   "lip": 0.013308362783016666,
+   "speaker": "creator"
+  },
+  {
+   "w": "ambulância?",
+   "s": 2.480751000000012,
+   "e": 3.3207510000000156,
+   "p": 0.9,
+   "lip": 0.00696353726566545,
+   "speaker": "creator"
+  },
+  {
+   "w": "Aqui",
+   "s": 3.3207510000000156,
+   "e": 4.780751000000009,
+   "p": 0.9,
+   "lip": 0.008679876681808396,
+   "speaker": "creator"
+  },
+  {
+   "w": "no",
+   "s": 4.780751000000009,
+   "e": 5.020751000000018,
+   "p": 0.9,
+   "lip": 0.02051904628399913,
+   "speaker": "creator"
+  },
+  {
+   "w": "Brasil...",
+   "s": 5.020751000000018,
+   "e": 5.760751000000013,
+   "p": 0.9,
+   "lip": null,
+   "speaker": "creator"
+  },
+  {
+   "w": "no",
+   "s": 6.506480000000025,
+   "e": 6.7264800000000236,
+   "p": 0.9,
+   "lip": 0.014967580173678456,
+   "speaker": "creator"
+  },
+  {
+   "w": "Brasil",
+   "s": 6.7264800000000236,
+   "e": 7.2264800000000236,
+   "p": 0.9,
+   "lip": 0.020889838786304175,
+   "speaker": "creator"
+  },
+  {
+   "w": "mal",
+   "s": 7.2264800000000236,
+   "e": 7.666480000000021,
+   "p": 0.9,
+   "lip": 0.02375331179409003,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 7.666480000000021,
+   "e": 8.106480000000019,
+   "p": 0.9,
+   "lip": 0.02665942642880205,
+   "speaker": "creator"
+  },
+  {
+   "w": "um",
+   "s": 8.106480000000019,
+   "e": 8.326480000000018,
+   "p": 0.9,
+   "lip": 0.02075804117782307,
+   "speaker": "creator"
+  },
+  {
+   "w": "socorrista.",
+   "s": 8.326480000000018,
+   "e": 10.086480000000023,
+   "p": 0.9,
+   "lip": 0.007235216656915778,
+   "speaker": "creator"
+  },
+  {
+   "w": "Vai",
+   "s": 10.298689000000039,
+   "e": 10.55868900000003,
+   "p": 0.9,
+   "lip": 0.022197580725940174,
+   "speaker": "creator"
+  },
+  {
+   "w": "nem",
+   "s": 10.55868900000003,
+   "e": 10.71869900000003,
+   "p": 0.9,
+   "lip": 0.03049997860685555,
+   "speaker": "creator"
+  },
+  {
+   "w": "enfermeiro,",
+   "s": 10.71869900000003,
+   "e": 11.918689000000029,
+   "p": 0.9,
+   "lip": 0.02024308071000894,
+   "speaker": "creator"
+  },
+  {
+   "w": "na",
+   "s": 11.918689000000029,
+   "e": 12.118689000000032,
+   "p": 0.9,
+   "lip": 0.009390920496632852,
+   "speaker": "creator",
+   "w_orig": "uma"
+  },
+  {
+   "w": "maioria",
+   "s": 12.118689000000032,
+   "e": 12.298689000000039,
+   "p": 0.9,
+   "lip": 0.009519762740801869,
+   "speaker": "creator"
+  },
+  {
+   "w": "das",
+   "s": 12.298689000000039,
+   "e": 12.498694000000029,
+   "p": 0.9,
+   "lip": 0.009102366740630752,
+   "speaker": "creator"
+  },
+  {
+   "w": "vezes.",
+   "s": 12.498694000000029,
+   "e": 13.427626000000032,
+   "p": 0.9,
+   "lip": 0.0023413639805669557,
+   "speaker": "creator"
+  },
+  {
+   "w": "mas",
+   "s": 13.753793000000044,
+   "e": 13.953793000000047,
+   "p": 0.9,
+   "lip": 0.01102864313137047,
+   "speaker": "creator"
+  },
+  {
+   "w": "aí",
+   "s": 13.953793000000047,
+   "e": 14.093793000000048,
+   "p": 0.9,
+   "lip": 0.010467165237159497,
+   "speaker": "creator"
+  },
+  {
+   "w": "também",
+   "s": 14.093793000000048,
+   "e": 14.373793000000049,
+   "p": 0.9,
+   "lip": 0.010458468662206297,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 14.373793000000049,
+   "e": 14.49379800000004,
+   "p": 0.9,
+   "lip": 0.0084098871128374,
+   "speaker": "creator"
+  },
+  {
+   "w": "muito",
+   "s": 14.49379800000004,
+   "e": 14.65379300000005,
+   "p": 0.9,
+   "lip": 0.011711341243263954,
+   "speaker": "creator"
+  },
+  {
+   "w": "babaca,",
+   "s": 14.65379300000005,
+   "e": 15.313793000000047,
+   "p": 0.9,
+   "lip": 0.00561192286010332,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 15.313793000000047,
+   "e": 15.49379800000004,
+   "p": 0.9,
+   "lip": 0.0014473338363409935,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ó,",
+   "s": 17.545438000000047,
+   "e": 17.84543800000006,
+   "p": 0.9,
+   "lip": 0.00800964061355821,
+   "speaker": "creator"
+  },
+  {
+   "w": "tá",
+   "s": 17.84543800000006,
+   "e": 18.00542800000005,
+   "p": 0.9,
+   "lip": 0.006147706155674083,
+   "speaker": "creator"
+  },
+  {
+   "w": "vendo",
+   "s": 18.00542800000005,
+   "e": 18.285428000000053,
+   "p": 0.9,
+   "lip": 0.00531982284793267,
+   "speaker": "creator",
+   "w_orig": "isso."
+  },
+  {
+   "w": "Todos",
+   "s": 18.285428000000053,
+   "e": 19.14543800000004,
+   "p": 0.9,
+   "lip": 0.008652088630160799,
+   "speaker": "creator"
+  },
+  {
+   "w": "esses",
+   "s": 19.14543800000004,
+   "e": 19.34543800000006,
+   "p": 0.9,
+   "lip": 0.013527599395575157,
+   "speaker": "creator"
+  },
+  {
+   "w": "são",
+   "s": 19.34543800000006,
+   "e": 19.485438000000045,
+   "p": 0.9,
+   "lip": 0.013390883755754753,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 19.485438000000045,
+   "e": 19.62543800000006,
+   "p": 0.9,
+   "lip": 0.013311419893373477,
+   "speaker": "creator"
+  },
+  {
+   "w": "lição,",
+   "s": 19.62543800000006,
+   "e": 20.16543800000005,
+   "p": 0.9,
+   "lip": 0.009770536315759578,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 20.16543800000005,
+   "e": 20.285428000000053,
+   "p": 0.9,
+   "lip": 0.007165879836329492,
+   "speaker": "creator"
+  },
+  {
+   "w": "isso",
+   "s": 20.285428000000053,
+   "e": 20.40543800000006,
+   "p": 0.9,
+   "lip": 0.011690285623900093,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 20.40543800000006,
+   "e": 20.50542800000005,
+   "p": 0.9,
+   "lip": 0.011593845411491813,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 20.50542800000005,
+   "e": 20.58542800000005,
+   "p": 0.9,
+   "lip": 0.011018139020726778,
+   "speaker": "creator"
+  },
+  {
+   "w": "acho",
+   "s": 20.565438000000057,
+   "e": 20.645438000000055,
+   "p": 0.9,
+   "lip": 0.010505579431112461,
+   "speaker": "creator"
+  },
+  {
+   "w": "bacana.",
+   "s": 20.60543800000005,
+   "e": 21.40543800000006,
+   "p": 0.9,
+   "lip": 0.007046663552648467,
+   "speaker": "creator"
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "claude-code-video-remotion",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Base Remotion: o Claude Code escreve src/videos/<id>/Video.tsx a cada vídeo",
+  "scripts": {
+    "render": "remotion render"
+  },
+  "dependencies": {
+    "@react-three/fiber": "8.17.10",
+    "@remotion/captions": "4.0.538",
+    "@remotion/cli": "4.0.538",
+    "@remotion/google-fonts": "4.0.538",
+    "@remotion/layout-utils": "4.0.538",
+    "@remotion/lottie": "4.0.538",
+    "@remotion/media-utils": "4.0.538",
+    "@remotion/motion-blur": "4.0.538",
+    "@remotion/noise": "4.0.538",
+    "@remotion/paths": "4.0.538",
+    "@remotion/shapes": "4.0.538",
+    "@remotion/three": "4.0.538",
+    "@remotion/transitions": "4.0.538",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.538",
+    "three": "0.169.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "@types/three": "0.169.0",
+    "typescript": "5.6.3"
+  }
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Hipercool Control Station</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f1117;color:#e0e0e0;font-family:Segoe UI,sans-serif;padding:10px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:#1a1d28;border-radius:8px;margin-bottom:12px}
+.header h1{font-size:16px;color:#22d3ee}
+.header .info{font-size:12px;color:#888}
+#conn-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#34d399;margin-right:6px}
+#conn-dot.off{background:#f87171}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:10px}
+.card{background:#1a1d28;border:1px solid #2a2d38;border-radius:8px;padding:12px}
+.card h2{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.mono{font-family:Consolas,monospace;font-size:12px}
+.row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.item{background:#12141c;padding:4px 8px;border-radius:4px;font-size:12px}
+.item .label{color:#888;font-size:10px}
+.item .val{font-family:Consolas,monospace;font-weight:bold}
+.pbar{background:#12141c;border-radius:4px;height:20px;position:relative;overflow:hidden;margin:6px 0}
+.pbar-fill{height:100%;background:linear-gradient(90deg,#22d3ee,#a78bfa);border-radius:4px;transition:width 0.3s}
+.pbar-text{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:Consolas,monospace;color:#fff}
+.log-box{background:#0a0c12;border-radius:4px;padding:6px;max-height:180px;overflow-y:auto;font-family:Consolas,monospace;font-size:11px;line-height:1.5}
+.log-line{padding:1px 4px}
+.log-line.error{color:#f87171}
+.log-line.tts{color:#a78bfa}
+.log-line.clip{color:#22d3ee}
+.badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;font-family:Consolas,monospace;background:#2a2d38}
+.badge.green{color:#34d399}.badge.red{color:#f87171}.badge.yellow{color:#fbbf24}
+.btn{border:none;padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer;margin:2px}
+.btn-pause{background:#3d3200;color:#fbbf24}.btn-pause.active{background:#fbbf24;color:#000}
+.btn-skip{background:#0a2a30;color:#22d3ee}
+.btn-stop{background:#2a0a0a;color:#f87171}
+.btn-action{background:#2a2d38;color:#e0e0e0;font-size:12px;padding:3px 6px}
+.cap-item{display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;margin:2px;background:#12141c}
+.cap-item.done{border-left:3px solid #34d399}.cap-item.active{border-left:3px solid #22d3ee;background:#0a2a30}
+.keys-grid{display:flex;flex-wrap:wrap;gap:3px}
+.key-dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+.key-dot.ok{background:#34d399}.key-dot.quota{background:#fbbf24}.key-dot.blocked{background:#f87171}
+.video-item{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #2a2d38;font-size:11px}
+.worker-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.worker-dot.online{background:#34d399}.worker-dot.offline{background:#f87171}
+#toast-area{position:fixed;top:50px;right:12px;z-index:200}
+.toast{background:#1a1d28;border:1px solid #34d399;border-radius:6px;padding:8px 12px;font-size:11px;margin-bottom:6px}
+.ctrl-status{display:inline-block;width:6px;height:6px;border-radius:50%;background:#34d399;margin-left:6px}
+.ctrl-status.paused{background:#fbbf24}.ctrl-status.stopped{background:#f87171}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>HIPERCOOL CONTROL STATION</h1>
+  <div class="info"><span id="conn-dot"></span> <span id="clock">--:--:--</span></div>
+</div>
+<div id="toast-area"></div>
+<div class="grid">
+  <div class="card"><h2>Hardware</h2>
+    <div class="row">
+      <div class="item"><div class="label">CPU</div><div class="val" id="hw-cpu">--%</div></div>
+      <div class="item"><div class="label">RAM</div><div class="val" id="hw-ram">--%</div></div>
+      <div class="item"><div class="label">GPU</div><div class="val" id="hw-gpu">--%</div></div>
+      <div class="item"><div class="label">Disco</div><div class="val" id="hw-disk">--</div></div>
+      <div class="item"><div class="label">FFmpeg</div><div class="val" id="hw-ffmpeg">0</div></div>
+      <div class="item"><div class="label">Down</div><div class="val" id="hw-net-down">0</div></div>
+      <div class="item"><div class="label">Up</div><div class="val" id="hw-net-up">0</div></div>
+      <div class="item"><div class="label">Swap</div><div class="val" id="hw-swap">0</div></div>
+    </div>
+    <div class="pbar"><div class="pbar-fill" id="hw-cpu-bar" style="width:0%"></div><div class="pbar-text">CPU</div></div>
+    <div class="pbar"><div class="pbar-fill" id="hw-ram-bar" style="width:0%"></div><div class="pbar-text">RAM</div></div>
+    <div class="pbar"><div class="pbar-fill" id="hw-gpu-bar" style="width:0%"></div><div class="pbar-text">GPU</div></div>
+  </div>
+  <div class="card"><h2>Fila de Capitulos</h2>
+    <div class="row">
+      <div class="item"><div class="label">Obra</div><div class="val" id="fila-obra">--</div></div>
+      <div class="item"><div class="label">Progresso</div><div class="val" id="fila-progresso">0/0</div></div>
+      <div class="item"><div class="label">ETA</div><div class="val" id="fila-eta">--</div></div>
+    </div>
+    <div id="fila-caps"></div>
+  </div>
+  <div class="card"><h2>Capitulo Atual</h2>
+    <div class="row">
+      <div class="item"><div class="val" id="mon-cap">--</div></div>
+      <div class="item"><div class="label">Fase</div><div class="val" id="mon-fase">--</div></div>
+      <div class="item"><div class="label">ETA</div><div class="val" id="mon-eta">--</div></div>
+    </div>
+    <div class="pbar"><div class="pbar-fill" id="mon-pbar" style="width:0%"></div><div class="pbar-text" id="mon-pbar-text">0%</div></div>
+    <div class="row">
+      <div class="item"><div class="val" id="mon-tts-cache">Cache: 0</div></div>
+      <div class="item"><div class="val" id="mon-tts-new">Novos: 0</div></div>
+      <div class="item"><div class="val" id="mon-tts-total">Total: 0</div></div>
+    </div>
+  </div>
+  <div class="card"><h2>API Radar</h2>
+    <div class="row">
+      <div class="item"><div class="val" id="api-engine">--</div></div>
+      <div class="item"><div class="val" id="api-429">429: 0</div></div>
+      <div class="item"><div class="val" id="api-rots">Rot: 0</div></div>
+    </div>
+    <div id="api-status-html" style="font-size:11px;margin:4px 0">--</div>
+    <div class="row">
+      <div class="item"><div class="label">Gemini</div><div class="val" id="api-gemini-count">--</div></div>
+      <div class="item"><div class="label">Eleven</div><div class="val" id="api-eleven-count">--</div></div>
+    </div>
+  </div>
+  <div class="card"><h2>Chaves API <span id="keys-last-check" style="font-size:10px;color:#888"></span></h2>
+    <div style="margin-bottom:6px;font-size:10px;color:#888">Gemini:</div>
+    <div class="keys-grid" id="keys-gemini"></div>
+    <div style="margin:6px 0 4px;font-size:10px;color:#888">ElevenLabs:</div>
+    <div class="keys-grid" id="keys-eleven"></div>
+    <button class="btn btn-skip" id="keys-refresh-btn" onclick="refreshKeys()">Atualizar</button>
+  </div>
+  <div class="card"><h2>Controles</h2>
+    <div style="margin-top:6px;font-size:10px;color:#888">Geral <span class="ctrl-status" id="ctrl-general-status"></span></div>
+    <button class="btn btn-pause" id="btn-pause" onclick="sendCmd('pause','all')">Pause</button>
+    <button class="btn btn-skip" onclick="sendCmd('skip','all')">Skip</button>
+    <button class="btn btn-stop" onclick="sendCmd('stop','all')">Stop</button>
+    <div style="margin-top:6px;font-size:10px;color:#888">Audio <span class="ctrl-status" id="ctrl-audio-status"></span></div>
+    <button class="btn btn-pause" id="btn-pause-audio" onclick="sendCmd('pause','audio')">Pause</button>
+    <button class="btn btn-skip" onclick="sendCmd('skip','audio')">Skip</button>
+    <button class="btn btn-stop" onclick="sendCmd('stop','audio')">Stop</button>
+    <div style="margin-top:6px;font-size:10px;color:#888">Video <span class="ctrl-status" id="ctrl-video-status"></span></div>
+    <button class="btn btn-pause" id="btn-pause-video" onclick="sendCmd('pause','video')">Pause</button>
+    <button class="btn btn-skip" onclick="sendCmd('skip','video')">Skip</button>
+    <button class="btn btn-stop" onclick="sendCmd('stop','video')">Stop</button>
+    <div style="margin-top:6px;font-size:10px;color:#888">Worker <span class="ctrl-status" id="ctrl-worker-status"></span></div>
+    <button class="btn btn-pause" id="btn-pause-worker" onclick="sendCmd('pause','worker')">Pause</button>
+    <button class="btn btn-skip" onclick="sendCmd('skip','worker')">Skip</button>
+    <button class="btn btn-stop" onclick="sendCmd('stop','worker')">Stop</button>
+  </div>
+  <div class="card"><h2>Log</h2>
+    <div class="log-box" id="sys-log"><div class="log-line">Aguardando...</div></div>
+  </div>
+  <div class="card"><h2>Videos Recentes</h2>
+    <div id="video-list"><span style="color:#888;font-size:11px">Nenhum</span></div>
+  </div>
+  <div class="card"><h2>Estatisticas</h2>
+    <div class="row">
+      <div class="item"><div class="label">Tempo medio</div><div class="val" id="st-avg-time">--</div></div>
+      <div class="item"><div class="label">Videos</div><div class="val" id="st-videos">0</div></div>
+      <div class="item"><div class="label">Disco</div><div class="val" id="st-disk">--</div></div>
+      <div class="item"><div class="label">Min gerados</div><div class="val" id="st-minutos">0</div></div>
+      <div class="item"><div class="label">Erros</div><div class="val" id="st-erros">0</div></div>
+      <div class="item"><div class="label">Censura</div><div class="val" id="st-censura">0</div></div>
+      <div class="item"><div class="label">SFX</div><div class="val" id="st-sfx">0</div></div>
+      <div class="item"><div class="label">Memes</div><div class="val" id="st-memes">0</div></div>
+    </div>
+    <div style="margin-top:6px;font-size:10px;color:#888">Top Personas:</div>
+    <div id="st-personas" class="row"></div>
+  </div>
+  <div class="card"><h2>Ultimo Frame</h2>
+    <img id="tv-img" src="" alt="Preview" style="display:none;max-width:100%;border-radius:4px">
+    <div id="tv-empty" style="text-align:center;color:#888;padding:20px;font-size:12px">Sem preview</div>
+  </div>
+  <div class="card"><h2>Worker Remoto</h2>
+    <div><span class="worker-dot" id="worker-dot"></span><span class="mono" id="worker-label">--</span></div>
+    <div style="margin-top:6px;font-size:11px;color:#888" id="worker-task-info">Nenhuma tarefa</div>
+  </div>
+</div>
+<script>
+var D={},prevConcluidos=[];
+function $(id){return document.getElementById(id)}
+function sendCmd(a,t){var x=new XMLHttpRequest();x.open("POST","/api/command");x.setRequestHeader("Content-Type","application/json");x.send(JSON.stringify({action:a,target:t}))}
+function openPath(p){var x=new XMLHttpRequest();x.open("POST","/api/open");x.setRequestHeader("Content-Type","application/json");x.send(JSON.stringify({path:p}))}
+function refreshKeys(){var b=$("keys-refresh-btn");b.textContent="Atualizando...";b.disabled=true;setTimeout(function(){b.textContent="Atualizar";b.disabled=false},3000)}
+function showToast(m){var t=document.createElement("div");t.className="toast";t.textContent=m;$("toast-area").appendChild(t);setTimeout(function(){t.remove()},5000)}
+function setVal(id,txt){var el=$(id);if(el&&el.textContent!==txt)el.textContent=txt}
+function setCtrlBtn(id,active){var el=$(id);if(el){if(active)el.classList.add("active");else el.classList.remove("active")}}
+function updateCtrlStatus(id,paused,stopped){var el=$(id);if(!el)return;if(stopped)el.className="ctrl-status stopped";else if(paused)el.className="ctrl-status paused";else el.className="ctrl-status"}
+function renderKeys(c,keys){if(!c)return;if(!keys||!keys.length){c.innerHTML="--";return}var h="";for(var i=0;i<keys.length;i++){var k=keys[i];var s=k.status==="ok"?"ok":k.status==="quota"?"quota":"blocked";h+="<div class=\"key-dot "+s+"\" title=\"#"+k.id+" "+k.status+"\"></div>"}c.innerHTML=h}
+function classifyLog(line){var l=line.toLowerCase();if(l.indexOf("erro")>=0||l.indexOf("error")>=0||l.indexOf("429")>=0)return "error";if(l.indexOf("tts")>=0||l.indexOf("narr")>=0)return "tts";if(l.indexOf("clip")>=0||l.indexOf("ffmpeg")>=0)return "clip";return ""}
+
+function updateData(){
+  var x=new XMLHttpRequest();
+  x.open("GET","/data.json");
+  x.onload=function(){
+    if(x.status!==200){$("conn-dot").classList.add("off");return}
+    var data;try{data=JSON.parse(x.responseText)}catch(e){return}
+    $("conn-dot").classList.remove("off");
+    D=data;
+    document.title=(data.cap_pct||0)+"% Cap "+(data.cap_atual||"?")+" - Hipercool";
+    setVal("hw-cpu",(data.cpu||0)+"%");setVal("hw-ram",(data.ram||0)+"%");setVal("hw-gpu",(data.gpu_pct||0)+"%");
+    setVal("hw-disk",(data.disk_free||"--")+" GB");setVal("hw-ffmpeg",String(data.ffmpeg_count||0));
+    setVal("hw-net-down",(data.net_down||"0")+" MB/s");setVal("hw-net-up",(data.net_up||"0")+" MB/s");
+    setVal("hw-swap",(data.swap_used||0)+"/"+(data.swap_total||0)+"MB");
+    $("hw-cpu-bar").style.width=(data.cpu||0)+"%";$("hw-ram-bar").style.width=(data.ram||0)+"%";$("hw-gpu-bar").style.width=(data.gpu_pct||0)+"%";
+    setVal("fila-obra",data.obra||"--");setVal("fila-progresso",(data.feitos||0)+"/"+(data.totais||0));setVal("fila-eta","ETA "+(data.eta_lote||"--"));
+    var caps=data.lista_recentes||[];var done=data.concluidos||[];var atual=data.cap_atual;
+    var ch="";for(var i=0;i<caps.length;i++){var c=caps[i];var st=done.indexOf(c)>=0?"done":c===atual?"active":"";ch+="<span class=\"cap-item "+st+"\">"+(st==="done"?"OK":st==="active"?">>":"..")+" Cap "+c+"</span>"}
+    $("fila-caps").innerHTML=ch;
+    if(prevConcluidos.length&&done.length>prevConcluidos.length){for(var j=0;j<done.length;j++){if(prevConcluidos.indexOf(done[j])<0)showToast("Cap "+done[j]+" concluido!")}}
+    prevConcluidos=done.slice();
+    setVal("mon-cap","Cap "+(data.cap_atual||"--"));setVal("mon-fase",data.cap_fase||"--");setVal("mon-eta","ETA "+(data.cap_eta||"--"));
+    $("mon-pbar").style.width=(data.cap_pct||0)+"%";$("mon-pbar-text").textContent=(data.cap_pct||0)+"% "+(data.cap_progresso_txt||"");
+    setVal("mon-tts-cache","Cache: "+(data.tts_cache||0));setVal("mon-tts-new","Novos: "+(data.tts_new||0));setVal("mon-tts-total","Total: "+(data.tts_total||0));
+    setVal("api-engine","Engine: "+(data.api_engine||"--"));$("api-status-html").innerHTML=data.api_status||"--";
+    setVal("api-429","429: "+(data.api_429||0));setVal("api-rots","Rot: "+(data.api_rots||0));
+    var gOk=(data.gemini_keys_total||0)-(data.gemini_keys_blocked||0);setVal("api-gemini-count",gOk+"/"+(data.gemini_keys_total||0));
+    var eOk=(data.eleven_keys_total||0)-(data.eleven_keys_used||0);setVal("api-eleven-count",eOk+"/"+(data.eleven_keys_total||0));
+    var kh=data.keys_health||{};renderKeys($("keys-gemini"),kh.gemini);renderKeys($("keys-eleven"),kh.eleven);
+    if(kh.last_check)$("keys-last-check").textContent="Check: "+kh.last_check;
+    var cmds=data.commands_active||{};
+    setCtrlBtn("btn-pause",cmds.pause);setCtrlBtn("btn-pause-audio",cmds.pause_audio);setCtrlBtn("btn-pause-video",cmds.pause_video);setCtrlBtn("btn-pause-worker",cmds.pause_worker);
+    updateCtrlStatus("ctrl-general-status",cmds.pause,cmds.stop);updateCtrlStatus("ctrl-audio-status",cmds.pause_audio,cmds.stop_audio);
+    updateCtrlStatus("ctrl-video-status",cmds.pause_video,cmds.stop_video);updateCtrlStatus("ctrl-worker-status",cmds.pause_worker,cmds.stop_worker);
+    var logBox=$("sys-log");var lines=data.linhas_recentes||[];var lh="";
+    for(var li=0;li<lines.length;li++){lh+="<div class=\"log-line "+classifyLog(lines[li])+"\">"+lines[li]+"</div>"}
+    logBox.innerHTML=lh;logBox.scrollTop=logBox.scrollHeight;
+    var vids=data.recent_videos||[];var vh="";
+    for(var vi=0;vi<vids.length;vi++){var v=vids[vi];vh+="<div class=\"video-item\"><span>"+v.name+" <span class=\"badge\">"+(v.size||"")+"</span></span><span><button class=\"btn btn-action\" onclick=\"openPath('"+v.video+"')\">Play</button><button class=\"btn btn-action\" onclick=\"openPath('"+v.folder+"')\">Pasta</button></span></div>"}
+    $("video-list").innerHTML=vh||"<span style=\"color:#888;font-size:11px\">Nenhum</span>";
+    setVal("st-avg-time",data.stats_avg_time||"--");setVal("st-videos",String(data.stats_video_count||0));
+    setVal("st-disk",data.stats_disk_videos||"--");setVal("st-minutos",String(data.minutos_gerados||0));
+    setVal("st-erros",String(data.erros_vistos||0));setVal("st-censura",(data.censura_count||0)+" (N2: "+(data.censura_n2||0)+")");
+    setVal("st-sfx",String(data.sfx_count||0));setVal("st-memes",String(data.memes_count||0));
+    var personas=data.personas||[];var ph="";
+    for(var pi=0;pi<personas.length;pi++){ph+="<span class=\"badge green\">"+personas[pi].name+": "+personas[pi].count+"</span> "}
+    $("st-personas").innerHTML=ph;
+    var wOn=data.worker_online;$("worker-dot").className="worker-dot "+(wOn?"online":"offline");
+    setVal("worker-label",wOn?"Online "+(data.worker_cores||0)+" cores":"Offline");
+    $("worker-task-info").textContent=data.worker_task_info||data.worker_task||"Nenhuma tarefa";
+  };
+  x.onerror=function(){$("conn-dot").classList.add("off")};
+  x.send();
+}
+function updateImg(){var x=new XMLHttpRequest();x.open("GET","/img.json");x.onload=function(){if(x.status!==200)return;try{var d=JSON.parse(x.responseText);if(d.ultima_img_b64){$("tv-img").src="data:image/jpeg;base64,"+d.ultima_img_b64;$("tv-img").style.display="block";$("tv-empty").style.display="none"}else{$("tv-img").style.display="none";$("tv-empty").style.display="block"}}catch(e){}};x.send()}
+function updateClock(){$("clock").textContent=new Date().toLocaleTimeString("pt-BR")}
+updateClock();setInterval(updateClock,1000);
+updateData();setInterval(updateData,1000);
+updateImg();setInterval(updateImg,5000);
+</script>
+</body>
+</html>

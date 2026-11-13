@@ -1,0 +1,342 @@
+{
+ "video": "followupia_ia_20261110_100550.mp4",
+ "conta": "followupia.ia",
+ "marca": "Follow-up IA",
+ "titulo": "Como recuperar clientes que sumiram no WhatsApp",
+ "formato": "cinco_veo",
+ "veo_total": 3,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.5,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 3.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    11.61
+   ],
+   [
+    1,
+    "dono",
+    12.01
+   ],
+   [
+    2,
+    "veo",
+    25.22
+   ],
+   [
+    3,
+    "imagem",
+    13.86
+   ],
+   [
+    4,
+    "cartao",
+    8.65
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Enquadramento do apresentador excessivamente alto e aproximado, fazendo com que a pílula '(1) O problema' cubra a testa e a linha do cabelo do apresentador, além da tarja superior cobrir o topo da cabeça.",
+   "como_corrigir": "Reduzir o zoom ou abaixar a posição vertical do apresentador na cena 1, garantindo que o topo da cabeça fique abaixo de y=450 para que a tarja fixa e a pílula de tópico tenham respiro e não cubram seu rosto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Dois textos brigando por atenção e redundância visual: o cartão em destaque exibe 'fecho negócios' exatamente ao mesmo tempo em que a legenda karaokê logo abaixo exibe 'fecho negócios pelo'.",
+   "como_corrigir": "Ocultar a legenda karaokê na cena 3 enquanto os cartões com tópicos estiverem em tela, ou posicionar os cartões mais acima e ajustar o corte da fala para evitar a duplicação simultânea da mesma frase."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Jump cut seco no mesmo enquadramento entre a cena 0 e a cena 1, mantendo o apresentador no mesmo ângulo fixo por mais de 10 segundos seguidos (q01 a q06), gerando ritmo arrastado e falta de dinamismo visual.",
+   "como_corrigir": "Aplicar um punch-in digital (corte para escala de 1.15x a 1.20x) na transição da cena 1 para quebrar a monotonia do plano médio, ou alternar com b-roll dinâmico ilustrando a dor do cliente."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Uso de vídeo com cara de banco de imagem genérico desconectado do roteiro: mostra uma pessoa trabalhando com paletas de design gráfico enquanto a fala trata de IA fazendo follow-up automático no WhatsApp. Além disso, a cena fica quase 5 segundos sem nenhuma sobreposição ou animação de interface.",
+   "como_corrigir": "Substituir por uma simulação animada da interface do WhatsApp com selo 'Simulação', mostrando balões de mensagens de follow-up sendo enviados e respondidos automaticamente em ritmo ágil."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Cena completamente parada com foto estática de banco de imagem (escritório vazio sem pessoas). Não há movimento de câmera (sem Ken Burns/push-in), e os cartões de resultado ('recupero leads inativos' e 'fecho negócios') entram de forma rígida e permanecem congelados na tela por mais de 4 segundos.",
+   "como_corrigir": "Inserir movimento contínuo de câmera (push-in suave de 3% a 5% ao longo do bloco) e animar a entrada dos cartões com escala com overshoot/mola (spring) e efeito de preenchimento animado no ícone de check."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cartão final estático sobre vídeo reaproveitado da cena 2 escurecido. O botão de CTA 'Chame no direct' e os elementos de marca permanecem completamente imóveis por quase 3 segundos, sem reforço visual para a chamada para ação.",
+   "como_corrigir": "Adicionar animação de pulso sutil (loop de escala 1.0 -> 1.05 -> 1.0) ou efeito de brilho passando (shimmer/sheen) sobre o botão 'Chame no direct', além de entrada escalonada dos textos."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Transições secas e abruptas entre os cortes principais (q03 para q04, q06 para q07 e q09 para q10), sem fluidez ou conexão visual entre as diferentes fases do funil.",
+   "como_corrigir": "Utilizar transições fluidas de motion design entre os tópicos, como whip pans suaves com motion blur ou zooms rápidos de transição, mantendo o fluxo contínuo e acelerando o ritmo do Reel."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "O visual exibe criação de design gráfico em notebook, destoando da fala sobre follow-up automático no WhatsApp.",
+   "como_corrigir": "Trocar por simulação de conversa no WhatsApp com a IA reativando contato."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Visual desconectado do produto: mostra trabalho de design gráfico em vez do follow-up no WhatsApp.",
+   "como_corrigir": "Substituir o b-roll genérico por tela de conversa no WhatsApp com selo 'Simulação' mostrando a IA atuando."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Aspecto de slide amador: foto estática de escritório vazio com cartões flutuantes sem prova concreta.",
+   "como_corrigir": "Trocar o escritório vazio por notificações de vendas recuperadas ou métricas reais de conversão da IA."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Gancho nos primeiros 2 segundos com baixa energia e enquadramento estático, reduzindo retenção.",
+   "como_corrigir": "Aplicar zoom digital dinâmico no início e iniciar com entonação mais enfática na dor do cliente."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "crmchatwoot_ia_20261112_045401.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "sem_dono",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "mentoriasia_ia_20261112_063630.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261112_165224.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

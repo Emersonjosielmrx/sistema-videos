@@ -1,0 +1,601 @@
+{
+ "part": [
+  0.0,
+  54.8
+ ],
+ "keeps": [
+  [
+   0.0,
+   18.529896
+  ],
+  [
+   19.517417,
+   38.983625
+  ],
+  [
+   39.590208,
+   54.8
+  ]
+ ],
+ "duration_out": 53.205896,
+ "zoom": [
+  [
+   0.0,
+   2.61,
+   1
+  ],
+  [
+   10.2,
+   12.27,
+   2
+  ],
+  [
+   16.04,
+   20.19,
+   1
+  ],
+  [
+   20.04,
+   21.022,
+   2
+  ],
+  [
+   30.892,
+   34.242,
+   1
+  ],
+  [
+   38.226,
+   40.416,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   8.95,
+   10.1
+  ],
+  [
+   33.302479000000005,
+   34.452479000000004
+  ],
+  [
+   39.89589600000001,
+   41.045896000000006
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 9.0,
+   "text": "TRANSFORMAÇÃO",
+   "emoji": "🦸"
+  },
+  {
+   "t": 33.352479,
+   "text": "POWER RANGER",
+   "emoji": "⚡"
+  },
+  {
+   "t": 39.945896000000005,
+   "text": "SUMIU",
+   "emoji": "😱"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 9.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 13.5,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Headshot - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 16.0,
+   "file": "D:\\manhwa-react\\assets\\memes_audio\\video_com_zoom9EAJM.wav"
+  },
+  {
+   "t": 23.942653200000002,
+   "file": "D:\\manhwa-react\\assets\\sfx\\like.wav"
+  },
+  {
+   "t": 33.352479,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 39.945896000000005,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\JJBA - killer queen detonate sfx (jojo part 4) (128 kbps).mp3"
+  },
+  {
+   "t": 47.18589600000001,
+   "file": "D:\\manhwa-react\\assets\\memes_audio\\video_com_zoom5VYCA.wav"
+  },
+  {
+   "t": 48.625896000000004,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Fala direito filho da putaaaaaaa (meme).mp3"
+  },
+  {
+   "t": 50.705896,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 2.8,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_watchtoend.mov",
+   "dur": 1.7,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 8.9,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 9.0,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f9b8_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 13.4,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_confetti.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 13.5,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f525_220.png",
+   "dur": 1.4,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 16.0,
+   "file": "D:\\hipercool-materiais\\assets\\memes_img\\memes\\video_com_zoom9EAJM.mp4",
+   "dur": 1.91,
+   "png": false,
+   "video": true
+  },
+  {
+   "t": 23.942653200000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_likeburst.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 33.252479,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 33.352479,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_26a1_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 39.845896,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 39.845896,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_exclaim.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 39.945896000000005,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 47.18589600000001,
+   "file": "D:\\hipercool-materiais\\assets\\memes_img\\memes\\video_com_zoom5VYCA.mp4",
+   "dur": 1.91,
+   "png": false,
+   "video": true
+  },
+  {
+   "t": 48.525896,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_emojirain.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 48.625896000000004,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f602_220.png",
+   "dur": 1.4,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 50.705896,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk das Winx.mp3",
+ "meta": {
+  "hook": "ELE SE VESTIU PRA ENFRENTAR UMA BARATA",
+  "title": "Ele virou POWER RANGER pra enfrentar uma barata 😂🪳 #shorts #react",
+  "description": "O cara tem tanto pavor de barata que se vestiu inteiro tipo ninja Power Ranger pra enfrentar o bichinho... e quando ficou pronto, a barata SUMIU 😂🪳\nVocês também têm esse medo ou são corajosos? Comenta aí!\nSegue pra mais reacts absurdos!\n\n#shorts #react #barata #medo #powerranger #ninja #casal #humor #engraçado #viral #comédia #transformação #absurdo #casalcomédia #medodebarata",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#barata",
+   "#medo",
+   "#powerranger",
+   "#ninja",
+   "#casal",
+   "#humor",
+   "#engraçado",
+   "#viral",
+   "#comédia",
+   "#transformação"
+  ],
+  "tags": [
+   "react",
+   "barata",
+   "medo de barata",
+   "casal engraçado",
+   "power ranger",
+   "ninja",
+   "transformação",
+   "humor",
+   "comédia",
+   "viral",
+   "react engraçado",
+   "casal",
+   "absurdo",
+   "medo",
+   "shorts",
+   "react brasileiro",
+   "situação absurda",
+   "vídeo engraçado"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Vocês enfrentam barata na mão ou também viram Power Ranger? 🪳😂",
+  "title_alternatives": [
+   "Se vestiu de NINJA pra enfrentar uma barata e olha no que deu 🪳😂 #shorts #react",
+   "A barata SUMIU depois que ele virou Power Ranger 💀🪳 #shorts #humor"
+  ],
+  "work": null,
+  "channel": "mundoquenaoexiste"
+ },
+ "channel": "mundoquenaoexiste",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_c13cff_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Vamos",
+   "s": 0.0,
+   "e": 0.6,
+   "p": 0.9,
+   "lip": 0.004733019504994767,
+   "speaker": "creator"
+  },
+  {
+   "w": "ver,",
+   "s": 0.6,
+   "e": 0.78,
+   "p": 0.9,
+   "lip": 0.005129633528384672,
+   "speaker": "creator"
+  },
+  {
+   "w": "vídeo",
+   "s": 0.78,
+   "e": 1.04,
+   "p": 0.9,
+   "lip": 0.010716770535049103,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 1.04,
+   "e": 1.28,
+   "p": 0.9,
+   "lip": 0.014331375646704352,
+   "speaker": "creator"
+  },
+  {
+   "w": "barata.",
+   "s": 1.28,
+   "e": 2.46,
+   "p": 0.9,
+   "lip": 0.008646877509009903,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 10.2,
+   "e": 10.28,
+   "p": 0.9,
+   "lip": 0.014167110262999596,
+   "speaker": "creator"
+  },
+  {
+   "w": "filme",
+   "s": 10.26,
+   "e": 10.34,
+   "p": 0.9,
+   "lip": 0.011955030125404024,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 10.34,
+   "e": 10.46,
+   "p": 0.9,
+   "lip": 0.011464855841095472,
+   "speaker": "creator"
+  },
+  {
+   "w": "hoje,",
+   "s": 10.46,
+   "e": 10.78,
+   "p": 0.9,
+   "lip": 0.008063226536738738,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 10.78,
+   "e": 11.74,
+   "p": 0.9,
+   "lip": 0.004025978947301375,
+   "speaker": "creator"
+  },
+  {
+   "w": "Eu",
+   "s": 11.5,
+   "e": 12.12,
+   "p": 0.9,
+   "lip": 0.0033760483141886165,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 16.04,
+   "e": 16.32,
+   "p": 0.9,
+   "lip": 0.01061293733264541,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 16.14,
+   "e": 16.22,
+   "p": 0.9,
+   "lip": 0.0098801425804202,
+   "speaker": "creator"
+  },
+  {
+   "w": "ela",
+   "s": 16.16,
+   "e": 16.26,
+   "p": 0.9,
+   "lip": 0.009994380258094425,
+   "speaker": "creator"
+  },
+  {
+   "w": "me",
+   "s": 16.26,
+   "e": 16.38,
+   "p": 0.9,
+   "lip": 0.009475471141055162,
+   "speaker": "creator"
+  },
+  {
+   "w": "quer",
+   "s": 16.32,
+   "e": 16.8,
+   "p": 0.9,
+   "lip": 0.008684994199012332,
+   "speaker": "creator",
+   "w_orig": "hoje"
+  },
+  {
+   "w": "transformar.",
+   "s": 16.38,
+   "e": 16.48,
+   "p": 0.9,
+   "lip": 0.008605771672334063,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 16.8,
+   "e": 16.9,
+   "p": 0.9,
+   "lip": 0.008626240183094356,
+   "speaker": "creator"
+  },
+  {
+   "w": "foda.",
+   "s": 16.9,
+   "e": 17.5,
+   "p": 0.9,
+   "lip": 0.005257413245292023,
+   "speaker": "creator"
+  },
+  {
+   "w": "Transformação!",
+   "s": 17.5,
+   "e": 20.872479000000002,
+   "p": 0.9,
+   "lip": 0.0019197419668159478,
+   "speaker": "creator"
+  },
+  {
+   "w": "Haja",
+   "s": 22.972479000000003,
+   "e": 23.252479,
+   "p": 0.9,
+   "lip": 0.0023688095160094903,
+   "speaker": "creator",
+   "w_orig": "Calça"
+  },
+  {
+   "w": "É",
+   "s": 30.892479,
+   "e": 31.052479,
+   "p": 0.9,
+   "lip": 0.016127570905846607,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 31.052479,
+   "e": 31.232479,
+   "p": 0.9,
+   "lip": 0.01640642107678483,
+   "speaker": "creator"
+  },
+  {
+   "w": "mistura",
+   "s": 31.232479,
+   "e": 31.632479,
+   "p": 0.9,
+   "lip": 0.011264219207606159,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 31.632479,
+   "e": 32.092479,
+   "p": 0.9,
+   "lip": 0.014359926048515992,
+   "speaker": "creator"
+  },
+  {
+   "w": "Power",
+   "s": 32.092479,
+   "e": 32.312478999999996,
+   "p": 0.9,
+   "lip": 0.013556444120258273,
+   "speaker": "creator"
+  },
+  {
+   "w": "Rangers",
+   "s": 32.312478999999996,
+   "e": 32.852479,
+   "p": 0.9,
+   "lip": 0.01039439286261191,
+   "speaker": "creator"
+  },
+  {
+   "w": "com...",
+   "s": 32.852479,
+   "e": 33.352479,
+   "p": 0.9,
+   "lip": 0.004057109861352547,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ultraman",
+   "s": 33.012479,
+   "e": 34.092479,
+   "p": 0.9,
+   "lip": 0.0032145677586130524,
+   "speaker": "creator",
+   "w_orig": "Último,"
+  },
+  {
+   "w": "Agora",
+   "s": 38.225896000000006,
+   "e": 38.46589600000001,
+   "p": 0.9,
+   "lip": 0.003117864578286477,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 38.46589600000001,
+   "e": 38.585896000000005,
+   "p": 0.9,
+   "lip": 0.0033181187019511982,
+   "speaker": "creator"
+  },
+  {
+   "w": "tô",
+   "s": 38.585896000000005,
+   "e": 38.665896000000004,
+   "p": 0.9,
+   "lip": 0.003376189968411932,
+   "speaker": "creator"
+  },
+  {
+   "w": "pronto,",
+   "s": 38.64589600000001,
+   "e": 39.025896,
+   "p": 0.9,
+   "lip": 0.0025901467600079903,
+   "speaker": "creator"
+  },
+  {
+   "w": "cadê",
+   "s": 39.025896,
+   "e": 39.165896000000004,
+   "p": 0.9,
+   "lip": 0.0022717911295066775,
+   "speaker": "creator"
+  },
+  {
+   "w": "essa",
+   "s": 39.165896000000004,
+   "e": 39.32589600000001,
+   "p": 0.9,
+   "lip": 0.0018072450156641645,
+   "speaker": "creator"
+  },
+  {
+   "w": "barata?",
+   "s": 39.32589600000001,
+   "e": 39.805896000000004,
+   "p": 0.9,
+   "lip": 0.0012956631356531108,
+   "speaker": "creator"
+  },
+  {
+   "w": "Então,",
+   "s": 39.82589600000001,
+   "e": 40.265896000000005,
+   "p": 0.9,
+   "lip": 0.0013495088340413533,
+   "speaker": "creator"
+  }
+ ]
+}

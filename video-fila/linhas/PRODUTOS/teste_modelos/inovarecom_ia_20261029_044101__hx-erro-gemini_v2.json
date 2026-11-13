@@ -1,0 +1,56 @@
+{
+ "modelo": "hx-erro-gemini",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T18:41:29",
+ "segundos": 1180,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:41:29",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "hx-erro-gemini",
+   "decisor": "hx-erro-gemini"
+  },
+  "achados": [
+   {
+    "tipo": "GOSTO",
+    "problema": "Variante 'dono_tres' mantém o apresentador nos 3 blocos narrativos (~27s) no mesmo plano sem telas de demonstração do produto ou WhatsApp.",
+    "prova": "dados.json formato 'dono_tres', histórico de notas recorrente em 4.0-5.0 em movimento nessa variante e juri_problemas cenas 1 e 2",
+    "sugestao": "Desligar ou reduzir o peso da variante 'dono_tres' em variantes_desligadas ou pesos_variantes para priorizar formatos com B-roll ou tela do produto",
+    "repetido": true
+   },
+   {
+    "tipo": "CERTEZA",
+    "problema": "Pílula de etapa ('1 O problema' / '2 Como funciona') encostando e sobrepondo o topo da cabeça e cabelo do apresentador (headroom estrangulado).",
+    "prova": "folha.jpg quadros 4, 6 e 8 e juri_problemas cena 1 diretor",
+    "sugestao": "Aumentar 'folga_dono' (atualmente 0.45) para 0.55 ou descer o enquadramento do apresentador para dar respiro acima do cabelo",
+    "repetido": false
+   },
+   {
+    "tipo": "GOSTO",
+    "problema": "Falta de elementos visuais entrando dinamicamente com a fala e cartão final estático com baixa retenção (movimento 4.63%).",
+    "prova": "dados.json júri movimento cena 4 (4.63%) e histórico com notas de movimento 4.0-5.0 em mais de 5 vídeos",
+    "sugestao": "Adicionar elementos gráficos sincronizados com a fala (ideia_codigo) nas cenas do dono e aumentar pulso_botao de 0.06 para 0.10 no cartão final",
+    "repetido": true
+   }
+  ],
+  "mudancas": [
+   {
+    "acao": "peso_variante",
+    "alvo": "dono_tres",
+    "valor": 0.4,
+    "motivo": "Formato dono_tres mantém 27s no mesmo enquadramento do apresentador sem mostrar tela do produto ou simulação, derrubando a nota de movimento repetidamente.",
+    "prova": "dados.json formato 'dono_tres', histórico de notas recorrente em 4.0-5.0 em movimento e juri_problemas cenas 1 e 2"
+   },
+   {
+    "acao": "ideia_codigo",
+    "alvo": "enquadramento_dono_topo",
+    "valor": "Descer o posicionamento vertical do vídeo do apresentador ou subir a pílula de etapa ('1 O problema' / '2 Como funciona') para abrir headroom e não cobrir o topo da cabeça/cabelo.",
+    "motivo": "A pílula de etapa está encostando e sobrepondo o topo da cabeça do apresentador (headroom estrangulado).",
+    "prova": "folha.jpg quadros 4, 6 e 8 e juri_problemas cena 1 diretor"
+   }
+  ],
+  "aprovadas": 2
+ }
+}

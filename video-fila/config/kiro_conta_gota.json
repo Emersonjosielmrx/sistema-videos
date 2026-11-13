@@ -1,0 +1,7 @@
+{
+ "robos_podem_usar_kiro": false,
+ "kiro_para_consertos": true,
+ "vigia_chama_conserto": true,
+ "consertos_kiro_por_dia": 6,
+ "_por_que": "26/10 dono: Kiro no conta-gota até dia 1. Gemini pra coisas menores (perguntas, vigia, aprendizado); Kiro só pras correções (propor/aplicar do painel; problema real do vigia vira conserto com Kiro, no máximo consertos_kiro_por_dia). Lido por ia_reserva."
+}

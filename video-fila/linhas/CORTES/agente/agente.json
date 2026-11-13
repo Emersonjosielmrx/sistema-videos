@@ -1,0 +1,9 @@
+{
+ "_leia": "Agente da linha CORTES (dona 27/10: 'sistema que substitui o chat a cada rodada, com os meus pedidos extras; abrir um chat pra falar com ele onde ele está; corrigir código com o modelo que eu passar; tirar quadros, cortar, corrigir e testar; mexer no PC2'). NÃO LIGADO até a dona mandar: ligado=false e tarefa Cortes_Agente desabilitada. 'modelo' = quem trabalha com as ferramentas (código, ffmpeg, PC2) — trocar pelo modelo de código que a dona passar. O Argon entra como ferramenta ask_argon (análise). Sem Opus nem Kiro (dona 27/10).",
+ "ligado": false,
+ "modelo": "argon-flash",
+ "modelo_reserva": "agy/gemini-3.8-flash-high",
+ "max_turnos_rodada": 80,
+ "timeout_rodada_s": 3600,
+ "sessao": "cdf822cc-8625-47e8-a6f1-faabb2611a9e"
+}

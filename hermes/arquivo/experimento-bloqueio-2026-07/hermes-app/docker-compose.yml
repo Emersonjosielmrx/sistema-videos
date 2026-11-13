@@ -1,0 +1,42 @@
+# Hermes Call REAL, isolado na VPS de teste (157.173.207.22) — SÓ pra investigar bloqueio.
+# Projeto/volumes próprios (prefixo hcbloq) pra não colidir com o Swarm existente.
+# Postgres NÃO publica porta no host (5432 já ocupado); fica interno na rede do compose.
+# Web/API em 8090 (8080 livre, mas uso 8090 pra deixar claro que é o de teste).
+# Mídia VoIP em 50000/udp (livre).
+#
+# Subir:  docker compose -p hcbloq up -d
+# Imagem: mesma publicada que roda em produção.
+
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: hermes_bloq
+      POSTGRES_PASSWORD: hermes_bloq
+      POSTGRES_DB: wacalls_main
+    volumes:
+      - hcbloq_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hermes_bloq -d wacalls_main"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: fabricadeautomacoesia/hermes-call:latest
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WACALLS_PG_URL: postgres://hermes_bloq:hermes_bloq@db:5432/wacalls_main?sslmode=disable
+      PORT: "8080"
+    # -debug: log verbose (DEBUG) pra capturar o ack cru da chamada (439/463, tctoken).
+    command: ["-addr", ":8080", "-static", "/app/client/dist", "-debug"]
+    ports:
+      - "8090:8080"
+      - "50000:50000/udp"
+
+volumes:
+  hcbloq_pg:

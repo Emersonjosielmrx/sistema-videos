@@ -1,0 +1,314 @@
+﻿
+[1/34] aulacomia...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[2/34] aulasrevolution...
+  Cloud Text-to-Speech: exige_2fa
+  Cloud Translation: exige_2fa
+  Cloud Vision: exige_2fa
+  Cloud Natural Language: exige_2fa
+  YouTube Data API v3: exige_2fa
+  Google Drive API: exige_2fa
+  Gmail API: exige_2fa
+  Google Sheets API: exige_2fa
+  Google Chat API: exige_2fa
+  (bloqueio de 2 etapas apareceu depois de abrir)
+  -> FALHA
+
+[3/34] canalalucinaai...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[4/34] canalhistoriacomia...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[5/34] comoseriasecomia...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[6/34] e4487017...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[7/34] emersongenc...
+  Cloud Text-to-Speech: erro
+  Cloud Translation: erro
+  Cloud Vision: erro
+  Cloud Natural Language: erro
+  YouTube Data API v3: erro
+  Google Drive API: erro
+  Gmail API: erro
+  Google Sheets API: erro
+  Google Chat API: erro
+  -> FALHA
+
+[8/34] emersongencshin...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[9/34] emersonjosiel1995...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[10/34] emersonjosiel649...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ja_ativa
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ja_ativa
+  Gmail API: ja_ativa
+  Google Sheets API: ja_ativa
+  Google Chat API: ja_ativa
+  -> OK
+
+[11/34] en1653964...
+  Cloud Text-to-Speech: exige_2fa
+  Cloud Translation: exige_2fa
+  Cloud Vision: exige_2fa
+  Cloud Natural Language: exige_2fa
+  YouTube Data API v3: exige_2fa
+  Google Drive API: exige_2fa
+  Gmail API: exige_2fa
+  Google Sheets API: exige_2fa
+  Google Chat API: exige_2fa
+  (bloqueio de 2 etapas apareceu depois de abrir)
+  -> FALHA
+
+[12/34] entrevistacomia...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[13/34] fabiovideoseducativos...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[14/34] fabricadeautomacoes0...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ja_ativa
+  Gmail API: ativada
+  Google Sheets API: ja_ativa
+  Google Chat API: ativada
+  -> OK
+
+[15/34] fabricadeautomacoesia...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ja_ativa
+  Gmail API: ja_ativa
+  Google Sheets API: ja_ativa
+  Google Chat API: ativada
+  -> OK
+
+[16/34] filmescomia1...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[17/34] gameoftroneskingsroadbrasil...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[18/34] inovarecap...
+  -> Page.goto: net::ERR_FAILED at https://console.cloud.google.com/
+Call log:
+  - navigating to "https://console.cloud.google.com/", waiting until "domcontentloaded"
+
+
+[19/34] inovaremanhwaverse...
+  -> Page.goto: net::ERR_FAILED at https://console.cloud.google.com/
+Call log:
+  - navigating to "https://console.cloud.google.com/", waiting until "domcontentloaded"
+
+
+[20/34] inovaremanhwaverseesp...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[21/34] inovaremanhwaverseviet...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[22/34] inovaremultiatendimento...
+  Cloud Text-to-Speech: exige_2fa
+  Cloud Translation: exige_2fa
+  Cloud Vision: exige_2fa
+  Cloud Natural Language: exige_2fa
+  YouTube Data API v3: exige_2fa
+  Google Drive API: exige_2fa
+  Gmail API: exige_2fa
+  Google Sheets API: exige_2fa
+  Google Chat API: exige_2fa
+  (bloqueio de 2 etapas apareceu depois de abrir)
+  -> FALHA
+
+[23/34] jogoscomia...
+  Cloud Text-to-Speech: exige_2fa
+  Cloud Translation: exige_2fa
+  Cloud Vision: exige_2fa
+  Cloud Natural Language: exige_2fa
+  YouTube Data API v3: exige_2fa
+  Google Drive API: exige_2fa
+  Gmail API: exige_2fa
+  Google Sheets API: exige_2fa
+  Google Chat API: exige_2fa
+  (bloqueio de 2 etapas apareceu depois de abrir)
+  -> FALHA
+
+[24/34] jornalcomia...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: nao_ativou (provável faturamento)
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: nao_ativou (provável faturamento)
+  -> OK
+
+[25/34] mentoriaiapro...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[26/34] mundosolar1995...
+  Cloud Text-to-Speech: botao_nao_encontrado
+  Cloud Translation: botao_nao_encontrado
+  Cloud Vision: botao_nao_encontrado
+  Cloud Natural Language: botao_nao_encontrado
+  YouTube Data API v3: botao_nao_encontrado
+  Google Drive API: botao_nao_encontrado
+  Gmail API: botao_nao_encontrado
+  Google Sheets API: botao_nao_encontrado
+  Google Chat API: botao_nao_encontrado
+  -> FALHA
+
+[27/34] murilodoctor192...
+  Cloud Text-to-Speech: exige_2fa
+  Cloud Translation: exige_2fa
+  Cloud Vision: exige_2fa
+  Cloud Natural Language: exige_2fa
+  YouTube Data API v3: exige_2fa
+  Google Drive API: exige_2fa
+  Gmail API: exige_2fa
+  Google Sheets API: exige_2fa
+  Google Chat API: exige_2fa
+  (bloqueio de 2 etapas apareceu depois de abrir)
+  -> FALHA
+
+[28/34] seebotsia...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[29/34] solarmundo195...
+  -> exige_2fa (ativar verificação em 2 etapas)
+
+[30/34] revolutionemerson1...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[31/34] revolutionemerson2...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[32/34] revolutionemerson3...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ja_ativa
+  Google Drive API: ativada
+  Gmail API: ativada
+  Google Sheets API: ativada
+  Google Chat API: ativada
+  -> OK
+
+[33/34] vendeafiliados3...
+  Cloud Text-to-Speech: exige_2fa
+  Cloud Translation: exige_2fa
+  Cloud Vision: exige_2fa
+  Cloud Natural Language: exige_2fa
+  YouTube Data API v3: exige_2fa
+  Google Drive API: exige_2fa
+  Gmail API: exige_2fa
+  Google Sheets API: exige_2fa
+  Google Chat API: exige_2fa
+  (bloqueio de 2 etapas apareceu depois de abrir)
+  -> FALHA
+
+[34/34] emersonjosielmrx1995...
+  Cloud Text-to-Speech: nao_ativou (provável faturamento)
+  Cloud Translation: ativada
+  Cloud Vision: ativada
+  Cloud Natural Language: nao_ativou (provável faturamento)
+  YouTube Data API v3: ativada
+  Google Drive API: ativada
+  Gmail API: nao_ativou (provável faturamento)
+  Google Sheets API: nao_ativou (provável faturamento)
+  Google Chat API: nao_ativou (provável faturamento)
+  -> OK
+
+14/34 contas com APIs ativadas

@@ -1,0 +1,25 @@
+{
+ "conta": "iapro.mentoria",
+ "marca": "IA Pro Mentoria",
+ "capa": "O que a IA realmente enxerga?",
+ "slides": [
+  {
+   "titulo": "Pixels viram números",
+   "texto": "Para a inteligência artificial, uma imagem colorida não passa de uma imensa tabela cheia de números que representam cores e posições exatas."
+  },
+  {
+   "titulo": "Linhas e formas",
+   "texto": "Nas primeiras camadas de análise, o sistema busca apenas identificar contornos básicos, cantos, sombras e transições simples de luz."
+  },
+  {
+   "titulo": "Montando padrões",
+   "texto": "Em seguida, essas formas geométricas se combinam para formar partes de objetos, como rodas, olhos ou texturas específicas de tecidos."
+  },
+  {
+   "titulo": "O reconhecimento final",
+   "texto": "Por fim, a rede neural cruza todas essas informações com sua base de dados para concluir o que está representado na tela."
+  }
+ ],
+ "legenda": "Descubra como a inteligência artificial processa imagens e enxerga o mundo digital.\nSalve este post para estudar depois.",
+ "gerado_em": "2026-11-08T09:18:09"
+}

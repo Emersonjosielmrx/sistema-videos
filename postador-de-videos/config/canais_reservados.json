@@ -1,0 +1,29 @@
+{
+  "_leia": "18/10: QUEM MANDA AGORA É config/canais.json (cadastro único, bin/canais.py: dono + alimentadores + max_dia); este arquivo só vale pra canal que não estiver lá. Canais que pertencem a um projeto: ficam FORA dos pools/rotação dos postadores (postar_tudo_hoje, postar_pos_final, agendar_vo3) e o youtube_poster.py só aceita upload neles com --projeto igual ao dono. Ids = campo id de D:\\credenciais-canais\\youtube_canais.json.",
+  "manhwa-react": [
+    "novo_mente_artificial_i5r",
+    "novo_universo_ia_d6s",
+    "novo_ia_agora_h3n"
+  ],
+  "hipercool": [
+    "0RW4rz4ekPpkPcZx",
+    "7zpNZNll2jlBnQ0J",
+    "8ROQmZVjbpwiwMoX",
+    "GG97QQt8lmyv0dDG",
+    "GtuH5ezUK8eBaC60",
+    "TkfzifstYEoG4jKg",
+    "UYjkdFO3V3kjmKU5",
+    "nYsAKUb3DbR1QOEm",
+    "q3mik36FjtTgFkNC",
+    "novo_inovaremanhwaverse",
+    "novo_manhwanoturno"
+  ],
+  "recapd": [
+    "novo_doramanoturno",
+    "novo_curiosidadesnoturnas",
+    "novo_filmenoturno"
+  ],
+  "comentarios": [
+    "novo_comedianoturna"
+  ]
+}

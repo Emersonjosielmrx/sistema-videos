@@ -1,0 +1,17 @@
+Narrador (voz clonada): mulher_maravilha
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_filmenoturno  |  título: A NAVE DESAPARECEU e SURGIU UM SER DESCONHECIDO
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-f9df42_cap1_20261024\video.mp4
+
+frase 0: francisca -5% | clima normal | tom +0 | index 0.7 | protect 0.22 | vol 0.72 | Pelos deuses do Olimpo, combatentes, eu acompanho o primeiro teste de uma nave capaz de al
+frase 1: kokoro x1.13 | clima acao | tom +1 | index 0.38 | protect 0.35 | vol 0.79 | No exato momento em que o motor é acionado, o veículo simplesmente desaparece diante dos n
+frase 2: francisca -15% | clima tensao | tom -1 | index 0.45 | protect 0.28 | vol 0.7 | O plano exigia apenas dois segundos de viagem ao redor do globo, mas dez minutos inteiros 
+frase 3: francisca -15% | clima tensao | tom -1 | index 0.45 | protect 0.28 | vol 0.66 | Ora vejam só, o pavor toma conta da equipe, que teme a desintegração total da máquina no v
+frase 4: francisca -15% | clima tensao | tom -1 | index 0.48 | protect 0.28 | vol 0.79 | Contudo, as pedras começam a levitar do chão, e eu ordeno imediatamente que todos recuem p
+frase 5: francisca -13% | clima epico | tom -1 | index 0.51 | protect 0.28 | vol 0.82 | Segundos depois, a nossa nave retorna rasgando o céu numa velocidade absurda, bem perto do
+frase 6: francisca -19% | clima vilao | tom -3 | index 0.78 | protect 0.22 | vol 0.72 | A comemoração dura pouco, pois uma nave desconhecida surge do nada e estilhaça a nossa cri
+frase 7: francisca -23% | clima terror | tom -2 | index 0.55 | protect 0.28 | vol 0.66 | A paralisia toma conta de todos nós, e dois companheiros da nossa equipe simplesmente desa
+frase 8: francisca -23% | clima terror | tom -2 | index 0.74 | protect 0.22 | vol 0.77 | Pela luz de Héstia, eu me viro e dou de cara com um ser extraterrestre armado logo atrás d
+frase 9: francisca -21% | clima normal | tom +0 | index 0.41 | protect 0.4 | vol 0.79 | O medo faz minhas pernas cederem, mas o alienígena apenas arremessa uma gema em minha dire
+frase 10: francisca -13% | clima epico | tom -1 | index 0.36 | protect 0.37 | vol 0.75 | Eu apanho o objeto e percebo a verdade: a nossa nave foi preservada por uma civilização al

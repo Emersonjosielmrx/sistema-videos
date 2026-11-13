@@ -1,0 +1,791 @@
+{
+  "titulo_video": "THE INHERITOR บทที่ 4: เขาบ้าไปแล้วเหรอ?!",
+  "tags": [
+    "manhwa",
+    "recaptutorial",
+    "the inheritor",
+    "manhwarecap",
+    "webtoon"
+  ],
+  "locucoes": [
+    {
+      "painel": 1,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พวกเรา เตรียมใจให้ดีนะ เพราะบรรยากาศในบทนี้ของ The Inheritor ร้อนแรงสุดๆ เลย!"
+    },
+    {
+      "painel": 2,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Hnngh..."
+    },
+    {
+      "painel": 3,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "นี่มันอะไรกัน?!"
+    },
+    {
+      "painel": 4,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันได้ยินอะไรนะ..."
+    },
+    {
+      "painel": 5,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ไม่ใช่เสียงครางเหรอ?"
+    },
+    {
+      "painel": 6,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เอ้า! ดูสิ ความกล้าของผู้หญิงคนนี้ เธอไม่กลัวถูกจับได้เหรอ?"
+    },
+    {
+      "painel": 7,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "อาจารย์..."
+    },
+    {
+      "painel": 8,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันไม่อยากเชื่อสายตาตัวเอง!"
+    },
+    {
+      "painel": 9,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ไม่นะ..."
+    },
+    {
+      "painel": 10,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "Joo Inhyuk ที่น่าสงสารกำลังประมวลผลทุกอย่าง แต่เรารู้ว่าเขาไม่สบายใจ"
+    },
+    {
+      "painel": 11,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "เธอกำลัง..."
+    },
+    {
+      "painel": 12,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พระเจ้า ระดับความตึงเครียดที่นี่พุ่งขึ้นถึงร้อยเปอร์เซ็นต์แล้ว!"
+    },
+    {
+      "painel": 13,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ช่วยตัวเองเหรอ?!"
+    },
+    {
+      "painel": 14,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ใจเย็นๆ พวกเรา เพราะนี่เป็นแค่จุดเริ่มต้นของคืนที่ไม่มีวันจบ"
+    },
+    {
+      "painel": 15,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Haa"
+    },
+    {
+      "painel": 16,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พวกเรา ความเงียบมันดังมากจนต้องฟัง!"
+    },
+    {
+      "painel": 17,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "บรรยากาศหนักอึ้งมากจนตัดได้ด้วยมีด!"
+    },
+    {
+      "painel": 18,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "และเธอก็ไม่หยุดแค่นั้น เพราะกำลังลงลึกเกินไป!"
+    },
+    {
+      "painel": 19,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "UGH...!"
+    },
+    {
+      "painel": 20,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พี่... ดูสภาพของผู้หญิงคนนี้สิ เพราะนี่มันไม่ปกติเลย!"
+    },
+    {
+      "painel": 21,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แต่เดี๋ยวก่อน เพราะที่แย่ที่สุดยังมาไม่ถึงในการโต้ตอบนี้!"
+    },
+    {
+      "painel": 22,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "...!!! ha... ot..."
+    },
+    {
+      "painel": 23,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ตอนนี้พวกเขาเผชิหน้ากัน Joo Inhyuk จะรุกมั้ย?"
+    },
+    {
+      "painel": 24,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เขาจะ... แน่นอน..."
+    },
+    {
+      "painel": 25,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทำไมคิดอย่างนั้น?"
+    },
+    {
+      "painel": 26,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ดูความไม่มั่นใจที่เข้ามาหาเธอ ที่กำลังสงสัยในเสน่ห์ของตัวเอง"
+    },
+    {
+      "painel": 27,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉันไม่มีเสน่ห์แบบนั้น... ที่จะทำแบบนั้น"
+    },
+    {
+      "painel": 28,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พวกคุณยังไม่พร้อมสำหรับสิ่งที่จะมาถึง จริงๆ นะ!"
+    },
+    {
+      "painel": 29,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ฉันน่าจะ..."
+    },
+    {
+      "painel": 30,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "สาวน้อยหัวเต็มไปด้วยความสงสัย น่าสงสาร"
+    },
+    {
+      "painel": 31,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เธอกำลังหาคำตอบในที่ที่ไม่มีมันอยู่จริงๆ พี่"
+    },
+    {
+      "painel": 32,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "?"
+    },
+    {
+      "painel": 33,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "และความลุ้นระทึกก็เพิ่มขึ้น เธอซ่อนอะไรอยู่?"
+    },
+    {
+      "painel": 34,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ขณะเดียวกัน ผู้ชายก็แค่มองดู กินเธอด้วยสายตา!"
+    },
+    {
+      "painel": 35,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ผู้ชายคนนั้น..."
+    },
+    {
+      "painel": 36,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Hnhhh"
+    },
+    {
+      "painel": 37,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Hang"
+    },
+    {
+      "painel": 38,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Nung-"
+    },
+    {
+      "painel": 39,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "คนนั้น... ไม่..."
+    },
+    {
+      "painel": 40,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ให้ตาย Joo Inhyuk กำลังต่อสู้กับความคิดของตัวเอง!"
+    },
+    {
+      "painel": 41,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "คิดถึงฉันในฐานะผู้หญิง..."
+    },
+    {
+      "painel": 42,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Aaahhh-"
+    },
+    {
+      "painel": 43,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "บ้าไปแล้ว การโต้ตอบนี้ผิดปกติสุดๆ!"
+    },
+    {
+      "painel": 44,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "สนใจในรายละเอียด ดูเธอเคลื่อนไหวยังไง พระเจ้า!"
+    },
+    {
+      "painel": 45,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Nnh... Ahhh ตอนนี้เลย..."
+    },
+    {
+      "painel": 46,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ถ้าฉัน..."
+    },
+    {
+      "painel": 47,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เลยผู้ชายแดงเหมือนพริก ตกใจสุดๆ!"
+    },
+    {
+      "painel": 48,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เปิดประตูนี้...!"
+    },
+    {
+      "painel": 49,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "และตรงนี้แหละที่ทุกอย่างเปลี่ยน การควบคุมหายไปไหนหมดแล้ว!"
+    },
+    {
+      "painel": 50,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "*กลืนน้ำลาย*"
+    },
+    {
+      "painel": 51,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ดูมือบนประตูนี่สิ ความลังเลนี่ฆ่าเราจริงๆ!"
+    },
+    {
+      "painel": 52,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ในความมืดสนิท เราได้ยินแค่ลมหายใจของพวกเขา... ทรมานใจ!"
+    },
+    {
+      "painel": 53,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "นี่จะระเบิดเมื่อไหร่ก็ได้ เลยติดตามกันไว้!"
+    },
+    {
+      "painel": 54,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ไม่ เราต้องสงบสติอารมณ์..."
+    },
+    {
+      "painel": 55,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "นี่เป็นครั้งแรกที่เห็นผู้หญิงคนนั้น..."
+    },
+    {
+      "painel": 56,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เขาพยายามฟื้นศักดิ์ศรี แต่ร่างกายไม่เชื่อฟัง!"
+    },
+    {
+      "painel": 57,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "เพราะฉะนั้นฉันทำแบบนี้ไม่ได้..."
+    },
+    {
+      "painel": 58,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ต้องกลับมามีสติ"
+    },
+    {
+      "painel": 59,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เขาจะทำได้มั้ย? สงสัยเหมือนกัน!"
+    },
+    {
+      "painel": 60,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "คุณจะหยุดตอนนี้จริงๆ เหรอ?"
+    },
+    {
+      "painel": 61,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉัน...!"
+    },
+    {
+      "painel": 62,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันทำไม่ได้!"
+    },
+    {
+      "painel": 63,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เลยความเงียบในห้องนี้หนาวสันหลัง พวกเรา"
+    },
+    {
+      "painel": 64,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ทันใดนั้น เสียงดังขึ้นและบรรยากาศก็แตกหัก!"
+    },
+    {
+      "painel": 65,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "อะไร?! เขาอดไม่ได้และรุกเข้าไปหาเธอ!"
+    },
+    {
+      "painel": 66,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "เอ้า คุณทำอะไรของคุณ?!"
+    },
+    {
+      "painel": 67,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ด้วยก้าวที่มั่นคง เธอกำลังเดินมาหาเขา!"
+    },
+    {
+      "painel": 68,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "*แดงขึ้นอีก*"
+    },
+    {
+      "painel": 69,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เข้าสู่ความตึงเครียดระดับสูงสุด เราเห็นว่าเกมพลิกแล้ว!"
+    },
+    {
+      "painel": 70,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "อ- อาจารย์?"
+    },
+    {
+      "painel": 71,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เธออาย แต่เรารู้ว่าเธออยากได้มากกว่านี้!"
+    },
+    {
+      "painel": 72,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "คุณบังเอิญ... ได้ยินฉันเหรอ?"
+    },
+    {
+      "painel": 73,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "หยุดได้แล้วตอนนี้!"
+    },
+    {
+      "painel": 74,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทำต่อในสิ่งที่กำลังทำอยู่"
+    },
+    {
+      "painel": 75,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "อะไรนะ? คุณต้องการจริงๆ เหรอ?"
+    },
+    {
+      "painel": 76,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พระเจ้า เพราะเธอกำลังยั่วเขาแบบเหนือจริง!"
+    },
+    {
+      "painel": 77,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "เสียง... ไม่ต้องสนใจหรอก..."
+    },
+    {
+      "painel": 78,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "แทนที่จะ... ฉันอยากเห็นคุณทำแบบนั้น"
+    },
+    {
+      "painel": 79,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "คุณจะนอนไม่หลับถ้าพยายามกลั้นไว้"
+    },
+    {
+      "painel": 80,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "งั้น... ทำต่อได้ คุณบอกว่า... คุณจะโชว์ให้ฉันดู"
+    },
+    {
+      "painel": 81,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "งั้น..."
+    },
+    {
+      "painel": 82,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แบบนี้ พวกเขาเข้าสู่ช่วงเวลาที่ไม่มีทางกลับแล้ว พวกเรา!"
+    },
+    {
+      "painel": 83,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันต้องบ้าไปแล้ว ฉันพูดอะไรไปเนี่ย?"
+    },
+    {
+      "painel": 84,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แล้วความเสียใจก็มาทันที แต่ตอนนี้สายเกินไปแล้ว!"
+    },
+    {
+      "painel": 85,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ฉันบอกผู้หญิงที่เพิ่งเจอกันครั้งแรกให้ฉันดูเธอช่วยตัวเองเหรอ??"
+    },
+    {
+      "painel": 86,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "ขณะเดียวกัน พระจันทร์อยู่บนนั้น เป็นพยานของความวุ่นวายทั้งหมดนี้!"
+    },
+    {
+      "painel": 87,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "กับกาต้มน้ำที่เดือด โลกภายนอกไม่รู้ว่าที่นี่เกิดอะไรขึ้น"
+    },
+    {
+      "painel": 88,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ขอโทษ... ฉันไม่ควรจะ..."
+    },
+    {
+      "painel": 89,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "คิดว่าเสียสติไปแล้ว ต้องบ้าแน่ๆ..."
+    },
+    {
+      "painel": 90,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ไปนอนซะ..."
+    },
+    {
+      "painel": 91,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "?!"
+    },
+    {
+      "painel": 92,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "홋, อาจารย์..."
+    },
+    {
+      "painel": 93,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เอ้า! ดูหน้าเธอสิ เพราะเธอไม่ได้มาเล่นๆ แน่ๆ!"
+    },
+    {
+      "painel": 94,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Hnnnh"
+    },
+    {
+      "painel": 95,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "Hnnng"
+    },
+    {
+      "painel": 96,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ขอบคุณ... อาจารย์...!"
+    },
+    {
+      "painel": 97,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "แบบนี้ ระดับความใกล้ชิดข้ามขีดจำกัดไปแล้ว ช่วยด้วย!"
+    },
+    {
+      "painel": 98,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พวกคุณเห็นสายตานี้มั้ย? ใช่ เธอหลงใหลแล้ว!"
+    },
+    {
+      "painel": 99,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "เลยโฟกัสไปที่ฉากนี้ทั้งหมด ที่จะอยู่ในประวัติศาสตร์"
+    },
+    {
+      "painel": 100,
+      "persona": "Noh Yeseul",
+      "gender": "F",
+      "text": "ขอบคุณ... ที่ให้คำสั่งฉัน!"
+    },
+    {
+      "painel": 101,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "เ-เธากำลังจะ..."
+    },
+    {
+      "painel": 102,
+      "persona": "Joo Inhyuk",
+      "gender": "M",
+      "text": "ทำจริงๆ เหรอ?!"
+    },
+    {
+      "painel": 103,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "พระเจ้า พวกเขาจะออกจากสถานการณ์นี้ได้ยังไงหลังจากคืนนี้?"
+    },
+    {
+      "painel": 104,
+      "persona": "Narrador",
+      "gender": "F",
+      "text": "บทจบที่นี่ แต่ความอยากรู้จะคงอยู่ทั้งสัปดาห์!"
+    }
+  ],
+  "descriptions": [
+    "Cena intensa.",
+    "Cena intensa com gemido \"Hnngh...\".",
+    "O jovem reage com surpresa e choque ao ouvir algo.",
+    "O jovem pensa e diz: \"O QUE TÔ OUVINDO AGORA...\".",
+    "O jovem conticena intensa a pensar e diz: \"NÃO SÃO GEMIDOS?\".",
+    "Uma pessoa toca o próprio corpo com expressão de prazer.",
+    "Ela diz: \"Mestre...\"",
+    "Close no rosto de alguém expressando choque ou surpresa.",
+    "Alguém diz: \"SERÁ QUE...\"",
+    "Ação de reflexão mental sobre uma situação específica.",
+    "Fundo com linhas de velocidade indica uma respiração pesada e suspense. Personagem fala: \"ELA TÁ...\"",
+    "Alguém em cena intensa está suspenso no ar com efeitos de eletricidade.",
+    "Fundo preto com balão de fala expressando choque. Alguém fala: \"SE MASTURBANDO?!\"",
+    "Uma página de crédito com título estilizado e informações sobre o site do artista.",
+    "Fundo escuro com som de respiração e um ruído abafado. Alguém fala: \"Haa\"",
+    "Sons de respiração ofegante preenchem o ambiente escuro.",
+    "Respiração pesada conticena intensa no escuro com sons de movimento.",
+    "Personagem faz som de esforço enquanto expressa desconforto.",
+    "Personagem diz: \"UGH...!\"",
+    "Personagem se contorce com expressão de dor ou prazer intenso.",
+    "Cena intensa.",
+    "Ela respira ofegante com expressão tensa. Ela diz: \"...!!!\" e também diz: \"ha... ot...\".",
+    "Duas pessoas se encaram em um ambiente escuro.",
+    "Ela segura a própria roupa enquanto pensa. Ela diz: \"ELE VAI...\" e \"COM CERTEZA...\".",
+    "Ele pergunta algo enquanto observa sentado. Ele diz: \"POR QUE ACHA ISSO?\".",
+    "Uma pessoa segura o próprio cena intensa com expressão de insegurança.",
+    "Ela diz: \"NÃO TENHO O TIPO DE CHARME... PRA FAZER ISSO.\"",
+    "O rosto de uma pessoa em close destaca seu olhar direcionado para o lado.",
+    "Ela diz: \"EU PROVAVELMENTE...\"",
+    "A pessoa conticena intensa seu desabafo com incerteza sobre o futuro.",
+    "Ela olha para frente com expressão de dúvida e incerteza.",
+    "Balão da garota: \"?\"",
+    "",
+    "O homem observa a garota enquanto ela permanece em silêncio.",
+    "Balão do homem: \"AQUELE HOMEM...\"",
+    "Cena intensa com foco no rosto e expressão ofegante. Personagem diz: \"Hnhhh\"",
+    "Cena intensa com foco na parte inferior do corpo e mãos. Personagem diz: \"Hang\"",
+    "Cena intensa com foco na parte inferior do corpo. Personagem diz: \"Nung-\"",
+    "Personagem reflete intensamente em pensamento. Personagem diz: \"AQUELA PESSOA... NÃO...\"",
+    "Cena intensa com foco no rosto e respiração.",
+    "Cena intensa com foco no vestuário. Alguém diz: \"PENSA EM MIM COMO UMA MULHER...\"",
+    "Cena intensa de expressão facial. Alguém diz: \"Aaahhh-\"",
+    "Cena intensa com foco na interação. Alguém diz: \"AQUI, VOCÊ LÊ COM A MELHOR QUALIDADE.\"",
+    "Cena intensa com foco nos pés.",
+    "Cena intensa mostrando o ambiente. Alguém diz: \"Nnh...\" Alguém diz: \"Ahhh\" Alguém diz: \"AGORA MESMO...\"",
+    "Um balão de fala solitário contém uma frase incompleta. Alguém diz: \"SE EU...\"",
+    "Um homem olha para baixo com uma expressão de tensão e rubor.",
+    "Uma visão focada nos pés de alguém sobre uma superfície vermelha. Alguém diz: \"ABRIR ESSA PORTA...!\"",
+    "Uma cena intensa de um momento íntimo.",
+    "Um homem engole em seco com expressão nervosa.",
+    "Uma mão segura a borda de uma porta fechada.",
+    "O ambiente está totalmente na escuridão.",
+    "Cena intensa.",
+    "Alguém diz: \"NÃO. VAMOS SE ACALMAR...\"",
+    "O homem pensa: \"É A PRIMEIRA VEZ QUE VEJO AQUELA MULHER...\"",
+    "Homem caminha e coloca a mão no rosto.",
+    "Ele diz: \"É POR ISSO QUE NÃO POSSO FAZER ISSO...\"",
+    "Ele diz: \"PRECISO VOLTAR À RAZÃO.\"",
+    "",
+    "Alguém fora do quadro fala com o homem.",
+    "A pessoa aperta os dentes com força enquanto exclama algo.",
+    "Personagem diz: \"EU...!\"",
+    "O ambiente permanece em um silêncio sombrio e escuro.",
+    "Algo impacta contra uma superfície em um quarto escuro.",
+    "Cena intensa com onomatopeia de impacto.",
+    "Homem observa uma mulher sentada em um ambiente escuro, reagindo com surpresa.",
+    "Pés descalços caminham sobre o chão em movimento.",
+    "Homem apresenta uma expressão de rubor intenso no rosto.",
+    "Cena intensa.",
+    "Mulher reage surpresa ao ver alguém e pergunta. Garota diz: \"M- MESTRE?\"",
+    "Ela olha para baixo com expressão tímida e questiona se foi ouvida.",
+    "Garota diz: \"O SENHOR POR ACASO... ME OUVIU?\"",
+    "Ele cerra o punho com força e ordena que ela continue.",
+    "Homem diz: \"CONTINUA O QUE TAVA FAZENDO.\"",
+    "Ela demonstra surpresa e choque ao ouvir a ordem de continuar.",
+    "Garota corada puxa a gola da camisa para baixo com as mãos.",
+    "Garota diz: \"O som tava...\" e \"Não se importe com isso...\"",
+    "Garota diz: \"Em vez disso...\" e \"Prefiro te ver fazendo isso.\"",
+    "Garota sentada olhando fixamente com expressão séria e bochechas coradas. Garota diz: \"Você não vai conseguir dormir se tentar se segurar.\"",
+    "Rapaz corado e suado olha surpreso para cima. Rapaz diz: \"Então... Pode continuar.\" e \"Você disse...\" e \"Você ia me mostrar.\"",
+    "Close-up de rosto com expressão de choque e expectativa. Ela diz: \"ENTÃO...\"",
+    "Homem encara mulher sentada sobre um cobertor no chão de um quarto escuro.",
+    "Homem leva as mãos ao rosto em sinal de arrependimento. Ele diz: \"DEVO TER FICADO LOUCO.\" Ele diz: \"O QUE DIABOS ACABEI DE DIZER?\"",
+    "Close-up do rosto do homem escondido atrás das mãos unidas.",
+    "Balões de pensamento flutuam sobre um fundo escuro. Ele diz: \"FALEI PRA UMA MULHER QUE ACABEI DE CONHECER PELA PRIMEIRA VEZ PRA ME DEIXAR VER ELA SE MASTURBANDO??\"",
+    "Uma lua cheia brilha intensamente no céu noturno estrelado.",
+    "Uma chaleira repousa sobre o fogão em uma cozinha escura.",
+    "Alguém emite um suspiro de alívio seguido de um pedido de desculpas.",
+    "Personagem encosta na porta com a mão no rosto, demonstrando frustração consigo mesmo. Ele diz: \"ACHO QUE PERDI A CABEÇA.\" e sussurra para si mesmo: \"Devo tá maluco...\"",
+    "Personagem fecha uma porta enquanto reflete sobre ir dormir. Ele diz: \"VAI DORMIR LOGO...\"",
+    "Personagem expressa surpresa e choque intenso, com balão de fala contendo: [?!].",
+    "Alguém fora do quadro diz: \"홋\" com corações.",
+    "Ação em cena intensa com personagem mordendo tecido com força.",
+    "Personagem emite som de gemido abafado, com balão de fala contendo: [Hnnnh].",
+    "Cena intensa de intimidade com personagem expressando gemido, com balão de fala contendo: [Hnnng].",
+    "Alguém fora do quadro diz: \"OBRIGADA...\" e \"MESTRE...!\"",
+    "Ela morde um tecido enquanto respira ofegante com os olhos focados.",
+    "Cena intensa.",
+    "Pés se apoiam sobre um tecido avermelhado em uma cena intensa.",
+    "Ela diz: \"OBRIGADA...\" e \"POR ME DAR UMA ORDEM!\"",
+    "Personagem masculino diz: \"E-ELA TÁ MESMO...\"",
+    "Personagem masculino diz: \"FAZENDO ISSO?!\"",
+    "Personagem sem falas visíveis aguarda em cena intensa",
+    "Personagem sem falas visíveis observa em cena intensa"
+  ],
+  "_revised": true,
+  "_editorial": {
+    "gancho": "บรรยากาศร้อนแรงสุดๆ ในบทนี้",
+    "impactos": [
+      {
+        "fala": 5,
+        "palavra": "ความกลา",
+        "emoji": "😰"
+      },
+      {
+        "fala": 16,
+        "palavra": "หนกอง",
+        "emoji": "⚡"
+      },
+      {
+        "fala": 27,
+        "palavra": "พรอม",
+        "emoji": "🔥"
+      },
+      {
+        "fala": 48,
+        "palavra": "เปลยน",
+        "emoji": "💥"
+      },
+      {
+        "fala": 64,
+        "palavra": "อดไมได",
+        "emoji": "😲"
+      },
+      {
+        "fala": 81,
+        "palavra": "กลบ",
+        "emoji": "❤️"
+      },
+      {
+        "fala": 92,
+        "palavra": "แนๆ",
+        "emoji": "😤"
+      },
+      {
+        "fala": 102,
+        "palavra": "ออก",
+        "emoji": "❓"
+      }
+    ],
+    "pergunta": "JOO INHYUK จะควบคุมสถานการณ์ได้ไหม?",
+    "fonte": "llm"
+  },
+  "idioma": "th"
+}

@@ -1,0 +1,897 @@
+{
+ "name": "🚀 Disparo Calls + Massa (com Loop)",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "1d01dd4b-516b-4d49-bbd8-702ee8c92677",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    208,
+    288
+   ],
+   "id": "6cbbc9af-ff09-4d9a-97db-2aa046d5e37b",
+   "name": "🌐 Porta de Entrada (Webhook)",
+   "webhookId": "1d01dd4b-516b-4d49-bbd8-702ee8c92677"
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.body.url }}/api/sessions",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "📃 Listar Sessões Ativas",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    -480
+   ],
+   "id": "8d0086eb-bc4d-4738-9cff-e34fe08b08f0"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.body.url }}/api/sessions/{{ $json.body.sessions }}/calls",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"phone\": \"{{ $json.body.telefone }}\",\n  \"duration_ms\": 15000,\n  \"record\": false\n}",
+    "options": {}
+   },
+   "name": "☎️ Tocar no Destino (1 número)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    -288
+   ],
+   "id": "391eb127-0090-4077-8e89-f7796d9c1630"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.body.url }}/api/sessions/{{ $json.body.sessions }}/broadcast",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"audio_base64\": \"{{ $json.body.audio_base64 }}\",\n  \"numbers\": [\n    \"{{ $json.body.telefone }}\"\n  ],\n  \"concurrency\": 1,\n  \"gap_ms\": 1500,\n  \"max_ring_ms\": 45000,\n  \"hangup_after_ms\": 0\n}",
+    "options": {}
+   },
+   "name": "📡 Broadcast Assíncrono (lista pronta)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    -96
+   ],
+   "id": "745cf6b8-2f9a-435c-a51d-3a9a000195c3"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.body.url }}/api/sessions/{{ $json.body.sessions }}/messages/text",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"to\": \"{{ $json.body.telefone }}\",\n  \"text\": \"{{ $json.body.text }}\"\n}",
+    "options": {}
+   },
+   "name": "💬 Enviar Mensagem de Texto",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    96
+   ],
+   "id": "4084855f-2128-46d0-82d3-9db0060a14ac"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.body.url }}/api/sessions/{{ $json.body.sessions }}/messages/audio",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"to\": \"{{ $json.body.telefone }}\",\n  \"base64\": \"{{ $json.body.audio_base64 }}\",\n  \"mimetype\": \"audio/ogg\",\n  \"ptt\": true\n}",
+    "options": {}
+   },
+   "name": "🎙️ Enviar Áudio (PTT)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    288
+   ],
+   "id": "5e9757be-4114-4bfb-a803-b6277521c1aa"
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.body.url }}/api/sessions/{{ $json.body.sessions }}/calls",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "📊 Consultar Status da Chamada",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    480
+   ],
+   "id": "fbf53df7-82bc-4e44-92bf-a74e17bf35e2"
+  },
+  {
+   "parameters": {
+    "url": "={{ $json.body.url }}/api/sessions/{{ $json.body.sessions }}/profile\n",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "name": "🪪 Ver Perfil da Sessão",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    672
+   ],
+   "id": "8cd103f3-c2f3-4256-a28c-12479d5e70d8"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $json.body.url }}/api/sessions",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $json.body.token }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ { name: \"New API Session\" } }}",
+    "options": {}
+   },
+   "name": "➕ Criar Nova Sessão",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    656,
+    864
+   ],
+   "id": "e7f54e51-38b0-40e8-a02f-aad30f6248a8"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "list_sessions",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "5e55a380-07d8-47fd-bfa2-3bbd507e376f"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "list_sessions"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "start_call",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "8b69ca7d-d3b1-4def-99a1-b4be93e6ffe3"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "start_call"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "broadcast",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "e73be8b7-aeef-40c2-b6a0-4182e916ec68"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "broadcast"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "send_text",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "a48aba08-afa9-48a3-962d-dc183c0c8227"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "send_text"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "send_audio",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "3d38f230-82cb-4945-b420-9f397ac96c18"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "send_audio"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "get_call_status",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "4c8ef9b4-3f4c-45bc-a2c8-f21c7f197f9c"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "get_call_status"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "get_profile",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "b92d8c3a-7c8c-4e18-b5ce-dbd7117fc252"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "get_profile"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "create_session",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "9d8f94c3-570b-4640-b18f-52704d543571"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "create_session"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.action }}",
+          "rightValue": "broadcast_massa",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "cond-broadcast-massa"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "broadcast_massa"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    432,
+    160
+   ],
+   "id": "switch-action-router",
+   "name": "🧭 Roteador de Ações"
+  },
+  {
+   "parameters": {
+    "fieldToSplitOut": "body.numeros",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitOut",
+   "typeVersion": 1,
+   "position": [
+    656,
+    1056
+   ],
+   "id": "split-out-numeros",
+   "name": "🔢 Separar Números (1 por item)"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.splitInBatches",
+   "typeVersion": 3,
+   "position": [
+    880,
+    1056
+   ],
+   "id": "loop-numeros",
+   "name": "🔁 Loop (1 por vez)"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('🌐 Porta de Entrada (Webhook)').item.json.body.url }}/api/sessions/{{ $('🌐 Porta de Entrada (Webhook)').item.json.body.sessions }}/broadcast",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "X-API-Key",
+       "value": "={{ $('🌐 Porta de Entrada (Webhook)').item.json.body.token }}"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/json"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={\n  \"audio_base64\": \"{{ $('🌐 Porta de Entrada (Webhook)').item.json.body.audio_base64 }}\",\n  \"numbers\": [\n    \"{{ $json['body.numeros'] }}\"\n  ],\n  \"concurrency\": 1,\n  \"gap_ms\": 0,\n  \"max_ring_ms\": 45000,\n  \"hangup_after_ms\": 0\n}",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    1104,
+    992
+   ],
+   "id": "call-um-numero",
+   "name": "📞 Ligar p/ ESTE número"
+  },
+  {
+   "parameters": {
+    "amount": "={{ $('Webhook').item.json.body.intervalo_seg || 20 }}"
+   },
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    1328,
+    1056
+   ],
+   "id": "wait-entre-calls",
+   "name": "⏱️ Esperar antes da próxima",
+   "webhookId": "6d31c67f-48ae-4068-8178-89731c4e7617"
+  },
+  {
+   "parameters": {
+    "content": "## 🚀 DISPARO EM MASSA (com LOOP)\n\nAção nova: mande no webhook `\"action\": \"broadcast_massa\"` com uma **lista** em `numeros`.\n\nO fluxo NÃO liga todos de uma vez — ele **separa a lista** e usa um **loop** que liga **1 número por vez**, espera o intervalo, e vai pro próximo.\n\n**Payload esperado:**\n```\n{\n  \"action\": \"broadcast_massa\",\n  \"url\": \"...\", \"token\": \"...\",\n  \"sessions\": \"ID_SESSAO\",\n  \"audio_base64\": \"...\",\n  \"numeros\": [\"5591...\", \"5522...\"],\n  \"intervalo_seg\": 20\n}\n```",
+    "height": 460,
+    "width": 420,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    80,
+    608
+   ],
+   "id": "note-massa-intro",
+   "name": "🚀 Disparo em Massa"
+  },
+  {
+   "parameters": {
+    "content": "### 🔢 + 🔁 O CORAÇÃO DO LOOP\n\n**🔢 Separar Números** quebra o array\n`numeros` em 1 item por número.\n\n**🔁 Loop (1 por vez)** processa\num item de cada vez (batchSize=1):\n\n➡️ saída **loop** → liga o número\n✅ saída **done** → acabou a lista\n\n⚠️ É isso que evita disparar tudo\nde uma vez e derrubar a sessão.",
+    "height": 320,
+    "width": 320,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    880,
+    624
+   ],
+   "id": "note-loop",
+   "name": "🔁 O Loop"
+  },
+  {
+   "parameters": {
+    "content": "### 📞 + ⏱️ LIGA E ESPERA\n\n**📞 Ligar p/ ESTE número** manda\no broadcast só do número atual\ndo loop (1 número no array).\n\n**⏱️ Esperar** dá uma pausa\n(`intervalo_seg`, padrão 20s) e\n**volta pro loop** pegar o próximo.\n\n🔒 Assim o telefone respira entre\numa chamada e outra.",
+    "height": 320,
+    "width": 320,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1264,
+    672
+   ],
+   "id": "note-liga-espera",
+   "name": "📞 Liga & Espera"
+  },
+  {
+   "parameters": {
+    "content": "## 🌐 PORTA DE ENTRADA\nRecebe o POST. O campo `body.action`\ndecide o que fazer. Manda tudo pro\n🧭 Roteador.",
+    "height": 198,
+    "width": 260,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    208,
+    -80
+   ],
+   "id": "doc-webhook",
+   "name": "doc: entrada"
+  },
+  {
+   "parameters": {
+    "content": "## 🧭 ROTEADOR DE AÇÕES\nLê `body.action` e escolhe 1 dos 9\ncaminhos:\n`list_sessions · start_call · broadcast`\n`send_text · send_audio · get_call_status`\n`get_profile · create_session · broadcast_massa`",
+    "height": 260,
+    "width": 300,
+    "color": 7
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    192,
+    -368
+   ],
+   "id": "doc-roteador",
+   "name": "doc: roteador"
+  },
+  {
+   "parameters": {
+    "content": "### 📃 LISTAR SESSÕES\n`GET /api/sessions`\nMostra as sessões WhatsApp\nconectadas (pega o id aqui).",
+    "height": 120,
+    "width": 230,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    912,
+    -496
+   ],
+   "id": "doc-list",
+   "name": "doc: listar"
+  },
+  {
+   "parameters": {
+    "content": "### ☎️ TOCAR NO DESTINO\n`POST /calls` — liga p/ 1 número\n(`telefone`), toca 15s, sem gravar.",
+    "height": 110,
+    "width": 230,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    912,
+    -320
+   ],
+   "id": "doc-start",
+   "name": "doc: tocar"
+  },
+  {
+   "parameters": {
+    "content": "### 📡 BROADCAST (lista pronta)\n`POST /broadcast` — dispara já com\num array de números montado no payload.\nÚtil quando a lista vem de fora.",
+    "height": 120,
+    "width": 230,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    912,
+    -176
+   ],
+   "id": "doc-broadcast",
+   "name": "doc: broadcast"
+  },
+  {
+   "parameters": {
+    "content": "### 💬 ENVIAR TEXTO\n`POST /messages/text`\nManda mensagem escrita p/ `telefone`.",
+    "height": 100,
+    "width": 230,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    912,
+    -16
+   ],
+   "id": "doc-text",
+   "name": "doc: texto"
+  },
+  {
+   "parameters": {
+    "content": "### 🎙️ ENVIAR ÁUDIO (PTT)\n`POST /messages/audio`\nÁudio em base64 como mensagem\nde voz (ptt=true).",
+    "height": 120,
+    "width": 230,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1104,
+    128
+   ],
+   "id": "doc-audio",
+   "name": "doc: audio"
+  },
+  {
+   "parameters": {
+    "content": "### 📊 STATUS DA CHAMADA\n`GET /calls`\nConsulta como foi a última chamada\nda sessão.",
+    "height": 110,
+    "width": 230,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    912,
+    272
+   ],
+   "id": "doc-status",
+   "name": "doc: status"
+  },
+  {
+   "parameters": {
+    "content": "### 🪪 PERFIL DA SESSÃO\n`GET /profile`\nDados da conta WhatsApp conectada.",
+    "height": 100,
+    "width": 230,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1136,
+    416
+   ],
+   "id": "doc-profile",
+   "name": "doc: perfil"
+  },
+  {
+   "parameters": {
+    "content": "### ➕ CRIAR SESSÃO\n`POST /api/sessions`\nCria uma sessão nova (depois é só\nler o QR no painel do Hermes).",
+    "height": 110,
+    "width": 230,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    880,
+    416
+   ],
+   "id": "doc-create",
+   "name": "doc: criar"
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "🌐 Porta de Entrada (Webhook)": {
+   "main": [
+    [
+     {
+      "node": "🧭 Roteador de Ações",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧭 Roteador de Ações": {
+   "main": [
+    [
+     {
+      "node": "📃 Listar Sessões Ativas",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "☎️ Tocar no Destino (1 número)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📡 Broadcast Assíncrono (lista pronta)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "💬 Enviar Mensagem de Texto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🎙️ Enviar Áudio (PTT)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📊 Consultar Status da Chamada",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🪪 Ver Perfil da Sessão",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "➕ Criar Nova Sessão",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🔢 Separar Números (1 por item)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔢 Separar Números (1 por item)": {
+   "main": [
+    [
+     {
+      "node": "🔁 Loop (1 por vez)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔁 Loop (1 por vez)": {
+   "main": [
+    [],
+    [
+     {
+      "node": "📞 Ligar p/ ESTE número",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📞 Ligar p/ ESTE número": {
+   "main": [
+    [
+     {
+      "node": "⏱️ Esperar antes da próxima",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏱️ Esperar antes da próxima": {
+   "main": [
+    [
+     {
+      "node": "🔁 Loop (1 por vez)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "5a362513-27d6-4a48-ab5c-92cfba5e77fc",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "jv91EbKPYAwGbjUf",
+ "tags": []
+}

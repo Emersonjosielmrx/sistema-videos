@@ -1,0 +1,189 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 12-03-29.mp4",
+ "duration": 63.733333,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 712,
+  "has_webcam": true,
+  "contrast": 45.4,
+  "trimmed": {
+   "webcam_bottom": 304,
+   "content_bottom": 214
+  },
+  "divider": 666,
+  "webcam": [
+   0,
+   0,
+   720,
+   362
+  ],
+  "content": [
+   0,
+   666,
+   712,
+   1066
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto sobre momentos tristes de anime com poucas falas do criador, mas tem emoção genuína e tema popular",
+  "topic": "momentos mais tristes dos animes",
+  "channel": "animescomia",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 63.7,
+    "hook": "NEM CONSIGO ASSISTIR ISSO",
+    "title": "Os momentos mais TRISTES dos animes me destruíram 😭💔 #shorts #anime",
+    "description": "Reagindo aos momentos mais tristes dos animes e não consegui segurar a emoção 😭\nA fome como maior tristeza... isso pega pesado demais.\nQual cena de anime te fez chorar mais? Comenta aí! 👇\nSe inscreve pra mais reacts emocionantes!\n\n#shorts #anime #react #momentostristes #animetriste #otaku #animebrasil #cenastristes #chorei #emocionante #animereact #weeb #otakubr #mangá #japão",
+    "hashtags": [
+     "#shorts",
+     "#anime",
+     "#react",
+     "#momentostristes",
+     "#animetriste",
+     "#otaku",
+     "#animebrasil",
+     "#cenastristes",
+     "#chorei",
+     "#emocionante"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "momentos tristes anime",
+     "cenas tristes",
+     "anime triste",
+     "react anime",
+     "otaku",
+     "anime brasil",
+     "chorei assistindo anime",
+     "cenas emocionantes anime",
+     "anime react br",
+     "top momentos tristes",
+     "anime sad moments",
+     "fome anime",
+     "anime que faz chorar",
+     "react emocionante"
+    ],
+    "keywords": [
+     {
+      "t": 2.5,
+      "text": "TRISTES",
+      "emoji": "😭"
+     },
+     {
+      "t": 37.0,
+      "text": "FOME",
+      "emoji": "💔"
+     },
+     {
+      "t": 48.5,
+      "text": "NEM CONSIGO",
+      "emoji": "😢"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 48.0,
+      "type": "shock"
+     }
+    ],
+    "memes": [
+     {
+      "t": 48.0,
+      "id": 99
+     }
+    ],
+    "cta": "Qual cena te fez chorar?",
+    "pinned_comment": "Qual cena de anime te fez chorar mais? 😭",
+    "title_alternatives": [
+     "A MAIOR TRISTEZA dos animes é essa... não aguentei 😭💔 #shorts #anime",
+     "Tentei reagir aos momentos mais TRISTES e não consegui 😢 #shorts #animetriste"
+    ],
+    "mood": "sad_emotional",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 60.0,
+    "end": 63.7,
+    "why": "Fala incompleta e sem sentido ('E aí'), não acrescenta nada ao react"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "animescomia",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_12_03_29\\2026_10_07_12_03_29.mp4",
+   "duration": 16.80910400000006,
+   "keeps": 12,
+   "meta": {
+    "hook": "NEM CONSIGO ASSISTIR ISSO",
+    "title": "Os momentos mais TRISTES dos animes me destruíram 😭💔 #shorts #anime",
+    "description": "Reagindo aos momentos mais tristes dos animes e não consegui segurar a emoção 😭\nA fome como maior tristeza... isso pega pesado demais.\nQual cena de anime te fez chorar mais? Comenta aí! 👇\nSe inscreve pra mais reacts emocionantes!\n\n#shorts #anime #react #momentostristes #animetriste #otaku #animebrasil #cenastristes #chorei #emocionante #animereact #weeb #otakubr #mangá #japão",
+    "hashtags": [
+     "#shorts",
+     "#anime",
+     "#react",
+     "#momentostristes",
+     "#animetriste",
+     "#otaku",
+     "#animebrasil",
+     "#cenastristes",
+     "#chorei",
+     "#emocionante"
+    ],
+    "tags": [
+     "react",
+     "anime",
+     "momentos tristes anime",
+     "cenas tristes",
+     "anime triste",
+     "react anime",
+     "otaku",
+     "anime brasil",
+     "chorei assistindo anime",
+     "cenas emocionantes anime",
+     "anime react br",
+     "top momentos tristes",
+     "anime sad moments",
+     "fome anime",
+     "anime que faz chorar",
+     "react emocionante"
+    ],
+    "cta": "Qual cena te fez chorar?",
+    "mood": "sad_emotional",
+    "music": true,
+    "pinned_comment": "Qual cena de anime te fez chorar mais? 😭",
+    "title_alternatives": [
+     "A MAIOR TRISTEZA dos animes é essa... não aguentei 😭💔 #shorts #anime",
+     "Tentei reagir aos momentos mais TRISTES e não consegui 😢 #shorts #animetriste"
+    ],
+    "work": null,
+    "channel": "animescomia"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_12_03_29\\2026_10_07_12_03_29_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\styxhelix_rezero_instrumental_ORIGINAL_oficial_mythROID.mp3",
+   "removed_pct": 73.6,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 16.77,
+    "lufs": -14.7
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 307.1
+}

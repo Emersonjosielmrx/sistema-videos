@@ -1,0 +1,15 @@
+[2:v]format=yuva420p[dv];
+[0:v][dv]overlay=0:406:shortest=1:format=auto[dvs];
+[3:v]format=yuva420p,scale=1080:1920,tpad=start_duration=1.944:start_mode=add:color=black@0.0[ov0];
+[dvs][ov0]overlay=0:0:eof_action=pass:enable='between(t,1.944,3.144)'[ovs0];
+[4:v]format=rgba,scale=200:-1,tpad=start_duration=2.044:start_mode=add:color=black@0.0[png1];
+[ovs0][png1]overlay=x=810:y='200-30*sin(min((t-2.044)*8,3.1416))':eof_action=pass:enable='between(t,2.044,3.444)'[ovs1];
+[5:v]format=yuva420p,scale=1080:1920,tpad=start_duration=10.435:start_mode=add:color=black@0.0[ov2];
+[ovs1][ov2]overlay=0:0:eof_action=pass:enable='between(t,10.435,12.235)'[ovs2];
+[6:v]scale=668:-2:flags=bicubic,format=yuva420p,tpad=start_duration=16.807:start_mode=add:color=black@0.0[mv3];
+[ovs2][mv3]overlay=x=206:y='546-20*sin(min((t-16.807)*8,3.1416))':eof_action=pass:enable='between(t,16.807,20.807)'[ovs3];
+[7:v]format=rgba,scale=170:-1,tpad=start_duration=19.438:start_mode=add:color=black@0.0[png4];
+[ovs3][png4]overlay=x=825:y='215-30*sin(min((t-19.438)*8,3.1416))':eof_action=pass:enable='between(t,19.438,20.538)'[ovs4];
+[8:v]format=yuva420p,scale=1080:1920,tpad=start_duration=20.689:start_mode=add:color=black@0.0[ov5];
+[ovs4][ov5]overlay=0:0:eof_action=pass:enable='between(t,20.689,22.689)'[ovs5];
+[ovs5]ass='D\:/manhwa-react/work/2026_10_07_16_17_32/part1/captions.ass':fontsdir='D\:/manhwa-react/assets/fonts',format=yuv420p[vout]

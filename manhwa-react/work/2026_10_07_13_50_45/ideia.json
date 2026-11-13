@@ -1,0 +1,28 @@
+{
+ "formato": "batalha de anime com legendas dinâmicas e musica épica",
+ "descricao": "Apresenta confronto entre personagens de anime/manga com título chamativo (X VS Y), painéis estáticos em sequência, legendas com palavras destacadas em cores, música de fundo tensa e branding constante (título da obra no rodapé).",
+ "replicavel": true,
+ "como_fazer": "1) Selecionar confronto icônico de Baki/outro anime do banco de 86k painéis de manhwa/anime. 2) Criar título VS chamativo no topo com ffmpeg (texto vermelho bold). 3) Montar sequência de 4-8 painéis em slideshow (0.8-1.2s cada) com zoom sutil (ken burns). 4) Adicionar legendas fixas em português com palavras-chave destacadas em amarelo/verde (estilo do vídeo). 5) Inserir trilha épica/tensa do banco de 341 músicas. 6) Colocar branding no rodapé (nome da obra). 7) Exportar em 9:16 com ffmpeg.",
+ "ferramentas": [
+  "ffmpeg",
+  "86k painéis manhwa/anime",
+  "341 trilhas música",
+  "overlays legendas"
+ ],
+ "fonte_de_material": "banco de 86 mil painéis de manhwa (extrair cenas de luta de Baki, Kengan Ashura, Hajime no Ippo, Record of Ragnarok)",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "Gatilho de curiosidade mórbida (canibalismo/violência extrema) + nostalgia de anime clássico + formato VS que gera debate nos comentários",
+ "exemplo_roteiro": "JACK HANMA VS PICKLE\n[Painel 1: Pickle musculoso]\nAS COSTAS E\n[Painel 2: Tokugawa preocupado]\nMAS ENQUANTO ELE\n[Painel 3: Cidade]\nO PICO TA\n[Painel 4: Baki observando]\nESPERANDO...",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "baki",
+  "anime",
+  "versus",
+  "luta",
+  "pickle",
+  "jackhanma"
+ ],
+ "video": "2026-10-07 13-50-45.mp4",
+ "data": "2026-10-12"
+}

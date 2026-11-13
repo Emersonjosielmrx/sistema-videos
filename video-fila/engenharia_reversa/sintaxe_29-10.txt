@@ -1,0 +1,4 @@
+ERRO recapd-ambientes/producao/bin/duracao_protegidos.py :: SyntaxError: invalid syntax
+ERRO recapd-ambientes/producao/bin/gerar_blocklist.py :: SyntaxError: invalid syntax
+ERRO recapd-ambientes/producao/bin/listar_protegidos.py :: SyntaxError: invalid syntax
+ERRO historias-em-frames/bin/parallax25d.py :: SyntaxError: name '_DEPTH_PIPE' is used prior to global declaration

@@ -1,0 +1,145 @@
+{
+ "conta": "followupia.ia",
+ "produto": "follow_up",
+ "marca": "Follow-up IA",
+ "titulo": "Pare de perder vendas por esquecimento no WhatsApp",
+ "legenda": "Atender muitos clientes faz parte da rotina, mas esquecer de cobrar quem sumiu custa caro.\nCom o Follow-up IA, nossa inteligência recupera leads inativos no WhatsApp sozinha e converte vendas sem esquecimento.\nConheça a solução pelo link no perfil. 💬\n\n👉 Chame no direct • link no perfil\n\n#followup #vendas #whatsappbusiness #automacao #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Vendas perdidas por esquecimento?",
+  "pergunta_cliente": "Esquece de cobrar quem pediu orçamento e não respondeu?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu atendia tantos clientes que esquecia de cobrar quem sumia, perdendo vendas todo dia.",
+    "visual": "apresentador",
+    "cenario_en": "standing in a tidy, well lit commercial office of a small Brazilian business",
+    "destaques": [
+     "esquecia de cobrar",
+     "perdendo vendas"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261110_101644_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Com o Follow-up IA, a inteligência faz o acompanhamento automático no WhatsApp, recupera leads inativos sozinha e nunca desiste.",
+    "visual": "veo",
+    "prompt_en": "a tidy and well lit small Brazilian sales office, a salesperson seen from the side working calmly at a clean desk, warm commercial lighting, cinematic, no text or readable screens",
+    "destaques": [
+     "acompanhamento automático",
+     "recupera leads inativos"
+    ],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Olá! Passando para saber se conseguiu avaliar o orçamento que enviei."
+     },
+     {
+      "de": "cliente",
+      "texto": "Oi! Acabei esquecendo de responder na correria."
+     },
+     {
+      "de": "empresa",
+      "texto": "Sem problemas! Ficou alguma dúvida para fecharmos o seu pedido?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Nenhuma, vamos fechar sim!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje eu não perco vendas por esquecimento e converto pelo WhatsApp sem depender de lembretes.",
+    "visual": "apresentador",
+    "cenario_en": "standing in a tidy, well lit commercial office of a small Brazilian business",
+    "destaques": [
+     "não perco vendas",
+     "converto pelo WhatsApp"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261110_101644_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261110_101644_1.png"
+   }
+  ],
+  "legenda": "Atender muitos clientes faz parte da rotina, mas esquecer de cobrar quem sumiu custa caro.\nCom o Follow-up IA, nossa inteligência recupera leads inativos no WhatsApp sozinha e converte vendas sem esquecimento.\nConheça a solução pelo link no perfil. 💬",
+  "titulo": "Pare de perder vendas por esquecimento no WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "acumulo_leads_esquecidos",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 47,
+  "tentativas_roteiro": 3
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\followupia.ia_20261111_203720\\dono_3.mp4",
+ "duracao_s": 33.41,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-11T21:41:25",
+ "variante": "dono_abre_fecha_veo_meio",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 3,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.39,
+   "fala": "Esquece de cobrar quem pediu orçamento e não respondeu?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.39,
+   "fim": 12.06,
+   "fala": "Eu atendia tantos clientes que esquecia de cobrar quem sumia, perdendo vendas todo dia.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.06,
+   "fim": 21.8,
+   "fala": "Com o Follow-up IA, a inteligência faz o acompanhamento automático no WhatsApp, recupera leads inativos sozinha e nunca desiste.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 21.8,
+   "fim": 29.46,
+   "fala": "Hoje eu não perco vendas por esquecimento e converto pelo WhatsApp sem depender de lembretes.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 29.46,
+   "fim": 33.41,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.2,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 7.0,
+   "roteiro_marca": 7.0,
+   "diretor": 6.8
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

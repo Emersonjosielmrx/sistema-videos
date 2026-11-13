@@ -1,0 +1,29 @@
+{
+ "formato": "meme narrativo com legendas progressivas + twist absurdo",
+ "descricao": "Sequência de frames com legendas curtas que constroem uma história absurda/nonsense, revelando um twist ridículo no final. Ritmo rápido, 3-5 segundos por frame, sem narração, só música de fundo e legendas sincronizadas.",
+ "replicavel": true,
+ "como_fazer": "1) Gerar 4-6 imagens com IA (Gemini/Pollinations) seguindo roteiro absurdo; 2) Adicionar legendas brancas centralizadas em cada frame (ffmpeg drawtext); 3) Timing: 2-4s por frame com transições rápidas; 4) Música de suspense/comédia de fundo (das 341 trilhas); 5) SFX de impacto no twist final (dos 650 sons de meme); 6) Overlay de efeito (confete/raio) no punchline",
+ "ferramentas": [
+  "Gemini/Pollinations",
+  "ffmpeg",
+  "sons de meme",
+  "trilhas de música",
+  "overlays animados"
+ ],
+ "fonte_de_material": "Geração de imagens por IA seguindo prompt de cenário absurdo + estética de filme/novela antiga",
+ "esforco": "baixo",
+ "potencial": 9,
+ "por_que_viraliza": "O setup cria expectativa de drama sério, mas o punchline absurdo (apagar fogo com xixi) quebra completamente e vira meme compartilhável",
+ "exemplo_roteiro": "Frame 1: 'HOMENS' (close dramático)\nFrame 2: 'ATÉ' (pedra rolando)\nFrame 3: 'ROLOU' (pedra gigante)\nFrame 4: 'MIM' (personagem nu de costas)\nFrame 5: [TWIST] 'E EU APAGUEI O FOGO ASSIM' (ação absurda + SFX + overlay de fogo)",
+ "nicho_canal": "novo canal: MemeDoAbsurdo",
+ "tags": [
+  "meme brasileiro",
+  "comedia absurda",
+  "plot twist",
+  "shitpost",
+  "zoeira",
+  "meme narrativo"
+ ],
+ "video": "2026-10-07 16-35-46.mp4",
+ "data": "2026-10-12"
+}

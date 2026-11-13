@@ -1,0 +1,141 @@
+{
+ "conta": "inovarecom.ia",
+ "produto": "hermes_call",
+ "marca": "Hermes Call",
+ "titulo": "Chamadas com inteligência artificial no WhatsApp",
+ "legenda": "Sua empresa não precisa travar para fazer chamadas ativas de vendas. Com atendimento contínuo e voz clonada, você ganha escala direta no WhatsApp. Saiba mais no link no perfil 📲\n\n👉 Chame no direct • link no perfil\n\n#whatsappbusiness #vendas #atendimentoaocliente #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "Chamadas automáticas sem complicação",
+  "pergunta_cliente": "Sua equipe perde vendas por falta de braço para ligar?",
+  "blocos": [
+   {
+    "rotulo": "O desafio",
+    "fala": "Eu achava complicado colocar robôs para discar, até centralizar todas as chamadas de vendas no WhatsApp.",
+    "visual": "apresentador",
+    "cenario_en": "a bright, tidy modern Brazilian office, well lit, man with glasses speaking calmly to camera",
+    "destaques": [
+     "achava complicado",
+     "centralizar todas as chamadas"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261111_045339_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Hermes Call faz ligações em massa com voz real e clonada, oferecendo atendimento contínuo.",
+    "visual": "veo",
+    "prompt_en": "commercial footage of a clean Brazilian retail sales office, warm lighting, employees working comfortably, seen from behind, cinematic 4k",
+    "destaques": [
+     "ligações em massa",
+     "atendimento contínuo"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Alô, quem está falando?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Estou ligando para confirmar o seu interesse na nossa proposta de vendas."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, pode me explicar como funciona agora?"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje minha operação liga e vende sem parar com inteligência artificial, escalando no ritmo que preciso.",
+    "visual": "apresentador",
+    "cenario_en": "a bright, tidy modern Brazilian office, well lit, man with glasses speaking calmly to camera",
+    "destaques": [
+     "vende sem parar",
+     "escalando no ritmo"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261111_045339_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261111_045339_1.png"
+   }
+  ],
+  "legenda": "Sua empresa não precisa travar para fazer chamadas ativas de vendas. Com atendimento contínuo e voz clonada, você ganha escala direta no WhatsApp. Saiba mais no link no perfil 📲",
+  "titulo": "Chamadas com inteligência artificial no WhatsApp",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "medo_configuracao_complexa",
+  "pauta_tipo": "objecao",
+  "tempo_roteiro_s": 198,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovarecom.ia_20261111_045015\\dono_3.mp4",
+ "duracao_s": 30.1,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-11T06:49:49",
+ "variante": "dono_abre_fecha_veo_meio",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 3,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.39,
+   "fala": "Sua equipe perde vendas por falta de braço para ligar?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.39,
+   "fim": 12.07,
+   "fala": "Eu achava complicado colocar robôs para discar, até centralizar todas as chamadas de vendas no WhatsApp.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.07,
+   "fim": 18.52,
+   "fala": "O Hermes Call faz ligações em massa com voz real e clonada, oferecendo atendimento contínuo.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 18.52,
+   "fim": 26.2,
+   "fala": "Hoje minha operação liga e vende sem parar com inteligência artificial, escalando no ritmo que preciso.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 26.2,
+   "fim": 30.1,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.62,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 5.5,
+   "roteiro_marca": 10.0,
+   "diretor": 7.0
+  },
+  "graves": 2,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

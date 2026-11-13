@@ -1,0 +1,12 @@
+{
+ "promover": true,
+ "min_certos": 3,
+ "janela": 5,
+ "taxa_min": 0.8,
+ "recaida_h": 6,
+ "ok_h": 24,
+ "expira_h": 72,
+ "juiz": "agy/gemini-3.8-flash-high",
+ "juizes_por_rodada": 3,
+ "destilar_h": 24
+}

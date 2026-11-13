@@ -1,0 +1,79 @@
+{
+ "_leia": "21/10: bots separados do Telegram (dono). avisos.py escolhe pelo assunto (ROTA); chat = o mesmo do telegram.json. 22/10: ligados bloqueios, metricas, pendencias_humanas e producao; integracao_produto espera o dono",
+ "aprendizado": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@Aviso_de_aprendizado_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true
+ },
+ "postagem": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@Aviso_de_postagem_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true
+ },
+ "vigia_trader": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@vigia_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true,
+  "_nota": "Do robo de investimentos (trader_binance\\vigia\\vigia_externo.py:157), nao dos videos. Nao mapear origens de video aqui."
+ },
+ "comentarios": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@aviso_comentarios_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true
+ },
+ "opus": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@opus_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true
+ },
+ "metricas": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@metricas_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true,
+  "_nota": "ligado 22/10; o que chega aqui = ROTA em D:\\video-fila\\avisos.py"
+ },
+ "bloqueios": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@bloqueios_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true,
+  "_nota": "ligado 22/10; o que chega aqui = ROTA em D:\\video-fila\\avisos.py"
+ },
+ "pendencias_humanas": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@pend_humanas_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true,
+  "_nota": "ligado 22/10; o que chega aqui = ROTA em D:\\video-fila\\avisos.py"
+ },
+ "producao": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@producao_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true,
+  "_nota": "ligado 22/10; o que chega aqui = ROTA em D:\\video-fila\\avisos.py"
+ },
+ "integracao_produto": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@int_produto_emerson_bot",
+  "chat_id": 7911666809,
+  "em_uso": true,
+  "origens": [
+   "produto-lead"
+  ],
+  "_nota": "01/11: bot 'Interessados no produto' = SO lead real (pediu orcamento/contato), 1 aviso por lead. Quem manda: ms-energy\\bin\\vigia_clientes_insta.py pela ROTA 'produto-lead' de D:\\video-fila\\avisos.py. Elogio/conversa = resumo no bot geral (msenergy-clientes); spam = so log (produto-ruido)"
+ },
+ "plantao": {
+  "bot_token": "<SEGREDO_REMOVIDO>",
+  "nome": "@plantao_emerson_bot",
+  "chat_id": "7911666809",
+  "em_uso": "True",
+  "_nota": "01/11: Funcionário de Plantão (melhorador central, vigia de melhorias, engenharia reversa, supervisor, painel ia). A dona pode falar com ele e ele responde."
+ }
+}

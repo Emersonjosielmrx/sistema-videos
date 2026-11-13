@@ -1,0 +1,2231 @@
+[
+ {
+  "hash": "c7c7ae4cfcb9",
+  "nome": "Vídeo de Anúncio com IA · ffmpeg na nuvem + voz Google (sem marca d'água) - V3",
+  "assunto": "anuncio-video",
+  "nos": 116,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "Very Good FFmpeg",
+   "catbox",
+   "roteador OmniRoute",
+   "voz Google Tradutor",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\v3\\fluxo_v3.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · ffmpeg na nuvem + voz Google (sem marca d'água) - V3.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 08:37"
+ },
+ {
+  "hash": "81539fe19242",
+  "nome": "Vídeo de Anúncio com IA · ffmpeg na nuvem · textos novos - V3b",
+  "assunto": "anuncio-video",
+  "nos": 116,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "Very Good FFmpeg",
+   "catbox",
+   "roteador OmniRoute",
+   "voz Google Tradutor",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\v3b\\fluxo_v3b.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · ffmpeg na nuvem · textos novos - V3b.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 09:18"
+ },
+ {
+  "hash": "8dd7d912464b",
+  "nome": "Vídeo de Anúncio com IA · Fotos → Reels narrado (estratégia, roteiro, revisão, voz) - ok - 07/11",
+  "assunto": "anuncio-video",
+  "nos": 97,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [
+   "video-oficina (servidor de vídeo próprio)"
+  ],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\original.json",
+  "copias": [
+   "D:\\tmp\\fluxo_api_externa\\original.json"
+  ],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · Fotos Reels narrado (estratégia, roteiro, revisão, voz) - ok - 07 11.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 04:10"
+ },
+ {
+  "hash": "c8d3f60fb87b",
+  "nome": "Vídeo de Anúncio com IA · JSON2Video (sem servidor de vídeo) - V1",
+  "assunto": "anuncio-video",
+  "nos": 112,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "JSON2Video",
+   "Redis",
+   "catbox",
+   "roteador OmniRoute",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\v1\\fluxo_v1.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · JSON2Video (sem servidor de vídeo) - V1.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 08:37"
+ },
+ {
+  "hash": "5d6f51228f55",
+  "nome": "Vídeo de Anúncio com IA · JSON2Video (sem servidor de vídeo) - V1",
+  "assunto": "anuncio-video",
+  "nos": 112,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "JSON2Video",
+   "Redis",
+   "catbox",
+   "roteador OmniRoute",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\tmp\\fluxo_api_externa\\v1\\fluxo_v1.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\_versoes\\Vídeo de Anúncio com IA · JSON2Video (sem servidor de vídeo) - V1 · 2026-10-30 0408 · 5d6f51.json",
+  "versao_antiga": true,
+  "modificado": "2026-10-30 04:08"
+ },
+ {
+  "hash": "1b1ea75c78d4",
+  "nome": "Vídeo de Anúncio com IA · JSON2Video · textos novos - V1b",
+  "assunto": "anuncio-video",
+  "nos": 112,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "JSON2Video",
+   "Redis",
+   "catbox",
+   "roteador OmniRoute",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\v1b\\fluxo_v1b.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · JSON2Video · textos novos - V1b.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 09:18"
+ },
+ {
+  "hash": "8c96941b0dcd",
+  "nome": "Vídeo de Anúncio com IA · Shotstack (sem servidor de vídeo) - V2",
+  "assunto": "anuncio-video",
+  "nos": 112,
+  "precisa": [
+   "Agente de IA",
+   "ElevenLabs",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "Shotstack",
+   "catbox",
+   "roteador OmniRoute",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\v2\\fluxo_v2.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · Shotstack (sem servidor de vídeo) - V2.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 08:37"
+ },
+ {
+  "hash": "b3bc8e8858e9",
+  "nome": "Vídeo de Anúncio com IA · Shotstack · textos novos - V2b",
+  "assunto": "anuncio-video",
+  "nos": 112,
+  "precisa": [
+   "Agente de IA",
+   "ElevenLabs",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "Shotstack",
+   "catbox",
+   "roteador OmniRoute",
+   "wsrv.nl"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-materiais\\fluxo-anuncio-api\\v2b\\fluxo_v2b.json",
+  "copias": [],
+  "arquivo": "biblioteca\\anuncio-video\\Vídeo de Anúncio com IA · Shotstack · textos novos - V2b.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-30 09:18"
+ },
+ {
+  "hash": "51c298b14e6b",
+  "nome": "Hermes - Disparar Ligacao para o 984698653",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 4,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hipercool-videos\\workspace\\N8N_CALL_NEW_WORKFLOW.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\Hermes - Disparar Ligacao para o 984698653.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-09 16:32"
+ },
+ {
+  "hash": "1727cab53f09",
+  "nome": "Hermes - Fazer Ligação para 91984698653",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 4,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hipercool-videos\\workspace\\N8N_CALL_BROADCAST_WORKFLOW.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\Hermes - Fazer Ligação para 91984698653.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-09 16:31"
+ },
+ {
+  "hash": "d07908aa6c14",
+  "nome": "Hermes API - Audio Call Proxy",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 2,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\hipercool-videos\\workspace\\audio_injection_workflow.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\Hermes API - Audio Call Proxy.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-08 23:52"
+ },
+ {
+  "hash": "f7762ecf6e7c",
+  "nome": "HermesCall V2 All Endpoints copy 2",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 89,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hipercool-videos\\workspace\\workflow_YvcqTFj3qWCkBQhm.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\HermesCall V2 All Endpoints copy 2.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-09 16:30"
+ },
+ {
+  "hash": "e7db805979df",
+  "nome": "HermesCall V2 All Endpoints",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 89,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\dados\\wf_E4TqncKk0ASevK8m.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\HermesCall V2 All Endpoints · 2026-07-08 1036 · e7db80.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-08 10:36"
+ },
+ {
+  "hash": "9decb9007be5",
+  "nome": "hermescall4-brodcast",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 7,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\dados\\wf_original.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\hermescall4-brodcast.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-09 08:58"
+ },
+ {
+  "hash": "22da184501b9",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\PromovaWeb-Sexta-Feira_ 🤖 Hermes Telegram (Agente IA).json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA).json",
+  "versao_antiga": false,
+  "modificado": "2026-07-07 20:57"
+ },
+ {
+  "hash": "479196a6728b",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hipercool-videos\\workspace\\hermes-router.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-07 0131 · 479196.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-07 01:31"
+ },
+ {
+  "hash": "271b146276e0",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_api_patched.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1952 · 271b14.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 19:52"
+ },
+ {
+  "hash": "c217331bb7c2",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_api.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1934 · c21733.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 19:34"
+ },
+ {
+  "hash": "5f20f7f361fa",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_put.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1932 · 5f20f7.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 19:32"
+ },
+ {
+  "hash": "ba5ec7ebc6d5",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes2_patched_22.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1931 · ba5ec7.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 19:31"
+ },
+ {
+  "hash": "7ddf34f141c2",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp21.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1430 · 7ddf34.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 14:30"
+ },
+ {
+  "hash": "3a9184858297",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp20.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1427 · 3a9184.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 14:27"
+ },
+ {
+  "hash": "be4279236053",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp19.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1425 · be4279.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 14:25"
+ },
+ {
+  "hash": "ce4f40e2aea6",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp18.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1354 · ce4f40.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 13:54"
+ },
+ {
+  "hash": "5588576bc737",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp17.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1349 · 558857.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 13:49"
+ },
+ {
+  "hash": "17f23181327e",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp16.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1334 · 17f231.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 13:34"
+ },
+ {
+  "hash": "b5a0f4c874d8",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp15.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1237 · b5a0f4.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 12:37"
+ },
+ {
+  "hash": "960b1ff2364d",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp14.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1235 · 960b1f.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 12:35"
+ },
+ {
+  "hash": "9e7dec59b64b",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_final.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1205 · 9e7dec.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 12:05"
+ },
+ {
+  "hash": "cb11a0f9d6a9",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp13.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1203 · cb11a0.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 12:03"
+ },
+ {
+  "hash": "268539f78972",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp12.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1151 · 268539.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:51"
+ },
+ {
+  "hash": "4ca474800a4d",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp11.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1148 · 4ca474.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:48"
+ },
+ {
+  "hash": "d7d877842690",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp10.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1146 · d7d877.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:46"
+ },
+ {
+  "hash": "953899bb3cdf",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp9.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1144 · 953899.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:44"
+ },
+ {
+  "hash": "4069c9f46627",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp8.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1139 · 4069c9.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:39"
+ },
+ {
+  "hash": "969c9db8ca14",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp7.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1136 · 969c9d.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:36"
+ },
+ {
+  "hash": "617e7f503040",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp6.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1135 · 617e7f.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:35"
+ },
+ {
+  "hash": "cff6b1645ace",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp5.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1131 · cff6b1.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:31"
+ },
+ {
+  "hash": "4802adfc4523",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp4.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1124 · 4802ad.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:24"
+ },
+ {
+  "hash": "05b2f1c24971",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp3.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1121 · 05b2f1.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:21"
+ },
+ {
+  "hash": "c3d86214d5f9",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp2.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1120 · c3d862.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:20"
+ },
+ {
+  "hash": "c6b61c6e09c2",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes_resp.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1107 · c6b61c.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:07"
+ },
+ {
+  "hash": "0c68dc4e7473",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Hermes Telegram (Agente IA)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 14,
+  "precisa": [
+   "HTTP",
+   "Telegram API",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\hermes\\hermes-call\\_arquivo\\2026-09-24_vindo-de-hipercool-videos\\n8n-hermes-telegram\\hermes.json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\_versoes\\PromovaWeb-Sexta-Feira Hermes Telegram (Agente IA) · 2026-07-05 1100 · 0c68dc.json",
+  "versao_antiga": true,
+  "modificado": "2026-07-05 11:00"
+ },
+ {
+  "hash": "8dd8f5b2439c",
+  "nome": "🚀 Disparo Calls + Massa (com Loop)",
+  "assunto": "hermes-ligacoes-telegram",
+  "nos": 27,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\🚀 Disparo Calls + Massa (com Loop).json",
+  "copias": [],
+  "arquivo": "biblioteca\\hermes-ligacoes-telegram\\Disparo Calls + Massa (com Loop).json",
+  "versao_antiga": false,
+  "modificado": "2026-07-10 18:17"
+ },
+ {
+  "hash": "c83b3343a45e",
+  "nome": "📚 Revisão de livro · 0 · Leitor (fichas)",
+  "assunto": "livros",
+  "nos": 27,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\01 - 0 · Leitor (fichas).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 0 · Leitor (fichas).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:35"
+ },
+ {
+  "hash": "026c10a7420f",
+  "nome": "📚 Revisão de livro · 1 · Arquiteto (carta editorial)",
+  "assunto": "livros",
+  "nos": 24,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\02 - 1 · Arquiteto (carta editorial).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 1 · Arquiteto (carta editorial).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "5a54a170d859",
+  "nome": "📚 Revisão de livro · 2 · Físico (continuidade)",
+  "assunto": "livros",
+  "nos": 24,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\03 - 2 · Físico (continuidade).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 2 · Físico (continuidade).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "b7928d6c8cbb",
+  "nome": "📚 Revisão de livro · 3 · Psicólogo (personagens)",
+  "assunto": "livros",
+  "nos": 24,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\04 - 3 · Psicólogo (personagens).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 3 · Psicólogo (personagens).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "a35fa19f1db6",
+  "nome": "📚 Revisão de livro · 4 · Estilista (linha e voz)",
+  "assunto": "livros",
+  "nos": 38,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\05 - 4 · Estilista (linha e voz).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 4 · Estilista (linha e voz).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "5cb2d8670104",
+  "nome": "📚 Revisão de livro · 5 · Relojoeiro (cena a cena)",
+  "assunto": "livros",
+  "nos": 24,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\06 - 5 · Relojoeiro (cena a cena).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 5 · Relojoeiro (cena a cena).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "7ea97ad0701e",
+  "nome": "📚 Revisão de livro · 6 · Beta (leitores simulados)",
+  "assunto": "livros",
+  "nos": 38,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\07 - 6 · Beta (leitores simulados).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 6 · Beta (leitores simulados).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "208f9691d21b",
+  "nome": "📚 Revisão de livro · 7 · Guardião (style sheet)",
+  "assunto": "livros",
+  "nos": 38,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\08 - 7 · Guardião (style sheet).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 7 · Guardião (style sheet).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "ff4a9900bbd4",
+  "nome": "📚 Revisão de livro · 8 · Checklist final (editor-chefe)",
+  "assunto": "livros",
+  "nos": 22,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [
+   "video-oficina (servidor de vídeo próprio)"
+  ],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\09 - 8 · Checklist final (editor-chefe).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · 8 · Checklist final (editor-chefe).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:36"
+ },
+ {
+  "hash": "c81e5b9885e2",
+  "nome": "📚 Revisão de livro · Editor-chefe (comece aqui)",
+  "assunto": "livros",
+  "nos": 92,
+  "precisa": [
+   "HTTP",
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxo n8n farael\\fluxos n8n (importar)\\00 - Editor-chefe (comece aqui).json",
+  "copias": [],
+  "arquivo": "biblioteca\\livros\\Revisão de livro · Editor-chefe (comece aqui).json",
+  "versao_antiga": false,
+  "modificado": "2026-10-25 17:35"
+ },
+ {
+  "hash": "c42beb55f8fc",
+  "nome": "App do Negócio (PWA) com IA + Notificações no Celular - ok",
+  "assunto": "paginas-e-apps",
+  "nos": 87,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\App do Negócio (PWA) com IA + Notificações no Celular - ok.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\App do Negócio (PWA) com IA + Notificações no Celular - ok.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-23 17:26"
+ },
+ {
+  "hash": "5701e318530b",
+  "nome": "backend manager-financeiro",
+  "assunto": "paginas-e-apps",
+  "nos": 27,
+  "precisa": [
+   "HTTP",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\backend manager-financeiro.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\backend manager-financeiro.json",
+  "versao_antiga": false,
+  "modificado": "2026-09-01 08:49"
+ },
+ {
+  "hash": "1bfc4108866e",
+  "nome": "backend-plataforma",
+  "assunto": "paginas-e-apps",
+  "nos": 133,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\paginas painel\\backend-plataforma.json",
+  "copias": [
+   "D:\\downloads\\saas de agentes de atendimento no whatsapp com evolutionn api e assas\\agente feito no n8n nao totamentente funcional\\backend-plataforma.json"
+  ],
+  "arquivo": "biblioteca\\paginas-e-apps\\backend-plataforma.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-11 13:17"
+ },
+ {
+  "hash": "9ccfc350cf6a",
+  "nome": "comunidade pro",
+  "assunto": "paginas-e-apps",
+  "nos": 153,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "HTTP",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\comunidade pro.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\comunidade pro.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-19 16:44"
+ },
+ {
+  "hash": "0d2bd7690508",
+  "nome": "Gerador de Landing Page por IA",
+  "assunto": "paginas-e-apps",
+  "nos": 12,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\Gerador de Landing Page por IA.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\Gerador de Landing Page por IA.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-23 17:27"
+ },
+ {
+  "hash": "7f9598cc9750",
+  "nome": "Gerador de Landing Page por IA — PRO (multiagente) - ok",
+  "assunto": "paginas-e-apps",
+  "nos": 52,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "roteador OmniRoute"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\Gerador de Landing Page por IA — PRO (multiagente) - ok.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\Gerador de Landing Page por IA — PRO (multiagente) - ok.json",
+  "versao_antiga": false,
+  "modificado": "2026-10-23 17:30"
+ },
+ {
+  "hash": "dfe9fe198fa9",
+  "nome": "KG Estratégico",
+  "assunto": "paginas-e-apps",
+  "nos": 7,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "Supabase"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\KG Estratégico (1).json",
+  "copias": [
+   "D:\\downloads\\fluxos\\KG Estratégico.json"
+  ],
+  "arquivo": "biblioteca\\paginas-e-apps\\KG Estratégico.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-05 23:22"
+ },
+ {
+  "hash": "a8331f71cdad",
+  "nome": "modulo-financeiro",
+  "assunto": "paginas-e-apps",
+  "nos": 49,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "HTTP",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\modulo-financeiro.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\modulo-financeiro.json",
+  "versao_antiga": false,
+  "modificado": "2026-09-01 08:48"
+ },
+ {
+  "hash": "a7a2f6c34726",
+  "nome": "PAINEL financeiro",
+  "assunto": "paginas-e-apps",
+  "nos": 14,
+  "precisa": [
+   "Postgres"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\PAINEL financeiro.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\PAINEL financeiro.json",
+  "versao_antiga": false,
+  "modificado": "2026-09-01 08:49"
+ },
+ {
+  "hash": "ffcbc934ce40",
+  "nome": "site mental",
+  "assunto": "paginas-e-apps",
+  "nos": 5,
+  "precisa": [],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\site mental.json",
+  "copias": [],
+  "arquivo": "biblioteca\\paginas-e-apps\\site mental.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-13 16:29"
+ },
+ {
+  "hash": "f2e71e5f3829",
+  "nome": "jarvis-tratamento de erros e aviso",
+  "assunto": "servidor-e-monitoramento",
+  "nos": 11,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\jarvis-tratamento de erros e aviso.json",
+  "copias": [],
+  "arquivo": "biblioteca\\servidor-e-monitoramento\\jarvis-tratamento de erros e aviso.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-08 19:27"
+ },
+ {
+  "hash": "3792c9425e76",
+  "nome": "jarvis-tratamento de erros e aviso final",
+  "assunto": "servidor-e-monitoramento",
+  "nos": 52,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "Redis",
+   "SSH",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\jarvis-tratamento de erros e aviso final (1).json",
+  "copias": [],
+  "arquivo": "biblioteca\\servidor-e-monitoramento\\jarvis-tratamento de erros e aviso final.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-20 10:41"
+ },
+ {
+  "hash": "0e4283e8a621",
+  "nome": "jarvis-tratamento de erros e aviso final",
+  "assunto": "servidor-e-monitoramento",
+  "nos": 52,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "Redis",
+   "SSH",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\jarvis-tratamento de erros e aviso final.json",
+  "copias": [],
+  "arquivo": "biblioteca\\servidor-e-monitoramento\\_versoes\\jarvis-tratamento de erros e aviso final · 2026-04-16 2339 · 0e4283.json",
+  "versao_antiga": true,
+  "modificado": "2026-04-16 23:39"
+ },
+ {
+  "hash": "cbd7aead1aec",
+  "nome": "PromovaWeb-Sexta-Feira: 📈 Termômetro das VPSs",
+  "assunto": "servidor-e-monitoramento",
+  "nos": 6,
+  "precisa": [
+   "SSH"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\PromovaWeb-Sexta-Feira_ 📈 Termômetro das VPSs.json",
+  "copias": [],
+  "arquivo": "biblioteca\\servidor-e-monitoramento\\PromovaWeb-Sexta-Feira Termômetro das VPSs.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-01 15:40"
+ },
+ {
+  "hash": "65c0973f6f36",
+  "nome": "PromovaWeb-Sexta-Feira: 📰 Radar de Notícias v4",
+  "assunto": "servidor-e-monitoramento",
+  "nos": 28,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\PromovaWeb-Sexta-Feira_ 📰 Radar de Notícias v4.json",
+  "copias": [],
+  "arquivo": "biblioteca\\servidor-e-monitoramento\\PromovaWeb-Sexta-Feira Radar de Notícias v4.json",
+  "versao_antiga": false,
+  "modificado": "2026-09-01 08:50"
+ },
+ {
+  "hash": "5030141c0f24",
+  "nome": "PromovaWeb-Sexta-Feira: 🤖 Autocura (Limpeza Automática)",
+  "assunto": "servidor-e-monitoramento",
+  "nos": 8,
+  "precisa": [
+   "HTTP",
+   "SSH",
+   "Telegram API"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\PromovaWeb-Sexta-Feira_ 🤖 Autocura (Limpeza Automática).json",
+  "copias": [],
+  "arquivo": "biblioteca\\servidor-e-monitoramento\\PromovaWeb-Sexta-Feira Autocura (Limpeza Automática).json",
+  "versao_antiga": false,
+  "modificado": "2026-07-08 14:29"
+ },
+ {
+  "hash": "18ac74c66f2e",
+  "nome": "[v1] Youtube Auto Create and Post",
+  "assunto": "video-e-imagem",
+  "nos": 60,
+  "precisa": [
+   "ElevenLabs",
+   "Google Planilhas",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "SSH",
+   "YouTube (OAuth)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\v1YoutubeAutoCreateandPost.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\[v1] Youtube Auto Create and Post.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-20 18:07"
+ },
+ {
+  "hash": "c1310c688a6f",
+  "nome": "[v2] Youtube Auto Create and Post",
+  "assunto": "video-e-imagem",
+  "nos": 46,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gmail",
+   "Google Drive",
+   "Google Planilhas",
+   "HTTP",
+   "IA (OpenAI/roteador)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\v2YoutubeAutoCreateandPost.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\[v2] Youtube Auto Create and Post.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-20 18:07"
+ },
+ {
+  "hash": "8b561e73dad1",
+  "nome": "aula fabrica viral",
+  "assunto": "video-e-imagem",
+  "nos": 30,
+  "precisa": [
+   "Agente de IA",
+   "Google Drive",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "YouTube (OAuth)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\aula fabrica viral.json",
+  "copias": [
+   "D:\\downloads\\fluxos\\fabrica viral.json"
+  ],
+  "arquivo": "biblioteca\\video-e-imagem\\aula fabrica viral.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-20 15:00"
+ },
+ {
+  "hash": "9486702e6589",
+  "nome": "aula fabrica viral novo 1 copy",
+  "assunto": "video-e-imagem",
+  "nos": 38,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Google Drive",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)",
+   "YouTube (OAuth)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\aula fabrica viral novo 1 copy.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\aula fabrica viral novo 1 copy.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-01 16:56"
+ },
+ {
+  "hash": "2d464385ec21",
+  "nome": "calculadora de sensura",
+  "assunto": "video-e-imagem",
+  "nos": 5,
+  "precisa": [],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\calculadora de sensura.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\calculadora de sensura.json",
+  "versao_antiga": false,
+  "modificado": "2026-06-30 22:59"
+ },
+ {
+  "hash": "135d775507f0",
+  "nome": "cria video de historia youtube",
+  "assunto": "video-e-imagem",
+  "nos": 195,
+  "precisa": [
+   "Agente de IA",
+   "Arquivo no disco do servidor",
+   "Comando no servidor",
+   "ElevenLabs",
+   "Gemini",
+   "Gemini API",
+   "Google Drive",
+   "Google Planilhas",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [
+   "arquivos no disco do servidor",
+   "programa no servidor (Execute Command)"
+  ],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\cria video de historia youtube.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\cria video de historia youtube.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-22 23:21"
+ },
+ {
+  "hash": "e8823f26e793",
+  "nome": "fabrica de animes-1-funcional copy 2",
+  "assunto": "video-e-imagem",
+  "nos": 32,
+  "precisa": [
+   "Arquivo no disco do servidor",
+   "Comando no servidor",
+   "HTTP",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [
+   "arquivos no disco do servidor",
+   "programa no servidor (Execute Command)"
+  ],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\fabrica de animes-1-funcional copy 2.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\fabrica de animes-1-funcional copy 2.json",
+  "versao_antiga": false,
+  "modificado": "2026-06-29 17:03"
+ },
+ {
+  "hash": "bc8074483d0f",
+  "nome": "fabrica de animes-3-cria video pequeno copy",
+  "assunto": "video-e-imagem",
+  "nos": 1,
+  "precisa": [],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\fabrica de animes-3-cria video pequeno copy.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\fabrica de animes-3-cria video pequeno copy.json",
+  "versao_antiga": false,
+  "modificado": "2026-06-28 04:14"
+ },
+ {
+  "hash": "63e0051d800b",
+  "nome": "fabrica de animes-4-cria videos grandes compilados",
+  "assunto": "video-e-imagem",
+  "nos": 1,
+  "precisa": [],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\fabrica de animes-4-cria videos grandes compilados.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\fabrica de animes-4-cria videos grandes compilados.json",
+  "versao_antiga": false,
+  "modificado": "2026-06-28 04:23"
+ },
+ {
+  "hash": "1fe9d92cbdd3",
+  "nome": "Fábrica Viral-1-gera prompt",
+  "assunto": "video-e-imagem",
+  "nos": 53,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\Fábrica Viral-1-gera prompt.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\Fábrica Viral-1-gera prompt.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-04 23:11"
+ },
+ {
+  "hash": "e4d3d5665ae8",
+  "nome": "Fábrica Viral-2-gera imagem copy",
+  "assunto": "video-e-imagem",
+  "nos": 30,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\Fábrica Viral-2-gera imagem copy.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\Fábrica Viral-2-gera imagem copy.json",
+  "versao_antiga": false,
+  "modificado": "2026-07-04 23:16"
+ },
+ {
+  "hash": "d8c5e5a20a3a",
+  "nome": "maquina de reels",
+  "assunto": "video-e-imagem",
+  "nos": 38,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Google Drive",
+   "HTTP",
+   "IA (OpenAI/roteador)"
+  ],
+  "instalar": [
+   "nó da comunidade n8n-nodes-instagram-token.instagram"
+  ],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\maquina de reels.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\maquina de reels.json",
+  "versao_antiga": false,
+  "modificado": "2026-03-26 16:30"
+ },
+ {
+  "hash": "87f565dd05aa",
+  "nome": "RENATA GERA VIDEO E IMAGEM DESING",
+  "assunto": "video-e-imagem",
+  "nos": 29,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "Google Drive",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\RENATA GERA VIDEO E IMAGEM DESING.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\RENATA GERA VIDEO E IMAGEM DESING.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-06 11:22"
+ },
+ {
+  "hash": "f2649f54a54e",
+  "nome": "Sub-workflow - analiza video",
+  "assunto": "video-e-imagem",
+  "nos": 12,
+  "precisa": [
+   "Gemini API",
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\Sub-workflow - analiza video.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\Sub-workflow - analiza video.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:17"
+ },
+ {
+  "hash": "cd1c53981ab4",
+  "nome": "Sub-workflow_transcreve_imagem",
+  "assunto": "video-e-imagem",
+  "nos": 5,
+  "precisa": [
+   "Gemini API",
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\Sub-workflow_transcreve_imagem.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\Sub-workflow_transcreve_imagem.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:17"
+ },
+ {
+  "hash": "b83ea7e4f990",
+  "nome": "VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi",
+  "assunto": "video-e-imagem",
+  "nos": 32,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi (1).json",
+  "copias": [
+   "D:\\downloads\\fluxos\\VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi (2).json"
+  ],
+  "arquivo": "biblioteca\\video-e-imagem\\VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi.json",
+  "versao_antiga": false,
+  "modificado": "2026-03-26 16:28"
+ },
+ {
+  "hash": "eb662d9af15f",
+  "nome": "VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi",
+  "assunto": "video-e-imagem",
+  "nos": 31,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi.json",
+  "copias": [],
+  "arquivo": "biblioteca\\video-e-imagem\\_versoes\\VITRINE-envio de produto com imagem e confirmacao do pedido - wuzapi · 2026-03-20 1734 · eb662d.json",
+  "versao_antiga": true,
+  "modificado": "2026-03-20 17:34"
+ },
+ {
+  "hash": "aa5a37fa4138",
+  "nome": "Youtube Auto Create and Post",
+  "assunto": "video-e-imagem",
+  "nos": 46,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gmail",
+   "Google Drive",
+   "Google Planilhas",
+   "HTTP",
+   "IA (OpenAI/roteador)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\YoutubeAutoCreateandPost (1).json",
+  "copias": [
+   "D:\\downloads\\fluxos\\YoutubeAutoCreateandPost (2).json",
+   "D:\\downloads\\fluxos\\YoutubeAutoCreateandPost.json"
+  ],
+  "arquivo": "biblioteca\\video-e-imagem\\Youtube Auto Create and Post.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-19 17:09"
+ },
+ {
+  "hash": "41a75857c1a7",
+  "nome": "advogado trab",
+  "assunto": "whatsapp-atendimento",
+  "nos": 53,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "Redis",
+   "SSH",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\advogado trab.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\advogado trab.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-03 21:18"
+ },
+ {
+  "hash": "38a11a11fa57",
+  "nome": "agendamento banco",
+  "assunto": "whatsapp-atendimento",
+  "nos": 20,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Postgres"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\agendamento banco.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\agendamento banco.json",
+  "versao_antiga": false,
+  "modificado": "2026-03-26 16:25"
+ },
+ {
+  "hash": "8c3bbd8291ed",
+  "nome": "agente que tras conversas anteriores",
+  "assunto": "whatsapp-atendimento",
+  "nos": 49,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\agente que tras conversas anteriores (1).json",
+  "copias": [
+   "D:\\downloads\\fluxos\\agente que tras conversas anteriores.json"
+  ],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\agente que tras conversas anteriores.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-24 17:48"
+ },
+ {
+  "hash": "a69a509845b8",
+  "nome": "ajuda humana+treinamento informatica",
+  "assunto": "whatsapp-atendimento",
+  "nos": 19,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\ajuda humana+treinamento informatica (1).json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\ajuda humana+treinamento informatica.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:13"
+ },
+ {
+  "hash": "5f63b80da2d8",
+  "nome": "ajuda humana+treinamento informatica",
+  "assunto": "whatsapp-atendimento",
+  "nos": 23,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\ajuda humana+treinamento informatica.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\_versoes\\ajuda humana+treinamento informatica · 2026-05-15 1111 · 5f63b8.json",
+  "versao_antiga": true,
+  "modificado": "2026-05-15 11:11"
+ },
+ {
+  "hash": "9acf1f658891",
+  "nome": "atendimento 1",
+  "assunto": "whatsapp-atendimento",
+  "nos": 17,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\atendimento 1 (1).json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\atendimento 1.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-10 19:37"
+ },
+ {
+  "hash": "37edd8c34a4a",
+  "nome": "atendimento 1",
+  "assunto": "whatsapp-atendimento",
+  "nos": 22,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\atendimento 1.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\_versoes\\atendimento 1 · 2026-04-10 1859 · 37edd8.json",
+  "versao_antiga": true,
+  "modificado": "2026-04-10 18:59"
+ },
+ {
+  "hash": "903e1f1f29ad",
+  "nome": "disparo e folow up remarketing em massa evoluion rei dos cartuchos",
+  "assunto": "whatsapp-atendimento",
+  "nos": 47,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\disparo e folow up remarketing em massa evoluion rei dos cartuchos.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\disparo e folow up remarketing em massa evoluion rei dos cartuchos.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-30 20:26"
+ },
+ {
+  "hash": "f620e16e16a1",
+  "nome": "DPS — Atendimento Unificado (Texto + Áudio)",
+  "assunto": "whatsapp-atendimento",
+  "nos": 43,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\DPS — Atendimento Unificado (Texto + Áudio).json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\DPS — Atendimento Unificado (Texto + Áudio).json",
+  "versao_antiga": false,
+  "modificado": "2026-04-13 10:36"
+ },
+ {
+  "hash": "1b30de8fbde2",
+  "nome": "edson",
+  "assunto": "whatsapp-atendimento",
+  "nos": 5,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "IA (OpenAI/roteador)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\edson (2).json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\edson.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-27 10:11"
+ },
+ {
+  "hash": "481248bbf3f1",
+  "nome": "edson",
+  "assunto": "whatsapp-atendimento",
+  "nos": 6,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "IA (OpenAI/roteador)",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\edson (1).json",
+  "copias": [
+   "D:\\downloads\\fluxos\\edson.json"
+  ],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\_versoes\\edson · 2026-04-27 1010 · 481248.json",
+  "versao_antiga": true,
+  "modificado": "2026-04-27 10:10"
+ },
+ {
+  "hash": "38250550f3aa",
+  "nome": "ext-21-folowup remarketing que envia mensgem fixa",
+  "assunto": "whatsapp-atendimento",
+  "nos": 66,
+  "precisa": [
+   "HTTP",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\ext-21-folowup remarketing que envia mensgem fixa.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\ext-21-folowup remarketing que envia mensgem fixa.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 03:18"
+ },
+ {
+  "hash": "fb51e2df0299",
+  "nome": "extrai contatos de chats whatsapp",
+  "assunto": "whatsapp-atendimento",
+  "nos": 36,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\extrai contatos de chats whatsapp.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\extrai contatos de chats whatsapp.json",
+  "versao_antiga": false,
+  "modificado": "2026-09-01 08:47"
+ },
+ {
+  "hash": "c83a2daeeea6",
+  "nome": "Flow Rei do Cartucho (Reparado com Frontend)",
+  "assunto": "whatsapp-atendimento",
+  "nos": 51,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "Postgres",
+   "Redis",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\Fluxo_Corrigido.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\Flow Rei do Cartucho (Reparado com Frontend).json",
+  "versao_antiga": false,
+  "modificado": "2026-04-30 20:53"
+ },
+ {
+  "hash": "b9d6542542d6",
+  "nome": "fluxo sem api de emvio macro",
+  "assunto": "whatsapp-atendimento",
+  "nos": 15,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\fluxo sem api de emvio macro.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\fluxo sem api de emvio macro.json",
+  "versao_antiga": false,
+  "modificado": "2026-03-30 20:17"
+ },
+ {
+  "hash": "1e3cd4d5ac95",
+  "nome": "hub-atendimento",
+  "assunto": "whatsapp-atendimento",
+  "nos": 167,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "Google Planilhas",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "Redis",
+   "SSH",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\hub-atendimento.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\hub-atendimento.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:15"
+ },
+ {
+  "hash": "75bdcf48aeb5",
+  "nome": "imoveis",
+  "assunto": "whatsapp-atendimento",
+  "nos": 4,
+  "precisa": [],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\imoveis.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\imoveis.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-17 08:59"
+ },
+ {
+  "hash": "440a122f00b2",
+  "nome": "jarvis-tratamento de erros e aviso final",
+  "assunto": "whatsapp-atendimento",
+  "nos": 53,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "Redis",
+   "SSH",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\VITRINE_EIA_V2\\JARVIS_OPS_COMPLETE_V13_20260518_101741\\jarvis_ops\\jarvis-tratamento de erros e aviso final.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\jarvis-tratamento de erros e aviso final.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-18 10:17"
+ },
+ {
+  "hash": "f54a2dc27f27",
+  "nome": "memoria de elefante Com gerenciador",
+  "assunto": "whatsapp-atendimento",
+  "nos": 54,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Postgres"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\memoria de elefante Com gerenciador (1).json",
+  "copias": [
+   "D:\\downloads\\fluxos\\memoria de elefante Com gerenciador.json"
+  ],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\memoria de elefante Com gerenciador.json",
+  "versao_antiga": false,
+  "modificado": "2026-04-13 16:19"
+ },
+ {
+  "hash": "ba3475bbb647",
+  "nome": "MODELO DE ATENDIMENTO DE TESTE GRATIS",
+  "assunto": "whatsapp-atendimento",
+  "nos": 46,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "Gemini API",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "Redis",
+   "SSH",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\MODELO DE ATENDIMENTO DE TESTE GRATIS.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\MODELO DE ATENDIMENTO DE TESTE GRATIS.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-18 03:00"
+ },
+ {
+  "hash": "fea7ae8b4227",
+  "nome": "Sub-workflow acionamento do desligamento",
+  "assunto": "whatsapp-atendimento",
+  "nos": 8,
+  "precisa": [
+   "Redis"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\Sub-workflow acionamento do desligamento.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\Sub-workflow acionamento do desligamento.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:18"
+ },
+ {
+  "hash": "0645a9ca90aa",
+  "nome": "Sub-workflow de presenca e maracado como lido",
+  "assunto": "whatsapp-atendimento",
+  "nos": 6,
+  "precisa": [
+   "HTTP",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\Sub-workflow de presenca e maracado como lido.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\Sub-workflow de presenca e maracado como lido.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:18"
+ },
+ {
+  "hash": "c798a651bab1",
+  "nome": "Sub-workflow-analiza-pdf",
+  "assunto": "whatsapp-atendimento",
+  "nos": 14,
+  "precisa": [
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\Sub-workflow-analiza-pdf.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\Sub-workflow-analiza-pdf.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:17"
+ },
+ {
+  "hash": "4ae9a2997a6d",
+  "nome": "Sub-workflow-transcreve_audio",
+  "assunto": "whatsapp-atendimento",
+  "nos": 8,
+  "precisa": [
+   "Gemini API",
+   "HTTP"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\Sub-workflow-transcreve_audio.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\Sub-workflow-transcreve_audio.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-15 11:17"
+ },
+ {
+  "hash": "d5fc25775c92",
+  "nome": "SãdentesSecretaria",
+  "assunto": "whatsapp-atendimento",
+  "nos": 59,
+  "precisa": [
+   "Agente de IA",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "Redis",
+   "Supabase",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [
+   "nó da comunidade n8n-nodes-evolution-api.evolutionApi"
+  ],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\SãdentesSecretaria (3).json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\SãdentesSecretaria.json",
+  "versao_antiga": false,
+  "modificado": "2026-05-05 14:22"
+ },
+ {
+  "hash": "8a40feec6c20",
+  "nome": "SãdentesSecretaria copy",
+  "assunto": "whatsapp-atendimento",
+  "nos": 15,
+  "precisa": [
+   "Agente de IA",
+   "Gemini",
+   "HTTP",
+   "IA (OpenAI/roteador)",
+   "Postgres",
+   "WhatsApp (Evolution/WuzAPI)"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": true,
+  "origem": "D:\\downloads\\fluxos\\SãdentesSecretaria copy.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\_versoes\\SãdentesSecretaria copy · 2026-05-05 1404 · 8a40fe.json",
+  "versao_antiga": true,
+  "modificado": "2026-05-05 14:04"
+ },
+ {
+  "hash": "2cc8983b132d",
+  "nome": "SãdentesSecretaria copy",
+  "assunto": "whatsapp-atendimento",
+  "nos": 11,
+  "precisa": [
+   "Agente de IA",
+   "IA (OpenAI/roteador)",
+   "Postgres"
+  ],
+  "instalar": [],
+  "chave_no_fluxo": false,
+  "origem": "D:\\downloads\\fluxos\\SãdentesSecretaria copy.json",
+  "copias": [],
+  "arquivo": "biblioteca\\whatsapp-atendimento\\_versoes\\SãdentesSecretaria copy · 2026-05-05 1153 · 2cc898.json",
+  "versao_antiga": true,
+  "modificado": "2026-05-05 11:53"
+ }
+]

@@ -1,0 +1,47 @@
+MANHWA-REACT NO OUTRO PC
+========================
+Copia do manhwa-react como esta no PC principal, com tudo que ele usa de outras pastas: efeitos,
+trilhas, overlays, memes, ffmpeg, modelos do Whisper, retratos das capas, caches de editorial e
+transcricao e a configuracao dos canais. O PC principal continua funcionando igual.
+
+INSTALAR
+1. Baixe TODOS os arquivos desta pasta do Drive para uma pasta qualquer (ex.: Downloads\pacote).
+2. Precisa de: disco D: com uns 30 GB livres, internet e Python 3.13
+   (se nao tiver, no PowerShell:  winget install -e --id Python.Python.3.13 ).
+3. Na pasta dos arquivos, abra o PowerShell e rode:
+       powershell -ExecutionPolicy Bypass -File INSTALAR.ps1
+   Ele extrai tudo em D:\ (os mesmos caminhos do PC principal), cria o ambiente Python e testa.
+
+USAR
+- Grave no OBS com a saida em D:\manhwa-react\1-COLOQUE-AQUI
+- Processar: D:\manhwa-react\.venv\Scripts\python.exe D:\manhwa-react\manhwareact.py batch
+- Os videos prontos saem em D:\hipercool-materiais\manhwa-react\shorts | cortes | grandes
+- Botoes na area de trabalho (opcional):
+      powershell -ExecutionPolicy Bypass -File D:\manhwa-react\scripts\criar_atalhos.ps1
+  NESTE PC use so os botoes de processar e aprovar. NAO aperte LIGAR postagem (abaixo).
+
+POSTAGEM (importante)
+A postagem automatica (rede de canais, TikTok, Instagram) continua SO no PC principal: la estao o
+historico do que ja foi postado, os logins do YouTube/TikTok e as tarefas agendadas. Aqui ela chega
+DESLIGADA (D:\postador-de-videos\config\POSTAGEM_DESLIGADA.json). Se os dois PCs postarem, o mesmo
+video sai duas vezes e os canais estouram a cota.
+Para os videos feitos aqui serem postados: copie as pastas shorts, cortes e grandes de
+D:\hipercool-materiais\manhwa-react\ para o mesmo lugar no PC principal (ou peca ao Claude para
+montar a sincronizacao pelo Drive).
+
+VIRADA (quando quiser que ESTE PC seja o principal)
+1. No PC principal: botao DESLIGAR e desative as tarefas agendadas (PostadorDeVideos,
+   ManhwaReact-*, AgendadorVO3, BackupDriveVideos).
+2. Gere um pacote novo no PC principal (D:\manhwa-react\scripts\pacote_outro_pc.py) e leve tambem:
+   D:\postador-de-videos\logs (historico de uploads), D:\hipercool-materiais\_postados (registro),
+   a fila D:\hipercool-materiais\manhwa-react e D:\credenciais-canais.
+3. Aqui: entre nos perfis do Chrome dos canais, recrie as tarefas agendadas e so entao LIGAR.
+
+O QUE NAO VEM NO PACOTE
+- Ambiente Python (.venv): o INSTALAR.ps1 recria a partir do requirements.txt.
+- Videos ja renderizados (output/), audios de trabalho e a fila de postagem.
+- MusicGen (comando "musica"): usa o ambiente do recapd-ambientes; so para gerar trilha nova.
+- Claude CLI de reserva (config.json > claude_cli): o caminho e do PC principal. A IA principal e o
+  proxy, que funciona daqui.
+
+segredos.zip tem chaves de API: nao compartilhe o link desta pasta com ninguem.

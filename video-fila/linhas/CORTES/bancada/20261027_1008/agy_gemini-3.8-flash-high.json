@@ -1,0 +1,42 @@
+{
+ "modelo": "agy/gemini-3.8-flash-high",
+ "segundos": 327,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Mantenha um único título no topo, sem sobrepor outros textos ou elementos visuais da cena, e com ortografia rigorosamente revisada.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "O lote apresentou problemas repetidos de sobreposição visual no topo e obstrução de expressões faciais por elementos gráficos. Em sem-obra-8a49d5 (q01) e sem-obra-c853c4 (q01), houve colisão e sobreposição de títulos e textos de impacto no topo, além de erro ortográfico em sem-obra-110e14 (q01). Adicionalmente, marcas d'água e botões de engajamento cobriram diretamente rostos de personagens em sem-obra-777e60 (q04, q06) e sem-obra-8a49d5 (q11, q15), violando a regra de não obstruir rostos e de proibir @ na tela.",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Mantenha um único título no topo, sem sobrepor outros textos ou elementos visuais da cena, e com ortografia rigorosamente revisada.",
+    "porque": "Evita a colisão e sobreposição de múltiplos títulos no topo observada em sem-obra-8a49d5 (q01) e sem-obra-c853c4 (q01)."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Impedir que marcas d'água, botões de engajamento e overlays cubram rostos de personagens",
+    "tipo": "CERTEZA",
+    "prova": "Em sem-obra-777e60 (q04 e q06), a marca d'água '@doramanoturno' cobriu testa, olhos e boca dos personagens; em sem-obra-8a49d5 (q11 e q15), o botão 'INSCREVA-SE' cobriu diretamente o rosto das pessoas no sofá.",
+    "onde": "parceiro_marca.py / anime_montar.py",
+    "como_testar": "Renderizar Shorts do lote e validar que overlays respeitem as caixas delimitadoras de rostos e removam qualquer @ da tela conforme a regra fixa da dona."
+   }
+  ],
+  "mural": [
+   "Aviso para as linhas LONGOS e PRODUTOS: reforçar travas de layout para impedir que botões de CTA ou marcas d'água cubram expressões faciais de personagens."
+  ]
+ }
+}

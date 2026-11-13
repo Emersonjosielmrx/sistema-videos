@@ -1,0 +1,15 @@
+import { chromium } from 'file:///c/Users/Haylla/AppData/Roaming/npm/node_modules/n8n/node_modules/playwright/index.js';
+const url = 'https://hermescall.opus-sem-limites.com.br/?action=login';
+const b = await chromium.launch();
+const p = await b.newPage();
+const errs = [], logs = [];
+p.on('console', m => logs.push('['+m.type()+'] '+m.text()));
+p.on('pageerror', e => errs.push('PAGEERROR: '+e.message+'\n'+(e.stack||'').split('\n').slice(0,5).join('\n')));
+p.on('requestfailed', r => errs.push('REQFAIL: '+r.url()+' — '+(r.failure()&&r.failure().errorText)));
+await p.goto(url, { waitUntil: 'networkidle', timeout: 30000 }).catch(e => errs.push('GOTO: '+e.message));
+await p.waitForTimeout(2500);
+const rootHtml = await p.$eval('#root', el => el.innerHTML).catch(() => '<<sem #root>>');
+console.log('=== PAGE ERRORS ==='); console.log(errs.join('\n') || '(nenhum)');
+console.log('=== CONSOLE (últimas 15) ==='); console.log(logs.slice(-15).join('\n') || '(vazio)');
+console.log('=== #root innerHTML (len='+rootHtml.length+') ==='); console.log(rootHtml.slice(0, 500));
+await b.close();

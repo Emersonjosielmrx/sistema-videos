@@ -1,0 +1,30 @@
+{
+  "accounts": {
+    "fabrica": {
+      "notebook": "D:\\projetos-navegador\\colab-workers\\notebooks\\worker_fabrica.ipynb",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "mundosolar1995": {
+      "notebook": "D:\\projetos-navegador\\colab-workers\\notebooks\\worker_mundosolar1995.ipynb",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "canalalucinaai": {
+      "notebook": "D:\\projetos-navegador\\colab-workers\\notebooks\\worker_canalalucinaai.ipynb",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "seebotsia": {
+      "notebook": "D:\\projetos-navegador\\colab-workers\\notebooks\\worker_seebotsia.ipynb",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "emersonjosiel649": {
+      "notebook": "D:\\projetos-navegador\\colab-workers\\notebooks\\worker_emersonjosiel649.ipynb",
+      "uploaded": false,
+      "dry_run": true
+    }
+  },
+  "last_run": "2026-07-02T16:19:42.540254+00:00"
+}

@@ -1,0 +1,16 @@
+WhatsApp do cliente -> status (vídeos postados no Instagram também vão para o status dele)
+
+Só precisa fazer 1 vez:
+
+1. Entre no Hermes Call (https://hermescall.opus-sem-limites.com.br) com a sua conta.
+2. Vá em Configurações > API do Sistema > API Keys > "Nova Chave" (nome: "Painel de Clientes").
+   Copie a chave na hora (ela começa com hk_... e o Hermes não mostra de novo).
+3. Crie aqui nesta pasta um arquivo chamado  hermes_chave.txt  e cole só a chave dentro (1 linha).
+4. Rode:  python D:\painel-clientes\publicar.py --config
+   (ou peça para o Claude rodar).
+
+Depois disso, no painel de cada cliente aparece o botão "Conectar WhatsApp":
+o cliente aponta o celular para o QR code (WhatsApp > Aparelhos conectados > Conectar um aparelho),
+ou, se estiver com o painel aberto no próprio celular, usa "conectar pelo número" e digita o código.
+
+Cada cliente vira 1 conta dentro do SEU Hermes Call (nome "Status · <cliente>").

@@ -1,0 +1,321 @@
+{
+ "video": "D:\\downloads\\7-20261012T124003Z-1-001\\7\\2026-10-07 16-17-32.mp4",
+ "duration": 137.766667,
+ "layout": {
+  "width": 720,
+  "height": 1280,
+  "content_x0": 0,
+  "content_x1": 714,
+  "has_webcam": true,
+  "contrast": 46.1,
+  "trimmed": {},
+  "divider": 360,
+  "webcam": [
+   0,
+   0,
+   720,
+   360
+  ],
+  "content": [
+   0,
+   360,
+   714,
+   1280
+  ]
+ },
+ "lip_threshold": 0.0014,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": true,
+  "score": 5,
+  "reason": "React curto a filme/série com comentários sobre tritons e cenas de perseguição, mas com muitos silêncios e pouca reação forte do criador.",
+  "topic": "React a filme/série com tritons e acordo perigoso",
+  "channel": "cenareact",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 49.0,
+    "hook": "OS TRITONS SÃO ASSEXUADOS?!",
+    "title": "Esse acordo NÃO vale a pena 😳 Se o cara vai embora, esquece! #shorts #react",
+    "description": "O criador reage a um filme e descobre que os tritons são assexuados 😂 Será que vale a pena fazer esse acordo? Ele acha que não!\nVocê faria esse acordo? Comenta aí!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #filme #triton #sereia #acordo #reacao #cenareact #filmes #curiosidade #engracado #humor #reactbr #viral",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#filme",
+     "#triton",
+     "#sereia",
+     "#acordo",
+     "#reacao",
+     "#cenareact",
+     "#humor",
+     "#reactbr"
+    ],
+    "tags": [
+     "react",
+     "filme",
+     "triton",
+     "sereia",
+     "acordo",
+     "reação",
+     "react filme",
+     "cena de filme",
+     "react br",
+     "shorts",
+     "cenareact",
+     "humor",
+     "comédia",
+     "filmes",
+     "curiosidade",
+     "react engraçado"
+    ],
+    "keywords": [
+     {
+      "t": 13.0,
+      "text": "ASSEXUADOS",
+      "emoji": "😳"
+     },
+     {
+      "t": 44.0,
+      "text": "NÃO VALE A PENA",
+      "emoji": "❌"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 6.0,
+      "type": "question"
+     },
+     {
+      "t": 30.0,
+      "type": "shock"
+     },
+     {
+      "t": 44.0,
+      "type": "angry"
+     }
+    ],
+    "memes": [
+     {
+      "t": 13.0,
+      "id": 105
+     },
+     {
+      "t": 38.0,
+      "id": 3
+     }
+    ],
+    "cta": "Você faria esse acordo?",
+    "pinned_comment": "Você faria esse acordo sabendo das consequências? 🤔",
+    "title_alternatives": [
+     "Tritons são ASSEXUADOS?! 😂 Esse acordo não compensa! #shorts #react",
+     "Se o cara vai embora, NÃO VALE A PENA 😳🚫 #shorts #filme"
+    ],
+    "mood": "funny_lighthearted",
+    "music": true
+   },
+   {
+    "start": 55.0,
+    "end": 137.766667,
+    "hook": "VÃO ACHAR O CARA OU NÃO?",
+    "title": "Pulou no rio e ACABOU 😱 Essa série é muito boa! #shorts #react",
+    "description": "A busca pelo cara fica intensa, acham a menina, mas ela pula no rio! 😱 O criador fica impressionado com a série!\nVocê já assistiu essa série? Comenta!\nSegue pra mais reacts! 🔥\n\n#shorts #react #serie #suspense #cenareact #reactbr #drama #perseguicao #fuga #rio #viral #engracado #filmes #reacao",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#serie",
+     "#suspense",
+     "#cenareact",
+     "#reactbr",
+     "#drama",
+     "#perseguicao"
+    ],
+    "tags": [
+     "react",
+     "série",
+     "suspense",
+     "drama",
+     "perseguição",
+     "fuga",
+     "react série",
+     "react br",
+     "shorts",
+     "cenareact",
+     "cena de série",
+     "reação",
+     "captura",
+     "rio",
+     "react suspense",
+     "filmes"
+    ],
+    "keywords": [
+     {
+      "t": 118.87,
+      "text": "ACABOU",
+      "emoji": "💀"
+     },
+     {
+      "t": 127.72,
+      "text": "BACANA",
+      "emoji": "👏"
+     }
+    ],
+    "reactions": [
+     {
+      "t": 108.87,
+      "type": "question"
+     },
+     {
+      "t": 123.87,
+      "type": "shock"
+     }
+    ],
+    "memes": [
+     {
+      "t": 123.87,
+      "id": 7
+     }
+    ],
+    "cta": "Segue pra mais reacts!",
+    "pinned_comment": "Pulou no rio e acabou? Você acha que ela sobreviveu? 🤔",
+    "title_alternatives": [
+     "Acharam a menina mas ela PULOU NO RIO 😱 Essa série surpreende! #shorts #react",
+     "Essa série é BACANA demais! 🔥 Pulou no rio e acabou! #shorts #suspense"
+    ],
+    "mood": "tense_dramatic",
+    "music": true
+   }
+  ],
+  "remove": [
+   {
+    "start": 60.0,
+    "end": 68.87,
+    "why": "Fala inaudível/incompleta do criador ('quer ver que o estrit ciumento') sem sentido claro"
+   }
+  ],
+  "speakers": {},
+  "highlights": false
+ },
+ "base": null,
+ "channel": "cenareact",
+ "outputs": [
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_17_32\\2026_10_07_16_17_32_p1.mp4",
+   "duration": 23.189022000000005,
+   "keeps": 11,
+   "meta": {
+    "hook": "OS TRITONS SÃO ASSEXUADOS?!",
+    "title": "Esse acordo NÃO vale a pena 😳 Se o cara vai embora, esquece! #shorts #react",
+    "description": "O criador reage a um filme e descobre que os tritons são assexuados 😂 Será que vale a pena fazer esse acordo? Ele acha que não!\nVocê faria esse acordo? Comenta aí!\nSegue pra mais reacts insanos! 🔥\n\n#shorts #react #filme #triton #sereia #acordo #reacao #cenareact #filmes #curiosidade #engracado #humor #reactbr #viral",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#filme",
+     "#triton",
+     "#sereia",
+     "#acordo",
+     "#reacao",
+     "#cenareact",
+     "#humor",
+     "#reactbr"
+    ],
+    "tags": [
+     "react",
+     "filme",
+     "triton",
+     "sereia",
+     "acordo",
+     "reação",
+     "react filme",
+     "cena de filme",
+     "react br",
+     "shorts",
+     "cenareact",
+     "humor",
+     "comédia",
+     "filmes",
+     "curiosidade",
+     "react engraçado"
+    ],
+    "cta": "Você faria esse acordo?",
+    "mood": "funny_lighthearted",
+    "music": true,
+    "pinned_comment": "Você faria esse acordo sabendo das consequências? 🤔",
+    "title_alternatives": [
+     "Tritons são ASSEXUADOS?! 😂 Esse acordo não compensa! #shorts #react",
+     "Se o cara vai embora, NÃO VALE A PENA 😳🚫 #shorts #filme"
+    ],
+    "work": null,
+    "channel": "cenareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_17_32\\2026_10_07_16_17_32_p1_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk da deep web (Original).mp3",
+   "removed_pct": 52.7,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 23.17,
+    "lufs": -13.9
+   }
+  },
+  {
+   "file": "D:\\manhwa-react\\output\\2026_10_07_16_17_32\\2026_10_07_16_17_32_p2.mp4",
+   "duration": 20.690123000000213,
+   "keeps": 14,
+   "meta": {
+    "hook": "VÃO ACHAR O CARA OU NÃO?",
+    "title": "Pulou no rio e ACABOU 😱 Essa série é muito boa! #shorts #react",
+    "description": "A busca pelo cara fica intensa, acham a menina, mas ela pula no rio! 😱 O criador fica impressionado com a série!\nVocê já assistiu essa série? Comenta!\nSegue pra mais reacts! 🔥\n\n#shorts #react #serie #suspense #cenareact #reactbr #drama #perseguicao #fuga #rio #viral #engracado #filmes #reacao",
+    "hashtags": [
+     "#shorts",
+     "#react",
+     "#serie",
+     "#suspense",
+     "#cenareact",
+     "#reactbr",
+     "#drama",
+     "#perseguicao"
+    ],
+    "tags": [
+     "react",
+     "série",
+     "suspense",
+     "drama",
+     "perseguição",
+     "fuga",
+     "react série",
+     "react br",
+     "shorts",
+     "cenareact",
+     "cena de série",
+     "reação",
+     "captura",
+     "rio",
+     "react suspense",
+     "filmes"
+    ],
+    "cta": "Segue pra mais reacts!",
+    "mood": "tense_dramatic",
+    "music": true,
+    "pinned_comment": "Pulou no rio e acabou? Você acha que ela sobreviveu? 🤔",
+    "title_alternatives": [
+     "Acharam a menina mas ela PULOU NO RIO 😱 Essa série surpreende! #shorts #react",
+     "Essa série é BACANA demais! 🔥 Pulou no rio e acabou! #shorts #suspense"
+    ],
+    "work": null,
+    "channel": "cenareact"
+   },
+   "thumb": "D:\\manhwa-react\\output\\2026_10_07_16_17_32\\2026_10_07_16_17_32_p2_thumb.jpg",
+   "music": "D:\\hipercool-materiais\\assets\\trilhas\\Battle! Rival Gladion - Pokemon Sun & Moon Music Extended.mp3",
+   "removed_pct": 75.0,
+   "validation": {
+    "ok": true,
+    "problems": [],
+    "duration": 20.65,
+    "lufs": -14.8
+   }
+  }
+ ],
+ "status": "done",
+ "elapsed_s": 441.0
+}

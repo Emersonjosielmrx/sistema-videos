@@ -1,0 +1,18 @@
+{
+ "_leia": "28/10 (dona: imagens no topo como no Hermes Call, 'ilusão de movimento' como da Apple, sem foto do produto): conversa SIMULADA de cada produto, renderizada pelo chat_ui dos vídeos e virada em quadros que trocam ao rolar (hero_quadros.py). Só o que o produto já promete na página; sem número/preço/prazo.",
+ "follow-up": [["cliente", "Oi, vi o orçamento, vou pensar"], ["empresa", "Claro! Ficou alguma dúvida sobre o pedido?"], ["cliente", "Na verdade queria pagar no Pix"], ["empresa", "Perfeito, te mando a chave agora"], ["empresa", "Pagamento confirmado! Seu pedido já está separado"]],
+ "agenda": [["cliente", "Boa noite, tem horário amanhã?"], ["empresa", "Tenho sim! Prefere de manhã ou à tarde?"], ["cliente", "De manhã"], ["empresa", "Marcado! Te lembro um dia antes"], ["cliente", "Ótimo, obrigada"]],
+ "vitrine": [["cliente", "Tem esse vestido no tamanho M?"], ["empresa", "Tem sim! Te mando as fotos das cores"], ["cliente", "Gostei do azul"], ["empresa", "Combina com essa sandália, quer ver?"], ["cliente", "Quero! Pode fechar os dois"]],
+ "superchat": [["cliente", "Mandei mensagem no Instagram também"], ["empresa", "Já vi aqui, está tudo na mesma conversa"], ["cliente", "Mandei um áudio com o pedido"], ["empresa", "Entendi o áudio! Vou passar para a equipe finalizar"]],
+ "crm": [["cliente", "Oi, sou eu de novo"], ["empresa", "Oi! Vi seu histórico: o pedido da semana passada chegou certinho?"], ["cliente", "Chegou! Agora quero mais um"], ["empresa", "Vou abrir o pedido e mover para a etapa de proposta"]],
+ "disparo": [["empresa", "Oi, Ana! Hoje tem promoção especial para clientes da casa"], ["cliente", "Oba, quais produtos?"], ["empresa", "Te mando a lista agora"], ["cliente", "Quero o primeiro"], ["empresa", "Te mandei o Pix para garantir"]],
+ "vps": [["cliente", "Meu n8n caiu de madrugada?"], ["empresa", "O bot sentinela viu o erro e reiniciou o serviço"], ["cliente", "E os dados?"], ["empresa", "O backup automático de ontem está guardado"]],
+ "marketing": [["cliente", "Amei o post de hoje!"], ["empresa", "Que bom! Tem artigo novo no blog sobre isso também"], ["cliente", "Vocês fazem entrega?"], ["empresa", "Fazemos sim! Te chamo no direct com os detalhes"]],
+ "mentoria": [["cliente", "Travei no meu fluxo do n8n"], ["empresa", "Bora resolver na mentoria de 20 minutos?"], ["cliente", "Bora! Pode ser hoje?"], ["empresa", "Pode sim, te mando o link da chamada"]],
+ "landing-page": [["cliente", "Vi a página e quero saber mais"], ["empresa", "Que bom! Viu o vídeo de demonstração?"], ["cliente", "Vi, gostei muito"], ["empresa", "Então bora conversar sobre o seu pedido"]],
+ "grupos": [["cliente", "Entrei agora no grupo"], ["empresa", "Seja bem-vindo! As regras estão na descrição"], ["cliente", "@bot qual o resumo de hoje?"], ["empresa", "Hoje o grupo falou sobre a nova turma e o horário da live"]],
+ "agentes": [["cliente", "Recebi esse PDF do fornecedor, o que diz?"], ["empresa", "É a tabela nova. Resumi os pontos principais para você"], ["cliente", "Marca uma reunião com ele amanhã"], ["empresa", "Marcado e avisado por mensagem"]],
+ "avatar": [["cliente", "Preciso de um vídeo para hoje"], ["empresa", "Seu avatar já está gravando com a sua voz"], ["cliente", "Posta no Instagram depois?"], ["empresa", "Pronto! Vídeo publicado"]],
+ "cardapio": [["cliente", "Oi, queria pedir uma pizza"], ["empresa", "Aqui está o cardápio com as fotos"], ["cliente", "Uma calabresa grande para entrega"], ["empresa", "Pedido anotado! Já foi para a cozinha"]],
+ "claw": [["cliente", "Pesquisa os fornecedores da minha região"], ["empresa", "Encontrei e organizei numa planilha para você"], ["cliente", "Manda mensagem para os três primeiros"], ["empresa", "Feito! Te aviso quando responderem"]]
+}

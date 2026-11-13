@@ -1,0 +1,147 @@
+{
+ "conta": "agentesdeia.ia",
+ "produto": "agente_tarefas",
+ "marca": "Agentes de IA",
+ "titulo": "Agente Pessoal IA: delegue tarefas reais do seu dia",
+ "legenda": "Muita gente pensa que inteligência artificial serve apenas para bater papo.\nCom o Agente Pessoal IA, você delega tarefas reais como pesquisa, agendamento e follow-up para quem faz por você.\nAcesse o link no perfil para conhecer. ✅\n\n👉 Chame no direct • link no perfil\n\n#produtividade #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "IA que executa tarefas",
+  "pergunta_cliente": "Cansado de IA que só conversa e não faz o trabalho?",
+  "blocos": [
+   {
+    "rotulo": "A situação",
+    "fala": "Eu achava que IA só escrevia texto, até colocar meu agente pessoal para trabalhar.",
+    "visual": "imagem",
+    "prompt_en": "a tidy and well lit modern Brazilian small business office desk, warm cinematic lighting, professional atmosphere, no readable text or logos",
+    "cenario_en": "sitting in a tidy, well lit modern Brazilian business office",
+    "real_tema": "dono relatando como superou a ideia de que IA apenas gera texto ao usar o agente pessoal",
+    "destaques": [
+     "só escrevia texto",
+     "agente pessoal"
+    ],
+    "conversa": []
+   },
+   {
+    "rotulo": "Na prática",
+    "fala": "Em vez de só bater papo, eu peço um follow-up de cliente e ele mesmo realiza.",
+    "visual": "imagem",
+    "prompt_en": "a professional Brazilian entrepreneur working from the side in a clean, tidy, well lit office, warm light, no readable screens",
+    "cenario_en": "standing in a clean, tidy, well lit professional workspace",
+    "real_tema": "exemplo prático de pedido de follow-up de cliente sendo realizado pelo agente",
+    "destaques": [
+     "follow-up de cliente",
+     "ele mesmo realiza"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Preciso fazer o follow-up dos clientes pendentes e agendar as reuniões."
+     },
+     {
+      "de": "empresa",
+      "texto": "Pode deixar. Vou realizar o follow-up e fazer o agendamento por você."
+     },
+     {
+      "de": "cliente",
+      "texto": "Faça também uma pesquisa sobre o novo fornecedor."
+     },
+     {
+      "de": "empresa",
+      "texto": "Combinado. Assumo essa pesquisa e te entrego a tarefa pronta."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "No Agente Pessoal IA, eu entrego qualquer coisa da rotina e recebo a tarefa pronta.",
+    "visual": "imagem",
+    "prompt_en": "a tidy and well lit meeting room in a small Brazilian company, warm natural light, cinematic commercial style, no text",
+    "cenario_en": "standing in a tidy, well lit modern meeting room",
+    "real_tema": "resultado prático de receber tarefas reais prontas com o Agente Pessoal IA",
+    "destaques": [
+     "qualquer coisa",
+     "tarefa pronta"
+    ],
+    "conversa": []
+   }
+  ],
+  "legenda": "Muita gente pensa que inteligência artificial serve apenas para bater papo.\nCom o Agente Pessoal IA, você delega tarefas reais como pesquisa, agendamento e follow-up para quem faz por você.\nAcesse o link no perfil para conhecer. ✅",
+  "titulo": "Agente Pessoal IA: delegue tarefas reais do seu dia",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "objecao_ia_faz_mesmo",
+  "pauta_tipo": "objecao",
+  "tempo_roteiro_s": 139,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "glitch",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": null,
+ "duracao_s": 28.79,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+editor",
+ "gerado_em": "2026-11-12T18:53:11",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 1,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.32,
+   "fala": "Cansado de IA que só conversa e não faz o trabalho?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.32,
+   "fim": 12.4,
+   "fala": "Eu achava que IA só escrevia texto, até colocar meu agente pessoal para trabalhar.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 12.4,
+   "fim": 17.7,
+   "fala": "Em vez de só bater papo, eu peço um follow-up de cliente e ele mesmo realiza.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 17.7,
+   "fim": 24.85,
+   "fala": "No Agente Pessoal IA, eu entrego qualquer coisa da rotina e recebo a tarefa pronta.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 4,
+   "ini": 24.85,
+   "fim": 28.79,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.25,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 4.0,
+   "roteiro_marca": 8.0,
+   "diretor": 6.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

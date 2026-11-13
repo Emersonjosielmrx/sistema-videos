@@ -1,0 +1,25 @@
+{
+ "conta": "jornalcomia",
+ "marca": "Jornal com IA",
+ "capa": "Como a inteligência artificial escreve textos?",
+ "slides": [
+  {
+   "titulo": "Previsão de palavras",
+   "texto": "A inteligência artificial analisa milhões de frases anteriores para adivinhar qual é a próxima palavra mais provável em uma conversa."
+  },
+  {
+   "titulo": "Padrões da linguagem",
+   "texto": "O sistema não pensa como um ser humano, mas reconhece estruturas gramaticais complexas e conexões lógicas entre os termos digitados."
+  },
+  {
+   "titulo": "Contexto contínuo",
+   "texto": "Durante o diálogo, o modelo guarda as informações recentes para manter o assunto coerente e responder de forma adequada à pergunta."
+  },
+  {
+   "titulo": "Limitações técnicas",
+   "texto": "Mesmo avançadas, essas ferramentas podem gerar respostas incorretas porque apenas combinam probabilidades estatísticas sem verificar a realidade dos factos."
+  }
+ ],
+ "legenda": "Descubra como os sistemas modernos de linguagem processam informações todos os dias. O que mais te fascina na tecnologia atual?",
+ "gerado_em": "2026-10-30T09:05:49"
+}

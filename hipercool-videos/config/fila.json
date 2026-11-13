@@ -1,0 +1,215 @@
+{
+ "_leia": "Fila de produção do hipercool (bin/fila.py). Obras em ordem de prioridade; caps de..ate. adiantado = quantos capítulos ficam renderizados à frente do que já foi postado em pt. max_censura = fração máxima do vídeo censurada para postar avulso (acima disso vira 'compilado').",
+ "obras": [
+  {
+   "slug": "the-inheritor",
+   "titulo": "The Inheritor",
+   "de": 1,
+   "ate": 41,
+   "generos": [
+    "romance",
+    "harem",
+    "drama",
+    "faculdade",
+    "familia"
+   ],
+   "nomes_proibidos": [
+    "The Inheritor",
+    "Inheritor",
+    "TheInheritor",
+    "the-inheritor",
+    "O Herdeiro",
+    "Наследник",
+    "उत्तराधिकारी",
+    "L'Erede",
+    "Pewaris",
+    "Người Thừa Kế",
+    "ทายาท",
+    "L'Héritier"
+   ],
+   "playlists": {
+    "pt": {
+     "recap": "ELE FOI HUMILHADO na FACULDADE mas a PROFESSORA revelou um SEGREDO 🔥 Manhwa Recap",
+     "maratona": "ELE FOI HUMILHADO na FACULDADE mas HERDOU um HARÉM - Manhwa Romance Completo 🔥"
+    },
+    "id": {
+     "recap": "Dia DIHINA karena TIDAK PUNYA Hasrat tapi DIWARISI Rahasia KELUARGA dan Semua Cewek Menginginkannya",
+     "maratona": "Dia DIHINA karena Tidak Punya Hasrat tapi Mewarisi RAHASIA dan Semua Gadis Menginginkannya 🔥 Manhwa Romance Harem Lengkap"
+    },
+    "it": {
+     "recap": "Lui fu UMILIATO ma nasconde un SEGRETO - Manhwa Recap Romance Harem Completo",
+     "maratona": "LUI è stato UMILIATO all'università ma ha EREDITATO tutto e ORA tutte lo vogliono"
+    },
+    "ru": {
+     "recap": "ОН БЫЛ УНИЖЕН на ЛЕКЦИИ но ВСТРЕТИЛ её и теперь ВСЁ ИЗМЕНИЛОСЬ — Manhwa Recap",
+     "maratona": "Он скрывал ЧТО У НЕГО НЕТ ЖЕЛАНИЯ но встретил профессора manhwa марафон 🔥"
+    },
+    "th": {
+     "recap": "เขาถูกถามว่าไม่มีความปรารถนาหรือแล้วพบอาจารย์สาวลึกลับ | Manhwa Recap Romance 😳",
+     "maratona": "เขาไม่มีความใคร่ แต่อาจารย์สาวทำให้หัวใจเต้นแรง - มังฮวา โรแมนติก มหาลัย มาราธอน"
+    },
+    "vi": {
+     "recap": "ANH ẤY bị CÔI CỚT nhưng thừa kế QUYỀN LỰC và giờ TẤT CẢ họ đều muốn anh - Manhwa Recap Romance Harem"
+    },
+    "hi": {
+     "maratona": "वह गरीब छात्र था लेकिन प्रोफेसर से प्यार हुआ 💘 मैनहवा रोमांस हरम मैराथन पूरी कहानी",
+     "recap": "वह गरीब छात्र था लेकिन प्रोफेसर ने उसे चुना अब सभी लड़कियां उसके पीछे हैं manhwa recap"
+    },
+    "en": {
+     "recap": "He Was HUMILIATED in Class but INHERITED a HAREM and Now ALL the GIRLS Want Him"
+    }
+   },
+   "_nomes_proibidos_obs": "inclui o nome traduzido (dono 15/10: o nome não pode aparecer em lugar nenhum, nem traduzido)"
+  }
+ ],
+ "adiantado": 10,
+ "_adiantado_obs": "14/10 16h: subido pra 10 pelo dono. Melhorias implementadas, cap 4 em diante sai com elas.",
+ "canal_pt": "Manhwa Noturno",
+ "canal_pt_longos": "InovareManhwaVerse",
+ "_canal_pt_longos_obs": "29/10 (dona): pt dividido em 2 canais — Shorts no Manhwa Noturno (canal_pt, limpo, 1,2 mil views/28d vindas dos Shorts) e o completo do capítulo + 16:9 avulso + compilado no InovareManhwaVerse (castigo de envio acabou; advertência ativa até ~14/01/2027, então o formato de mais risco fica no canal já advertido). Os vídeos levam a marca @manhwanoturno (hp_common). Tire a chave pra voltar tudo pro canal_pt.",
+ "_canal_pt_obs": "16/10: dono trocou o pt pro canal novo Manhwa Noturno (@manhwanoturno, conta inovaremanhwaverse2). O InovareManhwaVerse levou advertencia por nudez (compilado caps 1-11) e fica parado ate ~14/01/2027; nao apagar. Marca d'agua pt: hp_common WATERMARK_HANDLE.",
+ "postar_pt": true,
+ "postar_pt_volta_em": "2026-10-24",
+ "_regra_postagem": "REGRA DO DONO (18/10): NENHUM canal fica sem postagem, nem um dia, em hipótese nenhuma — pelo menos 1 por dia. Marca d'água antiga, capítulo sendo refeito ou qualquer outro impedimento NÃO seguram a postagem: avisam e o vídeo sobe com o que tem. EXCEÇÕES do dono (19/10): (1) nudez achada pela análise do vídeo pronto (veredito 'reprovado') segura AQUELE vídeo e a fila passa pro próximo; (2) pt segurado até 23/10 (ver _postar_pt_motivo).",
+ "_postar_pt_motivo": "19/10 (dono disse sim): The Inheritor fora do Manhwa Noturno até o fim do congelamento de envio do InovareManhwaVerse (advertência de 16/10, ~23/10). Subir a mesma série num canal novo durante o congelamento é evasão pela regra do YouTube (support.google.com/youtube/answer/2802032) e pode encerrar TODOS os canais. Volta sozinho em postar_pt_volta_em (fila._pt_ligado). O canal continua recebendo Shorts de parceiro (sobra). Ver D:/postador-de-videos/ANALISE_CRESCER_SEM_BAN_2026-10-18.md F5.",
+ "_postar_pt_motivo_16out": "16/10: segurado ao trocar pro Manhwa Noturno — os caps 1-11 pt prontos tem @InovareManhwaVerse gravado no canto; esperando o dono decidir (refazer o render ou trocar so a marca). Religar depois.",
+ "_postar_pt_motivo_15out": "15/10 0h: religado pelo dono. Limite YouTube NÃO resetou ainda (reseta Pacific ~4h BR). Cron 1:10 tenta de novo. Cap 1 precisa re-render (melhorias) antes de postar vertical. Tags corrigidas (seo.py, 400 chars).",
+ "_postar_pt_obs": "14/10: dono liberou todos os canais com avisos de direitos autorais. pt vai pro InovareManhwaVerse.",
+ "longo_primeiro": 2,
+ "longo_a_cada": 3,
+ "_longo_primeiro_a_cada_obs": "23/10: NÃO valem mais. Ordem da dona por dia: retrato cap N -> 16:9 cap N -> compilado 1..N (a partir de 1-2) -> Shorts -> resumo (fila._longos_do_dia).",
+ "_longo_pt_desde_removido_23out": "23/10 (dona): 'quanto ao canal que não tem o capítulo 1, é muito fácil: é só postar o cap 1 nele, já foi refeito, está diferente'. Trava longo_pt_desde (12) TIRADA; o compilado pt só usa capNN.mp4 feitos depois do vertical refeito (fila._seg_velho), nunca os de 15-16/10. Texto antigo abaixo.",
+ "_longo_pt_desde_obs": "22/10: compilado pt (Manhwa Noturno) só sobe se TODOS os capítulos forem >= este número. Os caps 1-11 estavam no InovareManhwaVerse advertido (compilado caps 1-11 de 16/10); repostar no Manhwa Noturno = evasão (ANALISE_CRESCER_SEM_BAN F5). Hoje os compilados pt começam no cap 1, então nenhum sobe até existir compilado a partir do 12. Tire a chave pra voltar ao comportamento antigo.",
+ "cache_clipes": true,
+ "_cache_clipes_obs": "liga/desliga o cache do movimento 2.5D (workspace/cache/clips_2p5d, máx. 15 GB): o render reaproveita o efeito já feito do mesmo painel nas outras línguas (só reajusta a duração e refaz cor/vinheta/voz; parte dos painéis sem balão sai espelhada por língua).",
+ "idiomas_auto": true,
+ "_idiomas_auto_obs": "liga/desliga a PRODUÇÃO das outras línguas (no tempo livre da fila, 1 língua por rodada). 14/10 13h40: ligado com o cache de clipes (cache_clipes).",
+ "postagem_idiomas": {
+  "max_dia": 3,
+  "intervalo_h": 2,
+  "parado_h": 24
+ },
+ "postagem_pt": {
+  "fuso": "America/Sao_Paulo",
+  "pico": [
+   18,
+   23
+  ],
+  "intervalo_h": 2,
+  "max_dia": 10,
+  "parado_h": 24
+ },
+ "_postagem_pt_obs": "16/10: Shorts do pt sobem 1 por rodada, no pico do Brasil (18h-23h), com intervalo_h entre eles — antes as 8 partes do cap 1 subiram entre 05:27 e 06:09 da madrugada, uma atrás da outra. Tire esta chave pra voltar ao comportamento antigo (despejar o que couber na cota).",
+ "_postagem_idiomas_obs": "14/10: canais das línguas sobem 1 vídeo por vez (completo e depois os Shorts), só no 'pico' de cada língua (hora local do 'fuso'), com intervalo_h entre um e outro e no máximo max_dia por dia (dia de lá). Canal sem nada há mais de parado_h horas: o próximo sai na hora. Contagem pelo ledger do postador (inclui outros projetos no mesmo canal).",
+ "memes": {
+  "ligado": true,
+  "figurinha_s": 25,
+  "interrompe_s": 60
+ },
+ "_memes_obs": "15/10 (dono): figurinha ESTAMPADA no centro, sem som, no máx 1 a cada figurinha_s; meme que INTERROMPE (o vídeo para, tela cheia com o som do meme) em choque/deboche/vergonha/raiva no fim da fala, no máx 1 a cada interrompe_s (0 = desliga).",
+ "max_censura": 0.5,
+ "idiomas": {
+  "hi": {
+   "canal": "GtuH5ezUK8eBaC60",
+   "nome": "hindi",
+   "fuso": "Asia/Kolkata",
+   "pico": [
+    17,
+    21
+   ],
+   "handle": "@inovaremanhwaversehindi"
+  },
+  "id": {
+   "canal": "nYsAKUb3DbR1QOEm",
+   "nome": "indonésio",
+   "fuso": "Asia/Jakarta",
+   "pico": [
+    17,
+    22
+   ],
+   "_obs": "14/10: o dono logou a conta própria do canal (inovaremanhwaverseind@gmail.com); --checar OK",
+   "handle": "@inovaremanhwaverseind"
+  },
+  "it": {
+   "canal": "7zpNZNll2jlBnQ0J",
+   "nome": "italiano",
+   "fuso": "Europe/Rome",
+   "pico": [
+    18,
+    22
+   ],
+   "handle": "@inovaremanhwaverseita"
+  },
+  "ru": {
+   "canal": "TkfzifstYEoG4jKg",
+   "nome": "russo",
+   "fuso": "Europe/Moscow",
+   "pico": [
+    18,
+    23
+   ],
+   "handle": "@inovaremanhwaru"
+  },
+  "th": {
+   "canal": "q3mik36FjtTgFkNC",
+   "nome": "tailandês",
+   "fuso": "Asia/Bangkok",
+   "pico": [
+    18,
+    22
+   ],
+   "_obs": "14/10: o dono logou a conta própria do canal (inovaremanhwaversethai@gmail.com); --checar OK ('Inovaremanhwaversethai')",
+   "handle": "@inovaremanhwaversethai"
+  },
+  "vi": {
+   "canal": "8ROQmZVjbpwiwMoX",
+   "nome": "vietnamita",
+   "fuso": "Asia/Ho_Chi_Minh",
+   "pico": [
+    18,
+    22
+   ],
+   "handle": "@inovaremanhwaverseviet"
+  },
+  "fr": {
+   "canal": "GG97QQt8lmyv0dDG",
+   "nome": "francês",
+   "fuso": "Europe/Paris",
+   "pico": [
+    17,
+    21
+   ],
+   "ativo": false,
+   "_obs": "14/10: upload bloqueado pelo YouTube por 73 dias (strike de direitos autorais) -> libera ~26/12/2026. Produção DESLIGADA (ativo=false) pra não gastar render; religar ~19/12 (o cache refaz o atraso rápido) e tirar a pausa no postador (rede_canais.json status pausado -> hipercool).",
+   "handle": "@inovaremanhwafrench"
+  },
+  "en": {
+   "canal": "UYjkdFO3V3kjmKU5",
+   "nome": "inglês",
+   "fuso": "America/New_York",
+   "pico": [
+    16,
+    21
+   ],
+   "_obs": "14/10: envios bloqueados pelo YouTube por 7 dias -> libera ~21/10/2026. Produção segue (estoque); a postagem pula enquanto estiver pausado no postador — no dia, tirar a pausa (rede_canais.json status pausado -> hipercool).",
+   "handle": "@inovaremanhwaverseeng"
+  }
+ },
+ "_obras_obs": "generos = chaves de config/seo_palavras.json (palavras buscadas pro título/descrição/tags); nomes_proibidos = nome da obra e variações que NUNCA vão no título/descrição/tags (direitos autorais, dono 15/10)",
+ "tts_motor": "edge",
+ "_tts_motor_obs": "Motor da voz do português (bin/elenco.py): 'edge' = vozes Multilingual do edge, rápido e sem cota (teste pedido pelo dono em 15/10, a partir do cap 9 do The Inheritor) | 'gemini' = como era. Vozes fixas por obra em config/elenco/<obra>.json.",
+ "_handles_obs": "16/10 (dono): o @ de cada canal de língua, pra marca d'água sair com o canal certo (antes todo vídeo levava o @ do canal brasileiro). Conferidos em D:/postador-de-videos/config/rede_canais.json pelo id da credencial; o vietnamita saiu de canais_status.json. Sem 'handle', o vídeo da língua sai SEM marca (fila._marca_do_idioma).",
+ "narracao_v": "v3",
+ "_leia_narracao_v": "Versao do roteiro (workspace/narration_cache). Mude so quando o jeito de LER os paineis mudar: o nome do arquivo muda, o roteiro antigo fica guardado e o proximo render refaz do zero (leitura + narracao, ~9 min por capitulo). Todos os processos leem daqui - render, postagem, capa, 16:9 e traducao - para o video nao sair narrado de um jeito e anunciado de outro.",
+ "voz_humana": {
+  "_leia": "Melhorias de voz humana (17/10). TUDO desligado até o dono ouvir as amostras em D:/hipercool-materiais/amostras_voz/. Ver docs/VOZ_E_NARRACAO_PENDENTE.md.",
+  "sem_camera": false,
+  "muletas": false,
+  "respiracao": false,
+  "pausa_variavel": false,
+  "ritmo_por_pedaco": false,
+  "gemini_nos_picos": false,
+  "_humanizar_comum": "22/10: humanizar do módulo COMUM narracao_curva (o mesmo que o dono aprovou no recapd em 20/10): respiração, pausa antes do impacto, ênfase nas palavras fortes e ritmo dentro da frase, com a legenda (words.json) corrigida junto. LIGADO em 22/10 com ok do dono ('se vc diz que está melhor pode fazer'). ATENÇÃO: as chaves respiracao/pausa_variavel acima fazem papel PARECIDO — não ligar junto, senão dobra pausa/respiração.",
+  "humanizar_comum": true
+ }
+}

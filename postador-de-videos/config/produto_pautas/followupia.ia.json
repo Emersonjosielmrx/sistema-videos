@@ -1,0 +1,109 @@
+{
+ "pautas": [
+  {
+   "id": "lead_sumiu_orcamento",
+   "tipo": "dor",
+   "ideia": "O cliente pediu orçamento no WhatsApp e sumiu, mas a IA faz o follow-up automático para recuperar essa venda perdida.",
+   "pergunta_cliente": "Como faço para recuperar cliente que para de responder no WhatsApp?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "recuperacao_inativos_rotina",
+   "tipo": "caso_de_uso",
+   "ideia": "A rotina corrida faz você esquecer contatos antigos, mas a IA recupera leads inativos e converte no WhatsApp sozinha.",
+   "pergunta_cliente": "Tem como reativar contatos antigos da minha base sem eu ter que mandar mensagem um por um?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "como_ocorre_conversao",
+   "tipo": "como_funciona",
+   "ideia": "O sistema faz follow-ups automáticos com inteligência artificial para retomar conversas paradas e fechar a venda.",
+   "pergunta_cliente": "Como funciona essa IA conversando com o cliente no WhatsApp?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "ia_desiste_facil",
+   "tipo": "pergunta_frequente",
+   "ideia": "Diferente de atendentes que desistem após a primeira tentativa sem resposta, a IA nunca desiste de buscar a recuperação do lead.",
+   "pergunta_cliente": "A IA tenta falar com o cliente mais de uma vez se ele não responder?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "esquecimento_vs_conversao",
+   "tipo": "antes_depois",
+   "ideia": "Antes você perdia dinheiro esquecendo de responder propostas pendentes; agora a IA assume os follow-ups e converte leads esquecidos.",
+   "pergunta_cliente": "Vou parar de perder vendas por falta de acompanhamento?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "vendedor_desiste_rapido",
+   "tipo": "dor",
+   "ideia": "Sua equipe cansa de mandar mensagem no vácuo e abandona a negociação, mas a IA nunca desiste e mantém o acompanhamento ativo.",
+   "pergunta_cliente": "Por que minha equipe perde tantas vendas que pareciam certas?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "reativacao_base_antiga",
+   "tipo": "caso_de_uso",
+   "ideia": "Várias pessoas demonstraram interesse semanas atrás e esfriaram; a IA envia follow-ups com IA para trazer esses clientes de volta.",
+   "pergunta_cliente": "Dá para resgatar quem pediu preço no mês passado e não comprou?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "operacao_sem_intervencao",
+   "tipo": "como_funciona",
+   "ideia": "A IA recupera leads inativos e converte no WhatsApp sozinha, sem você precisar ficar redigindo mensagens manuais.",
+   "pergunta_cliente": "Eu preciso ficar acompanhando ou ela manda mensagem sozinha?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "duvida_sobre_whatsapp",
+   "tipo": "pergunta_frequente",
+   "ideia": "O produto atua diretamente pelo WhatsApp realizando o follow-up automático que vende sem exigir esforço manual do dono.",
+   "pergunta_cliente": "As mensagens automáticas chegam direto no WhatsApp do lead?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "acumulo_leads_esquecidos",
+   "tipo": "dor",
+   "ideia": "Você atende muitos clientes no dia a dia, não consegue cobrar todos e perde vendas por puro esquecimento.",
+   "pergunta_cliente": "Como não esquecer de cobrar quem não respondeu minha mensagem?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "substituicao_processo_manual",
+   "tipo": "caso_de_uso",
+   "ideia": "Em vez de gastar horas caçando contatos frios, a IA localiza leads inativos e faz o follow-up automático para vender.",
+   "pergunta_cliente": "Como vender para quem parou de falar comigo sem perder meu tempo?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "persistencia_do_contato",
+   "tipo": "objecao",
+   "ideia": "Muitos acham que o lead não quer comprar após um silêncio, mas o SDR humano desiste cedo demais enquanto a IA insiste e converte.",
+   "pergunta_cliente": "Vale a pena continuar mandando mensagem para quem parou de responder?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "caos_de_atendimento_manual",
+   "tipo": "antes_depois",
+   "ideia": "Antes os contatos parados viravam vendas perdidas; com a IA, leads inativos recebem mensagens automáticas e voltam a negociar.",
+   "pergunta_cliente": "O que muda na prática se eu colocar a IA para rodar no meu negócio?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "automatizacao_fechamento",
+   "tipo": "como_funciona",
+   "ideia": "A ferramenta aplica follow-ups com IA que recuperam vendas abordando leads no WhatsApp de forma contínua até o fechamento.",
+   "pergunta_cliente": "Como a IA consegue fechar vendas que já estavam perdidas?",
+   "criada": "2026-10-25T14:44:08"
+  },
+  {
+   "id": "leads_esfriando_rapido",
+   "tipo": "dor",
+   "ideia": "O lead demonstra interesse mas esfria por falta de contato no tempo certo, problema resolvido pelo follow-up automático que vende.",
+   "pergunta_cliente": "Por que os clientes esfriam tão rápido depois de pedir orçamento?",
+   "criada": "2026-10-25T14:44:08"
+  }
+ ]
+}

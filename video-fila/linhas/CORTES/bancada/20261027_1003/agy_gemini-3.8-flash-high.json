@@ -1,0 +1,42 @@
+{
+ "modelo": "agy/gemini-3.8-flash-high",
+ "segundos": 310,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Mantenha um único título no topo, proibindo sobreposições de múltiplos títulos, textos de impacto concorrentes ou colisões com elementos visuais.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "O lote apresentou falhas de sobreposição gráfica e elementos visuais obstruindo rostos de personagens. Nos Shorts sem-obra-8a49d5 (q01) e sem-obra-c853c4 (q01), ocorreram sobreposições diretas de títulos e textos de impacto no topo. Além disso, botões e marcas d'água com @ cobriram diretamente expressões faciais em sem-obra-777e60 (q04, q06) e sem-obra-8a49d5 (q11, q15), violando as regras da dona.",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Mantenha um único título no topo, proibindo sobreposições de múltiplos títulos, textos de impacto concorrentes ou colisões com elementos visuais.",
+    "porque": "Evita a colisão e sobreposição de títulos observada em sem-obra-8a49d5 (q01) e sem-obra-c853c4 (q01)."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Impedir que elementos sobrepostos e marcas cubram rostos de personagens",
+    "tipo": "CERTEZA",
+    "prova": "Em sem-obra-777e60 (q04 e q06), a marca d'água e o desfoque cobriram olhos e boca dos personagens; em sem-obra-8a49d5 (q11 e q15), o botão 'INSCREVA-SE' cobriu rostos no sofá.",
+    "onde": "parceiro_marca.py / anime_montar.py (função de posicionamento de marcas e overlays)",
+    "como_testar": "Processar os vídeos do lote garantindo que botões e marcas respeitem a detecção de caixas de rostos e removam @ da tela."
+   }
+  ],
+  "mural": [
+   "Aviso para as linhas LONGOS e PRODUTOS: reforçar restrições de layout para impedir que botões de engajamento ou marcas sobreponham expressões faciais de personagens."
+  ]
+ }
+}

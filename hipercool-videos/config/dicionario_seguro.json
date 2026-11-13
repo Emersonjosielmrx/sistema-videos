@@ -1,0 +1,509 @@
+{
+  "_leia": "Dicionário de segurança de anúncios e engajamento. Palavras proibidas no título/descrição/tags/narração do NARRADOR (não em balões de personagens). Cada entrada tem eufemismos seguros pro YouTube. Usado por seo.py e narration.py. 16/10: os eufemismos do nicho ('foi de Vasco', 'ketchup', 'já era') vieram do estudo de 663 vídeos dos canais de referência e entram na frente; 'partida' e 'líquido escorrendo' saíram porque não existem no nicho (47 ocorrências de 'partida' são partida de jogo; 'líquido escorrendo', zero).",
+  "proibidas": {
+    "matar": [
+      "eliminar",
+      "acabar com",
+      "dar um fim"
+    ],
+    "matou": [
+      "eliminou",
+      "acabou com",
+      "deu um fim"
+    ],
+    "matando": [
+      "eliminando",
+      "acabando com"
+    ],
+    "morte": [
+      "queda"
+    ],
+    "morrer": [
+      "partir",
+      "encontrar o fim"
+    ],
+    "morreu": [
+      "foi de Vasco",
+      "já era",
+      "partiu",
+      "se foi",
+      "encontrou o fim"
+    ],
+    "morrendo": [
+      "partindo",
+      "encontrando o fim"
+    ],
+    "morre": [
+      "parte",
+      "se vai",
+      "encontra o fim"
+    ],
+    "morto": [
+      "eliminado",
+      "caído",
+      "fora de combate"
+    ],
+    "morta": [
+      "eliminada",
+      "caída",
+      "fora de combate"
+    ],
+    "mortos": [
+      "eliminados",
+      "caídos"
+    ],
+    "assassino": [
+      "exterminador",
+      "caçador"
+    ],
+    "assassina": [
+      "exterminadora",
+      "caçadora"
+    ],
+    "assassinato": [
+      "crime",
+      "golpe fatal"
+    ],
+    "suicídio": [
+      "ato extremo"
+    ],
+    "suicida": [
+      "desesperado",
+      "sem saída"
+    ],
+    "sangue": [
+      "ketchup",
+      "vermelho"
+    ],
+    "sangrar": [
+      "escorrer",
+      "derramar"
+    ],
+    "sangrento": [
+      "brutal",
+      "intenso"
+    ],
+    "sexo": [
+      "momento quente"
+    ],
+    "sexual": [
+      "sensual",
+      "provocante"
+    ],
+    "sexualmente": [
+      "de forma provocante"
+    ],
+    "nu": [
+      "exposto",
+      "sem nada"
+    ],
+    "nua": [
+      "exposta",
+      "sem nada"
+    ],
+    "nudez": [
+      "exposição",
+      "cena reveladora"
+    ],
+    "pelado": [
+      "exposto",
+      "sem nada"
+    ],
+    "pelada": [
+      "exposta",
+      "sem nada"
+    ],
+    "drogas": [
+      "substâncias",
+      "coisas proibidas"
+    ],
+    "arma": [
+      "lâmina"
+    ],
+    "armas": [
+      "lâminas"
+    ],
+    "estupro": [
+      "abuso"
+    ],
+    "violação": [
+      "agressão"
+    ],
+    "pornografia": [
+      "conteúdo adulto"
+    ],
+    "pornográfico": [
+      "adulto",
+      "proibido"
+    ],
+    "putaria": [
+      "loucura",
+      "bagunça"
+    ],
+    "puta": [
+      "desgraçada",
+      "maldita"
+    ],
+    "vadia": [
+      "sem-vergonha",
+      "atrevida"
+    ],
+    "vadio": [
+      "sem-vergonha",
+      "atrevido"
+    ],
+    "prostituta": [
+      "dama da noite",
+      "mulher da vida"
+    ],
+    "escravo": [
+      "servo",
+      "subordinado",
+      "capacho"
+    ],
+    "escrava": [
+      "serva",
+      "subordinada",
+      "submissa"
+    ],
+    "escravidão": [
+      "servidão",
+      "submissão"
+    ],
+    "tortura": [
+      "agonia"
+    ],
+    "torturar": [
+      "atormentar",
+      "fazer sofrer"
+    ],
+    "cadáver": [
+      "corpo"
+    ],
+    "cadáveres": [
+      "corpos"
+    ],
+    "cocaína": [
+      "substância"
+    ],
+    "maconha": [
+      "erva",
+      "substância"
+    ],
+    "crack": [
+      "substância pesada"
+    ],
+    "explosão": [
+      "destruição"
+    ],
+    "explodir": [
+      "detonar",
+      "destruir"
+    ],
+    "bomba": [
+      "carga explosiva"
+    ],
+    "terrorista": [
+      "extremista",
+      "radical"
+    ],
+    "terrorismo": [
+      "extremismo"
+    ],
+    "genocídio": [
+      "extermínio em massa"
+    ],
+    "massacre": [
+      "ataque brutal"
+    ],
+    "decapitar": [
+      "separar a cabeça"
+    ],
+    "esfaquear": [
+      "golpear",
+      "perfurar"
+    ],
+    "esfaqueou": [
+      "golpeou",
+      "perfurou"
+    ],
+    "atirar": [
+      "disparar",
+      "lançar"
+    ],
+    "tiro": [
+      "disparo",
+      "projétil"
+    ],
+    "bala": [
+      "munição"
+    ],
+    "veneno": [
+      "tóxico"
+    ],
+    "envenenar": [
+      "intoxicar",
+      "contaminar"
+    ],
+    "sangrando": [
+      "vazando ketchup"
+    ],
+    "ensanguentado": [
+      "lambuzado de ketchup"
+    ]
+  },
+  "engajamento_narrador": {
+    "_leia": "Só referência: NENHUM código lê esta lista (o prompt de narração não injeta). Várias são as frases prontas que o prompt agora proíbe.",
+    "ganchos": [
+      "mas calma que o pior ainda tá por vir",
+      "e o que acontece depois é de arrepiar",
+      "vocês NÃO estão prontos pro que vem agora",
+      "e quando você achar que entendeu tudo...",
+      "mas aí a coisa fica FEIA",
+      "e é aí que tudo muda",
+      "e o que ele faz em seguida? mano...",
+      "olha o que acontece",
+      "prepara o coração",
+      "segura firme que vai apertar",
+      "e aí vem a reviravolta",
+      "só que tem um detalhe...",
+      "e esse detalhe muda TUDO",
+      "quando eu falo que ficou tenso...",
+      "essa parte aqui é INSANA"
+    ],
+    "reacoes_narrador": [
+      "EITA",
+      "mano...",
+      "caramba",
+      "QUE?!",
+      "não acredito",
+      "olha isso",
+      "vixe",
+      "porra vida!",
+      "misericórdia",
+      "caralh... ops",
+      "vixi maria",
+      "meu Deus do céu",
+      "é de cair o queixo",
+      "isso é surreal",
+      "QUE LOUCURA"
+    ],
+    "chamadas_espectador": [
+      "e aí, vocês viram isso?",
+      "comenta aí o que você acha",
+      "se inscreve que toda semana tem capítulo novo",
+      "bota nos comentários se você já sabia",
+      "deixa o like se tá gostando",
+      "me diz nos comentários quem é seu personagem favorito"
+    ],
+    "bordoes": [
+      "bora que bora",
+      "partiu",
+      "simbora",
+      "vamo nessa",
+      "segue o jogo",
+      "tá ligado?",
+      "sacou?",
+      "entendeu o esquema?",
+      "olha só que beleza",
+      "é isso aí, pessoal"
+    ],
+    "humor": [
+      "se fosse eu, já tinha corrido faz tempo",
+      "esse cara é maluco ou é corajoso? os dois",
+      "imagina você nessa situação... pois é",
+      "se isso fosse anime, aqui entrava aquela musiquinha",
+      "esse personagem nasceu sem noção",
+      "alguém liga pro Samu",
+      "RIP pra ele, literalmente",
+      "esse aí já era, manda flores"
+    ],
+    "transicoes": [
+      "mas enfim",
+      "voltando aqui",
+      "continuando",
+      "agora presta atenção nessa parte",
+      "olha só o que rola agora",
+      "e aí a gente vai pra cena seguinte"
+    ],
+    "risadas": [
+      "(risos)",
+      "(risada leve)",
+      "(rindo)",
+      "(dando risada)"
+    ]
+  },
+  "idiomas": {
+    "en": {
+      "kill": [
+        "eliminate",
+        "take out",
+        "finish off"
+      ],
+      "killed": [
+        "eliminated",
+        "taken out",
+        "finished off"
+      ],
+      "die": [
+        "pass away",
+        "fall",
+        "meet their end"
+      ],
+      "died": [
+        "passed away",
+        "fell",
+        "met their end"
+      ],
+      "dead": [
+        "gone",
+        "fallen",
+        "no more"
+      ],
+      "death": [
+        "demise",
+        "end",
+        "fate"
+      ],
+      "murder": [
+        "crime",
+        "foul play"
+      ],
+      "blood": [
+        "vital fluid",
+        "red"
+      ],
+      "sex": [
+        "intimacy",
+        "romance"
+      ],
+      "nude": [
+        "exposed",
+        "revealed"
+      ],
+      "drug": [
+        "substance",
+        "powder"
+      ],
+      "weapon": [
+        "tool",
+        "instrument"
+      ],
+      "gun": [
+        "piece",
+        "hardware"
+      ],
+      "suicide": [
+        "extreme act",
+        "final choice"
+      ],
+      "slave": [
+        "servant",
+        "subordinate"
+      ],
+      "torture": [
+        "torment",
+        "suffering"
+      ]
+    },
+    "hi": {
+      "मारना": [
+        "खत्म करना",
+        "निपटाना"
+      ],
+      "मौत": [
+        "अंत",
+        "विदाई"
+      ],
+      "खून": [
+        "लाल तरल",
+        "जीवन रस"
+      ],
+      "हथियार": [
+        "उपकरण",
+        "साधन"
+      ]
+    },
+    "id": {
+      "membunuh": [
+        "menghabisi",
+        "mengeliminasi"
+      ],
+      "mati": [
+        "tumbang",
+        "gugur"
+      ],
+      "darah": [
+        "cairan merah"
+      ],
+      "senjata": [
+        "alat",
+        "perangkat"
+      ]
+    },
+    "it": {
+      "uccidere": [
+        "eliminare",
+        "far fuori"
+      ],
+      "morte": [
+        "fine",
+        "destino"
+      ],
+      "sangue": [
+        "fluido vitale"
+      ],
+      "arma": [
+        "strumento"
+      ]
+    },
+    "ru": {
+      "убить": [
+        "устранить",
+        "ликвидировать"
+      ],
+      "смерть": [
+        "конец",
+        "гибель"
+      ],
+      "кровь": [
+        "красная жидкость"
+      ],
+      "оружие": [
+        "инструмент"
+      ]
+    },
+    "th": {
+      "ฆ่า": [
+        "กำจัด",
+        "จัดการ"
+      ],
+      "ตาย": [
+        "จากไป",
+        "สิ้นลม"
+      ],
+      "เลือด": [
+        "ของเหลวสีแดง"
+      ],
+      "อาวุธ": [
+        "เครื่องมือ"
+      ]
+    },
+    "vi": {
+      "giết": [
+        "tiêu diệt",
+        "loại bỏ"
+      ],
+      "chết": [
+        "ra đi",
+        "ngã xuống"
+      ],
+      "máu": [
+        "chất lỏng đỏ"
+      ],
+      "vũ khí": [
+        "công cụ"
+      ]
+    }
+  }
+}

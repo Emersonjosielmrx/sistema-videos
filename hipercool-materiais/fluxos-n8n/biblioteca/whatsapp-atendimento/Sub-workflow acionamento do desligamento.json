@@ -1,0 +1,310 @@
+{
+ "name": "Sub-workflow acionamento do desligamento",
+ "nodes": [
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "=memoria3:{{ $('Start').item.json.body_event_Info_Chat_split.split(\"@\")[0] }}_{{ $('Start').item.json.body_instanceName }}",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    288,
+    720
+   ],
+   "id": "d5b782d6-d8be-4dc3-8648-902fcb5d410b",
+   "name": "memoria1",
+   "credentials": {
+    "postgres": {
+     "id": "aCCnKYtjDq4WO6cb",
+     "name": "fluxo_n8n_vps_console"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "mode": "insert",
+    "messages": {
+     "messageValues": [
+      {
+       "type": "ai",
+       "message": "={{ $('Start').item.json.body_event_Message_extendedTextMessage_text }}"
+      },
+      {
+       "type": "user",
+       "message": "= "
+      }
+     ]
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryManager",
+   "typeVersion": 1.1,
+   "position": [
+    224,
+    608
+   ],
+   "id": "70533267-e76a-4b73-b130-ad6365b17206",
+   "name": "Chat Memory Manager3",
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=contador:{{ $('Start').item.json.body_event_Info_Chat_split.split(\"@\")[0] }}_{{ $('Start').item.json.body_instanceName }}",
+    "value": "true",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 20
+   },
+   "id": "13870b73-8e1b-44ab-8995-8cc4a6a02dd7",
+   "name": "adiciona no contador1",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    576,
+    608
+   ],
+   "credentials": {
+    "redis": {
+     "id": "OKA1QWXk3tnTJlkf",
+     "name": "Redis account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "atendimentoHumano",
+    "key": "=contador:{{ $('Start').item.json.body_event_Info_Chat_split.split(\"@\")[0] }}_{{ $('Start').item.json.body_instanceName }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "id": "59174585-dd9a-4496-a540-f6212cf935cc",
+   "name": "contador1",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    448,
+    608
+   ],
+   "credentials": {
+    "redis": {
+     "id": "OKA1QWXk3tnTJlkf",
+     "name": "Redis account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "db8792c7-6fb2-46a3-98cb-11fc5111ef27",
+       "leftValue": "={{ $json.atendimentoHumano }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "notEmpty",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.2,
+   "position": [
+    752,
+    608
+   ],
+   "id": "97d033ec-0957-4d6f-b427-33f7fd896339",
+   "name": "se esta desligado3"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=desligaBot_curto:{{ $('Start').item.json.body_event_Info_Chat_split.split(\"@\")[0] }}_{{ $('Start').item.json.body_instanceName }}",
+    "value": "true",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 8
+   },
+   "id": "4c44ed1b-3596-4e39-a01c-8b146438a77f",
+   "name": "desliga_agente_por_11s",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    128,
+    608
+   ],
+   "credentials": {
+    "redis": {
+     "id": "OKA1QWXk3tnTJlkf",
+     "name": "Redis account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "workflowInputs": {
+     "values": [
+      {
+       "name": "body_event_Info_Chat_split",
+       "type": "any"
+      },
+      {
+       "name": "body_instanceName",
+       "type": "any"
+      },
+      {
+       "name": "body_event_Message_extendedTextMessage_text",
+       "type": "any"
+      }
+     ]
+    }
+   },
+   "id": "6a70b56a-0cd8-4600-9ebc-f4d3462db8e1",
+   "typeVersion": 1.1,
+   "name": "Start",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "position": [
+    0,
+    608
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=desligaBot:{{ $('Start').item.json.body_event_Info_Chat_split.split(\"@\")[0] }}_{{ $('Start').item.json.body_instanceName }}",
+    "value": "true",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 3600
+   },
+   "id": "7e3519da-4cf6-4f34-8000-93feb42ffa51",
+   "name": "desliga_agente_por_1d",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    928,
+    608
+   ],
+   "credentials": {
+    "redis": {
+     "id": "OKA1QWXk3tnTJlkf",
+     "name": "Redis account"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "Start": [
+   {
+    "json": {
+     "body_event_Info_Chat_split": "122793148580017@lid",
+     "body_instanceName": "s22-bus-5106",
+     "body_event_Message_extendedTextMessage_text": "Testw"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "memoria1": {
+   "ai_memory": [
+    [
+     {
+      "node": "Chat Memory Manager3",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Chat Memory Manager3": {
+   "main": [
+    [
+     {
+      "node": "contador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "adiciona no contador1": {
+   "main": [
+    [
+     {
+      "node": "se esta desligado3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "contador1": {
+   "main": [
+    [
+     {
+      "node": "adiciona no contador1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se esta desligado3": {
+   "main": [
+    [
+     {
+      "node": "desliga_agente_por_1d",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "desliga_agente_por_11s": {
+   "main": [
+    [
+     {
+      "node": "Chat Memory Manager3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Start": {
+   "main": [
+    [
+     {
+      "node": "desliga_agente_por_11s",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "availableInMCP": false
+ },
+ "versionId": "cdf06f62-9a0d-4902-8b19-80e836dcebd0",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "ZqyDr1fF4nGsb8vW",
+ "tags": []
+}

@@ -1,0 +1,108 @@
+{
+ "homens": [
+  {
+   "personagem": "h01",
+   "nome": "Chen",
+   "principal": true,
+   "aparicoes": 82,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 4470.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 4308.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 4512.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 276.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 216.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 4488.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Brown/reddish-brown spiky hair, sharp eyes, determined expression, athletic build, often shown in action poses",
+   "protagonista": true,
+   "adulto": true
+  },
+  {
+   "personagem": "h02",
+   "nome": "Stone Bone",
+   "principal": false,
+   "aparicoes": 22,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 498.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 3414.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 510.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3132.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1860.0
+    }
+   ],
+   "papel": "ally",
+   "visual": "Large muscular primitive man with tan skin, wearing a pale bone-like helmet/skull mask covering the top of his head with eye holes, and a black spiked collar choker around his neck.",
+   "protagonista": false,
+   "adulto": true
+  },
+  {
+   "personagem": "h03",
+   "nome": "Chen",
+   "principal": false,
+   "aparicoes": 11,
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 3048.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 2466.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2658.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2538.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3492.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 2502.0
+    }
+   ],
+   "papel": "protagonist",
+   "visual": "Long bright green hair with yellow highlights, pointed elf-like ears, light green/yellow eyes, often wearing a woven thorn/vine crown on his head",
+   "protagonista": true,
+   "adulto": true
+  }
+ ]
+}

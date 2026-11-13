@@ -1,0 +1,8 @@
+{
+  "_leia": "Palavra COMUM que o TTS lê errado, em qualquer obra (bin/elenco.aplicar_pronuncia; o arquivo da obra guarda os nomes dela e manda quando as duas listas têm a mesma palavra). Vale SÓ no texto que vai pra voz: legenda, karaokê e SEO continuam com a grafia certa. Como achar o que entra aqui: ouvir o vídeo pronto e anotar a palavra que saiu torta — foi assim que 'herança' entrou, em 16/10, quando o dono ouviu o capítulo 2 e disse que ela saía errada em TODAS as vozes, inclusive nas brasileiras. A troca é por palavra inteira, ignorando maiúsculas e do nome mais longo pro mais curto. Teste antes de pôr aqui: python bin/elenco.py --ouvir \"<palavra>\" (ou gere o mp3 e escute), porque respelling errado piora.",
+  "_como_escrever": "Escreva como se fala, usando só letras do português. Nasalização com til (ã, õ) costuma funcionar melhor que 'an'/'am'. Separar sílabas com hífen ajuda a voz a não engolir (In-hiúk). NÃO use alfabeto fonético nem <phoneme>: o edge-tts escapa o texto e os dois são ignorados.",
+  "pt": {},
+  "_pendente_do_dono": {
+    "herança": "o dono apontou em 16/10 que sai errada em todas as vozes. Amostras mandadas pra ele escolher a grafia (Erãsa / Eranssa / Erânsa); a escolhida entra em 'pt' acima."
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "formato": "sketch animado de comédia infantil com legendas",
+ "descricao": "Diálogo curto e absurdo entre personagens animados 2D (criança vs vendedor), com legendas sincronizadas, transições de cena tipo sitcom e punchline final. Ritmo rápido com pausas cômicas.",
+ "replicavel": true,
+ "como_fazer": "1) Escrever roteiro de sketch absurdo (30-45s) com LLM focado em lógica infantil/nonsense; 2) Gerar personagens 2D consistentes via Gemini (criança, adulto, cenário de loja colorido); 3) Criar 4-6 frames estáticos de cada cena com variação de expressão facial; 4) Sintetizar vozes com ElevenLabs (voz infantil feminina + voz adulta masculina) com timing de comédia; 5) Montar no ffmpeg: transições rápidas entre frames (0.5-1s cada), adicionar legendas brancas com borda preta estilo meme, inserir efeito de 'tela preta + texto' para punchline; 6) Adicionar trilha de fundo neutra + sons de meme (confusão, suspense) nos beats cômicos",
+ "ferramentas": [
+  "Gemini",
+  "ElevenLabs",
+  "ffmpeg",
+  "overlays de legenda"
+ ],
+ "fonte_de_material": "geração IA de personagens 2D estilo cartoon infantil (Gemini com prompt de consistência visual) + roteiros criados por LLM baseados em lógica absurda infantil",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "Absurdo infantil + timing de comédia criam loop de rewatching; legendas facilitam share sem áudio; formato universal de sketch curto",
+ "exemplo_roteiro": "CENA 1: Criança na padaria - 'Moço, me dá um pão de ontem'\nPadeiro confuso: 'Mas ontem já passou, só tenho pão fresco'\nCriança: 'Então eu volto ontem pra buscar'\nTELA PRETA: 'Ela nunca mais voltou...'",
+ "nicho_canal": "novo canal: ComedinhaCurta",
+ "tags": [
+  "humor infantil",
+  "sketch animado",
+  "comédia absurda",
+  "meme brasileiro",
+  "animação 2D",
+  "diálogo nonsense"
+ ],
+ "video": "2026-10-06 18-28-37.mp4",
+ "data": "2026-10-12"
+}

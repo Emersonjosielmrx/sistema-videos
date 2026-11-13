@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avatar IA - Inovare AI</title>
+<meta name="description" content="Um avatar digital seu, falando em português, gravando vídeos para as suas redes sem você precisar aparecer.">
+<meta property="og:title" content="Avatar IA - Inovare AI">
+<meta property="og:description" content="Um avatar digital seu, falando em português, gravando vídeos para as suas redes sem você precisar aparecer.">
+<meta property="og:image" content="https://i.postimg.cc/25jW9WFk/image.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="https://i.postimg.cc/25jW9WFk/image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/css/landing.css">
+<style>
+.lp-hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+ padding:8rem 1.5rem 4rem;max-width:960px;margin:0 auto}
+.lp-hero h1{font-size:clamp(2.2rem,5vw,4rem);line-height:1.1;margin-bottom:1.5rem;font-weight:800}
+.lp-hero p{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text-muted);max-width:760px;margin:0 auto 2.5rem}
+.lp-hero .tag{font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--accent);
+ font-size:.9rem;margin-bottom:1rem}
+.lp-dor{max-width:820px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.7;color:var(--text-main)}
+.lp-cta{display:inline-flex;align-items:center;gap:.6rem;font-size:1.1rem;padding:1rem 2rem;border-radius:999px;
+ text-decoration:none}
+.lp-final{text-align:center;padding:6rem 1.5rem}
+.lp-final h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem}
+.lp-grid-prod{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+.lp-grid-prod a{text-decoration:none;color:inherit}
+.lp-wa{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;
+ display:flex;align-items:center;justify-content:center;font-size:2rem;z-index:9999;box-shadow:0 8px 25px rgba(0,0,0,.4)}
+@media(max-width:768px){.nav-links{display:none}}
+html.gsap .reveal{opacity:1;transform:none;transition:none}
+.lp-cta{position:relative;overflow:hidden;will-change:transform}
+.lp-cta::after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;pointer-events:none;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-150%) skewX(-20deg);
+ animation:lp-brilho 3.2s ease-in-out infinite}
+@keyframes lp-brilho{0%,55%{transform:translateX(-150%) skewX(-20deg)}100%{transform:translateX(320%) skewX(-20deg)}}
+.lp-cta{animation:lp-pulso 1.8s ease-in-out 1.2s infinite}
+@keyframes lp-pulso{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@media(prefers-reduced-motion:reduce){.lp-cta,.lp-cta::after{animation:none}.lp-cta::after{display:none}}
+@keyframes lp-marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes lp-pisca{0%,100%{opacity:1}50%{opacity:0}}
+.price-card .btn-primary,.price-card .btn-outline{display:block;text-align:center;margin-top:auto}
+.lp-hero .lp-cta + .lp-cta{margin-left:.6rem}
+
+.lp-scrub{position:relative}
+.lp-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:#050508}
+.lp-sticky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.lp-veu{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,8,.92) 0%,rgba(5,5,8,.55) 42%,transparent 65%)}
+.lp-hero.lp-hero-scrub{position:relative;z-index:2;min-height:100vh;height:100vh;max-width:620px;margin:0 0 0 6vw;
+ align-items:flex-start;text-align:left;padding:6rem 1.5rem 3rem}
+.lp-hero-scrub p{margin-left:0}.lp-hero-scrub .lp-botoes{justify-content:flex-start!important}
+.lp-dica{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:3;font-size:.7rem;letter-spacing:2px;
+ text-transform:uppercase;color:rgba(255,255,255,.55)}
+@media(max-width:768px){
+ .lp-veu{background:linear-gradient(180deg,rgba(5,5,8,.95) 0%,rgba(5,5,8,.8) 38%,rgba(5,5,8,.15) 62%,rgba(5,5,8,.5) 100%)}
+ .lp-hero.lp-hero-scrub{margin:0 auto;max-width:none;align-items:center;text-align:center;justify-content:flex-start;padding-top:5.5rem}
+ .lp-hero-scrub h1{font-size:1.9rem}.lp-hero-scrub p{font-size:1rem;margin:0 auto 1.2rem}
+ .lp-hero-scrub .lp-botoes{justify-content:center!important}}
+</style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+ <a href="/" class="nav-brand"><img src="https://i.postimg.cc/25jW9WFk/image.png" alt="Inovare AI" style="height:35px;width:auto;object-fit:contain"></a>
+ <div class="nav-links"><a href="/">Produtos</a><a href="#como-funciona">Como funciona</a><a href="#planos">Planos</a><a href="#faq">Dúvidas</a></div>
+ <a href="https://wa.me/5591984698653" target="_blank" rel="noopener" class="btn-primary">Fale conosco</a>
+</nav>
+
+<section class="lp-hero">
+ <div class="tag"><i class="fa-solid fa-user-astronaut"></i> Avatar IA</div>
+ <h1>Seu avatar com IA <span class='text-gradient'>postando todo dia</span></h1>
+ <p>Um avatar digital seu, falando em português, gravando vídeos para as suas redes sem você precisar aparecer.</p>
+ <div class="lp-botoes" style="display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center">
+ <a class="btn-primary lp-cta" href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Avatar%20IA" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Quero testar</a>
+ <a class="btn-outline" href="#planos" style="padding:1rem 2rem;border-radius:999px"><i class="fa-solid fa-tags"></i> Ver planos</a></div>
+</section>
+
+<div style="overflow:hidden;white-space:nowrap;padding:1.6rem 0;background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)">
+ <div style="display:inline-block;animation:lp-marquee 22s linear infinite"><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-instagram"></i> Instagram</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-facebook"></i> Facebook</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-telegram"></i> Telegram</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-solid fa-plug"></i> n8n</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-solid fa-comments"></i> Chatwoot</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-solid fa-robot"></i> IA de última geração</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-instagram"></i> Instagram</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-facebook"></i> Facebook</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-brands fa-telegram"></i> Telegram</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-solid fa-plug"></i> n8n</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-solid fa-comments"></i> Chatwoot</span><span style="font-size:1.3rem;color:var(--text-muted);margin-right:3.5rem;opacity:.7"><i class="fa-solid fa-robot"></i> IA de última geração</span></div></div>
+<section class="section" style="padding-top:3rem;padding-bottom:2rem">
+ <div style="text-align:center;max-width:900px;margin:0 auto;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:600;line-height:1.5;min-height:80px">
+  <span style="color:#fff">Eu sou o Avatar IA. Meu objetivo é</span> <span id="lp-digita" style="color:var(--secondary)"></span><span style="color:var(--secondary);animation:lp-pisca 1s infinite">|</span></div>
+</section>
+<section class="section bg-darker">
+ <div class="reveal delay-100" style="max-width:800px;margin:0 auto;text-align:center">
+  <i class="fa-solid fa-user-astronaut" style="font-size:3rem;color:var(--accent);margin-bottom:1.5rem"></i>
+  <h2 style="font-size:clamp(1.5rem,4vw,2.5rem);margin-bottom:1.5rem;line-height:1.3">Você aparece sem precisar gravar</h2>
+  <p style="font-size:1.2rem;color:var(--text-muted);line-height:1.8">Um avatar digital seu, com a sua voz clonada, fala em português natural e grava os vídeos das suas redes, sem cenário e sem cansaço.</p></div>
+</section>
+<script>document.addEventListener('DOMContentLoaded',function(){var f=["gravar vídeos por você.", "falar português natural.", "postar todo dia.", "usar a sua voz clonada."],i=0,c=0,apaga=false,el=document.getElementById('lp-digita');
+if(!el)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=f[0];return}
+(function passo(){var t=f[i];el.textContent=t.substring(0,apaga?--c:++c);var v=apaga?30:50;
+if(!apaga&&c===t.length){v=2000;apaga=true}else if(apaga&&c===0){apaga=false;i=(i+1)%f.length;v=500}setTimeout(passo,v)})()});</script>
+<section class="section"><p class="lp-dor reveal">Quem aparece em vídeo vende mais, mas gravar todo dia toma tempo, exige cenário e vence pelo cansaço.</p></section>
+<section id="como-funciona" class="section">
+ <h2 class="section-title">Como funciona</h2>
+ <div class="features-grid reveal delay-100"><div class="feature-card glass" style="text-align:center">
+<div style="font-size:3rem;color:var(--accent);font-weight:800;margin-bottom:1rem;opacity:.3">01</div>
+<h3 style="font-size:1.3rem;margin-bottom:1rem">Gravamos sua base</h3><p style="color:var(--text-muted);line-height:1.5">Poucos minutos de vídeo e áudio seus.</p></div><div class="feature-card glass" style="text-align:center">
+<div style="font-size:3rem;color:var(--accent);font-weight:800;margin-bottom:1rem;opacity:.3">02</div>
+<h3 style="font-size:1.3rem;margin-bottom:1rem">Criamos o avatar</h3><p style="color:var(--text-muted);line-height:1.5">Seu rosto e sua voz, com IA.</p></div><div class="feature-card glass" style="text-align:center">
+<div style="font-size:3rem;color:var(--accent);font-weight:800;margin-bottom:1rem;opacity:.3">03</div>
+<h3 style="font-size:1.3rem;margin-bottom:1rem">Vídeos todo dia</h3><p style="color:var(--text-muted);line-height:1.5">Roteiros e vídeos prontos para postar.</p></div></div>
+</section>
+<section id="features" class="section bg-darker">
+ <h2 class="section-title">O que está incluso</h2>
+ <div class="features-grid"><div class="feature-card flashlight-card reveal delay-100">
+<i class="fa-solid fa-user-astronaut feature-icon"></i><h3>Seu avatar</h3><p>Com o seu rosto e a sua voz.</p></div><div class="feature-card flashlight-card reveal delay-200">
+<i class="fa-solid fa-language feature-icon"></i><h3>Português natural</h3><p>Fala fluida, sem sotaque de robô.</p></div><div class="feature-card flashlight-card reveal delay-300">
+<i class="fa-solid fa-calendar-days feature-icon"></i><h3>Postagem diária</h3><p>Vídeos prontos para as redes.</p></div><div class="feature-card flashlight-card reveal delay-400">
+<i class="fa-solid fa-microphone-lines feature-icon"></i><h3>Voz clonada</h3><p>A sua voz em qualquer roteiro.</p></div></div>
+</section>
+
+<section id="comparativo" class="section bg-darker">
+ <h2 class="section-title">Do jeito tradicional x com o Avatar IA</h2>
+ <div class="comparison-container reveal"><div class="comp-table">
+  <div class="comp-header"><div class="comp-col">Critério</div><div class="comp-col human-col">Tradicional</div>
+  <div class="comp-col text-gradient" style="font-weight:800">Avatar IA</div></div><div class="comp-row"><div class="comp-col font-medium">Gravar vídeo</div>
+<div class="comp-col human-col text-red-400">Cenário, tempo e regravação</div><div class="comp-col text-green-400">O avatar grava</div></div><div class="comp-row"><div class="comp-col font-medium">Frequência</div>
+<div class="comp-col human-col text-red-400">Quando dá</div><div class="comp-col text-green-400">Postagem diária</div></div><div class="comp-row"><div class="comp-col font-medium">Voz</div>
+<div class="comp-col human-col text-red-400">Você precisa estar lá</div><div class="comp-col text-green-400">Sua voz clonada</div></div></div></div>
+</section>
+<section class="section">
+ <h2 class="section-title">Como entregamos o seu projeto</h2>
+ <div class="reveal delay-100" style="max-width:800px;margin:0 auto;text-align:left"><details class="glass" style="margin-bottom:1rem;padding:1.5rem;border-radius:12px;border:1px solid var(--glass-border)" open>
+<summary style="font-size:1.15rem;font-weight:600;color:#fff;display:flex;align-items:center;gap:1rem;cursor:pointer">
+<i class="fa-solid fa-handshake-angle" style="color:var(--accent)"></i> 1. Implantação com especialista</summary>
+<p style="color:var(--text-muted);line-height:1.5;margin-top:1rem">A nossa equipe configura tudo, conecta os seus canais e ensina a IA com as informações da sua empresa.</p></details><details class="glass" style="margin-bottom:1rem;padding:1.5rem;border-radius:12px;border:1px solid var(--glass-border)">
+<summary style="font-size:1.15rem;font-weight:600;color:#fff;display:flex;align-items:center;gap:1rem;cursor:pointer">
+<i class="fa-solid fa-graduation-cap" style="color:var(--accent)"></i> 2. Treinamento da equipe</summary>
+<p style="color:var(--text-muted);line-height:1.5;margin-top:1rem">Mostramos para você e para a sua equipe como usar o painel.</p></details><details class="glass" style="margin-bottom:1rem;padding:1.5rem;border-radius:12px;border:1px solid var(--glass-border)">
+<summary style="font-size:1.15rem;font-weight:600;color:#fff;display:flex;align-items:center;gap:1rem;cursor:pointer">
+<i class="fa-solid fa-chart-line" style="color:var(--accent)"></i> 3. Ajustes contínuos</summary>
+<p style="color:var(--text-muted);line-height:1.5;margin-top:1rem">Acompanhamos os primeiros dias e ajustamos a IA para as novas dúvidas.</p></details></div>
+</section>
+<section id="planos" class="section bg-darker">
+ <h2 class="section-title">Planos</h2>
+ <div class="pricing-grid"><div class="price-card reveal delay-100">
+<h3>Essencial</h3>
+<div class="price-value">R$ 397<span>/mês</span></div><ul class="price-features"><li><i class="fa-solid fa-check"></i> Seu avatar digital</li><li><i class="fa-solid fa-check"></i> Português natural</li><li><i class="fa-solid fa-check"></i> Vídeos para as suas redes</li></ul>
+<a href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20quero%20o%20plano%20Essencial%20%28R%24%20397%29%20do%20Avatar%20IA." target="_blank" rel="noopener" class="btn-outline">
+<i class="fa-brands fa-whatsapp"></i> Quero este</a></div><div class="price-card vip reveal delay-200">
+<div class="card-badge card-badge-accent">MAIS COMPLETO</div><h3>Profissional</h3>
+<div class="price-value">R$ 797<span>/mês</span></div><ul class="price-features"><li><i class="fa-solid fa-check"></i> Tudo do Essencial</li><li><i class="fa-solid fa-check"></i> Voz clonada</li><li><i class="fa-solid fa-check"></i> Postagem diária</li></ul>
+<a href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20quero%20o%20plano%20Profissional%20%28R%24%20797%29%20do%20Avatar%20IA." target="_blank" rel="noopener" class="btn-primary lp-cta">
+<i class="fa-brands fa-whatsapp"></i> Quero este</a></div></div>
+ <p style="text-align:center;margin-top:2.5rem;color:var(--text-muted);font-size:.9rem"><i class="fa-solid fa-lock" style="color:#25D366"></i> Pagamento seguro · Pix e cartão</p>
+</section>
+<section class="lp-final">
+ <h2>Pronto para colocar o Avatar IA para trabalhar?</h2>
+ <p style="color:var(--text-muted);margin-bottom:2rem">Fale com a gente no WhatsApp e peça uma demonstração.</p>
+ <a class="btn-primary lp-cta" href="https://wa.me/5591984698653?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Avatar%20IA" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a>
+</section>
+<section id="faq" class="section bg-darker">
+ <h2 class="section-title">Perguntas Frequentes</h2>
+ <div class="faq-accordion reveal delay-200"><div class="faq-item"><div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+Fica parecido comigo? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-content"><p>Sim, o avatar é feito a partir de gravações suas.</p></div></div><div class="faq-item"><div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+Posso usar em anúncios? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-content"><p>Sim, o avatar é seu.</p></div></div><div class="faq-item"><div class="faq-header" onclick="this.parentElement.classList.toggle('active')">
+Quanto custa? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-content"><p>A partir de R$ 397. Veja os planos acima ou fale com a gente no WhatsApp.</p></div></div></div>
+</section>
+<footer><p>&copy; 2026 Inovare AI - Fábrica de Automação. Todos os direitos reservados.</p></footer>
+<a class="lp-wa" href="https://wa.me/5591984698653" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script>window.addEventListener('DOMContentLoaded',function(){
+var calmo=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var els=document.querySelectorAll('.reveal');
+if(calmo){els.forEach(function(e){e.classList.add('active')});return}
+if(!window.gsap||!window.ScrollTrigger){var o=new IntersectionObserver(function(es){
+ es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('active');o.unobserve(e.target)}})},{threshold:.1});
+ els.forEach(function(el){o.observe(el)});return}
+gsap.registerPlugin(ScrollTrigger);document.documentElement.classList.add('gsap');
+gsap.utils.toArray('.section-title,.lp-dor,.lp-final h2,.faq-accordion').forEach(function(el){
+ gsap.from(el,{y:40,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}})});
+gsap.utils.toArray('.features-grid,.lp-grid-prod').forEach(function(g){
+ gsap.from(g.children,{y:50,opacity:0,duration:.8,ease:'power3.out',stagger:.12,
+  scrollTrigger:{trigger:g,start:'top 85%',once:true}})});
+var h=document.querySelector('.lp-hero');
+if(h){gsap.from(h.children,{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.12});
+ // parallax só no desktop e só posição (no celular com CPU lenta ele derrubava os quadros por segundo)
+ if(window.matchMedia('(min-width: 769px)').matches)
+  gsap.to(h,{yPercent:-10,ease:'none',scrollTrigger:{trigger:h,start:'top top',end:'bottom top',scrub:.5}})}
+// pulso do botão = CSS (lp-pulso): animação de JS em todo quadro pesava no celular
+});</script>
+</body>
+</html>

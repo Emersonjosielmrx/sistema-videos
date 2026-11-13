@@ -1,0 +1,5 @@
+-r requirements-engine.txt
+
+# Gradio interface dependencies
+gradio==6.20.0
+pypresence==4.6.2

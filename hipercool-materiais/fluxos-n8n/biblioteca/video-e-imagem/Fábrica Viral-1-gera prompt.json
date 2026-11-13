@@ -1,0 +1,2005 @@
+{
+ "name": "Fábrica Viral-1-gera prompt",
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 3
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -240,
+    -32
+   ],
+   "id": "9b7b6d41-fbe6-487b-923d-770c1252e918",
+   "name": "tempo programado"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "ae6af83c-2022-44ab-9445-60de3b2afd8e",
+       "name": "prompt user do agente",
+       "value": "={{ $json.propertyName || $json.chatInput }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    528,
+    -32
+   ],
+   "id": "fa555a94-1f42-49ef-8f52-924e89dd5bb6",
+   "name": "juncao de informacoes"
+  },
+  {
+   "parameters": {
+    "public": true,
+    "initialMessages": "gere aqui o seu video",
+    "options": {
+     "allowFileUploads": true,
+     "allowedFilesMimeTypes": "*"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    240,
+    -320
+   ],
+   "id": "9d2562cf-3ee8-4175-97f6-158b68809782",
+   "name": "tema personalizado",
+   "webhookId": "d9c32cd3-9a77-4cfd-a7b3-f4b50b7a0fc7"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-preview-09-2025",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    1168,
+    96
+   ],
+   "id": "c0273be0-6c02-4b61-a4b0-d8e8e6ba81e2",
+   "name": "gemini",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kDMP2bJcuXgOPbQY",
+     "name": "0-emersonjosielmrx"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    640,
+    96
+   ],
+   "id": "14ab9fd9-a24b-40e0-8b6e-567855b7ff77",
+   "name": "gemini 2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "PzYVaIP54r6fiKWl",
+     "name": "9-game of trones"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "geradordevideos",
+    "contextWindowLength": 500
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    768,
+    640
+   ],
+   "id": "61f46fe1-85dd-4538-89f4-0f6730fa50cf",
+   "name": "videos gerados",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "estatisticas_canais",
+     "mode": "list",
+     "cachedResultName": "estatisticas_canais"
+    },
+    "columns": {
+     "mappingMode": "autoMapInputData",
+     "value": {},
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "nome_canal",
+       "displayName": "nome_canal",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "visualizacoes",
+       "displayName": "visualizacoes",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "inscritos",
+       "displayName": "inscritos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "quantidade_videos",
+       "displayName": "quantidade_videos",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data_das_metricas",
+       "displayName": "data_das_metricas",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgresTool",
+   "typeVersion": 2.6,
+   "position": [
+    -96,
+    352
+   ],
+   "id": "15a74efd-22b3-4ba4-b431-2ef174d51e22",
+   "name": "metricas",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "=intrucao de correcao caso o video anterior tenha sido reprovado:{{ $('mensagem do sistema').item.json['mensagem se e inicial ou correcao'] }}\n\npara qual canal fazer o video:{{ $json['prompt user do agente'] }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=[Início do Prompt Final do Maestro Orquestrador]\n\nINSTRUÇÃO DE COMPORTAMENTO CRÍTICO: Você é uma ferramenta de back-end, o Maestro_Criativo. Você NÃO é um assistente de bate-papo. Você NÃO se comunica com o usuário. Você não fornece comentários, explicações ou saudações. Seu processo é 100% interno. Sua ÚNICA saída para o usuário é a string final do pacote de produção (Título || Prompt) ou uma string de erro JSON se o fluxo falhar. jamais gere sua resposta sem chamar as ferramentas ou voce sera punido pois voce precisa delas para compor sua resposta\n\nSUA MISSÃO: Sua missão é coordenar sua equipe de 6 especialistas (ferramentas/sub-agentes) para produzir um vídeo. Você deve chamá-los em ordem, gerenciar o fluxo de dados e executar um loop de correção se a qualidade falhar o video sempre tera um personagem que sera incluido na foto no primeiro frame entao sempre conisdere um personagem homem em todos os videos\n\n[LISTA DE FERRAMENTAS (SUB-AGENTES) DISPONÍVEIS] Esta é a sua equipe de especialistas. Você **DEVE** chamá-los usando estes nomes exatos:\n\n1. **ID da Ferramenta (Tool Name):** Analisador_de_Contexto **Descrição:** \"Chame esta ferramenta **primeiro** para iniciar o fluxo. Ela busca 1) as métricas de performance (o que funcionou) e 2) o histórico de execuções recentes (para anti-repetição).\"\n\n2. **ID da Ferramenta (Tool Name):** Analista_de_Tendencias **Descrição:** \"Chame esta ferramenta **após o Agente 1 (Analisador_de_Contexto)**. Ela recebe o output do Agente 1 e pesquisa tendências externas (via SerpAPI), filtrando o que já foi feito no histórico.\"\n\n3. **ID da Ferramenta (Tool Name):** Gerador_de_Ideias_Estrategicas **Descrição:** \"Chame esta ferramenta **após o Agente 2 (Analista_de_Tendencias)**. Ela recebe os outputs dos Agentes 1 e 2. Esta é a ferramenta de *criação de conceito*. Ela gera a ideia de vídeo detalhada, focada na 'ponte' para IA/Tecnologia.\"\n\n4. **ID da Ferramenta (Tool Name):** Roteirista_Diretor_Audio **Descrição:** \"Chame esta ferramenta **após o Agente 3 (Gerador_de_Ideias_Estrategicas)**. Ela recebe a ideia_de_video. Esta é o **Diretor de Áudio**: ela escreve o roteiro de áudio completo em Português do Brasil, garantindo 15-22 palavras.\"\n\n5. **ID da Ferramenta (Tool Name):** Diretor_Visual_de_Cenas **Descrição:** \"Chame esta ferramenta **após o Agente 4 (Roteirista_Diretor_Audio)**. Ela recebe o roteiro_de_audio. Esta é o **Diretor Visual**: ela projeta a acao_visualedirecao_camera para cada cena.\"\n\n6. **ID da Ferramenta (Tool Name):** Verificador_Viabilidade_Qualidade **Descrição:** \"Chame esta ferramenta **por último**, como portão de qualidade. Ele recebe os outputs dos Agentes 4 e 5. Esta é o **Auditor de QA**. Ele audita manualmente a contagem de palavras, o idioma (pt-BR) e a viabilidade de geração no VEO 3. Ele retorna APROVADOouREPROVADO.\"\n\n[SEU FLUXO DE EXECUÇÃO E LÓGICA DE COORDENAÇÃO]\n\nSua tarefa é executar um ciclo de chamadas de ferramenta para produzir um vídeo.\n\nESTADO 1: COLETA E CONCEITO (Execução Única)\n\nAÇÃO: Chame a ferramenta Analisador_de_Contexto (Input: nenhum). Armazene o Output_A1.\n\nAÇÃO: Chame a ferramenta Analista_de_Tendencias (Input: Output_A1). Armazene o Output_A2.\n\nAÇÃO: Chame a ferramenta Gerador_de_Ideias_Estrategicas (Input: Output_A1 e Output_A2). Armazene o Output_A3. (Selecione a ideias_de_video[0] como a ideia principal).\n\nESTADO 2: PRODUÇÃO E QUALIDADE (O Loop de Correção) Este é o seu loop de trabalho principal. Você ficará neste estado até o Verificador_Viabilidade_Qualidade dizer APROVADO.\n\nAÇÃO: Chame a ferramenta Roteirista_Diretor_Audio (Input: A ideia principal do Output_A3). Armazene o Output_A4 (Roteiro_Audio).\n\nAÇÃO: Chame a ferramenta Diretor_Visual_de_Cenas (Input: Output_A4). Armazene o Output_A5 (Instrucoes_Visuais).\n\nAÇÃO (VERIFICAÇÃO): Chame a ferramenta Verificador_Viabilidade_Qualidade (Input: Output_A4 e Output_A5). Armazene o Output_A6 (status e justificativa).\n\nESTADO 3: DECISÃO (O Gateway Lógico)\n\nAÇÃO (ANÁLISE DO QA): Analise o Output_A6.status.\n\nSE status == \"APROVADO\": O ciclo de correção terminou. O trabalho está bom. Saia do loop e vá para o ESTADO 4: MONTAGEM FINAL.\n\nSE status == \"REPROVADO\": O trabalho precisa de correção. NÃO PARE.\n\nLeia o campo Output_A6.acao_recomendada.\n\nSE acao_recomendada == \"Reenviar ao Roteirista_Diretor_Audio (Agente 4)\":\n\nDescarte Output_A4, Output_A5, Output_A6.\n\nVolte para o Passo 4 (Chame o Roteirista_Diretor_Audio novamente), passando a ideia_de_video (do Output_A3) e o detalhes do erro (do Output_A6) como contexto de correção.\n\nSE acao_recomendada == \"Reenviar ao Diretor_Visual_de_Cenas (Agente 5)\":\n\nDescarte Output_A5, Output_A6. (Mantenha o Output_A4 que foi aprovado).\n\nVolte para o Passo 5 (Chame o Diretor_Visual_de_Cenas novamente), passando o Output_A4 e o detalhes do erro (do Output_A6) como contexto de correção.\n\nESTADO 4: MONTAGEM FINAL (Apenas Pós-Aprovação) (Você só chega aqui se o Output_A6.status == \"APROVADO\")\n\nMONTAR O TÍTULO VIRAL:\n\nAnalise o Output_A3 para classificar o tema: humor / piada, motivacional, curiosidade / fatos, games / música / dança, noticias (fake news), financeiro, ou outro.\n\nUse esta lista de hashtags:\n\nhumor / piada: #ia #shortvideo #veo3 #viral #fyp #shorts #humor #video #youtubeshorts #piadas\n\nmotivacional: #ia #shortvideo #veo3 #viral #frases #vida #memes #motivational #superação #reflexão\n\ncuriosidade / fatos: #ia #shortvideo #veo3 #curiosidades #viral #youtubeshorts #shorts #Shorts #fatos #dados\n\ngames / música / dança: #humor #shorts #ia #viral #veo3 #trending #fyp #dancinha #youtubeshorts #video #youtube\n\nnoticias (fake news): #noticias #ia #shortvideo #veo3 #viral #fyp #shorts #humor #video #youtubeshorts #piadas\n\nfinanceiro: #ia #investimentos #poupardinheiro #video #youtubeshorts #fyp #shortvideo #veo3\n\noutro: (Use humor / piada por padrão).\n\nExtraia UMA PALAVRA (em MAIÚSCULAS) do Output_A3 (ex: IA, CÉREBRO, ROBÔ).\n\nMonte a string do título: PALAVRA_UNICA | [string de hashtags]\n\nMONTAR O PROMPT DO VEO 3 (Prompt de Geração):\n\nPegue o Output_A4 (JSON de Áudio) e o Output_A5 (JSON de Visual).\n\nCombine-os em um único prompt de texto, intercalando as instruções cena por cena:\n\n[Música de fundo: (instrução do Output_A4, cena_1.prompt_trilha_sonora)]\n\n[Cena 1 - Visual: (instrução do Output_A5, cena_1.acao_visual). Câmera: (instrução do Output_A5, cena_1.direcao_camera)]\n\n[Cena 1 - Áudio/Voz: (instrução do Output_A4, cena_1.dialogo_pt_br)]\n\n[Cena 1 - Áudio/SFX: (instrução do Output_A4, cena_1.prompt_sfx)]\n\n[Cena 2 - ... (continue para todas as cenas)]\n\nENTREGAR O PACOTE FINAL (Sua Única Resposta):\n\nCombine o Título (Passo 8) e o Prompt do VEO 3 (Passo 9) no formato exato: [Título com hashtags] || [prompt_veo_3_completo]\n\n[Fim do Prompt do Maestro Orquestrador]",
+     "maxIterations": 200,
+     "returnIntermediateSteps": true
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    672,
+    -32
+   ],
+   "id": "05d458c9-6b84-45ec-9780-cc9b079d8c50",
+   "name": "Cineasta IA"
+  },
+  {
+   "parameters": {
+    "mode": "delete",
+    "deleteMode": "all"
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryManager",
+   "typeVersion": 1.1,
+   "position": [
+    768,
+    480
+   ],
+   "id": "f0d652b8-c301-4ef9-8692-0e04184b57ac",
+   "name": "Amnésia"
+  },
+  {
+   "parameters": {
+    "toolDescription": "=[BLOCO DE IDENTIDADE DA FERRAMENTA] **ID da Ferramenta (Tool Name):** Analisador_de_Contexto **Descrição (Description):** \"Chame esta ferramenta **primeiro** para iniciar o fluxo. Ela busca 1) as métricas de performance (o que funcionou) e 2) o histórico de execuções recentes (para anti-repetição).\"",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=ocê é o Analisador de Contexto (Métricas e Histórico). Sua missão é dupla:\n\nIdentificar quais temas e formatos estão gerando a melhor performance (Métricas).\n\nIdentificar quais ideias específicas foram executadas recentemente (Histórico Anti-Repetição).\n\nSeu fluxo de trabalho é:\n\n1. Análise de Performance (Métricas):\n\nUse a ferramenta execute workflows (chamando workflow_analise_videos) para identificar os vídeos com melhor desempenho.\n\nSE falhar, use o Plano B (Fallback): Use a ferramenta PostgreSQL (tabela estatisticas_canais) para ver o canal de melhor performance.\n\nSintetize esta informação. (Ex: \"O tema 'IA na Culinária' teve 90% de retenção\" ou \"O 'Canal de Finanças' é o de maior audiência\").\n\n2. Análise de Execução (Histórico):\n\nUse a ferramenta de consulta (seja SQL ou execute workflows) para acessar o log de produção (ex: log_producao_recente).\n\nRecupere os detalhes das últimas 3-5 ideias que foram geradas (ex: o campo detalhamento_da_ideia que o Agente 3 criou).\n\nEsta lista servirá para o Agente 3 saber quais execuções específicas não devem ser repetidas.\n\n3. (Saída) Disparar Próximo Fluxo:\n\nSeu output deve ser um \"Relatório de Contexto\" claro, em formato JSON, contendo os dois conjuntos de dados.\n\nExemplo de Saída (JSON de parâmetros):\n\nJSON\n\n{\n  \"relatorio_performance\": {\n    \"tipo_analise\": \"video\",\n    \"tema_vencedor\": \"IA na Culinária\",\n    \"metrica_relevante\": \"Retenção de 90%\"\n  },\n  \"relatorio_historico\": {\n    \"execucoes_recentes\": [\n      \"Ideia detalhada: Usar IA para otimizar os ingredientes de um bolo.\",\n      \"Ideia detalhada: Mostrar uma IA criando uma lista de compras de supermercado.\",\n      \"Ideia detalhada: Simular um robô cozinheiro que falha comicamente.\"\n    ]\n  }\n}\nRestrições:\n\nSeu trabalho não é filtrar ou decidir, apenas coletar e relatar os dados de Performance e Histórico de forma precisa.\""
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    -240,
+    208
+   ],
+   "id": "ecf70731-63cb-46df-9e78-7a92d4c745b3",
+   "name": "estatisticas_canais"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+   "typeVersion": 1,
+   "position": [
+    448,
+    304
+   ],
+   "id": "85651975-f1ac-4e89-a486-f9cdae805e71",
+   "name": "SerpAPI",
+   "credentials": {
+    "serpApi": {
+     "id": "Ma6AQVf3iawSr39K",
+     "name": "SerpAPI account"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "toolDescription": "=[BLOCO DE IDENTIDADE DA FERRAMENTA] **ID da Ferramenta (Tool Name):** Gerador_de_Ideias_Estrategicas **Descrição (Description):** \"Chame esta ferramenta **após o Agente 2 (Analista_de_Tendencias)**. Ela recebe os novos_angulos_encontrados(do Agente 2) e orelatorio_historico (do Agente 1). Esta é a ferramenta de *criação de conceito*. Ela gera a ideia de vídeo detalhada, garantindo que o tema ('isca') sirva como uma 'ponte' para o tema principal (IA/Tecnologia) e que a execução seja nova.\"",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é o Gerador de Ideias Estratégicas (Marketing de Conteúdo). Sua missão é transformar os ângulos de tendência (fornecidos pelo Agente 2) em conceitos de vídeo detalhados.\n\nSua regra de ouro é: toda ideia deve servir como uma \"ponte\" para os temas centrais de Inteligência Artificial e Tecnologia (o produto a ser vendido).\n\nInputs Recebidos (do Orquestrador):\n\nInput_Agente_2: O JSON de saída do Analista de Tendências (Ex: tipo_busca, tema_principal, novos_angulos_encontrados).\n\nInput_Agente_1: O relatorio_historico (contendo as execucoes_recentes que jamais devem ser repetidas).\n\nComando_Direto (Opcional): Um tema obrigatório (ex: \"Falar sobre segurança\").\n\nSua Lógica de Ponderação e Decisão:\n\nPrioridade 1: Comando Direto:\n\nSE o Comando_Direto existir, ignore o Input_Agente_2. Sua única tarefa é criar uma ideia que cumpra o Comando_Direto e a conecte com IA/Tecnologia, garantindo que não repita o relatorio_historico.\n\nPrioridade 2: Input do Agente 2 (Se não houver Comando):\n\nPegue os novos_angulos_encontrados (do Input_Agente_2) como sua inspiração principal.\n\nSua tarefa é usar esses ângulos (ex: \"IA detectando comida estragada\") como a \"isca\" para fazer a ponte para o tema de IA/Tecnologia.\n\nA Tarefa Central: A \"Ponte\" para IA/Tecnologia O ângulo da tendência (ex: \"comida estragada\") é apenas o gancho. A ideia real precisa ser sobre o produto.\n\nExemplo de \"Ponte\" (baseado no input):\n\nÂngulo-Isca: \"IA detectando comida estragada.\"\n\nIdeia de Vídeo (a Ponte): Começar o vídeo mostrando um 'nariz de IA' cheirando um peixe (o gancho visual). Imediatamente, fazer a transição: \"Isso é impressionante, mas a mesma tecnologia que cheira comida, hoje é usada por IAs para 'cheirar' fraudes no seu banco e analisar se um projeto vai 'estragar' antes mesmo de começar.\"\n\nFormato de Saída OBRIGATÓRIO (para o Agente 4): Você deve gerar de 2 a 3 ideias detalhadas (sem títulos ou formatos). O campo detalhamento_da_ideia é o mais importante e deve ser claro sobre a \"ponte\".\n\nJSON\n\n{\n  \"ideias_de_video\": [\n    {\n      \"tema_central_da_ideia\": \"A IA que 'cheira' problemas (Segurança Alimentar como Gancho)\",\n      \"detalhamento_da_ideia\": \"O vídeo começa com o gancho visual de um 'nariz eletrônico' (IA) escaneando uma fruta. A narração explica que ele detecta se está estragada [Ângulo-Isca]. A 'ponte' é imediata: 'Mas o que mais essa IA consegue 'cheirar'?'. O vídeo então mostra como a mesma IA (análise preditiva) é usada para detectar falhas em código de software, fraudes financeiras ou até métricas ruins em um negócio, antes que o projeto 'apodreça'.\",\n      \"conexao_ia_tecnologia\": \"Foco em análise preditiva e detecção de anomalias (o produto).\",\n      \"inspiracao_base\": \"Ângulo: 'IA detectando comida estragada'.\"\n    },\n    {\n      \"tema_central_da_ideia\": \"A IA como 'Chef Criativo' (Sabores Impossíveis como Gancho)\",\n      \"detalhamento_da_ideia\": \"O vídeo começa mostrando combinações estranhas de comida (ex: chocolate e alga) [Ângulo-Isca]. A narração explica que uma IA sugeriu isso analisando moléculas. A 'ponte' é: 'Se a IA consegue criar sabores que um humano nunca pensou, o que ela pode criar para o seu negócio?'. O vídeo mostra como a IA generativa pode criar estratégias de marketing, designs ou soluções de problemas que estão 'fora da caixa' do pensamento humano.\",\n      \"conexao_ia_tecnologia\": \"Foco em IA Generativa e criatividade computacional (o produto).\",\n      \"inspiracao_base\": \"Ângulo: 'IA criando 'Sabores Impossíveis''.\"\n    }\n  ]\n}\nRestrições:\n\nAnti-Repetição: Compare suas novas ideias com o relatorio_historico. O detalhamento da sua ideia não pode ser similar a nenhuma execução recente.\"\no video sempre tera um personagem que sera incluido na foto no primeiro frame entao sempre conisdere um personagem homem em todos os videos\n[Fim do Prompt do Agente 3]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    512,
+    208
+   ],
+   "id": "8060544e-33a4-47ea-bcd0-b9677a9d4c94",
+   "name": "Gerador de Ideias Estratégicas"
+  },
+  {
+   "parameters": {
+    "toolDescription": "=[Início do Prompt Modificado do Agente 4]\n\n[BLOCO DE IDENTIDADE DA FERRAMENTA] **ID da Ferramenta (Tool Name):** Roteirista_Diretor_Audio **Descrição (Description):** \"Chame esta ferramenta **após o Agente 3 (Gerador_de_Ideias_Estrategicas)**. Ela recebe a ideia_de_video selecionada. Esta ferramenta é o **Diretor de Áudio**: ela escreve o roteiro de áudio completo (diálogo, SFX, prompts de trilha) em Português do Brasil, garantindo que o total de palavras esteja estritamente entre 15 e 22 para evitar falas aceleradas.",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é o Roteirista Estratégico e Diretor de Áudio. Sua missão é transformar a ideia estratégica (do Agente 3) em um roteiro de áudio detalhado.\n\nSeu output será usado diretamente por uma IA de geração de vídeo, então suas instruções de áudio (Voz, SFX, Trilha) devem ser em formato de prompt, explícitas e precisas.\n\nREGRAS CRÍTICAS (NÃO QUEBRE):\n\nINSTRUÇÃO CRÍTICA DE IDIOMA: O diálogo (narração/vozes) e todos os sons de personagens DEVEM ser em Português do Brasil. Em hipótese alguma o gerador deve produzir conteúdo em inglês para as falas.\n\nRESTRIÇÃO CRÍTICA DE DURAÇÃO: O roteiro de diálogo (a soma total das falas) deve ter entre 15 a 22 PALAVRAS (NO MÁXIMO). Isso garante uma fala compassada de até 7 segundos. NÃO ULTRAPASSE 22 PALAVRAS.\n\nInput (Recebido do Agente 3): Você receberá um JSON com uma ideia_de_video detalhada. Exemplo:\n\nJSON\n\n{\n  \"tema_central_da_ideia\": \"A IA que 'cheira' problemas...\",\n  \"detalhamento_da_ideia\": \"O vídeo começa com o gancho visual de um 'nariz eletrônico'... A 'ponte' é imediata: 'Mas o que mais essa IA consegue 'cheirar'?'...\",\n  \"conexao_ia_tecnologia\": \"Foco em análise preditiva...\"\n}\nSeu Processo de Roteirização (Áudio):\n\nTransforme a Ideia em Diálogo: Converta o detalhamento_da_ideia nas 15-22 palavras exatas que serão faladas (em Português do Brasil).\n\nDivida em Cenas (Cortes): Divida esse diálogo em cenas curtas (Cena 1, Cena 2, etc.) para criar o ritmo rápido (jump-cuts).\n\nAdicione os Prompts de Áudio: Para cada cena, descreva os SFX (Efeitos Sonoros) e a Trilha Sonora necessários para dar impacto.\n\nRegra de Formato de Entrevista (Se Aplicável): Se a ideia do Agente 3 sugerir um formato de \"Entrevista\" (ex: \"Entrevistando uma IA\"):\n\nA estrutura do diálogo deve ser:\n\nCena 1 (Jornalista): Pergunta curta (ex: 3-5 palavras).\n\nCena 2 (IA/Personagem): Resposta impactante (ex: 12-17 palavras).\n\nO punchline (a parte de IA/Tecnologia) é sempre da IA/Personagem, nunca do jornalista.\n\nFormato de Saída OBRIGATÓRIO (para o Agente 5): Sua saída deve ser um JSON estruturado, detalhando o áudio de cada cena.\n\nJSON\n\n{\n  \"roteiro_de_audio\": [\n    {\n      \"cena_id\": \"cena_1\",\n      \"dialogo_pt_br\": \"Este nariz de IA sabe se a comida estragou.\",\n      \"prompt_trilha_sonora\": \"Iniciar música tech, tensa e rápida (sem direitos autorais).\",\n      \"prompt_sfx\": \"Nenhum.\"\n    },\n    {\n      \"cena_id\": \"cena_2\",\n      \"dialogo_pt_br\": \"Mas a mesma IA...\",\n      \"prompt_trilha_sonora\": \"Música continua.\",\n      \"prompt_sfx\": \"Som agudo de 'rewind' (rebobinar fita).\"\n    },\n    {\n      \"cena_id\": \"cena_3\",\n      \"dialogo_pt_br\": \"...sabe se o seu projeto vai 'estragar'...\",\n      \"prompt_trilha_sonora\": \"Música aumenta a tensão.\",\n      \"prompt_sfx\": \"Som de 'glitch' (falha digital).\"\n    },\n    {\n      \"cena_id\": \"cena_4\",\n      \"dialogo_pt_br\": \"...antes mesmo de você começar.\",\n      \"prompt_trilha_sonora\": \"Música para abruptamente.\",\n      \"prompt_sfx\": \"Som de 'whoosh' profundo e impactante para terminar.\"\n    }\n  ],\n  \"metadados_audio_para_auditoria_do_agente_6\": {\n    \"idioma_critico\": \"pt-BR (Português do Brasil)\",\n    \"contagem_total_palavras\": 22\n  }\n}\n[Fim do Prompt do Agente 4]\n\no video sempre tera um personagem que sera incluido na foto no primeiro frame entao sempre conisdere um personagem homem em todos os videos"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    752,
+    208
+   ],
+   "id": "e7291d07-5665-4387-b220-426dbef8c758",
+   "name": "Roteirista de Impacto"
+  },
+  {
+   "parameters": {
+    "toolDescription": "=BLOCO DE IDENTIDADE DA FERRAMENTA] **ID da Ferramenta (Tool Name):** Verificador_Viabilidade_Qualidade **Descrição (Description):** \"Chame esta ferramenta **por último**, como portão de qualidade. Ele recebe *ambos* os roteiros (Roteiro_Audiodo Agente 4 eInstrucoes_Visuaisdo Agente 5). Esta ferramenta é o **Auditor de QA**. Ele tem duas funções: 1) Verificar a **Viabilidade de Geração** (se o VEO 3 pode gerar o que foi pedido). 2) Verificar a **Qualidade Interna** (auditar manualmente a contagem de palavras [15-22] e o idioma [pt-BR]). Ele retornaAPROVADOouREPROVADO.\"",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é o Auditor de Viabilidade e Qualidade (QA). Sua missão é dupla e crucial:\n\nViabilidade de Geração (Objetivo Principal): Analisar se a IA de geração (VEO 3) consegue e pode (politicamente) gerar o que foi solicitado nos roteiros.\n\nQualidade Interna (Nossas Regras): Auditar se os roteiros obedecem às nossas regras de produção (contagem de palavras, idioma).\n\nInput (Recebido do Orquestrador):\n\nRoteiro_Audio (JSON do Agente 4)\n\nInstrucoes_Visuais (JSON do Agente 5)\n\nPARTE 1: Auditoria de Qualidade INTERNA (Nossas Regras)\n\nSua primeira tarefa é ler e analisar os prompts, não metadados.\n\nAuditoria de Duração (Cálculo Manual):\n\nVocê deve analisar o JSON Roteiro_Audio, extrair o texto de todos os campos dialogo_pt_br, juntá-los e contar as palavras manualmente.\n\nREPROVE se a contagem total não estiver estritamente entre 15 e 22.\n\nAuditoria de Idioma (Verificação Manual):\n\nVocê deve ler o texto nos campos dialogo_pt_br.\n\nREPROVE se o texto não estiver em Português do Brasil (ex: se contiver frases em inglês).\n\nAuditoria de Estrutura de Entrevista (Se aplicável):\n\nSe o conceito for uma entrevista, verifique a consistência entre o áudio (Jornalista -> Personagem) e o visual (Câmera no Jornalista -> Câmera no Personagem).\n\nREPROVE se houver inconsistência.\n\nPARTE 2: Verificação de Viabilidade de Geração (Limites do VEO 3)\n\nEste é o seu principal objetivo. Analise o Roteiro_Audio e as Instrucoes_Visuais e procure por prompts que a IA de geração (VEO 3) não conseguirá executar corretamente:\n\nPolíticas da Ferramenta (VEO):\n\nA acao_visual ou o dialogo_pt_br descrevem atos perigosos explícitos, violência gráfica, conteúdo sensível ou de ódio que a própria IA de geração é treinada para bloquear?\n\n(Isto é diferente da política do Google; esta é a política do próprio VEO.)\n\nComplexidade Excessiva da Cena:\n\nA acao_visual (do Agente 5) pede muitas ações complexas ao mesmo tempo na mesma cena? (ex: \"um robô dá um mortal para trás enquanto joga xadrez e a sala explode\").\n\nREPROVE se a cena for complexa demais para a IA gerar com fidelidade.\n\nGeração de Texto (Limitação Conhecida):\n\nO Instrucoes_Visuais pede para a IA gerar texto legível na tela? (ex: acao_visual: \"mostrar um jornal com a manchete...\").\n\nREPROVE se o sucesso do vídeo depender de texto gerado pela IA, pois ela falha nisso.\n\nPropriedade Intelectual (Copyright):\n\nOs roteiros pedem para gerar logotipos (ex: Apple) ou personagens protegidos (ex: \"Homer Simpson\")? O VEO bloqueará isso.\n\nFormato de Saída OBRIGATÓRIO (para o Orquestrador):\n\nSe estiver tudo limpo (passou na Parte 1 e Parte 2):\n\nJSON\n\n{\n  \"status\": \"APROVADO\",\n  \"justificativa\": \"Plano de vídeo (áudio e visual) passou na auditoria de Qualidade Interna (contagem de palavras: [número], idioma: pt-BR) e Viabilidade de Geração (VEO 3). Pronto para geração.\"\n}\nSe encontrar um problema INTERNO (ex: contagem de palavras):\n\nJSON\n\n{\n  \"status\": \"REPROVADO\",\n  \"justificativa\": \"Violação de Regra Interna: Duração Incorreta.\",\n  \"detalhes\": \"Auditoria manual do prompt de áudio resultou em 25 palavras. O limite é 22. Isso causará fala acelerada.\",\n  \"acao_recomendada\": \"Reenviar ao `Roteirista_Diretor_Audio` (Agente 4) para encurtar o diálogo.\"\n}\nSe encontrar um problema de VIABILIDADE (VEO 3):\n\nJSON\n\n{\n  \"status\": \"REPROVADO\",\n  \"justificativa\": \"Violação de Viabilidade de Geração: Complexidade Excessiva.\",\n  \"detalhes\": \"A 'Cena 5' pede ao VEO 3 para gerar três ações complexas simultâneas (robô girando, raio trator, expressão cômica), o que provavelmente resultará em um vídeo de baixa fidelidade.\",\n  \"acao_recomendada\": \"Reenviar ao `Diretor_Visual_de_Cenas` (Agente 5) para simplificar a ação da Cena 5.\"\n}\n[Fim do Prompt do Agente 6]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    1232,
+    208
+   ],
+   "id": "f4ce71ec-1b4e-47b2-9ed3-f9a6ea5499c7",
+   "name": "Verificador de Conformidade de Geração (IA)"
+  },
+  {
+   "parameters": {
+    "toolDescription": "=BLOCO DE IDENTIDADE DA FERRAMENTA] **ID da Ferramenta (Tool Name):** Diretor_Visual_de_Cenas **Descrição (Description):** \"Chame esta ferramenta **após o Agente 4 (Roteirista_Diretor_Audio)**. Ela recebe o roteiro_de_audio(JSON). Esta ferramenta é o **Diretor Visual**: ela projeta o que *acontece* na tela. Para cada cena de áudio, ela descreve aacao_visual(o que o personagem faz) e adirecao_camera (como é filmado), garantindo um vídeo dinâmico e não-estático.\"",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é o Diretor Visual de Cenas (Coreógrafo de Ação). Sua única missão é criar a camada visual do vídeo, garantindo que ela seja dinâmica, cheia de ação (cômica, impactante) e perfeitamente sincronizada com o roteiro de áudio que você receberá.\n\nInput (Recebido do Agente 4): Você receberá um JSON com o roteiro_de_audio, detalhado cena por cena. Exemplo de Input (O que você recebe):\n\nJSON\n\n{\n  \"roteiro_de_audio\": [\n    { \"cena_id\": \"cena_1\", \"dialogo_pt_br\": \"Este nariz de IA...\", ... },\n    { \"cena_id\": \"cena_2\", \"dialogo_pt_br\": \"Mas a mesma IA...\", ... },\n    { \"cena_id\": \"cena_3\", \"dialogo_pt_br\": \"...sabe se o seu projeto...\", ... },\n    { \"cena_id\": \"cena_4\", \"dialogo_pt_br\": \"...antes mesmo de começar.\", ... }\n  ],\n  \"metadados_audio_para_auditoria_do_agente_6\": { ... }\n}\nSua Tarefa (A Direção Visual):\n\nAnalise o Áudio: Leia o roteiro_de_audio cena por cena.\n\nCrie a Ação e a Câmera: Para cada cena_id, você deve criar as instruções visuais correspondentes, focando em:\n\nacao_visual: O que acontece? (Ex: \"Um personagem cômico cai\", \"O objeto explode\", \"Um robô dá um mortal\").\n\ndirecao_camera: Como é filmado? (Ex: \"Close-up extremo no olho\", \"Plano plongée (de cima para baixo)\", \"Câmera lenta\").\n\nEvite o Estático: O vídeo nunca deve ser apenas uma pessoa falando parada. A acao_visual é a sua principal entrega.\n\nREGRA VISUAL CRÍTICA (Se o formato for 'Entrevista'):\n\nSe o conceito do vídeo for uma \"Entrevista\" (ex: Jornalista falando com uma IA):\n\nCena 1 (Pergunta): A direcao_camera DEVE focar no jornalista. A acao_visual deve ser ele \"passando o microfone\" ao terminar a fala.\n\nCenas 2+ (Resposta): A direcao_camera DEVE focar 100% no entrevistado (a IA, o personagem). A acao_visual deve incluir o personagem segurando o microfone.\n\nÚltima Cena (Punchline): A acao_visual do entrevistado deve incluir \"olhar diretamente para a câmera\" ou \"fazer um gesto cômico/impactante\" (quebra da quarta parede).\n\nFormato de Saída OBRIGATÓRIO (para o Orquestrador): Sua saída deve ser um JSON estruturado, descrevendo o visual de cada cena para sincronizar com o áudio.\n\nJSON\n\n{\n  \"instrucoes_visuais\": [\n    {\n      \"cena_correspondente\": \"cena_1\",\n      \"acao_visual\": \"Um 'cientista maluco' (personagem cômico) aponta animadamente para um 'nariz eletrônico' que está cheirando uma fruta visivelmente podre.\",\n      \"direcao_camera\": \"Plano médio (Medium shot), focado na ação.\"\n    },\n    {\n      \"cena_correspondente\": \"cena_2\",\n      \"acao_visual\": \"Corte brusco (jump cut). O cientista agora olha para uma tela de computador que mostra um gráfico de 'projeto falhando'.\",\n      \"direcao_camera\": \"Close-up no rosto chocado do cientista.\"\n    },\n    {\n      \"cena_correspondente\": \"cena_3\",\n      \"acao_visual\": \"O gráfico na tela se transforma em um símbolo de 'caveira' (estilo desenho animado), indicando que o projeto 'estragou'.\",\n      \"direcao_camera\": \"Zoom rápido (Crash zoom) na tela do computador.\"\n    },\n    {\n      \"cena_correspondente\": \"cena_4\",\n      \"acao_visual\": \"O cientista se vira e olha diretamente para a câmera com uma expressão de 'aviso' (quebra da quarta parede).\",\n      \"direcao_camera\": \"Close-up extremo (Extreme close-up) no rosto do cientista.\"\n    }\n  ]\n}\n\no video sempre tera um personagem que sera incluido na foto no primeiro frame entao sempre conisdere um personagem homem em todos os videos\n[Fim do Prompt do Agente 5]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    992,
+    208
+   ],
+   "id": "e2ef32ba-98b4-472e-828e-0f21f4ca5aec",
+   "name": "Diretor Visual"
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -320,
+    320
+   ],
+   "id": "4e4279c0-f494-4bf8-a8b6-38c39bf82ce4",
+   "name": "gemini1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZYOvdr3FD4B9j5QQ",
+     "name": "5-Google Gemini andre"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    272,
+    320
+   ],
+   "id": "f6fb4bff-5bd2-4af1-9887-77a0e40260e3",
+   "name": "gemini2",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "m41oAUcs2kbKkRU0",
+     "name": "01-emersonjosiel1995"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    544,
+    320
+   ],
+   "id": "3e521ffd-6c8a-41d0-98ca-8d0f157e406e",
+   "name": "gemini3",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "kTNZbugWsRZCwXbq",
+     "name": "921-fabio"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    768,
+    336
+   ],
+   "id": "982c0f63-c9fe-42a7-b7a2-83d32351b8c5",
+   "name": "gemini4",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "JsNkMGppyl4BUM90",
+     "name": "7-alucinaai"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    992,
+    320
+   ],
+   "id": "9190465f-d055-4d10-8db6-3f5dea4691d1",
+   "name": "gemini5",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "PzYVaIP54r6fiKWl",
+     "name": "9-game of trones"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "modelName": "models/gemini-2.5-flash-lite",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    1248,
+    320
+   ],
+   "id": "38da4153-a880-4928-9819-05eb7784cce9",
+   "name": "gemini6",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "iRFFGYGfCftOplOw",
+     "name": "8-fabrica"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "subvideo1",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    -208,
+    320
+   ],
+   "id": "87f529dc-2c21-40d9-93b1-0c67c81494ea",
+   "name": "videos anteriores",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "subvideo2",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    368,
+    336
+   ],
+   "id": "ef10bbfa-09ce-447d-9ffa-c8dca4b243ae",
+   "name": "videos anteriores1",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "subvideo1",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    656,
+    320
+   ],
+   "id": "e0ed697b-f3c2-4da1-9db6-e58db2571be0",
+   "name": "videos anteriores2",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "subvideo4",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    1120,
+    400
+   ],
+   "id": "3375c6ca-2420-4a57-96b5-65a32d1be53a",
+   "name": "videos anteriores3",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "subvideo5",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    1376,
+    496
+   ],
+   "id": "db128dd0-ba9f-4b3d-8a1a-45b1617f2737",
+   "name": "videos anteriores4",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "sessionIdType": "<SEGREDO_REMOVIDO>",
+    "sessionKey": "subvideo3",
+    "contextWindowLength": 50
+   },
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    880,
+    336
+   ],
+   "id": "53668d22-d74b-42df-9f31-83292179e7fc",
+   "name": "videos anteriores5",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "8cda5dd1-9dc7-4c9f-8bfb-0ee20c905368",
+       "name": "prompt system do revisor de qualidade",
+       "value": "Persona (Função): Você é um Agente de Controle de Qualidade (QA) de Imagens, um especialista meticuloso em análise visual, semântica e de formato. Sua missão é atuar como o \"olho crítico\" em um pipeline automatizado de criação de vídeos por IA.  Contexto do Fluxo: O pipeline funciona da seguinte forma:  Um Agente Roteirista define o conceito, a cena e o propósito do vídeo.  Um Agente Editor de Imagem recebe uma [FOTO_ORIGINAL] e a modifica para criar múltiplas candidatas [LISTA_FOTOS_GERADAS], seguindo as instruções do roteiro.  Estas fotos serão usadas como frame de referência principal para a IA de vídeo (V3).  Sua função é interceptar a [LISTA_FOTOS_GERADAS], analisar TODAS elas, selecionar a melhor que atenda a TODOS os critérios (incluindo formato), e decidir se o lote \"Passa\" (se houver pelo menos uma boa) ou \"Falha\" (se nenhuma for boa). Uma falha fará com que o processo volte ao Agente Editor com sua sugestão de correção.  Inputs Recebidos: Você receberá quatro (4) blocos de informação para sua análise:  [FOTO_ORIGINAL]: A imagem base, o \"antes\". Esta é a referência de ouro para a aparência da pessoa e do objeto principal.  [LISTA_FOTOS_GERADAS]: Uma lista de imagens candidatas (com seus respectivos nomes de arquivo, que serão genéricos e sequenciais, ex: data1.png, data2.png, foto_modificada_1.jpg) modificadas pelo Agente Editor. Estas são as imagens que você deve avaliar.  [PROMPT_ROTEIRISTA]: A descrição do vídeo, o propósito, a cena, o que deve acontecer. (Ex: \"O usuário deve estar em um cenário de praia, parecendo relaxado\").  [PROMPT_EDITOR_IMAGEM]: As instruções exatas que o Agente Editor de Imagem recebeu para criar as fotos. (Ex: \"Edite a foto original, coloque o usuário em um fundo de praia ao pôr do sol, mantenha o rosto e as roupas\").  Tarefa Principal: Análise de Qualidade, Seleção de Formato e Decisão  Seu objetivo é analisar CADA imagem na [LISTA_FOTOS_GERADAS] e aplicar os seguintes critérios. Você deve selecionar UMA imagem que seja a \"melhor foto\", ou seja, a que passa em TODOS os critérios abaixo.  Critérios de Avaliação (Aplicados a cada imagem da lista):  Proporção da Imagem (Falha Crítica de Formato):  A imagem DEVE ter uma proporção de retrato (vertical). O formato \"retrato\" ou \"lateral\" (onde a altura é maior que a largura) é o único aceitável.  Imagens com proporção de paisagem (horizontal) DEVEM ser REJEITADAS, pois não funcionam para o vídeo final.  Inconsistência de Identidade (Falha Crítica):  A pessoa na foto gerada não é mais reconhecível como a pessoa na [FOTO_ORIGINAL]. O rosto está distorcido, parece outra pessoa, etc.  Exceção: A menos que o [PROMPT_ROTEIRISTA] especificamente peça uma transformação.  Artefatos e Deformidades (Falha Visual):  A imagem contém anomalias visuais óbvias (membros desproporcionais, mãos com 6 dedos, olhos bizarros, texturas \"derretidas\", proporções corporais incorretas).  Estilo Incorreto (Falha de Renderização):  A foto gerada parece um desenho, \"cartonesca\", pintura ou anime, quando o esperado era uma edição fotorrealista. (Endereça o problema \"cartonesca\").  Desalinhamento de Propósito (Falha Semântica):  A imagem não reflete o propósito descrito no [PROMPT_ROTEIRISTA] ou no [PROMPT_EDITOR_IMAGEM]. (Ex: Roteiro pedia \"escritório\" e a foto mostra uma \"montanha\").  Qualidade Geral Baixa (Falha Técnica):  A imagem está excessivamente borrada, pixelada ou com iluminação irrealista.  Decisão Final (Baseada na análise de TODAS as fotos):  APROVADO (SIM): A decisão será SIM se PELO MENOS UMA imagem da [LISTA_FOTOS_GERADAS] passar em TODOS os 6 critérios acima (Qualidade + Proporção Retrato).  REJEITADO (NÃO): A decisão será NÃO se NENHUMA das imagens na lista atender a todos os critérios simultaneamente.  Formato de Resposta Obrigatório:  Sua resposta DEVE seguir rigorosamente este formato de três partes, separadas por um pipe (barra vertical: |):  DECISÃO | NOME_ARQUIVO_APROVADO | SUGESTÃO  DECISÃO: Deve ser APENAS a palavra SIM ou a palavra NÃO.  NOME_ARQUIVO_APROVADO (A nova parte central):  Se a DECISÃO for SIM: Você deve inserir aqui o nome exato do arquivo (ex: data2.png ou foto_modificada_1.png) da imagem que você selecionou como a \"melhor foto\" (a que passou em todos os critérios).  Se a DECISÃO for NÃO: Você deve inserir aqui a palavra NENHUM.  SEPARADOR: Você deve usar OBRIGATORIAMENTE um pipe (|) para separar CADA uma das três partes.  SUGESTÃO (Terceira parte):  Se NÃO (Decisão foi NÃO): A SUGESTÃO deve ser uma instrução clara e curta para o Agente Editor, explicando por que todas as imagens falharam. (Ex: \"Nenhuma imagem tinha a proporção retrato\" ou \"Todas as imagens falharam no critério de identidade\").  Se SIM (Decisão foi SIM): A SUGESTÃO pode ficar vazia ou conter apenas um \"OK\" ou \"Aprovado\".  Exemplos de Respostas:  (Exemplo de Falha de Proporção): NÃO | NENHUM | Todas as imagens enviadas (data1.png, data2.png) estavam no formato paisagem (horizontal). É necessário gerar uma imagem no formato retrato (vertical) para continuar.  (Exemplo de Falha de Identidade): NÃO | NENHUM | O rosto em todas as imagens geradas (ex: data1.png, data3.png) está muito diferente da foto original e não é reconhecível. Tente preservar melhor os traços faciais ao aplicar a edição.  (Exemplo de Falha de Estilo): NÃO | NENHUM | Todas as imagens geradas (ex: foto_modificada_1.png) ficaram com um estilo \"cartonesco\". A edição deve ser fotorrealista. Refaça mantendo o realismo da foto original.  (Exemplo de Falha de Artefato): NÃO | NENHUM | A imagem 'data3.png' tinha proporção correta, mas a mão esquerda estava desproporcional. As outras (data1.png, data2.png) falharam na proporção. Corrija a proporção da mão.  (Exemplo de Sucesso): SIM | data2.png | Aprovado",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1552,
+    160
+   ],
+   "id": "7ad27221-6a74-4113-80c6-f3dd24b6f74a",
+   "name": "juncao de informacoes1"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "tema-canal",
+    "value": "={{ $json.propertyName }}"
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    528,
+    -160
+   ],
+   "id": "bb43bffd-8b2a-472b-812e-3a0b05511f2b",
+   "name": "Redis",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "key": "tema-canal",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    272,
+    -32
+   ],
+   "id": "b8cd8c22-0f2a-44d2-ae14-c5fb10b9fff5",
+   "name": "Redis1",
+   "credentials": {
+    "redis": {
+     "id": "3QWg9HtTf9lo9pYh",
+     "name": "Redis account 9"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// --- MASTER LIST OF ALL CHANNEL DESCRIPTIONS ---\n// Todas as 29 descrições estão hardcoded aqui.\n\nconst masterList = [\n`1. Canal: ReCenas IA\n * Tema: Releitura de Cenas Famosas.\n * Descrição para o Agente: O objetivo deste canal é recriar cenas icônicas de filmes, séries ou memes (ex: \"Eu sou seu pai\", \"Este é Sparta!\"). O vídeo de 10 segundos deve focar no punchline (o momento principal) da cena.\n * Instrução para IA: \"Gere um vídeo mostrando a cena [NOME DA CENA] de [NOME DO FILME], mas com um twist visual: execute-a no estilo 'animação de argila (claymation)', 'videogame 8-bit', 'pintura a óleo renascentista' ou 'personagens feitos de comida'. O áudio deve ser o original ou uma dublagem rápida. O humor vem do reconhecimento e do absurdo visual.\"`,\n\n`2. Canal: Aulas IA\n * Tema: Micro-aulas e Tutoriais Acelerados.\n * Descrição para o Agente: Este canal ensina um conceito complexo (tecnologia, ciência, IA) em 10 segundos. O valor está na densidade da informação.\n * Instrução para IA: \"Gere um vídeo de 10 segundos explicando [CONCEITO COMPLEXO, ex: 'O que é um Deepfake?']. Use exclusivamente animações gráficas, tipografia cinética (texto que se move) e ícones. O visual deve ser limpo, minimalista e rápido, forçando o espectador a pausar ou rever para absorver. A estética é de 'infográfico animado'.\"`,\n\n`3. Canal: Vídeos Cassetadas IA\n * Tema: Os Erros da IA (AI Fails).\n * Descrição para o Agente: Este canal celebra os resultados hilários e bizarros quando a IA entende um comando errado. É o clássico \"AI Fails\".\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Formato 'Expectativa vs. Realidade'. Nos primeiros 2 segundos, mostre o prompt de texto (ex: 'Um cachorro fofo brincando no parque'). Nos 8 segundos seguintes, mostre o resultado bizarro que a IA criou (ex: 'Um cachorro com seis patas, derretendo, em um parque pegando fogo'). Use uma trilha sonora de comédia pastelão (ex: música de circo).\"`,\n\n`4. Canal: AlucinaAI (Assumindo \"Alucinações de IA\")\n * Tema: Visuais Psicodélicos e Surreais.\n * Descrição para o Agente: O objetivo é hipnotizar o espectador. Não há história. O foco é em visuais \"trippy\", oníricos (de sonho) e surreais que só a IA pode criar.\n * Instrução para IA: \"Gere um vídeo de 10 segundos que simule um sonho ou alucinação. Use o efeito 'morphing' contínuo (objetos se transformando em outros) e 'zoom infinito' (fractais). As cores devem ser vibrantes e não realistas. A música deve ser ambiente ou eletrônica hipnótica. O objetivo é ser 'estranhamente satisfatório'.\"`,\n\n`5. Canal: Cérebro Digital, Piada Real\n * Tema: Trocadilhos e Piadas Visuais Literais.\n * Descrição para o Agente: O humor vem da IA interpretando expressões idiomáticas ou piadas ao pé da letra.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. O prompt visual é um trocadilho. Exemplo: 'Estou com uma fome de leão'. O vídeo deve mostrar um homem se transformando literalmente em um leão faminto. Outro ex: 'Pé-frio' (um homem com pés feitos de gelo). O texto da piada deve aparecer na tela.\"`,\n\n`6. Canal: Fofos e Absurdos\n * Tema: Fofura Extrema em Situações Bizarras.\n * Descrição para o Agente: Este canal mistura a estética \"kawaii\" (fofa) com o caos. O contraste é a chave do viral.\n * Instrução para IA: \"Gere um vídeo de 10 segundos mostrando algo extremamente fofo (ex: gatinhos bebês, filhotes de capivara) em uma situação completamente absurda ou épica (ex: 'pilotando caças F-18', 'comandando um exército medieval', 'discutindo filosofia em um café'). O visual deve ser adorável, mas a ação deve ser caótica.\"`,\n\n`7. Canal: Motivação da IA\n * Tema: Citações Motivacionais e Filosóficas.\n * Descrição para o Agente: Inspirar o espectador em 10 segundos com uma única frase poderosa.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Mostre uma única citação motivacional ou estoica (ex: 'O obstáculo é o caminho'). O fundo deve ser um visual de IA extremamente épico e cinematográfico (ex: um astronauta olhando para uma galáxia, um samurai meditando em uma montanha, uma estátua grega imponente). A música deve ser orquestral e inspiradora.\"`,\n\n`8. Canal: Curiosidades e Fatos IA\n * Tema: Fatos Rápidos e Chocantes (\"Você Sabia?\").\n * Descrição para o Agente: Informar o espectador com uma curiosidade impactante que ele não conhecia.\n * Instrução para IA: \"Gere um vídeo de 10 segundos no formato 'Você Sabia?'. Apresente um fato curto e chocante (ex: 'Raios são 5 vezes mais quentes que o Sol'). O visual da IA deve ser uma representação literal e dramática desse fato (ex: um raio atingindo o chão ao lado do Sol para comparação). O texto deve ser grande e claro.\"`,\n\n`9. Canal: Dança e Música com IA\n * Tema: Visualização de Música (Music Visualization).\n * Descrição para o Agente: Foco em criar visuais que reagem perfeitamente à música. O áudio é o protagonista.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Use um áudio em alta (trending audio) com uma batida clara. O visual deve ser uma animação abstrata (fluidos, formas geométricas, partículas) que 'pulsa', 'explode' e se move em sincronia perfeita com cada batida da música. O objetivo é ser hipnótico e satisfatório (ASMR visual).\"`,\n\n`10. Canal: Dicas Financeiras da IA\n * Tema: Educação Financeira Hiper-rápida.\n * Descrição para o Agente: Dar uma única dica de finanças, investimento ou economia de forma visual.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Apresente uma dica financeira (ex: 'O poder dos juros compostos'). O visual da IA deve ser uma metáfora clara (ex: uma pequena bola de neve rolando e se tornando uma avalanche gigante). Use gráficos simples (setas subindo) e texto. A estética é limpa, corporativa e moderna.\"`,\n\n`11. Canal: Fake News IA\n * Tema: O Poder da Desinformação (Educativo/Alerta).\n * Descrição para o Agente: Mostrar como a IA pode criar desinformação convincente, educando o público a desconfiar.\n * Instrução para IA: \"Gere um vídeo de 10 segundos no formato 'Real ou IA?'. Mostre um vídeo de IA hiper-realista (ex: uma celebridade famosa dizendo algo bizarro, um evento histórico que nunca aconteceu). Após 5 segundos, congele a imagem e revele 'É FAKE! Gerado por IA'. Mostre os artefatos ou 'glitches' para provar. O tom é de alerta.\"`,\n\n`12. Canal: Mitos vs Verdades\n * Tema: Desmentindo Mitos Populares.\n * Descrição para o Agente: Corrigir desinformação comum de forma rápida e visual.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Divida a tela ou o tempo: 4 segundos para o 'Mito' (ex: Texto: 'Você só usa 10% do cérebro' + Visual de IA de um cérebro escuro). 1 segundo de transição (som de 'X' ou 'Errado'). 5 segundos para a 'Verdade' (ex: Texto: 'Você usa 100% do cérebro' + Visual de IA de um cérebro totalmente iluminado e ativo).\"`,\n\n`13. Canal: Fatos Bizarros\n * Tema: Curiosidades Estranhas ou Nojentas.\n * Descrição para o Agente: Chocar o espectador com fatos bizarros sobre o mundo.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Apresente um fato bizarro (ex: 'Na Roma Antiga, cérebros de rato eram usados como pasta de dente'). O visual da IA deve ser uma representação surreal, artística e levemente desconfortável desse fato (evite o nojo gráfico, prefira o surrealismo). A música deve ser de mistério ou tensão.\"`,\n\n`14. Canal: Curiosidades do Corpo Humano\n * Tema: Fatos Médicos e Biológicos.\n * Descrição para o Agente: Educar sobre o corpo humano com fatos impressionantes.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Apresente um fato sobre o corpo (ex: 'Seus vasos sanguíneos dariam 2 voltas na Terra'). O visual da IA deve ser uma animação médica/científica (ex: um zoom no corpo humano, mostrando os vasos saindo e circulando um globo terrestre). A estética é limpa, similar a um documentário da BBC.\"`,\n\n`15. Canal: Segredos do Oceano\n * Tema: Talassofobia e Vida Marinha Abissal.\n * Descrição para o Agente: Foco no mistério e no medo do oceano profundo.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. O objetivo é causar talassofobia (medo do fundo do mar). Mostre uma criatura abissal gigante (ex: Lula-gigante, Peixe-diabo) gerada por IA, emergindo lentamente da escuridão total do oceano. O áudio deve ser apenas o som abafado do oceano profundo e sons de sonar.\"`,\n\n`16. Canal: Dicas Fitness IA\n * Tema: Exercícios e Nutrição em 10 segundos.\n * Descrição para o Agente: Dicas de utilidade rápida para saúde e fitness.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Foco em 'Certo vs. Errado'. Mostre lado a lado a forma errada e a forma correta de um exercício (ex: 'Agachamento'). Use avatares de IA com destaque na musculatura ou esqueleto. O ritmo é rápido e a música é eletrônica e energética (gym music).\"`,\n\n`17. Canal: Notícias de IA\n * Tema: Notícias Urgentes sobre Inteligência Artificial.\n * Descrição para o Agente: Ser o canal mais rápido para informar sobre o lançamento de novas IAs, avanços científicos, etc.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Formato 'Plantão de Notícias'. Use uma manchete de texto grande e impactante (ex: 'GOOGLE LANÇA VEO 3!'). O visual de fundo deve ser abstrato e tecnológico (redes neurais, código binário, logos). O áudio deve ser um som de 'alerta de notícias'. A velocidade é crucial.\"`,\n\n`18. Canal: Recordes Mundiais Inacreditáveis\n * Tema: Visualização de Recordes do Guinness.\n * Descrição para o Agente: Mostrar o quão impressionantes são os recordes mundiais de forma visual.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Apresente um recorde (ex: 'O maior dominó humano'). O visual da IA deve recriar esse recorde de forma épica e exagerada, com milhares de pessoas ou objetos. Use uma perspectiva cinematográfica (drone, câmera lenta) para dar escala. A música deve ser triunfante.\"`,\n\n`19. Canal: Podcast Entrevistas Rápidas (Cortes IA)\n * Tema: Visualização de Cortes de Podcast.\n * Descrição para o Agente: Pegar áudios virais de podcasts (10 segundos) e criar um clipe visual para eles.\n * Instrução para IA: \"Use um áudio de 10 segundos de um podcast famoso (um insight, uma piada). O vídeo da IA deve ser uma visualização literal ou surreal do que está sendo dito. Se o áudio fala sobre 'o caos da mente', o vídeo deve mostrar um cérebro explodindo em fractais. O áudio é o mestre; o vídeo da IA é o complemento hipnótico.\"`,\n\n`20. Canal: Show de Piadas Stand-up\n * Tema: Piadas Curtas (One-Liners) contadas por IA.\n * Descrição para o Agente: O humor vem da performance \"sem alma\" de um avatar de IA contando piadas humanas.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Mostre um avatar de IA (robô ou humanoide) em um palco de stand-up. O avatar conta uma piada curta (texto na tela e áudio TTS). Após a piada, há uma pausa e o som de uma plateia (pode ser uma risada ou um som de 'grilo', dependendo da piada).\"`,\n\n`21. Canal: E Se...\n * Tema: Cenários Hipotéticos e Perguntas Absurdas.\n * Descrição para o Agente: O canal de curiosidade pura. Responde visualmente a perguntas impossíveis.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Comece com a pergunta em texto (ex: 'E se os humanos tivessem asas?'). O restante do vídeo deve ser uma visualização de IA hiper-realista desse cenário (ex: pessoas voando em cidades modernas, desviando de prédios). O foco é o maravilhamento visual.\"`,\n\n`22. Canal: Humor de IA\n * Tema: Humor Nonsense e Surreal (Caos Puro).\n * Descrição para o Agente: O humor não vem de uma piada, mas do absurdo total.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. O objetivo é o nonsense. O vídeo deve ser uma sequência de 3 a 4 cenas rápidas e desconexas (ex: 'um peixe andando de bicicleta', 'um prédio dançando salsa', 'um advogado com cabeça de abacaxi'). A trilha sonora deve ser caótica e cômica (ex: 'Benny Hill Theme').\"`,\n\n`23. Canal: Ilusões de Ótica\n * Tema: \"Bugar\" a Mente do Espectador.\n * Descrição para o Agente: Criar ilusões de ótica usando o poder da IA.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. O objetivo é ser uma ilusão de ótica. Crie visuais que parecem se mover mas estão parados, perspectivas impossíveis (Estilo Escher), ou imagens que mudam de cor ou forma. O vídeo deve ser um loop perfeito para aumentar o efeito hipnótico.\"`,\n\n`24. Canal: Transformação (Morphing)\n * Tema: O Efeito \"Morphing\" Satisfatório.\n * Descrição para o Agente: Foco no prazer visual de ver uma coisa se transformar suavemente em outra.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Mostre uma transformação (morphing) suave e contínua. Ex: 'Um rosto de bebê se transformando em um rosto de idoso', 'Um gato se transformando em um tigre', 'Uma maçã se transformando em uma galáxia'. A música deve ser calma e ambiente.\"`,\n\n`25. Canal: Pessoas em Câmera Lenta (Super Slow IA)\n * Tema: Simulação de Câmera Lenta Extrema.\n * Descrição para o Agente: Recriar o efeito \"slow motion\" cinematográfico em cenas caóticas.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Simule uma cena em 'super slow motion' (câmera lenta extrema). O tema deve ser algo rápido (ex: 'Um skatista caindo', 'Um copo de água quebrando', 'Uma explosão de pipoca'). O visual deve ser cinematográfico, focado nos detalhes e partículas. A música deve ser épica e dramática.\"`,\n\n`26. Canal: Entrevistas na Rua (Voz da Rua IA)\n * Tema: Paródia de Entrevistas de Rua.\n * Descrição para o Agente: Simular o formato de perguntas rápidas na rua, mas com personagens de IA.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Um 'repórter' (avatar IA) faz uma pergunta (ex: 'Qual a sua opinião sobre [TEMA POLÊMICO OU BOBO]?'). O vídeo corta rapidamente entre 3-4 'pessoas' (avatares de IA diferentes: um punk, uma idosa, um empresário) dando respostas curtas, absurdas ou engraçadas (em texto ou TTS).\"`,\n\n`27. Canal: Entrevistas em Programas de TV (IA Talk Show)\n * Tema: Paródia de Talk Shows.\n * Descrição para o Agente: O humor vem do formato sério de talk show contrastando com convidados impossíveis.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Simule um corte de 'talk show'. Mostre um apresentador (avatar IA) rindo e um convidado bizarro (ex: 'Um alienígena', 'Um cavalo de terno', 'Napoleão Bonaparte'). O convidado deve estar fazendo algo absurdo (ex: o cavalo bebendo café). O foco é a reação engraçada do apresentador.\"`,\n\n`28. Canal: Alienígenas em Situações Engraçadas\n * Tema: ETs Mundanos (Comédia Física).\n * Descrição para o Agente: O humor clássico de \"um peixe fora d'água\".\n * Instrução para IA: \"Gere um vídeo de 10 segundos. O tema é 'alienígena falhando em ser humano'. Mostre um alienígena clássico (cabeçudo, olhos grandes) tentando fazer uma tarefa humana simples e falhando miseravelmente (ex: 'tentando usar um abridor de latas e explodindo a lata', 'tentando passear com um gato e sendo atacado'). O humor é físico (slapstick).\"`,\n\n`29. Canal: IAs em Situações Engraçadas\n * Tema: Robôs Desastrados.\n * Descrição para o Agente: Similar ao anterior, mas focado em robôs e sua interpretação literal de tarefas.\n * Instrução para IA: \"Gere um vídeo de 10 segundos. Mostre um robô humanoide (estilo Boston Dynamics) tentando executar uma tarefa humana delicada (ex: 'maquiar uma pessoa', 'fazer um carinho em um cachorro', 'servir vinho'). O robô deve ser desastrado e usar força excessiva (ex: quebrando a garrafa, derrubando a pessoa). O áudio deve ser de servomotos e metal batendo.\"`\n];\n\n// --- LÓGICA DO SCRIPT ---\n\n// 1. Pega o item que veio do nó anterior\nconst inputItem = items[0].json;\n\n// 2. Tenta extrair a descrição anterior.\n// A chave \"propertyName\" é baseada no seu exemplo [ { \"propertyName\": \"...\" } ]\nconst lastDescription = inputItem.propertyName;\n\n// 3. Encontra o índice (a posição) da descrição anterior na nossa lista\nconst currentIndex = masterList.findIndex(desc => desc === lastDescription);\n\nlet nextIndex;\n\nif (currentIndex === -1) {\n  // CASO 1: NÃO ENCONTROU A DESCRIÇÃO ANTERIOR\n  // Isso acontece na primeira execução ou se a lista for alterada.\n  // Vamos apenas pegar o primeiro item (índice 0).\n  nextIndex = 0;\n} else {\n  // CASO 2: ENCONTROU A DESCRIÇÃO ANTERIOR\n  // Pega o próximo índice\n  nextIndex = currentIndex + 1;\n}\n\n// 4. Verifica se chegamos ao fim da lista.\n// Se o nextIndex for igual ao tamanho da lista (ex: 29), volta para o 0.\nif (nextIndex >= masterList.length) {\n  nextIndex = 0; // Volta para o começo\n}\n\n// 5. Seleciona a próxima descrição\nconst nextDescription = masterList[nextIndex];\n\n// 6. Formata o output EXATAMENTE como o seu exemplo de entrada\nconst output = {\n  propertyName: nextDescription\n};\n\n// 7. Retorna o item para o próximo nó do n8n\nreturn [\n  {\n    json: output\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    368,
+    -32
+   ],
+   "id": "36b6617b-f48b-4cb6-a0f5-1c5c00805266",
+   "name": "troca de canal"
+  },
+  {
+   "parameters": {
+    "queue": "viral2",
+    "options": {
+     "arguments": {
+      "argument": [
+       {
+        "key": "x-queue-type",
+        "value": "quorum"
+       }
+      ]
+     }
+    }
+   },
+   "type": "n8n-nodes-base.rabbitmq",
+   "typeVersion": 1.1,
+   "position": [
+    1664,
+    -32
+   ],
+   "id": "7622fb32-f042-47c4-9020-a20e85508f51",
+   "name": "RabbitMQ1",
+   "executeOnce": true,
+   "retryOnFail": true,
+   "credentials": {
+    "rabbitmq": {
+     "id": "p9ROPSBTkuLHgvb4",
+     "name": "RabbitMQ account"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.output }}",
+    "options": {
+     "systemMessage": "seu objetivo e vericar se o pque o agente anterior mandou e um prompt para  ageracao de um video responda apenas sim ou nao"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    1152,
+    -32
+   ],
+   "id": "a70ea59f-8a67-4e0c-9321-f565fa88cd84",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "5d287686-39e4-41a7-bb3b-fa463ffc361d",
+       "leftValue": "={{ $json.output }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "empty",
+        "singleValue": true
+       }
+      },
+      {
+       "id": "53a7e47c-5b31-45bd-bdd1-f53c5c0a42dd",
+       "leftValue": "={{ $json.output }}",
+       "rightValue": "Agent stopped due to max iterations.",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      },
+      {
+       "id": "12a195db-a744-4a39-a15a-a39179413c37",
+       "leftValue": "={{ $json.intermediateSteps[4] }}",
+       "rightValue": "",
+       "operator": {
+        "type": "object",
+        "operation": "notExists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "or"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    960,
+    -32
+   ],
+   "id": "1df31389-5e27-4f11-9b0a-5a7a71d8eb90",
+   "name": "If"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "ea878c5f-be54-49fa-8513-8b1408db9e07",
+       "leftValue": "=sim",
+       "rightValue": "={{ $json.output }}",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1392,
+    -32
+   ],
+   "id": "d1e9f8e8-80e8-4adf-8e03-4b4d4ceffa82",
+   "name": "If1"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "434d423a-6b83-49aa-9a3f-fb4f2efd1140",
+       "name": "instrucao de correcao",
+       "value": "voce nao usou as ferramentas quanto nao usar o video nao sera aprovado",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -32,
+    -32
+   ],
+   "id": "8e17c8d2-c99d-4b97-a86e-f041d8f33131",
+   "name": "correcao"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "b6e0dac0-bfbb-4af5-970c-3a47a66694cf",
+       "name": "mensagem se e inicial ou correcao",
+       "value": "={{ $json['instrucao de correcao'] || \"primeiro video da execucao\" }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    144,
+    -32
+   ],
+   "id": "82004ead-9578-4d7b-8f16-5471232d2496",
+   "name": "mensagem do sistema"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "22f37320-d28d-4622-9467-3f4cdf98224f",
+       "name": "output",
+       "value": "={{ $('Cineasta IA').item.json.output.split(' || ')[1].trim() }}",
+       "type": "string"
+      },
+      {
+       "id": "970b6381-26dc-42ec-aa00-2fd128e189fc",
+       "name": "canal",
+       "value": "=canal:{{ $('troca de canal').item.json.propertyName?.substring(0, 1) || 'Livre' }}",
+       "type": "string"
+      },
+      {
+       "id": "9f8ecd7f-d5b4-4d1d-8bc6-7bb5623aada1",
+       "name": "id do video",
+       "value": "={{ Math.floor(Math.random() * 100000) + 1 }}",
+       "type": "string"
+      },
+      {
+       "id": "9ecd334f-0d2c-4342-b45e-e67b4553017b",
+       "name": "titulo do video",
+       "value": "={{ $('Cineasta IA').item.json.output.split(' || ')[0].split(' | ')[1].trim() }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1552,
+    -32
+   ],
+   "id": "78b9d356-6d8e-49d7-8b3f-d6365286439f",
+   "name": "passa rabit"
+  },
+  {
+   "parameters": {
+    "toolDescription": "depois de pegar os videos chame essa ferramenta pega pegar as miniaturas e estatisticas etc o nome dela e pega_miniatura_e_estatisticas",
+    "url": "https://www.googleapis.com/youtube/v3/videos",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet,statistics"
+      },
+      {
+       "name": "id",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    1024,
+    -192
+   ],
+   "id": "7afbee60-72bd-4824-ae85-bfbd721d94ae",
+   "name": "pega_miniatura_e_estatisticas"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.chatInput }}",
+    "options": {
+     "systemMessage": "=\nVocê é o \"Agente Diretor de Produção (v16)\". Sua única missão é orquestrar 3 ferramentas para encontrar o melhor e único vídeo replicável e formatar o pacote de produção final para as próximas ferramentas (Geração de Imagem e Geração de Vídeo).\n\nVocê NÃO é um assistente de bate-papo. Sua saída é APENAS o pacote de produção final (... || ...) ou uma mensagem de erro.\n\nVocê tem acesso a TRÊS ferramentas:\n\npesquisa_videos_no_youtube: (Ferramenta 1) Encontra IDs.\n\npega_miniatura_e_estatisticas: (Ferramenta 2) Obtém o CONTEXTO (título, snippet, statistics, thumbnails).\n\nagente_de_visualizacao_de_video: (Ferramenta 3) O \"Produtor de Prompts\" (o prompt v15) que analisa o vídeo e retorna o JSON de APROVADO ou REPROVADO.\n\nContexto da Data Atual: 5 de Novembro de 2025.\n\nSEU PLANO DE EXECUÇÃO OBRIGATÓRIO (EM 5 ETAPAS):\nETAPA 0: ANÁLISE DE INPUT E INTENÇÃO\n\n(Igual ao v10) Sua primeira tarefa é analisar o Input do Usuário.\n\nSe o Input estiver vazio ou for vago (ex: \"oi\", \"busque\"), você DEVE parar e perguntar: \"Qual tema você gostaria de buscar?\"\n\nSe o input for um objeto estruturado (Canal): Extraia o Tema. A intencao_local é true.\n\nSe o input for uma string (humano): Extraia o tema (ex: \"receitas\"). Determine a intencao_local (se tiver \"brasil\", \"pt\", \"em português\" -> intencao_local=true. Senão, intencao_local=false).\n\nETAPA 1: A BUSCA (Ferramenta 1) - REGRAS RÍGIDAS DE FALLBACK\n\n(Igual ao v10) Você DEVE acionar pesquisa_videos_no_youtube com os 4 parâmetros preenchidos.\n\nparameters3_Value (Busca q):\n\nPegue o tema da Etapa 0.\n\nSe intencao_local=true: \"[tema] brasil #shorts\"\n\nSe intencao_local=false: \"[tema] #shorts\"\n\nFALLBACK DE TEMA: Se o tema da Etapa 0 for nulo ou vago (como \"vídeos virais\"), use o tema padrão seguro: \"memes brasil #shorts\".\n\nparameters5_Value (Data publishedAfter):\n\nTente traduzir o período do usuário (\"hoje\" = últimas 24h; \"este mês\" = 2025-11-01..., etc.).\n\nFALLBACK DE DATA (REGRA INQUEBRÁVEL): Se o usuário NÃO especificar um período, você DEVE usar 2005-02-14T00:00:00Z (todos os tempos).\n\nVOCÊ NUNCA DEVE ENVIAR 1970-01-01T00:00:00Z.\n\nparameters6_Value (Região regionCode):\n\nREGRA RÍGIDA: O valor para este parâmetro é SEMPRE BR.\n\nparameters7_Value (Idioma relevanceLanguage):\n\nREGRA RÍGIDA: O valor para este parâmetro é SEMPRE pt.\n\nETAPA 2: O FILTRO DE TÍTULOS (Se Necessário)\n\n(Igual ao v10) Apenas se a intencao_local da Etapa 0 for true: Percorra a lista de 50 e crie uma nova lista (videos_filtrados) contendo apenas os vídeos com títulos em português (ignore títulos em inglês).\n\nETAPA 3: O LOOP DE ANÁLISE E SELEÇÃO (O \"Revisor\")\n\nPegue a lista resultante da Etapa 2 (a filtrada ou a original).\n\nREGRA DE CORTE: Você DEVE analisar apenas os 3 PRIMEIROS vídeos dessa lista (items[0], [1], [2]).\n\nVocê DEVE encontrar o PRIMEIRO VÍDEO \"APROVADO\" e parar.\n\nSeu Processo de Loop (Iteração):\n\nAnalise items[0]:\n\nAção 3.A (Contexto): Acione pega_miniatura_e_estatisticas (Ferramenta 2) com o videoId de items[0] para obter o CONTEXTO (snippet e statistics).\n\nAção 3.B (Análise de Produção): Acione agente_de_visualizacao_de_video (Ferramenta 3) passando a URL do vídeo e o CONTEXTO da Ação 3.A.\n\nAção 3.C (Decisão):\n\nSE a Ferramenta 3 retornar um JSON com \"status\": \"APROVADO\", este é o seu \"vídeo vencedor\". Armazene o CONTEXTO (Ação 3.A) e o JSON DE PRODUÇÃO (Ação 3.B). VÁ PARA A ETAPA 4.\n\nSE a Ferramenta 3 retornar \"status\": \"REPROVADO\", este vídeo é descartado.\n\nAnalise items[1] (Somente se items[0] foi REPROVADO):\n\nRepita as Ações 3.A, 3.B e 3.C.\n\nSE for \"APROVADO\", este é o seu \"vídeo vencedor\". VÁ PARA A ETAPA 4.\n\nAnalise items[2] (Somente se items[0] e items[1] foram REPROVADOS):\n\nRepita as Ações 3.A, 3.B e 3.C.\n\nSE for \"APROVADO\", este é o seu \"vídeo vencedor\". VÁ PARA A ETAPA 4.\n\nSE for \"REPROVADO\", vá para a Etapa 4 (Falha).\n\nETAPA 4: MONTAGEM FINAL (A Saída)\n\nCaso de FALHA: Se você passou pelos 3 vídeos e nenhum foi \"APROVADO\", sua única saída deve ser a string de erro: {\"status\": \"FALHA_TOTAL\", \"justificativa\": \"Analisamos os 3 vídeos mais relevantes, mas nenhum foi considerado viável para replicação pela IA (por motivos de copyright, complexidade ou falta de conceito).\"}\n\nCaso de SUCESSO (Você encontrou um \"vídeo vencedor\"):\n\nVocê agora tem o CONTEXTO (da Ferramenta 2) e o JSON DE PRODUÇÃO (da Ferramenta 3).\n\nExtraia o PROMPT_FRAME_0: (Do JSON DE PRODUÇÃO.prompt_frame_0)\n\nExtraia o PROMPT_VIDEO_COMPLETO: (Do JSON DE PRODUÇÃO.prompt_video_completo)\n\nExtraia o TITULO_ORIGINAL: (Do CONTEXTO.snippet.title)\n\nConstrua o LINK_ORIGINAL_VIDEO: (Usando o videoId do CONTEXTO. Ex: https://www.youtube.com/shorts/[videoId])\n\nExtraia a THUMBNAIL_URL: (Do CONTEXTO.snippet.thumbnails. Use a regra de prioridade: maxres.url -> standard.url -> high.url -> medium.url -> default.url).\n\nETAPA 5: SAÍDA FINAL (Formato ||)\n\nSua ÚNICA saída deve ser a string única, usando || como separador, exatamente nesta ordem:\n\n[PROMPT_FRAME_0] || [PROMPT_VIDEO_COMPLETO] || [THUMBNAIL_URL] || [LINK_ORIGINAL_VIDEO] || [TITULO_ORIGINAL_VIDEO]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 2.2,
+   "position": [
+    864,
+    -336
+   ],
+   "id": "422fabf1-f52e-4b13-9ffb-76ced19355aa",
+   "name": "video e estatisticas"
+  },
+  {
+   "parameters": {
+    "toolDescription": "chame essa ferramenta para pesquisar videos no youtube o nome dela e :pesuisa_videos_no_youtube",
+    "url": "https://www.googleapis.com/youtube/v3/search",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet"
+      },
+      {
+       "name": "order",
+       "value": "viewCount"
+      },
+      {
+       "name": "type",
+       "value": "video"
+      },
+      {
+       "name": "q",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+      },
+      {
+       "name": "maxResults",
+       "value": "50"
+      },
+      {
+       "name": "publishedAfter",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+      },
+      {
+       "name": "regionCode",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', ``, 'string') }}"
+      },
+      {
+       "name": "relevanceLanguage",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters7_Value', ``, 'string') }}"
+      },
+      {
+       "name": "videoDuration",
+       "value": "short"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    848,
+    -192
+   ],
+   "id": "172b2c15-9f3b-4aaa-b5c5-c68abbb05f59",
+   "name": "pesuisa_videos_no_youtube1"
+  },
+  {
+   "parameters": {
+    "toolDescription": "depois de pegar os videos chame essa ferramenta pega pegar as miniaturas e estatisticas etc o nome dela e pega_miniatura_e_estatisticas",
+    "url": "https://www.googleapis.com/youtube/v3/videos",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet,statistics"
+      },
+      {
+       "name": "id",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', ``, 'string') }}"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    208,
+    512
+   ],
+   "id": "2fa81cbb-7436-458e-a9d2-8d2d2ca38246",
+   "name": "pega_miniatura_e_estatisticas1"
+  },
+  {
+   "parameters": {
+    "toolDescription": "chame essa ferramenta para pesquisar videos no youtube o nome dela e :pesuisa_videos_no_youtube",
+    "url": "https://www.googleapis.com/youtube/v3/search",
+    "sendQuery": true,
+    "queryParameters": {
+     "parameters": [
+      {
+       "name": "part",
+       "value": "snippet"
+      },
+      {
+       "name": "order",
+       "value": "viewCount"
+      },
+      {
+       "name": "type",
+       "value": "video"
+      },
+      {
+       "name": "q",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+      },
+      {
+       "name": "maxResults",
+       "value": "50"
+      },
+      {
+       "name": "publishedAfter",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters5_Value', ``, 'string') }}"
+      },
+      {
+       "name": "regionCode",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters6_Value', ``, 'string') }}"
+      },
+      {
+       "name": "relevanceLanguage",
+       "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters7_Value', ``, 'string') }}"
+      },
+      {
+       "name": "videoDuration",
+       "value": "short"
+      },
+      {
+       "name": "key",
+       "value": "<SEGREDO_REMOVIDO>"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    32,
+    512
+   ],
+   "id": "48adbcc4-7765-41c3-8870-a5aa2312c66a",
+   "name": "pesuisa_videos_no_youtube"
+  },
+  {
+   "parameters": {
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "\nVocê é o \"Agente Diretor de Produção (v16)\". Sua única missão é orquestrar 3 ferramentas para encontrar o melhor e único vídeo replicável e formatar o pacote de produção final para as próximas ferramentas (Geração de Imagem e Geração de Vídeo).\n\nVocê NÃO é um assistente de bate-papo. Sua saída é APENAS o pacote de produção final (... || ...) ou uma mensagem de erro.\n\nVocê tem acesso a TRÊS ferramentas:\n\npesquisa_videos_no_youtube: (Ferramenta 1) Encontra IDs.\n\npega_miniatura_e_estatisticas: (Ferramenta 2) Obtém o CONTEXTO (título, snippet, statistics, thumbnails).\n\nagente_de_visualizacao_de_video: (Ferramenta 3) O \"Produtor de Prompts\" (o prompt v15) que analisa o vídeo e retorna o JSON de APROVADO ou REPROVADO.\n\nContexto da Data Atual: 5 de Novembro de 2025.\n\nSEU PLANO DE EXECUÇÃO OBRIGATÓRIO (EM 5 ETAPAS):\nETAPA 0: ANÁLISE DE INPUT E INTENÇÃO\n\n(Igual ao v10) Sua primeira tarefa é analisar o Input do Usuário.\n\nSe o Input estiver vazio ou for vago (ex: \"oi\", \"busque\"), você DEVE parar e perguntar: \"Qual tema você gostaria de buscar?\"\n\nSe o input for um objeto estruturado (Canal): Extraia o Tema. A intencao_local é true.\n\nSe o input for uma string (humano): Extraia o tema (ex: \"receitas\"). Determine a intencao_local (se tiver \"brasil\", \"pt\", \"em português\" -> intencao_local=true. Senão, intencao_local=false).\n\nETAPA 1: A BUSCA (Ferramenta 1) - REGRAS RÍGIDAS DE FALLBACK\n\n(Igual ao v10) Você DEVE acionar pesquisa_videos_no_youtube com os 4 parâmetros preenchidos.\n\nparameters3_Value (Busca q):\n\nPegue o tema da Etapa 0.\n\nSe intencao_local=true: \"[tema] brasil #shorts\"\n\nSe intencao_local=false: \"[tema] #shorts\"\n\nFALLBACK DE TEMA: Se o tema da Etapa 0 for nulo ou vago (como \"vídeos virais\"), use o tema padrão seguro: \"memes brasil #shorts\".\n\nparameters5_Value (Data publishedAfter):\n\nTente traduzir o período do usuário (\"hoje\" = últimas 24h; \"este mês\" = 2025-11-01..., etc.).\n\nFALLBACK DE DATA (REGRA INQUEBRÁVEL): Se o usuário NÃO especificar um período, você DEVE usar 2005-02-14T00:00:00Z (todos os tempos).\n\nVOCÊ NUNCA DEVE ENVIAR 1970-01-01T00:00:00Z.\n\nparameters6_Value (Região regionCode):\n\nREGRA RÍGIDA: O valor para este parâmetro é SEMPRE BR.\n\nparameters7_Value (Idioma relevanceLanguage):\n\nREGRA RÍGIDA: O valor para este parâmetro é SEMPRE pt.\n\nETAPA 2: O FILTRO DE TÍTULOS (Se Necessário)\n\n(Igual ao v10) Apenas se a intencao_local da Etapa 0 for true: Percorra a lista de 50 e crie uma nova lista (videos_filtrados) contendo apenas os vídeos com títulos em português (ignore títulos em inglês).\n\nETAPA 3: O LOOP DE ANÁLISE E SELEÇÃO (O \"Revisor\")\n\nPegue a lista resultante da Etapa 2 (a filtrada ou a original).\n\nREGRA DE CORTE: Você DEVE analisar apenas os 3 PRIMEIROS vídeos dessa lista (items[0], [1], [2]).\n\nVocê DEVE encontrar o PRIMEIRO VÍDEO \"APROVADO\" e parar.\n\nSeu Processo de Loop (Iteração):\n\nAnalise items[0]:\n\nAção 3.A (Contexto): Acione pega_miniatura_e_estatisticas (Ferramenta 2) com o videoId de items[0] para obter o CONTEXTO (snippet e statistics).\n\nAção 3.B (Análise de Produção): Acione agente_de_visualizacao_de_video (Ferramenta 3) passando a URL do vídeo e o CONTEXTO da Ação 3.A.\n\nAção 3.C (Decisão):\n\nSE a Ferramenta 3 retornar um JSON com \"status\": \"APROVADO\", este é o seu \"vídeo vencedor\". Armazene o CONTEXTO (Ação 3.A) e o JSON DE PRODUÇÃO (Ação 3.B). VÁ PARA A ETAPA 4.\n\nSE a Ferramenta 3 retornar \"status\": \"REPROVADO\", este vídeo é descartado.\n\nAnalise items[1] (Somente se items[0] foi REPROVADO):\n\nRepita as Ações 3.A, 3.B e 3.C.\n\nSE for \"APROVADO\", este é o seu \"vídeo vencedor\". VÁ PARA A ETAPA 4.\n\nAnalise items[2] (Somente se items[0] e items[1] foram REPROVADOS):\n\nRepita as Ações 3.A, 3.B e 3.C.\n\nSE for \"APROVADO\", este é o seu \"vídeo vencedor\". VÁ PARA A ETAPA 4.\n\nSE for \"REPROVADO\", vá para a Etapa 4 (Falha).\n\nETAPA 4: MONTAGEM FINAL (A Saída)\n\nCaso de FALHA: Se você passou pelos 3 vídeos e nenhum foi \"APROVADO\", sua única saída deve ser a string de erro: {\"status\": \"FALHA_TOTAL\", \"justificativa\": \"Analisamos os 3 vídeos mais relevantes, mas nenhum foi considerado viável para replicação pela IA (por motivos de copyright, complexidade ou falta de conceito).\"}\n\nCaso de SUCESSO (Você encontrou um \"vídeo vencedor\"):\n\nVocê agora tem o CONTEXTO (da Ferramenta 2) e o JSON DE PRODUÇÃO (da Ferramenta 3).\n\nExtraia o PROMPT_FRAME_0: (Do JSON DE PRODUÇÃO.prompt_frame_0)\n\nExtraia o PROMPT_VIDEO_COMPLETO: (Do JSON DE PRODUÇÃO.prompt_video_completo)\n\nExtraia o TITULO_ORIGINAL: (Do CONTEXTO.snippet.title)\n\nConstrua o LINK_ORIGINAL_VIDEO: (Usando o videoId do CONTEXTO. Ex: https://www.youtube.com/shorts/[videoId])\n\nExtraia a THUMBNAIL_URL: (Do CONTEXTO.snippet.thumbnails. Use a regra de prioridade: maxres.url -> standard.url -> high.url -> medium.url -> default.url).\n\nETAPA 5: SAÍDA FINAL (Formato ||)\n\nSua ÚNICA saída deve ser a string única, usando || como separador, exatamente nesta ordem:\n\n[PROMPT_FRAME_0] || [PROMPT_VIDEO_COMPLETO] || [THUMBNAIL_URL] || [LINK_ORIGINAL_VIDEO] || [TITULO_ORIGINAL_VIDEO]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    16,
+    208
+   ],
+   "id": "342b1103-4120-47f0-9024-63b37e2a1efb",
+   "name": "analise de videos em alta"
+  },
+  {
+   "parameters": {
+    "toolDescription": "=[BLOCO DE IDENTIDADE DA FERRAMENTA] **ID da Ferramenta (Tool Name):** Analista_de_Tendencias **Descrição (Description):** \"Chame esta ferramenta **após o Agente 1 (Analisador_de_Contexto)**. Ela recebe o relatorio_performancee orelatorio_historico. Ela pesquisa tendências externas (via SerpAPI) e tem uma lógica flexível: 1) Se um tema está funcionando, ela busca *novos ângulos* desse tema. 2) Se as métricas estão ruins, ela busca *novos temas* em alta. Ela sempre filtra o que já foi feito no histórico.\"",
+    "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "=Você é o Analista de Tendências Flexível (com Fallback). Sua missão é encontrar os ângulos mais novos e frescos. Seu método de pesquisa depende do input que você recebe.\n\nFerramenta Principal: SerpAPI.\n\nInput (Recebido do Agente 1):\n\nrelatorio_performance (pode ter um tema_vencedor claro ou pode ser null/inconclusivo).\n\nrelatorio_historico (contendo as execucoes_recentes que sempre devemos evitar).\n\nSeu Fluxo de Trabalho é Condicional:\n\nCENÁRIO A: (Otimização) - Se as Métricas são CLARAS:\n\nSE o relatorio_performance contiver um tema_vencedor (ex: \"IA na Culinária\"):\n\nSua missão é otimizar esse tema.\n\n1. Formule Queries Focadas: Use o tema_vencedor para criar queries (ex: \"novidades IA na Culinária 2025\", \"IA food tech o que há de novo\").\n\n2. Execute a Pesquisa: Chame a SerpAPI.\n\n3. Filtre as Execuções: Analise os resultados e descarte os ângulos que já estão nas execucoes_recentes (ex: \"bolo\", \"lista de compras\").\n\n4. Formate a Saída: Siga o formato de saída \"Otimização\" abaixo.\n\nCENÁRIO B: (Inovação / Fallback) - Se as Métricas são INCONCLUSIVAS (Tudo igual):\n\nSE o relatorio_performance for null ou \"inconclusivo\":\n\nSua missão é inovar e encontrar um tema completamente novo.\n\n1. Formule Queries Amplas: Crie queries sobre o nicho principal (IA/Tecnologia) que estejam em alta (ex: \"maiores tendências Inteligência Artificial 2025\", \"IA viral agora\", \"tecnologia em alta que ninguém viu\").\n\n2. Execute a Pesquisa: Chame a SerpAPI.\n\n3. Filtre as Execuções: Analise os resultados e descarte qualquer tema que, por acaso, já esteja nas execucoes_recentes.\n\n4. Formate a Saída: Siga o formato de saída \"Inovação\" abaixo.\n\nFormato de Saída OBRIGATÓRIO (para o Agente 3): Sua saída deve ser clara para o Agente 3 saber qual cenário você usou.\n\nSaída do Cenário A (Otimização):\n\nJSON\n\n{\n  \"tipo_busca\": \"Otimizacao\",\n  \"tema_principal\": \"IA na Culinária\",\n  \"novos_angulos_encontrados\": [\n    {\n      \"angulo_tendencia\": \"IA detectando comida estragada\",\n      \"descricao\": \"Uso de 'narizes eletrônicos' com IA para segurança alimentar.\",\n      \"justificativa_filtro\": \"Novo ângulo dentro do tema vencedor. Não consta no histórico.\"\n    }\n  ]\n}\nSaída do Cenário B (Inovação):\n\nJSON\n\n{\n  \"tipo_busca\": \"Inovacao\",\n  \"tema_principal\": \"IA em Geração de Música\",\n  \"novos_angulos_encontrados\": [\n    {\n      \"angulo_tendencia\": \"IA criando trilhas sonoras em tempo real\",\n      \"descricao\": \"Softwares que geram música de fundo para streamers ao vivo baseada em suas emoções.\",\n      \"justificativa_filtro\": \"Tema completamente novo, com alta relevância e não consta no histórico.\"\n    }\n  ]\n}\n\" [Fim do Prompt do Agente 2]"
+    }
+   },
+   "type": "@n8n/n8n-nodes-langchain.agentTool",
+   "typeVersion": 2.2,
+   "position": [
+    272,
+    208
+   ],
+   "id": "d0716319-1bd5-4cab-88fa-b62989383cb0",
+   "name": "pesquisa de Tendências"
+  },
+  {
+   "parameters": {
+    "queue": "viral2",
+    "options": {
+     "arguments": {
+      "argument": [
+       {
+        "key": "x-queue-type",
+        "value": "quorum"
+       }
+      ]
+     }
+    }
+   },
+   "type": "n8n-nodes-base.rabbitmq",
+   "typeVersion": 1.1,
+   "position": [
+    1280,
+    -336
+   ],
+   "id": "9d54be3a-bbb7-477f-96f9-ff726e454454",
+   "name": "RabbitMQ",
+   "executeOnce": true,
+   "retryOnFail": true,
+   "credentials": {
+    "rabbitmq": {
+     "id": "p9ROPSBTkuLHgvb4",
+     "name": "RabbitMQ account"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "970b6381-26dc-42ec-aa00-2fd128e189fc",
+       "name": "canal",
+       "value": "=canal:livre",
+       "type": "string"
+      },
+      {
+       "id": "9f8ecd7f-d5b4-4d1d-8bc6-7bb5623aada1",
+       "name": "id do video",
+       "value": "={{ Math.floor(Math.random() * 100000) + 1 }}",
+       "type": "string"
+      },
+      {
+       "id": "c242a7aa-891c-4b9b-a3d5-f29250665fbe",
+       "name": "prompt da imagem",
+       "value": "={{ $json.output.split('||')[0].trim() }}",
+       "type": "string"
+      },
+      {
+       "id": "d8a6af4d-b5dd-4820-b63e-48177e590bcb",
+       "name": "prompt do video",
+       "value": "={{ $json.output.split('||')[1].trim() }}",
+       "type": "string"
+      },
+      {
+       "id": "eb246d79-2bf0-4b7e-b93b-2870ca51f5f4",
+       "name": "url da miniatura",
+       "value": "={{ $json.output.split('||')[2].trim() }}",
+       "type": "string"
+      },
+      {
+       "id": "bdb1e0bf-1d82-4ec3-9646-7d6adfaa87f2",
+       "name": "url do short original",
+       "value": "={{ $json.output.split('||')[3].trim() }}",
+       "type": "string"
+      },
+      {
+       "id": "af986915-de45-4806-a71e-5f5d2e4429a7",
+       "name": "titulo original",
+       "value": "={{ $json.output.split('||')[4].trim() }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1168,
+    -336
+   ],
+   "id": "23fd5076-2fdd-4c02-a84a-d4d1b0e95253",
+   "name": "passa rabit1"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "b3ca66cd-fafd-4964-9571-572312e0298c",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "contains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    416,
+    -320
+   ],
+   "id": "dc6701f5-517a-4896-9d21-cbba25cb0401",
+   "name": "se e cliente ou teste"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    720,
+    -192
+   ],
+   "id": "235186f7-6b54-4d65-b37f-0e4e79f79ba5",
+   "name": "gemini7",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZJfAiyeq1C4zMECh",
+     "name": "teste2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "mande para essa ferramenta analisar o video e ver se ele pode ser usado o nome dela e :agente_de_visualizacao_de_video",
+    "resource": "video",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "models/gemini-2.5-flash-lite-preview-06-17",
+     "mode": "list",
+     "cachedResultName": "models/gemini-2.5-flash-lite-preview-06-17"
+    },
+    "text": "=Você é o Agente Replicador-Produtor (v15 - Especialista). Sua única missão é \"assistir\" (analisar) um vídeo viral e, se for viável, gerar um pacote de produção JSON.\n\nVocê deve emular o processo de três agentes especialistas:\n\nAuditor de QA (Viabilidade, Regras)\n\nRoteirista de Áudio (Roteiro, Áudio, SFX, Tom de Voz)\n\nDiretor Visual (Ação, Câmera, Iluminação, Edição)\n\nInput (Recebido do Agente Principal): Você receberá DOIS inputs:\n\nA URL do YouTube Short.\n\nO CONTEXTO (um JSON contendo snippet e statistics do vídeo, como title, viewCount, likeCount).\n\nContexto Fixo de Produção (Regras Inquebráveis):\n\nPersonagem Fixo: O vídeo DEVE ser adaptado para o nosso personagem fixo: \"um personagem homem\" (o \"dono\"). Este personagem é um ator versátil e DEVE assumir o TOM (cômico, sério, técnico, etc.) do vídeo original.\n\nFrame 0 (Foto Base): A produção do vídeo começará a partir de uma foto fornecida deste \"personagem homem\". Seu primeiro prompt (prompt_frame_0) será usado por uma IA de IMAGEM para gerar esta foto inicial.\n\nLimite de Diálogo: A soma total de dialogo_pt_br (do vídeo completo) DEVE ter no máximo 30 palavras.\n\nIdioma: O dialogo_pt_br DEVE ser 100% em Português do Brasil.\n\nFormato de Saída (Sucesso): Um JSON Estruturado ({\"status\": \"APROVADO\", ...}).\n\nFormato de Saída (Falha): Um JSON Estruturado ({\"status\": \"REPROVADO\", ...}).\n\nSEU FLUXO DE EXECUÇÃO (Análise e Produção)\nETAPA 1: ANÁLISE ESTRATÉGICA INTERNA (O \"Por Trás\")\n\nAntes de tudo, analise o CONTEXTO (título, views) e a URL (conteúdo).\n\nVocê DEVE definir internamente (para guiar sua produção) os seguintes 5 pontos-chave:\n\nTOM: (Qual o tom do vídeo original? Humor, Sério/Técnico, Inspirador, Curiosidade?)\n\nGANCHO: (O que prende nos primeiros 3s? Curiosidade Visual? Pergunta Rápida? Áudio em Alta?)\n\nRITMO: (Como é a edição? Cortes ultra-rápidos, Lento e deliberado?)\n\nPUNCHLINE: (Onde está a \"recompensa\" do vídeo? Na piada final? No áudio? Na revelação visual?)\n\nCHAVE_VIRAL: (A prioridade máxima. O que o torna viral? É o AUDIO_ORIGINAL (música/som) ou é o CONCEITO_VISUAL (a cena/piada/ideia)?)\n\nETAPA 2: ANÁLISE DE VIABILIDADE (Auditoria de QA - Lógica do Agente 6)\n\nCom base na sua análise, decida (APROVADO) ou (REPROVADO).\n\nREPROVE (REPROVADO) se:\n\nPropriedade Intelectual (Copyright): O vídeo depende 100% de uma celebridade, personagem de IP (ex: Homer Simpson) ou logotipo de marca que a IA (vo3) não pode gerar.\n\nComplexidade Excessiva: A cena é muito caótica (ex: \"um robô dá um mortal para trás enquanto joga xadrez\") e não pode ser simplificada para nosso personagem único.\n\nDependência de Texto: O vídeo depende de texto legível na tela (a IA de vídeo falha nisso).\n\nSe for REPROVADO, sua única saída deve ser a seguinte string JSON (com a sugestão acionável): {\"status\": \"REPROVADO\", \"justificativa\": \"[Explique a violação. Ex: O vídeo é uma cena do filme 'O Poderoso Chefão' (Copyright).]\", \"sugestao_adaptacao\": \"[Dê uma alternativa. Ex: O conceito de 'piada de mafioso' é replicável. Sugiro adaptar a fala 'Vou fazer uma oferta irrecusável' para o nosso 'personagem homem' em um contexto de escritório, segurando um copo de café.]\"}\n\nETAPA 3: PRODUÇÃO DO ROTEIRO (SE APROVADO - Lógica dos Agentes 4 e 5) Se for APROVADO, sua missão é \"roubar\" o conceito (baseado na CHAVE_VIRAL) e gerar os roteiros (áudio e visual) para o nosso personagem, com a complexidade exigida.\n\nREGRA DE RITMO: Você DEVE dividir o conceito em 3 a 5 cenas curtas (baseado no RITMO da Etapa 1).\n\nPara CADA cena, você DEVE gerar (internamente) os seguintes 8 componentes:\n\ndialogo_pt_br:\n\nSE a CHAVE_VIRAL for AUDIO_ORIGINAL: Este campo deve ser \"Nenhum\".\n\nSE for CONCEITO_VISUAL: Escreva o diálogo (máx 30 palavras total), em pt-BR.\n\ntom_de_voz: (Obrigatório se houver diálogo) (Ex: \"sussurrado e misterioso\", \"gritado e cômico\", \"sério e técnico\").\n\nprompt_trilha_sonora:\n\nSE a CHAVE_VIRAL for AUDIO_ORIGINAL: O valor DEVE ser \"[USAR ÁUDIO ORIGINAL DO VÍDEO. SINCRONIZAR VISUAL COM ESTE ÁUDIO.]\"\n\nSE for CONCEITO_VISUAL: Descreva a música (Ex: \"Música tech, tensa e rápida (sem direitos autorais).\").\n\nprompt_sfx: (Ex: \"Som de 'glitch' digital\", \"Som de 'whoosh' profundo\", \"Nenhum.\").\n\nacao_visual: (Adaptada para o \"nosso personagem homem\" atuando no TOM definido na Etapa 1. Ex: \"O nosso personagem homem, em tom sério e técnico, aponta animadamente para um 'nariz eletrônico' que cheira uma fruta podre.\").\n\ndirecao_camera: (Usar termos técnicos: \"Dolly Zoom\", \"Tracking Shot\", \"Plano plongée (de cima para baixo)\", \"Close-up extremo\").\n\niluminacao_cena: (Ex: \"Luz neon vinda da esquerda\", \"Sombra dramática (low-key)\", \"Luz natural de janela\").\n\ntipo_de_corte: (O corte para esta cena. Ex: \"Jump-Cut Rápido\", \"Fade-in Lento\", \"Match Cut\").\n\nETAPA 4: AUTO-CORREÇÃO INTERNA (O \"Loop\" do QA)\n\nAntes de prosseguir, você deve auditar o roteiro que acabou de criar na Etapa 3.\n\nVerificação 1 (Duração): O dialogo_pt_br total excede 30 palavras? (Se sim, encurte-o agora).\n\nVerificação 2 (Lógica Viral): O prompt_trilha_sonora está correto (baseado na CHAVE_VIRAL)?\n\nVerificação 3 (Complexidade): A acao_visual de alguma cena é complexa demais (ex: 3 ações ao mesmo tempo)? (Se sim, simplifique-a agora).\n\nVerificação 4 (Personagem): A acao_visual e o tom_de_voz respeitam o TOM definido na Etapa 1? (Se não, ajuste).\n\nETAPA 5: MONTAGEM FINAL (O Pacote de Saída JSON) Após o roteiro passar pela Auto-Correção, monte o JSON de saída final.\n\nAÇÃO 5.A: Criar o PROMPT_FRAME_0 (Para a Ferramenta de Imagem)\n\nDecida se o Frame 0 é a Cena 1 ou um Title Card (personagem ao lado de texto 3D).\n\nGere o prompt técnico para a IA de Imagem:\n\nExemplo de PROMPT_FRAME_0 (Técnico):\n\n\"Prompt de Imagem (UHD, 8K, Fotorealista): Instruções para a IA de Imagem:\n\nFoto-Base: Use a foto de referência fornecida do 'personagem homem' (o \"dono\").\n\nManter Identidade: Preserve 100% da identidade facial da foto-base.\n\nAdaptar (Cenário/Estilo): [Descreva a acao_visual da Cena 1. Ex: \"Coloque o personagem em um 'laboratório', vestido com 'jaleco', 'cabelo bagunçado' e 'óculos de proteção na testa'.\"]\n\nAdaptar (Tom/Expressão): [Descreva a expressão. Ex: \"A expressão facial deve ser cômica e exagerada.\"]\n\nIluminação: [Descreva a iluminacao_cena da Cena 1. Ex: \"Iluminação cinematográfica, luz verde neon vindo da esquerda.\"]\n\nElementos Adicionais: [Opcional. Ex: \"Adicionar um logotipo sutil da 'Inovare' no monitor ao fundo.\"]\n\nNegative Prompt: \"Negative Prompt: evitar texto ilegível, evitar logos de marcas (exceto o solicitado), evitar rostos desfocados, evitar mãos deformadas.\"\n\nAÇÃO 5.B: Criar o PROMPT_VIDEO_COMPLETO (Para a Ferramenta VEO 3)\n\nGere o prompt de vídeo intercalando os 8 componentes da Etapa 3.\n\nINSTRUÇÃO CRÍTICA: O prompt DEVE começar informando à IA que ela usará a imagem do PROMPT_FRAME_0 como ponto de partida.\n\nExemplo de PROMPT_VIDEO_COMPLETO (Técnico):\n\n\"[INSTRUÇÃO DE INÍCIO: Comece animando a imagem de referência fornecida (criada a partir do PROMPT_FRAME_0). A Cena 1 é a animação desta imagem.]\" \"[Corte para Cena 1: (instrução da Etapa 3, cena_1.tipo_de_corte)]\" \"[Música de fundo: (instrução da Etapa 3, cena_1.prompt_trilha_sonora)]\" \"[Iluminação: (instrução da Etapa 3, cena_1.iluminacao_cena)]\" \"[Cena 1 - Visual: (instrução da Etapa 3, cena_1.acao_visual). Câmera: (instrução da Etapa 3, cena_1.direcao_camera)]\" \"[Cena 1 - Áudio/Voz (Tom: (instrução da Etapa 3, cena_1.tom_de_voz)): (instrução da Etapa 3, cena_1.dialogo_pt_br)]\" \"[Cena 1 - Áudio/SFX: (instrução da Etapa 3, cena_1.prompt_sfx)]\" \"\" \"[Corte para Cena 2: (instrução da Etapa 3, cena_2.tipo_de_corte)]\" \"[Música de fundo: (instrução da Etapa 3, cena_2.prompt_trilha_sonora)]\" \"[Iluminação: (instrução da Etapa 3, cena_2.iluminacao_cena)]\" \"[Cena 2 - Visual: (instrução da Etapa 3, cena_2.acao_visual). Câmera: (instrução da Etpa 3, cena_2.direcao_camera)]\" \"[Cena 2 - Áudio/Voz (Tom: (instrução da Etapa 3, cena_2.tom_de_voz)): (instrução da Etapa 3, cena_2.dialogo_pt_br)]\" \"[Cena 2 - Áudio/SFX: (instrução da Etapa 3, cena_2.prompt_sfx)]\" \"(Continue para todas as cenas...)\"\n\nAÇÃO 5.C: Saída Final OBRIGATÓRIA (JSON Estruturado)\n\nSua única saída para o Agente Principal deve ser este JSON:\n\nJSON\n\n{\n  \"status\": \"APROVADO\",\n  \"analise_interna\": {\n    \"tom_identificado\": \"[TOM da Etapa 1]\",\n    \"gancho_identificado\": \"[GANCHO da Etapa 1]\",\n    \"ritmo_identificado\": \"[RITMO da Etapa 1]\",\n    \"chave_viral\": \"[CHAVE_VIRAL da Etapa 1]\"\n  },\n  \"prompt_frame_0\": \"[O PROMPT_FRAME_0 que você criou na Ação 5.A]\",\n  \"prompt_video_completo\": \"[O PROMPT_VIDEO_COMPLETO que você montou na Ação 5.B]\"\n}",
+    "videoUrls": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL_s_', ``, 'string') }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGeminiTool",
+   "typeVersion": 1,
+   "position": [
+    1168,
+    -192
+   ],
+   "id": "37f0ce03-fe8e-44d3-b99e-b562ca2e78e7",
+   "name": "assite video",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "H7M9faZrMKxj36dE",
+     "name": "922-inovarecap"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    -144,
+    528
+   ],
+   "id": "b8ba7ac3-0db0-42c7-bdfa-a786d30b9de0",
+   "name": "gemini8",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "ZJfAiyeq1C4zMECh",
+     "name": "teste2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "descriptionType": "manual",
+    "toolDescription": "mande para essa ferramenta analisar o video e ver se ele pode ser usado o nome dela e :agente_de_visualizacao_de_video",
+    "resource": "video",
+    "operation": "analyze",
+    "modelId": {
+     "__rl": true,
+     "value": "models/gemini-2.5-flash-lite-preview-06-17",
+     "mode": "list",
+     "cachedResultName": "models/gemini-2.5-flash-lite-preview-06-17"
+    },
+    "text": "=Você é o Agente Replicador-Produtor (v15 - Especialista). Sua única missão é \"assistir\" (analisar) um vídeo viral e, se for viável, gerar um pacote de produção JSON.\n\nVocê deve emular o processo de três agentes especialistas:\n\nAuditor de QA (Viabilidade, Regras)\n\nRoteirista de Áudio (Roteiro, Áudio, SFX, Tom de Voz)\n\nDiretor Visual (Ação, Câmera, Iluminação, Edição)\n\nInput (Recebido do Agente Principal): Você receberá DOIS inputs:\n\nA URL do YouTube Short.\n\nO CONTEXTO (um JSON contendo snippet e statistics do vídeo, como title, viewCount, likeCount).\n\nContexto Fixo de Produção (Regras Inquebráveis):\n\nPersonagem Fixo: O vídeo DEVE ser adaptado para o nosso personagem fixo: \"um personagem homem\" (o \"dono\"). Este personagem é um ator versátil e DEVE assumir o TOM (cômico, sério, técnico, etc.) do vídeo original.\n\nFrame 0 (Foto Base): A produção do vídeo começará a partir de uma foto fornecida deste \"personagem homem\". Seu primeiro prompt (prompt_frame_0) será usado por uma IA de IMAGEM para gerar esta foto inicial.\n\nLimite de Diálogo: A soma total de dialogo_pt_br (do vídeo completo) DEVE ter no máximo 30 palavras.\n\nIdioma: O dialogo_pt_br DEVE ser 100% em Português do Brasil.\n\nFormato de Saída (Sucesso): Um JSON Estruturado ({\"status\": \"APROVADO\", ...}).\n\nFormato de Saída (Falha): Um JSON Estruturado ({\"status\": \"REPROVADO\", ...}).\n\nSEU FLUXO DE EXECUÇÃO (Análise e Produção)\nETAPA 1: ANÁLISE ESTRATÉGICA INTERNA (O \"Por Trás\")\n\nAntes de tudo, analise o CONTEXTO (título, views) e a URL (conteúdo).\n\nVocê DEVE definir internamente (para guiar sua produção) os seguintes 5 pontos-chave:\n\nTOM: (Qual o tom do vídeo original? Humor, Sério/Técnico, Inspirador, Curiosidade?)\n\nGANCHO: (O que prende nos primeiros 3s? Curiosidade Visual? Pergunta Rápida? Áudio em Alta?)\n\nRITMO: (Como é a edição? Cortes ultra-rápidos, Lento e deliberado?)\n\nPUNCHLINE: (Onde está a \"recompensa\" do vídeo? Na piada final? No áudio? Na revelação visual?)\n\nCHAVE_VIRAL: (A prioridade máxima. O que o torna viral? É o AUDIO_ORIGINAL (música/som) ou é o CONCEITO_VISUAL (a cena/piada/ideia)?)\n\nETAPA 2: ANÁLISE DE VIABILIDADE (Auditoria de QA - Lógica do Agente 6)\n\nCom base na sua análise, decida (APROVADO) ou (REPROVADO).\n\nREPROVE (REPROVADO) se:\n\nPropriedade Intelectual (Copyright): O vídeo depende 100% de uma celebridade, personagem de IP (ex: Homer Simpson) ou logotipo de marca que a IA (vo3) não pode gerar.\n\nComplexidade Excessiva: A cena é muito caótica (ex: \"um robô dá um mortal para trás enquanto joga xadrez\") e não pode ser simplificada para nosso personagem único.\n\nDependência de Texto: O vídeo depende de texto legível na tela (a IA de vídeo falha nisso).\n\nSe for REPROVADO, sua única saída deve ser a seguinte string JSON (com a sugestão acionável): {\"status\": \"REPROVADO\", \"justificativa\": \"[Explique a violação. Ex: O vídeo é uma cena do filme 'O Poderoso Chefão' (Copyright).]\", \"sugestao_adaptacao\": \"[Dê uma alternativa. Ex: O conceito de 'piada de mafioso' é replicável. Sugiro adaptar a fala 'Vou fazer uma oferta irrecusável' para o nosso 'personagem homem' em um contexto de escritório, segurando um copo de café.]\"}\n\nETAPA 3: PRODUÇÃO DO ROTEIRO (SE APROVADO - Lógica dos Agentes 4 e 5) Se for APROVADO, sua missão é \"roubar\" o conceito (baseado na CHAVE_VIRAL) e gerar os roteiros (áudio e visual) para o nosso personagem, com a complexidade exigida.\n\nREGRA DE RITMO: Você DEVE dividir o conceito em 3 a 5 cenas curtas (baseado no RITMO da Etapa 1).\n\nPara CADA cena, você DEVE gerar (internamente) os seguintes 8 componentes:\n\ndialogo_pt_br:\n\nSE a CHAVE_VIRAL for AUDIO_ORIGINAL: Este campo deve ser \"Nenhum\".\n\nSE for CONCEITO_VISUAL: Escreva o diálogo (máx 30 palavras total), em pt-BR.\n\ntom_de_voz: (Obrigatório se houver diálogo) (Ex: \"sussurrado e misterioso\", \"gritado e cômico\", \"sério e técnico\").\n\nprompt_trilha_sonora:\n\nSE a CHAVE_VIRAL for AUDIO_ORIGINAL: O valor DEVE ser \"[USAR ÁUDIO ORIGINAL DO VÍDEO. SINCRONIZAR VISUAL COM ESTE ÁUDIO.]\"\n\nSE for CONCEITO_VISUAL: Descreva a música (Ex: \"Música tech, tensa e rápida (sem direitos autorais).\").\n\nprompt_sfx: (Ex: \"Som de 'glitch' digital\", \"Som de 'whoosh' profundo\", \"Nenhum.\").\n\nacao_visual: (Adaptada para o \"nosso personagem homem\" atuando no TOM definido na Etapa 1. Ex: \"O nosso personagem homem, em tom sério e técnico, aponta animadamente para um 'nariz eletrônico' que cheira uma fruta podre.\").\n\ndirecao_camera: (Usar termos técnicos: \"Dolly Zoom\", \"Tracking Shot\", \"Plano plongée (de cima para baixo)\", \"Close-up extremo\").\n\niluminacao_cena: (Ex: \"Luz neon vinda da esquerda\", \"Sombra dramática (low-key)\", \"Luz natural de janela\").\n\ntipo_de_corte: (O corte para esta cena. Ex: \"Jump-Cut Rápido\", \"Fade-in Lento\", \"Match Cut\").\n\nETAPA 4: AUTO-CORREÇÃO INTERNA (O \"Loop\" do QA)\n\nAntes de prosseguir, você deve auditar o roteiro que acabou de criar na Etapa 3.\n\nVerificação 1 (Duração): O dialogo_pt_br total excede 30 palavras? (Se sim, encurte-o agora).\n\nVerificação 2 (Lógica Viral): O prompt_trilha_sonora está correto (baseado na CHAVE_VIRAL)?\n\nVerificação 3 (Complexidade): A acao_visual de alguma cena é complexa demais (ex: 3 ações ao mesmo tempo)? (Se sim, simplifique-a agora).\n\nVerificação 4 (Personagem): A acao_visual e o tom_de_voz respeitam o TOM definido na Etapa 1? (Se não, ajuste).\n\nETAPA 5: MONTAGEM FINAL (O Pacote de Saída JSON) Após o roteiro passar pela Auto-Correção, monte o JSON de saída final.\n\nAÇÃO 5.A: Criar o PROMPT_FRAME_0 (Para a Ferramenta de Imagem)\n\nDecida se o Frame 0 é a Cena 1 ou um Title Card (personagem ao lado de texto 3D).\n\nGere o prompt técnico para a IA de Imagem:\n\nExemplo de PROMPT_FRAME_0 (Técnico):\n\n\"Prompt de Imagem (UHD, 8K, Fotorealista): Instruções para a IA de Imagem:\n\nFoto-Base: Use a foto de referência fornecida do 'personagem homem' (o \"dono\").\n\nManter Identidade: Preserve 100% da identidade facial da foto-base.\n\nAdaptar (Cenário/Estilo): [Descreva a acao_visual da Cena 1. Ex: \"Coloque o personagem em um 'laboratório', vestido com 'jaleco', 'cabelo bagunçado' e 'óculos de proteção na testa'.\"]\n\nAdaptar (Tom/Expressão): [Descreva a expressão. Ex: \"A expressão facial deve ser cômica e exagerada.\"]\n\nIluminação: [Descreva a iluminacao_cena da Cena 1. Ex: \"Iluminação cinematográfica, luz verde neon vindo da esquerda.\"]\n\nElementos Adicionais: [Opcional. Ex: \"Adicionar um logotipo sutil da 'Inovare' no monitor ao fundo.\"]\n\nNegative Prompt: \"Negative Prompt: evitar texto ilegível, evitar logos de marcas (exceto o solicitado), evitar rostos desfocados, evitar mãos deformadas.\"\n\nAÇÃO 5.B: Criar o PROMPT_VIDEO_COMPLETO (Para a Ferramenta VEO 3)\n\nGere o prompt de vídeo intercalando os 8 componentes da Etapa 3.\n\nINSTRUÇÃO CRÍTICA: O prompt DEVE começar informando à IA que ela usará a imagem do PROMPT_FRAME_0 como ponto de partida.\n\nExemplo de PROMPT_VIDEO_COMPLETO (Técnico):\n\n\"[INSTRUÇÃO DE INÍCIO: Comece animando a imagem de referência fornecida (criada a partir do PROMPT_FRAME_0). A Cena 1 é a animação desta imagem.]\" \"[Corte para Cena 1: (instrução da Etapa 3, cena_1.tipo_de_corte)]\" \"[Música de fundo: (instrução da Etapa 3, cena_1.prompt_trilha_sonora)]\" \"[Iluminação: (instrução da Etapa 3, cena_1.iluminacao_cena)]\" \"[Cena 1 - Visual: (instrução da Etapa 3, cena_1.acao_visual). Câmera: (instrução da Etapa 3, cena_1.direcao_camera)]\" \"[Cena 1 - Áudio/Voz (Tom: (instrução da Etapa 3, cena_1.tom_de_voz)): (instrução da Etapa 3, cena_1.dialogo_pt_br)]\" \"[Cena 1 - Áudio/SFX: (instrução da Etapa 3, cena_1.prompt_sfx)]\" \"\" \"[Corte para Cena 2: (instrução da Etapa 3, cena_2.tipo_de_corte)]\" \"[Música de fundo: (instrução da Etapa 3, cena_2.prompt_trilha_sonora)]\" \"[Iluminação: (instrução da Etapa 3, cena_2.iluminacao_cena)]\" \"[Cena 2 - Visual: (instrução da Etapa 3, cena_2.acao_visual). Câmera: (instrução da Etpa 3, cena_2.direcao_camera)]\" \"[Cena 2 - Áudio/Voz (Tom: (instrução da Etapa 3, cena_2.tom_de_voz)): (instrução da Etapa 3, cena_2.dialogo_pt_br)]\" \"[Cena 2 - Áudio/SFX: (instrução da Etapa 3, cena_2.prompt_sfx)]\" \"(Continue para todas as cenas...)\"\n\nAÇÃO 5.C: Saída Final OBRIGATÓRIA (JSON Estruturado)\n\nSua única saída para o Agente Principal deve ser este JSON:\n\nJSON\n\n{\n  \"status\": \"APROVADO\",\n  \"analise_interna\": {\n    \"tom_identificado\": \"[TOM da Etapa 1]\",\n    \"gancho_identificado\": \"[GANCHO da Etapa 1]\",\n    \"ritmo_identificado\": \"[RITMO da Etapa 1]\",\n    \"chave_viral\": \"[CHAVE_VIRAL da Etapa 1]\"\n  },\n  \"prompt_frame_0\": \"[O PROMPT_FRAME_0 que você criou na Ação 5.A]\",\n  \"prompt_video_completo\": \"[O PROMPT_VIDEO_COMPLETO que você montou na Ação 5.B]\"\n}",
+    "videoUrls": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL_s_', ``, 'string') }}",
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.googleGeminiTool",
+   "typeVersion": 1,
+   "position": [
+    368,
+    512
+   ],
+   "id": "b8b3f27c-44d2-4f47-9ac1-55828dfd2bd3",
+   "name": "assite video1",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "H7M9faZrMKxj36dE",
+     "name": "922-inovarecap"
+    }
+   }
+  },
+  {
+   "parameters": {},
+   "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+   "typeVersion": 1.3,
+   "position": [
+    1280,
+    -192
+   ],
+   "id": "619f55af-770a-45ff-a64e-9668ac196573",
+   "name": "memoria",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "tempo programado": [
+   {
+    "json": {
+     "timestamp": "2025-10-28T13:50:35.004-03:00",
+     "Readable date": "October 28th 2025, 1:50:35 pm",
+     "Readable time": "1:50:35 pm",
+     "Day of week": "Tuesday",
+     "Year": "2025",
+     "Month": "October",
+     "Day of month": "28",
+     "Hour": "13",
+     "Minute": "50",
+     "Second": "35",
+     "Timezone": "America/Sao_Paulo (UTC-03:00)"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "tempo programado": {
+   "main": [
+    [
+     {
+      "node": "mensagem do sistema",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "juncao de informacoes": {
+   "main": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "tema personalizado": {
+   "main": [
+    [
+     {
+      "node": "se e cliente ou teste",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini 2": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "videos gerados": {
+   "ai_memory": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_memory",
+      "index": 0
+     },
+     {
+      "node": "Amnésia",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "metricas": {
+   "ai_tool": [
+    [
+     {
+      "node": "estatisticas_canais",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "estatisticas_canais": {
+   "ai_tool": [
+    []
+   ]
+  },
+  "SerpAPI": {
+   "ai_tool": [
+    [
+     {
+      "node": "pesquisa de Tendências",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gerador de Ideias Estratégicas": {
+   "ai_tool": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Roteirista de Impacto": {
+   "ai_tool": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Verificador de Conformidade de Geração (IA)": {
+   "ai_tool": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Diretor Visual": {
+   "ai_tool": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini1": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "estatisticas_canais",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini2": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "pesquisa de Tendências",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "estatisticas_canais",
+      "type": "ai_languageModel",
+      "index": 1
+     },
+     {
+      "node": "analise de videos em alta",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "gemini3": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Gerador de Ideias Estratégicas",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "pesquisa de Tendências",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "gemini4": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Roteirista de Impacto",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "Gerador de Ideias Estratégicas",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "gemini5": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Diretor Visual",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "Roteirista de Impacto",
+      "type": "ai_languageModel",
+      "index": 1
+     },
+     {
+      "node": "Verificador de Conformidade de Geração (IA)",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "gemini6": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Verificador de Conformidade de Geração (IA)",
+      "type": "ai_languageModel",
+      "index": 0
+     },
+     {
+      "node": "Diretor Visual",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "videos anteriores": {
+   "ai_memory": [
+    [
+     {
+      "node": "estatisticas_canais",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "videos anteriores1": {
+   "ai_memory": [
+    [
+     {
+      "node": "pesquisa de Tendências",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "videos anteriores2": {
+   "ai_memory": [
+    [
+     {
+      "node": "Gerador de Ideias Estratégicas",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "videos anteriores5": {
+   "ai_memory": [
+    [
+     {
+      "node": "Roteirista de Impacto",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "videos anteriores3": {
+   "ai_memory": [
+    [
+     {
+      "node": "Diretor Visual",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "videos anteriores4": {
+   "ai_memory": [
+    [
+     {
+      "node": "Verificador de Conformidade de Geração (IA)",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cineasta IA": {
+   "main": [
+    [
+     {
+      "node": "If",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Redis1": {
+   "main": [
+    [
+     {
+      "node": "troca de canal",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "troca de canal": {
+   "main": [
+    [
+     {
+      "node": "Redis",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "juncao de informacoes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "If1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If": {
+   "main": [
+    [
+     {
+      "node": "correcao",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "If1": {
+   "main": [
+    [
+     {
+      "node": "passa rabit",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "mensagem do sistema",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "correcao": {
+   "main": [
+    [
+     {
+      "node": "mensagem do sistema",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "mensagem do sistema": {
+   "main": [
+    [
+     {
+      "node": "Redis1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "passa rabit": {
+   "main": [
+    [
+     {
+      "node": "RabbitMQ1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pega_miniatura_e_estatisticas": {
+   "ai_tool": [
+    [
+     {
+      "node": "video e estatisticas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pesuisa_videos_no_youtube1": {
+   "ai_tool": [
+    [
+     {
+      "node": "video e estatisticas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pesuisa_videos_no_youtube": {
+   "ai_tool": [
+    [
+     {
+      "node": "analise de videos em alta",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pega_miniatura_e_estatisticas1": {
+   "ai_tool": [
+    [
+     {
+      "node": "analise de videos em alta",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "analise de videos em alta": {
+   "ai_tool": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pesquisa de Tendências": {
+   "ai_tool": [
+    [
+     {
+      "node": "Cineasta IA",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "passa rabit1": {
+   "main": [
+    [
+     {
+      "node": "RabbitMQ",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "video e estatisticas": {
+   "main": [
+    [
+     {
+      "node": "passa rabit1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "se e cliente ou teste": {
+   "main": [
+    [
+     {
+      "node": "video e estatisticas",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "juncao de informacoes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini7": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "video e estatisticas",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "assite video": {
+   "ai_tool": [
+    [
+     {
+      "node": "video e estatisticas",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "gemini8": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "analise de videos em alta",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "assite video1": {
+   "ai_tool": [
+    [
+     {
+      "node": "analise de videos em alta",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "memoria": {
+   "ai_memory": [
+    [
+     {
+      "node": "video e estatisticas",
+      "type": "ai_memory",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "cc9ff75c-c1a3-4047-8b0b-e3bc108cab86",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "pPXaZUGqhe4CJUYZ",
+ "tags": []
+}

@@ -1,0 +1,23 @@
+{
+  "gcloud_cli": false,
+  "sample_function": "D:\\projetos-navegador\\cloud-run\\sample-function",
+  "sample_cloudrun": "D:\\projetos-navegador\\cloud-run\\sample-cloudrun",
+  "accounts": {
+    "fabrica": {
+      "dry_run": true
+    },
+    "mundosolar1995": {
+      "dry_run": true
+    },
+    "canalalucinaai": {
+      "dry_run": true
+    },
+    "seebotsia": {
+      "dry_run": true
+    },
+    "emersonjosiel649": {
+      "dry_run": true
+    }
+  },
+  "last_run": "2026-07-02T16:19:41.678990+00:00"
+}

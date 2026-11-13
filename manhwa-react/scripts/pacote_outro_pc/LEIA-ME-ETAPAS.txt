@@ -1,0 +1,34 @@
+VIDEOS DOS 2 PCs NO MESMO GOOGLE DRIVE (atualizacao de 16/10)
+==============================================================
+O que muda NESTE PC: todo dia (04:50) o que ele ja postou no YouTube ha mais de 3 dias vai para o
+Google Drive comum, na pasta do projeto e da etapa, e sai do disco daqui (so depois de o rclone
+conferir tamanho + md5 no Drive). O PC principal pega esses videos para o TikTok/Instagram quando
+acabarem os dele. A postagem no YouTube daqui continua igual.
+
+Como fica o Drive (manhwa-drive:videos-backup):
+  <projeto>/1_youtube/<canal>/      ja saiu no YouTube (esperando TikTok)
+  <projeto>/2_tiktok/<canal>/       ja saiu tambem no TikTok
+  <projeto>/3_instagram/<canal>/    ja saiu tambem no Instagram
+  <projeto>/brutos/                 Veo cru;  manhwa-react/_copias_rede/  copias com o @ do canal
+  _registro/<nome-do-pc>.jsonl      cada PC anota o que postou onde (so no arquivo dele)
+O TikTok e o Instagram continuam SO no PC principal (os logins estao la): ele muda o video de pasta
+quando posta. Rede nova (ex.: Kwai): so no PC principal (config\etapas.json).
+
+INSTALAR (uma vez)
+1. Baixe os 3 arquivos desta pasta do Drive para uma pasta qualquer (ex.: Downloads\etapas).
+2. Na pasta, abra o PowerShell e rode:
+       powershell -ExecutionPolicy Bypass -File INSTALAR-ETAPAS.ps1
+   Ele: guarda uma copia (.bkp_<data>) de cada arquivo que troca; poe no lugar
+     D:\postador-de-videos\bin\etapas.py e catalogo.py, D:\postador-de-videos\config\etapas.json,
+     D:\manhwa-react\scripts\backup_drive.py e .bat, D:\tools\rclone.exe, D:\rodar_oculto.vbs;
+   liga o rclone no mesmo Drive (remoto manhwa-drive: abre o navegador para voce entrar na conta
+   Google do Drive de backup, a mesma do PC principal; se der erro 400, abra antes uma janela
+   anonima do Chrome), testa, mostra o que o backup faria
+   (--simular, nao mexe em nada) e agenda a tarefa BackupDriveVideos (todo dia 04:50).
+3. Para mandar ja (sem esperar a tarefa):
+       D:\manhwa-react\scripts\backup_drive.bat
+   O resultado fica em D:\manhwa-react\logs\backup_drive.log
+
+Se este PC atualizar o postador ou o manhwa-react depois: manter etapas.py, catalogo.py,
+config\etapas.json e scripts\backup_drive.py desta versao (ou mais nova), senao o backup volta a
+mandar para as pastas antigas.

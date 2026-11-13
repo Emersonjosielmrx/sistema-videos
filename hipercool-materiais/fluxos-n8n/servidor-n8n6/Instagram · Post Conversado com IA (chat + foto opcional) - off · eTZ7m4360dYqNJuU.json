@@ -1,0 +1,4578 @@
+{
+ "updatedAt": "2026-10-14T01:03:51.913Z",
+ "createdAt": "2026-10-14T00:01:43.720Z",
+ "id": "eTZ7m4360dYqNJuU",
+ "name": "Instagram · Post Conversado com IA (chat + foto opcional) - off",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "public": true,
+    "initialMessages": "Oi! Eu sou a Lia, produtora de posts 📸\nMe conta: qual post você quer criar para o Instagram? Se quiser, anexe uma foto (do produto, do lugar, sua) que eu uso como base.",
+    "options": {
+     "allowFileUploads": true,
+     "allowedFilesMimeTypes": "image/*",
+     "inputPlaceholder": "Descreva o post ou anexe uma foto…",
+     "subtitle": "Converse, aprove e publique",
+     "title": "Post com IA",
+     "responseMode": "streaming"
+    }
+   },
+   "name": "Chat do criador",
+   "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+   "typeVersion": 1.4,
+   "position": [
+    0,
+    416
+   ],
+   "id": "49f753bb-84a2-4839-a8c5-6b244cea9d0d",
+   "webhookId": "ee2611a1-c496-4d79-ba65-28683539e72d"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Se a pessoa anexou uma imagem no chat, guardamos em texto (base64) para a produção usar depois\nconst ent = $input.first();\nconst bin = ent.binary || {};\nconst chave = Object.keys(bin).find(k => String(bin[k].mimeType || '').startsWith('image/'));\nlet b64 = '', mime = '';\nif (chave) {\n  const buf = await this.helpers.getBinaryDataBuffer(0, chave);\n  if (buf.length <= 8 * 1024 * 1024) { b64 = buf.toString('base64'); mime = bin[chave].mimeType; }\n}\nreturn [{ json: { sessionId: String(ent.json.sessionId || ''), chatInput: String(ent.json.chatInput || '').slice(0, 3000), foto: b64, mime } }];"
+   },
+   "name": "Guarda a foto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    240,
+    416
+   ],
+   "id": "b57069bf-6a7e-4407-9a68-7fa3cd611205"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "={{ $json.foto ? 'post:foto:' + $json.sessionId : 'post:foto:descartavel' }}",
+    "value": "={{ JSON.stringify({ mime: $json.mime, b64: $json.foto }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 86400
+   },
+   "name": "Salva a foto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    480,
+    416
+   ],
+   "id": "db574c51-ba71-451e-a39c-7e624e9b83d3",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "={{ $('Guarda a foto').first().json.foto ? 'post:foto-ok:' + $('Guarda a foto').first().json.sessionId : 'post:foto-ok:descartavel' }}",
+    "value": "1",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 86400
+   },
+   "name": "Marca que tem foto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    720,
+    416
+   ],
+   "id": "f7a78d5b-24e8-4bb3-a954-7e0c43bfe655",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "tem",
+    "key": "=post:foto-ok:{{ $('Guarda a foto').first().json.sessionId }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê se tem foto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    960,
+    416
+   ],
+   "id": "d9f92db5-d4ad-4fdd-924c-6a6987160727",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "historico",
+    "key": "=post:chat:{{ $('Guarda a foto').first().json.sessionId }}",
+    "keyType": "list",
+    "options": {}
+   },
+   "name": "Lê histórico do chat",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1200,
+    416
+   ],
+   "id": "1a75c221-ba78-40ab-a068-b963f2867643",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Memória feita à mão: últimas 14 mensagens + aviso se existe foto nesta conversa\nconst atual = $('Guarda a foto').first().json;\nlet hist = $('Lê histórico do chat').first().json.historico;\nif (!Array.isArray(hist)) hist = hist ? [hist] : [];\nconst temFotoAntes = !!$('Lê se tem foto').first().json.tem;\nconst linhas = hist.slice(-14).map(s => { try { const m = JSON.parse(s); return (m.quem === 'cliente' ? 'Cliente: ' : 'Produtora: ') + m.texto; } catch (e) { return ''; } }).filter(Boolean);\nconst foto = atual.foto ? 'FOTO: o cliente ACABOU DE ENVIAR uma foto nesta mensagem.' : temFotoAntes ? 'FOTO: o cliente já enviou uma foto antes nesta conversa.' : 'FOTO: nenhuma foto enviada.';\nconst prompt = (linhas.length ? 'CONVERSA ATÉ AGORA:\\n' + linhas.join('\\n') + '\\n\\n' : '') + foto + '\\n\\nNOVA MENSAGEM DO CLIENTE:\\n' + (atual.chatInput || '(enviou só a foto)');\nreturn [{ json: { prompt } }];"
+   },
+   "name": "Monta o contexto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1440,
+    416
+   ],
+   "id": "5101c695-3953-47ca-a5f8-34087a029cd4"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ $json.prompt }}",
+    "options": {
+     "systemMessage": "Você é a Lia, PRODUTORA DE POSTS para Instagram. Você conversa com o cliente para entender o post e depois aciona a equipe de criação.\n\nO QUE DESCOBRIR (pergunte só o que faltar, no máximo 2 perguntas por mensagem, de forma leve)\n1. Objetivo do post (vender, divulgar promoção, ensinar, engajar, institucional).\n2. Tema ou produto e a mensagem principal.\n3. Público.\n4. Estilo visual da imagem (ex.: foto realista, ilustração, minimalista, colorido) e cores.\n5. Tom da legenda e o @ do perfil.\n6. Se houver FOTO: pergunte se quer **usar a foto como imagem do post** (modo \"usar\") ou **criar uma imagem nova inspirada nela** (modo \"inspirar\"). Sem foto, o modo é \"nenhuma\".\n\nQUANDO TIVER TUDO\n- Mostre um resumo curto e pergunte \"Posso criar?\".\n- Com o sim do cliente, chame a ferramenta criar_post UMA vez, com um briefing completo (objetivo, tema, mensagem, público, estilo visual, cores, tom, chamada final), o modo da foto e o @ do perfil.\n- Depois, envie o link de aprovação que a ferramenta devolver e explique que em cerca de 2 minutos o post aparece lá para revisar e publicar.\n- Se o cliente pedir ajustes depois, crie de novo com o briefing ajustado.\n\nREGRAS: mensagens curtas, simpáticas, no máximo 2 emojis. Nunca invente o link.\n- IMPORTANTE: não escreva nada antes de usar as ferramentas. Use todas as ferramentas necessárias primeiro, em silêncio, e só então escreva UMA única resposta final, completa, com os resultados.",
+     "maxIterations": 5,
+     "enableStreaming": true
+    },
+    "needsFallback": true
+   },
+   "name": "Lia · produtora de posts",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1712,
+    416
+   ],
+   "id": "558eecaa-00c8-466a-aeec-ea2fd8325b7e",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 3000
+  },
+  {
+   "parameters": {
+    "model": "kr/claude-haiku-4.5",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 3000,
+     "temperature": 0.6,
+     "timeout": 180000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro da Lia",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1648,
+    656
+   ],
+   "id": "2ecdba05-e33c-4eee-804e-cdfe547742d5",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "toolDescription": "Envia o briefing aprovado para a equipe de criação (diretora de arte, copywriter e IA de imagem). Devolve o link da página de aprovação.",
+    "method": "POST",
+    "url": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/post-ia-produzir",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ sessao: $('Guarda a foto').first().json.sessionId, briefing: $fromAI('briefing', 'Briefing completo do post: objetivo, tema, mensagem, público, estilo visual, cores, tom e chamada final', 'string'), modo_foto: $fromAI('modo_foto', 'nenhuma, usar ou inspirar', 'string'), perfil: $fromAI('perfil', '@ do perfil do Instagram', 'string') }) }}",
+    "options": {
+     "timeout": 30000
+    }
+   },
+   "name": "criar_post",
+   "type": "n8n-nodes-base.httpRequestTool",
+   "typeVersion": 4.2,
+   "position": [
+    1888,
+    656
+   ],
+   "id": "c9c6f768-8543-41e5-9d0c-72271190ffa3"
+  },
+  {
+   "parameters": {
+    "jsCode": "const ent = $('Guarda a foto').first().json;\nconst resp = String($input.first().json.output || '').trim();\nconst msgs = [{ quem: 'cliente', texto: (ent.chatInput || '(enviou uma foto)').slice(0, 2000) }];\nif (resp) msgs.push({ quem: 'lia', texto: resp.slice(0, 3000) });\nreturn msgs.map(m => ({ json: { msg: JSON.stringify(m) } }));"
+   },
+   "name": "Registra a conversa",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2000,
+    416
+   ],
+   "id": "2110eb70-23a5-4d44-82c5-d3d56eb7a081"
+  },
+  {
+   "parameters": {
+    "operation": "push",
+    "list": "=post:chat:{{ $('Guarda a foto').first().json.sessionId }}",
+    "messageData": "={{ $json.msg }}",
+    "tail": true
+   },
+   "name": "Grava o histórico",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2240,
+    416
+   ],
+   "id": "7262a5a7-baea-4728-85e8-ba7eb482d896",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "post-ia-produzir",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Pedido de produção (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1776
+   ],
+   "id": "da270642-78d6-4d5a-a6a0-4d052feb1bf9",
+   "webhookId": "a8227063-b179-45b3-83f8-d3688ab4a8f9"
+  },
+  {
+   "parameters": {
+    "jsCode": "let b = $('Pedido de produção (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst req = $('Pedido de produção (POST)').first().json;\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u0008\\u000b-\\u001f\\u007f]/g, ' ').trim().slice(0, max);\nconst sessao = limpa(b.sessao, 80).replace(/[^\\w-]/g, '');\nconst briefing = limpa(b.briefing, 3000);\nconst modo = ['usar', 'inspirar'].includes(String(b.modo_foto || '').toLowerCase()) ? String(b.modo_foto).toLowerCase() : 'nenhuma';\nconst perfil = limpa(b.perfil, 30).replace(/^@+/, '').replace(/[^\\w.]/g, '');\nconst erros = [];\nif (!sessao) erros.push('Sessão do chat ausente.');\nif (briefing.length < 20) erros.push('Briefing muito curto: converse mais com o cliente antes de criar.');\nconst rnd = n => Array.from({ length: n }, () => 'abcdefghijkmnpqrstuvwxyz23456789'[Math.floor(Math.random() * 32)]).join('');\nconst id = 'pst-' + Date.now().toString(36) + rnd(4), k = rnd(18);\nconst base = String(req.webhookUrl || '').split('/webhook/')[0] || 'https://webhookn8n6.inovareinteligenciaartificial.com';\nreturn [{ json: { valido: erros.length === 0, erros, id, k, sessao, briefing, modo, perfil, base,\n  link: `${base}/webhook/post-ia-ver?id=${id}&k=${k}`, criadoEm: new Date().toISOString() } }];"
+   },
+   "name": "Valida pedido do post",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    256,
+    1776
+   ],
+   "id": "e8eb04ce-f852-4b29-a50d-213370dac48e"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "f7c15018-442d-4d9e-9d24-17122162642f",
+       "leftValue": "={{ $json.valido }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Pedido completo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    512,
+    1776
+   ],
+   "id": "4123fa1f-5575-4fd4-a620-e671104393a9"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erros.join(' ') }) }}",
+    "options": {
+     "responseCode": 400,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde recusa",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    752,
+    1984
+   ],
+   "id": "b817ced7-0fd7-4616-a4c2-94534e4f8d21"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=post:rasc:{{ $('Valida pedido do post').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Valida pedido do post').first().json.id, k: $('Valida pedido do post').first().json.k, status: 'gerando', perfil: $('Valida pedido do post').first().json.perfil, criadoEm: $('Valida pedido do post').first().json.criadoEm }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Rascunho: gerando",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    752,
+    1776
+   ],
+   "id": "b3c39eb7-cc2f-4c98-9d25-7c5d4b0c666b",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, link: $('Valida pedido do post').first().json.link, aviso: 'O post fica pronto em cerca de 2 minutos nesse link.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde ao chat",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1008,
+    1776
+   ],
+   "id": "414b0135-8928-4342-acd4-296054c3a5d0"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "foto",
+    "key": "=post:foto:{{ $('Valida pedido do post').first().json.sessao }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê a foto",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1264,
+    1776
+   ],
+   "id": "288fbefe-910e-46c4-b275-6f360920e75a",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Decide o modo real: se pediu foto mas não há foto guardada, gera do zero\nconst v = $('Valida pedido do post').first().json;\nlet foto = null;\ntry { foto = JSON.parse($input.first().json.foto || 'null'); } catch (e) {}\nconst temFoto = !!(foto && foto.b64 && foto.b64.length > 100);\nconst modo = temFoto ? v.modo : 'nenhuma';\nreturn [{ json: { modo, temFoto, mime: temFoto ? foto.mime : '', dataUrl: modo === 'inspirar' ? `data:${foto.mime || 'image/jpeg'};base64,${foto.b64}` : '' } }];"
+   },
+   "name": "Prepara a foto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1504,
+    1776
+   ],
+   "id": "cee3e0c8-58c5-4249-9f5a-ca4d8d854f92"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "3d768969-1207-480e-bf06-edaef3947efa",
+       "leftValue": "={{ $json.modo === 'inspirar' }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Inspirar na foto?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1760,
+    1776
+   ],
+   "id": "39634d37-a6a0-4e89-8505-dcf7d78d7ddf"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', stream: false, max_tokens: 600, messages: [{ role: 'user', content: [{ type: 'text', text: 'Descreva esta foto para uma diretora de arte recriar uma imagem parecida: o que aparece (produto, pessoas, lugar), cores principais, luz, estilo e composição. Seja objetiva, em até 6 frases.' }, { type: 'image_url', image_url: { url: $json.dataUrl } }] }] }) }}",
+    "options": {
+     "timeout": 120000
+    },
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi"
+   },
+   "name": "IA de visão descreve a foto",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    2000,
+    1584
+   ],
+   "id": "90fbea61-0483-45a5-9029-cb44bfdc5ee4",
+   "onError": "continueRegularOutput",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'BRIEFING:\\n' + $('Valida pedido do post').first().json.briefing + '\\n\\nMODO DA FOTO: ' + $('Prepara a foto').first().json.modo + ($('IA de visão descreve a foto').isExecuted ? '\\n\\nDESCRIÇÃO DA FOTO DE REFERÊNCIA:\\n' + (($('IA de visão descreve a foto').first().json.choices || [{}])[0].message || {}).content : '') }}",
+    "options": {
+     "systemMessage": "Você é a DIRETORA DE ARTE de posts para Instagram. Transforme o briefing em instruções para uma IA de imagem.\n\nREGRAS\n- prompt_imagem em INGLÊS, detalhado (assunto, cenário, luz, câmera ou técnica, cores, clima), formato vertical 4:5, composição com espaço livre na parte de baixo.\n- A imagem NÃO pode ter texto, letras, logos ou marcas d'água: escreva isso no prompt (\"no text, no letters, no logos\").\n- Se houver descrição de uma foto de referência, mantenha o mesmo produto ou cenário, cores e clima.\n- faixa_titulo: chamada curta em português, de até 40 caracteres, para a faixa sobre a imagem (ou \"\" se o post não pedir texto). Se o cliente pediu um texto exato para a faixa, use exatamente esse texto.\n- Seja FIEL à oferta do briefing: nunca invente nem altere preço, desconto, promoção ou condição (ex.: \"segundo café pela metade\" não vira \"café em dobro\").\n- cor_faixa: uma cor HEX escura que combine com a imagem.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"prompt_imagem\":\"\",\"faixa_titulo\":\"\",\"cor_faixa\":\"#\"}"
+    },
+    "needsFallback": true
+   },
+   "name": "Diretora de arte",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    2256,
+    1776
+   ],
+   "id": "35a8798e-ba34-415a-b35b-86ab4ba7f4ca",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 2000,
+     "temperature": 0.7,
+     "timeout": 240000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro da diretora",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2304,
+    2016
+   ],
+   "id": "60743f10-27cd-47d6-8d70-93a24ea0877c",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'BRIEFING:\\n' + $('Valida pedido do post').first().json.briefing + '\\n\\nPERFIL: @' + $('Valida pedido do post').first().json.perfil }}",
+    "options": {
+     "systemMessage": "Você é COPYWRITER de Instagram. Escreva o texto do post a partir do briefing.\n\nREGRAS\n- Português do Brasil com acentuação correta, no tom pedido.\n- Seja FIEL à oferta: copie preços, descontos, datas e condições exatamente como estão no briefing. Nunca invente benefícios.\n- titulo: frase curta que resume o post (até 60 caracteres).\n- legenda: de 400 a 1000 caracteres. Primeira linha é um gancho forte; depois o valor ou a oferta; termine com uma chamada clara (comentar, salvar, chamar no direct ou clicar no link da bio). Pode usar até 4 emojis.\n- hashtags: de 5 a 10, sem o símbolo #.\n- alt_text: descrição da imagem para acessibilidade (até 200 caracteres).\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"titulo\":\"\",\"legenda\":\"\",\"hashtags\":[\"\"],\"alt_text\":\"\"}"
+    },
+    "needsFallback": true
+   },
+   "name": "Copywriter do post",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    2560,
+    1776
+   ],
+   "id": "b018fa3b-dec0-47df-8ecc-5ba0b8c9dcc1",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 2500,
+     "temperature": 0.8,
+     "timeout": 240000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro do copywriter",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2608,
+    2016
+   ],
+   "id": "2cd6dfbe-045a-4937-a9ae-255c9614a9d5",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst arte = parseJSON($('Diretora de arte').first().json.output ?? '') || {};\nconst base = String(arte.prompt_imagem || $('Valida pedido do post').first().json.briefing).slice(0, 1800);\nreturn [{ json: { modo: $('Prepara a foto').first().json.modo, prompt: base + ' Vertical 4:5 composition. No text, no letters, no logos, no watermark.' } }];"
+   },
+   "name": "Prepara o pedido de imagem",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2880,
+    1776
+   ],
+   "id": "2b635858-9482-496a-950c-e3aeecb66a24"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "0c3fb7f2-f826-44bd-a7f3-c10e54334b1d",
+       "leftValue": "={{ $json.modo === 'usar' }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Usar a foto do cliente?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    3120,
+    1776
+   ],
+   "id": "72413e77-0977-4566-82cb-71bb4a9ba538"
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/images/generations",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3.1-flash-image', n: 1, prompt: $json.prompt }) }}",
+    "options": {
+     "timeout": 240000
+    },
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi"
+   },
+   "name": "Gera a imagem",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    3376,
+    1984
+   ],
+   "id": "988ba5ea-8dd0-4e1b-b2ea-a981d1511749",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueRegularOutput",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Junta a imagem (foto real ou gerada pela IA) e calcula o enquadramento \"cover\" em 1080×1350\nconst p = $('Prepara a foto').first().json;\nconst arte = parseJSON($('Diretora de arte').first().json.output ?? '') || {};\nlet b64 = '';\nif (p.modo === 'usar') {\n  try { b64 = JSON.parse($('Lê a foto').first().json.foto).b64; } catch (e) {}\n} else {\n  const r = $('Gera a imagem').first().json;\n  b64 = (r.data && r.data[0] && r.data[0].b64_json) || '';\n}\nif (!b64) return [{ json: { ok: false, erro: 'A IA de imagem não devolveu imagem.' } }];\nconst buf = Buffer.from(b64, 'base64');\nfunction dims(x) {\n  if (x[0] === 0x89 && x[1] === 0x50) return { w: x.readUInt32BE(16), h: x.readUInt32BE(20) };\n  if (x[0] === 0xFF && x[1] === 0xD8) {\n    let i = 2;\n    while (i < x.length - 9) {\n      if (x[i] !== 0xFF) { i++; continue; }\n      const m = x[i + 1];\n      if ([0xC0, 0xC1, 0xC2].includes(m)) return { h: x.readUInt16BE(i + 5), w: x.readUInt16BE(i + 7) };\n      i += 2 + x.readUInt16BE(i + 2);\n    }\n  }\n  return null;\n}\nconst d = dims(buf) || { w: 1024, h: 1024 };\nconst W = 1080, H = 1350, esc = Math.max(W / d.w, H / d.h);\nconst rw = Math.ceil(d.w * esc), rh = Math.ceil(d.h * esc);\nconst faixa = String(arte.faixa_titulo || '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}]/gu, '').replace(/\"/g, '”').replace(/'/g, '’').trim().slice(0, 42);\nconst cor = /^#[0-9a-f]{6}$/i.test(arte.cor_faixa || '') ? arte.cor_faixa : '#111111';\n// Fonte da faixa: diminui até o texto caber em 960 px (cada letra em negrito ocupa cerca de 0,72 do tamanho da fonte)\nconst fonteFaixa = faixa ? Math.max(30, Math.min(52, Math.floor(960 / (faixa.length * 0.72)))) : 52;\nreturn [{ json: { ok: true, w: d.w, h: d.h, rw, rh, cx: Math.floor((rw - W) / 2), cy: Math.floor((rh - H) / 2), faixa, cor, fonteFaixa,\n  faixaY: faixa ? 1160 : 1350, origem: p.modo === 'usar' ? 'foto do cliente' : 'gerada pela IA' },\n  binary: { data: { data: b64, mimeType: p.modo === 'usar' ? (p.mime || 'image/jpeg') : 'image/jpeg', fileName: 'base.jpg' } } }];"
+   },
+   "name": "Enquadra a imagem (cálculo)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    3664,
+    1776
+   ],
+   "id": "80d8b5dc-df9b-4308-bca6-d7ebb16af0f3"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "e291379e-b3bf-4007-b340-b72da7a5846c",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Tem imagem?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    3920,
+    1776
+   ],
+   "id": "8b8c7020-cce7-405e-8676-48442636fbe0"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=post:rasc:{{ $('Valida pedido do post').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Valida pedido do post').first().json.id, k: $('Valida pedido do post').first().json.k, status: 'erro_geracao', erro: $json.erro || 'Falha ao criar a imagem.' }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Rascunho: erro",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    4160,
+    2000
+   ],
+   "id": "0b2eaec1-8ec0-4f82-a589-8ef1cf768c36",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "multiStep",
+    "operations": {
+     "operations": [
+      {
+       "operation": "resize",
+       "width": "={{ $json.rw }}",
+       "height": "={{ $json.rh }}",
+       "resizeOption": "ignoreAspectRatio"
+      },
+      {
+       "operation": "crop",
+       "width": 1080,
+       "height": 1350,
+       "positionX": "={{ $json.cx }}",
+       "positionY": "={{ $json.cy }}"
+      },
+      {
+       "operation": "draw",
+       "color": "={{ $json.cor }}",
+       "startPositionX": 0,
+       "startPositionY": "={{ $json.faixaY }}",
+       "endPositionX": 1080,
+       "endPositionY": 1350
+      },
+      {
+       "operation": "text",
+       "text": "={{ $json.faixa || ' ' }}",
+       "fontSize": "={{ $json.fonteFaixa }}",
+       "fontColor": "#ffffff",
+       "positionX": 60,
+       "positionY": "={{ 1255 + Math.round($json.fonteFaixa * 0.35) }}",
+       "lineLength": 400,
+       "font": "/usr/share/fonts/truetype/msttcorefonts/Verdana_Bold.ttf"
+      }
+     ]
+    },
+    "options": {
+     "fileName": "post.jpg",
+     "format": "jpeg",
+     "quality": 90
+    }
+   },
+   "name": "Enquadra e aplica a faixa",
+   "type": "n8n-nodes-base.editImage",
+   "typeVersion": 1,
+   "position": [
+    4160,
+    1776
+   ],
+   "id": "01565523-3b0e-4067-9cda-39b08b4375b5"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O Edit Image entrega a imagem como arquivo; aqui viramos texto (base64) para guardar no Redis\nconst itens = $input.all();\nconst saida = [];\nfor (let i = 0; i < itens.length; i++) {\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  saida.push({ json: { n: itens[i].json.n, b64: buf.toString('base64'), kb: Math.round(buf.length / 1024) } });\n}\nreturn saida;"
+   },
+   "name": "Imagem do post em base64",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    4416,
+    1776
+   ],
+   "id": "eebe96fc-43e7-4f55-9dc1-69b14d9205dd"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=post:img:{{ $('Valida pedido do post').first().json.id }}",
+    "value": "={{ $json.b64 }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Guarda a imagem do post",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    4672,
+    1776
+   ],
+   "id": "7704bf3b-9c9b-4f55-ad93-1e89173310c3",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst v = $('Valida pedido do post').first().json;\nconst base = $('Enquadra a imagem (cálculo)').first().json;\nconst copy = parseJSON($('Copywriter do post').first().json.output ?? '') || {};\nconst arte = parseJSON($('Diretora de arte').first().json.output ?? '') || {};\nconst tags = (Array.isArray(copy.hashtags) ? copy.hashtags : []).map(t => '#' + String(t).replace(/[^\\p{L}\\p{N}_]/gu, '')).filter(t => t.length > 2).slice(0, 10);\nlet legenda = String(copy.legenda || '').trim().slice(0, 2000) || v.briefing.slice(0, 300);\nif (tags.length) legenda += '\\n\\n' + tags.join(' ');\nconst rascunho = {\n  id: v.id, k: v.k, status: 'aguardando', sessao: v.sessao, briefing: v.briefing, perfil: v.perfil,\n  titulo: String(copy.titulo || '').slice(0, 120), legenda, alt: String(copy.alt_text || '').slice(0, 300),\n  prompt_imagem: String(arte.prompt_imagem || '').slice(0, 1500), origem: base.origem, faixa: base.faixa,\n  url: `${v.base}/webhook/post-ia-img?id=${v.id}`, kb: $input.first().json.kb,\n  criadoEm: v.criadoEm, atualizadoEm: new Date().toISOString(),\n};\nreturn [{ json: { rascunho_str: JSON.stringify(rascunho) } }];"
+   },
+   "name": "Junta o rascunho do post",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    4912,
+    1776
+   ],
+   "id": "3a541b15-382d-4062-aeaa-403c2631a495"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=post:rasc:{{ $('Valida pedido do post').first().json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva o rascunho do post",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    5168,
+    1776
+   ],
+   "id": "8a11e326-1ebd-4cb4-951d-780651b325cc",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "post-ia-img",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Imagem do post (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    2608
+   ],
+   "id": "7149b8dc-a405-4bd2-b7dc-2816126a2e70",
+   "webhookId": "8cde8035-fa72-4e82-9f9a-af277a69bafc"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "img",
+    "key": "={{ /^pst-[a-z0-9]+$/.test($json.query.id || '') ? 'post:img:' + $json.query.id : 'post:img:invalida' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê a imagem do post",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    256,
+    2608
+   ],
+   "id": "655444f2-4483-4512-a036-49b9bfaf8393",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const b64 = $input.first().json.img;\nif (!b64) return [{ json: { achou: false } }];\nreturn [{ json: { achou: true }, binary: { data: { data: b64, mimeType: 'image/jpeg', fileName: 'slide.jpg', fileExtension: 'jpg' } } }];"
+   },
+   "name": "Vira arquivo JPEG",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    512,
+    2608
+   ],
+   "id": "be1686aa-df4f-4a72-9f3b-fc21e517e8a7"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2b501ae0-0f5d-4a99-abb5-17ac1634f7b5",
+       "leftValue": "={{ $json.achou }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Achou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    752,
+    2608
+   ],
+   "id": "0d5dd05f-fc74-4c08-a64c-1d6f4208d4b7"
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "image/jpeg"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=86400"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Entrega o JPEG do post",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1008,
+    2528
+   ],
+   "id": "336b3e99-c979-41b3-9518-1239d5318141"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "não encontrada",
+    "options": {
+     "responseCode": 404,
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Sem imagem",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1008,
+    2736
+   ],
+   "id": "0838ebe1-0e4c-45b8-91e2-072b6daff451"
+  },
+  {
+   "parameters": {
+    "path": "post-ia-ver",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Ver post (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    1408,
+    2608
+   ],
+   "id": "ba75c1b3-6e0c-4003-8c7c-f89cc7ec1eeb",
+   "webhookId": "71afa6cd-743e-430f-814c-a10b913ef08c"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "rascunho",
+    "key": "={{ /^pst-[a-z0-9]+$/.test($json.query.id || '') ? 'post:rasc:' + $json.query.id : 'post:rasc:invalido' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê o rascunho do post",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1664,
+    2608
+   ],
+   "id": "0fb6ebb5-c824-4fd6-877a-29e0d5395a6e",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const q = $('Ver post (GET)').first().json.query || {};\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst casca = (corpo, refresh) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">${refresh ? '<meta http-equiv=\"refresh\" content=\"6\">' : ''}<title>Aprovar post</title>\n<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#fafafa;color:#262626;padding:20px 14px 60px}.w{max-width:520px;margin:0 auto}\n.post{background:#fff;border:1px solid #dbdbdb;border-radius:12px;overflow:hidden}.post img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#eee}.leg{padding:12px 14px;font-size:14px;white-space:pre-wrap}\n.box{background:#fff;border:1px solid #dbdbdb;border-radius:12px;padding:16px;margin-top:14px}label{display:block;font-weight:600;font-size:13px;margin:10px 0 6px}textarea,input{width:100%;padding:11px;border:1px solid #dbdbdb;border-radius:10px;font:inherit;font-size:14px}textarea{min-height:160px}\n.bts{display:flex;gap:8px;margin-top:14px}.bt{flex:1;border:0;border-radius:10px;padding:13px;font:inherit;font-weight:700;cursor:pointer;background:#efefef}.bt.pub{background:#0095f6;color:#fff}.bt:disabled{opacity:.55}\n.msg{margin-top:12px;font-weight:600;font-size:14px}.ok{color:#2e9e5b}.er{color:#d03b3b}.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;background:#efefef}.mu{color:#8e8e8e;font-size:13px}\n.s{width:44px;height:44px;border:4px solid #efefef;border-top-color:#dd2a7b;border-radius:50%;margin:60px auto 16px;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}h1{font-size:20px;text-align:center}</style></head><body><div class=\"w\">${corpo}</div></body></html>`;\nif (!r || q.k !== r.k) return [{ json: { codigo: 404, html: casca('<h1 style=\"margin-top:60px\">Post não encontrado</h1>') } }];\nif (r.status === 'gerando') return [{ json: { codigo: 200, html: casca('<div class=\"s\"></div><h1>A equipe de IA está criando seu post</h1><p class=\"mu\" style=\"text-align:center\">Diretora de arte, copywriter e IA de imagem trabalhando. Esta página se atualiza sozinha (cerca de 2 minutos).</p>', true) } }];\nif (r.status === 'erro_geracao') return [{ json: { codigo: 500, html: casca(`<h1>Não foi possível criar o post</h1><p class=\"mu\" style=\"text-align:center\">${esc(r.erro)}</p>`) } }];\nconst ST = { aguardando: '📝 Aguardando aprovação', publicado: '✅ Publicado', erro: '⚠️ Falhou ao publicar', descartado: '🗑️ Descartado' };\nconst pode = ['aguardando', 'erro'].includes(r.status);\nconst corpo = `<p style=\"margin-bottom:10px\"><span class=\"tag\">${ST[r.status] || esc(r.status)}</span> <span class=\"mu\">imagem ${esc(r.origem)}</span>${r.permalink ? ` · <a href=\"${esc(r.permalink)}\" target=\"_blank\" rel=\"noopener\">ver no Instagram</a>` : ''}</p>\n${r.erro && r.status === 'erro' ? `<p class=\"msg er\">${esc(r.erro)}</p>` : ''}\n<div class=\"post\"><img src=\"${esc(r.url)}\" alt=\"${esc(r.alt)}\"><div class=\"leg\"><b>${esc(r.perfil || 'seu_perfil')}</b> ${esc(r.legenda)}</div></div>\n${pode ? `<div class=\"box\"><label for=\"leg\">Legenda (pode editar)</label><textarea id=\"leg\" maxlength=\"2200\">${esc(r.legenda)}</textarea>\n<label for=\"senha\">Senha de publicação</label><input id=\"senha\" type=\"password\" autocomplete=\"off\" placeholder=\"Só quem tem a senha publica\">\n<div class=\"bts\"><button class=\"bt pub\" data-a=\"publicar\" type=\"button\">🚀 Publicar agora</button><button class=\"bt\" data-a=\"descartar\" type=\"button\">🗑️ Descartar</button></div><p class=\"msg\" id=\"msg\" role=\"status\"></p></div>` : ''}\n<p class=\"mu\" style=\"margin-top:12px\">Para mudar a imagem, volte ao chat e peça um ajuste: a Produtora cria uma nova versão.</p>\n<script>document.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){var a=b.getAttribute('data-a'),m=document.getElementById('msg');\nif(a==='publicar'&&!confirm('Publicar agora no Instagram?'))return;document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=true;});m.className='msg';m.textContent=a==='publicar'?'Publicando…':'Salvando…';\nfetch('/webhook/post-ia-acao',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:${JSON.stringify(r.id)},k:${JSON.stringify(r.k)},acao:a,senha:document.getElementById('senha').value,legenda:document.getElementById('leg').value})})\n.then(function(x){return x.json();}).then(function(j){if(!j.ok){m.className='msg er';m.textContent=j.erro||'Não foi possível.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});return;}m.className='msg ok';m.textContent=j.mensagem||'Feito!';setTimeout(function(){location.reload();},1500);})\n.catch(function(){m.className='msg er';m.textContent='Falha de conexão.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});});});});</script>`;\nreturn [{ json: { codigo: 200, html: casca(corpo) } }];"
+   },
+   "name": "Monta a aprovação do post",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1904,
+    2608
+   ],
+   "id": "a5cb9c2b-cdb1-4af4-ab5b-b38401c32673"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseCode": "={{ $json.codigo }}",
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Entrega a aprovação do post",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2160,
+    2608
+   ],
+   "id": "3460807d-4146-4848-b595-2ad64a1ad5d8"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "post-ia-acao",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Ação no post (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    3344
+   ],
+   "id": "c1f2f5e9-ad09-4630-9477-5ed1fd8ac79e",
+   "webhookId": "3473bda8-521a-40a1-b685-953c95a90cbd"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "rascunho",
+    "key": "={{ /^pst-[a-z0-9]+$/.test(($json.body || {}).id || '') ? 'post:rasc:' + $json.body.id : 'post:rasc:invalido' }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê o rascunho da ação",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    256,
+    3344
+   ],
+   "id": "18c0971d-7272-4dd2-8fcc-cf1cec0b27bf",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// 🔐 Senha para publicar na conta do Instagram (troque aqui)\nconst SENHA = '<SEGREDO_REMOVIDO>';\nconst b = $('Ação no post (POST)').first().json.body || {};\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst nao = (erro, codigo = 400) => [{ json: { ok: false, erro, codigo } }];\nif (!r || b.k !== r.k) return nao('Post não encontrado.', 404);\nif (!['publicar', 'descartar'].includes(b.acao)) return nao('Ação inválida.');\nif (b.acao === 'publicar' && b.senha !== SENHA) return nao('Senha de publicação incorreta.', 403);\nif (r.status === 'publicado') return nao('Este post já foi publicado.');\nconst legenda = String(b.legenda ?? r.legenda).replace(/\\r/g, '').trim().slice(0, 2200) || r.legenda;\nconst novo = { ...r, legenda, erro: '', atualizadoEm: new Date().toISOString() };\nif (b.acao === 'descartar') novo.status = 'descartado';\nreturn [{ json: { ok: true, acao: b.acao, id: r.id, url: r.url, legenda, rascunho_str: JSON.stringify(novo) } }];"
+   },
+   "name": "Valida ação do post",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    512,
+    3344
+   ],
+   "id": "bdbb5fd8-2412-42d8-a0e3-77efd2fd41c8"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "821ff900-4c1d-4185-bc77-286e92db1b54",
+       "leftValue": "={{ $json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Pode seguir?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    752,
+    3344
+   ],
+   "id": "adfc714c-5691-452c-8400-375c04e9a4cb"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+    "options": {
+     "responseCode": "={{ $json.codigo }}",
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde não permitido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1008,
+    3600
+   ],
+   "id": "2ee63e2e-3f98-465d-bc91-e6e1a3feaf9c"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "d278609c-acd8-4b20-8ebb-903c0e3b3214",
+       "leftValue": "={{ $json.acao === 'publicar' }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "É para publicar?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1008,
+    3344
+   ],
+   "id": "d44f216b-4458-4f21-b7c2-e7c6875cb43e"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "postImageUrl": "={{ $json.url }}",
+    "postCaption": "={{ $json.legenda }}",
+    "postAdditionalOptions": {}
+   },
+   "name": "Cria o post",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1264,
+    3216
+   ],
+   "id": "44f6107c-5c25-4495-9f97-f8dc1b3240ed",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "publishPost",
+    "creationId": "={{ $json.id }}"
+   },
+   "name": "Publica o post",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1504,
+    3216
+   ],
+   "id": "dbb5a8b1-195a-4bb9-b52b-1c9da5fc1cae",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "resource": "media",
+    "operation": "getMedia",
+    "mediaId": "={{ $json.id }}",
+    "mediaDetailFields": [
+     "id",
+     "permalink",
+     "timestamp"
+    ]
+   },
+   "name": "Pega o link",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1744,
+    3216
+   ],
+   "id": "63e7a2b6-7a5d-4c1b-8306-c264727d9caa",
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta o resultado da publicação com o rascunho e marca como publicado (ou erro)\nconst NO_ORIGEM = 'Valida ação do post';\nconst saida = [];\nconst origem = $(NO_ORIGEM).all();\nconst itens = $input.all();\nfor (let i = 0; i < itens.length; i++) {\n  const o = origem[i] ? origem[i].json : origem[0].json;\n  const r = JSON.parse(o.rascunho_str);\n  const j = itens[i].json;\n  if (j.error || !j.id) {\n    const e = j.error;\n    Object.assign(r, { status: 'erro', erro: 'O Instagram recusou: ' + String((e && (e.message || e.description)) || e || 'sem resposta').slice(0, 300) });\n  } else {\n    Object.assign(r, { status: 'publicado', media_id: j.id, permalink: j.permalink || '', publicadoEm: new Date().toISOString(), erro: '' });\n  }\n  r.atualizadoEm = new Date().toISOString();\n  saida.push({ json: { id: r.id, ok: r.status === 'publicado', permalink: r.permalink || '', erro: r.erro || '', rascunho_str: JSON.stringify(r) } });\n}\nreturn saida;"
+   },
+   "name": "Registra o resultado",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1984,
+    3216
+   ],
+   "id": "6aba4b2f-e719-4ee2-a5c3-461061b4f2be"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=post:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva o resultado",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2224,
+    3216
+   ],
+   "id": "c33264bc-676f-4e3b-93a1-227b523b3042",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: $json.ok, mensagem: $json.ok ? 'Publicado no Instagram! 🎉' : $json.erro, erro: $json.erro, permalink: $json.permalink }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde a publicação",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2464,
+    3216
+   ],
+   "id": "6c2e9191-5069-484f-9d7d-ebd72e8fa181"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=post:rasc:{{ $json.id }}",
+    "value": "={{ $json.rascunho_str }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 2592000
+   },
+   "name": "Salva o descarte",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1264,
+    3456
+   ],
+   "id": "76158b17-a88e-4b83-848e-76fc1dabf661",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, mensagem: 'Post descartado.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde descarte",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1504,
+    3456
+   ],
+   "id": "b27fae85-ef42-473b-b92e-ac3111f98cd3"
+  },
+  {
+   "parameters": {
+    "content": "# 💬 POST CONVERSADO COM IA (com foto opcional)\n🎯 Em vez de formulário, a pessoa **conversa** com a **Lia**, a produtora. Ela entende o post, pede uma **foto** se fizer sentido e, quando tudo estiver claro, aciona uma **equipe de IAs** que cria a **imagem**, o **título**, a **legenda** e as **hashtags**. O post vai para aprovação e é publicado no Instagram pelo community node.\n▶️ **Teste:** abra a URL do chat no node **Chat do criador**, converse e anexe uma foto se quiser. Senha de publicação: **publica-5b514a** (troque em **Valida ação do post**).\n## 1️⃣ O CHAT\n📎 **Chat do criador** aceita anexar **imagens**. 📷 **Guarda a foto** + **Salva a foto**: se veio foto, ela fica guardada no Redis por 1 dia.\n🧠 **Lê histórico** + **Monta o contexto**: memória feita à mão (últimas 14 mensagens) e um aviso para a Lia se existe foto.\n🗣️ **Lia** (Claude Haiku, com reserva em outro roteador) conversa e, com o \"pode criar\" do cliente, usa a ferramenta **criar_post**, que chama a faixa 2 e devolve o **link de aprovação**.\n📝 **Registra a conversa** + **Grava o histórico**.",
+    "height": 330,
+    "width": 2620,
+    "color": 6
+   },
+   "name": "Nota · faixa 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -128,
+    0
+   ],
+   "id": "a6590e9e-e2be-4ba7-b957-1d019381f37b"
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ A EQUIPE DE CRIAÇÃO (roda sozinha depois de devolver o link)\n✅ **Valida pedido** → 🗄️ **Rascunho: gerando** → ⚡ **Responde ao chat** com o link.\n📷 **Lê a foto** + **Prepara a foto** decidem o modo: **usar** a foto de verdade, **inspirar** uma imagem nova nela, ou **nenhuma** foto.\n👁️ **IA de visão** (só no modo inspirar) descreve a foto: produto, cores, luz, composição.\n🎨 **Diretora de arte** escreve o prompt da imagem (em inglês, **sem texto na imagem**, porque a IA de imagem erra letras) e a faixa de título.\n✍️ **Copywriter** escreve título, legenda com gancho e chamada, hashtags e texto alternativo.\n🖼️ **Gera a imagem** (`gemini-3.1-flash-image` pelo roteador) ou usa a foto do cliente.\n📐 **Enquadra a imagem (cálculo)** descobre o tamanho da imagem e calcula o corte central em **1080×1350**. **Enquadra e aplica a faixa** (Edit Image) recorta e escreve a faixa.\n💾 Guarda a imagem e o rascunho para aprovação.\n⚠️ Por que não editar a foto com IA? Os modelos de imagem deste roteador **ignoram a foto enviada**. Por isso: usar a foto real, ou descrevê-la e criar uma nova.",
+    "height": 363,
+    "width": 5540,
+    "color": 4
+   },
+   "name": "Nota · faixa 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -128,
+    944
+   ],
+   "id": "91d51fef-2360-4f6c-b0f8-398ed9b2c46f"
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ IMAGEM PÚBLICA E PÁGINA DE APROVAÇÃO\n🖼️ `/webhook/post-ia-img?id=...` entrega o JPEG. O Instagram **baixa a imagem desse link** na hora de publicar.\n✅ `/webhook/post-ia-ver?id=...&k=...` mostra o post como no feed, com a legenda **editável**, a senha e os botões **Publicar** e **Descartar**.",
+    "height": 154,
+    "width": 2530,
+    "color": 5
+   },
+   "name": "Nota · faixa 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -128,
+    2304
+   ],
+   "id": "914d0e29-0300-4c49-bd1e-e44b25e0a1ad"
+  },
+  {
+   "parameters": {
+    "content": "## 4️⃣ PUBLICAR NO INSTAGRAM\n🔐 **Valida ação do post** confere a chave do link e a senha → 🚀 **Cria o post** → **Publica o post** → **Pega o link** (os três são o community node do Instagram) → **Registra o resultado** e responde com o link do post. Se o Instagram recusar, o erro aparece na página.",
+    "height": 124,
+    "width": 2830,
+    "color": 3
+   },
+   "name": "Nota · faixa 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -128,
+    3008
+   ],
+   "id": "6c5cc992-62db-4c2b-8b78-24955590177f"
+  },
+  {
+   "parameters": {
+    "model": "kiro/claude-haiku-4.5",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 3000,
+     "temperature": 0.6,
+     "timeout": 180000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro da Lia",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1648,
+    836
+   ],
+   "id": "8140dd75-62f7-4951-9d49-a5802972c9f8",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 2000,
+     "temperature": 0.7,
+     "timeout": 240000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro da diretora",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2304,
+    2196
+   ],
+   "id": "84afd99f-74c9-43de-92ef-226bab7303e6",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 2500,
+     "temperature": 0.8,
+     "timeout": 240000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro do copywriter",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2608,
+    2196
+   ],
+   "id": "14c2e45f-2107-4f95-9a94-09676e6a2e09",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Chat do criador": {
+   "main": [
+    [
+     {
+      "node": "Guarda a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Guarda a foto": {
+   "main": [
+    [
+     {
+      "node": "Salva a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva a foto": {
+   "main": [
+    [
+     {
+      "node": "Marca que tem foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Marca que tem foto": {
+   "main": [
+    [
+     {
+      "node": "Lê se tem foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê se tem foto": {
+   "main": [
+    [
+     {
+      "node": "Lê histórico do chat",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê histórico do chat": {
+   "main": [
+    [
+     {
+      "node": "Monta o contexto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Monta o contexto": {
+   "main": [
+    [
+     {
+      "node": "Lia · produtora de posts",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro da Lia": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Lia · produtora de posts",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criar_post": {
+   "ai_tool": [
+    [
+     {
+      "node": "Lia · produtora de posts",
+      "type": "ai_tool",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lia · produtora de posts": {
+   "main": [
+    [
+     {
+      "node": "Registra a conversa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registra a conversa": {
+   "main": [
+    [
+     {
+      "node": "Grava o histórico",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pedido de produção (POST)": {
+   "main": [
+    [
+     {
+      "node": "Valida pedido do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Valida pedido do post": {
+   "main": [
+    [
+     {
+      "node": "Pedido completo?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pedido completo?": {
+   "main": [
+    [
+     {
+      "node": "Rascunho: gerando",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde recusa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Rascunho: gerando": {
+   "main": [
+    [
+     {
+      "node": "Responde ao chat",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Responde ao chat": {
+   "main": [
+    [
+     {
+      "node": "Lê a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê a foto": {
+   "main": [
+    [
+     {
+      "node": "Prepara a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Prepara a foto": {
+   "main": [
+    [
+     {
+      "node": "Inspirar na foto?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Inspirar na foto?": {
+   "main": [
+    [
+     {
+      "node": "IA de visão descreve a foto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Diretora de arte",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "IA de visão descreve a foto": {
+   "main": [
+    [
+     {
+      "node": "Diretora de arte",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro da diretora": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Diretora de arte",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Diretora de arte": {
+   "main": [
+    [
+     {
+      "node": "Copywriter do post",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Copywriter do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro do copywriter": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Copywriter do post",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Copywriter do post": {
+   "main": [
+    [
+     {
+      "node": "Prepara o pedido de imagem",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Prepara o pedido de imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Prepara o pedido de imagem": {
+   "main": [
+    [
+     {
+      "node": "Usar a foto do cliente?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Usar a foto do cliente?": {
+   "main": [
+    [
+     {
+      "node": "Enquadra a imagem (cálculo)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Gera a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Gera a imagem": {
+   "main": [
+    [
+     {
+      "node": "Enquadra a imagem (cálculo)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Enquadra a imagem (cálculo)": {
+   "main": [
+    [
+     {
+      "node": "Tem imagem?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tem imagem?": {
+   "main": [
+    [
+     {
+      "node": "Enquadra e aplica a faixa",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Rascunho: erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Enquadra e aplica a faixa": {
+   "main": [
+    [
+     {
+      "node": "Imagem do post em base64",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Imagem do post em base64": {
+   "main": [
+    [
+     {
+      "node": "Guarda a imagem do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Guarda a imagem do post": {
+   "main": [
+    [
+     {
+      "node": "Junta o rascunho do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Junta o rascunho do post": {
+   "main": [
+    [
+     {
+      "node": "Salva o rascunho do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Imagem do post (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê a imagem do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê a imagem do post": {
+   "main": [
+    [
+     {
+      "node": "Vira arquivo JPEG",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Vira arquivo JPEG": {
+   "main": [
+    [
+     {
+      "node": "Achou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Achou?": {
+   "main": [
+    [
+     {
+      "node": "Entrega o JPEG do post",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Sem imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ver post (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê o rascunho do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê o rascunho do post": {
+   "main": [
+    [
+     {
+      "node": "Monta a aprovação do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Monta a aprovação do post": {
+   "main": [
+    [
+     {
+      "node": "Entrega a aprovação do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Ação no post (POST)": {
+   "main": [
+    [
+     {
+      "node": "Lê o rascunho da ação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê o rascunho da ação": {
+   "main": [
+    [
+     {
+      "node": "Valida ação do post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Valida ação do post": {
+   "main": [
+    [
+     {
+      "node": "Pode seguir?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pode seguir?": {
+   "main": [
+    [
+     {
+      "node": "É para publicar?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde não permitido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "É para publicar?": {
+   "main": [
+    [
+     {
+      "node": "Cria o post",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Salva o descarte",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cria o post": {
+   "main": [
+    [
+     {
+      "node": "Publica o post",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registra o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Publica o post": {
+   "main": [
+    [
+     {
+      "node": "Pega o link",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registra o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pega o link": {
+   "main": [
+    [
+     {
+      "node": "Registra o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registra o resultado": {
+   "main": [
+    [
+     {
+      "node": "Salva o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva o resultado": {
+   "main": [
+    [
+     {
+      "node": "Responde a publicação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salva o descarte": {
+   "main": [
+    [
+     {
+      "node": "Responde descarte",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro da Lia": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Lia · produtora de posts",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro da diretora": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Diretora de arte",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro do copywriter": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "Copywriter do post",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1800,
+  "binaryMode": "separate"
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": {},
+ "versionId": "6fcd66da-907e-4a36-b6ff-549923d0fa45",
+ "activeVersionId": "6fcd66da-907e-4a36-b6ff-549923d0fa45",
+ "versionCounter": 28,
+ "triggerCount": 5,
+ "shared": [
+  {
+   "updatedAt": "2026-10-14T00:01:43.720Z",
+   "createdAt": "2026-10-14T00:01:43.720Z",
+   "role": "workflow:owner",
+   "workflowId": "eTZ7m4360dYqNJuU",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-14T01:03:51.917Z",
+  "createdAt": "2026-10-14T01:03:51.917Z",
+  "versionId": "6fcd66da-907e-4a36-b6ff-549923d0fa45",
+  "workflowId": "eTZ7m4360dYqNJuU",
+  "nodes": [
+   {
+    "parameters": {
+     "public": true,
+     "initialMessages": "Oi! Eu sou a Lia, produtora de posts 📸\nMe conta: qual post você quer criar para o Instagram? Se quiser, anexe uma foto (do produto, do lugar, sua) que eu uso como base.",
+     "options": {
+      "allowFileUploads": true,
+      "allowedFilesMimeTypes": "image/*",
+      "inputPlaceholder": "Descreva o post ou anexe uma foto…",
+      "subtitle": "Converse, aprove e publique",
+      "title": "Post com IA",
+      "responseMode": "streaming"
+     }
+    },
+    "name": "Chat do criador",
+    "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+    "typeVersion": 1.4,
+    "position": [
+     0,
+     416
+    ],
+    "id": "49f753bb-84a2-4839-a8c5-6b244cea9d0d",
+    "webhookId": "ee2611a1-c496-4d79-ba65-28683539e72d"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Se a pessoa anexou uma imagem no chat, guardamos em texto (base64) para a produção usar depois\nconst ent = $input.first();\nconst bin = ent.binary || {};\nconst chave = Object.keys(bin).find(k => String(bin[k].mimeType || '').startsWith('image/'));\nlet b64 = '', mime = '';\nif (chave) {\n  const buf = await this.helpers.getBinaryDataBuffer(0, chave);\n  if (buf.length <= 8 * 1024 * 1024) { b64 = buf.toString('base64'); mime = bin[chave].mimeType; }\n}\nreturn [{ json: { sessionId: String(ent.json.sessionId || ''), chatInput: String(ent.json.chatInput || '').slice(0, 3000), foto: b64, mime } }];"
+    },
+    "name": "Guarda a foto",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     240,
+     416
+    ],
+    "id": "b57069bf-6a7e-4407-9a68-7fa3cd611205"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "={{ $json.foto ? 'post:foto:' + $json.sessionId : 'post:foto:descartavel' }}",
+     "value": "={{ JSON.stringify({ mime: $json.mime, b64: $json.foto }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 86400
+    },
+    "name": "Salva a foto",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     480,
+     416
+    ],
+    "id": "db574c51-ba71-451e-a39c-7e624e9b83d3",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "={{ $('Guarda a foto').first().json.foto ? 'post:foto-ok:' + $('Guarda a foto').first().json.sessionId : 'post:foto-ok:descartavel' }}",
+     "value": "1",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 86400
+    },
+    "name": "Marca que tem foto",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     720,
+     416
+    ],
+    "id": "f7a78d5b-24e8-4bb3-a954-7e0c43bfe655",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "tem",
+     "key": "=post:foto-ok:{{ $('Guarda a foto').first().json.sessionId }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê se tem foto",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     960,
+     416
+    ],
+    "id": "d9f92db5-d4ad-4fdd-924c-6a6987160727",
+    "alwaysOutputData": true,
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "historico",
+     "key": "=post:chat:{{ $('Guarda a foto').first().json.sessionId }}",
+     "keyType": "list",
+     "options": {}
+    },
+    "name": "Lê histórico do chat",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1200,
+     416
+    ],
+    "id": "1a75c221-ba78-40ab-a068-b963f2867643",
+    "alwaysOutputData": true,
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "// Memória feita à mão: últimas 14 mensagens + aviso se existe foto nesta conversa\nconst atual = $('Guarda a foto').first().json;\nlet hist = $('Lê histórico do chat').first().json.historico;\nif (!Array.isArray(hist)) hist = hist ? [hist] : [];\nconst temFotoAntes = !!$('Lê se tem foto').first().json.tem;\nconst linhas = hist.slice(-14).map(s => { try { const m = JSON.parse(s); return (m.quem === 'cliente' ? 'Cliente: ' : 'Produtora: ') + m.texto; } catch (e) { return ''; } }).filter(Boolean);\nconst foto = atual.foto ? 'FOTO: o cliente ACABOU DE ENVIAR uma foto nesta mensagem.' : temFotoAntes ? 'FOTO: o cliente já enviou uma foto antes nesta conversa.' : 'FOTO: nenhuma foto enviada.';\nconst prompt = (linhas.length ? 'CONVERSA ATÉ AGORA:\\n' + linhas.join('\\n') + '\\n\\n' : '') + foto + '\\n\\nNOVA MENSAGEM DO CLIENTE:\\n' + (atual.chatInput || '(enviou só a foto)');\nreturn [{ json: { prompt } }];"
+    },
+    "name": "Monta o contexto",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1440,
+     416
+    ],
+    "id": "5101c695-3953-47ca-a5f8-34087a029cd4"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ $json.prompt }}",
+     "options": {
+      "systemMessage": "Você é a Lia, PRODUTORA DE POSTS para Instagram. Você conversa com o cliente para entender o post e depois aciona a equipe de criação.\n\nO QUE DESCOBRIR (pergunte só o que faltar, no máximo 2 perguntas por mensagem, de forma leve)\n1. Objetivo do post (vender, divulgar promoção, ensinar, engajar, institucional).\n2. Tema ou produto e a mensagem principal.\n3. Público.\n4. Estilo visual da imagem (ex.: foto realista, ilustração, minimalista, colorido) e cores.\n5. Tom da legenda e o @ do perfil.\n6. Se houver FOTO: pergunte se quer **usar a foto como imagem do post** (modo \"usar\") ou **criar uma imagem nova inspirada nela** (modo \"inspirar\"). Sem foto, o modo é \"nenhuma\".\n\nQUANDO TIVER TUDO\n- Mostre um resumo curto e pergunte \"Posso criar?\".\n- Com o sim do cliente, chame a ferramenta criar_post UMA vez, com um briefing completo (objetivo, tema, mensagem, público, estilo visual, cores, tom, chamada final), o modo da foto e o @ do perfil.\n- Depois, envie o link de aprovação que a ferramenta devolver e explique que em cerca de 2 minutos o post aparece lá para revisar e publicar.\n- Se o cliente pedir ajustes depois, crie de novo com o briefing ajustado.\n\nREGRAS: mensagens curtas, simpáticas, no máximo 2 emojis. Nunca invente o link.\n- IMPORTANTE: não escreva nada antes de usar as ferramentas. Use todas as ferramentas necessárias primeiro, em silêncio, e só então escreva UMA única resposta final, completa, com os resultados.",
+      "maxIterations": 5,
+      "enableStreaming": true
+     },
+     "needsFallback": true
+    },
+    "name": "Lia · produtora de posts",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1712,
+     416
+    ],
+    "id": "558eecaa-00c8-466a-aeec-ea2fd8325b7e",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 3000
+   },
+   {
+    "parameters": {
+     "model": "kr/claude-haiku-4.5",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 3000,
+      "temperature": 0.6,
+      "timeout": 180000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro da Lia",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1648,
+     656
+    ],
+    "id": "2ecdba05-e33c-4eee-804e-cdfe547742d5",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "toolDescription": "Envia o briefing aprovado para a equipe de criação (diretora de arte, copywriter e IA de imagem). Devolve o link da página de aprovação.",
+     "method": "POST",
+     "url": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/post-ia-produzir",
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ sessao: $('Guarda a foto').first().json.sessionId, briefing: $fromAI('briefing', 'Briefing completo do post: objetivo, tema, mensagem, público, estilo visual, cores, tom e chamada final', 'string'), modo_foto: $fromAI('modo_foto', 'nenhuma, usar ou inspirar', 'string'), perfil: $fromAI('perfil', '@ do perfil do Instagram', 'string') }) }}",
+     "options": {
+      "timeout": 30000
+     }
+    },
+    "name": "criar_post",
+    "type": "n8n-nodes-base.httpRequestTool",
+    "typeVersion": 4.2,
+    "position": [
+     1888,
+     656
+    ],
+    "id": "c9c6f768-8543-41e5-9d0c-72271190ffa3"
+   },
+   {
+    "parameters": {
+     "jsCode": "const ent = $('Guarda a foto').first().json;\nconst resp = String($input.first().json.output || '').trim();\nconst msgs = [{ quem: 'cliente', texto: (ent.chatInput || '(enviou uma foto)').slice(0, 2000) }];\nif (resp) msgs.push({ quem: 'lia', texto: resp.slice(0, 3000) });\nreturn msgs.map(m => ({ json: { msg: JSON.stringify(m) } }));"
+    },
+    "name": "Registra a conversa",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2000,
+     416
+    ],
+    "id": "2110eb70-23a5-4d44-82c5-d3d56eb7a081"
+   },
+   {
+    "parameters": {
+     "operation": "push",
+     "list": "=post:chat:{{ $('Guarda a foto').first().json.sessionId }}",
+     "messageData": "={{ $json.msg }}",
+     "tail": true
+    },
+    "name": "Grava o histórico",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2240,
+     416
+    ],
+    "id": "7262a5a7-baea-4728-85e8-ba7eb482d896",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "httpMethod": "POST",
+     "path": "post-ia-produzir",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Pedido de produção (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1776
+    ],
+    "id": "da270642-78d6-4d5a-a6a0-4d052feb1bf9",
+    "webhookId": "a8227063-b179-45b3-83f8-d3688ab4a8f9"
+   },
+   {
+    "parameters": {
+     "jsCode": "let b = $('Pedido de produção (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst req = $('Pedido de produção (POST)').first().json;\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u0008\\u000b-\\u001f\\u007f]/g, ' ').trim().slice(0, max);\nconst sessao = limpa(b.sessao, 80).replace(/[^\\w-]/g, '');\nconst briefing = limpa(b.briefing, 3000);\nconst modo = ['usar', 'inspirar'].includes(String(b.modo_foto || '').toLowerCase()) ? String(b.modo_foto).toLowerCase() : 'nenhuma';\nconst perfil = limpa(b.perfil, 30).replace(/^@+/, '').replace(/[^\\w.]/g, '');\nconst erros = [];\nif (!sessao) erros.push('Sessão do chat ausente.');\nif (briefing.length < 20) erros.push('Briefing muito curto: converse mais com o cliente antes de criar.');\nconst rnd = n => Array.from({ length: n }, () => 'abcdefghijkmnpqrstuvwxyz23456789'[Math.floor(Math.random() * 32)]).join('');\nconst id = 'pst-' + Date.now().toString(36) + rnd(4), k = rnd(18);\nconst base = String(req.webhookUrl || '').split('/webhook/')[0] || 'https://webhookn8n6.inovareinteligenciaartificial.com';\nreturn [{ json: { valido: erros.length === 0, erros, id, k, sessao, briefing, modo, perfil, base,\n  link: `${base}/webhook/post-ia-ver?id=${id}&k=${k}`, criadoEm: new Date().toISOString() } }];"
+    },
+    "name": "Valida pedido do post",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     256,
+     1776
+    ],
+    "id": "e8eb04ce-f852-4b29-a50d-213370dac48e"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "f7c15018-442d-4d9e-9d24-17122162642f",
+        "leftValue": "={{ $json.valido }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Pedido completo?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     512,
+     1776
+    ],
+    "id": "4123fa1f-5575-4fd4-a620-e671104393a9"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erros.join(' ') }) }}",
+     "options": {
+      "responseCode": 400,
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde recusa",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     752,
+     1984
+    ],
+    "id": "b817ced7-0fd7-4616-a4c2-94534e4f8d21"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=post:rasc:{{ $('Valida pedido do post').first().json.id }}",
+     "value": "={{ JSON.stringify({ id: $('Valida pedido do post').first().json.id, k: $('Valida pedido do post').first().json.k, status: 'gerando', perfil: $('Valida pedido do post').first().json.perfil, criadoEm: $('Valida pedido do post').first().json.criadoEm }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Rascunho: gerando",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     752,
+     1776
+    ],
+    "id": "b3c39eb7-cc2f-4c98-9d25-7c5d4b0c666b",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true, link: $('Valida pedido do post').first().json.link, aviso: 'O post fica pronto em cerca de 2 minutos nesse link.' }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde ao chat",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1008,
+     1776
+    ],
+    "id": "414b0135-8928-4342-acd4-296054c3a5d0"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "foto",
+     "key": "=post:foto:{{ $('Valida pedido do post').first().json.sessao }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê a foto",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1264,
+     1776
+    ],
+    "id": "288fbefe-910e-46c4-b275-6f360920e75a",
+    "alwaysOutputData": true,
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "// Decide o modo real: se pediu foto mas não há foto guardada, gera do zero\nconst v = $('Valida pedido do post').first().json;\nlet foto = null;\ntry { foto = JSON.parse($input.first().json.foto || 'null'); } catch (e) {}\nconst temFoto = !!(foto && foto.b64 && foto.b64.length > 100);\nconst modo = temFoto ? v.modo : 'nenhuma';\nreturn [{ json: { modo, temFoto, mime: temFoto ? foto.mime : '', dataUrl: modo === 'inspirar' ? `data:${foto.mime || 'image/jpeg'};base64,${foto.b64}` : '' } }];"
+    },
+    "name": "Prepara a foto",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1504,
+     1776
+    ],
+    "id": "cee3e0c8-58c5-4249-9f5a-ca4d8d854f92"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "3d768969-1207-480e-bf06-edaef3947efa",
+        "leftValue": "={{ $json.modo === 'inspirar' }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Inspirar na foto?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     1760,
+     1776
+    ],
+    "id": "39634d37-a6a0-4e89-8505-dcf7d78d7ddf"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://157.173.207.22:20128/v1/chat/completions",
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', stream: false, max_tokens: 600, messages: [{ role: 'user', content: [{ type: 'text', text: 'Descreva esta foto para uma diretora de arte recriar uma imagem parecida: o que aparece (produto, pessoas, lugar), cores principais, luz, estilo e composição. Seja objetiva, em até 6 frases.' }, { type: 'image_url', image_url: { url: $json.dataUrl } }] }] }) }}",
+     "options": {
+      "timeout": 120000
+     },
+     "authentication": "predefinedCredentialType",
+     "nodeCredentialType": "openAiApi"
+    },
+    "name": "IA de visão descreve a foto",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     2000,
+     1584
+    ],
+    "id": "90fbea61-0483-45a5-9029-cb44bfdc5ee4",
+    "onError": "continueRegularOutput",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'BRIEFING:\\n' + $('Valida pedido do post').first().json.briefing + '\\n\\nMODO DA FOTO: ' + $('Prepara a foto').first().json.modo + ($('IA de visão descreve a foto').isExecuted ? '\\n\\nDESCRIÇÃO DA FOTO DE REFERÊNCIA:\\n' + (($('IA de visão descreve a foto').first().json.choices || [{}])[0].message || {}).content : '') }}",
+     "options": {
+      "systemMessage": "Você é a DIRETORA DE ARTE de posts para Instagram. Transforme o briefing em instruções para uma IA de imagem.\n\nREGRAS\n- prompt_imagem em INGLÊS, detalhado (assunto, cenário, luz, câmera ou técnica, cores, clima), formato vertical 4:5, composição com espaço livre na parte de baixo.\n- A imagem NÃO pode ter texto, letras, logos ou marcas d'água: escreva isso no prompt (\"no text, no letters, no logos\").\n- Se houver descrição de uma foto de referência, mantenha o mesmo produto ou cenário, cores e clima.\n- faixa_titulo: chamada curta em português, de até 40 caracteres, para a faixa sobre a imagem (ou \"\" se o post não pedir texto). Se o cliente pediu um texto exato para a faixa, use exatamente esse texto.\n- Seja FIEL à oferta do briefing: nunca invente nem altere preço, desconto, promoção ou condição (ex.: \"segundo café pela metade\" não vira \"café em dobro\").\n- cor_faixa: uma cor HEX escura que combine com a imagem.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"prompt_imagem\":\"\",\"faixa_titulo\":\"\",\"cor_faixa\":\"#\"}"
+     },
+     "needsFallback": true
+    },
+    "name": "Diretora de arte",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     2256,
+     1776
+    ],
+    "id": "35a8798e-ba34-415a-b35b-86ab4ba7f4ca",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3-flash",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 2000,
+      "temperature": 0.7,
+      "timeout": 240000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro da diretora",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     2304,
+     2016
+    ],
+    "id": "60743f10-27cd-47d6-8d70-93a24ea0877c",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'BRIEFING:\\n' + $('Valida pedido do post').first().json.briefing + '\\n\\nPERFIL: @' + $('Valida pedido do post').first().json.perfil }}",
+     "options": {
+      "systemMessage": "Você é COPYWRITER de Instagram. Escreva o texto do post a partir do briefing.\n\nREGRAS\n- Português do Brasil com acentuação correta, no tom pedido.\n- Seja FIEL à oferta: copie preços, descontos, datas e condições exatamente como estão no briefing. Nunca invente benefícios.\n- titulo: frase curta que resume o post (até 60 caracteres).\n- legenda: de 400 a 1000 caracteres. Primeira linha é um gancho forte; depois o valor ou a oferta; termine com uma chamada clara (comentar, salvar, chamar no direct ou clicar no link da bio). Pode usar até 4 emojis.\n- hashtags: de 5 a 10, sem o símbolo #.\n- alt_text: descrição da imagem para acessibilidade (até 200 caracteres).\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"titulo\":\"\",\"legenda\":\"\",\"hashtags\":[\"\"],\"alt_text\":\"\"}"
+     },
+     "needsFallback": true
+    },
+    "name": "Copywriter do post",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     2560,
+     1776
+    ],
+    "id": "b018fa3b-dec0-47df-8ecc-5ba0b8c9dcc1",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3-flash",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 2500,
+      "temperature": 0.8,
+      "timeout": 240000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro do copywriter",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     2608,
+     2016
+    ],
+    "id": "2cd6dfbe-045a-4937-a9ae-255c9614a9d5",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst arte = parseJSON($('Diretora de arte').first().json.output ?? '') || {};\nconst base = String(arte.prompt_imagem || $('Valida pedido do post').first().json.briefing).slice(0, 1800);\nreturn [{ json: { modo: $('Prepara a foto').first().json.modo, prompt: base + ' Vertical 4:5 composition. No text, no letters, no logos, no watermark.' } }];"
+    },
+    "name": "Prepara o pedido de imagem",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     2880,
+     1776
+    ],
+    "id": "2b635858-9482-496a-950c-e3aeecb66a24"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "0c3fb7f2-f826-44bd-a7f3-c10e54334b1d",
+        "leftValue": "={{ $json.modo === 'usar' }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Usar a foto do cliente?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     3120,
+     1776
+    ],
+    "id": "72413e77-0977-4566-82cb-71bb4a9ba538"
+   },
+   {
+    "parameters": {
+     "method": "POST",
+     "url": "http://157.173.207.22:20128/v1/images/generations",
+     "sendBody": true,
+     "specifyBody": "json",
+     "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3.1-flash-image', n: 1, prompt: $json.prompt }) }}",
+     "options": {
+      "timeout": 240000
+     },
+     "authentication": "predefinedCredentialType",
+     "nodeCredentialType": "openAiApi"
+    },
+    "name": "Gera a imagem",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+     3376,
+     1984
+    ],
+    "id": "988ba5ea-8dd0-4e1b-b2ea-a981d1511749",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueRegularOutput",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\n// Junta a imagem (foto real ou gerada pela IA) e calcula o enquadramento \"cover\" em 1080×1350\nconst p = $('Prepara a foto').first().json;\nconst arte = parseJSON($('Diretora de arte').first().json.output ?? '') || {};\nlet b64 = '';\nif (p.modo === 'usar') {\n  try { b64 = JSON.parse($('Lê a foto').first().json.foto).b64; } catch (e) {}\n} else {\n  const r = $('Gera a imagem').first().json;\n  b64 = (r.data && r.data[0] && r.data[0].b64_json) || '';\n}\nif (!b64) return [{ json: { ok: false, erro: 'A IA de imagem não devolveu imagem.' } }];\nconst buf = Buffer.from(b64, 'base64');\nfunction dims(x) {\n  if (x[0] === 0x89 && x[1] === 0x50) return { w: x.readUInt32BE(16), h: x.readUInt32BE(20) };\n  if (x[0] === 0xFF && x[1] === 0xD8) {\n    let i = 2;\n    while (i < x.length - 9) {\n      if (x[i] !== 0xFF) { i++; continue; }\n      const m = x[i + 1];\n      if ([0xC0, 0xC1, 0xC2].includes(m)) return { h: x.readUInt16BE(i + 5), w: x.readUInt16BE(i + 7) };\n      i += 2 + x.readUInt16BE(i + 2);\n    }\n  }\n  return null;\n}\nconst d = dims(buf) || { w: 1024, h: 1024 };\nconst W = 1080, H = 1350, esc = Math.max(W / d.w, H / d.h);\nconst rw = Math.ceil(d.w * esc), rh = Math.ceil(d.h * esc);\nconst faixa = String(arte.faixa_titulo || '').replace(/[\\u{1F000}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{FE0F}]/gu, '').replace(/\"/g, '”').replace(/'/g, '’').trim().slice(0, 42);\nconst cor = /^#[0-9a-f]{6}$/i.test(arte.cor_faixa || '') ? arte.cor_faixa : '#111111';\n// Fonte da faixa: diminui até o texto caber em 960 px (cada letra em negrito ocupa cerca de 0,72 do tamanho da fonte)\nconst fonteFaixa = faixa ? Math.max(30, Math.min(52, Math.floor(960 / (faixa.length * 0.72)))) : 52;\nreturn [{ json: { ok: true, w: d.w, h: d.h, rw, rh, cx: Math.floor((rw - W) / 2), cy: Math.floor((rh - H) / 2), faixa, cor, fonteFaixa,\n  faixaY: faixa ? 1160 : 1350, origem: p.modo === 'usar' ? 'foto do cliente' : 'gerada pela IA' },\n  binary: { data: { data: b64, mimeType: p.modo === 'usar' ? (p.mime || 'image/jpeg') : 'image/jpeg', fileName: 'base.jpg' } } }];"
+    },
+    "name": "Enquadra a imagem (cálculo)",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     3664,
+     1776
+    ],
+    "id": "80d8b5dc-df9b-4308-bca6-d7ebb16af0f3"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "e291379e-b3bf-4007-b340-b72da7a5846c",
+        "leftValue": "={{ $json.ok }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Tem imagem?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     3920,
+     1776
+    ],
+    "id": "8b8c7020-cce7-405e-8676-48442636fbe0"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=post:rasc:{{ $('Valida pedido do post').first().json.id }}",
+     "value": "={{ JSON.stringify({ id: $('Valida pedido do post').first().json.id, k: $('Valida pedido do post').first().json.k, status: 'erro_geracao', erro: $json.erro || 'Falha ao criar a imagem.' }) }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Rascunho: erro",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     4160,
+     2000
+    ],
+    "id": "0b2eaec1-8ec0-4f82-a589-8ef1cf768c36",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "operation": "multiStep",
+     "operations": {
+      "operations": [
+       {
+        "operation": "resize",
+        "width": "={{ $json.rw }}",
+        "height": "={{ $json.rh }}",
+        "resizeOption": "ignoreAspectRatio"
+       },
+       {
+        "operation": "crop",
+        "width": 1080,
+        "height": 1350,
+        "positionX": "={{ $json.cx }}",
+        "positionY": "={{ $json.cy }}"
+       },
+       {
+        "operation": "draw",
+        "color": "={{ $json.cor }}",
+        "startPositionX": 0,
+        "startPositionY": "={{ $json.faixaY }}",
+        "endPositionX": 1080,
+        "endPositionY": 1350
+       },
+       {
+        "operation": "text",
+        "text": "={{ $json.faixa || ' ' }}",
+        "fontSize": "={{ $json.fonteFaixa }}",
+        "fontColor": "#ffffff",
+        "positionX": 60,
+        "positionY": "={{ 1255 + Math.round($json.fonteFaixa * 0.35) }}",
+        "lineLength": 400,
+        "font": "/usr/share/fonts/truetype/msttcorefonts/Verdana_Bold.ttf"
+       }
+      ]
+     },
+     "options": {
+      "fileName": "post.jpg",
+      "format": "jpeg",
+      "quality": 90
+     }
+    },
+    "name": "Enquadra e aplica a faixa",
+    "type": "n8n-nodes-base.editImage",
+    "typeVersion": 1,
+    "position": [
+     4160,
+     1776
+    ],
+    "id": "01565523-3b0e-4067-9cda-39b08b4375b5"
+   },
+   {
+    "parameters": {
+     "jsCode": "// O Edit Image entrega a imagem como arquivo; aqui viramos texto (base64) para guardar no Redis\nconst itens = $input.all();\nconst saida = [];\nfor (let i = 0; i < itens.length; i++) {\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  saida.push({ json: { n: itens[i].json.n, b64: buf.toString('base64'), kb: Math.round(buf.length / 1024) } });\n}\nreturn saida;"
+    },
+    "name": "Imagem do post em base64",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     4416,
+     1776
+    ],
+    "id": "eebe96fc-43e7-4f55-9dc1-69b14d9205dd"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=post:img:{{ $('Valida pedido do post').first().json.id }}",
+     "value": "={{ $json.b64 }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Guarda a imagem do post",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     4672,
+     1776
+    ],
+    "id": "7704bf3b-9c9b-4f55-ad93-1e89173310c3",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst v = $('Valida pedido do post').first().json;\nconst base = $('Enquadra a imagem (cálculo)').first().json;\nconst copy = parseJSON($('Copywriter do post').first().json.output ?? '') || {};\nconst arte = parseJSON($('Diretora de arte').first().json.output ?? '') || {};\nconst tags = (Array.isArray(copy.hashtags) ? copy.hashtags : []).map(t => '#' + String(t).replace(/[^\\p{L}\\p{N}_]/gu, '')).filter(t => t.length > 2).slice(0, 10);\nlet legenda = String(copy.legenda || '').trim().slice(0, 2000) || v.briefing.slice(0, 300);\nif (tags.length) legenda += '\\n\\n' + tags.join(' ');\nconst rascunho = {\n  id: v.id, k: v.k, status: 'aguardando', sessao: v.sessao, briefing: v.briefing, perfil: v.perfil,\n  titulo: String(copy.titulo || '').slice(0, 120), legenda, alt: String(copy.alt_text || '').slice(0, 300),\n  prompt_imagem: String(arte.prompt_imagem || '').slice(0, 1500), origem: base.origem, faixa: base.faixa,\n  url: `${v.base}/webhook/post-ia-img?id=${v.id}`, kb: $input.first().json.kb,\n  criadoEm: v.criadoEm, atualizadoEm: new Date().toISOString(),\n};\nreturn [{ json: { rascunho_str: JSON.stringify(rascunho) } }];"
+    },
+    "name": "Junta o rascunho do post",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     4912,
+     1776
+    ],
+    "id": "3a541b15-382d-4062-aeaa-403c2631a495"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=post:rasc:{{ $('Valida pedido do post').first().json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva o rascunho do post",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     5168,
+     1776
+    ],
+    "id": "8a11e326-1ebd-4cb4-951d-780651b325cc",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "path": "post-ia-img",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Imagem do post (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     2608
+    ],
+    "id": "7149b8dc-a405-4bd2-b7dc-2816126a2e70",
+    "webhookId": "8cde8035-fa72-4e82-9f9a-af277a69bafc"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "img",
+     "key": "={{ /^pst-[a-z0-9]+$/.test($json.query.id || '') ? 'post:img:' + $json.query.id : 'post:img:invalida' }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê a imagem do post",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     256,
+     2608
+    ],
+    "id": "655444f2-4483-4512-a036-49b9bfaf8393",
+    "alwaysOutputData": true,
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const b64 = $input.first().json.img;\nif (!b64) return [{ json: { achou: false } }];\nreturn [{ json: { achou: true }, binary: { data: { data: b64, mimeType: 'image/jpeg', fileName: 'slide.jpg', fileExtension: 'jpg' } } }];"
+    },
+    "name": "Vira arquivo JPEG",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     512,
+     2608
+    ],
+    "id": "be1686aa-df4f-4a72-9f3b-fc21e517e8a7"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "2b501ae0-0f5d-4a99-abb5-17ac1634f7b5",
+        "leftValue": "={{ $json.achou }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Achou?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     752,
+     2608
+    ],
+    "id": "0d5dd05f-fc74-4c08-a64c-1d6f4208d4b7"
+   },
+   {
+    "parameters": {
+     "respondWith": "binary",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "image/jpeg"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "public, max-age=86400"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Entrega o JPEG do post",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1008,
+     2528
+    ],
+    "id": "336b3e99-c979-41b3-9518-1239d5318141"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "não encontrada",
+     "options": {
+      "responseCode": 404,
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/plain; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Sem imagem",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1008,
+     2736
+    ],
+    "id": "0838ebe1-0e4c-45b8-91e2-072b6daff451"
+   },
+   {
+    "parameters": {
+     "path": "post-ia-ver",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Ver post (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     1408,
+     2608
+    ],
+    "id": "ba75c1b3-6e0c-4003-8c7c-f89cc7ec1eeb",
+    "webhookId": "71afa6cd-743e-430f-814c-a10b913ef08c"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "rascunho",
+     "key": "={{ /^pst-[a-z0-9]+$/.test($json.query.id || '') ? 'post:rasc:' + $json.query.id : 'post:rasc:invalido' }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê o rascunho do post",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1664,
+     2608
+    ],
+    "id": "0fb6ebb5-c824-4fd6-877a-29e0d5395a6e",
+    "alwaysOutputData": true,
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "const q = $('Ver post (GET)').first().json.query || {};\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst casca = (corpo, refresh) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">${refresh ? '<meta http-equiv=\"refresh\" content=\"6\">' : ''}<title>Aprovar post</title>\n<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:#fafafa;color:#262626;padding:20px 14px 60px}.w{max-width:520px;margin:0 auto}\n.post{background:#fff;border:1px solid #dbdbdb;border-radius:12px;overflow:hidden}.post img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#eee}.leg{padding:12px 14px;font-size:14px;white-space:pre-wrap}\n.box{background:#fff;border:1px solid #dbdbdb;border-radius:12px;padding:16px;margin-top:14px}label{display:block;font-weight:600;font-size:13px;margin:10px 0 6px}textarea,input{width:100%;padding:11px;border:1px solid #dbdbdb;border-radius:10px;font:inherit;font-size:14px}textarea{min-height:160px}\n.bts{display:flex;gap:8px;margin-top:14px}.bt{flex:1;border:0;border-radius:10px;padding:13px;font:inherit;font-weight:700;cursor:pointer;background:#efefef}.bt.pub{background:#0095f6;color:#fff}.bt:disabled{opacity:.55}\n.msg{margin-top:12px;font-weight:600;font-size:14px}.ok{color:#2e9e5b}.er{color:#d03b3b}.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;background:#efefef}.mu{color:#8e8e8e;font-size:13px}\n.s{width:44px;height:44px;border:4px solid #efefef;border-top-color:#dd2a7b;border-radius:50%;margin:60px auto 16px;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}h1{font-size:20px;text-align:center}</style></head><body><div class=\"w\">${corpo}</div></body></html>`;\nif (!r || q.k !== r.k) return [{ json: { codigo: 404, html: casca('<h1 style=\"margin-top:60px\">Post não encontrado</h1>') } }];\nif (r.status === 'gerando') return [{ json: { codigo: 200, html: casca('<div class=\"s\"></div><h1>A equipe de IA está criando seu post</h1><p class=\"mu\" style=\"text-align:center\">Diretora de arte, copywriter e IA de imagem trabalhando. Esta página se atualiza sozinha (cerca de 2 minutos).</p>', true) } }];\nif (r.status === 'erro_geracao') return [{ json: { codigo: 500, html: casca(`<h1>Não foi possível criar o post</h1><p class=\"mu\" style=\"text-align:center\">${esc(r.erro)}</p>`) } }];\nconst ST = { aguardando: '📝 Aguardando aprovação', publicado: '✅ Publicado', erro: '⚠️ Falhou ao publicar', descartado: '🗑️ Descartado' };\nconst pode = ['aguardando', 'erro'].includes(r.status);\nconst corpo = `<p style=\"margin-bottom:10px\"><span class=\"tag\">${ST[r.status] || esc(r.status)}</span> <span class=\"mu\">imagem ${esc(r.origem)}</span>${r.permalink ? ` · <a href=\"${esc(r.permalink)}\" target=\"_blank\" rel=\"noopener\">ver no Instagram</a>` : ''}</p>\n${r.erro && r.status === 'erro' ? `<p class=\"msg er\">${esc(r.erro)}</p>` : ''}\n<div class=\"post\"><img src=\"${esc(r.url)}\" alt=\"${esc(r.alt)}\"><div class=\"leg\"><b>${esc(r.perfil || 'seu_perfil')}</b> ${esc(r.legenda)}</div></div>\n${pode ? `<div class=\"box\"><label for=\"leg\">Legenda (pode editar)</label><textarea id=\"leg\" maxlength=\"2200\">${esc(r.legenda)}</textarea>\n<label for=\"senha\">Senha de publicação</label><input id=\"senha\" type=\"password\" autocomplete=\"off\" placeholder=\"Só quem tem a senha publica\">\n<div class=\"bts\"><button class=\"bt pub\" data-a=\"publicar\" type=\"button\">🚀 Publicar agora</button><button class=\"bt\" data-a=\"descartar\" type=\"button\">🗑️ Descartar</button></div><p class=\"msg\" id=\"msg\" role=\"status\"></p></div>` : ''}\n<p class=\"mu\" style=\"margin-top:12px\">Para mudar a imagem, volte ao chat e peça um ajuste: a Produtora cria uma nova versão.</p>\n<script>document.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){var a=b.getAttribute('data-a'),m=document.getElementById('msg');\nif(a==='publicar'&&!confirm('Publicar agora no Instagram?'))return;document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=true;});m.className='msg';m.textContent=a==='publicar'?'Publicando…':'Salvando…';\nfetch('/webhook/post-ia-acao',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:${JSON.stringify(r.id)},k:${JSON.stringify(r.k)},acao:a,senha:document.getElementById('senha').value,legenda:document.getElementById('leg').value})})\n.then(function(x){return x.json();}).then(function(j){if(!j.ok){m.className='msg er';m.textContent=j.erro||'Não foi possível.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});return;}m.className='msg ok';m.textContent=j.mensagem||'Feito!';setTimeout(function(){location.reload();},1500);})\n.catch(function(){m.className='msg er';m.textContent='Falha de conexão.';document.querySelectorAll('[data-a]').forEach(function(x){x.disabled=false;});});});});</script>`;\nreturn [{ json: { codigo: 200, html: casca(corpo) } }];"
+    },
+    "name": "Monta a aprovação do post",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1904,
+     2608
+    ],
+    "id": "a5cb9c2b-cdb1-4af4-ab5b-b38401c32673"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseCode": "={{ $json.codigo }}",
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Entrega a aprovação do post",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     2160,
+     2608
+    ],
+    "id": "3460807d-4146-4848-b595-2ad64a1ad5d8"
+   },
+   {
+    "parameters": {
+     "httpMethod": "POST",
+     "path": "post-ia-acao",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Ação no post (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     3344
+    ],
+    "id": "c1f2f5e9-ad09-4630-9477-5ed1fd8ac79e",
+    "webhookId": "3473bda8-521a-40a1-b685-953c95a90cbd"
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "rascunho",
+     "key": "={{ /^pst-[a-z0-9]+$/.test(($json.body || {}).id || '') ? 'post:rasc:' + $json.body.id : 'post:rasc:invalido' }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê o rascunho da ação",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     256,
+     3344
+    ],
+    "id": "18c0971d-7272-4dd2-8fcc-cf1cec0b27bf",
+    "alwaysOutputData": true,
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "// 🔐 Senha para publicar na conta do Instagram (troque aqui)\nconst SENHA = '<SEGREDO_REMOVIDO>';\nconst b = $('Ação no post (POST)').first().json.body || {};\nlet r = null;\ntry { r = JSON.parse($input.first().json.rascunho || 'null'); } catch (e) {}\nconst nao = (erro, codigo = 400) => [{ json: { ok: false, erro, codigo } }];\nif (!r || b.k !== r.k) return nao('Post não encontrado.', 404);\nif (!['publicar', 'descartar'].includes(b.acao)) return nao('Ação inválida.');\nif (b.acao === 'publicar' && b.senha !== SENHA) return nao('Senha de publicação incorreta.', 403);\nif (r.status === 'publicado') return nao('Este post já foi publicado.');\nconst legenda = String(b.legenda ?? r.legenda).replace(/\\r/g, '').trim().slice(0, 2200) || r.legenda;\nconst novo = { ...r, legenda, erro: '', atualizadoEm: new Date().toISOString() };\nif (b.acao === 'descartar') novo.status = 'descartado';\nreturn [{ json: { ok: true, acao: b.acao, id: r.id, url: r.url, legenda, rascunho_str: JSON.stringify(novo) } }];"
+    },
+    "name": "Valida ação do post",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     512,
+     3344
+    ],
+    "id": "bdbb5fd8-2412-42d8-a0e3-77efd2fd41c8"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "821ff900-4c1d-4185-bc77-286e92db1b54",
+        "leftValue": "={{ $json.ok }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Pode seguir?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     752,
+     3344
+    ],
+    "id": "adfc714c-5691-452c-8400-375c04e9a4cb"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: false, erro: $json.erro }) }}",
+     "options": {
+      "responseCode": "={{ $json.codigo }}",
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde não permitido",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1008,
+     3600
+    ],
+    "id": "2ee63e2e-3f98-465d-bc91-e6e1a3feaf9c"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "d278609c-acd8-4b20-8ebb-903c0e3b3214",
+        "leftValue": "={{ $json.acao === 'publicar' }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "É para publicar?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     1008,
+     3344
+    ],
+    "id": "d44f216b-4458-4f21-b7c2-e7c6875cb43e"
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "postImageUrl": "={{ $json.url }}",
+     "postCaption": "={{ $json.legenda }}",
+     "postAdditionalOptions": {}
+    },
+    "name": "Cria o post",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1264,
+     3216
+    ],
+    "id": "44f6107c-5c25-4495-9f97-f8dc1b3240ed",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "resource": "post",
+     "operation": "publishPost",
+     "creationId": "={{ $json.id }}"
+    },
+    "name": "Publica o post",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1504,
+     3216
+    ],
+    "id": "dbb5a8b1-195a-4bb9-b52b-1c9da5fc1cae",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "resource": "media",
+     "operation": "getMedia",
+     "mediaId": "={{ $json.id }}",
+     "mediaDetailFields": [
+      "id",
+      "permalink",
+      "timestamp"
+     ]
+    },
+    "name": "Pega o link",
+    "type": "n8n-nodes-instagram-token.instagram",
+    "typeVersion": 1,
+    "position": [
+     1744,
+     3216
+    ],
+    "id": "63e7a2b6-7a5d-4c1b-8306-c264727d9caa",
+    "credentials": {
+     "instagramAccessTokenApi": {
+      "id": "LWfbyGDT9j3MOBGq",
+      "name": "_lucrocomia_"
+     }
+    },
+    "onError": "continueRegularOutput"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Junta o resultado da publicação com o rascunho e marca como publicado (ou erro)\nconst NO_ORIGEM = 'Valida ação do post';\nconst saida = [];\nconst origem = $(NO_ORIGEM).all();\nconst itens = $input.all();\nfor (let i = 0; i < itens.length; i++) {\n  const o = origem[i] ? origem[i].json : origem[0].json;\n  const r = JSON.parse(o.rascunho_str);\n  const j = itens[i].json;\n  if (j.error || !j.id) {\n    const e = j.error;\n    Object.assign(r, { status: 'erro', erro: 'O Instagram recusou: ' + String((e && (e.message || e.description)) || e || 'sem resposta').slice(0, 300) });\n  } else {\n    Object.assign(r, { status: 'publicado', media_id: j.id, permalink: j.permalink || '', publicadoEm: new Date().toISOString(), erro: '' });\n  }\n  r.atualizadoEm = new Date().toISOString();\n  saida.push({ json: { id: r.id, ok: r.status === 'publicado', permalink: r.permalink || '', erro: r.erro || '', rascunho_str: JSON.stringify(r) } });\n}\nreturn saida;"
+    },
+    "name": "Registra o resultado",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1984,
+     3216
+    ],
+    "id": "6aba4b2f-e719-4ee2-a5c3-461061b4f2be"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=post:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva o resultado",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     2224,
+     3216
+    ],
+    "id": "c33264bc-676f-4e3b-93a1-227b523b3042",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: $json.ok, mensagem: $json.ok ? 'Publicado no Instagram! 🎉' : $json.erro, erro: $json.erro, permalink: $json.permalink }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde a publicação",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     2464,
+     3216
+    ],
+    "id": "6c2e9191-5069-484f-9d7d-ebd72e8fa181"
+   },
+   {
+    "parameters": {
+     "operation": "set",
+     "key": "=post:rasc:{{ $json.id }}",
+     "value": "={{ $json.rascunho_str }}",
+     "keyType": "string",
+     "expire": true,
+     "ttl": 2592000
+    },
+    "name": "Salva o descarte",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1264,
+     3456
+    ],
+    "id": "76158b17-a88e-4b83-848e-76fc1dabf661",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ JSON.stringify({ ok: true, mensagem: 'Post descartado.' }) }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/json; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Responde descarte",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1504,
+     3456
+    ],
+    "id": "b27fae85-ef42-473b-b92e-ac3111f98cd3"
+   },
+   {
+    "parameters": {
+     "content": "# 💬 POST CONVERSADO COM IA (com foto opcional)\n🎯 Em vez de formulário, a pessoa **conversa** com a **Lia**, a produtora. Ela entende o post, pede uma **foto** se fizer sentido e, quando tudo estiver claro, aciona uma **equipe de IAs** que cria a **imagem**, o **título**, a **legenda** e as **hashtags**. O post vai para aprovação e é publicado no Instagram pelo community node.\n▶️ **Teste:** abra a URL do chat no node **Chat do criador**, converse e anexe uma foto se quiser. Senha de publicação: **publica-5b514a** (troque em **Valida ação do post**).\n## 1️⃣ O CHAT\n📎 **Chat do criador** aceita anexar **imagens**. 📷 **Guarda a foto** + **Salva a foto**: se veio foto, ela fica guardada no Redis por 1 dia.\n🧠 **Lê histórico** + **Monta o contexto**: memória feita à mão (últimas 14 mensagens) e um aviso para a Lia se existe foto.\n🗣️ **Lia** (Claude Haiku, com reserva em outro roteador) conversa e, com o \"pode criar\" do cliente, usa a ferramenta **criar_post**, que chama a faixa 2 e devolve o **link de aprovação**.\n📝 **Registra a conversa** + **Grava o histórico**.",
+     "height": 330,
+     "width": 2620,
+     "color": 6
+    },
+    "name": "Nota · faixa 1",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -128,
+     0
+    ],
+    "id": "a6590e9e-e2be-4ba7-b957-1d019381f37b"
+   },
+   {
+    "parameters": {
+     "content": "## 2️⃣ A EQUIPE DE CRIAÇÃO (roda sozinha depois de devolver o link)\n✅ **Valida pedido** → 🗄️ **Rascunho: gerando** → ⚡ **Responde ao chat** com o link.\n📷 **Lê a foto** + **Prepara a foto** decidem o modo: **usar** a foto de verdade, **inspirar** uma imagem nova nela, ou **nenhuma** foto.\n👁️ **IA de visão** (só no modo inspirar) descreve a foto: produto, cores, luz, composição.\n🎨 **Diretora de arte** escreve o prompt da imagem (em inglês, **sem texto na imagem**, porque a IA de imagem erra letras) e a faixa de título.\n✍️ **Copywriter** escreve título, legenda com gancho e chamada, hashtags e texto alternativo.\n🖼️ **Gera a imagem** (`gemini-3.1-flash-image` pelo roteador) ou usa a foto do cliente.\n📐 **Enquadra a imagem (cálculo)** descobre o tamanho da imagem e calcula o corte central em **1080×1350**. **Enquadra e aplica a faixa** (Edit Image) recorta e escreve a faixa.\n💾 Guarda a imagem e o rascunho para aprovação.\n⚠️ Por que não editar a foto com IA? Os modelos de imagem deste roteador **ignoram a foto enviada**. Por isso: usar a foto real, ou descrevê-la e criar uma nova.",
+     "height": 363,
+     "width": 5540,
+     "color": 4
+    },
+    "name": "Nota · faixa 2",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -128,
+     944
+    ],
+    "id": "91d51fef-2360-4f6c-b0f8-398ed9b2c46f"
+   },
+   {
+    "parameters": {
+     "content": "## 3️⃣ IMAGEM PÚBLICA E PÁGINA DE APROVAÇÃO\n🖼️ `/webhook/post-ia-img?id=...` entrega o JPEG. O Instagram **baixa a imagem desse link** na hora de publicar.\n✅ `/webhook/post-ia-ver?id=...&k=...` mostra o post como no feed, com a legenda **editável**, a senha e os botões **Publicar** e **Descartar**.",
+     "height": 154,
+     "width": 2530,
+     "color": 5
+    },
+    "name": "Nota · faixa 3",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -128,
+     2304
+    ],
+    "id": "914d0e29-0300-4c49-bd1e-e44b25e0a1ad"
+   },
+   {
+    "parameters": {
+     "content": "## 4️⃣ PUBLICAR NO INSTAGRAM\n🔐 **Valida ação do post** confere a chave do link e a senha → 🚀 **Cria o post** → **Publica o post** → **Pega o link** (os três são o community node do Instagram) → **Registra o resultado** e responde com o link do post. Se o Instagram recusar, o erro aparece na página.",
+     "height": 124,
+     "width": 2830,
+     "color": 3
+    },
+    "name": "Nota · faixa 4",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -128,
+     3008
+    ],
+    "id": "6c5cc992-62db-4c2b-8b78-24955590177f"
+   },
+   {
+    "parameters": {
+     "model": "kiro/claude-haiku-4.5",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 3000,
+      "temperature": 0.6,
+      "timeout": 180000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro da Lia",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1648,
+     836
+    ],
+    "id": "8140dd75-62f7-4951-9d49-a5802972c9f8",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-2.5-flash",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 2000,
+      "temperature": 0.7,
+      "timeout": 240000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro da diretora",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     2304,
+     2196
+    ],
+    "id": "84afd99f-74c9-43de-92ef-226bab7303e6",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-2.5-flash",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 2500,
+      "temperature": 0.8,
+      "timeout": 240000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro do copywriter",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     2608,
+     2196
+    ],
+    "id": "14c2e45f-2107-4f95-9a94-09676e6a2e09",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   }
+  ],
+  "connections": {
+   "Chat do criador": {
+    "main": [
+     [
+      {
+       "node": "Guarda a foto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Guarda a foto": {
+    "main": [
+     [
+      {
+       "node": "Salva a foto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva a foto": {
+    "main": [
+     [
+      {
+       "node": "Marca que tem foto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Marca que tem foto": {
+    "main": [
+     [
+      {
+       "node": "Lê se tem foto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê se tem foto": {
+    "main": [
+     [
+      {
+       "node": "Lê histórico do chat",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê histórico do chat": {
+    "main": [
+     [
+      {
+       "node": "Monta o contexto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Monta o contexto": {
+    "main": [
+     [
+      {
+       "node": "Lia · produtora de posts",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro da Lia": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Lia · produtora de posts",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "criar_post": {
+    "ai_tool": [
+     [
+      {
+       "node": "Lia · produtora de posts",
+       "type": "ai_tool",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lia · produtora de posts": {
+    "main": [
+     [
+      {
+       "node": "Registra a conversa",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Registra a conversa": {
+    "main": [
+     [
+      {
+       "node": "Grava o histórico",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pedido de produção (POST)": {
+    "main": [
+     [
+      {
+       "node": "Valida pedido do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Valida pedido do post": {
+    "main": [
+     [
+      {
+       "node": "Pedido completo?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pedido completo?": {
+    "main": [
+     [
+      {
+       "node": "Rascunho: gerando",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Responde recusa",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Rascunho: gerando": {
+    "main": [
+     [
+      {
+       "node": "Responde ao chat",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Responde ao chat": {
+    "main": [
+     [
+      {
+       "node": "Lê a foto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê a foto": {
+    "main": [
+     [
+      {
+       "node": "Prepara a foto",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Prepara a foto": {
+    "main": [
+     [
+      {
+       "node": "Inspirar na foto?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Inspirar na foto?": {
+    "main": [
+     [
+      {
+       "node": "IA de visão descreve a foto",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Diretora de arte",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "IA de visão descreve a foto": {
+    "main": [
+     [
+      {
+       "node": "Diretora de arte",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro da diretora": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Diretora de arte",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Diretora de arte": {
+    "main": [
+     [
+      {
+       "node": "Copywriter do post",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Copywriter do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro do copywriter": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Copywriter do post",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Copywriter do post": {
+    "main": [
+     [
+      {
+       "node": "Prepara o pedido de imagem",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Prepara o pedido de imagem",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Prepara o pedido de imagem": {
+    "main": [
+     [
+      {
+       "node": "Usar a foto do cliente?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Usar a foto do cliente?": {
+    "main": [
+     [
+      {
+       "node": "Enquadra a imagem (cálculo)",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Gera a imagem",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Gera a imagem": {
+    "main": [
+     [
+      {
+       "node": "Enquadra a imagem (cálculo)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Enquadra a imagem (cálculo)": {
+    "main": [
+     [
+      {
+       "node": "Tem imagem?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Tem imagem?": {
+    "main": [
+     [
+      {
+       "node": "Enquadra e aplica a faixa",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Rascunho: erro",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Enquadra e aplica a faixa": {
+    "main": [
+     [
+      {
+       "node": "Imagem do post em base64",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Imagem do post em base64": {
+    "main": [
+     [
+      {
+       "node": "Guarda a imagem do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Guarda a imagem do post": {
+    "main": [
+     [
+      {
+       "node": "Junta o rascunho do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Junta o rascunho do post": {
+    "main": [
+     [
+      {
+       "node": "Salva o rascunho do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Imagem do post (GET)": {
+    "main": [
+     [
+      {
+       "node": "Lê a imagem do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê a imagem do post": {
+    "main": [
+     [
+      {
+       "node": "Vira arquivo JPEG",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Vira arquivo JPEG": {
+    "main": [
+     [
+      {
+       "node": "Achou?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Achou?": {
+    "main": [
+     [
+      {
+       "node": "Entrega o JPEG do post",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Sem imagem",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ver post (GET)": {
+    "main": [
+     [
+      {
+       "node": "Lê o rascunho do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê o rascunho do post": {
+    "main": [
+     [
+      {
+       "node": "Monta a aprovação do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Monta a aprovação do post": {
+    "main": [
+     [
+      {
+       "node": "Entrega a aprovação do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Ação no post (POST)": {
+    "main": [
+     [
+      {
+       "node": "Lê o rascunho da ação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê o rascunho da ação": {
+    "main": [
+     [
+      {
+       "node": "Valida ação do post",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Valida ação do post": {
+    "main": [
+     [
+      {
+       "node": "Pode seguir?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pode seguir?": {
+    "main": [
+     [
+      {
+       "node": "É para publicar?",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Responde não permitido",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "É para publicar?": {
+    "main": [
+     [
+      {
+       "node": "Cria o post",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Salva o descarte",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cria o post": {
+    "main": [
+     [
+      {
+       "node": "Publica o post",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Registra o resultado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Publica o post": {
+    "main": [
+     [
+      {
+       "node": "Pega o link",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Registra o resultado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pega o link": {
+    "main": [
+     [
+      {
+       "node": "Registra o resultado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Registra o resultado": {
+    "main": [
+     [
+      {
+       "node": "Salva o resultado",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva o resultado": {
+    "main": [
+     [
+      {
+       "node": "Responde a publicação",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Salva o descarte": {
+    "main": [
+     [
+      {
+       "node": "Responde descarte",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro da Lia": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Lia · produtora de posts",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro da diretora": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Diretora de arte",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro do copywriter": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "Copywriter do post",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-14T01:03:52.075Z",
+    "id": 258,
+    "workflowId": "eTZ7m4360dYqNJuU",
+    "versionId": "6fcd66da-907e-4a36-b6ff-549923d0fa45",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T01:03:52.164Z",
+    "id": 259,
+    "workflowId": "eTZ7m4360dYqNJuU",
+    "versionId": "6fcd66da-907e-4a36-b6ff-549923d0fa45",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

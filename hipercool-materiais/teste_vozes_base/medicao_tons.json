@@ -1,0 +1,255 @@
+{
+ "bases": {
+  "francisca": {
+   "med": 181.2,
+   "faixa_st": 10.3,
+   "dur": 27.7
+  },
+  "antonio": {
+   "med": 109.9,
+   "faixa_st": 9.5,
+   "dur": 30.8
+  },
+  "thalita": {
+   "med": 181.2,
+   "faixa_st": 10.3,
+   "dur": 27.7
+  }
+ },
+ "clones": {
+  "billie_eilish": {
+   "natural": 185.0,
+   "antonio": {
+    "med": 83.5,
+    "faixa_st": 8.8,
+    "dur": 30.8,
+    "vs_natural_st": -13.8
+   },
+   "francisca": {
+    "med": 143.5,
+    "faixa_st": 12.2,
+    "dur": 27.7,
+    "vs_natural_st": -4.4
+   }
+  },
+  "doinsuka": {
+   "natural": 282.1,
+   "antonio": {
+    "med": 123.5,
+    "faixa_st": 9.3,
+    "dur": 30.8,
+    "vs_natural_st": -14.3
+   },
+   "francisca": {
+    "med": 205.4,
+    "faixa_st": 10.5,
+    "dur": 27.7,
+    "vs_natural_st": -5.5
+   }
+  },
+  "drezin": {
+   "natural": 178.8,
+   "antonio": {
+    "med": 78.0,
+    "faixa_st": 9.3,
+    "dur": 30.8,
+    "vs_natural_st": -14.4
+   },
+   "francisca": {
+    "med": 127.6,
+    "faixa_st": 10.8,
+    "dur": 27.7,
+    "vs_natural_st": -5.8
+   }
+  },
+  "guugou": {
+   "natural": 110.7,
+   "antonio": {
+    "med": 53.7,
+    "faixa_st": 9.5,
+    "dur": 30.8,
+    "vs_natural_st": -12.5
+   },
+   "francisca": {
+    "med": 82.0,
+    "faixa_st": 10.2,
+    "dur": 27.7,
+    "vs_natural_st": -5.2
+   }
+  },
+  "ijax": {
+   "natural": 188.3,
+   "antonio": {
+    "med": 82.7,
+    "faixa_st": 8.3,
+    "dur": 30.8,
+    "vs_natural_st": -14.2
+   },
+   "francisca": {
+    "med": 136.1,
+    "faixa_st": 11.0,
+    "dur": 27.7,
+    "vs_natural_st": -5.6
+   }
+  },
+  "iki": {
+   "natural": 118.6,
+   "antonio": {
+    "med": 55.0,
+    "faixa_st": 8.0,
+    "dur": 30.8,
+    "vs_natural_st": -13.3
+   },
+   "francisca": {
+    "med": 87.5,
+    "faixa_st": 10.4,
+    "dur": 27.7,
+    "vs_natural_st": -5.3
+   }
+  },
+  "jubertim": {
+   "natural": 143.5,
+   "francisca": {
+    "med": 108.9,
+    "faixa_st": 10.2,
+    "dur": 27.7,
+    "vs_natural_st": -4.8
+   }
+  },
+  "kkvirjao": {
+   "natural": 192.7,
+   "antonio": {
+    "med": 87.1,
+    "faixa_st": 9.5,
+    "dur": 30.8,
+    "vs_natural_st": -13.7
+   },
+   "francisca": {
+    "med": 143.8,
+    "faixa_st": 10.6,
+    "dur": 27.7,
+    "vs_natural_st": -5.1
+   }
+  },
+  "mike": {
+   "natural": 122.8,
+   "antonio": {
+    "med": 59.0,
+    "faixa_st": 6.4,
+    "dur": 30.8,
+    "vs_natural_st": -12.7
+   },
+   "francisca": {
+    "med": 90.0,
+    "faixa_st": 10.5,
+    "dur": 27.7,
+    "vs_natural_st": -5.4
+   }
+  },
+  "morgan_freeman": {
+   "natural": 105.0,
+   "antonio": {
+    "med": 55.7,
+    "faixa_st": 11.9,
+    "dur": 30.8,
+    "vs_natural_st": -11.0
+   },
+   "francisca": {
+    "med": 76.7,
+    "faixa_st": 9.6,
+    "dur": 27.7,
+    "vs_natural_st": -5.4
+   }
+  },
+  "omelhormanhwa": {
+   "natural": 140.3,
+   "antonio": {
+    "med": 65.2,
+    "faixa_st": 8.7,
+    "dur": 30.8,
+    "vs_natural_st": -13.3
+   },
+   "francisca": {
+    "med": 102.1,
+    "faixa_st": 10.6,
+    "dur": 27.7,
+    "vs_natural_st": -5.5
+   }
+  },
+  "pie": {
+   "natural": 108.8,
+   "antonio": {
+    "med": 54.0,
+    "faixa_st": 7.9,
+    "dur": 30.8,
+    "vs_natural_st": -12.1
+   },
+   "francisca": {
+    "med": 82.8,
+    "faixa_st": 10.2,
+    "dur": 27.7,
+    "vs_natural_st": -4.7
+   }
+  },
+  "porao": {
+   "natural": 139.4,
+   "antonio": {
+    "med": 64.8,
+    "faixa_st": 7.6,
+    "dur": 30.8,
+    "vs_natural_st": -13.3
+   },
+   "francisca": {
+    "med": 101.8,
+    "faixa_st": 10.4,
+    "dur": 27.7,
+    "vs_natural_st": -5.4
+   }
+  },
+  "rihanna": {
+   "natural": 190.0,
+   "antonio": {
+    "med": 82.3,
+    "faixa_st": 9.7,
+    "dur": 30.8,
+    "vs_natural_st": -14.5
+   },
+   "francisca": {
+    "med": 135.6,
+    "faixa_st": 10.6,
+    "dur": 27.7,
+    "vs_natural_st": -5.8
+   }
+  },
+  "solem8037": {
+   "natural": 139.4,
+   "antonio": {
+    "med": 67.5,
+    "faixa_st": 6.7,
+    "dur": 30.8,
+    "vs_natural_st": -12.6
+   },
+   "francisca": {
+    "med": 101.6,
+    "faixa_st": 10.4,
+    "dur": 27.7,
+    "vs_natural_st": -5.5
+   }
+  },
+  "solemsun": {
+   "natural": 140.3,
+   "antonio": {
+    "med": 67.1,
+    "faixa_st": 8.1,
+    "dur": 30.8,
+    "vs_natural_st": -12.8
+   },
+   "francisca": {
+    "med": 101.3,
+    "faixa_st": 10.4,
+    "dur": 27.7,
+    "vs_natural_st": -5.6
+   }
+  }
+ }
+}

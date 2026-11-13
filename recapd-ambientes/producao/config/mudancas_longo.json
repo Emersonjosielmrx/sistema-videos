@@ -1,0 +1,28 @@
+{
+ "_leia": "Lista das mudanças do recap longo/Shorts com a data em que entraram no código. montar_pacote.py grava config/versao_codigo.json (versão = hora do envio pro Kaggle + estas mudanças) e o kaggle_trabalhador põe a versão no pronto.json de cada longo. Quem avisa no Telegram lê pronto.json['versao'] e diz quais mudanças o vídeo tem. Acrescente uma linha a cada mudança nova.",
+ "mudancas": [
+  {"desde": "2026-10-29T23:31", "item": "eco na voz removido dos climas (climas_voz)"},
+  {"desde": "2026-10-31T15:30", "item": "narradores: 1º narrador >=35% do vídeo, máx. 5, Galvão/Chaves só participação de 3 frases, Kratos fora"},
+  {"desde": "2026-10-31T15:30", "item": "voz de personagem fixa por personagem; Kratos só monstro"},
+  {"desde": "2026-10-31T15:30", "item": "raio a cada 3 trechos; movimento suave; zoom múltiplo"},
+  {"desde": "2026-10-31T15:30", "item": "memes com música (Roda Regina etc.) bloqueados; figurinha de canto desligada"},
+  {"desde": "2026-10-31T15:30", "item": "som de efeito não toca junto com a voz"},
+  {"desde": "2026-10-31T15:30", "item": "Maria + amiga: lados opostos, mesmo tamanho, sem congelar, amiga fala depois"},
+  {"desde": "2026-10-31T19:00", "item": "1080p (720 + upscale na legenda) e guarda final de 1080p"},
+  {"desde": "2026-10-31T19:00", "item": "transições novas: fogo, água, papel rasgado, gelo"},
+  {"desde": "2026-10-31T19:00", "item": "mascote reage até 9x; meme de imagem em tela cheia 1,2 s"},
+  {"desde": "2026-10-31T19:00", "item": "disco: trechos apagados depois do concat"},
+  {"desde": "2026-10-31T22:00", "item": "upscale spline + nitidez leve (VMAF 99,6); eco desligado de vez; trilha audível nos Shorts; borrão só com legenda confirmada; Porão/Mike prioridade em anime"},
+  {"desde": "2026-11-01T02:00", "item": "imagem não fica presa na tela: cada corte anda >= 60% da fala anterior (antes até 26 frases no mesmo plano)"},
+  {"desde": "2026-11-01T02:00", "item": "Capitão Nascimento e Ei Nerd fora de todo vídeo (modelos em manhwa-drive:vozes_arquivadas)"},
+  {"desde": "2026-11-01T02:30", "item": "falas de série (Greg etc.) recortadas até o fim da frase, teto 10 s (antes só a frase de busca, teto 6 s)"},
+  {"desde": "2026-11-01T04:10", "item": "trilha sem música com dono: longo/Short de anime respeitam copyright_risk (Naruto, JJBA, Pokémon, Toy Story, GTA... 112 faixas marcadas)"},
+  {"desde": "2026-11-01T09:40", "item": "60 fps (1080p60 no YouTube)"},
+  {"desde": "2026-11-01T09:40", "item": "legenda criativa: abertura (8 s) + palavras pesadas + batalhas (até 20 s), palavra no tempo da fala, até 2 por vez, fonte/cor/tamanho/lugar diferentes, choque/fogo/água; sem tarja preta nem gancho escrito"},
+  {"desde": "2026-11-01T13:30", "item": "cartões animados estilo comercial do Instagram (personagem, lugar, sistema, chat, alerta, antes/agora, like) no que a narração fala, sempre em movimento"},
+  {"desde": "2026-11-01T14:40", "item": "legenda cinética em MIX (adesivos com 5 desenhos: degradê, sombra, contorno duplo, recorte branco, caixa colorida; pop, giro, sublinhado, rastro; modo inteligente/livre sorteado por vídeo pro placar) — ref. D:\\ms-energy\\testes_legendas\\MIX"},
+  {"desde": "2026-11-01T14:10", "item": "cartões VITÓRIA (brilho divino em triunfo) e MAPA GPS (investigação/perseguição) — aprendizado b450f844/1e25c542"},
+  {"desde": "2026-11-01T13:30", "item": "decoração da legenda criativa desenhada (chapéu de bruxa, correntes, coroa, caveira...) — antes emoji que saía quadradinho na nuvem"},
+  {"desde": "2026-11-01T09:40", "item": "postagem do longo sem QA de 40 min e sem cópia de 2 GB; alimentador recolhe pedidos sem nome (refeitos)"}
+ ]
+}

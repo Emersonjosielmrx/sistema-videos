@@ -1,0 +1,15 @@
+{
+ "nome": "mascote_voz_thalita",
+ "hipotese": "Testar a voz pt-BR-ThalitaMultilingualNeural na mascote para obter entonação mais jovem, expressiva e compatível com anime/waifu nos momentos de CTA e reação, sem aumentar o tempo de render em relação à FranciscaNeural.",
+ "A": {},
+ "B": {
+  "mascote.voz": "pt-BR-ThalitaMultilingualNeural"
+ },
+ "ativo": true,
+ "enviados": {
+  "A": 13,
+  "B": 13
+ },
+ "modelo": "agy/gemini-3.8-flash-high",
+ "aberto": "2026-11-10T23:35:08"
+}

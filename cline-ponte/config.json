@@ -1,0 +1,5 @@
+{
+  "porta": 20160,
+  "chaves": ["<SEGREDO_REMOVIDO>"],
+  "tunel": { "host": "hermes-bloqueio", "porta_vps": 20160 }
+}

@@ -1,0 +1,365 @@
+{
+ "resumo": "GERACAO DO \"VIDEO ATRATIVO\" (D:\\veo\\beta) — estado em 15/10/2026.\nEntrada: run_cron_loop_3contas.bat chama cron_gerar_video_llm.py a cada 30 s (1 video por ciclo). O run() checa PAUSE_SYSTEM, flag cron_video, se todas as 13 contas (contas.py; 12 pro + 1 free) estao EXHAUSTED, RAM/CPU/disco, e tenta a fila de prompts prontos (fila.py, hoje inexistente). Depois escolhe uma persona entre 25 CANAIS, pulando temas com >=5 videos em 24 h no video_cache.json e ponderando pelo horario de pico (inteligencia.bonus_horario).\nConcepcao do prompt (montar_prompt): camada 0 = 30% de chance de replicar formula com score>=8 (hoje so o score do critico, pois nenhum video jamais teve views); camada 1 = agents.run_pipeline: Trend Scout -> Hook Generator (fala pt-BR <=12 palavras, com persona + \"keywords virais\") -> Scenario Director (cenario em ingles, \"the person in the frame\", gancho visual no 0-1 s) -> Quality Critic (score 0-10 em texto; <7 regenera ate 3 iteracoes); 30% dos videos pedem 3 falas (beats). Camada 2 = LLM simples (score 5); camada 3 = lista fixa (score 3). Todas as chamadas vao primeiro ao gateway pro (antigravity/gemini-3.1-pro-high, temperatura 0.9 fixa) e so caem nas chaves Gemini (maxOutputTokens 120) se o gateway falhar.\nAnti-repeticao: HIST_FALAS/HIST_CENARIOS por tema (ultimas 50/30 em disco; so as ultimas 10/8 vao no prompt \"NAO repita\"); sem comparacao de similaridade, sem cruzar temas, sem dedupe de quadros. A memoria foi zerada na restauracao de 12/10 (cache com 2 videos; a copia experimental tem 130 formulas de 25-26/07).\nFoto: random.choice entre 305 fotos soltas de D:\\veo\\fotos (as 334 das subpastas comedia/epocas/guerra/herois/jornal sao ignoradas); a \"foto inteligente\" nunca atua porque registrar_match nunca e chamado. gera_auto.py sobe a foto no Flow (image-to-video), mas ignora se a anexacao falhou.\nWorker (gera_auto.py): Chrome real por CDP com flags stealth, le saldo no menu da conta (minimo 20 creditos/geracao), nova sessao, garantir_modo_veo (Veo 3.1 Fast, 9:16, x1, confirmar=Nunca), digita o prompt final = \"Use the uploaded image as the starting frame... <cenario> They speak in Brazilian Portuguese: '<fala>'. 9:16 vertical portrait. [aspect ratio MUST be 9:16; 8 seconds; use Veo 3.1 - Fast model; MUST include audio]\", espera bloco novo (minimo 45 s, 8 min sem sinal = erro, deadline 32 min), baixa so se content-type video e >500 KB. Exit codes: 2 creditos, 3 sessao, 4 direitos autorais, 5 pausa, 7 reCAPTCHA.\nPos-sucesso no cron: registra formula, copia o mp4 para D:\\hipercool-materiais\\veo\\cron_shorts, 3 thumbs A/B/C, postar.json (titulo/descricao/tags por LLM + CTA + canal via roteamento.py), SO ENTAO validar_video (ffprobe: dims + codec de audio; nao checa duracao, 9:16, idioma nem rosto), e roda a pos-producao incremental (flag pos_video ON) com o pipeline antigo do config.yaml (loudnorm, crop, legendas, propaganda_inteligente, branding_watermark).\nCusto observado em 12/10: LLM ~19 s (1 iteracao), video OK em 3m13s-3m29s, ~20 creditos; falhas: exit 2 em 15 s, mas um TIMEOUT de 1500 s (25 min) numa conta que estava sem credito. Escada: 2 tentativas por prompt x 2 prompts x ate 3 contas.\nLaco de metricas: NAO fecha. metrics_client precisa de YOUTUBE_API_KEY (proibido) e nao parseia /shorts/; o postador grava posted_url mas medir_metricas.py nao e chamado por ninguem; nenhum cache (beta ou experimental) jamais teve views.\nHoje: geracao PAUSADA (PAUSE_SYSTEM manual de 12/10 17:46) com o loop ainda rodando e abortando a cada 30 s; tarefas VeoProducaoDiaria7h e CronVeo* desabilitadas; PostadorDeVideos 06:40 e AgendadorVO3 05:00 continuam ativas e leem o video_cache do veo. ~2.200 linhas sem commit.",
+ "fatos": [
+  {
+   "fato": "O loop de producao e o run_cron_loop_3contas.bat chamando cron_gerar_video_llm.py por ciclo (processo novo a cada 30 s; 15 min quando exit 6 = sem credito). loop_cron.py nao e o caminho usado.",
+   "evidencia": "D:\\veo\\beta\\run_cron_loop_3contas.bat:22-36 (\"%VENV_PY%\" -u cron_gerar_video_llm.py ... if RC==6 timeout 900 ... timeout 30); D:\\veo\\supervisor.py:97 (bat = run_cron_loop_3contas.bat)"
+  },
+  {
+   "fato": "25 personas fixas (CANAIS) com fala/cenario de fallback; a escolha pula temas saturados (>=5 videos/24 h no cache) e pondera pelo pico de horario do publico.",
+   "evidencia": "cron_gerar_video_llm.py:62-88 (CANAIS), :404-410 (detectar_saturacao max_por_dia=5), :418-438 (escolher_canal_inteligente, pesos = _I.bonus_horario); inteligencia.py:405-421"
+  },
+  {
+   "fato": "montar_prompt tem 4 camadas: replica (30%, score composto >=8), multi-agente, LLM simples (score 5) e lista estatica (score 3). O prompt final e cenario + \"They speak in Brazilian Portuguese: '<fala>'. 9:16 vertical portrait.\"",
+   "evidencia": "cron_gerar_video_llm.py:1093-1109 (CAMADA 0), :1111-1137 (CAMADA 1 run_pipeline), :1139-1156 (CAMADA 2 score=5), :1158-1164 (CAMADA 3 score=3), :1166-1172 (montagem do prompt)"
+  },
+  {
+   "fato": "O multi-agente roda Trend Scout -> Hook -> Scenario -> Critic; critico exige >=7, max 3 iteracoes; 30% dos videos pedem 3 falas (gancho/conflito/revelacao).",
+   "evidencia": "agents.py:132-259 (run_pipeline, while iteracao < max_retries+1, if score >= 7 break); cron_gerar_video_llm.py:1112 (multi_fala = random.random() < 0.30); agents.py:349-367 (prompt das 3 falas)"
+  },
+  {
+   "fato": "O Trend Scout e descartado no caminho single-fala: _agent_hook_generator calcula emocao/gancho e chama gerar_fala_viral sem passa-los. So o caminho multi usa trend_data.",
+   "evidencia": "agents.py:312-328 (emocao = ...; gancho = ...; fala = gerar_fala_viral(canal_nome, tema, exemplos=exemplos)); agents.py:353-354 (Trending/Ganchos so no prompt multi)"
+  },
+  {
+   "fato": "O Critic avalia so TEXTO (fala + cenario), nunca o video renderizado; se a chamada falha devolve score 6 por padrao.",
+   "evidencia": "agents.py:427-495 (_agent_quality_critic: user = Fala/Cenario; linha 490 return {\"score\": 6, ...})"
+  },
+  {
+   "fato": "A troca de modelo do critico nao tem efeito: ele muda a env LLM_MODEL, mas _call_gemini_native usa a constante de modulo lida no import; e por padrao TODAS as chamadas vao ao gateway pro (antigravity/gemini-3.1-pro-high), nao ao Flash Lite dos docs.",
+   "evidencia": "agents.py:433 (os.environ[\"LLM_MODEL\"] = \"gemini-flash-latest\"); llm_client.py:31 (LLM_MODEL = os.environ.get(...) no import), :268 (url usa LLM_MODEL global), :74-75 (LLM_GATEWAY_MODEL default antigravity/gemini-3.1-pro-high), :239-241 (gateway primeiro)"
+  },
+  {
+   "fato": "No fallback para chaves Gemini nativas o limite e maxOutputTokens 120 para qualquer chamada; LLMClient.send ignora max_tokens. Isso trunca o JSON do critico (8 campos), as 3 falas e a caption (600 tokens pedidos).",
+   "evidencia": "llm_client.py:272-277 (\"maxOutputTokens\": 120), :542-549 (send: max_tokens fica implicito); publicar.py:62 (send(prompt, max_tokens=600))"
+  },
+  {
+   "fato": "Anti-repeticao = listas HIST_FALAS/HIST_CENARIOS por tema (50/30 guardadas; 10/8 enviadas ao LLM como \"NAO repita\"); sem similaridade, sem cruzar temas. As \"vencedoras\" exigem views>=100, logo sempre vazias.",
+   "evidencia": "cron_gerar_video_llm.py:146-148, :1117-1118, :1174-1177; llm_client.py:380-383 (ultimas = exemplos[-10:]), :430-433 (ultimos = exemplos_cenarios[-8:]); vencedoras.py:55-60 (min_views=100)"
+  },
+  {
+   "fato": "A memoria de aprendizado foi zerada na restauracao de 12/10: cache da beta com 2 videos (0 views); hist com 2 falas. A copia experimental guarda 130 formulas (25-26/07, 92 agent/38 llm, score medio 7.08) tambem sem nenhuma view.",
+   "evidencia": "D:\\veo\\beta\\logs\\video_cache.json (2 itens, ts 2026-10-12); D:\\veo\\beta\\logs\\cron_gerar_video_llm.hist.json (2 falas); D:\\veo\\experimental\\logs\\video_cache.json (130 itens, com views: 0, com posted_url: 0)"
+  },
+  {
+   "fato": "A foto e sorteada entre as 305 fotos soltas da raiz de D:\\veo\\fotos; as 334 fotos das subpastas (comedia 30, epocas 170, guerra 73, herois 54, jornal 7) nunca entram, e nenhum codigo cita essas pastas.",
+   "evidencia": "cron_gerar_video_llm.py:941-953 (glob.glob(os.path.join(FOTOS_DIR, pat)) sem recursao; random.choice(fotos)); contagem: ls D:\\veo\\fotos\\*.jpg|jpeg|png = 305; find -type f = 656"
+  },
+  {
+   "fato": "A \"foto inteligente\" por cenario nunca atua: registrar_match (que alimentaria logs/foto_cenario_match.json) nao e chamado em lugar nenhum e o arquivo nao existe.",
+   "evidencia": "cron_gerar_video_llm.py:333-351 (registrar_match) e :368-381 (escolher_foto_inteligente le load_foto_cenario()); grep \"registrar_match(\" = 0 usos fora da definicao; logs/foto_cenario_match.json ausente"
+  },
+  {
+   "fato": "O prompt pede explicitamente que a pessoa da foto seja a protagonista desde o segundo 0 e fale a frase; o worker prefixa \"Use the uploaded image as the starting frame (image-to-video mode). Animate it:\" e o _enrich_prompt anexa aspecto/duracao/modelo/audio.",
+   "evidencia": "llm_client.py:416-428 (system do gerar_prompt_viral: \"the person in the frame\"); gera_auto.py:808-814; flow_bot.py:134-157 (_enrich_prompt)"
+  },
+  {
+   "fato": "gera_auto ignora o retorno de garantir_modo_veo e de _subir_imagem: se a foto nao anexar, o prompt continua pedindo image-to-video e o Flow gera com uma pessoa generica; o cron registra a foto como usada.",
+   "evidencia": "gera_auto.py:845 (garantir_modo_veo(page, ...) sem usar o bool), :852 (_subir_imagem(page, image, log=log) sem usar o bool), :339-347 (retorna bool(anexada)); cron_gerar_video_llm.py:1503-1506 (registrar_formula com foto)"
+  },
+  {
+   "fato": "Controles de credito: saldo lido no menu da conta antes de gerar (minimo 20 creditos; Veo 3.1 Fast ~20/geracao) + padroes de texto; conta sem credito vira EXHAUSTED ate 00:05 do dia seguinte para qualquer tier.",
+   "evidencia": "gera_auto.py:721-729 (CREDITO_MINIMO = 20); creditos.py:36-47 (PATTERNS), :119-158 (ler_saldo_creditos); cron_gerar_video_llm.py:744-779 (marcar_creditos_esgotados: proxima meia-noite + 5 min)"
+  },
+  {
+   "fato": "Controle de qualidade pos-render = validar_video com ffprobe (so largura/altura e codec de audio); nao confere duracao, proporcao 9:16, idioma da fala, presenca de rosto/lip-sync; so loga \"AVISO: video sem audio!\" e segue como sucesso. Nao ha transcricao/Whisper na beta.",
+   "evidencia": "cron_gerar_video_llm.py:1280-1298 (validar_video), :1577-1582 (if not audio: log AVISO ... SUCESSO); grep whisper/transcri em D:\\veo\\beta = so subtitles_veo.py (estilo de legenda)"
+  },
+  {
+   "fato": "Protecao contra Nano Banana (modo imagem): garantir_modo_veo + download so aceita content-type video >500 KB + cron exige >100 KB; mas sem checar duracao ~8 s como o GUIA manda.",
+   "evidencia": "gera_auto.py:211-251, :147 (if not resp.ok or \"video\" not in tipo or len(body) < 500_000), cron_gerar_video_llm.py:1277; GUIA_AUTOMACAO_FLOW_VEO.md:34-41 (validar com ffprobe duracao)"
+  },
+  {
+   "fato": "Tempos reais de 12/10: LLM 19 s (17:09:15->17:09:34, iteracoes=1), video OK em 3m13s (17:09:34->17:12:47) e 3m29s (17:39:45->17:43:14); exit 2 em 15 s; TIMEOUT 1500 s na seebotsia que na tentativa seguinte deu creditos esgotados.",
+   "evidencia": "D:\\veo\\beta\\logs\\cron_gerar_llm.log linhas de 2026-10-12 17:09:15, 17:09:34, 17:12:47-53, 17:14:13-29, 17:39:30 (\"[gerar] TIMEOUT 1500s\"), 17:39:45 (\"exit code 2\"), 17:43:14-19"
+  },
+  {
+   "fato": "Os timeouts nao batem: o cron mata o worker em 1200 s x fator de carga (1.0-2.0), mas o worker so desiste em GEN_TIMEOUT_S 1800 + 120 s; MIN_ESPERA 45 s, SEM_SINAL 480 s.",
+   "evidencia": "cron_gerar_video_llm.py:1231 (recursos.timeout_dinamico(1200)); recursos.py:90-96 (fatores 1.0/1.25/1.5/2.0); gera_auto.py:914-922 (MIN_ESPERA_S = 45, SEM_SINAL_S = 480, deadline = GEN_TIMEOUT_S + 120); config.py:20 (GEN_TIMEOUT_S = 1800)"
+  },
+  {
+   "fato": "Escada de resiliencia: 2 tentativas por prompt, 2 prompts por conta, ate 3 contas (video com score <5.5: 1 prompt, 1 conta); cooldown de 5 min na conta apos 4 falhas; exit 4 (direitos) escala trocar_prompt -> isolar_foto em D:\\veo\\fotos_bloqueadas.",
+   "evidencia": "cron_gerar_video_llm.py:1395-1400, :1417-1426, :1608-1639; :1020-1073 (_tratar_bloqueio_direitos; md5 do prompt em _prompt_key :973-979)"
+  },
+  {
+   "fato": "O stdout do worker (prompt final, saldo, ajustes do Flow, upload da foto) e capturado e descartado no sucesso; na falha so os ultimos 300 chars do stderr. Nenhum log em disco contem essas linhas.",
+   "evidencia": "cron_gerar_video_llm.py:1236 (subprocess.run(cmd, capture_output=True...)), :1275 (result.stderr[-300:]); grep \"[veo] ajustes|[img] imagem anexada\" em logs/*.log = nenhum"
+  },
+  {
+   "fato": "Laco de metricas nao fecha: _auto_fetch_metricas e no-op sem posted_url/YOUTUBE_API_KEY; metrics_client so le YouTube com API key (regra da dona proibe) e a regex nao casa URLs /shorts/; medir_metricas.py do postador (que gravaria views no cache) nao e chamado por nenhum .bat/.py.",
+   "evidencia": "cron_gerar_video_llm.py:184-208; metrics_client.py:37-41 (if not api_key: return {}), :154 (regex (?:v=|youtu\\.be/)); D:\\postador-de-videos\\bin\\medir_metricas.py:1-30; grep medir_metricas em D:\\postador-de-videos = so docstring de postar_tudo_hoje.py:245"
+  },
+  {
+   "fato": "analisar_padroes_viralizacao usa re sem importar no modulo (import so dentro de outras funcoes) -> NameError assim que houver 3 videos com views; o erro e engolido em _auto_fetch_metricas.",
+   "evidencia": "cron_gerar_video_llm.py:25 (import os, sys, random, subprocess, glob, datetime, json), :618 (re.findall(r'\\w+', todas_falas)), :202-205 (try/except pass)"
+  },
+  {
+   "fato": "postar.json e escrito ANTES da validacao e da pos-producao, aponta para o mp4 cru e e um unico arquivo por pasta: cada video novo sobrescreve o anterior (cron_shorts tem 1 postar.json, do ultimo video).",
+   "evidencia": "publicar.py:139 (out = mp4.with_name(\"postar.json\")); cron_gerar_video_llm.py:1564-1575 (gerar_postar_json) antes de :1577 (validar_video); ls D:\\veo\\beta\\videos\\cron_shorts = 1 postar.json (super_slow_ia...)"
+  },
+  {
+   "fato": "Apos cada video, o cron roda a pos-producao incremental (flag pos_video = on) com o pipeline antigo: loudnorm, crop, legendas, propaganda_inteligente e branding_watermark.",
+   "evidencia": "cron_gerar_video_llm.py:1587-1599 (if _flag_on(\"pos_video\"): _run_one(out_path, ...)); pos_producao/flags/pos_video.flag = on; pos_producao/config.yaml:16-21 (pipeline: ... plugins.propaganda_inteligente, plugins.branding_watermark); cron_gerar_llm.log 2026-10-12 17:12:53 \"[pos] rodando pipeline\""
+  },
+  {
+   "fato": "A caption do postar.json pede titulo com 1-2 emojis, 5 hashtags e anexa um CTA que e o MESMO para todos os videos do dia (CTA_POOL indexado pelo dia do ano); fallback com \"#shorts #ia #viral #brasil\".",
+   "evidencia": "publicar.py:54-57 (\"1-2 emojis\", \"5 hashtags\"), :70-71 (descricao += \"👉 {cta}\"), :87 (#shorts #ia ...); inteligencia.py:231-242 (CTA_POOL[datetime.date.today().toordinal() % 4]); postar.json de 12/10: \"👉 segue pra nao perder o proximo\""
+  },
+  {
+   "fato": "roteamento.py usa hash() (nao deterministico entre processos), tem 'or True' que torna o return [] inalcancavel, e aponta para handles de canais que nao existem mais na rede: dos 19 handles, so animescomia esta em rede_canais.json. O postar.json de 12/10 roteou para gameoftroneskingsroadbrasil.",
+   "evidencia": "roteamento.py:58-61 (if p in _GENERICAS or True: idx = abs(hash(...)) % len(_POOL_HUMOR)); grep dos handles em D:\\postador-de-videos\\config\\rede_canais.json: animescomia=1, demais=0; D:\\veo\\beta\\videos\\cron_shorts\\postar.json \"canais\": [\"gameoftroneskingsroadbrasil\"]"
+  },
+  {
+   "fato": "As 3 thumbnails A/B/C por video (3.411 arquivos em thumbnails/) nunca sao medidas nem usadas: postar_tudo_hoje nao passa thumbnail ao politica.postar_youtube.",
+   "evidencia": "cron_gerar_video_llm.py:1545-1559; ls D:\\veo\\beta\\thumbnails = 3411; grep thumbnail em D:\\postador-de-videos\\bin\\postar_tudo_hoje.py = 0 (so politica.py:438-471 aceita o parametro)"
+  },
+  {
+   "fato": "Estado hoje: PAUSE_SYSTEM manual desde 12/10 17:46 com o loop ainda vivo abortando a cada 30 s ate 15/10 16:58; tarefa VeoProducaoDiaria7h Disabled (ultima 31/08), CronVeo* Disabled (apontam para D:\\hipercool-inferior-fix); PostadorDeVideos (06:40) e AgendadorVO3 (05:00) Ready.",
+   "evidencia": "D:\\veo\\beta\\logs\\PAUSE_SYSTEM {\"until\": null, \"motivo\": \"manual\", \"criado_em\": \"2026-10-12T17:46:44\"}; cron_gerar_llm.log 2026-10-15 16:58:40 \"[pause] sistema pausado, abortando\"; Get-ScheduledTask: VeoProducaoDiaria7h state=Disabled last=31/08/2026; PostadorDeVideos Ready next=16/10 06:40"
+  },
+  {
+   "fato": "O PostadorDeVideos (06:40) le o video_cache da beta e posta qualquer item sem posted_url cujo mp4 exista (prefere o cru), com titulo pedido ao Gemini; os 2 videos de 12/10 estao elegiveis assim que houver canal livre.",
+   "evidencia": "D:\\postador-de-videos\\bin\\postar_tudo_hoje.py:37 (VEO_CACHE), :90-101 (_resolver_video_vo3: p.is_file() -> cru), :107-126 (listar_vo3_pendentes), :229-240 (gravar_posted_url)"
+  },
+  {
+   "fato": "O que o codigo NAO commitado acrescentou no cron: trava por porta (filelock) contra o robo MS Energy, exit 3/7 (sessao/reCAPTCHA), modo paralelo SKIP_RESOURCE_CHECK (ignora pausa e guarda de carga), timeout 720->1200, copia para hipercool-materiais, subcomando loop, bloqueio global de 3->10 sessoes. No worker: reescrita do upload/download para a UI de 12/10 do flow.google.com, nova sessao por geracao, projeto por conta em flow_projetos.json, stealth/limpeza de reCAPTCHA.",
+   "evidencia": "git -C D:\\veo\\beta diff cron_gerar_video_llm.py (hunks em :221-241, :251-252, :271-272, :808-832, :1221-1233, :1263-1273, :1405-1414, :1509-1519, :1696-1717); git diff gera_auto.py (+_load_proj_map/_save_proj_url/_proj_inicial, +midias/_video_do_bloco/_baixar_url, +nova_sessao, +_aprovar_se_pedir, +RecaptchaError, +_gerar_impl)"
+  },
+  {
+   "fato": "Outro robo (MS Energy) escreve no mesmo logs/sessoes_status.json e disputa as mesmas contas/portas; o cooldown de 30 min e aplicado quando ha >=3 falhas acumuladas (so zera no sucesso), nao \"em <30 min\" como diz o docstring.",
+   "evidencia": "logs/sessoes_status.json filmescomia failures_log motivo \"gerar_video falhou MS Energy\"; cron_gerar_video_llm.py:704-708 (docstring) vs :735-739 (if len(log_fails) >= 3)"
+  },
+  {
+   "fato": "Segredos: chaves Gemini em D:\\veo\\secrets\\gemini_keys.json e gateway em beta\\secrets\\gateway.json (ambos gitignored); o log grava prefixo de 10 chars da chave e o usuario do proxy; FLOW_PROXY (Webshare user:pass) vem por env.",
+   "evidencia": "llm_client.py:40-42, :61-63, :295-303 (api_key[:10]); gera_auto.py:15-27, :605 (log ... {_FLOW_PROXY_USER}@{_FLOW_PROXY_HOST}); .gitignore (secrets/, *_keys.json)"
+  },
+  {
+   "fato": "Caminhos fixos para fora do projeto: ffprobe/ffmpeg em D:\\hipercool-materiais\\bin (cron + ~25 arquivos da pos_producao) e copia para D:\\hipercool-materiais\\veo\\cron_shorts; se o ffprobe faltar, validar_video devolve (None, <mensagem de erro>) e a mensagem conta como \"audio\" (nao gera aviso).",
+   "evidencia": "cron_gerar_video_llm.py:1284 (ffprobe = r\"D:\\hipercool-materiais\\bin\\ffprobe.exe\"), :1297-1298 (return None, str(e)), :1579 (if not audio); :1512; grep hipercool-materiais em pos_producao = 25+ arquivos"
+  },
+  {
+   "fato": "FLOW_HEADLESS (setado pelo START_DIARIO e pelo supervisor) nao e lido por gera_auto: o Chrome sempre abre com janela; a tarefa das 7 h abriria janela.",
+   "evidencia": "Veo_START_DIARIO_7H.bat:14 (set FLOW_HEADLESS=1); supervisor.py:98-99; grep headless em gera_auto.py = 0 (so config.py:23-26, nao usado); gera_auto.py:493-508 (chrome_args sem --headless)"
+  },
+  {
+   "fato": "Codigo morto/duplicado: agents.AGENTS_CONFIG e GeminiFlashLiteLLM (temperaturas por agente nunca aplicadas), llm_client *_i18n, cron ajustar_score_com_historico/gerar_fila_safe/gerar_cenario_safe/formula_to_canal_dict, inteligencia HOOK_VISUAL_INSTR/LOOP_INSTR/melhor_gancho, metrics_client auto_update_bio_tiktok; flow_bot.py (1.680 linhas) so e usado por 6 nomes; 3 listas de stopwords e 4 loaders de cache; loop_cron.py importa run sem load_hist (se usado, save_hist apagaria o historico); validate.py nao importa inteligencia/fila/publicar/roteamento/recursos; README/TUTORIAL citam venv do hipercool, D:\\hipercool-inferior-fix, tools/ e _LIXO_2026-07-26/ que nao existem.",
+   "evidencia": "grep de usos: registrar_match 0, ajustar_score_com_historico 0, gerar_fila_safe 0, GeminiFlashLiteLLM 0, AGENTS_CONFIG 0, HOOK_VISUAL_INSTR 0, LOOP_INSTR 0, gerar_fala_viral_i18n 0; gera_auto.py:808,838,858,967 (unicos usos de flow_bot); loop_cron.py:7,16; validate.py:22-27; README.md:16,72,76; TUTORIAL_AGENTE.md:7-9; ls tools _LIXO_2026-07-26 = nao existem"
+  },
+  {
+   "fato": "Flags stealth no Chrome e limpeza de reCAPTCHA: --disable-web-security, --disable-blink-features=AutomationControlled, spoof de navigator.webdriver/plugins/WebGL, remocao de cookies/cache do reCAPTCHA e proxy rotativo opcional.",
+   "evidencia": "gera_auto.py:493-507 (chrome_args), :546-586 (add_init_script stealth), :614-664 (limpeza localStorage/cookies/CacheStorage reCAPTCHA)"
+  }
+ ],
+ "problemas": [
+  {
+   "titulo": "Pos-producao automatica ainda aplica propaganda + marca (@InovareStories) em todo video novo",
+   "evidencia": "cron_gerar_video_llm.py:1587-1599 roda runner.run_one quando pos_video=on (pos_producao/flags/pos_video.flag = on); pos_producao/config.yaml:16-21 pipeline inclui plugins.propaganda_inteligente e plugins.branding_watermark; log 12/10 17:12:53 e 17:43:19 \"[pos] rodando pipeline no video recem-gerado\"",
+   "impacto": "Cada video gerado produz em videos_pos/cron_shorts (233 arquivos) a versao com slide de produto/WhatsApp e cartao \"Siga\" que o LEIA.txt aponta como causa da queda dos canais; esse material segue sendo reaproveitado por TikTok/Instagram e pode voltar ao YouTube pelo caminho antigo.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Caminho antigo de postagem continua armado sobre o video_cache do veo",
+   "evidencia": "Get-ScheduledTask: PostadorDeVideos Ready 06:40 e AgendadorVO3 Ready 05:00; D:\\postador-de-videos\\bin\\postar_tudo_hoje.py:107-126 lista todo item do cache sem posted_url com mp4 existente; publicar.py:54-57/87 titulo com emojis, 5 hashtags, \"#shorts #ia #viral #brasil\"; roteamento.py:58-61 roteia para handles inexistentes (so animescomia esta em rede_canais.json)",
+   "impacto": "Assim que um canal ficar livre, videos do veo sobem sem a aprovacao/diretor da rede, com metadados por template e CTA identico no dia inteiro, nos mesmos padroes que o relatorio do banimento lista; roteamento com hash() e 'or True' torna o destino aleatorio por processo.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Visual homogeneo entre as 25 personas (\"neon/cyberpunk/vibrant\" por instrucao)",
+   "evidencia": "llm_client.py:424 (\"Estilo: viral TikTok, dinamico, cores vibrantes, lighting chamativo\"); agents.py:417 (\"ultra HD, neon vibrant lighting\" no template multi); os 2 cenarios de 12/10 no video_cache.json: \"neon rain... cyberpunk lighting\" e \"neon water droplets... dark high-speed lab\"",
+   "impacto": "Videos de canais diferentes com a mesma cara, mesma foto da dona e mesma estrutura de 8 s reforcam o sinal \"Shorts de IA muito parecidos\" apontado no banimento; a persona define tom da fala mas nao define estetica visual propria.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "Idioma, fala e rosto do video gerado nao sao conferidos",
+   "evidencia": "cron_gerar_video_llm.py:1280-1298 (validar_video so dims + codec de audio), :1577-1582 (segue como SUCESSO mesmo sem audio); grep whisper/transcri na beta = nenhum; gera_auto.py:852 ignora o retorno de _subir_imagem",
+   "impacto": "Videos em ingles/espanhol, sem fala, com legenda errada do Veo, sem a dona no quadro ou com pessoa generica entram no cache como sucesso (score 8+), vao para postar.json e viram candidatos a postagem; o aprendizado replica formulas de videos que nunca foram vistos.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "O laco de metricas nunca fechou (0 views em qualquer cache da historia do projeto)",
+   "evidencia": "metrics_client.py:37-41 exige YOUTUBE_API_KEY (regra da dona proibe chave Google) e :154 regex sem /shorts/; cron_gerar_video_llm.py:618 NameError de re em analisar_padroes_viralizacao; D:\\postador-de-videos\\bin\\medir_metricas.py sem chamador; video_cache beta (2) e experimental (130) com views=0",
+   "impacto": "Replica de formulas (score>=8), keywords virais, ranking de ganchos, foto inteligente e vencedoras rodam todos sobre o score do proprio critico: o sistema aprende a agradar o LLM, nao o publico. Thumbs A/B (3.411 arquivos) e hook_family nunca sao avaliados.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Memoria de anti-repeticao e saturacao foi zerada e e fraca por desenho",
+   "evidencia": "logs/video_cache.json e hist com 2 itens (12/10); experimental/logs/video_cache.json com 130 formulas nao importadas; llm_client.py:380-383 e :430-433 so mandam as ultimas 10 falas/8 cenarios do MESMO tema; sem dedupe de quadros (grep phash/imagehash = 0)",
+   "impacto": "detectar_saturacao (>=5/tema/24 h) e o \"NAO repita\" partem do zero; falas parecidas entre temas e cenarios quase iguais passam; nada impede dois videos visualmente identicos.",
+   "liga_banimento": true
+  },
+  {
+   "titulo": "postar.json sobrescrito a cada video e gravado antes de validar",
+   "evidencia": "publicar.py:139 (mp4.with_name(\"postar.json\")); cron_gerar_video_llm.py:1564-1575 antes de :1577; ls videos/cron_shorts = 1 postar.json (so o ultimo video)",
+   "impacto": "Metadados do video anterior se perdem (o postador cai no Gemini generico); um video invalido ja tem postar.json pronto.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Critico e agentes nao rodam como documentado: modelo unico, temperatura 0.9 fixa, Trend Scout descartado, truncamento em 120 tokens no fallback",
+   "evidencia": "agents.py:433 vs llm_client.py:31/268 (override sem efeito); llm_client.py:117 e :274 (temperature 0.9); agents.py:312-328 (trend_data ignorado no single); llm_client.py:276 (maxOutputTokens 120) e agents.py:490 (score 6 por padrao)",
+   "impacto": "O \"juiz\" tem a mesma criatividade/vies do gerador; 1 chamada LLM por video e desperdicada; quando o gateway cai, o JSON do critico trunca e todo video recebe 6 -> regenera ate 3x e sai com 6 mesmo assim.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Creditos: modelo de reset diario para contas pro e timeout de 25 min antes de detectar conta vazia",
+   "evidencia": "cron_gerar_video_llm.py:744-779 (EXHAUSTED ate 00:05) vs comentario :868-871 (pro = 1050 creditos que acumulam); log 12/10 17:14:29->17:39:30 TIMEOUT 1500s na seebotsia e 17:39:45 exit 2 na mesma conta; cron :1231 (1200 s x fator) vs gera_auto :922 (1800+120 s)",
+   "impacto": "Contas pro vazias sao retestadas todo dia (abrir Chrome + 3-25 min); o cron pode matar o worker antes do deadline do proprio worker; quando o saldo nao e lido, 25 min e uma tentativa da escada sao queimados.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Diagnostico do worker e perdido (stdout descartado)",
+   "evidencia": "cron_gerar_video_llm.py:1236 capture_output=True; :1275 so stderr[-300:] em falha generica; nenhum log em logs/ contem \"[veo] ajustes\" ou \"[img] imagem anexada\"",
+   "impacto": "Nao da para saber, depois, se a foto anexou, qual modelo o Flow usou, qual prompt final foi enviado ou quanto tempo o render levou; cada bug novo exige reproduzir com a dona olhando.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Tarefa agendada abriria janela: FLOW_HEADLESS nao e aplicado",
+   "evidencia": "Veo_START_DIARIO_7H.bat:14 e supervisor.py:98-99 setam FLOW_HEADLESS; gera_auto.py:493-508 nao le a variavel nem passa --headless; config.HEADLESS_GEN nao e usado por gera_auto",
+   "impacto": "Viola a regra da dona (tarefa agendada nao pode abrir janela, sem_janela); o supervisor acredita estar ligando em headless.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Pausa manual nao para o loop; modo paralelo ignora a pausa",
+   "evidencia": "cron_gerar_llm.log 15/10 ate 16:58:40 \"[pause] sistema pausado, abortando\" a cada 30 s; cron_gerar_video_llm.py:251-252 e :271-272 (SKIP_RESOURCE_CHECK=1 ignora pausar_sistema e sistema_pausado); gera_auto.py:1011-1012",
+   "impacto": "Processo zumbi consumindo CPU e poluindo o log por 3 dias; qualquer .bat que exporte SKIP_RESOURCE_CHECK=1 gera mesmo com a dona tendo pausado.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "hash() nao deterministico e caminhos fixos fora do projeto",
+   "evidencia": "roteamento.py:60 e pos_producao/plugins/propaganda_inteligente.py:61 (hash(stem)); cron_gerar_video_llm.py:1284 e :1512 (D:\\hipercool-materiais); :1297-1298 + :1579 (erro do ffprobe passa como 'audio' presente); 25+ arquivos da pos_producao com ffmpeg fixo",
+   "impacto": "Sorteios nao reproduziveis entre execucoes (contra a regra md5 do hipercool); se D:\\hipercool-materiais mudar, a validacao vira no-op silencioso e a copia falha.",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Codigo nao commitado e documentacao desatualizada",
+   "evidencia": "git diff --stat: 11 arquivos, +2218/-563 desde 31/07; README.md:16,72,76 e TUTORIAL_AGENTE.md:7-9 citam venv do hipercool, D:\\hipercool-inferior-fix, tools/, _LIXO_2026-07-26/ (inexistentes); ARQUITETURA.md diz Flash Lite (hoje gateway pro)",
+   "impacto": "O que esta no ar nao esta versionado; o proximo agente segue instrucoes erradas (ja aconteceu no Hermes em 06/10).",
+   "liga_banimento": false
+  },
+  {
+   "titulo": "Estado compartilhado com o robo MS Energy e cooldown por contagem acumulada",
+   "evidencia": "logs/sessoes_status.json filmescomia: failures_log com \"gerar_video falhou MS Energy\"; cron_gerar_video_llm.py:735-739 cooldown se len(log_fails) >= 3 (lista so zera no sucesso)",
+   "impacto": "Falhas de outro projeto tiram contas do rodizio do veo; apos 3 falhas historicas, toda falha nova reaplica 30 min de cooldown.",
+   "liga_banimento": false
+  }
+ ],
+ "oportunidades": [
+  {
+   "titulo": "Fechar o laco de metricas pelo navegador (sem API key)",
+   "fonte": "D:\\hipercool-videos\\bin\\metricas.py (coletar via youtube_studio_extras --metricas) e D:\\postador-de-videos\\bin\\youtube_studio_extras.py; D:\\postador-de-videos\\bin\\notificar_telegram.py (views 48 h -> aprendizado_global.json)",
+   "como_adaptar": "Trocar metrics_client.auto_update_all por um coletor que le o Studio no navegador (ou reutiliza o aprendizado_global.json da rede, que ja identifica origem 'veo limpo' em notificar_telegram.py:599-601) e grava views/likes/retencao em video_cache.metrics via update_metrics; corrigir o import de re no cron; agendar 1x/dia sem janela.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Conferir idioma e fala do video gerado antes de aceitar",
+   "fonte": "D:\\manhwa-react\\mr\\transcribe.py (transcribe_groq via mr/groq_api proxy Webshare, retorna language/words) e D:\\postador-de-videos\\bin\\limpar_veo.py:163 (transcrever); mr/memoria.py:132-158 (_trigramas/repetido_texto)",
+   "como_adaptar": "Depois do download, extrair audio, transcrever com Groq pelo proxy, exigir idioma pt e similaridade por trigramas com a fala pedida (>=0.5); se falhar, marcar o mp4 como 'revisar', nao registrar como sucesso e tentar outro prompt (sem gastar conta nova).",
+   "esforco": "M"
+  },
+  {
+   "titulo": "validar_video forte e ANTES de publicar",
+   "fonte": "D:\\manhwa-react\\mr\\validate.py:8 (validate_output: duracao esperada, streams, LUFS) + GUIA_AUTOMACAO_FLOW_VEO.md:34-41",
+   "como_adaptar": "Portar validate_output para checar h264/aac, 720x1280 ou 1080x1920, duracao 7.5-8.5 s, audio presente; mover a chamada para antes da copia/postar.json/thumbs; tratar (None, erro) do ffprobe como falha; usar FFMPEG_PATH do pos_producao/config.py em vez do caminho fixo.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Garantir que a foto da dona realmente entrou (image-to-video)",
+   "fonte": "D:\\veo\\beta\\gera_auto.py:339-347 (ja devolve bool) e :845",
+   "como_adaptar": "Se _subir_imagem retornar False, nao enviar o prompt (tentar de novo / abortar com exit proprio) em vez de gerar pessoa generica; registrar no cache um campo foto_anexada; idem para garantir_modo_veo (abortar se o modelo nao ficou Veo).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Pipeline incremental LIMPO por padrao",
+   "fonte": "D:\\veo\\beta\\pos_producao\\config.yaml e D:\\postador-de-videos\\bin\\limpar_veo.py (regra 'nunca COMPLETO como limpo')",
+   "como_adaptar": "Tirar propaganda_inteligente e branding_watermark do pipeline do config.yaml (deixar loudnorm/crop/legendas) ou desligar pos_video; COMPLETO so sob demanda pelo worker_noite, sem numero de WhatsApp no quadro (link na descricao/comentario fixado via youtube_studio_extras).",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Dedupe de quadros e de texto entre videos (e entre temas)",
+   "fonte": "D:\\manhwa-react\\mr\\memoria.py:35-113 (impressao_arquivo, hashes_quadros, repetido) e :132-158 (repetido_texto)",
+   "como_adaptar": "Ao registrar_formula, guardar hashes de quadros do mp4 e trigramas da fala; em montar_prompt, rejeitar fala/cenario com trigramas >0.3 contra TODO o cache (nao so o tema) e, pos-render, rejeitar video com quadros parecidos a um ja feito.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Importar a memoria antiga (130 formulas + historico)",
+   "fonte": "D:\\veo\\experimental\\logs\\video_cache.json e cron_gerar_video_llm.hist.json (26/07)",
+   "como_adaptar": "Script unico que mescla os itens da experimental no cache da beta (sem video_path, so para anti-repeticao/saturacao) e as falas/cenarios no hist; ajuda o 'NAO repita' e a saturacao a nao partirem do zero.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Estetica propria por persona (acabar com o neon padrao)",
+   "fonte": "D:\\veo\\beta\\inteligencia.py:30-181 (PERSONAS) e D:\\hipercool-videos\\docs\\MELHORIAS_PARA_TODOS_OS_PROJETOS.md secao 4 (estrutura de retencao)",
+   "como_adaptar": "Adicionar campo 'visual' (paleta, locacao, lente, ritmo) a cada persona e injeta-lo no gerar_prompt_viral/_agent_scenario_director_multi no lugar de 'cores vibrantes/neon'; proibir termos repetidos nos ultimos N cenarios de qualquer tema.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Usar as 334 fotos das subpastas por tema",
+   "fonte": "D:\\veo\\fotos\\{comedia,epocas,guerra,herois,jornal} e cron_gerar_video_llm.py:941-953",
+   "como_adaptar": "Mapa tema->pasta (Humor/Piadas/ETs -> comedia; Releitura/E Se -> epocas; Noticias de IA -> jornal; Recordes/Motivacao -> herois; Cenarios Hipoteticos -> guerra) com fallback na raiz; escolher por md5 do id do video, e registrar a foto no cache (ja registra) para medir depois.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Critico de verdade: modelo distinto, JSON sem truncar e critica visual opcional",
+   "fonte": "D:\\veo\\beta\\agents.py:427-495; D:\\veo\\beta\\pos_producao\\comercial_agents.py:239-261 (critico com 'fala_garantida'/'vende')",
+   "como_adaptar": "Passar o modelo como parametro de _call_gemini_native (nao por env) e max_tokens real (subir 120 -> 512); usar o trend_data no hook single ou remover o Trend Scout; opcional: apos o render, mandar 2 quadros + transcricao ao LLM para nota de 'a dona aparece, fala em pt-BR, gancho visual no 0-1 s'.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Metadados sem template e CTA variado",
+   "fonte": "D:\\hipercool-videos\\bin\\seo.py (palavras do autocompletar publico + Thompson por estilo de titulo) e D:\\manhwa-react\\mr\\rede.py (agente por canal reescreve titulo/descricao/tags/1o comentario; revisor)",
+   "como_adaptar": "Em publicar.py, tirar '1-2 emojis'/'5 hashtags'/'#shorts #ia #viral #brasil', escolher CTA por md5 do video (nao pelo dia), e deixar a rede (mr/rede.py) ser o unico caminho ate o YouTube; desligar PostadorDeVideos/AgendadorVO3 para a fonte veo ou fazer listar_vo3_pendentes exigir aprovacao.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Roteamento por canais vivos e deterministico",
+   "fonte": "D:\\postador-de-videos\\config\\rede_canais.json e mr/rede.py (diretor de encaixe video x canal)",
+   "como_adaptar": "Apagar _DIRETO/_POOL_HUMOR mortos; canal_para_persona le rede_canais.json (ativos) e usa hashlib.md5; melhor ainda: nao preencher 'canais' e deixar o diretor da rede decidir.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Creditos por tier e timeouts alinhados",
+   "fonte": "D:\\veo\\beta\\cron_gerar_video_llm.py:744-779, :1231; gera_auto.py:721-729, :914-922",
+   "como_adaptar": "Guardar o saldo lido em sessoes_status e, para tier pro, so reabrir a conta quando saldo>=20 for lido de novo (ou apos N dias), nao a meia-noite; cron timeout = worker deadline + 60 s; se 'nada comecou em 8 min', reler o saldo antes de contar como falha.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Persistir o log do worker",
+   "fonte": "D:\\veo\\beta\\cron_gerar_video_llm.py:1236",
+   "como_adaptar": "Redirecionar stdout/stderr do gera_auto para logs/worker_<sessao>_<ts>.log (ou tee) e guardar o caminho no cache; assim prompt final, saldo, modelo do Flow e tempos ficam auditaveis.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "postar.json por video e so apos validar",
+   "fonte": "D:\\veo\\beta\\publicar.py:139",
+   "como_adaptar": "Nomear <stem>.postar.json (ou subpasta por video) e so gerar depois da validacao/transcricao; incluir 'foto', 'video_id' e 'sintetico: true'.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Headless/sem janela nas tarefas agendadas",
+   "fonte": "D:\\hipercool-videos\\bin\\sem_janela.py e D:\\manhwa-react\\mr\\sem_janela.py; config.py:23-26 (HEADLESS_GEN)",
+   "como_adaptar": "Ler FLOW_HEADLESS em _ensure_chrome_running e passar --headless=new quando 1 (testar se o Flow aceita); envolver os .bat agendados com sem_janela; parar o loop quando PAUSE_SYSTEM for manual (sleep longo) e remover a excecao SKIP_RESOURCE_CHECK para a pausa manual.",
+   "esforco": "P"
+  },
+  {
+   "titulo": "Legendas palavra a palavra e texto animado na peca atrativa",
+   "fonte": "D:\\manhwa-react\\mr\\captions.py (ASS por palavra) e mr/hyperframes.py (texto animado via Playwright)",
+   "como_adaptar": "Substituir pos_producao/plugins/legendas.py (PIL) pelas legendas ASS a partir da transcricao Groq (palavras com tempo), mantendo a fala original do Veo; o gancho em texto animado nos 0-1 s melhora retencao sem marca nem propaganda.",
+   "esforco": "M"
+  },
+  {
+   "titulo": "Limpeza, validate.py completo e commit",
+   "fonte": "D:\\veo\\beta\\validate.py:22-27; git diff --stat",
+   "como_adaptar": "Incluir inteligencia, fila, recursos, publicar, roteamento, creditos nos MODULOS_VIVOS; remover AGENTS_CONFIG/GeminiFlashLiteLLM, *_i18n, ajustar_score_com_historico, gerar_fila_safe, loop_cron.py (ou chamar load_hist), unificar stopwords/loaders; apagar thumbnails/ nao usadas; atualizar README/TUTORIAL/ARQUITETURA e commitar as 2.200 linhas.",
+   "esforco": "P"
+  }
+ ],
+ "perguntas_abertas": [
+  "Qual e o regime real de credito das contas pro (1050 mensais que acumulam ou cota diaria)? O codigo assume reset a meia-noite para todas; em 12/10 tres pro esgotaram na mesma tarde.",
+  "A dona quer continuar aparecendo como protagonista em todos os videos de 25 personas, ou prefere separar por canal (algumas personas sem a foto dela)? Isso muda a regra de foto por tema.",
+  "Os 2 videos de 12/10 (motivacao_ia, super_slow_ia) podem ser postados? Hoje estao elegiveis para o PostadorDeVideos das 06:40 pelo caminho antigo; a decisao e desligar a fonte veo nesse caminho ou deixar so a rede do manhwa-react (ja com veo LIMPO) postar.",
+  "O Flow aceita Chrome headless para gerar (o GUIA e o config dizem que login precisa ser visivel, mas geracao poderia ser headless)? Precisa de teste real antes de ligar a tarefa das 7 h.",
+  "O robo MS Energy (D:\\ms-energy) continua usando as mesmas contas/portas e o mesmo sessoes_status.json? Se sim, a trava por porta cobre, mas o cooldown compartilhado precisa de decisao.",
+  "A dona aceita transcrever o audio dos videos gerados com Groq pelo proxy (custo e envio do audio a um terceiro) como criterio de aprovacao automatica, ou prefere aprovacao por quadros apenas?",
+  "Ha intencao de voltar a multi-fala (3 beats) como padrao ou de testar com metricas reais primeiro? Hoje e 30% ao acaso e nunca foi medido.",
+  "Deve-se importar a memoria da experimental (130 formulas de julho) ou comecar limpo com os novos criterios de diversidade visual?"
+ ]
+}

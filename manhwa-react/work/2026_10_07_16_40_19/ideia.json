@@ -1,0 +1,29 @@
+{
+ "formato": "recap rápido de cena de anime com legendas em caps lock",
+ "descricao": "Sequência acelerada de frames de anime de romance com legendas destacadas narrando a situação de forma direta e coloquial, criando tensão cômica.",
+ "replicavel": true,
+ "como_fazer": "1) Extrair 4-6 frames-chave de episódios de anime de romance da temporada (usar pipeline de recap existente); 2) Gerar roteiro com LLM descrevendo a cena em frases curtas e diretas ('É QUE...', 'DESMONTA', 'DE ACIDENTE', 'NERVOSA'); 3) Adicionar legendas em caps lock rosa/branco com ffmpeg + overlays animados; 4) TTS narrando as frases (voz masculina casual, estilo react) ou música de fundo tensa; 5) Cortar frames em 0.8-1.5s cada; 6) Finalizar com hook 'vai dar namoro' ou pergunta engajadora.",
+ "ferramentas": [
+  "ffmpeg",
+  "TTS",
+  "pipeline de recap de anime",
+  "overlays animados",
+  "LLM para roteiro"
+ ],
+ "fonte_de_material": "Episódios de anime da temporada atual (captura via streaming legal ou database de frames), banco de 86k painéis de manhwa para complementar",
+ "esforco": "baixo",
+ "potencial": 8,
+ "por_que_viraliza": "Combina nostalgia de clichês de anime de romance com humor de observação e ritmo acelerado que prende até o final.",
+ "exemplo_roteiro": "É QUE / DESMONTA / DE ACIDENTE / NERVOSA / [pausa dramática] VAI DAR NAMORO OU VAI ENROLAR 12 EPISÓDIOS? Comenta aí 👇",
+ "nicho_canal": "cenareact",
+ "tags": [
+  "anime",
+  "romance",
+  "react",
+  "temporada",
+  "clichê",
+  "shoujo"
+ ],
+ "video": "2026-10-07 16-40-19.mp4",
+ "data": "2026-10-12"
+}

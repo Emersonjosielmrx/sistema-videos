@@ -1,0 +1,1730 @@
+{
+ "updatedAt": "2026-10-14T02:11:54.245Z",
+ "createdAt": "2026-10-13T14:35:30.790Z",
+ "id": "IV8sgllOq1N2AjtP",
+ "name": "Métricas das Landing Pages (visitas, rolagem, cliques) + Análise com IA",
+ "description": null,
+ "active": true,
+ "isArchived": false,
+ "nodes": [
+  {
+   "parameters": {
+    "path": "lp-script",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Pedido do script (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "id": "46e395a9-a877-49e8-8a4e-a4163a6c2e2f",
+   "webhookId": "aafb5230-41b3-4f4c-ac96-357e61182d7b"
+  },
+  {
+   "parameters": {
+    "jsCode": "const pedido = $('Pedido do script (GET)').first().json;\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);\nconst id = slug((pedido.query || {}).id);\nif (id.length < 4) {\n  return [{ json: { js: 'console.warn(\"[métricas] Falta o nome do site (mínimo 4 letras) no endereço do script. Use: lp-script?id=nome-do-seu-site\");' } }];\n}\n\n// Endereço completo do n8n: assim o script funciona em QUALQUER site, não só nas páginas servidas pelo n8n.\nconst BASE = String(pedido.webhookUrl || '').split('/webhook/')[0] + '/webhook';\n\n// Este é o script que roda dentro da página, no navegador do visitante.\n// O envio vai como texto puro: com 'application/json' o navegador faz uma checagem extra (CORS) e o sendBeacon descarta.\nconst script = `(function () {\n  if (window.__lpm) return; window.__lpm = 1;\n  var ID = ${JSON.stringify(id)}, B = ${JSON.stringify(BASE)};\n  try { console.info('[métricas] contando visitas, rolagem e cliques para \"' + ID + '\"'); } catch (e) {}\n  var v = '', voltou = false;\n  try { v = localStorage.getItem('lpv') || ''; if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('lpv', v); }\n        voltou = !!localStorage.getItem('lpv_' + ID); localStorage.setItem('lpv_' + ID, '1'); } catch (e) {}\n  var ini = Date.now(), maxR = 0, cliques = 0, marcos = {}, saiu = false, contatou = false;\n  function envia(ev, dados) {\n    var c = JSON.stringify(Object.assign({ id: ID, evento: ev, v: v }, dados || {}));\n    try { if (navigator.sendBeacon && navigator.sendBeacon(B + '/lp-evento', c)) return; } catch (e) {}\n    try { fetch(B + '/lp-evento', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: c, keepalive: true }); } catch (e) {}\n  }\n  var qs = new URLSearchParams(location.search), ref = '';\n  try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\\\\./, '') : ''; } catch (e) {}\n  var origem = qs.get('utm_source') || (ref && ref !== location.hostname ? ref : 'direto');\n  envia('visita', { novo: !voltou, origem: origem, disp: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'celular' : 'computador' });\n  function rolagem() {\n    var total = document.documentElement.scrollHeight - innerHeight, pct = total > 0 ? Math.round(scrollY / total * 100) : 100;\n    if (pct > maxR) maxR = pct;\n    [25, 50, 75, 100].forEach(function (m) { if (pct >= m - 2 && !marcos[m]) { marcos[m] = 1; envia('rolagem', { marco: m }); } });\n  }\n  addEventListener('scroll', rolagem, { passive: true }); setTimeout(rolagem, 1500);\n  document.addEventListener('click', function (e) {\n    if (!e.target.closest || e.target.closest('[data-lpm-ignorar]')) return;\n    var marcado = e.target.closest('[data-metrica]');\n    if (marcado) { cliques++; envia('clique', { tipo: 'marcado', rotulo: String(marcado.getAttribute('data-metrica')).slice(0, 40) }); return; }\n    var a = e.target.closest('a,button'); if (!a || a.type === 'submit') return;\n    var h = a.getAttribute('href') || '', tipo = 'botao';\n    if (/wa\\\\.me|whatsapp/i.test(h)) tipo = 'whatsapp'; else if (/^tel:/i.test(h)) tipo = 'telefone'; else if (/^mailto:/i.test(h)) tipo = 'email';\n    else if (/instagram\\\\.com/i.test(h)) tipo = 'instagram'; else if (h.charAt(0) === '#') tipo = 'menu'; else if (/^https?:/i.test(h)) tipo = 'link_externo';\n    // \"primeiro\": só o 1º clique de contato da visita, para contar PESSOAS que chamaram (e não cliques repetidos)\n    var primeiro = /whatsapp|telefone|email/.test(tipo) && !contatou; if (primeiro) contatou = true;\n    cliques++; envia('clique', { tipo: tipo, primeiro: primeiro, rotulo: (a.innerText || a.getAttribute('aria-label') || '').replace(/\\\\s+/g, ' ').trim().slice(0, 40) });\n  }, true);\n  function sai() { if (saiu) return; saiu = true; envia('saida', { segundos: Math.round((Date.now() - ini) / 1000), rolagem: maxR }); }\n  addEventListener('pagehide', sai);\n  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') sai(); });\n  document.addEventListener('submit', function (e) {\n    var f = e.target, campos = {}; if (!f || !f.querySelectorAll) return;\n    f.querySelectorAll('input,textarea,select').forEach(function (el, i) {\n      if (!el.value || /hidden|password|submit|button/.test(el.type)) return;\n      var r = (el.labels && el.labels[0] && el.labels[0].innerText) || el.getAttribute('aria-label') || el.name || el.placeholder || el.type || 'campo' + i;\n      campos[r.replace(/\\\\s+/g, ' ').trim().slice(0, 40)] = String(el.value).slice(0, 600);\n    });\n    if (!Object.keys(campos).length) return;\n    var d = document.querySelector('meta[name=\"description\"]');\n    var c = JSON.stringify({ id: ID, v: v, campos: campos, origem: origem,\n      pagina: { titulo: document.title.slice(0, 120), descricao: (d && d.content || '').slice(0, 300), url: location.href.split('#')[0] },\n      engajamento: { segundos: Math.round((Date.now() - ini) / 1000), rolagem: maxR, cliques: cliques, voltou: voltou } });\n    try { fetch(B + '/lp-lead', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: c, keepalive: true }); } catch (x) {}\n    envia('lead');\n  }, true);\n})();`;\nreturn [{ json: { js: script } }];"
+   },
+   "name": "Montar script",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    200
+   ],
+   "id": "1acc358c-a4dc-41c5-a3d0-be819ae809f7"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.js }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/javascript; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Entrega o script",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    0,
+    400
+   ],
+   "id": "c92def82-becd-46c5-b8a0-6ee32d2b9a54"
+  },
+  {
+   "parameters": {
+    "path": "lp-teste",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Pedido da página de teste (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1000
+   ],
+   "id": "a6d89531-201f-4ef7-afad-3811cffee1c3",
+   "webhookId": "f65bd5fb-20ee-42ff-be8b-82b723a7234d"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Página de exemplo (uma padaria de mentira) com o código das métricas instalado, igual a um site de verdade.\nconst pedido = $('Pedido da página de teste (GET)').first().json;\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);\nconst id = slug((pedido.query || {}).id);\nconst base = String(pedido.webhookUrl || '').split('/webhook/')[0];\nif (id.length < 4) {\n  // Sem o nome do site: manda para a tela \"Comece aqui\", que gera o nome.\n  const inicio = base + '/webhook/lp-metricas';\n  return [{ json: { codigo: 200, html: `<!DOCTYPE html><meta charset=\"UTF-8\"><meta http-equiv=\"refresh\" content=\"0;url=${inicio}\"><a href=\"${inicio}\">Comece aqui</a>` } }];\n}\nconst painel = `${base}/webhook/lp-metricas?id=${id}`;\nconst produtos = [\n  ['🥖', 'Pão francês', 'Saindo do forno a cada 2 horas', 'R$ 0,90'],\n  ['🧀', 'Pão de queijo', 'Receita mineira, crocante por fora', 'R$ 4,50'],\n  ['🍰', 'Bolo de cenoura', 'Com cobertura de chocolate de verdade', 'R$ 32,00'],\n  ['🥐', 'Croissant', 'Manteiga francesa, 36 camadas', 'R$ 9,00'],\n  ['☕', 'Café coado', 'Grãos do sul de Minas', 'R$ 6,00'],\n  ['🍩', 'Sonho', 'Recheio de creme ou doce de leite', 'R$ 7,50'],\n];\n\nconst html = `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">\n<title>Padaria Pão Quente (página de teste)</title>\n<meta name=\"description\" content=\"Página de exemplo para testar o painel de métricas.\">\n<style>\n:root{--creme:#fbf6ee;--marrom:#5a3418;--tx:#2b1d12;--tx2:#6b5646;--dourado:#c9822b;--borda:rgba(43,29,18,.12)}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:Georgia,\"Times New Roman\",serif;background:var(--creme);color:var(--tx);line-height:1.6}\n.faixa-teste{position:sticky;top:0;z-index:5;background:#1c5cab;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:10px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center}\n.faixa-teste a{color:#1c5cab;background:#fff;text-decoration:none;padding:6px 12px;border-radius:8px;font-weight:700}\nheader{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:1000px;margin:0 auto;padding:18px 16px}\n.logo{font-size:22px;font-weight:700;color:var(--marrom)}\nnav{display:flex;gap:16px;flex-wrap:wrap}nav a{color:var(--tx2);text-decoration:none;font:15px system-ui,sans-serif}\n.hero{max-width:1000px;margin:0 auto;padding:56px 16px 64px;text-align:center}\n.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.1;color:var(--marrom)}\n.hero p{font-size:19px;color:var(--tx2);max-width:560px;margin:16px auto 0}\n.botoes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}\n.b{display:inline-block;font:600 16px system-ui,sans-serif;padding:14px 22px;border-radius:12px;text-decoration:none;border:2px solid var(--marrom);color:var(--marrom);background:transparent;cursor:pointer}\n.b.zap{background:#128c4a;border-color:#128c4a;color:#fff}\nsection{max-width:1000px;margin:0 auto;padding:56px 16px}\nh2{font-size:32px;color:var(--marrom);text-align:center}\n.lead{text-align:center;color:var(--tx2);margin-top:6px}\n.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:28px}\n.card{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:22px;cursor:pointer;transition:transform .15s}\n.card:hover{transform:translateY(-2px)}\n.card .e{font-size:40px}.card h3{font-size:20px;margin-top:6px}.card p{color:var(--tx2);font-size:15px}.card b{display:block;color:var(--dourado);font:700 18px system-ui,sans-serif;margin-top:8px}\n.sobre{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}\n.sobre .foto{font-size:120px;text-align:center;background:#fff;border-radius:20px;border:1px solid var(--borda);padding:30px 0}\ndetails{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:14px 18px;margin-top:10px}\nsummary{cursor:pointer;font-weight:700}\n.contato{text-align:center;background:var(--marrom);color:#fff;border-radius:24px;margin:40px auto 60px;max-width:968px}\n.contato h2{color:#fff}.contato p{color:#f1e3d3}\n.contato .b{border-color:#fff;color:#fff}\nfooter{text-align:center;color:var(--tx2);font:14px system-ui,sans-serif;padding:0 16px 40px}\n@media(max-width:700px){.sobre{grid-template-columns:1fr}}\n</style>\n<script src=\"${base}/webhook/lp-script?id=${id}\" defer></script>\n</head><body>\n<div class=\"faixa-teste\" data-lpm-ignorar><span>🧪 Página de TESTE do painel <b>${id}</b>. Role até o fim e clique nos botões, depois veja os números subirem.</span>\n<a href=\"${painel}\" target=\"_blank\" rel=\"noopener\">📈 Abrir o painel</a></div>\n\n<header><div class=\"logo\">🥐 Pão Quente</div>\n<nav><a href=\"#cardapio\">Cardápio</a><a href=\"#sobre\">Sobre</a><a href=\"#perguntas\">Perguntas</a><a href=\"#contato\">Contato</a></nav></header>\n\n<div class=\"hero\"><h1>Pão quentinho a cada 2 horas</h1>\n<p>Padaria de bairro desde 1998. Encomende pelo WhatsApp e retire sem fila.</p>\n<div class=\"botoes\"><a class=\"b zap\" href=\"https://wa.me/?text=Quero%20fazer%20uma%20encomenda\" target=\"_blank\" rel=\"noopener\">💬 Pedir no WhatsApp</a>\n<a class=\"b\" href=\"#cardapio\">Ver cardápio</a></div></div>\n\n<section id=\"cardapio\"><h2>Cardápio do dia</h2><p class=\"lead\">Clique num produto: cada card conta como um clique com nome próprio (data-metrica).</p>\n<div class=\"cards\">${produtos.map(([e, n, d, pr]) => `<div class=\"card\" data-metrica=\"card-${slug(n)}\"><div class=\"e\">${e}</div><h3>${n}</h3><p>${d}</p><b>${pr}</b></div>`).join('')}</div></section>\n\n<section id=\"sobre\"><div class=\"sobre\"><div class=\"foto\">👩‍🍳</div><div><h2 style=\"text-align:left\">Feito por gente do bairro</h2>\n<p style=\"margin-top:12px;color:var(--tx2)\">A Dona Cida começou vendendo pão de queijo na garagem. Hoje são 12 pessoas na equipe e mais de 40 receitas, todas feitas aqui, com farinha selecionada e fermentação natural de 18 horas.</p>\n<p style=\"margin-top:12px;color:var(--tx2)\">Toda manhã, antes das 6h, o primeiro forno já está quente. Quem chega cedo leva o pão ainda estalando.</p>\n<p style=\"margin-top:16px\"><a class=\"b\" href=\"https://www.instagram.com/\" target=\"_blank\" rel=\"noopener\">📸 Siga no Instagram</a></p></div></div></section>\n\n<section id=\"perguntas\"><h2>Perguntas frequentes</h2>\n<details><summary>Vocês entregam?</summary><p>Sim, num raio de 3 km, de terça a domingo.</p></details>\n<details><summary>Dá para encomendar bolo de aniversário?</summary><p>Sim, com 2 dias de antecedência pelo WhatsApp.</p></details>\n<details><summary>Tem opção sem glúten?</summary><p>Temos pão de queijo e bolo de fubá, feitos em área separada.</p></details>\n<details><summary>Qual o horário?</summary><p>De terça a domingo, das 6h às 20h.</p></details></section>\n\n<section id=\"contato\" class=\"contato\"><h2>Bateu a fome?</h2><p>Chame no WhatsApp ou ligue. Atendemos das 6h às 20h.</p>\n<div class=\"botoes\"><a class=\"b zap\" href=\"https://wa.me/?text=Oi%2C%20quero%20fazer%20um%20pedido\" target=\"_blank\" rel=\"noopener\">💬 Chamar no WhatsApp</a>\n<a class=\"b\" href=\"tel:+5500000000000\">📞 Ligar agora</a></div></section>\n\n<footer>Padaria Pão Quente é um exemplo fictício para testar as métricas.</footer>\n</body></html>`;\nreturn [{ json: { codigo: 200, html } }];"
+   },
+   "name": "Montar página de teste",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    0,
+    1200
+   ],
+   "id": "a1bc1052-04e7-430a-8626-4f6410481ace"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Entrega a página de teste",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    0,
+    1400
+   ],
+   "id": "ed85a33e-25fb-448e-99b5-39484d621692"
+  },
+  {
+   "parameters": {
+    "path": "lp-evento",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "name": "Evento chega (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    760,
+    0
+   ],
+   "id": "868e8b3f-15ee-4ff8-8549-83b137077f52",
+   "webhookId": "32c24d79-aec8-4024-9613-0a3d9dc3de98"
+  },
+  {
+   "parameters": {
+    "respondWith": "noData",
+    "options": {
+     "responseCode": 204
+    }
+   },
+   "name": "Responde rápido (204)",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    760,
+    200
+   ],
+   "id": "c503bde9-737c-44e2-867c-b823c8f5526b"
+  },
+  {
+   "parameters": {
+    "jsCode": "let b = $('Evento chega (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst id = String(b.id || '').toLowerCase();\nconst EVENTOS = ['visita', 'rolagem', 'clique', 'saida', 'lead'];\nif (!/^[a-z0-9-]{4,80}$/.test(id) || !EVENTOS.includes(b.evento)) return [];\n\n// \"permitidos\" deixa passar o ponto na origem, para \"instagram.com\" não virar \"instagram-com\"\nconst slug = (s, permitidos = 'a-z0-9') => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')\n  .replace(new RegExp(`[^${permitidos}]+`, 'g'), '-').replace(/(^-|-$)/g, '').slice(0, 40) || 'sem-nome';\nconst dia = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });\nconst k = s => `mt:${id}:${s}`;\nconst chaves = [];\n\nif (b.evento === 'visita') {\n  chaves.push(k('visitas'), k('dia:' + dia));\n  if (b.novo) chaves.push(k('visitantes'));\n  chaves.push(k('disp:' + (b.disp === 'celular' ? 'celular' : 'computador')), k('origem:' + slug(b.origem, 'a-z0-9.')));\n} else if (b.evento === 'rolagem') {\n  const m = Number(b.marco);\n  if ([25, 50, 75, 100].includes(m)) chaves.push(k('rolagem:' + m));\n} else if (b.evento === 'clique') {\n  const tipos = ['whatsapp', 'telefone', 'email', 'instagram', 'menu', 'link_externo', 'botao', 'marcado'];\n  chaves.push(k('clique:' + (tipos.includes(b.tipo) ? b.tipo : 'botao')));\n  if (b.primeiro === true) chaves.push(k('pessoas_contato'));\n  const rotulo = String(b.rotulo || '').toLowerCase().replace(/[\\s:*?\\[\\]]+/g, ' ').trim().slice(0, 40);\n  if (rotulo) chaves.push(k('botao:' + rotulo));\n} else if (b.evento === 'saida') {\n  const s = Number(b.segundos) || 0;\n  chaves.push(k('tempo:' + (s < 10 ? 'a_0-10s' : s < 30 ? 'b_10-30s' : s < 60 ? 'c_30-60s' : s < 180 ? 'd_1-3min' : 'e_3min+')));\n} else if (b.evento === 'lead') {\n  chaves.push(k('leads'));\n}\nreturn chaves.map(chave => ({ json: { chave } }));"
+   },
+   "name": "Classificar evento",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    760,
+    400
+   ],
+   "id": "c2459a74-74a0-4027-93da-d08cc884a599"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "={{ $json.chave }}",
+    "expire": true,
+    "ttl": 15552000
+   },
+   "name": "Soma o contador",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    760,
+    600
+   ],
+   "id": "6ab6c09a-51e0-48ca-837b-61530f16f59c",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "lp-metricas",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Painel de métricas (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    1520,
+    0
+   ],
+   "id": "bb6fd499-7c6d-4589-b388-81e32e40f7e3",
+   "webhookId": "becd53e9-d303-4050-b496-57e2803b1159"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Aceita o nome do site do jeito que a pessoa digitar (\"Padaria do João\" vira \"padaria-do-joao\").\nconst q = $('Painel de métricas (GET)').first().json.query || {};\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);\nconst id = slug(q.id);\nreturn [{ json: { id, tem_id: id.length >= 4, ia: q.ia === '1', digitado: String(q.id || '').slice(0, 80) } }];"
+   },
+   "name": "Entende o pedido",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1520,
+    200
+   ],
+   "id": "6d203fc9-e364-48c5-9034-bbb78d022b3a"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "c5e8a9ca-c6d5-4496-868d-81de88dabd09",
+       "leftValue": "={{ $json.tem_id }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Veio com o nome do site?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1520,
+    400
+   ],
+   "id": "085401e1-564a-4d4e-bdd4-5d41ffd3a382"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Tela \"Comece aqui\": aparece quando o painel é aberto sem o nome do site.\nconst p = $('Entende o pedido').first().json;\nconst base = String($('Painel de métricas (GET)').first().json.webhookUrl || '').split('/webhook/')[0];\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\n// Este código roda no navegador de quem abriu a tela (vai para a página como texto com .toString()).\nfunction cliente(BASE) {\n  var el = function (s) { return document.querySelector(s); };\n  var sufixo = Math.random().toString(36).slice(2, 6);\n  function slug(s) {\n    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60);\n  }\n  function atualiza() {\n    var nome = slug(el('#nome').value);\n    var id = nome ? nome + (el('#sufixo').checked ? '-' + sufixo : '') : '';\n    var ok = id.length >= 4;\n    var painel = BASE + '/webhook/lp-metricas?id=' + id;\n    el('#codigo').textContent = ok ? id : '…';\n    el('#snippet').textContent = ok ? '<script src=\"' + BASE + '/webhook/lp-script?id=' + id + '\" defer><\\/script>' : 'Digite o nome do site no passo 1 (mínimo 4 letras)';\n    el('#painel-url').textContent = ok ? painel : '…';\n    el('#teste').href = ok ? BASE + '/webhook/lp-teste?id=' + id : '#';\n    el('#painel').href = ok ? painel : '#';\n    document.body.classList.toggle('pronto', ok);\n  }\n  el('#nome').addEventListener('input', atualiza);\n  el('#sufixo').addEventListener('change', atualiza);\n  document.addEventListener('click', function (e) {\n    var b = e.target.closest('[data-copiar]');\n    if (b) {\n      var alvo = el(b.getAttribute('data-copiar'));\n      var volta = function () { b.textContent = '✅ Copiado'; setTimeout(function () { b.textContent = b.getAttribute('data-rotulo'); }, 1800); };\n      if (navigator.clipboard) navigator.clipboard.writeText(alvo.textContent).then(volta, function () {});\n      else { var r = document.createRange(); r.selectNodeContents(alvo); getSelection().removeAllRanges(); getSelection().addRange(r); document.execCommand('copy'); volta(); }\n    }\n    var trava = e.target.closest('.trava');\n    if (trava && !document.body.classList.contains('pronto')) { e.preventDefault(); el('#nome').focus(); }\n  });\n  atualiza();\n}\n\nconst aviso = p.digitado\n  ? `<div class=\"aviso\">⚠️ O nome <b>${esc(p.digitado)}</b> é curto demais. Use pelo menos 4 letras ou números.</div>` : '';\n\nconst html = `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">\n<title>Métricas do seu site · Comece aqui</title>\n<style>\n:root{color-scheme:light;--plano:#f9f9f7;--sup:#fcfcfb;--tx:#0b0b0b;--tx2:#52514e;--mu:#898781;--borda:rgba(11,11,11,.12);--pri:#1c5cab;--pri-tx:#fff;--cod:#f1f0ec;--ok:#0a7d0a;--alerta:#8a5a00;--alerta-bg:#fff4d6}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--mu:#898781;--borda:rgba(255,255,255,.12);--pri:#3987e5;--cod:#232322;--ok:#5fd35f;--alerta:#fab219;--alerta-bg:#2a2210}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--borda:rgba(255,255,255,.12);--pri:#3987e5;--cod:#232322;--ok:#5fd35f;--alerta:#fab219;--alerta-bg:#2a2210}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:760px;margin:0 auto}\nh1{font-size:28px;font-weight:700;letter-spacing:-.01em}\n.sub{color:var(--tx2);margin-top:6px;font-size:15.5px}\n.passo{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:20px;margin-top:16px}\n.passo h2{font-size:17px;display:flex;gap:10px;align-items:center}\n.n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--pri);color:var(--pri-tx);display:grid;place-items:center;font-size:14px;font-weight:700}\n.passo p,.passo li{color:var(--tx2);font-size:14.5px;margin-top:8px}\nlabel{display:block;font-weight:600;font-size:14px;margin-top:12px}\ninput[type=text]{width:100%;margin-top:6px;font:inherit;font-size:17px;padding:12px 14px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}\ninput[type=text]:focus{outline:3px solid color-mix(in srgb,var(--pri) 35%,transparent);border-color:var(--pri)}\n.chk{display:flex;gap:8px;align-items:flex-start;font-weight:500;color:var(--tx2);font-size:13.5px;margin-top:10px}\n.chk input{margin-top:3px}\n.cod{display:block;background:var(--cod);border:1px solid var(--borda);border-radius:10px;padding:12px 14px;font:13.5px/1.5 ui-monospace,Consolas,monospace;word-break:break-all;margin-top:10px;color:var(--tx)}\n.linha{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}\n.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);text-decoration:none;font:inherit;font-weight:600;font-size:14.5px;padding:10px 16px;border-radius:11px;cursor:pointer}\n.btn.pri{background:var(--pri);color:var(--pri-tx);border-color:transparent}\nbody:not(.pronto) .trava{opacity:.45;cursor:not-allowed}\n.id{font-weight:700;color:var(--tx)}\nul{padding-left:20px}\n.onde li{margin-top:10px}\n.onde b{color:var(--tx)}\n.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}\n.item{background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:12px;font-size:14px;color:var(--tx2)}\n.item b{display:block;color:var(--tx);font-size:14.5px}\n.aviso{background:var(--alerta-bg);color:var(--tx);border:1px solid var(--borda);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:14.5px}\ncode{font:13px ui-monospace,Consolas,monospace;background:var(--cod);padding:1px 5px;border-radius:5px}\nform.abrir{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}form.abrir input{flex:1;min-width:200px;margin-top:0}\n.pe{color:var(--mu);font-size:13px;margin-top:22px;text-align:center}\n</style></head><body><div class=\"w\">\n<h1>📊 Métricas do seu site</h1>\n<p class=\"sub\">Descubra quantas pessoas visitam, até onde rolam a página e em quais botões clicam. Funciona em <b>qualquer site</b>: WordPress, Wix, HTML, loja virtual… São 3 passos.</p>\n${aviso}\n\n<section class=\"passo\"><h2><span class=\"n\">1</span> Dê um nome para o seu site</h2>\n<label for=\"nome\">Nome do site ou da empresa</label>\n<input id=\"nome\" type=\"text\" placeholder=\"Ex.: Padaria do João\" autocomplete=\"off\" autofocus>\n<label class=\"chk\"><input id=\"sufixo\" type=\"checkbox\" checked> Juntar 4 letras aleatórias no fim (deixa o link do painel difícil de adivinhar)</label>\n<p>Código do site: <span class=\"id\" id=\"codigo\">…</span></p></section>\n\n<section class=\"passo\"><h2><span class=\"n\">2</span> Cole este código no seu site</h2>\n<p>É uma linha só. Ela não muda nada na aparência do site.</p>\n<code class=\"cod\" id=\"snippet\"></code>\n<div class=\"linha\"><button class=\"btn pri trava\" type=\"button\" data-copiar=\"#snippet\" data-rotulo=\"📋 Copiar código\">📋 Copiar código</button>\n<a class=\"btn trava\" id=\"teste\" href=\"#\" target=\"_blank\" rel=\"noopener\">🧪 Testar numa página de exemplo</a></div>\n<ul class=\"onde\">\n<li><b>Site em HTML:</b> cole logo antes de <code>&lt;/body&gt;</code>, em todas as páginas.</li>\n<li><b>WordPress:</b> instale o plugin <i>WPCode</i> → <i>Code Snippets › Header &amp; Footer</i> → cole no <i>Footer</i> → Salvar.</li>\n<li><b>Wix:</b> <i>Configurações › Código personalizado › + Adicionar código</i> → escolha <i>Body – fim</i> e <i>Todas as páginas</i>.</li>\n<li><b>Loja virtual (Shopify, Nuvemshop…):</b> procure por <i>códigos externos</i> ou edite o tema e cole antes de <code>&lt;/body&gt;</code>.</li>\n<li><b>Landing pages do Gerador PRO:</b> já vem instalado. O link das métricas aparece no fim do gerador.</li>\n</ul></section>\n\n<section class=\"passo\"><h2><span class=\"n\">3</span> Abra o seu painel</h2>\n<p>Guarde este link nos favoritos. É nele que os números aparecem, em tempo real:</p>\n<code class=\"cod\" id=\"painel-url\">…</code>\n<div class=\"linha\"><a class=\"btn pri trava\" id=\"painel\" href=\"#\" target=\"_blank\" rel=\"noopener\">📈 Abrir meu painel</a>\n<button class=\"btn trava\" type=\"button\" data-copiar=\"#painel-url\" data-rotulo=\"📋 Copiar link\">📋 Copiar link</button></div>\n<p>Já tem um código? Abra direto:</p>\n<form class=\"abrir\" action=\"lp-metricas\" method=\"get\"><input type=\"text\" name=\"id\" placeholder=\"código do site\" required minlength=\"4\"><button class=\"btn\">Abrir</button></form></section>\n\n<section class=\"passo\"><h2>👀 O que o painel mostra</h2>\n<div class=\"grade\">\n<div class=\"item\"><b>👀 Visitas</b>e quantas pessoas diferentes</div>\n<div class=\"item\"><b>📜 Rolagem</b>quantos chegaram a 25, 50, 75% e ao fim</div>\n<div class=\"item\"><b>🖱️ Cliques</b>WhatsApp, telefone, Instagram, menu e o nome de cada botão</div>\n<div class=\"item\"><b>⏱️ Tempo</b>quanto tempo ficaram na página</div>\n<div class=\"item\"><b>🌐 Origem</b>Google, Instagram, link direto…</div>\n<div class=\"item\"><b>🤖 Análise da IA</b>explica os números e diz o que melhorar</div>\n</div></section>\n\n<section class=\"passo\"><h2>💡 Truques</h2>\n<ul><li><b>Contar cliques em qualquer coisa</b> (uma foto, um card): coloque <code>data-metrica=\"foto-do-bolo\"</code> no elemento. Ele aparece com esse nome no painel.</li>\n<li><b>Saber de onde veio a visita:</b> no link que você divulga, junte <code>?utm_source=instagram</code> (ou <code>whatsapp</code>, <code>panfleto</code>…).</li>\n<li><b>Conferir se está funcionando:</b> abra o site, aperte <code>F12</code> e veja a mensagem <i>[métricas] contando visitas…</i> no Console.</li></ul></section>\n\n<p class=\"pe\">🔒 Só contamos números. Nada de nome, IP ou dado pessoal do visitante.</p>\n</div>\n<script>(${cliente.toString()})(${JSON.stringify(base)});</script>\n</body></html>`;\nreturn [{ json: { html, codigo: p.digitado ? 400 : 200 } }];"
+   },
+   "name": "Tela Comece aqui",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1920,
+    560
+   ],
+   "id": "d2455592-ad96-4465-b8b6-c807dfc2d9be"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     },
+     "responseCode": "={{ $json.codigo }}"
+    }
+   },
+   "name": "Entrega Comece aqui",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1920,
+    760
+   ],
+   "id": "971066cf-4ea5-4828-9b21-d8eaae3819b7"
+  },
+  {
+   "parameters": {
+    "operation": "keys",
+    "keyPattern": "=mt:{{ $('Entende o pedido').first().json.id }}:*",
+    "getValues": true
+   },
+   "name": "Lê contadores",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1520,
+    600
+   ],
+   "id": "6446aded-4406-4dd4-b645-1f348a0e0ea1",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=lpia:status:{{ $('Entende o pedido').first().json.id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê dados da página",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1520,
+    800
+   ],
+   "id": "dedd3e87-2aab-4529-bc48-1818e91d2f0a",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "const pedido = $('Entende o pedido').first().json;\nconst id = pedido.id;\nconst valido = pedido.tem_id;\nconst bruto = valido ? ($('Lê contadores').first().json || {}) : {};\nconst pre = `mt:${id}:`;\nconst c = {};\nfor (const [k, v] of Object.entries(bruto)) if (k.startsWith(pre)) c[k.slice(pre.length)] = Number(v) || 0;\nlet pagina = null;\ntry { pagina = valido ? JSON.parse($('Lê dados da página').first().json.status || 'null') : null; } catch (e) {}\n\nconst g = n => c[n] || 0;\nconst grupo = prefixo => Object.entries(c).filter(([k]) => k.startsWith(prefixo)).map(([k, v]) => [k.slice(prefixo.length), v]).sort((a, b) => b[1] - a[1]);\nconst visitas = g('visitas'), visitantes = Math.max(g('visitantes'), visitas ? 1 : 0);\nconst cliques = Object.fromEntries(['whatsapp', 'telefone', 'email', 'instagram', 'menu', 'link_externo', 'botao', 'marcado'].map(t => [t, g('clique:' + t)]));\nconst leads = g('leads');\nconst pct = (a, b) => b ? Math.round(a / b * 1000) / 10 : 0;\n\nconst fuso = { timeZone: 'America/Sao_Paulo' };\nconst dias = [];\nfor (let i = 13; i >= 0; i--) {\n  const d = new Date(Date.now() - i * 86400000);\n  const chave = d.toLocaleDateString('sv-SE', fuso);\n  dias.push({ dia: d.toLocaleDateString('pt-BR', { ...fuso, day: '2-digit', month: '2-digit' }), semana: d.toLocaleDateString('pt-BR', { ...fuso, weekday: 'short' }).replace('.', ''), visitas: g('dia:' + chave) });\n}\nconst tempoNomes = { 'a_0-10s': 'menos de 10 s', 'b_10-30s': '10 a 30 s', 'c_30-60s': '30 s a 1 min', 'd_1-3min': '1 a 3 min', 'e_3min+': 'mais de 3 min' };\nconst tempo = Object.keys(tempoNomes).map(k => ({ faixa: tempoNomes[k], qtd: g('tempo:' + k) }));\n// Pessoas que chamaram (1 por visita). Dados antigos não têm esse contador: usa os cliques, limitado às visitas.\nconst contato = g('pessoas_contato') || Math.min(visitas, cliques.whatsapp + cliques.telefone + cliques.email);\n\nconst funil = [\n  { etapa: 'Abriram a página', qtd: visitas },\n  { etapa: 'Rolaram até a metade', qtd: g('rolagem:50') },\n  { etapa: 'Rolaram até o fim', qtd: g('rolagem:100') },\n  { etapa: 'Clicaram para contato', qtd: contato },\n  { etapa: 'Enviaram o formulário', qtd: leads },\n];\nconst resumo = {\n  empresa: pagina ? pagina.empresa : '', visitas, visitantes_unicos: visitantes,\n  rolagem: { '25%': g('rolagem:25'), '50%': g('rolagem:50'), '75%': g('rolagem:75'), '100%': g('rolagem:100') },\n  cliques, pessoas_que_chamaram: contato, leads, taxa_contato_percent: Math.min(100, pct(contato + leads, visitantes)),\n  tempo_na_pagina: tempo, dispositivos: Object.fromEntries(grupo('disp:')), origens: Object.fromEntries(grupo('origem:').slice(0, 6)),\n  botoes_mais_clicados: grupo('botao:').slice(0, 8), visitas_ultimos_14_dias: dias.map(d => d.visitas),\n};\nreturn [{ json: { valido, existe: !!pagina || visitas > 0, id, pagina, visitas, visitantes, leads, contato, cliques, funil, dias, tempo,\n  origens: grupo('origem:').slice(0, 6), dispositivos: grupo('disp:'), botoes: grupo('botao:').slice(0, 8),\n  taxa_fim: pct(g('rolagem:100'), visitas), taxa_contato: Math.min(100, pct(contato + leads, visitantes)),\n  quer_ia: pedido.ia && visitas > 0, resumo_ia: JSON.stringify(resumo, null, 1) } }];"
+   },
+   "name": "Calcular métricas",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1520,
+    1000
+   ],
+   "id": "7e8012dc-c7bf-421c-9b32-39e33aff2ca2"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "248c8501-1207-4acd-976a-48d219e30145",
+       "leftValue": "={{ $json.quer_ia }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Pediu análise da IA?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1520,
+    1200
+   ],
+   "id": "08fe5e6a-f4f2-40ad-be14-984c1c27d5bb"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'MÉTRICAS DA LANDING PAGE:\\n' + $json.resumo_ia }}",
+    "options": {
+     "systemMessage": "Você é um ANALISTA DE CONVERSÃO que explica números para donos de pequenos negócios, em português simples e direto.\n\nVocê recebe as métricas de um site ou landing page: visitas, visitantes únicos, quanto rolaram (25/50/75/100%), cliques por tipo, formulários enviados, tempo na página, origem, aparelho e visitas por dia.\n\nCOMO ANALISAR\n- Compare as etapas do funil e encontre onde a maior parte das pessoas desiste.\n- Use números concretos (ex.: \"só 18% chegam ao fim da página\").\n- Com menos de 30 visitas, diga que ainda é cedo para conclusões e foque em como atrair visitas.\n- Ações práticas e específicas para landing page (ex.: subir o botão de WhatsApp para o topo, encurtar o texto do início, colocar prova social antes da metade). Nada genérico.\n- nota_saude de 0 a 100: considere a taxa de contato (acima de 5% é boa) e a rolagem até o fim.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"nota_saude\":0,\"resumo\":\"2 frases\",\"pontos_fortes\":[\"\"],\"gargalos\":[\"\"],\"acoes\":[{\"titulo\":\"\",\"porque\":\"\"}]}"
+    },
+    "needsFallback": true
+   },
+   "name": "IA Analista",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1920,
+    1380
+   ],
+   "id": "47ebbcd4-4e23-415a-a2af-772d84246f9b",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 3000,
+     "temperature": 0.4,
+     "timeout": 120000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Cérebro da Analista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1920,
+    1600
+   ],
+   "id": "80828545-2fe3-459f-9f56-3dc82dad9121",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 3000,
+     "temperature": 0.4,
+     "timeout": 120000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Cérebro da Analista",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1920,
+    1780
+   ],
+   "id": "66564f57-57e0-44bb-8e9e-afbe9031da44",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst m = $('Calcular métricas').first().json;\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst num = n => Number(n || 0).toLocaleString('pt-BR');\nconst base = String($('Painel de métricas (GET)').first().json.webhookUrl || '').split('/webhook/')[0];\n\nconst casca = (titulo, corpo) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\"><title>${esc(titulo)}</title>\n<style>\n.viz{color-scheme:light;--plano:#f9f9f7;--sup:#fcfcfb;--tx:#0b0b0b;--tx2:#52514e;--mu:#898781;--grid:#e1e0d9;--base:#c3c2b7;--borda:rgba(11,11,11,.10);--s1:#2a78d6;--f1:#104281;--f2:#1c5cab;--f3:#2a78d6;--f4:#5598e7;--f5:#86b6ef;--bom:#0ca30c;--alerta:#fab219;--critico:#d03b3b;--link:#1c5cab}\n@media (prefers-color-scheme:dark){:root:where(:not([data-theme=\"light\"])) .viz{color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--mu:#898781;--grid:#2c2c2a;--base:#383835;--borda:rgba(255,255,255,.10);--s1:#3987e5;--f1:#184f95;--f2:#256abf;--f3:#3987e5;--f4:#6da7ec;--f5:#9ec5f4;--link:#86b6ef}}\n:root[data-theme=\"dark\"] .viz{color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--grid:#2c2c2a;--base:#383835;--borda:rgba(255,255,255,.10);--s1:#3987e5;--f1:#184f95;--f2:#256abf;--f3:#3987e5;--f4:#6da7ec;--f5:#9ec5f4;--link:#86b6ef}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{margin:0}\n.viz{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);min-height:100vh;padding:24px 16px 60px;line-height:1.45}\n.w{max-width:1080px;margin:0 auto}\nh1{font-size:24px;font-weight:650}\nh2{font-size:15px;font-weight:650;margin-bottom:4px}\n.sub{color:var(--tx2);font-size:13.5px;margin-top:4px}\n.acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}\n.btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--tx);background:var(--sup);border:1px solid var(--borda);padding:9px 14px;border-radius:10px;font-weight:600;font-size:14px}\n.btn.pri{background:var(--s1);color:#fff;border-color:transparent}\n.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:16px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:16px 18px}\n.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}\n.tile .lab{color:var(--tx2);font-size:13px;font-weight:600}\n.tile .val{font-size:30px;font-weight:650;margin-top:2px}\n.tile.hero .val{font-size:48px;line-height:1.05}\n.tile .det{color:var(--mu);font-size:12.5px;margin-top:2px}\n.hb{display:grid;grid-template-columns:minmax(110px,190px) 1fr;gap:10px;align-items:center;margin-top:10px;font-size:13.5px}\n.hl{color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.ht{display:flex;align-items:center;gap:8px;min-width:0}\n.hf{height:16px;border-radius:0 4px 4px 0;min-width:2px;flex:none;outline:none}\n.hv{font-weight:600;font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}\n.hv small{color:var(--mu);font-weight:500}\n.cols{display:flex;align-items:flex-end;gap:2px;height:170px;border-bottom:1px solid var(--base);margin-top:18px;padding-top:18px}\n.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}\n.col i{display:block;width:min(24px,70%);background:var(--s1);border-radius:4px 4px 0 0;min-height:2px;outline:none}\n.col em{position:absolute;font-style:normal;font-size:12px;font-weight:600;color:var(--tx)}\n.xl{display:flex;gap:2px;margin-top:6px}\n.xl span{flex:1;text-align:center;color:var(--mu);font-size:11px;font-variant-numeric:tabular-nums}\n.vazio{color:var(--mu);font-size:13.5px;margin-top:10px}\n.ia{border-left:4px solid var(--s1)}\n.saude{display:inline-flex;align-items:center;gap:8px;font-weight:650;margin:6px 0 10px}\n.ponto{width:12px;height:12px;border-radius:50%}\n.ia ul{margin:6px 0 0 18px}.ia li{margin-top:5px;color:var(--tx2);font-size:14px}.ia li b{color:var(--tx)}\n.ia h3{font-size:14px;margin-top:14px}\ndetails{margin-top:16px}summary{cursor:pointer;color:var(--link);font-weight:600;font-size:14px}\ntable{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--grid)}td:last-child{text-align:right;font-variant-numeric:tabular-nums}\n.cod{display:block;background:var(--plano);border:1px solid var(--borda);border-radius:10px;padding:12px 14px;font:13px/1.5 ui-monospace,Consolas,monospace;word-break:break-all;margin-top:10px;color:var(--tx)}\ncode{font:12.5px ui-monospace,Consolas,monospace}\nbutton.btn{font-family:inherit;cursor:pointer}\n.espera{border-left:4px solid var(--s1)}\n#tip{position:fixed;pointer-events:none;background:var(--tx);color:var(--sup);font-size:12.5px;padding:6px 9px;border-radius:8px;display:none;z-index:9;white-space:nowrap}\n.c404{max-width:460px;margin:80px auto;text-align:center}\n@media(max-width:820px){.c3,.c4{grid-column:span 6}.c6,.c8{grid-column:span 12}}\n@media(max-width:520px){.c3,.c4{grid-column:span 12}.hb{grid-template-columns:110px 1fr}}\n</style></head><body><div class=\"viz\"><div class=\"w\">${corpo}</div><div id=\"tip\" role=\"tooltip\"></div></div>\n<script>\n(function(){var t=document.getElementById('tip');function s(e){var el=e.target.closest('[data-tip]');if(!el){t.style.display='none';return;}t.textContent=el.getAttribute('data-tip');t.style.display='block';var r=el.getBoundingClientRect();t.style.left=Math.min(innerWidth-t.offsetWidth-8,Math.max(8,r.left+r.width/2-t.offsetWidth/2))+'px';t.style.top=Math.max(8,r.top-t.offsetHeight-8)+'px';}\ndocument.addEventListener('mouseover',s);document.addEventListener('focusin',s);document.addEventListener('mouseout',function(e){if(e.target.closest('[data-tip]'))t.style.display='none';});\ndocument.addEventListener('click',function(e){var b=e.target.closest('[data-copiar]');if(!b)return;var a=document.querySelector(b.getAttribute('data-copiar'));var ok=function(){b.textContent='✅ Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-rotulo');},1800);};if(navigator.clipboard)navigator.clipboard.writeText(a.textContent).then(ok,function(){});});})();\n</script></body></html>`;\n\n// Código de instalação: o mesmo que a tela \"Comece aqui\" entrega.\nconst snippet = `<script src=\"${base}/webhook/lp-script?id=${m.id}\" defer></script>`;\nconst instalar = `<p class=\"sub\">Cole esta linha no site, logo antes de <code>&lt;/body&gt;</code>. WordPress: plugin <i>WPCode › Footer</i>. Wix: <i>Configurações › Código personalizado › Body – fim</i>.</p>\n<code class=\"cod\" id=\"snippet\">${esc(snippet)}</code>\n<div class=\"acoes\"><button class=\"btn pri\" type=\"button\" data-copiar=\"#snippet\" data-rotulo=\"📋 Copiar código\">📋 Copiar código</button>\n<a class=\"btn\" href=\"${esc(base)}/webhook/lp-teste?id=${esc(m.id)}\" target=\"_blank\" rel=\"noopener\">🧪 Testar numa página de exemplo</a>\n<a class=\"btn\" href=\"${esc(base)}/webhook/lp-metricas\">❓ Passo a passo completo</a></div>`;\n\nconst barras = (itens, cor, total) => {\n  const max = Math.max(1, ...itens.map(i => i[1]));\n  return itens.map(([rot, v], i) => {\n    const pct = total ? ` <small>${Math.round(v / total * 100)}%</small>` : '';\n    const c = typeof cor === 'function' ? cor(i) : cor;\n    return `<div class=\"hb\"><span class=\"hl\" title=\"${esc(rot)}\">${esc(rot)}</span><span class=\"ht\"><span class=\"hf\" tabindex=\"0\" data-tip=\"${esc(rot)}: ${num(v)}\" style=\"width:calc((100% - 72px) * ${(v / max).toFixed(4)});background:${c}\"></span><span class=\"hv\">${num(v)}${pct}</span></span></div>`;\n  }).join('');\n};\nconst nomeOrigem = s => s === 'direto' ? 'Direto (link ou digitado)' : s;\nconst ROT = { whatsapp: 'WhatsApp', telefone: 'Telefone', email: 'E-mail', instagram: 'Instagram', menu: 'Menu da página', link_externo: 'Links externos', botao: 'Outros botões', marcado: 'Marcados (data-metrica)' };\n\nlet ia = null;\ntry { if ($('IA Analista').isExecuted) ia = parseJSON($('IA Analista').first().json.output); } catch (e) {}\n\nconst p = m.pagina || {};\nconst maxDia = Math.max(...m.dias.map(d => d.visitas));\nconst colunas = m.dias.map((d, i) => `<div class=\"col\"><i tabindex=\"0\" data-tip=\"${d.semana} ${d.dia}: ${num(d.visitas)} visita${d.visitas === 1 ? '' : 's'}\" style=\"height:${maxDia && d.visitas ? Math.max(1.5, d.visitas / maxDia * 100) : 0}%;${d.visitas ? '' : 'min-height:0'}\"></i>${d.visitas === maxDia && maxDia > 0 ? `<em style=\"bottom:calc(${d.visitas / maxDia * 100}% + 4px)\">${num(d.visitas)}</em>` : ''}</div>`).join('');\nconst rotX = m.dias.map((d, i) => `<span>${i % 2 === 1 || i === 13 ? d.dia : ''}</span>`).join('');\nconst cliquesLista = Object.entries(m.cliques).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).map(([k, v]) => [ROT[k] || k, v]);\nconst funilCores = ['var(--f1)', 'var(--f2)', 'var(--f3)', 'var(--f4)', 'var(--f5)'];\n\nlet blocoIA = '';\nif (ia) {\n  const n = Math.max(0, Math.min(100, Number(ia.nota_saude) || 0));\n  const st = n >= 70 ? ['var(--bom)', '✅', 'Saudável'] : n >= 40 ? ['var(--alerta)', '⚠️', 'Pode melhorar'] : ['var(--critico)', '🔴', 'Precisa de atenção'];\n  const lista = arr => (Array.isArray(arr) ? arr : []).slice(0, 5).map(x => `<li>${esc(typeof x === 'string' ? x : x.titulo || '')}${x && x.porque ? ` <span>· ${esc(x.porque)}</span>` : ''}</li>`).join('');\n  blocoIA = `<div class=\"card c12 ia\"><h2>🤖 Análise da IA</h2><div class=\"saude\"><span class=\"ponto\" style=\"background:${st[0]}\"></span>${st[1]} ${st[2]} · nota ${n} de 100</div>\n  <p style=\"color:var(--tx2)\">${esc(ia.resumo)}</p>\n  <h3>💪 O que está funcionando</h3><ul>${lista(ia.pontos_fortes)}</ul>\n  <h3>🚧 Onde as pessoas desistem</h3><ul>${lista(ia.gargalos)}</ul>\n  <h3>🎯 O que fazer agora</h3><ul>${(Array.isArray(ia.acoes) ? ia.acoes : []).slice(0, 4).map(a => `<li><b>${esc(a.titulo)}</b>${a.porque ? ` · ${esc(a.porque)}` : ''}</li>`).join('')}</ul></div>`;\n} else if ($('Calcular métricas').first().json.quer_ia) {\n  blocoIA = `<div class=\"card c12 ia\"><h2>🤖 Análise da IA</h2><p class=\"vazio\">A IA não respondeu agora. Tente de novo em instantes.</p></div>`;\n}\n\nconst todos = [['Visitas', m.visitas], ['Visitantes únicos', m.visitantes], ...m.funil.slice(1).map(f => [f.etapa, f.qtd]),\n  ...Object.entries(m.cliques).map(([k, v]) => ['Cliques · ' + (ROT[k] || k), v]), ...m.tempo.map(t => ['Tempo · ' + t.faixa, t.qtd]),\n  ...m.origens.map(([k, v]) => ['Origem · ' + nomeOrigem(k), v]), ...m.dispositivos.map(([k, v]) => ['Aparelho · ' + k, v])];\n\nconst corpo = `\n<h1>📊 Métricas · ${esc(p.empresa || m.id)}</h1>\n<p class=\"sub\">Atualizado às ${new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' })} · cada visita, rolagem e clique é contado em tempo real</p>\n<div class=\"acoes\">${p.url ? `<a class=\"btn\" href=\"${esc(p.url)}\" target=\"_blank\" rel=\"noopener\">🔗 Abrir a página</a>` : ''}\n${m.visitas ? `<a class=\"btn pri\" href=\"?id=${esc(m.id)}&ia=1\">🤖 Analisar com IA</a>` : ''}\n<a class=\"btn\" href=\"${esc(base)}/webhook/lp-leads?id=${esc(m.id)}\">🎯 Ver leads</a>\n<a class=\"btn\" href=\"?id=${esc(m.id)}\">🔄 Atualizar</a></div>\n${m.visitas === 0 ? `<div class=\"grid\"><div class=\"card c12 espera\"><h2>⏳ Esperando a primeira visita</h2>\n<p class=\"sub\">${p.url ? 'O código já está instalado nesta landing page. Abra a página e role um pouco.' : 'Instale o código abaixo no seu site (ou use a página de teste) e abra o site.'} Depois clique em <b>🔄 Atualizar</b>: os números aparecem em segundos.</p></div>\n<div class=\"card c12\"><h2>🔧 Como instalar</h2>${instalar}</div></div>` : `\n<div class=\"grid\">\n  <div class=\"card tile hero c3\"><div class=\"lab\">Visitas</div><div class=\"val\">${num(m.visitas)}</div><div class=\"det\">últimos 180 dias</div></div>\n  <div class=\"card tile c3\"><div class=\"lab\">Visitantes únicos</div><div class=\"val\">${num(m.visitantes)}</div><div class=\"det\">pessoas diferentes</div></div>\n  <div class=\"card tile c3\"><div class=\"lab\">Rolaram até o fim</div><div class=\"val\">${m.taxa_fim.toString().replace('.', ',')}%</div><div class=\"det\">das visitas viram a página toda</div></div>\n  <div class=\"card tile c3\"><div class=\"lab\">Contatos</div><div class=\"val\">${num(m.contato + m.leads)}</div><div class=\"det\">${m.taxa_contato.toString().replace('.', ',')}% dos visitantes chamaram</div></div>\n  ${blocoIA}\n  <div class=\"card c8\"><h2>🔻 Funil da página</h2><p class=\"sub\">Quantas pessoas chegaram em cada etapa, do total de visitas</p>${barras(m.funil.map(f => [f.etapa, f.qtd]), i => funilCores[i], m.visitas)}</div>\n  <div class=\"card c4\"><h2>🖱️ Cliques por tipo</h2>${cliquesLista.length ? barras(cliquesLista, 'var(--s1)') : '<p class=\"vazio\">Nenhum clique ainda.</p>'}</div>\n  <div class=\"card c12\"><h2>📅 Visitas por dia</h2><p class=\"sub\">Últimos 14 dias · passe o mouse nas colunas</p><div class=\"cols\">${colunas}</div><div class=\"xl\">${rotX}</div></div>\n  <div class=\"card c6\"><h2>🏷️ Botões mais clicados</h2>${m.botoes.length ? barras(m.botoes, 'var(--s1)') : '<p class=\"vazio\">Nenhum botão clicado ainda.</p>'}</div>\n  <div class=\"card c6\"><h2>⏱️ Tempo na página</h2>${m.tempo.some(t => t.qtd) ? barras(m.tempo.map(t => [t.faixa, t.qtd]), 'var(--s1)') : '<p class=\"vazio\">Aparece quando os visitantes saem da página.</p>'}</div>\n  <div class=\"card c6\"><h2>🌐 De onde vieram</h2>${barras(m.origens.map(([k, v]) => [nomeOrigem(k), v]), 'var(--s1)', m.visitas)}</div>\n  <div class=\"card c6\"><h2>📱 Aparelho</h2>${barras(m.dispositivos.map(([k, v]) => [k === 'celular' ? 'Celular' : 'Computador', v]), 'var(--s1)', m.visitas)}</div>\n</div>\n<details class=\"card\"><summary>Ver todos os números em tabela</summary><table><thead><tr><th>Métrica</th><th>Quantidade</th></tr></thead><tbody>${todos.map(([a, b]) => `<tr><td>${esc(a)}</td><td>${num(b)}</td></tr>`).join('')}</tbody></table></details>\n<details class=\"card\"><summary>🔧 Código de instalação e página de teste</summary>${instalar}</details>`}`;\nreturn [{ json: { codigo: 200, html: casca('Métricas · ' + (p.empresa || m.id), corpo) } }];"
+   },
+   "name": "Montar painel",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1520,
+    1580
+   ],
+   "id": "f29519d3-2278-4843-8ccd-462947e1ce9b"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     },
+     "responseCode": "={{ $json.codigo }}"
+    }
+   },
+   "name": "Entrega o painel",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1520,
+    1780
+   ],
+   "id": "7eb72ee8-4be2-4271-82e5-c532262e06f9"
+  },
+  {
+   "parameters": {
+    "content": "# 📊 MÉTRICAS DE QUALQUER SITE\n\n🎯 **Para que serve:** descobrir **o que os visitantes fazem** no seu site ou landing page:\n👀 quantas pessoas abriram (e quantas **diferentes**)\n📜 até onde **rolaram** (25%, 50%, 75% e até o fim)\n🖱️ em quais **botões clicaram** (WhatsApp, telefone, Instagram, menu…) e o **nome** de cada botão\n⏱️ quanto **tempo ficaram**\n🌐 de onde vieram e se usam **celular ou computador**\n\nE um botão **🤖 Analisar com IA** explica os números e diz o que melhorar.\n\n## ▶️ COMO USAR (3 passos)\n1️⃣ Abra **/webhook/lp-metricas** (sem nada depois)\n   ➜ aparece a tela **Comece aqui**\n2️⃣ Digite o nome do site ➜ copie a **linha de código** que aparece\n   e cole no seu site antes de `</body>`\n   (WordPress: plugin WPCode › Footer · Wix: Código personalizado)\n3️⃣ Clique em **📈 Abrir meu painel** e guarde o link\n\n🧪 Sem site para testar? Na tela Comece aqui tem o botão **Testar numa página de exemplo**: uma padaria de mentira com o código já instalado. Role, clique e veja os números subirem no painel.\n\n🚀 As landing pages do **Gerador PRO** já vêm com o código instalado.\n\n## 🧠 Como funciona por dentro\n1️⃣ O site carrega um **scriptzinho** deste fluxo\n2️⃣ O script avisa o n8n a cada visita, rolagem ou clique\n3️⃣ O n8n **soma 1** num contador do Redis\n4️⃣ O painel lê os contadores e desenha os gráficos\n\n## 🔒 Privacidade\nSó contamos **números**: nada de nome, IP ou dados pessoais. Quem é cada visitante fica apenas no navegador dele.",
+    "height": 1124,
+    "width": 680,
+    "color": 6
+   },
+   "name": "Nota · Comece aqui",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1320,
+    -120
+   ],
+   "id": "d2d4a783-8158-4a5a-b507-8d4566db9708"
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ O SCRIPT ESPIÃO DO BEM 🕵️\n\n🔔 **Pedido do script (GET)**: o site pede o script em `/webhook/lp-script?id=nome-do-site`\n\n🧩 **Montar script**: monta um JavaScript pequeno, sem bibliotecas, que roda no navegador do visitante e avisa:\n👀 **visita**: e se é a primeira vez daquela pessoa\n📜 **rolagem**: quando passa de 25, 50, 75 e 100%\n🖱️ **clique**: qual tipo de botão e o texto dele\n🏷️ **clique marcado**: qualquer coisa com `data-metrica=\"nome\"`\n⏱️ **saída**: quanto tempo ficou\n📝 **formulário**: manda o lead para o fluxo de Leads\n\n📤 **Entrega o script**: devolve como JavaScript.\n\n💡 O script leva o **endereço completo** do n8n dentro dele. Por isso funciona em qualquer site, não só nas páginas do gerador.\n\n💡 Os avisos usam `sendBeacon`, que funciona até quando a pessoa fecha a aba. Vão como **texto puro**: assim o navegador não bloqueia o envio para outro domínio.\n\n🔍 Para conferir num site: aperte F12 ➜ Console ➜ aparece **[métricas] contando visitas…**",
+    "height": 760,
+    "width": 540,
+    "color": 4
+   },
+   "name": "Nota · Script",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -580,
+    -120
+   ],
+   "id": "12e10125-c8b0-45bf-b5ac-581618aa0c8a"
+  },
+  {
+   "parameters": {
+    "content": "## 🧪 PÁGINA DE TESTE\n\n🔔 **Pedido da página de teste (GET)**: `/webhook/lp-teste?id=nome-do-site`\n\n🥐 **Montar página de teste**: uma **padaria de mentira**, com menu, botões de WhatsApp, telefone, Instagram, perguntas frequentes e cards do cardápio. O código das métricas vai instalado **igualzinho** num site de verdade.\n\n🏷️ Os cards usam `data-metrica`, então cada produto aparece com nome próprio no painel.\n\n📤 **Entrega a página de teste**.\n\n💡 Ótimo para a aula: abra no celular dos alunos e veja o painel mudando ao vivo.\n⚠️ As visitas de teste contam no painel daquele nome. Para começar do zero, use outro nome.",
+    "height": 583,
+    "width": 540,
+    "color": 3
+   },
+   "name": "Nota · Página de teste",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -580,
+    880
+   ],
+   "id": "a8968196-6268-4172-b89e-ede5e022bbea"
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ O CONTADOR 🧮\n\n🔔 **Evento chega (POST)**: cada visita, rolagem ou clique chega aqui.\n\n⚡ **Responde rápido (204)**: responde **na hora**, sem conteúdo, para não deixar o site lento.\n\n🏷️ **Classificar evento**: decide **quais contadores** somar. Uma visita, por exemplo, soma em:\n• visitas totais\n• visitas **do dia**\n• visitantes únicos (se for a primeira vez)\n• o aparelho e a origem\n\n➕ **Soma o contador**: usa o **INCR** do Redis, que soma 1 de forma segura mesmo com muita gente ao mesmo tempo. Cada contador vale por 180 dias.\n\n💡 Ideia de exercício: contar quantas pessoas clicaram no FAQ.",
+    "height": 760,
+    "width": 540,
+    "color": 5
+   },
+   "name": "Nota · Eventos",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    200,
+    -120
+   ],
+   "id": "bdc9a318-7713-4a70-81a9-f615d96cd934"
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ O PAINEL 📈\n\n🔔 **Painel de métricas (GET)**: abre com `?id=nome-do-site`\n\n🧹 **Entende o pedido**: aceita o nome do jeito que a pessoa digitar (\"Padaria do João\" vira `padaria-do-joao`).\n\n🚦 **Veio com o nome do site?**\n❌ Não ➜ **Tela Comece aqui**: explica os 3 passos e gera a linha de código para copiar\n✅ Sim ➜ segue para o painel\n\n🗄️ **Lê contadores**: busca de uma vez todos os contadores do site (`mt:nome:*`).\n🗄️ **Lê dados da página**: se for do Gerador PRO, pega o nome da empresa e o link.\n\n🧮 **Calcular métricas**: monta o **funil**, as taxas, os últimos 14 dias e os rankings.\n\n🚦 **Pediu análise da IA?**\n✅ Sim ➜ **IA Analista** (cérebro: `gemini-3.1-flash-lite`, com um **cérebro reserva** se o principal estiver ocupado) devolve nota de saúde, o que está bom, onde as pessoas desistem e o que fazer\n❌ Não ➜ vai direto para o painel\n\n🎨 **Montar painel**: gráficos só com HTML e CSS, tooltip ao passar o mouse, tabela com todos os números e modo escuro automático. Sem visitas ainda? Mostra como instalar.\n\n📤 **Entrega o painel**.",
+    "height": 907,
+    "width": 540,
+    "color": 7
+   },
+   "name": "Nota · Painel",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    960,
+    -120
+   ],
+   "id": "a71fd3eb-dca8-463b-8d68-5b8868d400d7"
+  }
+ ],
+ "connections": {
+  "Pedido do script (GET)": {
+   "main": [
+    [
+     {
+      "node": "Montar script",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Montar script": {
+   "main": [
+    [
+     {
+      "node": "Entrega o script",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Pedido da página de teste (GET)": {
+   "main": [
+    [
+     {
+      "node": "Montar página de teste",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Montar página de teste": {
+   "main": [
+    [
+     {
+      "node": "Entrega a página de teste",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Evento chega (POST)": {
+   "main": [
+    [
+     {
+      "node": "Responde rápido (204)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Responde rápido (204)": {
+   "main": [
+    [
+     {
+      "node": "Classificar evento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Classificar evento": {
+   "main": [
+    [
+     {
+      "node": "Soma o contador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Painel de métricas (GET)": {
+   "main": [
+    [
+     {
+      "node": "Entende o pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Entende o pedido": {
+   "main": [
+    [
+     {
+      "node": "Veio com o nome do site?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tela Comece aqui": {
+   "main": [
+    [
+     {
+      "node": "Entrega Comece aqui",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Veio com o nome do site?": {
+   "main": [
+    [
+     {
+      "node": "Lê contadores",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Tela Comece aqui",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê contadores": {
+   "main": [
+    [
+     {
+      "node": "Lê dados da página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê dados da página": {
+   "main": [
+    [
+     {
+      "node": "Calcular métricas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Calcular métricas": {
+   "main": [
+    [
+     {
+      "node": "Pediu análise da IA?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Cérebro da Analista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "IA Analista",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Cérebro da Analista": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "IA Analista",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Pediu análise da IA?": {
+   "main": [
+    [
+     {
+      "node": "IA Analista",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Montar painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "IA Analista": {
+   "main": [
+    [
+     {
+      "node": "Montar painel",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Montar painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Montar painel": {
+   "main": [
+    [
+     {
+      "node": "Entrega o painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 1800,
+  "binaryMode": "separate"
+ },
+ "staticData": null,
+ "meta": null,
+ "pinData": {},
+ "versionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+ "activeVersionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+ "versionCounter": 38,
+ "triggerCount": 4,
+ "shared": [
+  {
+   "updatedAt": "2026-10-13T14:35:30.790Z",
+   "createdAt": "2026-10-13T14:35:30.790Z",
+   "role": "workflow:owner",
+   "workflowId": "IV8sgllOq1N2AjtP",
+   "projectId": "3fU60QBo9r3dTQwz",
+   "project": {
+    "updatedAt": "2026-09-18T00:00:14.086Z",
+    "createdAt": "2026-09-17T23:37:39.592Z",
+    "id": "3fU60QBo9r3dTQwz",
+    "name": "Emerson Josiel <emersonjosielmrx@gmail.com>",
+    "type": "personal",
+    "icon": null,
+    "description": null,
+    "creatorId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  }
+ ],
+ "tags": [],
+ "activeVersion": {
+  "updatedAt": "2026-10-14T02:11:54.251Z",
+  "createdAt": "2026-10-14T02:11:54.251Z",
+  "versionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+  "workflowId": "IV8sgllOq1N2AjtP",
+  "nodes": [
+   {
+    "parameters": {
+     "path": "lp-script",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Pedido do script (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     0
+    ],
+    "id": "46e395a9-a877-49e8-8a4e-a4163a6c2e2f",
+    "webhookId": "aafb5230-41b3-4f4c-ac96-357e61182d7b"
+   },
+   {
+    "parameters": {
+     "jsCode": "const pedido = $('Pedido do script (GET)').first().json;\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);\nconst id = slug((pedido.query || {}).id);\nif (id.length < 4) {\n  return [{ json: { js: 'console.warn(\"[métricas] Falta o nome do site (mínimo 4 letras) no endereço do script. Use: lp-script?id=nome-do-seu-site\");' } }];\n}\n\n// Endereço completo do n8n: assim o script funciona em QUALQUER site, não só nas páginas servidas pelo n8n.\nconst BASE = String(pedido.webhookUrl || '').split('/webhook/')[0] + '/webhook';\n\n// Este é o script que roda dentro da página, no navegador do visitante.\n// O envio vai como texto puro: com 'application/json' o navegador faz uma checagem extra (CORS) e o sendBeacon descarta.\nconst script = `(function () {\n  if (window.__lpm) return; window.__lpm = 1;\n  var ID = ${JSON.stringify(id)}, B = ${JSON.stringify(BASE)};\n  try { console.info('[métricas] contando visitas, rolagem e cliques para \"' + ID + '\"'); } catch (e) {}\n  var v = '', voltou = false;\n  try { v = localStorage.getItem('lpv') || ''; if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('lpv', v); }\n        voltou = !!localStorage.getItem('lpv_' + ID); localStorage.setItem('lpv_' + ID, '1'); } catch (e) {}\n  var ini = Date.now(), maxR = 0, cliques = 0, marcos = {}, saiu = false, contatou = false;\n  function envia(ev, dados) {\n    var c = JSON.stringify(Object.assign({ id: ID, evento: ev, v: v }, dados || {}));\n    try { if (navigator.sendBeacon && navigator.sendBeacon(B + '/lp-evento', c)) return; } catch (e) {}\n    try { fetch(B + '/lp-evento', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: c, keepalive: true }); } catch (e) {}\n  }\n  var qs = new URLSearchParams(location.search), ref = '';\n  try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\\\\./, '') : ''; } catch (e) {}\n  var origem = qs.get('utm_source') || (ref && ref !== location.hostname ? ref : 'direto');\n  envia('visita', { novo: !voltou, origem: origem, disp: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'celular' : 'computador' });\n  function rolagem() {\n    var total = document.documentElement.scrollHeight - innerHeight, pct = total > 0 ? Math.round(scrollY / total * 100) : 100;\n    if (pct > maxR) maxR = pct;\n    [25, 50, 75, 100].forEach(function (m) { if (pct >= m - 2 && !marcos[m]) { marcos[m] = 1; envia('rolagem', { marco: m }); } });\n  }\n  addEventListener('scroll', rolagem, { passive: true }); setTimeout(rolagem, 1500);\n  document.addEventListener('click', function (e) {\n    if (!e.target.closest || e.target.closest('[data-lpm-ignorar]')) return;\n    var marcado = e.target.closest('[data-metrica]');\n    if (marcado) { cliques++; envia('clique', { tipo: 'marcado', rotulo: String(marcado.getAttribute('data-metrica')).slice(0, 40) }); return; }\n    var a = e.target.closest('a,button'); if (!a || a.type === 'submit') return;\n    var h = a.getAttribute('href') || '', tipo = 'botao';\n    if (/wa\\\\.me|whatsapp/i.test(h)) tipo = 'whatsapp'; else if (/^tel:/i.test(h)) tipo = 'telefone'; else if (/^mailto:/i.test(h)) tipo = 'email';\n    else if (/instagram\\\\.com/i.test(h)) tipo = 'instagram'; else if (h.charAt(0) === '#') tipo = 'menu'; else if (/^https?:/i.test(h)) tipo = 'link_externo';\n    // \"primeiro\": só o 1º clique de contato da visita, para contar PESSOAS que chamaram (e não cliques repetidos)\n    var primeiro = /whatsapp|telefone|email/.test(tipo) && !contatou; if (primeiro) contatou = true;\n    cliques++; envia('clique', { tipo: tipo, primeiro: primeiro, rotulo: (a.innerText || a.getAttribute('aria-label') || '').replace(/\\\\s+/g, ' ').trim().slice(0, 40) });\n  }, true);\n  function sai() { if (saiu) return; saiu = true; envia('saida', { segundos: Math.round((Date.now() - ini) / 1000), rolagem: maxR }); }\n  addEventListener('pagehide', sai);\n  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') sai(); });\n  document.addEventListener('submit', function (e) {\n    var f = e.target, campos = {}; if (!f || !f.querySelectorAll) return;\n    f.querySelectorAll('input,textarea,select').forEach(function (el, i) {\n      if (!el.value || /hidden|password|submit|button/.test(el.type)) return;\n      var r = (el.labels && el.labels[0] && el.labels[0].innerText) || el.getAttribute('aria-label') || el.name || el.placeholder || el.type || 'campo' + i;\n      campos[r.replace(/\\\\s+/g, ' ').trim().slice(0, 40)] = String(el.value).slice(0, 600);\n    });\n    if (!Object.keys(campos).length) return;\n    var d = document.querySelector('meta[name=\"description\"]');\n    var c = JSON.stringify({ id: ID, v: v, campos: campos, origem: origem,\n      pagina: { titulo: document.title.slice(0, 120), descricao: (d && d.content || '').slice(0, 300), url: location.href.split('#')[0] },\n      engajamento: { segundos: Math.round((Date.now() - ini) / 1000), rolagem: maxR, cliques: cliques, voltou: voltou } });\n    try { fetch(B + '/lp-lead', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: c, keepalive: true }); } catch (x) {}\n    envia('lead');\n  }, true);\n})();`;\nreturn [{ json: { js: script } }];"
+    },
+    "name": "Montar script",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     0,
+     200
+    ],
+    "id": "1acc358c-a4dc-41c5-a3d0-be819ae809f7"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.js }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "application/javascript; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Entrega o script",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     0,
+     400
+    ],
+    "id": "c92def82-becd-46c5-b8a0-6ee32d2b9a54"
+   },
+   {
+    "parameters": {
+     "path": "lp-teste",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Pedido da página de teste (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1000
+    ],
+    "id": "a6d89531-201f-4ef7-afad-3811cffee1c3",
+    "webhookId": "f65bd5fb-20ee-42ff-be8b-82b723a7234d"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Página de exemplo (uma padaria de mentira) com o código das métricas instalado, igual a um site de verdade.\nconst pedido = $('Pedido da página de teste (GET)').first().json;\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);\nconst id = slug((pedido.query || {}).id);\nconst base = String(pedido.webhookUrl || '').split('/webhook/')[0];\nif (id.length < 4) {\n  // Sem o nome do site: manda para a tela \"Comece aqui\", que gera o nome.\n  const inicio = base + '/webhook/lp-metricas';\n  return [{ json: { codigo: 200, html: `<!DOCTYPE html><meta charset=\"UTF-8\"><meta http-equiv=\"refresh\" content=\"0;url=${inicio}\"><a href=\"${inicio}\">Comece aqui</a>` } }];\n}\nconst painel = `${base}/webhook/lp-metricas?id=${id}`;\nconst produtos = [\n  ['🥖', 'Pão francês', 'Saindo do forno a cada 2 horas', 'R$ 0,90'],\n  ['🧀', 'Pão de queijo', 'Receita mineira, crocante por fora', 'R$ 4,50'],\n  ['🍰', 'Bolo de cenoura', 'Com cobertura de chocolate de verdade', 'R$ 32,00'],\n  ['🥐', 'Croissant', 'Manteiga francesa, 36 camadas', 'R$ 9,00'],\n  ['☕', 'Café coado', 'Grãos do sul de Minas', 'R$ 6,00'],\n  ['🍩', 'Sonho', 'Recheio de creme ou doce de leite', 'R$ 7,50'],\n];\n\nconst html = `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">\n<title>Padaria Pão Quente (página de teste)</title>\n<meta name=\"description\" content=\"Página de exemplo para testar o painel de métricas.\">\n<style>\n:root{--creme:#fbf6ee;--marrom:#5a3418;--tx:#2b1d12;--tx2:#6b5646;--dourado:#c9822b;--borda:rgba(43,29,18,.12)}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:Georgia,\"Times New Roman\",serif;background:var(--creme);color:var(--tx);line-height:1.6}\n.faixa-teste{position:sticky;top:0;z-index:5;background:#1c5cab;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:10px 16px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center}\n.faixa-teste a{color:#1c5cab;background:#fff;text-decoration:none;padding:6px 12px;border-radius:8px;font-weight:700}\nheader{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:1000px;margin:0 auto;padding:18px 16px}\n.logo{font-size:22px;font-weight:700;color:var(--marrom)}\nnav{display:flex;gap:16px;flex-wrap:wrap}nav a{color:var(--tx2);text-decoration:none;font:15px system-ui,sans-serif}\n.hero{max-width:1000px;margin:0 auto;padding:56px 16px 64px;text-align:center}\n.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.1;color:var(--marrom)}\n.hero p{font-size:19px;color:var(--tx2);max-width:560px;margin:16px auto 0}\n.botoes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}\n.b{display:inline-block;font:600 16px system-ui,sans-serif;padding:14px 22px;border-radius:12px;text-decoration:none;border:2px solid var(--marrom);color:var(--marrom);background:transparent;cursor:pointer}\n.b.zap{background:#128c4a;border-color:#128c4a;color:#fff}\nsection{max-width:1000px;margin:0 auto;padding:56px 16px}\nh2{font-size:32px;color:var(--marrom);text-align:center}\n.lead{text-align:center;color:var(--tx2);margin-top:6px}\n.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:28px}\n.card{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:22px;cursor:pointer;transition:transform .15s}\n.card:hover{transform:translateY(-2px)}\n.card .e{font-size:40px}.card h3{font-size:20px;margin-top:6px}.card p{color:var(--tx2);font-size:15px}.card b{display:block;color:var(--dourado);font:700 18px system-ui,sans-serif;margin-top:8px}\n.sobre{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}\n.sobre .foto{font-size:120px;text-align:center;background:#fff;border-radius:20px;border:1px solid var(--borda);padding:30px 0}\ndetails{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:14px 18px;margin-top:10px}\nsummary{cursor:pointer;font-weight:700}\n.contato{text-align:center;background:var(--marrom);color:#fff;border-radius:24px;margin:40px auto 60px;max-width:968px}\n.contato h2{color:#fff}.contato p{color:#f1e3d3}\n.contato .b{border-color:#fff;color:#fff}\nfooter{text-align:center;color:var(--tx2);font:14px system-ui,sans-serif;padding:0 16px 40px}\n@media(max-width:700px){.sobre{grid-template-columns:1fr}}\n</style>\n<script src=\"${base}/webhook/lp-script?id=${id}\" defer></script>\n</head><body>\n<div class=\"faixa-teste\" data-lpm-ignorar><span>🧪 Página de TESTE do painel <b>${id}</b>. Role até o fim e clique nos botões, depois veja os números subirem.</span>\n<a href=\"${painel}\" target=\"_blank\" rel=\"noopener\">📈 Abrir o painel</a></div>\n\n<header><div class=\"logo\">🥐 Pão Quente</div>\n<nav><a href=\"#cardapio\">Cardápio</a><a href=\"#sobre\">Sobre</a><a href=\"#perguntas\">Perguntas</a><a href=\"#contato\">Contato</a></nav></header>\n\n<div class=\"hero\"><h1>Pão quentinho a cada 2 horas</h1>\n<p>Padaria de bairro desde 1998. Encomende pelo WhatsApp e retire sem fila.</p>\n<div class=\"botoes\"><a class=\"b zap\" href=\"https://wa.me/?text=Quero%20fazer%20uma%20encomenda\" target=\"_blank\" rel=\"noopener\">💬 Pedir no WhatsApp</a>\n<a class=\"b\" href=\"#cardapio\">Ver cardápio</a></div></div>\n\n<section id=\"cardapio\"><h2>Cardápio do dia</h2><p class=\"lead\">Clique num produto: cada card conta como um clique com nome próprio (data-metrica).</p>\n<div class=\"cards\">${produtos.map(([e, n, d, pr]) => `<div class=\"card\" data-metrica=\"card-${slug(n)}\"><div class=\"e\">${e}</div><h3>${n}</h3><p>${d}</p><b>${pr}</b></div>`).join('')}</div></section>\n\n<section id=\"sobre\"><div class=\"sobre\"><div class=\"foto\">👩‍🍳</div><div><h2 style=\"text-align:left\">Feito por gente do bairro</h2>\n<p style=\"margin-top:12px;color:var(--tx2)\">A Dona Cida começou vendendo pão de queijo na garagem. Hoje são 12 pessoas na equipe e mais de 40 receitas, todas feitas aqui, com farinha selecionada e fermentação natural de 18 horas.</p>\n<p style=\"margin-top:12px;color:var(--tx2)\">Toda manhã, antes das 6h, o primeiro forno já está quente. Quem chega cedo leva o pão ainda estalando.</p>\n<p style=\"margin-top:16px\"><a class=\"b\" href=\"https://www.instagram.com/\" target=\"_blank\" rel=\"noopener\">📸 Siga no Instagram</a></p></div></div></section>\n\n<section id=\"perguntas\"><h2>Perguntas frequentes</h2>\n<details><summary>Vocês entregam?</summary><p>Sim, num raio de 3 km, de terça a domingo.</p></details>\n<details><summary>Dá para encomendar bolo de aniversário?</summary><p>Sim, com 2 dias de antecedência pelo WhatsApp.</p></details>\n<details><summary>Tem opção sem glúten?</summary><p>Temos pão de queijo e bolo de fubá, feitos em área separada.</p></details>\n<details><summary>Qual o horário?</summary><p>De terça a domingo, das 6h às 20h.</p></details></section>\n\n<section id=\"contato\" class=\"contato\"><h2>Bateu a fome?</h2><p>Chame no WhatsApp ou ligue. Atendemos das 6h às 20h.</p>\n<div class=\"botoes\"><a class=\"b zap\" href=\"https://wa.me/?text=Oi%2C%20quero%20fazer%20um%20pedido\" target=\"_blank\" rel=\"noopener\">💬 Chamar no WhatsApp</a>\n<a class=\"b\" href=\"tel:+5500000000000\">📞 Ligar agora</a></div></section>\n\n<footer>Padaria Pão Quente é um exemplo fictício para testar as métricas.</footer>\n</body></html>`;\nreturn [{ json: { codigo: 200, html } }];"
+    },
+    "name": "Montar página de teste",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     0,
+     1200
+    ],
+    "id": "a1bc1052-04e7-430a-8626-4f6410481ace"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      }
+     }
+    },
+    "name": "Entrega a página de teste",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     0,
+     1400
+    ],
+    "id": "ed85a33e-25fb-448e-99b5-39484d621692"
+   },
+   {
+    "parameters": {
+     "path": "lp-evento",
+     "responseMode": "responseNode",
+     "options": {},
+     "httpMethod": "POST"
+    },
+    "name": "Evento chega (POST)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     760,
+     0
+    ],
+    "id": "868e8b3f-15ee-4ff8-8549-83b137077f52",
+    "webhookId": "32c24d79-aec8-4024-9613-0a3d9dc3de98"
+   },
+   {
+    "parameters": {
+     "respondWith": "noData",
+     "options": {
+      "responseCode": 204
+     }
+    },
+    "name": "Responde rápido (204)",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     760,
+     200
+    ],
+    "id": "c503bde9-737c-44e2-867c-b823c8f5526b"
+   },
+   {
+    "parameters": {
+     "jsCode": "let b = $('Evento chega (POST)').first().json.body;\nif (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }\nb = b || {};\nconst id = String(b.id || '').toLowerCase();\nconst EVENTOS = ['visita', 'rolagem', 'clique', 'saida', 'lead'];\nif (!/^[a-z0-9-]{4,80}$/.test(id) || !EVENTOS.includes(b.evento)) return [];\n\n// \"permitidos\" deixa passar o ponto na origem, para \"instagram.com\" não virar \"instagram-com\"\nconst slug = (s, permitidos = 'a-z0-9') => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')\n  .replace(new RegExp(`[^${permitidos}]+`, 'g'), '-').replace(/(^-|-$)/g, '').slice(0, 40) || 'sem-nome';\nconst dia = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });\nconst k = s => `mt:${id}:${s}`;\nconst chaves = [];\n\nif (b.evento === 'visita') {\n  chaves.push(k('visitas'), k('dia:' + dia));\n  if (b.novo) chaves.push(k('visitantes'));\n  chaves.push(k('disp:' + (b.disp === 'celular' ? 'celular' : 'computador')), k('origem:' + slug(b.origem, 'a-z0-9.')));\n} else if (b.evento === 'rolagem') {\n  const m = Number(b.marco);\n  if ([25, 50, 75, 100].includes(m)) chaves.push(k('rolagem:' + m));\n} else if (b.evento === 'clique') {\n  const tipos = ['whatsapp', 'telefone', 'email', 'instagram', 'menu', 'link_externo', 'botao', 'marcado'];\n  chaves.push(k('clique:' + (tipos.includes(b.tipo) ? b.tipo : 'botao')));\n  if (b.primeiro === true) chaves.push(k('pessoas_contato'));\n  const rotulo = String(b.rotulo || '').toLowerCase().replace(/[\\s:*?\\[\\]]+/g, ' ').trim().slice(0, 40);\n  if (rotulo) chaves.push(k('botao:' + rotulo));\n} else if (b.evento === 'saida') {\n  const s = Number(b.segundos) || 0;\n  chaves.push(k('tempo:' + (s < 10 ? 'a_0-10s' : s < 30 ? 'b_10-30s' : s < 60 ? 'c_30-60s' : s < 180 ? 'd_1-3min' : 'e_3min+')));\n} else if (b.evento === 'lead') {\n  chaves.push(k('leads'));\n}\nreturn chaves.map(chave => ({ json: { chave } }));"
+    },
+    "name": "Classificar evento",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     760,
+     400
+    ],
+    "id": "c2459a74-74a0-4027-93da-d08cc884a599"
+   },
+   {
+    "parameters": {
+     "operation": "incr",
+     "key": "={{ $json.chave }}",
+     "expire": true,
+     "ttl": 15552000
+    },
+    "name": "Soma o contador",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     760,
+     600
+    ],
+    "id": "6ab6c09a-51e0-48ca-837b-61530f16f59c",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "path": "lp-metricas",
+     "responseMode": "responseNode",
+     "options": {}
+    },
+    "name": "Painel de métricas (GET)",
+    "type": "n8n-nodes-base.webhook",
+    "typeVersion": 2,
+    "position": [
+     1520,
+     0
+    ],
+    "id": "bb6fd499-7c6d-4589-b388-81e32e40f7e3",
+    "webhookId": "becd53e9-d303-4050-b496-57e2803b1159"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Aceita o nome do site do jeito que a pessoa digitar (\"Padaria do João\" vira \"padaria-do-joao\").\nconst q = $('Painel de métricas (GET)').first().json.query || {};\nconst slug = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);\nconst id = slug(q.id);\nreturn [{ json: { id, tem_id: id.length >= 4, ia: q.ia === '1', digitado: String(q.id || '').slice(0, 80) } }];"
+    },
+    "name": "Entende o pedido",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1520,
+     200
+    ],
+    "id": "6d203fc9-e364-48c5-9034-bbb78d022b3a"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "c5e8a9ca-c6d5-4496-868d-81de88dabd09",
+        "leftValue": "={{ $json.tem_id }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Veio com o nome do site?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     1520,
+     400
+    ],
+    "id": "085401e1-564a-4d4e-bdd4-5d41ffd3a382"
+   },
+   {
+    "parameters": {
+     "jsCode": "// Tela \"Comece aqui\": aparece quando o painel é aberto sem o nome do site.\nconst p = $('Entende o pedido').first().json;\nconst base = String($('Painel de métricas (GET)').first().json.webhookUrl || '').split('/webhook/')[0];\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\n\n// Este código roda no navegador de quem abriu a tela (vai para a página como texto com .toString()).\nfunction cliente(BASE) {\n  var el = function (s) { return document.querySelector(s); };\n  var sufixo = Math.random().toString(36).slice(2, 6);\n  function slug(s) {\n    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60);\n  }\n  function atualiza() {\n    var nome = slug(el('#nome').value);\n    var id = nome ? nome + (el('#sufixo').checked ? '-' + sufixo : '') : '';\n    var ok = id.length >= 4;\n    var painel = BASE + '/webhook/lp-metricas?id=' + id;\n    el('#codigo').textContent = ok ? id : '…';\n    el('#snippet').textContent = ok ? '<script src=\"' + BASE + '/webhook/lp-script?id=' + id + '\" defer><\\/script>' : 'Digite o nome do site no passo 1 (mínimo 4 letras)';\n    el('#painel-url').textContent = ok ? painel : '…';\n    el('#teste').href = ok ? BASE + '/webhook/lp-teste?id=' + id : '#';\n    el('#painel').href = ok ? painel : '#';\n    document.body.classList.toggle('pronto', ok);\n  }\n  el('#nome').addEventListener('input', atualiza);\n  el('#sufixo').addEventListener('change', atualiza);\n  document.addEventListener('click', function (e) {\n    var b = e.target.closest('[data-copiar]');\n    if (b) {\n      var alvo = el(b.getAttribute('data-copiar'));\n      var volta = function () { b.textContent = '✅ Copiado'; setTimeout(function () { b.textContent = b.getAttribute('data-rotulo'); }, 1800); };\n      if (navigator.clipboard) navigator.clipboard.writeText(alvo.textContent).then(volta, function () {});\n      else { var r = document.createRange(); r.selectNodeContents(alvo); getSelection().removeAllRanges(); getSelection().addRange(r); document.execCommand('copy'); volta(); }\n    }\n    var trava = e.target.closest('.trava');\n    if (trava && !document.body.classList.contains('pronto')) { e.preventDefault(); el('#nome').focus(); }\n  });\n  atualiza();\n}\n\nconst aviso = p.digitado\n  ? `<div class=\"aviso\">⚠️ O nome <b>${esc(p.digitado)}</b> é curto demais. Use pelo menos 4 letras ou números.</div>` : '';\n\nconst html = `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">\n<title>Métricas do seu site · Comece aqui</title>\n<style>\n:root{color-scheme:light;--plano:#f9f9f7;--sup:#fcfcfb;--tx:#0b0b0b;--tx2:#52514e;--mu:#898781;--borda:rgba(11,11,11,.12);--pri:#1c5cab;--pri-tx:#fff;--cod:#f1f0ec;--ok:#0a7d0a;--alerta:#8a5a00;--alerta-bg:#fff4d6}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--mu:#898781;--borda:rgba(255,255,255,.12);--pri:#3987e5;--cod:#232322;--ok:#5fd35f;--alerta:#fab219;--alerta-bg:#2a2210}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--borda:rgba(255,255,255,.12);--pri:#3987e5;--cod:#232322;--ok:#5fd35f;--alerta:#fab219;--alerta-bg:#2a2210}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);line-height:1.5;padding:28px 16px 64px}\n.w{max-width:760px;margin:0 auto}\nh1{font-size:28px;font-weight:700;letter-spacing:-.01em}\n.sub{color:var(--tx2);margin-top:6px;font-size:15.5px}\n.passo{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:20px;margin-top:16px}\n.passo h2{font-size:17px;display:flex;gap:10px;align-items:center}\n.n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--pri);color:var(--pri-tx);display:grid;place-items:center;font-size:14px;font-weight:700}\n.passo p,.passo li{color:var(--tx2);font-size:14.5px;margin-top:8px}\nlabel{display:block;font-weight:600;font-size:14px;margin-top:12px}\ninput[type=text]{width:100%;margin-top:6px;font:inherit;font-size:17px;padding:12px 14px;border-radius:12px;border:1px solid var(--borda);background:var(--plano);color:var(--tx)}\ninput[type=text]:focus{outline:3px solid color-mix(in srgb,var(--pri) 35%,transparent);border-color:var(--pri)}\n.chk{display:flex;gap:8px;align-items:flex-start;font-weight:500;color:var(--tx2);font-size:13.5px;margin-top:10px}\n.chk input{margin-top:3px}\n.cod{display:block;background:var(--cod);border:1px solid var(--borda);border-radius:10px;padding:12px 14px;font:13.5px/1.5 ui-monospace,Consolas,monospace;word-break:break-all;margin-top:10px;color:var(--tx)}\n.linha{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}\n.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--borda);background:var(--sup);color:var(--tx);text-decoration:none;font:inherit;font-weight:600;font-size:14.5px;padding:10px 16px;border-radius:11px;cursor:pointer}\n.btn.pri{background:var(--pri);color:var(--pri-tx);border-color:transparent}\nbody:not(.pronto) .trava{opacity:.45;cursor:not-allowed}\n.id{font-weight:700;color:var(--tx)}\nul{padding-left:20px}\n.onde li{margin-top:10px}\n.onde b{color:var(--tx)}\n.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}\n.item{background:var(--plano);border:1px solid var(--borda);border-radius:12px;padding:12px;font-size:14px;color:var(--tx2)}\n.item b{display:block;color:var(--tx);font-size:14.5px}\n.aviso{background:var(--alerta-bg);color:var(--tx);border:1px solid var(--borda);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:14.5px}\ncode{font:13px ui-monospace,Consolas,monospace;background:var(--cod);padding:1px 5px;border-radius:5px}\nform.abrir{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}form.abrir input{flex:1;min-width:200px;margin-top:0}\n.pe{color:var(--mu);font-size:13px;margin-top:22px;text-align:center}\n</style></head><body><div class=\"w\">\n<h1>📊 Métricas do seu site</h1>\n<p class=\"sub\">Descubra quantas pessoas visitam, até onde rolam a página e em quais botões clicam. Funciona em <b>qualquer site</b>: WordPress, Wix, HTML, loja virtual… São 3 passos.</p>\n${aviso}\n\n<section class=\"passo\"><h2><span class=\"n\">1</span> Dê um nome para o seu site</h2>\n<label for=\"nome\">Nome do site ou da empresa</label>\n<input id=\"nome\" type=\"text\" placeholder=\"Ex.: Padaria do João\" autocomplete=\"off\" autofocus>\n<label class=\"chk\"><input id=\"sufixo\" type=\"checkbox\" checked> Juntar 4 letras aleatórias no fim (deixa o link do painel difícil de adivinhar)</label>\n<p>Código do site: <span class=\"id\" id=\"codigo\">…</span></p></section>\n\n<section class=\"passo\"><h2><span class=\"n\">2</span> Cole este código no seu site</h2>\n<p>É uma linha só. Ela não muda nada na aparência do site.</p>\n<code class=\"cod\" id=\"snippet\"></code>\n<div class=\"linha\"><button class=\"btn pri trava\" type=\"button\" data-copiar=\"#snippet\" data-rotulo=\"📋 Copiar código\">📋 Copiar código</button>\n<a class=\"btn trava\" id=\"teste\" href=\"#\" target=\"_blank\" rel=\"noopener\">🧪 Testar numa página de exemplo</a></div>\n<ul class=\"onde\">\n<li><b>Site em HTML:</b> cole logo antes de <code>&lt;/body&gt;</code>, em todas as páginas.</li>\n<li><b>WordPress:</b> instale o plugin <i>WPCode</i> → <i>Code Snippets › Header &amp; Footer</i> → cole no <i>Footer</i> → Salvar.</li>\n<li><b>Wix:</b> <i>Configurações › Código personalizado › + Adicionar código</i> → escolha <i>Body – fim</i> e <i>Todas as páginas</i>.</li>\n<li><b>Loja virtual (Shopify, Nuvemshop…):</b> procure por <i>códigos externos</i> ou edite o tema e cole antes de <code>&lt;/body&gt;</code>.</li>\n<li><b>Landing pages do Gerador PRO:</b> já vem instalado. O link das métricas aparece no fim do gerador.</li>\n</ul></section>\n\n<section class=\"passo\"><h2><span class=\"n\">3</span> Abra o seu painel</h2>\n<p>Guarde este link nos favoritos. É nele que os números aparecem, em tempo real:</p>\n<code class=\"cod\" id=\"painel-url\">…</code>\n<div class=\"linha\"><a class=\"btn pri trava\" id=\"painel\" href=\"#\" target=\"_blank\" rel=\"noopener\">📈 Abrir meu painel</a>\n<button class=\"btn trava\" type=\"button\" data-copiar=\"#painel-url\" data-rotulo=\"📋 Copiar link\">📋 Copiar link</button></div>\n<p>Já tem um código? Abra direto:</p>\n<form class=\"abrir\" action=\"lp-metricas\" method=\"get\"><input type=\"text\" name=\"id\" placeholder=\"código do site\" required minlength=\"4\"><button class=\"btn\">Abrir</button></form></section>\n\n<section class=\"passo\"><h2>👀 O que o painel mostra</h2>\n<div class=\"grade\">\n<div class=\"item\"><b>👀 Visitas</b>e quantas pessoas diferentes</div>\n<div class=\"item\"><b>📜 Rolagem</b>quantos chegaram a 25, 50, 75% e ao fim</div>\n<div class=\"item\"><b>🖱️ Cliques</b>WhatsApp, telefone, Instagram, menu e o nome de cada botão</div>\n<div class=\"item\"><b>⏱️ Tempo</b>quanto tempo ficaram na página</div>\n<div class=\"item\"><b>🌐 Origem</b>Google, Instagram, link direto…</div>\n<div class=\"item\"><b>🤖 Análise da IA</b>explica os números e diz o que melhorar</div>\n</div></section>\n\n<section class=\"passo\"><h2>💡 Truques</h2>\n<ul><li><b>Contar cliques em qualquer coisa</b> (uma foto, um card): coloque <code>data-metrica=\"foto-do-bolo\"</code> no elemento. Ele aparece com esse nome no painel.</li>\n<li><b>Saber de onde veio a visita:</b> no link que você divulga, junte <code>?utm_source=instagram</code> (ou <code>whatsapp</code>, <code>panfleto</code>…).</li>\n<li><b>Conferir se está funcionando:</b> abra o site, aperte <code>F12</code> e veja a mensagem <i>[métricas] contando visitas…</i> no Console.</li></ul></section>\n\n<p class=\"pe\">🔒 Só contamos números. Nada de nome, IP ou dado pessoal do visitante.</p>\n</div>\n<script>(${cliente.toString()})(${JSON.stringify(base)});</script>\n</body></html>`;\nreturn [{ json: { html, codigo: p.digitado ? 400 : 200 } }];"
+    },
+    "name": "Tela Comece aqui",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1920,
+     560
+    ],
+    "id": "d2455592-ad96-4465-b8b6-c807dfc2d9be"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      },
+      "responseCode": "={{ $json.codigo }}"
+     }
+    },
+    "name": "Entrega Comece aqui",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1920,
+     760
+    ],
+    "id": "971066cf-4ea5-4828-9b21-d8eaae3819b7"
+   },
+   {
+    "parameters": {
+     "operation": "keys",
+     "keyPattern": "=mt:{{ $('Entende o pedido').first().json.id }}:*",
+     "getValues": true
+    },
+    "name": "Lê contadores",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1520,
+     600
+    ],
+    "id": "6446aded-4406-4dd4-b645-1f348a0e0ea1",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "operation": "get",
+     "propertyName": "status",
+     "key": "=lpia:status:{{ $('Entende o pedido').first().json.id }}",
+     "keyType": "string",
+     "options": {}
+    },
+    "name": "Lê dados da página",
+    "type": "n8n-nodes-base.redis",
+    "typeVersion": 1,
+    "position": [
+     1520,
+     800
+    ],
+    "id": "dedd3e87-2aab-4529-bc48-1818e91d2f0a",
+    "credentials": {
+     "redis": {
+      "id": "TgnZ028ccZYrorGM",
+      "name": "Redis redis2 (landing pages)"
+     }
+    },
+    "alwaysOutputData": true
+   },
+   {
+    "parameters": {
+     "jsCode": "const pedido = $('Entende o pedido').first().json;\nconst id = pedido.id;\nconst valido = pedido.tem_id;\nconst bruto = valido ? ($('Lê contadores').first().json || {}) : {};\nconst pre = `mt:${id}:`;\nconst c = {};\nfor (const [k, v] of Object.entries(bruto)) if (k.startsWith(pre)) c[k.slice(pre.length)] = Number(v) || 0;\nlet pagina = null;\ntry { pagina = valido ? JSON.parse($('Lê dados da página').first().json.status || 'null') : null; } catch (e) {}\n\nconst g = n => c[n] || 0;\nconst grupo = prefixo => Object.entries(c).filter(([k]) => k.startsWith(prefixo)).map(([k, v]) => [k.slice(prefixo.length), v]).sort((a, b) => b[1] - a[1]);\nconst visitas = g('visitas'), visitantes = Math.max(g('visitantes'), visitas ? 1 : 0);\nconst cliques = Object.fromEntries(['whatsapp', 'telefone', 'email', 'instagram', 'menu', 'link_externo', 'botao', 'marcado'].map(t => [t, g('clique:' + t)]));\nconst leads = g('leads');\nconst pct = (a, b) => b ? Math.round(a / b * 1000) / 10 : 0;\n\nconst fuso = { timeZone: 'America/Sao_Paulo' };\nconst dias = [];\nfor (let i = 13; i >= 0; i--) {\n  const d = new Date(Date.now() - i * 86400000);\n  const chave = d.toLocaleDateString('sv-SE', fuso);\n  dias.push({ dia: d.toLocaleDateString('pt-BR', { ...fuso, day: '2-digit', month: '2-digit' }), semana: d.toLocaleDateString('pt-BR', { ...fuso, weekday: 'short' }).replace('.', ''), visitas: g('dia:' + chave) });\n}\nconst tempoNomes = { 'a_0-10s': 'menos de 10 s', 'b_10-30s': '10 a 30 s', 'c_30-60s': '30 s a 1 min', 'd_1-3min': '1 a 3 min', 'e_3min+': 'mais de 3 min' };\nconst tempo = Object.keys(tempoNomes).map(k => ({ faixa: tempoNomes[k], qtd: g('tempo:' + k) }));\n// Pessoas que chamaram (1 por visita). Dados antigos não têm esse contador: usa os cliques, limitado às visitas.\nconst contato = g('pessoas_contato') || Math.min(visitas, cliques.whatsapp + cliques.telefone + cliques.email);\n\nconst funil = [\n  { etapa: 'Abriram a página', qtd: visitas },\n  { etapa: 'Rolaram até a metade', qtd: g('rolagem:50') },\n  { etapa: 'Rolaram até o fim', qtd: g('rolagem:100') },\n  { etapa: 'Clicaram para contato', qtd: contato },\n  { etapa: 'Enviaram o formulário', qtd: leads },\n];\nconst resumo = {\n  empresa: pagina ? pagina.empresa : '', visitas, visitantes_unicos: visitantes,\n  rolagem: { '25%': g('rolagem:25'), '50%': g('rolagem:50'), '75%': g('rolagem:75'), '100%': g('rolagem:100') },\n  cliques, pessoas_que_chamaram: contato, leads, taxa_contato_percent: Math.min(100, pct(contato + leads, visitantes)),\n  tempo_na_pagina: tempo, dispositivos: Object.fromEntries(grupo('disp:')), origens: Object.fromEntries(grupo('origem:').slice(0, 6)),\n  botoes_mais_clicados: grupo('botao:').slice(0, 8), visitas_ultimos_14_dias: dias.map(d => d.visitas),\n};\nreturn [{ json: { valido, existe: !!pagina || visitas > 0, id, pagina, visitas, visitantes, leads, contato, cliques, funil, dias, tempo,\n  origens: grupo('origem:').slice(0, 6), dispositivos: grupo('disp:'), botoes: grupo('botao:').slice(0, 8),\n  taxa_fim: pct(g('rolagem:100'), visitas), taxa_contato: Math.min(100, pct(contato + leads, visitantes)),\n  quer_ia: pedido.ia && visitas > 0, resumo_ia: JSON.stringify(resumo, null, 1) } }];"
+    },
+    "name": "Calcular métricas",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1520,
+     1000
+    ],
+    "id": "7e8012dc-c7bf-421c-9b32-39e33aff2ca2"
+   },
+   {
+    "parameters": {
+     "conditions": {
+      "options": {
+       "caseSensitive": true,
+       "leftValue": "",
+       "typeValidation": "loose",
+       "version": 2
+      },
+      "conditions": [
+       {
+        "id": "248c8501-1207-4acd-976a-48d219e30145",
+        "leftValue": "={{ $json.quer_ia }}",
+        "rightValue": "",
+        "operator": {
+         "type": "boolean",
+         "operation": "true",
+         "singleValue": true
+        }
+       }
+      ],
+      "combinator": "and"
+     },
+     "options": {}
+    },
+    "name": "Pediu análise da IA?",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.2,
+    "position": [
+     1520,
+     1200
+    ],
+    "id": "08fe5e6a-f4f2-40ad-be14-984c1c27d5bb"
+   },
+   {
+    "parameters": {
+     "promptType": "define",
+     "text": "={{ 'MÉTRICAS DA LANDING PAGE:\\n' + $json.resumo_ia }}",
+     "options": {
+      "systemMessage": "Você é um ANALISTA DE CONVERSÃO que explica números para donos de pequenos negócios, em português simples e direto.\n\nVocê recebe as métricas de um site ou landing page: visitas, visitantes únicos, quanto rolaram (25/50/75/100%), cliques por tipo, formulários enviados, tempo na página, origem, aparelho e visitas por dia.\n\nCOMO ANALISAR\n- Compare as etapas do funil e encontre onde a maior parte das pessoas desiste.\n- Use números concretos (ex.: \"só 18% chegam ao fim da página\").\n- Com menos de 30 visitas, diga que ainda é cedo para conclusões e foque em como atrair visitas.\n- Ações práticas e específicas para landing page (ex.: subir o botão de WhatsApp para o topo, encurtar o texto do início, colocar prova social antes da metade). Nada genérico.\n- nota_saude de 0 a 100: considere a taxa de contato (acima de 5% é boa) e a rolagem até o fim.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown:\n{\"nota_saude\":0,\"resumo\":\"2 frases\",\"pontos_fortes\":[\"\"],\"gargalos\":[\"\"],\"acoes\":[{\"titulo\":\"\",\"porque\":\"\"}]}"
+     },
+     "needsFallback": true
+    },
+    "name": "IA Analista",
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "typeVersion": 3.1,
+    "position": [
+     1920,
+     1380
+    ],
+    "id": "47ebbcd4-4e23-415a-a2af-772d84246f9b",
+    "retryOnFail": true,
+    "maxTries": 2,
+    "waitBetweenTries": 5000,
+    "onError": "continueErrorOutput"
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://157.173.207.22:20128/v1",
+      "maxTokens": 3000,
+      "temperature": 0.4,
+      "timeout": 120000,
+      "maxRetries": 3
+     }
+    },
+    "name": "Cérebro da Analista",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1920,
+     1600
+    ],
+    "id": "80828545-2fe3-459f-9f56-3dc82dad9121",
+    "credentials": {
+     "openAiApi": {
+      "id": "9L3A8W0GrI5kEyTG",
+      "name": "roteador 20128 (rápido)"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "model": "antigravity/gemini-3.1-flash-lite",
+     "options": {
+      "baseURL": "http://209.145.60.53:20131/v1",
+      "maxTokens": 3000,
+      "temperature": 0.4,
+      "timeout": 120000,
+      "maxRetries": 1
+     }
+    },
+    "name": "Reserva · Cérebro da Analista",
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "typeVersion": 1,
+    "position": [
+     1920,
+     1780
+    ],
+    "id": "66564f57-57e0-44bb-8e9e-afbe9031da44",
+    "credentials": {
+     "openAiApi": {
+      "id": "71OAs37MmQ8bcTr8",
+      "name": "roteador"
+     }
+    }
+   },
+   {
+    "parameters": {
+     "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst m = $('Calcular métricas').first().json;\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst num = n => Number(n || 0).toLocaleString('pt-BR');\nconst base = String($('Painel de métricas (GET)').first().json.webhookUrl || '').split('/webhook/')[0];\n\nconst casca = (titulo, corpo) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\"><title>${esc(titulo)}</title>\n<style>\n.viz{color-scheme:light;--plano:#f9f9f7;--sup:#fcfcfb;--tx:#0b0b0b;--tx2:#52514e;--mu:#898781;--grid:#e1e0d9;--base:#c3c2b7;--borda:rgba(11,11,11,.10);--s1:#2a78d6;--f1:#104281;--f2:#1c5cab;--f3:#2a78d6;--f4:#5598e7;--f5:#86b6ef;--bom:#0ca30c;--alerta:#fab219;--critico:#d03b3b;--link:#1c5cab}\n@media (prefers-color-scheme:dark){:root:where(:not([data-theme=\"light\"])) .viz{color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--mu:#898781;--grid:#2c2c2a;--base:#383835;--borda:rgba(255,255,255,.10);--s1:#3987e5;--f1:#184f95;--f2:#256abf;--f3:#3987e5;--f4:#6da7ec;--f5:#9ec5f4;--link:#86b6ef}}\n:root[data-theme=\"dark\"] .viz{color-scheme:dark;--plano:#0d0d0d;--sup:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--grid:#2c2c2a;--base:#383835;--borda:rgba(255,255,255,.10);--s1:#3987e5;--f1:#184f95;--f2:#256abf;--f3:#3987e5;--f4:#6da7ec;--f5:#9ec5f4;--link:#86b6ef}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{margin:0}\n.viz{font-family:system-ui,-apple-system,\"Segoe UI\",sans-serif;background:var(--plano);color:var(--tx);min-height:100vh;padding:24px 16px 60px;line-height:1.45}\n.w{max-width:1080px;margin:0 auto}\nh1{font-size:24px;font-weight:650}\nh2{font-size:15px;font-weight:650;margin-bottom:4px}\n.sub{color:var(--tx2);font-size:13.5px;margin-top:4px}\n.acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}\n.btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--tx);background:var(--sup);border:1px solid var(--borda);padding:9px 14px;border-radius:10px;font-weight:600;font-size:14px}\n.btn.pri{background:var(--s1);color:#fff;border-color:transparent}\n.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:16px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:16px 18px}\n.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}\n.tile .lab{color:var(--tx2);font-size:13px;font-weight:600}\n.tile .val{font-size:30px;font-weight:650;margin-top:2px}\n.tile.hero .val{font-size:48px;line-height:1.05}\n.tile .det{color:var(--mu);font-size:12.5px;margin-top:2px}\n.hb{display:grid;grid-template-columns:minmax(110px,190px) 1fr;gap:10px;align-items:center;margin-top:10px;font-size:13.5px}\n.hl{color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.ht{display:flex;align-items:center;gap:8px;min-width:0}\n.hf{height:16px;border-radius:0 4px 4px 0;min-width:2px;flex:none;outline:none}\n.hv{font-weight:600;font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}\n.hv small{color:var(--mu);font-weight:500}\n.cols{display:flex;align-items:flex-end;gap:2px;height:170px;border-bottom:1px solid var(--base);margin-top:18px;padding-top:18px}\n.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}\n.col i{display:block;width:min(24px,70%);background:var(--s1);border-radius:4px 4px 0 0;min-height:2px;outline:none}\n.col em{position:absolute;font-style:normal;font-size:12px;font-weight:600;color:var(--tx)}\n.xl{display:flex;gap:2px;margin-top:6px}\n.xl span{flex:1;text-align:center;color:var(--mu);font-size:11px;font-variant-numeric:tabular-nums}\n.vazio{color:var(--mu);font-size:13.5px;margin-top:10px}\n.ia{border-left:4px solid var(--s1)}\n.saude{display:inline-flex;align-items:center;gap:8px;font-weight:650;margin:6px 0 10px}\n.ponto{width:12px;height:12px;border-radius:50%}\n.ia ul{margin:6px 0 0 18px}.ia li{margin-top:5px;color:var(--tx2);font-size:14px}.ia li b{color:var(--tx)}\n.ia h3{font-size:14px;margin-top:14px}\ndetails{margin-top:16px}summary{cursor:pointer;color:var(--link);font-weight:600;font-size:14px}\ntable{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--grid)}td:last-child{text-align:right;font-variant-numeric:tabular-nums}\n.cod{display:block;background:var(--plano);border:1px solid var(--borda);border-radius:10px;padding:12px 14px;font:13px/1.5 ui-monospace,Consolas,monospace;word-break:break-all;margin-top:10px;color:var(--tx)}\ncode{font:12.5px ui-monospace,Consolas,monospace}\nbutton.btn{font-family:inherit;cursor:pointer}\n.espera{border-left:4px solid var(--s1)}\n#tip{position:fixed;pointer-events:none;background:var(--tx);color:var(--sup);font-size:12.5px;padding:6px 9px;border-radius:8px;display:none;z-index:9;white-space:nowrap}\n.c404{max-width:460px;margin:80px auto;text-align:center}\n@media(max-width:820px){.c3,.c4{grid-column:span 6}.c6,.c8{grid-column:span 12}}\n@media(max-width:520px){.c3,.c4{grid-column:span 12}.hb{grid-template-columns:110px 1fr}}\n</style></head><body><div class=\"viz\"><div class=\"w\">${corpo}</div><div id=\"tip\" role=\"tooltip\"></div></div>\n<script>\n(function(){var t=document.getElementById('tip');function s(e){var el=e.target.closest('[data-tip]');if(!el){t.style.display='none';return;}t.textContent=el.getAttribute('data-tip');t.style.display='block';var r=el.getBoundingClientRect();t.style.left=Math.min(innerWidth-t.offsetWidth-8,Math.max(8,r.left+r.width/2-t.offsetWidth/2))+'px';t.style.top=Math.max(8,r.top-t.offsetHeight-8)+'px';}\ndocument.addEventListener('mouseover',s);document.addEventListener('focusin',s);document.addEventListener('mouseout',function(e){if(e.target.closest('[data-tip]'))t.style.display='none';});\ndocument.addEventListener('click',function(e){var b=e.target.closest('[data-copiar]');if(!b)return;var a=document.querySelector(b.getAttribute('data-copiar'));var ok=function(){b.textContent='✅ Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-rotulo');},1800);};if(navigator.clipboard)navigator.clipboard.writeText(a.textContent).then(ok,function(){});});})();\n</script></body></html>`;\n\n// Código de instalação: o mesmo que a tela \"Comece aqui\" entrega.\nconst snippet = `<script src=\"${base}/webhook/lp-script?id=${m.id}\" defer></script>`;\nconst instalar = `<p class=\"sub\">Cole esta linha no site, logo antes de <code>&lt;/body&gt;</code>. WordPress: plugin <i>WPCode › Footer</i>. Wix: <i>Configurações › Código personalizado › Body – fim</i>.</p>\n<code class=\"cod\" id=\"snippet\">${esc(snippet)}</code>\n<div class=\"acoes\"><button class=\"btn pri\" type=\"button\" data-copiar=\"#snippet\" data-rotulo=\"📋 Copiar código\">📋 Copiar código</button>\n<a class=\"btn\" href=\"${esc(base)}/webhook/lp-teste?id=${esc(m.id)}\" target=\"_blank\" rel=\"noopener\">🧪 Testar numa página de exemplo</a>\n<a class=\"btn\" href=\"${esc(base)}/webhook/lp-metricas\">❓ Passo a passo completo</a></div>`;\n\nconst barras = (itens, cor, total) => {\n  const max = Math.max(1, ...itens.map(i => i[1]));\n  return itens.map(([rot, v], i) => {\n    const pct = total ? ` <small>${Math.round(v / total * 100)}%</small>` : '';\n    const c = typeof cor === 'function' ? cor(i) : cor;\n    return `<div class=\"hb\"><span class=\"hl\" title=\"${esc(rot)}\">${esc(rot)}</span><span class=\"ht\"><span class=\"hf\" tabindex=\"0\" data-tip=\"${esc(rot)}: ${num(v)}\" style=\"width:calc((100% - 72px) * ${(v / max).toFixed(4)});background:${c}\"></span><span class=\"hv\">${num(v)}${pct}</span></span></div>`;\n  }).join('');\n};\nconst nomeOrigem = s => s === 'direto' ? 'Direto (link ou digitado)' : s;\nconst ROT = { whatsapp: 'WhatsApp', telefone: 'Telefone', email: 'E-mail', instagram: 'Instagram', menu: 'Menu da página', link_externo: 'Links externos', botao: 'Outros botões', marcado: 'Marcados (data-metrica)' };\n\nlet ia = null;\ntry { if ($('IA Analista').isExecuted) ia = parseJSON($('IA Analista').first().json.output); } catch (e) {}\n\nconst p = m.pagina || {};\nconst maxDia = Math.max(...m.dias.map(d => d.visitas));\nconst colunas = m.dias.map((d, i) => `<div class=\"col\"><i tabindex=\"0\" data-tip=\"${d.semana} ${d.dia}: ${num(d.visitas)} visita${d.visitas === 1 ? '' : 's'}\" style=\"height:${maxDia && d.visitas ? Math.max(1.5, d.visitas / maxDia * 100) : 0}%;${d.visitas ? '' : 'min-height:0'}\"></i>${d.visitas === maxDia && maxDia > 0 ? `<em style=\"bottom:calc(${d.visitas / maxDia * 100}% + 4px)\">${num(d.visitas)}</em>` : ''}</div>`).join('');\nconst rotX = m.dias.map((d, i) => `<span>${i % 2 === 1 || i === 13 ? d.dia : ''}</span>`).join('');\nconst cliquesLista = Object.entries(m.cliques).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).map(([k, v]) => [ROT[k] || k, v]);\nconst funilCores = ['var(--f1)', 'var(--f2)', 'var(--f3)', 'var(--f4)', 'var(--f5)'];\n\nlet blocoIA = '';\nif (ia) {\n  const n = Math.max(0, Math.min(100, Number(ia.nota_saude) || 0));\n  const st = n >= 70 ? ['var(--bom)', '✅', 'Saudável'] : n >= 40 ? ['var(--alerta)', '⚠️', 'Pode melhorar'] : ['var(--critico)', '🔴', 'Precisa de atenção'];\n  const lista = arr => (Array.isArray(arr) ? arr : []).slice(0, 5).map(x => `<li>${esc(typeof x === 'string' ? x : x.titulo || '')}${x && x.porque ? ` <span>· ${esc(x.porque)}</span>` : ''}</li>`).join('');\n  blocoIA = `<div class=\"card c12 ia\"><h2>🤖 Análise da IA</h2><div class=\"saude\"><span class=\"ponto\" style=\"background:${st[0]}\"></span>${st[1]} ${st[2]} · nota ${n} de 100</div>\n  <p style=\"color:var(--tx2)\">${esc(ia.resumo)}</p>\n  <h3>💪 O que está funcionando</h3><ul>${lista(ia.pontos_fortes)}</ul>\n  <h3>🚧 Onde as pessoas desistem</h3><ul>${lista(ia.gargalos)}</ul>\n  <h3>🎯 O que fazer agora</h3><ul>${(Array.isArray(ia.acoes) ? ia.acoes : []).slice(0, 4).map(a => `<li><b>${esc(a.titulo)}</b>${a.porque ? ` · ${esc(a.porque)}` : ''}</li>`).join('')}</ul></div>`;\n} else if ($('Calcular métricas').first().json.quer_ia) {\n  blocoIA = `<div class=\"card c12 ia\"><h2>🤖 Análise da IA</h2><p class=\"vazio\">A IA não respondeu agora. Tente de novo em instantes.</p></div>`;\n}\n\nconst todos = [['Visitas', m.visitas], ['Visitantes únicos', m.visitantes], ...m.funil.slice(1).map(f => [f.etapa, f.qtd]),\n  ...Object.entries(m.cliques).map(([k, v]) => ['Cliques · ' + (ROT[k] || k), v]), ...m.tempo.map(t => ['Tempo · ' + t.faixa, t.qtd]),\n  ...m.origens.map(([k, v]) => ['Origem · ' + nomeOrigem(k), v]), ...m.dispositivos.map(([k, v]) => ['Aparelho · ' + k, v])];\n\nconst corpo = `\n<h1>📊 Métricas · ${esc(p.empresa || m.id)}</h1>\n<p class=\"sub\">Atualizado às ${new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' })} · cada visita, rolagem e clique é contado em tempo real</p>\n<div class=\"acoes\">${p.url ? `<a class=\"btn\" href=\"${esc(p.url)}\" target=\"_blank\" rel=\"noopener\">🔗 Abrir a página</a>` : ''}\n${m.visitas ? `<a class=\"btn pri\" href=\"?id=${esc(m.id)}&ia=1\">🤖 Analisar com IA</a>` : ''}\n<a class=\"btn\" href=\"${esc(base)}/webhook/lp-leads?id=${esc(m.id)}\">🎯 Ver leads</a>\n<a class=\"btn\" href=\"?id=${esc(m.id)}\">🔄 Atualizar</a></div>\n${m.visitas === 0 ? `<div class=\"grid\"><div class=\"card c12 espera\"><h2>⏳ Esperando a primeira visita</h2>\n<p class=\"sub\">${p.url ? 'O código já está instalado nesta landing page. Abra a página e role um pouco.' : 'Instale o código abaixo no seu site (ou use a página de teste) e abra o site.'} Depois clique em <b>🔄 Atualizar</b>: os números aparecem em segundos.</p></div>\n<div class=\"card c12\"><h2>🔧 Como instalar</h2>${instalar}</div></div>` : `\n<div class=\"grid\">\n  <div class=\"card tile hero c3\"><div class=\"lab\">Visitas</div><div class=\"val\">${num(m.visitas)}</div><div class=\"det\">últimos 180 dias</div></div>\n  <div class=\"card tile c3\"><div class=\"lab\">Visitantes únicos</div><div class=\"val\">${num(m.visitantes)}</div><div class=\"det\">pessoas diferentes</div></div>\n  <div class=\"card tile c3\"><div class=\"lab\">Rolaram até o fim</div><div class=\"val\">${m.taxa_fim.toString().replace('.', ',')}%</div><div class=\"det\">das visitas viram a página toda</div></div>\n  <div class=\"card tile c3\"><div class=\"lab\">Contatos</div><div class=\"val\">${num(m.contato + m.leads)}</div><div class=\"det\">${m.taxa_contato.toString().replace('.', ',')}% dos visitantes chamaram</div></div>\n  ${blocoIA}\n  <div class=\"card c8\"><h2>🔻 Funil da página</h2><p class=\"sub\">Quantas pessoas chegaram em cada etapa, do total de visitas</p>${barras(m.funil.map(f => [f.etapa, f.qtd]), i => funilCores[i], m.visitas)}</div>\n  <div class=\"card c4\"><h2>🖱️ Cliques por tipo</h2>${cliquesLista.length ? barras(cliquesLista, 'var(--s1)') : '<p class=\"vazio\">Nenhum clique ainda.</p>'}</div>\n  <div class=\"card c12\"><h2>📅 Visitas por dia</h2><p class=\"sub\">Últimos 14 dias · passe o mouse nas colunas</p><div class=\"cols\">${colunas}</div><div class=\"xl\">${rotX}</div></div>\n  <div class=\"card c6\"><h2>🏷️ Botões mais clicados</h2>${m.botoes.length ? barras(m.botoes, 'var(--s1)') : '<p class=\"vazio\">Nenhum botão clicado ainda.</p>'}</div>\n  <div class=\"card c6\"><h2>⏱️ Tempo na página</h2>${m.tempo.some(t => t.qtd) ? barras(m.tempo.map(t => [t.faixa, t.qtd]), 'var(--s1)') : '<p class=\"vazio\">Aparece quando os visitantes saem da página.</p>'}</div>\n  <div class=\"card c6\"><h2>🌐 De onde vieram</h2>${barras(m.origens.map(([k, v]) => [nomeOrigem(k), v]), 'var(--s1)', m.visitas)}</div>\n  <div class=\"card c6\"><h2>📱 Aparelho</h2>${barras(m.dispositivos.map(([k, v]) => [k === 'celular' ? 'Celular' : 'Computador', v]), 'var(--s1)', m.visitas)}</div>\n</div>\n<details class=\"card\"><summary>Ver todos os números em tabela</summary><table><thead><tr><th>Métrica</th><th>Quantidade</th></tr></thead><tbody>${todos.map(([a, b]) => `<tr><td>${esc(a)}</td><td>${num(b)}</td></tr>`).join('')}</tbody></table></details>\n<details class=\"card\"><summary>🔧 Código de instalação e página de teste</summary>${instalar}</details>`}`;\nreturn [{ json: { codigo: 200, html: casca('Métricas · ' + (p.empresa || m.id), corpo) } }];"
+    },
+    "name": "Montar painel",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+     1520,
+     1580
+    ],
+    "id": "f29519d3-2278-4843-8ccd-462947e1ce9b"
+   },
+   {
+    "parameters": {
+     "respondWith": "text",
+     "responseBody": "={{ $json.html }}",
+     "options": {
+      "responseHeaders": {
+       "entries": [
+        {
+         "name": "Content-Type",
+         "value": "text/html; charset=UTF-8"
+        },
+        {
+         "name": "Cache-Control",
+         "value": "no-store"
+        },
+        {
+         "name": "X-Robots-Tag",
+         "value": "noindex"
+        }
+       ]
+      },
+      "responseCode": "={{ $json.codigo }}"
+     }
+    },
+    "name": "Entrega o painel",
+    "type": "n8n-nodes-base.respondToWebhook",
+    "typeVersion": 1.1,
+    "position": [
+     1520,
+     1780
+    ],
+    "id": "7eb72ee8-4be2-4271-82e5-c532262e06f9"
+   },
+   {
+    "parameters": {
+     "content": "# 📊 MÉTRICAS DE QUALQUER SITE\n\n🎯 **Para que serve:** descobrir **o que os visitantes fazem** no seu site ou landing page:\n👀 quantas pessoas abriram (e quantas **diferentes**)\n📜 até onde **rolaram** (25%, 50%, 75% e até o fim)\n🖱️ em quais **botões clicaram** (WhatsApp, telefone, Instagram, menu…) e o **nome** de cada botão\n⏱️ quanto **tempo ficaram**\n🌐 de onde vieram e se usam **celular ou computador**\n\nE um botão **🤖 Analisar com IA** explica os números e diz o que melhorar.\n\n## ▶️ COMO USAR (3 passos)\n1️⃣ Abra **/webhook/lp-metricas** (sem nada depois)\n   ➜ aparece a tela **Comece aqui**\n2️⃣ Digite o nome do site ➜ copie a **linha de código** que aparece\n   e cole no seu site antes de `</body>`\n   (WordPress: plugin WPCode › Footer · Wix: Código personalizado)\n3️⃣ Clique em **📈 Abrir meu painel** e guarde o link\n\n🧪 Sem site para testar? Na tela Comece aqui tem o botão **Testar numa página de exemplo**: uma padaria de mentira com o código já instalado. Role, clique e veja os números subirem no painel.\n\n🚀 As landing pages do **Gerador PRO** já vêm com o código instalado.\n\n## 🧠 Como funciona por dentro\n1️⃣ O site carrega um **scriptzinho** deste fluxo\n2️⃣ O script avisa o n8n a cada visita, rolagem ou clique\n3️⃣ O n8n **soma 1** num contador do Redis\n4️⃣ O painel lê os contadores e desenha os gráficos\n\n## 🔒 Privacidade\nSó contamos **números**: nada de nome, IP ou dados pessoais. Quem é cada visitante fica apenas no navegador dele.",
+     "height": 1124,
+     "width": 680,
+     "color": 6
+    },
+    "name": "Nota · Comece aqui",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -1320,
+     -120
+    ],
+    "id": "d2d4a783-8158-4a5a-b507-8d4566db9708"
+   },
+   {
+    "parameters": {
+     "content": "## 1️⃣ O SCRIPT ESPIÃO DO BEM 🕵️\n\n🔔 **Pedido do script (GET)**: o site pede o script em `/webhook/lp-script?id=nome-do-site`\n\n🧩 **Montar script**: monta um JavaScript pequeno, sem bibliotecas, que roda no navegador do visitante e avisa:\n👀 **visita**: e se é a primeira vez daquela pessoa\n📜 **rolagem**: quando passa de 25, 50, 75 e 100%\n🖱️ **clique**: qual tipo de botão e o texto dele\n🏷️ **clique marcado**: qualquer coisa com `data-metrica=\"nome\"`\n⏱️ **saída**: quanto tempo ficou\n📝 **formulário**: manda o lead para o fluxo de Leads\n\n📤 **Entrega o script**: devolve como JavaScript.\n\n💡 O script leva o **endereço completo** do n8n dentro dele. Por isso funciona em qualquer site, não só nas páginas do gerador.\n\n💡 Os avisos usam `sendBeacon`, que funciona até quando a pessoa fecha a aba. Vão como **texto puro**: assim o navegador não bloqueia o envio para outro domínio.\n\n🔍 Para conferir num site: aperte F12 ➜ Console ➜ aparece **[métricas] contando visitas…**",
+     "height": 760,
+     "width": 540,
+     "color": 4
+    },
+    "name": "Nota · Script",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -580,
+     -120
+    ],
+    "id": "12e10125-c8b0-45bf-b5ac-581618aa0c8a"
+   },
+   {
+    "parameters": {
+     "content": "## 🧪 PÁGINA DE TESTE\n\n🔔 **Pedido da página de teste (GET)**: `/webhook/lp-teste?id=nome-do-site`\n\n🥐 **Montar página de teste**: uma **padaria de mentira**, com menu, botões de WhatsApp, telefone, Instagram, perguntas frequentes e cards do cardápio. O código das métricas vai instalado **igualzinho** num site de verdade.\n\n🏷️ Os cards usam `data-metrica`, então cada produto aparece com nome próprio no painel.\n\n📤 **Entrega a página de teste**.\n\n💡 Ótimo para a aula: abra no celular dos alunos e veja o painel mudando ao vivo.\n⚠️ As visitas de teste contam no painel daquele nome. Para começar do zero, use outro nome.",
+     "height": 583,
+     "width": 540,
+     "color": 3
+    },
+    "name": "Nota · Página de teste",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     -580,
+     880
+    ],
+    "id": "a8968196-6268-4172-b89e-ede5e022bbea"
+   },
+   {
+    "parameters": {
+     "content": "## 2️⃣ O CONTADOR 🧮\n\n🔔 **Evento chega (POST)**: cada visita, rolagem ou clique chega aqui.\n\n⚡ **Responde rápido (204)**: responde **na hora**, sem conteúdo, para não deixar o site lento.\n\n🏷️ **Classificar evento**: decide **quais contadores** somar. Uma visita, por exemplo, soma em:\n• visitas totais\n• visitas **do dia**\n• visitantes únicos (se for a primeira vez)\n• o aparelho e a origem\n\n➕ **Soma o contador**: usa o **INCR** do Redis, que soma 1 de forma segura mesmo com muita gente ao mesmo tempo. Cada contador vale por 180 dias.\n\n💡 Ideia de exercício: contar quantas pessoas clicaram no FAQ.",
+     "height": 760,
+     "width": 540,
+     "color": 5
+    },
+    "name": "Nota · Eventos",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     200,
+     -120
+    ],
+    "id": "bdc9a318-7713-4a70-81a9-f615d96cd934"
+   },
+   {
+    "parameters": {
+     "content": "## 3️⃣ O PAINEL 📈\n\n🔔 **Painel de métricas (GET)**: abre com `?id=nome-do-site`\n\n🧹 **Entende o pedido**: aceita o nome do jeito que a pessoa digitar (\"Padaria do João\" vira `padaria-do-joao`).\n\n🚦 **Veio com o nome do site?**\n❌ Não ➜ **Tela Comece aqui**: explica os 3 passos e gera a linha de código para copiar\n✅ Sim ➜ segue para o painel\n\n🗄️ **Lê contadores**: busca de uma vez todos os contadores do site (`mt:nome:*`).\n🗄️ **Lê dados da página**: se for do Gerador PRO, pega o nome da empresa e o link.\n\n🧮 **Calcular métricas**: monta o **funil**, as taxas, os últimos 14 dias e os rankings.\n\n🚦 **Pediu análise da IA?**\n✅ Sim ➜ **IA Analista** (cérebro: `gemini-3.1-flash-lite`, com um **cérebro reserva** se o principal estiver ocupado) devolve nota de saúde, o que está bom, onde as pessoas desistem e o que fazer\n❌ Não ➜ vai direto para o painel\n\n🎨 **Montar painel**: gráficos só com HTML e CSS, tooltip ao passar o mouse, tabela com todos os números e modo escuro automático. Sem visitas ainda? Mostra como instalar.\n\n📤 **Entrega o painel**.",
+     "height": 907,
+     "width": 540,
+     "color": 7
+    },
+    "name": "Nota · Painel",
+    "type": "n8n-nodes-base.stickyNote",
+    "typeVersion": 1,
+    "position": [
+     960,
+     -120
+    ],
+    "id": "a71fd3eb-dca8-463b-8d68-5b8868d400d7"
+   }
+  ],
+  "connections": {
+   "Pedido do script (GET)": {
+    "main": [
+     [
+      {
+       "node": "Montar script",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Montar script": {
+    "main": [
+     [
+      {
+       "node": "Entrega o script",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Pedido da página de teste (GET)": {
+    "main": [
+     [
+      {
+       "node": "Montar página de teste",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Montar página de teste": {
+    "main": [
+     [
+      {
+       "node": "Entrega a página de teste",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Evento chega (POST)": {
+    "main": [
+     [
+      {
+       "node": "Responde rápido (204)",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Responde rápido (204)": {
+    "main": [
+     [
+      {
+       "node": "Classificar evento",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Classificar evento": {
+    "main": [
+     [
+      {
+       "node": "Soma o contador",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Painel de métricas (GET)": {
+    "main": [
+     [
+      {
+       "node": "Entende o pedido",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Entende o pedido": {
+    "main": [
+     [
+      {
+       "node": "Veio com o nome do site?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Tela Comece aqui": {
+    "main": [
+     [
+      {
+       "node": "Entrega Comece aqui",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Veio com o nome do site?": {
+    "main": [
+     [
+      {
+       "node": "Lê contadores",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Tela Comece aqui",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê contadores": {
+    "main": [
+     [
+      {
+       "node": "Lê dados da página",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Lê dados da página": {
+    "main": [
+     [
+      {
+       "node": "Calcular métricas",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Calcular métricas": {
+    "main": [
+     [
+      {
+       "node": "Pediu análise da IA?",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Cérebro da Analista": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "IA Analista",
+       "type": "ai_languageModel",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Reserva · Cérebro da Analista": {
+    "ai_languageModel": [
+     [
+      {
+       "node": "IA Analista",
+       "type": "ai_languageModel",
+       "index": 1
+      }
+     ]
+    ]
+   },
+   "Pediu análise da IA?": {
+    "main": [
+     [
+      {
+       "node": "IA Analista",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Montar painel",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "IA Analista": {
+    "main": [
+     [
+      {
+       "node": "Montar painel",
+       "type": "main",
+       "index": 0
+      }
+     ],
+     [
+      {
+       "node": "Montar painel",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   },
+   "Montar painel": {
+    "main": [
+     [
+      {
+       "node": "Entrega o painel",
+       "type": "main",
+       "index": 0
+      }
+     ]
+    ]
+   }
+  },
+  "authors": "Emerson Josiel",
+  "name": null,
+  "description": null,
+  "autosaved": false,
+  "workflowPublishHistory": [
+   {
+    "createdAt": "2026-10-14T02:11:54.373Z",
+    "id": 264,
+    "workflowId": "IV8sgllOq1N2AjtP",
+    "versionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T02:11:54.433Z",
+    "id": 265,
+    "workflowId": "IV8sgllOq1N2AjtP",
+    "versionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T02:11:57.022Z",
+    "id": 266,
+    "workflowId": "IV8sgllOq1N2AjtP",
+    "versionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+    "event": "deactivated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   },
+   {
+    "createdAt": "2026-10-14T02:11:57.164Z",
+    "id": 267,
+    "workflowId": "IV8sgllOq1N2AjtP",
+    "versionId": "19666409-1bfe-454b-a6cf-a079168a9b28",
+    "event": "activated",
+    "userId": "e7375498-bfa5-4a6f-8f25-dd39728db346"
+   }
+  ]
+ }
+}

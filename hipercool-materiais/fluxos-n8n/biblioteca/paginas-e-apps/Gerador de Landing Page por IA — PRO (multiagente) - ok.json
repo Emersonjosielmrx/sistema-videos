@@ -1,0 +1,1568 @@
+{
+ "name": "Gerador de Landing Page por IA — PRO (multiagente) - ok",
+ "nodes": [
+  {
+   "parameters": {
+    "path": "lp-pro",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Formulário (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -160,
+    -1296
+   ],
+   "id": "a24443bf-c54f-41d5-a972-b9d82b322234",
+   "webhookId": "7a99a836-6e36-45b4-a9e0-1e1fd44c3084"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<meta name=\"robots\" content=\"noindex\">\n<title>Landing Page com IA</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap\" rel=\"stylesheet\">\n<style>\n*{box-sizing:border-box;margin:0;padding:0}\n:root{--bg:#07111f;--card:#0d1b2d;--card2:#10243a;--border:rgba(255,255,255,.09);--text:#f4f7fb;--muted:#91a4b8;--p:#8b5cf6;--p2:#6d28d9;--ok:#22c55e;--bad:#f87171}\nbody{font-family:Inter,system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 15% 0%,rgba(139,92,246,.16),transparent 32%),radial-gradient(circle at 90% 25%,rgba(14,165,233,.10),transparent 30%),var(--bg);color:var(--text);min-height:100vh;line-height:1.5}\n.wrap{width:min(860px,calc(100% - 32px));margin:0 auto;padding:44px 0 80px}\nheader{text-align:center;margin-bottom:32px}\n.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:17px;margin-bottom:18px}\n.logo i{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),var(--p2));font-style:normal;font-size:19px}\nh1{font-size:clamp(28px,5vw,46px);line-height:1.08;letter-spacing:-1.2px;margin-bottom:12px}\nh1 span{background:linear-gradient(90deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}\nheader p{color:var(--muted);max-width:600px;margin:0 auto}\n.agents{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}\n.agents span{font-size:12px;color:#c4b5fd;border:1px solid rgba(139,92,246,.35);background:rgba(139,92,246,.08);padding:5px 11px;border-radius:999px}\n.card{background:rgba(13,27,45,.82);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:18px;backdrop-filter:blur(14px)}\n.card h2{font-size:16px;display:flex;align-items:center;gap:10px;margin-bottom:18px}\n.card h2 b{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:rgba(139,92,246,.18);color:#c4b5fd;font-size:13px}\n.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}\n.full{grid-column:1/-1}\nlabel{display:block;font-size:12px;font-weight:600;color:#cbd5e1;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}\nlabel.req::after{content:\" *\";color:var(--bad)}\ninput,textarea,select{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:var(--text);font:inherit;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}\ninput:focus,textarea:focus,select:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(139,92,246,.25)}\ninput::placeholder,textarea::placeholder{color:rgba(255,255,255,.28)}\ntextarea{resize:vertical;min-height:84px}\nselect{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff70' d='M6 8L1 3h10z'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center}\nselect option{background:#0d1b2d}\n.hint{font-size:12px;color:var(--muted);margin-top:5px}\n.color{display:flex;gap:10px;align-items:center}\n.color input[type=color]{width:52px;height:46px;padding:4px;cursor:pointer}\n.color label{margin:0;text-transform:none;letter-spacing:0;font-weight:500;font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center}\n.color input[type=checkbox]{width:auto}\n.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 22px;border:none;border-radius:14px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--p),var(--p2));transition:transform .15s,box-shadow .15s}\n.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(139,92,246,.4)}\n.btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}\n.btn.ghost{background:rgba(255,255,255,.06);border:1px solid var(--border)}\n.btn.zap{background:#25d366;color:#05230f}\n.btn.block{width:100%}\n.err{display:none;margin-top:14px;padding:13px 16px;border-radius:12px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:#fecaca;font-size:14px}\n.err.show{display:block}\n#painel{display:none}\n.steps{list-style:none;display:grid;gap:10px;margin:6px 0 18px}\n.steps li{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--muted);transition:all .3s}\n.steps li .ic{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:none;border:2px solid rgba(255,255,255,.12);font-size:14px}\n.steps li.on{color:var(--text);border-color:rgba(139,92,246,.45);background:rgba(139,92,246,.08)}\n.steps li.on .ic{border-color:transparent;border-top-color:var(--p);border-right-color:var(--p);animation:spin .8s linear infinite}\n.steps li.done{color:var(--text)}\n.steps li.done .ic{background:var(--ok);border-color:var(--ok);color:#052e12}\n@keyframes spin{to{transform:rotate(360deg)}}\n.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}\n.linkbox{display:flex;gap:8px;margin:14px 0}\n.linkbox input{font-size:14px}\n.acts{display:flex;flex-wrap:wrap;gap:10px}\n.acts .btn{flex:1 1 180px;font-size:15px;padding:13px 16px}\n.preview{margin-top:18px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#fff}\n.preview iframe{width:100%;height:560px;border:0;display:block}\n.note{font-size:13px;color:var(--muted);margin-top:12px}\n.success{display:none}\n.success h3{font-size:20px;color:var(--ok);margin-bottom:4px}\n@media(max-width:640px){.grid{grid-template-columns:1fr}.card{padding:20px}.preview iframe{height:460px}}\n@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}\n</style>\n</head>\n<body>\n<div class=\"wrap\">\n<header>\n  <div class=\"logo\"><i>&#9889;</i>Landing Page AI</div>\n  <h1>Sua <span>landing page profissional</span> criada por uma equipe de IAs</h1>\n  <p>Preencha o briefing. Três agentes especialistas escrevem a copy, criam o design e programam a página, e você recebe o link aqui mesmo.</p>\n  <div class=\"agents\"><span>&#129504; Estrategista de conversão</span><span>&#127912; Diretor de arte</span><span>&#128187; Desenvolvedor front-end</span></div>\n</header>\n\n<form id=\"f\" novalidate>\n  <div class=\"card\">\n    <h2><b>1</b>Sobre o negócio</h2>\n    <div class=\"grid\">\n      <div><label class=\"req\" for=\"empresa\">Nome da empresa</label><input id=\"empresa\" name=\"empresa\" maxlength=\"120\" placeholder=\"Ex: Barbearia Premium\" required></div>\n      <div><label class=\"req\" for=\"segmento\">Segmento / nicho</label><input id=\"segmento\" name=\"segmento\" maxlength=\"120\" placeholder=\"Ex: Barbearia, Clínica, Consultoria\" required></div>\n      <div class=\"full\"><label class=\"req\" for=\"descricao\">Descrição do negócio</label><textarea id=\"descricao\" name=\"descricao\" maxlength=\"1500\" rows=\"3\" placeholder=\"O que a empresa faz, há quanto tempo, como atende, o que a torna especial...\" required></textarea></div>\n      <div class=\"full\"><label class=\"req\" for=\"servicos\">Serviços / produtos</label><textarea id=\"servicos\" name=\"servicos\" maxlength=\"1200\" rows=\"2\" placeholder=\"Separe por vírgula. Ex: Corte, Barba, Hidratação, Combo corte + barba\" required></textarea></div>\n    </div>\n  </div>\n\n  <div class=\"card\">\n    <h2><b>2</b>Público e oferta</h2>\n    <div class=\"grid\">\n      <div class=\"full\"><label for=\"publico\">Público-alvo</label><textarea id=\"publico\" name=\"publico\" maxlength=\"600\" rows=\"2\" placeholder=\"Quem é o cliente ideal? Quais as dores e desejos dele?\"></textarea></div>\n      <div class=\"full\"><label for=\"diferenciais\">Diferenciais</label><textarea id=\"diferenciais\" name=\"diferenciais\" maxlength=\"800\" rows=\"2\" placeholder=\"Por que escolher você e não o concorrente?\"></textarea></div>\n      <div><label for=\"objetivo\">Objetivo da página</label><select id=\"objetivo\" name=\"objetivo\"><option>gerar contatos pelo WhatsApp</option><option>agendar horários</option><option>pedir orçamento</option><option>vender um produto</option><option>captar cadastros (leads)</option><option>apresentar a empresa</option></select></div>\n      <div><label for=\"cta\">Texto do botão principal</label><input id=\"cta\" name=\"cta\" maxlength=\"60\" placeholder=\"Opcional. Ex: Agendar meu horário\"></div>\n      <div class=\"full\"><label for=\"depoimentos\">Depoimentos reais</label><textarea id=\"depoimentos\" name=\"depoimentos\" maxlength=\"1500\" rows=\"2\" placeholder=\"Opcional. Ex: Ana Souza: atendimento impecável!\"></textarea><div class=\"hint\">Se ficar vazio, a IA cria depoimentos de exemplo para você substituir depois.</div></div>\n    </div>\n  </div>\n\n  <div class=\"card\">\n    <h2><b>3</b>Identidade visual</h2>\n    <div class=\"grid\">\n      <div><label for=\"cor\">Cor principal</label><select id=\"cor\" name=\"cor\"><option value=\"azul\">Azul</option><option value=\"roxo\">Roxo</option><option value=\"verde\">Verde</option><option value=\"turquesa\">Turquesa</option><option value=\"vermelho\">Vermelho</option><option value=\"laranja\">Laranja</option><option value=\"rosa\">Rosa</option><option value=\"preto\">Preto / dark</option><option value=\"dourado\">Dourado / luxo</option></select></div>\n      <div><label>Cor exata da marca</label><div class=\"color\"><input type=\"color\" id=\"cor_hex\" value=\"#8b5cf6\" aria-label=\"Cor exata\"><label><input type=\"checkbox\" id=\"usar_hex\"> usar esta cor</label></div></div>\n      <div><label for=\"estilo\">Estilo</label><select id=\"estilo\" name=\"estilo\"><option value=\"moderno\">Moderno</option><option value=\"minimalista\">Minimalista</option><option value=\"corporativo\">Corporativo</option><option value=\"criativo e ousado\">Criativo / ousado</option><option value=\"elegante e sofisticado\">Elegante / luxo</option><option value=\"acolhedor e humano\">Acolhedor / humano</option></select></div>\n      <div><label for=\"tom\">Tom de voz</label><select id=\"tom\" name=\"tom\"><option>profissional e próximo</option><option>descontraído e jovem</option><option>sofisticado</option><option>técnico e confiável</option><option>acolhedor e empático</option><option>direto e persuasivo</option></select></div>\n    </div>\n  </div>\n\n  <div class=\"card\">\n    <h2><b>4</b>Contato</h2>\n    <div class=\"grid\">\n      <div><label for=\"whatsapp\">WhatsApp</label><input id=\"whatsapp\" name=\"whatsapp\" inputmode=\"tel\" maxlength=\"20\" placeholder=\"(11) 99999-9999\"><div class=\"hint\">Os botões da página vão abrir uma conversa nesse número.</div></div>\n      <div><label for=\"email\">E-mail</label><input id=\"email\" name=\"email\" type=\"email\" maxlength=\"120\" placeholder=\"contato@empresa.com\"></div>\n      <div><label for=\"instagram\">Instagram</label><input id=\"instagram\" name=\"instagram\" maxlength=\"60\" placeholder=\"@empresa\"></div>\n      <div><label for=\"horario\">Horário de atendimento</label><input id=\"horario\" name=\"horario\" maxlength=\"200\" placeholder=\"Seg a Sáb, 9h às 19h\"></div>\n      <div class=\"full\"><label for=\"endereco\">Endereço</label><input id=\"endereco\" name=\"endereco\" maxlength=\"200\" placeholder=\"Rua, número, bairro, cidade/UF (opcional)\"></div>\n      <div class=\"full\"><label for=\"extras\">Informações extras</label><textarea id=\"extras\" name=\"extras\" maxlength=\"1000\" rows=\"2\" placeholder=\"Slogan, promoções, formas de pagamento, áreas atendidas...\"></textarea></div>\n      <div class=\"hp\" aria-hidden=\"true\"><label for=\"website\">Website</label><input id=\"website\" name=\"website\" tabindex=\"-1\" autocomplete=\"off\"></div>\n    </div>\n  </div>\n\n  <button type=\"submit\" class=\"btn block\" id=\"btn\">&#10024; Gerar minha landing page</button>\n  <div class=\"err\" id=\"err\" role=\"alert\"></div>\n</form>\n\n<div id=\"painel\" class=\"card\" aria-live=\"polite\">\n  <h2><b>&#9881;</b><span id=\"ptitulo\">Sua equipe de IAs está trabalhando</span></h2>\n  <ol class=\"steps\" id=\"steps\">\n    <li data-s=\"1\"><span class=\"ic\"></span><span>Estrategista de conversão escrevendo a copy</span></li>\n    <li data-s=\"2\"><span class=\"ic\"></span><span>Diretor de arte criando o design system</span></li>\n    <li data-s=\"3\"><span class=\"ic\"></span><span id=\"s3txt\">Desenvolvedor front-end programando a página</span></li>\n    <li data-s=\"4\"><span class=\"ic\"></span><span>Revisão de qualidade e publicação</span></li>\n  </ol>\n  <div class=\"meta\"><span id=\"tempo\">&#9201; 0:00</span><span>Leva de 3 a 8 minutos. Você pode deixar esta aba aberta.</span></div>\n  <div class=\"linkbox\"><input id=\"link\" readonly aria-label=\"Link da landing page\"><button class=\"btn ghost\" type=\"button\" id=\"copiar\">Copiar</button></div>\n  <div class=\"note\" id=\"linknote\">O link já está reservado: guarde-o e abra quando a página ficar pronta.</div>\n\n  <div class=\"success\" id=\"ok\">\n    <h3>&#10004; Landing page pronta!</h3>\n    <p class=\"note\" id=\"okinfo\"></p>\n    <div class=\"acts\" style=\"margin-top:14px\">\n      <a class=\"btn\" id=\"abrir\" target=\"_blank\" rel=\"noopener\">Abrir página</a>\n      <a class=\"btn ghost\" id=\"baixar\">Baixar HTML</a>\n      <a class=\"btn zap\" id=\"share\" target=\"_blank\" rel=\"noopener\">Enviar no WhatsApp</a>\n      <a class=\"btn ghost\" id=\"metricas\" target=\"_blank\" rel=\"noopener\">📊 Métricas e leads</a>\n    </div>\n    <div class=\"preview\"><iframe id=\"frame\" title=\"Prévia da landing page\" loading=\"lazy\"></iframe></div>\n    <p class=\"note\" id=\"exnote\">Os depoimentos foram criados como exemplo: substitua pelos reais antes de divulgar.</p>\n    <button class=\"btn ghost block\" type=\"button\" id=\"nova\" style=\"margin-top:16px\">Criar outra landing page</button>\n  </div>\n</div>\n</div>\n\n<script>\n(function () {\n  var q = function (s) { return document.querySelector(s); };\n  var form = q('#f'), btn = q('#btn'), errBox = q('#err'), painel = q('#painel');\n  var KEY = 'lpia_job', timer = null, inicio = 0, poller = null;\n\n  function salvar(job) { try { localStorage.setItem(KEY, JSON.stringify(job)); } catch (e) {} }\n  function apagar() { try { localStorage.removeItem(KEY); } catch (e) {} }\n  function ler() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } }\n\n  function erro(msg) { errBox.textContent = msg; errBox.classList.add('show'); errBox.scrollIntoView({ behavior: 'smooth', block: 'center' }); }\n\n  function etapa(n, pronto) {\n    Array.prototype.forEach.call(document.querySelectorAll('#steps li'), function (li) {\n      var s = Number(li.getAttribute('data-s'));\n      li.className = (pronto || s < n) ? 'done' : (s === n ? 'on' : '');\n      li.querySelector('.ic').textContent = (pronto || s < n) ? '✓' : '';\n    });\n  }\n\n  function relogio() {\n    clearInterval(timer);\n    timer = setInterval(function () {\n      var s = Math.floor((Date.now() - inicio) / 1000);\n      q('#tempo').textContent = '⏱ ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');\n    }, 1000);\n  }\n\n  function abrirPainel(job) {\n    form.style.display = 'none';\n    painel.style.display = 'block';\n    q('#ok').style.display = 'none';\n    q('#ptitulo').textContent = 'Sua equipe de IAs está trabalhando';\n    q('#link').value = job.viewUrl;\n    inicio = job.inicio || Date.now();\n    etapa(1);\n    relogio();\n    painel.scrollIntoView({ behavior: 'smooth' });\n    consultar(job);\n  }\n\n  function consultar(job) {\n    clearTimeout(poller);\n    fetch(job.statusPath + '&t=' + Date.now(), { cache: 'no-store' })\n      .then(function (r) { return r.json(); })\n      .then(function (s) {\n        if (s.status === 'pronto') return concluir(job, s);\n        if (s.status === 'erro') return falhar(s.mensagem || 'Não foi possível gerar a página.');\n        if (s.status === 'nao_encontrado' && Date.now() - inicio > 60000) return falhar('Pedido não encontrado. Tente novamente.');\n        etapa(s.etapa || 1);\n        if (s.mensagem && s.etapa === 3) q('#s3txt').textContent = s.mensagem;\n        if (Date.now() - inicio > 25 * 60000) return falhar('Está demorando mais que o normal. Guarde o link acima e tente abrir em alguns minutos.');\n        poller = setTimeout(function () { consultar(job); }, 5000);\n      })\n      .catch(function () { poller = setTimeout(function () { consultar(job); }, 8000); });\n  }\n\n  function concluir(job, s) {\n    clearInterval(timer);\n    apagar();\n    etapa(4, true);\n    q('#ptitulo').textContent = 'Pronto! Sua landing page foi publicada';\n    q('#linknote').style.display = 'none';\n    q('#ok').style.display = 'block';\n    q('#okinfo').textContent = 'Gerada em ' + (s.segundos || Math.round((Date.now() - inicio) / 1000)) + ' segundos.';\n    q('#abrir').href = job.viewUrl;\n    q('#baixar').href = job.downloadUrl;\n    q('#share').href = 'https://wa.me/?text=' + encodeURIComponent('Veja a landing page: ' + job.viewUrl);\n    q('#frame').src = job.viewUrl;\n    q('#metricas').href = '/webhook/lp-metricas?id=' + job.id;\n    q('#exnote').style.display = job.temDepoimentos ? 'none' : 'block';\n  }\n\n  function falhar(msg) {\n    clearInterval(timer);\n    apagar();\n    painel.style.display = 'none';\n    form.style.display = 'block';\n    btn.disabled = false;\n    btn.innerHTML = '&#10024; Tentar novamente';\n    erro(msg);\n  }\n\n  form.addEventListener('submit', function (e) {\n    e.preventDefault();\n    errBox.classList.remove('show');\n    var obrig = ['empresa', 'segmento', 'descricao', 'servicos'];\n    for (var i = 0; i < obrig.length; i++) {\n      var el = form.elements[obrig[i]];\n      if (el.value.trim().length < 2) { el.focus(); return erro('Preencha os campos obrigatórios marcados com *.'); }\n    }\n    if (form.elements.email.value && !form.elements.email.checkValidity()) { form.elements.email.focus(); return erro('E-mail inválido.'); }\n\n    var dados = {};\n    new FormData(form).forEach(function (v, k) { dados[k] = String(v).trim(); });\n    if (q('#usar_hex').checked) dados.cor_hex = q('#cor_hex').value;\n\n    btn.disabled = true;\n    btn.textContent = 'Enviando briefing...';\n    fetch(location.pathname, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) })\n      .then(function (r) { return r.json().catch(function () { return { success: false, error: 'Resposta inválida do servidor (' + r.status + ').' }; }); })\n      .then(function (j) {\n        if (!j.success) throw new Error(j.error || 'Não foi possível iniciar a geração.');\n        var job = { id: j.id, viewUrl: j.viewUrl, downloadUrl: j.downloadUrl, statusPath: j.statusPath, inicio: Date.now(), temDepoimentos: !!dados.depoimentos };\n        salvar(job);\n        abrirPainel(job);\n      })\n      .catch(function (x) {\n        btn.disabled = false;\n        btn.innerHTML = '&#10024; Gerar minha landing page';\n        erro(x.message || 'Erro de conexão. Tente novamente.');\n      });\n  });\n\n  q('#copiar').addEventListener('click', function () {\n    var el = q('#link');\n    el.select();\n    (navigator.clipboard ? navigator.clipboard.writeText(el.value) : Promise.reject()).catch(function () { document.execCommand('copy'); });\n    q('#copiar').textContent = 'Copiado!';\n    setTimeout(function () { q('#copiar').textContent = 'Copiar'; }, 1800);\n  });\n\n  q('#nova').addEventListener('click', function () {\n    painel.style.display = 'none';\n    form.style.display = 'block';\n    btn.disabled = false;\n    btn.innerHTML = '&#10024; Gerar minha landing page';\n    q('#frame').removeAttribute('src');\n    window.scrollTo({ top: 0, behavior: 'smooth' });\n  });\n\n  var pendente = ler();\n  if (pendente && pendente.statusPath && Date.now() - (pendente.inicio || 0) < 25 * 60000) abrirPainel(pendente);\n})();\n</script>\n</body>\n</html>\n"
+   },
+   "name": "HTML do Formulário",
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    80,
+    -1296
+   ],
+   "id": "8b2e7e3a-5725-4a26-bf71-491b16df723f"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde Formulário",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    320,
+    -1296
+   ],
+   "id": "db1e6bb8-393d-4022-950d-d4159959d9f4"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "lp-pro",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Recebe Briefing (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -144,
+    0
+   ],
+   "id": "951886ce-9227-4461-a9ac-efd702923d4a",
+   "webhookId": "aec1a5df-8ddb-4fa9-af00-a789c1ef23d4"
+  },
+  {
+   "parameters": {
+    "operation": "incr",
+    "key": "=lpia:rl:{{ ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || 'sem-ip').split(',')[0]).trim() }}",
+    "expire": true,
+    "ttl": 3600
+   },
+   "name": "Limite por IP (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    80,
+    0
+   ],
+   "id": "9bf13a2e-a2dc-4ae6-91b4-b6f36a285a5b",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "// Ajuste aqui: limite de gerações por IP a cada hora e validade das páginas\nconst LIMITE_POR_HORA = 30;\nconst VALIDADE_DIAS = 30;\n\nconst req = $('Recebe Briefing (POST)').first().json;\nconst raw = (req.body && typeof req.body === 'object') ? req.body : {};\nconst usosNaHora = Number(Object.values($input.first().json)[0]) || 0;\n\nconst limpa = (v, max) => String(v ?? '').replace(/[\\u0000-\\u0008\\u000b-\\u001f\\u007f]/g, ' ').replace(/[ \\t]+/g, ' ').trim().slice(0, max);\n\nconst data = {\n  empresa: limpa(raw.empresa, 120),\n  segmento: limpa(raw.segmento, 120),\n  descricao: limpa(raw.descricao, 1500),\n  servicos: limpa(raw.servicos, 1200),\n  publico: limpa(raw.publico, 600),\n  diferenciais: limpa(raw.diferenciais, 800),\n  objetivo: limpa(raw.objetivo, 80) || 'gerar contatos pelo WhatsApp',\n  cta: limpa(raw.cta, 60),\n  tom: limpa(raw.tom, 60) || 'profissional e próximo',\n  cor: limpa(raw.cor, 30) || 'azul',\n  cor_hex: /^#[0-9a-f]{6}$/i.test(String(raw.cor_hex || '')) ? String(raw.cor_hex).toLowerCase() : '',\n  estilo: limpa(raw.estilo, 40) || 'moderno',\n  email: '',\n  instagram: limpa(raw.instagram, 60).replace(/^@+/, ''),\n  endereco: limpa(raw.endereco, 200),\n  horario: limpa(raw.horario, 200),\n  depoimentos_reais: limpa(raw.depoimentos, 1500),\n  extras: limpa(raw.extras, 1000),\n  whatsapp: '',\n  whatsapp_link: '',\n};\n\nconst erros = [];\nconst obrigatorios = { empresa: 'Nome da empresa', segmento: 'Segmento', descricao: 'Descrição do negócio', servicos: 'Serviços/produtos' };\nfor (const [campo, rotulo] of Object.entries(obrigatorios)) {\n  if (data[campo].length < 2) erros.push(`Preencha o campo \"${rotulo}\".`);\n}\n\nconst email = limpa(raw.email, 120);\nif (email) {\n  if (/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email)) data.email = email;\n  else erros.push('E-mail inválido.');\n}\n\nlet zap = String(raw.whatsapp || '').replace(/\\D/g, '');\nif (zap) {\n  if (zap.length === 10 || zap.length === 11) zap = '55' + zap;\n  if (zap.length >= 12 && zap.length <= 13) {\n    data.whatsapp = zap;\n    data.whatsapp_link = 'https://wa.me/' + zap;\n  } else erros.push('WhatsApp inválido. Use DDD + número, ex: (11) 99999-9999.');\n}\n\nlet codigo_http = 400;\nif (String(raw.website || '').trim()) { erros.push('Requisição recusada.'); }\nif (usosNaHora > LIMITE_POR_HORA) { erros.unshift('Muitas páginas geradas nesta rede na última hora. Tente novamente mais tarde.'); codigo_http = 429; }\n\nconst slug = (data.empresa || 'pagina').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')\n  .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40) || 'pagina';\nconst id = `${slug}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;\n\nconst base = String(req.webhookUrl || '').split('/webhook/')[0] || 'https://webhookn8n6.inovareinteligenciaartificial.com';\nconst view = `${base}/webhook/lp-pro-view?id=${id}`;\n\nreturn [{\n  json: {\n    valido: erros.length === 0,\n    erros,\n    codigo_http,\n    id,\n    slug,\n    data,\n    criadoEm: new Date().toISOString(),\n    urls: { view, download: `${view}&download=1`, statusPath: `/webhook/lp-pro-status?id=${id}` },\n    config: { ttl_segundos: VALIDADE_DIAS * 86400 },\n  }\n}];"
+   },
+   "name": "Normalizar Dados & ID Projeto",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    320,
+    0
+   ],
+   "id": "2dd501ce-097a-4316-a167-b13af84a1c4d"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "2fe0df5a-3d37-4b99-90dd-7b4133c530c2",
+       "leftValue": "={{ $json.valido }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "Briefing Válido?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    560,
+    0
+   ],
+   "id": "791438dc-8cf0-41e1-a804-9c47c98fdd47"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ success: false, error: $json.erros.join(' ') }) }}",
+    "options": {
+     "responseCode": "={{ $json.codigo_http }}",
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde Erro de Validação",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    800,
+    192
+   ],
+   "id": "c1b4ffb2-adab-4552-8fa6-0f3c0adcd820"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:status:{{ $('Normalizar Dados & ID Projeto').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Normalizar Dados & ID Projeto').first().json.id, empresa: $('Normalizar Dados & ID Projeto').first().json.data.empresa, status: 'processando', etapa: 1, mensagem: 'Estrategista de conversão escrevendo a copy', criadoEm: $('Normalizar Dados & ID Projeto').first().json.criadoEm, atualizadoEm: new Date().toISOString() }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": "={{ $('Normalizar Dados & ID Projeto').first().json.config.ttl_segundos }}"
+   },
+   "name": "Status: Etapa 1 (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    800,
+    -96
+   ],
+   "id": "997a9c43-6266-4c9c-a143-9650ca77a511",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ success: true, id: $('Normalizar Dados & ID Projeto').first().json.id, viewUrl: $('Normalizar Dados & ID Projeto').first().json.urls.view, downloadUrl: $('Normalizar Dados & ID Projeto').first().json.urls.download, statusPath: $('Normalizar Dados & ID Projeto').first().json.urls.statusPath }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde Job Criado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1040,
+    -96
+   ],
+   "id": "c4074e93-174c-4768-9fe7-018c44a70677"
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'BRIEFING DA EMPRESA:\\n' + JSON.stringify($('Normalizar Dados & ID Projeto').first().json.data, null, 2) }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é o ESTRATEGISTA DE CONVERSÃO E COPYWRITER SÊNIOR de uma agência de landing pages.\n\nSua função é transformar o briefing da empresa em TODA a copy de uma landing page de alta conversão, pronta para o desenvolvedor usar sem reescrever nada.\n\nMÉTODO\n- Analise segmento, público, dores, diferenciais e objetivo da página.\n- Use AIDA no fluxo da página e PAS (problema, agitação, solução) na seção de problema.\n- Fale com o público certo, no tom de voz pedido, em português do Brasil.\n- Seja ESPECÍFICO do negócio. Proibido texto genérico que serviria para qualquer empresa.\n\nREGRAS\n- Headline: benefício claro, até 12 palavras. Subtítulo: até 30 palavras.\n- CTAs orientados ao objetivo da página (ex.: \"Agendar meu horário\", \"Quero um orçamento\"). Se o briefing trouxer um texto de CTA, use-o no botão principal.\n- Serviços: use os serviços informados (corrigindo acentuação e ortografia, ex.: \"grao-de-bico\" vira \"grão-de-bico\"), cada um com descrição persuasiva de 1 a 2 frases e um emoji coerente.\n- NUNCA invente números concretos (anos de mercado, quantidade de clientes, prêmios, notas) que não estejam no briefing. Sem dados, use destaques qualitativos (ex.: \"Atendimento 100% personalizado\").\n- Depoimentos: se houver depoimentos reais no briefing, use-os. Se não houver, crie 3 exemplos verossímeis com nomes brasileiros e marque \"exemplo\": true.\n- FAQ: 5 perguntas que quebram as objeções reais desse público.\n- SEO: title até 60 caracteres e description até 155.\n- Passos (como_funciona): títulos curtos SEM numeração (ex.: \"Escolha o sabor\", não \"1. Escolha o sabor\").\n- Destaques: \"valor\" curto, de até 10 caracteres (ex.: \"40 min\", \"100%\", \"Pix\"). Nunca use horário de funcionamento como destaque.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown, exatamente nesta estrutura:\n{\n  \"seo\": {\"title\": \"\", \"description\": \"\", \"keywords\": \"\"},\n  \"hero\": {\"selo\": \"\", \"titulo\": \"\", \"subtitulo\": \"\", \"cta_principal\": \"\", \"cta_secundario\": \"\", \"prova\": \"\"},\n  \"problema\": {\"titulo\": \"\", \"dores\": [\"\", \"\", \"\"], \"virada\": \"\"},\n  \"sobre\": {\"titulo\": \"\", \"texto\": \"\", \"diferenciais\": [{\"emoji\": \"\", \"titulo\": \"\", \"texto\": \"\"}]},\n  \"servicos\": {\"titulo\": \"\", \"subtitulo\": \"\", \"itens\": [{\"emoji\": \"\", \"nome\": \"\", \"descricao\": \"\", \"destaque\": false}]},\n  \"como_funciona\": {\"titulo\": \"\", \"passos\": [{\"titulo\": \"\", \"texto\": \"\"}]},\n  \"destaques\": [{\"valor\": \"\", \"rotulo\": \"\"}],\n  \"depoimentos\": [{\"nome\": \"\", \"contexto\": \"\", \"texto\": \"\", \"exemplo\": true}],\n  \"faq\": [{\"pergunta\": \"\", \"resposta\": \"\"}],\n  \"cta_final\": {\"titulo\": \"\", \"texto\": \"\", \"botao\": \"\"},\n  \"contato\": {\"titulo\": \"\", \"texto\": \"\", \"mensagem_whatsapp\": \"\"},\n  \"rodape\": {\"slogan\": \"\"}\n}"
+    }
+   },
+   "name": "AGENTE 1 — ESTRATEGISTA DE CONVERSÃO & COPY",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    1312,
+    -96
+   ],
+   "id": "4a713f9f-6fbd-42a6-accc-bb719c3beb7d",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 16000,
+     "temperature": 0.8,
+     "timeout": 300000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Modelo Copy",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1312,
+    160
+   ],
+   "id": "58b33d98-b6e9-47ea-8463-ad2c906ce71a",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst bruto = $input.first().json.output ?? $input.first().json.text ?? '';\nconst copy = parseJSON(bruto);\nconst ok = !!(copy && copy.hero && copy.servicos);\nconst aviso = 'COPY INDISPONIVEL: escreva voce mesmo todos os textos a partir do briefing, seguindo as secoes obrigatorias.';\nconst reserva = String(bruto).trim() ? { aviso: 'Copy fora do formato JSON: aproveite o texto abaixo.', texto_livre: String(bruto).slice(0, 12000) } : { aviso };\nreturn [{ json: { copy_ok: ok, copy: ok ? copy : reserva } }];"
+   },
+   "name": "Parse Copy",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1600,
+    -96
+   ],
+   "id": "570b47b7-a18b-48fd-b933-2e70522f04cc"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:status:{{ $('Normalizar Dados & ID Projeto').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Normalizar Dados & ID Projeto').first().json.id, empresa: $('Normalizar Dados & ID Projeto').first().json.data.empresa, status: 'processando', etapa: 2, mensagem: 'Diretor de arte criando o design system', criadoEm: $('Normalizar Dados & ID Projeto').first().json.criadoEm, atualizadoEm: new Date().toISOString() }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": "={{ $('Normalizar Dados & ID Projeto').first().json.config.ttl_segundos }}"
+   },
+   "name": "Status: Etapa 2 (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    1840,
+    -96
+   ],
+   "id": "00997a79-1686-4304-9f1d-659e778ec7a8",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'BRIEFING DA EMPRESA:\\n' + JSON.stringify($('Normalizar Dados & ID Projeto').first().json.data, null, 2) + '\\n\\nCOPY APROVADA (resumo):\\n' + JSON.stringify({ hero: $('Parse Copy').first().json.copy.hero, servicos: $('Parse Copy').first().json.copy.servicos }, null, 2) }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é o DIRETOR DE ARTE e DESIGNER DE SISTEMAS da agência.\n\nSua função é traduzir o briefing e a copy em um DESIGN SYSTEM técnico e coerente para a landing page, que o desenvolvedor vai aplicar à risca.\n\nREGRAS\n- A cor principal pedida é a base da paleta. Se vier \"cor_hex\", ela é a cor primária exata.\n- Escolha tema claro ou escuro coerente com estilo e segmento (ex.: elegante/luxo combina com fundo escuro; minimalista com fundo claro).\n- Contraste mínimo WCAG AA: texto sobre fundo com no mínimo 4.5:1; botão com texto legível.\n- Use duas fontes do Google Fonts (títulos e corpo) que combinem com o segmento, e entregue o href completo do Google Fonts com os pesos usados.\n- Defina um elemento visual de assinatura (ex.: formas orgânicas, grid sutil, linhas douradas, glassmorphism) que torne a página memorável, sem imagens externas.\n- Todos os valores de cor em HEX de 6 dígitos.\n\nRETORNE SOMENTE JSON VÁLIDO, sem markdown, nesta estrutura:\n{\n  \"conceito\": \"\",\n  \"tema\": \"claro|escuro\",\n  \"paleta\": {\"primaria\": \"#\", \"primaria_escura\": \"#\", \"secundaria\": \"#\", \"acento\": \"#\", \"fundo\": \"#\", \"superficie\": \"#\", \"texto\": \"#\", \"texto_suave\": \"#\", \"borda\": \"#\"},\n  \"gradientes\": {\"hero\": \"\", \"botao\": \"\", \"destaque\": \"\"},\n  \"tipografia\": {\"titulos\": \"\", \"corpo\": \"\", \"google_fonts_href\": \"\", \"escala\": {\"h1\": \"\", \"h2\": \"\", \"corpo\": \"\"}},\n  \"forma\": {\"raio_cards\": \"\", \"raio_botoes\": \"\", \"sombra\": \"\", \"sombra_hover\": \"\"},\n  \"layout\": {\"hero\": \"\", \"servicos\": \"\", \"depoimentos\": \"\", \"faq\": \"\"},\n  \"assinatura_visual\": \"\",\n  \"animacoes\": [\"\", \"\"],\n  \"botoes\": {\"primario\": \"\", \"secundario\": \"\"}\n}"
+    }
+   },
+   "name": "AGENTE 2 — DIRETOR DE ARTE (DESIGN SYSTEM)",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    2112,
+    -96
+   ],
+   "id": "d0735f35-8be1-41ad-b391-c944c157c3d9",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 8000,
+     "temperature": 0.7,
+     "timeout": 300000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Modelo Design",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2112,
+    160
+   ],
+   "id": "87ff94b8-c9f9-42e5-8b3f-8d467c207019",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "function parseJSON(txt) {\n  const s = String(txt || '').replace(/^\\s*```(?:json)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\n  try { return JSON.parse(s); } catch (e) {}\n  const a = s.indexOf('{'), b = s.lastIndexOf('}');\n  if (a > -1 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e) {} }\n  return null;\n}\n\nconst d = $('Normalizar Dados & ID Projeto').first().json.data;\nconst bruto = $input.first().json.output ?? $input.first().json.text ?? '';\nconst design = parseJSON(bruto);\nconst hex = /^#[0-9a-f]{6}$/i;\n\nconst reserva = {\n  azul: '#2563eb', roxo: '#7c3aed', verde: '#16a34a', vermelho: '#dc2626', laranja: '#ea580c',\n  rosa: '#db2777', preto: '#111827', dourado: '#c9a227', turquesa: '#0d9488',\n};\nconst primaria = d.cor_hex || reserva[d.cor] || '#2563eb';\nconst padrao = {\n  conceito: `Visual ${d.estilo} para ${d.segmento}`,\n  tema: d.cor === 'preto' || d.estilo === 'elegante' ? 'escuro' : 'claro',\n  paleta: { primaria, primaria_escura: primaria, secundaria: '#0f172a', acento: primaria, fundo: '#ffffff', superficie: '#f8fafc', texto: '#0f172a', texto_suave: '#475569', borda: '#e2e8f0' },\n  tipografia: { titulos: 'Poppins', corpo: 'Inter', google_fonts_href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap' },\n};\n\nlet final = padrao, ok = false;\nif (design && design.paleta && hex.test(design.paleta.primaria || '')) {\n  final = design; ok = true;\n  if (d.cor_hex) final.paleta.primaria = d.cor_hex;\n}\nreturn [{ json: { design_ok: ok, design: final } }];"
+   },
+   "name": "Parse Design System",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2400,
+    -96
+   ],
+   "id": "6310e512-d99c-4624-a82e-ab667da3a83a"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:status:{{ $('Normalizar Dados & ID Projeto').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Normalizar Dados & ID Projeto').first().json.id, empresa: $('Normalizar Dados & ID Projeto').first().json.data.empresa, status: 'processando', etapa: 3, mensagem: 'Desenvolvedor front-end programando a página', criadoEm: $('Normalizar Dados & ID Projeto').first().json.criadoEm, atualizadoEm: new Date().toISOString() }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": "={{ $('Normalizar Dados & ID Projeto').first().json.config.ttl_segundos }}"
+   },
+   "name": "Status: Etapa 3 (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    2640,
+    -96
+   ],
+   "id": "ab134af8-1155-4cd6-835f-30764fcd41fd",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'BRIEFING DA EMPRESA:\\n' + JSON.stringify($('Normalizar Dados & ID Projeto').first().json.data, null, 2) + '\\n\\nCOPY FINAL:\\n' + JSON.stringify($('Parse Copy').first().json.copy, null, 2) + '\\n\\nDESIGN SYSTEM:\\n' + JSON.stringify($('Parse Design System').first().json.design, null, 2) }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é o DESENVOLVEDOR FRONT-END SÊNIOR da agência, especialista em landing pages de alta conversão.\n\nVocê recebe o briefing, a COPY final e o DESIGN SYSTEM. Sua função é programar a landing page completa.\n\nREGRAS DE CONTEÚDO\n- Use os textos da COPY exatamente como estão. Não invente textos novos, a não ser rótulos curtos de interface.\n- Aplique o DESIGN SYSTEM à risca: declare a paleta em variáveis CSS no :root e use as fontes indicadas pelo href do Google Fonts.\n- Se algum depoimento tiver \"exemplo\": true, não mostre essa marcação na página.\n\nESTRUTURA OBRIGATÓRIA (nesta ordem, com estes ids)\nheader fixo com logo em texto, menu e botão hamburger acessível no mobile | #inicio hero | #problema | #sobre com diferenciais | #servicos em cards | #como-funciona com passos | #destaques | #depoimentos | #faq em acordeão | #cta-final | #contato | footer com contatos, links das seções e ano atual via JS.\n\nCOMPORTAMENTO\n- Se houver whatsapp_link no briefing: todos os CTAs abrem o WhatsApp (whatsapp_link + \"?text=\" + mensagem codificada), botão flutuante de WhatsApp no canto inferior direito com ícone SVG inline, e o formulário de contato (campos: nome, WhatsApp do cliente e mensagem) abre o WhatsApp com a mensagem preenchida.\n- Sem WhatsApp: CTAs levam a #contato e o formulário usa mailto com o e-mail do briefing.\n- Menu fecha ao clicar em um link. Scroll suave com compensação do header fixo.\n- Animação de entrada com IntersectionObserver, com fallback que mostra tudo se não houver suporte, e respeito a prefers-reduced-motion.\n- FAQ acessível (button com aria-expanded ou details/summary).\n\nQUALIDADE\n- HTML semântico (header, main, section, footer), mobile-first, breakpoints 640px e 1024px, foco visível, contraste AA.\n- Sem bibliotecas JS e sem imagens externas: use gradientes, formas CSS, emojis e SVG inline. Única dependência externa permitida: Google Fonts.\n- CSS enxuto e reutilizável (classes utilitárias, sem repetição). A página deve ser completa e caber na resposta: termine SEMPRE com </html>.\n\nREGRAS DE LAYOUT (obrigatórias, evitam os defeitos mais comuns)\n- Header: espaço de no mínimo 32px entre o logo e o menu; links e botão do header com white-space: nowrap; no máximo 6 links (Sobre, Serviços, Como funciona, Depoimentos, FAQ, Contato); abaixo de 1024px o menu vira hamburger.\n- Tamanhos: h1 com font-size: clamp(2.2rem, 5vw, 3.6rem) e line-height 1.1; h2 com clamp(1.8rem, 3.5vw, 2.6rem); títulos de cards e nomes nos depoimentos até 1.25rem. Fonte display larga só em h1 e h2; nos cards use a fonte do corpo em negrito.\n- Hero: selo, título, texto e botões com o MESMO alinhamento (tudo à esquerda no layout de duas colunas, ou tudo centralizado em uma coluna). O lado visual do hero precisa de conteúdo útil (ex.: cartão com 3 destaques e o CTA), nunca só emojis soltos.\n- Listas de cards: display:flex; flex-wrap:wrap; justify-content:center; gap:24px; cada card com flex:1 1 280px e max-width:380px, para os itens que sobram na última linha ficarem centralizados.\n- Destaques: cada valor numa linha só (white-space: nowrap), com font-size até 2.5rem.\n- Rótulos visíveis sempre naturais: nunca mostre nomes de campos do briefing (ex.: \"Extras\", \"whatsapp_link\", \"cor_hex\"). Informações extras viram rótulos adequados (ex.: \"Pagamento\", \"Entrega\").\n- FAQ: cada pergunta é um <button aria-expanded=\"false\" aria-controls=\"...\"> que alterna para \"true\" ao abrir.\n- No mobile, dê padding-bottom de 96px ao footer para o botão flutuante não cobrir conteúdo.\n- Se os depoimentos forem exemplos, não use \"reais\" nem \"verdadeiros\" no título ou subtítulo da seção.\n- Elementos decorativos (números grandes, formas, ícones de fundo) nunca ficam por cima de texto: coloque-os atrás (z-index:0 e opacity até .15) e reserve espaço com padding. Na seção #como-funciona, cada passo tem o número SÓ dentro de um círculo de 48px acima do título (ex.: <span class=\"step-num\">1</span>); é proibido número decorativo grande e é proibido repetir o número no título.\n- Placeholders do formulário são exemplos úteis (ex.: \"Seu nome\", \"Conte o que você precisa\"), nunca traços ou textos vazios.\n\nSAÍDA\nRetorne APENAS o código HTML, começando com <!DOCTYPE html> e terminando com </html>. Sem markdown, sem ``` e sem explicações."
+    }
+   },
+   "name": "AGENTE 3 — DESENVOLVEDOR FRONT-END",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    2912,
+    -96
+   ],
+   "id": "b0ec0604-7b91-4f2a-9d3a-c29900a47422",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3-flash",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 60000,
+     "temperature": 0.5,
+     "timeout": 480000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Modelo Front-end",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2912,
+    160
+   ],
+   "id": "4982749c-25fa-4b86-bdbd-74a5f32b80db",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const d = $('Normalizar Dados & ID Projeto').first().json.data;\nconst copy = $('Parse Copy').first().json.copy || {};\nconst seo = copy.seo || {};\nconst tentativa = $runIndex + 1;\nconst esc = s => String(s || '').replace(/&/g, '&amp;').replace(/\"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nlet html = String($input.first().json.output ?? $input.first().json.text ?? '');\nhtml = html.replace(/^\\s*```(?:html)?\\s*/i, '').replace(/```\\s*$/i, '').trim();\nconst ini = html.search(/<!doctype html|<html[\\s>]/i);\nif (ini > 0) html = html.slice(ini);\nconst fim = html.toLowerCase().lastIndexOf('</html>');\nif (fim > -1) html = html.slice(0, fim + 7);\n\nconst tem = re => re.test(html);\nconst problemas = [];\nif (!tem(/<\\/html>\\s*$/i)) problemas.push('HTML cortado antes do </html>');\nif (!tem(/<body[\\s>]/i)) problemas.push('sem <body>');\nif (html.length < 6000) problemas.push(`HTML curto demais (${html.length} caracteres)`);\nconst completo = problemas.length === 0;\nconst correcoes = [];\n\nif (!tem(/^<!doctype html>/i)) { html = '<!DOCTYPE html>\\n' + html.replace(/^<!doctype[^>]*>/i, ''); correcoes.push('doctype'); }\nif (tem(/<html(?![^>]*\\blang=)/i)) { html = html.replace(/<html/i, '<html lang=\"pt-BR\"'); correcoes.push('lang'); }\nif (!tem(/<head[\\s>]/i)) { html = html.replace(/<html[^>]*>/i, m => m + '\\n<head></head>'); }\n\nconst head = [];\nif (!tem(/<meta[^>]+charset/i)) head.push('<meta charset=\"UTF-8\">');\nif (!tem(/<meta[^>]+name=[\"']viewport/i)) head.push('<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">');\nif (!tem(/<title>/i)) head.push(`<title>${esc(seo.title || d.empresa)}</title>`);\nif (!tem(/<meta[^>]+name=[\"']description/i)) head.push(`<meta name=\"description\" content=\"${esc(seo.description || d.descricao.slice(0, 155))}\">`);\nif (!tem(/property=[\"']og:title/i)) head.push(`<meta property=\"og:title\" content=\"${esc(seo.title || d.empresa)}\">`, `<meta property=\"og:description\" content=\"${esc(seo.description || d.descricao.slice(0, 155))}\">`, '<meta property=\"og:type\" content=\"website\">');\nif (head.length) { html = html.replace(/<head[^>]*>/i, m => m + '\\n' + head.join('\\n')); correcoes.push('meta tags: ' + head.length); }\n\nif (!completo && tentativa >= 2) {\n  if (!tem(/<\\/body>/i)) html += '\\n</body>';\n  if (!tem(/<\\/html>/i)) html += '\\n</html>';\n  correcoes.push('fechamento automático de tags');\n}\n\nif (d.whatsapp_link && !/wa\\.me\\//i.test(html)) {\n  const msg = encodeURIComponent(`Olá! Vi o site da ${d.empresa} e gostaria de mais informações.`);\n  const botao = `<a href=\"${d.whatsapp_link}?text=${msg}\" target=\"_blank\" rel=\"noopener\" aria-label=\"Fale conosco no WhatsApp\" style=\"position:fixed;right:20px;bottom:20px;z-index:9999;width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25)\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"#fff\" aria-hidden=\"true\"><path d=\"M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6A12 12 0 0 0 24 12c0-3.2-1.2-6.2-3.5-8.5zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm5.4-7.3c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5v-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z\"/></svg></a>`;\n  html = /<\\/body>/i.test(html) ? html.replace(/<\\/body>/i, botao + '\\n</body>') : html + botao;\n  correcoes.push('botão flutuante de WhatsApp');\n}\n\nreturn [{ json: { html, completo, tentativa, problemas, correcoes, tamanho: html.length, modelo_usado: $('AGENTE 3B — FRONT-END (MODELO RESERVA)').isExecuted ? 'reserva' : 'principal' } }];"
+   },
+   "name": "Validar & Otimizar HTML",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    3248,
+    -96
+   ],
+   "id": "656d411d-991a-47d5-92ac-5d2467b9060e"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bdf10ab7-7562-4bb7-928b-8d2e92813398",
+       "leftValue": "={{ $json.completo || $json.tentativa >= 2 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "name": "HTML Completo?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    3440,
+    -96
+   ],
+   "id": "4d60df23-a536-4fb9-8088-dc293e88ad39"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:status:{{ $('Normalizar Dados & ID Projeto').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Normalizar Dados & ID Projeto').first().json.id, empresa: $('Normalizar Dados & ID Projeto').first().json.data.empresa, status: 'processando', etapa: 3, mensagem: 'Refazendo a página com o modelo reserva', criadoEm: $('Normalizar Dados & ID Projeto').first().json.criadoEm, atualizadoEm: new Date().toISOString() }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": "={{ $('Normalizar Dados & ID Projeto').first().json.config.ttl_segundos }}"
+   },
+   "name": "Status: Correção (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3680,
+    144
+   ],
+   "id": "1a31850a-3bb7-4f31-bae6-31eb27eb02b9",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "promptType": "define",
+    "text": "={{ 'BRIEFING DA EMPRESA:\\n' + JSON.stringify($('Normalizar Dados & ID Projeto').first().json.data, null, 2) + '\\n\\nCOPY FINAL:\\n' + JSON.stringify($('Parse Copy').first().json.copy, null, 2) + '\\n\\nDESIGN SYSTEM:\\n' + JSON.stringify($('Parse Design System').first().json.design, null, 2) }}",
+    "needsFallback": true,
+    "options": {
+     "systemMessage": "Você é o DESENVOLVEDOR FRONT-END SÊNIOR da agência, especialista em landing pages de alta conversão.\n\nVocê recebe o briefing, a COPY final e o DESIGN SYSTEM. Sua função é programar a landing page completa.\n\nREGRAS DE CONTEÚDO\n- Use os textos da COPY exatamente como estão. Não invente textos novos, a não ser rótulos curtos de interface.\n- Aplique o DESIGN SYSTEM à risca: declare a paleta em variáveis CSS no :root e use as fontes indicadas pelo href do Google Fonts.\n- Se algum depoimento tiver \"exemplo\": true, não mostre essa marcação na página.\n\nESTRUTURA OBRIGATÓRIA (nesta ordem, com estes ids)\nheader fixo com logo em texto, menu e botão hamburger acessível no mobile | #inicio hero | #problema | #sobre com diferenciais | #servicos em cards | #como-funciona com passos | #destaques | #depoimentos | #faq em acordeão | #cta-final | #contato | footer com contatos, links das seções e ano atual via JS.\n\nCOMPORTAMENTO\n- Se houver whatsapp_link no briefing: todos os CTAs abrem o WhatsApp (whatsapp_link + \"?text=\" + mensagem codificada), botão flutuante de WhatsApp no canto inferior direito com ícone SVG inline, e o formulário de contato (campos: nome, WhatsApp do cliente e mensagem) abre o WhatsApp com a mensagem preenchida.\n- Sem WhatsApp: CTAs levam a #contato e o formulário usa mailto com o e-mail do briefing.\n- Menu fecha ao clicar em um link. Scroll suave com compensação do header fixo.\n- Animação de entrada com IntersectionObserver, com fallback que mostra tudo se não houver suporte, e respeito a prefers-reduced-motion.\n- FAQ acessível (button com aria-expanded ou details/summary).\n\nQUALIDADE\n- HTML semântico (header, main, section, footer), mobile-first, breakpoints 640px e 1024px, foco visível, contraste AA.\n- Sem bibliotecas JS e sem imagens externas: use gradientes, formas CSS, emojis e SVG inline. Única dependência externa permitida: Google Fonts.\n- CSS enxuto e reutilizável (classes utilitárias, sem repetição). A página deve ser completa e caber na resposta: termine SEMPRE com </html>.\n\nREGRAS DE LAYOUT (obrigatórias, evitam os defeitos mais comuns)\n- Header: espaço de no mínimo 32px entre o logo e o menu; links e botão do header com white-space: nowrap; no máximo 6 links (Sobre, Serviços, Como funciona, Depoimentos, FAQ, Contato); abaixo de 1024px o menu vira hamburger.\n- Tamanhos: h1 com font-size: clamp(2.2rem, 5vw, 3.6rem) e line-height 1.1; h2 com clamp(1.8rem, 3.5vw, 2.6rem); títulos de cards e nomes nos depoimentos até 1.25rem. Fonte display larga só em h1 e h2; nos cards use a fonte do corpo em negrito.\n- Hero: selo, título, texto e botões com o MESMO alinhamento (tudo à esquerda no layout de duas colunas, ou tudo centralizado em uma coluna). O lado visual do hero precisa de conteúdo útil (ex.: cartão com 3 destaques e o CTA), nunca só emojis soltos.\n- Listas de cards: display:flex; flex-wrap:wrap; justify-content:center; gap:24px; cada card com flex:1 1 280px e max-width:380px, para os itens que sobram na última linha ficarem centralizados.\n- Destaques: cada valor numa linha só (white-space: nowrap), com font-size até 2.5rem.\n- Rótulos visíveis sempre naturais: nunca mostre nomes de campos do briefing (ex.: \"Extras\", \"whatsapp_link\", \"cor_hex\"). Informações extras viram rótulos adequados (ex.: \"Pagamento\", \"Entrega\").\n- FAQ: cada pergunta é um <button aria-expanded=\"false\" aria-controls=\"...\"> que alterna para \"true\" ao abrir.\n- No mobile, dê padding-bottom de 96px ao footer para o botão flutuante não cobrir conteúdo.\n- Se os depoimentos forem exemplos, não use \"reais\" nem \"verdadeiros\" no título ou subtítulo da seção.\n- Elementos decorativos (números grandes, formas, ícones de fundo) nunca ficam por cima de texto: coloque-os atrás (z-index:0 e opacity até .15) e reserve espaço com padding. Na seção #como-funciona, cada passo tem o número SÓ dentro de um círculo de 48px acima do título (ex.: <span class=\"step-num\">1</span>); é proibido número decorativo grande e é proibido repetir o número no título.\n- Placeholders do formulário são exemplos úteis (ex.: \"Seu nome\", \"Conte o que você precisa\"), nunca traços ou textos vazios.\n\nSAÍDA\nRetorne APENAS o código HTML, começando com <!DOCTYPE html> e terminando com </html>. Sem markdown, sem ``` e sem explicações.\n\nATENÇÃO: uma tentativa anterior com outro modelo veio cortada ou incompleta. Gere uma versão mais compacta (CSS objetivo, sem comentários) e garanta que o documento termine com </body></html>."
+    }
+   },
+   "name": "AGENTE 3B — FRONT-END (MODELO RESERVA)",
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    3920,
+    144
+   ],
+   "id": "d35f756a-725a-4f80-bd36-141e52b69921",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 5000,
+   "onError": "continueErrorOutput"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://157.173.207.22:20128/v1",
+     "maxTokens": 60000,
+     "temperature": 0.4,
+     "timeout": 300000,
+     "maxRetries": 3
+    }
+   },
+   "name": "Modelo Reserva",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    3920,
+    400
+   ],
+   "id": "12c1bbbb-7ce0-4c60-83e2-bcc4a10681fe",
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:html:{{ $('Normalizar Dados & ID Projeto').first().json.id }}",
+    "value": "={{ $json.html }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": "={{ $('Normalizar Dados & ID Projeto').first().json.config.ttl_segundos }}"
+   },
+   "name": "Salvar HTML (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3680,
+    -256
+   ],
+   "id": "1e7dc88b-7f3e-42bd-a16e-7e19bca18d13",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:status:{{ $('Normalizar Dados & ID Projeto').first().json.id }}",
+    "value": "={{ JSON.stringify({ id: $('Normalizar Dados & ID Projeto').first().json.id, empresa: $('Normalizar Dados & ID Projeto').first().json.data.empresa, status: 'pronto', etapa: 4, mensagem: 'Landing page publicada', criadoEm: $('Normalizar Dados & ID Projeto').first().json.criadoEm, atualizadoEm: new Date().toISOString(), url: $('Normalizar Dados & ID Projeto').first().json.urls.view, download: $('Normalizar Dados & ID Projeto').first().json.urls.download, tamanho: $json.tamanho, modelo: $json.modelo_usado, correcoes: $json.correcoes, segundos: Math.round((Date.now() - new Date($('Normalizar Dados & ID Projeto').first().json.criadoEm).getTime()) / 1000) }) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": "={{ $('Normalizar Dados & ID Projeto').first().json.config.ttl_segundos }}"
+   },
+   "name": "Status: Pronto (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3920,
+    -256
+   ],
+   "id": "708926f5-5874-4589-b5de-87c7e1d86187",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const e = $input.first().json.error;\nconst detalhe = typeof e === 'string' ? e : (e && (e.description || e.message)) || 'Falha desconhecida';\nlet id = '', empresa = '', criadoEm = '';\ntry { const n = $('Normalizar Dados & ID Projeto').first().json; id = n.id; empresa = n.data.empresa; criadoEm = n.criadoEm; } catch (x) {}\nreturn [{ json: { id, empresa, criadoEm, status: 'erro', etapa: 0, etapa_falhou: $prevNode.name,\n  mensagem: 'A IA não conseguiu concluir a página agora. Tente novamente em alguns minutos.', detalhe: String(detalhe).slice(0, 500),\n  atualizadoEm: new Date().toISOString() } }];"
+   },
+   "name": "Registrar Erro",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    3200,
+    432
+   ],
+   "id": "501cf176-9478-4333-ade9-6f926005624d"
+  },
+  {
+   "parameters": {
+    "operation": "set",
+    "key": "=lpia:status:{{ $json.id }}",
+    "value": "={{ JSON.stringify($json) }}",
+    "keyType": "string",
+    "expire": true,
+    "ttl": 86400
+   },
+   "name": "Status: Erro (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    3440,
+    432
+   ],
+   "id": "70af9a9f-347e-4900-b073-ad8246b5a7ae",
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "path": "lp-pro-status",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Consulta Status (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -160,
+    784
+   ],
+   "id": "753b2ddf-7bc2-41c3-bb86-deb2f2d3a79c",
+   "webhookId": "03efae5a-22a1-4a88-a004-025543e95f2d"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=lpia:status:{{ $json.query.id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê Status (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    80,
+    784
+   ],
+   "id": "116d4552-a7f4-4451-9f49-8579fad25802",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const id = String($('Consulta Status (GET)').first().json.query.id || '');\nlet s = null;\ntry { s = JSON.parse($('Lê Status (Redis)').first().json.status || 'null'); } catch (e) {}\nif (!/^[a-z0-9-]{4,80}$/.test(id) || !s) return [{ json: { status: 'nao_encontrado', mensagem: 'Pedido não encontrado ou expirado.' } }];\n\nconst parado = Date.now() - new Date(s.atualizadoEm).getTime();\nif (s.status === 'processando' && parado > 20 * 60 * 1000) {\n  s.status = 'erro';\n  s.mensagem = 'A geração parou de responder. Tente novamente.';\n}\ndelete s.detalhe;\nreturn [{ json: s }];"
+   },
+   "name": "Formata Status",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    320,
+    784
+   ],
+   "id": "96e29a42-d4d0-41ca-85e0-6838c72d1c81"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Responde Status",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    560,
+    784
+   ],
+   "id": "e88fee9c-e2e2-487e-9853-08aceccc8c01"
+  },
+  {
+   "parameters": {
+    "path": "lp-pro-view",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "Visualizar Página (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -160,
+    1568
+   ],
+   "id": "3433c4a9-4659-49e9-bbdd-18cf4b41b5f6",
+   "webhookId": "ced4f77d-45d1-481c-a9fd-3c91dc113d37"
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "html",
+    "key": "=lpia:html:{{ $json.query.id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê HTML (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    80,
+    1568
+   ],
+   "id": "357289e2-9791-425f-a470-d4bf336a23f6",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "get",
+    "propertyName": "status",
+    "key": "=lpia:status:{{ $('Visualizar Página (GET)').first().json.query.id }}",
+    "keyType": "string",
+    "options": {}
+   },
+   "name": "Lê Status p/ Viewer (Redis)",
+   "type": "n8n-nodes-base.redis",
+   "typeVersion": 1,
+   "position": [
+    320,
+    1568
+   ],
+   "id": "92ec5dfd-b530-4a11-825c-e9dd2c70f62e",
+   "alwaysOutputData": true,
+   "credentials": {
+    "redis": {
+     "id": "TgnZ028ccZYrorGM",
+     "name": "Redis redis2 (landing pages)"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "jsCode": "const q = $('Visualizar Página (GET)').first().json.query || {};\nconst id = String(q.id || '');\nconst valido = /^[a-z0-9-]{4,80}$/.test(id);\nconst html = valido ? $('Lê HTML (Redis)').first().json.html : null;\nlet st = null;\ntry { st = valido ? JSON.parse($('Lê Status p/ Viewer (Redis)').first().json.status || 'null') : null; } catch (e) {}\n\nconst casca = (titulo, corpo, refresh) => `<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\">${refresh ? '<meta http-equiv=\"refresh\" content=\"6\">' : ''}<title>${titulo}</title><style>*{box-sizing:border-box;margin:0}body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#07111f;color:#f4f7fb;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}.c{max-width:480px}h1{font-size:28px;margin:18px 0 10px}p{color:#91a4b8;line-height:1.6}a{display:inline-block;margin-top:22px;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6d28d9);padding:12px 22px;border-radius:12px;text-decoration:none;font-weight:600}.s{width:46px;height:46px;border:4px solid rgba(255,255,255,.12);border-top-color:#8b5cf6;border-radius:50%;margin:0 auto;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}.big{font-size:64px;font-weight:800;background:linear-gradient(135deg,#a78bfa,#6d28d9);-webkit-background-clip:text;background-clip:text;color:transparent}</style></head><body><div class=\"c\">${corpo}</div></body></html>`;\n\nif (html) {\n  const baixar = q.download === '1';\n  const nome = (id.replace(/-[a-z0-9]+$/, '') || 'landing-page') + '.html';\n  const tag = `<script src=\"/webhook/lp-script?id=${id}\" defer></script>`;\n  const fim = html.toLowerCase().lastIndexOf('</body>');\n  const comScript = baixar ? html : (fim > -1 ? html.slice(0, fim) + tag + html.slice(fim) : html + tag);\n  return [{ json: { html: comScript, disposicao: baixar ? `attachment; filename=\"${nome}\"` : 'inline', codigo: 200 } }];\n}\nif (st && st.status === 'processando') {\n  const etapas = ['', 'Escrevendo a copy', 'Criando o design', 'Programando a página', 'Publicando'];\n  return [{ json: { codigo: 200, disposicao: 'inline', html: casca('Gerando sua página…', `<div class=\"s\"></div><h1>Sua landing page está sendo criada</h1><p>Etapa ${st.etapa} de 4: ${etapas[st.etapa] || ''}. Esta página atualiza sozinha.</p>`, true) } }];\n}\nif (st && st.status === 'erro') {\n  return [{ json: { codigo: 500, disposicao: 'inline', html: casca('Não foi possível gerar', `<div class=\"big\">:(</div><h1>Não conseguimos gerar esta página</h1><p>${st.mensagem}</p><a href=\"/webhook/lp-pro\">Tentar de novo</a>`) } }];\n}\nreturn [{ json: { codigo: 404, disposicao: 'inline', html: casca('Página não encontrada', `<div class=\"big\">404</div><h1>Página não encontrada</h1><p>Este link não existe ou expirou.</p><a href=\"/webhook/lp-pro\">Criar uma landing page</a>`) } }];"
+   },
+   "name": "Monta Página",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    560,
+    1568
+   ],
+   "id": "663bc854-63e6-45b7-9d82-27497deca245"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseCode": "={{ $json.codigo }}",
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Content-Disposition",
+        "value": "={{ $json.disposicao }}"
+       },
+       {
+        "name": "X-Robots-Tag",
+        "value": "noindex"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Serve Página",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    800,
+    1568
+   ],
+   "id": "b1ee2f17-7ac5-4ede-b77e-877e25bdb81a"
+  },
+  {
+   "parameters": {
+    "content": "## 🌐 1. A VITRINE: o formulário que o cliente vê\n\n🧑‍💻 **O que acontece aqui:** quando alguém abre o link do formulário, estes 3 nodes entregam a página onde o cliente conta tudo sobre o negócio dele.\n\n🔔 **Formulário (GET)**: é a \"campainha\". Fica esperando alguém abrir o link `/webhook/lp-pro`.\n📄 **HTML do Formulário**: guarda o desenho da página do formulário (campos, cores e botões).\n📤 **Responde Formulário**: entrega essa página para o navegador do cliente.\n\n✨ **O formulário também:** confere os campos obrigatórios, mostra as 4 etapas da IA em tempo real e, no final, exibe a prévia da página com os botões **copiar link**, **baixar** e **enviar no WhatsApp**.\n\n💡 **Quer mudar?** Os textos e campos do formulário ficam dentro do node **HTML do Formulário**.",
+    "height": 640,
+    "width": 1456,
+    "color": 6
+   },
+   "name": "Nota - Formulário",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -240,
+    -1776
+   ],
+   "id": "a84da29a-dd6b-4097-9bd0-9f1af55c426e"
+  },
+  {
+   "parameters": {
+    "content": "## 📥 2. A RECEPÇÃO: recebe, confere e já responde\n\n📨 Quando o cliente clica em **Gerar**, os dados chegam aqui. É como a **recepção de uma agência**: confere a ficha, dá um número de pedido e diz \"pode aguardar, já estamos fazendo\" 😉\n\n🔔 **Recebe Briefing (POST)**: recebe a ficha preenchida pelo cliente.\n🚧 **Limite por IP (Redis)**: conta quantos pedidos vieram da mesma internet na última hora, para ninguém abusar. O limite é **30 por hora** (dá para mudar no topo do node Normalizar).\n🧹 **Normalizar Dados & ID Projeto**: arruma a ficha. Tira espaços, corta textos gigantes, confere e-mail e WhatsApp, barra robôs, cria o **número do pedido** e o **link** da página.\n🚦 **Briefing Válido?**: o porteiro.\n   ✅ Ficha certa: segue em frente\n   ❌ Faltou algo: **Responde Erro de Validação** avisa o cliente o que corrigir\n🗄️ **Status: Etapa 1 (Redis)**: anota na gaveta do pedido \"etapa 1 começou\".\n⚡ **Responde Job Criado**: devolve o link **na hora**, sem fazer o cliente esperar a IA.\n\n🤔 **Por que responder antes de terminar?** A IA leva alguns minutos. Se o navegador ficasse esperando todo esse tempo, a conexão poderia cair. Então o fluxo responde logo e **continua trabalhando sozinho** nos bastidores 🎬",
+    "height": 1424,
+    "width": 1456,
+    "color": 4
+   },
+   "name": "Nota - Ingestão",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -240,
+    -1072
+   ],
+   "id": "297b2855-4920-4283-b88a-f2601c4afeeb"
+  },
+  {
+   "parameters": {
+    "content": "## 🧠 3. AGENTE 1: o ESTRATEGISTA\n\n✍️ É o **redator** da agência. Lê a ficha do cliente e escreve **todos os textos** da página: título, benefícios, serviços, passo a passo, perguntas frequentes e a chamada final.\n\n🎯 Usa técnicas de venda (AIDA e PAS) para o texto **convencer**, não só informar.\n🚫 Não inventa números (anos, clientes, prêmios) que o cliente não informou.\n💬 Sem depoimentos na ficha? Cria exemplos para o cliente trocar depois.\n\n🧠 **Modelo Copy**: o cérebro deste agente, `gemini-3-flash`.\n🧾 **Parse Copy**: transforma a resposta da IA em dados organizados (JSON). Se a IA errar o formato, o fluxo **não para**: o programador escreve os textos sozinho.\n\n💡 **Quer outro estilo de texto?** Edite o **System Message** do agente.",
+    "height": 1424,
+    "width": 560,
+    "color": 7
+   },
+   "name": "Nota - Agente 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1232,
+    -1072
+   ],
+   "id": "47f10196-78b8-400c-8dd3-be273d0e4910"
+  },
+  {
+   "parameters": {
+    "content": "## 🎨 4. AGENTE 2: o DIRETOR DE ARTE\n\n🖌️ Antes de programar, alguém precisa decidir **como a página vai parecer**. Este agente cria o **guia de estilo**: tema claro ou escuro, cores exatas, fontes, cantos arredondados, sombras e um detalhe visual marcante.\n\n👓 Garante **contraste** bom, para qualquer pessoa conseguir ler.\n🎯 Se o cliente escolheu uma cor exata da marca, ela sempre vence.\n\n🗄️ **Status: Etapa 2**: avisa o cliente \"agora estamos no design\".\n🧠 **Modelo Design**: o cérebro, `gemini-3.1-flash-lite` (o mais rápido).\n🧾 **Parse Design System**: organiza a resposta. Se vier quebrada, usa uma **paleta reserva** pronta da cor escolhida.",
+    "height": 1424,
+    "width": 800,
+    "color": 5
+   },
+   "name": "Nota - Agente 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1808,
+    -1072
+   ],
+   "id": "66c1bd86-e778-444c-a3d1-a753dbb462b5"
+  },
+  {
+   "parameters": {
+    "content": "## 💻 5. AGENTE 3: o PROGRAMADOR\n\n🗄️ **Status: Etapa 3**: avisa o cliente \"agora estamos programando\".\n\n🏗️ Junta os **textos** do Estrategista com o **guia de estilo** do Diretor de Arte e escreve a página inteira em HTML.\n\n📱 Funciona no celular e no computador\n🍔 Menu que vira \"hamburger\" no celular\n💬 Botões e formulário que abrem o WhatsApp com mensagem pronta\n❓ Perguntas frequentes que abrem e fecham\n\n📏 O prompt traz **regras de layout** descobertas testando de verdade (menu sem aperto, título do tamanho certo, cards alinhados), para evitar defeitos comuns.\n\n🧠 **Modelo Front-end**: o cérebro, `gemini-3-flash`, o que melhor entregou páginas completas nos testes.",
+    "height": 1424,
+    "width": 512,
+    "color": 3
+   },
+   "name": "Nota - Agente 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2624,
+    -1072
+   ],
+   "id": "76dbea7f-ac55-4989-89c3-a00c583aaeec"
+  },
+  {
+   "parameters": {
+    "content": "## 🛡️ 6. O REVISOR: confere, corrige e publica\n\n🔍 **Validar & Otimizar HTML** é o **controle de qualidade** 🧪:\n• tira sujeiras que a IA às vezes coloca antes ou depois do código\n• confere se a página veio **inteira**, não cortada no meio\n• completa o que faltar: título da aba, descrição para o Google, prévia para redes sociais e botão de WhatsApp\n\n🚦 **HTML Completo?**\n✅ Sim: segue para publicar\n❌ Não: **Status: Correção** avisa o cliente e o **AGENTE 3B (reserva)** refaz a página com outro cérebro (`gemini-3.1-flash-lite`). Depois a página volta para o revisor. Na 2ª volta o revisor fecha o que faltar e libera, para o fluxo nunca ficar rodando em círculos 🔄\n\n📦 **Salvar HTML (Redis)**: guarda a página pronta na gaveta do pedido por **30 dias**.\n✅ **Status: Pronto**: avisa o formulário \"terminou!\", com o link e o tempo total.\n\n## 🚨 E se algo der errado?\n🔁 Cada agente tenta **2 vezes** antes de desistir. E o fluxo **se adapta** em vez de travar:\n• 🧠 Estrategista falhou: o programador escreve os textos\n• 🎨 Diretor de Arte falhou: usa a paleta reserva\n• 💻 Programador falhou: o reserva assume\n• 🆘 Só se o reserva também falhar: **Registrar Erro** e **Status: Erro**, e o cliente vê uma mensagem amigável pedindo para tentar de novo",
+    "height": 1664,
+    "width": 1088,
+    "color": 2
+   },
+   "name": "Nota - Qualidade",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    3152,
+    -1072
+   ],
+   "id": "792d1c5d-014c-4755-bea4-c6e2048eeaac"
+  },
+  {
+   "parameters": {
+    "content": "## 📡 7. O ACOMPANHAMENTO: \"em que etapa está meu pedido?\"\n\n⏳ Enquanto a IA trabalha, o formulário pergunta aqui **a cada 5 segundos**: \"como está o pedido número X?\". É como acompanhar a entrega num app de comida 🛵\n\n🔔 **Consulta Status (GET)**: recebe a pergunta com o número do pedido.\n🗄️ **Lê Status (Redis)**: abre a gaveta do pedido e lê a etapa atual.\n🧹 **Formata Status**: esconde detalhes técnicos. Se o pedido ficar **20 minutos parado**, avisa que deu erro, para o cliente não esperar para sempre.\n📤 **Responde Status**: devolve a resposta e o formulário atualiza a tela.",
+    "height": 528,
+    "width": 1456,
+    "color": 6
+   },
+   "name": "Nota - Status",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -240,
+    416
+   ],
+   "id": "7007832f-6821-4a5f-9e60-660a5a988596"
+  },
+  {
+   "parameters": {
+    "content": "## 👁️ 8. A ENTREGA: o link da landing page\n\n🔗 É aqui que o link final funciona. Quando alguém abre `/webhook/lp-pro-view?id=...`, o fluxo procura a página na gaveta e mostra.\n\n🔔 **Visualizar Página (GET)**: recebe quem abriu o link.\n🗄️ **Lê HTML** e **Lê Status p/ Viewer**: buscam a página e a situação do pedido.\n🧩 **Monta Página**: decide o que mostrar.\n   ✅ Pronta: mostra a landing page\n   ⏳ Ainda gerando: tela \"estamos criando\", que se atualiza sozinha\n   ❌ Não existe ou expirou: página amigável com botão para criar outra\n📤 **Serve Página**: entrega tudo para o navegador.\n\n📥 **Bônus:** colocando `&download=1` no fim do link, a página é **baixada** como arquivo `.html`, pronta para hospedar onde o cliente quiser.\n🔒 **Segurança:** o link usa o domínio de webhooks, separado do painel do n8n. Assim a página feita pela IA não roda junto da sua sessão de administrador.\n\n📊 **Métricas e leads:** ao servir a página, o **Monta Página** coloca um scriptzinho do fluxo de **Métricas**. Ele conta visitas, rolagem e cliques e manda o formulário de contato para o fluxo de **Leads**. O download (`&download=1`) sai sem o script.",
+    "height": 720,
+    "width": 1456,
+    "color": 4
+   },
+   "name": "Nota - Viewer",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -240,
+    1008
+   ],
+   "id": "3d20a90a-71d9-4597-85f1-fd4fdb0437d0"
+  },
+  {
+   "parameters": {
+    "content": "# 🚀 COMECE AQUI: Gerador de Landing Page com IA\n\nEste fluxo funciona como uma **agência de marketing automática** 🏢. O cliente preenche um formulário e, em cerca de **3 minutos**, recebe uma **landing page profissional pronta**, com um link para compartilhar.\n\nDentro dele trabalha uma **equipe de 3 IAs**, cada uma com uma especialidade, como numa empresa de verdade 👩‍💼👨‍🎨👨‍💻.\n\n## 🗺️ O caminho de um pedido\n1️⃣ 📝 O cliente abre o **formulário** e conta sobre o negócio\n2️⃣ 📥 O n8n **recebe e confere** os dados\n3️⃣ 🧠 O **Estrategista** escreve os textos da página\n4️⃣ 🎨 O **Diretor de Arte** escolhe cores e fontes\n5️⃣ 💻 O **Programador** monta a página\n6️⃣ 🛡️ O **Revisor** confere se ficou completa e publica\n7️⃣ 📡 Enquanto isso, o formulário mostra o **progresso**\n8️⃣ 👁️ O cliente abre o **link** e vê a página pronta 🎉\n\nAs notas coloridas seguem essa mesma numeração. Leia na ordem! 👉\n\n## ▶️ Como testar na aula\n1. Confira se o fluxo está **ativo** (chave no topo da tela)\n2. Clique no node **Formulário (GET)** e copie a **Production URL**\n3. Abra a URL no navegador, preencha e clique em **Gerar**\n4. Acompanhe as 4 etapas e abra o link da sua página\n\n## 👀 Como ver o que aconteceu por dentro\nAbra a aba **Executions** (Execuções) no topo. Cada pedido vira uma execução: clique nela para ver **o que cada node recebeu e entregou**, passo a passo. É a melhor forma de aprender! 🔎\n\n## ⏱️ Bom saber\n• Cada página leva de **2 a 5 minutos**: a IA escreve, desenha e programa\n• Com a turma toda gerando ao mesmo tempo, pode demorar um pouco mais\n• As páginas ficam no ar por **30 dias**",
+    "height": 1200,
+    "width": 1040,
+    "color": 6
+   },
+   "name": "COMECE AQUI",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1312,
+    -1776
+   ],
+   "id": "cfb70fcc-73b5-4642-9078-c4378a1fd4ae"
+  },
+  {
+   "parameters": {
+    "content": "# 📚 DICIONÁRIO RÁPIDO (para quem está começando)\n\n🔲 **Node**: cada \"caixinha\" do fluxo. Faz uma tarefa e passa o resultado para a próxima, como numa **linha de montagem** 🏭.\n\n🔔 **Webhook**: o \"endereço\" do fluxo na internet, como uma **campainha**. Quando alguém acessa o link, o fluxo começa a trabalhar.\n\n📮 **GET e POST**: **GET** é *pedir* algo (abrir uma página). **POST** é *enviar* algo (mandar o formulário preenchido).\n\n↩️ **Respond to Webhook**: a **resposta** que volta para quem tocou a campainha (uma página ou uma mensagem).\n\n🤖 **Agente de IA**: um **funcionário virtual** que recebe instruções e faz um trabalho, como escrever textos ou programar.\n\n🧠 **Modelo de IA**: o **cérebro** que o agente usa (aqui, modelos Gemini). É o node pendurado embaixo de cada agente.\n\n📝 **Prompt / System Message**: as **instruções de trabalho** do agente. Mudou o prompt, mudou o resultado!\n\n🧾 **JSON**: um jeito organizado de guardar informação no formato \"etiqueta: valor\", fácil para o computador ler. Exemplo: `{\"empresa\": \"Doceria da Ana\"}`\n\n🌐 **HTML**: a linguagem das páginas da internet. É o que o agente programador escreve.\n\n🗄️ **Redis**: um **armário com gavetas etiquetadas** ⚡, super rápido. Cada pedido tem sua gaveta, onde guardamos o andamento e a página pronta.\n\n🚦 **If**: um **porteiro** que decide o caminho. Se a condição for verdadeira, vai por cima; se não, vai por baixo.\n\n💻 **Code**: node onde escrevemos um pouco de JavaScript para tarefas sob medida, como limpar dados ou conferir a página.\n\n🆔 **ID do pedido**: o \"número da senha\" de cada página, como numa lanchonete 🍔. É ele que aparece no link final.",
+    "height": 912,
+    "width": 1040,
+    "color": 7
+   },
+   "name": "Dicionário",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1312,
+    -512
+   ],
+   "id": "609f6cec-2096-4af6-8ce3-2baec386307d"
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 16000,
+     "temperature": 0.8,
+     "timeout": 300000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Modelo Copy",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    1312,
+    352
+   ],
+   "id": "5239e9d8-1d3e-4512-984b-734305b7c409",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 8000,
+     "temperature": 0.7,
+     "timeout": 300000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Modelo Design",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2112,
+    352
+   ],
+   "id": "4517cb8d-6987-4696-8e57-af4136b217fb",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-2.5-flash",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 60000,
+     "temperature": 0.5,
+     "timeout": 480000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Modelo Front-end",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    2912,
+    352
+   ],
+   "id": "38eb9973-fc9c-4760-8015-4366c3727da7",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "model": "antigravity/gemini-3.1-flash-lite",
+    "options": {
+     "baseURL": "http://209.145.60.53:20131/v1",
+     "maxTokens": 60000,
+     "temperature": 0.4,
+     "timeout": 300000,
+     "maxRetries": 1
+    }
+   },
+   "name": "Reserva · Modelo Reserva",
+   "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+   "typeVersion": 1,
+   "position": [
+    3920,
+    592
+   ],
+   "id": "c8a29c97-3d4e-48bd-a933-115dc52f6c75",
+   "credentials": {
+    "openAiApi": {
+     "id": "71OAs37MmQ8bcTr8",
+     "name": "roteador"
+    }
+   }
+  }
+ ],
+ "pinData": {},
+ "connections": {
+  "Formulário (GET)": {
+   "main": [
+    [
+     {
+      "node": "HTML do Formulário",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML do Formulário": {
+   "main": [
+    [
+     {
+      "node": "Responde Formulário",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Recebe Briefing (POST)": {
+   "main": [
+    [
+     {
+      "node": "Limite por IP (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Limite por IP (Redis)": {
+   "main": [
+    [
+     {
+      "node": "Normalizar Dados & ID Projeto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Normalizar Dados & ID Projeto": {
+   "main": [
+    [
+     {
+      "node": "Briefing Válido?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Briefing Válido?": {
+   "main": [
+    [
+     {
+      "node": "Status: Etapa 1 (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Responde Erro de Validação",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Status: Etapa 1 (Redis)": {
+   "main": [
+    [
+     {
+      "node": "Responde Job Criado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Responde Job Criado": {
+   "main": [
+    [
+     {
+      "node": "AGENTE 1 — ESTRATEGISTA DE CONVERSÃO & COPY",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AGENTE 1 — ESTRATEGISTA DE CONVERSÃO & COPY": {
+   "main": [
+    [
+     {
+      "node": "Parse Copy",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Parse Copy",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Copy": {
+   "main": [
+    [
+     {
+      "node": "Status: Etapa 2 (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Status: Etapa 2 (Redis)": {
+   "main": [
+    [
+     {
+      "node": "AGENTE 2 — DIRETOR DE ARTE (DESIGN SYSTEM)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AGENTE 2 — DIRETOR DE ARTE (DESIGN SYSTEM)": {
+   "main": [
+    [
+     {
+      "node": "Parse Design System",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Parse Design System",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Design System": {
+   "main": [
+    [
+     {
+      "node": "Status: Etapa 3 (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Status: Etapa 3 (Redis)": {
+   "main": [
+    [
+     {
+      "node": "AGENTE 3 — DESENVOLVEDOR FRONT-END",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Modelo Copy": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 1 — ESTRATEGISTA DE CONVERSÃO & COPY",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Modelo Design": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 2 — DIRETOR DE ARTE (DESIGN SYSTEM)",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Modelo Front-end": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 3 — DESENVOLVEDOR FRONT-END",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AGENTE 3 — DESENVOLVEDOR FRONT-END": {
+   "main": [
+    [
+     {
+      "node": "Validar & Otimizar HTML",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Status: Correção (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Validar & Otimizar HTML": {
+   "main": [
+    [
+     {
+      "node": "HTML Completo?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML Completo?": {
+   "main": [
+    [
+     {
+      "node": "Salvar HTML (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Status: Correção (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Status: Correção (Redis)": {
+   "main": [
+    [
+     {
+      "node": "AGENTE 3B — FRONT-END (MODELO RESERVA)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AGENTE 3B — FRONT-END (MODELO RESERVA)": {
+   "main": [
+    [
+     {
+      "node": "Validar & Otimizar HTML",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Registrar Erro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Modelo Reserva": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 3B — FRONT-END (MODELO RESERVA)",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Salvar HTML (Redis)": {
+   "main": [
+    [
+     {
+      "node": "Status: Pronto (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Registrar Erro": {
+   "main": [
+    [
+     {
+      "node": "Status: Erro (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Consulta Status (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê Status (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê Status (Redis)": {
+   "main": [
+    [
+     {
+      "node": "Formata Status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Formata Status": {
+   "main": [
+    [
+     {
+      "node": "Responde Status",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Visualizar Página (GET)": {
+   "main": [
+    [
+     {
+      "node": "Lê HTML (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê HTML (Redis)": {
+   "main": [
+    [
+     {
+      "node": "Lê Status p/ Viewer (Redis)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Lê Status p/ Viewer (Redis)": {
+   "main": [
+    [
+     {
+      "node": "Monta Página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Monta Página": {
+   "main": [
+    [
+     {
+      "node": "Serve Página",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Reserva · Modelo Copy": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 1 — ESTRATEGISTA DE CONVERSÃO & COPY",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Reserva · Modelo Design": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 2 — DIRETOR DE ARTE (DESIGN SYSTEM)",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Reserva · Modelo Front-end": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 3 — DESENVOLVEDOR FRONT-END",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Reserva · Modelo Reserva": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AGENTE 3B — FRONT-END (MODELO RESERVA)",
+      "type": "ai_languageModel",
+      "index": 1
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate",
+  "saveManualExecutions": true,
+  "executionTimeout": 2400
+ },
+ "versionId": "1e8b7bda-9a1a-4972-a99b-98a481c28491",
+ "meta": {
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "pdQBeqv89Zq7eubl",
+ "tags": []
+}

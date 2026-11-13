@@ -1,0 +1,29 @@
+{
+ "ligado": true,
+ "_ligado": "DESLIGADO até o dono dar o sinal (27/10). Ligar: LIGAR_MELHORADOR.bat ou python melhorador.py ligar",
+ "videos_para_julgar": 2,
+ "piora_maxima": 0.4,
+ "crescimento_max": 0.25,
+ "bloqueados": {
+  "kr/": "2026-11-01"
+ },
+ "papeis": {
+  "analista": [
+   "agy/gemini-3.8-flash-high",
+   "antigravity/gemini-3.8-flash-tiered"
+  ],
+  "propositor": [
+   "agy/gemini-3.8-flash-high",
+   "antigravity/gemini-3.8-flash-tiered"
+  ],
+  "critico": [
+   "agy/gemini-3.8-flash-high",
+   "antigravity/gemini-3.8-flash-tiered"
+  ],
+  "implementador": [
+   "hx-maos-gemini"
+  ]
+ },
+ "_papeis": "escada por papel (o 1º que responder). Kiro bloqueado até 01/11 (sem crédito). Argon (gemini/gemini-4-argon) entra quando o dono avisar que está pronto. cc/ só com cota de certeza do Claude Pro. estado/melhorador_modelos.json mostra quem ajuda de verdade em cada papel.",
+ "pode_codigo": true
+}

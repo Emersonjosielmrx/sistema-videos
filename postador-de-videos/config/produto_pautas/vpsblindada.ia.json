@@ -1,0 +1,74 @@
+{
+ "pautas": [
+  {
+   "id": "parada_noturna",
+   "tipo": "dor",
+   "ideia": "Seu fluxo de atendimento para de funcionar de madrugada e você só descobre pela reclamação do cliente, mas a VPS Blindada inclui o Bot Sentinela vigiando erros para avisar você.",
+   "pergunta_cliente": "Como eu fico sabendo se as automações pararem de funcionar?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "perda_dados_automacao",
+   "tipo": "dor",
+   "ideia": "Uma atualização mal feita apaga os fluxos da sua empresa, situação evitada pela VPS Blindada com sua rotina de backup automático.",
+   "pergunta_cliente": "Se der algum problema no servidor, eu perco meus fluxos?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "transicao_estabilidade",
+   "tipo": "antes_depois",
+   "ideia": "Antes você sofria com instabilidades e falta de suporte técnico; agora tem sua VPS pronta, segura, com Bot Sentinela e contratos formais.",
+   "pergunta_cliente": "O que muda na prática ao migrar para a VPS Blindada?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "gestao_portainer",
+   "tipo": "como_funciona",
+   "ideia": "Veja como a interface visual do Portainer dentro do setup da VPS Blindada facilita o acompanhamento dos serviços em Docker.",
+   "pergunta_cliente": "Consigo acompanhar os serviços sem usar tela preta de terminal?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "vigilancia_bot_sentinela",
+   "tipo": "caso_de_uso",
+   "ideia": "Um erro inesperado trava um processo crítico da sua empresa e o Bot Sentinela detecta a falha ativamente por você.",
+   "pergunta_cliente": "Esse robô monitora as falhas em tempo real?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "caos_vs_organizacao",
+   "tipo": "antes_depois",
+   "ideia": "Antes suas automações não tinham cópia de segurança nem monitoramento; agora você conta com backup automático e Bot Sentinela ativo.",
+   "pergunta_cliente": "Como fica a proteção dos meus dados no dia a dia?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "falta_relatorios_status",
+   "tipo": "dor",
+   "ideia": "Você não sabe a real situação da sua infraestrutura por falta de dados, problema resolvido pelos relatórios entregues com a VPS Blindada.",
+   "pergunta_cliente": "Como eu avalio a estabilidade e a saúde da minha VPS?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "demora_implementacao",
+   "tipo": "objecao",
+   "ideia": "Você acha que colocar uma infraestrutura própria no ar levará semanas de esforço técnico, mas recebe sua VPS pronta e configurada.",
+   "pergunta_cliente": "Vou ter que passar dias configurando o ambiente?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "sobrecarga_monitoramento",
+   "tipo": "dor",
+   "ideia": "Você perde tempo checando logs e telas de erro manualmente, tarefa assumida pelo Bot Sentinela na VPS Blindada.",
+   "pergunta_cliente": "Preciso ficar olhando o servidor para ver se algo deu errado?",
+   "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "rotina_docker_portainer",
+   "tipo": "como_funciona",
+   "ideia": "Descubra como a integração Docker e Portainer simplifica o isolamento das aplicações na sua VPS pronta e segura.",
+   "pergunta_cliente": "Como os aplicativos rodam dentro do servidor?",
+   "criada": "2026-10-26T06:23:58"
+  }
+ ]
+}

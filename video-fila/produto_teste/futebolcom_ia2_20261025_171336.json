@@ -1,0 +1,63 @@
+{
+ "conta": "futebolcom.ia2",
+ "produto": "cardapio_digital",
+ "marca": "Cardápio Digital",
+ "titulo": "Cardápio digital com fotos e pedido no WhatsApp",
+ "legenda": "Ver o prato com fotos claras no celular ajuda o cliente a decidir sem demora. Com atendimento por IA para tirar dúvidas, o pedido chega pronto no seu WhatsApp.\n\n👉 Link no perfil • fale com a gente no direct\n\n#cardapiodigital #delivery #restaurante #lanchonete #gestaoderestaurante",
+ "roteiro": {
+  "gancho_tela": "Cardápio com fotos no WhatsApp?",
+  "pergunta_cliente": "O cardápio digital mostra as fotos dos pratos no celular?",
+  "blocos": [
+   {
+    "rotulo": "A dúvida",
+    "fala": "Eu vejo muito cliente inseguro para pedir porque não consegue ver a foto do prato.",
+    "visual": "imagem",
+    "cenario_en": "standing behind the wooden counter of an authentic Brazilian burger diner with warm ambient lighting",
+    "prompt_en": "standing behind the wooden counter of an authentic Brazilian burger diner with warm ambient lighting, no people in focus"
+   },
+   {
+    "rotulo": "Na prática",
+    "fala": "Com o cardápio digital, ele abre as fotos no celular e tira dúvidas com a inteligência artificial.",
+    "visual": "conversa",
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Consigo ver foto do lanche?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim! Você vê todas as fotos no cardápio digital direto no celular."
+     },
+     {
+      "de": "cliente",
+      "texto": "Vem cebola caramelizada nele?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, vai com cebola caramelizada e queijo prato."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "O cliente escolhe com mais certeza e envia o pedido fechado direto no seu WhatsApp.",
+    "visual": "imagem",
+    "prompt_en": "side view of a cook preparing artisan burgers in a Brazilian restaurant kitchen, warm natural light, cinematic commercial photography"
+   }
+  ],
+  "legenda": "Ver o prato com fotos claras no celular ajuda o cliente a decidir sem demora. Com atendimento por IA para tirar dúvidas, o pedido chega pronto no seu WhatsApp.",
+  "titulo": "Cardápio digital com fotos e pedido no WhatsApp",
+  "pauta_id": "fotos_ajudam_vender",
+  "pauta_tipo": "pergunta_frequente"
+ },
+ "voz": "pt-BR-ThalitaMultilingualNeural",
+ "trilha": "calm_chill.mp3",
+ "veo": null,
+ "duracao_s": 23.51,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo",
+ "gerado_em": "2026-10-25T17:48:48"
+}

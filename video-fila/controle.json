@@ -1,0 +1,47 @@
+{
+ "_leia": "Liga/desliga único (D:\\video-fila\\controle.py). Os botões antigos continuam valendo.",
+ "projetos": {
+  "historias": {
+   "postagem": {
+    "ligado": true,
+    "motivo": "",
+    "em": "2026-10-18T19:25:10"
+   }
+  },
+  "desktop": {
+   "producao": {
+    "ligado": true,
+    "motivo": "pelo painel",
+    "em": "2026-10-22T00:54:13"
+   }
+  },
+  "melhorador_longo": {
+   "producao": {
+    "ligado": true,
+    "motivo": "ligado pelo melhorador central (aplicar)",
+    "em": "2026-10-29T18:06:33"
+   }
+  },
+  "melhorador_cortes": {
+   "producao": {
+    "ligado": true,
+    "motivo": "ligado pelo melhorador central (aplicar)",
+    "em": "2026-10-29T18:06:33"
+   }
+  },
+  "melhorador_central": {
+   "producao": {
+    "ligado": true,
+    "motivo": "dona ligou o central (aplicar)",
+    "em": "2026-10-29T18:06:33"
+   }
+  },
+  "hipercool": {
+   "producao": {
+    "ligado": false,
+    "motivo": "dona 04/11 15:40: desativar o hipercool por ora, focar nos que dao certo",
+    "em": "2026-11-04T15:52:08"
+   }
+  }
+ }
+}

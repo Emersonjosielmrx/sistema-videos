@@ -1,0 +1,53 @@
+{
+ "video": "D:\\manhwa-react\\work\\2026_10_08_10_29_40\\temas\\2026-10-08 10-29-40_tema1.mp4",
+ "duration": 963.854349,
+ "layout": {
+  "width": 1920,
+  "height": 1080,
+  "content_x0": 161,
+  "content_x1": 1609,
+  "has_webcam": false,
+  "contrast": 7.5,
+  "trimmed": {},
+  "divider": 0,
+  "webcam": null,
+  "content": [
+   161,
+   0,
+   1609,
+   1080
+  ]
+ },
+ "lip_threshold": null,
+ "engine": "groq:whisper-large-v3",
+ "editorial": {
+  "usable": false,
+  "score": 2,
+  "reason": "Conversa política opinativa sobre eleições brasileiras, sem valor educacional claro, sem reações fortes e com alto risco de desmonetização por tema político polarizante.",
+  "topic": "Opinião política sobre eleições brasileiras e comportamento do eleitor",
+  "channel": "fiodameada",
+  "work": null,
+  "parts": [
+   {
+    "start": 0.0,
+    "end": 963.854349,
+    "hook": "",
+    "title": "",
+    "description": "",
+    "hashtags": [],
+    "tags": [],
+    "keywords": [],
+    "cta": "",
+    "mood": "neutral_chill",
+    "music": true
+   }
+  ],
+  "remove": [],
+  "speakers": {},
+  "highlights": true
+ },
+ "base": null,
+ "channel": "fiodameada",
+ "outputs": [],
+ "status": "rejected"
+}

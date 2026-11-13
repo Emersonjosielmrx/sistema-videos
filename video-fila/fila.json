@@ -1,0 +1,17 @@
+{
+  "_leia": "Fila de render entre projetos (fila_render.py). slots = renders pesados ao mesmo tempo neste PC. prioridade: menor sai antes (hipercool é a prioridade do dono). max_h: vez esquecida é liberada depois disso. espera_max_h: ninguém espera mais que isso (segue mesmo sem vez).",
+  "slots": 1,
+  "max_h": 6,
+  "espera_max_h": 8,
+  "prioridade": {
+    "anime": 1,
+    "parceiro": 2,
+    "hipercool": 3,
+    "historias": 4
+  },
+  "_prioridade_obs": "17/10 22:10 dono: 'dê a prioridade de produção ao projeto recap animes nesse momento' — anime na frente de todos (antes: 13:25 parceiro=1 pelos Shorts dos 12 canais de react). Quando o dono mandar voltar: hipercool=1.",
+  "slots_maquina": {
+    "pc2": 2
+  },
+  "_slots_obs": "21/10: PC2 com 2 vagas (o maquinas.py já só libera o 2º trabalho com CPU <= 50% e RAM >= 6 GB). Com 1 vaga o anime longo (horas) segurava o PC2 inteiro com CPU 4% e 7,9 GB livres. Short do parceiro continua 1 por vez (pc2_parceiro.json)."
+}

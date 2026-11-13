@@ -1,0 +1,1193 @@
+﻿PROMPT PARA CRIAR O MOTIONFLOW AI
+
+
+========================================================
+OBJETIVO DA FERRAMENTA
+========================================================
+
+
+Crie uma ferramenta profissional dentro do Google Flow chamada “MotionFlow AI”.
+
+
+A ferramenta deve permitir trabalhar com duas funções principais:
+
+
+1. ROTEIRO → GERAÇÃO DE CENAS
+2. MOTION SYNC → TRANSFERÊNCIA DE MOVIMENTO
+
+
+A ferramenta deve ser simples o suficiente para iniciantes, mas ter uma aparência profissional e recursos avançados.
+
+
+IMPORTANTE:
+
+
+Utilize prioritariamente os recursos, modelos e capacidades NATIVAS disponíveis dentro do Google Flow.
+
+
+Não crie funcionalidades fictícias.
+
+
+Sempre que uma capacidade não estiver disponível no modelo selecionado, utilize a melhor alternativa nativa disponível e informe corretamente a limitação.
+
+
+Não crie apenas botões decorativos.
+
+
+Todos os botões, uploads, seletores, previews, gerações e downloads devem estar funcionalmente conectados sempre que o Google Flow disponibilizar essa capacidade.
+
+
+========================================================
+DESIGN GERAL
+========================================================
+
+
+Crie uma interface moderna, premium, minimalista e profissional.
+
+
+A aparência deve combinar com a identidade visual escura do Google Flow.
+
+
+PALETA VISUAL:
+
+
+Fundo principal:
+#08090B
+
+
+Painéis:
+#111214
+
+
+Cards:
+#17181B
+
+
+Campos:
+#1B1D21
+
+
+Bordas:
+#303239
+
+
+Texto principal:
+#FFFFFF
+
+
+Texto secundário:
+#9FA3AD
+
+
+Azul de destaque:
+#3B82F6
+
+
+Roxo de destaque:
+#8B5CF6
+
+
+Gradiente de destaque:
+azul #3B82F6 → roxo #8B5CF6
+
+
+Estados positivos:
+#22C55E
+
+
+Avisos:
+#F59E0B
+
+
+Erro:
+#EF4444
+
+
+Utilize glow azul e roxo apenas de maneira sutil.
+
+
+Não deixar a interface exageradamente colorida.
+
+
+Priorizar:
+preto,
+cinza escuro,
+branco,
+azul,
+roxo.
+
+
+Botões principais devem ter alto contraste.
+
+
+Layout limpo, tecnológico e premium.
+
+
+========================================================
+ESTRUTURA PRINCIPAL
+========================================================
+
+
+Na parte superior da ferramenta, criar duas abas:
+
+
+ROTEIRO
+
+
+MOTION SYNC
+
+
+O usuário deve conseguir alternar livremente entre elas.
+
+
+========================================================
+ABA 1 — ROTEIRO
+========================================================
+
+
+Crie uma área chamada:
+
+
+ROTEIRO ORIGINAL
+
+
+Adicionar um campo grande de texto com o placeholder:
+
+
+“Cole seu roteiro ou ideia central aqui...”
+
+
+Abaixo, criar a seção:
+
+
+CONFIGURAÇÕES VISUAIS
+
+
+Adicionar:
+
+
+ESTILO VISUAL
+
+
+Opções:
+
+
+Cinematográfico
+Ultrarrealista
+3D
+Tecnologia
+Finanças
+Documentário
+Futurista
+Minimalista
+Glassmorphism
+Editorial Premium
+
+
+Adicionar:
+
+
+MOVIMENTO DE CÂMERA
+
+
+Opções:
+
+
+Automático
+Zoom in
+Zoom out
+Dolly in
+Dolly out
+Orbit
+Pan
+Tracking
+Parallax
+Câmera estática
+
+
+Adicionar:
+
+
+FORMATO
+
+
+Opções:
+
+
+16:9
+9:16
+
+
+Adicionar seleção de duração sempre que o modelo utilizado permitir.
+
+
+Criar um botão principal:
+
+
+GERAR CENAS
+
+
+========================================================
+FUNCIONAMENTO DO GERADOR DE CENAS
+========================================================
+
+
+Quando o usuário clicar em “Gerar Cenas”, a ferramenta deve analisar o roteiro e dividi-lo automaticamente em cenas visualmente coerentes.
+
+
+Não dividir o roteiro de maneira aleatória.
+
+
+Analise:
+contexto,
+tema,
+emoção,
+mudanças de assunto,
+ritmo da narração
+e intenção de cada trecho.
+
+
+Para cada cena criada, mostrar um CARD individual contendo:
+
+
+Número da cena
+
+
+Trecho correspondente do roteiro
+
+
+Descrição visual
+
+
+Prompt para geração da imagem
+
+
+Prompt para animação da imagem
+
+
+Movimento de câmera sugerido
+
+
+Estilo visual
+
+
+Botão:
+GERAR IMAGEM
+
+
+Botão:
+ANIMAR IMAGEM
+
+
+Preview da mídia gerada
+
+
+Botão:
+GERAR NOVAMENTE
+
+
+Botão:
+BAIXAR
+
+
+========================================================
+INTELIGÊNCIA DAS CENAS
+========================================================
+
+
+Não criar imagens genéricas.
+
+
+Cada cena deve representar visualmente o significado exato do trecho da narração.
+
+
+A ferramenta também deve interpretar a emoção do texto.
+
+
+Exemplos:
+
+
+Se o trecho representar dúvida:
+a imagem e a animação devem transmitir dúvida.
+
+
+Se representar tensão:
+iluminação, câmera e movimento devem transmitir tensão.
+
+
+Se representar descoberta:
+a cena deve transmitir descoberta.
+
+
+Se representar curiosidade:
+não revelar visualmente a resposta antes da narração.
+
+
+Se representar autoridade:
+usar composição visual mais sólida.
+
+
+Se representar entusiasmo:
+usar movimento mais energético.
+
+
+A animação deve acompanhar o significado emocional da narração, e não apenas movimentar elementos aleatoriamente.
+
+
+========================================================
+ABA 2 — MOTION SYNC
+========================================================
+
+
+Crie uma segunda aba chamada:
+
+
+MOTION SYNC
+
+
+Objetivo:
+
+
+Permitir que o usuário envie uma imagem de uma pessoa e um vídeo base para fazer a pessoa da imagem repetir os movimentos do vídeo.
+
+
+========================================================
+ENTRADA 1
+========================================================
+
+
+Criar um campo de upload chamado:
+
+
+IMAGEM PRINCIPAL — APARÊNCIA BLOQUEADA
+
+
+Descrição abaixo:
+
+
+“Esta imagem define a identidade, aparência, roupa e cenário do resultado final.”
+
+
+Permitir:
+
+
+arrastar e soltar
+
+
+selecionar arquivo
+
+
+selecionar mídia já existente na galeria do Flow, quando disponível
+
+
+Mostrar preview da imagem.
+
+
+========================================================
+ENTRADA 2
+========================================================
+
+
+Criar um segundo campo chamado:
+
+
+VÍDEO BASE — USAR SOMENTE MOVIMENTOS
+
+
+Descrição:
+
+
+“Este vídeo será utilizado exclusivamente como referência de movimento.”
+
+
+Permitir:
+
+
+upload
+
+
+drag and drop
+
+
+seleção da galeria
+
+
+preview do vídeo.
+
+
+========================================================
+CAMPO DE PROMPT
+========================================================
+
+
+Logo abaixo das duas referências, adicionar um campo grande chamado:
+
+
+PROMPT / INSTRUÇÕES ADICIONAIS
+
+
+Placeholder:
+
+
+“Ex.: preservar rosto, cabelo, roupa e cenário. Copiar somente os movimentos do vídeo base...”
+
+
+O conteúdo escrito nesse campo DEVE ser enviado junto com a imagem e o vídeo para o modelo de geração.
+
+
+Não criar o campo apenas visualmente.
+
+
+========================================================
+LÓGICA PRINCIPAL DO MOTION SYNC
+========================================================
+
+
+A IMAGEM PRINCIPAL deve ser considerada a fonte visual absoluta e prioritária.
+
+
+O VÍDEO BASE deve ser utilizado exclusivamente como referência de movimento.
+
+
+A ferramenta deve preservar com máxima fidelidade possível da imagem principal:
+
+
+rosto
+
+
+identidade facial
+
+
+formato do rosto
+
+
+olhos
+
+
+sobrancelhas
+
+
+nariz
+
+
+boca
+
+
+pele
+
+
+cabelo
+
+
+penteado
+
+
+comprimento do cabelo
+
+
+cor do cabelo
+
+
+corpo
+
+
+proporções corporais
+
+
+roupa
+
+
+acessórios
+
+
+cenário
+
+
+objetos do cenário
+
+
+enquadramento
+
+
+iluminação
+
+
+cores
+
+
+estética geral
+
+
+Não recriar a pessoa.
+
+
+Não reinterpretar a identidade.
+
+
+Não trocar o rosto.
+
+
+Não trocar cabelo.
+
+
+Não alterar roupa.
+
+
+Não alterar cenário.
+
+
+Não utilizar aparência visual do vídeo base.
+
+
+========================================================
+O VÍDEO BASE DEVE FORNECER SOMENTE
+========================================================
+
+
+Movimentos corporais
+
+
+Gestos
+
+
+Postura
+
+
+Movimento dos braços
+
+
+Movimento das mãos
+
+
+Movimento da cabeça
+
+
+Direção corporal
+
+
+Ritmo
+
+
+Timing
+
+
+Velocidade
+
+
+Pausas
+
+
+Sequência dos movimentos
+
+
+Micro movimentos
+
+
+Expressão corporal
+
+
+Movimentos naturais do corpo
+
+
+Direção do olhar, quando tecnicamente possível
+
+
+========================================================
+REGRA DE PRIORIDADE
+========================================================
+
+
+PRIORIDADE 1:
+
+
+Preservação da imagem principal.
+
+
+PRIORIDADE 2:
+
+
+Transferência do movimento do vídeo base.
+
+
+Caso exista qualquer conflito entre manter a aparência da imagem e reproduzir um movimento:
+
+
+PRESERVE A APARÊNCIA DA IMAGEM.
+
+
+O vídeo final deve parecer que:
+
+
+A PESSOA DA IMAGEM ORIGINAL SIMPLESMENTE COMEÇOU A REALIZAR OS MOVIMENTOS DO VÍDEO BASE.
+
+
+========================================================
+FIDELIDADE MÁXIMA AO MOVIMENTO
+========================================================
+
+
+Não quero apenas movimento parecido.
+
+
+Quero a maior fidelidade temporal e corporal tecnicamente possível ao vídeo base.
+
+
+Não estilizar os movimentos.
+
+
+Não suavizar desnecessariamente.
+
+
+Não inventar novos movimentos.
+
+
+Não adicionar gestos.
+
+
+Não modificar a ordem dos movimentos.
+
+
+Não modificar o timing.
+
+
+Não acelerar.
+
+
+Não desacelerar.
+
+
+Não substituir os gestos por movimentos semelhantes.
+
+
+Não criar movimentos genéricos de avatar.
+
+
+Não exagerar expressões.
+
+
+Não criar movimentos extras de cabeça.
+
+
+Não criar balanços corporais artificiais.
+
+
+Se o modelo disponibilizar parâmetros equivalentes, utilizar:
+
+
+motion fidelity = maximum
+
+
+motion strength = high
+
+
+source motion adherence = strict
+
+
+temporal consistency = maximum
+
+
+preserve source timing = enabled
+
+
+creativity = minimum
+
+
+stylization = minimum
+
+
+motion smoothing = minimum ou disabled
+
+
+camera reinterpretation = disabled
+
+
+identity preservation = maximum
+
+
+reference image strength = maximum
+
+
+Utilize essas configurações somente se forem realmente suportadas pelo modelo.
+
+
+Não invente parâmetros inexistentes.
+
+
+========================================================
+PROMPT INTERNO PADRÃO DO MOTION SYNC
+========================================================
+
+
+Toda geração Motion Sync deve utilizar internamente uma instrução equivalente a:
+
+
+“Use a imagem principal como fonte visual absoluta.
+
+
+Preserve integralmente rosto, identidade, cabelo, corpo, proporções, pele, roupa, acessórios, cenário, iluminação e estética.
+
+
+Use o vídeo base exclusivamente como fonte de movimento.
+
+
+Reproduza com máxima fidelidade possível os mesmos gestos, postura, movimentos corporais, movimento das mãos, braços e cabeça, ritmo, timing, velocidade, pausas e sequência temporal do vídeo base.
+
+
+Não copie aparência, pessoa, rosto, cabelo, roupa, cenário ou iluminação do vídeo base.
+
+
+Não estilize, não reinvente e não adicione movimentos.
+
+
+Se houver conflito entre aparência e movimento, preserve a imagem principal.”
+
+
+========================================================
+MODELO DE GERAÇÃO
+========================================================
+
+
+Utilize o melhor modelo nativo disponível dentro do Google Flow para:
+
+
+image-to-video
+
+
+video-to-video
+
+
+video editing
+
+
+reference image
+
+
+motion transfer
+
+
+ou capacidades equivalentes.
+
+
+Se Omni Flash ou uma versão equivalente estiver disponível e for adequada para a tarefa, ela pode ser utilizada.
+
+
+Entretanto, não bloqueie a ferramenta a um nome específico de modelo que possa mudar futuramente.
+
+
+Sempre utilizar a melhor opção nativa compatível disponível no Flow.
+
+
+========================================================
+BOTÃO GERAR VÍDEO
+========================================================
+
+
+Adicionar um botão principal:
+
+
+GERAR VÍDEO
+
+
+Antes da geração:
+
+
+verificar se existe imagem principal
+
+
+verificar se existe vídeo base
+
+
+verificar compatibilidade dos arquivos
+
+
+Depois:
+
+
+executar a geração
+
+
+Mostrar indicador de processamento:
+
+
+“Preservando aparência e copiando movimento...”
+
+
+========================================================
+PREVIEW DO RESULTADO
+========================================================
+
+
+Após a geração mostrar:
+
+
+Vídeo final em destaque
+
+
+Botão:
+REPRODUZIR
+
+
+Botão:
+GERAR NOVAMENTE
+
+
+Botão:
+BAIXAR VÍDEO
+
+
+Botão:
+USAR NO FLOW
+
+
+quando essa opção estiver disponível.
+
+
+========================================================
+DOWNLOAD DO VÍDEO
+========================================================
+
+
+O botão:
+
+
+BAIXAR VÍDEO
+
+
+deve realizar download real do arquivo gerado.
+
+
+Preferencialmente:
+
+
+MP4.
+
+
+Se o Google Flow disponibilizar arquivo ou URL da geração, utilizar diretamente esse arquivo.
+
+
+Não criar apenas um botão visual.
+
+
+Se download direto não for tecnicamente possível, utilizar a função nativa equivalente disponível dentro do Flow.
+
+
+========================================================
+CONSUMO DE CRÉDITOS
+========================================================
+
+
+Antes de qualquer geração de mídia, mostrar claramente o custo.
+
+
+Exemplo:
+
+
+“Este vídeo consumirá aproximadamente X créditos.”
+
+
+Ou:
+
+
+“Esta geração consumirá aproximadamente X créditos.”
+
+
+O indicador deve ficar próximo ao botão GERAR.
+
+
+Atualizar automaticamente sempre que forem modificados:
+
+
+modelo
+
+
+duração
+
+
+resolução
+
+
+tipo de geração
+
+
+formato
+
+
+configuração utilizada
+
+
+Se o Google Flow disponibilizar o custo REAL:
+
+
+mostrar o custo real.
+
+
+Caso o custo real não esteja disponível:
+
+
+mostrar:
+
+
+“Estimativa de consumo: X créditos.”
+
+
+Nunca apresentar uma estimativa como valor oficial.
+
+
+========================================================
+ORGANIZAÇÃO VISUAL DO MOTION SYNC
+========================================================
+
+
+Utilize preferencialmente duas áreas.
+
+
+PAINEL ESQUERDO:
+
+
+Imagem Principal — aparência bloqueada
+
+
+Vídeo Base — usar somente movimentos
+
+
+Prompt / Instruções adicionais
+
+
+Configurações
+
+
+Créditos
+
+
+Botão Gerar Vídeo
+
+
+PAINEL PRINCIPAL:
+
+
+Preview do resultado
+
+
+Status da geração
+
+
+Controles
+
+
+Download
+
+
+Gerar novamente
+
+
+========================================================
+RESPONSIVIDADE
+========================================================
+
+
+A ferramenta deve funcionar corretamente em diferentes larguras de tela.
+
+
+Em telas menores:
+
+
+empilhar os componentes verticalmente.
+
+
+Não deixar texto cortado.
+
+
+Não esconder os controles principais.
+
+
+========================================================
+EXPERIÊNCIA DE USO
+========================================================
+
+
+A ferramenta deve ser simples.
+
+
+Não exigir conhecimento técnico.
+
+
+O usuário deve conseguir:
+
+
+1. Escolher Roteiro ou Motion Sync
+
+
+2. Subir os arquivos
+
+
+3. Digitar uma instrução opcional
+
+
+4. Conferir o consumo de créditos
+
+
+5. Gerar
+
+
+6. Visualizar
+
+
+7. Baixar
+
+
+========================================================
+TRATAMENTO DE ERROS
+========================================================
+
+
+Caso ocorra erro:
+
+
+não apagar os arquivos enviados.
+
+
+Não apagar o prompt.
+
+
+Não reiniciar toda a ferramenta.
+
+
+Mostrar mensagem clara sobre o erro.
+
+
+Permitir tentar novamente.
+
+
+========================================================
+REGRAS PARA ALTERAÇÕES FUTURAS
+========================================================
+
+
+Ao corrigir qualquer erro futuro:
+
+
+NÃO remover recursos já implementados.
+
+
+NÃO remover Motion Sync.
+
+
+NÃO remover a aba Roteiro.
+
+
+NÃO remover upload de imagem.
+
+
+NÃO remover upload de vídeo.
+
+
+NÃO remover o campo de prompt.
+
+
+NÃO remover créditos.
+
+
+NÃO remover download.
+
+
+NÃO remover previews.
+
+
+NÃO alterar a hierarquia entre imagem e vídeo.
+
+
+Manter a lógica:
+
+
+IMAGEM = APARÊNCIA
+
+
+VÍDEO = MOVIMENTO
+
+
+Ao fazer qualquer alteração, preserve todas as funcionalidades existentes.
+
+
+========================================================
+VALIDAÇÃO FINAL
+========================================================
+
+
+Antes de concluir a criação da ferramenta, verifique:
+
+
+A aba Roteiro funciona?
+
+
+A aba Motion Sync funciona?
+
+
+É possível subir imagem?
+
+
+É possível subir vídeo?
+
+
+Existe campo de prompt?
+
+
+O texto do prompt é realmente enviado ao modelo?
+
+
+A imagem tem prioridade visual?
+
+
+O vídeo é usado como referência de movimento?
+
+
+Existe botão Gerar Vídeo?
+
+
+Existe preview?
+
+
+Existe indicador de créditos?
+
+
+Existe botão de download?
+
+
+Os botões estão realmente conectados?
+
+
+Existe tratamento de erros?
+
+
+A ferramenta mantém os arquivos caso uma geração falhe?
+
+
+========================================================
+RESULTADO FINAL ESPERADO
+========================================================
+
+
+Quero uma ferramenta chamada MotionFlow AI que permita:
+
+
+ROTEIRO
+→ CENAS
+→ IMAGENS
+→ ANIMAÇÕES
+
+
+e também:
+
+
+IMAGEM DE REFERÊNCIA
++
+VÍDEO DE MOVIMENTO
+→
+MOTION SYNC
+→
+NOVO VÍDEO
+
+
+onde a pessoa da imagem preserve sua identidade visual e reproduza com máxima fidelidade possível os movimentos do vídeo de referência.
+
+
+Construa a ferramenta completamente, corrija automaticamente possíveis erros de componentes e entregue a interface pronta para teste dentro do Google Flow.

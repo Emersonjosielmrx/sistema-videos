@@ -1,0 +1,4 @@
+﻿Tarefas agendadas removidas em 18/10/2026 (unificação, revisão com o dono): todas apontavam para arquivo que não existe
+mais (D:\hipercool-inferior-fix, C:\Users\Haylla\Downloads\apps\_autoshift, D:\hipercool-producao,
+D:\hipercool-videos\auto_producer.py) — não conseguiam rodar.
+Restaurar uma:  Register-ScheduledTask -TaskName <nome> -Xml (Get-Content '<nome>.xml' -Raw)

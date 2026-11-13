@@ -1,0 +1,77 @@
+20:58:20 | aulacomia@gmail.com            | PULADA | aulacomia
+20:59:33 | aulasrevolution@gmail.com      | FALHA | nao conseguiu logar no Kaggle
+21:01:02 | canalalucinaai@gmail.com       | OK | alucinaai
+21:02:32 | canalanimescomia@gmail.com     | OK | animescomia
+21:04:08 | canalhistoriacomia@gmail.com   | OK | histriacomia
+21:05:35 | comoseriasecomia@gmail.com     | OK | comoseriasecomia
+21:07:00 | e4487017@gmail.com             | FALHA | nao conseguiu logar no Kaggle
+21:08:22 | emersongenc@gmail.com          | FALHA | nao conseguiu logar no Kaggle
+21:09:56 | emersongencshin@gmail.com      | FALHA | nao conseguiu logar no Kaggle
+21:11:26 | emersonjosiel0@gmail.com       | OK | emersonjosiel2027
+21:13:01 | emersonjosiel1995@gmail.com    | FALHA | nao conseguiu logar no Kaggle
+21:25:29 | emersonjosiel2026@gmail.com    | FALHA | download do kaggle.json não veio: TimeoutError
+21:35:25 | emersonjosiel2027@gmail.com    | FALHA | nao conseguiu logar no Kaggle
+21:38:17 | emersonjosiel2029@gmail.com    | OK | emerson2029
+21:39:43 | emersonjosiel2030@gmail.com    | OK | emerson2030
+21:41:53 | emersonjosiel2031@gmail.com    | OK | emerson2031
+21:46:25 | emersonjosiel2032@gmail.com    | OK | emerson2032
+21:48:27 | emersonjosiel2033@gmail.com    | OK | emerson2033
+21:49:22 | emersonjosiel649@gmail.com     | OK | emersonjosiel
+21:50:50 | empressinovare@gmail.com       | OK | inovareempress
+21:52:21 | en1653964@gmail.com            | FALHA | nao conseguiu logar no Kaggle
+21:53:48 | entrevistacomia@gmail.com      | OK | entrevistacomia
+21:55:12 | fabiovideoseducativos@gmail.com | OK | fabioyoutube
+21:56:39 | fabricadeautomacoes0@gmail.com | OK | fbricadeautomaes
+21:57:53 | fabricadeautomacoesia@gmail.com | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+    - locator resolved to <button tabindex="0" role="button" class="sc-kLEbxe iWITea">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+   
+21:59:52 | filmescomia00@gmail.com        | FALHA | nao conseguiu logar no Kaggle
+22:01:31 | filmescomia1@gmail.com         | OK | filmescomia
+22:02:56 | gameoftroneskingsroadbrasil@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:04:28 | inovarecap@gmail.com           | OK | inovarecap
+22:05:59 | inovaremanhwabr@gmail.com      | OK | inovaremanhwabr
+22:09:42 | inovaremanhwaverse@gmail.com   | FALHA | Page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://www.kaggle.com/settings", waiting until "domcontentloaded"
+
+22:11:23 | inovaremanhwaverseesp@gmail.com | OK | inovaremanga
+22:12:57 | inovaremanhwaversefrench@gmail.com | OK | emersoncunhacunha
+22:14:37 | inovaremanhwaversehindi@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:16:34 | inovaremanhwaverseind@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:19:12 | inovaremanhwaverseing@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:20:47 | inovaremanhwaverseita@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:22:21 | inovaremanhwaverserussian@gmail.com | OK | emersonjosielcunha
+22:24:05 | inovaremanhwaversethai@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:25:32 | inovaremanhwaverseviet@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:27:15 | inovaremultiatendimento@gmail.com | FALHA | nao conseguiu logar no Kaggle
+22:29:25 | jogoscomia@gmail.com           | OK | jogoscomia
+22:31:22 | jornalcomia@gmail.com          | OK | jornalia
+22:32:50 | mentoriaiapro@gmail.com        | FALHA | nao conseguiu logar no Kaggle
+22:34:26 | msenergypara@gmail.com         | OK | msenergypar
+22:52:35 | mundosolar1995@gmail.com       | FALHA | nao conseguiu logar no Kaggle (redirecionou: https://www.kaggle.com/account/login?returnUrl=%2Fsettings)
+22:54:52 | murilodoctor192@gmail.com      | OK | doctor192
+22:59:29 | rezaulkarimul355@gmail.com     | FALHA | Page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://www.kaggle.com/account/login?returnUrl=%2Fsettings", waiting until "domcontentloaded"
+
+23:05:03 | seebotsia@gmail.com            | FALHA | nao conseguiu logar no Kaggle
+23:06:26 | solarmundo195@gmail.com        | OK | mundosolar
+23:22:49 | inovaremanhwaverse2@gmail.com  | FALHA | nao conseguiu logar no Kaggle
+23:25:22 | maiteanajessicajesus@gmail.com | FALHA | Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("button:has-text(\"Google\")").first
+    - locator resolved to <button tabindex="0" role="button" class="sc-kLEbxe iWITea">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+   
+23:30:13 | gabriellyvitoriaisabelaaraujo@gmail.com | FALHA | nao conseguiu logar no Kaggle
+23:32:19 | simonerebecaluizasilva@gmail.com | FALHA | nao conseguiu logar no Kaggle
+23:34:54 | revolutionemerson1@gmail.com   | OK | revolutionemerson
+23:37:31 | revolutionemerson2@gmail.com   | FALHA | nao conseguiu logar no Kaggle
+23:38:54 | revolutionemerson3@gmail.com   | FALHA | nao conseguiu logar no Kaggle
+23:41:10 | vendeafiliados3@gmail.com      | OK | vendeafiliados
+23:43:10 | emersonjosielmrx1995@gmail.com | FALHA | nao conseguiu logar no Kaggle

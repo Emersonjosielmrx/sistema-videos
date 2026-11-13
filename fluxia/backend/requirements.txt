@@ -1,0 +1,8 @@
+fastapi==0.143.1
+uvicorn==0.54.0
+aiosqlite==0.22.1
+python-jose==3.5.0
+httpx==0.28.1
+python-multipart==0.0.32
+cryptography==49.0.0
+tzdata==2026.5

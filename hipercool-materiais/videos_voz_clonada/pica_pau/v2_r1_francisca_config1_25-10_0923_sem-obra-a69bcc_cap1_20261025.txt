@@ -1,0 +1,10 @@
+Narrador (voz clonada): pica_pau
+Voz base: edge Francisca
+Config 1 (produção): curva de locutor por frase — index_rate 0,30-0,85 (~0,38 nas normais), protect 0,22-0,41, volume_envelope 0,6-0,9
+Canal: novo_bichonoturno  |  título: ELE CAVOU um TÚNEL GIGANTE e DESCOBRIU o SEGREDO mais escondido da natureza
+Vídeo: D:\hipercool-materiais\animes recap\shorts\sem-obra-a69bcc_cap1_20261025\video.mp4
+
+frase abertura: trecho ORIGINAL  | clima normal | tom +0 | index None | protect None | vol None | (som) — Efeito sonoro RISADA DO PICA PAU https://www.youtube.com/watch?v=u9CyJTsYNuw
+frase 0: francisca -3% | clima normal | tom +0 | index 0.55 | protect 0.28 | vol 0.73 | O tatu-canastra cava uma das tocas mais brutais do Brasil, meu caro freguês.
+frase 1: francisca +11% | clima engracado | tom +0 | index 0.45 | protect 0.28 | vol 0.71 | A entrada já parece obra de retroescavadeira, mas olha só o tamanho desse buraco.
+frase 2: francisca -13% | clima epico | tom -1 | index 0.79 | protect 0.22 | vol 0.66 | E o túnel pode passar de quatro metros, e a toca ainda serve de abrigo para vários outros 

@@ -1,0 +1,42 @@
+{
+ "modelo": "argon-opus",
+ "segundos": 115,
+ "erro": null,
+ "lote": [
+  "sem-obra-c853c4_cap1_20261026",
+  "sem-obra-110e14_cap1_20261027",
+  "sem-obra-8a49d5_cap1_20261027",
+  "sem-obra-777e60_cap1_20261027"
+ ],
+ "alavancas_trava": [
+  {
+   "chave": "<SEGREDO_REMOVIDO>",
+   "op": "add",
+   "valor": "Utilize apenas um único elemento de título no topo, sem sobrepor camadas de texto ou marcas d'água.",
+   "passa_trava": true
+  }
+ ],
+ "resposta": {
+  "diagnostico": "O lote apresenta falhas recorrentes de sobreposição gráfica e elementos visuais cobrindo rostos e expressões dos personagens. Nos Shorts sem-obra-8a49d5 (q01) e sem-obra-110e14 (q01), ocorreram conflitos de duplo título e erros de digitação no topo. Adicionalmente, tarjas e marcas d'água cobriram diretamente rostos em sem-obra-c853c4 (q16), sem-obra-110e14 (q14) e sem-obra-777e60 (q04).",
+  "alavancas": [
+   {
+    "chave": "<SEGREDO_REMOVIDO>",
+    "op": "add",
+    "valor": "Utilize apenas um único elemento de título no topo, sem sobrepor camadas de texto ou marcas d'água.",
+    "porque": "Evita a colisão e sobreposição de títulos observada em sem-obra-8a49d5 e sem-obra-110e14."
+   }
+  ],
+  "propostas": [
+   {
+    "titulo": "Correção de posicionamento de tarjas e elementos sobre rostos",
+    "tipo": "CERTEZA",
+    "prova": "Júri registrou tarjas cobrindo rostos sem legenda da fonte embaixo em sem-obra-c853c4 (q16) e sem-obra-110e14 (q14).",
+    "onde": "pipeline/renderer.py",
+    "como_testar": "Validar coordenadas verticais das tarjas para garantir que não invadam a zona central de rostos quando houver ausência de hardsub."
+   }
+  ],
+  "mural": [
+   "Linha CORTES reforçando o rigor contra sobreposição de elementos gráficos nas expressões faciais dos personagens."
+  ]
+ }
+}

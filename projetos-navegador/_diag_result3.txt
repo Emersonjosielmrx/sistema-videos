@@ -1,0 +1,40 @@
+﻿=== WORKER.PY report_failure ===
+from .account_health import report_success, report_failure
+report_failure(account, str(e))
+
+=== ACCOUNT_HEALTH.PY cooldown ===
+COOLDOWN_SECONDS = 900  # 15 minutos
+"""Registra falha — incrementa contador e aplica cooldown se necessário."""
+cooldown_until = datetime.now() + timedelta(seconds=COOLDOWN_SECONDS * 4)
+health[account]["cooldown_until"] = cooldown_until.isoformat()
+log(f"[HEALTH] BAN SIGNAL em {account}: '{ban_detected}' — cooldown 4h")
+cooldown_until = datetime.now() + timedelta(seconds=COOLDOWN_SECONDS)
+health[account]["cooldown_until"] = cooldown_until.isoformat()
+log(f"[HEALTH] {account} com {consecutive} falhas seguidas — cooldown 1h")
+"""Verifica se a conta pode operar agora (não está em cooldown)."""
+cooldown_until = acc.get("cooldown_until")
+if not cooldown_until:
+until = datetime.fromisoformat(cooldown_until)
+acc.pop("cooldown_until", None)
+"""Retorna lista de contas em cooldown."""
+cooldown_until = data.get("cooldown_until")
+if cooldown_until:
+until = datetime.fromisoformat(cooldown_until)
+def clear_cooldown(account: str):
+"""Remove cooldown manualmente de uma conta."""
+health[account].pop("cooldown_until", None)
+log(f"[HEALTH] Cooldown removido de {account}")
+
+=== CONFIG.PY cooldown ===
+
+=== BOT LOG RESUMO ===
+Total linhas: 228
+OKs: 12
+Erros: 91
+Cooldown 1h: 59
+Cooldown 15m: 0
+
+=== PRIMEIRO/ULTIMO ===
+PRIMEIRO: === BOT WRAPPER START ===
+ULTIMO: [2026-08-05 08:22:05] ERRO en1653964/8_G2RGQ1RPo: Page.evaluate: Execution context was destroyed, mo
+

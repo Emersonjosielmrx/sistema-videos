@@ -1,0 +1,496 @@
+{
+ "part": [
+  0.0,
+  35.36
+ ],
+ "keeps": [
+  [
+   0.0,
+   3.936583
+  ],
+  [
+   4.614875,
+   7.231792
+  ],
+  [
+   7.599833,
+   8.219979
+  ],
+  [
+   9.531354,
+   10.035957999999999
+  ],
+  [
+   10.183771,
+   11.616041999999998
+  ],
+  [
+   12.491333000000001,
+   12.991354
+  ],
+  [
+   14.677688000000002,
+   20.941292
+  ],
+  [
+   23.948041999999997,
+   27.067145999999997
+  ],
+  [
+   27.9055,
+   28.408583
+  ],
+  [
+   28.625729,
+   29.302146
+  ],
+  [
+   30.529457999999998,
+   30.944875
+  ]
+ ],
+ "duration_out": 20.588167,
+ "zoom": [
+  [
+   0.0,
+   4.15,
+   1
+  ],
+  [
+   4.0,
+   6.704,
+   2
+  ],
+  [
+   10.213,
+   14.363,
+   1
+  ],
+  [
+   14.213,
+   18.363,
+   2
+  ],
+  [
+   18.213,
+   18.876,
+   1
+  ]
+ ],
+ "content_zoom": [
+  [
+   1.45,
+   2.6
+  ],
+  [
+   10.382853999999995,
+   11.532853999999995
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 1.5,
+   "text": "PRÉ-HISTÓRICO",
+   "emoji": "🦴"
+  },
+  {
+   "t": 10.432853999999995,
+   "text": "DEVORA",
+   "emoji": "😱"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 1.5,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 10.212853999999995,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\45- Whaaat - Sound Effect.mp3"
+  },
+  {
+   "t": 18.088167,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 1.4,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 1.5,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f9b4_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 10.212853999999995,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f928_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 10.332853999999996,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 18.088167,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Funk das Winx.mp3",
+ "meta": {
+  "hook": "O CARA VIROU CARNE SECA!",
+  "title": "O cara DEIXOU ser devorado?! 😱🍖 #shorts #baki",
+  "description": "O criador reage à cena insana do Baki onde o cara pré-histórico devora o braço do oponente e ele simplesmente DEIXA acontecer! 😳\nVocê teria coragem de enfrentar esse monstro?\nSegue pra mais reacts insanos de anime!\n\n#shorts #react #baki #anime #luta #cenainsana #reactanime #mangá #reactbrasil #animetiktok #animebrasil #otaku #hype #brutal",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#baki",
+   "#anime",
+   "#luta",
+   "#cenainsana",
+   "#reactanime",
+   "#mangá",
+   "#reactbrasil",
+   "#animetiktok"
+  ],
+  "tags": [
+   "react",
+   "baki",
+   "anime",
+   "luta",
+   "pickle",
+   "pré-histórico",
+   "devora braço",
+   "cena insana",
+   "react anime",
+   "react baki",
+   "anime brasil",
+   "otaku",
+   "mangá",
+   "carne seca",
+   "react brasil",
+   "anime react"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "funny_lighthearted",
+  "music": true,
+  "pinned_comment": "Você deixaria alguém te devorar numa luta? 😳",
+  "title_alternatives": [
+   "Ele DEIXOU o braço ser devorado?! 😳🦴 #shorts #baki",
+   "O pré-histórico transformou o cara em CARNE SECA 💀 #shorts #anime"
+  ],
+  "work": "BAKI",
+  "channel": "manhwareact"
+ },
+ "channel": "manhwareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_ff2d55_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Esse",
+   "s": 0.0,
+   "e": 0.82,
+   "p": 0.9,
+   "lip": 0.008651428123414897,
+   "speaker": "creator"
+  },
+  {
+   "w": "aí",
+   "s": 0.82,
+   "e": 1.0,
+   "p": 0.9,
+   "lip": 0.017404453353006794,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 1.0,
+   "e": 1.08,
+   "p": 0.9,
+   "lip": 0.01909407736379277,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 1.08,
+   "e": 1.1600000000000001,
+   "p": 0.9,
+   "lip": 0.019656701569759447,
+   "speaker": "creator"
+  },
+  {
+   "w": "do",
+   "s": 1.16,
+   "e": 1.24,
+   "p": 0.9,
+   "lip": 0.024187074475036503,
+   "speaker": "creator"
+  },
+  {
+   "w": "cara",
+   "s": 1.24,
+   "e": 1.48,
+   "p": 0.9,
+   "lip": 0.0195405268834646,
+   "speaker": "creator"
+  },
+  {
+   "w": "pré-histórico",
+   "s": 1.48,
+   "e": 2.3,
+   "p": 0.9,
+   "lip": 0.017164962321502265,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 2.3,
+   "e": 2.48,
+   "p": 0.9,
+   "lip": 0.012268720859313654,
+   "speaker": "creator"
+  },
+  {
+   "w": "foi",
+   "s": 2.48,
+   "e": 2.66,
+   "p": 0.9,
+   "lip": 0.010939381369605492,
+   "speaker": "creator"
+  },
+  {
+   "w": "acordado,",
+   "s": 2.66,
+   "e": 3.38,
+   "p": 0.9,
+   "lip": 0.0130069587993967,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 3.38,
+   "e": 3.92,
+   "p": 0.9,
+   "lip": 0.008934721053344748,
+   "speaker": "creator"
+  },
+  {
+   "w": "do",
+   "s": 4.481708000000001,
+   "e": 5.241708000000001,
+   "p": 0.9,
+   "lip": 0.010970540138721098,
+   "speaker": "creator"
+  },
+  {
+   "w": "Baki.",
+   "s": 5.241708000000001,
+   "e": 6.553500000000001,
+   "p": 0.9,
+   "lip": 0.00983435279845862,
+   "speaker": "creator",
+   "w_orig": "Bach."
+  },
+  {
+   "w": "o",
+   "s": 10.212853999999995,
+   "e": 10.392853999999996,
+   "p": 0.9,
+   "lip": 0.01337276015601637,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 10.392853999999996,
+   "e": 10.612853999999995,
+   "p": 0.9,
+   "lip": 0.013509237731961058,
+   "speaker": "creator"
+  },
+  {
+   "w": "ele",
+   "s": 10.612853999999995,
+   "e": 10.872853999999995,
+   "p": 0.9,
+   "lip": 0.01577767623071336,
+   "speaker": "creator"
+  },
+  {
+   "w": "devora?",
+   "s": 10.872853999999995,
+   "e": 11.592853999999996,
+   "p": 0.9,
+   "lip": 0.01691985737100701,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ele",
+   "s": 11.592853999999996,
+   "e": 11.812853999999994,
+   "p": 0.9,
+   "lip": 0.017555664309938417,
+   "speaker": "creator"
+  },
+  {
+   "w": "devora",
+   "s": 11.812853999999994,
+   "e": 12.432853999999995,
+   "p": 0.9,
+   "lip": 0.016366559600089294,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 12.432853999999995,
+   "e": 13.012853999999994,
+   "p": 0.9,
+   "lip": 0.012943899444130439,
+   "speaker": "creator"
+  },
+  {
+   "w": "braço,",
+   "s": 13.012853999999994,
+   "e": 14.112853999999995,
+   "p": 0.9,
+   "lip": 0.0199628110472939,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 14.112853999999995,
+   "e": 14.272853999999995,
+   "p": 0.9,
+   "lip": 0.01958748344485452,
+   "speaker": "creator"
+  },
+  {
+   "w": "eu",
+   "s": 14.272853999999995,
+   "e": 14.352853999999995,
+   "p": 0.9,
+   "lip": 0.01279598152692857,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 14.332853999999994,
+   "e": 14.412853999999996,
+   "p": 0.9,
+   "lip": 0.011587717927682813,
+   "speaker": "creator"
+  },
+  {
+   "w": "me",
+   "s": 14.412853999999996,
+   "e": 14.532853999999997,
+   "p": 0.9,
+   "lip": 0.017066616413639324,
+   "speaker": "creator"
+  },
+  {
+   "w": "engano,",
+   "s": 14.532853999999997,
+   "e": 14.752853999999996,
+   "p": 0.9,
+   "lip": 0.022903590518922084,
+   "speaker": "creator"
+  },
+  {
+   "w": "do",
+   "s": 14.752853999999996,
+   "e": 14.852853999999997,
+   "p": 0.9,
+   "lip": 0.02524898075922424,
+   "speaker": "creator"
+  },
+  {
+   "w": "cara.",
+   "s": 14.852853999999997,
+   "e": 15.874145999999996,
+   "p": 0.9,
+   "lip": 0.009330467324707043,
+   "speaker": "creator"
+  },
+  {
+   "w": "E",
+   "s": 16.006103999999997,
+   "e": 16.206104,
+   "p": 0.9,
+   "lip": 0.016622690651769623,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 16.206104,
+   "e": 16.286103999999998,
+   "p": 0.9,
+   "lip": 0.01924167361350993,
+   "speaker": "creator"
+  },
+  {
+   "w": "cara",
+   "s": 16.286103999999998,
+   "e": 16.506103999999997,
+   "p": 0.9,
+   "lip": 0.019821223411970845,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 16.506103999999997,
+   "e": 16.766104,
+   "p": 0.9,
+   "lip": 0.01980150875834961,
+   "speaker": "creator"
+  },
+  {
+   "w": "deixa",
+   "s": 16.766104,
+   "e": 17.206104,
+   "p": 0.9,
+   "lip": 0.016397339467863564,
+   "speaker": "creator"
+  },
+  {
+   "w": "ser",
+   "s": 17.206104,
+   "e": 17.466103999999998,
+   "p": 0.9,
+   "lip": 0.02314101703920447,
+   "speaker": "creator"
+  },
+  {
+   "w": "devorado.",
+   "s": 17.466103999999998,
+   "e": 18.726104,
+   "p": 0.9,
+   "lip": 0.015269943114132193,
+   "speaker": "creator"
+  }
+ ]
+}

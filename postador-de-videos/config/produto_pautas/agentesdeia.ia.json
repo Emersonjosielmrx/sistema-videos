@@ -1,0 +1,137 @@
+{
+ "pautas": [
+  {
+   "id": "dor_followup_esquecido",
+   "tipo": "dor",
+   "ideia": "Você perde vendas porque esquece de mandar mensagem para quem pediu orçamento, mas pode delegar esse follow-up para o agente IA fazer por você.",
+   "pergunta_cliente": "Ele consegue mandar mensagem de acompanhamento para quem não me respondeu?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "como_delegar_tarefas",
+   "tipo": "como_funciona",
+   "ideia": "Em vez de pausar seu trabalho estratégico para resolver pendências operacionais, você passa a instrução e o agente IA executa a tarefa real.",
+   "pergunta_cliente": "Como eu passo o que precisa ser feito para o agente?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "caso_pesquisa_mercado",
+   "tipo": "caso_de_uso",
+   "ideia": "Quando você precisa levantar dados sobre fornecedores ou concorrentes sem perder horas navegando, delega toda essa pesquisa ao agente IA.",
+   "pergunta_cliente": "Ele consegue pesquisar opções de fornecedores para mim?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "objecao_ia_faz_mesmo",
+   "tipo": "objecao",
+   "ideia": "Muitos acham que IA só serve para bater papo, mas este é um agente pessoal focado em fazer tarefas de verdade por você.",
+   "pergunta_cliente": "Ele realmente executa tarefas ou é só um gerador de texto?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "antes_depois_agenda",
+   "tipo": "antes_depois",
+   "ideia": "Antes você passava o dia alternando entre atender clientes e organizar horários, agora o agente IA cuida do agendamento das suas reuniões.",
+   "pergunta_cliente": "O agente consegue marcar meus compromissos no meu lugar?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "faq_qualquer_coisa",
+   "tipo": "pergunta_frequente",
+   "ideia": "Explicamos na prática o que significa delegar qualquer coisa da sua rotina ao seu agente pessoal de tarefas com IA.",
+   "pergunta_cliente": "Que tipos de tarefas operacionais eu posso passar para ele?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "dor_dia_atropelado",
+   "tipo": "dor",
+   "ideia": "O dia acaba e suas principais prioridades ficaram para trás porque as microtarefas acumularam, cenário resolvido ao ter um agente IA que faz tarefas por você.",
+   "pergunta_cliente": "Posso transferir essas pequenas tarefas chatas do dia a dia para ele?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "caso_followup_propostas",
+   "tipo": "caso_de_uso",
+   "ideia": "Envio de propostas comerciais sem tempo de cobrar retorno, situação em que o agente IA assume o follow-up diário dos contatos.",
+   "pergunta_cliente": "Ele faz o acompanhamento dos clientes que receberam minha proposta?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "objecao_dificuldade_uso",
+   "tipo": "objecao",
+   "ideia": "O receio de que usar um agente IA seja complicado cai por terra ao ver que delegar é tão simples quanto passar uma tarefa a um assistente.",
+   "pergunta_cliente": "É difícil mandar o agente fazer uma tarefa?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "antes_depois_pesquisa",
+   "tipo": "antes_depois",
+   "ideia": "Antes você gastava a manhã inteira buscando informações na internet, agora você delega a pesquisa ao agente IA e recebe a tarefa concluída.",
+   "pergunta_cliente": "Ele me entrega a pesquisa pronta enquanto cuido de outras coisas?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "dor_tarefa_acumulada",
+   "tipo": "dor",
+   "ideia": "A sensação de sufoco com uma lista infinita de pendências se resolve ao colocar um agente pessoal com IA para trabalhar nas tarefas.",
+   "pergunta_cliente": "Ele me ajuda a diminuir o volume de pendências da minha rotina?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "como_agendamento_funciona",
+   "tipo": "como_funciona",
+   "ideia": "Demonstração de como delegar o agendamento de reuniões e compromissos diretamente ao agente de tarefas com IA.",
+   "pergunta_cliente": "Como funciona para ele cuidar dos meus agendamentos?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "caso_qualquer_tarefa",
+   "tipo": "caso_de_uso",
+   "ideia": "Profissional sobrecarregado que começou a passar qualquer tarefa operacional de rotina para o agente IA executar.",
+   "pergunta_cliente": "Consigo usar no meu dia a dia mesmo tendo uma rotina corrida?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "faq_o_que_e_agente",
+   "tipo": "pergunta_frequente",
+   "ideia": "Esclarecimento definitivo sobre a diferença entre ferramentas comuns e um agente IA que executa tarefas práticas por você.",
+   "pergunta_cliente": "Qual a diferença desse agente para outras inteligências artificiais?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "dor_falta_de_foco",
+   "tipo": "dor",
+   "ideia": "Ter que interromper uma entrega importante para fazer um follow-up urgente, tarefa que o agente IA assume para não tirar seu foco.",
+   "pergunta_cliente": "Posso deixar os contatos de follow-up com ele sem parar o que estou fazendo?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "antes_depois_sobrecarga",
+   "tipo": "antes_depois",
+   "ideia": "Antes você trabalhava até tarde para dar conta do operacional, agora delega pesquisas, agendamentos e follow-ups para o agente IA.",
+   "pergunta_cliente": "Vou conseguir parar de levar tarefa operacional para a noite?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "objecao_confianca_tarefa",
+   "tipo": "objecao",
+   "ideia": "O medo de perder o controle das pendências é superado ao ver o agente pessoal de tarefas com IA executando exatamente o que você delegou.",
+   "pergunta_cliente": "O agente faz a tarefa seguindo as orientações que eu passar?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "caso_agendamento_compromissos",
+   "tipo": "caso_de_uso",
+   "ideia": "Empreendedor que não tem secretária e passa a contar com o agente IA para cuidar de todo o agendamento de atendimentos.",
+   "pergunta_cliente": "O agente pode ser meu apoio para organizar agendamentos?",
+   "criada": "2026-10-30T23:21:57"
+  },
+  {
+   "id": "faq_delegar_pesquisa",
+   "tipo": "pergunta_frequente",
+   "ideia": "Respondendo como o agente pessoal com IA recebe instruções e realiza pesquisas complexas de mercado por conta própria.",
+   "pergunta_cliente": "Como ele faz pesquisa quando preciso de informações sobre um tema?",
+   "criada": "2026-10-30T23:21:57"
+  }
+ ]
+}

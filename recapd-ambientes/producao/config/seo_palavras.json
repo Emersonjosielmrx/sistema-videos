@@ -1,0 +1,131 @@
+{
+ "_leia": "Banco de palavras de busca pro gerador de SEO (bin/seo_generator.py). Fonte: autocompletar da busca do YouTube em pt-BR + palavras de anime recap. Título NUNCA leva o nome da obra original (risco de direitos autorais): provocação + o máximo de palavras buscadas que tenham a ver com a história.",
+ "sempre": [
+  "anime",
+  "anime recap",
+  "resumo anime",
+  "anime completo",
+  "anime dublado",
+  "anime recap pt br",
+  "recap anime português",
+  "recap completo",
+  "resumo completo"
+ ],
+ "padroes_reais": [
+  "ele foi humilhado mas se tornou o mais forte",
+  "ele foi humilhado por ser fraco / pobre / feio",
+  "ele foi traído mas voltou como o herói mais forte",
+  "ele foi humilhado mas ganhou um poder infinito",
+  "ele foi traído pela namorada / pelo clã",
+  "ele reencarnou como vilão / dragão / demônio",
+  "ele despertou o sistema mais forte",
+  "ele despertou a pior classe mas é overpower",
+  "ele despertou o poder de copiar habilidades",
+  "ele voltou no tempo",
+  "ele escondia ser o mais forte do mundo",
+  "anime isekai completo",
+  "anime ação completo"
+ ],
+ "generos": {
+  "acao": [
+   "ação",
+   "anime ação",
+   "luta",
+   "batalha",
+   "o mais forte",
+   "overpower",
+   "invencível",
+   "poder infinito"
+  ],
+  "isekai": [
+   "isekai",
+   "anime isekai",
+   "outro mundo",
+   "reencarnação",
+   "reencarnou",
+   "renasceu"
+  ],
+  "fantasia": [
+   "magia",
+   "mago",
+   "feiticeiro",
+   "dragão",
+   "demônio",
+   "espada",
+   "academia de magia",
+   "fantasia"
+  ],
+  "sistema": [
+   "sistema",
+   "despertou o sistema",
+   "level up",
+   "nível máximo",
+   "habilidade",
+   "classe",
+   "skill",
+   "talento"
+  ],
+  "regressao": [
+   "voltou no tempo",
+   "voltou ao passado",
+   "regressão",
+   "segunda chance",
+   "renasceu"
+  ],
+  "apocalipse": [
+   "apocalipse",
+   "fim do mundo",
+   "sobrevivência",
+   "masmorra",
+   "dungeon",
+   "caçador",
+   "hunter"
+  ],
+  "aventura": [
+   "aventura",
+   "jornada",
+   "quest",
+   "missão",
+   "exploração"
+  ],
+  "romance": [
+   "romance",
+   "amor",
+   "namorada",
+   "relacionamento"
+  ],
+  "comedia": [
+   "comédia",
+   "engraçado",
+   "funny",
+   "hilário"
+  ],
+  "escola": [
+   "escola",
+   "academia",
+   "estudante",
+   "colégio",
+   "universidade"
+  ],
+  "poder": [
+   "poder secreto",
+   "poder oculto",
+   "poder supremo",
+   "habilidade única",
+   "dom especial"
+  ],
+  "vinganca": [
+   "vingança",
+   "traído",
+   "humilhado",
+   "rejeitado",
+   "desprezado",
+   "subestimado"
+  ]
+ },
+ "estilos_titulo": {
+  "busca": "frase no padrão do que o público digita (ver padroes_reais), com 3-5 palavras buscadas da história, tom de 'ele foi X mas Y'",
+  "provocacao": "provocação curiosa/chocante tirada do fato mais forte DESTA história (ex. de tom: ELE PERDEU TUDO, O PODER PROIBIDO) + 2-3 palavras buscadas da história; NÃO comece com 'NINGUÉM ESPERAVA' nem 'ELE FOI' (viraram fórmula repetida em 30% dos títulos)",
+  "curiosidade": "pergunta ou revelação chocante do episódio + 2-3 palavras buscadas da história"
+ }
+}

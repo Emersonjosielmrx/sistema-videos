@@ -1,0 +1,25 @@
+{
+ "formato": "ranking de cenas tristes de anime com música emocional",
+ "descricao": "Compilação de cenas impactantes de animes (morte, despedida, sofrimento) com música dramática de fundo, sem narração, apenas mostrando os momentos mais emocionais em sequência. O vídeo prende pela nostalgia e pelo gatilho emocional.",
+ "replicavel": false,
+ "como_fazer": "Não replicável diretamente: usar clipes de anime protegidos por direitos autorais é violação de copyright. Alternativa parcial: criar 'momentos tristes de manhwa' usando os 86 mil painéis, adicionar música emocional das 341 trilhas, aplicar zoom/pan com ffmpeg, adicionar legendas contextuais. Mas perde o impacto visual do anime em movimento.",
+ "ferramentas": [
+  "ffmpeg",
+  "trilhas musicais"
+ ],
+ "fonte_de_material": "clipes de anime (protegidos por direitos autorais) - não recomendado. Alternativa: painéis de manhwa estáticos do acervo",
+ "esforco": "baixo",
+ "potencial": 3,
+ "por_que_viraliza": "Nostalgia e gatilho emocional de quem já assistiu os animes fazem as pessoas pararem para relembrar e comentar.",
+ "exemplo_roteiro": "CENA 1: [painel manhwa de despedida] 'Quando ele teve que escolher...'\nCENA 2: [painel de personagem chorando] 'E ela nunca mais voltou...'\nCENA 3: [painel final trágico] 'O sacrifício que ninguém esquece.'",
+ "nicho_canal": "manhwareact",
+ "tags": [
+  "anime triste",
+  "momentos emocionantes",
+  "nostalgia otaku",
+  "cenas marcantes",
+  "ranking anime"
+ ],
+ "video": "2026-10-07 12-03-29.mp4",
+ "data": "2026-10-12"
+}

@@ -1,0 +1,586 @@
+{
+ "part": [
+  0.0,
+  73.366667
+ ],
+ "keeps": [
+  [
+   0.46883300000000006,
+   2.294229
+  ],
+  [
+   4.720354,
+   5.503354
+  ],
+  [
+   22.846187999999998,
+   23.346916999999998
+  ],
+  [
+   30.41,
+   32.35714600000001
+  ],
+  [
+   33.647771,
+   34.16075000000001
+  ],
+  [
+   46.876104,
+   50.24864600000001
+  ],
+  [
+   53.902499999999996,
+   54.55
+  ],
+  [
+   54.95,
+   58.00160400000001
+  ],
+  [
+   61.823125,
+   62.69
+  ],
+  [
+   63.050000000000004,
+   64.752875
+  ],
+  [
+   70.55939599999999,
+   72.85650000000001
+  ]
+ ],
+ "duration_out": 17.507750000000048,
+ "zoom": [
+  [
+   0.0,
+   1.761,
+   1
+  ],
+  [
+   3.109,
+   4.889,
+   2
+  ],
+  [
+   5.853,
+   8.583,
+   1
+  ],
+  [
+   9.589,
+   12.449,
+   2
+  ],
+  [
+   12.978,
+   14.708,
+   1
+  ],
+  [
+   15.371,
+   17.341,
+   2
+  ]
+ ],
+ "content_zoom": [
+  [
+   5.6031460000000175,
+   6.753146000000017
+  ],
+  [
+   9.469292000000024,
+   10.619292000000025
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 5.653146000000017,
+   "text": "CORTOU",
+   "emoji": "⚔️"
+  },
+  {
+   "t": 9.519292000000025,
+   "text": "MEDIEVAL MODERNO",
+   "emoji": "🏰"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 5.653146000000017,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\37- Chicote.mp3"
+  },
+  {
+   "t": 9.519292000000025,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 15.007750000000048,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 5.553146000000018,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 5.553146000000018,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_speedlines.mov",
+   "dur": 0.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 5.653146000000017,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_2694_fe0f_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 9.419292000000025,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 9.519292000000025,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f3f0_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 15.007750000000048,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_comment.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\Grandpa_s House - The Legend of Zelda_ The Wind Waker.mp3",
+ "meta": {
+  "hook": "ELA CORTOU A ESPADA COM OUTRA!",
+  "title": "Esse anime novo vai ser INSANO! 🔥 Cortou a espada de madeira?! #shorts #anime",
+  "description": "Reagindo a um anime novo que promete muito! A protagonista cortou uma espada de madeira com outra espada de madeira, e o cenário mistura medieval com moderno 🤯\nVocês já viram esse anime? Comentem aí!\nSiga pra mais reacts de anime da temporada!\n\n#shorts #react #anime #animenovo #temporada #espada #medieval #otaku #animebrasileiro #reactanime #weeb #japones #animereact #mangá #novelight",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#anime",
+   "#animenovo",
+   "#temporada",
+   "#espada",
+   "#medieval",
+   "#otaku",
+   "#animebrasileiro",
+   "#reactanime"
+  ],
+  "tags": [
+   "react",
+   "anime novo",
+   "anime temporada",
+   "espada de madeira",
+   "medieval",
+   "react anime",
+   "anime brasileiro",
+   "otaku",
+   "anime 2025",
+   "protagonista forte",
+   "cena epica anime",
+   "anime react br",
+   "anime hype",
+   "weeb",
+   "reação anime"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "neutral_chill",
+  "music": true,
+  "pinned_comment": "Qual anime novo dessa temporada vocês mais querem ver react?",
+  "title_alternatives": [
+   "Ela CORTOU a espada de madeira com outra?! 😱⚔️ #shorts #anime",
+   "Anime novo que mistura medieval com moderno! 🔥🏰 #shorts #react"
+  ],
+  "work": null,
+  "channel": "manhwareact"
+ },
+ "channel": "manhwareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\electric_ff2d55_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "electric"
+ },
+ "words": [
+  {
+   "w": "Vamos",
+   "s": 0.0,
+   "e": 0.27116699999999994,
+   "p": 0.9,
+   "lip": 0.011819310911742167,
+   "speaker": "creator"
+  },
+  {
+   "w": "ver",
+   "s": 0.27116699999999994,
+   "e": 0.4711669999999999,
+   "p": 0.9,
+   "lip": 0.014073170405702528,
+   "speaker": "creator"
+  },
+  {
+   "w": "anime",
+   "s": 0.4711669999999999,
+   "e": 0.6711669999999998,
+   "p": 0.9,
+   "lip": 0.013671737469579646,
+   "speaker": "creator"
+  },
+  {
+   "w": "novo",
+   "s": 0.6711669999999998,
+   "e": 1.071167,
+   "p": 0.9,
+   "lip": 0.010236900478229437,
+   "speaker": "creator"
+  },
+  {
+   "w": "também.",
+   "s": 1.071167,
+   "e": 1.611167,
+   "p": 0.9,
+   "lip": 0.007781795036039987,
+   "speaker": "creator"
+  },
+  {
+   "w": "esse",
+   "s": 3.1091249999999993,
+   "e": 3.2191249999999987,
+   "p": 0.9,
+   "lip": 0.010494266608471848,
+   "speaker": "creator"
+  },
+  {
+   "w": "anime",
+   "s": 3.2191249999999987,
+   "e": 3.419124999999998,
+   "p": 0.9,
+   "lip": 0.01246897958648818,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 3.419124999999998,
+   "e": 3.6391250000000004,
+   "p": 0.9,
+   "lip": 0.01061648791422204,
+   "speaker": "creator"
+  },
+  {
+   "w": "ser",
+   "s": 3.6391250000000004,
+   "e": 3.7791249999999974,
+   "p": 0.9,
+   "lip": 0.01309778814262018,
+   "speaker": "creator"
+  },
+  {
+   "w": "bacana",
+   "s": 3.7791249999999974,
+   "e": 4.219124999999998,
+   "p": 0.9,
+   "lip": 0.014664849300336005,
+   "speaker": "creator"
+  },
+  {
+   "w": "também,",
+   "s": 4.219124999999998,
+   "e": 4.639125,
+   "p": 0.9,
+   "lip": 0.00848760976472232,
+   "speaker": "creator"
+  },
+  {
+   "w": "hein?",
+   "s": 4.639125,
+   "e": 4.739124999999998,
+   "p": 0.9,
+   "lip": 0.006428324433562747,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ela",
+   "s": 5.853146000000013,
+   "e": 6.573146000000019,
+   "p": 0.9,
+   "lip": 0.01227365592841373,
+   "speaker": "creator"
+  },
+  {
+   "w": "cortou",
+   "s": 6.573146000000019,
+   "e": 7.03314600000002,
+   "p": 0.9,
+   "lip": 0.017244444524521833,
+   "speaker": "creator"
+  },
+  {
+   "w": "a",
+   "s": 7.03314600000002,
+   "e": 7.173146000000013,
+   "p": 0.9,
+   "lip": 0.022144712101689366,
+   "speaker": "creator"
+  },
+  {
+   "w": "espada",
+   "s": 7.173146000000013,
+   "e": 7.4331460000000185,
+   "p": 0.9,
+   "lip": 0.02402367593412733,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 7.4331460000000185,
+   "e": 7.593146000000015,
+   "p": 0.9,
+   "lip": 0.02341091640880683,
+   "speaker": "creator"
+  },
+  {
+   "w": "madeira",
+   "s": 7.593146000000015,
+   "e": 7.913146000000015,
+   "p": 0.9,
+   "lip": 0.019344191722822264,
+   "speaker": "creator"
+  },
+  {
+   "w": "com",
+   "s": 7.913146000000015,
+   "e": 8.113146000000018,
+   "p": 0.9,
+   "lip": 0.011658027271284383,
+   "speaker": "creator"
+  },
+  {
+   "w": "outra!",
+   "s": 8.113146000000018,
+   "e": 8.433146000000018,
+   "p": 0.9,
+   "lip": 0.006868986675441363,
+   "speaker": "creator"
+  },
+  {
+   "w": "então",
+   "s": 9.589292000000025,
+   "e": 9.819292000000022,
+   "p": 0.9,
+   "lip": 0.016076664164110306,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 9.819292000000022,
+   "e": 9.959292000000023,
+   "p": 0.9,
+   "lip": 0.018484547339683258,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 9.959292000000023,
+   "e": 10.099292000000023,
+   "p": 0.9,
+   "lip": 0.01860075928010848,
+   "speaker": "creator"
+  },
+  {
+   "w": "bem",
+   "s": 10.099292000000023,
+   "e": 10.319292000000022,
+   "p": 0.9,
+   "lip": 0.017768210241552163,
+   "speaker": "creator"
+  },
+  {
+   "w": "medieval.",
+   "s": 10.319292000000022,
+   "e": 10.879292000000024,
+   "p": 0.9,
+   "lip": 0.014161093218329777,
+   "speaker": "creator"
+  },
+  {
+   "w": "É",
+   "s": 10.879292000000024,
+   "e": 10.999292000000022,
+   "p": 0.9,
+   "lip": 0.013613825336466993,
+   "speaker": "creator"
+  },
+  {
+   "w": "medieval",
+   "s": 10.999292000000022,
+   "e": 11.339292000000025,
+   "p": 0.9,
+   "lip": 0.01577998559025444,
+   "speaker": "creator"
+  },
+  {
+   "w": "já",
+   "s": 11.339292000000025,
+   "e": 11.57929200000002,
+   "p": 0.9,
+   "lip": 0.019803783244091988,
+   "speaker": "creator"
+  },
+  {
+   "w": "moderno,",
+   "s": 11.57929200000002,
+   "e": 12.159292000000026,
+   "p": 0.9,
+   "lip": 0.015798562777942483,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 12.159292000000026,
+   "e": 12.299292000000019,
+   "p": 0.9,
+   "lip": 0.009839077519260737,
+   "speaker": "creator"
+  },
+  {
+   "w": "assistir",
+   "s": 12.977771000000029,
+   "e": 13.50777100000003,
+   "p": 0.9,
+   "lip": 0.009751394425248519,
+   "speaker": "creator"
+  },
+  {
+   "w": "digo",
+   "s": 13.50777100000003,
+   "e": 13.597771000000026,
+   "p": 0.9,
+   "lip": 0.010438643210393915,
+   "speaker": "creator"
+  },
+  {
+   "w": "pra",
+   "s": 13.597771000000026,
+   "e": 13.757771000000023,
+   "p": 0.9,
+   "lip": 0.010366626638330408,
+   "speaker": "creator"
+  },
+  {
+   "w": "vocês",
+   "s": 13.757771000000023,
+   "e": 14.097771000000026,
+   "p": 0.9,
+   "lip": 0.011359562639443578,
+   "speaker": "creator"
+  },
+  {
+   "w": "se",
+   "s": 14.097771000000026,
+   "e": 14.197771000000028,
+   "p": 0.9,
+   "lip": 0.011271714266847413,
+   "speaker": "creator"
+  },
+  {
+   "w": "é",
+   "s": 14.197771000000028,
+   "e": 14.277771000000028,
+   "p": 0.9,
+   "lip": 0.00946173657812337,
+   "speaker": "creator"
+  },
+  {
+   "w": "realmente",
+   "s": 14.217771000000024,
+   "e": 14.55777100000002,
+   "p": 0.9,
+   "lip": 0.006698430007588403,
+   "speaker": "creator"
+  },
+  {
+   "w": "E",
+   "s": 15.371250000000035,
+   "e": 15.551250000000042,
+   "p": 0.9,
+   "lip": 0.014304067774028383,
+   "speaker": "creator"
+  },
+  {
+   "w": "ela",
+   "s": 15.551250000000042,
+   "e": 15.651250000000037,
+   "p": 0.9,
+   "lip": 0.018747594294287795,
+   "speaker": "creator"
+  },
+  {
+   "w": "ainda",
+   "s": 15.651250000000037,
+   "e": 15.811250000000033,
+   "p": 0.9,
+   "lip": 0.02029513904163105,
+   "speaker": "creator"
+  },
+  {
+   "w": "tava",
+   "s": 15.811250000000033,
+   "e": 15.99125000000004,
+   "p": 0.9,
+   "lip": 0.01736202956752744,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 15.99125000000004,
+   "e": 16.21125000000004,
+   "p": 0.9,
+   "lip": 0.01997092460340488,
+   "speaker": "creator"
+  },
+  {
+   "w": "carregador",
+   "s": 16.21125000000004,
+   "e": 16.511250000000036,
+   "p": 0.9,
+   "lip": 0.016667885714521595,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 16.511250000000036,
+   "e": 16.71125000000004,
+   "p": 0.9,
+   "lip": 0.01167590717689761,
+   "speaker": "creator"
+  },
+  {
+   "w": "roda!",
+   "s": 16.71125000000004,
+   "e": 17.191250000000043,
+   "p": 0.9,
+   "lip": 0.007115491086727976,
+   "speaker": "creator"
+  }
+ ]
+}

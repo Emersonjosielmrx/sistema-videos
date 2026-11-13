@@ -1,0 +1,19 @@
+{
+ "modelo": "cw/claude-sonnet-5-5",
+ "video": "inovarecom_ia_20261029_044101.json",
+ "quando": "2026-10-29T18:13:28",
+ "segundos": 203,
+ "erro": null,
+ "resultado": {
+  "quando": "2026-10-29T18:13:28",
+  "video": "inovarecom_ia_20261029_044101.json",
+  "ensaio": true,
+  "modelos": {
+   "analista": "cw/claude-sonnet-5-5",
+   "decisor": "cw/claude-sonnet-5-5"
+  },
+  "achados": [],
+  "mudancas": [],
+  "aprovadas": 0
+ }
+}

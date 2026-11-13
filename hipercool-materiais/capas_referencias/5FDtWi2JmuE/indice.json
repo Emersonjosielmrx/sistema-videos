@@ -1,0 +1,227 @@
+{
+ "video": "D:\\hipercool-materiais\\tmp\\banco_video\\video.mp4",
+ "passo_s": 4.0,
+ "mulheres": [
+  {
+   "personagem": "p01",
+   "nome": "Mi-kyung",
+   "principal": true,
+   "aparicoes": 49,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2324.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1280.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1288.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 2340.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 804.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 1320.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1280.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1288.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2340.0
+    }
+   ],
+   "papel": "Cliente favorita do protagonista e cabeleireira",
+   "visual": "Light brown bob haircut with bangs, grey/brown eyes",
+   "adulta": true,
+   "mulher": true
+  },
+  {
+   "personagem": "p02",
+   "nome": "Mi-kyung",
+   "principal": false,
+   "aparicoes": 15,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 932.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 108.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 272.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 4272.0
+    },
+    {
+     "arquivo": "rosto_5.jpg",
+     "seg": 3212.0
+    },
+    {
+     "arquivo": "rosto_6.jpg",
+     "seg": 4052.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 932.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 108.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 272.0
+    }
+   ],
+   "papel": "Personagem secundária que interage com o protagonista e tem poderes de Despertada.",
+   "visual": "brown wavy hair, brown eyes, no visible ears, no horns, no tail, wears various outfits including a flight attendant uniform, a Christmas outfit, and a green tactical outfit.",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p03",
+   "nome": "Mi-kyung",
+   "principal": false,
+   "aparicoes": 6,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 1100.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1340.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 776.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 772.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 1100.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1340.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 776.0
+    }
+   ],
+   "papel": "Cliente favorita do protagonista e barbeira",
+   "visual": "Long black hair, brown eyes, tan skin, colorful feather earrings, green beaded necklace",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p04",
+   "nome": "Mi-kyung",
+   "principal": false,
+   "aparicoes": 5,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 424.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1716.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 1712.0
+    },
+    {
+     "arquivo": "rosto_4.jpg",
+     "seg": 1112.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 424.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1716.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 1712.0
+    }
+   ],
+   "papel": "Cliente favorita e cabeleireira do protagonista",
+   "visual": "Dark brown hair styled up with traditional floral hair ornaments (kanzashi), brown eyes, tanned skin, wearing a red floral kimono with a yellow obi",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  },
+  {
+   "personagem": "p05",
+   "nome": "Mi-kyung",
+   "principal": false,
+   "aparicoes": 4,
+   "possivel_menor": [],
+   "arquivos": [
+    {
+     "arquivo": "rosto_1.jpg",
+     "seg": 2276.0
+    },
+    {
+     "arquivo": "rosto_2.jpg",
+     "seg": 1480.0
+    },
+    {
+     "arquivo": "rosto_3.jpg",
+     "seg": 2272.0
+    },
+    {
+     "arquivo": "corpo_1.jpg",
+     "seg": 2276.0
+    },
+    {
+     "arquivo": "corpo_2.jpg",
+     "seg": 1480.0
+    },
+    {
+     "arquivo": "corpo_3.jpg",
+     "seg": 2272.0
+    }
+   ],
+   "papel": "Cliente favorita do protagonista e cabeleireira/amiga",
+   "visual": "Long wavy blonde hair, blue eyes, wearing a green bikini top/swimsuit in some scenes",
+   "adulta": true,
+   "mulher": true,
+   "repetida": "p01"
+  }
+ ]
+}

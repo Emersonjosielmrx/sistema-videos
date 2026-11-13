@@ -1,0 +1,219 @@
+{
+  "last_run": "2026-07-02T16:19:42.714661+00:00",
+  "mode": "dry_run",
+  "sessions_valid": 0,
+  "projects_run": 16,
+  "projects_ok": 16,
+  "projects_error": 0,
+  "projects_skipped": 0,
+  "results": [
+    {
+      "name": "Atualizador de Sessões",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  - seebotsia: redirected to login: https://accounts.google.com/v3/signin/accountchooser?authus",
+        "  - emersonjosiel649: redirected to login: https://accounts.google.com/v3/signin/accountchooser?authus",
+        "",
+        "Pra criar perfis Chrome (persistentes):",
+        "  PYTHONUTF8=1 D:/hipercool-videos/venv/Scripts/python.exe D:\\projetos-navegador\\auto-refresh-sessoes/login_massa.py"
+      ],
+      "error": null
+    },
+    {
+      "name": "Fábrica de Chaves",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  canalalucinaai... sessao_expirada (0 chaves)",
+        "  seebotsia... sessao_expirada (0 chaves)",
+        "  emersonjosiel649... sessao_expirada (0 chaves)",
+        "",
+        "Resultado salvo em D:\\projetos-navegador\\key-factory\\discovered_keys.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Blogger + AdSense",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  Blog Receitas Rápidas (canalalucinaai) já existe, pulando.",
+        "  Blog Dicas de Saúde (seebotsia) já existe, pulando.",
+        "  Blog Mundo Animal (emersonjosiel649) já existe, pulando.",
+        "",
+        "Status salvo em D:\\projetos-navegador\\blogger-adsense\\blog_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Nuvem (Cloud Run/Registry/Functions)",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "",
+        "Status salvo em D:\\projetos-navegador\\cloud-run\\gcp_status.json",
+        "",
+        "Pra deploy real, instale gcloud CLI:",
+        "  https://cloud.google.com/sdk/docs/install"
+      ],
+      "error": null
+    },
+    {
+      "name": "Hospedagem Firebase",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] verificaria Firebase: canalalucinaai",
+        "  [DRY RUN] verificaria Firebase: seebotsia",
+        "  [DRY RUN] verificaria Firebase: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\firebase-hosting\\firebase_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Central de Chat (Agentes)",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] verificaria Chat: canalalucinaai",
+        "  [DRY RUN] verificaria Chat: seebotsia",
+        "  [DRY RUN] verificaria Chat: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\chat-hub-agentes\\chat_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Gerenciador YouTube",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] seebotsia: verificaria canal",
+        "",
+        "  [DRY RUN] emersonjosiel649: verificaria canal",
+        "",
+        "Status salvo em D:\\projetos-navegador\\youtube-manager\\youtube_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Redes Sociais",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  Posts na fila: 11",
+        "",
+        "Status salvo em D:\\projetos-navegador\\redes-sociais\\social_status.json",
+        "",
+        "[DRY RUN] Crosspost configurado. Use --live pra postar."
+      ],
+      "error": null
+    },
+    {
+      "name": "Armazenamento Drive",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] verificaria Drive: canalalucinaai",
+        "  [DRY RUN] verificaria Drive: seebotsia",
+        "  [DRY RUN] verificaria Drive: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\drive-storage\\drive_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "APIs da Nuvem",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] habilitaria APIs: canalalucinaai",
+        "  [DRY RUN] habilitaria APIs: seebotsia",
+        "  [DRY RUN] habilitaria APIs: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\cloud-apis\\apis_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "SEO + Search Console",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] verificaria Search Console: canalalucinaai",
+        "  [DRY RUN] verificaria Search Console: seebotsia",
+        "  [DRY RUN] verificaria Search Console: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\seo-search-console\\seo_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Compartilhamento de Banda",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "",
+        "Notebooks gerados em D:\\projetos-navegador\\bandwidth-sharing\\notebooks",
+        "Status salvo em D:\\projetos-navegador\\bandwidth-sharing\\bandwidth_status.json",
+        "",
+        "[DRY RUN] Use --live pra fazer upload pro Colab"
+      ],
+      "error": null
+    },
+    {
+      "name": "Mineração em Colab",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "Notebooks gerados em D:\\projetos-navegador\\mining-colab\\notebooks",
+        "Status: D:\\projetos-navegador\\mining-colab\\mining_status.json",
+        "",
+        "[DRY RUN] Notebooks criados localmente. Pra upload, use --live",
+        "IMPORTANTE: Configure wallet_xmr em config.json antes de rodar --live"
+      ],
+      "error": null
+    },
+    {
+      "name": "Trabalhadores Colab",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  Notebook criado: worker_seebotsia.ipynb",
+        "  Notebook criado: worker_emersonjosiel649.ipynb",
+        "",
+        "Notebooks em D:\\projetos-navegador\\colab-workers\\notebooks",
+        "Status: D:\\projetos-navegador\\colab-workers\\colab_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Volume no Meet",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] verificaria Meet: canalalucinaai",
+        "  [DRY RUN] verificaria Meet: seebotsia",
+        "  [DRY RUN] verificaria Meet: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\meet-volume\\meet_status.json"
+      ],
+      "error": null
+    },
+    {
+      "name": "Play Store",
+      "status": "ok",
+      "returncode": 0,
+      "output_lines": [
+        "  [DRY RUN] verificaria Play Console: canalalucinaai",
+        "  [DRY RUN] verificaria Play Console: seebotsia",
+        "  [DRY RUN] verificaria Play Console: emersonjosiel649",
+        "",
+        "Status salvo em D:\\projetos-navegador\\play-store\\play_status.json"
+      ],
+      "error": null
+    }
+  ]
+}

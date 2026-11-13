@@ -1,0 +1,102 @@
+{
+ "pautas": [
+  {
+   "id": "telas_abertas",
+   "tipo": "dor",
+   "ideia": "A confusão de alternar abas entre Instagram, WhatsApp e Telegram é resolvida centralizando todos os canais em um único painel de multi atendimento.",
+   "pergunta_cliente": "Dá para parar de trocar de aplicativo toda hora para atender?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "esquecimento_followup",
+   "tipo": "dor",
+   "ideia": "Contatos perdidos em conversas antigas de redes sociais passam a ser organizados no CRM integrado com IA para acompanhar cada negociação.",
+   "pergunta_cliente": "Como faço para não perder o histórico das conversas com os clientes?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "medo_atendimento_robotico",
+   "tipo": "objecao",
+   "ideia": "O receio de que o cliente perceba respostas mecânicas é superado pelo atendimento inteligente da IA no WhatsApp combinado à supervisão no CRM.",
+   "pergunta_cliente": "O atendimento por IA parece uma conversa natural?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "dificuldade_migrar_canais",
+   "tipo": "objecao",
+   "ideia": "O medo de perder conversas ao trocar de sistema acaba ao unificar WhatsApp, Instagram e Telegram no mesmo painel com CRM.",
+   "pergunta_cliente": "Preciso cancelar meus canais atuais para usar o painel único?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "equipe_nao_se_adapta",
+   "tipo": "objecao",
+   "ideia": "A preocupação com a complexidade técnica é eliminada com a interface de multi atendimento que reúne as mensagens em um só lugar.",
+   "pergunta_cliente": "Minha equipe vai conseguir usar o sistema sem complicação?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "painel_centralizado",
+   "tipo": "como_funciona",
+   "ideia": "As mensagens recebidas no Direct do Instagram, no Telegram e no WhatsApp chegam simultaneamente no painel de multi atendimento com CRM.",
+   "pergunta_cliente": "Como funciona para ver mensagens de canais diferentes no mesmo lugar?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "crm_integrado",
+   "tipo": "como_funciona",
+   "ideia": "Cada conversa iniciada no WhatsApp, Telegram ou Instagram alimenta automaticamente o CRM com IA para gestão do contato.",
+   "pergunta_cliente": "O CRM já vem integrado direto com as redes sociais?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "campanha_instagram_fechamento",
+   "tipo": "caso_de_uso",
+   "ideia": "Interessados que chegam pelo Instagram e pelo WhatsApp são atendidos e gerenciados pela mesma equipe através do painel centralizado.",
+   "pergunta_cliente": "Consigo atender quem vem de anúncios no Instagram e no WhatsApp juntos?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "divisao_mensagens_equipe",
+   "tipo": "caso_de_uso",
+   "ideia": "Vários atendentes respondem clientes de WhatsApp, Instagram, Face e Telegram ao mesmo tempo usando o recurso de multi atendimento.",
+   "pergunta_cliente": "Mais de uma pessoa pode atender os clientes no mesmo sistema?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "duvida_canais_aceitos",
+   "tipo": "pergunta_frequente",
+   "ideia": "O empresário descobre que pode conectar WhatsApp, Telegram, Instagram e Face no mesmo painel de multi atendimento com CRM e IA.",
+   "pergunta_cliente": "Quais redes e canais consigo conectar no painel?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "duvida_atendimento_simultaneo",
+   "tipo": "pergunta_frequente",
+   "ideia": "Dúvidas sobre atender clientes de plataformas diferentes são sanadas com a demonstração do multi atendimento unificado.",
+   "pergunta_cliente": "Dá para responder o Telegram e o WhatsApp na mesma tela?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "desordem_para_organizacao",
+   "tipo": "antes_depois",
+   "ideia": "De celulares corporativos passando de mão em mão para uma equipe inteira atendendo no mesmo painel com CRM e IA.",
+   "pergunta_cliente": "Consigo tirar o atendimento dos celulares físicos e centralizar?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "conversas_dispersas_para_crm",
+   "tipo": "antes_depois",
+   "ideia": "De informações de clientes espalhadas entre Face, Insta e WhatsApp para um histórico estruturado no CRM com IA.",
+   "pergunta_cliente": "Como vejo o histórico completo do cliente em um só lugar?",
+   "criada": "2026-11-03T18:00:33"
+  },
+  {
+   "id": "receio_configuracao_multi_aten",
+   "tipo": "objecao",
+   "ideia": "O receio de perder o controle das mensagens de vários canais é superado pela visualização clara de todos os chats no painel unificado.",
+   "pergunta_cliente": "Não vou me confundir com mensagens de redes diferentes juntas?",
+   "criada": "2026-11-03T18:00:33"
+  }
+ ]
+}

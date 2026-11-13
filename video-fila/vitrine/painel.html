@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<script>/* dona 23/10: no PC2 o painel fica dentro da moldura (20% da esquerda preto: falha no monitor) */
+if (new URLSearchParams(location.search).get("tela") === "pc2" && window.top === window) location.replace("moldura_pc2.html");</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telão de vídeos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* mesmo visual da Central de Vídeos (painel_web/index.html) em tamanho de TELÃO. Sem backdrop-filter/blur: os
+   notebooks são fracos. Letra grande (dono 22/10). */
+:root {
+  --background: 0 0% 0%; --foreground: 0 0% 95%; --card: 0 0% 4%; --primary: 152 70% 45%;
+  --muted: 220 13% 22%; --muted-foreground: 220 10% 75%; --destructive: 0 72% 55%; --border: 220 13% 28%;
+  --warn: 38 92% 55%; --info: 199 89% 60%; --violet: 262 83% 68%;
+}
+/* 23/10 (dona: "os avisos do painel têm que ter cores diferentes; muitas vezes pensamos que é a mesma coisa"): cada
+   quadro pinta o destaque (--primary) com a SUA cor; problema/alerta continua vermelho (--destructive) */
+body[data-q="saindo"]    { --primary: 145 72% 46%; }  /* vídeo no ar: verde */
+body[data-q="proximos"]  { --primary: 188 90% 48%; }  /* próximos: ciano */
+body[data-q="milviews"]  { --primary: 48 96% 53%; }   /* 5 mil views: amarelo */
+body[data-q="inscritos"] { --primary: 217 91% 62%; }  /* inscritos: azul */
+body[data-q="pendentes"] { --primary: 265 85% 68%; }  /* esperando você: roxo */
+body[data-q="producao"]  { --primary: 315 80% 62%; }  /* vídeos do dia: magenta */
+body[data-q="acima"]     { --primary: 45 96% 55%; }   /* acima do normal: dourado */
+body[data-q="dados"]     { --primary: 210 25% 80%; }  /* números: branco-azulado */
+body[data-q="bloqueios"] { --primary: 340 88% 63%; }  /* bloqueio/limite: rosa */
+body[data-q="opus"]      { --primary: 25 95% 55%; }   /* Opus/Flow/Veo: laranja */
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow:hidden; }
+body { font-family:'Plus Jakarta Sans', 'Ubuntu', system-ui, sans-serif; background:hsl(var(--background));
+  color:hsl(var(--foreground)); line-height:1.35; }
+svg.ic { width:1em; height:1em; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+
+.tela { display:flex; flex-direction:column; height:100vh; padding:2.2vh 2.2vw 1.6vh; gap:1.8vh; }
+.hero { position:relative; overflow:hidden; border-radius:18px; padding:1.8vh 2vw; flex-shrink:0;
+  background:linear-gradient(135deg, hsl(var(--primary) / .12), hsl(var(--background)) 55%);
+  border:1px solid hsl(var(--primary) / .22); box-shadow:0 0 22px -6px hsl(var(--primary) / .35);
+  display:flex; align-items:center; justify-content:space-between; gap:2vw; }
+.hero h1 { font-size:4.4vh; font-weight:800; letter-spacing:-.02em; display:flex; align-items:center; gap:1vw; }
+.hero h1 .ic { color:hsl(var(--primary)); }
+.hero p { color:hsl(var(--muted-foreground)); font-size:2.3vh; margin-top:.3vh; }
+.relogio { font-size:6.5vh; font-weight:800; letter-spacing:-.02em; font-variant-numeric:tabular-nums;
+  background:linear-gradient(to right, #34d399, #059669); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.prog { height:.5vh; border-radius:99px; background:hsl(var(--muted) / .45); overflow:hidden; flex-shrink:0; }
+.prog > i { display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg, #059669, #34d399); }
+main { flex:1; min-height:0; overflow:hidden; }
+footer { display:flex; gap:.8vw; justify-content:center; flex-wrap:wrap; flex-shrink:0; }
+
+.badge { display:inline-flex; align-items:center; gap:.5vw; padding:.4vh 1vw; border-radius:999px; font-size:2vh;
+  font-weight:600; border:1px solid transparent; white-space:nowrap; }
+.b-ok { background:hsl(var(--primary) / .1); color:hsl(var(--primary)); border-color:hsl(var(--primary) / .25); }
+.b-bad { background:hsl(var(--destructive) / .12); color:hsl(var(--destructive)); border-color:hsl(var(--destructive) / .3); }
+.b-warn { background:hsl(var(--warn) / .12); color:hsl(var(--warn)); border-color:hsl(var(--warn) / .3); }
+.b-info { background:hsl(var(--info) / .12); color:hsl(var(--info)); border-color:hsl(var(--info) / .3); }
+.b-mut { background:hsl(var(--muted) / .5); color:hsl(var(--muted-foreground)); border-color:hsl(var(--border) / .5); }
+.dot { width:1.2vh; height:1.2vh; border-radius:50%; display:inline-block; background:hsl(var(--primary)); }
+
+.card { background:hsl(var(--card)); border:1px solid hsl(var(--border) / .55); border-radius:16px; }
+.lista { display:flex; flex-direction:column; gap:1.3vh; }
+.item { display:flex; align-items:center; gap:2vw; padding:1.5vh 1.6vw; }
+.item.ok { border-color:hsl(var(--primary) / .3); background:hsl(var(--primary) / .04); }
+.item.bad { border-color:hsl(var(--destructive) / .4); background:hsl(var(--destructive) / .05); }
+.item.warn { border-color:hsl(var(--warn) / .35); background:hsl(var(--warn) / .04); }
+.hora { font-size:6vh; font-weight:800; letter-spacing:-.02em; min-width:22vw; font-variant-numeric:tabular-nums; line-height:1; }
+.hora.verde { color:hsl(var(--primary)); } .hora.amarelo { color:hsl(var(--warn)); } .hora.vermelho { color:hsl(var(--destructive)); }
+.info { flex:1; min-width:0; }
+.info b { font-size:3.6vh; font-weight:700; display:block; overflow-wrap:anywhere; }
+.info b.uma { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.info small { font-size:2.3vh; color:hsl(var(--muted-foreground)); display:flex; gap:.8vw; align-items:center; flex-wrap:wrap; margin-top:.4vh; }
+
+.btn { display:inline-flex; align-items:center; gap:.7vw; font:700 3vh 'Plus Jakarta Sans', sans-serif; padding:1.3vh 1.8vw;
+  border-radius:14px; cursor:pointer; flex-shrink:0; color:hsl(var(--primary)); background:hsl(var(--primary) / .12);
+  border:1px solid hsl(var(--primary) / .45); box-shadow:0 0 18px -6px hsl(var(--primary) / .5); }
+.btn:active { background:hsl(var(--primary) / .3); }
+
+/* destaque do próximo vídeo */
+.destaque { padding:2.4vh 2vw; display:flex; align-items:center; gap:3vw; position:relative; overflow:hidden;
+  border-color:hsl(var(--primary) / .35); box-shadow:0 0 26px -8px hsl(var(--primary) / .45); margin-bottom:1.6vh; }
+.destaque .gigante { font-size:16vh; font-weight:800; letter-spacing:-.04em; line-height:.95; font-variant-numeric:tabular-nums;
+  color:hsl(var(--primary)); }
+.destaque .rot { font-size:2.4vh; color:hsl(var(--muted-foreground)); font-weight:600; text-transform:uppercase; letter-spacing:.08em; }
+.destaque .canal { font-size:5.4vh; font-weight:800; letter-spacing:-.02em; margin-top:.6vh; overflow-wrap:anywhere; }
+
+/* números (StatCard da Central) */
+.grade { display:grid; grid-template-columns:repeat(auto-fit, minmax(23vw, 1fr)); gap:1.6vh 1.2vw; }
+.stat { position:relative; overflow:hidden; padding:2vh 1.4vw; display:flex; flex-direction:column; gap:1vh; }
+.stat .blob { position:absolute; top:-5vh; right:-3vw; width:16vh; height:16vh; border-radius:50%;
+  background:radial-gradient(circle, hsl(var(--primary) / .22), transparent 70%); }
+.stat .ico { display:inline-flex; border-radius:12px; padding:1vh; width:fit-content; font-size:3.4vh;
+  background:hsl(var(--primary) / .15); color:hsl(var(--primary)); box-shadow:0 0 18px -5px hsl(var(--primary) / .35); }
+.stat .vl { font-size:8vh; font-weight:800; letter-spacing:-.03em; line-height:1; position:relative; }
+.stat .vl small { font-size:3vh; font-weight:600; color:hsl(var(--muted-foreground)); }
+.stat .lb { font-size:2.4vh; color:hsl(var(--muted-foreground)); font-weight:500; position:relative; }
+.stat.warn .ico { background:hsl(var(--warn) / .15); color:hsl(var(--warn)); } .stat.warn .blob { background:radial-gradient(circle, hsl(var(--warn) / .2), transparent 70%); }
+.stat.bad .ico { background:hsl(var(--destructive) / .15); color:hsl(var(--destructive)); } .stat.bad .vl { color:hsl(var(--destructive)); }
+.stat.bad .blob { background:radial-gradient(circle, hsl(var(--destructive) / .22), transparent 70%); }
+
+/* ranking (01/11): 10 por página em 2 colunas, título inteiro em até 3 linhas */
+.rank { display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:1vh 1vw; height:calc(100% - 5.5vh); }
+.rank .card { padding:.7vh 1.1vw; display:flex; flex-direction:column; justify-content:center; gap:.3vh; min-height:0; overflow:hidden; }
+.rank .topo { display:flex; align-items:baseline; gap:1vw; }
+.rank .pos { font-size:3vh; font-weight:800; color:hsl(var(--muted-foreground)); min-width:4.5vw; font-variant-numeric:tabular-nums; }
+.rank .vw { font-size:4.4vh; font-weight:800; color:hsl(var(--primary)); font-variant-numeric:tabular-nums; line-height:1; }
+.rank .cn { margin-left:auto; font-size:2vh; color:hsl(var(--muted-foreground)); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:18vw; }
+.rank .tt { font-size:2.4vh; font-weight:700; line-height:1.28; padding-bottom:.2vh; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.msg { padding:1.4vh 1.4vw; }
+.msg .cab { display:flex; align-items:center; gap:.8vw; font-size:2.2vh; color:hsl(var(--muted-foreground)); font-weight:600; }
+.msg p { font-size:2.8vh; white-space:pre-line; margin-top:.6vh; max-height:15vh; overflow:hidden; overflow-wrap:anywhere; }
+
+/* acima do normal (12/11): 1 linha por canal, views e inscritos lado a lado */
+/* 12/11 dona: tabela de 1 coluna (em 2 colunas o nome virava 1 letra por linha na tela 1024x768 do STI) */
+.acima { display:flex; flex-direction:column; gap:.6vh; }
+.acima .lin { display:grid; grid-template-columns:5vh minmax(0, 1fr) 30vw 30vw; align-items:center; gap:1.5vw;
+  padding:.4vh 1.4vw; line-height:1.2; }
+.acima .cab { padding:0 1.4vw; font-size:2vh; font-weight:700; color:hsl(var(--muted-foreground)); text-transform:uppercase;
+  letter-spacing:.06em; }
+.acima .mk { font-size:3.4vh; line-height:1; text-align:center; }
+.acima .nm { font-size:3.2vh; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.acima .met { display:flex; align-items:baseline; gap:1vw; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:0; }
+.acima .met b { font-size:3.6vh; font-weight:800; min-width:11vw; text-align:right; }
+.acima .met small { font-size:2.1vh; color:hsl(var(--muted-foreground)); overflow:hidden; text-overflow:ellipsis; }
+.acima .met.on b { color:hsl(var(--primary)); } .acima .met.off b { color:hsl(var(--muted-foreground)); font-weight:600; }
+.redes { display:grid; grid-template-columns:repeat(3, 1fr); gap:1.4vh 1.2vw; margin-top:1.6vh; }
+.grande-status { font-size:13vh; font-weight:800; letter-spacing:-.04em; line-height:1; }
+.vazio { padding:6vh 2vw; text-align:center; color:hsl(var(--muted-foreground)); font-size:4vh; border:1px dashed hsl(var(--border) / .6); border-radius:16px; margin-top:4vh; }
+.sub { font-size:2.4vh; color:hsl(var(--muted-foreground)); margin-bottom:1.4vh; }
+
+#alerta { display:none; position:fixed; inset:0; z-index:9; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:4vw; background:radial-gradient(circle at center, #3b0a0a, #000 75%); }
+#alerta h2 { font-size:11vh; font-weight:800; color:hsl(var(--destructive)); letter-spacing:-.03em; }
+#alerta p { font-size:4vh; margin-top:2vh; } #alerta small { font-size:2.6vh; color:hsl(var(--muted-foreground)); margin-top:2vh; display:block; }
+/* pop-up de conquista (novo inscrito / mil views) */
+#popup { display:none; position:fixed; inset:0; z-index:7; align-items:center; justify-content:center;
+  background:radial-gradient(circle at center, hsl(var(--primary) / .18), rgba(0,0,0,.92) 70%); }
+#popup .caixa { width:78vw; padding:5vh 4vw; text-align:center; border-radius:24px; background:hsl(var(--card));
+  border:2px solid hsl(var(--primary) / .6); box-shadow:0 0 60px -10px hsl(var(--primary) / .8); animation:entra .5s cubic-bezier(.2,.8,.2,1) both; }
+#popup .ico { display:inline-flex; font-size:10vh; padding:2vh; border-radius:24px; color:hsl(var(--primary));
+  background:hsl(var(--primary) / .15); box-shadow:0 0 30px -6px hsl(var(--primary) / .6); }
+#popup .num { font-size:15vh; font-weight:800; letter-spacing:-.04em; line-height:1; margin-top:2vh; color:hsl(var(--primary)); }
+#popup .tipo { font-size:4vh; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:hsl(var(--primary)); }
+#popup .canal { font-size:5.5vh; font-weight:800; margin-top:2vh; overflow-wrap:anywhere; }
+#popup .tit { font-size:3.4vh; color:hsl(var(--muted-foreground)); margin-top:1vh; overflow-wrap:anywhere; }
+#popup .btn { margin-top:3vh; font-size:3.6vh; }
+@keyframes entra { from { opacity:0; transform:scale(.85); } to { opacity:1; transform:none; } }
+#toast { position:fixed; right:2vw; bottom:6vh; display:none; z-index:8; font-size:3vh; font-weight:700; padding:1.6vh 2vw; border-radius:14px;
+  color:hsl(var(--primary)); background:hsl(var(--card)); border:1px solid hsl(var(--primary) / .5); box-shadow:0 0 24px -6px hsl(var(--primary) / .6); }
+</style>
+</head>
+<body>
+<div class="tela">
+  <div class="hero"><div><h1 id="titulo">Telão</h1><p id="subtitulo"></p></div><div class="relogio" id="relogio">--:--</div></div>
+  <div class="prog"><i id="barra"></i></div>
+  <main id="quadro"></main>
+  <footer id="rodape"></footer>
+</div>
+<div id="alerta"><h2 id="alerta_tit">PC1 SEM SINAL</h2><p id="alerta_txt"></p>
+  <small id="alerta_dica">O PC1 parou de mandar os dados. Confira se ele está ligado e com internet.</small></div>
+<div id="atrasado" style="display:none;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(120,90,0,.85);color:#fff;font:600 18px/1.3 system-ui,sans-serif;padding:8px 18px;border-radius:10px;z-index:50"></div>
+<div id="popup"><div class="caixa" id="popup_caixa"></div></div>
+<div id="toast"></div>
+<script>
+"use strict";
+const TELA = new URLSearchParams(location.search).get("tela") || "acer";
+const SEG = 20;  // cada quadro fica 20 s
+const IC = {  // ícones no traço da Central (lucide)
+  play:'<polygon points="6 3 20 12 6 21 6 3"/>', clock:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  eye:'<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>', chart:'<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>', bot:'<rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>', users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>', film:'<rect x="2" y="2" width="20" height="20" rx="2.2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/>',
+  hd:'<line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  cpu:'<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/>', alert:'<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+};
+const ic = n => `<svg class="ic" viewBox="0 0 24 24">${IC[n] || ""}</svg>`;
+const Q_INFO = {
+  saindo:["Longos que saíram","Vídeos longos que abriram nas últimas 24 h","film"], proximos:["Próximos longos","Horário em que cada vídeo longo entra no ar","clock"],
+  milviews:["5 mil visualizações","Vídeos que passaram de 5.000 views (todos os canais, views ao vivo)","eye"],
+  maisvistos:["Ranking de todos os tempos","Os vídeos mais vistos dos canais, do mais visto pro menos","chart"],
+  rankdia:["Ranking do dia","Os vídeos que mais ganharam views hoje","eye"],
+  inscritos:["Novos inscritos","Quem se inscreveu nas últimas 48 h","users"], pendentes:["Esperando você","Vídeos parados até você olhar","alert"],
+  producao:["Vídeos do dia","Feitos hoje e postados em todas as redes","film"],
+  acima:["Acima do normal hoje","Canais com views ou inscritos 2× acima da média do canal","chart"], dados:["Hoje em números","Produção, agenda e saúde do PC1","chart"],
+  bloqueios:["Bloqueios do Studio","Canais esperando o limite do YouTube","shield"], opus:["Opus e Flow","Quando o crédito volta","bot"],
+};
+let D = null, i = 0, inicio = Date.now();
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const vazio = t => `<div class="vazio">${esc(t)}</div>`;
+const num = n => Number(n).toLocaleString("pt-BR");
+
+function pedir(tipo, valor) {
+  fetch(`/pedido?tipo=${tipo}&v=${encodeURIComponent(valor)}`).then(r => r.text()).then(t => {
+    const a = document.getElementById("toast"); a.textContent = t; a.style.display = "block";
+    setTimeout(() => a.style.display = "none", 6000);
+  });
+}
+// valor vai escapado num data-* entre aspas duplas (revisão 23/10: nome com apóstrofo quebrava o onclick='...')
+const botao = (tipo, valor, texto) => valor
+  ? `<button class="btn" data-tipo="${esc(tipo)}" data-v="${esc(valor)}" onclick="pedir(this.dataset.tipo, this.dataset.v)">${ic("play")}${esc(texto)}</button>` : "";
+
+// ranking: cartão inteiro abre o vídeo (toque), posição + views ao vivo + canal + título
+const POR_PAG = 10;
+let mvVez = -1, mvBase = 0, mvFatia = -1;
+const slotRanking = () => Math.min(3, Math.floor((Date.now() - inicio) / 1000 / (SEG / 4)));
+const cartoesRanking = (lista, desde) => `<div class="rank">` + lista.map((v, n) => `<div class="card ok"
+    style="cursor:pointer" data-v="${esc(v.url || "")}" onclick="this.dataset.v && pedir('abrir', this.dataset.v)">
+    <div class="topo"><span class="pos">${desde + n + 1}º</span><span class="vw">${num(v.views)}</span>
+    <span class="cn">${esc(v.canal)} · ${esc(v.em)}</span></div><div class="tt">${esc(v.titulo)}</div></div>`).join("") + `</div>`;
+
+const Q = {
+  proximos() {
+    const p = D.proximos || [];
+    if (!p.length) return vazio("Nenhum vídeo longo agendado para abrir.");
+    const [a, ...resto] = p;
+    return `<div class="card destaque"><div><div class="rot">O próximo abre às</div><div class="gigante">${esc(a.hora)}</div></div>
+      <div class="info"><div class="canal">${esc(a.canal)}</div><small><span class="badge b-ok">${esc(a.projeto)}</span><span class="badge b-mut">${esc(a.tipo)}</span></small></div></div>
+      <div class="lista">` + resto.slice(0, 4).map(v => `<div class="card item"><div class="hora amarelo">${esc(v.hora)}</div>
+      <div class="info"><b class="uma">${esc(v.canal)}</b><small>${esc(v.projeto)}</small></div></div>`).join("") + `</div>`;
+  },
+  saindo() {
+    const s = D.saidos || [];
+    if (!s.length) return vazio("Nenhum vídeo longo abriu nas últimas 24 h.");
+    return `<div class="lista">` + s.slice(0, 5).map(v => `<div class="card item ok"><div class="hora verde">${esc(v.hora)}</div>
+      <div class="info"><b class="uma">${esc(v.canal)}</b><small><span class="badge b-ok">${esc(v.projeto)}</span>${esc(v.tipo)}</small></div>
+      ${botao("abrir", v.url, "Abrir")}</div>`).join("") + `</div>`;
+  },
+  milviews() {
+    // 01/11 dona: lia os avisos congelados (1.075, 1.210 views de 23/10) e cortava em 4; agora a lista ao vivo, todos
+    const m = D.milviews || [];
+    if (!m.length) return vazio("Nenhum vídeo passou de 5 mil visualizações ainda.");
+    return `<div class="sub">${m.length} vídeo(s) com 5.000+${D.views_lido ? ` · views lidas às ${esc(D.views_lido)}` : ""}</div>`
+      + cartoesRanking(m.slice(0, 10), 0);
+  },
+  maisvistos() {
+    // 01/11 dona ("faça um ranking real acima de 1.200"): 5 por página sorteada = quase sempre a cauda de 1.0xx e o topo
+    // sumia. Agora 10 por página; a cada vez que o quadro volta: top 10 primeiro, depois 3 páginas seguintes EM ORDEM
+    // (continua de onde parou), 5 s cada
+    const m = D.maisvistos || [];
+    if (!m.length) return vazio("Sem a lista de vídeos dos canais ainda.");
+    const pag = Math.ceil(m.length / POR_PAG);
+    if (mvVez !== i) { if (mvVez >= 0) mvBase += 3; mvVez = i; }
+    const fatia = slotRanking();
+    const p = fatia === 0 || pag <= 1 ? 0 : 1 + (mvBase + fatia - 1) % (pag - 1);
+    return `<div class="sub">${m.length} vídeos mais vistos de todos os tempos · página ${p + 1} de ${pag}`
+      + `${D.views_lido ? ` · views lidas às ${esc(D.views_lido)}` : ""}</div>` + cartoesRanking(m.slice(p * POR_PAG, (p + 1) * POR_PAG), p * POR_PAG);
+  },
+  rankdia() {
+    const r = D.rank_dia || {}, m = r.itens || [];
+    if (!m.length) return vazio("Nenhum vídeo ganhou views hoje ainda.");
+    return `<div class="sub">Views ganhas hoje${r.desde ? ` (desde ${esc(r.desde)})` : ""}${D.views_lido ? ` · lidas às ${esc(D.views_lido)}` : ""}</div>`
+      + cartoesRanking(m.slice(0, 10).map(v => ({...v, em: `${num(v.total)} no total`})), 0).replace(/class="vw">/g, 'class="vw">+');
+  },
+  inscritos() {
+    const s = D.inscritos || [];
+    if (!s.length) return vazio("Nenhum inscrito novo nas últimas 48 h.");
+    return `<div class="lista">` + s.slice(0, 6).map(v => `<div class="card item ok"><div class="hora verde" style="min-width:12vw">+${esc(v.ganhou)}</div>
+      <div class="info"><b>${esc(v.canal)}</b><small>${v.total ? `<span class="badge b-ok">${esc(v.total)} inscritos agora</span>` : ""}${esc(v.em)}</small></div></div>`).join("") + `</div>`;
+  },
+  pendentes() {
+    const p = D.pendentes || [];
+    if (!p.length) return vazio("Nada esperando você.");
+    return `<div class="sub">${p.length} vídeo(s) parados. Toque em <b>Ver</b> para assistir aqui; aprovar continua pelo Telegram.</div>
+      <div class="lista">` + p.slice(0, 5).map(v => `<div class="card item warn"><div class="info"><b>${esc(v.nome)}</b>
+      <small><span class="badge b-warn">${esc(v.projeto)}</span>${esc(v.motivo)}</small></div>${botao("ver", v.id, "Ver")}</div>`).join("") + `</div>`;
+  },
+  producao() {
+    const p = D.producao;
+    if (!p) return vazio("Sem os números do dia ainda.");
+    const st = (vl, lb, icone, cls = "") => `<div class="card stat ${cls}"><div class="blob"></div><div class="ico">${ic(icone)}</div>
+      <div class="vl">${vl ?? "—"}</div><div class="lb">${lb}</div></div>`;
+    const yt = p.youtube_no_ar || {}, tt = p.tiktok_tipo || {}, ig = p.instagram_tipo || {};
+    const det = o => [o.short ? `${num(o.short)} shorts` : "", o.longo ? `${num(o.longo)} longos` : "", o.veo ? `${num(o.veo)} Veo` : ""].filter(Boolean).join(" · ") || "nenhum";
+    return `<div class="grade" style="grid-template-columns:repeat(3,1fr)">` +
+      st(num(p.shorts_feitos ?? 0), "Shorts feitos hoje (todas as máquinas)", "film") +
+      st(num(p.longos_feitos ?? 0), "longos prontos e subidos hoje", "film") +
+      st(num(p.total_postado ?? 0), "postados hoje nas 3 redes", "send") + `</div>
+      <div class="redes">` +
+      st(num((yt.short || 0) + (yt.longo || 0) + (yt.veo || 0)), `YouTube no ar · ${det(yt)}`, "play") +
+      st(num(p.tiktok || 0), `TikTok · ${det(tt)}`, "play") +
+      st(num(p.instagram || 0), `Instagram · ${det(ig)}`, "play") + `</div>`;
+  },
+  acima() {
+    const a = D.acima;
+    if (!a) return vazio("Painel de canais fora: sem a medição de hoje.");
+    const c = a.canais || [];
+    if (!c.length) return vazio("Nenhum canal acima do normal hoje (ainda).");
+    const duas = c.filter(x => x.views_acima && x.insc_acima).length;
+    const met = (on, v, r, med) => `<div class="met ${on ? "on" : "off"}"><b>+${num(v)}</b><small>${med ? `${r}× a média` : v ? "canal novo" : ""}</small></div>`;
+    return `<div class="sub">${c.length} canal(is) acima do normal · ⭐ ${duas} nos dois · 🔥 só um · lidos às ${esc(a.em)}</div>
+      <div class="acima"><div class="lin cab"><span></span><span>Canal</span><span>Views hoje</span><span>Inscritos hoje</span></div>` +
+      c.slice(0, 8).map(x => `<div class="card lin ${x.views_acima && x.insc_acima ? "ok" : ""}">
+      <span class="mk">${x.views_acima && x.insc_acima ? "⭐" : "🔥"}</span><span class="nm">${esc(x.canal)}</span>
+      ${met(x.views_acima, x.views_hoje, x.rv, x.media_views)}${met(x.insc_acima, x.insc_hoje, x.ri, x.media_insc)}</div>`).join("") +
+      (c.length > 8 ? `<div class="sub" style="margin:.4vh 0 0">+ ${c.length - 8}: ${esc(c.slice(8).map(x => x.canal).join(", "))}</div>` : "") + `</div>`;
+  },
+  dados() {
+    const h = D.hoje || {}, ag = D.agendados || {}, pc = D.pc1 || {}, disco = pc.disco_livre_gb || {};
+    const total = Object.values(h).reduce((a, b) => a + b, 0);
+    const st = (vl, lb, icone, cls = "", un = "") => `<div class="card stat ${cls}"><div class="blob"></div><div class="ico">${ic(icone)}</div>
+      <div class="vl">${vl}${un ? `<small> ${un}</small>` : ""}</div><div class="lb">${esc(lb)}</div></div>`;
+    return `<div class="grade">` + st(total, "vídeos abrindo hoje", "film") +
+      Object.entries(h).map(([k, v]) => st(v, `${k} hoje`, "play")).join("") +
+      Object.entries(ag).map(([k, v]) => st(v, `${k} agendados`, "clock", "warn")).join("") +
+      Object.entries(disco).map(([k, v]) => st(v, `livres no disco ${k}: do PC1`, "hd", v < 5 ? "bad" : v < 12 ? "warn" : "", "GB")).join("") +
+      (pc.ram_livre_gb != null ? st(pc.ram_livre_gb, "RAM livre no PC1", "cpu", pc.ram_livre_gb < 2 ? "bad" : "", "GB") : "") + `</div>`;
+  },
+  bloqueios() {
+    const b = D.bloqueios || {};
+    const lim = (b.limite || []).map(x => `<div class="card item bad"><div class="hora vermelho">${esc(x.ate)}</div>
+      <div class="info"><b>${esc(x.canal)}</b><small>Limite diário do YouTube: espera até esse horário, sem tentar</small></div></div>`).join("");
+    const ch = (b.checagem || []).map(x => `<div class="card msg"><div class="cab"><span class="badge b-warn">${esc(x.video)}</span>${esc(x.em)}</div><p>${esc(x.texto)}</p></div>`).join("");
+    return (lim || ch) ? `<div class="lista">${lim}${ch}</div>`
+      : `<div class="card destaque"><div class="grande-status" style="color:hsl(var(--primary))">${ic("check")}</div><div class="info"><div class="canal">Nenhum canal bloqueado</div></div></div>`;
+  },
+  opus() {
+    const o = D.opus, f = D.flow || [];
+    let h = "";
+    if (!o) h += vazio("Sem notícia do Opus.");
+    else if (o.ok) h += `<div class="card destaque"><div class="grande-status" style="color:hsl(var(--primary))">OK</div>
+      <div class="info"><div class="canal">Opus funcionando</div><small>${esc(o.em)}</small></div></div>`;
+    else h += `<div class="card destaque" style="border-color:hsl(var(--warn) / .4);box-shadow:0 0 26px -8px hsl(var(--warn) / .45)">
+      <div><div class="rot">Opus sem crédito · volta</div><div class="grande-status" style="color:hsl(var(--warn));font-size:9vh">${esc(o.volta || "sem previsão")}</div></div></div>
+      <div class="card msg"><div class="cab"><span class="badge b-warn">opus-monitor</span>${esc(o.em)}</div><p>${esc(o.texto)}</p></div>`;
+    h += `<div class="sub" style="margin-top:2vh;font-size:3vh;font-weight:700;color:hsl(var(--foreground))">Flow / Veo</div>` +
+      (f.length ? f.slice(0, 1).map(m => `<div class="card msg"><div class="cab"><span class="badge b-info">flow</span>${esc(m.em)}</div><p>${esc(m.texto)}</p></div>`).join("")
+                : `<div class="sub">Sem aviso do Flow.</div>`);
+    return h;
+  },
+};
+
+function desenhar() {
+  if (!D) { document.getElementById("quadro").innerHTML = vazio("Esperando os dados do PC1…"); return; }
+  const ordem = (D.telas && D.telas[TELA]) || Object.keys(Q);
+  const nome = ordem[i % ordem.length];
+  const [tit, sub, icone] = Q_INFO[nome] || [nome, "", "chart"];
+  document.body.dataset.q = nome;  // 23/10: cor própria de cada quadro (CSS body[data-q])
+  document.getElementById("titulo").innerHTML = ic(icone) + esc(tit);
+  document.getElementById("subtitulo").textContent = sub;
+  try { document.getElementById("quadro").innerHTML = Q[nome](); }
+  catch (e) { document.getElementById("quadro").innerHTML = vazio("Quadro com erro: " + e.message); }
+  document.getElementById("rodape").innerHTML = ordem.map(n =>
+    `<span class="badge ${n === nome ? "b-ok" : "b-mut"}">${n === nome ? '<span class="dot"></span>' : ""}${esc((Q_INFO[n] || [n])[0])}</span>`).join("");
+}
+
+function carregar() {
+  fetch("painel.json?t=" + Date.now()).then(r => r.json())
+    .then(j => { const primeiro = !D; D = j; vigiar(); novidades(); if (primeiro) desenhar(); }).catch(() => vigiar());
+}
+
+// ── pop-up de conquista: cada inscrito/mil views aparece UMA vez, na hora (até 45 min depois, se o telão estava
+// tocando um vídeo); os já mostrados ficam guardados neste navegador.
+const FILA_POP = [];
+let mostrando = false;
+function vistos() { try { return new Set(JSON.parse(localStorage.getItem("eventos_vistos") || "null") || []); } catch (e) { return null; } }
+function guardar(s) { try { localStorage.setItem("eventos_vistos", JSON.stringify([...s].slice(-300))); } catch (e) {} }
+function novidades() {
+  const ev = D.eventos || [];
+  let v = vistos();
+  if (v === null || !localStorage.getItem("eventos_vistos")) {  // 1ª vez: o que já tinha acontecido não vira pop-up
+    v = new Set(ev.map(e => e.id)); guardar(v); return;
+  }
+  const limite = Date.now() / 1000 - 45 * 60;
+  for (const e of ev.slice().reverse()) {
+    if (!v.has(e.id) && (e.t || 0) >= limite && !FILA_POP.some(x => x.id === e.id)) FILA_POP.push(e);
+    if (!v.has(e.id) && (e.t || 0) < limite) v.add(e.id);
+  }
+  guardar(v);
+  if (!mostrando) proximoPop();
+}
+function proximoPop() {
+  const e = FILA_POP.shift();
+  const p = document.getElementById("popup");
+  if (!e) { mostrando = false; p.style.display = "none"; return; }
+  mostrando = true;
+  const mil = e.tipo === "mil";
+  p.style.setProperty("--primary", mil ? "48 96% 53%" : "217 91% 62%");  // 23/10: mil views amarelo, inscrito azul
+  document.getElementById("popup_caixa").innerHTML = mil
+    ? `<div class="ico">${ic("eye")}</div><div class="num">${e.views ? num(e.views) : "1.000"}</div><div class="tipo">visualizações!</div>
+       <div class="canal">${esc(e.canal)}</div><div class="tit">${esc(e.titulo)}</div>${e.url ? botao("abrir", e.url, "Abrir o vídeo") : ""}`
+    : `<div class="ico">${ic("users")}</div><div class="num">+${esc(e.ganhou)}</div><div class="tipo">novo${e.ganhou > 1 ? "s" : ""} inscrito${e.ganhou > 1 ? "s" : ""}!</div>
+       <div class="canal">${esc(e.canal)}</div><div class="tit">${e.total ? esc(e.total) + " inscritos agora" : ""}</div>`;
+  p.style.display = "flex";
+  const v = vistos() || new Set(); v.add(e.id); guardar(v);
+  setTimeout(proximoPop, 12000);
+}
+
+let semConexaoDesde = 0;  // 30/10: desde quando esta máquina não alcança o PC1 (0 = alcança)
+function vigiar() {
+  // vigia de FORA (dono 22/10): se o PC1 travar ou cair, quem avisa é o telão
+  const al = document.getElementById("alerta");
+  if (!D || !D.gerado_em) { al.style.display = "none"; return; }
+  const min = Math.floor((Date.now() - new Date(D.gerado_em).getTime()) / 60000);
+  const mostra = (tit, txt, dica) => {
+    document.getElementById("alerta_tit").textContent = tit;
+    document.getElementById("alerta_txt").textContent = txt;
+    document.getElementById("alerta_dica").textContent = dica;
+    al.style.display = "flex";
+  };
+  const atr = document.getElementById("atrasado");
+  if (min >= 12) {
+    // 28/10 (dona): "sem sinal" só se NÃO houver conexão nenhuma. Dado atrasado com o PC1 alcançável = faixa pequena
+    // (o programa que manda o painel travou, as máquinas seguem trabalhando)
+    const hora = new Date(D.gerado_em).toLocaleTimeString("pt-BR", {hour:"2-digit", minute:"2-digit"});
+    fetch("/pc1?t=" + Date.now()).then(r => r.json()).then(j => {
+      if (j.conectado) {
+        al.style.display = "none";
+        atr.textContent = `Conectado ao PC1 · dados do painel atrasados (último às ${hora})`;
+        atr.style.display = "block";
+      } else {
+        // 30/10 (dona: "esse aviso só tem que aparecer se realmente houver essa perda e por um período que atrapalhe"):
+        // tela cheia só com 5 min SEGUIDOS sem alcançar o PC1; antes disso, só a faixa pequena
+        if (!semConexaoDesde) semConexaoDesde = Date.now();
+        const seg = Math.floor((Date.now() - semConexaoDesde) / 1000);
+        if (seg >= 300) {
+          atr.style.display = "none";
+          mostra("SEM CONEXÃO COM O PC1", `Esta máquina não alcança o PC1 há ${Math.floor(seg / 60)} min · último dado às ${hora}`,
+            "Confira se o PC1 está ligado e se esta máquina está com internet.");
+        } else {
+          al.style.display = "none";
+          atr.textContent = `Verificando a conexão com o PC1 · dados do painel atrasados (último às ${hora})`;
+          atr.style.display = "block";
+        }
+        return;
+      }
+      semConexaoDesde = 0;
+    }).catch(() => { atr.textContent = `Dados do painel atrasados (último às ${hora})`; atr.style.display = "block"; });
+    return;
+  }
+  semConexaoDesde = 0;
+  atr.style.display = "none";
+  // 23/10 (dona): qualquer máquina fora há 6+ min também vira alerta de tela cheia (o PC2 perde a placa Wi-Fi)
+  const fora = Object.entries(D.fora || {});
+  if (fora.length) {
+    const [nome, m] = fora[0];
+    mostra(`${nome} SEM SINAL`, fora.map(([n, x]) => `${n}: fora há ${x} min`).join(" · "),
+      nome === "PC2" ? "O vigia da placa Wi-Fi não conseguiu religar sozinho: desative e ative a placa de rede do PC2 (ou reinicie)."
+                     : "Confira se está ligado e com internet.");
+  } else if (D.deslogado && D.deslogado.maquina) {
+    // 29/10 (dona): a conta do like/comentário caiu no telão -> aviso MUITO claro na própria tela
+    const d = D.deslogado;
+    mostra(`CONTA DO LIKE DESLOGADA (${String(d.maquina).toUpperCase()})`,
+      `${d.seguidos || 1} vídeo(s) exibido(s) sem like e sem comentário (${d.resultado || ""}) desde ${String(d.desde || "").slice(5, 16).replace("T", " ")}`,
+      `Entre de novo com a conta pessoal: ${d.como_resolver || "python D:\video-fila\vitrine.py --logar-telao"}`);
+  } else al.style.display = "none";
+}
+
+function tique() {
+  document.getElementById("relogio").textContent = new Date().toLocaleTimeString("pt-BR", {hour:"2-digit", minute:"2-digit"});
+  const pass = (Date.now() - inicio) / 1000;
+  document.getElementById("barra").style.width = Math.min(100, pass / SEG * 100) + "%";
+  if (pass >= SEG) { i++; inicio = Date.now(); mvFatia = -1; desenhar(); }
+  else if (D && document.body.dataset.q === "maisvistos" && slotRanking() !== mvFatia) { mvFatia = slotRanking(); desenhar(); }
+}
+
+carregar(); desenhar();
+setInterval(carregar, 30000);
+setInterval(() => { if (D) desenhar(); }, 30500);
+setInterval(tique, 1000);
+// 30/10: o Chrome do telão do PC2 ficou de 27 a 30/10 com o painel velho (só pega o novo quando reabre).
+// Painel trocado no disco = recarrega sozinho (confere a cada 5 min).
+let versaoPainel = null;
+setInterval(() => {
+  fetch("painel.html", {method: "HEAD", cache: "no-store"}).then(r => {
+    const v = r.ok && r.headers.get("Last-Modified");
+    if (!v) return;
+    if (versaoPainel && v !== versaoPainel) location.reload();
+    versaoPainel = v;
+  }).catch(() => {});
+}, 300000);
+</script>
+</body>
+</html>

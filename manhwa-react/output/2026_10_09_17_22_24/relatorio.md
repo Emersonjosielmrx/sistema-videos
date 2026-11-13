@@ -1,0 +1,138 @@
+# Relatorio - 2026-10-09 17-22-24.mp4
+
+- Duracao original: 1043.7s
+- Status: rejected
+- Canal: inventoreact
+- Transcricao: groq:whisper-large-v3
+- Editorial: score=2 usable=False - Gravação de workshop/aula sobre Brand Book e automação de marketing, sem reações de react a conteúdo externo — é conteúdo educacional próprio do criador, não um react.
+- Assunto: Workshop de Brand Book e identidade visual para agências de marketing | Obra: None
+
+## Trechos removidos pelo editorial
+
+- 01:48.00-02:02.00: Criador perguntando se estão vivos, respondendo gatinha, silêncios longos sem conteúdo útil
+
+## Transcricao (CRIADOR = legendado; CONTEUDO = audio do video reagido)
+
+- [00:00.00] **creator**: Hoje a gente vai trazer um workshop pra vocês muito bom, muito bom mesmo.
+- [00:06.00] **creator**: A gente tá naquela linha de oferecer, de fazer a linha, né?
+- [00:14.00] **creator**: Desde a captação até a reunião, o contrato, né?
+- [00:22.00] **creator**: E, enfim, é...
+- [00:52.00] **creator**: E o que que é isso, né? Pra quem não sabe, é justamente as identidades da pessoa que... é uma coisa que você pode oferecer pra pessoa que fechou o contrato com você agora, né?
+- [01:05.00] **creator**: Você pode oferecer pra ela, tipo, ah, faz parte do serviço, vou te oferecer isso.
+- [01:10.00] **creator**: Ou você pode cobrar. Que é pra gerar pra pessoa a identidade visual dela, né?
+- [01:17.00] **creator**: As cores, as cores ideais, as paletas de cores que você vai utilizar no negócio.
+- [01:26.00] **creator**: Entende? Tem negócio que você sabe que tem cor que não combina.
+- [01:30.00] **creator**: Já viu uma farmácia preta?
+- [01:33.00] **creator**: Alguém aqui já viu uma farmácia preta com vermelho?
+- [01:37.00] **creator**: Não, né? Porque isso aí é cor de barbearia. Barbearia agora, a maioria das barbearias são preto, né?
+- [01:46.36] **creator**: Então, cada negócio tem uma cor, tem uma identidade que a gente visualiza na nossa mente como que tem que ser, né?
+- [01:56.92] **creator**: Você vai num hospital, como que você enxerga um hospital? Como que você enxerga que vai ser as cores lá?
+- [02:03.40] **creator**: Você acredita que lá vai ser branco, o ambiente limpo, branco, azul claro, cores claras.
+- [02:10.40] **creator**: Então, é... o Brand Book, ele vai guiar o teu cliente até as cores ideais da marca, o posicionamento da marca,
+- [02:23.40] **creator**: De repente os objetivos que aquela pessoa tem n As diretrizes ideias ali de logo que sejam legais n Mensagens n Pilares da empresa
+- [02:39.00] **creator**: Tem as vezes quando você entra que já me tem quatro pilares ali da empresa. Teu lemazinho da empresa, propósito, missão.
+- [02:48.00] **creator**: É sempre aquela missão e valores, isso aí, geralmente, é a empresa, né? Que tá cuidando do marketing que faz esse brandbook, com a missão, com os valores, com tudo que...
+- [03:05.00] **creator**: Com tudo que tem direito, né? Então, a gente faz... Às vezes o cara faz uma entrevistinha. Eu fiz pra vocês um fluxo, né?
+- [03:15.00] **creator**: Essa empresa, a gente tratou, acho que até a semana passada foi de contrato, né?
+- [03:18.84] **creator**: A pessoa assinou contigo, aí você vai começar a pegar essas informações
+- [03:23.76] **creator**: pra fazer o Brand Book da pessoa, tá? O fluxo é muito simples.
+- [03:30.12] **creator**: Vou pegar aqui com vocês pra mostrar.
+- [03:37.76] **creator**: O fluxo em si, ele é muito simples, tá, pessoal?
+- [03:42.92] **creator**: Ó.
+- [03:45.00] **creator**: Vamos lá... Ele é um painel que vai ser onde a pessoa vai responder isso aí, tá? Vai ser onde a pessoa vai responder.
+- [04:04.00] **creator**: Ela vai passar pelaquele mesmo que a gente começou na primeira...
+- [04:09.20] **creator**: Na primeira aula dessa sequência de workshop, que é a pasta, né?
+- [04:16.40] **creator**: Tipo, ele já vai jogar na pasta do drive, se não tiver ele vai criar.
+- [04:20.80] **creator**: Vai verificar se existe, se não existe ele vai criar.
+- [04:23.80] **creator**: Se existe ele vai adicionar já na pasta da empresa esses dados, né?
+- [04:29.80] **creator**: E aí isso é mais uma coisa que facilita que quando outra pessoa pegar, de repente na tua empresa tem mais alguém, e aí você pega aquela empresa e você sabe de tudo sobre ela.
+- [04:40.80] **creator**: E aí aqui, que nem você vê, eu tenho vários agentes, né? Eu tenho um diretor estratégico, vamo lá, ó.
+- [04:50.80] **creator**: Que ele vai, é...
+- [04:52.80] **creator**: Que ele vai fazer essa parte da...
+- [04:54.80] **creator**: do... do...
+- [04:56.80] **creator**: do branding n Inicial pra mandar pros seguintes conforme os dados que a pessoa responder A eu tenho aqui
+- [05:27.00] **creator**: E aí, o que que ele vai fazer? Ele vai levar a criança pra uma oficina de carro. Ele vai pegar pessoas, o público-alvo são pessoas que têm carro, tá? E pessoas que precisam muito de manutenção de carro.
+- [05:37.00] **creator**: Então, ele vai trabalhar na proposta de valor, né? Na personalidade da marca, tá? Nos arquétipos, tudo isso ele vai trabalhar, né? É...
+- [05:51.00] **creator**: É... analisando o quê? O segmento da pessoa, que é aquilo que eu falei, né? Qual que é o ramo de atividade, pra poder pegar tudo isso.
+- [06:00.54] **creator**: Produtos e serviços que a pessoa vai colocar no Brand Book, né? O que que ela oferece. Às vezes o cara, não é bem uma oficina, é só uma troca de óleo.
+- [06:12.78] **creator**: Isso já muda completamente. Tecnicamente é o mesmo segmento.
+- [06:17.02] **creator**: Mas os produtos e os serviços oferecidos de uma oficina que troca só óleo e o foco dela é a venda de óleo,
+- [06:25.02] **creator**: é totalmente diferente de uma oficina que só oferece manutenção, tá?
+- [06:29.26] **creator**: Público atual, às vezes a pessoa, ela tem um público, né? Mas ela deseja outro.
+- [06:37.78] **creator**: Por exemplo, um cliente, voltando ao exemplo da oficina,
+- [06:42.10] **creator**: Ela atende pessoas aleatórias, mas ela deseja atender empresas.
+- [06:49.86] **creator**: Por que ela deseja atender empresas? Porque ela vai ter uma lucratividade mais previsível, né?
+- [06:58.86] **creator**: Ela sabe que aquela empresa vai precisar de manutenção.
+- [07:03.10] **creator**: E o agente vai preparar esse Brand Book justamente posicionando ela pro público desejado, tá?
+- [07:13.90] **creator**: Né? É...
+- [07:15.90] **creator**: Aí, problemas, diferenciais da empresa, empresas concorrentes, justamente pra poder ela ter esses diferenciais.
+- [07:27.10] **creator**: Objetivos que importante por exemplo voc v que voc t fazendo uma campanha pra pessoa E o objetivo seu na m social dobrar os seguidores dela mil seguidores E tipo eu n sei se eu vou conseguir mas eu vou tentar
+- [07:58.00] **creator**: Quer.
+- [07:59.36] **creator**: Ah, eu quero o máximo possível. O máximo possível é quanto?
+- [08:01.86] **creator**: Agora, se ela colocou lá, eu quero mil seguidores, é o meu objetivo, 10 mil.
+- [08:06.20] **creator**: E aí, você fez o dobro,
+- [08:08.00] **creator**: é, você tem justificativa de mostrar pra ela, dizer assim, olha, eu mereço ficar, porque eu consegui dobrar o teu público.
+- [08:14.96] **creator**: Né?
+- [08:15.46] **creator**: O objetivo que a gente tinha, o objetivo de tantos meses,
+- [08:18.66] **creator**: a gente não só conseguiu, mas superou, ela vai pagar feliz.
+- [08:22.50] **creator**: E até você pode colocar isso aqui na fatura dela.
+- [08:26.06] **creator**: Ó, é... nossa meta desse mês foi tanto, a gente conseguiu tanto a mais, e esse é o valor.
+- [08:34.06] **creator**: Então você consegue oferecer pro cliente, não, é... preço, mas consegue oferecer valor no teu serviço, né?
+- [08:42.06] **creator**: Então ele vai pegar tudo isso, né? É... é... perigo empresarial, quais são as dores, os objetivos, né? Os gatilhos de compra...
+- [08:54.06] **creator**: Vai preparar todos esses dados pra colocar no arquétipo que ele vai fazer, tá?
+- [09:08.06] **creator**: Aí aqui eu tenho outros agentes que vão... que é o diretor de áudio, né?
+- [09:15.06] **creator**: De áudio não, de visual, né?
+- [09:18.06] **creator**: Que vai pegar esses padrões, vai colocar características da marca, vocabulário...
+- [09:23.06] **creator**: Tem certas palavras que você não pode utilizar, né?
+- [09:27.06] **creator**: É... em certas empresas, tá?
+- [09:31.06] **creator**: É... por exemplo, no hospital, você não fala que a pessoa morreu.
+- [09:37.06] **creator**: Você fala que a pessoa foi a óbito.
+- [09:40.06] **creator**: Né? Então, tipo assim, tem palavras que são sensíveis, né?
+- [09:44.06] **creator**: E você vai, é... utilizar, né? Do agente pra poder pegar tudo isso.
+- [09:52.06] **creator**: Aí aqui a gente tem o diretor que é só da parte visual.
+- [09:57.06] **creator**: Ele vai pegar tudo isso, ó, conceito criativo, território
+- [10:30.00] **creator**: Tá? Então, é... tudo isso, a Dimetriz dá logo, né? Ideias pra poder fazer a logo, e ele já cria uma logozinha com a gente, né?
+- [10:43.20] **creator**: E aí ele coloca tudo isso nessa pasta, tá? Vou mostrar aqui pra vocês o...
+- [10:49.20] **creator**: Vamos pegar aqui uma execução. Eu vou mostrar o formulário também. É um formulário super fácil, que o teu próprio cliente pode fazer, tá?
+- [11:13.20] **creator**: Então, aqui são as perguntas que vai lá no formulário.
+- [11:17.20] **creator**: Que é o nome da empresa, a descrição, o segmento, público atual, história da empresa, tá?
+- [11:26.20] **creator**: É... visão.
+- [11:29.20] **creator**: Então, tudo isso, ó, é concorrentes, problemas resolvidos, redes sociais.
+- [11:34.20] **creator**: um formul super simples mas que vai direcionar a pessoa pra um pra um pra poder a gente evoluir nesse produto n A voc pode ou oferecer isso j como parte do pacote pra ela t Como voc tamb pode cobrar por isso t
+- [11:58.91] **creator**: Ou já deixar... Eu gosto de, tipo assim...
+- [12:01.91] **creator**: Isso aqui é uma coisa que eu gosto de deixar embutido se eu vou fazer marketing pra pessoa, tá?
+- [12:08.91] **creator**: Então aqui eu tenho...
+- [12:10.91] **creator**: As perguntas, né? Pra ficar em etapas.
+- [12:15.91] **creator**: Então, são etapas que nem você pode ver, muito simples, que é aquelas perguntas que a gente acabou de falar.
+- [12:26.41] **creator**: E a pessoa vai responder essas perguntas e vai receber isso aqui, eu não sei se vocês lembram,
+- [12:34.41] **creator**: mas você pode colocar pra colocar naquele grupo que você colocou a pessoa lá no começo, tá?
+- [12:40.91] **creator**: Que você... Lembra que na primeira que a gente colocou, acho que na semana retrasada,
+- [12:46.41] **creator**: que ele cria um grupo entre você e a empresa que você tá atendendo?
+- [12:50.41] **creator**: Aí já envia isso aqui pro Drive. Envia. Deixa na parte da VPS e envia no grupo.
+- [12:57.91] **creator**: Tá? Que aí a pessoa já consegue acompanhar, já recebe esses dados aqui.
+- [13:03.41] **creator**: Ela já começa a ver alguma coisa ali pra você atender ela, né?
+- [13:10.91] **creator**: Então, é um negócio muito legal, eu acho que é um diferencial você ter isso aqui no começo, na hora que a pessoa te contratou, assinou o contrato, né?
+- [13:23.55] **creator**: Independente do servi que ela for fazer j algo que ela fica feliz porque ela entende que um extra ela n contratou isso aqui mas se voc for fazer um marketing pra ela voc vai precisar E voc colocou voc colocou no pacote t Ent E se voc for fazer uma IA voc vai precisar pra algumas coisas algumas coisas voc vai ter que entender vai precisar tamb
+- [13:51.82] **creator**: Então não tem contra-indicação você fazer isso aí, tá? É super bacana.
+- [13:59.82] **creator**: É... E é isso aí, pessoal. Por hoje, né? Essa semana é só. A gente vai ter na semana que vem, é... mais uma... uma desses produtos que a gente oferece pra empresa assim que ela... que ela entra, né? Assim que ela assina com você, contrata alguma coisa.
+- [14:17.00] **creator**: E a gente vai seguir nessa linha de atendimento dessas novas empresas, né? Que você vai captar e que você vai trabalhar com elas.
+- [14:26.21] **creator**: Tá bom? E é isso aí, o fluxo vai estar disponível pra vocês, tá? O fluxo vai estar disponível pra vocês lá na Promovaweb, só baixar ele certinho, beleza?
+- [14:38.21] **creator**: Então, pessoal que tá assistindo o gravado, até a semana que vem.
+- [14:49.21] **creator**: Vamos lá, vamos lá...
+- [14:51.21] **creator**: Então, é... alguma dúvida desse sistema antes da gente voltar a falar do que vocês querem saber?
+- [15:10.21] **creator**: Ah... não? Que bom então, né?
+- [15:21.21] **creator**: E a Pessoal voc est vivos a
+- [15:43.72] **creator**: Pronto...
+- [15:50.72] **creator**: Se tá todo mundo vivo, tá bom.
+- [15:54.72] **creator**: Só responder aqui... a minha gatinha.
+- [16:14.72] **creator**: Pronto, estamos aí.
+- [16:20.72] **creator**: Deixa eu abrir...
+- [16:26.72] **creator**: Então, perguntas...
+- [16:32.72] **creator**: Deixa eu ver se eu consigo abrir o Cloud aqui, que aí eu mostro pra vocês a conversa.
+- [16:38.72] **creator**: Eu não sei se eu vou conseguir...
+- [16:44.72] **creator**: Porque eu tô... porque agora eu fui tentar e ele... antes da aula, né?
+- [16:50.72] **creator**: E ele tava fazendo um processamento e ele travou meu computador.
+- [16:55.72] **creator**: Ele simplesmente travou, então, se travar...
+- [17:02.72] **creator**: E eu tiver que reiniciar, vocês já sabem.
+- [17:06.72] **creator**: Tá? Vou tentar abrir aqui.
+- [17:08.72] **creator**: Vamos ver... Vamos ver, vamos ver, vamos ver...

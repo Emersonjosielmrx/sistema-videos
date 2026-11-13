@@ -1,0 +1,131 @@
+{
+ "conta": "gestaodegrupos.ia",
+ "produto": "gestao_grupos",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Agente Sniper e seus grupos de WhatsApp no automático",
+ "legenda": "Deixe seus grupos de WhatsApp no automático com Agente Sniper, boas-vindas, moderação e atas.\nConte também com resumidor de links, prompt dinâmico e um bot condicional que responde só quando chamado.\nConheça a solução no link no perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Grupos de WhatsApp no automático",
+  "pergunta_cliente": "Cansado de cuidar de cada conversa nos grupos de WhatsApp sozinho?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu não conseguia acompanhar os meus grupos de WhatsApp o tempo todo e hoje deixo tudo no automático.",
+    "visual": "imagem",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian office with a clean desk",
+    "destaques": [
+     "acompanhar os meus grupos",
+     "tudo no automático"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261102_075838_1.png",
+    "prompt_en": "standing in a tidy, well lit modern Brazilian office with a clean desk, no people in focus"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Gestão de Grupos IA conta com Agente Sniper, moderação, atas e um bot que responde só quando chamado.",
+    "visual": "veo",
+    "prompt_en": "a tidy well lit small Brazilian office, a business owner seen from the side working calmly at a clean wooden desk, warm cinematic lighting, no readable screens or text",
+    "destaques": [
+     "Agente Sniper, moderação",
+     "responde só quando chamado"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Pessoal, alguém viu o link que mandaram mais cedo?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Resumo do link enviado hoje: novidades da semana e orientações para os membros."
+     },
+     {
+      "de": "cliente",
+      "texto": "Bot, qual é o resumo das conversas de hoje?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Aqui está a ata com o resumo das conversas e boas-vindas aos novos membros."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora tenho boas-vindas, resumidor de links e resumo das conversas funcionando tudo automático nos meus grupos.",
+    "visual": "apresentador",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian office with a clean desk",
+    "destaques": [
+     "resumidor de links",
+     "tudo automático"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261102_075838_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261102_075838_1.png"
+   }
+  ],
+  "legenda": "Deixe seus grupos de WhatsApp no automático com Agente Sniper, boas-vindas, moderação e atas.\nConte também com resumidor de links, prompt dinâmico e um bot condicional que responde só quando chamado.\nConheça a solução no link no perfil.",
+  "titulo": "Agente Sniper e seus grupos de WhatsApp no automático",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "vendas_sniper",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 186,
+  "tentativas_roteiro": 3
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "glitch",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\gestaodegrupos.ia_20261102_075517\\dono_3.mp4",
+ "duracao_s": 32.47,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-02T10:59:35",
+ "variante": "dono_abre_fecha_veo_meio",
+ "cenas_dono_feitas": [
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.2,
+   "fala": "Cansado de cuidar de cada conversa nos grupos de WhatsApp sozinho?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.2,
+   "fim": 12.26,
+   "fala": "Eu não conseguia acompanhar os meus grupos de WhatsApp o tempo todo e hoje deixo tudo no automático.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 12.26,
+   "fim": 20.84,
+   "fala": "O Gestão de Grupos IA conta com Agente Sniper, moderação, atas e um bot que responde só quando chamado.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 20.84,
+   "fim": 28.52,
+   "fala": "Agora tenho boas-vindas, resumidor de links e resumo das conversas funcionando tudo automático nos meus grupos.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.52,
+   "fim": 32.47,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+CUPONS = {"DEZ": 10, "VINTE": 20}

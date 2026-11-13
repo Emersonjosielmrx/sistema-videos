@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Hipercool Control Station</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#000;--card:#0a0a14;--border:#1a1a2e;
+  --cyan:#00ffff;--purple:#bf00ff;--green:#00ff88;--red:#ff2255;--yellow:#ffcc00;
+  --text:#e0e0e0;--dim:#555;
+  --font:'JetBrains Mono',monospace;
+  --glow-cyan:0 0 12px #00ffff,0 0 30px rgba(0,255,255,0.2);
+  --glow-purple:0 0 12px #bf00ff,0 0 30px rgba(191,0,255,0.2);
+  --glow-green:0 0 12px #00ff88,0 0 30px rgba(0,255,136,0.2);
+  --glow-red:0 0 12px #ff2255,0 0 30px rgba(255,34,85,0.2);
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+#header{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.95)}
+#header h1{font-size:14px;letter-spacing:3px;color:var(--cyan);text-shadow:var(--glow-cyan)}
+#header .right{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--dim)}
+#conn-dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:var(--glow-green);animation:pulse 2s infinite}
+#conn-dot.off{background:var(--red);box-shadow:var(--glow-red);animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* TABS */
+#tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:#050510;padding:0 20px}
+.tab{padding:10px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--cyan);border-bottom-color:var(--cyan);text-shadow:var(--glow-cyan)}
+.tab-content{display:none;padding:16px;max-width:1600px;margin:0 auto}
+.tab-content.active{display:block}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;position:relative;transition:border-color 0.3s,box-shadow 0.3s}
+.card:hover{border-color:#2a2a4e}
+.card h2{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cyan);margin-bottom:10px;text-shadow:0 0 8px rgba(0,255,255,0.3)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;background:rgba(255,255,255,0.04);border:1px solid var(--border)}
+.badge-cyan{color:var(--cyan);border-color:rgba(0,255,255,0.3)}
+.badge-green{color:var(--green);border-color:rgba(0,255,136,0.3)}
+.badge-red{color:var(--red);border-color:rgba(255,34,85,0.3)}
+.badge-yellow{color:var(--yellow);border-color:rgba(255,204,0,0.3)}
+.badge-purple{color:var(--purple);border-color:rgba(191,0,255,0.3)}
+
+/* PROGRESS BARS */
+.pbar{background:#111;border-radius:6px;height:24px;overflow:hidden;position:relative;border:1px solid var(--border)}
+.pbar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width 0.4s;position:relative}
+.pbar-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shimmer 2s infinite}
+.pbar-text{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.8)}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+.minibar{height:6px;background:#111;border-radius:3px;overflow:hidden;flex:1;min-width:50px;border:1px solid #1a1a2e}
+.minibar-fill{height:100%;border-radius:3px;transition:width 0.3s}
+
+/* BUTTONS */
+.btn{border:none;padding:7px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all 0.2s;letter-spacing:0.5px}
+.btn-pause{background:rgba(255,204,0,0.1);color:var(--yellow);border:1px solid rgba(255,204,0,0.3)}
+.btn-pause:hover{background:rgba(255,204,0,0.25);box-shadow:0 0 12px rgba(255,204,0,0.3)}
+.btn-pause.active{background:var(--yellow);color:#000;box-shadow:0 0 16px rgba(255,204,0,0.5)}
+.btn-skip{background:rgba(0,255,255,0.1);color:var(--cyan);border:1px solid rgba(0,255,255,0.3)}
+.btn-skip:hover{background:rgba(0,255,255,0.25);box-shadow:0 0 12px rgba(0,255,255,0.3)}
+.btn-stop{background:rgba(255,34,85,0.1);color:var(--red);border:1px solid rgba(255,34,85,0.3)}
+.btn-stop:hover{background:rgba(255,34,85,0.25);box-shadow:0 0 12px rgba(255,34,85,0.3)}
+.btn-open{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.3)}
+.btn-open:hover{background:rgba(0,255,136,0.25);box-shadow:var(--glow-green)}
+
+/* LOG */
+.log-box{background:#050508;border:1px solid var(--border);border-radius:6px;padding:8px;max-height:200px;overflow-y:auto;font-size:11px;line-height:1.7}
+.log-box::-webkit-scrollbar{width:4px}
+.log-box::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
+.log-line.error{color:var(--red)}
+.log-line.tts{color:var(--purple)}
+.log-line.clip{color:var(--cyan)}
+
+/* KEYS */
+.keys-grid{display:flex;flex-wrap:wrap;gap:4px}
+.key-dot{width:14px;height:14px;border-radius:4px;display:inline-block;cursor:pointer;transition:transform 0.2s}
+.key-dot:hover{transform:scale(1.6)}
+.key-dot.ok{background:var(--green);box-shadow:0 0 6px rgba(0,255,136,0.4)}
+.key-dot.quota{background:var(--yellow);box-shadow:0 0 6px rgba(255,204,0,0.4)}
+.key-dot.blocked{background:var(--red);box-shadow:0 0 6px rgba(255,34,85,0.4)}
+
+/* VIDEO LIST */
+.video-list{max-height:200px;overflow-y:auto}
+.video-item{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-bottom:1px solid #111;font-size:12px}
+.video-item:hover{background:rgba(0,255,255,0.03)}
+
+/* STATS */
+.stat-item{text-align:center;padding:10px;background:#050510;border:1px solid var(--border);border-radius:8px}
+.stat-val{font-size:18px;font-weight:700;color:var(--cyan)}
+.stat-label{font-size:10px;color:var(--dim);margin-top:3px}
+
+/* CTRL GROUPS */
+.ctrl-group{background:#050510;border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px}
+.ctrl-label{font-size:11px;color:var(--dim);min-width:50px}
+.ctrl-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:var(--glow-green)}
+.ctrl-dot.paused{background:var(--yellow);box-shadow:0 0 8px rgba(255,204,0,0.4)}
+.ctrl-dot.stopped{background:var(--red);box-shadow:var(--glow-red)}
+
+/* WORKER */
+.worker-dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.worker-dot.online{background:var(--green);box-shadow:var(--glow-green);animation:pulse 2s infinite}
+.worker-dot.offline{background:var(--red);box-shadow:var(--glow-red)}
+
+/* HW ITEM */
+.hw-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#050510;border:1px solid var(--border);border-radius:6px;min-width:140px}
+.hw-label{font-size:10px;color:var(--dim);text-transform:uppercase;width:40px}
+.hw-val{font-size:13px;font-weight:700;min-width:45px}
+
+/* TOAST */
+#toast-area{position:fixed;top:50px;right:16px;z-index:999;display:flex;flex-direction:column;gap:6px}
+.toast{background:#0a0a14;border:1px solid var(--green);border-radius:8px;padding:10px 14px;font-size:11px;box-shadow:var(--glow-green);animation:slidein 0.3s}
+.toast.err{border-color:var(--red);box-shadow:var(--glow-red)}
+@keyframes slidein{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+
+/* CAP ITEMS */
+.cap-item{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:5px;font-size:11px;background:#050510;border:1px solid var(--border);margin:2px}
+.cap-item.done{border-color:rgba(0,255,136,0.4);color:var(--green)}
+.cap-item.active{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 8px rgba(0,255,255,0.2);animation:pulse 2s infinite}
+.cap-item.pending{color:var(--dim)}
+
+/* TV */
+#tv-img{width:100%;border-radius:8px;border:1px solid var(--border);display:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="header">
+  <h1>&#9889; HIPERCOOL CONTROL STATION</h1>
+  <div class="right">
+    <span id="clock">--:--:--</span>
+    <span id="conn-dot"></span>
+  </div>
+</div>
+
+<div id="tabs">
+  <div class="tab active" onclick="switchTab('sistema')">SISTEMA</div>
+  <div class="tab" onclick="switchTab('producao')">PRODUCAO</div>
+  <div class="tab" onclick="switchTab('api')">API</div>
+  <div class="tab" onclick="switchTab('midia')">MIDIA</div>
+  <div class="tab" onclick="switchTab('worker')">WORKER</div>
+</div>
+
+<div id="toast-area"></div>
+
+<!-- TAB SISTEMA -->
+<div class="tab-content active" id="tab-sistema">
+  <div class="grid2">
+    <div class="card">
+      <h2>HARDWARE</h2>
+      <div class="row" style="gap:8px;flex-wrap:wrap">
+        <div class="hw-item"><span class="hw-label">CPU</span><span class="hw-val" id="hw-cpu">--%</span><span class="minibar"><span class="minibar-fill" id="hw-cpu-bar" style="width:0%;background:var(--cyan)"></span></span></div>
+        <div class="hw-item"><span class="hw-label">RAM</span><span class="hw-val" id="hw-ram">--%</span><span class="minibar"><span class="minibar-fill" id="hw-ram-bar" style="width:0%;background:var(--purple)"></span></span></div>
+        <div class="hw-item"><span class="hw-label">GPU</span><span class="hw-val" id="hw-gpu">--%</span><span class="minibar"><span class="minibar-fill" id="hw-gpu-bar" style="width:0%;background:var(--green)"></span></span></div>
+        <div class="hw-item"><span class="hw-label">SWAP</span><span class="hw-val" id="hw-swap">--</span></div>
+        <div class="hw-item"><span class="hw-label">DISCO</span><span class="hw-val" id="hw-disk">--</span></div>
+        <div class="hw-item"><span class="hw-label">FFMPEG</span><span class="hw-val" id="hw-ffmpeg">0</span></div>
+        <div class="hw-item"><span class="hw-label">NET &#8595;</span><span class="hw-val" id="hw-net-down">0</span></div>
+        <div class="hw-item"><span class="hw-label">NET &#8593;</span><span class="hw-val" id="hw-net-up">0</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>MONITOR ATIVO</h2>
+      <div class="row" style="margin-bottom:8px">
+        <span class="badge badge-cyan" id="mon-cap">Cap --</span>
+        <span class="badge badge-purple" id="mon-fase">--</span>
+        <span class="badge badge-green" id="mon-eta">ETA --</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" id="mon-pbar" style="width:0%"></div><div class="pbar-text" id="mon-pbar-text">0%</div></div>
+      <div class="row" style="margin-top:8px">
+        <span class="badge badge-green" id="mon-tts-cache">Cache: --</span>
+        <span class="badge badge-yellow" id="mon-tts-new">Novos: --</span>
+        <span class="badge" id="mon-tts-total">Total: --</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>LOG</h2>
+    <div class="log-box" id="sys-log"></div>
+  </div>
+</div>
+
+<!-- TAB PRODUCAO -->
+<div class="tab-content" id="tab-producao">
+  <div class="card">
+    <h2>FILA DE PRODUCAO</h2>
+    <div class="row" style="margin-bottom:10px">
+      <span style="font-size:14px;font-weight:700" id="fila-obra">--</span>
+      <span class="badge badge-cyan" id="fila-progresso">0/0</span>
+      <span class="badge badge-purple" id="fila-eta">ETA --</span>
+    </div>
+    <div id="fila-caps" style="display:flex;flex-wrap:wrap;gap:4px"></div>
+  </div>
+  <div class="card">
+    <h2>CONTROLES</h2>
+    <div class="grid2">
+      <div class="ctrl-group"><span class="ctrl-dot" id="ctrl-dot-all"></span><span class="ctrl-label">GERAL</span><button class="btn btn-pause" id="btn-pause" onclick="sendCmd('pause','all')">PAUSAR</button><button class="btn btn-skip" onclick="sendCmd('skip','all')">PULAR</button><button class="btn btn-stop" onclick="sendCmd('stop','all')">PARAR</button></div>
+      <div class="ctrl-group"><span class="ctrl-dot" id="ctrl-dot-audio"></span><span class="ctrl-label">AUDIO</span><button class="btn btn-pause" id="btn-pause-audio" onclick="sendCmd('pause','audio')">PAUSAR</button><button class="btn btn-skip" onclick="sendCmd('skip','audio')">PULAR</button><button class="btn btn-stop" onclick="sendCmd('stop','audio')">PARAR</button></div>
+      <div class="ctrl-group"><span class="ctrl-dot" id="ctrl-dot-video"></span><span class="ctrl-label">VIDEO</span><button class="btn btn-pause" id="btn-pause-video" onclick="sendCmd('pause','video')">PAUSAR</button><button class="btn btn-skip" onclick="sendCmd('skip','video')">PULAR</button><button class="btn btn-stop" onclick="sendCmd('stop','video')">PARAR</button></div>
+      <div class="ctrl-group"><span class="ctrl-dot" id="ctrl-dot-worker"></span><span class="ctrl-label">WORKER</span><button class="btn btn-pause" id="btn-pause-worker" onclick="sendCmd('pause','worker')">PAUSAR</button><button class="btn btn-skip" onclick="sendCmd('skip','worker')">PULAR</button><button class="btn btn-stop" onclick="sendCmd('stop','worker')">PARAR</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB API -->
+<div class="tab-content" id="tab-api">
+  <div class="card">
+    <h2>API RADAR</h2>
+    <div class="row" style="margin-bottom:10px">
+      <span class="badge badge-cyan" id="api-engine">Engine: --</span>
+      <span id="api-status-html">--</span>
+      <span class="badge badge-yellow" id="api-429">429: 0</span>
+      <span class="badge badge-purple" id="api-rots">Rot: 0</span>
+    </div>
+    <div class="row">
+      <span>Gemini: <span id="api-gemini-count">--/--</span></span>
+      <span>ElevenLabs: <span id="api-eleven-count">--/--</span></span>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h2>CHAVES GEMINI</h2>
+      <div class="keys-grid" id="keys-gemini"></div>
+    </div>
+    <div class="card">
+      <h2>CHAVES ELEVENLABS</h2>
+      <div class="keys-grid" id="keys-eleven"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB MIDIA -->
+<div class="tab-content" id="tab-midia">
+  <div class="grid2">
+    <div class="card">
+      <h2>VIDEOS RECENTES</h2>
+      <div class="video-list" id="video-list"></div>
+    </div>
+    <div class="card">
+      <h2>ULTIMO FRAME</h2>
+      <img id="tv-img" src="" alt="Preview">
+      <div id="tv-empty" style="text-align:center;color:var(--dim);padding:20px;font-size:12px">Sem preview</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>ESTATISTICAS</h2>
+    <div class="grid3">
+      <div class="stat-item"><div class="stat-val" id="st-avg-time">--</div><div class="stat-label">Tempo medio/cap</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-videos">0</div><div class="stat-label">Videos totais</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-disk">--</div><div class="stat-label">Disco usado</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-minutos">0</div><div class="stat-label">Min gerados</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-erros">0</div><div class="stat-label">Erros</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-sfx">0</div><div class="stat-label">SFX</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-censura">0</div><div class="stat-label">Censura</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-memes">0</div><div class="stat-label">Memes</div></div>
+      <div class="stat-item"><div class="stat-val" id="st-personas">--</div><div class="stat-label">Top Persona</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB WORKER -->
+<div class="tab-content" id="tab-worker">
+  <div class="card">
+    <h2>WORKER REMOTO</h2>
+    <div class="row" style="gap:12px">
+      <span class="worker-dot" id="worker-dot"></span>
+      <span id="worker-label" style="font-size:14px;font-weight:700">--</span>
+    </div>
+    <div style="margin-top:10px;color:var(--dim);font-size:12px" id="worker-task-info">Nenhuma tarefa</div>
+  </div>
+  <div class="card">
+    <h2>CONTROLES WORKER</h2>
+    <div class="ctrl-group">
+      <button class="btn btn-pause" onclick="sendCmd('pause','worker')">PAUSAR</button>
+      <button class="btn btn-skip" onclick="sendCmd('skip','worker')">PULAR</button>
+      <button class="btn btn-stop" onclick="sendCmd('stop','worker')">PARAR</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var prevConcluidos = [];
+
+function G(id) { return document.getElementById(id); }
+
+function switchTab(name) {
+  var tabs = document.querySelectorAll('.tab');
+  var contents = document.querySelectorAll('.tab-content');
+  var i;
+  for (i = 0; i < tabs.length; i++) { tabs[i].className = 'tab'; }
+  for (i = 0; i < contents.length; i++) { contents[i].className = 'tab-content'; }
+  var target = document.getElementById('tab-' + name);
+  if (target) target.className = 'tab-content active';
+  var tabEls = document.querySelectorAll('.tab');
+  for (i = 0; i < tabEls.length; i++) {
+    if (tabEls[i].textContent.toLowerCase().indexOf(name.substring(0,4)) !== -1) {
+      tabEls[i].className = 'tab active';
+    }
+  }
+}
+
+function sendCmd(action, target) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/api/command", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) showToast("CMD: " + action + " > " + target);
+      else showToast("Erro ao enviar comando", true);
+    }
+  };
+  xhr.send(JSON.stringify({action: action, target: target}));
+}
+
+function openPath(path) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/api/open", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({path: path}));
+}
+
+function showToast(msg, isErr) {
+  var t = document.createElement("div");
+  t.className = "toast" + (isErr ? " err" : "");
+  t.textContent = msg;
+  G("toast-area").appendChild(t);
+  setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 4000);
+}
+
+function setVal(id, txt) {
+  var el = G(id);
+  if (el && el.textContent !== String(txt)) el.textContent = txt;
+}
+
+function classifyLog(line) {
+  var l = line.toLowerCase();
+  if (l.indexOf("erro") !== -1 || l.indexOf("error") !== -1 || l.indexOf("429") !== -1 || l.indexOf("falha") !== -1) return "error";
+  if (l.indexOf("tts") !== -1 || l.indexOf("narr") !== -1) return "tts";
+  if (l.indexOf("clip") !== -1 || l.indexOf("ffmpeg") !== -1 || l.indexOf("render") !== -1) return "clip";
+  return "";
+}
+
+function renderKeys(el, keys) {
+  if (!el) return;
+  if (!keys || !keys.length) { el.innerHTML = "<span style='color:var(--dim);font-size:11px'>Sem dados</span>"; return; }
+  var html = "";
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    var cls = k.status === "ok" ? "ok" : k.status === "quota" ? "quota" : "blocked";
+    html += "<span class='key-dot " + cls + "' title='#" + k.id + " " + k.status + (k.detail ? " (" + k.detail + ")" : "") + "'></span>";
+  }
+  el.innerHTML = html;
+}
+
+function updateCtrlDot(id, cmds, pauseKey, stopKey) {
+  var el = G(id);
+  if (!el) return;
+  if (cmds[stopKey]) el.className = "ctrl-dot stopped";
+  else if (cmds[pauseKey]) el.className = "ctrl-dot paused";
+  else el.className = "ctrl-dot";
+}
+
+function updateData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/data.json", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4) return;
+    if (xhr.status !== 200) { G("conn-dot").className = "off"; return; }
+    var d = JSON.parse(xhr.responseText);
+    G("conn-dot").className = "";
+    document.title = (d.cap_pct || 0) + "% Cap " + (d.cap_atual || "?") + " - Hipercool";
+
+    // HW
+    setVal("hw-cpu", (d.cpu || 0) + "%");
+    setVal("hw-ram", (d.ram || 0) + "%");
+    setVal("hw-gpu", (d.gpu_pct || 0) + "%");
+    setVal("hw-swap", (d.swap_used || 0) + "/" + (d.swap_total || 0) + "MB");
+    setVal("hw-disk", (d.disk_free || "--") + " GB");
+    setVal("hw-ffmpeg", String(d.ffmpeg_count || 0));
+    setVal("hw-net-down", (d.net_down || "0") + " MB/s");
+    setVal("hw-net-up", (d.net_up || "0") + " MB/s");
+    G("hw-cpu-bar").style.width = (d.cpu || 0) + "%";
+    G("hw-ram-bar").style.width = (d.ram || 0) + "%";
+    G("hw-gpu-bar").style.width = (d.gpu_pct || 0) + "%";
+
+    // Monitor
+    setVal("mon-cap", "Cap " + (d.cap_atual || "--"));
+    setVal("mon-fase", d.cap_fase || "--");
+    setVal("mon-eta", "ETA " + (d.cap_eta || "--"));
+    G("mon-pbar").style.width = (d.cap_pct || 0) + "%";
+    setVal("mon-pbar-text", (d.cap_pct || 0) + "% " + (d.cap_progresso_txt || ""));
+    setVal("mon-tts-cache", "Cache: " + (d.tts_cache || 0));
+    setVal("mon-tts-new", "Novos: " + (d.tts_new || 0));
+    setVal("mon-tts-total", "Total: " + (d.tts_total || 0));
+
+    // Log
+    var logBox = G("sys-log");
+    var lines = d.linhas_recentes || [];
+    var logHtml = "";
+    for (var k = 0; k < lines.length; k++) {
+      var cls = classifyLog(lines[k]);
+      logHtml += "<div class='log-line " + cls + "'>" + lines[k] + "</div>";
+    }
+    logBox.innerHTML = logHtml;
+    logBox.scrollTop = logBox.scrollHeight;
+
+    // Fila
+    setVal("fila-obra", d.obra || "--");
+    setVal("fila-progresso", (d.feitos || 0) + "/" + (d.totais || 0));
+    setVal("fila-eta", "ETA " + (d.eta_lote || "--"));
+    var caps = d.lista_recentes || [];
+    var done = d.concluidos || [];
+    var atual = d.cap_atual;
+    var capsHtml = "";
+    for (var ci = 0; ci < caps.length; ci++) {
+      var c = caps[ci];
+      var st = done.indexOf(c) !== -1 ? "done" : c === atual ? "active" : "pending";
+      var icon = st === "done" ? "OK" : st === "active" ? ">>" : "..";
+      var paths = (d.cap_paths || {})[String(c)] || {};
+      var openBtn = paths.video ? " <button class='btn btn-open' onclick=\"openPath('" + (paths.video || "").replace(/\\\\/g, "/") + "')\">ABRIR</button>" : "";
+      capsHtml += "<span class='cap-item " + st + "'>" + icon + " Cap" + c + openBtn + "</span>";
+    }
+    G("fila-caps").innerHTML = capsHtml;
+
+    // Toast on new cap done
+    if (prevConcluidos.length && done.length > prevConcluidos.length) {
+      for (var j = 0; j < done.length; j++) {
+        if (prevConcluidos.indexOf(done[j]) === -1) showToast("Cap " + done[j] + " concluido!");
+      }
+    }
+    prevConcluidos = done.slice();
+
+    // Controls
+    var cmds = d.commands_active || {};
+    updateCtrlDot("ctrl-dot-all", cmds, "pause", "stop");
+    updateCtrlDot("ctrl-dot-audio", cmds, "pause_audio", "stop_audio");
+    updateCtrlDot("ctrl-dot-video", cmds, "pause_video", "stop_video");
+    updateCtrlDot("ctrl-dot-worker", cmds, "pause_worker", "stop_worker");
+    var pb = G("btn-pause");
+    if (pb) pb.className = "btn btn-pause" + (cmds.pause ? " active" : "");
+
+    // API
+    setVal("api-engine", "Engine: " + (d.api_engine || "--"));
+    G("api-status-html").innerHTML = d.api_status || "--";
+    setVal("api-429", "429: " + (d.api_429 || 0));
+    setVal("api-rots", "Rot: " + (d.api_rots || 0));
+    var gOk = (d.gemini_keys_total || 0) - (d.gemini_keys_blocked || 0);
+    setVal("api-gemini-count", gOk + "/" + (d.gemini_keys_total || 0));
+    var eOk = (d.eleven_keys_total || 0) - (d.eleven_keys_used || 0);
+    setVal("api-eleven-count", eOk + "/" + (d.eleven_keys_total || 0));
+
+    // Keys
+    var kh = d.keys_health || {};
+    renderKeys(G("keys-gemini"), kh.gemini);
+    renderKeys(G("keys-eleven"), kh.eleven);
+
+    // Videos
+    var vids = d.recent_videos || [];
+    var vidHtml = "";
+    for (var v = 0; v < vids.length; v++) {
+      var vid = vids[v];
+      vidHtml += "<div class='video-item'><span>" + vid.name + " <span class='badge'>" + (vid.size || "") + "</span></span>";
+      vidHtml += "<span>";
+      if (vid.video) vidHtml += "<button class='btn btn-open' onclick=\"openPath('" + vid.video.replace(/\\\\/g, "/") + "')\">PLAY</button>";
+      if (vid.folder) vidHtml += "<button class='btn btn-skip' onclick=\"openPath('" + vid.folder.replace(/\\\\/g, "/") + "')\">PASTA</button>";
+      vidHtml += "</span></div>";
+    }
+    G("video-list").innerHTML = vidHtml || "<div style='color:var(--dim);padding:10px'>Nenhum video</div>";
+
+    // Stats
+    setVal("st-avg-time", d.stats_avg_time || "--");
+    setVal("st-videos", String(d.stats_video_count || 0));
+    setVal("st-disk", d.stats_disk_videos || "--");
+    setVal("st-minutos", String(d.minutos_gerados || 0));
+    setVal("st-erros", String(d.erros_vistos || 0));
+    setVal("st-sfx", String(d.sfx_count || 0));
+    setVal("st-censura", String((d.censura_count || 0) + " (N2:" + (d.censura_n2 || 0) + ")"));
+    setVal("st-memes", String(d.memes_count || 0));
+    var personas = d.personas || [];
+    setVal("st-personas", personas.length ? personas[0].name + ":" + personas[0].count : "--");
+
+    // Worker
+    var wOn = d.worker_online;
+    G("worker-dot").className = "worker-dot " + (wOn ? "online" : "offline");
+    setVal("worker-label", wOn ? "Online - " + (d.worker_cores || 0) + " cores" : "Offline");
+    setVal("worker-task-info", d.worker_task_info || d.worker_task || "Nenhuma tarefa");
+  };
+  xhr.send();
+}
+
+function updateImg() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/img.json", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState !== 4 || xhr.status !== 200) return;
+    var d = JSON.parse(xhr.responseText);
+    if (d.ultima_img_b64) {
+      G("tv-img").src = "data:image/jpeg;base64," + d.ultima_img_b64;
+      G("tv-img").style.display = "block";
+      G("tv-empty").style.display = "none";
+    } else {
+      G("tv-img").style.display = "none";
+      G("tv-empty").style.display = "block";
+    }
+  };
+  xhr.send();
+}
+
+function updateClock() { G("clock").textContent = new Date().toLocaleTimeString("pt-BR"); }
+
+// Keyboard shortcuts
+document.onkeydown = function(e) {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if (e.key === "p" || e.key === "P") { sendCmd("pause", "all"); }
+  else if (e.key === "s" || e.key === "S") { sendCmd("skip", "all"); }
+  else if (e.key === "Escape") { sendCmd("stop", "all"); }
+};
+
+// Init
+updateClock();
+setInterval(updateClock, 1000);
+updateData();
+setInterval(updateData, 1000);
+updateImg();
+setInterval(updateImg, 5000);
+</script>
+</body>
+</html>

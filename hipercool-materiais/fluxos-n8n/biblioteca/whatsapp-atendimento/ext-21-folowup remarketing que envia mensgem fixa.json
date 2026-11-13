@@ -1,0 +1,3260 @@
+{
+ "name": "ext-21-folowup remarketing que envia mensgem fixa",
+ "nodes": [
+  {
+   "parameters": {
+    "jsCode": "// Obter a data atual como objeto Date\nlet dataAtual = new Date();\n\n// Configurar fuso horário para São Paulo\ndataAtual = new Date(dataAtual.toLocaleString(\"en-US\", {timeZone: 'America/Sao_Paulo'}));\n\n// Obter hora atual\nlet horaAtual = dataAtual.getHours();\n\n// Determinar a saudação adequada baseada na hora do dia\nlet saudacao;\n\nif (horaAtual >= 5 && horaAtual < 12) {\n  saudacao = \"Bom dia!\";\n} else if (horaAtual >= 12 && horaAtual < 18) {\n  saudacao = \"Boa tarde!\";\n} else if (horaAtual >= 18 && horaAtual <= 23) {\n  saudacao = \"Boa noite!\";\n} else {\n  saudacao = \"Boa madrugada!\";\n}\n\n// Definir a saudação como uma variável de contexto\nreturn { saudacao: saudacao };"
+   },
+   "id": "e4bd0dcd-e479-4f06-a8a4-0dd3ee60e6e7",
+   "name": "pegar hora",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1104,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "d753e012-2d01-46d4-8694-a577ef2024d2",
+       "name": "url_evolution",
+       "value": "https://ligawhatsapp.inovareinteligenciaartificial.com",
+       "type": "string"
+      },
+      {
+       "id": "7a3149d7-8b06-4658-a5e6-795cffe7371c",
+       "name": "apikey_evolution",
+       "value": "29A6CBA349DE-4E92-97C5-6A12B7F8EEE5",
+       "type": "string"
+      },
+      {
+       "id": "06246722-6c29-4c0c-b817-6c2658dac666",
+       "name": "instancia",
+       "value": "pessoal",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    608,
+    480
+   ],
+   "id": "ab397550-1865-4aad-88c3-41e224e53844",
+   "name": "dados"
+  },
+  {
+   "parameters": {
+    "content": "## time programado a gosto⏲️\nEle funciona como um gatilho de tempo que inicia um fluxo de trabalho (workflow) automaticamente em intervalos programados.\n\nComo ele funciona na prática?\nO node que você mostrou está configurado para iniciar uma ação a cada 99 segundos ⏳. Pense nele como um alarme ou um cronômetro digital. ⏲️\n\n\"name\": \"Schedule Trigger\": Esse é o nome do node, que deixa claro o seu propósito: acionar algo com base em um agendamento.\n\n\"rule\": {\"interval\": [{\"field\": \"seconds\", \"secondsInterval\": 99}]}: Essa é a parte mais importante! Aqui, a regra foi definida para que o gatilho seja ativado a cada 99 segundos. É a \"mágica\" que faz a automação funcionar periodicamente. ✨",
+    "height": 576,
+    "width": 272,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    160,
+    -128
+   ],
+   "typeVersion": 1,
+   "id": "2c4bcf1e-177b-43a1-82bc-208ae491405a",
+   "name": "Sticky Note"
+  },
+  {
+   "parameters": {
+    "content": "## dados📂\nA principal função do node \"Set\" é definir variáveis ou campos de dados. No exemplo que você mostrou, ele está criando três variáveis:\n\nurl_evolution: Uma variável do tipo string para armazenar uma URL. 🌐\n\napikey_evolution: Outra variável do tipo string para guardar uma chave de API, geralmente usada para autenticação. 🔑\n\ninstancia: Mais uma variável do tipo string para armazenar a instância de algum serviço. 📂\n\nApesar dos campos value estarem vazios no código, o propósito do node é justamente preencher essas variáveis. Por exemplo, você pode digitar a URL de uma API no campo url_evolution, a chave de acesso em apikey_evolution e o nome da instância em instancia.",
+    "height": 448,
+    "width": 368,
+    "color": 6
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    464,
+    0
+   ],
+   "typeVersion": 1,
+   "id": "be964802-736d-4aec-aef1-9f24fac71f33",
+   "name": "Sticky Note1"
+  },
+  {
+   "parameters": {
+    "content": "## pegar hora⏰\nO node \"Código\" atua como uma \"caixa de ferramentas\" 🔧 personalizada. Ele é a solução perfeita para quando os nodes padrão do n8n não conseguem fazer exatamente o que você precisa. No exemplo que você mostrou, ele está realizando uma tarefa bem específica:\n\nObtendo a data e a hora atuais ⏰: O código começa pegando a data e hora do sistema.\n\nAjustando o fuso horário 🇧🇷: Ele ajusta o fuso horário para 'America/Sao_Paulo', garantindo que a hora esteja correta, independentemente de onde o servidor do n8n esteja rodando. Isso é crucial para automações que precisam funcionar em horários locais específicos.\n\nDeterminando a saudação ☀️🌙: Ele usa uma lógica if/else para verificar a hora do dia e atribuir uma saudação apropriada (\"Bom dia!\", \"Boa tarde!\", \"Boa noite!\" ou \"Boa madrugada!\").\n\nCriando uma nova variável ✨: Por fim, ele retorna essa saudação como uma nova variável chamada saudacao. Essa variável pode então ser usada em nodes seguintes do fluxo. Por exemplo, você poderia usar essa saudação para personalizar uma mensagem de WhatsApp (\"{{ $json.saudacao }}! O nosso sistema está funcionando corretamente.\") ou um e-mail.",
+    "height": 480,
+    "width": 544,
+    "color": 2
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    848,
+    -32
+   ],
+   "typeVersion": 1,
+   "id": "471612ed-eff7-4abe-b824-98d93b2c7e82",
+   "name": "Sticky Note2"
+  },
+  {
+   "parameters": {
+    "content": "## verifica etapa de 30m🆔\nA função desse node é recuperar um único contato da tabela contatos_geral que ainda não foi processado (etapa nula), que não foi atualizado nos últimos 30 minutos e que pertence a uma instância específica.\n\nImagine que você tem um fluxo de automação que processa contatos para enviar mensagens. Este node \"Postgres1\" serve para selecionar a próxima pessoa na fila que precisa ser contatada, com base em critérios que evitam que o mesmo contato seja processado várias vezes ou que a automação se sobreponha. Ele é um nó central para fluxos de automação que dependem de informações de bancos de dados. ✅",
+    "height": 544,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    1408,
+    -96
+   ],
+   "typeVersion": 1,
+   "id": "9593f263-0e2a-44c9-9a25-68ec74f1d5fc",
+   "name": "Sticky Note3"
+  },
+  {
+   "parameters": {
+    "content": "## emvia msg⏳\n está configurado para enviar uma mensagem de texto por meio de uma API de mensageria, provavelmente uma API de WhatsApp, usando a Evolution API. 📱 Ele é o ponto de ação no fluxo, onde a automação se materializa em uma tarefa concreta.\n\nAqui está o que cada parte da configuração significa:\n\n\"method\": \"POST\": Indica que a ação é uma requisição POST. Isso geralmente significa que o node está enviando dados para o servidor da API, neste caso, o texto da mensagem e o número de destino. 🚀\n\n\"url\": \"={{ $('dados').item.json.url_evolution }}/message/sendText/{{ $('dados').item.json.instancia }}\": O endereço para onde a requisição será enviada. Note que a URL é dinâmica, ou seja, ela é construída usando informações de outro node ('dados'), o que torna o fluxo flexível. Ele pega a URL e a instância definidas no node \"Set\" anterior para montar o endereço completo da API. 🔗\n\n\"headerParameters\": São os cabeçalhos da requisição. Eles contêm informações adicionais para o servidor, como o tipo de dados que está sendo enviado (accept) e a chave de autenticação (apikey) para garantir que a requisição é válida e segura. Assim como a URL, o apikey é obtido do node \"Set\". 🔑\n\n\"bodyParameters\": É o corpo da requisição, que contém os dados principais a serem enviados. Aqui, estão as informações da mensagem:\n\n\"number\": \"={{ $json.remoteJid }}\": O número de telefone de destino da mensagem. A informação remoteJid provavelmente vem do node \"Postgres1\", que selecionou o contato a ser processado. Isso permite que a mensagem seja enviada para a pessoa correta. 🎯\n\n\"text\": \"=que horas posso te ligar ?\": O conteúdo da mensagem a ser enviada. 💬\n\n\"delay\": \"={{ 1200 }}\": Um pequeno atraso em milissegundos (1.2 segundos), para evitar que as mensagens sejam enviadas rápido demais, o que pode causar problemas. ⏳",
+    "height": 976,
+    "width": 400,
+    "color": 3
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    2048,
+    -528
+   ],
+   "typeVersion": 1,
+   "id": "e1ef2e11-2fc3-4381-97fa-f5d512b2d401",
+   "name": "Sticky Note4"
+  },
+  {
+   "parameters": {
+    "content": "## verifica etapa de 1d➡️\nImagine que o fluxo de trabalho enviou uma mensagem para um contato. Para evitar que a automação tente enviar a mesma mensagem para a mesma pessoa novamente, este node \"Postgres3\" entra em ação.\n\nEle atualiza o registro do contato no banco de dados, alterando o status (etapa) e a data da última interação (ultima_interacao). Na próxima execução do fluxo, o node Postgres1 (o de leitura) não vai mais selecionar este contato, pois ele não atende mais às condições de \"etapa nula\" e de \"última interação há mais de 30 minutos\". Este é um padrão comum em automações para garantir que cada item seja processado de forma única e sequencial. ✅",
+    "height": 400,
+    "width": 368,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    1664,
+    48
+   ],
+   "typeVersion": 1,
+   "id": "e5c4e103-6a6b-415c-b2bd-13139309149b",
+   "name": "Sticky Note5"
+  },
+  {
+   "parameters": {
+    "content": "## cadastra_usuario3💾\nEste node, nomeado \"cadastra_usuario3\" 💾, é um node \"Postgres\" configurado para uma operação de atualização (update). Ele tem a importante função de salvar a etapa de atendimento identificada pela IA no banco de dados, marcando o progresso do usuário no funil de vendas ou atendimento.\n\n",
+    "height": 560,
+    "width": 576,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    1168,
+    656
+   ],
+   "typeVersion": 1,
+   "id": "5f9645f3-3f31-4904-9a7b-a9abf1661544",
+   "name": "Sticky Note14"
+  },
+  {
+   "parameters": {
+    "content": "![Video tutorial](https://i.postimg.cc/HkDDZSTm/promovaweb-og-1.png)",
+    "height": 592,
+    "width": 976,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    432,
+    -624
+   ],
+   "typeVersion": 1,
+   "id": "491ff75b-2858-4868-b1be-4d9a3a304a27",
+   "name": "Sticky Note15"
+  },
+  {
+   "parameters": {
+    "content": "![Texto alternativo da imagem](https://i.postimg.cc/4NdcFfvy/Gemini-Generated-Image-9bd2329bd2329bd2-1.png#full-width)",
+    "height": 512,
+    "width": 496,
+    "color": 7
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -352,
+    -64
+   ],
+   "typeVersion": 1,
+   "id": "16c36cab-7d07-48d1-a380-2751f69e07e3",
+   "name": "Sticky Note16"
+  },
+  {
+   "parameters": {
+    "content": "![Texto alternativo da imagem](https://i.postimg.cc/FKWzScqx/Gemini-Generated-Image-jf7fe3jf7fe3jf7f-2.png#full-width)",
+    "height": 480,
+    "width": 464,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    -368,
+    1008
+   ],
+   "typeVersion": 1,
+   "id": "d9f44dc5-2274-4588-8acd-a5572aac9c88",
+   "name": "Sticky Note17"
+  },
+  {
+   "parameters": {
+    "content": "![Texto alternativo da imagem](https://i.postimg.cc/DZ1Vh3qb/Gemini-Generated-Image-9kma2t9kma2t9kma-1.png#full-width)",
+    "height": 496,
+    "width": 480,
+    "color": 5
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    2736,
+    816
+   ],
+   "typeVersion": 1,
+   "id": "99fa07cb-79d0-4427-a367-fa2a165b435c",
+   "name": "Sticky Note18"
+  },
+  {
+   "parameters": {
+    "content": "![Texto alternativo da imagem](https://i.postimg.cc/fLCKmHsr/Gemini-Generated-Image-q0eijbq0eijbq0ei-1.png#full-width)",
+    "height": 512,
+    "width": 480,
+    "color": 4
+   },
+   "type": "n8n-nodes-base.stickyNote",
+   "position": [
+    2464,
+    -64
+   ],
+   "typeVersion": 1,
+   "id": "fb8287b5-cc0a-4530-91ee-56fb91da2adb",
+   "name": "Sticky Note19"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE contatos_geral (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    remota_id VARCHAR(255) NOT NULL,\n    atendimento_humano BOOLEAN DEFAULT FALSE,\n    ultima_interacao TIMESTAMP NULL,\n    etapa VARCHAR(255),\n    mensagem TEXT,\n    nome VARCHAR(255),\n    instanceName VARCHAR(255),\n    informacao_cliente TEXT,\n    numero_instancia VARCHAR(50),\n    contagem_followup INT DEFAULT 0,\n    token_instancia VARCHAR(255),\n    autorizacao_spam BOOLEAN NOT NULL DEFAULT FALSE\n);",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    64,
+    688
+   ],
+   "id": "e4f43c98-354d-4775-9bec-0893c7d57c96",
+   "name": "criar tabela",
+   "credentials": {
+    "postgres": {
+     "id": "H6KRfIcop66Lbi9g",
+     "name": "postgrespgvector"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1824,
+    880
+   ],
+   "id": "41f52599-13fa-4751-949e-86c24a124e64",
+   "name": "fluxo"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "e6e5cc07-a0b1-4314-9cb3-149b34c8cedf",
+       "leftValue": "",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "equals",
+        "name": "filter.operator.equals"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2000,
+    880
+   ],
+   "id": "29cb5a27-fd21-40bb-8eff-335fdec883a9",
+   "name": "altorizado"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "list",
+     "cachedResultName": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {},
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance_wuzapi",
+       "displayName": "instance_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "erro",
+       "displayName": "erro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2240,
+    832
+   ],
+   "id": "7be34c14-edcb-48b5-9ee3-59e399a95755",
+   "name": "atualiza altorizacao",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "mode": "list",
+     "value": "contatos_geral"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "etapa",
+       "value": "30min"
+      },
+      {
+       "column": "ultima_interacao",
+       "condition": "<=",
+       "value": "={{ $now.plus(1, day).format('X') }}"
+      },
+      {
+       "column": "instanceName",
+       "value": "inovarecomunidade_5591985442837"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "da86aaf2-3830-4955-8ea3-e735d5ac1101",
+   "name": "verifica etapa de 1d",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    1808,
+    672
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('dados').item.json.url_evolution }}/message/sendText/{{ $('dados').item.json.instancia }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('dados').item.json.apikey_evolution }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $json.remoteJid }}"
+      },
+      {
+       "name": "text",
+       "value": "=que horas posso te ligar ?"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "24baed21-f8a4-4b43-81f9-88e0346c1376",
+   "name": "emvia msg",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    2224,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "={{ $('dados').item.json.url_evolution }}/message/sendText/{{ $('dados').item.json.instancia }}",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "={{ $('dados').item.json.apikey_evolution }}"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $json.remoteJid }}"
+      },
+      {
+       "name": "text",
+       "value": "=Oi, {{ $('pegar hora').item.json.saudacao }}"
+      },
+      {
+       "name": "delay",
+       "value": "={{ 1200 }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "1a0af307-5b3b-4af8-ba9b-4f10c5d45faf",
+   "name": "emvia msg1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    2224,
+    672
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=contatos_geral",
+     "mode": "name"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('verifica etapa de 30m ou pesquisa de satisfacao').item.json.id }}",
+      "ultima_interacao": "={{ $now.format('X') }}",
+      "etapa": "30min"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance_wuzapi",
+       "displayName": "instance_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "erro",
+       "displayName": "erro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "id": "74f57b52-afff-4e1d-8785-a19fb87ac12e",
+   "name": "atualiza etapa",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    2560,
+    480
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "mode": "list",
+     "value": "contatos_geral"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "id": "={{ $('verifica etapa de 1d').item.json.id }}",
+      "ultima_interacao": "={{ $now.format('X') }}",
+      "etapa": "24h"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance_wuzapi",
+       "displayName": "instance_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "erro",
+       "displayName": "erro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "id": "027c303b-1482-4649-8ec4-b3de2fafb57d",
+   "name": "atuaaliza etapa",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    2512,
+    672
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "seconds",
+       "secondsInterval": 99
+      }
+     ]
+    }
+   },
+   "id": "c9725222-d64d-45fa-b675-c398bd28d8c4",
+   "name": "time programado a gosto",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    256,
+    480
+   ],
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 1
+     },
+     "conditions": [
+      {
+       "id": "d65fcc81-8788-46d6-be7f-61206a3bed7c",
+       "leftValue": "={{ $json.telefone }}",
+       "rightValue": "",
+       "operator": {
+        "type": "string",
+        "operation": "notExists",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "3acc16d7-459e-4438-a2ec-425edd3f59e7",
+   "name": "se e cadastrado",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    928,
+    960
+   ],
+   "notesInFlow": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "3a3250f2-daa8-404c-aa79-d8f362a87735",
+       "leftValue": "={{ $json.body.data.key.fromMe }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "false",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1104,
+    944
+   ],
+   "id": "95ed7429-a7ff-4851-825d-00a149365fab",
+   "name": "eu mandei ?"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=contatos_geral",
+     "mode": "name"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "={{ $('ouve-whatsapp1').item.json.body.data.key.remoteJid.split(\"@\")[0] }}_{{ $('ouve-whatsapp1').item.json.body.instance }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    752,
+    960
+   ],
+   "id": "9d2ee504-000a-43b3-92ab-860744688fdf",
+   "name": "busca cadastro",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "name"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "ultima_interacao": "={{ $now.format('X') }}",
+      "id": "={{ $('ouve-whatsapp1').item.json.body.data.key.remoteJid.split(\"@\")[0] }}_{{ $('ouve-whatsapp1').item.json.body.instance }}",
+      "remoteJid": "={{ $('ouve-whatsapp1').item.json.body.data.key.remoteJid }}",
+      "instanceName": "={{ $('ouve-whatsapp1').item.json.body.instance }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance_wuzapi",
+       "displayName": "instance_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "erro",
+       "displayName": "erro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "id": "1f892e2e-a7c2-4abb-9260-dc4bf7c910cf",
+   "name": "cadastra_usuario1",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    1232,
+    800
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "cadastro-pessoal-remarketing-followup",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    368,
+    976
+   ],
+   "id": "1ad84309-c501-4800-b1c6-02823a649ec9",
+   "name": "ouve-whatsapp1",
+   "webhookId": "8c6f6066-c8fd-40ee-8dbd-b4b5e63296f6"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "93b7bcad-c291-4f90-8b36-cb42092dee6b",
+       "leftValue": "={{ $json.body.data.key.remoteJid }}",
+       "rightValue": "@g.us",
+       "operator": {
+        "type": "string",
+        "operation": "notContains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    544,
+    976
+   ],
+   "id": "77e6c40f-3af5-4c80-806d-3307804820c1",
+   "name": "filtra grupo"
+  },
+  {
+   "parameters": {
+    "content": "## 📨 Entrada & Triagem (Webhook)\n\n**🚀 O Radar da Operação**\nEste bloco é o ponto de entrada que \"escuta\" todos os eventos do WhatsApp em tempo real.\n\n---\n\n### 🛡️ Camada de Filtros:\n* **🚫 Anti-Grupo:** O node `filtra grupo` bloqueia interações vindas de grupos (`@g.us`), garantindo foco total no atendimento individual (X1).\n* **👤 Validação:** Garante que o evento possui um `remoteJid` válido antes de gastar recursos de processamento.",
+    "height": 386,
+    "width": 361,
+    "color": 2
+   },
+   "id": "8e463223-c713-48df-b709-90a044cefbd4",
+   "name": "Doc - Entrada",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    128,
+    944
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🧠 Cérebro & Verificação\n\n**🔍 Identificação de Lead**\nAntes de tomar qualquer ação, o sistema consulta o banco para saber com quem estamos falando.\n\n---\n\n### ⚙️ Lógica de Decisão:\n1. **🔎 Busca SQL:** Consulta a tabela `clientes_mentoria` usando um ID composto (Telefone + Instância).\n2. **🚦 Roteador (Switch):**\n   * **Novo Lead:** Se o retorno for vazio, prepara para cadastro.\n   * **Recorrente:** Se já existe, segue para atualizar a última interação.\n3. **🤖 vs 👤:** O node `eu mandei?` filtra mensagens enviadas pelo próprio bot (`fromMe: true`) para evitar loops infinitos.",
+    "height": 482,
+    "width": 508,
+    "color": 4
+   },
+   "id": "386c6044-828c-4610-a5a8-a22ba03b0bd1",
+   "name": "Doc - Logica",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    592,
+    1104
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🏗️ Infraestrutura (Setup)\n\n**🛠️ Definição da Tabela**\nNode de utilidade para criar a tabela SQL `contatos_geral` se ela ainda não existir.\n\n---\n\n* **📋 Schema:** Define colunas críticas (`id`, `telefone`, `etapa`, `ultima_interacao`, `atendimento_humano`, etc).\n* **⚠️ Atenção:** Este node geralmente roda apenas na instalação ou manutenção do fluxo, mas garante que o banco esteja pronto para receber dados.",
+    "height": 476,
+    "width": 320
+   },
+   "id": "8c8d97a8-e5de-4755-b20d-f3f10eee7eec",
+   "name": "Doc - Infra",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -320,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🚦 Checkpoint de Consentimento\n\n**❓ O que está acontecendo?**\nNeste ponto, o fluxo analisa se o comando ou resposta do usuário confirma o desejo de receber novidades.\n\n---\n\n### 🛡️ Regra de Negócio:\n* **Node `fluxo`:** Prepara as variáveis necessárias.\n* **Node `altorizado`:** Atua como um porteiro rigoroso. Ele verifica se a condição foi atendida (ex: cliente digitou 'SIM' ou clicou no botão).\n\n**💡 Importante:** Somente quem passar por este filtro ('true') seguirá para a lista de remarketing.",
+    "height": 345,
+    "width": 366,
+    "color": 6
+   },
+   "id": "1d514a39-8e4e-455c-a4b5-c3141bb6d965",
+   "name": "Doc - Validação",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1920,
+    1008
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## ✅ Registro de Opt-in (Remarketing)\n\n**💾 Ação no Banco de Dados**\nAtualiza o cadastro do cliente na tabela `contatos_geral` oficializando a permissão.\n\n---\n\n### 🎯 O que muda no Lead?\n* **🔓 Status:** Marca o cliente como 'Autorizado a receber propaganda'.\n* **🛡️ Segurança:** Isso cria sua *Whitelist*. Ao garantir que só envia para quem pediu, você reduz drasticamente o risco de bloqueio do chip por denúncia de spam.\n* **Chave:** A atualização é feita buscando pelo `remoteJid` (ID único do Whats).",
+    "height": 345,
+    "width": 325,
+    "color": 5
+   },
+   "id": "2ffdee26-e03d-47de-a1e2-91f7b7bde81e",
+   "name": "Doc - Update",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    2304,
+    1008
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "name"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "etapa",
+       "condition": "IS NULL"
+      },
+      {
+       "column": "ultima_interacao",
+       "condition": "<=",
+       "value": "={{ $now.plus(30, minutes).format('X') }}"
+      },
+      {
+       "column": "instanceName",
+       "value": "8-azul1-norm-0164"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "259d111a-8a86-43a9-8743-6deb66a54bbb",
+   "name": "verifica etapa de 30m ou pesquisa de satisfacao",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    1488,
+    480
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "clientes_mentoria",
+     "mode": "list",
+     "cachedResultName": "clientes_mentoria"
+    },
+    "deleteCommand": "delete",
+    "where": {
+     "values": [
+      {
+       "column": "id",
+       "value": "558187703547_pessoal"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1248,
+    1264
+   ],
+   "id": "63923921-5225-4b21-ae06-c8e6a6a2d8d7",
+   "name": "deleta cadastro",
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ $json.html }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       }
+      ]
+     }
+    }
+   },
+   "name": "Respond to Webhook",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    96,
+    2048
+   ],
+   "typeVersion": 1,
+   "id": "bad4609c-5e7d-4b19-898c-71882a2b912b"
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-br\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>WhatsApp Follow-up | Dashboard AI</title>\n    <link href=\"https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n    <style>\n        :root {\n            --primary: #6366f1;\n            --primary-light: #818cf8;\n            --secondary: #22d3ee;\n            --bg-dark: #020617;\n            --bg-card: rgba(15, 23, 42, 0.6);\n            --text-main: #f8fafc;\n            --text-muted: #94a3b8;\n            --border-glass: rgba(255, 255, 255, 0.08);\n            --success: #10b981;\n            --warning: #f59e0b;\n            --danger: #ef4444;\n            --indigo-blur: rgba(99, 102, 241, 0.1);\n        }\n\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n            font-family: 'Outfit', sans-serif;\n        }\n\n        body {\n            background-color: var(--bg-dark);\n            background-image: \n                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),\n                radial-gradient(at 100% 100%, rgba(34, 211, 238, 0.1) 0px, transparent 50%);\n            color: var(--text-main);\n            min-height: 100vh;\n            overflow-x: hidden;\n        }\n\n        .layout {\n            display: grid;\n            grid-template-columns: 280px 1fr;\n            min-height: 100vh;\n        }\n\n        /* Sidebar */\n        .sidebar {\n            background: rgba(15, 23, 42, 0.8);\n            backdrop-filter: blur(20px);\n            border-right: 1px solid var(--border-glass);\n            padding: 2.5rem 1.5rem;\n            display: flex;\n            flex-direction: column;\n            gap: 2rem;\n            position: sticky;\n            top: 0;\n            height: 100vh;\n        }\n\n        .brand {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            font-size: 1.5rem;\n            font-weight: 700;\n            background: linear-gradient(to right, var(--text-main), var(--secondary));\n            -webkit-background-clip: text;\n            -webkit-text-fill-color: transparent;\n        }\n\n        .brand i {\n            -webkit-text-fill-color: initial;\n            color: var(--primary);\n        }\n\n        .nav-menu {\n            display: flex;\n            flex-direction: column;\n            gap: 0.5rem;\n        }\n\n        .nav-item {\n            display: flex;\n            align-items: center;\n            gap: 1rem;\n            padding: 0.85rem 1.25rem;\n            border-radius: 12px;\n            color: var(--text-muted);\n            text-decoration: none;\n            font-weight: 500;\n            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n        }\n\n        .nav-item i {\n            font-size: 1.1rem;\n            transition: transform 0.3s ease;\n        }\n\n        .nav-item:hover {\n            background: rgba(255, 255, 255, 0.05);\n            color: var(--text-main);\n        }\n\n        .nav-item:hover i {\n            transform: translateX(3px);\n        }\n\n        .nav-item.active {\n            background: var(--indigo-blur);\n            color: var(--primary-light);\n            border: 1px solid rgba(99, 102, 241, 0.2);\n        }\n\n        /* Main Content */\n        .main-content {\n            padding: 2.5rem;\n            max-width: 1400px;\n            margin: 0 auto;\n            width: 100%;\n        }\n\n        header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 3rem;\n        }\n\n        .welcome-text h1 {\n            font-size: 2.25rem;\n            font-weight: 700;\n            margin-bottom: 0.5rem;\n        }\n\n        .welcome-text p {\n            color: var(--text-muted);\n            font-size: 1.1rem;\n        }\n\n        .header-actions {\n            display: flex;\n            align-items: center;\n            gap: 1rem;\n        }\n\n        .refresh-btn {\n            background: var(--primary);\n            color: white;\n            border: none;\n            padding: 0.75rem 1.5rem;\n            border-radius: 12px;\n            font-weight: 600;\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n            cursor: pointer;\n            transition: all 0.3s ease;\n            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);\n        }\n\n        .refresh-btn:hover {\n            background: var(--primary-light);\n            transform: translateY(-2px);\n            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);\n        }\n\n        .refresh-btn:active {\n            transform: translateY(0);\n        }\n\n        /* Stats Grid */\n        .stats-grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));\n            gap: 1.5rem;\n            margin-bottom: 2.5rem;\n        }\n\n        .stat-card {\n            background: var(--bg-card);\n            backdrop-filter: blur(12px);\n            border: 1px solid var(--border-glass);\n            padding: 1.75rem;\n            border-radius: 24px;\n            display: flex;\n            align-items: center;\n            gap: 1.5rem;\n            transition: all 0.3s ease;\n        }\n\n        .stat-card:hover {\n            border-color: rgba(255, 255, 255, 0.15);\n            transform: translateY(-4px);\n            background: rgba(15, 23, 42, 0.7);\n        }\n\n        .stat-icon-box {\n            width: 64px;\n            height: 64px;\n            border-radius: 20px;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            font-size: 1.5rem;\n        }\n\n        .stat-icon-box.pending { background: rgba(245, 158, 11, 0.1); color: var(--warning); }\n        .stat-icon-box.stage30 { background: rgba(34, 211, 238, 0.1); color: var(--secondary); }\n        .stat-icon-box.stage24 { background: rgba(16, 185, 129, 0.1); color: var(--success); }\n        .stat-icon-box.total { background: rgba(99, 102, 241, 0.1); color: var(--primary); }\n\n        .stat-data h3 {\n            font-size: 0.95rem;\n            color: var(--text-muted);\n            margin-bottom: 0.25rem;\n            font-weight: 500;\n        }\n\n        .stat-data .value {\n            font-size: 2rem;\n            font-weight: 700;\n            color: var(--text-main);\n        }\n\n        /* Chart Section */\n        .chart-section {\n            background: var(--bg-card);\n            backdrop-filter: blur(12px);\n            border: 1px solid var(--border-glass);\n            padding: 2rem;\n            border-radius: 24px;\n            margin-bottom: 2.5rem;\n        }\n\n        .chart-header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 2rem;\n        }\n\n        .chart-header h2 {\n            font-size: 1.25rem;\n            font-weight: 600;\n        }\n\n        /* Leads Table */\n        .table-section {\n            background: var(--bg-card);\n            backdrop-filter: blur(12px);\n            border: 1px solid var(--border-glass);\n            border-radius: 24px;\n            overflow: hidden;\n        }\n\n        .table-header {\n            padding: 1.75rem 2rem;\n            border-bottom: 1px solid var(--border-glass);\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n\n        .table-header h2 {\n            font-size: 1.25rem;\n            font-weight: 600;\n        }\n\n        .table-container {\n            overflow-x: auto;\n        }\n\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th {\n            text-align: left;\n            padding: 1.25rem 2rem;\n            color: var(--text-muted);\n            font-weight: 600;\n            font-size: 0.9rem;\n            text-transform: uppercase;\n            letter-spacing: 0.05em;\n            background: rgba(255, 255, 255, 0.02);\n        }\n\n        td {\n            padding: 1.25rem 2rem;\n            border-bottom: 1px solid var(--border-glass);\n            vertical-align: middle;\n        }\n\n        tr:last-child td {\n            border-bottom: none;\n        }\n\n        .lead-id {\n            display: flex;\n            flex-direction: column;\n            gap: 0.25rem;\n        }\n\n        .jid {\n            font-weight: 600;\n            color: var(--text-main);\n        }\n\n        .sub-id {\n            font-size: 0.8rem;\n            color: var(--text-muted);\n        }\n\n        .badge-pill {\n            display: inline-flex;\n            align-items: center;\n            padding: 0.35rem 0.85rem;\n            border-radius: 100px;\n            font-size: 0.8rem;\n            font-weight: 600;\n            gap: 0.4rem;\n        }\n\n        .badge-30min { background: rgba(34, 211, 238, 0.1); color: var(--secondary); border: 1px solid rgba(34, 211, 238, 0.2); }\n        .badge-24h { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }\n        .badge-pending { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }\n\n        .status-cell {\n            display: flex;\n            align-items: center;\n            gap: 0.6rem;\n            color: var(--success);\n            font-weight: 500;\n            font-size: 0.9rem;\n        }\n\n        .pulse-dot {\n            width: 8px;\n            height: 8px;\n            background: var(--success);\n            border-radius: 50%;\n            box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);\n            animation: pulse 2s infinite;\n        }\n\n        @keyframes pulse {\n            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }\n            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }\n            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }\n        }\n\n        /* Mobile Adjustments */\n        @media (max-width: 1024px) {\n            .layout {\n                grid-template-columns: 1fr;\n            }\n            .sidebar {\n                display: none;\n            }\n            .main-content {\n                padding: 1.5rem;\n            }\n        }\n    </style>\n</head>\n<body>\n    <div class=\"layout\">\n        <aside class=\"sidebar\">\n            <div class=\"brand\">\n                <i class=\"fab fa-whatsapp\"></i>\n                <span>Follow-up AI</span>\n            </div>\n            <nav class=\"nav-menu\">\n                <a href=\"#\" class=\"nav-item active\"><i class=\"fas fa-grid-2\"></i> Dashboard</a>\n                <a href=\"#\" class=\"nav-item\"><i class=\"fas fa-users\"></i> Gestão de Leads</a>\n                <a href=\"#\" class=\"nav-item\"><i class=\"fas fa-clock-rotate-left\"></i> Histórico</a>\n                <a href=\"#\" class=\"nav-item\"><i class=\"fas fa-gear\"></i> Configurações</a>\n            </nav>\n        </aside>\n\n        <main class=\"main-content\">\n            <header>\n                <div class=\"welcome-text\">\n                    <h1>Dashboard Operacional</h1>\n                    <p>Visão em tempo real do processamento de leads.</p>\n                </div>\n                <div class=\"header-actions\">\n                    <button class=\"refresh-btn\" id=\"refresh-btn\">\n                        <i class=\"fas fa-sync-alt\" id=\"refresh-icon\"></i>\n                        Atualizar\n                    </button>\n                </div>\n            </header>\n\n            <div class=\"stats-grid\">\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box pending\"><i class=\"fas fa-hourglass-start\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Aguardando</h3>\n                        <div class=\"value\" id=\"stat-pending\">--</div>\n                    </div>\n                </div>\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box stage30\"><i class=\"fas fa-clock\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Etapa 30m</h3>\n                        <div class=\"value\" id=\"stat-30m\">--</div>\n                    </div>\n                </div>\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box stage24\"><i class=\"fas fa-calendar-check\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Etapa 24h</h3>\n                        <div class=\"value\" id=\"stat-24h\">--</div>\n                    </div>\n                </div>\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box total\"><i class=\"fas fa-users\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Total Leads</h3>\n                        <div class=\"value\" id=\"stat-total\">--</div>\n                    </div>\n                </div>\n            </div>\n\n            <section class=\"chart-section\">\n                <div class=\"chart-header\">\n                    <h2>Fluxo de Processamento</h2>\n                </div>\n                <canvas id=\"leadsChart\" height=\"100\"></canvas>\n            </section>\n\n            <section class=\"table-section\">\n                <div class=\"table-header\">\n                    <h2>Leads Recentes</h2>\n                </div>\n                <div class=\"table-container\">\n                    <table>\n                        <thead>\n                            <tr>\n                                <th>WhatsApp / ID</th>\n                                <th>Instância</th>\n                                <th>Etapa Atual</th>\n                                <th>Última Interação</th>\n                                <th>Status</th>\n                            </tr>\n                        </thead>\n                        <tbody id=\"leads-body\">\n                            <!-- Data populated via JS -->\n                        </tbody>\n                    </table>\n                </div>\n            </section>\n        </main>\n    </div>\n\n    <script>\n        const BACKEND_URL = 'https://interface.inovareinteligenciaartificial.com/webhook/cadastro-pessoal-remarketing-followup-backend';\n        let chart = null;\n\n        async function fetchData() {\n            const btn = document.getElementById('refresh-btn');\n            const icon = document.getElementById('refresh-icon');\n            \n            btn.disabled = true;\n            icon.classList.add('fa-spin');\n\n            try {\n                const response = await fetch(BACKEND_URL, { method: 'POST' });\n                const json = await response.json();\n                const leads = json.data || [];\n                \n                updateStats(leads);\n                updateTable(leads);\n                updateChart(leads);\n                \n            } catch (error) {\n                console.error('Erro ao buscar dados:', error);\n            } finally {\n                setTimeout(() => {\n                    btn.disabled = false;\n                    icon.classList.remove('fa-spin');\n                }, 800);\n            }\n        }\n\n        function updateStats(leads) {\n            const total = leads.length;\n            const pending = leads.filter(l => !l.etapa || l.etapa.toLowerCase() === 'pendente').length;\n            const s30m = leads.filter(l => l.etapa === '30min').length;\n            const s24h = leads.filter(l => l.etapa === '24h').length;\n\n            document.getElementById('stat-pending').textContent = pending;\n            document.getElementById('stat-30m').textContent = s30m;\n            document.getElementById('stat-24h').textContent = s24h;\n            document.getElementById('stat-total').textContent = total;\n        }\n\n        function updateTable(leads) {\n            const tbody = document.getElementById('leads-body');\n            tbody.innerHTML = '';\n\n            if (!leads || leads.length === 0) {\n                tbody.innerHTML = '<tr><td colspan=\"5\" style=\"text-align: center; color: var(--text-muted); padding: 3rem;\">Nenhum lead encontrado</td></tr>';\n                return;\n            }\n\n            leads.slice(0, 10).forEach(lead => {\n                const row = document.createElement('tr');\n                \n                const interaction = lead.ultima_interacao \n                    ? new Date(parseInt(lead.ultima_interacao) * 1000).toLocaleString('pt-BR')\n                    : 'Nenhuma';\n\n                const stage = lead.etapa || 'Pendente';\n                const badgeClass = `badge-${stage.toLowerCase().includes('30') ? '30min' : stage.toLowerCase().includes('24') ? '24h' : 'pending'}`;\n\n                row.innerHTML = `\n                    <td>\n                        <div class=\"lead-id\">\n                            <span class=\"jid\">${lead.remoteJid || 'N/A'}</span>\n                            <span class=\"sub-id\">ID: ${lead.id || '---'}</span>\n                        </div>\n                    </td>\n                    <td><span style=\"color: var(--text-muted)\">${lead.instanceName || 'pessoal'}</span></td>\n                    <td><span class=\"badge-pill ${badgeClass}\">${stage}</span></td>\n                    <td><span style=\"color: var(--text-muted)\">${interaction}</span></td>\n                    <td>\n                        <div class=\"status-cell\">\n                            <div class=\"pulse-dot\"></div>\n                            Ativo\n                        </div>\n                    </td>\n                `;\n                tbody.appendChild(row);\n            });\n        }\n\n        function updateChart(leads) {\n            const ctx = document.getElementById('leadsChart').getContext('2d');\n            \n            // Simulação de labels baseada nos leads recentes (apenas para visual)\n            const labels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];\n            const values = [0, 0, 0, 0, 0, 0, 0];\n            \n            // Se houver leads, vamos colocar o total no dia de hoje (simplificado)\n            const today = new Date().getDay();\n            values[today] = leads.length;\n\n            if (chart) {\n                chart.destroy();\n            }\n\n            chart = new Chart(ctx, {\n                type: 'line',\n                data: {\n                    labels: labels,\n                    datasets: [{\n                        label: 'Volume de Leads',\n                        data: values,\n                        borderColor: '#6366f1',\n                        backgroundColor: (context) => {\n                            const chart = context.chart;\n                            const {ctx, chartArea} = chart;\n                            if (!chartArea) return null;\n                            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);\n                            gradient.addColorStop(0, 'rgba(99, 102, 241, 0)');\n                            gradient.addColorStop(1, 'rgba(99, 102, 241, 0.2)');\n                            return gradient;\n                        },\n                        fill: true,\n                        tension: 0.4,\n                        borderWidth: 3,\n                        pointRadius: 4,\n                        pointBackgroundColor: '#6366f1',\n                        pointBorderColor: '#fff',\n                        pointBorderWidth: 2\n                    }]\n                },\n                options: {\n                    responsive: true,\n                    maintainAspectRatio: true,\n                    plugins: {\n                        legend: { display: false }\n                    },\n                    scales: {\n                        y: {\n                            beginAtZero: true,\n                            grid: { color: 'rgba(255, 255, 255, 0.05)' },\n                            ticks: { color: '#94a3b8' }\n                        },\n                        x: {\n                            grid: { display: false },\n                            ticks: { color: '#94a3b8' }\n                        }\n                    }\n                }\n            });\n        }\n\n        // Initialize\n        document.getElementById('refresh-btn').addEventListener('click', fetchData);\n        fetchData();\n\n        // Auto-refresh every 60s\n        setInterval(fetchData, 60000);\n    </script>\n</body>\n</html>\n"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    -64,
+    2048
+   ],
+   "id": "8c6c9bc8-c9b3-45e7-8a40-85e00d6ad849",
+   "name": "HTML1"
+  },
+  {
+   "parameters": {
+    "path": "cadastro-pessoal-remarketing-followup-fronend",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "name": "frontend",
+   "type": "n8n-nodes-base.webhook",
+   "position": [
+    -224,
+    2048
+   ],
+   "webhookId": "cb694da5-9e6d-4355-99a5-a4956e957663",
+   "typeVersion": 1,
+   "id": "b9260644-8806-4fc2-a19e-2c199fcf4fa3"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "cadastro-pessoal-remarketing-followup-backend",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -288,
+    1872
+   ],
+   "id": "3949719f-4e49-4918-8b3c-7a10e0c75d20",
+   "name": "backend",
+   "webhookId": "9c7c915f-fce9-4313-9ce4-a1086679205f"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    16,
+    1872
+   ],
+   "id": "357fe7dc-c716-4b53-810b-f5750cf1dd9c",
+   "name": "Code6"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook16",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    160,
+    1872
+   ],
+   "typeVersion": 1,
+   "id": "c9865cb6-35dd-426b-9640-c10078424a57"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "name"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instanceName",
+       "value": "pessoal"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -128,
+    1872
+   ],
+   "id": "46b67331-2544-4af5-8ffd-9925ffda1b88",
+   "name": "busca",
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "html": "<!DOCTYPE html>\n<html lang=\"pt-br\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>WhatsApp Follow-up | Dashboard AI</title>\n    <link href=\"https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>\n    <style>\n        :root {\n            --primary: #6366f1;\n            --primary-light: #818cf8;\n            --secondary: #22d3ee;\n            --bg-dark: #020617;\n            --bg-card: rgba(15, 23, 42, 0.6);\n            --text-main: #f8fafc;\n            --text-muted: #94a3b8;\n            --border-glass: rgba(255, 255, 255, 0.08);\n            --success: #10b981;\n            --warning: #f59e0b;\n            --danger: #ef4444;\n            --indigo-blur: rgba(99, 102, 241, 0.1);\n        }\n\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n            font-family: 'Outfit', sans-serif;\n        }\n\n        body {\n            background-color: var(--bg-dark);\n            background-image: \n                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),\n                radial-gradient(at 100% 100%, rgba(34, 211, 238, 0.1) 0px, transparent 50%);\n            color: var(--text-main);\n            min-height: 100vh;\n            overflow-x: hidden;\n        }\n\n        .layout {\n            display: grid;\n            grid-template-columns: 280px 1fr;\n            min-height: 100vh;\n        }\n\n        /* Sidebar */\n        .sidebar {\n            background: rgba(15, 23, 42, 0.8);\n            backdrop-filter: blur(20px);\n            border-right: 1px solid var(--border-glass);\n            padding: 2.5rem 1.5rem;\n            display: flex;\n            flex-direction: column;\n            gap: 2rem;\n            position: sticky;\n            top: 0;\n            height: 100vh;\n        }\n\n        .brand {\n            display: flex;\n            align-items: center;\n            gap: 0.75rem;\n            font-size: 1.5rem;\n            font-weight: 700;\n            background: linear-gradient(to right, var(--text-main), var(--secondary));\n            -webkit-background-clip: text;\n            -webkit-text-fill-color: transparent;\n        }\n\n        .brand i {\n            -webkit-text-fill-color: initial;\n            color: var(--primary);\n        }\n\n        .nav-menu {\n            display: flex;\n            flex-direction: column;\n            gap: 0.5rem;\n        }\n\n        .nav-item {\n            display: flex;\n            align-items: center;\n            gap: 1rem;\n            padding: 0.85rem 1.25rem;\n            border-radius: 12px;\n            color: var(--text-muted);\n            text-decoration: none;\n            font-weight: 500;\n            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n        }\n\n        .nav-item i {\n            font-size: 1.1rem;\n            transition: transform 0.3s ease;\n        }\n\n        .nav-item:hover {\n            background: rgba(255, 255, 255, 0.05);\n            color: var(--text-main);\n        }\n\n        .nav-item:hover i {\n            transform: translateX(3px);\n        }\n\n        .nav-item.active {\n            background: var(--indigo-blur);\n            color: var(--primary-light);\n            border: 1px solid rgba(99, 102, 241, 0.2);\n        }\n\n        /* Main Content */\n        .main-content {\n            padding: 2.5rem;\n            max-width: 1400px;\n            margin: 0 auto;\n            width: 100%;\n        }\n\n        header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 3rem;\n        }\n\n        .welcome-text h1 {\n            font-size: 2.25rem;\n            font-weight: 700;\n            margin-bottom: 0.5rem;\n        }\n\n        .welcome-text p {\n            color: var(--text-muted);\n            font-size: 1.1rem;\n        }\n\n        .header-actions {\n            display: flex;\n            align-items: center;\n            gap: 1rem;\n        }\n\n        .refresh-btn {\n            background: var(--primary);\n            color: white;\n            border: none;\n            padding: 0.75rem 1.5rem;\n            border-radius: 12px;\n            font-weight: 600;\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n            cursor: pointer;\n            transition: all 0.3s ease;\n            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);\n        }\n\n        .refresh-btn:hover {\n            background: var(--primary-light);\n            transform: translateY(-2px);\n            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);\n        }\n\n        .refresh-btn:active {\n            transform: translateY(0);\n        }\n\n        /* Stats Grid */\n        .stats-grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));\n            gap: 1.5rem;\n            margin-bottom: 2.5rem;\n        }\n\n        .stat-card {\n            background: var(--bg-card);\n            backdrop-filter: blur(12px);\n            border: 1px solid var(--border-glass);\n            padding: 1.75rem;\n            border-radius: 24px;\n            display: flex;\n            align-items: center;\n            gap: 1.5rem;\n            transition: all 0.3s ease;\n        }\n\n        .stat-card:hover {\n            border-color: rgba(255, 255, 255, 0.15);\n            transform: translateY(-4px);\n            background: rgba(15, 23, 42, 0.7);\n        }\n\n        .stat-icon-box {\n            width: 64px;\n            height: 64px;\n            border-radius: 20px;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            font-size: 1.5rem;\n        }\n\n        .stat-icon-box.pending { background: rgba(245, 158, 11, 0.1); color: var(--warning); }\n        .stat-icon-box.stage30 { background: rgba(34, 211, 238, 0.1); color: var(--secondary); }\n        .stat-icon-box.stage24 { background: rgba(16, 185, 129, 0.1); color: var(--success); }\n        .stat-icon-box.total { background: rgba(99, 102, 241, 0.1); color: var(--primary); }\n\n        .stat-data h3 {\n            font-size: 0.95rem;\n            color: var(--text-muted);\n            margin-bottom: 0.25rem;\n            font-weight: 500;\n        }\n\n        .stat-data .value {\n            font-size: 2rem;\n            font-weight: 700;\n            color: var(--text-main);\n        }\n\n        /* Chart Section */\n        .chart-section {\n            background: var(--bg-card);\n            backdrop-filter: blur(12px);\n            border: 1px solid var(--border-glass);\n            padding: 2rem;\n            border-radius: 24px;\n            margin-bottom: 2.5rem;\n        }\n\n        .chart-header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 2rem;\n        }\n\n        .chart-header h2 {\n            font-size: 1.25rem;\n            font-weight: 600;\n        }\n\n        /* Leads Table */\n        .table-section {\n            background: var(--bg-card);\n            backdrop-filter: blur(12px);\n            border: 1px solid var(--border-glass);\n            border-radius: 24px;\n            overflow: hidden;\n        }\n\n        .table-header {\n            padding: 1.75rem 2rem;\n            border-bottom: 1px solid var(--border-glass);\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n\n        .table-header h2 {\n            font-size: 1.25rem;\n            font-weight: 600;\n        }\n\n        .table-container {\n            overflow-x: auto;\n        }\n\n        table {\n            width: 100%;\n            border-collapse: collapse;\n        }\n\n        th {\n            text-align: left;\n            padding: 1.25rem 2rem;\n            color: var(--text-muted);\n            font-weight: 600;\n            font-size: 0.9rem;\n            text-transform: uppercase;\n            letter-spacing: 0.05em;\n            background: rgba(255, 255, 255, 0.02);\n        }\n\n        td {\n            padding: 1.25rem 2rem;\n            border-bottom: 1px solid var(--border-glass);\n            vertical-align: middle;\n        }\n\n        tr:last-child td {\n            border-bottom: none;\n        }\n\n        .lead-id {\n            display: flex;\n            flex-direction: column;\n            gap: 0.25rem;\n        }\n\n        .jid {\n            font-weight: 600;\n            color: var(--text-main);\n        }\n\n        .sub-id {\n            font-size: 0.8rem;\n            color: var(--text-muted);\n        }\n\n        .badge-pill {\n            display: inline-flex;\n            align-items: center;\n            padding: 0.35rem 0.85rem;\n            border-radius: 100px;\n            font-size: 0.8rem;\n            font-weight: 600;\n            gap: 0.4rem;\n        }\n\n        .badge-30min { background: rgba(34, 211, 238, 0.1); color: var(--secondary); border: 1px solid rgba(34, 211, 238, 0.2); }\n        .badge-24h { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }\n        .badge-pending { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }\n\n        .status-cell {\n            display: flex;\n            align-items: center;\n            gap: 0.6rem;\n            color: var(--success);\n            font-weight: 500;\n            font-size: 0.9rem;\n        }\n\n        .pulse-dot {\n            width: 8px;\n            height: 8px;\n            background: var(--success);\n            border-radius: 50%;\n            box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);\n            animation: pulse 2s infinite;\n        }\n\n        @keyframes pulse {\n            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }\n            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }\n            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }\n        }\n\n        /* Mobile Adjustments */\n        @media (max-width: 1024px) {\n            .layout {\n                grid-template-columns: 1fr;\n            }\n            .sidebar {\n                display: none;\n            }\n            .main-content {\n                padding: 1.5rem;\n            }\n        }\n    </style>\n</head>\n<body>\n    <div class=\"layout\">\n        <aside class=\"sidebar\">\n            <div class=\"brand\">\n                <i class=\"fab fa-whatsapp\"></i>\n                <span>Follow-up AI</span>\n            </div>\n            <nav class=\"nav-menu\">\n                <a href=\"#\" class=\"nav-item active\"><i class=\"fas fa-grid-2\"></i> Dashboard</a>\n                <a href=\"#\" class=\"nav-item\"><i class=\"fas fa-users\"></i> Gestão de Leads</a>\n                <a href=\"#\" class=\"nav-item\"><i class=\"fas fa-clock-rotate-left\"></i> Histórico</a>\n                <a href=\"#\" class=\"nav-item\"><i class=\"fas fa-gear\"></i> Configurações</a>\n            </nav>\n        </aside>\n\n        <main class=\"main-content\">\n            <header>\n                <div class=\"welcome-text\">\n                    <h1>Dashboard Operacional</h1>\n                    <p>Visão em tempo real do processamento de leads.</p>\n                </div>\n                <div class=\"header-actions\">\n                    <button class=\"refresh-btn\" id=\"refresh-btn\">\n                        <i class=\"fas fa-sync-alt\" id=\"refresh-icon\"></i>\n                        Atualizar\n                    </button>\n                </div>\n            </header>\n\n            <div class=\"stats-grid\">\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box pending\"><i class=\"fas fa-hourglass-start\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Aguardando</h3>\n                        <div class=\"value\" id=\"stat-pending\">--</div>\n                    </div>\n                </div>\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box stage30\"><i class=\"fas fa-clock\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Etapa 30m</h3>\n                        <div class=\"value\" id=\"stat-30m\">--</div>\n                    </div>\n                </div>\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box stage24\"><i class=\"fas fa-calendar-check\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Etapa 24h</h3>\n                        <div class=\"value\" id=\"stat-24h\">--</div>\n                    </div>\n                </div>\n                <div class=\"stat-card\">\n                    <div class=\"stat-icon-box total\"><i class=\"fas fa-users\"></i></div>\n                    <div class=\"stat-data\">\n                        <h3>Total Leads</h3>\n                        <div class=\"value\" id=\"stat-total\">--</div>\n                    </div>\n                </div>\n            </div>\n\n            <section class=\"chart-section\">\n                <div class=\"chart-header\">\n                    <h2>Fluxo de Processamento</h2>\n                </div>\n                <canvas id=\"leadsChart\" height=\"100\"></canvas>\n            </section>\n\n            <section class=\"table-section\">\n                <div class=\"table-header\">\n                    <h2>Leads Recentes</h2>\n                </div>\n                <div class=\"table-container\">\n                    <table>\n                        <thead>\n                            <tr>\n                                <th>WhatsApp / ID</th>\n                                <th>Instância</th>\n                                <th>Etapa Atual</th>\n                                <th>Última Interação</th>\n                                <th>Status</th>\n                            </tr>\n                        </thead>\n                        <tbody id=\"leads-body\">\n                            <!-- Data populated via JS -->\n                        </tbody>\n                    </table>\n                </div>\n            </section>\n        </main>\n    </div>\n\n    <script>\n        const BACKEND_URL = 'https://interface.inovareinteligenciaartificial.com/webhook/cadastro-pessoal-remarketing-followup-backend';\n        let chart = null;\n\n        async function fetchData() {\n            const btn = document.getElementById('refresh-btn');\n            const icon = document.getElementById('refresh-icon');\n            \n            btn.disabled = true;\n            icon.classList.add('fa-spin');\n\n            try {\n                const response = await fetch(BACKEND_URL, { method: 'POST' });\n                const json = await response.json();\n                const leads = json.data || [];\n                \n                updateStats(leads);\n                updateTable(leads);\n                updateChart(leads);\n                \n            } catch (error) {\n                console.error('Erro ao buscar dados:', error);\n            } finally {\n                setTimeout(() => {\n                    btn.disabled = false;\n                    icon.classList.remove('fa-spin');\n                }, 800);\n            }\n        }\n\n        function updateStats(leads) {\n            const total = leads.length;\n            const pending = leads.filter(l => !l.etapa || l.etapa.toLowerCase() === 'pendente').length;\n            const s30m = leads.filter(l => l.etapa === '30min').length;\n            const s24h = leads.filter(l => l.etapa === '24h').length;\n\n            document.getElementById('stat-pending').textContent = pending;\n            document.getElementById('stat-30m').textContent = s30m;\n            document.getElementById('stat-24h').textContent = s24h;\n            document.getElementById('stat-total').textContent = total;\n        }\n\n        function updateTable(leads) {\n            const tbody = document.getElementById('leads-body');\n            tbody.innerHTML = '';\n\n            if (!leads || leads.length === 0) {\n                tbody.innerHTML = '<tr><td colspan=\"5\" style=\"text-align: center; color: var(--text-muted); padding: 3rem;\">Nenhum lead encontrado</td></tr>';\n                return;\n            }\n\n            leads.slice(0, 10).forEach(lead => {\n                const row = document.createElement('tr');\n                \n                const interaction = lead.ultima_interacao \n                    ? new Date(parseInt(lead.ultima_interacao) * 1000).toLocaleString('pt-BR')\n                    : 'Nenhuma';\n\n                const stage = lead.etapa || 'Pendente';\n                const badgeClass = `badge-${stage.toLowerCase().includes('30') ? '30min' : stage.toLowerCase().includes('24') ? '24h' : 'pending'}`;\n\n                row.innerHTML = `\n                    <td>\n                        <div class=\"lead-id\">\n                            <span class=\"jid\">${lead.remoteJid || 'N/A'}</span>\n                            <span class=\"sub-id\">ID: ${lead.id || '---'}</span>\n                        </div>\n                    </td>\n                    <td><span style=\"color: var(--text-muted)\">${lead.instanceName || 'pessoal'}</span></td>\n                    <td><span class=\"badge-pill ${badgeClass}\">${stage}</span></td>\n                    <td><span style=\"color: var(--text-muted)\">${interaction}</span></td>\n                    <td>\n                        <div class=\"status-cell\">\n                            <div class=\"pulse-dot\"></div>\n                            Ativo\n                        </div>\n                    </td>\n                `;\n                tbody.appendChild(row);\n            });\n        }\n\n        function updateChart(leads) {\n            const ctx = document.getElementById('leadsChart').getContext('2d');\n            \n            // Simulação de labels baseada nos leads recentes (apenas para visual)\n            const labels = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];\n            const values = [0, 0, 0, 0, 0, 0, 0];\n            \n            // Se houver leads, vamos colocar o total no dia de hoje (simplificado)\n            const today = new Date().getDay();\n            values[today] = leads.length;\n\n            if (chart) {\n                chart.destroy();\n            }\n\n            chart = new Chart(ctx, {\n                type: 'line',\n                data: {\n                    labels: labels,\n                    datasets: [{\n                        label: 'Volume de Leads',\n                        data: values,\n                        borderColor: '#6366f1',\n                        backgroundColor: (context) => {\n                            const chart = context.chart;\n                            const {ctx, chartArea} = chart;\n                            if (!chartArea) return null;\n                            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);\n                            gradient.addColorStop(0, 'rgba(99, 102, 241, 0)');\n                            gradient.addColorStop(1, 'rgba(99, 102, 241, 0.2)');\n                            return gradient;\n                        },\n                        fill: true,\n                        tension: 0.4,\n                        borderWidth: 3,\n                        pointRadius: 4,\n                        pointBackgroundColor: '#6366f1',\n                        pointBorderColor: '#fff',\n                        pointBorderWidth: 2\n                    }]\n                },\n                options: {\n                    responsive: true,\n                    maintainAspectRatio: true,\n                    plugins: {\n                        legend: { display: false }\n                    },\n                    scales: {\n                        y: {\n                            beginAtZero: true,\n                            grid: { color: 'rgba(255, 255, 255, 0.05)' },\n                            ticks: { color: '#94a3b8' }\n                        },\n                        x: {\n                            grid: { display: false },\n                            ticks: { color: '#94a3b8' }\n                        }\n                    }\n                }\n            });\n        }\n\n        // Initialize\n        document.getElementById('refresh-btn').addEventListener('click', fetchData);\n        fetchData();\n\n        // Auto-refresh every 60s\n        setInterval(fetchData, 60000);\n    </script>\n</body>\n</html>\n"
+   },
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    -64,
+    2320
+   ],
+   "id": "342e04bc-ff53-45ab-bdb9-bcced938fd44",
+   "name": "HTML"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contatos_geral",
+     "mode": "name"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "ultima_interacao": "={{ $now.format('X') }}",
+      "id": "={{ $('ouve-whatsapp1').item.json.body.data.key.remoteJid.split(\"@\")[0] }}_{{ $('ouve-whatsapp1').item.json.body.instance }}",
+      "remoteJid": "={{ $('ouve-whatsapp1').item.json.body.data.key.remoteJid }}",
+      "instanceName": "={{ $('ouve-whatsapp1').item.json.body.instance }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": true,
+       "defaultMatch": true,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "remoteJid",
+       "displayName": "remoteJid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "atendimentoHumano",
+       "displayName": "atendimentoHumano",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "ultima_interacao",
+       "displayName": "ultima_interacao",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "etapa",
+       "displayName": "etapa",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "mensagem",
+       "displayName": "mensagem",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instanceName",
+       "displayName": "instanceName",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "informacao_cliente",
+       "displayName": "informacao_cliente",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "numero_instancia",
+       "displayName": "numero_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "contagem_followup",
+       "displayName": "contagem_followup",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_instancia",
+       "displayName": "token_instancia",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "instance_wuzapi",
+       "displayName": "instance_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "token_wuzapi",
+       "displayName": "token_wuzapi",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "erro",
+       "displayName": "erro",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "id": "18976130-bce1-4afc-8732-a838aae1b107",
+   "name": "cadastra_usuario",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    1264,
+    1072
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "qCv4m2pmdQHQ80W6",
+     "name": "Postgres fluxo_n8n2"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "criar",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          },
+          "id": "25b747da-b4a1-4eb2-b5a8-53aba65c35e7"
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "criar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "bbf863d0-b292-4f20-b6b4-aa529f53be69",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "editar",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "editar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ca69a75f-dce3-4135-993f-eb3a2f1dcec1",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "inserir",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "inserir"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a24355ed-90d4-48b3-9b32-9511e615e8c5",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "consulta_erros",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "consulta_erros"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "85b4be7a-59da-4382-8c89-6d490d6b3bd4",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "consulta_adm",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "consulta_adm"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "e3a57c40-77dd-4d23-936b-e39b15aa7e23",
+          "leftValue": "={{ $json.body.p }}",
+          "rightValue": "BUSINESS_HOURS",
+          "operator": {
+           "type": "string",
+           "operation": "equals",
+           "name": "filter.operator.equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "BUSINESS_HOURS"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra"
+    }
+   },
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.3,
+   "position": [
+    -1728,
+    1824
+   ],
+   "id": "4058cd43-b111-4dac-afa4-c9608c13ae69",
+   "name": "Switch1"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook17",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1168,
+    1440
+   ],
+   "typeVersion": 1,
+   "id": "2527bb06-98a3-48fa-adeb-4914db2abf47"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "=execution_entity",
+     "mode": "name"
+    },
+    "limit": 10,
+    "where": {
+     "values": [
+      {
+       "column": "status",
+       "value": "error"
+      }
+     ]
+    },
+    "sort": {
+     "values": [
+      {
+       "column": "id",
+       "direction": "DESC"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1360,
+    1584
+   ],
+   "id": "a5200593-5e9c-44b5-a218-2ca52d26fe52",
+   "name": "criar_tabela2"
+  },
+  {
+   "parameters": {
+    "resource": "execution",
+    "operation": "get",
+    "executionId": "={{ $json.id }}",
+    "options": {
+     "activeWorkflows": true
+    },
+    "requestOptions": {}
+   },
+   "type": "n8n-nodes-base.n8n",
+   "typeVersion": 1,
+   "position": [
+    -1168,
+    1584
+   ],
+   "id": "05b19127-e132-4414-b24e-12ec459c960a",
+   "name": "Get an execution"
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "02cdc9be-9d4c-4b14-8a5a-b277c7f20664",
+       "name": "id",
+       "value": "={{ $json.id }}",
+       "type": "string"
+      },
+      {
+       "id": "89c57bcb-1afc-4539-9af0-6661f68e4ad5",
+       "name": "name",
+       "value": "={{ $json.workflowData.name }}",
+       "type": "string"
+      },
+      {
+       "id": "954b8a35-12c7-4497-9f52-d09490920ed5",
+       "name": "message",
+       "value": "={{ $json.data.resultData.error.message }}",
+       "type": "string"
+      },
+      {
+       "id": "86c0a16c-f19c-4cc9-89b8-d3d2dc0a16ee",
+       "name": "stack",
+       "value": "={{ $json.data.resultData.error.stack }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    -992,
+    1584
+   ],
+   "id": "c85a052a-c82c-47cd-b67b-ed4dfb3ede41",
+   "name": "Edit Fields"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -848,
+    1584
+   ],
+   "id": "93470ee9-9d40-49c8-ad1e-1629c7c62445",
+   "name": "Code"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook18",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -688,
+    1584
+   ],
+   "typeVersion": 1,
+   "id": "657baa30-7c22-4edd-bfb4-0496487579c9"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook19",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1184,
+    1312
+   ],
+   "typeVersion": 1,
+   "id": "abdede51-c0ac-4da3-b892-643713e0a897"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "whatsapp": "={{ $json.body.whatsapp }}",
+      "nome": "={{ $json.body.nome }}",
+      "data": "={{ $json.body.data }}",
+      "hora": "={{ $json.body.hora }}",
+      "status": "={{ $json.body.status }}",
+      "serviço": "={{ $json.body['serviço'] }}"
+     },
+     "matchingColumns": [],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "data",
+       "displayName": "data",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "hora",
+       "displayName": "hora",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "time",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "serviço",
+       "displayName": "serviço",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1360,
+    1264
+   ],
+   "id": "815309bf-ed4a-429a-8c69-681843e274d5",
+   "name": "criar"
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "whatsapp": "={{ $('backend1').item.json.body.whatsapp }}",
+      "status": "={{ $('backend1').item.json.body.status }}",
+      "data": "={{ $json.body.data }}",
+      "hora": "={{ $json.body.hora }}"
+     },
+     "matchingColumns": [
+      "whatsapp",
+      "data",
+      "hora"
+     ],
+     "schema": [
+      {
+       "id": "whatsapp",
+       "displayName": "whatsapp",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "nome",
+       "displayName": "nome",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "data",
+       "displayName": "data",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "hora",
+       "displayName": "hora",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "time",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "status",
+       "displayName": "status",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "serviço",
+       "displayName": "serviço",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1360,
+    1440
+   ],
+   "id": "3830a962-7314-4cb7-bbd2-88b43e630a43",
+   "name": "edita"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": true,\n  \"user\": {\n    \"email\": \"{{ $json.body.email }}\",\n    \"token\": \"{{ $('Switch1').item.json.body.password }}\",\n    \"user_premium\": {\n       \"data_liberacao\": \"{{ $json.body.data }}\"\n    }\n  },\n  \"user_status\": \"active\"\n}",
+    "options": {}
+   },
+   "name": "Respond to Webhook1",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1264,
+    1776
+   ],
+   "typeVersion": 1,
+   "id": "1c939eb5-b793-4cdc-acd1-20919af0f12e"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.3,
+   "position": [
+    -1488,
+    1872
+   ],
+   "id": "961977a3-9973-468b-9311-b594a6f8ba3a",
+   "name": "info_admin"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={\n  \"success\": false,\n  \"user_status\": \"false\"\n}",
+    "options": {}
+   },
+   "name": "Respond to Webhook2",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1280,
+    1920
+   ],
+   "typeVersion": 1,
+   "id": "289b03bb-fb04-44d6-8d56-b870cde82af6"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -1328,
+    2064
+   ],
+   "id": "10fdf697-8dc5-4186-84cd-bcc1a23c75b5",
+   "name": "Code7"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook20",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1184,
+    2064
+   ],
+   "typeVersion": 1,
+   "id": "dcd3c781-4d5f-4b07-b5b4-38e3eb799c18"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "returnAll": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1472,
+    2064
+   ],
+   "id": "4eefcfb9-243c-434e-a6e8-86a0fd3183a2",
+   "name": "busca1"
+  },
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "backend-agendamento",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -1984,
+    1872
+   ],
+   "id": "1753dfe7-5cc6-489f-9c2c-a38f7eb7c998",
+   "name": "backend1",
+   "webhookId": "c277376b-361b-44dd-91ce-5b29dbd214fd"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Agrupar todos os itens do Postgres em um único item com um campo \"todosContatos\"\nreturn [\n  {\n    json: {\n      data: items.map(item => item.json)\n    }\n  }\n];\n"
+   },
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -1328,
+    2272
+   ],
+   "id": "aff14915-8e82-47e3-8631-8bf879a32caa",
+   "name": "Code8"
+  },
+  {
+   "parameters": {
+    "respondWith": "json",
+    "responseBody": "={{ $json }}",
+    "options": {}
+   },
+   "name": "Respond to Webhook21",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "position": [
+    -1184,
+    2272
+   ],
+   "typeVersion": 1,
+   "id": "1b9d3ffe-42a2-4206-8b94-750058cdea23"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "agendamento",
+     "mode": "list",
+     "cachedResultName": "agendamento"
+    },
+    "returnAll": true,
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -1472,
+    2272
+   ],
+   "id": "8d4ff940-73d2-4228-a7d3-83f3023d4092",
+   "name": "busca2"
+  }
+ ],
+ "pinData": {
+  "backend": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+      "content-length": "64",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/json",
+      "origin": "null",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "45.71.241.194",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "45.71.241.194"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "p": "consulta_adm",
+      "email": "rafael@gmail.com",
+      "password": "123"
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/backend-agendamento",
+     "executionMode": "production"
+    }
+   }
+  ],
+  "ouve-whatsapp1": [
+   {
+    "json": {
+     "headers": {
+      "host": "interface.inovareinteligenciaartificial.com",
+      "user-agent": "EvolutionAPI-Webhook/2.3.7",
+      "content-length": "2056",
+      "accept": "application/json, text/plain, */*",
+      "accept-encoding": "gzip, compress, deflate, br",
+      "content-type": "application/json",
+      "x-event-type": "messages.upsert",
+      "x-forwarded-for": "172.18.0.1",
+      "x-forwarded-host": "interface.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "7f2af2a1ce50",
+      "x-instance-id": "d1a5e006-96d6-4f2e-95ac-66355a9c0680",
+      "x-instance-name": "pessoal",
+      "x-real-ip": "172.18.0.1",
+      "x-timestamp": "1778805746915"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "event": "messages.upsert",
+      "instance": "pessoal",
+      "data": {
+       "key": {
+        "remoteJid": "559185685106@s.whatsapp.net",
+        "remoteJidAlt": "241502404010237@lid",
+        "fromMe": false,
+        "id": "A56C935F9694C63FF75C68E65C14BDBD",
+        "participant": "",
+        "addressingMode": "pn"
+       },
+       "pushName": "inovare inteligencia artficial",
+       "message": {
+        "conversation": "Oi",
+        "messageContextInfo": {
+         "threadId": [],
+         "deviceListMetadata": {
+          "senderKeyIndexes": [],
+          "recipientKeyIndexes": [],
+          "senderTimestamp": {
+           "low": 1776990680,
+           "high": 0,
+           "unsigned": true
+          },
+          "recipientKeyHash": {
+           "0": 78,
+           "1": 137,
+           "2": 147,
+           "3": 25,
+           "4": 199,
+           "5": 77,
+           "6": 237,
+           "7": 164,
+           "8": 181,
+           "9": 163
+          },
+          "recipientTimestamp": {
+           "low": 1778720034,
+           "high": 0,
+           "unsigned": true
+          }
+         },
+         "deviceListMetadataVersion": 2,
+         "messageSecret": {
+          "0": 26,
+          "1": 235,
+          "2": 159,
+          "3": 78,
+          "4": 195,
+          "5": 84,
+          "6": 184,
+          "7": 35,
+          "8": 231,
+          "9": 153,
+          "10": 15,
+          "11": 124,
+          "12": 105,
+          "13": 245,
+          "14": 222,
+          "15": 224,
+          "16": 198,
+          "17": 34,
+          "18": 158,
+          "19": 229,
+          "20": 128,
+          "21": 109,
+          "22": 8,
+          "23": 248,
+          "24": 22,
+          "25": 5,
+          "26": 60,
+          "27": 5,
+          "28": 188,
+          "29": 248,
+          "30": 193,
+          "31": 50
+         }
+        }
+       },
+       "messageType": "conversation",
+       "messageTimestamp": 1778805746,
+       "source": "android",
+       "instanceId": "d1a5e006-96d6-4f2e-95ac-66355a9c0680",
+       "status": "DELIVERY_ACK",
+       "contextInfo": {
+        "threadId": [],
+        "deviceListMetadata": {
+         "senderKeyIndexes": [],
+         "recipientKeyIndexes": [],
+         "senderTimestamp": {
+          "low": 1776990680,
+          "high": 0,
+          "unsigned": true
+         },
+         "recipientKeyHash": {
+          "0": 78,
+          "1": 137,
+          "2": 147,
+          "3": 25,
+          "4": 199,
+          "5": 77,
+          "6": 237,
+          "7": 164,
+          "8": 181,
+          "9": 163
+         },
+         "recipientTimestamp": {
+          "low": 1778720034,
+          "high": 0,
+          "unsigned": true
+         }
+        },
+        "deviceListMetadataVersion": 2,
+        "messageSecret": {
+         "0": 26,
+         "1": 235,
+         "2": 159,
+         "3": 78,
+         "4": 195,
+         "5": 84,
+         "6": 184,
+         "7": 35,
+         "8": 231,
+         "9": 153,
+         "10": 15,
+         "11": 124,
+         "12": 105,
+         "13": 245,
+         "14": 222,
+         "15": 224,
+         "16": 198,
+         "17": 34,
+         "18": 158,
+         "19": 229,
+         "20": 128,
+         "21": 109,
+         "22": 8,
+         "23": 248,
+         "24": 22,
+         "25": 5,
+         "26": 60,
+         "27": 5,
+         "28": 188,
+         "29": 248,
+         "30": 193,
+         "31": 50
+        }
+       }
+      },
+      "destination": "https://interface.inovareinteligenciaartificial.com/webhook/cadastro-pessoal-remarketing-followup",
+      "date_time": "2026-05-14T21:42:26.908Z",
+      "sender": "559184698653@s.whatsapp.net",
+      "server_url": "https://ligawhatsapp.inovareinteligenciaartificial.com",
+      "apikey": "<SEGREDO_REMOVIDO>"
+     },
+     "webhookUrl": "https://interface.inovareinteligenciaartificial.com/webhook/cadastro-pessoal-remarketing-followup",
+     "executionMode": "production"
+    }
+   }
+  ],
+  "backend1": [
+   {
+    "json": {
+     "headers": {
+      "host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+      "content-length": "64",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/json",
+      "origin": "null",
+      "priority": "u=1, i",
+      "sec-ch-ua": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "x-forwarded-for": "45.71.241.194",
+      "x-forwarded-host": "webhookn8n6.inovareinteligenciaartificial.com",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-forwarded-server": "traefik_traefik.1",
+      "x-real-ip": "45.71.241.194"
+     },
+     "params": {},
+     "query": {},
+     "body": {
+      "p": "consulta_adm",
+      "email": "rafael@gmail.com",
+      "password": "123"
+     },
+     "webhookUrl": "https://webhookn8n6.inovareinteligenciaartificial.com/webhook/backend-agendamento",
+     "executionMode": "production"
+    }
+   }
+  ]
+ },
+ "connections": {
+  "pegar hora": {
+   "main": [
+    [
+     {
+      "node": "verifica etapa de 30m ou pesquisa de satisfacao",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "verifica etapa de 1d",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "pegar hora",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "fluxo": {
+   "main": [
+    [
+     {
+      "node": "altorizado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "altorizado": {
+   "main": [
+    [
+     {
+      "node": "atualiza altorizacao",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "verifica etapa de 1d": {
+   "main": [
+    [
+     {
+      "node": "emvia msg1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "emvia msg": {
+   "main": [
+    [
+     {
+      "node": "atualiza etapa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "emvia msg1": {
+   "main": [
+    [
+     {
+      "node": "atuaaliza etapa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "atualiza etapa": {
+   "main": [
+    []
+   ]
+  },
+  "atuaaliza etapa": {
+   "main": [
+    []
+   ]
+  },
+  "time programado a gosto": {
+   "main": [
+    []
+   ]
+  },
+  "se e cadastrado": {
+   "main": [
+    [
+     {
+      "node": "eu mandei ?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "eu mandei ?": {
+   "main": [
+    [
+     {
+      "node": "cadastra_usuario1",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "cadastra_usuario",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca cadastro": {
+   "main": [
+    [
+     {
+      "node": "se e cadastrado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "ouve-whatsapp1": {
+   "main": [
+    [
+     {
+      "node": "filtra grupo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "filtra grupo": {
+   "main": [
+    [
+     {
+      "node": "busca cadastro",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    []
+   ]
+  },
+  "verifica etapa de 30m ou pesquisa de satisfacao": {
+   "main": [
+    [
+     {
+      "node": "emvia msg",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML1": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "frontend": {
+   "main": [
+    [
+     {
+      "node": "HTML1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "backend": {
+   "main": [
+    [
+     {
+      "node": "busca",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code6": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook16",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca": {
+   "main": [
+    [
+     {
+      "node": "Code6",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Switch1": {
+   "main": [
+    [
+     {
+      "node": "criar",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "edita",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+     {
+      "node": "busca2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criar_tabela2": {
+   "main": [
+    [
+     {
+      "node": "Get an execution",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Get an execution": {
+   "main": [
+    [
+     {
+      "node": "Edit Fields",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Edit Fields": {
+   "main": [
+    [
+     {
+      "node": "Code",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook18",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "criar": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook19",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "edita": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook17",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code7": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook20",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca1": {
+   "main": [
+    [
+     {
+      "node": "Code7",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "backend1": {
+   "main": [
+    [
+     {
+      "node": "Switch1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Code8": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook21",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca2": {
+   "main": [
+    [
+     {
+      "node": "Code8",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": false,
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "versionId": "031a880f-03e2-4867-b902-ac6eddc56463",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "96qAweGHyJcuVT1I",
+ "tags": [
+  {
+   "updatedAt": "2024-12-22T19:30:50.649Z",
+   "createdAt": "2024-12-22T19:30:50.649Z",
+   "id": "wnlIzhSyg2mOefR9",
+   "name": "aula-fluxo"
+  }
+ ]
+}

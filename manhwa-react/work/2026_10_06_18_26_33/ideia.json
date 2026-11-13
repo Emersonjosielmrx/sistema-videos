@@ -1,0 +1,30 @@
+{
+ "formato": "história cômica ilustrada com narração TTS",
+ "descricao": "Narrativa curta e engraçada contada através de painéis estáticos de ilustração estilo webtoon/quadrinho, com narração em português, SFX e timing comedico. Estrutura: setup > escalada absurda > punchline visual.",
+ "replicavel": true,
+ "como_fazer": "1) Escrever roteiro cômico de situação cotidiana brasileira com twist absurdo (30-45seg). 2) Gerar 4-6 painéis de ilustração via Gemini/Pollinations (estilo webtoon simplificado, personagens consistentes). 3) Narrar com TTS edge-tts (voz brasileira natural) + diálogos alternados (vozes masculina/feminina). 4) Adicionar SFX nos momentos-chave (susto, transformação, grito) + música de suspense/comédia de fundo. 5) Montar no ffmpeg: painéis com zoom/pan sutil + legendas grandes estilo meme + overlays (raio na transformação, confete no fail). 6) Cortar em 40-50seg, ritmo rápido.",
+ "ferramentas": [
+  "Gemini/Pollinations",
+  "TTS (edge-tts)",
+  "ffmpeg",
+  "SFX meme",
+  "trilhas comédia",
+  "overlays animados"
+ ],
+ "fonte_de_material": "Geração de imagem por IA (prompts detalhados para consistência visual dos personagens), biblioteca de SFX de meme/comédia, trilhas cômicas do acervo",
+ "esforco": "medio",
+ "potencial": 8,
+ "por_que_viraliza": "Identificação universal com situações cotidianas brasileiras + exagero absurdo que subverte expectativa + timing perfeito de comédia física",
+ "exemplo_roteiro": "[Painel 1] 'Amor, tem uma barata aqui!' [SFX: grito feminino]\n[Painel 2] 'Calma, eu vou matar' [música épica começa]\n[Painel 3 - zoom] 'Mas primeiro... MODO COMBATE ATIVADO' [SFX: transformação] [overlay: raio]\n[Painel 4] [personagem todo embrulhado tipo múmia] 'Cadê ela?'\n[Painel 5] 'Tá subindo em você' [SFX: suspense]\n[Painel 6] 'AAAAH!' [overlay: explosão] [música para]",
+ "nicho_canal": "novo canal: ComedyBR Comics",
+ "tags": [
+  "comédia brasileira",
+  "situações cotidianas",
+  "ilustração animada",
+  "relatable",
+  "humor absurdo",
+  "casal"
+ ],
+ "video": "2026-10-06 18-26-33.mp4",
+ "data": "2026-10-12"
+}

@@ -1,0 +1,21 @@
+{
+  "workers": 3,
+  "sleep_min": 5,
+  "sleep_max": 15,
+  "batch": 500,
+  "mode": "comments",
+  "active_hours": [0, 23],
+  "max_per_account_day": 150,
+  "max_per_channel_day": 50,
+  "randomize_order": true,
+  "paused": true,
+  "watch_time": [10, 30],
+  "subscribe": false,
+  "fingerprint": true,
+  "organic_mode": true,
+  "priority": "",
+  "blacklist_channels": [],
+  "blacklist_videos": [],
+  "proxies": [],
+  "comments_extra": []
+}

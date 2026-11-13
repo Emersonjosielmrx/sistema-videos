@@ -1,0 +1,5 @@
+[2:v]format=yuva420p[dv];
+[0:v][dv]overlay=0:408:shortest=1:format=auto[dvs];
+[3:v]format=yuva420p,scale=1080:1920,tpad=start_duration=7.284:start_mode=add:color=black@0.0[ov0];
+[dvs][ov0]overlay=0:0:eof_action=pass:enable='between(t,7.284,9.284)'[ovs0];
+[ovs0]ass='D\:/manhwa-react/work/2026_10_07_16_35_46/part1/captions.ass':fontsdir='D\:/manhwa-react/assets/fonts',format=yuv420p[vout]

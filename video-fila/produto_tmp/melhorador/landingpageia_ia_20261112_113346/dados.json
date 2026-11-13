@@ -1,0 +1,341 @@
+{
+ "video": "landingpageia_ia_20261112_113346.mp4",
+ "conta": "landingpageia.ia",
+ "marca": "Landing Page e Comunicação",
+ "titulo": "Como apresentar seu novo produto digital",
+ "formato": "dono_tres_veo_final",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.5,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.64
+   ],
+   [
+    1,
+    "dono",
+    11.01
+   ],
+   [
+    2,
+    "dono",
+    12.73
+   ],
+   [
+    3,
+    "dono",
+    11.93
+   ],
+   [
+    4,
+    "cartao",
+    10.42
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Enquadramento claustrofóbico e legenda cobrindo o rosto: o apresentador está com zoom excessivo em relação às cenas seguintes, fazendo com que o cartão superior corte o topo de sua cabeça e a legenda karaokê ('Como apresentar meu') fique sobreposta diretamente ao seu queixo e barba.",
+   "como_corrigir": "Ajustar o enquadramento do apresentador na Cena 0 para o mesmo plano médio (busto) das Cenas 1 a 3, dando respiro abaixo do cartão de pergunta e posicionando a legenda sobre a camisa (em torno de y=1450), sem invadir o queixo ou o rosto."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Pouco contraste no título 'Landing Page e Comunicação': a cor laranja sem borda ou sombra projeta-se sobre a parte clara e amadeirada da estante ao fundo, prejudicando a legibilidade imediata na tela do celular.",
+   "como_corrigir": "Aplicar uma sombra projetada escura (drop shadow), contorno sutil ou uma máscara/vinheta escura sobre o vídeo de fundo para destacar o texto laranja sobre áreas claras."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Enquadramento com letterbox (faixas pretas): o vídeo de fundo da Cena 4 não preenche a proporção 9:16 (1080x1920), apresentando faixas pretas espessas no topo e na base que quebram a imersão de tela cheia do Reels.",
+   "como_corrigir": "Redimensionar/escalar o vídeo de fundo da Cena 4 para cobrir totalmente o formato 1080x1920 (crop/fill vertical), eliminando as faixas pretas horizontais."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Cena parada com foto estática congelada do apresentador durante todo o hook (0s a ~4s). Os quadros q01, q02 e q03 são exatamente a mesma imagem fixa sem qualquer movimento facial ou de fundo, alterando apenas a legenda.",
+   "como_corrigir": "Substituir a foto congelada por filmagem em vídeo real do apresentador falando ou, no mínimo, aplicar um push-in digital lento contínuo combinado com animação de entrada (pop/slide com amortecimento) para o cartão de pergunta."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Falta de variedade e ritmo arrastado: as cenas 1, 2 e 3 (mais de 20 segundos) utilizam exatamente o mesmo molde visual estático, no mesmo ângulo e enquadramento de câmera, sem nenhum mockup da landing page, demonstração visual do produto ou corte de apoio.",
+   "como_corrigir": "Alternar o enquadramento entre os blocos (aplicar corte com punch-in de escala 10-15% nas mudanças de tópicos) e inserir elementos visuais de apoio, como screencast ou mockup animado da landing page e do vídeo demo sendo navegados."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Transição seca (jump cut) no mesmo eixo entre os blocos de fala (da cena 1 para a 2 e da 2 para a 3), gerando um salto visual brusco sem dinamismo de motion.",
+   "como_corrigir": "Inserir transição dinâmica com corte de escala (plano médio para plano fechado) e reforçar a troca do tópico numerado com animação de entrada com overshoot ou slide lateral suave."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Fundo com imagem escura de banco de imagens genérico (pessoa de perfil no laptop), desconectada da ambientação calorosa do escritório do apresentador e do tom da marca.",
+   "como_corrigir": "Substituir o stock genérico por um fundo com motion graphics institucional nas cores da marca ou pelo próprio apresentador no cenário real apontando para a chamada do direct."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Gancho fraco nos primeiros 2 segundos: o apresentador está totalmente desfocado/borrado no fundo e o card de pergunta é estático, passando impressão de erro de foco ou baixa qualidade de vídeo logo na abertura; além disso, há um traço laranja cortado pela metade na base inferior do card.",
+   "como_corrigir": "Remover o blur pesado da cena 0 mantendo o apresentador nítido desde o primeiro frame; animar a entrada do gancho com tipografia dinâmica nos primeiros 2 segundos e corrigir a barra laranja da base para ocupar a largura total do cartão."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Ausência total de demonstração visual do produto vendido: o locutor afirma 'Apresento a solução com landing page pronta e vídeo demo', mas o vídeo continua mostrando apenas o busto do apresentador na mesma sala, sem exibir nenhum mockup, tela ou demonstração real da landing page ou do vídeo.",
+   "como_corrigir": "Cortar para B-roll dinâmico ou aplicar split-screen/picture-in-picture exibindo um mockup navegável de uma landing page responsiva de alta conversão e um trecho do vídeo demo em execução, provando a qualidade do serviço."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Monotonia visual acumulada do plano único: da cena 1 à cena 3 são mais de 20 segundos ininterruptos exatamente no mesmo enquadramento estático do apresentador, sem variação de escala de câmera ou elementos gráficos que sustentem a retenção do anúncio.",
+   "como_corrigir": "Aplicar dinamismo de câmera na transição para a cena 3 através de um corte seco com zoom digital (punch-in de 1.15x) para dar ênfase à fala de resultado, acompanhado de ícones ou métricas visuais animadas ao lado do apresentador."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Quebra de identidade e estética genérica no encerramento: transição abrupta para um vídeo de banco de imagens escuro e desconexo do ambiente diurno anterior, além de uma barra laranja flutuando isolada no terço superior e botão de CTA com brilho 'glossy' datado.",
+   "como_corrigir": "Substituir o stock escuro por um fundo clean com a identidade da marca ou manter o próprio apresentador com sobreposição de tela final; remover o traço laranja solto acima do título e adotar design contemporâneo no botão do CTA."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261112_000116.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.5,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.12,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 6.5,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 5.83,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 5.88,
+   "notas": {
+    "legibilidade": 6.5,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261112_045401.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "sem_dono",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "mentoriasia_ia_20261112_063630.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

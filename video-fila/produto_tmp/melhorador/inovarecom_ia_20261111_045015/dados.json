@@ -1,0 +1,349 @@
+{
+ "video": "inovarecom_ia_20261111_045015.mp4",
+ "conta": "inovarecom.ia",
+ "marca": "Hermes Call",
+ "titulo": "Chamadas com inteligência artificial no WhatsApp",
+ "formato": "dono_abre_fecha_veo_meio",
+ "veo_total": 3,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.75,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 9.0,
+   "diretor": 6.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    10.71
+   ],
+   [
+    1,
+    "dono",
+    10.97
+   ],
+   [
+    2,
+    "veo",
+    26.85
+   ],
+   [
+    3,
+    "dono",
+    13.32
+   ],
+   [
+    4,
+    "cartao",
+    4.61
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('ligar') está posicionada diretamente sobre a boca e o queixo do apresentador no enquadramento com zoom fechado (punch-in), cobrindo o rosto e a articulação da fala.",
+   "como_corrigir": "Descer a linha de base da legenda karaokê para a região do peitoral (em torno de y=1480 a 1520) ou ajustar o enquadramento do vídeo/câmera com zoom mais alto para manter o queixo do apresentador livre acima da legenda."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "A palavra destacada pelo efeito karaokê ('vendas') foi renderizada em verde escuro/apagado em vez do verde claro vibrante usado nos demais quadros, gerando baixo contraste sobre a camiseta azul-marinho e o fundo escuro da legenda.",
+   "como_corrigir": "Padronizar a cor da palavra ativa do karaokê com o mesmo verde claro brilhante/neon da marca utilizado em q04 e q05, assegurando legibilidade instantânea no celular."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Imagem com cara de banco de imagem genérico mostrando pessoas andando em escritório desfocado, sem qualquer relação visual com o Hermes Call, disparo de ligações automáticas ou voz clonada por IA.",
+   "como_corrigir": "Substituir o b-roll genérico por um mockup animado de smartphone recebendo chamadas do WhatsApp em massa, animação de ondas sonoras representando voz clonada ou dashboard com métricas de disparos em tempo real."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Cena parada e ritmo arrastado; o apresentador permanece falando estático por mais de 5 segundos no mesmo enquadramento e cenário das cenas 0 e 1, gerando falta de variedade e cansaço visual.",
+   "como_corrigir": "Aplicar um slow push-in (zoom contínuo suave) na câmera e inserir motion graphics de apoio (ícones de robô, gráficos em curva ascendente ou badges numéricos de ligações escalando com efeito pop-in) ilustrando a fala de escala e IA."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cartão final com dinâmica quase estática por cerca de 3 segundos; apenas um reflexo discreto passa pelo botão, enquanto o logotipo, os textos de apoio e o @ ficam completamente congelados.",
+   "como_corrigir": "Animar a entrada dos elementos em cascata (stagger com fade e slide up suave), aplicar efeito contínuo de pulsação (scale pulse) no botão 'Chame no direct' e adicionar um ponteiro animado simulando o clique na chamada para ação."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca no corte entre a cena 0 e a cena 1, mantendo o apresentador exatamente no mesmo fundo e posição, com o selo '1 O desafio' surgindo sem animação de transição marcante.",
+   "como_corrigir": "Adicionar uma transição dinâmica (como whip pan sutil ou zoom transition rápido) e animar a entrada do tópico numerado com slide-in e overshoot elástico."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "O vídeo de fundo da cena 2 mostra pessoas em um escritório caminhando e manuseando folhas de papel impresso, o que não combina com a fala sobre 'ligações em massa com voz real e clonada, oferecendo atendimento contínuo' e não ilustra adequadamente o tópico 'Como funciona'.",
+   "como_corrigir": "Substituir o B-roll por imagens ou animações que remetam à tecnologia do produto, como um dashboard de chamadas ativas, simulação de tela de WhatsApp/smartphone realizando chamadas ou representação visual de ondas de áudio/voz de inteligência artificial."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho inicial não prende nos dois primeiros segundos: a abertura é estática e fria, sem punch-in de câmera, sem sound design de impacto e com o apresentador em tom morno, facilitando o swipe away antes da entrega da promessa.",
+   "como_corrigir": "Aplicar no segundo 0 um zoom digital dinâmico (punch-in de 10% a 15%), inserir efeito sonoro de alerta ou notificação urgente e dirigir a fala inicial com mais energia gestual e ênfase na dor de 'perder vendas'."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "B-roll incoerente que destrói a percepção de empresa de tecnologia: a narração cita 'ligações em massa com voz real e clonada', mas o vídeo mostra funcionários transitando com folhas de papel sulfite impressas na mão, entregando visual de banco de imagens genérico e arcaico.",
+   "como_corrigir": "Substituir o b-roll por um mockup dinâmico de smartphone ou dashboard mostrando chamadas simultâneas de WhatsApp em execução, com ondas sonoras de IA e métricas de discagem para tangibilizar a sofisticação do software."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Cartão final estático estilo slide corporativo por cerca de 3 segundos: a quebra do apresentador humano para uma tela monocromática chapada com texto centralizado parece PowerPoint antigo e derruba a retenção no momento do CTA.",
+   "como_corrigir": "Manter o apresentador na cena em split screen ou picture-in-picture apontando para o botão do direct, ou aplicar motion design com pulso contínuo no botão 'Chame no direct' e microanimação simulando o envio de mensagem."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Corte de entrada desfavorável: a transição para a cena 1 inicia com o apresentador no meio de um piscar de olhos e boca entreaberta na palavra 'robôs', gerando impressão de corte amador.",
+   "como_corrigir": "Ajustar o trim do corte para iniciar em um quadro com os olhos abertos e olhar firme na lente, garantindo continuidade e fluidez profissional entre os planos."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Falta de reforço visual para tangibilizar o bloco 'O resultado': ao afirmar que a operação escala e vende sem parar com inteligência artificial, a cena repete o enquadramento anterior sem gráficos, badges ou dados de prova social.",
+   "como_corrigir": "Incluir sobreposições gráficas dinâmicas (como pop-ups de vendas caindo, volume de ligações escalando ou percentual de conversão) ao lado do apresentador para dar peso visual ao resultado anunciado."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 7.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261106_153434.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261110_045334.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261110_061444.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 6.5,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261110_100550.mp4",
+   "conta": "followupia.ia",
+   "formato": "cinco_veo",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 3.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261110_143858.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261111_045015.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 7.62,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.5,
+    "roteiro_marca": 10.0,
+    "diretor": 7.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_abre_fecha_veo_meio+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   6,
+   1
+  ],
+  "dono_mesma_foto": [
+   2,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   2,
+   0
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   18,
+   6
+  ]
+ },
+ "vigiando": []
+}

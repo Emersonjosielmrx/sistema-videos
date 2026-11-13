@@ -1,0 +1,9 @@
+{
+  "_leia": "Regras aplicadas pelo youtube_poster.py a TODO upload. exigir_aprovacao_humana: false desliga a revisão (bin/aprovar.py). 16/10 (dono): piso de segurança no código (politica.PISO = 4 por canal/dia, 20/dia, 1 h entre vídeos do mesmo canal) — este arquivo pode APERTAR, mas valor mais frouxo (ou null) é ignorado. || 16/10 (ORDEM DO DONO): POSTAR POR API ESTA PROIBIDO. Todo upload vai pelo NAVEGADOR (youtube_web_poster.py). Canal novo entra em config/youtube_navegador.json com \"usar\": true. Em 16/10 oito uploads do ManhwaReact-ia subiram pela API (youtube_poster.py) sem ninguem notar, e o canal foi corrigido no mesmo dia. Se aparecer upload com script=youtube_poster.py no ledger, e erro: ponha o canal no navegador. || 16/10 (noite, dono): o limite e POR CANAL e nunca coletivo — max_uploads_total_dia = null. O que segura o uploadLimitExceeded e o 4/canal/dia mais a 1 h entre videos do mesmo canal.",
+  "max_uploads_por_canal_dia": 4,
+  "max_uploads_total_dia": null,
+  "intervalo_min_horas_mesmo_canal": 1,
+  "exigir_aprovacao_humana": true,
+  "parar_tudo_ao_detectar_suspensao": true,
+  "proibido_postar_por_api": true
+}

@@ -1,0 +1,83 @@
+{
+  "_leia": "VERSIONAMENTO DAS CENSURAS (ideia do dono, 16/10/2026: 'tem que ter uma espécie de versionamento de censuras, assim não ficamos dando voltas'). Cada receita tem nome, parâmetros, quem aprovou e quando, e o que ficou decidido. Antes de propor uma censura nova, LEIA isto: se já foi reprovada ou vetada, não repita. bin/censura_visual.py lê os parâmetros daqui (_receita).",
+  "_tres_niveis": "Como ficou depois da conversa de 16/10. São DOIS caminhos, não três: 1) LOCAL (mosaico_local_v1) — sempre que a localização marca as caixas; é o normal e o que o dono aprovou. 2) FOSCO DO PAINEL INTEIRO (fosco_painel_v1) — só quando não há localização utilizável. O dono: 'aí tem a questão dos localizados, que está boa, aí só vai usar na tela toda quando não tiver localização'. Um terceiro nível mais forte foi testado e RECUSADO por ele no mesmo dia (ver fosco_forte_recusado).",
+  "em_uso": {
+    "com_localizacao": "mosaico_local_v1",
+    "fosco_painel": "fosco_painel_v1"
+  },
+  "receitas": {
+    "mosaico_local_v1": {
+      "o_que_e": "mosaico só dentro das caixas que a localização marcou, com borda suave",
+      "onde": "censura_visual.censurar_localizado",
+      "status": "APROVADO",
+      "quem": "dono, 16/10/2026",
+      "nota": "'as que você usa mosaico localizado estão ótimas'. Não mexer."
+    },
+    "mosaico_painel_v3": {
+      "o_que_e": "mosaico do painel inteiro, colorido, blocos de 40 px e borrão 25",
+      "onde": "era censura_visual.censurar_fosco, por algumas horas em 16/10",
+      "parametros": {
+        "blocos": 40,
+        "blur_kernel": 25
+      },
+      "status": "REPROVADO NO TESTE",
+      "quem": "testado em 16/10, depois de aprovado na amostra",
+      "nota": "É a 'da direita' que o dono escolheu nas amostras, e na amostra estava boa mesmo. Mas as amostras eram de painel fraco: aplicada ao painel 100 do cap 3 (720x2016, score 1,73), que é o caso real em que o fosco entra, as pernas e a posição continuavam legíveis e a conferência por visão respondeu que AINDA APARECIA. Virou o fosco_medio_v1/fosco_forte_v1, que são a mesma receita com os números calibrados nesse painel. Não voltar a estes números no caminho do fosco."
+    },
+    "exodia_fosco_v1": {
+      "o_que_e": "negativo + pixelão + cinza + ruído + véu branco + GaussianBlur 251 + balões nítidos",
+      "onde": "censura_visual.censurar_fosco_exodia (era o censurar_fosco até 16/10)",
+      "status": "APOSENTADO",
+      "quem": "dono, 16/10/2026",
+      "nota": "'a ideia é só não usar o blur total como tem usado'. Esconde bem, mas o painel vira mancha e perde a cor. Medido em 16/10: o negativo não muda nada no resultado final — só o borrão trabalhava."
+    },
+    "recorte_parte_limpa": {
+      "o_que_e": "enquadrar o clip numa faixa do painel que não tem região +18, em vez de cobrir",
+      "onde": "censura_visual.censurar_recortando (CENSURA_RECORTE=1 liga)",
+      "status": "REPROVADO NO TESTE",
+      "quem": "testado em 16/10",
+      "nota": "Ideia boa do dono, mas os recortes saíram COM nudez nos painéis 086, 066 e 007 do cap 3: a localização só marca a área que o modelo aponta e o resto do corpo fica fora das caixas. Só religar depois que a detecção cobrir o corpo inteiro."
+    },
+    "tarja_preta": {
+      "o_que_e": "retângulo preto sobre a região",
+      "status": "VETADO",
+      "quem": "dono, 16/10/2026",
+      "nota": "'ela e tarjas pretas são muito ruins'. Nunca propor."
+    },
+    "mosaico_painel_cinza": {
+      "o_que_e": "mosaico do painel inteiro em preto e branco",
+      "status": "VETADO",
+      "quem": "dono, 16/10/2026",
+      "nota": "'nada de cinza'. Esconde mais que o colorido, mas o dono não quer."
+    },
+    "mostrar_rapido": {
+      "o_que_e": "mostrar o conteúdo sem censura por pouco tempo, contando que o detector não pegue",
+      "status": "VETADO",
+      "nota": "O canal já levou advertência por nudez em 16/10 e a segunda derruba o canal. Não implementar."
+    },
+    "fosco_painel_v1": {
+      "o_que_e": "mosaico do painel inteiro, COLORIDO (blocos de 55 px), com borrão 45 por cima; balões recolocados nítidos",
+      "onde": "censura_visual.censurar_fosco",
+      "parametros": {
+        "blocos": 55,
+        "blur_kernel": 45,
+        "cinza": false,
+        "veu": 0.0,
+        "interpolacao": "linear"
+      },
+      "status": "EM USO — nível único",
+      "quem": "16/10/2026",
+      "nota": "Único nível do painel inteiro. Entra só quando não há localização utilizável. Mantém a cor e a composição — nada de cinza, nada de tarja, nada do véu branco do Exodia. Conferido no painel 100 do cap 3 (o mais explícito da obra, score 1,73): não dá pra ler anatomia e a conferência por visão respondeu que não aparece mais."
+    },
+    "fosco_forte_recusado": {
+      "o_que_e": "o mesmo mosaico colorido, mais grosso (blocos de 90 px) e borrão 95, como 3º nível para score alto",
+      "parametros": {
+        "blocos": 90,
+        "blur_kernel": 95
+      },
+      "status": "RECUSADO",
+      "quem": "dono, 16/10/2026",
+      "nota": "Mostrado a ele junto com o médio: *'o N3 certeza é quase blur total, não dá pra manter só no anterior?'*. Esconde mais, mas cai no que ele já tinha vetado. Não propor de novo."
+    }
+  }
+}

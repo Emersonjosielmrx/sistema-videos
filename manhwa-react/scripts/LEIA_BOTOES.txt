@@ -1,0 +1,42 @@
+MANHWAREACT E REDE DE CANAIS - O QUE CADA BOTÃO FAZ
+====================================================
+
+1 - COLOQUE AQUI as gravacoes - em pe ou deitadas (pasta)
+    Pasta única para todas as gravações do OBS, em pé (celular) ou deitadas (laterais). Pode misturar:
+    o sistema separa sozinho pelo formato.
+
+2 - PROCESSAR as gravacoes
+    Em pé: edita e vira Shorts, cada um no canal do tema.
+    Deitada (mais de 4 min): divide por assunto; cada assunto vira um VÍDEO COMPLETO (com capítulos e
+    thumb) e também Shorts cortados dele. Os completos são postados pela rede: 1 por canal por dia.
+    (Toda noite, às 02:00, isso também roda sozinho.)
+
+3 - APROVAR os videos prontos
+    Abre cada vídeo pronto no player: a = aprovar, r = rejeitar, p = pular, s = sair.
+    Os aprovados entram na agenda da rede: 1 vídeo por canal por dia, no horário de cada canal.
+    No fim, mostra o plano dos próximos 3 dias (só simulação, nada sobe nessa hora).
+
+4 - VIDEOS PRONTOS (pasta)
+    Os Shorts prontos, separados por canal.
+
+5 - POSTAGEM AUTOMATICA - LIGAR
+    Volta a postar sozinho. Na hora, faz as pendentes de hoje: todo canal que ainda tem vídeo
+    para hoje publica já (sem esperar o horário do canal), com 20 minutos entre um canal e outro.
+    Depois segue a agenda normal nos próximos dias (1 vídeo por canal por dia, no horário de cada canal).
+
+6 - POSTAGEM AUTOMATICA - DESLIGAR
+    Para as postagens automáticas desta rede: a rodada de hora em hora, os comentários do canal, o ciclo
+    das 06:40 e o agendador VO3. Nenhum navegador abre por elas. Os vídeos continuam na fila, nada se perde.
+    (MS Energy e Veo têm os próprios botões de ligar e desligar.)
+    Se apertar no meio de uma rodada, ela termina o upload que está fazendo e para.
+
+7 - PAINEL DOS CANAIS (views e comentarios)
+    Inscritos, views, likes e comentários dos 19 canais (abre no navegador).
+
+8 - CORTAR SO A CAMERA (arraste o video em cima)
+    Arraste uma gravação em cima deste botão: sai só a webcam, em 1920x1080.
+
+9 - Pasta do projeto manhwa-react
+
+Observação: vídeo que já subiu para o YouTube agendado continua agendado lá. O YouTube publica na hora,
+mesmo com a postagem desligada (isso não abre navegador).

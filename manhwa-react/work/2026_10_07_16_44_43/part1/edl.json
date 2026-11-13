@@ -1,0 +1,697 @@
+{
+ "part": [
+  0.0,
+  55.0
+ ],
+ "keeps": [
+  [
+   0.718708,
+   6.3945
+  ],
+  [
+   6.784958,
+   7.310271
+  ],
+  [
+   7.662312,
+   8.222854
+  ],
+  [
+   8.848438000000002,
+   9.365146
+  ],
+  [
+   10.000604000000001,
+   13.273166999999999
+  ],
+  [
+   14.337937,
+   15.433770999999998
+  ],
+  [
+   16.201916999999998,
+   16.749146
+  ],
+  [
+   17.105771,
+   17.607708
+  ],
+  [
+   18.927979,
+   20.235667
+  ],
+  [
+   20.326021,
+   20.826041999999998
+  ],
+  [
+   22.806521,
+   26.014021
+  ],
+  [
+   27.274667,
+   28.254437
+  ],
+  [
+   28.527936999999998,
+   33.44489600000001
+  ],
+  [
+   33.947103999999996,
+   34.45302100000001
+  ],
+  [
+   38.851604,
+   41.047208000000005
+  ],
+  [
+   41.689854,
+   42.35735400000001
+  ],
+  [
+   45.997146,
+   47.394042000000006
+  ],
+  [
+   47.546417,
+   48.78058300000001
+  ],
+  [
+   49.120521,
+   50.99606300000001
+  ],
+  [
+   51.163833,
+   51.66385400000001
+  ],
+  [
+   53.155771,
+   53.852583
+  ],
+  [
+   53.975042,
+   55.0
+  ]
+ ],
+ "duration_out": 33.70527200000006,
+ "zoom": [
+  [
+   0.0,
+   4.15,
+   1
+  ],
+  [
+   4.0,
+   4.911,
+   2
+  ],
+  [
+   7.998,
+   9.908,
+   1
+  ],
+  [
+   12.748,
+   14.018,
+   2
+  ],
+  [
+   14.677,
+   18.827,
+   1
+  ],
+  [
+   18.677,
+   22.827,
+   2
+  ],
+  [
+   22.677,
+   23.758,
+   1
+  ],
+  [
+   24.242,
+   25.892,
+   2
+  ],
+  [
+   27.16,
+   28.524,
+   1
+  ],
+  [
+   29.707,
+   31.79,
+   2
+  ],
+  [
+   32.705,
+   33.705,
+   1
+  ]
+ ],
+ "content_zoom": [
+  [
+   23.11295999999999,
+   24.262959999999993
+  ],
+  [
+   27.92973100000002,
+   29.079731000000024
+  ]
+ ],
+ "keywords": [
+  {
+   "t": 23.16295999999999,
+   "text": "CARTA",
+   "emoji": "📩"
+  },
+  {
+   "t": 27.979731000000022,
+   "text": "GRÁVIDA",
+   "emoji": "😱"
+  }
+ ],
+ "sfx": [
+  {
+   "t": 0.0,
+   "file": "D:\\manhwa-react\\assets\\sfx\\whoosh.wav"
+  },
+  {
+   "t": 15.167372400000026,
+   "file": "D:\\manhwa-react\\assets\\sfx\\like.wav"
+  },
+  {
+   "t": 17.69710599999999,
+   "file": "D:\\manhwa-react\\assets\\memes_audio\\video_com_zoom1MP54.wav"
+  },
+  {
+   "t": 23.16295999999999,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 25.262169000000007,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_memes\\Sarcasmo - Efeitos sonoros Nerzinho.mp3"
+  },
+  {
+   "t": 27.979731000000022,
+   "file": "D:\\manhwa-react\\assets\\sfx\\pop.wav"
+  },
+  {
+   "t": 31.205272000000058,
+   "file": "D:\\manhwa-react\\assets\\sfx\\cta.wav"
+  },
+  {
+   "t": 32.70527200000006,
+   "file": "D:\\hipercool-materiais\\assets\\sfx_extras\\sonoros\\Outros efeitos sonoros\\Outros efeitos sonoros\\Bruh - Efeitos sonoros Nerzinho.mp3"
+  }
+ ],
+ "overlays": [
+  {
+   "t": 15.167372400000026,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_likeburst.mov",
+   "dur": 1.8,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 17.69710599999999,
+   "file": "D:\\hipercool-materiais\\assets\\memes_img\\memes\\video_com_zoom1MP54.mp4",
+   "dur": 4.0,
+   "png": false,
+   "video": true
+  },
+  {
+   "t": 23.06295999999999,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 23.16295999999999,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f4e9_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 25.162169000000006,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_emojirain.mov",
+   "dur": 1.6,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 25.262169000000007,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f602_220.png",
+   "dur": 1.4,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 27.87973100000002,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_impact.mov",
+   "dur": 0.9,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 27.979731000000022,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f631_220.png",
+   "dur": 1.3,
+   "png": true,
+   "video": false
+  },
+  {
+   "t": 31.205272000000058,
+   "file": "D:\\manhwa-react\\assets\\overlays_cache\\fx_part2.mov",
+   "dur": 2.0,
+   "png": false,
+   "video": false
+  },
+  {
+   "t": 32.70527200000006,
+   "file": "D:\\manhwa-react\\assets\\emoji\\e_1f633_220.png",
+   "dur": 1.1,
+   "png": true,
+   "video": false
+  }
+ ],
+ "music": "D:\\hipercool-materiais\\assets\\trilhas\\rezero_creepy_theme.mp3",
+ "meta": {
+  "hook": "MULHER VINGATIVA É O PIOR QUE EXISTE",
+  "title": "Essa mulher é o CAPETA do cinema 😈 Vocês já viram esse filme? #shorts #react",
+  "description": "Reagindo a um dos filmes mais tensos que já assisti! Essa personagem vingativa vai te deixar de queixo caído 😱\nVocês já assistiram esse filme? Comentem aí!\nSe curtiu, segue pra mais reacts insanos!\n\n#shorts #react #filme #suspense #cinema #garotaexemplar #gonegirl #cena #reacao #hollywood #thriller #filmes #drama",
+  "hashtags": [
+   "#shorts",
+   "#react",
+   "#filme",
+   "#suspense",
+   "#cinema",
+   "#garotaexemplar",
+   "#thriller",
+   "#drama"
+  ],
+  "tags": [
+   "react",
+   "filme",
+   "garota exemplar",
+   "gone girl",
+   "suspense",
+   "thriller",
+   "cinema",
+   "cena de filme",
+   "mulher vingativa",
+   "react filme",
+   "filmes de suspense",
+   "hollywood",
+   "drama",
+   "reação",
+   "react br"
+  ],
+  "cta": "Segue pra mais reacts!",
+  "mood": "tense_dramatic",
+  "music": true,
+  "pinned_comment": "Vocês acham que essa personagem é a vilã mais assustadora do cinema? 🤔",
+  "title_alternatives": [
+   "Ela fez o IMPENSÁVEL e o marido se ferrou 😈🔥 #shorts #react",
+   "Nunca mexa com uma mulher VINGATIVA 😱 Esse filme prova! #shorts #suspense"
+  ],
+  "work": "GAROTA EXEMPLAR",
+  "channel": "cenareact"
+ },
+ "channel": "cenareact",
+ "seam": {
+  "mask": "D:\\manhwa-react\\assets\\dividers\\mask_tear_1080x1488_56_7.png",
+  "overlap": 56,
+  "y": 488,
+  "divider": "D:\\manhwa-react\\assets\\dividers\\fire_ffb800_160.mov",
+  "divider_h": 160,
+  "opacity": 1.0,
+  "style": "fire"
+ },
+ "words": [
+  {
+   "w": "Vamos",
+   "s": 0.0,
+   "e": 0.281292,
+   "p": 0.9,
+   "lip": 0.007256296767534916,
+   "speaker": "creator"
+  },
+  {
+   "w": "ver",
+   "s": 0.281292,
+   "e": 0.4612919999999999,
+   "p": 0.9,
+   "lip": 0.010312655247140886,
+   "speaker": "creator"
+  },
+  {
+   "w": "o",
+   "s": 0.4612919999999999,
+   "e": 0.601292,
+   "p": 0.9,
+   "lip": 0.009704705708728436,
+   "speaker": "creator"
+  },
+  {
+   "w": "risco",
+   "s": 0.601292,
+   "e": 1.121292,
+   "p": 0.9,
+   "lip": 0.01062965827682794,
+   "speaker": "creator"
+  },
+  {
+   "w": "de",
+   "s": 1.121292,
+   "e": 1.3212920000000001,
+   "p": 0.9,
+   "lip": 0.009602605840916356,
+   "speaker": "creator"
+  },
+  {
+   "w": "ter",
+   "s": 1.3212920000000001,
+   "e": 3.3812919999999997,
+   "p": 0.9,
+   "lip": 0.010568816516850928,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 3.3812919999999997,
+   "e": 3.5212920000000003,
+   "p": 0.9,
+   "lip": 0.023667081222396046,
+   "speaker": "creator"
+  },
+  {
+   "w": "mulher",
+   "s": 3.5212920000000003,
+   "e": 3.701292,
+   "p": 0.9,
+   "lip": 0.022359947657945318,
+   "speaker": "creator"
+  },
+  {
+   "w": "bandida,",
+   "s": 3.701292,
+   "e": 4.281292,
+   "p": 0.9,
+   "lip": 0.013263412712332761,
+   "speaker": "creator"
+  },
+  {
+   "w": "né?",
+   "s": 4.281292,
+   "e": 4.761292,
+   "p": 0.9,
+   "lip": 0.004774111405950776,
+   "speaker": "creator"
+  },
+  {
+   "w": "Vai",
+   "s": 7.997750999999997,
+   "e": 8.177750999999997,
+   "p": 0.9,
+   "lip": 0.008186302449555432,
+   "speaker": "creator"
+  },
+  {
+   "w": "dizer",
+   "s": 8.177750999999997,
+   "e": 8.357750999999997,
+   "p": 0.9,
+   "lip": 0.014126833489997104,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 8.357750999999997,
+   "e": 8.457750999999996,
+   "p": 0.9,
+   "lip": 0.01647125604407156,
+   "speaker": "creator"
+  },
+  {
+   "w": "ela",
+   "s": 8.457750999999996,
+   "e": 8.577750999999997,
+   "p": 0.9,
+   "lip": 0.01598771715932045,
+   "speaker": "creator"
+  },
+  {
+   "w": "foi",
+   "s": 8.577750999999997,
+   "e": 8.817750999999996,
+   "p": 0.9,
+   "lip": 0.017288104156073614,
+   "speaker": "creator"
+  },
+  {
+   "w": "agredida.",
+   "s": 8.817750999999996,
+   "e": 9.757750999999997,
+   "p": 0.9,
+   "lip": 0.007326841664149493,
+   "speaker": "creator"
+  },
+  {
+   "w": "Tô",
+   "s": 12.747938999999993,
+   "e": 13.007938999999991,
+   "p": 0.9,
+   "lip": 0.008216350058045597,
+   "speaker": "creator"
+  },
+  {
+   "w": "te",
+   "s": 13.007938999999991,
+   "e": 13.187938999999995,
+   "p": 0.9,
+   "lip": 0.008899461910767585,
+   "speaker": "creator"
+  },
+  {
+   "w": "falando.",
+   "s": 13.187938999999995,
+   "e": 13.867938999999994,
+   "p": 0.9,
+   "lip": 0.0053334254031626996,
+   "speaker": "creator"
+  },
+  {
+   "w": "Rapaz,",
+   "s": 14.67710599999999,
+   "e": 15.17710599999999,
+   "p": 0.9,
+   "lip": 0.022472080607729657,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 15.17710599999999,
+   "e": 15.397105999999988,
+   "p": 0.9,
+   "lip": 0.017152519727126336,
+   "speaker": "creator"
+  },
+  {
+   "w": "mulher",
+   "s": 15.397105999999988,
+   "e": 15.81710599999999,
+   "p": 0.9,
+   "lip": 0.023314976289166515,
+   "speaker": "creator"
+  },
+  {
+   "w": "vingativa...",
+   "s": 15.81710599999999,
+   "e": 17.31710599999999,
+   "p": 0.9,
+   "lip": 0.01868715931094177,
+   "speaker": "creator"
+  },
+  {
+   "w": "Rapaz,",
+   "s": 17.69710599999999,
+   "e": 19.262959999999993,
+   "p": 0.9,
+   "lip": 0.01187475317381159,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 19.262959999999993,
+   "e": 19.34295999999999,
+   "p": 0.9,
+   "lip": 0.017732241335855506,
+   "speaker": "creator"
+  },
+  {
+   "w": "mulher",
+   "s": 19.34295999999999,
+   "e": 19.582959999999993,
+   "p": 0.9,
+   "lip": 0.016349869947953975,
+   "speaker": "creator"
+  },
+  {
+   "w": "vingativa",
+   "s": 19.582959999999993,
+   "e": 20.36295999999999,
+   "p": 0.9,
+   "lip": 0.0150183062929555,
+   "speaker": "creator"
+  },
+  {
+   "w": "não",
+   "s": 20.36295999999999,
+   "e": 20.54295999999999,
+   "p": 0.9,
+   "lip": 0.014355163710628139,
+   "speaker": "creator"
+  },
+  {
+   "w": "tem",
+   "s": 20.54295999999999,
+   "e": 20.762959999999993,
+   "p": 0.9,
+   "lip": 0.014225309909473365,
+   "speaker": "creator"
+  },
+  {
+   "w": "nada",
+   "s": 20.762959999999993,
+   "e": 21.36295999999999,
+   "p": 0.9,
+   "lip": 0.01166985610571209,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 21.36295999999999,
+   "e": 21.68295999999999,
+   "p": 0.9,
+   "lip": 0.004508759221142668,
+   "speaker": "creator"
+  },
+  {
+   "w": "seja",
+   "s": 21.68295999999999,
+   "e": 22.762959999999993,
+   "p": 0.9,
+   "lip": 0.004927019589408186,
+   "speaker": "creator"
+  },
+  {
+   "w": "pior.",
+   "s": 22.762959999999993,
+   "e": 23.607855999999998,
+   "p": 0.9,
+   "lip": 0.006317607766209226,
+   "speaker": "creator"
+  },
+  {
+   "w": "Ela",
+   "s": 24.242169000000004,
+   "e": 24.422169000000004,
+   "p": 0.9,
+   "lip": 0.010478585422773492,
+   "speaker": "creator"
+  },
+  {
+   "w": "vai",
+   "s": 24.422169000000004,
+   "e": 24.522169000000005,
+   "p": 0.9,
+   "lip": 0.012309681762950194,
+   "speaker": "creator"
+  },
+  {
+   "w": "deixar",
+   "s": 24.522169000000005,
+   "e": 24.64216900000001,
+   "p": 0.9,
+   "lip": 0.013390808042082977,
+   "speaker": "creator"
+  },
+  {
+   "w": "uma",
+   "s": 24.64216900000001,
+   "e": 24.762169000000007,
+   "p": 0.9,
+   "lip": 0.011058010041336759,
+   "speaker": "creator"
+  },
+  {
+   "w": "carta.",
+   "s": 24.762169000000007,
+   "e": 25.742169000000004,
+   "p": 0.9,
+   "lip": 0.004618378963741526,
+   "speaker": "creator"
+  },
+  {
+   "w": "Hahaha!",
+   "s": 27.159731000000022,
+   "e": 28.37377300000003,
+   "p": 0.9,
+   "lip": 0.009274536897705713,
+   "speaker": "creator"
+  },
+  {
+   "w": "Vai",
+   "s": 29.70741800000004,
+   "e": 29.907418000000042,
+   "p": 0.9,
+   "lip": 0.005550573050847643,
+   "speaker": "creator"
+  },
+  {
+   "w": "dizer",
+   "s": 29.907418000000042,
+   "e": 30.107418000000038,
+   "p": 0.9,
+   "lip": 0.006661574633200905,
+   "speaker": "creator"
+  },
+  {
+   "w": "que",
+   "s": 30.107418000000038,
+   "e": 30.24741800000004,
+   "p": 0.9,
+   "lip": 0.010446450154137182,
+   "speaker": "creator"
+  },
+  {
+   "w": "tava",
+   "s": 30.24741800000004,
+   "e": 30.44741800000004,
+   "p": 0.9,
+   "lip": 0.014830979486127929,
+   "speaker": "creator"
+  },
+  {
+   "w": "grávida.",
+   "s": 30.44741800000004,
+   "e": 31.63964800000005,
+   "p": 0.9,
+   "lip": 0.007527295615064525,
+   "speaker": "creator"
+  },
+  {
+   "w": "Caramba!",
+   "s": 32.70527200000006,
+   "e": 33.70527200000006,
+   "p": 0.9,
+   "lip": 0.009712880012342637,
+   "speaker": "creator"
+  }
+ ]
+}

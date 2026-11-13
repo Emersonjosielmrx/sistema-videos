@@ -1,0 +1,1597 @@
+{
+ "name": "extrai contatos de chats whatsapp",
+ "nodes": [
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "7953c93b-d5fe-4ce4-acbf-50e55d3c110b",
+       "name": "numero",
+       "value": "559184698653",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    0,
+    368
+   ],
+   "id": "266de727-5921-401b-983b-648bdb5432a5",
+   "name": "dados"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "Instance",
+     "mode": "list",
+     "cachedResultName": "Instance"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "ownerJid",
+       "condition": "LIKE",
+       "value": "=%{{ $json.numero }}%"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "ad375da9-793c-4a22-91ad-672223fa4f1e",
+   "name": "busca_Instance",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    400,
+    368
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "oimBuH4UImzTDpBB",
+     "name": "Postgres evolution"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "Chat",
+     "mode": "list",
+     "cachedResultName": "Chat"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "instanceId",
+       "value": "={{ $json.id }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "f9d925d3-779c-42d1-ac24-51eb0f715b9c",
+   "name": "busca_Chat",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.4,
+   "position": [
+    752,
+    368
+   ],
+   "alwaysOutputData": true,
+   "credentials": {
+    "postgres": {
+     "id": "oimBuH4UImzTDpBB",
+     "name": "Postgres evolution"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "a52aabbe-9605-4bb8-9de5-9ca1ad1ab338",
+       "name": "remoteJid",
+       "value": "={{ $json.remoteJid }}",
+       "type": "string"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    1152,
+    368
+   ],
+   "id": "186f5171-bbb1-4e0c-9189-5d50f4d2efc5",
+   "name": "numeros"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "strict",
+      "version": 3
+     },
+     "conditions": [
+      {
+       "id": "b4664a04-2ef6-465d-95f7-6b542face6b5",
+       "leftValue": "={{ $json.remoteJid }}",
+       "rightValue": "@g.us",
+       "operator": {
+        "type": "string",
+        "operation": "notContains"
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2.3,
+   "position": [
+    1584,
+    368
+   ],
+   "id": "4c40fbbb-593b-489e-89a2-e99c81378a8a",
+   "name": "Filter"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "CREATE TABLE contato (\n    id BIGSERIAL PRIMARY KEY,\n\n    remoteJid TEXT NOT NULL,\n\n    created_at TIMESTAMPTZ DEFAULT NOW(),\n    updated_at TIMESTAMPTZ DEFAULT NOW()\n);",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -688,
+    624
+   ],
+   "id": "328af2ef-3a75-4ea4-854a-82a90c167390",
+   "name": "cria_tabela",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "ALTER TABLE contato ADD COLUMN IF NOT EXISTS enviado BOOLEAN DEFAULT FALSE;",
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -720,
+    992
+   ],
+   "id": "10481d9b-bf78-47b7-8547-0f710de9e5d7",
+   "name": "colocar_coluna_enviar",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 1. Criar Tabela (Setup)\n\nNode auxiliar para:\n- Criar a tabela businesses no PostgreSQL\n- Executar apenas uma vez\n- Pode ser removido após setup inicial",
+    "height": 300,
+    "width": 340
+   },
+   "id": "93a8d53a-6764-4b49-aa4a-f16aff7f30cf",
+   "name": "Nota: cria_tabela",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    448
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 2. Adicionar Coluna\n\nNode auxiliar para:\n- Adicionar coluna 'enviado' na tabela\n- Executar apenas uma vez\n- Pode ser removido após setup inicial",
+    "height": 300,
+    "width": 340
+   },
+   "id": "0bed82e9-9436-489d-b090-9ea13d6edbf2",
+   "name": "Nota: colocar_coluna_enviar",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    816
+   ]
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "months"
+      }
+     ]
+    }
+   },
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.3,
+   "position": [
+    -336,
+    976
+   ],
+   "id": "a22b5190-922f-4325-a13f-781b64b67826",
+   "name": "Schedule Trigger",
+   "disabled": true
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contato",
+     "mode": "list",
+     "cachedResultName": "contato"
+    },
+    "limit": 1,
+    "where": {
+     "values": [
+      {
+       "column": "enviado",
+       "value": "false"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    128,
+    976
+   ],
+   "id": "4a555503-d35e-4c83-95f7-233797bce5d0",
+   "name": "consuta_enviar",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "=https://ligawhatsapp.inovareinteligenciaartificial.com/message/sendText/sans-norm",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "accept",
+       "value": "application/json, text/plain, */*"
+      },
+      {
+       "name": "apikey",
+       "value": "=93EEBBC1E6A9-40FC-A89F-F3EB44FEAF4A"
+      }
+     ]
+    },
+    "sendBody": true,
+    "bodyParameters": {
+     "parameters": [
+      {
+       "name": "number",
+       "value": "={{ $('consuta_enviar').item.json.remotejid }}"
+      },
+      {
+       "name": "text",
+       "value": "={{ $json.saudacao }}"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "fff4200e-b266-4679-9a14-5e94bacc0094",
+   "name": "envia_evolution",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.1,
+   "position": [
+    1280,
+    976
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Obter a data atual como objeto Date\nlet dataAtual = new Date();\n\n// Configurar fuso horário para São Paulo\ndataAtual = new Date(dataAtual.toLocaleString(\"en-US\", {timeZone: 'America/Sao_Paulo'}));\n\n// Obter hora atual\nlet horaAtual = dataAtual.getHours();\n\n// Determinar a saudação adequada baseada na hora do dia\nlet saudacao;\n\nif (horaAtual >= 5 && horaAtual < 12) {\n  saudacao = \"Bom dia\";\n} else if (horaAtual >= 12 && horaAtual < 18) {\n  saudacao = \"Boa tarde\";\n} else if (horaAtual >= 18 && horaAtual <= 23) {\n  saudacao = \"Boa noite\";\n} else {\n  saudacao = \"Boa Madrugada\";\n}\n\n// Definir a saudação como uma variável de contexto\nreturn { saudacao: saudacao };"
+   },
+   "id": "e2e68b9f-de25-4dd7-aaec-a94fce14ada6",
+   "name": "pegar hora",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    512,
+    976
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "update",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contato",
+     "mode": "list",
+     "cachedResultName": "contato"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "enviado": true,
+      "id": "={{ $('consuta_enviar').item.json.id }}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": false
+      },
+      {
+       "id": "title",
+       "displayName": "title",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "subtitle",
+       "displayName": "subtitle",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "description",
+       "displayName": "description",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "price",
+       "displayName": "price",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "category_name",
+       "displayName": "category_name",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "address",
+       "displayName": "address",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "neighborhood",
+       "displayName": "neighborhood",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "street",
+       "displayName": "street",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "city",
+       "displayName": "city",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "postal_code",
+       "displayName": "postal_code",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "state",
+       "displayName": "state",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "country_code",
+       "displayName": "country_code",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "phone",
+       "displayName": "phone",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "phone_unformatted",
+       "displayName": "phone_unformatted",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "website",
+       "displayName": "website",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "claim_this_business",
+       "displayName": "claim_this_business",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "located_in",
+       "displayName": "located_in",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "floor",
+       "displayName": "floor",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "plus_code",
+       "displayName": "plus_code",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "menu",
+       "displayName": "menu",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "services_link",
+       "displayName": "services_link",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "total_score",
+       "displayName": "total_score",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "permanently_closed",
+       "displayName": "permanently_closed",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "temporarily_closed",
+       "displayName": "temporarily_closed",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "place_id",
+       "displayName": "place_id",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "fid",
+       "displayName": "fid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "cid",
+       "displayName": "cid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "reviews_count",
+       "displayName": "reviews_count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "images_count",
+       "displayName": "images_count",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "scraped_at",
+       "displayName": "scraped_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "location",
+       "displayName": "location",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "categories",
+       "displayName": "categories",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "image_categories",
+       "displayName": "image_categories",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "popular_times_histogram",
+       "displayName": "popular_times_histogram",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "opening_hours",
+       "displayName": "opening_hours",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "people_also_search",
+       "displayName": "people_also_search",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "places_tags",
+       "displayName": "places_tags",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "reviews_tags",
+       "displayName": "reviews_tags",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "additional_info",
+       "displayName": "additional_info",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "gas_prices",
+       "displayName": "gas_prices",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "hotel_ads",
+       "displayName": "hotel_ads",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "object",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "url",
+       "displayName": "url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "search_page_url",
+       "displayName": "search_page_url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "search_string",
+       "displayName": "search_string",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "language",
+       "displayName": "language",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "rank",
+       "displayName": "rank",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "is_advertisement",
+       "displayName": "is_advertisement",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "image_url",
+       "displayName": "image_url",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "kgmid",
+       "displayName": "kgmid",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "updated_at",
+       "displayName": "updated_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "enviado",
+       "displayName": "enviado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1648,
+    976
+   ],
+   "id": "d3fc01b8-5052-4a96-a372-5171a506092a",
+   "name": "consuta_enviar1",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 8. Agendador\n\nSchedule Trigger que:\n- Dispara a cada X minutos\n- Verifica novos leads para enviar\n- Configurar intervalo conforme necessidade",
+    "height": 300,
+    "width": 340,
+    "color": 4
+   },
+   "id": "931b9a10-e484-476f-9f41-aca4ffb95d46",
+   "name": "Nota: Schedule Trigger",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -432,
+    816
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 9. Consultar para Enviar\n\nPostgres que:\n- Busca leads com enviado = false\n- Filtra por cidade/estado se necessário\n- Retorna contatos não enviados",
+    "height": 300,
+    "width": 340,
+    "color": 4
+   },
+   "id": "c8e01599-f178-424f-8261-f9ed6d444fc3",
+   "name": "Nota: consuta_enviar",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -64,
+    816
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 10. Processar Hora\n\nCode node que:\n- Obtém a hora atual\n- Pode filtrar por horário de envio\n- Evita enviar fora do horário comercial",
+    "height": 300,
+    "width": 340,
+    "color": 4
+   },
+   "id": "6e03f58b-b807-4f7b-b8f7-532f9e0f11a6",
+   "name": "Nota: pegar hora",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    304,
+    816
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 11. Enviar Mensagem\n\nHTTP Request que:\n- Envia mensagem via Evolution API\n- WhatsApp Business\n- Formato personalizado",
+    "height": 300,
+    "width": 340,
+    "color": 4
+   },
+   "id": "5cf71502-0932-4f78-b4a9-8ae8b83087fd",
+   "name": "Nota: envia_evolution",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1072,
+    816
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 12. Atualizar Status\n\nPostgres que:\n- Atualiza enviado = true\n- Marca data/hora do envio\n- Evita reenvio duplicado",
+    "height": 300,
+    "width": 340,
+    "color": 4
+   },
+   "id": "51ae9e28-94d2-4953-b775-69323c22c6e6",
+   "name": "Nota: consuta_enviar1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1440,
+    816
+   ]
+  },
+  {
+   "parameters": {
+    "path": "pega-conversas-evolution",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "2ecfb35c-ff72-463a-aa61-981b838dceda",
+   "name": "Receber Pedido",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -288,
+    368
+   ],
+   "webhookId": "553eb3ae-664d-4299-b043-f68cf95bd76d"
+  },
+  {
+   "parameters": {
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contato",
+     "mode": "list",
+     "cachedResultName": "contato"
+    },
+    "columns": {
+     "mappingMode": "defineBelow",
+     "value": {
+      "enviado": false,
+      "remotejid": "={{ $json.remoteJid }}",
+      "updated_at": "={{$now}}",
+      "created_at": "={{$now}}"
+     },
+     "matchingColumns": [
+      "id"
+     ],
+     "schema": [
+      {
+       "id": "id",
+       "displayName": "id",
+       "required": false,
+       "defaultMatch": true,
+       "display": true,
+       "type": "number",
+       "canBeUsedToMatch": true,
+       "removed": true
+      },
+      {
+       "id": "remotejid",
+       "displayName": "remotejid",
+       "required": true,
+       "defaultMatch": false,
+       "display": true,
+       "type": "string",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "created_at",
+       "displayName": "created_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "updated_at",
+       "displayName": "updated_at",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "dateTime",
+       "canBeUsedToMatch": true
+      },
+      {
+       "id": "enviado",
+       "displayName": "enviado",
+       "required": false,
+       "defaultMatch": false,
+       "display": true,
+       "type": "boolean",
+       "canBeUsedToMatch": true
+      }
+     ],
+     "attemptToConvertTypes": false,
+     "convertFieldsToString": false
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1968,
+    368
+   ],
+   "id": "270d49e2-8045-4f7d-a22c-c9f5ca805529",
+   "name": "salva_banco",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "operation": "deleteTable",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contato",
+     "mode": "list",
+     "cachedResultName": "contato"
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -688,
+    240
+   ],
+   "id": "82538a48-39cf-444a-b864-2475fbf2691d",
+   "name": "limpar_dados",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "content": "## 0. Limpar Dados\n\nNode auxiliar para:\n- Deletar a tabela contato/limpar os dados\n- Utilizado para reset de testes",
+    "height": 300,
+    "width": 340,
+    "color": 3
+   },
+   "id": "495823f9-52ba-411d-b30e-e3f586fd7e4d",
+   "name": "Nota: limpar_dados",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -816,
+    80
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 3. Receber Pedido\n\nWebhook Trigger que:\n- Recebe requisições HTTP POST externos\n- Inicia o fluxo de busca de conversas",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "6f3e21a5-d9cb-43a1-889a-2ba060d6530b",
+   "name": "Nota: Receber Pedido",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -416,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 4. Dados (Set)\n\nEdit Fields (Set) que:\n- Define o número do WhatsApp de origem\n- Prepara o parâmetro para busca de instância",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "49eb64e3-7bfc-4615-afb9-6f2c7ef05cfb",
+   "name": "Nota: dados",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -48,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 5. Buscar Instância\n\nPostgres que:\n- Consulta a tabela Instance no banco da Evolution API\n- Filtra pelo número de telefone configurado",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "af6e7705-c245-40d5-bd8d-3b68a9e250b9",
+   "name": "Nota: busca_Instance",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    320,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 6. Buscar Chat\n\nPostgres que:\n- Consulta a tabela Chat da Evolution API\n- Retorna todas as conversas/chats da instância",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "cb238fcd-fb26-4941-9d1a-1da50113c1b9",
+   "name": "Nota: busca_Chat",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    688,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 7. Números (Set)\n\nEdit Fields (Set) que:\n- Mapeia e extrai o campo remoteJid dos chats\n- Prepara a lista para filtragem",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "fe5c777d-f816-44c1-8312-575e210da9a2",
+   "name": "Nota: numeros",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1072,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 8. Filtrar Grupos\n\nFilter node que:\n- Remove contatos de grupos (@g.us)\n- Garante que apenas conversas individuais sejam salvas",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "1fd1496c-b02a-499c-857f-783730d4665f",
+   "name": "Nota: Filter",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1456,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 9. Salvar no Banco\n\nPostgres que:\n- Insere/atualiza os contatos na tabela contato\n- Salva remoteJid, created_at, updated_at e enviado=false",
+    "height": 300,
+    "width": 340,
+    "color": 2
+   },
+   "id": "948d7104-3bbb-4f11-97ff-48289d36ebb1",
+   "name": "Nota: salva_banco",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    1840,
+    208
+   ]
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.agent",
+   "typeVersion": 3.1,
+   "position": [
+    736,
+    976
+   ],
+   "id": "3f3ddd36-d785-4e01-948f-1138a4cecece",
+   "name": "AI Agent"
+  },
+  {
+   "parameters": {
+    "path": "pega-conversas-evolution",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "9b550a94-3a60-4ca4-9d9c-2da3845f5543",
+   "name": "Receber Pedido1",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    -496,
+    1216
+   ],
+   "webhookId": "553eb3ae-664d-4299-b043-f68cf95bd76d"
+  },
+  {
+   "parameters": {},
+   "type": "n8n-nodes-base.html",
+   "typeVersion": 1.2,
+   "position": [
+    -160,
+    1216
+   ],
+   "id": "9decce00-68e0-4ea5-bf45-618afef4d38e",
+   "name": "HTML"
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.5,
+   "position": [
+    16,
+    1216
+   ],
+   "id": "c4a102bf-58af-443b-83ee-5653799cb93a",
+   "name": "Respond to Webhook"
+  },
+  {
+   "parameters": {
+    "operation": "select",
+    "schema": {
+     "__rl": true,
+     "mode": "list",
+     "value": "public"
+    },
+    "table": {
+     "__rl": true,
+     "value": "contato",
+     "mode": "list",
+     "cachedResultName": "contato"
+    },
+    "returnAll": true,
+    "where": {
+     "values": [
+      {
+       "column": "enviado",
+       "value": "false"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -336,
+    1216
+   ],
+   "id": "2b1c7059-e5dc-4a0c-be45-0d34967167dc",
+   "name": "consuta_enviar2",
+   "credentials": {
+    "postgres": {
+     "id": "lxX8IhcEOEHV9OPW",
+     "name": "Postgres 53 - bdr"
+    }
+   }
+  },
+  {
+   "parameters": {
+    "options": {}
+   },
+   "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+   "typeVersion": 1,
+   "position": [
+    736,
+    1120
+   ],
+   "id": "9007babf-e380-46bd-aa42-3011012422b2",
+   "name": "Google Gemini Chat Model",
+   "credentials": {
+    "googlePalmApi": {
+     "id": "f7qahhzyzCZBuqUQ",
+     "name": "Google Gemini(PaLM) Api account 2"
+    }
+   }
+  }
+ ],
+ "pinData": {
+  "consuta_enviar": [
+   {
+    "json": {
+     "id": "4366",
+     "remotejid": "5522998908709@s.whatsapp.net",
+     "created_at": "2026-08-28T00:06:28.700Z",
+     "updated_at": "2026-08-28T00:06:28.684Z",
+     "enviado": false
+    }
+   }
+  ],
+  "Receber Pedido": [
+   {
+    "json": {
+     "name": "First item",
+     "code": 1
+    },
+    "pairedItem": {
+     "item": 0
+    }
+   }
+  ],
+  "Receber Pedido1": [
+   {
+    "json": {
+     "name": "First item",
+     "code": 1
+    }
+   }
+  ]
+ },
+ "connections": {
+  "dados": {
+   "main": [
+    [
+     {
+      "node": "busca_Instance",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_Instance": {
+   "main": [
+    [
+     {
+      "node": "busca_Chat",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "busca_Chat": {
+   "main": [
+    [
+     {
+      "node": "numeros",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "numeros": {
+   "main": [
+    [
+     {
+      "node": "Filter",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Filter": {
+   "main": [
+    [
+     {
+      "node": "salva_banco",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Schedule Trigger": {
+   "main": [
+    [
+     {
+      "node": "consuta_enviar",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consuta_enviar": {
+   "main": [
+    [
+     {
+      "node": "pegar hora",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "envia_evolution": {
+   "main": [
+    [
+     {
+      "node": "consuta_enviar1",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "pegar hora": {
+   "main": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Receber Pedido": {
+   "main": [
+    [
+     {
+      "node": "dados",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "AI Agent": {
+   "main": [
+    [
+     {
+      "node": "envia_evolution",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Receber Pedido1": {
+   "main": [
+    [
+     {
+      "node": "consuta_enviar2",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "HTML": {
+   "main": [
+    [
+     {
+      "node": "Respond to Webhook",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "consuta_enviar2": {
+   "main": [
+    [
+     {
+      "node": "HTML",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Google Gemini Chat Model": {
+   "ai_languageModel": [
+    [
+     {
+      "node": "AI Agent",
+      "type": "ai_languageModel",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "active": true,
+ "settings": {
+  "executionOrder": "v1",
+  "binaryMode": "separate"
+ },
+ "versionId": "4a1f971d-b02d-414a-8b48-02385f59e90d",
+ "meta": {
+  "templateCredsSetupCompleted": true,
+  "instanceId": "64c8d852cb4cb8b6cdcaeca273aec553ab2eec666899418d788bf43eddc933f4"
+ },
+ "id": "xFnJXx3OZGwrNiRI",
+ "tags": []
+}

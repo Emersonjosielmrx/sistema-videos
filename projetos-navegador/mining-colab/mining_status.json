@@ -1,0 +1,36 @@
+{
+  "accounts": {
+    "fabrica": {
+      "notebook": "D:\\projetos-navegador\\mining-colab\\notebooks\\mining_fabrica.ipynb",
+      "worker_name": "colab_fabrica",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "mundosolar1995": {
+      "notebook": "D:\\projetos-navegador\\mining-colab\\notebooks\\mining_mundosolar1995.ipynb",
+      "worker_name": "colab_mundosolar1995",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "canalalucinaai": {
+      "notebook": "D:\\projetos-navegador\\mining-colab\\notebooks\\mining_canalalucinaai.ipynb",
+      "worker_name": "colab_canalalucinaai",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "seebotsia": {
+      "notebook": "D:\\projetos-navegador\\mining-colab\\notebooks\\mining_seebotsia.ipynb",
+      "worker_name": "colab_seebotsia",
+      "uploaded": false,
+      "dry_run": true
+    },
+    "emersonjosiel649": {
+      "notebook": "D:\\projetos-navegador\\mining-colab\\notebooks\\mining_emersonjosiel649.ipynb",
+      "worker_name": "colab_emersonjosiel649",
+      "uploaded": false,
+      "dry_run": true
+    }
+  },
+  "wallet": "SEU_WALL...",
+  "last_run": "2026-07-02T16:19:42.454858+00:00"
+}
