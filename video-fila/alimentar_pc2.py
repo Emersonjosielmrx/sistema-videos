@@ -67,6 +67,10 @@ def rodada():
     # 13/11 (pilha única pra PC2, PC3 e STI — ocioso.PILHA_ALVO): prepara em sequência até encher a pilha ou passar
     # PILHA_RODADA_MIN (padrão 12 min; a tarefa roda de 5 em 5 e a trava impede 2 ao mesmo tempo). Parou de achar = sai.
     fim = time.time() + float(os.environ.get("PILHA_RODADA_MIN", "12")) * 60
+    try:  # 13/11: primeiro em paralelo pelos baixadores de fora; o que faltar, o de 1 em 1 abaixo completa
+        ocioso.encher_pilha()
+    except Exception as e:  # noqa: BLE001
+        log(f"[!] encher a pilha em paralelo: {type(e).__name__}: {str(e)[:150]}")
     try:
         while ocioso.preparar_proximo_pc2() and time.time() < fim:
             pass

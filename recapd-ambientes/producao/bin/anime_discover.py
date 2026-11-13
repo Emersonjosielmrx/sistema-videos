@@ -514,6 +514,13 @@ if __name__ == "__main__":
 # pausa — era o grosso dos pedidos ao YouTube e o IP voltou a ser barrado a cada fim de pausa. Parceiro posta pouco/dia.
 CANAL_CACHE = Path(__file__).resolve().parent.parent / "workspace" / "cache" / "discover_canal"
 CANAL_CACHE_H = 6
+# 13/11 (dona: "todos sempre no máximo; resolver os gargalos"): a listagem trazia o canal INTEIRO (até 4.172 Shorts,
+# 38 canais com mais de 500) e uma só segurou a vez do yt-dlp por mais de 5 min (@jresumos, 20:04-20:10) com TODAS as
+# máquinas esperando; 123 das 133 listas guardadas estavam vencidas. Agora: (1) só os CANAL_LISTA_MAX Shorts mais
+# novos da aba (a aba vem do mais novo pro mais antigo; os antigos já estão na lista guardada, que é juntada);
+# (2) teto de CANAL_LISTA_SEG por listagem — estourou, usa a lista guardada e solta a vez. CANAL_LISTA_MAX=0 volta.
+CANAL_LISTA_MAX = int(__import__("os").environ.get("CANAL_LISTA_MAX", "150"))
+CANAL_LISTA_SEG = int(__import__("os").environ.get("CANAL_LISTA_SEG", "120"))
 
 
 def discover_canal(url, top=0):
@@ -552,8 +559,27 @@ def discover_canal(url, top=0):
     # --encoding utf-8: sem ele o yt-dlp sai em cp1252 e troca o emoji do começo do título por espaço
     cmd = ["yt-dlp", "--flat-playlist", "--encoding", "utf-8", "--print",
            "%(id)s\t%(view_count)s\t%(duration)s\t%(title)s", url] + (["--proxy", px] if px else [])
-    with ytdlp_vez.vez("anime: canal"):
-        r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
+    antigos = []
+    try:  # o que já se sabia do canal (qualquer idade): junta com os novos e serve de reserva se a listagem falhar
+        antigos = json.loads(cache.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
+    limitar = CANAL_LISTA_MAX > 0 and len(antigos) >= 20  # 1ª vez do canal: lista inteira (não há o que juntar)
+    if limitar:
+        cmd += ["--playlist-end", str(CANAL_LISTA_MAX)]
+    try:
+        with ytdlp_vez.vez("anime: canal"):
+            r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
+                               timeout=CANAL_LISTA_SEG if limitar else 600)
+    except subprocess.TimeoutExpired:
+        logging.warning(f"[discover_canal] listagem de {url} passou do tempo — uso a lista guardada "
+                        f"({len(antigos)} Shorts) e solto a vez do yt-dlp")
+        try:
+            __import__("os").utime(cache, None)  # não tenta de novo a cada rodada
+        except OSError:
+            pass
+        itens = sorted(antigos, key=lambda c: -(c.get("views") or 0))
+        return itens[:top] if top else itens
     if r.returncode and ytdlp_vez.bloqueio(r.stderr):
         if px:
             ytdlp_vez.proxy_ruim(px, r.stderr)  # proxy barrado sai da roda; nunca alonga a pausa do IP de casa
@@ -575,6 +601,9 @@ def discover_canal(url, top=0):
         itens.append({"id": vid, "title": title.strip(), "url": f"https://www.youtube.com/shorts/{vid}",
                       "views": int(views) if views.isdigit() else 0, "duration": d,
                       "parte": int(parte.group(1)) if parte else 0, "parceiro": url})
+    if limitar and itens:  # junta os que já se conhecia (os novos mandam: views atualizadas)
+        vistos = {c["id"] for c in itens}
+        itens += [c for c in antigos if c.get("id") not in vistos]
     itens.sort(key=lambda c: -c["views"])  # 30/10 (dona): SEMPRE os mais vistos primeiro, parte ou não
     logging.info(f"[discover_canal] {len(itens)} Shorts em {url} "
                  f"({sum(1 for c in itens if not c['parte'])} resumos sem parte)")

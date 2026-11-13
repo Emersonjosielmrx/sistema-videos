@@ -317,7 +317,7 @@ def _pilha_por_canal():
     """{id do canal: quantos Shorts já estão preparados pra ele} — entra na conta da fila (senão a pilha inteira ia
     pro mesmo canal do topo)."""
     out = {}
-    for m in PRONTOS_PC2.glob("*/meta.json"):
+    for m in list(PRONTOS_PC2.glob("*/meta.json")) + list(PRONTOS_PC2.glob("_baixando_*/meta_parcial.json")):
         try:
             cid = json.loads(m.read_text(encoding="utf-8"))["alvo"]["canal"]
             out[cid] = out.get(cid, 0) + 1
@@ -549,6 +549,107 @@ def _enviar_pronto_pc2(cand, pasta):
         return False
     log(f"prebaixar (preparado antes): {cand['id']} -> PC2:{r_dir}")
     return True
+
+
+def encher_pilha(max_seg=600):
+    """13/11: enche a pilha em PARALELO. Preparar 1 Short levava de 10 a 35 min (19:08-19:43: 2084 s) porque o PC1
+    escolhia, pedia o download e ESPERAVA, um de cada vez — e a pilha de 5 nunca passava de 1. A fila de download de
+    fora (manhwa-drive:baixador) é atendida por várias máquinas, cada uma com o seu IP (3 VPS + as sessões do Kaggle,
+    kaggle_baixar): pedir N vídeos de uma vez = N baixando ao mesmo tempo, sem tocar no IP de casa.
+    Escolhe os que faltam (mesma regra e mesma reserva de sempre), pede todos e recolhe o que chegar. Quem não chegar
+    em `max_seg` volta pra fila (sai dos tentados). Sem baixador vivo = não faz nada (o preparo de 1 em 1 continua).
+    PILHA_PARALELA=0 desliga. Devolve quantos entraram na pilha."""
+    if os.environ.get("PILHA_PARALELA", "1") == "0" or PILHA_ALVO <= 1:
+        return 0
+    falta_n = PILHA_ALVO - len(_prontos_pc2())
+    if falta_n <= 0 or shutil.disk_usage(str(BASE)).free / 1e9 < PILHA_DISCO_MIN_GB:
+        return 0
+    import concurrent.futures as cf
+    import msvcrt
+    sys.path.insert(0, str(PROD / "bin"))
+    import anime_discover
+    import kaggle_baixar
+    import parceiro_diario as pdi
+    c = pdi.cfg()
+    if not c.get("ligado", True) or not kaggle_baixar.vivo(5):
+        return 0
+    # 13/11 20:07 (1º teste real): escolher os 5 SOB a trava do disparo segurou o PC2 por 10 min ("outro disparo pro
+    # PC2 em andamento"). Agora a trava é pega e SOLTA a cada escolha (o disparo do PC2 entra no meio) e a escolha
+    # inteira tem teto de PILHA_ESCOLHA_SEG (padrão 150 s): o que deu pra escolher nesse tempo é o que se pede.
+    escolhidos = []
+    limite = time.time() + float(os.environ.get("PILHA_ESCOLHA_SEG", "150"))
+    for _ in range(falta_n):
+        if time.time() > limite:
+            break
+        TRAVA_DISPARO_PC2.parent.mkdir(parents=True, exist_ok=True)
+        f = open(TRAVA_DISPARO_PC2, "a+")
+        try:
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        except OSError:
+            f.close()
+            break  # um disparo está escolhendo agora: fica pra próxima rodada
+        try:
+            esc = _escolher_pc2(pdi, anime_discover, c)
+            if not esc:
+                break
+            alvo, escolha, cand = esc
+            with open(FEITOS / "_feitos_short_attempted.txt", "a", encoding="utf-8") as fa:
+                fa.write(cand["id"] + chr(10))
+            pasta = PRONTOS_PC2 / ("_baixando_" + cand["id"])
+            shutil.rmtree(pasta, ignore_errors=True)
+            pasta.mkdir(parents=True, exist_ok=True)
+            # meta provisória: conta na fila do canal, pra próxima escolha desta mesma volta ir pra outro canal
+            (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}}), encoding="utf-8")
+            escolhidos.append((alvo, escolha, cand, pasta))
+        finally:
+            try:
+                f.seek(0)
+                msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+            except OSError:
+                pass
+            f.close()
+        time.sleep(1)  # deixa o disparo do PC2 pegar a trava se estiver esperando
+    if not escolhidos:
+        return 0
+    log(f"pilha: pedindo {len(escolhidos)} fonte(s) em paralelo aos baixadores de fora "
+        f"({', '.join(x[2]['id'] for x in escolhidos)})")
+    t0 = time.time()
+
+    def _um(item):
+        alvo, escolha, cand, pasta = item
+        try:
+            video, _legs = kaggle_baixar.baixar(cand["url"], cand["id"], pasta, timeout=max_seg, log=log)
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] pilha: {cand['id']} falhou ({type(e).__name__}: {str(e)[:120]})")
+            video = None
+        return item, video
+
+    entrou = 0
+    with cf.ThreadPoolExecutor(max_workers=len(escolhidos)) as ex:
+        for (alvo, escolha, cand, pasta), video in ex.map(_um, escolhidos):
+            (pasta / "meta_parcial.json").unlink(missing_ok=True)
+            if not video:
+                tent = FEITOS / "_feitos_short_attempted.txt"
+                try:
+                    tent.write_text("".join(l + "\n" for l in tent.read_text(encoding="utf-8").split()
+                                            if l != cand["id"]), encoding="utf-8")
+                except OSError:
+                    pass
+                shutil.rmtree(pasta, ignore_errors=True)
+                continue
+            (pasta / "cand.json").write_text(json.dumps(cand, ensure_ascii=False), encoding="utf-8")
+            (pasta / "meta.json").write_text(json.dumps(
+                {"cand": cand, "alvo": {k: alvo[k] for k in ("nome", "handle", "canal")}, "fonte": escolha[0],
+                 "tipo": escolha[1], "rodizio": escolha[2] if len(escolha) == 3 else None, "quando": time.time()},
+                ensure_ascii=False), encoding="utf-8")
+            try:
+                pasta.rename(PRONTOS_PC2 / cand["id"])
+                entrou += 1
+            except OSError:
+                shutil.rmtree(pasta, ignore_errors=True)
+    log(f"pilha: {entrou} de {len(escolhidos)} chegaram em {round(time.time() - t0)} s "
+        f"(pilha {len(_prontos_pc2())}/{PILHA_ALVO})")
+    return entrou
 
 
 def preparar_proximo_pc2():
