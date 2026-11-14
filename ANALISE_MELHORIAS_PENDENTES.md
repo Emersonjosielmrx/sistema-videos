@@ -443,3 +443,40 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
   "rastro" pretendido — conferir num vídeo se não encavalam.
 - **Confiança:** alta no comportamento (rodado); o ganho visual você julga no vídeo.
 
+## A17. Prompts do roteiro que brigam entre si (a IA obedece um e descumpre o outro)
+- **Onde:** `recapd-ambientes/producao/bin/anime_script.py` — `_system()` (~linha 130), `rewrite_curto_com_tempo`
+  (~659), `rewrite_longo_com_tempo` (~803), `_COMENTARIO_NARRADOR` (~758). **Atenção:** você avisou que `_ABERTURAS`
+  e a 1ª frase do Short estão em teste (T13) — nada aqui mexe nisso.
+- **Lido (4 contradições):**
+  1. **Colchete proibido x colchete obrigatório.** O `_system()` diz, com "VIOLAÇÃO GERA FALHA CRÍTICA": "NÃO use
+     marcações teatrais, **colchetes**, parênteses...". Os dois roteiros com tempo usam esse MESMO sistema e pedem no
+     pedido: "Cada linha COMEÇA com o segundo... no formato **[12s]**". O próprio código registra o sintoma: comentário
+     de 24-25/10 ("8 respostas com só 2 linhas marcadas"), a 2ª tentativa com "TODA linha começa com [Ns]", e o
+     contador `sem_marca` do longo ("N bloco(s) sem marca, espalhados no trecho"). Bloco sem marca = frases
+     espalhadas no chute = fala descolada da imagem (o que a dona reclamou em 21/10 e 25/10).
+     **Conserto:** nas duas chamadas com tempo, somar ao sistema uma linha: "EXCEÇÃO À REGRA 1: a marca de tempo
+     [12s] no começo de cada linha é obrigatória e não conta como colchete proibido." (ou tirar "colchetes" da regra 1
+     e proibir só "rótulos como [Música], [Narrador]"). **Como medir:** contar no log `bloco(s) sem marca` e
+     `veio com N frases marcadas` antes e depois.
+  2. **"Condensada" x "NÃO condense demais".** O `_system()` manda contar "de forma envolvente, **condensada** e
+     clara" em todos os nichos; o pedido do longo manda "NÃO condense demais, NÃO pule diálogos importantes". O
+     comentário de 02/11 no código conta o resultado: o 1º recap de anime saiu com 60% do original. **Conserto:** o
+     `_system()` receber um parâmetro (`longo=True`) e trocar "condensada" por "completa, sem pular cenas" no longo.
+  3. **"Não invente fatos" x comentário obrigatório.** O sistema diz "Não invente fatos que não estão na transcrição";
+     o `_COMENTARIO_NARRADOR` obriga 2 frases por trecho "que NÃO estão na história". Um modelo cauteloso corta os
+     comentários (e aí a dona sente falta: "tem que colocar mais comentários"). **Conserto:** uma frase no sistema do
+     longo: "Opinião e ironia do narrador não são fatos inventados — são pedidas abaixo."
+  4. **"Nada de despedida, o vídeo roda em loop" x CTA no fim.** `_jeito_do_narrador` termina com "NADA de despedida
+     ou encerramento... a última frase emenda na primeira", e o código tem `CTAS_FIM`/`cta_fim` ("Gostou? Segue o
+     canal que amanhã tem mais", "Deixa seu like...") e o `fechar_loop`. Se os dois entram no mesmo Short, o loop
+     quebra na frase do CTA. Conferir no D: qual dos dois está ligado por canal; se o CTA vale, ele devia vir ANTES
+     da frase de loop, não depois.
+- **Também no `_COMENTARIO_NARRADOR`:** todo comentário é obrigado a começar com uma de 10 aberturas fixas ("Cá entre
+  nós,", "Sinceramente,", "Convenhamos,"...) porque é pela abertura que o `climas_voz.ABRE_COMENTARIO` e o cartão de
+  balão reconhecem o comentário. Num longo de 1.500 frases (~50 trechos × 2) são ~100 comentários com 10 aberturas:
+  cada uma aparece ~10 vezes — vira bordão involuntário, um a cada minuto. **Sugestão:** a IA marcar o comentário
+  com um sinal que não é falado (ex.: a linha começa com `§`), o código guardar o índice e tirar o sinal antes do
+  TTS/legenda; aí a abertura fica livre. `eh_comentario` passa a olhar o índice.
+- **Miúdo:** "texto **totalment** incompreensível" (falta o "e") no fim do `_system()`.
+- **Confiança:** alta em 1 (o código documenta o sintoma), média em 2-4 (lido).
+
