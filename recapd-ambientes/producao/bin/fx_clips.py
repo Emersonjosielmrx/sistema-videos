@@ -174,10 +174,21 @@ def apply_effects_to_cmd(cmd, transition_type, sfx_file, duration):
         # sumiam no mix. Aplicado ANTES do volume/trim. SFX_LOUDNORM=0 desliga.
         norm = ("loudnorm=I=-16:TP=-1.5,"
                 if os.environ.get("SFX_LOUDNORM", "1") != "0" else "")
+        # 14/11 (achado A18 do agente online, medido no D: com este filtro): o amix sem normalize=0 DIVIDE cada entrada
+        # pelo nº de entradas — a VOZ caía 6 dB (-36 -> -42 dB) enquanto o SFX tocava e voltava subindo em 0,3 s: a 1ª
+        # palavra depois de cada corte com SFX saía engolida, em todo Short e longo. Com normalize=0 a voz fica estável
+        # (-35,8 dB o clipe inteiro). Como aí voz e SFX passam a SOMAR, o volume do SFX vai à metade (1.2 -> 0.6,
+        # 0.8 -> 0.4): medido, o SFX fica igual ao de antes (-30,4 contra -30,8 dB). alimiter = sem estouro na soma.
+        # SFX_AMIX_ANTIGO=1 volta ao mix de antes.
+        if os.environ.get("SFX_AMIX_ANTIGO") == "1":
+            fim_mix = ""
+        else:
+            sfx_vol = f"{float(sfx_vol) / 2:g}"
+            fim_mix = ":normalize=0,alimiter=limit=0.95"
         audio_mix_filter = (
             f";[{sfx_idx}:a]{norm}volume={sfx_vol},atrim=0:{play:.2f},"
             f"afade=t=out:st={max(0.0, play - 0.12):.2f}:d=0.12,apad=whole_dur={play:.2f}[sfx_temp];"
-            f"[{orig_audio_map}][sfx_temp]amix=inputs=2:duration=first:dropout_transition=0.3[aout]"
+            f"[{orig_audio_map}][sfx_temp]amix=inputs=2:duration=first:dropout_transition=0.3{fim_mix}[aout]"
         )
         filter_complex += audio_mix_filter
         new_audio_map = "[aout]"

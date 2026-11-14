@@ -735,7 +735,9 @@ def _memes_resumo(clips, sfx_durs, workspace):
                             "-i", "anullsrc=r=44100:cl=stereo", "-filter_complex",
                             f"[0:v]split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
                             f"gblur=sigma=25[bg];[b]scale=-2:{H}[fg];[bg][fg]overlay=(W-w)/2:0,fps=30,format=yuv420p[v];"
-                            "[0:a][1:a]amix=inputs=2:duration=first[au]",
+                            # 14/11 (A18): normalize=0 — a 2ª entrada é só silêncio (garante trilha de áudio) e o
+                            # amix dividia o som do meme por 2 (-6 dB)
+                            "[0:a][1:a]amix=inputs=2:duration=first:normalize=0[au]",
                             "-map", "[v]", "-map", "[au]", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "23",
                             "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2", "-shortest",
                             "-t", f"{MEME_RESUMO_MAX_S + 0.5:.1f}", str(out)],  # trava final: nunca passa do teto
