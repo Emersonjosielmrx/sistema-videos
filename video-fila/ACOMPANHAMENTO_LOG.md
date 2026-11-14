@@ -2090,3 +2090,31 @@ A "falha calada de 2 h" de 13/11 era o ssh sem resposta nesses picos (TimeoutExp
 Não aplicados (lidos, ficam pra próxima): A4 voz de homem em "Senhora/Sereia", A5 filtro de telefone por citar
 "celular", A6 efeito por pedaço de palavra, A10/A11 clima da voz no longo, A12 cartões, A13, A16, A17, A20 (imagem
 congela 0,5 s depois de cada frase no longo).
+
+## 14/11/2026 10:30 — manutenção: STI parado 9 h por causa do ssh errado; título genérico de anime; revisão dos Shorts
+1. **STI sem trabalho da 01:00 às 10:15.** `disparar_sti.py` chamava "ssh" pelo nome e, na tarefa agendada, isso virava
+   o ssh do WINDOWS (System32\OpenSSH), que trava depois de autenticar (já anotado em maquinas.py e celulares.py):
+   toda rodada estourava em 60 s ("STI não respondeu") com a máquina parada, respondendo em 1 s pelo ssh do Git;
+   8 ssh.exe zumbis. Agora `_SSH`/`_SCP` = binários do Git, como o resto do sistema. No scp do Git a forma do caminho
+   com espaço é a INVERSA (cru funciona, aspas simples não — testado): o código tenta as duas, a certa primeiro.
+   10:16: "STI pega da pilha" e disparou. Perdido: o Short ANG_4v0fags (pronto à 01:22) sumiu no desligamento das
+   03:40 — desligamento limpo (poweroff) com sessão aberta de 100.118.234.102 das 03:13 às 03:40, a 46 °C: alguém ou
+   outro chat desligou; não foi calor.
+2. **Título de reserva escrevia sempre como recap de anime** (`anime_publish.generate_metadata`): dorama de mãe e
+   filha saiu "⚡ Ele Foi Traído e Acabou Despertando o Poder Mais Apelado do Mundo!", vídeo de ventilador saiu "Ele
+   Perdeu TUDO e Renasceu... Capítulo 1 COMPLETO". 25 Shorts desde 06/11 (19 já postados/agendados — não mexi). Agora
+   o reserva usa o ROTEIRO do vídeo; sem IA, a 1ª frase do roteiro. `METADATA_RESERVA_ANTIGA=1` volta. Novo
+   `corrigir_titulo_generico.py`: ouve o vídeo (Groq; o Whisper "tiny" errava palavras) e refaz o título dos que
+   estavam na FILA, só gravando se as palavras em destaque estão no que se ouve: 3 corrigidos, 2 estão no Drive.
+   Não sei por que o gerador principal falha nesses casos: a saída do publish não chegava ao log desde o fim de
+   outubro (agora chega: PYTHONUNBUFFERED).
+3. **Revisão visual de 4 Shorts de hoje** (um de cada forma de abertura): 1080x1920, 60 fps, -14 LUFS, legenda e
+   cartões no lugar, marca do canal presente. Único defeito achado: o título do item 2.
+4. Noite (00:00-10:13): PC2 68 Shorts, desktop 43, STI 1. Pilha em paralelo: 88 de 119 pedidos chegaram. PC2 com
+   preparo mediano de 41 s. Fiquei parado das ~04:00 às 10:00 esperando confirmação de um comando ssh (memória
+   feedback_ssh_script_embutido_trava).
+5. Pesquisa (2 buscas): nas VPS o YouTube barra TODOS os clientes do yt-dlp (testado: padrão, web_embedded,
+   tv_embedded, android_vr) — VPS não baixa; em casa todos funcionam. Achados de GitHub ainda NÃO implantados:
+   maumoya/SignalForge (efeito por canal com correção de falso positivo), velvetthunder15/heatmapify (cortes/movimento
+   por ffmpeg + curva "mais repetidos"), Hao0321/video-autopilot-kit (regras numéricas de ritmo e SFX),
+   AmnioticF72072/rvc-cpu-lite (clone de voz por ONNX, pro STI/HP).

@@ -50,6 +50,12 @@ ALVO = "sti"  # alias do ~/.ssh/config
 R_BASE = "recapd-sti"
 R_SHORTS = "D/hipercool-materiais/animes recap/shorts"
 _SEM_JANELA = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+# 14/11: "ssh" pelo nome virava o do Windows (System32/OpenSSH) na tarefa agendada — o que "trava depois de autenticar"
+# (maquinas.py 17/10, celulares.py). Da 01:00 às 10:15 de 14/11 TODA rodada do STI estourou em 60 s ("STI não
+# respondeu") com a máquina parada e respondendo em 1 s pelo ssh do Git; sobraram 8 ssh.exe zumbis. Agora o mesmo
+# binário do resto do sistema.
+_SSH = str(Path("C:/Program Files/Git/usr/bin/ssh.exe")) if Path("C:/Program Files/Git/usr/bin/ssh.exe").exists() else "ssh"
+_SCP = _SSH.replace("ssh.exe", "scp.exe") if _SSH.lower().endswith("ssh.exe") else "scp"
 MORTO_MIN = 100  # log parado há mais que isso sem .fim = morreu
 
 
@@ -66,13 +72,13 @@ def log(m):
 
 
 def _ssh(cmd, timeout=120):
-    r = _run_seguro(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", ALVO, cmd], capture_output=True,
+    r = _run_seguro([_SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", ALVO, cmd], capture_output=True,
                        timeout=timeout, creationflags=_SEM_JANELA)
     return r.returncode, (r.stdout or b"").decode("utf-8", "replace")
 
 
 def _scp(*args, timeout=900):
-    return _run_seguro(["scp", "-q", "-r", "-o", "BatchMode=yes", *args], capture_output=True, timeout=timeout,
+    return _run_seguro([_SCP, "-q", "-r", "-o", "BatchMode=yes", *args], capture_output=True, timeout=timeout,
                           creationflags=_SEM_JANELA)
 
 
@@ -188,11 +194,18 @@ def _trazer_pasta(p):
     # ("No such file"): 2 Shorts prontos ficaram presos no STI. Tenta cru; o jeito antigo fica de reserva.
     # (testado 13/11 15:36: cru e com "\ " falham; entre ASPAS SIMPLES funciona — o scp daqui manda o caminho pro
     # shell do STI, que separa no espaço)
-    r = _scp(f"{ALVO}:'{R_SHORTS}/{p}'", str(tmp))
+    # 14/11: o binário agora é o scp do Git (_SCP) e nele é o CONTRÁRIO (testado: cru funciona, aspas simples não).
+    # Tenta as duas formas, a do binário em uso primeiro: nenhuma troca de scp deixa Short preso de novo.
+    formas = [f"{ALVO}:{R_SHORTS}/{p}", f"{ALVO}:'{R_SHORTS}/{p}'"]
+    if "Git" not in _SCP:
+        formas.reverse()
     veio = tmp / p
-    if r.returncode != 0 or not (veio / "postar.json").exists():
+    r = None
+    for forma in formas:
         shutil.rmtree(veio, ignore_errors=True)
-        r = _scp(f"{ALVO}:{R_SHORTS}/{p}".replace(" ", "\\ "), str(tmp))
+        r = _scp(forma, str(tmp))
+        if r.returncode == 0 and (veio / "postar.json").exists():
+            break
     if r.returncode != 0 or not (veio / "postar.json").exists() or not (veio / "video.mp4").exists():
         log(f"[!] falhou trazer {p} do STI (fica lá): {(r.stderr or b'').decode('utf-8', 'replace')[:160]}")
         shutil.rmtree(tmp, ignore_errors=True)
