@@ -42,6 +42,21 @@ if os.name != "nt":
     # vira h264_nvenc de qualidade equivalente (-cq N, -b:v 0). Deu erro = roda de novo com libx264 (nunca perde vídeo).
     import subprocess as _sp
 
+    # 14/11 (achado A14 do agente online, reproduzido no Linux do STI): creationflags=0x08000000 (janela oculta, só do
+    # Windows) faz o subprocess levantar ValueError no Linux — 20 chamadas do recap (trecho real do narrador na
+    # abertura, efeito de voz do formato, conferência de áudio, capa com referência) falhavam SEMPRE no Kaggle, dentro
+    # de try/except que só registra aviso: o vídeo saía sem o recurso. A camada do STI já tirava; a do Kaggle não.
+    _popen_init = _sp.Popen.__init__
+
+    def _popen_sem_flags(self, *a, **kw):
+        kw.pop("creationflags", None)
+        kw.pop("startupinfo", None)
+        _popen_init(self, *a, **kw)
+
+    _sp.Popen.__init__ = _popen_sem_flags
+    if not hasattr(_sp, "CREATE_NO_WINDOW"):
+        _sp.CREATE_NO_WINDOW = 0
+
     _run = _sp.run
 
     def _nvenc(cmd):

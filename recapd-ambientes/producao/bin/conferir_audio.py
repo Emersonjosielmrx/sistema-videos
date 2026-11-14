@@ -94,8 +94,14 @@ def ouvir(ficha):
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(video), "-vn", "-ac", "1", "-ar", "16000", "-b:a", "48k",
                         str(mp3)], check=True, timeout=180, creationflags=SEM_JANELA)
-        import monitor_bordoes
-        ouvido = monitor_bordoes._transcrever(mp3) or ""
+        # 14/11 (achado A14/A15 do agente online, conferido no STI): em máquina sem o groq_api (STI, Kaggle) o import
+        # estourava e a conferência inteira virava "não conferi (ModuleNotFoundError)" — nenhum Short feito lá era
+        # ouvido. Erro na transcrição ONLINE não derruba mais: vira transcrição vazia e cai no Whisper local, abaixo.
+        try:
+            import monitor_bordoes
+            ouvido = monitor_bordoes._transcrever(mp3) or ""
+        except Exception:  # noqa: BLE001 — sem Groq/proxy/módulo: tenta o Whisper local
+            ouvido = ""
         # 13/11: TRANSCRIÇÃO VAZIA NÃO É VÍDEO MUDO. Com o Groq fora ("Organization has been restricted", proxy fora)
         # a transcrição volta vazia e a regra abaixo lia "0 palavras = quase nada se ouve": 25 Shorts prontos segurados
         # só em 13/11 (53 em 2 semanas) e depois descartados pro Drive pelo descartar_segurados. Conferido num deles
