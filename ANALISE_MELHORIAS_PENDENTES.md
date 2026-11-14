@@ -535,3 +535,37 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
   Com um sinal só: avisa e deixa sair.
 - **Confiança:** baixa-média (não tenho os logs; é um risco a medir, não um defeito provado).
 
+## A20. No longo deitado, a imagem CONGELA meio segundo depois de cada frase (quadro parado no respiro entre as falas)
+- **Onde:** `recapd-ambientes/producao/bin/fx_clips.py` — `concat_with_xfade` (gaps, ~linha 1262-1290) e
+  `_render_xfade_segment` (~1053: `tpad=stop_mode=clone:stop_duration={gi}`); padrão em `anime-pipeline.py` ~84.
+- **Lido:** cada clipe de FALA ganha no fim um respiro (`CLIP_GAP_S`, padrão **0,5 s** no deitado; 0 no Short) feito
+  com `tpad=stop_mode=clone` = **repete o último quadro** + silêncio. Se o clipe seguinte tem SFX longo, o respiro
+  cresce até `CLIP_GAP_MAX` (1,2 s no deitado; 0,6 s no Short).
+- **Conta:** num longo de 1.500 frases são 1.500 congeladas de 0,5 s = **12,5 minutos de imagem parada**, uma a cada
+  ~6 s. No manhwa (painel parado com zoom) quase não se nota; no **recap de anime**, em que a fonte é vídeo em
+  movimento, a cena anda, trava meio segundo, e corta. No Short acontece só antes de clipe com SFX (até 0,6 s).
+- **Efeito no vídeo:** soluço visual constante; pode ser parte do que a dona chamou de "imagem presa na tela".
+- **Conserto sugerido:** quando o clipe vem de vídeo (`build_clip_from_video`), o respiro deve ser MAIS VÍDEO, não
+  quadro repetido: cortar da fonte `duração da fala + respiro` e deixar o áudio com silêncio no fim (o respiro já é
+  conhecido antes do corte: é `CLIP_GAP_S`, ou o SFX do próximo). Aí o `tpad` do `_render_xfade_segment` recebe
+  gap 0 para esses clipes. Para painel de manhwa (imagem parada) fica como está.
+  Cuidado: a função `_inicios` (A13) garante "corte + fala ≤ duração do original" — somar o respiro nessa conta.
+- **Como conferir no D::** num longo de anime, avançar quadro a quadro no fim de qualquer frase: os últimos 15
+  quadros antes do corte são iguais.
+- **Confiança:** alta no mecanismo (lido); o incômodo visual você julga no vídeo.
+
+## Hipóteses que TESTEI e NÃO se confirmaram (não gastar tempo nelas)
+- **"O Short perde qualidade por ser recodificado 3 vezes em crf 23."** Medi aqui (720x1280, 8 s, conteúdo sintético
+  com detalhe e ruído): 1 geração em crf 23 = SSIM 0,886 / PSNR 36,5 dB; **3 gerações em crf 23 = 0,877 / 35,6 dB**;
+  2 intermediários em crf 16 + final em crf 23 = 0,876 / 35,4 dB (e intermediários 6x maiores). A perda por geração é
+  pequena e intermediário de alta qualidade não ajuda se o final continua em crf 23. Não mexer. (Se um dia quiserem
+  mais nitidez, o que muda é o crf do ÚLTIMO encode e renderizar em 1080 nativo — `ANIME_RENDER_1080=1` já existe.)
+- **"O `loudnorm` de uma passada estraga efeito sonoro curto."** Medi um impacto de 1,2 s e um whoosh quase mudo
+  (-55 dB) passando por `loudnorm=I=-16:TP=-1.5`: o ganho sai uniforme (o ataque do impacto continua 21 dB acima do
+  resto, igual ao original) e o whoosh mudo sobe pra -21 dB. Funciona como vocês queriam.
+- **"O volume final sai baixo (-20 LUFS)."** Não: o `anime-pipeline.py` já faz o master em -14 LUFS / -1 dBTP em duas
+  passadas (e na junção das fatias no longo). O `MASTER_LOUDNORM` do `fx_music.py` está desligado, mas não faz falta.
+- **Cartões por sentido da legenda (`fx_subtitles.cartoes_por_sentido`)**: 20.000 sorteios, sempre cobre todas as
+  palavras, sem cartão vazio. Sólido.
+- **`_inicios` com original maior que a narração**: sólido (ver A13).
+
