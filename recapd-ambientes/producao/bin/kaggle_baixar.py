@@ -26,6 +26,23 @@ SEM_JANELA = 0x08000000
 
 
 def _rc(*args, timeout=180):
+    """13/11 22:15: o Drive pendura 1 chamada de vez em quando (cat de 150 bytes: 3 s normal, > 60 s às 22:09 — e o
+    download inteiro era abandonado). Chamada PEQUENA (cat/lsf/deletefile/moveto/purge) tem prazo curto e até 3
+    tentativas; a grande (copy/copyto) segue com o prazo pedido, 1 vez."""
+    if args and args[0] in ("cat", "lsf", "deletefile", "moveto", "purge") and timeout <= 90:
+        ultimo = None
+        for _t in range(3):
+            try:
+                return _rc1(*args, timeout=min(timeout, 20))
+            except RuntimeError as e:
+                ultimo = e
+                if "passou de" not in str(e):
+                    raise  # erro de verdade (não existe, sem permissão): não insiste
+        raise ultimo
+    return _rc1(*args, timeout=timeout)
+
+
+def _rc1(*args, timeout=180):
     # 13/11 (py-spy, 21:43): o alimentador do PC2 ficou 14 min preso AQUI com timeout de 60 s. No Windows o
     # subprocess.run(capture_output=True, timeout=...) mata o rclone no estouro e depois espera SEM prazo os canais de
     # saída fecharem — se o rclone travado não morre na hora (ou deixou filho com o canal aberto), nunca volta. Foi
