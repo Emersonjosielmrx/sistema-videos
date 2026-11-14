@@ -480,3 +480,37 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
 - **Miúdo:** "texto **totalment** incompreensível" (falta o "e") no fim do `_system()`.
 - **Confiança:** alta em 1 (o código documenta o sintoma), média em 2-4 (lido).
 
+## A18. A VOZ cai 6 dB (metade do volume) enquanto o efeito sonoro toca, em todo clipe com SFX — medido
+- **Onde:** `recapd-ambientes/producao/bin/fx_clips.py`, `apply_effects_to_cmd` (linha ~180):
+  `amix=inputs=2:duration=first:dropout_transition=0.3` — **sem `normalize=0`**. Mesmo padrão em
+  `anime-pipeline.py:738` (meme do resumo) e `landscape-compiler.py:360` (trilha). No repositório: 27 `amix` sem
+  `normalize=0` contra 51 com.
+- **Por quê:** o `amix` do ffmpeg, por padrão, DIVIDE cada entrada pelo número de entradas ativas. Com voz + SFX, a
+  voz sai a 50% enquanto o SFX existe; quando o SFX acaba (ele é cortado em até 1,5 s pelo `apad=whole_dur`), o
+  volume da voz sobe de volta ao longo de `dropout_transition` (0,3 s). Vocês já conhecem o defeito: o
+  `fx_music.py:613` tem o comentário "normalize=0: sem isso o amix dividia a trilha inteira pelo nº de entradas".
+  Ficou faltando aqui.
+- **Prova (rodado, ffmpeg 6.1, com o MESMO filtro da linha 180; voz = tom de 300 Hz, SFX = tom de 3 kHz de 1,5 s,
+  volume medido só na faixa da voz):**
+  | Trecho | sem `normalize=0` (como está) | com `normalize=0` |
+  |---|---|---|
+  | voz sozinha (referência) | -30,4 dB | -30,4 dB |
+  | voz enquanto o SFX toca | **-36,4 dB** | -30,3 dB |
+  | voz 0,1-0,4 s depois do SFX | -31,6 dB (subindo) | -30,4 dB |
+  | resto do clipe | -30,4 dB | -30,4 dB |
+- **Efeito no vídeo:** no começo de cada clipe com SFX (transição, impacto, meme) a narração afunda 6 dB por até
+  1,5 s e depois "volta" — é o bombeamento que faz a 1ª palavra depois do corte soar engolida. O próprio SFX também
+  sai 6 dB abaixo do que o `sfx_vol`/`loudnorm` pediram (o `loudnorm=I=-16` do SFX foi posto pra resolver "SFX que
+  sumiam no mix" — parte do sumiço era isto).
+- **Conserto:** acrescentar `:normalize=0` nos três:
+  ```python
+  f"[{orig_audio_map}][sfx_temp]amix=inputs=2:duration=first:dropout_transition=0.3:normalize=0[aout]"
+  ```
+  **Atenção ao aplicar:** sem a divisão, voz e SFX passam a SOMAR — o SFX fica 6 dB mais alto do que vocês ouvem
+  hoje. Recalibrar `sfx_vol` (hoje `1.2` no impacto/flash e `0.8` nos outros): pra manter o SFX no nível atual e só
+  devolver a voz, usar metade (`0.6` e `0.4`). E pôr um limitador depois da soma pra não estourar:
+  `...:normalize=0,alimiter=limit=0.95[aout]`.
+- **Como conferir no D::** pegar um clipe com SFX de impacto, extrair o áudio e olhar a forma de onda do 1º segundo
+  (ou `ffmpeg -i clipe.mp4 -af volumedetect` em 0-1,2 s contra 2-4 s).
+- **Confiança:** alta (reproduzido com o filtro exato). É dos achados com mais efeito audível: vale pra Short e longo.
+
