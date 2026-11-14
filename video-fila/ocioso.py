@@ -586,7 +586,10 @@ def encher_pilha(max_seg=600):
     import kaggle_baixar
     import parceiro_diario as pdi
     c = pdi.cfg()
-    if not c.get("ligado", True) or not kaggle_baixar.vivo(5):
+    if not c.get("ligado", True):
+        return 0
+    if not kaggle_baixar.vivo(5):
+        log("pilha: nenhum baixador de fora deu sinal nos últimos 5 min — não peço nada agora")
         return 0
     # 13/11 20:07 (1º teste real): escolher os 5 SOB a trava do disparo segurou o PC2 por 10 min ("outro disparo pro
     # PC2 em andamento"). Agora a trava é pega e SOLTA a cada escolha (o disparo do PC2 entra no meio) e a escolha
@@ -598,11 +601,24 @@ def encher_pilha(max_seg=600):
             break
         TRAVA_DISPARO_PC2.parent.mkdir(parents=True, exist_ok=True)
         f = open(TRAVA_DISPARO_PC2, "a+")
-        try:
-            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
-        except OSError:
+        # 13/11 22:30: saía CALADA e sem pedir nada quando o alimentador do PC2 estava no meio de um disparo — e ele
+        # fica minutos lá (a trava cobre a escolha E o download). Espera a trava até PILHA_TRAVA_SEG (padrão 90 s).
+        pegou = False
+        fim_trava = time.time() + float(os.environ.get("PILHA_TRAVA_SEG", "90"))
+        while True:
+            try:
+                msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+                pegou = True
+                break
+            except OSError:
+                if time.time() > fim_trava:
+                    break
+                time.sleep(3)
+        if not pegou:
             f.close()
-            break  # um disparo está escolhendo agora: fica pra próxima rodada
+            log(f"pilha: a trava de disparo do PC2 ficou ocupada {os.environ.get('PILHA_TRAVA_SEG', '90')} s "
+                f"(um disparo está baixando sob ela) — escolhi {len(escolhidos)} nesta rodada")
+            break
         try:
             esc = _escolher_pc2(pdi, anime_discover, c)
             if not esc:
@@ -697,8 +713,19 @@ def preparar_proximo_pc2():
         alvo, escolha, cand = esc
         with open(FEITOS / "_feitos_short_attempted.txt", "a", encoding="utf-8") as fa:
             fa.write(cand["id"] + "\n")  # reservado: ninguém escolhe o mesmo enquanto está preparado
-        pasta = PRONTOS_PC2 / cand["id"]
+        # 13/11 22:35: a trava do disparo sai AQUI (era segurada durante o download inteiro — ver _disparar_parceiro_pc2)
+        if os.environ.get("DISPARO_TRAVA_LONGA") != "1":
+            try:
+                f.seek(0)
+                msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+            except OSError:
+                pass
+        # pasta provisória: só vira item da pilha (rename) quando o download e o meta.json estão completos — com a
+        # trava solta, ninguém pode pegar um preparo pela metade
+        pasta = PRONTOS_PC2 / ("_baixando_" + cand["id"])
+        shutil.rmtree(pasta, ignore_errors=True)
         pasta.mkdir(parents=True, exist_ok=True)
+        (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}}), encoding="utf-8")
         t0 = time.time()
         os.environ["YTDLP_PRIORIDADE"] = "pc2"  # 30/10 (D39): o download do PC2 passa na frente na vez do yt-dlp
         video, _extras = _fonte_para(cand, pasta, anime_fetch)
@@ -713,6 +740,12 @@ def preparar_proximo_pc2():
             {"cand": cand, "alvo": {k: alvo[k] for k in ("nome", "handle", "canal")}, "fonte": escolha[0],
              "tipo": escolha[1], "rodizio": escolha[2] if len(escolha) == 3 else None, "quando": time.time()},
             ensure_ascii=False), encoding="utf-8")
+        (pasta / "meta_parcial.json").unlink(missing_ok=True)
+        try:
+            pasta.rename(PRONTOS_PC2 / cand["id"])
+        except OSError:
+            shutil.rmtree(pasta, ignore_errors=True)
+            return False
         log(f"preparado com antecedência: {cand['id']} pra {alvo['nome']} ({round(time.time() - t0)} s; pilha "
             f"{len(_prontos_pc2())}/{PILHA_ALVO})")
         return True
@@ -738,18 +771,29 @@ def _disparar_parceiro_pc2():
         f.close()
         log("parceiro: outro disparo pro PC2 em andamento — este não dispara (evita o mesmo vídeo 2x)")
         return False
-    try:
-        return _disparar_parceiro_pc2_travado()
-    finally:
+    # 13/11 22:35: a trava cobria a escolha E o download (minutos) — enquanto um Short baixava, ninguém mais escolhia
+    # nem preparava nada (a pilha saía vazia rodada após rodada). O que não pode repetir é a ESCOLHA, e o vídeo
+    # escolhido já fica reservado na hora (_reservar, 16 h). _soltar() é chamado logo depois de escolher; o finally
+    # garante que solta de qualquer jeito. DISPARO_TRAVA_LONGA=1 volta a segurar até o fim.
+    solta = {"ja": False}
+
+    def _soltar():
+        if solta["ja"]:
+            return
+        solta["ja"] = True
         try:
             f.seek(0)
             msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
         except OSError:
             pass
         f.close()
+    try:
+        return _disparar_parceiro_pc2_travado(None if os.environ.get("DISPARO_TRAVA_LONGA") == "1" else _soltar)
+    finally:
+        _soltar()
 
 
-def _disparar_parceiro_pc2_travado():
+def _disparar_parceiro_pc2_travado(soltar_trava=None):
     """Escolhe AQUI o próximo vídeo do parceiro, o canal e a fonte do nicho dele (mesma regra do parceiro_diario) e
     manda o PC2 fazer. True se disparou."""
     sys.path.insert(0, str(PROD / "bin"))
@@ -773,6 +817,8 @@ def _disparar_parceiro_pc2_travado():
             return False
         alvo, escolha, cand = esc
         fonte, tipo = escolha[0], escolha[1]
+    if soltar_trava:
+        soltar_trava()  # escolhido e reservado: o resto (cópia, download, envio) não precisa da trava
     # o PC2 lê cobertura/narrador do config dele (o sincronizar_bin não copia config/)
     # 12/11: a tabela de vozes x nicho (narradores_nichos.json) vai junto no MESMO scp — antes só o parceiro.json ia e o
     # PC2 escolhia a voz pela tabela velha: os canais novos de negócios saíram com Pica-Pau e Chapolin
