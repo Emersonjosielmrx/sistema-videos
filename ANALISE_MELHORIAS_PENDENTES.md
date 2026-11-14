@@ -330,3 +330,29 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
 - **Confiança:** alta (reproduzido na função real). Posso escrever o conserto com teste se você me liberar o
   arquivo (avise no recado).
 
+## A13. Começo de cada corte (`_inicios`): sólido quando o original é maior que a narração; repete plano quando a narração passa do original
+- **Onde:** `recapd-ambientes/producao/bin/anime_segments.py`, `_inicios` (~linha 86) e `_desprender` (~70).
+- **Prova (rodado: 6.000 sorteios da função real, 8-40 frases de 2,5-6 s, tempos do roteiro com ±40% de folga, e de 0
+  a 3 frases finais com o tempo do FIM do vídeo — CTA/gancho/comentário):**
+  | original ÷ narração | casos com 2+ planos repetidos (o corte seguinte começa quase no mesmo ponto) |
+  |---|---|
+  | 0,8 (narração 25% MAIOR que o original) | **40% a 52%** |
+  | 1,0 | 2% a 5% |
+  | 1,2 | 0% a 1% |
+  | 1,5 e 2,0 | 0% a 1% |
+  Nunca saiu corte fora do vídeo nem exceção; ordem invertida só apareceu com tempos de roteiro absurdos.
+- **Leitura:** as travas de 30/10 e 01/11 ("nunca volta", `_desprender`, a passada de trás pra frente com
+  `RECUO_MAX_S = 8`) funcionam. O que sobra é o caso em que **não existe imagem suficiente**: narração mais longa que o
+  trecho-fonte. Aí o fim do vídeo empilha as últimas frases no mesmo plano (exemplo do sorteio: 5 cortes entre
+  143,5 s e 151 s de um original de 156,7 s).
+- **Como conferir no D::** no log, a linha `[segments] cortes ... (original Xs, narração Ys)`. Contar em quantos
+  Shorts recentes `Y > X` — é nesses que o júri vê "take repetido".
+- **Conserto sugerido (escolher um):**
+  1. Antes de narrar: se a soma estimada das falas (frases × ~4,5 s) passa de 95% do original, pedir ao roteiro
+     menos frases (o `target_lines` já existe) — é a causa.
+  2. Na montagem: quando `total > src_dur`, espalhar os cortes pela proporção (`t = acum × src_dur / total`) em vez
+     de seguir os tempos do roteiro — a imagem anda mais devagar que a fala, mas não repete.
+  3. Para as frases finais sem imagem própria (CTA/gancho): usar câmera lenta ou o quadro congelado com zoom do
+     último plano, em vez de repetir o trecho.
+- **Confiança:** alta na medida; a frequência real depende de quantos vídeos têm narração > original.
+
