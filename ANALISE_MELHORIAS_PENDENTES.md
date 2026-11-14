@@ -218,3 +218,59 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
   (IA sem resposta). Enquanto o processo viver, aquele painel nunca mais pergunta à IA e fica na lista de palavras
   (A1). Pela sua regra "sem resposta = não conferi": não guardar `None`.
 
+
+---
+
+# Análise profunda por módulo (14/11)
+
+## A10. Clima da voz no LONGO: a IA recebe as 1.500 frases numa chamada só e precisa devolver EXATAMENTE 1.500 nomes — quase certo que cai na reserva por palavras
+- **Onde:** `recapd-ambientes/producao/bin/climas_voz.py`, `_pelo_llm` (linha ~96) e `_escolher` (~127). (Mesmo arquivo
+  nas cópias de `hipercool-materiais/comum` se existir.)
+- **Lido:** `_pelo_llm` monta um prompt com TODAS as frases numeradas, pede `max_tokens = 40 + 8 × n` (12.040 para
+  1.500 frases), `timeout=90`, e só aceita a resposta se `len(lst) == len(linhas)` e todos os nomes forem válidos.
+  Qualquer coisa diferente → `None` → `_heuristica` para o vídeo inteiro. O resultado fica em `_climas_voz.json`.
+- **Por que falha no longo:** (1) 12 mil tokens de saída em 90 s não fecham na maioria dos modelos; (2) modelo
+  nenhum conta 1.500 itens sem errar por 1 — e 1 a mais ou a menos invalida tudo. É o mesmo defeito que consertei no
+  `narracao_curva.escolher_impactos` (item 2c): lá virou escolha por janela.
+- **Como conferir no D::** abrir o `_climas_voz.json` de 3 longos recentes e ver `"origem"`. Aposto em
+  `"palavra-chave"` em todos. O log tem `[climas] (palavra-chave) {...}`.
+- **Efeito no vídeo:** o longo inteiro tem o clima decidido pela lista de palavras do A11 — que erra muito.
+- **Conserto sugerido:** janelas de ~80 frases (`_pelo_llm(linhas[ini:fim])`, cada uma tem de devolver o tamanho da
+  janela), 1 falha = reserva só NAQUELA janela (e, pra não esperar vários prazos, depois de 2 falhas seguidas o resto
+  vai de reserva). Passar na janela as 2 últimas frases+clima da anterior como contexto ("vinha assim: ...") pra não
+  quebrar uma luta no meio. O teste pode ser igual ao `teste_impactos_longo.py` (LLM de mentira).
+- **Confiança:** média-alta (lido; a taxa real de falha você vê no `origem`).
+
+## A11. Reserva do clima da voz: palavras que casam errado, e frase isolada de "ação" recebe o tratamento de GOL
+- **Onde:** `climas_voz.py`, `_PALAVRAS` (~linha 62), `_heuristica` (~83), `ajustes` (~187).
+- **Prova (rodado, `_heuristica`):**
+  | Frase | Clima que saiu | Por quê |
+  |---|---|---|
+  | A **soc**iedade **investi**u no garoto. | acao | `soc\w*`, `investi\w*` |
+  | Ele **investi**gou o caso. | acao | `investi\w*` |
+  | Ela **acert**ou as contas com o banco. | acao | `acert\w*` |
+  | O **pul**so dele estava normal. | acao | `pul\w*` (pulso, pulmão, pulseira) |
+  | Ele pulou o muro e **soc**orreu a irmã. | acao | `soc\w*` (socorro, social, sócio) |
+  | Tinha **algo** na mesa. | tensao | `algo` sozinho |
+  | Foi um **tremend**o sucesso. | terror | `tremend\w*` |
+  | Eles são do mesmo **sangue**. | terror | `sangue` |
+  | Ele **perdeu** o ônibus. | triste | `perdeu` |
+  | O **inseto** pousou na flor. | vilao | `inseto` |
+  | **Rapaz**, que dia bonito. | engracado | `rapaz`, `mano` |
+  | O **sistema** mostrou o **nível** e a **habilidade** dele. | epico | em manhwa de sistema, quase toda frase |
+- **O que cada erro faz na voz (tabela `CLIMAS`):** `acao` troca a base pra Kokoro e acelera; `terror` = 16% mais
+  lento, 2 semitons abaixo, pausa de 0,45 s; `vilao` = **8 semitons abaixo** (homem) e 12% mais lento; `epico` = 6%
+  mais lento, +2 dB e pausa de 0,35 s depois de CADA frase (num manhwa de sistema isso vira o vídeo todo arrastado);
+  `triste` = 10% mais lento.
+- **Segundo defeito, vale também quando a IA acerta:** em `ajustes`, sequência de ação com 1 frase só (`n == 1`)
+  recebe `f = 1.0` — o MÁXIMO da curva: velocidade 1,30x, +4 dB, +1 semitom e pausa de 0,45 s (o "gol"). Uma frase
+  de ação sozinha no meio de narração calma sai 30% mais rápida e 4 dB mais alta que as vizinhas.
+- **Conserto sugerido:**
+  1. Em `ajustes`: `f = (k / (n - 1)) ** 2 if n > 1 else 0.25` e o "gol" (`+1 st`, pausa) só com `n >= 3`.
+  2. Na reserva, exigir pelo menos 2 sinais do mesmo clima na frase (ou 1 sinal + a vizinha no mesmo clima) e tirar o
+     que é palavra comum: `algo`, `perdeu`, `rapaz`, `mano`, `inseto`, `sangue`, `sistema`, `nível`, `habilidade`,
+     `rank`; trocar radicais largos por formas fechadas: `soc(o|os|ou|ando|ar)\b`, `pul(ou|a|ando|ar|o)\b`,
+     `investi(u|da|ndo)\b` + "contra", `acert(ou|a) (um|o|em)`, `tremend[oa] de`, `respira\w* (fundo|pesad)`.
+  3. Empate: hoje vence o primeiro do dicionário (`acao`). Empate deveria dar `normal`.
+- **Confiança:** alta (reproduzido). Pesa mais por causa do A10 (no longo a reserva é quem decide).
+
