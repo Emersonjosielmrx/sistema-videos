@@ -356,3 +356,62 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
      último plano, em vez de repetir o trecho.
 - **Confiança:** alta na medida; a frequência real depende de quantos vídeos têm narração > original.
 
+## A14. No Linux (Kaggle e STI), 20 chamadas do recap falham sempre por causa de `creationflags=0x08000000` — e o erro é engolido
+- **Onde (recapd-ambientes/producao/bin):**
+  | Arquivo | Funções | O que deixa de acontecer no Linux |
+  |---|---|---|
+  | `anime_tts.py` linhas 191 e 193 | `_abrir_com_trecho` | o vídeo NÃO abre com o trecho real do narrador (cai no `except` → "trecho original de X não entrou") |
+  | `anime_formatos.py` ~454, ~494, ~496 | `aplicar_efeito_voz`, `_trecho_original`, `preparar_formato` | efeito de voz do formato e trechos originais das vozes não entram |
+  | `conferir_audio.py` linha 24 (`SEM_JANELA = 0x08000000`) | `_duracao`, `_tem_som`, `_whisper_local`, `ouvir` | a conferência do áudio devolve sempre "não conferi" — nenhum Short feito no Linux é ouvido antes de subir |
+  | `anime_testes.py` ~282 | `conferir` | o teste de voz não confere |
+  | `capa_ia_anime.py` ~667 | `_gerar_com_ref` | capa com referência não é gerada por esse caminho |
+  | `kaggle_baixar.py`, `parceiro_diario.py`, `recuperar_falsos_mudos.py` | — | só rodam no PC (Windows): sem efeito |
+- **Prova (rodado aqui, Linux, Python 3.13):**
+  `subprocess.run(["ffprobe","-version"], creationflags=0x08000000)` → `ValueError: creationflags is only supported
+  on Windows platforms`. Com um mp4 de 3 s com som: `conferir_audio._duracao` → `0.0` e `_tem_som` → `None`.
+- **A camada do Linux não cobre isso:** `recapd-ambientes/producao/colab/sitecustomize.py` traduz caminho `D:\...`
+  e troca o encoder, mas não tira `creationflags`. (Se a camada do STI tira, o problema é só no Kaggle — você disse
+  que `creationflags` sem `getattr` "quebra lá".)
+- **Por que ninguém viu:** todas ficam dentro de `try/except` que registra um aviso e segue. O vídeo sai, só que
+  sem o recurso. É o mesmo tipo de falha silenciosa do `color_filter` e do Groq.
+- **Como conferir no D::** no `pipeline.log` de um longo do Kaggle, procurar `trecho original de` e
+  `creationflags is only supported` (aparece no texto do aviso). No STI, ver se o `conferido_audio` dos Shorts feitos
+  lá é sempre `"não conferi (ValueError)"`.
+- **Conserto sugerido (um dos dois):**
+  1. Central, sem tocar em 97 arquivos: na camada do Linux (`colab/sitecustomize.py` e a do STI), dentro do
+     `if os.name != "nt":`, embrulhar `subprocess.Popen.__init__` para **tirar** `creationflags` e `startupinfo` dos
+     argumentos. Cobre tudo de uma vez, inclusive o que ainda vai ser escrito.
+     ```python
+     _popen_init = _sp.Popen.__init__
+     def _popen_sem_flags(self, *a, **kw):
+         kw.pop("creationflags", None); kw.pop("startupinfo", None)
+         _popen_init(self, *a, **kw)
+     _sp.Popen.__init__ = _popen_sem_flags
+     ```
+  2. Nos arquivos: trocar o número fixo por `getattr(subprocess, "CREATE_NO_WINDOW", 0)` (como já fazem
+     `climas_voz.py`, `narracao_curva.py`, `qa_video.py`).
+  No repositório inteiro são 97 arquivos com o número fixo; a maioria só roda no Windows. A opção 1 resolve os que
+  importam.
+- **Confiança:** alta (reproduzido). Efeito no vídeo: médio — a abertura com o trecho real do narrador e a
+  conferência de áudio são coisas que a dona pediu.
+
+## A15. Conferência de áudio (`conferir_audio.ouvir`): dois jeitos de segurar vídeo bom que sobraram depois do conserto de 13/11
+- **Onde:** `recapd-ambientes/producao/bin/conferir_audio.py`, `ouvir` (~linha 88).
+- **Lido (a lógica):**
+  1. "Quase nada se ouve": segura se `len(palavras) < max(8, duração × 0,6)`. O conserto de 13/11 cobre a
+     transcrição VAZIA, mas não a transcrição PARCIAL. Se o Groq devolver só o começo (corte por tamanho, erro no
+     meio, limite) num Short de 60 s, vêm 20 palavras → "quase nada se ouve (20 palavras em 60 s)" → segurado →
+     `descartar_segurados` leva pro Drive. Pela regra "revisor sem resposta = não conferi": antes de segurar por
+     pouca palavra, conferir `_tem_som` (se há som em mais de ~60% do tempo, é a transcrição que falhou) ou repetir
+     com o Whisper local, e só segurar se os dois concordarem.
+  2. "Só X% do roteiro aparece": compara com `roteiro.txt` da pasta de trabalho. Formatos com fala real do parceiro,
+     trecho original do narrador na abertura, mascote ou várias vozes têm bastante áudio que NÃO está no roteiro;
+     e o `anti_ban` troca palavras na fala. O limite de 30% é folgado, mas a conta divide pelo roteiro inteiro
+     (`/ len(a)`): um Short em que a narração foi cortada pela metade por causa do `target_lines` (o roteiro.txt
+     guarda o texto longo) pode cair abaixo. Sugestão: comparar com o que foi NARRADO (as frases que viraram
+     `audio_N.wav`) e não com o roteiro bruto.
+  3. O veredito `ok: None` é gravado em `conferido_audio` e a função `antes_de_subir` deixa subir — certo. Mas na
+     próxima vez ela ouve de novo (só pula quando `ok is True`): Short que não dá pra conferir é transcrito a cada
+     tentativa de postagem. Guardar a data e não repetir por algumas horas.
+- **Confiança:** média (lido, não reproduzido — precisa de transcrição real).
+
