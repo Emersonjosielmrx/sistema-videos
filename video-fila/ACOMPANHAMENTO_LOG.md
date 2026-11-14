@@ -2068,3 +2068,25 @@ refrigeração (cooler/pasta térmica/entrada de ar) — só a dona resolve.** C
 pode ser gerente nem rodar 2 juntos. Para liberar o limite de frequência por software bastaria a senha de sudo.
 A "falha calada de 2 h" de 13/11 era o ssh sem resposta nesses picos (TimeoutExpired não tratado): agora conta como
 "STI ocupado, tento na próxima".
+
+## 14/11/2026 02:00 — achados do agente online (ANALISE_MELHORIAS_PENDENTES.md, A10-A20): 3 aplicados, medidos no D:
+1. **A18 — a voz afundava 6 dB enquanto o efeito sonoro tocava** (`fx_clips.apply_effects_to_cmd`: `amix` sem
+   `normalize=0`). Medido aqui com o filtro da produção: voz -36 -> -42 dB durante o SFX, voltando em 0,3 s; em
+   clipe real de Short (função real + whoosh real): 0-1,5 s -19,9 dB contra -17,4 no resto. Corrigido
+   (`normalize=0,alimiter`, volume do SFX pela metade pra ele ficar igual): voz estável, SFX -30,4 contra -30,8 dB.
+   Também no meme do resumo (`anime-pipeline.py`). `SFX_AMIX_ANTIGO=1` volta. Vale pra todo Short e longo novos.
+2. **A14 — no Linux do Kaggle, 20 chamadas falhavam caladas** por `creationflags=0x08000000`: trecho real do
+   narrador na abertura, efeito de voz, conferência de áudio, capa com referência. A camada do STI já tirava a opção;
+   a do Kaggle (`colab/sitecustomize.py`) não — agora tira (testado num Linux real). No STI o defeito era outro:
+   `conferir_audio` morria em "No module named groq_api" e nenhum Short de lá era ouvido (6 de 6 com
+   conferido_audio vazio) — erro na transcrição online agora cai no Whisper local.
+3. **A19 — trava "NARRAÇÃO MUDA" por um número só.** Medido nos logs: na semana da calibração (16-20/10) 1,6% dos
+   Shorts bons ficavam entre -23 e -21 LUFS; em 21-25/10 eram 25% (54 de 214) e um foi barrado em -23,2. Desde 30/10
+   o PC1 não registra mais essa medida (render no Kaggle/outras máquinas): **não sei quantos são barrados hoje.**
+   Agora só barra com DOIS sinais: mix abaixo de -23 E volume baixo na faixa da voz (`_volume_faixa_voz`, 300 Hz-3
+   kHz, limite -28 dB; medido: com narração -19 a -25, só trilha -32 a -36). Abaixo de -27 LUFS barra direto.
+   A 1ª régua que escrevi (fração de silêncio) NÃO separava os casos — o teste pegou e troquei.
+   `NARRACAO_MUDA_SO_VOLUME=1` volta.
+Não aplicados (lidos, ficam pra próxima): A4 voz de homem em "Senhora/Sereia", A5 filtro de telefone por citar
+"celular", A6 efeito por pedaço de palavra, A10/A11 clima da voz no longo, A12 cartões, A13, A16, A17, A20 (imagem
+congela 0,5 s depois de cada frase no longo).

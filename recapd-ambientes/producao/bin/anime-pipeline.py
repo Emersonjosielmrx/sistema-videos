@@ -285,10 +285,25 @@ def run_one(video_path, script_path, orient, out_name, max_panels):
         # (só trilha). Vertical abaixo de -23 não sai; nos outros formatos ainda não há medida, só avisa.
         nivel = float(m.get("input_i"))
         if nivel < -23:
-            if orient == "vertical":
+            # 14/11 (achado A19 do agente online, medido no D:): a régua de -23 é de 20/10, quando só 1,6% dos Shorts
+            # bons ficavam entre -23 e -21 LUFS. Em 21-25/10 já eram 25% (54 de 214) e um foi barrado em -23,2 — a
+            # 0,2 dB do corte. Um número só não decide "mudo" (mesmo erro dos 59 Shorts descartados em 13/11): agora
+            # só não sai quando o volume é baixo E a faixa da voz também está baixa (_volume_faixa_voz).
+            # Abaixo de -27 (os mudos de verdade mediam -23,7 a -30,4) continua barrando direto.
+            # NARRACAO_MUDA_SO_VOLUME=1 volta à régua antiga.
+            mudo = True
+            if os.environ.get("NARRACAO_MUDA_SO_VOLUME") != "1" and nivel >= -27:
+                voz = _volume_faixa_voz(final_out)
+                # voz presente fica acima de -28 dB nessa faixa (medido: -19 a -25); só trilha, abaixo de -31
+                if voz is None or voz > float(os.environ.get("NARRACAO_MUDA_VOZ_DB", "-28")):
+                    mudo = False
+                    logging.warning(f"[{orient}] mix baixo ({nivel} LUFS) mas a voz está lá (faixa da voz: "
+                                    f"{'não medi' if voz is None else f'{voz:.1f} dB'}) — segue pro master")
+            if orient == "vertical" and mudo:
                 logging.error(f"[{orient}] NARRAÇÃO MUDA: mix em {nivel} LUFS (normal -17 a -21) — vídeo não sai")
                 return False
-            logging.warning(f"[{orient}] mix baixo ({nivel} LUFS): conferir se a narração saiu")
+            if orient != "vertical":
+                logging.warning(f"[{orient}] mix baixo ({nivel} LUFS): conferir se a narração saiu")
         mastered = str(workspace / f"_master_{orient}.mp4")
         ML.apply_pass(final_out, mastered, -14.0, -1.0, m)
         if Path(mastered).exists() and Path(mastered).stat().st_size > 10000:
@@ -367,6 +382,23 @@ def _dims(arq):
                         "-of", "csv=p=0:s=x", str(arq)], capture_output=True, text=True, timeout=60)
     w, h = (int(x) for x in r.stdout.strip().split("x")[:2])
     return w, h
+
+
+def _volume_faixa_voz(video):
+    """Volume médio (dB) do vídeo SÓ na faixa da voz (300 Hz-3 kHz). Medido em 14/11: Short com narração -18,9 dB
+    (-24,6 com o volume 6 dB mais baixo); só trilha, no nível dos mudos de verdade (-26 a -30 LUFS), -31,8 a -35,8 dB.
+    "Silêncio" não serve de régua: trilha contínua nunca fica em silêncio (medi 0-47%).
+    None = não deu pra medir (quem chama trata como "não é mudo": falha de checagem não é reprovação)."""
+    import re as _re
+    try:
+        r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(video), "-vn", "-af",
+                            "highpass=f=300,lowpass=f=3000,volumedetect", "-f", "null", "-"],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300,
+                           creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        m = _re.search(r"mean_volume: (-?[\d.]+) dB", r.stderr or "")
+        return float(m.group(1)) if m else None
+    except Exception:  # noqa: BLE001
+        return None
 
 
 class _MasterFeito(Exception):
