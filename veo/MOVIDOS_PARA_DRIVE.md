@@ -2663,3 +2663,22 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - aulas_ia_20261104_074905_intro.mp4
   - aulas_ia_20261104_074905_prop.mp4
   - aulas_ia_20261104_074905_punch.mp4
+
+## 2026-11-13 17:10 — 122 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (122 MB) — 15 arquivos:
+  - danca_e_musica__20261106_101404_final.mp4
+  - danca_e_musica__20261106_101404_imp.mp4
+  - danca_e_musica__20261106_101404_intro.mp4
+  - danca_e_musica__20261106_101404_prop.mp4
+  - danca_e_musica__20261106_101404_punch.mp4
+  - dicas_financeir_20261104_093412_final.mp4
+  - dicas_financeir_20261104_093412_imp.mp4
+  - dicas_financeir_20261104_093412_intro.mp4
+  - dicas_financeir_20261104_093412_prop.mp4
+  - dicas_financeir_20261104_093412_punch.mp4
+  - fofos_e_absurdo_20261104_081307_final.mp4
+  - fofos_e_absurdo_20261104_081307_imp.mp4
+  - fofos_e_absurdo_20261104_081307_intro.mp4
+  - fofos_e_absurdo_20261104_081307_prop.mp4
+  - fofos_e_absurdo_20261104_081307_punch.mp4

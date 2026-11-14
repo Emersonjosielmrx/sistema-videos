@@ -88,8 +88,52 @@ def _rc_lsf(caminho):
         return None
 
 
+def _shorts_gerados():
+    """13/11 dona ("você não colocou os Shorts gerados"): pasta de Short com video.mp4 feito hoje (Cortes/parceiro) +
+    Veo limpos. [(datetime, {canal, idioma, origem})]."""
+    out = []
+    raiz = Path(r"D:\hipercool-materiais\animes recap\shorts")
+    ini = datetime(agora.year, agora.month, agora.day).timestamp()
+    try:
+        for d in raiz.iterdir():
+            v = d / "video.mp4"
+            try:
+                mt = v.stat().st_mtime
+            except OSError:
+                continue
+            if mt < ini:
+                continue
+            pj = _json(d / "postar.json", {}) or {}
+            out.append((datetime.fromtimestamp(mt), {"canal": pj.get("canal") or "?",
+                                                     "idioma": pj.get("idioma") or pj.get("lingua") or "pt",
+                                                     "origem": "Cortes/parceiro"}))
+    except OSError:
+        pass
+    try:
+        for v in Path(r"D:\hipercool-materiais\veo\limpos").rglob("*.mp4"):
+            mt = v.stat().st_mtime
+            if mt >= ini:
+                out.append((datetime.fromtimestamp(mt), {"canal": "?", "idioma": "pt", "origem": "Veo"}))
+    except OSError:
+        pass
+    return out
+
+
+def _nome_canal(cid):
+    try:
+        for k, c in (_json(Path(r"D:\postador-de-videos\config\canais.json"), {}).get("canais") or {}).items():
+            if cid == k or cid in (c.get("creds") or []):
+                return c.get("nome") or cid
+    except (AttributeError, TypeError):
+        pass
+    return cid
+
+
 def sec_numeros():
-    post = _linhas(COLAB / "postar_longos.log", r"\s+ok: https://")
+    # 13/11 dona ("relatório cada vez com menos coisas; tudo em tabela, sempre no mesmo padrão"): longos e cortes
+    # SEPARADOS (antes "\s+ok:" pegava os dois), Shorts gerados x postados, TikTok/Instagram, numa tabela só.
+    post = _linhas(COLAB / "postar_longos.log", r"^\[\d\d/\d\d \d\d:\d\d\]\s+ok: https://")
+    cortes = _linhas(COLAB / "postar_longos.log", r"cortes: .* — ok: https://")
     capas = _linhas(COLAB / "capas_depois.log", r"aplicada no Studio: RESULTADO: \{\"(capa|teste_ab)\": \"(enviada|ok)")
     cel = []
     for l in (BASE / "logs" / "celulares.log").read_text(encoding="utf-8", errors="ignore").splitlines() \
@@ -102,22 +146,73 @@ def sec_numeros():
         flow.append((datetime.fromisoformat(l["quando"][:19]), l))
     links = [re.search(r"https://\S+", l).group(0) for t, l in post if t >= ultima]
     p1, p2 = _conta(post)
+    k1, k2 = _conta(cortes)
     c1, c2 = _conta(capas)
     e1, e2 = _conta(cel)
     f1, f2 = _conta(flow)
+    ger = _shorts_gerados()
+    g1, g2 = _conta(ger)
+    r = _redes()
     livre = _disco()
-    out = ["## 📊 Números", "| | Desde a última ronda | Hoje |", "|---|---|---|",
-           f"| Longos postados | {p1}{' — ' + ', '.join(links) if links else ''} | {p2} |",
-           f"| Capas aplicadas | {c1} | {c2} |",
-           f"| Renders nos celulares/STI | {e1} | {e2} |",
-           f"| Imagens do Flow | {f1} | {f2} |",
-           f"| Disco D livre | {livre} | — |"]
-    v = _json(COLAB / "views_longos.json", {})
-    if v:
-        top = sorted(v.items(), key=lambda kv: -(kv[1].get("views") or 0))[:3]
-        out.append("")
-        out.append("Longos que mais rendem: " + "; ".join(f"{x.get('canal', '?')} {x.get('views')} views ({k})"
-                                                       for k, x in top))
+    itens = [("🎬 Longos postados", p1, p2), ("✂️ Cortes do longo (Shorts) postados", k1, k2),
+             ("🏭 Shorts GERADOS (prontos)", g1, g2), ("📺 Shorts subidos no YouTube", *r["sh"]),
+             ("🎵 TikTok postados", *r["tk"]), ("📸 Instagram postados", *r["ig"]), ("🖼️ Capas aplicadas", c1, c2),
+             ("📱 Renders nos celulares/notebooks", e1, e2), ("🎨 Imagens do Flow", f1, f2)]
+    # 14/11 00h (virada do dia zerou a coluna "Hoje"): guarda os totais do dia a cada execução; a coluna "Ontem" usa o
+    # último total gravado no dia anterior (a ronda das 23h+ — perto do total real). RELATORIO_ONTEM=0 tira a coluna.
+    tot_arq = BASE / "estado" / "relatorio_totais.json"
+    tot = _json(tot_arq, {}) or {}
+    tot[agora.strftime("%Y-%m-%d")] = {n: h for n, _, h in itens}
+    ontem_d = tot.get((agora - timedelta(days=1)).strftime("%Y-%m-%d"), {})
+    try:
+        tot_arq.write_text(json.dumps(dict(sorted(tot.items())[-10:]), ensure_ascii=False, indent=1), encoding="utf-8")
+    except OSError:
+        pass
+    com_ontem = __import__("os").environ.get("RELATORIO_ONTEM", "1") != "0"
+    if com_ontem:
+        out = ["## 📊 Números", "| Item | Desde a última ronda | Hoje | Ontem |", "|---|---:|---:|---:|"]
+        out += [f"| {n} | {d} | {h} | {ontem_d.get(n, '—')} |" for n, d, h in itens]
+        out.append(f"| 💾 Disco D livre | {livre} | — | — |")
+    else:
+        out = ["## 📊 Números", "| Item | Desde a última ronda | Hoje |", "|---|---:|---:|"]
+        out += [f"| {n} | {d} | {h} |" for n, d, h in itens]
+        out.append(f"| 💾 Disco D livre | {livre} | — |")
+    if links:
+        out += ["", "**Longos no ar desde a última:** " + " · ".join(links)]
+    if ger:
+        por_id = Counter(g["idioma"] for _, g in ger)
+        por_canal = Counter(_nome_canal(g["canal"]) for _, g in ger if g["canal"] != "?")
+        out += ["", "**Shorts gerados hoje** — por idioma: " + ", ".join(f"{k} {n}" for k, n in por_id.most_common())
+                + " | por canal: " + ", ".join(f"{k} {n}" for k, n in por_canal.most_common(8))]
+    return out
+
+
+def sec_mais_vistos():
+    """13/11 dona ("vamos focar nos mais vistos do YouTube"): top 10 longos por views e views/dia, em tabela."""
+    out = ["## 📈 Longos que mais rendem (nossos)"]
+    v = _json(COLAB / "views_longos.json", {}) or {}
+    titulos = {}
+    try:
+        for x in _json(COLAB / "longos_postados.json", {}).get("postados", []):
+            u = (x.get("url") or "").rsplit("/", 1)[-1]
+            titulos[u] = x.get("titulo") or ""
+    except AttributeError:
+        pass
+    linhas = []
+    for k, x in v.items():
+        try:
+            dias = max((agora - datetime.fromisoformat(x.get("postado", "")[:16])).total_seconds() / 86400, 0.5)
+        except ValueError:
+            dias = None
+        vd = (x.get("views") or 0) / dias if dias else 0
+        linhas.append((x.get("views") or 0, vd, k, x))
+    if not linhas:
+        return out + ["- sem leitura de views"]
+    out += ["| # | Canal | Views | Views/dia | Título | Link |", "|---:|---|---:|---:|---|---|"]
+    for i, (vw, vd, k, x) in enumerate(sorted(linhas, key=lambda t: -t[0])[:10], 1):
+        out.append(f"| {i} | {x.get('canal', '?')} | {vw} | {vd:.0f} | {titulos.get(k, '')[:55]} | https://youtu.be/{k} |")
+    lido = max((x.get("lido") or "" for _, _, _, x in linhas), default="")
+    out.append(f"\n_views lidas até {lido[11:16]} de {lido[8:10]}/{lido[5:7]}_")
     return out
 
 
@@ -186,6 +281,34 @@ def sec_serie():
             tarefas.append(f"{parte}: próxima {c[1] if len(c) > 1 else '?'}")
     if tarefas:
         out.append("- Postagem automática (pública + aviso): " + " | ".join(tarefas))
+    # 13/11: a série tem 16 partes, não só 13-15 — mostra todas as fichas em na_nuvem (postada / esperando / reprovada)
+    # numa linha só, pra buraco (4 e 6 reprovadas por palavrão, 16 sem render.json) aparecer. RELATORIO_SERIE_TODA=0 tira.
+    import os as _os
+    if _os.environ.get("RELATORIO_SERIE_TODA", "1") != "0":
+        try:
+            est = _json(COLAB / "longos_postados.json", {}) or {}
+            urls = {x.get("nome", ""): x.get("url", "") for x in est.get("postados", [])}
+            repr_ = set(est.get("reprovados", []))
+            fichas = Path(r"D:\hipercool-materiais\animes recap\na_nuvem")
+            todas = []
+            for d in fichas.iterdir():
+                if "Medieval_Age" not in d.name:
+                    continue
+                m = re.match(r"^[\w-]{11}_(\d{1,2})_", d.name)
+                n = int(m.group(1)) if m else 1
+                if d.name in urls:
+                    s = "✅"
+                elif d.name in repr_:
+                    s = "❌ reprovada (bipe pendente)" if not (d / "SEM_PALAVRAO.txt").exists() else "🔁 bipada"
+                else:
+                    s = "⏳ esperando"
+                todas.append((n, s))
+            todas.sort()
+            out.append("- Série toda: " + " · ".join(f"{n} {s}" for n, s in todas))
+            falta = [str(n) for n, s in todas if s != "✅"]
+            out.append(f"- Faltam no ar: {', '.join(falta) or 'nenhuma'}")
+        except OSError:
+            pass
     return out
 
 
@@ -209,10 +332,13 @@ def sec_kaggle():
     if not st:
         return out + ["- central sem resposta"]
     rod = [g["conta"] for g in st.get("gpus", []) if g.get("conta")]
-    out.append(f"- Rodando: {len(rod)} ({', '.join(rod) or 'nenhuma'}) | {st.get('verificadas', '?')} verificadas | "
-               f"atualizado {st.get('atualizado', '?')}")
-    for p in st.get("pedidos", [])[:8]:
-        out.append(f"  - {p['pct']}% {p['situacao'][:45]} — {p['titulo'][:60]}")
+    out.append(f"**{len(rod)} contas rodando** ({', '.join(rod) or 'nenhuma'}) · {st.get('verificadas', '?')} "
+               f"verificadas · atualizado {st.get('atualizado', '?')}")
+    peds = st.get("pedidos", [])[:10]
+    if peds:  # 13/11 dona: tabela
+        out += ["", "| % | Situação | Vídeo |", "|---:|---|---|"]
+        out += [f"| {p['pct']}% | {p['situacao'][:45]} | {p['titulo'][:70]} |" for p in peds]
+        out.append("")
     try:
         r = subprocess.run(["ssh", "-o", "ConnectTimeout=15", "-o", "BatchMode=yes", "hermes-prod",
                             "grep -v kernelworkerstatus.running /opt/recap_central/central.log | tail -40 | "
@@ -242,19 +368,23 @@ def sec_frentes():
 
 
 def sec_maquinas():
-    out = ["## 📱 Máquinas (hora / dia)"]
+    # 13/11 dona: tabela (antes era texto cortado em 9 linhas — com o HP o PC1 sumia). Uma linha por máquina com uso
+    # na hora/dia, renders e imagens do Flow de hoje e o que faz agora.
+    out = ["## 📱 Máquinas", "| Máquina | Hora | Dia | Renders hoje | Flow hoje | Agora |", "|---|---:|---:|---|---:|---|"]
     try:
-        r = subprocess.run([sys.executable, str(BASE / "uso_maquinas.py"), "resumo"], capture_output=True, text=True,
-                           timeout=120, creationflags=_SEM, encoding="utf-8", errors="replace", cwd=str(BASE))
-        out += ["```"] + [l for l in r.stdout.splitlines() if l.strip()][-9:] + ["```"]
+        sys.path.insert(0, str(BASE))
+        import uso_maquinas
+        res = uso_maquinas.resumo()
     except Exception as e:  # noqa: BLE001
-        out.append(f"- uso_maquinas falhou ({type(e).__name__})")
+        return out + [f"| — | | | | | uso_maquinas falhou ({type(e).__name__}) |"]
     st = (_json(BASE / "estado" / "celulares_stats.json", {}) or {}).get(agora.strftime("%Y-%m-%d"), {})
-    if st:
-        out.append("- Renders hoje: " + ", ".join(f"{h} {v['ok']} ok/{v['falhas']} falhas" for h, v in st.items()))
     por = Counter((d.get("onde") or str(d.get("via") or "").split(":")[-1]).lower() for d in _flow_hoje())
-    if por:
-        out.append("- Flow hoje por máquina: " + ", ".join(f"{k} {n}" for k, n in por.most_common()))
+    pct = lambda x: f"{x}%" if x is not None else "—"  # noqa: E731
+    for m, r in res.items():
+        rd = st.get(m)
+        rtxt = f"{rd['ok']} ok / {rd['falhas']} falha" if rd else "—"
+        out.append(f"| {m} | {pct(r['hora'])} | {pct(r['dia'])} | {rtxt} | {por.get(m, 0)} | "
+                   f"{str(r['agora'])[:70].replace('|', '/')} |")
     return out
 
 
@@ -338,9 +468,26 @@ def sec_pesquisador():
     return out
 
 
+_REDES = None
+
+
+def _redes():
+    """Coleta uma vez (sec_numeros e sec_redes usam): {'sh': (desde, hoje), 'tk': ..., 'ig': ..., 'linhas': [...]}."""
+    global _REDES
+    if _REDES is None:
+        _REDES = {"sh": (0, 0), "tk": (0, 0), "ig": (0, 0)}
+        _REDES["linhas"] = _sec_redes_coleta(_REDES)
+    return _REDES
+
+
 def sec_redes():
+    return _redes()["linhas"]
+
+
+def _sec_redes_coleta(res):
     """12/11 dona: "vamos adicionar os dados dos Shorts, Instagram e TikTok; quero eliminar o outro chat e ficar só com
-    esse". Shorts = uploads_ledger.jsonl (tipo short); TikTok/Instagram = logs do dia do postador."""
+    esse". Shorts = uploads_ledger.jsonl (tipo short); TikTok/Instagram = logs do dia do postador.
+    13/11: em TABELA por canal (dona: "manter sempre os dados em tabelas")."""
     out = ["## 📲 Shorts, TikTok e Instagram"]
     led = Path(r"D:\postador-de-videos\logs\uploads_ledger.jsonl")
     sh, por_canal = [], Counter()
@@ -361,9 +508,13 @@ def sec_redes():
     except OSError:
         pass
     s1, s2 = _conta(sh)
-    out.append(f"- Shorts no YouTube (subidos/agendados): {s1} desde a última | {s2} hoje em {len(por_canal)} canais")
+    res["sh"] = (s1, s2)
+    desde_canal = Counter(d.get("canal", "?") for t, d in sh if t >= ultima)
+    out.append(f"**YouTube Shorts:** {s1} desde a última · {s2} hoje em {len(por_canal)} canais")
     if por_canal:
-        out.append("  - mais hoje: " + ", ".join(f"{c} {n}" for c, n in por_canal.most_common(6)))
+        out += ["", "| Canal | Desde a última | Hoje |", "|---|---:|---:|"]
+        out += [f"| {c} | {desde_canal.get(c, 0)} | {n} |" for c, n in por_canal.most_common()]
+        out.append("")
     logs = Path(r"D:\postador-de-videos\logs")
     tk = logs / f"tiktok_{agora:%Y%m%d}.log"
     ok_tk, err_tk = [], []
@@ -377,8 +528,9 @@ def sec_redes():
         pass
     k1, k2 = _conta(ok_tk)
     e1, e2 = _conta(err_tk)
-    out.append(f"- TikTok: {k1} postados desde a última | {k2} hoje ({len({c for _, c in ok_tk})} contas) | "
-               f"falhas {e1}/{e2}")
+    res["tk"] = (k1, k2)
+    out.append(f"**TikTok:** {k1} postados desde a última · {k2} hoje ({len({c for _, c in ok_tk})} contas) · "
+               f"falhas {e1} desde a última / {e2} hoje")
     try:
         resumo = [l for l in (logs / "tiktok_auto.log").read_text(encoding="utf-8", errors="ignore")
                   .splitlines()[-40:] if "deslogados" in l or "sem postar hoje" in l]
@@ -407,8 +559,9 @@ def sec_redes():
     except OSError:
         pass
     i1 = sum(1 for t in ig_ok if t >= ultima)
-    out.append(f"- Instagram: {i1} postados desde a última | {len(ig_ok)} nas rodadas de hoje | erros "
-               f"{sum(1 for t in ig_err if t >= ultima)}/{len(ig_err)}")
+    res["ig"] = (i1, len(ig_ok))
+    out.append(f"**Instagram:** {i1} postados desde a última · {len(ig_ok)} hoje · erros "
+               f"{sum(1 for t in ig_err if t >= ultima)} desde a última / {len(ig_err)} hoje")
     try:
         trav = [l for l in (logs / "instagram_auto.log").read_text(encoding="utf-8", errors="ignore")
                 .splitlines()[-300:] if re.search(r"verifica|challenge|bloquead|checkpoint|suspens", l, re.I)]
@@ -416,6 +569,54 @@ def sec_redes():
             out.append(f"  - ⚠️ Instagram pedindo verificação/travado: {trav[-1][11:160]}")
     except OSError:
         pass
+    return out
+
+
+def sec_trio_midia():
+    """14/11 dona ("temos novos geradores de vídeo e imagem, coloque no relatório porque está em avaliação e precisaremos
+    corrigir quando for rotacionando entre contas e começar a dar erro" — D:\\gemini-argo\\TRIO_MIDIA.md): Gemini sem
+    navegador (1º) x Flow (2º/3º). midia.log = Gemini; geracoes.jsonl = Flow."""
+    out = ["## 🎞️ Geradores de imagem e vídeo (em avaliação — TRIO_MIDIA.md)"]
+    ger = {("imagem", "ok"): [], ("imagem", "falha"): [], ("video", "ok"): [], ("video", "falha"): []}
+    motivos, contas_ok, contas_err = Counter(), Counter(), Counter()
+    ini_dia = agora.strftime("%Y-%m-%d")
+    try:
+        for l in Path(r"D:\gemini-argo\midia.log").read_text(encoding="utf-8", errors="ignore").splitlines()[-3000:]:
+            if not l.startswith(ini_dia):
+                continue
+            m = re.match(r"(\S+ \S+) \w+ (imagem|video) (OK|falhou) (\S+?):? (\d+)?s?", l)
+            if not m:
+                continue
+            t = datetime.fromisoformat(m.group(1))
+            tipo, res, conta = m.group(2), ("ok" if m.group(3) == "OK" else "falha"), m.group(4).rstrip(":")
+            seg = int(m.group(5)) if res == "ok" and m.group(5) else None
+            ger[(tipo, res)].append((t, seg))
+            (contas_ok if res == "ok" else contas_err)[conta] += 1
+            if res == "falha":
+                txt = l.split(":", 3)[-1].lower()
+                motivos["cota esgotada" if "limit" in txt or "cota" in txt else "não ficou pronto (timeout)"
+                        if "não ficou pronto" in txt else "cookie/login" if "cookie" in txt or "401" in txt
+                        else "outro"] += 1
+    except OSError:
+        out.append("- midia.log sem leitura")
+    flow = _flow_hoje()
+    flow_t = [(datetime.fromisoformat(d["quando"][:19]), d) for d in flow]
+    med = lambda xs: f"{sorted(xs)[len(xs) // 2]} s" if xs else "—"  # noqa: E731
+    out += ["| Gerador | Tipo | OK desde a última | OK hoje | Falhas hoje | Tempo (mediana) |",
+            "|---|---|---:|---:|---:|---:|"]
+    for tipo in ("imagem", "video"):
+        oks, fs = ger[(tipo, "ok")], ger[(tipo, "falha")]
+        out.append(f"| Gemini (sem navegador) | {tipo} | {sum(1 for t, _ in oks if t >= ultima)} | {len(oks)} | "
+                   f"{len(fs)} | {med([s for _, s in oks if s])} |")
+    out.append(f"| Flow | imagem | {sum(1 for t, _ in flow_t if t >= ultima)} | {len(flow_t)} | — | — |")
+    tot_g = len(ger[("imagem", "ok")]) + len(ger[("imagem", "falha")])
+    if tot_g:
+        out.append(f"\nGemini imagem: {100 * len(ger[('imagem', 'ok')]) // tot_g}% de acerto hoje")
+    if motivos:
+        out.append("**Erros do Gemini hoje:** " + ", ".join(f"{k} {n}" for k, n in motivos.most_common()))
+    if contas_err:
+        out.append("**Contas com erro:** " + ", ".join(f"{c} {n}" for c, n in contas_err.most_common(8))
+                   + f" · contas que geraram: {len(contas_ok)}")
     return out
 
 
@@ -450,8 +651,10 @@ def sec_insta_http():
 def main(gravar):
     partes = [f"# Relatório completo — {agora:%d/%m, %H:%M}",
               f"_(desde a última ronda = desde {ultima:%d/%m %H:%M})_"]
-    for f in (sec_numeros, sec_serie, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
-              sec_pesquisador, sec_redes, sec_insta_http):
+    # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
+    # a série vai pro fim
+    for f in (sec_numeros, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
+              sec_pesquisador, sec_redes, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()
         except Exception as e:  # noqa: BLE001 — uma seção quebrada não derruba o relatório

@@ -1,0 +1,341 @@
+{
+ "video": "futebolcom_ia2_20261113_182327.mp4",
+ "conta": "futebolcom.ia2",
+ "marca": "Cardápio Digital",
+ "titulo": "Cardápio digital para pizzaria no WhatsApp",
+ "formato": "dono_e_cena_veo",
+ "veo_total": 1,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.75,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 6.0,
+   "roteiro_marca": 5.0,
+   "diretor": 6.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.47
+   ],
+   [
+    1,
+    "imagem",
+    14.69
+   ],
+   [
+    2,
+    "conversa",
+    9.0
+   ],
+   [
+    3,
+    "veo",
+    24.32
+   ],
+   [
+    4,
+    "cartao",
+    8.31
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Legenda karaokê 'IA para' totalmente apagada e ilegível: o texto foi renderizado em cinza-escuro translúcido sobre o fundo escuro do forno a lenha, sem preenchimento branco, sem contorno e sem a tarja escura de fundo, gerando perda total de contraste.",
+   "como_corrigir": "Aplicar o estilo padrão das legendas (texto branco com contorno preto e tarja preta semitransparente ao fundo), aplicando o destaque vermelho apenas na palavra ativa no momento da fala."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "O cabo da pá de pizza cruza diretamente a legenda 'direto pelo WhatsApp', e a palavra 'direto' (em vermelho escuro sobre o avental vermelho e o cabo de madeira) fica com baixo contraste e poluição visual.",
+   "como_corrigir": "Adicionar a caixa/tarja preta semitransparente padronizada atrás da legenda inteira para isolá-la do cabo da pá e do avental, ou elevar ligeiramente a legenda para não colidir com o movimento da pá."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Dois textos brigando pelo foco visual: o selo/tópico '✓ tirando dúvidas' fica colado e concorre diretamente com a legenda 'e tirando dúvidas' logo abaixo, repetindo o mesmo termo no mesmo instante e cobrindo a montagem da pizza na bancada.",
+   "como_corrigir": "Reposicionar os selos tópicos mais acima na lateral esquerda para distanciar da legenda, e descer ou afastar a legenda da área de ação para não cobrir a pizza."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada com foto estática de aspecto genérico mantida por cerca de 4 segundos sem movimento de câmera.",
+   "como_corrigir": "Substituir por take em vídeo ou aplicar efeito Ken Burns (zoom contínuo suave)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "O elemento 'tirando dúvidas' surge de forma seca, sem animação perceptível de entrada.",
+   "como_corrigir": "Adicionar transição de entrada com pop de escala ou slide com atenuação (ease-out)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Card de WhatsApp e fundo estáticos por tempo excessivo, gerando ritmo arrastado.",
+   "como_corrigir": "Incluir leve aproximação de câmera (push-in) e animação com micro-bounce na entrada dos balões."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "O @ exibido é @futebolcom.ia2, incompatível com a marca Cardápio Digital.",
+   "como_corrigir": "Substituir o @ pelo perfil oficial da marca."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Legenda 'IA para' quase invisível contra o fundo escuro.",
+   "como_corrigir": "Ajustar contraste e preenchimento da legenda para manter legibilidade."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Gancho estático nos primeiros 2 segundos, sem movimento de câmera, corte ou efeito sonoro que prenda a atenção no feed.",
+   "como_corrigir": "Aplicar zoom digital rápido no apresentador e inserir efeito sonoro de notificação para criar urgência inicial."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Visual de slide com ícones de checkmark (✔) associados a dores e imagem de fundo que não ilustra o gargalo do WhatsApp.",
+   "como_corrigir": "Substituir checks por marcadores de alerta e mostrar cena de atendente sobrecarregado digitando no celular."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A locução promete cardápio com fotos no celular, mas a cena exibe apenas balões de texto em uma caixa vazia, sem mostrar o produto.",
+   "como_corrigir": "Exibir a tela do celular demonstrando a navegação prática pelo cardápio digital com fotos dos pratos."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261113_051134.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261113_135029.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261113_182327.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 5.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 5.67,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "diretor": 5.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   5,
+   2
+  ],
+  "dono_mesma_foto": [
+   5,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   1,
+   2
+  ],
+  "dono_abre_fecha_veo_meio": [
+   1,
+   1
+  ],
+  "dono_tres_veo_final": [
+   2,
+   1
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   16,
+   8
+  ]
+ },
+ "vigiando": []
+}

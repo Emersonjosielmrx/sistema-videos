@@ -56,6 +56,13 @@ HOSTS = {
     # 12/11 dona ("A2, A3 e Moto G20 ligados"): Moto G20 (8 núcleos, 3,5 GB, ffmpeg do Termux). A2/A3 entram quando o
     # sshd do Termux deles responder (instalar_vigia.py instala o vigia sozinho).
     "g20": {"nome": "Moto G20", "modelo": "moto g(20)", "ip": "100.75.139.24", "ram_min": 1.0},
+    # 14/11 dona ("adicione o emerson-asus-eepc, põe ele pra trabalhar"): netbook Eee PC 1015BX, AMD C-60 (2 núcleos
+    # 1 GHz, 2011), 1,5 GB, Mint 22.3, ffmpeg 7.0.2 estático em ~/bin. O mais fraco de todos: último da ordem e
+    # ram_min 0,6 GB (1,5 GB total, ~950 MB livres).
+    # 14/11 01h25: TESTADO — render de 23 s de Short passou de 10 min sem terminar (PC1: 24 s). NÃO faz render:
+    # fica fora da HOSTS (só navegador pelo maquina_remota). Pra testar de novo: descomentar e `celulares.py testar asus`.
+    # "asus": {"nome": "Netbook Asus", "modelo": "eee pc 1015bx", "ip": "100.122.115.57", "notebook": True,
+    #          "ram_min": 0.6},
     # 12/11: Redmi A3 testado — xfade 8 s 1080x1920 passou de 200 s (G20 = 23 s): lento demais pro render; só o vigia
 }
 # Regras de vaga. 04/11 (dona: "vão trabalhar acima da temperatura, o local é quente; não tem problema se der pau, são

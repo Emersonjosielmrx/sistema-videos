@@ -1,0 +1,141 @@
+{
+ "conta": "inovarecom.ia",
+ "produto": "hermes_call",
+ "marca": "Hermes Call",
+ "titulo": "Como escalar ligações pelo WhatsApp",
+ "legenda": "Sua equipe comercial não precisa passar o dia discando manualmente. Automatize ligações pelo WhatsApp com inteligência artificial.\nSaiba como no link do perfil.\n\n👉 Chame no direct • link no perfil\n\n#whatsappbusiness #vendas #atendimentoaocliente #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "Equipe sem tempo de ligar?",
+  "pergunta_cliente": "Sua equipe não dá conta de ligar para tantos contatos?",
+  "blocos": [
+   {
+    "rotulo": "O gargalo",
+    "fala": "Chegavam centenas de interessados e meu time não conseguia discar para todo mundo a tempo.",
+    "visual": "imagem",
+    "cenario_en": "standing in a modern, tidy and well-lit office of a small Brazilian commercial company, warm lighting, professional atmosphere",
+    "destaques": [
+     "centenas de interessados",
+     "discar para todo mundo"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261111_045339_1.png",
+    "prompt_en": "standing in a modern, tidy and well-lit office of a small Brazilian commercial company, warm lighting, professional atmosphere, no people in focus"
+   },
+   {
+    "rotulo": "A solução",
+    "fala": "A tecnologia dispara chamadas automáticas de WhatsApp em grande escala, com atendimento inteligente vinte e quatro horas.",
+    "visual": "veo",
+    "prompt_en": "cinematic side shot in a bright modern Brazilian sales office, professional staff working calmly on laptops, soft natural light, no text, clean environment",
+    "destaques": [
+     "chamadas automáticas",
+     "em grande escala"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Alô, quem está falando?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Estou ligando para dar andamento ao seu pedido."
+     },
+     {
+      "de": "cliente",
+      "texto": "Que ótimo, podemos fechar agora?"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje ativamos quantos contatos precisamos no WhatsApp sem sobrecarregar nossa equipe comercial.",
+    "visual": "apresentador",
+    "cenario_en": "standing in a modern, tidy and well-lit office of a small Brazilian commercial company, warm lighting, professional atmosphere",
+    "destaques": [
+     "quantos contatos precisamos",
+     "sem sobrecarregar"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261111_045339_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261111_045339_1.png"
+   }
+  ],
+  "legenda": "Sua equipe comercial não precisa passar o dia discando manualmente. Automatize ligações pelo WhatsApp com inteligência artificial.\nSaiba como no link do perfil.",
+  "titulo": "Como escalar ligações pelo WhatsApp",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "escala_como_funciona",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 706,
+  "tentativas_roteiro": 4
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovarecom.ia_20261113_135029\\dono_3.mp4",
+ "duracao_s": 30.46,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-13T15:58:06",
+ "variante": "quatro_veo",
+ "cenas_dono_feitas": [
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 3,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.36,
+   "fala": "Sua equipe não dá conta de ligar para tantos contatos?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.36,
+   "fim": 10.48,
+   "fala": "Chegavam centenas de interessados e meu time não conseguia discar para todo mundo a tempo.",
+   "tipo": "imagem"
+  },
+  {
+   "n": 2,
+   "ini": 10.48,
+   "fim": 18.9,
+   "fala": "A tecnologia dispara chamadas automáticas de WhatsApp em grande escala, com atendimento inteligente vinte e quatro horas.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 18.9,
+   "fim": 26.57,
+   "fala": "Hoje ativamos quantos contatos precisamos no WhatsApp sem sobrecarregar nossa equipe comercial.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 26.57,
+   "fim": 30.46,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

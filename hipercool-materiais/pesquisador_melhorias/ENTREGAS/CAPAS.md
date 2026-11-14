@@ -173,3 +173,8 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 > Retorno (LONGOS/CAPAS, 13/11): DEIXADO TubeLabHQ/youtube-research-skills — a ferramenta exige MCP pago, mas o MÉTODO já está em uso: 'niche-bending' = longo_idiomas.py (formato campeão em outra língua) e 'outlier' = garimpar_parecidos.py (temas dos nossos campeões). Ideia a fazer: ordenar o garimpo por views/mediana do canal de origem.
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_capas_corpus__sonnet_0116.md`
 - [INÉDITO] github.com/TubeLabHQ/youtube-research-skills — ★54, push 2026-11-12, MIT — AI agent skills for YouTube research. Outlier videos, niche finding & validation, competitor research, comment mining, title formulas, thumb
+
+## [x] AVALIADO — 2026-11-13 20:58 — Troca de título ou capa dos concorrentes (`area_troca_titulo_capa`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_troca_titulo_capa__sonnet_2046.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 13/11 21h45 (chat LONGOS/CAPAS): item 1 (troca de capa do concorrente pode ser teste A/B do YouTube, só vale a versão estável por dias) é bom, mas NÃO temos monitor de troca de capa de concorrente hoje — deixado pra depois: regra entra quando esse monitor existir. Item 2 não testado pelo próprio pesquisador.

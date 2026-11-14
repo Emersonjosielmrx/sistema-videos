@@ -29,6 +29,7 @@ import json
 import re
 import statistics
 import subprocess
+import os
 import sys
 import time
 from collections import Counter, defaultdict
@@ -260,7 +261,19 @@ def med_capas_longos(agora):
             ficha = json.loads((Path(r["caminho"]).parent / "postar.json").read_text(encoding="utf-8"))
         except (OSError, ValueError, KeyError):
             ficha = {}
-        if len(ficha.get("thumbs_ab") or []) < 2:
+        # 14/11: 25 alarmes "falso" em 13/11 — canal com recursos avançados negados não faz A/B (só a capa A é o
+        # certo, critério da dona) e o modo "capa depois" não grava thumbs_ab. Só cobra B/C de canal que pode A/B.
+        # VIGIA_AB_TODOS=1 volta a cobrar de todos.
+        sem_ab = False
+        if os.environ.get("VIGIA_AB_TODOS") != "1":
+            try:
+                if r"D:\recapd-ambientes\producao\colab" not in sys.path:
+                    sys.path.insert(0, r"D:\recapd-ambientes\producao\colab")
+                import capas_depois
+                sem_ab = capas_depois._sem_ab(r.get("canal")) or bool(ficha.get("capa_depois"))
+            except Exception:  # noqa: BLE001
+                sem_ab = False
+        if not sem_ab and len(ficha.get("thumbs_ab") or []) < 2:
             out.append({"chave": f"capas_ab:{r['video_id']}", "categoria": "capa-longo", "projeto": "cortes",
                         "titulo": f"longo {r['video_id']} ({r.get('canal')}) sem as capas B/C do teste A/B",
                         "evidencia": f"{r.get('caminho')} postar.json thumbs_ab={ficha.get('thumbs_ab')}"})

@@ -98,6 +98,8 @@ def provedor(modelo):
     """De qual crédito o chat depende: 'claude' (Opus 5.5 pago), 'antigravity' (Opus 5.5 Antigravity),
     'ag46' (Opus 4.6 Antigravity), 'auto' (opus-auto / genspark: qualquer Opus 5.5) ou None (outros modelos)."""
     m = (modelo or "").lower()
+    if "fable" in m:  # 13/11 (dona): Fable 5.2 tem limite próprio nas contas cc; acorda só quando o Fable volta
+        return "fable"
     if m.startswith(("cc/", "claude/")):
         return "claude"
     if "opus-4-6" in m:
@@ -110,7 +112,7 @@ def provedor(modelo):
 
 
 # 09/11 (dona): modo automático (pago ou grátis) acorda quando QUALQUER Opus 5.5 voltar, não só o cc
-FONTES = {"claude": ("claude",), "antigravity": ("antigravity",), "ag46": ("ag46",),
+FONTES = {"claude": ("claude",), "antigravity": ("antigravity",), "ag46": ("ag46",), "fable": ("fable",),
           "auto": ("claude", "antigravity"), None: ("claude", "antigravity", "ag46")}
 
 
@@ -146,7 +148,7 @@ def escolher(alvos, cota):
         return sorted(alvos, key=lambda x: x["quando"] or "")
     for a in sorted(alvos, key=lambda x: x["quando"] or ""):
         # poupar/gastar vem das contas cc: só vale para chat que gasta cc
-        poupa = modo == "poupar" and a["prov"] in ("claude", "auto", "qualquer")
+        poupa = modo == "poupar" and a["prov"] in ("claude", "fable", "auto", "qualquer")
         limite = MIN_POR_PROV if poupa else max(MIN_POR_PROV, credito(cota, a["prov"]) or total)
         if por_prov.get(a["prov"], 0) < limite:
             por_prov[a["prov"]] = por_prov.get(a["prov"], 0) + 1
@@ -450,7 +452,7 @@ def main():
         estado = json.loads(ESTADO.read_text(encoding="utf-8"))
     except (ValueError, OSError):
         estado = {}
-    leituras = [sc.consultar("claude"), sc.consultar("antigravity"), sc.consultar("ag46")]
+    leituras = [sc.consultar("claude"), sc.consultar("antigravity"), sc.consultar("ag46"), sc.consultar("fable")]
     cota = {p["provider"]: p.get("com_credito", 0) for p in leituras}
     # 2ª camada da leitura: ssh caiu = usa o último crédito lido, em vez de achar que é 0 e não acordar ninguém
     falhas = [p for p in leituras if p.get("erro")]
@@ -499,7 +501,7 @@ def main():
     credito = estado.setdefault("_credito", {})
     credito.update({p["provider"]: p.get("com_credito", 0) for p in leituras if not p.get("erro")})
     if simular:
-        log(f"[simular] crédito cc={cota.get('claude')} ag55={cota.get('antigravity')} ag46={cota.get('ag46')}"
+        log(f"[simular] crédito cc={cota.get('claude')} ag55={cota.get('antigravity')} ag46={cota.get('ag46')} fable={cota.get('fable')}"
             f" vscode={'aberto' if sessoes_json else 'FECHADO'}")
         for a in alvos:
             extra = " [VS Code fechado, abriria]" if a.get("_vscode_fechado") else ""

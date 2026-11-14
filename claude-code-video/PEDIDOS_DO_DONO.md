@@ -17,7 +17,7 @@ pedido aberto, mesmo sem vídeo novo.
 - [ ] Efeitos sonoros curtos nas palavras de impacto da narração (dinheiro, choque, clique, virada), sincronizados com o tempo da palavra. Referência: historias-em-frames\bin\fx_audio_final.py, fx_foley.py e config\gatilhos_palavras.json. Volume baixo, no máximo 1 a cada 3 s.
 - [ ] Capa (thumbnail) gerada para cada Reel, com pose escolhida de um catálogo e texto grande legível, e conferida por visão antes de usar. Referência: capa_ia_historias.py, config\POSES_HISTORIAS.py, visao_capa.py.
 - [ ] Narração que acelera um pouco rumo ao clímax e corta pausas mortas maiores que 0,07 s. Referência: narracao_curva.py.
-- [ ] Trilha que sobe de intensidade no gancho e no clímax e desce na resolução, em vez do ducking fixo. Referência: music_escalation.py.
+- [x] Trilha que sobe de intensidade no gancho e no clímax e desce na resolução, em vez do ducking fixo. Referência: music_escalation.py.  → 14/11 01:30 aplicado: trilha_intensidade_dinamica (julgado nos próximos vídeos)
 - [ ] Memes visuais de 1 s ligados à emoção da cena (só no modo entretenimento, nunca em anúncio de cliente). Catálogo pronto em D:\hipercool-videos\config\memes_catalogo.json; lógica em historias memes_catalogo.py.
 - [ ] Transições por palavra-chave do roteiro (fogo, água, raio, impacto, glitch) além do rasgo que já existe. Referência: elemental_transitions.py e os overlays.
 - [ ] Pergunta de engajamento no meio do vídeo e um comentário para fixar, ligados ao tema. Referência: community_hooks.py.

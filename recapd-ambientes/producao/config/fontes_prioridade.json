@@ -2,261 +2,6 @@
  "_leia": "09/11 dona: 'prioridade aos vídeos que dão mais visualizações, independente do canal' + autorização dos canais novos (8 escolhidos pela dona 09/11 21h30 (lista colada), pesquisa de 09/11, conferida na página). O alimentador (cliente.py alimentar) pega DESTA lista primeiro, do mais visto pro menos, 1 por vez; vídeo já feito/enviado é pulado; lista vazia = só o canal normal. FONTES_PRIORIDADE=0 desliga. tipo: anime | manhwa.",
  "videos": [
   {
-   "id": "PReloN5HWSI",
-   "tipo": "manhwa",
-   "canal": "@Manhwa_Fresh",
-   "views": 0,
-   "min": 189,
-   "titulo": "(13) He got into the Medieval Age - SÉRIE da dona (Fio da Meada)",
-   "serie": "medieval",
-   "forcar_longo": true
-  },
-  {
-   "id": "pnX8RlSn7Yk",
-   "tipo": "manhwa",
-   "canal": "@Manhwa_Fresh",
-   "views": 0,
-   "min": 187,
-   "titulo": "(14) He got into the Medieval Age - SÉRIE da dona",
-   "serie": "medieval",
-   "forcar_longo": true
-  },
-  {
-   "id": "oLBasz5H1-4",
-   "tipo": "manhwa",
-   "canal": "@Manhwa_Fresh",
-   "views": 0,
-   "min": 186,
-   "titulo": "(15) He got into the Medieval Age - SÉRIE da dona",
-   "serie": "medieval",
-   "forcar_longo": true
-  },
-  {
-   "id": "mzhXJNkndXI",
-   "tipo": "manhwa",
-   "canal": "@Manhwa_Fresh",
-   "views": 140000,
-   "min": 62,
-   "titulo": "(6) He got into the Medieval Age - SÉRIE da dona",
-   "serie": "medieval"
-  },
-  {
-   "id": "7z7YF-wEHPk",
-   "canal": "NiceGamLii",
-   "views": 629645,
-   "min": 94,
-   "titulo": "MY GIRLFRIEND RAN AWAY ON OUR WEDDING DAY, SO I MARRIED MY CHILDHOOD RIVAL | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "fH-Wy_tDk80",
-   "canal": "CrunchExplainer",
-   "views": 447220,
-   "min": 37,
-   "titulo": "He Died… Then Came Back for Revenge on His Ex | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "WSJzlWkok1o",
-   "canal": "Mamoru Manhwa",
-   "views": 407850,
-   "min": 140,
-   "titulo": "Cheated, Dumped and Poor... But Awakened a Talent That Made Everyone Regret! - Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "rVacUCRJQxg",
-   "canal": "Haruto Xplainer and Haruto Recaps",
-   "views": 953160,
-   "min": 58,
-   "titulo": "Every Time He Spent Money, It Returned 10X More… So He Bought Everything | Anime Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "sistema_dinheiro",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "f_zcwjp3DUE",
-   "canal": "Haruto Xplainer",
-   "views": 446780,
-   "min": 150,
-   "titulo": "Everyone Bullied Me For Being Poor Until They Found Out I Was A Billionaire | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "sistema_dinheiro",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "ib4MOGsuvPw",
-   "canal": "Stark Recap",
-   "views": 228414,
-   "min": 168,
-   "titulo": "A Poor Nobody Became a Mega-Billionaire Overnight with a 10x Cashback System | MANHWA RECAP",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "sistema_dinheiro",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "v455srQ6mqY",
-   "canal": "GrimmyManhwa",
-   "views": 273338,
-   "min": 74,
-   "titulo": "Reincarnated as the TRASH Son of the #1 Family, He Takes REVENGE on Everyone! – Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "renasce_rico_forte",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "42aL4ga52LE",
-   "canal": "ManhwaDealer",
-   "views": 228403,
-   "min": 133,
-   "titulo": "His Family Betrayed Him—Then His MILLIONTH Regression Unlocked DEMONIC Power! | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "renasce_rico_forte",
-   "garimpado": "2026-11-13",
-   "parecido": true
-  },
-  {
-   "id": "KQMPGyt6PxA",
-   "canal": "Manhwa Senpai and Manhwa Senpai Z",
-   "views": 1216421,
-   "min": 105,
-   "titulo": "She Dumped Me for the \"Hero\"—Now I Awakened VILLAIN System To Crush Them! - Manhwa Recap in Hindi",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "8fM6Ay7OJho",
-   "canal": "Manhwa Senpai and Desi Manhwa",
-   "views": 964821,
-   "min": 51,
-   "titulo": "She Dumped Me Before! Reborn, I Want Her Money—But She Refuses Divorce! - Manhwa Recap in Hindi",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "RkLkEUk5AJw",
-   "canal": "Popi Recaps",
-   "views": 924751,
-   "min": 72,
-   "titulo": "(1-12) His Girlfriend Cheated on Him... Then Regrets But It Was Too Late | Manga Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "e2nIzNGXvmA",
-   "canal": "Mamoru Manhwa",
-   "views": 1519492,
-   "min": 62,
-   "titulo": "POOR Guy Receives 90 BILLION To Get REVENGE On GOLD DIGGERS Who HUMILIATED Him | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "sistema_dinheiro",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "eRJ1kFR196s",
-   "canal": "Jinwoo Recap",
-   "views": 616314,
-   "min": 121,
-   "titulo": "She Cheated With Fake Heir At The Party... So I Married A Billionaire Instead - Jinwoo Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "sistema_dinheiro",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "TAvIqS9VzK0",
-   "canal": "Torno Petruska",
-   "views": 550291,
-   "min": 61,
-   "titulo": "I Rebirth and Choose 10 Million Cash Instead of Being Her Simp | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "sistema_dinheiro",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "s8fi4F5G5uU",
-   "canal": "Donalds_Manhwa",
-   "views": 338663,
-   "min": 155,
-   "titulo": "He Reincarnated as a Fat Aristocrat, Then Shocked the Entire Kingdom! | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "medieval_tecnologia",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "LJ_-PZhcRPI",
-   "canal": "Gaku Recaps",
-   "views": 503490,
-   "min": 62,
-   "titulo": "Poor Loser Becomes Rich Because Every Dollar He Spends Multiplies 200x!- Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "renasce_rico_forte",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "Y0tReVhVHHE",
-   "canal": "Yogiri Recap",
-   "views": 412988,
-   "min": 141,
-   "titulo": "I Returned to My Billionaire Family, But I Was Already the World's Richest Man! | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "renasce_rico_forte",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
-   "id": "V2GlngLtTkg",
-   "canal": "Gido Cuni Mahwa",
-   "views": 366571,
-   "min": 69,
-   "titulo": "The Strongest Special Forces Soldier Was Betrayed… Then Reborn Back in School~Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "renasce_rico_forte",
-   "garimpado": "2026-11-12",
-   "parecido": true
-  },
-  {
    "id": "r77umNwvRKU",
    "tipo": "anime",
    "canal": "@Recapkun",
@@ -305,22 +50,6 @@
    "titulo": "Boy is Reincarnated As The Weakest F-Rank Hunter But Discovers Cheat Weapon With +999 Luck"
   },
   {
-   "id": "82ge1YYkUyA",
-   "tipo": "manhwa",
-   "canal": "@Gave-k8y",
-   "views": 1271327,
-   "min": 85,
-   "titulo": "He Got Max Luck After a System Error and Farms 0.0001% Drop Items Like Candy"
-  },
-  {
-   "id": "KTe13kwBSFc",
-   "tipo": "manhwa",
-   "canal": "@ActionToon",
-   "views": 1887957,
-   "min": 139,
-   "titulo": "His Party Left Him to Fight an Army For 10 years Straight [1-2]"
-  },
-  {
    "id": "AP_c0bbMmRI",
    "tipo": "anime",
    "canal": "AntiClimsx",
@@ -328,6 +57,24 @@
    "min": 65,
    "titulo": "He Accidentally Reincarnated As A Lv 1 Slime Tamer But Hid His God Skill | Anime Recap Documentary",
    "garimpado": "2026-11-12"
+  },
+  {
+   "id": "NatfJn-eQp0",
+   "tipo": "anime",
+   "canal": "AntiClimsx",
+   "views": 3073130,
+   "min": 150,
+   "titulo": "This Useless Loser Swallowed God's Finger & Reincarnated As King Of Curses | Anime Recap Documentary",
+   "garimpado": "2026-11-13"
+  },
+  {
+   "id": "Qet3goTGf0Q",
+   "tipo": "anime",
+   "canal": "AniKing",
+   "views": 2781434,
+   "min": 78,
+   "titulo": "Pharmacologist Reincarnated Into Isekai as a Child but is Extremely OP | Anime Recap",
+   "garimpado": "2026-11-13"
   },
   {
    "id": "PvkF8Ut-mIM",
@@ -339,6 +86,14 @@
    "garimpado": "2026-11-12"
   },
   {
+   "id": "KTe13kwBSFc",
+   "tipo": "manhwa",
+   "canal": "@ActionToon",
+   "views": 1887957,
+   "min": 139,
+   "titulo": "His Party Left Him to Fight an Army For 10 years Straight [1-2]"
+  },
+  {
    "id": "65WBxTrMYGQ",
    "tipo": "anime",
    "canal": "AniCapped",
@@ -346,6 +101,18 @@
    "min": 51,
    "titulo": "Overpowered Boy Raised By Dragon Hides His True Abilities To Appear Ordinary | Anime Recap",
    "garimpado": "2026-11-12"
+  },
+  {
+   "id": "e2nIzNGXvmA",
+   "canal": "Mamoru Manhwa",
+   "views": 1519492,
+   "min": 62,
+   "titulo": "POOR Guy Receives 90 BILLION To Get REVENGE On GOLD DIGGERS Who HUMILIATED Him | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-12",
+   "parecido": true
   },
   {
    "id": "t-mnhLoSb18",
@@ -357,6 +124,26 @@
    "garimpado": "2026-11-12"
   },
   {
+   "id": "82ge1YYkUyA",
+   "tipo": "manhwa",
+   "canal": "@Gave-k8y",
+   "views": 1271327,
+   "min": 85,
+   "titulo": "He Got Max Luck After a System Error and Farms 0.0001% Drop Items Like Candy"
+  },
+  {
+   "id": "KQMPGyt6PxA",
+   "canal": "Manhwa Senpai and Manhwa Senpai Z",
+   "views": 1216421,
+   "min": 105,
+   "titulo": "She Dumped Me for the \"Hero\"—Now I Awakened VILLAIN System To Crush Them! - Manhwa Recap in Hindi",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
    "id": "y5Pm6ba-kIM",
    "tipo": "anime",
    "canal": "First Flower",
@@ -364,6 +151,15 @@
    "min": 88,
    "titulo": "He got ban from using MAGIC so he awaken A FORBIDDEN POWER | Anime recap",
    "garimpado": "2026-11-12"
+  },
+  {
+   "id": "kh0Ejfzs4_4",
+   "tipo": "anime",
+   "canal": "Turtle Quirk",
+   "views": 1128821,
+   "min": 38,
+   "titulo": "Jujutsu Kaisen SEASON 1 RECAP! | JJK Timeline Explained",
+   "garimpado": "2026-11-13"
   },
   {
    "id": "76SYvCtml4k",
@@ -402,6 +198,30 @@
    "garimpado": "2026-11-12"
   },
   {
+   "id": "8fM6Ay7OJho",
+   "canal": "Manhwa Senpai and Desi Manhwa",
+   "views": 964821,
+   "min": 51,
+   "titulo": "She Dumped Me Before! Reborn, I Want Her Money—But She Refuses Divorce! - Manhwa Recap in Hindi",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
+   "id": "rVacUCRJQxg",
+   "canal": "Haruto Xplainer and Haruto Recaps",
+   "views": 953160,
+   "min": 58,
+   "titulo": "Every Time He Spent Money, It Returned 10X More… So He Bought Everything | Anime Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-13",
+   "parecido": true
+  },
+  {
    "id": "TknHxBfyajo",
    "tipo": "anime",
    "canal": "AnimeRealm",
@@ -418,6 +238,18 @@
    "min": 68,
    "titulo": "Reincarnates with LEGENDARY Power That Shocks the Kingdom’s Strongest | Anime Recap",
    "garimpado": "2026-11-12"
+  },
+  {
+   "id": "RkLkEUk5AJw",
+   "canal": "Popi Recaps",
+   "views": 924751,
+   "min": 72,
+   "titulo": "(1-12) His Girlfriend Cheated on Him... Then Regrets But It Was Too Late | Manga Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-12",
+   "parecido": true
   },
   {
    "id": "LmNMaTLH0wg",
@@ -447,42 +279,6 @@
    "garimpado": "2026-11-12"
   },
   {
-   "id": "1gXXQ8IIyek",
-   "tipo": "manhwa",
-   "canal": "Mamoru Manhwa",
-   "views": 623428,
-   "min": 59,
-   "titulo": "It's Apocalypse, but He Has a FOOD STALL With INFINITE SUPPLIES for ANYTHING! - Manhwa Recap",
-   "garimpado": "2026-11-12"
-  },
-  {
-   "id": "NatfJn-eQp0",
-   "tipo": "anime",
-   "canal": "AntiClimsx",
-   "views": 3073130,
-   "min": 150,
-   "titulo": "This Useless Loser Swallowed God's Finger & Reincarnated As King Of Curses | Anime Recap Documentary",
-   "garimpado": "2026-11-13"
-  },
-  {
-   "id": "Qet3goTGf0Q",
-   "tipo": "anime",
-   "canal": "AniKing",
-   "views": 2781434,
-   "min": 78,
-   "titulo": "Pharmacologist Reincarnated Into Isekai as a Child but is Extremely OP | Anime Recap",
-   "garimpado": "2026-11-13"
-  },
-  {
-   "id": "kh0Ejfzs4_4",
-   "tipo": "anime",
-   "canal": "Turtle Quirk",
-   "views": 1128821,
-   "min": 38,
-   "titulo": "Jujutsu Kaisen SEASON 1 RECAP! | JJK Timeline Explained",
-   "garimpado": "2026-11-13"
-  },
-  {
    "id": "i2YG_Kr6d4M",
    "tipo": "anime",
    "canal": "AniPrestigE",
@@ -501,6 +297,39 @@
    "garimpado": "2026-11-13"
   },
   {
+   "id": "7z7YF-wEHPk",
+   "canal": "NiceGamLii",
+   "views": 629645,
+   "min": 94,
+   "titulo": "MY GIRLFRIEND RAN AWAY ON OUR WEDDING DAY, SO I MARRIED MY CHILDHOOD RIVAL | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-13",
+   "parecido": true
+  },
+  {
+   "id": "1gXXQ8IIyek",
+   "tipo": "manhwa",
+   "canal": "Mamoru Manhwa",
+   "views": 623428,
+   "min": 59,
+   "titulo": "It's Apocalypse, but He Has a FOOD STALL With INFINITE SUPPLIES for ANYTHING! - Manhwa Recap",
+   "garimpado": "2026-11-12"
+  },
+  {
+   "id": "eRJ1kFR196s",
+   "canal": "Jinwoo Recap",
+   "views": 616314,
+   "min": 121,
+   "titulo": "She Cheated With Fake Heir At The Party... So I Married A Billionaire Instead - Jinwoo Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
    "id": "acD-WG3069o",
    "tipo": "anime",
    "canal": "AniSigma",
@@ -508,6 +337,18 @@
    "min": 56,
    "titulo": "Reincarnated As Useless Mage Until He Awakens Demonic Power And Shocks Everyone | Anime Recap",
    "garimpado": "2026-11-13"
+  },
+  {
+   "id": "TAvIqS9VzK0",
+   "canal": "Torno Petruska",
+   "views": 550291,
+   "min": 61,
+   "titulo": "I Rebirth and Choose 10 Million Cash Instead of Being Her Simp | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-12",
+   "parecido": true
   },
   {
    "id": "_Adfy9sQQ0s",
@@ -537,6 +378,18 @@
    "garimpado": "2026-11-13"
   },
   {
+   "id": "LJ_-PZhcRPI",
+   "canal": "Gaku Recaps",
+   "views": 503490,
+   "min": 62,
+   "titulo": "Poor Loser Becomes Rich Because Every Dollar He Spends Multiplies 200x!- Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
    "id": "sAXk4AALxGg",
    "tipo": "anime",
    "canal": "Frieren Manhwa",
@@ -544,6 +397,30 @@
    "min": 169,
    "titulo": "God Reincarnated Him with an SSS-Rank Ability for REVENGE! - Manhwa Recap",
    "garimpado": "2026-11-13"
+  },
+  {
+   "id": "fH-Wy_tDk80",
+   "canal": "CrunchExplainer",
+   "views": 447220,
+   "min": 37,
+   "titulo": "He Died… Then Came Back for Revenge on His Ex | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-13",
+   "parecido": true
+  },
+  {
+   "id": "f_zcwjp3DUE",
+   "canal": "Haruto Xplainer",
+   "views": 446780,
+   "min": 150,
+   "titulo": "Everyone Bullied Me For Being Poor Until They Found Out I Was A Billionaire | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-13",
+   "parecido": true
   },
   {
    "id": "2r6xu8KAjs0",
@@ -564,6 +441,18 @@
    "garimpado": "2026-11-13"
   },
   {
+   "id": "Y0tReVhVHHE",
+   "canal": "Yogiri Recap",
+   "views": 412988,
+   "min": 141,
+   "titulo": "I Returned to My Billionaire Family, But I Was Already the World's Richest Man! | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
    "id": "5gZycXTnxrU",
    "tipo": "anime",
    "canal": "AniRoll",
@@ -571,6 +460,18 @@
    "min": 104,
    "titulo": "He Reincarnated With Overpowered CHEAT Skills But Hides Them | New Anime Recap",
    "garimpado": "2026-11-13"
+  },
+  {
+   "id": "WSJzlWkok1o",
+   "canal": "Mamoru Manhwa",
+   "views": 407850,
+   "min": 140,
+   "titulo": "Cheated, Dumped and Poor... But Awakened a Talent That Made Everyone Regret! - Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-13",
+   "parecido": true
   },
   {
    "id": "XkraqGxxmOg",
@@ -589,9 +490,118 @@
    "min": 83,
    "titulo": "He Was Summoned By Accident But Received SS-Rank Abilities In Another World | Anime Recap",
    "garimpado": "2026-11-13"
+  },
+  {
+   "id": "V2GlngLtTkg",
+   "canal": "Gido Cuni Mahwa",
+   "views": 366571,
+   "min": 69,
+   "titulo": "The Strongest Special Forces Soldier Was Betrayed… Then Reborn Back in School~Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
+   "id": "s8fi4F5G5uU",
+   "canal": "Donalds_Manhwa",
+   "views": 338663,
+   "min": 155,
+   "titulo": "He Reincarnated as a Fat Aristocrat, Then Shocked the Entire Kingdom! | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "medieval_tecnologia",
+   "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
+   "id": "v455srQ6mqY",
+   "canal": "GrimmyManhwa",
+   "views": 273338,
+   "min": 74,
+   "titulo": "Reincarnated as the TRASH Son of the #1 Family, He Takes REVENGE on Everyone! – Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-13",
+   "parecido": true
+  },
+  {
+   "id": "ib4MOGsuvPw",
+   "canal": "Stark Recap",
+   "views": 228414,
+   "min": 168,
+   "titulo": "A Poor Nobody Became a Mega-Billionaire Overnight with a 10x Cashback System | MANHWA RECAP",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-13",
+   "parecido": true
+  },
+  {
+   "id": "42aL4ga52LE",
+   "canal": "ManhwaDealer",
+   "views": 228403,
+   "min": 133,
+   "titulo": "His Family Betrayed Him—Then His MILLIONTH Regression Unlocked DEMONIC Power! | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-13",
+   "parecido": true
+  },
+  {
+   "id": "PReloN5HWSI",
+   "tipo": "manhwa",
+   "canal": "@Manhwa_Fresh",
+   "views": 0,
+   "min": 189,
+   "titulo": "(13) He got into the Medieval Age - SÉRIE da dona (Fio da Meada)",
+   "serie": "medieval",
+   "forcar_longo": true
+  },
+  {
+   "id": "pnX8RlSn7Yk",
+   "tipo": "manhwa",
+   "canal": "@Manhwa_Fresh",
+   "views": 0,
+   "min": 187,
+   "titulo": "(14) He got into the Medieval Age - SÉRIE da dona",
+   "serie": "medieval",
+   "forcar_longo": true
+  },
+  {
+   "id": "oLBasz5H1-4",
+   "tipo": "manhwa",
+   "canal": "@Manhwa_Fresh",
+   "views": 0,
+   "min": 186,
+   "titulo": "(15) He got into the Medieval Age - SÉRIE da dona",
+   "serie": "medieval",
+   "forcar_longo": true
+  },
+  {
+   "id": "jcQ9GQz5CG4",
+   "tipo": "manhwa",
+   "canal": "@Manhwa_Fresh",
+   "views": 57958,
+   "min": 121,
+   "titulo": "(16-17) He got into the Medieval Age - SÉRIE da dona (continuação da 15)",
+   "serie": "medieval",
+   "forcar_longo": true
+  },
+  {
+   "id": "mzhXJNkndXI",
+   "tipo": "manhwa",
+   "canal": "@Manhwa_Fresh",
+   "views": 140000,
+   "min": 62,
+   "titulo": "(6) He got into the Medieval Age - SÉRIE da dona",
+   "serie": "medieval"
   }
  ],
- "_leia_medieval": "10/11 dona: a série 'He got into the Medieval Age' interessa a ela — completar o COMEÇO (partes 4, 6, 8 faltavam; 1-2, 3, 5, 7 já postadas) antes de continuação. Avisar com ênfase quando postar.",
+ "_leia_medieval": "10/11 dona: a série 'He got into the Medieval Age' interessa a ela — completar o COMEÇO (partes 4, 6, 8 faltavam; 1-2, 3, 5, 7 já postadas) antes de continuação. Avisar com ênfase quando postar. | 13/11 23h dona: \"pode parar de focar no Medieval Age, já temos muitos por hora pra eu ir assistindo; foco nos mais vistos\" -> série foi pro FIM da lista; a (16-17) já está no Kaggle e segue normal.",
  "ja_garimpados": [
   "0w1FjXmgX0w",
   "1gXXQ8IIyek",

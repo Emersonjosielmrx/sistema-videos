@@ -3225,3 +3225,75 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 13/11 — 0 implantados, 1 reprovado — 2026-11-13 12:52 — Previsão da curva de uma tendência (`area_trend_forecast`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trend_forecast__sonnet_1241.md`
 - [INÉDITO] github.com/web3wesley/trend-research-toolkit — ★8, push 2026-10-29, MIT — Two-tier YouTube topic research: demand (Google Trends via SerpApi) + competition (YouTube Data API) to find rising, under-served video topi
+
+## [ ] PENDENTE — 2026-11-13 16:28 — Tendências e nichos de Shorts por país sem API do Google (`area_tendencias_por_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_tendencias_por_pais__sonnet_1616.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 17:04 — Nichos de Shorts por país só com yt-dlp (`area_nicho_pais_ytdlp`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_nicho_pais_ytdlp__sonnet_1654.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 17:20 — Dados e métodos de legenda de quadrinhos por VLM (`area_recap_vlm_dataset`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_recap_vlm_dataset__sonnet_1706.md`
+- [INÉDITO] github.com/sky4302/mochiku — ★1, push 2026-11-10, Apache-2.0 — Mochiku (餅ク) - A modern manga reader featuring Mochy-Music aesthetic, frosted acrylic HUDs, and the Otaku Passport & Manga Recap gimmick.
+
+## [ ] PENDENTE — 2026-11-13 17:27 — Regras oficiais do YouTube sobre recap e conteúdo reaproveitado (`area_regras_youtube`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_regras_youtube__sonnet_1721.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 20:20 — Tendências abertas sem login (`area_trends_wikipedia_gdelt`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_wikipedia_gdelt__sonnet_2011.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 21:13 — Programa de parceria ou autorização com donos de recap (`area_parceria_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_parceria_canal__sonnet_2102.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 21:24 — Modelo de pedido de autorização e revenue share para recap (`area_parceria_modelo_carta`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_parceria_modelo_carta__sonnet_2116.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 22:21 — Fontes com licença aberta para recap (`area_fontes_com_licenca_aberta`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_fontes_com_licenca_aberta__sonnet_2159.md`
+- [INÉDITO] github.com/rishaan1402/opensource-clipping-autopilot — ★1, push 2026-11-12, MIT — Turns long videos into short-form clips, and can run unattended. It finds Creative Commons videos from channels you have reviewed, verifies 
+
+## [ ] PENDENTE — 2026-11-13 22:34 — Conteúdo transformador em recap (`area_cta_conteudo_transformador`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_cta_conteudo_transformador__sonnet_2226.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 23:00 — Ritmo de cortes em recap (`area_ritmo_cortes`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_ritmo_cortes__sonnet_2246.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-13 23:20 — Primeiros 30 s do recap (`area_abertura_30s`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_abertura_30s__sonnet_2306.md`
+- [INÉDITO] github.com/hackers-reality/youtube-skillbox — ★4, push 2026-11-10, MIT — Free YouTube toolkit for AI agents — search, transcripts, community posts, home sections & Shows, plus 10 creator tools: scripts, hooks, SEO
+
+## [ ] PENDENTE — 2026-11-13 23:29 — Música livre em alta (`area_musica_cc0_trend`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_musica_cc0_trend__sonnet_2322.md`
+- [INÉDITO] github.com/blueorionn/albumy — ★1, push 2026-10-01, Apache-2.0 — A curated music library for copyright-free music. Albumy brings together freely licensed tracks — from sources like NCS, Free Music Archive 
+
+## [ ] PENDENTE — 2026-11-13 23:46 — Bancos de abertura e recap por episódio (`area_timestamps_anime`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_timestamps_anime__sonnet_2331.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 01:10 — Padrões dos primeiros 30 s em recap (`area_curva_retencao_30s`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_curva_retencao_30s__sonnet_0056.md`
+- [INÉDITO] github.com/itzjk/hookcheck — ★0, push 2026-10-28, MIT — Will viewers swipe your Short in the first second? A frame-level hook audit for Shorts, Reels and TikToks.
+
+## [ ] PENDENTE — 2026-11-14 01:39 — Achar vídeos e recaps mais vistos por canal pequeno (`area_outliers_nicho`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_outliers_nicho__sonnet_0126.md`
+- [INÉDITO] github.com/misterzaidxpy/tubescrape — ★18, push 2026-11-11, MIT —  A fast, lightweight Python toolkit for scraping YouTube without an API key. Search videos with filters, browse channel content (videos, sho
+
+## [ ] PENDENTE — 2026-11-14 01:56 — Achar recaps mais vistos só com yt-dlp (`area_ytdlp_ranking`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_ytdlp_ranking__sonnet_0141.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 03:10 — Formatos que viralizam por nicho (`area_formatos_nicho`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_formatos_nicho__sonnet_0256.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 03:29 — Como provar comentário original em recap (`area_conteudo_nao_original_defesa`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_conteudo_nao_original_defesa__sonnet_0317.md`
+- (todos os itens desta pesquisa foram reprovados)

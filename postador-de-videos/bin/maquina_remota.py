@@ -44,6 +44,13 @@ MAQUINAS = {"x200ma": {"ssh": "emerson@100.87.195.108", "porta": 9460,
             "acer": {"ssh": "emerson-ia@100.98.55.125", "porta": 9460, "lento": True},  # Atom: Studio estoura o tempo
             # i5, 16 GB (12/11 conferido: 15,9 GB), Mint Xfce — 2ª faixa: Veo/Flow em paralelo ao login de TikTok
             "sti": {"ssh": "emerson-sti-st@100.98.49.0", "porta": 9460, "faixa_extra": 9461},
+            # 13/11 dona ("adicione no sistema o HP Pavilion; abre as contas pra eu ir logando"): AMD Turion II N530
+            # (2 núcleos, 2010), 8 GB, Mint 22.3, Chrome instalado. Lento (render 8x mais lento que o PC1): "lento"
+            # como o Acer — Studio com mais tempo.
+            "hp": {"ssh": "emerson-hp-pavili@100.123.69.41", "porta": 9460, "lento": True},
+            # 14/11 dona: netbook Asus Eee PC 1015BX (AMD C-60, 1,5 GB) — só navegador (render não aguentou); login das
+            # contas só depois das 8h (dona). "lento" como o Acer.
+            "asus": {"ssh": "emerson-asus-eepc@100.122.115.57", "porta": 9460, "lento": True},
             # 23/10 (dona): o DESKTOP também posta, só quando NÃO está gravando (OBS) nem em chamada (mic/câmera) —
             # quem confere é o chrome_conta.py de lá ("OCUPADO gravando"); entra na conta só depois do `ativar`
             # 30/10 (D39): puxar_http = arquivos vão/voltam por HTTP temporário do PC1 (o sshd do desktop derruba scp)
@@ -60,7 +67,7 @@ SCRIPT_WIN = r"C:\postador-worker\chrome_conta.py"
 SEM_PROXY_REMOTO = {"pc2"}
 # dona 27/10; o PC1 é sempre o último (None). 28/10 (dona): desktop = a máquina MAIS LIVRE -> primeiro (nos horários
 # da câmera, maquinas.AGENDA_CAMERA, o maquina_livre já tira ele)
-ORDEM_NAVEGADOR = {"desktop": -1, "x200ma": 0, "acer": 1, "sti": 1, "pc2": 2}
+ORDEM_NAVEGADOR = {"desktop": -1, "x200ma": 0, "acer": 1, "sti": 1, "hp": 1, "asus": 1, "pc2": 2}
 SCRIPT = "~/postador-worker/chrome_conta.py"
 LOG = ROOT / "logs" / "maquina_remota.log"
 LOGINS = ROOT / "config" / "netbooks_logins.json"
@@ -1163,6 +1170,15 @@ def maquina_livre(nome, cache_s=60):
         txt = r._txt(r._ssh(f"{r.run} estado", timeout=20))
         j = json.loads(txt[txt.index("{"):txt.rindex("}") + 1])
         livre = not j.get("aberto") and bool(j.get("chrome"))
+        # 13/11 (dona: "x200ma parado há horas"): um Chrome de conta ficou aberto 20+ min sem ninguém usando e a
+        # máquina contava como ocupada. Aberto há mais de CHROME_ESQUECIDO_MIN (25) sem login em curso e sem nenhum
+        # processo daqui pedindo = esquecido: fecha (liberar) e a máquina volta. CHROME_ESQUECIDO_MIN=0 desliga.
+        ab = j.get("aberto") or {}
+        lim = float(os.environ.get("CHROME_ESQUECIDO_MIN", "25"))
+        if ab and lim and not ab.get("login") and time.time() - float(ab.get("desde") or time.time()) > lim * 60:
+            r._ssh(f"{r.run} liberar", timeout=40)
+            r._ssh(f"pkill -f 'postador-worker/perfis/{ab.get('perfil', 'X_NADA_X')}'", timeout=20)
+            livre = bool(j.get("chrome"))
     except Exception:  # noqa: BLE001
         livre = False
     _LIVRE_CACHE[nome] = (agora, livre)

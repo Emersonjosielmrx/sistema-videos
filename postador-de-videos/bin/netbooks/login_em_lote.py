@@ -14,6 +14,7 @@ Como funciona:
 - segura a vez da máquina ("login google lote (dona)") — o tiktok_notebooks e o telão esperam.
 """
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -48,8 +49,15 @@ def _conta_kaggle(p):
     login em lote abre o Chrome SEM proxy; essas contas logam só no PC1, pelo IP fixo delas (cofre + ponte rnprmtfo)."""
     try:
         pool = json.loads(Path(r"D:\recapd-ambientes\producao\colab\kaggle_pool.json").read_text(encoding="utf-8"))
-        nomes = {str(c.get("cofre") or "").split("@")[0].lower() for c in pool.get("contas", [])}
-        nomes |= {str(c.get("username") or "").lower() for c in pool.get("contas", [])}
+        # 13/11 23h dona (login no HP: 56 de 65 travadas): "só não vamos logar as que estão funcionando no Kaggle; as
+        # que já foram banidas do Kaggle vamos logar". Conta BANIDA no pool sai da trava (nada mais a perder lá); viva
+        # (sem "banida") continua proibida em casa. Nome que aparece vivo em qualquer entrada fica travado.
+        # LOGIN_BANIDAS_KAGGLE=0 volta a travar todas.
+        _so_vivas = os.environ.get("LOGIN_BANIDAS_KAGGLE", "1") != "0"
+        contas_k = [c for c in pool.get("contas", []) if not (_so_vivas and c.get("banida"))]
+        nomes = {str(c.get("cofre") or "").split("@")[0].lower() for c in contas_k}
+        nomes |= {str(c.get("username") or "").lower() for c in contas_k}
+        nomes.discard("")
         # conta reservada pro Kaggle no cofre (kaggle_proxy) antes de entrar no pool (ex.: 2036–2038 durante o cadastro)
         try:
             reg = json.loads(Path(r"D:\logins-google\cofre\contas.json").read_text(encoding="utf-8")).get("contas", {})

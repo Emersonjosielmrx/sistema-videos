@@ -775,8 +775,49 @@ def _gerar_http(prompt, out_path, image, aspect, modelo, log):
     return None
 
 
+def _gerar_gemini(prompt, out_path, image, aspect, duration, log):
+    """14/11/2026 (dona): 1º do TRIO de vídeo = Gemini sem navegador (D:\\gemini-argo\\gemini_midia_http.py: HTTP com os
+    cookies do Argon, ~1-2 min, não gasta crédito do Flow nem do Argon). Depois o Flow sem navegador (notebooks/HTTP) e
+    por último o Flow com navegador (tela). Com foto inicial (animar foto) pula: o HTTP do Gemini ainda não anexa.
+    Corta na duração pedida (o Gemini entrega 10 s; o validador do robô espera 8 s ±1). GEMINI_VIDEO=0 desliga."""
+    if image or os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_VIDEO", "1") == "0":
+        return None
+    py = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"
+    script = r"D:\gemini-argo\gemini_midia_http.py"
+    if not (os.path.exists(py) and os.path.exists(script)):
+        return None
+    try:
+        dur = float(re.sub(r"[^\d.]", "", str(duration)) or 8)
+    except ValueError:
+        dur = 8.0
+    import subprocess
+    import time as _t
+    t0 = _t.time()
+    try:
+        r = subprocess.run([py, "-X", "utf8", "-I", script, "video", prompt, out_path, "--formato", aspect,
+                            "--duracao", str(dur)], capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=700, creationflags=0x08000000)
+    except Exception as e:  # noqa: BLE001
+        log(f"[gemini] nao rodou ({type(e).__name__}) -> Flow")
+        return None
+    saida = ((r.stdout or "") + (r.stderr or "")).strip()
+    if r.returncode == 0 and os.path.exists(out_path) and os.path.getsize(out_path) > 100000:
+        log(f"[gemini] video gerado sem navegador em {_t.time() - t0:.0f}s -> {out_path} ({saida[-80:]})")
+        # marcador pro cron: NÃO descontar os 20 créditos do Flow desta conta (o Gemini não gastou crédito do Flow)
+        print("GEMINI_VIDEO_OK", flush=True)
+        return out_path
+    log(f"[gemini] nao gerou em {_t.time() - t0:.0f}s ({saida[-160:]}) -> Flow")
+    return None
+
+
 def gerar(prompt, out_path, image=None, aspect="9:16", modelo="Veo 3.1 - Fast",
           duration="8S", log=print):
+    feito = _gerar_gemini(prompt, out_path, image, aspect, duration, log)
+    if feito:
+        return feito
+    if os.environ.get("VEO_SO_GEMINI") == "1":
+        # 14/11: o cron chamou só pelo Gemini porque TODAS as contas do Flow estão sem crédito — não há Flow para tentar
+        raise CreditosEsgotadosError("padrao='gemini_sem_cota' Gemini não entregou e o Flow está sem crédito")
     feito = _gerar_nos_notebooks(prompt, out_path, image, aspect, modelo, duration, log)
     if feito:
         return feito

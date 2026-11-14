@@ -4,5 +4,6 @@ Config.setVideoImageFormat('jpeg');
 Config.setConcurrency(2);
 Config.setOverwriteOutput(true);
 Config.setDelayRenderTimeoutInMilliseconds(120000);
+Config.setChromiumOpenGlRenderer('swangle');
 // Config.setBrowserExecutable('C:/Program Files/Google/Chrome/Application/chrome.exe');
 

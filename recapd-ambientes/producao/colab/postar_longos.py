@@ -106,6 +106,9 @@ def _gravar_estado_trancado(est):
     est["postados"] = est.get("postados", []) + [p for p in disco.get("postados", [])
                                                  if (p.get("nome"), p.get("url")) not in vistos]
     est["reprovados"] = sorted(set(est.get("reprovados", [])) | set(disco.get("reprovados", [])))
+    # 13/11 20h45 (Medieval 4): bipar_palavrao tirou dos reprovados, mas a rodada que já estava rodando gravou a cópia
+    # antiga por cima (a união nunca tira) e a parte 4 voltou a reprovada. Ficha com SEM_PALAVRAO.txt = liberada.
+    est["reprovados"] = [n for n in est["reprovados"] if not (FICHAS / n / "SEM_PALAVRAO.txt").exists()]
     est["cortes_postados"] = sorted(set(est.get("cortes_postados", [])) | set(disco.get("cortes_postados", [])))
     ESTADO.write_text(json.dumps(est, ensure_ascii=False, indent=1), encoding="utf-8")
 
@@ -410,7 +413,18 @@ def _publicar(ficha, d):
             return None, pasta
         _RESERVADO[str(video)] = tam
     try:
-        r = subprocess.run([RCLONE, "copyto", d["drive"], str(video)], capture_output=True, text=True)
+        # 13/11 18h40: a parte 16 travou em 1,99 de 2,00 GB e o rclone ficou parado 10+ min sem errar (sem timeout a
+        # rodada inteira esperava pra sempre). Agora: --timeout 2m de conexão parada + 5 tentativas, e o processo
+        # todo tem teto de LONGO_DOWNLOAD_MAX_MIN (90). LONGO_DOWNLOAD_TIMEOUT=0 volta o comando antigo.
+        _cmd = [RCLONE, "copyto", d["drive"], str(video)]
+        if os.environ.get("LONGO_DOWNLOAD_TIMEOUT", "1") != "0":
+            _cmd += ["--timeout", "2m", "--contimeout", "60s", "--retries", "5", "--low-level-retries", "20"]
+        try:
+            r = subprocess.run(_cmd, capture_output=True, text=True,
+                               timeout=float(os.environ.get("LONGO_DOWNLOAD_MAX_MIN", "90")) * 60)
+        except subprocess.TimeoutExpired:
+            log("  download do Drive passou do teto — tenta na próxima rodada")
+            return None, pasta
     finally:
         with _TRAVA_DISCO:
             _RESERVADO.pop(str(video), None)
@@ -821,11 +835,18 @@ def rodada(ver=False):
                             if res_:
                                 capas_depois._studio(cred, vid_cd, "--capa", str(res_))
                                 log(f"  capa reserva da série no ar: {res_.parent.name}/{res_.name}")
-                            rv = subprocess.run([r"D:\manhwa-react\.venv\Scripts\python.exe", st_, "--canal", cred,
-                                                 f"--video={vid_cd}", "--visibilidade", "public"], capture_output=True,
-                                                text=True, encoding="utf-8", errors="replace", timeout=1800,
-                                                cwd=r"D:\postador-de-videos\bin")
-                            res = [l for l in (rv.stdout + rv.stderr).splitlines() if "RESULTADO" in l]
+                            # 13/11 19:33 (parte 16): "a página de edição não abriu" logo após o envio (vídeo ainda
+                            # processando); na mão 5 min depois foi "ok". Tenta até PUBLICO_TENTATIVAS (3) com 3 min.
+                            for _tent in range(int(os.environ.get("PUBLICO_TENTATIVAS", "3"))):
+                                rv = subprocess.run([r"D:\manhwa-react\.venv\Scripts\python.exe", st_, "--canal", cred,
+                                                     f"--video={vid_cd}", "--visibilidade", "public"],
+                                                    capture_output=True, text=True, encoding="utf-8", errors="replace",
+                                                    timeout=1800, cwd=r"D:\postador-de-videos\bin")
+                                res = [l for l in (rv.stdout + rv.stderr).splitlines() if "RESULTADO" in l]
+                                if res and "não abriu" not in res[-1]:
+                                    break
+                                log("  página de edição não abriu (vídeo processando?) — tenta de novo em 3 min")
+                                time.sleep(180)
                             log(f"  público JÁ (sem esperar a capa própria): {res[-1] if res else 'sem resposta'}")
                             try:
                                 sys.path.insert(0, r"D:\video-fila")

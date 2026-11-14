@@ -805,6 +805,35 @@ def marcar_limite_diario(canal_id):
     data = ler_json(LIMITE_DIARIO_FILE, {})
     d = data.get(canal_id) or {}
     ate = agora() + timedelta(hours=24)
+    # 13/11 22h40 (Medieval 4 no Fio da Meada: 11 envios em 24 h, 7 deles entre 04:52 e 05:28 — Shorts agendados): o
+    # limite do YouTube é de envios em 24 h CORRIDAS; a espera fixa de 24 h deixava a série parada até 22:28 do dia
+    # seguinte, mas às ~05:30 já saem 7 envios da janela. Fim da espera = quando sair da janela o envio que deixa o
+    # canal abaixo de LIMITE_ENVIOS_24H (7), + 30 min de folga; nunca depois das 24 h. Continua 1 tentativa por espera.
+    # LIMITE_JANELA_REAL=0 volta as 24 h fixas.
+    if os.environ.get("LIMITE_JANELA_REAL", "1") != "0":
+        try:
+            import youtube_web_poster as _yw
+            slug = _yw.entrada_do_cred(canal_id)[0]
+            lim = int(os.environ.get("LIMITE_ENVIOS_24H", "7"))
+            if slug:
+                corte = agora() - timedelta(hours=24)
+                envios = []
+                for l in (ROOT / "logs" / "youtube_http.log").read_text(encoding="utf-8", errors="ignore") \
+                        .splitlines()[-4000:]:
+                    m = re.match(r"\[(\d\d)/(\d\d) (\d\d):(\d\d):(\d\d)\] (\S+): subiu", l)
+                    if m and m.group(6) == slug:
+                        t = agora().replace(month=int(m.group(2)), day=int(m.group(1)), hour=int(m.group(3)),
+                                            minute=int(m.group(4)), second=int(m.group(5)), microsecond=0)
+                        if t >= corte:
+                            envios.append(t)
+                envios.sort()
+                if len(envios) >= lim:
+                    # sai da janela o envio na posição (n - lim): depois dele sobram lim-1 -> 1 vaga livre
+                    livre = envios[len(envios) - lim] + timedelta(hours=24, minutes=30)
+                    if agora() + timedelta(hours=1) < livre < ate:
+                        ate = livre
+        except Exception:  # noqa: BLE001
+            pass
     data[canal_id] = {"ate": ate.isoformat(timespec="seconds"), "vezes": int(d.get("vezes", 0)) + 1}
     gravar_json(LIMITE_DIARIO_FILE, data)
     try:  # rampa (22/10): pegou o limite = o degrau extra do canal desce na hora

@@ -5165,3 +5165,38 @@ STATUS: OK
 - Causa provável: Intervalo normal sem novos vídeos nos canais monitorados do parceiro, aguardando o próximo ciclo.
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+
+## 20261113_1437 — Recap longo: verificação do alimentador (RecapAlimentar) e Wise Memory Optimizer
+- Motivo / O que achei: Alerta de verificação do alimentador do recap longo (cliente.py alimentar). A verificação da tarefa agendada RecapAlimentar via PowerShell confirmou que a tarefa está ativa e em execução ("Running"), com última execução e próxima execução agendada corretamente, e Wise Memory Optimizer em funcionamento.
+- Causa provável: Variação temporal momentânea ou alarme falso do agendador.
+- CONSERTO PROPOSTO: Nenhum (tarefa RecapAlimentar está ativa e rodando normalmente).
+- Estado: NADA A FAZER
+## 20261113_1543 — parceiro-render: timeout pontual de ffmpeg em cobertura (já tratado pelo try/except) e GPU recap longo
+- Motivo / O que achei (trecho de log): workspace/anime/_parceiro_20261113.log registrou TimeoutExpired: Command '['ffmpeg', '-v', 'error', '-ss', '4.73', ...]' timed out after 60 seconds (cobertura falhou), seguido de continuidade normal do pipeline. No recap longo, contagem de GPUs sem conta livre/verificada no momento.
+- Causa provável: Concorrente/transiente contenção de I/O e CPU no Windows durante a extração do frame pelo ffmpeg, já tratada adequadamente pelo bloco try/except do código.
+- CONSERTO PROPOSTO: Nenhum (o fluxo já possui tratamento robusto de exceção).
+- Estado: NADA A FAZER
+
+## 20261113_2038 — recap longo: alimentador operando normalmente
+- Motivo / O que achei: A verificação via Get-ScheduledTask e Get-ScheduledTaskInfo confirmou que a tarefa RecapAlimentar está ativa e em execução (LastRunTime recente, NextRunTime agendado), com o Wise Memory Optimizer ativo (PID 6272).
+- Causa provável: Variação temporal momentânea ou alarme falso do disparador.
+- CONSERTO PROPOSTO: Nenhum (tarefa ativa e executando normalmente).
+- Estado: NADA A FAZER
+## 20261113_2218 — recap longo: 13 de 20 GPUs sem conta e rodízio normal de contas/cotas
+- Motivo / O que achei (trecho de log): Recap longo com 13 de 20 GPUs sem conta (espera a próxima volta com 1 lançamento por volta); contas verificadas 7 de 61. Wise Memory Optimizer ativo (PID 6272). Tarefas agendadas operando com rodízio normal de cotas e pausa automática/proteção contra rate-limit.
+- Causa provável: Esgotamento temporário e rodízio padrão de contas e cotas de API/contas verificadas no pool.
+- CONSERTO PROPOSTO: Nenhum (rodízio automático e funcionamento normal esperado).
+- Estado: NADA A FAZER
+## 20261113_2255 — parceiro-render: Whisper timeout pontual em vídeos curtos
+- Motivo / O que achei (trecho de log): 2026-11-13 22:36:35,619 - ERROR - [fetch] Whisper (model=tiny) exception: Command '['D:\\recapd-ambientes\\producao\\venv\\Scripts\\python.exe', 'D:\\recapd-ambientes\\producao\\bin\\_whisper_sub.py', ...]' timed out after 980 seconds | Causa provável: Sobrecarga temporária de CPU/threads do Whisper em vídeo curto.
+- Causa provável: Carga pesada de render/transcrição simultânea no PC elevando o tempo de processamento do Whisper acima do timeout estático/dinâmico calculado.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sem edições de código).
+- Estado: NADA A FAZER
+## 20261113_2337 — parceiro-render: av.error.InvalidDataError no whisper.wav do YouTube e alimentador longo reiniciado
+- Motivo / O que achei (trecho de log): parceiro-render (workspace/anime/_parceiro_20261113.log) registrou `av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '...\\source.whisper.wav'` às 23:35 e aviso `[auto] sem transcrição disponível`. O alimentador do recap longo estava travado e foi reiniciado automaticamente. Wise Memory Optimizer ativo (PID 6272).
+- Causa provável: Arquivo de áudio corrompido, incompleto ou falha de leitura do container AV ao carregar o whisper.wav gerado de um download interrompido/instável do YouTube.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sem edições de código; o erro é tratado ou reprocessado nas rodadas seguintes).
+- Estado: NADA A FAZER
+
+## 20261114_0256 — recap longo: alimentador recap alimentar verificado (ativo/running)
+- Motivo / O que achei: Alerta de verificação do alimentador do recap longo (cliente.py alimentar). A verificação da tarefa agendada RecapAlimentar via PowerShell confirmou que a tarefa está ativa e em execução (Running, LastRunTime 14/11/2026 02:56:56). | Causa provável: Variação temporal ou alarme falso do agendador. | CONSERTO PROPOSTO: Nenhum (tarefa RecapAlimentar está ativa e rodando normalmente). | Estado: NADA A FAZER

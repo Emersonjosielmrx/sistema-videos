@@ -1384,7 +1384,33 @@ def aplicar_sessao(s):
     os.environ["FLOW_SESSION"] = s["session"]
     os.environ["FLOW_PORT"] = s["port"]
     os.environ["FLOW_PROFILE"] = s["profile"]
+    # 14/11: sessao virtual "gemini" = todas as contas do Flow sem credito; o worker so tenta o Gemini sem navegador
+    if s.get("so_gemini"):
+        os.environ["VEO_SO_GEMINI"] = "1"
+    else:
+        os.environ.pop("VEO_SO_GEMINI", None)
     log(f"[sessao] usando {s['session']} na porta {s['port']}")
+
+
+# 14/11/2026 (dona): TRIO do vídeo = 1º Gemini sem navegador (gera_auto._gerar_gemini) -> 2º Flow sem navegador -> 3º
+# Flow com navegador. Quando NENHUMA conta do Flow tem crédito, o ciclo não para mais: roda só pelo Gemini se ele tiver
+# conta pronta (consulta local, sem rede). GEMINI_VIDEO=0 volta ao comportamento antigo.
+SESSAO_GEMINI = {"session": "gemini", "port": "0", "profile": "", "so_gemini": True}
+
+
+def _gemini_tem_conta():
+    if os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_VIDEO", "1") == "0":
+        return False
+    py = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"
+    script = r"D:\gemini-argo\gemini_midia_http.py"
+    if not (os.path.exists(py) and os.path.exists(script)):
+        return False
+    try:
+        r = subprocess.run([py, "-X", "utf8", "-I", script, "tem-video"], capture_output=True, text=True,
+                           timeout=60, creationflags=0x08000000)
+        return r.returncode == 0
+    except Exception:
+        return False
 
 
 # Subpasta de fotos por persona (item AT-06, 16/10): as 333 das subpastas nunca entravam (glob so na raiz). Todas as
@@ -1779,9 +1805,15 @@ def gerar_video(prompt, foto, out_path):
     # custo do video que saiu e tira a conta (< VEO_CREDITO_MINIMO) ate renovar. Reprova do porteiro tambem gastou.
     try:
         _out_cr = (result.stdout or "") + (result.stderr or "")
-        _c = creditos_contas.anotar_uso(
+        # 14/11: vídeo feito pelo Gemini (1º do trio, gera_auto._gerar_gemini) não gasta os 20 créditos do Flow
+        _pelo_gemini = "GEMINI_VIDEO_OK" in _out_cr
+        if _pelo_gemini:
+            log("[gerar] video feito pelo Gemini sem navegador (sem credito do Flow)")
+        # sessão virtual "gemini" (Flow inteiro sem crédito): não é conta do Flow, não entra no controle de créditos
+        _c = {} if os.environ.get("VEO_SO_GEMINI") == "1" else creditos_contas.anotar_uso(
             os.environ.get("FLOW_SESSION", ""), _out_cr,
-            gerou=result.returncode == 0 and os.path.exists(out_path) and os.path.getsize(out_path) > 100_000,
+            gerou=(not _pelo_gemini) and result.returncode == 0 and os.path.exists(out_path)
+            and os.path.getsize(out_path) > 100_000,
             sem_credito=result.returncode == 2 or "CREDITOS_ESGOTADOS" in _out_cr)
         if _c.get("saldo") is not None:
             log(f"[creditos] {os.environ.get('FLOW_SESSION', '')}: saldo {_c['saldo']}{' (estimado)' if _c.get('estimado') else ''}"
@@ -1985,7 +2017,12 @@ def run():
     # Pula o ciclo inteiro ate o reset diario (meia-noite BR). O loop .bat espera
     # 30s e chama de novo; ate renovar, cada ciclo custa ~0 (so este cheque).
     esgotadas, renova = todas_sessoes_esgotadas()
-    if esgotadas:
+    _so_gemini = False
+    if esgotadas and _gemini_tem_conta():
+        # 14/11: Flow inteiro sem crédito, mas o Gemini sem navegador tem conta -> o ciclo segue só pelo Gemini
+        log(f"[creditos] TODAS as contas do Flow sem credito (renova {renova or 'meia-noite'}) — seguindo SO pelo Gemini")
+        _so_gemini = True
+    elif esgotadas:
         log(f"[creditos] TODAS as contas sem credito — pulando ciclo (renova {renova or 'meia-noite'})")
         _MOTIVO = f"todas as contas do Flow sem credito (renova {renova or 'meia-noite'})"
         return "NO_ACCOUNTS"
@@ -2187,14 +2224,19 @@ def run():
                 _st[sessao["session"]] = _inf
                 save_sessoes_status(_st)
             sessao = None
-            while etapas and etapa_i < len(etapas):
+            while not _so_gemini and etapas and etapa_i < len(etapas):
                 _aplicar_etapa(etapas[etapa_i])
                 sessao = escolher_sessao(etapas[etapa_i])
                 if sessao is not None:
                     break
                 etapa_i += 1  # nenhuma conta com credito/logada nas maquinas desta etapa: proxima maquina
-            if not etapas:
+            if not etapas and not _so_gemini:
                 sessao = escolher_sessao()
+            if sessao is None and "gemini" not in tentativas and (_so_gemini or _gemini_tem_conta()):
+                # 14/11: nenhuma conta do Flow livre/com crédito -> 1 tentativa só pelo Gemini sem navegador
+                sessao = dict(SESSAO_GEMINI)
+                _so_gemini = True
+                log("[cadeia] nenhuma conta do Flow livre — tentando so pelo Gemini sem navegador")
             if sessao is None:
                 # Todas as contas esgotaram. Preserva o prompt na fila e sai sem martelar.
                 log("[creditos] sem conta disponivel — preservando prompt na fila")
@@ -2284,7 +2326,8 @@ def run():
         if isinstance(ok, tuple) and ok[0] == "NO_CREDITS":
             padrao_achou = ok[1] if len(ok) > 1 else ""
             log(f"[CREDITOS] {sessao['session']} SEM CREDITOS! padrao='{padrao_achou}'")
-            marcar_creditos_esgotados(sessao["session"], padrao_texto=padrao_achou)
+            if not sessao.get("so_gemini"):  # 14/11: a sessão virtual "gemini" não é conta do Flow
+                marcar_creditos_esgotados(sessao["session"], padrao_texto=padrao_achou)
             sessao = None  # forca escolher_sessao() no topo do loop (troca de CONTA)
             continue
         # Caso 1b: reCAPTCHA Enterprise → cooldown 15min + troca de conta

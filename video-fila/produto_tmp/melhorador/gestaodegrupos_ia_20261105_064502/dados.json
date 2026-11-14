@@ -1,0 +1,335 @@
+{
+ "video": "gestaodegrupos_ia_20261105_064502.mp4",
+ "conta": "gestaodegrupos.ia",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Bot condicional que responde só quando chamado no grupo",
+ "formato": "dono_e_cena_veo",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.38,
+  "notas": {
+   "legibilidade": 7.5,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 6.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.27
+   ],
+   [
+    1,
+    "dono",
+    10.96
+   ],
+   [
+    2,
+    "conversa",
+    8.21
+   ],
+   [
+    3,
+    "veo",
+    26.22
+   ],
+   [
+    4,
+    "cartao",
+    5.61
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Legenda karaokê sobreposta diretamente ao rosto do apresentador, cobrindo o queixo, a barba e encostando no lábio inferior (visível em q01, q02 e q03). Como o vídeo do apresentador foi rebaixado para abrir espaço ao cartão de pergunta no topo, a legenda permaneceu na coordenada vertical padrão (~y=1420), obstruindo a boca e a articulação facial do locutor no momento do gancho inicial.",
+   "como_corrigir": "Ajustar o enquadramento do apresentador na cena 0 ou descer a legenda para a altura do peito (faixa entre y=1500 e y=1540, mantendo-a acima da zona de botões em y=1580), deixando a face do locutor completamente livre."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Conflito visual por duplicidade de texto ('dois textos brigando') na cena de abertura. O cartão superior já exibe a pergunta completa em destaque ('O robô vai interromper a conversa dos membros toda hora?'), enquanto a legenda karaokê logo abaixo pisca e repete exatamente o mesmo texto palavra por palavra, gerando poluição e sobrecarga cognitiva no gancho.",
+   "como_corrigir": "Ocultar a legenda karaokê na cena 0, deixando apenas o cartão da pergunta como elemento de apoio de leitura da fala inicial (o que também elimina o risco de tampar o rosto do apresentador)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca entre cena 0 e cena 1 mantendo plano quase idêntico do apresentador, gerando sensação de jump cut.",
+   "como_corrigir": "Aplicar corte em punch-in evidente de enquadramento ou transição dinâmica de entrada no bloco 1."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Simulação de chat com ritmo arrastado e entrada rígida das mensagens sem microinterações visuais.",
+   "como_corrigir": "Inserir indicador animado de digitação e animação de entrada com overshoot nas mensagens."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Visual com aspecto de banco de imagem genérico exibindo papéis físicos, destoando do contexto digital do produto.",
+   "como_corrigir": "Substituir por vídeo focado no uso de smartphone com WhatsApp ou animações gráficas de interface."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Cena final totalmente estática do início ao fim; quadros q13, q14 e q15 são visualmente idênticos.",
+   "como_corrigir": "Adicionar animação contínua de escala no fundo e pulso de atenção no botão de direct."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos não retém atenção suficiente: a imagem do apresentador é excessivamente estática, com enquadramento convencional e sem movimento de câmera ou elemento visual dinâmico que impeça o scroll rápido no feed.",
+   "como_corrigir": "Na Cena 0, adicionar um push-in digital contínuo de 10% em direção ao rosto do apresentador com efeito sonoro sutil de pop no cartão de pergunta, além de direcionar o apresentador a abrir com fala mais assertiva e inclinada para a lente."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Corte de continuidade frouxo entre a pergunta e a resposta: ao sair da cena 0 para a cena 1, o enquadramento do apresentador permanece exatamente na mesma escala de plano médio, dando aspecto de gravação caseira contínua sem ritmo de edição de anúncio.",
+   "como_corrigir": "Na Cena 1, aplicar um corte com punch-in de 15% na escala do vídeo ao entrar o selo '1 A situação', aproximando o plano para close-up para marcar uma mudança clara de ritmo e aumentar a autoridade do apresentador."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A simulação do WhatsApp falha em provar a inteligência do produto: o bot responde apenas 'Olá! Aqui está a ata com o resumo...', mas não mostra nenhum conteúdo real da ata ou do resumo, gerando frustração cognitiva no lead.",
+   "como_corrigir": "Na Cena 2, incluir dentro do balão do bot um resumo de verdade com 2 tópicos sintéticos reais (ex.: '• Decisões: prazo aprovado para sexta; • Próximo passo: envio dos contratos'), comprovando o valor tangível da IA na tela."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Ruído semiótico gritante no B-roll: enquanto o áudio menciona 'resumidor de links e tudo automático', a atriz aparece anotando à mão com caneta esferográfica em pilhas de papel físico, remetendo a trabalho manual burocrático em vez de tecnologia e automação.",
+   "como_corrigir": "Na Cena 3, substituir o clipe de banco de imagem por uma cena de profissional gerenciando o fluxo no smartphone de forma fluida ou relaxando enquanto as notificações do WhatsApp chegam resolvidas na tela."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "landingpageia_ia_20261112_113346.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.5,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "agentesdeia_ia_20261112_165224.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "agentesdeia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovareclone_20261112_210030.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 3.5,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261113_051134.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   5,
+   2
+  ],
+  "dono_mesma_foto": [
+   5,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   1,
+   2
+  ],
+  "dono_abre_fecha_veo_meio": [
+   1,
+   1
+  ],
+  "dono_tres_veo_final": [
+   2,
+   1
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   16,
+   8
+  ]
+ },
+ "vigiando": []
+}

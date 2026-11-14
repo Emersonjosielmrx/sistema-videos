@@ -7432,5 +7432,29 @@
     "motivo": "faixa de áudio alternativa do YouTube usa Chirp 3 HD (Google Cloud pago); as versões em língua já saem por canal próprio",
     "quem": "CURTOS",
     "data": "2026-11-13"
+  },
+  {
+    "repo": "gsstharun/youtube-agent-skill-",
+    "motivo": "skills de agente sem codigo de pontuacao aproveitavel; ja temos nota de gancho e placar de variantes",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "adrk18/viralize",
+    "motivo": "preve assunto por snapshots de views; ja temos buscar_fontes_campeas (outlier) e a escolha e por fonte autorizada, nao por assunto",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "web3wesley/trend-research-toolkit",
+    "motivo": "depende de SerpApi paga e YouTube Data API; regra: Google so pelo navegador",
+    "quem": "CURTOS",
+    "data": "2026-11-13"
+  },
+  {
+    "repo": "maatmyali-eng/YouTube-Channel-Replication",
+    "motivo": "repositório de 1 estrela; a única 'informação' (regra nova do YPP em 02/2027) não foi confirmada em página oficial — boato",
+    "quem": "LONGOS",
+    "data": "2026-11-13"
   }
 ]

@@ -75,7 +75,7 @@ Pacotes instalados: remotion, @remotion/transitions, @remotion/shapes, @remotion
 - Elementos de interface desenhados em React quando a fala pedir: celular com conversa de WhatsApp (balões entrando
   um a um, "digitando..."), cardápio com itens, notificação, calendário, checklist com ✓ animado, ícones SVG simples.
   Selo pequeno "Simulação" em telas de conversa.
-- ZERO SLIDES, MODAIS OPACOS OU TABELAS: proibido layout de PowerPoint com cards modais opacos, réguas de etapas (timeline de passos), tabelas densas, listas de retângulos ou tópicos numerados encobrindo as filmagens e o produto. Todo card ou mockup deve ser translúcido (opacidade do fundo <= 80% ou sem caixa de fundo), ocupando no máximo 35% da tela e deixando >= 65% da filmagem e do produto visíveis. Em vez de réguas e tabelas corporativas, use motion design fluido: apresente 1 elemento visual ou palavra-chave por vez sincronizado com a narração (entra em 0,2 a 0,4 s e transiciona em 1,5 a 2,5 s).
+- ZERO SLIDES OU TOPICOS EMPILHADOS: proibido layout corporativo de PowerPoint com listas de retangulos, topicos numerados ou checklists estaticos encobrindo as filmagens. No maximo 1 card/mockup por cena, ocupando ate 35% da tela e deixando >= 65% da filmagem/foto real visivel. Em vez de empilhar caixas, use motion design fluido: apresente 1 elemento ou palavra-chave forte por vez sincronizado com a narracao (entra em 0,3 s e transiciona em 1,5 a 2,5 s).
 - NENHUMA cena só com foto + legenda: toda cena tem pelo menos um elemento gráfico vivo (tela, card, ícone,
   checklist, texto forte animado). 26/10: "Você foca na cozinha" saiu só com a foto e ficou vazia.
 - Transições com intenção (wipe, slide, zoom-through, máscara) entre as cenas.
@@ -92,8 +92,7 @@ Pacotes instalados: remotion, @remotion/transitions, @remotion/shapes, @remotion
 - Cartão final: marca grande, o que o produto faz, botão de ação, @conta. Animado. O texto do botão diz a MESMA
   ação que a fala do cartão final (`cenas[último].fala`): se a voz diz "chame no direct", o botão diz "CHAME NO
   DIRECT" — nunca uma ação diferente ("link no perfil") da que está sendo falada.
-- Áudio: `<Audio src={staticFile('narracao.mp3')} />` e a trilha baixa (volume ~0.12, sobe para ~0.25 onde não há
-  fala, fade in/out).
+- Áudio: `<Audio src={staticFile('narracao.mp3')} />` e trilha com intensidade dinâmica (volume ~0.20 no gancho 0–2 s, ~0.12 durante a fala, subindo para ~0.26 no clímax e descendo com fade out para ~0.10 no cartão final, em vez de ducking fixo).
 
 ## Zonas seguras (Reels cobre a borda)
 Nada importante acima de y=150 nem abaixo de y=1580; margens laterais de 60 px. Texto nunca cortado.

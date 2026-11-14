@@ -11,6 +11,7 @@ export type PalavraK = {
   fim: number;
   quebraAntes?: boolean;
   quebraApos?: boolean;
+  quebraLinha?: boolean;
 }; // segundos absolutos no vídeo
 
 type Props = {
@@ -84,9 +85,9 @@ export const Karaoke: React.FC<Props> = ({
           flexWrap: 'wrap',
           justifyContent: 'center',
           alignItems: 'center',
-          columnGap: Math.round(tamanho * 0.32),
+          columnGap: Math.round(tamanho * 0.16),
           rowGap: Math.round(tamanho * 0.18),
-          maxWidth: 940,
+          maxWidth: 960,
           padding: '14px 22px',
           borderRadius: 22,
           background: 'rgba(10, 10, 12, 0.72)',
@@ -94,28 +95,32 @@ export const Karaoke: React.FC<Props> = ({
       >
         {blocoAtual.map((w, k) => {
           const proximoIni = k + 1 < blocoAtual.length ? blocoAtual[k + 1].ini : blocoFim;
-          const fimEfetivo = k + 1 < blocoAtual.length ? Math.min(w.fim + 0.02, proximoIni) : Math.min(w.fim + 0.08, blocoFim);
+          const fimEfetivo = k + 1 < blocoAtual.length ? proximoIni : Math.min(w.fim + 0.25, blocoFim);
           const ativa = t >= w.ini && t < fimEfetivo;
           const dita = t >= fimEfetivo;
           return (
-            <span
-              key={k}
-              style={{
-                fontFamily,
-                fontSize: tamanho,
-                fontWeight: 900,
-                lineHeight: 1.15,
-                textTransform: 'uppercase',
-                whiteSpace: 'nowrap',
-                padding: '2px 10px',
-                borderRadius: 10,
-                background: ativa ? destaque : 'transparent',
-                color: ativa ? textoDestaque : dita ? '#FFFFFF' : '#CBD5E1',
-                textShadow: ativa ? 'none' : '0 3px 8px rgba(0,0,0,0.9)',
-              }}
-            >
-              {w.p}
-            </span>
+            <React.Fragment key={k}>
+              {w.quebraLinha && (
+                <div style={{width: '100%', height: 0, flexBasis: '100%'}} />
+              )}
+              <span
+                style={{
+                  fontFamily,
+                  fontSize: tamanho,
+                  fontWeight: 900,
+                  lineHeight: 1.15,
+                  textTransform: 'uppercase',
+                  whiteSpace: 'nowrap',
+                  padding: ativa ? '2px 8px' : '2px 3px',
+                  borderRadius: 10,
+                  background: ativa ? destaque : 'transparent',
+                  color: ativa ? textoDestaque : dita ? '#FFFFFF' : '#CBD5E1',
+                  textShadow: ativa ? 'none' : '0 3px 8px rgba(0,0,0,0.9)',
+                }}
+              >
+                {w.p.trim()}
+              </span>
+            </React.Fragment>
           );
         })}
       </div>

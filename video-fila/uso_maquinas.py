@@ -20,7 +20,7 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 ARQ = BASE / "estado" / "uso_maquinas.jsonl"
 RES = Path(r"D:\postador-de-videos\config\notebooks_reservados.json")
-MAQS = ("pc1", "pc2", "desktop", "sti", "acer", "x200ma", "s20", "s20ultra")
+MAQS = ("pc1", "pc2", "desktop", "sti", "hp", "asus", "acer", "x200ma", "s20", "s20ultra", "g20")  # 13/11 dona: Moto G20 e HP Pavilion na medição
 
 
 def _reservas():
@@ -72,7 +72,7 @@ def amostra():
     for m in MAQS:
         o = {"m": m, "t": datetime.now().isoformat(timespec="minutes"), "cpu": None, "fazendo": "", "trab": False}
         try:
-            if m in ("sti", "s20", "s20ultra"):
+            if m in ("sti", "hp", "s20", "s20ultra", "g20"):
                 import celulares
                 md = celulares.medir(m, vale_s=240)
                 o["cpu"] = md.get("cpu")
@@ -86,13 +86,17 @@ def amostra():
                 else:
                     o["fazendo"] = ", ".join(fz) or "livre"
                     o["trab"] = bool(fz)
-            elif m in ("acer", "x200ma"):
+            elif m in ("acer", "x200ma", "asus"):
                 md = medidas.get(m) or {}
                 o["cpu"] = md.get("cpu")
                 fz = []
                 if res.get(m):
                     fz.append(f"vez: {res[m]}")
-                if "mostrando" in str(md.get("motivo", "")) or "visualizador" in str(md.get("motivo", "")):
+                # 13/11 dona: acer e x200ma não são mais telão (vitrine.TELOES vazio) — o "visualizador" do controlador
+                # é status velho; só conta telão se VITRINE_NOTEBOOKS=1
+                import os as _os
+                if _os.environ.get("VITRINE_NOTEBOOKS") == "1" and (
+                        "mostrando" in str(md.get("motivo", "")) or "visualizador" in str(md.get("motivo", ""))):
                     fz.append("telão")
                 o["fazendo"] = ", ".join(fz) or "livre"
                 # 12/11: o telão é a função dele, mas a dona mede o aproveitamento pra PRODUZIR: só a vez de trabalho

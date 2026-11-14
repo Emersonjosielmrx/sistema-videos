@@ -1036,7 +1036,24 @@ def _serie_esperando(cid):
         fichas = Path(r"D:\hipercool-materiais\animes recap\na_nuvem")
         prontas = [d for d in fichas.iterdir() if d.name[:11] in ja and d.name[:11] not in post
                    and (d / "nuvem.json").exists() and "Medieval" in d.name]
-        return bool(prontas) and cid == "novo_codigo_inteligente_n7j"
+        if not (prontas and cid == "novo_codigo_inteligente_n7j"):
+            return False
+        # 13/11 (dona: views do Fio da Meada caíram — ficou o dia sem Short): a reserva segurava o canal o DIA TODO.
+        # Agora só segura quando sobram SERIE_GUARDA_ENVIOS (2) envios na janela de 24 h do YouTube (o canal travou
+        # em 12/11 com 7 envios em 24 h: SERIE_LIMITE_24H). Até lá os Shorts sobem normal.
+        import re as _re
+        from datetime import datetime as _dt, timedelta as _td
+        lim = int(os.environ.get("SERIE_LIMITE_24H", "7"))
+        guarda = int(os.environ.get("SERIE_GUARDA_ENVIOS", "2"))
+        corte = _dt.now() - _td(hours=24)
+        n = 0
+        for l in Path(r"D:\postador-de-videos\logs\youtube_http.log").read_text(
+                encoding="utf-8", errors="ignore").splitlines()[-3000:]:
+            m = _re.match(r"\[(\d\d)/(\d\d) (\d\d):(\d\d):\d\d\] fiodameada: subiu", l)
+            if m:
+                t = _dt(_dt.now().year, int(m.group(2)), int(m.group(1)), int(m.group(3)), int(m.group(4)))
+                n += t >= corte
+        return n >= lim - guarda
     except (OSError, ValueError):
         return False
 

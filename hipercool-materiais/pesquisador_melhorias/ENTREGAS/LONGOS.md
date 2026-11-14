@@ -1434,10 +1434,28 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_trends_yt_pais__sonnet_0506.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-13 10:37 — Conteúdo reutilizado aplicado a recap de anime/manhwa (`area_yt_reused_recap`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0 aplicados, 1 reprovado (boato sem fonte oficial) — 2026-11-13 10:37 — Conteúdo reutilizado aplicado a recap de anime/manhwa (`area_yt_reused_recap`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_yt_reused_recap__sonnet_1031.md`
 - [INÉDITO] github.com/maatmyali-eng/YouTube-Channel-Replication — ★1, push 2026-10-21, MIT — one reusable, $0 system for modeling any YouTube channel's style (tone, script, hook, audio, visuals, Shorts and long videos, thumbnails) an
 
-## [ ] PENDENTE — 2026-11-13 11:34 — Regras oficiais do YouTube sobre recap e conteúdo reutilizado (`area_regras_yt_oficiais`, Sonnet 5.5 web)
+## [x] AVALIADO 13/11 — 0/0/0 (filtro já tirou tudo) — 2026-11-13 11:34 — Regras oficiais do YouTube sobre recap e conteúdo reutilizado (`area_regras_yt_oficiais`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_regras_yt_oficiais__sonnet_1132.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO — 2026-11-13 19:15 — Sons em alta no YouTube Shorts (`area_yt_shorts_audio_trend`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_yt_shorts_audio_trend__sonnet_1906.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 13/11 19h45 (chat LONGOS): nada aproveitável — o próprio motor reprovou todos os itens; e sons em alta dos Shorts não é da linha de longos.
+
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 3 deixados — 2026-11-14 00:52 — regras oficiais do YouTube sobre conteúdo reutilizado/recap (`area_regras_yt_2026`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_regras_yt_2026__sonnet_0042.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 14/11 01h45 (chat LONGOS): o motor reprovou por não ser repositório, mas é regra OFICIAL útil (support.google.com/youtube/answer/1311392). (1) Shorts: a partir de 01/02/2027 só monetiza com 10 mi de views qualificadas de Shorts em 90 dias — DEIXADO: precisa confirmar se é por canal ou conta; reforça a aposta no LONGO (Short→longo). Entra no relatório como aviso quando confirmado. (2) narração própria: JÁ FAZEMOS (voz clonada em todo corte). (3) "Sobre" do canal dizendo que é recap/comentário com narração própria — DEIXADO: mexe na página dos canais, pergunta pra dona.
+
+## [ ] PENDENTE — 2026-11-14 02:03 — Regras oficiais do YouTube que afetam recaps (`area_yt_regras_oficiais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_regras_oficiais__sonnet_0201.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 02:51 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_fontes_recap_ingles__sonnet_0238.md`
 - (todos os itens desta pesquisa foram reprovados)

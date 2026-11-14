@@ -21,7 +21,8 @@
   "publicar": false,
   "estado": "feito",
   "tentativas": 2,
-  "em": "2026-11-05T02:08"
+  "em": "2026-11-05T02:08",
+  "refazer": "dona_1113: sem capa (quadro do vídeo)"
  },
  {
   "canal": "novo_historias_em_frames",
@@ -64,7 +65,8 @@
   "publicar": true,
   "estado": "feito",
   "tentativas": 1,
-  "em": "2026-11-05T13:54"
+  "em": "2026-11-05T13:54",
+  "refazer": "dona_1113: só o herói, sem mulher"
  },
  {
   "canal": "novo_ia_agora_h3n",
@@ -87,7 +89,8 @@
   "publicar": true,
   "estado": "feito",
   "tentativas": 1,
-  "em": "2026-11-05T15:46"
+  "em": "2026-11-05T15:46",
+  "refazer": "dona_1113: só o herói assustado, mulher minúscula no canto"
  },
  {
   "canal": "novo_forjareact",
@@ -599,9 +602,9 @@
   },
   "publicar": false,
   "estado": "feito",
-  "tentativas": 4,
+  "tentativas": 0,
   "em": "2026-11-05T16:35",
-  "refazer": "fora_padrao_1111"
+  "refazer": "dona_1113: sem capa (meme de gatinho)"
  },
  {
   "canal": "novo_universo_ia_d6s",
@@ -825,10 +828,10 @@
   },
   "publicar": false,
   "estado": "feito",
-  "tentativas": 4,
+  "tentativas": 3,
   "em": "2026-11-06T19:58",
   "refazer_motivo": "06/11 plantao: subiu quadro do video como capa A",
-  "refazer": "fora_padrao_1111"
+  "refazer": "dona_1113: protagonista não parece o da história"
  },
  {
   "canal": "hNQrW5ouNe0Ni5Me",
@@ -889,10 +892,11 @@
    "source_url": "https://www.youtube.com/watch?v=V4msWWPktbU"
   },
   "publicar": false,
-  "estado": "feito",
-  "tentativas": 1,
+  "estado": "pendente",
+  "tentativas": 11,
   "em": "2026-11-11T12:31",
-  "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0dc381_cap1_20261106\\capa_c.jpg"
+  "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0dc381_cap1_20261106\\capa_c.jpg",
+  "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11"
  },
  {
   "canal": "novo_inovaremanhwaverse",
@@ -914,9 +918,10 @@
    "source_url": "https://www.youtube.com/watch?v=McmTVgI6efk"
   },
   "publicar": false,
-  "estado": "sem_capa",
-  "tentativas": 3,
-  "em": "2026-11-11T17:02"
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-11T17:02",
+  "refazer": "dona_1113: sem capa (quadro do vídeo)"
  },
  {
   "canal": "novo_codigo_inteligente_n7j",
@@ -939,9 +944,10 @@
   },
   "publicar": false,
   "estado": "feito",
-  "tentativas": 0,
+  "tentativas": 2,
   "em": "2026-11-11T17:46",
-  "obs": "11/11 21h: capa temporária = B da parte 5 (padrão, nunca usada); dona pediu prioridade"
+  "obs": "11/11 21h: capa temporária = B da parte 5 (padrão, nunca usada); dona pediu prioridade",
+  "refazer": "dona_1113: protagonista não parece o da história"
  },
  {
   "canal": "novo_historias_em_frames",
@@ -963,9 +969,10 @@
    "source_url": "https://www.youtube.com/watch?v=8m6TEKqvxfY"
   },
   "publicar": false,
-  "estado": "sem_capa",
-  "tentativas": 3,
-  "em": "2026-11-11T17:49"
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-11T17:49",
+  "refazer": "dona_1113: sem capa (quadro do vídeo)"
  },
  {
   "canal": "novo_forjareact",
@@ -987,9 +994,10 @@
    "source_url": "https://www.youtube.com/watch?v=r77umNwvRKU"
   },
   "publicar": false,
-  "estado": "sem_capa",
-  "tentativas": 3,
-  "em": "2026-11-11T18:50"
+  "estado": "feito",
+  "tentativas": 2,
+  "em": "2026-11-11T18:50",
+  "refazer": "dona_1113: sem capa (quadro do vídeo, menina)"
  },
  {
   "canal": "novo_universo_ia_d6s",
@@ -1154,7 +1162,8 @@
   "publicar": false,
   "estado": "feito",
   "tentativas": 1,
-  "em": "2026-11-12T13:30"
+  "em": "2026-11-12T13:30",
+  "refazer": "dona_1113: quadro do vídeo como capa, sem mulher"
  },
  {
   "canal": "novo_manhwanoturno",
@@ -1296,8 +1305,9 @@
   },
   "publicar": false,
   "estado": "feito",
-  "tentativas": 3,
-  "em": "2026-11-13T04:52"
+  "tentativas": 1,
+  "em": "2026-11-13T04:52",
+  "refazer": "dona_1113: protagonista não parece o da história"
  },
  {
   "canal": "novo_codigo_inteligente_n7j",
@@ -1319,9 +1329,10 @@
   },
   "publicar": true,
   "estado": "feito",
-  "tentativas": 2,
+  "tentativas": 1,
   "em": "2026-11-13T05:25",
-  "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0dc381_cap1_20261106\\capa_b.jpg"
+  "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0dc381_cap1_20261106\\capa_b.jpg",
+  "refazer": "dona_1113: protagonista não parece o da história; sem nome na imagem"
  },
  {
   "canal": "novo_codigo_inteligente_n7j",
@@ -1343,9 +1354,10 @@
    "source_url": "https://www.youtube.com/watch?v=pnX8RlSn7Yk"
   },
   "publicar": true,
-  "estado": "feito",
-  "tentativas": 2,
-  "em": "2026-11-13T05:28"
+  "estado": "pendente",
+  "tentativas": 8,
+  "em": "2026-11-13T05:28",
+  "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11"
  },
  {
   "canal": "novo_manhwanoturno",
@@ -1395,5 +1407,152 @@
   "estado": "feito",
   "tentativas": 1,
   "em": "2026-11-13T12:20"
+ },
+ {
+  "canal": "novo_curiosidadesnoturnas",
+  "vid": "N_O4ooMZ3do",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\refazer_capa_N_O4ooMZ3do",
+  "params": {
+   "anime": "Ele Reencarnou Como um gatinho de estimação",
+   "cap": 1,
+   "texto": "",
+   "cena": "Cavaleiro FRAQUINHO REENCARNOU como monstro mas ROUBOU o poder supremo (COMPLETO) - ANIME RECAP",
+   "protagonista": "",
+   "generos": null,
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=waaQjaQ_WVs"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-04T18:42",
+  "refazer": "dona_1113: sem mulher e protagonista não parece o da história"
+ },
+ {
+  "canal": "novo_curiosidadesnoturnas",
+  "vid": "2dCDDjWiV2M",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\refazer_capa_2dCDDjWiV2M",
+  "params": {
+   "anime": "sem-obra-056f71",
+   "cap": 1,
+   "texto": "",
+   "cena": "E se ele VOLTAR NO TEMPO para DEVORAR O CORAÇÃO do herói e salvar seu REINO gelado? 🧊",
+   "protagonista": "",
+   "generos": null,
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=6d2aEsFp6Qk"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 2,
+  "em": "2026-11-02T04:22",
+  "refazer": "dona_1113: sem mulher e protagonista não parece o da história"
+ },
+ {
+  "canal": "novo_manhwanoturno",
+  "vid": "AznoavGpczU",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\refazer_capa_AznoavGpczU",
+  "params": {
+   "anime": "sem-obra-AznoavGpczU",
+   "cap": 1,
+   "texto": "",
+   "cena": "ELE ERA INVISÍVEL, O ROMANCE SECRETO COM A MAIS POPULAR (1-12) - ANIME RECAP",
+   "protagonista": "",
+   "generos": null,
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=fQTiy7CVMxA"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 5,
+  "em": "2026-11-02T20:28",
+  "refazer": "dona_1113: só o herói, sem mulher"
+ },
+ {
+  "canal": "novo_universo_ia_d6s",
+  "vid": "dr6rZ8aeXXg",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\refazer_capa_dr6rZ8aeXXg",
+  "params": {
+   "anime": "sem-obra-7a5ce3",
+   "cap": 1,
+   "texto": "",
+   "cena": "🔥 Ele Foi Traído Pelos Seus Próprios Aliados e Voltou Mais Forte Para Vingar a Todos!",
+   "protagonista": "",
+   "generos": null,
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=xshdHp4tNPE"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 5,
+  "em": "2026-11-04T15:00",
+  "refazer": "dona_1113: só o herói, sem mulher"
+ },
+ {
+  "canal": "novo_doramanoturno",
+  "vid": "8fsdSEFZtMw",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\refazer_capa_8fsdSEFZtMw",
+  "params": {
+   "anime": "sem-obra-d408ca",
+   "cap": 1,
+   "texto": "",
+   "cena": "ELE FOI ABANDONADO na floresta mas VIROU o MERCENÁRIO mais FORTE e VOLTOU para a escola",
+   "protagonista": "",
+   "generos": null,
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=DshSnbY3y8s"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 12,
+  "em": "2026-11-04T05:53",
+  "refazer": "dona_1113: só o herói, sem mulher"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "Hm4neTPGM_c",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-7e0b2e_cap1_20261113",
+  "params": {
+   "anime": "sem-obra-7e0b2e",
+   "cap": 1,
+   "texto": "BASE SECRETA?",
+   "cena": "ELE FOI PARA OUTRO MUNDO e DESENVOLVEU a TECNOLOGIA do império para vencer os demônios",
+   "protagonista": "young adult male prince, short dark hair, blue eyes, elegant medieval noble attire, royal cape, serious expression, holding a map, bright lighting, detailed digital art",
+   "generos": [
+    "acao",
+    "isekai",
+    "fantasia",
+    "aventura"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=n_NwO2_X_5Q"
+  },
+  "publicar": true,
+  "estado": "sem_capa",
+  "tentativas": 3,
+  "em": "2026-11-13T16:15"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "L0-6t7qjKho",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-fd7333_cap1_20261113",
+  "params": {
+   "anime": "sem-obra-fd7333",
+   "cap": 1,
+   "texto": "O PODER SECRETO",
+   "cena": "ELE FOI JOGAR no mundo MEDIEVAL mas CRIOU a TECNOLOGIA mais AVANÇADA",
+   "protagonista": "young adult male, medieval prince clothing, royal coat, dark hair, focused expression, fantasy castle background, cinematic lighting",
+   "generos": [
+    "isekai",
+    "fantasia",
+    "aventura"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=oLBasz5H1-4"
+  },
+  "publicar": true,
+  "estado": "sem_capa",
+  "tentativas": 3,
+  "em": "2026-11-13T19:27"
  }
 ]

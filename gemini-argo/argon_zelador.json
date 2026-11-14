@@ -1,12 +1,28 @@
 {
  "contas": 29,
  "prontas": 10,
- "cookies_mortos": 16,
- "sem_cota": 2,
- "bloqueadas": 3,
- "aguardando_oi": 5,
- "proxima_volta": "2026-11-13T16:28",
+ "cookies_mortos": 19,
+ "sem_cota": 1,
+ "bloqueadas": 0,
+ "aguardando_oi": 3,
+ "proxima_volta": "2026-11-14T05:57",
  "ultimas_voltas": [
+  [
+   "2026-11-14T03:48",
+   "inovaremanhwaverseesp"
+  ],
+  [
+   "2026-11-14T03:30",
+   "inovaremanhwaverseing"
+  ],
+  [
+   "2026-11-14T00:41",
+   "emersonjosiel2029"
+  ],
+  [
+   "2026-11-13T21:27",
+   "emersonjosiel2030"
+  ],
   [
    "2026-11-13T10:36",
    "mentoriaiapro"
@@ -22,34 +38,21 @@
   [
    "2026-11-13T05:30",
    "filmescomia1"
-  ],
-  [
-   "2026-11-13T05:04",
-   "emersonjosiel1995"
-  ],
-  [
-   "2026-11-13T04:50",
-   "emersonjosiel2030"
-  ],
-  [
-   "2026-11-13T04:46",
-   "emersonjosiel2029"
-  ],
-  [
-   "2026-11-13T04:45",
-   "inovaremultiatendimento"
   ]
  ],
- "em": "2026-11-13T13:38:10",
- "duracao_s": 7,
- "conferidas": 0,
+ "em": "2026-11-14T03:48:14",
+ "duracao_s": 13,
+ "conferidas": 2,
  "mortas_vistas": [
   "emersonjosiel2030",
-  "comoseriasecomia",
-  "inovaremanhwaverseesp",
   "solarmundo195",
-  "inovaremanhwabr",
   "aulasrevolution",
+  "inovaremultiatendimento",
+  "msenergypara",
+  "murilodoctor192",
+  "emersonjosiel1995",
+  "mentoriaiapro",
+  "fabricadeautomacoes0",
   "inovarecap",
   "emersongenc",
   "emersongencshin",
@@ -63,8 +66,8 @@
  ],
  "renovadas": [],
  "falhas_renovar": [],
- "voltaram": [],
- "oi_sem_cota": [
-  "msenergypara"
- ]
+ "voltaram": [
+  "inovaremanhwaverseesp"
+ ],
+ "oi_sem_cota": []
 }

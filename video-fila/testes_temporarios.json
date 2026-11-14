@@ -1,1 +1,26 @@
-[]
+[
+ {
+  "caminho": "D:\\gemini-argo\\_teste_http",
+  "motivo": "testes do Gemini imagem/vídeo sem navegador (trio 14/11)",
+  "chat": "gemini-midia",
+  "drive": false,
+  "criado": "2026-11-14T00:49",
+  "vence": "2026-11-21T00:49"
+ },
+ {
+  "caminho": "D:\\gemini-argo\\_teste_imagem",
+  "motivo": "testes do Gemini imagem/vídeo sem navegador (trio 14/11)",
+  "chat": "gemini-midia",
+  "drive": false,
+  "criado": "2026-11-14T00:49",
+  "vence": "2026-11-21T00:49"
+ },
+ {
+  "caminho": "D:\\gemini-argo\\_teste_video",
+  "motivo": "testes do Gemini imagem/vídeo sem navegador (trio 14/11)",
+  "chat": "gemini-midia",
+  "drive": false,
+  "criado": "2026-11-14T00:49",
+  "vence": "2026-11-21T00:49"
+ }
+]

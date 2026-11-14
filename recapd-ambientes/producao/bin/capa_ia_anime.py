@@ -413,6 +413,11 @@ def _seta(d, ini, fim, esp, contorno):
     d.polygon(ponta, fill=AMARELO)
 
 
+def _os_env(nome, padrao):
+    import os
+    return os.environ.get(nome, padrao)
+
+
 def _rotulos(capa, rotulos, manter=False, evitar=()):
     """rotulos = [(texto, caixa do rosto em px ou None)]. Cada texto vai num lugar livre perto do rosto (acima, ao
     lado, abaixo — senão o lugar livre mais perto no quadro) com uma seta até a borda do rosto; sem rosto, sem seta.
@@ -470,7 +475,27 @@ def _rotulos(capa, rotulos, manter=False, evitar=()):
             cands = [c for c in cands if livre((c[0], c[1], c[0] + larg, c[1] + alt)) and longe(c)]
             cands = [c for c in cands if mesmo_lado(c[0])] or cands
             pos = min(cands, key=lambda c: (c[0] + larg / 2 - alvo[0]) ** 2 + (c[1] + alt / 2 - alvo[1]) ** 2) \
-                if cands else (W * 0.04, H * 0.04 + i * alt * 1.2)
+                if cands else None
+            # 13/11 dona (PARTE 14: "INIMIGO" escrito por cima de "EXÉRCITO DO PROTAGONISTA"): sem lugar livre, o
+            # rótulo caía num canto FIXO sem olhar o que já estava lá. Agora tenta menor (70% e 50%) num lugar livre;
+            # se ainda não couber, fica de fora (melhor sem a palavra do que palavra em cima de palavra).
+            # CAPA_ROTULO_SEM_SOBREPOR=0 volta o canto fixo.
+            if pos is None and _os_env("CAPA_ROTULO_SEM_SOBREPOR", "1") != "0":
+                for esc in (0.7, 0.5):
+                    f2, tam2 = _caber(d, txt, W * (0.8 if H > W else 0.36) * esc, int(min(W, H) * 0.13 * esc))
+                    l2, a2 = d.textlength(txt, font=f2), tam2 * 1.05
+                    c2 = [(W * fx - l2 / 2, H * fy) for fy in (0.03, 0.12, 0.22, 0.34, 0.46, 0.58, 0.7, 0.8)
+                          for fx in (0.22, 0.35, 0.5, 0.65, 0.78)]
+                    c2 = [c for c in c2 if livre((c[0], c[1], c[0] + l2, c[1] + a2))]
+                    if c2:
+                        pos = min(c2, key=lambda c: (c[0] + l2 / 2 - alvo[0]) ** 2 + (c[1] + a2 / 2 - alvo[1]) ** 2)
+                        f, tam, larg, alt = f2, tam2, l2, a2
+                        break
+                if pos is None:
+                    log(f"  rótulo '{txt}' sem lugar livre — fica de fora (não escreve por cima de outro)")
+                    continue
+            elif pos is None:
+                pos = (W * 0.04, H * 0.04 + i * alt * 1.2)
         x, y = pos
         if cx:
             # da borda da palavra mais perto do rosto até a borda do rosto
@@ -541,9 +566,19 @@ def _compor(img_path, texto, out_jpg, quadro, estilo="frase", mascote=None, rost
         x0 = (W - larg) / 2 if vertical else 40
         frase = (f, linhas, lh, y0, (x0 - 12, y0 - 12, x0 + larg + 12, y0 + len(linhas) * lh + 12))
     if rotulos_extra:  # 01/11: os rótulos da capa original, cada um com seta pro mesmo objeto na capa nova
+        # 14/11 (dona, Medieval 14 e 11: "INIMIGO" por cima de "EXÉRCITO DO PROTAGONISTA", setas pra nada): os rótulos
+        # do original apontavam pros NAVIOS do parceiro; na capa nova não há navio, a visão não achou o alvo e os dois
+        # caíam no topo, um sobre o outro. Rótulo cujo objeto não existe na capa nova fica de fora.
+        # CAPA_ROTULO_SO_COM_ALVO=0 volta a escrever sem alvo.
+        lista = [(t, px_v(v)) for t, v in rotulos_extra]
+        if _os_env("CAPA_ROTULO_SO_COM_ALVO", "1") != "0":
+            fora = [t for t, c in lista if not c]
+            lista = [(t, c) for t, c in lista if c]
+            if fora:
+                log(f"  rótulos sem o objeto na capa nova — ficam de fora: {', '.join(fora)}")
         # 02/11 (P-djts A): o rótulo "DEUSA" ficou embaixo da frase grande — a frase entra no bloqueio
-        _rotulos(capa, [(t, px_v(v)) for t, v in rotulos_extra], manter=True,
-                 evitar=caras + ([frase[4]] if frase else []))
+        if lista:
+            _rotulos(capa, lista, manter=True, evitar=caras + ([frase[4]] if frase else []))
     if estilo == "etiqueta":
         if texto:
             _desenhar_etiqueta(capa, texto, px("ela") or px("ele"))
@@ -875,6 +910,13 @@ def capa_melhorada(source_url, saida, texto="", cena="", formato="16:9"):
             chk = dict(chk, adultos=False if chk.get("ela") else True, vestidas=False)
         elif chk and not chk.get("ela"):  # 01/11 dona: capa sem mulher sensual não é o que ela pediu
             chk = dict(chk, sem_mulher=True)
+        # 13/11 dona (prints: "o protagonista não se parece", "nem tem protagonista"): sem o rosto do herói na imagem
+        # reprova também (antes só faltar mulher reprovava). CAPA_EXIGE_HEROI=0 desliga.
+        import os as _os
+        if chk and not chk.get("ele") and _os.environ.get("CAPA_EXIGE_HEROI", "1") != "0":
+            log("  capa A: sem o protagonista na imagem — reprovada")
+            Path(img).unlink(missing_ok=True)
+            continue
         if not (chk or {}).get("sem_mulher") and not (_reprovada_v2(chk, img) if v2 else _reprovada(chk)):
             # a Maria já está na cena: sem a figurinha por cima
             rot = original.get("rotulos") or []

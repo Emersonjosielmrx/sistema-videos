@@ -255,9 +255,17 @@ def vez(rotulo=""):
             print(f"[ytdlp_vez] espaçando downloads ({_bloqueios_hoje()} bloqueio(s) hoje): "
                   f"esperando {falta / 60:.0f} min", file=sys.stderr)
             time.sleep(min(falta, 60))
+    # 13/11 (dona: "todos sempre no máximo; resolver os gargalos"): DUAS faixas. Era uma trava só: listar um canal (9 s)
+    # esperou 239 s atrás de downloads, e uma listagem de 5 min segurou todos os downloads — é o que deixava PC2, PC3,
+    # STI e Kaggle parados esperando o PC1. A consulta PEQUENA (lista, legenda, metadado, busca: KB, e sai pelo proxy
+    # rotativo, não pelo IP de casa) tem a faixa dela; o DOWNLOAD grande continua 1 por vez na faixa antiga, com o
+    # espaçamento e a pausa de sempre (é ele que o YouTube barra). YTDLP_UMA_FAIXA=1 volta à trava única.
+    import re as _re0
+    pequena = (not eh_download and os.environ.get("YTDLP_UMA_FAIXA") != "1" and bool(_re0.search(
+        r"busca|legenda|lista|probe|metad|checar|canal|discover|search|sub", rotulo or "", _re0.I)) and bool(_proxies()))
     try:
         TRAVA.parent.mkdir(parents=True, exist_ok=True)
-        f = open(TRAVA, "a+b")
+        f = open(TRAVA.with_name("ytdlp_vez_pequenas.lock") if pequena else TRAVA, "a+b")
     except OSError:  # PC2/desktop recebem o bin/ por cópia e não têm D:\video-fila: segue sem a vez
         yield
         return
@@ -272,7 +280,7 @@ def vez(rotulo=""):
         except OSError:
             prio_pc2 = False
     while True:
-        if not prio_pc2 and _pc2_esperando() and time.time() - t0 < ESPERA_MAX:
+        if not prio_pc2 and not pequena and _pc2_esperando() and time.time() - t0 < ESPERA_MAX:
             time.sleep(2)
             continue
         try:
@@ -301,7 +309,8 @@ def vez(rotulo=""):
             os.environ[k] = px
     try:
         try:
-            ult = float(json.loads(ULTIMA.read_text(encoding="utf-8")).get("fim") or 0)
+            ult = float(json.loads((ULTIMA.with_name("ytdlp_vez_pequenas.json") if pequena else ULTIMA)
+                                   .read_text(encoding="utf-8")).get("fim") or 0)
         except (OSError, ValueError):
             ult = 0.0
         falta = ult + INTERVALO - time.time()
@@ -322,7 +331,8 @@ def vez(rotulo=""):
                 pass
         _local.dentro = 0
         try:
-            ULTIMA.write_text(json.dumps({"fim": time.time(), "rotulo": rotulo, "pid": os.getpid()}), encoding="utf-8")
+            (ULTIMA.with_name("ytdlp_vez_pequenas.json") if pequena else ULTIMA).write_text(
+                json.dumps({"fim": time.time(), "rotulo": rotulo, "pid": os.getpid()}), encoding="utf-8")
         except OSError:
             pass
         if pegou:

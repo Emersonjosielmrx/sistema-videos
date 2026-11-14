@@ -38,6 +38,8 @@ PROVIDER="$PROVIDER$"
 TIPO=PROVIDER
 # 09/11: "ag46" = contas Antigravity que ainda tem o Opus 4.6 (e nao ganharam o 5.5)
 if TIPO=="ag46": PROVIDER="antigravity"
+# 13/11: "fable" = contas cc (mesma cota 5h/semanal) sem o limite proprio do Fable 5.2 (429 nas ultimas 5 h sem 200 depois; medido: dura 4-5 h)
+if TIPO=="fable": PROVIDER="claude"
 
 try: isoladas=set(json.load(open("/opt/omniroute/contas_isoladas.json")))
 except (OSError, ValueError): isoladas=set()
@@ -55,7 +57,7 @@ for cid,psd,rl in db.execute("select id,provider_specific_data,rate_limited_unti
 desde=(agora-datetime.timedelta(hours=3 if TIPO=="ag46" else 12)).strftime("%Y-%m-%dT%H:%M:%S")
 # so as janelas do Opus: as do Gemini (mesmas contas do antigravity) nao dizem nada do Opus
 # 06/11: Opus 4.6 morreu -> antigravity conta so as contas com o Opus 5.5 (janela claude-opus-5-5-high)
-JANELAS={"claude":("session (5h)","weekly (7d)"),"antigravity":("claude-opus-5-5-high","claude_gpt_weekly","gpt-oss-120b-medium"),
+JANELAS={"claude":("session (5h)","weekly (7d)"),"fable":("session (5h)","weekly (7d)"),"antigravity":("claude-opus-5-5-high","claude_gpt_weekly","gpt-oss-120b-medium"),
          "ag46":("claude-opus-4-6-thinking","claude-opus-5-5-high")}[TIPO]
 for cid,wk,ex,nr in db.execute("select s.connection_id,s.window_key,s.is_exhausted,s.next_reset_at from quota_snapshots s join (select connection_id,window_key,max(id) mid from quota_snapshots where provider=? and created_at>? group by connection_id,window_key) u on s.id=u.mid",(PROVIDER,desde)):
     if cid in contas and wk in JANELAS:
@@ -65,6 +67,15 @@ if TIPO == "antigravity":  # sem a janela do Opus 5.5 = conta nao tem o 5.5: nao
 if TIPO == "ag46":  # tem a janela do 4.6 e nao a do 5.5 (quem ganhou o 5.5 perdeu o 4.6)
     contas={k:{**v,"windows":{w:x for w,x in v["windows"].items() if w!="claude-opus-5-5-high"}} for k,v in contas.items()
             if "claude-opus-4-6-thinking" in v["windows"] and "claude-opus-5-5-high" not in v["windows"]}
+if TIPO == "fable":
+    hora=(agora-datetime.timedelta(hours=5)).strftime("%Y-%m-%dT%H:%M:%S")
+    for cid,t429 in db.execute("select connection_id,max(timestamp) from usage_history where provider='claude' and model like 'claude-fable%' "
+                               "and cast(status as integer)=429 and connection_id is not null and timestamp>? group by 1",(hora,)):
+        ok=db.execute("select max(timestamp) from usage_history where connection_id=? and model like 'claude-fable%' "
+                      "and cast(status as integer)=200",(cid,)).fetchone()[0]
+        if cid in contas and not (ok and ok>t429):
+            fim=(datetime.datetime.fromisoformat(t429[:19])+datetime.timedelta(hours=5)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+            if not (contas[cid]["rl"] and contas[cid]["rl"][:19]>fim[:19]): contas[cid]["rl"]=fim
 
 com=0; voltas=[]
 for c in contas.values():
@@ -112,7 +123,7 @@ def texto_previsao(p):
         for t in [datetime.fromisoformat(v.replace("Z", "+00:00")).astimezone()]
         if t > agora
     )
-    nome = {"claude": "CC (Opus 5.5)", "antigravity": "Antigravity (Opus 5.5)"}.get(p["provider"], "Antigravity (Opus 4.6)")
+    nome = {"claude": "CC (Opus 5.5)", "antigravity": "Antigravity (Opus 5.5)", "fable": "CC (Fable 5.2)"}.get(p["provider"], "Antigravity (Opus 4.6)")
     if p["com_credito"] > 0:
         return f"{nome}: {p['com_credito']} conta(s) com credito", None
     if not futuras:

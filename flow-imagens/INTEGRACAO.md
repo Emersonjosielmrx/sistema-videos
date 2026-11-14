@@ -3,6 +3,9 @@
 Pedido do dono (22/10/2026 23:10): "nos lugares dos geradores de imagem coloque esse sistema para gerar capas, imagens
 que precisa nos geradores de vídeo etc e teste para garantir que funciona".
 
+**14/11/2026: TRIO** — dentro do `cliente.gerar()` agora vem 1º o Gemini sem navegador (~15 s, não gasta Argon),
+depois o Flow HTTP e por último o Flow pela tela. Detalhes: `D:\gemini-argo\TRIO_MIDIA.md`. `GEMINI_IMAGEM=0` desliga.
+
 Regra: o Flow entra como **1ª opção**. O gerador que já existia continua como reserva, então se o Flow falhar
 (recusa por política, conta ocupada, PC sem as contas do Flow, como o PC2) o projeto segue igual a antes.
 

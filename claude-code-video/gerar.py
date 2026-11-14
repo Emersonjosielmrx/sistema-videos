@@ -989,6 +989,7 @@ def _so_este_video(tid):
 
 # erro do Chrome/máquina, não do código (27/10: CPU a 100% -> "Timed out evaluating page function" em 30 s)
 _RENDER_PASSAGEIRO = re.compile(r"Timed out evaluating page function|Target closed|Session closed|"
+                                r"trying to connect to the browser|"
                                 r"Navigation timeout|ECONNRESET|Cannot allocate memory|browser has disconnected|"
                                 r"write EOF|EPIPE|render travou", re.I)  # 27/10: write EOF = filho do Remotion morreu (o código rendia)
 # 28/10: "render travou 20 min" (máquina sem RAM) ia para o corretor como se fosse erro de código (15 min perdidos)

@@ -21,6 +21,32 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 PY = Path(r"D:\veo\venv\Scripts\python.exe")
 SCRIPT = BASE / "gera_imagem.py"
+# 14/11/2026 (dona): TRIO de imagem = 1º Gemini sem navegador (D:\gemini-argo\gemini_midia_http.py, ~15 s, não gasta
+# Argon) -> 2º Flow sem navegador (HTTP do gera_imagem) -> 3º Flow com navegador (tela, o próprio gera_imagem cai nela).
+# O Gemini roda com o Python do Argon (requests). GEMINI_IMAGEM=0 / GEMINI_MIDIA=0 desligam só o 1º passo.
+PY_GEMINI = Path(r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe")
+SCRIPT_GEMINI = Path(r"D:\gemini-argo\gemini_midia_http.py")
+
+
+def _gemini(prompt, saida, formato, log, timeout=150):
+    """1º do trio. Path ou None (nunca levanta). Sem foto de referência (o HTTP do Gemini ainda não anexa)."""
+    if os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_IMAGEM", "1") == "0":
+        return None
+    if not (PY_GEMINI.exists() and SCRIPT_GEMINI.exists()):
+        return None
+    t0 = time.time()
+    try:
+        r = subprocess.run([str(PY_GEMINI), "-X", "utf8", "-I", str(SCRIPT_GEMINI), "imagem", prompt, str(saida),
+                            "--formato", formato], capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           timeout=timeout, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+    except Exception as e:  # noqa: BLE001
+        log(f"[gemini] não rodou ({type(e).__name__}) -> Flow")
+        return None
+    if r.returncode == 0 and saida.exists() and saida.stat().st_size > 10_000:
+        log(f"[gemini] ok {saida.name} em {time.time() - t0:.0f}s ({(r.stdout or '').strip()[-80:]})")
+        return saida
+    log(f"[gemini] não gerou em {time.time() - t0:.0f}s ({((r.stdout or '') + (r.stderr or '')).strip()[-160:]}) -> Flow")
+    return None
 PAUSA = BASE / "logs" / "cliente_pausa.json"
 PAUSA_S = 1800
 FORMATOS = {"16:9": 16 / 9, "4:3": 4 / 3, "1:1": 1.0, "3:4": 3 / 4, "9:16": 9 / 16}
@@ -60,12 +86,17 @@ def formato_mais_proximo(aspect):
 
 
 def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log=None):
-    """Path da imagem salva em `saida` (png/jpg pela extensão) ou None. Nunca levanta."""
+    """Path da imagem salva em `saida` (png/jpg pela extensão) ou None. Nunca levanta.
+    Ordem (14/11): Gemini sem navegador -> Flow HTTP -> Flow tela."""
     log = log or (lambda m: None)
-    if not disponivel():
-        return None
     saida = Path(saida)
     saida.parent.mkdir(parents=True, exist_ok=True)
+    if not refs:
+        feito = _gemini(prompt, saida, formato_mais_proximo(formato), log)
+        if feito:
+            return feito
+    if not disponivel():
+        return None
     cmd = [str(PY), str(SCRIPT), prompt, str(saida), "--formato", formato_mais_proximo(formato),
            "--max-contas", str(max_contas)]
     if refs:

@@ -1,0 +1,362 @@
+{
+ "video": "sintetizerisada_20261113_212616.mp4",
+ "conta": "sintetizerisada",
+ "marca": "Agenda IA",
+ "titulo": "A IA consegue organizar sua agenda no WhatsApp?",
+ "formato": "dono_mesma_foto",
+ "veo_total": 1,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.0,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 6.0,
+   "roteiro_marca": 6.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.67
+   ],
+   [
+    1,
+    "imagem",
+    15.95
+   ],
+   [
+    2,
+    "conversa",
+    6.29
+   ],
+   [
+    3,
+    "dono",
+    14.66
+   ],
+   [
+    4,
+    "cartao",
+    4.99
+   ]
+  ],
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "A legenda correspondente à fala ('organizar nossos horários') perdeu a estilização padrão: está renderizada em cinza claro quase transparente sobre a bancada de mármore claro, sem contorno preto e sem contraste, tornando-se praticamente invisível e ilegível.",
+   "como_corrigir": "Restaurar o estilo padrão da legenda karaokê (fonte branca em negrito com traçado/borda preta espessa e destaque) centralizada na faixa inferior segura, garantindo leitura nítida contra o fundo claro da recepção."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "A legenda 'A tecnologia faz agendamentos automáticos 24' foi condensada em uma única linha longa (45 caracteres), forçando uma redução drástica do tamanho da fonte em relação aos demais quadros (letra pequena demais para telas de celular), além de destacar quatro palavras simultaneamente e quebrar a expressão '24 horas', deixando 'horas' isolado no quadro seguinte.",
+   "como_corrigir": "Segmentar a fala em duas frases mais curtas (ex.: 'A tecnologia faz' e 'agendamentos automáticos 24h'), preservando o tamanho de fonte grande e consistente do vídeo e mantendo o destaque karaokê palavra por palavra."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada com fundo totalmente congelado entre q04 e q06 (cerca de 4 segundos). Não há movimento de câmera (slow zoom, push-in contínuo ou pan suave), transformando o bloco em uma apresentação de foto estática.",
+   "como_corrigir": "Aplicar um efeito Ken Burns contínuo (push-in suave de escala de 100% para 106% com interpolação linear ou ease-in-out suave) para manter retenção visual de Reels."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "A imagem de fundo possui visual evidente de banco de imagens genérico / render de IA (recepção asséptica, vazia e estéril), sem transmitir a dor real de sobrecarga ou fluxo de clientes de um negócio.",
+   "como_corrigir": "Substituir a foto estática por um trecho de vídeo real em B-roll de uma recepção em funcionamento ou adicionar camadas dinâmicas de motion (ícones de alerta, papéis acumulados ou notificações flutuantes)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Salto visual brusco no mockup de WhatsApp. A primeira mensagem do cliente é cortada subitamente sem uma rolagem vertical suave (smooth scroll) quando a resposta e o indicador de digitação entram.",
+   "como_corrigir": "Animar a rolagem vertical do histórico de mensagens no eixo Y com curva de aceleração (smooth scroll up), deslocando as bolhas anteriores de forma fluida para acomodar a nova mensagem."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Falta de variedade e repetição exata do molde da cena 0. O apresentador volta no mesmo ângulo, enquadramento e distância focal estática, tornando o ritmo arrastado.",
+   "como_corrigir": "Fazer um punch-in digital com corte de escala (crop de 1.15x a 1.20x para plano mais fechado no apresentador) ou inserir cortes rápidos de inserts/motion graphics sobre a fala para dinamizar o ritmo."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Falha de renderização na legenda: o texto 'organizar nossos horários' está completamente desformatado, translúcido e sem contraste (sem o preenchimento branco, sem borda/stroke preta e sem o destaque karaokê), ficando praticamente invisível sobre o piso claro da recepção.",
+   "como_corrigir": "Aplicar o estilo padrão das demais legendas ao trecho 'organizar nossos horários' (fonte bold branca com contorno preto nítido e destaque laranja na palavra sincronizada com o áudio)."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Quebra de consistência e falha de sincronia no karaokê: a legenda acumulou 6 palavras ('A tecnologia faz agendamentos automáticos 24'), forçando uma redução drástica no tamanho da fonte em relação ao resto do vídeo. Além disso, o destaque laranja cobre 4 palavras de uma vez só ('faz agendamentos automáticos 24') em vez de destacar palavra por palavra, e separou a expressão '24 horas' entre duas telas ('24' no q07 e 'horas' no q08).",
+   "como_corrigir": "Fracionar o texto em blocos de 2 a 3 palavras no tamanho padrão (ex: 'A tecnologia faz' seguido de 'agendamentos automáticos 24 horas'), destacando uma palavra por vez no ritmo da fala e mantendo '24 horas' unidas."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Incongruência na interface da simulação e promessa da fala incompleta na tela: o balão de digitação ('•••') aparece posicionado à esquerda (lado do cliente), mas com a cor bege (cor das respostas da Agenda IA), logo após o cliente escolher 'Pode ser às 14h.'. Ademais, a cena encerra com esses três pontinhos sem mostrar a mensagem de confirmação da IA, deixando de demonstrar visualmente o ato de 'confirmando' citado na locução.",
+   "como_corrigir": "Remover o indicador de digitação do lado esquerdo e inserir o balão de resposta final da Agenda IA à direita (ex: 'Perfeito! Agendado para amanhã às 14h.'), comprovando a confirmação automática prometida na fala."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos é passivo e tem aspecto amador: o apresentador está estático com iluminação precária (sombras sob os olhos e contraluz da janela), o card de pergunta corta o topo do seu cabelo (enquadramento sufocado) e há restos laranjas do cabeçalho vazando de forma defeituosa nas bordas da caixa de pergunta.",
+   "como_corrigir": "Aplicar um punch-in dinâmico (zoom 1.1x) no início da fala, rebaixar a posição do apresentador ou subir o card para dar respiro (headroom), corrigir a camada para não vazar artefato laranja atrás do card e usar luz frontal (key light) para valorizar a fisionomia do apresentador."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Falha crítica de renderização na legenda karaokê: a frase 'organizar nossos horários' perdeu a cor e o contorno preto, virando um texto fantasma translúcido completamente ilegível contra a bancada de madeira e mármore.",
+   "como_corrigir": "Corrigir a camada de legenda para manter o padrão idêntico aos outros quadros: texto branco com contorno preto espesso (stroke 4px) e destaque colorido apenas na palavra ativa."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A demonstração do produto sofre um anticlímax narrativo: o cliente envia 'Pode ser às 14h' e a cena é cortada exibindo apenas três pontinhos de digitação (...), sem nunca mostrar a mensagem da IA confirmando o agendamento, que é a promessa central do roteiro ('confirmando e reagendando horários').",
+   "como_corrigir": "Inserir o balão de resposta final da Agenda IA alinhado à direita com a confirmação imediata (ex: 'Perfeito! Agendamento confirmado para amanhã às 14h ✅'), entregando o momento 'uau' da tecnologia."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Dissonância semiótica de direção de arte: o bloco é rotulado como '1 O problema', mas apresenta caixas com ícones de visto/check (✔ 'uma pessoa', ✔ 'sem confusão'), comunicando sucesso e validação em vez de dor ou objeção, parecendo slide amador.",
+   "como_corrigir": "Substituir os ícones de visto (✔) por elementos visuais que representem o gargalo (como alerta, texto tachado ou relógio) e alterar o texto para expressar a dor (ex: 'Recepcionista sobrecarregada' / 'Horários perdidos')."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Corte de edição que congela o apresentador de olhos completamente fechados no meio da fala de resultado ('sem conflito e'), transmitindo cansaço e falta de cuidado com a imagem do porta-voz.",
+   "como_corrigir": "Ajustar o ponto de corte do vídeo para selecionar frames em que o apresentador mantenha contato visual firme com a câmera, ou cobrir o trecho com um B-roll de tela mostrando o painel de horários sendo atualizado."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "inovareclone",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "inovareagenda_20261113_051134.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261113_135029.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261113_182327.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 5.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 5.67,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261113_212616.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   5,
+   2
+  ],
+  "dono_mesma_foto": [
+   5,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   1,
+   2
+  ],
+  "dono_abre_fecha_veo_meio": [
+   1,
+   1
+  ],
+  "dono_tres_veo_final": [
+   2,
+   1
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   16,
+   8
+  ]
+ },
+ "vigiando": []
+}

@@ -16853,5 +16853,125 @@
     "arquivado": false,
     "descricao": "Two-tier YouTube topic research: demand (Google Trends via SerpApi) + competition (YouTube Data API) to find rising, under-served video topi",
     "data": "2026-11-13"
+  },
+  "nxc1802/manga-recap-skill": {
+    "ok": true,
+    "nome": "nxc1802/Manga-Recap-Skill",
+    "estrelas": 1,
+    "push": "2026-11-13",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-13"
+  },
+  "sky4302/mochiku": {
+    "ok": true,
+    "nome": "sky4302/mochiku",
+    "estrelas": 1,
+    "push": "2026-11-10",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Mochiku (餅ク) - A modern manga reader featuring Mochy-Music aesthetic, frosted acrylic HUDs, and the Otaku Passport & Manga Recap gimmick.",
+    "data": "2026-11-13"
+  },
+  "ajayyy/dearrow": {
+    "ok": true,
+    "nome": "ajayyy/DeArrow",
+    "estrelas": 2353,
+    "push": "2026-10-17",
+    "licenca": "GPL-3.0",
+    "arquivado": false,
+    "descricao": "Crowdsourcing better titles and thumbnails on YouTube",
+    "data": "2026-11-13"
+  },
+  "berkant-jotform/video-growth": {
+    "ok": true,
+    "nome": "berkant-jotform/Video-Growth",
+    "estrelas": 0,
+    "push": "2026-11-11",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Track real finish signals for YouTube title and thumbnail A/B tests, review outcomes, and keep retests separate.",
+    "data": "2026-11-13"
+  },
+  "rishaan1402/opensource-clipping-autopilot": {
+    "ok": true,
+    "nome": "rishaan1402/opensource-clipping-autopilot",
+    "estrelas": 1,
+    "push": "2026-11-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turns long videos into short-form clips, and can run unattended. It finds Creative Commons videos from channels you have reviewed, verifies ",
+    "data": "2026-11-13"
+  },
+  "muhammadbilalqamar/yt-shorts-pipeline": {
+    "ok": true,
+    "nome": "MuhammadBilalQamar/yt-shorts-pipeline",
+    "estrelas": 0,
+    "push": "2026-10-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "The full pipeline for a channel you own or have written permission to clip. Same architecture: yt-dlp for ingestion, Whisper for transcripts",
+    "data": "2026-11-13"
+  },
+  "hsnmzhrr/hook-analyzer": {
+    "ok": true,
+    "nome": "hsnmzhrr/hook-analyzer",
+    "estrelas": 0,
+    "push": "2026-07-24",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Rule-based scoring engine that rates YouTube hooks 0-100 on retention mechanics, with optional LLM critique",
+    "data": "2026-11-13"
+  },
+  "hackers-reality/youtube-skillbox": {
+    "ok": true,
+    "nome": "hackers-reality/youtube-skillbox",
+    "estrelas": 4,
+    "push": "2026-11-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free YouTube toolkit for AI agents — search, transcripts, community posts, home sections & Shows, plus 10 creator tools: scripts, hooks, SEO",
+    "data": "2026-11-13"
+  },
+  "blueorionn/albumy": {
+    "ok": true,
+    "nome": "blueorionn/albumy",
+    "estrelas": 1,
+    "push": "2026-10-01",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "A curated music library for copyright-free music. Albumy brings together freely licensed tracks — from sources like NCS, Free Music Archive ",
+    "data": "2026-11-13"
+  },
+  "itzjk/hookcheck": {
+    "ok": true,
+    "nome": "itzjk/hookcheck",
+    "estrelas": 0,
+    "push": "2026-10-28",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Will viewers swipe your Short in the first second? A frame-level hook audit for Shorts, Reels and TikToks.",
+    "data": "2026-11-14"
+  },
+  "misterzaidxpy/tubescrape": {
+    "ok": true,
+    "nome": "misterzaidxpy/tubescrape",
+    "estrelas": 18,
+    "push": "2026-11-11",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": " A fast, lightweight Python toolkit for scraping YouTube without an API key. Search videos with filters, browse channel content (videos, sho",
+    "data": "2026-11-14"
+  },
+  "yxxrn/manhwashorts-studio": {
+    "ok": true,
+    "nome": "yxxrn/manhwashorts-studio",
+    "estrelas": 1,
+    "push": "2026-09-12",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Auto YouTube Shorts generator for manhwa recaps - rights-aware, human-in-the-loop pipeline",
+    "data": "2026-11-14"
   }
 }

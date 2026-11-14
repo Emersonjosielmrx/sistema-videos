@@ -288,3 +288,13 @@
 - prova: PReloN5HWSI (legibilidade 5.0: balão em inglês 'BLACK MONEY' colidindo diretamente com a legenda PT 'puxavam as cordinhas').
 - onde: bin/delogo_scan.py
 - como testar: Rodar detecção de OCR/texto em inglês nos painéis de entrada e verificar a aplicação de inpainting limpo no balão antes da sobreposição da legenda narrada.
+
+## 13/11 18:54 [CERTEZA] Trava de margem de segurança Y para legendas e tarjas fora da área facial (gemini/gemini-3.5-flash)
+- prova: Em GMuCrqDRe9A, a palavra 'MUNDO' cobriu olhos/testa e a tarja 'MAIS ENROLAÇÃO' desfigurou o nariz/olho do personagem.
+- onde: bin/fx_clips.py
+- como testar: Renderizar trecho de teste com legendas longas e verificar se a coordenada vertical permanece fixa na margem inferior da tela 16:9.
+
+## 13/11 18:54 [CERTEZA] Ocultação/Inpainting automático de balões com texto original em inglês (gemini/gemini-3.5-flash)
+- prova: Em PReloN5HWSI e oLBasz5Hp16, textos em inglês ('BLACK MONEY', 'YOU WANT ME') mantiveram-se visíveis sob a legenda em português.
+- onde: bin/delogo_scan.py
+- como testar: Processar painéis contendo balões de fala estrangeiros e confirmar se a rotina de delogo/máscara limpa o balão antes do render da legenda.

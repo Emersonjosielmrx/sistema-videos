@@ -334,3 +334,12 @@ evisão: REPROVADO — 10 quadro(s) com nudez), o que demonstra o funcionamento 
 - O que fiz: Nenhum código ou arquivo alterado (Modo Só Aviso estrito). Apenas conferência dos logs de execução e registro no diário.
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+
+## 20261113_1859 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): 
+  - `fila_ciclo.log`: registra ciclos de verificação e o status da fila de capítulos ("fila de capítulos terminada — adicione a próxima obra em config/fila.json").
+  - `fila_postagem.log`: registra a execução contínua dos ciclos de postagem (ex: "Shorts em pt: canal parado, sai já") e o gerenciamento da janela local de espaço em disco (espaço no disco D: com < 10 GB livres controlando a janela local de arquivos no PC).
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas leitura de logs e verificação do status da fila.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

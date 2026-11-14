@@ -25,7 +25,9 @@ SSH = r"C:\Program Files\Git\usr\bin\ssh.exe"
 PORTA_SSH = {"emerson@100.87.195.108": 2222}  # 24/10: a 22 do x200ma virou Tailscale SSH (pede login); sshd na 2222
 FFPROBE = r"D:\hipercool-materiais\bin\ffprobe.exe"
 # 22/10 (dono): só o ACER exibe; o X200MA é RESERVA (só recebe se o Acer não responder) e toca a 70%
-TELOES = ["emerson-ia@100.98.55.125", "emerson@100.87.195.108"]
+# 13/11 dona: "acer e x200ma não são mais telão" — só produção (Flow/Veo). VITRINE_NOTEBOOKS=1 volta os dois.
+TELOES = (["emerson-ia@100.98.55.125", "emerson@100.87.195.108"] if os.environ.get("VITRINE_NOTEBOOKS") == "1"
+          else [])
 VOLUME = {"emerson-ia@100.98.55.125": 100, "emerson@100.87.195.108": 70}
 TELA = {"emerson-ia@100.98.55.125": "acer", "emerson@100.87.195.108": "x200ma"}  # que quadros cada um gira
 TELOES_VIDEO = ["emerson-ia@100.98.55.125", "emerson@100.87.195.108"]  # dona 23/10: só o Acer; X200MA só se o Acer falhar (70%)

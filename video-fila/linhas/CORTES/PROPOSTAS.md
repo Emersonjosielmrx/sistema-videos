@@ -1083,3 +1083,168 @@
 - prova: b36464 q04/q06/q09 (carretilha x molinete) e 421860 q10 (fala 'a molecada' sobre caneta mágica). Repete em 2 Shorts, mas depende da sincronia entre fala e cena, não do texto.
 - onde: Alinhamento de cena com as palavras-chave do roteiro (seleção/corte de cena e sincronia fala-imagem).
 - como testar: Para cada substantivo-chave do roteiro, checar se a cena exibida no instante da fala corresponde; começar pelos dois Shorts citados.
+
+## 13/11 14:27 PROPOSTA [CERTEZA] Legenda palavra a palavra só em amarelo ou branco opaco com contorno preto grosso (cw/claude-sonnet-5-5)
+- prova: Texto ilegível por cor escura, azul, verde ou translúcida em 4 Shorts: parasyte_cap1 q14 e q17, sem-obra-b36464 q02, q03, q08 e q16, sem-obra-d79377 q06 e q12, sem-obra-421860 q11. A cor 'por personagem' ou 'por palavra' está caindo em tons escuros sobre cena escura.
+- onde: Função de render da legenda karaokê (paleta de cores e estilo de contorno); provavelmente o módulo da legenda palavra a palavra em linhas/CORTES.
+- como testar: Renderizar 20 Shorts com cenas escuras e conferir, por script, que a cor de preenchimento fica no conjunto permitido (amarelo/branco/ciano claro, luminância alta) e o contorno é >= 6 px. Passar a folha de quadros no júri e ver se 'contraste' some dos problemas graves.
+
+## 13/11 14:27 PROPOSTA [CERTEZA] Tarja vazando nas pontas da legenda queimada e legenda da fonte visível (cw/claude-sonnet-5-5)
+- prova: sem-obra-421860 q01 ('ÃO,' à direita) e q17 ('MA' e 'ELAR' nas duas pontas); sem-obra-b36464 q08 ('GALHADAS' visível) e q11 ('REGULAGEM' na linha da água). Faltam folha de quadros e log '[hardsub]' para confirmar que a visão leu legenda nesses Shorts.
+- onde: Função que mede a caixa da legenda queimada e monta a tarja/delogo (largura e margem lateral).
+- como testar: Conferir antes o log '[hardsub]' desses 2 Shorts. Se a visão leu legenda, medir a caixa das letras em resolução >= 720 px e somar uma margem lateral de ~3% de cada lado, mantendo a altura exata da legenda (regra da dona). Rodar nos 2 Shorts e conferir que não vaza nas pontas.
+
+## 13/11 14:27 PROPOSTA [CERTEZA] Cards, setas e tarjas não podem cobrir o @ do canal (cw/claude-sonnet-5-5)
+- prova: parasyte_cap1 q15 (card 'ALERTA MONSTRO' sobre o @manhwareact-ia), sem-obra-d79377 q07 (seta e 'REPARA' sobre @historiasemframes-emerson), sem-obra-421860 q01 (@inventoreact visível no topo, de outro canal).
+- onde: Posicionamento dos cards e setas (zona segura vertical) e a camada do identificador do canal na composição final.
+- como testar: Reservar a faixa y=160 a 220 só para o @ e mover cards e setas para fora dela. Conferir também de onde vem o @inventoreact do 421860 (marca da fonte ou @ configurado errado).
+
+## 13/11 14:27 PROPOSTA [GOSTO] Corte de cena adiantado ou atrasado em relação à palavra falada (cw/claude-sonnet-5-5)
+- prova: b36464 q06 ('SÓ QUE A CARRETILHA' sobre molinete) e q10; d79377 q10; 421860 q10 ('a molecada' sobre caneta parada). Em 3 Shorts o corte cai errado em relação à fala.
+- onde: Corte de cena e sincronia (pipeline), no ponto que alinha o início de cada take ao primeiro substantivo da frase.
+- como testar: Medir o deslocamento entre o início da palavra-chave na voz e o início do take correspondente em 10 Shorts. Mexer só se a mediana passar de 0,3 s.
+
+## 13/11 16:12 PROPOSTA [CERTEZA] Legenda palavra a palavra com cor escura/translúcida e sem contorno ilegível sobre cena escura (cw/claude-sonnet-5-5)
+- prova: Em 4 Shorts: parasyte_cap1 q14 ('CACHORRO' transparente sobre o focinho) e q17 ('VOADOR' azul-escuro); sem-obra-b36464 q03 ('MOLEZA' azul-escuro), q08 ('GALHADAS' verde-oliva), q02 e q16; sem-obra-d79377 q06 ('NISSO') e q12 ('ASSISTIR'); sem-obra-421860 q11 ('MANCHA'). Já consta nas regras 3 do APRENDIDO.
+- onde: Renderizador da legenda palavra a palavra: paleta de cores por personagem/impacto e contorno (provavelmente a função que sorteia a cor da palavra).
+- como testar: Impor luminância mínima de preenchimento, ou trocar para branco/amarelo quando o contraste com o quadro for baixo, e manter contorno preto >= 6 px. Renderizar 10 Shorts escuros (parasyte, d79377) e conferir q14/q17/q06 nos quadros. Respeitar a preferência da dona por cores por personagem, só limitando as escuras.
+
+## 13/11 16:12 PROPOSTA [CERTEZA] Duas camadas de legenda ativas ao mesmo tempo / resíduo fantasma da palavra anterior (cw/claude-sonnet-5-5)
+- prova: parasyte_cap1 q11 ('REVELOU' duplicado com estilos diferentes); sem-obra-d79377 q14 (resto translúcido sob 'UMA'), q16 ('BRAÇO' congelado enquanto a fala já está em 'DA ESTÁTUA') e q17 (duas 'VERDADE'); sem-obra-421860 q01 ('OLHA' residual sob 'SÓ ESSE BANDO').
+- onde: Montagem das legendas (ASS/drawtext): sobreposição de eventos, com fim de uma palavra posterior ao início da seguinte.
+- como testar: Dump dos eventos de legenda dos 3 Shorts e checagem de que end(n) <= start(n+1). Rerrenderizar e inspecionar os quadros citados.
+
+## 13/11 16:12 PROPOSTA [CERTEZA] Vazamento da legenda queimada da fonte nas pontas da cobertura (cw/claude-sonnet-5-5)
+- prova: sem-obra-421860 q01 (sufixo 'ÃO,' visível) e q17 ('MA ... ELAR' nas duas pontas); sem-obra-b36464 q11 ('REGULAGEM' vazando). Só vale como defeito se o log desses Shorts mostrar que a visão leu legenda (ex.: '[hardsub] 3/6'). O júri não vê o que está sob a tarja, então confira antes de agir.
+- onde: Cálculo da caixa da legenda na visão (cortes hardsub) e aplicação do delogo/tarja: margem lateral da caixa medida.
+- como testar: Ler os logs '[hardsub]' do 421860 e do b36464. Se leu legenda, medir a caixa real das letras em resolução >= 720 px, alargar as laterais em ~3% e rerrenderizar os quadros q01/q17. Se não leu, descartar.
+
+## 13/11 17:18 PROPOSTA [CERTEZA] Detector de hardsub e máscara delogo deixando legenda da fonte exposta ou vazando nas bordas (gemini-4-argon)
+- prova: Nos 4 Shorts do lote a legenda original vazou: sem-obra-421860 (q01 vaza 'ÃO,' à direita e q17 vaza 'MA' e 'ELAR' nas pontas do delogo), sem-obra-36800d (q01 a q17 com legenda amarela/vermelha exposta e spoiler de '1,8 milhão' em q14), sem-obra-b44755 (q01 colidindo com nossa legenda) e sem-obra-0b3b6c (q02, q06, q07 com legenda azul da fonte visível no rodapé).
+- onde: Módulo de detecção de hardsub e cálculo da bounding box do filtro delogo/tarja no pipeline de vídeo (ex.: cortes_video.py / detecção de legenda queimada)
+- como testar: Rodar a detecção nos 4 vídeos-fonte do lote em >= 720p com 6 quadros amostrados em momentos de fala ativa e conferir na folha de contato se a caixa cobre 100% da largura horizontal das legendas coloridas (amarela, vermelha e azul) com folga lateral.
+
+## 13/11 17:18 PROPOSTA [CERTEZA] Renderizador de legenda empilhando camadas fantasmas, usando verde/azul translúcido e cortando palavras (gemini-4-argon)
+- prova: Legenda duplicada/fantasma em sem-obra-421860 (q01 'OLHA' sob 'SÓ ESSE BANDO'), sem-obra-36800d (q03 'LEILÃO' sob 'GOVERNO', q10 'DEPOIS') e sem-obra-b44755 (q01 'ENTROU', q03 'ESSA CRIATURA' sobre 'QUILÔMETROS'); cor verde/translúcida ilegível em sem-obra-421860 (q11 'MANCHA') e sem-obra-36800d (q03 'GOVERNO'); corte e hifenização em sem-obra-421860 (q06 'COLHER' em x < 0), sem-obra-b44755 (q02 'BRA') e sem-obra-0b3b6c (q12 'infec-ção', q18 'antitetâ-nica').
+- onde: Gerador de legendas ASS/gerador de stickers palavra-a-palavra (ex.: cortes_legenda.py)
+- como testar: Regerar a legenda de sem-obra-421860, sem-obra-b44755 e sem-obra-0b3b6c garantindo limpeza de eventos sobrepostos no timestamp, paleta restrita a #FFFF00/#FFFFFF com opacidade 100% e traço preto 6-12px, margem lateral mínima x >= 60 e quebra de linha apenas em espaços entre palavras.
+
+## 13/11 19:06 PROPOSTA [CERTEZA] Fixar paleta de alto contraste (amarelo/branco com stroke preto) e margem segura de 60 px na legenda e cards (gemini-4-argon)
+- prova: Palavras da legenda saíram em tons escuros ilegíveis sem contorno (sem-obra-a4625a q05 'REPENTE' em verde-escuro; sem-obra-22968b q05 'DURA' em azul-escuro e q15 'CABEÇA' em marrom-escuro; sem-obra-923315 q07 texto verde residual), além de cortes na borda esquerda x < 60 (sem-obra-da9ca5 q13 'ARA'; sem-obra-a4625a q06 'NEGÓCIOS') e sobreposição sobre rostos e @ do canal (sem-obra-a4625a q05/q06; sem-obra-923315 q03/q07/q09; sem-obra-da9ca5 q03).
+- onde: Renderizador de legendas/cards (gerador ASS/ Remotion da linha CORTES): travar cores em #FFFF00 ou #FFFFFF com borda preta 6-12 px (proibir verde, azul e marrom escuros), limitar X entre 60 e 1020 px e fixar Y da legenda na faixa inferior (1200-1450) longe de rostos e da marca d'água.
+- como testar: Re-renderizar os quadros q05/q06 de sem-obra-a4625a, q07 de sem-obra-923315 e q15 de sem-obra-22968b e validar contraste, margens >= 60 px e ausência de colisão com rostos/@.
+
+## 13/11 19:06 PROPOSTA [CERTEZA] Reforçar detecção de hardsub da fonte e limpeza de artefatos de transição diagonal (gemini-4-argon)
+- prova: Legendas queimadas da fonte ficaram expostas sem cobertura em 3 Shorts (sem-obra-a4625a q01 'WHAT THE HELL' e q02 'WHAT IS IT'; sem-obra-923315 q02 'One more time!!' e q05 'She kept messing up!'; sem-obra-22968b q02 'MAÇÃ'), e uma linha branca diagonal de transição/split sujou a tela em 2 Shorts (sem-obra-da9ca5 q18 e sem-obra-a4625a q08).
+- onde: Detector de hardsub (`[hardsub]` / `delogo`) e filtro de transição entre cenas no pipeline de vídeo da linha CORTES.
+- como testar: Rodar a detecção de legenda nos vídeos-fonte de sem-obra-a4625a, sem-obra-923315 e sem-obra-22968b em resolução >= 720p conferindo na folha de quadros se a cobertura entra exatamente sobre as caixas de texto originais sem gerar linhas diagonais.
+
+## 13/11 20:21 PROPOSTA [CERTEZA] Fixar paleta de alto contraste, margem lateral >= 60px e zona segura inferior na legenda dinâmica (gemini-4-argon)
+- prova: Cores escuras sem contraste em 3 Shorts (sem-obra-a4625a q05 'REPENTE' verde-escuro; sem-obra-22968b q05 'DURA' azul-escuro e q15 'CABEÇA' marrom; sem-obra-0fe7a7 q11 'PRESSÃO' cinza), corte na borda esquerda (sem-obra-a4625a q06 'NEGÓCIOS'; sem-obra-0fe7a7 q03 'GARRAFA' em x=0) e sobreposição em rostos/ação (sem-obra-a4625a q05, sem-obra-923315 q03/q07/q09, sem-obra-0fe7a7 q03/q07/q08) mais colisão de camadas (sem-obra-0fe7a7 q01 'DO 🔥' sobre 'FOGO').
+- onde: Renderizador de legendas / template ASS ou Remotion da linha CORTES
+- como testar: Renderizar sem-obra-a4625a, sem-obra-22968b e sem-obra-0fe7a7 e verificar nos quadros q01, q03, q05, q06 e q15 se as palavras usam apenas amarelo (#FFFF00) ou branco (#FFFFFF) com traçado preto 6-12px, x entre 60 e 1020, y entre 1200 e 1450 e uma única camada ativa por vez.
+
+## 13/11 20:21 PROPOSTA [CERTEZA] Auditar detecção de hardsub para cobrir legendas queimadas da fonte do tamanho exato (gemini-4-argon)
+- prova: Legendas queimadas da fonte expostas em todos os 4 Shorts do lote: sem-obra-a4625a (q01 'WHAT THE HELL', q02 'WHAT IS IT'), sem-obra-923315 (q02 'One more time!!', q05 'She kept messing up!'), sem-obra-22968b (q02 'MAÇÃ') e sem-obra-0fe7a7 (q02 caixa azul '...QUE').
+- onde: Detector de hardsub / aplicação de delogo no pipeline CORTES
+- como testar: Rodar o detector nos 4 vídeos-fonte em >= 720p com folha de 6 quadros e confirmar que a máscara delogo cobre 100% da caixa exata das letras nos quadros q01, q02 e q05.
+
+## 13/11 20:21 PROPOSTA [CERTEZA] Cortar planos estáticos longos (> 3s) aplicando punch-in ou b-roll da fonte (gemini-4-argon)
+- prova: Estagnação visual grave em 3 Shorts: sem-obra-a4625a (q14-q16, > 5s no mesmo close com 7.6% de movimento enquanto narra 'uma civilização inteira ali dentro'), sem-obra-22968b (q13-q16, ~4s no boneco azul parado) e sem-obra-0fe7a7 (q04-q18, ~10s na garrafa amassada estática com ~6% de movimento).
+- onde: Seletor de cenas / montagem de vídeo do pipeline CORTES
+- como testar: Reprocessar sem-obra-a4625a e sem-obra-0fe7a7 garantindo alternância de plano ou punch-in (15-20%) a cada 1.5s-2.5s para manter movimento medido > 12% em todas as cenas.
+
+## 13/11 21:53 PROPOSTA [CERTEZA] Legenda palavra a palavra: preenchimento sempre opaco e contorno sólido, em qualquer estilo de cor/fonte (cw/claude-sonnet-5-5)
+- prova: Em 3 Shorts do lote a legenda some por falta de contraste: sem-obra-e908ce q06 (branco sem borda sobre fundo estourado), sem-obra-ef7fcc q13 (preenchimento semitransparente com traço fino sobre peixe claro), sem-obra-96ddc5 q03 (azul-escuro sobre carne escura), q06 e q15 (palavra vazada/translúcida). A dona gosta de cores e fontes por personagem, então isso é um piso de legibilidade e não uma troca de estilo.
+- onde: Módulo que gera a legenda ASS/estilos da palavra ativa e inativa (provavelmente na função de estilo do karaokê em cortes_*; confirmar o nome exato no código)
+- como testar: Renderizar as mesmas palavras sobre fundo branco, escuro e de cor média. Exigir preenchimento com 100% de opacidade e contorno escuro de pelo menos 6 px, mantendo a cor por personagem. Conferir de novo os quadros q06/q13/q03 desses Shorts.
+
+## 13/11 21:53 PROPOSTA [CERTEZA] Texto da fonte exposto sem tarja em Shorts onde a fonte tem texto queimado (cw/claude-sonnet-5-5)
+- prova: sem-obra-7a7df4 tem 'Mysterious creature in sewer?!' no topo durante todo o vídeo e 'What is it?' em q12-q18. sem-obra-ef7fcc tem 'guelras' em q05 e 'Agora me conta' em q17, ambos sem cobertura. Atenção às lições: o texto no topo quase nunca é a legenda, e o júri não vê o que há sob a tarja. Por isso a ação certa é conferir o log antes de mudar a detecção.
+- onde: Detecção de legenda queimada (visão '[hardsub]') e a decisão de aplicar tarja/delogo no pipeline do Short
+- como testar: Abrir o log '[hardsub]' desses 2 Shorts e ver se a visão leu o texto. Rodar D:\tmp\folha_topo.py no 1,5 s de todos os Shorts do dia para medir quantos têm texto no topo. Se houver texto lido e não coberto, corrigir a decisão. Usar vídeo sem legenda como controle negativo e manter a tarja do tamanho exato da legenda.
+
+## 13/11 21:53 PROPOSTA [GOSTO] Ordem das cenas contra o roteiro: imagem de resultado antes do preparo (cw/claude-sonnet-5-5)
+- prova: sem-obra-ef7fcc q10-q11 mostra o peixe fritando e q12-q13 volta ao peixe cru na pia. sem-obra-96ddc5 q13 mostra o mocotó pronto e q14 corta para ingredientes crus. sem-obra-e908ce q01 abre com o peixe assado enquanto a narração fala de pescar. Nota do júri não é prova, então é preciso conferir no roteiro.txt e nas cenas se a ordem vem do casamento entre frase e cena.
+- onde: Etapa que associa cada trecho do roteiro a uma cena da fonte (seleção e ordenação de cenas)
+- como testar: Para esses 3 Shorts, comparar a lista de cenas com as frases do roteiro.txt. Se a ordem diverge, testar penalizar cenas de prato pronto nas frases iniciais de preparo, em um canal só, e medir a nota do júri e o % assistido antes de generalizar.
+
+## 13/11 23:01 PROPOSTA [CERTEZA] Conferir no log se a visão leu a legenda antes de chamar de 'tarja faltando' (cw/claude-sonnet-5-5)
+- prova: ex-machina_cap1_20261110 (q02, q06, q07: legenda da fonte nítida sob 'desfoque cinza fraco') e transformers_cap1_20261110 (q01, q02: 'foi estabelecido' e 'através da internet' visíveis). Só vale se o log do Short disser '[hardsub] só 0/6'.
+- onde: Log desses 2 Shorts; se a visão falhou, a função que lê a legenda queimada (checagem hardsub em cortes_juri / etapa de cobertura) e a escolha da cobertura em cortes_ajustes.json:cobertura_legenda
+- como testar: Ler os logs dos 2 Shorts. Se a visão falhou em achar a legenda, refazer com a folha de quadros em resolução >= 720 px e um controle negativo (vídeo sem legenda). Se a visão leu a legenda e a cobertura ainda deixou o texto legível, o problema é a cobertura 'delogo', que borra pouco. Nesse caso reprocessar com tarja do tamanho exato da legenda.
+
+## 13/11 23:01 PROPOSTA [CERTEZA] Texto da legenda e dos selos cortado nas margens laterais (cw/claude-sonnet-5-5)
+- prova: ex-machina q05 ('M' de MORADORA decepado na esquerda); sem-obra-41c5a0 q09 (faixa 'TRAZENDO' encostando em x=1080) e q16-q17 (personagem e texto no limite esquerdo). Aparece em 2 Shorts.
+- onde: Render dos selos e palavras de impacto (função de layout da legenda palavra a palavra / efeito pop-in e escala)
+- como testar: Limitar toda caixa de texto à largura segura (x 60 a 1020) já contando a escala máxima da animação. Renderizar os 2 Shorts e conferir que nenhum quadro passa de x=60 ou x=1020.
+
+## 13/11 23:01 PROPOSTA [GOSTO] Legenda e selos cobrindo rosto ou foco da cena (cw/claude-sonnet-5-5)
+- prova: the-eminence-in-shadow q04, q14 e q15 (legenda sobre olhos, nariz e boca); transformers q07 e q09 (sobre o rosto do avatar); ex-machina q07 (cobre os rostos) e q13 ('RASTREANDO...' sobre o robô). Aparece em 3 Shorts.
+- onde: Posicionamento vertical da legenda palavra a palavra e dos selos gráficos
+- como testar: Testar a legenda no terço inferior seguro (y≈1200 a 1540, o que a regra 2 do APRENDIZ já propõe) em 1 canal, comparando % assistido com o grupo de controle antes de ligar nos demais. Antes disso, passar pelas DECISOES_DONO: a dona prefere legenda grande e de lado, então a posição baixa pode ir contra o que ela quer.
+
+## 13/11 23:01 PROPOSTA [CERTEZA] Legendas duplicadas ou em camadas sobrepostas (cw/claude-sonnet-5-5)
+- prova: transformers q04 ('ACORDOU' em 2 faixas) e q08 ('ATUALIZAÇÃO' sobre 'ATUALIZAÇÃO 3.9'). Só 1 Short, mas é defeito objetivo e visível, e só vale confirmar o frame.
+- onde: Montagem das faixas de texto: provável que a legenda palavra a palavra e o selo de título/capítulo estejam sendo renderizados juntos
+- como testar: Abrir o quadro 4.04 s e o 8 s do Short, ver as camadas ativas. Se for a legenda mais o selo, impedir que os dois rodem no mesmo intervalo.
+
+## 13/11 23:01 PROPOSTA [GOSTO] Planos estáticos longos ou quase pretos no começo e no meio (cw/claude-sonnet-5-5)
+- prova: the-eminence q01-q04 (pôster parado por mais de 3 s no gancho) e q11-q12; transformers q07 (avatar parado, movimento 8%, fundo preto) e q06 (quase preto); ex-machina q08 (subexposto). Aparece em 3 Shorts.
+- onde: Seleção e corte de cena, mais o ajuste de brilho/zoom (punch-in) na montagem
+- como testar: Aplicar punch-in lento em plano parado com mais de 2,5 s e descartar cena abaixo de um limite de brilho. Comparar a nota de movimento antes e depois em 1 lote.
+
+## 14/11 00:18 PROPOSTA [CERTEZA] Nunca deixar quadro preto nem faixas pretas: preencher 9:16 com o clipe cortado ou ampliado (cw/claude-sonnet-5-5)
+- prova: pânico-na-floresta q01/q02 (abertura preta por mais de 2 s) e q16/q17 (19.59–21.5 s, só legenda no vazio). james-bond q02 (16:9 solto no meio com mais de 60% preto) e q01 (crédito abaixo de y=1580).
+- onde: Montagem das cenas e render final: o ramo de fallback quando a cena não tem clipe, e o de entrada de clipe horizontal (scale+crop ou fundo desfocado do próprio clipe). Também a função que escolhe o clipe da abertura.
+- como testar: Rodar os dois Shorts de novo e extrair um quadro a cada 0.5 s. Nenhum quadro pode ter mais de 5% de pixels pretos puros nas faixas superior e inferior. Falhar o QA se a cena ficar sem clipe.
+
+## 14/11 00:18 PROPOSTA [CERTEZA] Prender a legenda palavra a palavra na zona segura (x de 60 a 1020) e escolher o lado ao medir a palavra (cw/claude-sonnet-5-5)
+- prova: pânico-na-floresta q04 ('NÃO PE'/'ATALHO' cortadas na direita) e stray-kids-bts q03 ('P' de PASSAMOS encostando na esquerda, a menos de 60 px). O pedido de não cobrir rosto aparece em pânico q03, sem-obra q05 e james-bond q03, mas é GOSTO e só se mede depois do corte, então vem em segundo lugar.
+- onde: Função que desenha a legenda palavra a palavra (cálculo de x e largura do texto). Limitar x por largura medida e reduzir o corpo da palavra longa em vez de deixar sair da tela.
+- como testar: Gerar o Short com a palavra mais longa do roteiro, ex.: 'ATALHOS..' e 'PASSAMOS'. Conferir que a caixa do texto fica dentro de x=60..1020 em todos os quadros.
+
+## 14/11 00:18 PROPOSTA [CERTEZA] Sincronizar a imagem com a palavra citada: trocar o clipe quando a fala cita o objeto (cw/claude-sonnet-5-5)
+- prova: pânico-na-floresta q10 ('SINALIZADOR' com a imagem de um machado) e q11 ('DE CAÇA' com o sinalizador). james-bond q15 (fala 'pega fogo', copo ainda sem chama, e a chama só em q16) e q06 (cita o copo da direita, zoom no da esquerda).
+- onde: Função que casa cena e tempo da fala (alinhamento das cenas ao áudio da voz clonada). Possivelmente o ponto onde o início de cada cena é calculado a partir das palavras-chave e do zoom.
+- como testar: Pegar os dois Shorts e comparar o tempo da palavra-chave na transcrição da voz com o tempo de entrada do clipe certo. A diferença tem de ficar abaixo de 0.2 s.
+
+## 14/11 01:28 PROPOSTA [CERTEZA] Clamping de margem segura (x=60..1020, y<=1540) na renderização de legendas ASS/FFmpeg e tarja superior (gemini-4-argon)
+- prova: Três Shorts tiveram palavras decepadas nas bordas laterais ou cobertas pela UI inferior: stray-kids-bts_cap1_20261110 (q02 'PALCO', q03 'PASSAMOS' < 60px), sem-obra-7f9e8e_cap1_20261110 (q10 'TUDO', q13 'CONTAS', q17 'nventou de investi' cortado nas duas bordas e abaixo de y=1580, q18 'isso só' abaixo de y=1580) e sem-obra-f9dc0b_cap1_20261110 (q05/q07 '...LOJA D' cortado na direita e q12/q14 'NINGUEM' cortado na esquerda).
+- onde: Módulo de geração de legendas (.ass / drawtext) e cálculo de bounding box da tarja superior no pipeline de renderização de CORTES
+- como testar: Renderizar novamente sem-obra-7f9e8e_cap1_20261110 (q17) e sem-obra-f9dc0b_cap1_20261110 (q05, q12) forçando MarginL=60, MarginR=60, MarginV>=380 (y<=1540) e quebra automática de linha (WrapStyle) ou redução dinâmica de fonte quando a largura exceder 960 px.
+
+## 14/11 01:28 PROPOSTA [CERTEZA] Detecção de hardsub colorido/estilizado e corte de cartela final promocional (outro) da fonte (gemini-4-argon)
+- prova: Vazamento de legenda queimada da fonte em 4 Shorts: stray-kids-bts_cap1_20261110 (q01 'vs INSETOS no PALCO', q04 'UMA BARATA APARECEU NO'), sem-obra-7f9e8e_cap1_20261110 (q01 'SERÁ QUE É?', q09, q11, q16, q17 'O PROBLEMA COMEÇOU'), sem-obra-f9dc0b_cap1_20261110 (q01 'CONTAVAM' e q17 tela final 'Cinefy - CAPÍTULO NOVO JÁ NA CINEFY' durante a locução) e the-untouchable-boss-lives-next-door_cap1_20261110 (q16 marca 'KAIJINRE' e balões em inglês por 4,5s).
+- onde: Detector de hardsub/OCR por amostragem de quadros e seletor de pontos de corte (trim final) do vídeo fonte
+- como testar: Rodar o detector de legenda nos 6 quadros de stray-kids-bts_cap1_20261110 e sem-obra-7f9e8e_cap1_20261110 verificando se a máscara/tarja do tamanho exato é ativada, e adicionar detecção de cena estática/vinheta nos últimos 3s para cortar cartelas promocionais como 'Cinefy' em sem-obra-f9dc0b_cap1_20261110 (q17).
+
+## 14/11 02:47 PROPOSTA [CERTEZA] Cortar a cartela de encerramento/CTA de terceiros e manter a história até o fim (cw/claude-sonnet-5-5)
+- prova: sem-obra-f635ce_cap1_20261110 q15-q18: a partir de ~16,96 s o vídeo mostra o card 'Capítulo novo já na Cinefy / Link no perfil' por mais de 4 s, com a narração ainda rolando por cima e a legenda cobrindo o botão (q16, q17).
+- onde: Etapa de corte de cenas/duração do clipe fonte (seleção do trecho final) e detecção de cartela de encerramento.
+- como testar: Detectar quadros finais com texto de CTA ('link no perfil', logo de terceiro) ou fundo preto com círculo isolado, aparar a fonte antes deles e completar a duração com cenas anteriores da própria obra. Rodar no sem-obra-f635ce e checar que nenhum quadro do último terço traz marca externa.
+
+## 14/11 02:47 PROPOSTA [CERTEZA] Evitar colisão entre a legenda base e as palavras de impacto/adesivos (cw/claude-sonnet-5-5)
+- prova: 4 Shorts do lote: cyberpunk q03 ('MANDOU' sobre 'BRINCANDO!'), one-piece q04 ('AH!' sobre 'CIMA'), wonder-egg q14 ('DE BASE' sobre 'e o pai'), sem-obra q16/q17 (legenda sobre o botão do CTA). Wonder-egg q17 também encosta nas bordas laterais (margem zero).
+- onde: Renderizador da legenda palavra a palavra (camada de palavra de impacto vs. camada base) e cálculo de largura máxima da linha.
+- como testar: Antes de renderizar, calcular as caixas de todas as camadas ativas no mesmo instante. Se houver interseção, suprimir a camada de impacto ou deslocá-la. Impor margem lateral >= 60 px. Re-renderizar os 4 Shorts citados e conferir os quadros q03/q04/q14/q17.
+
+## 14/11 02:47 PROPOSTA [CERTEZA] Piso de contraste e opacidade na cor das legendas (cw/claude-sonnet-5-5)
+- prova: one-piece q02 ('VERDE' em cinza translúcido) e q03 ('CASACA' branco sobre amarelo); wonder-egg q06 ('NA ESCURIDÃO' marrom/cinza escuro sobre preto) e q08 ('DEIXOU' com contorno roxo e preenchimento transparente).
+- onde: Tabela de cores por personagem/estilo da legenda (fill e stroke) no renderizador.
+- como testar: Exigir preenchimento 100% opaco com contorno escuro espesso. Se a cor do personagem tiver luminância baixa, cair para branco ou amarelo. Reprocessar one-piece e wonder-egg e olhar q02, q06 e q08.
+
+## 14/11 02:47 PROPOSTA [CERTEZA] Verificar se a seta amarela 3D e a palavra 'PERCEBE' são adesivos nossos (cw/claude-sonnet-5-5)
+- prova: sem-obra q08 (seta gigante apontando para a serpente, personagem errado) e one-piece q08/q09 (seta 3D + 'PERCEBE' no centro, competindo com a legenda).
+- onde: Gerador de adesivos/palavras de impacto; se não for nosso, a etapa de limpeza do clipe fonte.
+- como testar: Comparar o quadro renderizado com o clipe fonte sem edição. Se o adesivo for nosso, limitar a seta ao objeto mencionado e proibir sobre o rosto ou o centro. Se vier da fonte, mascarar.
+
+## 14/11 02:47 PROPOSTA [GOSTO] Limitar a duração de cenas quase paradas (cw/claude-sonnet-5-5)
+- prova: cyberpunk q12-q18 (~8 s no Katsuo caído, movimento 13,6% e 11,4%), one-piece q12-q16 (>4,5 s no mesmo plano), wonder-egg q02-q03 (>7 s de portão vazio).
+- onde: Seletor de cenas/ritmo: usar o movimento medido por cena para trocar de plano quando ficar abaixo do limiar por mais de ~3 s.
+- como testar: Aplicar teto de ~3 s para cena com movimento < 15% (alternar com outro trecho da mesma obra) e comparar % assistido e retenção em 1 lote, mudando só isso.
+
+## 14/11 02:47 PROPOSTA [CERTEZA] Reenquadramento que decapita o personagem (cw/claude-sonnet-5-5)
+- prova: one-piece q05 (Luffy sem cabeça e sem chapéu enquanto a narração diz 'DO CAPITÃO DE PALHA') e cyberpunk q14 (rosto do personagem cortado).
+- onde: Cálculo do crop 9:16 (centro do recorte) na etapa de reenquadramento.
+- como testar: Detectar o rosto/cabeça com a visão ou centralizar no maior movimento e impedir recorte que deixe a testa fora do quadro. Re-renderizar o one-piece e conferir q05.

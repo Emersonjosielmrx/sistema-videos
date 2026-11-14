@@ -97,6 +97,118 @@
    "ideia": "Manter a voz da marca constante em todas as abordagens é possível usando o recurso de voz clonada do Hermes Call em ligações no WhatsApp.",
    "pergunta_cliente": "Posso padronizar a mesma voz em todas as ligações de WhatsApp da minha empresa?",
    "criada": "2026-10-25T11:04:54"
+  },
+  {
+   "id": "base_inativa_dor",
+   "tipo": "dor",
+   "ideia": "Sua base de contatos antigos está acumulando poeira no CRM, e o Hermes Call resolve isso fazendo ligações em massa pelo WhatsApp com voz real para reativar essas oportunidades.",
+   "pergunta_cliente": "Como reativar clientes antigos no WhatsApp sem gastar horas da minha equipe?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "voz_robo_objecao",
+   "tipo": "objecao",
+   "ideia": "Clientes desligam ao perceber que falam com robôs, mas o Hermes Call soluciona essa barreira usando voz real e clonada nas chamadas via WhatsApp.",
+   "pergunta_cliente": "A voz da IA parece robótica e espanta os clientes?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "escala_como_funciona",
+   "tipo": "como_funciona",
+   "ideia": "Sua equipe comercial não consegue atender o volume de leads, e o Hermes Call automatiza o processo realizando ligações de WhatsApp em massa e escaláveis.",
+   "pergunta_cliente": "Como o sistema consegue fazer tantas ligações pelo WhatsApp ao mesmo tempo?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "preco_perguntas",
+   "tipo": "pergunta_frequente",
+   "ideia": "Gestores querem saber como implantar automação sem perder o contato humano, e o Hermes Call executa ligações de WhatsApp com voz natural e clonada.",
+   "pergunta_cliente": "Como funciona o atendimento por voz no WhatsApp?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "whatsapp_vs_telefone_dor",
+   "tipo": "dor",
+   "ideia": "As pessoas ignoram ligações de operadora, mas o Hermes Call faz chamadas de voz diretamente pelo WhatsApp onde o cliente realmente atende.",
+   "pergunta_cliente": "As ligações são feitas pela rede móvel normal ou direto pelo WhatsApp?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "timbre_proprio_objecao",
+   "tipo": "objecao",
+   "ideia": "Empresários temem perder a identidade da marca, mas o Hermes Call permite usar clonagem de voz para manter o padrão nas chamadas de WhatsApp.",
+   "pergunta_cliente": "Posso clonar a voz da minha própria equipe para as ligações?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "fluxo_atendimento_como",
+   "tipo": "como_funciona",
+   "ideia": "O chat do WhatsApp fica sobrecarregado de mensagens, e o Hermes Call entra em ação realizando ligações de voz automáticas para filtrar os interessados.",
+   "pergunta_cliente": "O bot faz apenas disparos ou ele também conversa com o cliente na ligação?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "qualificacao_caso",
+   "tipo": "caso_de_uso",
+   "ideia": "Você recebe muitos curiosos que não compram, e o Hermes Call realiza ligações automáticas pelo WhatsApp para qualificar o lead antes de passar para o vendedor.",
+   "pergunta_cliente": "Como filtrar os curiosos antes de ocupar meu time de vendas?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "rotina_exausta_antes",
+   "tipo": "antes_depois",
+   "ideia": "Antes sua equipe saía esgotada de tentar ligar para listas intermináveis, agora o Hermes Call executa ligações em massa pelo WhatsApp sem fadiga.",
+   "pergunta_cliente": "Como tirar a tarefa repetitiva de discagem dos meus vendedores?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "volume_baixo_dor",
+   "tipo": "dor",
+   "ideia": "Sua operação travou porque não há gente suficiente para ligar para novos leads, e o Hermes Call escala quantas chamadas pelo WhatsApp forem necessárias.",
+   "pergunta_cliente": "Como escalar minhas vendas no WhatsApp sem precisar contratar mais atendentes?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "confianca_voz_objecao",
+   "tipo": "objecao",
+   "ideia": "Leads desconfiam de números desconhecidos, mas o Hermes Call usa voz real e clonada para gerar proximidade e confiança na chamada de WhatsApp.",
+   "pergunta_cliente": "O cliente percebe que está falando com uma inteligência artificial?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "disparo_lote_como",
+   "tipo": "como_funciona",
+   "ideia": "Você precisa falar com milhares de cadastros rapidamente, e o Hermes Call processa o disparo de ligações automáticas em massa pelo WhatsApp.",
+   "pergunta_cliente": "Posso enviar campanhas de ligações em massa para milhares de contatos?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "retirada_carrinho_caso",
+   "tipo": "caso_de_uso",
+   "ideia": "Propostas enviadas ficam sem retorno no chat, e o Hermes Call faz uma ligação imediata via WhatsApp para retomar o contato com o cliente.",
+   "pergunta_cliente": "O sistema consegue ligar para quem deixou o orçamento pendente?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "integracao_zap_pergunta",
+   "tipo": "pergunta_frequente",
+   "ideia": "Sua empresa opera totalmente pelo mensageiro, e o Hermes Call integra perfeitamente realizando atendimento e ligações direto pelo WhatsApp.",
+   "pergunta_cliente": "Preciso de algum aplicativo externo ou tudo acontece no WhatsApp?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "planilha_manual_antes",
+   "tipo": "antes_depois",
+   "ideia": "Antes seus atendentes copiavam números de planilhas para o celular, agora o Hermes Call conecta na base e dispara as ligações de WhatsApp automaticamente.",
+   "pergunta_cliente": "Como importar minha lista de contatos para o Hermes Call?",
+   "criada": "2026-11-13T13:52:36"
+  },
+  {
+   "id": "personalizacao_voz_caso",
+   "tipo": "caso_de_uso",
+   "ideia": "Você quer manter o tom exato da sua marca nas abordagens, e o Hermes Call aplica clonagem de voz nas chamadas automáticas do WhatsApp.",
+   "pergunta_cliente": "Consigo usar o tom de voz da minha empresa nas ligações automáticas?",
+   "criada": "2026-11-13T13:52:36"
   }
  ]
 }

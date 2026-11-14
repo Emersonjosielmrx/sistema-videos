@@ -133,3 +133,7 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-12 16:30 | veo_robos_desastrad_20260729_155953__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_robos_desastrad_20260729_155953__manhwareact.png` | backup_drive.py |
 | 2026-11-13 11:16 | veo_recenas_ia_20260729_212509__manhwareact.mp4 | 7.9 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_recenas_ia_20260729_212509__manhwareact.mp4` | backup_drive.py |
 | 2026-11-13 11:16 | veo_recenas_ia_20260729_212509__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_recenas_ia_20260729_212509__manhwareact.png` | backup_drive.py |
+| 2026-11-13 14:46 | veo_cassetadas_ia_20261111_150302__inventoreact.mp4 | 7.4 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_cassetadas_ia_20261111_150302__inventoreact.mp4` | backup_drive.py |
+| 2026-11-13 14:46 | veo_cassetadas_ia_20261111_150302__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_cassetadas_ia_20261111_150302__inventoreact.png` | backup_drive.py |
+| 2026-11-13 17:00 | veo_noticias_de_ia_20261111_054318__manhwareact.mp4 | 9.7 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_noticias_de_ia_20261111_054318__manhwareact.mp4` | backup_drive.py |
+| 2026-11-13 17:00 | veo_noticias_de_ia_20261111_054318__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_noticias_de_ia_20261111_054318__manhwareact.png` | backup_drive.py |
