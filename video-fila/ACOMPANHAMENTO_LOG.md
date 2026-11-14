@@ -2027,3 +2027,16 @@ Dona: "coloquei mais um PC, veja a forma mais eficiente de usar ele". Medido na 
 - NÃO instalar o pipeline de Short inteiro no HP: um Short que leva ~25 min no STI levaria horas lá.
 Também nesta rodada: a trava de disparo do PC2 passou a cobrir só a ESCOLHA (o download fica fora) — 1º Short da
 pilha chegou ao PC2 em 67 s (era 950-1028 s). Relógio do PC1 3 min 42 s atrasado (serviço w32time PARADO).
+
+## 13/11/2026 23:55 — manutenção: pilha única funcionando de ponta a ponta (medido)
+- **Pilha:** rodadas em paralelo desde 22:34: 3 de 3 (153 s), 2 de 3, 3 de 3 (83 s), 1 de 1, 2 de 2 (92 s) — pilha 5/5
+  às 23:29. PC3 e STI pegaram da pilha 4 vezes ("PC3 pega da pilha", "STI pega da pilha"). Downloads de fora: 6-16 s
+  lá, 45-76 s no total.
+- **PC2, preparo por disparo:** 00-19 h (antes de eu mexer) mediana 29 s, maior 3224 s; 20 h-22:33 (minhas mudanças
+  quebrando e consertando) 3 disparos, mediana 1006 s; 22:34 em diante (código final) 6 disparos, mediana 44 s, maior
+  258 s. Ou seja: o PC2 voltou ao normal e perdeu os picos de dezenas de minutos; o ganho novo é PC3/STI com pilha.
+- **Relógio do PC1 3 min 42 s atrasado** (serviço w32time PARADO e em Manual): acertado (`w32tm /resync`, erro agora
+  0,016 s) e posto em Automático. Fazia o sinal dos baixadores parecer "do futuro" (-216 s) e atrapalha toda conta de
+  prazo/agendamento.
+- `alimentar_pc2.py`: a limpeza de disco do PC2 rodava a cada recusa por CPU ("disco" aparece em todo motivo): 179
+  conexões à toa hoje, sempre "apaguei 0 pastas". Agora só quando o disco está abaixo do mínimo.

@@ -29,6 +29,12 @@ def log(m):
         LOG.write_text(LOG.read_text("utf-8")[-500_000:], "utf-8")
 
 
+def _disco_baixo(motivo, minimo):
+    import re
+    m = re.search(r"disco ([\d.]+) GB", motivo or "")
+    return bool(m) and float(m.group(1)) < minimo
+
+
 def rodada():
     import controle
     import fila_render
@@ -45,7 +51,9 @@ def rodada():
     except Exception as e:  # noqa: BLE001
         log(f"[!] trazer prontos do PC2: {type(e).__name__}: {str(e)[:150]}")
     vaga, motivo = ocioso.pc2_vaga_short()
-    if not vaga and "disco" in motivo:
+    # 13/11 23:50: "disco" aparece em TODO motivo ("...disco 15.1 GB; 3 Shorts") — a limpeza rodava a cada recusa por
+    # CPU (179 vezes hoje, 1 conexão ao PC2 cada, sempre "apaguei 0 pastas"). Só quando o disco é mesmo o problema.
+    if not vaga and _disco_baixo(motivo, ocioso.PC2_SHORT_DISCO_MIN):
         # 05/11: o PC2 ficou de 04/11 19:33 a 05/11 12:30 sem Short por "disco 7.6 GB" (mín. 8): 454 pastas de trabalho
         # de Shorts JÁ trazidos (13.8 GB) em C:\recapd-e-animes\workspace\anime. Apaga as de mais de 48 h e mede de novo.
         try:
