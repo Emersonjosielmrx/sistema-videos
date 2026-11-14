@@ -15,6 +15,11 @@ import os
 import sys
 import re
 import subprocess
+try:  # 13/11: subprocess.run com capture_output+timeout não voltava no Windows (rodar_seguro.py, cópia aqui
+    # no bin pra ir junto pro PC2/PC3/STI/Kaggle) — a legenda prendeu o despacho do PC2 por 9 min
+    from rodar_seguro import run as _run_seguro
+except ImportError:
+    _run_seguro = subprocess.run
 from pathlib import Path
 
 # O venv do recapd-e-animes é vazio (só pip+psutil).
@@ -135,7 +140,7 @@ def download_video(url, out_dir, max_height=720):
             cmd.extend(["--proxy", proxy])
         env = os.environ.copy()
         with ytdlp_vez.vez("anime: download"):
-            subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=1800, env=env)
+            _run_seguro(cmd, check=True, capture_output=True, text=True, timeout=1800, env=env)
         for f in out_dir.glob("source.*"):
             if f.stem == "source" and f.suffix.lower() in (".mp4", ".mkv", ".webm"):  # 30/10: nunca o pedaço source.f396
                 _banda_proxy_gastar(sum(x.stat().st_size for x in out_dir.glob("source.*")) / 1e6 if proxy else 0)
@@ -342,7 +347,7 @@ def fetch_captions(url, out_dir, langs=("pt", "es")):
             ] + (["--proxy", proxy] if proxy else [])
             try:
                 with ytdlp_vez.vez("anime: legenda"):
-                    subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=180)
+                    _run_seguro(cmd, check=True, capture_output=True, text=True, timeout=180)
                 break
             except Exception as e:  # noqa: BLE001 — sem legenda do YT o Whisper transcreve
                 motivo = _motivo_ytdlp(e)
@@ -376,7 +381,7 @@ def fetch_captions(url, out_dir, langs=("pt", "es")):
     if _usa_disj:
         d = _disj_ler()
         d["seguidas"] = int(d.get("seguidas") or 0) + 1
-        if d["seguidas"] >= int(os.environ.get("LEGENDA_FALHAS_MAX", "4")):
+        if d["seguidas"] >= int(os.environ.get("LEGENDA_FALHAS_MAX", "2")):
             d = {"seguidas": 0, "ate": time.time() + float(os.environ.get("LEGENDA_PAUSA_MIN", "90")) * 60}
             logging.warning("[fetch] legenda do YouTube falhou várias vezes seguidas — pausa; os próximos vão direto "
                             "pro Whisper")
@@ -409,7 +414,7 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
 
     # Verifica se o vídeo tem stream de áudio antes de tentar extrair
     try:
-        probe = subprocess.run(
+        probe = _run_seguro(
             ["ffprobe", "-v", "error", "-select_streams", "a:0",
              "-show_entries", "stream=codec_type", "-of", "default=noprint_wrappers=1:nokey=1",
              str(video_path)],
@@ -423,7 +428,7 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
         # Continua tentando extrair mesmo assim (pode ser erro transitório)
 
     try:
-        subprocess.run(
+        _run_seguro(
             ["ffmpeg", "-y", "-t", str(max_seconds), "-i", str(video_path),
              "-vn", "-ac", "1", "-ar", "16000", "-f", "wav", str(wav)],
             check=True, capture_output=True, timeout=600,
@@ -450,7 +455,7 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
                 MKL_NUM_THREADS="1", OMP_NUM_THREADS="1",
                 PYTHONIOENCODING="utf-8", PYTHONUTF8="1",
             )
-            result = subprocess.run(
+            result = _run_seguro(
                 [PY, str(whisper_script), str(wav), msize],
                 capture_output=True, text=True, timeout=whisper_timeout,
                 encoding="utf-8", errors="replace",

@@ -15,6 +15,11 @@ import json
 import logging
 import random
 import subprocess
+try:  # 13/11: subprocess.run com capture_output+timeout não voltava no Windows (rodar_seguro.py, cópia aqui
+    # no bin pra ir junto pro PC2/PC3/STI/Kaggle) — a legenda prendeu o despacho do PC2 por 9 min
+    from rodar_seguro import run as _run_seguro
+except ImportError:
+    _run_seguro = subprocess.run
 import time
 import ytdlp_vez  # COMUM: 1 yt-dlp por vez no PC (rajada bloqueou o IP da casa)
 from datetime import datetime
@@ -258,7 +263,7 @@ def _search_one(query, limit):
     ]
     try:
         with ytdlp_vez.vez("anime: busca"):
-            out = subprocess.run(cmd, capture_output=True, text=True, timeout=180, encoding='utf-8', errors='replace')
+            out = _run_seguro(cmd, capture_output=True, text=True, timeout=180, encoding='utf-8', errors='replace')
     except (subprocess.TimeoutExpired, Exception) as e:
         logging.error(f"[discover] busca falhou ({query!r}): {e}")
         return []
@@ -294,7 +299,7 @@ def _search_one_short(query, limit):
     ]
     try:
         with ytdlp_vez.vez("anime: busca shorts"):
-            out = subprocess.run(cmd, capture_output=True, text=True, timeout=180, encoding='utf-8', errors='replace')
+            out = _run_seguro(cmd, capture_output=True, text=True, timeout=180, encoding='utf-8', errors='replace')
     except (subprocess.TimeoutExpired, Exception) as e:
         logging.error(f"[discover_shorts] busca falhou ({query!r}): {e}")
         return []
@@ -373,7 +378,7 @@ def _aspect_ratio_remote(url, timeout=30):
     ]
     try:
         with ytdlp_vez.vez("anime: orientação"):
-            out = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+            out = _run_seguro(cmd, capture_output=True, text=True, timeout=timeout)
     except (subprocess.TimeoutExpired, Exception) as e:
         logging.warning(f"[discover_shorts] probe orientação falhou ({url}): {e}")
         return None
@@ -569,7 +574,7 @@ def discover_canal(url, top=0):
         cmd += ["--playlist-end", str(CANAL_LISTA_MAX)]
     try:
         with ytdlp_vez.vez("anime: canal"):
-            r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
+            r = _run_seguro(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
                                timeout=CANAL_LISTA_SEG if limitar else 600)
     except subprocess.TimeoutExpired:
         logging.warning(f"[discover_canal] listagem de {url} passou do tempo — uso a lista guardada "
