@@ -2058,3 +2058,13 @@ pilha chegou ao PC2 em 67 s (era 950-1028 s). Relógio do PC1 3 min 42 s atrasad
    pro HP/acer/x200ma. 00:54: "vez de sti: short no STI por 25 min". `STI_SHORT_PEGA_VEZ=0` desliga.
    Falta medir a temperatura de um Short inteiro com a vez reservada.
 4. O STI continua a 100 °C com carga, sem sudo pra limitar a frequência: a causa física (cooler/pasta) é da dona.
+
+## 14/11/2026 01:10 — STI: limite do que dá pra fazer por software (conclusão medida)
+Short das 00:54 com a vez reservada: nenhum navegador de upload/Veo abriu lá (só o telão, parado) — a reserva
+funciona. Mesmo assim 99-100 °C às 00:58, 01:02-01:04. O que roda nesses minutos é a clonagem de voz
+(`voz_clonada_nuvem.py`, RVC), JÁ limitada a 1 núcleo físico (afinidade 0,2) e nice 15. Ou seja: 1 núcleo a 100% basta
+pra levar o processador a 100 °C. Sem sudo não dá pra baixar a frequência/desligar o turbo. **Conclusão: é a
+refrigeração (cooler/pasta térmica/entrada de ar) — só a dona resolve.** Com isso o STI aguenta 1 Short por vez e não
+pode ser gerente nem rodar 2 juntos. Para liberar o limite de frequência por software bastaria a senha de sudo.
+A "falha calada de 2 h" de 13/11 era o ssh sem resposta nesses picos (TimeoutExpired não tratado): agora conta como
+"STI ocupado, tento na próxima".

@@ -496,7 +496,14 @@ def main():
             print("em andamento:", EST.read_text(encoding="utf-8") if EST.exists() else "nada",
                   "| falhas seguidas:", _falhas(), "| STI:", _sti_livre())
             return 0
-        if buscar():
+        try:
+            ocupado = buscar()
+        except subprocess.TimeoutExpired:
+            # 14/11: com o STI no pico (clonagem de voz a 100 °C) o ssh não responde em 60 s; a rodada estourava sem
+            # tratar e a tarefa saía com erro CALADA — 2 h sem uma linha em 13/11. STI lento = ocupado: tenta na próxima.
+            log("STI não respondeu em 60 s (ocupado demais) — tento na próxima rodada")
+            return 0
+        if ocupado:
             return 0
         if acao == "buscar":
             return 0
@@ -505,6 +512,9 @@ def main():
             return 0
         except RuntimeError as e:
             log(f"STI: {e}")
+            return 1
+        except subprocess.TimeoutExpired:
+            log("STI não respondeu no meio do disparo — tento na próxima rodada")
             return 1
         except Exception as e:  # noqa: BLE001
             log(f"[!] disparo do STI falhou: {type(e).__name__}: {e}")
