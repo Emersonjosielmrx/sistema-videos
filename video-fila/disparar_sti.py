@@ -27,6 +27,10 @@ import os
 import shlex
 import shutil
 import subprocess
+try:  # 13/11: subprocess.run com capture_output+timeout não voltava no Windows (rodar_seguro.py)
+    from rodar_seguro import run as _run_seguro
+except ImportError:  # cópia em outra máquina sem o arquivo
+    _run_seguro = subprocess.run
 import sys
 import tempfile
 import time
@@ -62,13 +66,13 @@ def log(m):
 
 
 def _ssh(cmd, timeout=120):
-    r = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", ALVO, cmd], capture_output=True,
+    r = _run_seguro(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", ALVO, cmd], capture_output=True,
                        timeout=timeout, creationflags=_SEM_JANELA)
     return r.returncode, (r.stdout or b"").decode("utf-8", "replace")
 
 
 def _scp(*args, timeout=900):
-    return subprocess.run(["scp", "-q", "-r", "-o", "BatchMode=yes", *args], capture_output=True, timeout=timeout,
+    return _run_seguro(["scp", "-q", "-r", "-o", "BatchMode=yes", *args], capture_output=True, timeout=timeout,
                           creationflags=_SEM_JANELA)
 
 
@@ -97,13 +101,13 @@ def _falhou(vid, motivo):
 def _video_ok(mp4):
     """(ok, texto). 1080x1920 no mínimo (regra da dona) e áudio com som."""
     try:
-        r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+        r = _run_seguro(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
                             "stream=width,height:format=duration", "-of", "json", str(mp4)], capture_output=True,
                            text=True, timeout=60, creationflags=_SEM_JANELA)
         j = json.loads(r.stdout)
         w, h = j["streams"][0]["width"], j["streams"][0]["height"]
         dur = float(j["format"]["duration"])
-        v = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(mp4), "-af", "volumedetect", "-vn", "-f",
+        v = _run_seguro(["ffmpeg", "-hide_banner", "-nostats", "-i", str(mp4), "-af", "volumedetect", "-vn", "-f",
                             "null", "-"], capture_output=True, text=True, encoding="utf-8", errors="replace",
                            timeout=120, creationflags=_SEM_JANELA)
         import re

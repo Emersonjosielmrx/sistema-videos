@@ -94,7 +94,10 @@ def download_video(url, out_dir, max_height=720):
             if m and kaggle_baixar.vivo(5):
                 logging.info(f"[fetch] IP {'em pausa' if falta else (f'esperaria {espera / 60:.0f} min' if espera > 300 else 'de casa poupado')}"
                              " — baixando pelo KAGGLE (outro IP)")
-                v, _legs = kaggle_baixar.baixar(url, m.group(1), out_dir, log=logging.info)
+                # 13/11: fora da pausa o prazo é curto (FORA_PRAZO_SEG, 240 s; medido: volta em ~58 s) — esperar os
+                # 15 min de antes por um baixador sumido segurava o Short inteiro; na pausa não há outra saída: 900 s
+                v, _legs = kaggle_baixar.baixar(url, m.group(1), out_dir, log=logging.info,
+                                                timeout=900 if falta else int(os.environ.get("FORA_PRAZO_SEG", "240")))
                 if v and v.exists():
                     alvo = Path(out_dir) / ("source" + v.suffix.lower())
                     if v != alvo:

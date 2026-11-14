@@ -46,9 +46,15 @@ def main():
         ocioso.log = log
         if not controle.ligado("parceiro", "producao")[0] or not controle.ligado("controlador", "producao")[0]:
             return 0
-        n = ocioso.encher_pilha(max_seg=int(os.environ.get("PILHA_ESPERA_SEG", "420")))
+        # 13/11 (dona: "todos sempre no máximo"): o alvo da pilha acompanha a hora. De dia o que limita é o download;
+        # de madrugada (0-7 h) sobra baixador de fora e IP de casa sem bloqueio — a pilha sobe pra PILHA_ALVO_NOITE
+        # (padrão 14) e o dia começa com trabalho pronto pra todas as máquinas. PILHA_ALVO_NOITE=0 desliga.
+        noite = int(os.environ.get("PILHA_ALVO_NOITE", "14"))
+        if noite and time.localtime().tm_hour < 7:
+            ocioso.PILHA_ALVO = max(ocioso.PILHA_ALVO, noite)
+        n = ocioso.encher_pilha(max_seg=int(os.environ.get("PILHA_ESPERA_SEG", "300")))
         if n:
-            log(f"rodada: +{n} na pilha")
+            log(f"rodada: +{n} na pilha (alvo {ocioso.PILHA_ALVO})")
     except Exception as e:  # noqa: BLE001
         log(f"[!] {type(e).__name__}: {str(e)[:200]}")
     return 0

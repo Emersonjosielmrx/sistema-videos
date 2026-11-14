@@ -15,6 +15,10 @@ import json
 import os
 import re
 import subprocess
+try:  # 13/11: subprocess.run com capture_output+timeout não voltava no Windows (rodar_seguro.py)
+    from rodar_seguro import run as _run_seguro
+except ImportError:  # cópia em outra máquina sem o arquivo
+    _run_seguro = subprocess.run
 import sys
 import time
 from datetime import datetime
@@ -100,7 +104,7 @@ LINUX_MEDIR = (
     "t1,i1=st(); time.sleep(3); t2,i2=st()\n"
     "mem={l.split(':')[0]: int(l.split()[1]) for l in open('/proc/meminfo')}\n"
     "env=dict(os.environ, XDG_RUNTIME_DIR='/run/user/%d' % os.getuid())\n"
-    "srv=subprocess.run(['systemctl','--user','is-active','visualizador'],capture_output=True,text=True,env=env).stdout.strip()\n"
+    "srv=_run_seguro(['systemctl','--user','is-active','visualizador'],capture_output=True,text=True,env=env).stdout.strip()\n"
     "try: e=json.load(open(os.path.expanduser('~/visualizador/estado.json')))\n"
     "except Exception: e={}\n"
     "print(json.dumps({'cpu': round(100*(1-(i2-i1)/max(t2-t1,1))), 'ram_gb': round(mem['MemAvailable']/1048576,1),"
@@ -121,7 +125,7 @@ def _vez_notebook(host):
 def _medir_linux(host):
     """Máquina Linux que não renderiza: só mostra se está no ar, CPU/RAM/disco e o que o visualizador está fazendo."""
     try:
-        r = subprocess.run([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", LIMITES[host].get("ssh", host),
+        r = _run_seguro([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", LIMITES[host].get("ssh", host),
                             "python3", "-"], input=LINUX_MEDIR.encode(), capture_output=True, timeout=60,
                            creationflags=_SEM_JANELA)
         m = json.loads((r.stdout or b"").decode("utf-8", "replace").strip().splitlines()[-1])
@@ -162,7 +166,7 @@ def _medir_kaggle():
             gpu.append((datetime.strptime(m.group(2), "%d/%m %H:%M"), float(m.group(1)), m.group(2)))
     fila = {n: sum(1 for p in (GPU_FILA / n).glob("*") if p.is_dir()) for n in ("pendentes", "enviados", "falhas")}
     try:
-        r = subprocess.run(["schtasks", "/query", "/tn", "GpuKaggleFila", "/fo", "csv", "/nh"], capture_output=True,
+        r = _run_seguro(["schtasks", "/query", "/tn", "GpuKaggleFila", "/fo", "csv", "/nh"], capture_output=True,
                            text=True, timeout=30, creationflags=_SEM_JANELA)
         tarefa = "desab" not in r.stdout.lower() and "disabled" not in r.stdout.lower() if r.returncode == 0 else False
     except Exception:  # noqa: BLE001
@@ -234,7 +238,7 @@ def _rodar(host, script):
     cmd = ["powershell", "-NoProfile", "-EncodedCommand", enc]
     if host != "pc1":
         cmd = [SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", host, " ".join(cmd)]
-    r = subprocess.run(cmd, capture_output=True, timeout=120, creationflags=_SEM_JANELA)
+    r = _run_seguro(cmd, capture_output=True, timeout=120, creationflags=_SEM_JANELA)
     return r.returncode, (r.stdout or b"").decode("utf-8", "replace")
 
 

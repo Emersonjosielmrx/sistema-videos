@@ -19,6 +19,10 @@ rodando no destino = falhou + aviso de erro no Telegram (portão avisos.py).
 import json
 import os
 import subprocess
+try:  # 13/11: subprocess.run com capture_output+timeout não voltava no Windows (rodar_seguro.py)
+    from rodar_seguro import run as _run_seguro
+except ImportError:  # cópia em outra máquina sem o arquivo
+    _run_seguro = subprocess.run
 import sys
 import time
 import uuid
@@ -96,7 +100,7 @@ def _ps_remoto(host, ps, timeout=60):
     import base64
     import maquinas
     enc = base64.b64encode(ps.encode("utf-16-le")).decode()
-    r = subprocess.run([maquinas.SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", host,
+    r = _run_seguro([maquinas.SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", host,
                         "powershell -NoProfile -EncodedCommand " + enc],
                        capture_output=True, timeout=timeout, creationflags=_SEM_JANELA)
     return r.returncode, (r.stdout or b"").decode("utf-8", "replace")
@@ -107,7 +111,7 @@ def processos(host):
     ps = ("Get-CimInstance Win32_Process -Filter \"Name like 'python%' or Name='cmd.exe' or Name='wscript.exe'\" | "
           "ForEach-Object { \"$($_.ProcessId)|$($_.Name)|$($_.CommandLine)\" }")
     if host == "pc1":
-        r = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, timeout=90,
+        r = _run_seguro(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True, timeout=90,
                            encoding="utf-8", errors="replace", creationflags=_SEM_JANELA)
         rc, txt = r.returncode, r.stdout or ""
     else:
@@ -163,7 +167,7 @@ def parar(tarefa, host):
             n += len(alvos)
         alvos = [pid for pid, _n, cmd in processos("pc1") if any(m in cmd for m in marcas_pc1)] if marcas_pc1 else []
     for pid in alvos:
-        subprocess.run(["taskkill", "/T", "/F", "/PID", str(pid)], capture_output=True, creationflags=_SEM_JANELA)
+        _run_seguro(["taskkill", "/T", "/F", "/PID", str(pid)], capture_output=True, creationflags=_SEM_JANELA)
         n += 1
     log(f"parar {tarefa} no {host}: {n} processo(s)")
     return n

@@ -1988,3 +1988,25 @@ NÃO fazer o STI rodar 2 Shorts juntos nem virar gerente enquanto a refrigeraç�
    baixam). `vps_baixador.py`: cada barrada seguida dobra a espera (1, 2, 4... até 12 h, `BARRADO_MAX_H`), guardado em
    disco (o cron relança e a memória zerava: a 3ª VPS devolvia o mesmo pedido em laço); 1 download certo zera.
    Instalado nas 3 (backup `vps_baixador.py.bak_13nov`). Falta medir a espera nova nas próximas horas.
+
+## 13/11/2026 22:00 — manutenção: a causa dos despachos "eternos" + download de fora primeiro
+1. **Causa raiz dos travamentos (py-spy, 21:43):** no Windows, `subprocess.run(capture_output=True, timeout=N)` mata o
+   processo no estouro e espera SEM prazo os canais de saída fecharem. Um rclone/ssh/scp travado prendia a rodada
+   inteira: alimentador do PC2 parado 14 min numa chamada "de 60 s"; despacho do PC3 e do STI com 40-60 min. Novo
+   `video-fila/rodar_seguro.py` (saída em arquivo, mata a ÁRVORE com taskkill /T, espera final com teto) usado em
+   `ocioso.py`, `disparar_sti.py`, `transferencias.py`, `maquinas.py` (18 chamadas) e o mesmo conserto dentro de
+   `kaggle_baixar._rc` (+ `--timeout 45s --contimeout 20s`). Teste: processo com filho pendurado volta em 4 s;
+   listagem gigante com prazo de 4 s volta em 5 s. `RODAR_SEGURO=0` volta ao antigo.
+2. **Download de fora PRIMEIRO** (`ocioso._fonte_para`, `anime_fetch.download_video`): fora da pausa, cada Short
+   esperava a fila de casa (1 download a cada 5 min depois de 2 bloqueios = teto de 12 Shorts/h pro sistema todo;
+   preparo de 1006 s pra 7 MB às 21:21). Medido com as VPS barradas fora do caminho: pedido de fora volta em 58 s.
+   Agora o de fora vai primeiro com prazo de 240 s (`FORA_PRAZO_SEG`); sem resposta = fila de casa. `FORA_PRIMEIRO=0`.
+3. `kaggle_baixar.baixar`: o envio do pedido (100 bytes) tem 3 tentativas de 60 s (às 21:28, 3 de 4 pedidos morreram
+   num `copyto` de 180 s); vídeo que chegou depois do prazo é aproveitado (era apagado e pedido de novo — testado:
+   recolhido em 29 s); consulta a cada 8 s (era 15).
+4. Pilha: alvo 14 da 0 às 7 h (`PILHA_ALVO_NOITE`), no máximo 3 pedidos por rodada, validade 14 h, reserva 16 h.
+   **1ª prova real da pilha única:** 21:27 "STI pega da pilha: Z0fv7_Qsdlg" (preparado pelo PC1 às 21:25).
+5. **STI**: o limite "2 núcleos" de 20:45 estava errado — 0 e 1 são os dois núcleos FÍSICOS (i5-2430M, pares 0,2 e
+   1,3): seguia a 99-100 °C. Agora um núcleo físico (`STI_CPUS=0,2`) e nice 15: caiu pra 71-75 °C com o Short rodando.
+   A trava de calor funcionou sozinha às 21:49 ("STI quente (100 °C) — espera esfriar").
+Disco D: 25 GB livres (outro agente liberou).

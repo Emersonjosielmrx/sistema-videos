@@ -17,6 +17,10 @@ import json
 import shutil
 import os
 import subprocess
+try:  # 13/11: subprocess.run com capture_output+timeout não voltava no Windows (rodar_seguro.py)
+    from rodar_seguro import run as _run_seguro
+except ImportError:  # cópia em outra máquina sem o arquivo
+    _run_seguro = subprocess.run
 import sys
 import time
 from datetime import datetime
@@ -46,7 +50,7 @@ def log(msg):
 
 
 def _deitado_rodando():
-    r = subprocess.run(["powershell", "-NoProfile", "-Command",
+    r = _run_seguro(["powershell", "-NoProfile", "-Command",
                         "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | ForEach-Object { $_.CommandLine }"],
                        capture_output=True, text=True, encoding="utf-8", errors="replace", creationflags=_SEM_JANELA)
     linhas = (r.stdout or "").splitlines()
@@ -107,7 +111,7 @@ def pc2_vaga_short():
 
 
 def _ssh(cmd, timeout=300):
-    return subprocess.run([_SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "pc2", cmd], capture_output=True,
+    return _run_seguro([_SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "pc2", cmd], capture_output=True,
                           stdin=subprocess.DEVNULL, timeout=timeout, creationflags=_SEM_JANELA)
 
 
@@ -130,7 +134,7 @@ def _trazer_prontos_pc2():
                                 f'tar -cf - -C "C:/hipercool-materiais/animes recap/shorts" "{p}"'],
                                stdout=subprocess.PIPE, creationflags=_SEM_JANELA)
         try:
-            r = subprocess.run(["tar", "-xf", "-", "-C", str(SHORTS)], stdin=tar.stdout, capture_output=True,
+            r = _run_seguro(["tar", "-xf", "-", "-C", str(SHORTS)], stdin=tar.stdout, capture_output=True,
                                timeout=600, creationflags=_SEM_JANELA)
         except subprocess.TimeoutExpired:
             tar.kill()
@@ -255,13 +259,24 @@ def _fonte_para(cand, pasta, anime_fetch):
     try:
         import ytdlp_vez
         import kaggle_baixar
-        if ytdlp_vez.pausado() and kaggle_baixar.vivo():
-            log(f"fonte {cand['id']} pelo Kaggle (IP de casa em pausa)")
-            video, legs = kaggle_baixar.baixar(cand["url"], cand["id"], pasta, log=log)
+        # 13/11 (dona: "resolver os gargalos"): o baixador de fora só era usado com o IP de casa em PAUSA. Fora da
+        # pausa, cada download esperava a fila de casa (1 a cada 5 min depois de 2 bloqueios no dia: teto de 12 Shorts
+        # por hora pro sistema inteiro) — preparo de 1006 s pra um vídeo de 7 MB (21:21). Medido 21:27 com as VPS
+        # barradas fora do caminho: pedido de fora volta em 58 s e não toca no IP de casa. Agora o de fora vai
+        # PRIMEIRO sempre que está vivo, com prazo curto (FORA_PRAZO_SEG, padrão 240 s); só sem ele (ou sem resposta
+        # no prazo) usa a fila de casa. FORA_PRIMEIRO=0 volta ao antigo (só na pausa).
+        fora = os.environ.get("FORA_PRIMEIRO", "1") != "0"
+        em_pausa = ytdlp_vez.pausado()
+        if (em_pausa or fora) and kaggle_baixar.vivo(5 if fora else 3):
+            log(f"fonte {cand['id']} pelo baixador de fora ({'IP de casa em pausa' if em_pausa else 'poupa a fila de casa'})")
+            video, legs = kaggle_baixar.baixar(cand["url"], cand["id"], pasta, log=log,
+                                               timeout=900 if em_pausa else int(os.environ.get("FORA_PRAZO_SEG", "240")))
             if video:
                 (Path(pasta) / "cand.json").write_text(json.dumps(cand, ensure_ascii=False), encoding="utf-8")
                 return video, legs + [Path(pasta) / "cand.json"]
-            return None, []
+            if em_pausa:
+                return None, []
+            log(f"baixador de fora não trouxe {cand['id']} no prazo — fila de casa")
     except Exception as e:  # noqa: BLE001 — Kaggle é atalho; o caminho normal segue
         log(f"[!] Kaggle indisponível pra {cand['id']} ({type(e).__name__}: {str(e)[:120]}) — caminho normal")
     video = anime_fetch.download_video(cand["url"], pasta)
@@ -286,7 +301,7 @@ def _prebaixar_pc2(cand):
         r_dir = f"C:/recapd-e-animes/workspace/anime/{nome_pasta}"
         _ssh(f'mkdir "{r_dir}"')
         arquivos = [str(video)] + [str(p) for p in extras]
-        cp = subprocess.run([_SCP, "-q", "-o", "BatchMode=yes", *arquivos,
+        cp = _run_seguro([_SCP, "-q", "-o", "BatchMode=yes", *arquivos,
                              f"pc2:{r_dir}/"], capture_output=True, timeout=300,
                             creationflags=_SEM_JANELA)
         if cp.returncode != 0:
@@ -304,7 +319,7 @@ TRAVA_DISPARO_PC2 = BASE / "estado" / "pc2_disparo.lock"
 # 30/10 (D39): Short preparado com antecedência (fonte + legenda + cand.json já baixados aqui). O preparo levava
 # 438–793 s por Short (03:27–03:51) com o PC2 esperando; com 1 pronto o disparo é só enviar e rodar.
 PRONTOS_PC2 = BASE / "estado" / "pc2_prontos"
-PRONTO_MAX_H = 8
+PRONTO_MAX_H = 14  # 13/11: era 8; o que a madrugada empilha vale até o fim da manhã
 # 13/11 (dona: "o sistema tem de se comportar como um só; todos sempre no máximo"): a pilha era de 1 Short e só do PC2;
 # o PC3 e o STI escolhiam e baixavam NA HORA do disparo (4 a 50 min com a máquina parada: em 13/11 o PC2 entregou 43
 # Shorts, o PC3 10 e o STI 3). Agora é UMA pilha pra todos: o PC1 mantém PILHA_ALVO Shorts já baixados e cada máquina
@@ -362,7 +377,7 @@ def _ler_feitos(nome):
 # mesmo tempo (PC2/alimentador, PC3 e o abastecedor do Kaggle) e o "tentado" só era gravado depois do download —
 # minutos em que outro podia pegar a MESMA fonte (regra: nunca a mesma fonte em 2 canais). Quem escolhe reserva na hora.
 RESERVAS = BASE / "estado" / "fontes_reservadas.json"
-RESERVA_H = 8
+RESERVA_H = 16  # 13/11: era 8; tem de passar a validade da pilha (PRONTO_MAX_H 14) — senão o mesmo vídeo é escolhido 2x
 
 
 def _reservados():
@@ -542,7 +557,7 @@ def _enviar_pronto_pc2(cand, pasta):
     nome_pasta = f"{cand['id']}_{_slug(cand['title'])}"
     r_dir = f"C:/recapd-e-animes/workspace/anime/{nome_pasta}"
     _ssh(f'mkdir "{r_dir}"')
-    cp = subprocess.run([_SCP, "-q", "-o", "BatchMode=yes", *arquivos, f"pc2:{r_dir}/"], capture_output=True,
+    cp = _run_seguro([_SCP, "-q", "-o", "BatchMode=yes", *arquivos, f"pc2:{r_dir}/"], capture_output=True,
                         timeout=300, creationflags=_SEM_JANELA)
     if cp.returncode != 0:
         log(f"[!] envio do preparado: SCP falhou: {(cp.stderr or b'').decode('utf-8', 'replace')[:200]}")
@@ -561,7 +576,7 @@ def encher_pilha(max_seg=600):
     PILHA_PARALELA=0 desliga. Devolve quantos entraram na pilha."""
     if os.environ.get("PILHA_PARALELA", "1") == "0" or PILHA_ALVO <= 1:
         return 0
-    falta_n = PILHA_ALVO - len(_prontos_pc2())
+    falta_n = min(PILHA_ALVO - len(_prontos_pc2()), int(os.environ.get("PILHA_POR_RODADA", "3")))
     if falta_n <= 0 or shutil.disk_usage(str(BASE)).free / 1e9 < PILHA_DISCO_MIN_GB:
         return 0
     import concurrent.futures as cf
@@ -761,7 +776,7 @@ def _disparar_parceiro_pc2_travado():
     # o PC2 lê cobertura/narrador do config dele (o sincronizar_bin não copia config/)
     # 12/11: a tabela de vozes x nicho (narradores_nichos.json) vai junto no MESMO scp — antes só o parceiro.json ia e o
     # PC2 escolhia a voz pela tabela velha: os canais novos de negócios saíram com Pica-Pau e Chapolin
-    cp = subprocess.run([_SCP, "-q", "-o", "BatchMode=yes", str(PROD / "config" / "parceiro.json"),
+    cp = _run_seguro([_SCP, "-q", "-o", "BatchMode=yes", str(PROD / "config" / "parceiro.json"),
                          str(PROD / "config" / "narradores_nichos.json"),
                          *([str(PROD / "config" / "narradores_ajustado.json")]  # 13/11: ranking de voz ajustado
                            if (PROD / "config" / "narradores_ajustado.json").exists() else []),
@@ -831,7 +846,7 @@ def _pc3(script, timeout=300):
 
 
 def _scp(*args, timeout=600):
-    return subprocess.run([_SCP, "-q", "-r", "-o", "BatchMode=yes", *args], capture_output=True, timeout=timeout,
+    return _run_seguro([_SCP, "-q", "-r", "-o", "BatchMode=yes", *args], capture_output=True, timeout=timeout,
                           creationflags=_SEM_JANELA)
 
 

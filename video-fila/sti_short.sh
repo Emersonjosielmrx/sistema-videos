@@ -19,9 +19,11 @@ export APPLIO_DIR="$HOME/hipercool-materiais/tools/applio" RAIZ_WIN="$HOME"
 export VOZES_PY_NUVEM="$HOME/hipercool-materiais/python/venv_vozes/bin/python"
 # 13/11: o STI desligava por calor (99-100 C com o Short usando os 4 nucleos). O Short fica em STI_NUCLEOS nucleos
 # (padrao 2: 0-1) e o ffmpeg em 2 threads; mais lento, mas a maquina nao cai. STI_NUCLEOS=4 volta ao antigo.
-NUC="${STI_NUCLEOS:-2}"
-export OMP_NUM_THREADS="$NUC" MKL_NUM_THREADS="$NUC" FFMPEG_THREADS="$NUC"
-nice -n 5 taskset -c 0-$((NUC-1)) timeout 7200 "$HOME/hipercool-materiais/python/venv_vozes/bin/python" -X utf8 anime_auto.py \
+# 13/11 21:50: "0-1" eram os 2 nucleos FISICOS inteiros (i5-2430M: pares 0,2 e 1,3) e a maquina ia a 100 C igual.
+# Agora UM nucleo fisico (STI_CPUS, padrao "0,2") e prioridade minima; "0-3" volta a usar tudo.
+CPUS="${STI_CPUS:-0,2}"
+export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 FFMPEG_THREADS=2
+nice -n 15 taskset -c "$CPUS" timeout 7200 "$HOME/hipercool-materiais/python/venv_vozes/bin/python" -X utf8 anime_auto.py \
     --modo short --fonte "$FONTE" --engine local --limit 1 --top 5 --id "$ID" > "$LOG" 2>&1
 RC=$?
 echo "$RC" > "$BASE/logs/sti_short_$ID.fim"

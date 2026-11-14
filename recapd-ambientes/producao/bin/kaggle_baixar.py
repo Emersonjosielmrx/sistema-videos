@@ -26,14 +26,36 @@ SEM_JANELA = 0x08000000
 
 
 def _rc(*args, timeout=180):
-    try:
-        r = subprocess.run([RCLONE, *args], capture_output=True, text=True, timeout=timeout, stdin=subprocess.DEVNULL,
-                           creationflags=SEM_JANELA, env={**__import__("os").environ, "RCLONE_DRIVE_USE_TRASH": "false"})
-    except subprocess.TimeoutExpired:  # Drive lento (30/10 11:27: lsf > 60 s): quem chama trata como "ainda não"
-        raise RuntimeError(f"rclone {args[0]}: passou de {timeout} s")
-    if r.returncode != 0:
-        raise RuntimeError(f"rclone {args[0]}: {r.stderr[-200:]}")
-    return r.stdout
+    # 13/11 (py-spy, 21:43): o alimentador do PC2 ficou 14 min preso AQUI com timeout de 60 s. No Windows o
+    # subprocess.run(capture_output=True, timeout=...) mata o rclone no estouro e depois espera SEM prazo os canais de
+    # saída fecharem — se o rclone travado não morre na hora (ou deixou filho com o canal aberto), nunca volta. Foi
+    # isso que fez rodadas "de 60 s" durarem 15-27 min e deixou o PC2 sem Short. Agora a saída vai pra ARQUIVO (sem
+    # canal pra esperar), o rclone tem o próprio prazo de rede (--timeout/--contimeout) e, no estouro, a árvore dele
+    # é morta com taskkill /T e a espera final tem teto.
+    import tempfile as _tf
+    rede = [] if any(str(a).startswith("--timeout") for a in args) else ["--timeout", "45s", "--contimeout", "20s",
+                                                                         "--low-level-retries", "3"]
+    with _tf.TemporaryFile() as so, _tf.TemporaryFile() as se:
+        p = subprocess.Popen([RCLONE, *args, *rede], stdout=so, stderr=se, stdin=subprocess.DEVNULL,
+                             creationflags=SEM_JANELA,
+                             env={**__import__("os").environ, "RCLONE_DRIVE_USE_TRASH": "false"})
+        try:
+            p.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:  # Drive lento (30/10 11:27: lsf > 60 s): quem chama trata como "ainda não"
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(p.pid)], capture_output=True,
+                           creationflags=SEM_JANELA, timeout=30)
+            try:
+                p.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                pass
+            raise RuntimeError(f"rclone {args[0]}: passou de {timeout} s")
+        so.seek(0)
+        se.seek(0)
+        saida = so.read().decode("utf-8", "replace")
+        erro = se.read().decode("utf-8", "replace")
+    if p.returncode != 0:
+        raise RuntimeError(f"rclone {args[0]}: {erro[-200:]}")
+    return saida
 
 
 def vivo(max_min=3):
@@ -54,13 +76,33 @@ def baixar(url, vid, pasta, max_height=720, legendas=("pt", "es"), timeout=900, 
     try:
         (tmp / f"{vid}.json").write_text(json.dumps({"id": vid, "url": url, "max_height": max_height,
                                                       "legendas": list(legendas)}), encoding="utf-8")
-        _rc("purge", f"{RAIZ}/prontos/{vid}", timeout=60) if _existe(f"{RAIZ}/prontos/{vid}") else None
-        _rc("copyto", str(tmp / f"{vid}.json"), f"{RAIZ}/pedidos/{vid}.json")
+        # 13/11: vídeo que chegou DEPOIS do prazo de um pedido anterior (kqVnyjl38iM, 21:37: pronto no Drive e jogado
+        # fora aqui) é aproveitado: com ok.json lá não pede de novo, o laço abaixo recolhe na 1ª volta.
+        ja = set()
+        try:
+            ja = set(_rc("lsf", f"{RAIZ}/prontos/{vid}", timeout=60).split())
+        except RuntimeError:
+            pass
+        if "ok.json" not in ja:
+            _rc("purge", f"{RAIZ}/prontos/{vid}", timeout=60) if ja else None
+        # 13/11 21:28: 3 de 4 pedidos em paralelo morreram AQUI ("copyto: passou de 180 s") — um envio de 100 bytes
+        # que leva 5 s travou no Drive e o Short inteiro foi perdido. Agora 60 s por tentativa, 3 tentativas.
+        for _tent in ((1, 2, 3) if "ok.json" not in ja else ()):
+            try:
+                _rc("copyto", str(tmp / f"{vid}.json"), f"{RAIZ}/pedidos/{vid}.json", timeout=60)
+                break
+            except RuntimeError:
+                if _tent == 3:
+                    raise
+                time.sleep(3)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     t0 = time.time()
+    primeira = "ok.json" in ja
     while time.time() - t0 < timeout:
-        time.sleep(15)
+        if not primeira:
+            time.sleep(8)  # 13/11: era 15 s; o download lá leva ~7 s
+        primeira = False
         try:
             nomes = set(_rc("lsf", f"{RAIZ}/prontos/{vid}", timeout=60).split())
         except RuntimeError:
