@@ -415,3 +415,31 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
      tentativa de postagem. Guardar a data e não repetir por algumas horas.
 - **Confiança:** média (lido, não reproduzido — precisa de transcrição real).
 
+## A16. Legenda MIX (modo "inteligente"): quase metade das palavras é tratada como palavra FORTE — o destaque perde o efeito
+- **Onde:** `recapd-ambientes/producao/bin/legenda_mix.py`, `peso` (~linha 96), `EMOCAO` (~42), `plano` (~124).
+- **Prova (rodado, `peso` palavra a palavra):** na frase "Naquele dia o rei morreu. Depois disso tudo mudou! Então Jin
+  voltou para casa e ninguém acreditou nele." saem com peso 3 (o máximo): **Naquele**, rei, morreu., **Depois**,
+  tudo, mudou!, **Então**, Jin — **8 de 18 palavras**.
+- **Causas:**
+  1. `lw[:1].isupper() and len(lw) >= 3` dá peso 3 a toda palavra com maiúscula — inclusive a 1ª de cada frase
+     ("Naquele", "Depois", "Então", "Quando", "Durante"). A ideia era pegar NOME próprio.
+  2. `EMOCAO` tem palavras muito comuns: `tudo`, `nada`, `nunca`, `verdade`, `rei`, `poder\w*` (pega "poderia",
+     "poderiam", "poder" verbo), `deus\w*`, `am(ou|ava)`.
+  3. Palavra que termina em "!" ou "?" ganha peso 3 mesmo sendo "nele?" ou "isso!".
+- **O que o peso 3 faz (em `plano`):** desenho recorte/caixa, cor quente, pop de entrada 1,40x, giro maior em metade
+  dos casos, sublinhado em metade. Com metade das palavras assim, a legenda inteira pula e gira — não há contraste
+  entre a palavra que importa e as outras, que é a razão de existir do modo "inteligente" (e ele é medido contra o
+  "livre" no placar: se os dois se comportam quase igual, o teste não mede nada).
+- **Conserto sugerido:**
+  1. Maiúscula só conta se a palavra NÃO abre frase (a anterior não termina em `.!?…` e não é a 1ª do vídeo) —
+     mesma regra do `anime_formatos._cores_dos_nomes`. `blocos`/`plano` recebem as palavras em ordem, dá pra passar o
+     índice ou a palavra anterior pro `peso`.
+  2. Tirar de `EMOCAO`: `tudo`, `nada`, `nunca`, `jamais`, `verdade`, `rei`, `rainha`, `poder\w*` (deixar `poderoso`,
+     `poderosa`), `am(ou|ava)`.
+  3. Teto: no máximo 1 palavra forte a cada 4 (se a anterior forte foi há menos de 3 blocos, a atual desce pra 2).
+  4. "!"/"?" no fim só sobe o peso se a palavra tiver 5+ letras e não estiver em `CURTAS`.
+- **Observação (não é defeito, só registro):** cada adesivo fica no mínimo 0,3 s na tela; em fala rápida o próximo
+  entra antes (13% dos blocos no sorteio, até 0,2 s juntos). Como cada um vai num lugar diferente, deve ser o
+  "rastro" pretendido — conferir num vídeo se não encavalam.
+- **Confiança:** alta no comportamento (rodado); o ganho visual você julga no vídeo.
+
