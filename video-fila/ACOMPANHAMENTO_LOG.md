@@ -1975,3 +1975,16 @@ Feito: `disparar_sti._sti_livre` não manda Short com o STI acima de 70 °C (STI
 upload abertos (STI_CHROMES_MAX); `sti_short.sh` roda o Short em 2 núcleos (taskset, STI_NUCLEOS=4 volta). Sem sudo lá:
 não dá pra desligar o turbo nem limitar a frequência daqui (precisa da senha na máquina).
 NÃO fazer o STI rodar 2 Shorts juntos nem virar gerente enquanto a refrigeração não for vista.
+
+## 13/11/2026 21:25 — manutenção: PC2 parado por erro meu (consertado) + as 3 VPS só atrasavam os downloads
+1. **Regressão minha:** das 19:56 às ~21:10 o PC2 ficou SEM Short. O enchimento da pilha que pus às 19:40 dentro do
+   `alimentar_pc2.py` (laço de até 12 min + pedido em paralelo) rodava sob a trava do alimentador: a rodada de 20:33
+   passou 27 min esperando download e nenhuma outra entrava pra disparar. Consertado: o alimentador voltou a disparar
+   primeiro e preparar só 1; a pilha grande é de OUTRA tarefa (`encher_pilha.py`, tarefa `EncherPilha` de 5 em 5 min,
+   trava própria). Desliga: estado\encher_pilha.off.
+2. **Causa de fundo (anterior às minhas mudanças):** o PC1 espera 178 s em mediana (até 308 s) por um download que leva
+   10 s lá fora. As 3 VPS baixadoras são barradas pelo YouTube em TODAS as tentativas (hoje: 14, 13 e 52; 0 downloads)
+   e cada uma pegava o pedido, falhava e devolvia — o vídeo perdia a vez até cair numa sessão do Kaggle (as únicas que
+   baixam). `vps_baixador.py`: cada barrada seguida dobra a espera (1, 2, 4... até 12 h, `BARRADO_MAX_H`), guardado em
+   disco (o cron relança e a memória zerava: a 3ª VPS devolvia o mesmo pedido em laço); 1 download certo zera.
+   Instalado nas 3 (backup `vps_baixador.py.bak_13nov`). Falta medir a espera nova nas próximas horas.

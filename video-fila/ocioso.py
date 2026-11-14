@@ -665,8 +665,8 @@ def preparar_proximo_pc2():
         f.close()
         return False
     try:
-        if len(_prontos_pc2()) >= max(1, PILHA_ALVO):
-            return False  # pilha cheia
+        if len(_prontos_pc2()) >= 1:
+            return False  # já tem 1 pronto (a pilha maior é do encher_pilha.py, fora da rodada do alimentador)
         if shutil.disk_usage(str(BASE)).free / 1e9 < PILHA_DISCO_MIN_GB:
             return False  # disco no fim: não empilha (quem dispara na hora ainda funciona)
         sys.path.insert(0, str(PROD / "bin"))

@@ -83,8 +83,31 @@ def baixar(p):
             "legendas": sorted(f.name for f in d.glob("cap*.vtt"))}
 
 
+_BARRADO_ARQ = AQUI / "baixador" / "barrado.json"
+
+
+def _barrado_ler():
+    try:
+        d = json.loads(_BARRADO_ARQ.read_text(encoding="utf-8"))
+        return int(d.get("seguidas") or 0), float(d.get("ate") or 0)
+    except (OSError, ValueError):
+        return 0, 0.0
+
+
+def _barrado_gravar(seguidas, ate):
+    try:
+        _BARRADO_ARQ.parent.mkdir(parents=True, exist_ok=True)
+        _BARRADO_ARQ.write_text(json.dumps({"seguidas": seguidas, "ate": ate}), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def _barradas(mais=0):
+    return _barrado_ler()[0] + mais
+
+
 def main():
-    barrado_ate, sinal = 0.0, 0.0
+    barrado_ate, sinal = _barrado_ler()[1], 0.0
     log(f"no ar ({QUEM})")
     while True:
         if time.time() - sinal > 120:
@@ -122,14 +145,24 @@ def main():
         erro = str(res.get("erro") or "")
         if erro.startswith("BARRADO") or any(s in erro for s in ("Sign in to confirm", "not a bot", "429",
                                                                   "Too Many Requests", "403", "Forbidden")):
-            barrado_ate = time.time() + 3600
+            # 13/11: as 3 VPS foram barradas em TODAS as tentativas do dia (14, 13 e 52; 0 downloads) e cada uma
+            # pegava 1 pedido por hora só pra devolver — o vídeo perdia a vez e o PC1 esperava 8 min por um download de
+            # 5 s (quem baixa de verdade são as sessões do Kaggle). Cada barrada seguida DOBRA a espera (1, 2, 4... até
+            # BARRADO_MAX_H, padrão 12 h); 1 download que dê certo zera. O estado fica em disco (o cron relança o
+            # processo e a memória zerava: a 3ª VPS devolvia o mesmo pedido em laço).
+            seguidas = _barradas(+1)
+            horas = min(float(os.environ.get("BARRADO_MAX_H", "12")), 2 ** (seguidas - 1))
+            barrado_ate = time.time() + horas * 3600
+            _barrado_gravar(seguidas, barrado_ate)
             try:
                 rc("moveto", tomado, f"{BX}/pedidos/{nome}", timeout=120)
             except Exception:  # noqa: BLE001
                 pass
             shutil.rmtree(TRAB / p["id"], ignore_errors=True)
-            log(f"IP barrado pelo YouTube — {p['id']} devolvido; 1 h sem baixar")
+            log(f"IP barrado pelo YouTube — {p['id']} devolvido; {horas:g} h sem baixar ({seguidas}ª seguida)")
             continue
+        if not erro:
+            _barrado_gravar(0, 0)
         res.update(id=p["id"], em=_agora(), por=QUEM)
         d = TRAB / p["id"]
         d.mkdir(parents=True, exist_ok=True)
