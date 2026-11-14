@@ -20,7 +20,10 @@ import registro_drive  # noqa: E402
 ANIME = Path(r"D:\hipercool-materiais\anime")
 DRIVE = "manhwa-drive:videos-backup/hipercool-materiais/anime"
 RCLONE = r"D:\tools\rclone.exe"
-DIAS = 3
+# 14/11 (dona: "por que perdemos 10 GB de ontem pra hoje?"): o disco oscila 7-24 GB por dia e o anime\ tinha 4,9 GB de
+# fontes com mais de 12 h (199). A fonte do Short é usada logo depois do download e volta do Drive se precisar
+# (anime_fetch.download_video). 3 -> 1 dia. FONTES_DRIVE_DIAS muda.
+DIAS = float(__import__("os").environ.get("FONTES_DRIVE_DIAS", "1"))
 FONTE = re.compile(r"^source\.(mp4|mkv|webm)$", re.I)
 SOBRA = re.compile(r"^source\.(temp\.|f\d+\.).+|.+\.(part|ytdl)$", re.I)
 

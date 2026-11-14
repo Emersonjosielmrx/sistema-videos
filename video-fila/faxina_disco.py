@@ -43,7 +43,8 @@ VELHOS_EXTRA = [(Path(r"D:\postador-de-videos\logs\yt_web"), 7),  # prints de ca
                 (Path(r"D:\video-fila\produto_tmp"), 3),  # montagem dos vídeos de produto
                 # 12/11 (disco em 7 GB segurava 6 longos): cópia baixada do Drive só para postar; o catalogo.liberar
                 # apaga, mas quando a postagem cai no meio ela fica (6,8 GB, 138 com mais de 2 dias). Baixa de novo.
-                (Path(r"D:\postador-de-videos\cache_reuso"), 2),
+                # 14/11 (disco 11 GB, cache voltou a 2,3 GB em 1 dia): 2 -> 1 dia. FAXINA_REUSO_DIAS muda.
+                (Path(r"D:\postador-de-videos\cache_reuso"), float(os.environ.get("FAXINA_REUSO_DIAS", "1"))),
                 (Path(os.path.expandvars(r"%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache")), 0),  # driver refaz
                 (Path(r"C:\Program Files (x86)\Google\GoogleUpdater\crx_cache"), 3)]  # instalador já aplicado
 PLAYWRIGHT = Path(os.path.expandvars(r"%LOCALAPPDATA%\ms-playwright"))  # junção pra D:\caches\ms-playwright

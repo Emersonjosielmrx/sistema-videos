@@ -298,3 +298,23 @@
 - prova: Em PReloN5HWSI e oLBasz5Hp16, textos em inglês ('BLACK MONEY', 'YOU WANT ME') mantiveram-se visíveis sob a legenda em português.
 - onde: bin/delogo_scan.py
 - como testar: Processar painéis contendo balões de fala estrangeiros e confirmar se a rotina de delogo/máscara limpa o balão antes do render da legenda.
+
+## 14/11 05:30 [CERTEZA] Impedir sobreposição de stickers e legendas sobre o rosto de personagens (gemini/gemini-3.5-flash)
+- prova: Júri de legibilidade indicou que stickers como 'E DEIXA' e 'MAS QUERIAM' (AP_c0bbMmRI), 'PASSANDO' (8fM6Ay7OJho) e 'OS GURI?' (KQMPGyt6PxA) cobriram olhos e rostos em close-ups dramáticos.
+- onde: bin/fx_clips.py (função de cálculo de posição de stickers e legendas)
+- como testar: Renderizar amostragem de 5 minutos dos vídeos com erro e rodar o júri de legibilidade para confirmar que nenhum elemento gráfico colide com a face.
+
+## 14/11 05:30 [CERTEZA] Corrigir enquadramento focal vertical para evitar decapitação e emendas de fundo (gemini/gemini-3.5-flash)
+- prova: Relatórios de movimento e legibilidade apontam cortes severos no topo da cabeça (8fM6Ay7OJho e KQMPGyt6PxA) e emenda vertical dura dividindo o céu azul ao meio no pan (8fM6Ay7OJho q30 e KQMPGyt6PxA).
+- onde: bin/fx_clips.py (ancoragem de crop 16:9 e geração de pans)
+- como testar: Gerar trechos de pan nos segmentos afetados e verificar visualmente se a cabeça do personagem é preservada no terço superior sem divisões de textura no cenário.
+
+## 14/11 08:18 [CERTEZA] Trava anti-colisão de stickers e textos sobre rostos de personagens (gemini/gemini-3.5-flash)
+- prova: Nos vídeos LUQDew946Ps (legibilidade 3.5) e KQMPGyt6PxA (legibilidade 4.5), stickers como 'BOTANDO', 'o MALUCO' e 'OS GURI?' foram estampados diretamente sobre olhos e rostos dos personagens.
+- onde: bin/mascote_overlay.py e bin/fx_clips.py na função de posicionamento de overlays/stickers
+- como testar: Gerar render de amostragem com detecção facial ativa e verificar se o bounding box do sticker é deslocado para o terço inferior quando detecta área focal de rosto.
+
+## 14/11 08:18 [CERTEZA] Limpeza automatizada de legendas originais espelhadas na fonte (gemini/gemini-3.5-flash)
+- prova: No vídeo LUQDew946Ps (legibilidade 3.5, q06), a legenda oficial em português colidiu visualmente com o texto espelhado da fonte original em inglês ('tuov tlust e'mraG ton e'tI').
+- onde: bin/delogo.py ou bin/anime_legendas.py antes da etapa de queimado da legenda final
+- como testar: Processar trechos que contenham texto queimado no material bruto e confirmar a aplicação do delogo/máscara antes da sobreposição da legenda em português.

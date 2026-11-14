@@ -40,7 +40,8 @@
   "_flow": {
     "emersonjosiel2032": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwaversethai": [
       "x200ma",
@@ -48,18 +49,21 @@
     ],
     "inovaremanhwaverseviet": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwaversehindi": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwaverserussian": [
       "x200ma"
     ],
     "inovaremanhwaversefrench": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwaverseita": [
       "x200ma",
@@ -71,19 +75,23 @@
     ],
     "inovaremanhwaverseind": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwaverseing": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwaverse": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "inovaremanhwabr": [
       "x200ma",
-      "acer"
+      "acer",
+      "hp"
     ],
     "mentoriaiapro": [
       "x200ma",
@@ -106,6 +114,39 @@
     ],
     "ig__lucrocomia_": [
       "desktop"
+    ],
+    "canalanimescomia": [
+      "hp"
+    ],
+    "emersonjosiel2027": [
+      "hp"
+    ],
+    "revolutionemerson1": [
+      "hp"
+    ],
+    "revolutionemerson2": [
+      "hp"
+    ],
+    "emersonjosiel2029": [
+      "hp"
+    ],
+    "emersonjosiel2030": [
+      "hp"
+    ],
+    "maiteanajessicajesus": [
+      "hp"
+    ],
+    "emersonjosiel2026": [
+      "hp"
+    ],
+    "emersonjosiel0": [
+      "hp"
+    ],
+    "emersonjosiel2033": [
+      "hp"
+    ],
+    "empressinovare": [
+      "hp"
     ]
   },
   "inovaremanhwaversethai": {
@@ -138,6 +179,13 @@
     "sti": {
       "google": true,
       "tiktok": true
+    },
+    "hp": {
+      "google": true,
+      "youtube": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "inovaremanhwaverseviet": {
@@ -172,6 +220,9 @@
     "hp": {
       "google": true,
       "youtube": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "inovaremanhwaversehindi": {
@@ -205,6 +256,10 @@
       "tiktok": true
     },
     "hp": {
+      "google": true,
+      "youtube": true
+    },
+    "asus": {
       "google": true,
       "youtube": true
     }
@@ -241,6 +296,10 @@
     },
     "hp": {
       "google": true
+    },
+    "asus": {
+      "google": true,
+      "youtube": true
     }
   },
   "inovaremanhwaversefrench": {
@@ -515,7 +574,8 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
     }
   },
   "jogoscomia": {
@@ -614,7 +674,8 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
     }
   },
   "canalhistoriacomia": {
@@ -647,7 +708,8 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
     }
   },
   "aulacomia": {
@@ -678,7 +740,8 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
     }
   },
   "gameoftroneskingsroadbrasil": {
@@ -707,7 +770,8 @@
       "tiktok": true
     },
     "hp": {
-      "youtube": false
+      "youtube": false,
+      "google": true
     }
   },
   "canalanimescomia": {
@@ -767,7 +831,8 @@
       "google": true
     },
     "hp": {
-      "youtube": false
+      "youtube": false,
+      "google": true
     }
   },
   "en1653964": {
@@ -856,7 +921,8 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
     }
   },
   "rezaulkarimul355": {
@@ -1302,7 +1368,8 @@
       "tiktok": true
     },
     "hp": {
-      "youtube": false
+      "youtube": false,
+      "google": true
     }
   },
   "aulasrevolution": {
@@ -1388,7 +1455,8 @@
       "tiktok": true
     },
     "hp": {
-      "youtube": false
+      "youtube": false,
+      "google": true
     }
   },
   "emersonjosielmrx1995": {
@@ -1727,7 +1795,8 @@
       "tiktok": true
     },
     "hp": {
-      "youtube": false
+      "youtube": true,
+      "google": true
     }
   },
   "emersonjosiel0": {

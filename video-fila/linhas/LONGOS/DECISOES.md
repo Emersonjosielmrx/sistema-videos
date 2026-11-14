@@ -1,5 +1,9 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 14/11 08:18 [melhorador gemini/gemini-3.5-flash] EXPERIMENTO aberto 'capitulos_mais_frequentes': A={} x B={'capitulos.a_cada_s': 240} — Reduzir o intervalo entre capítulos de 300s para 240s aumenta a frequência de vinhetas/tarjas visuais e entradas da mascote, dinamizando o ritmo no meio dos longos e melhorando a retenção (% assistido).
+
+- 14/11 07:26 [melhorador] EXPERIMENTO 'mascote_voz_thalita' fechado: vence A (B deixou o render 1.7x mais lento)
+
 - 13/11 00:12 [melhorador código ag-opus-5-5] mascote_overlay.py: Descarte automático de overlays na transição de cena e filtro de memes externos (46 linhas). Desfazer: copiar mascote_overlay.py.bak_20261113_001251_melhorador
 
 - 12/11 23:40 [melhorador código ag-opus-5-5] fx_clips.py: Movimento de câmera dinâmico obrigatório nos primeiros 6s do gancho (26 linhas). Desfazer: copiar fx_clips.py.bak_20261112_234032_melhorador

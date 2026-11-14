@@ -1248,3 +1248,88 @@
 - prova: one-piece q05 (Luffy sem cabeça e sem chapéu enquanto a narração diz 'DO CAPITÃO DE PALHA') e cyberpunk q14 (rosto do personagem cortado).
 - onde: Cálculo do crop 9:16 (centro do recorte) na etapa de reenquadramento.
 - como testar: Detectar o rosto/cabeça com a visão ou centralizar no maior movimento e impedir recorte que deixe a testa fora do quadro. Re-renderizar o one-piece e conferir q05.
+
+## 14/11 04:02 PROPOSTA [CERTEZA] Piso de contraste nas palavras inativas/secundárias da legenda palavra a palavra (cw/claude-sonnet-5-5)
+- prova: Aparece em 3 Shorts do lote. sem-obra-3cda55: q10 'AO REDOR', q11 'INTRUSO', q12 'DE SORTE' (azul/roxo escuro) e q14 'FORA' (inativa translúcida). sem-obra-3df933: q09 'MOEDA' verde sobre cinza. sem-obra-e21230: q06 'ARREBENTA' azul-acinzentado sobre fundo escuro. Todas ficam quase ilegíveis no celular.
+- onde: Gerador da legenda ASS/overlay palavra a palavra (função que escolhe a cor por preset/palavra). Provável módulo de legenda do pipeline CORTES; não tenho o nome exato da função.
+- como testar: Impor uma lista de cores permitidas (branco, amarelo, ciano claro) ou calcular a luminância da cor contra o quadro e subir para um mínimo de contraste. Contorno preto de pelo menos 6 px. Palavra inativa com opacidade mínima de 80%. Renderizar os 3 Shorts acima e conferir os mesmos quadros (q10-q14, q09, q06). Isso é diferente da preferência da dona por cores por personagem: as cores continuam, só com piso de contraste.
+
+## 14/11 04:02 PROPOSTA [GOSTO] Legenda cobrindo rosto ou olhos do apresentador/avatar (cw/claude-sonnet-5-5)
+- prova: sem-obra-58d8af q04 ('SEM' sobre a boca) e q05 ('PERCEBER' e 'ELA TOTALMENTE' sobre testa, olhos e boca). sem-obra-3df933 q18 ('PORQUE' sobre o rosto do avatar). Aparece em 2 Shorts, ambos com apresentador ou avatar em cena.
+- onde: Posicionamento da legenda (coordenada Y) e posição do avatar no composer de cena.
+- como testar: Medir a caixa do rosto, por detecção simples ou pela posição conhecida do avatar, e deslocar a legenda para a zona livre mais próxima. Rodar nos dois Shorts e comparar q04, q05 e q18. Medir uma coisa de cada vez, junto com a proposta de contraste só se der para separar o efeito.
+
+## 14/11 05:04 PROPOSTA [CERTEZA] Fixar paleta de alto contraste (amarelo/branco 100% opaco com borda preta) na legenda dinâmica e desativar cores escuras/translúcidas (gemini-4-argon)
+- prova: Legendas saindo com cores escuras ou translúcidas de baixa leitura em 3 Shorts do lote: azul-acinzentado translúcido em sem-obra-8aa5d4_cap1_20261111 (q04 'COBRIMOS'), verde-claro opaco sem contraste em sem-obra-ffb7b5_cap1_20261111 (q05 'LEVANDO') e magenta escuro / baixa opacidade em sem-obra-b37837_cap1_20261111 (q01 'UM MOTOR', q08 'DESSA').
+- onde: Renderizador de legendas ASS/FFmpeg ou componente de legenda do pipeline de cortes (geração de estilo/paleta por palavra)
+- como testar: Renderizar novamente os trechos q04 de 8aa5d4, q05 de ffb7b5 e q01/q08 de b37837 verificando que 100% das palavras usam apenas #FFFF00 ou #FFFFFF com alfa 1.0 e borda preta >= 6 px.
+
+## 14/11 05:04 PROPOSTA [CERTEZA] Travar posição vertical da legenda (y=1200..1450) e remover cards/templates de status (ALERTA / ANTES-AGORA) em vídeos de curiosidades e pesca (gemini-4-argon)
+- prova: Legendas e cards gráficos cobrindo rostos, pontos focais e marca d'água ou cortados na borda em 3 Shorts: legenda no rosto em sem-obra-8aa5d4_cap1_20261111 (q07, q08, q09); card 'ALERTA / MO' cortado sobre '@cenareact-f3j' e tarja sobre boca do peixe em sem-obra-ffb7b5_cap1_20261111 (q06, q14); e card RPG 'ANTES: DEPOIS DESSA TRAQUITANA / AGORA: O CAIAQUE NUM ⚡' cortado na margem esquerda e cobrindo o rosto do pescador e '@cenareact-f3j' em sem-obra-b37837_cap1_20261111 (q09, q10, q11).
+- onde: Módulo de composição de overlays/stickers e posicionamento Y da legenda no pipeline de renderização
+- como testar: Gerar folha de quadros de ffb7b5 e b37837 confirmando ausência de cards sobrepostos ao @ do canal/rostos, respeito à margem lateral >= 60 px e legendas confinadas no terço inferior.
+
+## 14/11 06:42 PROPOSTA [CERTEZA] Cortar a tela final promocional da fonte e vãos pretos da linha do tempo (cw/claude-sonnet-5-5)
+- prova: his-demon-devours: a cena 6 inteira (q16 a q18) é o anúncio do 'Cinefy' com a narração do clímax por cima, e q15 é um fade-to-black com tela preta. as-the-gods-will: ~3,7 s de fundo preto na abertura (q01) e na cena de q13. jujutsu-kaisen q09: quase preto.
+- onde: Seleção e corte de cenas do pipeline CORTES. Provavelmente a função que define o fim do trecho aproveitado da fonte e a que mede o movimento por cena (a medida já existe).
+- como testar: Marcar como inválido o trecho com luminância média muito baixa por mais de 0,5 s, ou com texto promocional da fonte ('capítulo novo', 'link no perfil'). Aparar o fim da fonte antes de gerar a narração. Rodar nos 3 Shorts acima e conferir que não sobra quadro preto nem anúncio. Controle negativo: um Short bom do lote não pode mudar.
+
+## 14/11 06:42 PROPOSTA [CERTEZA] Legenda palavra a palavra não pode cair em cima de título estático ou texto da fonte (cw/claude-sonnet-5-5)
+- prova: as-the-gods-will: 'AMADORES' sobre 'DARUMA / EM 30' (q01), 'O BONECO' sobre o título fixo (q02), 'EU COBRIRIA' sobre 'DERROTAR' (q03), 'ELE DE PORRADA' sobre '1# JOGUE SUA JAQUETA' (q05). his-demon-devours: 'ESSE VENENO' sobre 'JÁ NA CINEFY' (q16) e 'NA HORA' sobre 'AQUI NO CANAL' (q18). sem-obra-a01f97: título queimado 'COMIDAS DE VÓ' acima de y=150 sem cobertura (q01, q02).
+- onde: Renderização da legenda e da tarja (módulo da legenda palavra a palavra). Conferir primeiro o log '[hardsub]' do Short, pois o júri não vê o que está debaixo da tarja.
+- como testar: Só aplicar a tarja onde o log do Short confirmar legenda lida e diferente em 2 ou mais de 6 quadros. Quando a fonte tiver título grande no centro, subir a legenda para o terço inferior livre (y=1200 a 1450). Conferir q01 a q05 de as-the-gods-will. Se o log disser que a visão não leu legenda, descartar o item, conforme a lição de 26/10.
+
+## 14/11 06:42 PROPOSTA [GOSTO] Piso de contraste na cor da legenda, sem abrir mão das cores por personagem (cw/claude-sonnet-5-5)
+- prova: jujutsu-kaisen q06: 'INSUPORTÁVEL' em oliva escuro quase ilegível, sobre os olhos e o nariz de Naoya. sem-obra-a01f97 q03 e q05: 'MESMO' e 'FAMOSA' em cinza ou vermelho escuro sobre fundo escuro.
+- onde: Paleta de cores da legenda por personagem e a função que escolhe cor e contorno.
+- como testar: Manter as cores por personagem, que a dona prefere (27/10). Exigir contorno preto de 6 a 12 px e luminância mínima. Se a cor falhar no teste de contraste, clarear a cor em vez de trocar por branco. Mudar uma coisa só e comparar a nota de legibilidade antes e depois.
+
+## 14/11 06:42 PROPOSTA [CERTEZA] Palavrão 'porrada' escapou do filtro de roteiro (cw/claude-sonnet-5-5)
+- prova: as-the-gods-will q05: a legenda diz 'ELE DE PORRADA'. A regra atual lista 'porra', 'merda' e 'caralho', mas a derivada 'porrada' passou. Só 1 Short, por isso não viro regra de roteiro.
+- onde: Filtro de palavrões pós-roteiro, se existir como lista ou regex, não como regra de IA.
+- como testar: Incluir derivadas (porrada, porrão e semelhantes) na lista e rodar sobre o roteiro.txt dos últimos 7 dias para ver quantos casos reais aparecem. Se houver 2 ou mais em Shorts diferentes, aí sim vale a regra de roteiro.
+
+## 14/11 07:53 PROPOSTA [CERTEZA] Piso de contraste da palavra da legenda (cor por personagem continua valendo) (cw/claude-sonnet-5-5)
+- prova: 4 Shorts: a8eec5 q15, 0a72ab q15, 599628 q17, 296d39 q02/q07 e q14 (retângulo laranja sem texto legível). A legenda sai ilegível no celular.
+- onde: Função que sorteia ou atribui cor e opacidade da palavra ativa e inativa no renderizador da legenda (módulo da legenda palavra a palavra).
+- como testar: Calcular o contraste da cor de preenchimento contra a luminância média da região de legenda no quadro. Se for menor que ~4,5:1, clarear a cor ou forçar contorno preto de 6 a 8 px. Opacidade mínima de 100% na palavra ativa. Não impor só amarelo ou branco, para manter a preferência da dona por cores por personagem. Rodar nos 4 Shorts acima e olhar a folha de quadros.
+
+## 14/11 07:53 PROPOSTA [CERTEZA] Auto-escala da palavra para caber na margem lateral de 60 px (cw/claude-sonnet-5-5)
+- prova: 2 Shorts: a8eec5 q12 (card 'ALERTA MONSTROS' cortado em 'ALERTA MON' e acima de y=150) e 599628 q03 ('ESCOBRIR': o D saiu da tela). 599628 q09 'LAGARTO' também fica a menos de 60 px da borda.
+- onde: Cálculo de largura, inclinação e rotação da palavra e do card de alerta no renderizador da legenda. Conferir a largura final com a rotação aplicada.
+- como testar: Medir o bounding box após rotação e escala. Se x < 60 ou x+largura > 1020, reduzir a escala até caber. Gerar os Shorts a8eec5 e 599628 e conferir q03, q09 e q12. O erro 'ESCOBRIR' é corte de renderização, não do roteiro, então não precisa de regra de roteiro.
+
+## 14/11 07:53 PROPOSTA [GOSTO] Evitar legenda sobre rosto ou cabeça do bicho (cw/claude-sonnet-5-5)
+- prova: 0a72ab q04 (boca e queixo cobertos) e q16 (olhos, nariz e boca), 296d39 q11 (bico e olhos do casuar). Cobre o foco da cena, o que prejudica a retenção.
+- onde: Posicionamento vertical da legenda no renderizador. Deslocar para o terço inferior e, se houver detecção de rosto por quadro, para a lateral.
+- como testar: Medir um Short por vez, com rosto detectado no centro do quadro de legenda e a posição ajustada. Comparar a nota de legibilidade do lote seguinte com a deste. É só 1 teste por vez, porque é questão de gosto.
+
+## 14/11 07:53 PROPOSTA [CERTEZA] Barrar cena quase preta no meio do Short (cw/claude-sonnet-5-5)
+- prova: a8eec5 q11 (15,28 s, quase tela preta enquanto a voz segue) e 0a72ab q07 (cena 3 subexposta com silhuetas pretas).
+- onde: Escolha ou corte de cena no pipeline de montagem. Calcular a luminância média por cena na seleção.
+- como testar: Descartar ou encurtar a cena com luminância média abaixo do limiar (por exemplo, abaixo de ~12 em 255) por mais de 0,5 s. Re-renderizar o a8eec5 e conferir q11.
+
+## 14/11 09:02 PROPOSTA [CERTEZA] Verificar a ortografia da legenda palavra a palavra contra o roteiro.txt (cw/claude-sonnet-5-5)
+- prova: sem-obra-599628 q03 mostra 'ESCOBRIR' (falta o 'D') e sem-obra-dd72bc q10 mostra 'EEM' (letra duplicada). Dois Shorts diferentes, e os dois casos são typo de uma letra, o que sugere bug de renderização ou de tokenização da legenda, e não erro do roteiro.
+- onde: Função que gera as palavras da legenda (render da legenda palavra a palavra / alinhamento voz-texto). Comparar o texto do roteiro.txt com as palavras exibidas, nos Shorts 599628 e dd72bc.
+- como testar: Rodar o diff palavra a palavra entre roteiro.txt e a legenda gerada nos dois Shorts. Se o roteiro tem 'DESCOBRIR' e 'EM' certinhos, o bug é na legenda (letra cortada na borda esquerda em q03; duplicação do karaokê em q10). Se o roteiro já vem errado, subir para regra de roteiro. Depois conferir 1 lote inteiro.
+
+## 14/11 09:02 PROPOSTA [CERTEZA] Validar a cena escolhida contra a entidade citada na narração (ator, raça de animal) (cw/claude-sonnet-5-5)
+- prova: dd72bc q16: aparece Can Yaman enquanto a narração é sobre Engin Akyürek. 8fc2a3 q08: Pug de 7 kg aparece enquanto a voz fala do mastim inglês de mais de 100 kg; q04: Pitbull/American Bully aparece para o dogue de bordeaux. Dois Shorts com a mesma falha de correspondência imagem-narração.
+- onde: Passo de escolha/corte de cenas e checagem visual (seleção de clipe por cena), provavelmente o ponto onde a IA de visão valida a cena contra o roteiro.
+- como testar: Para Shorts de pessoa/animal nominal, pedir à visão que confirme a identidade ou raça do clipe contra o nome na frase da cena; se não bater ou não confirmar, trocar a cena ou cortar o trecho. Medir quantos Shorts do lote seguinte repetem o erro.
+
+## 14/11 09:02 PROPOSTA [GOSTO] Segurar o fim de uma cena até a frase terminar (sincronia corte x fala) (cw/claude-sonnet-5-5)
+- prova: Cortes defasados em 296d39 q06 e q12 (fala nova começa antes do corte) e em 8fc2a3 q07 e q15 ('de pressão' dito já na cena seguinte; o anúncio do Kangal é partido ao meio). Em 599628 q10 e dd72bc q03 o oposto: corte atrasado em relação à fala. Três Shorts com o mesmo padrão.
+- onde: Cálculo dos pontos de corte de cena a partir do tempo das palavras da voz (alinhamento voz-cena).
+- como testar: Alinhar o início de cada cena ao início da primeira palavra da frase correspondente, com tolerância de 0,2 s, e comparar a nota de movimento do júri num lote de 20 Shorts antes e depois.
+
+## 14/11 10:07 PROPOSTA [CERTEZA] Travar paleta da legenda dinâmica em alto contraste (#FFFF00/#FFFFFF com borda preta espessa) e limpar camada anterior na troca de palavra (gemini-4-argon)
+- prova: Baixo contraste por cores escuras/translúcidas em 4/4 Shorts (`sem-obra-438cf2` q03, `the-last-doomsday-bunker` q13, `sem-obra-e4e43e` q09/q13, `sem-obra-51efb3` q03) e sobreposição/duplicação de palavras ativas e stickers sobre rostos em 2/4 Shorts (`sem-obra-438cf2` q04/q05/q14, `sem-obra-51efb3` q02/q04/q14/q16).
+- onde: Módulo de renderização de legendas ASS/FFmpeg da linha CORTES (gerador de estilos/camadas palavra a palavra e posicionamento no terço inferior y=1200..1450)
+- como testar: Re-renderizar a legenda de `sem-obra-51efb3_cap1_20261111` e `sem-obra-438cf2_cap1_20261111` e extrair os quadros q02, q03, q05, q14 e q16 para confirmar que só 1 palavra fica ativa por vez em amarelo/branco com contorno preto de 6-12 px dentro de x=60..1020 e y=1200..1450.
+
+## 14/11 10:07 PROPOSTA [CERTEZA] Desativar cards de HUD 'LOCAL:' sem validação geográfica e isolar zona segura da marca d'água (@) no topo (gemini-4-argon)
+- prova: Em 3/4 Shorts aparecem cards de topo com placeholders ou falsos locais e colisão com `@`: `sem-obra-438cf2` q05/q09 ('LOCAL: CIDADE' e seta sobre `@bichonoturnobr`), `sem-obra-e4e43e` q13/q14 ('LOCAL' vazio e 'LOCAL: MUNDO' tirado de 'Todo mundo achava') e `the-last-doomsday-bunker` q16 (`@curiosidadesnoturnasbr` sobreposto ao card 'O MUNDO INTEIRO').
+- onde: Gerador de overlays/HUDs de topo e filtro de marca d'água na composição de vídeo da linha CORTES
+- como testar: Rodar o compositor nos roteiros de `sem-obra-e4e43e_cap1_20261111` e `the-last-doomsday-bunker_cap1_20261111` e inspecionar q09, q13, q14 e q16 confirmando ausência de card 'LOCAL' inválido e respiro >= 20 px ao redor do `@` em y=150..250.

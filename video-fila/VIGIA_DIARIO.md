@@ -5,6 +5,13 @@ Formato: data_hora — resumo / motivo / achei / fiz / como desfazer / estado.
 
 ---
 
+
+## 20261114_0456 — parceiro-render: rc=1 no Kaggle (vídeo DTaNZETVyNw)
+- Motivo / O que achei (trecho de log): 2026-11-14 04:37:16,840 - WARNING - [kaggle-lote] 20261114_043519_DTaNZETVyNw deu erro no Kaggle: {"ok": false, "error": "rc=1", "segundos": 7, ... "applio": "ok em 67 s"}
+- Causa provável: Erro transitório de execução/script no Kaggle (rc=1) ao renderizar short vertical com formato experimental (chaves_chiquinha).
+- CONSERTO PROPOSTO: Nenhum — falha transitória no Kaggle, e o sistema prosseguiu normalmente gerando postar.json em seguida.
+- Estado: NADA A FAZER
+
 ## 20261104_1916 — parceiro-render: rc=1 no Kaggle ao processar lote do Short Yz7c04eNjUg
 - Motivo / O que achei (trecho de log): 2026-11-04 19:02:28,121 - WARNING - [kaggle-lote] 20261104_183253_Yz7c04eNjUg deu erro no Kaggle: ok: false, error: rc=1, segundos: 8 ao rodar renderização do short em formato experimental.
 - Causa provável: Falha transitória ou erro no script de renderização no Kaggle ao aplicar formatação especial.
@@ -5200,3 +5207,39 @@ STATUS: OK
 
 ## 20261114_0256 — recap longo: alimentador recap alimentar verificado (ativo/running)
 - Motivo / O que achei: Alerta de verificação do alimentador do recap longo (cliente.py alimentar). A verificação da tarefa agendada RecapAlimentar via PowerShell confirmou que a tarefa está ativa e em execução (Running, LastRunTime 14/11/2026 02:56:56). | Causa provável: Variação temporal ou alarme falso do agendador. | CONSERTO PROPOSTO: Nenhum (tarefa RecapAlimentar está ativa e rodando normalmente). | Estado: NADA A FAZER
+
+## 20261114_0415 — parceiro-producao: alerta transiente de estoque vazio seguido de reposição normal de shorts
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\logs\parceiro_producao.log registrou [2026-11-14 03:57:51] 3 falhas seguidas — a próxima rodada tenta de novo e [2026-11-14 03:57:51] estoque: nada reposto (8/8; sem candidato novo ou download falhou). No entanto, na rodada seguinte (04:16:29), o sistema repôs com sucesso novos shorts (sem-obra-6d3cb1_cap1_20261114 [pronto], etc.) e o Wise Memory Optimizer está rodando (PID 6272).
+- Causa provável: Variação transiente de candidatos ou indisponibilidade momentânea no download de fontes (yt-dlp) que se resolveu automaticamente na rodada subsequente.
+- CONSERTO PROPOSTO: Nenhum (rodízio e recuperação automáticos bem-sucedidos).
+- Estado: NADA A FAZER
+## 20261114_0436 — Recap longo com GPUs sem conta por falta de trabalho e erro pontual no parceiro
+- Motivo / O que achei: Recap longo com 13 de 20 GPUs sem conta (parada: sem trabalho na fila); contas verificadas: 7 de 61; alerta de proxy Grok no parceiro_postar_auto.log. Wise Memory Optimizer rodando e ativo (PID 6272). RAM livre: ~6.48 GB.
+- Causa provável: Escassez temporária de contas/trabalho na fila e falha pontual de proxy.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER
+## 20261114_0615 — recap longo: alimentador reiniciado e operando normalmente com pilha e parceiro ativos
+- Motivo / O que achei (trecho de log): O alimentador do recap longo estava travado (44 min sem dar a volta) e foi reiniciado conforme alerta. O Wise Memory Optimizer está ativo (PID 6272), a pilha de renderização está repondo normalmente (13/14) e o PC2 / parceiro operam disparando Shorts sem interrupções.
+- Causa provável: Travamento transitório do alimentador do recap longo, já resolvido pelo reinício.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sem alterações em código ou processos).
+- Estado: NADA A FAZER
+
+## 20261114_0757 — parceiro-render: Whisper texto curto demais em vídeo do estoque, retomada automática na próxima rodada
+- Motivo / O que achei (trecho de log): D:\recapd-ambientes\producao\workspace\anime\_parceiro_20261114.log registrou [2026-11-14 07:50:21] WARNING - [fetch] Whisper (model=tiny) texto curto demais (16 chars) e [2026-11-14 07:50:22] ERROR - [auto] sem transcrição disponível para o vídeo do estoque vR1tN9TtiOc (Movimento friamente calculado).
+- Causa provável: Áudio do vídeo de origem muito curto, com trecho musical sem fala ou ruído que o modelo tiny do Whisper não conseguiu transcrever com relevância, acionando a proteção de texto curto.
+- CONSERTO PROPOSTO: Aumentar o modelo padrão do Whisper de 	iny para ase em in/anime_fetch.py e ajustar o timeout dinâmico conforme as lições aprendidas (min(900, max(300, duracao_audio*1.5))), reduzindo falsos positivos de texto vazio em áudios complexos.
+- Estado: PRECISA REVISÃO
+
+## 20261114_0813 — Whisper modelo tiny→base como fallback para textos curtos (pelo painel)
+- Motivo / O que fiz (arquivos) / Como conferi / Como desfazer: Mudei bin/anime_fetch.py:452 de `for msize in ("tiny",):` para `for msize in ("tiny", "base"):` para tentar modelo base quando tiny retornar <50 chars. Conferido: sintaxe OK (py_compile passou) e linha 452 confirmada com grep. Botão "Desfazer" no painel (pedido 20261114_081326_1e1f)
+- Estado: RESOLVIDO
+## 20261114_0915 — Vigia geral: disco D com espaço marginal (6.8 GB livres) mas serviços e pipeline operando normalmente
+- Motivo / O que achei: Disco D com ~6.8 GB livres (abaixo do limiar de 8 GB), porém os serviços de produção (anime_auto.py, parceiro_diario.py) e monitoramento estão rodando normalmente sem travamentos. Processos python ativos e healthy.
+- Causa provável: Acúmulo natural de arquivos e dados de workspace dos vídeos em andamento.
+- CONSERTO PROPOSTO: Nenhum (Modo somente aviso, sem limpeza de arquivos de produção ou exclusão de workspace conforme regras do projeto).
+- Estado: NADA A FAZER
+## 20261114_0937 — recap longo: alimentador operando e tarefa ativa
+- Motivo / O que achei: Alerta indicando que o alimentador do recap longo (cliente.py alimentar) não estava rodando no PC1. A verificação da tarefa agendada RecapAlimentar via PowerShell confirmou que a tarefa está ativa e em execução ('Running'), com Wise Memory Optimizer ativo (PID 6272).
+- Causa provável: Variação temporal ou alarme falso no agendador de tarefas.
+- CONSERTO PROPOSTO: Nenhum (tarefa RecapAlimentar ativa e rodando normalmente).
+- Estado: RESOLVIDO

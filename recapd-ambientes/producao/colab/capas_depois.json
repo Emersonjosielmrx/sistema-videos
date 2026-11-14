@@ -892,11 +892,12 @@
    "source_url": "https://www.youtube.com/watch?v=V4msWWPktbU"
   },
   "publicar": false,
-  "estado": "pendente",
-  "tentativas": 11,
+  "estado": "bloqueado",
+  "tentativas": 12,
   "em": "2026-11-11T12:31",
   "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0dc381_cap1_20261106\\capa_c.jpg",
-  "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11"
+  "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11",
+  "bloqueado_em": "2026-11-14T03:55"
  },
  {
   "canal": "novo_inovaremanhwaverse",
@@ -1354,10 +1355,11 @@
    "source_url": "https://www.youtube.com/watch?v=pnX8RlSn7Yk"
   },
   "publicar": true,
-  "estado": "pendente",
-  "tentativas": 8,
+  "estado": "bloqueado",
+  "tentativas": 10,
   "em": "2026-11-13T05:28",
-  "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11"
+  "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11",
+  "bloqueado_em": "2026-11-14T03:55"
  },
  {
   "canal": "novo_manhwanoturno",
@@ -1554,5 +1556,99 @@
   "estado": "sem_capa",
   "tentativas": 3,
   "em": "2026-11-13T19:27"
+ },
+ {
+  "canal": "novo_ia_agora_h3n",
+  "vid": "--g1zfTqc-E",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\slime-tamer_cap1_20261114",
+  "params": {
+   "anime": "Slime Tamer",
+   "cap": 1,
+   "texto": "PODER SECRETO",
+   "cena": "O DOMADOR MAIS FRACO DESPERTOU O PODER secreto mais forte",
+   "protagonista": "young adult male anime protagonist with short dark hair, green eyes, wearing a simple blue academy uniform, surrounded by small cute glowing blue slime creatures, bright magical background",
+   "generos": [
+    "acao",
+    "isekai",
+    "fantasia",
+    "sistema"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=AP_c0bbMmRI"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 2,
+  "em": "2026-11-14T03:56"
+ },
+ {
+  "canal": "novo_inovaremanhwaverse",
+  "vid": "kPvegQOYHI0",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-063c6d_cap1_20261114",
+  "params": {
+   "anime": "sem-obra-063c6d",
+   "cap": 1,
+   "texto": "O MAIS FRACO?",
+   "cena": "ELE FOI HUMILHADO por ser FRACO mas DESPERTOU o SISTEMA mais FORTE na masmorra",
+   "protagonista": "young male anime protagonist, black hair, determined expression, casual adventurer clothes, holding a bamboo spear, fantasy dungeon background, vibrant colors, cinematic lighting",
+   "generos": [
+    "acao",
+    "isekai",
+    "fantasia",
+    "sistema"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=kP0KdA-s128"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-14T05:20"
+ },
+ {
+  "canal": "novo_ia_agora_h3n",
+  "vid": "olOL01PLwv8",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-67a35d_cap1_20261114",
+  "params": {
+   "anime": "sem-obra-67a35d",
+   "cap": 1,
+   "texto": "QUERIA A GRANA",
+   "cena": "ELE VOLTOU NO TEMPO para viver de RIQUEZA e agora ela NÃO QUER O DIVÓRCIO",
+   "protagonista": "young adult male protagonist, short dark hair, brown eyes, wearing a casual elegant suit, looking surprised and panicked, clean background, vibrant colors",
+   "generos": [
+    "regressao",
+    "romance",
+    "comedia"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=8fM6Ay7OJho"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-14T05:57"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "DCyOfv2lI2E",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-9c342a_cap1_20261114",
+  "params": {
+   "anime": "sem-obra-9c342a",
+   "cap": 1,
+   "texto": "MUNDO MEDIEVAL",
+   "cena": "ELE FOI REJEITADO mas ENTROU no MUNDO MEDIEVAL para DESENVOLVER A tecnologia do império",
+   "protagonista": "young adult male prince, short dark hair, blue eyes, elegant royal medieval coat, serious expression, high quality digital art",
+   "generos": [
+    "isekai",
+    "fantasia",
+    "aventura"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=AXR1lZb1P-o"
+  },
+  "publicar": true,
+  "estado": "sem_capa",
+  "tentativas": 3,
+  "em": "2026-11-14T06:58"
  }
 ]

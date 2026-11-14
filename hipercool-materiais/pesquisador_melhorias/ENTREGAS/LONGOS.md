@@ -1452,10 +1452,27 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 - (todos os itens desta pesquisa foram reprovados)
 - 14/11 01h45 (chat LONGOS): o motor reprovou por não ser repositório, mas é regra OFICIAL útil (support.google.com/youtube/answer/1311392). (1) Shorts: a partir de 01/02/2027 só monetiza com 10 mi de views qualificadas de Shorts em 90 dias — DEIXADO: precisa confirmar se é por canal ou conta; reforça a aposta no LONGO (Short→longo). Entra no relatório como aviso quando confirmado. (2) narração própria: JÁ FAZEMOS (voz clonada em todo corte). (3) "Sobre" do canal dizendo que é recap/comentário com narração própria — DEIXADO: mexe na página dos canais, pergunta pra dona.
 
-## [ ] PENDENTE — 2026-11-14 02:03 — Regras oficiais do YouTube que afetam recaps (`area_yt_regras_oficiais`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 1 deixado — 2026-11-14 02:03 — Regras oficiais do YouTube que afetam recaps (`area_yt_regras_oficiais`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_regras_oficiais__sonnet_0201.md`
 - (todos os itens desta pesquisa foram reprovados)
+- 14/11 04h (chat LONGOS): mesmo conteúdo do bloco anterior (regras oficiais, página 1311392) — ver avaliação acima; nada novo pra implantar.
 
-## [ ] PENDENTE — 2026-11-14 02:51 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-14 — 0 implantados, 1 reprovado, 1 deixado — 2026-11-14 02:51 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_fontes_recap_ingles__sonnet_0238.md`
 - (todos os itens desta pesquisa foram reprovados)
+- 14/11 04h (chat LONGOS): REPROVADO o lote de repositórios (sem licença/0 estrelas/função já coberta pelo buscar_fontes_campeas.py). DEIXADO: medir horas de recap por semana por canal-fonte com `yt-dlp --flat-playlist -J` (sem baixar) pra achar fonte nova quando o Manhwa Fresh esgotar — útil pro foco nos mais vistos, mas yt-dlp pelo IP de casa precisa da vez (ytdlp_vez); fica pra quando a lista de prioridade (61) baixar.
+
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 2 deixados — 2026-11-14 03:53 — Relatos de recap desmonetizado ou aprovado (`area_yt_relatos_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_relatos_recap__sonnet_0347.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 14/11 04h (chat LONGOS): **IMPORTANTE, levado à dona.** Página oficial 1311392: recap é permitido com história/comentário próprios; NÃO é permitido "mesma situação com mesmo desfecho" e "modelo genérico de IA produzido em massa" — e vale pro CANAL INTEIRO. Nossos 11 canais de longo estão com recursos avançados negados por suspensão (recursos_negados.json; contestação do Fio da Meada negada 14/11). DEIXADO (decisão de estratégia da dona): (a) alerta de roteiros parecidos por canal; (b) não reagir a vídeo "em revisão" nas 1ªs 24 h. Não implanto sozinho.
+
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 2 deixados — 2026-11-14 07:48 — Padrões de título de recap por idioma (`area_yt_titulos_longos`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_titulos_longos__sonnet_0726.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 14/11 08h20 (chat LONGOS): (1) molde pt-BR "perda/humilhação + poder/sistema + vingança, 2-4 palavras em CAIXA ALTA" — JÁ É o que o seo_generator faz ("ELE FOI HUMILHADO por ser FRACO mas DESPERTOU o SISTEMA..."). (2) "Completo" em vídeo que não cobre a obra toda = clickbait enganoso (política 2801973) — medi: só 3 de 92 longos usam "COMPLETO" no título (Curiosidades Noturnas, Fio da Meada dx7MVQjZlMA, CartuchoReact "Capítulo 1 COMPLETO"); risco baixo, e com os 11 canais em recursos negados não mexo em título publicado sem a dona — DEIXADO. (3) título es/en com molde próprio por idioma — DEIXADO: só 2 longos em outra língua até agora (vi/en); vale quando a linha de línguas crescer.
+
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 1 deixado — 2026-11-14 09:31 — Conteúdo reutilizado aplicado a recap de anime/manhwa (`area_yt_reused_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_reused_recap__sonnet_0921.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 14/11 09h45 (chat LONGOS): mesma regra das 3 avaliações de 14/11 01h45/04h, com 1 dado novo e importante: "a regra é separada de direitos autorais — ter PERMISSÃO do criador original não protege" (nossos parceiros autorizaram, mas isso não cobre o "reused/inauthentic"). Também: o risco vem da SIMILARIDADE ENTRE CANAIS (mesmo template/voz/estrutura de título em dezenas de canais) e o "Sobre" é lido pelo revisor. DEIXADO: decisão de estratégia já levada à dona (variar enredos/estrutura por canal + "Sobre" dizendo recap com narração própria); não implanto sozinho.

@@ -110,6 +110,7 @@ def _gravar_estado_trancado(est):
     # antiga por cima (a união nunca tira) e a parte 4 voltou a reprovada. Ficha com SEM_PALAVRAO.txt = liberada.
     est["reprovados"] = [n for n in est["reprovados"] if not (FICHAS / n / "SEM_PALAVRAO.txt").exists()]
     est["cortes_postados"] = sorted(set(est.get("cortes_postados", [])) | set(disco.get("cortes_postados", [])))
+    est["presos"] = {**disco.get("presos", {}), **est.get("presos", {})}  # 14/11: rodada antiga não apaga preso
     ESTADO.write_text(json.dumps(est, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
@@ -669,8 +670,13 @@ def rodada(ver=False):
                 # 09/11: parte de SÉRIE ("(9) He got into the Medieval Age...") só sai no canal dono da série
                 # (_dono_serie); longo de série de outro canal fica na fila pra ele. SERIE_MESMO_CANAL=0 desliga.
                 # 12/11: longo traduzido (nuvem.json com "canal") só sai no canal da língua dele
+                # 14/11 08h40 (Orphan LUQDew946Ps): subiu 4 GB no HistoriasEmFrames, deu erro no clique final e ficou
+                # RASCUNHO lá — a rodada seguinte já ia mandar a MESMA fonte pro Animescomia (regra: vídeo único por
+                # canal). Longo com erro DEPOIS de subir os bytes fica preso ao canal onde subiu (est["presos"]).
+                presos = est.get("presos", {})
                 cand = [i for i, (_, f, _d) in enumerate(fila) if _dono_serie(f.name, est) in (None, cred)
-                        and (not _d.get("canal") or _d["canal"] == cred)]
+                        and (not _d.get("canal") or _d["canal"] == cred)
+                        and presos.get(f.name, {}).get("canal", cred) == cred]
                 if not cand:
                     break
                 # 11/11 dona (Medieval Age: completar em ordem): entre partes da MESMA série, sai a de menor número
@@ -778,6 +784,25 @@ def rodada(ver=False):
                                                     "status": status, "em": datetime.now().isoformat("T", "minutes")})
                 teste_env.write_text(json.dumps(te, ensure_ascii=False, indent=1), encoding="utf-8")
             log(f"  {status}: {info}")
+            # 14/11: erro DEPOIS de mandar o arquivo grande (> LONGO_PRESO_MIN_MIN minutos de envio, padrão 5) = o vídeo
+            # pode ter ficado como rascunho no canal: prende a fonte nele (só ele pode tentar de novo) e avisa a dona.
+            # LONGO_PRESO_AO_CANAL=0 desliga.
+            if (status not in ("ok", "limite") and os.environ.get("LONGO_PRESO_AO_CANAL", "1") != "0"
+                    and (time.time() - t_env) / 60 >= float(os.environ.get("LONGO_PRESO_MIN_MIN", "5"))):
+                est.setdefault("presos", {})[ficha.name] = {"canal": cred, "canal_nome": nome_canal, "status": status,
+                                                            "info": str(info)[:160],
+                                                            "em": datetime.now().isoformat(timespec="minutes")}
+                _gravar_estado(est)
+                log(f"  {ficha.name[:30]}: erro DEPOIS de subir ({(time.time() - t_env) / 60:.0f} min) — pode ter "
+                    f"ficado rascunho; preso ao {nome_canal} (não vai pra outro canal)")
+                try:
+                    sys.path.insert(0, r"D:\video-fila")
+                    import avisos
+                    avisos.enviar(f"⚠️ Longo subiu {mb} MB no {nome_canal} e deu erro no fim ({str(info)[:80]}) — "
+                                  f"pode ter ficado RASCUNHO no Studio. Não vai pra outro canal. Conferir: {ficha.name[:40]}",
+                                  "recap-longo", importante=True, html_ok=False)
+                except Exception:  # noqa: BLE001
+                    pass
             if status == "ok":
                 # 29/10 noite (Fable): a duração vai junto — o melhorador_longo calcula o % assistido com ela (antes
                 # saía "None%" em todos os postados: a duração só existia nos vídeos que ele mesmo analisou)

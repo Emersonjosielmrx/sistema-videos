@@ -1,0 +1,318 @@
+{
+ "video": "vpsblindada_ia_20261114_044257.mp4",
+ "conta": "vpsblindada.ia",
+ "marca": "VPS Blindada",
+ "titulo": "Proteção e monitoramento para seu servidor",
+ "formato": "dono_mesma_foto",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.67,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 6.0,
+   "roteiro_marca": 7.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    13.62
+   ],
+   [
+    1,
+    "dono",
+    13.06
+   ],
+   [
+    2,
+    "conversa",
+    7.13
+   ],
+   [
+    3,
+    "dono",
+    15.25
+   ],
+   [
+    4,
+    "cartao",
+    6.7
+   ]
+  ],
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "A legenda karaokê 'cópia de segurança' está sem preenchimento branco e sem contorno (stroke) preto, sendo renderizada em tom azul-escuro diretamente sobre a jaqueta escura do apresentador, gerando contraste quase nulo e tornando o texto invisível.",
+   "como_corrigir": "Aplicar o estilo padrão das legendas (preenchimento branco com contorno preto espesso e destaque em ciano na palavra ativa), garantindo contraste imediato sobre roupas escuras."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "O terceiro balão da conversa de WhatsApp ('O Bot Sentinela segue ativo vigiando os erros.') apresenta texto cinza muito claro e baixa opacidade sobre o fundo claro do cartão, dificultando a leitura em telas de celular no momento exato em que o recurso é citado na locução.",
+   "como_corrigir": "Garantir 100% de opacidade no balão e configurar a cor da tipografia para cinza-escuro/preto (#1a1a1a), alinhando o contraste ao padrão dos balões anteriores da simulação."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena excessivamente parada e ritmo arrastado por quase 7 segundos (q04 a q06). O apresentador permanece no mesmo enquadramento fixo sem nenhuma variação de escala, corte dinâmico ou grafismo em motion para ilustrar 'cópia de segurança' e 'alertas'.",
+   "como_corrigir": "Aplicar um punch-in digital (corte para zoom de 1.15x) na fala de ênfase e incluir motion graphics de apoio (ícones animados de backup e alerta) para reter a atenção."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Transição seca entre a cena 1 (vídeo do apresentador) e a cena 2 (tela do WhatsApp), quebrando o fluxo visual de forma abrupta.",
+   "como_corrigir": "Inserir uma transição de motion fluida na troca de cena, como um slide lateral com motion blur ou push vertical acompanhando a entrada da interface."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Entrada com fade de opacidade arrastado e desbotado no terceiro balão ('O Bot Sentinela segue ativo vigiando os erros.'), resultando em um elemento semitransparente e ilegível no momento em que a legenda já encerra a frase.",
+   "como_corrigir": "Substituir o fade linear por uma animação rápida de pop ou slide up com easing/overshoot, sincronizando a chegada em 100% de opacidade com o início exato da fala do bot."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Cena parada e com o mesmo molde da cena 1 ao longo de mais de 6 segundos (q10 a q12), mantendo plano médio estático e ritmo monótono sem novos estímulos visuais.",
+   "como_corrigir": "Alternar a escala da câmera com punch-in e adicionar um elemento gráfico animado (por exemplo, selo ou ícone de escudo de proteção contínua) sobreposto para enriquecer o visual."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Legenda 'cópia de segurança' com cor escura e sem contorno, ficando invisível sobre a jaqueta.",
+   "como_corrigir": "Manter o padrão de texto branco com contorno preto e realce azul ciano."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Balão do Bot Sentinela aparece com fundo translúcido e texto cinza desbotado, fora do padrão visual.",
+   "como_corrigir": "Aplicar o balão azul claro com tipografia escura padronizada na mensagem da empresa."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "inovareagenda",
+   "formato": "cinco_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261113_135029.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261113_182327.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 5.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 5.67,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261113_212616.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261114_030252.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 4.75,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261114_044257.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 6.67,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   5,
+   2
+  ],
+  "dono_mesma_foto": [
+   5,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   1,
+   2
+  ],
+  "dono_abre_fecha_veo_meio": [
+   1,
+   1
+  ],
+  "dono_tres_veo_final": [
+   2,
+   1
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   16,
+   8
+  ]
+ },
+ "vigiando": []
+}

@@ -448,8 +448,8 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
         whisper_timeout = int(max_seconds * 2.5)
     else:
         whisper_timeout = min(7200, int(max_seconds * 1.5))
-    # Tenta apenas "tiny" para minimizar risco de MemoryError
-    for msize in ("tiny",):
+    # Tenta tiny primeiro; se texto curto/vazio, tenta base (mais preciso em áudio com ruído/música)
+    for msize in ("tiny", "base"):
         try:
             env = dict(os.environ,
                 MKL_NUM_THREADS="1", OMP_NUM_THREADS="1",

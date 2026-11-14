@@ -45,8 +45,8 @@
       "t": 1794507502.5274796
     },
     "hp": {
-      "resultado": "nao_logou",
-      "t": 1794624878.8014934
+      "resultado": "logado @iapro518",
+      "t": 1794654340.0933404
     }
   },
   "jogoscomia": {
@@ -105,6 +105,10 @@
     "sti": {
       "resultado": "logado @jornal.ia3",
       "t": 1794434584.1343658
+    },
+    "hp": {
+      "resultado": "logado @jornal.ia3",
+      "t": 1794657721.6639414
     }
   },
   "canalhistoriacomia": {
@@ -123,6 +127,10 @@
     "sti": {
       "resultado": "logado @histria.com.ia35",
       "t": 1794434695.216438
+    },
+    "hp": {
+      "resultado": "logado @histria.com.ia35",
+      "t": 1794658816.1378913
     }
   },
   "entrevistacomia": {
@@ -141,6 +149,10 @@
     "sti": {
       "resultado": "logado @entrevista.com.ia",
       "t": 1794434810.9717445
+    },
+    "hp": {
+      "resultado": "erro: TargetClosedError: BrowserContext.add_init_script: Target page, context or browser has been closed",
+      "t": 1794661769.9721713
     }
   },
   "emersonjosiel2027": {
@@ -199,6 +211,10 @@
     "sti": {
       "resultado": "logado @aulacomia",
       "t": 1794490610.3783724
+    },
+    "hp": {
+      "resultado": "logado @aulacomia",
+      "t": 1794654734.3753233
     }
   },
   "inovaremanhwaverse": {
@@ -444,7 +460,7 @@
     },
     "pc2": {
       "resultado": "nao_logou",
-      "t": 1794611507.276989
+      "t": 1794651713.895363
     },
     "sti": {
       "resultado": "logado @emersonn598",
@@ -489,6 +505,10 @@
     "sti": {
       "resultado": "logado @comoseriasecomia",
       "t": 1794507627.5966604
+    },
+    "hp": {
+      "resultado": "logado @comoseriasecomia",
+      "t": 1794655043.6711245
     }
   },
   "emersonjosiel2030": {

@@ -135,13 +135,24 @@ def _flow(pr, destino):
     """Nano Banana 2.1 pelo Google Flow (D:\\flow-imagens, contas do Veo, 0 crédito no teste de 22/10). 16:9 = a faixa
     de imagem do slide (1080x680). None se nenhuma conta entregou."""
     sys.path.insert(0, r"D:\flow-imagens")
-    from gera_imagem import gerar_imagem
     import threading
     res = {}
 
     def _rodar():
         try:
-            res["im"] = Image.open(gerar_imagem(pr, destino, formato="16:9", log=lambda m: None)[0]).convert("RGB")
+            # 14/11 dona ("veja por que está sendo usado o Flow e não o Gemini como primário"): o carrossel chamava o
+            # gera_imagem DIRETO (sem referência) e pulava o Gemini. Agora passa pelo cliente.gerar(): 1º Gemini sem
+            # navegador -> Flow HTTP -> Flow tela (TRIO_MIDIA.md). CARROSSEL_FLOW_DIRETO=1 volta ao Flow direto.
+            import os as _o
+            if _o.environ.get("CARROSSEL_FLOW_DIRETO") == "1":
+                from gera_imagem import gerar_imagem
+                res["im"] = Image.open(gerar_imagem(pr, destino, formato="16:9", log=lambda m: None)[0]).convert("RGB")
+                return
+            import cliente as _cli
+            p = _cli.gerar(pr, destino, formato="16:9", log=lambda m: log(f"  imagem: {m}"))
+            if not p:
+                raise RuntimeError("nenhum gerador entregou (Gemini/Flow)")
+            res["im"] = Image.open(p).convert("RGB")
         except Exception as e:  # noqa: BLE001
             res["erro"] = e
 

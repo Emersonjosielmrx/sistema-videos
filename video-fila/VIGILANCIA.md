@@ -1,12 +1,12 @@
-# Vigilância 24 h — 2026-11-14T03:30:39
+# Vigilância 24 h — 2026-11-14T10:40:40
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
 ## Alarmes desta volta (2)
-- tiktok: mesmo erro 13x em 6 h
-- Short sem-obra-83d7ff_cap1_20261114 saiu com problema de qualidade
+- longo Tv4TcuPT9JI_When_a_Top_Player_Gets_6_Unique_Traits_R saiu com problema de qualidade
+- longo Tv828JN1ZcM_He_Can_Upgrade_Anything_to_Its_Max_Level saiu com problema de qualidade
 
-## Casos abertos (37)
+## Casos abertos (39)
 - [consertar] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B (cw/claude-sonnet-5-5)
 - [consertar] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B (cw/claude-sonnet-5-5)
 - [consertar] longo dflyIbOR5ME (Manhwa Noturno) sem as capas B/C do teste A/B (cw/claude-sonnet-5-5)
@@ -44,12 +44,10 @@
 - [consertar] canal leielucro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] _parceiro_20261113.log: mesmo erro 5x (-)
 - [consertar] tiktok: mesmo erro 6x em 6 h (-)
+- [consertar] longo LUQDew946Ps_Orphan_Reincarnated_With_God_s_Leveling saiu com problema de qualidade (-)
+- [consertar] longo Tv828JN1ZcM_He_Can_Upgrade_Anything_to_Its_Max_Level saiu com problema de qualidade (-)
 
 ## Últimos fechados
-- [falso] longo I-ZCv6BaFrc (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
-- [falso] longo Wdc8vq3XCQw (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
-- [falso] longo ijsBfAGDgb0 (Manhwa Noturno) sem as capas B/C do teste A/B — - / -
-- [falso] longo AWweNegHpbI (Manhwa Noturno) sem as capas B/C do teste A/B — - / -
 - [falso] longo dtjL5XFWlXQ (InovareManhwaVerse) sem as capas B/C do teste A/B — - / -
 - [sem_mudanca] reel_advance_cron: clipe do Veo aprovado e a montagem morreu — 1minopus-sonnetweb / -
 - [sem_mudanca] longo eft6rqWlPms (InovareManhwaVerse) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
@@ -61,6 +59,10 @@
 - [sem_mudanca] longo dflyIbOR5ME (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
 - [sem_mudanca] _parceiro_20261107.log: mesmo erro 7x — 1minopus-sonnetweb / -
 - [falso] Short sem-obra-83d7ff_cap1_20261114 saiu com problema de qualidade — - / -
+- [falso] longo jcQ9GQz5CG4_16_17__He_got_into_the_Medieval_Age___b saiu com problema de qualidade — - / -
+- [falso] longo jcQ9GQz5CG4_17__He_got_into_the_Medieval_Age___bega saiu com problema de qualidade — - / -
+- [falso] tiktok: mesmo erro 7x em 6 h — - / -
+- [falso] longo Tv4TcuPT9JI_When_a_Top_Player_Gets_6_Unique_Traits_R saiu com problema de qualidade — - / -
 
 ## Placar dos consertadores
 - **cw/claude-sonnet-5-5**: 23 casos, nota 9% — capa-longo: 2/22 (voltou 0), postagem-tiktok: 0/1 (voltou 0)

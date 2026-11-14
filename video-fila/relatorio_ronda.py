@@ -392,7 +392,11 @@ def sec_capas():
     out = ["## 🖼️ Capas"]
     fila = _json(COLAB / "capas_depois.json", []) or []
     c = Counter(x.get("estado") for x in fila)
-    out.append(f"- Fila: {c.get('pendente', 0)} pendentes, {c.get('feito', 0)} feitas, {c.get('sem_capa', 0)} sem capa")
+    out.append(f"- Fila: {c.get('pendente', 0)} pendentes, {c.get('feito', 0)} feitas, {c.get('sem_capa', 0)} sem capa"
+               f", {c.get('bloqueado', 0)} bloqueadas (canal com recursos avançados negados não troca capa)")
+    blq = [x for x in fila if x.get("estado") == "bloqueado"]
+    if blq:  # 14/11: capa pronta que o Studio não deixa trocar — a dona precisa saber quais
+        out.append("  - bloqueadas: " + ", ".join(f"{x['vid']} ({x.get('canal', '?')})" for x in blq[:10]))
     tempos = [int(m.group(1)) for _, l in _linhas(COLAB / "capas_depois.log", r"capa\(s\) em (\d+) min")
               for m in [re.search(r"capa\(s\) em (\d+) min", l)] if m]
     if tempos:

@@ -124,6 +124,17 @@ def um(item):
     log(f"{item['vid']}: aplicada no Studio: {res}")
     # 05/11: "aviso: TimeoutError" (fiYW0vWk0Yo) e página de edição que não abriu (pXI9) viravam "feito" sem capa
     if not re.search(r'"(capa|teste_ab)": "(enviada|ok|ja)', res):
+        # 14/11 03h50 (partes 14 e 11 do Medieval, 26 tentativas na madrugada): no Fio da Meada a contestação dos
+        # recursos avançados foi NEGADA — o Studio abre o aviso e a capa de vídeo publicado não troca ("Salvar
+        # continuou cinza"). Canal bloqueado não fica tentando (Studio insistindo pode piorar a situação do canal):
+        # o item vira "bloqueado" e volta sozinho quando o bloqueio vencer. CAPAS_PARA_NO_BLOQUEIO=0 volta a insistir.
+        if (os.environ.get("CAPAS_PARA_NO_BLOQUEIO", "1") != "0" and _sem_ab(item["canal"])
+                and re.search(r"Salvar continuou cinza|contesta\w+ .*negada|recursos avançados", res)):
+            item["estado"] = "bloqueado"
+            item["bloqueado_em"] = datetime.now().isoformat(timespec="minutes")
+            log(f"{item['vid']}: canal com recursos avançados BLOQUEADOS — capa de vídeo publicado não troca; "
+                f"para de tentar até o bloqueio vencer (recursos_negados.json)")
+            return False
         log(f"{item['vid']}: Studio NÃO confirmou a capa — tenta de novo na próxima rodada")
         return False
     if item.get("publicar"):
@@ -282,7 +293,9 @@ def _fechar_item(item, feito):
         for x in fila:
             if x["vid"] == item["vid"]:
                 x["tentativas"] = x.get("tentativas", 0) + 1
-                if feito:
+                if item.get("estado") == "bloqueado":  # 14/11: canal com recursos avançados bloqueados (um())
+                    x["estado"], x["bloqueado_em"] = "bloqueado", item.get("bloqueado_em")
+                elif feito:
                     x["estado"] = "feito"
                 # 12/11: refeita (capa antiga já no ar) caía em sem_capa a cada 3 rodadas só porque o Flow estava sem
                 # máquina; ela tem folga de CAPA_MAX_REFEITA (12) e não avisa no Telegram

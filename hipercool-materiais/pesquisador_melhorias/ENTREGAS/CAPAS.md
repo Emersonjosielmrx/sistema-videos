@@ -178,3 +178,13 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-13\respostas\area_troca_titulo_capa__sonnet_2046.md`
 - (todos os itens desta pesquisa foram reprovados)
 - 13/11 21h45 (chat LONGOS/CAPAS): item 1 (troca de capa do concorrente pode ser teste A/B do YouTube, só vale a versão estável por dias) é bom, mas NÃO temos monitor de troca de capa de concorrente hoje — deixado pra depois: regra entra quando esse monitor existir. Item 2 não testado pelo próprio pesquisador.
+
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 3 deixados — 2026-11-14 05:35 — Títulos e capas de recap que seguram clique (`area_capa_titulo_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_capa_titulo_recap__sonnet_0522.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 14/11 05h45 (chat LONGOS/CAPAS): (1) teste A/B de capa no Studio — JÁ USAMOS (capas_depois: A/B/C quando o canal tem recursos avançados); hoje TODOS os 11 canais de longo estão com recursos negados (recursos_negados.json), então não há onde testar. (2) rosto com emoção + texto curto e grande — JÁ É o critério da dona (protagonista com expressão + palavra-gancho; capa_ia_anime). (3) capa nova nos longos que não decolaram — boa ideia, DEIXADA: canal com recursos negados não troca capa de vídeo publicado (Fio da Meada, print 14/11 03h50); volta quando os bloqueios vencerem.
+
+## [x] AVALIADO 2026-11-14 — 0 implantados, 0 reprovados, 0 deixados (já atendido) — 2026-11-14 07:21 — Mudança de título e miniatura do concorrente (`area_pacote_troca`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_pacote_troca__sonnet_0711.md`
+- (todos os itens desta pesquisa foram reprovados)
+- 14/11 07h50 (chat LONGOS/CAPAS): conferi as 2 regras novas da página oficial 13861714. (a) "capa com menos de 1280x720 derruba todas do teste pra 480p" — JÁ ATENDIDO: capa_ia_anime.QUADRO 16:9 = (1280, 720); medi 10 capas recentes, todas 1280x720. (b) "mudar título/capa durante o teste cancela o teste" — JÁ ATENDIDO: capas_depois aplica A e depois o A/B, e não mexe mais; e hoje os 11 canais de longo estão sem recursos avançados (sem A/B). Tema "troca do concorrente" já avaliado em 13/11 21h45 (sem monitor de concorrente ainda).

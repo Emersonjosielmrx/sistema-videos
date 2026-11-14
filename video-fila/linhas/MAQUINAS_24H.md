@@ -1,5 +1,10 @@
 # Máquinas: trabalharam as 24 h? (mais novo em cima)
 
+🖥️ Máquinas nas últimas 24 h (14/11 08:05) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
+⚠️ PC2: trabalhando 58% do tempo (CPU média 65%, RAM 31%, ffmpeg em 46%), parado 25%; horas quase paradas: 00, 11, 21, 22h; medidor só cobriu 89% do dia
+✅ PC1: trabalhando 96% do tempo (CPU média 95%, RAM 61%, ffmpeg em 74%), parado 0%; medidor só cobriu 55% do dia
+• DESKTOP: NameError: name 'os' is not defined
+
 🖥️ Máquinas nas últimas 24 h (13/11 08:06) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
 ⚠️ PC2: trabalhando 54% do tempo (CPU média 62%, RAM 33%, ffmpeg em 37%), parado 25%; horas quase paradas: 00, 09h; medidor só cobriu 88% do dia
 ⚠️ PC1: trabalhando 79% do tempo (CPU média 83%, RAM 57%, ffmpeg em 52%), parado 6%; medidor só cobriu 69% do dia

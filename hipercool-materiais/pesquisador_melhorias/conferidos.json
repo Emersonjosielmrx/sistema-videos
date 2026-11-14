@@ -16973,5 +16973,105 @@
     "arquivado": false,
     "descricao": "Auto YouTube Shorts generator for manhwa recaps - rights-aware, human-in-the-loop pipeline",
     "data": "2026-11-14"
+  },
+  "enricpedro/factum-skills": {
+    "ok": true,
+    "nome": "enricpedro/factum-skills",
+    "estrelas": 10,
+    "push": "2026-11-10",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Claude Code skills from Factum Club. First: Appeal Maker, for YouTube monetization appeals (reused or repetitive content).",
+    "data": "2026-11-14"
+  },
+  "billsmokes/youtube-shorts-auto-clipper": {
+    "ok": true,
+    "nome": "Billsmokes/Youtube-shorts-auto-clipper",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Auto-clip YouTube videos into vertical Shorts: viral-potential scoring, word-by-word captions, 9:16 export",
+    "data": "2026-11-14"
+  },
+  "shivang-creator/pitstop": {
+    "ok": true,
+    "nome": "Shivang-creator/pitstop",
+    "estrelas": 0,
+    "push": "2026-08-18",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Check a YouTube video before you upload it. Deterministic checks for titles, tags, chapters and thumbnails — plus trending and competitor be",
+    "data": "2026-11-14"
+  },
+  "opus-pro/reel-runbook": {
+    "ok": true,
+    "nome": "opus-pro/reel-runbook",
+    "estrelas": 1,
+    "push": "2026-11-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Fix the hook of your YouTube Shorts, TikToks and Reels with frame-by-frame review and hook-first scripts.",
+    "data": "2026-11-14"
+  },
+  "s77sh/viral-reel-playbook": {
+    "ok": true,
+    "nome": "s77sh/viral-reel-playbook",
+    "estrelas": 0,
+    "push": "2026-11-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code skill for Instagram Reels, TikTok and YouTube Shorts scripts: hooks, rehooks and funnel stages that keep viewers watching and br",
+    "data": "2026-11-14"
+  },
+  "gpsyrou/tube-virality": {
+    "ok": true,
+    "nome": "gpsyrou/tube-virality",
+    "estrelas": 44,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "The YouTube Virality project collects and analyzes trending video data from multiple countries using the YouTube API. It aims to gather metr",
+    "data": "2026-11-14"
+  },
+  "perceptreneur/yt-idea-bot": {
+    "ok": true,
+    "nome": "perceptreneur/yt-idea-bot",
+    "estrelas": 2,
+    "push": "2026-11-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Automated tool to monitor YouTube channels, extract the content ideas from the comments and send them to Discord.",
+    "data": "2026-11-14"
+  },
+  "wealthrxai/tubedesk": {
+    "ok": true,
+    "nome": "WealthRxAi/tubedesk",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free self-hosted vidIQ alternative: YouTube analytics, keyword demand, outliers, competitors, packaging, AI coach and a Chrome extension. Ru",
+    "data": "2026-11-14"
+  },
+  "aarenkay/ffmpeg-termux-tools": {
+    "ok": true,
+    "nome": "AARENKAY/ffmpeg-termux-tools",
+    "estrelas": 4,
+    "push": "2026-11-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "FFmpeg automation scripts for Android Termux — easy to use, non-coder friendly",
+    "data": "2026-11-14"
+  },
+  "loic31000/anirecap": {
+    "ok": true,
+    "nome": "loic31000/AniRecap",
+    "estrelas": 2,
+    "push": "2026-11-02",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Application Symfony de récapitulatifs d'animes et de mangas : œuvres, saisons, épisodes, tomes, chapitres, personnages, favoris et résumés.",
+    "data": "2026-11-14"
   }
 }
