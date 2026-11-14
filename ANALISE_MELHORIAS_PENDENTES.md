@@ -514,3 +514,24 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
   (ou `ffmpeg -i clipe.mp4 -af volumedetect` em 0-1,2 s contra 2-4 s).
 - **Confiança:** alta (reproduzido com o filtro exato). É dos achados com mais efeito audível: vale pra Short e longo.
 
+## A19. Trava "NARRAÇÃO MUDA — vídeo não sai" (Short abaixo de -23 LUFS): margem pequena e calibrada em 20/10 — conferir se não está descartando Short bom
+- **Onde:** `recapd-ambientes/producao/bin/anime-pipeline.py`, bloco do master (~linhas 283-291).
+- **Lido:** antes do master, mede o mix; se `nivel < -23` e o vídeo é vertical → `return False` (o Short não sai).
+  O comentário dá a base: "20/10: 238 Shorts bons entraram aqui entre -17,5 e -20,8 LUFS; os 9 de narração muda, de
+  -23,7 a -30,4".
+- **Por que desconfio:** essa régua foi medida em 20/10. Depois disso mudou muita coisa que mexe no nível do mix:
+  a voz passou a ser nivelada a -20 LUFS com variação por frase (`narracao_curva`: ±1 dB sorteado, respiro -3 dB),
+  os climas da voz, a voz clonada ("sai mais baixa e varia por modelo", 27/10), os microcortes, o trecho real do
+  narrador na abertura, falas reais, pausa da mascote, e a trilha dos Shorts subiu em 31/10. E o A18 (a voz cai
+  6 dB em cada entrada de SFX). A faixa "normal" de hoje pode ter descido 1-2 dB, e entre o pior Short bom de 20/10
+  (-20,8) e o corte (-23) só havia 2,2 dB.
+- **É o mesmo tipo de trava que descartou 59 Shorts como "mudos" em 13/11** (lá pela transcrição; aqui pelo volume).
+- **Como conferir no D: (5 minutos):** nos logs dos últimos 7 dias, juntar todas as linhas `master: X LUFS -> -14`
+  (os que passaram) e `NARRAÇÃO MUDA: mix em X LUFS` (os barrados). Se houver barrados entre -23 e -25, ouvir 3
+  deles. Se a faixa dos bons hoje encosta em -22, a trava está perto demais.
+- **Conserto sugerido:** não decidir "mudo" por um número só. Segurar apenas quando DOIS sinais concordam: mix
+  abaixo do limite **e** pouca fala de verdade — por exemplo a soma das durações dos `audio_N.wav` menor que 50% do
+  vídeo, ou o `conferir_audio._tem_som`/`silencedetect` acusando 60%+ de silêncio na faixa de voz (150 Hz-4 kHz).
+  Com um sinal só: avisa e deixa sair.
+- **Confiança:** baixa-média (não tenho os logs; é um risco a medir, não um defeito provado).
+
