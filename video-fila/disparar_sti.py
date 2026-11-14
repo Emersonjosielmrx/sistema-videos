@@ -76,6 +76,42 @@ def _scp(*args, timeout=900):
                           creationflags=_SEM_JANELA)
 
 
+VEZ_SHORT = "short no STI"
+
+
+def _mr():
+    pasta = str(Path("D:/postador-de-videos") / "bin")
+    if pasta not in sys.path:
+        sys.path.append(pasta)  # no fim: pasta de outro projeto nunca na frente
+    import maquina_remota
+    return maquina_remota
+
+
+def _vez_do_sti():
+    """Quem está com a vez do STI ("" = ninguém). Falhou a leitura = "" (não trava o Short por isso)."""
+    try:
+        return _mr().reservado(ALVO) or ""
+    except Exception:  # noqa: BLE001
+        return ""
+
+
+def _vez_pegar(minutos=45):
+    """O Short pega a vez do STI: uploads/Veo/TikTok vão pro próximo notebook (HP, acer, x200ma) enquanto ele roda."""
+    if os.environ.get("STI_SHORT_PEGA_VEZ", "1") == "0":
+        return
+    try:
+        _mr().ocupar(ALVO, VEZ_SHORT, minutos)
+    except Exception as e:  # noqa: BLE001
+        log(f"[!] não consegui pegar a vez do STI ({type(e).__name__}) — o Short roda assim mesmo")
+
+
+def _vez_soltar():
+    try:
+        _mr().liberar(ALVO, VEZ_SHORT)
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def _falhas():
     try:
         return int(json.loads(FALHOU.read_text(encoding="utf-8")).get("seguidas", 0))
@@ -122,6 +158,13 @@ def _video_ok(mp4):
     if vol < -45:
         return False, f"áudio mudo (volume médio {vol:.0f} dB)"
     return True, f"{w}x{h}, {dur:.0f} s, {vol:.0f} dB"
+
+
+def _cauda(vid):
+    try:
+        return _ssh(f"tail -c 400 ~/{R_BASE}/logs/sti_short_{shlex.quote(vid)}.log", 40)[1]
+    except subprocess.TimeoutExpired:
+        return ""
 
 
 def _devolver(vid):
@@ -226,18 +269,30 @@ def buscar():
                 rc3, vivo = _ssh("pgrep -fc '[a]nime_auto[.]py --modo' || true; uptime -s", timeout=40)
             except subprocess.TimeoutExpired:
                 rc3, vivo = 1, ""
-            if rc3 == 0 and vivo.split()[:1] == ["0"]:
+            # 13/11 23:55: "sem processo e sem .fim" NÃO basta — o Z0fv7_Qsdlg terminou certo às 22:04 e ficou sem o
+            # .fim (troquei o sti_short.sh com ele rodando; o bash perde o resto do script). Ia ser dado como morto
+            # com o Short pronto lá. Com pasta de Short pronta OU "PRONTO:" no fim do log = terminou: grava o .fim.
+            if rc3 == 0 and vivo.split()[:1] == ["0"] and (pastas or "PRONTO:" in _cauda(vid)):
+                log(f"STI: o Short {vid} terminou sem gravar o fim (script trocado no meio?) — sigo como terminado")
+                _ssh(f"echo 0 > ~/{R_BASE}/logs/sti_short_{shlex.quote(vid)}.fim", 30)
+                fim = "0"
+            elif rc3 == 0 and vivo.split()[:1] == ["0"]:
                 log(f"[!] STI: o Short {vid} morreu no meio (sem processo lá; ligado desde "
                     f"{' '.join(vivo.split()[1:3])}) — máquina reiniciou; libero o próximo")
                 _devolver(vid)
                 EST.unlink(missing_ok=True)
+                _vez_soltar()
                 return False
-        if mins <= MORTO_MIN:
+        if fim == "ANDANDO" and mins <= MORTO_MIN:
             log(f"STI ainda fazendo o Short {vid} ({est.get('destino')}; log parado há {mins} min)")
+            _vez_pegar(25)  # renova a vez enquanto o Short roda (a rodada passa aqui de 10 em 10 min)
             return True
-        _falhou(vid, f"morreu sem terminar (log parado há {mins} min)")
-        EST.unlink(missing_ok=True)
-        return False
+        if fim == "ANDANDO":
+            _falhou(vid, f"morreu sem terminar (log parado há {mins} min)")
+            EST.unlink(missing_ok=True)
+            _vez_soltar()
+            return False
+        # fim != "ANDANDO": terminou sem gravar o .fim — segue pro trecho que traz a pasta pronta
     trouxe = False
     for p in [x.strip() for x in pastas.splitlines() if x.strip()]:
         trouxe = _trazer_pasta(p) or trouxe
@@ -257,6 +312,7 @@ def buscar():
     _ssh(f"rm -rf ~/{R_BASE}/workspace/anime/{shlex.quote(vid)}_* ; "
          f"find ~/{R_BASE}/logs -name 'sti_short_*' -mtime +3 -delete", 120)
     EST.unlink(missing_ok=True)
+    _vez_soltar()
     return False
 
 
@@ -267,7 +323,7 @@ def _sti_livre():
         rc, txt = _ssh("nproc; cut -d' ' -f1 /proc/loadavg; free -m | awk 'NR==2{print $7}'; "
                        "pgrep -fc '[a]nime_auto[.]py --modo' || true; "
                        "sort -nr /sys/class/thermal/thermal_zone*/temp 2>/dev/null | head -1; "
-                       "pgrep -fc '[c]hrome.*remote-debugging' || true", timeout=60)
+                       "pgrep -af '[c]hrome.*remote-debugging-port' | grep -v -- '--type=' | grep -vc 'port=9470' || true", timeout=60)
     except subprocess.TimeoutExpired:
         return False, "STI não respondeu em 60 s"
     v = txt.split()
@@ -284,8 +340,15 @@ def _sti_livre():
         temp, chromes = 0, 0
     if temp > int(os.environ.get("STI_TEMP_MAX", "70")):
         return False, f"STI quente ({temp} °C) — espera esfriar"
-    if chromes > int(os.environ.get("STI_CHROMES_MAX", "5")):
-        return False, f"STI com {chromes} Chromes de upload abertos — Short junto disso superaquece"
+    # 14/11 (registro de 6 h, 1 linha/min): Short + navegador juntos = 95 °C ou mais em 36 de 109 min; navegador sem
+    # Short = 4 de 261 min. O que derruba o STI é os DOIS juntos. A conta antiga somava os processos-filho do Chrome
+    # (1 navegador = "4") e o limite 5 nunca barrava. Agora conta navegadores de verdade e não aceita nenhum
+    # (STI_CHROMES_MAX, padrão 0) — fora o telão (porta 9470), que é só o painel parado.
+    if chromes > int(os.environ.get("STI_CHROMES_MAX", "0")):
+        return False, f"STI com {chromes} navegador(es) de upload/Veo aberto(s) — Short junto superaquece (espera fechar)"
+    vez = _vez_do_sti()
+    if vez and vez != VEZ_SHORT:
+        return False, f"STI com a vez de '{vez}' (navegador) — Short espera"
     if rodando:
         return False, "já tem um anime_auto rodando lá"
     if ram < 3500:
@@ -413,6 +476,7 @@ def disparar():
     EST.write_text(json.dumps({"id": cand["id"], "destino": alvo["nome"], "titulo": cand["title"],
                                "inicio": datetime.now().isoformat(timespec="seconds")}, ensure_ascii=False),
                    encoding="utf-8")
+    _vez_pegar(25)
     log(f"STI faz o Short {cand['id']} [{tipo}] pra {alvo['nome']}")
     return f"Cortes: Short {cand['id']} pra {alvo['nome']} no STI"
 
@@ -455,4 +519,11 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except SystemExit:
+        raise
+    except BaseException as _e:  # 14/11: das 21:47 às 23:53 a tarefa saiu com erro a cada 10 min SEM uma linha no log
+        import traceback
+        log("[!] erro não tratado: " + " | ".join(traceback.format_exc().strip().splitlines()[-4:])[:600])
+        sys.exit(1)

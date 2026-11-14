@@ -2040,3 +2040,21 @@ pilha chegou ao PC2 em 67 s (era 950-1028 s). Relógio do PC1 3 min 42 s atrasad
   prazo/agendamento.
 - `alimentar_pc2.py`: a limpeza de disco do PC2 rodava a cada recusa por CPU ("disco" aparece em todo motivo): 179
   conexões à toa hoje, sempre "apaguei 0 pastas". Agora só quando o disco está abaixo do mínimo.
+
+## 14/11/2026 01:00 — manutenção: STI e desktop alimentados; o calor do STI é Short + navegador JUNTOS
+1. **Desktop (PC3)** ficava em mediana 13 min (até 145) parado entre entregar um Short e receber o próximo — 6 h
+   ociosas em 13/11, 20 Shorts. Novo `alimentar_pc3.py` (tarefa `AlimentarPC3`, 5 em 5 min, oculta): traz o pronto e
+   dispara o próximo, respeitando câmera/OBS/uso (as mesmas regras do controlador). 1ª rodada real: trouxe e 16 s
+   depois o desktop já tinha outro, tirado da pilha com 5 s de preparo. Desliga: estado\alimentar_pc3.off.
+2. **STI ficou 2 h parado (21:47-23:53) com um Short PRONTO lá.** Troquei o `sti_short.sh` com um Short rodando e o
+   bash perdeu o fim do script: o `.fim` nunca foi gravado. Pior: a minha regra "sem processo e sem .fim = morreu"
+   ia dar esse Short como morto. `disparar_sti.buscar`: com pasta pronta ou "PRONTO:" no fim do log = terminou.
+   O Short foi trazido (1080x1920, 69 s). Erro não tratado agora vai pro log (a tarefa saía com rc 1 calada).
+3. **Calor do STI, medido em 376 minutos de registro:** Short + navegador juntos = 95 °C ou mais em 36 de 109 min;
+   navegador sem Short = 4 de 261 min. É a soma dos dois. A trava de "5 Chromes" nunca barrava (contava os
+   processos-filho: 1 navegador aparecia como 4). Agora: conta navegadores de verdade e não começa Short com nenhum
+   aberto (`STI_CHROMES_MAX`, padrão 0; o telão não conta), e o Short PEGA A VEZ do STI no arquivo de reservas que
+   uploads/Veo/TikTok já respeitam (`maquina_remota.ocupar`, renovada a cada rodada, solta ao terminar) — eles vão
+   pro HP/acer/x200ma. 00:54: "vez de sti: short no STI por 25 min". `STI_SHORT_PEGA_VEZ=0` desliga.
+   Falta medir a temperatura de um Short inteiro com a vez reservada.
+4. O STI continua a 100 °C com carga, sem sudo pra limitar a frequência: a causa física (cooler/pasta) é da dona.
