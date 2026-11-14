@@ -274,3 +274,59 @@ Não analisei postagem, horários, narradores, fontes e nicho (são seus).
   3. Empate: hoje vence o primeiro do dicionário (`acao`). Empate deveria dar `normal`.
 - **Confiança:** alta (reproduzido). Pesa mais por causa do A10 (no longo a reserva é quem decide).
 
+## A12. Cartões animados: "ERA", "DURANTE", "FOI" viram cartão de PERSONAGEM; "comentou"/"curto" dispara o cartão de LIKE; a prioridade quase não vale
+- **Onde:** `recapd-ambientes/producao/bin/anime_cartoes.py` — `candidatos` (~linha 550), `_PARADA` (~511), as
+  `_RE_*` (~517-533) e a escolha em `gerar` (~634).
+- **Prova (rodado: `candidatos` com 40 s de narração de mentira, palavras a cada 0,4 s):**
+  ```
+   0.0s pri 8 personagem  {'nome': 'ERA', 'selo': 'IMPORTANTE'}
+   6.8s pri 6 lugar       {'texto': 'ESCOLA DURANTE'}
+   7.2s pri 7 personagem  {'nome': 'DURANTE', 'selo': 'IMPORTANTE'}
+  12.8s pri 6 personagem  {'nome': 'NAQUELE', 'selo': 'PERSONAGEM'}
+  14.8s pri 6 lugar       {'texto': 'MUNDO'}
+  19.2s pri 6 triunfo     {'palavra': 'CONSEGUIU'}      <- a frase era "Ele NÃO conseguiu passar na prova"
+  21.2s pri 3 alerta      {'palavra': 'CHEFE'}          <- "O chefe dele comentou..."
+  22.0s pri 8 like        {}                            <- "comentou"
+  24.0s pri 8 like        {}                            <- "o prazo era curto"
+  24.8s pri 4 chat        {'baloes': [(25.2, 'que ia embora da'), (26.8, 'cidade')]}   <- "disse que ia embora" (fala indireta)
+  27.6s pri 5 antes_agora {'antes': 'DA CIDADE ELE', 'agora': 'AS COSTAS E'}           <- "virou as costas"
+  30.0s pri 4 gps         {'palavra': 'SEGUIU'}         <- "seguiu em frente"
+  31.6s pri 5 sistema     {'cabeca': 'STATUS', 'linha': 'CLASSE MÉDIA DO REINO'}
+  33.6s pri 4 seta        {'palavra': 'OLHA ISSO'}      <- "Olha, eu não esperava"
+  38.8s pri 5 personagem  {'nome': 'FOI', 'selo': 'PERSONAGEM'}
+  ```
+- **Causas, uma por uma:**
+  1. **Personagem falso.** `_RE_NOME` aceita qualquer palavra com inicial maiúscula e a contagem NÃO descarta a
+     1ª palavra da frase (a lista `inicio` é calculada na linha seguinte mas só é usada pro comentário). Basta a
+     palavra abrir 3 frases: "Era", "Foi", "Durante", "Naquele", "Antes", "Ninguém", "Alguém", "Finalmente", "Aquele",
+     "Porque", "Sinceramente", "Convenhamos", "Imagina", "Repara". O `anime_formatos._cores_dos_nomes` já faz certo
+     (ignora começo de frase) — é copiar a regra: só conta ocorrência que NÃO abre frase; nome que só aparece abrindo
+     frase precisa de 5+.
+  2. **Lugar + palavra seguinte.** "escola. Durante" virou "ESCOLA DURANTE": o `elif` que gruda a próxima palavra
+     maiúscula não olha se a palavra do lugar fechou a frase. Conferir `_FIM_FRASE.search(pal[i][2])` antes de grudar.
+  3. **Triunfo em derrota.** `conseguiu` é verbo comum e vem muito com "não". Tirar `conseguiu`; nos outros, pular se
+     uma das 2 palavras anteriores for "não", "nunca", "quase", "nem".
+  4. **Like fora de hora.** `curt\w*` casa "curto", "curta" (distância), "curtiu"; `coment\w*` casa "comentou",
+     "comentário" (o do narrador!). E o like **sempre sai** (até 3 por vídeo) e ainda derruba o cartão que estiver na
+     frente, trazendo a mascote. Trocar por formas de pedido: `^(curte|curta|inscreva|inscreve|comenta|comente)$` só
+     quando a frase tem "like", "canal", "vídeo", "aí" (ou, mais simples: só nas 3 últimas frases do vídeo e na
+     frase do CTA que o roteiro já marca).
+  5. **Chat em fala indireta.** "disse que ia embora" vira balão "QUE IA EMBORA DA". Só abrir chat se a palavra
+     seguinte NÃO for "que"/"pra"/"para"/"a"/"ao" ou se houver aspas/dois-pontos/travessão logo depois.
+  6. **Antes/agora sem sentido.** "virou as costas" → ANTES "DA CIDADE ELE" / AGORA "AS COSTAS E". `virou`/`tornou`
+     só valem quando a próxima palavra é "um", "uma", "o", "a", "rei", "lenda"... ("virou um monstro", "tornou-se rei")
+     e nunca com "as costas", "a esquina", "o rosto", "a cabeça", "de lado".
+  7. **Palavras do dia a dia nas listas:** lugar `mundo`, `cidade`, `escola`, `capital`, `ilha`; sistema `classe`,
+     `status`, `missão`, `recompensa`; alerta `chefe`; gps `seguiu`, `procurou`, `fugiu`; seta `olha`. Em `lugar`,
+     exigir nome próprio depois ("Reino de Aldor", "Academia Solis") — "mundo" sozinho não é cartão.
+  8. **A prioridade (`pri`) quase não é usada.** Em `gerar` os candidatos são ordenados por TEMPO e entra o primeiro
+     que aparecer depois do intervalo (`t >= livre`); a prioridade só desempata dois no MESMO instante. Então o cartão
+     fraco que vem 0,4 s antes ("SEGUIU") ganha do forte ("PROTAGONISTA"). Sugestão: ao abrir a vaga, olhar os
+     candidatos dos próximos ~4 s e ficar com o de maior prioridade.
+- **Efeito no vídeo:** cartão animado ocupando a tela com informação errada ("PERSONAGEM: FOI", "VITÓRIA: CONSEGUIU"
+  num fracasso, like no meio da história). É dos elementos mais visíveis do vídeo.
+- **Como conferir no D::** `marcas_visuais.json` / `pronto.json["marcas"]` de um longo recente lista os cartões e o
+  rótulo de cada um — procurar por "ERA", "FOI", "DURANTE", "CONSEGUIU", "SEGUIU".
+- **Confiança:** alta (reproduzido na função real). Posso escrever o conserto com teste se você me liberar o
+  arquivo (avise no recado).
+
