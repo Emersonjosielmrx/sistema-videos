@@ -49,6 +49,10 @@ HOSTS = {
     "sti": {"nome": "Notebook STI", "modelo": "is1442", "ip": "100.98.49.0", "notebook": True},
     "s20ultra": {"nome": "S20 Ultra", "modelo": "SM-G988B", "ip": "100.103.218.7"},
     "s20": {"nome": "S20", "modelo": "SM-G980F", "ip": "100.117.134.73"},
+    # 13/11 dona ("adicione no sistema o HP Pavilion"): AMD Turion II N530 (2010, 2 núcleos), 8 GB, Mint 22.3, ffmpeg
+    # 7.0.2 estático em ~/bin (copiado do STI). Medido: 8 s 1080x1920 veryfast em 9 s — mais lento que o STI e os S20,
+    # fica depois deles. Na tomada (bateria morta: 0%).
+    "hp": {"nome": "Notebook HP", "modelo": "pavilion dv6", "ip": "100.123.69.41", "notebook": True, "lento": True},
     # 12/11 dona ("A2, A3 e Moto G20 ligados"): Moto G20 (8 núcleos, 3,5 GB, ffmpeg do Termux). A2/A3 entram quando o
     # sshd do Termux deles responder (instalar_vigia.py instala o vigia sozinho).
     "g20": {"nome": "Moto G20", "modelo": "moto g(20)", "ip": "100.75.139.24", "ram_min": 1.0},
@@ -316,7 +320,15 @@ def _escolher(rotulo):
     ordem = list(HOSTS)
     if os.environ.get("CELULARES_RODIZIO", "1") != "0":
         hoje = _stats().get(_hoje(), {})
-        ordem.sort(key=lambda h: (hoje.get(h, {}).get("falhas", 0) > 0, hoje.get(h, {}).get("ok", 0)))
+        # 13/11 22:55 (dona: "veja a forma mais eficiente de usar o HP"): "quem fez menos hoje vai primeiro" punha o
+        # aparelho recém-chegado na frente — e o HP é o mais lento da casa. Mesma prova (xfade 1080x1920): PC1 31 s,
+        # S20 Ultra 36 s, S20 42 s, STI 71 s, HP 267 s. Um trecho que caísse nele segurava o Short inteiro 4 min.
+        # Agora "lento": True (HOSTS) vai sempre DEPOIS dos rápidos: só pega render com todos eles ocupados. O melhor
+        # uso do HP é navegador (maquina_remota: uploads/logins), que não depende de processador.
+        # CELULARES_LENTO_IGUAL=1 volta ao rodízio puro.
+        lento = (lambda h: False) if os.environ.get("CELULARES_LENTO_IGUAL") == "1" else \
+            (lambda h: bool(HOSTS[h].get("lento")))
+        ordem.sort(key=lambda h: (lento(h), hoje.get(h, {}).get("falhas", 0) > 0, hoje.get(h, {}).get("ok", 0)))
     for host in ordem:
         if not _pegar(host, rotulo):
             continue

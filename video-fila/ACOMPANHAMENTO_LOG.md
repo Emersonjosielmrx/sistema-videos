@@ -2010,3 +2010,20 @@ NÃO fazer o STI rodar 2 Shorts juntos nem virar gerente enquanto a refrigeraç�
    1,3): seguia a 99-100 °C. Agora um núcleo físico (`STI_CPUS=0,2`) e nice 15: caiu pra 71-75 °C com o Short rodando.
    A trava de calor funcionou sozinha às 21:49 ("STI quente (100 °C) — espera esfriar").
 Disco D: 25 GB livres (outro agente liberou).
+
+## 13/11/2026 23:00 — HP Pavilion: onde ele rende (medido) + recado pro chat que está instalando ele
+Dona: "coloquei mais um PC, veja a forma mais eficiente de usar ele". Medido na MESMA prova de render (xfade
+1080x1920): PC1 31 s, S20 Ultra 36 s, S20 42 s, STI 71 s, **HP 267 s** (Turion II de 2010, 2 núcleos; 62 °C parado,
+76 °C na prova). É o aparelho mais lento da casa pra render — 7x mais lento que um celular.
+- Feito (`celulares.py`): HP marcado `"lento": True` e o rodízio do render põe os lentos DEPOIS dos rápidos (antes "quem
+  fez menos hoje vai primeiro" punha o recém-chegado na frente: cada trecho que caísse nele segurava o Short 4 min).
+  Ordem agora: g20, s20, sti, s20ultra, hp. `CELULARES_LENTO_IGUAL=1` volta.
+- Melhor uso = NAVEGADOR (uploads do Studio, logins, TikTok/Insta): 8 GB de RAM, Chrome instalado, não depende de CPU.
+  Outro chat já o registrou em `maquina_remota.MAQUINAS` (lento, como o Acer) e a dona está logando as contas.
+- **RECADO pro chat que está com o `maquina_remota.py` (não mexi no arquivo pra não atropelar):** quando o HP tiver
+  contas logadas, tirar o STI da frente nos navegadores — `ORDEM_NAVEGADOR`: hp 1, sti 2 (hoje os dois são 1). Motivo
+  medido hoje: o STI desliga por calor (99-100 °C) justamente quando roda Short + Chromes de upload juntos; sozinho
+  com o Short em 1 núcleo físico fica em 71-75 °C. STI = só Shorts; HP/acer/x200ma = navegador.
+- NÃO instalar o pipeline de Short inteiro no HP: um Short que leva ~25 min no STI levaria horas lá.
+Também nesta rodada: a trava de disparo do PC2 passou a cobrir só a ESCOLHA (o download fica fora) — 1º Short da
+pilha chegou ao PC2 em 67 s (era 950-1028 s). Relógio do PC1 3 min 42 s atrasado (serviço w32time PARADO).
