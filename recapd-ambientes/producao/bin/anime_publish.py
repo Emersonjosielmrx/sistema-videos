@@ -127,7 +127,7 @@ def extract_thumb(video, thumb_png, t_s=None):
         return False
 
 
-def generate_metadata(anime, capitulo, formato, video_info, roteiro_path=None):
+def generate_metadata(anime, capitulo, formato, video_info, roteiro_path=None, roteiro_txt=""):
     """Gera metadata viral via Gemini (mesma base URL/api key do claude_client)."""
     prompt = f"""Você é especialista em YouTube BR para canal de RECAP DE ANIME em português brasileiro.
 
@@ -151,13 +151,37 @@ REGRAS ABSOLUTAS (NUNCA violar):
 
 RETORNE JSON PURO (sem markdown) com as chaves: titulo, descricao, tags (array), hashtags (array), capa_conceito, thumb_texto, ctas (array)."""
 
+    # 14/11 (revisão dos Shorts do dia): este reserva escrevia SEMPRE como recap de anime — um dorama sobre uma menina
+    # e a mãe saiu "⚡ Ele Foi Traído e Acabou Despertando o Poder Mais Apelado do Mundo!" (20 Shorts desde 06/11,
+    # vários postados). Com o roteiro em mãos, o texto sai do QUE O VÍDEO CONTA, seja qual for o assunto.
+    # METADATA_RESERVA_ANTIGA=1 volta ao prompt de anime.
+    rot = (roteiro_txt or "").strip()
+    if rot and os.environ.get("METADATA_RESERVA_ANTIGA") != "1":
+        prompt = (
+            "Você escreve título e descrição de YouTube Shorts em português do Brasil.\n\n"
+            "ROTEIRO NARRADO DO VÍDEO (é a única fonte: não invente nada que não esteja aqui):\n"
+            f"<<<\n{rot[:2500]}\n>>>\n\n"
+            "REGRAS:\n"
+            "1. Tudo em português do Brasil.\n"
+            "2. O título descreve o que ACONTECE neste roteiro (quem, o quê), cria curiosidade e NÃO conta o final. "
+            "Até 90 caracteres, 2 ou 3 palavras-chave em MAIÚSCULAS, no máximo 1 emoji no fim.\n"
+            "3. Confirme no roteiro o gênero de quem age antes de usar ELE/ELA; na dúvida, sujeito neutro.\n"
+            "4. Proibido clichê que não esteja no roteiro (traição, renascer, poder apelado, isekai, capítulo). Nunca "
+            "cite nome de obra, canal ou criador.\n"
+            "5. Descrição: 2 a 4 frases sobre o que o vídeo mostra + 1 pergunta pro público. Tags: 10 a 15, do assunto "
+            "real.\n"
+            "6. thumb_texto: 2 a 4 palavras MAIÚSCULAS do assunto real. capa_conceito: 1 frase em inglês da cena "
+            "principal.\n\n"
+            "RETORNE JSON PURO com as chaves: titulo, descricao, tags (array), hashtags (array), capa_conceito, "
+            "thumb_texto, ctas (array).")
+
     if not claude_client.is_available():
         print("[metadata] claude_client indisponível — usando placeholder")
-        return _placeholder_meta(anime, capitulo, formato, video_info)
+        return _placeholder_meta(anime, capitulo, formato, video_info, rot)
 
     resp = claude_client.generate_text(prompt, max_tokens=2000, temperature=0.7)
     if not resp:
-        return _placeholder_meta(anime, capitulo, formato, video_info)
+        return _placeholder_meta(anime, capitulo, formato, video_info, rot)
 
     # Limpa blocos markdown ```json ... ```
     txt = resp.strip()
@@ -167,15 +191,25 @@ RETORNE JSON PURO (sem markdown) com as chaves: titulo, descricao, tags (array),
     m = re.search(r"\{.*\}", txt, re.DOTALL)
     if not m:
         print("[metadata] resposta sem JSON válido, usando placeholder")
-        return _placeholder_meta(anime, capitulo, formato, video_info)
+        return _placeholder_meta(anime, capitulo, formato, video_info, rot)
     try:
         return json.loads(m.group(0))
     except Exception as e:
         print(f"[metadata] JSON parse falhou: {e}")
-        return _placeholder_meta(anime, capitulo, formato, video_info)
+        return _placeholder_meta(anime, capitulo, formato, video_info, rot)
 
 
-def _placeholder_meta(anime, cap, formato, video_info):
+def _placeholder_meta(anime, cap, formato, video_info, roteiro_txt=""):
+    # 14/11: sem IA nenhuma, o título vem da 1ª frase do roteiro (o gancho do próprio vídeo), nunca do texto fixo de
+    # anime abaixo — que só fica pra quando não há roteiro.
+    rot = " ".join((roteiro_txt or "").split())
+    if rot and os.environ.get("METADATA_RESERVA_ANTIGA") != "1":
+        frase = re.split(r"(?<=[.!?…])\s", rot)[0].strip().rstrip(".")
+        if len(frase) > 88:
+            frase = frase[:88].rsplit(" ", 1)[0] + "…"
+        resumo = rot[:400].rsplit(" ", 1)[0]
+        return {"titulo": frase, "descricao": resumo + "…\n\nO que você achou? Comenta aí 👇", "tags": [],
+                "hashtags": [], "capa_conceito": "", "thumb_texto": "", "ctas": []}
     return {
         "titulo": f"⚡ Ele Perdeu TUDO e Renasceu no Mundo Mais Perigoso! Capítulo {cap} COMPLETO",
         "descricao": f"Recap completo do capítulo {cap}.\n\n"
@@ -413,7 +447,13 @@ def main():
         nomes_obra = [args.anime] + list(pacote.get("nomes_da_obra") or [])
         print(f"[seo] estilo={pacote['estilo']} | {meta['titulo']}")
     else:
-        meta = generate_metadata(args.anime, cap, args.formato, video_info)
+        _rot = ""
+        try:
+            if args.roteiro and Path(args.roteiro).is_file():
+                _rot = Path(args.roteiro).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            pass
+        meta = generate_metadata(args.anime, cap, args.formato, video_info, roteiro_txt=_rot)
         nomes_obra = [args.anime]
         if seo_generator:  # o prompt antigo deixava o nome 1x na descrição/hashtag
             rx = seo_generator._rx_obra(nomes_obra)

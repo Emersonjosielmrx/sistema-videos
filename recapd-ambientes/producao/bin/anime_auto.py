@@ -509,7 +509,11 @@ def fazer_deitado(cand, target_lines, dry_run, use_worker=False,
             if not use_worker:  # no PC2 a voz é escolhida lá
                 import anime_tts
                 pub_cmd += ["--narrador", os.environ.get("ANIME_TTS_VOICE") or anime_tts.NARRATOR_VOICE]
-            env_pub = dict(os.environ, PYTHONUTF8="1")
+            # 14/11: PYTHONUNBUFFERED — tudo que o anime_publish imprime ([seo] estilo=..., "[seo] falhou", [qa],
+            # [metadata]) sumia do log diário desde o fim de outubro (saída com buffer do processo-filho): não dava
+            # pra saber por que o título caía no texto de reserva.
+            env_pub = dict(os.environ, PYTHONUTF8="1", PYTHONUNBUFFERED="1")
+            sys.stdout.flush()
             # 900 s: SEO pelo LLM + capa IA com checagem por visão (até 3 imagens) — 120 s matava no meio
             rp = subprocess.run(pub_cmd, env=env_pub, timeout=4800)  # 4800: inclui a análise do vídeo pronto (anime_revisao, 16/10)
             if rp.returncode == 0:
@@ -1082,7 +1086,11 @@ def fazer_short(cand, target_lines, dry_run, use_worker=False,
             segurado = teste and (teste.get("qualidade") or {}).get("ok") is False  # voz em teste que soou mal
             if segurado:  # já nasce segurado (nunca fica pronto=True nem por um instante)
                 pub_cmd += ["--segurar", teste["qualidade"].get("motivo") or "áudio ruim"]
-            env_pub = dict(os.environ, PYTHONUTF8="1")
+            # 14/11: PYTHONUNBUFFERED — tudo que o anime_publish imprime ([seo] estilo=..., "[seo] falhou", [qa],
+            # [metadata]) sumia do log diário desde o fim de outubro (saída com buffer do processo-filho): não dava
+            # pra saber por que o título caía no texto de reserva.
+            env_pub = dict(os.environ, PYTHONUTF8="1", PYTHONUNBUFFERED="1")
+            sys.stdout.flush()
             rp = subprocess.run(pub_cmd, env=env_pub, timeout=4800)  # 4800: inclui a análise do vídeo pronto (anime_revisao, 16/10)
             if teste:  # roteiro na pasta do Short (o vigia reconfere) + registro
                 pj_t = Path(anota.read_text(encoding="utf-8").strip()) if rp.returncode == 0 and anota.exists() else None
