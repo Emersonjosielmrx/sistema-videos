@@ -75,8 +75,44 @@ def _rc1(*args, timeout=180):
     return saida
 
 
+SECO = Path(__file__).resolve().parent.parent / "workspace" / "cache" / "baixador_fora_seco.json"
+SECO_FALHAS = int(__import__("os").environ.get("BAIXADOR_SECO_FALHAS", "3"))
+SECO_HORAS = float(__import__("os").environ.get("BAIXADOR_SECO_HORAS", "2"))
+
+
+def _seco(ok):
+    """15/11: depois do 3º banimento as VPS seguem escrevendo vivo.json mas o YouTube barra todas — o PC1 achava que
+    havia baixador e perdia 4-5 min por Short esperando (preparo do PC2 de 936 s). Conta pedidos seguidos sem entrega;
+    entrega zera. BAIXADOR_SECO_FALHAS=0 desliga."""
+    try:
+        d = json.loads(SECO.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        d = {}
+    d = {"falhas": 0} if ok else {"falhas": int(d.get("falhas", 0)) + 1, "em": time.time()}
+    try:
+        SECO.parent.mkdir(parents=True, exist_ok=True)
+        SECO.write_text(json.dumps(d), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def seco():
+    """Segundos que faltam para tentar o baixador de fora de novo (0 = pode tentar)."""
+    if SECO_FALHAS <= 0:
+        return 0
+    try:
+        d = json.loads(SECO.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return 0
+    if int(d.get("falhas", 0)) < SECO_FALHAS:
+        return 0
+    return max(0, float(d.get("em", 0)) + SECO_HORAS * 3600 - time.time())
+
+
 def vivo(max_min=3):
-    """O baixador do Kaggle respondeu nos últimos `max_min` minutos?"""
+    """O baixador do Kaggle respondeu nos últimos `max_min` minutos? (E entregou: ver seco().)"""
+    if seco():
+        return False
     try:
         d = json.loads(_rc("cat", f"{RAIZ}/vivo.json", timeout=60))
         em = datetime.fromisoformat(d["em"])
@@ -128,6 +164,7 @@ def baixar(url, vid, pasta, max_height=720, legendas=("pt", "es"), timeout=900, 
             erro = json.loads(_rc("cat", f"{RAIZ}/prontos/{vid}/erro.json", timeout=60)).get("erro", "?")
             _rc("purge", f"{RAIZ}/prontos/{vid}", timeout=60)
             log(f"[kaggle] {vid}: erro lá ({erro[:150]})")
+            _seco(False)
             return None, []
         if "ok.json" in nomes:
             _rc("copy", f"{RAIZ}/prontos/{vid}", str(pasta), "--exclude", "ok.json", timeout=900)
@@ -137,8 +174,10 @@ def baixar(url, vid, pasta, max_height=720, legendas=("pt", "es"), timeout=900, 
             legs = [pasta / n for n in info.get("legendas", [])]
             log(f"[kaggle] {vid}: {info.get('mb')} MB em {info.get('s')} s lá + {round(time.time() - t0)} s total "
                 f"(IP {info.get('ip')}), legendas {info.get('legendas')}")
+            _seco(bool(video and video.exists()))
             return (video if video and video.exists() else None), [l for l in legs if l.exists()]
     log(f"[kaggle] {vid}: não voltou em {timeout} s — pedido retirado")
+    _seco(False)
     try:
         _rc("deletefile", f"{RAIZ}/pedidos/{vid}.json", timeout=60)
     except RuntimeError:
