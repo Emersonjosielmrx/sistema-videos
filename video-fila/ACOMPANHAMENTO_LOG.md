@@ -2193,3 +2193,26 @@ até 1296 s com a máquina parada.
 - Views do ORIGINAL não preveem as nossas: canal forte ganha um pouco com original >= 100 mil; canal fraco fica perto
   de zero com qualquer original. O que decide é o canal → reforça a decisão da escada (fracos 1-2/dia).
 - 19% dos posts de 3 dias foram para canais com mediana <= 4 views (línguas, Forja, Manhwa/Dorama Noturno).
+
+## 15/11 09:10 — por que PC2 e desktop pararam das 07:16 às ~09:10 (e o que mudei)
+
+O PC1 reiniciou às ~07:07; depois disso, uma cadeia de travas deixou PC2 e desktop sem Short por ~2 h:
+1. Download de Short travado segurou a vez do yt-dlp 1908 s (os outros esperaram o teto de 30 min). `anime_fetch`:
+   Short tem teto de `SHORT_DL_SEG` (300 s) e `--socket-timeout 30` (normal: 12-18 s). Longo segue com 1800 s.
+2. O preparo rodava DENTRO da rodada do alimentador do PC2 e segurava a trava dele: a rodada de 07:18 ficou 1,5 h
+   presa. O alimentador só dispara agora; quem prepara é o EncherPilha (`ALIMENTADOR_PREPARA=1` volta).
+3. Escolha lenta sob a trava do disparo: `parceiro_diario.itens()` lia ~3.000 fichas, 2x por escolha (10 s com o
+   disco livre; minutos com o PC1 a 100%). Cache por mtime/tamanho (2ª leitura 7,9 → 2,1 s, resultado idêntico).
+   `ITENS_SEM_CACHE=1` desliga.
+4. Lista de canal: canal removido (404) ou sem aba Shorts caía no yt-dlp e ficava 14-22 min pendurado
+   (@thalisshortsbr, 864 s segurando a vez). Agora usa a lista guardada; só formato estranho cai no yt-dlp.
+5. PC1 a 100%: ssh/taskkill dos despachos estouravam prazo. Os 5 despachos rodam acima do normal
+   (`prioridade_alta.py`; `PRIORIDADE_ALTA=0` desliga). Fechei um grep de outra sessão (1 núcleo + 1,3 GB há 1,5 h) e
+   um Chrome do Flow (porta 9280) aberto há 80 min sem gerador.
+6. Fonte repetida (18 renders descartados em 3 dias, mediana 30 min entre os 2): `anime_auto` agora RESERVA o que
+   escolhe (`AUTO_RESERVA=0` desliga) e o `ocioso` respeita `_fontes_postadas.json` (`FONTES_POSTADAS_OCIOSO=0`).
+   Os outros 31 descartes "fonte repetida" são da regra PREFERE_PT (a língua cede pro pt), intencionais.
+
+**Para a dona decidir:** fontes novas de ESPORTE (o nicho do canal nº 1 acabou: 0 vídeos novos nas 3 fontes).
+Conferidas 1 a 1 pela API pública: @eFootzBR (300 Shorts, mediana 68 mil views), @NinjaShortes (27 mil),
+@RANKFUTEBOL10 (26 mil), @YguFut (20 mil), @curiosidadesdabola (5,5 mil). Só entram se ela autorizar.
