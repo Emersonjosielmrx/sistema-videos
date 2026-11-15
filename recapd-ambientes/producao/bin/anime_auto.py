@@ -1203,6 +1203,23 @@ def main():
         if piso and fortes and len(fortes) < len(novos):
             logging.info(f"[auto] piso de {piso:,} views na fonte: {len(fortes)} de {len(novos)} candidatos passam")
             novos = fortes + [c for c in novos if (c.get("views") or 0) < piso]
+        # 15/11: o anime_auto lia as reservas do ocioso mas não RESERVAVA o que escolhia — 2 abastecedores (e o PC2) pegavam
+        # o mesmo vídeo com ~30 min de diferença e um ia pro lixo como "fonte repetida". Reserva no registro comum.
+        # AUTO_RESERVA=0 desliga.
+        if not args.id and os.environ.get("AUTO_RESERVA", "1") != "0":
+            try:
+                if r"D:\video-fila" not in sys.path:
+                    sys.path.append(r"D:\video-fila")
+                import ocioso as _oc
+                _res = []
+                for c in novos:
+                    if len(_res) >= args.top:
+                        break
+                    if _oc._reservar(c["id"]):
+                        _res.append(c)
+                novos = _res  # quem outro reservou no meio do caminho sai (nunca o mesmo vídeo em 2 máquinas)
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[auto] reservar candidato falhou ({type(e).__name__}: {str(e)[:100]})")
         cands = novos[:args.top]
         if args.id:  # balanço entre PCs (17/10): o PC1 escolhe o vídeo e manda o PC2 fazer ESSE, sem repetir
             cands = [c for c in fonte if c["id"] == args.id][:1]

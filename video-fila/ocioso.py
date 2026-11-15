@@ -497,6 +497,14 @@ def _escolher_pc2(pdi, anime_discover, c):
         log(f"parceiro: filas pt cheias — Short pra {falta[0]['nome']} + versões em {_LINGUAS_DA_VEZ} (línguas com "
             "fila curta)")
     usados = _ler_feitos("_feitos_short.txt") | _ler_feitos("_feitos_short_attempted.txt") | _reservados()
+    # 15/11: fonte já POSTADA em algum canal (registro durável do parceiro_diario) — o anime_auto já olhava, o ocioso
+    # não: 18 Shorts em 3 dias foram renderizados e descartados por "fonte repetida". FONTES_POSTADAS_OCIOSO=0 desliga.
+    if os.environ.get("FONTES_POSTADAS_OCIOSO", "1") != "0":
+        try:
+            for _por in json.loads((FEITOS / "_fontes_postadas.json").read_text(encoding="utf-8")).values():
+                usados |= set(_por)
+        except (OSError, ValueError, AttributeError, TypeError):
+            pass
     # 30/10 (D39): fonte sem vídeo novo (29/10 22:49 @grananerd) deixava o PC2 vazio a rodada inteira: tenta os próximos
     # canais da fila na mesma ordem de prioridade (até 3)
     # 13/11 (dona: "todos têm de estar sempre no máximo; resolver os gargalos"): olhava só os 3 canais do topo e
