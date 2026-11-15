@@ -2227,3 +2227,12 @@ Conferidas 1 a 1 pela API pública: @eFootzBR (300 Shorts, mediana 68 mil views)
   sozinhos. `ABASTECEDOR_SEM_KAGGLE=-1` desliga. Quando uma conta de curto voltar, a meta volta sozinha.
 - `prioridade_alta.py` nunca tinha funcionado (ctypes truncava o handle: erro 6). Corrigido e testado (16384 → 32768).
   `ytdlp_vez`: quem tem a vez sobe pra acima do normal (psutil) e volta ao soltar.
+
+## 15/11 10:50 — frota voltou a rodar
+
+- PC2 sem Short 07:09-10:35 e desktop 09:27-10:48. Depois de cortar a fila de download do PC1 (abastecedor sem extras
+  sem Kaggle; 3 extras parados devolvidos à fila): PC2 10:35, 10:39 (preparo 18 s, da pilha), 10:49 (2 rodando);
+  desktop 10:48 (preparo 17 s, da pilha).
+- Defeito meu corrigido: a limpeza da pilha apagava como órfão todo preparo com mais de 30 min — inclusive os VIVOS
+  esperando a vez do yt-dlp (3 perdidos em 1 h). Agora o meta_parcial guarda o pid de quem baixa; órfão = esse
+  processo morreu. `_prontos_pc2` não apaga mais pastas `_baixando_`.
