@@ -2156,3 +2156,17 @@ Base: 1.429 Shorts de parceiro com views de 48 h (18/10 a 12/11), ledger e metri
 - Baixar os canais fracos de 4-5/dia pra 1-2/dia (o mínimo que ela definiu é 1 a 3) e passar essas ~25 vagas de
   produção por dia pros fortes. Pelos números, é a mudança que mais rende.
 - Teto dos fortes: hoje 12/dia; nenhum passou de 7 abertos. O freio real é o limite diário do YouTube.
+
+## 15/11 06:45 — pesquisador CURTOS zerado; lista de canal sem yt-dlp; baixador de fora "seco"
+
+- **Lista da aba Shorts pela API do site** (`bin/aba_shorts.py`, ideia do misterzaidxpy/tubescrape, refeita com
+  paginação): `anime_discover.discover_canal` tenta ela primeiro: 1-2 s por canal contra 5-10 s do yt-dlp, mesmos
+  ids e views (150/51/20 iguais em 3 canais), e não ocupa a vez do yt-dlp, que fica para os downloads. Erro =
+  volta ao yt-dlp. `DISCOVER_TUBESCRAPE=0` desliga. Leitura pública, sem conta.
+- **Baixador de fora que não entrega**: as VPS seguem marcando "vivo", mas desde 04:58 nenhum pedido voltou (6
+  seguidos), e cada Short perdia 5 min esperando (preparo do PC2 chegou a 936 s). `kaggle_baixar`: 3 pedidos
+  seguidos sem entrega = 2 h sem pedir para fora, depois tenta de novo; 1 entrega zera. `BAIXADOR_SECO_FALHAS=0`
+  desliga. Até voltar, a pilha não enche (só casa baixa).
+- **Caixa CURTOS do pesquisador**: 43 blocos avaliados. 1 implantado (tubescrape), 18 reprovados com motivo.
+  hookcheck rodado em 15 Shorts: 14 com risco baixo; só 1 de 73 começa com 0,07 s de preto. As aberturas já estão
+  boas.
