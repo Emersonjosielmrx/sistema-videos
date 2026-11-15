@@ -165,14 +165,29 @@ def _fonte(pj, d):
         return str(pj.parent)
 
 
+_ITENS_CACHE = {}  # {caminho do postar.json: ((mtime, tamanho), ficha)} — ver itens()
+
+
 def itens(c):
     """Um item por postar.json de Short do parceiro (os de teste ficam de fora), do mais antigo pro mais novo."""
     pt_padrao = c["pt"][0]["canal"]  # os primeiros (16/10) saíram com o @manhwanoturno gravado
     por_lang = {lang: d["canal"] for lang, d in c["idiomas"].items()}
     out = []
+    # 15/11: ~3.000 fichas lidas e decodificadas a cada chamada (2x por escolha = 10 s com o disco folgado; minutos
+    # com rclone/render no disco) — a escolha do EncherPilha passou de 12 min segurando a trava do disparo do PC2.
+    # Cache em memória por (mtime, tamanho): só relê a ficha que mudou. ITENS_SEM_CACHE=1 desliga.
+    usar_cache = os.environ.get("ITENS_SEM_CACHE") != "1"
     for pj in SHORTS.glob("*/postar.json"):
         try:
-            d = json.loads(pj.read_text(encoding="utf-8"))
+            st = pj.stat()
+            chave = (st.st_mtime, st.st_size)
+            hit = _ITENS_CACHE.get(pj) if usar_cache else None
+            if hit and hit[0] == chave:
+                d = dict(hit[1])  # cópia: quem mexe em x["d"] na memória não suja o cache
+            else:
+                d = json.loads(pj.read_text(encoding="utf-8"))
+                if usar_cache:
+                    _ITENS_CACHE[pj] = (chave, dict(d))
         except (OSError, ValueError):
             continue
         # o recap de anime próprio grava na mesma pasta (categoria "animes"): quem posta esse é o postar_tudo_hoje
@@ -181,7 +196,7 @@ def itens(c):
         lang = d.get("idioma") or "pt"
         out.append({"pj": pj, "d": d, "lang": lang, "estado": _estado(d), "fonte": _fonte(pj, d),
                     "canal": d.get("canal") or (pt_padrao if lang == "pt" else por_lang.get(lang)),
-                    "mp4": pj.parent / d.get("arquivo", "video.mp4"), "mtime": pj.stat().st_mtime})
+                    "mp4": pj.parent / d.get("arquivo", "video.mp4"), "mtime": st.st_mtime})
     return sorted(out, key=lambda x: x["mtime"])
 
 

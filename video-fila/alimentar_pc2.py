@@ -76,10 +76,14 @@ def rodada():
     # trava do alimentador — das 19:56 às 21:00 o PC2 ficou SEM Short (a rodada de 20:33 passou 27 min esperando um
     # download e nenhuma outra entrava pra disparar). Disparar vem sempre antes; aqui só se prepara 1 por rodada
     # (como era), e a pilha grande é enchida por OUTRA tarefa (encher_pilha.py), que não segura o disparo.
-    try:
-        ocioso.preparar_proximo_pc2()
-    except Exception as e:  # noqa: BLE001
-        log(f"[!] preparar o próximo: {type(e).__name__}: {str(e)[:150]}")
+    # 15/11: o preparo aqui segurava a trava do alimentador durante o download — a rodada de 07:18 ficou 1,5 h presa
+    # (download travado + ssh caindo) e o PC2 não recebeu nenhum Short. Quem prepara agora é o EncherPilha (processo à
+    # parte, 5/5 min, mesma função). ALIMENTADOR_PREPARA=1 volta a preparar aqui.
+    if os.environ.get("ALIMENTADOR_PREPARA") == "1":
+        try:
+            ocioso.preparar_proximo_pc2()
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] preparar o próximo: {type(e).__name__}: {str(e)[:150]}")
 
 
 def main():
