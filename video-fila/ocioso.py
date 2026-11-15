@@ -545,7 +545,8 @@ def _prontos_pc2():
     feitos = _ler_feitos("_feitos_short.txt")
     out = []
     for d in PRONTOS_PC2.glob("*"):  # preparo que caiu no meio (sem meta.json) e já passou de 1 h: lixo
-        if d.is_dir() and not (d / "meta.json").exists() and time.time() - d.stat().st_mtime > 3600:
+        if (d.is_dir() and not d.name.startswith("_baixando_") and not (d / "meta.json").exists()
+                and time.time() - d.stat().st_mtime > 3600):  # 15/11: _baixando_ vivo é do preparo (regra do pid)
             shutil.rmtree(d, ignore_errors=True)
     for m in sorted(PRONTOS_PC2.glob("*/meta.json"), key=lambda p: p.stat().st_mtime):
         try:
@@ -639,7 +640,7 @@ def encher_pilha(max_seg=600):
             shutil.rmtree(pasta, ignore_errors=True)
             pasta.mkdir(parents=True, exist_ok=True)
             # meta provisória: conta na fila do canal, pra próxima escolha desta mesma volta ir pra outro canal
-            (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}}), encoding="utf-8")
+            (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}, "pid": os.getpid()}), encoding="utf-8")
             escolhidos.append((alvo, escolha, cand, pasta))
         finally:
             try:
@@ -711,13 +712,28 @@ def preparar_proximo_pc2():
         _baixando = 0
         for _p in (PRONTOS_PC2.glob("_baixando_*") if PRONTOS_PC2.exists() else []):
             try:
-                if time.time() - _p.stat().st_mtime > 1800:  # órfão (processo morreu): libera o vídeo e apaga
+                # órfão = o processo que criou a pasta morreu (pid no meta_parcial). 15/11: só a idade (30 min) apagava
+                # preparo VIVO esperando a fila do yt-dlp — 3 perdidos em 1 h. Sem pid (versão antiga): idade > 2 h.
+                try:
+                    _dono = int(json.loads((_p / "meta_parcial.json").read_text(encoding="utf-8")).get("pid") or 0)
+                except (OSError, ValueError, TypeError):
+                    _dono = 0
+                if _dono:
+                    try:
+                        import psutil as _ps
+                        _vivo = _ps.pid_exists(_dono)
+                    except ImportError:
+                        _vivo = True
+                    _orfao = not _vivo and time.time() - _p.stat().st_mtime > 120
+                else:
+                    _orfao = time.time() - _p.stat().st_mtime > 7200
+                if _orfao:  # libera o vídeo e apaga
                     _vid = _p.name[len("_baixando_"):]
                     _tent = FEITOS / "_feitos_short_attempted.txt"
                     _tent.write_text("".join(l + "\n" for l in _tent.read_text(encoding="utf-8").split() if l != _vid),
                                      encoding="utf-8")
                     shutil.rmtree(_p, ignore_errors=True)
-                    log(f"pilha: preparo órfão {_vid} (> 30 min) apagado e devolvido à fila")
+                    log(f"pilha: preparo órfão {_vid} (processo que baixava morreu) apagado e devolvido à fila")
                 elif _p.is_dir():
                     _baixando += 1
             except OSError:
@@ -751,7 +767,7 @@ def preparar_proximo_pc2():
         pasta = PRONTOS_PC2 / ("_baixando_" + cand["id"])
         shutil.rmtree(pasta, ignore_errors=True)
         pasta.mkdir(parents=True, exist_ok=True)
-        (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}}), encoding="utf-8")
+        (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}, "pid": os.getpid()}), encoding="utf-8")
         t0 = time.time()
         if os.environ.get("PREPARO_SEM_PRIORIDADE") != "1":  # 15/11: o EncherPilha prepara sem furar a fila
             os.environ["YTDLP_PRIORIDADE"] = "pc2"  # 30/10 (D39): o download do PC2 passa na frente na vez do yt-dlp
