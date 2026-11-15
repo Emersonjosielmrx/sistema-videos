@@ -2216,3 +2216,14 @@ O PC1 reiniciou às ~07:07; depois disso, uma cadeia de travas deixou PC2 e desk
 **Para a dona decidir:** fontes novas de ESPORTE (o nicho do canal nº 1 acabou: 0 vídeos novos nas 3 fontes).
 Conferidas 1 a 1 pela API pública: @eFootzBR (300 Shorts, mediana 68 mil views), @NinjaShortes (27 mil),
 @RANKFUTEBOL10 (26 mil), @YguFut (20 mil), @curiosidadesdabola (5,5 mil). Só entram se ela autorizar.
+
+## 15/11 09:55 — a causa de fundo do PC1 a 100%: extras do Kaggle renderizando no PC1
+
+- `abastecedor_kaggle` mantinha até 14 Shorts "extras" (2 por linha × 7 linhas do pool) pra o Kaggle renderizar. Depois
+  do 3º banimento nenhuma conta de curto roda (`lote_shorts_kaggle._curto_rodando()` = False) e TODO extra renderizava
+  no PC1: 7 ao mesmo tempo. Com isso abrir um processo levava 12-96 s, o yt-dlp segurava a vez 335-354 s (28 s fora da
+  fila) e os despachos de PC2/desktop/STI estouravam prazo — as máquinas que têm folga ficavam paradas.
+- Agora: sem Kaggle de curto (ou em pausa), meta dos extras = `ABASTECEDOR_SEM_KAGGLE` (1). Os 7 em andamento terminam
+  sozinhos. `ABASTECEDOR_SEM_KAGGLE=-1` desliga. Quando uma conta de curto voltar, a meta volta sozinha.
+- `prioridade_alta.py` nunca tinha funcionado (ctypes truncava o handle: erro 6). Corrigido e testado (16384 → 32768).
+  `ytdlp_vez`: quem tem a vez sobe pra acima do normal (psutil) e volta ao soltar.
