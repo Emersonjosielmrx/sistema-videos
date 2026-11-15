@@ -17,6 +17,7 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE))
+import prioridade_alta  # noqa: E402,F401 — 15/11: despacho acima do normal (PC1 a 100% travava ssh/taskkill)
 LOG = BASE / "logs" / "disparar_pc3.log"
 TRAVA = BASE / "estado" / "disparar_pc3.lock"
 
