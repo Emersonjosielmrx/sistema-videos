@@ -20,7 +20,12 @@ def ativar():
         return False
     try:
         import ctypes
+        from ctypes import wintypes
         k = ctypes.windll.kernel32
+        # 15/11: sem restype o pseudo-handle (-1) era truncado e a chamada falhava calada (erro 6, handle inválido)
+        k.GetCurrentProcess.restype = wintypes.HANDLE
+        k.SetPriorityClass.argtypes = (wintypes.HANDLE, wintypes.DWORD)
+        k.SetPriorityClass.restype = wintypes.BOOL
         return bool(k.SetPriorityClass(k.GetCurrentProcess(), ABOVE_NORMAL))
     except Exception:  # noqa: BLE001
         return False
