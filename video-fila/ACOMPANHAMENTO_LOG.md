@@ -2170,3 +2170,26 @@ Base: 1.429 Shorts de parceiro com views de 48 h (18/10 a 12/11), ledger e metri
 - **Caixa CURTOS do pesquisador**: 43 blocos avaliados. 1 implantado (tubescrape), 18 reprovados com motivo.
   hookcheck rodado em 15 Shorts: 14 com risco baixo; só 1 de 73 começa com 0,07 s de preto. As aberturas já estão
   boas.
+
+## 15/11 07:35 — análise profunda: onde mais vale melhorar
+
+**Medido (24 h):** PC1 trabalhando 98% do tempo; PC2 44% (parado 36%); desktop 24% (parado 58%, maior parada 104 min).
+O gargalo não é render: é ALIMENTAR. Hoje 24 de 43 disparos (PC2+desktop) esperaram download na hora — média 337 s,
+até 1296 s com a máquina parada.
+
+**Causas e o que fiz**
+1. Pilha de prontos só enchia pelos baixadores de fora (mortos desde o 3º banimento); o preparo de casa mantinha só 1
+   pronto, disputado por PC2, desktop e STI. Agora: `ocioso.preparar_proximo_pc2` mantém `PREPARO_CASA_ALVO` (3) prontos
+   ou baixando, e o `EncherPilha` (5/5 min) prepara 1 pela fila de casa quando o de fora não dá sinal, sem furar a fila
+   do disparo ao vivo (`PREPARO_SEM_PRIORIDADE`). Preparos órfãos > 30 min são devolvidos à fila. `PILHA_CASA=0` desliga.
+   Teste: +1 em 20 s e +1 em 110 s.
+2. Nicho esgotado: as 3 fontes de 'esportes' (futtres, fabioindaia2006, score90) não têm vídeo novo, e o Esporte Noturno
+   (canal nº 1) sorteava esportes ~metade das vezes → 3 consultas perdidas e canal pulado (11x na madrugada).
+   `parceiro_diario._escolher_fonte`: nicho sem fonte viva sai do sorteio (cai em fatos, que rende 1138 x 1283 e tem 23
+   mil vídeos novos). `NICHO_PULA_VAZIO=0` desliga. Teste: 60 sorteios → fatos 58, dorama 2, esportes 0.
+3. Registro da vez do yt-dlp (`D:\video-fila\ytdlp_vez_uso.log`: quem, espera, quanto segurou) pra medir o próximo gargalo.
+
+**Medido e descartado**
+- Views do ORIGINAL não preveem as nossas: canal forte ganha um pouco com original >= 100 mil; canal fraco fica perto
+  de zero com qualquer original. O que decide é o canal → reforça a decisão da escada (fracos 1-2/dia).
+- 19% dos posts de 3 dias foram para canais com mediana <= 4 views (línguas, Forja, Manhwa/Dorama Noturno).
