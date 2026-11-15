@@ -2157,7 +2157,7 @@ Base: 1.429 Shorts de parceiro com views de 48 h (18/10 a 12/11), ledger e metri
   produção por dia pros fortes. Pelos números, é a mudança que mais rende.
 - Teto dos fortes: hoje 12/dia; nenhum passou de 7 abertos. O freio real é o limite diário do YouTube.
 
-## 15/11 06:45 — pesquisador CURTOS zerado; lista de canal sem yt-dlp; baixador de fora "seco"
+## 15/11 06:25 — pesquisador CURTOS zerado; lista de canal sem yt-dlp; baixador de fora "seco"
 
 - **Lista da aba Shorts pela API do site** (`bin/aba_shorts.py`, ideia do misterzaidxpy/tubescrape, refeita com
   paginação): `anime_discover.discover_canal` tenta ela primeiro: 1-2 s por canal contra 5-10 s do yt-dlp, mesmos
