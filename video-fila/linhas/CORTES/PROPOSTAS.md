@@ -1333,3 +1333,123 @@
 - prova: Em 3/4 Shorts aparecem cards de topo com placeholders ou falsos locais e colisão com `@`: `sem-obra-438cf2` q05/q09 ('LOCAL: CIDADE' e seta sobre `@bichonoturnobr`), `sem-obra-e4e43e` q13/q14 ('LOCAL' vazio e 'LOCAL: MUNDO' tirado de 'Todo mundo achava') e `the-last-doomsday-bunker` q16 (`@curiosidadesnoturnasbr` sobreposto ao card 'O MUNDO INTEIRO').
 - onde: Gerador de overlays/HUDs de topo e filtro de marca d'água na composição de vídeo da linha CORTES
 - como testar: Rodar o compositor nos roteiros de `sem-obra-e4e43e_cap1_20261111` e `the-last-doomsday-bunker_cap1_20261111` e inspecionar q09, q13, q14 e q16 confirmando ausência de card 'LOCAL' inválido e respiro >= 20 px ao redor do `@` em y=150..250.
+
+## 14/11 12:02 PROPOSTA [CERTEZA] Eliminar resíduos de texto fantasma e limpar camadas anteriores da legenda dinâmica (agy/gemini-3.8-flash-high)
+- prova: Texto fantasma e duplicação de palavras ativas ocorrendo em sem-obra-51efb3 (q04 com 'DE PELE' borrado sob 'CABEÇA DE' e q14 com 'MAIOR' duplicada), sem-obra-0ad845 (q07 com 'CRESCE' residual e q15 com 'PEIXE' residual) e sem-obra-0ba3da (q12 com 'DOIS' sobreposto).
+- onde: cortes_legenda.py / renderização da timeline de legenda dinâmica (limpeza de buffer de frames anteriores)
+- como testar: Renderizar trecho de fala rápida e inspecionar a folha de contato quadro a quadro para garantir que cada palavra anterior seja 100% apagada no momento exato em que a próxima palavra entra na timeline.
+
+## 14/11 12:02 PROPOSTA [CERTEZA] Corrigir corrupção de frames (glitch de solarização e ruído estático) nas transições de vídeo (agy/gemini-3.8-flash-high)
+- prova: Glitch destrutivo de vídeo com estática e solarização em sem-obra-480ddb (q05 com mulher corrompida por ruído estático roxo/branco e solarização entre planos) e sem-obra-0ba3da (q10 com deformação metálica/datamosh e multiplicação da marca d'água aos 16s).
+- onde: cortes_video.py / pipeline de concatenação, filtros de transição e codificação ffmpeg
+- como testar: Montar sequência com cortes rápidos entre clipes de fontes distintas e checar integridade dos frames via ffprobe/leitura de anomalias visuais, assegurando compatibilidade de pixel format e ausência de frames corrompidos.
+
+## 14/11 13:06 PROPOSTA [CERTEZA] Segurar/refazer Short com glitch de render e desligar o efeito de distorção (cw/claude-sonnet-5-5)
+- prova: 480ddb q05 (flash de ruído estático/solarização de ~1 s no meio do plano do leque), 0ba3da q10 (datamosh e marca d'água multiplicada em cascata), 39e0be q11 (displacement circular e rasgo na janela) e 39e0be q07 (linha branca horizontal, split-screen acidental). Os quatro estão no mesmo lote de 11/11.
+- onde: Função de efeitos de movimento/'glitch' aplicada nas cenas paradas, mais a montagem de cenas (concat/overlay) no render; estender cortes_juri._trava_texto_erro para travar Short com artefato.
+- como testar: Renderizar de novo os 4 Shorts com o efeito de distorção desligado e confirmar nos quadros q05/q10/q11/q07 que não há ruído, inversão de cor nem split. Depois rodar a folha de quadros do dia inteiro (D:\tmp\folha_topo.py adaptado) para medir quantos Shorts têm o defeito antes de ligar a trava.
+
+## 14/11 13:06 PROPOSTA [CERTEZA] Cards de texto (LOCAL:, nome de personagem) respeitando a zona segura lateral (cw/claude-sonnet-5-5)
+- prova: 0ba3da q09 mostra 'BRASI' sem o 'L' e 39e0be q04/q05 mostra 'LOCAL: ACADEMIA AMERICANA' a menos de 40 px da borda e depois cortado na direita. São 2 Shorts com o mesmo defeito.
+- onde: Função que desenha card/rótulo de personagem e local no render; falta quebrar a linha ou reduzir a fonte conforme a largura (margem mínima de 60 px).
+- como testar: Gerar cards com textos longos ('ACADEMIA AMERICANA', 'BRASIL' em fonte grande) em 1080 px e medir a caixa: x entre 60 e 1020, sem corte. Conferir com uma folha de quadros antes de usar.
+
+## 14/11 13:06 PROPOSTA [GOSTO] Escolha de cena que contradiz a narração no momento-chave (cw/claude-sonnet-5-5)
+- prova: 480ddb q15 mostra mulher parada de braços caídos enquanto o texto fala 'pra nocautear'; 0ba3da q07 mostra mapa dos estados do Brasil quando a voz fala da lagosta no fundo do mar; 39e0be q12 mantém o quarto escuro por mais de 3 s depois que a fala já passou para a China.
+- onde: Seleção/associação cena-frase e sincronia de troca de cena (função que casa trechos do vídeo com o tempo da voz).
+- como testar: Em 5 Shorts, comparar o tempo de início de cada frase do roteiro com o corte de cena e medir a defasagem. Só mexer se a defasagem mediana ficar acima de 0,5 s.
+
+## 14/11 14:16 PROPOSTA [CERTEZA] Cards de texto (LOCAL:, nome de país) cortados ou fora da zona segura lateral (cw/claude-sonnet-5-5)
+- prova: 0ba3da q09 ('BRASI' sem o L); 39e0be q04 (< 40 px da borda) e q05 (card saindo pela direita); 7eced1 q15/q16 ('LOCAL MUNDO' cobrindo o @curiosidadesnoturnasbr). Aparece em 3 Shorts do lote.
+- onde: Função que desenha os cards de local/personagem no render (provavelmente no módulo de overlay do cortes_render ou equivalente); verificar a largura máxima do texto.
+- como testar: Renderizar 5 Shorts com cards longos ('ACADEMIA AMERICANA'). Medir a caixa do texto: x entre 60 e 1020, sem sobrepor a marca d'água. Se estourar, reduzir a fonte ou quebrar em 2 linhas, e remontar a posição do @ para não colidir.
+
+## 14/11 14:16 PROPOSTA [CERTEZA] Glitch de renderização (displacement, tearing, split-screen acidental, rosto esticado, marca d'água multiplicada) (cw/claude-sonnet-5-5)
+- prova: 0ba3da q10 e q12 (solarização, rosto e queixo esticados, @ em cascata); 39e0be q07 (linha branca dividindo a tela) e q11 (tearing e displacement circular que duplica o @). Em 2 Shorts.
+- onde: Efeitos de 'impacto'/movimento aplicados à palavra ativa ou a cenas paradas (filtros de displacement/glitch no ffmpeg ou no gerador de legenda) e o corte do crop do narrador.
+- como testar: Re-renderizar 0ba3da e 39e0be com os efeitos de distorção desligados e comparar nos mesmos quadros (16 s e 'PARA TUDO'). Se sumirem, desligar o efeito em cenas com movimento < 15%. Seguir a lição de 28/10: se o júri vir texto de erro ou glitch, segurar o Short na hora.
+
+## 14/11 14:16 PROPOSTA [CERTEZA] Legenda queimada da fonte vazando pelo blur (cw/claude-sonnet-5-5)
+- prova: 7eced1 q15 e q16 ('brasiliensis' legível através do desfoque). O júri não vê o que há sob a tarja, então só vale com prova no log: conferir '[hardsub]' do Short. Sem esse log, não é defeito (regra fixa do júri).
+- onde: Função de cobertura de legenda (cobertura_legenda=delogo) e a caixa medida pela visão; o log '[hardsub]' do Short 7eced1.
+- como testar: Ler o log '[hardsub]' do 7eced1. Se leu legenda e o delogo ainda vaza, medir a caixa das letras em resolução >= 720 px (lição de 27/10) e conferir que a caixa cobre o texto inteiro, sem aumentar a tarja além do tamanho exato.
+
+## 14/11 14:16 PROPOSTA [GOSTO] Contraste e perspectiva 3D em palavras de impacto (cw/claude-sonnet-5-5)
+- prova: 7eced1 q01 ('VOCÊ' vermelho escuro, 'CAIR' achatado em 3D) e q03 ('AGUENTA' deitada); 2d8527 q08 e q13 (azul claro sem contorno sobre fundo claro); 39e0be q02 (azul e roxo escuros sobre fundo escuro). Aparece em 3 Shorts, mas a dona gosta de palavras de impacto maiores e coloridas (27/10). Não banir cor nem 3D.
+- onde: Paleta e transformação 3D das palavras de impacto no gerador de legenda.
+- como testar: Sem mudar o estilo: exigir contorno escuro de espessura mínima e luminância mínima por palavra, com limite de ângulo 3D. Comparar a nota de legibilidade em um lote de 20 Shorts. Antes de aplicar, passar pelas DECISOES_DONO.
+
+## 14/11 14:16 PROPOSTA [GOSTO] Cena parada por mais de 4 s e troca de cena atrasada em relação à fala (cw/claude-sonnet-5-5)
+- prova: 0ba3da q16 a q18 (mapa da França 10,8% de movimento); 39e0be q10 a q13 (escrivaninha 10,7%, troca atrasada mais de 3 s); 7eced1 q13 a q17 (bagre 11,4%). Aparece em 3 Shorts. Mexe no corte de cena, que fica fora das alavancas.
+- onde: Seleção e duração de cenas (o corte de cena que usa o movimento medido por cena) e o alinhamento com o início da frase.
+- como testar: Limitar cena com movimento < 15% a 3 s (cortar para o próximo trecho mais ativo ou aplicar zoom lento) e alinhar o corte ao início da frase (tolerância de 0,2 s). Comparar a retenção em 20 Shorts.
+
+## 14/11 14:16 PROPOSTA [GOSTO] Arte da imagem não bate com a espécie ou o objeto da fala (cw/claude-sonnet-5-5)
+- prova: 7eced1 q08 (fala 'surubim', imagem de dourado); 0ba3da q07 (fala sobre a lagosta no fundo do mar nacional, imagem de mapa rodoviário). Aparece em 2 Shorts.
+- onde: Função que escolhe o trecho da fonte para cada frase do roteiro (casamento entre imagem e frase).
+- como testar: Cruzar o substantivo principal de cada frase com a descrição visual do trecho escolhido. Se não bater, escolher outro trecho. Medir em 20 Shorts quantas frases ficam sem correspondência.
+
+## 14/11 16:10 PROPOSTA [CERTEZA] Legenda palavra a palavra cobrindo rosto e saindo da margem esquerda (cw/claude-sonnet-5-5)
+- prova: Rosto coberto: 8d7987 q02, q04, q06; c02324 q18, q08; 55194e q03, q06; adventure-time q05. Margem < 60 px ou cortada: 8d7987 q05 ('PATIFARIA', P cortado), 55194e q02, q03, q04, q06, c02324 q09. Padrão em 4 Shorts de 4.
+- onde: Função que renderiza a legenda palavra a palavra (ASS/drawtext no módulo de legenda do pipeline CORTES): âncora X e largura máxima da palavra.
+- como testar: Gerar 10 Shorts, medir a caixa de cada palavra: x_min >= 60, x_max <= 1020, y entre 1200 e 1450. Ao longo de 10 Shorts, a contagem de palavras sobre rosto ou fora da margem deve cair a zero. Para o rosto, usar detecção de rosto por quadro e deslocar a legenda para o terço inferior livre quando houver sobreposição.
+
+## 14/11 16:10 PROPOSTA [CERTEZA] Duplicação e resíduo de camadas de legenda (cw/claude-sonnet-5-5)
+- prova: 55194e q09 ('DESCOBRI' em duas cores mais 'DELE'), q18 ('LOURCURA' duplicada), q02 ('BARRIGA' residual); adventure-time q06 ('GRAÇA' fantasma sob 'DAQUELE'); c02324 q09 (sticker em cima da legenda da fonte).
+- onde: Compositor de legenda: eventos que não terminam no keyframe da troca de palavra, ou legenda da fonte vazando sob a nossa.
+- como testar: Dump da timeline de eventos de um Short afetado e checar sobreposição de intervalos de legenda. Confirmar quadro a quadro que só há 1 palavra ativa por instante.
+
+## 14/11 16:10 PROPOSTA [CERTEZA] Blur preto no lugar da tarja, só se o log mostrar legenda lida (cw/claude-sonnet-5-5)
+- prova: 8d7987 q03 mostra borrão preto manchado na parte inferior e legenda da fonte visível. A regra fixa exige tarja do tamanho exato da legenda, e a lição de 28/10 diz que o júri não vê o que está embaixo da tarja. Falta o log do hardsub para provar.
+- onde: Função de cobertura de legenda (cobertura_legenda=delogo): conferir se o delogo está sendo aplicado em vez da tarja do tamanho exato.
+- como testar: Ler o log de 8d7987_cap1 e verificar '[hardsub] N/6'. Se N >= 2 e a legenda ainda vaza, o defeito é real: renderizar com a tarja do tamanho exato e comparar quadros.
+
+## 14/11 16:10 PROPOSTA [GOSTO] Troca de cena em desacordo com a fala (cw/claude-sonnet-5-5)
+- prova: 55194e q10 (berço aparece quando a fala diz 'A FACULDADE'); c02324 q03/q05/q06 (ping-pong de B-roll e split-screen piscando em menos de 1 s). O padrão se repete em 2 Shorts, mas o júri às vezes erra o que é intencional.
+- onde: Seletor de B-roll por cena e a lógica de sincronia cena x frase do pipeline.
+- como testar: Comparar, nas folhas de quadros, o tema da frase com o B-roll em 5 Shorts antes de mexer. Só abrir mudança de código se o desencontro persistir.
+
+## 14/11 18:07 PROPOSTA [CERTEZA] Travar paleta da legenda dinâmica em amarelo/branco 100% opaco com contorno preto e fixar Y na zona segura inferior (gemini-4-argon)
+- prova: Repetido nos 4 Shorts do lote: sem-obra-2d1801_cap1_20261111 (q01 'UMA MENINA' vermelho escuro sobre camiseta vermelha, q02 cinza translúcido, q05 palavra residual 'OUTROS' duplicada, q09 'COITADO' sobre nariz/boca), tottenham-2_cap1_20261111 (q09 'PELOS' verde-escuro, q10 'ESPERAVA' sobre nariz/boca de Son, q16 'FEZ' vermelho escuro), gta-rp_cap1_20261112 (q03 'MEU' e q07 'COMO DANÇAR' sobre rostos, q05 'ABRIR' azul-escuro sem contraste) e sem-obra-f2e066_cap1_20261112 (q06 'USA' verde sobre gramado, q08 'LIMPANDO' sobre rosto, q11 legenda fantasma invisível).
+- onde: Gerador de legendas ASS/renderizador de legendas em D:\video-fila\linhas\CORTES (função de estilo e posicionamento de palavras ativas)
+- como testar: Renderizar novamente um Short do lote (ex.: sem-obra-f2e066_cap1_20261112) e inspecionar q04, q06, q08 e q11 garantindo preenchimento #FFFF00 ou #FFFFFF com 100% de opacidade, borda preta 6-12px, y fixo entre 1200 e 1450 fora de rostos e limpeza de camadas residuais.
+
+## 14/11 18:07 PROPOSTA [CERTEZA] Alinhar timestamps de corte de cena com o início exato de cada frase do TTS e remover interpolação/blur sobre legenda (gemini-4-argon)
+- prova: Repetido em 3 Shorts do lote: sem-obra-2d1801_cap1_20261111 (q09 a frase 3 inicia em 9.1s mas o corte só ocorre em 10.4s), tottenham-2_cap1_20261111 (q08 voz vira para Son nos Spurs enquanto vídeo ainda exibe Kane no Bayern; q12 frame blending/ghosting severo; q15 cena regride para amistoso anterior durante fala do mural; q16 delogo/blur cortando a própria legenda 'CO... OS') e sem-obra-f2e066_cap1_20261112 (q06 corte seco antes de Kroos entrar em cena e q10/q11 atraso na entrada da cena da pia).
+- onde: Montador de vídeo / alinhamento de cenas por timestamp do áudio (pipeline de corte e aplicação da ordem de filtros ffmpeg delogo antes do subtítulo ASS)
+- como testar: Conferir no comando ffmpeg se o filtro delogo roda estritamente antes do filtro ass/subtitles (nunca borrando a nossa legenda) e validar que o início de cada segmento de vídeo coincide com o timestamp inicial da frase no JSON/SRT do TTS.
+
+## 14/11 23:32 PROPOSTA [CERTEZA] Travar zona vertical da legenda no terço inferior (y=1200 a 1450), fixar paleta branco/amarelo opaca com borda preta e limpar camadas residuais (gemini-4-argon)
+- prova: Legendas e HUDs sobrepondo olhos/boca e usando cores proibidas/translúcidas ou deixando palavras fantasmas em 4/4 Shorts: sem-obra-6ad046_cap1_20261112 (q04 'PRA CASA' na testa/nariz, q07 'DONO' residual marrom, q10 'UM DESAFIO' na boca, q11 'EMBORA' roxo escuro nos olhos), sem-obra-e5c4b8_cap1_20261112 (q06 'DA BRONCA' na boca e card 'LOCAL ESCOLA' vazando, q08 'SÓ QUE NINGUÉM' nos olhos + 'LUGAR' residual), gavi_cap1_20261112 (q11 'TERIA' cinza translúcido, q16 'CONFUSÃO' fora da margem x>=60, q17 'NA REALEZA' ciano translúcido no nariz/boca, q18 'PORQUE' na boca), sem-obra-c14473_cap1_20261112 (q05 HUD 'RASTREANDO...' nos olhos, q08 'DA' encobrindo 'ROUPA', q10 'BOTÃO' vermelho escuro translúcido).
+- onde: Gerador de legendas ASS / compositor de overlays de vídeo (função de cálculo de posição Y, estilo de cores/outline das palavras ativas e encerramento do timestamp da palavra anterior no frame exato da próxima).
+- como testar: Re-renderizar sem-obra-6ad046_cap1_20261112 e gavi_cap1_20261112 e extrair os quadros q04, q07, q08, q11, q17 e q18: verificar que 100% das palavras usam apenas #FFFFFF ou #FFFF00 com 100% de opacidade e borda preta (6–12 px), confinadas em x=60..1020 e y=1200..1450, sem duas palavras de tempos distintos visíveis no mesmo frame.
+
+## 14/11 23:32 PROPOSTA [CERTEZA] Filtrar frames de blackout/whiteout/desfoque na escolha do take e alinhar o corte visual ao sujeito/ação da frase narrada (gemini-4-argon)
+- prova: Quadros pretos, estourados em branco ou com ação/personagem contraditórios com a locução em 4/4 Shorts: sem-obra-6ad046_cap1_20261112 (q09 tela preta aos 18.57s; q03 fala em quebrar tijolo e mostra garoto na neve; q07 fala em invasão na academia e volta pra rua), sem-obra-e5c4b8_cap1_20261112 (q17 tela preta/borrada aos 20.62s; q07 fala do garoto assumindo a culpa e mostra o professor; q13-q15 fala da chuva/guarda-chuva que só aparece em q16), gavi_cap1_20261112 (q03 cita 'GAVI' exibindo a Infanta Sofía; q15 corta lance tenso no meio da palavra 'SÃO'), sem-obra-c14473_cap1_20261112 (q03 quadro vazio branco aos 7.61s; q06 estouro branco aos 17.13s; q07 hanfu de época em dorama moderno).
+- onde: Seletor de cenas / montador de cortes de vídeo (validação de luminância média/variância de nitidez dos frames candidatos e sincronização dos timestamps de corte com os intervalos de frase do TTS).
+- como testar: Rodar o seletor de cenas nos 4 Shorts do lote rejeitando segmentos com luminância média < 15 (blackout) ou > 240 (whiteout) por > 0.2s, e conferir nos quadros q03, q06, q07, q09 e q17 se os apagões sumiram e se o corte entra no início exato da oração correspondente.
+
+## 15/11 01:14 PROPOSTA [CERTEZA] Cartão de HUD 'RASTREANDO...' não pode cobrir rosto: desligar ou só usar em área sem rosto (cc-sobra)
+- prova: sem-obra-c14473 q05: o cartão cobre os olhos e o nariz da protagonista (a boca fica logo abaixo). sem-obra-6f9897 q12: o cartão cobre a cabeça da criança, a palavra 'ESCONDEU' fica dentro do mapa e o cartão continua na tela depois do corte para 'CARAMBA'. O mesmo defeito já foi visto antes: ex-machina q13, 11/11 'IMPORTANTE/ALERTA' e 14/11 'LOCAL:' em PROPOSTAS.md. O padrão continua no lote.
+- onde: gerador de overlays/HUD da composição do CORTES (não está nos .py desta pasta; procurar 'RASTREANDO' no código do pipeline)
+- como testar: Desligar o HUD ou exigir que a caixa do cartão não encoste em nenhum rosto detectado e que ele suma no corte de cena. Depois re-renderizar c14473 e 6f9897 e conferir q05 e q12: nenhum rosto pode ficar coberto e o cartão não pode passar do corte.
+
+## 15/11 01:14 PROPOSTA [CERTEZA] Palavra de impacto com opacidade 100% e cor clara com contorno preto grosso (piso de contraste) (cc-sobra)
+- prova: Em 4 Shorts do lote a palavra fica translúcida ou escura sobre o fundo: the-story-of-the-immortal-woman q02 'SE MULTIPLICANDO' (ardósia sobre azul, quase invisível), q04 'POBRE' e q09 'TAVA'; sem-obra-09b635 q05 'GENTE?' sobre jaleco branco; sem-obra-6f9897 q02 'MINHA' e q06 'CARRO' com motion blur; sem-obra-c14473 q06 'NA' e q10 'BOTÃO' bordô. Já foi proposto em 11/11 e continua acontecendo.
+- onde: renderizador da legenda palavra a palavra (estilos/cores por personagem e animação de entrada)
+- como testar: Medir o contraste entre a cor da palavra e a região do quadro atrás dela; abaixo de 4,5:1, trocar por amarelo ou branco com contorno de pelo menos 8 px. Tirar o motion blur e o alpha < 1 depois da entrada. Re-renderizar immortal-woman e 6f9897 e conferir q02, q04 e q06.
+
+## 15/11 01:14 PROPOSTA [CERTEZA] Uma trilha de legenda só: a palavra anterior sai quando a próxima entra (sem camada encavalada) (cc-sobra)
+- prova: sem-obra-c14473 q08: 'DA' em amarelo desenhado por cima de 'ROUPA' em cinza, tapando 'ROU'. sem-obra-09b635 q17: 'MASSAGEM' (amarelo, y~715) e 'UMA MASSAGEM' (y~1150) na tela ao mesmo tempo. No 09b635, conferir no log se o 'MASSAGEM' de cima é legenda queimada da fonte que escapou do delogo (o júri viu uma faixa de borrão constante no meio, q11) ou se é a nossa camada duplicada.
+- onde: montagem dos eventos ASS da legenda palavra a palavra (fim do evento = início do próximo; grupo de 2 palavras com destaque) e, no caso do 09b635, a detecção [hardsub] e a posição do delogo
+- como testar: Verificar no .ass de c14473 e 09b635 que nenhum par de eventos se sobrepõe no tempo e na mesma região. Ler a linha [hardsub] do log do 09b635. Re-renderizar e conferir q08 e q17 com uma camada só.
+
+## 15/11 02:28 PROPOSTA [CERTEZA] Travar paleta da legenda dinâmica em amarelo (#FFFF00) e branco (#FFFFFF) com opacidade 100% e contorno preto espesso, banindo overlays gráficos alucinados (gemini-4-argon)
+- prova: 4 de 4 Shorts do lote tiveram palavras ilegíveis por cor escura/translúcida sem contorno: sem-obra-d1fe57 (q03 'cidadão' avermelhada translúcida e artefato '[0]'), sem-obra-4f4b2d (q01 'BROTAR' e q05 'OVOS' verde-oliva escuro sobre água escura), sem-obra-788b1d (q04 'CINZA' azul escuro, q12 'TODO' verde escuro no mato, q16 'ALTO' distorcido em 3D no chão, q17 'SUFOCA' vermelho escuro e card 'LOCAL: MUNDO' em q04) e sem-obra-57b857 (q03 'TIPO' azul sobre blusa azul e q06 'BEM' laranja com opacidade quase nula).
+- onde: Módulo de renderização de legenda ASS/FFmpeg e gerador de overlays da linha CORTES
+- como testar: Renderizar novamente os Shorts sem-obra-4f4b2d, sem-obra-788b1d e sem-obra-57b857 e inspecionar q01, q04, q06 e q16 para confirmar preenchimento 100% opaco (#FFFF00/#FFFFFF), borda preta de 6-12 px e ausência dos cards 'LOCAL: MUNDO' / '[0]' e de deformação 3D.
+
+## 15/11 02:28 PROPOSTA [CERTEZA] Cortar cartelas estáticas de fim/CTA da fonte original e ampliar detecção de hardsub no terço inferior (gemini-4-argon)
+- prova: Em 2 Shorts o vídeo congela nos segundos finais em tela preta/cartela de CTA da fonte durante a locução: sem-obra-788b1d (q18 aos 36.64s: tela preta 'link para o vídeo completo abaixo') e sem-obra-57b857 (q18: cartela azul estática do Sebrae). Além disso, 3 Shorts vazaram legenda queimada da fonte sem cobertura: sem-obra-d1fe57 (q01/q03 'Diarreia?' / 'Comeu qualquer coisa estragada?'), sem-obra-4f4b2d (q01-q03 'COMO A TRAÍRA SURGE EM LAGOAS') e sem-obra-57b857 (q02/q05 '3 peças essenciais...').
+- onde: Detector de hardsub (visão/OCR em >= 720p) e seletor de cenas/trim final do vídeo fonte na linha CORTES
+- como testar: Rodar o detector de hardsub nos fontes de sem-obra-d1fe57, sem-obra-4f4b2d e sem-obra-57b857 verificando se a caixa exata da legenda original é detectada em >= 2 de 6 quadros, e validar no trim final de sem-obra-788b1d e sem-obra-57b857 que quadros finais com movimento < 2% ou texto de CTA sejam descartados ou substituídos por B-roll em movimento.

@@ -1,6 +1,6 @@
 # Aprendizado com os parceiros — PARA IMPLEMENTAR (refeito a cada rodada; não editar à mão)
 
-Atualizado 14/11/2026 10:26. Gerado por D:\video-fila\aprendizado.py.
+Atualizado 15/11/2026 02:45. Gerado por D:\video-fila\aprendizado.py.
 
 OBRIGATÓRIO (dona 01/11): ninguém implanta isto sozinho — o chat que for melhorar vídeo analisa estes itens
 ANTES de editar e marca cada um. Passo a passo: D:\video-fila\aprendizado\LEIA_ANTES_DE_MELHORAR.md
@@ -14,309 +14,295 @@ com backup) ou descartar com motivo. Depois:
 Candidato = o dono não respondeu em 24 h e a nota era >= 7: é sugestão, não ordem. Cuidado com o que já existe
 na produção, com humor/visual que derruba monetização e com marca do parceiro (não copiar marca).
 
-## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (3)
+## A. Aprovados (pela dona ou sozinho: os melhores de cada dia, nota >= 7) (1)
 
-### 1. [visual] Banner de impacto em faixa amarela full-width cobrindo o centro do quadro
-- visto em 1 vídeo(s) · nota máx. 7 · modelos: claude-sonnet
-- como aplicar: Inserir uma tarja horizontal amarela de ponta a ponta (com tipografia preta pesada) nos primeiros 2-3 segundos do Shorts para destacar a frase mais chocante da premissa.
-- por que é novo: Nosso layout usa caixas menores ou legendas pontuais; aqui há uma faixa sólida amarela de ponta a ponta que entra nos primeiros segundos com texto em caixa alta e fonte pesada ('AGORA QUER SER O LÍDER.') para reter atenção imediata no gancho.
-- exemplos: https://www.youtube.com/watch?v=GxkhmEX5wL0 seg 1.3 (trecho 64bf6d99.mp4)
-- ids: 64bf6d99
-
-### 2. [visual] Enquadramento vertical com bordas/letterbox superior e inferior escuras destacando o mangá centralizado.
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Aplicar barras pretas estilizadas ou desfoque de fundo (blur background) nas extremidades superior e inferior do painel central do mangá para focar o olhar.
-- por que é novo: Cria um aspecto cinematográfico (letterbox) em vídeos verticais (tipo 9:16), separando claramente a área do conteúdo da área de legendas e tarjas.
-- exemplos: https://www.youtube.com/watch?v=GxkhmEX5wL0 seg 1.3 (trecho 724cdc5a.mp4)
-- ids: 724cdc5a
-
-### 3. [efeito] Efeito de glitch/fita com fatiamento horizontal dessincronizado revelando camadas
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Aplicar displacement map horizontal ou fatiamento em blocos com leve offset quando o roteiro falar de ilusão, fantasmas ou realidade distorcida.
-- por que é novo: Nosso banco de cortes_fx tem cortes rápidos, mas não temos transição de glitch slice/tear horizontal revelando rostos divididos.
-- exemplos: https://www.youtube.com/watch?v=xnDpE5LIBh0 seg 1.7 (trecho 7e900bc0.mp4)
-- ids: 7e900bc0
-
-## B. Candidatos (sem resposta em 24 h): 646 grupo(s), os 40 mais fortes
-
-### 1. [visual] Demonstração prática em close-up das mãos cortando e preparando a isca natural na tábua de corte
+### 1. [outro] Sequência rápida de transição mostrando etapas extremas de preparo culinário (fritura na natureza, cozimento em caldeirão, montagem de prato rústico).
 - visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
-- como aplicar: Começar nossos tutoriais e vídeos de dicas com um shot POV em close-up das mãos manipulando o objeto/isca de forma satisfatória nos primeiros 3 segundos.
-- por que é novo: Inicia o vídeo diretamente com a ação manual detalhada (POV do pescador preparando o coquinho/fruta), gerando curiosidade imediata antes de mostrar o peixe.
-- exemplos: https://www.youtube.com/watch?v=fpecvHeh06g seg 2.5 (trecho a8ba5a0a.mp4)
-- ids: a8ba5a0a
+- como aplicar: Criar blocos de montagem rápida de 3 a 5 cortes secos mostrando o processo do início ao fim em menos de 5 segundos para aumentar a retenção.
+- por que é novo: Montagem sequencial dinâmica focando puramente no aspecto visual e ASMR visual de receitas sem enrolação.
+- exemplos: https://www.youtube.com/watch?v=hDG5QOEkaiI seg 8.0 (trecho f5babf5c.mp4)
+- ids: f5babf5c
 
-### 2. [visual] Perspectiva submarina macro hiper-realista com animais da fauna silvestre brasileira nativa (peixes de cardume, dourado, capivara, cervo-do-pantanal) interagindo próximo a lixo/poluição humana submersa.
-- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
-- como aplicar: Utilizar prompts de IA ou banco de imagens focados em macrofotografia subaquática de rios brasileiros de água doce limpa contrastando com elementos poluentes detalhados (chumbadas de pesca), mantendo alta imersão.
-- por que é novo: Uso consistente de filmagens hiper-realistas subaquáticas de ecossistemas fluviais brasileiros (Pantanal/Rios de água cristalina) mostrando animais reais (dourado, piava, capivara) convivendo diretamente com resíduos metálicos no fundo.
-- exemplos: https://www.youtube.com/watch?v=YxABYyjo3IU seg 0.0 (trecho af755ec0.mp4)
-- ids: af755ec0
+## B. Candidatos (sem resposta em 24 h): 527 grupo(s), os 40 mais fortes
 
-### 3. [visual] Transição de tela gravada (gravação de tela de resultados de busca do Google) com a apresentadora sobreposta no canto inferior direito.
-- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
-- como aplicar: Inserir screen recordings reais de portais oficiais (gov.br) com o avatar/apresentador em Picture-in-Picture (PIP) comentando e apontando para os pontos de atenção.
-- por que é novo: Mostra o site real do governo/busca de forma fluida com recorte chroma/PIP da pessoa guiando com o dedo/apontando para os resultados patrocinados.
-- exemplos: https://www.youtube.com/watch?v=tEN7LosaLf4 seg 18.4 (trecho c1a13d2f.mp4)
-- ids: c1a13d2f
-
-### 4. [visual] Mnemônico visual colorido com acrônimo 'Hi.Po / Di.Vi.Di.Re' segurado por mascote ilustrada para memorização de poderes administrativos.
-- visto em 1 vídeo(s) · nota máx. 9 · modelos: gemini
-- como aplicar: Criar arte gráfica vetorial dividindo conceitos complexos em sílabas coloridas (ex: mnemônicos de direito ou biologia) para fixar na introdução de vídeos de questões.
-- por que é novo: Apresenta um método mnemônico completo dividido por cores e sílabas direto em um cartaz físico segurado por uma personagem animada antes de resolver cada item da questão.
-- exemplos: https://www.youtube.com/watch?v=Asg5Q6iN-AA seg 3 (trecho bd1f7b9b.mp4)
-- ids: bd1f7b9b
-
-### 5. [visual] Inserção de fórmulas químicas/elementos técnicos flutuantes
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Quando o roteiro citar algum conceito científico ou técnico, inserir uma sobreposição (overlay) estática ou levemente animada de uma fórmula ou esquema técnico ao lado do personagem.
-- por que é novo: Adiciona uma camada de 'autoridade' e curiosidade visual que quebra a monotonia da narração.
-- exemplos: https://www.youtube.com/watch?v=fSx50o67HB4 seg 3062.9 (trecho 28fc46f8.mp4)
-- ids: 28fc46f8
-
-### 6. [visual] Meme em sticker recortado (Willem Dafoe olhando pra cima apavorado) sobreposto diretamente no cenário
+### 1. [jeito_de_falar] Analogias caseiras e táteis para explicar geologia complexa ('massa de pizza', 'pasta de dente', 'porta')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Adicionar o recorte PNG do Willem Dafoe olhando pra cima na pasta memes_png e disparar como sticker sobreposto na tela quando o narrador descrever uma ameaça colossal ou piora repentina da situação.
-- por que é novo: Embora tenhamos memes_img, usar o recorte transparente do Dafoe olhando pro céu sobreposto diretamente sobre a cena dramática pontua o choque/medo do personagem sem cortar o fluxo da animação com tela cheia.
-- exemplos: https://www.youtube.com/watch?v=q3ixE2vr8aA seg 27.0 (trecho 8f34797b.mp4)
-- ids: 8f34797b
+- como aplicar: Nos roteiros de curiosidades científicas e históricas, substituir explicações técnicas por comparações táteis cotidianas com cartelas de texto destacadas.
+- por que é novo: Geralmente usamos gírias ou memes para humor, mas não analogias sensoriais/culinárias estruturadas com texto colado na tela ('esticada como massa de pizza').
+- exemplos: https://www.youtube.com/watch?v=53oBWf7c9DQ seg 24.3 (trecho ee775939.mp3)
+- ids: ee775939
 
-### 7. [efeito] Efeito de 'tremor' (shake) nos personagens
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Aplicar um leve efeito de vibração (shake) em camadas de personagens quando estiverem em situações de perigo ou susto.
-- por que é novo: Dá uma sensação de medo ou tensão que nossos efeitos estáticos não transmitem.
-- exemplos: https://www.youtube.com/watch?v=5-vQopGwQ8Y seg 1028.0 (trecho 888f8cff.mp4)
-- ids: 888f8cff
-
-### 8. [efeito] Efeito de impacto com linhas de velocidade e brilho intenso
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Usar overlays de impacto com linhas radiais e brilho roxo/neon em momentos de ataque ou poder.
-- por que é novo: Nossos impactos são mais simples; este efeito de 'energia' é mais dinâmico para cenas de ação.
-- exemplos: https://www.youtube.com/watch?v=5-vQopGwQ8Y seg 1850.5 (trecho 1b9593b5.mp4)
-- ids: 1b9593b5
-
-### 9. [visual] Gradiente de cor dominante por personagem/mood
+### 2. [jeito_de_falar] Metáfora didática em aforismo conciso: 'A água em si não mata bactéria nenhuma, só muda ela de endereço'
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Aplicar gradiente overlay consistente em blocos de cena para criar identidade visual por personagem ou momento emocional, não só correção de cor
-- por que é novo: Cada corte tem gradiente overlay forte (azul-verde, verde natural, amarelo, vermelho-laranja, rosa) sincronizado com personagem/emoção, não apenas como filtro mas como identidade visual do momento
-- exemplos: https://www.youtube.com/watch?v=r6wFByKK0Q4 seg 191.3 (trecho 676c7c06.mp4)
-- ids: 676c7c06
+- como aplicar: Incluir no roteiro frases-síntese com analogias cotidianas simples para desmistificar mitos comuns no meio do vídeo.
+- por que é novo: Frase de alto impacto cognitivo e fácil memorização ('muda de endereço') que resume instantaneamente a tese científica do vídeo sem termos técnicos maçantes.
+- exemplos: https://www.youtube.com/watch?v=ZKJMDenC seg 16.3 (trecho 2a80d39c.mp3)
+- ids: 2a80d39c
 
-### 10. [visual] Uso de cortinas de teatro como moldura (frame) inicial
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Adicionar uma sobreposição (overlay) de cortinas vermelhas abrindo nos primeiros 1-2 segundos de vídeos que contam histórias ou curiosidades.
-- por que é novo: Cria um efeito de 'abertura de espetáculo' que dá um ar mais premium e narrativo ao início do vídeo.
-- exemplos: https://www.youtube.com/watch?v=r6wFByKK0Q4 seg 191.3 (trecho 53fbef0c.mp4)
-- ids: 53fbef0c
-
-### 11. [visual] Inversão de cor/flash dramático de choque no rosto do protagonista humano ao perceber que virou formiga
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Aplicar filtro de tom avermelhado forte com vinheta escura e zoom rápido no momento de surpresa/desespero do personagem.
-- por que é novo: Usamos reações genéricas, mas o close com distorção e tom avermelhado/magenta de choque absurdo intensifica a comédia da situação.
-- exemplos: https://www.youtube.com/watch?v=nV2aNVwUL-A seg 159.1 (trecho e896297c.mp4)
-- ids: e896297c
-
-### 12. [efeito] Linhas de tremor (Shake Lines) em objetos estáticos
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Adicionar overlays de 'Electric/Shock lines' ou usar o pincel de animação quadro a quadro para criar contornos vibrantes em pontos específicos de ação.
-- por que é novo: O vídeo adiciona linhas brancas trêmulas desenhadas ao redor do punho para simular força/tensão, transformando uma imagem estática em algo dinâmico sem mover o quadro todo.
-- exemplos: https://www.youtube.com/watch?v=5FDtWi2JmuE seg 2083.5
-- ids: 9f2c1527
-
-### 13. [visual] Uso de 'freeze frame' com filtro de contorno/desenho
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Ao narrar momentos de choque ou estranheza, pausar o vídeo e aplicar um filtro de 'posterize' ou 'sketch' com bordas pretas fortes para enfatizar a expressão do personagem.
-- por que é novo: O vídeo congela a imagem e aplica um filtro que parece um desenho ou pintura, destacando a ação bizarra do personagem.
-- exemplos: https://www.youtube.com/watch?v=yDSdS0yAatM seg 20.2 (trecho 2d868b48.mp4)
-- ids: 2d868b48
-
-### 14. [jeito_de_falar] Estrutura narrativa 'in media res' com cliffhanger causal: revela o crime/sabotagem no presente e faz flashback para a motivação
+### 3. [piada] Plot twist cômico anti-clímax ('solução tecnológica ultra complexa vs jogar uma pedra')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Adaptar o gerador de roteiros para Shorts de suspense/drama: iniciar com a ação de vingança/clímax nos primeiros 10s e em seguida rebobinar ('Tudo começou quando...') para prender retenção imediata.
-- por que é novo: Geralmente nossas narrações seguem ordem cronológica ou apresentação direta de fatos. Aqui o protagonista abre confessando um ato extremo em andamento ('Eu solto de propósito o trinco...') e no meio transiciona para 'Tudo começa minutos antes quando...'.
-- exemplos: https://www.youtube.com/watch?v=IlGnmNGHHII seg 0.0 (trecho a6e4234e.mp3)
-- ids: a6e4234e
+- como aplicar: Usar essa estrutura de contraste/quebra de expectativa nos roteiros de animação e teorias: criar um problema hiperbólico e dar a solução mais boba e rústica no clímax final.
+- por que é novo: Construção de roteiro que infla a complexidade de ficção científica (campo de atraso temporal, canhão de almas humanas) para resolver o problema com a ação mais primitiva e banal possível (atirar uma pedra).
+- exemplos: https://www.youtube.com/watch?v=72NKj2CkiLI seg 47.0 (trecho 7c90c6fc.mp3)
+- ids: 7c90c6fc
 
-### 15. [visual] Cortes rápidos e fechados (close-ups) em detalhes da arte
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Programar cortes que acompanhem a narração, dando zoom no detalhe que está sendo descrito (ex: o olho do personagem ao falar de poder), em vez de apenas mostrar a cena estática.
-- por que é novo: O vídeo alterna entre planos gerais e zooms extremos em olhos ou mãos, aumentando a intensidade dramática da cena.
-- exemplos: https://www.youtube.com/watch?v=zuDwpO6AokY seg 15.0 (trecho 2b08f9fc.mp4)
-- ids: 2b08f9fc
-
-### 16. [visual] Censura em pixel art (mosaico) para itens cômicos ou 'proibidos'
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Aplicar o efeito 'Mosaic' ou 'Pixelate' apenas sobre o objeto mencionado na fala absurda para gerar curiosidade/humor.
-- por que é novo: Nós não usamos censura visual estilizada para reforçar piadas (como o chapéu sendo comido).
-- exemplos: https://www.youtube.com/watch?v=39kzEATJ044 seg 3.8 (trecho 15b68abd.mp4)
-- ids: 15b68abd
-
-### 17. [visual] Uso de balão de pensamento (thought bubble) com imagem interna
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Criar um overlay de balão de pensamento que permita inserir uma imagem ou vídeo pequeno dentro dele para representar o que o personagem está pensando.
-- por que é novo: Nós usamos apenas legendas ou memes estáticos; o balão de pensamento integra a narrativa visual de forma mais orgânica e cômica.
-- exemplos: https://www.youtube.com/watch?v=QW0lnOD seg 8770.9 (trecho a7f9fc71.mp4)
-- ids: a7f9fc71
-
-### 18. [visual] Menu interativo estilizado do jogo (FiveM/GTA) mostrando a seleção de origem ('Onde nos encontrou?') com opções flutuantes customizadas
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Simular telas de carregamento, menus de contexto ou caixas de diálogo estilizadas do jogo como elemento overlay nos vídeos.
-- por que é novo: Foca em interações de UI/UX personalizadas de servidores de RP que geram identificação imediata do nicho.
-- exemplos: https://www.youtube.com/watch?v=unSSHjDlge8 seg 9.3 (trecho f7a93d1e.mp4)
-- ids: f7a93d1e
-
-### 19. [visual] Mini-mapa do jogo com marcação de rota em roxo/magenta com ícone personalizado destacando o destino exato
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Incluir clipes rápidos do GPS do jogo traçando rotas para locais específicos mencionados no roteiro.
-- por que é novo: Uso dinâmico do mapa do GTA/FiveM como storytelling visual para mostrar localização de forma imersiva.
-- exemplos: https://www.youtube.com/watch?v=unSSHjDlge8 seg 13.0 (trecho 5a53abff.mp4)
-- ids: 5a53abff
-
-### 20. [gíria] Uso de eufemismos da internet como 'desviver' e 'suco de tomate' para sangue/morte
+### 4. [jeito_de_falar] Gancho com quebra abrupta de narrativa no clímax final ('bem na hora em que...') sem call to action óbvia
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Padronizar nos roteiros de histórias fictícias o uso proposital de 'desviver' e 'suco de tomate' (sangue) para retenção da linguagem algorítmica e tom cômico/jovem.
-- por que é novo: Nosso vocabulário/roteiros muitas vezes evitam o assunto ou usam linguagem direta, arriscando filtro de conteúdo do TikTok/Shorts.
-- exemplos: https://www.youtube.com/watch?v=B-2QuiaoBcE seg 100.8 (trecho ce6e8d81.mp3)
-- ids: ce6e8d81
+- como aplicar: Encerrar scripts de episódios divididos interrompendo a frase na última conjunção da ação crucial, sem introduzir áudio de encerramento padrão
+- por que é novo: Nossas intros/fins e CTAs costumam pedir inscrição/like ou fechar raciocínio; aqui há um corte seco no ápice da ação ('bem na hora em que...') gerando retenção pura para parte 2
+- exemplos: https://www.youtube.com/watch?v=W7o0hzjbZ60 seg 85.0 (trecho 590791d3.mp3)
+- ids: 590791d3
 
-### 21. [visual] Simulação de interface de tablet/sistema
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Criar um frame de sobreposição que simule uma tela de dispositivo (tablet/celular) com bordas tecnológicas para mostrar o que o personagem está vendo.
-- por que é novo: O vídeo mostra a mão do personagem interagindo com um tablet que exibe o mundo pixelado, criando uma imersão de 'POV' (ponto de vista).
-- exemplos: https://www.youtube.com/watch?v=B-2QuiaoBcE seg 87.4 (trecho 95f5b551.mp4)
-- ids: 95f5b551
-
-### 22. [visual] Escrita secreta na perna/coxa
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Simular escrita à caneta na pele com efeito de zoom em dramatizações de suspense.
-- por que é novo: Uso de partes do corpo como suporte de mensagem oculta de socorro em close-up.
-- exemplos: https://www.youtube.com/watch?v=LiMdjEzZxpQ seg 4.9 (trecho 118eadba.mp4)
-- ids: 118eadba
-
-### 23. [jeito_de_falar] Uso de analogias cotidianas e informais
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Incorporar analogias do dia a dia para explicar comportamentos complexos de animais ou produtos, fugindo da linguagem puramente descritiva.
-- por que é novo: O roteiro usa comparações como 'vigia de baú de brinquedos' e 'xerife', que tornam o conteúdo técnico mais acessível e engraçado.
-- exemplos: https://www.youtube.com/watch?v=gFg-PP seg 27.9 (trecho 024b0bd9.mp3)
-- ids: 024b0bd9
-
-### 24. [visual] Card retangular escuro semi-transparente com borda/acento amarelo lateral agrupando especificações técnicas (ex: '1 máquina ASIC • 200 TH/s • 3.500 W')
+### 5. [jeito_de_falar] Call To Action com engajamento geográfico específico ('comenta o nome da sua cidade')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Criar um componente de overlay estilo 'infocard' para exibir dados técnicos, atributos ou métricas com linha vertical amarela em vídeos informativos ou comparativos
-- por que é novo: Nosso acervo tem overlays pontuais e big numbers, mas não possui esse formato de mini-ficha técnica/hud retangular com marcador de borda vertical amarelo para resumir stats ou dados analíticos
-- exemplos: https://www.youtube.com/watch?v=F1Vr2Uq7oeA seg 4.0 (trecho a8baabde.mp4)
-- ids: a8baabde
+- como aplicar: Adicionar script/hyperframe de finalização convidando os espectadores a comentar sua cidade/estado para pedir a continuação.
+- por que é novo: Nosso repertório de CTAs (cta_question, watch_to_end) usa perguntas genéricas ou pedidos de like/inscrição. Pedir a cidade de origem gera alta taxa de comentários espontâneos e sem atrito cognitivo.
+- exemplos: https://www.youtube.com/watch?v=cTMg2GTXHwY seg 63.0 (trecho a760cd16.mp3)
+- ids: a760cd16
 
-### 25. [piada] Dublagem paródia inserindo bordões clássicos do Chaves ('Cale-se, cale-se...', 'Isso, isso, isso!', 'Não se misture com essa gentalha!') em dorama dramático chinês
+### 6. [jeito_de_falar] Loop narrativo em gancho com pergunta reflexiva de retorno ao início
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Usar roteiros/dublagens cômicas que remixam falas icônicas da TV brasileira (Chaves, novelas da Globo) sobre trechos de conflito dramático de doramas curtos para gerar contraste cômico e retenção.
-- por que é novo: Não temos esse formato de paródia de voz com referências e bordões de humor nostálgico brasileiro sobrepostas a novelas asiáticas sérias.
-- exemplos: https://www.youtube.com/watch?v=kFdlOyUMkxw seg 9.0 (trecho 370d009d.mp3)
-- ids: 370d009d
+- como aplicar: Adicionar essa frase ou estrutura de recapitulação circular no final do roteiro de shorts/reels que contam histórias lineares, incentivando a repetição do vídeo
+- por que é novo: Usa a fórmula '...só que cê lembra como tudo isso começou?' no clímax final para criar um seamless loop perfeito de volta aos primeiros segundos sem parecer corte seco de fim de vídeo
+- exemplos: https://www.youtube.com/watch?v=BOWCeZuogKI seg 81.0 (trecho 63df3f3a.mp3)
+- ids: 63df3f3a
 
-### 26. [jeito_de_falar] Roteiro em 1ª pessoa adotando a persona egocêntrica/narcisista ('minha gloriosa propriedade', 'mente brilhante', 'dentadura majestosa', 'seus desocupados')
+### 7. [jeito_de_falar] Gancho reflexivo de encerramento ('Pode ser o registro silencioso de... / A mesma força que destrói... cria')
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Inserir adjetivos grandiosos satíricos ('meu intelecto incomparável', 'minha nobre presença') e chamar o espectador de apelidos provocativos amigáveis nos roteiros de recap/POV
-- por que é novo: Geralmente usamos narração em 3ª pessoa ou primeira pessoa neutra/séria; o vídeo usa um tom cômico arrogante/teatral que xinga o público ('seus desocupados') e romantiza situações trágicas para reter a atenção
-- exemplos: https://www.youtube.com/watch?v=qzI seg 0.0 (trecho b7a1d6cb.mp3)
-- ids: b7a1d6cb
+- como aplicar: Inserir nos últimos 15s de roteiros de curiosidades uma antítese poética (destruição vs criação, micro vs macro) para elevar o valor percebido do conteúdo antes do CTA de inscrição.
+- por que é novo: Nosso roteiro costuma finalizar com CTA direto ou resumo factual simples; aqui ele usa uma antítese poética e filosófica ('destruição na superfície gerando riqueza no subterrâneo') que conecta destruição e criação antes da pergunta de retenção.
+- exemplos: https://www.youtube.com/watch?v=kirdD3zdWw0 seg 135.6 (trecho eeae67d2.mp3)
+- ids: eeae67d2
 
-### 27. [visual] Legenda centralizada com quebra de linha dinâmica que acompanha o ritmo da fala.
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Configurar o editor de legendas para priorizar frases curtas centralizadas, alternando o peso visual entre as linhas para destacar o tom dramático da narrativa.
-- por que é novo: Nossas legendas atuais costumam ser estáticas ou seguir padrões de leitura linear; o uso de quebras de linha que enfatizam palavras-chave no centro da tela aumenta a retenção.
-- exemplos: https://www.youtube.com/watch?v=qzI seg 3.4 (trecho 09f58ab0.mp4)
-- ids: 09f58ab0
-
-### 28. [visual] Uso de acessórios físicos na personagem (tiara de sapo)
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Incluir acessórios simples e temáticos no figurino do apresentador/mascote que combinem com o tema da história (ex: tiaras, óculos, adereços de cabeça).
-- por que é novo: Adiciona uma camada de personalidade e humor visual que não temos, criando uma identificação imediata com o personagem sem depender só de edição.
-- exemplos: https://www.youtube.com/watch?v=zmN5gHkCaG8 seg 111.2 (trecho c4276cd2.mp4)
-- ids: c4276cd2
-
-### 29. [visual] Legenda dinâmica com troca de cor por palavra
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Implementar um estilo de legenda onde a palavra falada no momento ganha uma cor de destaque (ex: amarelo ou ciano) enquanto as outras permanecem brancas.
-- por que é novo: Nossas legendas costumam ser estáticas ou simples; o parceiro usa cores vibrantes que mudam conforme a ênfase da fala, mantendo o foco visual.
-- exemplos: https://www.youtube.com/watch?v=UYwA-hJjMnw seg 1.4 (trecho 1ff5c0fd.mp4)
-- ids: 1ff5c0fd
-
-### 30. [visual] Lista vertical de locais com ícones
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Criar uma lista animada (overlay) que surge lateralmente para listar comandos ou locais importantes em vez de falar tudo.
-- por que é novo: Apresenta informações densas de forma organizada e visualmente limpa, facilitando a leitura rápida.
-- exemplos: https://www.youtube.com/watch?v=fQsSb-qUZHU seg 34.1 (trecho edcf7e13.mp4)
-- ids: edcf7e13
-
-### 31. [visual] Uso de partículas de energia/faíscas (overlay) para enfatizar impacto ou tensão
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Adicionar overlays de faíscas ou partículas em momentos de impacto ou transições rápidas, sincronizando com um sfx de impacto.
-- por que é novo: Embora tenhamos overlays, não usamos partículas dinâmicas que 'nascem' de um ponto de impacto específico para dar peso visual a uma cena de ação.
-- exemplos: https://www.youtube.com/watch?v=MlgXYIqjzno seg 1424.5 (trecho c25b9d2d.mp4)
-- ids: c25b9d2d
-
-### 32. [jeito_de_falar] Uso de regionalismos informais ('uai', 'dureza danada', 'cês')
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Incorporar expressões regionais leves no roteiro para humanizar a narração, mantendo a clareza.
-- por que é novo: Nossa comunicação atual é muito neutra/padrão; o uso de gírias regionais cria proximidade e autenticidade.
-- exemplos: https://www.youtube.com/watch?v=C5hzxEfLlf4 seg 0 (trecho ee8bf678.mp3)
-- ids: ee8bf678
-
-### 33. [som] Efeitos sonoros onomatopaicos (SNIFF, PLUM)
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Adicionar sfx de foley curtos e pontuais que reforcem ações físicas dos personagens, sincronizados exatamente com o movimento na tela.
-- por que é novo: O vídeo usa sons que acompanham ações específicas dos personagens (como o 'sniff' ao cheirar energia), criando uma camada de imersão cômica.
-- exemplos: https://www.youtube.com/watch?v=WAv-3WVeAu0 seg 3.7
-- ids: 4fda937a
-
-### 34. [outro] Narrativa com tom de 'contação de história' (storytelling)
-- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Começar nossos vídeos com uma frase de ambientação que convide o espectador para dentro da história, criando um clima de 'fofoca' ou 'conto'.
-- por que é novo: O vídeo não apenas descreve a cena, ele cria um ambiente ('Senta aqui perto do fogo'), humanizando a narração.
-- exemplos: https://www.youtube.com/watch?v=2Lq7KkHt-6Q seg 3.9 (trecho 043159cd.mp4)
-- ids: 043159cd
-
-### 35. [piada] Analogia cômica do cotidiano: 'É tipo almoço de domingo na casa da sogra, só que...'
+### 8. [jeito_de_falar] Gancho condicional imersivo 'Imagina que un día...'
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Orientar os roteiristas a incluírem punchlines usando hipérboles de situações familiares brasileiras para quebrar o tom expositivo do resumo.
-- por que é novo: Compara a premissa fantástica/absurda do manhwa (vilão conhecendo heróis) com uma situação comum brasileira (tensão na casa da sogra), gerando identificação imediata.
-- exemplos: https://www.youtube.com/watch?v=DXqqnQP3omE seg 48.0 (trecho 2cccc77e.mp3)
-- ids: 2cccc77e
+- como aplicar: Abrir o Short/TikTok nos primeiros 3 segundos dizendo: 'Imagina se um dia você abre uma porta no seu quarto e vai parar direto num mundo de RPG com status apelão...'.
+- por que é novo: Nossas intros focam em bordoes ou falas diretas do mascote, mas não usam a estrutura de convite mental 'Imagina se um dia você...', que retém a audiência colocando-a na pele do protagonista.
+- exemplos: https://www.youtube.com/watch?v=r77umNwvRKU seg 0.0 (trecho 7373216f.mp3)
+- ids: 7373216f
 
-### 36. [jeito_de_falar] Narração em 1ª pessoa assumindo o monólogo interno do monstro/personagem bizarro ('Eu fiz mais de oitocentas cirurgias...', 'Arrancaram meus braços...') com deboche ao ouvinte ('seu pançudo')
+### 9. [visual] Transição de foto histórica real para recriação 3D cinematográfica no mesmo ângulo relativo
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
-- como aplicar: Em cortes de monstros, vilões ou transformações bizarras de animes/séries, redigir o roteiro na primeira pessoa do próprio personagem contando sua loucura e insultando o espectador com humor ácido.
-- por que é novo: Costumamos narrar fatos em 3ª pessoa ou fazer resumos analíticos/descritivos. Incorporar a 'persona' do vilão/criatura de forma visceral e informal gera identificação e choque imediatos.
-- exemplos: https://www.youtube.com/watch?v=Da2OEqetod4 seg 0.0 (trecho f909ea2f.mp3)
-- ids: f909ea2f
+- como aplicar: Quando falarmos de armamentos ou veículos históricos, parear fotos de museu/arquivo com clipes renderizados em CGI/jogos com câmera dinâmica simulando o disparo.
+- por que é novo: Não temos esse contraste de alternar foto de arquivo B&W/colorizada para cena de render 3D/game engine (estilo War Thunder/cinematics) para dar dinamismo visual à narrativa técnica.
+- exemplos: https://www.youtube.com/watch?v=CCji3f6Cgj8 seg 14.6 (trecho 20af9c21.mp4)
+- ids: 20af9c21
 
-### 37. [visual] Uso de caligrafia chinesa vertical para identificar personagens
+### 10. [visual] Uso de fotografias históricas reais em preto e branco combinadas com colorizações de época e filmagens de arquivo sobrepostas com cortes dinâmicos de zoom sutil.
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Criar overlays de texto com fontes estilo 'brush' ou caligráficas, posicionadas verticalmente na lateral da tela ao introduzir um novo personagem.
-- por que é novo: Identifica personagens com um estilo visual mais sofisticado e dramático do que apenas nomes simples na tela.
-- exemplos: https://www.youtube.com/watch?v=OAoFU2VUrMY seg 63.0 (trecho 6b38ae6f.mp4)
-- ids: 6b38ae6f
+- como aplicar: Incorporar mais fotos e vídeos de arquivo reais e históricos (história militar/engenharia) com tratamento de cor sépia ou PB com zoom digital lento para dar dinamismo a conteúdos informativos.
+- por que é novo: Foca em imagens arquivísticas históricas reais de grande escala com acabamento documental de época que não utilizamos com tanta frequência em nossos vídeos cotidianos.
+- exemplos: https://www.youtube.com/watch?v=CCji3f6Cgj8 seg 0 (trecho acd8b7ef.mp4)
+- ids: acd8b7ef
 
-### 38. [efeito] Uso de 'zoom' dramático em momentos de comédia física
+### 11. [visual] Pig icon with surprised eyes overlay at top-left corner
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Aplicar zooms rápidos (keyframe de escala) em momentos de 'punchline' ou situações bizarras, sincronizado com o efeito sonoro de impacto.
-- por que é novo: O vídeo usa zooms rápidos e fechados para enfatizar o absurdo da situação (pés/mãos trocados), o que potencializa o humor visual.
-- exemplos: https://www.youtube.com/watch?v=DCAAna2CkV0 seg 11.3 (trecho 649262d8.mp4)
-- ids: 649262d8
+- como aplicar: Adicionar um PNG fixo da mascote com expressão de surpresa no canto superior esquerdo em vídeos de suspense ou bizarrice.
+- por que é novo: Usa um ícone de animal temático (porquinho) com expressão de espanto no canto superior fixo durante todo o vídeo, reforçando a identidade visual e o tom de humor.
+- exemplos: https://www.youtube.com/watch?v=Z7wrutt3G90 seg 0.0 (trecho d50b51ca.mp4)
+- ids: d50b51ca
 
-### 39. [outro] Narrativa baseada em 'causa e efeito' absurdo
+### 12. [jeito_de_falar] Hook com curiosidade pop linkada à ciência prática ('Já reparou que James Bond pede batida e não mexida?')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Adotar ganchos que questionam hábitos clássicos de ficção (animes, filmes, games) prometendo uma explicação lógica/científica do mundo real para prender o público nos primeiros 3s.
+- por que é novo: Costumamos abrir direto no tema factual ou com piadas/bordões de choque; não usamos perguntas retóricas sobre detalhes de filmes/cultura pop com explicação científica imediata.
+- exemplos: https://www.youtube.com/watch?v=d-QU seg 0.0 (trecho 5016bf0d.mp3)
+- ids: 5016bf0d
+
+### 13. [efeito] Clímax visual dramático com fogo/maçarico no topo da solução para comprovar o argumento
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Inserir no terço final um elemento de choque/teste de estresse visual (ex: fogo, teste de resistência, explosão curta ou efeito visual radical) para reter até o último segundo.
+- por que é novo: Não temos desfecho de retenção baseado em teste extremo ou combustão real como punchline visual antes da CTA.
+- exemplos: https://www.youtube.com/watch?v=d-QU seg 54.0 (trecho 5b5a6707.mp4)
+- ids: 5b5a6707
+
+### 14. [visual] Teste prático final com maçarico acendendo fogo na camada de álcool da bebida
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Estruturar roteiros onde o clímax da bizarrice acontece primeiro e a explicação (mesmo que absurda) é revelada apenas no final do vídeo.
-- por que é novo: O vídeo constrói uma história surrealista que justifica o absurdo inicial apenas no final, mantendo a curiosidade até o último segundo.
-- exemplos: https://www.youtube.com/watch?v=DCAAna2CkV0 seg 64.0 (trecho 3587853c.mp4)
-- ids: 3587853c
+- como aplicar: Incorporar pequenos experimentos controlados com fogo ou reações visuais marcantes no encerramento de vídeos de ciência ou curiosidades.
+- por que é novo: Não temos o recurso visual de demonstração com fogo/maçarico para provar dramaticamente a concentração de álcool em um experimento.
+- exemplos: https://www.youtube.com/watch?v=d-QU seg 54 (trecho 15763a22.mp4)
+- ids: 15763a22
 
-### 40. [visual] Header fixo com perfil simulado de rede social (Twitter/X)
+### 15. [visual] Stack progressivo vertical de linhas com bandeira + rage comic + fórmula matemática correspondente
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Em Shorts comparativos entre países ou línguas, montar um layout vertical onde cada linha nova entra abaixo com bandeira, equação lógica simplificada e reação cômica crescente.
+- por que é novo: Apresenta comparações linguísticas empilhando visualmente fórmulas aritméticas com expressões de Rage Comics que evoluem de calmo para desespero/raiva extrema.
+- exemplos: https://www.youtube.com/watch?v=p-s330V6IDU seg 3.0 (trecho 397a79ca.mp4)
+- ids: 397a79ca
+
+### 16. [visual] Contagem regressiva estilizada em 3D com números volumétricos (como o '2' gigante no segundo 21)
 - visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
-- como aplicar: Fixar um elemento gráfico no topo com foto de perfil, nome e @ do canal durante todo o vídeo.
-- por que é novo: Cria uma identidade visual constante e autoridade de marca sem poluir o centro da tela, diferente dos nossos overlays genéricos.
-- exemplos: https://www.youtube.com/watch?v=l6IqakMpVaQ seg 2.5 (trecho 92c32386.mp4)
-- ids: 92c32386
+- como aplicar: Importar assets de números 3D estilizados em formato de vídeo/overlay com canal alpha para transições de contagem ou tópicos.
+- por que é novo: Usa um número 3D com chanfro dourado/metálico muito limpo e chamativo, diferente dos nossos números padrão.
+- exemplos: https://www.youtube.com/watch?v=M5esBi7xSMc seg 21.1 (trecho 9538f259.mp4)
+- ids: 9538f259
 
-(+ 606 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)
+### 17. [outro] Uso de cenas geradas por IA com estilo visual consistente de fantasia mecânica/vintage para recontar uma história dramática/cinemática
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Integrar prompts de IA estilo dark steampunk/fantasy nos vídeos de histórias misteriosas e de fuga.
+- por que é novo: A narrativa visual lembra clássicos adaptados por IA com temática steampunk/fantasia escura (como O Mágico de Oz sombrio) mantendo engajamento alto.
+- exemplos: https://www.youtube.com/watch?v=wYsrT7sLWPo seg 3.6 (trecho 05ac530e.mp4)
+- ids: 05ac530e
+
+### 18. [visual] Uso de faixa amarela superior com texto em caixa alta destacando a premissa isekai/cultigao do protagonista
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Implementar uma tarja superior permanente ou semi-permanente em vídeos de recapitulação de mangá/manhua resumindo o conflito principal do protagonista.
+- por que é novo: Manter uma barra de texto fixa no topo com um resumo chamativo da premissa ("Ele caiu no corpo de um líder fracassado...") durante todo o vídeo prende a atenção de quem entra no meio.
+- exemplos: https://www.youtube.com/watch?v=YDaBWskB seg 1.6 (trecho 8482f31a.mp4)
+- ids: 8482f31a
+
+### 19. [jeito_de_falar] Estrutura de hook cumulativo rápido ('Esse peixe aguenta água ruim, come praticamente de tudo, se reproduz rápido e ainda quase não tem predador...')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Adotar roteiro com lista rápida de 3 a 4 fatos inacreditáveis/características extremas antes de revelar o elemento principal nos primeiros 10 segundos para reter curiosidade
+- por que é novo: Nossas intros em intros_voz focam em frases de abertura diretas ou bordões gravados; essa técnica usa empilhamento acelerado de atributos extremos antes de revelar o nome do sujeito aos 13s
+- exemplos: https://www.youtube.com/watch?v=VyUBk3VVPyo seg 1.9 (trecho a465aa05.mp3)
+- ids: a465aa05
+
+### 20. [visual] Vetores/setas bidirecionais de forças opostas com fissuras de tensão na superfície do astro
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Criar preset de animação para conceitos de física/destruição onde setas de tração aparecem enquanto rachaduras surgem sobre a imagem do elemento central.
+- por que é novo: Mostra visualmente o 'limite de Roche' e forças diferenciais usando setas opostas e rachaduras sincronizadas na geometria do corpo celeste.
+- exemplos: https://www.youtube.com/watch?v=r244g1U6-bc seg 16.3 (trecho 9ff5f93c.mp4)
+- ids: 9ff5f93c
+
+### 21. [efeito] Anel de detritos/fragmentos orbitando o planeta após destruição
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Adicionar preset de loop/camada de partículas 'debris_orbit' para representar impactos cósmicos, fragmentação de luas ou satélites.
+- por que é novo: Nosso acervo de fx tem cortes e fumaça, mas não partículas/escombros volumétricos orbitando em anel tipo Saturno ao redor do objeto.
+- exemplos: https://www.youtube.com/watch?v=r244g1U6-bc seg 19.9 (trecho 50738594.mp4)
+- ids: 50738594
+
+### 22. [jeito_de_falar] Gancho de 'ponto fraco curioso' com reviravolta explicativa e teste prático
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Em roteiros sobre materiais, invenções ou curiosidades científicas, incluir sempre a seção do 'calcanhar de Aquiles' ou contraindicação bizarra aos 75% do vídeo para renovar a retenção antes do CTA.
+- por que é novo: Apresenta um 'super-material' incrível, mas no clímax do vídeo introduz intencionalmente o seu ponto fraco/defeito ('Mas o produto tem um ponto fraco muito curioso: basta jogar sal...') demonstrando a dissolução imediata e finalizando com a implicação lógica ('não funciona na água do mar'). Nosso formato foca muito em fatos lineares sem essa quebra de expectativa no terço final.
+- exemplos: https://www.youtube.com/watch?v=xSzOJAgDVD8 seg 25.5 (trecho 265b8868.mp3)
+- ids: 265b8868
+
+### 23. [visual] Zoom dramático com distorção de foco na reação de pânico da protagonista
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Aplicar zoom in rápido combinado com leve desfoque nas bordas (radial blur) nos momentos de revelação ou choque dos personagens.
+- por que é novo: Foca na expressão de choque de forma muito intensa e cinematográfica, ideal para o início de reviravoltas em vídeos de drama.
+- exemplos: https://www.youtube.com/watch?v=FrdfvS-hFWM seg 25.8 (trecho df8ba7c1.mp4)
+- ids: df8ba7c1
+
+### 24. [jeito_de_falar] Uso de 'bicho escroto' e 'tecnologia doida' para qualificar maquinário técnico/avançado de forma ultra-coloquial
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Flexibilizar o tom dos roteiros sobre ferramentas/ciência adotando hipérboles informais de admiração ('é um bicho muito escroto', 'tecnologia doida')
+- por que é novo: Nosso acervo de roteiros e dublagens tende a usar explicações científicas ou termos neutros; o canal parceiro vulgariza positivamente a eficiência tecnológica ('um bicho muito escroto')
+- exemplos: https://www.youtube.com/watch?v=JpXFH7 seg 7.0 (trecho 8f640022.mp3)
+- ids: 8f640022
+
+### 25. [visual] Uso de personagem animado 2D integrado na lateral inferior do vídeo reagindo e apontando para as cenas
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Criar variações de posicionamento do nosso avatar mascote fixo no canto inferior esquerdo/direito com animações de corpo inteiro gesticulando durante explicações técnicas.
+- por que é novo: Apesar de termos mascotes, a nossa integração e posicionamento estático dinâmico no canto com falas explicativas no estilo narrador-personagem com avatar humanóide cartoon próprio difere do nosso padrão atual de uso de mascotes reativas.
+- exemplos: https://www.youtube.com/watch?v=JpXFH7 seg 2.5 (trecho 565c9d17.mp4)
+- ids: 565c9d17
+
+### 26. [gíria] Uso de termos coloquiais fortes e expressivos ('um bicho muito escroto', 'zero bala')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Temperar os roteiros descritivos com expressões populares brasileiras de forte contraste com alta tecnologia.
+- por que é novo: Vocabulário técnico misturado com gírias de forte apelo popular e regional brasileiro para descrever tecnologia de ponta.
+- exemplos: https://www.youtube.com/watch?v=JpXFH7 seg 7.4 (trecho 75521d89.mp3)
+- ids: 75521d89
+
+### 27. [jeito_de_falar] Hook com paradoxo de escala extrema ('um simples X podia destruir uma fábrica inteira')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Estruturar aberturas de curiosidades usando a fórmula: 'Sabia que um simples [objeto insignificante] quase destruiu [algo gigantesco] nos anos [década]?'
+- por que é novo: Contraste narrativo imediato entre um detalhe minúsculo/banal (um número escrito à mão) e uma catástrofe monumental (destruição de uma fábrica de milhares de dólares), gerando curiosidade instantânea antes de revelar o tema.
+- exemplos: https://www.youtube.com/watch?v=lbNZaiGpGvo seg 0.0 (trecho 967295b7.mp3)
+- ids: 967295b7
+
+### 28. [visual] Sequência de imagens macro/zoom estáticas evoluindo para tomada aberta em vídeo mostrando o bando no habitat
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Inserir fotos estáticas com zoom in dramático nos primeiros segundos de vídeos de animais antes de soltar a cena principal em movimento.
+- por que é novo: Começamos direto com vídeos em movimento sem explorar close-ups extremos iniciais dos detalhes do animal para gerar curiosidade antes da revelação do bando.
+- exemplos: https://www.youtube.com/watch?v=Kisv0-FWSho seg 1.0 (trecho 95403218.mp4)
+- ids: 95403218
+
+### 29. [piada] Metáfora cômica e culturalmente identificável ('Brasília amarela com hélice voando baixo por Guarulhos')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Inserir comparações absurdas do imaginário pop brasileiro no roteiro de curiosidades sobre veículos estranhos ou engenhocas
+- por que é novo: Usa referências populares brasileiras muito específicas (Mamonas Assassinas / Brasília Amarela / Guarulhos) para criar contraste humorístico com uma geringonça tecnológica
+- exemplos: https://www.youtube.com/watch?v=wVRZu9dsskA seg 45.0 (trecho 5669445d.mp3)
+- ids: 5669445d
+
+### 30. [jeito_de_falar] Gancho com negação imediata de suposições intuitivas ('Este homem não está cavando neve ou areia...')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Em roteiros com cenas visuais enganosas ou surpreendentes, abrir a narração com 'Você pode achar que [X], mas na verdade é [Y]' ou 'Isso não é [suposição óbvia]'.
+- por que é novo: Em vez de abrir com pergunta genérica ou afirmação descritiva padrão, abre desmentindo o que os olhos do espectador imediatamente assumem ao ver a imagem (neve), gerando quebra imediata de expectativa.
+- exemplos: https://www.youtube.com/watch?v=gE3Bl0FoW8o seg 0.0 (trecho 188d7ff0.mp3)
+- ids: 188d7ff0
+
+### 31. [outro] Hook com objeto misterioso/transformável em POV close-up gerando curiosidade ('isso não é X')
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Usar em intros de review ou curiosidades sobre itens inusitados: começar mostrando o item fechado com frase de quebra de expectativa ('Isso não é um chaveiro...') antes da transformação.
+- por que é novo: Abertura puramente visual e tátil com negação no gancho ('isso não é 1 caneta') focada em produto curioso/gadget miniaturizado, sem necessidade de narrador em tela.
+- exemplos: https://www.youtube.com/watch?v=cfmOF7QyXH0 seg 1.7 (trecho eb355338.mp4)
+- ids: eb355338
+
+### 32. [visual] Uso de imagens de arquivo estáticas e surreais de memes antigos (como o Fofão deformado/bochechudo) para ilustrar piadas visuais rápidas
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Inserir imagens estáticas de baixa resolução de memes clássicos brasileiros com zoom súbito durante citações cômicas.
+- por que é novo: Apesar de termos memes_img, a escolha de imagens de susto/bizzarras de baixa qualidade sincronizadas com narração acelerada gera um efeito de shitpost dinâmico.
+- exemplos: https://www.youtube.com/watch?v=eHFIPHvZ7qQ seg 5.3 (trecho 1b25d180.mp4)
+- ids: 1b25d180
+
+### 33. [visual] Borda de foto polaroid/analógica escura com vinheta granulada sobre cenas de terror/creepypasta
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Criar um overlay PNG de moldura polaroid escura/vintage para vídeos de contos de terror e mistério no pipeline de geração
+- por que é novo: Nosso acervo de hyperframes/dividers usa estilos gráficos coloridos/elétricos, sem moldura fotográfica analógica 'found footage/polaroid' com bordas brancas sutis e revelação escura
+- exemplos: https://www.youtube.com/watch?v=V217m seg 3.6 (trecho 45355603.mp4)
+- ids: 45355603
+
+### 34. [visual] Tomada aérea cenográfica direta (top-down view) de uma cratera de água azul intensa cercada por vegetação densa.
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Empregar imagens de satélite ou drone em perspectiva estritamente vertical (top-down) para introduzir locais misteriosos ou abismos naturais.
+- por que é novo: Gera um forte impacto visual de escala e isolamento geográfico que prende a atenção do espectador instantaneamente nos primeiros segundos de um tópico.
+- exemplos: https://www.youtube.com/watch?v=5zUdresZmKY seg 18.3 (trecho c768aaf6.mp4)
+- ids: c768aaf6
+
+### 35. [visual] Composição em camadas no mesmo ambiente subaquático mostrando escala e comparação entre os espécimes citados
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: claude-sonnet
+- como aplicar: Nos segundos finais de vídeos comparativos/listas, gerar um quadro síntese reunindo todos os elementos citados no vídeo para ancorar a conclusão e prender o espectador no loop
+- por que é novo: Não temos b-roll de síntese comparativa onde todos os sujeitos do roteiro (baleia, tubarão e concha) coexistem num mesmo plano final submerso para recapitulação
+- exemplos: https://www.youtube.com/watch?v=n5G0JHa seg 72.1 (trecho b5f59e29.mp4)
+- ids: b5f59e29
+
+### 36. [visual] Enquadramento de baixo para cima mostrando a enorme pata ou traseiro de um monstro cobrindo o horizonte da vila
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Usar clipes de monstros gigantes ou animais oversized com ângulo contra-plongée extremo e legenda centralizada chamativa
+- por que é novo: Perspectiva exagerada de proporção que enfatiza a comédia do tamanho absurdo do monstro comparado ao protagonista
+- exemplos: https://www.youtube.com/watch?v=7vVwf4hlUnI seg 0.8 (trecho 97b5bd3e.mp4)
+- ids: 97b5bd3e
+
+### 37. [visual] Uso de imagens subaquáticas reais e ilustrativas intercaladas com cenas reais de pesca em tom informativo/documental de alerta
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Utilizar B-roll subaquático de alta qualidade combinado com imagens reais de manuseio de grandes peixes em vídeos de alerta de leis ambientais.
+- por que é novo: Foca em imagens de arquivo subaquáticas bem cinematográficas aliadas a avisos legais de pesca que agregam autoridade e clareza visual imediata.
+- exemplos: https://www.youtube.com/watch?v=wqJvHYqpit4 seg 3.0 (trecho b139e441.mp4)
+- ids: b139e441
+
+### 38. [som] Efeito sonoro exagerado de osso quebrando/estalando sincronizado com o susto do apresentador
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Adicionar efeito de som de 'crack' seco em momentos de ações corporais exageradas nos nossos vídeos
+- por que é novo: Foco em som de impacto corporal cômico sincronizado com reação dramática em close
+- exemplos: https://www.youtube.com/watch?v=OMHvhSt0UmE seg 15.0 (trecho 7721a080.mp3)
+- ids: 7721a080
+
+### 39. [visual] Menu estilo interface de rede social/comentários com cabeçalho 'SORTED BY COMMENTS' e setas de ordenação no topo do vídeo
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Criar um componente overlay em formato de caixa de comentários com título estilizado no topo para introduzir premissas ou dilemas de mangás/manhwas.
+- por que é novo: Apresenta uma UI simulando um fórum ou seção de comentários de forma limpa e destacada, gerando contexto narrativo imediato sem uso de legenda comum.
+- exemplos: https://www.youtube.com/watch?v=Tv4TcuPT9JI seg 225.5 (trecho df074136.mp4)
+- ids: df074136
+
+### 40. [visual] Seta verde grande apontando para a ação do segurança no início do vídeo
+- visto em 1 vídeo(s) · nota máx. 8 · modelos: gemini
+- como aplicar: Adicionar setas indicativas verdes ou vermelhas dinâmicas nos primeiros segundos de vídeos de fofoca/flagras para destacar detalhes sutis.
+- por que é novo: Uso de setas verdes grossas com contorno escuro bem chamativas para guiar o olhar do espectador para o ponto exato de conflito antes da revelação.
+- exemplos: https://www.youtube.com/watch?v=CGfcAnwEtD0 seg 1.4 (trecho 62eba2f2.mp4)
+- ids: 62eba2f2
+
+(+ 487 grupo(s) mais fracos: vistos em 1 vídeo só; ficam no acervo.jsonl)

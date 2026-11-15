@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gráficos dos canais</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+  :root { --bg:#05080a; --card:#0b1410; --fg:#e8fff1; --mut:#8fb5a0; --acc:#22c55e; --linha:#183024; }
+  html,body { margin:0; background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; height:100%; overflow:hidden; }
+  .tela { display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap:1.6vh 1.4vw;
+          height:100vh; box-sizing:border-box; padding:2vh max(16px,2vw); }
+  .topo { grid-column:1/3; display:flex; gap:1.4vw; }
+  .kpi { flex:1; background:var(--card); border:1px solid var(--linha); border-radius:1.2vh; padding:1.2vh 1.4vw; }
+  .kpi small { color:var(--mut); font-size:1.8vh; display:block; }
+  .kpi b { font-size:5vh; color:var(--acc); font-variant-numeric:tabular-nums; }
+  .kpi span { font-size:1.9vh; color:var(--mut); }
+  .card { background:var(--card); border:1px solid var(--linha); border-radius:1.2vh; padding:1.2vh 1.2vw; min-height:0;
+          display:flex; flex-direction:column; }
+  .card h3 { margin:0 0 .8vh; font-size:2.3vh; }
+  .card .grafico { position:relative; flex:1; min-height:0; }
+  .largo { grid-column:1/3; }
+  @media (max-width: 700px) { .tela { grid-template-columns:1fr; grid-template-rows:auto; overflow:auto; height:auto; }
+    .topo,.largo { grid-column:1; flex-wrap:wrap; } .card .grafico { height:40vh; } body { overflow:auto; } }
+</style>
+</head>
+<body>
+<!-- 14/11 dona: gráficos do painel principal (views do dia/semana, comparação dos canais) no telão do Tab -->
+<div class="tela">
+  <div class="topo">
+    <div class="kpi"><small>Views hoje (desde 06h)</small><b id="k_hoje">—</b> <span id="k_ontem"></span></div>
+    <div class="kpi"><small>Views nos últimos 7 dias</small><b id="k_7d">—</b> <span id="k_canais"></span></div>
+    <div class="kpi"><small>Inscritos ganhos em 7 dias</small><b id="k_insc">—</b> <span id="k_hora"></span></div>
+  </div>
+  <div class="card"><h3>Views por dia — total dos canais</h3><div class="grafico"><canvas id="g_dia"></canvas></div></div>
+  <div class="card"><h3>Views hoje por canal (top 10)</h3><div class="grafico"><canvas id="g_hoje"></canvas></div></div>
+  <div class="card largo"><h3>Comparação: views nos 7 dias por canal</h3><div class="grafico"><canvas id="g_sem"></canvas></div></div>
+</div>
+<!-- 14/11 dona: 2ª tela (alterna a cada 30 s) — postagens e inscritos da semana + RECORDES (canal bateu a própria marca) -->
+<div class="tela" id="tela2" style="display:none;grid-template-rows:42vh 1fr">
+  <div class="card"><h3>Postagens por dia (vídeos que abriram)</h3><div class="grafico"><canvas id="g_post"></canvas></div></div>
+  <div class="card"><h3>Inscritos ganhos por dia — total</h3><div class="grafico"><canvas id="g_insc"></canvas></div></div>
+  <div class="card largo"><h3>🏆 Recordes da semana — o canal bateu a própria marca</h3>
+    <div id="recordes" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(26vw,1fr));gap:1.2vh 1vw;overflow:hidden"></div></div>
+</div>
+<script>
+const fmt = n => Number(n || 0).toLocaleString("pt-BR");
+const COR = "#22c55e", COR2 = "#38bdf8", GRADE = "rgba(143,181,160,.15)", TXT = "#8fb5a0";
+Chart.defaults.color = TXT; Chart.defaults.font.size = Math.max(11, innerHeight / 60);
+const graf = {};
+function desenha(id, cfg) { if (graf[id]) graf[id].destroy(); graf[id] = new Chart(document.getElementById(id), cfg); }
+const opc = (h) => ({ responsive:true, maintainAspectRatio:false, indexAxis: h ? "y" : "x", animation:false,
+  plugins:{ legend:{ display:false } }, scales:{ x:{ grid:{ color:GRADE } }, y:{ grid:{ color:GRADE } } } });
+var carregar = async function () {
+  let g; try { g = await (await fetch("graficos.json?t=" + Date.now())).json(); } catch (e) { return; }
+  const cs = (g.canais && g.canais.canais) || [], rk = (g.ranking && g.ranking.canais) || [], h = g.hora || {};
+  // por dia: soma da diferença diária da série de cada canal
+  const dias = {};
+  cs.forEach(c => { const s = c.serie || []; for (let i = 1; i < s.length; i++) dias[s[i][0]] = (dias[s[i][0]] || 0) + Math.max(0, s[i][2] - s[i-1][2]); });
+  const dk = Object.keys(dias).sort();
+  desenha("g_dia", { type:"bar", data:{ labels: dk.map(d => d.slice(8,10) + "/" + d.slice(5,7)),
+    datasets:[{ data: dk.map(d => dias[d]), backgroundColor: COR, borderRadius: 4 }] }, options: opc(false) });
+  const top = [...rk].sort((a,b) => (b.views_hoje||0) - (a.views_hoje||0)).slice(0, 10);
+  desenha("g_hoje", { type:"bar", data:{ labels: top.map(c => c.canal), datasets:[{ data: top.map(c => c.views_hoje||0),
+    backgroundColor: COR2, borderRadius: 4 }] }, options: opc(true) });
+  const sem = [...cs].sort((a,b) => (b.ganho_views||0) - (a.ganho_views||0)).slice(0, 16);
+  desenha("g_sem", { type:"bar", data:{ labels: sem.map(c => c.slug), datasets:[{ data: sem.map(c => c.ganho_views||0),
+    backgroundColor: sem.map((c,i) => i < 3 ? COR : "rgba(34,197,94,.45)"), borderRadius: 4 }] }, options: opc(false) });
+  document.getElementById("k_hoje").textContent = fmt(h.hoje);
+  if (h.ontem_mesma_hora) { const p = Math.round((h.hoje / h.ontem_mesma_hora - 1) * 100);
+    document.getElementById("k_ontem").textContent = `${p >= 0 ? "▲" : "▼"} ${Math.abs(p)}% vs ontem às ${h.hora || ""}`; }
+  document.getElementById("k_7d").textContent = fmt(cs.reduce((s,c) => s + (c.ganho_views||0), 0));
+  document.getElementById("k_canais").textContent = `${cs.length} canais`;
+  document.getElementById("k_insc").textContent = fmt(cs.reduce((s,c) => s + (c.ganho_inscritos||0), 0));
+  document.getElementById("k_hora").textContent = g.gerado_em ? "atualizado " + new Date(g.gerado_em).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}) : "";
+};
+function tela2(g) {
+  const p = g.postagens || {}, pk = Object.keys(p).sort();
+  desenha("g_post", { type:"bar", data:{ labels: pk.map(d => d.slice(8,10) + "/" + d.slice(5,7)), datasets:[
+    { label:"Shorts", data: pk.map(d => p[d].shorts), backgroundColor: COR, borderRadius: 4, stack:"s" },
+    { label:"Longos", data: pk.map(d => p[d].longos), backgroundColor: "#f59e0b", borderRadius: 4, stack:"s" }] },
+    options: Object.assign(opc(false), { plugins:{ legend:{ display:true } }, scales:{ x:{ stacked:true, grid:{ color:GRADE } }, y:{ stacked:true, grid:{ color:GRADE } } } }) });
+  const cs = (g.canais && g.canais.canais) || [], dias = {};
+  cs.forEach(c => { const s = c.serie || []; for (let i = 1; i < s.length; i++) dias[s[i][0]] = (dias[s[i][0]] || 0) + Math.max(0, s[i][1] - s[i-1][1]); });
+  const dk = Object.keys(dias).sort();
+  desenha("g_insc", { type:"line", data:{ labels: dk.map(d => d.slice(8,10) + "/" + d.slice(5,7)),
+    datasets:[{ data: dk.map(d => dias[d]), borderColor: COR2, backgroundColor:"rgba(56,189,248,.2)", fill:true, tension:.3 }] }, options: opc(false) });
+  const R = g.recordes || [];
+  document.getElementById("recordes").innerHTML = R.length ? R.slice(0, 9).map(r => {
+    const x = r.vezes ? `${r.vezes.toLocaleString("pt-BR")}×` : "1ª vez";
+    const big = (r.vezes || 99) >= 2;
+    return `<div style="background:${big ? "rgba(245,158,11,.14)" : "rgba(34,197,94,.08)"};border:1px solid ${big ? "#f59e0b" : "#183024"};border-radius:1vh;padding:1vh 1vw">
+      <div style="font-size:2.1vh;font-weight:700">${r.canal}</div>
+      <div style="font-size:4vh;font-weight:800;color:${big ? "#f59e0b" : COR}">${x} <span style="font-size:2vh;color:#8fb5a0">${r.tipo}</span></div>
+      <div style="font-size:1.8vh;color:#8fb5a0">${fmt(r.valor)} em ${r.dia.slice(8,10)}/${r.dia.slice(5,7)} · antes, o máximo era ${fmt(r.antes)}</div></div>`;
+  }).join("") : `<div style="color:#8fb5a0;font-size:2.4vh">Nenhum canal bateu a própria marca nesta semana ainda.</div>`;
+}
+let ultimoG = null, telaAtual = 1;
+const _car = carregar;
+carregar = async function () { await _car(); try { ultimoG = await (await fetch("graficos.json?t=" + Date.now())).json(); tela2(ultimoG); } catch (e) {} };
+carregar(); setInterval(carregar, 120000);
+function mostra(t) {
+  telaAtual = t;
+  document.querySelector(".tela").style.display = t === 1 ? "grid" : "none";
+  document.getElementById("tela2").style.display = t === 2 ? "grid" : "none";
+  Object.values(graf).forEach(c => c.resize());
+}
+// ?tela=1 ou ?tela=2 = fixa (quadro "Gráficos"/"Recordes" do telão local); sem = alterna a cada 30 s (Tab)
+var fixa = (location.search.match(/tela=(\d)/) || [])[1];
+if (fixa) { setTimeout(function () { mostra(+fixa); }, 300); }
+else { setInterval(function () { mostra(telaAtual === 1 ? 2 : 1); }, 30000); }
+</script>
+</body>
+</html>

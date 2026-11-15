@@ -1,0 +1,2743 @@
+{
+ "name": "📸 INSTAGRAM · Central: Sorteio com vídeo, Gincana nos stories, Menção vira cliente fiel e Instagram vira site",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 📸 CENTRAL DO INSTAGRAM — comece aqui\nQuatro ferramentas num painel só: 🔐 `/webhook/insta-painel` (conta + senha).\n\n🎁 **Sorteio com vídeo** — pega os participantes que o fluxo *Sorteio parte 1* já validou (comentou + segue + confirmou no direct), sorteia de forma **verificável** (chave secreta fixada antes, revelada depois) e mostra uma **roleta animada** que vira **vídeo 9:16** para postar. Página pública de transparência.\n🕵️ **Gincana nos stories** — pistas com horário; o ⏰ posta a arte da pista no **story** sozinho; inscrição e respostas pelo **direct**; pontos (quem acerta primeiro ganha mais) e ranking público ao vivo.\n💜 **Menção vira cliente fiel** — alguém marca a loja no story → o robô responde no direct com agradecimento (✨ IA personaliza) e **cupom único**; o caixa confere o cupom no painel.\n🌐 **Instagram vira site** — 🤖 a IA lê os últimos posts (foto + legenda) e monta um site com catálogo, diferenciais, FAQ e botão do WhatsApp.\n\n**Eventos da Meta:** o app só tem 1 endereço de eventos (está no *Sorteio parte 1*). Ele **repassa** cada evento para `/webhook/insta-eventos` (nó 📨 no fim do sorteio), e aqui o 🔀 separa: direct → gincana · menção no story → cupom.\n\n**Legenda:** 🔔 gatilho · 📤 resposta · 🐘 banco · 🔀 decisão · 🤖 IA · 📸 Instagram · 🛠️ oficina · ⏰ agendado",
+    "height": 700,
+    "width": 780,
+    "color": 6
+   },
+   "id": "e7418d73-a81a-5f54-9284-cfe5084fb23d",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1300,
+    -700
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ PÁGINAS 📄\nPainel, apresentação do sorteio, ranking da gincana e o site. HTML fixo (abre em < 1 s).",
+    "height": 980,
+    "width": 560,
+    "color": 7
+   },
+   "id": "b31544c7-e66e-549a-a537-e065daa5365c",
+   "name": "Nota 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    -700
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ API 🔌\n🐘 **ig_api(jsonb)** guarda a regra (login, sorteio verificável, gincana, cupons). O 🔀 manda para o n8n o que precisa de Instagram ou IA.",
+    "height": 1250,
+    "width": 1900,
+    "color": 4
+   },
+   "id": "f638a9f6-e251-5a9f-9e31-69f99409ebac",
+   "name": "Nota 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    160,
+    -700
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ EVENTOS DO INSTAGRAM 📨\nRepassados pelo *Sorteio parte 1*. Direct → 🕵️ gincana. Story que marca a loja → 💜 cupom.",
+    "height": 560,
+    "width": 2520,
+    "color": 5
+   },
+   "id": "cb0ec799-4eb8-5748-bada-c009b1244b3c",
+   "name": "Nota 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    600
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 4️⃣ ⏰ PISTA NO STORY\nA cada 5 min: pista que abriu → 🛠️ desenha a arte 1080×1920 → 📸 posta no story.",
+    "height": 420,
+    "width": 2520,
+    "color": 3
+   },
+   "id": "81ac5be3-bfde-5edd-8e92-be56490c00e7",
+   "name": "Nota 5",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    1200
+   ]
+  },
+  {
+   "parameters": {
+    "path": "insta-painel",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "4df8bdcd-7337-5de5-b54e-002e6f0cd55c",
+   "name": "🔔 Painel",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -580
+   ],
+   "webhookId": "30c64614-d826-5643-aafa-09bccd34f479"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Central do Instagram</title><meta name=\"robots\" content=\"noindex\">\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C13584;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.topo{position:sticky;top:0;z-index:20;background:var(--sup);border-bottom:1px solid var(--borda)}\n.topo .in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}.marca{font-weight:800;font-size:17px;flex:1}\n.abas{max-width:1180px;margin:0 auto;padding:0 10px;display:flex;gap:4px;overflow-x:auto}\n.abas button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--tx2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}.abas button.on{color:var(--pri);border-color:var(--pri)}\nmain{max-width:1180px;margin:0 auto;padding:16px 16px 80px}\nh2{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2 .esp{flex:1}h2 .btn{font-size:14px;min-height:38px;padding:7px 12px}\n.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}\n.kpi{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px}.kpi .v{font-size:22px;font-weight:800}.kpi .r{font-size:12px;color:var(--mu);font-weight:600;text-transform:uppercase}\n.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;max-height:340px;overflow:auto}\n.post{aspect-ratio:1;border-radius:10px;background:var(--sup2) center/cover;cursor:pointer;border:3px solid transparent;position:relative}.post.on{border-color:var(--pri)}\n.post span{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;border-radius:6px;padding:1px 6px}\n.etapa{display:grid;grid-template-columns:40px 1fr 1fr 90px;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--borda)}@media (max-width:700px){.etapa{grid-template-columns:1fr}}\n.login{max-width:400px;margin:10vh auto;padding:0 16px}\n.dica{background:var(--av-bg);color:var(--av);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:14px}\n</style></head><body><div id=\"app\"></div>\n<script>\nconst API = location.origin + '/webhook/insta-api';\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nwindow.TOKEN = guarda.ler('ig_token'); let EU = null, ABA = null;\nfunction sair() { guarda.gravar('ig_token', null); window.TOKEN = ''; login(); }\nfunction login(msg) {\n  $('#app').innerHTML = `<div class=\"login\"><div class=\"card\"><h2>📸 Central do Instagram</h2>${msg ? `<div class=\"dica\">${esc(msg)}</div>` : ''}\n    <label>Conta</label><input id=\"ct\" value=\"${esc(new URLSearchParams(location.search).get('c') || guarda.ler('ig_conta') || '')}\" autocapitalize=\"off\"><label>Senha</label><input id=\"sn\" type=\"password\">\n    <button class=\"btn pri\" id=\"ent\" style=\"width:100%;margin-top:14px\">Entrar</button></div></div>`;\n  const ir = async () => { const j = await api('login', { conta: $('#ct').value.trim(), senha: $('#sn').value }); if (!j.ok) return aviso(j.erro, true);\n    window.TOKEN = j.token; guarda.gravar('ig_token', j.token); guarda.gravar('ig_conta', $('#ct').value.trim()); iniciar(); };\n  $('#ent').onclick = ir; $('#sn').onkeydown = e => e.key === 'Enter' && ir();\n}\nasync function iniciar() {\n  if (!window.TOKEN) return login(); const j = await api('eu'); if (!j.ok) return login(j.sair ? '' : j.erro); EU = j;\n  document.documentElement.style.setProperty('--pri', j.conta.cor);\n  const AB = { inicio: '🏠 Início', sorteio: '🎁 Sorteios', gincana: '🕵️ Gincana', mencao: '💜 Menções', site: '🌐 Meu site' };\n  $('#app').innerHTML = `<div class=\"topo\"><div class=\"in\"><div class=\"marca\">📸 ${esc(j.conta.nome)} <span class=\"mu pq\">@${esc(j.conta.ig_username)}</span></div><button class=\"btn fant pq\" id=\"tema\">🌓</button><button class=\"btn pq\" onclick=\"sair()\">Sair</button></div>\n    <nav class=\"abas\">${Object.entries(AB).map(([k, v]) => `<button data-aba=\"${k}\">${v}</button>`).join('')}</nav></div><main id=\"tela\"></main>`;\n  tema(); $$('[data-aba]').forEach(b => b.onclick = () => abrir(b.dataset.aba)); abrir(AB[location.hash.slice(1)] ? location.hash.slice(1) : 'inicio');\n}\nfunction abrir(a) { ABA = a; location.hash = a; $$('[data-aba]').forEach(b => b.classList.toggle('on', b.dataset.aba === a)); $('#tela').innerHTML = '<div class=\"vazio\">Carregando…</div>';\n  ({ inicio: telaInicio, sorteio: telaSorteio, gincana: telaGincana, mencao: telaMencao, site: telaSite })[a](); }\nasync function telaInicio() {\n  const j = await api('eu'); const r = j.resumo || {};\n  $('#tela').innerHTML = `<h2>Olá! 👋</h2><div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Sorteios</div><div class=\"v\">${r.sorteios || 0}</div></div><div class=\"kpi\"><div class=\"r\">Gincanas ativas</div><div class=\"v\">${r.gincanas_ativas || 0}</div></div>\n    <div class=\"kpi\"><div class=\"r\">Menções (30 dias)</div><div class=\"v\">${r.mencoes_30d || 0}</div></div><div class=\"kpi\"><div class=\"r\">Cupons usados</div><div class=\"v\">${r.cupons_usados || 0}</div></div>\n    <div class=\"kpi\"><div class=\"r\">Visitas no site</div><div class=\"v\">${r.site ? r.site.visitas : 0}</div><div class=\"mu pq\">${r.site ? r.site.cliques + ' cliques no WhatsApp' : 'site não gerado'}</div></div></div>\n    <div class=\"g2\">${[['sorteio', '🎁', 'Sorteio com vídeo', 'Pegue quem comentou no post, sorteie numa roleta animada e baixe o vídeo para postar.'],\n      ['gincana', '🕵️', 'Gincana nos stories', 'Pistas que abrem sozinhas, respostas pelo direct e ranking ao vivo.'],\n      ['mencao', '💜', 'Menção vira cliente fiel', 'Quem marcar você no story ganha agradecimento e cupom na hora.'],\n      ['site', '🌐', 'Instagram vira site', 'A IA lê seus posts e monta um site com catálogo e botão do WhatsApp.']].map(([a, i, t, d]) =>\n      `<div class=\"card\" style=\"cursor:pointer\" onclick=\"abrir('${a}')\"><div style=\"font-size:30px\">${i}</div><b>${t}</b><p class=\"mu pq\">${d}</p></div>`).join('')}</div>`;\n}\n\n// ═════════ SORTEIO ═════════\nasync function telaSorteio() {\n  const j = await api('sorteios'); if (!j.ok) return aviso(j.erro, true);\n  $('#tela').innerHTML = `<h2>🎁 Sorteios <span class=\"esp\"></span><button class=\"btn pri\" id=\"nv\">＋ Novo sorteio</button></h2>\n    <div class=\"dica\">Como funciona: quem comenta a palavra-chave no post recebe o botão no direct, confirma que segue o perfil e entra na lista (fluxo \"Sorteio parte 1\"). Aqui você escolhe o post, carrega os participantes válidos e faz a apresentação com vídeo.</div>\n    <div class=\"card tabela\"><table><tr><th>Sorteio</th><th>Participantes</th><th>Resultado</th><th></th></tr>${j.sorteios.map(s => `<tr><td><b>${esc(s.titulo)}</b><br><span class=\"mu pq\">${new Date(s.criado_em).toLocaleString('pt-BR')}</span></td><td>${s.n}</td>\n      <td>${s.sorteado_em ? s.ganhadores.map(g => '🏆 @' + esc(g.u)).join('<br>') : '<span class=\"selo av\">aguardando</span>'}</td>\n      <td style=\"white-space:nowrap\"><a class=\"btn pq pri\" href=\"${location.origin}/webhook/insta-sorteio?s=${s.codigo}\" target=\"_blank\">${s.sorteado_em ? '▶️ Ver / vídeo' : '🎲 Apresentar'}</a>\n        ${s.sorteado_em ? (s.anuncio && s.anuncio.em ? `<a class=\"btn pq\" target=\"_blank\" href=\"${location.origin}/videos/arquivo/${s.anuncio.arte}\">✅ Anunciado</a>` : `<button class=\"btn pq\" data-an=\"${s.codigo}\">📣 Anunciar</button>`) : ''}\n        <button class=\"btn pq fant er\" data-x=\"${s.codigo}\">✕</button></td></tr>`).join('') || '<tr><td colspan=\"4\" class=\"vazio\">Nenhum sorteio ainda</td></tr>'}</table></div>`;\n  $$('[data-x]').forEach(b => b.onclick = async () => { if (await confirma('Apagar este sorteio?') && await chama('sorteio_excluir', { codigo: b.dataset.x }, 'Apagado')) telaSorteio(); });\n  $$('[data-an]').forEach(b => b.onclick = () => anunciar(b.dataset.an));\n  $('#nv').onclick = novoSorteio;\n}\nfunction anunciar(codigo) {\n  const m = modal(`<h3>📣 Anunciar o resultado</h3><p class=\"mu\">O sistema desenha a arte com o(s) ganhador(es) e:</p>\n    <label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"st\" checked style=\"width:auto;min-height:0\"> Posta no seu story</label>\n    <label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"av\" checked style=\"width:auto;min-height:0\"> Avisa o ganhador no direct (quem entrou pelo comentário)</label>\n    <div id=\"rs\" style=\"margin-top:10px\"></div><div class=\"acoes\"><button class=\"btn\" data-fechar>Fechar</button><button class=\"btn pri\" id=\"ok\">Anunciar agora</button></div>`);\n  $('#ok', m).onclick = async () => { $('#ok', m).disabled = true; $('#ok', m).textContent = '⏳ Desenhando e postando…';\n    const r = await api('sorteio_anunciar', { codigo, story: $('#st', m).checked, avisar: $('#av', m).checked }); $('#ok', m).textContent = 'Anunciar agora';\n    if (!r.ok) { $('#ok', m).disabled = false; return aviso(r.erro, true); }\n    $('#rs', m).innerHTML = `<img src=\"${r.arte}\" style=\"width:180px;border-radius:12px\"><p class=\"pq\">✅ Pronto! ${r.avisados ? r.avisados + ' ganhador(es) avisado(s) no direct.' : ''} <a href=\"${r.arte}\" download>Baixar a arte</a></p>`;\n    telaSorteio(); };\n}\nasync function novoSorteio() {\n  const m = modal(`<h3>Novo sorteio</h3><label>1. Escolha o post do sorteio</label><div class=\"posts\" id=\"ps\"><div class=\"vazio\">Buscando seus posts…</div></div>\n    <label>2. Nome do sorteio</label><input id=\"tt\" placeholder=\"ex.: Sorteio de Natal\"><label>Prêmio</label><input id=\"pr\" placeholder=\"ex.: Kit com 3 produtos\">\n    <div class=\"linha\"><div><label>Comentaram a partir de</label><input id=\"de\" type=\"date\"></div><div><label>Até</label><input id=\"ate\" type=\"date\"></div></div>\n    <details style=\"margin-top:10px\"><summary class=\"pq\" style=\"cursor:pointer\">Ou cole a lista de participantes (um @ por linha)</summary><textarea id=\"cola\" placeholder=\"@maria&#10;@joao&#10;@ana\" style=\"margin-top:6px\"></textarea>\n      <button class=\"btn pq\" id=\"usa\" style=\"margin-top:6px\">Usar esta lista</button></details>\n    <div id=\"info\" class=\"mu pq\" style=\"margin-top:8px\"></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn\" id=\"bc\">🔎 Carregar participantes</button><button class=\"btn pri\" id=\"ok\" disabled>Criar sorteio</button></div>`);\n  let post = null, part = [];\n  const p = await api('posts', { limite: 24 });\n  $('#ps', m).innerHTML = p.ok && p.posts.length ? p.posts.map((x, i) => `<div class=\"post\" data-i=\"${i}\" style=\"background-image:url('${esc(x.thumbnail_url || x.media_url)}')\"><span>${new Date(x.timestamp).toLocaleDateString('pt-BR')}</span></div>`).join('')\n    : `<div class=\"vazio\">${esc(p.erro || 'Nenhum post encontrado')}</div>`;\n  $$('[data-i]', m).forEach(d => d.onclick = () => { post = p.posts[Number(d.dataset.i)]; $$('.post', m).forEach(x => x.classList.toggle('on', x === d)); if (!$('#tt', m).value) $('#tt', m).value = String(post.caption || 'Sorteio').split('\\n')[0].slice(0, 60); });\n  $('#bc', m).onclick = async () => { if (!post) return aviso('Escolha o post.', true); $('#info', m).textContent = '⏳ Lendo os participantes…';\n    const r = await api('sorteio_buscar', { media_id: post.id, de: $('#de', m).value, ate: $('#ate', m).value });\n    if (!r.ok) { $('#info', m).textContent = ''; return aviso(r.erro, true); }\n    part = r.participantes; $('#info', m).innerHTML = `✅ <b>${part.length}</b> participantes válidos (seguem o perfil e confirmaram no direct).${part.length ? '<br>' + part.slice(0, 12).map(x => '@' + esc(x.u)).join(', ') + (part.length > 12 ? '…' : '') : ''}`;\n    $('#ok', m).disabled = !part.length; };\n  $('#usa', m).onclick = () => { part = [...new Set($('#cola', m).value.split(/[\\s,;]+/).map(s => s.replace(/^@/, '').trim()).filter(s => /^[A-Za-z0-9._]{1,30}$/.test(s)))].map(u => ({ u, id: '' }));\n    $('#info', m).innerHTML = `✅ <b>${part.length}</b> participantes da lista colada.`; $('#ok', m).disabled = !part.length; };\n  $('#ok', m).onclick = async () => { const r = await chama('sorteio_criar', { titulo: $('#tt', m).value, premio: $('#pr', m).value, media_id: post ? post.id : '', permalink: post ? post.permalink : '', participantes: part }, 'Sorteio criado');\n    if (r) { m.fechar(); window.open(`${location.origin}/webhook/insta-sorteio?s=${r.codigo}`, '_blank'); telaSorteio(); } };\n}\n\n// ═════════ GINCANA ═════════\nasync function telaGincana() {\n  const j = await api('gincanas'); if (!j.ok) return aviso(j.erro, true);\n  $('#tela').innerHTML = `<h2>🕵️ Gincana nos stories <span class=\"esp\"></span><button class=\"btn pri\" id=\"nv\">＋ Nova gincana</button></h2>\n    <div class=\"dica\">Quando a última pista fecha, a gincana se encerra sozinha: o pódio vai para o story e cada jogador recebe a colocação no direct. Como funciona: no horário de cada pista o sistema posta a arte da pista no seu story sozinho. Quem quer jogar manda a palavra de inscrição no direct; as respostas chegam pelo direct, o robô corrige na hora, dá pontos (quem acerta primeiro ganha mais) e o ranking fica numa página pública.</div>\n    ${j.gincanas.map(g => `<div class=\"card\" style=\"margin-bottom:12px\"><div class=\"linha\"><div style=\"flex:1\"><b style=\"font-size:17px\">${esc(g.titulo)}</b> ${g.ativa ? '<span class=\"selo ok\">ativa</span>' : '<span class=\"selo\">encerrada</span>'}\n      <div class=\"mu pq\">Prêmio: ${esc(g.premio || '—')} · palavra de inscrição: <b>${esc(g.palavra_inscricao)}</b> · ${g.jogadores} jogadores</div></div>\n      <a class=\"btn pq\" style=\"flex:none\" target=\"_blank\" href=\"${location.origin}/webhook/insta-gincana?g=${g.codigo}\">🏆 Ranking público</a><button class=\"btn pq\" style=\"flex:none\" data-e=\"${g.codigo}\">✏️ Editar</button>\n      ${g.ativa ? `<button class=\"btn pq\" style=\"flex:none\" data-fim=\"${g.codigo}\">🏁 Encerrar e anunciar</button>` : g.final && g.final.arte ? `<a class=\"btn pq\" style=\"flex:none\" target=\"_blank\" href=\"${location.origin}/videos/arquivo/${g.final.arte}\">🏆 Arte do pódio</a>` : ''}</div>\n      <div class=\"g2\" style=\"margin-top:10px\"><div><b class=\"pq\">Pistas</b>${g.etapas.map(e => `<div class=\"pq\" style=\"padding:4px 0;border-bottom:1px solid var(--borda)\">${e.ordem}. ${esc(e.pista)} <span class=\"mu\">→ ${esc(e.resposta)}</span><br>\n        <span class=\"mu\">${new Date(e.abre_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })} · ${e.acertos} acertos / ${e.tentativas} tentativas ${e.publicada ? '· 📲 postada' : ''}</span></div>`).join('')}</div>\n      <div><b class=\"pq\">Ranking</b>${g.ranking.map((r, i) => `<div class=\"linha pq\" style=\"flex-wrap:nowrap\"><span style=\"flex:1\">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'} @${esc(r.username || '?')}</span><b style=\"flex:none\">${r.pontos}</b></div>`).join('') || '<div class=\"mu pq\">Ninguém ainda</div>'}</div></div></div>`).join('') || '<div class=\"vazio\">Nenhuma gincana ainda</div>'}`;\n  $$('[data-fim]').forEach(b => b.onclick = async () => {\n    if (!await confirma('Encerrar agora? O pódio vai para o seu story e cada jogador recebe a colocação no direct.')) return;\n    b.disabled = true; b.textContent = '⏳ Encerrando…'; const r = await api('gincana_encerrar', { codigo: b.dataset.fim });\n    if (!r.ok) { b.disabled = false; b.textContent = '🏁 Encerrar e anunciar'; return aviso(r.erro, true); }\n    aviso(`🏁 Encerrada! ${r.story ? 'Pódio no story. ' : ''}${r.avisados} jogador(es) avisado(s).`); telaGincana(); });\n  $('#nv').onclick = () => editarGincana(null);\n  $$('[data-e]').forEach(b => b.onclick = () => editarGincana(j.gincanas.find(g => g.codigo === b.dataset.e)));\n}\nfunction editarGincana(g) {\n  const loc = d => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); };\n  const amanha = new Date(); amanha.setDate(amanha.getDate() + 1); amanha.setHours(12, 0, 0, 0);\n  const et = g ? g.etapas.map(e => ({ ...e })) : [0, 1, 2].map(i => ({ ordem: i + 1, pista: '', resposta: '', pontos: 10, abre_em: new Date(amanha.getTime() + i * 864e5), fecha_em: new Date(amanha.getTime() + i * 864e5 + 10 * 36e5) }));\n  const m = modal(`<h3>${g ? 'Editar' : 'Nova'} gincana</h3><div class=\"linha\"><div><label>Nome</label><input id=\"tt\" value=\"${esc(g ? g.titulo : '')}\" placeholder=\"ex.: Caça ao Tesouro de Verão\"></div>\n    <div style=\"flex:0 0 160px\"><label>Palavra de inscrição</label><input id=\"pl\" value=\"${esc(g ? g.palavra_inscricao : 'GINCANA')}\"></div></div>\n    <label>Prêmio</label><input id=\"pr\" value=\"${esc(g ? g.premio : '')}\"><label>Pistas <button class=\"btn pq fant\" id=\"ia\" style=\"min-height:0;padding:2px 8px\">✨ criar pistas com IA</button></label><div id=\"et\"></div>\n    <button class=\"btn pq\" id=\"ma\">＋ Pista</button>${g ? `<label style=\"display:flex;gap:8px;align-items:center;font-weight:400;margin-top:12px\"><input type=\"checkbox\" id=\"at\" style=\"width:auto;min-height:0\" ${g.ativa ? 'checked' : ''}> Gincana ativa</label>` : ''}\n    <div class=\"acoes\">${g ? '<button class=\"btn er\" id=\"ex\">Apagar</button>' : ''}<button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar</button></div>`);\n  const des = () => { $('#et', m).innerHTML = et.map((e, i) => `<div class=\"etapa\"><b style=\"font-size:20px\">${i + 1}</b><div><textarea data-p=\"${i}\" style=\"min-height:60px\" placeholder=\"Pista (aparece no story)\">${esc(e.pista)}</textarea><input data-r=\"${i}\" value=\"${esc(e.resposta)}\" placeholder=\"Resposta certa\" style=\"margin-top:6px\"></div>\n      <div><label style=\"margin:0\">Abre</label><input type=\"datetime-local\" data-a=\"${i}\" value=\"${loc(e.abre_em)}\"><label style=\"margin:6px 0 0\">Fecha</label><input type=\"datetime-local\" data-f=\"${i}\" value=\"${loc(e.fecha_em)}\"></div>\n      <div><label style=\"margin:0\">Pontos</label><input type=\"number\" data-n=\"${i}\" value=\"${e.pontos}\"><button class=\"btn pq fant er\" data-x=\"${i}\" style=\"margin-top:6px\">✕</button></div></div>`).join('');\n    $$('[data-p]', m).forEach(x => x.oninput = () => et[x.dataset.p].pista = x.value); $$('[data-r]', m).forEach(x => x.oninput = () => et[x.dataset.r].resposta = x.value);\n    $$('[data-a]', m).forEach(x => x.onchange = () => et[x.dataset.a].abre_em = new Date(x.value)); $$('[data-f]', m).forEach(x => x.onchange = () => et[x.dataset.f].fecha_em = new Date(x.value));\n    $$('[data-n]', m).forEach(x => x.oninput = () => et[x.dataset.n].pontos = Number(x.value)); $$('[data-x]', m).forEach(b => b.onclick = () => { et.splice(Number(b.dataset.x), 1); des(); }); };\n  $('#ma', m).onclick = () => { const u = et[et.length - 1]; const a = u ? new Date(new Date(u.abre_em).getTime() + 864e5) : amanha; et.push({ ordem: et.length + 1, pista: '', resposta: '', pontos: 10, abre_em: a, fecha_em: new Date(a.getTime() + 10 * 36e5) }); des(); };\n  $('#ia', m).onclick = async () => { const tema = prompt('Sobre o que é sua loja/perfil? (a IA cria pistas sobre isso)', EU.conta.nome); if (!tema) return;\n    $('#ia', m).textContent = '⏳ criando…'; const r = await api('gincana_pistas', { tema, quantas: et.length || 3 }); $('#ia', m).textContent = '✨ criar pistas com IA';\n    if (!r.ok) return aviso(r.erro, true); let l; try { l = JSON.parse(String(r.resultado).replace(/^\\s*```(?:json)?/i, '').replace(/```\\s*$/, '')).pistas; } catch (e) { return aviso('A IA respondeu fora do formato.', true); }\n    l.forEach((x, i) => { if (!et[i]) $('#ma', m).click(); et[i].pista = x.pista; et[i].resposta = x.resposta; }); des(); };\n  $('#ok', m).onclick = async () => { const r = await chama('gincana_salvar', { codigo: g ? g.codigo : '', titulo: $('#tt', m).value, premio: $('#pr', m).value, palavra: $('#pl', m).value, ativa: g ? $('#at', m).checked : true,\n      etapas: et.map((e, i) => ({ ordem: i + 1, pista: e.pista, resposta: e.resposta, pontos: e.pontos, abre_em: new Date(e.abre_em).toISOString(), fecha_em: new Date(e.fecha_em).toISOString() })) }, 'Gincana salva');\n    if (r) { m.fechar(); telaGincana(); } };\n  if (g) $('#ex', m).onclick = async () => { if (await confirma('Apagar a gincana e o ranking?') && await chama('gincana_excluir', { codigo: g.codigo }, 'Apagada')) { m.fechar(); telaGincana(); } };\n  des();\n}\n\n// ═════════ MENÇÃO ═════════\nasync function telaMencao() {\n  const j = await api('mencao_ver'); if (!j.ok) return aviso(j.erro, true); const c = j.cfg;\n  $('#tela').innerHTML = `<h2>💜 Menção vira cliente fiel</h2>\n    <div class=\"dica\">Quando alguém marca @${esc(EU.conta.ig_username)} no story, o robô responde no direct na hora com um agradecimento e um cupom único. A mesma pessoa só ganha cupom de novo depois do prazo que você escolher. No caixa, confira o cupom aqui.</div>\n    <div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Menções</div><div class=\"v\">${j.total}</div></div><div class=\"kpi\"><div class=\"r\">Cupons usados</div><div class=\"v\">${j.usados}</div></div>\n      <div class=\"kpi\"><div class=\"r\">Conversão</div><div class=\"v\">${j.total ? Math.round(j.usados / j.total * 100) : 0}%</div></div></div>\n    <div class=\"g2\"><div class=\"card\"><b>⚙️ Mensagem e cupom</b>\n      <label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"at\" style=\"width:auto;min-height:0\" ${c.ativo ? 'checked' : ''}> Ligado</label>\n      <label>Mensagem (use {nome}, {cupom}, {desconto}, {validade})</label><textarea id=\"ms\">${esc(c.mensagem)}</textarea>\n      <label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"ia\" style=\"width:auto;min-height:0\" ${c.usar_ia ? 'checked' : ''}> ✨ A IA personaliza a mensagem olhando o story da pessoa</label>\n      <div class=\"linha\"><div><label>Prefixo do cupom</label><input id=\"cp\" value=\"${esc(c.cupom_prefixo)}\"></div><div><label>Presente</label><input id=\"ds\" value=\"${esc(c.desconto)}\"></div></div>\n      <div class=\"linha\"><div><label>Validade (dias)</label><input id=\"vd\" type=\"number\" value=\"${c.validade_dias}\"></div><div><label>Novo cupom só após (dias)</label><input id=\"lm\" type=\"number\" value=\"${c.limite_por_pessoa_dias}\"></div></div>\n      <button class=\"btn pri\" id=\"sv\" style=\"margin-top:12px;width:100%\">Salvar</button></div>\n    <div class=\"card\"><b>🧾 Conferir cupom no caixa</b><div class=\"linha\" style=\"margin-top:8px\"><input id=\"cc\" placeholder=\"ex.: AMIGO3F9A2\" style=\"text-transform:uppercase\"><button class=\"btn pri\" id=\"cv\" style=\"flex:none\">Usar cupom</button></div><div id=\"cr\" style=\"margin-top:8px\"></div></div></div>\n    <h2 style=\"margin-top:20px\">Últimas menções</h2><div class=\"card tabela\"><table><tr><th>Quando</th><th>Quem</th><th>Cupom</th><th>Mensagem enviada</th></tr>\n    ${j.mencoes.map(x => `<tr><td class=\"pq\">${new Date(x.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>@${esc(x.username || x.ig_id)}${x.midia_url ? `<br><a class=\"pq\" href=\"${esc(x.midia_url)}\" target=\"_blank\">ver story</a>` : ''}</td>\n      <td>${x.cupom ? `<b>${esc(x.cupom)}</b> ${x.usado ? '<span class=\"selo ok\">usado</span>' : ''}` : '<span class=\"mu\">—</span>'}</td><td class=\"pq\">${esc(x.mensagem)} ${x.enviado ? '<span class=\"selo ok\">enviado</span>' : x.erro ? '<span class=\"selo er\">⚠️ ' + esc(x.erro) + '</span>' : ''}</td></tr>`).join('') || '<tr><td colspan=\"4\" class=\"vazio\">Ninguém marcou ainda. Peça para os clientes marcarem você no story!</td></tr>'}</table></div>`;\n  $('#sv').onclick = () => chama('mencao_cfg', { ativo: $('#at').checked, mensagem: $('#ms').value, usar_ia: $('#ia').checked, cupom_prefixo: $('#cp').value, desconto: $('#ds').value, validade_dias: Number($('#vd').value), limite_por_pessoa_dias: Number($('#lm').value) }, 'Salvo');\n  $('#cv').onclick = async () => { const r = await api('cupom_usar', { cupom: $('#cc').value.trim() }); $('#cr').innerHTML = r.ok ? `<div class=\"selo ok\" style=\"font-size:15px\">✅ Válido! Cliente @${esc(r.username)}. Marcado como usado.</div>` : `<div class=\"selo er\" style=\"font-size:15px\">❌ ${esc(r.erro)}</div>`; };\n}\n\n// ═════════ SITE ═════════\nasync function telaSite() {\n  const j = await api('eu'); const s = j.resumo.site; const url = `${location.origin}/webhook/insta-site?c=${EU.conta.slug}`;\n  $('#tela').innerHTML = `<h2>🌐 Instagram vira site</h2><div class=\"dica\">A IA lê os seus últimos posts (fotos e legendas), descobre o que você vende, separa produtos e preços e monta um site com catálogo e botão do WhatsApp. Gere de novo sempre que postar novidades.</div>\n    <div class=\"card\"><label>WhatsApp do site (com DDD)</label><div class=\"linha\"><input id=\"wa\" inputmode=\"tel\" value=\"${esc(EU.conta.whatsapp)}\"><button class=\"btn\" id=\"sw\" style=\"flex:none\">Salvar</button></div>\n      <button class=\"btn pri\" id=\"gr\" style=\"margin-top:14px;width:100%;min-height:50px\">${s && s.gerado_em ? '🔁 Gerar o site de novo' : '✨ Gerar meu site agora'}</button><div id=\"st\" class=\"mu pq\" style=\"margin-top:8px\"></div>\n      ${s && s.gerado_em ? `<div style=\"margin-top:14px\"><b>Seu site:</b> <a href=\"${url}\" target=\"_blank\">${esc(url)}</a><div class=\"mu pq\">Gerado em ${new Date(s.gerado_em).toLocaleString('pt-BR')} · ${s.visitas} visitas · ${s.cliques} cliques no WhatsApp</div>\n        <div class=\"linha\" style=\"margin-top:8px\"><button class=\"btn pq\" id=\"cp\" style=\"flex:none\">📋 Copiar link</button><a class=\"btn pq\" style=\"flex:none\" target=\"_blank\" href=\"https://wa.me/?text=${encodeURIComponent('Conheça nosso site: ' + url)}\">💬 Mandar no WhatsApp</a>\n        <span class=\"mu pq\" style=\"flex:1\">Dica: coloque este link na bio do Instagram.</span></div></div>\n        <iframe src=\"${url}\" style=\"width:100%;height:640px;border:1px solid var(--borda);border-radius:14px;margin-top:12px\"></iframe>` : ''}</div>`;\n  if ($('#cp')) $('#cp').onclick = () => { navigator.clipboard.writeText(url); aviso('Link copiado'); };\n  $('#sw').onclick = async () => { if (await chama('config_salvar', { whatsapp: $('#wa').value }, 'Salvo')) EU.conta.whatsapp = $('#wa').value; };\n  $('#gr').onclick = async () => { $('#gr').disabled = true; $('#st').textContent = '⏳ Lendo seus posts e montando o site… (até 1 minuto)';\n    const r = await api('site_gerar', {}); $('#gr').disabled = false; if (!r.ok) { $('#st').textContent = ''; return aviso(r.erro, true); } aviso('🌐 Site pronto!'); telaSite(); };\n}\niniciar();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "b2ea3046-944a-5f1a-8bee-f9d291fea709",
+   "name": "📤 Painel",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -580
+   ]
+  },
+  {
+   "parameters": {
+    "path": "insta-sorteio",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "6442d2d5-34f6-5e4a-93f8-ed7455cb3be0",
+   "name": "🔔 Sorteio (apresentação)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -370
+   ],
+   "webhookId": "2920b764-fede-525f-865c-012b15dace2b"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Sorteio</title>\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C13584;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\nbody{background:#0b0b10;color:#fff}\n.w{max-width:1100px;margin:0 auto;padding:18px 16px 60px}\n.palco{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}@media (max-width:900px){.palco{grid-template-columns:1fr}}\n.tela{position:relative;aspect-ratio:9/16;max-height:82vh;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}\ncanvas{width:100%;height:100%;display:block}\n.lado .card{background:#16161d;border-color:rgba(255,255,255,.08);color:#fff}.lado .mu{color:#a1a1aa}\n.lado label{color:#c4c4cc}.lado input,.lado select{background:#0e0e14;border-color:rgba(255,255,255,.12);color:#fff}\n.lista{max-height:240px;overflow:auto;font-size:13px;columns:2;column-gap:12px;margin-top:8px}.lista div{break-inside:avoid;padding:2px 0;color:#d4d4d8}\n.big{font-size:17px;min-height:52px;width:100%}\n.gan{font-size:22px;font-weight:800}\n.mono{font-family:ui-monospace,Consolas,monospace;font-size:11px;word-break:break-all;color:#a1a1aa}\n</style></head><body><div class=\"w\" id=\"app\"><div class=\"vazio\">Carregando…</div></div>\n<script>\nconst API = location.origin + '/webhook/insta-api';\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst q = new URLSearchParams(location.search); const COD = q.get('s'); window.TOKEN = guarda.ler('ig_token') || '';\nlet S = null, C = null, cv, ctx, gravador = null, pedacos = [], anim = null;\nconst W = 1080, H = 1920;\n(async () => {\n  const j = await api('sorteio_publico', { codigo: COD }); if (!j.ok) return $('#app').innerHTML = `<div class=\"vazio\">${esc(j.erro)}</div>`;\n  S = j.sorteio; C = j.conta; document.title = 'Sorteio · ' + S.titulo;\n  const dono = !!window.TOKEN && !q.has('publico');\n  const ps = S.participantes;\n  $('#app').innerHTML = `<div class=\"palco\"><div class=\"tela\"><canvas id=\"cv\" width=\"${W}\" height=\"${H}\"></canvas></div>\n    <aside class=\"lado\"><div class=\"card\"><div class=\"mu pq\">@${esc(C.username)}</div><h2 style=\"font-size:22px;margin:2px 0\">🎁 ${esc(S.titulo)}</h2>\n      ${S.premio ? `<div style=\"margin-bottom:6px\">Prêmio: <b>${esc(S.premio)}</b></div>` : ''}<div class=\"mu pq\">${ps.length} participantes válidos${S.permalink ? ` · <a href=\"${esc(S.permalink)}\" target=\"_blank\" style=\"color:#f0abfc\">ver post</a>` : ''}</div>\n      <div id=\"res\" style=\"margin-top:12px\"></div>\n      ${dono && !S.sorteado_em ? `<label>Quantos ganhadores</label><input id=\"qt\" type=\"number\" min=\"1\" max=\"10\" value=\"1\">\n        <label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"gv\" checked style=\"width:auto;min-height:0\"> Gravar o vídeo da roleta (para postar)</label>\n        <button class=\"btn pri big\" id=\"ir\" style=\"margin-top:12px\">🎲 SORTEAR AGORA</button>` : ''}\n      ${S.sorteado_em ? `<button class=\"btn big\" id=\"rever\" style=\"margin-top:10px\">▶️ Ver a roleta de novo${dono ? ' e gravar o vídeo' : ''}</button>` : ''}\n      <div id=\"baixar\" style=\"margin-top:10px\"></div></div>\n    <div class=\"card\" style=\"margin-top:12px\"><b>📋 Participantes</b><div class=\"lista\">${ps.map(p => `<div>@${esc(p.u)}</div>`).join('')}</div></div>\n    <div class=\"card\" style=\"margin-top:12px\"><b>🔐 Transparência</b><p class=\"mu pq\" style=\"margin:6px 0\">Antes de sortear, o sistema fixou uma chave secreta e publicou só a \"impressão digital\" dela. Depois do sorteio a chave é revelada: qualquer pessoa pode conferir que o resultado já estava definido e ninguém mexeu.</p>\n      <div class=\"mono\">Impressão digital: ${esc(S.semente_hash)}</div>${S.semente ? `<div class=\"mono\" style=\"margin-top:6px\">Chave revelada: ${esc(S.semente)}</div>` : ''}\n      <p class=\"mu pq\" style=\"margin-top:8px\">Mostre esta página aos seguidores para provar que o sorteio foi limpo:</p>\n      <button class=\"btn pq\" style=\"margin-top:6px\" onclick=\"navigator.clipboard.writeText('${location.origin}/webhook/insta-sorteio?s=${esc(COD)}&publico=1');aviso('Link copiado')\">📋 Copiar link público</button></div></aside></div>`;\n  cv = $('#cv'); ctx = cv.getContext('2d');\n  if (S.sorteado_em) { mostraGanhadores(S.ganhadores); desenhaFinal(S.ganhadores); } else desenhaRoda(0, null);\n  const ir = $('#ir'); if (ir) ir.onclick = async () => {\n    ir.disabled = true; ir.textContent = '⏳ Sorteando…';\n    const r = await api('sorteio_sortear', { codigo: COD, quantos: Number($('#qt').value) || 1 });\n    if (!r.ok) { ir.disabled = false; ir.textContent = '🎲 SORTEAR AGORA'; return aviso(r.erro, true); }\n    const gv = $('#gv').checked; ir.remove(); $$('#qt, #gv').forEach(x => (x.closest('label') && x.type === 'checkbox' ? x.closest('label') : x).remove()); $$('.lado label').forEach(l => /Quantos/.test(l.textContent) && l.remove());\n    await roleta(r.ganhadores, gv); S.ganhadores = r.ganhadores; mostraGanhadores(r.ganhadores);\n    const n2 = await api('sorteio_publico', { codigo: COD }); if (n2.ok && n2.sorteio.semente) { const d = document.createElement('div'); d.className = 'mono'; d.style.marginTop = '6px'; d.textContent = 'Chave revelada: ' + n2.sorteio.semente; $$('.mono').pop().after(d); }\n  };\n  const rv = $('#rever'); if (rv) rv.onclick = async () => { rv.disabled = true; await roleta(S.ganhadores, dono); rv.disabled = false; };\n})();\nfunction mostraGanhadores(g) { $('#res').innerHTML = `<div class=\"mu pq\">🏆 ${g.length > 1 ? 'Ganhadores' : 'Ganhador(a)'}</div>` + g.map((x, i) => `<div class=\"gan\">${g.length > 1 ? (i + 1) + 'º ' : ''}@${esc(x.u)}</div>`).join(''); }\nconst COR = () => C.cor || '#C13584';\nfunction fundo() {\n  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#1a0b2e'); g.addColorStop(.55, COR()); g.addColorStop(1, '#f59e0b');\n  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);\n  ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.textAlign = 'center';\n  ctx.font = '800 64px system-ui,Segoe UI,sans-serif'; ctx.fillText('SORTEIO', W / 2, 190);\n  ctx.font = '600 44px system-ui,Segoe UI,sans-serif'; quebra(S.titulo, W / 2, 260, 900, 54);\n  ctx.font = '500 36px system-ui,Segoe UI,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.8)'; ctx.fillText('@' + C.username + ' · ' + S.participantes.length + ' participantes', W / 2, 400);\n}\nfunction quebra(t, x, y, larg, alt) { const ps = String(t).split(' '); let l = '', yy = y; for (const p of ps) { const n = l ? l + ' ' + p : p; if (ctx.measureText(n).width > larg && l) { ctx.fillText(l, x, yy); l = p; yy += alt; } else l = n; } ctx.fillText(l, x, yy); }\nconst CORES = ['#f43f5e', '#8b5cf6', '#06b6d4', '#22c55e', '#f59e0b', '#ec4899', '#3b82f6', '#14b8a6'];\nlet RODA = null;\nfunction nomesRoda() { if (RODA) return RODA; const ps = S.participantes.map(p => p.u); const n = Math.min(ps.length, 24); const out = []; for (let i = 0; i < n; i++) out.push(ps[Math.floor(i * ps.length / n)]); return out; }\nfunction desenhaRoda(ang, destaque) {\n  fundo(); const cx = W / 2, cy = 1030, R = 430, nm = nomesRoda(), n = nm.length, fat = Math.PI * 2 / n;\n  ctx.save(); ctx.translate(cx, cy); ctx.rotate(ang);\n  for (let i = 0; i < n; i++) {\n    ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, i * fat, (i + 1) * fat); ctx.closePath(); ctx.fillStyle = CORES[i % CORES.length]; ctx.fill();\n    ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.lineWidth = 3; ctx.stroke();\n    ctx.save(); ctx.rotate(i * fat + fat / 2); ctx.textAlign = 'right'; ctx.fillStyle = '#fff'; ctx.font = `700 ${n > 16 ? 26 : 32}px system-ui,sans-serif`;\n    ctx.fillText(('@' + nm[i]).slice(0, 18), R - 24, 10); ctx.restore();\n  }\n  ctx.restore();\n  ctx.beginPath(); ctx.arc(cx, cy, 70, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.font = '64px serif'; ctx.textAlign = 'center'; ctx.fillText('🎁', cx, cy + 22);\n  ctx.beginPath(); ctx.moveTo(cx - 40, cy - R - 60); ctx.lineTo(cx + 40, cy - R - 60); ctx.lineTo(cx, cy - R + 20); ctx.closePath(); ctx.fillStyle = '#fff'; ctx.fill();\n  ctx.fillStyle = '#fff'; ctx.textAlign = 'center';\n  if (destaque) { ctx.font = '800 76px system-ui,sans-serif'; ctx.fillText('@' + destaque, W / 2, 1640); }\n  else { ctx.font = '600 40px system-ui,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.fillText('Boa sorte! 🍀', W / 2, 1640); }\n}\nfunction desenhaFinal(g, t = 1) {\n  fundo(); ctx.textAlign = 'center';\n  for (let i = 0; i < 60; i++) { const s = Math.sin(i * 99.7) * 0.5 + 0.5, x = (i * 173) % W, y = ((i * 311 + t * 900) % (H - 500)) + 450; ctx.fillStyle = CORES[i % CORES.length]; ctx.fillRect(x, y, 14 + s * 10, 26); }\n  ctx.fillStyle = '#fff'; ctx.font = '160px serif'; ctx.fillText('🏆', W / 2, 760);\n  ctx.font = '700 52px system-ui,sans-serif'; ctx.fillText(g.length > 1 ? 'GANHADORES' : 'GANHADOR(A)', W / 2, 880);\n  g.forEach((x, i) => { ctx.font = `800 ${g.length > 3 ? 64 : 92}px system-ui,sans-serif`; ctx.fillText((g.length > 1 ? (i + 1) + 'º ' : '') + '@' + x.u, W / 2, 1010 + i * (g.length > 3 ? 90 : 120)); });\n  ctx.font = '500 38px system-ui,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.9)';\n  if (S.premio) quebra('Prêmio: ' + S.premio, W / 2, 1520, 900, 48);\n  ctx.font = '500 32px system-ui,sans-serif'; ctx.fillText('Sorteio verificável · ' + new Date(S.sorteado_em || Date.now()).toLocaleString('pt-BR'), W / 2, 1760);\n}\nfunction roleta(ganhadores, gravar) {\n  return new Promise(res => {\n    // posição final: o 1º ganhador aparece no ponteiro (topo). Se ele não estiver entre os nomes da roda, troca o nome mais próximo.\n    RODA = null; const nm2 = nomesRoda().slice(); let alvo = nm2.indexOf(ganhadores[0].u); if (alvo < 0) { alvo = Math.floor(nm2.length / 2); nm2[alvo] = ganhadores[0].u; }\n    const nm = nm2, n = nm.length, fat = Math.PI * 2 / n; RODA = nm;\n    const final = -Math.PI / 2 - (alvo * fat + fat / 2) + Math.PI * 2 * 8;\n    const dur = 7000, fim = 4500; let t0 = null;\n    if (gravar && cv.captureStream && window.MediaRecorder) {\n      const tipo = ['video/mp4;codecs=avc1', 'video/webm;codecs=vp9', 'video/webm'].find(x => MediaRecorder.isTypeSupported(x));\n      pedacos = []; gravador = new MediaRecorder(cv.captureStream(30), { mimeType: tipo, videoBitsPerSecond: 8e6 });\n      gravador.ondataavailable = e => e.data.size && pedacos.push(e.data);\n      gravador.onstop = () => { const b = new Blob(pedacos, { type: tipo }), ext = tipo.includes('mp4') ? 'mp4' : 'webm', url = URL.createObjectURL(b);\n        $('#baixar').innerHTML = `<a class=\"btn pri big\" href=\"${url}\" download=\"sorteio-${COD}.${ext}\">⬇️ Baixar o vídeo do sorteio (${(b.size / 1e6).toFixed(1)} MB)</a>\n          <p class=\"mu pq\" style=\"margin-top:6px\">Vertical 9:16, pronto para Reels e Stories.${ext === 'webm' ? ' O Instagram aceita WEBM pelo celular; se precisar, converta para MP4.' : ''}</p>`; };\n      gravador.start(200);\n    }\n    const passo = ts => {\n      if (!t0) t0 = ts; const t = ts - t0;\n      if (t < dur) { const k = t / dur, e = 1 - Math.pow(1 - k, 4); const a = final * e; const idx = ((Math.round(((-Math.PI / 2 - a) / fat) - .5) % n) + n) % n; desenhaRoda(a, k > .92 ? nm[idx] : null); requestAnimationFrame(passo); }\n      else if (t < dur + fim) { desenhaFinal(ganhadores, (t - dur) / 1000); requestAnimationFrame(passo); }\n      else { if (gravador && gravador.state === 'recording') gravador.stop(); res(); }\n    };\n    requestAnimationFrame(passo);\n  });\n}\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "e0d935c7-7107-5296-a6cc-f51c6cf016ae",
+   "name": "📤 Sorteio (apresentação)",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -370
+   ]
+  },
+  {
+   "parameters": {
+    "path": "insta-gincana",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "555ed2a1-3b5c-5561-828e-b7a4b588b1c0",
+   "name": "🔔 Gincana (ranking)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -160
+   ],
+   "webhookId": "91bf9e07-1158-515e-ae40-d5e5bf0d746d"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Gincana</title>\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C13584;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\nbody{background:linear-gradient(160deg,#1a0b2e,var(--pri) 70%,#f59e0b);background-attachment:fixed;color:#fff;min-height:100vh}\n.w{max-width:720px;margin:0 auto;padding:26px 16px 60px}h1{font-size:34px;line-height:1.1}\n.cx{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:16px;margin-top:14px;backdrop-filter:blur(6px)}\n.rk{display:flex;gap:10px;align-items:center;padding:9px 4px;border-bottom:1px solid rgba(255,255,255,.15);font-size:17px}.rk b{margin-left:auto}\n.et{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.15)}.et .n{font-size:22px;font-weight:800;width:34px}\n.mu2{color:rgba(255,255,255,.75)}\n</style></head><body><div class=\"w\" id=\"app\"><div class=\"vazio\">Carregando…</div></div>\n<script>\nconst API = location.origin + '/webhook/insta-api';\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst COD = new URLSearchParams(location.search).get('g');\nasync function carrega() {\n  const j = await api('gincana_publica', { codigo: COD }); if (!j.ok) return $('#app').innerHTML = `<div class=\"vazio\">${esc(j.erro)}</div>`;\n  document.documentElement.style.setProperty('--pri', j.conta.cor); document.title = j.gincana.titulo;\n  const ag = Date.now(), aberta = j.etapas.find(e => new Date(e.abre_em) <= ag && new Date(e.fecha_em) > ag), prox = j.etapas.find(e => new Date(e.abre_em) > ag);\n  $('#app').innerHTML = `<div class=\"mu2\">@${esc(j.conta.username)} apresenta</div><h1>🕵️ ${esc(j.gincana.titulo)}</h1>\n    ${j.gincana.premio ? `<div style=\"font-size:18px;margin-top:6px\">🏆 Prêmio: <b>${esc(j.gincana.premio)}</b></div>` : ''}\n    <div class=\"cx\"><b>Como jogar</b><ol style=\"margin:6px 0 0 20px;line-height:1.7\"><li>Siga <b>@${esc(j.conta.username)}</b></li><li>Mande <b>${esc(j.gincana.palavra)}</b> no direct para entrar</li><li>Fique de olho nos stories: cada pista abre num horário</li><li>Responda a pista no direct. Quem acerta primeiro ganha mais pontos!</li></ol></div>\n    ${aberta ? `<div class=\"cx\" style=\"border-color:#fde047\"><div class=\"mu2\">🔎 PISTA ${aberta.ordem} ABERTA · fecha ${new Date(aberta.fecha_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</div><div style=\"font-size:21px;font-weight:700;margin-top:4px\">${esc(aberta.pista)}</div></div>`\n      : prox ? `<div class=\"cx\">⏳ Próxima pista: <b>${new Date(prox.abre_em).toLocaleString('pt-BR', { weekday: 'long', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</b></div>` : `<div class=\"cx\">🏁 A gincana terminou!</div>`}\n    <div class=\"cx\"><div style=\"display:flex;align-items:center\"><b style=\"font-size:19px\">🏆 Ranking</b><span class=\"mu2 pq\" style=\"margin-left:auto\">${j.jogadores} jogadores · atualiza sozinho</span></div>\n      ${j.ranking.map((r, i) => `<div class=\"rk\"><span style=\"width:34px;font-size:20px\">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'}</span>@${esc(r.username || 'jogador')}<b>${r.pontos} pts</b></div>`).join('') || '<div class=\"mu2\" style=\"padding:10px 0\">Seja o primeiro!</div>'}</div>\n    <div class=\"cx\"><b>Pistas</b>${j.etapas.map(e => `<div class=\"et\"><span class=\"n\">${e.ordem}</span><div style=\"flex:1\">${e.pista ? esc(e.pista) : `<span class=\"mu2\">🔒 abre ${new Date(e.abre_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>`}\n      ${e.resposta ? `<div class=\"pq\">✅ Resposta: <b>${esc(e.resposta)}</b> · ${e.acertos} acertaram</div>` : ''}</div><span class=\"mu2 pq\">${e.pontos} pts</span></div>`).join('')}</div>`;\n}\ncarrega(); setInterval(carrega, 15000);\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "372b4251-8d95-5955-8737-90f47989fc33",
+   "name": "📤 Gincana (ranking)",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "path": "insta-site",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "ac83ec79-c956-5304-ad04-0aad4fe33efa",
+   "name": "🔔 Site do Instagram",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    50
+   ],
+   "webhookId": "bc74fd23-791c-5f89-845f-6bf4e7a33044"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Site</title>\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C13584;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.hero{background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 45%,#000));color:#fff;padding:36px 16px 30px}\n.hero .in{max-width:1100px;margin:0 auto}.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.1}.hero p{opacity:.92;margin-top:10px;max-width:640px;font-size:17px}\n.hero .btn{margin-top:18px;background:#fff;color:#111;border:0}\nmain{max-width:1100px;margin:0 auto;padding:24px 16px 80px}\n.sec{font-size:22px;font-weight:800;margin:28px 0 12px}\n.cat{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.cat button{border:1px solid var(--borda);background:var(--sup);border-radius:99px;padding:7px 14px;cursor:pointer;font-weight:600}.cat button.on{background:var(--pri);color:#fff;border-color:var(--pri)}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}\n.pr{background:var(--sup);border:1px solid var(--borda);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}\n.pr .ft{aspect-ratio:1;background:var(--sup2) center/cover}.pr .cp{padding:12px;flex:1;display:flex;flex-direction:column;gap:4px}\n.pr .vl{font-weight:800;color:var(--pri);font-size:18px}.pr .btn{margin-top:auto}\n.dif{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}.dif>div{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:14px}\n.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.galeria a{aspect-ratio:1;background:var(--sup2) center/cover;border-radius:8px}\n.zap{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.25);text-decoration:none}\n.faq details{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:12px 14px;margin-bottom:8px}.faq summary{font-weight:700;cursor:pointer}\n</style></head><body><div id=\"app\"><div class=\"vazio\">Carregando…</div></div>\n<script>\nconst API = location.origin + '/webhook/insta-api';\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst CT = new URLSearchParams(location.search).get('c');\n(async () => {\n  const j = await api('site_publico', { conta: CT }); if (!j.ok) return $('#app').innerHTML = `<div class=\"vazio\" style=\"padding-top:20vh\"><h2>${esc(j.erro)}</h2></div>`;\n  const s = j.site; document.documentElement.style.setProperty('--pri', s.cor || '#C13584'); document.title = s.nome;\n  const zap = t => j.whatsapp ? `https://wa.me/${j.whatsapp.length <= 11 ? '55' + j.whatsapp : j.whatsapp}?text=${encodeURIComponent(t)}` : `https://instagram.com/${j.username}`;\n  const cats = [...new Set((s.produtos || []).map(p => p.categoria).filter(Boolean))];\n  $('#app').innerHTML = `<div class=\"hero\"><div class=\"in\"><div class=\"pq\" style=\"opacity:.85\">@${esc(j.username)}</div><h1>${esc(s.titulo || s.nome)}</h1><p>${esc(s.subtitulo || '')}</p>\n      <a class=\"btn\" href=\"${zap(s.cta_mensagem || 'Olá! Vim pelo site.')}\" target=\"_blank\" rel=\"noopener\" data-z>💬 ${esc(s.cta || 'Falar no WhatsApp')}</a></div></div>\n    <main>${s.sobre ? `<div class=\"sec\">Quem somos</div><p style=\"font-size:17px;color:var(--tx2);max-width:760px\">${esc(s.sobre)}</p>` : ''}\n    ${(s.diferenciais || []).length ? `<div class=\"sec\">Por que escolher a gente</div><div class=\"dif\">${s.diferenciais.map(d => `<div><div style=\"font-size:26px\">${esc(d.icone || '✨')}</div><b>${esc(d.titulo)}</b><div class=\"mu pq\">${esc(d.texto || '')}</div></div>`).join('')}</div>` : ''}\n    ${(s.produtos || []).length ? `<div class=\"sec\">${esc(s.titulo_catalogo || 'Nossos produtos')}</div>${cats.length > 1 ? `<div class=\"cat\"><button class=\"on\" data-c=\"\">Tudo</button>${cats.map(c => `<button data-c=\"${esc(c)}\">${esc(c)}</button>`).join('')}</div>` : ''}<div class=\"grade\" id=\"gr\"></div>` : ''}\n    ${(s.faq || []).length ? `<div class=\"sec\">Perguntas frequentes</div><div class=\"faq\">${s.faq.map(f => `<details><summary>${esc(f.pergunta)}</summary><p class=\"mu\" style=\"margin-top:6px\">${esc(f.resposta)}</p></details>`).join('')}</div>` : ''}\n    ${(s.galeria || []).length ? `<div class=\"sec\">No Instagram</div><div class=\"galeria\">${s.galeria.map(g => `<a href=\"${esc(g.link)}\" target=\"_blank\" rel=\"noopener\" style=\"background-image:url('${esc(g.img)}')\"></a>`).join('')}</div>` : ''}\n    <p class=\"mu pq\" style=\"text-align:center;margin-top:40px\">${esc(s.nome)} · <a href=\"https://instagram.com/${esc(j.username)}\" target=\"_blank\">@${esc(j.username)}</a>${s.cidade ? ' · ' + esc(s.cidade) : ''}</p></main>\n    <a class=\"zap\" href=\"${zap('Olá! Vim pelo site.')}\" target=\"_blank\" rel=\"noopener\" data-z>💬</a>`;\n  const lista = c => { $('#gr').innerHTML = s.produtos.filter(p => !c || p.categoria === c).map(p => `<div class=\"pr\"><div class=\"ft\" style=\"background-image:url('${esc(p.img || '')}')\"></div><div class=\"cp\">\n      <b>${esc(p.nome)}</b><div class=\"mu pq\">${esc(p.descricao || '')}</div>${p.preco ? `<div class=\"vl\">${esc(p.preco)}</div>` : ''}\n      <a class=\"btn pri pq\" href=\"${zap('Olá! Tenho interesse em: ' + p.nome)}\" target=\"_blank\" rel=\"noopener\" data-z>Quero este</a></div></div>`).join(''); bind(); };\n  const bind = () => $$('[data-z]').forEach(a => a.onclick = () => api('site_clique', { conta: CT }, 1));\n  if ($('#gr')) lista(''); else bind();\n  $$('[data-c]').forEach(b => b.onclick = () => { $$('[data-c]').forEach(x => x.classList.toggle('on', x === b)); lista(b.dataset.c); });\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "f908cdfe-470f-515c-81f5-b9ab5852cccc",
+   "name": "📤 Site do Instagram",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    50
+   ]
+  },
+  {
+   "parameters": {
+    "path": "insta-api",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "bc76564a-d900-53c7-8025-c965a285c01c",
+   "name": "🔔 API (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    200,
+    -380
+   ],
+   "webhookId": "f54442ef-f455-5501-968d-cc23b60dd724"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_api2($1::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ JSON.stringify(Object.assign({}, (typeof $json.body === 'object' && $json.body) || {}, { ip: ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || '').split(',')[0] || '').trim() })) }}"
+    }
+   },
+   "id": "41f8a19d-5175-5366-be38-d1e19f5b9139",
+   "name": "🐘 ig_api",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    420,
+    -380
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ab23877f-752f-5688-82ec-73c5e72e7b0b",
+          "leftValue": "={{ $json.r && $json.r.ia === 'posts' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "posts"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "258f6c34-e859-58de-a514-c0f486869dd5",
+          "leftValue": "={{ $json.r && $json.r.ia === 'sorteio_buscar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "sorteio_buscar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b3f2db1b-b47f-5863-b765-f189cd9a8715",
+          "leftValue": "={{ $json.r && $json.r.ia === 'site_gerar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "site_gerar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "5714ed33-699b-515f-90d9-3129c2fca7f5",
+          "leftValue": "={{ $json.r && $json.r.ia === 'gincana_pistas' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "gincana_pistas"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "5fee7a00-d82c-5792-a2f7-57aa8f4c6836",
+          "leftValue": "={{ $json.r && $json.r.ia === 'gincana_encerrar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "gincana_encerrar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "209a90bb-96a4-5b69-8e76-da4912ccf856",
+          "leftValue": "={{ $json.r && $json.r.ia === 'sorteio_anunciar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "sorteio_anunciar"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "resto"
+    }
+   },
+   "id": "3503eb92-fe00-5e07-8e51-b54d2808327e",
+   "name": "🔀 Precisa do Instagram ou da IA?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    640,
+    -380
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.r || { ok: false, erro: 'Sem resposta do banco' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "e43e5d2e-0b6d-5f4d-b950-a076d99391e8",
+   "name": "📤 Responde",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    900,
+    -640
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "media",
+    "operation": "listMedia",
+    "returnAll": false,
+    "limit": 24,
+    "mediaFields": [
+     "id",
+     "caption",
+     "media_type",
+     "media_url",
+     "thumbnail_url",
+     "permalink",
+     "timestamp"
+    ]
+   },
+   "id": "5ae7a064-24f4-5c18-ad94-ec7b47514337",
+   "name": "📸 Lista os posts",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    900,
+    -500
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: !!$input.all().filter(i => i.json.id).length, erro: $input.first().json.error ? 'Não consegui ler o Instagram (token?)' : 'Nenhum post', posts: $input.all().map(i => i.json).filter(p => p.id) }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "793797f9-d749-50f5-a8ca-6e31128c2a2e",
+   "name": "📤 Posts",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    -500
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT DISTINCT ON (from_user_id) from_username AS u, from_user_id AS id FROM sorteio_participantes WHERE media_id = $1 AND is_following = true AND created_at >= coalesce(nullif($2, '')::date, '2000-01-01') AND created_at < coalesce(nullif($3, '')::date, '2100-01-01') + 1 ORDER BY from_user_id, created_at",
+    "options": {
+     "queryReplacement": "={{ [$('🐘 ig_api').first().json.r.contexto.media_id || '0', $('🐘 ig_api').first().json.r.contexto.de || '', $('🐘 ig_api').first().json.r.contexto.ate || ''] }}"
+    }
+   },
+   "id": "d34286e9-dd0d-5e8f-8566-fd4dd826b07f",
+   "name": "🐘 Participantes do post",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    900,
+    -360
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "6xi2NwJjZR2l2zYQ",
+     "name": "209.145.60.53"
+    }
+   },
+   "alwaysOutputData": true,
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: !$input.first().json.error, erro: $input.first().json.error ? 'Não consegui ler o banco do sorteio' : undefined, participantes: $input.all().map(i => i.json).filter(p => p.u) }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "8ce82255-c588-5f8d-960a-0e08f8ba2d29",
+   "name": "📤 Participantes",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    -360
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "media",
+    "operation": "listMedia",
+    "returnAll": false,
+    "limit": 30,
+    "mediaFields": [
+     "id",
+     "caption",
+     "media_type",
+     "media_url",
+     "thumbnail_url",
+     "permalink",
+     "timestamp"
+    ]
+   },
+   "id": "da0a4cbd-cc15-5ecf-b89e-4ec208292fa1",
+   "name": "📸 Lê os posts para o site",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    900,
+    -220
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta as legendas dos posts numa lista numerada para a IA.\nconst posts = $input.all().map(i => i.json).filter(p => p.id);\nif (!posts.length) return [{ json: { vazio: true } }];\nconst lista = posts.map((p, i) => `POST ${i} (${p.media_type}${p.timestamp ? ', ' + p.timestamp.slice(0, 10) : ''}): ${String(p.caption || '(sem legenda)').replace(/\\s+/g, ' ').slice(0, 600)}`).join('\\n');\nreturn [{ json: { vazio: false, posts, lista } }];"
+   },
+   "id": "eb2d8f45-f144-5d59-beb6-691f7475653a",
+   "name": "🧩 Monta o pedido do site",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1120,
+    -220
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 6000, temperature: 0.4, messages: [{ role: 'system', content: \"Você cria sites de negócios a partir do Instagram. Recebe a lista de posts (legenda + número da imagem). Descubra o que o perfil vende/oferece, o tom de voz e monte o conteúdo de um site de uma página em português do Brasil. Use SOMENTE o que está nas legendas: preço só se aparecer escrito; não invente produtos, endereço nem telefone. Devolva SOMENTE JSON: \\u007b\\\"nome\\\":\\\"\\\",\\\"titulo\\\":\\\"frase forte para o topo (até 60)\\\",\\\"subtitulo\\\":\\\"até 140\\\",\\\"sobre\\\":\\\"2-3 frases\\\",\\\"cidade\\\":\\\"se aparecer\\\",\\\"cta\\\":\\\"texto do botão (até 24)\\\",\\\"cta_mensagem\\\":\\\"mensagem que o cliente manda no WhatsApp\\\",\\\"titulo_catalogo\\\":\\\"ex.: Nossos produtos / Serviços\\\",\\\"diferenciais\\\":[\\u007b\\\"icone\\\":\\\"1 emoji\\\",\\\"titulo\\\":\\\"\\\",\\\"texto\\\":\\\"\\\"\\u007d],\\\"produtos\\\":[\\u007b\\\"nome\\\":\\\"\\\",\\\"descricao\\\":\\\"até 100\\\",\\\"preco\\\":\\\"como estiver escrito, ex.: R$ 49,90 (ou vazio)\\\",\\\"categoria\\\":\\\"\\\",\\\"post\\\":número_do_post\\u007d],\\\"faq\\\":[\\u007b\\\"pergunta\\\":\\\"\\\",\\\"resposta\\\":\\\"\\\"\\u007d]\\u007d. 3 a 4 diferenciais, até 24 produtos (um por post de produto), 3 a 5 FAQs baseadas em dúvidas comuns do ramo e no que as legendas dizem.\" }, { role: 'user', content: 'Perfil: @' + $('🐘 ig_api').first().json.r.contexto.slug + ' (' + $('🐘 ig_api').first().json.r.contexto.nome + ')\\n\\n' + $json.lista }] }) }}",
+    "options": {
+     "timeout": 150000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "29f06624-1386-5417-b0bf-edfbeede2602",
+   "name": "🤖 IA monta o site",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1340,
+    -220
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "jsCode": "const c = $('🐘 ig_api').first().json.r.contexto, m = $('🧩 Monta o pedido do site').first().json;\nif (m.vazio) return [{ json: { ok: false, erro: 'Não achei posts no Instagram (ou o token venceu).' } }];\nlet s = null; const t = String(($json.choices && $json.choices[0] && $json.choices[0].message.content) || '');\ntry { s = JSON.parse(t.replace(/^\\s*```(?:json)?/i, '').replace(/```\\s*$/, '').trim()); } catch (e) { const a = t.indexOf('{'), b = t.lastIndexOf('}'); try { s = JSON.parse(t.slice(a, b + 1)); } catch (e2) {} }\nif (!s) return [{ json: { ok: false, erro: 'A IA não respondeu no formato. Tente de novo.' } }];\nconst img = p => p && (p.media_type === 'VIDEO' ? p.thumbnail_url : p.media_url) || '';\ns.produtos = (s.produtos || []).map(x => ({ ...x, img: img(m.posts[Number(x.post)]), link: (m.posts[Number(x.post)] || {}).permalink || '' })).filter(x => x.nome);\ns.galeria = m.posts.slice(0, 12).map(p => ({ img: img(p), link: p.permalink })).filter(g => g.img);\ns.cor = c.cor; s.nome = s.nome || c.nome;\nreturn [{ json: { ok: true, conta_id: c.conta_id, dados: JSON.stringify(s), produtos: s.produtos.length } }];"
+   },
+   "id": "dd7e0411-8e2a-50af-a10f-a1bfb23a4d93",
+   "name": "🧩 Junta site e fotos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1560,
+    -220
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_site_salvar($1::int, $2::jsonb)",
+    "options": {
+     "queryReplacement": "={{ [$json.conta_id || 0, $json.dados || '{}'] }}"
+    }
+   },
+   "id": "24730048-4d5c-5c44-a77b-97d36ac8cd82",
+   "name": "🐘 Salva o site",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1780,
+    -220
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "bfb92795-1a27-5ffa-8f48-2a79ebc5777f",
+       "leftValue": "={{ $('🧩 Junta site e fotos').first().json.ok }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "e8b5a2ea-1f2f-5d86-beed-793016e65e34",
+   "name": "🔀 Site ok?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    2000,
+    -220
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, produtos: $('🧩 Junta site e fotos').first().json.produtos }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "aa437b41-57f5-50a7-9a81-71b617c515aa",
+   "name": "📤 Site pronto",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2220,
+    -280
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: false, erro: $('🧩 Junta site e fotos').first().json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "af9a9a77-6f4a-5bb7-8dc7-dbe509cf2458",
+   "name": "📤 Site falhou",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2220,
+    -160
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 1200, temperature: 0.9, messages: [{ role: 'system', content: \"Você cria gincanas de Instagram para lojas. Crie pistas curtas e divertidas (enigmas, charadas, 'complete a frase') sobre o tema dado, com resposta de UMA ou DUAS palavras, fácil de digitar e sem ambiguidade. Devolva SOMENTE JSON: \\u007b\\\"pistas\\\":[\\u007b\\\"pista\\\":\\\"\\\",\\\"resposta\\\":\\\"\\\"\\u007d]\\u007d\" }, { role: 'user', content: 'Tema: ' + $('🐘 ig_api').first().json.r.contexto.tema + '\\nQuantidade: ' + ($('🐘 ig_api').first().json.r.contexto.quantas || 3) }] }) }}",
+    "options": {
+     "timeout": 90000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "6234acf0-bb4d-52ff-8bdf-1f73fae5bb1f",
+   "name": "🤖 IA cria as pistas",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    900,
+    -80
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '') } : { ok: false, erro: 'A IA não respondeu agora.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "22969dfd-20f5-5268-b978-bdeb0961b2ba",
+   "name": "📤 Pistas",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    -80
+   ]
+  },
+  {
+   "parameters": {
+    "path": "insta-eventos",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "1fc427c4-cc97-57f4-abf6-bdbaa4945414",
+   "name": "🔔 Evento do Instagram (repassado)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    760
+   ],
+   "webhookId": "b2bd8ab3-24b3-54ad-8fa8-68ec77f2abf2"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "fb0c6d37-ac93-506d-ba29-3906e9fddd27",
+   "name": "📤 Recebido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -200,
+    640
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// O Sorteio parte 1 repassa o item do Instagram Trigger. Menção no story chega como MENSAGEM com anexo story_mention.\nconst b = (typeof $json.body === 'object' && $json.body) || {};\nconst e = b.evento || b;\nif (b.segredo !== 'fbee074ef51fbd72c53d2c43') return [];\nconst anexos = Array.isArray(e.attachments) ? e.attachments : [];\nconst story = anexos.find(a => a && a.type === 'story_mention');\nconst conta = String(e.recipientId || e.entryId || '');\nif (e.isEcho || !e.senderId || e.senderId === conta) return [];\nif (story) return [{ json: { tipo: 'mencao', conta, remetente: String(e.senderId), midia: (story.payload && story.payload.url) || '' } }];\nif (e.eventType === 'message' && e.text) return [{ json: { tipo: 'dm', conta, remetente: String(e.senderId), texto: String(e.text).slice(0, 200) } }];\nreturn [];"
+   },
+   "id": "fb2342e9-28c8-58a4-a296-5dbabec91008",
+   "name": "🧩 Separa o evento",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    -200,
+    860
+   ]
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ef1b30de-062e-57d0-915c-4493941c9a06",
+          "leftValue": "={{ $json.tipo === 'dm' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "dm"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "5a4ee112-2232-5835-89d7-466441ada965",
+          "leftValue": "={{ $json.tipo === 'mencao' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "mencao"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "resto"
+    }
+   },
+   "id": "e0b3f2ee-c43f-57b0-a431-04833d7867b5",
+   "name": "🔀 Que evento é?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    0,
+    860
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "user",
+    "operation": "getProfile",
+    "userId": "={{ $json.remetente }}",
+    "fields": [
+     "username"
+    ]
+   },
+   "id": "4fa60588-b95e-5479-ad0c-d025621e35f6",
+   "name": "📸 Quem é o jogador?",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    220,
+    700
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_gincana_dm($1, $2, $3, $4) AS r",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Separa o evento').item.json.conta, $('🧩 Separa o evento').item.json.remetente, $json.username || '', $('🧩 Separa o evento').item.json.texto] }}"
+    }
+   },
+   "id": "c3d0c987-7cb8-5f5b-80df-af4c156ba512",
+   "name": "🐘 Gincana confere",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    440,
+    700
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "4d8ff025-0c6a-5fa6-aada-ab4a70e884fe",
+       "leftValue": "={{ $json.r && $json.r.acao === 'responder' }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "3fda21ff-fa6b-576e-b59c-9ebd89811bf8",
+   "name": "🔀 Responder?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    660,
+    700
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "message",
+    "operation": "sendText",
+    "recipientId": "={{ $('🧩 Separa o evento').item.json.remetente }}",
+    "messageText": "={{ $json.r.texto }}"
+   },
+   "id": "504ca329-4a75-5985-8e7b-2e4e32f9bc6c",
+   "name": "📸 Responde no direct",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    880,
+    640
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "user",
+    "operation": "getProfile",
+    "userId": "={{ $json.remetente }}",
+    "fields": [
+     "name",
+     "username"
+    ]
+   },
+   "id": "3759419e-fd0a-52d1-aabf-eaa57ece21b4",
+   "name": "📸 Quem marcou?",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    220,
+    980
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_mencao_nova($1, $2, $3, 'story', $4) AS r",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Separa o evento').item.json.conta, $('🧩 Separa o evento').item.json.remetente, $json.username || '', $('🧩 Separa o evento').item.json.midia] }}"
+    }
+   },
+   "id": "c86d26f6-e579-5e43-b5aa-760b5ac704ac",
+   "name": "🐘 Registra a menção",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    440,
+    980
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "117d2c67-4a03-515b-b070-5c3b26ec8b68",
+          "leftValue": "={{ $json.r && $json.r.acao === 'cupom' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "cupom"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ab4b6468-ef1e-5181-a93e-af6cfc9216a7",
+          "leftValue": "={{ $json.r && $json.r.acao === 'agradecer' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "agradecer"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "resto"
+    }
+   },
+   "id": "2b797e32-31b1-5fa3-87f4-9e9b4f59138b",
+   "name": "🔀 Cupom ou só obrigado?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    660,
+    980
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 400, temperature: 0.8, messages: [{ role: 'system', content: \"Você é a voz de uma loja no Instagram. Escreva UMA mensagem curta de direct (até 320 caracteres) agradecendo a pessoa por marcar a loja no story. Se houver imagem do story, cite com carinho algo que aparece nela (sem inventar). Siga o modelo do dono no tom. Inclua obrigatoriamente o cupom e o presente exatamente como recebidos, e a validade. 1 ou 2 emojis. Sem aspas, sem markdown.\" }, { role: 'user', content: [{ type: 'text', text: 'Loja: ' + $json.r.loja + '\\nNome: ' + $json.r.nome + '\\nCupom: ' + $json.r.cupom + '\\nPresente: ' + $json.r.desconto + '\\nValidade: ' + $json.r.validade + ' dias\\nModelo do dono: ' + $json.r.modelo }].concat($('🧩 Separa o evento').item.json.midia && $json.r.usar_ia ? [{ type: 'image_url', image_url: { url: $('🧩 Separa o evento').item.json.midia } }] : []) }] }) }}",
+    "options": {
+     "timeout": 60000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "9c80857c-b2d8-532a-9311-4459dae439c2",
+   "name": "🤖 IA personaliza o agradecimento",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    880,
+    920
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "jsCode": "// Se a IA falhar (ou estiver desligada), usa o modelo do dono com as variáveis trocadas.\nreturn $input.all().map((it, k) => {\n  const r = $('🐘 Registra a menção').all()[k].json.r;\n  const ia = it.json.choices && it.json.choices[0] && String(it.json.choices[0].message.content || '').trim();\n  const modelo = String(r.modelo).replace(/\\{nome\\}/g, r.nome).replace(/\\{cupom\\}/g, r.cupom).replace(/\\{desconto\\}/g, r.desconto).replace(/\\{validade\\}/g, r.validade + ' dias');\n  let texto = r.usar_ia && ia && ia.includes(r.cupom) ? ia : modelo;\n  if (!texto.includes(r.cupom)) texto += `\\n🎁 Cupom: ${r.cupom}`;\n  if (!texto.toLowerCase().includes(String(r.desconto).toLowerCase().slice(0, 6))) texto += `\\n✨ Vale ${r.desconto} por ${r.validade} dias.`;\n  return { json: { id: r.id, texto } };\n});"
+   },
+   "id": "18800e6a-ee4e-5804-bc90-54f4219e173e",
+   "name": "🧩 Texto final",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1100,
+    920
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "message",
+    "operation": "sendText",
+    "recipientId": "={{ $('🧩 Separa o evento').item.json.remetente }}",
+    "messageText": "={{ $json.texto }}"
+   },
+   "id": "910df521-db53-59c1-91a4-3be993172359",
+   "name": "📸 Manda o cupom no direct",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1320,
+    920
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_mencao_enviada($1::int, $2, $3)",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Texto final').item.json.id, $('🧩 Texto final').item.json.texto, $json.error ? String($json.error.message || $json.error).slice(0, 200) : ($json.message_id || $json.id || $json.recipient_id ? '' : 'sem confirmação do Instagram')] }}"
+    }
+   },
+   "id": "6048bfd3-4f1e-55a3-a4f1-33e4ba0f4bbc",
+   "name": "🐘 Marca enviado",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1540,
+    920
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "resource": "message",
+    "operation": "sendText",
+    "recipientId": "={{ $('🧩 Separa o evento').item.json.remetente }}",
+    "messageText": "={{ $json.r.texto }}"
+   },
+   "id": "d3534021-6f33-5b08-a0d2-15dc319c508a",
+   "name": "📸 Só agradece",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    880,
+    1060
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "*/5 * * * *"
+      }
+     ]
+    }
+   },
+   "id": "fef7a609-74aa-54ad-8533-8d24a7801083",
+   "name": "⏰ A cada 5 minutos",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -420,
+    1320
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT * FROM ig_gincana_a_publicar()",
+    "options": {
+     "queryReplacement": ""
+    }
+   },
+   "id": "ee301902-2deb-51c4-8c9e-71a73a1c4d2d",
+   "name": "🐘 Pistas que abriram",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -200,
+    1320
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "jsCode": "// HTML 1080x1920 da pista (vira JPG na oficina).\nconst esc = s => String(s || '').replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\nreturn $input.all().map(it => { const e = it.json; const cor = /^#[0-9a-fA-F]{6}$/.test(e.cor) ? e.cor : '#C13584';\n  const html = `<!DOCTYPE html><html><head><meta charset=\"utf-8\"><style>*{margin:0;box-sizing:border-box}body{width:1080px;height:1920px;font-family:Montserrat,Inter,sans-serif;color:#fff;\n  background:linear-gradient(160deg,#1a0b2e,${cor} 65%,#f59e0b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px}\n  .t{font-size:44px;font-weight:800;letter-spacing:6px;opacity:.9}.n{font-size:150px;margin:30px 0 10px}.h{font-size:58px;font-weight:800;margin-bottom:50px}\n  .p{font-size:66px;font-weight:800;line-height:1.2;background:rgba(255,255,255,.14);border:3px solid rgba(255,255,255,.4);border-radius:40px;padding:60px 50px}\n  .c{margin-top:70px;font-size:44px;font-weight:700}.c b{background:#fff;color:#111;padding:6px 22px;border-radius:16px}.f{position:absolute;bottom:120px;font-size:34px;opacity:.85}</style></head>\n  <body><div class=\"t\">GINCANA · ${esc(e.titulo).toUpperCase()}</div><div class=\"n\">🕵️</div><div class=\"h\">PISTA ${e.ordem} DE ${e.total}</div><div class=\"p\">${esc(e.pista)}</div>\n  <div class=\"c\">Responda no DIRECT 📩<br><br>Ainda não joga? Mande <b>${esc(e.palavra)}</b></div>${e.premio ? `<div class=\"f\">🏆 Prêmio: ${esc(e.premio)}</div>` : ''}</body></html>`;\n  return { json: { ...e, corpo: JSON.stringify({ area: 'eventos', deck: 'gincana-' + e.codigo, nome: 'pista-' + e.ordem, largura: 1080, altura: 1920, html }) } }; });"
+   },
+   "id": "45971f4d-be3e-5454-b24c-053fa6a5e0ef",
+   "name": "🧩 Desenha a arte da pista",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    20,
+    1320
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/html_png",
+    "options": {
+     "timeout": 150000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}"
+   },
+   "id": "a16cbf4b-a8fb-5411-92b9-a378f6b29d18",
+   "name": "🛠️ Oficina desenha (1080×1920)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    240,
+    1320
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "story",
+    "operation": "createStory",
+    "storyMediaType": "IMAGE",
+    "storyImageUrl": "=https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/{{ $json.arquivo }}"
+   },
+   "id": "07e4fe12-8c47-5dfe-a96d-56d1b98d38f0",
+   "name": "📸 Posta no story",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    460,
+    1320
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_gincana_marcar($1::int, $2::jsonb)",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Desenha a arte da pista').item.json.etapa_id, JSON.stringify({ arquivo: $('🛠️ Oficina desenha (1080×1920)').item.json.arquivo || '', story: $json.id || null, erro: $json.error ? String($json.error.message || $json.error).slice(0, 200) : null })] }}"
+    }
+   },
+   "id": "4802686d-4df6-555a-b9f3-d114e90394dd",
+   "name": "🐘 Marca a pista como postada",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    680,
+    1320
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_gincana_encerrar($1::int) AS r",
+    "options": {
+     "queryReplacement": "={{ [$('🐘 ig_api').first().json.r.contexto.gincana_id] }}"
+    }
+   },
+   "id": "b974e4f3-f273-5c71-ac85-cc37b93d6622",
+   "name": "🐘 Encerra a gincana",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    900,
+    60
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Arte 1080x1920 do resultado (pódio da gincana ou ganhador do sorteio).\nconst esc = s => String(s || '').replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\nreturn $input.all().map(it => { const r = it.json.r; const cor = /^#[0-9a-fA-F]{6}$/.test(r.cor) ? r.cor : '#C13584';\n  const lista = (r.podio || r.ganhadores || []).map((g, i) => `<div class=\"l\">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'} @${esc(g.username || g.u || \"jogador\")}${g.pontos != null ? ` <small>${g.pontos} pts</small>` : ''}</div>`).join('') || '<div class=\"l\">Ninguém pontuou 😅</div>';\n  const titulo = r.podio ? 'RESULTADO DA GINCANA' : 'RESULTADO DO SORTEIO';\n  const html = `<!DOCTYPE html><html><head><meta charset=\"utf-8\"><style>*{margin:0;box-sizing:border-box}body{width:1080px;height:1920px;font-family:Montserrat,Inter,sans-serif;color:#fff;\n  background:linear-gradient(160deg,#1a0b2e,${cor} 60%,#f59e0b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px}\n  .t{font-size:46px;font-weight:800;letter-spacing:5px}.s{font-size:58px;font-weight:800;margin:24px 0 10px}.tr{font-size:190px;margin:30px 0}\n  .l{font-size:78px;font-weight:800;margin:18px 0}.l small{font-size:40px;opacity:.8}.p{margin-top:60px;font-size:44px;background:rgba(255,255,255,.16);border-radius:30px;padding:26px 40px}\n  .f{position:absolute;bottom:110px;font-size:36px;opacity:.85}</style></head><body><div class=\"t\">${titulo}</div><div class=\"s\">${esc(r.titulo)}</div><div class=\"tr\">🏆</div>${lista}\n  ${r.premio ? `<div class=\"p\">🎁 ${esc(r.premio)}</div>` : ''}<div class=\"f\">@${esc(r.conta)} · obrigado a todos que participaram! 💜</div></body></html>`;\n  const pasta = (r.podio ? 'gincana-' : 'sorteio-') + r.codigo;\n  return { json: { ...r, corpo: JSON.stringify({ area: 'eventos', deck: pasta, nome: 'resultado', largura: 1080, altura: 1920, html }) } }; });"
+   },
+   "id": "8a2a79f4-4203-5ce4-a622-069f983301ab",
+   "name": "🧩 Arte do pódio",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1120,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/html_png",
+    "options": {
+     "timeout": 150000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}"
+   },
+   "id": "d35478d8-5d18-541e-b5f7-142716e1cde7",
+   "name": "🛠️ Oficina desenha o pódio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1340,
+    60
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "story",
+    "operation": "createStory",
+    "storyMediaType": "IMAGE",
+    "storyImageUrl": "=https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/{{ $json.arquivo }}"
+   },
+   "id": "3e0a3737-0a31-5e0e-8b22-92a02dc4dcce",
+   "name": "📸 Pódio no story",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1560,
+    60
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const r = $('🧩 Arte do pódio').first().json;\nconst msgs = (r.jogadores || []).map(j => ({ json: { ig_id: j.ig_id, texto: j.pos <= 3 && j.pontos > 0\n  ? `🏆 PARABÉNS! Você ficou em ${j.pos}º lugar na gincana \"${r.titulo}\" com ${j.pontos} pontos!${j.pos == 1 && r.premio ? ' Você ganhou: ' + r.premio + '. Vamos combinar a entrega por aqui. 🎁' : ''}`\n  : `🏁 A gincana \"${r.titulo}\" terminou! Você fez ${j.pontos} pontos e ficou em ${j.pos}º. Obrigado por jogar! 💜` } }));\nreturn msgs.length ? msgs : [{ json: { vazio: true } }];"
+   },
+   "id": "68bb0ad9-a7dc-5476-9ee5-986b477fa33b",
+   "name": "🧩 Mensagem para cada jogador",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1780,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "message",
+    "operation": "sendText",
+    "recipientId": "={{ $json.ig_id }}",
+    "messageText": "={{ $json.texto }}"
+   },
+   "id": "289426f0-5495-5f66-bd85-1c39e17a7606",
+   "name": "📸 Avisa cada jogador",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    2000,
+    60
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "return [{ json: { n: $input.all().filter(i => !i.json.error && !i.json.vazio).length } }];"
+   },
+   "id": "5e655d63-acc9-5cdf-9217-245b4ca05d6d",
+   "name": "🧩 Conta os avisos",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2220,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_gincana_final($1::int, $2::jsonb)",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Arte do pódio').first().json.gincana_id, JSON.stringify({ arte: $('🛠️ Oficina desenha o pódio').first().json.arquivo || '', story: $('📸 Pódio no story').first().json.id || null, avisados: $json.n })] }}"
+    }
+   },
+   "id": "e1bc4366-1dcd-57df-b890-bc854a9ebe5b",
+   "name": "🐘 Guarda o resultado",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2440,
+    60
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, arte: 'https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/' + ($('🛠️ Oficina desenha o pódio').first().json.arquivo || ''), story: !!$('📸 Pódio no story').first().json.id, avisados: $('🧩 Conta os avisos').first().json.n }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "fdc31e00-8a8e-5dae-9b9e-88d8466eb483",
+   "name": "📤 Gincana encerrada",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2660,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Arte 1080x1920 do resultado (pódio da gincana ou ganhador do sorteio).\nconst esc = s => String(s || '').replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\nreturn $input.all().map(it => { const r = it.json.r.contexto; const cor = /^#[0-9a-fA-F]{6}$/.test(r.cor) ? r.cor : '#C13584';\n  const lista = (r.podio || r.ganhadores || []).map((g, i) => `<div class=\"l\">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'} @${esc(g.username || g.u || \"jogador\")}${g.pontos != null ? ` <small>${g.pontos} pts</small>` : ''}</div>`).join('') || '<div class=\"l\">Ninguém pontuou 😅</div>';\n  const titulo = r.podio ? 'RESULTADO DA GINCANA' : 'RESULTADO DO SORTEIO';\n  const html = `<!DOCTYPE html><html><head><meta charset=\"utf-8\"><style>*{margin:0;box-sizing:border-box}body{width:1080px;height:1920px;font-family:Montserrat,Inter,sans-serif;color:#fff;\n  background:linear-gradient(160deg,#1a0b2e,${cor} 60%,#f59e0b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px}\n  .t{font-size:46px;font-weight:800;letter-spacing:5px}.s{font-size:58px;font-weight:800;margin:24px 0 10px}.tr{font-size:190px;margin:30px 0}\n  .l{font-size:78px;font-weight:800;margin:18px 0}.l small{font-size:40px;opacity:.8}.p{margin-top:60px;font-size:44px;background:rgba(255,255,255,.16);border-radius:30px;padding:26px 40px}\n  .f{position:absolute;bottom:110px;font-size:36px;opacity:.85}</style></head><body><div class=\"t\">${titulo}</div><div class=\"s\">${esc(r.titulo)}</div><div class=\"tr\">🏆</div>${lista}\n  ${r.premio ? `<div class=\"p\">🎁 ${esc(r.premio)}</div>` : ''}<div class=\"f\">@${esc(r.conta)} · obrigado a todos que participaram! 💜</div></body></html>`;\n  const pasta = (r.podio ? 'gincana-' : 'sorteio-') + r.codigo;\n  return { json: { ...r, corpo: JSON.stringify({ area: 'eventos', deck: pasta, nome: 'resultado', largura: 1080, altura: 1920, html }) } }; });"
+   },
+   "id": "faa890f2-e54f-5b5f-b946-fbe1443a69aa",
+   "name": "🧩 Arte do ganhador",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    900,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/html_png",
+    "options": {
+     "timeout": 150000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}"
+   },
+   "id": "71347101-18eb-5d9f-bf08-d6a288047e11",
+   "name": "🛠️ Oficina desenha o ganhador",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1120,
+    220
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "6c6a3bca-776a-5c2d-8dab-e1c9e19e2d3d",
+       "leftValue": "={{ $('🧩 Arte do ganhador').first().json.story }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "ade8da8d-5666-5b59-ae94-45462f0b62ae",
+   "name": "🔀 Postar no story?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    1340,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "story",
+    "operation": "createStory",
+    "storyMediaType": "IMAGE",
+    "storyImageUrl": "=https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/{{ $('🛠️ Oficina desenha o ganhador').first().json.arquivo }}"
+   },
+   "id": "892ad908-d1fd-57d1-9fa7-faa86a4d0f7f",
+   "name": "📸 Ganhador no story",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    1560,
+    160
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const r = $('🧩 Arte do ganhador').first().json;\nconst out = r.avisar ? (r.ganhadores || []).filter(g => g.id).map(g => ({ json: { ig_id: g.id, texto: `🎉 PARABÉNS, @${g.u}! Você ganhou o sorteio \"${r.titulo}\"${r.premio ? ': ' + r.premio : ''}! Responda aqui para combinarmos a entrega. 🎁` } })) : [];\nreturn out.length ? out : [{ json: { vazio: true } }];"
+   },
+   "id": "7ee264b4-43ed-5859-9772-1901e370d29b",
+   "name": "🧩 Avisos aos ganhadores",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1780,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "message",
+    "operation": "sendText",
+    "recipientId": "={{ $json.ig_id }}",
+    "messageText": "={{ $json.texto }}"
+   },
+   "id": "271fc90a-71da-524f-9a19-725600cf07f7",
+   "name": "📸 Avisa o ganhador",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    2000,
+    220
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "return [{ json: { n: $input.all().filter(i => !i.json.error && !i.json.vazio).length } }];"
+   },
+   "id": "031c9bc6-ff65-5ecf-b21f-c8b642fe181d",
+   "name": "🧩 Conta os avisos do sorteio",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    2220,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_sorteio_anuncio($1, $2::jsonb)",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Arte do ganhador').first().json.codigo, JSON.stringify({ arte: $('🛠️ Oficina desenha o ganhador').first().json.arquivo || '', story: $('🧩 Arte do ganhador').first().json.story, avisados: $json.n, em: new Date().toISOString() })] }}"
+    }
+   },
+   "id": "6ada2c9f-a441-57ee-9a95-7cf1949b78be",
+   "name": "🐘 Guarda o anúncio",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    2440,
+    220
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: true, arte: 'https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/' + ($('🛠️ Oficina desenha o ganhador').first().json.arquivo || ''), avisados: $('🧩 Conta os avisos do sorteio').first().json.n }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "86e04a58-12eb-5393-b05a-561b478a231a",
+   "name": "📤 Sorteio anunciado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    2660,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "*/30 * * * *"
+      }
+     ]
+    }
+   },
+   "id": "f0962ba5-931b-55cc-82f1-1968c8a78e0c",
+   "name": "⏰ Encerra gincanas (30 min)",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    -420,
+    1500
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_gincana_encerrar(id) AS r FROM ig_gincanas_a_encerrar() id",
+    "options": {
+     "queryReplacement": ""
+    }
+   },
+   "id": "34a7105a-571c-5e53-ad8f-29811beb3a62",
+   "name": "🐘 Gincanas para encerrar",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -200,
+    1500
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "jsCode": "// Arte 1080x1920 do resultado (pódio da gincana ou ganhador do sorteio).\nconst esc = s => String(s || '').replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\nreturn $input.all().map(it => { const r = it.json.r; const cor = /^#[0-9a-fA-F]{6}$/.test(r.cor) ? r.cor : '#C13584';\n  const lista = (r.podio || r.ganhadores || []).map((g, i) => `<div class=\"l\">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'} @${esc(g.username || g.u || \"jogador\")}${g.pontos != null ? ` <small>${g.pontos} pts</small>` : ''}</div>`).join('') || '<div class=\"l\">Ninguém pontuou 😅</div>';\n  const titulo = r.podio ? 'RESULTADO DA GINCANA' : 'RESULTADO DO SORTEIO';\n  const html = `<!DOCTYPE html><html><head><meta charset=\"utf-8\"><style>*{margin:0;box-sizing:border-box}body{width:1080px;height:1920px;font-family:Montserrat,Inter,sans-serif;color:#fff;\n  background:linear-gradient(160deg,#1a0b2e,${cor} 60%,#f59e0b);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px}\n  .t{font-size:46px;font-weight:800;letter-spacing:5px}.s{font-size:58px;font-weight:800;margin:24px 0 10px}.tr{font-size:190px;margin:30px 0}\n  .l{font-size:78px;font-weight:800;margin:18px 0}.l small{font-size:40px;opacity:.8}.p{margin-top:60px;font-size:44px;background:rgba(255,255,255,.16);border-radius:30px;padding:26px 40px}\n  .f{position:absolute;bottom:110px;font-size:36px;opacity:.85}</style></head><body><div class=\"t\">${titulo}</div><div class=\"s\">${esc(r.titulo)}</div><div class=\"tr\">🏆</div>${lista}\n  ${r.premio ? `<div class=\"p\">🎁 ${esc(r.premio)}</div>` : ''}<div class=\"f\">@${esc(r.conta)} · obrigado a todos que participaram! 💜</div></body></html>`;\n  const pasta = (r.podio ? 'gincana-' : 'sorteio-') + r.codigo;\n  return { json: { ...r, corpo: JSON.stringify({ area: 'eventos', deck: pasta, nome: 'resultado', largura: 1080, altura: 1920, html }) } }; });"
+   },
+   "id": "5f99c42f-30d0-5707-bcb3-cc77e619376f",
+   "name": "🧩 Arte do pódio (auto)",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    20,
+    1500
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/html_png",
+    "options": {
+     "timeout": 150000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ $json.corpo }}"
+   },
+   "id": "5df2aff5-7620-5aea-88d8-95f0982a376c",
+   "name": "🛠️ Desenha o pódio (auto)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    240,
+    1500
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "resource": "story",
+    "operation": "createStory",
+    "storyMediaType": "IMAGE",
+    "storyImageUrl": "=https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/{{ $json.arquivo }}"
+   },
+   "id": "de30ecca-da5c-5841-b153-fdee757b842a",
+   "name": "📸 Pódio no story (auto)",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    460,
+    1500
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT ig_gincana_final($1::int, $2::jsonb)",
+    "options": {
+     "queryReplacement": "={{ [$('🧩 Arte do pódio (auto)').item.json.gincana_id, JSON.stringify({ arte: $('🛠️ Desenha o pódio (auto)').item.json.arquivo || '', story: $json.id || null, auto: true })] }}"
+    }
+   },
+   "id": "5bd69c8b-af24-5e88-928a-03f712e37660",
+   "name": "🐘 Guarda o resultado (auto)",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    680,
+    1500
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  }
+ ],
+ "connections": {
+  "🔔 Painel": {
+   "main": [
+    [
+     {
+      "node": "📤 Painel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Sorteio (apresentação)": {
+   "main": [
+    [
+     {
+      "node": "📤 Sorteio (apresentação)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Gincana (ranking)": {
+   "main": [
+    [
+     {
+      "node": "📤 Gincana (ranking)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Site do Instagram": {
+   "main": [
+    [
+     {
+      "node": "📤 Site do Instagram",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 API (POST)": {
+   "main": [
+    [
+     {
+      "node": "🐘 ig_api",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 ig_api": {
+   "main": [
+    [
+     {
+      "node": "🔀 Precisa do Instagram ou da IA?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Precisa do Instagram ou da IA?": {
+   "main": [
+    [
+     {
+      "node": "📸 Lista os posts",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🐘 Participantes do post",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📸 Lê os posts para o site",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 IA cria as pistas",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🐘 Encerra a gincana",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Arte do ganhador",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Responde",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Lista os posts": {
+   "main": [
+    [
+     {
+      "node": "📤 Posts",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Participantes do post": {
+   "main": [
+    [
+     {
+      "node": "📤 Participantes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Lê os posts para o site": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta o pedido do site",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta o pedido do site": {
+   "main": [
+    [
+     {
+      "node": "🤖 IA monta o site",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 IA monta o site": {
+   "main": [
+    [
+     {
+      "node": "🧩 Junta site e fotos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Junta site e fotos": {
+   "main": [
+    [
+     {
+      "node": "🐘 Salva o site",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Salva o site": {
+   "main": [
+    [
+     {
+      "node": "🔀 Site ok?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Site ok?": {
+   "main": [
+    [
+     {
+      "node": "📤 Site pronto",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Site falhou",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 IA cria as pistas": {
+   "main": [
+    [
+     {
+      "node": "📤 Pistas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Evento do Instagram (repassado)": {
+   "main": [
+    [
+     {
+      "node": "📤 Recebido",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "🧩 Separa o evento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Separa o evento": {
+   "main": [
+    [
+     {
+      "node": "🔀 Que evento é?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Quem é o jogador?": {
+   "main": [
+    [
+     {
+      "node": "🐘 Gincana confere",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Gincana confere": {
+   "main": [
+    [
+     {
+      "node": "🔀 Responder?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Que evento é?": {
+   "main": [
+    [
+     {
+      "node": "📸 Quem é o jogador?",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📸 Quem marcou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Responder?": {
+   "main": [
+    [
+     {
+      "node": "📸 Responde no direct",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Quem marcou?": {
+   "main": [
+    [
+     {
+      "node": "🐘 Registra a menção",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Registra a menção": {
+   "main": [
+    [
+     {
+      "node": "🔀 Cupom ou só obrigado?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Cupom ou só obrigado?": {
+   "main": [
+    [
+     {
+      "node": "🤖 IA personaliza o agradecimento",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📸 Só agradece",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 IA personaliza o agradecimento": {
+   "main": [
+    [
+     {
+      "node": "🧩 Texto final",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Texto final": {
+   "main": [
+    [
+     {
+      "node": "📸 Manda o cupom no direct",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Manda o cupom no direct": {
+   "main": [
+    [
+     {
+      "node": "🐘 Marca enviado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏰ A cada 5 minutos": {
+   "main": [
+    [
+     {
+      "node": "🐘 Pistas que abriram",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Pistas que abriram": {
+   "main": [
+    [
+     {
+      "node": "🧩 Desenha a arte da pista",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Desenha a arte da pista": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina desenha (1080×1920)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina desenha (1080×1920)": {
+   "main": [
+    [
+     {
+      "node": "📸 Posta no story",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Posta no story": {
+   "main": [
+    [
+     {
+      "node": "🐘 Marca a pista como postada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Encerra a gincana": {
+   "main": [
+    [
+     {
+      "node": "🧩 Arte do pódio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Arte do pódio": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina desenha o pódio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina desenha o pódio": {
+   "main": [
+    [
+     {
+      "node": "📸 Pódio no story",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Pódio no story": {
+   "main": [
+    [
+     {
+      "node": "🧩 Mensagem para cada jogador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Mensagem para cada jogador": {
+   "main": [
+    [
+     {
+      "node": "📸 Avisa cada jogador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Avisa cada jogador": {
+   "main": [
+    [
+     {
+      "node": "🧩 Conta os avisos",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Conta os avisos": {
+   "main": [
+    [
+     {
+      "node": "🐘 Guarda o resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Guarda o resultado": {
+   "main": [
+    [
+     {
+      "node": "📤 Gincana encerrada",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Arte do ganhador": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Oficina desenha o ganhador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina desenha o ganhador": {
+   "main": [
+    [
+     {
+      "node": "🔀 Postar no story?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Postar no story?": {
+   "main": [
+    [
+     {
+      "node": "📸 Ganhador no story",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🧩 Avisos aos ganhadores",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Ganhador no story": {
+   "main": [
+    [
+     {
+      "node": "🧩 Avisos aos ganhadores",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Avisos aos ganhadores": {
+   "main": [
+    [
+     {
+      "node": "📸 Avisa o ganhador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Avisa o ganhador": {
+   "main": [
+    [
+     {
+      "node": "🧩 Conta os avisos do sorteio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Conta os avisos do sorteio": {
+   "main": [
+    [
+     {
+      "node": "🐘 Guarda o anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Guarda o anúncio": {
+   "main": [
+    [
+     {
+      "node": "📤 Sorteio anunciado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏰ Encerra gincanas (30 min)": {
+   "main": [
+    [
+     {
+      "node": "🐘 Gincanas para encerrar",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Gincanas para encerrar": {
+   "main": [
+    [
+     {
+      "node": "🧩 Arte do pódio (auto)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Arte do pódio (auto)": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Desenha o pódio (auto)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Desenha o pódio (auto)": {
+   "main": [
+    [
+     {
+      "node": "📸 Pódio no story (auto)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Pódio no story (auto)": {
+   "main": [
+    [
+     {
+      "node": "🐘 Guarda o resultado (auto)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 300,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

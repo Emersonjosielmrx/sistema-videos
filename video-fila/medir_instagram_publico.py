@@ -44,7 +44,7 @@ def main():
             try:
                 r = json.loads(l)
                 antes[r["conta"]] = r
-            except (ValueError, KeyError):
+            except (ValueError, KeyError, TypeError):  # 14/11: linha "null" no histórico derrubava o medidor
                 pass
     prox = []
     for p in _proxies():  # 10/11: 21 de 72 sem banda (402) — testa num site neutro e fica só com os que respondem

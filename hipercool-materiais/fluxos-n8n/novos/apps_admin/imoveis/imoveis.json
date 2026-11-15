@@ -1,0 +1,1590 @@
+{
+ "name": "🏠 Vitrine de Imóveis com IA · site de imóveis, painel admin com fotos, anúncio e vídeo por IA, interessados e corretores",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🏠 VITRINE DE IMÓVEIS COM IA — comece aqui\nUm **site de imóveis** (tipo portal) para corretor ou imobiliária, com **painel administrador** fácil.\n\n**Links:**\n• 🆕 Criar a vitrine: `/webhook/imoveis-criar`\n• 🔐 Painel: `/webhook/imoveis-painel`\n• 🌐 Site público: `/webhook/imoveis?l=<código>` · 🏡 página de cada imóvel: `/webhook/imovel?l=<código>&c=IM101`\n\n**No painel:** 📸 sobe as fotos do celular (arrasta para ordenar, escolhe a capa) · ✨ **a IA olha as fotos e escreve o anúncio** (título, descrição, destaques, características, melhor ordem das fotos e dicas) · 🎬 **gera o vídeo do imóvel** (usa o fluxo *Vídeo de Anúncio com IA*: roteiro, narração, movimento de câmera, preço e música) · 🟢 publica, reserva, marca vendido · 📥 interessados com status (CRM simples) · 👥 corretores com WhatsApp próprio · 📊 visitas e cliques por imóvel.\n\n**Legenda:** 🔔 gatilho · 📤 resposta · 🐘 banco Postgres · 🔀 decisão · 🤖 IA · 🛠️ oficina de vídeo · ⏰ agendado",
+    "height": 600,
+    "width": 760,
+    "color": 6
+   },
+   "id": "0b096c5f-2581-59a5-b2a8-8f5d1c68d4d2",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1300,
+    -600
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ PÁGINAS 📄\nHTML fixo devolvido direto pelo 📤 (abre em menos de 1 s). Tudo o que muda vem da API.",
+    "height": 900,
+    "width": 560,
+    "color": 7
+   },
+   "id": "d44ae8d8-d9e4-5c77-b937-eff52d8a27fb",
+   "name": "Nota 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    -600
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ API 🔌\n🐘 **imv_api(jsonb)**: toda a regra fica no Postgres (login com bcrypt, permissão, imóveis, interessados, contadores).\nUma chamada por pedido, corpo inteiro como parâmetro **$1** (sem SQL injection).\n🔀 Quando a resposta pede trabalho extra: ✨ **anúncio** (IA com visão olha as fotos) · 🎬 **vídeo** (manda as fotos para a oficina e pede o vídeo ao fluxo de anúncio) · 💾 **guardar vídeo** (copia o vídeo para a pasta que não expira).",
+    "height": 1000,
+    "width": 1500,
+    "color": 4
+   },
+   "id": "09126ee4-c451-506e-b76c-b40e22c07ae0",
+   "name": "Nota 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    160,
+    -600
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ FOTOS 🖼️\nAs fotos ficam **no banco** (não somem). 🔔 `/webhook/imoveis-img?id=` entrega com cache de 1 dia.",
+    "height": 380,
+    "width": 560,
+    "color": 5
+   },
+   "id": "7a3eaf1a-46bb-5dc4-b08c-f495215943fb",
+   "name": "Nota 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    340
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 4️⃣ FINALIZADOR ⏰\nA cada 2 min confere vídeos que ficaram \"gerando\" (quando o dono fechou o painel antes do fim) e guarda os prontos.",
+    "height": 360,
+    "width": 1100,
+    "color": 3
+   },
+   "id": "fbf26292-6b4f-554a-97cd-470a2c195ca1",
+   "name": "Nota 5",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    160,
+    440
+   ]
+  },
+  {
+   "parameters": {
+    "path": "imoveis-criar",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "7d9d87bd-01c4-5085-a0b0-95d835bde756",
+   "name": "🔔 Criar vitrine",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -480
+   ],
+   "webhookId": "fd35b004-89b8-5bec-adb5-cba285638a96"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Vitrine de Imóveis com IA</title><meta name=\"robots\" content=\"noindex\">\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#1E3A8A;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.w{max-width:560px;margin:0 auto;padding:32px 16px 60px}h1{font-size:30px;line-height:1.15}.sub{color:var(--tx2);margin:8px 0 18px}\n.lista{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}.lista div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:14px;font-weight:600}\n.pronto{border:2px solid var(--ok)}\n</style></head><body><div class=\"w\">\n<h1>🏠 Vitrine de Imóveis com IA</h1><p class=\"sub\">Seu site de imóveis pronto em 1 minuto. Você sobe as fotos pelo celular e a IA escreve o anúncio e faz o vídeo de cada imóvel.</p>\n<div class=\"lista\"><div>🌐 Site com filtros e busca</div><div>📸 Fotos do celular, arrastar e ordenar</div><div>✨ IA escreve o anúncio pelas fotos</div><div>🎬 Vídeo narrado de cada imóvel</div><div>📥 Interessados num CRM simples</div><div>👥 Corretores com WhatsApp próprio</div><div>📊 Visitas e cliques por imóvel</div><div>🟢 Publicar, reservar, vender em 1 toque</div></div>\n<div class=\"card\" id=\"form\" style=\"margin-top:18px\"><h2 style=\"font-size:19px\">Crie a sua (grátis)</h2>\n<label>Nome da imobiliária ou do corretor</label><input id=\"nome\" placeholder=\"ex.: Ana Souza Imóveis\">\n<div class=\"linha\"><div><label>CRECI</label><input id=\"creci\" placeholder=\"opcional\"></div><div><label>Cidade</label><input id=\"cidade\"></div></div>\n<label>WhatsApp com DDD</label><input id=\"whatsapp\" inputmode=\"tel\">\n<label>Seu nome</label><input id=\"dono\">\n<label>Senha do painel</label><input id=\"senha\" type=\"password\" placeholder=\"mínimo 6 caracteres\">\n<button class=\"btn pri\" id=\"criar\" style=\"width:100%;margin-top:14px\">Criar minha vitrine</button></div>\n<div class=\"card pronto\" id=\"ok\" hidden style=\"margin-top:18px\"></div></div>\n<script>\nconst API = location.origin + '/webhook/imoveis-api';\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\n$('#criar').onclick = async () => {\n  $('#criar').disabled = true; $('#criar').textContent = 'Criando…'; const senha = $('#senha').value;\n  const j = await api('cadastro', { nome: $('#nome').value, creci: $('#creci').value, cidade: $('#cidade').value, whatsapp: $('#whatsapp').value, dono: $('#dono').value, senha });\n  $('#criar').disabled = false; $('#criar').textContent = 'Criar minha vitrine';\n  if (!j.ok) return aviso(j.erro, true);\n  const l = await api('login', { loja: j.loja, login: 'admin', senha }); if (l.ok) guarda.gravar('imv_token', l.token); guarda.gravar('imv_loja', j.loja);\n  const painel = `${location.origin}/webhook/imoveis-painel?l=${j.loja}`, site = `${location.origin}/webhook/imoveis?l=${j.loja}`;\n  $('#form').hidden = true; $('#ok').hidden = false;\n  $('#ok').innerHTML = `<h2>✅ Vitrine criada!</h2><p style=\"margin:8px 0\">Código: <b>${esc(j.loja)}</b> · usuário: <b>admin</b></p>\n    <a class=\"btn pri\" style=\"width:100%;margin-top:8px\" href=\"${painel}\">Abrir o painel e cadastrar o 1º imóvel</a>\n    <p class=\"mu pq\" style=\"margin-top:10px\">Seu site: <a href=\"${site}\">${esc(site)}</a></p>`;\n};\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "7e72e09f-4473-5fb5-9425-7d3ffabd0f80",
+   "name": "📤 Criar vitrine",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -480
+   ]
+  },
+  {
+   "parameters": {
+    "path": "imoveis-painel",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "61efa3cd-1374-558e-b07d-f7902b6ff938",
+   "name": "🔔 Painel administrador",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -290
+   ],
+   "webhookId": "82d76179-5422-517a-9298-50e26743656c"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Vitrine · Painel</title><meta name=\"robots\" content=\"noindex\">\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#1E3A8A;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.topo{position:sticky;top:0;z-index:20;background:var(--sup);border-bottom:1px solid var(--borda)}\n.topo .in{max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}\n.marca{font-weight:800;font-size:17px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.abas{max-width:1280px;margin:0 auto;padding:0 10px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}\n.abas button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--tx2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;position:relative}\n.abas button.on{color:var(--pri);border-color:var(--pri)}.abas .bolha{position:absolute;top:4px;right:0;background:var(--er);color:#fff;border-radius:999px;font-size:11px;padding:0 6px;line-height:17px}\nmain{max-width:1280px;margin:0 auto;padding:16px 16px 90px}\nh2{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2 .esp{flex:1}h2 .btn,h2 select,h2 input{font-size:14px;min-height:38px;padding:7px 12px;width:auto}\n.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}\n.kpi{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px}.kpi .v{font-size:22px;font-weight:800}.kpi .r{font-size:12px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.03em}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}\n.im{background:var(--sup);border:1px solid var(--borda);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}\n.im .ft{aspect-ratio:16/10;background:var(--sup2) center/cover;position:relative;cursor:pointer}\n.im .ft .tags{position:absolute;top:8px;left:8px;display:flex;gap:5px;flex-wrap:wrap}\n.im .cp{padding:12px;flex:1;display:flex;flex-direction:column;gap:4px}.im .pr{font-weight:800;color:var(--pri);font-size:18px}\n.im .ac{display:flex;gap:6px;padding:0 12px 12px;flex-wrap:wrap}\n.st-rascunho{background:#71717a;color:#fff}.st-publicado{background:var(--ok);color:#fff}.st-reservado{background:var(--av);color:#fff}.st-vendido{background:var(--er);color:#fff}\n.fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}\n.foto{position:relative;aspect-ratio:1;border-radius:12px;background:var(--sup2) center/cover;border:2px solid transparent;cursor:grab}\n.foto.capa{border-color:var(--pri)}.foto .cp{position:absolute;top:5px;left:5px;background:var(--pri);color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px}\n.foto .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer}\n.foto .mv{position:absolute;bottom:4px;left:4px;right:4px;display:flex;gap:4px;justify-content:space-between}.foto .mv button{border:0;background:rgba(0,0,0,.6);color:#fff;border-radius:6px;width:28px;height:24px;cursor:pointer}\n.foto.arrasta{opacity:.4}.solta{border:2px dashed var(--borda);border-radius:12px;display:grid;place-items:center;aspect-ratio:1;cursor:pointer;color:var(--mu);text-align:center;font-size:13px;padding:6px}\n.solta.sobre{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 8%,transparent)}\n.modal{max-width:880px}\n.chips{display:flex;flex-wrap:wrap;gap:6px}.chips label{display:flex;gap:6px;align-items:center;background:var(--sup2);border:1px solid var(--borda);border-radius:99px;padding:5px 11px;margin:0;font-weight:500;color:var(--tx);cursor:pointer}\n.chips input{width:auto;min-height:0}\n.ia-box{background:linear-gradient(135deg,color-mix(in srgb,var(--pri) 12%,var(--sup)),var(--sup));border:1px solid color-mix(in srgb,var(--pri) 35%,transparent);border-radius:14px;padding:14px;margin:10px 0}\n.lead{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px;border-bottom:1px solid var(--borda)}\n.login{max-width:400px;margin:8vh auto;padding:0 16px}.alerta{background:var(--av-bg);color:var(--av);border-radius:12px;padding:10px 12px;font-weight:600;margin-bottom:12px}\n.prog{height:8px;background:var(--sup2);border-radius:99px;overflow:hidden;margin-top:6px}.prog div{height:100%;background:var(--pri);transition:width .5s}\n</style></head><body><div id=\"app\"></div>\n<script>\nconst API = location.origin + '/webhook/imoveis-api';\nconst IMG = id => location.origin + '/webhook/imoveis-img?id=' + id;\nconst ARQ = c => location.origin + '/videos/arquivo/' + c;\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst TIPOS = { casa: 'Casa', apartamento: 'Apartamento', sobrado: 'Sobrado', cobertura: 'Cobertura', terreno: 'Terreno', comercial: 'Ponto comercial', sala: 'Sala comercial', galpao: 'Galpão', chacara: 'Chácara' };\nconst FIN = { venda: 'Venda', aluguel: 'Aluguel', temporada: 'Temporada' };\nconst STATUS = { rascunho: '📝 Rascunho', publicado: '🟢 Na vitrine', reservado: '🟡 Reservado', vendido: '🔴 Vendido/alugado' };\nconst CARAC = ['Piscina', 'Churrasqueira', 'Área gourmet', 'Varanda', 'Sacada', 'Jardim', 'Quintal', 'Elevador', 'Portaria 24h', 'Academia', 'Salão de festas', 'Playground', 'Ar-condicionado', 'Armários planejados', 'Mobiliado', 'Lavanderia', 'Closet', 'Lareira', 'Energia solar', 'Portão eletrônico', 'Aceita pet', 'Aceita financiamento', 'Escritura ok', 'Vista para o mar'];\nconst LEAD_ST = { novo: '🆕 Novo', contatado: '📞 Contatado', visita: '🏠 Visita marcada', proposta: '📄 Proposta', fechado: '🤝 Fechado', perdido: '❌ Perdido' };\nconst INTER = { visita: '🏠 Quer visitar', informacoes: 'ℹ️ Informações', financiamento: '🏦 Financiamento', proposta: '📄 Proposta' };\nlet EU = null, ABA = null;\nconst params = new URLSearchParams(location.search);\nwindow.TOKEN = guarda.ler('imv_token');\nfunction sair() { api('sair'); guarda.gravar('imv_token', null); window.TOKEN = ''; telaLogin(); }\nfunction telaLogin(msg) {\n  const loja = params.get('l') || guarda.ler('imv_loja') || '';\n  $('#app').innerHTML = `<div class=\"login\"><div class=\"card\"><h2>🏠 Entrar no painel</h2>${msg ? `<div class=\"alerta\">${esc(msg)}</div>` : ''}\n    <label>Código da vitrine</label><input id=\"lj\" value=\"${esc(loja)}\" autocapitalize=\"off\"><label>Usuário</label><input id=\"lg\" value=\"admin\" autocapitalize=\"off\">\n    <label>Senha</label><input id=\"sn\" type=\"password\"><button class=\"btn pri\" style=\"width:100%;margin-top:14px\" id=\"ent\">Entrar</button>\n    <p class=\"mu pq\" style=\"margin-top:12px\">Ainda não tem? <a href=\"${location.origin}/webhook/imoveis-criar\">Crie a sua vitrine grátis</a>.</p></div></div>`;\n  const ir = async () => { const j = await api('login', { loja: $('#lj').value.trim(), login: $('#lg').value.trim(), senha: $('#sn').value });\n    if (!j.ok) return aviso(j.erro, true); window.TOKEN = j.token; guarda.gravar('imv_token', j.token); guarda.gravar('imv_loja', $('#lj').value.trim()); iniciar(); };\n  $('#ent').onclick = ir; $('#sn').onkeydown = e => { if (e.key === 'Enter') ir(); };\n}\nasync function iniciar() {\n  if (!window.TOKEN) return telaLogin();\n  const j = await api('eu'); if (!j.ok) return telaLogin(j.sair ? '' : j.erro);\n  EU = j; document.documentElement.style.setProperty('--pri', j.loja.cor);\n  const abas = j.usuario.papel === 'admin' ? ['inicio', 'imoveis', 'leads', 'equipe', 'config'] : ['inicio', 'imoveis', 'leads'];\n  const NOME = { inicio: '📊 Início', imoveis: '🏠 Imóveis', leads: '📥 Interessados', equipe: '👥 Equipe', config: '⚙️ Vitrine' };\n  $('#app').innerHTML = `<div class=\"topo\"><div class=\"in\"><div class=\"marca\">${esc(j.loja.nome)}</div><a class=\"btn pq\" target=\"_blank\" href=\"${location.origin}/webhook/imoveis?l=${encodeURIComponent(j.loja.slug)}\">👁️ Ver site</a>\n    <button class=\"btn fant pq\" id=\"tema\">🌓</button><button class=\"btn pq\" onclick=\"sair()\">Sair</button></div>\n    <nav class=\"abas\">${abas.map(a => `<button data-aba=\"${a}\">${NOME[a]}<span class=\"bolha\" hidden></span></button>`).join('')}</nav></div><main id=\"tela\"></main>`;\n  tema(); $$('[data-aba]').forEach(b => b.onclick = () => abrir(b.dataset.aba));\n  abrir(abas.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'inicio');\n  api('resumo').then(r => { const b = $('[data-aba=\"leads\"] .bolha'); if (r.ok && b && r.leads_novos) { b.hidden = false; b.textContent = r.leads_novos; } });\n}\nfunction abrir(a) { ABA = a; location.hash = a; $$('[data-aba]').forEach(b => b.classList.toggle('on', b.dataset.aba === a)); $('#tela').innerHTML = '<div class=\"vazio\">Carregando…</div>';\n  ({ inicio: telaInicio, imoveis: telaImoveis, leads: telaLeads, equipe: telaEquipe, config: telaConfig })[a](); }\n\n// ═════════ INÍCIO ═════════\nasync function telaInicio() {\n  const r = await api('resumo'); if (!r.ok) return aviso(r.erro, true);\n  $('#tela').innerHTML = `<h2>Olá, ${esc(EU.usuario.nome.split(' ')[0])} 👋 <span class=\"esp\"></span><button class=\"btn pri\" onclick=\"editar(null)\">＋ Cadastrar imóvel</button></h2>\n    ${r.sem_foto ? `<div class=\"alerta\">📸 ${r.sem_foto} imóvel(is) com menos de 3 fotos. Imóvel com muitas fotos recebe muito mais contato.</div>` : ''}\n    ${r.sem_video ? `<div class=\"alerta\">🎬 ${r.sem_video} imóvel(is) na vitrine sem vídeo. Gere o vídeo com 1 clique na aba Imóveis.</div>` : ''}\n    <div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Na vitrine</div><div class=\"v\">${r.publicados}</div></div><div class=\"kpi\"><div class=\"r\">Rascunhos</div><div class=\"v\">${r.rascunhos}</div></div>\n    <div class=\"kpi\"><div class=\"r\">Negociados</div><div class=\"v\">${r.vendidos}</div></div><div class=\"kpi\"><div class=\"r\">Visitas nas páginas</div><div class=\"v\">${r.visitas}</div></div>\n    <div class=\"kpi\"><div class=\"r\">Cliques no WhatsApp</div><div class=\"v\">${r.cliques}</div></div><div class=\"kpi\"><div class=\"r\">Interessados (7 dias)</div><div class=\"v\">${r.leads_7d}</div><div class=\"mu pq\">${r.leads_novos} sem resposta</div></div></div>\n    <h2>Mais vistos</h2><div class=\"card tabela\"><table><tr><th>Imóvel</th><th>Visitas</th><th>WhatsApp</th><th>Interessados</th><th>Conversão</th></tr>\n    ${r.top.map(t => `<tr><td><b>${esc(t.codigo)}</b> ${esc(t.titulo)}</td><td class=\"num\">${t.visitas}</td><td class=\"num\">${t.cliques_whats}</td><td class=\"num\">${t.leads}</td><td class=\"num\">${t.visitas ? Math.round((t.cliques_whats + t.leads) / t.visitas * 100) : 0}%</td></tr>`).join('') || '<tr><td colspan=\"5\" class=\"vazio\">Cadastre o primeiro imóvel</td></tr>'}</table></div>\n    <div class=\"card\" style=\"margin-top:14px\"><b>🔗 Link da sua vitrine</b><div class=\"linha\" style=\"margin-top:8px\"><input readonly value=\"${location.origin}/webhook/imoveis?l=${esc(EU.loja.slug)}\" id=\"lk\"><button class=\"btn\" style=\"flex:none\" onclick=\"navigator.clipboard.writeText($('#lk').value);aviso('Link copiado')\">Copiar</button></div></div>`;\n}\n\n// ═════════ IMÓVEIS ═════════\nlet LISTA = [];\nasync function telaImoveis() {\n  const j = await api('lista'); if (!j.ok) return aviso(j.erro, true); LISTA = j.imoveis;\n  $('#tela').innerHTML = `<h2>🏠 Imóveis <span class=\"esp\"></span><input id=\"bs\" placeholder=\"🔎 Buscar\"><select id=\"fs\"><option value=\"\">Todos</option>${Object.entries(STATUS).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('')}</select>\n    <button class=\"btn pri\" onclick=\"editar(null)\">＋ Cadastrar imóvel</button></h2><div class=\"grade\" id=\"gr\"></div>`;\n  const d = () => { const q = $('#bs').value.toLowerCase(), s = $('#fs').value;\n    $('#gr').innerHTML = LISTA.filter(i => (!s || i.status === s) && (!q || (i.titulo + i.codigo + i.bairro).toLowerCase().includes(q))).map(i => `<div class=\"im\">\n      <div class=\"ft\" data-e=\"${i.id}\" style=\"background-image:url('${i.capa ? IMG(i.capa) : ''}')\"><div class=\"tags\"><span class=\"selo st-${i.status}\">${STATUS[i.status]}</span>${i.destaque ? '<span class=\"selo av\">⭐</span>' : ''}\n        ${i.tem_video ? '<span class=\"selo ok\">▶ vídeo</span>' : i.video_status === 'gerando' ? '<span class=\"selo av\">⏳ vídeo</span>' : ''}</div></div>\n      <div class=\"cp\"><div class=\"mu pq\">${esc(i.codigo)} · ${TIPOS[i.tipo] || i.tipo} · ${FIN[i.finalidade]}</div><b>${esc(i.titulo || '(sem título)')}</b><div class=\"pr\">${brl(i.preco).replace(',00', '')}</div>\n        <div class=\"mu pq\">📍 ${esc(i.bairro || '—')} · 📸 ${i.n_fotos} · 👁️ ${i.visitas} · 💬 ${i.cliques} · 📥 ${i.leads}</div></div>\n      <div class=\"ac\"><button class=\"btn pq\" data-e=\"${i.id}\">✏️ Editar</button><button class=\"btn pq\" data-v=\"${i.id}\">🎬 Vídeo</button>\n        <select class=\"pq\" data-s=\"${i.id}\" style=\"flex:1;min-height:32px;padding:4px 8px\">${Object.entries(STATUS).map(([k, v]) => `<option value=\"${k}\" ${i.status === k ? 'selected' : ''}>${v}</option>`).join('')}</select>\n        <button class=\"btn pq fant\" data-m=\"${i.id}\" title=\"Mais\">⋯</button></div></div>`).join('') || '<div class=\"vazio\">Nenhum imóvel. Toque em “Cadastrar imóvel”.</div>';\n    $$('[data-e]').forEach(b => b.onclick = () => editar(Number(b.dataset.e)));\n    $$('[data-v]').forEach(b => b.onclick = () => video(LISTA.find(i => i.id === Number(b.dataset.v))));\n    $$('[data-s]').forEach(s => s.onchange = async () => { if (await chama('status', { id: Number(s.dataset.s), status: s.value }, 'Status atualizado')) telaImoveis(); else telaImoveis(); });\n    $$('[data-m]').forEach(b => b.onclick = () => mais(LISTA.find(i => i.id === Number(b.dataset.m)))); };\n  $('#bs').oninput = d; $('#fs').onchange = d; d();\n}\nfunction mais(i) {\n  const m = modal(`<h3>${esc(i.codigo)} · ${esc(i.titulo)}</h3><div style=\"display:grid;gap:8px;margin-top:10px\">\n    <a class=\"btn\" target=\"_blank\" href=\"${location.origin}/webhook/imovel?l=${encodeURIComponent(EU.loja.slug)}&c=${i.codigo}\">👁️ Ver a página do imóvel</a>\n    <button class=\"btn\" id=\"cl\">🔗 Copiar link do imóvel</button><button class=\"btn\" id=\"dt\">${i.destaque ? '☆ Tirar dos destaques' : '⭐ Pôr em destaque'}</button>\n    <button class=\"btn\" id=\"dp\">📄 Duplicar (para imóvel parecido)</button><button class=\"btn er\" id=\"ex\">🗑️ Apagar imóvel</button></div><div class=\"acoes\"><button class=\"btn\" data-fechar>Fechar</button></div>`);\n  $('#cl', m).onclick = () => { navigator.clipboard.writeText(`${location.origin}/webhook/imovel?l=${EU.loja.slug}&c=${i.codigo}`); aviso('Link copiado'); };\n  $('#dt', m).onclick = async () => { if (await chama('destaque', { id: i.id })) { m.fechar(); telaImoveis(); } };\n  $('#dp', m).onclick = async () => { const r = await chama('duplicar', { id: i.id }, 'Cópia criada como rascunho'); if (r) { m.fechar(); editar(r.id); } };\n  $('#ex', m).onclick = async () => { if (await confirma(`Apagar ${i.codigo} e as fotos dele? Não dá para desfazer.`) && await chama('excluir', { id: i.id }, 'Imóvel apagado')) { m.fechar(); telaImoveis(); } };\n}\n\nasync function editar(id) {\n  let I = { id: 0, titulo: '', finalidade: 'venda', tipo: 'casa', preco: 0, condominio: 0, iptu: 0, area: 0, area_total: 0, quartos: 0, suites: 0, banheiros: 0, vagas: 0, bairro: '', cidade: EU.loja.cidade || '', endereco: '', mostrar_endereco: false, descricao: '', destaques: [], caracteristicas: [], fotos: [], legendas: {}, status: 'rascunho', destaque: false, corretor_id: null };\n  if (id) { const r = await api('ver', { id }); if (!r.ok) return aviso(r.erro, true); I = r.imovel; }\n  const cor = await api('corretores');\n  const fotos = [...I.fotos], miniaturas = {}; let enviando = 0;\n  const m = modal(`<h3>${id ? `Editar ${esc(I.codigo)}` : 'Cadastrar imóvel'}</h3>\n    <label>📸 Fotos <span class=\"mu pq\">(arraste para mudar a ordem · a primeira é a capa · até 30)</span></label><div class=\"fotos\" id=\"fts\"></div><input type=\"file\" id=\"ff\" accept=\"image/*\" multiple hidden>\n    <div class=\"ia-box\"><b>✨ Criar o anúncio com IA</b><p class=\"pq mu\" style=\"margin:4px 0 8px\">A IA olha as fotos, junta o que você escrever e preenche título, descrição, destaques e características. Você revisa antes de salvar.</p>\n      <textarea id=\"nt\" style=\"min-height:60px\" placeholder=\"Opcional: o que só você sabe. Ex.: casa reformada em 2024, rua tranquila, perto da escola, aceita carro como parte do pagamento\"></textarea>\n      <button class=\"btn pri\" id=\"ia\" style=\"margin-top:8px\">✨ Preencher com IA</button><div id=\"dicas\" class=\"pq\" hidden style=\"margin-top:10px;background:var(--av-bg);color:var(--av);border-radius:10px;padding:8px 10px\"></div></div>\n    <div class=\"linha\"><div><label>Finalidade</label><select id=\"fn\">${Object.entries(FIN).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('')}</select></div>\n      <div><label>Tipo</label><select id=\"tp\">${Object.entries(TIPOS).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('')}</select></div>\n      <div><label>Preço (R$)</label><input id=\"pr\" inputmode=\"decimal\"></div></div>\n    <label>Título do anúncio</label><input id=\"tt\" maxlength=\"120\" placeholder=\"ex.: Casa térrea com piscina e 3 quartos no Jardim América\">\n    <div class=\"linha\"><div><label>Área útil (m²)</label><input id=\"ar\" inputmode=\"decimal\"></div><div><label>Terreno (m²)</label><input id=\"at\" inputmode=\"decimal\"></div>\n      <div><label>Quartos</label><input id=\"qt\" type=\"number\" min=\"0\"></div><div><label>Suítes</label><input id=\"su\" type=\"number\" min=\"0\"></div><div><label>Banheiros</label><input id=\"bn\" type=\"number\" min=\"0\"></div><div><label>Vagas</label><input id=\"vg\" type=\"number\" min=\"0\"></div></div>\n    <div class=\"linha\"><div><label>Condomínio (R$/mês)</label><input id=\"cd\" inputmode=\"decimal\"></div><div><label>IPTU (R$/ano)</label><input id=\"ip\" inputmode=\"decimal\"></div></div>\n    <div class=\"linha\"><div><label>Bairro</label><input id=\"br\"></div><div><label>Cidade</label><input id=\"cy\"></div></div>\n    <label>Endereço</label><input id=\"en\" placeholder=\"Rua e número\"><label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"me\" style=\"width:auto;min-height:0\"> Mostrar o endereço no site (se desmarcado, só bairro e cidade)</label>\n    <label>Descrição</label><textarea id=\"ds\" style=\"min-height:150px\"></textarea>\n    <label>Destaques (um por linha, aparecem em lista)</label><textarea id=\"dq\" style=\"min-height:80px\" placeholder=\"Piscina aquecida&#10;Cozinha planejada\"></textarea>\n    <label>Características</label><div class=\"chips\" id=\"cr\"></div><input id=\"cx\" placeholder=\"Outra característica (Enter para adicionar)\" style=\"margin-top:6px\">\n    <div class=\"linha\"><div><label>Corretor responsável (recebe o WhatsApp)</label><select id=\"co\"><option value=\"0\">Contato da vitrine</option>${(cor.usuarios || []).map(u => `<option value=\"${u.id}\">${esc(u.nome)}</option>`).join('')}</select></div>\n      <div><label>Situação</label><select id=\"st\">${Object.entries(STATUS).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('')}</select></div></div>\n    <label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"dt\" style=\"width:auto;min-height:0\"> ⭐ Destaque (aparece primeiro na vitrine)</label>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn\" id=\"sr\">Salvar rascunho</button><button class=\"btn pri\" id=\"sp\">Salvar e publicar</button></div>`);\n  const set = (s, v) => $(s, m).value = v ?? '';\n  set('#fn', I.finalidade); set('#tp', I.tipo); set('#pr', I.preco ? String(I.preco).replace('.', ',') : ''); set('#tt', I.titulo); set('#ar', Number(I.area) || ''); set('#at', Number(I.area_total) || '');\n  set('#qt', I.quartos || ''); set('#su', I.suites || ''); set('#bn', I.banheiros || ''); set('#vg', I.vagas || ''); set('#cd', Number(I.condominio) || ''); set('#ip', Number(I.iptu) || '');\n  set('#br', I.bairro); set('#cy', I.cidade); set('#en', I.endereco); $('#me', m).checked = I.mostrar_endereco; set('#ds', I.descricao); set('#dq', I.destaques.join('\\n'));\n  set('#co', I.corretor_id || 0); set('#st', I.status); $('#dt', m).checked = I.destaque;\n  const caracs = new Set(I.caracteristicas);\n  const desenhaCar = () => { $('#cr', m).innerHTML = [...new Set([...CARAC, ...caracs])].map(c => `<label><input type=\"checkbox\" value=\"${esc(c)}\" ${caracs.has(c) ? 'checked' : ''}> ${esc(c)}</label>`).join('');\n    $$('#cr input', m).forEach(x => x.onchange = () => x.checked ? caracs.add(x.value) : caracs.delete(x.value)); };\n  $('#cx', m).onkeydown = e => { if (e.key === 'Enter' && e.target.value.trim()) { caracs.add(e.target.value.trim()); e.target.value = ''; desenhaCar(); } };\n  let arrastando = null;\n  const desenhaFotos = () => {\n    $('#fts', m).innerHTML = fotos.map((f, i) => `<div class=\"foto ${i === 0 ? 'capa' : ''}\" draggable=\"true\" data-i=\"${i}\" style=\"background-image:url('${f.startsWith('tmp:') ? miniaturas[f] : IMG(f)}')\">\n      ${i === 0 ? '<span class=\"cp\">CAPA</span>' : ''}${f.startsWith('tmp:') ? '<span class=\"cp\" style=\"background:#000\">⏳</span>' : ''}<button class=\"x\" data-x=\"${i}\">✕</button>\n      <div class=\"mv\"><button data-esq=\"${i}\">‹</button><button data-cap=\"${i}\" title=\"Usar como capa\">★</button><button data-dir=\"${i}\">›</button></div></div>`).join('') +\n      `<div class=\"solta\" id=\"add\">＋<br>Adicionar fotos<br><span class=\"pq\">ou arraste aqui</span></div>`;\n    $('#add', m).onclick = () => $('#ff', m).click();\n    $$('[data-x]', m).forEach(b => b.onclick = e => { e.stopPropagation(); fotos.splice(Number(b.dataset.x), 1); desenhaFotos(); });\n    const move = (i, j) => { if (j < 0 || j >= fotos.length) return; const [f] = fotos.splice(i, 1); fotos.splice(j, 0, f); desenhaFotos(); };\n    $$('[data-esq]', m).forEach(b => b.onclick = () => move(Number(b.dataset.esq), Number(b.dataset.esq) - 1));\n    $$('[data-dir]', m).forEach(b => b.onclick = () => move(Number(b.dataset.dir), Number(b.dataset.dir) + 1));\n    $$('[data-cap]', m).forEach(b => b.onclick = () => move(Number(b.dataset.cap), 0));\n    $$('.foto', m).forEach(el => { el.ondragstart = () => { arrastando = Number(el.dataset.i); el.classList.add('arrasta'); }; el.ondragend = () => el.classList.remove('arrasta');\n      el.ondragover = e => e.preventDefault(); el.ondrop = e => { e.preventDefault(); if (arrastando !== null && !e.dataTransfer.files.length) move(arrastando, Number(el.dataset.i)); arrastando = null; }; });\n  };\n  const sobe = async lista => {\n    const arqs = [...lista].filter(f => f.type.startsWith('image/')).slice(0, 30 - fotos.length);\n    for (const a of arqs) {\n      const tmp = 'tmp:' + Math.random().toString(36).slice(2); fotos.push(tmp); miniaturas[tmp] = URL.createObjectURL(a); desenhaFotos(); enviando++;\n      try { const b64 = await reduzFoto(a, 1800, .84); const r = await api('img_salvar', { mime: 'image/jpeg', b64 });\n        const k = fotos.indexOf(tmp); if (r.ok && k > -1) { fotos[k] = r.id; miniaturas[r.id] = await reduzFoto(a, 512, .7); } else { if (k > -1) fotos.splice(k, 1); aviso(r.erro || 'Falha ao enviar foto', true); }\n      } catch (er) { const k = fotos.indexOf(tmp); if (k > -1) fotos.splice(k, 1); aviso(er.message, true); }\n      enviando--; desenhaFotos();\n    }\n  };\n  $('#ff', m).onchange = e => sobe(e.target.files);\n  const zona = $('#fts', m); zona.ondragover = e => { e.preventDefault(); }; zona.ondrop = e => { if (e.dataTransfer.files.length) { e.preventDefault(); sobe(e.dataTransfer.files); } };\n\n  $('#ia', m).onclick = async () => {\n    const ids = fotos.filter(f => !f.startsWith('tmp:')).slice(0, 10);\n    if (!ids.length && !$('#nt', m).value.trim()) return aviso('Adicione fotos ou escreva algo sobre o imóvel.', true);\n    $('#ia', m).disabled = true; $('#ia', m).textContent = '⏳ A IA está olhando as fotos… (até 1 min)';\n    // miniaturas pequenas para a visão (das que acabaram de subir já temos; das antigas, baixa e reduz)\n    const minis = [];\n    for (const f of ids) { try { if (miniaturas[f] && miniaturas[f].length < 200000 && !miniaturas[f].startsWith('blob:')) minis.push(miniaturas[f]); else { const bl = await (await fetch(IMG(f))).blob(); minis.push(await reduzFoto(bl, 512, .7)); } } catch (e) {} }\n    const dados = { finalidade: $('#fn', m).value, tipo: $('#tp', m).value, preco: numIn($('#pr', m).value), quartos: $('#qt', m).value, suites: $('#su', m).value, banheiros: $('#bn', m).value, vagas: $('#vg', m).value, area: $('#ar', m).value, bairro: $('#br', m).value, cidade: $('#cy', m).value, titulo: $('#tt', m).value };\n    const r = await api('ia_anuncio', { miniaturas: minis, notas: $('#nt', m).value, dados });\n    $('#ia', m).disabled = false; $('#ia', m).textContent = '✨ Preencher com IA';\n    if (!r.ok) return aviso(r.erro, true);\n    let a; try { a = JSON.parse(String(r.resultado).replace(/^\\s*```(?:json)?/i, '').replace(/```\\s*$/, '')); } catch (e) { return aviso('A IA respondeu fora do formato. Tente de novo.', true); }\n    if (a.titulo) set('#tt', a.titulo); if (a.descricao) set('#ds', a.descricao); if (Array.isArray(a.destaques)) set('#dq', a.destaques.join('\\n'));\n    if (Array.isArray(a.caracteristicas)) { a.caracteristicas.forEach(c => caracs.add(c)); desenhaCar(); }\n    if (a.tipo && TIPOS[a.tipo] && !id) set('#tp', a.tipo);\n    const sug = []; for (const [k, s, nm] of [['quartos', '#qt', 'quartos'], ['suites', '#su', 'suítes'], ['banheiros', '#bn', 'banheiros'], ['vagas', '#vg', 'vagas']]) if (!$(s, m).value && Number(a[k])) { set(s, a[k]); $(s, m).style.outline = '2px dashed var(--av)'; sug.push(nm); }\n    if (sug.length) a.avisos = [...(a.avisos || []), `Confira: a IA chutou ${sug.join(', ')} pelas fotos (campos marcados).`];\n    if (Array.isArray(a.ordem_fotos) && a.ordem_fotos.length) { const nova = a.ordem_fotos.map(n => ids[n]).filter(Boolean); const resto = fotos.filter(f => !nova.includes(f)); fotos.splice(0, fotos.length, ...new Set([...nova, ...resto])); desenhaFotos(); }\n    if (a.legendas) Object.entries(a.legendas).forEach(([n, t]) => { if (ids[n]) I.legendas[ids[n]] = t; });\n    aviso('✨ Pronto! Revise o texto e salve.');\n    $('#dicas', m).innerHTML = a.avisos && a.avisos.length ? `<b>💡 Dicas da IA</b><ul style=\"margin:4px 0 0 18px\">${a.avisos.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''; $('#dicas', m).hidden = !(a.avisos && a.avisos.length);\n  };\n  const salvar = async publicar => {\n    if (enviando) return aviso('Espere as fotos terminarem de enviar.', true);\n    const d = { id: I.id || 0, titulo: $('#tt', m).value, finalidade: $('#fn', m).value, tipo: $('#tp', m).value, preco: numIn($('#pr', m).value), condominio: numIn($('#cd', m).value), iptu: numIn($('#ip', m).value),\n      area: numIn($('#ar', m).value), area_total: numIn($('#at', m).value), quartos: Number($('#qt', m).value) || 0, suites: Number($('#su', m).value) || 0, banheiros: Number($('#bn', m).value) || 0, vagas: Number($('#vg', m).value) || 0,\n      bairro: $('#br', m).value, cidade: $('#cy', m).value, endereco: $('#en', m).value, mostrar_endereco: $('#me', m).checked, descricao: $('#ds', m).value,\n      destaques: $('#dq', m).value.split('\\n').map(s => s.trim()).filter(Boolean), caracteristicas: [...caracs], fotos: fotos.filter(f => !f.startsWith('tmp:')), legendas: I.legendas || {},\n      status: publicar ? 'publicado' : ($('#st', m).value === 'publicado' ? 'rascunho' : $('#st', m).value), destaque: $('#dt', m).checked, corretor_id: Number($('#co', m).value) || 0 };\n    const r = await chama('salvar', d, publicar ? '🟢 Publicado na vitrine' : (d.status === 'rascunho' ? '📝 Salvo como rascunho (não aparece no site)' : 'Salvo'));\n    if (!r) return;\n    m.fechar();\n    if (publicar && (!I.video || !I.video.url) && d.fotos.length >= 3 && await confirma('Gerar agora o vídeo deste imóvel com IA? (leva uns 3 minutos e roda sozinho)'))\n      { await telaImoveis(); return video(LISTA.find(x => x.id === r.id)); }\n    if (ABA === 'imoveis') telaImoveis(); else abrir('imoveis');\n  };\n  $('#sr', m).onclick = () => salvar(false); $('#sp', m).onclick = () => salvar(true);\n  desenhaFotos(); desenhaCar();\n}\n\n// ═════════ VÍDEO (usa o fluxo \"Vídeo de Anúncio com IA\") ═════════\nasync function video(i) {\n  const r = await api('ver', { id: i.id }); if (!r.ok) return aviso(r.erro, true); const I = r.imovel, V = I.video || {};\n  const m = modal(`<h3>🎬 Vídeo · ${esc(I.codigo)}</h3>\n    ${V.url ? `<video src=\"${ARQ(V.url)}\" ${V.capa ? `poster=\"${ARQ(V.capa)}\"` : ''} controls playsinline style=\"width:100%;max-height:60vh;border-radius:12px;background:#000\"></video><p class=\"mu pq\" style=\"margin-top:6px\">Este vídeo aparece na página do imóvel. Baixe para postar no Instagram, TikTok e Status.</p>\n      <div class=\"linha\" style=\"margin-top:8px\"><a class=\"btn\" href=\"${ARQ(V.url)}\" download>⬇️ Baixar vídeo</a><button class=\"btn pri\" id=\"ig\">📸 Postar no Instagram</button></div>` : '<p class=\"mu\">A IA escolhe a ordem das fotos, escreve o roteiro, narra com voz humana, põe movimento de câmera, preço e música. Fica pronto em 2 a 4 minutos.</p>'}\n    <div id=\"gera\" ${V.status === 'gerando' ? 'hidden' : ''}><div class=\"linha\" style=\"margin-top:12px\"><div><label>Formato</label><select id=\"fm\"><option value=\"vertical\">Vertical (Reels, Status, TikTok)</option><option value=\"quadrado\">Quadrado (feed)</option><option value=\"deitado\">Deitado (YouTube, site)</option></select></div>\n      <div><label>Duração</label><select id=\"du\"><option value=\"30\">30 s</option><option value=\"15\">15 s</option><option value=\"60\">60 s</option></select></div>\n      <div><label>Voz</label><select id=\"vz\"><option value=\"pt-BR-ThalitaMultilingualNeural\">Thalita (feminina)</option><option value=\"en-US-AndrewMultilingualNeural\">Andrew (masculina)</option></select></div></div>\n      <button class=\"btn pri\" id=\"ir\" style=\"margin-top:12px;width:100%\">${V.url ? '🔁 Gerar um vídeo novo' : '🎬 Gerar o vídeo com IA'}</button></div>\n    <div id=\"and\" ${V.status === 'gerando' ? '' : 'hidden'}><b id=\"et\">Preparando…</b><div class=\"prog\"><div id=\"pb\" style=\"width:4%\"></div></div><p class=\"mu pq\" style=\"margin-top:6px\">Pode fechar esta janela: o vídeo continua sendo feito e aparece aqui quando ficar pronto.</p></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Fechar</button></div>`);\n  const ETAPAS = { recebido: [8, 'Pedido recebido'], fotos: [18, '👀 A IA está olhando as fotos'], estrategia: [30, '🧠 Pensando no público e no ângulo'], roteiro: [42, '✍️ Escrevendo o roteiro'], revisao: [52, '🔎 Revisando (sem inventar nada)'], direcao: [62, '🎬 Dirigindo as cenas'], narrando: [72, '🎙️ Gravando a narração'], montando: [85, '🎞️ Montando o vídeo'], pronto: [100, '✅ Pronto!'] };\n  let parar = false; m.closest('.modal-fundo').addEventListener('remove', () => parar = true);\n  const acompanha = async job => {\n    $('#gera', m).hidden = true; $('#and', m).hidden = false;\n    for (let k = 0; k < 120 && !parar && document.body.contains(m); k++) {\n      let s; try { s = await (await fetch(`${location.origin}/webhook/anuncio-video-status?job=${job}`)).json(); } catch (e) { s = {}; }\n      const e = ETAPAS[s.etapa]; if (e) { $('#et', m).textContent = e[1] + (s.detalhe ? ' · ' + s.detalhe : ''); $('#pb', m).style.width = (s.etapa === 'montando' && s.progresso ? 75 + s.progresso * .2 : e[0]) + '%'; }\n      if (s.etapa === 'pronto' || s.etapa === 'erro') {\n        const g = await api('video_guardar', { id: I.id, job: s.job || job, pagina: s.pagina || '', erro: s.erro || '' });\n        if (s.etapa === 'erro' || !g.ok) { $('#et', m).textContent = '❌ ' + (s.erro || g.erro || 'Falhou'); $('#gera', m).hidden = false; return; }\n        aviso('🎬 Vídeo pronto!'); m.fechar(); video(i); if (ABA === 'imoveis') telaImoveis(); return;\n      }\n      await new Promise(r => setTimeout(r, 4000));\n    }\n  };\n  $('#ir', m).onclick = async () => {\n    $('#ir', m).disabled = true; $('#ir', m).textContent = '⏳ Enviando as fotos…';\n    const g = await api('video_gerar', { id: I.id, formato: $('#fm', m).value, duracao: Number($('#du', m).value), voz: $('#vz', m).value });\n    $('#ir', m).disabled = false; $('#ir', m).textContent = '🎬 Gerar o vídeo com IA';\n    if (!g.ok) return aviso(g.erro, true);\n    acompanha(g.job);\n  };\n  if (V.status === 'gerando' && V.job) acompanha(V.job);\n  if ($('#ig', m)) $('#ig', m).onclick = () => { m.fechar(); postarInsta(I, r.pode_postar); };\n}\nasync function postarInsta(I, pode) {\n  const m = modal(`<h3>📸 Postar ${esc(I.codigo)} no Instagram</h3><p class=\"mu pq\">A IA escreve a legenda com gancho, destaques, chamada e hashtags da região. Revise antes de postar.</p>\n    <textarea id=\"lg\" style=\"min-height:220px\">${esc((I.instagram && I.instagram.legenda) || '')}</textarea><button class=\"btn pq\" id=\"ia\" style=\"margin-top:6px\">✨ ${I.instagram && I.instagram.legenda ? 'Escrever outra' : 'Escrever com IA'}</button>\n    <div id=\"rs\" class=\"pq\" style=\"margin-top:10px\"></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Fechar</button><button class=\"btn\" id=\"cp\">📋 Copiar legenda</button><a class=\"btn\" href=\"${ARQ(I.video.url)}\" download>⬇️ Vídeo</a>\n      ${pode ? '<button class=\"btn pri\" id=\"ps\">📤 Postar como Reel agora</button>' : ''}</div>`);\n  const gera = async () => { $('#ia', m).disabled = true; $('#ia', m).textContent = '⏳ escrevendo…'; const r = await api('insta_legenda', { id: I.id }); $('#ia', m).disabled = false; $('#ia', m).textContent = '✨ Escrever outra';\n    if (!r.ok) return aviso(r.erro, true); $('#lg', m).value = r.resultado; api('insta_salvar', { id: I.id, legenda: r.resultado }); };\n  $('#ia', m).onclick = gera; if (!$('#lg', m).value) gera();\n  $('#cp', m).onclick = () => { navigator.clipboard.writeText($('#lg', m).value); aviso('Legenda copiada'); };\n  if ($('#ps', m)) $('#ps', m).onclick = async () => { if (!await confirma('Publicar agora no Instagram conectado?')) return;\n    $('#ps', m).disabled = true; $('#ps', m).textContent = '⏳ Enviando o Reel (até 2 min)…';\n    const r = await api('insta_postar', { id: I.id, legenda: $('#lg', m).value }); $('#ps', m).disabled = false; $('#ps', m).textContent = '📤 Postar como Reel agora';\n    $('#rs', m).innerHTML = r.ok ? `✅ Publicado! ${r.link ? `<a href=\"${esc(r.link)}\" target=\"_blank\">ver no Instagram</a>` : ''}` : `<span style=\"color:var(--er)\">❌ ${esc(r.erro)}</span>`; };\n}\n\n// ═════════ LEADS ═════════\nasync function telaLeads() {\n  const j = await api('leads'); if (!j.ok) return aviso(j.erro, true);\n  $('#tela').innerHTML = `<h2>📥 Interessados <span class=\"esp\"></span><select id=\"fl\"><option value=\"\">Todos</option>${Object.entries(LEAD_ST).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('')}</select></h2><div class=\"card\" id=\"ll\" style=\"padding:0\"></div>`;\n  const d = () => { const f = $('#fl').value; $('#ll').innerHTML = j.leads.filter(l => !f || l.status === f).map(l => `<div class=\"lead\"><div><b>${esc(l.nome)}</b> <span class=\"selo\">${INTER[l.interesse] || l.interesse}</span>\n      <div class=\"pq mu\">${new Date(l.criado_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })} · ${l.imovel ? esc(l.imovel.codigo + ' ' + l.imovel.titulo) : 'imóvel apagado'}</div>\n      ${l.mensagem ? `<div style=\"margin-top:4px\">“${esc(l.mensagem)}”</div>` : ''}${l.notas ? `<div class=\"pq\" style=\"margin-top:4px;background:var(--sup2);padding:6px 8px;border-radius:8px\">📝 ${esc(l.notas)}</div>` : ''}</div>\n      <div style=\"display:flex;flex-direction:column;gap:6px;align-items:flex-end\"><a class=\"btn pq\" style=\"background:#25D366;color:#fff;border-color:#25D366\" target=\"_blank\" href=\"https://wa.me/${l.telefone.length <= 11 ? '55' + l.telefone : l.telefone}?text=${encodeURIComponent(`Olá ${l.nome.split(' ')[0]}! Aqui é da ${EU.loja.nome}. Vi seu interesse no imóvel ${l.imovel ? l.imovel.codigo : ''}. Posso te ajudar?`)}\">💬 Responder</a>\n      <select data-l=\"${l.id}\" class=\"pq\" style=\"min-height:32px;padding:4px 8px;width:auto\">${Object.entries(LEAD_ST).map(([k, v]) => `<option value=\"${k}\" ${l.status === k ? 'selected' : ''}>${v}</option>`).join('')}</select>\n      <button class=\"btn pq fant\" data-n=\"${l.id}\">📝 Anotar</button></div></div>`).join('') || '<div class=\"vazio\">Nenhum interessado ainda. Divulgue o link da vitrine!</div>';\n    $$('[data-l]').forEach(s => s.onchange = async () => { if (await chama('lead_salvar', { id: Number(s.dataset.l), status: s.value }, 'Atualizado')) j.leads.find(l => l.id === Number(s.dataset.l)).status = s.value; });\n    $$('[data-n]').forEach(b => b.onclick = async () => { const l = j.leads.find(x => x.id === Number(b.dataset.n)); const t = prompt('Anotação sobre ' + l.nome + ':', l.notas || ''); if (t === null) return;\n      if (await chama('lead_salvar', { id: l.id, notas: t }, 'Anotado')) { l.notas = t; d(); } }); };\n  $('#fl').onchange = d; d();\n}\n// ═════════ EQUIPE ═════════\nasync function telaEquipe() {\n  const [u, a] = await Promise.all([api('usuarios'), api('atividades')]); if (!u.ok) return aviso(u.erro, true);\n  $('#tela').innerHTML = `<h2>👥 Equipe <span class=\"esp\"></span><button class=\"btn pri\" id=\"nu\">＋ Corretor</button></h2>\n    <div class=\"card tabela\"><table><tr><th>Nome</th><th>Usuário</th><th>Papel</th><th>WhatsApp</th><th>Situação</th><th></th></tr>${u.usuarios.map(x => `<tr><td><b>${esc(x.nome)}</b></td><td>${esc(x.login)}</td><td>${x.papel === 'admin' ? '👑 Administrador' : '🏠 Corretor'}</td><td>${esc(x.whatsapp)}</td>\n      <td>${x.ativo ? '<span class=\"selo ok\">ativo</span>' : '<span class=\"selo\">bloqueado</span>'}</td><td><button class=\"btn pq\" data-u=\"${x.id}\">Editar</button></td></tr>`).join('')}</table></div>\n    <p class=\"mu pq\" style=\"margin:8px 0 20px\">👑 Administrador mexe em tudo · 🏠 Corretor cadastra imóveis e atende interessados. O WhatsApp do corretor responsável aparece na página do imóvel.<br>Cada um entra com o código <b>${esc(EU.loja.slug)}</b>.</p>\n    <h2>📜 Registro de atividades</h2><div class=\"card tabela\"><table><tr><th>Quando</th><th>Quem</th><th>O quê</th></tr>${(a.atividades || []).map(x => `<tr><td class=\"pq\">${new Date(x.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>${esc(x.usuario)}</td><td><b>${esc(x.acao)}</b> <span class=\"mu\">${esc(x.detalhe)}</span></td></tr>`).join('')}</table></div>`;\n  const ed = x => { const m = modal(`<h3>${x ? 'Editar' : 'Novo'} corretor</h3><label>Nome</label><input id=\"nm\" value=\"${esc(x ? x.nome : '')}\"><label>WhatsApp</label><input id=\"wa\" inputmode=\"tel\" value=\"${esc(x ? x.whatsapp : '')}\">\n    <div class=\"linha\"><div><label>Usuário</label><input id=\"lg\" value=\"${esc(x ? x.login : '')}\" ${x ? 'disabled' : ''} autocapitalize=\"off\"></div><div><label>${x ? 'Nova senha (vazio = manter)' : 'Senha'}</label><input id=\"sn\"></div></div>\n    <label>Papel</label><select id=\"pp\"><option value=\"corretor\">🏠 Corretor</option><option value=\"admin\">👑 Administrador</option></select>\n    ${x ? `<label style=\"display:flex;gap:8px;align-items:center\"><input type=\"checkbox\" id=\"at\" style=\"width:auto;min-height:0\" ${x.ativo ? 'checked' : ''}> Pode entrar</label>` : ''}<div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar</button></div>`);\n    if (x) $('#pp', m).value = x.papel;\n    $('#ok', m).onclick = async () => { if (await chama('usuario_salvar', { id: x ? x.id : 0, nome: $('#nm', m).value, whatsapp: $('#wa', m).value, login: $('#lg', m).value, senha: $('#sn', m).value, papel: $('#pp', m).value, ativo: x ? $('#at', m).checked : true }, 'Salvo')) { m.fechar(); telaEquipe(); } }; };\n  $('#nu').onclick = () => ed(null); $$('[data-u]').forEach(b => b.onclick = () => ed(u.usuarios.find(x => x.id === Number(b.dataset.u))));\n}\n// ═════════ CONFIG ═════════\nasync function telaConfig() {\n  const j = await api('config_ver'); if (!j.ok) return aviso(j.erro, true); const c = j.config; let logo = c.logo;\n  $('#tela').innerHTML = `<div class=\"card\" style=\"max-width:640px\"><h2>⚙️ Sua vitrine</h2><label>Nome (imobiliária ou corretor)</label><input id=\"nm\" value=\"${esc(c.nome)}\">\n    <div class=\"linha\"><div><label>CRECI</label><input id=\"cr\" value=\"${esc(c.creci)}\"></div><div><label>Cidade principal</label><input id=\"cy\" value=\"${esc(c.cidade)}\"></div></div>\n    <div class=\"linha\"><div><label>WhatsApp</label><input id=\"wa\" inputmode=\"tel\" value=\"${esc(c.whatsapp)}\"></div><div><label>Instagram</label><input id=\"ig\" value=\"${esc(c.instagram)}\" placeholder=\"sem @\"></div></div>\n    <label>Juros do simulador de financiamento (% ao ano)</label><input id=\"jr\" inputmode=\"decimal\" value=\"${String(c.juros_ano ?? 11.5).replace('.', ',')}\">\n    <label>Frase de apresentação (aparece no topo do site)</label><textarea id=\"sb\" style=\"min-height:70px\">${esc(c.sobre)}</textarea>\n    <div class=\"linha\"><div><label>Cor principal</label><input id=\"co\" type=\"color\" value=\"${esc(c.cor)}\" style=\"padding:4px\"></div><div><label>Logo</label><div class=\"linha\" style=\"flex-wrap:nowrap\"><div id=\"lv\" style=\"flex:0 0 52px;height:52px;border-radius:10px;background:var(--sup2);display:grid;place-items:center;overflow:hidden\"></div><input type=\"file\" id=\"lf\" accept=\"image/*\"></div></div></div>\n    <button class=\"btn pri\" id=\"sv\" style=\"margin-top:16px;width:100%\">Salvar</button></div>`;\n  const lv = () => $('#lv').innerHTML = logo ? `<img src=\"${IMG(logo)}\" style=\"width:100%;height:100%;object-fit:contain\">` : '🏠'; lv();\n  $('#lf').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { const r = await chama('img_salvar', { mime: 'image/jpeg', b64: await reduzFoto(f, 600) }); if (r) { logo = r.id; lv(); } } catch (er) { aviso(er.message, true); } };\n  $('#sv').onclick = async () => { if (await chama('config_salvar', { nome: $('#nm').value, creci: $('#cr').value, cidade: $('#cy').value, whatsapp: $('#wa').value, instagram: $('#ig').value, sobre: $('#sb').value, cor: $('#co').value, logo: logo || '', juros_ano: numIn($('#jr').value) }, 'Salvo')) iniciar(); };\n}\niniciar();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "ff55efb3-2a6e-575f-9dbc-6abf2c098abb",
+   "name": "📤 Painel administrador",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -290
+   ]
+  },
+  {
+   "parameters": {
+    "path": "imoveis",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "b9159ef0-b59a-5d38-8458-f8880bdf3428",
+   "name": "🔔 Site da vitrine",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -100
+   ],
+   "webhookId": "ac41bf62-5312-5d3f-875e-4b70826b4c10"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Imóveis</title>\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#1E3A8A;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\nbody{background:var(--plano)}\n.cab{background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 55%,#000));color:#fff}\n.cab .in{max-width:1180px;margin:0 auto;padding:16px;display:flex;gap:12px;align-items:center}\n.cab img{height:46px;border-radius:10px;background:#fff;padding:3px}.cab .nm{font-weight:800;font-size:19px;flex:1}\n.hero{max-width:1180px;margin:0 auto;padding:30px 16px 12px;color:#fff}.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.1;max-width:720px}.hero p{opacity:.9;margin-top:8px;max-width:640px}\n.filtros{max-width:1180px;margin:-4px auto 0;padding:0 16px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}\n.filtros select,.filtros input{background:#fff;color:#18181b;border:0}\nmain{max-width:1180px;margin:0 auto;padding:22px 16px 60px}\n.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}\n.im{background:var(--sup);border-radius:18px;overflow:hidden;border:1px solid var(--borda);box-shadow:var(--sombra);text-decoration:none;color:var(--tx);display:flex;flex-direction:column;transition:transform .15s}\n.im:hover{transform:translateY(-3px)}\n.im .ft{aspect-ratio:4/3;background:var(--sup2) center/cover;position:relative}\n.im .tags{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}.im .tags span{background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px}\n.im .tags .vd{background:var(--er)}.im .tags .rs{background:var(--av)}.im .tags .dt{background:var(--pri)}\n.im .cp{padding:14px}.im .pr{font-size:21px;font-weight:800;color:var(--pri)}.im .tt{font-weight:700;margin:2px 0}.im .lc{color:var(--mu);font-size:14px}\n.im .ca{display:flex;gap:12px;color:var(--tx2);font-size:14px;margin-top:8px;flex-wrap:wrap}\n.vendido{opacity:.7}.vendido .ft{filter:grayscale(.6)}\n.rod{text-align:center;color:var(--mu);font-size:13px;padding:30px 16px}\n.zap{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.25);text-decoration:none}\n</style></head><body><div id=\"app\"><div class=\"vazio\">Carregando imóveis…</div></div>\n<script>\nconst API = location.origin + '/webhook/imoveis-api';\nconst IMG = id => location.origin + '/webhook/imoveis-img?id=' + id;\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst LOJA = new URLSearchParams(location.search).get('l');\nconst TIPOS = { casa: 'Casa', apartamento: 'Apartamento', terreno: 'Terreno', comercial: 'Comercial', sala: 'Sala', chacara: 'Chácara', sobrado: 'Sobrado', cobertura: 'Cobertura', galpao: 'Galpão' };\nconst FIN = { venda: 'Venda', aluguel: 'Aluguel', temporada: 'Temporada' };\nconst preco = i => brl(i.preco).replace(',00', '') + (i.finalidade === 'aluguel' ? '/mês' : i.finalidade === 'temporada' ? '/diária' : '');\n(async () => {\n  const j = await api('site', { loja: LOJA });\n  if (!j.ok) { $('#app').innerHTML = `<div class=\"vazio\"><h2>${esc(j.erro)}</h2></div>`; return; }\n  const L = j.loja; document.documentElement.style.setProperty('--pri', L.cor); document.title = L.nome + ' · Imóveis';\n  const bairros = [...new Set(j.imoveis.map(i => i.bairro).filter(Boolean))].sort();\n  $('#app').innerHTML = `<div class=\"cab\"><div class=\"in\">${L.logo ? `<img src=\"${IMG(L.logo)}\" alt=\"\">` : ''}<div class=\"nm\">${esc(L.nome)}</div>${L.creci ? `<span class=\"pq\" style=\"opacity:.85\">CRECI ${esc(L.creci)}</span>` : ''}</div>\n    <div class=\"hero\"><h1>Encontre o imóvel certo${L.cidade ? ' em ' + esc(L.cidade) : ''}</h1><p>${esc(L.sobre || 'Imóveis selecionados, com fotos, vídeo e atendimento direto pelo WhatsApp.')}</p></div>\n    <div class=\"filtros\"><select id=\"ff\"><option value=\"\">Comprar ou alugar</option>${Object.entries(FIN).map(([k, v]) => `<option value=\"${k}\">${v}</option>`).join('')}</select>\n    <select id=\"ft\"><option value=\"\">Todos os tipos</option>${[...new Set(j.imoveis.map(i => i.tipo))].map(t => `<option value=\"${t}\">${TIPOS[t] || t}</option>`).join('')}</select>\n    <select id=\"fb\"><option value=\"\">Todos os bairros</option>${bairros.map(b => `<option>${esc(b)}</option>`).join('')}</select>\n    <select id=\"fq\"><option value=\"0\">Quartos</option><option value=\"1\">1+</option><option value=\"2\">2+</option><option value=\"3\">3+</option><option value=\"4\">4+</option></select>\n    <input id=\"fp\" inputmode=\"numeric\" placeholder=\"Preço até (R$)\"></div></div>\n    <main><div class=\"linha\" style=\"margin-bottom:14px\"><b id=\"qt\"></b><span></span><select id=\"or\" style=\"flex:0 0 190px\"><option value=\"\">Mais recentes</option><option value=\"m\">Menor preço</option><option value=\"M\">Maior preço</option></select></div><div class=\"grade\" id=\"gr\"></div></main>\n    <div class=\"rod\">${esc(L.nome)}${L.creci ? ' · CRECI ' + esc(L.creci) : ''}${L.instagram ? ` · <a href=\"https://instagram.com/${esc(L.instagram)}\" target=\"_blank\" rel=\"noopener\">@${esc(L.instagram)}</a>` : ''}</div>\n    ${L.whatsapp ? `<a class=\"zap\" href=\"https://wa.me/${L.whatsapp}?text=${encodeURIComponent('Olá! Vi os imóveis no site e quero mais informações.')}\" target=\"_blank\" rel=\"noopener\" aria-label=\"WhatsApp\">💬</a>` : ''}`;\n  const lista = () => {\n    const f = { fin: $('#ff').value, tipo: $('#ft').value, bairro: $('#fb').value, q: Number($('#fq').value), max: num($('#fp').value) };\n    let r = j.imoveis.filter(i => (!f.fin || i.finalidade === f.fin) && (!f.tipo || i.tipo === f.tipo) && (!f.bairro || i.bairro === f.bairro) && i.quartos >= f.q && (!f.max || i.preco <= f.max));\n    if ($('#or').value === 'm') r.sort((a, b) => a.preco - b.preco); if ($('#or').value === 'M') r.sort((a, b) => b.preco - a.preco);\n    $('#qt').textContent = r.length + (r.length === 1 ? ' imóvel' : ' imóveis');\n    $('#gr').innerHTML = r.map(i => `<a class=\"im ${i.status === 'vendido' ? 'vendido' : ''}\" href=\"${location.origin}/webhook/imovel?l=${encodeURIComponent(LOJA)}&c=${i.codigo}\">\n      <div class=\"ft\" style=\"background-image:url('${i.capa ? IMG(i.capa) : ''}')\"><div class=\"tags\"><span>${FIN[i.finalidade]}</span>${i.destaque ? '<span class=\"dt\">⭐ Destaque</span>' : ''}${i.tem_video ? '<span>▶ Vídeo</span>' : ''}${i.status === 'vendido' ? `<span class=\"vd\">${i.finalidade === 'venda' ? 'Vendido' : 'Alugado'}</span>` : i.status === 'reservado' ? '<span class=\"rs\">Reservado</span>' : ''}</div></div>\n      <div class=\"cp\"><div class=\"pr\">${preco(i)}</div><div class=\"tt\">${esc(i.titulo)}</div><div class=\"lc\">📍 ${esc([i.bairro, i.cidade].filter(Boolean).join(', '))}</div>\n      <div class=\"ca\">${i.area > 0 ? `<span>📐 ${Number(i.area).toLocaleString('pt-BR')} m²</span>` : ''}${i.quartos ? `<span>🛏️ ${i.quartos}</span>` : ''}${i.banheiros ? `<span>🛁 ${i.banheiros}</span>` : ''}${i.vagas ? `<span>🚗 ${i.vagas}</span>` : ''}</div></div></a>`).join('') || '<div class=\"vazio\">Nenhum imóvel com esses filtros.</div>';\n  };\n  $$('.filtros select, .filtros input, #or').forEach(e => e.oninput = lista); lista();\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "3bdea979-489a-5b77-b4c4-bfbab2b27a44",
+   "name": "📤 Site da vitrine",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -100
+   ]
+  },
+  {
+   "parameters": {
+    "path": "imovel",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "362778eb-957b-53a6-8b08-3efe41b8154b",
+   "name": "🔔 Página do imóvel",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    90
+   ],
+   "webhookId": "d484f60b-816c-5eaf-b02c-a73072311910"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Imóvel</title>\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#1E3A8A;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.cab{background:var(--sup);border-bottom:1px solid var(--borda)}.cab .in{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}\n.cab img{height:38px;border-radius:8px}.cab a{text-decoration:none;color:var(--tx);font-weight:800;flex:1}\nmain{max-width:1180px;margin:0 auto;padding:16px 16px 100px}\n.gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:8px;height:min(62vw,480px);border-radius:18px;overflow:hidden}\n.gal div{background:var(--sup2) center/cover;cursor:zoom-in;position:relative}.gal div:first-child{grid-row:span 2}\n.gal .mais{position:absolute;inset:0;background:rgba(0,0,0,.5);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px}\n@media (max-width:700px){.gal{grid-template-columns:1fr;grid-template-rows:1fr;height:72vw}.gal div:not(:first-child){display:none}}\n.cols{display:grid;grid-template-columns:1fr 360px;gap:26px;margin-top:20px}@media (max-width:900px){.cols{grid-template-columns:1fr}}\nh1{font-size:clamp(22px,4vw,32px);line-height:1.15}.preco{font-size:30px;font-weight:800;color:var(--pri);margin:6px 0}\n.carac{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:18px 0}.carac div{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px;text-align:center}\n.carac b{display:block;font-size:20px}#sr b{font-size:17px;white-space:nowrap}#sr{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.carac span{font-size:13px;color:var(--mu)}\n.sec{font-size:19px;font-weight:800;margin:24px 0 10px}.desc{white-space:pre-line;color:var(--tx2);font-size:16px;line-height:1.6}\n.dest li{margin:6px 0 6px 20px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:var(--sup);border:1px solid var(--borda);border-radius:99px;padding:6px 12px;font-size:14px}\nvideo{display:block;margin:0 auto;max-width:100%;max-height:72vh;border-radius:16px;background:#000}\n.lado{position:sticky;top:16px;align-self:start}\n.zapb{background:#25D366;border-color:#25D366;color:#fff;width:100%;font-size:17px;min-height:50px}\n.lb{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:60;display:flex;align-items:center;justify-content:center}\n.lb img{max-width:96vw;max-height:84vh;object-fit:contain}.lb button{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:50%;width:48px;height:48px;font-size:24px;cursor:pointer}\n.lb .x{top:14px;right:14px}.lb .a{left:10px;top:50%}.lb .p{right:10px;top:50%}.lb .cap{position:absolute;bottom:16px;color:#fff;text-align:center;width:100%;padding:0 20px}\n.fixo{position:fixed;left:0;right:0;bottom:0;background:var(--sup);border-top:1px solid var(--borda);padding:10px 16px;display:none;gap:8px;z-index:30}@media (max-width:900px){.fixo{display:flex}}\n.pq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}.pq-grid a{background:var(--sup);border:1px solid var(--borda);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--tx)}\n.pq-grid .ft{aspect-ratio:16/10;background:var(--sup2) center/cover}.pq-grid .cp{padding:10px}\n.selo-st{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:800;color:#fff;background:var(--er);margin-bottom:6px}\n</style></head><body><div id=\"app\"><div class=\"vazio\">Carregando…</div></div>\n<script>\nconst API = location.origin + '/webhook/imoveis-api';\nconst IMG = id => location.origin + '/webhook/imoveis-img?id=' + id;\nconst ARQ = c => location.origin + '/videos/arquivo/' + c;\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst q = new URLSearchParams(location.search); const LOJA = q.get('l'), COD = q.get('c');\nconst TIPOS = { casa: 'Casa', apartamento: 'Apartamento', terreno: 'Terreno', comercial: 'Ponto comercial', sala: 'Sala comercial', chacara: 'Chácara', sobrado: 'Sobrado', cobertura: 'Cobertura', galpao: 'Galpão' };\nconst FIN = { venda: 'à venda', aluguel: 'para alugar', temporada: 'para temporada' };\n(async () => {\n  const j = await api('imovel', { loja: LOJA, codigo: COD });\n  if (!j.ok) { $('#app').innerHTML = `<div class=\"vazio\" style=\"padding-top:20vh\"><div style=\"font-size:48px\">🏠</div><h2>${esc(j.erro)}</h2><p><a href=\"${location.origin}/webhook/imoveis?l=${encodeURIComponent(LOJA)}\">Ver outros imóveis</a></p></div>`; return; }\n  const L = j.loja, I = j.imovel; document.documentElement.style.setProperty('--pri', L.cor);\n  document.title = I.titulo + ' · ' + L.nome;\n  const fotos = I.fotos || [], leg = I.legendas || {};\n  const zap = `https://wa.me/${L.whatsapp}?text=${encodeURIComponent(`Olá! Tenho interesse no imóvel ${I.codigo}: ${I.titulo}\\n${location.href}`)}`;\n  const vendido = I.status === 'vendido';\n  $('#app').innerHTML = `<div class=\"cab\"><div class=\"in\">${L.logo ? `<img src=\"${IMG(L.logo)}\" alt=\"\">` : ''}<a href=\"${location.origin}/webhook/imoveis?l=${encodeURIComponent(LOJA)}\">${esc(L.nome)}</a><a class=\"btn pq\" style=\"flex:none\" href=\"${location.origin}/webhook/imoveis?l=${encodeURIComponent(LOJA)}\">← Todos os imóveis</a></div></div>\n    <main><div class=\"gal\">${fotos.slice(0, 3).map((f, i) => `<div data-i=\"${i}\" style=\"background-image:url('${IMG(f)}')\">${i === 2 && fotos.length > 3 ? `<span class=\"mais\">+${fotos.length - 3} fotos</span>` : ''}</div>`).join('')}</div>\n    <div class=\"cols\"><div>\n      ${vendido ? `<span class=\"selo-st\">${I.finalidade === 'venda' ? 'VENDIDO' : 'ALUGADO'}</span>` : I.status === 'reservado' ? '<span class=\"selo-st\" style=\"background:var(--av)\">RESERVADO</span>' : ''}\n      <div class=\"mu pq\">${TIPOS[I.tipo] || I.tipo} ${FIN[I.finalidade]} · cód. ${esc(I.codigo)}</div><h1>${esc(I.titulo)}</h1>\n      <div class=\"mu\">📍 ${esc([I.endereco, I.bairro, I.cidade].filter(Boolean).join(', '))}</div>\n      <div class=\"preco\">${brl(I.preco).replace(',00', '')}${I.finalidade === 'aluguel' ? '<span class=\"pq mu\">/mês</span>' : ''}</div>\n      ${Number(I.condominio) || Number(I.iptu) ? `<div class=\"mu pq\">${Number(I.condominio) ? 'Condomínio ' + brl(I.condominio) : ''}${Number(I.condominio) && Number(I.iptu) ? ' · ' : ''}${Number(I.iptu) ? 'IPTU ' + brl(I.iptu) + '/ano' : ''}</div>` : ''}\n      <div class=\"carac\">${Number(I.area) ? `<div><b>${Number(I.area).toLocaleString('pt-BR')} m²</b><span>área útil</span></div>` : ''}${Number(I.area_total) ? `<div><b>${Number(I.area_total).toLocaleString('pt-BR')} m²</b><span>terreno</span></div>` : ''}\n        ${I.quartos ? `<div><b>${I.quartos}</b><span>quarto(s)${I.suites ? ', ' + I.suites + ' suíte(s)' : ''}</span></div>` : ''}${I.banheiros ? `<div><b>${I.banheiros}</b><span>banheiro(s)</span></div>` : ''}${I.vagas ? `<div><b>${I.vagas}</b><span>vaga(s)</span></div>` : ''}</div>\n      ${I.video && I.video.url ? `<div class=\"sec\">▶️ Vídeo do imóvel</div><video src=\"${ARQ(I.video.url)}\" ${I.video.capa ? `poster=\"${ARQ(I.video.capa)}\"` : ''} controls playsinline preload=\"metadata\"></video>` : ''}\n      ${I.destaques.length ? `<div class=\"sec\">✨ Destaques</div><ul class=\"dest\">${I.destaques.map(d => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}\n      <div class=\"sec\">Sobre o imóvel</div><div class=\"desc\">${esc(I.descricao || 'Fale com a gente para saber mais sobre este imóvel.')}</div>\n      ${I.finalidade === 'venda' && Number(I.preco) > 0 ? `<div class=\"sec\">🏦 Simule o financiamento</div><div class=\"card\" id=\"sim\">\n        <div class=\"linha\"><div><label>Entrada (R$)</label><input id=\"se\" inputmode=\"numeric\"></div><div><label>Prazo</label><select id=\"sp\">${[420, 360, 300, 240, 180, 120].map(m => `<option value=\"${m}\">${m / 12} anos</option>`).join('')}</select></div>\n        <div><label>Juros ao ano (%)</label><input id=\"sj\" inputmode=\"decimal\"></div><div><label>Sistema</label><select id=\"ss\"><option value=\"sac\">SAC (parcela cai)</option><option value=\"price\">Price (parcela fixa)</option></select></div></div>\n        <div class=\"carac\" id=\"sr\" style=\"margin-top:12px\"></div><p class=\"mu pq\">Simulação aproximada, sem seguro e taxas do banco. A aprovação depende da análise de crédito. Mínimo de entrada costuma ser 20%.</p></div>` : ''}\n      ${I.caracteristicas.length ? `<div class=\"sec\">O que tem</div><div class=\"chips\">${I.caracteristicas.map(c => `<span>✔ ${esc(c)}</span>`).join('')}</div>` : ''}\n      ${j.parecidos.length ? `<div class=\"sec\">Você também pode gostar</div><div class=\"pq-grid\">${j.parecidos.map(p => `<a href=\"?l=${encodeURIComponent(LOJA)}&c=${p.codigo}\"><div class=\"ft\" style=\"background-image:url('${p.capa ? IMG(p.capa) : ''}')\"></div><div class=\"cp\"><b style=\"color:var(--pri)\">${brl(p.preco).replace(',00', '')}</b><div class=\"pq\">${esc(p.titulo)}</div></div></a>`).join('')}</div>` : ''}\n    </div><aside class=\"lado\"><div class=\"card\"><b style=\"font-size:18px\">${vendido ? 'Este já foi negociado' : 'Gostou deste imóvel?'}</b><p class=\"mu pq\" style=\"margin:4px 0 12px\">${vendido ? 'Fale com a gente: temos outros parecidos.' : 'Fale agora com o corretor ou agende uma visita.'}</p>\n      ${L.whatsapp ? `<a class=\"btn zapb\" id=\"zap\" href=\"${zap}\" target=\"_blank\" rel=\"noopener\">💬 Chamar no WhatsApp</a>` : ''}\n      <div style=\"margin-top:14px\"><label>Seu nome</label><input id=\"nm\"><label>WhatsApp com DDD</label><input id=\"tl\" inputmode=\"tel\"><label>Quero</label>\n      <select id=\"it\"><option value=\"visita\">Agendar uma visita</option><option value=\"informacoes\">Mais informações</option><option value=\"financiamento\">Simular financiamento</option><option value=\"proposta\">Fazer uma proposta</option></select>\n      <label>Mensagem (opcional)</label><textarea id=\"ms\" style=\"min-height:70px\"></textarea><button class=\"btn pri\" id=\"env\" style=\"width:100%;margin-top:10px\">Enviar</button></div>\n      <p class=\"mu pq\" style=\"margin-top:10px\">${esc(L.nome)}${L.creci ? ' · CRECI ' + esc(L.creci) : ''}</p></div></aside></div></main>\n    ${L.whatsapp ? `<div class=\"fixo\"><a class=\"btn zapb\" href=\"${zap}\" target=\"_blank\" rel=\"noopener\">💬 WhatsApp</a></div>` : ''}`;\n  if ($('#sim')) {\n    const preco = Number(I.preco); $('#se').value = Math.round(preco * 0.2).toLocaleString('pt-BR'); $('#sj').value = String(L.juros_ano || 11.5).replace('.', ',');\n    const calc = () => {\n      const ent = num($('#se').value), fin = Math.max(0, preco - ent), n = Number($('#sp').value), i = Math.pow(1 + numIn($('#sj').value) / 100, 1 / 12) - 1;\n      let p1, pf, tot;\n      if ($('#ss').value === 'price') { p1 = pf = i > 0 ? fin * i / (1 - Math.pow(1 + i, -n)) : fin / n; tot = p1 * n; }\n      else { const amort = fin / n; p1 = amort + fin * i; pf = amort + amort * i; tot = amort * n + i * amort * n * (n + 1) / 2; }\n      $('#sr').innerHTML = `<div><b>${brl(fin).replace(',00', '')}</b><span>financiado</span></div><div><b>${brl(p1)}</b><span>${$('#ss').value === 'price' ? 'parcela fixa' : '1ª parcela'}</span></div>\n        ${$('#ss').value === 'sac' ? `<div><b>${brl(pf)}</b><span>última parcela</span></div>` : ''}<div><b>${brl(p1 / 0.3).replace(',00', '')}</b><span>renda mínima aprox.</span></div><div><b>${brl(tot).replace(',00', '')}</b><span>total pago ao banco</span></div>`;\n      if (ent < preco * 0.2) $('#sr').insertAdjacentHTML('beforeend', '<div style=\"grid-column:1/-1;color:var(--av)\"><b>⚠️</b><span>Entrada abaixo de 20% pode não ser aceita.</span></div>');\n    };\n    $$('#sim input, #sim select').forEach(e => e.oninput = calc); calc();\n  }\n  const clique = () => api('clique', { loja: LOJA, codigo: COD }, 1); $$('a[href^=\"https://wa.me\"]').forEach(a => a.addEventListener('click', clique));\n  $$('[data-i]').forEach(d => d.onclick = () => abreFoto(Number(d.dataset.i)));\n  function abreFoto(i) {\n    const lb = document.createElement('div'); lb.className = 'lb';\n    const mostra = () => lb.innerHTML = `<img src=\"${IMG(fotos[i])}\" alt=\"\"><div class=\"cap\">${esc(leg[fotos[i]] || '')} <span style=\"opacity:.6\">${i + 1}/${fotos.length}</span></div><button class=\"x\">✕</button><button class=\"a\">‹</button><button class=\"p\">›</button>`;\n    lb.onclick = e => { const c = e.target.className; if (c === 'x' || e.target === lb) lb.remove(); else if (c === 'a') { i = (i - 1 + fotos.length) % fotos.length; mostra(); } else if (c === 'p') { i = (i + 1) % fotos.length; mostra(); } };\n    document.addEventListener('keydown', function k(e) { if (!document.body.contains(lb)) return document.removeEventListener('keydown', k); if (e.key === 'Escape') lb.remove(); if (e.key === 'ArrowLeft') { i = (i - 1 + fotos.length) % fotos.length; mostra(); } if (e.key === 'ArrowRight') { i = (i + 1) % fotos.length; mostra(); } });\n    let x0 = null; lb.addEventListener('touchstart', e => x0 = e.touches[0].clientX); lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { i = (i + (dx < 0 ? 1 : -1) + fotos.length) % fotos.length; mostra(); } x0 = null; });\n    mostra(); document.body.appendChild(lb);\n  }\n  $('#env').onclick = async () => { $('#env').disabled = true;\n    const r = await api('lead', { loja: LOJA, codigo: COD, nome: $('#nm').value, telefone: $('#tl').value, interesse: $('#it').value, mensagem: $('#ms').value });\n    $('#env').disabled = false; if (!r.ok) return aviso(r.erro, true);\n    $('#env').closest('div').innerHTML = '<div style=\"text-align:center;padding:14px\"><div style=\"font-size:42px\">✅</div><b>Recebemos!</b><p class=\"mu pq\">O corretor vai te chamar no WhatsApp em breve.</p></div>'; };\n})();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "55cf3837-ee9a-5407-9274-7544b74691d5",
+   "name": "📤 Página do imóvel",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    90
+   ]
+  },
+  {
+   "parameters": {
+    "path": "imoveis-api",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "2c11e38c-295f-540d-94cb-0f9019024810",
+   "name": "🔔 API (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    200,
+    -300
+   ],
+   "webhookId": "dfeac81e-89dc-5163-80f4-9a87f5d6fc39"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT imv_api2($1::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ JSON.stringify(Object.assign({}, (typeof $json.body === 'object' && $json.body) || {}, { ip: ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || '').split(',')[0] || '').trim() })) }}"
+    }
+   },
+   "id": "812354a9-d9e6-557a-a4bb-1de0911f2358",
+   "name": "🐘 imv_api",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    420,
+    -300
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "7b41e2f8-058d-5df8-9425-eae3d0b4f142",
+          "leftValue": "={{ $json.r && $json.r.ia === 'anuncio' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "anuncio"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "a74dfdc9-4e40-5558-910c-c3e6e43138d2",
+          "leftValue": "={{ $json.r && $json.r.ia === 'video_gerar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "video_gerar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "d7990748-8d2f-54d7-8cbc-d27850ed2025",
+          "leftValue": "={{ $json.r && $json.r.ia === 'video_guardar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "video_guardar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "6f3ffae1-0463-5645-a4b7-2c9f5db0d52e",
+          "leftValue": "={{ $json.r && $json.r.ia === 'insta_legenda' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "insta_legenda"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "e4f68c79-2c69-530f-b286-650907e9b83a",
+          "leftValue": "={{ $json.r && $json.r.ia === 'insta_postar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "insta_postar"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "resto"
+    }
+   },
+   "id": "8f2429cf-4ea4-53b5-8bbd-35eaeebe1585",
+   "name": "🔀 Precisa de trabalho extra?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    640,
+    -300
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.r || { ok: false, erro: 'Sem resposta do banco' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "8c5c0768-71e2-5261-aa3d-ab5edf40b2fd",
+   "name": "📤 Responde",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    900,
+    -520
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 3500, temperature: 0.4, messages: [{ role: 'system', content: \"Você é um corretor de imóveis experiente e copywriter. Recebe fotos (numeradas a partir de 0), dados e anotações do corretor. Escreva o anúncio em português do Brasil, vendedor mas HONESTO: só afirme o que aparece nas fotos ou foi dito. Nada de 'imperdível', 'oportunidade única' ou exageros. Devolva SOMENTE JSON: \\u007b\\\"titulo\\\":\\\"até 80 caracteres, com tipo, 1-2 diferenciais e o bairro se houver\\\",\\\"descricao\\\":\\\"3 parágrafos curtos: impressão geral; ambientes na ordem de uma visita; localização/estilo de vida e chamada para visita\\\",\\\"destaques\\\":[\\\"3 a 6 frases curtas\\\"],\\\"caracteristicas\\\":[\\\"itens curtos como Piscina, Churrasqueira, Armários planejados\\\"],\\\"tipo\\\":\\\"casa|apartamento|sobrado|cobertura|terreno|comercial|sala|galpao|chacara\\\",\\\"quartos\\\":0,\\\"suites\\\":0,\\\"banheiros\\\":0,\\\"vagas\\\":0,\\\"ordem_fotos\\\":[índices na melhor ordem para vender: fachada ou sala mais bonita primeiro, depois a sequência de uma visita],\\\"legendas\\\":\\u007b\\\"0\\\":\\\"legenda curta da foto 0\\\"\\u007d,\\\"avisos\\\":[\\\"dicas sobre as fotos: escura, torta, com bagunça, falta foto de cozinha/banheiro etc.\\\"]\\u007d. NÚMEROS: quartos, suítes, banheiros e vagas = 0 sempre que não estiver ESCRITO nos dados/anotações. Uma foto de um quarto não prova que só existe 1 quarto: nesse caso devolva 0. Nunca contradiga as anotações do corretor (se ele disse 2 vagas, são 2).\" }, { role: 'user', content: [{ type: 'text', text: 'Imobiliária: ' + $('🐘 imv_api').first().json.r.contexto.loja + ' (' + ($('🐘 imv_api').first().json.r.contexto.cidade || '') + ')\\nDados já preenchidos: ' + JSON.stringify($('🐘 imv_api').first().json.r.contexto.dados || {}) + '\\nAnotações do corretor: ' + ($('🐘 imv_api').first().json.r.contexto.notas || '(nenhuma)') + '\\nFotos: ' + $('🐘 imv_api').first().json.r.contexto.miniaturas.length }].concat($('🐘 imv_api').first().json.r.contexto.miniaturas.map((b, i) => [{ type: 'text', text: 'FOTO ' + i }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + b } }]).flat()) }] }) }}",
+    "options": {
+     "timeout": 150000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "9b54f5dc-2c6a-5d28-a7ca-db1377e0122e",
+   "name": "🤖 IA escreve o anúncio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    900,
+    -380
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '') } : { ok: false, erro: 'A IA não respondeu agora. Tente de novo.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "3ec148eb-3025-580b-a6e9-ee6a0c8ab9cd",
+   "name": "📤 Anúncio pronto",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1140,
+    -380
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/fotos_b64",
+    "options": {
+     "timeout": 120000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ fotos: $('🐘 imv_api').first().json.r.contexto.fotos }) }}"
+   },
+   "id": "b4c91235-8894-52f4-8ae6-88723228e042",
+   "name": "🛠️ Oficina recebe as fotos",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    900,
+    -230
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "url": "={{ $('🔔 API (POST)').first().json.webhookUrl.split('/webhook/')[0] }}/webhook/anuncio-video",
+    "options": {
+     "timeout": 60000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify(Object.assign({}, $('🐘 imv_api').first().json.r.contexto.pedido, { fotos: $json.ids || [] })) }}"
+   },
+   "id": "19923324-336f-5d76-bc6c-cae9581f40e4",
+   "name": "🎬 Pede o vídeo ao fluxo de anúncio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1120,
+    -230
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// O fluxo de anúncio responde {ok, link: '.../anuncio-video-ver?job=...'}: guarda o job no imóvel.\nconst c = $('🐘 imv_api').first().json.r.contexto;\nconst r = $input.first().json || {};\nconst m = String(r.link || '').match(/job=([a-z0-9-]+)/);\nif (!r.ok || !m) return [{ json: { ok: false, erro: (r.erros && r.erros.join(' ')) || r.erro || 'Não consegui pedir o vídeo agora. Tente de novo.', id: c.id, salvar: JSON.stringify({ status: 'erro', erro: 'falha ao pedir' }) } }];\nreturn [{ json: { ok: true, job: m[1], id: c.id, salvar: JSON.stringify({ status: 'gerando', job: m[1] }) } }];"
+   },
+   "id": "9a4f3de3-f3cf-51cb-b9e6-db989e7a05ce",
+   "name": "🧩 Lê o trabalho",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1340,
+    -230
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT imv_video_status($1::int, $2::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ [$json.id, $json.salvar] }}"
+    }
+   },
+   "id": "f96f9765-54a6-5876-83e5-8379a34edb53",
+   "name": "🐘 Marca 'gerando'",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1560,
+    -230
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: $('🧩 Lê o trabalho').first().json.ok, job: $('🧩 Lê o trabalho').first().json.job, erro: $('🧩 Lê o trabalho').first().json.erro }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "ebec5626-d64f-5a35-92b2-7066651255b2",
+   "name": "📤 Vídeo pedido",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1780,
+    -230
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/guardar_video",
+    "options": {
+     "timeout": 120000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ job: $('🐘 imv_api').first().json.r.contexto.job, pasta: $('🐘 imv_api').first().json.r.contexto.pasta }) }}"
+   },
+   "id": "92663b41-d11d-574b-bbc7-4a206011d185",
+   "name": "🛠️ Guarda o vídeo para sempre",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    900,
+    -80
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "const c = $('🐘 imv_api').first().json.r.contexto;\nconst g = $input.first().json || {};\nif (!g.video) return [{ json: { ok: false, id: c.id, salvar: JSON.stringify({ status: 'erro', job: c.job, erro: 'vídeo não encontrado na oficina' }) } }];\nreturn [{ json: { ok: true, id: c.id, salvar: JSON.stringify({ status: 'pronto', job: c.job, url: g.video || g.video_musica, musica: g.video_musica || null, capa: g.capa || null, pagina: c.pagina || null }) } }];"
+   },
+   "id": "ed6e441a-3448-5f9d-bef0-a231ee66cf49",
+   "name": "🧩 Monta o vídeo do imóvel",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1120,
+    -80
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT imv_video_status($1::int, $2::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ [$json.id, $json.salvar] }}"
+    }
+   },
+   "id": "5f8ab8ee-9a4b-53cc-b998-4e1bc52dd552",
+   "name": "🐘 Grava o vídeo no imóvel",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1340,
+    -80
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify({ ok: $('🧩 Monta o vídeo do imóvel').first().json.ok, erro: $('🧩 Monta o vídeo do imóvel').first().json.ok ? undefined : 'O vídeo não ficou pronto. Gere de novo.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "75a9e94b-414c-50f1-b2d9-0a506d756f4f",
+   "name": "📤 Vídeo guardado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1560,
+    -80
+   ]
+  },
+  {
+   "parameters": {
+    "path": "imoveis-img",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "49ebe1a1-38e6-5476-8e6f-43122cbcf984",
+   "name": "🔔 Foto (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    480
+   ],
+   "webhookId": "dc8609da-8c53-5973-a73b-f06168a9f8ac"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT mime, b64 FROM imv_img($1)",
+    "options": {
+     "queryReplacement": "={{ String($json.query.id || '').replace(/[^0-9a-f-]/g, '').slice(0, 36) || '0' }}"
+    }
+   },
+   "id": "a5895593-e87e-50f4-946f-05c838e451ae",
+   "name": "🐘 Lê a foto",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -200,
+    480
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "fd0dec12-6e58-58ba-9e0b-22135cd45fb5",
+       "leftValue": "={{ !!$json.b64 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "0e34413f-4e05-54fb-93da-289068108b9c",
+   "name": "🔀 Achou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    0,
+    480
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "b64",
+    "binaryPropertyName": "data",
+    "options": {
+     "mimeType": "={{ $json.mime }}",
+     "fileName": "imagem"
+    }
+   },
+   "id": "482973ba-1557-505b-8137-9058a75cee15",
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    200,
+    420
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=604800, immutable"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       },
+       {
+        "name": "Access-Control-Expose-Headers",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "56c210bb-3e8d-52f6-9a0e-585d90282d78",
+   "name": "📤 Entrega a foto",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    400,
+    420
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "não encontrada",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 404
+    }
+   },
+   "id": "bee0067c-6a9d-5fea-8454-351fdcdf743b",
+   "name": "📤 Sem foto",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    200,
+    580
+   ]
+  },
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "cronExpression",
+       "expression": "*/2 * * * *"
+      }
+     ]
+    }
+   },
+   "id": "a6e8845a-4a28-5a79-8bea-79c4bb3beaae",
+   "name": "⏰ A cada 2 minutos",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    200,
+    580
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT * FROM imv_videos_pendentes()",
+    "options": {
+     "queryReplacement": ""
+    }
+   },
+   "id": "74e12de2-1231-5159-bfcf-e582a5130d7b",
+   "name": "🐘 Vídeos pendentes",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    420,
+    580
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": false
+  },
+  {
+   "parameters": {
+    "url": "=https://webhookn8n6.inovareinteligenciaartificial.com/webhook/anuncio-video-status?job={{ $json.job }}",
+    "options": {
+     "timeout": 20000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "25432dd3-6d89-5053-9b2a-b2242af76c0d",
+   "name": "🌐 Pergunta o andamento",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    640,
+    580
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "// Junta cada imóvel pendente com o andamento do vídeo dele.\nconst pend = $('🐘 Vídeos pendentes').all().map(i => i.json);\nreturn $input.all().map((it, k) => ({ json: { ...pend[k], s: it.json || {} } }))\n  .filter(x => x.s.etapa === 'pronto' || x.s.etapa === 'erro')\n  .map(x => ({ json: { id: x.id, job: x.job, pasta: x.pasta, pagina: x.s.pagina || x.pagina || '', erro: x.s.etapa === 'erro' ? String(x.s.erro || 'falhou').slice(0, 200) : '' } }));"
+   },
+   "id": "80f36741-3f92-512c-967a-71769cb49efa",
+   "name": "🧩 Terminou?",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    860,
+    580
+   ]
+  },
+  {
+   "parameters": {
+    "url": "http://video-oficina:8000/videos/api/guardar_video",
+    "options": {
+     "timeout": 120000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    },
+    "method": "POST",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ job: $json.job, pasta: $json.pasta }) }}"
+   },
+   "id": "0a123339-eae0-58a6-aaa5-1e474219cfda",
+   "name": "🛠️ Guarda o vídeo",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1080,
+    580
+   ],
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "jsCode": "return $input.all().map((it, k) => { const x = $('🧩 Terminou?').all()[k].json, g = it.json || {};\n  const ok = !x.erro && g.video;\n  return { json: { id: x.id, salvar: JSON.stringify(ok ? { status: 'pronto', job: x.job, url: g.video || g.video_musica, musica: g.video_musica || null, capa: g.capa || null, pagina: x.pagina || null } : { status: 'erro', job: x.job, erro: x.erro || 'vídeo não encontrado' }) } }; });"
+   },
+   "id": "2d87f687-a1be-5f43-9d25-9089dd38787c",
+   "name": "🧩 Resultado",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1300,
+    580
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT imv_video_status($1::int, $2::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ [$json.id, $json.salvar] }}"
+    }
+   },
+   "id": "454eb45d-ddfd-5ca1-9a3a-07289370a148",
+   "name": "🐘 Grava no imóvel",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1520,
+    580
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 1500, temperature: 0.7, messages: [{ role: 'system', content: \"Você é social media de imobiliária. Escreva a LEGENDA de um Reel do imóvel, em português do Brasil: 1ª linha = gancho forte (até 70 caracteres, com emoji); depois 3 a 5 destaques em linhas com emoji; preço; localização (bairro/cidade); chamada para ação (\\\"chama no direct\\\" ou WhatsApp); CRECI se houver; no fim 8 a 12 hashtags (tipo de imóvel + bairro + cidade + compra/aluguel). Honesta: só o que está nos dados. Sem markdown, sem aspas. Até 1800 caracteres.\" }, { role: 'user', content: JSON.stringify(Object.assign({}, $('🐘 imv_api').first().json.r.contexto, { video: undefined, token: undefined, legenda: undefined })) }] }) }}",
+    "options": {
+     "timeout": 90000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "3f736cfd-ea92-57d7-9c88-2fa71d1f89e4",
+   "name": "🤖 IA escreve a legenda",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    900,
+    60
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '').trim() } : { ok: false, erro: 'A IA não respondeu agora.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "8ddc8580-1176-59e9-95d1-0903880dc06d",
+   "name": "📤 Legenda",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    60
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "post",
+    "operation": "createReel",
+    "reelVideoUrl": "=https://webhookn8n6.inovareinteligenciaartificial.com/videos/arquivo/{{ $('🐘 imv_api').first().json.r.contexto.video }}",
+    "reelCaption": "={{ $('🐘 imv_api').first().json.r.contexto.legenda }}"
+   },
+   "id": "5e06f48b-8fb2-51be-81de-99085925e143",
+   "name": "📸 Publica o Reel",
+   "type": "n8n-nodes-instagram-token.instagram",
+   "typeVersion": 1,
+   "position": [
+    900,
+    200
+   ],
+   "credentials": {
+    "instagramAccessTokenApi": {
+     "id": "LWfbyGDT9j3MOBGq",
+     "name": "_lucrocomia_"
+    }
+   },
+   "onError": "continueRegularOutput"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT imv_api2($1::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ JSON.stringify({ acao: 'insta_salvar', token: $('🐘 imv_api').first().json.r.contexto.token, id: $('🐘 imv_api').first().json.r.contexto.id, legenda: $('🐘 imv_api').first().json.r.contexto.legenda, post: $json.id || '' }) }}"
+    }
+   },
+   "id": "b6101919-5c39-5bf4-867f-5fa09bbe8651",
+   "name": "🐘 Guarda o post",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    1120,
+    200
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($('📸 Publica o Reel').first().json.id ? { ok: true, id: $('📸 Publica o Reel').first().json.id, link: $('📸 Publica o Reel').first().json.permalink || '' } : { ok: false, erro: 'O Instagram recusou: ' + String($('📸 Publica o Reel').first().json.error || 'sem resposta').slice(0, 200) }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "49858c44-1395-5fb1-91a5-586b28ec9f00",
+   "name": "📤 Reel publicado",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1340,
+    200
+   ]
+  }
+ ],
+ "connections": {
+  "🔔 Criar vitrine": {
+   "main": [
+    [
+     {
+      "node": "📤 Criar vitrine",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Painel administrador": {
+   "main": [
+    [
+     {
+      "node": "📤 Painel administrador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Site da vitrine": {
+   "main": [
+    [
+     {
+      "node": "📤 Site da vitrine",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Página do imóvel": {
+   "main": [
+    [
+     {
+      "node": "📤 Página do imóvel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 API (POST)": {
+   "main": [
+    [
+     {
+      "node": "🐘 imv_api",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 imv_api": {
+   "main": [
+    [
+     {
+      "node": "🔀 Precisa de trabalho extra?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Precisa de trabalho extra?": {
+   "main": [
+    [
+     {
+      "node": "🤖 IA escreve o anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🛠️ Oficina recebe as fotos",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🛠️ Guarda o vídeo para sempre",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 IA escreve a legenda",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📸 Publica o Reel",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Responde",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 IA escreve o anúncio": {
+   "main": [
+    [
+     {
+      "node": "📤 Anúncio pronto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Oficina recebe as fotos": {
+   "main": [
+    [
+     {
+      "node": "🎬 Pede o vídeo ao fluxo de anúncio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🎬 Pede o vídeo ao fluxo de anúncio": {
+   "main": [
+    [
+     {
+      "node": "🧩 Lê o trabalho",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Lê o trabalho": {
+   "main": [
+    [
+     {
+      "node": "🐘 Marca 'gerando'",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Marca 'gerando'": {
+   "main": [
+    [
+     {
+      "node": "📤 Vídeo pedido",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Guarda o vídeo para sempre": {
+   "main": [
+    [
+     {
+      "node": "🧩 Monta o vídeo do imóvel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Monta o vídeo do imóvel": {
+   "main": [
+    [
+     {
+      "node": "🐘 Grava o vídeo no imóvel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Grava o vídeo no imóvel": {
+   "main": [
+    [
+     {
+      "node": "📤 Vídeo guardado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Foto (GET)": {
+   "main": [
+    [
+     {
+      "node": "🐘 Lê a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Lê a foto": {
+   "main": [
+    [
+     {
+      "node": "🔀 Achou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Achou?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Sem foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a foto",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "⏰ A cada 2 minutos": {
+   "main": [
+    [
+     {
+      "node": "🐘 Vídeos pendentes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Vídeos pendentes": {
+   "main": [
+    [
+     {
+      "node": "🌐 Pergunta o andamento",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🌐 Pergunta o andamento": {
+   "main": [
+    [
+     {
+      "node": "🧩 Terminou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Terminou?": {
+   "main": [
+    [
+     {
+      "node": "🛠️ Guarda o vídeo",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🛠️ Guarda o vídeo": {
+   "main": [
+    [
+     {
+      "node": "🧩 Resultado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Resultado": {
+   "main": [
+    [
+     {
+      "node": "🐘 Grava no imóvel",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 IA escreve a legenda": {
+   "main": [
+    [
+     {
+      "node": "📤 Legenda",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "📸 Publica o Reel": {
+   "main": [
+    [
+     {
+      "node": "🐘 Guarda o post",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Guarda o post": {
+   "main": [
+    [
+     {
+      "node": "📤 Reel publicado",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 600,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

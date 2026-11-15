@@ -19,7 +19,8 @@
   "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
   "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
   "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
-  "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS')."
+  "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS').",
+  "Se o vídeo mostrar especialista ou apresentadora mulher, nunca use sujeito masculino ('ELE') no título: foque direto no tema ou problema da cena sem atribuir gênero."
  ],
  "tarja_largura_max": 0.8,
  "tarja_letra": 0.62,
@@ -948,6 +949,31 @@
     "Se uma expressão ouvida soar errada em português, use a forma correta: 'no fim das contas', não 'os das contas'; 'se der sorte', não 'de sorte'. Releia cada frase como fala natural."
    ],
    "porque": "Ouvido errado virou erro de português na legenda em 2 Shorts: sem-obra-58d8af q13 ('OS DAS CONTAS') e sem-obra-3cda55 q12 ('DE SORTE'). É defeito de CERTEZA. A regra 6 só cobre termos absurdos para a cena, não expressões plausíveis mas erradas. A lista tem 9 de 10 itens, então cabe sem remover nada."
+  },
+  {
+   "em": "2026-11-15T02:27",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
+    "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS')."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
+    "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS').",
+    "Se o vídeo mostrar especialista ou apresentadora mulher, nunca use sujeito masculino ('ELE') no título: foque direto no tema ou problema da cena sem atribuir gênero."
+   ],
+   "porque": "Em sem-obra-d1fe57 (q01: 'ELE PASSOU MAL' com a especialista Tatiana Zanin na tela) e sem-obra-57b857 (q01: 'ELE TENTOU CRIAR um NEGÓCIO' com apresentadora mulher em todo o vídeo), o título usou 'ELE' contradizendo a imagem."
   }
  ]
 }

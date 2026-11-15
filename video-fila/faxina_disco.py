@@ -22,6 +22,8 @@ O vigia geral chama 1x por dia (SUBVIGIAS "faxina_disco", 4 h).
 """
 import os
 import shutil
+import json
+import re
 import subprocess
 import sys
 import time
@@ -184,8 +186,64 @@ def upscale_de_postados(simular=False):
     return total
 
 
+def longos_que_falharam(simular=False, horas=6):
+    r"""15/11 (disco foi a 1,7 GB): longo cujo ENVIO falhou deixa o vídeo de 4-8 GB em DOIS lugares — o
+    _longos_postar\<ficha>\final_anime_deitado.mp4 e a pasta de postagem animes recap\videos laterais\<x>\video.mp4 —
+    e são o MESMO arquivo (link físico): apagar só um não libera nada. Pasta de postagem de longo com vídeo > 1 GB,
+    NÃO postada (sem posted_url e fora do uploads_ledger), parada há > `horas` e sem envio rodando = o vídeo sai dos
+    dois lugares (o original segue no Drive; o postar_longos baixa de novo na vez). FAXINA_LONGOS_FALHOS=0 desliga."""
+    if os.environ.get("FAXINA_LONGOS_FALHOS", "1") == "0":
+        return 0
+    lat = Path(r"D:\hipercool-materiais\animes recap\videos laterais")
+    postar = Path(r"D:\hipercool-materiais\_longos_postar")
+    try:
+        ledger = Path(r"D:\postador-de-videos\logs\uploads_ledger.jsonl").read_text("utf-8", "replace")
+    except OSError:
+        return 0
+    try:
+        enviando = subprocess.run(["powershell", "-NoProfile", "-c",
+                                   "Get-CimInstance Win32_Process -Filter \"Name like 'python%'\" | "
+                                   "? CommandLine -match 'youtube_web_poster' | % CommandLine"],
+                                  capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60,
+                                  creationflags=0x08000000).stdout
+    except Exception:  # noqa: BLE001
+        return 0  # sem saber o que está subindo, não apaga nada
+    if enviando is None:
+        return 0
+    lim, total = time.time() - horas * 3600, 0
+    for v in lat.glob("*/video.mp4"):
+        try:
+            st = v.stat()
+            if st.st_size < 1e9 or st.st_mtime > lim or v.parent.name in ledger or str(v.parent) in enviando:
+                continue
+            # mesmo arquivo (link físico) usado por um envio que roda com OUTRA pasta = pula
+            usados = [Path(m) for m in re.findall(r'--video "([^"]+)"', enviando)]
+            if any(u.exists() and u.stat().st_size == st.st_size and abs(u.stat().st_mtime - st.st_mtime) < 5
+                   for u in usados):
+                continue
+            d = json.loads((v.parent / "postar.json").read_text("utf-8"))
+            if d.get("posted_url") or d.get("tipo") != "completo":
+                continue
+        except (OSError, ValueError):
+            continue
+        irmaos = [f for f in postar.glob("*/final_anime_deitado.mp4") if f.stat().st_size == st.st_size
+                  and abs(f.stat().st_mtime - st.st_mtime) < 5 and str(f.parent.name) not in enviando]
+        if not simular:
+            for f in [v, *irmaos]:
+                try:
+                    f.unlink()
+                except OSError:
+                    pass
+        total += st.st_size
+        log(f"longo que falhou: {v.parent.name} ({st.st_size / 1e9:.1f} GB, +{len(irmaos)} cópia(s) ligada(s))")
+    return total
+
+
 def main(simular=False):
     total = 0
+    l = longos_que_falharam(simular)
+    log(f"longos com envio falho (vídeo preso em 2 lugares): {l / 1e9:.1f} GB")
+    total += l
     l, pul = cache_chrome(CHROME_UD, simular)
     log(f"cache do Chrome normal: {l / 1e9:.1f} GB ({pul} pasta(s) de perfil aberto puladas)")
     total += l

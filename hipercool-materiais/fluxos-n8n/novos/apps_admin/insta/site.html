@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Site</title>
+<style>__CSS__
+.hero{background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 45%,#000));color:#fff;padding:36px 16px 30px}
+.hero .in{max-width:1100px;margin:0 auto}.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.1}.hero p{opacity:.92;margin-top:10px;max-width:640px;font-size:17px}
+.hero .btn{margin-top:18px;background:#fff;color:#111;border:0}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+.sec{font-size:22px;font-weight:800;margin:28px 0 12px}
+.cat{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.cat button{border:1px solid var(--borda);background:var(--sup);border-radius:99px;padding:7px 14px;cursor:pointer;font-weight:600}.cat button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.pr{background:var(--sup);border:1px solid var(--borda);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.pr .ft{aspect-ratio:1;background:var(--sup2) center/cover}.pr .cp{padding:12px;flex:1;display:flex;flex-direction:column;gap:4px}
+.pr .vl{font-weight:800;color:var(--pri);font-size:18px}.pr .btn{margin-top:auto}
+.dif{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}.dif>div{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:14px}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.galeria a{aspect-ratio:1;background:var(--sup2) center/cover;border-radius:8px}
+.zap{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.25);text-decoration:none}
+.faq details{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:12px 14px;margin-bottom:8px}.faq summary{font-weight:700;cursor:pointer}
+</style></head><body><div id="app"><div class="vazio">Carregando…</div></div>
+<script>
+const API = location.origin + '/webhook/insta-api';
+__BASE__
+const CT = new URLSearchParams(location.search).get('c');
+(async () => {
+  const j = await api('site_publico', { conta: CT }); if (!j.ok) return $('#app').innerHTML = `<div class="vazio" style="padding-top:20vh"><h2>${esc(j.erro)}</h2></div>`;
+  const s = j.site; document.documentElement.style.setProperty('--pri', s.cor || '#C13584'); document.title = s.nome;
+  const zap = t => j.whatsapp ? `https://wa.me/${j.whatsapp.length <= 11 ? '55' + j.whatsapp : j.whatsapp}?text=${encodeURIComponent(t)}` : `https://instagram.com/${j.username}`;
+  const cats = [...new Set((s.produtos || []).map(p => p.categoria).filter(Boolean))];
+  $('#app').innerHTML = `<div class="hero"><div class="in"><div class="pq" style="opacity:.85">@${esc(j.username)}</div><h1>${esc(s.titulo || s.nome)}</h1><p>${esc(s.subtitulo || '')}</p>
+      <a class="btn" href="${zap(s.cta_mensagem || 'Olá! Vim pelo site.')}" target="_blank" rel="noopener" data-z>💬 ${esc(s.cta || 'Falar no WhatsApp')}</a></div></div>
+    <main>${s.sobre ? `<div class="sec">Quem somos</div><p style="font-size:17px;color:var(--tx2);max-width:760px">${esc(s.sobre)}</p>` : ''}
+    ${(s.diferenciais || []).length ? `<div class="sec">Por que escolher a gente</div><div class="dif">${s.diferenciais.map(d => `<div><div style="font-size:26px">${esc(d.icone || '✨')}</div><b>${esc(d.titulo)}</b><div class="mu pq">${esc(d.texto || '')}</div></div>`).join('')}</div>` : ''}
+    ${(s.produtos || []).length ? `<div class="sec">${esc(s.titulo_catalogo || 'Nossos produtos')}</div>${cats.length > 1 ? `<div class="cat"><button class="on" data-c="">Tudo</button>${cats.map(c => `<button data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>` : ''}<div class="grade" id="gr"></div>` : ''}
+    ${(s.faq || []).length ? `<div class="sec">Perguntas frequentes</div><div class="faq">${s.faq.map(f => `<details><summary>${esc(f.pergunta)}</summary><p class="mu" style="margin-top:6px">${esc(f.resposta)}</p></details>`).join('')}</div>` : ''}
+    ${(s.galeria || []).length ? `<div class="sec">No Instagram</div><div class="galeria">${s.galeria.map(g => `<a href="${esc(g.link)}" target="_blank" rel="noopener" style="background-image:url('${esc(g.img)}')"></a>`).join('')}</div>` : ''}
+    <p class="mu pq" style="text-align:center;margin-top:40px">${esc(s.nome)} · <a href="https://instagram.com/${esc(j.username)}" target="_blank">@${esc(j.username)}</a>${s.cidade ? ' · ' + esc(s.cidade) : ''}</p></main>
+    <a class="zap" href="${zap('Olá! Vim pelo site.')}" target="_blank" rel="noopener" data-z>💬</a>`;
+  const lista = c => { $('#gr').innerHTML = s.produtos.filter(p => !c || p.categoria === c).map(p => `<div class="pr"><div class="ft" style="background-image:url('${esc(p.img || '')}')"></div><div class="cp">
+      <b>${esc(p.nome)}</b><div class="mu pq">${esc(p.descricao || '')}</div>${p.preco ? `<div class="vl">${esc(p.preco)}</div>` : ''}
+      <a class="btn pri pq" href="${zap('Olá! Tenho interesse em: ' + p.nome)}" target="_blank" rel="noopener" data-z>Quero este</a></div></div>`).join(''); bind(); };
+  const bind = () => $$('[data-z]').forEach(a => a.onclick = () => api('site_clique', { conta: CT }, 1));
+  if ($('#gr')) lista(''); else bind();
+  $$('[data-c]').forEach(b => b.onclick = () => { $$('[data-c]').forEach(x => x.classList.toggle('on', x === b)); lista(b.dataset.c); });
+})();
+</script></body></html>

@@ -1,3 +1,137 @@
 {
- "pautas": []
+ "pautas": [
+  {
+   "id": "dor_mensagem_madrugada",
+   "tipo": "dor",
+   "ideia": "Um cliente manda mensagem tarde da noite querendo comprar e o bot com todo o conhecimento da loja atende e recomenda o item certo na hora.",
+   "pergunta_cliente": "Ele responde os clientes mesmo quando eu estiver dormindo?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "objecao_bot_generico",
+   "tipo": "objecao",
+   "ideia": "O lojista acha que atendentes virtuais dão respostas vagas, mas a Vitrine IA é um bot que conhece os produtos da sua loja para atender com precisão.",
+   "pergunta_cliente": "Ele realmente vai saber os detalhes do que eu vendo?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "como_funciona_treino",
+   "tipo": "como_funciona",
+   "ideia": "O sistema absorve as informações do seu catálogo para se tornar um bot com todo o conhecimento da sua loja que atende, recomenda e vende.",
+   "pergunta_cliente": "Como o bot aprende sobre os produtos da minha loja?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "caso_de_uso_duvida_tecnica",
+   "tipo": "caso_de_uso",
+   "ideia": "Um comprador pergunta se determinado produto serve para o caso dele e o bot com conhecimento dos produtos atende e tira a dúvida na hora.",
+   "pergunta_cliente": "Ele consegue explicar para que serve cada produto?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "pergunta_frequente_recomendaca",
+   "tipo": "pergunta_frequente",
+   "ideia": "Entenda como a Vitrine IA funciona na prática sendo um bot com todo o conhecimento da sua loja que recomenda opções ideais para cada cliente.",
+   "pergunta_cliente": "O bot consegue sugerir outros produtos para quem está indeciso?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "antes_depois_demora_venda",
+   "tipo": "antes_depois",
+   "ideia": "Antes você perdia vendas por demorar a responder no chat, agora o bot com conhecimento dos produtos da loja atende e vende imediatamente.",
+   "pergunta_cliente": "Vou parar de perder cliente por demora no atendimento?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "dor_perguntas_repetitivas",
+   "tipo": "dor",
+   "ideia": "Passar o dia inteiro respondendo as mesmas dúvidas sobre produtos cansa, mas o bot que conhece seus produtos assume esse atendimento por você.",
+   "pergunta_cliente": "Ele pode responder as perguntas repetidas dos clientes sobre os produtos?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "objecao_fechar_venda",
+   "tipo": "objecao",
+   "ideia": "Muitos acham que robô só passa recado, mas este é um bot com todo o conhecimento da sua loja que atende, recomenda e vende.",
+   "pergunta_cliente": "O bot realmente ajuda a fechar a venda?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "caso_de_uso_cliente_indeciso",
+   "tipo": "caso_de_uso",
+   "ideia": "Um cliente chega sem saber exatamente o que levar e o bot com conhecimento dos produtos atende e recomenda a melhor escolha.",
+   "pergunta_cliente": "Se o cliente não souber o que quer, ele ajuda a escolher?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "como_funciona_atendimento",
+   "tipo": "como_funciona",
+   "ideia": "A Vitrine IA atua como um bot com conhecimento dos produtos da loja para atender e tirar dúvidas sem você precisar digitar tudo do zero.",
+   "pergunta_cliente": "Como ele faz para atender no meu lugar?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "dor_perder_venda_ocupado",
+   "tipo": "dor",
+   "ideia": "Você não consegue atender no chat porque está cuidando da operação, enquanto o bot que conhece seus produtos atende e vende sozinho.",
+   "pergunta_cliente": "Consigo deixar o atendimento com ele enquanto cuido da loja?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "pergunta_frequente_catalogo_am",
+   "tipo": "pergunta_frequente",
+   "ideia": "Mesmo para lojas com variedade de itens, o bot com todo o conhecimento da sua loja atende e recomenda com base no que você oferece.",
+   "pergunta_cliente": "Ele consegue gravar as informações de muitos produtos?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "caso_de_uso_horario_pico",
+   "tipo": "caso_de_uso",
+   "ideia": "Várias pessoas chamam ao mesmo tempo querendo saber sobre itens da loja e o bot com todo o conhecimento da loja atende todas sem fila.",
+   "pergunta_cliente": "Ele atende várias pessoas ao mesmo tempo falando dos produtos?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "objecao_recomendar_certo",
+   "tipo": "objecao",
+   "ideia": "O lojista teme recomendações erradas, mas o sistema é um bot que conhece seus produtos para sugerir o item adequado.",
+   "pergunta_cliente": "Ele não vai indicar o produto errado para o cliente?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "dor_fim_de_semana",
+   "tipo": "dor",
+   "ideia": "Mensagens de clientes chegam no fim de semana e o bot com todo o conhecimento da sua loja atende, recomenda e vende sem você parar o descanso.",
+   "pergunta_cliente": "Minha loja continua vendendo no final de semana com o bot?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "como_funciona_venda_guiada",
+   "tipo": "como_funciona",
+   "ideia": "Veja como a ferramenta atua sendo um bot que conhece seus produtos, conversando com o cliente para atender e conduzir até a venda.",
+   "pergunta_cliente": "Como o bot conduz a conversa até o cliente comprar?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "pergunta_frequente_tudo_sobre",
+   "tipo": "pergunta_frequente",
+   "ideia": "Esclarecimento sobre a capacidade da ferramenta de ser um bot com todo o conhecimento da sua loja para atender os clientes no dia a dia.",
+   "pergunta_cliente": "O bot aprende exatamente o que a minha loja oferece?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "antes_depois_cliente_sem_respo",
+   "tipo": "antes_depois",
+   "ideia": "Antes o cliente desistia por falta de retorno rápido, agora o bot com conhecimento dos produtos da loja atende na hora e recomenda o produto.",
+   "pergunta_cliente": "O cliente vai ser atendido na hora que chamar?",
+   "criada": "2026-11-15T02:39:05"
+  },
+  {
+   "id": "caso_de_uso_comparacao_produto",
+   "tipo": "caso_de_uso",
+   "ideia": "Um cliente quer saber a diferença entre dois itens da loja e o bot que conhece seus produtos atende e recomenda a melhor opção.",
+   "pergunta_cliente": "Ele sabe explicar a diferença entre um produto e outro da minha loja?",
+   "criada": "2026-11-15T02:39:05"
+  }
+ ]
 }

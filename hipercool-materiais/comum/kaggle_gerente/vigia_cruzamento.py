@@ -81,6 +81,38 @@ def main():
         s = str(c.get("cofre") or "").split("@")[0].lower()
         if s and usos.get(s):
             achados.append(f"NO FLOW: {c['username']} ({s}) gerou {usos[s]} imagens em 7 dias por IPs de casa")
+    # 5. (14/11, 3º banimento) canal de conta VIVA do Kaggle que subiu por HTTP SEM passar pelo IP fixo — o upload HTTP
+    #    saía de casa. Desde 14/11 23h30 cada envio dessas contas grava "HTTP pelo IP fixo dela" antes do "subiu por HTTP".
+    try:
+        mapa = json.loads(Path(r"D:\gemini-argo\youtube_canais_http.json").read_text("utf-8")) \
+            if Path(r"D:\gemini-argo\youtube_canais_http.json").exists() else {}
+    except (OSError, ValueError):
+        mapa = {}
+    try:
+        sys.path.append(r"D:\gemini-argo")
+        import youtube_http as _yh
+        slug_email = {s: str(v.get("email") or "").lower() for s, v in _yh._mapa().items()}
+    except Exception:  # noqa: BLE001
+        slug_email = {}
+    viv_mail = {str(c.get("cofre") or "").lower(): c["username"] for c in vivas}
+    try:
+        linhas = Path(r"D:\postador-de-videos\logs\youtube_http.log").read_text("utf-8", "ignore").splitlines()[-4000:]
+    except OSError:
+        linhas = []
+    hoje, ontem = datetime.now().strftime("%d/%m"), datetime.fromtimestamp(time.time() - 86400).strftime("%d/%m")
+    fixo = set()
+    sem_fixo = defaultdict(int)
+    for ln in linhas:
+        if not ln.startswith((f"[{hoje}", f"[{ontem}")):
+            continue
+        s = ln.split("] ", 1)[-1].split(":", 1)[0]
+        if "HTTP pelo IP fixo dela" in ln:
+            fixo.add(s)
+        elif "subiu por HTTP" in ln and viv_mail.get(slug_email.get(s, "")) and s not in fixo:
+            sem_fixo[s] += 1
+    for s, n in sem_fixo.items():
+        achados.append(f"HTTP DE CASA: canal {s} (conta viva do Kaggle {viv_mail[slug_email[s]]}) subiu {n} vídeo(s) "
+                       f"por HTTP sem o IP fixo em 48 h")
     texto = (f"# Vigia de cruzamento do Kaggle — {datetime.now():%d/%m/%Y %H:%M}\n\n"
              f"{len(vivas)} contas vivas, {len(banidas)} banidas. Só leitura de arquivos.\n\n"
              + ("\n".join(f"- {a}" for a in achados) if achados else "- nada encontrado") + "\n")

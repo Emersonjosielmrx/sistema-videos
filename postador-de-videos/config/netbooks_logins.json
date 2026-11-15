@@ -34,6 +34,11 @@
     },
     "hp": {
       "google": true,
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "google": true,
       "youtube": true
     }
   },
@@ -182,7 +187,8 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
     },
     "asus": {
       "youtube": false
@@ -219,10 +225,12 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
     },
     "asus": {
-      "youtube": false
+      "youtube": true,
+      "google": true
     }
   },
   "inovaremanhwaversehindi": {
@@ -257,7 +265,8 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
     },
     "asus": {
       "google": true,
@@ -295,7 +304,8 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
     },
     "asus": {
       "google": true,
@@ -334,6 +344,11 @@
     },
     "hp": {
       "google": true,
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "google": true,
       "youtube": true
     }
   },
@@ -368,7 +383,13 @@
       "tiktok": true
     },
     "hp": {
-      "youtube": false
+      "youtube": true,
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": true,
+      "google": true
     }
   },
   "inovaremanhwaverseesp": {
@@ -401,6 +422,10 @@
       "tiktok": true
     },
     "hp": {
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -436,7 +461,12 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": true,
+      "google": true
     }
   },
   "inovaremanhwaverseing": {
@@ -471,7 +501,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "inovaremanhwaverse": {
@@ -506,7 +540,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "inovaremanhwabr": {
@@ -540,7 +578,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "mentoriaiapro": {
@@ -576,6 +618,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "google": true
     }
   },
   "jogoscomia": {
@@ -608,6 +653,10 @@
       "tiktok": true
     },
     "hp": {
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -641,7 +690,11 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "jornalcomia": {
@@ -676,6 +729,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "google": true
     }
   },
   "canalhistoriacomia": {
@@ -710,6 +766,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "aulacomia": {
@@ -742,6 +801,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "gameoftroneskingsroadbrasil": {
@@ -771,6 +833,10 @@
     },
     "hp": {
       "youtube": false,
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -804,6 +870,11 @@
     },
     "hp": {
       "google": true,
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "google": true,
       "youtube": true
     }
   },
@@ -833,6 +904,9 @@
     "hp": {
       "youtube": false,
       "google": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "en1653964": {
@@ -864,6 +938,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "vendeafiliados3": {
@@ -892,7 +969,11 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "comoseriasecomia": {
@@ -923,6 +1004,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "rezaulkarimul355": {
@@ -952,6 +1036,11 @@
       "tiktok": true
     },
     "hp": {
+      "youtube": true,
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "youtube": false
     }
   },
@@ -983,7 +1072,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "simonerebecaluizasilva": {
@@ -1042,6 +1135,11 @@
     },
     "hp": {
       "google": true,
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "google": true,
       "youtube": true
     }
   },
@@ -1072,6 +1170,10 @@
     },
     "hp": {
       "google": true,
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
       "youtube": true
     }
   },
@@ -1104,6 +1206,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "emersongencshin": {
@@ -1134,6 +1239,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "solarmundo195": {
@@ -1163,7 +1271,11 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "revolutionemerson3": {
@@ -1225,7 +1337,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "inovaremanhwaverse2": {
@@ -1282,6 +1398,10 @@
       "tiktok": true
     },
     "hp": {
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -1369,7 +1489,11 @@
     },
     "hp": {
       "youtube": false,
-      "google": true
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "aulasrevolution": {
@@ -1426,6 +1550,10 @@
       "tiktok": true
     },
     "hp": {
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -1456,6 +1584,10 @@
     },
     "hp": {
       "youtube": false,
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -1489,6 +1621,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "inovaremultiatendimento": {
@@ -1520,6 +1655,9 @@
     "hp": {
       "google": true,
       "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "emersonjosiel1995": {
@@ -1550,6 +1688,9 @@
     },
     "hp": {
       "youtube": false
+    },
+    "asus": {
+      "google": true
     }
   },
   "fabricadeautomacoes0": {
@@ -1579,7 +1720,11 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "emersonjosiel649": {
@@ -1608,6 +1753,10 @@
       "tiktok": true
     },
     "hp": {
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -1637,7 +1786,11 @@
       "tiktok": true
     },
     "hp": {
-      "google": true
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "emersonjosiel2030": {
@@ -1672,7 +1825,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "maiteanajessicajesus": {
@@ -1702,7 +1859,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "gabriellyvitoriaisabelaaraujo": {
@@ -1761,7 +1922,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "emersonjosiel2031": {
@@ -1796,6 +1961,10 @@
     },
     "hp": {
       "youtube": true,
+      "google": true,
+      "tiktok": true
+    },
+    "asus": {
       "google": true
     }
   },
@@ -1829,6 +1998,11 @@
     },
     "hp": {
       "google": true,
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "google": true,
       "youtube": true
     }
   },
@@ -1859,7 +2033,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "empressinovare": {
@@ -1891,7 +2069,11 @@
     },
     "hp": {
       "google": true,
-      "youtube": true
+      "youtube": true,
+      "tiktok": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "ig__lucrocomia_": {
@@ -1924,6 +2106,9 @@
     },
     "hp": {
       "google": true
+    },
+    "asus": {
+      "youtube": false
     }
   },
   "emersonjosiel02": {

@@ -219,12 +219,58 @@ def _abrir():
     if not exe:
         log("sem Chrome no PC2")
         return
-    subprocess.Popen([str(exe), f"--user-data-dir={PERFIL}", "--kiosk", f"--app={URL}", "--no-first-run",
+    # 14/11 dona ("deixe o telão rodar mas por baixo: quando não houver nada rodando aí ele aparece"): sem --kiosk
+    # (tela cheia por cima de tudo); janela maximizada que _pro_fundo() manda pro fundo. TELAO_POR_CIMA=1 volta.
+    modo = ["--kiosk"] if os.environ.get("TELAO_POR_CIMA") == "1" else ["--start-maximized"]
+    subprocess.Popen([str(exe), f"--user-data-dir={PERFIL}", *modo, f"--app={URL}", "--no-first-run",
                       "--no-default-browser-check", "--disable-extensions", "--disable-sync", "--mute-audio",
                       "--disable-features=Translate,MediaRouter,OptimizationHints", "--renderer-process-limit=1",
                       "--disable-background-networking", "--lang=pt-BR", "--password-store=basic"],
                      creationflags=ABAIXO_DO_NORMAL | 0x00000008)  # DETACHED_PROCESS
     log("telão aberto")
+
+
+def _pro_fundo(pids):
+    """14/11: manda as janelas do Chrome do telão pro FUNDO (HWND_BOTTOM, sem ativar) — qualquer janela de trabalho
+    (Flow, upload, render) fica por cima; sem nada aberto, o telão é o que aparece."""
+    if os.environ.get("TELAO_POR_CIMA") == "1" or not pids:
+        return
+    u = ctypes.windll.user32
+    alvo = set(pids)
+    achadas = []
+
+    @ctypes.WINFUNCTYPE(ctypes.c_bool, ctypes.c_void_p, ctypes.c_void_p)
+    def cada(hwnd, _):
+        pid = ctypes.c_ulong()
+        u.GetWindowThreadProcessId(ctypes.c_void_p(hwnd), ctypes.byref(pid))
+        if pid.value in alvo and u.IsWindowVisible(ctypes.c_void_p(hwnd)):
+            achadas.append(hwnd)
+        return True
+    u.EnumWindows(cada, 0)
+    for h in achadas:  # HWND_BOTTOM=1; SWP_NOSIZE|SWP_NOMOVE|SWP_NOACTIVATE = 0x13
+        u.SetWindowPos(ctypes.c_void_p(h), ctypes.c_void_p(1), 0, 0, 0, 0, 0x13)
+
+
+ABRIR = PASTA / "abrir.txt"  # 14/11: o PC1 escreve aqui a URL de um vídeo pedido no painel público (Tab)
+
+
+def _abrir_pedido():
+    """14/11 dona ("quando clico em abrir um longo no telão do Tab, deve abrir num dos PCs pra eu assistir, de
+    preferência no desktop"): abrir.txt com uma URL do YouTube -> abre num Chrome em tela cheia (perfil próprio do
+    telão, sem conta), POR CIMA; apaga o arquivo. Fechar o vídeo = Alt+F4, o telão continua por baixo."""
+    try:
+        url = ABRIR.read_text("utf-8").strip().splitlines()[0]
+        ABRIR.unlink()
+    except (OSError, IndexError):
+        return
+    if not url.startswith(("https://www.youtube.com/", "https://youtu.be/")):
+        return
+    exe = next((c for c in CHROMES if c.exists()), None)
+    if exe:
+        subprocess.Popen([str(exe), f"--user-data-dir={PASTA / 'perfil_video'}", "--start-fullscreen", "--new-window",
+                          "--autoplay-policy=no-user-gesture-required", "--no-first-run", url],
+                         creationflags=0x00000008)
+        log(f"pedido do painel: abrindo {url}")
 
 
 def _em_login():
@@ -242,8 +288,11 @@ def main():
     threading.Thread(target=saude, daemon=True).start()
     log(f"telao_win iniciado ({MAQUINA})")
     parado, ultimo = None, 0.0
+    _fundo = [0.0]
     while True:
         try:
+            if ABRIR.exists():
+                _abrir_pedido()
             parar = DESLIGADO.exists() or _em_login() or bool(_saude.get("camera"))
             _saude["parado"] = parar
             # o PowerShell do PC2 é lento: confere o Chrome só quando muda o estado ou a cada 1 min
@@ -258,6 +307,12 @@ def main():
                                        creationflags=0x08000000)
                 elif not pids and (PASTA / "painel.html").exists():
                     _abrir()
+                    _fundo[0] = time.time() - 50  # recém-aberto: manda pro fundo daqui a ~10 s
+                else:
+                    _pro_fundo(pids)
+            elif not parar and _fundo[0] and time.time() - _fundo[0] >= 60:
+                _fundo[0] = 0.0
+                _pro_fundo(_chrome_aberto())
         except Exception as e:  # noqa: BLE001 — o laço nunca morre
             log(f"erro: {type(e).__name__}: {e}")
         time.sleep(5)

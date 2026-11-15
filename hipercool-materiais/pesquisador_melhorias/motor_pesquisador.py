@@ -387,8 +387,13 @@ def entregar_pendentes():
                     "reprovar dono/repo \"motivo\" <linha>` (vira aprendizado do motor).\n"
                     "Item com [USA em ...] já existe no nosso código: só olhe se trouxer versão/ideia nova.\n",
                     encoding="utf-8")
+            # 14/11 (chat LONGOS): bloco sem nenhum item aproveitável já nasce AVALIADO — antes virava PENDENTE e o
+            # cobrador cobrava o chat da linha de hora em hora só pra marcar "0/0/0". MOTOR_VAZIO_PENDENTE=1 volta.
+            vazio_ok = not bons and os.environ.get("MOTOR_VAZIO_PENDENTE") != "1"
+            marca = (f"[x] AVALIADO {time.strftime('%d/%m')} (automático: nada aproveitável)" if vazio_ok
+                     else "[ ] PENDENTE")
             with open(arq, "a", encoding="utf-8") as f:
-                f.write(f"\n## [ ] PENDENTE — {cab}\n{bruta}\n" + ("\n".join(bons) if bons else
+                f.write(f"\n## {marca} — {cab}\n{bruta}\n" + ("\n".join(bons) if bons else
                         "- (todos os itens desta pesquisa foram reprovados)") + "\n")
         feitas.add(cab)
         novas += 1

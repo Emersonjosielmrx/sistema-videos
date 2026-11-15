@@ -51,11 +51,13 @@ def registrar(cred, vid, pasta, params, publicar):
     gravar(fila)
 
 
-def _studio(cred, vid, *args, timeout=1800):
+def _studio(cred, vid, *args, timeout=1800, maquina=None):
     # 07/11 (-gprBunwSXQ): ID que começa com "-" virava opção no argparse ("--video: expected one argument")
+    # 14/11 (JesjRW5uBR0 abriu SEM capa: 3 timeouts de 90 s no Acer/HP): maquina= força a máquina (YT_MAQUINA)
+    env = dict(os.environ, **({"YT_MAQUINA": maquina, "MAQUINA_VEZ_DE": "veo"} if maquina else {}))
     r = subprocess.run([PY_EXTRAS, EXTRAS, "--canal", cred, f"--video={vid}", *args], capture_output=True, text=True,
                        encoding="utf-8", errors="replace", timeout=timeout, cwd=str(Path(EXTRAS).parent),
-                       creationflags=0x08000000)
+                       creationflags=0x08000000, env=env)
     res = [l for l in (r.stdout + r.stderr).splitlines() if "RESULTADO" in l]
     return res[-1][:200] if res else (r.stdout + r.stderr)[-200:]
 
@@ -135,6 +137,17 @@ def um(item):
             log(f"{item['vid']}: canal com recursos avançados BLOQUEADOS — capa de vídeo publicado não troca; "
                 f"para de tentar até o bloqueio vencer (recursos_negados.json)")
             return False
+        # 14/11 (JesjRW5uBR0): capa PRONTA e o Studio lento no notebook (timeout) — tenta já pelo desktop (o mais rápido;
+        # aplicou em 30 s). CAPA_STUDIO_RESERVA= (vazio) desliga; outro nome troca a máquina.
+        reserva = os.environ.get("CAPA_STUDIO_RESERVA", "desktop")
+        if reserva and re.search(r"Timeout|não abriu|nao abriu", res):
+            res = _studio(item["canal"], item["vid"], "--capa", str(capa), maquina=reserva)
+            log(f"{item['vid']}: de novo pelo {reserva}: {res}")
+            if re.search(r'"capa": "(enviada|ja)', res):
+                if item.get("publicar"):
+                    log(f"{item['vid']}: público: {_studio(item['canal'], item['vid'], '--visibilidade', 'public')}")
+                return True
+        item["capa_pronta"] = True  # só o Studio falhou: _fechar_item não desiste em 3 (CAPA_MAX_REFEITA)
         log(f"{item['vid']}: Studio NÃO confirmou a capa — tenta de novo na próxima rodada")
         return False
     if item.get("publicar"):
@@ -299,7 +312,8 @@ def _fechar_item(item, feito):
                     x["estado"] = "feito"
                 # 12/11: refeita (capa antiga já no ar) caía em sem_capa a cada 3 rodadas só porque o Flow estava sem
                 # máquina; ela tem folga de CAPA_MAX_REFEITA (12) e não avisa no Telegram
-                elif x["tentativas"] >= (int(os.environ.get("CAPA_MAX_REFEITA", "12")) if x.get("refazer")
+                elif x["tentativas"] >= (int(os.environ.get("CAPA_MAX_REFEITA", "12"))
+                                         if x.get("refazer") or item.get("capa_pronta")  # 14/11: só o Studio falhou
                                          else CAPA_MAX_TENTATIVAS):
                     x["estado"] = "sem_capa"
                     try:

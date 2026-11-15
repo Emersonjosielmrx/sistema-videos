@@ -2682,3 +2682,17 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - fofos_e_absurdo_20261104_081307_intro.mp4
   - fofos_e_absurdo_20261104_081307_prop.mp4
   - fofos_e_absurdo_20261104_081307_punch.mp4
+
+## 2026-11-14 17:15 — 51 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (51 MB) — 10 arquivos:
+  - cerebro_digital_20261106_112855_final.mp4
+  - cerebro_digital_20261106_112855_imp.mp4
+  - cerebro_digital_20261106_112855_intro.mp4
+  - cerebro_digital_20261106_112855_prop.mp4
+  - cerebro_digital_20261106_112855_punch.mp4
+  - e_se..._20261112_150509_final.mp4
+  - e_se..._20261112_150509_imp.mp4
+  - e_se..._20261112_150509_intro.mp4
+  - e_se..._20261112_150509_prop.mp4
+  - e_se..._20261112_150509_punch.mp4

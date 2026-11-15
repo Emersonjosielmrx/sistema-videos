@@ -125,6 +125,10 @@ def sessao(e):
     from contextlib import nullcontext
     from playwright.sync_api import sync_playwright
     proc, rem = None, None
+    # 14/11 (capa do JesjRW5uBR0 estourou 90 s 3x nos notebooks lentos): YT_MAQUINA=desktop força a máquina, como no upload
+    import os as _os
+    if _os.environ.get("YT_MAQUINA") and e.get("perfil_remoto"):
+        e = dict(e, maquina=[_os.environ["YT_MAQUINA"]])
     if e.get("maquina"):  # 22/10 (dono): canal ativado nos notebooks confere/edita pelo Chrome de lá; fora = aqui
         import maquina_remota
         rem = maquina_remota.tentar(e["maquina"], e.get("perfil_remoto"), log_fn=log)
@@ -627,6 +631,38 @@ def _comentar_fixar(pg, vid, texto):
     if re.search(r"Fixado por|Pinned by", meu.inner_text(), re.I):
         return "ok"
     return "aviso: cliquei em fixar, mas o comentário não mostra 'Fixado por' (ver print comentario_fixado)"
+
+
+# ─────────────────────────── "Sobre" do canal ──────────────────────────────
+def editar_sobre(pg, channel_id, texto, ensaio=False):
+    """14/11 dona (autorizou "escrever o Sobre de cada canal, texto diferente por canal"): Personalização > Informações
+    básicas > Descrição. Pelo navegador (regra: YouTube só pelo navegador). Confere o texto gravado depois de publicar."""
+    yw._abrir_studio(pg, channel_id, "/editing/details")
+    pg.wait_for_timeout(15000)  # 14/11: ForjaReact estourou 30 s com 8 s de espera (Studio lento)
+    caixa = pg.locator("#description-container #textbox, ytcp-social-suggestions-textbox #textbox, "
+                       "#description-textarea #textbox, div[aria-label*='escri'][contenteditable=true], "
+                       "div[aria-label*='escription'][contenteditable=true]").first
+    caixa.wait_for(state="visible", timeout=60000)
+    atual = caixa.inner_text().strip()
+    if ensaio:
+        return f"ensaio: descrição atual ({len(atual)} car.): {atual[:120]}"
+    if atual == texto.strip():
+        return "ja"
+    caixa.click()
+    pg.keyboard.press("Control+A")
+    pg.keyboard.press("Delete")
+    pg.keyboard.insert_text(texto.strip())
+    pg.wait_for_timeout(1500)
+    bt = pg.locator("ytcp-button#publish-button, #publish-button").first
+    bt.wait_for(state="visible", timeout=15000)
+    bt.click()
+    pg.wait_for_timeout(6000)
+    yw._shot(pg, "sobre_publicado")
+    yw._abrir_studio(pg, channel_id, "/editing/details")
+    pg.wait_for_timeout(8000)
+    novo = pg.locator("#description-container #textbox, ytcp-social-suggestions-textbox #textbox, "
+                      "#description-textarea #textbox").first.inner_text().strip()
+    return "ok" if novo[:60] == texto.strip()[:60] else f"aviso: depois de publicar a descrição é '{novo[:80]}'"
 
 
 # ─────────────────────────── rascunhos presos ──────────────────────────────
@@ -1425,6 +1461,7 @@ def main():
                     help="(com --video, aceita vários IDs separados por vírgula) troca a visibilidade")
     ap.add_argument("--colaborar", metavar="@HANDLE", help="(com --video) convida esse canal como colaborador (collab)")
     ap.add_argument("--aceitar-collab", metavar="LINK", help="aceita o convite de collab (link do Studio do convidado)")
+    ap.add_argument("--sobre", metavar="ARQ.txt", help="(14/11) troca a descrição do canal (Sobre) pelo texto do arquivo")
     a = ap.parse_args()
     res = {}
     try:
@@ -1479,6 +1516,9 @@ def main():
         if a.ler_comentarios:
             acoes.append(("comentarios", lambda pg: ler_comentarios(pg, e["channel_id"])))
             acoes.append(("inscritos", lambda pg: ler_inscritos(pg, e["channel_id"])))
+        if a.sobre:  # 14/11: "Sobre" do canal (descrição) a partir de um .txt
+            txt = Path(a.sobre).read_text(encoding="utf-8")
+            acoes.append(("sobre", lambda pg: editar_sobre(pg, e["channel_id"], txt, a.ensaio)))
         if a.limpar_rascunhos:
             # 16/10: apagar exige --apagar-mesmo - um teste apagou junto um rascunho antigo de outro upload
             acoes.append(("rascunhos", lambda pg: limpar_rascunhos(pg, e["channel_id"], a.ensaio or not a.apagar_mesmo)))

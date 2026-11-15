@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Central do Instagram</title><meta name="robots" content="noindex">
+<style>__CSS__
+.topo{position:sticky;top:0;z-index:20;background:var(--sup);border-bottom:1px solid var(--borda)}
+.topo .in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}.marca{font-weight:800;font-size:17px;flex:1}
+.abas{max-width:1180px;margin:0 auto;padding:0 10px;display:flex;gap:4px;overflow-x:auto}
+.abas button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--tx2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}.abas button.on{color:var(--pri);border-color:var(--pri)}
+main{max-width:1180px;margin:0 auto;padding:16px 16px 80px}
+h2{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2 .esp{flex:1}h2 .btn{font-size:14px;min-height:38px;padding:7px 12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px}.kpi .v{font-size:22px;font-weight:800}.kpi .r{font-size:12px;color:var(--mu);font-weight:600;text-transform:uppercase}
+.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;max-height:340px;overflow:auto}
+.post{aspect-ratio:1;border-radius:10px;background:var(--sup2) center/cover;cursor:pointer;border:3px solid transparent;position:relative}.post.on{border-color:var(--pri)}
+.post span{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;border-radius:6px;padding:1px 6px}
+.etapa{display:grid;grid-template-columns:40px 1fr 1fr 90px;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--borda)}@media (max-width:700px){.etapa{grid-template-columns:1fr}}
+.login{max-width:400px;margin:10vh auto;padding:0 16px}
+.dica{background:var(--av-bg);color:var(--av);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:14px}
+</style></head><body><div id="app"></div>
+<script>
+const API = location.origin + '/webhook/insta-api';
+__BASE__
+window.TOKEN = guarda.ler('ig_token'); let EU = null, ABA = null;
+function sair() { guarda.gravar('ig_token', null); window.TOKEN = ''; login(); }
+function login(msg) {
+  $('#app').innerHTML = `<div class="login"><div class="card"><h2>📸 Central do Instagram</h2>${msg ? `<div class="dica">${esc(msg)}</div>` : ''}
+    <label>Conta</label><input id="ct" value="${esc(new URLSearchParams(location.search).get('c') || guarda.ler('ig_conta') || '')}" autocapitalize="off"><label>Senha</label><input id="sn" type="password">
+    <button class="btn pri" id="ent" style="width:100%;margin-top:14px">Entrar</button></div></div>`;
+  const ir = async () => { const j = await api('login', { conta: $('#ct').value.trim(), senha: $('#sn').value }); if (!j.ok) return aviso(j.erro, true);
+    window.TOKEN = j.token; guarda.gravar('ig_token', j.token); guarda.gravar('ig_conta', $('#ct').value.trim()); iniciar(); };
+  $('#ent').onclick = ir; $('#sn').onkeydown = e => e.key === 'Enter' && ir();
+}
+async function iniciar() {
+  if (!window.TOKEN) return login(); const j = await api('eu'); if (!j.ok) return login(j.sair ? '' : j.erro); EU = j;
+  document.documentElement.style.setProperty('--pri', j.conta.cor);
+  const AB = { inicio: '🏠 Início', sorteio: '🎁 Sorteios', gincana: '🕵️ Gincana', mencao: '💜 Menções', site: '🌐 Meu site' };
+  $('#app').innerHTML = `<div class="topo"><div class="in"><div class="marca">📸 ${esc(j.conta.nome)} <span class="mu pq">@${esc(j.conta.ig_username)}</span></div><button class="btn fant pq" id="tema">🌓</button><button class="btn pq" onclick="sair()">Sair</button></div>
+    <nav class="abas">${Object.entries(AB).map(([k, v]) => `<button data-aba="${k}">${v}</button>`).join('')}</nav></div><main id="tela"></main>`;
+  tema(); $$('[data-aba]').forEach(b => b.onclick = () => abrir(b.dataset.aba)); abrir(AB[location.hash.slice(1)] ? location.hash.slice(1) : 'inicio');
+}
+function abrir(a) { ABA = a; location.hash = a; $$('[data-aba]').forEach(b => b.classList.toggle('on', b.dataset.aba === a)); $('#tela').innerHTML = '<div class="vazio">Carregando…</div>';
+  ({ inicio: telaInicio, sorteio: telaSorteio, gincana: telaGincana, mencao: telaMencao, site: telaSite })[a](); }
+async function telaInicio() {
+  const j = await api('eu'); const r = j.resumo || {};
+  $('#tela').innerHTML = `<h2>Olá! 👋</h2><div class="kpis"><div class="kpi"><div class="r">Sorteios</div><div class="v">${r.sorteios || 0}</div></div><div class="kpi"><div class="r">Gincanas ativas</div><div class="v">${r.gincanas_ativas || 0}</div></div>
+    <div class="kpi"><div class="r">Menções (30 dias)</div><div class="v">${r.mencoes_30d || 0}</div></div><div class="kpi"><div class="r">Cupons usados</div><div class="v">${r.cupons_usados || 0}</div></div>
+    <div class="kpi"><div class="r">Visitas no site</div><div class="v">${r.site ? r.site.visitas : 0}</div><div class="mu pq">${r.site ? r.site.cliques + ' cliques no WhatsApp' : 'site não gerado'}</div></div></div>
+    <div class="g2">${[['sorteio', '🎁', 'Sorteio com vídeo', 'Pegue quem comentou no post, sorteie numa roleta animada e baixe o vídeo para postar.'],
+      ['gincana', '🕵️', 'Gincana nos stories', 'Pistas que abrem sozinhas, respostas pelo direct e ranking ao vivo.'],
+      ['mencao', '💜', 'Menção vira cliente fiel', 'Quem marcar você no story ganha agradecimento e cupom na hora.'],
+      ['site', '🌐', 'Instagram vira site', 'A IA lê seus posts e monta um site com catálogo e botão do WhatsApp.']].map(([a, i, t, d]) =>
+      `<div class="card" style="cursor:pointer" onclick="abrir('${a}')"><div style="font-size:30px">${i}</div><b>${t}</b><p class="mu pq">${d}</p></div>`).join('')}</div>`;
+}
+
+// ═════════ SORTEIO ═════════
+async function telaSorteio() {
+  const j = await api('sorteios'); if (!j.ok) return aviso(j.erro, true);
+  $('#tela').innerHTML = `<h2>🎁 Sorteios <span class="esp"></span><button class="btn pri" id="nv">＋ Novo sorteio</button></h2>
+    <div class="dica">Como funciona: quem comenta a palavra-chave no post recebe o botão no direct, confirma que segue o perfil e entra na lista (fluxo "Sorteio parte 1"). Aqui você escolhe o post, carrega os participantes válidos e faz a apresentação com vídeo.</div>
+    <div class="card tabela"><table><tr><th>Sorteio</th><th>Participantes</th><th>Resultado</th><th></th></tr>${j.sorteios.map(s => `<tr><td><b>${esc(s.titulo)}</b><br><span class="mu pq">${new Date(s.criado_em).toLocaleString('pt-BR')}</span></td><td>${s.n}</td>
+      <td>${s.sorteado_em ? s.ganhadores.map(g => '🏆 @' + esc(g.u)).join('<br>') : '<span class="selo av">aguardando</span>'}</td>
+      <td style="white-space:nowrap"><a class="btn pq pri" href="${location.origin}/webhook/insta-sorteio?s=${s.codigo}" target="_blank">${s.sorteado_em ? '▶️ Ver / vídeo' : '🎲 Apresentar'}</a>
+        ${s.sorteado_em ? (s.anuncio && s.anuncio.em ? `<a class="btn pq" target="_blank" href="${location.origin}/videos/arquivo/${s.anuncio.arte}">✅ Anunciado</a>` : `<button class="btn pq" data-an="${s.codigo}">📣 Anunciar</button>`) : ''}
+        <button class="btn pq fant er" data-x="${s.codigo}">✕</button></td></tr>`).join('') || '<tr><td colspan="4" class="vazio">Nenhum sorteio ainda</td></tr>'}</table></div>`;
+  $$('[data-x]').forEach(b => b.onclick = async () => { if (await confirma('Apagar este sorteio?') && await chama('sorteio_excluir', { codigo: b.dataset.x }, 'Apagado')) telaSorteio(); });
+  $$('[data-an]').forEach(b => b.onclick = () => anunciar(b.dataset.an));
+  $('#nv').onclick = novoSorteio;
+}
+function anunciar(codigo) {
+  const m = modal(`<h3>📣 Anunciar o resultado</h3><p class="mu">O sistema desenha a arte com o(s) ganhador(es) e:</p>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="st" checked style="width:auto;min-height:0"> Posta no seu story</label>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="av" checked style="width:auto;min-height:0"> Avisa o ganhador no direct (quem entrou pelo comentário)</label>
+    <div id="rs" style="margin-top:10px"></div><div class="acoes"><button class="btn" data-fechar>Fechar</button><button class="btn pri" id="ok">Anunciar agora</button></div>`);
+  $('#ok', m).onclick = async () => { $('#ok', m).disabled = true; $('#ok', m).textContent = '⏳ Desenhando e postando…';
+    const r = await api('sorteio_anunciar', { codigo, story: $('#st', m).checked, avisar: $('#av', m).checked }); $('#ok', m).textContent = 'Anunciar agora';
+    if (!r.ok) { $('#ok', m).disabled = false; return aviso(r.erro, true); }
+    $('#rs', m).innerHTML = `<img src="${r.arte}" style="width:180px;border-radius:12px"><p class="pq">✅ Pronto! ${r.avisados ? r.avisados + ' ganhador(es) avisado(s) no direct.' : ''} <a href="${r.arte}" download>Baixar a arte</a></p>`;
+    telaSorteio(); };
+}
+async function novoSorteio() {
+  const m = modal(`<h3>Novo sorteio</h3><label>1. Escolha o post do sorteio</label><div class="posts" id="ps"><div class="vazio">Buscando seus posts…</div></div>
+    <label>2. Nome do sorteio</label><input id="tt" placeholder="ex.: Sorteio de Natal"><label>Prêmio</label><input id="pr" placeholder="ex.: Kit com 3 produtos">
+    <div class="linha"><div><label>Comentaram a partir de</label><input id="de" type="date"></div><div><label>Até</label><input id="ate" type="date"></div></div>
+    <details style="margin-top:10px"><summary class="pq" style="cursor:pointer">Ou cole a lista de participantes (um @ por linha)</summary><textarea id="cola" placeholder="@maria&#10;@joao&#10;@ana" style="margin-top:6px"></textarea>
+      <button class="btn pq" id="usa" style="margin-top:6px">Usar esta lista</button></details>
+    <div id="info" class="mu pq" style="margin-top:8px"></div>
+    <div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn" id="bc">🔎 Carregar participantes</button><button class="btn pri" id="ok" disabled>Criar sorteio</button></div>`);
+  let post = null, part = [];
+  const p = await api('posts', { limite: 24 });
+  $('#ps', m).innerHTML = p.ok && p.posts.length ? p.posts.map((x, i) => `<div class="post" data-i="${i}" style="background-image:url('${esc(x.thumbnail_url || x.media_url)}')"><span>${new Date(x.timestamp).toLocaleDateString('pt-BR')}</span></div>`).join('')
+    : `<div class="vazio">${esc(p.erro || 'Nenhum post encontrado')}</div>`;
+  $$('[data-i]', m).forEach(d => d.onclick = () => { post = p.posts[Number(d.dataset.i)]; $$('.post', m).forEach(x => x.classList.toggle('on', x === d)); if (!$('#tt', m).value) $('#tt', m).value = String(post.caption || 'Sorteio').split('\n')[0].slice(0, 60); });
+  $('#bc', m).onclick = async () => { if (!post) return aviso('Escolha o post.', true); $('#info', m).textContent = '⏳ Lendo os participantes…';
+    const r = await api('sorteio_buscar', { media_id: post.id, de: $('#de', m).value, ate: $('#ate', m).value });
+    if (!r.ok) { $('#info', m).textContent = ''; return aviso(r.erro, true); }
+    part = r.participantes; $('#info', m).innerHTML = `✅ <b>${part.length}</b> participantes válidos (seguem o perfil e confirmaram no direct).${part.length ? '<br>' + part.slice(0, 12).map(x => '@' + esc(x.u)).join(', ') + (part.length > 12 ? '…' : '') : ''}`;
+    $('#ok', m).disabled = !part.length; };
+  $('#usa', m).onclick = () => { part = [...new Set($('#cola', m).value.split(/[\s,;]+/).map(s => s.replace(/^@/, '').trim()).filter(s => /^[A-Za-z0-9._]{1,30}$/.test(s)))].map(u => ({ u, id: '' }));
+    $('#info', m).innerHTML = `✅ <b>${part.length}</b> participantes da lista colada.`; $('#ok', m).disabled = !part.length; };
+  $('#ok', m).onclick = async () => { const r = await chama('sorteio_criar', { titulo: $('#tt', m).value, premio: $('#pr', m).value, media_id: post ? post.id : '', permalink: post ? post.permalink : '', participantes: part }, 'Sorteio criado');
+    if (r) { m.fechar(); window.open(`${location.origin}/webhook/insta-sorteio?s=${r.codigo}`, '_blank'); telaSorteio(); } };
+}
+
+// ═════════ GINCANA ═════════
+async function telaGincana() {
+  const j = await api('gincanas'); if (!j.ok) return aviso(j.erro, true);
+  $('#tela').innerHTML = `<h2>🕵️ Gincana nos stories <span class="esp"></span><button class="btn pri" id="nv">＋ Nova gincana</button></h2>
+    <div class="dica">Quando a última pista fecha, a gincana se encerra sozinha: o pódio vai para o story e cada jogador recebe a colocação no direct. Como funciona: no horário de cada pista o sistema posta a arte da pista no seu story sozinho. Quem quer jogar manda a palavra de inscrição no direct; as respostas chegam pelo direct, o robô corrige na hora, dá pontos (quem acerta primeiro ganha mais) e o ranking fica numa página pública.</div>
+    ${j.gincanas.map(g => `<div class="card" style="margin-bottom:12px"><div class="linha"><div style="flex:1"><b style="font-size:17px">${esc(g.titulo)}</b> ${g.ativa ? '<span class="selo ok">ativa</span>' : '<span class="selo">encerrada</span>'}
+      <div class="mu pq">Prêmio: ${esc(g.premio || '—')} · palavra de inscrição: <b>${esc(g.palavra_inscricao)}</b> · ${g.jogadores} jogadores</div></div>
+      <a class="btn pq" style="flex:none" target="_blank" href="${location.origin}/webhook/insta-gincana?g=${g.codigo}">🏆 Ranking público</a><button class="btn pq" style="flex:none" data-e="${g.codigo}">✏️ Editar</button>
+      ${g.ativa ? `<button class="btn pq" style="flex:none" data-fim="${g.codigo}">🏁 Encerrar e anunciar</button>` : g.final && g.final.arte ? `<a class="btn pq" style="flex:none" target="_blank" href="${location.origin}/videos/arquivo/${g.final.arte}">🏆 Arte do pódio</a>` : ''}</div>
+      <div class="g2" style="margin-top:10px"><div><b class="pq">Pistas</b>${g.etapas.map(e => `<div class="pq" style="padding:4px 0;border-bottom:1px solid var(--borda)">${e.ordem}. ${esc(e.pista)} <span class="mu">→ ${esc(e.resposta)}</span><br>
+        <span class="mu">${new Date(e.abre_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })} · ${e.acertos} acertos / ${e.tentativas} tentativas ${e.publicada ? '· 📲 postada' : ''}</span></div>`).join('')}</div>
+      <div><b class="pq">Ranking</b>${g.ranking.map((r, i) => `<div class="linha pq" style="flex-wrap:nowrap"><span style="flex:1">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'} @${esc(r.username || '?')}</span><b style="flex:none">${r.pontos}</b></div>`).join('') || '<div class="mu pq">Ninguém ainda</div>'}</div></div></div>`).join('') || '<div class="vazio">Nenhuma gincana ainda</div>'}`;
+  $$('[data-fim]').forEach(b => b.onclick = async () => {
+    if (!await confirma('Encerrar agora? O pódio vai para o seu story e cada jogador recebe a colocação no direct.')) return;
+    b.disabled = true; b.textContent = '⏳ Encerrando…'; const r = await api('gincana_encerrar', { codigo: b.dataset.fim });
+    if (!r.ok) { b.disabled = false; b.textContent = '🏁 Encerrar e anunciar'; return aviso(r.erro, true); }
+    aviso(`🏁 Encerrada! ${r.story ? 'Pódio no story. ' : ''}${r.avisados} jogador(es) avisado(s).`); telaGincana(); });
+  $('#nv').onclick = () => editarGincana(null);
+  $$('[data-e]').forEach(b => b.onclick = () => editarGincana(j.gincanas.find(g => g.codigo === b.dataset.e)));
+}
+function editarGincana(g) {
+  const loc = d => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); };
+  const amanha = new Date(); amanha.setDate(amanha.getDate() + 1); amanha.setHours(12, 0, 0, 0);
+  const et = g ? g.etapas.map(e => ({ ...e })) : [0, 1, 2].map(i => ({ ordem: i + 1, pista: '', resposta: '', pontos: 10, abre_em: new Date(amanha.getTime() + i * 864e5), fecha_em: new Date(amanha.getTime() + i * 864e5 + 10 * 36e5) }));
+  const m = modal(`<h3>${g ? 'Editar' : 'Nova'} gincana</h3><div class="linha"><div><label>Nome</label><input id="tt" value="${esc(g ? g.titulo : '')}" placeholder="ex.: Caça ao Tesouro de Verão"></div>
+    <div style="flex:0 0 160px"><label>Palavra de inscrição</label><input id="pl" value="${esc(g ? g.palavra_inscricao : 'GINCANA')}"></div></div>
+    <label>Prêmio</label><input id="pr" value="${esc(g ? g.premio : '')}"><label>Pistas <button class="btn pq fant" id="ia" style="min-height:0;padding:2px 8px">✨ criar pistas com IA</button></label><div id="et"></div>
+    <button class="btn pq" id="ma">＋ Pista</button>${g ? `<label style="display:flex;gap:8px;align-items:center;font-weight:400;margin-top:12px"><input type="checkbox" id="at" style="width:auto;min-height:0" ${g.ativa ? 'checked' : ''}> Gincana ativa</label>` : ''}
+    <div class="acoes">${g ? '<button class="btn er" id="ex">Apagar</button>' : ''}<button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="ok">Salvar</button></div>`);
+  const des = () => { $('#et', m).innerHTML = et.map((e, i) => `<div class="etapa"><b style="font-size:20px">${i + 1}</b><div><textarea data-p="${i}" style="min-height:60px" placeholder="Pista (aparece no story)">${esc(e.pista)}</textarea><input data-r="${i}" value="${esc(e.resposta)}" placeholder="Resposta certa" style="margin-top:6px"></div>
+      <div><label style="margin:0">Abre</label><input type="datetime-local" data-a="${i}" value="${loc(e.abre_em)}"><label style="margin:6px 0 0">Fecha</label><input type="datetime-local" data-f="${i}" value="${loc(e.fecha_em)}"></div>
+      <div><label style="margin:0">Pontos</label><input type="number" data-n="${i}" value="${e.pontos}"><button class="btn pq fant er" data-x="${i}" style="margin-top:6px">✕</button></div></div>`).join('');
+    $$('[data-p]', m).forEach(x => x.oninput = () => et[x.dataset.p].pista = x.value); $$('[data-r]', m).forEach(x => x.oninput = () => et[x.dataset.r].resposta = x.value);
+    $$('[data-a]', m).forEach(x => x.onchange = () => et[x.dataset.a].abre_em = new Date(x.value)); $$('[data-f]', m).forEach(x => x.onchange = () => et[x.dataset.f].fecha_em = new Date(x.value));
+    $$('[data-n]', m).forEach(x => x.oninput = () => et[x.dataset.n].pontos = Number(x.value)); $$('[data-x]', m).forEach(b => b.onclick = () => { et.splice(Number(b.dataset.x), 1); des(); }); };
+  $('#ma', m).onclick = () => { const u = et[et.length - 1]; const a = u ? new Date(new Date(u.abre_em).getTime() + 864e5) : amanha; et.push({ ordem: et.length + 1, pista: '', resposta: '', pontos: 10, abre_em: a, fecha_em: new Date(a.getTime() + 10 * 36e5) }); des(); };
+  $('#ia', m).onclick = async () => { const tema = prompt('Sobre o que é sua loja/perfil? (a IA cria pistas sobre isso)', EU.conta.nome); if (!tema) return;
+    $('#ia', m).textContent = '⏳ criando…'; const r = await api('gincana_pistas', { tema, quantas: et.length || 3 }); $('#ia', m).textContent = '✨ criar pistas com IA';
+    if (!r.ok) return aviso(r.erro, true); let l; try { l = JSON.parse(String(r.resultado).replace(/^\s*```(?:json)?/i, '').replace(/```\s*$/, '')).pistas; } catch (e) { return aviso('A IA respondeu fora do formato.', true); }
+    l.forEach((x, i) => { if (!et[i]) $('#ma', m).click(); et[i].pista = x.pista; et[i].resposta = x.resposta; }); des(); };
+  $('#ok', m).onclick = async () => { const r = await chama('gincana_salvar', { codigo: g ? g.codigo : '', titulo: $('#tt', m).value, premio: $('#pr', m).value, palavra: $('#pl', m).value, ativa: g ? $('#at', m).checked : true,
+      etapas: et.map((e, i) => ({ ordem: i + 1, pista: e.pista, resposta: e.resposta, pontos: e.pontos, abre_em: new Date(e.abre_em).toISOString(), fecha_em: new Date(e.fecha_em).toISOString() })) }, 'Gincana salva');
+    if (r) { m.fechar(); telaGincana(); } };
+  if (g) $('#ex', m).onclick = async () => { if (await confirma('Apagar a gincana e o ranking?') && await chama('gincana_excluir', { codigo: g.codigo }, 'Apagada')) { m.fechar(); telaGincana(); } };
+  des();
+}
+
+// ═════════ MENÇÃO ═════════
+async function telaMencao() {
+  const j = await api('mencao_ver'); if (!j.ok) return aviso(j.erro, true); const c = j.cfg;
+  $('#tela').innerHTML = `<h2>💜 Menção vira cliente fiel</h2>
+    <div class="dica">Quando alguém marca @${esc(EU.conta.ig_username)} no story, o robô responde no direct na hora com um agradecimento e um cupom único. A mesma pessoa só ganha cupom de novo depois do prazo que você escolher. No caixa, confira o cupom aqui.</div>
+    <div class="kpis"><div class="kpi"><div class="r">Menções</div><div class="v">${j.total}</div></div><div class="kpi"><div class="r">Cupons usados</div><div class="v">${j.usados}</div></div>
+      <div class="kpi"><div class="r">Conversão</div><div class="v">${j.total ? Math.round(j.usados / j.total * 100) : 0}%</div></div></div>
+    <div class="g2"><div class="card"><b>⚙️ Mensagem e cupom</b>
+      <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="at" style="width:auto;min-height:0" ${c.ativo ? 'checked' : ''}> Ligado</label>
+      <label>Mensagem (use {nome}, {cupom}, {desconto}, {validade})</label><textarea id="ms">${esc(c.mensagem)}</textarea>
+      <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="ia" style="width:auto;min-height:0" ${c.usar_ia ? 'checked' : ''}> ✨ A IA personaliza a mensagem olhando o story da pessoa</label>
+      <div class="linha"><div><label>Prefixo do cupom</label><input id="cp" value="${esc(c.cupom_prefixo)}"></div><div><label>Presente</label><input id="ds" value="${esc(c.desconto)}"></div></div>
+      <div class="linha"><div><label>Validade (dias)</label><input id="vd" type="number" value="${c.validade_dias}"></div><div><label>Novo cupom só após (dias)</label><input id="lm" type="number" value="${c.limite_por_pessoa_dias}"></div></div>
+      <button class="btn pri" id="sv" style="margin-top:12px;width:100%">Salvar</button></div>
+    <div class="card"><b>🧾 Conferir cupom no caixa</b><div class="linha" style="margin-top:8px"><input id="cc" placeholder="ex.: AMIGO3F9A2" style="text-transform:uppercase"><button class="btn pri" id="cv" style="flex:none">Usar cupom</button></div><div id="cr" style="margin-top:8px"></div></div></div>
+    <h2 style="margin-top:20px">Últimas menções</h2><div class="card tabela"><table><tr><th>Quando</th><th>Quem</th><th>Cupom</th><th>Mensagem enviada</th></tr>
+    ${j.mencoes.map(x => `<tr><td class="pq">${new Date(x.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>@${esc(x.username || x.ig_id)}${x.midia_url ? `<br><a class="pq" href="${esc(x.midia_url)}" target="_blank">ver story</a>` : ''}</td>
+      <td>${x.cupom ? `<b>${esc(x.cupom)}</b> ${x.usado ? '<span class="selo ok">usado</span>' : ''}` : '<span class="mu">—</span>'}</td><td class="pq">${esc(x.mensagem)} ${x.enviado ? '<span class="selo ok">enviado</span>' : x.erro ? '<span class="selo er">⚠️ ' + esc(x.erro) + '</span>' : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="vazio">Ninguém marcou ainda. Peça para os clientes marcarem você no story!</td></tr>'}</table></div>`;
+  $('#sv').onclick = () => chama('mencao_cfg', { ativo: $('#at').checked, mensagem: $('#ms').value, usar_ia: $('#ia').checked, cupom_prefixo: $('#cp').value, desconto: $('#ds').value, validade_dias: Number($('#vd').value), limite_por_pessoa_dias: Number($('#lm').value) }, 'Salvo');
+  $('#cv').onclick = async () => { const r = await api('cupom_usar', { cupom: $('#cc').value.trim() }); $('#cr').innerHTML = r.ok ? `<div class="selo ok" style="font-size:15px">✅ Válido! Cliente @${esc(r.username)}. Marcado como usado.</div>` : `<div class="selo er" style="font-size:15px">❌ ${esc(r.erro)}</div>`; };
+}
+
+// ═════════ SITE ═════════
+async function telaSite() {
+  const j = await api('eu'); const s = j.resumo.site; const url = `${location.origin}/webhook/insta-site?c=${EU.conta.slug}`;
+  $('#tela').innerHTML = `<h2>🌐 Instagram vira site</h2><div class="dica">A IA lê os seus últimos posts (fotos e legendas), descobre o que você vende, separa produtos e preços e monta um site com catálogo e botão do WhatsApp. Gere de novo sempre que postar novidades.</div>
+    <div class="card"><label>WhatsApp do site (com DDD)</label><div class="linha"><input id="wa" inputmode="tel" value="${esc(EU.conta.whatsapp)}"><button class="btn" id="sw" style="flex:none">Salvar</button></div>
+      <button class="btn pri" id="gr" style="margin-top:14px;width:100%;min-height:50px">${s && s.gerado_em ? '🔁 Gerar o site de novo' : '✨ Gerar meu site agora'}</button><div id="st" class="mu pq" style="margin-top:8px"></div>
+      ${s && s.gerado_em ? `<div style="margin-top:14px"><b>Seu site:</b> <a href="${url}" target="_blank">${esc(url)}</a><div class="mu pq">Gerado em ${new Date(s.gerado_em).toLocaleString('pt-BR')} · ${s.visitas} visitas · ${s.cliques} cliques no WhatsApp</div>
+        <div class="linha" style="margin-top:8px"><button class="btn pq" id="cp" style="flex:none">📋 Copiar link</button><a class="btn pq" style="flex:none" target="_blank" href="https://wa.me/?text=${encodeURIComponent('Conheça nosso site: ' + url)}">💬 Mandar no WhatsApp</a>
+        <span class="mu pq" style="flex:1">Dica: coloque este link na bio do Instagram.</span></div></div>
+        <iframe src="${url}" style="width:100%;height:640px;border:1px solid var(--borda);border-radius:14px;margin-top:12px"></iframe>` : ''}</div>`;
+  if ($('#cp')) $('#cp').onclick = () => { navigator.clipboard.writeText(url); aviso('Link copiado'); };
+  $('#sw').onclick = async () => { if (await chama('config_salvar', { whatsapp: $('#wa').value }, 'Salvo')) EU.conta.whatsapp = $('#wa').value; };
+  $('#gr').onclick = async () => { $('#gr').disabled = true; $('#st').textContent = '⏳ Lendo seus posts e montando o site… (até 1 minuto)';
+    const r = await api('site_gerar', {}); $('#gr').disabled = false; if (!r.ok) { $('#st').textContent = ''; return aviso(r.erro, true); } aviso('🌐 Site pronto!'); telaSite(); };
+}
+iniciar();
+</script></body></html>

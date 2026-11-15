@@ -394,6 +394,10 @@ def _maquina_pronta(maquina_remota, m):
 # 12/11 (dona: "temos 2 notebooks só pra flow + pc2 + sti + desktop, não faz sentido 1 capa a cada 10 h"): o STI (i5,
 # 16 GB, Mint) entrou na ordem logo depois dos notebooks; antes ele não constava aqui e nunca era visto como livre
 ORDEM_IMAGENS = ("x200ma", "acer", "sti", "pc2", "desktop")
+# 14/11 dona ("o HP Pavilion está desocupado e com todas as contas logadas, põe ele pra trabalhar no máximo"): o HP
+# (Turion 2 núcleos, 8 GB, Mint) entra como os notebooks, depois do STI. FLOW_SEM_HP=1 tira.
+if os.environ.get("FLOW_SEM_HP") != "1":
+    ORDEM_IMAGENS = ("x200ma", "acer", "hp", "sti", "pc2", "desktop")
 # PC2 aguenta vários Chromes juntos ("nem precisa ser um por vez como é nos notebooks"): a imagem usa as portas extras do
 # chrome_conta (cada uma com o seu ocupado_<porta>), sem disputar a 9460 do Veo/postagem nem as 9461+ do TikTok em lote.
 PC2_PORTAS = range(9470, 9476)
@@ -401,8 +405,12 @@ PC2_PORTAS = range(9470, 9476)
 # também usa portas extras (4 núcleos, ~3 GB livres = 3 Chromes de imagem; o Chrome fica aberto só ~80 s pro token)
 # 12/11: o STI (i5, 16 GB) também abre vários Chromes de imagem (como o PC2), nas mesmas portas extras 9470+; assim não
 # disputa a 9460 com o TikTok/Veo (era 'OCUPADO' toda hora). FLOW_STI_EXTRA=0 tira.
+# 14/11 dona ("o Flow com conta deslogada ainda está na tela do STI"): o TELÃO do STI (vitrine/player.py, perfil
+# vitrine/perfil_navegador, SEM conta Google) usa a porta 9470 — o Flow achava um Chrome vivo na 9470 e entrava nele,
+# caindo em flow.google.com/about (deslogado) na tela. No STI o Flow usa 9471-9474. FLOW_STI_9470=1 volta a usar a 9470.
 PORTAS_EXTRA = {"pc2": PC2_PORTAS, "desktop": range(9470, 9473),
-                **({"sti": range(9470, 9474)} if os.environ.get("FLOW_STI_EXTRA", "1") != "0" else {})}
+                **({"sti": (range(9470, 9474) if os.environ.get("FLOW_STI_9470") == "1" else range(9471, 9475))}
+                   if os.environ.get("FLOW_STI_EXTRA", "1") != "0" else {})}
 # 01/11 23h30 (dona: "testa até X Chromes começar a falhar; 3 não falha põe 4... falhou, reduz; sempre dinâmico"):
 # quantas portas extras cada máquina usa vem de logs\capacidade.json. 3 imagens seguidas OK = +1 vaga; falha de
 # capacidade (Chrome não abriu, pouca RAM, travou) = -1 e esse número vira o teto por 2 h; depois tenta subir de novo.
@@ -557,7 +565,9 @@ def _abrir_pc2_extra(maquina_remota, perfil, log, nome="pc2"):
         log(f"  {nome}: sem folga agora (cpu {med['cpu']}%, RAM livre {med['ram_mb']} MB) — próxima máquina")
         return None
     rem = maquina_remota.Remoto(nome)
-    portas = range(9470, 9470 + cap_limite(nome))  # dinâmico (capacidade.json)
+    # 14/11: a 1ª porta vem do PORTAS_EXTRA da máquina (STI começa na 9471 — a 9470 é do telão de lá)
+    ini = PORTAS_EXTRA[nome].start if nome in PORTAS_EXTRA else 9470
+    portas = range(ini, ini + cap_limite(nome))  # dinâmico (capacidade.json)
     for p in portas:
         rem.porta = p
         try:
@@ -827,6 +837,35 @@ def _log(reg):
         f.write(json.dumps(reg, ensure_ascii=False) + "\n")
 
 
+def _gemini_primeiro(prompt, saida, refs, formato, log):
+    """1º do trio: D:\\gemini-argo\\gemini_midia_http.py (HTTP com os cookies do Argon, ~15-25 s, não gasta Argon).
+    Path ou None (nunca levanta). GEMINI_IMAGEM=0 / GEMINI_MIDIA=0 desligam."""
+    if os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_IMAGEM", "1") == "0":
+        return None
+    py = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"
+    script = r"D:\gemini-argo\gemini_midia_http.py"
+    if not (os.path.exists(py) and os.path.exists(script)):
+        return None
+    import subprocess as _sp
+    cmd = [py, "-X", "utf8", "-I", script, "imagem", prompt, str(saida), "--formato", formato]
+    if refs:
+        cmd += ["--ref", *[str(Path(r).resolve()) for r in refs]]
+    t0 = time.time()
+    try:
+        r = _sp.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=240,
+                    creationflags=0x08000000)
+    except Exception as e:  # noqa: BLE001
+        log(f"[gemini] nao rodou ({type(e).__name__}) -> Flow")
+        return None
+    out = ((r.stdout or "") + (r.stderr or "")).strip()
+    if r.returncode == 0 and Path(saida).exists() and Path(saida).stat().st_size > 10_000:
+        log(f"[gemini] imagem sem navegador em {time.time() - t0:.0f}s"
+            f"{f' com {len(refs)} referencia(s)' if refs else ''} ({out[-70:]})")
+        return Path(saida)
+    log(f"[gemini] nao gerou em {time.time() - t0:.0f}s ({out[-150:]}) -> Flow")
+    return None
+
+
 def gerar_imagem(prompt, saida, refs=(), formato="9:16", modelo="Nano Banana 2.1", quantidade=1, conta=None,
                  log=print, max_contas=None, maquinas=None):
     """Tenta conta por conta (as do Veo, em ordem; ou so a pedida) ate uma entregar. Devolve a lista de arquivos.
@@ -839,6 +878,13 @@ def gerar_imagem(prompt, saida, refs=(), formato="9:16", modelo="Nano Banana 2.1
     saida = Path(saida)
     saidas = [saida] if quantidade == 1 else [saida.with_name(f"{saida.stem}_{i}{saida.suffix}")
                                               for i in range(1, quantidade + 1)]
+    # 14/11/2026 (dona): TRIO — 1º o Gemini sem navegador (com as fotos de referência, por HTTP), depois o Flow HTTP e
+    # a tela daqui. Vale pra quem chama direto (foto na hora do Veo, carrossel do MS Energy). O cliente.py já tenta o
+    # Gemini antes e passa GEMINI_JA_TENTOU=1 pra não repetir. Conta fixa do Flow = pedido é pro Flow, não entra aqui.
+    if quantidade == 1 and not conta and os.environ.get("GEMINI_JA_TENTOU") != "1":
+        feito = _gemini_primeiro(prompt, saida, refs, formato, log)
+        if feito:
+            return [feito]
     fora = _ler_fora()
     reserva_pc1 = set()  # D36: contas do PC1 que ficam com a última tentativa do pedido
     if conta:
@@ -850,16 +896,24 @@ def gerar_imagem(prompt, saida, refs=(), formato="9:16", modelo="Nano Banana 2.1
         pc2_aberto = None
         try:
             import maquina_remota
-            livres = {m for m in ("x200ma", "acer", "sti", "desktop")
+            livres = {m for m in ("x200ma", "acer", "hp", "sti", "desktop")
                       if (maquinas is None or m in maquinas) and _maquina_pronta(maquina_remota, m)}
             if maquinas is None or "pc2" in maquinas or PC2_SEMPRE:  # D36: porta extra, não depende da 9460
                 pc2_aberto = _pc2_pronto(maquina_remota)
                 if pc2_aberto is not None:
                     livres.add("pc2")
             # 12/11: STI pelas portas extras (como o PC2) — livre mesmo com a 9460 ocupada pelo TikTok/Veo
-            if "sti" in PORTAS_EXTRA and (maquinas is None or "sti" in maquinas) and "sti" not in livres:
+            # 14/11 dona ("ponha os outros pra trabalhar, tem muitos dispositivos livres"): o Chrome do Flow aberto no
+            # STI travava os Shorts dele (Short + navegador juntos = 95 °C+; disparar_sti espera fechar) enquanto Acer,
+            # X200MA e HP ficavam parados. Agora a porta extra do STI só entra se nenhuma outra máquina estiver livre.
+            # FLOW_STI_SO_RESERVA=0 volta.
+            outras = livres - {"sti"}
+            so_reserva = os.environ.get("FLOW_STI_SO_RESERVA", "1") != "0" and (outras or pc2_aberto is not None)
+            if "sti" in PORTAS_EXTRA and (maquinas is None or "sti" in maquinas) and "sti" not in livres and not so_reserva:
                 if _pc2_pronto(maquina_remota, "sti") is not None:
                     livres.add("sti")
+            if so_reserva:
+                livres.discard("sti")
         except Exception:  # noqa: BLE001
             livres = set()
         ativas = [c for c in CONTAS if fora.get(c["session"], 0) < time.time()

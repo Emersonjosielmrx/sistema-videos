@@ -28,16 +28,18 @@ PY_GEMINI = Path(r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\pytho
 SCRIPT_GEMINI = Path(r"D:\gemini-argo\gemini_midia_http.py")
 
 
-def _gemini(prompt, saida, formato, log, timeout=150):
-    """1º do trio. Path ou None (nunca levanta). Sem foto de referência (o HTTP do Gemini ainda não anexa)."""
+def _gemini(prompt, saida, formato, log, refs=(), timeout=180):
+    """1º do trio. Path ou None (nunca levanta). Com foto de referência desde 14/11 (sobe por HTTP, sem navegador)."""
     if os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_IMAGEM", "1") == "0":
         return None
     if not (PY_GEMINI.exists() and SCRIPT_GEMINI.exists()):
         return None
     t0 = time.time()
     try:
-        r = subprocess.run([str(PY_GEMINI), "-X", "utf8", "-I", str(SCRIPT_GEMINI), "imagem", prompt, str(saida),
-                            "--formato", formato], capture_output=True, text=True, encoding="utf-8", errors="replace",
+        cmd = [str(PY_GEMINI), "-X", "utf8", "-I", str(SCRIPT_GEMINI), "imagem", prompt, str(saida), "--formato", formato]
+        if refs:
+            cmd += ["--ref", *[str(Path(r).resolve()) for r in refs]]
+        r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
                            timeout=timeout, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except Exception as e:  # noqa: BLE001
         log(f"[gemini] não rodou ({type(e).__name__}) -> Flow")
@@ -91,10 +93,9 @@ def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log
     log = log or (lambda m: None)
     saida = Path(saida)
     saida.parent.mkdir(parents=True, exist_ok=True)
-    if not refs:
-        feito = _gemini(prompt, saida, formato_mais_proximo(formato), log)
-        if feito:
-            return feito
+    feito = _gemini(prompt, saida, formato_mais_proximo(formato), log, refs=refs)
+    if feito:
+        return feito
     if not disponivel():
         return None
     cmd = [str(PY), str(SCRIPT), prompt, str(saida), "--formato", formato_mais_proximo(formato),
@@ -104,7 +105,8 @@ def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log
     t0 = time.time()
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout,
-                           creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+                           creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                           env={**os.environ, "GEMINI_JA_TENTOU": "1"})  # o gera_imagem não repete o Gemini
     except subprocess.TimeoutExpired:
         _pausar(f"passou de {timeout}s")
         log(f"[flow] passou de {timeout}s — Flow em pausa 30 min, segue o gerador antigo")

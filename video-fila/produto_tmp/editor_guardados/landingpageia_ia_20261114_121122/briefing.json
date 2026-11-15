@@ -1,0 +1,439 @@
+{
+ "marca": "Landing Page e Comunicação",
+ "produto": "Landing Page e Comunicação",
+ "publico": "",
+ "fatos": [
+  "Landing page pronta, video demo e comunicacao",
+  "Landing page pronta que vende",
+  "Página de vendas pronta e vídeo de demonstração para apresentar seu produto e transformar visita em cliente."
+ ],
+ "cliente_real": false,
+ "cores": {
+  "marca": "#F59E0B",
+  "apoio": "#111827",
+  "fundo_escuro": "#111827",
+  "destaque": "#F59E0B",
+  "texto_sobre_marca": "#121216"
+ },
+ "arroba": "@landingpageia.ia",
+ "convite": "Chame no direct",
+ "convite_voz": "Chame a gente no direct.",
+ "titulo": "Site institucional ou landing page pronta?",
+ "gancho_tela": "Site sem vendas?",
+ "duracao_s": 30.83,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.7,
+   "tipo": "pergunta",
+   "fala": "Seu site institucional atrai visitas, mas ninguém entra em contato?",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_0.jpg"
+  },
+  {
+   "n": 1,
+   "ini": 5.35,
+   "fim": 12.98,
+   "tipo": "dono",
+   "fala": "Eu tinha um site institucional tradicional, mas ele não transformava os visitantes em clientes.",
+   "rotulo": "O problema",
+   "conversa": null,
+   "video": "dono_1.mp4"
+  },
+  {
+   "n": 2,
+   "ini": 12.63,
+   "fim": 19.41,
+   "tipo": "conversa",
+   "fala": "A landing page pronta e o vídeo de demonstração apresentam seu produto com foco comercial.",
+   "rotulo": "Como funciona",
+   "conversa": [
+    {
+     "de": "cliente",
+     "texto": "Vi o vídeo demonstrando o produto na página."
+    },
+    {
+     "de": "empresa",
+     "texto": "Perfeito! A apresentação tirou todas as suas dúvidas?"
+    },
+    {
+     "de": "cliente",
+     "texto": "Sim, ficou muito claro. Quero fechar agora."
+    }
+   ],
+   "foto": "img_2.jpg"
+  },
+  {
+   "n": 3,
+   "ini": 19.06,
+   "fim": 27.24,
+   "tipo": "dono",
+   "fala": "Agora utilizo uma estrutura pronta que vende, gerando comunicação clara para o meu negócio.",
+   "rotulo": "O resultado",
+   "conversa": null,
+   "video": "dono_3.mp4"
+  },
+  {
+   "n": 4,
+   "ini": 26.89,
+   "fim": 30.83,
+   "tipo": "cartao",
+   "fala": "Chame a gente no direct.",
+   "rotulo": null,
+   "conversa": null,
+   "foto": "img_4.jpg"
+  }
+ ],
+ "palavras": [
+  {
+   "p": "Seu",
+   "ini": 0.318,
+   "fim": 0.57,
+   "cena": 0
+  },
+  {
+   "p": "site",
+   "ini": 0.582,
+   "fim": 0.943,
+   "cena": 0
+  },
+  {
+   "p": "institucional",
+   "ini": 0.955,
+   "fim": 1.628,
+   "cena": 0
+  },
+  {
+   "p": "atrai",
+   "ini": 1.64,
+   "fim": 1.881,
+   "cena": 0
+  },
+  {
+   "p": "visitas",
+   "ini": 1.893,
+   "fim": 2.506,
+   "cena": 0
+  },
+  {
+   "p": "mas",
+   "ini": 2.746,
+   "fim": 2.926,
+   "cena": 0
+  },
+  {
+   "p": "ninguém",
+   "ini": 2.938,
+   "fim": 3.323,
+   "cena": 0
+  },
+  {
+   "p": "entra",
+   "ini": 3.335,
+   "fim": 3.539,
+   "cena": 0
+  },
+  {
+   "p": "em",
+   "ini": 3.551,
+   "fim": 3.611,
+   "cena": 0
+  },
+  {
+   "p": "contato",
+   "ini": 3.623,
+   "fim": 4.236,
+   "cena": 0
+  },
+  {
+   "p": "Eu",
+   "ini": 6.038,
+   "fim": 6.598,
+   "cena": 1
+  },
+  {
+   "p": "tinha",
+   "ini": 6.598,
+   "fim": 6.778,
+   "cena": 1
+  },
+  {
+   "p": "um",
+   "ini": 6.778,
+   "fim": 6.978,
+   "cena": 1
+  },
+  {
+   "p": "site",
+   "ini": 6.978,
+   "fim": 7.258,
+   "cena": 1
+  },
+  {
+   "p": "institucional",
+   "ini": 7.258,
+   "fim": 7.958,
+   "cena": 1
+  },
+  {
+   "p": "tradicional,",
+   "ini": 7.958,
+   "fim": 8.498,
+   "cena": 1
+  },
+  {
+   "p": "mas",
+   "ini": 9.158,
+   "fim": 9.358,
+   "cena": 1
+  },
+  {
+   "p": "ele",
+   "ini": 9.358,
+   "fim": 9.578,
+   "cena": 1
+  },
+  {
+   "p": "não",
+   "ini": 9.578,
+   "fim": 9.998,
+   "cena": 1
+  },
+  {
+   "p": "transformava",
+   "ini": 9.998,
+   "fim": 10.478,
+   "cena": 1
+  },
+  {
+   "p": "os",
+   "ini": 10.478,
+   "fim": 10.778,
+   "cena": 1
+  },
+  {
+   "p": "visitantes",
+   "ini": 10.778,
+   "fim": 11.238,
+   "cena": 1
+  },
+  {
+   "p": "em",
+   "ini": 11.238,
+   "fim": 11.498,
+   "cena": 1
+  },
+  {
+   "p": "clientes.",
+   "ini": 11.498,
+   "fim": 12.178,
+   "cena": 1
+  },
+  {
+   "p": "A",
+   "ini": 13.121,
+   "fim": 13.205,
+   "cena": 2
+  },
+  {
+   "p": "landing",
+   "ini": 13.217,
+   "fim": 13.614,
+   "cena": 2
+  },
+  {
+   "p": "page",
+   "ini": 13.626,
+   "fim": 13.914,
+   "cena": 2
+  },
+  {
+   "p": "pronta",
+   "ini": 13.926,
+   "fim": 14.371,
+   "cena": 2
+  },
+  {
+   "p": "e",
+   "ini": 14.383,
+   "fim": 14.467,
+   "cena": 2
+  },
+  {
+   "p": "o",
+   "ini": 14.479,
+   "fim": 14.527,
+   "cena": 2
+  },
+  {
+   "p": "vídeo",
+   "ini": 14.539,
+   "fim": 14.864,
+   "cena": 2
+  },
+  {
+   "p": "de",
+   "ini": 14.876,
+   "fim": 14.96,
+   "cena": 2
+  },
+  {
+   "p": "demonstração",
+   "ini": 14.972,
+   "fim": 15.705,
+   "cena": 2
+  },
+  {
+   "p": "apresentam",
+   "ini": 15.717,
+   "fim": 16.282,
+   "cena": 2
+  },
+  {
+   "p": "seu",
+   "ini": 16.294,
+   "fim": 16.462,
+   "cena": 2
+  },
+  {
+   "p": "produto",
+   "ini": 16.474,
+   "fim": 16.943,
+   "cena": 2
+  },
+  {
+   "p": "com",
+   "ini": 16.955,
+   "fim": 17.123,
+   "cena": 2
+  },
+  {
+   "p": "foco",
+   "ini": 17.135,
+   "fim": 17.448,
+   "cena": 2
+  },
+  {
+   "p": "comercial",
+   "ini": 17.46,
+   "fim": 18.109,
+   "cena": 2
+  },
+  {
+   "p": "Agora",
+   "ini": 19.966,
+   "fim": 20.706,
+   "cena": 3
+  },
+  {
+   "p": "utilizo",
+   "ini": 20.826,
+   "fim": 21.186,
+   "cena": 3
+  },
+  {
+   "p": "uma",
+   "ini": 21.186,
+   "fim": 21.446,
+   "cena": 3
+  },
+  {
+   "p": "estrutura",
+   "ini": 21.446,
+   "fim": 21.966,
+   "cena": 3
+  },
+  {
+   "p": "pronta",
+   "ini": 21.966,
+   "fim": 22.386,
+   "cena": 3
+  },
+  {
+   "p": "que",
+   "ini": 22.386,
+   "fim": 22.646,
+   "cena": 3
+  },
+  {
+   "p": "vende,",
+   "ini": 22.646,
+   "fim": 23.326,
+   "cena": 3
+  },
+  {
+   "p": "gerando",
+   "ini": 23.686,
+   "fim": 24.066,
+   "cena": 3
+  },
+  {
+   "p": "comunicação",
+   "ini": 24.066,
+   "fim": 24.866,
+   "cena": 3
+  },
+  {
+   "p": "clara",
+   "ini": 24.866,
+   "fim": 25.526,
+   "cena": 3
+  },
+  {
+   "p": "para",
+   "ini": 25.526,
+   "fim": 25.766,
+   "cena": 3
+  },
+  {
+   "p": "o",
+   "ini": 25.766,
+   "fim": 25.886,
+   "cena": 3
+  },
+  {
+   "p": "meu",
+   "ini": 25.886,
+   "fim": 26.046,
+   "cena": 3
+  },
+  {
+   "p": "negócio.",
+   "ini": 26.046,
+   "fim": 26.466,
+   "cena": 3
+  },
+  {
+   "p": "Chame",
+   "ini": 27.382,
+   "fim": 27.731,
+   "cena": 4
+  },
+  {
+   "p": "a",
+   "ini": 27.743,
+   "fim": 27.803,
+   "cena": 4
+  },
+  {
+   "p": "gente",
+   "ini": 27.815,
+   "fim": 28.139,
+   "cena": 4
+  },
+  {
+   "p": "no",
+   "ini": 28.151,
+   "fim": 28.247,
+   "cena": 4
+  },
+  {
+   "p": "direct",
+   "ini": 28.26,
+   "fim": 28.873,
+   "cena": 4
+  }
+ ]
+}

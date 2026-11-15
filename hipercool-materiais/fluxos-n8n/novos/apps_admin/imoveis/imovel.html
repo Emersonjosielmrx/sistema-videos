@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Imóvel</title>
+<style>__CSS__
+.cab{background:var(--sup);border-bottom:1px solid var(--borda)}.cab .in{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
+.cab img{height:38px;border-radius:8px}.cab a{text-decoration:none;color:var(--tx);font-weight:800;flex:1}
+main{max-width:1180px;margin:0 auto;padding:16px 16px 100px}
+.gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:8px;height:min(62vw,480px);border-radius:18px;overflow:hidden}
+.gal div{background:var(--sup2) center/cover;cursor:zoom-in;position:relative}.gal div:first-child{grid-row:span 2}
+.gal .mais{position:absolute;inset:0;background:rgba(0,0,0,.5);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px}
+@media (max-width:700px){.gal{grid-template-columns:1fr;grid-template-rows:1fr;height:72vw}.gal div:not(:first-child){display:none}}
+.cols{display:grid;grid-template-columns:1fr 360px;gap:26px;margin-top:20px}@media (max-width:900px){.cols{grid-template-columns:1fr}}
+h1{font-size:clamp(22px,4vw,32px);line-height:1.15}.preco{font-size:30px;font-weight:800;color:var(--pri);margin:6px 0}
+.carac{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:18px 0}.carac div{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px;text-align:center}
+.carac b{display:block;font-size:20px}#sr b{font-size:17px;white-space:nowrap}#sr{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.carac span{font-size:13px;color:var(--mu)}
+.sec{font-size:19px;font-weight:800;margin:24px 0 10px}.desc{white-space:pre-line;color:var(--tx2);font-size:16px;line-height:1.6}
+.dest li{margin:6px 0 6px 20px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:var(--sup);border:1px solid var(--borda);border-radius:99px;padding:6px 12px;font-size:14px}
+video{display:block;margin:0 auto;max-width:100%;max-height:72vh;border-radius:16px;background:#000}
+.lado{position:sticky;top:16px;align-self:start}
+.zapb{background:#25D366;border-color:#25D366;color:#fff;width:100%;font-size:17px;min-height:50px}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:60;display:flex;align-items:center;justify-content:center}
+.lb img{max-width:96vw;max-height:84vh;object-fit:contain}.lb button{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:50%;width:48px;height:48px;font-size:24px;cursor:pointer}
+.lb .x{top:14px;right:14px}.lb .a{left:10px;top:50%}.lb .p{right:10px;top:50%}.lb .cap{position:absolute;bottom:16px;color:#fff;text-align:center;width:100%;padding:0 20px}
+.fixo{position:fixed;left:0;right:0;bottom:0;background:var(--sup);border-top:1px solid var(--borda);padding:10px 16px;display:none;gap:8px;z-index:30}@media (max-width:900px){.fixo{display:flex}}
+.pq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}.pq-grid a{background:var(--sup);border:1px solid var(--borda);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--tx)}
+.pq-grid .ft{aspect-ratio:16/10;background:var(--sup2) center/cover}.pq-grid .cp{padding:10px}
+.selo-st{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:800;color:#fff;background:var(--er);margin-bottom:6px}
+</style></head><body><div id="app"><div class="vazio">Carregando…</div></div>
+<script>
+const API = location.origin + '/webhook/imoveis-api';
+const IMG = id => location.origin + '/webhook/imoveis-img?id=' + id;
+const ARQ = c => location.origin + '/videos/arquivo/' + c;
+__BASE__
+const q = new URLSearchParams(location.search); const LOJA = q.get('l'), COD = q.get('c');
+const TIPOS = { casa: 'Casa', apartamento: 'Apartamento', terreno: 'Terreno', comercial: 'Ponto comercial', sala: 'Sala comercial', chacara: 'Chácara', sobrado: 'Sobrado', cobertura: 'Cobertura', galpao: 'Galpão' };
+const FIN = { venda: 'à venda', aluguel: 'para alugar', temporada: 'para temporada' };
+(async () => {
+  const j = await api('imovel', { loja: LOJA, codigo: COD });
+  if (!j.ok) { $('#app').innerHTML = `<div class="vazio" style="padding-top:20vh"><div style="font-size:48px">🏠</div><h2>${esc(j.erro)}</h2><p><a href="${location.origin}/webhook/imoveis?l=${encodeURIComponent(LOJA)}">Ver outros imóveis</a></p></div>`; return; }
+  const L = j.loja, I = j.imovel; document.documentElement.style.setProperty('--pri', L.cor);
+  document.title = I.titulo + ' · ' + L.nome;
+  const fotos = I.fotos || [], leg = I.legendas || {};
+  const zap = `https://wa.me/${L.whatsapp}?text=${encodeURIComponent(`Olá! Tenho interesse no imóvel ${I.codigo}: ${I.titulo}\n${location.href}`)}`;
+  const vendido = I.status === 'vendido';
+  $('#app').innerHTML = `<div class="cab"><div class="in">${L.logo ? `<img src="${IMG(L.logo)}" alt="">` : ''}<a href="${location.origin}/webhook/imoveis?l=${encodeURIComponent(LOJA)}">${esc(L.nome)}</a><a class="btn pq" style="flex:none" href="${location.origin}/webhook/imoveis?l=${encodeURIComponent(LOJA)}">← Todos os imóveis</a></div></div>
+    <main><div class="gal">${fotos.slice(0, 3).map((f, i) => `<div data-i="${i}" style="background-image:url('${IMG(f)}')">${i === 2 && fotos.length > 3 ? `<span class="mais">+${fotos.length - 3} fotos</span>` : ''}</div>`).join('')}</div>
+    <div class="cols"><div>
+      ${vendido ? `<span class="selo-st">${I.finalidade === 'venda' ? 'VENDIDO' : 'ALUGADO'}</span>` : I.status === 'reservado' ? '<span class="selo-st" style="background:var(--av)">RESERVADO</span>' : ''}
+      <div class="mu pq">${TIPOS[I.tipo] || I.tipo} ${FIN[I.finalidade]} · cód. ${esc(I.codigo)}</div><h1>${esc(I.titulo)}</h1>
+      <div class="mu">📍 ${esc([I.endereco, I.bairro, I.cidade].filter(Boolean).join(', '))}</div>
+      <div class="preco">${brl(I.preco).replace(',00', '')}${I.finalidade === 'aluguel' ? '<span class="pq mu">/mês</span>' : ''}</div>
+      ${Number(I.condominio) || Number(I.iptu) ? `<div class="mu pq">${Number(I.condominio) ? 'Condomínio ' + brl(I.condominio) : ''}${Number(I.condominio) && Number(I.iptu) ? ' · ' : ''}${Number(I.iptu) ? 'IPTU ' + brl(I.iptu) + '/ano' : ''}</div>` : ''}
+      <div class="carac">${Number(I.area) ? `<div><b>${Number(I.area).toLocaleString('pt-BR')} m²</b><span>área útil</span></div>` : ''}${Number(I.area_total) ? `<div><b>${Number(I.area_total).toLocaleString('pt-BR')} m²</b><span>terreno</span></div>` : ''}
+        ${I.quartos ? `<div><b>${I.quartos}</b><span>quarto(s)${I.suites ? ', ' + I.suites + ' suíte(s)' : ''}</span></div>` : ''}${I.banheiros ? `<div><b>${I.banheiros}</b><span>banheiro(s)</span></div>` : ''}${I.vagas ? `<div><b>${I.vagas}</b><span>vaga(s)</span></div>` : ''}</div>
+      ${I.video && I.video.url ? `<div class="sec">▶️ Vídeo do imóvel</div><video src="${ARQ(I.video.url)}" ${I.video.capa ? `poster="${ARQ(I.video.capa)}"` : ''} controls playsinline preload="metadata"></video>` : ''}
+      ${I.destaques.length ? `<div class="sec">✨ Destaques</div><ul class="dest">${I.destaques.map(d => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}
+      <div class="sec">Sobre o imóvel</div><div class="desc">${esc(I.descricao || 'Fale com a gente para saber mais sobre este imóvel.')}</div>
+      ${I.finalidade === 'venda' && Number(I.preco) > 0 ? `<div class="sec">🏦 Simule o financiamento</div><div class="card" id="sim">
+        <div class="linha"><div><label>Entrada (R$)</label><input id="se" inputmode="numeric"></div><div><label>Prazo</label><select id="sp">${[420, 360, 300, 240, 180, 120].map(m => `<option value="${m}">${m / 12} anos</option>`).join('')}</select></div>
+        <div><label>Juros ao ano (%)</label><input id="sj" inputmode="decimal"></div><div><label>Sistema</label><select id="ss"><option value="sac">SAC (parcela cai)</option><option value="price">Price (parcela fixa)</option></select></div></div>
+        <div class="carac" id="sr" style="margin-top:12px"></div><p class="mu pq">Simulação aproximada, sem seguro e taxas do banco. A aprovação depende da análise de crédito. Mínimo de entrada costuma ser 20%.</p></div>` : ''}
+      ${I.caracteristicas.length ? `<div class="sec">O que tem</div><div class="chips">${I.caracteristicas.map(c => `<span>✔ ${esc(c)}</span>`).join('')}</div>` : ''}
+      ${j.parecidos.length ? `<div class="sec">Você também pode gostar</div><div class="pq-grid">${j.parecidos.map(p => `<a href="?l=${encodeURIComponent(LOJA)}&c=${p.codigo}"><div class="ft" style="background-image:url('${p.capa ? IMG(p.capa) : ''}')"></div><div class="cp"><b style="color:var(--pri)">${brl(p.preco).replace(',00', '')}</b><div class="pq">${esc(p.titulo)}</div></div></a>`).join('')}</div>` : ''}
+    </div><aside class="lado"><div class="card"><b style="font-size:18px">${vendido ? 'Este já foi negociado' : 'Gostou deste imóvel?'}</b><p class="mu pq" style="margin:4px 0 12px">${vendido ? 'Fale com a gente: temos outros parecidos.' : 'Fale agora com o corretor ou agende uma visita.'}</p>
+      ${L.whatsapp ? `<a class="btn zapb" id="zap" href="${zap}" target="_blank" rel="noopener">💬 Chamar no WhatsApp</a>` : ''}
+      <div style="margin-top:14px"><label>Seu nome</label><input id="nm"><label>WhatsApp com DDD</label><input id="tl" inputmode="tel"><label>Quero</label>
+      <select id="it"><option value="visita">Agendar uma visita</option><option value="informacoes">Mais informações</option><option value="financiamento">Simular financiamento</option><option value="proposta">Fazer uma proposta</option></select>
+      <label>Mensagem (opcional)</label><textarea id="ms" style="min-height:70px"></textarea><button class="btn pri" id="env" style="width:100%;margin-top:10px">Enviar</button></div>
+      <p class="mu pq" style="margin-top:10px">${esc(L.nome)}${L.creci ? ' · CRECI ' + esc(L.creci) : ''}</p></div></aside></div></main>
+    ${L.whatsapp ? `<div class="fixo"><a class="btn zapb" href="${zap}" target="_blank" rel="noopener">💬 WhatsApp</a></div>` : ''}`;
+  if ($('#sim')) {
+    const preco = Number(I.preco); $('#se').value = Math.round(preco * 0.2).toLocaleString('pt-BR'); $('#sj').value = String(L.juros_ano || 11.5).replace('.', ',');
+    const calc = () => {
+      const ent = num($('#se').value), fin = Math.max(0, preco - ent), n = Number($('#sp').value), i = Math.pow(1 + numIn($('#sj').value) / 100, 1 / 12) - 1;
+      let p1, pf, tot;
+      if ($('#ss').value === 'price') { p1 = pf = i > 0 ? fin * i / (1 - Math.pow(1 + i, -n)) : fin / n; tot = p1 * n; }
+      else { const amort = fin / n; p1 = amort + fin * i; pf = amort + amort * i; tot = amort * n + i * amort * n * (n + 1) / 2; }
+      $('#sr').innerHTML = `<div><b>${brl(fin).replace(',00', '')}</b><span>financiado</span></div><div><b>${brl(p1)}</b><span>${$('#ss').value === 'price' ? 'parcela fixa' : '1ª parcela'}</span></div>
+        ${$('#ss').value === 'sac' ? `<div><b>${brl(pf)}</b><span>última parcela</span></div>` : ''}<div><b>${brl(p1 / 0.3).replace(',00', '')}</b><span>renda mínima aprox.</span></div><div><b>${brl(tot).replace(',00', '')}</b><span>total pago ao banco</span></div>`;
+      if (ent < preco * 0.2) $('#sr').insertAdjacentHTML('beforeend', '<div style="grid-column:1/-1;color:var(--av)"><b>⚠️</b><span>Entrada abaixo de 20% pode não ser aceita.</span></div>');
+    };
+    $$('#sim input, #sim select').forEach(e => e.oninput = calc); calc();
+  }
+  const clique = () => api('clique', { loja: LOJA, codigo: COD }, 1); $$('a[href^="https://wa.me"]').forEach(a => a.addEventListener('click', clique));
+  $$('[data-i]').forEach(d => d.onclick = () => abreFoto(Number(d.dataset.i)));
+  function abreFoto(i) {
+    const lb = document.createElement('div'); lb.className = 'lb';
+    const mostra = () => lb.innerHTML = `<img src="${IMG(fotos[i])}" alt=""><div class="cap">${esc(leg[fotos[i]] || '')} <span style="opacity:.6">${i + 1}/${fotos.length}</span></div><button class="x">✕</button><button class="a">‹</button><button class="p">›</button>`;
+    lb.onclick = e => { const c = e.target.className; if (c === 'x' || e.target === lb) lb.remove(); else if (c === 'a') { i = (i - 1 + fotos.length) % fotos.length; mostra(); } else if (c === 'p') { i = (i + 1) % fotos.length; mostra(); } };
+    document.addEventListener('keydown', function k(e) { if (!document.body.contains(lb)) return document.removeEventListener('keydown', k); if (e.key === 'Escape') lb.remove(); if (e.key === 'ArrowLeft') { i = (i - 1 + fotos.length) % fotos.length; mostra(); } if (e.key === 'ArrowRight') { i = (i + 1) % fotos.length; mostra(); } });
+    let x0 = null; lb.addEventListener('touchstart', e => x0 = e.touches[0].clientX); lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { i = (i + (dx < 0 ? 1 : -1) + fotos.length) % fotos.length; mostra(); } x0 = null; });
+    mostra(); document.body.appendChild(lb);
+  }
+  $('#env').onclick = async () => { $('#env').disabled = true;
+    const r = await api('lead', { loja: LOJA, codigo: COD, nome: $('#nm').value, telefone: $('#tl').value, interesse: $('#it').value, mensagem: $('#ms').value });
+    $('#env').disabled = false; if (!r.ok) return aviso(r.erro, true);
+    $('#env').closest('div').innerHTML = '<div style="text-align:center;padding:14px"><div style="font-size:42px">✅</div><b>Recebemos!</b><p class="mu pq">O corretor vai te chamar no WhatsApp em breve.</p></div>'; };
+})();
+</script></body></html>

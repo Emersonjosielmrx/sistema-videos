@@ -318,3 +318,78 @@
 - prova: No vídeo LUQDew946Ps (legibilidade 3.5, q06), a legenda oficial em português colidiu visualmente com o texto espelhado da fonte original em inglês ('tuov tlust e'mraG ton e'tI').
 - onde: bin/delogo.py ou bin/anime_legendas.py antes da etapa de queimado da legenda final
 - como testar: Processar trechos que contenham texto queimado no material bruto e confirmar a aplicação do delogo/máscara antes da sobreposição da legenda em português.
+
+## 14/11 13:47 [CERTEZA] Trava de posicionamento de stickers e balões fora da área facial (gemini/gemini-3.5-flash)
+- prova: Em LUQDew946Ps (legibilidade 3.5), a tarja 'BOTANDO' cobriu o rosto da personagem; em KQMPGyt6PxA (legibilidade 4.5), stickers 'OS GURI?' e 'UMA ALMA' ficaram sobre os olhos do protagonista e a face do idoso.
+- onde: bin/mascote_overlay.py / bin/fx_clips.py
+- como testar: Gerar clipe com stickers de gancho ativados e verificar se as caixas de texto permanecem restritas ao terço inferior ou áreas negativas sem sobreposição com rostos detectados.
+
+## 14/11 13:47 [CERTEZA] Ajuste na âncora do crop vertical para evitar decapitação em zooms e pans (gemini/gemini-3.5-flash)
+- prova: Em KQMPGyt6PxA (movimento 6.0), a câmera aplicou zoom/pan cortando o topo da cabeça do personagem e enquadrando peito e manga durante a fala 'chega esbaforido'.
+- onde: bin/fx_clips.py
+- como testar: Executar a função de renderização de movimento vertical em quadros com personagens e confirmar visualmente que os olhos e o topo da cabeça permanecem visíveis no terço superior.
+
+## 14/11 18:30 [CERTEZA] Corrigir distorção de malha 2.5D e eliminar fenda de costura (seam tear) vertical (gemini/gemini-3.5-flash)
+- prova: S6LISaC7K6A apresentou rosto com 3 olhos e feições duplicadas em q01 (nota 4.12); KAA_csRv7NU apresentou rosto partido verticalmente com duplicação de olho/sobrancelha em cena central.
+- onde: bin/fx_clips.py:aplicar_efeito_25d / animar_crop_vertical
+- como testar: Executar render de amostragem em quadros de close-up facial com parallax 2.5D habilitado e validar visualmente ausência de duplicação de feições ou desalinhamento de emenda vertical.
+
+## 14/11 18:30 [CERTEZA] Reforçar inpainting/limpeza automática de balões de fala e marcas em inglês (gemini/gemini-3.5-flash)
+- prova: KAA_csRv7NU q02, q03 e q07-q09 exibiram balões em inglês visíveis ('EN-THUNDERSCANS.COM' e 'SUCH A GROWN MAN...'), derrubando retenção para 4.0 e história para 5.0.
+- onde: bin/limpa_baloes.py:remover_texto_ingles
+- como testar: Rodar rotina de detecção de OCR e inpaint em lote de quadros com balões em inglês e verificar se 100% das caixas de texto estrangeiro foram limpas.
+
+## 14/11 18:30 [CERTEZA] Ajustar colisão e margem de segurança de legendas/stickers sobre a boca de personagens (gemini/gemini-3.5-flash)
+- prova: S6LISaC7K6A teve a legenda 'você ficar' e o sticker 'DESFALQUE' posicionados diretamente sobre a boca e queixo dos personagens nos close-ups de reação.
+- onde: bin/mascote_overlay.py e bin/fx_clips.py:posicionar_elementos_texto
+- como testar: Gerar render de teste em sequências com stickers/legendas em close-ups faciais e verificar se a região da boca e olhos permanece 100% desobstruída.
+
+## 14/11 22:46 [CERTEZA] Limitar duração de stickers a 2s e bloquear sobreposição em rostos/bocas (gemini-4-argon)
+- prova: Em S6LISaC7K6A ('DESFALQUE' sobre a boca em choro; 'QUE DIABOS' congelado por >9s de q07 a q09), KAA_csRv7NU ('SE INSCREVE!' fixo por >4s cobrindo rosto em q16) e t-mnhLoSb18 ('ESTÃO?' nos olhos e 'A FORTALEZA' na boca), stickers estáticos obstruíram expressões faciais e poluíram o gancho.
+- onde: bin/fx_clips.py e bin/mascote_overlay.py
+- como testar: Renderizar trecho de 60s com stickers/CTAs e verificar no júri se nenhum overlay ultrapassa 2.0s, se é encerrado no corte de cena e se respeita a bounding box facial.
+
+## 14/11 22:46 [CERTEZA] Corrigir wrap/costura vertical no pan/crop, artefato de wipe diagonal e deformação 2.5D em rostos (gemini-4-argon)
+- prova: Em S6LISaC7K6A o efeito 2.5D gerou três olhos e corte triangular no braço; em KAA_csRv7NU houve seam tear vertical partindo o rosto; em t-mnhLoSb18 o pan vertical sem clamp duplicou o topo da cabeça e uma linha diagonal de wipe ficou travada sobre o salão.
+- onde: bin/fx_clips.py (funções de _movimento, pan/crop 16:9, wipe e parallax 2.5D)
+- como testar: Aplicar clamp nas bordas do pan/zoom para impedir repetição de pixels (wrap), desativar distorção de malha 2.5D sobre faces detectadas e validar keyframes de transição wipe em trechos de teste.
+
+## 14/11 22:46 [CERTEZA] Detectar marca d'água antes de espelhar quadro e cobrir balões em inglês na base (gemini-4-argon)
+- prova: Em t-mnhLoSb18 a marca 'AniPrestige' passou batida porque o quadro foi espelhado horizontalmente ('pit2e19inA'); em KAA_csRv7NU o selo roxo 'EN-THUNDERSCANS.COM' e balões em inglês (q02, q03, q07–q09) ficaram totalmente expostos.
+- onde: bin/marca_site.py e pipeline de limpeza/crop de painéis
+- como testar: Executar OCR/detecção de marca d'água também na versão espelhada do frame antes de aplicar hflip + delogo, e aplicar inpaint/crop nos balões de diálogo em inglês na base dos quadros.
+
+## 14/11 23:26 [CERTEZA] Clamp de bordas no pan vertical para evitar duplicação e wrap de quadros (gemini/gemini-3.5-flash)
+- prova: t-mnhLoSb18 (legibilidade 4.0 / movimento 5.0): pan vertical sem clamp causou wrap horizontal e duplicou o topo da cabeça do personagem no limite da tela.
+- onde: bin/fx_clips.py
+- como testar: Executar animação de pan vertical no limite do enquadramento e confirmar que as bordas aplicam clamp sem duplicação de quadros.
+
+## 14/11 23:26 [CERTEZA] Offset de margem de segurança para legendas e stickers longe do rosto (gemini/gemini-3.5-flash)
+- prova: S6LISaC7K6A (legibilidade 5.0) com sticker 'DESFALQUE' e legendas sobre a boca; t-mnhLoSb18 (legibilidade 4.0) com sticker 'ESTÃO?' cobrindo os olhos do personagem.
+- onde: bin/legenda.py e bin/mascote_overlay.py
+- como testar: Renderizar cenas de close-up facial e verificar se legendas/stickers são reposicionados automaticamente na margem neutra.
+
+## 14/11 23:26 [CERTEZA] Limpeza automática (inpaint/delogo) de balões em inglês e marcas de scan (gemini/gemini-3.5-flash)
+- prova: KAA_csRv7NU (historia 5.0): balões com texto em inglês 'SUCH A GROWN MAN...' e marca 'EN-THUNDERSCANS.COM' visíveis no render.
+- onde: bin/limpa_balao.py e bin/delogo.py
+- como testar: Processar imagem com balões em inglês e verificar se o OCR/inpaint remove o texto mantendo a textura original do painel.
+
+## 14/11 23:26 [CERTEZA] Fallback do efeito 2.5D/parallax para pan/zoom 2D em segmentações complexas (gemini/gemini-3.5-flash)
+- prova: S6LISaC7K6A (legibilidade 5.0): deformação no efeito 2.5D gerou rosto com três olhos e feições duplicadas.
+- onde: bin/fx_clips.py
+- como testar: Simular mapa de profundidade de baixa confiança e verificar se o sistema comuta para zoom 2D suave em vez de aplicar distorção de malha.
+
+## 15/11 02:17 [CERTEZA] Limpeza automática de balões de texto em inglês e marcas de scan (gemini/gemini-3.5-flash)
+- prova: KAA_csRv7NU (história 5.0) exibe balões em inglês ('SUCH A GROWN MAN...', 'IS THE SUPREME RULER...') nos quadros q02, q03, q07, q08, q09 e marca d'água EN-THUNDERSCANS.COM.
+- onde: bin/scan_cleaner.py
+- como testar: Executar a rotina de limpeza/inpaint na imagem fonte de KAA_csRv7NU e conferir a remoção total do texto em inglês e das marcas de scan.
+
+## 15/11 02:17 [CERTEZA] Margem de segurança para legendas e stickers desviarem do rosto dos personagens (gemini/gemini-3.5-flash)
+- prova: S6LISaC7K6A (legibilidade 5.0) teve o sticker 'DESFALQUE' e legenda 'você ficar' sobre a boca do personagem; t-mnhLoSb18 (legibilidade 4.0) teve o sticker 'ESTÃO?' sobre os olhos.
+- onde: bin/legenda.py e bin/mascote_overlay.py
+- como testar: Processar os takes com sobreposição ajustando a posição Y dos elementos para manter a expressão facial desobstruída.
+
+## 15/11 02:17 [CERTEZA] Clamp nas bordas do movimento de câmera e travamento do efeito 2.5D instável (gemini/gemini-3.5-flash)
+- prova: t-mnhLoSb18 (movimento 5.0) apresentou topo da cabeça duplicado/cortado em pan vertical; S6LISaC7K6A (legibilidade 5.0) sofreu deformação severa de malha no rosto em 2.5D.
+- onde: bin/fx_clips.py (_movimento)
+- como testar: Renderizar clipe com pan vertical checando se o clamp impede duplicação visual e fallback para pan/zoom 2D suave em recortes faciais complexos.

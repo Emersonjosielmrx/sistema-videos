@@ -9,6 +9,7 @@ Também atende os botões do telão: "abrir vídeo" e "ver" (vídeo esperando ap
     python vitrine_painel.py            # mostra o JSON que iria pros telões
 """
 import json
+import os
 import re
 import shutil
 import time
@@ -32,6 +33,10 @@ FUSO = timezone(timedelta(hours=-3))
 # 12/11 dona (2ª): telão = STI e PC2. Próximos/saindo só longos; ranking do dia + ranking de todos os tempos (saem os de
 # 5 mil e 1.200); no lugar de "novos inscritos", só os canais acima do normal no dia (views e inscritos)
 _QUADROS = ["producao", "acima", "rankdia", "maisvistos", "proximos", "saindo", "pendentes", "bloqueios", "opus"]
+# 14/11 dona: gráficos da semana + recordes (página pública de gráficos) em todos os telões. TELAO_GRAFICOS=0 tira.
+if __import__("os").environ.get("TELAO_GRAFICOS", "1") != "0":
+    _QUADROS = ["graficos", "producao", "acima", "recordes", "rankdia", "maisvistos", "proximos", "saindo", "pendentes",
+                "bloqueios", "opus"]
 TELAS = {"sti": _QUADROS, "pc2": _QUADROS, "desktop": _QUADROS,
          "acer": ["saindo", "proximos", "acima", "rankdia", "maisvistos", "pendentes", "producao"],
          "x200ma": ["producao", "acima", "rankdia", "maisvistos", "bloqueios", "opus", "proximos"]}
@@ -261,10 +266,16 @@ def pendentes(forcar=False):
             continue
         if re.search(r"dispensad|dono \d", rev, re.I):  # já decidido pela dona (descartado/reprovado por ela)
             continue
+        # 15/11 dona ("o Esperando você do telão são vídeos sem nome, não faz sentido; eu disse pra você mesmo
+        # selecionar"): "aprovado"/"ok (automático...)" já passou — não espera ninguém. Só fica o que a IA NÃO
+        # resolveu (reprovado/segurado/nudez). PENDENTES_SO_REAIS=0 volta ao antigo.
+        if (os.environ.get("PENDENTES_SO_REAIS", "1") != "0"
+                and (rev.startswith(("aprovado", "ok")) or not re.search(r"reprov|segur|nudez|revisar|conferir", rev, re.I))):
+            continue
         mp4 = next(iter(sorted(pj.parent.glob("*.mp4"))), None)
         if mp4:
-            itens.append({"id": f"a:{pj.parent.name}", "nome": pj.parent.name, "projeto": "Anime/recap",
-                          "motivo": rev[:80], "caminho": str(mp4)})
+            itens.append({"id": f"a:{pj.parent.name}", "nome": (d.get("titulo") or pj.parent.name)[:70],
+                          "projeto": "Anime/recap", "motivo": rev[:80], "caminho": str(mp4)})
     PENDENTES_CACHE.parent.mkdir(parents=True, exist_ok=True)
     PENDENTES_CACHE.write_text(json.dumps({"t": time.time(), "itens": itens}, ensure_ascii=False), encoding="utf-8")
     return itens

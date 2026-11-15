@@ -137,3 +137,11 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-13 14:46 | veo_cassetadas_ia_20261111_150302__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_cassetadas_ia_20261111_150302__inventoreact.png` | backup_drive.py |
 | 2026-11-13 17:00 | veo_noticias_de_ia_20261111_054318__manhwareact.mp4 | 9.7 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_noticias_de_ia_20261111_054318__manhwareact.mp4` | backup_drive.py |
 | 2026-11-13 17:00 | veo_noticias_de_ia_20261111_054318__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_noticias_de_ia_20261111_054318__manhwareact.png` | backup_drive.py |
+| 2026-11-14 12:19 | veo_e_se..._20261112_051501__manhwareact.mp4 | 10.2 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_e_se..._20261112_051501__manhwareact.mp4` | backup_drive.py |
+| 2026-11-14 12:19 | veo_segredos_do_oce_20261111_155259__inventoreact.mp4 | 6.4 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_segredos_do_oce_20261111_155259__inventoreact.mp4` | backup_drive.py |
+| 2026-11-14 12:19 | veo_e_se..._20261112_051501__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_e_se..._20261112_051501__manhwareact.png` | backup_drive.py |
+| 2026-11-14 12:19 | veo_segredos_do_oce_20261111_155259__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_segredos_do_oce_20261111_155259__inventoreact.png` | backup_drive.py |
+| 2026-11-14 14:44 | veo_curiosidades_ia_20260802_100732__inventoreact.mp4 | 6.1 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_curiosidades_ia_20260802_100732__inventoreact.mp4` | backup_drive.py |
+| 2026-11-14 14:44 | veo_curiosidades_ia_20260802_100732__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_curiosidades_ia_20260802_100732__inventoreact.png` | backup_drive.py |
+| 2026-11-14 16:45 | veo_danca_e_musica__20260729_224910__inventoreact.mp4 | 12.5 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_danca_e_musica__20260729_224910__inventoreact.mp4` | backup_drive.py |
+| 2026-11-14 16:45 | veo_danca_e_musica__20260729_224910__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_danca_e_musica__20260729_224910__inventoreact.png` | backup_drive.py |

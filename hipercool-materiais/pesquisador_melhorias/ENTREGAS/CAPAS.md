@@ -188,3 +188,16 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_pacote_troca__sonnet_0711.md`
 - (todos os itens desta pesquisa foram reprovados)
 - 14/11 07h50 (chat LONGOS/CAPAS): conferi as 2 regras novas da página oficial 13861714. (a) "capa com menos de 1280x720 derruba todas do teste pra 480p" — JÁ ATENDIDO: capa_ia_anime.QUADRO 16:9 = (1280, 720); medi 10 capas recentes, todas 1280x720. (b) "mudar título/capa durante o teste cancela o teste" — JÁ ATENDIDO: capas_depois aplica A e depois o A/B, e não mexe mais; e hoje os 11 canais de longo estão sem recursos avançados (sem A/B). Tema "troca do concorrente" já avaliado em 13/11 21h45 (sem monitor de concorrente ainda).
+
+## [x] AVALIADO 14/11 — 0 aplicados, 0 reprovados (motor já reprovou tudo), 0 deixados — 2026-11-14 14:17 — Corpus de títulos e thumbnails por nicho e idioma (`area_titulo_thumb_corpus`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulo_thumb_corpus__sonnet_1353.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 — 0 aplicados, 0 reprovados (motor já reprovou tudo), 0 deixados — 2026-11-14 15:26 — Troca de título ou capa dos concorrentes (`area_troca_titulo_capa`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_troca_titulo_capa__sonnet_1511.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 — 0 aplicados, 2 reprovados, 0 deixados — 2026-11-14 20:53 — Padrões de capa por nicho a partir de miniaturas já baixadas (`area_capas_corpus`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_capas_corpus__sonnet_2046.md`
+- [INÉDITO] github.com/tungpm21/niche-research — ★0, push 2026-11-07, MIT — Claude Code skill: YouTube niche research (channel outliers, thumbnail sheets, trending keywords, Studio Research tab) with no API key
+- [INÉDITO] github.com/jb-alvarado/facedetection-thumb — ★4, push 2026-10-29, MIT — Generate thumbnail from video with face detection

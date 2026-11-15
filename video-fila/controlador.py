@@ -58,7 +58,8 @@ ENV = dict(os.environ, PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
 HIPER_ESTOQUE_MIN = 5
 HIPER_ESTOQUE_URGENTE = 2
 MSENERGY_POR_DIA = 2
-RESERVA_DIAS = 7  # 02/11 dona: todo projeto guarda 1 semana de vídeos (doc: MELHORIAS_PARA_TODOS_OS_PROJETOS.md)
+# 14/11 dona: "o estoque de Instagram das empresas tem que ter os mesmos 30 dias" (era 7, de 02/11). RESERVA_DIAS_EMPRESAS volta.
+RESERVA_DIAS = int(__import__("os").environ.get("RESERVA_DIAS_EMPRESAS", "30"))
 MSENERGY_TENTATIVAS_DIA = 3
 VEO_TETO_DIA = 40
 VEO_LIMPAR_LOTE = 5

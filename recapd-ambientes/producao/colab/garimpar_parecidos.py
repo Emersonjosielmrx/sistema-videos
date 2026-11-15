@@ -41,16 +41,29 @@ TEMAS = [
     ("sistema_dinheiro", INVENTO,
      ["manhwa recap money system", "manhwa recap spend money system women", "manhwa recap billionaire system"],
      r"money|rich|billion|million|spend|wealth|gold|cash|debt"),
+    # 14/11 dona ("temos que fazer mais desse do jardineiro e colocar no mesmo canal o mais rápido possível"): o
+    # "jardineiro mal-arrumado" (lztXRIb2s30, Arrogant Students Had No Idea the Academy...) segura 70 min por view —
+    # 112 h assistidas com 96 views. Tema: funcionário humilde/subestimado na academia que é o mais forte em segredo.
+    ("jardineiro_academia", FIO,
+     ["manhwa recap academy janitor secretly strongest", "manhwa recap arrogant students had no idea",
+      "manhwa recap gardener academy hidden power", "manhwa recap academy staff underestimated"],
+     r"academ|janitor|gardener|staff|servant|cleaner|teacher|arrogant|student|underestimat|hidden|secret"),
     ("loot_box_sistema", FIO,
      ["manhwa recap loot box system", "manhwa recap gacha system apocalypse"],
      r"loot|box|gacha|chest|drop|item"),
-    ("medieval_tecnologia", FIO,
-     ["manhwa recap medieval technology modern knowledge", "manhwa recap reincarnated noble kingdom develop"],
-     r"medieval|kingdom|empire|lord|noble|territor|technolog|develop|engineer"),
+    # 14/11 dona: "medieval age pode parar de focar nele" — tema medieval_tecnologia tirado (GARIMPAR_MEDIEVAL=1 volta)
+    *([("medieval_tecnologia", FIO,
+        ["manhwa recap medieval technology modern knowledge", "manhwa recap reincarnated noble kingdom develop"],
+        r"medieval|kingdom|empire|lord|noble|territor|technolog|develop|engineer")]
+      if os.environ.get("GARIMPAR_MEDIEVAL") == "1" else []),
     ("renasce_rico_forte", FIO,
      ["manhwa recap reborn stronger richer", "manhwa recap regressor revenge rich"],
      r"reborn|regress|return|richer|rich|revenge"),
 ]
+# 14/11 dona ("mais dos do dinheiro e do cara bilionário no InventoReact, o mais rápido possível"): os temas campeões
+# pegam mais por tema. PARECIDOS_POR_TEMA_CAMPEAO muda.
+CAMPEOES = {"ex_arrependida", "sistema_dinheiro", "jardineiro_academia"}
+POR_TEMA_CAMPEAO = int(os.environ.get("PARECIDOS_POR_TEMA_CAMPEAO", "5"))
 
 
 def buscar_tema(q, rx):
@@ -102,7 +115,7 @@ def main(ver):
                 if v["id"] not in conhecidos and v["id"] not in {x["id"] for x in escolhidos}:
                     achados[v["id"]] = v
             time.sleep(25)
-        top = sorted(achados.values(), key=lambda v: -v["views"])[:POR_TEMA]
+        top = sorted(achados.values(), key=lambda v: -v["views"])[:POR_TEMA_CAMPEAO if tema in CAMPEOES else POR_TEMA]
         for v in top:
             v.update(tipo="manhwa", canal_destino=canal, tema=tema, garimpado=time.strftime("%Y-%m-%d"),
                      parecido=True)
@@ -113,8 +126,12 @@ def main(ver):
         return
     d = json.loads(gf.CFG.read_text(encoding="utf-8"))
     vs = d.get("videos", [])
-    # logo depois da série que a dona acompanha (forcar_longo), antes dos mais vistos genéricos
-    i = max((k + 1 for k, v in enumerate(vs) if v.get("forcar_longo") or "SÉRIE" in (v.get("titulo") or "")), default=0)
+    # 14/11 dona (parar de focar no Medieval): parecidos com os campeões vão pra FRENTE DE TUDO (a série foi pro fim);
+    # PARECIDOS_DEPOIS_DA_SERIE=1 volta a pôr depois da série.
+    if os.environ.get("PARECIDOS_DEPOIS_DA_SERIE") == "1":
+        i = max((k + 1 for k, v in enumerate(vs) if v.get("forcar_longo") or "SÉRIE" in (v.get("titulo") or "")), default=0)
+    else:
+        i = 0
     d["videos"] = vs[:i] + escolhidos + vs[i:]
     d["ja_garimpados"] = sorted(set(d.get("ja_garimpados", [])) | {v["id"] for v in escolhidos})
     d["_leia_parecidos"] = ("12/11 dona: obras PARECIDAS com as que deram certo (ex arrependida/sistema de dinheiro -> "

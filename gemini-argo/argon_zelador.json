@@ -1,70 +1,78 @@
 {
  "contas": 29,
- "prontas": 12,
- "cookies_mortos": 16,
- "sem_cota": 0,
+ "prontas": 4,
+ "cookies_mortos": 18,
+ "sem_cota": 20,
  "bloqueadas": 1,
- "aguardando_oi": 2,
- "proxima_volta": null,
+ "aguardando_oi": 22,
+ "proxima_volta": "2026-11-15T04:01",
  "ultimas_voltas": [
   [
-   "2026-11-14T06:52",
+   "2026-11-15T03:34",
    "empressinovare"
   ],
   [
-   "2026-11-14T03:48",
-   "inovaremanhwaverseesp"
-  ],
-  [
-   "2026-11-14T03:30",
+   "2026-11-15T03:19",
    "inovaremanhwaverseing"
   ],
   [
-   "2026-11-14T00:41",
-   "emersonjosiel2029"
+   "2026-11-15T03:04",
+   "en1653964"
   ],
   [
-   "2026-11-13T21:27",
-   "emersonjosiel2030"
+   "2026-11-15T02:52",
+   "fabricadeautomacoes0"
   ],
   [
-   "2026-11-13T10:36",
-   "mentoriaiapro"
+   "2026-11-15T02:01",
+   "vendeafiliados3"
   ],
   [
-   "2026-11-13T09:28",
-   "aulacomia"
+   "2026-11-15T02:01",
+   "gameoftroneskingsroadbrasil"
   ],
   [
-   "2026-11-13T06:03",
-   "inovaremanhwabr"
+   "2026-11-15T02:01",
+   "emersongencshin"
+  ],
+  [
+   "2026-11-15T01:48",
+   "fabiovideoseducativos"
   ]
  ],
- "em": "2026-11-14T10:41:06",
- "duracao_s": 177,
- "conferidas": 4,
+ "em": "2026-11-15T03:49:29",
+ "duracao_s": 686,
+ "conferidas": 7,
  "mortas_vistas": [
+  "emersonjosiel2029",
+  "emersonjosiel2030",
+  "comoseriasecomia",
+  "emersonjosiel2033",
+  "inovaremanhwaverseesp",
+  "inovaremanhwaversethai",
   "solarmundo195",
   "inovaremanhwabr",
-  "inovaremanhwaverseing",
   "aulacomia",
   "aulasrevolution",
+  "inovaremultiatendimento",
   "filmescomia1",
-  "msenergypara",
   "murilodoctor192",
+  "emersonjosiel1995",
   "mentoriaiapro",
-  "inovarecap",
-  "empressinovare",
-  "fabiovideoseducativos",
-  "gameoftroneskingsroadbrasil",
-  "en1653964",
-  "emersonjosiel2031",
-  "entrevistacomia"
+  "e4487017",
+  "inovarecap"
  ],
  "renovadas": [
-  "emersongenc"
+  "vendeafiliados3"
  ],
- "falhas_renovar": [],
+ "falhas_renovar": [
+  "solarmundo195",
+  "aulasrevolution",
+  "murilodoctor192",
+  "gameoftroneskingsroadbrasil"
+ ],
  "voltaram": [],
- "oi_sem_cota": []
+ "oi_sem_cota": [
+  "msenergypara"
+ ]
 }

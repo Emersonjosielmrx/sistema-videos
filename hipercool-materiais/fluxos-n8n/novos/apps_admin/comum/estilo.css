@@ -1,0 +1,36 @@
+:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:__COR__;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}
+*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}
+a{color:var(--pri)}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}
+.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}
+.btn.fant{border-color:transparent;background:transparent}
+input,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}
+label{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}
+.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}
+.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}
+.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}
+.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}
+.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.toast.er{background:var(--er);color:#fff}
+.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}
+@media (min-width:700px){.modal-fundo{align-items:center}}
+.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}
+@media (min-width:700px){.modal{border-radius:18px}}
+.modal h3{font-size:18px;margin-bottom:6px}
+.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}
+.tabela{overflow-x:auto}
+.vazio{text-align:center;padding:30px 10px;color:var(--mu)}
+.num{font-variant-numeric:tabular-nums}

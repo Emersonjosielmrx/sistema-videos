@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Imóveis</title>
+<style>__CSS__
+body{background:var(--plano)}
+.cab{background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 55%,#000));color:#fff}
+.cab .in{max-width:1180px;margin:0 auto;padding:16px;display:flex;gap:12px;align-items:center}
+.cab img{height:46px;border-radius:10px;background:#fff;padding:3px}.cab .nm{font-weight:800;font-size:19px;flex:1}
+.hero{max-width:1180px;margin:0 auto;padding:30px 16px 12px;color:#fff}.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.1;max-width:720px}.hero p{opacity:.9;margin-top:8px;max-width:640px}
+.filtros{max-width:1180px;margin:-4px auto 0;padding:0 16px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.filtros select,.filtros input{background:#fff;color:#18181b;border:0}
+main{max-width:1180px;margin:0 auto;padding:22px 16px 60px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.im{background:var(--sup);border-radius:18px;overflow:hidden;border:1px solid var(--borda);box-shadow:var(--sombra);text-decoration:none;color:var(--tx);display:flex;flex-direction:column;transition:transform .15s}
+.im:hover{transform:translateY(-3px)}
+.im .ft{aspect-ratio:4/3;background:var(--sup2) center/cover;position:relative}
+.im .tags{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}.im .tags span{background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px}
+.im .tags .vd{background:var(--er)}.im .tags .rs{background:var(--av)}.im .tags .dt{background:var(--pri)}
+.im .cp{padding:14px}.im .pr{font-size:21px;font-weight:800;color:var(--pri)}.im .tt{font-weight:700;margin:2px 0}.im .lc{color:var(--mu);font-size:14px}
+.im .ca{display:flex;gap:12px;color:var(--tx2);font-size:14px;margin-top:8px;flex-wrap:wrap}
+.vendido{opacity:.7}.vendido .ft{filter:grayscale(.6)}
+.rod{text-align:center;color:var(--mu);font-size:13px;padding:30px 16px}
+.zap{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.25);text-decoration:none}
+</style></head><body><div id="app"><div class="vazio">Carregando imóveis…</div></div>
+<script>
+const API = location.origin + '/webhook/imoveis-api';
+const IMG = id => location.origin + '/webhook/imoveis-img?id=' + id;
+__BASE__
+const LOJA = new URLSearchParams(location.search).get('l');
+const TIPOS = { casa: 'Casa', apartamento: 'Apartamento', terreno: 'Terreno', comercial: 'Comercial', sala: 'Sala', chacara: 'Chácara', sobrado: 'Sobrado', cobertura: 'Cobertura', galpao: 'Galpão' };
+const FIN = { venda: 'Venda', aluguel: 'Aluguel', temporada: 'Temporada' };
+const preco = i => brl(i.preco).replace(',00', '') + (i.finalidade === 'aluguel' ? '/mês' : i.finalidade === 'temporada' ? '/diária' : '');
+(async () => {
+  const j = await api('site', { loja: LOJA });
+  if (!j.ok) { $('#app').innerHTML = `<div class="vazio"><h2>${esc(j.erro)}</h2></div>`; return; }
+  const L = j.loja; document.documentElement.style.setProperty('--pri', L.cor); document.title = L.nome + ' · Imóveis';
+  const bairros = [...new Set(j.imoveis.map(i => i.bairro).filter(Boolean))].sort();
+  $('#app').innerHTML = `<div class="cab"><div class="in">${L.logo ? `<img src="${IMG(L.logo)}" alt="">` : ''}<div class="nm">${esc(L.nome)}</div>${L.creci ? `<span class="pq" style="opacity:.85">CRECI ${esc(L.creci)}</span>` : ''}</div>
+    <div class="hero"><h1>Encontre o imóvel certo${L.cidade ? ' em ' + esc(L.cidade) : ''}</h1><p>${esc(L.sobre || 'Imóveis selecionados, com fotos, vídeo e atendimento direto pelo WhatsApp.')}</p></div>
+    <div class="filtros"><select id="ff"><option value="">Comprar ou alugar</option>${Object.entries(FIN).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+    <select id="ft"><option value="">Todos os tipos</option>${[...new Set(j.imoveis.map(i => i.tipo))].map(t => `<option value="${t}">${TIPOS[t] || t}</option>`).join('')}</select>
+    <select id="fb"><option value="">Todos os bairros</option>${bairros.map(b => `<option>${esc(b)}</option>`).join('')}</select>
+    <select id="fq"><option value="0">Quartos</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select>
+    <input id="fp" inputmode="numeric" placeholder="Preço até (R$)"></div></div>
+    <main><div class="linha" style="margin-bottom:14px"><b id="qt"></b><span></span><select id="or" style="flex:0 0 190px"><option value="">Mais recentes</option><option value="m">Menor preço</option><option value="M">Maior preço</option></select></div><div class="grade" id="gr"></div></main>
+    <div class="rod">${esc(L.nome)}${L.creci ? ' · CRECI ' + esc(L.creci) : ''}${L.instagram ? ` · <a href="https://instagram.com/${esc(L.instagram)}" target="_blank" rel="noopener">@${esc(L.instagram)}</a>` : ''}</div>
+    ${L.whatsapp ? `<a class="zap" href="https://wa.me/${L.whatsapp}?text=${encodeURIComponent('Olá! Vi os imóveis no site e quero mais informações.')}" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>` : ''}`;
+  const lista = () => {
+    const f = { fin: $('#ff').value, tipo: $('#ft').value, bairro: $('#fb').value, q: Number($('#fq').value), max: num($('#fp').value) };
+    let r = j.imoveis.filter(i => (!f.fin || i.finalidade === f.fin) && (!f.tipo || i.tipo === f.tipo) && (!f.bairro || i.bairro === f.bairro) && i.quartos >= f.q && (!f.max || i.preco <= f.max));
+    if ($('#or').value === 'm') r.sort((a, b) => a.preco - b.preco); if ($('#or').value === 'M') r.sort((a, b) => b.preco - a.preco);
+    $('#qt').textContent = r.length + (r.length === 1 ? ' imóvel' : ' imóveis');
+    $('#gr').innerHTML = r.map(i => `<a class="im ${i.status === 'vendido' ? 'vendido' : ''}" href="${location.origin}/webhook/imovel?l=${encodeURIComponent(LOJA)}&c=${i.codigo}">
+      <div class="ft" style="background-image:url('${i.capa ? IMG(i.capa) : ''}')"><div class="tags"><span>${FIN[i.finalidade]}</span>${i.destaque ? '<span class="dt">⭐ Destaque</span>' : ''}${i.tem_video ? '<span>▶ Vídeo</span>' : ''}${i.status === 'vendido' ? `<span class="vd">${i.finalidade === 'venda' ? 'Vendido' : 'Alugado'}</span>` : i.status === 'reservado' ? '<span class="rs">Reservado</span>' : ''}</div></div>
+      <div class="cp"><div class="pr">${preco(i)}</div><div class="tt">${esc(i.titulo)}</div><div class="lc">📍 ${esc([i.bairro, i.cidade].filter(Boolean).join(', '))}</div>
+      <div class="ca">${i.area > 0 ? `<span>📐 ${Number(i.area).toLocaleString('pt-BR')} m²</span>` : ''}${i.quartos ? `<span>🛏️ ${i.quartos}</span>` : ''}${i.banheiros ? `<span>🛁 ${i.banheiros}</span>` : ''}${i.vagas ? `<span>🚗 ${i.vagas}</span>` : ''}</div></div></a>`).join('') || '<div class="vazio">Nenhum imóvel com esses filtros.</div>';
+  };
+  $$('.filtros select, .filtros input, #or').forEach(e => e.oninput = lista); lista();
+})();
+</script></body></html>

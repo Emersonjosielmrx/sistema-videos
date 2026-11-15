@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vitrine de Imóveis com IA</title><meta name="robots" content="noindex">
+<style>__CSS__
+.w{max-width:560px;margin:0 auto;padding:32px 16px 60px}h1{font-size:30px;line-height:1.15}.sub{color:var(--tx2);margin:8px 0 18px}
+.lista{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}.lista div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:14px;font-weight:600}
+.pronto{border:2px solid var(--ok)}
+</style></head><body><div class="w">
+<h1>🏠 Vitrine de Imóveis com IA</h1><p class="sub">Seu site de imóveis pronto em 1 minuto. Você sobe as fotos pelo celular e a IA escreve o anúncio e faz o vídeo de cada imóvel.</p>
+<div class="lista"><div>🌐 Site com filtros e busca</div><div>📸 Fotos do celular, arrastar e ordenar</div><div>✨ IA escreve o anúncio pelas fotos</div><div>🎬 Vídeo narrado de cada imóvel</div><div>📥 Interessados num CRM simples</div><div>👥 Corretores com WhatsApp próprio</div><div>📊 Visitas e cliques por imóvel</div><div>🟢 Publicar, reservar, vender em 1 toque</div></div>
+<div class="card" id="form" style="margin-top:18px"><h2 style="font-size:19px">Crie a sua (grátis)</h2>
+<label>Nome da imobiliária ou do corretor</label><input id="nome" placeholder="ex.: Ana Souza Imóveis">
+<div class="linha"><div><label>CRECI</label><input id="creci" placeholder="opcional"></div><div><label>Cidade</label><input id="cidade"></div></div>
+<label>WhatsApp com DDD</label><input id="whatsapp" inputmode="tel">
+<label>Seu nome</label><input id="dono">
+<label>Senha do painel</label><input id="senha" type="password" placeholder="mínimo 6 caracteres">
+<button class="btn pri" id="criar" style="width:100%;margin-top:14px">Criar minha vitrine</button></div>
+<div class="card pronto" id="ok" hidden style="margin-top:18px"></div></div>
+<script>
+const API = location.origin + '/webhook/imoveis-api';
+__BASE__
+$('#criar').onclick = async () => {
+  $('#criar').disabled = true; $('#criar').textContent = 'Criando…'; const senha = $('#senha').value;
+  const j = await api('cadastro', { nome: $('#nome').value, creci: $('#creci').value, cidade: $('#cidade').value, whatsapp: $('#whatsapp').value, dono: $('#dono').value, senha });
+  $('#criar').disabled = false; $('#criar').textContent = 'Criar minha vitrine';
+  if (!j.ok) return aviso(j.erro, true);
+  const l = await api('login', { loja: j.loja, login: 'admin', senha }); if (l.ok) guarda.gravar('imv_token', l.token); guarda.gravar('imv_loja', j.loja);
+  const painel = `${location.origin}/webhook/imoveis-painel?l=${j.loja}`, site = `${location.origin}/webhook/imoveis?l=${j.loja}`;
+  $('#form').hidden = true; $('#ok').hidden = false;
+  $('#ok').innerHTML = `<h2>✅ Vitrine criada!</h2><p style="margin:8px 0">Código: <b>${esc(j.loja)}</b> · usuário: <b>admin</b></p>
+    <a class="btn pri" style="width:100%;margin-top:8px" href="${painel}">Abrir o painel e cadastrar o 1º imóvel</a>
+    <p class="mu pq" style="margin-top:10px">Seu site: <a href="${site}">${esc(site)}</a></p>`;
+};
+</script></body></html>

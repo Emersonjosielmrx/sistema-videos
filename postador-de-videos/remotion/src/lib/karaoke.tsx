@@ -65,6 +65,7 @@ export const Karaoke: React.FC<Props> = ({
   });
   if (i < 0) return null;
   const blocoAtual = bs[i];
+  const blocoIni = blocoAtual[0].ini - 0.1;
   const blocoFim = i + 1 < bs.length ? bs[i + 1][0].ini - 0.1 : blocoAtual[blocoAtual.length - 1].fim + 2.0;
   return (
     <div
@@ -95,8 +96,9 @@ export const Karaoke: React.FC<Props> = ({
       >
         {blocoAtual.map((w, k) => {
           const proximoIni = k + 1 < blocoAtual.length ? blocoAtual[k + 1].ini : blocoFim;
-          const fimEfetivo = k + 1 < blocoAtual.length ? proximoIni : Math.min(w.fim + 0.25, blocoFim);
-          const ativa = t >= w.ini && t < fimEfetivo;
+          const iniEfetivo = k === 0 ? blocoIni : w.ini;
+          const fimEfetivo = k + 1 < blocoAtual.length ? proximoIni : blocoFim;
+          const ativa = t >= iniEfetivo && t < fimEfetivo;
           const dita = t >= fimEfetivo;
           return (
             <React.Fragment key={k}>

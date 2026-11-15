@@ -362,6 +362,20 @@ def main():
         if tetos.linha("instagram", nome).get("nivel"):
             log(f"  [{nome}] teto da rampa: {tetos.teto('instagram', nome)}/dia (base {tetos.linha('instagram', nome).get('base')}), restam {resta}")
     plano = {nome: x for nome, x in plano.items() if x[0]}
+    # 14/11 dona ("Instagram: veja qual a melhor estratégia e faça"). Pesquisa (Gemini Pro, fontes 2026: viral.app
+    # 32 mil contas, proxies.sx, tubefilter): conta nova postando em volume sem interação cai no filtro anti-spam —
+    # 844 posts deram 12 seguidores. Estratégia: CONCENTRAR nas contas com tração (config\instagram_foco.json), no
+    # máximo 2 Reels/dia cada, intervalo >= 4 h; as outras param (sem apagar nada). INSTA_FOCO=0 volta ao antigo.
+    foco_arq = Path(__file__).resolve().parents[1] / "config" / "instagram_foco.json"
+    if os.environ.get("INSTA_FOCO", "1") != "0" and foco_arq.exists():
+        foco = json.loads(foco_arq.read_text("utf-8"))
+        so = set(foco.get("contas") or [])
+        fora = [n for n in plano if n not in so]
+        if fora:
+            log(f"  foco Instagram: {len(fora)} conta(s) paradas (só {', '.join(sorted(so))})")
+        plano = {n: (min(x[0], max(0, int(foco.get("max_dia", 2)) - feitos[n])), x[1]) for n, x in plano.items() if n in so}
+        plano = {n: x for n, x in plano.items() if x[0]}
+        cfg["intervalo_conta_min"] = max(float(cfg.get("intervalo_conta_min", 60)), float(foco.get("intervalo_min", 240)))
     # 01/11: quem postou menos hoje vai primeiro (a rodada cortada pelo prazo deixava sempre as mesmas do fim da lista)
     plano = dict(sorted(plano.items(), key=lambda x: feitos[x[0]]))
     if args.contas:
@@ -453,6 +467,18 @@ def main():
                     f"(maximo {cfg.get('duracao_max_s', 90)}s)")
                 continue
             texto = v.get("legenda") or legenda(v)  # pasta da empresa traz a legenda da marca
+            # 14/11 (estratégia do Instagram, INSTAGRAM_ESTRATEGIA.md): no máximo 5 hashtags (limite de 2026; bloco
+            # grande de tags sinaliza automação). INSTA_MAX_TAGS=0 desliga.
+            _mx = int(os.environ.get("INSTA_MAX_TAGS", "5"))
+            if _mx > 0:
+                _vistas = []
+
+                def _tag(m):
+                    if m.group(0).lower() in _vistas or len(_vistas) >= _mx:
+                        return ""
+                    _vistas.append(m.group(0).lower())
+                    return m.group(0)
+                texto = re.sub(r"[ \t]*#[\wÀ-ÿ]+", _tag, texto).rstrip()
             if not texto.strip():  # 28/10 (dono): nunca postar com legenda "Video"/vazia
                 catalogo.pular("instagram", v, "sem legenda (título não achado)")
                 catalogo.liberar(local)

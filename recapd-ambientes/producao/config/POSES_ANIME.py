@@ -65,7 +65,38 @@ POSES = {
     "esporte_decisivo": (1, "HE is caught mid-motion in the decisive moment of a match, sweat in the air, "
                             "stadium lights and a blurred cheering crowd behind, intense focused expression, "
                             "dynamic sports composition"),
+
+    # 14/11 dona ("pode testar várias coisas que chamem a atenção pra pessoa clicar: capas estilo dos longos, beijos e
+    # amassos FAKE etc. — faça o máximo de teste de capas nesse estilo pros Shorts"): "romance fake" = a cena que o
+    # público quer ver e nunca aconteceu no anime. Sempre ADULTOS (vinte e poucos anos), vestidos, sem ato sexual, sem
+    # uniforme escolar (regras de feedback_capas). Entram em TODOS os gêneros de anime/manhwa (POSES_GENERO vazio =
+    # liberada) e o placar de capas (Thompson em _poses) escolhe as que dão mais clique. CAPA_SHORT_FAKE=0 tira.
+    "fake_beijo": (2, "HE and SHE share a passionate romantic kiss, eyes closed, her hands on his face, his arm "
+                      "around her waist, glowing sparkles and hearts in the air, dramatic romantic lighting"),
+    "fake_quase_beijo": (2, "HE and SHE are a breath away from kissing, noses almost touching, both deeply blushing, "
+                            "her hand gripping his collar, intense romantic tension, soft bokeh light"),
+    "fake_amasso_parede": (2, "HE pins HER gently against a wall with one hand beside her head (kabedon), leaning in "
+                              "close, she blushes and looks up at him biting her lip, steamy romantic tension"),
+    "fake_abraco_tras": (2, "SHE hugs HIM tightly from behind, pressing her cheek on his back, he turns his head "
+                            "shocked and blushing, warm intimate glow"),
+    "fake_colo": (2, "SHE sits on HIS lap facing him with her arms around his neck, foreheads touching, both "
+                     "blushing, he is frozen in shock, flirty playful mood"),
+    "fake_cama": (2, "HE wakes up in bed and finds HER lying next to him smiling teasingly, wearing his oversized "
+                     "shirt, he panics with a comical shocked face, morning light"),
 }
+
+FAKE_ROMANCE = {"fake_beijo", "fake_quase_beijo", "fake_amasso_parede", "fake_abraco_tras", "fake_colo", "fake_cama"}
+REGRAS_FAKE = (
+    "All characters are clearly grown-up ADULTS in their mid-twenties with adult bodies and faces, never school "
+    "uniforms. Romantic and flirty but tasteful: clothed (she may wear a short silk nightgown or an oversized shirt), "
+    "no nudity, no sexual act, no hands on private parts. Bright glossy manhwa-recap thumbnail style, vibrant "
+    "saturated colors. No text, no letters, no speech bubbles, no logos, no watermarks, no emblems or symbols on "
+    "clothes. Clean professional anime illustration."
+)
+import os as _os
+if _os.environ.get("CAPA_SHORT_FAKE") == "0":
+    for _k in FAKE_ROMANCE:
+        POSES.pop(_k, None)
 
 # Poses de batalha (o resto é de clima): decide regra/estilo do prompt
 BATALHA = {"espada_ar", "contra_monstro", "magia_poderosa", "duelo_espadas", "despertar_poder",

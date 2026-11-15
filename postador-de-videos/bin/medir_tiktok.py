@@ -73,7 +73,9 @@ def medir(saida):
         try:
             for nome, h in alvos.items():
                 try:
-                    pg.goto(f"https://www.tiktok.com/@{h}", wait_until="domcontentloaded")
+                    # 14/11: metade das contas dava TimeoutError no padrão de 30 s (TikTok lento) — 60 s
+                    pg.goto(f"https://www.tiktok.com/@{h}", wait_until="domcontentloaded",
+                            timeout=int(__import__("os").environ.get("TIKTOK_MEDIR_TIMEOUT_MS", "60000")))
                     pg.wait_for_timeout(7000)
                     for _ in range(5):  # a grade carrega ~24 videos por vez
                         pg.mouse.wheel(0, 3000)
@@ -82,7 +84,16 @@ def medir(saida):
                 except Exception as e:  # noqa: BLE001
                     d = {"seg": None, "curt": None, "v": [], "titulo": f"erro {type(e).__name__}"}
                 vs = [num(x) for x in d["v"] if x is not None]
-                feito[nome] = {"handle": h, "seguidores": num(d["seg"]), "curtidas": num(d["curt"]),
+                # 14/11 dona ("o instagram tem que medir assim como o resto dos tiktoks"): 46 de 58 "não abriram" sem
+                # motivo gravado — inclusive filmenoturno/doramanoturno, as melhores. Guarda título e URL da página
+                # pra saber se é captcha, login, conta privada ou banida.
+                motivo = None
+                if not vs:
+                    try:
+                        motivo = f"{(d.get('titulo') or '')[:60]} | {pg.url[:80]}"
+                    except Exception:  # noqa: BLE001
+                        motivo = str(d.get("titulo"))[:60]
+                feito[nome] = {"handle": h, "seguidores": num(d["seg"]), "curtidas": num(d["curt"]), "motivo": motivo,
                                "videos": len(vs), "views": sum(vs), "views_max": max(vs) if vs else 0,
                                "zerados": sum(1 for x in vs if x == 0),
                                "abriu": len(vs) > 0 and "Make Your Day" not in (d["titulo"] or ""),

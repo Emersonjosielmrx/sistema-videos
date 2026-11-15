@@ -29,3 +29,28 @@ Trazer de volta: `D:\tools\rclone.exe copy "manhwa-drive:arquivo-pc1/movidos_13n
 - capas_proximo_G1_iPga6nLg: https://drive.google.com/drive/folders/1QPQBiRGpRvGf2BYGtii6l6Yg5jt5KeSF
 - joao-lucas-virjao: https://drive.google.com/drive/folders/1l3l-IVV8LGwHXLZIVXhxCMKVIqP-9rH9
 - shorts_hipercool: https://drive.google.com/drive/folders/168-z2IkhR_vRdBI_yvhntX3nsLrpxAhz
+
+## 14/11 — movidos (dona: testes, logs, motion, vozes de treino que falharam; açaí FICOU — aparece no painel de clientes)
+- 357M `D:/tmp_logs` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp_logs`
+- 300M `D:/tmp_motion` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp_motion`
+- 3.1G `D:/tmp/vozes_novas_treino` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp/vozes_novas_treino`
+- 339M `D:/hipercool-materiais/CORTES_ULTIMO_VIDEO/testes` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/CORTES_ULTIMO_VIDEO/testes`
+- 142M `D:/hipercool-materiais/python/tmp` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/python/tmp`
+- 131M `D:/hipercool-materiais/tmp/kaggle_teste` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/tmp/kaggle_teste`
+- 103M `D:/hipercool-materiais/teste_vozes_base` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/teste_vozes_base`
+- 57M `D:/hipercool-materiais/_teste_trilha` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/_teste_trilha`
+- 51M `D:/hipercool-materiais/teste_efeitos_longo` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/teste_efeitos_longo`
+- 46M `D:/hipercool-materiais/teste_legenda_abertura` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/teste_legenda_abertura`
+- 42M `D:/hipercool-materiais/cortes_teste_produto` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/cortes_teste_produto`
+- 39M `D:/hipercool-materiais/testes_flow_http` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/testes_flow_http`
+- 31M `D:/hipercool-materiais/_melhorador_caixa/_teste_trilha` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/_melhorador_caixa/_teste_trilha`
+- 5.6M `D:/hipercool-materiais/testes_fotos_http` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/testes_fotos_http`
+- 46M `D:/claude-code-video/_teste` -> `manhwa-drive:arquivo-pc1/movidos_14nov/claude-code-video/_teste`
+- 40M `D:/clone-real/resultados/testes_flow` -> `manhwa-drive:arquivo-pc1/movidos_14nov/clone-real/resultados/testes_flow`
+- 56M `D:/tmp/delogo_teste` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp/delogo_teste`
+- 62M `D:/tmp/sti_teste` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp/sti_teste`
+- 19M `D:/hipercool-videos/workspace/capas_reserva_teste` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-videos/workspace/capas_reserva_teste`
+- 31M `D:/ms-energy/_diag/teste_misto` -> `manhwa-drive:arquivo-pc1/movidos_14nov/ms-energy/_diag/teste_misto`
+- 1.1G `D:/hipercool-materiais/fluxo-anuncio-api/videos_prontos` -> `manhwa-drive:arquivo-pc1/movidos_14nov/hipercool-materiais/fluxo-anuncio-api/videos_prontos`
+- 90M `D:/tmp/t_amix` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp/t_amix`
+- 36M `D:/tmp/mudo` -> `manhwa-drive:arquivo-pc1/movidos_14nov/tmp/mudo`

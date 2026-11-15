@@ -38,7 +38,7 @@ Desliga e trava (`systemctl disable` + `mask`): **bluetooth**, **impressão** (c
 montar pendrive (udisks2), instalador de pacotes (packagekit), **atualização automática** (unattended-upgrades,
 apt-daily, apt-daily-upgrade, mintupdate-automation), e tarefas de manutenção (anacron, man-db, motd-news, e2scrub_all).
 
-Status (14/11 03h50): ✅ STI · ✅ HP · ✅ x200ma · ✅ Asus — 21 serviços cada · ⏳ Acer (caiu no meio; roda quando voltar)
+Status (14/11 11h30): ✅ STI · ✅ HP · ✅ x200ma · ✅ Asus · ✅ Acer — 21 serviços cada (Acer: RAM livre ~1150 -> 1365 MB)
 
 ## Windows (PC2 e desktop) — Bluetooth FICA (dona)
 ⏳ a fazer com cuidado (o PC2 é do hipercool — só tirar serviço do sistema, nunca worker): impressão (Spooler), Xbox,

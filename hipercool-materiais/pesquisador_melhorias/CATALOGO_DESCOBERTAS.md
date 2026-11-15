@@ -4938,3 +4938,193 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 - [INÉDITO] github.com/AARENKAY/ffmpeg-termux-tools — ★4, push 2026-11-04, MIT — FFmpeg automation scripts for Android Termux — easy to use, non-coder friendly
 - [USA em D:\recapd-ambientes\producao\bin\anime_discover.py:116] github.com/loic31000/AniRecap — ★2, push 2026-11-02, MIT — Application Symfony de récapitulatifs d'animes et de mangas : œuvres, saisons, épisodes, tomes, chapitres, personnages, favoris et résumés.
+
+## 2026-11-14 10:50 — Tendências e nichos de Shorts por país sem API do Google (`area_tendencias_por_pais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_tendencias_por_pais__sonnet_1041.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 11:08 — Tendências públicas por país sem API (`area_trends_pais_publico`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_pais_publico__sonnet_1057.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 12:28 — Trends→título por idioma (`area_trends_titulo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_titulo__sonnet_1207.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 13:00 — Conteúdo transformador em recap (`area_cta_conteudo_transformador`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_cta_conteudo_transformador__sonnet_1246.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 13:20 — Referências de ASL por nicho (`area_asl_benchmarks`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_asl_benchmarks__sonnet_1311.md`
+
+- [INÉDITO] github.com/minimus7/creator-teardown — ★1, push 2026-09-14, MIT — Claude Code skill that breaks down a short-form creator's TikTok or YouTube Shorts videos: real view counts, word-level transcripts, measure
+- [INÉDITO] github.com/kmilo93sd/agent-video-editor — ★8, push 2026-10-04, MIT — Editing judgment for AI agents: pacing, cuts, captions, audio, color and thumbnails for any video type, plus 128 CC0 sounds, 26 CC0 graphics
+
+## 2026-11-14 14:17 — Corpus de títulos e thumbnails por nicho e idioma (`area_titulo_thumb_corpus`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulo_thumb_corpus__sonnet_1353.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 14:37 — Sons em alta no YouTube Shorts (`area_yt_shorts_audio_trend`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_shorts_audio_trend__sonnet_1421.md`
+
+- [REPROVADO por LONGOS: 0 estrelas e 1 dia de vida; é do TikTok Creative Center, não do YouTube; longo não usa som em alta (risco de direitos autorais na narração própria)] github.com/MegaStretch23/tiktok-trending-core — ★0, push 2026-11-13, MIT — Minimal Node CLI/library for TikTok Creative Center trending hashtags, sounds and creators. Open-source core of the tiktok-trending-scraper 
+
+## 2026-11-14 15:07 — Tendências abertas sem login (`area_trends_wikipedia_gdelt`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_wikipedia_gdelt__sonnet_1501.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 15:26 — Troca de título ou capa dos concorrentes (`area_troca_titulo_capa`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_troca_titulo_capa__sonnet_1511.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 15:37 — Programa de parceria ou autorização com donos de recap (`area_parceria_canal`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_parceria_canal__sonnet_1531.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 15:52 — Creative Commons Atribuição como fonte de recap (`area_cc_by_fontes`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_cc_by_fontes__sonnet_1546.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 16:07 — SEO de busca para recaps (nome da obra + episódio) (`area_busca_yt_longos`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_busca_yt_longos__sonnet_1601.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 16:26 — Bancos de abertura e recap por episódio (`area_timestamps_anime`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_timestamps_anime__sonnet_1611.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 16:48 — Quais recaps de anime/manhwa têm mais views por país (`area_recap_views`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_recap_views__sonnet_1634.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 17:16 — Primeiros 30 s e retenção em recap (`area_gancho_30s`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_gancho_30s__sonnet_1701.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 17:54 — Canais de recap longo em inglês (`area_fonte_canais_en`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_fonte_canais_en__sonnet_1741.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 18:53 — Título e os primeiros 30 s dos recaps campeões (`area_titulo_30s_longo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulo_30s_longo__sonnet_1816.md`
+
+- [INÉDITO] github.com/ctskool/youtube-packaging — ★0, push 2026-10-28, MIT — Claude Code skills for packaging YouTube videos: thumbnail-first titles scored on your own channel's data, hooks, and a Test & Compare plan.
+- [INÉDITO] github.com/gladosAagman/youtube-agent-skill — ★1, push 2026-11-11, MIT — Fifteen Claude skills and two agents that run a YouTube channel: scored hooks, title and thumbnail linting, a channel audit that names the o
+
+## 2026-11-14 19:55 — Padrões de título que mudam por idioma em canais de recap (`area_titulos_por_pais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulos_por_pais__sonnet_1934.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 20:13 — Títulos de recap por idioma (yt-dlp, só metadados) (`area_titulos_por_idioma`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulos_por_idioma__sonnet_2002.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 20:41 — Títulos dos vídeos mais vistos de canais estrangeiros de recap (`area_titulos_campeoes_por_idioma`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulos_campeoes_por_idioma__sonnet_2031.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 20:53 — Padrões de capa por nicho a partir de miniaturas já baixadas (`area_capas_corpus`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_capas_corpus__sonnet_2046.md`
+
+- [REPROVADO por CAPAS: 0 estrelas; já temos (engenharia_reversa/continuo.py + ranking do painel :8790)] github.com/tungpm21/niche-research — ★0, push 2026-11-07, MIT — Claude Code skill: YouTube niche research (channel outliers, thumbnail sheets, trending keywords, Studio Research tab) with no API key
+- [REPROVADO por CAPAS: capa por quadro do vídeo; as nossas são geradas por IA (capa_ia_anime) e o quadro já foi testado e perde] github.com/jb-alvarado/facedetection-thumb — ★4, push 2026-10-29, MIT — Generate thumbnail from video with face detection
+
+## 2026-11-14 21:28 — Filtro de nicho para Trends/Wikipedia (`area_tend_filtro_nicho`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_tend_filtro_nicho__sonnet_2116.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 21:53 — Histórico do RSS do Google Trends (`area_trends_snapshots`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_snapshots__sonnet_2132.md`
+
+- [INÉDITO] github.com/ielym/google-trends-scraper — ★0, push 2026-10-06, MIT — Google Trends 全量数据面抓取工具：Explore / Trending Now / RSS / Autocomplete / Datastore / BigQuery / 官方 API alpha
+- [INÉDITO] github.com/cedarfetch/google-trending-searches-examples — ★0, push 2026-11-12, MIT — Python, Node.js and cURL examples for Google trending searches by country, with alerts on new trends.
+
+## 2026-11-14 22:00 — Google Trends RSS por país e idioma (`area_trends_rss_por_pais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_rss_por_pais__sonnet_2156.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 22:31 — Cruzar pauta do trends com vídeos campeões (`area_trend_x_outlier`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trend_x_outlier__sonnet_2226.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-14 23:08 — Longo em outro idioma com pauta local (`area_trend_longo_idioma`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trend_longo_idioma__sonnet_2256.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-15 01:35 — Séries e playlists em Shorts (`area_shorts_seriados`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_shorts_seriados__sonnet_0121.md`
+
+- [REPROVADO por LONGOS: 0 estrelas; já temos playlist por série em ordem (postar_longos.PLAYLIST_SERIES / youtube_web_poster --playlist)] github.com/LooneyN/chronolist — ★0, push 2026-11-13, MIT — Builds chronological YouTube playlists in upload order for any channel: one per year, plus custom keyword lists (e.g. a series).
+
+## 2026-11-15 01:54 — Distribuição e algoritmos (`area_distribuicao`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_distribuicao__sonnet_0142.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-15 02:54 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_dist_impressoes_diagnostico__sonnet_0241.md`
+
+- [INÉDITO] github.com/andremrod/youtube-insights — ★0, push 2026-11-10, MIT — Descobre o que deu certo nos seus Shorts e vídeos do YouTube: título, tema e duração × views, retenção e inscritos, com comparação com o Ins
+
+## 2026-11-15 03:03 — Recuperar recursos avançados do YouTube (caminho oficial) (`area_yt_recursos_avancados_recuperar`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_yt_recursos_avancados_recuperar__sonnet_0256.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-15 03:38 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_yt_conformidade_canal__sonnet_0327.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

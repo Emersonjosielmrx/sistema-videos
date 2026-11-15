@@ -98,8 +98,16 @@ def _shorts_gerados():
         for d in raiz.iterdir():
             v = d / "video.mp4"
             try:
-                mt = v.stat().st_mtime
-            except OSError:
+                # 14/11: o estoque do mês vai pro Drive (só fica _NO_DRIVE.txt) — o contador caiu de 144 pra 25.
+                # Sem o vídeo, vale a data de criação do qa.json/postar.json (feitos junto com o Short).
+                if v.exists():
+                    mt = v.stat().st_mtime
+                else:  # data do nome da pasta (<obra>_cap1_AAAAMMDD) + hora do qa.json (feito junto com o vídeo)
+                    m = re.search(r"_(\d{8})(?:_|$)", d.name)
+                    if not m or m.group(1) != agora.strftime("%Y%m%d"):
+                        continue
+                    mt = (d / "qa.json").stat().st_mtime
+            except (OSError, ValueError):
                 continue
             if mt < ini:
                 continue
@@ -187,6 +195,19 @@ def sec_numeros():
     return out
 
 
+def _titulo_do_ledger(vid):
+    """14/11: título de verdade do vídeo pelo postar.json que o ledger de uploads aponta (registro com nota no lugar)."""
+    try:
+        for ln in Path(r"D:\postador-de-videos\logs\uploads_ledger.jsonl").read_text("utf-8", "replace").splitlines():
+            if vid in ln:
+                d = json.loads(ln)
+                pj = Path(d.get("caminho", "")).parent / "postar.json"
+                return json.loads(pj.read_text("utf-8")).get("titulo") or ""
+    except (OSError, ValueError):
+        pass
+    return ""
+
+
 def sec_mais_vistos():
     """13/11 dona ("vamos focar nos mais vistos do YouTube"): top 10 longos por views e views/dia, em tabela."""
     out = ["## 📈 Longos que mais rendem (nossos)"]
@@ -195,7 +216,10 @@ def sec_mais_vistos():
     try:
         for x in _json(COLAB / "longos_postados.json", {}).get("postados", []):
             u = (x.get("url") or "").rsplit("/", 1)[-1]
-            titulos[u] = x.get("titulo") or ""
+            t = x.get("titulo") or ""
+            # 14/11: registro reposto à mão tinha uma NOTA no lugar do título (o jardineiro aparecia como
+            # "(reposto 03/11 ...)") — nota entre parênteses vira o nome da fonte
+            titulos[u] = t if not t.startswith("(") else _titulo_do_ledger(u) or f"[sem título] {x.get('nome', '')[12:]}"
     except AttributeError:
         pass
     linhas = []
@@ -208,9 +232,22 @@ def sec_mais_vistos():
         linhas.append((x.get("views") or 0, vd, k, x))
     if not linhas:
         return out + ["- sem leitura de views"]
-    out += ["| # | Canal | Views | Views/dia | Título | Link |", "|---:|---|---:|---:|---|---|"]
-    for i, (vw, vd, k, x) in enumerate(sorted(linhas, key=lambda t: -t[0])[:10], 1):
-        out.append(f"| {i} | {x.get('canal', '?')} | {vw} | {vd:.0f} | {titulos.get(k, '')[:55]} | https://youtu.be/{k} |")
+    # 14/11 dona ("os longos que rendem mais não está por hora assistida, só de visualizações"): horas assistidas =
+    # views x duração média assistida (dur_media do painel :8790, /api/ranking). Ordena por HORAS; sem dur_media = 0.
+    dur = {}
+    try:
+        import urllib.request as _u
+        rk = json.loads(_u.urlopen("http://127.0.0.1:8790/api/ranking?dias=60", timeout=150).read())
+        dur = {r["id"]: float(r.get("dur_media") or 0) for r in rk.get("videos", []) if r.get("tipo") != "short"}
+    except Exception:  # noqa: BLE001
+        pass
+    out += ["| # | Canal | ⏱️ Horas assistidas | Views | Views/dia | Duração média | Título | Link |",
+            "|---:|---|---:|---:|---:|---:|---|---|"]
+    hrs = {k: vw * dur.get(k, 0) / 3600 for vw, _, k, _ in linhas}
+    for i, (vw, vd, k, x) in enumerate(sorted(linhas, key=lambda t: (-hrs[t[2]], -t[0]))[:10], 1):
+        dm = dur.get(k, 0)
+        out.append(f"| {i} | {x.get('canal', '?')} | {hrs[k]:.1f} h | {vw} | {vd:.0f} | "
+                   f"{int(dm // 60)}:{int(dm % 60):02d} | {titulos.get(k, '')[:50]} | https://youtu.be/{k} |")
     lido = max((x.get("lido") or "" for _, _, _, x in linhas), default="")
     out.append(f"\n_views lidas até {lido[11:16]} de {lido[8:10]}/{lido[5:7]}_")
     return out
@@ -346,6 +383,22 @@ def sec_kaggle():
                            capture_output=True, text=True, timeout=40, creationflags=_SEM, encoding="utf-8",
                            errors="replace")
         al = [l.strip()[:160] for l in r.stdout.splitlines() if l.strip()]
+        # 14/11 (3º banimento): "proxy webshare sem resposta" escondia o motivo real (token recusado pelo Kaggle =
+        # possível banimento). Busca a última tentativa de cada conta no log e mostra o motivo de verdade.
+        mot = {}
+        if any("proxy webshare sem resposta" in a for a in al):
+            r2 = subprocess.run(["ssh", "-o", "ConnectTimeout=15", "-o", "BatchMode=yes", "hermes-prod",
+                                 "grep -a '3 tentativas falharam' /opt/recap_central/central.log | tail -40"],
+                                capture_output=True, text=True, timeout=40, creationflags=_SEM, encoding="utf-8",
+                                errors="replace")
+            for l in r2.stdout.splitlines():
+                m = re.search(r"\[saída ([^\]]+)\].*?última: (.*)", l)
+                if m:
+                    mot[m.group(1)] = ("🚨 TOKEN RECUSADO pelo Kaggle (possível banimento)" if "KAGGLE_API_TOKEN" in m.group(2)
+                                       else "proxy/rede fora" if re.search(r"Max retries|timeout|ProxyError|407", m.group(2))
+                                       else m.group(2)[:60])
+        al = [re.sub(r"status (\S+) (\(lançada [^)]*\)): proxy webshare sem resposta",
+                     lambda m: f"{m.group(1)} {m.group(2)}: {mot.get(m.group(1), 'sem resposta')}", a) for a in al]
         if al:
             out.append("- Alertas da central: " + " / ".join(al))
     except Exception:  # noqa: BLE001
@@ -442,6 +495,60 @@ def sec_vigia_melhorador():
                        f"{(hj[-1][14:] if hj else '')[:120]}")
         except OSError:
             out.append(f"- {nome}: sem log")
+    # 14/11 dona ("considerar uma fila: estamos em atraso de X vídeos que saíram e ainda não foram analisados — assim
+    # sabemos se precisamos injetar mais crédito ou se está acompanhando em dia")
+    try:
+        fa = _json(COLAB.parent / "melhorador_estado.json", {}).get("fila_analise") or {}
+        if not fa:
+            fa = _json(Path(r"D:\video-fila\linhas\LONGOS\melhorador_estado.json"), {}).get("fila_analise") or {}
+        if fa:
+            n = fa.get("atrasados", 0)
+            sit = "✅ em dia" if n <= 2 else ("⚠️ atrasando" if n <= 8 else "🔴 precisa de mais crédito/IA")
+            out.append(f"- **Fila do melhorador dos longos: {n} vídeo(s) esperando análise** — {sit}"
+                       + (f" (mais antigo de {fa['mais_antigo'][8:10]}/{fa['mais_antigo'][5:7]} "
+                          f"{fa['mais_antigo'][11:16]}; próximo: {fa.get('proximo', '')[:40]})" if n else ""))
+    except Exception:  # noqa: BLE001
+        pass
+    # 14/11 dona ("quero saber se a IA está dando conta ou faltando tokens, e o que cada uma está acertando e errando,
+    # em tabela"): placar do dia por agente. RELATORIO_PLACAR_IA=0 tira.
+    if __import__("os").environ.get("RELATORIO_PLACAR_IA", "1") != "0":
+        out += ["", "| Agente | Rodadas/casos | ✅ Acertou | ❌ Errou | Falta de IA/token | Obs. |",
+                "|---|---:|---:|---:|---:|---|"]
+        ok_v = passos.get("consertando", 0) + passos.get("consertou", 0)
+        falso = passos.get("falso", 0)
+        out.append(f"| Vigilância | {len(casos)} | {ok_v + falso + passos.get('real', 0)} | {passos.get('falhou', 0)} | — | "
+                   f"{passos.get('real', 0)} problema(s) reais, {falso} alarme(s) falso(s) descartado(s), "
+                   f"{passos.get('sem_mudanca', 0)} sem mudança |")
+        if va:
+            sts = re.findall(r"STATUS:\s*(\S+)", "\n".join(f.read_text(encoding="utf-8", errors="ignore")
+                                                          for f in va if f.stem[-13:-5] == agora.strftime("%Y%m%d")))
+            c = Counter(sts)
+            out.append(f"| Vigia agente | {len(sts)} | {c.get('OK', 0) + c.get('NADA', 0)} | {c.get('REVISAR', 0)} | — | "
+                       f"REVISAR = achou algo pra olhar |")
+        for nome, arq in (("Melhorador central", BASE / "logs" / "melhorador_central.log"),
+                          ("Melhorador dos longos", COLAB / "melhorador_longo.log")):
+            try:
+                hj = [l for l in arq.read_text(encoding="utf-8", errors="ignore").splitlines()
+                      if l.startswith(f"[{hoje}")]
+            except OSError:
+                continue
+            txt = "\n".join(hj)
+            aplic = len(re.findall(r"APLICAR|aplicou|vence [AB]", txt))
+            rc_ok, rc_err = len(re.findall(r"rc=0", txt)), len(re.findall(r"rc=[1-9]", txt))
+            sem_efeito = len(re.findall(r"modelo não mudou nada", txt))
+            falta = len(re.findall(r"\b429\b|cota|não respondeu|sem resposta", txt, re.I))
+            # 14/11: os "consertos sem efeito" eram cota (503/429) nas caixas do melhorador — conta as caixas de hoje
+            if "longos" in nome:
+                try:
+                    for cx in Path(r"D:\hipercool-materiais\_melhorador_caixa").glob(f"{agora:%Y%m%d}_*melhorador*"):
+                        if re.search(r"API Error|\b503\b|\b429\b|exhausted", (cx / "resumo_gemini.txt").read_text(
+                                encoding="utf-8", errors="ignore")):
+                            falta += 1
+                except OSError:
+                    pass
+            tmo = len(re.findall(r"[Tt]imeout", txt))
+            out.append(f"| {nome} | {aplic + rc_ok} | {aplic} | {rc_err + sem_efeito} | {falta} | "
+                       f"{tmo} timeout(s); {sem_efeito} conserto(s) sem efeito (modelo não mudou nada) |")
     return out
 
 

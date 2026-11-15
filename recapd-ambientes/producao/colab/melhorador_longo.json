@@ -102,6 +102,11 @@
   ],
   "decisor": [
    [
+    "cc-sobra",
+    60,
+    900
+   ],
+   [
     "gemini/gemini-3.5-flash",
     60,
     900
@@ -138,7 +143,7 @@
  "codigo": {
   "_leia": "Dona 27/10: o melhorador conserta código sozinho (caixa isolada -> diff pequeno e válido -> real com backup -> pacote pras GPUs -> vigiado; nota cai = volta o backup). 'modelo' = o modelo de código que a dona vai passar (trocar aqui). texto=true manda o arquivo no prompt (Argon puro); false = com ferramentas.",
   "ligado": true,
-  "modelo": "ag-opus-5-5",
+  "modelo": "cc-sobra",
   "texto": false,
   "turnos": 40,
   "max_linhas": 60,
@@ -147,7 +152,12 @@
    "colab",
    "config"
   ],
-  "reserva": "agy/gemini-3.8-flash-high"
+  "reserva": "agy/gemini-3.8-flash-high",
+  "reservas": [
+   "ag-opus-5-5",
+   "agy/gemini-3.8-flash-high"
+  ],
+  "_14nov": "14/11 dona ('o Opus 5.5 que eu dei pra sua quando não tiver ninguém usando; tem o gerenciador que mede'): 1º cc-sobra (Opus 5.5 da cc só quando outra pessoa usa a conta / janela vira com sobra — modo_tokens.py na VPS; falha em 1 s se não puder), 2º ag-opus-5-5 (Antigravity 5.5 -> 4.6), 3º Gemini 3.8. Volta: modelo='ag-opus-5-5'."
  },
  "_modelos_desligados_06nov": "06/11: \"opus\" saiu da lista para liberar SÓ o ag-opus-5-5 (Antigravity). cc/claude-opus e opus-auto (cota do Claude da dona) continuam proibidos."
 }

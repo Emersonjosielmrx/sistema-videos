@@ -682,6 +682,24 @@ def horario_longo(canal, base):
     longos = [t for t in (_dt(r.get("publish_at")) or _dt(r["ts"]) for r in regs if r.get("tipo") == "completo") if t]
     tz = _hora_local(canal, cadastro_do_canal(canal)).tzinfo
     alvo = base
+    # 15/11 dona ("aproveitar melhor os longos: voltar a postar com agendamento conforme o que for melhor pra crescer,
+    # não postando vários em seguida"). Medido 15/11 em 129 longos: abriu 18-21 h = 9,4 h assistidas em média; as
+    # outras faixas 0,2-1,8 h. Longo vai pro PRÓXIMO 18-21 h do canal, 1 por dia nessa faixa (o resto, dias seguintes).
+    # LONGO_HORA_NOBRE="" desliga (volta a "pode já"); LONGO_HORA_NOBRE="18,19,20" muda a faixa.
+    nobre = [int(h) for h in os.environ.get("LONGO_HORA_NOBRE", "18,19,20").split(",") if h.strip().isdigit()]
+    if nobre:
+        local = alvo.astimezone(tz)
+        for dias in range(0, 30):
+            dia = (local + timedelta(days=dias)).date()
+            ja_nobre = sum(1 for t in longos if t.astimezone(tz).date() == dia and t.astimezone(tz).hour in nobre)
+            if ja_nobre:
+                continue
+            cand = [datetime.combine(dia, datetime.min.time(), tzinfo=tz).replace(hour=h, minute=m)
+                    for h in nobre for m in (0, 30)]
+            cand = [c for c in cand if c > agora() + timedelta(minutes=40)
+                    and not any(abs(c - t) < gap for t in ocupados)]
+            if cand:
+                return cand[0]
     for _ in range(60):
         perto = [t for t in ocupados if abs(alvo - t) < gap] if gap else []
         if perto:

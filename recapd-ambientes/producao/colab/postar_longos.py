@@ -111,6 +111,13 @@ def _gravar_estado_trancado(est):
     est["reprovados"] = [n for n in est["reprovados"] if not (FICHAS / n / "SEM_PALAVRAO.txt").exists()]
     est["cortes_postados"] = sorted(set(est.get("cortes_postados", [])) | set(disco.get("cortes_postados", [])))
     est["presos"] = {**disco.get("presos", {}), **est.get("presos", {})}  # 14/11: rodada antiga não apaga preso
+    # 14/11 15h20: o título real do jardineiro (lztXRIb2s30) foi gravado à mão e a rodada que já estava rodando voltou
+    # a nota "(reposto 03/11 ...)" por cima — título de NOTA na memória perde pro título de verdade do disco.
+    tit_disco = {p.get("url"): p.get("titulo") for p in disco.get("postados", [])
+                 if p.get("titulo") and not str(p["titulo"]).startswith("(")}
+    for p in est["postados"]:
+        if str(p.get("titulo") or "").startswith("(") and tit_disco.get(p.get("url")):
+            p["titulo"] = tit_disco[p["url"]]
     ESTADO.write_text(json.dumps(est, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
@@ -196,16 +203,25 @@ def _dono_serie(nome, est):
     s = _serie(nome)
     if not s:
         return None
+    # 15/11: série nova com canal escolhido desde a 1ª parte (SERIE_DONO) — antes ficava com o canal que pegasse a 1ª
+    for chave, cred in SERIE_DONO.items():
+        if s.startswith(chave):
+            return cred
     canais = [p["canal"] for p in est.get("postados", []) if _serie(p.get("nome", "")) == s]
     if not canais:
         return None
     return FIO_CRED if FIO_CRED in canais else canais[-1]
 
 
+# 15/11 dona: "Reencarnou como VILÃO e tem uma ESPOSA MAID" -> InventoReact (canal do ex/bilionário, tema renasce/rico)
+SERIE_DONO = {"reincarnated_as_the_villain_with": "novo_ia_agora_h3n"}
+
+
 # 11/11 pesquisador (area_serie_playlist: tirar o atrito pro próximo episódio aumenta a sessão) + dona (a série Medieval
 # Age é obra que ela acompanha): longo de SÉRIE vai pra playlist DAQUELA série, em ordem; o resto na playlist geral.
 # Nome sem o nome da obra (regra dos títulos). LONGO_PLAYLIST_SERIE=0 = só a geral; LONGO_PLAYLIST="" = nenhuma.
-PLAYLIST_SERIES = {"he_got_into_the_medieval_age": "O ENGENHEIRO na ERA MEDIEVAL 🔥 saga completa em ordem"}
+PLAYLIST_SERIES = {"he_got_into_the_medieval_age": "O ENGENHEIRO na ERA MEDIEVAL 🔥 saga completa em ordem",
+                   "reincarnated_as_the_villain_with_a": "REENCARNOU como VILÃO com a ESPOSA MAID 🥵 saga em ordem"}
 
 
 VIEWS_LONGO = AQUI / "views_ultimo_longo.json"
@@ -420,6 +436,12 @@ def _publicar(ficha, d):
         _cmd = [RCLONE, "copyto", d["drive"], str(video)]
         if os.environ.get("LONGO_DOWNLOAD_TIMEOUT", "1") != "0":
             _cmd += ["--timeout", "2m", "--contimeout", "60s", "--retries", "5", "--low-level-retries", "20"]
+            # 14/11 19h (Tv4TcuPT9JI e Medieval 17): download travava a ~300 MB do fim (7,38 de 7,74 GB) e ficava
+            # parado — mesmo com --timeout 2m — até o teto de 90 min; a rodada seguinte recomeçava do zero e travava
+            # igual (Tv4 desde 06:48). Em 4 pedaços paralelos o pedaço que trava é refeito sozinho. LONGO_DL_PEDACOS=1 volta.
+            _ped = os.environ.get("LONGO_DL_PEDACOS", "4")
+            if _ped != "1":
+                _cmd += ["--multi-thread-streams", _ped, "--multi-thread-cutoff", "256M"]
         try:
             r = subprocess.run(_cmd, capture_output=True, text=True,
                                timeout=float(os.environ.get("LONGO_DOWNLOAD_MAX_MIN", "90")) * 60)
@@ -745,6 +767,15 @@ def rodada(ver=False):
             # solto — quem viu a parte 3 (308 views) não reconhecia a continuação. Parte de SÉRIE = "PARTE N |" no
             # título + 1ª linha da descrição apontando a saga. LONGO_TITULO_PARTE=0 desliga.
             n_parte = _parte(ficha.name)
+            # 14/11 (Medieval 17 "Roland cria o CINEMA..."): o SEO falhou (seo_versao vazio) e o título veio da ficha com
+            # o NOME do personagem — regra: título sem nome da obra/personagem. Nome próprio (Capitalizado, 1ª palavra
+            # ou depois de "o/a/rei/...") vira "ELE". LONGO_TITULO_SEM_NOME=0 desliga.
+            if (os.environ.get("LONGO_TITULO_SEM_NOME", "1") != "0" and _serie(ficha.name) and not p.get("seo_versao")):
+                t0 = p["titulo"]
+                p["titulo"] = re.sub(r"^(?:o rei |a rainha |o príncipe |a princesa )?([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]{2,})(?=\s)",
+                                     "ELE", p["titulo"], flags=re.I if False else 0)
+                if p["titulo"] != t0:
+                    log(f"  título sem nome próprio: '{t0[:50]}' -> '{p['titulo'][:50]}'")
             if (os.environ.get("LONGO_TITULO_PARTE", "1") != "0" and _serie(ficha.name) and n_parte < 999
                     and not re.match(r"(?i)\s*parte\s*\d", p["titulo"])):
                 p["titulo"] = f"PARTE {n_parte} | {p['titulo']}"[:100]
@@ -752,6 +783,13 @@ def rodada(ver=False):
                 p["descricao"] = (f"Parte {n_parte} da saga" + (f" \"{saga}\"" if saga else "")
                                   + " — assista em ordem na playlist do canal.\n\n" + (p.get("descricao") or ""))
                 log(f"  título de série: {p['titulo']}")
+                # 14/11 (Medieval 17 subiu com o capítulo 'Comente "PARTE 2" pra continuar'): na série o pedido é a
+                # PRÓXIMA parte. E os nomes próprios da obra (tags/hashtags) saem — regra "sem o nome da obra"; o
+                # filtro do SEO não pega obra "sem-obra". LONGO_SERIE_DESC=0 desliga.
+                if os.environ.get("LONGO_SERIE_DESC", "1") != "0":
+                    p["descricao"] = p["descricao"].replace('Comente "PARTE 2"', f'Comente "PARTE {n_parte + 1}"')
+                    p["descricao"] = re.sub(r"(?m)^#\S+(\s+#\S+)*\s*$", "", p["descricao"]).rstrip()
+                    p["tags"] = [t for t in (p.get("tags") or []) if not t[:1].isupper() or " " in t]
             # 11/11 pesquisador (area_metadata_spam, política de spam do YouTube: "título que promete o que o vídeo não
             # entrega", ex. oficial 'partida completa'): recap cobre PARTE da obra -> tira "(COMPLETO)", "Capítulo 1
             # COMPLETO", "FINAL" do título. LONGO_TITULO_SEM_PROMESSA=0 desliga.

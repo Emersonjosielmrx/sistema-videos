@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gincana</title>
+<style>__CSS__
+body{background:linear-gradient(160deg,#1a0b2e,var(--pri) 70%,#f59e0b);background-attachment:fixed;color:#fff;min-height:100vh}
+.w{max-width:720px;margin:0 auto;padding:26px 16px 60px}h1{font-size:34px;line-height:1.1}
+.cx{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:16px;margin-top:14px;backdrop-filter:blur(6px)}
+.rk{display:flex;gap:10px;align-items:center;padding:9px 4px;border-bottom:1px solid rgba(255,255,255,.15);font-size:17px}.rk b{margin-left:auto}
+.et{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.15)}.et .n{font-size:22px;font-weight:800;width:34px}
+.mu2{color:rgba(255,255,255,.75)}
+</style></head><body><div class="w" id="app"><div class="vazio">Carregando…</div></div>
+<script>
+const API = location.origin + '/webhook/insta-api';
+__BASE__
+const COD = new URLSearchParams(location.search).get('g');
+async function carrega() {
+  const j = await api('gincana_publica', { codigo: COD }); if (!j.ok) return $('#app').innerHTML = `<div class="vazio">${esc(j.erro)}</div>`;
+  document.documentElement.style.setProperty('--pri', j.conta.cor); document.title = j.gincana.titulo;
+  const ag = Date.now(), aberta = j.etapas.find(e => new Date(e.abre_em) <= ag && new Date(e.fecha_em) > ag), prox = j.etapas.find(e => new Date(e.abre_em) > ag);
+  $('#app').innerHTML = `<div class="mu2">@${esc(j.conta.username)} apresenta</div><h1>🕵️ ${esc(j.gincana.titulo)}</h1>
+    ${j.gincana.premio ? `<div style="font-size:18px;margin-top:6px">🏆 Prêmio: <b>${esc(j.gincana.premio)}</b></div>` : ''}
+    <div class="cx"><b>Como jogar</b><ol style="margin:6px 0 0 20px;line-height:1.7"><li>Siga <b>@${esc(j.conta.username)}</b></li><li>Mande <b>${esc(j.gincana.palavra)}</b> no direct para entrar</li><li>Fique de olho nos stories: cada pista abre num horário</li><li>Responda a pista no direct. Quem acerta primeiro ganha mais pontos!</li></ol></div>
+    ${aberta ? `<div class="cx" style="border-color:#fde047"><div class="mu2">🔎 PISTA ${aberta.ordem} ABERTA · fecha ${new Date(aberta.fecha_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</div><div style="font-size:21px;font-weight:700;margin-top:4px">${esc(aberta.pista)}</div></div>`
+      : prox ? `<div class="cx">⏳ Próxima pista: <b>${new Date(prox.abre_em).toLocaleString('pt-BR', { weekday: 'long', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</b></div>` : `<div class="cx">🏁 A gincana terminou!</div>`}
+    <div class="cx"><div style="display:flex;align-items:center"><b style="font-size:19px">🏆 Ranking</b><span class="mu2 pq" style="margin-left:auto">${j.jogadores} jogadores · atualiza sozinho</span></div>
+      ${j.ranking.map((r, i) => `<div class="rk"><span style="width:34px;font-size:20px">${['🥇', '🥈', '🥉'][i] || (i + 1) + 'º'}</span>@${esc(r.username || 'jogador')}<b>${r.pontos} pts</b></div>`).join('') || '<div class="mu2" style="padding:10px 0">Seja o primeiro!</div>'}</div>
+    <div class="cx"><b>Pistas</b>${j.etapas.map(e => `<div class="et"><span class="n">${e.ordem}</span><div style="flex:1">${e.pista ? esc(e.pista) : `<span class="mu2">🔒 abre ${new Date(e.abre_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>`}
+      ${e.resposta ? `<div class="pq">✅ Resposta: <b>${esc(e.resposta)}</b> · ${e.acertos} acertaram</div>` : ''}</div><span class="mu2 pq">${e.pontos} pts</span></div>`).join('')}</div>`;
+}
+carrega(); setInterval(carrega, 15000);
+</script></body></html>

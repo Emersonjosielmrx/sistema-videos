@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comanda de Mesa com IA</title><meta name="robots" content="noindex">
+<style>__CSS__
+.w{max-width:560px;margin:0 auto;padding:32px 16px 60px}h1{font-size:30px;line-height:1.15}.sub{color:var(--tx2);margin:8px 0 18px}
+.lista{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}.lista div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:14px;font-weight:600}
+.pronto{border:2px solid var(--ok)}
+</style></head><body><div class="w">
+<h1>🍽️ Comanda de Mesa com IA</h1><p class="sub">Sistema completo para bar, restaurante e lanchonete: o cliente pede pelo QR da mesa, a cozinha recebe na tela, e o dono controla caixa, estoque e equipe pelo celular.</p>
+<div class="lista"><div>📱 Cardápio no QR da mesa</div><div>👨‍🍳 Tela da cozinha e do bar</div><div>💰 Caixa com sangria e fechamento</div><div>📦 Estoque com ficha técnica</div><div>📋 Produtos com foto e adicionais</div><div>📊 Relatórios e curva ABC</div><div>👥 Equipe com permissões</div><div>✨ IA: importa cardápio, lê nota, analisa</div></div>
+<div class="card" id="form" style="margin-top:18px"><h2 style="font-size:19px">Crie o seu (grátis)</h2>
+<label>Nome do estabelecimento</label><input id="nome" placeholder="ex.: Bar do Zé">
+<div class="linha"><div><label>Tipo</label><select id="tipo"><option>restaurante</option><option>bar</option><option>lanchonete</option><option>pizzaria</option><option>hamburgueria</option><option>cafeteria</option><option>outro</option></select></div>
+<div><label>Quantas mesas?</label><input id="mesas" type="number" value="10" min="1" max="80"></div></div>
+<label>Seu nome</label><input id="dono" placeholder="Quem administra">
+<label>Senha do painel</label><input id="senha" type="password" placeholder="mínimo 6 caracteres">
+<label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="ex" checked style="width:auto;min-height:0"> Começar com um cardápio de exemplo (lanches, porções, bebidas e estoque)</label>
+<button class="btn pri" id="criar" style="width:100%;margin-top:14px">Criar meu sistema</button></div>
+<div class="card pronto" id="ok" hidden style="margin-top:18px"></div>
+</div><script>
+const API = location.origin + '/webhook/comanda-api';
+__BASE__
+$('#criar').onclick = async () => {
+  $('#criar').disabled = true; $('#criar').textContent = 'Criando…';
+  const senha = $('#senha').value;
+  const j = await api('cadastro', { nome: $('#nome').value, tipo: $('#tipo').value, mesas: Number($('#mesas').value), dono: $('#dono').value, senha, exemplo: $('#ex').checked });
+  $('#criar').disabled = false; $('#criar').textContent = 'Criar meu sistema';
+  if (!j.ok) return aviso(j.erro, true);
+  const l = await api('login', { loja: j.loja, login: 'dono', senha });
+  if (l.ok) guarda.gravar('cmd_token', l.token); guarda.gravar('cmd_loja', j.loja);
+  const painel = `${location.origin}/webhook/comanda-painel?l=${j.loja}`;
+  $('#form').hidden = true; $('#ok').hidden = false;
+  $('#ok').innerHTML = `<h2>✅ Pronto!</h2><p style="margin:8px 0">Guarde estes dados. A equipe entra com o mesmo código.</p>
+    <p>Código: <b>${esc(j.loja)}</b><br>Usuário: <b>dono</b></p><a class="btn pri" style="width:100%;margin-top:12px" href="${painel}">Abrir o painel</a>
+    <p class="mu pq" style="margin-top:10px">Link do painel: ${esc(painel)}</p>`;
+};
+</script></body></html>

@@ -1,0 +1,140 @@
+{
+ "conta": "inovarecrm",
+ "produto": "crm_chatwoot",
+ "marca": "Inovare CRM",
+ "titulo": "Do celular compartilhado ao atendimento organizado",
+ "legenda": "Chega de confusão com vários atendentes usando o mesmo aparelho sem controle. 📋\nTenha um CRM personalizado com IA a partir do Chatwoot, unindo atendimento, tickets e histórico do cliente.\nAcesse o link no perfil para conhecer. 💬\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Vários atendentes no mesmo celular?",
+  "pergunta_cliente": "Sua equipe ainda divide o mesmo aparelho e atropela as conversas?",
+  "blocos": [
+   {
+    "rotulo": "Antes",
+    "fala": "Meus vendedores dividiam o mesmo celular sem controle, até eu adotar um CRM feito para o meu negócio.",
+    "visual": "apresentador",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian small business office",
+    "prompt_en": "commercial photography of a tidy well lit modern Brazilian office desk, warm natural light, people seen from behind working together, no readable screens or text",
+    "destaques": [
+     "mesmo celular",
+     "CRM feito"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261114_204530_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A plataforma une o Chatwoot ao helpdesk para separar as conversas por setor sem misturar o atendimento.",
+    "visual": "conversa",
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Olá, preciso falar com o suporte sobre meu pedido."
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Sou a IA de atendimento. Já localizei seu cadastro aqui no sistema."
+     },
+     {
+      "de": "empresa",
+      "texto": "Abri seu ticket de suporte e transferi sua conversa para o setor responsável."
+     },
+     {
+      "de": "cliente",
+      "texto": "Perfeito, fico no aguardo."
+     }
+    ],
+    "destaques": []
+   },
+   {
+    "rotulo": "Depois",
+    "fala": "Hoje cada vendedor sabe exatamente quem está atendendo e ninguém mais responde por cima do colega.",
+    "visual": "apresentador",
+    "cenario_en": "standing by a clean, well lit reception counter of a Brazilian company",
+    "prompt_en": "commercial photography of a clean well lit Brazilian office workspace, professionals seen from the side, warm light, cinematic, no text or logos",
+    "destaques": [
+     "quem está atendendo",
+     "ninguém mais responde"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261114_204530_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecrm_20261114_204530_1.png"
+   }
+  ],
+  "legenda": "Chega de confusão com vários atendentes usando o mesmo aparelho sem controle. 📋\nTenha um CRM personalizado com IA a partir do Chatwoot, unindo atendimento, tickets e histórico do cliente.\nAcesse o link no perfil para conhecer. 💬",
+  "titulo": "Do celular compartilhado ao atendimento organizado",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "transicao_caos_ordem",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 57,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovarecrm_20261114_204432\\dono_3.mp4",
+ "duracao_s": 31.94,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-14T21:02:04",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.08,
+   "fala": "Sua equipe ainda divide o mesmo aparelho e atropela as conversas?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.08,
+   "fim": 12.92,
+   "fala": "Meus vendedores dividiam o mesmo celular sem controle, até eu adotar um CRM feito para o meu negócio.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.92,
+   "fim": 20.16,
+   "fala": "A plataforma une o Chatwoot ao helpdesk para separar as conversas por setor sem misturar o atendimento.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.16,
+   "fim": 27.99,
+   "fala": "Hoje cada vendedor sabe exatamente quem está atendendo e ninguém mais responde por cima do colega.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.99,
+   "fim": 31.94,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.83,
+  "notas": {
+   "legibilidade": 8.5,
+   "movimento": 7.0,
+   "roteiro_marca": 8.0
+  },
+  "graves": 1,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

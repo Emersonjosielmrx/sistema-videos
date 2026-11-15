@@ -7456,5 +7456,29 @@
     "motivo": "repositório de 1 estrela; a única 'informação' (regra nova do YPP em 02/2027) não foi confirmada em página oficial — boato",
     "quem": "LONGOS",
     "data": "2026-11-13"
+  },
+  {
+    "repo": "MegaStretch23/tiktok-trending-core",
+    "motivo": "0 estrelas e 1 dia de vida; é do TikTok Creative Center, não do YouTube; longo não usa som em alta (risco de direitos autorais na narração própria)",
+    "quem": "LONGOS",
+    "data": "2026-11-14"
+  },
+  {
+    "repo": "tungpm21/niche-research",
+    "motivo": "0 estrelas; já temos (engenharia_reversa/continuo.py + ranking do painel :8790)",
+    "quem": "CAPAS",
+    "data": "2026-11-14"
+  },
+  {
+    "repo": "jb-alvarado/facedetection-thumb",
+    "motivo": "capa por quadro do vídeo; as nossas são geradas por IA (capa_ia_anime) e o quadro já foi testado e perde",
+    "quem": "CAPAS",
+    "data": "2026-11-14"
+  },
+  {
+    "repo": "LooneyN/chronolist",
+    "motivo": "0 estrelas; já temos playlist por série em ordem (postar_longos.PLAYLIST_SERIES / youtube_web_poster --playlist)",
+    "quem": "LONGOS",
+    "data": "2026-11-15"
   }
 ]

@@ -1,0 +1,1057 @@
+{
+ "name": "🍽️ Comanda de Mesa com IA · QR na mesa, cozinha, caixa, estoque, produtos com foto, equipe e relatórios",
+ "nodes": [
+  {
+   "parameters": {
+    "content": "## 🍽️ COMANDA DE MESA COM IA — comece aqui\nSistema completo para **bar, restaurante e lanchonete**, com **painel administrador** de verdade.\n\n**Links (troque pelo seu domínio):**\n• 🆕 Criar o sistema: `/webhook/comanda`\n• 🔐 Painel (dono, caixa, garçom, cozinha): `/webhook/comanda-painel`\n• 📱 Cardápio da mesa: `/webhook/comanda-mesa?l=<código>&m=<mesa>&t=<assinatura>` (o painel imprime os QR)\n\n**O que o painel faz:** 🍽️ mapa das mesas ao vivo · 👨‍🍳 tela da cozinha/bar · 💰 caixa (abertura, sangria, fechamento com diferença) · 📋 produtos com foto, adicionais e \"esgotado\" em 1 toque · 📦 estoque com ficha técnica (baixa sozinho a cada venda) · 📊 relatórios e curva ABC · 👥 equipe com permissões e registro de quem fez o quê · ⚙️ Pix, cores, logo e QR das mesas.\n\n**IA (roteador):** ✨ importa o cardápio colado · ✨ escreve a descrição do prato · 📸 lê a foto da nota fiscal e dá entrada no estoque · 📊 analisa as vendas.\n\n**Legenda:** 🔔 gatilho · 📤 resposta · 🐘 banco Postgres · 🔀 decisão · 🤖 IA · 🧩 código",
+    "height": 560,
+    "width": 760,
+    "color": 6
+   },
+   "id": "6a10f503-52b5-511c-aa17-c653dcd7fb33",
+   "name": "Nota 1",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -1300,
+    -560
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 1️⃣ PÁGINAS 📄\nCada página é um HTML fixo devolvido direto pelo 📤 (resposta em menos de 1 s).\nA página conversa com a API (etapa 2) por `fetch`. Nada de dado fica no HTML.",
+    "height": 700,
+    "width": 560,
+    "color": 7
+   },
+   "id": "2a61cbb7-7356-5bc5-9c3e-96599abb5cfd",
+   "name": "Nota 2",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    -560
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 2️⃣ API 🔌 (toda ação do painel e da mesa)\n🐘 **cmd_api(jsonb)** é uma função dentro do Postgres que guarda **toda a regra de negócio**: login com senha criptografada (bcrypt), permissão por papel, comanda, caixa, estoque, relatórios.\nO n8n faz **uma única chamada** por pedido, com o corpo inteiro como parâmetro **$1** (nunca colado no SQL → sem SQL injection).\n🔀 Se a resposta pedir IA (`ia`), o fluxo chama o 🤖 e devolve o texto; senão responde direto.",
+    "height": 700,
+    "width": 1200,
+    "color": 4
+   },
+   "id": "72bef161-5f79-5e81-826b-0389a7b9b32e",
+   "name": "Nota 3",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    160,
+    -560
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 3️⃣ IMAGENS 🖼️\nAs fotos dos produtos e o logo ficam **no próprio banco** (não somem).\n🔔 `/webhook/comanda-img?id=...` lê a foto e devolve com cache de 1 dia.",
+    "height": 420,
+    "width": 560,
+    "color": 5
+   },
+   "id": "f335af95-cf46-5ce4-a3a2-cf4370f26e03",
+   "name": "Nota 4",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    -460,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## 🗄️ O BANCO (Postgres `apps_aulas`)\nTabelas `cmd_*`: loja, usuario, sessao, categoria, produto, imagem, insumo, ficha, mov_estoque, comanda, item, caixa, caixa_mov, chamado, atividade.\nO arquivo `comanda/schema.sql` cria tudo (pode rodar de novo sem perder dados).",
+    "height": 300,
+    "width": 600,
+    "color": 3
+   },
+   "id": "2ebc5fe3-c515-542e-8e06-c831f7d20e66",
+   "name": "Nota 5",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    160,
+    220
+   ]
+  },
+  {
+   "parameters": {
+    "path": "comanda",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "a0181de7-d9f0-5a36-baba-0c4c2fa92a1f",
+   "name": "🔔 Página de cadastro",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -440
+   ],
+   "webhookId": "2049e285-fe6f-5cd2-90c8-1c65d2e7439f"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Comanda de Mesa com IA</title><meta name=\"robots\" content=\"noindex\">\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C2410C;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.w{max-width:560px;margin:0 auto;padding:32px 16px 60px}h1{font-size:30px;line-height:1.15}.sub{color:var(--tx2);margin:8px 0 18px}\n.lista{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}.lista div{background:var(--sup);border:1px solid var(--borda);border-radius:12px;padding:10px;font-size:14px;font-weight:600}\n.pronto{border:2px solid var(--ok)}\n</style></head><body><div class=\"w\">\n<h1>🍽️ Comanda de Mesa com IA</h1><p class=\"sub\">Sistema completo para bar, restaurante e lanchonete: o cliente pede pelo QR da mesa, a cozinha recebe na tela, e o dono controla caixa, estoque e equipe pelo celular.</p>\n<div class=\"lista\"><div>📱 Cardápio no QR da mesa</div><div>👨‍🍳 Tela da cozinha e do bar</div><div>💰 Caixa com sangria e fechamento</div><div>📦 Estoque com ficha técnica</div><div>📋 Produtos com foto e adicionais</div><div>📊 Relatórios e curva ABC</div><div>👥 Equipe com permissões</div><div>✨ IA: importa cardápio, lê nota, analisa</div></div>\n<div class=\"card\" id=\"form\" style=\"margin-top:18px\"><h2 style=\"font-size:19px\">Crie o seu (grátis)</h2>\n<label>Nome do estabelecimento</label><input id=\"nome\" placeholder=\"ex.: Bar do Zé\">\n<div class=\"linha\"><div><label>Tipo</label><select id=\"tipo\"><option>restaurante</option><option>bar</option><option>lanchonete</option><option>pizzaria</option><option>hamburgueria</option><option>cafeteria</option><option>outro</option></select></div>\n<div><label>Quantas mesas?</label><input id=\"mesas\" type=\"number\" value=\"10\" min=\"1\" max=\"80\"></div></div>\n<label>Seu nome</label><input id=\"dono\" placeholder=\"Quem administra\">\n<label>Senha do painel</label><input id=\"senha\" type=\"password\" placeholder=\"mínimo 6 caracteres\">\n<label style=\"display:flex;gap:8px;align-items:center;font-weight:400\"><input type=\"checkbox\" id=\"ex\" checked style=\"width:auto;min-height:0\"> Começar com um cardápio de exemplo (lanches, porções, bebidas e estoque)</label>\n<button class=\"btn pri\" id=\"criar\" style=\"width:100%;margin-top:14px\">Criar meu sistema</button></div>\n<div class=\"card pronto\" id=\"ok\" hidden style=\"margin-top:18px\"></div>\n</div><script>\nconst API = location.origin + '/webhook/comanda-api';\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\n$('#criar').onclick = async () => {\n  $('#criar').disabled = true; $('#criar').textContent = 'Criando…';\n  const senha = $('#senha').value;\n  const j = await api('cadastro', { nome: $('#nome').value, tipo: $('#tipo').value, mesas: Number($('#mesas').value), dono: $('#dono').value, senha, exemplo: $('#ex').checked });\n  $('#criar').disabled = false; $('#criar').textContent = 'Criar meu sistema';\n  if (!j.ok) return aviso(j.erro, true);\n  const l = await api('login', { loja: j.loja, login: 'dono', senha });\n  if (l.ok) guarda.gravar('cmd_token', l.token); guarda.gravar('cmd_loja', j.loja);\n  const painel = `${location.origin}/webhook/comanda-painel?l=${j.loja}`;\n  $('#form').hidden = true; $('#ok').hidden = false;\n  $('#ok').innerHTML = `<h2>✅ Pronto!</h2><p style=\"margin:8px 0\">Guarde estes dados. A equipe entra com o mesmo código.</p>\n    <p>Código: <b>${esc(j.loja)}</b><br>Usuário: <b>dono</b></p><a class=\"btn pri\" style=\"width:100%;margin-top:12px\" href=\"${painel}\">Abrir o painel</a>\n    <p class=\"mu pq\" style=\"margin-top:10px\">Link do painel: ${esc(painel)}</p>`;\n};\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "e3614a32-6540-54ad-8ff7-a11c0ed40393",
+   "name": "📤 Página de cadastro",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -440
+   ]
+  },
+  {
+   "parameters": {
+    "path": "comanda-painel",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "7b8d58b8-7251-5b73-99c0-f35145162ad5",
+   "name": "🔔 Painel administrador",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -250
+   ],
+   "webhookId": "b41b0290-b3f3-5c56-b23f-78c644fbf2b3"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<title>Comanda · Painel</title><meta name=\"robots\" content=\"noindex\"><meta name=\"theme-color\" content=\"#C2410C\">\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C2410C;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\n.topo{position:sticky;top:0;z-index:20;background:var(--sup);border-bottom:1px solid var(--borda)}\n.topo .in{max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}\n.marca{font-weight:800;font-size:17px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.abas{max-width:1280px;margin:0 auto;padding:0 10px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}\n.abas button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--tx2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;position:relative}\n.abas button.on{color:var(--pri);border-color:var(--pri)}\n.abas .bolha{position:absolute;top:4px;right:0;background:var(--er);color:#fff;border-radius:999px;font-size:11px;padding:0 6px;line-height:17px}\nmain{max-width:1280px;margin:0 auto;padding:16px 16px 90px}\nh2{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2 .esp{flex:1}h2 .btn,h2 select,h2 input{font-size:14px;min-height:38px;padding:7px 12px;width:auto}\n.mesas{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}\n.mesa{border-radius:16px;padding:14px;cursor:pointer;border:2px solid var(--borda);background:var(--sup);min-height:112px;display:flex;flex-direction:column;gap:4px;text-align:left}\n.mesa .n{font-size:24px;font-weight:800}.mesa.ocupada{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 8%,var(--sup))}\n.mesa.conta{border-color:var(--av);background:var(--av-bg)}.mesa.chama{animation:pisca 1s infinite}\n@keyframes pisca{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--er) 45%,transparent)}}\n.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}\n.kpi{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px}.kpi .v{font-size:22px;font-weight:800}.kpi .r{font-size:12px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.03em}\n.cozinha{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}\n.ped{background:var(--sup);border:1px solid var(--borda);border-left:6px solid var(--mu);border-radius:14px;padding:12px}\n.ped.novo{border-left-color:var(--er)}.ped.preparo{border-left-color:var(--av)}.ped.pronto{border-left-color:var(--ok);opacity:.75}\n.ped .q{font-size:20px;font-weight:800}.ped .obs{background:var(--av-bg);color:var(--av);border-radius:8px;padding:4px 8px;margin-top:6px;font-weight:600}\n.prod{display:flex;gap:12px;align-items:center;padding:10px;border-bottom:1px solid var(--borda)}\n.prod img,.prod .semfoto{width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--sup2);flex:none;display:grid;place-items:center;font-size:24px}\n.prod .info{flex:1;min-width:0}.prod .nm{font-weight:700}.prod.off{opacity:.55}\n.chave{position:relative;width:46px;height:26px;flex:none}.chave input{opacity:0;width:0;height:0}.chave span{position:absolute;inset:0;background:var(--borda);border-radius:99px;cursor:pointer;transition:.2s}\n.chave span:before{content:\"\";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.chave input:checked+span{background:var(--ok)}.chave input:checked+span:before{transform:translateX(20px)}\n.cat-t{margin:18px 0 6px;font-weight:800;display:flex;gap:8px;align-items:center}\n.barras{display:flex;align-items:flex-end;gap:3px;height:140px;padding-top:10px}.barras div{flex:1;background:var(--pri);border-radius:4px 4px 0 0;min-height:2px;position:relative}\n.barras div:hover::after{content:attr(data-t);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--tx);color:var(--plano);font-size:11px;padding:2px 6px;border-radius:6px;white-space:nowrap}\n.eixo{display:flex;gap:3px;font-size:10px;color:var(--mu)}.eixo span{flex:1;text-align:center;overflow:hidden}\n.item-c{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--borda)}.item-c.cancelado{opacity:.45;text-decoration:line-through}\n.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;max-height:300px;overflow:auto;padding:2px}\n.picker button{border:1px solid var(--borda);background:var(--sup2);border-radius:12px;padding:10px;text-align:left;cursor:pointer}.picker button:disabled{opacity:.4}\n.carrinho{background:var(--sup2);border-radius:12px;padding:10px;margin-top:10px}\n.qrs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.qr{border:1px dashed var(--borda);border-radius:14px;padding:14px;text-align:center;background:#fff;color:#111}\n.qr .c{display:flex;justify-content:center;margin:8px 0}\n@media print{.topo,.nao-imprime{display:none!important}main{padding:0}.qr{break-inside:avoid}}\n.login{max-width:400px;margin:8vh auto;padding:0 16px}\n.alerta{background:var(--er-bg);color:var(--er);border-radius:12px;padding:10px 12px;font-weight:600;margin-bottom:12px}\n</style></head><body>\n<div id=\"app\"></div>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js\"></script>\n<script>\nconst API = location.origin + '/webhook/comanda-api';\nconst IMG = id => location.origin + '/webhook/comanda-img?id=' + id;\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst PAPEL_ABAS = {\n  dono: ['mesas', 'cozinha', 'caixa', 'produtos', 'estoque', 'relatorios', 'equipe', 'config'],\n  caixa: ['mesas', 'cozinha', 'caixa', 'produtos', 'estoque'], garcom: ['mesas', 'cozinha', 'produtos'], cozinha: ['cozinha', 'produtos'] };\nconst NOME_ABA = { mesas: '🍽️ Mesas', cozinha: '👨‍🍳 Cozinha e bar', caixa: '💰 Caixa', produtos: '📋 Produtos', estoque: '📦 Estoque', relatorios: '📊 Relatórios', equipe: '👥 Equipe', config: '⚙️ Configurações' };\nconst FORMAS = { dinheiro: '💵 Dinheiro', pix: '⚡ Pix', credito: '💳 Crédito', debito: '💳 Débito' };\nconst PAPEIS = { dono: 'Dono', caixa: 'Caixa', garcom: 'Garçom', cozinha: 'Cozinha' };\nconst TIPO_MOV = { venda: '🍽️ venda', estorno: '↩️ estorno', entrada: '📥 entrada', perda: '🗑️ perda', ajuste: '🔧 contagem' };\nlet EU = null, ABA = null, TIMER = null, CAT = null, ULT_PRONTOS = 0, ULT_CHAMADOS = 0, ULT_NOVOS = 0;\nconst params = new URLSearchParams(location.search);\nwindow.TOKEN = guarda.ler('cmd_token');\n\nfunction sair() { api('sair'); guarda.gravar('cmd_token', null); window.TOKEN = ''; telaLogin(); }\nfunction telaLogin(msg) {\n  clearInterval(TIMER);\n  const loja = params.get('l') || guarda.ler('cmd_loja') || '';\n  $('#app').innerHTML = `<div class=\"login\"><div class=\"card\"><h2>🍽️ Entrar no painel</h2>\n    ${msg ? `<div class=\"alerta\">${esc(msg)}</div>` : ''}\n    <label>Código do estabelecimento</label><input id=\"lj\" value=\"${esc(loja)}\" placeholder=\"ex.: bar-do-ze-1a2b\" autocapitalize=\"off\">\n    <label>Usuário</label><input id=\"lg\" value=\"${esc(params.get('u') || 'dono')}\" autocapitalize=\"off\">\n    <label>Senha</label><input id=\"sn\" type=\"password\">\n    <button class=\"btn pri\" style=\"width:100%;margin-top:14px\" id=\"ent\">Entrar</button>\n    <p class=\"mu pq\" style=\"margin-top:12px\">Ainda não tem? <a href=\"${location.origin}/webhook/comanda\">Crie o seu grátis</a>.</p></div></div>`;\n  const ir = async () => {\n    const j = await api('login', { loja: $('#lj').value.trim(), login: $('#lg').value.trim(), senha: $('#sn').value });\n    if (!j.ok) return aviso(j.erro, true);\n    window.TOKEN = j.token; guarda.gravar('cmd_token', j.token); guarda.gravar('cmd_loja', $('#lj').value.trim()); iniciar();\n  };\n  $('#ent').onclick = ir; $('#sn').onkeydown = e => { if (e.key === 'Enter') ir(); };\n}\nasync function iniciar() {\n  if (!window.TOKEN) return telaLogin();\n  const j = await api('eu');\n  if (!j.ok) return telaLogin(j.sair ? '' : j.erro);\n  EU = j; document.documentElement.style.setProperty('--pri', j.loja.cor || '#C2410C');\n  const abas = PAPEL_ABAS[j.usuario.papel] || ['mesas'];\n  $('#app').innerHTML = `<div class=\"topo\"><div class=\"in\"><div class=\"marca\">${esc(j.loja.nome)}</div>\n      <span class=\"selo\">${esc(j.usuario.nome)} · ${PAPEIS[j.usuario.papel]}</span>\n      <button class=\"btn fant pq\" id=\"tema\" title=\"Tema\">🌓</button><button class=\"btn pq\" onclick=\"sair()\">Sair</button></div>\n    <nav class=\"abas\">${abas.map(a => `<button data-aba=\"${a}\">${NOME_ABA[a]}<span class=\"bolha\" hidden></span></button>`).join('')}</nav></div><main id=\"tela\"></main>`;\n  tema();\n  $$('[data-aba]').forEach(b => b.onclick = () => abrir(b.dataset.aba));\n  abrir(location.hash.slice(1) && abas.includes(location.hash.slice(1)) ? location.hash.slice(1) : abas[0]);\n}\nfunction abrir(aba) {\n  ABA = aba; location.hash = aba; clearInterval(TIMER);\n  $$('[data-aba]').forEach(b => b.classList.toggle('on', b.dataset.aba === aba));\n  const f = { mesas: telaMesas, cozinha: telaCozinha, caixa: telaCaixa, produtos: telaProdutos, estoque: telaEstoque, relatorios: telaRelatorios, equipe: telaEquipe, config: telaConfig }[aba];\n  $('#tela').innerHTML = '<div class=\"vazio\">Carregando…</div>'; f();\n}\nconst pode = (...p) => p.includes(EU.usuario.papel);\n\n// ═════════ IMPRESSÃO (cupom 80 mm, qualquer impressora térmica ou comum) ═════════\nfunction imprimir(titulo, linhas) {\n  const w = window.open('', '_blank', 'width=380,height=640'); if (!w) return aviso('Libere os pop-ups para imprimir.', true);\n  w.document.write(`<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>${esc(titulo)}</title><style>@page{size:80mm auto;margin:3mm}body{font-family:ui-monospace,Consolas,monospace;font-size:13px;width:72mm;margin:0;color:#000}\n    h1{font-size:17px;text-align:center;margin:0 0 4px}.c{text-align:center}.g{font-size:16px;font-weight:700}.l{display:flex;justify-content:space-between;gap:6px}.o{font-weight:700;padding-left:10px}hr{border:0;border-top:1px dashed #000;margin:6px 0}</style></head>\n    <body>${linhas}<hr><div class=\"c\">${new Date().toLocaleString('pt-BR')}</div><script>window.onload=()=>{window.print();setTimeout(()=>window.close(),400)}<\\/script></body></html>`);\n  w.document.close();\n}\nfunction imprimirConta(mesa, c) {\n  imprimir('Conta mesa ' + mesa, `<h1>${esc(EU.loja.nome)}</h1><div class=\"c\">CONFERÊNCIA · MESA ${mesa}</div><hr>\n    ${c.itens.filter(i => i.status !== 'cancelado').map(i => `<div class=\"l\"><span>${i.qtd}x ${esc(i.nome)}</span><span>${brl(i.qtd * i.preco_unit)}</span></div>${i.adicionais.length ? `<div>&nbsp;+ ${i.adicionais.map(esc).join(', ')}</div>` : ''}`).join('')}\n    <hr><div class=\"l\"><span>Subtotal</span><span>${brl(c.subtotal)}</span></div><div class=\"l\"><span>Serviço ${Number(c.servico_pct)}%</span><span>${brl(c.subtotal * c.servico_pct / 100)}</span></div>\n    ${Number(c.desconto) ? `<div class=\"l\"><span>Desconto</span><span>-${brl(c.desconto)}</span></div>` : ''}<div class=\"l g\"><span>TOTAL</span><span>${brl(c.total)}</span></div>\n    ${c.pessoas > 1 ? `<div class=\"l\"><span>Por pessoa (${c.pessoas})</span><span>${brl(c.total / c.pessoas)}</span></div>` : ''}<hr><div class=\"c\">Não é documento fiscal</div>`);\n}\nfunction imprimirPedido(itens) {\n  const porMesa = {}; itens.forEach(i => (porMesa[i.mesa] = porMesa[i.mesa] || []).push(i));\n  imprimir('Pedido cozinha', `<div class=\"c\">${esc(EU.loja.nome)} · PEDIDO</div><hr>` + Object.entries(porMesa).map(([m, l]) => `<h1>MESA ${m}</h1><div class=\"c\">${l[0].origem === 'cliente' ? 'pelo QR da mesa' : ''}</div>${l.map(i => `<div class=\"g\">${i.qtd}x ${esc(i.nome)}</div>${i.adicionais.length ? `<div>+ ${i.adicionais.map(esc).join(', ')}</div>` : ''}${i.obs ? `<div class=\"o\">>> ${esc(i.obs)}</div>` : ''}`).join('')}<hr>`).join(''));\n}\n\n// ═════════ MESAS ═════════\nasync function telaMesas() {\n  const desenha = async () => {\n    const j = await api('mesas'); if (!j.ok || ABA !== 'mesas') return;\n    const prontos = j.mesas.reduce((s, m) => s + Number(m.prontos || 0), 0), chamados = j.mesas.filter(m => m.chamado).length;\n    if (prontos > ULT_PRONTOS || chamados > ULT_CHAMADOS) bipe();\n    ULT_PRONTOS = prontos; ULT_CHAMADOS = chamados;\n    const ocup = j.mesas.filter(m => m.comanda);\n    $('#tela').innerHTML = `${!j.caixa && pode('dono', 'caixa') ? `<div class=\"alerta\">💰 O caixa está fechado. <a href=\"#caixa\" onclick=\"abrir('caixa')\">Abrir o caixa</a> para receber as contas.</div>` : ''}\n      ${j.alertas > 0 && pode('dono', 'caixa') ? `<div class=\"alerta\">📦 ${j.alertas} insumo(s) no estoque mínimo. <a href=\"#estoque\" onclick=\"abrir('estoque')\">Ver estoque</a></div>` : ''}\n      <div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Mesas ocupadas</div><div class=\"v\">${ocup.length}/${j.mesas.length}</div></div>\n      <div class=\"kpi\"><div class=\"r\">Em aberto</div><div class=\"v\">${brl(ocup.reduce((s, m) => s + Number(m.total), 0))}</div></div>\n      <div class=\"kpi\"><div class=\"r\">Na cozinha</div><div class=\"v\">${j.cozinha}</div></div>\n      <div class=\"kpi\"><div class=\"r\">Prontos p/ servir</div><div class=\"v\" style=\"color:var(--ok)\">${prontos}</div></div></div>\n      <h2>Mesas <span class=\"esp\"></span><span class=\"mu pq\">atualiza sozinho</span></h2>\n      <div class=\"mesas\">${j.mesas.map(m => `<button class=\"mesa ${m.comanda ? 'ocupada' : ''} ${m.pediu_conta ? 'conta' : ''} ${m.chamado ? 'chama' : ''}\" data-m=\"${m.mesa}\">\n        <div class=\"linha\" style=\"flex-wrap:nowrap\"><span class=\"n\">${m.mesa}</span>${m.chamado ? `<span class=\"selo er\">${m.chamado === 'conta' ? '🧾 conta' : '🙋 chamou'}</span>` : ''}</div>\n        ${m.comanda ? `<div class=\"forte\">${brl(m.total)}</div><div class=\"mu pq\">${tempoDesde(m.aberta_em)}${m.garcom ? ' · ' + esc(m.garcom) : ''}</div>\n          ${Number(m.prontos) ? `<span class=\"selo ok\">🔔 ${m.prontos} pronto(s)</span>` : ''}` : '<div class=\"mu\">Livre</div>'}</button>`).join('')}</div>`;\n    $$('[data-m]').forEach(b => b.onclick = () => abrirComanda(Number(b.dataset.m)));\n    const bolha = $('[data-aba=\"mesas\"] .bolha'); if (bolha) { bolha.hidden = !(prontos + chamados); bolha.textContent = prontos + chamados; }\n  };\n  await desenha(); TIMER = setInterval(() => { if (!$('.modal-fundo')) desenha(); }, 6000);\n}\nasync function catalogo(forcar) { if (!CAT || forcar) { const j = await api('prod_lista'); if (j.ok) CAT = j; } return CAT; }\nasync function abrirComanda(mesa) {\n  const j = await api('comanda_ver', { mesa }); if (!j.ok) return aviso(j.erro, true);\n  const c = j.comanda;\n  const st = { novo: '<span class=\"selo er\">novo</span>', preparo: '<span class=\"selo av\">preparando</span>', pronto: '<span class=\"selo ok\">pronto</span>', entregue: '<span class=\"selo\">entregue</span>', cancelado: '<span class=\"selo\">cancelado</span>' };\n  const m = modal(`<h3>Mesa ${mesa} ${c ? `· <span class=\"num\">${brl(c.total)}</span>` : '· livre'}</h3>\n    ${c ? `<p class=\"mu pq\">Aberta há ${tempoDesde(c.aberta_em)} · ${c.pessoas} pessoa(s) · serviço ${Number(c.servico_pct)}%${Number(c.desconto) ? ' · desconto ' + brl(c.desconto) : ''}</p>\n      <div style=\"margin-top:8px\">${c.itens.map(it => `<div class=\"item-c ${it.status}\"><div style=\"flex:1\"><b>${it.qtd}x ${esc(it.nome)}</b>\n        ${it.adicionais.length ? `<div class=\"pq mu\">+ ${it.adicionais.map(esc).join(', ')}</div>` : ''}${it.obs ? `<div class=\"pq\">📝 ${esc(it.obs)}</div>` : ''}\n        <div class=\"pq mu\">${it.origem === 'cliente' ? '📱 pelo QR' : esc(it.usuario)} · ${new Date(it.criado_em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}${it.motivo ? ' · ' + esc(it.motivo) : ''}</div></div>\n        <div style=\"text-align:right\"><div class=\"num\">${brl(it.qtd * it.preco_unit)}</div>${st[it.status]}\n        ${it.status === 'pronto' ? `<br><button class=\"btn pq ok\" data-ent=\"${it.id}\" style=\"margin-top:4px\">Servido</button>` : ''}\n        ${it.status !== 'cancelado' && it.status !== 'entregue' ? `<br><button class=\"btn pq fant er\" data-can=\"${it.id}\">Cancelar</button>` : ''}</div></div>`).join('')}</div>\n      <div class=\"linha\" style=\"margin-top:10px;justify-content:space-between\"><span class=\"mu\">Subtotal ${brl(c.subtotal)} + serviço ${brl(c.subtotal * c.servico_pct / 100)}${Number(c.desconto) ? ' − ' + brl(c.desconto) : ''}</span><b class=\"num\" style=\"font-size:20px;flex:none\">${brl(c.total)}</b></div>` : '<p class=\"mu\">Nenhum pedido ainda. Lance o primeiro item para abrir a mesa.</p>'}\n    <div class=\"acoes\" style=\"flex-wrap:wrap\"><button class=\"btn\" data-fechar>Fechar</button>\n      ${c ? `<button class=\"btn\" data-mais>⋯ Mais</button><button class=\"btn\" data-imp>🖨️ Conta</button>` : ''}\n      ${c && pode('dono', 'caixa') ? `<button class=\"btn ok\" data-receber>💰 Receber</button>` : ''}\n      <button class=\"btn pri\" data-add>＋ Lançar itens</button></div>`);\n  $('[data-add]', m).onclick = () => { m.fechar(); lancarItens(mesa); };\n  $$('[data-can]', m).forEach(b => b.onclick = async () => {\n    const motivo = prompt('Motivo do cancelamento (fica registrado):'); if (!motivo) return;\n    if (await chama('item_cancelar', { id: Number(b.dataset.can), motivo }, 'Item cancelado')) { m.fechar(); abrirComanda(mesa); } });\n  $$('[data-ent]', m).forEach(b => b.onclick = async () => { if (await chama('item_status', { id: Number(b.dataset.ent), status: 'entregue' })) { m.fechar(); abrirComanda(mesa); } });\n  if (c) {\n    $('[data-mais]', m).onclick = () => { m.fechar(); maisComanda(mesa, c); };\n    $('[data-imp]', m).onclick = () => imprimirConta(mesa, c);\n    const r = $('[data-receber]', m); if (r) r.onclick = () => { m.fechar(); receber(mesa, c); };\n  }\n}\nfunction maisComanda(mesa, c) {\n  const m = modal(`<h3>Mesa ${mesa} · ajustes</h3>\n    <div class=\"linha\"><div><label>Pessoas</label><input id=\"pe\" type=\"number\" min=\"1\" value=\"${c.pessoas}\"></div>\n    <div><label>Serviço (%)</label><input id=\"sv\" type=\"number\" min=\"0\" max=\"20\" value=\"${Number(c.servico_pct)}\"></div>\n    ${pode('dono', 'caixa') ? `<div><label>Desconto (R$)</label><input id=\"ds\" inputmode=\"decimal\" value=\"${Number(c.desconto) || ''}\"></div>` : ''}</div>\n    <button class=\"btn\" id=\"salva\" style=\"margin-top:10px\">Salvar ajustes</button>\n    <label style=\"margin-top:18px\">Transferir ou juntar com a mesa</label><div class=\"linha\"><input id=\"pr\" type=\"number\" min=\"1\" max=\"${EU.loja.mesas}\" placeholder=\"nº da mesa\"><button class=\"btn\" id=\"tr\" style=\"flex:none\">Transferir / juntar</button></div>\n    <p class=\"mu pq\">Se a outra mesa estiver livre, a comanda muda de lugar. Se estiver ocupada, as duas viram uma conta só.</p>\n    ${pode('dono', 'caixa') ? `<label style=\"margin-top:18px\">Cancelar a comanda inteira</label><button class=\"btn er\" id=\"cc\">Cancelar comanda</button>` : ''}\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Voltar</button></div>`);\n  $('#salva', m).onclick = async () => { const d = { mesa, pessoas: Number($('#pe', m).value), servico_pct: Number($('#sv', m).value) };\n    if ($('#ds', m)) d.desconto = numIn($('#ds', m).value); if (await chama('comanda_ajustar', d, 'Ajustado')) { m.fechar(); abrirComanda(mesa); } };\n  $('#tr', m).onclick = async () => { const para = Number($('#pr', m).value); if (!para) return;\n    if (await chama('comanda_transferir', { de: mesa, para }, 'Feito')) { m.fechar(); abrirComanda(para); } };\n  const cc = $('#cc', m); if (cc) cc.onclick = async () => { const motivo = prompt('Motivo do cancelamento da comanda inteira:'); if (!motivo) return;\n    if (await chama('comanda_cancelar', { mesa, motivo }, 'Comanda cancelada')) m.fechar(); };\n}\nasync function lancarItens(mesa) {\n  const cat = await catalogo(true); if (!cat) return;\n  const carrinho = [];\n  const m = modal(`<h3>Lançar na mesa ${mesa}</h3><input id=\"busca\" placeholder=\"🔎 Buscar produto\">\n    <div class=\"linha\" id=\"cats\" style=\"margin:8px 0;gap:6px\">${cat.categorias.map(c => `<button class=\"btn pq\" data-c=\"${c.id}\" style=\"flex:none\">${esc(c.icone)} ${esc(c.nome)}</button>`).join('')}</div>\n    <div class=\"picker\" id=\"pk\"></div><div class=\"carrinho\" id=\"car\"></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"env\" disabled>Enviar para a cozinha</button></div>`);\n  let filtro = { c: null, q: '' };\n  const lista = () => { $('#pk', m).innerHTML = cat.produtos.filter(p => (!filtro.c || p.categoria_id === filtro.c) && (!filtro.q || p.nome.toLowerCase().includes(filtro.q)))\n    .map(p => `<button data-p=\"${p.id}\" ${p.disponivel ? '' : 'disabled'}><b>${esc(p.nome)}</b><br><span class=\"mu pq\">${p.disponivel ? brl(p.preco) : 'esgotado'}</span></button>`).join('') || '<div class=\"vazio\">Nada encontrado</div>';\n    $$('[data-p]', m).forEach(b => b.onclick = () => escolhe(cat.produtos.find(p => p.id === Number(b.dataset.p)))); };\n  const desenhaCar = () => { $('#car', m).innerHTML = carrinho.length ? carrinho.map((x, i) => `<div class=\"linha\" style=\"flex-wrap:nowrap;padding:4px 0\"><span style=\"flex:1\"><b>${x.qtd}x ${esc(x.nome)}</b>${x.adicionais.length ? ' + ' + x.adicionais.map(esc).join(', ') : ''}${x.obs ? ' · 📝 ' + esc(x.obs) : ''}</span><span class=\"num\" style=\"flex:none\">${brl(x.total)}</span><button class=\"btn pq fant er\" data-rm=\"${i}\" style=\"flex:none\">✕</button></div>`).join('') + `<div style=\"text-align:right;font-weight:800;margin-top:6px\">${brl(carrinho.reduce((s, x) => s + x.total, 0))}</div>` : '<span class=\"mu pq\">Toque nos produtos para adicionar.</span>';\n    $$('[data-rm]', m).forEach(b => b.onclick = () => { carrinho.splice(Number(b.dataset.rm), 1); desenhaCar(); }); $('#env', m).disabled = !carrinho.length; };\n  const escolhe = p => {\n    const e = modal(`<h3>${esc(p.nome)}</h3><p class=\"mu\">${esc(p.descricao)}</p>\n      <label>Quantidade</label><div class=\"linha\" style=\"flex-wrap:nowrap\"><button class=\"btn\" id=\"me\" style=\"flex:none\">−</button><input id=\"q\" type=\"number\" value=\"1\" min=\"1\" style=\"text-align:center\"><button class=\"btn\" id=\"ma\" style=\"flex:none\">＋</button></div>\n      ${p.adicionais.length ? `<label>Adicionais</label>${p.adicionais.map((a, i) => `<label style=\"font-weight:400;display:flex;gap:8px;align-items:center\"><input type=\"checkbox\" data-a=\"${i}\" style=\"width:auto;min-height:0\"> ${esc(a.nome)} <span class=\"mu\">+ ${brl(a.preco)}</span></label>`).join('')}` : ''}\n      <label>Observação para a cozinha</label><input id=\"ob\" placeholder=\"ex.: sem cebola, ponto da carne\">\n      <div class=\"acoes\"><button class=\"btn\" data-fechar>Voltar</button><button class=\"btn pri\" id=\"ok\">Adicionar</button></div>`);\n    $('#me', e).onclick = () => $('#q', e).value = Math.max(1, Number($('#q', e).value) - 1);\n    $('#ma', e).onclick = () => $('#q', e).value = Number($('#q', e).value) + 1;\n    $('#ok', e).onclick = () => { const ads = $$('[data-a]:checked', e).map(x => p.adicionais[Number(x.dataset.a)]); const q = Math.max(1, Number($('#q', e).value) || 1);\n      carrinho.push({ produto_id: p.id, nome: p.nome, qtd: q, obs: $('#ob', e).value.trim(), adicionais: ads.map(a => a.nome), total: q * (Number(p.preco) + ads.reduce((s, a) => s + Number(a.preco), 0)) });\n      e.fechar(); desenhaCar(); };\n  };\n  $$('[data-c]', m).forEach(b => b.onclick = () => { filtro.c = filtro.c === Number(b.dataset.c) ? null : Number(b.dataset.c); $$('[data-c]', m).forEach(x => x.classList.toggle('pri', Number(x.dataset.c) === filtro.c)); lista(); });\n  $('#busca', m).oninput = e => { filtro.q = e.target.value.toLowerCase().trim(); lista(); };\n  $('#env', m).onclick = async () => { $('#env', m).disabled = true;\n    const j = await chama('comanda_add', { mesa, itens: carrinho.map(({ produto_id, qtd, obs, adicionais }) => ({ produto_id, qtd, obs, adicionais })) }, 'Enviado para a cozinha');\n    if (j) { m.fechar(); abrirComanda(mesa); } else $('#env', m).disabled = false; };\n  lista(); desenhaCar();\n}\nasync function receber(mesa, c) {\n  const pix = await api('pix');\n  const pags = [{ forma: 'pix', valor: Number(c.total) }];\n  const m = modal(`<h3>Receber · mesa ${mesa}</h3><div class=\"kpis\" style=\"grid-template-columns:1fr 1fr\"><div class=\"kpi\"><div class=\"r\">Total</div><div class=\"v num\">${brl(c.total)}</div></div>\n    <div class=\"kpi\"><div class=\"r\">Por pessoa (${c.pessoas})</div><div class=\"v num\">${brl(c.total / Math.max(1, c.pessoas))}</div></div></div>\n    <div class=\"linha\"><button class=\"btn pq\" id=\"div\" style=\"flex:none\">Dividir em partes iguais</button><input id=\"np\" type=\"number\" min=\"1\" value=\"${c.pessoas}\" style=\"max-width:90px;flex:none\"></div>\n    <div id=\"pgs\" style=\"margin-top:10px\"></div><button class=\"btn pq\" id=\"maisf\" style=\"margin-top:6px\">＋ Outra forma de pagamento</button>\n    <div id=\"res\" style=\"margin-top:12px;font-weight:700\"></div><div id=\"pixqr\" style=\"margin-top:10px;text-align:center\"></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Voltar</button><button class=\"btn ok\" id=\"fin\">Confirmar recebimento</button></div>`);\n  const desenha = () => {\n    $('#pgs', m).innerHTML = pags.map((p, i) => `<div class=\"linha\" style=\"flex-wrap:nowrap;margin-bottom:6px\"><select data-f=\"${i}\" style=\"flex:1\">${Object.entries(FORMAS).map(([k, v]) => `<option value=\"${k}\" ${p.forma === k ? 'selected' : ''}>${v}</option>`).join('')}</select>\n      <input data-v=\"${i}\" inputmode=\"decimal\" value=\"${p.valor.toFixed(2).replace('.', ',')}\" style=\"max-width:130px;flex:none\">${pags.length > 1 ? `<button class=\"btn pq fant er\" data-x=\"${i}\" style=\"flex:none\">✕</button>` : ''}</div>`).join('');\n    $$('[data-f]', m).forEach(s => s.onchange = () => { pags[Number(s.dataset.f)].forma = s.value; resumo(); });\n    $$('[data-v]', m).forEach(s => s.oninput = () => { pags[Number(s.dataset.v)].valor = numIn(s.value); resumo(); });\n    $$('[data-x]', m).forEach(b => b.onclick = () => { pags.splice(Number(b.dataset.x), 1); desenha(); });\n    resumo();\n  };\n  const resumo = () => { const pago = pags.reduce((s, p) => s + p.valor, 0), dif = pago - Number(c.total);\n    $('#res', m).innerHTML = dif < -0.009 ? `<span style=\"color:var(--er)\">Faltam ${brl(-dif)}</span>` : dif > 0.009 ? `<span style=\"color:var(--ok)\">Troco: ${brl(dif)}</span>` : '<span style=\"color:var(--ok)\">✔ Valor certo</span>';\n    const vp = pags.filter(p => p.forma === 'pix').reduce((s, p) => s + p.valor, 0);\n    $('#pixqr', m).innerHTML = '';\n    if (vp > 0 && pix.ok && pix.chave && window.QRCode) { const cod = pixCopiaECola({ chave: pix.chave, nome: pix.nome, cidade: pix.cidade, valor: vp, txid: 'MESA' + mesa });\n      const d = document.createElement('div'); d.style.cssText = 'display:inline-block;background:#fff;padding:10px;border-radius:12px'; $('#pixqr', m).append(d);\n      new QRCode(d, { text: cod, width: 180, height: 180 }); const b = document.createElement('button'); b.className = 'btn pq'; b.textContent = '📋 Copiar Pix ' + brl(vp);\n      b.onclick = () => { navigator.clipboard && navigator.clipboard.writeText(cod); aviso('Pix copiado'); }; $('#pixqr', m).append(document.createElement('br'), b);\n    } else if (vp > 0 && pix.ok && !pix.chave) $('#pixqr', m).innerHTML = '<span class=\"mu pq\">Cadastre a chave Pix em Configurações para mostrar o QR aqui.</span>';\n  };\n  $('#div', m).onclick = () => { const n = Math.max(1, Number($('#np', m).value) || 1), parte = Math.floor(Number(c.total) / n * 100) / 100;\n    pags.length = 0; for (let i = 0; i < n; i++) pags.push({ forma: 'pix', valor: i === n - 1 ? Math.round((Number(c.total) - parte * (n - 1)) * 100) / 100 : parte }); desenha(); };\n  $('#maisf', m).onclick = () => { const falta = Math.max(0, Number(c.total) - pags.reduce((s, p) => s + p.valor, 0)); pags.push({ forma: 'dinheiro', valor: Math.round(falta * 100) / 100 }); desenha(); };\n  $('#fin', m).onclick = async () => { const j = await chama('comanda_fechar', { mesa, pagamentos: pags });\n    if (j) { m.fechar(); aviso(j.troco > 0 ? `Conta fechada · troco ${brl(j.troco)}` : 'Conta fechada ✔'); if (ABA === 'mesas') telaMesas(); } };\n  desenha();\n}\n\n// ═════════ COZINHA ═════════\nasync function telaCozinha() {\n  let destino = guarda.ler('cmd_destino') || '';\n  const desenha = async () => {\n    const j = await api('cozinha', { destino }); if (!j.ok || ABA !== 'cozinha') return;\n    const novos = j.itens.filter(i => i.status === 'novo').length; if (novos > ULT_NOVOS) bipe(); ULT_NOVOS = novos;\n    const ag = new Date(j.agora).getTime();\n    const min = i => Math.floor((ag - new Date(i.criado_em)) / 60000);\n    $('#tela').innerHTML = `<h2>Pedidos <span class=\"esp\"></span>\n      <label style=\"display:flex;gap:6px;align-items:center;font-weight:400;margin:0;font-size:14px\"><input type=\"checkbox\" id=\"autoimp\" style=\"width:auto;min-height:0\" ${guarda.ler('cmd_autoimp') ? 'checked' : ''}> imprimir sozinho</label>\n      <button class=\"btn\" id=\"impn\">🖨️ Imprimir novos</button><select id=\"dst\" style=\"width:auto\">${[['', 'Tudo'], ['cozinha', '👨‍🍳 Cozinha'], ['bar', '🍹 Bar']].map(([v, t]) => `<option value=\"${v}\" ${destino === v ? 'selected' : ''}>${t}</option>`).join('')}</select></h2>\n      <div class=\"cozinha\">${j.itens.length ? j.itens.map(i => `<div class=\"ped ${i.status}\"><div class=\"linha\" style=\"flex-wrap:nowrap\"><span class=\"q\">Mesa ${i.mesa}</span>\n        <span class=\"selo ${min(i) >= 20 && i.status !== 'pronto' ? 'er' : ''}\" style=\"flex:none\">${i.status === 'pronto' ? 'pronto' : min(i) + ' min'}</span></div>\n        <div style=\"font-size:17px;margin-top:4px\"><b>${i.qtd}x</b> ${esc(i.nome)}</div>${i.adicionais.length ? `<div>+ ${i.adicionais.map(esc).join(', ')}</div>` : ''}\n        ${i.obs ? `<div class=\"obs\">📝 ${esc(i.obs)}</div>` : ''}<div class=\"pq mu\" style=\"margin-top:4px\">${i.origem === 'cliente' ? '📱 pedido pelo QR' : ''} ${i.destino === 'bar' ? '🍹 bar' : ''}</div>\n        <div class=\"linha\" style=\"margin-top:8px\">${i.status === 'novo' ? `<button class=\"btn\" data-s=\"${i.id}\" data-v=\"preparo\">Começar</button>` : ''}\n        ${i.status !== 'pronto' ? `<button class=\"btn ok\" data-s=\"${i.id}\" data-v=\"pronto\">✔ Pronto</button>` : `<button class=\"btn pq\" data-s=\"${i.id}\" data-v=\"preparo\">Voltar</button>`}</div></div>`).join('') : '<div class=\"vazio\">Nenhum pedido agora 🎉</div>'}</div>`;\n    $('#dst').onchange = e => { destino = e.target.value; guarda.gravar('cmd_destino', destino); desenha(); };\n    const novosIt = j.itens.filter(i => i.status === 'novo');\n    $('#impn').onclick = () => novosIt.length ? imprimirPedido(novosIt) : aviso('Nenhum pedido novo.');\n    $('#autoimp').onchange = e => guarda.gravar('cmd_autoimp', e.target.checked ? '1' : null);\n    const jaImpressos = new Set(JSON.parse(guarda.ler('cmd_impressos') || '[]'));\n    const faltam = novosIt.filter(i => !jaImpressos.has(i.id));\n    if ($('#autoimp').checked && faltam.length) { imprimirPedido(faltam); faltam.forEach(i => jaImpressos.add(i.id)); guarda.gravar('cmd_impressos', JSON.stringify([...jaImpressos].slice(-300))); }\n    $$('[data-s]').forEach(b => b.onclick = async () => { b.disabled = true; if (await chama('item_status', { id: Number(b.dataset.s), status: b.dataset.v })) desenha(); });\n  };\n  await desenha(); TIMER = setInterval(desenha, 5000);\n}\n\n// ═════════ CAIXA ═════════\nasync function telaCaixa() {\n  const j = await api('caixa_atual'); if (!j.ok) return aviso(j.erro, true);\n  const h = await api('caixa_hist');\n  const hist = h.ok && h.caixas.length ? `<h2 style=\"margin-top:24px\">Caixas anteriores</h2><div class=\"card tabela\"><table><tr><th>Aberto</th><th>Fechado</th><th>Esperado</th><th>Contado</th><th>Diferença</th></tr>\n    ${h.caixas.map(c => { const s = o => Object.values(o || {}).reduce((a, b) => a + Number(b), 0); return `<tr><td>${new Date(c.aberto_em).toLocaleString('pt-BR')}<br><span class=\"mu pq\">${esc(c.aberto_por)}</span></td><td>${new Date(c.fechado_em).toLocaleString('pt-BR')}<br><span class=\"mu pq\">${esc(c.fechado_por)}</span></td>\n      <td class=\"num\">${brl(s(c.esperado))}</td><td class=\"num\">${brl(s(c.contado))}</td><td class=\"num\" style=\"color:${Math.abs(c.diferenca) < 0.01 ? 'var(--ok)' : 'var(--er)'}\">${brl(c.diferenca)}</td></tr>`; }).join('')}</table></div>` : '';\n  if (!j.caixa) {\n    $('#tela').innerHTML = `<div class=\"card\" style=\"max-width:460px\"><h2>💰 Caixa fechado</h2><p class=\"mu\">Informe quanto tem de troco na gaveta para começar o dia.</p>\n      <label>Troco inicial (R$)</label><input id=\"tr\" inputmode=\"decimal\" placeholder=\"0,00\"><button class=\"btn pri\" id=\"ab\" style=\"margin-top:12px;width:100%\">Abrir o caixa</button></div>${hist}`;\n    $('#ab').onclick = async () => { if (await chama('caixa_abrir', { troco: numIn($('#tr').value) }, 'Caixa aberto')) telaCaixa(); };\n    return;\n  }\n  const c = j.caixa, pf = c.por_forma || {}, din = Number(c.troco_inicial) + Number(pf.dinheiro || 0) + Number(c.suprimentos) - Number(c.sangrias);\n  const total = Object.values(pf).reduce((s, v) => s + Number(v), 0);\n  $('#tela').innerHTML = `<h2>💰 Caixa aberto <span class=\"selo ok\">desde ${new Date(c.aberto_em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })} · ${esc(c.aberto_por)}</span></h2>\n    <div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Vendido</div><div class=\"v num\">${brl(total)}</div><div class=\"mu pq\">${c.vendas} conta(s)</div></div>\n    ${Object.entries(FORMAS).map(([k, v]) => `<div class=\"kpi\"><div class=\"r\">${v}</div><div class=\"v num\">${brl(pf[k] || 0)}</div></div>`).join('')}\n    <div class=\"kpi\"><div class=\"r\">Dinheiro na gaveta</div><div class=\"v num\">${brl(din)}</div><div class=\"mu pq\">troco ${brl(c.troco_inicial)} · sangria ${brl(c.sangrias)} · reforço ${brl(c.suprimentos)}</div></div></div>\n    <div class=\"linha nao-imprime\" style=\"margin-bottom:14px\"><button class=\"btn\" id=\"sg\" style=\"flex:none\">➖ Sangria (retirada)</button><button class=\"btn\" id=\"sp\" style=\"flex:none\">➕ Reforço de troco</button><span></span><button class=\"btn pri\" id=\"fc\" style=\"flex:none\">Fechar o caixa</button></div>\n    <div class=\"card tabela\"><table><tr><th>Hora</th><th>Tipo</th><th>Forma</th><th>Valor</th><th>Quem</th></tr>\n    ${c.movimentos.map(x => `<tr><td>${new Date(x.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</td><td>${x.tipo === 'venda' ? 'Mesa ' + (x.mesa || '?') : x.tipo === 'sangria' ? '➖ Sangria' : '➕ Reforço'}${x.obs ? `<br><span class=\"mu pq\">${esc(x.obs)}</span>` : ''}</td>\n      <td>${FORMAS[x.forma] || x.forma}</td><td class=\"num\" style=\"color:${x.tipo === 'sangria' ? 'var(--er)' : 'inherit'}\">${brl(x.valor)}</td><td>${esc(x.usuario)}</td></tr>`).join('') || '<tr><td colspan=\"5\" class=\"vazio\">Nenhum movimento ainda</td></tr>'}</table></div>${hist}`;\n  const mov = tipo => { const m = modal(`<h3>${tipo === 'sangria' ? '➖ Sangria (retirar dinheiro)' : '➕ Reforço de troco'}</h3><label>Valor (R$)</label><input id=\"v\" inputmode=\"decimal\">\n    <label>Motivo</label><input id=\"o\" placeholder=\"${tipo === 'sangria' ? 'ex.: pagar o gás, depósito' : 'ex.: troco extra'}\"><div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Registrar</button></div>`);\n    $('#ok', m).onclick = async () => { if (await chama('caixa_mov', { tipo, valor: numIn($('#v', m).value), obs: $('#o', m).value }, 'Registrado')) { m.fechar(); telaCaixa(); } }; };\n  $('#sg').onclick = () => mov('sangria'); $('#sp').onclick = () => mov('suprimento');\n  $('#fc').onclick = () => { const m = modal(`<h3>Fechar o caixa</h3><p class=\"mu\">Conte o que tem de verdade. O sistema mostra a diferença.</p>\n    ${Object.entries(FORMAS).map(([k, v]) => `<label>${v} ${k === 'dinheiro' ? '(conte a gaveta)' : '(confira na maquininha/banco)'}</label><input data-k=\"${k}\" inputmode=\"decimal\" value=\"${k === 'dinheiro' ? '' : Number(pf[k] || 0).toFixed(2).replace('.', ',')}\">`).join('')}\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Fechar caixa</button></div>`);\n    $('#ok', m).onclick = async () => { const contado = Object.fromEntries($$('[data-k]', m).map(i => [i.dataset.k, numIn(i.value)]));\n      let j2 = await api('caixa_fechar', { contado });\n      if (!j2.ok && j2.confirmar && await confirma(j2.erro)) j2 = await api('caixa_fechar', { contado, forcar: true });\n      if (!j2.ok) return j2.confirmar ? null : aviso(j2.erro, true);\n      m.fechar(); const d = Number(j2.diferenca);\n      modal(`<h3>Caixa fechado ✔</h3><div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Diferença</div><div class=\"v num\" style=\"color:${Math.abs(d) < 0.01 ? 'var(--ok)' : 'var(--er)'}\">${brl(d)}</div><div class=\"mu pq\">${Math.abs(d) < 0.01 ? 'Bateu certinho' : d > 0 ? 'Sobrou dinheiro' : 'Faltou dinheiro'}</div></div></div>\n        <table>${Object.keys(FORMAS).map(k => `<tr><td>${FORMAS[k]}</td><td class=\"num\">esperado ${brl(j2.esperado[k])}</td><td class=\"num\">contado ${brl(j2.contado[k])}</td></tr>`).join('')}</table><div class=\"acoes\"><button class=\"btn pri\" data-fechar>OK</button></div>`);\n      telaCaixa(); }; };\n}\n\n// ═════════ PRODUTOS ═════════\nasync function telaProdutos() {\n  const cat = await catalogo(true); if (!cat) return;\n  const dono = pode('dono');\n  $('#tela').innerHTML = `<h2>📋 Produtos <span class=\"esp\"></span>${dono ? `<button class=\"btn\" id=\"imp\">✨ Importar cardápio com IA</button><button class=\"btn\" id=\"nc\">＋ Categoria</button><button class=\"btn pri\" id=\"np\">＋ Produto</button>` : '<span class=\"mu pq\">Toque na chave para marcar esgotado</span>'}</h2>\n    <input id=\"bp\" placeholder=\"🔎 Buscar produto\" style=\"margin-bottom:6px\">\n    <div id=\"lp\"></div>`;\n  const desenha = q => { $('#lp').innerHTML = cat.categorias.map(c => { const ps = cat.produtos.filter(p => p.categoria_id === c.id && (!q || p.nome.toLowerCase().includes(q)));\n    if (q && !ps.length) return ''; return `<div class=\"cat-t\">${esc(c.icone)} ${esc(c.nome)} <span class=\"selo\">${c.destino === 'bar' ? '🍹 bar' : c.destino === 'nenhum' ? 'sem preparo' : '👨‍🍳 cozinha'}</span>\n      ${dono ? `<button class=\"btn pq fant\" data-ec=\"${c.id}\">editar</button>` : ''}</div><div class=\"card\" style=\"padding:0 6px\">${ps.map(p => `<div class=\"prod ${p.disponivel ? '' : 'off'}\">\n      ${p.imagem ? `<img src=\"${IMG(p.imagem)}\" loading=\"lazy\" alt=\"\">` : `<div class=\"semfoto\">${esc(c.icone)}</div>`}\n      <div class=\"info\"><div class=\"nm\">${esc(p.nome)} ${p.destaque ? '<span class=\"selo av\">⭐ destaque</span>' : ''}</div><div class=\"mu pq\" style=\"white-space:nowrap;overflow:hidden;text-overflow:ellipsis\">${esc(p.descricao)}</div>\n      <div class=\"pq\"><b class=\"num\">${brl(p.preco)}</b>${p.preco_antigo ? ` <s class=\"mu\">${brl(p.preco_antigo)}</s>` : ''}${dono && p.tem_ficha ? ` · custo ${brl(p.custo)} · <b style=\"color:${p.preco > 0 && p.custo / p.preco > .4 ? 'var(--er)' : 'var(--ok)'}\">margem ${p.preco > 0 ? Math.round((1 - p.custo / p.preco) * 100) : 0}%</b>` : ''}</div></div>\n      <label class=\"chave\" title=\"Disponível\"><input type=\"checkbox\" data-d=\"${p.id}\" ${p.disponivel ? 'checked' : ''}><span></span></label>\n      ${dono ? `<button class=\"btn pq\" data-ep=\"${p.id}\">Editar</button>` : ''}</div>`).join('') || '<div class=\"vazio pq\">Nenhum produto nesta categoria</div>'}</div>`; }).join('') || '<div class=\"vazio\">Crie a primeira categoria</div>';\n    $$('[data-d]').forEach(i => i.onchange = async () => { const j = await chama('prod_disp', { id: Number(i.dataset.d) }, i.checked ? 'Disponível de novo' : 'Marcado como esgotado'); if (j) cat.produtos.find(p => p.id === Number(i.dataset.d)).disponivel = j.disponivel; desenha(q); });\n    $$('[data-ep]').forEach(b => b.onclick = () => editarProduto(cat.produtos.find(p => p.id === Number(b.dataset.ep))));\n    $$('[data-ec]').forEach(b => b.onclick = () => editarCategoria(cat.categorias.find(c => c.id === Number(b.dataset.ec))));\n  };\n  $('#bp').oninput = e => desenha(e.target.value.toLowerCase().trim());\n  if (dono) { $('#np').onclick = () => cat.categorias.length ? editarProduto(null) : aviso('Crie uma categoria antes.', true); $('#nc').onclick = () => editarCategoria(null); $('#imp').onclick = importarIA; }\n  desenha('');\n}\nfunction editarCategoria(c) {\n  const m = modal(`<h3>${c ? 'Editar' : 'Nova'} categoria</h3><div class=\"linha\"><div style=\"flex:0 0 90px\"><label>Ícone</label><input id=\"ic\" value=\"${esc(c ? c.icone : '🍽️')}\"></div><div><label>Nome</label><input id=\"nm\" value=\"${esc(c ? c.nome : '')}\"></div></div>\n    <label>Vai para</label><select id=\"ds\"><option value=\"cozinha\">👨‍🍳 Cozinha</option><option value=\"bar\">🍹 Bar</option><option value=\"nenhum\">Não precisa preparar (já sai pronto)</option></select>\n    <label>Ordem</label><input id=\"or\" type=\"number\" value=\"${c ? c.ordem : ''}\" placeholder=\"automática\">\n    <div class=\"acoes\">${c ? '<button class=\"btn er\" id=\"ex\">Apagar</button>' : ''}<button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar</button></div>`);\n  $('#ds', m).value = c ? c.destino : 'cozinha';\n  $('#ok', m).onclick = async () => { if (await chama('cat_salvar', { id: c ? c.id : 0, nome: $('#nm', m).value, icone: $('#ic', m).value, destino: $('#ds', m).value, ordem: $('#or', m).value || undefined }, 'Salvo')) { m.fechar(); telaProdutos(); } };\n  if (c) $('#ex', m).onclick = async () => { if (await confirma('Apagar a categoria ' + c.nome + '?') && await chama('cat_excluir', { id: c.id }, 'Apagada')) { m.fechar(); telaProdutos(); } };\n}\nfunction editarProduto(p) {\n  const cat = CAT; let imagem = p ? p.imagem : null; const ads = p ? p.adicionais.map(a => ({ ...a })) : [];\n  const m = modal(`<h3>${p ? 'Editar produto' : 'Novo produto'}</h3>\n    <div class=\"linha\" style=\"align-items:flex-start\"><div style=\"flex:0 0 120px\"><label>Foto</label><div id=\"fv\" style=\"width:120px;height:120px;border-radius:14px;background:var(--sup2);display:grid;place-items:center;overflow:hidden;cursor:pointer;border:1px dashed var(--borda)\">📷</div>\n      <input id=\"ff\" type=\"file\" accept=\"image/*\" hidden><button class=\"btn pq fant er\" id=\"fr\" style=\"margin-top:4px\" ${imagem ? '' : 'hidden'}>Tirar foto</button></div>\n      <div><label>Nome</label><input id=\"nm\" value=\"${esc(p ? p.nome : '')}\"><label>Categoria</label><select id=\"ct\">${cat.categorias.map(c => `<option value=\"${c.id}\">${esc(c.icone)} ${esc(c.nome)}</option>`).join('')}</select></div></div>\n    <label>Descrição <button class=\"btn pq fant\" id=\"ia\" style=\"min-height:0;padding:2px 8px\">✨ escrever com IA</button></label><textarea id=\"dc\" placeholder=\"Ingredientes e o que tem de especial\">${esc(p ? p.descricao : '')}</textarea>\n    <div class=\"linha\"><div><label>Preço (R$)</label><input id=\"pr\" inputmode=\"decimal\" value=\"${p ? String(p.preco).replace('.', ',') : ''}\"></div><div><label>Preço antigo (promoção)</label><input id=\"pa\" inputmode=\"decimal\" value=\"${p && p.preco_antigo ? String(p.preco_antigo).replace('.', ',') : ''}\" placeholder=\"opcional\"></div></div>\n    <div class=\"linha\" style=\"margin-top:10px\"><label style=\"display:flex;gap:8px;align-items:center;margin:0\"><input type=\"checkbox\" id=\"dp\" style=\"width:auto;min-height:0\" ${!p || p.disponivel ? 'checked' : ''}> Disponível</label>\n      <label style=\"display:flex;gap:8px;align-items:center;margin:0\"><input type=\"checkbox\" id=\"dt\" style=\"width:auto;min-height:0\" ${p && p.destaque ? 'checked' : ''}> ⭐ Destaque no cardápio</label></div>\n    <label>Adicionais (opcionais que o cliente pode somar)</label><div id=\"ad\"></div><button class=\"btn pq\" id=\"ma\">＋ Adicional</button>\n    ${p ? `<label style=\"margin-top:14px\">Ficha técnica (baixa do estoque a cada venda)</label><button class=\"btn pq\" id=\"fi\">📦 Editar ficha técnica</button>` : ''}\n    <div class=\"acoes\">${p ? '<button class=\"btn er\" id=\"ex\">Apagar</button>' : ''}<button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar</button></div>`);\n  if (p) $('#ct', m).value = p.categoria_id;\n  const foto = () => { $('#fv', m).innerHTML = imagem ? `<img src=\"${IMG(imagem)}\" style=\"width:100%;height:100%;object-fit:cover\">` : '📷'; $('#fr', m).hidden = !imagem; };\n  const desenhaAds = () => { $('#ad', m).innerHTML = ads.map((a, i) => `<div class=\"linha\" style=\"flex-wrap:nowrap;margin-bottom:6px\"><input data-an=\"${i}\" value=\"${esc(a.nome)}\" placeholder=\"ex.: Bacon\"><input data-ap=\"${i}\" inputmode=\"decimal\" value=\"${String(a.preco).replace('.', ',')}\" style=\"max-width:110px;flex:none\" placeholder=\"R$\"><button class=\"btn pq fant er\" data-ax=\"${i}\" style=\"flex:none\">✕</button></div>`).join('');\n    $$('[data-an]', m).forEach(x => x.oninput = () => ads[Number(x.dataset.an)].nome = x.value); $$('[data-ap]', m).forEach(x => x.oninput = () => ads[Number(x.dataset.ap)].preco = numIn(x.value));\n    $$('[data-ax]', m).forEach(b => b.onclick = () => { ads.splice(Number(b.dataset.ax), 1); desenhaAds(); }); };\n  $('#ma', m).onclick = () => { ads.push({ nome: '', preco: 0 }); desenhaAds(); };\n  $('#fv', m).onclick = () => $('#ff', m).click(); $('#fr', m).onclick = () => { imagem = null; foto(); };\n  $('#ff', m).onchange = async e => { const f = e.target.files[0]; if (!f) return; $('#fv', m).textContent = '⏳';\n    try { const b64 = await reduzFoto(f, 1000); const j = await chama('img_salvar', { mime: 'image/jpeg', b64 }); if (j) imagem = j.id; } catch (er) { aviso(er.message, true); } foto(); };\n  $('#ia', m).onclick = async () => { const nome = $('#nm', m).value.trim(); if (!nome) return aviso('Escreva o nome antes.', true);\n    $('#ia', m).textContent = '⏳ escrevendo…'; const j = await api('ia_descricao', { nome, categoria: $('#ct', m).selectedOptions[0].textContent, ingredientes: $('#dc', m).value });\n    $('#ia', m).textContent = '✨ escrever com IA'; if (!j.ok) return aviso(j.erro, true); $('#dc', m).value = String(j.resultado || '').replace(/^[\"“]|[\"”]$/g, '').trim(); };\n  $('#ok', m).onclick = async () => { const d = { id: p ? p.id : 0, nome: $('#nm', m).value, categoria_id: Number($('#ct', m).value), descricao: $('#dc', m).value, preco: numIn($('#pr', m).value),\n      preco_antigo: numIn($('#pa', m).value), disponivel: $('#dp', m).checked, destaque: $('#dt', m).checked, imagem: imagem || '', adicionais: ads.filter(a => a.nome.trim()) };\n    if (await chama('prod_salvar', d, 'Produto salvo')) { m.fechar(); telaProdutos(); } };\n  if (p) { $('#ex', m).onclick = async () => { if (await confirma('Apagar ' + p.nome + '?') && await chama('prod_excluir', { id: p.id }, 'Apagado')) { m.fechar(); telaProdutos(); } };\n    $('#fi', m).onclick = () => { m.fechar(); fichaTecnica(p); }; }\n  foto(); desenhaAds();\n}\nasync function fichaTecnica(p) {\n  const [f, ins] = await Promise.all([api('ficha_ver', { produto_id: p.id }), api('insumo_lista')]); if (!f.ok || !ins.ok) return aviso(f.erro || ins.erro, true);\n  const itens = f.itens.map(x => ({ insumo_id: x.insumo_id, qtd: Number(x.qtd) }));\n  const m = modal(`<h3>Ficha técnica · ${esc(p.nome)}</h3><p class=\"mu pq\">O que sai do estoque a cada 1 unidade vendida.</p><div id=\"li\"></div>\n    <button class=\"btn pq\" id=\"ma\">＋ Ingrediente</button><div id=\"cu\" style=\"margin-top:10px;font-weight:700\"></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar ficha</button></div>`);\n  const desenha = () => { $('#li', m).innerHTML = itens.map((x, i) => `<div class=\"linha\" style=\"flex-wrap:nowrap;margin-bottom:6px\"><select data-i=\"${i}\">${ins.insumos.map(n => `<option value=\"${n.id}\" ${n.id === x.insumo_id ? 'selected' : ''}>${esc(n.nome)} (${esc(n.unidade)})</option>`).join('')}</select>\n      <input data-q=\"${i}\" inputmode=\"decimal\" value=\"${String(x.qtd).replace('.', ',')}\" style=\"max-width:100px;flex:none\"><button class=\"btn pq fant er\" data-x=\"${i}\" style=\"flex:none\">✕</button></div>`).join('') || '<p class=\"mu pq\">Sem ingredientes ainda.</p>';\n    $$('[data-i]', m).forEach(s => s.onchange = () => { itens[Number(s.dataset.i)].insumo_id = Number(s.value); custo(); });\n    $$('[data-q]', m).forEach(s => s.oninput = () => { itens[Number(s.dataset.q)].qtd = numIn(s.value); custo(); });\n    $$('[data-x]', m).forEach(b => b.onclick = () => { itens.splice(Number(b.dataset.x), 1); desenha(); }); custo(); };\n  const custo = () => { const c = itens.reduce((s, x) => s + x.qtd * Number((ins.insumos.find(n => n.id === x.insumo_id) || {}).custo_unit || 0), 0);\n    $('#cu', m).innerHTML = `Custo: ${brl(c)} · preço ${brl(p.preco)} · margem <span style=\"color:${p.preco > 0 && c / p.preco > .4 ? 'var(--er)' : 'var(--ok)'}\">${p.preco > 0 ? Math.round((1 - c / p.preco) * 100) : 0}%</span>`; };\n  $('#ma', m).onclick = () => { if (!ins.insumos.length) return aviso('Cadastre insumos na aba Estoque.', true); itens.push({ insumo_id: ins.insumos[0].id, qtd: 1 }); desenha(); };\n  $('#ok', m).onclick = async () => { if (await chama('ficha_salvar', { produto_id: p.id, itens }, 'Ficha salva')) { m.fechar(); telaProdutos(); } };\n  desenha();\n}\nfunction importarIA() {\n  const m = modal(`<h3>✨ Importar cardápio com IA</h3><p class=\"mu\">Cole o cardápio do jeito que estiver (do WhatsApp, PDF, foto transcrita). A IA organiza em categorias e você confere antes de salvar.</p>\n    <textarea id=\"tx\" style=\"min-height:200px\" placeholder=\"X-Tudo ........ 32,00&#10;Coca lata 7&#10;Porção de fritas 400g - R$ 24\"></textarea>\n    <div id=\"pv\"></div><div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ler\">Ler com IA</button></div>`);\n  let lido = null;\n  $('#ler', m).onclick = async () => {\n    if (lido) { const j = await chama('importar_produtos', { categorias: lido }, 'Cardápio importado'); if (j) { m.fechar(); telaProdutos(); } return; }\n    $('#ler', m).disabled = true; $('#ler', m).textContent = '⏳ Lendo…';\n    const j = await api('ia_importar', { texto: $('#tx', m).value }); $('#ler', m).disabled = false; $('#ler', m).textContent = 'Ler com IA';\n    if (!j.ok) return aviso(j.erro, true);\n    try { lido = JSON.parse(String(j.resultado).replace(/^\\s*```(?:json)?/i, '').replace(/```\\s*$/, '')).categorias; } catch (e) { return aviso('A IA não devolveu um cardápio legível. Tente de novo.', true); }\n    $('#pv', m).innerHTML = `<div class=\"card\" style=\"margin-top:10px\">${lido.map(c => `<div class=\"cat-t\">${esc(c.icone)} ${esc(c.nome)} <span class=\"selo\">${esc(c.destino)}</span></div>${(c.itens || []).map(i => `<div class=\"linha pq\" style=\"flex-wrap:nowrap\"><span style=\"flex:1\">${esc(i.nome)}<br><span class=\"mu\">${esc(i.descricao || '')}</span></span><b class=\"num\" style=\"flex:none\">${brl(i.preco)}</b></div>`).join('')}`).join('')}</div>`;\n    $('#ler', m).textContent = `✔ Salvar ${lido.reduce((s, c) => s + (c.itens || []).length, 0)} produtos`;\n  };\n}\n\n// ═════════ ESTOQUE ═════════\nasync function telaEstoque() {\n  const j = await api('insumo_lista'); if (!j.ok) return aviso(j.erro, true);\n  const dono = pode('dono'), baixos = j.insumos.filter(i => Number(i.estoque) <= Number(i.minimo));\n  const valor = j.insumos.reduce((s, i) => s + Math.max(0, i.estoque) * i.custo_unit, 0);\n  $('#tela').innerHTML = `<h2>📦 Estoque <span class=\"esp\"></span><button class=\"btn\" id=\"nota\">📸 Entrada pela foto da nota</button>${dono ? '<button class=\"btn pri\" id=\"ni\">＋ Insumo</button>' : ''}</h2>\n    ${baixos.length ? `<div class=\"alerta\">⚠️ Comprar: ${baixos.map(i => esc(i.nome)).join(', ')}</div>` : ''}\n    <div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Itens</div><div class=\"v\">${j.insumos.length}</div></div><div class=\"kpi\"><div class=\"r\">Valor em estoque</div><div class=\"v num\">${brl(valor)}</div></div>\n    <div class=\"kpi\"><div class=\"r\">No mínimo</div><div class=\"v\" style=\"color:${baixos.length ? 'var(--er)' : 'var(--ok)'}\">${baixos.length}</div></div></div>\n    <div class=\"card tabela\"><table><tr><th>Insumo</th><th>Estoque</th><th>Mínimo</th><th>Custo</th><th>Gasto 7 dias</th><th>Dura</th><th></th></tr>\n    ${j.insumos.map(i => { const dia = Number(i.consumo_7d) / 7, dura = dia > 0 ? Math.floor(i.estoque / dia) : null;\n      return `<tr><td><b>${esc(i.nome)}</b></td><td class=\"num\" style=\"color:${Number(i.estoque) <= Number(i.minimo) ? 'var(--er)' : 'inherit'};font-weight:700\">${Number(i.estoque).toLocaleString('pt-BR')} ${esc(i.unidade)}</td>\n      <td class=\"num\">${Number(i.minimo).toLocaleString('pt-BR')}</td><td class=\"num\">${brl(i.custo_unit)}/${esc(i.unidade)}</td><td class=\"num\">${Number(i.consumo_7d).toLocaleString('pt-BR')}</td>\n      <td>${dura === null ? '<span class=\"mu\">—</span>' : dura <= 2 ? `<span class=\"selo er\">${dura} dia(s)</span>` : `<span class=\"selo\">${dura} dias</span>`}</td>\n      <td style=\"white-space:nowrap\"><button class=\"btn pq\" data-mv=\"${i.id}\">Movimentar</button>${dono ? ` <button class=\"btn pq fant\" data-ei=\"${i.id}\">✏️</button>` : ''}</td></tr>`; }).join('') || '<tr><td colspan=\"7\" class=\"vazio\">Cadastre o primeiro insumo</td></tr>'}</table></div>\n    <h2 style=\"margin-top:22px\">Últimos movimentos</h2><div class=\"card tabela\"><table><tr><th>Quando</th><th>Insumo</th><th>Tipo</th><th>Qtd</th><th>Obs</th><th>Quem</th></tr>\n    ${j.movimentos.map(x => `<tr><td>${new Date(x.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>${esc(x.insumo)}</td><td>${TIPO_MOV[x.tipo] || x.tipo}</td>\n      <td class=\"num\" style=\"color:${x.qtd < 0 ? 'var(--er)' : 'var(--ok)'}\">${x.qtd > 0 ? '+' : ''}${Number(x.qtd).toLocaleString('pt-BR')} ${esc(x.unidade)}</td><td class=\"pq\">${esc(x.obs)}</td><td class=\"pq\">${esc(x.usuario)}</td></tr>`).join('') || '<tr><td colspan=\"6\" class=\"vazio\">Nada ainda</td></tr>'}</table></div>`;\n  $$('[data-mv]').forEach(b => b.onclick = () => movimentar(j.insumos.find(i => i.id === Number(b.dataset.mv))));\n  $$('[data-ei]').forEach(b => b.onclick = () => editarInsumo(j.insumos.find(i => i.id === Number(b.dataset.ei))));\n  if (dono) $('#ni').onclick = () => editarInsumo(null);\n  $('#nota').onclick = () => notaFiscal(j.insumos);\n}\nfunction editarInsumo(i) {\n  const m = modal(`<h3>${i ? 'Editar' : 'Novo'} insumo</h3><label>Nome</label><input id=\"nm\" value=\"${esc(i ? i.nome : '')}\" placeholder=\"ex.: Pão brioche\">\n    <div class=\"linha\"><div><label>Unidade</label><select id=\"un\">${['un', 'kg', 'g', 'L', 'ml', 'cx', 'pct'].map(u => `<option ${i && i.unidade === u ? 'selected' : ''}>${u}</option>`).join('')}</select></div>\n    ${i ? '' : '<div><label>Estoque atual</label><input id=\"es\" inputmode=\"decimal\"></div>'}<div><label>Mínimo (alerta)</label><input id=\"mn\" inputmode=\"decimal\" value=\"${i ? String(i.minimo).replace('.', ',') : ''}\"></div>\n    <div><label>Custo por unidade (R$)</label><input id=\"cu\" inputmode=\"decimal\" value=\"${i ? String(Number(i.custo_unit)).replace('.', ',') : ''}\"></div></div>\n    <div class=\"acoes\">${i ? '<button class=\"btn er\" id=\"ex\">Apagar</button>' : ''}<button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar</button></div>`);\n  $('#ok', m).onclick = async () => { if (await chama('insumo_salvar', { id: i ? i.id : 0, nome: $('#nm', m).value, unidade: $('#un', m).value, estoque: $('#es', m) ? numIn($('#es', m).value) : 0, minimo: numIn($('#mn', m).value), custo_unit: numIn($('#cu', m).value) }, 'Salvo')) { m.fechar(); telaEstoque(); } };\n  if (i) $('#ex', m).onclick = async () => { if (await confirma('Apagar ' + i.nome + '? Ele sai das fichas técnicas.') && await chama('insumo_excluir', { id: i.id }, 'Apagado')) { m.fechar(); telaEstoque(); } };\n}\nfunction movimentar(i) {\n  const m = modal(`<h3>${esc(i.nome)}</h3><p class=\"mu\">Estoque atual: <b>${Number(i.estoque).toLocaleString('pt-BR')} ${esc(i.unidade)}</b></p>\n    <label>O que aconteceu?</label><select id=\"tp\"><option value=\"entrada\">📥 Chegou mercadoria (compra)</option><option value=\"perda\">🗑️ Perda / quebra / vencido</option><option value=\"ajuste\">🔧 Contei o estoque (corrigir)</option></select>\n    <div class=\"linha\"><div><label id=\"lq\">Quantidade que chegou (${esc(i.unidade)})</label><input id=\"q\" inputmode=\"decimal\"></div><div id=\"bc\"><label>Valor total pago (R$)</label><input id=\"c\" inputmode=\"decimal\"></div></div>\n    <label>Observação</label><input id=\"o\" placeholder=\"ex.: fornecedor, motivo\"><div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Registrar</button></div>`);\n  $('#tp', m).onchange = e => { const t = e.target.value; $('#bc', m).hidden = t !== 'entrada'; $('#lq', m).textContent = t === 'entrada' ? `Quantidade que chegou (${i.unidade})` : t === 'perda' ? `Quantidade perdida (${i.unidade})` : `Quantidade contada agora (${i.unidade})`; };\n  $('#ok', m).onclick = async () => { if (await chama('estoque_mov', { insumo_id: i.id, tipo: $('#tp', m).value, qtd: numIn($('#q', m).value), custo: numIn($('#c', m).value), obs: $('#o', m).value }, 'Registrado')) { m.fechar(); telaEstoque(); } };\n}\nfunction notaFiscal(insumos) {\n  const m = modal(`<h3>📸 Entrada pela foto da nota</h3><p class=\"mu\">Tire a foto da nota ou do cupom. A IA lê os itens, as quantidades e os valores, e você confere antes de dar entrada.</p>\n    <input type=\"file\" id=\"f\" accept=\"image/*\" capture=\"environment\"><div id=\"pv\" style=\"margin-top:10px\"></div>\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\" disabled>Dar entrada</button></div>`);\n  let itens = [];\n  $('#f', m).onchange = async e => { const f = e.target.files[0]; if (!f) return; $('#pv', m).innerHTML = '<div class=\"vazio\">⏳ A IA está lendo a nota… (até 40 s)</div>';\n    let b64; try { b64 = await reduzFoto(f, 1800, .85); } catch (er) { return aviso(er.message, true); }\n    const j = await api('ia_nota', { b64 }); if (!j.ok) { $('#pv', m).innerHTML = ''; return aviso(j.erro, true); }\n    try { itens = JSON.parse(String(j.resultado).replace(/^\\s*```(?:json)?/i, '').replace(/```\\s*$/, '')).itens || []; } catch (er) { $('#pv', m).innerHTML = ''; return aviso('Não consegui ler a nota. Tente uma foto mais nítida.', true); }\n    $('#pv', m).innerHTML = `<div class=\"tabela\"><table><tr><th>Item da nota</th><th>Vai para</th><th>Qtd</th><th>Total R$</th></tr>${itens.map((x, k) => `<tr><td class=\"pq\">${esc(x.descricao_nota || x.nome)}</td>\n      <td><select data-k=\"${k}\"><option value=\"\">＋ novo: ${esc(x.nome)}</option>${insumos.map(n => `<option value=\"${n.id}\" ${n.id === x.insumo_id ? 'selected' : ''}>${esc(n.nome)}</option>`).join('')}</select></td>\n      <td><input data-q=\"${k}\" inputmode=\"decimal\" value=\"${String(x.qtd).replace('.', ',')}\" style=\"max-width:90px\"></td><td><input data-c=\"${k}\" inputmode=\"decimal\" value=\"${String(x.custo).replace('.', ',')}\" style=\"max-width:100px\"></td></tr>`).join('')}</table></div>`;\n    $('#ok', m).disabled = !itens.length; };\n  $('#ok', m).onclick = async () => { const lote = itens.map((x, k) => ({ insumo_id: Number($(`[data-k=\"${k}\"]`, m).value) || 0, nome: x.nome, unidade: x.unidade, qtd: numIn($(`[data-q=\"${k}\"]`, m).value), custo: numIn($(`[data-c=\"${k}\"]`, m).value) }));\n    if (await chama('estoque_lote', { itens: lote }, 'Entrada registrada')) { m.fechar(); telaEstoque(); } };\n}\n\n// ═════════ RELATÓRIOS ═════════\nasync function telaRelatorios(de, ate) {\n  const hoje = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });\n  de = de || new Date(Date.now() - 6 * 864e5).toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' }); ate = ate || hoje;\n  const j = await api('relatorio', { de, ate }); if (!j.ok) return aviso(j.erro, true);\n  const lucro = j.faturamento - j.servico - j.custo, maxD = Math.max(1, ...j.por_dia.map(d => d.total)), maxH = Math.max(1, ...j.por_hora.map(d => d.total));\n  const totP = j.produtos.reduce((s, p) => s + Number(p.valor), 0); let acum = 0;\n  $('#tela').innerHTML = `<h2>📊 Relatórios <span class=\"esp\"></span><input type=\"date\" id=\"de\" value=\"${de}\" style=\"width:auto\"><input type=\"date\" id=\"ate\" value=\"${ate}\" style=\"width:auto\">\n    <button class=\"btn\" id=\"hj\">Hoje</button><button class=\"btn\" id=\"d7\">7 dias</button><button class=\"btn\" id=\"d30\">30 dias</button></h2>\n    <div class=\"kpis\"><div class=\"kpi\"><div class=\"r\">Faturamento</div><div class=\"v num\">${brl(j.faturamento)}</div></div><div class=\"kpi\"><div class=\"r\">Contas</div><div class=\"v\">${j.comandas}</div><div class=\"mu pq\">${j.pessoas} pessoas</div></div>\n    <div class=\"kpi\"><div class=\"r\">Ticket médio</div><div class=\"v num\">${brl(j.ticket)}</div><div class=\"mu pq\">${brl(j.pessoas ? j.faturamento / j.pessoas : 0)} por pessoa</div></div>\n    <div class=\"kpi\"><div class=\"r\">Serviço (garçons)</div><div class=\"v num\">${brl(j.servico)}</div></div><div class=\"kpi\"><div class=\"r\">Custo dos produtos</div><div class=\"v num\">${brl(j.custo)}</div><div class=\"mu pq\">pela ficha técnica</div></div>\n    <div class=\"kpi\"><div class=\"r\">Lucro bruto</div><div class=\"v num\" style=\"color:var(--ok)\">${brl(lucro)}</div><div class=\"mu pq\">${j.faturamento ? Math.round(lucro / j.faturamento * 100) : 0}% · descontos ${brl(j.descontos)}</div></div>\n    <div class=\"kpi\"><div class=\"r\">Tempo de cozinha</div><div class=\"v\">${j.tempo_cozinha_min ?? '—'} min</div><div class=\"mu pq\">média por item</div></div></div>\n    <div class=\"card\" style=\"margin-bottom:12px\"><div class=\"linha\"><b>✨ Análise da IA</b><span></span><button class=\"btn pri\" id=\"ia\" style=\"flex:none\">Pedir análise</button></div><div id=\"iar\" class=\"mu\" style=\"margin-top:8px;white-space:pre-wrap\">A IA olha os números deste período e diz o que fazer para vender mais.</div></div>\n    <div class=\"g2\"><div class=\"card\"><b>Vendas por dia</b><div class=\"barras\">${j.por_dia.map(d => `<div style=\"height:${d.total / maxD * 100}%\" data-t=\"${new Date(d.dia + 'T12:00').toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}: ${brl(d.total)}\"></div>`).join('')}</div>\n      <div class=\"eixo\">${j.por_dia.map(d => `<span>${j.por_dia.length <= 14 ? new Date(d.dia + 'T12:00').toLocaleDateString('pt-BR', { day: '2-digit' }) : ''}</span>`).join('')}</div></div>\n    <div class=\"card\"><b>Movimento por horário</b><div class=\"barras\">${j.por_hora.map(d => `<div style=\"height:${d.total / maxH * 100}%\" data-t=\"${d.hora}h: ${brl(d.total)}\"></div>`).join('')}</div><div class=\"eixo\">${j.por_hora.map(d => `<span>${d.hora % 3 === 0 ? d.hora : ''}</span>`).join('')}</div></div>\n    <div class=\"card\"><b>Formas de pagamento</b>${Object.entries(j.formas).map(([k, v]) => `<div class=\"linha pq\" style=\"flex-wrap:nowrap;margin-top:6px\"><span style=\"flex:1\">${FORMAS[k] || k}</span><b class=\"num\" style=\"flex:none\">${brl(v)}</b></div>`).join('') || '<div class=\"vazio pq\">—</div>'}\n      <b style=\"display:block;margin-top:14px\">Por garçom</b>${j.garcons.map(g => `<div class=\"linha pq\" style=\"flex-wrap:nowrap;margin-top:6px\"><span style=\"flex:1\">${esc(g.quem)} · ${g.itens} itens</span><b class=\"num\" style=\"flex:none\">${brl(g.valor)}</b></div>`).join('') || '<div class=\"vazio pq\">—</div>'}</div></div>\n    <h2 style=\"margin-top:20px\">Produtos (curva ABC)</h2><div class=\"card tabela\"><table><tr><th>Produto</th><th>Qtd</th><th>Vendido</th><th>Custo</th><th>Margem</th><th>Curva</th></tr>\n    ${j.produtos.map(p => { acum += Number(p.valor); const cl = acum / totP <= .8 ? 'A' : acum / totP <= .95 ? 'B' : 'C';\n      return `<tr><td>${esc(p.nome)}</td><td class=\"num\">${p.qtd}</td><td class=\"num\">${brl(p.valor)}</td><td class=\"num\">${Number(p.custo) ? brl(p.custo) : '<span class=\"mu\">sem ficha</span>'}</td>\n      <td class=\"num\">${Number(p.custo) ? Math.round((1 - p.custo / p.valor) * 100) + '%' : '—'}</td><td><span class=\"selo ${cl === 'A' ? 'ok' : cl === 'B' ? 'av' : ''}\">${cl}</span></td></tr>`; }).join('') || '<tr><td colspan=\"6\" class=\"vazio\">Nenhuma venda no período</td></tr>'}</table></div>\n    <h2 style=\"margin-top:20px\">Cancelamentos</h2><div class=\"card tabela\"><table><tr><th>Quando</th><th>Item</th><th>Valor</th><th>Quem</th><th>Motivo</th></tr>\n    ${j.cancelados.map(c => `<tr><td>${new Date(c.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>${c.qtd}x ${esc(c.nome)}</td><td class=\"num\">${brl(c.valor)}</td><td>${esc(c.por)}</td><td class=\"pq\">${esc(c.motivo)}</td></tr>`).join('') || '<tr><td colspan=\"5\" class=\"vazio\">Nenhum cancelamento 👍</td></tr>'}</table></div>`;\n  const per = d => telaRelatorios(new Date(Date.now() - d * 864e5).toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' }), hoje);\n  $('#hj').onclick = () => per(0); $('#d7').onclick = () => per(6); $('#d30').onclick = () => per(29);\n  $('#de').onchange = $('#ate').onchange = () => telaRelatorios($('#de').value, $('#ate').value);\n  $('#ia').onclick = async () => { $('#iar').textContent = '⏳ Analisando…'; const r = await api('ia_analise', { de, ate }); $('#iar').textContent = r.ok ? String(r.resultado || '').replace(/\\*\\*/g, '') : r.erro; };\n}\n\n// ═════════ EQUIPE ═════════\nasync function telaEquipe() {\n  const [u, a] = await Promise.all([api('usuarios'), api('atividades')]); if (!u.ok) return aviso(u.erro, true);\n  $('#tela').innerHTML = `<h2>👥 Equipe <span class=\"esp\"></span><button class=\"btn pri\" id=\"nu\">＋ Pessoa</button></h2>\n    <div class=\"card tabela\"><table><tr><th>Nome</th><th>Usuário</th><th>Papel</th><th>Situação</th><th></th></tr>${u.usuarios.map(x => `<tr><td><b>${esc(x.nome)}</b></td><td>${esc(x.login)}</td><td>${PAPEIS[x.papel]}</td>\n      <td>${x.ativo ? '<span class=\"selo ok\">ativo</span>' : '<span class=\"selo\">bloqueado</span>'}</td><td><button class=\"btn pq\" data-u=\"${x.id}\">Editar</button></td></tr>`).join('')}</table></div>\n    <p class=\"mu pq\" style=\"margin:8px 0 20px\">👑 Dono vê tudo · 💰 Caixa recebe contas, caixa e estoque · 🍽️ Garçom lança pedidos e marca esgotado · 👨‍🍳 Cozinha só vê a tela de pedidos.<br>Cada pessoa entra com o código <b>${esc(EU.loja.slug)}</b>, o usuário e a senha dela.</p>\n    <h2>📜 Registro de atividades</h2><div class=\"card tabela\"><table><tr><th>Quando</th><th>Quem</th><th>O quê</th></tr>${(a.atividades || []).map(x => `<tr><td class=\"pq\">${new Date(x.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>${esc(x.usuario)}</td><td><b>${esc(x.acao)}</b> <span class=\"mu\">${esc(x.detalhe)}</span></td></tr>`).join('')}</table></div>`;\n  const editar = x => { const m = modal(`<h3>${x ? 'Editar' : 'Nova'} pessoa</h3><label>Nome</label><input id=\"nm\" value=\"${esc(x ? x.nome : '')}\">\n    <div class=\"linha\"><div><label>Usuário (para entrar)</label><input id=\"lg\" value=\"${esc(x ? x.login : '')}\" ${x ? 'disabled' : ''} autocapitalize=\"off\"></div><div><label>${x ? 'Nova senha (deixe vazio para manter)' : 'Senha'}</label><input id=\"sn\" type=\"text\"></div></div>\n    <label>Papel</label><select id=\"pp\">${Object.entries(PAPEIS).map(([k, v]) => `<option value=\"${k}\" ${x && x.papel === k ? 'selected' : ''}>${v}</option>`).join('')}</select>\n    ${x ? `<label style=\"display:flex;gap:8px;align-items:center\"><input type=\"checkbox\" id=\"at\" style=\"width:auto;min-height:0\" ${x.ativo ? 'checked' : ''}> Pode entrar no sistema</label>` : ''}\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Cancelar</button><button class=\"btn pri\" id=\"ok\">Salvar</button></div>`);\n    if (!x) $('#pp', m).value = 'garcom';\n    $('#ok', m).onclick = async () => { if (await chama('usuario_salvar', { id: x ? x.id : 0, nome: $('#nm', m).value, login: $('#lg', m).value, senha: $('#sn', m).value, papel: $('#pp', m).value, ativo: x ? $('#at', m).checked : true }, 'Salvo')) { m.fechar(); telaEquipe(); } }; };\n  $('#nu').onclick = () => editar(null); $$('[data-u]').forEach(b => b.onclick = () => editar(u.usuarios.find(x => x.id === Number(b.dataset.u))));\n}\n\n// ═════════ CONFIGURAÇÕES ═════════\nasync function telaConfig() {\n  const j = await api('config_ver'); if (!j.ok) return aviso(j.erro, true); const c = j.config; let logo = c.logo;\n  const base = location.origin + '/webhook/comanda-mesa';\n  $('#tela').innerHTML = `<div class=\"g2 nao-imprime\"><div class=\"card\"><h2>⚙️ Estabelecimento</h2><label>Nome</label><input id=\"nm\" value=\"${esc(c.nome)}\">\n    <div class=\"linha\"><div><label>Tipo</label><select id=\"tp\">${['restaurante', 'bar', 'lanchonete', 'pizzaria', 'hamburgueria', 'cafeteria', 'sorveteria', 'açaí', 'outro'].map(t => `<option ${c.tipo === t ? 'selected' : ''}>${t}</option>`).join('')}</select></div><div><label>Mesas</label><input id=\"ms\" type=\"number\" min=\"1\" max=\"80\" value=\"${c.mesas}\"></div></div>\n    <div class=\"linha\"><div><label>Taxa de serviço (%)</label><input id=\"tx\" type=\"number\" min=\"0\" max=\"20\" value=\"${Number(c.taxa_servico)}\"></div><div><label>Cor</label><input id=\"cr\" type=\"color\" value=\"${esc(c.cor)}\" style=\"padding:4px\"></div></div>\n    <label>WhatsApp</label><input id=\"wa\" inputmode=\"tel\" value=\"${esc(c.whatsapp)}\">\n    <label>Logo</label><div class=\"linha\"><div id=\"lv\" style=\"flex:0 0 64px;height:64px;border-radius:12px;background:var(--sup2);display:grid;place-items:center;overflow:hidden\"></div><input type=\"file\" id=\"lf\" accept=\"image/*\"></div></div>\n    <div class=\"card\"><h2>⚡ Pix</h2><p class=\"mu pq\">Com a chave, o caixa mostra o QR do Pix com o valor certo na hora de receber.</p><label>Chave Pix</label><input id=\"pk\" value=\"${esc(c.pix_chave)}\" placeholder=\"CPF, CNPJ, e-mail, celular ou aleatória\">\n    <label>Nome do recebedor</label><input id=\"pn\" value=\"${esc(c.pix_nome)}\" maxlength=\"25\"><label>Cidade</label><input id=\"pc\" value=\"${esc(c.pix_cidade)}\" maxlength=\"15\">\n    <button class=\"btn pri\" id=\"sv\" style=\"margin-top:16px;width:100%\">Salvar configurações</button></div></div>\n    <h2 style=\"margin-top:22px\">📱 QR das mesas <span class=\"esp\"></span><button class=\"btn nao-imprime\" onclick=\"print()\">🖨️ Imprimir</button></h2>\n    <p class=\"mu pq nao-imprime\" style=\"margin-bottom:10px\">Cole na mesa. O cliente abre o cardápio no celular, pede e chama o garçom. Cada QR só serve para a mesa dele.</p>\n    <div class=\"qrs\">${j.qrs.map(q => `<div class=\"qr\"><b style=\"font-size:18px\">${esc(c.nome)}</b><div class=\"c\" data-qr=\"${base}?l=${encodeURIComponent(EU.loja.slug)}&m=${q.mesa}&t=${q.t}\"></div><b style=\"font-size:22px\">Mesa ${q.mesa}</b><div style=\"font-size:12px\">Aponte a câmera e peça pelo celular</div></div>`).join('')}</div>`;\n  $$('[data-qr]').forEach(d => window.QRCode && new QRCode(d, { text: d.dataset.qr, width: 150, height: 150 }));\n  const lv = () => $('#lv').innerHTML = logo ? `<img src=\"${IMG(logo)}\" style=\"width:100%;height:100%;object-fit:contain\">` : '🏪'; lv();\n  $('#lf').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { const r = await chama('img_salvar', { mime: 'image/jpeg', b64: await reduzFoto(f, 600) }); if (r) { logo = r.id; lv(); } } catch (er) { aviso(er.message, true); } };\n  $('#sv').onclick = async () => { if (await chama('config_salvar', { nome: $('#nm').value, tipo: $('#tp').value, mesas: Number($('#ms').value), taxa_servico: Number($('#tx').value), cor: $('#cr').value, whatsapp: $('#wa').value, pix_chave: $('#pk').value, pix_nome: $('#pn').value, pix_cidade: $('#pc').value, logo: logo || '' }, 'Configurações salvas')) iniciar(); };\n}\niniciar();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "ff26f57c-a8ec-5d2b-9334-27ca0b2412d0",
+   "name": "📤 Painel administrador",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -250
+   ]
+  },
+  {
+   "parameters": {
+    "path": "comanda-mesa",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "fee3dc14-8457-54ff-9bc4-b68702619f0a",
+   "name": "🔔 Cardápio da mesa",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    -60
+   ],
+   "webhookId": "93f35bec-e3e3-5131-bc50-ab77bf65d59e"
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<title>Cardápio da mesa</title><meta name=\"robots\" content=\"noindex\">\n<style>:root{color-scheme:light;--plano:#f5f5f3;--sup:#fff;--sup2:#fafaf8;--tx:#18181b;--tx2:#52525b;--mu:#8a8a93;--borda:rgba(0,0,0,.1);--pri:#C2410C;--pri-tx:#fff;--ok:#15803d;--ok-bg:#dcfce7;--av:#b45309;--av-bg:#fef3c7;--er:#b42318;--er-bg:#fee2e2;--sombra:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}\n@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}}\n:root[data-theme=\"dark\"]{color-scheme:dark;--plano:#0e0e10;--sup:#18181b;--sup2:#1f1f23;--tx:#f4f4f5;--tx2:#c4c4cc;--mu:#9a9aa3;--borda:rgba(255,255,255,.1);--ok:#4ade80;--ok-bg:#14532d;--av:#fbbf24;--av-bg:#451a03;--er:#ff8a80;--er-bg:#450a0a;--sombra:0 1px 2px rgba(0,0,0,.4)}\n*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}\nhtml{-webkit-text-size-adjust:100%}\nbody{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;background:var(--plano);color:var(--tx);line-height:1.45;font-size:15px}\na{color:var(--pri)}\nbutton,input,select,textarea{font:inherit;color:inherit}\n.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;min-height:40px;text-decoration:none;color:var(--tx)}\n.btn:hover{background:var(--sup2)}.btn:disabled{opacity:.5;cursor:default}\n.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-tx)}.btn.pri:hover{filter:brightness(1.07)}\n.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.er{color:var(--er)}.btn.pq{padding:5px 10px;min-height:32px;font-size:13px}\n.btn.fant{border-color:transparent;background:transparent}\ninput,select,textarea{width:100%;border:1px solid var(--borda);background:var(--sup);border-radius:10px;padding:10px 12px;min-height:42px}\ntextarea{min-height:90px;resize:vertical}\ninput:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:-1px}\nlabel{display:block;font-size:13px;font-weight:600;color:var(--tx2);margin:10px 0 4px}\n.card{background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:16px;box-shadow:var(--sombra)}\n.linha{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.linha>*{flex:1 1 140px}\n.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}\n.mu{color:var(--mu)}.pq{font-size:13px}.forte{font-weight:700}\n.selo{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--sup2);border:1px solid var(--borda)}\n.selo.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}.selo.av{background:var(--av-bg);color:var(--av);border-color:transparent}.selo.er{background:var(--er-bg);color:var(--er);border-color:transparent}\n.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--plano);padding:11px 18px;border-radius:12px;font-weight:600;z-index:99;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.25)}\n.toast.er{background:var(--er);color:#fff}\n.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}\n@media (min-width:700px){.modal-fundo{align-items:center}}\n.modal{background:var(--sup);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}\n@media (min-width:700px){.modal{border-radius:18px}}\n.modal h3{font-size:18px;margin-bottom:6px}\n.modal .acoes{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;position:sticky;bottom:-18px;background:var(--sup);padding:12px 0 4px}\ntable{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--borda);vertical-align:top}\nth{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}\n.tabela{overflow-x:auto}\n.vazio{text-align:center;padding:30px 10px;color:var(--mu)}\n.num{font-variant-numeric:tabular-nums}\n\nbody{padding-bottom:110px}\n.cab{background:var(--pri);color:#fff;padding:22px 16px 18px}.cab .in{max-width:720px;margin:0 auto;display:flex;gap:12px;align-items:center}\n.cab img{width:54px;height:54px;border-radius:14px;object-fit:contain;background:#fff}.cab h1{font-size:22px;line-height:1.15}.cab .m{opacity:.9;font-weight:600}\n.cats{position:sticky;top:0;background:var(--plano);z-index:5;border-bottom:1px solid var(--borda)}.cats .in{max-width:720px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}\n.cats a{flex:none;text-decoration:none;color:var(--tx);background:var(--sup);border:1px solid var(--borda);border-radius:999px;padding:7px 13px;font-weight:600;font-size:14px}\nmain{max-width:720px;margin:0 auto;padding:6px 16px}\n.sec{font-size:19px;font-weight:800;margin:22px 0 8px;scroll-margin-top:60px}\n.it{display:flex;gap:12px;background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:12px;margin-bottom:10px;cursor:pointer;text-align:left;width:100%}\n.it img,.it .sf{width:92px;height:92px;border-radius:12px;object-fit:cover;flex:none;background:var(--sup2);display:grid;place-items:center;font-size:32px}\n.it .nm{font-weight:700;font-size:16px}.it .ds{color:var(--tx2);font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:2px 0 6px}\n.it.off{opacity:.5;cursor:default}.preco{font-weight:800;color:var(--pri)}\n.barra{position:fixed;left:0;right:0;bottom:0;background:var(--sup);border-top:1px solid var(--borda);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:20}\n.barra .in{max-width:720px;margin:0 auto;display:flex;gap:8px}.barra .btn{flex:1}\n.foto-g{width:100%;max-height:260px;object-fit:cover;border-radius:14px;margin-bottom:10px}\n.erro{max-width:420px;margin:20vh auto;text-align:center;padding:0 16px}\n</style></head><body><div id=\"app\"><div class=\"vazio\">Abrindo o cardápio…</div></div>\n<script>\nconst API = location.origin + '/webhook/comanda-api';\nconst IMG = id => location.origin + '/webhook/comanda-img?id=' + id;\n// Funções comuns às páginas (API, avisos, modal, fotos). API = endereço do webhook da API ao lado desta página.\nconst $ = (s, el = document) => el.querySelector(s);\nconst $$ = (s, el = document) => [...el.querySelectorAll(s)];\nconst esc = s => String(s ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst brl = v => 'R$ ' + Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst num = v => Number(String(v ?? '').replace(/\\./g, '').replace(',', '.')) || 0;\nconst numIn = v => { const s = String(v ?? '').trim(); return s.includes(',') ? num(s) : Number(s) || 0; };\nconst guarda = { ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, gravar(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };\n\nasync function api(acao, dados = {}, tentativas = 2) {\n  for (let i = 0; i < tentativas; i++) {\n    try {\n      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao, token: window.TOKEN || '', ...dados }) });\n      const j = await r.json();\n      if (j && j.sair && typeof sair === 'function') { sair(); throw new Error(j.erro); }\n      return j;\n    } catch (e) {\n      if (i === tentativas - 1) return { ok: false, erro: e.message && e.message !== 'Failed to fetch' ? e.message : 'Sem conexão. Tente de novo.' };\n      await new Promise(r => setTimeout(r, 900));\n    }\n  }\n}\nfunction aviso(msg, erro = false) {\n  $$('.toast').forEach(x => x.remove());\n  const t = document.createElement('div'); t.className = 'toast' + (erro ? ' er' : ''); t.textContent = msg;\n  document.body.appendChild(t); setTimeout(() => t.remove(), erro ? 4500 : 2600);\n}\nasync function chama(acao, dados, ok) {\n  const j = await api(acao, dados);\n  if (!j.ok) { aviso(j.erro || 'Algo deu errado.', true); return null; }\n  if (ok) aviso(ok);\n  return j;\n}\nfunction modal(html, aoAbrir) {\n  const f = document.createElement('div'); f.className = 'modal-fundo';\n  f.innerHTML = `<div class=\"modal\" role=\"dialog\">${html}</div>`;\n  f.addEventListener('click', e => { if (e.target === f) f.remove(); });\n  document.body.appendChild(f);\n  const m = f.firstChild; m.fechar = () => f.remove();\n  $$('[data-fechar]', m).forEach(b => b.onclick = m.fechar);\n  if (aoAbrir) aoAbrir(m);\n  return m;\n}\nfunction confirma(msg) { return new Promise(res => { const m = modal(`<h3>${esc(msg)}</h3><div class=\"acoes\"><button class=\"btn\" data-n>Não</button><button class=\"btn pri\" data-s>Sim</button></div>`);\n  $('[data-n]', m).onclick = () => { m.fechar(); res(false); }; $('[data-s]', m).onclick = () => { m.fechar(); res(true); }; }); }\n// foto do celular → JPEG reduzido (base64 sem o prefixo)\nfunction reduzFoto(arquivo, max = 1400, qual = 0.82) {\n  return new Promise((res, rej) => {\n    const url = URL.createObjectURL(arquivo); const img = new Image();\n    img.onload = () => { const k = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement('canvas');\n      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);\n      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', qual).split(',')[1]); };\n    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Não consegui abrir essa foto (use JPG ou PNG).')); };\n    img.src = url;\n  });\n}\nfunction bipe() { try { const c = new (window.AudioContext || window.webkitAudioContext)(); const o = c.createOscillator(); const g = c.createGain();\n  o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(() => { o.frequency.value = 1320; }, 140); setTimeout(() => { o.stop(); c.close(); }, 320); } catch (e) {} }\nfunction tempoDesde(iso) { const s = Math.max(0, (Date.now() - new Date(iso)) / 1000); return s < 60 ? Math.round(s) + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + Math.floor(s % 3600 / 60) + ' min'; }\nfunction tema() { const b = $('#tema'); if (!b) return; const atual = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n  const s = guarda.ler('tema'); if (s) document.documentElement.dataset.theme = s;\n  b.onclick = () => { const n = atual() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; guarda.gravar('tema', n); }; }\n// Pix copia e cola (BR Code do Banco Central), sem API\nfunction pixCopiaECola({ chave, nome, cidade, valor, txid }) {\n  const emv = (id, v) => id + String(String(v).length).padStart(2, '0') + v;\n  const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').trim().toUpperCase();\n  let s = emv('00', '01') + emv('26', emv('00', 'br.gov.bcb.pix') + emv('01', chave)) + emv('52', '0000') + emv('53', '986');\n  if (valor > 0) s += emv('54', valor.toFixed(2));\n  s += emv('58', 'BR') + emv('59', ascii(nome).slice(0, 25) || 'LOJA') + emv('60', ascii(cidade).slice(0, 15) || 'BRASIL');\n  s += emv('62', emv('05', String(txid || '***').replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) + '6304';\n  let crc = 0xFFFF;\n  for (let i = 0; i < s.length; i++) { crc ^= s.charCodeAt(i) << 8; for (let j = 0; j < 8; j++) { crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } }\n  return s + crc.toString(16).toUpperCase().padStart(4, '0');\n}\n\nconst q = new URLSearchParams(location.search); const LOJA = q.get('l'), MESA = Number(q.get('m')), T = q.get('t');\nconst chave = '<SEGREDO_REMOVIDO>' + LOJA + '_' + MESA; let D = null; let carrinho = []; try { carrinho = JSON.parse(guarda.ler(chave) || '[]'); } catch (e) {}\nconst salva = () => guarda.gravar(chave, JSON.stringify(carrinho));\nasync function carrega() {\n  const j = await api('cliente_menu', { loja: LOJA, mesa: MESA, t: T });\n  if (!j.ok) { $('#app').innerHTML = `<div class=\"erro\"><div style=\"font-size:48px\">😕</div><h2>${esc(j.erro)}</h2></div>`; return; }\n  D = j; document.documentElement.style.setProperty('--pri', j.loja.cor); document.title = j.loja.nome + ' · Mesa ' + MESA;\n  const cats = j.categorias.filter(c => c.produtos.length);\n  $('#app').innerHTML = `<div class=\"cab\"><div class=\"in\">${j.loja.logo ? `<img src=\"${IMG(j.loja.logo)}\" alt=\"\">` : ''}<div><h1>${esc(j.loja.nome)}</h1><div class=\"m\">Mesa ${MESA}</div></div></div></div>\n    <nav class=\"cats\"><div class=\"in\">${cats.map(c => `<a href=\"#c${c.id}\">${esc(c.icone)} ${esc(c.nome)}</a>`).join('')}</div></nav>\n    <main>${cats.map(c => `<div class=\"sec\" id=\"c${c.id}\">${esc(c.icone)} ${esc(c.nome)}</div>${c.produtos.map(p => `<button class=\"it ${p.disponivel ? '' : 'off'}\" data-p=\"${p.id}\">\n      ${p.imagem ? `<img src=\"${IMG(p.imagem)}\" loading=\"lazy\" alt=\"\">` : `<div class=\"sf\">${esc(c.icone)}</div>`}\n      <div style=\"flex:1;min-width:0\"><div class=\"nm\">${esc(p.nome)} ${p.destaque ? '⭐' : ''}</div><div class=\"ds\">${esc(p.descricao)}</div>\n      ${p.disponivel ? `<span class=\"preco\">${brl(p.preco)}</span>${p.preco_antigo ? ` <s class=\"mu pq\">${brl(p.preco_antigo)}</s>` : ''}` : '<span class=\"selo\">esgotado</span>'}</div></button>`).join('')}`).join('')}\n      <p class=\"mu pq\" style=\"text-align:center;margin:20px 0\">Taxa de serviço de ${Number(j.loja.taxa)}% na conta.</p></main>\n    <div class=\"barra\"><div class=\"in\"><button class=\"btn\" id=\"cg\">🙋 Garçom</button><button class=\"btn\" id=\"ct\">🧾 Conta</button><button class=\"btn pri\" id=\"vc\"></button></div></div>`;\n  $$('[data-p]').forEach(b => b.onclick = () => { const p = j.categorias.flatMap(c => c.produtos).find(x => x.id === Number(b.dataset.p)); if (p.disponivel) escolhe(p); });\n  $('#cg').onclick = () => chamar('garcom'); $('#ct').onclick = verConta; $('#vc').onclick = verCarrinho; barra();\n}\nconst barra = () => { const n = carrinho.reduce((s, x) => s + x.qtd, 0); $('#vc').textContent = n ? `🛒 Pedido (${n}) · ${brl(carrinho.reduce((s, x) => s + x.total, 0))}` : '🛒 Pedido'; };\nfunction escolhe(p) {\n  const m = modal(`${p.imagem ? `<img class=\"foto-g\" src=\"${IMG(p.imagem)}\" alt=\"\">` : ''}<h3>${esc(p.nome)}</h3><p class=\"mu\">${esc(p.descricao)}</p>\n    ${p.adicionais.length ? `<label>Adicionais</label>${p.adicionais.map((a, i) => `<label style=\"font-weight:400;display:flex;gap:8px;align-items:center;padding:6px 0\"><input type=\"checkbox\" data-a=\"${i}\" style=\"width:auto;min-height:0\"> ${esc(a.nome)} <span class=\"mu\">+ ${brl(a.preco)}</span></label>`).join('')}` : ''}\n    <label>Alguma observação?</label><input id=\"ob\" placeholder=\"ex.: sem cebola\">\n    <div class=\"linha\" style=\"margin-top:12px;flex-wrap:nowrap\"><button class=\"btn\" id=\"me\" style=\"flex:none\">−</button><b id=\"q\" style=\"flex:none;min-width:30px;text-align:center;font-size:18px\">1</b><button class=\"btn\" id=\"ma\" style=\"flex:none\">＋</button>\n    <button class=\"btn pri\" id=\"ok\"></button></div>`);\n  let q = 1; const tot = () => q * (Number(p.preco) + $$('[data-a]:checked', m).reduce((s, x) => s + Number(p.adicionais[Number(x.dataset.a)].preco), 0));\n  const at = () => { $('#q', m).textContent = q; $('#ok', m).textContent = 'Adicionar · ' + brl(tot()); }; at();\n  $('#me', m).onclick = () => { q = Math.max(1, q - 1); at(); }; $('#ma', m).onclick = () => { q++; at(); }; $$('[data-a]', m).forEach(x => x.onchange = at);\n  $('#ok', m).onclick = () => { carrinho.push({ produto_id: p.id, nome: p.nome, qtd: q, obs: $('#ob', m).value.trim(), adicionais: $$('[data-a]:checked', m).map(x => p.adicionais[Number(x.dataset.a)].nome), total: tot() }); salva(); barra(); m.fechar(); aviso('Adicionado ao pedido'); };\n}\nfunction verCarrinho() {\n  if (!carrinho.length) return aviso('Escolha algo no cardápio primeiro 🙂');\n  const m = modal(`<h3>Seu pedido · mesa ${MESA}</h3><div id=\"li\"></div><div class=\"acoes\"><button class=\"btn\" data-fechar>Continuar escolhendo</button><button class=\"btn pri\" id=\"env\">Enviar para a cozinha</button></div>`);\n  const d = () => { $('#li', m).innerHTML = carrinho.map((x, i) => `<div class=\"linha\" style=\"flex-wrap:nowrap;padding:8px 0;border-bottom:1px solid var(--borda)\"><span style=\"flex:1\"><b>${x.qtd}x ${esc(x.nome)}</b>${x.adicionais.length ? '<br><span class=\"pq mu\">+ ' + x.adicionais.map(esc).join(', ') + '</span>' : ''}${x.obs ? '<br><span class=\"pq\">📝 ' + esc(x.obs) + '</span>' : ''}</span><b style=\"flex:none\">${brl(x.total)}</b><button class=\"btn pq fant er\" data-x=\"${i}\" style=\"flex:none\">✕</button></div>`).join('') + `<p style=\"text-align:right;font-weight:800;margin-top:8px\">${brl(carrinho.reduce((s, x) => s + x.total, 0))}</p>`;\n    $$('[data-x]', m).forEach(b => b.onclick = () => { carrinho.splice(Number(b.dataset.x), 1); salva(); barra(); carrinho.length ? d() : m.fechar(); }); }; d();\n  $('#env', m).onclick = async () => { $('#env', m).disabled = true;\n    const j = await api('cliente_pedir', { loja: LOJA, mesa: MESA, t: T, itens: carrinho.map(({ produto_id, qtd, obs, adicionais }) => ({ produto_id, qtd, obs, adicionais })) });\n    if (!j.ok) { $('#env', m).disabled = false; return aviso(j.erro, true); }\n    carrinho = []; salva(); barra(); m.fechar(); modal(`<div style=\"text-align:center\"><div style=\"font-size:54px\">✅</div><h3>Pedido enviado!</h3><p class=\"mu\">A cozinha já recebeu. É só aguardar na mesa.</p></div><div class=\"acoes\"><button class=\"btn pri\" data-fechar>OK</button></div>`); };\n}\nasync function verConta() {\n  const j = await api('cliente_menu', { loja: LOJA, mesa: MESA, t: T }); const c = j.ok && j.conta;\n  const m = modal(`<h3>Conta da mesa ${MESA}</h3>${c ? `${c.itens.map(i => `<div class=\"linha\" style=\"flex-wrap:nowrap;padding:6px 0;border-bottom:1px solid var(--borda)\"><span style=\"flex:1\">${i.qtd}x ${esc(i.nome)} ${i.status === 'pronto' ? '<span class=\"selo ok\">pronto</span>' : i.status === 'entregue' ? '' : '<span class=\"selo av\">preparando</span>'}</span><span style=\"flex:none\">${brl(i.qtd * i.preco)}</span></div>`).join('')}\n    <p class=\"mu\" style=\"margin-top:8px\">Subtotal ${brl(c.subtotal)} · serviço ${Number(c.servico_pct)}%</p><p style=\"font-size:22px;font-weight:800\">${brl(c.total)}</p>` : '<p class=\"mu\">Nenhum pedido ainda.</p>'}\n    <div class=\"acoes\"><button class=\"btn\" data-fechar>Voltar</button>${c ? `<button class=\"btn pri\" id=\"pc\" ${c.pediu_conta ? 'disabled' : ''}>${c.pediu_conta ? 'Conta já pedida ✔' : '🧾 Pedir a conta'}</button>` : ''}</div>`);\n  const b = $('#pc', m); if (b) b.onclick = async () => { await chamar('conta'); m.fechar(); };\n}\nasync function chamar(tipo) { const j = await api('cliente_chamar', { loja: LOJA, mesa: MESA, t: T, tipo }); aviso(j.ok ? (tipo === 'conta' ? 'Conta pedida. O garçom já vem 🙂' : 'O garçom foi chamado 🙋') : j.erro, !j.ok); }\ncarrega();\n</script></body></html>\n",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "f5d8b74f-6723-500c-9f7a-9fad5d5e545b",
+   "name": "📤 Cardápio da mesa",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    -160,
+    -60
+   ]
+  },
+  {
+   "parameters": {
+    "path": "comanda-api",
+    "responseMode": "responseNode",
+    "options": {},
+    "httpMethod": "POST"
+   },
+   "id": "16c6e21d-e2d7-5867-9eb5-b1052a3285ac",
+   "name": "🔔 API (POST)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    200,
+    -260
+   ],
+   "webhookId": "125e0d12-2976-5410-aa84-2399e04f9942"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT cmd_api($1::jsonb) AS r",
+    "options": {
+     "queryReplacement": "={{ JSON.stringify(Object.assign({}, (typeof $json.body === 'object' && $json.body) || {}, { ip: ($json.headers['x-real-ip'] || String($json.headers['x-forwarded-for'] || '').split(',')[0] || '').trim() })) }}"
+    }
+   },
+   "id": "7a213399-a115-53cc-8aa7-108a8451b076",
+   "name": "🐘 cmd_api",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    420,
+    -260
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "ec2879e2-e238-595e-893b-7bbcc83a4260",
+          "leftValue": "={{ $json.r && $json.r.ia === 'descricao' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "descricao"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "e1fdbe32-d183-5472-824b-c69cb6c352ea",
+          "leftValue": "={{ $json.r && $json.r.ia === 'importar' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "importar"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "5d076ff9-f941-5f30-9b51-cb7d9c0185cd",
+          "leftValue": "={{ $json.r && $json.r.ia === 'nota' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "nota"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "loose",
+         "version": 2
+        },
+        "conditions": [
+         {
+          "id": "b1f3f9f1-a794-5591-82b8-4ad3e155e9e4",
+          "leftValue": "={{ $json.r && $json.r.ia === 'analise' }}",
+          "rightValue": "",
+          "operator": {
+           "type": "boolean",
+           "operation": "true",
+           "singleValue": true
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "analise"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "resto"
+    }
+   },
+   "id": "8605cd81-1f0b-5099-9f4d-14a09b3c783b",
+   "name": "🔀 Precisa de IA?",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.2,
+   "position": [
+    640,
+    -260
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.r || { ok: false, erro: 'Sem resposta do banco' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "9bbc8a3b-0f7e-573f-a190-f3b537751c73",
+   "name": "📤 Responde",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    880,
+    -460
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 300, temperature: 0.8, messages: [{ role: 'system', content: \"Você é copywriter de cardápio. Escreva UMA descrição curta (até 140 caracteres) que dê água na boca, em português do Brasil, sem inventar ingrediente que não foi dito (se não disserem, descreva de forma genérica e honesta). Sem aspas, sem emoji, sem markdown.\" }, { role: 'user', content: 'Restaurante: ' + $('🐘 cmd_api').first().json.r.contexto.loja + ' (' + $('🐘 cmd_api').first().json.r.contexto.tipo + ')\\nPrato: ' + $('🐘 cmd_api').first().json.r.contexto.nome + '\\nCategoria: ' + $('🐘 cmd_api').first().json.r.contexto.categoria + '\\nO que o dono disse: ' + ($('🐘 cmd_api').first().json.r.contexto.ingredientes || '(nada)') }] }) }}",
+    "options": {
+     "timeout": 90000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "02507c80-d7f3-5c5e-b3ca-bbdf03e1b60e",
+   "name": "🤖 Descrição do prato",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    880,
+    -320
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '').trim() } : { ok: false, erro: 'A IA não respondeu agora. Tente de novo em instantes.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "026b4541-412a-54dc-ba57-f09ccbda2b8e",
+   "name": "📤 Descrição do prato",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    -320
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 8000, temperature: 0.1, messages: [{ role: 'system', content: \"Você organiza cardápios. Recebe o texto colado pelo dono (bagunçado) e devolve SOMENTE JSON: \\u007b\\\"categorias\\\":[\\u007b\\\"nome\\\":\\\"\\\",\\\"icone\\\":\\\"(1 emoji)\\\",\\\"destino\\\":\\\"cozinha|bar|nenhum\\\",\\\"itens\\\":[\\u007b\\\"nome\\\":\\\"\\\",\\\"descricao\\\":\\\"\\\",\\\"preco\\\":0\\u007d]\\u007d]\\u007d. Bebidas vão para o bar; itens prontos (sobremesa de vitrine, embalados) podem ser nenhum. Preço em número (32.5). Corrija erros de digitação. Não invente itens nem preços. Descrição curta só se o texto der informação.\" }, { role: 'user', content: 'Tipo: ' + $('🐘 cmd_api').first().json.r.contexto.tipo + '\\n\\nTEXTO:\\n' + $('🐘 cmd_api').first().json.r.contexto.texto }] }) }}",
+    "options": {
+     "timeout": 90000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "4a26ad3b-7912-5761-bb71-53c94c177f1c",
+   "name": "🤖 Organiza o cardápio",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    880,
+    -170
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '').trim() } : { ok: false, erro: 'A IA não respondeu agora. Tente de novo em instantes.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "c16a2602-fc9f-530d-92e0-09bbc3ada45d",
+   "name": "📤 Organiza o cardápio",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    -170
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 3000, temperature: 0.1, messages: [{ role: 'system', content: \"Você lê fotos de nota fiscal ou cupom de compra de restaurante. Devolva SOMENTE JSON: \\u007b\\\"itens\\\":[\\u007b\\\"descricao_nota\\\":\\\"texto como está na nota\\\",\\\"nome\\\":\\\"nome simples do insumo\\\",\\\"unidade\\\":\\\"un|kg|g|L|ml|cx|pct\\\",\\\"qtd\\\":0,\\\"custo\\\":0,\\\"insumo_id\\\":0\\u007d]\\u007d. custo = valor TOTAL pago pela linha. Se a quantidade for em caixa/fardo, converta para a unidade de uso quando estiver claro (ex.: fardo com 12 latas = 12 un). insumo_id = id do insumo da lista que for o MESMO produto (0 se nenhum). Não invente linhas que não estão na foto.\" }, { role: 'user', content: [{ type: 'text', text: 'Insumos já cadastrados: ' + JSON.stringify($('🐘 cmd_api').first().json.r.contexto.insumos) }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + $('🐘 cmd_api').first().json.r.contexto.b64 } }] }] }) }}",
+    "options": {
+     "timeout": 90000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "c4883cca-2736-5a07-afe3-47b7949c54e8",
+   "name": "🤖 Lê a nota fiscal",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    880,
+    -20
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '').trim() } : { ok: false, erro: 'A IA não respondeu agora. Tente de novo em instantes.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "8ae6f94c-45d9-5b10-b7c9-12875bd48c77",
+   "name": "📤 Lê a nota fiscal",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    -20
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "http://157.173.207.22:20128/v1/chat/completions",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "openAiApi",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({ model: 'antigravity/gemini-3-flash', max_tokens: 1200, temperature: 0.5, messages: [{ role: 'system', content: \"Você é consultor de restaurantes. Recebe os números de um período e escreve uma análise curta e prática em português do Brasil, para o dono (leigo): 1) como foi o período em 2 frases; 2) 3 a 5 ações concretas para vender mais ou gastar menos, citando produtos, horários e números reais (curva ABC, margem, cancelamentos, ticket, horários fracos); 3) um alerta se houver algo estranho (muito cancelamento, margem baixa, diferença de caixa). Sem markdown, use emojis no início dos tópicos. Não invente números.\" }, { role: 'user', content: JSON.stringify(Object.assign({}, $('🐘 cmd_api').first().json.r.contexto, { por_dia: undefined })) }] }) }}",
+    "options": {
+     "timeout": 90000,
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     }
+    }
+   },
+   "id": "5a805e30-f79b-5c24-961e-991f7db1556a",
+   "name": "🤖 Analisa as vendas",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    880,
+    130
+   ],
+   "credentials": {
+    "openAiApi": {
+     "id": "9L3A8W0GrI5kEyTG",
+     "name": "roteador 20128 (rápido)"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "retryOnFail": true,
+   "maxTries": 2,
+   "waitBetweenTries": 2000
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "={{ JSON.stringify($json.choices && $json.choices[0] ? { ok: true, resultado: String($json.choices[0].message.content || '').trim() } : { ok: false, erro: 'A IA não respondeu agora. Tente de novo em instantes.' }) }}",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "application/json; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "d24c937e-136b-566c-8dd5-00495ce2d950",
+   "name": "📤 Analisa as vendas",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    1120,
+    130
+   ]
+  },
+  {
+   "parameters": {
+    "path": "comanda-img",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "67a9695f-9385-538d-b111-0dffded7a299",
+   "name": "🔔 Imagem (GET)",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    -420,
+    360
+   ],
+   "webhookId": "057d84ed-00bb-5196-8656-619eab4cbefc"
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "SELECT mime, b64 FROM cmd_img($1)",
+    "options": {
+     "queryReplacement": "={{ String($json.query.id || '').replace(/[^0-9a-f-]/g, '').slice(0, 36) || '0' }}"
+    }
+   },
+   "id": "f6809236-21a0-5c57-a190-e2ec33cdac8c",
+   "name": "🐘 Lê a imagem",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    -200,
+    360
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "iG55YIDJm3Q0HLuz",
+     "name": "Postgres apps_aulas (painéis das aulas)"
+    }
+   },
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose",
+      "version": 2
+     },
+     "conditions": [
+      {
+       "id": "733a7275-cd7a-551a-bb5c-84676c6a263c",
+       "leftValue": "={{ !!$json.b64 }}",
+       "rightValue": "",
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   },
+   "id": "812a80a3-ec28-5402-ae9c-c36d7d9c9c24",
+   "name": "🔀 Achou?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2.2,
+   "position": [
+    0,
+    360
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "toBinary",
+    "sourceProperty": "b64",
+    "binaryPropertyName": "data",
+    "options": {
+     "mimeType": "={{ $json.mime }}",
+     "fileName": "imagem"
+    }
+   },
+   "id": "487f82c0-470d-51bd-a9ee-971a56739b37",
+   "name": "🧩 Vira arquivo",
+   "type": "n8n-nodes-base.convertToFile",
+   "typeVersion": 1.1,
+   "position": [
+    200,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "binary",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Cache-Control",
+        "value": "public, max-age=86400"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       },
+       {
+        "name": "Access-Control-Expose-Headers",
+        "value": "*"
+       }
+      ]
+     }
+    }
+   },
+   "id": "0874c754-2984-562b-be49-88a286ba2047",
+   "name": "📤 Entrega a imagem",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    400,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "text",
+    "responseBody": "não encontrada",
+    "options": {
+     "responseHeaders": {
+      "entries": [
+       {
+        "name": "Content-Type",
+        "value": "text/plain; charset=UTF-8"
+       },
+       {
+        "name": "Cache-Control",
+        "value": "no-store"
+       },
+       {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+       }
+      ]
+     },
+     "responseCode": 404
+    }
+   },
+   "id": "1268da4a-4817-552e-900a-9638aeac5aea",
+   "name": "📤 Sem imagem",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    200,
+    440
+   ]
+  }
+ ],
+ "connections": {
+  "🔔 Página de cadastro": {
+   "main": [
+    [
+     {
+      "node": "📤 Página de cadastro",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Painel administrador": {
+   "main": [
+    [
+     {
+      "node": "📤 Painel administrador",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Cardápio da mesa": {
+   "main": [
+    [
+     {
+      "node": "📤 Cardápio da mesa",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 API (POST)": {
+   "main": [
+    [
+     {
+      "node": "🐘 cmd_api",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 cmd_api": {
+   "main": [
+    [
+     {
+      "node": "🔀 Precisa de IA?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Precisa de IA?": {
+   "main": [
+    [
+     {
+      "node": "🤖 Descrição do prato",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 Organiza o cardápio",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 Lê a nota fiscal",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "🤖 Analisa as vendas",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Responde",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Descrição do prato": {
+   "main": [
+    [
+     {
+      "node": "📤 Descrição do prato",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Organiza o cardápio": {
+   "main": [
+    [
+     {
+      "node": "📤 Organiza o cardápio",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Lê a nota fiscal": {
+   "main": [
+    [
+     {
+      "node": "📤 Lê a nota fiscal",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🤖 Analisa as vendas": {
+   "main": [
+    [
+     {
+      "node": "📤 Analisa as vendas",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔔 Imagem (GET)": {
+   "main": [
+    [
+     {
+      "node": "🐘 Lê a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🐘 Lê a imagem": {
+   "main": [
+    [
+     {
+      "node": "🔀 Achou?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🔀 Achou?": {
+   "main": [
+    [
+     {
+      "node": "🧩 Vira arquivo",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "📤 Sem imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "🧩 Vira arquivo": {
+   "main": [
+    [
+     {
+      "node": "📤 Entrega a imagem",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "saveManualExecutions": true,
+  "executionTimeout": 300,
+  "saveDataErrorExecution": "all",
+  "saveDataSuccessExecution": "all"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

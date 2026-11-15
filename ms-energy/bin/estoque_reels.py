@@ -12,7 +12,10 @@ from pathlib import Path
 
 PY = r"D:\veo\venv\Scripts\python.exe"
 BIN = Path(r"D:\ms-energy\bin")
-ALVO = 2
+# 14/11 dona ("o estoque de Instagram das empresas tem que ter os mesmos 30 dias"): 30 Reels prontos por empresa
+# (1/dia). Era 2. ESTOQUE_EMPRESAS_DIAS volta (ex.: 2).
+import os
+ALVO = int(os.environ.get("ESTOQUE_EMPRESAS_DIAS", "30"))
 CONTAS = [("advance", BIN / "reel_advance.py", Path(r"D:\ms-energy\videos\reels_advance")),
           ("globo", BIN / "reel_globo.py", Path(r"D:\ms-energy\videos\reels_globo"))]
 
@@ -35,7 +38,7 @@ CARROSSEIS = [("carrossel advance", BIN / "carrossel_advance.py", Path(r"D:\ms-e
               ("carrossel ms", BIN / "carrossel_ms.py", Path(r"D:\ms-energy\videos\carrosseis"))]
 
 
-def carrosseis_prontos(pasta, dias=3):
+def carrosseis_prontos(pasta, dias=45):  # 14/11: estoque de 30 dias (era "feito nos últimos 3 dias")
     import time
     n = 0
     for m in pasta.glob("*/meta.json") if pasta.exists() else []:
@@ -50,7 +53,7 @@ def carrosseis_prontos(pasta, dias=3):
 
 def main():
     for nome, script, pasta in CARROSSEIS:
-        if carrosseis_prontos(pasta):
+        if carrosseis_prontos(pasta) >= ALVO:  # 14/11: era "tem 1 pronto"
             continue
         r = subprocess.run([PY, str(script), "--so-gerar"], capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=3600, creationflags=0x08000000)

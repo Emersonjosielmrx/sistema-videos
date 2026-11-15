@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cardápio da mesa</title><meta name="robots" content="noindex">
+<style>__CSS__
+body{padding-bottom:110px}
+.cab{background:var(--pri);color:#fff;padding:22px 16px 18px}.cab .in{max-width:720px;margin:0 auto;display:flex;gap:12px;align-items:center}
+.cab img{width:54px;height:54px;border-radius:14px;object-fit:contain;background:#fff}.cab h1{font-size:22px;line-height:1.15}.cab .m{opacity:.9;font-weight:600}
+.cats{position:sticky;top:0;background:var(--plano);z-index:5;border-bottom:1px solid var(--borda)}.cats .in{max-width:720px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+.cats a{flex:none;text-decoration:none;color:var(--tx);background:var(--sup);border:1px solid var(--borda);border-radius:999px;padding:7px 13px;font-weight:600;font-size:14px}
+main{max-width:720px;margin:0 auto;padding:6px 16px}
+.sec{font-size:19px;font-weight:800;margin:22px 0 8px;scroll-margin-top:60px}
+.it{display:flex;gap:12px;background:var(--sup);border:1px solid var(--borda);border-radius:16px;padding:12px;margin-bottom:10px;cursor:pointer;text-align:left;width:100%}
+.it img,.it .sf{width:92px;height:92px;border-radius:12px;object-fit:cover;flex:none;background:var(--sup2);display:grid;place-items:center;font-size:32px}
+.it .nm{font-weight:700;font-size:16px}.it .ds{color:var(--tx2);font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:2px 0 6px}
+.it.off{opacity:.5;cursor:default}.preco{font-weight:800;color:var(--pri)}
+.barra{position:fixed;left:0;right:0;bottom:0;background:var(--sup);border-top:1px solid var(--borda);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:20}
+.barra .in{max-width:720px;margin:0 auto;display:flex;gap:8px}.barra .btn{flex:1}
+.foto-g{width:100%;max-height:260px;object-fit:cover;border-radius:14px;margin-bottom:10px}
+.erro{max-width:420px;margin:20vh auto;text-align:center;padding:0 16px}
+</style></head><body><div id="app"><div class="vazio">Abrindo o cardápio…</div></div>
+<script>
+const API = location.origin + '/webhook/comanda-api';
+const IMG = id => location.origin + '/webhook/comanda-img?id=' + id;
+__BASE__
+const q = new URLSearchParams(location.search); const LOJA = q.get('l'), MESA = Number(q.get('m')), T = q.get('t');
+const chave = '<SEGREDO_REMOVIDO>' + LOJA + '_' + MESA; let D = null; let carrinho = []; try { carrinho = JSON.parse(guarda.ler(chave) || '[]'); } catch (e) {}
+const salva = () => guarda.gravar(chave, JSON.stringify(carrinho));
+async function carrega() {
+  const j = await api('cliente_menu', { loja: LOJA, mesa: MESA, t: T });
+  if (!j.ok) { $('#app').innerHTML = `<div class="erro"><div style="font-size:48px">😕</div><h2>${esc(j.erro)}</h2></div>`; return; }
+  D = j; document.documentElement.style.setProperty('--pri', j.loja.cor); document.title = j.loja.nome + ' · Mesa ' + MESA;
+  const cats = j.categorias.filter(c => c.produtos.length);
+  $('#app').innerHTML = `<div class="cab"><div class="in">${j.loja.logo ? `<img src="${IMG(j.loja.logo)}" alt="">` : ''}<div><h1>${esc(j.loja.nome)}</h1><div class="m">Mesa ${MESA}</div></div></div></div>
+    <nav class="cats"><div class="in">${cats.map(c => `<a href="#c${c.id}">${esc(c.icone)} ${esc(c.nome)}</a>`).join('')}</div></nav>
+    <main>${cats.map(c => `<div class="sec" id="c${c.id}">${esc(c.icone)} ${esc(c.nome)}</div>${c.produtos.map(p => `<button class="it ${p.disponivel ? '' : 'off'}" data-p="${p.id}">
+      ${p.imagem ? `<img src="${IMG(p.imagem)}" loading="lazy" alt="">` : `<div class="sf">${esc(c.icone)}</div>`}
+      <div style="flex:1;min-width:0"><div class="nm">${esc(p.nome)} ${p.destaque ? '⭐' : ''}</div><div class="ds">${esc(p.descricao)}</div>
+      ${p.disponivel ? `<span class="preco">${brl(p.preco)}</span>${p.preco_antigo ? ` <s class="mu pq">${brl(p.preco_antigo)}</s>` : ''}` : '<span class="selo">esgotado</span>'}</div></button>`).join('')}`).join('')}
+      <p class="mu pq" style="text-align:center;margin:20px 0">Taxa de serviço de ${Number(j.loja.taxa)}% na conta.</p></main>
+    <div class="barra"><div class="in"><button class="btn" id="cg">🙋 Garçom</button><button class="btn" id="ct">🧾 Conta</button><button class="btn pri" id="vc"></button></div></div>`;
+  $$('[data-p]').forEach(b => b.onclick = () => { const p = j.categorias.flatMap(c => c.produtos).find(x => x.id === Number(b.dataset.p)); if (p.disponivel) escolhe(p); });
+  $('#cg').onclick = () => chamar('garcom'); $('#ct').onclick = verConta; $('#vc').onclick = verCarrinho; barra();
+}
+const barra = () => { const n = carrinho.reduce((s, x) => s + x.qtd, 0); $('#vc').textContent = n ? `🛒 Pedido (${n}) · ${brl(carrinho.reduce((s, x) => s + x.total, 0))}` : '🛒 Pedido'; };
+function escolhe(p) {
+  const m = modal(`${p.imagem ? `<img class="foto-g" src="${IMG(p.imagem)}" alt="">` : ''}<h3>${esc(p.nome)}</h3><p class="mu">${esc(p.descricao)}</p>
+    ${p.adicionais.length ? `<label>Adicionais</label>${p.adicionais.map((a, i) => `<label style="font-weight:400;display:flex;gap:8px;align-items:center;padding:6px 0"><input type="checkbox" data-a="${i}" style="width:auto;min-height:0"> ${esc(a.nome)} <span class="mu">+ ${brl(a.preco)}</span></label>`).join('')}` : ''}
+    <label>Alguma observação?</label><input id="ob" placeholder="ex.: sem cebola">
+    <div class="linha" style="margin-top:12px;flex-wrap:nowrap"><button class="btn" id="me" style="flex:none">−</button><b id="q" style="flex:none;min-width:30px;text-align:center;font-size:18px">1</b><button class="btn" id="ma" style="flex:none">＋</button>
+    <button class="btn pri" id="ok"></button></div>`);
+  let q = 1; const tot = () => q * (Number(p.preco) + $$('[data-a]:checked', m).reduce((s, x) => s + Number(p.adicionais[Number(x.dataset.a)].preco), 0));
+  const at = () => { $('#q', m).textContent = q; $('#ok', m).textContent = 'Adicionar · ' + brl(tot()); }; at();
+  $('#me', m).onclick = () => { q = Math.max(1, q - 1); at(); }; $('#ma', m).onclick = () => { q++; at(); }; $$('[data-a]', m).forEach(x => x.onchange = at);
+  $('#ok', m).onclick = () => { carrinho.push({ produto_id: p.id, nome: p.nome, qtd: q, obs: $('#ob', m).value.trim(), adicionais: $$('[data-a]:checked', m).map(x => p.adicionais[Number(x.dataset.a)].nome), total: tot() }); salva(); barra(); m.fechar(); aviso('Adicionado ao pedido'); };
+}
+function verCarrinho() {
+  if (!carrinho.length) return aviso('Escolha algo no cardápio primeiro 🙂');
+  const m = modal(`<h3>Seu pedido · mesa ${MESA}</h3><div id="li"></div><div class="acoes"><button class="btn" data-fechar>Continuar escolhendo</button><button class="btn pri" id="env">Enviar para a cozinha</button></div>`);
+  const d = () => { $('#li', m).innerHTML = carrinho.map((x, i) => `<div class="linha" style="flex-wrap:nowrap;padding:8px 0;border-bottom:1px solid var(--borda)"><span style="flex:1"><b>${x.qtd}x ${esc(x.nome)}</b>${x.adicionais.length ? '<br><span class="pq mu">+ ' + x.adicionais.map(esc).join(', ') + '</span>' : ''}${x.obs ? '<br><span class="pq">📝 ' + esc(x.obs) + '</span>' : ''}</span><b style="flex:none">${brl(x.total)}</b><button class="btn pq fant er" data-x="${i}" style="flex:none">✕</button></div>`).join('') + `<p style="text-align:right;font-weight:800;margin-top:8px">${brl(carrinho.reduce((s, x) => s + x.total, 0))}</p>`;
+    $$('[data-x]', m).forEach(b => b.onclick = () => { carrinho.splice(Number(b.dataset.x), 1); salva(); barra(); carrinho.length ? d() : m.fechar(); }); }; d();
+  $('#env', m).onclick = async () => { $('#env', m).disabled = true;
+    const j = await api('cliente_pedir', { loja: LOJA, mesa: MESA, t: T, itens: carrinho.map(({ produto_id, qtd, obs, adicionais }) => ({ produto_id, qtd, obs, adicionais })) });
+    if (!j.ok) { $('#env', m).disabled = false; return aviso(j.erro, true); }
+    carrinho = []; salva(); barra(); m.fechar(); modal(`<div style="text-align:center"><div style="font-size:54px">✅</div><h3>Pedido enviado!</h3><p class="mu">A cozinha já recebeu. É só aguardar na mesa.</p></div><div class="acoes"><button class="btn pri" data-fechar>OK</button></div>`); };
+}
+async function verConta() {
+  const j = await api('cliente_menu', { loja: LOJA, mesa: MESA, t: T }); const c = j.ok && j.conta;
+  const m = modal(`<h3>Conta da mesa ${MESA}</h3>${c ? `${c.itens.map(i => `<div class="linha" style="flex-wrap:nowrap;padding:6px 0;border-bottom:1px solid var(--borda)"><span style="flex:1">${i.qtd}x ${esc(i.nome)} ${i.status === 'pronto' ? '<span class="selo ok">pronto</span>' : i.status === 'entregue' ? '' : '<span class="selo av">preparando</span>'}</span><span style="flex:none">${brl(i.qtd * i.preco)}</span></div>`).join('')}
+    <p class="mu" style="margin-top:8px">Subtotal ${brl(c.subtotal)} · serviço ${Number(c.servico_pct)}%</p><p style="font-size:22px;font-weight:800">${brl(c.total)}</p>` : '<p class="mu">Nenhum pedido ainda.</p>'}
+    <div class="acoes"><button class="btn" data-fechar>Voltar</button>${c ? `<button class="btn pri" id="pc" ${c.pediu_conta ? 'disabled' : ''}>${c.pediu_conta ? 'Conta já pedida ✔' : '🧾 Pedir a conta'}</button>` : ''}</div>`);
+  const b = $('#pc', m); if (b) b.onclick = async () => { await chamar('conta'); m.fechar(); };
+}
+async function chamar(tipo) { const j = await api('cliente_chamar', { loja: LOJA, mesa: MESA, t: T, tipo }); aviso(j.ok ? (tipo === 'conta' ? 'Conta pedida. O garçom já vem 🙂' : 'O garçom foi chamado 🙋') : j.erro, !j.ok); }
+carrega();
+</script></body></html>

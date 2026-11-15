@@ -25,6 +25,7 @@ LIGA/DESLIGA: controle.json projeto "melhorador_longo" etapa "producao" (painel 
 """
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -156,14 +157,27 @@ def _mp4_da_ficha(ficha):
         log(f"{ficha.name}: sem espaço no D pra baixar o longo ({tam / 2**30:.1f} GB; deixo 6 GB livres) — pula")
         return None, False
     alvo = TMP / f"{ficha.name[:40]}.mp4"
-    r = subprocess.run([RCLONE, "copyto", d["drive"], str(alvo)], capture_output=True, text=True)
+    # 14/11 19h50: o download do XYDK (5,3 GB) travou às 12:26 e ficou 7 h segurando o disco (sem timeout nenhum).
+    # Agora: 4 pedaços paralelos + timeout de conexão + teto MELHORADOR_DL_MAX_MIN (40); estourou = apaga e pula.
+    try:
+        r = subprocess.run([RCLONE, "copyto", d["drive"], str(alvo), "--multi-thread-streams", "4",
+                            "--multi-thread-cutoff", "256M", "--timeout", "2m", "--contimeout", "60s", "--retries", "3"],
+                           capture_output=True, text=True,
+                           timeout=float(os.environ.get("MELHORADOR_DL_MAX_MIN", "40")) * 60)
+    except subprocess.TimeoutExpired:
+        for p in TMP.glob(f"{alvo.name}*"):
+            p.unlink(missing_ok=True)
+        log(f"{ficha.name}: download do longo passou de {os.environ.get('MELHORADOR_DL_MAX_MIN', '40')} min — pula")
+        return None, False
     return (alvo, True) if r.returncode == 0 and alvo.exists() else (None, False)
 
 
 def analisar(ficha, c):
     mp4, temporario = _mp4_da_ficha(ficha)
     if not mp4:
-        log(f"{ficha.name}: sem vídeo (nem local nem no Drive) — pula")
+        # 14/11: "sem vídeo" aparecia também quando o vídeo ESTAVA no Drive e só faltava espaço (Top Player, 7,7 GB,
+        # com 11,9 GB livres) — o motivo real já sai no log acima ("sem espaço no D"); aqui só confirma o pulo.
+        log(f"{ficha.name}: não analisado agora (sem espaço, download falhou ou sem vídeo — ver linha acima) — pula")
         return None
     res = None
     try:
@@ -599,8 +613,31 @@ def consertar_codigo(est, c):
     tarefa = (f"Conserto pedido pelo melhorador do recap longo: {p.get('titulo')}\nProva do problema: {p.get('prova')}\n"
               f"Onde: {p.get('onde')}\nComo testar: {p.get('como_testar')}\n"
               "Regras: mudança mínima, não mude o que funciona, quem chama as funções continua igual, sem palavrão.")
-    pasta = caixa_gemini.caixa(f"melhorador_{real.stem}", tarefa, [str(real)],
-                               modelos=[(cod["modelo"], cod.get("turnos", 40))], texto=bool(cod.get("texto")))
+    # 14/11: as 5 últimas caixas deram "API Error 503 (todas as contas 100%)" / "429 Resource exhausted" — o modelo nem
+    # rodou e a proposta saía como "modelo não mudou nada" (perdida). Agora: 1º o modelo principal, se a resposta for
+    # erro de cota/API tenta o RESERVA (cod["reserva"]); se nenhum rodar, a proposta VOLTA pra fila ("nova") e o log diz
+    # "sem cota de IA". MELHORADOR_RESERVA=0 desliga a reserva.
+    modelos_tentar = [(cod["modelo"], cod.get("turnos", 40))]
+    if os.environ.get("MELHORADOR_RESERVA", "1") != "0":
+        # 14/11: lista de reservas (cc-sobra -> ag-opus-5-5 -> Gemini); "reserva" (1 só) continua valendo
+        for r in (cod.get("reservas") or ([cod["reserva"]] if cod.get("reserva") else [])):
+            modelos_tentar.append((r, cod.get("turnos", 40)))
+    pasta = None
+    for mod in modelos_tentar:
+        pasta = caixa_gemini.caixa(f"melhorador_{real.stem}", tarefa, [str(real)], modelos=[mod],
+                                   texto=bool(cod.get("texto")))
+        try:
+            resp = (pasta / "resumo_gemini.txt").read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            resp = ""
+        if not re.search(r"API Error|\b503\b|\b429\b|Resource has been exhausted|temporarily unavailable", resp):
+            break
+        log(f"conserto '{p.get('titulo', '')[:60]}': {mod[0]} sem cota/fora ({resp[:80].strip()}) — "
+            + ("tento a reserva" if mod != modelos_tentar[-1] else "proposta volta pra fila"))
+    else:
+        p["estado"] = "nova"  # nenhum modelo rodou: tenta de novo na próxima volta
+        p["sem_cota"] = p.get("sem_cota", 0) + 1
+        return
     nova = pasta / real.name
     linhas = sum(1 for l in (pasta / "gemini.diff").read_text(encoding="utf-8").splitlines()
                  if l[:1] in "+-" and l[:3] not in ("+++", "---"))
@@ -689,6 +726,27 @@ def volta(forcar=False, so_analisar=False):
     novas = sorted((f for f in FICHAS.glob("*/render.json")
                     if f.parent.name not in est["videos"] and f.stat().st_mtime > datetime(2026, 10, 26, 19).timestamp()),
                    key=lambda f: f.stat().st_mtime)
+    # 14/11 dona ("focar nos que podemos ter mais resultado de melhoria ou nos que mais precisam; considerar uma fila"):
+    # 1º os vídeos do tema CAMPEÃO (pesar_fila: pesos_temas.json — onde melhorar rende mais), depois os mais NOVOS
+    # (a melhoria vale pros próximos; o velho já foi). Fila/atraso vai pro estado (relatório mostra).
+    # MELHORADOR_ORDEM_ANTIGA=1 volta ao "mais antigo primeiro".
+    if os.environ.get("MELHORADOR_ORDEM_ANTIGA") != "1" and novas:
+        try:
+            import pesar_fila
+            pesos = json.loads(Path(r"D:\video-fila\estado\pesos_temas.json").read_text("utf-8")).get("temas", {})
+        except Exception:  # noqa: BLE001
+            pesos, pesar_fila = {}, None
+
+        def _nota(f):
+            tema = pesar_fila.tema_do(f.parent.name[12:].replace("_", " ")) if pesar_fila else None
+            p = pesos.get(tema) if isinstance(pesos.get(tema), dict) else {}
+            n = 0.6 * (p.get("horas", 0) / max(1, p.get("longos", 1))) + 0.4 * p.get("vd", 0) / 10 if p else 0
+            return (-n if tema != "outros" else 0, -f.stat().st_mtime)
+        novas = sorted(novas, key=_nota)
+    est["fila_analise"] = {"atrasados": len(novas), "em": datetime.now().isoformat(timespec="minutes"),
+                           "mais_antigo": (datetime.fromtimestamp(min(f.stat().st_mtime for f in novas))
+                                           .isoformat(timespec="minutes") if novas else None),
+                           "proximo": novas[0].parent.name[:60] if novas else None}
     for rj in novas[:1]:  # 1 vídeo por volta: a análise leva ~10 min
         res = analisar(rj.parent, c)
         est["videos"].setdefault(rj.parent.name, {}).update(

@@ -156,6 +156,18 @@ def _cofre():
     return cofre
 
 
+def _conta_no_kaggle(email):
+    """14/11: a conta Google está VIVA no pool do Kaggle? Na dúvida (pool ilegível) = True."""
+    import json
+    try:
+        pool = json.loads(Path(r"D:\recapd-ambientes\producao\colab\kaggle_pool.json").read_text("utf-8"))
+    except (OSError, ValueError):
+        return True
+    e = (email or "").lower()
+    # só a VIVA importa (a banida já não tem o que perder; o HTTP dela sai de casa como sempre saiu)
+    return bool(e) and any(str(x.get("cofre") or "").lower() == e and not x.get("banida") for x in pool.get("contas", []))
+
+
 def _proxy_da_conta_kaggle(email):
     """12/11 (dona: as contas novas são "do canal E do Kaggle; o Kaggle acessa com proxy"): a regra do 2º banimento
     (09/11) é a MESMA conta Google aparecer em 2 IPs (proxy no Kaggle + casa no Flow/YouTube). Conta que está no pool do
@@ -1110,6 +1122,25 @@ def _subir_http(slug, e, a, alvo, maiores_18):
     Chrome). Sem token/cookies vivos o Enviador colhe os dois numa visita escondida ao Studio (upload_http.colher_sessao).
     Devolve o videoId ou None (aí segue o Chrome como antes)."""
     mapa = ler_mapa()
+    # 14/11 23h — CAUSA DO 3º BANIMENTO DO KAGGLE: o upload HTTP (Enviador) sai pela INTERNET DE CASA; só o Chrome
+    # usava o IP fixo da conta (_proxy_da_conta_kaggle). Comédia Noturna (emerso), Empresário (inovaremanhwaverse8),
+    # Imóvel em Foco (emersonverse7/inovaremanhwaverse7) e Vendas (emersonjosiel2034) subiram dezenas de Shorts por HTTP
+    # de casa desde 12/11 enquanto o Kaggle delas saía pelo rnprmtfo-N = mesma conta Google em 2 IPs. 14/11 21h40 os 4
+    # tokens foram recusados juntos. Conta Google que está no pool do Kaggle NUNCA sobe por HTTP — vai pelo Chrome
+    # (ponte do IP fixo). Sem trava de desligar: é a regra do CLAUDE.md.
+    # (14/11 23h30) O HTTP agora sai pela ponte do IP fixo (gemini-argo/youtube_http.Studio._entrar usa
+    # cofre.saida_kaggle). Aqui só confere que a ponte sobe; sem ponte = Chrome (que também recusa sem ponte).
+    try:
+        if _conta_no_kaggle(e.get("email") or ""):
+            sys.path.append(r"D:\logins-google") if r"D:\logins-google" not in sys.path else None
+            import cofre as _cofre
+            if not _cofre.saida_kaggle(e.get("email") or ""):
+                _log_http(f"{slug}: conta do Kaggle sem ponte do IP fixo — não sobe por HTTP")
+                return None
+            _log_http(f"{slug}: conta do Kaggle — HTTP pelo IP fixo dela")
+    except Exception as ex:  # noqa: BLE001 — na dúvida, não sobe por HTTP
+        _log_http(f"{slug}: conta do Kaggle, ponte falhou ({type(ex).__name__}) — não sobe por HTTP")
+        return None
     motivos = [n for n, v in (("sem horário", not alvo), ("ensaio", a.ensaio), ("maiores de 18", maiores_18),
                               (f"privacy={a.privacy}", a.privacy != "public"),
                               ("desligado no mapa", not mapa.get("postar_http", True)), ("sem_http", e.get("sem_http"))) if v]

@@ -1,0 +1,6 @@
+{
+  "_doc": "14/11 dona ('Instagram: veja a melhor estratégia e faça'). Só estas contas postam (as 5 com seguidores em 14/11); max 2 Reels/dia cada, >= 4 h entre Reels. As outras ficam paradas (nada apagado). Desligar: env INSTA_FOCO=0 ou apagar este arquivo. Pesquisa: D:/postador-de-videos/INSTAGRAM_ESTRATEGIA.md",
+  "contas": ["sintetizerisada", "fakenews.ia4", "_lucrocomia_", "iapro.mentoria", "futebolcom.ia2"],
+  "max_dia": 2,
+  "intervalo_min": 240
+}

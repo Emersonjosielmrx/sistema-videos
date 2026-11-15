@@ -778,9 +778,12 @@ def _gerar_http(prompt, out_path, image, aspect, modelo, log):
 def _gerar_gemini(prompt, out_path, image, aspect, duration, log):
     """14/11/2026 (dona): 1º do TRIO de vídeo = Gemini sem navegador (D:\\gemini-argo\\gemini_midia_http.py: HTTP com os
     cookies do Argon, ~1-2 min, não gasta crédito do Flow nem do Argon). Depois o Flow sem navegador (notebooks/HTTP) e
-    por último o Flow com navegador (tela). Com foto inicial (animar foto) pula: o HTTP do Gemini ainda não anexa.
-    Corta na duração pedida (o Gemini entrega 10 s; o validador do robô espera 8 s ±1). GEMINI_VIDEO=0 desliga."""
-    if image or os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_VIDEO", "1") == "0":
+    por último o Flow com navegador (tela). Com foto inicial (animar foto): desde 14/11 a foto sobe por HTTP e o vídeo
+    começa nela, como no Veo. Corta na duração pedida (o Gemini entrega 10 s; o validador do robô espera 8 s ±1).
+    GEMINI_VIDEO=0 desliga; GEMINI_VIDEO_FOTO=0 manda só os pedidos COM foto direto pro Flow."""
+    if os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_VIDEO", "1") == "0":
+        return None
+    if image and (os.environ.get("GEMINI_VIDEO_FOTO", "1") == "0" or not os.path.exists(image)):
         return None
     py = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"
     script = r"D:\gemini-argo\gemini_midia_http.py"
@@ -794,8 +797,10 @@ def _gerar_gemini(prompt, out_path, image, aspect, duration, log):
     import time as _t
     t0 = _t.time()
     try:
-        r = subprocess.run([py, "-X", "utf8", "-I", script, "video", prompt, out_path, "--formato", aspect,
-                            "--duracao", str(dur)], capture_output=True, text=True, encoding="utf-8",
+        cmd = [py, "-X", "utf8", "-I", script, "video", prompt, out_path, "--formato", aspect, "--duracao", str(dur)]
+        if image:
+            cmd += ["--ref", os.path.abspath(image)]
+        r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=700, creationflags=0x08000000)
     except Exception as e:  # noqa: BLE001
         log(f"[gemini] nao rodou ({type(e).__name__}) -> Flow")

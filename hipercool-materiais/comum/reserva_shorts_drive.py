@@ -25,7 +25,9 @@ DESTINO = "manhwa-drive:videos-backup/parceiro/_reserva_1112"
 PARCEIRO = Path(r"D:\recapd-ambientes\producao\config\parceiro.json")
 LOG = Path(r"D:\tmp\reserva_shorts_drive.log")
 LISTA = Path(r"D:\tmp\reserva_shorts_lista.txt")
-DIAS = 7
+# 14/11 dona ("um MÊS de estoque"): o mês fica no Drive; no PC só RESERVA_DIAS_PC dias (padrão 3) pra postar sem
+# esperar download. Era 7.
+DIAS = int(os.environ.get("RESERVA_DIAS_PC", "3"))
 
 
 def log(m):
@@ -88,8 +90,12 @@ def main(simular):
         if not v.exists():  # 12/11: o postador subiu/moveu este Short durante a cópia — nada a fazer
             continue
         if no_drive.get(rel) == v.stat().st_size:
-            liberado += v.stat().st_size
-            v.unlink()
+            tam = v.stat().st_size
+            try:
+                v.unlink()
+            except PermissionError:  # 14/11: o postador está subindo este vídeo agora — fica no PC
+                continue
+            liberado += tam
             (p / "_NO_DRIVE.txt").write_text(f"{DESTINO}/{rel}\n", encoding="utf-8")
             n += 1
     log(f"no Drive e fora do PC: {n} de {len(sair)}, {liberado / 1e9:.1f} GB liberados")
@@ -97,3 +103,12 @@ def main(simular):
 
 if __name__ == "__main__":
     main("--simular" in sys.argv)
+    # 15/11 (disco a 1,7 GB): a cada 3 h também solta os longos cujo envio falhou (vídeo de 4-8 GB preso em 2 pastas
+    # como link físico). Mesma função da faxina diária. FAXINA_LONGOS_FALHOS=0 desliga.
+    try:
+        sys.path.append(r"D:\video-fila")
+        import faxina_disco
+        n = faxina_disco.longos_que_falharam("--simular" in sys.argv)
+        log(f"longos com envio falho: {n / 1e9:.1f} GB liberados")
+    except Exception as e:  # noqa: BLE001
+        log(f"longos com envio falho: falhou ({type(e).__name__}: {e})")

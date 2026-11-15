@@ -17073,5 +17073,135 @@
     "arquivado": false,
     "descricao": "Application Symfony de récapitulatifs d'animes et de mangas : œuvres, saisons, épisodes, tomes, chapitres, personnages, favoris et résumés.",
     "data": "2026-11-14"
+  },
+  "minimus7/creator-teardown": {
+    "ok": true,
+    "nome": "minimus7/creator-teardown",
+    "estrelas": 1,
+    "push": "2026-09-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code skill that breaks down a short-form creator's TikTok or YouTube Shorts videos: real view counts, word-level transcripts, measure",
+    "data": "2026-11-14"
+  },
+  "kmilo93sd/agent-video-editor": {
+    "ok": true,
+    "nome": "kmilo93sd/agent-video-editor",
+    "estrelas": 8,
+    "push": "2026-10-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Editing judgment for AI agents: pacing, cuts, captions, audio, color and thumbnails for any video type, plus 128 CC0 sounds, 26 CC0 graphics",
+    "data": "2026-11-14"
+  },
+  "megastretch23/tiktok-trending-core": {
+    "ok": true,
+    "nome": "MegaStretch23/tiktok-trending-core",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Minimal Node CLI/library for TikTok Creative Center trending hashtags, sounds and creators. Open-source core of the tiktok-trending-scraper ",
+    "data": "2026-11-14"
+  },
+  "ctskool/youtube-packaging": {
+    "ok": true,
+    "nome": "ctskool/youtube-packaging",
+    "estrelas": 0,
+    "push": "2026-10-28",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code skills for packaging YouTube videos: thumbnail-first titles scored on your own channel's data, hooks, and a Test & Compare plan.",
+    "data": "2026-11-14"
+  },
+  "gladosaagman/youtube-agent-skill": {
+    "ok": true,
+    "nome": "gladosAagman/youtube-agent-skill",
+    "estrelas": 1,
+    "push": "2026-11-11",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Fifteen Claude skills and two agents that run a YouTube channel: scored hooks, title and thumbnail linting, a channel audit that names the o",
+    "data": "2026-11-14"
+  },
+  "tungpm21/niche-research": {
+    "ok": true,
+    "nome": "tungpm21/niche-research",
+    "estrelas": 0,
+    "push": "2026-11-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code skill: YouTube niche research (channel outliers, thumbnail sheets, trending keywords, Studio Research tab) with no API key",
+    "data": "2026-11-14"
+  },
+  "hitfactorapp/youtube-thumbnail-color-contrast-study": {
+    "ok": true,
+    "nome": "HitFactorApp/youtube-thumbnail-color-contrast-study",
+    "estrelas": 0,
+    "push": "2026-06-19",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Replication package: thumbnail color & contrast vs YouTube views",
+    "data": "2026-11-14"
+  },
+  "jb-alvarado/facedetection-thumb": {
+    "ok": true,
+    "nome": "jb-alvarado/facedetection-thumb",
+    "estrelas": 4,
+    "push": "2026-10-29",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Generate thumbnail from video with face detection",
+    "data": "2026-11-14"
+  },
+  "ielym/google-trends-scraper": {
+    "ok": true,
+    "nome": "ielym/google-trends-scraper",
+    "estrelas": 0,
+    "push": "2026-10-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Google Trends 全量数据面抓取工具：Explore / Trending Now / RSS / Autocomplete / Datastore / BigQuery / 官方 API alpha",
+    "data": "2026-11-14"
+  },
+  "drwiiche/google-trend-morocco": {
+    "ok": true,
+    "nome": "drwiiche/google-trend-morocco",
+    "estrelas": 6,
+    "push": "2026-11-14",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "automatically monitor the latest trending searches in Morocco by periodically fetching the Google Trends RSS feed. The repository is updated",
+    "data": "2026-11-14"
+  },
+  "cedarfetch/google-trending-searches-examples": {
+    "ok": true,
+    "nome": "cedarfetch/google-trending-searches-examples",
+    "estrelas": 0,
+    "push": "2026-11-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Python, Node.js and cURL examples for Google trending searches by country, with alerts on new trends.",
+    "data": "2026-11-14"
+  },
+  "looneyn/chronolist": {
+    "ok": true,
+    "nome": "LooneyN/chronolist",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Builds chronological YouTube playlists in upload order for any channel: one per year, plus custom keyword lists (e.g. a series).",
+    "data": "2026-11-15"
+  },
+  "andremrod/youtube-insights": {
+    "ok": true,
+    "nome": "andremrod/youtube-insights",
+    "estrelas": 0,
+    "push": "2026-11-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Descobre o que deu certo nos seus Shorts e vídeos do YouTube: título, tema e duração × views, retenção e inscritos, com comparação com o Ins",
+    "data": "2026-11-15"
   }
 }

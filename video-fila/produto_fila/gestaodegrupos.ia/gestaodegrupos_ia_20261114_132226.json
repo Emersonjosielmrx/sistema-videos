@@ -1,0 +1,143 @@
+{
+ "conta": "gestaodegrupos.ia",
+ "produto": "gestao_grupos",
+ "marca": "Gestão de Grupos IA",
+ "titulo": "Resumo das conversas no WhatsApp",
+ "legenda": "Não perca tempo lendo centenas de mensagens acumuladas no dia a dia. Com o recurso de atas, você tem o resumo direto no grupo para acompanhar tudo com agilidade. 📲\n\nSaiba mais no link do perfil.\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Centenas de mensagens acumuladas?",
+  "pergunta_cliente": "Preciso ler todas as mensagens para saber o que rolou no grupo?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia muito tempo lendo centenas de mensagens acumuladas para entender o que acontecia nos grupos.",
+    "visual": "apresentador",
+    "cenario_en": "a bright, tidy modern office with clean desk and warm natural lighting, professional Brazilian business owner with glasses speaking to camera",
+    "destaques": [
+     "perdia muito tempo",
+     "mensagens acumuladas"
+    ],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261114_132757_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O recurso de atas gera um resumo direto no grupo, organizando os principais pontos da conversa de forma prática.",
+    "visual": "veo",
+    "prompt_en": "commercial footage of a clean Brazilian corporate office desk, a professional checking a smartphone quietly, cinematic warm daylight, over-the-shoulder shot, no legible text",
+    "destaques": [
+     "recurso de atas",
+     "resumo direto"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Pessoal, quais foram as decisões da reunião de hoje?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Ata do dia: alinhamos o cronograma e definimos os responsáveis de cada etapa."
+     },
+     {
+      "de": "cliente",
+      "texto": "Excelente resumo, obrigado!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje fico informado rapidamente sobre as conversas e mantenho meus grupos de WhatsApp no automático.",
+    "visual": "apresentador",
+    "cenario_en": "a bright, tidy modern office with clean desk and warm natural lighting, professional Brazilian business owner with glasses speaking to camera",
+    "destaques": [
+     "fico informado rapidamente"
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261114_132757_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_gestaodegrupos.ia_20261114_132757_1.png"
+   }
+  ],
+  "legenda": "Não perca tempo lendo centenas de mensagens acumuladas no dia a dia. Com o recurso de atas, você tem o resumo direto no grupo para acompanhar tudo com agilidade. 📲\n\nSaiba mais no link do perfil.",
+  "titulo": "Resumo das conversas no WhatsApp",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "resumo_conversas",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 319,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\gestaodegrupos.ia_20261114_132226\\dono_3.mp4",
+ "duracao_s": 31.44,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-14T14:07:10",
+ "variante": "cinco_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "abertura",
+  "cartao"
+ ],
+ "veo_total": 5,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.77,
+   "fala": "Preciso ler todas as mensagens para saber o que rolou no grupo?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.77,
+   "fim": 11.82,
+   "fala": "Eu perdia muito tempo lendo centenas de mensagens acumuladas para entender o que acontecia nos grupos.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.82,
+   "fim": 19.67,
+   "fala": "O recurso de atas gera um resumo direto no grupo, organizando os principais pontos da conversa de forma prática.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 19.67,
+   "fim": 27.5,
+   "fala": "Hoje fico informado rapidamente sobre as conversas e mantenho meus grupos de WhatsApp no automático.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.5,
+   "fim": 31.44,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.12,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 6.5,
+   "roteiro_marca": 7.0,
+   "diretor": 7.0
+  },
+  "graves": 3,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

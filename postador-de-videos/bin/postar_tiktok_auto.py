@@ -164,6 +164,10 @@ def abrir_conta(conta, r, proxy_n=None):
         sys.path.insert(0, r"D:\logins-google")
         import cofre
         porta, proc = cofre.abrir(r["cofre"], extra=extra)
+        # 15/11: conta VIVA do Kaggle — o cofre.abrir já fecha e reabre pela ponte um Chrome aberto sem ela; se devolveu
+        # um Chrome já aberto, é porque ele ESTÁ na ponte do IP fixo: pode usar (antes recusava e a conta não postava)
+        if extra and not proc and cofre.saida_kaggle(r["cofre"]) and cofre._chrome_com_ponte(porta):
+            return porta, proc
         if extra and not proc:
             # aberto por outro projeto SEM o proxy desta conta: usar seria sair por outro IP
             raise RuntimeError(f"{conta}: Chrome ja estava aberto por outro projeto sem o proxy dela — fica para a "
@@ -303,8 +307,28 @@ def filas(cfg, posted):
     for v in dispo:
         cand[v["conta_reuso"]].append(v)
     out = {}
+    # 14/11 dona ("os tiktoks estão reagindo, amplifique isso"): 4 contas concentram quase todas as views (medir_tiktok:
+    # fabricadeautomacoesia 3065, inovaremanhwabr 1916, emersonjosiel649 1416, seebotsia 1366). Conta com views na
+    # última medição ganha teto maior (TIKTOK_TETO_FORTE, padrão 6; >= TIKTOK_VIEWS_FORTE views, padrão 300) e média
+    # (>= 50 views) 4; zerada fica no max_por_conta_dia. O intervalo de 90 min entre posts da conta continua.
+    # TIKTOK_AMPLIFICAR=0 desliga.
+    fortes = {}
+    if os.environ.get("TIKTOK_AMPLIFICAR", "1") != "0":
+        try:
+            ult = sorted(Path(r"D:\postador-de-videos\logs\tiktok_views").glob("*.json"))[-1]
+            for k, v in json.loads(ult.read_text(encoding="utf-8")).items():
+                if v.get("abriu"):
+                    fortes[k] = v.get("views") or 0
+        except (OSError, ValueError, IndexError):
+            fortes = {}
     for conta, r in cfg.get("contas", {}).items():
-        resta = max(0, cfg.get("max_por_conta_dia", 3) - feitos[conta])
+        base = cfg.get("max_por_conta_dia", 3)
+        vw = fortes.get(conta, 0)
+        if vw >= int(os.environ.get("TIKTOK_VIEWS_FORTE", "300")):
+            base = max(base, int(os.environ.get("TIKTOK_TETO_FORTE", "6")))
+        elif vw >= 50:
+            base = max(base, 4)
+        resta = max(0, base - feitos[conta])
         m = minutos_desde_ultimo(posted, conta)
         if m is not None and m < gap:
             continue  # postou há menos de 90 min: fica pra próxima rodada

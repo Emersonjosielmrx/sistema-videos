@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Telão de vídeos</title>
+<style>
+  :root { --bg:#000; --fg:#e8fff1; --acc:#22c55e; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; overflow:hidden; }
+  #player, #painel { position:fixed; inset:0; width:100%; height:100%; border:0; }
+  #painel { display:none; }
+  #faixa { position:fixed; left:0; right:0; bottom:0; padding:1.2vh 2vw; background:linear-gradient(transparent,rgba(0,0,0,.85));
+           font-size:3vh; font-weight:700; text-shadow:0 2px 6px #000; pointer-events:none; }
+  #faixa small { display:block; font-size:2vh; font-weight:500; color:var(--acc); }
+  #inicio { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3vh;
+            background:#000; z-index:5; cursor:pointer; font-size:4vh; text-align:center; }
+  #inicio b { color:var(--acc); font-size:6vh; }
+</style>
+</head>
+<body>
+<!-- 14/11 dona ("Galaxy Tab A8: esse você pode usar pra exibir coisas além dos vídeos"): passa os vídeos que acabaram de
+     abrir no YouTube (videos.json, mandado pelo PC1 com o painel) e entre eles o painel por 1 min. Toque = liga o som. -->
+<div id="inicio"><b>▶ Toque para começar</b>Vídeos novos dos canais + painel</div>
+<iframe id="player" allow="autoplay; encrypted-media; fullscreen"></iframe>
+<iframe id="painel" src="painel_tv.html"></iframe>
+<iframe id="graf" src="graficos.html" style="position:fixed;inset:0;width:100%;height:100%;border:0;display:none"></iframe>
+<div id="faixa"></div>
+<script>
+let lista = [], i = 0, som = false, timer = null;
+const P = document.getElementById("player"), PN = document.getElementById("painel"), F = document.getElementById("faixa");
+async function carregar() {
+  try { const r = await fetch("videos.json?t=" + Date.now()); const j = await r.json(); if (j.videos && j.videos.length) lista = j.videos; }
+  catch (e) {}
+}
+let vezGraf = false;
+function painel(seg) {
+  // 14/11 dona: alterna painel e gráficos (views do dia/semana e comparação dos canais) entre os vídeos
+  const G = document.getElementById("graf"); vezGraf = !vezGraf;
+  P.style.display = "none"; PN.style.display = vezGraf ? "none" : "block"; G.style.display = vezGraf ? "block" : "none";
+  F.textContent = "";
+  clearTimeout(timer); timer = setTimeout(proximo, seg * 1000);
+}
+function proximo() {
+  carregar().then(() => {
+    if (!lista.length) return painel(60);
+    if (i > 0 && i % 3 === 0) { i++; return painel(60); }   // a cada 3 vídeos, 1 min de painel
+    const v = lista[i % lista.length]; i++;
+    PN.style.display = "none"; document.getElementById("graf").style.display = "none"; P.style.display = "block";
+    P.src = `https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&mute=${som ? 0 : 1}&controls=0&rel=0&playsinline=1&modestbranding=1`;
+    F.innerHTML = `${v.titulo || ""}<small>${v.canal || ""} · ${v.quando || ""}</small>`;
+    clearTimeout(timer); timer = setTimeout(proximo, Math.min(Math.max(v.seg || 60, 20), 600) * 1000 + 3000);
+  });
+}
+document.getElementById("inicio").onclick = () => {
+  som = true; document.getElementById("inicio").style.display = "none";
+  try { document.documentElement.requestFullscreen(); } catch (e) {}
+  proximo();
+};
+setTimeout(() => { if (document.getElementById("inicio").style.display !== "none") { document.getElementById("inicio").style.display = "none"; proximo(); } }, 15000);
+</script>
+</body>
+</html>

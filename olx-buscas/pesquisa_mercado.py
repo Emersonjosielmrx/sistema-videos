@@ -36,7 +36,38 @@ CONSOLE_JSON = """ "e_o_console": true/false (false se for só jogo, controle, a
  "preco_real": número ou null (preço DESTE console segundo a descrição, se diferente do anúncio),
  "resumo": "1 frase com o que importa citando o vendedor" """
 
+TELA_JSON = """ "e_o_produto": true/false (false se for peça, placa, fonte, suporte, controle, cabo, lote de vários, outro aparelho),
+ "funciona": "sim" | "nao" | "incerto" (sim = liga e mostra imagem, mesmo com poucas linhas ou manchas),
+ "polegadas": número ou null (tamanho da tela dito no título/descrição),
+ "tipo": "monitor" | "smart tv" | "tv" | null,
+ "entradas": "HDMI, VGA, DVI... como dito, ou null",
+ "defeitos_tela": "linhas, manchas, pixels, backlight fraco, trinca... como dito, ou vazio",
+ "outros_defeitos": "sem controle, sem pé, som ruim, só liga às vezes... ou vazio",
+ "aceitavel": true/false (true se a imagem é usável: no máximo poucas linhas finas ou alguma mancha; false se tela
+               quebrada/trincada no meio, metade escura, sem imagem, só funciona às vezes),
+ "preco_real": número ou null (preço DESTE item segundo a descrição, se diferente do anúncio),
+ "resumo": "1 frase com o que importa citando o vendedor" """
+
 PERFIS = {
+    "monitor": {
+        "url": "https://www.olx.com.br/informatica/monitores?opst=2&sp=1&pe={teto}",
+        "teto": 1500,
+        "o_que": "monitor de computador inteiro (pode ter poucas linhas ou manchas na tela)",
+        "lixo": r"^\s*(suporte|braço|cabo|fonte|placa|carca[çc]a|tela para|display para|kit\b|lote\b)",
+        "triagem_extra": "Descarte notebooks, CPUs, impressoras, lotes de vários monitores e placas avulsas.",
+        "json": TELA_JSON,
+        "grupo": lambda v: v.get("polegadas"),
+    },
+    "tv": {
+        "url": "https://www.olx.com.br/audio-tv-video-e-fotografia/tvs?opst=2&sp=1&pe={teto}",
+        "teto": 1500,
+        "o_que": "televisão inteira (pode ter poucas linhas ou manchas na tela)",
+        "lixo": r"^\s*(suporte|controle|cabo|fonte|placa|barra de led|kit\b|lote\b|conversor|antena|receptor|"
+                r"tv box|chromecast|fire ?stick|rack|painel)",
+        "triagem_extra": "Descarte TV box, conversor, antena, rack, placas e barras de LED avulsas, projetor.",
+        "json": TELA_JSON,
+        "grupo": lambda v: v.get("polegadas"),
+    },
     "ps3": {
         "url": "https://www.olx.com.br/games/consoles-de-video-game?q=ps3&opst=2&sp=1&pe={teto}",
         "teto": 1000,
@@ -141,6 +172,7 @@ def _julgar(P, item):
             v = o.ia(p, max_tokens=1500)
             if "funciona" in v:
                 v["fotos"] = det["fotos"][:8]
+                v["frete"] = det.get("frete")
                 return v
         except Exception:
             time.sleep(4)

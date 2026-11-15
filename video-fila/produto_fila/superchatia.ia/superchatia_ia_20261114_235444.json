@@ -1,0 +1,156 @@
+{
+ "conta": "superchatia.ia",
+ "produto": "superchat",
+ "marca": "SuperChat IA",
+ "titulo": "WhatsApp, Instagram e Telegram juntos no mesmo painel",
+ "legenda": "Atender clientes no WhatsApp, Instagram e Telegram ao mesmo tempo fica mais simples quando tudo chega em um só lugar. 💻\nCom o SuperChat IA, sua equipe acompanha as mensagens em um único painel com CRM e conta com atendimento IA 24h no WhatsApp. Saiba mais no link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#atendimentoaocliente #crm #whatsappbusiness #automacao",
+ "roteiro": {
+  "gancho_tela": "Três canais no mesmo painel",
+  "pergunta_cliente": "Cansado de trocar de tela para responder WhatsApp, Instagram e Telegram?",
+  "blocos": [
+   {
+    "rotulo": "A situação",
+    "fala": "Eu ficava alternando entre celulares para atender. Hoje recebo todas as mensagens juntas num único painel.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern small Brazilian office with a clean desk",
+    "real_tema": "Rotina de atendimento em múltiplos canais",
+    "destaques": [
+     "alternando entre celulares",
+     "num único painel"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261114_235531_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "No SuperChat IA, as mensagens do WhatsApp, Instagram e Telegram chegam juntas no painel de multi atendimento com CRM.",
+    "visual": "veo",
+    "prompt_en": "a professional attendant viewed from the side working at a clean reception desk in a small Brazilian business, warm cinematic light, tidy workspace, no readable screens or text",
+    "cenario_en": "",
+    "real_tema": "Centralização de canais no painel com CRM",
+    "destaques": [
+     "chegam juntas",
+     "multi atendimento com CRM"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Oi! Vi o perfil no Instagram, vocês atendem por aqui?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Sim, recebemos sua mensagem direto na nossa central de atendimento."
+     },
+     {
+      "de": "cliente",
+      "texto": "Mandei uma dúvida pelo Telegram também."
+     },
+     {
+      "de": "empresa",
+      "texto": "Já localizamos aqui no mesmo painel e registramos seu histórico no CRM."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Além de centralizar esses canais, conto com inteligência artificial vinte e quatro horas no WhatsApp para minha equipe.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern small Brazilian office with a clean desk",
+    "real_tema": "Atendimento organizado com suporte de IA",
+    "destaques": [
+     "centralizar esses canais",
+     "inteligência artificial"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261114_235531_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_superchatia.ia_20261114_235531_1.png"
+   }
+  ],
+  "legenda": "Atender clientes no WhatsApp, Instagram e Telegram ao mesmo tempo fica mais simples quando tudo chega em um só lugar. 💻\nCom o SuperChat IA, sua equipe acompanha as mensagens em um único painel com CRM e conta com atendimento IA 24h no WhatsApp. Saiba mais no link no perfil.",
+  "titulo": "WhatsApp, Instagram e Telegram juntos no mesmo painel",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "painel_centralizado",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 43,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\superchatia.ia_20261114_235444\\dono_3.mp4",
+ "duracao_s": 34.94,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-15T00:32:45",
+ "variante": "cinco_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "abertura",
+  "cartao"
+ ],
+ "veo_total": 5,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.54,
+   "fala": "Cansado de trocar de tela para responder WhatsApp, Instagram e Telegram?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.54,
+   "fim": 13.37,
+   "fala": "Eu ficava alternando entre celulares para atender. Hoje recebo todas as mensagens juntas num único painel.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 13.37,
+   "fim": 23.16,
+   "fala": "No SuperChat IA, as mensagens do WhatsApp, Instagram e Telegram chegam juntas no painel de multi atendimento com CRM.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 23.16,
+   "fim": 30.99,
+   "fala": "Além de centralizar esses canais, conto com inteligência artificial vinte e quatro horas no WhatsApp para minha equipe.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 30.99,
+   "fim": 34.94,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.12,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.5,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 3,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

@@ -31,6 +31,14 @@ ARQ_SEM = os.path.join(BASE, "logs", "veo_sem_alternativa.json")
 # com 65 contas Google logadas e o Flow funcionando (imagens do Claude Code Video saem lá), ficava parado.
 # Ele vai PRIMEIRO: não exibe telão. VEO_SEM_STI=1 tira.
 NOTEBOOKS = (("x200ma", "acer") if os.environ.get("VEO_SEM_STI") == "1" else ("sti", "x200ma", "acer"))
+# 14/11 dona ("o HP Pavilion está desocupado e com todas as contas logadas, põe ele pra trabalhar no máximo"): 47 contas
+# com Flow no HP; ele não exibe telão. VEO_SEM_HP=1 tira.
+if os.environ.get("VEO_SEM_HP") != "1":
+    NOTEBOOKS = NOTEBOOKS[:1] + ("hp",) + NOTEBOOKS[1:]
+# 14/11 dona ("tem muitos dispositivos livres"): o STI vai por ÚLTIMO no Veo — o Chrome do Veo nele trava os Shorts
+# (calor); HP/X200MA/Acer livres pegam antes. VEO_STI_PRIMEIRO=1 volta.
+if os.environ.get("VEO_STI_PRIMEIRO") != "1" and "sti" in NOTEBOOKS:
+    NOTEBOOKS = tuple(m for m in NOTEBOOKS if m != "sti") + ("sti",)
 AVISO_H = float(os.environ.get("VEO_AVISO_H", "3"))
 # castigo por tipo de falha da maquina (minutos)
 CASTIGO_MIN = {"FALHOU": 30, "nao respondeu": 20, "OCUPADO": 5}

@@ -324,7 +324,8 @@ PRONTO_MAX_H = 14  # 13/11: era 8; o que a madrugada empilha vale até o fim da 
 # o PC3 e o STI escolhiam e baixavam NA HORA do disparo (4 a 50 min com a máquina parada: em 13/11 o PC2 entregou 43
 # Shorts, o PC3 10 e o STI 3). Agora é UMA pilha pra todos: o PC1 mantém PILHA_ALVO Shorts já baixados e cada máquina
 # livre pega o mais antigo (pegar_pronto). PILHA_ALVO=1 volta ao antigo. Disco: cada fonte tem ~5-40 MB.
-PILHA_ALVO = int(os.environ.get("PILHA_ALVO", "5"))
+# 14/11 dona ("um mês de estoque"): pilha 10 pras máquinas livres nunca esperarem fonte (era 5)
+PILHA_ALVO = int(os.environ.get("PILHA_ALVO", "10"))
 PILHA_DISCO_MIN_GB = float(os.environ.get("PILHA_DISCO_MIN_GB", "2"))
 
 

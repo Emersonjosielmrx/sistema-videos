@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sorteio</title>
+<style>__CSS__
+body{background:#0b0b10;color:#fff}
+.w{max-width:1100px;margin:0 auto;padding:18px 16px 60px}
+.palco{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}@media (max-width:900px){.palco{grid-template-columns:1fr}}
+.tela{position:relative;aspect-ratio:9/16;max-height:82vh;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+canvas{width:100%;height:100%;display:block}
+.lado .card{background:#16161d;border-color:rgba(255,255,255,.08);color:#fff}.lado .mu{color:#a1a1aa}
+.lado label{color:#c4c4cc}.lado input,.lado select{background:#0e0e14;border-color:rgba(255,255,255,.12);color:#fff}
+.lista{max-height:240px;overflow:auto;font-size:13px;columns:2;column-gap:12px;margin-top:8px}.lista div{break-inside:avoid;padding:2px 0;color:#d4d4d8}
+.big{font-size:17px;min-height:52px;width:100%}
+.gan{font-size:22px;font-weight:800}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:11px;word-break:break-all;color:#a1a1aa}
+</style></head><body><div class="w" id="app"><div class="vazio">Carregando…</div></div>
+<script>
+const API = location.origin + '/webhook/insta-api';
+__BASE__
+const q = new URLSearchParams(location.search); const COD = q.get('s'); window.TOKEN = guarda.ler('ig_token') || '';
+let S = null, C = null, cv, ctx, gravador = null, pedacos = [], anim = null;
+const W = 1080, H = 1920;
+(async () => {
+  const j = await api('sorteio_publico', { codigo: COD }); if (!j.ok) return $('#app').innerHTML = `<div class="vazio">${esc(j.erro)}</div>`;
+  S = j.sorteio; C = j.conta; document.title = 'Sorteio · ' + S.titulo;
+  const dono = !!window.TOKEN && !q.has('publico');
+  const ps = S.participantes;
+  $('#app').innerHTML = `<div class="palco"><div class="tela"><canvas id="cv" width="${W}" height="${H}"></canvas></div>
+    <aside class="lado"><div class="card"><div class="mu pq">@${esc(C.username)}</div><h2 style="font-size:22px;margin:2px 0">🎁 ${esc(S.titulo)}</h2>
+      ${S.premio ? `<div style="margin-bottom:6px">Prêmio: <b>${esc(S.premio)}</b></div>` : ''}<div class="mu pq">${ps.length} participantes válidos${S.permalink ? ` · <a href="${esc(S.permalink)}" target="_blank" style="color:#f0abfc">ver post</a>` : ''}</div>
+      <div id="res" style="margin-top:12px"></div>
+      ${dono && !S.sorteado_em ? `<label>Quantos ganhadores</label><input id="qt" type="number" min="1" max="10" value="1">
+        <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="gv" checked style="width:auto;min-height:0"> Gravar o vídeo da roleta (para postar)</label>
+        <button class="btn pri big" id="ir" style="margin-top:12px">🎲 SORTEAR AGORA</button>` : ''}
+      ${S.sorteado_em ? `<button class="btn big" id="rever" style="margin-top:10px">▶️ Ver a roleta de novo${dono ? ' e gravar o vídeo' : ''}</button>` : ''}
+      <div id="baixar" style="margin-top:10px"></div></div>
+    <div class="card" style="margin-top:12px"><b>📋 Participantes</b><div class="lista">${ps.map(p => `<div>@${esc(p.u)}</div>`).join('')}</div></div>
+    <div class="card" style="margin-top:12px"><b>🔐 Transparência</b><p class="mu pq" style="margin:6px 0">Antes de sortear, o sistema fixou uma chave secreta e publicou só a "impressão digital" dela. Depois do sorteio a chave é revelada: qualquer pessoa pode conferir que o resultado já estava definido e ninguém mexeu.</p>
+      <div class="mono">Impressão digital: ${esc(S.semente_hash)}</div>${S.semente ? `<div class="mono" style="margin-top:6px">Chave revelada: ${esc(S.semente)}</div>` : ''}
+      <p class="mu pq" style="margin-top:8px">Mostre esta página aos seguidores para provar que o sorteio foi limpo:</p>
+      <button class="btn pq" style="margin-top:6px" onclick="navigator.clipboard.writeText('${location.origin}/webhook/insta-sorteio?s=${esc(COD)}&publico=1');aviso('Link copiado')">📋 Copiar link público</button></div></aside></div>`;
+  cv = $('#cv'); ctx = cv.getContext('2d');
+  if (S.sorteado_em) { mostraGanhadores(S.ganhadores); desenhaFinal(S.ganhadores); } else desenhaRoda(0, null);
+  const ir = $('#ir'); if (ir) ir.onclick = async () => {
+    ir.disabled = true; ir.textContent = '⏳ Sorteando…';
+    const r = await api('sorteio_sortear', { codigo: COD, quantos: Number($('#qt').value) || 1 });
+    if (!r.ok) { ir.disabled = false; ir.textContent = '🎲 SORTEAR AGORA'; return aviso(r.erro, true); }
+    const gv = $('#gv').checked; ir.remove(); $$('#qt, #gv').forEach(x => (x.closest('label') && x.type === 'checkbox' ? x.closest('label') : x).remove()); $$('.lado label').forEach(l => /Quantos/.test(l.textContent) && l.remove());
+    await roleta(r.ganhadores, gv); S.ganhadores = r.ganhadores; mostraGanhadores(r.ganhadores);
+    const n2 = await api('sorteio_publico', { codigo: COD }); if (n2.ok && n2.sorteio.semente) { const d = document.createElement('div'); d.className = 'mono'; d.style.marginTop = '6px'; d.textContent = 'Chave revelada: ' + n2.sorteio.semente; $$('.mono').pop().after(d); }
+  };
+  const rv = $('#rever'); if (rv) rv.onclick = async () => { rv.disabled = true; await roleta(S.ganhadores, dono); rv.disabled = false; };
+})();
+function mostraGanhadores(g) { $('#res').innerHTML = `<div class="mu pq">🏆 ${g.length > 1 ? 'Ganhadores' : 'Ganhador(a)'}</div>` + g.map((x, i) => `<div class="gan">${g.length > 1 ? (i + 1) + 'º ' : ''}@${esc(x.u)}</div>`).join(''); }
+const COR = () => C.cor || '#C13584';
+function fundo() {
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#1a0b2e'); g.addColorStop(.55, COR()); g.addColorStop(1, '#f59e0b');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.textAlign = 'center';
+  ctx.font = '800 64px system-ui,Segoe UI,sans-serif'; ctx.fillText('SORTEIO', W / 2, 190);
+  ctx.font = '600 44px system-ui,Segoe UI,sans-serif'; quebra(S.titulo, W / 2, 260, 900, 54);
+  ctx.font = '500 36px system-ui,Segoe UI,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.8)'; ctx.fillText('@' + C.username + ' · ' + S.participantes.length + ' participantes', W / 2, 400);
+}
+function quebra(t, x, y, larg, alt) { const ps = String(t).split(' '); let l = '', yy = y; for (const p of ps) { const n = l ? l + ' ' + p : p; if (ctx.measureText(n).width > larg && l) { ctx.fillText(l, x, yy); l = p; yy += alt; } else l = n; } ctx.fillText(l, x, yy); }
+const CORES = ['#f43f5e', '#8b5cf6', '#06b6d4', '#22c55e', '#f59e0b', '#ec4899', '#3b82f6', '#14b8a6'];
+let RODA = null;
+function nomesRoda() { if (RODA) return RODA; const ps = S.participantes.map(p => p.u); const n = Math.min(ps.length, 24); const out = []; for (let i = 0; i < n; i++) out.push(ps[Math.floor(i * ps.length / n)]); return out; }
+function desenhaRoda(ang, destaque) {
+  fundo(); const cx = W / 2, cy = 1030, R = 430, nm = nomesRoda(), n = nm.length, fat = Math.PI * 2 / n;
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(ang);
+  for (let i = 0; i < n; i++) {
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, i * fat, (i + 1) * fat); ctx.closePath(); ctx.fillStyle = CORES[i % CORES.length]; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.save(); ctx.rotate(i * fat + fat / 2); ctx.textAlign = 'right'; ctx.fillStyle = '#fff'; ctx.font = `700 ${n > 16 ? 26 : 32}px system-ui,sans-serif`;
+    ctx.fillText(('@' + nm[i]).slice(0, 18), R - 24, 10); ctx.restore();
+  }
+  ctx.restore();
+  ctx.beginPath(); ctx.arc(cx, cy, 70, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.font = '64px serif'; ctx.textAlign = 'center'; ctx.fillText('🎁', cx, cy + 22);
+  ctx.beginPath(); ctx.moveTo(cx - 40, cy - R - 60); ctx.lineTo(cx + 40, cy - R - 60); ctx.lineTo(cx, cy - R + 20); ctx.closePath(); ctx.fillStyle = '#fff'; ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+  if (destaque) { ctx.font = '800 76px system-ui,sans-serif'; ctx.fillText('@' + destaque, W / 2, 1640); }
+  else { ctx.font = '600 40px system-ui,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.fillText('Boa sorte! 🍀', W / 2, 1640); }
+}
+function desenhaFinal(g, t = 1) {
+  fundo(); ctx.textAlign = 'center';
+  for (let i = 0; i < 60; i++) { const s = Math.sin(i * 99.7) * 0.5 + 0.5, x = (i * 173) % W, y = ((i * 311 + t * 900) % (H - 500)) + 450; ctx.fillStyle = CORES[i % CORES.length]; ctx.fillRect(x, y, 14 + s * 10, 26); }
+  ctx.fillStyle = '#fff'; ctx.font = '160px serif'; ctx.fillText('🏆', W / 2, 760);
+  ctx.font = '700 52px system-ui,sans-serif'; ctx.fillText(g.length > 1 ? 'GANHADORES' : 'GANHADOR(A)', W / 2, 880);
+  g.forEach((x, i) => { ctx.font = `800 ${g.length > 3 ? 64 : 92}px system-ui,sans-serif`; ctx.fillText((g.length > 1 ? (i + 1) + 'º ' : '') + '@' + x.u, W / 2, 1010 + i * (g.length > 3 ? 90 : 120)); });
+  ctx.font = '500 38px system-ui,sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.9)';
+  if (S.premio) quebra('Prêmio: ' + S.premio, W / 2, 1520, 900, 48);
+  ctx.font = '500 32px system-ui,sans-serif'; ctx.fillText('Sorteio verificável · ' + new Date(S.sorteado_em || Date.now()).toLocaleString('pt-BR'), W / 2, 1760);
+}
+function roleta(ganhadores, gravar) {
+  return new Promise(res => {
+    // posição final: o 1º ganhador aparece no ponteiro (topo). Se ele não estiver entre os nomes da roda, troca o nome mais próximo.
+    RODA = null; const nm2 = nomesRoda().slice(); let alvo = nm2.indexOf(ganhadores[0].u); if (alvo < 0) { alvo = Math.floor(nm2.length / 2); nm2[alvo] = ganhadores[0].u; }
+    const nm = nm2, n = nm.length, fat = Math.PI * 2 / n; RODA = nm;
+    const final = -Math.PI / 2 - (alvo * fat + fat / 2) + Math.PI * 2 * 8;
+    const dur = 7000, fim = 4500; let t0 = null;
+    if (gravar && cv.captureStream && window.MediaRecorder) {
+      const tipo = ['video/mp4;codecs=avc1', 'video/webm;codecs=vp9', 'video/webm'].find(x => MediaRecorder.isTypeSupported(x));
+      pedacos = []; gravador = new MediaRecorder(cv.captureStream(30), { mimeType: tipo, videoBitsPerSecond: 8e6 });
+      gravador.ondataavailable = e => e.data.size && pedacos.push(e.data);
+      gravador.onstop = () => { const b = new Blob(pedacos, { type: tipo }), ext = tipo.includes('mp4') ? 'mp4' : 'webm', url = URL.createObjectURL(b);
+        $('#baixar').innerHTML = `<a class="btn pri big" href="${url}" download="sorteio-${COD}.${ext}">⬇️ Baixar o vídeo do sorteio (${(b.size / 1e6).toFixed(1)} MB)</a>
+          <p class="mu pq" style="margin-top:6px">Vertical 9:16, pronto para Reels e Stories.${ext === 'webm' ? ' O Instagram aceita WEBM pelo celular; se precisar, converta para MP4.' : ''}</p>`; };
+      gravador.start(200);
+    }
+    const passo = ts => {
+      if (!t0) t0 = ts; const t = ts - t0;
+      if (t < dur) { const k = t / dur, e = 1 - Math.pow(1 - k, 4); const a = final * e; const idx = ((Math.round(((-Math.PI / 2 - a) / fat) - .5) % n) + n) % n; desenhaRoda(a, k > .92 ? nm[idx] : null); requestAnimationFrame(passo); }
+      else if (t < dur + fim) { desenhaFinal(ganhadores, (t - dur) / 1000); requestAnimationFrame(passo); }
+      else { if (gravador && gravador.state === 'recording') gravador.stop(); res(); }
+    };
+    requestAnimationFrame(passo);
+  });
+}
+</script></body></html>

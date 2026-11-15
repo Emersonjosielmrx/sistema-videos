@@ -1476,3 +1476,35 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_reused_recap__sonnet_0921.md`
 - (todos os itens desta pesquisa foram reprovados)
 - 14/11 09h45 (chat LONGOS): mesma regra das 3 avaliações de 14/11 01h45/04h, com 1 dado novo e importante: "a regra é separada de direitos autorais — ter PERMISSÃO do criador original não protege" (nossos parceiros autorizaram, mas isso não cobre o "reused/inauthentic"). Também: o risco vem da SIMILARIDADE ENTRE CANAIS (mesmo template/voz/estrutura de título em dezenas de canais) e o "Sobre" é lido pelo revisor. DEIXADO: decisão de estratégia já levada à dona (variar enredos/estrutura por canal + "Sobre" dizendo recap com narração própria); não implanto sozinho.
+
+## [x] AVALIADO 14/11 — 0 aplicados, 1 reprovado, 0 deixados — 2026-11-14 14:37 — Sons em alta no YouTube Shorts (`area_yt_shorts_audio_trend`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_yt_shorts_audio_trend__sonnet_1421.md`
+- [INÉDITO] github.com/MegaStretch23/tiktok-trending-core — ★0, push 2026-11-13, MIT — Minimal Node CLI/library for TikTok Creative Center trending hashtags, sounds and creators. Open-source core of the tiktok-trending-scraper 
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 16:07 — SEO de busca para recaps (nome da obra + episódio) (`area_busca_yt_longos`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_busca_yt_longos__sonnet_1601.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 20:13 — Títulos de recap por idioma (yt-dlp, só metadados) (`area_titulos_por_idioma`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulos_por_idioma__sonnet_2002.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 — 0 aplicados, 1 reprovado, 0 deixados — 2026-11-15 01:35 — Séries e playlists em Shorts (`area_shorts_seriados`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_shorts_seriados__sonnet_0121.md`
+- [INÉDITO] github.com/LooneyN/chronolist — ★0, push 2026-11-13, MIT — Builds chronological YouTube playlists in upload order for any channel: one per year, plus custom keyword lists (e.g. a series).
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 01:54 — Distribuição e algoritmos (`area_distribuicao`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_distribuicao__sonnet_0142.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-15 02:54 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_dist_impressoes_diagnostico__sonnet_0241.md`
+- [INÉDITO] github.com/andremrod/youtube-insights — ★0, push 2026-11-10, MIT — Descobre o que deu certo nos seus Shorts e vídeos do YouTube: título, tema e duração × views, retenção e inscritos, com comparação com o Ins
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 03:03 — Recuperar recursos avançados do YouTube (caminho oficial) (`area_yt_recursos_avancados_recuperar`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_yt_recursos_avancados_recuperar__sonnet_0256.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 03:38 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_yt_conformidade_canal__sonnet_0327.md`
+- (todos os itens desta pesquisa foram reprovados)

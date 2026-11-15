@@ -1,0 +1,383 @@
+{
+ "video": "landingpageia_ia_20261114_121122.mp4",
+ "conta": "landingpageia.ia",
+ "marca": "Landing Page e Comunicação",
+ "titulo": "Site institucional ou landing page pronta?",
+ "formato": "dono_mesma_foto",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "fatos_desconhecidos",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.75,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.38
+   ],
+   [
+    1,
+    "dono",
+    11.84
+   ],
+   [
+    2,
+    "conversa",
+    7.32
+   ],
+   [
+    3,
+    "dono",
+    10.66
+   ],
+   [
+    4,
+    "cartao",
+    4.77
+   ]
+  ],
+  "graves": 9,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A legenda 'pronta e o' apresenta contraste praticamente nulo (letras em tom marrom-escuro opaco sobre o fundo escuro, sem tarja preta e sem preenchimento em branco/amarelo), tornando o texto ilegível na tela do celular.",
+   "como_corrigir": "Aplicar o mesmo tratamento visual de legenda dos demais quadros (texto em branco com destaque amarelo e tarja/sombra preta de alto contraste)."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "O selo 'Simulação' no cabeçalho do WhatsApp está sobreposto ao título 'Landing Page e Comunicação', cobrindo e cortando as letras finais ('ão').",
+   "como_corrigir": "Reduzir o tamanho da fonte do nome no cabeçalho ou reposicionar o selo 'Simulação' mais à direita para evitar a colisão e sobreposição de textos."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "O selo 'Simulação' permanece sobreposto ao final do nome 'Landing Page e Comunicação' no cabeçalho do WhatsApp, cortando a leitura da marca.",
+   "como_corrigir": "Ajustar o espaçamento horizontal do cabeçalho da conversa simulada para que o selo não avance sobre o texto do nome."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Persistência do selo 'Simulação' cobrindo e cortando o final do texto 'Landing Page e Comunicação' no topo do cartão de WhatsApp.",
+   "como_corrigir": "Garantir margem suficiente entre o nome do contato e o selo 'Simulação' em todo o bloco da cena 2."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "No enquadramento aproximado (punch-in zoom), a caixa da legenda 'contato' sobrepõe o queixo e a barba do apresentador.",
+   "como_corrigir": "Descer ligeiramente a posição Y da legenda ou reenquadrar a câmera no corte fechado para manter uma margem de respiro abaixo do queixo do apresentador."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Transição seca e repetição de molde entre a Cena 0 e a Cena 1. O vídeo corta abruptamente mantendo o apresentador exatamente na mesma posição, escala e enquadramento de câmera, gerando um jump cut seco onde apenas os cards gráficos mudam repentinamente.",
+   "como_corrigir": "Aplicar um punch-in de câmera (zoom de corte de 10% a 15%) na virada para a Cena 1 para alternar de plano médio para plano fechado, e animar a entrada dos elementos de UI ('SITE SEM VENDAS?' e tag '1 O problema') com efeito de slide down e amortecimento elástico (spring)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Cena parada e ritmo arrastado durante quase 6 segundos contínuos (q04 a q06). O apresentador fala para uma câmera completamente imóvel, sem nenhuma animação secundária, sem movimento de câmera e sem elementos visuais que ilustrem o problema falado.",
+   "como_corrigir": "Implementar um movimento lento de aproximação de câmera (slow push-in contínuo de 100% para 107%) e inserir elementos visuais de apoio (como ícones ou tipografia cinética) que surjam durante termos-chave para sustentar a retenção visual."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Defeito de renderização/animação na legenda karaokê: o texto 'pronta e o' surge apagado em tom marrom escuro, sem contraste contra o fundo preto, tornando-se ilegível antes de receber o destaque.",
+   "como_corrigir": "Ajustar o template de legenda animada para que todas as palavras não destacadas mantenham preenchimento branco com traçado/sombra escura consistente sobre o fundo, animando apenas a cor de preenchimento para amarelo na sincronia da fala."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Falta de variedade e corte seco após o bloco gráfico. A Cena 3 volta abruptamente da simulação gráfica para exatamente o mesmo ângulo, enquadramento e posição do apresentador visto nas cenas 0 e 1, tornando a composição monótona.",
+   "como_corrigir": "Alternar o enquadramento do apresentador para um corte em close-up dinâmico e criar uma transição de saída do card da Cena 2 (por exemplo, um slide lateral rápido ou zoom-in de transição) para conectar fluidamente com o retorno do apresentador."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cartão final estático por mais de 3 segundos (q13 a q15). Exceto pelo brilho no botão, todos os textos, marca e call-to-action ficam parados sobre um fundo escuro vazio, reduzindo a energia no momento da conversão.",
+   "como_corrigir": "Adicionar animação sequencial de entrada escalonada (stagger) para os blocos de texto e botão, além de manter um pulso sutil de escala (scale pulse) no botão 'Chame no direct' e um gradiente sutil com leve movimento no fundo."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Legenda 'pronta e o' com texto escuro sobre fundo escuro, quase invisível.",
+   "como_corrigir": "Aplicar preenchimento branco com contorno preto e destaque padrão da marca."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Selo 'Simulação' sobrepõe o nome no topo do chat, cortando para 'Landing Page e Comunicaçã'.",
+   "como_corrigir": "Reduzir fonte ou reposicionar o selo para exibir 'Comunicação' por completo."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho não prende nos primeiros 2 segundos: a cena inicia estática com o apresentador no mesmo enquadramento fixo e uma caixinha de pergunta genérica, sem quebra de padrão, sem dinamismo visual e sem ilustrar a dor de tráfego sem conversão, arriscando perda imediata de retenção.",
+   "como_corrigir": "Aplicar um punch-in (zoom digital de 10-15%) nos primeiros 1.5s com transição sonora sutil e inserir elemento visual dinâmico que ilustre a dor (ex.: mockup rápido de página com tráfego alto e zero mensagens) para criar magnetismo visual imediato."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A cena da solução parece slide/meme amador em vez de agência séria: o cabeçalho está com texto truncado e atropelado pelo selo ('Landing Page e Comunicaçã'), e a cena mostra apenas uma conversa genérica de WhatsApp em vez de demonstrar a Landing Page e o vídeo demo citados na narração.",
+   "como_corrigir": "Corrigir o layout do card para não cortar a palavra 'Comunicação' e substituir o chat estático por um mockup real (desktop ou smartphone) exibindo a Landing Page com o vídeo de demonstração em execução, provando a qualidade do serviço ofertado."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Falha severa de contraste na legenda karaokê: as palavras 'pronta e o' aparecem em marrom muito escuro sobre o fundo preto/escuro degradê, ficando praticamente invisíveis antes de serem destacadas.",
+   "como_corrigir": "Ajustar a cor do estado inativo da legenda karaokê para branco ou cinza claro com opacidade média (60-70%) com contorno nítido, garantindo leitura instantânea mesmo antes do destaque."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Monotonia visual e falta de ritmo de agência: as cenas com o apresentador (cenas 0, 1 e 3) utilizam o mesmíssimo plano médio e distância de câmera, gerando sensação de vídeo caseiro contínuo e sem corte comercial refinado.",
+   "como_corrigir": "Alternar a escala de planos entre as cenas: usar plano médio na introdução, corte fechado/close-up na cena 1 para dar peso dramático ao problema ('Eu tinha um site institucional...'), e plano médio com micro-movimento ou B-roll na cena 3."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "O fechamento parece um slide cru de PowerPoint: fundo preto liso sem textura, sem profundidade e sem elementos visuais que reforcem o ecossistema da solução antes do CTA.",
+   "como_corrigir": "Adicionar uma vinheta visual ou mockup em perspectiva da landing page pronta ao lado ou atrás da chamada, com iluminação de fundo suave nas cores da marca para transmitir autoridade e acabamento premium."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261114_030252.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 4.75,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 5.0,
+    "roteiro_marca": 5.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261114_044257.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 6.67,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261114_064315.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 6.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.5,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261114_085316.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_uma_cena",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "mentoriasia_ia_20261114_110117.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.25,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "landingpageia_ia_20261114_121122.mp4",
+   "conta": "landingpageia.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "gestaodegrupos_ia_20261114_132226.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "cinco_veo",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "cinco_veo+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "cinco_veo+editor",
+   "nota": 7.12,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 6.5,
+    "roteiro_marca": 7.0,
+    "diretor": 7.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   4,
+   3
+  ],
+  "dono_abre_fecha": [
+   5,
+   2
+  ],
+  "dono_mesma_foto": [
+   5,
+   0
+  ],
+  "dono_e_cena_veo": [
+   2,
+   1
+  ],
+  "dono_tres": [
+   1,
+   2
+  ],
+  "dono_abre_fecha_veo_meio": [
+   1,
+   1
+  ],
+  "dono_tres_veo_final": [
+   2,
+   1
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   16,
+   8
+  ]
+ },
+ "vigiando": []
+}

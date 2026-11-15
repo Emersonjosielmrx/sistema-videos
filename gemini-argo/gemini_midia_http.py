@@ -59,6 +59,7 @@ log.propagate = False  # não mistura com o argon.log
 
 MAX_CONTAS_POR_PEDIDO = 2
 ESPERA_FALHA = timedelta(minutes=30)
+ESPERA_REDE = timedelta(minutes=3)
 ESPERA_COTA = timedelta(hours=3)
 # 13/11: os que deram certo ficaram prontos em 30-100 s; um ficou 7 min sem entregar e segurou o Flow (fallback).
 ESPERA_VIDEO_S = int(os.environ.get("GEMINI_VIDEO_PRAZO_S", "240"))
@@ -92,6 +93,10 @@ class SemCotaMidia(Exception):
 
 class CookieMorto(Exception):
     pass
+
+
+class ErroDoPedido(Exception):
+    """O pedido em si não serve (referência inexistente/ilegível): trocar de conta não adianta."""
 
 
 def ligado(tipo):
@@ -141,8 +146,8 @@ def candidatas(tipo):
     saida = []
     for c in argon:
         ap = c["apelido"]
-        if c.get("bloqueada"):
-            continue
+        # 14/11: o "bloqueada" do Argon NÃO vale aqui (é 3 erros seguidos de TEXTO; às 11h35-11h58 uma oscilação de
+        # rede bloqueou 10 de 12 contas vivas e a mídia parou junto, tudo caindo no Flow). A mídia tem castigo próprio.
         if c.get("cookies_mortos_ate") and iso < c["cookies_mortos_ate"]:
             continue
         arq = gh._arq_cookies(ap)
@@ -177,7 +182,7 @@ def _registrar(ap, tipo, ok, motivo="", espera=None, segundos=None):
                 m["seg_total"] = round(m.get("seg_total", 0) + segundos, 1)
         else:
             m["falhas_hoje"] += 1
-            m["ultimo_erro"] = motivo[:150]
+            m["ultimo_erro"] = motivo[:300]
             if espera:
                 m["fora_ate"] = (datetime.now() + espera).isoformat(timespec="minutes")
         _gravar(e)
@@ -244,8 +249,132 @@ def _desescapar(t):
     return re.sub(r"\\+u0026", "&", re.sub(r"\\+u003d", "=", t))
 
 
-def _pedido(prompt, ferramenta, modelo_hash, formato=None, temporario=False):
-    msg = [prompt, 0, None, None, None, None, 0]
+# 14/11 (medido): foto de referência SEM navegador. Sobe o arquivo no content-push do Google (o mesmo do app; vale 1 dia)
+# e cita o caminho devolvido em msg[3] = [[[caminho, 1, None, mime], nome, None x6, [0]], ...]. Imagem: a mesma
+# tartaruga foi posta num aquário (14 s). Vídeo: o 1º quadro É a foto e ele anima a partir dela (animar foto, como o Veo).
+UPLOAD_URL = "https://content-push.googleapis.com/upload"
+MAX_REFS = 10
+REF_LADO_MAX = 2048  # foto maior é reduzida antes de subir (upload rápido; o modelo não usa mais que isso)
+
+
+def _preparar_ref(arq):
+    """Converte para jpg e reduz se precisar (webp/png/heic grandes). Devolve (caminho, temporario?)."""
+    arq = Path(arq)
+    if not arq.exists():
+        raise ErroDoPedido(f"referência não existe: {arq}")
+    if arq.suffix.lower() in (".jpg", ".jpeg") and arq.stat().st_size < 3_000_000:
+        return arq, False
+    tmp = Path(os.environ.get("TEMP", str(BASE))) / f"gemref_{os.getpid()}_{threading.get_ident()}_{arq.stem[:40]}.jpg"
+    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(arq), "-vf",
+                    f"scale='min({REF_LADO_MAX},iw)':'min({REF_LADO_MAX},ih)':force_original_aspect_ratio=decrease",
+                    "-q:v", "3", str(tmp)], capture_output=True, creationflags=0x08000000, timeout=120)
+    if not tmp.exists() or tmp.stat().st_size < 1000:
+        return arq, False  # ffmpeg falhou: sobe o original
+    return tmp, True
+
+
+# 14/11: cache de uploads POR CONTA (o caminho vale 1 dia — "ttl_1d"). As capas e a foto na hora mandam sempre as
+# mesmas fotos (corpo_ref, poses, fotos-base do dono, Maria): a conta reaproveita o que ELA subiu nas últimas 20 h.
+# Não reaproveita entre contas de propósito (o caminho funciona em outra conta — testado — mas não ligamos contas).
+UPLOADS = BASE / "uploads_midia.json"
+UPLOAD_VALIDADE_S = 20 * 3600
+_trava_uploads = threading.Lock()
+
+
+def _chave_arquivo(arq):
+    import hashlib
+    st = Path(arq).stat()
+    return hashlib.md5(f"{Path(arq).resolve()}|{st.st_size}|{int(st.st_mtime)}".encode()).hexdigest()[:20]
+
+
+def _uploads_ler():
+    try:
+        return json.loads(UPLOADS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _uploads_gravar(d):
+    agora = time.time()
+    d = {c: {k: v for k, v in m.items() if agora - v.get("t", 0) < UPLOAD_VALIDADE_S} for c, m in d.items()}
+    tmp = UPLOADS.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+    tmp.write_text(json.dumps({c: m for c, m in d.items() if m}, ensure_ascii=False), encoding="utf-8")
+    for _ in range(20):
+        try:
+            os.replace(tmp, UPLOADS)
+            return
+        except PermissionError:
+            time.sleep(0.1)
+    tmp.unlink(missing_ok=True)
+
+
+def _subir_uma(s, ref):
+    """Sobe 1 referência. Devolve (caminho, mime)."""
+    arq, temp = _preparar_ref(ref)
+    try:
+        mime = "image/jpeg" if arq.suffix.lower() in (".jpg", ".jpeg") else \
+            (__import__("mimetypes").guess_type(str(arq))[0] or "image/jpeg")
+        with open(arq, "rb") as f:
+            r = s.post(UPLOAD_URL, headers={"Push-ID": "feeds/mcudyrk2a4khkz", "Origin": "https://gemini.google.com",
+                                            "Referer": "https://gemini.google.com/"},
+                       files={"file": (arq.name, f, mime)}, timeout=180)
+        caminho = r.text.strip()
+        if r.status_code != 200 or not caminho.startswith("/"):
+            raise RuntimeError(f"upload da referência HTTP {r.status_code}: {caminho[:100]}")
+        return caminho, mime
+    finally:
+        if temp:
+            arq.unlink(missing_ok=True)
+
+
+def _subir_refs(s, refs, conta=""):
+    """Sobe as fotos de referência (em paralelo, reaproveitando o que esta conta subiu há < 20 h) e devolve o campo
+    msg[3] do pedido NA MESMA ORDEM das refs (o prompt cita "the FIRST/SECOND... reference"). None sem refs."""
+    if not refs:
+        return None
+    # 14/11: 1 referência com caminho errado derrubava o Gemini INTEIRO (o pedido ia pro Flow, minutos) e o motivo
+    # nem chegava ao midia.log. Agora a que falta é pulada com aviso e o pedido segue com as outras.
+    pedidas = [Path(r) for r in refs]
+    refs = [r for r in pedidas if r.is_file() and r.stat().st_size > 0]
+    for r in pedidas:
+        if r not in refs:
+            log.warning("%s: referência não existe ou vazia, pulada: %s", conta, r)
+    if not refs:
+        raise ErroDoPedido(f"nenhuma das {len(pedidas)} referências existe")
+    if len(refs) > MAX_REFS:
+        log.warning("%d referências: só as %d primeiras vão (limite do app)", len(refs), MAX_REFS)
+        refs = refs[:MAX_REFS]
+    agora = time.time()
+    with _trava_uploads:
+        cache = _uploads_ler().get(conta, {}) if conta else {}
+    chaves = [_chave_arquivo(r) for r in refs]
+    res = [None] * len(refs)
+    faltam = []
+    for i, k in enumerate(chaves):
+        c = cache.get(k)
+        if c and agora - c.get("t", 0) < UPLOAD_VALIDADE_S:
+            res[i] = (c["caminho"], c["mime"])
+        else:
+            faltam.append(i)
+    if faltam:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=min(4, len(faltam))) as ex:
+            for i, r in zip(faltam, ex.map(lambda i: _subir_uma(s, refs[i]), faltam)):
+                res[i] = r
+        if conta:
+            with _trava_uploads:
+                d = _uploads_ler()
+                m = d.setdefault(conta, {})
+                for i in faltam:
+                    m[chaves[i]] = {"caminho": res[i][0], "mime": res[i][1], "t": agora}
+                _uploads_gravar(d)
+    if len(refs) - len(faltam):
+        log.info("%s: %d de %d referências reaproveitadas do upload anterior", conta, len(refs) - len(faltam), len(refs))
+    return [[[c, 1, None, m], r.name, None, None, None, None, None, None, [0]] for (c, m), r in zip(res, refs)]
+
+
+def _pedido(prompt, ferramenta, modelo_hash, formato=None, temporario=False, anexos=None):
+    msg = [prompt, 0, None, anexos, None, None, 0]
     if formato in FORMATOS:
         msg += [None, None, [None] * 6 + [[None, [None, formato]]]]
     inner = [msg, ["pt"], None] + [None] * 47
@@ -291,9 +420,10 @@ def formato_mais_proximo(aspect):
 
 
 # ─────────────────────── imagem ───────────────────────
-def _uma_imagem(conta, prompt, formato, saida):
+def _uma_imagem(conta, prompt, formato, saida, refs=None):
     s, at, bl, fsid = _sessao(conta)
-    freq, jspb = _pedido(prompt, FERRAMENTA_IMAGEM, MODELO_IMAGEM, formato, temporario=True)
+    anexos = _subir_refs(s, refs, conta)
+    freq, jspb = _pedido(prompt, FERRAMENTA_IMAGEM, MODELO_IMAGEM, formato, temporario=True, anexos=anexos)
     corpo = _stream(conta, s, at, bl, fsid, freq, jspb)
     m = _RE_IMG.search(corpo)
     if not m:
@@ -302,17 +432,25 @@ def _uma_imagem(conta, prompt, formato, saida):
     if r.status_code != 200 or not r.headers.get("content-type", "").startswith("image") or len(r.content) < 10_000:
         raise RuntimeError(f"download HTTP {r.status_code} {r.headers.get('content-type')}")
     Path(saida).parent.mkdir(parents=True, exist_ok=True)
-    if str(saida).lower().endswith(".png"):
-        tmp = Path(str(saida) + ".jpg")
-        tmp.write_bytes(r.content)
-        subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(tmp), str(saida)], capture_output=True,
-                       creationflags=0x08000000, timeout=60)
-        tmp.unlink(missing_ok=True)
-        if not Path(saida).exists():
-            Path(saida).write_bytes(r.content)
-    else:
-        Path(saida).write_bytes(r.content)
+    _gravar_imagem(r.content, saida)
     return len(r.content)
+
+
+def _gravar_imagem(dados, saida):
+    """Grava no formato da extensão pedida. 14/11: a conversão p/ PNG pelo ffmpeg (subprocesso, timeout 60 s) caiu 2x
+    com o PC carregado e a imagem já gerada era jogada fora; agora é PIL em memória e, se falhar, grava o JPG mesmo
+    (PIL/Flow/os projetos abrem pelo conteúdo)."""
+    saida = Path(saida)
+    if saida.suffix.lower() in (".png", ".webp"):
+        try:
+            import io
+            from PIL import Image
+            with Image.open(io.BytesIO(dados)) as im:
+                im.convert("RGB").save(saida)
+            return
+        except Exception as e:  # noqa: BLE001
+            log.warning("conversão p/ %s falhou (%s): grava o JPG", saida.suffix, str(e)[:80])
+    saida.write_bytes(dados)
 
 
 # ─────────────────────── vídeo ───────────────────────
@@ -353,7 +491,7 @@ def _cortar(origem, destino, duracao):
     return Path(destino).exists() and Path(destino).stat().st_size > 100_000
 
 
-def _um_video(conta, prompt, formato, saida, duracao):
+def _um_video(conta, prompt, formato, saida, duracao, refs=None):
     tem, volta = cota_video(conta)
     if not tem:
         e = SemCotaMidia("cota de vídeo esgotada" + (f", volta {datetime.fromtimestamp(volta):%d/%m %H:%M}"
@@ -366,7 +504,8 @@ def _um_video(conta, prompt, formato, saida, duracao):
     texto = prompt
     if formato == "9:16" and not re.search(r"\b(vertical|9:16|portrait|retrato)\b", prompt, re.I):
         texto = f"{prompt}. Vertical 9:16 portrait video."
-    freq, jspb = _pedido(texto, FERRAMENTA_VIDEO, MODELO_VIDEO, formato)
+    anexos = _subir_refs(s, refs, conta)  # foto inicial: o vídeo começa nela (animar foto)
+    freq, jspb = _pedido(texto, FERRAMENTA_VIDEO, MODELO_VIDEO, formato, anexos=anexos)
     corpo = _stream(conta, s, at, bl, fsid, freq, jspb)
     m = _RE_CID.search(corpo)
     if not ("video_generation" in corpo and m):
@@ -453,25 +592,43 @@ def _gerar(tipo, prompt, saida, formato, conta, executar):
         except CookieMorto as e:
             _registrar(ap, tipo, False, f"cookie: {e}", ESPERA_FALHA)
             ultimo = f"{ap}: cookie morto (zelador renova)"
+        except ErroDoPedido as e:
+            # referência que não existe/não abre: culpa do PEDIDO, outra conta falharia igual — sem castigo, para aqui
+            _registrar(ap, tipo, False, f"pedido: {e}")
+            log.warning("%s: erro do pedido (não castiga a conta): %s", tipo, e)
+            return False, f"erro do pedido: {e}"
         except Exception as e:  # noqa: BLE001
-            _registrar(ap, tipo, False, str(e), ESPERA_FALHA)
-            ultimo = f"{ap}: {str(e)[:120]}"
+            # rede caindo (11h35-11h58 de 14/11: "Max retries exceeded" em todas as contas) não é defeito da conta:
+            # castigo curto, senão a fila inteira some por 30 min
+            rede = _e_rede(e)
+            _registrar(ap, tipo, False, str(e), ESPERA_REDE if rede else ESPERA_FALHA)
+            ultimo = f"{ap}: {type(e).__name__}: {str(e)[:300]}"
         finally:
             trava.release()
         log.warning("%s falhou %s: %s", tipo, ap, ultimo)
     return False, ultimo
 
 
-def gerar_imagem(prompt, saida, formato="16:9", conta=None):
-    """1 imagem por HTTP (~12-20 s). (ok, detalhe). Nunca levanta."""
+def _e_rede(e):
+    import requests
+    return isinstance(e, (requests.ConnectionError, requests.Timeout, ConnectionError, TimeoutError)) or bool(
+        re.search(r"Max retries|Connection(Reset|Error|Aborted)|timed? ?out|RemoteDisconnected|"
+                  r"NameResolution|SSLError|resposta vazia", str(e), re.I))
+
+
+def gerar_imagem(prompt, saida, formato="16:9", conta=None, refs=None):
+    """1 imagem por HTTP (~12-20 s). refs = fotos de referência (até 10). (ok, detalhe). Nunca levanta."""
     formato = formato_mais_proximo(formato)
-    return _gerar("imagem", prompt, saida, formato, conta, lambda ap: (_uma_imagem(ap, prompt, formato, saida), 0))
+    return _gerar("imagem", prompt, saida, formato, conta,
+                  lambda ap: (_uma_imagem(ap, prompt, formato, saida, refs), 0))
 
 
-def gerar_video(prompt, saida, formato="9:16", conta=None, duracao=8):
-    """1 vídeo por HTTP (~1 min), cortado em `duracao` s (None = 10 s inteiro). (ok, detalhe). Nunca levanta."""
+def gerar_video(prompt, saida, formato="9:16", conta=None, duracao=8, refs=None):
+    """1 vídeo por HTTP (~1 min), cortado em `duracao` s (None = 10 s inteiro). refs = foto inicial (o vídeo anima a
+    partir dela). (ok, detalhe). Nunca levanta."""
     formato = "9:16" if formato_mais_proximo(formato) in ("9:16", "3:4") else "16:9"
-    return _gerar("video", prompt, saida, formato, conta, lambda ap: _um_video(ap, prompt, formato, saida, duracao))
+    return _gerar("video", prompt, saida, formato, conta,
+                  lambda ap: _um_video(ap, prompt, formato, saida, duracao, refs))
 
 
 def tem_conta_video():
@@ -504,6 +661,7 @@ def main():
     ap.add_argument("--formato", default="16:9")
     ap.add_argument("--conta")
     ap.add_argument("--duracao", type=float, default=8)
+    ap.add_argument("--ref", nargs="*", default=[], help="foto(s) de referência / foto inicial do vídeo")
     a = ap.parse_args()
     if a.acao == "estado":
         print(estado())
@@ -513,9 +671,9 @@ def main():
         print("SIM" if tem else "NAO")
         sys.exit(0 if tem else 1)
     if a.acao == "video":
-        ok, det = gerar_video(a.prompt, a.saida, a.formato, a.conta, a.duracao or None)
+        ok, det = gerar_video(a.prompt, a.saida, a.formato, a.conta, a.duracao or None, a.ref or None)
     else:
-        ok, det = gerar_imagem(a.prompt, a.saida, a.formato, a.conta)
+        ok, det = gerar_imagem(a.prompt, a.saida, a.formato, a.conta, a.ref or None)
     print(("OK: " if ok else "FALHOU: ") + det)
     sys.exit(0 if ok else 1)
 

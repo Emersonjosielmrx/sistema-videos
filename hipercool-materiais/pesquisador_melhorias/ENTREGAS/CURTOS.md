@@ -3363,3 +3363,86 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_recap_vlm_dataset__sonnet_1007.md`
 - [INÉDITO] github.com/AARENKAY/ffmpeg-termux-tools — ★4, push 2026-11-04, MIT — FFmpeg automation scripts for Android Termux — easy to use, non-coder friendly
 - [USA em D:\recapd-ambientes\producao\bin\anime_discover.py:116] github.com/loic31000/AniRecap — ★2, push 2026-11-02, MIT — Application Symfony de récapitulatifs d'animes et de mangas : œuvres, saisons, épisodes, tomes, chapitres, personnages, favoris et résumés.
+
+## [ ] PENDENTE — 2026-11-14 10:50 — Tendências e nichos de Shorts por país sem API do Google (`area_tendencias_por_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_tendencias_por_pais__sonnet_1041.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 11:08 — Tendências públicas por país sem API (`area_trends_pais_publico`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_pais_publico__sonnet_1057.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 12:28 — Trends→título por idioma (`area_trends_titulo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_titulo__sonnet_1207.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 13:00 — Conteúdo transformador em recap (`area_cta_conteudo_transformador`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_cta_conteudo_transformador__sonnet_1246.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 13:20 — Referências de ASL por nicho (`area_asl_benchmarks`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_asl_benchmarks__sonnet_1311.md`
+- [INÉDITO] github.com/minimus7/creator-teardown — ★1, push 2026-09-14, MIT — Claude Code skill that breaks down a short-form creator's TikTok or YouTube Shorts videos: real view counts, word-level transcripts, measure
+- [INÉDITO] github.com/kmilo93sd/agent-video-editor — ★8, push 2026-10-04, MIT — Editing judgment for AI agents: pacing, cuts, captions, audio, color and thumbnails for any video type, plus 128 CC0 sounds, 26 CC0 graphics
+
+## [ ] PENDENTE — 2026-11-14 15:07 — Tendências abertas sem login (`area_trends_wikipedia_gdelt`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_wikipedia_gdelt__sonnet_1501.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 15:37 — Programa de parceria ou autorização com donos de recap (`area_parceria_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_parceria_canal__sonnet_1531.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 15:52 — Creative Commons Atribuição como fonte de recap (`area_cc_by_fontes`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_cc_by_fontes__sonnet_1546.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 16:26 — Bancos de abertura e recap por episódio (`area_timestamps_anime`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_timestamps_anime__sonnet_1611.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 16:48 — Quais recaps de anime/manhwa têm mais views por país (`area_recap_views`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_recap_views__sonnet_1634.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 17:16 — Primeiros 30 s e retenção em recap (`area_gancho_30s`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_gancho_30s__sonnet_1701.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 17:54 — Canais de recap longo em inglês (`area_fonte_canais_en`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_fonte_canais_en__sonnet_1741.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 18:53 — Título e os primeiros 30 s dos recaps campeões (`area_titulo_30s_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulo_30s_longo__sonnet_1816.md`
+- [INÉDITO] github.com/ctskool/youtube-packaging — ★0, push 2026-10-28, MIT — Claude Code skills for packaging YouTube videos: thumbnail-first titles scored on your own channel's data, hooks, and a Test & Compare plan.
+- [INÉDITO] github.com/gladosAagman/youtube-agent-skill — ★1, push 2026-11-11, MIT — Fifteen Claude skills and two agents that run a YouTube channel: scored hooks, title and thumbnail linting, a channel audit that names the o
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 19:55 — Padrões de título que mudam por idioma em canais de recap (`area_titulos_por_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulos_por_pais__sonnet_1934.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 20:41 — Títulos dos vídeos mais vistos de canais estrangeiros de recap (`area_titulos_campeoes_por_idioma`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_titulos_campeoes_por_idioma__sonnet_2031.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 21:28 — Filtro de nicho para Trends/Wikipedia (`area_tend_filtro_nicho`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_tend_filtro_nicho__sonnet_2116.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-14 21:53 — Histórico do RSS do Google Trends (`area_trends_snapshots`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_snapshots__sonnet_2132.md`
+- [INÉDITO] github.com/ielym/google-trends-scraper — ★0, push 2026-10-06, MIT — Google Trends 全量数据面抓取工具：Explore / Trending Now / RSS / Autocomplete / Datastore / BigQuery / 官方 API alpha
+- [INÉDITO] github.com/cedarfetch/google-trending-searches-examples — ★0, push 2026-11-12, MIT — Python, Node.js and cURL examples for Google trending searches by country, with alerts on new trends.
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 22:00 — Google Trends RSS por país e idioma (`area_trends_rss_por_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trends_rss_por_pais__sonnet_2156.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 22:31 — Cruzar pauta do trends com vídeos campeões (`area_trend_x_outlier`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trend_x_outlier__sonnet_2226.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 14/11 (automático: nada aproveitável) — 2026-11-14 23:08 — Longo em outro idioma com pauta local (`area_trend_longo_idioma`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_trend_longo_idioma__sonnet_2256.md`
+- (todos os itens desta pesquisa foram reprovados)

@@ -57,9 +57,13 @@ def _navegador(url):
                 "--disable-session-crashed-bubble", "--disable-infobars", "--noerrdialogs", "--password-store=basic",
                 f"--remote-debugging-port={PORTA_CDP}", "--remote-allow-origins=*", f"--user-data-dir={PERFIL_CHROME}",
                 url]
+    # 14/11 dona ("deixe o telão rodar mas por baixo; quando não houver nada rodando ele aparece"): no STI/HP sem
+    # --kiosk — janela maximizada que _abaixo() prende no fundo (wmctrl "below"). TELAO_POR_CIMA=1 volta.
+    tela_cheia = ("--kiosk" if os.environ.get("TELAO_POR_CIMA") == "1" or _tela() in ("acer", "x200ma")
+                  else "--start-maximized")
     for chrome in ("google-chrome", "chromium", "chromium-browser"):
         if shutil.which(chrome):
-            return [chrome, "--kiosk", "--autoplay-policy=no-user-gesture-required", "--no-first-run",
+            return [chrome, tela_cheia, "--autoplay-policy=no-user-gesture-required", "--no-first-run",
                     "--disable-session-crashed-bubble", "--disable-infobars", "--noerrdialogs",
                     f"--remote-debugging-port={PORTA_CDP}", "--remote-allow-origins=*",  # like da dona (reserva)
                     "--password-store=basic", f"--user-data-dir={PERFIL}", url]
@@ -224,6 +228,23 @@ def painel_abrir():
         return
     PAINEL["proc"] = _abrir(f"http://127.0.0.1:{PORTA}/painel.html?tela={urllib.parse.quote(_tela())}")
     PAINEL["desde"] = time.time()
+
+
+def _abaixo():
+    """14/11: janela do telão sempre ABAIXO das outras (Flow/upload/render ficam por cima). Precisa de wmctrl."""
+    if os.environ.get("TELAO_POR_CIMA") == "1" or _tela() in ("acer", "x200ma") or not shutil.which("wmctrl"):
+        return
+    try:
+        r = subprocess.run(["wmctrl", "-lp"], capture_output=True, text=True, timeout=10)
+        meus = set(subprocess.run(["pgrep", "-f", "vitrine/perfil_navegador"], capture_output=True, text=True,
+                                  timeout=10).stdout.split())
+        for ln in r.stdout.splitlines():
+            c = ln.split(None, 4)
+            if len(c) >= 3 and c[2] in meus:
+                subprocess.run(["wmctrl", "-i", "-r", c[0], "-b", "add,below"], timeout=10,
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:  # noqa: BLE001
+        pass
 
 
 def painel_fechar():
@@ -485,6 +506,7 @@ def main():
         else:
             try:
                 painel_abrir()
+                _abaixo()
             except Exception as e:  # noqa: BLE001
                 log(f"painel falhou: {e}")
             time.sleep(5)  # confere a fila a cada 5 s: o botão "Abrir" responde rápido

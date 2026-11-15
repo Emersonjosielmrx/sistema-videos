@@ -1782,7 +1782,7 @@ def _objeto_no_trecho(video, t, texto, idx, flip):
 def _movimento(idx, dur, out_w, out_h, impacto=False, cy=None, rosto=None, forcar_zoom=False):
     """Câmera por trecho (dono 17/10: "manhwa-react e hipercool adicionam muitos efeitos, temos que adicionar pra ficar
     no mínimo diferente além do áudio e trilha"). Só com ANIME_FX_MOV=1 (o anime_auto liga no parceiro).
-    Ciclo zoom-in / pan esq / zoom-out / pan dir. Zoom/pan ancorado no terço superior (~0.30) para priorizar rostos e
+    Ciclo zoom-in / pan esq / zoom-out / pan dir. Zoom/pan ancorado no terço superior (~0.10) para priorizar rostos e
     evitar decapitação de personagens no crop 16:9. Frase de impacto (curva de narração): tremida que some em ~0,6 s
     + flash curto.
     12/11 (melhorador do recap longo): GANCHO = primeiros ANIME_FX_GANCHO_N trechos (padrão 2, ~6 s) têm câmera
@@ -1796,11 +1796,11 @@ def _movimento(idx, dur, out_w, out_h, impacto=False, cy=None, rosto=None, forca
     if os.environ.get("ANIME_FX_MOV", "0") != "1" and not gancho:
         return ""
     try:
-        anchor_default = float(os.environ.get("ANIME_FX_ANCHOR_Y", "0.30"))
+        anchor_default = float(os.environ.get("ANIME_FX_ANCHOR_Y", "0.10"))
     except ValueError:
-        anchor_default = 0.30
-    # Priorizar topo/rostos no terço superior (limite de segurança 0.35 para evitar decapitação)
-    cy = min(max(float(cy if cy is not None else anchor_default), 0.0), 0.35)
+        anchor_default = 0.10
+    # Priorizar topo/rostos no terço superior (limite de segurança 0.15 para evitar decapitação)
+    cy = min(max(float(cy if cy is not None else anchor_default), 0.0), 0.15)
     n = max(1, int(float(dur or 3) * 30))
     tipo = 0 if forcar_zoom else idx % 4  # 30/10: objeto citado = sempre zoom-in nele
     # 28/10 dona (item 1 aprovado, "câmera dentro da imagem"): ANIME_FX_ZOOM = quanto a câmera anda (0,12 antes; o
@@ -1843,17 +1843,17 @@ def _movimento(idx, dur, out_w, out_h, impacto=False, cy=None, rosto=None, forca
         # janela de zoom com o rosto no centro: canto = (rosto − metade da janela) / folga, por eixo, entre 0 e 1
         zf = 1 + zz
         fx, fy = rosto
-        mira = (min(max((fx - 0.5 / zf) / (1 - 1 / zf), 0.0), 1.0), min(max((fy - 0.5 / zf) / (1 - 1 / zf), 0.0), 1.0))
+        mira = (min(max((fx - 0.5 / zf) / (1 - 1 / zf), 0.0), 1.0), min(max((fy - 0.5 / zf) / (1 - 1 / zf), 0.0), cy))
         x, y = f"{mira[0]:.3f}*(iw-iw/zoom)", f"{mira[1]:.3f}*(ih-ih/zoom)"
     # 28/10 dona: "não é tremida em todo trecho, é um BALANÇO nas lutas" — câmera balança devagar nas frases de
     # impacto (ANIME_FX_BALANCO=1). Medido: custo ~0 (bench 11_balanco_desloca).
     if impacto and os.environ.get("ANIME_FX_BALANCO") == "1":
         x = f"({x})+min((iw-iw/zoom)/2,18)*sin(on/9)"
     if os.environ.get("ANIME_FX_DERIVA") == "1" and mira is None:  # mirando o rosto, a deriva não puxa pra fora dele
-        # Deriva 2.5D com offset Y inicial ancorado no terço superior (~0.25 a 0.35),
+        # Deriva 2.5D com offset Y inicial ancorado no terço superior (~0.05 a 0.15),
         # oscilando suavemente sem descer para a zona de corte/decapitação (antigo 0.70 cortava cabeças).
-        y0 = max(0.05, cy - 0.05)
-        y1 = min(0.36, cy + 0.05)
+        y0 = max(0.02, cy - 0.05)
+        y1 = min(0.18, cy + 0.05)
         dy = y1 - y0
         y = "(ih-ih/zoom)*(%s)" % (
             f"{y0:.2f}+{dy:.2f}*on/{n}" if idx % 2 == 0 else f"{y1:.2f}-{dy:.2f}*on/{n}"
@@ -2238,12 +2238,12 @@ def build_clip_from_video(video_source, audio_path, out_path, panel_idx, effects
         # deitado casa com a fonte 16:9 → decrease+pad quase nunca gera barra
         scale_filter = (f"scale={out_w}:{out_h}:force_original_aspect_ratio=decrease,"
                         f"pad={out_w}:{out_h}:(ow-iw)/2:(oh-ih)/2")
-        # Priorizar topo/rostos no crop vertical 16:9 (terço superior ~0.30) para evitar decapitação.
+        # Priorizar topo/rostos no crop vertical 16:9 (terço superior ~0.10) para evitar decapitação.
         # Ancorar o zoom no terço superior em vez do rodapé (0.9+) que cortava olhos/testa/queixo (júri OLYsz-zu7Rs / YZNYmnqVZWI).
         try:
-            ancora = float(os.environ.get("ANIME_FX_ANCHOR_Y", "0.30"))
+            ancora = float(os.environ.get("ANIME_FX_ANCHOR_Y", "0.10"))
         except ValueError:
-            ancora = 0.30
+            ancora = 0.10
         objeto = _objeto_no_trecho(video_source, cut_start + clip_duration / 2,
                                    subtitles if isinstance(subtitles, str) else "", panel_idx, "hflip" in descaracterizador)
         rosto = objeto or (_rosto_no_trecho(video_source, cut_start + clip_duration / 2, "hflip" in descaracterizador)

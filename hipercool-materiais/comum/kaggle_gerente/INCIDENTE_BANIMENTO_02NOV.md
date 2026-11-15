@@ -72,3 +72,26 @@ mesmo erro no mesmo minuto e não foram abertas (abrir uma a uma = laço proibid
   NUNCA usaram o Flow. Exceção: mundosolar1995 usa o Flow (94) e está viva — hipótese forte, não certeza.
 - **Lição:** conta Google que roda no Kaggle NÃO pode ser usada no Flow/YouTube/outro serviço por outros IPs; e `webshare_ip` de
   conta banida nunca pode ser reusado (a conta grátis do Webshare troca, o IP -N é o mesmo).
+
+## 3º banimento — 14/11/2026 ~21h40 (00h40 UTC): emerso, emersonjosiel2034, emersonjosiel2038, emersonverse7, inovaremanhwaverse8
+**Causa:** o upload de Shorts por HTTP (sem Chrome — `gemini-argo/youtube_http.Studio` + `projeto-navegador-sem-navegador/
+services/youtube/upload_http.Enviador`) saía pela INTERNET DE CASA. Só o caminho pelo Chrome usava o IP fixo da conta
+(`cofre._ip_fixo_kaggle` / `youtube_web_poster._proxy_da_conta_kaggle`). Os canais Comédia Noturna (emersonjosiel02 = Kaggle
+emerso), Empresário Inteligente IA (inovaremanhwaverse8), Imóvel em Foco (inovaremanhwaverse7 = Kaggle emersonverse7) e Vendas
+que Escalam (emersonjosiel2034) subiram 9–11 Shorts cada por HTTP de casa entre 12 e 14/11, enquanto o Kaggle das mesmas
+contas saía pelo rnprmtfo-N = a mesma conta Google em 2 IPs (regra 2b de 09/11). Também houve login em lote dessas contas no
+STI e no desktop em 12/11 de manhã (antes da trava do login em lote). A aulasrevolution (sem canal postando por HTTP) ficou viva.
+Sinal no log: a central mostrava "proxy webshare sem resposta"; o motivo real em /opt/recap_central/central.log era
+"supply KAGGLE_API_TOKEN" (token recusado). Ninguém testou conta por fora.
+
+**Travas (14/11 23h30):**
+- `D:\logins-google\cofre.py saida_kaggle(email)` = a ÚNICA porta: devolve o proxy da ponte do IP fixo (127.0.0.1:183NN) da
+  conta viva do Kaggle, None se não é; ponte fora = RuntimeError. Testado: Comédia Noturna sai por 185.72.242.6 (casa = 191.36.x).
+- `gemini-argo/youtube_http.Studio._entrar`: a sessão requests inteira (Studio, upload.youtube.com, capa) usa esse proxy.
+- `postador bin/youtube_web_poster._subir_http`: conta viva do Kaggle só sobe por HTTP se a ponte subir.
+- `cofre.abrir`: Chrome JÁ aberto de conta viva do Kaggle sem a ponte = fecha e reabre pela ponte (antes só reusava).
+- Regra no CLAUDE.md global (3º banimento).
+
+**Em risco (vivas que também subiram por HTTP de casa 12–14/11):** Filme Noturno (simonerebecaluizasilva), Curiosidades
+Noturnas (gabriellyvitoria...), Manhwa Noturno (inovaremanhwaverse2), Inovare q8l/u8b (inovaremanhwaverse5/6), Lei e Lucro
+(emersonjosiel2035), Clínica Lucrativa IA (inovaremanhwaverse9).

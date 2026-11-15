@@ -230,6 +230,17 @@ class Studio:
     def _entrar(self):
         self.s = requests.Session()
         self.s.headers["User-Agent"] = UA
+        # 14/11 23h — REGRA (3º banimento do Kaggle: este HTTP saía pela internet de casa com contas VIVAS do Kaggle):
+        # conta viva do Kaggle -> a sessão inteira sai pela ponte do IP fixo dela (cofre.saida_kaggle). Ponte fora =
+        # erro (o cofre levanta), nunca cai pra casa. Sem trava de desligar: regra do CLAUDE.md.
+        try:
+            import cofre as _cofre
+        except ImportError:
+            sys.path.append(r"D:\logins-google")
+            import cofre as _cofre
+        px = _cofre.saida_kaggle(_email(self.slug))
+        if px:
+            self.s.proxies = {"http": px, "https": px}
         # 30/10: com domínio; o update(dict) criava cookies sem domínio e o Set-Cookie do Studio (.youtube.com) virava
         # uma 2ª cópia de cada um (as duas iam no pedido; SAPISID duplicado = CookieConflictError)
         for k, v in json.loads(self.arq.read_text("utf-8")).items():

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Telão do painel</title>
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden} iframe{position:fixed;inset:0;width:100%;height:100%;border:0}</style>
+</head>
+<body>
+<!-- 14/11 dona: telão do Tab A6 (tv.opus-sem-limites.com.br) = painel e gráficos/recordes se revezando -->
+<iframe id="p" src="painel_tv.html"></iframe>
+<iframe id="g" src="graficos.html" style="display:none"></iframe>
+<script>
+var vez = 0, P = document.getElementById("p"), G = document.getElementById("g");
+setInterval(function () { vez = 1 - vez; P.style.display = vez ? "none" : "block"; G.style.display = vez ? "block" : "none"; },
+            90000);  // 1,5 min cada (os gráficos alternam as 2 telas por dentro a cada 30 s)
+</script>
+</body>
+</html>

@@ -1,5 +1,9 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 14/11 15:55 [melhorador código ag-opus-5-5] fx_clips.py: Ajuste na âncora do crop vertical para evitar decapitação em zooms e pans (24 linhas). Desfazer: copiar fx_clips.py.bak_20261114_155544_melhorador
+
+- 14/11 15:54 [melhorador código ag-opus-5-5] fx_clips.py: Ajuste na âncora do crop vertical para evitar decapitação em zooms e pans (22 linhas). Desfazer: copiar fx_clips.py.bak_20261114_155403_melhorador
+
 - 14/11 08:18 [melhorador gemini/gemini-3.5-flash] EXPERIMENTO aberto 'capitulos_mais_frequentes': A={} x B={'capitulos.a_cada_s': 240} — Reduzir o intervalo entre capítulos de 300s para 240s aumenta a frequência de vinhetas/tarjas visuais e entradas da mascote, dinamizando o ritmo no meio dos longos e melhorando a retenção (% assistido).
 
 - 14/11 07:26 [melhorador] EXPERIMENTO 'mascote_voz_thalita' fechado: vence A (B deixou o render 1.7x mais lento)

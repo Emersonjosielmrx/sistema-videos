@@ -177,6 +177,8 @@ const IC = {  // ícones no traço da Central (lucide)
 };
 const ic = n => `<svg class="ic" viewBox="0 0 24 24">${IC[n] || ""}</svg>`;
 const Q_INFO = {
+  graficos:["Gráficos da semana","Views, postagens e inscritos — comparação dos canais","chart"],
+  recordes:["Recordes","Canais que bateram a própria marca nesta semana","chart"],
   saindo:["Longos que saíram","Vídeos longos que abriram nas últimas 24 h","film"], proximos:["Próximos longos","Horário em que cada vídeo longo entra no ar","clock"],
   milviews:["5 mil visualizações","Vídeos que passaram de 5.000 views (todos os canais, views ao vivo)","eye"],
   maisvistos:["Ranking de todos os tempos","Os vídeos mais vistos dos canais, do mais visto pro menos","chart"],
@@ -211,7 +213,13 @@ const cartoesRanking = (lista, desde) => `<div class="rank">` + lista.map((v, n)
     <div class="topo"><span class="pos">${desde + n + 1}º</span><span class="vw">${num(v.views)}</span>
     <span class="cn">${esc(v.canal)} · ${esc(v.em)}</span></div><div class="tt">${esc(v.titulo)}</div></div>`).join("") + `</div>`;
 
+// 14/11 dona ("no telão e no Tab, além dos gráficos de postagem, views e inscritos da semana como tem no :8790, uma
+// página de RECORDES"): os dois quadros mostram a página pública de gráficos (tela 1 / tela 2). Mesma fonte do Tab.
+const GRAF_URL = "http://tv.opus-sem-limites.com.br/graficos.html";
+const _graf = tela => `<iframe src="${GRAF_URL}?tela=${tela}&t=${Math.floor(Date.now() / 60000)}" style="width:100%;height:100%;border:0;border-radius:1vh"></iframe>`;
 const Q = {
+  graficos() { return _graf(1); },
+  recordes() { return _graf(2); },
   proximos() {
     const p = D.proximos || [];
     if (!p.length) return vazio("Nenhum vídeo longo agendado para abrir.");

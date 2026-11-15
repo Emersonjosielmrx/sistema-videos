@@ -348,3 +348,13 @@ evisão: REPROVADO — 10 quadro(s) com nudez), o que demonstra o funcionamento 
 - O que achei (com trecho de log): O arquivo `fila_postagem.log` registra ciclos contínuos de execução e postagem (ex: "Shorts em pt: canal parado, sai já"). A produção está com a tarefa HipercoolFila desativada (conforme esperado ou em manutenção/refazer) e postagem ativa, executando ciclos normalmente.
 - CONSERTO PROPOSTO: nenhum.
 - Estado: NADA A FAZER
+
+## 20261114_1857 — Verificação de rotina: avisos conhecidos sobre métricas de vídeos travados/removidos e timeout pontual no YouTube Studio
+- Motivo: Alerta em fila_postagem.log indicando que as métricas dos vídeos Jz4MeePEwBY e CvmJXTdsi5Y não foram lidas por estarem marcados como mortos/travados pelo YouTube (removidos desde 2026-11-05), além de um timeout pontual de 30s no carregamento do YouTube Studio para DTY8QccBZlo.
+- O que achei (com trecho de log):
+  - [18:54:35]   métricas Jz4MeePEwBY: não leu ({'erro': 'morto: TRAVADO pelo YouTube (removido desde 2026-11-05 (a dona libera apagando a linha em contas_travadas.json)) — inovare_ita não é tocado por nenhum)
+  - [18:54:35]   métricas CvmJXTdsi5Y: não leu ({'erro': 'morto: TRAVADO pelo YouTube (removido desde 2026-11-05 (a dona libera apagando a linha em contas_travadas.json)) — inovare_ita não é tocado por nenhum)
+  - [18:57:25]   métricas DTY8QccBZlo: não leu ({'metricas': 'aviso: TimeoutError: Locator.inner_text: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator("ytcp-app").first\n'})
+- O que fiz (Modo Só Aviso): Nenhum arquivo alterado. Apenas verificação do log e registro no diário.
+- CONSERTO PROPOSTO: Nenhum. Os vídeos `Jz4MeePEwBY` e `CvmJXTdsi5Y` estão em canais/contas marcados como travados/removidos (conforme regras e listas de `contas_travadas.json`), e o timeout no YouTube Studio (`DTY8QccBZlo`) é transiente/pontual, sendo recuperado automaticamente nas próximas rodadas.
+- Estado: NADA A FAZER

@@ -1,0 +1,148 @@
+{
+ "conta": "agentesdeia.ia",
+ "produto": "agente_tarefas",
+ "marca": "Agentes de IA",
+ "titulo": "Delegue o follow-up de orçamentos ao Agente Pessoal IA",
+ "legenda": "Esquecer o follow-up de um orçamento enviado custa vendas todos os dias. Delegue o acompanhamento, a pesquisa e o agendamento para um agente pessoal de tarefas com IA fazer por você. Conheça no link no perfil. ✅\n\n👉 Chame no direct • link no perfil\n\n#produtividade #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "Follow-up de orçamentos em dia",
+  "pergunta_cliente": "Você esquece de cobrar retorno de quem pediu orçamento?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia vendas porque esquecia de cobrar resposta dos orçamentos. Hoje o agente IA faz esse follow-up.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting at a desk in a clean modern Brazilian office, tidy, well lit",
+    "real_tema": "Dono relatando perda de vendas por falta de acompanhamento de orçamentos",
+    "destaques": [
+     "perdia vendas",
+     "faz esse follow-up"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261114_171514_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Você delega o acompanhamento para o Agente Pessoal IA e ele faz essa tarefa real por você.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "Demonstração de delegação de follow-up para o agente IA",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Preciso fazer o follow-up dos orçamentos enviados que ainda não responderam."
+     },
+     {
+      "de": "empresa",
+      "texto": "Certo. Vou enviar a mensagem de acompanhamento para esses contatos agora."
+     },
+     {
+      "de": "cliente",
+      "texto": "Me avise quando terminar e registre quem tiver interesse em avançar."
+     },
+     {
+      "de": "empresa",
+      "texto": "Combinado. Tarefa de follow-up iniciada e retorno com as respostas."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora eu delego o follow-up, o agendamento e a pesquisa para não deixar nenhum cliente sem retorno.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a bright professional Brazilian office workspace, tidy, well lit",
+    "real_tema": "Dono mostrando a organização do acompanhamento comercial com o agente",
+    "destaques": [
+     "delego o follow-up",
+     "nenhum cliente sem retorno"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261114_171514_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_agentesdeia.ia_20261114_171514_1.png"
+   }
+  ],
+  "legenda": "Esquecer o follow-up de um orçamento enviado custa vendas todos os dias. Delegue o acompanhamento, a pesquisa e o agendamento para um agente pessoal de tarefas com IA fazer por você. Conheça no link no perfil. ✅",
+  "titulo": "Delegue o follow-up de orçamentos ao Agente Pessoal IA",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "dor_followup_esquecido",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 129,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\agentesdeia.ia_20261114_171158\\dono_3.mp4",
+ "duracao_s": 31.48,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-14T17:33:02",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.41,
+   "fala": "Você esquece de cobrar retorno de quem pediu orçamento?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.41,
+   "fim": 12.25,
+   "fala": "Eu perdia vendas porque esquecia de cobrar resposta dos orçamentos. Hoje o agente IA faz esse follow-up.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.25,
+   "fim": 19.71,
+   "fala": "Você delega o acompanhamento para o Agente Pessoal IA e ele faz essa tarefa real por você.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 19.71,
+   "fim": 27.54,
+   "fala": "Agora eu delego o follow-up, o agendamento e a pesquisa para não deixar nenhum cliente sem retorno.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.54,
+   "fim": 31.48,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.75,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 7.0,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

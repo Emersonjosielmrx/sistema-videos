@@ -32,6 +32,10 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_DIR / "config"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from POSES_ANIME import POSES, POSES_GENERO, REGRAS_BATALHA, ROUPAS_BATALHA, BATALHA, REGRAS_GERAIS  # noqa: E402
+try:  # 14/11: poses de "romance fake" pros Shorts (beijo/amasso que nunca aconteceu no anime)
+    from POSES_ANIME import FAKE_ROMANCE, REGRAS_FAKE  # noqa: E402
+except ImportError:
+    FAKE_ROMANCE, REGRAS_FAKE = set(), REGRAS_GERAIS
 import visao_capa  # noqa: E402  (COMUM: corpo malformado + visão com reserva, igual ao hipercool)
 import capa_longo_v2  # noqa: E402  (01/11 dona: regras novas das capas A/B/C do longo)
 
@@ -983,6 +987,13 @@ POSES_SENSUAIS = {
                    "with her tongue out teasingly, eyes half-closed; HIM smaller in the corner, shocked",
     "colo_harem": "one woman sits facing HIM on his lap with her arms around his neck while two other women cling to "
                   "his arms jealously",
+    # 15/11 dona (referência youtu.be/iI52YYpcQAU "Hand Manhwa"): EX x NAMORADA na cama — adaptado à regra das capas
+    # (nada de foco no bumbum/nudez parcial): a namorada deitada de lado na cama, de frente pro leitor, sorrindo
+    # provocante; a ex de lingerie sentada atrás acenando; ELE de braços cruzados atrás, sério e corado. Rótulos
+    # "EX" e "NAMORADA" com seta (estilo do catálogo da dona).
+    "ex_x_namorada_cama": "on a big bed by a sunny window: one gorgeous woman in a lace nightgown lying on her side facing "
+                          "the viewer with a teasing smile; behind her another gorgeous woman in lace lingerie sitting and "
+                          "waving happily; HE stands behind them with arms crossed, serious and blushing",
 }
 REFAZER_SENSUAL = (
     "Recreate the attached YouTube thumbnail as a brand-new {fmt} anime thumbnail, MUCH MORE SEDUCTIVE. Keep the SAME "
@@ -1146,12 +1157,22 @@ def gerar_capa(anime, capitulo, saida, texto="", cena="", protagonista="", gener
     feminino = cfg.get("genero") == "F" or (not cfg and bool(re.search(r"\b(woman|girl|female|she)\b", prot, re.I)))
     generos = cfg.get("generos") or generos or _generos_do_texto(cena, texto, anime) or ["acao", "fantasia"]
     quadro = QUADRO.get(formato, QUADRO["16:9"])
-    for pose in _poses(generos)[:3]:
+    poses = _poses(generos)
+    # 14/11 dona ("faça o máximo de teste de capas nesse estilo pros Shorts"): no Short (9:16) a 1ª tentativa é uma
+    # pose de romance fake (sorteada; o placar decide depois quais rendem). CAPA_SHORT_FAKE_PRIMEIRO=0 volta.
+    import os
+    if (formato == "9:16" and FAKE_ROMANCE and os.environ.get("CAPA_SHORT_FAKE_PRIMEIRO", "1") != "0"):
+        fake = [p for p in poses if p in FAKE_ROMANCE]
+        if fake:
+            primeira = random.choice(fake)
+            poses = [primeira] + [p for p in poses if p != primeira]
+    for pose in poses[:3]:
         luta = pose in BATALHA
         roupa = "" if (cfg or protagonista or not luta) else f", wearing {random.choice(ROUPAS_BATALHA)}"
         prompt = (f"{_pronomes(POSES[pose][1], feminino)}. Main character design: {prot}{roupa}. "
                   + (f"Story premise (Portuguese, context only - never write it): {cena}. " if cena else "")
                   + (f"{REGRAS_BATALHA} Anime art style, dynamic action composition, " if luta else
+                     f"{REGRAS_FAKE} Anime art style, romantic eye-catching composition, " if pose in FAKE_ROMANCE else
                      f"{REGRAS_GERAIS} Anime art style, expressive emotional composition, ")
                   + f"cinematic lighting, vibrant "
                   f"colors, eye-catching {'vertical 9:16' if formato == '9:16' else '16:9'} YouTube thumbnail, "

@@ -1,0 +1,146 @@
+{
+ "conta": "mentoriasia.ia",
+ "produto": "treinamentos",
+ "marca": "Treinamentos e Mentorias IA",
+ "titulo": "Consultoria de otimização e automações com IA",
+ "legenda": "Seus fluxos atuais estão lentos? Com a consultoria de otimização, mapa mental, pack de prompts validados e o treinamento de Vibe Coding, você aprende a criar suas próprias automações com IA. ⚙️\nAcesse o link no perfil para conhecer. 🚀\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Processos lentos na empresa?",
+  "pergunta_cliente": "Seus processos internos travam a rotina da empresa?",
+  "blocos": [
+   {
+    "rotulo": "A situação",
+    "fala": "Meus fluxos eram lentos, até a consultoria de otimização mostrar onde aplicar automações com IA.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian small business office",
+    "real_tema": "fluxos lentos e consultoria de otimização",
+    "destaques": [
+     "fluxos eram lentos",
+     "consultoria de otimização"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261114_110352_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A consultoria avalia sua rotina e entrega mapa mental, pack de prompts validados e treinamento de Vibe Coding.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "entrega de mapa mental, prompts e treinamento",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Vocês avaliam meus fluxos atuais que estão lentos?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, na consultoria de otimização identificamos onde criar automações com IA."
+     },
+     {
+      "de": "cliente",
+      "texto": "E eu mesmo consigo montar depois?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, com o treinamento de Vibe Coding, mapa mental e pack de prompts validados."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Aprendi a criar automações com IA e hoje monto minhas próprias soluções para otimizar nossos processos.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting at a clean desk in a tidy, well lit Brazilian office",
+    "real_tema": "autonomia para criar automações com IA",
+    "destaques": [
+     "criar automações",
+     "otimizar nossos processos"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261114_110352_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261114_110352_1.png"
+   }
+  ],
+  "legenda": "Seus fluxos atuais estão lentos? Com a consultoria de otimização, mapa mental, pack de prompts validados e o treinamento de Vibe Coding, você aprende a criar suas próprias automações com IA. ⚙️\nAcesse o link no perfil para conhecer. 🚀",
+  "titulo": "Consultoria de otimização e automações com IA",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "otimizacao_processo_atual",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 153,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\mentoriasia.ia_20261114_110117\\dono_3.mp4",
+ "duracao_s": 31.79,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-14T11:20:04",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.39,
+   "fala": "Seus processos internos travam a rotina da empresa?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.39,
+   "fim": 12.22,
+   "fala": "Meus fluxos eram lentos, até a consultoria de otimização mostrar onde aplicar automações com IA.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.22,
+   "fim": 20.02,
+   "fala": "A consultoria avalia sua rotina e entrega mapa mental, pack de prompts validados e treinamento de Vibe Coding.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.02,
+   "fim": 27.85,
+   "fala": "Aprendi a criar automações com IA e hoje monto minhas próprias soluções para otimizar nossos processos.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.85,
+   "fim": 31.79,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.25,
+  "notas": {
+   "legibilidade": 5.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "graves": 10,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

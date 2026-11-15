@@ -10,6 +10,8 @@ está no PC. Quem toca é o player.py de cada notebook (~/vitrine/fila.txt). Nad
     python vitrine.py --instalar-pc2  # PC2 (Windows) como telão só do painel (vitrine\\telao_win.py)
 """
 import json
+import re
+import os
 import subprocess
 import sys
 import time
@@ -36,6 +38,11 @@ TELOES_VIDEO = ["emerson-ia@100.98.55.125", "emerson@100.87.195.108"]  # dona 23
 TELAO_NOTEBOOKS = BASE / "estado" / "telao_notebooks.json"
 TELOES_PAINEL = ["emerson-sti-st@100.98.49.0"]  # Linux só com o painel (sem vídeo, sem like)
 TELA["emerson-sti-st@100.98.49.0"] = "sti"
+# 14/11 dona ("deixe o telão rodar por baixo... e coloque também no HP"): HP Pavilion também mostra o painel, por baixo
+# das janelas de trabalho (player.py _abaixo). VITRINE_SEM_HP=1 tira.
+if os.environ.get("VITRINE_SEM_HP") != "1":
+    TELOES_PAINEL.append("emerson-hp-pavili@100.123.69.41")
+    TELA["emerson-hp-pavili@100.123.69.41"] = "hp"
 
 
 def notebooks_ligados():
@@ -70,8 +77,10 @@ def log(m):
 
 
 def _ssh(alvo, comando, entrada=None, timeout=60):
-    args = [SSH, "-o", "BatchMode=yes", "-o", "LogLevel=ERROR", "-o", "ConnectTimeout=10", "-o", f"Port={PORTA_SSH.get(alvo, 22)}", alvo,
-            comando]
+    # 14/11: alias do ~/.ssh/config (desktop = porta 2223 + HostKeyAlias) não pode levar Port=22 forçado — só quem
+    # está em PORTA_SSH ganha a porta
+    porta = ["-o", f"Port={PORTA_SSH[alvo]}"] if alvo in PORTA_SSH else []
+    args = [SSH, "-o", "BatchMode=yes", "-o", "LogLevel=ERROR", "-o", "ConnectTimeout=10", *porta, alvo, comando]
     if hasattr(entrada, "read"):  # arquivo (vídeo de aprovação): vai direto pelo stdin, sem carregar na memória
         return subprocess.run(args, stdin=entrada, capture_output=True, timeout=timeout, creationflags=SEM_JANELA)
     if entrada is None:  # 29/10 (Fable): sob pythonw não há stdin e o ssh travava até o timeout ("curtir ...: TimeoutExpired")
@@ -196,11 +205,171 @@ def _reservado_veo(alvo):
         return ""
 
 
+PUBLICO = BASE / "estado" / "painel_publico.json"  # {"slug": "telao-xxxx", "html_md5": ...}
+
+
+def _recordes():
+    """14/11 dona ("uma página de RECORDES: o canal X bateu 2x a mais de inscritos e nunca tinha batido"): para cada
+    canal, o ganho diário de views/inscritos (série de 30 dias do painel). Recorde = o melhor dia dos últimos 7 passou
+    o maior dia ANTES deles; vezes = quanto passou. Ordena pelos maiores saltos."""
+    import urllib.request
+    d = json.loads(urllib.request.urlopen("http://127.0.0.1:8790/api/canais_views?dias=30", timeout=200).read())
+    out = []
+    for c in d.get("canais", []):
+        s = c.get("serie") or []
+        if len(s) < 9:
+            continue
+        dif = [(s[i][0], max(0, s[i][1] - s[i - 1][1]), max(0, s[i][2] - s[i - 1][2])) for i in range(1, len(s))]
+        antes, semana = dif[:-7], dif[-7:]
+        for idx, nome in ((2, "views"), (1, "inscritos")):
+            ant = max((x[idx] for x in antes), default=0)
+            melhor = max(semana, key=lambda x: x[idx])
+            minimo = 50 if nome == "views" else 3
+            if melhor[idx] >= minimo and melhor[idx] > ant:
+                out.append({"canal": c["slug"], "tipo": nome, "dia": melhor[0], "valor": melhor[idx], "antes": ant,
+                            "vezes": round(melhor[idx] / ant, 1) if ant else None})
+    return sorted(out, key=lambda r: -(r["vezes"] or 99))[:20]
+
+
+def _postagens_por_dia(dias=7):
+    """Vídeos que ABRIRAM por dia (ledger, publish_at), Shorts e longos separados."""
+    agora = datetime.now(timezone.utc)
+    cont = {}
+    try:
+        linhas = LEDGER.read_text("utf-8", "replace").splitlines()[-6000:]
+    except OSError:
+        return {}
+    for ln in linhas:
+        try:
+            d = json.loads(ln)
+            q = datetime.fromisoformat((d.get("publish_at") or d.get("ts")).replace("Z", "+00:00"))
+        except (ValueError, AttributeError, TypeError):
+            continue
+        if q > agora or agora - q > timedelta(days=dias):
+            continue
+        dia = q.astimezone().strftime("%Y-%m-%d")
+        k = "longos" if d.get("tipo") == "completo" else "shorts"
+        cont.setdefault(dia, {"shorts": 0, "longos": 0})[k] += 1
+    return dict(sorted(cont.items()))
+
+
+def _abertos_recentes(horas=48, maximo=30):
+    """Vídeos do ledger que JÁ abriram (publish_at passou) nas últimas `horas`, mais novos primeiro (Tab A8)."""
+    agora = datetime.now(timezone.utc)
+    out, vistos = [], set()
+    try:
+        linhas = LEDGER.read_text("utf-8", "replace").splitlines()[-4000:]
+    except OSError:
+        return out
+    for ln in reversed(linhas):
+        try:
+            d = json.loads(ln)
+            quando = datetime.fromisoformat((d.get("publish_at") or d.get("ts")).replace("Z", "+00:00"))
+        except (ValueError, AttributeError, TypeError):
+            continue
+        vid = d.get("video_id")
+        if not vid or vid in vistos or quando > agora or agora - quando > timedelta(hours=horas):
+            continue
+        vistos.add(vid)
+        tit, seg = "", 60
+        try:
+            pj = json.loads((Path(d.get("caminho", "")).parent / "postar.json").read_text("utf-8"))
+            tit = pj.get("titulo") or ""
+        except (OSError, ValueError):
+            pass
+        if d.get("tipo") == "completo":
+            seg = 300  # longo: 5 min e passa pro próximo
+        out.append({"id": vid, "titulo": tit[:90], "canal": d.get("canal", ""), "seg": seg,
+                    "quando": quando.astimezone().strftime("%d/%m %H:%M")})
+        if len(out) >= maximo:
+            break
+    return out
+
+
+def _publico(dados):
+    """14/11 dona ("deixe um link público com o painel, assim deixo exibindo o tempo todo — pode até ser com
+    dimensionamento exclusivo pra esse Tab A6"): o MESMO painel em https://<slug>.opus-sem-limites.com.br (nginx das
+    landings na hermes-prod, /var/www/landings/site/<slug>). Slug aleatório (não dá pra adivinhar). Só o painel.json
+    sobe a cada rodada; o html só quando muda. PAINEL_PUBLICO=0 desliga."""
+    if os.environ.get("PAINEL_PUBLICO", "1") == "0":
+        return
+    import hashlib
+    import secrets
+    est = json.loads(PUBLICO.read_text("utf-8")) if PUBLICO.exists() else {}
+    if not est.get("slug"):
+        est["slug"] = "telao-" + secrets.token_hex(5)
+    slug = est["slug"]
+    html = PAINEL_HTML.read_text("utf-8")
+    # sem os pedidos locais do telão (/pc1, /pedido): no público, "conectado" = dado recente
+    html = html.replace('fetch("/pc1?t=" + Date.now()).then(r => r.json())',
+                        'Promise.resolve({conectado: false})')
+    html = html.replace("<head>", '<head><meta name="robots" content="noindex"><meta http-equiv="refresh" content="1800">', 1)
+    # 14/11 dona ("quando clico em abrir um longo ele não abre, só dá erro; deve abrir num dos PCs pra eu assistir, de
+    # preferência no desktop, senão no STI"): no público o pedido vira um GET em pedido.txt (fica no access.log do
+    # nginx); o PC1 lê (_pedidos_publicos) e abre no desktop/STI. Resposta de 404 = normal, o toast diz o que acontece.
+    html = html.replace("fetch(`/pedido?tipo=${tipo}&v=${encodeURIComponent(valor)}`).then(r => r.text()).then(t => {",
+                        "fetch(`pedido.txt?tipo=${tipo}&v=${encodeURIComponent(valor)}&t=${Date.now()}`).catch(() => 0)"
+                        ".then(() => 'Abrindo no PC (desktop ou STI) em até 2 minutos').then(t => {")
+    md5 = hashlib.md5(html.encode()).hexdigest()
+    pasta = f"/var/www/landings/site/{slug}"
+    if est.get("html_md5") != md5:
+        _ssh("hermes-prod", f"mkdir -p {pasta} && cat > {pasta}/index.html", entrada=html.encode("utf-8"), timeout=60)
+        _ssh("hermes-prod", f"cp {pasta}/index.html {pasta}/painel.html && cp {pasta}/index.html {pasta}/painel_tv.html", timeout=30)
+        est["html_md5"] = md5
+    _ssh("hermes-prod", f"cat > {pasta}/painel.json.tmp && mv {pasta}/painel.json.tmp {pasta}/painel.json",
+         entrada=dados, timeout=60)
+    # 14/11 dona ("no telão do tab quero as coisas gráficas que tem no principal do painel local: as visualizações do
+    # dia, da semana em gráfico e as comparações dos canais"): graficos.json (APIs do painel :8790) + graficos.html.
+    # TELAO_GRAFICOS=0 desliga.
+    if os.environ.get("TELAO_GRAFICOS", "1") != "0":
+        import urllib.request
+        g = {}
+        for chave, rota in (("canais", "canais_views?dias=7"), ("ranking", "ranking_canais"), ("hora", "views_mesma_hora")):
+            try:
+                g[chave] = json.loads(urllib.request.urlopen(f"http://127.0.0.1:8790/api/{rota}", timeout=150).read())
+            except Exception as e:  # noqa: BLE001
+                log(f"gráficos: {rota} falhou ({type(e).__name__})")
+        try:  # 14/11 dona: recordes (canal bateu a própria marca; 2x = destaque) + postagens por dia
+            g["recordes"] = _recordes()
+            g["postagens"] = _postagens_por_dia()
+        except Exception as e:  # noqa: BLE001
+            log(f"recordes falhou ({type(e).__name__}: {e})")
+        if g:
+            g["gerado_em"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            _ssh("hermes-prod", f"cat > {pasta}/graficos.json.tmp && mv {pasta}/graficos.json.tmp {pasta}/graficos.json",
+                 entrada=json.dumps(g, ensure_ascii=False).encode("utf-8"), timeout=60)
+        tvp = (BASE / "vitrine" / "tv_painel_graficos.html").read_text("utf-8")
+        if est.get("tvp_md5") != hashlib.md5(tvp.encode()).hexdigest():
+            _ssh("hermes-prod", f"cat > {pasta}/tv_painel.html", entrada=tvp.encode("utf-8"), timeout=60)
+            est["tvp_md5"] = hashlib.md5(tvp.encode()).hexdigest()
+        gh = (BASE / "vitrine" / "graficos.html").read_text("utf-8")
+        md5g = hashlib.md5(gh.encode()).hexdigest()
+        if est.get("graf_md5") != md5g:
+            _ssh("hermes-prod", f"cat > {pasta}/graficos.html", entrada=gh.encode("utf-8"), timeout=60)
+            est["graf_md5"] = md5g
+    # 14/11 dona ("Galaxy Tab A8: esse pode exibir os vídeos"): tv8.opus-sem-limites.com.br = vídeos que já abriram
+    # (últimas 48 h, do ledger) + painel. Página em vitrine/tv_videos.html. TV8_VIDEOS=0 desliga.
+    if os.environ.get("TV8_VIDEOS", "1") != "0":
+        tv = (BASE / "vitrine" / "tv_videos.html").read_text("utf-8")
+        md5v = hashlib.md5(tv.encode()).hexdigest()
+        if est.get("tv8_md5") != md5v:
+            _ssh("hermes-prod", f"cat > {pasta}/tv8.html", entrada=tv.encode("utf-8"), timeout=60)
+            est["tv8_md5"] = md5v
+        _ssh("hermes-prod", f"cat > {pasta}/videos.json.tmp && mv {pasta}/videos.json.tmp {pasta}/videos.json",
+             entrada=json.dumps({"videos": _abertos_recentes()}, ensure_ascii=False).encode("utf-8"), timeout=60)
+    est["url"] = f"https://produtos.opus-sem-limites.com.br/{slug}/"  # subdomínio novo não tem certificado; caminho na raiz das landings
+    PUBLICO.write_text(json.dumps(est, ensure_ascii=False), "utf-8")
+
+
 def painel():
     """Manda os dados do painel (vitrine_painel.py) pros telões ligados. Também é o sinal de vida do PC1: telão sem
     dado novo há 12 min mostra "PC1 SEM SINAL"."""
     import vitrine_painel
     dados = json.dumps(vitrine_painel.montar(), ensure_ascii=False).encode("utf-8")
+    try:
+        _publico(dados)
+    except Exception as e:  # noqa: BLE001 — o link público é extra; os telões seguem
+        log(f"painel público: {type(e).__name__}: {str(e)[:120]}")
     ligados = notebooks_ligados()
     for alvo in TELOES + TELOES_PAINEL:
         try:
@@ -824,6 +993,57 @@ def _telao_de_video():
     return next((a for a in TELOES_VIDEO if _vivo(a)), TELOES_VIDEO[0])
 
 
+PEDIDOS_PUB = BASE / "estado" / "pedidos_publicos.json"
+
+
+def _pedidos_publicos():
+    """14/11 dona ("quando clico em abrir um longo no telão do Tab ele dá erro; deve abrir num dos PCs pra eu assistir,
+    de preferência no desktop ou em seguida no STI"): o painel público grava GET pedido.txt?tipo=abrir&v=<url> no
+    access.log do nginx (hermes-prod). Aqui lê os novos e abre: desktop (C:\\vitrine\\abrir.txt -> telao_win) ou, com a
+    câmera do desktop em uso / desktop fora, o STI (fila do player). PEDIDOS_PUBLICOS=0 desliga."""
+    if os.environ.get("PEDIDOS_PUBLICOS", "1") == "0":
+        return
+    import urllib.parse
+    est = json.loads(PEDIDOS_PUB.read_text("utf-8")) if PEDIDOS_PUB.exists() else {}
+    r = _ssh("hermes-prod", "grep -a 'GET /[^ ]*pedido.txt?tipo=abrir' /var/log/nginx/access.log | tail -20", timeout=40)
+    novos = []
+    for ln in (r.stdout or b"").decode("utf-8", "replace").splitlines():
+        m = re.search(r'pedido\.txt\?([^ "]+)', ln)
+        if not m:
+            continue
+        q = urllib.parse.parse_qs(m.group(1))
+        url, t = (q.get("v") or [""])[0], (q.get("t") or ["0"])[0]
+        if url.startswith(("https://www.youtube.com/", "https://youtu.be/")) and t > est.get("ultimo_t", "0"):
+            novos.append((t, url))
+    for t, url in sorted(novos)[-3:]:
+        est["ultimo_t"] = t
+        onde = None
+        try:
+            ok = _ssh("desktop", f'powershell -NoProfile -c "Set-Content -Path C:\\vitrine\\abrir.txt -Value \'{url}\'; '
+                                 f'if (Test-Path C:\\vitrine\\abrir.txt) {{ \'ok\' }}"', timeout=40)
+            cam = _ssh("desktop", 'powershell -NoProfile -c "Get-Content C:\\vitrine\\saude.csv -Tail 1"', timeout=30)
+            # saude.csv: quando,cpu,ram_pct,ram_livre_gb,ffmpeg,python,pythonw,chrome,camera,telao -> camera = índice 8
+            col = (cam.stdout or b"").decode(errors="replace").strip().splitlines()[-1:] or [""]
+            camera = (col[0].split(",") + [""] * 10)[8] == "1"
+            if b"ok" in (ok.stdout or b"") and not camera:
+                onde = "desktop"
+            elif camera:
+                _ssh("desktop", 'powershell -NoProfile -c "Remove-Item C:\\vitrine\\abrir.txt -ErrorAction SilentlyContinue"', timeout=30)
+        except subprocess.TimeoutExpired:
+            pass
+        if not onde:
+            sti = next((a for a in TELOES_PAINEL if a.endswith("100.98.49.0")), None)
+            if sti:
+                try:
+                    _ssh(sti, "rm -f ~/vitrine/SO_PAINEL; cat >> ~/vitrine/fila.txt",
+                         entrada=f"{url}#pedido{int(time.time())}\t600\tpedido do Tab\n".encode(), timeout=30)
+                    onde = "sti"
+                except subprocess.TimeoutExpired:
+                    pass
+        log(f"pedido do painel público: {url} -> {onde or 'nenhum PC respondeu'}")
+    PEDIDOS_PUB.write_text(json.dumps(est), "utf-8")
+
+
 def pedidos():
     """Botão "Ver" do painel (vídeo esperando aprovação): manda o arquivo pro telão que pediu e põe na fila dele."""
     import vitrine_painel
@@ -988,6 +1208,7 @@ def main():
                                                                   _os._exit(3))).start()
         try:
             ultima = 0.0
+            _ult_pub = [0.0]
             while time.time() < fim:
                 trava.write_text(str(time.time()))
                 if time.time() - ultima >= 120:  # vídeos que abriram a cada 2 min
@@ -1001,6 +1222,12 @@ def main():
                     pedidos()
                 except Exception as e:  # noqa: BLE001
                     log(f"pedidos falhou: {e}")
+                if time.time() - _ult_pub[0] >= 60:  # 14/11: "Abrir" do painel público (Tab) — a cada 1 min
+                    _ult_pub[0] = time.time()
+                    try:
+                        _pedidos_publicos()
+                    except Exception as e:  # noqa: BLE001
+                        log(f"pedidos públicos falhou: {e}")
                 try:  # like da conta pessoal da dona no vídeo que o Acer está tocando
                     curtir_no_telao()
                 except Exception as e:  # noqa: BLE001

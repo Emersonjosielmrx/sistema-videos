@@ -136,6 +136,11 @@ def modo_modelos():
     if not mc.get("kiro_liberado"):
         conj = {p: [m for m in ms if not str(m).startswith(("kr/", "kiro"))] for p, ms in conj.items()}
     conj = {p: list(ms) for p, ms in conj.items()}
+    # 14/11 (dona): "cc-sobra" (combo da VPS, modo_tokens.py a cada 5 min) = Opus 5.5 só nas contas cc em que outra
+    # pessoa está usando ou a janela de 5 h vira com sobra. Sem conta assim ele falha em ~1 s e a linha segue a lista
+    # normal; conta que vira "só nós" sai do combo sozinha. Desligar: modelos_central.json "cc_sobra": false.
+    if mc.get("cc_sobra", True):
+        conj = {p: (ms if p == "analista" or "cc-sobra" in ms else ["cc-sobra"] + ms) for p, ms in conj.items()}
     mc_kiro = bool(mc.get("kiro_liberado"))
     os.environ["CENTRAL_KIRO_OK"] = "1" if mc_kiro else "0"
     return pedido, vigor, motivo, conj

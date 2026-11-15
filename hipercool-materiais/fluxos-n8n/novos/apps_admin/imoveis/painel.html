@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vitrine · Painel</title><meta name="robots" content="noindex">
+<style>__CSS__
+.topo{position:sticky;top:0;z-index:20;background:var(--sup);border-bottom:1px solid var(--borda)}
+.topo .in{max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}
+.marca{font-weight:800;font-size:17px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.abas{max-width:1280px;margin:0 auto;padding:0 10px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.abas button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--tx2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;position:relative}
+.abas button.on{color:var(--pri);border-color:var(--pri)}.abas .bolha{position:absolute;top:4px;right:0;background:var(--er);color:#fff;border-radius:999px;font-size:11px;padding:0 6px;line-height:17px}
+main{max-width:1280px;margin:0 auto;padding:16px 16px 90px}
+h2{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2 .esp{flex:1}h2 .btn,h2 select,h2 input{font-size:14px;min-height:38px;padding:7px 12px;width:auto}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--sup);border:1px solid var(--borda);border-radius:14px;padding:12px 14px}.kpi .v{font-size:22px;font-weight:800}.kpi .r{font-size:12px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.im{background:var(--sup);border:1px solid var(--borda);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.im .ft{aspect-ratio:16/10;background:var(--sup2) center/cover;position:relative;cursor:pointer}
+.im .ft .tags{position:absolute;top:8px;left:8px;display:flex;gap:5px;flex-wrap:wrap}
+.im .cp{padding:12px;flex:1;display:flex;flex-direction:column;gap:4px}.im .pr{font-weight:800;color:var(--pri);font-size:18px}
+.im .ac{display:flex;gap:6px;padding:0 12px 12px;flex-wrap:wrap}
+.st-rascunho{background:#71717a;color:#fff}.st-publicado{background:var(--ok);color:#fff}.st-reservado{background:var(--av);color:#fff}.st-vendido{background:var(--er);color:#fff}
+.fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.foto{position:relative;aspect-ratio:1;border-radius:12px;background:var(--sup2) center/cover;border:2px solid transparent;cursor:grab}
+.foto.capa{border-color:var(--pri)}.foto .cp{position:absolute;top:5px;left:5px;background:var(--pri);color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px}
+.foto .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer}
+.foto .mv{position:absolute;bottom:4px;left:4px;right:4px;display:flex;gap:4px;justify-content:space-between}.foto .mv button{border:0;background:rgba(0,0,0,.6);color:#fff;border-radius:6px;width:28px;height:24px;cursor:pointer}
+.foto.arrasta{opacity:.4}.solta{border:2px dashed var(--borda);border-radius:12px;display:grid;place-items:center;aspect-ratio:1;cursor:pointer;color:var(--mu);text-align:center;font-size:13px;padding:6px}
+.solta.sobre{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 8%,transparent)}
+.modal{max-width:880px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips label{display:flex;gap:6px;align-items:center;background:var(--sup2);border:1px solid var(--borda);border-radius:99px;padding:5px 11px;margin:0;font-weight:500;color:var(--tx);cursor:pointer}
+.chips input{width:auto;min-height:0}
+.ia-box{background:linear-gradient(135deg,color-mix(in srgb,var(--pri) 12%,var(--sup)),var(--sup));border:1px solid color-mix(in srgb,var(--pri) 35%,transparent);border-radius:14px;padding:14px;margin:10px 0}
+.lead{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px;border-bottom:1px solid var(--borda)}
+.login{max-width:400px;margin:8vh auto;padding:0 16px}.alerta{background:var(--av-bg);color:var(--av);border-radius:12px;padding:10px 12px;font-weight:600;margin-bottom:12px}
+.prog{height:8px;background:var(--sup2);border-radius:99px;overflow:hidden;margin-top:6px}.prog div{height:100%;background:var(--pri);transition:width .5s}
+</style></head><body><div id="app"></div>
+<script>
+const API = location.origin + '/webhook/imoveis-api';
+const IMG = id => location.origin + '/webhook/imoveis-img?id=' + id;
+const ARQ = c => location.origin + '/videos/arquivo/' + c;
+__BASE__
+const TIPOS = { casa: 'Casa', apartamento: 'Apartamento', sobrado: 'Sobrado', cobertura: 'Cobertura', terreno: 'Terreno', comercial: 'Ponto comercial', sala: 'Sala comercial', galpao: 'Galpão', chacara: 'Chácara' };
+const FIN = { venda: 'Venda', aluguel: 'Aluguel', temporada: 'Temporada' };
+const STATUS = { rascunho: '📝 Rascunho', publicado: '🟢 Na vitrine', reservado: '🟡 Reservado', vendido: '🔴 Vendido/alugado' };
+const CARAC = ['Piscina', 'Churrasqueira', 'Área gourmet', 'Varanda', 'Sacada', 'Jardim', 'Quintal', 'Elevador', 'Portaria 24h', 'Academia', 'Salão de festas', 'Playground', 'Ar-condicionado', 'Armários planejados', 'Mobiliado', 'Lavanderia', 'Closet', 'Lareira', 'Energia solar', 'Portão eletrônico', 'Aceita pet', 'Aceita financiamento', 'Escritura ok', 'Vista para o mar'];
+const LEAD_ST = { novo: '🆕 Novo', contatado: '📞 Contatado', visita: '🏠 Visita marcada', proposta: '📄 Proposta', fechado: '🤝 Fechado', perdido: '❌ Perdido' };
+const INTER = { visita: '🏠 Quer visitar', informacoes: 'ℹ️ Informações', financiamento: '🏦 Financiamento', proposta: '📄 Proposta' };
+let EU = null, ABA = null;
+const params = new URLSearchParams(location.search);
+window.TOKEN = guarda.ler('imv_token');
+function sair() { api('sair'); guarda.gravar('imv_token', null); window.TOKEN = ''; telaLogin(); }
+function telaLogin(msg) {
+  const loja = params.get('l') || guarda.ler('imv_loja') || '';
+  $('#app').innerHTML = `<div class="login"><div class="card"><h2>🏠 Entrar no painel</h2>${msg ? `<div class="alerta">${esc(msg)}</div>` : ''}
+    <label>Código da vitrine</label><input id="lj" value="${esc(loja)}" autocapitalize="off"><label>Usuário</label><input id="lg" value="admin" autocapitalize="off">
+    <label>Senha</label><input id="sn" type="password"><button class="btn pri" style="width:100%;margin-top:14px" id="ent">Entrar</button>
+    <p class="mu pq" style="margin-top:12px">Ainda não tem? <a href="${location.origin}/webhook/imoveis-criar">Crie a sua vitrine grátis</a>.</p></div></div>`;
+  const ir = async () => { const j = await api('login', { loja: $('#lj').value.trim(), login: $('#lg').value.trim(), senha: $('#sn').value });
+    if (!j.ok) return aviso(j.erro, true); window.TOKEN = j.token; guarda.gravar('imv_token', j.token); guarda.gravar('imv_loja', $('#lj').value.trim()); iniciar(); };
+  $('#ent').onclick = ir; $('#sn').onkeydown = e => { if (e.key === 'Enter') ir(); };
+}
+async function iniciar() {
+  if (!window.TOKEN) return telaLogin();
+  const j = await api('eu'); if (!j.ok) return telaLogin(j.sair ? '' : j.erro);
+  EU = j; document.documentElement.style.setProperty('--pri', j.loja.cor);
+  const abas = j.usuario.papel === 'admin' ? ['inicio', 'imoveis', 'leads', 'equipe', 'config'] : ['inicio', 'imoveis', 'leads'];
+  const NOME = { inicio: '📊 Início', imoveis: '🏠 Imóveis', leads: '📥 Interessados', equipe: '👥 Equipe', config: '⚙️ Vitrine' };
+  $('#app').innerHTML = `<div class="topo"><div class="in"><div class="marca">${esc(j.loja.nome)}</div><a class="btn pq" target="_blank" href="${location.origin}/webhook/imoveis?l=${encodeURIComponent(j.loja.slug)}">👁️ Ver site</a>
+    <button class="btn fant pq" id="tema">🌓</button><button class="btn pq" onclick="sair()">Sair</button></div>
+    <nav class="abas">${abas.map(a => `<button data-aba="${a}">${NOME[a]}<span class="bolha" hidden></span></button>`).join('')}</nav></div><main id="tela"></main>`;
+  tema(); $$('[data-aba]').forEach(b => b.onclick = () => abrir(b.dataset.aba));
+  abrir(abas.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'inicio');
+  api('resumo').then(r => { const b = $('[data-aba="leads"] .bolha'); if (r.ok && b && r.leads_novos) { b.hidden = false; b.textContent = r.leads_novos; } });
+}
+function abrir(a) { ABA = a; location.hash = a; $$('[data-aba]').forEach(b => b.classList.toggle('on', b.dataset.aba === a)); $('#tela').innerHTML = '<div class="vazio">Carregando…</div>';
+  ({ inicio: telaInicio, imoveis: telaImoveis, leads: telaLeads, equipe: telaEquipe, config: telaConfig })[a](); }
+
+// ═════════ INÍCIO ═════════
+async function telaInicio() {
+  const r = await api('resumo'); if (!r.ok) return aviso(r.erro, true);
+  $('#tela').innerHTML = `<h2>Olá, ${esc(EU.usuario.nome.split(' ')[0])} 👋 <span class="esp"></span><button class="btn pri" onclick="editar(null)">＋ Cadastrar imóvel</button></h2>
+    ${r.sem_foto ? `<div class="alerta">📸 ${r.sem_foto} imóvel(is) com menos de 3 fotos. Imóvel com muitas fotos recebe muito mais contato.</div>` : ''}
+    ${r.sem_video ? `<div class="alerta">🎬 ${r.sem_video} imóvel(is) na vitrine sem vídeo. Gere o vídeo com 1 clique na aba Imóveis.</div>` : ''}
+    <div class="kpis"><div class="kpi"><div class="r">Na vitrine</div><div class="v">${r.publicados}</div></div><div class="kpi"><div class="r">Rascunhos</div><div class="v">${r.rascunhos}</div></div>
+    <div class="kpi"><div class="r">Negociados</div><div class="v">${r.vendidos}</div></div><div class="kpi"><div class="r">Visitas nas páginas</div><div class="v">${r.visitas}</div></div>
+    <div class="kpi"><div class="r">Cliques no WhatsApp</div><div class="v">${r.cliques}</div></div><div class="kpi"><div class="r">Interessados (7 dias)</div><div class="v">${r.leads_7d}</div><div class="mu pq">${r.leads_novos} sem resposta</div></div></div>
+    <h2>Mais vistos</h2><div class="card tabela"><table><tr><th>Imóvel</th><th>Visitas</th><th>WhatsApp</th><th>Interessados</th><th>Conversão</th></tr>
+    ${r.top.map(t => `<tr><td><b>${esc(t.codigo)}</b> ${esc(t.titulo)}</td><td class="num">${t.visitas}</td><td class="num">${t.cliques_whats}</td><td class="num">${t.leads}</td><td class="num">${t.visitas ? Math.round((t.cliques_whats + t.leads) / t.visitas * 100) : 0}%</td></tr>`).join('') || '<tr><td colspan="5" class="vazio">Cadastre o primeiro imóvel</td></tr>'}</table></div>
+    <div class="card" style="margin-top:14px"><b>🔗 Link da sua vitrine</b><div class="linha" style="margin-top:8px"><input readonly value="${location.origin}/webhook/imoveis?l=${esc(EU.loja.slug)}" id="lk"><button class="btn" style="flex:none" onclick="navigator.clipboard.writeText($('#lk').value);aviso('Link copiado')">Copiar</button></div></div>`;
+}
+
+// ═════════ IMÓVEIS ═════════
+let LISTA = [];
+async function telaImoveis() {
+  const j = await api('lista'); if (!j.ok) return aviso(j.erro, true); LISTA = j.imoveis;
+  $('#tela').innerHTML = `<h2>🏠 Imóveis <span class="esp"></span><input id="bs" placeholder="🔎 Buscar"><select id="fs"><option value="">Todos</option>${Object.entries(STATUS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+    <button class="btn pri" onclick="editar(null)">＋ Cadastrar imóvel</button></h2><div class="grade" id="gr"></div>`;
+  const d = () => { const q = $('#bs').value.toLowerCase(), s = $('#fs').value;
+    $('#gr').innerHTML = LISTA.filter(i => (!s || i.status === s) && (!q || (i.titulo + i.codigo + i.bairro).toLowerCase().includes(q))).map(i => `<div class="im">
+      <div class="ft" data-e="${i.id}" style="background-image:url('${i.capa ? IMG(i.capa) : ''}')"><div class="tags"><span class="selo st-${i.status}">${STATUS[i.status]}</span>${i.destaque ? '<span class="selo av">⭐</span>' : ''}
+        ${i.tem_video ? '<span class="selo ok">▶ vídeo</span>' : i.video_status === 'gerando' ? '<span class="selo av">⏳ vídeo</span>' : ''}</div></div>
+      <div class="cp"><div class="mu pq">${esc(i.codigo)} · ${TIPOS[i.tipo] || i.tipo} · ${FIN[i.finalidade]}</div><b>${esc(i.titulo || '(sem título)')}</b><div class="pr">${brl(i.preco).replace(',00', '')}</div>
+        <div class="mu pq">📍 ${esc(i.bairro || '—')} · 📸 ${i.n_fotos} · 👁️ ${i.visitas} · 💬 ${i.cliques} · 📥 ${i.leads}</div></div>
+      <div class="ac"><button class="btn pq" data-e="${i.id}">✏️ Editar</button><button class="btn pq" data-v="${i.id}">🎬 Vídeo</button>
+        <select class="pq" data-s="${i.id}" style="flex:1;min-height:32px;padding:4px 8px">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${i.status === k ? 'selected' : ''}>${v}</option>`).join('')}</select>
+        <button class="btn pq fant" data-m="${i.id}" title="Mais">⋯</button></div></div>`).join('') || '<div class="vazio">Nenhum imóvel. Toque em “Cadastrar imóvel”.</div>';
+    $$('[data-e]').forEach(b => b.onclick = () => editar(Number(b.dataset.e)));
+    $$('[data-v]').forEach(b => b.onclick = () => video(LISTA.find(i => i.id === Number(b.dataset.v))));
+    $$('[data-s]').forEach(s => s.onchange = async () => { if (await chama('status', { id: Number(s.dataset.s), status: s.value }, 'Status atualizado')) telaImoveis(); else telaImoveis(); });
+    $$('[data-m]').forEach(b => b.onclick = () => mais(LISTA.find(i => i.id === Number(b.dataset.m)))); };
+  $('#bs').oninput = d; $('#fs').onchange = d; d();
+}
+function mais(i) {
+  const m = modal(`<h3>${esc(i.codigo)} · ${esc(i.titulo)}</h3><div style="display:grid;gap:8px;margin-top:10px">
+    <a class="btn" target="_blank" href="${location.origin}/webhook/imovel?l=${encodeURIComponent(EU.loja.slug)}&c=${i.codigo}">👁️ Ver a página do imóvel</a>
+    <button class="btn" id="cl">🔗 Copiar link do imóvel</button><button class="btn" id="dt">${i.destaque ? '☆ Tirar dos destaques' : '⭐ Pôr em destaque'}</button>
+    <button class="btn" id="dp">📄 Duplicar (para imóvel parecido)</button><button class="btn er" id="ex">🗑️ Apagar imóvel</button></div><div class="acoes"><button class="btn" data-fechar>Fechar</button></div>`);
+  $('#cl', m).onclick = () => { navigator.clipboard.writeText(`${location.origin}/webhook/imovel?l=${EU.loja.slug}&c=${i.codigo}`); aviso('Link copiado'); };
+  $('#dt', m).onclick = async () => { if (await chama('destaque', { id: i.id })) { m.fechar(); telaImoveis(); } };
+  $('#dp', m).onclick = async () => { const r = await chama('duplicar', { id: i.id }, 'Cópia criada como rascunho'); if (r) { m.fechar(); editar(r.id); } };
+  $('#ex', m).onclick = async () => { if (await confirma(`Apagar ${i.codigo} e as fotos dele? Não dá para desfazer.`) && await chama('excluir', { id: i.id }, 'Imóvel apagado')) { m.fechar(); telaImoveis(); } };
+}
+
+async function editar(id) {
+  let I = { id: 0, titulo: '', finalidade: 'venda', tipo: 'casa', preco: 0, condominio: 0, iptu: 0, area: 0, area_total: 0, quartos: 0, suites: 0, banheiros: 0, vagas: 0, bairro: '', cidade: EU.loja.cidade || '', endereco: '', mostrar_endereco: false, descricao: '', destaques: [], caracteristicas: [], fotos: [], legendas: {}, status: 'rascunho', destaque: false, corretor_id: null };
+  if (id) { const r = await api('ver', { id }); if (!r.ok) return aviso(r.erro, true); I = r.imovel; }
+  const cor = await api('corretores');
+  const fotos = [...I.fotos], miniaturas = {}; let enviando = 0;
+  const m = modal(`<h3>${id ? `Editar ${esc(I.codigo)}` : 'Cadastrar imóvel'}</h3>
+    <label>📸 Fotos <span class="mu pq">(arraste para mudar a ordem · a primeira é a capa · até 30)</span></label><div class="fotos" id="fts"></div><input type="file" id="ff" accept="image/*" multiple hidden>
+    <div class="ia-box"><b>✨ Criar o anúncio com IA</b><p class="pq mu" style="margin:4px 0 8px">A IA olha as fotos, junta o que você escrever e preenche título, descrição, destaques e características. Você revisa antes de salvar.</p>
+      <textarea id="nt" style="min-height:60px" placeholder="Opcional: o que só você sabe. Ex.: casa reformada em 2024, rua tranquila, perto da escola, aceita carro como parte do pagamento"></textarea>
+      <button class="btn pri" id="ia" style="margin-top:8px">✨ Preencher com IA</button><div id="dicas" class="pq" hidden style="margin-top:10px;background:var(--av-bg);color:var(--av);border-radius:10px;padding:8px 10px"></div></div>
+    <div class="linha"><div><label>Finalidade</label><select id="fn">${Object.entries(FIN).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></div>
+      <div><label>Tipo</label><select id="tp">${Object.entries(TIPOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></div>
+      <div><label>Preço (R$)</label><input id="pr" inputmode="decimal"></div></div>
+    <label>Título do anúncio</label><input id="tt" maxlength="120" placeholder="ex.: Casa térrea com piscina e 3 quartos no Jardim América">
+    <div class="linha"><div><label>Área útil (m²)</label><input id="ar" inputmode="decimal"></div><div><label>Terreno (m²)</label><input id="at" inputmode="decimal"></div>
+      <div><label>Quartos</label><input id="qt" type="number" min="0"></div><div><label>Suítes</label><input id="su" type="number" min="0"></div><div><label>Banheiros</label><input id="bn" type="number" min="0"></div><div><label>Vagas</label><input id="vg" type="number" min="0"></div></div>
+    <div class="linha"><div><label>Condomínio (R$/mês)</label><input id="cd" inputmode="decimal"></div><div><label>IPTU (R$/ano)</label><input id="ip" inputmode="decimal"></div></div>
+    <div class="linha"><div><label>Bairro</label><input id="br"></div><div><label>Cidade</label><input id="cy"></div></div>
+    <label>Endereço</label><input id="en" placeholder="Rua e número"><label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="me" style="width:auto;min-height:0"> Mostrar o endereço no site (se desmarcado, só bairro e cidade)</label>
+    <label>Descrição</label><textarea id="ds" style="min-height:150px"></textarea>
+    <label>Destaques (um por linha, aparecem em lista)</label><textarea id="dq" style="min-height:80px" placeholder="Piscina aquecida&#10;Cozinha planejada"></textarea>
+    <label>Características</label><div class="chips" id="cr"></div><input id="cx" placeholder="Outra característica (Enter para adicionar)" style="margin-top:6px">
+    <div class="linha"><div><label>Corretor responsável (recebe o WhatsApp)</label><select id="co"><option value="0">Contato da vitrine</option>${(cor.usuarios || []).map(u => `<option value="${u.id}">${esc(u.nome)}</option>`).join('')}</select></div>
+      <div><label>Situação</label><select id="st">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></div></div>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="checkbox" id="dt" style="width:auto;min-height:0"> ⭐ Destaque (aparece primeiro na vitrine)</label>
+    <div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn" id="sr">Salvar rascunho</button><button class="btn pri" id="sp">Salvar e publicar</button></div>`);
+  const set = (s, v) => $(s, m).value = v ?? '';
+  set('#fn', I.finalidade); set('#tp', I.tipo); set('#pr', I.preco ? String(I.preco).replace('.', ',') : ''); set('#tt', I.titulo); set('#ar', Number(I.area) || ''); set('#at', Number(I.area_total) || '');
+  set('#qt', I.quartos || ''); set('#su', I.suites || ''); set('#bn', I.banheiros || ''); set('#vg', I.vagas || ''); set('#cd', Number(I.condominio) || ''); set('#ip', Number(I.iptu) || '');
+  set('#br', I.bairro); set('#cy', I.cidade); set('#en', I.endereco); $('#me', m).checked = I.mostrar_endereco; set('#ds', I.descricao); set('#dq', I.destaques.join('\n'));
+  set('#co', I.corretor_id || 0); set('#st', I.status); $('#dt', m).checked = I.destaque;
+  const caracs = new Set(I.caracteristicas);
+  const desenhaCar = () => { $('#cr', m).innerHTML = [...new Set([...CARAC, ...caracs])].map(c => `<label><input type="checkbox" value="${esc(c)}" ${caracs.has(c) ? 'checked' : ''}> ${esc(c)}</label>`).join('');
+    $$('#cr input', m).forEach(x => x.onchange = () => x.checked ? caracs.add(x.value) : caracs.delete(x.value)); };
+  $('#cx', m).onkeydown = e => { if (e.key === 'Enter' && e.target.value.trim()) { caracs.add(e.target.value.trim()); e.target.value = ''; desenhaCar(); } };
+  let arrastando = null;
+  const desenhaFotos = () => {
+    $('#fts', m).innerHTML = fotos.map((f, i) => `<div class="foto ${i === 0 ? 'capa' : ''}" draggable="true" data-i="${i}" style="background-image:url('${f.startsWith('tmp:') ? miniaturas[f] : IMG(f)}')">
+      ${i === 0 ? '<span class="cp">CAPA</span>' : ''}${f.startsWith('tmp:') ? '<span class="cp" style="background:#000">⏳</span>' : ''}<button class="x" data-x="${i}">✕</button>
+      <div class="mv"><button data-esq="${i}">‹</button><button data-cap="${i}" title="Usar como capa">★</button><button data-dir="${i}">›</button></div></div>`).join('') +
+      `<div class="solta" id="add">＋<br>Adicionar fotos<br><span class="pq">ou arraste aqui</span></div>`;
+    $('#add', m).onclick = () => $('#ff', m).click();
+    $$('[data-x]', m).forEach(b => b.onclick = e => { e.stopPropagation(); fotos.splice(Number(b.dataset.x), 1); desenhaFotos(); });
+    const move = (i, j) => { if (j < 0 || j >= fotos.length) return; const [f] = fotos.splice(i, 1); fotos.splice(j, 0, f); desenhaFotos(); };
+    $$('[data-esq]', m).forEach(b => b.onclick = () => move(Number(b.dataset.esq), Number(b.dataset.esq) - 1));
+    $$('[data-dir]', m).forEach(b => b.onclick = () => move(Number(b.dataset.dir), Number(b.dataset.dir) + 1));
+    $$('[data-cap]', m).forEach(b => b.onclick = () => move(Number(b.dataset.cap), 0));
+    $$('.foto', m).forEach(el => { el.ondragstart = () => { arrastando = Number(el.dataset.i); el.classList.add('arrasta'); }; el.ondragend = () => el.classList.remove('arrasta');
+      el.ondragover = e => e.preventDefault(); el.ondrop = e => { e.preventDefault(); if (arrastando !== null && !e.dataTransfer.files.length) move(arrastando, Number(el.dataset.i)); arrastando = null; }; });
+  };
+  const sobe = async lista => {
+    const arqs = [...lista].filter(f => f.type.startsWith('image/')).slice(0, 30 - fotos.length);
+    for (const a of arqs) {
+      const tmp = 'tmp:' + Math.random().toString(36).slice(2); fotos.push(tmp); miniaturas[tmp] = URL.createObjectURL(a); desenhaFotos(); enviando++;
+      try { const b64 = await reduzFoto(a, 1800, .84); const r = await api('img_salvar', { mime: 'image/jpeg', b64 });
+        const k = fotos.indexOf(tmp); if (r.ok && k > -1) { fotos[k] = r.id; miniaturas[r.id] = await reduzFoto(a, 512, .7); } else { if (k > -1) fotos.splice(k, 1); aviso(r.erro || 'Falha ao enviar foto', true); }
+      } catch (er) { const k = fotos.indexOf(tmp); if (k > -1) fotos.splice(k, 1); aviso(er.message, true); }
+      enviando--; desenhaFotos();
+    }
+  };
+  $('#ff', m).onchange = e => sobe(e.target.files);
+  const zona = $('#fts', m); zona.ondragover = e => { e.preventDefault(); }; zona.ondrop = e => { if (e.dataTransfer.files.length) { e.preventDefault(); sobe(e.dataTransfer.files); } };
+
+  $('#ia', m).onclick = async () => {
+    const ids = fotos.filter(f => !f.startsWith('tmp:')).slice(0, 10);
+    if (!ids.length && !$('#nt', m).value.trim()) return aviso('Adicione fotos ou escreva algo sobre o imóvel.', true);
+    $('#ia', m).disabled = true; $('#ia', m).textContent = '⏳ A IA está olhando as fotos… (até 1 min)';
+    // miniaturas pequenas para a visão (das que acabaram de subir já temos; das antigas, baixa e reduz)
+    const minis = [];
+    for (const f of ids) { try { if (miniaturas[f] && miniaturas[f].length < 200000 && !miniaturas[f].startsWith('blob:')) minis.push(miniaturas[f]); else { const bl = await (await fetch(IMG(f))).blob(); minis.push(await reduzFoto(bl, 512, .7)); } } catch (e) {} }
+    const dados = { finalidade: $('#fn', m).value, tipo: $('#tp', m).value, preco: numIn($('#pr', m).value), quartos: $('#qt', m).value, suites: $('#su', m).value, banheiros: $('#bn', m).value, vagas: $('#vg', m).value, area: $('#ar', m).value, bairro: $('#br', m).value, cidade: $('#cy', m).value, titulo: $('#tt', m).value };
+    const r = await api('ia_anuncio', { miniaturas: minis, notas: $('#nt', m).value, dados });
+    $('#ia', m).disabled = false; $('#ia', m).textContent = '✨ Preencher com IA';
+    if (!r.ok) return aviso(r.erro, true);
+    let a; try { a = JSON.parse(String(r.resultado).replace(/^\s*```(?:json)?/i, '').replace(/```\s*$/, '')); } catch (e) { return aviso('A IA respondeu fora do formato. Tente de novo.', true); }
+    if (a.titulo) set('#tt', a.titulo); if (a.descricao) set('#ds', a.descricao); if (Array.isArray(a.destaques)) set('#dq', a.destaques.join('\n'));
+    if (Array.isArray(a.caracteristicas)) { a.caracteristicas.forEach(c => caracs.add(c)); desenhaCar(); }
+    if (a.tipo && TIPOS[a.tipo] && !id) set('#tp', a.tipo);
+    const sug = []; for (const [k, s, nm] of [['quartos', '#qt', 'quartos'], ['suites', '#su', 'suítes'], ['banheiros', '#bn', 'banheiros'], ['vagas', '#vg', 'vagas']]) if (!$(s, m).value && Number(a[k])) { set(s, a[k]); $(s, m).style.outline = '2px dashed var(--av)'; sug.push(nm); }
+    if (sug.length) a.avisos = [...(a.avisos || []), `Confira: a IA chutou ${sug.join(', ')} pelas fotos (campos marcados).`];
+    if (Array.isArray(a.ordem_fotos) && a.ordem_fotos.length) { const nova = a.ordem_fotos.map(n => ids[n]).filter(Boolean); const resto = fotos.filter(f => !nova.includes(f)); fotos.splice(0, fotos.length, ...new Set([...nova, ...resto])); desenhaFotos(); }
+    if (a.legendas) Object.entries(a.legendas).forEach(([n, t]) => { if (ids[n]) I.legendas[ids[n]] = t; });
+    aviso('✨ Pronto! Revise o texto e salve.');
+    $('#dicas', m).innerHTML = a.avisos && a.avisos.length ? `<b>💡 Dicas da IA</b><ul style="margin:4px 0 0 18px">${a.avisos.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''; $('#dicas', m).hidden = !(a.avisos && a.avisos.length);
+  };
+  const salvar = async publicar => {
+    if (enviando) return aviso('Espere as fotos terminarem de enviar.', true);
+    const d = { id: I.id || 0, titulo: $('#tt', m).value, finalidade: $('#fn', m).value, tipo: $('#tp', m).value, preco: numIn($('#pr', m).value), condominio: numIn($('#cd', m).value), iptu: numIn($('#ip', m).value),
+      area: numIn($('#ar', m).value), area_total: numIn($('#at', m).value), quartos: Number($('#qt', m).value) || 0, suites: Number($('#su', m).value) || 0, banheiros: Number($('#bn', m).value) || 0, vagas: Number($('#vg', m).value) || 0,
+      bairro: $('#br', m).value, cidade: $('#cy', m).value, endereco: $('#en', m).value, mostrar_endereco: $('#me', m).checked, descricao: $('#ds', m).value,
+      destaques: $('#dq', m).value.split('\n').map(s => s.trim()).filter(Boolean), caracteristicas: [...caracs], fotos: fotos.filter(f => !f.startsWith('tmp:')), legendas: I.legendas || {},
+      status: publicar ? 'publicado' : ($('#st', m).value === 'publicado' ? 'rascunho' : $('#st', m).value), destaque: $('#dt', m).checked, corretor_id: Number($('#co', m).value) || 0 };
+    const r = await chama('salvar', d, publicar ? '🟢 Publicado na vitrine' : (d.status === 'rascunho' ? '📝 Salvo como rascunho (não aparece no site)' : 'Salvo'));
+    if (!r) return;
+    m.fechar();
+    if (publicar && (!I.video || !I.video.url) && d.fotos.length >= 3 && await confirma('Gerar agora o vídeo deste imóvel com IA? (leva uns 3 minutos e roda sozinho)'))
+      { await telaImoveis(); return video(LISTA.find(x => x.id === r.id)); }
+    if (ABA === 'imoveis') telaImoveis(); else abrir('imoveis');
+  };
+  $('#sr', m).onclick = () => salvar(false); $('#sp', m).onclick = () => salvar(true);
+  desenhaFotos(); desenhaCar();
+}
+
+// ═════════ VÍDEO (usa o fluxo "Vídeo de Anúncio com IA") ═════════
+async function video(i) {
+  const r = await api('ver', { id: i.id }); if (!r.ok) return aviso(r.erro, true); const I = r.imovel, V = I.video || {};
+  const m = modal(`<h3>🎬 Vídeo · ${esc(I.codigo)}</h3>
+    ${V.url ? `<video src="${ARQ(V.url)}" ${V.capa ? `poster="${ARQ(V.capa)}"` : ''} controls playsinline style="width:100%;max-height:60vh;border-radius:12px;background:#000"></video><p class="mu pq" style="margin-top:6px">Este vídeo aparece na página do imóvel. Baixe para postar no Instagram, TikTok e Status.</p>
+      <div class="linha" style="margin-top:8px"><a class="btn" href="${ARQ(V.url)}" download>⬇️ Baixar vídeo</a><button class="btn pri" id="ig">📸 Postar no Instagram</button></div>` : '<p class="mu">A IA escolhe a ordem das fotos, escreve o roteiro, narra com voz humana, põe movimento de câmera, preço e música. Fica pronto em 2 a 4 minutos.</p>'}
+    <div id="gera" ${V.status === 'gerando' ? 'hidden' : ''}><div class="linha" style="margin-top:12px"><div><label>Formato</label><select id="fm"><option value="vertical">Vertical (Reels, Status, TikTok)</option><option value="quadrado">Quadrado (feed)</option><option value="deitado">Deitado (YouTube, site)</option></select></div>
+      <div><label>Duração</label><select id="du"><option value="30">30 s</option><option value="15">15 s</option><option value="60">60 s</option></select></div>
+      <div><label>Voz</label><select id="vz"><option value="pt-BR-ThalitaMultilingualNeural">Thalita (feminina)</option><option value="en-US-AndrewMultilingualNeural">Andrew (masculina)</option></select></div></div>
+      <button class="btn pri" id="ir" style="margin-top:12px;width:100%">${V.url ? '🔁 Gerar um vídeo novo' : '🎬 Gerar o vídeo com IA'}</button></div>
+    <div id="and" ${V.status === 'gerando' ? '' : 'hidden'}><b id="et">Preparando…</b><div class="prog"><div id="pb" style="width:4%"></div></div><p class="mu pq" style="margin-top:6px">Pode fechar esta janela: o vídeo continua sendo feito e aparece aqui quando ficar pronto.</p></div>
+    <div class="acoes"><button class="btn" data-fechar>Fechar</button></div>`);
+  const ETAPAS = { recebido: [8, 'Pedido recebido'], fotos: [18, '👀 A IA está olhando as fotos'], estrategia: [30, '🧠 Pensando no público e no ângulo'], roteiro: [42, '✍️ Escrevendo o roteiro'], revisao: [52, '🔎 Revisando (sem inventar nada)'], direcao: [62, '🎬 Dirigindo as cenas'], narrando: [72, '🎙️ Gravando a narração'], montando: [85, '🎞️ Montando o vídeo'], pronto: [100, '✅ Pronto!'] };
+  let parar = false; m.closest('.modal-fundo').addEventListener('remove', () => parar = true);
+  const acompanha = async job => {
+    $('#gera', m).hidden = true; $('#and', m).hidden = false;
+    for (let k = 0; k < 120 && !parar && document.body.contains(m); k++) {
+      let s; try { s = await (await fetch(`${location.origin}/webhook/anuncio-video-status?job=${job}`)).json(); } catch (e) { s = {}; }
+      const e = ETAPAS[s.etapa]; if (e) { $('#et', m).textContent = e[1] + (s.detalhe ? ' · ' + s.detalhe : ''); $('#pb', m).style.width = (s.etapa === 'montando' && s.progresso ? 75 + s.progresso * .2 : e[0]) + '%'; }
+      if (s.etapa === 'pronto' || s.etapa === 'erro') {
+        const g = await api('video_guardar', { id: I.id, job: s.job || job, pagina: s.pagina || '', erro: s.erro || '' });
+        if (s.etapa === 'erro' || !g.ok) { $('#et', m).textContent = '❌ ' + (s.erro || g.erro || 'Falhou'); $('#gera', m).hidden = false; return; }
+        aviso('🎬 Vídeo pronto!'); m.fechar(); video(i); if (ABA === 'imoveis') telaImoveis(); return;
+      }
+      await new Promise(r => setTimeout(r, 4000));
+    }
+  };
+  $('#ir', m).onclick = async () => {
+    $('#ir', m).disabled = true; $('#ir', m).textContent = '⏳ Enviando as fotos…';
+    const g = await api('video_gerar', { id: I.id, formato: $('#fm', m).value, duracao: Number($('#du', m).value), voz: $('#vz', m).value });
+    $('#ir', m).disabled = false; $('#ir', m).textContent = '🎬 Gerar o vídeo com IA';
+    if (!g.ok) return aviso(g.erro, true);
+    acompanha(g.job);
+  };
+  if (V.status === 'gerando' && V.job) acompanha(V.job);
+  if ($('#ig', m)) $('#ig', m).onclick = () => { m.fechar(); postarInsta(I, r.pode_postar); };
+}
+async function postarInsta(I, pode) {
+  const m = modal(`<h3>📸 Postar ${esc(I.codigo)} no Instagram</h3><p class="mu pq">A IA escreve a legenda com gancho, destaques, chamada e hashtags da região. Revise antes de postar.</p>
+    <textarea id="lg" style="min-height:220px">${esc((I.instagram && I.instagram.legenda) || '')}</textarea><button class="btn pq" id="ia" style="margin-top:6px">✨ ${I.instagram && I.instagram.legenda ? 'Escrever outra' : 'Escrever com IA'}</button>
+    <div id="rs" class="pq" style="margin-top:10px"></div>
+    <div class="acoes"><button class="btn" data-fechar>Fechar</button><button class="btn" id="cp">📋 Copiar legenda</button><a class="btn" href="${ARQ(I.video.url)}" download>⬇️ Vídeo</a>
+      ${pode ? '<button class="btn pri" id="ps">📤 Postar como Reel agora</button>' : ''}</div>`);
+  const gera = async () => { $('#ia', m).disabled = true; $('#ia', m).textContent = '⏳ escrevendo…'; const r = await api('insta_legenda', { id: I.id }); $('#ia', m).disabled = false; $('#ia', m).textContent = '✨ Escrever outra';
+    if (!r.ok) return aviso(r.erro, true); $('#lg', m).value = r.resultado; api('insta_salvar', { id: I.id, legenda: r.resultado }); };
+  $('#ia', m).onclick = gera; if (!$('#lg', m).value) gera();
+  $('#cp', m).onclick = () => { navigator.clipboard.writeText($('#lg', m).value); aviso('Legenda copiada'); };
+  if ($('#ps', m)) $('#ps', m).onclick = async () => { if (!await confirma('Publicar agora no Instagram conectado?')) return;
+    $('#ps', m).disabled = true; $('#ps', m).textContent = '⏳ Enviando o Reel (até 2 min)…';
+    const r = await api('insta_postar', { id: I.id, legenda: $('#lg', m).value }); $('#ps', m).disabled = false; $('#ps', m).textContent = '📤 Postar como Reel agora';
+    $('#rs', m).innerHTML = r.ok ? `✅ Publicado! ${r.link ? `<a href="${esc(r.link)}" target="_blank">ver no Instagram</a>` : ''}` : `<span style="color:var(--er)">❌ ${esc(r.erro)}</span>`; };
+}
+
+// ═════════ LEADS ═════════
+async function telaLeads() {
+  const j = await api('leads'); if (!j.ok) return aviso(j.erro, true);
+  $('#tela').innerHTML = `<h2>📥 Interessados <span class="esp"></span><select id="fl"><option value="">Todos</option>${Object.entries(LEAD_ST).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></h2><div class="card" id="ll" style="padding:0"></div>`;
+  const d = () => { const f = $('#fl').value; $('#ll').innerHTML = j.leads.filter(l => !f || l.status === f).map(l => `<div class="lead"><div><b>${esc(l.nome)}</b> <span class="selo">${INTER[l.interesse] || l.interesse}</span>
+      <div class="pq mu">${new Date(l.criado_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })} · ${l.imovel ? esc(l.imovel.codigo + ' ' + l.imovel.titulo) : 'imóvel apagado'}</div>
+      ${l.mensagem ? `<div style="margin-top:4px">“${esc(l.mensagem)}”</div>` : ''}${l.notas ? `<div class="pq" style="margin-top:4px;background:var(--sup2);padding:6px 8px;border-radius:8px">📝 ${esc(l.notas)}</div>` : ''}</div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end"><a class="btn pq" style="background:#25D366;color:#fff;border-color:#25D366" target="_blank" href="https://wa.me/${l.telefone.length <= 11 ? '55' + l.telefone : l.telefone}?text=${encodeURIComponent(`Olá ${l.nome.split(' ')[0]}! Aqui é da ${EU.loja.nome}. Vi seu interesse no imóvel ${l.imovel ? l.imovel.codigo : ''}. Posso te ajudar?`)}">💬 Responder</a>
+      <select data-l="${l.id}" class="pq" style="min-height:32px;padding:4px 8px;width:auto">${Object.entries(LEAD_ST).map(([k, v]) => `<option value="${k}" ${l.status === k ? 'selected' : ''}>${v}</option>`).join('')}</select>
+      <button class="btn pq fant" data-n="${l.id}">📝 Anotar</button></div></div>`).join('') || '<div class="vazio">Nenhum interessado ainda. Divulgue o link da vitrine!</div>';
+    $$('[data-l]').forEach(s => s.onchange = async () => { if (await chama('lead_salvar', { id: Number(s.dataset.l), status: s.value }, 'Atualizado')) j.leads.find(l => l.id === Number(s.dataset.l)).status = s.value; });
+    $$('[data-n]').forEach(b => b.onclick = async () => { const l = j.leads.find(x => x.id === Number(b.dataset.n)); const t = prompt('Anotação sobre ' + l.nome + ':', l.notas || ''); if (t === null) return;
+      if (await chama('lead_salvar', { id: l.id, notas: t }, 'Anotado')) { l.notas = t; d(); } }); };
+  $('#fl').onchange = d; d();
+}
+// ═════════ EQUIPE ═════════
+async function telaEquipe() {
+  const [u, a] = await Promise.all([api('usuarios'), api('atividades')]); if (!u.ok) return aviso(u.erro, true);
+  $('#tela').innerHTML = `<h2>👥 Equipe <span class="esp"></span><button class="btn pri" id="nu">＋ Corretor</button></h2>
+    <div class="card tabela"><table><tr><th>Nome</th><th>Usuário</th><th>Papel</th><th>WhatsApp</th><th>Situação</th><th></th></tr>${u.usuarios.map(x => `<tr><td><b>${esc(x.nome)}</b></td><td>${esc(x.login)}</td><td>${x.papel === 'admin' ? '👑 Administrador' : '🏠 Corretor'}</td><td>${esc(x.whatsapp)}</td>
+      <td>${x.ativo ? '<span class="selo ok">ativo</span>' : '<span class="selo">bloqueado</span>'}</td><td><button class="btn pq" data-u="${x.id}">Editar</button></td></tr>`).join('')}</table></div>
+    <p class="mu pq" style="margin:8px 0 20px">👑 Administrador mexe em tudo · 🏠 Corretor cadastra imóveis e atende interessados. O WhatsApp do corretor responsável aparece na página do imóvel.<br>Cada um entra com o código <b>${esc(EU.loja.slug)}</b>.</p>
+    <h2>📜 Registro de atividades</h2><div class="card tabela"><table><tr><th>Quando</th><th>Quem</th><th>O quê</th></tr>${(a.atividades || []).map(x => `<tr><td class="pq">${new Date(x.em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</td><td>${esc(x.usuario)}</td><td><b>${esc(x.acao)}</b> <span class="mu">${esc(x.detalhe)}</span></td></tr>`).join('')}</table></div>`;
+  const ed = x => { const m = modal(`<h3>${x ? 'Editar' : 'Novo'} corretor</h3><label>Nome</label><input id="nm" value="${esc(x ? x.nome : '')}"><label>WhatsApp</label><input id="wa" inputmode="tel" value="${esc(x ? x.whatsapp : '')}">
+    <div class="linha"><div><label>Usuário</label><input id="lg" value="${esc(x ? x.login : '')}" ${x ? 'disabled' : ''} autocapitalize="off"></div><div><label>${x ? 'Nova senha (vazio = manter)' : 'Senha'}</label><input id="sn"></div></div>
+    <label>Papel</label><select id="pp"><option value="corretor">🏠 Corretor</option><option value="admin">👑 Administrador</option></select>
+    ${x ? `<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="at" style="width:auto;min-height:0" ${x.ativo ? 'checked' : ''}> Pode entrar</label>` : ''}<div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="ok">Salvar</button></div>`);
+    if (x) $('#pp', m).value = x.papel;
+    $('#ok', m).onclick = async () => { if (await chama('usuario_salvar', { id: x ? x.id : 0, nome: $('#nm', m).value, whatsapp: $('#wa', m).value, login: $('#lg', m).value, senha: $('#sn', m).value, papel: $('#pp', m).value, ativo: x ? $('#at', m).checked : true }, 'Salvo')) { m.fechar(); telaEquipe(); } }; };
+  $('#nu').onclick = () => ed(null); $$('[data-u]').forEach(b => b.onclick = () => ed(u.usuarios.find(x => x.id === Number(b.dataset.u))));
+}
+// ═════════ CONFIG ═════════
+async function telaConfig() {
+  const j = await api('config_ver'); if (!j.ok) return aviso(j.erro, true); const c = j.config; let logo = c.logo;
+  $('#tela').innerHTML = `<div class="card" style="max-width:640px"><h2>⚙️ Sua vitrine</h2><label>Nome (imobiliária ou corretor)</label><input id="nm" value="${esc(c.nome)}">
+    <div class="linha"><div><label>CRECI</label><input id="cr" value="${esc(c.creci)}"></div><div><label>Cidade principal</label><input id="cy" value="${esc(c.cidade)}"></div></div>
+    <div class="linha"><div><label>WhatsApp</label><input id="wa" inputmode="tel" value="${esc(c.whatsapp)}"></div><div><label>Instagram</label><input id="ig" value="${esc(c.instagram)}" placeholder="sem @"></div></div>
+    <label>Juros do simulador de financiamento (% ao ano)</label><input id="jr" inputmode="decimal" value="${String(c.juros_ano ?? 11.5).replace('.', ',')}">
+    <label>Frase de apresentação (aparece no topo do site)</label><textarea id="sb" style="min-height:70px">${esc(c.sobre)}</textarea>
+    <div class="linha"><div><label>Cor principal</label><input id="co" type="color" value="${esc(c.cor)}" style="padding:4px"></div><div><label>Logo</label><div class="linha" style="flex-wrap:nowrap"><div id="lv" style="flex:0 0 52px;height:52px;border-radius:10px;background:var(--sup2);display:grid;place-items:center;overflow:hidden"></div><input type="file" id="lf" accept="image/*"></div></div></div>
+    <button class="btn pri" id="sv" style="margin-top:16px;width:100%">Salvar</button></div>`;
+  const lv = () => $('#lv').innerHTML = logo ? `<img src="${IMG(logo)}" style="width:100%;height:100%;object-fit:contain">` : '🏠'; lv();
+  $('#lf').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { const r = await chama('img_salvar', { mime: 'image/jpeg', b64: await reduzFoto(f, 600) }); if (r) { logo = r.id; lv(); } } catch (er) { aviso(er.message, true); } };
+  $('#sv').onclick = async () => { if (await chama('config_salvar', { nome: $('#nm').value, creci: $('#cr').value, cidade: $('#cy').value, whatsapp: $('#wa').value, instagram: $('#ig').value, sobre: $('#sb').value, cor: $('#co').value, logo: logo || '', juros_ano: numIn($('#jr').value) }, 'Salvo')) iniciar(); };
+}
+iniciar();
+</script></body></html>
