@@ -297,6 +297,7 @@ def vez(rotulo=""):
                 break
             time.sleep(2)
     _local.dentro = 1
+    _t_pegou = time.time()
     # 22/10 (dono: "falei pra usar o webshare"): operação PEQUENA (busca/legenda/probe/lista, KB) sai por proxy
     # rotativo via env http_proxy — cobre todos os chamadores sem mexer neles; DOWNLOAD (MB) segue direto (a
     # banda da Webshare é limitada). Quem passa --proxy explícito não é afetado (a flag vence a env).
@@ -333,6 +334,14 @@ def vez(rotulo=""):
         try:
             (ULTIMA.with_name("ytdlp_vez_pequenas.json") if pequena else ULTIMA).write_text(
                 json.dumps({"fim": time.time(), "rotulo": rotulo, "pid": os.getpid()}), encoding="utf-8")
+        except OSError:
+            pass
+        # 15/11: registro de uso da vez (quem, quanto esperou, quanto segurou) para achar o gargalo dos preparos
+        try:
+            with open(TRAVA.with_name("ytdlp_vez_uso.log"), "a", encoding="utf-8") as _fu:
+                _fu.write("\t".join((time.strftime("%d/%m %H:%M:%S"), "peq" if pequena else "dl", str(rotulo),
+                                     f"espera={_t_pegou - t0:.0f}", f"segurou={time.time() - _t_pegou:.0f}",
+                                     f"pid={os.getpid()}")) + "\n")
         except OSError:
             pass
         if pegou:

@@ -697,8 +697,25 @@ def preparar_proximo_pc2():
         f.close()
         return False
     try:
-        if len(_prontos_pc2()) >= 1:
-            return False  # já tem 1 pronto (a pilha maior é do encher_pilha.py, fora da rodada do alimentador)
+        # 15/11: era 1. A pilha é dividida por PC2, desktop e STI; com 1 só, 24 de 43 disparos de hoje baixaram na hora
+        # (média 337 s, até 1296 s com a máquina parada). Sem baixador de fora, só o preparo de casa enche a pilha:
+        # mantém PREPARO_CASA_ALVO (padrão 3 = 1 por consumidor) prontos ou baixando. PREPARO_CASA_ALVO=1 = antigo.
+        _baixando = 0
+        for _p in (PRONTOS_PC2.glob("_baixando_*") if PRONTOS_PC2.exists() else []):
+            try:
+                if time.time() - _p.stat().st_mtime > 1800:  # órfão (processo morreu): libera o vídeo e apaga
+                    _vid = _p.name[len("_baixando_"):]
+                    _tent = FEITOS / "_feitos_short_attempted.txt"
+                    _tent.write_text("".join(l + "\n" for l in _tent.read_text(encoding="utf-8").split() if l != _vid),
+                                     encoding="utf-8")
+                    shutil.rmtree(_p, ignore_errors=True)
+                    log(f"pilha: preparo órfão {_vid} (> 30 min) apagado e devolvido à fila")
+                elif _p.is_dir():
+                    _baixando += 1
+            except OSError:
+                pass
+        if len(_prontos_pc2()) + _baixando >= int(os.environ.get("PREPARO_CASA_ALVO", "3")):
+            return False
         if shutil.disk_usage(str(BASE)).free / 1e9 < PILHA_DISCO_MIN_GB:
             return False  # disco no fim: não empilha (quem dispara na hora ainda funciona)
         sys.path.insert(0, str(PROD / "bin"))
@@ -728,7 +745,8 @@ def preparar_proximo_pc2():
         pasta.mkdir(parents=True, exist_ok=True)
         (pasta / "meta_parcial.json").write_text(json.dumps({"alvo": {"canal": alvo["canal"]}}), encoding="utf-8")
         t0 = time.time()
-        os.environ["YTDLP_PRIORIDADE"] = "pc2"  # 30/10 (D39): o download do PC2 passa na frente na vez do yt-dlp
+        if os.environ.get("PREPARO_SEM_PRIORIDADE") != "1":  # 15/11: o EncherPilha prepara sem furar a fila
+            os.environ["YTDLP_PRIORIDADE"] = "pc2"  # 30/10 (D39): o download do PC2 passa na frente na vez do yt-dlp
         video, _extras = _fonte_para(cand, pasta, anime_fetch)
         if not video:
             log(f"[!] preparar: download falhou pra {cand['id']} — volta pra fila")

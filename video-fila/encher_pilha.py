@@ -55,6 +55,15 @@ def main():
         n = ocioso.encher_pilha(max_seg=int(os.environ.get("PILHA_ESPERA_SEG", "300")))
         if n:
             log(f"rodada: +{n} na pilha (alvo {ocioso.PILHA_ALVO})")
+        else:
+            # 15/11: sem baixador de fora (3º banimento), a pilha só enchia pelo alimentador do PC2, 1 por rodada e só
+            # se ele tivesse vez — PC3 e STI baixavam na hora (até 21 min parados). Aqui prepara mais 1 pela fila de
+            # casa (mesma regra de ocioso.preparar_proximo_pc2, alvo PREPARO_CASA_ALVO). PILHA_CASA=0 desliga.
+            if os.environ.get("PILHA_CASA", "1") != "0":
+                t0 = time.time()
+                os.environ["PREPARO_SEM_PRIORIDADE"] = "1"  # disparo ao vivo passa na frente deste
+                if ocioso.preparar_proximo_pc2():
+                    log(f"rodada: +1 na pilha pela fila de casa ({round(time.time() - t0)} s)")
     except Exception as e:  # noqa: BLE001
         log(f"[!] {type(e).__name__}: {str(e)[:200]}")
     return 0
