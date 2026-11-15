@@ -139,8 +139,15 @@ def download_video(url, out_dir, max_height=720):
         if proxy:
             cmd.extend(["--proxy", proxy])
         env = os.environ.copy()
+        # 15/11: um download de Short travado segurou a vez do yt-dlp 1908 s (07:20-07:52) e todos os preparos de PC2,
+        # desktop e STI esperaram o teto de 30 min. Short baixa em 12-18 s (ytdlp_vez_uso.log): teto SHORT_DL_SEG
+        # (padrão 300) e socket-timeout 30 s; vídeo longo continua com 1800 s.
+        _curto = "/shorts/" in str(url)
+        if _curto:
+            cmd.extend(["--socket-timeout", "30"])
         with ytdlp_vez.vez("anime: download"):
-            _run_seguro(cmd, check=True, capture_output=True, text=True, timeout=1800, env=env)
+            _run_seguro(cmd, check=True, capture_output=True, text=True,
+                        timeout=int(os.environ.get("SHORT_DL_SEG", "300")) if _curto else 1800, env=env)
         for f in out_dir.glob("source.*"):
             if f.stem == "source" and f.suffix.lower() in (".mp4", ".mkv", ".webm"):  # 30/10: nunca o pedaço source.f396
                 _banda_proxy_gastar(sum(x.stat().st_size for x in out_dir.glob("source.*")) / 1e6 if proxy else 0)
@@ -443,7 +450,9 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
     # Vídeos médios (10-25 min): 2.5x a duração
     # Vídeos longos (>25 min): 1.5x a duração, máximo 7200s (2h)
     if max_seconds <= 600:
-        whisper_timeout = max(900, int(max_seconds * 5))
+        # Calcula sobre a duração REAL do vídeo (sem a margem de +60s), mínimo 900s
+        duracao_real = max(60, max_seconds - 60)  # remove os +60s que anime_auto.py adiciona
+        whisper_timeout = max(900, int(duracao_real * 5))
     elif max_seconds <= 1500:
         whisper_timeout = int(max_seconds * 2.5)
     else:
