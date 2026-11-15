@@ -2118,3 +2118,41 @@ congela 0,5 s depois de cada frase no longo).
    maumoya/SignalForge (efeito por canal com correção de falso positivo), velvetthunder15/heatmapify (cortes/movimento
    por ffmpeg + curva "mais repetidos"), Hao0321/video-autopilot-kit (regras numéricas de ritmo e SFX),
    AmnioticF72072/rvc-cpu-lite (clone de voz por ONNX, pro STI/HP).
+
+## 15/11/2026 03:30 — análise da ESCADA de Shorts (pedido da dona) — números e o que mudou
+Base: 1.429 Shorts de parceiro com views de 48 h (18/10 a 12/11), ledger e metricas_studio. Scripts: D:\tmp\escada*.py.
+
+**O que os dados mostram**
+1. **Postar mais NÃO derruba o vídeo nos canais fortes.** Por nº de posts no dia (novembro): Esporte Noturno 4/dia
+   965, 5/dia 1.208, 6/dia 1.228, 7/dia 1.272 por vídeo; HistoriasEmFrames 1.000-1.456 de 3 a 6/dia; CenaReact
+   964-1.199 de 4 a 6/dia. Ordem no dia: 1º post 0,98x, 2º 1,05x, 3º 1,00x, 4º 1,10x, 5º 1,05x, 6º+ 1,23x a mediana do
+   canal — o 5º e o 6º rendem igual ao 1º. Cada vaga a mais num canal forte vale ~1.000-1.400 views.
+2. **Onde a produção vai x onde as views vêm** (06-12/11): canais FORTES recebem 44% dos Shorts (32,7/dia) e dão 84%
+   das views (1.401 por Short); os FRACOS recebem 55% (40,6/dia) e dão 16% (209 por Short).
+3. **Nos fracos, 1 vídeo carrega o dia:** o maior vídeo de cada dia soma 90% das views; em vários, postar 4+ por dia
+   rende MENOS que 1-3 (Curiosidades 987 x 95; Dorama 760 x 26; Game 493 x 168; Animescomia 1.407 x 579). Exceções
+   onde mais posts ajudaram: Bicho Noturno, Filme Noturno, CartuchoReact.
+4. **Intervalo entre posts:** 46-75 min = 1,08x; 2-4 h = 1,03x; mais de 4 h = 0,98x. O intervalo atual de 1 h não
+   custa nada. Abaixo de 45 min só há 3 casos (0,23x) — não dá pra concluir.
+5. **A escada classificava errado 3 canais fortes.** A nota vinha de TUDO que o canal posta (Veo e longos juntos):
+   InventoReact 45 (tratado como FRACO, preso em 4/dia) x 1.152 nos Shorts — é o 2º melhor canal; Fio da Meada 231 x
+   989; inovare manhwa br 234 x 887.
+6. **Limite diário do YouTube: não achei a regra nos nossos números.** 76 bloqueios desde 28/10; 21 com ZERO envio
+   nosso nas 24 h antes e 9 com 1; ManhwaReact 14 bloqueios e InventoReact 12, enquanto Esporte Noturno, Assist-IA e
+   Bicho Noturno fizeram os mesmos picos (10-12 em 24 h) sem nenhum. Não é conta compartilhada (1 canal por conta) nem
+   hora do envio (bloqueados e não bloqueados enviam ~50% de madrugada). Parece limite do YouTube por canal.
+7. Fio da Meada caiu de ~1.500 pra 36-288 por Short de 08 a 12/11, justo quando passou a 5 Shorts + 1-3 partes da
+   série por dia e pegou o limite diário 7 vezes. Um canal só, 5 dias: indício, não prova.
+
+**O que mudei**
+- `rampa_canais._mediana_shorts()`: a escada usa a mediana dos SHORTS DE PARCEIRO do Studio (14 dias, 8+ vídeos).
+  `parceiro_diario._rendimento_canais()` usa a mesma nota na fila de produção. Voltar: RAMPA_NOTA_ANTIGA=1 /
+  PARCEIRO_NOTA_ANTIGA=1.
+- Canal que pegou o limite diário não sobe por 7 dias (`limite_em` na escada; LIMITE_ESFRIA_DIAS). Subia 20 h depois
+  de descer e batia de novo. Por isso InventoReact e Fio da Meada, agora "fortes", NÃO subiram hoje.
+- Aplicado agora: só Filme Noturno 6 -> 5/dia (mediana 30).
+
+**Não mudei — decisão da dona**
+- Baixar os canais fracos de 4-5/dia pra 1-2/dia (o mínimo que ela definiu é 1 a 3) e passar essas ~25 vagas de
+  produção por dia pros fortes. Pelos números, é a mudança que mais rende.
+- Teto dos fortes: hoje 12/dia; nenhum passou de 7 abertos. O freio real é o limite diário do YouTube.
