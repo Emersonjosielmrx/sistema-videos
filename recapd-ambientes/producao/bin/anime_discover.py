@@ -596,7 +596,21 @@ def discover_canal(url, top=0):
             except OSError:
                 pass
             return itens[:top] if top else itens
-        except Exception as e:  # noqa: BLE001 — qualquer mudança no site: volta para o yt-dlp
+        except RuntimeError as e:
+            # 15/11: canal removido (sem id) ou aba Shorts vazia — o yt-dlp ficava 14-22 min pendurado nesses
+            # (@thalisshortsbr, 864 s segurando a vez) pra dar o mesmo resultado. Usa a lista guardada e marca o cache.
+            logging.warning(f"[discover_canal] {url}: {str(e)[:100]} — sem yt-dlp; lista guardada ({len(antigos)})")
+            try:
+                CANAL_CACHE.mkdir(parents=True, exist_ok=True)
+                if cache.exists():
+                    __import__("os").utime(cache, None)
+                else:
+                    cache.write_text("[]", encoding="utf-8")
+            except OSError:
+                pass
+            itens = sorted(antigos, key=lambda c: -(c.get("views") or 0))
+            return itens[:top] if top else itens
+        except Exception as e:  # noqa: BLE001 — erro de rede/HTTP ou mudança no site: volta para o yt-dlp
             logging.warning(f"[discover_canal] API do site falhou em {url} ({type(e).__name__}: {str(e)[:120]}) — uso o yt-dlp")
     if limitar:
         cmd += ["--playlist-end", str(CANAL_LISTA_MAX)]

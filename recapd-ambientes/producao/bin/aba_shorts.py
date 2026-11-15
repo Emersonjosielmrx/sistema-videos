@@ -54,10 +54,14 @@ def canal_id(url, s, timeout=20):
         memo = {}
     if base in memo:
         return memo[base]
-    html = s.get(base, timeout=timeout).text
+    resp = s.get(base, timeout=timeout)
+    if resp.status_code == 404:
+        raise RuntimeError(f"canal não existe (404): {base}")
+    resp.raise_for_status()
+    html = resp.text
     m = _RX_CANON.search(html) or _RX_UC.search(html)
     if not m:
-        raise RuntimeError(f"id do canal não achado em {base}")
+        raise ValueError(f"id do canal não achado em {base}")  # página mudou: yt-dlp de reserva
     memo[base] = m.group(1)
     try:
         IDS.parent.mkdir(parents=True, exist_ok=True)
@@ -97,11 +101,17 @@ def listar(url, maximo=150, proxy=None, timeout=20):
     uc = canal_id(url, s, timeout)
     corpo = {"context": {"client": CLIENTE}, "browseId": uc, "params": PARAMS_SHORTS}
     vistos, saida = set(), []
+    sem_aba = False
     for _pag in range(40):
         r = s.post(BROWSE, params={"prettyPrint": "false"}, json=corpo, timeout=timeout)
         r.raise_for_status()
         itens, cont = [], []
-        _varrer(r.json(), itens, cont)
+        j = r.json()
+        if _pag == 0:
+            abas = ((j.get("contents") or {}).get("twoColumnBrowseResultsRenderer") or {}).get("tabs") or []
+            titulos = [((a.get("tabRenderer") or {}).get("title") or "") for a in abas]
+            sem_aba = bool(abas) and not any(t.lower() == "shorts" for t in titulos)
+        _varrer(j, itens, cont)
         for it in itens:
             if it[0] not in vistos:
                 vistos.add(it[0])
@@ -110,7 +120,9 @@ def listar(url, maximo=150, proxy=None, timeout=20):
             break
         corpo = {"context": {"client": CLIENTE}, "continuation": cont[-1]}
     if not saida:
-        raise RuntimeError(f"aba Shorts vazia/irreconhecível em {url}")
+        if sem_aba:  # o canal não tem aba Shorts (vazio de verdade): quem chama não tenta o yt-dlp
+            raise RuntimeError(f"canal sem aba Shorts: {url}")
+        raise ValueError(f"resposta da aba Shorts irreconhecível em {url}")  # formato mudou: yt-dlp de reserva
     return saida[:maximo] if maximo else saida
 
 
