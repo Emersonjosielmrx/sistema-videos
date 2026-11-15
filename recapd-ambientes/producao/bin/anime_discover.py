@@ -570,6 +570,34 @@ def discover_canal(url, top=0):
     except (OSError, ValueError):
         pass
     limitar = CANAL_LISTA_MAX > 0 and len(antigos) >= 20  # 1ª vez do canal: lista inteira (não há o que juntar)
+    # 15/11: 1º caminho = API interna do site (aba_shorts.py, ideia do tubescrape): 1-2 s, sem yt-dlp, sem ocupar a
+    # vez do yt-dlp (que fica para os downloads). Mesmos ids e views medidos em 3 canais. Falha = segue no yt-dlp.
+    # DISCOVER_TUBESCRAPE=0 desliga.
+    if __import__("os").environ.get("DISCOVER_TUBESCRAPE", "1") != "0":
+        try:
+            import aba_shorts
+            lista = aba_shorts.listar(url if "/shorts" in url else url.rstrip("/") + "/shorts",
+                                      maximo=CANAL_LISTA_MAX if limitar else 0, proxy=px)
+            itens = []
+            for vid, title, views in lista:
+                parte = re.search(r"\b(?:part|parte)\.?\s*(\d+)", title, re.I)
+                velho = next((c for c in antigos if c.get("id") == vid), None) if antigos else None
+                itens.append({"id": vid, "title": title, "url": f"https://www.youtube.com/shorts/{vid}",
+                              "views": views, "duration": float((velho or {}).get("duration") or 0),
+                              "parte": int(parte.group(1)) if parte else 0, "parceiro": url})
+            if antigos:
+                vistos = {c["id"] for c in itens}
+                itens += [c for c in antigos if c.get("id") not in vistos]
+            itens.sort(key=lambda c: -(c.get("views") or 0))
+            logging.info(f"[discover_canal] {len(itens)} Shorts em {url} pela API do site ({len(lista)} lidos agora)")
+            try:
+                CANAL_CACHE.mkdir(parents=True, exist_ok=True)
+                cache.write_text(json.dumps(itens, ensure_ascii=False), encoding="utf-8")
+            except OSError:
+                pass
+            return itens[:top] if top else itens
+        except Exception as e:  # noqa: BLE001 — qualquer mudança no site: volta para o yt-dlp
+            logging.warning(f"[discover_canal] API do site falhou em {url} ({type(e).__name__}: {str(e)[:120]}) — uso o yt-dlp")
     if limitar:
         cmd += ["--playlist-end", str(CANAL_LISTA_MAX)]
     try:
