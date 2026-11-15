@@ -328,6 +328,14 @@ def _escolher_fonte(c, alvo=None, evitar=None):
     # "nichos_foco" = {tipo: peso} calculado pelo Studio (video-fila\analise_shorts_foco.py --aplicar: mediana de views
     # do tipo NESTE canal). Sorteia pelo peso; NICHO_TESTE das vezes segue o funil antigo (testa tipo novo).
     foco = {n: float(p) for n, p in ((alvo or {}).get("nichos_foco") or {}).items() if n in nichos and float(p) > 0}
+    # 15/11: o nicho 'esportes' do Esporte Noturno (canal nº 1) ficou sem vídeo novo nas 3 fontes, e o sorteio caía
+    # nele ~metade das vezes: 3 consultas perdidas e o canal pulado (11x só de madrugada). Nicho com TODAS as fontes em
+    # `evitar` (tentadas/vazias) sai do sorteio; sobra o outro nicho do foco. NICHO_PULA_VAZIO=0 desliga.
+    if evitar and foco and os.environ.get("NICHO_PULA_VAZIO", "1") != "0":
+        _vivos = {n: p for n, p in foco.items() if any(f["url"] not in evitar for f in fontes if n in serve(f))}
+        if _vivos and len(_vivos) < len(foco):
+            log(f"nicho: {(alvo or {}).get('nome')}: {sorted(set(foco) - set(_vivos))} sem fonte com vídeo novo — fora do sorteio")
+            foco = _vivos
     import random as _rnd
     if (alvo or {}).get("nicho_fixo") and nicho in nichos:
         # 12/11 (canais novos de público que compra automação — negócio/saúde/imobiliário): o teste de nicho mandava
@@ -346,6 +354,11 @@ def _escolher_fonte(c, alvo=None, evitar=None):
             if f:
                 cont_nicho[f["tipo"]] += len([t for t in ts_list if t > corte])
         nicho = min(principais, key=lambda n: cont_nicho[n])
+    # 15/11: o ramo do teste/funil também caía no nicho esgotado — troca pelo melhor nicho vivo do foco
+    if (evitar and foco and os.environ.get("NICHO_PULA_VAZIO", "1") != "0"
+            and not (alvo or {}).get("nicho_fixo")
+            and not any(f["url"] not in evitar for f in fontes if nicho in serve(f))):
+        nicho = max(foco, key=foco.get)
     # dentro do nicho, a fonte menos usada
     do_nicho = [f for f in fontes if nicho in serve(f)]
     try:  # placar das fontes (views em 48 h contra a mediana do canal, notificar_telegram.medir_48h; 21/10)
