@@ -134,6 +134,21 @@ def _um(simular=False):
         return log(f"D: com {livre_gb:.1f} GB livres (< 6) — sem Short extra até liberar espaço")
     linhas = linhas_curto()
     meta = min(MAXIMO, POR_LINHA * len(linhas))
+    # 15/11: depois do 3º banimento NENHUMA conta de curto roda no Kaggle (lote_shorts_kaggle._curto_rodando() False)
+    # e todo extra renderizava NO PC1 ("nenhuma conta de curto rodando — renderizo no PC agora"): 7 Shorts juntos, PC1
+    # a 100%, abrir um processo levava até 96 s e o alimentar de PC2/desktop/STI travava (1,5-2 h sem Short neles).
+    # Sem Kaggle de curto (ou em pausa) a meta cai pra ABASTECEDOR_SEM_KAGGLE (padrão 1): o PC1 alimenta a frota em vez
+    # de renderizar. ABASTECEDOR_SEM_KAGGLE=-1 desliga a regra.
+    sem = int(os.environ.get("ABASTECEDOR_SEM_KAGGLE", "1"))
+    if sem >= 0:
+        try:
+            import lote_shorts_kaggle as _lk
+            if _lk._curto_rodando() is False or _lk.kaggle_em_pausa():
+                if meta > sem:
+                    log(f"nenhuma conta de curto rodando no Kaggle — meta {meta} -> {sem} (o extra renderizaria no PC1)")
+                meta = min(meta, sem)
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] checar o Kaggle de curto: {type(e).__name__}: {str(e)[:100]}")
     v = vivos()
     gravar(v)
     if len(v) >= meta:
