@@ -20,7 +20,7 @@ Quem roda: notificar_telegram chama rodar() 1x/dia (guardado por data). Nada aqu
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 BIN = Path(__file__).resolve().parent
@@ -168,10 +168,16 @@ def descer(canal_id, motivo="pegou 'limite diário' do YouTube"):
     d = _ler()
     c = d["canais"].get(canal_id)
     if not c or int(c.get("extra", 0)) <= 0:
+        if "limite" in motivo:  # já no degrau 0: não desce, mas fica registrado que pegou o limite
+            c = d["canais"].setdefault(canal_id, {"extra": 0})
+            c["limite_em"] = datetime.now().astimezone().isoformat(timespec="seconds")
+            _gravar(d)
         return False
     c["extra"] = int(c["extra"]) - 1
     c["ultima_mudanca"] = datetime.now().astimezone().isoformat(timespec="seconds")
     c["motivo"] = f"desceu: {motivo}"
+    if "limite" in motivo:
+        c["limite_em"] = c["ultima_mudanca"]  # 15/11: a escada espera LIMITE_ESFRIA_DIAS antes de subir de novo
     _gravar(d)
     return True
 
@@ -182,6 +188,46 @@ def _mudar(d, cid, delta, motivo):
     c["extra"] = max(0, min(max(teto, int(c.get("extra", 0))), int(c.get("extra", 0)) + delta))
     c["ultima_mudanca"] = datetime.now().astimezone().isoformat(timespec="seconds")
     c["motivo"] = motivo
+
+
+METRICAS_STUDIO = Path("D:/postador-de-videos/_analise/metricas_studio.json")
+SHORTS_DIAS = 14     # janela da nota dos Shorts
+SHORTS_MIN = 8       # com menos que isso medido, vale a nota antiga (aprendizado_global)
+
+
+def _mediana_shorts():
+    """{slug do canal: (mediana de views em 48 h, n)} só dos SHORTS DE PARCEIRO dos últimos SHORTS_DIAS dias, lido do
+    Studio (metricas_studio.json + ledger). 15/11: a escada usava a mediana de TUDO que o canal posta
+    (aprendizado_global.por_canal) — no InventoReact os 25 Veo e 6 longos puxavam a nota pra 45 e ele era tratado como
+    FRACO (preso em 4/dia, descendo), com os Shorts rendendo 1.162 (o 2º melhor canal); Fio da Meada (231 x 958) e
+    inovare manhwa br (234 x 754) ficavam como médios e não subiam como fortes. A escada é dos Shorts: a nota é deles.
+    Falhou a leitura = {} (vale a nota antiga). RAMPA_NOTA_ANTIGA=1 desliga."""
+    if os.environ.get("RAMPA_NOTA_ANTIGA") == "1":
+        return {}
+    import statistics
+    try:
+        metr = json.loads(METRICAS_STUDIO.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    quando = {}
+    for r in politica._ler_ledger():
+        if r.get("video_id"):
+            quando[r["video_id"]] = r.get("publish_at") or r.get("ts")
+    agora = politica.agora()
+    por = {}
+    for vid, m in metr.items():
+        if (m.get("fonte") or "") != "parceiro short" or (m.get("idade_h") or 0) < 48:
+            continue
+        if m.get("erro") and not m.get("views"):
+            continue
+        q = politica._dt(quando.get(vid) or "")
+        if not q or (agora - q).days > SHORTS_DIAS:
+            continue
+        v = m.get("views")
+        if v is None:
+            v = (m.get("ret_lista") or {}).get("views")
+        por.setdefault(m.get("canal_slug"), []).append(float(v or 0))
+    return {s: (statistics.median(vs), len(vs)) for s, vs in por.items() if s and len(vs) >= SHORTS_MIN}
 
 
 def rodar(simular=False):
@@ -205,6 +251,7 @@ def rodar(simular=False):
             por_dia.setdefault(r["canal_id"], {}).setdefault(q.date().isoformat(), 0)
             por_dia[r["canal_id"]][q.date().isoformat()] += 1
     mudancas = []
+    shorts = _mediana_shorts()
     for chave, x in cad.items():
         if not isinstance(x, dict) or not x.get("creds"):
             continue
@@ -213,6 +260,8 @@ def rodar(simular=False):
         lib = bool(c.get("liberado"))
         extra_atual = int(c.get("extra", 0))
         m = apr.get(chave) or {}
+        if chave in shorts:  # 15/11: nota só dos Shorts de parceiro (ver _mediana_shorts)
+            m = dict(m, mediana=round(shorts[chave][0]), n=shorts[chave][1], _de="Shorts no Studio")
         # 12/11 dona ("os maiores sempre no máximo; os mais baixos ficam com as sobras"): a escada segue o RENDIMENTO.
         # Forte (mediana 48 h >= 300) sobe como liberado (1/dia até +8 = 12/dia). Fraco (< 50 com >= 4 vídeos medidos)
         # não sobe e DESCE 1 degrau por dia até o teto base (4/dia — o mínimo dele). RAMPA_POR_RENDIMENTO=0 desliga.
@@ -251,6 +300,21 @@ def rodar(simular=False):
         if any(politica._dt((limite.get(cr) or {}).get("ate") or "") and
                politica._dt(limite[cr]["ate"]) > agora for cr in x["creds"]):
             continue
+        # 15/11: quem pegou o "limite diário" há menos de LIMITE_ESFRIA_DIAS (7) não sobe — subia de novo 20 h depois
+        # de descer e batia no limite outra vez (inovare manhwa br: barrado 14/11 com 7 envios em 24 h; Fio da Meada:
+        # 13/11 com 10, e lá o limite trava as partes da série da dona). O "ate" guardado é a hora do bloqueio + 24 h.
+        esfria = float(os.environ.get("LIMITE_ESFRIA_DIAS", "7")) * 86400
+
+        def _pegou_limite(cr):
+            cc = d["canais"].get(cr) or {}
+            marca = cc.get("limite_em") or (cc.get("ultima_mudanca") if "limite" in str(cc.get("motivo") or "") else None)
+            q = politica._dt(marca or "")
+            if not q:  # sem registro na escada: o arquivo de limites guarda "ate" = hora do bloqueio + 24 h
+                ate = politica._dt((limite.get(cr) or {}).get("ate") or "")
+                q = ate - timedelta(hours=24) if ate else None
+            return bool(q) and (agora - q).total_seconds() < esfria
+        if any(_pegou_limite(cr) for cr in x["creds"]):
+            continue
         teto_atual = base + extra_atual
         dias = {}
         for cr in x["creds"]:
@@ -259,7 +323,6 @@ def rodar(simular=False):
         cheios = sum(1 for n in dias.values() if n >= teto_atual)
         if cheios < (1 if lib else DIAS_CHEIOS):
             continue
-        m = apr.get(chave) or {}
         rende = (m.get("n", 0) >= 4 and (m.get("mediana", 0) >= med_geral or m.get("pct_1000", 0) >= 10))
         if not (rende or lib):
             continue

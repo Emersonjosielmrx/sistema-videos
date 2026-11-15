@@ -577,7 +577,11 @@ def alvo_por_rendimento(d, rend, base):
             return base
         return max(3, pd * (10 if r >= 300 else 7 if r >= 50 else 3))
     gasto = max(pd, ritmo_real().get(d["canal"], 0))
-    dias = 10 if (r or 0) >= 300 else 7
+    # 14/11 dona ("um MÊS de vídeos em estoque, assim se o sistema parar ou perdermos os Kaggles não ficamos na mão"):
+    # reserva de PARCEIRO_DIAS_ESTOQUE dias (padrão 30) pra todos; o que passa de 3 dias no PC vai pro Drive
+    # (estoque_drive.py). PARCEIRO_DIAS_ESTOQUE=0 volta à conta de 10/7 dias.
+    dias_env = int(os.environ.get("PARCEIRO_DIAS_ESTOQUE", "30"))
+    dias = dias_env if dias_env > 0 else (10 if (r or 0) >= 300 else 7)
     return max(base if r is None else 3, int(round(gasto * dias)))
 
 
@@ -632,6 +636,21 @@ def _rendimento_canais():
             continue
         for cid in (x.get("creds") or []):
             out[cid] = med
+    # 15/11: a nota acima mistura TUDO que o canal posta. No InventoReact os Veo e os longos puxavam pra 45 e a
+    # produção o tratava como fraco (estoque de 7 dias, fim da fila) com os Shorts rendendo 1.152 — o 2º melhor canal;
+    # Fio da Meada 231 x 989, inovare manhwa br 234 x 887. Aqui é a fila dos SHORTS: vale a mediana dos Shorts de
+    # parceiro medida no Studio (rampa_canais._mediana_shorts, 14 dias, 8+ vídeos). PARCEIRO_NOTA_ANTIGA=1 desliga.
+    if os.environ.get("PARCEIRO_NOTA_ANTIGA") != "1":
+        try:
+            pasta = str(Path("D:/postador-de-videos") / "bin")
+            if pasta not in sys.path:
+                sys.path.append(pasta)  # no fim: pasta de outro projeto nunca na frente
+            import rampa_canais
+            for slug, (med_s, _n) in rampa_canais._mediana_shorts().items():
+                for cid in ((cad.get(slug) or {}).get("creds") or []):
+                    out[cid] = round(med_s)
+        except Exception:  # noqa: BLE001 — sem a nota nova, fica a antiga
+            pass
     return out
 
 
