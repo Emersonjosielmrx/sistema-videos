@@ -545,7 +545,7 @@ def _com_narrador(voz, fn):
 
 _ARGON = {"falhou": False}
 _EDGE_POOL = {"ex": None}  # 04/11: pedidos ao Edge em paralelo (preparar_clone)
-GEMINI_TEXTO = os.environ.get("GEMINI_TEXTO_VIDEO", "antigravity/gemini-3.8-flash-tiered")
+GEMINI_TEXTO = os.environ.get("GEMINI_TEXTO_VIDEO", "antigravity/gemini-3-flash")
 
 
 def _criativo(prompt, max_tokens, temperature, timeout, curto=False):
@@ -591,7 +591,7 @@ def _criativo(prompt, max_tokens, temperature, timeout, curto=False):
     # 27/10 (dona: "3º fallback se o 3.8 antigravity acabar ou demorar"): 3.8 por 2 rotas e o Gemini 3 de antes.
     # Gemini Pro grátis não respondia (429 cooling down / timeout) — fica fora até voltar. Quem demorar mais que o
     # limite ou falhar sai do resto do vídeo. Uma tentativa por modelo (o _post repetia 3x = 3x o tempo).
-    for m in (GEMINI_TEXTO, "agy/gemini-3.8-flash-high", None):
+    for m in (GEMINI_TEXTO, None):
         if m in _ARGON.setdefault("fora", set()):
             continue
         t0 = time.time()

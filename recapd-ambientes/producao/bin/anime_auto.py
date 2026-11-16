@@ -844,7 +844,18 @@ def fazer_short(cand, target_lines, dry_run, use_worker=False,
         if n == 0 and not anime_script.TRANSCRICAO_LIXO:  # 27/10: lixo = não tenta o roteiro normal (outro modelo inventava)
             n = anime_script.rewrite_to_file(txt, roteiro, target_lines=target_lines - (1 if cta else 0))
         if n == 0:
-            if work.exists(): shutil.rmtree(work)
+            if work.exists():
+                import time
+                for tentativa in range(3):
+                    try:
+                        shutil.rmtree(work)
+                        break
+                    except PermissionError as e:
+                        if tentativa < 2:
+                            logging.warning(f"[auto] rmtree falhou (tentativa {tentativa+1}/3): {e}")
+                            time.sleep(1)
+                        else:
+                            logging.error(f"[auto] rmtree falhou após 3 tentativas: {e}")
             anime_metrics.record_job(cand["id"], cand["title"], "short", "FALHA",
                                      "Transcrição lixo (IA recusou)" if anime_script.TRANSCRICAO_LIXO
                                      else "Roteirização falhou/Recusa IA", orig_dur=orig_dur)

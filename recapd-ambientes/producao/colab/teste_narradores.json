@@ -76,7 +76,7 @@
   "chaves",
   "chaves_chapolin"
  ],
- "cursor": 883,
+ "cursor": 897,
  "videos": [
   {
    "pid": "20261026_111528_5-vQopGwQ8Y",
@@ -1824,6 +1824,30 @@
     "guugou",
     "mangaticos"
    ]
+  },
+  {
+   "pid": "20261116_061745_GoFYsj0q_s4",
+   "vozes": [
+    "momo",
+    "fatos_desconhecidos",
+    "mattz",
+    "ludmilla",
+    "jessie_toy_story",
+    "buzz_lightyear",
+    "galvao_bueno"
+   ]
+  },
+  {
+   "pid": "20261116_071249_QwY2Kqk7jo8",
+   "vozes": [
+    "momo",
+    "mike",
+    "mangaticos",
+    "iki",
+    "mc_melody_brazilian_singer_v2_500",
+    "walter_white_breaking_bad",
+    "seu_madruga"
+   ]
   }
  ],
  "_obs": [
@@ -1905,5 +1929,5 @@
   "_vegeta": "29/10 dona: 'Vegeta é um excelente dublador, põe ele como uma das prioridades do segundo'",
   "_leia_modos_30_10": "Fable 30/10 (dona: vídeos SOLO, misturas com mais e com menos narradores, outros só com os da fila 1): solo = 1 primário; dupla = 2 primários; so_primarios = 4; primarios_secundarios; com_terciarios; mistura_grande = 6-7 vozes. Só-primários somam 65%. O modo vai no pedido.json (narradores_modo) pra comparar pelas views."
  },
- "_modo": "so_primarios"
+ "_modo": "mistura_grande"
 }

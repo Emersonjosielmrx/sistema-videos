@@ -1,3 +1,7 @@
+> ⛔ **NUNCA rode `git reset`, `git checkout -- .`, `git restore` nem `git stash` em D:\recapd-ambientes\producao.** O último commit é de 27/07/2026: tudo de agosto a novembro NÃO está no git. Em 16/11 05:48 um `git reset --hard` voltou 41 arquivos do bin pra julho (anime-pipeline 82->8 KB, voz edge proibida) e os longos pararam de postar; às 06:39 alguém voltou de novo anime_auto/anime_discover. Restaurado do backup diário D:\github_sistema\recapd-ambientes\producao (salvar_github). Esse git tem remoto com token: NUNCA dar push nem commit com segredo.
+ecapd-ambientes\producao.** O último commit é de 27/07/2026: tudo de agosto a novembro NÃO está no git. Em 16/11 05:48 um `git reset --hard` voltou 41 arquivos do bin pra julho (anime-pipeline 82->8 KB, voz edge proibida) e os longos pararam de postar; restaurado do backup D:\github_sistema (salvar_github, diário). Cópia boa = D:\github_sistema
+ecapd-ambientes\producao.
+
 # 🟢 LEIA PRIMEIRO — comece por aqui (Hipercool)
 
 > Documento único de entrada. Se você é um agente novo, **leia só este + os "docs ativos" abaixo**.

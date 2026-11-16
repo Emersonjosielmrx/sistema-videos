@@ -1544,3 +1544,20 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 2026-11-16 — 0 implantados, 1 reprovado, 0 deixados — 2026-11-16 02:02 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_fontes_recap_ingles__sonnet_0151.md`
 - [INÉDITO] github.com/RTY2345RR/youtube-multi-language-audio — ★0, push 2026-11-15, MIT — YouTube multi-language audio tracks from your subtitles: auto dubbing in your own cloned voice, time-synced to every cue, one upload-ready t
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 03:47 — Regras oficiais do YouTube sobre recap e conteúdo reutilizado (`area_regras_yt_oficiais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_regras_yt_oficiais__sonnet_0346.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 05:46 — Padrões de título e hook por views/dia nos canais campeões de recap, por idioma (`area_yt_titulo_vdia`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_titulo_vdia__sonnet_0536.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 09:56 — Conteúdo reutilizado aplicado a recap de anime/manhwa (`area_yt_reused_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_reused_recap__sonnet_0947.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-16 10:57 — Primeiros 30 s dos recaps campeões (`area_yt_primeiros30s`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_primeiros30s__sonnet_1033.md`
+- [INÉDITO] github.com/AkhileshNagargoje/youtube-search-filters — ★3, push 2026-08-04, MIT — Search Filters for YouTube — sort results and filter by upload year, duration, view count, Shorts, watched videos, keywords and channels. Ma
+- [INÉDITO] github.com/Sewer2K/yt-channel-downloader — ★31, push 2026-09-05, MIT — Download YouTube channel videos & Shorts with a modern desktop GUI — yt-dlp + PySide6, thumbnail/title/view-count previews, quality picker, 

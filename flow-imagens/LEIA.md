@@ -72,3 +72,19 @@ O tamanho da saída é o que o Flow entrega na grade (~768x1376 em 9:16). Os mod
 
 - Imagem de IA só **ilustra**. Nunca apresentar como "instalação da empresa" nem como cliente real (regra do MS Energy).
 - Recusa por política (pessoa famosa etc.) para de tentar nas outras contas: o problema é o pedido, não a conta.
+
+## 16/11 — "sem máquina" com as máquinas PARADAS (causa raiz e conserto, vale pra TODO o Flow de imagem)
+Medido em `logs\pedidos_falhos.jsonl`: 413 de 417 pedidos falhos (desde 14/11) tinham PC2/STI/desktop LIVRES.
+1. **Limite preso em 1** (`logs\capacidade.json`): `cap_falha` contava qualquer `TimeoutError` do Playwright (botão do
+   Flow que não apareceu) como falta de capacidade; com limite 1 + teto 1 nunca subia. Agora: só falha da MÁQUINA
+   (Chrome/porta/túnel/ssh/sem resposta), mede antes de baixar (folgada = não baixa), teto mínimo 2, e grava em
+   `capacidade.json` -> `baixou` quem baixou (pid, script, motivo, cpu/ram).
+2. **CPU medida errada**: medida ÚNICA agora em `D:\video-fila\maquinas.PS_CPU` (média de 3 amostras; no desktop o
+   LoadPercentage vem vazio -> tempo de CPU dos processos). Usada por gera_imagem (`_ps_cpu`), maquinas.PS_MEDIR e
+   `D:\postador-de-videos\bin\workers.py`.
+3. **Ordem**: STI -> PC2 -> desktop -> notebooks (`FLOW_NOTEBOOK_PRIMEIRO=1` volta).
+4. **Vigia** `vigia_capacidade.py` (tarefa VigiaCapacidadeFlow, 10/10 min, oculta; `VIGIA_CAPACIDADE=0`): limite abaixo
+   do piso (PC2 4, STI 5, desktop 3) com a máquina folgada -> devolve; log `logs\vigia_capacidade.log`.
+   Por quê: processo que IMPORTA o gera_imagem (produto.diario, carrossel_marca, foto_na_hora) segue com o código
+   antigo até reiniciar.
+Backups: `gera_imagem.py.bak_16nov_capacidade`, `D:\video-fila\maquinas.py.bak_16nov_cpu`, `workers.py.bak_16nov_cpu`.

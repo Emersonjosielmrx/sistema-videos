@@ -17343,5 +17343,195 @@
     "arquivado": false,
     "descricao": "A deterministic procedural video renderer running natively on Android Termux",
     "data": "2026-11-16"
+  },
+  "gregman2121/youtube-autocomplete-miner": {
+    "ok": true,
+    "nome": "gregman2121/youtube-autocomplete-miner",
+    "estrelas": 0,
+    "push": "2026-10-23",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Find out what people actually type into YouTube search. Give it a seed term, and it pulls the autocomplete suggestions for the seed plus eve",
+    "data": "2026-11-16"
+  },
+  "chocodata-com/youtube-suggest-scraper": {
+    "ok": true,
+    "nome": "ChocoData-com/youtube-suggest-scraper",
+    "estrelas": 1,
+    "push": "2026-07-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "YouTube Suggest Scraper for extracting autocomplete suggestions and related search terms in any language from YouTube.com. Updated 2026.",
+    "data": "2026-11-16"
+  },
+  "sebdata-tools/search-autocomplete": {
+    "ok": true,
+    "nome": "sebdata-tools/search-autocomplete",
+    "estrelas": 0,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Google autocomplete scraper that also reads YouTube, Amazon and DuckDuckGo: keyword suggestions from four search boxes in one run. Many seed",
+    "data": "2026-11-16"
+  },
+  "systemfsoftware/youtube-autocomplete-scraper": {
+    "ok": true,
+    "nome": "systemfsoftware/youtube-autocomplete-scraper",
+    "estrelas": 9,
+    "push": "2026-07-15",
+    "licenca": "MIT",
+    "arquivado": true,
+    "descricao": "YouTube AutoComplete Scraper - An Apify actor that scrapes YouTube's search suggestions with intelligent deduplication using pglite and trig",
+    "data": "2026-11-16"
+  },
+  "parths301/topic-radar": {
+    "ok": true,
+    "nome": "parths301/topic-radar",
+    "estrelas": 0,
+    "push": "2026-11-07",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Free YouTube topic research tool and outlier finder. Find video ideas, check competition, track channels and mine competitors from the comma",
+    "data": "2026-11-16"
+  },
+  "minhaj-builds/yt-scout": {
+    "ok": true,
+    "nome": "minhaj-builds/yt-scout",
+    "estrelas": 0,
+    "push": "2026-08-12",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Keyless YouTube analytics CLI: evidence-based outlier scoring + resilient LLM calls with per-model failover. No API key, no quota.",
+    "data": "2026-11-16"
+  },
+  "eliftforlife/youtube-formula-skills": {
+    "ok": true,
+    "nome": "eliftforlife/youtube-formula-skills",
+    "estrelas": 0,
+    "push": "2026-10-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "8 free Claude skills from analyzing Alex Hormozi's top 100 YouTube videos: thumbnails, titles, hooks, descriptions, formats, delivery, editi",
+    "data": "2026-11-16"
+  },
+  "georgewangyu/youtubebot": {
+    "ok": true,
+    "nome": "georgewangyu/youtubebot",
+    "estrelas": 1,
+    "push": "2026-11-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "CLI for finding low-subscriber, high-view YouTube outlier videos",
+    "data": "2026-11-16"
+  },
+  "scaryvoid/ytsub": {
+    "ok": true,
+    "nome": "scaryvoid/ytsub",
+    "estrelas": 0,
+    "push": "2026-11-11",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "A single-file Python tool that polls your YouTube subscriptions and downloads new videos into a Jellyfin-friendly library, for offline viewi",
+    "data": "2026-11-16"
+  },
+  "heyitsgautham/youtube-comments-scraper": {
+    "ok": true,
+    "nome": "heyitsgautham/youtube-comments-scraper",
+    "estrelas": 0,
+    "push": "2026-10-25",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Export YouTube comments and replies with Python or curl, no API key, plus a finder for unanswered viewer questions",
+    "data": "2026-11-16"
+  },
+  "zhengchen1999/dove": {
+    "ok": true,
+    "nome": "zhengchen1999/DOVE",
+    "estrelas": 227,
+    "push": "2026-10-20",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "[NeurIPS'25] DOVE: Efficient One-Step Diffusion Model for Real-World Video Super-Resolution",
+    "data": "2026-11-16"
+  },
+  "pedromarinhodev/comfyui-recavsr": {
+    "ok": true,
+    "nome": "PedroMarinhoDev/ComfyUI-ReCaVSR",
+    "estrelas": 80,
+    "push": "2026-11-10",
+    "licenca": "GPL-3.0",
+    "arquivado": false,
+    "descricao": "ReCaVSR one-step streaming video super-resolution natively in ComfyUI: 4x on Wan2.2, block by block with its FlashDecoder. bf16 and int8 Con",
+    "data": "2026-11-16"
+  },
+  "zhengchen1999/lsgquant": {
+    "ok": true,
+    "nome": "zhengchen1999/LSGQuant",
+    "estrelas": 16,
+    "push": "2026-10-21",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "PyTorch code for our paper \"LSGQuant: Layer-Sensitivity Guided Quantization for One-Step Diffusion Real-World Video Super-Resolution\"",
+    "data": "2026-11-16"
+  },
+  "w-shuoyan/osdenhancer": {
+    "ok": true,
+    "nome": "W-Shuoyan/OSDEnhancer",
+    "estrelas": 17,
+    "push": "2026-06-25",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "[OSDEnhancer] Taming Real-World Space-Time Video Super-Resolution with One-Step Diffusion (arXiv 2026)",
+    "data": "2026-11-16"
+  },
+  "akhileshnagargoje/youtube-search-filters": {
+    "ok": true,
+    "nome": "AkhileshNagargoje/youtube-search-filters",
+    "estrelas": 3,
+    "push": "2026-08-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Search Filters for YouTube — sort results and filter by upload year, duration, view count, Shorts, watched videos, keywords and channels. Ma",
+    "data": "2026-11-16"
+  },
+  "sewer2k/yt-channel-downloader": {
+    "ok": true,
+    "nome": "Sewer2K/yt-channel-downloader",
+    "estrelas": 31,
+    "push": "2026-09-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Download YouTube channel videos & Shorts with a modern desktop GUI — yt-dlp + PySide6, thumbnail/title/view-count previews, quality picker, ",
+    "data": "2026-11-16"
+  },
+  "victoranime/viralspy": {
+    "ok": true,
+    "nome": "victoranime/viralspy",
+    "estrelas": 0,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Open-source Instagram, TikTok, YouTube & Facebook Outlier Sorter Chrome Extension + Local AI MCP Server (Claude, Antigravity, Cursor) & Free",
+    "data": "2026-11-16"
+  },
+  "ai-pix/manga-recap": {
+    "ok": true,
+    "nome": "ai-pix/manga-recap",
+    "estrelas": 1,
+    "push": "2026-11-05",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automated end-to-end Manga Recap video generation pipeline with AI narration and GPU rendering",
+    "data": "2026-11-16"
+  },
+  "chukie99/manhwa-recap-ai": {
+    "ok": true,
+    "nome": "Chukie99/manhwa-recap-ai",
+    "estrelas": 0,
+    "push": "2026-08-28",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn manga/manhwa into cinematic recap videos with AI narration — full-stack FastAPI + React SaaS",
+    "data": "2026-11-16"
   }
 }

@@ -1,33 +1,33 @@
 {
- "_quando": "2026-11-15T05:40",
+ "_quando": "2026-11-16T05:40",
  "_como": "média de log2(razão ajustada), 3 neutros; inteligencia_ajustada.py",
  "vozes": {
   "dino_da_silva_sauro_familia_dinossauro": [
-   -0.52,
+   -0.607,
    34
   ],
   "solemsun": [
-   -0.13,
+   -0.172,
    26
   ],
   "guugou": [
-   0.201,
-   27
+   0.142,
+   30
   ],
   "asuka_langley_evangelion": [
    0.264,
    3
   ],
   "jubertim": [
-   -0.128,
-   28
+   0.021,
+   33
   ],
   "iki": [
-   0.017,
-   19
+   0.047,
+   22
   ],
   "capitao_nascimento": [
-   -0.558,
+   -0.559,
    9
   ],
   "walter_white_breaking_bad": [
@@ -35,28 +35,28 @@
    7
   ],
   "jessie_toy_story": [
-   -0.34,
+   -0.344,
    5
   ],
   "pie": [
-   0.069,
-   25
+   -0.029,
+   26
   ],
   "kay_o_valorant": [
-   0.186,
+   0.192,
    2
   ],
   "d_va_overwatch": [
-   -0.456,
-   4
+   -0.381,
+   5
   ],
   "cintilante_she_ra_flavia_saddy": [
-   0.644,
-   18
+   0.397,
+   21
   ],
   "mulher_maravilha": [
-   0.073,
-   8
+   0.467,
+   11
   ],
   "marilia_mendonca": [
    -0.387,
@@ -67,7 +67,7 @@
    3
   ],
   "patrick_estrela": [
-   0.007,
+   -0.002,
    3
   ],
   "aracy_top_therm": [
@@ -75,91 +75,91 @@
    2
   ],
   "ivete_sangalo": [
-   0.278,
-   15
+   0.42,
+   16
   ],
   "mc_melody_brazilian_singer_v2_500": [
-   0.691,
+   0.697,
    11
   ],
   "ei_nerd": [
-   0.165,
-   26
+   0.117,
+   29
   ],
   "akali_lol": [
-   -0.391,
+   -0.413,
    4
   ],
   "porao": [
-   -0.141,
-   28
+   -0.145,
+   31
   ],
   "thomas_shelby_peaky_blinders": [
-   -0.437,
+   -0.445,
    16
   ],
   "jett_valorant": [
-   0.901,
+   0.881,
    6
   ],
   "pica_pau": [
-   0.188,
-   35
+   0.198,
+   37
   ],
   "seu_madruga": [
-   -0.736,
-   9
+   -0.67,
+   10
   ],
   "woody": [
-   0.009,
+   -0.076,
    11
   ],
   "sett_lol": [
-   -0.414,
+   -0.415,
    2
   ],
   "doinsuka": [
-   -0.178,
-   27
+   -0.255,
+   29
   ],
   "apostolo_valdemiro_santiago": [
-   0.226,
-   7
+   0.531,
+   8
   ],
   "dinho_mamonas_assassinas": [
-   0.093,
+   0.033,
    11
   ],
   "baby_familia_dinossauro": [
-   -0.026,
+   -0.031,
    2
   ],
   "harry_potter": [
-   0.006,
+   -0.066,
    11
   ],
   "kratos_god_of_war_2018": [
-   0.082,
-   5
+   0.077,
+   6
   ],
   "mangaticos": [
-   -0.115,
-   19
+   -0.364,
+   24
   ],
   "fatos_desconhecidos": [
-   -0.038,
-   34
+   -0.085,
+   35
   ],
   "chico_selton": [
-   0.344,
-   2
+   0.786,
+   3
   ],
   "moana": [
-   0.05,
-   43
+   0.025,
+   44
   ],
   "ludmilla": [
-   -0.06,
+   -0.095,
    9
   ],
   "puss_in_boots_gato_de_botas_portuguese_d": [
@@ -167,40 +167,40 @@
    5
   ],
   "drezin": [
-   0.223,
-   25
+   0.292,
+   30
   ],
   "mike": [
-   0.262,
+   0.178,
    27
   ],
   "chapolin_colorado": [
-   -0.37,
+   -0.419,
    37
   ],
   "buzz_lightyear": [
-   -0.192,
-   3
+   -0.182,
+   4
   ],
   "solem8037": [
-   -0.247,
-   36
+   -0.16,
+   39
   ],
   "alex_madagascar": [
-   -0.26,
+   -0.253,
    10
   ],
   "husk_hazbin_hotel": [
-   0.313,
+   0.25,
    14
   ],
   "cassidy_overwatch": [
-   -0.374,
-   10
+   -0.351,
+   11
   ],
   "patolino": [
-   0.026,
-   37
+   -0.15,
+   38
   ],
   "hanako_san_yo_kai_watch": [
    -0.717,
@@ -211,51 +211,51 @@
    2
   ],
   "chamber_valorant": [
-   -0.473,
-   29
+   -0.404,
+   31
   ],
   "luiz_carlos_persy": [
-   0.254,
-   32
+   0.291,
+   37
   ],
   "verosika_helluva_boss_fandub": [
-   -0.42,
-   5
+   -0.41,
+   6
   ],
   "ashley_graham_re4_remake": [
-   -0.077,
-   13
+   -0.107,
+   14
   ],
   "ashe_overwatch": [
-   0.047,
-   4
-  ],
-  "ilulu_kobayashi_san_dragon_maid": [
-   0.452,
+   0.091,
    5
   ],
+  "ilulu_kobayashi_san_dragon_maid": [
+   0.183,
+   6
+  ],
   "mattz": [
-   -0.126,
-   35
+   -0.13,
+   38
   ],
   "homem_de_ferro_tony_stark": [
-   -0.151,
+   -0.196,
    8
   ],
   "naruto": [
-   0.28,
-   11
+   0.417,
+   14
   ],
   "lula_molusco": [
    -0.725,
    2
   ],
   "ijax": [
-   -0.258,
-   28
+   -0.202,
+   29
   ],
   "omelhormanhwa": [
-   -0.032,
+   -0.016,
    4
   ],
   "narrador_do_canal_fala_serio": [
@@ -263,8 +263,8 @@
    5
   ],
   "kkvirjao": [
-   0.37,
-   20
+   0.385,
+   22
   ],
   "bills": [
    0.248,
@@ -279,11 +279,11 @@
    3
   ],
   "momo": [
-   -0.054,
-   25
+   0.112,
+   27
   ],
   "mei_overwatch": [
-   0.52,
+   0.505,
    14
   ],
   "seu_sirigueijo_peter_griffin": [
@@ -291,20 +291,24 @@
    3
   ],
   "quico": [
-   0.614,
+   0.613,
    2
   ],
   "mestre_kame": [
-   -0.083,
+   0.301,
+   3
+  ],
+  "cell": [
+   0.502,
    2
   ],
   "chaves_chapolin": [
-   -0.276,
-   3
+   0.046,
+   4
   ],
   "chiquinha": [
-   -0.643,
-   3
+   -0.59,
+   4
   ]
  }
 }

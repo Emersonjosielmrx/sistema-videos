@@ -9151,13 +9151,53 @@
    "config": "1",
    "quando": "16/11 02:03",
    "nicho": "saude"
+  },
+  "joao_grilo:kokoro:r1.13": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-0c78ad_cap1_20261116\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\joao_grilo\\v2_r1_kokoro_config2_16-11_0347_sem-obra-0c78ad_cap1_20261116.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-0c78ad_cap1_20261116",
+   "config": "2",
+   "quando": "16/11 03:47",
+   "nicho": "pesca"
+  },
+  "loid_forger:kokoro:r1.8": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-46ac59_cap1_20261116\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\loid_forger\\v2_r1_kokoro_config1_16-11_0412_sem-obra-46ac59_cap1_20261116.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-46ac59_cap1_20261116",
+   "config": "1",
+   "quando": "16/11 04:12",
+   "nicho": "dorama"
+  },
+  "chico_selton:kokoro:r1.15": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-ee912c_cap1_20261116\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\chico_selton\\v2_r1_kokoro_config2_16-11_0501_sem-obra-ee912c_cap1_20261116.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-ee912c_cap1_20261116",
+   "config": "2",
+   "quando": "16/11 05:01",
+   "nicho": "pesca"
+  },
+  "fatos_desconhecidos:francisca:r1.10": {
+   "video": "D:\\hipercool-materiais\\historias-em-frames\\3d-geladeira-v2\\3d-geladeira-v2.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\fatos_desconhecidos\\v2_r1_francisca_config1_16-11_1026_3d-geladeira-v2.txt",
+   "postagem": "D:\\hipercool-materiais\\historias-em-frames\\3d-geladeira-v2",
+   "config": "1",
+   "quando": "16/11 10:26",
+   "nicho": "curiosidades"
+  },
+  "yor_forger:kokoro:r1.8": {
+   "video": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-2a08c8_cap1_20261116\\video.mp4",
+   "txt": "D:\\hipercool-materiais\\videos_voz_clonada\\yor_forger\\v2_r1_kokoro_config2_16-11_1159_sem-obra-2a08c8_cap1_20261116.txt",
+   "postagem": "D:\\hipercool-materiais\\animes recap\\shorts\\sem-obra-2a08c8_cap1_20261116",
+   "config": "2",
+   "quando": "16/11 11:59",
+   "nicho": "dorama"
   }
  },
  "falhas": {
   "ijax:kokoro:r1": 1,
   "sukuna:kokoro:r1": 1
  },
- "proxima_config": "2",
+ "proxima_config": "1",
  "falhas_em": {
   "thomas_shelby_peaky_blinders:kokoro:r1": "2026-11-02T19:30:51",
   "thomas_shelby_peaky_blinders:francisca:r1": "2026-10-22T05:36:33",
@@ -9174,6 +9214,7 @@
   "cintilante_she_ra_flavia_saddy:francisca:r1": "2026-11-07T04:49:03",
   "mattz:francisca:r1": "2026-11-07T14:09:26",
   "patolino:francisca:r1": "2026-11-10T14:40:19",
-  "sukuna:kokoro:r1": "2026-11-14T04:55:29"
+  "sukuna:kokoro:r1": "2026-11-14T04:55:29",
+  "yor_forger:kokoro:r1": "2026-11-16T06:15:54"
  }
 }

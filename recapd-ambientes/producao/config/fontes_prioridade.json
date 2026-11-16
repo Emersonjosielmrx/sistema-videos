@@ -2,6 +2,18 @@
  "_leia": "09/11 dona: 'prioridade aos vídeos que dão mais visualizações, independente do canal' + autorização dos canais novos (8 escolhidos pela dona 09/11 21h30 (lista colada), pesquisa de 09/11, conferida na página). O alimentador (cliente.py alimentar) pega DESTA lista primeiro, do mais visto pro menos, 1 por vez; vídeo já feito/enviado é pulado; lista vazia = só o canal normal. FONTES_PRIORIDADE=0 desliga. tipo: anime | manhwa.",
  "videos": [
   {
+   "id": "Bb3C8_mEpUE",
+   "canal": "Mamoru Manhwa",
+   "views": 1189622,
+   "min": 132,
+   "titulo": "New Academy Student Is Breaking WAY TOO MANY Records.... ! - Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "jardineiro_academia",
+   "garimpado": "2026-11-16",
+   "parecido": true
+  },
+  {
    "id": "97bBeHddKJI",
    "canal": "Tobs Manhwa",
    "views": 1036512,
@@ -48,6 +60,42 @@
    "tema": "jardineiro_academia",
    "parecido": true,
    "garimpado": "2026-11-14"
+  },
+  {
+   "id": "QwY2Kqk7jo8",
+   "canal": "Manhwa Senpai",
+   "views": 238208,
+   "min": 70,
+   "titulo": "She Betrayed Him for a Servant—Now He’s a CEO & She LOST EVERYTHING! - Manhwa Recap in Hindi",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-16",
+   "parecido": true
+  },
+  {
+   "id": "ZaWVmJcOjfo",
+   "canal": "Night Coffee Stories",
+   "views": 157613,
+   "min": 50,
+   "titulo": "Every RUMOR Became True, So My Cheating Ex Accidentally Made Me Her Stepfather | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-16",
+   "parecido": true
+  },
+  {
+   "id": "kxohroSbgS8",
+   "canal": "Mizu Recap",
+   "views": 153149,
+   "min": 51,
+   "titulo": "She Cheated On Him With 3 Other Guys But Now Wants Him Back! - Manga Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-16",
+   "parecido": true
   },
   {
    "id": "ZZ7LeUws7-c",
@@ -387,6 +435,30 @@
    "parecido": true
   },
   {
+   "id": "zdiZtx5CGI4",
+   "canal": "Torno Petruska",
+   "views": 453902,
+   "min": 75,
+   "titulo": "My Father Wrapped Me Up and Sent Me to the Female CEO’s House to Pay Off His Debt | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-16",
+   "parecido": true
+  },
+  {
+   "id": "RzoyNcnlIj8",
+   "canal": "Yunowha",
+   "views": 447462,
+   "min": 76,
+   "titulo": "My Aunt Stole My Billionaire Inheritance Then I Awakened the Unlimited Money System | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "sistema_dinheiro",
+   "garimpado": "2026-11-16",
+   "parecido": true
+  },
+  {
    "id": "iWIgK8o9pxE",
    "canal": "John 's Manhwa",
    "views": 210371,
@@ -677,6 +749,36 @@
    "garimpado": "2026-11-14"
   },
   {
+   "id": "jc6Z4KITPaI",
+   "tipo": "anime",
+   "canal": "AntiClimsx",
+   "views": 7723070,
+   "min": 86,
+   "titulo": "His Mom Fried His Worthless Brain To Awaken His God Powers | Anime Recap Documentary",
+   "garimpado": "2026-11-16"
+  },
+  {
+   "id": "BlTjJHdJRq0",
+   "tipo": "anime",
+   "canal": "First Flower",
+   "views": 1004678,
+   "min": 71,
+   "titulo": "SPY Marries an ASSASSIN To Save The WORLD 1-2 | Anime recap",
+   "garimpado": "2026-11-16"
+  },
+  {
+   "id": "Eh4p9tVhQqs",
+   "canal": "Jinwoo Recap",
+   "views": 306872,
+   "min": 103,
+   "titulo": "Reborn to Love the Yandere Who Died for Me - Jinwoo Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "renasce_rico_forte",
+   "garimpado": "2026-11-16",
+   "parecido": true
+  },
+  {
    "id": "rkiWlwvG9SM",
    "canal": "Neko Recap",
    "views": 152495,
@@ -918,6 +1020,15 @@
    "garimpado": "2026-11-14"
   },
   {
+   "id": "q_CFsP6B0hQ",
+   "tipo": "anime",
+   "canal": "ANiSagaX",
+   "views": 301735,
+   "min": 51,
+   "titulo": "He Died Miserably, Only to Return as a God They Should Fear | Anime Recap",
+   "garimpado": "2026-11-16"
+  },
+  {
    "id": "PReloN5HWSI",
    "tipo": "manhwa",
    "canal": "@Manhwa_Fresh",
@@ -983,8 +1094,11 @@
   "8fM6Ay7OJho",
   "97bBeHddKJI",
   "AP_c0bbMmRI",
+  "Bb3C8_mEpUE",
+  "BlTjJHdJRq0",
   "DLGf1a8Hlvo",
   "DiukW0rZW44",
+  "Eh4p9tVhQqs",
   "FSjpu7MB93I",
   "FU1E9I-0-EA",
   "GoFYsj0q_s4",
@@ -1000,7 +1114,9 @@
   "PvkF8Ut-mIM",
   "Qet3goTGf0Q",
   "QqzmmzlhjAg",
+  "QwY2Kqk7jo8",
   "RkLkEUk5AJw",
+  "RzoyNcnlIj8",
   "SLUPhSO7zf4",
   "SO-icNCOO3E",
   "SjQHP-0GKJs",
@@ -1017,6 +1133,7 @@
   "Y0tReVhVHHE",
   "Y1rMPBkQzto",
   "ZZ7LeUws7-c",
+  "ZaWVmJcOjfo",
   "_Adfy9sQQ0s",
   "acD-WG3069o",
   "bawu9hZLPow",
@@ -1030,11 +1147,14 @@
   "iWIgK8o9pxE",
   "iX0kSg4SZ8w",
   "ib4MOGsuvPw",
+  "jc6Z4KITPaI",
   "keBJ_bd5oVw",
   "kh0Ejfzs4_4",
+  "kxohroSbgS8",
   "lB1rbKXs3aQ",
   "msdGuyJ4gLA",
   "pvf8yoBphtk",
+  "q_CFsP6B0hQ",
   "rNcnQU_Mk3o",
   "rVacUCRJQxg",
   "rkiWlwvG9SM",
@@ -1046,6 +1166,7 @@
   "v455srQ6mqY",
   "y5Pm6ba-kIM",
   "zZGctp8j_QU",
+  "zdiZtx5CGI4",
   "zoBhyCpV8vs"
  ],
  "_leia_parecidos": "12/11 dona: obras PARECIDAS com as que deram certo (ex arrependida/sistema de dinheiro -> InventoReact; medieval/loot box/renasce rico -> Fio da Meada). garimpar_parecidos.py; canal_destino = onde posta.",

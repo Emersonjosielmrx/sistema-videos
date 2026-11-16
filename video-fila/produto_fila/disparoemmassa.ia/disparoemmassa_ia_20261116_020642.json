@@ -1,0 +1,146 @@
+{
+ "conta": "disparoemmassa.ia",
+ "produto": "disparo_massa",
+ "marca": "Disparo em Massa IA",
+ "titulo": "Como enviar campanhas para milhares de contatos no WhatsApp",
+ "legenda": "Sua base de contatos cresceu e ficou difícil falar com todo mundo pelo WhatsApp? 📱\nCom o Disparo em Massa IA, você envia campanhas para milhares de contatos com rotação de números e mensagens personalizadas.\nAcesse o link no perfil e conheça a ferramenta. 🚀\n\n👉 Chame no direct • link no perfil\n\n#whatsappmarketing #disparoemmassa #vendas #automacao #marketingdigital",
+ "roteiro": {
+  "gancho_tela": "Lista grande no WhatsApp?",
+  "pergunta_cliente": "Sua lista cresceu e ficou difícil avisar todos os clientes?",
+  "blocos": [
+   {
+    "rotulo": "O desafio",
+    "fala": "Quando a minha base cresceu, não dava mais para avisar todo mundo no WhatsApp sem travar a operação.",
+    "visual": "apresentador",
+    "prompt_en": "a busy Brazilian clothing boutique interior, warm lighting, racks of clothes in soft focus, cinematic",
+    "cenario_en": "standing at the tidy, well lit counter of a modern Brazilian retail store",
+    "real_tema": "base grande de contatos",
+    "destaques": [
+     "minha base cresceu",
+     "travar a operação"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261116_020812_1.png"
+   },
+   {
+    "rotulo": "A solução",
+    "fala": "Para listas grandes, o Disparo em Massa IA alterna seus números e entrega cada aviso personalizado sozinho.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "rotação de números e personalização",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Olá, Mariana! Preparamos uma condição especial para você na nossa campanha de hoje."
+     },
+     {
+      "de": "cliente",
+      "texto": "Oi! Que ótimo, já estava esperando esse aviso. Como faço para aproveitar?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Já separei seu pedido aqui. Posso te mandar a chave Pix para agilizar?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Pode mandar sim, obrigada!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora eu alcanço toda a minha carteira de clientes com campanhas organizadas e atendimento muito mais ágil.",
+    "visual": "apresentador",
+    "prompt_en": "a modern and tidy Brazilian office workspace, warm daylight, blurred background, commercial photography",
+    "cenario_en": "standing in a bright, tidy, well lit modern Brazilian office",
+    "real_tema": "alcance da carteira de clientes",
+    "destaques": [
+     "toda a minha carteira",
+     "campanhas organizadas"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261116_020812_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261116_020812_1.png"
+   }
+  ],
+  "legenda": "Sua base de contatos cresceu e ficou difícil falar com todo mundo pelo WhatsApp? 📱\nCom o Disparo em Massa IA, você envia campanhas para milhares de contatos com rotação de números e mensagens personalizadas.\nAcesse o link no perfil e conheça a ferramenta. 🚀",
+  "titulo": "Como enviar campanhas para milhares de contatos no WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "duvida_volume_contatos",
+  "pauta_tipo": "pergunta_frequente",
+  "tempo_roteiro_s": 90,
+  "tentativas_roteiro": 3
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\disparoemmassa.ia_20261116_020642\\dono_3.mp4",
+ "duracao_s": 32.82,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-16T02:27:22",
+ "variante": "dono_abre_fecha",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.82,
+   "fala": "Sua lista cresceu e ficou difícil avisar todos os clientes?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.82,
+   "fim": 12.65,
+   "fala": "Quando a minha base cresceu, não dava mais para avisar todo mundo no WhatsApp sem travar a operação.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.65,
+   "fim": 21.19,
+   "fala": "Para listas grandes, o Disparo em Massa IA alterna seus números e entrega cada aviso personalizado sozinho.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 21.19,
+   "fim": 28.87,
+   "fala": "Agora eu alcanço toda a minha carteira de clientes com campanhas organizadas e atendimento muito mais ágil.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.87,
+   "fim": 32.82,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.12,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.5
+  },
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

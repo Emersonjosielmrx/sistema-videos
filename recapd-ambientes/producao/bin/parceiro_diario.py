@@ -535,6 +535,18 @@ def _prioridade(its, fila, alvo_fila, c=None):
         dias = (fila[d["canal"]] + agendados[d["canal"]]) / gasto
         t = teto(d)
         return min(t, int(dias)) - t  # negativo = falta pra chegar no teto dele (mais negativo produz antes)
+    if os.environ.get("PARCEIRO_30_DIAS_TODOS", "1") != "0":
+        # 16/11 dona ("cada canal tem que ficar com 30 dias"): o rendimento puro deixava canal com 0 (InovareManhwaVerse
+        # 0/90, Anime Noturno 5/60) enquanto o Esporte Noturno chegava a 207/220. Agora vai primeiro quem está MAIS LONGE
+        # dos 30 dias (fração do alvo de alvo_por_rendimento já atingida), rendimento só desempata. Assim todo canal chega
+        # aos 30 dias. PARCEIRO_30_DIAS_TODOS=0 volta ao "o melhor faz o máximo" de 12/11.
+        def _fracao(d):
+            try:
+                a = alvo_por_rendimento(d, rend, d.get("fila_alvo", alvo_fila))
+            except Exception:  # noqa: BLE001
+                a = d.get("fila_alvo", alvo_fila)
+            return round(fila[d["canal"]] / max(1, a), 1)
+        return lambda d: (d["canal"] in com_hoje, _fracao(d), -(rend.get(d["canal"]) or 0), uso(d))
     if os.environ.get("PARCEIRO_ALVO_RENDIMENTO", "1") != "0":
         # 12/11 dona: "o melhor canal faz o máximo, depois o segundo, e assim até os mais baixos". Depois de "sem post
         # hoje", o que mais RENDE vem primeiro (o estoque por rendimento já tira da fila quem está cheio).

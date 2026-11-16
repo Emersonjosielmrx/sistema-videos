@@ -202,6 +202,8 @@ def inventario(cfg, politica, so_aprovados=True):
             item = {"id": iid, "fonte": "historias", "mp4": mp4, "json": pj, "dados": d, "slug_origem": None,
                     "sintetico": True, "resumo": {"titulo": d.get("titulo", ""), "tema": d.get("tema", ""),
                                                   "genero": d.get("genero", ""), "tags": (d.get("tags") or [])[:8]}}
+            if d.get("canais"):  # 16/11 (Shorts 3D, kit3d): só nos canais listados no postar.json (curiosidades)
+                item["so_canais"] = list(d["canais"])
             (itens if (not so_aprovados or politica.aprovado(mp4, aprov)) else esperando).append(item)
     # 3. Veo LIMPO (sem a marca @InovareStories e sem o slide de propaganda/WhatsApp que derrubou os canais antigos):
     #    so nos canais de canais_veo_limpo; o limpar_veo.py ja aprova os de estrutura padrao (os outros ficam em 'esperando')

@@ -759,13 +759,51 @@ def sec_insta_http():
     return out
 
 
+def sec_3d():
+    """16/11 dona ("adicione no relatório os Shorts 3D, vamos ver como se saem em visualizações"): kit3d-producao.
+    Feitos/falhos hoje (logs\\diario.log), postados (posted_url nos postar.json 3d-*) e views (painel :8790/api/ranking)."""
+    out = ["## 🧊 Shorts 3D (kit3d — teste de formato)"]
+    base = Path(r"D:\kit3d-producao")
+    if (base / "PARADO.json").exists():
+        out.append("- ⏸️ PARADO (D:\\kit3d-producao\\PARADO.json)")
+    feitos = falhas = 0
+    try:
+        for l in (base / "logs" / "diario.log").read_text(encoding="utf-8", errors="ignore").splitlines():
+            if hoje in l or f"{agora:%Y-%m-%d}" in l:
+                feitos += "PRONTO" in l
+                falhas += "FALHOU" in l
+    except OSError:
+        pass
+    vids = []
+    for pj in Path(r"D:\hipercool-materiais\historias-em-frames").glob("3d-*/postar.json"):
+        d = _json(pj, {}) or {}
+        url = d.get("posted_url") or ""
+        vids.append((pj.parent.name, url.rsplit("/", 1)[-1] if url else "", d.get("canal_postado") or ""))
+    views = {}
+    if any(v for _, v, _ in vids):
+        try:
+            import urllib.request as _u
+            rk = json.loads(_u.urlopen("http://127.0.0.1:8790/api/ranking?dias=30", timeout=150).read())
+            views = {r["id"]: r.get("views") for r in rk.get("videos", [])}
+        except Exception:  # noqa: BLE001
+            pass
+    out.append(f"- Hoje: {feitos} prontos, {falhas} falharam | total: {len(vids)} Shorts 3D, "
+               f"{sum(1 for _, v, _ in vids if v)} postados")
+    if vids:
+        out += ["", "| Short | Canal | Link | Views |", "|---|---|---|---:|"]
+        for nome, vid, canal in sorted(vids, key=lambda t: (not t[1], t[0])):
+            out.append(f"| {nome} | {canal or '—'} | {('https://youtu.be/' + vid) if vid else 'não postado'} | "
+                       f"{views.get(vid, '—') if vid else '—'} |")
+    return out
+
+
 def main(gravar):
     partes = [f"# Relatório completo — {agora:%d/%m, %H:%M}",
               f"_(desde a última ronda = desde {ultima:%d/%m %H:%M})_"]
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
     for f in (sec_numeros, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
-              sec_pesquisador, sec_redes, sec_trio_midia, sec_insta_http, sec_serie):
+              sec_pesquisador, sec_redes, sec_3d, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()
         except Exception as e:  # noqa: BLE001 — uma seção quebrada não derruba o relatório

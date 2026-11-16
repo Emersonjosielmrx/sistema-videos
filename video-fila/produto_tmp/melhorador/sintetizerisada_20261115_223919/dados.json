@@ -1,0 +1,341 @@
+{
+ "video": "sintetizerisada_20261115_223919.mp4",
+ "conta": "sintetizerisada",
+ "marca": "Agenda IA",
+ "titulo": "Reagendamento sozinho à noite direto no WhatsApp",
+ "formato": "dono_tres_veo_final",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "glitch",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.95,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.8
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    11.8
+   ],
+   [
+    1,
+    "dono",
+    12.02
+   ],
+   [
+    2,
+    "dono",
+    10.6
+   ],
+   [
+    3,
+    "dono",
+    10.35
+   ],
+   [
+    4,
+    "cartao",
+    4.6
+   ]
+  ],
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('perde a manhã') está sobreposta diretamente sobre a boca e o queixo do apresentador, cobrindo o movimento labial e a expressão facial durante a fala.",
+   "como_corrigir": "Mover a legenda karaokê para a altura do peito (em torno de y=1500 a y=1540, respeitando o limite seguro de y=1580) ou reenquadrar o apresentador mais para cima, reduzindo o espaçamento do cartão de pergunta."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A palavra da legenda karaokê ('resolvendo') continua posicionada sobre a boca e o queixo do apresentador, prejudicando a legibilidade e a estética visual da cena.",
+   "como_corrigir": "Ajustar a linha base da legenda na cena 0 para baixo do queixo, mantendo o padrão adotado nas cenas 1 a 3."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "O texto 'Link no perfil' possui tipografia muito reduzida e baixo contraste contra os elementos claros do vídeo de fundo (jaleco branco e mesa clara), dificultando a leitura na tela de um celular.",
+   "como_corrigir": "Aumentar o corpo da fonte de 'Link no perfil', adicionar sombra projetada suave nos textos brancos e intensificar o overlay escuro sobre o vídeo de fundo da clínica."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Repetição estrita do mesmo molde visual ao longo de mais de 20 segundos (cenas 1, 2 e 3, de q04 a q12). O vídeo fica preso exatamente na mesma composição estática: apresentador falando no mesmo plano médio, com a mesma faixa superior fixa e mudando apenas o número da pílula, sem variedade de planos ou B-roll.",
+   "como_corrigir": "Alternar a escala dos planos com cortes de aproximação (punch-in zoom digital de 10% a 15%) na troca dos blocos e intercalar com telas cheias ou split-screens dinâmicos ilustrando cada ponto."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Ritmo arrastado e ausência de motion design para demonstrar o produto. Durante quase 5 segundos em que o locutor explica que a Agenda IA reagenda sozinha direto pelo WhatsApp, o visual continua unicamente no rosto do apresentador, sem exibir a simulação da conversa prometida.",
+   "como_corrigir": "Inserir mockup animado de tela de smartphone com a simulação do WhatsApp (selo 'Simulação'), animando a chegada do imprevisto e a IA reagendando o cliente automaticamente em tempo real."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Transição seca e corte brusco entre o gancho inicial e a cena 1 (de q03 para q04). O cartão de pergunta é removido de forma estática em um jump cut direto, e o banner superior com a pílula surge instantaneamente sem animação de entrada.",
+   "como_corrigir": "Animar a saída do cartão de pergunta com slide-up e fade, seguido de uma entrada fluida (slide-down com easing suave) para o banner laranja do bloco 1."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Cena parada por quase 5 segundos (de q10 a q12). A câmera fica 100% estática sem nenhum movimento de câmera, microanimação ou efeito gráfico complementar, gerando lentidão visual.",
+   "como_corrigir": "Aplicar um slow push-in contínuo (zoom suave de 100% a 105%) durante a fala e inserir ícones animados ou grafismos flutuantes reforçando a ideia de consultório sem interrupção de celular."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Uso de vídeo de fundo com aspecto evidente de banco de imagem genérico no cartão final. O ambiente hospitalar com profissionais em jaleco destoa da linguagem autêntica do consultório real apresentado em todo o restante do vídeo.",
+   "como_corrigir": "Substituir o stock footage por um B-roll gravado no próprio consultório do apresentador em câmera lenta desfocada, ou utilizar um fundo gráfico escurecido com partículas e gradiente da marca."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Gancho visual estático nos primeiros 2 segundos e erro crítico de safe zone: a legenda karaokê ('Cliente desmarca à' / 'perde a manhã') está sobreposta à boca e ao queixo do apresentador, prejudicando a leitura labial e a estética. Além disso, a cena abre em formato talking head estático idêntico ao restante do vídeo e há uma tarja laranja truncada/cortada de forma assimétrica sob o card branco de pergunta, passando aspecto amador logo na entrada.",
+   "como_corrigir": "Na Cena 0, rebaixar a legenda karaokê para o terço inferior (abaixo do tórax, respeitando a safe zone dos botões do Reels); corrigir o traço decorativo laranja para que acompanhe simetricamente a largura total do card; e aplicar um punch-in zoom de 10% com sound design sutil (som de notificação ou pop de mensagem) para romper o padrão do feed nos primeiros 1,5s."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Ausência completa de demonstração visual (Visual Proof) do produto: o texto fala que a Agenda IA reagenda clientes sozinha pelo WhatsApp, mas o vídeo se mantém em monólogo contínuo sem mostrar a ferramenta em ação. Sem o mockup ou a simulação da conversa no WhatsApp prevista no modelo, o anúncio perde autoridade de empresa de tecnologia e soa como mero depoimento ou slide falado.",
+   "como_corrigir": "Na Cena 2, inserir uma divisão de tela (split screen) ou mockup dinâmico de smartphone exibindo a simulação do WhatsApp com o selo 'Simulação': mostrar o balão do cliente cancelando à noite e a IA respondendo em segundos com novas opções e confirmando o reagendamento, tangibilizando a solução enquanto o dono explica o funcionamento."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Enquadramento sufocado estilo selfie e monotonia visual contínua: a gravação com lente grande-angular muito próxima causa distorção facial e deixa a cabeça do apresentador colidindo com o badge de tópico ('1 A situação') e a tarja superior. Manter o mesmíssimo ângulo e enquadramento ininterruptamente por mais de 20 segundos (cenas 1, 2 e 3) cansa a retenção e empobrece a produção.",
+   "como_corrigir": "Nas Cenas 1 a 3, afastar a câmera física 40 a 60 cm do apresentador para dar respiro (headroom) abaixo dos elementos gráficos do topo e eliminar a distorção de lente. Na edição, introduzir variação de planos e ritmo (ex.: plano médio na cena 1, corte dinâmico para a tela do WhatsApp na cena 2 e retorno com B-roll do consultório na cena 3)."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 7.62,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261115_184500.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha",
+   "nota": 5.33,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.5,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 7.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261115_223919.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.95,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.8
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "disparoemmassa_ia_20261116_020642.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 6.12,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.75,
+   "notas": {
+    "legibilidade": 9.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   8,
+   3
+  ],
+  "dono_abre_fecha": [
+   8,
+   0
+  ],
+  "dono_mesma_foto": [
+   6,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   20,
+   7
+  ]
+ },
+ "vigiando": []
+}

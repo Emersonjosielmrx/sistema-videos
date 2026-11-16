@@ -385,3 +385,10 @@ evisão: REPROVADO — 10 quadro(s) com nudez), o que demonstra o funcionamento 
 - CONSERTO PROPOSTO: Nenhum. O comportamento de pular vídeos marcados como mortos/travados no YouTube é esperado e automático pela rotina de métricas, e timeouts no YouTube Studio são transitórios da interface web.
 - Como desfazer: Não aplicável (nenhuma alteração realizada).
 - Estado: NADA A FAZER
+
+## 20261116_0455 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra execução contínua dos ciclos de postagem (ex: "Shorts em pt: canal parado, sai já") e o log `fila_ciclo.log` indica o gerenciamento da fila e janelas de espaço em disco local. Os processos rodam de forma contínua e normal.
+- O que fiz (Modo Só Aviso): Nenhum arquivo alterado. Apenas verificação completa dos logs e processos.
+- CONSERTO PROPOSTO: Nenhum. A fila automática está ativa, executando os ciclos regularmente e gerenciando o espaço em disco e as postagens conforme as regras vigentes.
+- Estado: NADA A FAZER

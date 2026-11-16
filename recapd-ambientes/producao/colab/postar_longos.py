@@ -442,12 +442,31 @@ def _publicar(ficha, d):
             _ped = os.environ.get("LONGO_DL_PEDACOS", "4")
             if _ped != "1":
                 _cmd += ["--multi-thread-streams", _ped, "--multi-thread-cutoff", "256M"]
-        try:
-            r = subprocess.run(_cmd, capture_output=True, text=True,
-                               timeout=float(os.environ.get("LONGO_DOWNLOAD_MAX_MIN", "90")) * 60)
-        except subprocess.TimeoutExpired:
-            log("  download do Drive passou do teto — tenta na próxima rodada")
-            return None, pasta
+        def _partial_completo():
+            # 16/11 (PvkF8Ut 8,8 GB e y5Pm6ba 5,3 GB presos desde 14/11): o download CHEGAVA inteiro mas o processo era
+            # cortado pelo teto antes do rclone renomear o .partial -> cada rodada baixava tudo de novo e o disco ficava
+            # com 14 GB parados. .partial com o tamanho EXATO do Drive = completo: renomeia. LONGO_PARTIAL_OK=0 desliga.
+            if os.environ.get("LONGO_PARTIAL_OK", "1") == "0" or not tam:
+                return False
+            for p in video.parent.glob(video.name + ".*.partial"):
+                if p.stat().st_size == tam:
+                    video.unlink(missing_ok=True)
+                    p.rename(video)
+                    log(f"  .partial já completo ({tam / 1e9:.1f} GB) — usado sem baixar de novo")
+                    return True
+            return False
+        if _partial_completo():
+            r = subprocess.CompletedProcess(_cmd, 0, "", "")
+        else:
+            try:
+                r = subprocess.run(_cmd, capture_output=True, text=True,
+                                   timeout=float(os.environ.get("LONGO_DOWNLOAD_MAX_MIN", "90")) * 60)
+            except subprocess.TimeoutExpired:
+                if _partial_completo():
+                    r = subprocess.CompletedProcess(_cmd, 0, "", "")
+                else:
+                    log("  download do Drive passou do teto — tenta na próxima rodada")
+                    return None, pasta
     finally:
         with _TRAVA_DISCO:
             _RESERVADO.pop(str(video), None)

@@ -53,3 +53,9 @@ Contexto (só leitura):
   do que copiar, em ordem de impacto);
 - `D:\hipercool-materiais\tarefas complexas para fable 5.1\ENGENHARIA_REVERSA (parceiros - o que da views)\ER_07_LONGOS_PRIORIDADE.md`
   (números medidos e o que ainda não foi aplicado).
+
+## 16/11 — medida de CPU e capacidade das máquinas (vale pra todos os projetos)
+- CPU de máquina Windows por ssh: use SEMPRE `D:\video-fila\maquinas.PS_CPU` (LoadPercentage puro vem VAZIO no
+  desktop = "0%" falso, e no PC2 pega o pico da própria medida).
+- Falha de página/conta (botão não apareceu, timeout do Playwright) NÃO é falta de capacidade da máquina — não baixe
+  limite por isso. Detalhes: `D:\flow-imagens\LEIA.md` (16/11).

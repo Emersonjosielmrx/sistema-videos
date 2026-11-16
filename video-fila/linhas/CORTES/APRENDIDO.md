@@ -1,25 +1,26 @@
-# Regras aprendidas — CORTES (atualizado 16/11 03:02; a sessão da linha aplica no pipeline)
-1. Manter rosto, olhos, boca e expressões dos personagens 100% desobstruídos em todos os frames; banir terminantemente legendas, cards, stickers, tarjas ou desfoques posicionados sobre a face, cabeça ou queixo.
-2. Cobrir integralmente textos e legendas originais queimadas da fonte com tarja sólida branca opaca (largura 1080 px, título oficial em preto >= 32 px) estritamente nos trechos com texto queimado; banir tarjas vazias (sem título), banir coberturas em fontes limpas e banir desfoques parciais que deixem caracteres vazarem.
-3. Exibir rigorosamente uma única camada de legenda ativa por vez, sincronizada palavra-a-palavra; banir palavras duplicadas na mesma tela, sobreposição física entre caixas de texto e camadas residuais ou fantasmas de takes anteriores.
-4. Fixar a legenda dinâmica no terço inferior estritamente entre y=1200 e y=1500 (altura do peito/colarinho), centralizada e dentro dos limites úteis; banir legendas acima de y=1200 (sobre tronco alto/rosto) ou abaixo de y=1580 (área coberta pela interface do Shorts).
-5. Confinar 100% de textos, legendas, cards e elementos gráficos entre x=60 e x=1020 e entre y=150 e y=1580; assegurar margem lateral mínima de 60 px em ambas as bordas (com quebra de linha ou redução de escala automática) para banir caracteres decepados.
-6. Formatar a legenda dinâmica em CAIXA ALTA uniforme, corpo >= 32 px (palavras de destaque entre 50 e 70 px), preenchimento sólido de alto contraste em amarelo (#FFFF00) ou branco (#FFFFFF) e traçado preto espesso (6 a 12 px); banir cores escuras ou desbotadas (verde, roxo, marrom, cinza), minúsculas e textos sem borda escura sólida.
-7. Abrir o vídeo de 0.0s a 2.0s em tela cheia 9:16 com headline provocativa no topo seguro (y=150 a 300, corpo >= 36 px) em português e corte de alto impacto visual ou close expressivo (movimento > 20%); banir aberturas sem título de gancho, planos borrados e inícios estáticos.
-8. Validar 100% do texto da legenda contra o áudio gravado e o roteiro oficial (respeitando 1ª pessoa, gírias e bordões); banir alucinações de transcrição, palavras inventadas ou omitidas, termos estrangeiros não falados e palavras truncadas.
-9. Exibir cenas que ilustrem com precisão o protagonista exato, a ação física, o ambiente e o tom emocional anunciados na narração; banir troca indevida de atores/personagens (ou figuras de outras partidas/obras), ações opostas à locução e cenas que contradigam o sentimento narrado.
-10. Respeitar a ordem cronológica estrita dos acontecimentos narrados; banir spoilers visuais prematuros (revelar desfechos, cartas ou consequências antes de serem citadas na voz) e banir saltos temporais desordenados em sequências contínuas de ação.
-11. Sincronizar a troca de tomada no milissegundo exato em que o novo elemento, sujeito ou ação é introduzido na locução; banir tomadas atrasadas que sustentem o cenário anterior por segundos e cortes prematuros antes da menção verbal.
-12. Renovar o estímulo visual a cada 1.5s a 3.0s (máximo 3.5s) com novos planos contextuais ou reenquadramentos dinâmicos (punch-in de 15% a 20%); banir tomadas estáticas sustentadas por mais de 3.0s, interfaces paradas e repetições imediatas do mesmo plano.
-13. Manter movimento ativo (> 20%) até o último frame e cortar a seco na última sílaba falada da frase aberta para engatar perfeitamente no segundo 0.0s; banir CTAs de Like/Inscrição no encerramento, congelamentos de tela e qualquer elemento que denuncie o fim do vídeo.
-14. Banir terminantemente botões ou stickers de CTA/Like/Inscrição, figurinhas infantis em conteúdos dramáticos, cards de mockups de chat anacrônicos e selos estilo HUD/arcade ('ALERTA INIMIGO/AMEAÇA') que quebrem a imersão da história.
-15. Eliminar 100% de marcas d'água de parceiros, arrobas (@), logos externos e textos estrangeiros da fonte via crop limpo ou máscara suave; cobrir ou traduzir títulos e cartões em outros idiomas com a identidade do canal.
-16. Deletar 100% de widgets de localização automática ('LOCAL: MUNDO', 'LOCAL: CIDADE'), placeholders e tags de template que confundam expressões da narração com locais físicos ou fiquem flutuando vazios na tela.
-17. Executar 100% das transições estritamente por corte seco em tela cheia; banir linhas diagonais gráficas, artefatos de transição 3D, wipes ou efeitos de perspectiva que rasguem a imagem ou cortem textos.
-18. Preencher 100% do quadro na resolução 1080x1920 (9:16 vertical) sem letterboxing ou pillarboxing; centralizar a ação ou protagonista com headroom de 50 a 100 px abaixo de y=150, banindo enquadramentos com cortes na cabeça, olhos ou queixo.
-19. Revisar a renderização para eliminar 100% de glitches gráficos, barras verticais órfãs, faixas de texto deformadas ou achatadas, ruído/dithering extremo e bordas de elementos que vazem antes do corte.
-20. Manter exposição e iluminação equilibradas até o milissegundo exato do corte, aplicando ganho de sombras (lift/shadows) em cenas noturnas; banir fades prematuros para o preto, quedas bruscas de luminosidade e tomadas com > 50% de escuridão ou silhuetas indistintas.
-21. Formatar cards contextuais e balões de diálogo com texto em português, corpo legível (>= 32 px) e posicionamento estritamente fora do rosto dos atores; banir telas de mensagens em línguas estrangeiras sem tradução visual nítida.
-22. Preservar rigorosamente a mesma família tipográfica, estilo gráfico (traçado duplo/cápsula) e padrão cromático do frame 0.0s ao encerramento; banir mudanças súbitas de tipografia (como Impact avulsa), transição para minúsculas e filtros de partículas isolados.
-23. Fixar o identificador oficial (@) exclusivamente no topo seguro (y entre 150 e 220 e x entre 60 e 250), estático, contínuo e 100% nítido; banir sobreposição de cards, tarjas, legendas ou elementos da fonte colidindo com a marca d'água oficial.
-24. Estruturar as camadas na ordem estrita: vídeo base < tarjas de cobertura da fonte < cards informativos contextuais < legenda dinâmica ativa < tarja superior e @ oficial; assegurar respiro vertical mínimo de 30 px entre caixas de texto para banir colisões.
+# Regras aprendidas — CORTES (atualizado 16/11 11:49; a sessão da linha aplica no pipeline)
+1. Manter rosto, olhos, boca e ponto focal da ação física 100% desobstruídos; banir legendas, stickers ou desfoques sobre a área principal.
+2. Confinar textos, legendas e títulos estritamente entre x=60 e x=1020 e entre y=150 e y=1580, com margem lateral mínima de 60 px e quebra automática.
+3. Renderizar títulos superiores, @ oficial e cards como camadas estáticas desacopladas, banindo herança de pan, zoom ou punch-in em overlays.
+4. Cobrir integralmente legendas e manchetes originais da fonte com tarja sólida branca opaca (largura 1080 px, título em preto >= 32 px), evitando poluição visual na zona inferior.
+5. Eliminar 100% de marcas d'água, arrobas (@), logotipos e stickers da fonte via reenquadramento limpo ou cobertura sólida.
+6. Fixar a legenda dinâmica estritamente na zona segura inferior (y entre 1200 e 1500), centralizada, com respiro adequado acima da tarja de cobertura e da borda inferior.
+7. Exibir rigorosamente uma única palavra ou expressão ativa por vez sincronizada à locução, sem sobreposição física, fragmentação excessiva ou resíduos.
+8. Formatar legendas e textos em preenchimento 100% sólido em amarelo (#FFFF00) ou branco (#FFFFFF) com contorno preto espesso (6 a 12 px) e alto contraste, garantindo leitura instantânea em fundos claros ou escuros.
+9. Manter a mesma família tipográfica em CAIXA ALTA uniforme do frame 0.0s ao último milissegundo, corpo >= 32 px (destaques de 50 a 70 px).
+10. Abrir o vídeo de 0.0s a 2.0s em tela cheia 9:16 com gancho/pergunta aberta de alto impacto e headline provocativa no topo seguro (y=150 a 300, corpo >= 36 px), banindo termos isolados sem contexto e garantindo alta movimentação visual inicial sem spoilers conclusivos.
+11. Renovar o estímulo visual a cada 1.5s a 3.5s com novos planos contextuais, B-rolls ou reenquadramentos dinâmicos com punch-in/zoom progressivo de 15% a 20% para manter variação acima do limiar mínimo (> 20%).
+12. Exibir tomadas que ilustrem com precisão o protagonista exato, a ação física correta e o tom dramático, banindo cortes desconexos, cenas estáticas excessivas ou troca de identidade de personagens.
+13. Agrupar e sequenciar os takes de forma fluida, banindo o efeito ping-pong (vaivém repetitivo) e planos duplicados.
+14. Respeitar a cronologia estrita dos acontecimentos, banindo spoilers visuais prematuros e inversão de causa e consequência.
+15. Cortar para a nova tomada no milissegundo exato em que o novo assunto, sujeito ou elemento for introduzido na locução.
+16. Executar 100% das transições estritamente por corte seco limpo, banindo clarões brancos (whiteout), névoa, congelamentos de frame ou obstruções diretas da lente.
+17. Manter a geometria original das imagens e textos (aspect ratio 1:1), banindo efeitos de distorção esférica ou estiramento.
+18. Preencher 100% do quadro na resolução 1080x1920 sem bordas pretas, mantendo o sujeito centralizado com headroom de 50 a 100 px abaixo de y=150.
+19. Manter iluminação e exposição calibradas, aplicando ganho de sombras em tomadas escuras e ajustando quadros finais para banir cenas com mais de 50% de área preta ou silhuetas sem expressão.
+20. Manter a legenda dinâmica ativa do primeiro milissegundo até a última sílaba falada, validando 100% das palavras contra o roteiro em 1ª pessoa.
+21. Manter movimento ativo (> 20%) e legenda ativa até o último frame, cortando a seco na última sílaba falada para emendar perfeitamente na primeira frase (loop infinito).
+22. Fixar o identificador oficial (@) exclusivamente no topo seguro (y entre 150 e 220, x entre 60 e 250), estático, contínuo e nítido.
+23. Banir rabiscos desenhados à mão, figurinhas ou stickers desconexos, cards HUD/arcade, balões de mangá estrangeiros e ícones de engajamento sobrepostos.
+24. Importar e renderizar overlays, ícones e ilustrações exclusivamente em PNG com canal alfa limpo e recorte nítido.
+25. Estruturar camadas na ordem estrita: vídeo base < tarjas < cards/B-rolls < legenda dinâmica < tarja de gancho e @ oficial, com respiro adequado e sem sobreposição de rodapé ou rostos.

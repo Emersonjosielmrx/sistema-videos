@@ -17,7 +17,7 @@ import re
 import urllib.request
 
 VISAO_RESERVA = "kr/claude-sonnet-4.5"  # dono 20/10: Haiku recusa checar capa sensual
-RESERVAS_GATEWAY = ["agy/gemini-3.8-flash-high", "antigravity/gemini-3-flash"]  # testados 23/10 com imagem
+RESERVAS_GATEWAY = ["antigravity/gemini-3-flash"]  # testados 23/10 com imagem
 
 DEFEITOS = (
     '"anatomia": true/false (look at EACH body closely; true if any is malformed: extra or missing arms, legs, hands '

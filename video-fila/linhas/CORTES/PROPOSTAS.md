@@ -1693,3 +1693,93 @@
 - prova: Repete em 4 Shorts: sem-obra-30856a (q09 narra 'ME ARRASTARAM' mostrando personagem parado de costas), sem-obra-577d70 (q02 exibe Brasil x Itália na história de Andrés Escobar), she-mistook-the-ceo-for-her-new-best-friend (q04 narra 'FLORES' em 6.26s mas só corta para o buquê em 9.38s no q06) e sem-obra-745280 (q06/q07/q09/q12 cortam para relógio, mansão e cemitério fora da ordem da locução).
 - onde: montador de cenas / alinhamento de cortes com timestamps do TTS na linha CORTES
 - como testar: Rodar o alinhador de cenas em she-mistook-the-ceo-for-her-new-best-friend_cap1_20261113 e sem-obra-745280_cap1_20261113 e verificar se a troca de tomada ocorre no segundo exato da palavra-chave e na ordem cronológica do vídeo-fonte.
+
+## 16/11 04:27 PROPOSTA [CERTEZA] Legenda palavra a palavra com cor escura ou translúcida e sem contorno some no celular (cc-sobra)
+- prova: Aparece nos 4 Shorts: Dragon Ball q02 (azul escuro sem borda), 3946a6 q11 e q13 (azul e verde escuros), 76b090 q05 ('VENDAS' verde translúcido) e b4ad73 q07, q08, q11, q14 e q15 ('JOGA', 'TODA', 'PUXÃO', 'BONITO', 'RECEITA'). Pode ser palavra pega no meio da animação de entrada ou saída, ou uma cor escura da paleta.
+- onde: No gerador da legenda ASS da linha CORTES (paleta de cores por palavra e animação de entrada e saída: \fad, \alpha, \blur). Não achei o arquivo daqui: só aparecem ultimo_video.py e agente/cortes_agente.py nesta pasta.
+- como testar: Gerar de novo os Shorts b4ad73 e 76b090 e fazer a folha de 18 quadros. Em todo quadro com fala, a palavra ativa tem de ter preenchimento claro (luminância de pelo menos 0,6, como amarelo ou branco), contorno preto de pelo menos 6 px e opacidade total por mais de 85% do tempo da palavra. Sai da paleta toda cor com luminância abaixo de 0,5.
+
+## 16/11 04:27 PROPOSTA [CERTEZA] Troca de cena desalinhada da frase e imagem contra a narração (cc-sobra)
+- prova: Dragon Ball q04-q05 (corta em 3,72 s no meio de 'perdeu pedaços do braço'), 3946a6 q07 (a cena 3 entra no meio da frase 2), 76b090 q12 ('No fim' entra antes do corte, com ghosting) e b4ad73 q10-q11 (narra 'a linha estica' enquanto a imagem mostra a ceva sendo jogada, ou seja, a consequência vem antes da causa).
+- onde: No alinhamento de cena com a fala, na hora de montar (o tempo de corte de cada cena contra o início e o fim de cada frase da voz).
+- como testar: Para os 4 Shorts, listar o tempo de cada corte e a fronteira de frase mais próxima vinda da voz. A meta é que todo corte caia a no máximo 0,3 s de uma pausa entre frases. No b4ad73, conferir se a cena do arremesso fica antes da cena da fisgada.
+
+## 16/11 04:27 PROPOSTA [GOSTO] Legenda tapando rosto ou o objeto da ação (cc-sobra)
+- prova: 76b090: q03 ('PRECISA' sobre os olhos), q04 ('INSUMOS' sobre olho e boca), q12 e q13. b4ad73: q03 ('UM MONTE' sobre a lata que está sendo triturada) e q05 ('FEDORENTA' sobre as mãos que misturam).
+- onde: No posicionamento da legenda palavra a palavra, onde se escolhe o y e o x de cada palavra. É compatível com o que a dona pediu (palavras de impacto maiores, de lado).
+- como testar: Ligar a detecção de rosto (a mesma visão já usada na tarja) e empurrar a palavra para o lado ou para baixo do rosto. Medir em uma folha de quadros do 76b090: a meta é 0 quadro com letra sobre os olhos ou a boca. Depois comparar o % assistido de 10 Shorts com o desvio contra 10 sem.
+
+## 16/11 04:27 PROPOSTA [CERTEZA] Marca d'água com @ na tela: confirmar se é intencional e se bate com o canal (cc-sobra)
+- prova: Os 4 Shorts mostram um @ no meio da tela (@animescomia, @dicasfinanceirasdaia, @vendasqueescalam, @cenareact-f3j), e a regra fixa diz 'sem @ na tela'. No b4ad73, o júri diz que o @cenareact-f3j não é o canal de destino (@novo_universo_ia_d6s).
+- onde: Na etapa que põe a marca d'água do canal, e no mapa Short → canal de postagem.
+- como testar: A dona confirma se a marca d'água do próprio canal é uma exceção à regra do @. Se for, conferir nos Shorts agendados do dia que o @ queimado é igual ao canal de destino, e travar quando for diferente.
+
+## 16/11 05:40 PROPOSTA [CERTEZA] Piso de contraste na cor da legenda palavra a palavra (manter cor por personagem) (cw/claude-sonnet-5-5)
+- prova: Legenda ilegível por cor escura ou translúcida: 151c96 q04 ('JÁ PEDIU' cinza chumbo) e q08 ('PAGAMENTO' marrom); 6fa74d q03 ('ECONÔMICA!' oliva) e q08 ('APERTA' cinza); 082282 q03 ('SANIDADE' roxo quase invisível); 55d5d7 q03 ('PAI'). São 4 Shorts do lote.
+- onde: Módulo que gera a legenda ASS/drawtext e escolhe a cor por personagem. Provável função de paleta (cortes_legenda ou equivalente); confirmar no código.
+- como testar: Ao escolher a cor, calcular a luminância relativa e, se ficar abaixo do mínimo, trocar para amarelo ou branco. Contorno preto de pelo menos 6 px, sem alpha. Renderizar 3 Shorts com personagens de cores diferentes, olhar a folha de quadros e comparar a nota de legibilidade do júri com o lote anterior.
+
+## 16/11 05:40 PROPOSTA [CERTEZA] Legenda e cards fora do rosto e dentro das margens seguras (cw/claude-sonnet-5-5)
+- prova: Legenda sobre rosto, queixo ou boca em 082282 q02 ('PRÓPRIA' sobre a criança), 55d5d7 q03/q05 ('MEU' e 'EU' no queixo) e 151c96 q05 (card da fonte sobre o rosto). Legenda decepada nas bordas em 6fa74d q12/q16/q18 e faixa amarela sem o 'C' em 151c96 q08–q11.
+- onde: Posicionamento da legenda (y fixo no terço inferior) e quebra de linha por largura em px; o card verde de diálogo vem da fonte e pode ser coberto pela mesma tarja.
+- como testar: Medir a largura do texto antes de desenhar e quebrar a linha ou reduzir a escala para caber em x=60..1020. Subir ou descer a legenda quando houver face detectada na região. Rodar nos 4 Shorts citados e conferir q12/q16/q18 do 6fa74d.
+
+## 16/11 05:40 PROPOSTA [CERTEZA] Crop 9:16 acompanhando o foco da ação (cw/claude-sonnet-5-5)
+- prova: Personagem cortado na borda enquanto o centro fica vazio: 082282 q04 (menino metade fora, mesa vazia), 6fa74d q03 (zumbi e protagonista cortados), q13 (avião cortado) e 151c96 q04/q05 (crop saltando entre posições).
+- onde: Função de reenquadramento horizontal por cena (centro do crop), provavelmente no corte de cena ou no render vertical.
+- como testar: Calcular o centro do crop pelo movimento ou pelas caixas de pessoa por cena, suavizar para evitar salto e travar dentro de cada cena. Comparar o 'movimento' do júri em 3 Shorts antes e depois.
+
+## 16/11 05:40 PROPOSTA [CERTEZA] Camadas fantasma de legenda (palavra extra por cima da correta) (cw/claude-sonnet-5-5)
+- prova: Só no 082282: 'achava' atrás de 'PAGOU/ELE' (q01), 'até' sobre 'SANIDADE' (q03), 'imediatamente' sobre 'TOCAR' (q14), 'DOIS' congelado em q11/q12. As palavras não estão no roteiro falado. Um Short só: não sirvo como padrão, fica como alerta.
+- onde: Geração dos eventos de legenda a partir do roteiro.txt e dos tempos da voz. Conferir se há eventos de uma versão anterior do roteiro ou de outro idioma sem limpar, ou eventos sem fim de duração.
+- como testar: Comparar a lista de palavras do .ass com o roteiro.txt do 082282 e garantir uma única palavra ativa por instante. Ver se o defeito reaparece nos próximos lotes antes de tratar como padrão.
+
+## 16/11 05:40 PROPOSTA [GOSTO] Máscara delogo estreita deixando vazar letras da legenda queimada (cw/claude-sonnet-5-5)
+- prova: Só no 6fa74d q03/q04: sobram letras 'E' e 'ca' nas laterais do desfoque. Vale 1 Short só, e a regra da dona exige tarja ou apagado do TAMANHO EXATO da legenda, então não aumento faixa.
+- onde: Medida da caixa das letras da visão (folga horizontal) usada em delogo.
+- como testar: Medir em resolução >= 720 px, alargar só na horizontal por alguns pixels e comparar em folha de quadros com controle negativo (vídeo sem legenda).
+
+## 16/11 06:55 PROPOSTA [GOSTO] Legenda palavra a palavra de destaque não pode cobrir rosto nem pescoço do sujeito (cw/claude-sonnet-5-5)
+- prova: 4 Shorts do lote: hunter-x-hunter q01 ('QUÍMICO' gigante no centro, sobre os rostos), aa21c1 q03 ('CARTEIRA' no pescoço) e q12 ('BAIXINHA' laranja sobre pescoço e orelha), 2623b8 q11 ('EXPLODE' em dois estilos sobre o peixe). Nota: a dona prefere palavras de impacto maiores e de lado (lição 27/10), então a mudança deve deslocar a palavra para o lado ou para o terço inferior, sem reduzir o tamanho.
+- onde: Módulo que desenha a legenda ASS/overlay das palavras de destaque (posição e tamanho da palavra ativa), e a regra 1 do APRENDIDO.md sobre manter a face desobstruída.
+- como testar: Rodar 10 Shorts com palavra de destaque, tirar folha de quadros e medir quantos têm a caixa da palavra sobre a região do rosto (detector de face ou posição fixa). Comparar antes e depois e conferir que a legenda continua grande e legível.
+
+## 16/11 06:55 PROPOSTA [GOSTO] Cena final com movimento medido abaixo de ~20% (final do loop parado) (cw/claude-sonnet-5-5)
+- prova: hunter-x-hunter q18 (16,7%, parede de metal), sem-obra-28167c q16 (12,8%), sem-obra-2623b8 q17 (16,2%) e q04, aa21c1 q07 (22,7%). Ponto de atenção: o final precisa fechar o loop, então a troca deve ser por uma tomada com mais ação, sem encerrar a frase.
+- onde: Seleção de tomadas por cena (escolha do clipe por cena e limiar de movimento), função que usa o movimento medido por cena.
+- como testar: Testar um limiar mínimo de movimento só na última cena, com troca por outro trecho da mesma fonte quando abaixo do limiar. Medir o % assistido dos Shorts alterados contra o grupo de controle por 48 h antes de generalizar.
+
+## 16/11 06:55 PROPOSTA [CERTEZA] Verificar legenda cortada na margem lateral (hunter-x-hunter q11 'uanto', q12 'menin') (cw/claude-sonnet-5-5)
+- prova: Aparece em 1 Short só neste lote, então não é padrão ainda. Se a folha do topo/quadros de outros Shorts do dia mostrarem o mesmo corte, é defeito objetivo.
+- onde: Renderização da legenda: largura máxima do texto e quebra de linha por palavra (regra 2 do APRENDIDO.md: margem lateral mínima de 60 px). Conferir também se a palavra ativa tem efeito de zoom ou punch-in que a empurra pra fora do quadro.
+- como testar: Gerar folha de quadros de todos os Shorts do dia no 1,5 s e em mais 3 pontos, medir a caixa das letras em resolução >= 720 px e contar quantos ultrapassam x=60 ou x=1020. Só tratar como bug se repetir em >= 2 Shorts.
+
+## 16/11 06:55 PROPOSTA [CERTEZA] Conferir 'ultrapassana' no roteiro do hunter-x-hunter antes de qualquer mudança (cw/claude-sonnet-5-5)
+- prova: O júri anotou 'ultrapassanatinal, o menino' no q08. Como a legenda é o texto do roteiro, abrir o roteiro.txt do Short: se o erro estiver lá, é regra de roteiro (e o 4º item já cobre ortografia); se não, é só sobreposição de legenda e não é defeito de roteiro.
+- onde: roteiro.txt do hunter-x-hunter_cap1_20261116 e a função que monta a legenda a partir dele.
+- como testar: Comparar o trecho do roteiro.txt com o texto desenhado no q08. Sem o erro no roteiro, descartar.
+
+## 16/11 08:09 PROPOSTA [CERTEZA] Legendas palavra a palavra sobrepostas no rodapé em Shorts com fala longa (cw/claude-sonnet-5-5)
+- prova: sem-obra-788b2f q16/q18: 'estuda a condição' sobreposto por 'riscar uma cirurg', e 'PROFUNDAMENTE' colado na margem inferior (q17). Só 1 Short no lote, então é observação, não padrão ainda. Confirmar nos outros Shorts do dia antes de agir.
+- onde: função que agrupa/posiciona as palavras da legenda (ASS/render da legenda palavra a palavra) e o limite de linhas e de y da legenda
+- como testar: Renderizar o roteiro.txt do 788b2f e checar que há 1 grupo ativo por vez, sem 2 linhas no mesmo y, e que a base fica acima da zona dos botões (y <= 1500). Medir em todos os Shorts do dia com folha de quadros (D:\tmp\folha_topo.py adaptado) quantos têm sobreposição antes de mexer no código.
+
+## 16/11 08:09 PROPOSTA [GOSTO] Posição da legenda palavra a palavra sobre o rosto (olhos/boca) (cw/claude-sonnet-5-5)
+- prova: sem-obra-514cc3 q05: 'MULHER' cobre olhos e boca da personagem. Aparece só em 1 Short, e a legenda no terço inferior é padrão da linha. Só vira mudança se repetir em >= 2 Shorts.
+- onde: cálculo do y da legenda (ponto focal/rosto) no render
+- como testar: Amostrar 20 Shorts do dia, medir em quantos a legenda cobre o rosto e comparar a retenção com os que não cobrem.
+
+## 16/11 11:16 PROPOSTA [GOSTO] Conferir se o 1º quadro (0-2 s) abre com palavra solta nos Shorts do dia (cw/claude-sonnet-5-5)
+- prova: baki_cap1_20261116 q01 ('MANO' isolado, retenção 6.0 grave) e sem-obra-367781_cap1_20261116 q01 ('GIGANTES', 'USA', 'MOEDAS' soltas, retenção 4.0 grave): 2 Shorts do lote com o mesmo padrão. Falta confirmar no roteiro.txt que a 1ª frase é mesmo curta e sem contexto, e não só o recorte do quadro pelo júri.
+- onde: roteiro.txt dos 2 Shorts; prompt de roteiro (gancho da 1ª frase); D:\tmp\folha_topo.py para medir os 1,5 s de todos os Shorts do dia
+- como testar: Rodar folha_topo.py nos Shorts de 16/11 e contar quantos abrem com 1 palavra isolada. Se for >= 30%, testar UMA regra de roteiro (ex.: 'A 1ª frase tem >= 5 palavras e levanta uma pergunta ou tensão sobre a cena.') por 1 lote e comparar a nota média e o % assistido. Cuidado: não pode contradizer a regra de 1ª pessoa nem o gancho-loop no fim.
+
+## 16/11 11:16 PROPOSTA [GOSTO] Cena parada no meio ou no fim do Short (movimento abaixo de 20%) (cw/claude-sonnet-5-5)
+- prova: baki q13 (17.6%), wakfu q04 (20.6%) e wakfu q16 (18.1%): 2 Shorts com cenas quase estáticas. São medidas reais, mas o corte de cena é de pipeline e não é alavanca.
+- onde: seleção/corte de cenas do pipeline (função que escolhe os takes por movimento medido)
+- como testar: Listar as cenas com movimento < 20% nos Shorts de 16/11 e ver se são sempre painéis ou planos parados da fonte. Se sim, testar piso de movimento por cena em 1 canal e comparar % assistido.
+
+## 16/11 11:16 PROPOSTA [GOSTO] Legenda palavra a palavra muito fragmentada (blocos de 1 a 2 palavras) (cw/claude-sonnet-5-5)
+- prova: baki q16 ('QUE FOI MORDIDO' / 'VOCÊ FAZ') e sem-obra-367781 q05: 2 Shorts. Porém a lição de 27/10 pede legenda com palavras de impacto maiores, e a dona prefere esse estilo. Só mudar com opinião da dona.
+- onde: módulo de legenda (agrupamento de palavras por bloco)
+- como testar: Não aplicar sem a dona. Se ela quiser, testar blocos de 2 a 3 palavras em 1 canal por 1 lote.

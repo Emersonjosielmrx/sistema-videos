@@ -2,25 +2,33 @@
   "arquivo": "3d-geladeira-v2.mp4",
   "categoria": "historias",
   "tipo": "completo",
-  "titulo": "Sua geladeira NÃO cria frio! Veja como ela funciona em 3D",
-  "descricao": "Descubra o segredo por trás do funcionamento da sua geladeira e como ela suga o calor dos alimentos.\nEntenda o ciclo térmico completo nesta animação 3D explicativa!\n#curiosidades #ciencia #animacao3d #comofunciona #tecnologia",
+  "titulo": "Sua Geladeira Não Cria Frio: Veja Como Ela Funciona!",
+  "descricao": "Descubra como o ciclo de compressão e os canos escondidos mantêm sua comida gelada!\nEntenda a ciência por trás dos eletrodomésticos do dia a dia de forma simples.\n#ciencia #curiosidades #fisica #geladeira #animacao3d",
   "tags": [
     "como funciona a geladeira",
-    "curiosidades",
-    "ciência explicada",
-    "animação 3d",
-    "termodinâmica",
+    "ciência",
     "física no dia a dia",
+    "curiosidades",
+    "animação 3d",
     "eletrodomésticos",
-    "educação"
+    "termodinâmica",
+    "fatos curiosos"
   ],
   "genero": "curiosidade 3D",
-  "tema": "o que acontece dentro da sua geladeira para ela gelar a comida",
-  "pergunta": "Você sabia dessa ou achava que ela fabricava gelo direto? Conta aqui nos comentários! 👇",
+  "tema": "o que acontece dentro da sua geladeira para ela gelar a comida (o gás circula nos canos, o motor aperta o gás e ele esquenta atrás, depois ele evapora e rouba o calor de dentro)",
+  "pergunta": "Você já sabia dessa ou achava que ela fabricava gelo direto? Conta aqui nos comentários!",
   "origem": "kit3d",
   "privacy": "public",
   "made_for_kids": false,
   "pronto": true,
-  "defeitos_visuais": 0,
-  "cenas_nao_conferidas": []
+  "defeitos_visuais": null,
+  "cenas_nao_conferidas": [],
+  "conferencia": "v2 16/11 (Claude, quadros a cada 3 s): voz clonada fatos_desconhecidos, legenda MIX, trilha, 60 fps, cor forte; fraco: 2 cenas com casca branca ~33 s",
+  "canais": [
+    "inventoreact",
+    "inovareu8b",
+    "inovareq8l"
+  ],
+  "narrador": "fatos_desconhecidos",
+  "voz_base": "francisca"
 }

@@ -23453,6 +23453,398 @@
         "ler as páginas oficiais de Content ID, disputa e \"Rights Clearance Adjustment\" para saber o que fazer quando o parceiro autoriza mas o claim vem de terceiros"
       ],
       "origem": "area_transformative_recap__sonnet_0331.md 2026-11-16"
+    },
+    {
+      "id": "yt_shorts_reuse",
+      "nome": "Regras oficiais do YouTube para Shorts: remix, clipes de terceiros, \"conteúdo reutilizado\" em vídeos curtos e a data da última atualização",
+      "subtemas": [
+        "ler as páginas de Shorts e de remix em support.google.com/youtube (pt-BR e en) e o blog.youtube sobre monetização em 2026"
+      ],
+      "origem": "area_regras_yt_oficiais__sonnet_0346.md 2026-11-16"
+    },
+    {
+      "id": "yt_ypp_updates_2026",
+      "nome": "Atualizações do YouTube Partner Program em 2026 (conteúdo não original, IA, revisão manual)",
+      "subtemas": [
+        "blog.youtube, o histórico de mudanças da página de monetização e o canal Creator Insider"
+      ],
+      "origem": "area_regras_yt_oficiais__sonnet_0346.md 2026-11-16"
+    },
+    {
+      "id": "trend_br_fila",
+      "nome": "Fila de recap guiada por busca",
+      "subtemas": [
+        "Como cruzar autocomplete do YouTube (pt/es/en) com os temas campeões da fila; truques em Python para ranquear o próximo recap"
+      ],
+      "origem": "area_trend_por_nicho__sonnet_0351.md 2026-11-16"
+    },
+    {
+      "id": "longo_outro_idioma",
+      "nome": "Roteiro longo em outro idioma",
+      "subtemas": [
+        "O que muda de título e retenção ao adaptar um recap pt-BR para es/en; canais estrangeiros que fazem o mesmo recap"
+      ],
+      "origem": "area_trend_por_nicho__sonnet_0351.md 2026-11-16"
+    },
+    {
+      "id": "trends_pais",
+      "nome": "Tendência de manhwa/anime por país",
+      "subtemas": [
+        "como medir demanda em pt-BR, es-MX, es-ES e en-US sem API do Google, e se a mesma fila serve nos quatro"
+      ],
+      "origem": "area_trend_br_fila__sonnet_0401.md 2026-11-16"
+    },
+    {
+      "id": "fila_titulo",
+      "nome": "Título do próximo recap vindo do autocomplete",
+      "subtemas": [
+        "como transformar sugestões de busca em título e capa já no formato que o público digita"
+      ],
+      "origem": "area_trend_br_fila__sonnet_0401.md 2026-11-16"
+    },
+    {
+      "id": "anilist_pop",
+      "nome": "Popularidade de obra via AniList/MangaUpdates",
+      "subtemas": [
+        "se APIs públicas de ranking de obra dão sinal de \"esquentando\" melhor que pageviews da Wikipédia"
+      ],
+      "origem": "area_trend_br_fila__sonnet_0401.md 2026-11-16"
+    },
+    {
+      "id": "regras_inauthentic",
+      "nome": "Conteúdo inautêntico e reutilizado, exemplos oficiais",
+      "subtemas": [
+        "páginas oficiais e blog.youtube sobre o que passa como transformador em recap e compilado"
+      ],
+      "origem": "area_trends_pais__sonnet_0411.md 2026-11-16"
+    },
+    {
+      "id": "tendencia_semente",
+      "nome": "Sugestões por país para um mesmo anime",
+      "subtemas": [
+        "procurar scripts pequenos em Python que comparem as sugestões de um mesmo título entre países (`gl`) para escolher em qual canal postar primeiro"
+      ],
+      "origem": "area_fila_titulo__sonnet_0421.md 2026-11-16"
+    },
+    {
+      "id": "titulo_pt_es",
+      "nome": "Palavras de pergunta e sufixos de busca em pt-BR e espanhol",
+      "subtemas": [
+        "procurar listas curtas de prefixos e sufixos que o público digita nessas línguas para usar no A-Z"
+      ],
+      "origem": "area_fila_titulo__sonnet_0421.md 2026-11-16"
+    },
+    {
+      "id": "capa_texto_busca",
+      "nome": "Texto da capa tirado da frase digitada",
+      "subtemas": [
+        "procurar projetos pequenos que reduzam uma sugestão de busca a 3-4 palavras para a capa, sem modelo de IA"
+      ],
+      "origem": "area_fila_titulo__sonnet_0421.md 2026-11-16"
+    },
+    {
+      "id": "yt_termo_pais",
+      "nome": "Termos de busca do mesmo título por idioma",
+      "subtemas": [
+        "Script Python que guarda o autocomplete por dia e `gl`, para ver quais termos sobem. Buscar \"autocomplete history trend\" e \"search suggestion tracker\" com `pushed>2026-06`."
+      ],
+      "origem": "area_tendencia_semente__sonnet_0442.md 2026-11-16"
+    },
+    {
+      "id": "yt_serie_playlist",
+      "nome": "Ordem de séries e playlists que levam ao próximo vídeo",
+      "subtemas": [
+        "Projetos pequenos que montam playlist ou ordem de reprodução pelo vídeo mais visto. Buscar \"playlist order\" e \"next video retention\"."
+      ],
+      "origem": "area_tendencia_semente__sonnet_0442.md 2026-11-16"
+    },
+    {
+      "id": "yt_regras_idioma",
+      "nome": "Regras oficiais do YouTube sobre faixa de áudio e metadados em outro idioma",
+      "subtemas": [
+        "Páginas em support.google.com/youtube sobre títulos e descrições traduzidos e áudio multi-idioma. Citar o link exato e a data."
+      ],
+      "origem": "area_tendencia_semente__sonnet_0442.md 2026-11-16"
+    },
+    {
+      "id": "outlier_mediana_formato",
+      "nome": "Nota de outlier pela mediana do canal por formato",
+      "subtemas": [
+        "como pegar views e data dos últimos 30 uploads via UULF/UUSH com yt-dlp e calcular mediana e múltiplo, com piso de views"
+      ],
+      "origem": "area_recaps_mais_vistos__sonnet_0451.md 2026-11-16"
+    },
+    {
+      "id": "amplitude_por_obra",
+      "nome": "Quantos canais por obra estouraram",
+      "subtemas": [
+        "agrupar títulos campeões por obra (anime/manhwa) com fuzzy de títulos e contar canais independentes"
+      ],
+      "origem": "area_recaps_mais_vistos__sonnet_0451.md 2026-11-16"
+    },
+    {
+      "id": "recap_por_pais",
+      "nome": "Canais de recap em outros idiomas",
+      "subtemas": [
+        "listas de canais estrangeiros de recap e como puxar o top via UULP e UUPS para decidir qual língua traduzir"
+      ],
+      "origem": "area_recaps_mais_vistos__sonnet_0451.md 2026-11-16"
+    },
+    {
+      "id": "yt_titulo_vdia",
+      "nome": "Padrões de título e hook por views/dia nos canais campeões de recap, por idioma",
+      "subtemas": [
+        "Repositórios pequenos que rankeiam top vídeos de um canal via yt-dlp, e como comparar com a nota views÷inscritos que já temos"
+      ],
+      "origem": "area_formatos_nicho__sonnet_0522.md 2026-11-16"
+    },
+    {
+      "id": "yt_regra_nao_original",
+      "nome": "Seção completa de \"conteúdo não original\" e reutilização na ajuda oficial",
+      "subtemas": [
+        "Texto exato sobre o que o YouTube considera transformador em recap e compilado, e o que muda para canais com vários vídeos de template parecido"
+      ],
+      "origem": "area_formatos_nicho__sonnet_0522.md 2026-11-16"
+    },
+    {
+      "id": "titulos_recap_idioma",
+      "nome": "Padrões de título de recap por idioma",
+      "subtemas": [
+        "Ler direto, com yt-dlp, os títulos dos 20 vídeos mais vistos de 5 canais de recap por idioma (pt, en, es). Contar comprimento, número, pergunta e palavra de gancho, e cruzar com views por dia. É um estudo nosso com yt-dlp, não um repositório."
+      ],
+      "origem": "area_yt_titulo_vdia__sonnet_0536.md 2026-11-16"
+    },
+    {
+      "id": "hook_30s_retencao",
+      "nome": "Primeiros 30 s dos recaps campeões",
+      "subtemas": [
+        "Pegar a transcrição dos primeiros 30 s dos mais vistos com `yt-dlp --write-auto-subs --skip-download` e classificar o tipo de abertura (fato, pergunta, cena de ação). Comparar com `_ABERTURAS` do anime_script."
+      ],
+      "origem": "area_yt_titulo_vdia__sonnet_0536.md 2026-11-16"
+    },
+    {
+      "id": "titulo_ab_pt",
+      "nome": "Teste de título A/B nos canais pt com número/multiplicador",
+      "subtemas": [
+        "Repetir o estudo com 20 vídeos por canal, 5 canais pt e 5 en, usando views/dia e idade do vídeo para controlar o viés"
+      ],
+      "origem": "area_titulos_recap_idioma__sonnet_0551.md 2026-11-16"
+    },
+    {
+      "id": "titulo_es",
+      "nome": "Padrões de título em canais de recap em espanhol",
+      "subtemas": [
+        "Rodar o mesmo estudo com yt-dlp em canais de recap/manhwa em es (não coberto nesta rodada) e comparar com pt e en"
+      ],
+      "origem": "area_titulos_recap_idioma__sonnet_0551.md 2026-11-16"
+    },
+    {
+      "id": "titulo_ab_es",
+      "nome": "Teste A/B de título no canal es",
+      "subtemas": [
+        "Medir no Studio (navegador) qual variante de título (frase normal com ¡…! ou MAIÚSCULA nos destaques, \"Resumen\" ou \"Recap\") rende mais impressões e CTR, sem API do Google"
+      ],
+      "origem": "area_titulo_es__sonnet_0616.md 2026-11-16"
+    },
+    {
+      "id": "capa_es",
+      "nome": "Miniaturas dos recaps campeões em es",
+      "subtemas": [
+        "Com yt-dlp, baixar só a miniatura dos vídeos campeões e anotar texto, cor e posição do rosto, para comparar com pt e en"
+      ],
+      "origem": "area_titulo_es__sonnet_0616.md 2026-11-16"
+    },
+    {
+      "id": "trilha_idioma",
+      "nome": "Vídeos campeões com título em outro idioma",
+      "subtemas": [
+        "Checar com yt-dlp se os canais es com título em inglês têm trilha de áudio múltipla ou legenda automática, e como isso muda as views"
+      ],
+      "origem": "area_titulo_es__sonnet_0616.md 2026-11-16"
+    },
+    {
+      "id": "es_titulos_campeoes",
+      "nome": "Títulos dos recaps campeões em es",
+      "subtemas": [
+        "comparar tamanho, caixa alta, números e emoji nos títulos campeões em es, pt e en usando `yt-dlp --dump-json`, e ver como o título é adaptado em canais estrangeiros"
+      ],
+      "origem": "area_capa_es__sonnet_0626.md 2026-11-16"
+    },
+    {
+      "id": "es_series_playlists",
+      "nome": "Séries e playlists em es",
+      "subtemas": [
+        "como canais de recap em espanhol numeram partes, nomeiam playlists e encadeiam o próximo vídeo (cartões e tela final)"
+      ],
+      "origem": "area_capa_es__sonnet_0626.md 2026-11-16"
+    },
+    {
+      "id": "es_primeiros_30s",
+      "nome": "Primeiros 30 s dos longos em es",
+      "subtemas": [
+        "transcrever os 30 s iniciais dos campeões em es com `youtube-transcript-api` ou legenda automática do yt-dlp e ver o padrão de abertura"
+      ],
+      "origem": "area_capa_es__sonnet_0626.md 2026-11-16"
+    },
+    {
+      "id": "thumb_titulo_par",
+      "nome": "Capa e título como par em es",
+      "subtemas": [
+        "Texto da capa que complementa o título (sem repetir), medido nos mesmos canais campeões"
+      ],
+      "origem": "area_es_titulos_campeoes__sonnet_0636.md 2026-11-16"
+    },
+    {
+      "id": "abertura_30s_longo",
+      "nome": "Primeiros 30 s dos recaps longos campeões",
+      "subtemas": [
+        "Estrutura da abertura dos longos campeões em es via legendas do `yt-dlp`, sem modelo novo"
+      ],
+      "origem": "area_es_titulos_campeoes__sonnet_0636.md 2026-11-16"
+    },
+    {
+      "id": "heatmap_pico",
+      "nome": "Teaser do trecho mais reproduzido",
+      "subtemas": [
+        "achar a cena do pico no vídeo campeão, extrair a legenda desse trecho com `yt-dlp` e gerar o teaser de 0:00–0:10"
+      ],
+      "origem": "area_abertura_30s_longo__sonnet_0651.md 2026-11-16"
+    },
+    {
+      "id": "abertura_pt_en",
+      "nome": "Aberturas dos campeões em pt-BR e inglês",
+      "subtemas": [
+        "repetir a medição de legendas dos primeiros 30 s em canais campeões desses idiomas"
+      ],
+      "origem": "area_abertura_30s_longo__sonnet_0651.md 2026-11-16"
+    },
+    {
+      "id": "capitulos_longo",
+      "nome": "Capítulos dos longos de 1 a 4 h",
+      "subtemas": [
+        "tamanho e posição dos capítulos nos campeões, para os longos de 1 a 4 h"
+      ],
+      "origem": "area_abertura_30s_longo__sonnet_0651.md 2026-11-16"
+    },
+    {
+      "id": "retencao_studio",
+      "nome": "Ler gráfico de retenção do Studio pelo navegador",
+      "subtemas": [
+        "Como extrair \"intro %\", picos e quedas por vídeo e Short na tela do Studio (sem API do Google) e mapear para segundos do roteiro"
+      ],
+      "origem": "area_recap_ritmo__sonnet_0701.md 2026-11-16"
+    },
+    {
+      "id": "termux_render_android",
+      "nome": "Render FFmpeg no celular Android",
+      "subtemas": [
+        "Receitas prontas de Termux com ffmpeg (h264 por hardware do celular, fila de lotes) em repositório pequeno, buscando por termos específicos e não pela busca genérica que falhou"
+      ],
+      "origem": "area_recap_ritmo__sonnet_0701.md 2026-11-16"
+    },
+    {
+      "id": "outlier_recap",
+      "nome": "Recaps mais vistos por nicho",
+      "subtemas": [
+        "Repositórios pequenos (0 a 50 estrelas) que ranqueiam vídeos de recap por views÷inscritos usando só yt-dlp ou RSS do canal, sem API do Google"
+      ],
+      "origem": "area_reddit_trend__sonnet_0711.md 2026-11-16"
+    },
+    {
+      "id": "short_longo_ponte",
+      "nome": "Ponte Short para longo",
+      "subtemas": [
+        "Técnicas e pesquisas sobre séries e playlists de Shorts que levam ao vídeo longo, incluindo as regras oficiais do YouTube sobre vídeo relacionado e links fixados"
+      ],
+      "origem": "area_reddit_trend__sonnet_0711.md 2026-11-16"
+    },
+    {
+      "id": "yt_hotspots",
+      "nome": "Picos de timestamp em comentários e \"most replayed\"",
+      "subtemas": [
+        "Projetos pequenos que extraem os momentos mais marcados de vídeos longos (yt-dlp + comentários) para escolher cortes e ganchos"
+      ],
+      "origem": "area_comment_mining__sonnet_0736.md 2026-11-16"
+    },
+    {
+      "id": "pedidos_serie",
+      "nome": "Pedidos de continuação do público",
+      "subtemas": [
+        "Técnicas e scripts que transformam \"faz parte 2 / continua / next\" em fila de próximos recaps e ordem de série"
+      ],
+      "origem": "area_comment_mining__sonnet_0736.md 2026-11-16"
+    },
+    {
+      "id": "comentarios_idioma",
+      "nome": "Comentários de canais estrangeiros (es/en)",
+      "subtemas": [
+        "Como achar canais de recap estrangeiros campeões e o que o público pede em cada país, para decidir idioma do próximo longo"
+      ],
+      "origem": "area_comment_mining__sonnet_0736.md 2026-11-16"
+    },
+    {
+      "id": "auditoria_transformacao",
+      "nome": "Checagem de transformação antes de postar",
+      "subtemas": [
+        "Scripts simples de fração de voz própria, similaridade de roteiro entre canais e fonte saturada (várias obras recapadas por muitos canais), só CPU, em Python/FFmpeg"
+      ],
+      "origem": "area_yt_reused_recap__sonnet_0947.md 2026-11-16"
+    },
+    {
+      "id": "yt_titulo_gancho",
+      "nome": "Padrão de título e capa dos top 20 vídeos",
+      "subtemas": [
+        "medir por RSS e página os 20 maiores recaps de anime de 2026: tamanho do título, palavras em caixa alta, e se há \"Season 1&2\" ou \"Full Season\""
+      ],
+      "origem": "area_anime_long__sonnet_1002.md 2026-11-16"
+    },
+    {
+      "id": "yt_primeiros30s",
+      "nome": "Primeiros 30 s dos recaps campeões",
+      "subtemas": [
+        "ler transcrição (youtube-transcript-api) dos 30 s iniciais dos 10 maiores e comparar com nossa abertura"
+      ],
+      "origem": "area_anime_long__sonnet_1002.md 2026-11-16"
+    },
+    {
+      "id": "yt_intervalo_postagem",
+      "nome": "Cadência ótima de longos por canal",
+      "subtemas": [
+        "cruzar views da mediana com vídeos/dia de 30 canais pelo RSS, para achar o ponto em que mais vídeos derruba as views"
+      ],
+      "origem": "area_anime_long__sonnet_1002.md 2026-11-16"
+    },
+    {
+      "id": "1__rss_estatisticas",
+      "nome": "Fila de recap guiada pelo feed",
+      "subtemas": [
+        "buscar como ligar o alerta de outlier à fila de recap, para o vídeo já entrar no roteiro com a pauta"
+      ],
+      "origem": "area_competitor_watch__sonnet_1101.md 2026-11-16"
+    },
+    {
+      "id": "2__ponte_short_longo",
+      "nome": "Ponte Short→longo por canal estrangeiro",
+      "subtemas": [
+        "buscar quais canais gringos de recap têm Short e longo do mesmo tema, e como eles encadeiam um no outro"
+      ],
+      "origem": "area_competitor_watch__sonnet_1101.md 2026-11-16"
+    },
+    {
+      "id": "3__titulos_outlier",
+      "nome": "Padrão de título dos outliers",
+      "subtemas": [
+        "buscar como extrair, só do título e da miniatura dos vídeos outlier do feed, o padrão que se repete por idioma"
+      ],
+      "origem": "area_competitor_watch__sonnet_1101.md 2026-11-16"
+    },
+    {
+      "id": "recap_transformador",
+      "nome": "Regras de conteúdo transformador",
+      "subtemas": [
+        "Páginas oficiais do YouTube sobre reutilização e monetização (não original e conteúdo reutilizado) e exemplos de canais de recap que ficaram monetizados"
+      ],
+      "origem": "area_recap_vlm_dataset__sonnet_1141.md 2026-11-16"
     }
   ],
   "projetos": [

@@ -398,6 +398,11 @@ ORDEM_IMAGENS = ("x200ma", "acer", "sti", "pc2", "desktop")
 # (Turion 2 núcleos, 8 GB, Mint) entra como os notebooks, depois do STI. FLOW_SEM_HP=1 tira.
 if os.environ.get("FLOW_SEM_HP") != "1":
     ORDEM_IMAGENS = ("x200ma", "acer", "hp", "sti", "pc2", "desktop")
+# 16/11 dona ("47% sem máquina com todos os PCs parados"): os notebooks (1 Chrome só, quase sempre com o Veo) iam
+# primeiro e o pedido gastava a vez neles; as de VÁRIOS Chromes (STI, PC2, desktop) vão primeiro agora. Os notebooks
+# continuam no fim (o Veo é deles). FLOW_NOTEBOOK_PRIMEIRO=1 volta à ordem antiga.
+if os.environ.get("FLOW_NOTEBOOK_PRIMEIRO") != "1":
+    ORDEM_IMAGENS = tuple(m for m in ("sti", "pc2", "desktop", "x200ma", "acer", "hp") if m in ORDEM_IMAGENS)
 # PC2 aguenta vários Chromes juntos ("nem precisa ser um por vez como é nos notebooks"): a imagem usa as portas extras do
 # chrome_conta (cada uma com o seu ocupado_<porta>), sem disputar a 9460 do Veo/postagem nem as 9461+ do TikTok em lote.
 PC2_PORTAS = range(9470, 9480)
@@ -420,8 +425,12 @@ PORTAS_EXTRA = {"pc2": PC2_PORTAS, "desktop": range(9470, 9478),
 CAP_ARQ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "capacidade.json")
 CAP_INICIO = {"pc2": 6, "desktop": 4, "sti": 6}
 CAP_MAX, CAP_SOBE_APOS, CAP_TETO_S = 10, 2, 2 * 3600  # 15/11: sobe após 2 acertos (era 3)
-_FALHA_CAPACIDADE = ("porta de controle", "POUCA_RAM", "TimeoutError", "TargetClosedError", "não respondeu",
-                     "sem resposta", "túnel")
+# 16/11 dona ("47% das tentativas = sem máquina, e elas estão paradas"): "TimeoutError" pegava QUALQUER timeout do
+# Playwright (botão do Flow que não apareceu em 8 s, página lenta) -> a máquina a 0% de CPU caía pra 1 Chrome por 2 h.
+# Agora só o que é da MÁQUINA (Chrome não abriu, sem RAM, túnel/ssh caiu) — e, antes de baixar, mede: CPU/RAM folgadas
+# = a culpa não é dela, não baixa.
+_FALHA_CAPACIDADE = ("porta de controle", "POUCA_RAM", "não respondeu", "sem resposta", "túnel",
+                     "Connection timed out", "banner exchange", "Target page, context or browser has been closed")
 
 
 def _cap_mexer(maquina, fn):
@@ -446,7 +455,25 @@ def cap_limite(maquina):
 # dona 01/11: "ponha um monitoramento de RAM e CPU... se a CPU estiver livre põe mais; se limpar a RAM fica mais livre"
 CPU_MAX, RAM_MIN_MB = 75, 900
 MONITOR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "monitor_maquinas.jsonl")
-_MED_PS = ("$c=[int](Get-CimInstance Win32_Processor | Measure-Object LoadPercentage -Average).Average; "
+# 16/11: LoadPercentage é uma amostra instantânea — no PC2 pegava o pico do próprio PowerShell/ssh da medida (95%+ em
+# 60% das medidas) e no desktop vinha vazio = "0%" em 127 de 127 medidas. Agora: medida única (_ps_cpu).
+# desktop: LoadPercentage vem VAZIO (contador WMI quebrado lá) -> plano B = soma do tempo de CPU dos processos em 2 s
+def _ps_cpu():
+    """Medida única de CPU (D:/video-fila/maquinas.PS_CPU); cópia de reserva se não importar."""
+    try:
+        if r"D:\video-fila" not in sys.path:
+            sys.path.append(r"D:\video-fila")
+        import maquinas
+        return maquinas.PS_CPU
+    except Exception:  # noqa: BLE001
+        return ("$v=@(); 1..3 | % { Start-Sleep -Milliseconds 900; $x=(Get-CimInstance Win32_Processor | "
+                "Measure-Object LoadPercentage -Average).Average; if($x -ne $null){$v += [int]$x} }; "
+                "if($v.Count){$c=[int](($v | Measure-Object -Average).Average)} else { "
+                "$a=(Get-Process | Measure-Object CPU -Sum).Sum; Start-Sleep 2; $b=(Get-Process | Measure-Object CPU -Sum).Sum; "
+                "$c=[int][Math]::Min(100, 100*($b-$a)/2/[Environment]::ProcessorCount) }; ")
+
+
+_MED_PS = (_ps_cpu() +
            "$r=[int]((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1024); "
            "$n=(Get-Process chrome -EA 0).Count; 'MED ' + $c + ' ' + $r + ' ' + $n")
 
@@ -508,7 +535,8 @@ def cap_ok(maquina):
     def f(e):
         e["ok"] += 1
         teto = e["teto"] if e.get("teto_ate", 0) > time.time() else None
-        return e["ok"] >= CAP_SOBE_APOS and e["limite"] < CAP_MAX and (teto is None or e["limite"] + 1 < teto)
+        # 16/11: com limite 1 e teto 1 "limite+1 < teto" nunca era verdade -> preso em 1 (e cada falha renovava 2 h)
+        return e["ok"] >= CAP_SOBE_APOS and e["limite"] < CAP_MAX and (teto is None or e["limite"] + 1 < max(teto, 3))
     if not _cap_mexer(maquina, f):
         return
     med = medir(maquina)
@@ -529,9 +557,18 @@ def cap_ok(maquina):
 def cap_falha(maquina, motivo):
     if not any(s in str(motivo) for s in _FALHA_CAPACIDADE):
         return  # falha da conta/prompt, não da máquina
+    med = medir(maquina)
+    if med and med["cpu"] <= CPU_MAX and med["ram_mb"] >= RAM_MIN_MB * 2:
+        print(f"  capacidade {maquina}: falha ({str(motivo)[:50]}) mas a máquina está folgada (cpu {med['cpu']}%, "
+              f"RAM {med['ram_mb']} MB) — não baixa", flush=True)
+        return
     def f(e):
-        e["teto"], e["teto_ate"] = e["limite"], time.time() + CAP_TETO_S
+        e["teto"], e["teto_ate"] = max(e["limite"], 2), time.time() + CAP_TETO_S
         e["limite"], e["ok"] = max(1, e["limite"] - 1), 0
+        # 16/11: quem baixou e por quê (o limite caía de novo sem ninguém saber de onde)
+        e["baixou"] = {"quando": time.strftime("%d/%m %H:%M"), "pid": os.getpid(),
+                       "quem": os.path.basename(sys.argv[0] or "?"), "motivo": str(motivo)[:120],
+                       "cpu": (med or {}).get("cpu"), "ram_mb": (med or {}).get("ram_mb")}
         return e["limite"]
     novo = _cap_mexer(maquina, f)
     print(f"  capacidade {maquina}: falhou ({str(motivo)[:60]}) -> {novo} Chromes de imagem", flush=True)

@@ -772,9 +772,9 @@ def _cadeia_uma_vez(prompt, modelos, system=None, max_tokens=2048, temperature=0
 
 
 
-CADEIA_TEXTO_LONGO = [os.environ.get("GEMINI_TEXTO_VIDEO") or "antigravity/gemini-3.8-flash-tiered",
+CADEIA_TEXTO_LONGO = [os.environ.get("GEMINI_TEXTO_VIDEO") or "antigravity/gemini-3-flash",
 
-                      "agy/gemini-3.8-flash-high", "gemini-fila", "antigravity/gemini-3-flash"]  # nunca Opus/Kiro
+                      "gemini-fila", "antigravity/gemini-3-flash"]  # nunca Opus/Kiro
 
 
 

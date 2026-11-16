@@ -1,5 +1,6 @@
 # CLAUDE-CODE-VIDEO — DECISÕES (mais nova em cima)
 
+- 16/11 10:53 [melhorador] APLICADO: proibir_checklists_emojis_topicos_slide (remotion/EDITOR.md) — hipótese: Elimina o aspecto de apresentação corporativa ao proibir checklists com emojis e caixas de tópicos empilhados estáticos, exigindo motion design vertical nativo com apenas um elemento por vez e movimento de câmera obrigatório no fundo.; base 1ª versão 6.08; julga em 2 vídeo(s) de anuncio; desfazer: copiar 20261116_105345_EDITOR.md de volta. Modelos: {'analista': 'agy/gemini-3.8-flash-high', 'propositor': 'agy/gemini-3.8-flash-high', 'critico': 'agy/gemini-3.8-flash-high'}
 - 15/11 19:39 [melhorador] ficou: trilha_intensidade_dinamica — 1ª versão 6.15 → 6.62
 - 14/11 01:30 [melhorador] APLICADO: trilha_intensidade_dinamica (remotion/EDITOR.md) — hipótese: Substitui o ducking fixo por intensidade musical dinâmica com pico no gancho e no clímax, aumentando a retenção sem cobrir a voz.; base 1ª versão 6.15; julga em 2 vídeo(s) de anuncio; desfazer: copiar 20261114_013054_EDITOR.md de volta. Modelos: {'analista': 'agy/gemini-3.8-flash-high', 'propositor': 'agy/gemini-3.8-flash-high', 'critico': 'agy/gemini-3.8-flash-high'}
 - 13/11 16:53 [melhorador] DESFEITO — NÃO REPROPOR: proibir modais opacos reguas e tabelas — 1ª versão caiu 6.11 → 5.69

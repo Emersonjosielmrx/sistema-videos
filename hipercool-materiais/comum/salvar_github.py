@@ -49,7 +49,8 @@ RAIZ_SOLTOS = ["sentinela_credito.py", "sentinela_disparo.py", "sentinela_vigia.
                "ACESSO_VPS_PARA_AGENTES.md", "relatorio_final.md"]
 EXT = {".py", ".ps1", ".bat", ".sh", ".vbs", ".js", ".ts", ".tsx", ".mjs", ".md", ".txt", ".json", ".yaml", ".yml",
        ".toml", ".html", ".css", ".ipynb"}
-PASTAS_FORA = {"venv", ".venv", "venv_vozes", "node_modules", "__pycache__", ".git", "models", "modelos", "workspace",
+PASTAS_FORA = {"venv", ".venv", "venv_vozes", "node_modules", "__pycache__", ".git", ".git_velho_NAO_USAR",
+               ".git_velho_julho_NAO_USAR", "models", "modelos", "workspace",
                "cache", "caches", "perfis", "perfil", "perfil_navegador", "perfil_chrome", "secrets", "secret",
                "credenciais", "logs", "log", "tmp", "temp", "dados", "videos", "video", "assets", "saida", "out",
                "dist", "build", "shorts", "animes recap", "na_nuvem", "cofre", "juri", "rodadas", "videos laterais",

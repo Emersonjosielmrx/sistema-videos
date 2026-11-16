@@ -297,6 +297,23 @@ def vez(rotulo=""):
                 break
             time.sleep(2)
     _local.dentro = 1
+    _t_pegou = time.time()
+    # 15/11: com o PC1 a 100%, quem tem a vez (exclusiva) rodava em prioridade normal/baixa e o download de Short
+    # levava 79-179 s (28 s fora da fila) — todos os preparos esperam atrás. Enquanto segura a vez, o processo (e o
+    # yt-dlp filho, que herda) sobe pra ACIMA DO NORMAL; volta à classe de antes ao soltar. YTDLP_VEZ_PRIORIDADE=0 desliga.
+    _classe_antes = None
+    if pegou and sys.platform == "win32" and os.environ.get("YTDLP_VEZ_PRIORIDADE", "1") != "0":
+        try:
+            import psutil
+            _eu = psutil.Process(os.getpid())
+            _classe_antes = _eu.nice()
+            if _classe_antes not in (psutil.ABOVE_NORMAL_PRIORITY_CLASS, psutil.HIGH_PRIORITY_CLASS,
+                                     psutil.REALTIME_PRIORITY_CLASS):
+                _eu.nice(psutil.ABOVE_NORMAL_PRIORITY_CLASS)
+            else:
+                _classe_antes = None
+        except Exception:  # noqa: BLE001
+            _classe_antes = None
     # 22/10 (dono: "falei pra usar o webshare"): operação PEQUENA (busca/legenda/probe/lista, KB) sai por proxy
     # rotativo via env http_proxy — cobre todos os chamadores sem mexer neles; DOWNLOAD (MB) segue direto (a
     # banda da Webshare é limitada). Quem passa --proxy explícito não é afetado (a flag vence a env).
@@ -318,6 +335,12 @@ def vez(rotulo=""):
             time.sleep(min(falta, INTERVALO))
         yield
     finally:
+        if _classe_antes:
+            try:
+                import psutil
+                psutil.Process(os.getpid()).nice(_classe_antes)
+            except Exception:  # noqa: BLE001
+                pass
         if px:
             for k, v in env_antes.items():
                 if v is None:
@@ -333,6 +356,14 @@ def vez(rotulo=""):
         try:
             (ULTIMA.with_name("ytdlp_vez_pequenas.json") if pequena else ULTIMA).write_text(
                 json.dumps({"fim": time.time(), "rotulo": rotulo, "pid": os.getpid()}), encoding="utf-8")
+        except OSError:
+            pass
+        # 15/11: registro de uso da vez (quem, quanto esperou, quanto segurou) para achar o gargalo dos preparos
+        try:
+            with open(TRAVA.with_name("ytdlp_vez_uso.log"), "a", encoding="utf-8") as _fu:
+                _fu.write("\t".join((time.strftime("%d/%m %H:%M:%S"), "peq" if pequena else "dl", str(rotulo),
+                                     f"espera={_t_pegou - t0:.0f}", f"segurou={time.time() - _t_pegou:.0f}",
+                                     f"pid={os.getpid()}")) + "\n")
         except OSError:
             pass
         if pegou:

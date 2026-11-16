@@ -102,6 +102,16 @@ def no_ar(host):
         return False
 
 
+def _ps_cpu():
+    try:
+        if r"D:\video-fila" not in sys.path:
+            sys.path.append(r"D:\video-fila")
+        import maquinas
+        return maquinas.PS_CPU
+    except Exception:  # noqa: BLE001
+        return "$c=[math]::Round((Get-CimInstance Win32_Processor | Measure-Object LoadPercentage -Average).Average); "
+
+
 def livre(host):
     """(pode, motivo). Desktop: OBS fechado e CPU abaixo de cpu_max. PC2: nunca (so leitura)."""
     h = HOSTS[host]
@@ -111,8 +121,9 @@ def livre(host):
         h = _estado().get(host, {})
         return False, f"pausado/descansando ate {h.get('descanso_ate') or h.get('pausado_ate')}"
     try:  # 1 conexao so (sem o no_ar separado)
+        # 16/11: CPU pela medida única (D:/video-fila/maquinas.PS_CPU) — LoadPercentage vem vazio no desktop
         r = ssh(host, "if (Get-Process obs64,obs32 -ErrorAction SilentlyContinue) {'GRAVANDO'} else {'livre'}; "
-                      "[math]::Round((Get-CimInstance Win32_Processor | Measure-Object LoadPercentage -Average).Average)")
+                      + _ps_cpu() + "$c")
     except subprocess.TimeoutExpired:
         return False, "fora do ar"
     if r.returncode != 0:

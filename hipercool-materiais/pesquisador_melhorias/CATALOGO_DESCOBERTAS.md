@@ -5442,3 +5442,193 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_transformative_recap__sonnet_0331.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 03:47 — Regras oficiais do YouTube sobre recap e conteúdo reutilizado (`area_regras_yt_oficiais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_regras_yt_oficiais__sonnet_0346.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 03:56 — Fontes de tendência por nicho e idioma (`area_trend_por_nicho`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trend_por_nicho__sonnet_0351.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 04:08 — Fila de recap guiada por busca (`area_trend_br_fila`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trend_br_fila__sonnet_0401.md`
+
+- [INÉDITO] github.com/gregman2121/youtube-autocomplete-miner — ★0, push 2026-10-23, MIT — Find out what people actually type into YouTube search. Give it a seed term, and it pulls the autocomplete suggestions for the seed plus eve
+
+## 2026-11-16 04:16 — Tendência de manhwa/anime por país (`area_trends_pais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trends_pais__sonnet_0411.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 04:36 — Título do próximo recap vindo do autocomplete (`area_fila_titulo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_fila_titulo__sonnet_0421.md`
+
+- [INÉDITO] github.com/ChocoData-com/youtube-suggest-scraper — ★1, push 2026-07-20, MIT — YouTube Suggest Scraper for extracting autocomplete suggestions and related search terms in any language from YouTube.com. Updated 2026.
+- [INÉDITO] github.com/sebdata-tools/search-autocomplete — ★0, push 2026-11-15, MIT — Google autocomplete scraper that also reads YouTube, Amazon and DuckDuckGo: keyword suggestions from four search boxes in one run. Many seed
+
+## 2026-11-16 04:47 — Sugestões por país para um mesmo anime (`area_tendencia_semente`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_tendencia_semente__sonnet_0442.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 05:02 — Achar recaps mais vistos para recapar (`area_recaps_mais_vistos`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recaps_mais_vistos__sonnet_0451.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 05:15 — Canais de recap em outros idiomas (`area_recap_por_pais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_por_pais__sonnet_0506.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 05:34 — Formatos que viralizam por nicho (`area_formatos_nicho`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_formatos_nicho__sonnet_0522.md`
+
+- [INÉDITO] github.com/eliftforlife/youtube-formula-skills — ★0, push 2026-10-16, MIT — 8 free Claude skills from analyzing Alex Hormozi's top 100 YouTube videos: thumbnails, titles, hooks, descriptions, formats, delivery, editi
+
+## 2026-11-16 05:46 — Padrões de título e hook por views/dia nos canais campeões de recap, por idioma (`area_yt_titulo_vdia`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_titulo_vdia__sonnet_0536.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 05:58 — Padrões de título de recap por idioma (`area_titulos_recap_idioma`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulos_recap_idioma__sonnet_0551.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 06:12 — Primeiros 30 s dos recaps campeões (`area_hook_30s_retencao`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_hook_30s_retencao__sonnet_0603.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 06:21 — Padrões de título em canais de recap em espanhol (`area_titulo_es`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulo_es__sonnet_0616.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 06:30 — Miniaturas dos recaps campeões em es (`area_capa_es`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_capa_es__sonnet_0626.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 06:40 — Títulos dos recaps campeões em es (`area_es_titulos_campeoes`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_es_titulos_campeoes__sonnet_0636.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 06:58 — Primeiros 30 s dos recaps longos campeões (`area_abertura_30s_longo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_abertura_30s_longo__sonnet_0651.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 07:08 — Retenção em recap de manhwa/anime (`area_recap_ritmo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_ritmo__sonnet_0701.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 07:17 — Detecção de tendência por Reddit/HN sem API paga (`area_reddit_trend`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_reddit_trend__sonnet_0711.md`
+
+- [INÉDITO] github.com/mvanhorn/last30days-skill — ★None, push ?, ver repo (fallback HTML) — AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary
+
+## 2026-11-16 07:27 — Recaps mais vistos por nicho (`area_outlier_recap`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_outlier_recap__sonnet_0721.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 07:42 — Mineração de comentários de concorrentes (pt, en, es) (`area_comment_mining`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_comment_mining__sonnet_0736.md`
+
+- [INÉDITO] github.com/heyitsgautham/youtube-comments-scraper — ★0, push 2026-10-25, MIT — Export YouTube comments and replies with Python or curl, no API key, plus a finder for unanswered viewer questions
+
+## 2026-11-16 08:11 — Previsão da curva de uma tendência (`area_trend_forecast`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trend_forecast__sonnet_0804.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 08:36 — VSR de um passo (FlashVSR e concorrentes) em fp16 na T4 (`area_vsr_streaming`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_vsr_streaming__sonnet_0821.md`
+
+- [INÉDITO] github.com/zhengchen1999/DOVE — ★227, push 2026-10-20, Apache-2.0 — [NeurIPS'25] DOVE: Efficient One-Step Diffusion Model for Real-World Video Super-Resolution
+- [INÉDITO] github.com/zhengchen1999/LSGQuant — ★16, push 2026-10-21, Apache-2.0 — PyTorch code for our paper "LSGQuant: Layer-Sensitivity Guided Quantization for One-Step Diffusion Real-World Video Super-Resolution"
+- [INÉDITO] github.com/W-Shuoyan/OSDEnhancer — ★17, push 2026-06-25, Apache-2.0 — [OSDEnhancer] Taming Real-World Space-Time Video Super-Resolution with One-Step Diffusion (arXiv 2026)
+
+## 2026-11-16 09:56 — Conteúdo reutilizado aplicado a recap de anime/manhwa (`area_yt_reused_recap`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_reused_recap__sonnet_0947.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 10:11 — Canais de recap de anime em inglês, 1-3 h (`area_anime_long`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_anime_long__sonnet_1002.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 10:57 — Primeiros 30 s dos recaps campeões (`area_yt_primeiros30s`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_primeiros30s__sonnet_1033.md`
+
+- [INÉDITO] github.com/AkhileshNagargoje/youtube-search-filters — ★3, push 2026-08-04, MIT — Search Filters for YouTube — sort results and filter by upload year, duration, view count, Shorts, watched videos, keywords and channels. Ma
+- [INÉDITO] github.com/Sewer2K/yt-channel-downloader — ★31, push 2026-09-05, MIT — Download YouTube channel videos & Shorts with a modern desktop GUI — yt-dlp + PySide6, thumbnail/title/view-count previews, quality picker, 
+
+## 2026-11-16 11:09 — Monitor de novos uploads de concorrentes (`area_competitor_watch`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_competitor_watch__sonnet_1101.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 11:22 — Fila de recap guiada pelo feed (`area_1__rss_estatisticas`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_1__rss_estatisticas__sonnet_1115.md`
+
+- [INÉDITO] github.com/victoranime/viralspy — ★0, push 2026-11-15, MIT — Open-source Instagram, TikTok, YouTube & Facebook Outlier Sorter Chrome Extension + Local AI MCP Server (Claude, Antigravity, Cursor) & Free
+
+## 2026-11-16 11:37 — Referências de ASL por nicho (`area_asl_benchmarks`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_asl_benchmarks__sonnet_1128.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 11:49 — Dados e métodos de legenda de quadrinhos por VLM (`area_recap_vlm_dataset`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_vlm_dataset__sonnet_1141.md`
+
+- [INÉDITO] github.com/Chukie99/manhwa-recap-ai — ★0, push 2026-08-28, MIT — Turn manga/manhwa into cinematic recap videos with AI narration — full-stack FastAPI + React SaaS
+
+## 2026-11-16 12:03 — Regras de conteúdo transformador (`area_recap_transformador`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_transformador__sonnet_1156.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 12:14 — Deduplicação de títulos próprios contra os de concorrentes (`area_titulos_dedup_semantico`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulos_dedup_semantico__sonnet_1207.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

@@ -1,0 +1,152 @@
+{
+ "conta": "followupia.ia",
+ "produto": "follow_up",
+ "marca": "Follow-up IA",
+ "titulo": "Como resgatar clientes que esfriaram no WhatsApp",
+ "legenda": "Clientes que esfriaram semanas atrás podem voltar a comprar com o acompanhamento certo.\nDescubra como reativar contatos no WhatsApp pelo link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#followup #vendas #whatsappbusiness #automacao #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Resgatar clientes que sumiram",
+  "pergunta_cliente": "Dá para resgatar quem pediu preço no mês passado e não comprou?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Muitos contatos interessados esfriaram semanas atrás porque não tivemos braço para insistir.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "modern Brazilian commercial office desk, clean, well lit, professional atmosphere",
+    "real_tema": "lead_inativo",
+    "destaques": [
+     "interessados esfriaram",
+     "para insistir"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261116_052517_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A IA envia mensagens no WhatsApp para trazer esse público de volta e nunca desiste.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "bright and tidy corporate meeting room in a Brazilian company",
+    "real_tema": "follow_up_ia",
+    "destaques": [
+     "mensagens no WhatsApp",
+     "nunca desiste"
+    ],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Oi, tudo bem? Conseguiu avaliar a proposta que te mandei?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Oi! Acabei me enrolando na época. Ainda dá para fechar?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Com certeza! Vamos dar andamento agora mesmo por aqui."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261116_052517_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261116_052517_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Eu recupero vendas de semanas atrás direto no WhatsApp, a partir de cento e noventa e nove reais.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "tidy modern workspace in Brazil, warm natural lighting, professional setting",
+    "real_tema": "vendas_recuperadas",
+    "destaques": [
+     "recupero vendas",
+     "direto no WhatsApp"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261116_052517_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261116_052517_1.png"
+   }
+  ],
+  "legenda": "Clientes que esfriaram semanas atrás podem voltar a comprar com o acompanhamento certo.\nDescubra como reativar contatos no WhatsApp pelo link no perfil.",
+  "titulo": "Como resgatar clientes que esfriaram no WhatsApp",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "reativacao_base_antiga",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 56,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\followupia.ia_20261116_052420\\dono_3.mp4",
+ "duracao_s": 31.34,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-16T05:42:06",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.77,
+   "fala": "Dá para resgatar quem pediu preço no mês passado e não comprou?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.77,
+   "fim": 11.73,
+   "fala": "Muitos contatos interessados esfriaram semanas atrás porque não tivemos braço para insistir.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.73,
+   "fim": 19.57,
+   "fala": "A IA envia mensagens no WhatsApp para trazer esse público de volta e nunca desiste.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 19.57,
+   "fim": 27.4,
+   "fala": "Eu recupero vendas de semanas atrás direto no WhatsApp, a partir de cento e noventa e nove reais.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.4,
+   "fim": 31.34,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.2,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.8,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

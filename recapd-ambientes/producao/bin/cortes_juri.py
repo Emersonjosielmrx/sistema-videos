@@ -32,8 +32,8 @@ OPINIOES_USADAS = Path(r"D:\hipercool-materiais\CORTES_ULTIMO_VIDEO\.opinioes_us
 LOG = LINHA / "juri.log"
 TRAVA = LINHA / ".juri.lock"
 CFG_CCV = Path(r"D:\claude-code-video\config.json")  # só leitura: gateway e chave (não entra no sys.path)
-MODELO = "agy/gemini-3.8-flash-high"
-MODELO_RESERVA = "antigravity/gemini-3.8-flash-tiered"
+MODELO = "antigravity/gemini-3-flash"
+MODELO_RESERVA = "antigravity/gemini-3-flash"
 MOV_MIN = 4          # % de mudança entre 20% e 80% da cena: abaixo = cena PARADA (calibrado no claude-code-video)
 N_CENAS = 6          # o Short não guarda o roteiro com tempo: 6 pedaços iguais
 JURI_CADA = 4        # júri em 1 a cada 4 Shorts (muito volume)

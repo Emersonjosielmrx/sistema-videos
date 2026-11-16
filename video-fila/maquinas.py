@@ -30,9 +30,18 @@ _SEM_JANELA = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 # ssh do Git: o do Windows (System32\OpenSSH) trava depois de autenticar (17/10); tarefa agendada pode pegar ele no PATH.
 SSH = r"C:\Program Files\Git\usr\bin\ssh.exe" if Path(r"C:\Program Files\Git\usr\bin\ssh.exe").exists() else "ssh"
 
+# 16/11 (dona: "corrija em todos os projetos"): medida ÚNICA de CPU do Windows. LoadPercentage é instantâneo e no
+# desktop vem VAZIO (contador WMI quebrado lá) -> virava 0% sempre (127 de 127 medidas) e no gera_imagem o PC2 dava
+# 95%+ pelo pico da própria medida. Média de 3 amostras; sem contador = tempo de CPU somado dos processos em 2 s.
+# Usado por: este PS_MEDIR, D:low-imagens\gera_imagem.py (_MED_PS) e D:\postador-de-videosin\workers.py.
+PS_CPU = ("$v=@(); 1..3 | ForEach-Object { Start-Sleep -Milliseconds 900; $x=(Get-CimInstance Win32_Processor | "
+          "Measure-Object LoadPercentage -Average).Average; if($x -ne $null){$v += [int]$x} }; "
+          "if($v.Count){$c=[int](($v | Measure-Object -Average).Average)} else { "
+          "$a=(Get-Process | Measure-Object CPU -Sum).Sum; Start-Sleep 2; $b=(Get-Process | Measure-Object CPU -Sum).Sum; "
+          "$c=[int][Math]::Min(100, 100*($b-$a)/2/[Environment]::ProcessorCount) }; ")
+
 PS_MEDIR = (
-    "$c = (1..3 | ForEach-Object { (Get-CimInstance Win32_Processor | Measure-Object LoadPercentage -Average).Average;"
-    " Start-Sleep 3 } | Measure-Object -Average).Average;"
+    PS_CPU +
     "$r = [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1MB,1);"
     "$d = [math]::Round(((Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Free -and (-not '__DRIVE__' -or $_.Name -eq '__DRIVE__') } | Measure-Object Free -Maximum).Maximum)/1GB,1);"
     # 1 trabalho = o processo raiz (o lançador do venv e os filhos têm a mesma marca); raiz com mais de __MAXH__ h = travado

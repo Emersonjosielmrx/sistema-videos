@@ -1,4 +1,4 @@
-# Os nossos Shorts medidos — 16/11 03:09
+# Os nossos Shorts medidos — 16/11 11:14
 
 Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 324, não elegíveis 414, sem dado 22. Elegível = o feed deu o lote de teste (Fable ER_01).
 
@@ -16,7 +16,7 @@ Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 324, não elegív
 | vol_2s | -16.40 | -16.60 |
 | vol_dif | 0.40 | 0.30 |
 | silencio_ini_s | 0.00 | 0.00 |
-| pct_media | 54.13 | 54.12 |
+| pct_media | 54.13 | 54.69 |
 
 ### Elegível (A) x não elegível (B) — no MESMO canal (23 canais)
 
@@ -30,37 +30,37 @@ Gerado por `medir_nossos.py` (sem IA). Medidos 760: elegíveis 324, não elegív
 | vol_2s | -0.05 | 10 / 12 |
 | vol_dif | +0.15 | 12 / 11 |
 | silencio_ini_s | +0.00 | 2 / 0 |
-| pct_media | -3.54 | 9 / 14 |
+| pct_media | -3.39 | 9 / 14 |
 
 ## 2. Entre os elegíveis: 2º lote x só o 1º
 
 ### Geral
 
-| medida | 2º lote (n 114) | 1º lote (n 210) |
+| medida | 2º lote (n 113) | 1º lote (n 211) |
 |---|---|---|
-| dur | 28.40 | 52.40 |
+| dur | 28.30 | 52.70 |
 | cortes_s | 0.41 | 0.52 |
 | cortes_2s | 0.00 | 1.00 |
-| primeiro_corte | 1.70 | 1.87 |
-| maior_plano_s | 7.04 | 6.23 |
+| primeiro_corte | 1.75 | 1.85 |
+| maior_plano_s | 7.07 | 6.20 |
 | vol_2s | -16.50 | -16.40 |
 | vol_dif | 0.40 | 0.40 |
 | silencio_ini_s | 0.00 | 0.00 |
-| pct_media | 82.12 | 44.57 |
+| pct_media | 82.22 | 44.65 |
 
 ### 2º lote (A) x 1º lote (B) — no MESMO canal (19 canais)
 
 | medida | mediana da diferença (A − B) | canais A maior / A menor |
 |---|---|---|
 | dur | -18.25 | 1 / 18 |
-| cortes_s | -0.08 | 6 / 13 |
+| cortes_s | -0.21 | 5 / 14 |
 | cortes_2s | +0.00 | 5 / 6 |
 | primeiro_corte | -0.19 | 9 / 10 |
 | maior_plano_s | +1.54 | 13 / 6 |
 | vol_2s | +0.00 | 9 / 9 |
 | vol_dif | +0.10 | 12 / 7 |
 | silencio_ini_s | +0.00 | 0 / 0 |
-| pct_media | +36.12 | 19 / 0 |
+| pct_media | +35.43 | 19 / 0 |
 
 ## 3. Duração
 

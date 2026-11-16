@@ -209,3 +209,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 18:49 — Padrões de título e capa de recap longo que seguram retenção (`area_titulo_capa_longo`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_titulo_capa_longo__sonnet_1837.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 05:02 — Achar recaps mais vistos para recapar (`area_recaps_mais_vistos`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recaps_mais_vistos__sonnet_0451.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 06:30 — Miniaturas dos recaps campeões em es (`area_capa_es`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_capa_es__sonnet_0626.md`
+- (todos os itens desta pesquisa foram reprovados)
