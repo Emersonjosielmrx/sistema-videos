@@ -194,6 +194,53 @@ def capar(d, j):
     return True
 
 
+KIT3D = Path(r"D:\hipercool-materiais\historias-em-frames")
+
+
+def capar_3d():
+    """16/11 dona ("aplique no 3D tudo que os outros já usam"): Shorts 3D (fichas 3d-*) já vêm com capa.png do próprio
+    kit — vai como 1º quadro (CAPA_1O_QUADRO_S), igual aos de parceiro, antes de postar. CAPAR_3D=0 desliga."""
+    if os.environ.get("CAPAR_3D", "1") == "0" or not KIT3D.is_dir():
+        return 0
+    n = 0
+    for pj in KIT3D.glob("3d-*/postar.json"):
+        d = pj.parent
+        try:
+            j = json.loads(pj.read_text("utf-8"))
+        except (OSError, ValueError):
+            continue
+        video = d / (j.get("arquivo") or "video.mp4")
+        capa = next((d / c for c in ("capa.png", "capa.jpg") if (d / c).exists()), None)
+        if (not video.exists() or not capa or j.get("capa_no_inicio") or j.get("posted_url")
+                or not j.get("pronto") or time.time() - video.stat().st_mtime < 180):
+            continue
+        try:
+            seg = float(os.environ.get("CAPA_1O_QUADRO_S", "0.5"))
+            # capa_no_inicio trabalha com "video.mp4" + "video_sem_capa.mp4": usa o nome real do 3D por cópia
+            tmp = d / "video.mp4"
+            if tmp.exists() and tmp != video:
+                continue
+            video.rename(tmp)
+            try:
+                capa_no_inicio(tmp, capa, seg)
+            finally:
+                tmp.rename(video)
+            j = json.loads(pj.read_text("utf-8"))
+            if j.get("posted_url"):
+                log(f"{d.name}: postado durante a capa — desfaço")
+                sem = d / "video_sem_capa.mp4"
+                if sem.exists():
+                    shutil.move(str(sem), str(video))
+                continue
+            j.update(capa_no_inicio=seg, thumb=capa.name, capa_shorts_em=datetime.now().isoformat("T", "minutes"))
+            pj.write_text(json.dumps(j, ensure_ascii=False, indent=2), "utf-8")
+            log(f"{d.name}: capa do kit 3D no 1º quadro")
+            n += 1
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] {d.name} (3D): {type(e).__name__}: {str(e)[:200]}")
+    return n
+
+
 def main():
     if os.environ.get("CAPAR_SHORTS") == "0":
         return
@@ -212,6 +259,7 @@ def main():
                 feitos += capar(d, j)
             except Exception as e:  # noqa: BLE001
                 log(f"[!] {d.name}: {type(e).__name__}: {str(e)[:200]}")
+        feitos += capar_3d()
         log(f"rodada: {feitos} Short(s) com capa IA")
     finally:
         trava.unlink(missing_ok=True)

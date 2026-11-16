@@ -23845,6 +23845,38 @@
         "Páginas oficiais do YouTube sobre reutilização e monetização (não original e conteúdo reutilizado) e exemplos de canais de recap que ficaram monetizados"
       ],
       "origem": "area_recap_vlm_dataset__sonnet_1141.md 2026-11-16"
+    },
+    {
+      "id": "trends_pais_roteiro",
+      "nome": "Manchetes do Trends como gancho de roteiro por idioma",
+      "subtemas": [
+        "como nomear títulos e primeiros 30 s a partir de `news_item_title` em pt, es e en, e o que muda por país"
+      ],
+      "origem": "area_tendencias_por_pais__sonnet_1217.md 2026-11-16"
+    },
+    {
+      "id": "longo_idioma_pais",
+      "nome": "Longo em outras línguas",
+      "subtemas": [
+        "canais de recap em es, id e de, quais temas funcionam em cada país e como adaptar o roteiro (não só traduzir)"
+      ],
+      "origem": "area_tendencias_por_pais__sonnet_1217.md 2026-11-16"
+    },
+    {
+      "id": "yt_bridge_shorts_longo",
+      "nome": "Ponte Short para longo e playlists",
+      "subtemas": [
+        "páginas oficiais sobre \"vídeos relacionados\" em Shorts, playlists como série e como o YouTube indica o próximo vídeo; scripts pequenos (qualquer estrelas) que fazem isso via navegador ou OAuth de leitura"
+      ],
+      "origem": "area_cta_conteudo_transformador__sonnet_1346.md 2026-11-16"
+    },
+    {
+      "id": "yt_dub_multilingue",
+      "nome": "Faixas de áudio em vários idiomas no YouTube",
+      "subtemas": [
+        "página oficial de áudio multilíngue e o que muda por país na descoberta, sem modelo novo, só o fluxo de upload e título por idioma"
+      ],
+      "origem": "area_cta_conteudo_transformador__sonnet_1346.md 2026-11-16"
     }
   ],
   "projetos": [

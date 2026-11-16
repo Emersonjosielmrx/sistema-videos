@@ -3714,3 +3714,15 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 12:14 — Deduplicação de títulos próprios contra os de concorrentes (`area_titulos_dedup_semantico`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulos_dedup_semantico__sonnet_1207.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 12:25 — Tendências e nichos de Shorts por país sem API do Google (`area_tendencias_por_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_tendencias_por_pais__sonnet_1217.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 12:43 — Manchetes do Trends como gancho de roteiro por idioma (`area_trends_pais_roteiro`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trends_pais_roteiro__sonnet_1237.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 13:57 — Conteúdo transformador em recap (`area_cta_conteudo_transformador`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_cta_conteudo_transformador__sonnet_1346.md`
+- (todos os itens desta pesquisa foram reprovados)

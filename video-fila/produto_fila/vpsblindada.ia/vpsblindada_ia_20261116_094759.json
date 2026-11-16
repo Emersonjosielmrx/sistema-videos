@@ -1,0 +1,155 @@
+{
+ "conta": "vpsblindada.ia",
+ "produto": "vps_infra",
+ "marca": "VPS Blindada",
+ "titulo": "Relatórios que mostram a saúde da sua VPS",
+ "legenda": "Saber como está seu servidor não precisa ser um palpite. A VPS Blindada vem pronta, segura, com backup e relatórios claros. Link no perfil. 🔒\n\n👉 Chame no direct • link no perfil\n\n#vps #servidor #hospedagem #seguranca #tecnologia",
+ "roteiro": {
+  "gancho_tela": "Sua VPS está saudável?",
+  "pergunta_cliente": "Seu sistema caiu e você só ficou sabendo pelo cliente?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu olhava para o meu servidor e não sabia dizer se estava tudo certo. Faltavam dados para decidir.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit modern office with a clean desk and a laptop, professional look",
+    "real_tema": "",
+    "destaques": [
+     "não sabia dizer",
+     "Faltavam dados"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261116_095239_2.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Junto com a VPS pronta, você recebe relatórios claros e o robô Sentinela vigiando os erros por você.",
+    "visual": "veo",
+    "prompt_en": "a tidy small Brazilian business office in the evening, a laptop on a clean desk showing blurred dashboards, warm soft light, cinematic, no text, person seen from behind",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "relatórios claros",
+     "robô Sentinela vigiando"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Como está a saúde da minha VPS?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Seu relatório chegou: servidor estável e backup em dia."
+     },
+     {
+      "de": "cliente",
+      "texto": "E se algum fluxo falhar?"
+     },
+     {
+      "de": "empresa",
+      "texto": "O Bot Sentinela vigia os erros e avisa você."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje eu leio o relatório e sei a real situação da minha infraestrutura. Decido com segurança.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "sitting at a tidy, well lit office desk with a laptop, bright clean room, professional look",
+    "real_tema": "",
+    "destaques": [
+     "leio o relatório",
+     "real situação"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261116_095239_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vpsblindada.ia_20261116_095239_2.png"
+   }
+  ],
+  "legenda": "Saber como está seu servidor não precisa ser um palpite. A VPS Blindada vem pronta, segura, com backup e relatórios claros. Link no perfil. 🔒",
+  "titulo": "Relatórios que mostram a saúde da sua VPS",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "falta_relatorios_status",
+  "pauta_tipo": "dor",
+  "tempo_roteiro_s": 126,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\vpsblindada.ia_20261116_094759\\dono_3.mp4",
+ "duracao_s": 31.55,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-16T10:30:28",
+ "variante": "quatro_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.56,
+   "fala": "Seu sistema caiu e você só ficou sabendo pelo cliente?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.56,
+   "fim": 12.24,
+   "fala": "Eu olhava para o meu servidor e não sabia dizer se estava tudo certo. Faltavam dados para decidir.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.24,
+   "fim": 19.77,
+   "fala": "Junto com a VPS pronta, você recebe relatórios claros e o robô Sentinela vigiando os erros por você.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 19.77,
+   "fim": 27.6,
+   "fala": "Hoje eu leio o relatório e sei a real situação da minha infraestrutura. Decido com segurança.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.6,
+   "fim": 31.55,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.62,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.5,
+   "roteiro_marca": 8.0,
+   "diretor": 6.0
+  },
+  "graves": 7,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

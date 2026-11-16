@@ -77,6 +77,25 @@ for _chave, _n, _ger, _valor in [("iedson1600", 20, 1600, 34900.00), ("iedson180
                 "aproveita melhor as horas de sol fraco.",
                 "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano).",
                 "Acompanhamento da geração pelo aplicativo do inversor."])
+# Keyla 16/11: 500 kWh/mes -> 6 x 625 W = 3,75 kWp (mesma base: 7,5 kWp = 1.000 kWh)
+VERSOES["keyla"] = dict(
+    n=6, ger_media=500, consumo=500, valor=13900.00, num="P26-1116",
+    saida="Proposta MS Energy - Keyla Mayra dos Santos - 500 kWh - 6x625W Solis 3k.pdf",
+    cliente="KEYLA MAYRA DOS SANTOS", cliente_doc="CPF: 550.197.222-00", cliente_end="",
+    ligacao="Monofásico", grupo="Grupo B1 – Residencial", minimo=30,
+    inversores=[(1, "INVERSOR SOLAR SOLIS 3 kW MONOFÁSICO", "Ligação 220 V · 2 MPPT · monitoramento Wi-Fi pelo celular", "SOLIS")],
+    inv_curto="Solis 3 kW", inv_card="Inversor com monitoramento pelo celular",
+    inv_garantia="Inversor Solis: 10 anos (conforme fabricante)",
+    estrutura=("ESTRUTURA TELHADO CERÂMICO P/ 4 PAINÉIS", "Alumínio e inox, à prova de corrosão"), cabo_m=30,
+    porque=["Gera cerca de 500 kWh por mês: cobre o consumo da casa e zera a conta, pagando só a taxa mínima.",
+            "Só 6 painéis de 625 W: pouco peso e poucos furos no telhado.",
+            "Tecnologia N-type: perde menos rendimento no calor do Pará e envelhece mais devagar (cerca de 0,4% ao ano).",
+            "Inversor Solis com acompanhamento da geração pelo aplicativo."],
+    pagamento=True,
+    # pesquisa 16/11 (taxas de mercado, ponta alta da faixa; portais bloquearam leitura direta)
+    financ=[("Solfácil – Financiamento Solar", 120, 0.0215, 6, "Pelo portal do integrador · sem conta em banco"),
+            ("BV – Meu Financiamento Solar", 96, 0.0219, 4, "Pelo portal do integrador · sem conta em banco"),
+            ("Santander – CDC Socioambiental", 96, 0.0229, 4, "Pelo portal do parceiro · sem conta em banco")])
 CHAVE = sys.argv[1] if len(sys.argv) > 1 else "solis"
 V = VERSOES[CHAVE]
 SAIDA = os.path.join(AQUI, V["saida"])
@@ -447,6 +466,48 @@ pagina(f"""
   <div class="preco"><div><span>Investimento total</span><b>R$ {brl(VALOR)}</b><small>Material, projeto, homologação e instalação inclusos</small></div></div>
 """)
 
+# --- 5b. pagamento (parcelamento proprio + simulacao de financiamento)
+# FINANC: (banco, prazo meses, taxa a.m., carencia meses, observacao) -> parcela estimada pela Tabela Price
+FINANC = V.get("financ", [])
+
+
+def pmt(pv, i, n):
+    return pv * i / (1 - (1 + i) ** -n) if i else pv / n
+
+
+if V.get("pagamento"):
+    meio = VALOR / 2
+    p21 = meio / 21
+    linhas_fin = "".join(
+        f"<tr><td class='pn'><b>{b}</b><br><span class='mut'>{obs}</span></td><td>{n}×</td><td>{brl(i*100,2)}% a.m.</td>"
+        f"<td>{car} meses</td><td class='q' style='font-size:11pt'>R$ {brl(pmt(VALOR, i, n))}</td></tr>"
+        for b, n, i, car, obs in FINANC)
+    bloco_fin = (f"""<h2>Simulação de financiamento</h2>
+  <p class="sub" style="margin-bottom:3mm">Valor financiado: R$ {brl(VALOR)} · cliente {V['cliente']} · {V['cliente_doc']} · no maior prazo de cada linha</p>
+  <table class="prod"><tr><th style="text-align:left">Financeira</th><th>Prazo</th><th>Juros</th><th>Carência</th><th>Parcela estimada</th></tr>{linhas_fin}</table>
+  <div class="destaque" style="font-size:9.5pt"><b>Parcela estimada:</b> ao submeter à aprovação da financeira, os valores
+  podem aumentar dependendo do score de crédito. A taxa final sai da análise feita com o CPF da cliente e pode incluir IOF,
+  seguro e tarifas.</div>"""
+                 if FINANC else "")
+    pagina(f"""
+  {titulo('Formas de pagamento', 'Escolha a que cabe melhor no seu orçamento')}
+  <div class="duas" style="grid-template-columns:1fr">
+    <div class="box"><h3>{ico('dinheiro',AZUL2,18)} Parcelamento direto MS Energy</h3>
+      <p style="margin:1mm 0 2mm">Investimento de <b>R$ {brl(VALOR)}</b> dividido em duas partes:</p>
+      <table><tr><th>Parte</th><th>Valor</th><th>Como paga</th></tr>
+      <tr><td>1ª metade (50%)</td><td>R$ {brl(meio)}</td><td><b>21× de R$ {brl(p21)}</b> (única opção)</td></tr>
+      <tr><td rowspan="2">2ª metade (50%)<br><small>escolha uma</small></td><td rowspan="2">R$ {brl(meio)}</td><td><b>3× de R$ {brl(meio/3)}</b> no boleto</td></tr>
+      <tr><td>ou <b>12× de R$ {brl(meio/12)}</b> no cartão</td></tr></table></div>
+    <div class="box"><h3>{ico('relogio',AZUL2,18)} Como fica por mês</h3>
+      <p class="mut" style="margin:0 0 2mm">Soma das duas metades: as 21 parcelas da 1ª metade + a forma escolhida para a 2ª metade.</p>
+      <table><tr><th>2ª metade em</th><th>Meses 1 a 3</th><th>Meses 4 a 12</th><th>Meses 13 a 21</th></tr>
+      <tr><td>Boleto 3×</td><td>R$ {brl(p21+meio/3)}</td><td>R$ {brl(p21)}</td><td>R$ {brl(p21)}</td></tr>
+      <tr><td>Cartão 12×</td><td>R$ {brl(p21+meio/12)}</td><td>R$ {brl(p21+meio/12)}</td><td>R$ {brl(p21)}</td></tr></table>
+      <p class="mut" style="margin-top:2mm">Economia média estimada na conta de luz: <b>R$ {brl(ECON_ANO1/12,0)} por mês</b> já no 1º ano.</p></div>
+  </div>
+  {bloco_fin}
+""")
+
 # --- 6. retorno
 linhas_ret = "".join(
     f'<tr><td class="{"inv" if ac < 0 else "luc"}">{"Investimento" if ac < 0 else "Lucro"}</td><td>{a}</td>'
@@ -496,7 +557,7 @@ pagina(f"""
   <div class="etapas">{linha_et}</div>
   <div class="duas">
     <div class="box"><h3>{ico('relogio',AZUL2,18)} Prazo de entrega</h3>Até 60 dias após a assinatura, incluindo a homologação na concessionária.</div>
-    <div class="box"><h3>{ico('dinheiro',AZUL2,18)} Formas de pagamento</h3>À vista · financiamento em até 84× · cartão em até 18×
+    <div class="box"><h3>{ico('dinheiro',AZUL2,18)} Formas de pagamento</h3>{'À vista · parcelamento direto (1ª metade em 21×; 2ª metade em 3× no boleto ou 12× no cartão) · financiamento em até 120× (ver página de pagamento)' if V.get('pagamento') else 'À vista · financiamento em até 84× · cartão em até 18×'}
     <img src="{b64('bancos.jpg')}" class="bancos"></div>
     <div class="box"><h3>{ico('escudo',AZUL2,18)} Garantias</h3><ul><li>Painéis: 30 anos de desempenho (fabricante)</li>
     <li>{V['inv_garantia']}</li><li>Instalação: 1 ano</li></ul></div>
@@ -612,7 +673,10 @@ html = f'<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>{C
 with open(os.path.join(AQUI, f"proposta_{CHAVE}.html"), "w", encoding="utf-8") as f:
     f.write(html)
 with sync_playwright() as p:
-    b = p.chromium.launch()
+    try:
+        b = p.chromium.launch()
+    except Exception:  # playwright sem o chromium dele: usa o Chrome instalado
+        b = p.chromium.launch(channel="chrome")
     pg = b.new_page()
     pg.set_content(html, wait_until="load")
     pg.pdf(path=SAIDA, format="A4", print_background=True, prefer_css_page_size=True)

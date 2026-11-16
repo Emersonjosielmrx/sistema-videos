@@ -66,7 +66,10 @@ PASTAS = [
 # agendado_para, canal_postado). Assim os Shorts de parceiro entram no reuso TikTok/Instagram e no backup.
 FICHAS = [(r"D:\hipercool-materiais\animes recap\shorts", "parceiro", "parceiro/shorts", False),
           # 02/11: Shorts de comentários do Comédia Noturna (D:\videos-comentarios) no reuso TikTok/Insta
-          (r"D:\hipercool-materiais\videos-comentarios", "comentarios", "comentarios/fichas", False)]
+          (r"D:\hipercool-materiais\videos-comentarios", "comentarios", "comentarios/fichas", False),
+          # 16/11 dona ("aplique no 3D tudo que os outros já usam"): Shorts 3D (kit3d, fichas 3d-*) no reuso
+          # TikTok/Instagram e no backup, como os de parceiro.
+          (r"D:\hipercool-materiais\historias-em-frames", "kit3d", "kit3d/fichas", False)]
 MS_ENERGY_LOG = Path(r"D:\ms-energy\videos\postagem_log.json")  # postador proprio do ms-energy (insta/fb/stories)
 BRUTOS = Path(r"D:\hipercool-materiais\veo\veo_videos_iniciais")  # geracoes brutas do Veo: reaproveitaveis em videos novos
 SUSPENSOS = Path(r"D:\hipercool-materiais\veo\pos_final\completo")  # VO3 antigo: muitos passaram pelos canais suspensos

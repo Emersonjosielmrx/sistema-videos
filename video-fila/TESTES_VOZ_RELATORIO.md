@@ -1,14 +1,14 @@
-# Teste gradual de formatos e vozes — 16/11 10:57
+# Teste gradual de formatos e vozes — 16/11 13:59
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 568.0 de 1037 Shorts medidos passaram da mediana do canal (taxa 0.55). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 578.5 de 1048 Shorts medidos passaram da mediana do canal (taxa 0.55). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | voz:cintilante_she_ra_flavia_saddy | promovido | 46 | 0 | 0 | 37 | 22 | 18.0/25 | 0.70 | 121 | 48% (12) | 45/0 | 0 |
 | voz:moana | promovido | 12 | 0 | 0 | 6 | 5 | 16.0/23 | 0.68 | 510 | 40% (5) | 12/0 | 0 |
-| voz:chapolin_colorado | testando | 8 | 0 | 0 | 4 | 2 | 7.5/13 | 0.57 | 2114 | 53% (2) | 8/0 | 0 |
+| voz:chapolin_colorado | testando | 8 | 0 | 0 | 4 | 2 | 8.5/14 | 0.59 | 2114 | 53% (2) | 8/0 | 0 |
 | voz:chamber_valorant | testando | 1 | 0 | 0 | 1 | 1 | 6.0/10 | 0.58 | 1091 | 36% (1) | 1/0 | 0 |
 | formato:chaves_chiquinha | testando | 24 | 0 | 0 | 12 | 6 | 4.5/7 | 0.61 | 1140 | 65% (4) | 22/0 | 0 |
 | formato:joao_chico | testando | 6 | 0 | 0 | 3 | 3 | 3.0/6 | 0.50 | 13 | 18% (1) | 3/0 | 0 |
@@ -28,8 +28,9 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:naruto | testando | 5 | 0 | 0 | 4 | 3 | 3.0/3 | 0.80 | 1097 | 67% (4) | 5/0 | 0 |
 | formato:chaves_quico | testando | 6 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 1145 | 47% (1) | 2/0 | 0 |
 | formato:fofoca | testando | 6 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 3235 | 61% (2) | 2/0 | 0 |
-| formato:madruga_chaves | testando | 8 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1388 | 70% (2) | 4/0 | 0 |
-| voz:cell | testando | 3 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1204 | 42% (2) | 3/0 | 0 |
+| formato:madruga_chaves | testando | 9 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1388 | 70% (2) | 5/0 | 0 |
+| voz:cell | testando | 3 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1204 | 45% (2) | 3/0 | 0 |
+| voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 3 | 2.0/2 | 0.75 | 1796 | 46% (3) | 4/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 2 | 1.5/2 | 0.62 | 1537 | 52% (1) | 2/0 | 0 |
 | voz:quico | testando | 4 | 0 | 0 | 4 | 2 | 1.5/2 | 0.62 | 1783 | 68% (2) | 4/0 | 0 |
 | voz:alex_madagascar | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 8 | - | 1/0 | 0 |
@@ -39,7 +40,6 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:gru_hassum | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 2 | - | 1/0 | 0 |
 | voz:homem_de_ferro_tony_stark | testando | 2 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 2113 | 59% (2) | 2/0 | 0 |
 | voz:jett_valorant | testando | 2 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 1317 | 51% (1) | 2/0 | 0 |
-| voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 2 | 1.0/1 | 0.67 | 3263 | 46% (3) | 4/0 | 0 |
 | voz:mulher_maravilha | testando | 1 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1003 | 32% (1) | 1/0 | 0 |
 | voz:professor_girafales | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 3 | - | 1/0 | 0 |
 | voz:puss_in_boots_gato_de_botas_portuguese_d | testando | 2 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 2007 | 48% (2) | 2/0 | 0 |

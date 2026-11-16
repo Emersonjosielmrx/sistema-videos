@@ -7642,5 +7642,17 @@
     "motivo": "0 estrelas, criado ontem; não é fonte de recap (pedido da área) e a dublagem já é RVC própria (voz_clonada.py)",
     "quem": "LONGOS",
     "data": "2026-11-16"
+  },
+  {
+    "repo": "AkhileshNagargoje/youtube-search-filters",
+    "motivo": "extensão de navegador pra filtrar busca; não analisa os 30 s iniciais (pedido da área)",
+    "quem": "LONGOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "Sewer2K/yt-channel-downloader",
+    "motivo": "GUI de download (yt-dlp+PySide6); já temos yt-dlp + ytdlp_vez sem interface",
+    "quem": "LONGOS",
+    "data": "2026-11-16"
   }
 ]

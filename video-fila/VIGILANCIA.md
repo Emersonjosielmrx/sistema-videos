@@ -1,11 +1,9 @@
-# Vigilância 24 h — 2026-11-16T11:50:36
+# Vigilância 24 h — 2026-11-16T16:00:37
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (3)
-- instagram: 10 posts até 11:50, normal ~27
-- reel_globo: clipe do Veo aprovado e a montagem morreu
-- reel_globo: clipe do Veo aprovado e a montagem morreu
+## Alarmes desta volta (1)
+- instagram: 10 posts até 16:00, normal ~39
 
 ## Casos abertos (37)
 - [consertar] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B (cw/claude-sonnet-5-5)

@@ -394,3 +394,13 @@ odizio_longos.py: 2ª/3ª chance pros longos fracos (>=3 dias, < mediana do cana
   - Desktop D:\VENTOINHA_MAX: instalador Macs Fan Control + passo a passo (usuário Emerson não é admin).
   - Teste cego: 2040 e 2036 sem 401 (nenhuma em 'ruins'); 2040 relançada 08:55 BRT após sessão de 12 h.
 - 16/11 10:50: postar_longos aberto às 08:10 (código antigo na memória) estava baixando DE NOVO o y5Pm6ba já completo; encerrado e a tarefa RecapPostarLongos relançada com o conserto do .partial.
+- 16/11 14h JÁ FEITO:
+  - postar_longos._publicar: o shutil.rmtree apagava o vídeo JÁ COMPLETO a cada rodada (PvkF8Ut 8,8 GB e y5Pm6ba 5,3 GB nunca saíam desde 14/11). Agora reaproveita o vídeo (final ou .partial) com o tamanho exato do Drive, pula o teste de espaço e o download (LONGO_REUSA_COMPLETO=0 desliga). PvkF8Ut subindo 11:46 no Fio da Meada ('O PODER DA ÁGUA É INFINITO? ELE REENCARNOU e DOMINOU tudo').
+  - kit3d: pasta logs\ não existia -> Kit3dDiario terminava com erro 1 a cada 2 h, 0 Shorts 3D hoje. diario.py cria a pasta; tarefa relançada.
+  - Pesquisador: 2 reprovados (search-filters, yt-channel-downloader) — não tratavam dos 30 s iniciais.
+  - Estoque 30 dias funcionando: Empresário 7 e Vendas 2 Shorts hoje (antes ficavam vazios).
+- 16/11 15h JÁ FEITO (dona: 'aplique no 3D tudo que os outros usam; disco era 20 GB ontem'):
+  - DISCO: pagefile.sys do D cresceu até o máximo de 24 GB (pico real 14 GB, uso 6,7 GB). Limitado a 10-16 GB no registro (PagingFiles) — devolve ~8 GB no próximo reinício. Cópia de 5,6 GB do vilão em recap-longos-prontos (TESTE_NARRADORES, pra dona assistir) mantida.
+  - Vilão/maid caía no Fio da Meada: parte 1 veio com nome PT sem nº de parte -> _serie None. postar_longos.SERIE_DONO_VID (5DoGv3EXHgc, eoyI3tVsj5w, CgyXHx6h2a8 -> InventoReact).
+  - 3D no reuso: catalogo.FICHAS inclui historias-em-frames (projeto kit3d) — quando subir no YouTube vai sozinho pro TikTok/Instagram da conta do canal (postados_em).
+  - 3D com capa no 1º quadro: capar_shorts.capar_3d (capa.png do kit, 0,5 s; CAPAR_3D=0). Geladeira testada: feita no S20 Ultra em 62 s, 1080x1920 60 fps, 46,3 s (era 45,8). Original em video_sem_capa.mp4.

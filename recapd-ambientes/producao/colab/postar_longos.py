@@ -200,6 +200,8 @@ def _dono_serie(nome, est):
     está na Fio da Meada, a série é dela; senão a do canal da última parte. None = não é série / nunca saiu."""
     if os.environ.get("SERIE_MESMO_CANAL", "1") == "0":
         return None
+    if _dono_por_vid(nome):
+        return _dono_por_vid(nome)
     s = _serie(nome)
     if not s:
         return None
@@ -207,6 +209,14 @@ def _dono_serie(nome, est):
     for chave, cred in SERIE_DONO.items():
         if s.startswith(chave):
             return cred
+    return _dono_por_vid(nome)
+
+
+def _dono_por_vid(nome):
+    """16/11: a parte 1 do vilão/maid (5DoGv3EXHgc) veio com nome em PT e SEM número de parte -> _serie None -> caía no
+    Fio da Meada. Série pelo ID do vídeo-fonte (SERIE_DONO_VID)."""
+    vid = (nome or "")[:11]
+    return SERIE_DONO_VID.get(vid)
     canais = [p["canal"] for p in est.get("postados", []) if _serie(p.get("nome", "")) == s]
     if not canais:
         return None
@@ -215,6 +225,9 @@ def _dono_serie(nome, est):
 
 # 15/11 dona: "Reencarnou como VILÃO e tem uma ESPOSA MAID" -> InventoReact (canal do ex/bilionário, tema renasce/rico)
 SERIE_DONO = {"reincarnated_as_the_villain_with": "novo_ia_agora_h3n"}
+# 16/11: por ID do vídeo-fonte (partes 1, 2 e 4 do vilão/maid do Luke Manhwa — nome em PT sem nº de parte)
+SERIE_DONO_VID = {"5DoGv3EXHgc": "novo_ia_agora_h3n", "eoyI3tVsj5w": "novo_ia_agora_h3n",
+                  "CgyXHx6h2a8": "novo_ia_agora_h3n"}
 
 
 # 11/11 pesquisador (area_serie_playlist: tirar o atrito pro próximo episódio aumenta a sessão) + dona (a série Medieval
@@ -407,9 +420,32 @@ def _subir_1080(video, drive):
 def _publicar(ficha, d):
     """Baixa e roda o anime_publish. Devolve o caminho do postar.json ou None."""
     pasta = TMP / ficha.name
-    shutil.rmtree(pasta, ignore_errors=True)
-    pasta.mkdir(parents=True)
     video = pasta / "final_anime_deitado.mp4"
+    # 16/11: o rmtree apagava o vídeo JÁ COMPLETO (8,8 GB do PvkF8Ut, 5,3 GB do y5Pm6ba) a cada rodada e baixava tudo
+    # de novo — com o teto de 90 min eles nunca saíam (presos desde 14/11). Agora só limpa a pasta se o vídeo de lá
+    # (final ou .partial) NÃO tiver o tamanho exato do Drive. LONGO_REUSA_COMPLETO=0 volta a apagar sempre.
+    _reusar = False
+    if os.environ.get("LONGO_REUSA_COMPLETO", "1") != "0" and pasta.exists():
+        try:
+            _ls = subprocess.run([RCLONE, "lsjson", d["drive"]], capture_output=True, text=True, timeout=120)
+            _tam_drive = sum(x.get("Size", 0) for x in json.loads(_ls.stdout or "[]"))
+        except Exception:  # noqa: BLE001
+            _tam_drive = 0
+        if _tam_drive:
+            if video.exists() and video.stat().st_size == _tam_drive:
+                _reusar = True
+            else:
+                for _p in pasta.glob(video.name + ".*.partial"):
+                    if _p.stat().st_size == _tam_drive:
+                        video.unlink(missing_ok=True)
+                        _p.rename(video)
+                        _reusar = True
+                        break
+    if not _reusar:
+        shutil.rmtree(pasta, ignore_errors=True)
+        pasta.mkdir(parents=True)
+    else:
+        log(f"  vídeo já baixado inteiro ({video.stat().st_size / 1e9:.1f} GB) — sem baixar de novo")
     # 05/11 06:20 (claude-dc, acompanhamento): o D ZEROU 2x de madrugada com este download (4,8 GB) e derrubou o reel
     # da Globo e o carrossel do açaí (clientes). Só baixa se, depois do vídeo, sobrarem 6 GB livres no disco.
     try:
@@ -424,7 +460,7 @@ def _publicar(ficha, d):
         livre = shutil.disk_usage(str(pasta)).free - sum(_RESERVADO.values())
         # 13/11 dona ("use os 10 GB até acabar; produza até o último MB"): folga 6 -> 1,5 GB (LONGO_FOLGA_GB)
         _folga = float(os.environ.get("LONGO_FOLGA_GB", "1.5")) * 1e9
-        if livre - tam < _folga:
+        if not _reusar and livre - tam < _folga:
             log(f"  sem espaço: {livre / 1e9:.1f} GB livres (já descontados os downloads em curso) e o vídeo tem "
                 f"{tam / 1e9:.1f} GB (folga {_folga / 1e9:.1f} GB) — fica pra próxima rodada")
             return None, pasta
@@ -455,7 +491,7 @@ def _publicar(ficha, d):
                     log(f"  .partial já completo ({tam / 1e9:.1f} GB) — usado sem baixar de novo")
                     return True
             return False
-        if _partial_completo():
+        if _reusar or _partial_completo():
             r = subprocess.CompletedProcess(_cmd, 0, "", "")
         else:
             try:

@@ -1,0 +1,149 @@
+{
+ "conta": "fabricademarketing.ia",
+ "produto": "fabrica_conteudo",
+ "marca": "Fábrica de Marketing IA",
+ "titulo": "Como manter vários canais ativos sem equipe",
+ "legenda": "Manter múltiplos canais ativos não exige uma equipe inteira de marketing.\nCom automação da ideia até a postagem, você publica em texto, áudio e redes com autonomia.\nSaiba mais no link do perfil.\n\n👉 Chame no direct • link no perfil\n\n#marketingdeconteudo #seo #blog #automacao #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Vários canais sozinho?",
+  "pergunta_cliente": "Consigo manter vários canais ativos sendo o único responsável pela empresa?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Tocar a operação sozinho tornava impossível manter redes, site e áudio atualizados.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "a bright and tidy modern office of a small Brazilian service business, well lit, professional atmosphere",
+    "real_tema": "rotina sobrecarregada de prestador de serviços",
+    "destaques": [
+     "operação sozinho",
+     "redes, site e áudio"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261116_130225_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A plataforma entrega automação full post, artigos para blog com SEO e podcast.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "a bright and tidy modern office of a small Brazilian service business, well lit, professional atmosphere",
+    "real_tema": "produção multicanal integrada",
+    "destaques": [
+     "automação full post",
+     "blog com SEO"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Vocês também produzem conteúdo em áudio?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim, geramos postagens completas, artigos de blog e podcast."
+     },
+     {
+      "de": "cliente",
+      "texto": "Excelente, preciso dessa presença completa."
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261116_130225_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261116_130225_1.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Consigo manter presença forte em diferentes canais sem precisar contratar terceiros.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "a bright and tidy modern office of a small Brazilian service business, well lit, professional atmosphere",
+    "real_tema": "presença digital multicanal independente",
+    "destaques": [
+     "presença forte"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261116_130225_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_fabricademarketing.ia_20261116_130225_1.png"
+   }
+  ],
+  "legenda": "Manter múltiplos canais ativos não exige uma equipe inteira de marketing.\nCom automação da ideia até a postagem, você publica em texto, áudio e redes com autonomia.\nSaiba mais no link do perfil.",
+  "titulo": "Como manter vários canais ativos sem equipe",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "prestador_servico_conteudo",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 204,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\fabricademarketing.ia_20261116_125853\\dono_3.mp4",
+ "duracao_s": 31.43,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-16T14:17:54",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 5.54,
+   "fala": "Consigo manter vários canais ativos sendo o único responsável pela empresa?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 5.54,
+   "fim": 12.86,
+   "fala": "Tocar a operação sozinho tornava impossível manter redes, site e áudio atualizados.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.86,
+   "fim": 20.54,
+   "fala": "A plataforma entrega automação full post, artigos para blog com SEO e podcast.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 20.54,
+   "fim": 27.49,
+   "fala": "Consigo manter presença forte em diferentes canais sem precisar contratar terceiros.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.49,
+   "fim": 31.43,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.75,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 4.0,
+   "roteiro_marca": 10.0,
+   "diretor": 6.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

@@ -1,0 +1,321 @@
+{
+ "video": "vpsblindada_ia_20261116_094759.mp4",
+ "conta": "vpsblindada.ia",
+ "marca": "VPS Blindada",
+ "titulo": "Relatórios que mostram a saúde da sua VPS",
+ "formato": "quatro_veo",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 6.5,
+  "notas": {
+   "legibilidade": 8.0,
+   "movimento": 5.0,
+   "roteiro_marca": 7.0,
+   "diretor": 6.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.91
+   ],
+   [
+    1,
+    "dono",
+    11.62
+   ],
+   [
+    2,
+    "veo",
+    17.9
+   ],
+   [
+    3,
+    "dono",
+    11.07
+   ],
+   [
+    4,
+    "cartao",
+    4.11
+   ]
+  ],
+  "graves": 3,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "Elemento gráfico ciano vazando por baixo do canto inferior esquerdo do cartão branco de pergunta (visível logo abaixo da borda entre x≈38 e x≈152), dando aspecto de camada desalinhada ou bug de renderização.",
+   "como_corrigir": "Ocultar ou remover a camada azul/ciano que está posicionada atrás do cartão na cena 0, garantindo que nenhuma ponta ou barra vaze pelas bordas do cartão."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Contraste prejudicado no texto '@vpsblindada.ia'. O texto branco sem fundo sólido fica posicionado diretamente sobre a tela iluminada do notebook no vídeo de fundo, dificultando a leitura imediata do @ obrigatório da conta.",
+   "como_corrigir": "Aumentar a opacidade do overlay escuro no centro da tela na cena 4 ou adicionar uma sombra projetada (drop shadow) mais densa ou tarja translúcida atrás de '@vpsblindada.ia'."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Cartão final totalmente estático entre 28.39s e 30.76s (mais de 2,3 segundos sem movimento). Os textos, o botão de CTA 'Chame no direct' e o arroba ficam congelados sobre o vídeo de fundo, quebrando o dinamismo no momento crucial de conversão.",
+   "como_corrigir": "Animar a entrada dos elementos do cartão com escala suave (scale-up com overshoot de 0% a 100%), aplicar efeito periódico de brilho (shimmer/sheen) ou leve pulso de escala (100% para 104%) no botão 'Chame no direct' para direcionar o olhar do usuário, além de manter um slow zoom contínuo de aproximação."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Vídeo com aspecto de banco de imagem/IA genérico e ausência de elementos gráficos de apoio. A locução cita 'relatórios claros e o robô Sentinela vigiando os erros por você', mas a cena exibe apenas um homem genérico mexendo em gráficos aleatórios no notebook e tomando café, sem conexão visual específica com a solução da VPS Blindada.",
+   "como_corrigir": "Inserir motion graphics contextuais sobre a cena: um pop-up animado simulando notificação de alerta do bot Sentinela (ex.: aviso de container estável / falha prevenida) e um card flutuante em destaque mostrando métricas reais ou ilustradas de saúde da VPS."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Todas as cenas com o apresentador (cenas 0, 1 e 3) repetem exatamente o mesmo molde e enquadramento. O plano médio estático, na mesma distância focal e ângulo, gera monotonia e sensação de ritmo arrastado.",
+   "como_corrigir": "Aplicar um corte com punch-in digital (zoom in para ~115% de escala) na cena 3 para quebrar a repetição visual em relação à cena 1 e destacar o momento de resolução ('Hoje eu leio o relatório e sei a real situação...')."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Transição seca (corte brusco) entre a fala do dono na cena 1 e o b-roll da cena 2, tornando a passagem visual ríspida.",
+   "como_corrigir": "Adicionar uma transição de motion design fluida entre os blocos (como um whip pan suave, slide lateral rápido ou zoom blur de 10 frames) sincronizada com a troca da etiqueta '1 O problema' para '2 Como funciona'."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Retângulo azul de título vaza por trás do cartão de pergunta, gerando acabamento amador no gancho inicial.",
+   "como_corrigir": "Ocultar o cabeçalho azul na cena 0 e aplicar leve zoom dinâmico nos 2 primeiros segundos para reforçar a retenção."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "B-roll genérico de pessoa tomando café não comprova a existência do robô Sentinela nem dos relatórios técnicos.",
+   "como_corrigir": "Substituir por gravação de tela ou simulação em WhatsApp com o robô Sentinela notificando status e painel n8n/Docker."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "disparoemmassa_ia_20261116_020642.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 6.12,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.75,
+   "notas": {
+    "legibilidade": 9.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261116_052420.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 4.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "followupia.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.2,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.8,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261116_094759.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "quatro_veo",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.5,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.12,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261116_125853.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   8,
+   3
+  ],
+  "dono_abre_fecha": [
+   8,
+   0
+  ],
+  "dono_mesma_foto": [
+   6,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   20,
+   7
+  ]
+ },
+ "vigiando": []
+}

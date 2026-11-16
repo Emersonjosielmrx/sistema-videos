@@ -1175,3 +1175,5 @@
 - 2026-11-16 06:41 | aplicar | CONSERTEI | Conserte (achado pelo vigia): Ajustar parser de argumentos em anime_auto.py (--fonte) e implementar discover_canal em an → [20261116_063857_7812.md](20261116_063857_7812.md)
 - 2026-11-16 10:44 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): instagram: 10 posts até 10:40, normal ~23 EVIDÊNCIA: ledger/logs de instagram: ho → [20261116_104041_6aab.md](20261116_104041_6aab.md)
 - 2026-11-16 11:33 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): reel_globo: clipe do Veo aprovado e a montagem morreu EVIDÊNCIA: D:\ms-energy\log → [20261116_113045_8090.md](20261116_113045_8090.md)
+- 2026-11-16 12:57 | propor | PROPOSTA | Conserte (achado pelo vigia): Arquivos comuns divergentes em recapd; rodar o script recursos.py subir para sincronizar. → [20261116_125615_8f46.md](20261116_125615_8f46.md)
+- 2026-11-16 12:59 | aplicar | CONSERTEI | Conserte (achado pelo vigia): Arquivos comuns divergentes em recapd; rodar o script recursos.py subir para sincronizar. → [20261116_125741_cb84.md](20261116_125741_cb84.md)

@@ -5594,8 +5594,8 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_primeiros30s__sonnet_1033.md`
 
-- [INÉDITO] github.com/AkhileshNagargoje/youtube-search-filters — ★3, push 2026-08-04, MIT — Search Filters for YouTube — sort results and filter by upload year, duration, view count, Shorts, watched videos, keywords and channels. Ma
-- [INÉDITO] github.com/Sewer2K/yt-channel-downloader — ★31, push 2026-09-05, MIT — Download YouTube channel videos & Shorts with a modern desktop GUI — yt-dlp + PySide6, thumbnail/title/view-count previews, quality picker, 
+- [REPROVADO por LONGOS: extensão de navegador pra filtrar busca; não analisa os 30 s iniciais (pedido da área)] github.com/AkhileshNagargoje/youtube-search-filters — ★3, push 2026-08-04, MIT — Search Filters for YouTube — sort results and filter by upload year, duration, view count, Shorts, watched videos, keywords and channels. Ma
+- [REPROVADO por LONGOS: GUI de download (yt-dlp+PySide6); já temos yt-dlp + ytdlp_vez sem interface] github.com/Sewer2K/yt-channel-downloader — ★31, push 2026-09-05, MIT — Download YouTube channel videos & Shorts with a modern desktop GUI — yt-dlp + PySide6, thumbnail/title/view-count previews, quality picker, 
 
 ## 2026-11-16 11:09 — Monitor de novos uploads de concorrentes (`area_competitor_watch`, Sonnet 5.5 web)
 
@@ -5630,5 +5630,29 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## 2026-11-16 12:14 — Deduplicação de títulos próprios contra os de concorrentes (`area_titulos_dedup_semantico`, Sonnet 5.5 web)
 
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulos_dedup_semantico__sonnet_1207.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 12:25 — Tendências e nichos de Shorts por país sem API do Google (`area_tendencias_por_pais`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_tendencias_por_pais__sonnet_1217.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 12:43 — Manchetes do Trends como gancho de roteiro por idioma (`area_trends_pais_roteiro`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trends_pais_roteiro__sonnet_1237.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 12:54 — SEO de busca para recaps (nome da obra + episódio) (`area_busca_yt_longos`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_busca_yt_longos__sonnet_1246.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-16 13:57 — Conteúdo transformador em recap (`area_cta_conteudo_transformador`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_cta_conteudo_transformador__sonnet_1346.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)

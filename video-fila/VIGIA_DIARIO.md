@@ -130,3 +130,25 @@ Formato: data_hora — resumo / motivo / achei / fiz / como desfazer / estado.
 - CONSERTO PROPOSTO: Ajustar o timeout do Whisper em bin/anime_fetch.py e bin/_whisper_sub.py para usar um limite dinâmico proporcional à duração do vídeo ou maior margem quando em carga.
 - Estado: RESOLVIDO
 STATUS: OK
+
+## 20261116_1255 — Vigia geral: arquivos comuns modificados em recapd sem subir
+- Motivo / O que achei: O prompt indicou que 10 arquivos comuns (landscape_filters.py, master_loudness.py, content_analyzer.py, contextual_motion.py, effects_memory.py, panel_classifier.py, sfx_categorizer.py, styled_transitions.py, musicgen_local.py, visao_capa.py) foram modificados em recapd e divergem dos hashes de D:\hipercool-materiais\comum.
+- Causa provável: Alterações locais feitas no projeto recapd-ambientes/producao que ainda não foram sincronizadas para o repositório comum através do script `recursos.py`.
+- CONSERTO PROPOSTO: Executar o comando de sincronização para cada arquivo ou o lote correspondente: `python D:\hipercool-materiais\bin\recursos.py subir <arquivo> --de recapd` (conforme solicitado no prompt do vigia). Como estamos em modo somente aviso, nenhum comando foi executado.
+- Estado: PRECISA REVISÃO
+STATUS: REVISAR - Arquivos comuns divergentes em recapd; rodar o script recursos.py subir para sincronizar.
+
+## 20261116_1257 — Sincronizados 10 arquivos comuns de recapd para comum (pelo painel)
+- Motivo / O que fiz (arquivos): Executei `recursos.py subir` para os 10 arquivos divergentes (landscape_filters.py, master_loudness.py, content_analyzer.py, contextual_motion.py, effects_memory.py, panel_classifier.py, sfx_categorizer.py, styled_transitions.py, musicgen_local.py, visao_capa.py) de recapd→comum. Todos sincronizados com sucesso (ok em historias, postador, recapd; musicgen_local.py não copiado para postador, visao_capa.py também copiado para hipercool). / Como conferi: md5sum após sincronização — todos os 10 hashes em comum agora batem com recapd. / Como desfazer: botão "Desfazer" no painel (pedido 20261116_125741_cb84)
+- Estado: RESOLVIDO
+## 20261116_1400 — Vigia conferiu status: Recap longo aguardando cota/contas, espaço no D: baixo (3.29 GB livres).
+- Motivo / O que achei: Disco D: com 3.29 GB livres (abaixo do limite de 8GB), 19 de 20 GPUs sem conta verificada, rotinas operando dentro do esperado.
+- Causa provável: Consumo natural de cache/mídias em D: e restrições de contas de IA.
+- CONSERTO PROPOSTO: Nenhum (modo só aviso, sem alterações em arquivos ou exclusão de mídias conforme regras).
+- Estado: NADA A FAZER
+
+## 20261116_1435 — Vigia geral: D: com 3.77 GB livres, WiseMemoryOptimizer ativo e rotinas em andamento.
+- Motivo / O que achei: Disco D com 3.77 GB livres. WiseMemoryOptimizer rodando normalmente (PID 6820). O sistema executa rotinas e verificações de fila sem travamentos críticos detectados.
+- Causa provável: Acúmulo padrão de artefatos de trabalho e cache.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo; espaço sob gerenciamento automático do backup/limpeza de cache do sistema).
+- Estado: NADA A FAZER

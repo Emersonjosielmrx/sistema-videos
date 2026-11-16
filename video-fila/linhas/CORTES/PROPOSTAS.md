@@ -1783,3 +1783,38 @@
 - prova: baki q16 ('QUE FOI MORDIDO' / 'VOCÊ FAZ') e sem-obra-367781 q05: 2 Shorts. Porém a lição de 27/10 pede legenda com palavras de impacto maiores, e a dona prefere esse estilo. Só mudar com opinião da dona.
 - onde: módulo de legenda (agrupamento de palavras por bloco)
 - como testar: Não aplicar sem a dona. Se ela quiser, testar blocos de 2 a 3 palavras em 1 canal por 1 lote.
+
+## 16/11 12:41 PROPOSTA [GOSTO] Legenda palavra a palavra sai da frente do rosto em close-up (gemini-4-argon)
+- prova: ceo-discovers-the-truth_cap1_20261113 q01 ('DEUS' grande cobre parte do rosto nos 2 primeiros segundos) e q08 ('CARINHO TODO' sobre a ação). tensura_cap1_20261116 q02 ('ENREDO' sobre o rosto), q05 (cobre os olhos) e q08 (sobre boca e nariz). Repete em 2 Shorts de canais diferentes. A dona já prefere 'palavras de impacto maiores, de lado' (lição de 27/10).
+- onde: Módulo que renderiza a legenda palavra a palavra (posição Y/X no ASS ou no overlay). Não tenho o nome exato da função; localizar onde a posição vertical da legenda é definida.
+- como testar: Em 1 canal só (ex.: Inovare Manhwa), baixar a legenda para o terço inferior ou deslocá-la para o lado quando a visão detectar rosto grande no centro do quadro. Rodar um lote A/B, comparar a nota de legibilidade e o % assistido mediano (hoje 49,5) e conferir no roteiro/quadros antes de generalizar. Só 1 teste por vez.
+
+## 16/11 12:41 PROPOSTA [CERTEZA] Júri aponta 'movimento baixo' com valor acima do limiar de 4% (gemini-4-argon)
+- prova: tensura q16 (cena 6 com 5,9%, marcado 'grave') e sem-obra-c297e0 q16 (cena 6 com 8,1%, marcado 'media'). O próprio texto do júri admite que os valores estão acima de 4%, então o aviso contradiz a medida. Isso derruba a nota de movimento/retenção sem defeito real.
+- onde: Prompt do júri em cortes_juri: o trecho que recebe o 'movimento medido por cena' e define a gravidade.
+- como testar: Instruir o júri a só listar movimento como problema quando a medida for < 4% (ou < 4% em cena não proposital). Rodar o júri nos mesmos 2 Shorts e conferir que o aviso some.
+
+## 16/11 12:41 PROPOSTA [CERTEZA] NÃO aplicar a regra 4 do APRENDIZ (tarja branca largura 1080) (gemini-4-argon)
+- prova: A regra 4 manda cobrir com tarja sólida branca opaca de largura 1080 px. Isso contradiz a regra fixa da dona (tarja só quando a fonte tem legenda queimada e do TAMANHO EXATO da legenda, nunca faixa grande) e a lição de 27/10 (a dona não gostou da barra com a frase). Segundo o júri, no sem-obra-c297e0 a tarja já está poluindo a leitura.
+- onde: Filtro DECISOES_DONO em cortes_juri, antes de qualquer regra do APRENDIZ virar mudança no pipeline.
+- como testar: Conferir que a regra 4 é barrada pelas DECISOES_DONO e não chega ao pipeline. As regras 11 (punch-in de 15–20%) e 10 (headline fixa no topo) também merecem essa conferência.
+
+## 16/11 14:19 PROPOSTA [CERTEZA] Travar margem inferior de segurança da legenda dinâmica e texto secundário (y_max <= 1500) (agy/gemini-3.8-flash-high)
+- prova: Em sem-obra-0eb0d0 (q01 'PRA PENSAR' cortada na zona de risco inferior; q08 e q11 texto secundário 'ASSUMINDO' cortado e apagado) e em sem-obra-9d260d (q08 legenda próxima à zona de risco; q18 legenda secundária 'PERTO' colada na margem inferior).
+- onde: fx_subtitles.py / gerador de legendas ASS (posicionamento da legenda secundária e clamp vertical inferior)
+- como testar: Renderizar q01 e q08 de sem-obra-0eb0d0 e q08 e q18 de sem-obra-9d260d validando que todo o texto dinâmico e secundário permaneça com y entre 1200 e 1500, a pelo menos 80 px da borda inferior.
+
+## 16/11 14:19 PROPOSTA [CERTEZA] Impedir que a legenda dinâmica seja renderizada sobre o rosto dos personagens (agy/gemini-3.8-flash-high)
+- prova: Em sem-obra-d40632 (q02 'COMERCIANTE' atravessando olhos/rosto; q03 'INTEIRA' sobreposto à boca/rosto) e em sem-obra-0eb0d0 (q11 'COMO SUAS VENDAS' colado ao rosto/barba).
+- onde: fx_subtitles.py / anime_montar.py (função de ancoragem vertical de legendas e verificação de colisão com caixas faciais)
+- como testar: Renderizar os trechos q02/q03 de sem-obra-d40632 e q11 de sem-obra-0eb0d0 com detecção facial ativa, garantindo que o bounding box da legenda dinâmica nunca cruze a área de rostos detectados.
+
+## 16/11 15:27 PROPOSTA [CERTEZA] Travar legenda dinâmica na zona segura inferior (y entre 1200 e 1500) sem duplicação de camadas (gemini-4-argon)
+- prova: Em sem-obra-cf6f38 (q03 'CORRENDO', q06 'COMIDA', q12 'DE VOLTA') a legenda subiu para o centro do quadro cobrindo olhos e boca dos atores; em sem-obra-aa91d4 (q03 'Você', q13 'SEGGREDO') desceu além de y=1580 com rastro visual; em sem-obra-1fada7 (q13 'ARRANCOU') houve sobreposição/duplicidade de legendas menores.
+- onde: Gerador de legendas ASS / renderizador de overlay de palavras (cálculo de coordenada Y e limpeza de eventos simultâneos)
+- como testar: Renderizar os Shorts sem-obra-cf6f38 e sem-obra-1fada7 e inspecionar os quadros q03, q06, q12 e q13 garantindo que todas as palavras fiquem estritamente entre y=1200 e y=1500, com apenas 1 camada ativa por vez e rostos livres.
+
+## 16/11 15:27 PROPOSTA [CERTEZA] Forçar zoom/punch-in dinâmico (15% a 20%) em cenas com movimento medido abaixo de 20% (gemini-4-argon)
+- prova: Três Shorts do lote perderam nota de movimento/retenção por tomadas com mudança de imagem abaixo de 20%: sem-obra-aa91d4 (q11 com 18.5%), sem-obra-1fada7 (q02 com 15.1%) e sem-obra-3a43e4 (q04 com 16.7%).
+- onde: Pipeline de vídeo / filtro FFmpeg de reenquadramento e zoom progressivo por cena
+- como testar: Rodar o medidor de movimento por cena nos 3 Shorts após aplicar punch-in progressivo nos trechos parados e confirmar que todas as tomadas ultrapassam 20% de mudança útil.

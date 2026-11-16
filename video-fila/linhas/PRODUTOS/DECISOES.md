@@ -3,6 +3,7 @@
 Formato: data | o que mudou | por quê | prova | como desfazer. [GRANDE] = muda o que o público vê/ouve ou a produção.
 Histórico detalhado antes de 26/10 18h: `D:\postador-de-videos\docs\PRODUTO_PROFISSIONAL.md` (tabela "Rodadas de melhoria").
 
+- 16/11 14:42 | [MELHORADOR ensaio — NÃO aplicado] ideia_codigo  = Cena 4 (cartão final): fazer os 3 itens (Setup, Segurança, Monitoramento) entrarem escalonados em vez de aparecerem juntos. Antes, conferir o período do pulso e | O júri aponta o cartão final estático por 2,3 s (28.39–30.76 s), com movimento de 4.11%. pulso_botao (0.06) e brilho_botao (1) já estão liga | modelo cw/claude-sonnet-5-5
 - 16/11 05:29 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_tres_veo_final = 0.4 | O vídeo inteiro ficou com o dono no mesmo plano falando (cenas 1-3), sem tela do produto nem conversa, e o movimento ficou em 4.0 mesmo com  | modelo cw/claude-sonnet-5-5
 - 16/11 05:29 | [MELHORADOR ensaio — NÃO aplicado] ideia_codigo cena 2 (Como funciona) = Na cena de produto falada (ex.: reagendar pelo WhatsApp), exibir um balão de conversa do WhatsApp (cliente cancelando à noite e a IA reagendando) entrando junto | O padrão mais forte do histórico é a nota de movimento 4.0 (3 entradas) com o júri apontando 'parado/mesmo molde' apesar do movimento medido | modelo cw/claude-sonnet-5-5
 - 15/11 15:09 | [MELHORADOR ensaio — NÃO aplicado] ajuste pulso_botao = 0.1 | Aumenta o pulso do botao no cartao final (de 0.06 para 0.10) para elevar o movimento da Cena 4 (cartao com apenas 7.38% de movimento) e dest | modelo gemini-4-argon
