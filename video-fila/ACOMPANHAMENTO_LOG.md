@@ -2236,3 +2236,17 @@ Conferidas 1 a 1 pela API pública: @eFootzBR (300 Shorts, mediana 68 mil views)
 - Defeito meu corrigido: a limpeza da pilha apagava como órfão todo preparo com mais de 30 min — inclusive os VIVOS
   esperando a vez do yt-dlp (3 perdidos em 1 h). Agora o meta_parcial guarda o pid de quem baixa; órfão = esse
   processo morreu. `_prontos_pc2` não apaga mais pastas `_baixando_`.
+
+## 16/11 19:30 — títulos e tags: 37% dos Shorts saíam com regras de ANIME em nicho que não é anime
+
+- `seo_generator._MIDIAS` não tinha tradução para 6 nichos em produção: pesca (209 Shorts de 10 a 16/11), negócios
+  (79), jurídico (73), imobiliário (37), saúde (36) e jogos (30) = 464 de 1.263 (37%). Esses saíam com as regras de
+  "recap de anime": um Short de pesca foi "ficou OVERPOWER / na MAIOR DUNGEON" com tags "anime recap, resumo anime";
+  um jurídico saiu com tags "anime dublado, anime completo".
+- Corrigido: 6 traduções novas (`SEO_MIDIAS_NOVAS=0` desliga) e nicho que não é anime/manhwa não recebe mais o banco de
+  palavras de anime (`SEO_PALAVRAS_NICHO=0` volta). Teste em 3 Shorts reais: nenhuma palavra de anime sobrou; tags
+  passaram a ser do assunto ("quais são meus direitos, o que diz a lei", "como pescar, dicas de pesca").
+- `bin/palavras_buscadas.py` (ideia da caixa do pesquisador): coleta o autocompletar do YouTube por nicho em
+  `config/seo_palavras_nicho.json`. Usar isso no título fica DESLIGADO (`SEO_PALAVRAS_NICHO=1` liga): no teste o modelo
+  copiava as buscas e inventava "traíra", "isca artificial", "molinete" em vídeo que não fala disso.
+- Caixa CURTOS do pesquisador: 12 blocos avaliados (1 implantado, 15 reprovados).
