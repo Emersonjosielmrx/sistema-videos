@@ -3,6 +3,7 @@
 Formato: data | o que mudou | por quê | prova | como desfazer. [GRANDE] = muda o que o público vê/ouve ou a produção.
 Histórico detalhado antes de 26/10 18h: `D:\postador-de-videos\docs\PRODUTO_PROFISSIONAL.md` (tabela "Rodadas de melhoria").
 
+- 15/11 15:09 | [MELHORADOR ensaio — NÃO aplicado] ajuste pulso_botao = 0.1 | Aumenta o pulso do botao no cartao final (de 0.06 para 0.10) para elevar o movimento da Cena 4 (cartao com apenas 7.38% de movimento) e dest | modelo gemini-4-argon
 - 14/11 15:56 | [MELHORADOR ensaio — NÃO aplicado] peso_variante dono_mesma_foto = 0.5 | O formato dono_mesma_foto acumula notas baixas em 3 vídeos recentes (followupia 4,75, mentoriasia 5,25, este 5,75), com movimento 4–5 se rep | modelo cw/claude-sonnet-5-5
 - 14/11 15:56 | [MELHORADOR ensaio — NÃO aplicado] regra_editor  = Na cena de conversa, toda palavra da legenda karaokê não destacada deve ser branca com contorno preto grosso, nunca marrom ou opaca. Só a palavra falada usa a c | O defeito de legenda ilegível na cena 2 foi apontado por 4 jurados e o selo 'Simulação' cortando o nome da marca por 5 jurados, ambos CERTEZ | modelo cw/claude-sonnet-5-5
 - 14/11 09:23 | [MELHORADOR ensaio — NÃO aplicado] regra_roteiro  = Na cena de conversa, o diálogo simulado deve mostrar o tema do vídeo: um seguidor comenta num post e o agente responde ali, convidando para o direct. A resposta | O texto do chat (blog e podcast) não tem relação com a fala (agente de respostas nos comentários) nem com o tema. É uma falha de conteúdo qu | modelo cw/claude-sonnet-5-5

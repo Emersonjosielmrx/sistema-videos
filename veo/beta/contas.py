@@ -118,6 +118,28 @@ PROFILE_MAP = {c["session"]: c["profile"] for c in CONTAS}
 # session -> porta CDP.
 PORT_MAP = {c["session"]: c["port"] for c in CONTAS}
 
+# 15/11 (regra do 3º banimento): o Chrome do Veo (chrome_gen_mundosolar) abriu a mundosolar1995 — conta VIVA do
+# Kaggle — pela internet de casa, às 03:22. Agora todo Chrome do Veo pergunta ao cofre: conta viva do Kaggle só sai
+# pela ponte do IP fixo dela; ponte fora = erro (nunca casa); Chrome já aberto sem a ponte é fechado e reaberto.
+# VEO_TRAVA_KAGGLE=0 desliga (NÃO desligue sem a dona).
+EMAIL_MAP = {"mundosolar": "mundosolar1995@gmail.com"}
+
+
+def ponte_kaggle(session, porta=None):
+    """Flags do Chrome para a conta (['--proxy-server=...'] ou []). Levanta RuntimeError se a ponte estiver fora."""
+    import os as _os
+    if _os.environ.get("VEO_TRAVA_KAGGLE", "1") == "0":
+        return []
+    import sys as _sys
+    if r"D:\logins-google" not in _sys.path:
+        _sys.path.append(r"D:\logins-google")
+    import cofre
+    email = EMAIL_MAP.get(session) or (session if "@" in session else f"{session}@gmail.com")
+    px = cofre.saida_kaggle(email)
+    if px and porta and cofre._cdp_vivo(str(porta)) and not cofre._chrome_com_ponte(str(porta)):
+        cofre._fechar_porta(str(porta))
+    return [f"--proxy-server={px}"] if px else []
+
 # session -> tier ("pro"/"free"). Default "pro" se nao especificado.
 TIER_MAP = {c["session"]: c.get("tier", "pro") for c in CONTAS}
 

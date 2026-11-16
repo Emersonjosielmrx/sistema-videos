@@ -337,6 +337,10 @@ def _escolher(rotulo):
             (lambda h: bool(HOSTS[h].get("lento")))
         ordem.sort(key=lambda h: (lento(h), hoje.get(h, {}).get("falhas", 0) > 0, hoje.get(h, {}).get("ok", 0)))
     for host in ordem:
+        # 15/11: o STI (notebook) chega a 97 °C com Short próprio; trecho/capa do PC1 nele = esquenta mais e espera.
+        # Com Short dele rodando (estado\sti_short.json) fica de fora — os celulares pegam. CELULARES_STI_LIVRE=0 desliga.
+        if host == "sti" and os.environ.get("CELULARES_STI_LIVRE", "1") != "0" and (EST / "sti_short.json").exists():
+            continue
         if not _pegar(host, rotulo):
             continue
         m = medir(host, vale_s=MEDIDA_VALE_S)

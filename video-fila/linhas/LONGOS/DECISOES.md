@@ -1,5 +1,9 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 15/11 23:08 [melhorador código cc-sobra] anime_tts.py: Garantir painel de fundo até o último segundo e eliminar tela preta/congelamento no encerramento (58 linhas). Desfazer: copiar anime_tts.py.bak_20261115_230817_melhorador
+
+- 15/11 05:16 [melhorador código cc-sobra] fx_clips.py: Clamp nas bordas do movimento de câmera e travamento do efeito 2.5D instável (36 linhas). Desfazer: copiar fx_clips.py.bak_20261115_051621_melhorador
+
 - 14/11 15:55 [melhorador código ag-opus-5-5] fx_clips.py: Ajuste na âncora do crop vertical para evitar decapitação em zooms e pans (24 linhas). Desfazer: copiar fx_clips.py.bak_20261114_155544_melhorador
 
 - 14/11 15:54 [melhorador código ag-opus-5-5] fx_clips.py: Ajuste na âncora do crop vertical para evitar decapitação em zooms e pans (22 linhas). Desfazer: copiar fx_clips.py.bak_20261114_155403_melhorador

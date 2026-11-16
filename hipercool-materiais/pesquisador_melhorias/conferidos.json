@@ -17203,5 +17203,145 @@
     "arquivado": false,
     "descricao": "Descobre o que deu certo nos seus Shorts e vídeos do YouTube: título, tema e duração × views, retenção e inscritos, com comparação com o Ins",
     "data": "2026-11-15"
+  },
+  "m-elkhou/motoride-montage": {
+    "ok": true,
+    "nome": "m-elkhou/motoride-montage",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Viral-style moto Shorts engine: beat-synced montages, claim-free music, light voice hooks, paced YouTube uploads.",
+    "data": "2026-11-15"
+  },
+  "sirkunle001/youtube-channel-finder": {
+    "ok": true,
+    "nome": "Sirkunle001/youtube-channel-finder",
+    "estrelas": 1,
+    "push": "2026-08-25",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Open-source YouTube channel list building for creator marketing and GTM teams. Find every channel in a niche (name, handle, URL, subscribers",
+    "data": "2026-11-15"
+  },
+  "jjohnnystwsss/yt-playlist-subs": {
+    "ok": true,
+    "nome": "jjohnnystwsss/yt-playlist-subs",
+    "estrelas": 1,
+    "push": "2026-07-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn any YouTube playlist into merged transcripts — manual/auto subs, no-captions→Whisper, members-only→cookie. Works as a CLI and a Claude ",
+    "data": "2026-11-15"
+  },
+  "jhao0413/dsh-video-clip": {
+    "ok": true,
+    "nome": "jhao0413/dsh-video-clip",
+    "estrelas": 0,
+    "push": "2026-11-11",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "DSH 插件：按时间区间下载视频片段（yt-dlp --download-sections，长视频自动走 HLS 分片）+ 抽帧核对边界 + 内网 HTTP 分享",
+    "data": "2026-11-15"
+  },
+  "mohamadsawas05-cell/contentoutlierengine": {
+    "ok": true,
+    "nome": "mohamadsawas05-cell/ContentOutlierEngine",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Finds the videos that overperformed their account's normal in your niche, then has Claude turn them into a weekly 7 reel + 1 YouTube plan. N",
+    "data": "2026-11-15"
+  },
+  "farazbukhari/savesama": {
+    "ok": true,
+    "nome": "FarazBukhari/savesama",
+    "estrelas": 0,
+    "push": "2026-10-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Self-hosted media downloader. A small yt-dlp + ffmpeg server runs on your phone (Termux), Windows or macOS, and an Android app saves videos,",
+    "data": "2026-11-15"
+  },
+  "chaitu328/youtube-shorts-agent": {
+    "ok": true,
+    "nome": "Chaitu328/youtube-shorts-agent",
+    "estrelas": 0,
+    "push": "2026-11-08",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Retention-engineered AI agent that writes, scores hooks, and packages viral 60-second YouTube Shorts using Google Gemini (100% Free Tier).",
+    "data": "2026-11-15"
+  },
+  "bedirhandd/dubbed-video-downloader": {
+    "ok": true,
+    "nome": "Bedirhandd/dubbed-video-downloader",
+    "estrelas": 8,
+    "push": "2026-07-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Python CLI for downloading YouTube videos or audio in the dubbed language you want, powered by yt-dlp and FFmpeg.",
+    "data": "2026-11-15"
+  },
+  "liosvee/japanese-shorts-agent": {
+    "ok": true,
+    "nome": "liosvee/japanese-shorts-agent",
+    "estrelas": 0,
+    "push": "2026-11-08",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A Claude Code workflow for researching Japanese YouTube niches, analysing keywords and Shorts, and producing original Japanese videos with E",
+    "data": "2026-11-15"
+  },
+  "scrapingbee/youtube-email-scraper-api": {
+    "ok": true,
+    "nome": "ScrapingBee/youtube-email-scraper-api",
+    "estrelas": 0,
+    "push": "2026-10-30",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "YouTube email scraper reading business emails creators publish on channel About pages and video descriptions, in Python, Node and cURL.",
+    "data": "2026-11-16"
+  },
+  "rty2345rr/youtube-multi-language-audio": {
+    "ok": true,
+    "nome": "RTY2345RR/youtube-multi-language-audio",
+    "estrelas": 0,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "YouTube multi-language audio tracks from your subtitles: auto dubbing in your own cloned voice, time-synced to every cue, one upload-ready t",
+    "data": "2026-11-16"
+  },
+  "ahmedmostafa147/youtube-studio": {
+    "ok": true,
+    "nome": "ahmedmostafa147/youtube-studio",
+    "estrelas": 5,
+    "push": "2026-10-22",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free, open-source vidIQ / TubeBuddy alternative that runs on your computer: keyword research, SEO checker, competitor outliers, channel anal",
+    "data": "2026-11-16"
+  },
+  "ledrodh/echoscope-ai": {
+    "ok": true,
+    "nome": "ledrodh/EchoScope-AI",
+    "estrelas": 1,
+    "push": "2026-11-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "EchoScope AI is a YouTube market intelligence dashboard built with Python. It tracks competitor metrics, compares Shorts vs. Long-form effic",
+    "data": "2026-11-16"
+  },
+  "malatangxiaxie/framekit": {
+    "ok": true,
+    "nome": "malatangxiaxie/framekit",
+    "estrelas": 0,
+    "push": "2026-11-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A deterministic procedural video renderer running natively on Android Termux",
+    "data": "2026-11-16"
   }
 }

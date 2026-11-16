@@ -18,6 +18,35 @@
       "max_dia": null,
       "horarios_rede": null
     },
+    "animenoturno": {
+      "slug": "animenoturno",
+      "creds": [
+        "novo_animenoturno"
+      ],
+      "nome": "Anime Noturno",
+      "handle": "@animenoturno",
+      "channel_id": "UCewCJ-gv-2FzTHPu5hhIiZA",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "anime",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:30",
+        "18:30",
+        "21:40"
+      ],
+      "horarios_parceiro": [
+        "12:30",
+        "18:30",
+        "21:40"
+      ],
+      "reserva_dono": 1
+    },
     "animescomia": {
       "slug": "animescomia",
       "creds": [
@@ -59,7 +88,7 @@
       "navegador": true,
       "idioma": "pt",
       "fuso": "America/Sao_Paulo",
-      "nicho": "financas",
+      "nicho": "filme_sem_voz",
       "dono": "manhwa-react",
       "alimentadores": {
         "parceiro": "livre"
@@ -97,6 +126,35 @@
         "12:40",
         "22:10"
       ]
+    },
+    "bilionarionoturno": {
+      "slug": "bilionarionoturno",
+      "creds": [
+        "novo_bilionarionoturno"
+      ],
+      "nome": "Bilionário Noturno",
+      "handle": "@bilionarionoturno",
+      "channel_id": "UC5a8hc96KXJ62xak5vGYosQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "financas",
+      "dono": "manhwa-react",
+      "alimentadores": {
+        "parceiro": "livre"
+      },
+      "max_dia": 3,
+      "horarios_rede": [
+        "07:30",
+        "12:30",
+        "21:30"
+      ],
+      "horarios_parceiro": [
+        "07:30",
+        "12:30",
+        "21:30"
+      ],
+      "reserva_dono": 1
     },
     "cartuchoreact": {
       "slug": "cartuchoreact",
@@ -776,7 +834,7 @@
       "navegador": true,
       "idioma": "pt",
       "fuso": "America/Sao_Paulo",
-      "nicho": "misterios",
+      "nicho": "fatos",
       "dono": "parceiro",
       "alimentadores": {},
       "max_dia": 2,
@@ -802,7 +860,7 @@
       "navegador": true,
       "idioma": "pt",
       "fuso": "America/Sao_Paulo",
-      "nicho": "tecnologia",
+      "nicho": "dorama",
       "dono": "parceiro",
       "alimentadores": {},
       "max_dia": 2,

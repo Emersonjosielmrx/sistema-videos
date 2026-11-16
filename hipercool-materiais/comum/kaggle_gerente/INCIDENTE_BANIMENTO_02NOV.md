@@ -95,3 +95,12 @@ Sinal no log: a central mostrava "proxy webshare sem resposta"; o motivo real em
 **Em risco (vivas que também subiram por HTTP de casa 12–14/11):** Filme Noturno (simonerebecaluizasilva), Curiosidades
 Noturnas (gabriellyvitoria...), Manhwa Noturno (inovaremanhwaverse2), Inovare q8l/u8b (inovaremanhwaverse5/6), Lei e Lucro
 (emersonjosiel2035), Clínica Lucrativa IA (inovaremanhwaverse9).
+
+## TESTE CEGO — 15/11/2026 (dona: "se elas banirem, o problema não é cruzamento")
+Contas emersonjosiel2036 e emersonjosiel2040: feitas pela dona só num PC no Rio e no celular; nunca no Flow/YouTube.
+Tokens KGAT entregues pela dona; usernames presumidos = nome do e-mail. Saídas exclusivas, IP nunca visto no pool:
+2036 -> rnprmtfo-15 (185.72.240.95, onde ela fez o login Google em 12/11), 2040 -> rnprmtfo-20 (185.72.241.131).
+**Erro de cadastro (15/11 11:05):** os tokens foram trocados — o 1º push (kernel recap-trabalho) foi da 2040 pelo
+rnprmtfo-15. Corrigido às 11:20 (2040->rnprmtfo-20). A 2036 ficou PAUSADA até 23:30 pro IP esfriar. Se as duas caírem
+juntas na virada UTC (21h BRT), ESTE contato duplo no rnprmtfo-15 é a explicação mais provável — não conclui o teste.
+Acompanhar: central.log (grep emersonjosiel20), banimento = 401 'supply KAGGLE_API_TOKEN'.

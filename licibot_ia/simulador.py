@@ -3,7 +3,7 @@ LiciBot-IA · simulador.py
 "Se eu tiver R$ X para investir, quanto ganho e em quanto tempo?" — usando o lance que o PRÓPRIO robô daria
 numa disputa automática, não o valor estimado do edital.
 
-Para cada licitação aberta que a IA aprovou (MEI/CPF; AMIGO_SOLAR fica de fora: o investimento é do parceiro):
+Para cada licitação aberta que a IA aprovou (MEI/CPF/DENILDO):
   custo          = o que a IA estimou para entregar (compra do produto, ferramentas, horas)
   lance_minimo   = menor preço que o robô aceita: cobre o custo, os impostos da carteira e a margem mínima
   preco_provavel = quanto o vencedor costuma cobrar (estimado × (1 - desconto real dos vencedores na gaveta))

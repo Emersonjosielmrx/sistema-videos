@@ -126,6 +126,15 @@ def um(item):
     log(f"{item['vid']}: aplicada no Studio: {res}")
     # 05/11: "aviso: TimeoutError" (fiYW0vWk0Yo) e página de edição que não abriu (pXI9) viravam "feito" sem capa
     if not re.search(r'"(capa|teste_ab)": "(enviada|ok|ja)', res):
+        # 15/11: "Salvar continuou cinza" NÃO era o canal bloqueado — as partes 11 e 14 do Medieval (Fio da Meada,
+        # recursos negados) trocaram de capa pelo DESKTOP em 1 tentativa (o recurso negado só barra o teste A/B).
+        # Antes de concluir "bloqueado", tenta pelo desktop. CAPA_CINZA_DESKTOP=0 desliga.
+        reserva_c = os.environ.get("CAPA_STUDIO_RESERVA", "desktop")
+        if (os.environ.get("CAPA_CINZA_DESKTOP", "1") != "0" and reserva_c
+                and re.search(r"Salvar continuou cinza", res)):
+            res = _studio(item["canal"], item["vid"], "--capa", str(capa), maquina=reserva_c)
+            log(f"{item['vid']}: 'Salvar cinza' — de novo pelo {reserva_c}: {res}")
+    if not re.search(r'"(capa|teste_ab)": "(enviada|ok|ja)', res):
         # 14/11 03h50 (partes 14 e 11 do Medieval, 26 tentativas na madrugada): no Fio da Meada a contestação dos
         # recursos avançados foi NEGADA — o Studio abre o aviso e a capa de vídeo publicado não troca ("Salvar
         # continuou cinza"). Canal bloqueado não fica tentando (Studio insistindo pode piorar a situação do canal):

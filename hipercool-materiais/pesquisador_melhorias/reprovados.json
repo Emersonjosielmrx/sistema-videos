@@ -7480,5 +7480,167 @@
     "motivo": "0 estrelas; já temos playlist por série em ordem (postar_longos.PLAYLIST_SERIES / youtube_web_poster --playlist)",
     "quem": "LONGOS",
     "data": "2026-11-15"
+  },
+  {
+    "repo": "andremrod/youtube-insights",
+    "motivo": "repo 0 estrelas de 5 dias; já cruzamos título/duração x views/horas no relatorio_ronda e inteligencia_ajustada",
+    "quem": "LONGOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "itzjk/hookcheck",
+    "motivo": "testado 15/11 em 15 Shorts: 14 low; 1/73 com 0,07 s preto; aberturas já boas",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "kmilo93sd/agent-video-editor",
+    "motivo": "sons CC0 quase todos de interface (clique/notificação); já temos 69 SFX",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "sky4302/mochiku",
+    "motivo": "leitor de mangá (app), sem código de legenda/recap aproveitável",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "rishaan1402/opensource-clipping-autopilot",
+    "motivo": "cortes de vídeo longo CC; nossos Shorts vêm de parceiro autorizado",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "hackers-reality/youtube-skillbox",
+    "motivo": "skill de agente sem código novo; listagem já feita por aba_shorts.py",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "blueorionn/albumy",
+    "motivo": "catálogo de música livre (NCS/FMA) sem API; trilha já resolvida",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "Billsmokes/Youtube-shorts-auto-clipper",
+    "motivo": "corta longos em Shorts com legenda; já temos pipeline próprio",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "opus-pro/reel-runbook",
+    "motivo": "texto de boas práticas de gancho, sem código",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "s77sh/viral-reel-playbook",
+    "motivo": "skill de prompt para roteiro, sem código",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "gpsyrou/tube-virality",
+    "motivo": "usa a API do YouTube (proibida para nós)",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "perceptreneur/yt-idea-bot",
+    "motivo": "ideia de comentários via API do YouTube + Discord",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "WealthRxAi/tubedesk",
+    "motivo": "painel tipo vidIQ com API/extensão; não aplica",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "AARENKAY/ffmpeg-termux-tools",
+    "motivo": "scripts ffmpeg básicos para Termux; já temos",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "minimus7/creator-teardown",
+    "motivo": "skill de análise manual de criador, sem código reaproveitável",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "ctskool/youtube-packaging",
+    "motivo": "skills de título/miniatura, sem código",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "gladosAagman/youtube-agent-skill",
+    "motivo": "skills de prompt, sem código",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "cedarfetch/google-trending-searches-examples",
+    "motivo": "exemplos de RSS do Trends; não ligado à escolha de fonte de parceiro",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "ielym/google-trends-scraper",
+    "motivo": "raspagem do Google Trends; risco Google e sem uso na fila de parceiro",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "robonuggets/gauntlet-loop",
+    "motivo": "só 1 SKILL.md de prompt de chat, loop sem teto de rodadas; ideia aproveitável: revisor compara A/B cego contra campeão real",
+    "quem": "LONGOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "m-elkhou/motoride-montage",
+    "motivo": "0 estrelas; montagem de vídeo de moto no ritmo da música, sem relação com recap narrado",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "Sirkunle001/youtube-channel-finder",
+    "motivo": "1 estrela, foco marketing; já temos colab\\garimpar_fontes.py e garimpar_parecidos.py",
+    "quem": "LONGOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "jjohnnystwsss/yt-playlist-subs",
+    "motivo": "1 estrela; baixa legenda de playlist com yt-dlp, já temos (anime_fetch) e usa cookie de conta",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "jhao0413/dsh-video-clip",
+    "motivo": "0 estrelas; baixa trecho por tempo com yt-dlp, já temos",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "FarazBukhari/savesama",
+    "motivo": "0 estrelas; baixador genérico yt-dlp+ffmpeg, já temos",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "Chaitu328/youtube-shorts-agent",
+    "motivo": "0 estrelas; agente de prompt de roteiro com Gemini, sem código reaproveitável",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
+  },
+  {
+    "repo": "RTY2345RR/youtube-multi-language-audio",
+    "motivo": "0 estrelas, criado ontem; não é fonte de recap (pedido da área) e a dublagem já é RVC própria (voz_clonada.py)",
+    "quem": "LONGOS",
+    "data": "2026-11-16"
   }
 ]

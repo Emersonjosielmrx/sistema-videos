@@ -702,6 +702,18 @@ def producao(args):
     if not ok:
         log(f"produção: {motivo}")
         return
+    # 15/11 dona ("PC1 o máximo livre pro VS Code"): render de Short NÃO roda no PC1 com a trava ligada — o PC2, o
+    # desktop, o STI e os celulares pegam da pilha. Apagar D:\video-fila\estado\pc1_sem_render.on volta ao normal.
+    if "--forcar" not in sys.argv:
+        try:
+            sys.path.insert(0, r"D:\video-fila")
+            import pc1_reserva  # 15/11 dona: só renderiza no PC1 se pc2/desktop/sti estiverem todas ocupadas
+            pode, mot = pc1_reserva.pode_pesado()
+        except Exception:  # noqa: BLE001 — sem a medida, segue como antes
+            pode, mot = True, ""
+        if not pode:
+            log(f"produção: {mot}")
+            return
     if not _pegar_lock():
         log("produção: a rodada anterior ainda está rodando — pulando")
         return

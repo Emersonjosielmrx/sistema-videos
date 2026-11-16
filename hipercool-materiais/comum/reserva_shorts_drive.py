@@ -97,6 +97,7 @@ def main(simular):
                 continue
             liberado += tam
             (p / "_NO_DRIVE.txt").write_text(f"{DESTINO}/{rel}\n", encoding="utf-8")
+            msp.anotar_manifesto(v, f"{DESTINO}/{rel}", tam)  # 15/11: catálogo/TikTok acham o vídeo no Drive
             n += 1
     log(f"no Drive e fora do PC: {n} de {len(sair)}, {liberado / 1e9:.1f} GB liberados")
 

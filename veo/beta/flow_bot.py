@@ -630,6 +630,9 @@ def _account_port(apelido):
 def _ensure_chrome(apelido, port, log=print):
     """Abre Chrome real com CDP se nao estiver rodando na porta."""
     url = f"http://127.0.0.1:{port}/json/version"
+    # 15/11: conta viva do Kaggle só pela ponte do IP fixo (fecha Chrome dela aberto sem a ponte). VEO_TRAVA_KAGGLE
+    from contas import ponte_kaggle
+    _ponte = ponte_kaggle(apelido, port)
     try:
         with urllib.request.urlopen(url, timeout=2):
             log(f"[cdp] Chrome ja rodando na porta {port}")
@@ -647,7 +650,7 @@ def _ensure_chrome(apelido, port, log=print):
         "--no-default-browser-check",
         "--disable-background-timer-throttling",
         "--disable-renderer-backgrounding",
-    ]
+    ] + _ponte
     log(f"[cdp] abrindo Chrome real na porta {port} (perfil {profile})")
     proc = subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     deadline = time.time() + 15

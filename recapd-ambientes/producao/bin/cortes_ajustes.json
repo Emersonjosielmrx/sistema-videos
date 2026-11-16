@@ -19,8 +19,7 @@
   "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
   "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
   "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
-  "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS').",
-  "Se o vídeo mostrar especialista ou apresentadora mulher, nunca use sujeito masculino ('ELE') no título: foque direto no tema ou problema da cena sem atribuir gênero."
+  "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS')."
  ],
  "tarja_largura_max": 0.8,
  "tarja_letra": 0.62,
@@ -974,6 +973,47 @@
     "Se o vídeo mostrar especialista ou apresentadora mulher, nunca use sujeito masculino ('ELE') no título: foque direto no tema ou problema da cena sem atribuir gênero."
    ],
    "porque": "Em sem-obra-d1fe57 (q01: 'ELE PASSOU MAL' com a especialista Tatiana Zanin na tela) e sem-obra-57b857 (q01: 'ELE TENTOU CRIAR um NEGÓCIO' com apresentadora mulher em todo o vídeo), o título usou 'ELE' contradizendo a imagem."
+  },
+  {
+   "em": "2026-11-15T03:34",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
+    "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS').",
+    "Se o vídeo mostrar especialista ou apresentadora mulher, nunca use sujeito masculino ('ELE') no título: foque direto no tema ou problema da cena sem atribuir gênero."
+   ],
+   "depois": [
+    "Nunca entregue o clímax ou o final no título: crie curiosidade sobre O QUE vai acontecer, sem contar o resultado.",
+    "Não use 'ELE' ou 'ELA' no título sem confirmar o gênero de quem age no vídeo; na dúvida, use sujeito neutro ou focado na ação.",
+    "Separe todas as palavras com espaço simples e revise a ortografia: nunca cole artigo, preposição ou pronome na palavra seguinte (ex.: 'UM ERRO', nunca 'UMERRO').",
+    "Baseie o título estritamente no que acontece no vídeo e roteiro: nunca invente clichês de traição, renascimento, calabouço ou poderes se não existirem na cena.",
+    "Não use verbos no passado que revelem a vitória ou salvação ('SALVOU', 'SE TORNOU UMA LENDA') nem abrevie verbos ('viro' em vez de 'virou').",
+    "Confirme o gênero e o papel de cada personagem antes de usar substantivos como 'FILHO' ou 'FILHA': nunca troque o gênero da vítima no título.",
+    "Confira a ortografia de cada palavra e a concordância verbal do título: nunca omita letras ('MULHRES') nem use verbo no singular com sujeito no plural ('FALTA HOMENS')."
+   ],
+   "porque": "nota caiu 4.84 -> 4.21"
+  },
+  {
+   "em": "2026-11-15T17:46",
+   "quem": "melhorador gemini-4-argon",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.62,
+   "depois": 0.52,
+   "porque": "Com tarja_letra no teto (0.62), palavras longas estouram a margem lateral de 60 px e quebram no meio da sílaba nos 4 Shorts do lote: son-heung-min_cap1_20261112 q03 ('HEUNG-MIN' <20 px) e q04 ('PEQUENOS?' <10 px), sem-obra-3ae205_cap1_20261115 q16 ('INGENUIDADE' <30 px) e q17 ('REVOLTANTE' <20 px), "
+  },
+  {
+   "em": "2026-11-15T19:45",
+   "quem": "melhorador (desfez)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": 0.52,
+   "depois": 0.62,
+   "porque": "nota caiu 5.13 -> 4.63"
   }
  ]
 }

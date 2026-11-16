@@ -86,12 +86,30 @@ def clone_ligado():
     return bool(os.environ.get("VOZ_CLONADA"))
 
 
+MISTURA_TETO_S = float(os.environ.get("ANIME_MISTURA_TETO_S", "50"))  # máx. de fala seguida na mesma base
+_SEGUIDA = {"base": None, "s": 0.0}
+
+
 def base_da_frase(modo, texto, indice, impactos, total):
     """misto: Kokoro (emoção, acelerado) na abertura e chegando nos impactos (a curva sobe 8%+), Francisca (pronúncia)
-    no resto — mesmo timbre, ritmo que muda como o de um narrador humano."""
+    no resto — mesmo timbre, ritmo que muda como o de um narrador humano.
+    15/11 (dona + revisão do outro agente: dos últimos 400 vídeos só 6 misturaram; no misto a Francisca ficava 86% da
+    fala e até 33,7 min seguidos): com ANIME_MISTURA=1 todo vídeo mistura, e nenhuma base passa de MISTURA_TETO_S
+    seguidos — passou, a próxima frase vai pra outra base. Sem a chave = exatamente como antes."""
+    if os.environ.get("ANIME_MISTURA") == "1":
+        modo = "misto"
     if modo != "misto":
         return modo
-    return "kokoro" if indice == 0 or narracao_curva.deltas(texto, indice, impactos, total)[0] >= 8 else "francisca"
+    base = "kokoro" if indice == 0 or narracao_curva.deltas(texto, indice, impactos, total)[0] >= 8 else "francisca"
+    if os.environ.get("ANIME_MISTURA") == "1":
+        if indice == 0:
+            _SEGUIDA.update(base=None, s=0.0)
+        if base == _SEGUIDA["base"] and _SEGUIDA["s"] >= MISTURA_TETO_S:
+            base = "kokoro" if base == "francisca" else "francisca"
+        dur = len(texto.split()) / 2.6  # ~2,6 palavras/s (mesma conta do _duracao_sa)
+        _SEGUIDA["s"] = _SEGUIDA["s"] + dur if base == _SEGUIDA["base"] else dur
+        _SEGUIDA["base"] = base
+    return base
 
 
 _PERSONAGENS_COMICOS = {"pica_pau", "chaves", "chaves_chapolin", "chapolin_colorado", "chiquinha", "seu_madruga",
@@ -213,14 +231,30 @@ def _proteger_cauda_bruto(wav):
     wav = Path(wav)
     if not wav.exists() or wav.stat().st_size < 500:
         return
+    tag = wav.with_name(wav.stem + ".pad_ok")
+    if tag.exists():
+        return
     tmp = wav.with_name(wav.stem + ".pad.wav")
     flags = 0x08000000 if os.name == "nt" else 0
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", "apad=pad_dur=0.4", str(tmp)],
                        check=True, capture_output=True, timeout=30, creationflags=flags)
-        tmp.replace(wav)
-    except Exception:  # noqa: BLE001
+        for tentativa in range(3):
+            try:
+                tmp.replace(wav)
+                break
+            except OSError:
+                if tentativa == 2:
+                    raise
+                time.sleep(0.1)
+        try:
+            tag.write_text("1", encoding="utf-8")
+        except OSError:
+            pass
+        logging.info(f"[anime_tts] cauda protegida no bruto: {wav.name} (+0.4s)")
+    except Exception as e:  # noqa: BLE001
         tmp.unlink(missing_ok=True)
+        logging.warning(f"[anime_tts] proteger cauda bruto falhou em {wav.name} ({e})")
 
 
 def _aplicar_margem_final(wav, margem=None, fade=0.5):
@@ -242,7 +276,10 @@ def _aplicar_margem_final(wav, margem=None, fade=0.5):
     try:
         r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
                            capture_output=True, text=True, timeout=30, creationflags=flags)
-        dur = float(r.stdout.strip())
+        if r.returncode != 0 or not r.stdout.strip():
+            logging.warning(f"[anime_tts] ffprobe falhou em {wav.name}: rc={r.returncode}")
+            return
+        dur = float(r.stdout.strip().splitlines()[0])
     except Exception as e:  # noqa: BLE001
         logging.warning(f"[anime_tts] ffprobe falhou em {wav.name} ({e})")
         return
@@ -254,7 +291,14 @@ def _aplicar_margem_final(wav, margem=None, fade=0.5):
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", filtros, str(tmp)],
                        check=True, capture_output=True, timeout=60, creationflags=flags)
-        tmp.replace(wav)
+        for tentativa in range(3):
+            try:
+                tmp.replace(wav)
+                break
+            except OSError:
+                if tentativa == 2:
+                    raise
+                time.sleep(0.1)
         try:
             tag.write_text("1", encoding="utf-8")
         except OSError:
@@ -263,6 +307,10 @@ def _aplicar_margem_final(wav, margem=None, fade=0.5):
     except Exception as e:  # noqa: BLE001
         tmp.unlink(missing_ok=True)
         logging.warning(f"[anime_tts] margem final falhou em {wav.name} ({e})")
+
+
+aplicar_margem_final = _aplicar_margem_final
+proteger_cauda_bruto = _proteger_cauda_bruto
 
 
 def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
@@ -287,6 +335,8 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
             continue
         out = audio_dir / f"audio_{i}.wav"
         if out.exists() and out.stat().st_size > 500:
+            if i == len(lines) - 1:
+                _aplicar_margem_final(out)
             continue
         texto = _seguro(line)
         aj = None
@@ -307,6 +357,8 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                                                               str(audio_dir))
         else:
             rate, pitch, ganho, cauda = narracao_curva.prosodia(texto, i, impactos, len(lines))
+            if i == len(lines) - 1:
+                cauda = max(cauda or 0.25, 1.5)
             extra, vel = {}, max(0.85, min(1.35, 1 + int(rate.rstrip("%")) / 100))
         eco = None
         if aj and aj["clima"] != "normal":
@@ -365,6 +417,10 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
             raise RuntimeError(f"[clone] edge {voz_base} falhou na frase {i} ({type(e).__name__}: {e})") from e
         if not ok_edge:
             raise RuntimeError(f"[clone] edge {voz_base} falhou na frase {i}")
+        _proteger_cauda_bruto(bases / f"audio_{i}.wav")
+    for it in itens:
+        if "entrada" in it and Path(it["entrada"]).exists():
+            _proteger_cauda_bruto(it["entrada"])
     if not itens:
         return
     lista = bases / "lista.json"
@@ -408,6 +464,10 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
         anime_formatos.aplicar_efeito_voz(voz, out)  # efeito próprio da voz (ex.: tremido da Aracy), do cadastro dela
         if eco:
             climas_voz.aplicar_eco(out, eco)
+        if idx == len(lines) - 1:
+            _aplicar_margem_final(out)
+    if lines and (so is None or (len(lines) - 1) in so):
+        _aplicar_margem_final(audio_dir / f"audio_{len(lines) - 1}.wav")
     import anime_script  # dono 26/10: dorama/filme = o protagonista narra; a fala real do personagem quebraria isso
     # abertura=False: frase solta no meio do vídeo (cortes_produto), sem a fala real do personagem na frente
     trecho = None if (anime_script.primeira_pessoa() or not abertura or (so is not None and 0 not in so)
@@ -732,6 +792,8 @@ def preparar_revezamento(lines, dono, audio_dir, impactos):
     finally:
         if antes is not None:
             os.environ["VOZ_CLONADA"] = antes
+    if lines:
+        _aplicar_margem_final(Path(audio_dir) / f"audio_{len(lines) - 1}.wav")
 
 
 def narrate(text, out_wav, indice=None, impactos=None, total=None):
@@ -750,6 +812,8 @@ def narrate(text, out_wav, indice=None, impactos=None, total=None):
     out_wav = Path(out_wav)
 
     if out_wav.exists() and out_wav.stat().st_size > 500:
+        if indice is not None and total is not None and indice == total - 1:
+            _aplicar_margem_final(out_wav)
         return out_wav
 
     # ── SEGUNDA CAMADA anti-ban: garante que nenhum termo de risco chegue ao TTS ──
@@ -761,6 +825,8 @@ def narrate(text, out_wav, indice=None, impactos=None, total=None):
     ganho, cauda = 0.0, None
     if indice is not None and narracao_curva.ligado():
         rate, pitch, ganho, cauda = narracao_curva.prosodia(safe_text, indice, impactos, total)
+        if total is not None and indice == total - 1:
+            cauda = max(cauda or 0.25, 1.5)
     ok = edge_tts_engine.speak(safe_text, voice=NARRATOR_VOICE,
                                out_wav=str(out_wav), persona="Narrador", rate=rate, pitch=pitch)
     if not ok:
@@ -770,5 +836,7 @@ def narrate(text, out_wav, indice=None, impactos=None, total=None):
         narracao_curva.pos_processar(out_wav, ganho, cauda)
         narracao_curva.humanizar(out_wav, safe_text, indice, impactos, total)
         logging.info(f"[curva] frase {indice}: {rate} {pitch} {ganho:+.1f} dB")
+    if indice is not None and total is not None and indice == total - 1:
+        _aplicar_margem_final(out_wav)
 
     return out_wav

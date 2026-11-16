@@ -634,6 +634,49 @@ def _comentar_fixar(pg, vid, texto):
 
 
 # ─────────────────────────── "Sobre" do canal ──────────────────────────────
+def editar_branding(pg, channel_id, foto=None, banner=None, ensaio=False):
+    """15/11 dona ("baner aprovados pode colocar"): Personalização > Branding — troca a foto e/ou o banner do canal.
+    Arquivo entra pelo caminho (yw._escolher_arquivo: CDP lê do disco da máquina do Chrome). Confirma o recorte
+    ("Concluído") e publica. Pelo Chrome do cofre do PRÓPRIO canal (sessao)."""
+    yw._abrir_studio(pg, channel_id, "/editing/images")
+    pg.wait_for_timeout(15000)
+    if ensaio:
+        yw._shot(pg, "branding_ensaio")
+        bts = pg.locator("ytcp-button, button").all_inner_texts()
+        return "ensaio: botões " + " | ".join(t.strip()[:20] for t in bts if t.strip())[:400]
+    feitos = []
+    for nome, arq, sel in (("foto", foto, "#profile-image-upload-button, ytcp-profile-image-upload ytcp-button"),
+                           ("banner", banner, "#banner-upload-button, ytcp-banner-upload ytcp-button")):
+        if not arq:
+            continue
+        secao = pg.locator("ytcp-profile-image-upload" if nome == "foto" else "ytcp-banner-upload").first
+        entrada = secao.locator("input[type=file]").first
+        if not entrada.count():
+            entrada = pg.locator("input[type=file]").nth(0 if nome == "foto" else 1)
+        yw._escolher_arquivo(pg, entrada, arq)
+        pg.wait_for_timeout(6000)
+        ok = pg.locator("#done-button:visible, ytcp-button:has-text('Concluído'):visible, ytcp-button:has-text('Done'):visible,"
+                        " button:has-text('Concluído'):visible").last
+        try:
+            ok.wait_for(state="visible", timeout=90000)  # 15/11: notebook lento — 30 s estourou no Fio e no Plantão
+            ok.click()
+        except Exception:
+            yw._shot(pg, f"branding_{nome}_sem_concluido")
+            raise
+        pg.wait_for_timeout(4000)
+        feitos.append(nome)
+    bt = pg.locator("ytcp-button#publish-button, #publish-button").first
+    bt.wait_for(state="visible", timeout=15000)
+    pg.keyboard.press("Escape")  # 15/11: no Fio/Plantão algo cobria o Publicar e o clique estourava 30 s
+    pg.wait_for_timeout(1500)
+    bt.click(force=True, timeout=60000)
+    pg.wait_for_timeout(10000)
+    yw._shot(pg, "branding_publicado")
+    if bt.get_attribute("aria-disabled") not in ("true",) and "disabled" not in (bt.get_attribute("class") or ""):
+        return "aviso: Publicar continua ativo (não salvou?) — ver print branding_publicado"
+    return "ok: " + "+".join(feitos)
+
+
 def editar_sobre(pg, channel_id, texto, ensaio=False):
     """14/11 dona (autorizou "escrever o Sobre de cada canal, texto diferente por canal"): Personalização > Informações
     básicas > Descrição. Pelo navegador (regra: YouTube só pelo navegador). Confere o texto gravado depois de publicar."""
@@ -1462,6 +1505,8 @@ def main():
     ap.add_argument("--colaborar", metavar="@HANDLE", help="(com --video) convida esse canal como colaborador (collab)")
     ap.add_argument("--aceitar-collab", metavar="LINK", help="aceita o convite de collab (link do Studio do convidado)")
     ap.add_argument("--sobre", metavar="ARQ.txt", help="(14/11) troca a descrição do canal (Sobre) pelo texto do arquivo")
+    ap.add_argument("--foto", metavar="ARQ", help="(15/11) troca a foto do canal")
+    ap.add_argument("--banner", metavar="ARQ", help="(15/11) troca o banner do canal (2048x1152+)")
     a = ap.parse_args()
     res = {}
     try:
@@ -1519,6 +1564,8 @@ def main():
         if a.sobre:  # 14/11: "Sobre" do canal (descrição) a partir de um .txt
             txt = Path(a.sobre).read_text(encoding="utf-8")
             acoes.append(("sobre", lambda pg: editar_sobre(pg, e["channel_id"], txt, a.ensaio)))
+        if a.foto or a.banner:  # 15/11: foto/banner do canal (aprovados pela dona)
+            acoes.append(("branding", lambda pg: editar_branding(pg, e["channel_id"], a.foto, a.banner, a.ensaio)))
         if a.limpar_rascunhos:
             # 16/10: apagar exige --apagar-mesmo - um teste apagou junto um rascunho antigo de outro upload
             acoes.append(("rascunhos", lambda pg: limpar_rascunhos(pg, e["channel_id"], a.ensaio or not a.apagar_mesmo)))

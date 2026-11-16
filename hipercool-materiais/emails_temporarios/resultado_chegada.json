@@ -1,0 +1,104 @@
+{
+ "em": "2026-11-15T11:54:06",
+ "remetente": "npcwagdy@guerrillamailblock.com",
+ "resultado": {
+  "mailtm": {
+   "email": "jypjacefcp@fldubai.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "tempmaillol": {
+   "email": "ossie488a94@cey.roomsranked.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "tempmailplus": {
+   "email": "trhvvreo8pat@mailto.plus",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "tempmailio": {
+   "email": "ckfi9d70q5@gmeenramy.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "maildrop": {
+   "email": "flj36e7h6glh@maildrop.cc",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "mailnesia": {
+   "email": "ki5a4dzrdh67@mailnesia.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "inboxkitten": {
+   "email": "gv1y6g0bvpfq@inboxkitten.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "harakiri": {
+   "email": "agzkwkx5sj9v@harakirimail.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "guerrilla": {
+   "email": "kkpleqow@guerrillamailblock.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"valid\":false,\"queue_id\":null,\"error\":\"Invalid from address\",\"error_code\":1,\"security_check_status\":true,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "mailinator": {
+   "email": "o1xk3oeyiuvd@mailinator.com",
+   "chegou": false,
+   "seg": null,
+   "erro": null,
+   "envio": "{\"captcha_html\":\"\",\"needs_captcha\":true,\"security_check_status\":false,\"auth\":{\"success\":true,\"error_codes\":[]}}"
+  },
+  "mailgw": {
+   "email": null,
+   "chegou": false,
+   "seg": null,
+   "erro": "ProxyError: HTTPSConnectionPool(host='api.mail.gw', port=443): Max retries exceeded with url: /domains (Caused by ProxyError('Unable to connect to proxy', OSError",
+   "envio": null
+  },
+  "dropmail": {
+   "email": null,
+   "chegou": false,
+   "seg": null,
+   "erro": "RuntimeError: dropmail recusou: {'errors': [{'extensions': {'code': 'authentication_error'}, 'message': 'legacy_token_disabled'}]}",
+   "envio": null
+  },
+  "developermail": {
+   "email": null,
+   "chegou": false,
+   "seg": null,
+   "erro": "ProxyError: HTTPSConnectionPool(host='www.developermail.com', port=443): Max retries exceeded with url: /api/v1/mailbox (Caused by ProxyError('Unable to connect t",
+   "envio": null
+  },
+  "1secmail": {
+   "email": null,
+   "chegou": false,
+   "seg": null,
+   "erro": "SSLError: HTTPSConnectionPool(host='www.1secmail.com', port=443): Max retries exceeded with url: /api/v1/?action=genRandomMailbox&count=1 (Caused by SSLError(SS",
+   "envio": null
+  }
+ }
+}

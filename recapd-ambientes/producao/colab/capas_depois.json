@@ -892,12 +892,14 @@
    "source_url": "https://www.youtube.com/watch?v=V4msWWPktbU"
   },
   "publicar": false,
-  "estado": "bloqueado",
+  "estado": "feita",
   "tentativas": 12,
   "em": "2026-11-11T12:31",
   "reserva": "D:\\hipercool-materiais\\animes recap\\videos laterais\\sem-obra-0dc381_cap1_20261106\\capa_c.jpg",
   "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11",
-  "bloqueado_em": "2026-11-14T03:55"
+  "bloqueado_em": "2026-11-14T03:55",
+  "feita_em": "2026-11-15T14:47",
+  "obs_1511": "aplicada pelo desktop (YT_MAQUINA) — recurso negado só barra A/B"
  },
  {
   "canal": "novo_inovaremanhwaverse",
@@ -1355,11 +1357,13 @@
    "source_url": "https://www.youtube.com/watch?v=pnX8RlSn7Yk"
   },
   "publicar": true,
-  "estado": "bloqueado",
+  "estado": "feita",
   "tentativas": 10,
   "em": "2026-11-13T05:28",
   "refazer": "dona_1113: rótulos sem alvo (navios) — refeita sem eles 14/11",
-  "bloqueado_em": "2026-11-14T03:55"
+  "bloqueado_em": "2026-11-14T03:55",
+  "feita_em": "2026-11-15T14:47",
+  "obs_1511": "aplicada pelo desktop (YT_MAQUINA) — recurso negado só barra A/B"
  },
  {
   "canal": "novo_manhwanoturno",
@@ -1840,8 +1844,81 @@
    "source_url": "https://www.youtube.com/watch?v=Tv4TcuPT9JI"
   },
   "publicar": false,
-  "estado": "pendente",
-  "tentativas": 1,
+  "estado": "feito",
+  "tentativas": 2,
   "em": "2026-11-15T02:59"
+ },
+ {
+  "canal": "novo_ia_agora_h3n",
+  "vid": "HVJCPWQfCa0",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\he-can-make-any-weak-skill-god-level-by-reversing-it_cap1_20261115",
+  "params": {
+   "anime": "He Can Make Any Weak Skill God-Level by Reversing It!",
+   "cap": 1,
+   "texto": "PODER OCULTO",
+   "cena": "ELE FOI HUMILHADO por ser fraco MAS DESPERTOU O SISTEMA mais forte",
+   "protagonista": "young adult male protagonist, short dark hair, sharp expression, glowing blue eyes, wearing futuristic tactical combat gear, dark coat, holding a glowing magical skill orb, intense cinematic lighting, detailed anime style",
+   "generos": [
+    "acao",
+    "fantasia",
+    "sistema",
+    "regressao",
+    "vinganca"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=KAA_csRv7NU"
+  },
+  "publicar": false,
+  "estado": "sem_capa",
+  "tentativas": 3,
+  "em": "2026-11-15T06:26"
+ },
+ {
+  "canal": "hNQrW5ouNe0Ni5Me",
+  "vid": "Vqzd9oirlC0",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\jujutsu-kaisen_cap1_20261115",
+  "params": {
+   "anime": "Jujutsu Kaisen",
+   "cap": 1,
+   "texto": "PODER OCULTO",
+   "cena": "ELE FOI REJEITADO mas engoliu um poder oculto e se tornou o mais forte",
+   "protagonista": "young male anime protagonist, short spiky pink hair, dark eyes, casual school uniform, determined expression, intense energy aura",
+   "generos": [
+    "acao",
+    "fantasia",
+    "poder",
+    "escola"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=NatfJn-eQp0"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-15T17:30"
+ },
+ {
+  "canal": "novo_codigo_inteligente_n7j",
+  "vid": "SPThI7oMKGw",
+  "pasta": "D:\\hipercool-materiais\\animes recap\\videos laterais\\solo-max-level-newbie_cap1_20261115",
+  "params": {
+   "anime": "Solo Max-Level Newbie",
+   "cap": 1,
+   "texto": "PODER PROIBIDO",
+   "cena": "ELE FOI HUMILHADO MAS DESPERTOU O SISTEMA MAIS FORTE limpando dungeon e quebrando recordes",
+   "protagonista": "Young adult male protagonist with short dark hair, sharp eyes, wearing modern casual dark streetwear, holding glowing blue summoning scrolls, dynamic action pose, cinematic lighting, no logos, no text",
+   "generos": [
+    "acao",
+    "sistema",
+    "fantasia",
+    "aventura"
+   ],
+   "formato": "16:9",
+   "source_url": "https://www.youtube.com/watch?v=XYDK10mfxd0"
+  },
+  "publicar": false,
+  "estado": "feito",
+  "tentativas": 1,
+  "em": "2026-11-15T22:38"
  }
 ]

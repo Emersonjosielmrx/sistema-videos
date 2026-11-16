@@ -2861,7 +2861,7 @@ def api_celular(_params):
         return {"erro": f"{type(e).__name__}: {e}"}
 
 
-ROTAS = {"/api/geral": lambda p: _cache("geral", 10, lambda: api_geral(p)), "/api/medir": api_medir,
+ROTAS = {"/api/geral": lambda p: _cache("geral", 60, lambda: api_geral(p)), "/api/medir": api_medir,
          "/api/modelos_central": api_modelos_central, "/api/nsn": api_nsn, "/api/er": api_er, "/api/celular": api_celular, "/api/telao_like": api_telao_like,
          "/api/canais": api_canais, "/api/postagens": api_postagens, "/api/cobertura": api_cobertura, "/api/kanban": api_kanban, "/api/erros": api_erros,
          "/api/ranking": api_ranking, "/api/canais_views": api_canais_views, "/api/placar": api_placar,
@@ -2892,8 +2892,8 @@ ROTAS_POST = {"/api/controle": api_controle_mudar, "/api/abrir": api_abrir, "/ap
               "/api/aprendizado_marcar": api_aprendizado_marcar, "/api/ia_pedir": api_ia_pedir, "/api/ia_acao": api_ia_acao,
               "/api/ia_corrigir_todos": api_ia_corrigir_todos, "/api/mover": api_mover, "/api/soltar": api_soltar,
               "/api/referencia_nova": api_referencia_nova}
-AQUECER = [("geral", 10, lambda: api_geral({})), ("producao", 30, lambda: api_producao({})), ("canais", 120, _canais),
-           ("postagens", 60, _postagens), ("tarefas", 90, _tarefas), ("bots", 600, _bots), ("problemas", 40, _problemas),
+AQUECER = [("geral", 60, lambda: api_geral({})), ("producao", 90, lambda: api_producao({})), ("canais", 120, _canais),
+           ("postagens", 60, _postagens), ("tarefas", 90, _tarefas), ("bots", 600, _bots), ("problemas", 120, _problemas),
            ("saude", 180, _saude), ("tendencias", 900, _tendencias)]
 VIDEO_OK = PODE_ABRIR + [APR / "trechos"]
 TIPOS = {".mp4": "video/mp4", ".webm": "video/webm", ".mov": "video/quicktime", ".mp3": "audio/mpeg", ".wav": "audio/wav",

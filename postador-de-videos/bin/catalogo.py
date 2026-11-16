@@ -134,11 +134,21 @@ def _postagens(caminhos):
     for d in politica.ler_json(politica.APROV_FILE, {}).values():
         if d.get("arquivo"):
             aprov_nome[Path(d["arquivo"]).name].add(d["arquivo"])
+    # 15/11: o ledger grava o NOME do canal que o Studio mostrava na hora — Tech Noturno e Mistérios Noturnos saíam como
+    # "Inovare" (nome antigo), Plantão como "DicasFinanceirasDaIA", Fio como "@CodigoInteligente-n7j". As regras do
+    # TikTok (postados_em) usam o nome ATUAL: 107 Shorts do Tech/Mistérios nunca chegavam à seebotsia/revolutionemerson3.
+    # Nome atual pelo slug (canal_id = creds do youtube_navegador.json). CATALOGO_NOME_ATUAL=0 desliga.
+    nome_atual = {}
+    if os.environ.get("CATALOGO_NOME_ATUAL", "1") != "0":
+        for _s, _c in (_ler(CONFIG / "youtube_navegador.json", {}).get("canais") or {}).items():
+            if isinstance(_c, dict) and _c.get("nome"):
+                for cred in _c.get("creds") or []:
+                    nome_atual[cred] = _c["nome"]
     for r in politica._ler_ledger():
         if r.get("video_id") and r.get("arquivo"):
             cam = aprov_nome.get(r["arquivo"], set())
             # ledger com caminho (desde 18/10): liga direto ao arquivo, mesmo quando o nome é só "video.mp4"
-            out.append(("youtube", r.get("canal"), r["video_id"], politica._dt(r.get("publish_at")) or politica._dt(r.get("ts")),
+            out.append(("youtube", nome_atual.get(r.get("canal_id")) or r.get("canal"), r["video_id"], politica._dt(r.get("publish_at")) or politica._dt(r.get("ts")),
                         r.get("caminho") or (next(iter(cam)) if len(cam) == 1 else None), r["arquivo"]))
     for _pj, f, d in _fichas():  # ficha postada (parceiro): a postagem está nela
         if d.get("posted_url"):

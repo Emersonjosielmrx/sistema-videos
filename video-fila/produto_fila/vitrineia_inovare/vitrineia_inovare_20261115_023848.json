@@ -1,0 +1,159 @@
+{
+ "conta": "vitrineia_inovare",
+ "produto": "vitrine_ia",
+ "marca": "Vitrine IA",
+ "titulo": "Bot que conhece seus produtos, recomenda e vende",
+ "legenda": "Quando o cliente fica em dúvida, um bom atendimento faz toda a diferença. Com a Vitrine IA, você tem um bot com todo o conhecimento da sua loja que atende, recomenda e vende. 💬\nQuer conhecer melhor? Acesse o link no perfil. ✨\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Cliente indeciso na sua loja?",
+  "pergunta_cliente": "Cliente fica em dúvida e desiste da compra na hora?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia vendas quando o cliente ficava indeciso, mas hoje o bot conhece meus produtos e recomenda.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing at a tidy, well lit counter of a modern small Brazilian retail shop, organized shelves in the background",
+    "real_tema": "Cliente indeciso que desiste de comprar por falta de recomendação no atendimento",
+    "destaques": [
+     "perdia vendas",
+     "conhece meus produtos"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261115_024401_2.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A Vitrine IA tem todo o conhecimento da sua loja. Ela atende, recomenda opções ideais e vende.",
+    "visual": "veo",
+    "prompt_en": "commercial photography of a small Brazilian clothing store, a clerk packing a shopping bag at a tidy counter, warm cinematic light, seen from the side, no close-up on faces, no readable text or logos",
+    "cenario_en": "",
+    "real_tema": "Bot com conhecimento dos produtos da loja recomendando opções para o cliente",
+    "destaques": [
+     "conhecimento da sua loja",
+     "atende, recomenda"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Gostei dessa peça, mas ainda estou na dúvida se combina comigo."
+     },
+     {
+      "de": "empresa",
+      "texto": "Entendo! Como conheço os produtos da loja, posso sugerir outras opções do mesmo estilo."
+     },
+     {
+      "de": "cliente",
+      "texto": "Tem algo mais discreto para usar no trabalho?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Temos sim. Vou te recomendar duas opções da loja que vestem muito bem nessa ocasião."
+     },
+     {
+      "de": "cliente",
+      "texto": "Gostei muito da segunda recomendação, vou levar essa!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora meu atendimento orienta quem está em dúvida, apresenta outros produtos da loja e fecha a venda.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing in a tidy, well lit office of a small Brazilian retail store, clean desk",
+    "real_tema": "Atendimento que orienta o cliente indeciso e realiza a venda",
+    "destaques": [
+     "apresenta outros produtos",
+     "fecha a venda"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261115_024401_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_vitrineia_inovare_20261115_024401_2.png"
+   }
+  ],
+  "legenda": "Quando o cliente fica em dúvida, um bom atendimento faz toda a diferença. Com a Vitrine IA, você tem um bot com todo o conhecimento da sua loja que atende, recomenda e vende. 💬\nQuer conhecer melhor? Acesse o link no perfil. ✨",
+  "titulo": "Bot que conhece seus produtos, recomenda e vende",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "pergunta_frequente_recomendaca",
+  "pauta_tipo": "pergunta_frequente",
+  "tempo_roteiro_s": 55,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "fogo",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\vitrineia_inovare_20261115_023848\\dono_3.mp4",
+ "duracao_s": 31.94,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-15T03:29:59",
+ "variante": "quatro_veo",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  2
+ ],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.15,
+   "fala": "Cliente fica em dúvida e desiste da compra na hora?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.15,
+   "fim": 11.98,
+   "fala": "Eu perdia vendas quando o cliente ficava indeciso, mas hoje o bot conhece meus produtos e recomenda.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.98,
+   "fim": 20.16,
+   "fala": "A Vitrine IA tem todo o conhecimento da sua loja. Ela atende, recomenda opções ideais e vende.",
+   "tipo": "veo"
+  },
+  {
+   "n": 3,
+   "ini": 20.16,
+   "fim": 27.99,
+   "fala": "Agora meu atendimento orienta quem está em dúvida, apresenta outros produtos da loja e fecha a venda.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.99,
+   "fim": 31.94,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.25,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 9.0,
+   "diretor": 5.0
+  },
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

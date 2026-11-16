@@ -592,6 +592,9 @@ def _ensure_chrome_running(port, log=print):
     Devolve "novo" quando FOI ESTA chamada que abriu (quem abriu fecha: fechar_chrome), True se ja estava aberto."""
     import urllib.request, subprocess
     url = f"http://127.0.0.1:{port}/json/version"
+    # 15/11: conta viva do Kaggle só pela ponte do IP fixo (contas.ponte_kaggle fecha Chrome aberto sem ela)
+    from contas import ponte_kaggle
+    _ponte = ponte_kaggle(os.environ.get("FLOW_SESSION", "seebotsia"), port)
     try:
         urllib.request.urlopen(url, timeout=3)
         return True
@@ -621,7 +624,10 @@ def _ensure_chrome_running(port, log=print):
         # 29/10 (D28/D30): Chrome aberto so para o token do reCAPTCHA (flow_gerar no PC1) fica fora da tela, como o
         # chrome_conta.py faz nas maquinas; a dona viu janelas "about:blank" da seebotsia aparecendo no PC1
         chrome_args.append("--window-position=-3000,0")
-    if _FLOW_PROXY_HOST:
+    if _ponte:  # ponte do Kaggle vence o proxy rotativo
+        chrome_args += _ponte
+        log(f"[chrome] conta viva do Kaggle: saída fixa {_ponte[0]}")
+    elif _FLOW_PROXY_HOST:
         chrome_args.append(f"--proxy-server=http://{_FLOW_PROXY_HOST}")
         log(f"[chrome] proxy ativo: {_FLOW_PROXY_HOST}")
     chrome_args.append("about:blank")

@@ -696,6 +696,14 @@ def _bloqueio(n, jobs, ocup, hiper_em, medidas, est):
         if n["nome"] == "cortes_desktop_auto" and not md.get("ocioso"):
             return f"desktop em uso ({md.get('motivo')})"  # automático respeita câmera/OBS; o fixado no kanban não
     elif n["tipo"] == "render":
+        # 15/11 dona ("deixar o PC1 o máximo livre pro VS Code"): com estado\pc1_sem_render.on nenhum render novo cai no
+        # PC1 (os Shorts vão pro PC2/desktop/STI/celulares); só o capítulo URGENTE do hipercool (prio 2) passa.
+        # Apagar o arquivo = volta ao normal.
+        if not (n.get("projeto") == "hipercool" and n.get("prio") == 2):
+            import pc1_reserva  # 15/11 dona: só usa o PC1 se as outras (pc2/desktop/sti) estiverem todas ocupadas
+            pode, mot = pc1_reserva.pode_pesado()
+            if not pode:
+                return mot
         if ocup["render"]:
             return ocup["render"]
         if not medidas["pc1"].get("ocioso"):

@@ -40,5 +40,11 @@
     "onde": "anime_script._ABERTURAS + variantes.py teste abertura (T13); desliga com abertura=fato em cortes_ajustes.json",
     "quem": "CURTOS",
     "data": "2026-11-13"
+  },
+  {
+    "repo": "misterzaidxpy/tubescrape",
+    "onde": "bin/aba_shorts.py + anime_discover.discover_canal; DISCOVER_TUBESCRAPE=0 desliga",
+    "quem": "CURTOS",
+    "data": "2026-11-15"
   }
 ]

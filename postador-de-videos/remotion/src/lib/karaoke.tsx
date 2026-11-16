@@ -57,16 +57,20 @@ export const Karaoke: React.FC<Props> = ({
 }) => {
   const t = useCurrentFrame() / useVideoConfig().fps;
   const bs = blocos(palavras, maxLetras, pausaQuebra);
-  // bloco visível: do início da 1ª palavra (−0,1 s) até o início do próximo bloco (ou 2,0 s depois da última para cobrir o final)
+  // bloco visível: do início da 1ª palavra (−0,1 s, respeitando quebra de cena) até o próximo bloco (ou 2,0 s depois da última para cobrir o final)
   const i = bs.findIndex((b, k) => {
-    const ini = b[0].ini - 0.1;
-    const fim = k + 1 < bs.length ? bs[k + 1][0].ini - 0.1 : b[b.length - 1].fim + 2.0;
+    const isQuebraCena = k > 0 && Boolean(bs[k - 1][bs[k - 1].length - 1].quebraApos || b[0].quebraAntes);
+    const ini = isQuebraCena ? b[0].ini : b[0].ini - 0.1;
+    const proxIsQuebra = k + 1 < bs.length && Boolean(b[b.length - 1].quebraApos || bs[k + 1][0].quebraAntes);
+    const fim = k + 1 < bs.length ? (proxIsQuebra ? bs[k + 1][0].ini : bs[k + 1][0].ini - 0.1) : b[b.length - 1].fim + 2.0;
     return t >= ini && t < fim;
   });
   if (i < 0) return null;
   const blocoAtual = bs[i];
-  const blocoIni = blocoAtual[0].ini - 0.1;
-  const blocoFim = i + 1 < bs.length ? bs[i + 1][0].ini - 0.1 : blocoAtual[blocoAtual.length - 1].fim + 2.0;
+  const isQuebraCenaAtual = i > 0 && Boolean(bs[i - 1][bs[i - 1].length - 1].quebraApos || blocoAtual[0].quebraAntes);
+  const blocoIni = isQuebraCenaAtual ? blocoAtual[0].ini : blocoAtual[0].ini - 0.1;
+  const proxIsQuebraAtual = i + 1 < bs.length && Boolean(blocoAtual[blocoAtual.length - 1].quebraApos || bs[i + 1][0].quebraAntes);
+  const blocoFim = i + 1 < bs.length ? (proxIsQuebraAtual ? bs[i + 1][0].ini : bs[i + 1][0].ini - 0.1) : blocoAtual[blocoAtual.length - 1].fim + 2.0;
   return (
     <div
       style={{

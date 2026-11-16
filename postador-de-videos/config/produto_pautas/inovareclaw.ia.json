@@ -1,3 +1,144 @@
 {
- "pautas": []
+ "pautas": [
+  {
+   "id": "sobrecarga_tarefas",
+   "tipo": "dor",
+   "ideia": "O dono do pequeno negócio passa o dia atolado em tarefas operacionais em vez de focar nas vendas, e o Inovare Claw assume essa execução trabalhando de forma autônoma.",
+   "pergunta_cliente": "Ele consegue assumir as tarefas do meu dia a dia sozinho?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "diferenca_chat",
+   "tipo": "objecao",
+   "ideia": "Empresários acham que toda IA apenas gera textos como um chatbot comum, mas o Inovare Claw é um agente autônomo que executa tarefas de verdade pelo dono.",
+   "pergunta_cliente": "Isso só responde perguntas ou realmente faz o trabalho por mim?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "fluxo_autonomo",
+   "tipo": "como_funciona",
+   "ideia": "Ao receber uma demanda, o Inovare Claw opera sozinho no estilo de agentes como Hermes e OpenClaw, realizando os passos necessários sem exigir supervisão constante.",
+   "pergunta_cliente": "Como o agente sabe o que fazer sem eu precisar mandar o tempo todo?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "rotina_repetitiva",
+   "tipo": "caso_de_uso",
+   "ideia": "Tarefas repetitivas que tomam horas do expediente da empresa são delegadas para o Inovare Claw, que as executa de forma independente.",
+   "pergunta_cliente": "Posso passar as rotinas chatas da minha empresa para ele executar?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "precisa_programar",
+   "tipo": "pergunta_frequente",
+   "ideia": "Dono de negócio teme precisar de conhecimento técnico avançado, mas o Inovare Claw é um agente pronto para trabalhar pelo usuário.",
+   "pergunta_cliente": "Eu preciso entender de programação para usar esse agente?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "fim_do_retrabalho",
+   "tipo": "antes_depois",
+   "ideia": "Antes, o dono precisava parar tudo para fazer tarefas manuais; depois, conta com um agente de inteligência artificial que trabalha sozinho executando essas atividades.",
+   "pergunta_cliente": "Minha rotina realmente muda depois que coloco o agente para rodar?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "falta_de_tempo",
+   "tipo": "dor",
+   "ideia": "A sensação de nunca ter tempo para expandir a empresa diminui quando o Inovare Claw assume a execução das demandas diárias.",
+   "pergunta_cliente": "Vou conseguir me livrar da parte operacional com essa ferramenta?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "nivel_execucao",
+   "tipo": "objecao",
+   "ideia": "O empresário duvida da capacidade prática da tecnologia, mas o Inovare Claw entrega execução autônoma no nível de referências como Hermes Agent e OpenClaw.",
+   "pergunta_cliente": "Ele realmente dá conta de executar tarefas complexas do negócio?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "trabalho_invisivel",
+   "tipo": "como_funciona",
+   "ideia": "O Inovare Claw atua em segundo plano, executando tarefas de ponta a ponta enquanto o dono cuida dos clientes e da gestão.",
+   "pergunta_cliente": "Ele fica trabalhando nos bastidores sem travar minha rotina?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "apoio_operacional",
+   "tipo": "caso_de_uso",
+   "ideia": "Pequenas empresas sem braço operacional utilizam o Inovare Claw como um agente autônomo para dar vazão ao volume de trabalho diário.",
+   "pergunta_cliente": "Consigo usar o agente para substituir tarefas que eu mesmo tinha que fazer?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "autonomia_real",
+   "tipo": "pergunta_frequente",
+   "ideia": "Muitos perguntam se é preciso validar cada clique da IA, descobrindo que o Inovare Claw foi projetado para agir com autonomia real.",
+   "pergunta_cliente": "Eu preciso ficar aprovando cada ação dele ou ele faz direto?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "centralizacao_dono",
+   "tipo": "antes_depois",
+   "ideia": "Antes, tudo dependia exclusivamente das mãos do proprietário; com o Inovare Claw, tarefas reais passam a ser executadas de forma automática pela IA.",
+   "pergunta_cliente": "Ele me ajuda a parar de ser o gargalo da minha própria empresa?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "acumulo_tarefas_noite",
+   "tipo": "dor",
+   "ideia": "O dono leva pendências para casa por não dar conta da operação, enquanto o Inovare Claw pode seguir executando tarefas sozinho.",
+   "pergunta_cliente": "Ele pode continuar executando as demandas mesmo fora do horário de expediente?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "comparacao_ia_falsa",
+   "tipo": "objecao",
+   "ideia": "Muitos acreditam que 'agente' é apenas um nome chique para texto automático, até verem o Inovare Claw executando ações de verdade pelo negócio.",
+   "pergunta_cliente": "O que faz dele um agente autônomo e não apenas mais uma IA comum?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "mecanismo_hermes_claw",
+   "tipo": "como_funciona",
+   "ideia": "Inspirado no padrão técnico do Hermes Agent e OpenClaw, o Inovare Claw recebe o objetivo e resolve as etapas operacionais sem intervenção humana.",
+   "pergunta_cliente": "Como funciona essa tecnologia no estilo do OpenClaw na prática?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "liberacao_estrategica",
+   "tipo": "caso_de_uso",
+   "ideia": "O gestor passa a focar no fechamento de contratos enquanto o Inovare Claw executa as tarefas práticas de rotina nos bastidores.",
+   "pergunta_cliente": "Posso deixar o operacional com ele e focar apenas nas vendas?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "seguranca_execucao",
+   "tipo": "pergunta_frequente",
+   "ideia": "Empresários querem saber se o agente é confiável ao executar tarefas sozinho, vendo a solidez do modelo no estilo Hermes Agent.",
+   "pergunta_cliente": "É seguro deixar o agente executando coisas pela minha empresa sozinho?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "jornada_exausta",
+   "tipo": "antes_depois",
+   "ideia": "Antes, dias exaustivos resolvendo microdemandas; depois, o Inovare Claw trabalhando sozinho como um braço direito digital da empresa.",
+   "pergunta_cliente": "Como fica a minha carga de trabalho depois que ele é implementado?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "sensacao_apagador_incendio",
+   "tipo": "dor",
+   "ideia": "O pequeno empresário vive apenas apagando incêndios operacionais, mas ganha alívio ao delegar a execução de tarefas para o Inovare Claw.",
+   "pergunta_cliente": "Como esse agente me ajuda a parar de só apagar incêndios?",
+   "criada": "2026-11-15T05:25:30"
+  },
+  {
+   "id": "agente_na_pratica",
+   "tipo": "como_funciona",
+   "ideia": "O Inovare Claw traduz comandos em execuções práticas e autônomas, eliminando o esforço braçal do dia a dia do negócio.",
+   "pergunta_cliente": "Quais tarefas práticas do meu negócio ele consegue pegar para fazer?",
+   "criada": "2026-11-15T05:25:30"
+  }
+ ]
 }

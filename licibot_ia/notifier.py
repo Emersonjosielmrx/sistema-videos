@@ -18,7 +18,7 @@ import httpx
 from config import BASE, GAVETA_TIPO, WEBHOOK_URL, avisos
 
 log = logging.getLogger("licibot.aviso")
-EMOJI = {"MEI": "🟢", "CPF": "🔵", "AMIGO_SOLAR": "🟡", "DESCARTADO": "🔴"}
+EMOJI = {"MEI": "🟢", "CPF": "🔵", "DENILDO": "🟡", "DESCARTADO": "🔴"}
 ESTADO_ARQ = BASE / "avisos_estado.json"   # quando cada tipo saiu por último (evita repetir)
 
 
@@ -48,6 +48,8 @@ def passa_filtros(e: dict[str, Any], cfg: dict | None = None) -> bool:
     if e.get("carteira") not in (cfg["carteiras"] or []):
         return False
     if GAVETA_TIPO.get(e.get("gaveta"), "servico") not in (cfg["tipos"] or []):
+        return False
+    if cfg.get("cnaes") and e.get("cnae_sugerido") not in cfg["cnaes"]:
         return False
     if cfg["ufs"] and e.get("uf") not in cfg["ufs"]:
         return False

@@ -144,56 +144,20 @@
  "historico_notas": [
   {
    "video": "video.mp4",
-   "conta": "inovarecom.ia",
-   "formato": "dono_abre_fecha_veo_meio+editor",
-   "nota": 6.5,
+   "conta": "inovarecrm",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 7.0,
    "notas": {
-    "legibilidade": 7.0,
-    "movimento": 6.0,
-    "roteiro_marca": 7.0,
+    "legibilidade": 9.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
     "diretor": 6.0
    }
   },
   {
-   "video": "sintetizerisada_20261111_095525.mp4",
-   "conta": "sintetizerisada",
-   "formato": "dono_mesma_foto",
-   "nota": 5.25,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 4.0,
-    "roteiro_marca": 6.0,
-    "diretor": 4.0
-   }
-  },
-  {
-   "video": "disparoemmassa_ia_20261111_135247.mp4",
-   "conta": "disparoemmassa.ia",
-   "formato": "dono_tres_veo_final",
-   "nota": 6.88,
-   "notas": {
-    "legibilidade": 8.5,
-    "movimento": 6.0,
-    "roteiro_marca": 8.0,
-    "diretor": 5.0
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "disparoemmassa.ia",
-   "formato": "dono_tres_veo_final+editor",
-   "nota": 6.0,
-   "notas": {
-    "legibilidade": 6.0,
-    "movimento": 5.0,
-    "roteiro_marca": 8.0,
-    "diretor": 5.0
-   }
-  },
-  {
-   "video": "followupia_ia_20261111_203720.mp4",
-   "conta": "followupia.ia",
-   "formato": "dono_abre_fecha_veo_meio",
+   "video": "superchatia_ia_20261114_235444.mp4",
+   "conta": "superchatia.ia",
+   "formato": "cinco_veo",
    "nota": 6.25,
    "notas": {
     "legibilidade": 7.0,
@@ -204,20 +168,20 @@
   },
   {
    "video": "video.mp4",
-   "conta": "followupia.ia",
-   "formato": "dono_abre_fecha_veo_meio+editor",
-   "nota": 7.2,
+   "conta": "superchatia.ia",
+   "formato": "cinco_veo+editor",
+   "nota": 7.12,
    "notas": {
-    "legibilidade": 8.0,
-    "movimento": 7.0,
-    "roteiro_marca": 7.0,
-    "diretor": 6.8
+    "legibilidade": 7.0,
+    "movimento": 5.5,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "followupia.ia",
-   "formato": "dono_abre_fecha_veo_meio+editor",
+   "conta": "superchatia.ia",
+   "formato": "cinco_veo+editor",
    "nota": 7.0,
    "notas": {
     "legibilidade": 7.0,
@@ -227,61 +191,97 @@
    }
   },
   {
-   "video": "vpsblindada_ia_20261112_000116.mp4",
-   "conta": "vpsblindada.ia",
-   "formato": "dono_mesma_foto",
-   "nota": 5.62,
+   "video": "video.mp4",
+   "conta": "superchatia.ia",
+   "formato": "cinco_veo+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "vitrineia_inovare_20261115_023848.mp4",
+   "conta": "vitrineia_inovare",
+   "formato": "quatro_veo",
+   "nota": 5.75,
    "notas": {
     "legibilidade": 6.0,
     "movimento": 5.0,
-    "roteiro_marca": 6.5,
+    "roteiro_marca": 7.0,
     "diretor": 5.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "vpsblindada.ia",
-   "formato": "dono_mesma_foto+editor",
-   "nota": 6.5,
+   "conta": "vitrineia_inovare",
+   "formato": "quatro_veo+editor",
+   "nota": 7.5,
    "notas": {
-    "legibilidade": 7.0,
-    "movimento": 6.0,
-    "roteiro_marca": 7.0,
+    "legibilidade": 8.5,
+    "roteiro_marca": 8.0,
     "diretor": 6.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "vpsblindada.ia",
-   "formato": "dono_mesma_foto+editor",
-   "nota": 7.12,
+   "conta": "vitrineia_inovare",
+   "formato": "quatro_veo+editor",
+   "nota": 7.25,
    "notas": {
     "legibilidade": 10.0,
-    "movimento": 6.5,
-    "roteiro_marca": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
     "diretor": 6.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "vpsblindada.ia",
-   "formato": "dono_mesma_foto+editor",
-   "nota": 5.83,
+   "conta": "vitrineia_inovare",
+   "formato": "quatro_veo+editor",
+   "nota": 6.25,
    "notas": {
-    "legibilidade": 7.0,
+    "legibilidade": 6.0,
     "movimento": 5.0,
-    "diretor": 5.5
+    "roteiro_marca": 9.0,
+    "diretor": 5.0
    }
   },
   {
-   "video": "video.mp4",
-   "conta": "vpsblindada.ia",
-   "formato": "dono_mesma_foto+editor",
+   "video": "inovareclaw_ia_20261115_052513.mp4",
+   "conta": "inovareclaw.ia",
+   "formato": "dono_mesma_foto",
    "nota": 5.88,
    "notas": {
     "legibilidade": 6.5,
     "movimento": 5.0,
     "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovareclaw.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 8.0,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261115_140123.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
     "diretor": 6.0
    }
   }
@@ -311,19 +311,19 @@
  },
  "placar_formatos": {
   "dono_uma_cena": [
-   4,
+   8,
    3
   ],
   "dono_abre_fecha": [
-   6,
-   1
+   8,
+   0
   ],
   "dono_mesma_foto": [
-   2,
+   6,
    0
   ],
   "dono_e_cena_veo": [
-   2,
+   3,
    1
   ],
   "dono_tres": [
@@ -331,8 +331,8 @@
    1
   ],
   "dono_abre_fecha_veo_meio": [
-   2,
-   0
+   3,
+   1
   ],
   "dono_tres_veo_final": [
    3,
@@ -347,8 +347,8 @@
    0
   ],
   "sem_dono": [
-   18,
-   6
+   20,
+   7
   ]
  },
  "vigiando": []

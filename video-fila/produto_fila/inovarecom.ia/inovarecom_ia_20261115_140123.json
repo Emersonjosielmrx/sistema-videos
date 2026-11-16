@@ -1,0 +1,143 @@
+{
+ "conta": "inovarecom.ia",
+ "produto": "hermes_call",
+ "marca": "Hermes Call",
+ "titulo": "Como automatizar ligações de WhatsApp para seu time",
+ "legenda": "Automatize as chamadas de WhatsApp do seu negócio e libere sua equipe comercial para focar em fechar vendas. Acesse o link no perfil para saber mais.\n\n👉 Chame no direct • link no perfil\n\n#whatsappbusiness #vendas #atendimentoaocliente #inteligenciaartificial #automacao",
+ "roteiro": {
+  "gancho_tela": "Vendedores esgotados de ligar?",
+  "pergunta_cliente": "Seu time de vendas vive cansado de discar para listas enormes?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Minha equipe passava o dia discando para listas gigantescas e acabava o expediente totalmente exausta.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "modern and tidy Brazilian corporate sales office, glass partition, well lit, professional ambiance",
+    "real_tema": "",
+    "destaques": [
+     "passava o dia discando",
+     "totalmente exausta"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_inovarecom.ia_20261115_140455_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Coloquei o bot de ligação por WhatsApp em massa do Hermes Call para falar com voz real clonada.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Olá! Vi que você pediu detalhes sobre nossa solução de vendas pelo WhatsApp."
+     },
+     {
+      "de": "cliente",
+      "texto": "Sim, queria entender como funcionam as chamadas automáticas."
+     },
+     {
+      "de": "empresa",
+      "texto": "Perfeito! Nossa inteligência artificial faz ligações vinte e quatro horas com voz real."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Desafoguei meus vendedores e agora mantemos atendimento com inteligência artificial vinte e quatro horas.",
+    "visual": "veo",
+    "prompt_en": "side view of Brazilian sales professionals smiling and talking calmly in a bright modern office, warm lighting, cinematic",
+    "cenario_en": "",
+    "real_tema": "",
+    "destaques": [
+     "desafoguei meus vendedores",
+     "vinte e quatro horas"
+    ],
+    "conversa": []
+   }
+  ],
+  "legenda": "Automatize as chamadas de WhatsApp do seu negócio e libere sua equipe comercial para focar em fechar vendas. Acesse o link no perfil para saber mais.",
+  "titulo": "Como automatizar ligações de WhatsApp para seu time",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "rotina_equipe_sobrecarregada",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 197,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\inovarecom.ia_20261115_140123\\veo_3.mp4",
+ "duracao_s": 30.37,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-15T14:29:15",
+ "variante": "dono_e_cena_veo",
+ "cenas_dono_feitas": [
+  1
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [
+  3
+ ],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.96,
+   "fala": "Seu time de vendas vive cansado de discar para listas enormes?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.96,
+   "fim": 12.8,
+   "fala": "Minha equipe passava o dia discando para listas gigantescas e acabava o expediente totalmente exausta.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.8,
+   "fim": 19.39,
+   "fala": "Coloquei o bot de ligação por WhatsApp em massa do Hermes Call para falar com voz real clonada.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 19.39,
+   "fim": 26.47,
+   "fala": "Desafoguei meus vendedores e agora mantemos atendimento com inteligência artificial vinte e quatro horas.",
+   "tipo": "veo"
+  },
+  {
+   "n": 4,
+   "ini": 26.47,
+   "fim": 30.37,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.62,
+  "notas": {
+   "legibilidade": 10.0,
+   "movimento": 4.0,
+   "roteiro_marca": 10.0,
+   "diretor": 6.5
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

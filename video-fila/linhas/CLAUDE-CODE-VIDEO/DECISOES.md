@@ -1,5 +1,6 @@
 # CLAUDE-CODE-VIDEO — DECISÕES (mais nova em cima)
 
+- 15/11 19:39 [melhorador] ficou: trilha_intensidade_dinamica — 1ª versão 6.15 → 6.62
 - 14/11 01:30 [melhorador] APLICADO: trilha_intensidade_dinamica (remotion/EDITOR.md) — hipótese: Substitui o ducking fixo por intensidade musical dinâmica com pico no gancho e no clímax, aumentando a retenção sem cobrir a voz.; base 1ª versão 6.15; julga em 2 vídeo(s) de anuncio; desfazer: copiar 20261114_013054_EDITOR.md de volta. Modelos: {'analista': 'agy/gemini-3.8-flash-high', 'propositor': 'agy/gemini-3.8-flash-high', 'critico': 'agy/gemini-3.8-flash-high'}
 - 13/11 16:53 [melhorador] DESFEITO — NÃO REPROPOR: proibir modais opacos reguas e tabelas — 1ª versão caiu 6.11 → 5.69
 - 13/11 01:44 [melhorador] APLICADO: proibir modais opacos reguas e tabelas (remotion/EDITOR.md) — hipótese: Ao vedar expressamente cards modais 100% opacos, réguas de etapas e tabelas densas, exigindo fundo translúcido (opacidade <= 80%) e mantendo >= 65% do produto visível com elementos revelados um a um na fala, elimina-se o aspecto estático de apresentação corporativa e valoriza-se a filmagem real.; base 1ª versão 6.11; julga em 2 vídeo(s) de anuncio; desfazer: copiar 20261113_014409_EDITOR.md de volta. Modelos: {'analista': 'agy/gemini-3.8-flash-high', 'propositor': 'agy/gemini-3.8-flash-high', 'critico': 'agy/gemini-3.8-flash-high'}

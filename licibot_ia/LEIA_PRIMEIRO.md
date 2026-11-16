@@ -1,7 +1,7 @@
 # LiciBot-IA
 
 Robô que lê **todas** as licitações com proposta aberta no PNCP, filtra as que servem para as carteiras
-MEI / CPF / AMIGO_SOLAR, baixa itens e documentos, pede a análise a **modelos grátis em cadeia** e avisa
+MEI / CPF / DENILDO, baixa itens e documentos, pede a análise a **modelos grátis em cadeia** e avisa
 as melhores. Nenhum modelo pago é usado (decisão da dona, 12/11/2026).
 
 ## Onde roda
@@ -37,6 +37,36 @@ Funcionamento:
   - volta quando o órgão paga (federal ~15 dias, estadual ~35, municipal ~45 depois da entrega).
 - **Serviço:** limitado pelas horas/mês da dona.
 - **Resultado:** mostra pessimista / esperado / se ganhar todas. É estimativa para decidir, não promessa.
+
+## Carteira DENILDO (15/11/2026)
+O "amigo solar" é o Denildo: a carteira `AMIGO_SOLAR` passou a se chamar **DENILDO** (o `init_db` renomeia no banco).
+- **CNAEs do CNPJ dele:** `config.CNAES_DENILDO`.
+  - Principal: 4321-5/00, energia solar.
+  - Secundários: 3329-5/99, 4742-3/00, 4755-5/02, 4755-5/03, 4763-6/01, 4781-4/00, 4782-2/01, 4789-0/01.
+- **Gaveta nova `comercio_denildo`:** material elétrico, armarinho, cama/mesa/banho, brinquedos, vestuário/uniformes, calçados, suvenires/brindes/troféus, instalação de equipamentos.
+  - Traz ~1.000 licitações a mais por leitura completa.
+  - `uniformes`/`fardamento` saíram dos negativos.
+- **Regras:**
+  - Informática/áudio/vídeo ficam no MEI.
+  - Produto só do Denildo vai para DENILDO.
+  - Acima do teto do MEI, se for gaveta solar ou comércio do Denildo, vai para DENILDO.
+  - Sem CNAE da IA: `cnae_denildo_por_texto`.
+
+## Assistente do painel (`agente.py`, botão 💬)
+- **Modelos:** só os grátis da cadeia.
+- **Ferramentas:**
+  - `buscar_licitacoes` (filtros combináveis);
+  - `ver_licitacao`;
+  - `resumo_numeros`;
+  - `simular`;
+  - `explicar_cnae`;
+  - `ler_pagina` (só domínios oficiais).
+- **Sem busca livre na web:**
+  - DuckDuckGo devolve desafio anti-robô;
+  - Bing ignora o português;
+  - a busca do PNCP não responde da VPS;
+  - o IBGE bloqueia robô (Cloudflare): o CNAE vem da lista do sistema, com link para a pessoa abrir.
+- Pergunta geral sem fonte: responde do conhecimento e avisa; nunca inventa link.
 
 ## Painel de controle
 - **https://licitacoes.157-173-207-22.sslip.io/?k=CHAVE** (chave em `/opt/licibot_ia/painel.chave`).
@@ -106,8 +136,17 @@ edital; falha do gateway/cota não conta tentativa).
 - **CPF** (IN SEGES/ME 116/2021): o lance de comparação já inclui 20%; se vencer, o órgão tira os 20% e recolhe.
   Depois INSS 11% (até o teto) e IRRF 2026 com a isenção/redutor da Lei 15.270/2025.
   Edital exclusivo ME/EPP descarta o CPF.
-- **AMIGO_SOLAR**: `COMISSAO_AMIGO_SOLAR` sobre o lance esperado.
+- **DENILDO** (o antigo AMIGO_SOLAR): `COMISSAO_AMIGO_SOLAR` (nome da chave mantido) sobre o lance esperado; vale para obra e venda de produto.
 - `INSS_TETO` no `.env` é de 2025: **confirmar o de 2026**.
+
+## Filtros do painel (15/11/2026)
+- **Como funcionam:** os filtros se SOMAM (estado E valor E sobra E investimento E nota E prazo E carteira E tipo E esfera E modalidade E CNAE). Ficam guardados no navegador (`lb_filtros`).
+- **Atalhos:** perto de mim, lucro alto, fecha logo, pouco investimento, CNAEs do Denildo, CNAEs do MEI, só produto, bom pagador, vou participar.
+- **Explicação:** cada coluna, card e campo tem dica ⓘ. A aba "❓ Como funciona" tem o passo a passo e o glossário.
+- **Velocidade:**
+  - a lista manda só os campos da tabela (de 1,2 MB para 565 KB);
+  - o nginx comprime com gzip (122 KB baixados).
+  - Config do nginx no Swarm = `licibot_nginx_v2`: para mudar, criar a v3, porque config do Swarm não se edita.
 
 ## Pendências
 - Escolher o bot do Telegram (nenhum dos atuais é de licitação) e pôr token/chat no `.env` da VPS.

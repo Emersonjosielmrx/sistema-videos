@@ -30,6 +30,7 @@ LOG = BIN.parent / "logs" / "capar_shorts.log"
 FFMPEG = r"D:\hipercool-materiais\bin\ffmpeg.exe" if Path(r"D:\hipercool-materiais\bin\ffmpeg.exe").exists() else "ffmpeg"
 FFPROBE = FFMPEG.replace("ffmpeg.exe", "ffprobe.exe") if FFMPEG.endswith(".exe") else "ffprobe"
 SEM = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+QUADRO_REAL = ("dorama", "filme_sem_voz", "fatos")  # capa com quadros do próprio vídeo (D:/fabrica-poses)
 
 
 def log(m):
@@ -54,7 +55,9 @@ def candidatos():
             j = json.loads(p.read_text("utf-8"))
         except (OSError, ValueError):
             continue
-        if (j.get("midia") not in ("anime", "manhwa") or j.get("thumb") or j.get("capa_no_inicio")
+        # 15/11 dona ("podemos testar em produção"): dorama/filme/fatos ganham capa de QUADRO REAL (sem IA de rosto)
+        midias = ("anime", "manhwa") + (QUADRO_REAL if os.environ.get("CAPA_QUADRO_REAL", "1") != "0" else ())
+        if (j.get("midia") not in midias or j.get("thumb") or j.get("capa_no_inicio")
                 or j.get("posted_url") or j.get("timeout_em") or not j.get("pronto") or j.get("tipo") != "short"):
             continue
         if (d / "_NO_DRIVE.txt").exists():  # 14/11: vídeo no Drive (estoque do mês) — capa só quando voltar
@@ -80,10 +83,23 @@ def capa_no_inicio(video, capa, seg):
     filtro = (f"[1:v]scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},setsar=1,fps={fps},"
               f"format=yuv420p,trim=duration={seg}[c];[0:v]setsar=1,fps={fps},format=yuv420p[v];"
               f"[c][v]concat=n=2:v=1:a=0[vo];[0:a]adelay={int(seg * 1000)}:all=1[ao]")
-    r = subprocess.run([FFMPEG, "-y", "-v", "error", "-i", str(video), "-loop", "1", "-t", str(seg), "-i", str(capa),
-                        "-filter_complex", filtro, "-map", "[vo]", "-map", "[ao]", "-c:v", "libx264", "-preset",
-                        "veryfast", "-crf", "20", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(tmp)],
-                       capture_output=True, text=True, timeout=900, creationflags=SEM)
+    cmd = [FFMPEG, "-y", "-v", "error", "-i", str(video), "-loop", "1", "-t", str(seg), "-i", str(capa),
+           "-filter_complex", filtro, "-map", "[vo]", "-map", "[ao]", "-c:v", "libx264", "-preset",
+           "veryfast", "-crf", "20", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(tmp)]
+    # 15/11 dona ("PC1 livre pro VS Code; passar a conversão pros outros"): o re-encode vai pra um celular livre
+    # (celulares.rodar_ffmpeg); celular fora/ocupado = roda aqui como antes. CAPAR_NO_CELULAR=0 desliga.
+    feito = False
+    if os.environ.get("CAPAR_NO_CELULAR", "1") != "0":
+        try:
+            sys.path.insert(0, r"D:\video-fila")
+            import celulares
+            feito = bool(celulares.rodar_ffmpeg(cmd, timeout=900, rotulo=f"capa {video.parent.name[:30]}"))
+        except Exception:  # noqa: BLE001
+            feito = False
+    if feito:
+        r = subprocess.CompletedProcess(cmd, 0, "", "")
+    else:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=900, creationflags=SEM)
     if r.returncode != 0 or not tmp.exists() or tmp.stat().st_size < 100_000:
         tmp.unlink(missing_ok=True)
         raise RuntimeError(f"ffmpeg falhou: {r.stderr[-200:]}")
@@ -97,7 +113,45 @@ def capa_no_inicio(video, capa, seg):
     shutil.move(str(tmp), str(video))
 
 
+def capar_quadro_real(d, j):
+    """15/11 (teste em produção liberado pela dona): capa = quadros reais do próprio Short em 1 de 4 molduras (tweet,
+    split, reddit, zap), sorteada. Nada de rosto por IA (atores reais). Original em video_sem_capa.mp4."""
+    import random
+    if r"D:/fabrica-poses" not in sys.path:
+        sys.path.append(r"D:/fabrica-poses")
+    import capa_quadro_real as cq
+    from PIL import Image
+    video = d / "video_sem_capa.mp4" if (d / "video_sem_capa.mp4").exists() else d / "video.mp4"
+    qs = cq.escolher_quadros(video, d / "_capa_quadros", n=2)
+    if not qs:
+        log(f"{d.name}: sem quadro bom pra capa")
+        return False
+    q1, q2 = (cq._cima(Image.open(q).convert("RGB")) for q in (qs[0], qs[-1]))
+    txt = cq.gancho(j.get("titulo", ""), d)
+    estilo = random.choice(["tweet", "split", "reddit", "zap"])
+    capa = d / "capa_quadro.jpg"
+    if estilo == "tweet":
+        cq.tweet(q1, txt, capa, cq.TIPO.get(j.get("midia"), ("fofoca", "@fofoca")))
+    elif estilo == "split":
+        cq.split(q1, q2, txt, capa)
+    else:
+        getattr(cq, estilo)(q1, txt, capa)
+    seg = float(os.environ.get("CAPA_1O_QUADRO_S", "0.5"))
+    capa_no_inicio(d / "video.mp4", capa, seg)
+    j = json.loads((d / "postar.json").read_text("utf-8"))
+    if j.get("posted_url") or j.get("timeout_em"):
+        shutil.move(str(d / "video_sem_capa.mp4"), str(d / "video.mp4"))
+        return False
+    j.update(thumb=capa.name, capa_pose=f"quadro_{estilo}", capa_no_inicio=seg,
+             capa_shorts_em=datetime.now().isoformat("T", "minutes"))
+    (d / "postar.json").write_text(json.dumps(j, ensure_ascii=False, indent=2), "utf-8")
+    log(f"{d.name}: capa de QUADRO REAL ({estilo}, '{txt}')")
+    return True
+
+
 def capar(d, j):
+    if j.get("midia") in QUADRO_REAL:
+        return capar_quadro_real(d, j)
     import capa_ia_anime
     capa = d / "capa_ia.jpg"
     texto = ""
@@ -108,8 +162,17 @@ def capar(d, j):
     if not texto:  # sem thumb_texto: 3 primeiras palavras em MAIÚSCULA do título viram a frase da capa
         mai = [w for w in (j.get("titulo") or "").split() if w.isupper() and len(w) > 1]
         texto = " ".join(mai[:3]) + ("?" if mai else "")
-    out = capa_ia_anime.gerar_capa(j.get("obra") or "sem-obra", j.get("cap") or 1, str(capa), texto=texto,
-                                   cena=j.get("titulo", ""), protagonista="", formato="9:16")
+    out = None
+    # 15/11 dona (aprovou os de Spy x Family): anime com casal ADULTO conhecido -> 1º a capa "print do próprio
+    # episódio", feita com quadros reais deste Short (capa_print_anime). Não saiu = capa antiga. CAPA_PRINT_ANIME=0 desliga.
+    try:
+        import capa_print_anime
+        out = capa_print_anime.gerar(d, j, str(capa))
+    except Exception as e:  # noqa: BLE001
+        log(f"{d.name}: capa print do anime falhou ({type(e).__name__}: {str(e)[:120]}) — capa antiga")
+    if not out:
+        out = capa_ia_anime.gerar_capa(j.get("obra") or "sem-obra", j.get("cap") or 1, str(capa), texto=texto,
+                                       cena=j.get("titulo", ""), protagonista="", formato="9:16")
     if not out:
         log(f"{d.name}: capa IA não saiu (todas as poses reprovadas) — segue com o quadro do vídeo")
         return False
@@ -140,7 +203,11 @@ def main():
     trava.write_text(str(os.getpid()))
     try:
         feitos = 0
-        for d, j in candidatos()[:int(os.environ.get("CAPAR_POR_RODADA", "4"))]:
+        cand = candidatos()
+        # 15/11: teste do quadro real limitado a CAPA_QUADRO_REAL_POR_RODADA (2) pra não tomar a vez dos de anime
+        qr = [c for c in cand if c[1].get("midia") in QUADRO_REAL][:int(os.environ.get("CAPA_QUADRO_REAL_POR_RODADA", "2"))]
+        ia = [c for c in cand if c[1].get("midia") not in QUADRO_REAL][:int(os.environ.get("CAPAR_POR_RODADA", "4"))]
+        for d, j in ia + qr:
             try:
                 feitos += capar(d, j)
             except Exception as e:  # noqa: BLE001

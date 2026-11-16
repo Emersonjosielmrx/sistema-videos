@@ -172,3 +172,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 - [INÉDITO] github.com/iamtie34/see-through-portable — ★2, push 2026-06-06, Apache-2.0 — One-click portable launcher for See-through anime layer decomposition | 上傳一張動漫角色插圖，自動分解為完整修補的語義圖層並依深度排序，匯出為多圖層 PSD 檔案。
 - (movido da caixa LONGOS 08/11)
 
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 20:37 — Recaps e resenhas com clipes (`area_regras_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_regras_recap__sonnet_2031.md`
+- (todos os itens desta pesquisa foram reprovados)

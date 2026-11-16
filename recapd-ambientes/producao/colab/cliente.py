@@ -1047,6 +1047,11 @@ def alimentar(canal, folga=6):  # 07/11: com 10 contas de longo, folga 2 deixava
         except Exception:  # noqa: BLE001 — sem status da VPS, fica a contagem pelos vivo*.json
             pass
         em_fila = {(_pedido_json(pid) or {}).get("vid") for pid in ped}
+        # 15/11: Drive deu 401 passageiro, o pedido.json voltou vazio e o 5DoGv3EXHgc (vilão parte 1) foi pra fila 2x
+        # (05:33 e 06:28). O pid já traz o vid no fim (AAAAMMDD_HHMMSS_<vid>): vale mesmo sem ler o json.
+        # FILA_VID_PELO_NOME=0 desliga.
+        if os.environ.get("FILA_VID_PELO_NOME", "1") != "0":
+            em_fila |= {pid.split("_", 2)[-1] for pid in ped if pid.count("_") >= 2}
         # 26/10: o pedido passa pela entrada da VPS (até 5 min) antes de aparecer na fila; sem isto o mesmo vídeo era
         # reenviado a cada volta (uNNUWNkro0I foi 3x) e virava 3 GPUs no mesmo vídeo. Enviado há < 6 h = já está indo.
         agora_ts = time.time()

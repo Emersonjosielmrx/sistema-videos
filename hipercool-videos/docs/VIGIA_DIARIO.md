@@ -358,3 +358,30 @@ evisão: REPROVADO — 10 quadro(s) com nudez), o que demonstra o funcionamento 
 - O que fiz (Modo Só Aviso): Nenhum arquivo alterado. Apenas verificação do log e registro no diário.
 - CONSERTO PROPOSTO: Nenhum. Os vídeos `Jz4MeePEwBY` e `CvmJXTdsi5Y` estão em canais/contas marcados como travados/removidos (conforme regras e listas de `contas_travadas.json`), e o timeout no YouTube Studio (`DTY8QccBZlo`) é transiente/pontual, sendo recuperado automaticamente nas próximas rodadas.
 - Estado: NADA A FAZER
+
+## 20261115_1218 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra execução contínua e normal dos ciclos a cada 20 minutos (último registro às 12:07 "janela: D: com 7.2 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). O log `vigia.log` confirma o funcionamento regular da checagem.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
+- CONSERTO PROPOSTO: Nenhum. A fila automática está ativa, executando os ciclos corretamente e gerenciando o espaço em disco local na janela configurada.
+- Estado: NADA A FAZER
+
+## 20261115_1538 — Verificação de rotina: aviso transitório e timeout em métricas do YouTube Studio
+- Motivo: Alerta em `fila_postagem.log` indicando falha ao ler métricas do vídeo `-PbFYhXhiXw` (erro de argumento de linha de comando no postador/cli de métricas) e timeouts pontuais de carregamento/locator no YouTube Studio (`5CDITuqptQo`, `dBHqBxk44BA`), além de vídeo marcado como morto/removido (`G4HNY5SB0TE`).
+- O que achei (com trecho de log):
+  - [15:31:44]   métricas -PbFYhXhiXw: não leu ({'erro': '[--visibilidade {private,unlisted,public}]\n                                [--colaborar @HANDLE] [--aceitar-collab LINK]\n                           )
+  - [15:36:15]   métricas 5CDITuqptQo: não leu ({'metricas': 'aviso: TimeoutError: Page.goto: Timeout 90000ms exceeded...'})
+  - [15:40:00]   métricas dBHqBxk44BA: não leu ({'metricas': 'aviso: TimeoutError: Locator.inner_text: Timeout 30000ms exceeded...'})
+  - [15:40:02]   métricas G4HNY5SB0TE: não leu ({'erro': 'morto: TRAVADO pelo YouTube (removido desde 2026-11-05...)')
+- CONSERTO PROPOSTO: Nenhum (Modo Só Aviso). Falhas transientes de rede/carregamento do YouTube Studio e vídeos removidos/travados são tratados automaticamente pelo fluxo de métricas e pela lista de contas/vídeos mortos.
+- Estado: NADA A FAZER
+
+## 20261115_1637 — Verificação de rotina: avisos de métricas (vídeos removidos e timeouts pontuais)
+- Motivo: Alerta em fila_postagem.log indicando que métricas de vídeos marcados como mortos/travados pelo YouTube (ex: G4HNY5SB0TE, pk5BXIC8394) não foram lidas, além de timeouts pontuais no YouTube Studio durante coleta de analytics.
+- O que achei (com trecho de log):
+  - [15:40:02] métricas G4HNY5SB0TE: não leu ({'erro': 'morto: TRAVADO pelo YouTube (removido desde 2026-11-05 (a dona libera apagando a linha em contas_travadas.json))'})
+  - [16:03:57] métricas pk5BXIC8394: não leu ({'erro': 'sem resposta em 900s'})
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Verificação completa de logs e estado dos processos de render/fila.
+- CONSERTO PROPOSTO: Nenhum. O comportamento de pular vídeos marcados como mortos/travados no YouTube é esperado e automático pela rotina de métricas, e timeouts no YouTube Studio são transitórios da interface web.
+- Como desfazer: Não aplicável (nenhuma alteração realizada).
+- Estado: NADA A FAZER

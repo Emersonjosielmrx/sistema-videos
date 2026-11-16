@@ -112,7 +112,7 @@ td.obj .o{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;o
 td.obj .org{color:var(--txt3);font-size:12px;margin-top:2px}
 .tag{display:inline-block;padding:2px 8px;border-radius:7px;font-size:11.5px;font-weight:700;white-space:nowrap}
 .t-MEI{background:rgba(16,185,129,.16);color:var(--verde2)} .t-CPF{background:rgba(56,189,248,.16);color:var(--azul)}
-.t-AMIGO_SOLAR{background:rgba(251,191,36,.16);color:var(--amarelo)} .t-DESCARTADO{background:rgba(248,113,113,.14);color:var(--vermelho)}
+.t-DENILDO{background:rgba(251,191,36,.16);color:var(--amarelo)} .t-DESCARTADO{background:rgba(248,113,113,.14);color:var(--vermelho)}
 .t-x{background:rgba(148,163,184,.15);color:var(--txt2)}
 .nota{display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;font-weight:800;font-size:13px;
   background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(100,116,139,.22) 0);position:relative}
@@ -170,6 +170,61 @@ textarea{width:100%;min-height:70px;padding:9px;border-radius:10px;border:1px so
 .grafico{width:100%;height:240px;display:block}
 .nota-sim{font-size:12px;color:var(--txt3);line-height:1.55;margin-top:10px}
 @media (max-width:900px){.sim-grade{grid-template-columns:1fr}.cen{grid-template-columns:1fr}}
+/* filtros */
+.filtros{margin-bottom:12px}
+.f-topo{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.f-topo .busca{flex:1;min-width:220px}
+.f-atalhos,.f-ativos{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:9px}
+.f-rot{font-size:12px;color:var(--txt3)}
+.pilula-f{padding:4px 10px;border-radius:99px;font-size:12px;background:rgba(16,185,129,.14);color:var(--verde2);border:1px solid var(--borda2);cursor:pointer}
+.pilula-f b{margin-left:4px;opacity:.7}.pilula-f:hover{background:rgba(248,113,113,.15);color:var(--vermelho);border-color:rgba(248,113,113,.4)}
+.f-mais{margin-top:12px;padding-top:10px;border-top:1px dashed var(--borda)}
+.f-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 18px;margin-bottom:8px}
+.f-campo label{display:block;font-size:12px;color:var(--txt2);margin-bottom:4px}
+.f-campo input{width:100%;padding:7px 9px;border-radius:9px;border:1px solid var(--borda);background:var(--bg2)}
+.f-campo .faixa input{width:50%}
+.f-linha{padding:8px 0;border-top:1px dashed var(--borda)}
+.f-linha label{display:block;font-size:12px;color:var(--txt2);margin-bottom:6px}
+.f-linha label a{margin-left:8px;font-size:11.5px}
+.marcas.esq{justify-content:flex-start}
+/* dicas */
+.ii{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;font-size:10px;font-style:normal;
+  background:rgba(148,163,184,.2);color:var(--txt2);cursor:help;vertical-align:middle;font-weight:700}
+.balao{position:fixed;z-index:60;max-width:320px;padding:10px 12px;border-radius:11px;background:#0b1220;color:#e5e7eb;
+  border:1px solid var(--borda2);box-shadow:0 12px 30px rgba(0,0,0,.5);font-size:12.5px;line-height:1.5;pointer-events:none;
+  opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s}
+.balao.on{opacity:1;transform:none}
+:root[data-tema="claro"] .balao{background:#fff;color:#0f172a}
+/* ajuda */
+.ajuda h2{margin:6px 0 10px;font-size:18px}.ajuda h3{margin:18px 0 8px;font-size:14px;color:var(--verde2)}
+.ajuda p,.ajuda li{line-height:1.6;color:var(--txt)}.ajuda .passos{counter-reset:p;list-style:none;padding:0}
+.ajuda .passos li{counter-increment:p;padding:10px 12px 10px 46px;position:relative;margin:8px 0;border-radius:12px;background:var(--vidro);border:1px solid var(--borda)}
+.ajuda .passos li::before{content:counter(p);position:absolute;left:12px;top:10px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--verde);color:#fff;font-weight:800;font-size:13px}
+.glossario{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.glossario div{padding:10px 12px;border-radius:12px;background:var(--vidro);border:1px solid var(--borda)}
+.glossario b{color:var(--verde2)}
+/* chat do agente */
+.chat-btn{position:fixed;right:18px;bottom:18px;z-index:50;width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;font-size:26px;
+  background:linear-gradient(135deg,var(--verde),var(--verde3));color:#fff;box-shadow:0 10px 30px rgba(16,185,129,.5);animation:pulsa 2.4s infinite}
+.chat{position:fixed;right:18px;bottom:88px;z-index:50;width:min(420px,calc(100vw - 24px));height:min(600px,calc(100vh - 120px));
+  display:none;flex-direction:column;border-radius:18px;background:var(--bg2);border:1px solid var(--borda2);box-shadow:0 20px 60px rgba(0,0,0,.55);overflow:hidden}
+.chat.on{display:flex}
+.chat-top{padding:12px 14px;border-bottom:1px solid var(--borda);display:flex;align-items:center;gap:8px}
+.chat-top b{flex:1}
+.chat-msgs{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:9px 12px;border-radius:13px;line-height:1.5;font-size:13.5px;white-space:pre-wrap;word-wrap:break-word}
+.msg.eu{align-self:flex-end;background:rgba(16,185,129,.18);border:1px solid var(--borda2)}
+.msg.ia{align-self:flex-start;background:var(--vidro);border:1px solid var(--borda);white-space:normal}
+.msg.ia p{margin:0 0 6px}.msg.ia ul{margin:4px 0 6px;padding-left:18px}.msg.ia a{word-break:break-all}
+.msg .meta{font-size:11px;color:var(--txt3);margin-top:4px}
+.chat-sug{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
+.chat-sug span{font-size:12px;padding:5px 9px;border-radius:99px;border:1px solid var(--borda);cursor:pointer;color:var(--txt2)}
+.chat-sug span:hover{border-color:var(--borda2);color:var(--verde2)}
+.chat-in{display:flex;gap:8px;padding:10px;border-top:1px solid var(--borda)}
+.chat-in textarea{flex:1;resize:none;height:42px;padding:10px;border-radius:11px;border:1px solid var(--borda);background:var(--bg)}
+.digitando{display:inline-flex;gap:4px}.digitando i{width:7px;height:7px;border-radius:50%;background:var(--verde2);animation:pisca 1s infinite}
+.digitando i:nth-child(2){animation-delay:.2s}.digitando i:nth-child(3){animation-delay:.4s}
+@keyframes pisca{0%,100%{opacity:.2}50%{opacity:1}}
 @keyframes entra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes pulsa{0%{box-shadow:0 0 0 0 rgba(16,185,129,.6)}70%{box-shadow:0 0 0 9px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
 @media (max-width:700px){.wrap{padding:12px 10px 50px}.hero{padding:14px}.hero h1{font-size:17px}.logo{width:30px;height:30px;font-size:15px}.cards{grid-template-columns:1fr 1fr;gap:8px}.card{padding:11px 12px}.card .v{font-size:19px}.card .r{font-size:10.5px}.controle{grid-template-columns:1fr}.campo{width:100px}td.obj{min-width:220px}.det .top{padding:12px}.det .corpo{padding:10px 12px 40px}}
@@ -219,7 +274,7 @@ textarea{width:100%;min-height:70px;padding:9px;border-radius:10px;border:1px so
     <div class="caixa">
       <h3>Finanças</h3>
       <div class="linha"><label>MEI já faturado no ano (R$)</label><input class="campo aj" data-k="MEI_FATURADO_ANO" type="number" step="100"></div>
-      <div class="linha"><label>Comissão AMIGO_SOLAR (%)</label><input class="campo aj" data-k="COMISSAO_AMIGO_SOLAR" data-pct="1" type="number" step="0.5" min="0" max="100"></div>
+      <div class="linha"><label>Comissão nas vendas/obras do Denildo (%) <span class="ii" data-dica="Quanto do valor que o Denildo recebe fica para você (parceria). Usado para calcular a sobra das licitações da carteira DENILDO.">ⓘ</span></label><input class="campo aj" data-k="COMISSAO_AMIGO_SOLAR" data-pct="1" type="number" step="0.5" min="0" max="100"></div>
       <div class="linha"><label>Ler documentos até (R$ estimado)</label><input class="campo aj" data-k="DOCS_ATE_VALOR" type="number" step="10000"></div>
       <div class="linha"><label>Buscar o que fecha em até (dias)</label><input class="campo aj" data-k="DIAS_A_FRENTE" type="number" min="5" max="120"></div>
       <div class="linha"><label>Ajustes da IA e finanças</label><button class="btn peq pri" id="bSalvar">💾 Salvar</button></div>
@@ -249,7 +304,7 @@ textarea{width:100%;min-height:70px;padding:9px;border-radius:10px;border:1px so
         <div class="linha"><label>Sobra no bolso pelo menos (R$)</label><input class="campo av" data-a="liquido_min" type="number" step="500" min="0"></div>
         <div class="linha"><label>Investimento (custo) de … até … R$</label><span class="faixa"><input class="campo av" data-a="invest_min" type="number" step="500" min="0" placeholder="0"><input class="campo av" data-a="invest_max" type="number" step="500" min="0" placeholder="sem limite"></span></div>
         <div class="linha"><label>Valor da licitação de … até … R$</label><span class="faixa"><input class="campo av" data-a="valor_min" type="number" step="1000" min="0" placeholder="0"><input class="campo av" data-a="valor_max" type="number" step="1000" min="0" placeholder="sem limite"></span></div>
-        <div class="linha"><label>Carteiras</label><span class="marcas" data-a="carteiras" data-op="MEI,CPF,AMIGO_SOLAR"></span></div>
+        <div class="linha"><label>Carteiras</label><span class="marcas" data-a="carteiras" data-op="MEI,CPF,DENILDO"></span></div>
         <div class="linha"><label>Tipo</label><span class="marcas" data-a="tipos" data-op="produto:📦 Produto,servico:🛠 Serviço,obra:⚡ Obra"></span></div>
         <div class="linha col"><label>Estados <small>(nenhum marcado = Brasil todo)</small>
             <span style="float:right"><a href="#" id="ufVizinhas">GO + vizinhos</a> · <a href="#" id="ufTodas">Brasil todo</a></span></label>
@@ -299,14 +354,15 @@ async function carregarResumo(){
     ['Oportunidades abertas',num(R.oportunidades),`${num(R.boas)} com nota ≥ ${R.ajustes.NOTIFICAR_SCORE_MIN}`,1],
     ['Líquido MEI',brl(cart('MEI').liq),`${num(cart('MEI').n)} licitações`,1],
     ['Líquido CPF',brl(cart('CPF').liq),`${num(cart('CPF').n)} licitações`],
-    ['Comissão solar',brl(cart('AMIGO_SOLAR').liq),`${num(cart('AMIGO_SOLAR').n)} usinas/obras do parceiro`],
+    ['Denildo (sua parte)',brl(cart('DENILDO').liq),`${num(cart('DENILDO').n)} licitações do CNPJ dele`],
     ['Fecham em 48 h',num(R.fecha_48h),'abertas e não ignoradas'],
     ['Vou participar',num(R.participar),'marcadas por você'],
     ['Fila da IA',num(R.fila_ia),`+ ${num(R.fila_docs)} baixando documentos`],
     ['Última leitura',R.ultima_leitura?num(R.ultima_leitura.lidos):'—',R.ultima_leitura?`${num(R.ultima_leitura.filtrados)} passaram no filtro`:''],
     ['Tokens 24 h',num(R.tokens_24h),`${num(R.tokens_total)} no total`],
   ];
-  $('cards').innerHTML=c.map((x,i)=>`<div class="card${x[3]?' destaque':''}" style="animation-delay:${i*40}ms"><div class="r">${x[0]}</div><div class="v">${x[1]}</div><div class="d">${esc(x[2])}</div></div>`).join('');
+  const DC={"Oportunidades abertas": "Licitações ainda recebendo proposta que a IA analisou e achou que dá para disputar.", "Líquido MEI": "Soma do que sobraria no bolso se você ganhasse todas as do MEI (teto, não previsão).", "Líquido CPF": "Soma do que sobraria se ganhasse todas as da carteira CPF.", "Denildo (sua parte)": "Soma da sua parte (comissão) nas licitações que o Denildo pode disputar.", "Fecham em 48 h": "Precisam de decisão rápida: o prazo de proposta acaba em menos de 2 dias.", "Vou participar": "As que você marcou com ⭐.", "Fila da IA": "Licitações que o robô achou e ainda vai analisar (lendo o edital).", "Última leitura": "Quantas licitações o robô leu no PNCP na última varredura e quantas passaram no filtro.", "Tokens 24 h": "Quanto texto a IA processou (só informativo: os modelos usados são grátis)."};
+  $('cards').innerHTML=c.map((x,i)=>`<div class="card${x[3]?' destaque':''}" style="animation-delay:${i*40}ms" data-dica="${esc(DC[x[0]]||'')}"><div class="r">${x[0]} <span class="ii">ⓘ</span></div><div class="v">${x[1]}</div><div class="d">${esc(x[2])}</div></div>`).join('');
   $('swCron').classList.toggle('on',ag.ligado);
   $('bVarrer').disabled=$('bVarrerSemIA').disabled=v.rodando; $('bParar').disabled=!v.rodando;
   $('etapa').textContent=v.rodando?('▶ '+(v.etapa||'iniciando…')):(u?`Última: ${dt(u.inicio)} → ${u.fim?dt(u.fim):'—'} · lidas ${num(u.lidos)}, analisadas ${num(u.analisados)}, avisos ${num(u.notificados)}${u.erro?' · '+u.erro:''}`:'Nenhuma varredura ainda');
@@ -317,39 +373,39 @@ async function carregarResumo(){
 }
 
 /* ── abas e tabelas ─────────────────────── */
-const ABAS=[['oportunidades','Oportunidades'],['decididas','Minhas decisões'],['fila','Fila'],['descartadas','Descartadas'],['encerradas','Encerradas'],['todas','Todas'],['varreduras','Varreduras'],['cnaes','CNAEs'],['simulacao','💹 Simulação'],['modelos','Modelos de IA'],['log','Log']];
+const ABAS=[['oportunidades','Oportunidades'],['decididas','Minhas decisões'],['fila','Fila'],['descartadas','Descartadas'],['encerradas','Encerradas'],['todas','Todas'],['varreduras','Varreduras'],['cnaes','CNAEs'],['simulacao','💹 Simulação'],['ajuda','❓ Como funciona'],['modelos','Modelos de IA'],['log','Log']];
 function contagem(a){if(!R)return'';const s=R.por_status;return{oportunidades:R.oportunidades,fila:(s.novo||0)+(s.enriquecido||0)+(s.sem_analise||0),participar:R.participar}[a]}
 function desenharAbas(){$('abas').innerHTML=ABAS.map(([k,n])=>{const c=contagem(k);return`<span class="aba${k===ABA?' on':''}" data-a="${k}">${n}${c?`<span class="n">${num(c)}</span>`:''}</span>`}).join('');
-  document.querySelectorAll('.aba').forEach(a=>a.onclick=()=>{ABA=a.dataset.a;try{localStorage.setItem('lb_aba',ABA)}catch(e){};FILT={};CHIP='todas';desenharAbas();carregarAba()})}
+  document.querySelectorAll('.aba').forEach(a=>a.onclick=()=>{ABA=a.dataset.a;try{localStorage.setItem('lb_aba',ABA)}catch(e){};desenharAbas();carregarAba()})}
 
 const COLS={
   edital:[
-    {k:'nota_final',n:'Nota',t:'n',f:r=>notaHtml(r.nota_final)},
-    {k:'carteira',n:'Carteira',t:'c',f:r=>`<span class="tag t-${esc(r.carteira||'x')}">${esc(r.carteira||r.status)}</span>`},
-    {k:'objeto_compra',n:'Objeto / órgão',t:'s',cls:'obj',f:r=>`<div class="o">${esc(r.objeto_compra)}</div><div class="org">${esc(r.razao_social)}</div>`},
-    {k:'margem_estimada',n:'Sobra',t:'n',cls:'num',f:r=>brl(r.margem_estimada)},
-    {k:'custo_estimado',n:'Investe',t:'n',cls:'num',f:r=>brl(r.custo_estimado)},
-    {k:'tipo',n:'Tipo',t:'c',f:r=>({produto:'📦 produto',servico:'🛠 serviço',obra:'⚡ obra'})[r.tipo]||''},
-    {k:'valor_estimado',n:'Estimado',t:'n',cls:'num',f:r=>r.valor_estimado?brl(r.valor_estimado):'sigiloso'},
-    {k:'data_encerramento',n:'Fecha',t:'d',f:r=>prazoHtml(r.data_encerramento)},
-    {k:'uf',n:'UF',t:'c'},
+    {k:'nota_final',n:'Nota',d:'Nota do robô de 0 a 100: o quanto vale a pena. Junta a chance de ganhar (lida no edital pela IA), o lucro e se o órgão paga bem. Verde ≥ 60, amarelo ≥ 45.',t:'n',f:r=>notaHtml(r.nota_final)},
+    {k:'carteira',n:'Carteira',d:'Quem disputa: MEI (você), CPF (você como pessoa física) ou DENILDO (o CNPJ do parceiro).',t:'c',f:r=>`<span class="tag t-${esc(r.carteira||'x')}">${esc(r.carteira||r.status)}</span>`},
+    {k:'objeto_compra',n:'Objeto / órgão',d:'O que o governo quer comprar ou contratar, e qual órgão está comprando.',t:'s',cls:'obj',f:r=>`<div class="o">${esc(r.objeto_compra)}</div><div class="org">${esc(r.razao_social)}</div>`},
+    {k:'margem_estimada',n:'Sobra',d:'Quanto fica no seu bolso se ganhar, depois de pagar o produto/ferramentas e os impostos. É estimativa.',t:'n',cls:'num',f:r=>brl(r.margem_estimada)},
+    {k:'custo_estimado',n:'Investe',d:'Quanto você precisa gastar ANTES de receber (comprar o produto, ferramentas). O órgão só paga depois da entrega.',t:'n',cls:'num',f:r=>brl(r.custo_estimado)},
+    {k:'tipo',n:'Tipo',d:'Produto = comprar e entregar. Serviço = trabalho seu. Obra = instalação em campo.',t:'c',f:r=>({produto:'📦 produto',servico:'🛠 serviço',obra:'⚡ obra'})[r.tipo]||''},
+    {k:'valor_estimado',n:'Estimado',d:"Quanto o órgão estima pagar no total (preço de referência). 'Sigiloso' = o órgão escondeu o valor.",t:'n',cls:'num',f:r=>r.valor_estimado?brl(r.valor_estimado):'sigiloso'},
+    {k:'data_encerramento',n:'Fecha',d:'Último dia e hora para mandar a proposta. Vermelho = menos de 24 h.',t:'d',f:r=>prazoHtml(r.data_encerramento)},
+    {k:'uf',n:'UF',d:'Estado do órgão comprador.',t:'c'},
     {k:'municipio',n:'Município',t:'s'},
-    {k:'gaveta',n:'Gaveta',t:'c'},
-    {k:'modalidade_nome',n:'Modalidade',t:'c'},
-    {k:'score_viabilidade',n:'Viab.',t:'n',cls:'num'},
-    {k:'score_pagador',n:'Pagador',t:'n',cls:'num',f:r=>r.score_pagador!=null?Math.round(r.score_pagador*100)+'%':'—'},
-    {k:'exclusivo_me_epp',n:'ME/EPP',t:'c',f:r=>r.exclusivo_me_epp?'✔':''},
-    {k:'cnae_sugerido',n:'CNAE',t:'c'},
-    {k:'decisao',n:'Decisão',t:'c',f:r=>r.decisao==='participar'?'⭐ participar':r.decisao==='ignorar'?'🚫 ignorar':''},
+    {k:'gaveta',n:'Gaveta',d:'Em que grupo o robô encaixou pela palavra-chave: serviços de IA, produtos fáceis, solar ou comércio do Denildo.',t:'c'},
+    {k:'modalidade_nome',n:'Modalidade',d:'Tipo de disputa. Dispensa = compra rápida e menor. Pregão = leilão de preço pela internet. Credenciamento = todos que cumprem as regras podem ser contratados.',t:'c'},
+    {k:'score_viabilidade',n:'Viab.',d:'Viabilidade de 0 a 100 dada pela IA lendo o edital: chance real de ganhar e entregar com lucro.',t:'n',cls:'num'},
+    {k:'score_pagador',n:'Pagador',d:'Quão bom pagador é o órgão: federal e judiciário pagam mais rápido e certo; municipal costuma atrasar.',t:'n',cls:'num',f:r=>r.score_pagador!=null?Math.round(r.score_pagador*100)+'%':'—'},
+    {k:'exclusivo_me_epp',n:'ME/EPP',d:'✔ = só micro e pequenas empresas (e MEI) podem disputar: menos concorrência grande.',t:'c',f:r=>r.exclusivo_me_epp?'✔':''},
+    {k:'cnae_sugerido',n:'CNAE',d:'Código da atividade da empresa que cobre essa compra. Precisa estar no CNPJ de quem vai disputar.',t:'c'},
+    {k:'decisao',n:'Decisão',d:'O que você marcou: ⭐ vou participar ou 🚫 ignorar.',t:'c',f:r=>r.decisao==='participar'?'⭐ participar':r.decisao==='ignorar'?'🚫 ignorar':''},
   ],
   fila:[
-    {k:'pre_nota',n:'Pré-nota',t:'n',cls:'num'},
-    {k:'status',n:'Situação',t:'c',f:r=>`<span class="tag t-x">${{novo:'baixando docs',enriquecido:'esperando IA',sem_analise:'IA falhou'}[r.status]||r.status}</span>`},
-    {k:'objeto_compra',n:'Objeto / órgão',t:'s',cls:'obj',f:r=>`<div class="o">${esc(r.objeto_compra)}</div><div class="org">${esc(r.razao_social)}</div>`},
-    {k:'valor_estimado',n:'Estimado',t:'n',cls:'num',f:r=>r.valor_estimado?brl(r.valor_estimado):'sigiloso'},
-    {k:'data_encerramento',n:'Fecha',t:'d',f:r=>prazoHtml(r.data_encerramento)},
-    {k:'uf',n:'UF',t:'c'},{k:'gaveta',n:'Gaveta',t:'c'},{k:'modalidade_nome',n:'Modalidade',t:'c'},
-    {k:'kw_match',n:'Casou com',t:'s'},
+    {k:'pre_nota',n:'Pré-nota',d:'Ordem da fila da IA (sem gastar IA): valor que cabe, bom pagador, exclusivo ME/EPP, documento legível. Quem tem pré-nota maior é analisado antes.',t:'n',cls:'num'},
+    {k:'status',n:'Situação',d:'Baixando docs = o robô ainda vai ler o edital. Esperando IA = já leu, falta a análise. IA falhou = tentou 3 vezes.',t:'c',f:r=>`<span class="tag t-x">${{novo:'baixando docs',enriquecido:'esperando IA',sem_analise:'IA falhou'}[r.status]||r.status}</span>`},
+    {k:'objeto_compra',n:'Objeto / órgão',d:'O que o governo quer comprar ou contratar, e qual órgão está comprando.',t:'s',cls:'obj',f:r=>`<div class="o">${esc(r.objeto_compra)}</div><div class="org">${esc(r.razao_social)}</div>`},
+    {k:'valor_estimado',n:'Estimado',d:"Quanto o órgão estima pagar no total (preço de referência). 'Sigiloso' = o órgão escondeu o valor.",t:'n',cls:'num',f:r=>r.valor_estimado?brl(r.valor_estimado):'sigiloso'},
+    {k:'data_encerramento',n:'Fecha',d:'Último dia e hora para mandar a proposta. Vermelho = menos de 24 h.',t:'d',f:r=>prazoHtml(r.data_encerramento)},
+    {k:'uf',n:'UF',d:'Estado do órgão comprador.',t:'c'},{k:'gaveta',n:'Gaveta',d:'Em que grupo o robô encaixou pela palavra-chave: serviços de IA, produtos fáceis, solar ou comércio do Denildo.',t:'c'},{k:'modalidade_nome',n:'Modalidade',d:'Tipo de disputa. Dispensa = compra rápida e menor. Pregão = leilão de preço pela internet. Credenciamento = todos que cumprem as regras podem ser contratados.',t:'c'},
+    {k:'kw_match',n:'Casou com',d:'A palavra do edital que fez o robô achar essa licitação.',t:'s'},
     {k:'tentativas_ia',n:'Tent.',t:'n',cls:'num'},
     {k:'ultimo_erro',n:'Último erro',t:'s'},
   ],
@@ -371,6 +427,7 @@ function prazoHtml(s){const h=horas(s);const cls=h<24?'urg':h<72?'perto':'';cons
 async function carregarAba(){
   const box=$('conteudo');
   if(ABA==='simulacao'){montarSimulacao();return}
+  if(ABA==='ajuda'){box.innerHTML=AJUDA_HTML;ligarDicas(box);box.querySelectorAll('[data-pergunta]').forEach(b=>b.onclick=()=>abrirChat(b.dataset.pergunta));return}
   if(ABA==='modelos'){const c=await api('api/comparacoes');box.innerHTML=`<div class="caixa" style="margin-bottom:12px"><h3>Comparação com o Opus (gabarito)</h3>
     <div class="dica">Cada linha é um teste: o modelo analisou licitações que o Opus já tinha analisado. <b>ajuste</b> = editais usados para melhorar o prompt; <b>prova</b> = editais diferentes, só para medir (é o número que vale). Riscos/exigências achados = quantos dos que o Opus apontou o modelo também encontrou.</div></div>
     <div class="tab modelos"><table><thead><tr><th>Quando</th><th>Modelo</th><th>Prompt</th><th>Grupo</th><th>Respondeu</th><th>Mesma carteira</th><th>Mesma decisão</th><th>Riscos achados</th><th>Exigências achadas</th><th>Dif. viabilidade</th><th>Riscos/edital</th><th>Tempo</th><th>Tokens</th></tr></thead><tbody>
@@ -383,45 +440,119 @@ async function carregarAba(){
   montarTabela();
 }
 
+/* ── FILTROS COMBINÁVEIS ─────────────────────────────────────────
+   F guarda todos os filtros ativos; todos se somam (E). Fica salvo no navegador. */
+const F_PADRAO={ufs:[],carteiras:[],tipos:[],cnaes:[],esferas:[],modalidades:[],valor_min:'',valor_max:'',sobra_min:'',invest_min:'',invest_max:'',nota_min:'',fecha_dias:'',so_participar:false,texto:''};
+let F=Object.assign({},F_PADRAO);try{Object.assign(F,JSON.parse(localStorage.getItem('lb_filtros')||'{}'))}catch(e){}
+function salvarF(){try{localStorage.setItem('lb_filtros',JSON.stringify(F))}catch(e){}}
+const ESFERA_NOME={F:'Federal',E:'Estadual',M:'Municipal',D:'Distrital',N:'Outro'};
+const TIPO_NOME={produto:'📦 Produto',servico:'🛠 Serviço',obra:'⚡ Obra'};
+const ATALHOS=[
+ ['perto','📍 Perto de mim','Só Goiás e estados vizinhos (DF, MG, MS, MT, BA, TO): entrega e frete mais fáceis',()=>{F.ufs=[...((OPC&&OPC.vizinhas&&OPC.vizinhas.GO)||[])]}],
+ ['lucro','💰 Lucro alto','Só as que deixam pelo menos R$ 5.000 no bolso',()=>{F.sobra_min=5000}],
+ ['logo','⏰ Fecha logo','Só as que fecham nos próximos 3 dias: precisa decidir já',()=>{F.fecha_dias=3}],
+ ['barato','🪙 Pouco investimento','Só as que custam até R$ 3.000 para entregar',()=>{F.invest_max=3000}],
+ ['denildo','👕 CNAEs do Denildo','Só o que cabe no CNPJ do Denildo (solar, elétrico, roupas, calçados, brinquedos...)',()=>{F.cnaes=Object.keys((OPC&&OPC.cnaes_denildo)||{})}],
+ ['mei','🧑‍💻 CNAEs do MEI','Só o que cabe nas atividades do seu MEI',()=>{F.cnaes=Object.keys((OPC&&OPC.cnaes_mei)||{})}],
+ ['produto','📦 Só produto','Só compras de produto (não serviço nem obra)',()=>{F.tipos=['produto']}],
+ ['federal','🏛 Bom pagador','Só órgãos federais e estaduais (pagam mais rápido e certo)',()=>{F.esferas=['F','E']}],
+ ['participar','⭐ Vou participar','Só as que você marcou',()=>{F.so_participar=true}],
+];
+function nFiltros(){let n=0;for(const k in F_PADRAO){const v=F[k];if(Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null))n++}return n}
+
 function montarTabela(){
-  const cols=colsDaAba(), box=$('conteudo'), ed=!['varreduras','cnaes'].includes(ABA);
-  const chips=ed&&ABA!=='fila'?['todas','MEI','CPF','AMIGO_SOLAR','produto','servico','obra','48h','perto','lucro','participar']:[];
-  box.innerHTML=`<div class="ferr"><input class="busca" id="q" placeholder="Buscar em tudo (objeto, órgão, município, CNAE…)">
-    <div class="chips">${chips.map(c=>`<span class="chip${c===CHIP?' on':''}" data-c="${c}">${{todas:'Todas','48h':'⏰ Fecham em 48 h',participar:'⭐ Vou participar',produto:'📦 Só produto',servico:'🛠 Só serviço',obra:'⚡ Obra',perto:'📍 GO + vizinhos',lucro:'💰 Maior lucro'}[c]||c}</span>`).join('')}</div>
-    <button class="btn peq" id="bCsv">⬇ CSV</button></div>
-    <div class="tab"><table><thead><tr>${cols.map(c=>`<th data-k="${c.k}">${c.n}<span id="o_${c.k}"></span></th>`).join('')}</tr>
-    <tr class="filt">${cols.map(c=>`<th>${filtroHtml(c)}</th>`).join('')}</tr></thead><tbody id="corpo"></tbody></table></div>
-    <div class="rod"><span id="cont"></span><span>Clique no título para ordenar · filtros: <code>&gt;50</code>, <code>&lt;10000</code>, <code>10-60</code></span></div>`;
+  const cols=colsDaAba(), box=$('conteudo'), ed=!['varreduras','cnaes'].includes(ABA), comFiltros=ed;
+  box.innerHTML=`${comFiltros?`<div class="filtros caixa">
+      <div class="f-topo"><b>🔎 Filtrar</b> <span class="ii" data-dica="Os filtros se SOMAM: escolha estado E faixa de valor E tipo... só aparecem as licitações que passam em todos. Ficam guardados neste aparelho.">ⓘ</span>
+        <input class="busca" id="q" placeholder="Palavra no objeto, órgão ou cidade (ex.: uniforme, notebook, Goiânia)" value="${esc(F.texto)}">
+        <button class="btn peq" id="fMais">⚙ Mais filtros</button><button class="btn peq" id="fLimpar">✕ Limpar tudo</button><button class="btn peq" id="bCsv" title="Baixa a lista filtrada para abrir no Excel">⬇ Excel/CSV</button></div>
+      <div class="f-atalhos"><span class="f-rot">Atalhos:</span>${ATALHOS.map(([k,n,d])=>`<span class="chip" data-at="${k}" data-dica="${esc(d)}">${n}</span>`).join('')}</div>
+      <div class="f-ativos" id="fAtivos"></div>
+      <div class="f-mais" id="fPainel" style="display:none">${painelFiltros()}</div>
+    </div>`:''}
+    <div class="tab"><table><thead><tr>${cols.map(c=>`<th data-k="${c.k}"${c.d?` data-dica="${esc(c.d)}"`:''}>${c.n}${c.d?' <span class="ii">ⓘ</span>':''}<span id="o_${c.k}"></span></th>`).join('')}</tr></thead><tbody id="corpo"></tbody></table></div>
+    <div class="rod"><span id="cont"></span><span>Clique no título da coluna para ordenar · clique na linha para ver tudo</span></div>`;
   document.querySelectorAll('thead tr:first-child th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;ORD=ORD.k===k?{k,d:-ORD.d}:{k,d:['s','c'].includes(cols.find(c=>c.k===k).t)?1:-1};desenhar()});
-  document.querySelectorAll('[data-f]').forEach(el=>{el.value=FILT[el.dataset.f]||'';el.oninput=()=>{FILT[el.dataset.f]=el.value;desenhar()}});
-  document.querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{CHIP=ch.dataset.c;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===ch));desenhar()});
-  $('q').oninput=desenhar;
-  $('bCsv').onclick=()=>{if(ed)location.href='api/editais?formato=csv&aba='+ABA;else baixarCsv(cols)};
+  if(comFiltros){
+    $('q').oninput=()=>{F.texto=$('q').value;salvarF();desenhar()};
+    $('fMais').onclick=()=>{const p=$('fPainel');p.style.display=p.style.display==='none'?'block':'none'};
+    $('fLimpar').onclick=()=>{F=Object.assign({},F_PADRAO);salvarF();montarTabela()};
+    document.querySelectorAll('[data-at]').forEach(ch=>ch.onclick=()=>{ATALHOS.find(a=>a[0]===ch.dataset.at)[3]();salvarF();montarTabela()});
+    ligarPainelFiltros();
+    $('bCsv').onclick=()=>baixarCsv(cols);
+  }
+  ligarDicas(box);
   desenhar();
 }
-function filtroHtml(c){
-  if(c.t==='c'){const vals=[...new Set(DADOS.map(r=>r[c.k]).filter(v=>v!=null&&v!==''))].sort();
-    return`<select data-f="${c.k}"><option value="">todos</option>${vals.map(v=>`<option>${esc(v)}</option>`).join('')}</select>`}
-  return`<input data-f="${c.k}" placeholder="${c.t==='n'?'>0':'filtrar'}">`}
-function passa(v,f,t){
-  if(!f)return true;
-  if(t==='n'){const x=Number(v);if(v==null||isNaN(x))return false;let m;
-    if(m=f.match(/^\s*>=?\s*(-?[\d.]+)/))return x>=Number(m[1]);if(m=f.match(/^\s*<=?\s*(-?[\d.]+)/))return x<=Number(m[1]);
-    if(m=f.match(/^\s*(-?[\d.]+)\s*-\s*(-?[\d.]+)/))return x>=Number(m[1])&&x<=Number(m[2]);return String(v).includes(f)}
-  if(t==='c')return String(v??'')===f;
-  return String(v??'').toLowerCase().includes(f.toLowerCase())}
+function opcoesDe(k){return[...new Set(DADOS.map(r=>r[k]).filter(v=>v!=null&&v!==''))].sort()}
+function painelFiltros(){
+  const nomeCnae=c=>((OPC&&OPC.cnaes_denildo)||{})[c]||((OPC&&OPC.cnaes_mei)||{})[c]||c;
+  const marcas=(k,vals,nome)=>`<span class="marcas esq" data-fk="${k}">${vals.map(v=>`<span class="marca${F[k].includes(v)?' on':''}" data-v="${esc(v)}">${esc(nome?nome(v):v)}</span>`).join('')||'<small>—</small>'}</span>`;
+  const faixa=(a,b,rot,dica,passo)=>`<div class="f-campo"><label>${rot} <span class="ii" data-dica="${esc(dica)}">ⓘ</span></label><span class="faixa"><input type="number" step="${passo}" min="0" data-fn="${a}" value="${F[a]}" placeholder="de"><input type="number" step="${passo}" min="0" data-fn="${b}" value="${F[b]}" placeholder="até"></span></div>`;
+  const um=(a,rot,dica,passo,ph)=>`<div class="f-campo"><label>${rot} <span class="ii" data-dica="${esc(dica)}">ⓘ</span></label><input type="number" step="${passo}" min="0" data-fn="${a}" value="${F[a]}" placeholder="${ph}"></div>`;
+  return `<div class="f-grade">
+    ${faixa('valor_min','valor_max','Valor da licitação (R$)','Quanto o órgão estima pagar no total. Licitação grande costuma ter mais concorrentes e exigências.','1000')}
+    ${um('sobra_min','Sobra no bolso, mínimo (R$)','Quanto fica para você depois de pagar o produto e os impostos (estimativa).','500','ex.: 2000')}
+    ${faixa('invest_min','invest_max','Investimento para entregar (R$)','Quanto você precisa gastar antes de receber (comprar o produto, ferramentas). O órgão só paga depois da entrega.','500')}
+    ${um('nota_min','Nota mínima (0 a 100)','Nota do robô: quanto vale a pena, juntando chance de ganhar, lucro e se o órgão paga bem.','5','ex.: 50')}
+    ${um('fecha_dias','Fecha em até (dias)','Prazo para mandar a proposta. Depois disso não dá mais para participar.','1','ex.: 7')}
+  </div>
+  <div class="f-linha"><label>Estados <span class="ii" data-dica="Onde fica o órgão comprador. Mais perto = frete e entrega mais fáceis. Nenhum marcado = Brasil todo.">ⓘ</span>
+     <a href="#" data-uf="viz">GO + vizinhos</a> · <a href="#" data-uf="nen">Brasil todo</a></label>${marcas('ufs',(OPC&&OPC.ufs)||opcoesDe('uf'))}</div>
+  <div class="f-linha"><label>Quem disputa (carteira) <span class="ii" data-dica="MEI = você, serviços com IA e informática (até R$ 81 mil/ano). CPF = você como pessoa física. DENILDO = o CNPJ do parceiro (solar, elétrico, roupas, calçados, brinquedos...).">ⓘ</span></label>${marcas('carteiras',['MEI','CPF','DENILDO'])}</div>
+  <div class="f-linha"><label>Tipo <span class="ii" data-dica="Produto = comprar e entregar. Serviço = trabalho seu (diagramar, transcrever, editar vídeo). Obra = instalação em campo (solar, elétrica).">ⓘ</span></label>${marcas('tipos',['produto','servico','obra'],v=>TIPO_NOME[v])}</div>
+  <div class="f-linha"><label>Órgão (esfera) <span class="ii" data-dica="Federal costuma pagar em ~15 dias; estadual ~35; municipal ~45 e atrasa mais.">ⓘ</span></label>${marcas('esferas',['F','E','M','D'],v=>ESFERA_NOME[v])}</div>
+  <div class="f-linha"><label>Modalidade <span class="ii" data-dica="Dispensa = compra rápida e menor (até ~R$ 60 mil). Pregão = disputa de preço pela internet. Credenciamento = todos que cumprem as regras podem ser contratados.">ⓘ</span></label>${marcas('modalidades',opcoesDe('modalidade_nome'))}</div>
+  <div class="f-linha"><label>CNAE (atividade da empresa) <span class="ii" data-dica="Código que diz o que a empresa pode vender ou fazer. Use os atalhos 'CNAEs do Denildo' ou 'CNAEs do MEI' para marcar todos de uma vez.">ⓘ</span>
+     <a href="#" data-cn="den">Denildo</a> · <a href="#" data-cn="mei">MEI</a> · <a href="#" data-cn="nen">todos</a></label>${marcas('cnaes',[...new Set([...Object.keys((OPC&&OPC.cnaes_mei)||{}),...Object.keys((OPC&&OPC.cnaes_denildo)||{}),...opcoesDe('cnae_sugerido')])].sort(),c=>c+' · '+nomeCnae(c).replace(/ — principal/,'').slice(0,42))}</div>`;
+}
+function ligarPainelFiltros(){
+  document.querySelectorAll('[data-fk] .marca').forEach(m=>m.onclick=()=>{const k=m.parentElement.dataset.fk,v=m.dataset.v;
+    F[k]=F[k].includes(v)?F[k].filter(x=>x!==v):[...F[k],v];m.classList.toggle('on');salvarF();desenhar()});
+  document.querySelectorAll('[data-fn]').forEach(el=>el.oninput=()=>{F[el.dataset.fn]=el.value;salvarF();desenhar()});
+  document.querySelectorAll('[data-uf]').forEach(a=>a.onclick=ev=>{ev.preventDefault();F.ufs=a.dataset.uf==='viz'?[...((OPC&&OPC.vizinhas&&OPC.vizinhas.GO)||[])]:[];salvarF();montarTabela();$('fPainel').style.display='block'});
+  document.querySelectorAll('[data-cn]').forEach(a=>a.onclick=ev=>{ev.preventDefault();F.cnaes=a.dataset.cn==='den'?Object.keys(OPC.cnaes_denildo):a.dataset.cn==='mei'?Object.keys(OPC.cnaes_mei):[];salvarF();montarTabela();$('fPainel').style.display='block'});
+}
+function desenharAtivos(){
+  const box=$('fAtivos');if(!box)return;const p=[];
+  const add=(txt,limpa)=>p.push([txt,limpa]);
+  if(F.texto)add(`🔤 "${F.texto}"`,()=>F.texto='');
+  if(F.ufs.length)add(`📍 ${F.ufs.length>6?F.ufs.length+' estados':F.ufs.join(', ')}`,()=>F.ufs=[]);
+  if(F.carteiras.length)add(`👤 ${F.carteiras.join(', ')}`,()=>F.carteiras=[]);
+  if(F.tipos.length)add(F.tipos.map(t=>TIPO_NOME[t]).join(', '),()=>F.tipos=[]);
+  if(F.esferas.length)add(`🏛 ${F.esferas.map(e=>ESFERA_NOME[e]).join(', ')}`,()=>F.esferas=[]);
+  if(F.modalidades.length)add(`📋 ${F.modalidades.join(', ')}`,()=>F.modalidades=[]);
+  if(F.cnaes.length)add(`🏷 ${F.cnaes.length} CNAE(s)`,()=>F.cnaes=[]);
+  if(F.valor_min||F.valor_max)add(`💵 valor ${F.valor_min?'≥ '+brl(+F.valor_min):''}${F.valor_min&&F.valor_max?' e ':''}${F.valor_max?'≤ '+brl(+F.valor_max):''}`,()=>{F.valor_min='';F.valor_max=''});
+  if(F.sobra_min)add(`💰 sobra ≥ ${brl(+F.sobra_min)}`,()=>F.sobra_min='');
+  if(F.invest_min||F.invest_max)add(`🪙 investe ${F.invest_min?'≥ '+brl(+F.invest_min):''}${F.invest_min&&F.invest_max?' e ':''}${F.invest_max?'≤ '+brl(+F.invest_max):''}`,()=>{F.invest_min='';F.invest_max=''});
+  if(F.nota_min)add(`⭐ nota ≥ ${F.nota_min}`,()=>F.nota_min='');
+  if(F.fecha_dias)add(`⏰ fecha em até ${F.fecha_dias} dia(s)`,()=>F.fecha_dias='');
+  if(F.so_participar)add('⭐ só "vou participar"',()=>F.so_participar=false);
+  box.innerHTML=p.length?`<span class="f-rot">Filtrando por:</span>`+p.map(([t],i)=>`<span class="pilula-f" data-i="${i}">${esc(t)} <b>✕</b></span>`).join(''):'<span class="f-rot">Nenhum filtro: mostrando tudo desta aba.</span>';
+  box.querySelectorAll('.pilula-f').forEach(el=>el.onclick=()=>{p[+el.dataset.i][1]();salvarF();montarTabela()});
+}
 function filtrados(){
-  const cols=colsDaAba(), q=($('q')?.value||'').toLowerCase();
+  const q=normal(F.texto||''), dias=+F.fecha_dias;
+  const n=(v,lim,op)=>lim===''||lim==null||(op==='>'?(+v||0)>=+lim:(+v||0)<=+lim);
   return DADOS.filter(r=>{
-    if(CHIP==='48h'&&horas(r.data_encerramento)>48)return false;
-    if(['produto','servico','obra'].includes(CHIP)&&r.tipo!==CHIP)return false;
-    if(CHIP==='perto'&&!((AV&&AV.vizinhas&&AV.vizinhas.GO)||[]).includes(r.uf))return false;
-    if(CHIP==='participar'&&r.decisao!=='participar')return false;
-    if(['MEI','CPF','AMIGO_SOLAR'].includes(CHIP)&&r.carteira!==CHIP)return false;
-    if(q&&!Object.values(r).some(v=>String(v??'').toLowerCase().includes(q)))return false;
-    return cols.every(c=>passa(r[c.k],FILT[c.k],c.t))
-  }).sort((a,b)=>{const ord=CHIP==='lucro'?{k:'margem_estimada',d:-1}:ORD;const x=a[ord.k],y=b[ord.k];if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;
-    return(typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y),'pt-BR'))*ord.d})}
+    if(q&&!normal([r.objeto_compra,r.razao_social,r.municipio,r.uf,r.cnae_sugerido,r.kw_match].join(' ')).includes(q))return false;
+    if(F.ufs.length&&!F.ufs.includes(r.uf))return false;
+    if(F.carteiras.length&&!F.carteiras.includes(r.carteira))return false;
+    if(F.tipos.length&&!F.tipos.includes(r.tipo))return false;
+    if(F.esferas.length&&!F.esferas.includes(r.esfera_id))return false;
+    if(F.modalidades.length&&!F.modalidades.includes(r.modalidade_nome))return false;
+    if(F.cnaes.length&&!F.cnaes.includes(r.cnae_sugerido))return false;
+    if(!n(r.valor_estimado,F.valor_min,'>')||!n(r.valor_estimado,F.valor_max,'<'))return false;
+    if(!n(r.margem_estimada,F.sobra_min,'>'))return false;
+    if(!n(r.custo_estimado,F.invest_min,'>')||!n(r.custo_estimado,F.invest_max,'<'))return false;
+    if(!n(r.nota_final,F.nota_min,'>'))return false;
+    if(dias&&horas(r.data_encerramento)>dias*24)return false;
+    if(F.so_participar&&r.decisao!=='participar')return false;
+    return true;
+  }).sort((a,b)=>{const x=a[ORD.k],y=b[ORD.k];if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;
+    return(typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y),'pt-BR'))*ORD.d})}
+function normal(t){return String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
 function desenhar(){
   const cols=colsDaAba(), linhas=filtrados(), corpo=$('corpo'); if(!corpo)return;
   cols.forEach(c=>{const o=$('o_'+c.k);if(o)o.textContent=c.k===ORD.k?(ORD.d>0?' ▲':' ▼'):''});
@@ -429,7 +560,8 @@ function desenhar(){
   corpo.innerHTML=linhas.length?linhas.slice(0,1500).map(r=>`<tr${ed?` data-n="${esc(r.numero_controle)}"`:''} class="${r.numero_controle===SEL?'sel':''}">${cols.map(c=>`<td class="${c.cls||''}">${c.f?c.f(r):esc(r[c.k]??'')}</td>`).join('')}</tr>`).join('')
     :`<tr><td colspan="${cols.length}" class="vazio">${DADOS.length?'Nada com esses filtros.':'Nada aqui ainda.'}</td></tr>`;
   if(ed)corpo.querySelectorAll('tr[data-n]').forEach(tr=>tr.onclick=()=>abrir(tr.dataset.n));
-  $('cont').textContent=`${num(linhas.length)} de ${num(DADOS.length)}`+(linhas.length>1500?' (mostrando 1.500; use os filtros)':'');
+  $('cont').innerHTML=`<b>${num(linhas.length)}</b> de ${num(DADOS.length)} licitações`+(nFiltros()?` com ${nFiltros()} filtro(s)`:'')+(linhas.length>1500?' (mostrando 1.500; filtre mais)':'');
+  desenharAtivos();
 }
 function baixarCsv(cols){const linhas=filtrados();const s=[cols.map(c=>c.n).join(';'),...linhas.map(r=>cols.map(c=>`"${String(r[c.k]??'').replace(/"/g,'""')}"`).join(';'))].join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+s],{type:'text/csv'}));a.download=`licibot_${ABA}.csv`;a.click()}
@@ -449,6 +581,7 @@ async function abrir(n){
       <button class="btn peq ${e.decisao==='participar'?'pri':''}" data-dec="participar">⭐ Vou participar</button>
       <button class="btn peq ${e.decisao==='ignorar'?'perigo':''}" data-dec="ignorar">🚫 Ignorar</button>
       ${e.decisao?'<button class="btn peq" data-dec="">↺ Limpar decisão</button>':''}
+      <button class="btn peq" id="bPerg" title="Abre o assistente já perguntando sobre esta licitação">💬 Perguntar sobre esta</button>
       <button class="btn peq" id="bReana">🔄 Reanalisar</button>
       <a class="btn peq" href="${esc(e.link_pncp)}" target="_blank" rel="noopener">PNCP ↗</a>
       ${e.link_sistema?`<a class="btn peq" href="${esc(e.link_sistema)}" target="_blank" rel="noopener">Sistema de compras ↗</a>`:''}
@@ -487,6 +620,7 @@ async function abrir(n){
   </div>`;
   $('fechar').onclick=fechar;
   d.querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>acao('api/decisao',{n,decisao:b.dataset.dec||null},()=>{abrir(n);carregarAba()}));
+  $('bPerg').onclick=()=>{fechar();abrirChat(`Me explique a licitação ${n} como se eu fosse iniciante: vale a pena? o que preciso ter para participar? quais os riscos?`)};
   $('bReana').onclick=()=>{if(confirm('Mandar este edital de novo para a IA? Gasta tokens na próxima varredura.'))acao('api/reanalisar',{n},()=>abrir(n))};
   $('bAnot').onclick=()=>acao('api/decisao',{n,decisao:e.decisao,anotacao:$('anot').value});
 }
@@ -595,11 +729,11 @@ function montarSimulacao(){
     ${campo('horas_mes','Suas horas por mês para serviços','diagramação, vídeo, transcrição','step="10" min="0"')}
     ${campo('valor_hora','Quanto vale 1 h sua (R$)','estima as horas de cada serviço','step="10" min="10"')}
     ${campo('pagamento_extra_dias','Atraso extra no pagamento (dias)','prudência: órgão que atrasa','step="5" min="0"')}
-    <div class="linha"><label>Carteiras</label>${marcas('carteiras',[['MEI','MEI'],['CPF','CPF']])}</div>
+    <div class="linha"><label>Carteiras <span class="ii" data-dica="DENILDO: a simulação usa o dinheiro e o lucro do CNPJ dele (ele compra e vende). Sua parte é a comissão. Deixe só MEI/CPF para ver o seu próprio dinheiro.">ⓘ</span></label>${marcas('carteiras',[['MEI','MEI'],['CPF','CPF'],['DENILDO','Denildo']])}</div>
     <div class="linha"><label>Tipo</label>${marcas('tipos',[['produto','📦 Produto'],['servico','🛠 Serviço']])}</div>
     <div class="linha"><label>Reinvestir o que voltar</label><button class="sw ${SIM.reinvestir?'on':''}" id="swReinv"></button></div>
     <div style="margin-top:10px;display:flex;gap:8px"><button class="btn pri" id="bSimular">▶ Simular</button><button class="btn" id="bSimPadrao">↺ Padrão</button></div>
-    <div class="nota-sim">O robô dá o lance que <b>ele mesmo</b> daria no automático: cobre o custo, os impostos da carteira e a margem mínima, e fica 1% abaixo do preço que os vencedores costumam cobrar. Só disputa se esse lance ganha. O dinheiro só sai quando ganha; a reserva garante pagar se ganhar todas da mesma semana. Pagamento: federal ~15 dias, estadual ~35, municipal ~45 depois da entrega. AMIGO_SOLAR fica fora (o investimento é do parceiro).</div>
+    <div class="nota-sim">O robô dá o lance que <b>ele mesmo</b> daria no automático: cobre o custo, os impostos da carteira e a margem mínima, e fica 1% abaixo do preço que os vencedores costumam cobrar. Só disputa se esse lance ganha. O dinheiro só sai quando ganha; a reserva garante pagar se ganhar todas da mesma semana. Pagamento: federal ~15 dias, estadual ~35, municipal ~45 depois da entrega. Com Denildo marcado, o dinheiro e o lucro são do CNPJ dele.</div>
    </div>
    <div id="simRes"><div class="caixa vazio">Ajuste ao lado e clique em Simular.</div></div></div>`;
   box.querySelectorAll('.marcas[data-s] .marca').forEach(m=>m.onclick=()=>m.classList.toggle('on'));
@@ -653,6 +787,103 @@ function grafico(pts,capital){
    <text x="${P}" y="${H-6}" fill="var(--txt3)" font-size="11">hoje</text>
    <text x="${W-8}" y="${H-6}" text-anchor="end" fill="var(--txt3)" font-size="11">dia ${Math.max(...xs)}</text></svg>`;
 }
+
+const AJUDA_HTML=`<div class="caixa ajuda">
+<h2>❓ Como o LiciBot funciona, em palavras simples</h2>
+<p>O governo (prefeituras, câmaras, universidades, tribunais...) publica no <b>PNCP</b> (Portal Nacional de Contratações Públicas) tudo o que quer comprar. O LiciBot é um robô que lê esse portal sozinho, a cada 6 horas, e separa o que você e o Denildo conseguem vender ou fazer, com lucro.</p>
+<ol class="passos">
+ <li><b>Lê o PNCP inteiro.</b> Umas 28 mil licitações abertas. Passa por um filtro de palavras (degravação, notebook, uniforme, energia solar...) e fica com umas 1.700.</li>
+ <li><b>Baixa os documentos.</b> Para cada uma, baixa os itens (o que exatamente o órgão quer, quantidade e preço) e lê o edital e o termo de referência (até PDF escaneado, por OCR).</li>
+ <li><b>A inteligência artificial lê e decide.</b> Uma IA grátis lê tudo e diz: quem pode disputar (MEI, CPF ou Denildo), se dá para fazer de casa, quais documentos pedem, quais os riscos e uma nota de viabilidade.</li>
+ <li><b>O robô faz as contas.</b> Quanto você daria de lance, quanto custa entregar, os impostos e quanto sobra no bolso. A conta é feita no computador, não pela IA (que erra conta).</li>
+ <li><b>Você decide.</b> Nesta tela você filtra, lê a análise, marca ⭐ vou participar ou 🚫 ignorar, e recebe avisos no Telegram.</li>
+</ol>
+<h3>Glossário</h3>
+<div class="glossario">
+ <div><b>Licitação</b><br>Disputa em que o governo escolhe quem vai vender ou prestar um serviço. Em geral ganha o menor preço.</div>
+ <div><b>PNCP</b><br>Portal Nacional de Contratações Públicas: o site oficial onde todas as compras públicas aparecem.</div>
+ <div><b>Edital / Termo de referência</b><br>Documentos com as regras: o que comprar, prazos, documentos exigidos, multas e forma de pagamento.</div>
+ <div><b>Dispensa</b><br>Compra menor e mais rápida (até uns R$ 60 mil), com disputa curta pela internet.</div>
+ <div><b>Pregão eletrônico</b><br>Leilão de preço pela internet: quem dá o menor lance e cumpre as regras ganha.</div>
+ <div><b>Credenciamento</b><br>Quem cumpre as regras pode ser contratado; não há disputa de preço.</div>
+ <div><b>Registro de preços (SRP)</b><br>O órgão fixa preços e compra aos poucos, quando precisar, por até 1 ano. Não garante que vai comprar tudo.</div>
+ <div><b>MEI</b><br>Microempreendedor Individual: CNPJ simples, imposto fixo por mês (DAS), mas só pode faturar até R$ 81 mil por ano e só nas atividades permitidas.</div>
+ <div><b>ME/EPP</b><br>Micro e pequenas empresas. Licitação "exclusiva ME/EPP" afasta empresas grandes (o MEI entra).</div>
+ <div><b>CNAE</b><br>Código que diz o que a empresa pode fazer. Para disputar, o CNAE do CNPJ precisa cobrir o que está sendo comprado.</div>
+ <div><b>CPF (pessoa física)</b><br>Você pode disputar alguns serviços como pessoa física (regra IN 116/2021). O órgão desconta INSS e imposto de renda.</div>
+ <div><b>Habilitação</b><br>Documentos que provam que a empresa pode ser contratada: certidões, cadastro no SICAF, atestados.</div>
+ <div><b>Atestado de capacidade técnica</b><br>Declaração de outro cliente dizendo que você já entregou algo parecido. Muitas licitações pedem.</div>
+ <div><b>SICAF</b><br>Cadastro de fornecedores do governo federal. Precisa estar em dia para disputar compras federais.</div>
+ <div><b>Lance</b><br>O preço que você oferece na disputa. O robô calcula o lance mínimo que ainda dá lucro.</div>
+ <div><b>Sobra (líquido)</b><br>O que fica no seu bolso depois de comprar o produto e pagar os impostos. É estimativa.</div>
+ <div><b>Investimento</b><br>O que você gasta antes de receber. O governo paga só depois da entrega (15 a 45 dias, às vezes mais).</div>
+ <div><b>Nota</b><br>De 0 a 100, o quanto vale a pena: chance de ganhar, lucro e se o órgão paga bem.</div>
+</div>
+<h3>Pergunte ao assistente</h3>
+<p>O botão 💬 no canto abre um assistente que conhece o sistema e as licitações. Ele procura, explica e traz o link de cada licitação. Exemplos (clique para perguntar):</p>
+<div class="chat-sug" style="padding:0">
+ <span data-pergunta="Quais as 5 melhores licitações abertas em Goiás e vizinhos, e quanto sobra em cada?">Melhores perto de mim</span>
+ <span data-pergunta="Tem licitação aberta de uniforme, roupa ou calçado para o Denildo?">Roupas para o Denildo</span>
+ <span data-pergunta="Se eu investir R$ 5.000, quanto posso ganhar e em quanto tempo?">Simular R$ 5 mil</span>
+ <span data-pergunta="O que é uma dispensa e como eu participo de uma? Passo a passo para iniciante.">Como participo?</span>
+ <span data-pergunta="Quais licitações fecham nos próximos 2 dias e valem a pena?">O que fecha logo</span>
+</div>
+</div>`;
+
+/* ── balão de dica (passar o mouse ou tocar) ───────────────────── */
+const BALAO=document.createElement('div');BALAO.className='balao';document.body.appendChild(BALAO);
+function mostrarDica(el,ev){const t=el.dataset.dica;if(!t)return;BALAO.textContent=t;BALAO.classList.add('on');
+  const r=el.getBoundingClientRect(),w=Math.min(320,innerWidth-20);let x=Math.min(Math.max(10,r.left),innerWidth-w-10),y=r.bottom+8;
+  if(y+120>innerHeight)y=r.top-BALAO.offsetHeight-8;BALAO.style.left=x+'px';BALAO.style.top=y+'px'}
+function esconderDica(){BALAO.classList.remove('on')}
+function ligarDicas(raiz){(raiz||document).querySelectorAll('[data-dica]').forEach(el=>{if(el._dica)return;el._dica=1;
+  el.addEventListener('mouseenter',ev=>mostrarDica(el,ev));el.addEventListener('mouseleave',esconderDica);
+  el.addEventListener('touchstart',ev=>{mostrarDica(el,ev);setTimeout(esconderDica,3500)},{passive:true})})}
+new MutationObserver(()=>ligarDicas(document)).observe(document.body,{childList:true,subtree:true});
+
+/* ── assistente (agente) ──────────────────────────────────────── */
+let CHAT=[];try{CHAT=JSON.parse(sessionStorage.getItem('lb_chat')||'[]')}catch(e){}
+const chatBtn=document.createElement('button');chatBtn.className='chat-btn';chatBtn.title='Pergunte ao assistente';chatBtn.textContent='💬';
+const chatBox=document.createElement('div');chatBox.className='chat';
+chatBox.innerHTML=`<div class="chat-top"><span class="logo" style="width:30px;height:30px;font-size:15px">🤖</span><b>Assistente do LiciBot</b>
+  <button class="btn peq" id="chLimpar" title="Começar conversa nova">↺</button><button class="btn peq" id="chFechar">✕</button></div>
+  <div class="chat-msgs" id="chMsgs"></div>
+  <div class="chat-sug" id="chSug">
+   <span>Quais as melhores para mim hoje?</span><span>O que fecha nos próximos 2 dias?</span>
+   <span>Tem algo para o Denildo?</span><span>Como eu participo de uma dispensa?</span><span>Se eu investir R$ 5 mil?</span></div>
+  <div class="chat-in"><textarea id="chTexto" placeholder="Pergunte qualquer coisa sobre as licitações..."></textarea><button class="btn pri" id="chEnviar">➤</button></div>`;
+document.body.appendChild(chatBtn);document.body.appendChild(chatBox);
+function mdLeve(t){ // markdown simples e seguro: escapa tudo e só então aplica negrito, link e listas
+  let h=esc(t);
+  h=h.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  h=h.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  h=h.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');
+  return h.split(/\n{2,}/).map(par=>{const ls=par.split('\n');
+    if(ls.every(l=>/^\s*([-*]|\d+\.)\s/.test(l)))return'<ul>'+ls.map(l=>'<li>'+l.replace(/^\s*([-*]|\d+\.)\s/,'')+'</li>').join('')+'</ul>';
+    return'<p>'+par.replace(/\n/g,'<br>')+'</p>'}).join('')}
+function desenharChat(carregando){
+  const box=$('chMsgs');
+  box.innerHTML=(CHAT.length?'':`<div class="msg ia"><p>Olá! Eu conheço todas as licitações que o robô achou e como o sistema funciona. Pergunte em português normal, por exemplo: <b>"tem uniforme em Goiás?"</b> ou <b>"quanto ganho investindo R$ 3 mil?"</b>. Sempre trago o link da licitação.</p></div>`)+
+    CHAT.map(m=>`<div class="msg ${m.role==='user'?'eu':'ia'}">${m.role==='user'?esc(m.content):mdLeve(m.content)}${m.meta?`<div class="meta">${esc(m.meta)}</div>`:''}</div>`).join('')+
+    (carregando?'<div class="msg ia"><span class="digitando"><i></i><i></i><i></i></span> procurando...</div>':'');
+  box.scrollTop=box.scrollHeight;$('chSug').style.display=CHAT.length?'none':'flex';
+}
+async function enviarChat(texto){
+  texto=(texto||'').trim();if(!texto)return;
+  CHAT.push({role:'user',content:texto});desenharChat(true);$('chTexto').value='';$('chEnviar').disabled=true;
+  try{const r=await api('api/agente',{historico:CHAT.map(m=>({role:m.role,content:m.content}))});
+    CHAT.push({role:'assistant',content:r.resposta,meta:r.modelo?`respondido por ${r.modelo}${r.ferramentas&&r.ferramentas.length?' · consultou: '+[...new Set(r.ferramentas)].join(', '):''}`:''})}
+  catch(e){CHAT.push({role:'assistant',content:'Não consegui responder agora: '+e})}
+  try{sessionStorage.setItem('lb_chat',JSON.stringify(CHAT.slice(-30)))}catch(e){}
+  $('chEnviar').disabled=false;desenharChat(false);
+}
+function abrirChat(pergunta){chatBox.classList.add('on');desenharChat(false);if(pergunta)enviarChat(pergunta);else $('chTexto').focus()}
+chatBtn.onclick=()=>chatBox.classList.contains('on')?chatBox.classList.remove('on'):abrirChat();
+$('chFechar').onclick=()=>chatBox.classList.remove('on');
+$('chLimpar').onclick=()=>{CHAT=[];try{sessionStorage.removeItem('lb_chat')}catch(e){};desenharChat(false)};
+$('chEnviar').onclick=()=>enviarChat($('chTexto').value);
+$('chTexto').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&!ev.shiftKey){ev.preventDefault();enviarChat($('chTexto').value)}});
+$('chSug').querySelectorAll('span').forEach(sp=>sp.onclick=()=>enviarChat(sp.textContent));
 
 carregarResumo().then(()=>Promise.all([carregarOpcoes(),carregarAvisos()])).then(carregarAba);
 setInterval(carregarResumo,15000);

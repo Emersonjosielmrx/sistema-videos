@@ -1,0 +1,354 @@
+{
+ "video": "futebolcom_ia2_20261115_184500.mp4",
+ "conta": "futebolcom.ia2",
+ "marca": "Cardápio Digital",
+ "titulo": "IA que tira dúvidas sobre os pratos no cardápio digital",
+ "formato": "dono_abre_fecha",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "pica_pau",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.33,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.46
+   ],
+   [
+    1,
+    "dono",
+    14.79
+   ],
+   [
+    2,
+    "conversa",
+    6.89
+   ],
+   [
+    3,
+    "dono",
+    14.51
+   ],
+   [
+    4,
+    "cartao",
+    7.55
+   ]
+  ],
+  "graves": 10,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('Perdendo vendas porque') está sobreposta ao queixo, barba e boca do apresentador, cobrindo seus lábios enquanto ele fala.",
+   "como_corrigir": "Descer a legenda karaokê para a região inferior do peito (em torno de y=1500) ou reenquadrar a filmagem subindo o apresentador e reduzindo a altura ocupada pelo cartão de pergunta no topo."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('dúvida sobre o') continua posicionada diretamente sobre a boca e queixo do apresentador, encobrindo a expressão facial no hook do vídeo.",
+   "como_corrigir": "Posicionar a legenda abaixo do rosto do apresentador em toda a cena 0 para não obstruir o interlocutor."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê ('prato') está cobrindo a boca do apresentador.",
+   "como_corrigir": "Ajustar a linha de base vertical da legenda para y=1500, garantindo que o rosto fique totalmente visível."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "A legenda 'detalhar os acompanhamentos' ficou excessivamente longa em linha única, ficando a menos de 60 px da borda lateral direita (cerca de 35-40 px), colidindo com a área dos botões de interação do Reels.",
+   "como_corrigir": "Quebrar a legenda em duas linhas ('detalhar os' / 'acompanhamentos') ou diminuir levemente a escala da fonte para manter margem lateral mínima de 60 px à direita."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "A legenda 'fez no cardápio.' sofreu queda severa de opacidade e contraste: o texto 'no cardápio.' está em cinza escuro apagado sobre a camisa preta, tornando-se quase invisível.",
+   "como_corrigir": "Manter o texto da legenda com 100% de opacidade em branco sólido (#FFFFFF) com contorno preto nítido até o corte da cena, evitando fade out prematuro."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Cena inicial totalmente congelada (freeze frame). O apresentador e o cenário ao fundo permanecem exatamente nos mesmos pixels entre q01, q02 e q03 (mais de 3,5 segundos estáticos), alterando apenas a legenda. No formato Reels, abrir o anúncio com uma imagem parada compromete a retenção inicial.",
+   "como_corrigir": "Manter o vídeo contínuo do apresentador falando e gesticulando já no gancho. Caso opte por elemento estático, aplicar animação contínua de câmera (slow zoom-in/push-in de 100% a 106%) e entrada dinâmica no card de pergunta (slide-down com amortecimento/overshoot)."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Simulação de chat sem fluxo contínuo de conversa e sem animação de cascata. Em vez de as mensagens entrarem com efeito de pop/slide e empurrarem o histórico para cima, a mensagem anterior é deletada a cada troca (a pergunta do cliente em q07 desaparece em q08, e a resposta da IA desaparece em q09), deixando uma área vazia enorme no topo do card.",
+   "como_corrigir": "Animar a entrada de cada balão de mensagem de baixo para cima com escala suave (pop 0.95 -> 1.0) e rolagem vertical (scroll up), mantendo os balões anteriores visíveis na tela para construir uma conversa encadeada natural."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca com jump cut entre o gancho e o primeiro bloco de conteúdo. Como o apresentador e o enquadramento de q03 e q04 são rigorosamente idênticos, a saída do card branco e a entrada abrupta da tarja vermelha criam um salto visual desconfortável.",
+   "como_corrigir": "Inserir transição de motion design na virada de cena: animar a saída do card de pergunta para cima e a descida da tarja '1 O problema' com easing suave e um leve desfoque de movimento (motion blur) ou corte com transição de escala."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Falta de variedade de planos (mesmo molde repetido). As cenas 1 e 3 utilizam rigorosamente o mesmo ângulo médio, altura de câmera e distância focal do apresentador no balcão, tornando a volta do chat para o dono monótona.",
+   "como_corrigir": "Aplicar um recorte/punch-in digital de 15% a 20% (close-up) na cena 3 para diferenciar a fase de 'resultado' da fase de 'problema', quebrando o padrão estético e acelerando a dinâmica visual."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos não retém: o apresentador está estático com expressão desconfiada/tensa e o enquadramento não traz nenhum elemento visual que comunique restaurante ou comida de imediato. Além disso, o card inicial usa o rótulo 'Pergunta frequente', mas traz uma pergunta B2B direcionada ao dono do negócio ('Perdendo vendas porque o cliente tem dúvida sobre o prato?'), criando ruído conceitual logo na abertura.",
+   "como_corrigir": "No próximo vídeo, abrir a Cena 0 com corte dinâmico ou ação prática (ex.: movimento de câmera mostrando a correria do balcão ou o dono segurando um prato/celular com expressão enérgica) e ajustar a redação do card para uma chamada direta de dor de balcão, capturando a atenção imediatamente."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A cena da simulação parece um slide amador de PowerPoint: o vídeo corta da filmagem real para um fundo vinho completamente plano e estático, com um card flutuante que deixa quase 40% da tela inferior em vazio absoluto. Passa sensação de mockup improvisado em vez de software de empresa séria.",
+   "como_corrigir": "Na Cena 2, substituir o fundo chapado e o card flutuante por um mockup 3D de smartphone em perspectiva ou uma mão real segurando o aparelho com o restaurante desfocado ao fundo, exibindo a tela do cardápio digital com foto antes da abertura da mensagem no WhatsApp."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Monotonia visual por repetição de enquadramento idêntico às Cenas 0 e 1, somada à ausência completa de B-roll de pratos ou do cardápio com fotos em um anúncio cujo tema central é exatamente 'dúvidas sobre pratos'. O vídeo fica restrito a um 'talking head' no mesmo plano médio sem comprovação visual do produto.",
+   "como_corrigir": "Nas Cenas 1 e 3, intercalar a fala do apresentador com takes de cobertura (B-roll): close-up do prato suculento sendo finalizado, tela do celular exibindo as fotos do cardápio digital e o comprovante do pedido impresso saindo na maquininha do balcão."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Inconsistência de marca severa no encerramento: o produto divulgado é 'Cardápio Digital' para restaurantes, mas a conta indicada no rodapé obrigatório é '@futebolcom.ia2', o que destrói a credibilidade do lead B2B e passa aspecto de template reaproveitado sem revisão.",
+   "como_corrigir": "Na Cena 4, alinhar rigorosamente o @ da conta ao nicho de food service/cardápio digital e dinamizar o cartão final com transição fluida ou presença do apresentador ao lado do convite para o direct."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "inovareclaw.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 8.0,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "inovarecom_ia_20261115_140123.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 7.62,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "inovarecom.ia",
+   "formato": "dono_e_cena_veo+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261115_184500.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha",
+   "nota": 5.33,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.38,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.88,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.5,
+    "roteiro_marca": 9.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 7.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 10.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "sintetizerisada_20261115_223919.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.95,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.8
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 4.0,
+    "roteiro_marca": 9.0,
+    "diretor": 5.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   8,
+   3
+  ],
+  "dono_abre_fecha": [
+   8,
+   0
+  ],
+  "dono_mesma_foto": [
+   6,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   3,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   20,
+   7
+  ]
+ },
+ "vigiando": []
+}

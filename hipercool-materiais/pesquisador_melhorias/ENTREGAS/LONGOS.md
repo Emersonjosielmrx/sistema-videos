@@ -1497,7 +1497,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_distribuicao__sonnet_0142.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-15 02:54 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+## [x] AVALIADO 15/11 — 0 aplicados, 1 reprovado, 0 deixados — 2026-11-15 02:54 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_dist_impressoes_diagnostico__sonnet_0241.md`
 - [INÉDITO] github.com/andremrod/youtube-insights — ★0, push 2026-11-10, MIT — Descobre o que deu certo nos seus Shorts e vídeos do YouTube: título, tema e duração × views, retenção e inscritos, com comparação com o Ins
 
@@ -1508,3 +1508,39 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 03:38 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_yt_conformidade_canal__sonnet_0327.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 04:57 — Séries e "assistir a seguir" em canais estrangeiros de recap (`area_playlist_serie_estrangeira`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_playlist_serie_estrangeira__sonnet_0446.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 12:28 — Do artigo ao recap campeão (`area_ponte_yt_search`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_ponte_yt_search__sonnet_1221.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 15:11 — Pauta para longo e playlist (`area_trends_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_trends_longo__sonnet_1455.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 17:12 — Regras oficiais de conteúdo reaproveitado (`area_regras_yt_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_regras_yt_recap__sonnet_1706.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-15 — 0 implantados, 1 reprovado, 0 deixados — 2026-11-15 19:41 — Descoberta de canais de recap no mesmo nicho por país (`area_yt_nome_pais`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_yt_nome_pais__sonnet_1927.md`
+- [INÉDITO] github.com/Sirkunle001/youtube-channel-finder — ★1, push 2026-08-25, MIT — Open-source YouTube channel list building for creator marketing and GTM teams. Find every channel in a niche (name, handle, URL, subscribers
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 21:13 — Regras oficiais do YouTube para recap e conteúdo reutilizado (`area_regras_yt`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_regras_yt__sonnet_2111.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 00:06 — Política do YouTube: rótulo de conteúdo alterado/sintético (voz clonada) (`area_yt_politica_conteudo_sintetico`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_politica_conteudo_sintetico__sonnet_0002.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 00:20 — Política de conteúdo reutilizado e como documentar transformação (`area_yt_politica_conteudo_reutilizado`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_politica_conteudo_reutilizado__sonnet_0012.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-16 — 0 implantados, 1 reprovado, 0 deixados — 2026-11-16 02:02 — Fontes novas de recap de anime/manhwa em inglês (vídeos de 1-3 h) (`area_fontes_recap_ingles`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_fontes_recap_ingles__sonnet_0151.md`
+- [INÉDITO] github.com/RTY2345RR/youtube-multi-language-audio — ★0, push 2026-11-15, MIT — YouTube multi-language audio tracks from your subtitles: auto dubbing in your own cloned voice, time-synced to every cue, one upload-ready t

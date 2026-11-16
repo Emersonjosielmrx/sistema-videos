@@ -988,6 +988,27 @@ CORTES_POR_RODADA = 2  # por canal: 3 rodadas/dia → até 6 Shorts de corte/dia
 CORTES_POR_DIA = 6
 
 
+def _corte_nao_rende(canal_nome):
+    """15/11 dona ("os cortes estão valendo a pena ou só enchendo linguiça? se não, focar nos de parceiro"): medido em
+    cortes_x_parceiro.json (mediana de views por canal, API do YouTube, desde 31/10). O corte gasta a MESMA vaga diária
+    do parceiro. Canal com >= CORTES_MIN_N cortes e mediana < CORTES_MIN_VIEWS (50), ou < CORTES_FRACAO (0,7) da
+    mediana do parceiro do canal = corte espera. Sem medida = testa. CORTES_POR_RENDIMENTO=0 desliga."""
+    if os.environ.get("CORTES_POR_RENDIMENTO", "1") == "0":
+        return None
+    try:
+        m = json.loads((AQUI / "cortes_x_parceiro.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    c, n, p = m.get("cortes", {}).get(canal_nome), m.get("cortes_n", {}).get(canal_nome, 0), m.get("parceiro", {}).get(canal_nome)
+    if c is None or n < int(os.environ.get("CORTES_MIN_N", "5")):
+        return None
+    if c < float(os.environ.get("CORTES_MIN_VIEWS", "50")):
+        return f"corte não rende aqui (mediana {c:.0f} views em {n})"
+    if p and c < float(os.environ.get("CORTES_FRACAO", "0.7")) * p:
+        return f"parceiro rende mais aqui (corte {c:.0f} x parceiro {p:.0f})"
+    return None
+
+
 def postar_cortes(ver=False):
     """Shorts dos melhores trechos (bin/melhores_cortes.py, pasta cortes_longo ao lado do video.mp4 no Drive) no canal
     que recebeu o longo, com a descrição apontando pro vídeo completo. Agendado como tudo (politica.postar_youtube)."""
@@ -1009,6 +1030,10 @@ def postar_cortes(ver=False):
         if not cortes:
             log(f"cortes: {item['nome']} sem cortes no Drive — sai da lista")
             pend.remove(item)
+            continue
+        motivo = _corte_nao_rende(item.get("canal_nome") or "")
+        if motivo:
+            log(f"cortes: {item['canal_nome']} — {motivo}; {item['nome']} espera (vaga fica pro parceiro)")
             continue
         canal, _ = politica.achar_canal(item["canal"])
         if canal and (politica.em_limite_diario(canal) or politica.cota_restante(canal, "parceiro") <= 0):

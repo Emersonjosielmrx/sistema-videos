@@ -105,16 +105,31 @@ def resolucao(p):
     return int(r[0]), int(r[1])
 
 
+def _ffmpeg(cmd, rotulo):
+    """15/11 dona ("passar a conversão pros outros; PC1 livre pro VS Code"): o re-encode vai pra um celular/notebook
+    livre (D:\\video-fila\\celulares.rodar_ffmpeg); fora/ocupado = roda aqui, como antes. VEO_NO_CELULAR=0 desliga."""
+    import os
+    if os.environ.get("VEO_NO_CELULAR", "1") != "0":
+        try:
+            import sys as _s
+            _s.path.insert(0, r"D:\video-fila")
+            import celulares
+            if celulares.rodar_ffmpeg(list(cmd), timeout=900, rotulo=rotulo):
+                return
+        except Exception:  # noqa: BLE001
+            pass
+    subprocess.run(cmd, check=True, creationflags=_SEM_JANELA)
+
+
 def limpar(src, destino):
     """Devolve (dur, layout, corte, confiavel). 'cru' = 720x1280 de ~8 s: o clipe do Veo puro (sem marca, legenda,
     propaganda nem cartao - conferido em 15/10), so sobe para 1080x1920. Outro formato: ValueError (fica p/ revisar)."""
     dur = duracao(src)
     res = resolucao(src)
     if res == (720, 1280) and dur <= 9.0:
-        subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(src), "-vf", "scale=1080:1920:flags=lanczos,setsar=1",
-                        "-c:v", "libx264", "-threads", "3", "-crf", "20", "-preset", "medium", "-pix_fmt", "yuv420p",
-                        "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(destino)], check=True,
-                       creationflags=_SEM_JANELA)
+        _ffmpeg([FFMPEG, "-v", "error", "-y", "-i", str(src), "-vf", "scale=1080:1920:flags=lanczos,setsar=1",
+                 "-c:v", "libx264", "-threads", "3", "-crf", "20", "-preset", "medium", "-pix_fmt", "yuv420p",
+                 "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(destino)], f"veo {Path(src).name[:30]}")
         return dur, "cru", round(dur, 2), True
     if res != (1080, 1920):
         raise ValueError(f"formato {res[0]}x{res[1]} de {dur:.1f} s fora do padrao")
@@ -129,10 +144,9 @@ def limpar(src, destino):
         # a legenda embutida passa um pouco do quadro 720x1280 (dos lados e embaixo): pega 900x1600 em volta dele
         # (borda preta fina, legenda inteira); a marca @InovareStories fica acima de y=80 e sai do mesmo jeito
         vf = "[0:v]crop=900:1600:90:160,scale=1080:1920,setsar=1[v]"
-    subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(src), "-t", str(fim), "-filter_complex", vf, "-map", "[v]",
-                    "-map", "0:a?", "-c:v", "libx264", "-threads", "3", "-crf", "20", "-preset", "medium", "-pix_fmt", "yuv420p",
-                    "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(destino)], check=True,
-                   creationflags=_SEM_JANELA)
+    _ffmpeg([FFMPEG, "-v", "error", "-y", "-i", str(src), "-t", str(fim), "-filter_complex", vf, "-map", "[v]",
+             "-map", "0:a?", "-c:v", "libx264", "-threads", "3", "-crf", "20", "-preset", "medium", "-pix_fmt", "yuv420p",
+             "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(destino)], f"veo {Path(src).name[:30]}")
     return dur, lay, fim, detectado and 14.0 <= dur <= 17.0
 
 

@@ -121,6 +121,47 @@ def _reprovada_v2(c, img=None):
     return v
 
 
+def heroi_diferente(img, semente):
+    """15/11 dona (Fábrica de Poses): "o rosto dele mudou de novo" — perguntar por texto aprovava herói de cabelo
+    espetado. Igual à fábrica: a visão VÊ lado a lado o rosto do herói tirado do vídeo (banco) e a capa, e diz se é a
+    mesma pessoa. True = diferente (reprova); False/None = igual ou não deu pra conferir. CAPA_COMPARA_HEROI=0 desliga,
+    =2 reprova (padrão = só anota no log)."""
+    import io
+    import os
+    if os.environ.get("CAPA_COMPARA_HEROI", "1") == "0":
+        return None
+    try:
+        h = capa_longo_v2.heroi_banco(semente)
+        if not h:
+            return None
+        from PIL import Image
+        ger = Image.open(img).convert("RGB")
+        ger = ger.resize((int(ger.width * 1024 / ger.height), 1024))
+        ref = Image.open(capa_longo_v2._so_rosto_foto(h[0])).convert("RGB")
+        ref.thumbnail((400, 1024))
+        lado = Image.new("RGB", (ref.width + 20 + ger.width, 1024), (255, 255, 255))
+        lado.paste(ref, (0, 0))
+        lado.paste(ger, (ref.width + 20, 0))
+        buf = io.BytesIO()
+        lado.save(buf, "JPEG", quality=88)
+        r = visao_capa.perguntar(buf.getvalue(), (
+            "LEFT = official reference frame of the male HERO from the anime/manhwa. RIGHT = a new thumbnail. Compare "
+            "his FACE only (ignore clothes, pose, expression, lighting). Answer ONLY JSON: {\"heroi_mesmo\": true/false "
+            "(the main man on the right has the SAME face: same hair shape and color, same eye shape and color; false "
+            "if he looks like a different or generic guy), \"por_que\": \"<short reason>\"}"), gateway=_gateway())
+    except Exception:  # noqa: BLE001
+        return None
+    if not r or r.get("heroi_mesmo") is not False:
+        return None if not r else False
+    # 15/11 teste: reprovou 2 capas da KwdN que a dona APROVOU (o banco automático dela mistura personagens). Até o
+    # banco ser conferido, na produção só ANOTA; CAPA_COMPARA_HEROI=2 faz reprovar de verdade.
+    if os.environ.get("CAPA_COMPARA_HEROI", "1") != "2":
+        log(f"  capa: [aviso] herói parece diferente do banco do vídeo ({str(r.get('por_que'))[:80]}) — só anotado")
+        return False
+    log(f"  capa: herói diferente do vídeo -> reprovada ({str(r.get('por_que'))[:80]})")
+    return True
+
+
 def _so_roupa_ou_letras(c):
     """06/11 dona: "tem que haver tolerância, vários vídeos estão sendo postados sem capas; se até a hora de postar
     não tiver conseguido aprovar uma capa nas exigências, posta com as rejeitadas de roupa mesmo". Tolerada = reprovada
@@ -214,13 +255,23 @@ def _checar(img):
     return r
 
 
+def _dividida_boa(c):
+    """15/11 dona ("os 2 longos mais vistos usam tela dividida — sendo boa realmente, deve usar"): HomhRlIE72I (583 views,
+    InventoReact) e nd67FAr0h14 (425, Fio da Meada) são antes/depois. Dividida com ROSTO do herói E da mulher e clara =
+    passa; dividida escura ou sem os 2 rostos continua reprovada. CAPA_DIVIDIDA_LIBERA=0 volta a reprovar toda."""
+    import os
+    return (os.environ.get("CAPA_DIVIDIDA_LIBERA", "1") != "0" and bool(c.get("ele")) and bool(c.get("ela"))
+            and not c.get("escura"))
+
+
 def _reprovada(c):
     """Letra/logo, sangue, cara de menor, tela dividida e (dono 20/10) corpo malformado. Multidão não reprova: faz
     parte de cena de batalha."""
     # 30/10: "exposto" — a versão sensual do teste A/B chega perto da linha; nudez nunca vai pra capa (hipercool
     # levou advertência de nudez em 16/10)
     # 01/11 dona: capa no ar com foto de homem real (05_CenaReact) e capas escuras — "foto"/"escura" reprovam
-    return bool(c) and bool(c.get("letras") or c.get("sangue") or c.get("adultos") is False or c.get("dividida")
+    return bool(c) and bool(c.get("letras") or c.get("sangue") or c.get("adultos") is False
+                            or (c.get("dividida") and not _dividida_boa(c))
                             or c.get("exposto") or c.get("foto") or c.get("escura")
                             or visao_capa.defeitos(c, figurantes=False))
 
@@ -1092,7 +1143,8 @@ def capas_ab(source_url, saida, texto="", cena="", generos=None, formato="16:9",
                 chk = _checar(img)
                 if chk and so_heroi:  # herói bebê: a criança é ele; mulher na imagem reprova
                     chk = dict(chk, adultos=False if chk.get("ela") else True, vestidas=False)
-                if not ((_reprovada(chk) if so_heroi else _reprovada_v2(chk, img)) if v2 else _reprovada(chk)):
+                if not ((_reprovada(chk) if so_heroi else _reprovada_v2(chk, img)) if v2 else _reprovada(chk)) \
+                        and not (v2 and heroi_diferente(img, source_url)):  # 15/11: rosto do herói = o do vídeo
                     _compor(img, txt, out, QUADRO.get(formato, QUADRO["16:9"]), estilo=estilo,
                             mascote=None if (maria or v2) else f"{source_url}|{letra}", rostos=chk, fala=fala)
                     out.with_suffix(".capa.json").write_text(json.dumps(

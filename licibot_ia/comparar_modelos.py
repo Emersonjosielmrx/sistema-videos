@@ -25,12 +25,12 @@ def amostra(n: int, semente: int) -> list[dict]:
     """Mistura de carteiras do Opus: metade MEI, um quarto descartadas, o resto CPF/solar (o que houver)."""
     with db.conexao() as c:
         por = {}
-        for cart in ("MEI", "DESCARTADO", "AMIGO_SOLAR", "CPF"):
+        for cart in ("MEI", "DESCARTADO", "DENILDO", "CPF"):
             por[cart] = [dict(r) for r in c.execute(
                 "SELECT * FROM editais WHERE status='analisado' AND carteira=? AND json_ia IS NOT NULL "
                 "AND modelo_ia LIKE 'claude-opus%'", (cart,))]
     rnd = random.Random(semente)
-    quer = {"MEI": n // 2, "DESCARTADO": n // 4, "AMIGO_SOLAR": n // 8, "CPF": n // 8}
+    quer = {"MEI": n // 2, "DESCARTADO": n // 4, "DENILDO": n // 8, "CPF": n // 8}
     escolha = []
     for cart, q in quer.items():
         escolha += rnd.sample(por[cart], min(q, len(por[cart])))
@@ -81,7 +81,7 @@ def _equilibrar(eds: list[dict], n: int, semente: int) -> list[dict]:
     por = {}
     for e in eds:
         por.setdefault(e["carteira"], []).append(e)
-    quer = {"MEI": n // 2, "DESCARTADO": n // 4, "AMIGO_SOLAR": n // 8, "CPF": n // 8}
+    quer = {"MEI": n // 2, "DESCARTADO": n // 4, "DENILDO": n // 8, "CPF": n // 8}
     out = []
     for cart, q in quer.items():
         out += rnd.sample(por.get(cart, []), min(q, len(por.get(cart, []))))

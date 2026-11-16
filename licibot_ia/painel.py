@@ -84,7 +84,7 @@ AVISOS_TIPOS = {  # chave -> tipo esperado
     "tg_token": str, "tg_chat": str, "oportunidade": bool, "lembrete_prazo": bool, "erro": bool,
     "sem_credito": bool, "resumo_diario": bool, "hora_resumo": int, "silencio_de": int, "silencio_ate": int,
     "carteiras": list, "tipos": list, "ufs": list, "liquido_min": float, "invest_min": float, "invest_max": float,
-    "valor_min": float, "valor_max": float,
+    "valor_min": float, "valor_max": float, "cnaes": list,
 }
 UFS = ["AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR",
        "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"]
@@ -223,12 +223,12 @@ def resumo() -> dict:
     }
 
 
+# só o que a tabela e os filtros usam (o resumo e o resto vêm no detalhe): a lista tinha 1,2 MB e levava ~8 s
 _COLS_LISTA = ("numero_controle, status, carteira, gaveta, nota_final, score_viabilidade, score_pagador, "
-               "valor_estimado, valor_lance, margem_estimada, liquido_mei, liquido_cpf, objeto_compra, razao_social, "
-               "uf, municipio, poder_id, esfera_id, modalidade_nome, data_encerramento, data_publicacao, "
-               "exclusivo_me_epp, entrega_remota, exige_presencial, aceita_pf, cnae_sugerido, qtd_itens, "
-               "kw_match, link_pncp, link_sistema, resumo_ia, decisao, anotacao, notificado, tentativas_ia, "
-               "ultimo_erro, tokens_ia, modelo_ia, srp, custo_estimado, length(texto_docs) tam_docs")
+               "valor_estimado, margem_estimada, substr(objeto_compra,1,300) objeto_compra, razao_social, "
+               "uf, municipio, poder_id, esfera_id, modalidade_nome, data_encerramento, "
+               "exclusivo_me_epp, cnae_sugerido, kw_match, link_pncp, decisao, tentativas_ia, "
+               "substr(ultimo_erro,1,120) ultimo_erro, custo_estimado, length(texto_docs) tam_docs")
 
 
 def editais(aba: str) -> list[dict]:
@@ -389,7 +389,8 @@ def gravar_avisos(novos: dict) -> str:
                 raise ValueError(f"{k} não pode ser negativo")
         elif tipo is list:
             v = [str(x) for x in (v or [])]
-            permitido = {"carteiras": {"MEI", "CPF", "AMIGO_SOLAR"}, "tipos": {"produto", "servico", "obra"},
+            permitido = {"carteiras": {"MEI", "CPF", "DENILDO"}, "tipos": {"produto", "servico", "obra"},
+                         "cnaes": set(config.CNAES_MEI) | set(config.CNAES_DENILDO),
                          "ufs": set(UFS)}[k]
             if not set(v) <= permitido:
                 raise ValueError(f"{k}: valor inválido {set(v) - permitido}")
@@ -559,7 +560,9 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/avisos":
                 return self._enviar(200, ler_avisos())
             if u.path == "/api/opcoes":
-                return self._enviar(200, {"modelos": _modelos_gratis(), "prompts": PROMPTS, "efforts": sorted(EFFORTS)})
+                return self._enviar(200, {"modelos": _modelos_gratis(), "prompts": PROMPTS, "efforts": sorted(EFFORTS),
+                                          "cnaes_mei": config.CNAES_MEI, "cnaes_denildo": config.CNAES_DENILDO,
+                                          "ufs": UFS, "vizinhas": config.UFS_VIZINHAS})
             if u.path == "/api/comparacoes":
                 return self._enviar(200, comparacoes())
             return self._enviar(404, {"erro": "rota não existe"})
@@ -616,6 +619,12 @@ class Handler(BaseHTTPRequestHandler):
                 msg = avisar_agora()
             elif u.path == "/api/avisos":
                 msg = gravar_avisos(d)
+            elif u.path == "/api/agente":
+                import agente
+                hist = d.get("historico") or []
+                if not isinstance(hist, list) or len(hist) > 40:
+                    raise ValueError("histórico inválido")
+                return self._enviar(200, agente.perguntar(hist))
             elif u.path == "/api/simular":
                 import simulador
                 pm = simulador.Parametros()

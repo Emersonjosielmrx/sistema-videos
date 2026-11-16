@@ -1,0 +1,154 @@
+{
+ "conta": "sintetizerisada",
+ "produto": "agenda_ia",
+ "marca": "Agenda IA",
+ "titulo": "Reagendamento sozinho à noite direto no WhatsApp",
+ "legenda": "Imprevistos acontecem fora do horário comercial, mas você não precisa começar o dia resolvendo trocas no celular.\nCom a Agenda IA, o próprio cliente reagenda sozinho direto no WhatsApp, sem conflito de horário.\nAcesse o link no perfil para conhecer.\n\n👉 Chame no direct • link no perfil\n\n#agendamentoonline #clinica #salaodebeleza #barbearia #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Reagendamento automático à noite",
+  "pergunta_cliente": "Cliente desmarca à noite e você perde a manhã resolvendo?",
+  "blocos": [
+   {
+    "rotulo": "A situação",
+    "fala": "Antes eu acordava cheio de pedidos de troca no WhatsApp. Hoje tudo se resolve enquanto descanso.",
+    "visual": "apresentador",
+    "prompt_en": "a tidy and well lit modern Brazilian dental clinic reception desk at night, warm ambient lighting, no people, no text or logos",
+    "cenario_en": "standing in a tidy, well lit modern Brazilian clinic office",
+    "real_tema": "imprevisto_noturno",
+    "destaques": [
+     "pedidos de troca",
+     "enquanto descanso"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261115_224119_2.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Se surge um imprevisto à noite, a Agenda IA reagenda meu cliente sozinha direto pelo WhatsApp.",
+    "visual": "apresentador",
+    "prompt_en": "a clean and tidy Brazilian barbershop interior with leather chairs, warm lighting, commercial photography, no text or readable screens",
+    "cenario_en": "standing at a tidy, well lit reception counter of a Brazilian studio",
+    "real_tema": "reagendamento_whatsapp",
+    "destaques": [
+     "imprevisto à noite",
+     "reagenda meu cliente"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Boa noite, tive um imprevisto amanhã cedo. Consigo mudar meu horário?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Olá! Sem problemas. Temos horário livre na quinta às 15h ou sexta às 10h. Qual prefere?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Quinta às 15h fica ótimo."
+     },
+     {
+      "de": "empresa",
+      "texto": "Perfeito! Seu agendamento foi alterado para quinta-feira às 15h. Até lá!"
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261115_224119_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261115_224119_2.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Assim eu já começo o expediente atendendo no consultório, sem precisar tocar no celular pela manhã.",
+    "visual": "apresentador",
+    "prompt_en": "a professional Brazilian beauty salon interior, tidy and well lit, morning sunlight, person seen from behind preparing workstation, no text",
+    "cenario_en": "standing inside a tidy, well lit Brazilian medical consultation room",
+    "real_tema": "manhas_livres",
+    "destaques": [
+     "começo o expediente",
+     "tocar no celular"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261115_224119_2.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_sintetizerisada_20261115_224119_2.png"
+   }
+  ],
+  "legenda": "Imprevistos acontecem fora do horário comercial, mas você não precisa começar o dia resolvendo trocas no celular.\nCom a Agenda IA, o próprio cliente reagenda sozinho direto no WhatsApp, sem conflito de horário.\nAcesse o link no perfil para conhecer.",
+  "titulo": "Reagendamento sozinho à noite direto no WhatsApp",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "remarcacao_madrugada",
+  "pauta_tipo": "caso_de_uso",
+  "tempo_roteiro_s": 34,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "pica_pau",
+ "efeito_transicao": "glitch",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\sintetizerisada_20261115_223919\\dono_3.mp4",
+ "duracao_s": 32.04,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-15T23:01:29",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  2,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 4,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.7,
+   "fala": "Cliente desmarca à noite e você perde a manhã resolvendo?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.7,
+   "fim": 12.38,
+   "fala": "Antes eu acordava cheio de pedidos de troca no WhatsApp. Hoje tudo se resolve enquanto descanso.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.38,
+   "fim": 20.21,
+   "fala": "Se surge um imprevisto à noite, a Agenda IA reagenda meu cliente sozinha direto pelo WhatsApp.",
+   "tipo": "dono"
+  },
+  {
+   "n": 3,
+   "ini": 20.21,
+   "fim": 28.05,
+   "fala": "Assim eu já começo o expediente atendendo no consultório, sem precisar tocar no celular pela manhã.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.05,
+   "fim": 32.04,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.95,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.8
+  },
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

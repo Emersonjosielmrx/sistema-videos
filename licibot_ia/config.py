@@ -59,7 +59,7 @@ MODO_TOKENS_ARQ = os.getenv("MODO_TOKENS_ARQ", "/opt/omniroute/modo_tokens.json"
 # ── Notificações ─────────────────────────────────────────────────────────────
 # Tudo de aviso fica em AJUSTES["AVISOS"] (o painel grava). Lido de novo a cada uso: o painel é um processo
 # que fica no ar e não pode depender do valor do momento em que subiu.
-GAVETA_TIPO = {"produtos_faceis": "produto", "servicos_ia": "servico", "solar": "obra"}
+GAVETA_TIPO = {"produtos_faceis": "produto", "servicos_ia": "servico", "solar": "obra", "comercio_denildo": "produto"}
 UFS_VIZINHAS = {"GO": ["GO", "DF", "MG", "MS", "MT", "BA", "TO"]}
 AVISOS_PADRAO = {
     "tg_token": "", "tg_chat": "",
@@ -69,8 +69,9 @@ AVISOS_PADRAO = {
     "sem_credito": True,           # IA adiada por falta de crédito do Opus (no máximo 1 a cada 12 h)
     "resumo_diario": True, "hora_resumo": 8,
     "silencio_de": 22, "silencio_ate": 7,       # sem aviso nesse intervalo (fica para depois)
-    "carteiras": ["MEI", "CPF", "AMIGO_SOLAR"],
+    "carteiras": ["MEI", "CPF", "DENILDO"],
     "tipos": ["produto", "servico", "obra"],
+    "cnaes": [],                   # vazio = qualquer CNAE; senão só licitação com esses CNAEs
     "ufs": [],                     # vazio = todo o Brasil
     "liquido_min": 0,              # R$ que sobra no bolso, no mínimo
     "invest_min": 0,               # R$ de custo para entregar (compra da mercadoria, ferramentas), de...
@@ -184,6 +185,31 @@ _SOLAR = [
     r"inversor(es)? (solar\w*|fotovolt\w*|on.grid|hibrido)", r"eficiencia energetica", r"subestac\w+",
 ]
 
+# Comércio do Denildo (CNAEs secundários do CNPJ dele, 15/11): compra de produto, não serviço.
+_COMERCIO_DENILDO = [
+    # 4742-3/00 material elétrico
+    r"materia\w* eletric\w*", r"(fios|cabos) eletric\w*", r"disjuntor(es)?", r"lampadas?", r"luminarias?",
+    r"reator(es)? (para lampada|eletronico)", r"tomadas? (eletric\w*|2p|3p|de embutir|de sobrepor|e interruptores)",
+    r"interruptor(es)?", r"eletrodutos?", r"quadros? de distribuicao",
+    # 4755-5/02 armarinho
+    r"armarinho", r"aviamentos?", r"\blinhas? de costura", r"\bzipers?", r"botoes para", r"elasticos?",
+    # 4755-5/03 cama, mesa e banho
+    r"cama,? mesa e banho", r"roupas? de cama", r"lencois", r"fronhas?", r"toalhas? (de banho|de rosto|de mesa)",
+    r"cobertor(es)?", r"edredo\w*", r"travesseiros?", r"colchas?",
+    # 4763-6/01 brinquedos
+    r"brinquedos?", r"jogos pedagogicos", r"\bbonecas?", r"material ludico", r"kits? recreativ\w*",
+    # 4781-4/00 vestuário e acessórios
+    r"uniformes?", r"fardamentos?", r"camisetas?", r"camisas?", r"jalecos?", r"agasalhos?", r"vestuario",
+    r"bones?", r"meias", r"bermudas?", r"calcas", r"aventa\w+",
+    # 4782-2/01 calçados
+    r"calcados?", r"tenis\b", r"sapatos?", r"botinas?", r"chinelos?", r"sandalias?",
+    # 4789-0/01 suvenires, bijuterias e artesanato
+    r"suvenir\w*", r"souvenir\w*", r"brindes?", r"bijuteria\w*", r"artesanato", r"medalhas?", r"trofeus?",
+    r"canecas? personalizad\w*",
+    # 3329-5/99 instalação de outros equipamentos
+    r"instalacao de (equipamentos|cameras|ar.condicionado|antenas?|persianas|toldos?)",
+]
+
 # Descarte imediato (só no objeto da compra). Serve para matar colisões com os padrões acima.
 _NEGATIVOS = [
     r"protetor solar", r"filtro solar", r"bronzead\w*", r"aquecimento solar", r"aquecedor\w* solar",
@@ -201,7 +227,8 @@ _NEGATIVOS = [
     r"decorac\w+ (de )?natal\w*", r"natalin\w*", r"ornamentac\w*",
     r"funerari\w*", r"translado", r"veterinari\w*", r"castrac\w*",
     r"seguro (patrimonial|predial|automotivo|veicular|de vida)", r"inspecao predial",
-    r"materia\w* esportiv\w*", r"fardamento", r"uniformes?",
+    r"materia\w* esportiv\w*",   # 15/11: uniformes/fardamento saíram (vestuário é CNAE do Denildo)
+    r"lavanderia", r"lavagem de (roupa|enxoval)", r"locacao de brinquedos", r"servicos? de chaveiro",
     r"locacao de (palco|estrutura|tendas?|banheiros?)", r"\bshows?\b", r"iluminacao cenica",
     r"transporte (escolar|de passageiros)", r"postos? de trabalho", r"cessao de mao de obra",
     # 11/11: medidos contra 491 análises do Opus — cortam 28 descartes e nenhum aprovado
@@ -221,6 +248,7 @@ GAVETAS: list[tuple[str, list[re.Pattern]]] = [
     ("solar", _compilar(_SOLAR)),
     ("servicos_ia", _compilar(_SERVICOS_IA)),
     ("produtos_faceis", _compilar(_PRODUTOS_FACEIS)),
+    ("comercio_denildo", _compilar(_COMERCIO_DENILDO)),   # por último: informática/serviço têm prioridade
 ]
 NEGATIVOS = _compilar(_NEGATIVOS)
 
@@ -245,6 +273,21 @@ CNAES_MEI: dict[str, str] = {
     "7319-0/02": "Promoção de vendas",
 }
 
+# CNPJ do Denildo (o "amigo solar"; dona 15/11): principal = energia solar, secundários = cartão CNPJ.
+# Sem teto do MEI. Executa em campo (obra/instalação) e vende os produtos abaixo.
+CNAES_DENILDO: dict[str, str] = {
+    "4321-5/00": "Instalação e manutenção elétrica (energia solar / fotovoltaico) — principal",
+    "3329-5/99": "Instalação de outros equipamentos não especificados anteriormente",
+    "4742-3/00": "Comércio varejista de material elétrico",
+    "4755-5/02": "Comércio varejista de artigos de armarinho",
+    "4755-5/03": "Comércio varejista de artigos de cama, mesa e banho",
+    "4763-6/01": "Comércio varejista de brinquedos e artigos recreativos",
+    "4781-4/00": "Comércio varejista de artigos do vestuário e acessórios",
+    "4782-2/01": "Comércio varejista de calçados",
+    "4789-0/01": "Comércio varejista de suvenires, bijuterias e artesanatos",
+}
+CNAES_POR_CARTEIRA = {"MEI": CNAES_MEI, "DENILDO": CNAES_DENILDO}
+
 # ═════════════════════════════════════════════════════════════════════════════
 # Finanças
 # ═════════════════════════════════════════════════════════════════════════════
@@ -252,7 +295,7 @@ TETO_MEI_ANUAL = _f("TETO_MEI_ANUAL", 81_000.00)
 MEI_FATURADO_ANO = _f("MEI_FATURADO_ANO", 0.0)           # quanto o MEI já faturou no ano (atualize no .env)
 MEI_DAS_MENSAL = _f("MEI_DAS_MENSAL", 80.0)
 COMISSAO_AMIGO_SOLAR = _f("COMISSAO_AMIGO_SOLAR", 0.10)   # nossa parte nos contratos do parceiro
-DESCONTO_PADRAO = {"servicos_ia": 0.25, "produtos_faceis": 0.20, "solar": 0.15}  # até o histórico ter dados
+DESCONTO_PADRAO = {"servicos_ia": 0.25, "produtos_faceis": 0.20, "solar": 0.15, "comercio_denildo": 0.20}  # até o histórico ter dados
 
 # IN SEGES/ME 116/2021: a pessoa física soma 20% (contribuição patronal) à proposta só para comparar;
 # se vencer, o órgão tira esses 20% e recolhe ao INSS.

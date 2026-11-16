@@ -63,25 +63,49 @@ def medir(saida):
     feito = json.loads(saida.read_text("utf-8")) if saida.exists() else {}
     alvos, _ = contas()
     if not set(alvos) <= set(feito):  # dia completo = "medir agora" do painel: mede tudo de novo, trocando conta a
-        alvos = {k: v for k, v in alvos.items() if k not in feito}  # conta (a tabela do painel nao fica pela metade)
+        alvos = {k: v for k, v in alvos.items() if k not in feito or not feito[k].get("abriu")}  # 15/11: refaz as que falharam
     if not alvos:
         return feito
     porta, proc = cofre.abrir("msenergypara")
     with sync_playwright() as p:
         br = p.chromium.connect_over_cdp(f"http://127.0.0.1:{porta}")
         pg = br.contexts[0].new_page()
+        # 15/11 (51 de 58 perfis "não abriram"): depois do 1º TimeoutError a ABA travava — pg.url ficava no perfil de
+        # 5-10 contas antes e nenhum goto seguinte navegava (não era o TikTok lento). Agora: aba nova por conta, espera a
+        # grade em vez de domcontentloaded, e para depois de TIKTOK_MEDIR_MAX_FALHAS seguidas (a próxima execução
+        # refaz só as que falharam). TIKTOK_MEDIR_ROBUSTO=0 volta ao antigo.
+        _os = __import__("os")
+        robusto = _os.environ.get("TIKTOK_MEDIR_ROBUSTO", "1") != "0"
+        max_seg, seg = int(_os.environ.get("TIKTOK_MEDIR_MAX_FALHAS", "6")), 0
         try:
             for nome, h in alvos.items():
+                if robusto:
+                    try:
+                        pg.close()
+                    except Exception:  # noqa: BLE001
+                        pass
+                    pg = br.contexts[0].new_page()
+                erro = False
                 try:
-                    # 14/11: metade das contas dava TimeoutError no padrão de 30 s (TikTok lento) — 60 s
-                    pg.goto(f"https://www.tiktok.com/@{h}", wait_until="domcontentloaded",
-                            timeout=int(__import__("os").environ.get("TIKTOK_MEDIR_TIMEOUT_MS", "60000")))
-                    pg.wait_for_timeout(7000)
+                    if robusto:
+                        pg.goto(f"https://www.tiktok.com/@{h}", wait_until="commit", timeout=30000)
+                        try:
+                            pg.wait_for_selector('a[href*="/video/"], [data-e2e="followers-count"]', timeout=25000)
+                        except Exception:  # noqa: BLE001 — sem grade: o motivo grava título/URL
+                            pass
+                        pg.wait_for_timeout(2500)
+                    else:
+                        # 14/11: metade das contas dava TimeoutError no padrão de 30 s (TikTok lento) — 60 s
+                        pg.goto(f"https://www.tiktok.com/@{h}", wait_until="domcontentloaded",
+                                timeout=int(_os.environ.get("TIKTOK_MEDIR_TIMEOUT_MS", "60000")))
+                        pg.wait_for_timeout(7000)
                     for _ in range(5):  # a grade carrega ~24 videos por vez
                         pg.mouse.wheel(0, 3000)
-                        pg.wait_for_timeout(1500)
+                        # 15/11: com a aba nova (robusto) 1,5 s não carregava a 2ª leva (fabricadeautomacoesia 24 de 48)
+                        pg.wait_for_timeout(3000 if robusto else 1500)
                     d = pg.evaluate(JS_GRADE)
                 except Exception as e:  # noqa: BLE001
+                    erro = True
                     d = {"seg": None, "curt": None, "v": [], "titulo": f"erro {type(e).__name__}"}
                 vs = [num(x) for x in d["v"] if x is not None]
                 # 14/11 dona ("o instagram tem que medir assim como o resto dos tiktoks"): 46 de 58 "não abriram" sem
@@ -96,10 +120,16 @@ def medir(saida):
                 feito[nome] = {"handle": h, "seguidores": num(d["seg"]), "curtidas": num(d["curt"]), "motivo": motivo,
                                "videos": len(vs), "views": sum(vs), "views_max": max(vs) if vs else 0,
                                "zerados": sum(1 for x in vs if x == 0),
-                               "abriu": len(vs) > 0 and "Make Your Day" not in (d["titulo"] or ""),
+                               # 15/11: "Make Your Day" virou o título de TODA página do TikTok (até perfil com 24
+                               # vídeos lidos: "(7)TikTok - Make Your Day") — leu vídeos = abriu
+                               "abriu": len(vs) > 0,
                                "lido_em": datetime.now().astimezone().isoformat(timespec="minutes"),
                                "por_video": {i: num(x) for i, x in (d.get("pv") or [])}}
                 saida.write_text(json.dumps(feito, ensure_ascii=False, indent=1), "utf-8")
+                seg = seg + 1 if erro else 0
+                if robusto and seg >= max_seg:
+                    print(f"{seg} falhas seguidas — paro; a próxima execução refaz as que faltam", flush=True)
+                    break
                 pg.wait_for_timeout(random.randint(3000, 6000))
         finally:
             pg.close()

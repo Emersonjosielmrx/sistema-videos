@@ -794,6 +794,59 @@
         "13:30",
         "19:30"
       ]
+    },
+    {
+      "slug": "animenoturno",
+      "yt_id": "UCewCJ-gv-2FzTHPu5hhIiZA",
+      "nome": "Anime Noturno",
+      "handle": "@animenoturno",
+      "creds": [
+        "novo_animenoturno"
+      ],
+      "status": "ativo",
+      "categoria": "24",
+      "nicho": "anime: cenas épicas, lutas, power-ups, romance e reviravoltas de anime e manhwa, narradas em pt-BR",
+      "persona": "narrador noturno empolgado, fala direto com quem está vendo, curto e provocativo",
+      "tags_base": [
+        "anime",
+        "anime brasil",
+        "manhwa",
+        "recap anime",
+        "cenas de anime"
+      ],
+      "horarios": [
+        "12:30",
+        "18:30",
+        "21:40"
+      ],
+      "nota": "15/11: canal novo do projeto rede (adicionar_canal.py)"
+    },
+    {
+      "slug": "bilionarionoturno",
+      "yt_id": "UC5a8hc96KXJ62xak5vGYosQ",
+      "nome": "Bilionário Noturno",
+      "handle": "@bilionarionoturno",
+      "creds": [
+        "novo_bilionarionoturno"
+      ],
+      "status": "ativo",
+      "categoria": "24",
+      "nicho": "histórias reais de bilionários, impérios, fortunas e quedas: como grandes empresas nasceram, cresceram e quebraram",
+      "persona": "narrador de documentário, voz séria e intrigante, ritmo de história de negócio",
+      "tags_base": [
+        "bilionário",
+        "empreendedorismo",
+        "história de empresas",
+        "dinheiro",
+        "investimento",
+        "negócios"
+      ],
+      "horarios": [
+        "07:30",
+        "12:30",
+        "21:30"
+      ],
+      "nota": "15/11: canal novo do projeto rede (adicionar_canal.py)"
     }
   ],
   "a_verificar": {

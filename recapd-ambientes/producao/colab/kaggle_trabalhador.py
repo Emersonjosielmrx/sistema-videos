@@ -135,7 +135,8 @@ def preparar_applio():
     """Voz clonada (25/10): com GPU, instala o Applio do PC num ambiente PRÓPRIO (o pip dele troca numpy/torch e
     quebraria o render) + o nosso pipeline.py + contentvec/rmvpe/fcpe. Sem GPU ou falhou = longo sem clone."""
     global _APPLIO_OK, _APPLIO_MSG
-    if subprocess.run(["nvidia-smi"], capture_output=True).returncode != 0:
+    import shutil as _sh  # 15/11: na VPS (CPU, Kaggle banido) não existe nvidia-smi — FileNotFoundError matava o worker
+    if not _sh.which("nvidia-smi") or subprocess.run(["nvidia-smi"], capture_output=True).returncode != 0:
         _APPLIO_MSG = "sem GPU"
         print("sem GPU: longo sem voz clonada", flush=True)
         return

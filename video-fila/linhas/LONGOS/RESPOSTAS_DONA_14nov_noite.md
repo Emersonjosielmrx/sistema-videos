@@ -46,3 +46,15 @@ olhar a playlist dele (próximo passo, pela vez do yt-dlp).
 ## 6. Amostras de foto e banner
 Pasta: `D:\hipercool-materiais\AMOSTRAS_CANAIS_14nov`. Versão 2 (`v2_*`) com a mascote ATUAL (morena brasileira,
 biquíni dourado) e poses mais sensuais.
+
+## 15/11 manhã — dona: "baner aprovados pode colocar, kangles considere banidos so lembre de eu verificar depois, os temas vc escolhe"
+- Foto + banner v2 aplicados (Studio, Chrome do cofre de cada canal, 1 por vez): Animescomia, Fio da Meada (n7j), Plantão das Histórias. Prints em postador logs\yt_web\*branding_publicado*. Código: youtube_studio_extras.py --foto/--banner (foto e banner em IDAS SEPARADAS: juntos o recorte do banner trava).
+- Kaggle: as 12 contas com 401 tratadas como BANIDAS. Lembrete pra dona: conferir no Gmail de uma delas (pela saída dela).
+- Temas (config/parceiro.json, backup .bkp_1511_temas), escolhidos pelo placar_nicho_canal (vitórias/testes em 48 h):
+  | Canal | Antes | Agora | Por quê |
+  |---|---|---|---|
+  | Assist-IA Investimentos | financas (29%) | filme_sem_voz | 64% em 21 testes |
+  | Tech Noturno | tecnologia | dorama | 3/3; dorama = melhor nicho geral (67%) |
+  | Mistérios Noturnos | misterios (3 fontes só) | fatos | 47% em 46 testes |
+  | Bicho Noturno | animais | animais (+fatos/pesca no foco) | bate com o nome; fatos 47% |
+  O funil (parceiro_diario._nicho_do_canal) continua testando 20% outros nichos.

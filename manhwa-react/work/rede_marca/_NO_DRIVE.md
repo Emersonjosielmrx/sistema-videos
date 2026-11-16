@@ -145,3 +145,7 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-14 14:44 | veo_curiosidades_ia_20260802_100732__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_curiosidades_ia_20260802_100732__inventoreact.png` | backup_drive.py |
 | 2026-11-14 16:45 | veo_danca_e_musica__20260729_224910__inventoreact.mp4 | 12.5 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_danca_e_musica__20260729_224910__inventoreact.mp4` | backup_drive.py |
 | 2026-11-14 16:45 | veo_danca_e_musica__20260729_224910__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_danca_e_musica__20260729_224910__inventoreact.png` | backup_drive.py |
+| 2026-11-15 11:35 | veo_e_se..._20260811_084825__manhwareact.mp4 | 8.8 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_e_se..._20260811_084825__manhwareact.mp4` | backup_drive.py |
+| 2026-11-15 11:35 | veo_robos_desastrad_20261114_175232__inventoreact.mp4 | 7.1 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_robos_desastrad_20261114_175232__inventoreact.mp4` | backup_drive.py |
+| 2026-11-15 15:02 | veo_ilusoes_de_otic_20260729_211415__manhwareact.mp4 | 11.3 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_ilusoes_de_otic_20260729_211415__manhwareact.mp4` | backup_drive.py |
+| 2026-11-15 15:02 | veo_ilusoes_de_otic_20260729_211415__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_ilusoes_de_otic_20260729_211415__manhwareact.png` | backup_drive.py |

@@ -400,7 +400,7 @@ if os.environ.get("FLOW_SEM_HP") != "1":
     ORDEM_IMAGENS = ("x200ma", "acer", "hp", "sti", "pc2", "desktop")
 # PC2 aguenta vários Chromes juntos ("nem precisa ser um por vez como é nos notebooks"): a imagem usa as portas extras do
 # chrome_conta (cada uma com o seu ocupado_<porta>), sem disputar a 9460 do Veo/postagem nem as 9461+ do TikTok em lote.
-PC2_PORTAS = range(9470, 9476)
+PC2_PORTAS = range(9470, 9480)
 # 01/11 21h (dona: "os notebooks só um por vez está correto, mas o desktop, o PC2 e esse podem fazer vários"): o desktop
 # também usa portas extras (4 núcleos, ~3 GB livres = 3 Chromes de imagem; o Chrome fica aberto só ~80 s pro token)
 # 12/11: o STI (i5, 16 GB) também abre vários Chromes de imagem (como o PC2), nas mesmas portas extras 9470+; assim não
@@ -408,16 +408,18 @@ PC2_PORTAS = range(9470, 9476)
 # 14/11 dona ("o Flow com conta deslogada ainda está na tela do STI"): o TELÃO do STI (vitrine/player.py, perfil
 # vitrine/perfil_navegador, SEM conta Google) usa a porta 9470 — o Flow achava um Chrome vivo na 9470 e entrava nele,
 # caindo em flow.google.com/about (deslogado) na tela. No STI o Flow usa 9471-9474. FLOW_STI_9470=1 volta a usar a 9470.
-PORTAS_EXTRA = {"pc2": PC2_PORTAS, "desktop": range(9470, 9473),
-                **({"sti": (range(9470, 9474) if os.environ.get("FLOW_STI_9470") == "1" else range(9471, 9475))}
+# 15/11 dona ("pode fazer com quantos aquela máquina aguentar; acer, x200 e asus realmente só aguentam 1"): PC2, STI e
+# desktop vão até onde a CPU/RAM deixarem (portas até 9479, o máximo do chrome_conta); os notebooks seguem com 1.
+PORTAS_EXTRA = {"pc2": PC2_PORTAS, "desktop": range(9470, 9478),
+                **({"sti": (range(9470, 9474) if os.environ.get("FLOW_STI_9470") == "1" else range(9471, 9480))}
                    if os.environ.get("FLOW_STI_EXTRA", "1") != "0" else {})}
 # 01/11 23h30 (dona: "testa até X Chromes começar a falhar; 3 não falha põe 4... falhou, reduz; sempre dinâmico"):
 # quantas portas extras cada máquina usa vem de logs\capacidade.json. 3 imagens seguidas OK = +1 vaga; falha de
 # capacidade (Chrome não abriu, pouca RAM, travou) = -1 e esse número vira o teto por 2 h; depois tenta subir de novo.
 # 9470–9479: as 9461–9469 são do TikTok em lote no PC2 (chrome_conta aceita extra até 9479).
 CAP_ARQ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "capacidade.json")
-CAP_INICIO = {"pc2": 6, "desktop": 3}
-CAP_MAX, CAP_SOBE_APOS, CAP_TETO_S = 10, 3, 2 * 3600
+CAP_INICIO = {"pc2": 6, "desktop": 4, "sti": 6}
+CAP_MAX, CAP_SOBE_APOS, CAP_TETO_S = 10, 2, 2 * 3600  # 15/11: sobe após 2 acertos (era 3)
 _FALHA_CAPACIDADE = ("porta de controle", "POUCA_RAM", "TimeoutError", "TargetClosedError", "não respondeu",
                      "sem resposta", "túnel")
 

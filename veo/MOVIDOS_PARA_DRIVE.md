@@ -2696,3 +2696,52 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - e_se..._20261112_150509_intro.mp4
   - e_se..._20261112_150509_prop.mp4
   - e_se..._20261112_150509_punch.mp4
+
+## 2026-11-15 17:12 — 232 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (232 MB) — 45 arquivos:
+  - cassetadas_ia_20261113_114841_final.mp4
+  - cassetadas_ia_20261113_114841_imp.mp4
+  - cassetadas_ia_20261113_114841_intro.mp4
+  - cassetadas_ia_20261113_114841_prop.mp4
+  - cassetadas_ia_20261113_114841_punch.mp4
+  - curiosidades_ia_20261114_004209_final.mp4
+  - curiosidades_ia_20261114_004209_imp.mp4
+  - curiosidades_ia_20261114_004209_intro.mp4
+  - curiosidades_ia_20261114_004209_prop.mp4
+  - curiosidades_ia_20261114_004209_punch.mp4
+  - danca_e_musica__20261112_152333_final.mp4
+  - danca_e_musica__20261112_152333_imp.mp4
+  - danca_e_musica__20261112_152333_intro.mp4
+  - danca_e_musica__20261112_152333_prop.mp4
+  - danca_e_musica__20261112_152333_punch.mp4
+  - dicas_financeir_20261113_213807_final.mp4
+  - dicas_financeir_20261113_213807_imp.mp4
+  - dicas_financeir_20261113_213807_intro.mp4
+  - dicas_financeir_20261113_213807_prop.mp4
+  - dicas_financeir_20261113_213807_punch.mp4
+  - fatos_bizarros_20261114_220244_final.mp4
+  - fatos_bizarros_20261114_220244_imp.mp4
+  - fatos_bizarros_20261114_220244_intro.mp4
+  - fatos_bizarros_20261114_220244_prop.mp4
+  - fatos_bizarros_20261114_220244_punch.mp4
+  - humor_de_ia_20261114_091802_final.mp4
+  - humor_de_ia_20261114_091802_imp.mp4
+  - humor_de_ia_20261114_091802_intro.mp4
+  - humor_de_ia_20261114_091802_prop.mp4
+  - humor_de_ia_20261114_091802_punch.mp4
+  - mitos_vs_verdad_20261114_185400_final.mp4
+  - mitos_vs_verdad_20261114_185400_imp.mp4
+  - mitos_vs_verdad_20261114_185400_intro.mp4
+  - mitos_vs_verdad_20261114_185400_prop.mp4
+  - mitos_vs_verdad_20261114_185400_punch.mp4
+  - noticias_de_ia_20261113_133539_final.mp4
+  - noticias_de_ia_20261113_133539_imp.mp4
+  - noticias_de_ia_20261113_133539_intro.mp4
+  - noticias_de_ia_20261113_133539_prop.mp4
+  - noticias_de_ia_20261113_133539_punch.mp4
+  - segredos_do_oce_20261114_152409_final.mp4
+  - segredos_do_oce_20261114_152409_imp.mp4
+  - segredos_do_oce_20261114_152409_intro.mp4
+  - segredos_do_oce_20261114_152409_prop.mp4
+  - segredos_do_oce_20261114_152409_punch.mp4

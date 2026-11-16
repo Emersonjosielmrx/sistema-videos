@@ -166,6 +166,13 @@ def init_db() -> None:
                 c.execute(f"ALTER TABLE editais ADD COLUMN {col} {tipo}")
         if "leitura" not in {r["name"] for r in c.execute("PRAGMA table_info(execucoes)")}:
             c.execute("ALTER TABLE execucoes ADD COLUMN leitura TEXT")   # completa | incremental
+        # 15/11: o "amigo solar" é o Denildo; a carteira passa a se chamar DENILDO (idempotente)
+        if c.execute("SELECT 1 FROM editais WHERE carteira='AMIGO_SOLAR' LIMIT 1").fetchone():
+            c.execute("UPDATE editais SET carteira='DENILDO' WHERE carteira='AMIGO_SOLAR'")
+            c.execute("UPDATE editais SET cnae_sugerido='4321-5/00' WHERE carteira='DENILDO' "
+                      "AND coalesce(cnae_sugerido,'')='' AND gaveta='solar'")
+            c.execute("UPDATE editais SET json_ia=replace(json_ia,'\"AMIGO_SOLAR\"','\"DENILDO\"') "
+                      "WHERE json_ia LIKE '%AMIGO_SOLAR%'")
 
 
 # ── editais ──────────────────────────────────────────────────────────────────

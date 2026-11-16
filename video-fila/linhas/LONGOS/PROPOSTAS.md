@@ -393,3 +393,53 @@
 - prova: t-mnhLoSb18 (movimento 5.0) apresentou topo da cabeça duplicado/cortado em pan vertical; S6LISaC7K6A (legibilidade 5.0) sofreu deformação severa de malha no rosto em 2.5D.
 - onde: bin/fx_clips.py (_movimento)
 - como testar: Renderizar clipe com pan vertical checando se o clamp impede duplicação visual e fallback para pan/zoom 2D suave em recortes faciais complexos.
+
+## 15/11 04:54 [CERTEZA] Impedir sobreposição de stickers e textos decorativos sobre rostos (gemini/gemini-3.5-flash)
+- prova: SjQHP-0GKJs (legibilidade 5.0: 'MOLECADA?' e 'TRAÍRA' cobrindo boca e queixo) e t-mnhLoSb18 (legibilidade 4.0: 'ESTÃO?' sobre os olhos do protagonista)
+- onde: bin/mascote_overlay.py e bin/fx_clips.py
+- como testar: Renderizar trechos de teste com stickers de apoio e confirmar que a caixa delimitadora dos rostos é duramente respeitada como área proibida
+
+## 15/11 04:54 [CERTEZA] Corrigir wrap horizontal/seam tear em pans e zooms verticais (gemini/gemini-3.5-flash)
+- prova: t-mnhLoSb18 (legibilidade 4.0 e movimento 5.0: rasgo horizontal no terço superior e duplicação da cabeça) e KAA_csRv7NU (historia 5.0: rosto partido verticalmente por seam tear)
+- onde: bin/fx_clips.py (_movimento / clamp de bordas)
+- como testar: Executar fx_clips.py em imagem vertical com movimento de pan e checar ausência de repetição de pixels ou emendas visíveis nas margens superiores
+
+## 15/11 04:54 [CERTEZA] Forçar limpeza/inpaint de balões de texto em inglês e marcas de scanlation (gemini/gemini-3.5-flash)
+- prova: KAA_csRv7NU (historia 5.0: marca 'EN-THUNDERSCANS.COM' e balões não limpos 'SUCH A GROWN MAN...' e 'IS THE SUPREME RULER...')
+- onde: bin/limpar_baloes.py
+- como testar: Submeter os quadros brutos de KAA_csRv7NU ao pipeline de limpeza e verificar eliminação total dos balões em inglês antes do ajuste de legenda
+
+## 15/11 22:53 [CERTEZA] Garantir painel de fundo até o último segundo e eliminar tela preta/congelamento no encerramento (gemini-4-argon)
+- prova: Em SO-icNCOO3E (legibilidade 4.0, movimento 5.0), q25.jpg (5855.25s) a q27.jpg ficam com 70% a 100% da tela em preto sólido vazio atrás da legenda e do avatar, derrubando o movimento do trecho 9 para 6.6%; em NatfJn-eQp0 o trecho final caiu para 9.2% com a mascote congelada; em 0w1FjXmgX0w o encerramento cortou a fala na legenda 'de casa!'.
+- onde: bin/anime_tts.py e bin/mascote_overlay.py (overlay_mascote_deitado / montagem da trilha visual de fechamento e CTA final)
+- como testar: Renderizar os últimos 20s de SO-icNCOO3E e 0w1FjXmgX0w garantindo que o último painel do manhwa (com pan/zoom ativo) se estenda até o fim do áudio do CTA + 0.5s de padding, verificar com ffprobe se a duração de vídeo cobre 100% do áudio e checar se o movimento do último trecho fica acima de 18% sem frames pretos.
+
+## 15/11 22:53 [CERTEZA] Bloquear sobreposição de pop-ups de texto, stickers e HUDs sobre rostos no centro do frame (gemini-4-argon)
+- prova: Em NatfJn-eQp0 (legibilidade 5.0), os pop-ups 'GAROTO', 'O FEITICEIRO' e 'MAIS ENROLAÇÃO' cobriram os olhos de Yuji, a face de Geto e a boca de Sukuna; em 0w1FjXmgX0w (legibilidade 4.0), 'OS GURI?' e 'QUE CORTADO' cobriram o rosto e a cabeça dos personagens; em SO-icNCOO3E (legibilidade 4.0), o HUD 'RASTREANDO...' tampou a cabeça do personagem e metade do balão.
+- onde: bin/fx_clips.py (posicionamento de stickers/pop-ups de impacto e HUDs sobre o vídeo 16:9)
+- como testar: Restringir o ancoramento de pop-ups e HUDs às margens laterais (zonas de blur 16:9) ou ao terço inferior fora da caixa central de rosto, gerar os primeiros 60s de NatfJn-eQp0 e 0w1FjXmgX0w e inspecionar q01-q10 confirmando zero obstrução facial.
+
+## 15/11 22:53 [CERTEZA] Forçar troca de quadros ou recorte multi-foco a cada 1.5s-2s no gancho de abertura (0s a 6.5s) (gemini-4-argon)
+- prova: Mesmo após o ajuste de câmera em 12/11, q01, q02 e q03 (0s a 6.5s) seguem presos no mesmo quadro estático nos 3 vídeos: Sukuna parado em NatfJn-eQp0 (movimento 18.3%, retenção 4.0), mesma imagem de 'RAPAZIADA!' a 'UMA QUE EU TÔ' em 0w1FjXmgX0w (movimento 19.9%) e página inteira sem corte em SO-icNCOO3E.
+- onde: bin/fx_clips.py (_movimento / montagem dos primeiros 6.5s do gancho)
+- como testar: Subdividir páginas ou alternar entre 3 recortes/quadros distintos nos primeiros 6.5s (1 corte a cada frase curta ou 2s) com zoom-in forte, renderizar o início de 0w1FjXmgX0w e confirmar que q01, q02 e q03 exibem enquadramentos diferentes e movimento > 28%.
+
+## 15/11 23:21 [CERTEZA] Safe area e evasão facial obrigatória para overlays de texto e adesivos flutuantes (antigravity/gemini-3.8-flash-tiered)
+- prova: Em NatfJn-eQp0 o pop-up 'GAROTO' cobriu o olho de Yuji, 'O FEITICEIRO' cobriu o rosto de Geto e 'MAIS ENROLAÇÃO' cobriu a boca de Sukuna; em 0w1FjXmgX0w o selo 'OS GURI?' tampou olhos/nariz/boca e 'QUE CORTADO' cobriu a cabeça; em SO-icNCOO3E o HUD cobriu o rosto do personagem e balões de diálogo.
+- onde: bin/mascote_overlay.py / bin/fx_clips.py (rotina de posicionamento de pop-ups, adesivos e tags gráficas)
+- como testar: Renderizar trechos de 5s nos momentos com pop-ups em NatfJn-eQp0 e 0w1FjXmgX0w com detecção facial ativa e verificar se todos os elementos foram deslocados para áreas neutras, mantendo o rosto dos personagens 100% desobstruído.
+
+## 15/11 23:21 [CERTEZA] Forçar alternância de painéis ou zoom punch-in real na imagem durante os 6s do gancho (antigravity/gemini-3.8-flash-tiered)
+- prova: NatfJn-eQp0 travou no mesmo quadro do Sukuna de 0s a 4.5s (q01-q03) com movimento medido de apenas 18.3% e retenção 4.0; em 0w1FjXmgX0w a mesma imagem estática perdurou por três falas (2.0s a 6.5s, 19.9% de movimento), comprovando que apenas alternar stickers de texto não produz dinamismo visual real na abertura.
+- onde: bin/fx_clips.py (_movimento e montagem do gancho inicial nos primeiros 7s)
+- como testar: Renderizar os primeiros 7 segundos de NatfJn-eQp0 e 0w1FjXmgX0w forçando divisão de cortes (máx 2.0s por imagem) ou push-in contínuo na camada de imagem do manhwa, validando se o movimento medido do trecho 0 supera 25%.
+
+## 15/11 23:21 [CERTEZA] Eliminar tela preta no encerramento e garantir animação/fundo contínuo com fade suave (antigravity/gemini-3.8-flash-tiered)
+- prova: SO-icNCOO3E finalizou em tela preta total nos quadros q25 a q27 com movimento de 6.6%; NatfJn-eQp0 congelou a mascote e o fundo estáticos no trecho final com 9.2% de movimento; 0w1FjXmgX0w cortou o áudio abruptamente na frase incompleta ('de' casa!').
+- onde: bin/anime_tts.py / bin/mascote_overlay.py / pipeline de montagem e finalização de áudio/vídeo
+- como testar: Renderizar os últimos 20s de SO-icNCOO3E e NatfJn-eQp0 conferindo a presença de background ativo (partículas/pan suave) sem tela preta e verificando se o áudio e a legenda completam a frase com fade out adequado.
+
+## 15/11 23:21 [CERTEZA] Bloquear inserção de clipes live-action em recaps de mangá/manhwa (antigravity/gemini-3.8-flash-tiered)
+- prova: Em SO-icNCOO3E a nota de história caiu para 4.0 devido à quebra de imersão provocada pela inclusão de um vídeo live-action de escritório em baixa resolução para ilustrar 'O Salto Final Para A Queda' em meio a uma história escolar em preto e branco.
+- onde: bin/arsenal_memes.py / bin/fx_clips.py (filtro de estilo visual para seleção de mídias de apoio e memes)
+- como testar: Executar o seletor de memes em lote para histórias de mangá/manhwa e verificar por asserção que nenhum vídeo live-action com atores reais seja selecionado, priorizando painéis da própria obra ou animações estilizadas.

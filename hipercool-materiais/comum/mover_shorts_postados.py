@@ -25,6 +25,22 @@ LOG = Path(r"D:\tmp\mover_shorts_postados.log")
 LISTA = Path(r"D:\tmp\mover_shorts_lista.txt")
 
 
+MANIFESTO = Path(r"D:\manhwa-react\logs\backup_drive.jsonl")
+
+
+def anotar_manifesto(local, drive, tam):
+    """15/11: o catálogo (postador bin\\catalogo._no_drive) só acha vídeo fora do PC pelo manifesto do backup — sem esta
+    linha, 326 de 350 Shorts postados no YouTube desde 13/11 sumiam do catálogo e o TikTok (reuso) ficava sem fonte
+    em 42 contas. MANIFESTO_SHORTS=0 desliga."""
+    import os
+    if os.environ.get("MANIFESTO_SHORTS", "1") == "0":
+        return
+    linha = {"em": datetime.now().astimezone().isoformat(timespec="seconds"), "local": str(local), "drive": drive,
+             "nome": Path(local).name, "bytes": tam}
+    with MANIFESTO.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(linha, ensure_ascii=False) + "\n")
+
+
 def log(msg):
     linha = f"[{datetime.now():%d/%m %H:%M:%S}] {msg}"
     print(linha, flush=True)
@@ -81,9 +97,11 @@ def main():
         rel = f"{p.name}/video.mp4"
         if rel in ok:
             v = p / "video.mp4"
-            liberado += v.stat().st_size
+            tam = v.stat().st_size
+            liberado += tam
             v.unlink()
             (p / "_NO_DRIVE.txt").write_text(f"{DESTINO}/{rel}\n", encoding="utf-8")
+            anotar_manifesto(v, f"{DESTINO}/{rel}", tam)
             apagados += 1
     log(f"apagados {apagados} de {len(alvo)} (só os conferidos), {liberado / 1e9:.1f} GB liberados; "
         f"{len(alvo) - apagados} ficam no PC (não conferidos: roda de novo depois)")

@@ -369,7 +369,7 @@ def _marcas_fixas(video, W, H, dur, n=16):
     for i in range(n):
         t = dur * (0.05 + 0.9 * i / (n - 1))
         r = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.2f}", "-i", str(video), "-frames:v", "1",
-                            "-vf", f"scale={w}:{h},format=gray", "-f", "rawvideo", "-"], capture_output=True, timeout=60)
+                            "-vf", f"scale={w}:{h},format=gray", "-f", "rawvideo", "-"], capture_output=True, timeout=180)
         if len(r.stdout) < w * h:
             continue
         cont += cv2.dilate(cv2.Canny(np.frombuffer(r.stdout[:w * h], np.uint8).reshape(h, w), 50, 130),
@@ -425,7 +425,7 @@ def _quadros_texto(video, W, H, dur, n=TXT_AMOSTRAS, w=TXT_LARG):
             t = dur * (0.03 + 0.94 * i / (n - 1))
             r = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.2f}", "-i", str(video), "-frames:v", "1",
                                 "-vf", f"scale={w}:{h}", "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
-                               capture_output=True, timeout=60)
+                               capture_output=True, timeout=180)
             if len(r.stdout) >= w * h * 3:
                 out.append(np.frombuffer(r.stdout[:w * h * 3], np.uint8).reshape(h, w, 3))
     return out, w, h

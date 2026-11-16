@@ -14,14 +14,14 @@ from typing import Any
 
 import anthropic
 
-from config import (IA_TEXTO_MAX_CHARS, LLM_PROMPT, CNAES_MEI, COMISSAO_AMIGO_SOLAR, CPF_ENCARGO_COMPARACAO, DESCONTO_PADRAO, INSS_ALIQUOTA_PF,
+from config import (IA_TEXTO_MAX_CHARS, LLM_PROMPT, CNAES_MEI, CNAES_DENILDO, COMISSAO_AMIGO_SOLAR, CPF_ENCARGO_COMPARACAO, DESCONTO_PADRAO, INSS_ALIQUOTA_PF,
                     INSS_TETO, IRRF_ISENTO_ATE, IRRF_REDUTOR_ATE, IRRF_TABELA, LLM_API_KEY,
                     LLM_EFFORT, MEI_DAS_MENSAL, MEI_FATURADO_ANO, NOSSA_CIDADE, NOSSA_UF,
                     PESO_ESFERA, PESO_PODER, TETO_MEI_ANUAL, normalizar)
 
 log = logging.getLogger("licibot.ia")
 
-CARTEIRAS = ["MEI", "CPF", "AMIGO_SOLAR", "DESCARTADO"]
+CARTEIRAS = ["MEI", "CPF", "DENILDO", "DESCARTADO"]
 
 SCHEMA = {
     "type": "object",
@@ -37,8 +37,8 @@ SCHEMA = {
         "local_presencial": {"type": "string", "description": "cidade/UF da presença exigida, ou vazio"},
         "aceita_pessoa_fisica": {"type": "string", "enum": ["sim", "nao", "nao_informado"]},
         "exclusivo_me_epp": {"type": "boolean"},
-        "cnae_mei": {"type": "string", "description": "código da lista de CNAEs do MEI que cobre o objeto, "
-                                                       "ou vazio se nenhum cobre"},
+        "cnae_mei": {"type": "string", "description": "código do CNAE da carteira escolhida (lista do MEI ou do "
+                                                       "DENILDO) que cobre o objeto, ou vazio se nenhum cobre"},
         "custo_percentual": {"type": "number", "description": "nosso custo direto estimado como fração do valor "
                                                               "do lance (0.05 = 5%), incluindo mercadoria e frete"},
         "prazo_execucao_meses": {"type": "number"},
@@ -52,7 +52,7 @@ SCHEMA = {
 }
 
 SYSTEM_PROMPT = f"""Você é analista sênior de licitações públicas brasileiras (Lei 14.133/2021) e trabalha para \
-uma pessoa de {NOSSA_CIDADE}/{NOSSA_UF} que disputa contratações pelo PNCP com três "carteiras":
+uma pessoa de {NOSSA_CIDADE}/{NOSSA_UF} que disputa contratações pelo PNCP com três "carteiras" (MEI, CPF e DENILDO):
 
 1. MEI — serviços feitos em casa com ferramentas de IA (degravação/transcrição, atas, edição de vídeo, \
 legendagem, locução, diagramação, digitalização, treinamento em informática) e venda de produtos simples \
@@ -62,13 +62,15 @@ Desenvolvimento de software, web design, consultoria em TI e suporte em TI NÃO 
 2. CPF — pessoa física (IN SEGES/ME 116/2021), para serviços intelectuais que o MEI não pode fazer \
 (desenvolvimento de sistemas, sites, chatbots, consultoria em TI/IA) e credenciamentos abertos a pessoa física. \
 Só vale se o edital não exigir CNPJ.
-3. AMIGO_SOLAR — parceiro com CNPJ de engenharia elétrica/energia solar: usinas e sistemas fotovoltaicos, \
-instalações elétricas e qualquer contrato acima do teto do MEI que exija empresa de engenharia.
+3. DENILDO — parceiro com CNPJ próprio (sem teto do MEI). CNAEs do CNPJ dele: \
+{json.dumps(CNAES_DENILDO, ensure_ascii=False)}. Faz em campo: usinas e sistemas fotovoltaicos, instalações \
+elétricas e instalação de equipamentos. Vende: material elétrico, armarinho, cama/mesa/banho, brinquedos, \
+vestuário e uniformes, calçados, suvenires/bijuterias/brindes/troféus.
 
 Leia os documentos com atenção e decida:
 - Se a execução exige presença física (plantão, sessões ao vivo, montagem, instalação, visita técnica \
-obrigatória, entrega pessoal) fora de {NOSSA_CIDADE}/{NOSSA_UF}, a carteira é DESCARTADO, exceto em AMIGO_SOLAR, \
-em que o parceiro executa em campo. Entrega de produto por transportadora não conta como presença.
+obrigatória, entrega pessoal) fora de {NOSSA_CIDADE}/{NOSSA_UF}, a carteira é DESCARTADO, exceto em DENILDO \
+quando for obra/instalação, que ele executa em campo. Entrega de produto por transportadora não conta como presença.
 - DESCARTADO também quando: o objeto não é algo que alguma carteira faça; exige atestado, registro em \
 conselho, alvará ou certificação que nenhuma carteira tem; exige CNPJ e o MEI não pode pelo CNAE; ou a \
 licitação foi revogada/anulada/suspensa.
@@ -105,10 +107,12 @@ MEI, a carteira é MEI e itens_que_atendemos lista só esses itens. Nunca descar
 valor total quando dá para disputar só parte. O valor que conta para o teto é a soma dos itens que atendemos.
 4. PRESENÇA: entrega por transportadora/correio NÃO é presença. Instalação, montagem, comissionamento, \
 treinamento presencial, plantão ou sessão ao vivo fora de {NOSSA_CIDADE}/{NOSSA_UF} é presença. Se for obra ou \
-instalação elétrica/energia (inclui nobreak de grande porte, subestação, fotovoltaico), a carteira é \
-AMIGO_SOLAR; para outras presenças, DESCARTADO.
-5. PRODUTO fora dos CNAEs do MEI (ferramentas, móveis, eletrodomésticos de linha branca etc.) só entra se o \
-CNAE de comércio listado cobrir; itens de informática, áudio e vídeo o MEI cobre.
+instalação elétrica/energia/equipamentos (inclui nobreak de grande porte, subestação, fotovoltaico, \
+ar-condicionado), a carteira é DENILDO; para outras presenças, DESCARTADO.
+5. PRODUTO: informática, áudio e vídeo → MEI (se couber no teto; senão DENILDO não cobre e é DESCARTADO). \
+Material elétrico, lâmpadas, armarinho, cama/mesa/banho, brinquedos, vestuário/uniformes, calçados, \
+suvenires/brindes/troféus → DENILDO (cnae_mei vazio; use o CNAE dele no resumo). Produto que nenhum CNAE \
+listado cobre (móveis, ferramentas, alimentos, linha branca etc.) → DESCARTADO.
 6. VIABILIDADE: 0–100. Comece em 60 para algo fornecível e remoto; some se for exclusivo ME/EPP, órgão bom \
 pagador, preço estimado folgado; subtraia por exigência a cumprir, prazo curto, especificação rara, multa alta, \
 muitos concorrentes prováveis. DESCARTADO deve ter viabilidade abaixo de 15.
@@ -147,6 +151,26 @@ def irrf_mensal(renda: float, base: float) -> float:
 
 def score_pagador(poder: str | None, esfera: str | None) -> float:
     return round(0.5 * PESO_PODER.get(poder or "N", 0.5) + 0.5 * PESO_ESFERA.get(esfera or "N", 0.5), 2)
+
+
+_CNAE_DENILDO_TEXTO = [   # para quando a IA não diz o CNAE: o 1º que casar no objeto
+    ("4781-4/00", r"uniforme|fardament|camiset|camisa|jaleco|agasalh|vestuario|bone|meia|bermuda|calca|avental"),
+    ("4782-2/01", r"calcad|tenis|sapato|botina|chinel|sandalia"),
+    ("4763-6/01", r"brinquedo|pedagogic|boneca|ludic|recreativ"),
+    ("4755-5/03", r"cama|lencol|lencois|fronha|toalha|cobertor|edredo|travesseir|colcha"),
+    ("4755-5/02", r"armarinho|aviament|linha de costura|ziper|botoes|elastic"),
+    ("4789-0/01", r"suvenir|souvenir|brinde|bijuteri|artesanat|medalha|trofeu|chaveiro|caneca"),
+    ("4742-3/00", r"eletric|disjuntor|lampada|luminaria|reator|tomada|eletroduto"),
+    ("3329-5/99", r"instalacao de"),
+]
+
+
+def cnae_denildo_por_texto(objeto: str) -> str:
+    t = normalizar(objeto)
+    for cnae, padrao in _CNAE_DENILDO_TEXTO:
+        if re.search(padrao, t):
+            return cnae
+    return "4321-5/00"
 
 
 def pre_nota(e: dict[str, Any], tam_docs: int | None = None) -> float:
@@ -383,15 +407,26 @@ def analisar(e: dict[str, Any], itens: list[dict[str, Any]], descontos: dict[str
     fin = calcular_financas(valor_base, e["gaveta"], custo_pct, meses, descontos)
 
     carteira = ia["carteira"]
+    if carteira == "AMIGO_SOLAR":           # nome antigo (até 15/11) se algum modelo ainda responder assim
+        carteira = "DENILDO"
     motivo = ia["motivo_descarte"]
     cnae = (ia["cnae_mei"] or "").strip() or None
     # travas que o código garante, independentemente do que o modelo disse
     if carteira == "MEI" and not fin["cabe_mei"]:
-        carteira, motivo = ("CPF" if ia["aceita_pessoa_fisica"] != "nao" else "DESCARTADO",
-                            motivo or "o lance estoura o teto anual do MEI")
+        if e.get("gaveta") in ("comercio_denildo", "solar"):
+            carteira = "DENILDO"            # acima do teto do MEI, mas cabe no CNPJ do Denildo
+        else:
+            carteira, motivo = ("CPF" if ia["aceita_pessoa_fisica"] != "nao" else "DESCARTADO",
+                                motivo or "o lance estoura o teto anual do MEI")
     if carteira == "MEI" and cnae not in CNAES_MEI:
-        carteira, motivo = (("CPF", "") if ia["aceita_pessoa_fisica"] == "sim"
-                            else ("DESCARTADO", motivo or f"CNAE {cnae or 'nenhum'} não é permitido ao MEI"))
+        if cnae in CNAES_DENILDO:
+            carteira = "DENILDO"
+        else:
+            carteira, motivo = (("CPF", "") if ia["aceita_pessoa_fisica"] == "sim"
+                                else ("DESCARTADO", motivo or f"CNAE {cnae or 'nenhum'} não é permitido ao MEI"))
+    if carteira == "DENILDO" and cnae not in CNAES_DENILDO:
+        # a IA não disse o CNAE dele: deduz pela gaveta (obra/solar = principal, comércio = vê na regra 5)
+        cnae = "4321-5/00" if e.get("gaveta") == "solar" else cnae_denildo_por_texto(e["objeto_compra"] or "")
     if carteira == "CPF" and (ia["exclusivo_me_epp"] or e.get("exclusivo_me_epp")) and \
             all(i["tipo_beneficio"] == 1 for i in itens if i["numero_item"] in atendidos or not atendidos):
         carteira, motivo = "DESCARTADO", motivo or "exclusivo para ME/EPP: pessoa física não participa"
@@ -402,7 +437,7 @@ def analisar(e: dict[str, Any], itens: list[dict[str, Any]], descontos: dict[str
             carteira, motivo = "DESCARTADO", motivo or f"exige presença em {ia['local_presencial'] or 'local não dito'}"
 
     margem = {"MEI": fin["liquido_mei"] or 0, "CPF": fin["liquido_cpf"],
-              "AMIGO_SOLAR": fin["comissao_solar"]}.get(carteira, 0.0)
+              "DENILDO": fin["comissao_solar"]}.get(carteira, 0.0)
     pag = score_pagador(e["poder_id"], e["esfera_id"])
     nota = 0.0
     if carteira != "DESCARTADO":

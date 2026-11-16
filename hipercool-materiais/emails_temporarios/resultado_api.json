@@ -1,0 +1,131 @@
+{
+ "mailtm": {
+  "provedor": "mailtm",
+  "em": "2026-11-15T11:22:19",
+  "criar_ok": true,
+  "email": "c136m1ne3t@fldubai.com",
+  "seg_criar": 3.6,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "mailgw": {
+  "provedor": "mailgw",
+  "em": "2026-11-15T11:24:51",
+  "criar_ok": false,
+  "erro": "ProxyError: HTTPSConnectionPool(host='api.mail.gw', port=443): Max retries exceeded with url: /domains (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway')))"
+ },
+ "guerrilla": {
+  "provedor": "guerrilla",
+  "em": "2026-11-15T11:23:37",
+  "criar_ok": true,
+  "email": "jviaqbst@guerrillamailblock.com",
+  "seg_criar": 2.1,
+  "tentativas": 3,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "tempmaillol": {
+  "provedor": "tempmaillol",
+  "em": "2026-11-15T11:23:40",
+  "criar_ok": true,
+  "email": "sigrid4884ee@r8f.roomsranked.com",
+  "seg_criar": 2.3,
+  "tentativas": 1,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "dropmail": {
+  "provedor": "dropmail",
+  "em": "2026-11-15T11:24:55",
+  "criar_ok": false,
+  "erro": "RuntimeError: dropmail recusou: {'errors': [{'extensions': {'code': 'authentication_error'}, 'message': 'legacy_token_disabled'}]}"
+ },
+ "maildrop": {
+  "provedor": "maildrop",
+  "em": "2026-11-15T11:23:46",
+  "criar_ok": true,
+  "email": "hgnx2x4mwia2@maildrop.cc",
+  "seg_criar": 3.1,
+  "tentativas": 1,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "1secmail": {
+  "provedor": "1secmail",
+  "em": "2026-11-15T11:23:49",
+  "criar_ok": false,
+  "erro": "SSLError: HTTPSConnectionPool(host='www.1secmail.com', port=443): Max retries exceeded with url: /api/v1/?action=genRandomMailbox&count=1 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIF"
+ },
+ "tempmailplus": {
+  "provedor": "tempmailplus",
+  "em": "2026-11-15T11:22:39",
+  "criar_ok": true,
+  "email": "maftlr1xziki@mailto.plus",
+  "seg_criar": 2.6,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "tempmailio": {
+  "provedor": "tempmailio",
+  "em": "2026-11-15T11:22:42",
+  "criar_ok": true,
+  "email": "ex3gy8sydg@ooynib.com",
+  "seg_criar": 2.0,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "mailnesia": {
+  "provedor": "mailnesia",
+  "em": "2026-11-15T11:22:45",
+  "criar_ok": true,
+  "email": "exukeq605w9c@mailnesia.com",
+  "seg_criar": 2.1,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "inboxkitten": {
+  "provedor": "inboxkitten",
+  "em": "2026-11-15T11:23:52",
+  "criar_ok": true,
+  "email": "ali7ru75i4cc@inboxkitten.com",
+  "seg_criar": 3.1,
+  "tentativas": 3,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "harakiri": {
+  "provedor": "harakiri",
+  "em": "2026-11-15T11:22:48",
+  "criar_ok": true,
+  "email": "s7e3p7pswcom@harakirimail.com",
+  "seg_criar": 3.3,
+  "ler_ok": true,
+  "mensagens": 0
+ },
+ "mailinator": {
+  "provedor": "mailinator",
+  "em": "2026-11-15T11:23:57",
+  "criar_ok": true,
+  "email": "uqirvsrvx193@mailinator.com",
+  "seg_criar": 2.0,
+  "tentativas": 1,
+  "ler_ok": false,
+  "erro_ler": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+ },
+ "developermail": {
+  "provedor": "developermail",
+  "em": "2026-11-15T11:24:58",
+  "criar_ok": false,
+  "erro": "ProxyError: HTTPSConnectionPool(host='www.developermail.com', port=443): Max retries exceeded with url: /api/v1/mailbox (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 B"
+ },
+ "yopmail": {
+  "provedor": "yopmail",
+  "em": "2026-11-15T11:24:04",
+  "criar_ok": true,
+  "email": "d1far2sl5knm@yopmail.com",
+  "seg_criar": 2.6,
+  "tentativas": 1,
+  "ler_ok": false,
+  "erro_ler": "RuntimeError: yopmail não tem API: a lista vem de inbox?login=..&yp=..&yj=.. com tokens do JS + captcha"
+ }
+}

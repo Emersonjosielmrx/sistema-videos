@@ -1532,8 +1532,8 @@ def build_clip_animated(img_path, audio_path, out_path, panel_idx, effects_mgr, 
     animated_tall_filter = (
         f"zoompan="
         f"z='1.25+0.02*sin(2*PI*on/({FPS}*3))':"
-        f"x='iw/2-(iw/zoom/2)+2*sin(2*PI*on/({FPS}*4))':"
-        f"y='if(lte(on,{FPS}),0,min(ih-ih/zoom,(on-{FPS})*3))+1*sin(2*PI*on/({FPS}*5))':"
+        f"x='min(max(iw/2-(iw/zoom/2)+2*sin(2*PI*on/({FPS}*4)),0),iw-iw/zoom)':"
+        f"y='min(max(if(lte(on,{FPS}),0,min(ih-ih/zoom,(on-{FPS})*3))+1*sin(2*PI*on/({FPS}*5)),0),ih-ih/zoom)':"
         f"d={frames}:s={W}x{H}:fps={FPS}"
     )
 
@@ -1650,9 +1650,9 @@ MODELO_ROSTO = Path(os.environ.get("ANIME_ROSTO_MODELO", r"D:\hipercool-materiai
 _ROSTO = {"sess": None, "falhou": False}
 
 
-def _rosto_no_trecho(video, t, flip):
+def _rosto_no_trecho(video, t, flip, forcar=False):
     """(cx, cy) do maior rosto (fração do quadro DEPOIS do corte de 10% e do espelho do descaracterizador) ou None."""
-    if os.environ.get("ANIME_FX_ROSTO") != "1" or _ROSTO["falhou"] or not MODELO_ROSTO.exists():
+    if (os.environ.get("ANIME_FX_ROSTO") != "1" and not forcar) or _ROSTO["falhou"] or not MODELO_ROSTO.exists():
         return None
     try:
         import cv2
@@ -1810,8 +1810,8 @@ def _movimento(idx, dur, out_w, out_h, impacto=False, cy=None, rosto=None, forca
     except ValueError:
         zz = 0.12
     # 31/10 dona: movimento SUAVE nas imagens paradas (paisagem) — a câmera acelera e freia (cosseno) em vez de andar
-    # em linha reta, e flutua de leve. ANIME_FX_SUAVE=1.
-    suave = os.environ.get("ANIME_FX_SUAVE") == "1" and not rosto and not impacto and not gancho
+    # em linha reta, e flutua de leve. ANIME_FX_SUAVE=1. Fallback para pan/zoom 2D suave em recortes faciais (evita saltos).
+    suave = (os.environ.get("ANIME_FX_SUAVE") == "1" or bool(rosto)) and not impacto and not gancho
     prog = f"(1-cos(PI*min(on/{n},1)))/2" if suave else f"min(on/{n},1)"
     # 31/10 dona: ZOOM MÚLTIPLO — 3 zooms secos seguidos até o alvo (rosto/objeto), 1 a cada ANIME_FX_MULTIZOOM_CADA
     # trechos com alvo. Cada degrau sobe em 3 quadros e segura 5.
@@ -1839,17 +1839,22 @@ def _movimento(idx, dur, out_w, out_h, impacto=False, cy=None, rosto=None, forca
         x = "(iw-iw/zoom)*%s" % prog if tipo == 1 else "(iw-iw/zoom)*(1-%s)" % prog
     y = f"{cy:.2f}*(ih-ih/zoom)"
     mira = None
-    if rosto and tipo in (0, 2) and not gancho:  # no gancho o pan contínuo manda (mira fixa = câmera parada)
+    if rosto and not gancho:  # no gancho o pan contínuo manda (mira fixa = câmera parada)
         # janela de zoom com o rosto no centro: canto = (rosto − metade da janela) / folga, por eixo, entre 0 e 1
         zf = 1 + zz
         fx, fy = rosto
-        mira = (min(max((fx - 0.5 / zf) / (1 - 1 / zf), 0.0), 1.0), min(max((fy - 0.5 / zf) / (1 - 1 / zf), 0.0), cy))
-        x, y = f"{mira[0]:.3f}*(iw-iw/zoom)", f"{mira[1]:.3f}*(ih-ih/zoom)"
+        fy_alvo = min(max((fy - 0.5 / zf) / (1 - 1 / zf), 0.0), cy)
+        if tipo in (0, 2):
+            fx_alvo = min(max((fx - 0.5 / zf) / (1 - 1 / zf), 0.0), 1.0)
+            mira = (fx_alvo, fy_alvo)
+            x, y = f"{mira[0]:.3f}*(iw-iw/zoom)", f"{mira[1]:.3f}*(ih-ih/zoom)"
+        else:
+            y = f"{fy_alvo:.3f}*(ih-ih/zoom)"
     # 28/10 dona: "não é tremida em todo trecho, é um BALANÇO nas lutas" — câmera balança devagar nas frases de
     # impacto (ANIME_FX_BALANCO=1). Medido: custo ~0 (bench 11_balanco_desloca).
     if impacto and os.environ.get("ANIME_FX_BALANCO") == "1":
         x = f"({x})+min((iw-iw/zoom)/2,18)*sin(on/9)"
-    if os.environ.get("ANIME_FX_DERIVA") == "1" and mira is None:  # mirando o rosto, a deriva não puxa pra fora dele
+    if os.environ.get("ANIME_FX_DERIVA") == "1" and mira is None and not rosto:  # travamento do 2.5D instável no rosto
         # Deriva 2.5D com offset Y inicial ancorado no terço superior (~0.05 a 0.15),
         # oscilando suavemente sem descer para a zona de corte/decapitação (antigo 0.70 cortava cabeças).
         y0 = max(0.02, cy - 0.05)
@@ -1858,11 +1863,16 @@ def _movimento(idx, dur, out_w, out_h, impacto=False, cy=None, rosto=None, forca
         y = "(ih-ih/zoom)*(%s)" % (
             f"{y0:.2f}+{dy:.2f}*on/{n}" if idx % 2 == 0 else f"{y1:.2f}-{dy:.2f}*on/{n}"
         )
-    if suave:  # flutuação leve por cima do caminho (some sozinha se a folga do zoom for pequena)
-        x = f"min(max(({x})+min((iw-iw/zoom)/4,14)*sin(on/41),0),iw-iw/zoom)"
-        y = f"min(max(({y})+min((ih-ih/zoom)/4,9)*sin(on/53),0),ih-ih/zoom)"
+    # Flutuação leve apenas em imagens paradas (paisagem) sem rosto
+    flutua = os.environ.get("ANIME_FX_SUAVE") == "1" and not rosto and not impacto and not gancho
+    if flutua:
+        x = f"({x})+min((iw-iw/zoom)/4,14)*sin(on/41)"
+        y = f"({y})+min((ih-ih/zoom)/4,9)*sin(on/53)"
     if multi:
         logging.info(f"[multizoom] trecho {idx}: {passos} zooms de {deg:.2f} no alvo")
+    # Clamp estrito nas bordas do movimento de câmera (impede duplicação visual e topo da cabeça duplicado/cortado em pan vertical)
+    x = f"min(max({x},0),iw-iw/zoom)"
+    y = f"min(max({y},0),ih-ih/zoom)"
     # sem ampliar antes (2x pesava demais com o PC cheio do hipercool; 12% de zoom quase não perde nitidez)
     f = (f",fps=30,zoompan=z='{z}':x='{x}':y='{y}'"
          f":d=1:s={out_w}x{out_h}:fps=30")

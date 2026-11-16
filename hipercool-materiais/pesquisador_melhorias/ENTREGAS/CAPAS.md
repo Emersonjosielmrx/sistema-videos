@@ -201,3 +201,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-14\respostas\area_capas_corpus__sonnet_2046.md`
 - [INÉDITO] github.com/tungpm21/niche-research — ★0, push 2026-11-07, MIT — Claude Code skill: YouTube niche research (channel outliers, thumbnail sheets, trending keywords, Studio Research tab) with no API key
 - [INÉDITO] github.com/jb-alvarado/facedetection-thumb — ★4, push 2026-10-29, MIT — Generate thumbnail from video with face detection
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 04:07 — Títulos e capas por tendência (`area_trend_titulo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_trend_titulo__sonnet_0351.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 15/11 (automático: nada aproveitável) — 2026-11-15 18:49 — Padrões de título e capa de recap longo que seguram retenção (`area_titulo_capa_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_titulo_capa_longo__sonnet_1837.md`
+- (todos os itens desta pesquisa foram reprovados)

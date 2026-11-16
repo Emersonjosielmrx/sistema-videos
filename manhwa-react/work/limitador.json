@@ -6,13 +6,13 @@
   },
   "proxy_opus": {
     "falhas": 0,
-    "pausa_s": 300,
-    "pausa_ate": 1794713899.1252048
+    "pausa_s": 4800,
+    "pausa_ate": 1794802041.1670637
   },
   "proxy_haiku": {
-    "falhas": 1,
-    "pausa_s": 600,
-    "pausa_ate": 1794620047.5707068
+    "falhas": 0,
+    "pausa_s": 7200,
+    "pausa_ate": 1794799467.1904747
   },
   "groq": {
     "falhas": 0,

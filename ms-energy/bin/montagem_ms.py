@@ -834,8 +834,10 @@ def montar(clip, roteiro, palavras, out_path, foto_fundo=None, log=print, karaok
                [((" ".join(c) + " " + f).strip(), s, e) for c, f, s, e in blocos_cineticos(alinhadas)])
     card = cartao(foto_fundo, TMP / f"{stem}_cartao.jpg")
 
-    # SFX: estilos leves ganham 1-2 efeitos de som em palavras fortes (dona 01/11)
-    usar_sfx = roteiro.get("estilo") in ESTILOS_LEVES and os.environ.get("MS_SFX", "1") != "0"
+    # SFX: estilos leves ganhavam 1-2 efeitos de som em palavras fortes (dona 01/11)
+    # 15/11: DESLIGADO por padrão — cliente da Globo reclamou de "sons estranhos": a única fonte era o catálogo de memes
+    # do recapd (peido, palavrão, macaco, tiro, Among Us...) sorteado ao acaso. MS_SFX=1 religa (não religar sem a dona).
+    usar_sfx = roteiro.get("estilo") in ESTILOS_LEVES and os.environ.get("MS_SFX", "0") == "1"
     sfx_entradas, sfx_momentos = [], []
     if usar_sfx:
         fortes_idx = [(w, s) for w, s, _e in alinhadas
