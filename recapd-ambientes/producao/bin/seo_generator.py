@@ -96,8 +96,38 @@ def _banco():
         return {}
 
 
-def _palavras(b):
-    """Bloco do prompt com as palavras buscadas + padrões reais de busca."""
+PALAVRAS_NICHO = PALAVRAS.with_name("seo_palavras_nicho.json")
+
+
+def _palavras(b, midia=None):
+    """Bloco do prompt com as palavras buscadas + padrões reais de busca.
+    16/11: o banco (seo_palavras.json) é só de ANIME, escrito à mão em 30/10 — e entrava no título de TODO nicho: Short
+    de pesca/futebol recebia "anime recap, isekai, ele foi traído pelo clã" como palavra buscada. Com `midia` e o
+    arquivo do bin/palavras_buscadas.py (autocompletar do YouTube por nicho, atualizado 1x/dia) usa as do nicho do
+    vídeo; nicho sem coleta que não é anime/manhwa = sem o bloco de anime. SEO_PALAVRAS_NICHO=0 volta ao de sempre."""
+    # anime/manhwa seguem com o banco escrito pelo dono (padrões aprovados); a coleta vale pros OUTROS nichos
+    # SEO_PALAVRAS_NICHO: "sem" (padrão) = nicho que não é anime/manhwa NÃO recebe o banco de anime nem lista nenhuma;
+    # "1" = recebe a referência do autocompletar (DESLIGADA por padrão: no teste de 16/11 o modelo ainda inventou
+    # "traíra" e "isca artificial" num vídeo que não fala disso); "0" = como era (banco de anime pra todo nicho).
+    _modo = os.environ.get("SEO_PALAVRAS_NICHO", "sem")
+    if midia and midia not in ("anime", "manhwa") and _modo != "0":
+        if _modo != "1":
+            return ""
+        try:
+            nicho = (json.loads(PALAVRAS_NICHO.read_text(encoding="utf-8")).get("nichos") or {}).get(midia)
+        except (OSError, ValueError, AttributeError):
+            nicho = None
+        if nicho and nicho.get("palavras"):
+            # 1º teste (16/11): com a lista "pra usar" o modelo COPIAVA as buscas — título "Como pescar com molinete..."
+            # num vídeo sem molinete e tags "pescaria na amazônia, pesca de robalo" (tag que não descreve o vídeo é
+            # enganosa). A lista é só referência de vocabulário; título e tags saem do roteiro.
+            return ("REFERÊNCIA (não é lista pra copiar): assim o público deste assunto escreve na busca do YouTube — "
+                    f"{', '.join(nicho['palavras'][:10])}"
+                    + (f". Perguntas que digitam: {' | '.join(nicho['padroes'][:5])}" if nicho.get("padroes") else "")
+                    + ".\nUse isso só pra escolher PALAVRAS do mesmo jeito que o público fala. Título e tags descrevem "
+                    "o que ESTE vídeo mostra: é PROIBIDO pôr no título ou nas tags lugar, técnica, espécie, produto, "
+                    "pessoa, time, canal, obra, jogo ou marca que o roteiro não menciona.\n")
+        return ""  # sem coleta do nicho: melhor nada do que palavras de anime num vídeo de outro assunto
     pal = [w for ws in b.get("generos", {}).values() for w in ws]
     return (f"Palavras buscadas (use SÓ as que combinam com a história): "
             f"{', '.join(dict.fromkeys(b.get('sempre', []) + pal))}\n"
@@ -343,6 +373,45 @@ _MIDIA_HISTORIA_MITOLOGIA = (
     ("#anime #animerecap #resumoanime #isekai", "#história #mitologia #lendas #civilização #mistérios"),
     ("'anime isekai completo', 'ele foi humilhado anime'", "'civilização perdida', 'mitologia grega', 'história antiga'"),
 )
+# 16/11: seis nichos em produção NÃO tinham tradução e saíam com as regras de "recap de anime" — 464 de 1.263 Shorts de
+# parceiro de 10 a 16/11 (37%): pesca (209), negócios, jurídico, imobiliário, saúde e jogos. Um Short de pesca saiu com
+# "ficou OVERPOWER", "na MAIOR DUNGEON" e tags "anime recap, resumo anime". SEO_MIDIAS_NOVAS=0 desliga estes seis.
+_MIDIA_PESCA = (
+    ("recap de anime", "pescaria e dicas de pesca"),
+    ("anime recap, resumo anime", "pescaria, pesca, dicas de pescaria, isca, peixe"),
+    ("#anime #animerecap #resumoanime #isekai", "#pescaria #pesca #peixe #dicasdepesca"),
+    ("'anime isekai completo', 'ele foi humilhado anime'", "'como pescar', 'melhor isca para', 'pescaria de'"),
+)
+_MIDIA_JOGOS = (
+    ("recap de anime", "curiosidades e segredos de jogos"),
+    ("anime recap, resumo anime", "jogos, games, curiosidades de jogos, segredos dos jogos"),
+    ("#anime #animerecap #resumoanime #isekai", "#jogos #games #curiosidades #gamer"),
+    ("'anime isekai completo', 'ele foi humilhado anime'", "'curiosidades de jogos', 'segredo do jogo', 'você sabia jogos'"),
+)
+_MIDIA_NEGOCIOS = (
+    ("recap de anime", "dica prática de vendas e gestão para quem tem negócio"),
+    ("anime recap, resumo anime", "vendas, negócios, empreendedorismo, clientes, marketing"),
+    ("#anime #animerecap #resumoanime #isekai", "#vendas #negocios #empreendedorismo #marketing"),
+    ("'anime isekai completo', 'ele foi humilhado anime'", "'como vender mais', 'como conseguir clientes', 'como aumentar as vendas'"),
+)
+_MIDIA_SAUDE = (
+    ("recap de anime", "dica prática de gestão e marketing para clínicas e consultórios"),
+    ("anime recap, resumo anime", "clínica, consultório, pacientes, gestão de clínica, marketing para clínica"),
+    ("#anime #animerecap #resumoanime #isekai", "#clinica #consultorio #pacientes #gestao"),
+    ("'anime isekai completo', 'ele foi humilhado anime'", "'como atrair pacientes', 'como lotar a agenda', 'marketing para clínica'"),
+)
+_MIDIA_IMOBILIARIO = (
+    ("recap de anime", "dica prática do mercado imobiliário para corretores e compradores"),
+    ("anime recap, resumo anime", "imóveis, corretor de imóveis, mercado imobiliário, comprar imóvel, vender imóvel"),
+    ("#anime #animerecap #resumoanime #isekai", "#imoveis #corretordeimoveis #mercadoimobiliario #imobiliaria"),
+    ("'anime isekai completo', 'ele foi humilhado anime'", "'como vender imóvel', 'como captar imóveis', 'vale a pena comprar imóvel'"),
+)
+_MIDIA_JURIDICO = (
+    ("recap de anime", "explicação simples de direitos e leis do dia a dia"),
+    ("anime recap, resumo anime", "direito, leis, seus direitos, advogado, justiça"),
+    ("#anime #animerecap #resumoanime #isekai", "#direito #seusdireitos #leis #advogado"),
+    ("'anime isekai completo', 'ele foi humilhado anime'", "'quais são meus direitos', 'o que diz a lei', 'posso ser demitido'"),
+)
 _MIDIAS = {
     "manhwa": _MIDIA_MANHWA, "dorama": _MIDIA_DORAMA, "fatos": _MIDIA_FATOS,
     "esportes": _MIDIA_ESPORTES, "filme_sem_voz": _MIDIA_FILME_SEM_VOZ,
@@ -351,6 +420,9 @@ _MIDIAS = {
     "motivacao": _MIDIA_MOTIVACAO, "financas": _MIDIA_FINANCAS,
     "historia_mitologia": _MIDIA_HISTORIA_MITOLOGIA,
 }
+if os.environ.get("SEO_MIDIAS_NOVAS", "1") != "0":
+    _MIDIAS.update(pesca=_MIDIA_PESCA, jogos=_MIDIA_JOGOS, negocios=_MIDIA_NEGOCIOS, saude=_MIDIA_SAUDE,
+                   imobiliario=_MIDIA_IMOBILIARIO, juridico=_MIDIA_JURIDICO)
 
 
 def gerar_seo_anime(titulo_original, descricao_original="", tags_originais=(), video_id="",
@@ -424,7 +496,7 @@ def gerar_seo_anime(titulo_original, descricao_original="", tags_originais=(), v
                 f"Descrição do vídeo-fonte: {(descricao_original or '')[:400]}\n"
                 f"Tags do vídeo-fonte: {', '.join(list(tags_originais or [])[:10])}\n"
                 + (f"Narração do nosso vídeo (resumo): {resumo}\n" if resumo else "")
-                + _palavras(b)
+                + _palavras(b, midia)
                 + (f"\nPalavras que MAIS renderam nos nossos vídeos medidos (views em 48 h) — encaixe com "
                    f"naturalidade as que tiverem a ver com ESTE vídeo, no título e nas tags: {', '.join(pal_q)}\n"
                    if pal_q else ""))
