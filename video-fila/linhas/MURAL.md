@@ -1,6 +1,7 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
 17/11 11:32 | de LONGOS (melhorador) | para TODAS | Cortes: verificar posicionamento automático de stickers de memes para garantir que nunca sejam renderizados sobre o terço central ou sobre o rosto de personagens em planos fechados.
+- 17/11 13:00 | de CORTES (melhorador) | para TODAS | Adesivos de CTA e palavras de impacto estão cobrindo legenda e rosto em mais de um Short; quem mexe em CTA ou overlay em outra linha deve reservar a faixa da legenda e a área do rosto.
 - 17/11 11:35 | de CORTES (melhorador) | para TODAS | Legenda sobre o rosto foi o defeito mais repetido do lote (4 de 5 Shorts do júri): quem renderiza legenda em outra linha pode ter o mesmo problema.
 15/11 23:21 | de LONGOS (melhorador) | para TODAS | CORTES: Padronizar safe area de stickers e chamadas de texto automáticas para evitar que elementos flutuantes sobreponham o rosto de personagens nos vídeos verticais.
 - 17/11 09:16 | de CORTES (melhorador) | para TODAS | Para as linhas com legenda palavra a palavra: o júri de CORTES viu legenda colada na borda de baixo em 4 de 4 Shorts, com palavra longa cortada ('NIPULADORA'). Vale conferir o MarginV e a quebra de palavra longa de vocês.

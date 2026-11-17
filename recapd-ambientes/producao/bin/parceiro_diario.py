@@ -330,7 +330,9 @@ def _nicho_do_canal(alvo, proprio, principais):
 def _escolher_fonte(c, alvo=None, evitar=None):
     """Fonte do nicho do canal de destino (pt[i]["nicho"]); nicho sem fonte ainda: rodízio — o nicho que menos
     produziu nas últimas 24h. Dentro do nicho, a fonte menos usada."""
-    fontes = c.get("fontes")
+    # 17/11 dona (parceiro @izabela.anholett pra um canal de notícias de IA que ainda não existe): fonte com
+    # "pausada": true fica CADASTRADA mas fora de toda escolha (nicho, foco, funil de teste e rodízio).
+    fontes = [f for f in (c.get("fontes") or []) if not f.get("pausada")]
     if not fontes:
         return c["fonte"], c.get("tipo_fonte", "manhwa")
     estado = _rodizio_estado()
@@ -1551,6 +1553,17 @@ def postar(args):
                 log(f"{nome}: TIMEOUT no upload de {x['pj'].parent.name} — conferir no Studio (fica 'verificar')")
                 parar.add(cid)
                 break
+            if status == "repetido":
+                # 17/11 (politica.ja_enviado_aqui): esta pasta já está no canal — marca como postada e sai da fila
+                # (sem isto ela voltava toda rodada e era barrada pra sempre). Incerto/enviando agora: fica pra depois.
+                m = re.search(r"subiu neste canal \(([\w-]{11})", str(info))
+                if m:
+                    _gravar(x["pj"], posted_url=f"https://youtu.be/{m.group(1)}", canal_postado=nome,
+                            posted_at=agora.isoformat(timespec="seconds"), repetido_barrado=True)
+                    log(f"{nome}: {x['pj'].parent.name} JÁ estava no canal ({m.group(1)}) — marcado postado, não reenvia")
+                else:
+                    log(f"{nome}: {x['pj'].parent.name} barrado contra envio em dobro ({str(info)[:120]})")
+                continue
             if status != "ok":
                 log(f"{nome}: não subiu {x['pj'].parent.name} ({status}: {info})")
                 parar.add(cid)

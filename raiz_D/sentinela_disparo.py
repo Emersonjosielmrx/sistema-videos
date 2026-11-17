@@ -274,6 +274,49 @@ def ler_abas_vscdb():
 # Chats parados por erro
 # ---------------------------------------------------------------------------
 
+_SONDA = {}  # modelo -> (ok, motivo) nesta rodada
+
+
+def sonda_oi(modelo):
+    """17/11 dona ("antes de mandar o continue, mandar um oi na conta e ver se responde DE FATO, pra não sujar o chat
+    com pedidos que não deram certo"): o crédito do OmniRoute às vezes diz que tem e o modelo ainda recusa. Pergunta
+    mínima ('oi', 8 tokens) pela MESMA rota do VS Code e o MESMO modelo do chat; só passa com resposta de verdade.
+    1 vez por modelo por rodada. SENTINELA_SONDA=0 desliga (volta a confiar só no crédito)."""
+    if os.environ.get("SENTINELA_SONDA", "1") == "0" or not modelo:
+        return True, "sonda desligada"
+    if modelo in _SONDA:
+        return _SONDA[modelo]
+    import urllib.request
+    base, token = "<SEGREDO_REMOVIDO>", CHAVE
+    try:
+        p = Path(os.path.expandvars(r"%APPDATA%\Code\User\settings.json"))
+        ev = {x["name"]: x["value"] for x in json.loads(p.read_text(encoding="utf-8")).get(
+            "claudeCode.environmentVariables", [])}
+        base, token = ev.get("ANTHROPIC_BASE_URL") or base, ev.get("ANTHROPIC_AUTH_TOKEN") or token
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    corpo = json.dumps({"model": modelo, "max_tokens": 8,
+                        "messages": [{"role": "user", "content": "oi, responda só: ok"}]}).encode()
+    req = urllib.request.Request(base.rstrip("/") + "/v1/messages", data=corpo, method="POST",
+                                 headers={"content-type": "application/json", "x-api-key": token,
+                                          "authorization": f"Bearer {token}", "anthropic-version": "2023-06-01"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            j = json.loads(r.read().decode("utf-8", "replace"))
+        txt = "".join(c.get("text", "") for c in j.get("content") or [] if isinstance(c, dict))
+        res = (bool(txt.strip()) or j.get("stop_reason") == "max_tokens"), f"respondeu '{txt.strip()[:20]}'"
+    except Exception as e:  # noqa: BLE001  (HTTPError 429/503, timeout...)
+        corpo_erro = ""
+        try:
+            corpo_erro = e.read().decode("utf-8", "replace")[:120]  # type: ignore[attr-defined]
+        except Exception:  # noqa: BLE001
+            pass
+        res = False, f"{type(e).__name__} {getattr(e, 'code', '')} {corpo_erro}".strip()
+    _SONDA[modelo] = res
+    log(f"sonda 'oi' em {modelo}: {'OK' if res[0] else 'NÃO respondeu'} ({res[1][:140]})")
+    return res
+
+
 def _avaliar_chat(sid, nome, status, estado, cota, voltou, motivos):
     """Avalia um chat e devolve o dict do alvo ou None."""
     quando, erro, modelo = ultimo_turno(sid)
@@ -315,6 +358,10 @@ def _avaliar_chat(sid, nome, status, estado, cota, voltou, motivos):
             log(f"{nome}: parei de mandar continue ({MAX_TENTATIVAS} tentativas sem voltar): {erro[:100]}")
             avisar_dona(nome, sid, erro)
             estado[sid] = {**e, "avisado": True}
+        return None
+    ok_sonda, por_que = sonda_oi(modelo)
+    if not ok_sonda:  # não conta tentativa: o chat não recebeu nada
+        pulou(f"crédito diz que tem, mas o 'oi' em {modelo} não respondeu ({por_que[:80]})")
         return None
     return {"nome": nome, "sid": sid, "quando": quando, "erro": erro, "n": e.get("n", 0),
             "prov": prov or "qualquer"}

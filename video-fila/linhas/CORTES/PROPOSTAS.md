@@ -1993,3 +1993,18 @@
 - prova: eda16a q01 (drone de ilha tropical sobre 'o sujeito aguentou desaforo...') e 914886 q02 ('VIVO?' sobre a fala 'bota esse fóssil na água'). Só 2 Shorts e o júri vê quadros soltos, então não é conclusivo.
 - onde: Escolha da cena de abertura (seleção de tomada para o 1º segundo, função de casamento fala × cena).
 - como testar: Conferir no roteiro.txt e no vídeo se a cena do primeiro segundo ilustra a primeira frase. Se isso se repetir em 3 ou mais Shorts no próximo lote, propor regra de seleção de tomada.
+
+## 17/11 13:00 PROPOSTA [CERTEZA] Palavra de impacto da legenda não pode cobrir boca e nariz (cw/claude-sonnet-5-5)
+- prova: sem-obra-f5c6a0 q10 ('TUMULTUANDO' cobre boca e nariz, grave) e q13 ('NINGUÉM' idem, grave). sem-obra-41531a q02 e q03: tarja inclinada sobre tronco e microfone. shein q12: 'REVOLTANTE' cobre a legenda inferior. São 3 Shorts do lote.
+- onde: Módulo que desenha a legenda palavra a palavra e as palavras de impacto (posição Y e rotação da tarja colorida); provavelmente a função de layout/ASS no gerador de legenda da linha CORTES.
+- como testar: Fixar a palavra de impacto na faixa inferior segura, abaixo do rosto e acima da zona dos botões, ou deslocá-la para o lado. Renderizar os 3 Shorts acima mais 2 de controle e conferir a folha de quadros (q10, q13, q02, q03, q12): nenhuma palavra sobre boca/nariz e nenhuma sobreposição com a legenda principal. Medir a nota do júri antes e depois.
+
+## 17/11 13:00 PROPOSTA [CERTEZA] Adesivos de CTA (curtir/inscrever-se + personagem) não podem sobrepor legenda e tarja (cw/claude-sonnet-5-5)
+- prova: sem-obra-f5c6a0 q13 e q16: CTA sobre a tarja preta e a legenda amarela. shein q16: tarja de curtida, botão e personagem sobre o tórax e a legenda. Nos dois casos o júri aponta leitura prejudicada e retenção 6-7.
+- onde: Etapa que insere o CTA final (adesivos de curtir/inscrever-se); ajustar posição ou tempo de entrada e saída em relação à legenda.
+- como testar: Colocar o CTA fora da faixa da legenda (topo lateral ou acima dela) ou esperar a legenda terminar. Renderizar f5c6a0 e shein e conferir q13 e q16: legenda e tarja inteiramente legíveis com o CTA na tela.
+
+## 17/11 13:00 PROPOSTA [CERTEZA] Abertura do narrador ('RAPAZIADA') em dorama/manhwa deve ser barrada também no bloco do narrador (cw/claude-sonnet-5-5)
+- prova: love-after-world-domination q01: o gancho de 0-2 s é só 'RAPAZIADA', saudação de abertura. Isso viola a regra fixa 'dorama e filme: sem bordão/abertura do narrador'. Há só 1 Short no lote, então não vira alavanca agora. A regra 'comece direto no gancho' foi tirada de regras_roteiro em 13/11 e a lição de 26/10 diz que a regra de nicho tem de entrar também no bloco do narrador.
+- onde: Prompt do narrador de nicho (dorama/filme/manhwa) no gerador de roteiro; mais uma validação que descarta ou remove saudação na primeira frase antes da voz.
+- como testar: Listar os roteiro.txt dos últimos 7 dias dos canais de manhwa/dorama e contar quantos começam com saudação ('rapaziada', 'galera', 'salve'). Com 2 ou mais ocorrências, adicionar a regra a regras_roteiro no próximo lote.

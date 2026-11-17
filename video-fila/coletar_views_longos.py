@@ -66,6 +66,18 @@ def main():
         fila_melhorador()
     except Exception:  # noqa: BLE001
         pass
+    # 17/11 dona ("horas dos longos são as mesmas de ontem — ninguém assistiu?"): o views_longos.json só era relido
+    # pelo postar_longos de 6 em 6 h (última leitura 06:10 até 13 h). Aqui relê os com mais de 2 h (página pública do
+    # vídeo, sem conta, 1 pedido a cada 3 s). COLETAR_RELER_LONGOS=0 desliga.
+    if os.environ.get("COLETAR_RELER_LONGOS", "1") != "0":
+        try:
+            os.environ.setdefault("VIEWS_LONGOS_IDADE_H", "2")
+            sys.path.insert(0, str(VL.parent))
+            import views_longos
+            views_longos.atualizar()
+        except Exception as e:  # noqa: BLE001
+            if sys.stdout:
+                print(f"releitura falhou: {type(e).__name__}: {e}")
     r = foto()
     # só grava se a leitura mudou (views_longos é relido a cada ~6 h) ou se passou 1 dia — o arquivo não incha à toa
     ult = None

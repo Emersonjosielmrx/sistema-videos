@@ -3994,3 +3994,39 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 12:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1214.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 12:36 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1226.md`
+- [INÉDITO] github.com/CatDogFishFrog/gemini-webapi-manager — ★0, push 2026-10-19, MIT — 
+
+## [ ] PENDENTE — 2026-11-17 13:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1241.md`
+- [INÉDITO] github.com/juangchuank-ops/gemini-web2api — ★0, push 2026-08-03, MIT — Convert Google Gemini web interface into an OpenAI-compatible API with Web UI console, multi-account rotation, and concurrency limits
+- [INÉDITO] github.com/Moonzayn/geminiwebapi — ★0, push 2026-09-15, MIT — Gemini Web to OpenAI API proxy with multi-account round-robin rotation
+- [INÉDITO] github.com/Godde3s/GhostBrain — ★10, push 2026-09-27, MIT — Turn your FREE web Gemini account into a real OpenAI + Anthropic compatible API — one file, no API key, multi-account rate-limit rotation, a
+
+## [ ] PENDENTE — 2026-11-17 13:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1310.md`
+- [INÉDITO] github.com/nv876620-design/gemini-web-2api — ★0, push 2026-11-08, MIT — 
+- [INÉDITO] github.com/rizky-gumelar/gemini-web2api-go-multi-user — ★0, push 2026-11-05, MIT — 
+- [INÉDITO] github.com/jacob-bd/gemini-notebook-mcp-cli — ★6527, push 2026-11-17, MIT — Programmatic access to Gemini Notebook - via command-line interface (CLI), Model Context Protocol (MCP) server, and AI agent skills.
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 13:34 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1326.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 13:52 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1347.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 14:06 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1356.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 15:35 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1527.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 16:07 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1542.md`
+- (todos os itens desta pesquisa foram reprovados)

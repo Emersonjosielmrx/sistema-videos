@@ -32,10 +32,20 @@ SITE = re.compile(r"\.(com|net|org|co|io|xyz|me|top|site|cc|tv|gg|to)\b|www\.|ma
 
 
 def _dims(video):
-    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "V:0", "-show_entries",
                         "stream=width,height:format=duration", "-of", "json", str(video)], capture_output=True, text=True)
     d = json.loads(r.stdout)
-    return int(d["streams"][0]["width"]), int(d["streams"][0]["height"]), float(d["format"]["duration"])
+    if not d.get("streams"):
+        r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                            "stream=width,height:format=duration", "-of", "json", str(video)], capture_output=True, text=True)
+        d = json.loads(r.stdout)
+    st = d["streams"][0]
+    dur_str = d.get("format", {}).get("duration") or st.get("duration") or 0.0
+    try:
+        dur = float(dur_str)
+    except (ValueError, TypeError):
+        dur = 0.0
+    return int(st["width"]), int(st["height"]), dur
 
 
 FINO = 0.25           # perto de uma marca achada, 4 quadros/s: o painel ROLA e a marca anda junto (26/10: 72 px em 0,5 s)
@@ -147,10 +157,18 @@ def _inpaint(video, saida, grupos, W, H):
     a marca aparece. Caixa GRANDE = tarja branca + nossa marca. Quadros sem marca passam direto."""
     import cv2
     import numpy as np
-    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=r_frame_rate",
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "V:0", "-show_entries", "stream=r_frame_rate",
                         "-of", "csv=p=0", str(video)], capture_output=True, text=True)
-    n, d = (r.stdout.strip() or "30/1").split("/")
-    fps = float(n) / float(d or 1)
+    out_fps = r.stdout.strip()
+    if not out_fps:
+        r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=r_frame_rate",
+                            "-of", "csv=p=0", str(video)], capture_output=True, text=True)
+        out_fps = r.stdout.strip()
+    try:
+        n, d = (out_fps or "30/1").split("/")
+        fps = float(n) / float(d) if float(d) else 30.0
+    except Exception:
+        fps = 30.0
     folga = max(4, int(H * 0.006))
     caixas = []
     for g in grupos:
@@ -159,7 +177,8 @@ def _inpaint(video, saida, grupos, W, H):
         x1, y1 = min(W, int(x1) + folga), min(H, int(y1) + folga)
         if x1 - x0 >= 4 and y1 - y0 >= 4:
             caixas.append((max(0.0, g["a"] - g["passo"] / 2), g["b"] + g["passo"] / 2, x0, y0, x1, y1))
-    dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(video), "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
+    dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", str(video), "-map", "0:V:0?", "-s", f"{W}x{H}",
+                            "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
                            stdout=subprocess.PIPE)
     enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}",
                             "-r", f"{fps}", "-i", "-", "-i", str(video), "-map", "0:v", "-map", "1:a?", "-c:v", "libx264",

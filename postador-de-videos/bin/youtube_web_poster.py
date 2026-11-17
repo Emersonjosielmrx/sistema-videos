@@ -523,9 +523,39 @@ def _fechar_sugestoes(pg):
     except Exception:  # noqa: BLE001 — lista de hashtags ainda por cima do título
         pass
     _shot(pg, "hashtag_por_cima")
-    pg.keyboard.press("Escape")  # com a lista aberta o Escape só fecha a lista
-    pg.wait_for_timeout(600)
+    # 17/11 (Fio da Meada, X29n4fGbdXw: 2 envios perdidos com o Studio em "Envio em 34%" e o diálogo FECHADO — print
+    # 15:25): sem lista de hashtag aberta, o Escape fecha o DIÁLOGO inteiro, não a lista. Só aperta com lista aberta; se
+    # o diálogo sumiu mesmo assim, reabre pelo "Editar rascunho" do vídeo que está subindo. YT_REABRE_DIALOGO=0 desliga.
+    lista = pg.locator("tp-yt-iron-dropdown:visible, ytcp-text-menu:visible, .ytcp-hashtag-suggestions:visible")
+    try:
+        tem_lista = lista.count() > 0
+    except Exception:  # noqa: BLE001
+        tem_lista = True
+    if tem_lista or os.environ.get("YT_REABRE_DIALOGO", "1") == "0":
+        pg.keyboard.press("Escape")  # com a lista aberta o Escape só fecha a lista
+        pg.wait_for_timeout(600)
+    if os.environ.get("YT_REABRE_DIALOGO", "1") != "0" and not _visivel_titulo(pg):
+        _reabrir_rascunho(pg)
     titulo.click(timeout=10000)
+
+
+def _visivel_titulo(pg):
+    try:
+        return pg.locator("#title-textarea #textbox").first.is_visible(timeout=1500)
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _reabrir_rascunho(pg):
+    """O diálogo de detalhes fechou com o envio em andamento: o Studio mostra a linha do vídeo com "Editar rascunho"
+    (o mais recente, no topo da aba Vídeos). Clica nele e espera o título voltar."""
+    log("  o diálogo de detalhes fechou no meio do envio — reabro pelo 'Editar rascunho'")
+    _shot(pg, "dialogo_fechou")
+    botao = pg.locator("ytcp-video-row ytcp-button:has-text('Editar rascunho'), "
+                       "ytcp-video-row ytcp-button:has-text('Edit draft')").first
+    botao.click(timeout=15000)
+    pg.locator("#title-textarea #textbox").first.wait_for(state="visible", timeout=60000)
+    pg.wait_for_timeout(1500)
 
 
 def _video_id(pg):
@@ -1201,6 +1231,83 @@ def _subir_http(slug, e, a, alvo, maiores_18):
         return None
 
 
+def _para_fila_celular(slug, e, a, alvo, maiores_18, canal):
+    """17/11 (dona: "pode postar ao máximo no G20 pra testar se tem diferença de visualizações; o selo vemos se faz
+    diferença; o ideal é cada celular ter uma fila e uma fila geral que distribua"): uma PARTE dos Shorts vai pra
+    fila geral dos celulares (D:\\projeto celular sub controle\\fila_celulares.py) em vez do HTTP. Comparação justa:
+    YT_CELULAR_PARTE (padrão 0.5) = sorteio por vídeo. Só Short agendado público sem maiores de 18 de conta que algum
+    celular de POSTADORES tem. Sai SEM o selo de IA (o app não marca) — é o teste da dona. Conta viva do Kaggle nunca.
+    O ledger recebe o upload quando o celular postar (video_id 'celular:<serial>'). YT_CELULAR_PARTE=0 desliga."""
+    try:
+        parte = float(os.environ.get("YT_CELULAR_PARTE", "0"))  # 17/11 16h: DESLIGADO (CartuchoReact removido; dona decide)
+    except ValueError:
+        parte = 0.0
+    if parte <= 0 or not e.get("email") or a.ensaio or maiores_18 or not alvo or a.privacy != "public":
+        return None
+    if _duracao_video(a.video) > 180:
+        return None
+    import random
+    if random.random() >= parte:
+        return None
+    try:
+        if _conta_no_kaggle(e["email"]):  # regra do IP: conta viva do Kaggle nunca sai pela casa/celular
+            return None
+        pasta = r"D:\projeto celular sub controle"
+        if pasta not in sys.path:
+            sys.path.append(pasta)
+        import fila_celulares as fc
+        import postar_celular as pc
+        email = e["email"].lower()
+        if not any(email in fc._contas(s) for s in pc.POSTADORES):
+            return None
+        p = fc.enfileirar(a.video, a.titulo[:100], email, alvo.astimezone().replace(tzinfo=None),
+                          origem="youtube_web_poster", canal=slug, canal_id=canal.get("id"),
+                          projeto=a.projeto, tipo=a.tipo, sintetico=bool(a.sintetico))
+        log(f"{slug}: foi pra fila dos celulares ({p.name})")
+        _log_http(f"{slug}: fila dos celulares -> {p.name}")
+        return f"fila_celular:{p.name}"
+    except Exception as ex:  # noqa: BLE001 — fila é extra: erro nela segue o HTTP normal
+        _log_http(f"{slug}: fila dos celulares falhou ({type(ex).__name__}: {str(ex)[:150]}) -> HTTP")
+        return None
+
+
+def _subir_celular(slug, e, a, alvo, maiores_18):
+    """17/11 (dona: "faça tudo que falta"): ÚLTIMO recurso depois de HTTP e Chrome falharem — posta o Short pelo APP
+    do YouTube de um celular que tenha a conta do canal (D:\\projeto celular sub controle\\postar_celular.py; G20 e A3).
+    Só o caso simples: Short (≤ 3 min), agendado, público, sem selo sintético (o app não marca 'conteúdo alterado'),
+    sem maiores de 18. Sem descrição/tags/capa/playlist (o app só põe título). Conta viva do Kaggle = recusada lá.
+    Devolve 'celular:<serial>' (o app não mostra o ID do vídeo) ou None. YT_CELULAR=0 desliga."""
+    if os.environ.get("YT_CELULAR", "0") == "0" or not e.get("email"):  # 17/11 16h: desligado até a dona liberar
+        return None
+    motivos = [n for n, v in (("sem horário", not alvo), ("ensaio", a.ensaio), ("maiores de 18", maiores_18),
+                              (f"privacy={a.privacy}", a.privacy != "public"), ("sintético", a.sintetico),
+                              ("não é Short", _duracao_video(a.video) > 180)) if v]
+    if motivos:
+        log(f"{slug}: celular não serve ({', '.join(motivos)})")
+        return None
+    try:
+        pasta = r"D:\projeto celular sub controle"
+        if pasta not in sys.path:
+            sys.path.append(pasta)  # no fim (pasta de outro projeto nunca na frente)
+        import postar_celular as pc
+        serial = pc.aparelho_do_canal(e["email"])
+        if not serial:
+            log(f"{slug}: nenhum celular tem a conta {e['email']}")
+            return None
+        quando = alvo.astimezone().replace(tzinfo=None)
+        # o app não aceita horário que já passou: o envio pelo celular leva ~5 min
+        if quando < datetime.now() + timedelta(minutes=10):
+            quando = datetime.now() + timedelta(minutes=30)
+        log(f"{slug}: HTTP e Chrome falharam -> tentando pelo celular {serial}")
+        r = pc.postar(a.video, a.titulo[:100], serial, e["email"], agendar=quando)
+        _log_http(f"{slug}: celular {serial} -> {r.get('resultado')} {r.get('motivo', '')}".strip())
+        if r.get("resultado") == "ok":
+            return f"celular:{serial}"
+    except Exception as ex:  # noqa: BLE001 — celular é reserva: erro nele nunca derruba o fluxo
+        _log_http(f"{slug}: celular falhou ({type(ex).__name__}: {str(ex)[:200]})")
+    return None
+
+
 def main():
     if sys.stdout:  # pythonw (tarefa agendada) não tem stdout
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -1262,6 +1369,15 @@ def main():
         codigo, msg = bloqueio
         print(f"BLOQUEADO [{codigo}]: {msg}", file=sys.stderr)
         _fim(STATUS_BLOQUEIO.get(codigo, codigo), msg, EXIT_BLOQUEADO)
+    if not a.ensaio and a.tipo != "completo":
+        # 17/11: 2 rodadas mandando a MESMA pasta juntas (15/11 04h: 14 Shorts em dobro) — só uma passa
+        _trava = politica.pegar_trava_envio(canal, a.video)
+        if not _trava:
+            msg = "esta pasta já está sendo enviada pra este canal por outra rodada — não envia em dobro"
+            print(f"BLOQUEADO [repetido]: {msg}", file=sys.stderr)
+            _fim("repetido", msg, EXIT_BLOQUEADO)
+        import atexit
+        atexit.register(politica.soltar_trava_envio, _trava)
 
     alvo = None
     if a.publish_at or a.privacy == "public":  # público SEMPRE agendado (10+ min): nunca abre na hora
@@ -1315,6 +1431,11 @@ def main():
                     pass
                 soltar(br, proc)
 
+    fila = _para_fila_celular(slug, e, a, alvo, maiores_18, canal)
+    if fila:
+        print(f"AGENDADO: {fila}  (canal: {canal['nome'].strip()}, fila dos celulares) → publica "
+              f"{politica.rfc3339(alvo)}")
+        _fim("ok", fila)
     try:
         vid = _subir_http(slug, e, a, alvo, maiores_18)
     except Falha as f:
@@ -1369,6 +1490,8 @@ def main():
                 if FINAL_CLICADO:
                     log(f"{slug}: falhou DEPOIS do botão final no {rem.nome if rem else 'PC1'} — não reenvio (o vídeo "
                         "pode já estar no canal; conferir no Studio)")
+                    # 17/11: grava pra a PRÓXIMA rodada também não reenviar (politica.ja_enviado_aqui)
+                    politica.marcar_envio_incerto(canal, a.video, f"{f.status}: {str(f)[:150]}")
                     break
                 if rem and f.status in ("erro", "morto"):
                     log(f"{slug}: falhou no {rem.nome} [{f.status}] {str(f)[:120]} — tento na próxima máquina")
@@ -1383,6 +1506,13 @@ def main():
         REMOTO = None
         if hasattr(ordem, "close"):
             ordem.close()
+    if ultimo and not FINAL_CLICADO and ultimo.status in ("erro", "morto", "timeout"):
+        cel = _subir_celular(slug, e, a, alvo, maiores_18)
+        if cel:
+            publish_at = politica.rfc3339(alvo) if alvo else None
+            politica.registrar_upload(canal, cel, a.video, publish_at, projeto=a.projeto, tipo=a.tipo)
+            print(f"AGENDADO: {cel}  (canal: {canal['nome'].strip()}, celular) → publica {publish_at}")
+            _fim("ok", cel)
     if ultimo:
         print(f"ERRO navegador [{ultimo.status}]: {ultimo}", file=sys.stderr)
         _fim(ultimo.status, str(ultimo), EXIT_FALHA)

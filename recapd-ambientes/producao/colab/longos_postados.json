@@ -6050,15 +6050,15 @@
    "canal": "novo_codigo_inteligente_n7j",
    "canal_nome": "Fio da Meada",
    "status": "erro",
-   "info": "TimeoutError: Locator.wait_for: Timeout 60000ms exceeded.",
-   "em": "2026-11-17T11:10"
+   "info": "TimeoutError: Locator.evaluate: Timeout 30000ms exceeded.",
+   "em": "2026-11-17T15:37"
   },
   "SO-icNCOO3E_HE_WAS_REJECTED_BY_HIS_CHILDHOOD_FRIEND": {
    "canal": "novo_ia_agora_h3n",
    "canal_nome": "InventoReact",
-   "status": "enviando",
-   "info": "envio começou; se este registro sobrar, o processo morreu no meio (pode ter rascunho)",
-   "em": "2026-11-17T11:38"
+   "status": "erro",
+   "info": "TimeoutError: Locator.wait_for: Timeout 60000ms exceeded.",
+   "em": "2026-11-17T13:21"
   }
  }
 }

@@ -341,6 +341,12 @@ details.dobra > summary svg.lucide { color: hsl(var(--primary)); width: 17px; he
     <div class="glass card"><b>🎬 Longos — views</b><div id="gg-longo-v"></div></div>
     <div class="glass card"><b>🎬 Longos — horas assistidas</b><div id="gg-longo-h"></div></div>
   </div>
+  <!-- 17/11 dona: "adicionar um gráfico de horários das visualizações" -->
+  <h2 class="tit"><i data-lucide="clock"></i>Horários das visualizações <span class="mini" id="gg-hora-sub"></span></h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
+    <div class="glass card"><b>⏰ Views por HORA DE POSTAGEM</b> <span class="mini">(mediana dos Shorts com 48 h+ — que hora rende mais postar)</span><div id="gg-hora-post"></div><div id="gg-hora-n" class="mini"></div></div>
+    <div class="glass card"><b>📈 Hora em que as views ENTRAM</b> <span class="mini">(soma dos últimos 7 dias, todos os canais — o YouTube solta em lotes)</span><div id="gg-hora-cheg"></div></div>
+  </div>
   <h2 class="tit"><i data-lucide="image"></i>Imagens e vídeos gerados por dia <span class="mini">Flow x Gemini</span></h2>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
     <div class="glass card"><b>🖼️ Imagens</b><div id="gg-img"></div></div>
@@ -713,7 +719,7 @@ function barras(dias, series, cores) {
     // 12/11 dona: o total aparece em TODA barra (antes só a cada "passo"); com muitos dias vira "52k" e fonte menor
     const curto = dias.length > 20, tv = tot[i] ? (curto && tot[i] >= 1000 ? (tot[i] / 1000).toFixed(tot[i] < 10000 ? 1 : 0).replace('.', ',') + 'k' : fmt(tot[i])) : '';
     svg += `<text x="${x + bw / 2}" y="${y - 4}" text-anchor="middle" font-size="${dias.length > 40 ? 8 : curto ? 9.5 : 11}" fill="hsl(0 0% 85%)">${tv}</text>`;
-    if (rot) svg += `<text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle" font-size="10" fill="hsl(220 10% 60%)">${esc(d.slice(8, 10) + '/' + d.slice(5, 7))}</text>`;
+    if (rot) svg += `<text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle" font-size="10" fill="hsl(220 10% 60%)">${esc(d.startsWith('0000-00-') ? d.slice(8, 10) + 'h' : d.slice(8, 10) + '/' + d.slice(5, 7))}</text>`;
   });
   svg += '</svg>';
   return `<div style="overflow-x:auto">${svg}</div><div class="legenda">${Object.keys(series).map(n => `<span><i style="background:${cores[n] || '#10b981'}"></i>${esc(n)}</span>`).join('')}</div>`;
@@ -1152,9 +1158,24 @@ async function graficosExtras() {
   if (v.erro) { $('gg-longo-v').innerHTML = erro(v); }
   else {
     const dlo = ds.filter(x => (v.longos_views || {})[x] != null);
-    $('gg-sub').textContent = '· foto de hora em hora (histórico desde 13/11); horas = views × duração média de cada longo';
+    // 17/11 dona: hora do DADO (não da tela)
+    const hh = s => s ? s.slice(8, 10) + '/' + s.slice(5, 7) + ' ' + s.slice(11, 16) : '?';
+    $('gg-sub').textContent = `· views dos longos lidas às ${hh(d.longos_lido_em)} (foto ${hh(d.longos_foto_em)}; relê a cada ~6 h) · gráficos gerados ${hh(d.gerado_em)}; horas = views × duração média de cada longo`;
     $('gg-longo-v').innerHTML = barras(dlo, {'views longos': so(v.longos_views)}, {'views longos': '#f59e0b'});
     $('gg-longo-h').innerHTML = barras(dlo, {'horas longos': so(v.longos_horas)}, {'horas longos': '#ef4444'});
+  }
+  const hr = d.horarios || {};
+  if (hr.erro) $('gg-hora-post').innerHTML = erro(hr);
+  else {
+    const hs = [...Array(24)].map((_, i) => String(i).padStart(2, '0'));
+    const med = {}, cheg = {}, nob = {};
+    hs.forEach(h => { const p = (hr.post || {})[h]; if (p) ((h >= '21' && h <= '22') ? nob : med)[h] = p.mediana; cheg[h] = (hr.chegada_7d || {})[h] || 0; });
+    // barras() espera rótulos de data: passa a hora como 'xxxx-xx-HH' pra cair no rótulo do eixo
+    const rot = hs.map(h => '0000-00-' + h), m2 = o => Object.fromEntries(Object.entries(o).map(([h, v]) => ['0000-00-' + h, v]));
+    $('gg-hora-post').innerHTML = barras(rot, {'mediana de views': m2(med), 'horário nobre (21-22h)': m2(nob)}, {'mediana de views': '#60a5fa', 'horário nobre (21-22h)': '#f59e0b'});
+    $('gg-hora-n').textContent = 'vídeos por hora: ' + hs.filter(h => (hr.post || {})[h]).map(h => `${h}h ${hr.post[h].videos}`).join(' · ');
+    $('gg-hora-cheg').innerHTML = barras(rot, {'views que entraram': m2(cheg)}, {'views que entraram': '#10b981'});
+    $('gg-hora-sub').textContent = `· gerado ${(d.gerado_em || '').slice(11, 16)}`;
   }
   const m = d.midia || {};
   if (m.erro) $('gg-img').innerHTML = erro(m);
@@ -1199,11 +1220,22 @@ async function loadGeral() {
   // gráficos: na 1ª vez e a cada 5 min (o loadGeral roda de 30 em 30 s; redesenhar tudo a cada 30 s piscava a tela)
   if (!$('per-geral').innerHTML || Date.now() - (window._gerT || 0) > 300000) { window._gerT = Date.now(); montarPerGeral(); graficosGeral(); loadRankingGeral(); graficosExtras(); }
   loadResumoSaude();
-  const [d, p, v1, v2, cob, kb, mh] = await Promise.all([api('geral'), POST14 ? Promise.resolve(POST14) : api('postagens?dias=14'),
-    api('canais_views?dias=1'), api('canais_views?dias=2'), api('cobertura'), api('kanban'), api('views_mesma_hora')]);
+  const [d, p, v1, v2, cob, kb, mh, mi] = await Promise.all([api('geral'), POST14 ? Promise.resolve(POST14) : api('postagens?dias=14'),
+    api('canais_views?dias=1'), api('canais_views?dias=2'), api('cobertura'), api('kanban'), api('views_mesma_hora'),
+    api('meta_inscritos')]);
+  // 17/11 dona: meta SEMANAL de inscritos que se ajusta sozinha (sobe se bateu, desce se não)
+  const metaInsc = mi && !mi.erro && !mi.desligado ? stat('target', `Meta de inscritos até ${(mi.fim || '').slice(8, 10)}/${(mi.fim || '').slice(5, 7)}`,
+    `${fmt(mi.atual)} / ${fmt(mi.meta)}`,
+    `<div style="background:hsl(220 15% 18%);border-radius:5px;height:8px;margin:4px 0"><div style="width:${Math.max(1, Math.min(100, mi.pct))}%;height:100%;border-radius:5px;background:#10b981"></div></div>` +
+    `faltam ${fmt(mi.falta)} · precisa ~${fmt(mi.precisa_dia)}/dia (ritmo ${fmt(mi.ritmo_dia)}/dia) · meta ajusta toda semana`,
+    mi.precisa_dia > mi.ritmo_dia * 1.5 ? 'warn' : '') : '';
   // 12/11 (dona: "por que diminuiu pra 2 mil?"): de manhã o "hoje" é sempre pequeno (YouTube solta as views em lotes);
   // a comparação justa é com ONTEM ATÉ A MESMA HORA
   const mesmaHora = mh && !mh.erro ? ` · ontem até ${esc(mh.hora)}: ${fmt(mh.ontem_mesma_hora)}` : '';
+  // 17/11 dona ("tem que ter no painel a hora da última atualização dos dados"): lido = última coleta; YouTube mudou =
+  // última vez que o total andou (ele solta as views em lotes)
+  const hm = s => s ? s.slice(8, 10) + '/' + s.slice(5, 7) + ' ' + s.slice(11, 16) : '?';
+  const dado = v1 && !v1.erro ? ` · lido ${hm(v1.lido_em)} · YouTube mudou ${hm(v1.youtube_mudou_em)}` : '';
   if (kb && !kb.erro) K = kb;
   // até que dia tem postagem (agendado + pronto no PC): o canal com menos segura "todos"; o com mais mostra o teto
   const dm = s => s ? s.slice(8, 10) + '/' + s.slice(5, 7) : '?';
@@ -1235,15 +1267,15 @@ async function loadGeral() {
   const porRede = dd => ['youtube', 'tiktok', 'instagram'].map(pl => `${{youtube: 'YT', tiktok: 'TikTok', instagram: 'Insta'}[pl]} ${noAr(dd, pl)}`).join(' · ');
   const agHoje = linhas.filter(x => x.situacao === 'agendado' && x.quando.slice(0, 10) === dHoje).length;
   if ($('geral-topo')) $('geral-topo').innerHTML =
-    stat('eye', 'Views hoje (desde 06h)', fmt(viewsHoje), `ontem inteiro: ${fmt(viewsOntem)}${mesmaHora}`) +
-    stat('user-plus', 'Inscritos novos hoje', sinal(insc(v1)), `ontem: ${sinal(insc(v2) - insc(v1))} · total ${fmt(inscTotal)}`) +
+    stat('eye', 'Views hoje (desde 06h)', fmt(viewsHoje), `ontem inteiro: ${fmt(viewsOntem)}${mesmaHora}${dado}`) +
+    stat('user-plus', 'Inscritos novos hoje', sinal(insc(v1)), `ontem: ${sinal(insc(v2) - insc(v1))} · total ${fmt(inscTotal)} · lido ${hm(v1 && v1.lido_em)}`) +
     stat('send', 'Vídeos postados hoje', fmt(noAr(dHoje)), `${porRede(dHoje)}${agHoje ? ` · +${agHoje} agendados pra hoje` : ''}`, '', porDia) +
-    stat('history', 'Vídeos postados ontem', fmt(noAr(dOntem)), porRede(dOntem));
+    stat('history', 'Vídeos postados ontem', fmt(noAr(dOntem)), porRede(dOntem)) + metaInsc;
   $('geral-kpis').innerHTML =
     stat('cpu', 'Trabalhos no PC1', (ag.pc1 || []).length, esc((med.pc1 || {}).motivo || '')) +
     stat('server', 'Trabalhos no PC2', (ag.pc2 || []).length, esc((med.pc2 || {}).motivo || ''), (ag.pc2 || []).length ? '' : 'warn') +
     // 24/10: o "ontem: 12 mil" (views) era lido como inscritos; cada número tem cartão próprio, um só assunto por cartão
-    stat('eye', 'VIEWS hoje', fmt(viewsHoje), `desde 06h (o YouTube solta em lotes)${mesmaHora}`) +
+    stat('eye', 'VIEWS hoje', fmt(viewsHoje), `desde 06h (o YouTube solta em lotes)${mesmaHora}${dado}`) +
     stat('eye', 'VIEWS ontem', fmt(viewsOntem), 'visualizações somadas de todos os canais') +
     stat('user-plus', 'INSCRITOS novos hoje', sinal(insc(v1)), `ontem: ${sinal(insc(v2) - insc(v1))} inscritos`) +
     stat('users', 'INSCRITOS no total', fmt(inscTotal), 'soma de todos os canais') + cobertura +

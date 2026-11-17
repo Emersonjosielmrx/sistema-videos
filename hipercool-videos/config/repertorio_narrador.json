@@ -857,6 +857,105 @@
     "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
     "o fato da cena continua na mesma frase ou na seguinte (a piada é tempero, não troca a história)"
    ]
+  },
+  {
+   "id": "eu_cairia",
+   "nome": "Eu cairia / eu faria esse acordo (o narrador admite que cairia na tentação da vilã ou da proposta)",
+   "_dona": "17/11 dona: 'modo tem muitas piadas: prio de tudo, eu cairia, eu faria esse acordo, ela é forte, respeito'",
+   "situacao": [
+    "vila_sedutora",
+    "proposta_tentadora",
+    "mulher_bonita_em_cena"
+   ],
+   "molde": "<a moça faz a proposta/a armadilha>. Galera, sinceramente? Eu cairia. Eu faria esse acordo na hora.",
+   "exemplo_real": "Ela oferece poder em troca de ele ficar no castelo com ela. Sinceramente, galera? Eu faria esse acordo.",
+   "variacoes": [
+    "eu cairia fácil",
+    "eu faria esse acordo",
+    "eu assinava sem ler",
+    "eu nem pensava duas vezes"
+   ],
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
+    "o fato da cena continua na mesma frase ou na seguinte (a piada é tempero, não troca a história)"
+   ]
+  },
+  {
+   "id": "o_prio",
+   "nome": "O prio de tudo / ela é forte, respeito (o prioritário dela é o que salta aos olhos)",
+   "_dona": "17/11 dona: 'prio de tudo', 'ela é forte, respeito' — piada oculta de quem repara sem falar",
+   "situacao": [
+    "mulher_bonita_em_cena",
+    "heroi_constrangido",
+    "luta_com_personagem_feminina"
+   ],
+   "molde": "<fato com a personagem>. E olha, ela é forte. Muito forte. RES-peito. <volta pra história>.",
+   "exemplo_real": "A capitã entra na arena e a plateia inteira se cala. Ela é forte, galera. Muito forte. Respeito.",
+   "variacoes": [
+    "ela é forte, respeito",
+    "esse é o prio de tudo",
+    "o prioritário aqui é outro, né, galera",
+    "duas razões pra respeitar essa mulher"
+   ],
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "nada de palavrão, nome de parte íntima ou ato sexual: só elogio malicioso e trocadilho",
+    "não usar no mesmo capítulo que res_peito (mesma piada)"
+   ]
+  },
+  {
+   "id": "montanhas",
+   "nome": "As montanhas (os seios, sem dizer seios)",
+   "_dona": "17/11 dona: 'usar palavras como montanhas, que é seios; molecagem'",
+   "situacao": [
+    "mulher_bonita_em_cena",
+    "heroi_constrangido"
+   ],
+   "molde": "<fato com a personagem>. E o <apelido> perdido no meio daquelas montanhas, coitado. Foco, foco.",
+   "exemplo_real": "Ela abraça o garoto pra protegê-lo, e o coitado fica perdido no meio das montanhas. Foco, galera.",
+   "variacoes": [
+    "as montanhas",
+    "a cordilheira",
+    "os dois argumentos dela",
+    "o par de motivos"
+   ],
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "NUNCA a palavra 'seios' nem nome de parte íntima: a graça é o eufemismo",
+    "o fato da cena continua na mesma frase ou na seguinte"
+   ]
+  },
+  {
+   "id": "youtube_nao_deixa",
+   "nome": "Isso não vai dar pra passar / vocês sabem o que acontece (o narrador pisca pro público na cena picante)",
+   "_dona": "17/11 dona: 'comentários como não vai dar pra passar, vocês sabem o que acontece, o YouTube não gosta'",
+   "situacao": [
+    "cena_picante_cortada",
+    "casal_sozinho",
+    "beijo_ou_quarto"
+   ],
+   "molde": "<o casal fica a sós / a cena esquenta>. E essa parte aqui, galera, não vai dar pra passar. Vocês sabem o que acontece, né? O YouTube não gosta.",
+   "exemplo_real": "Os dois ficam sozinhos no quarto e a porta fecha. E essa parte, galera, não vai dar pra mostrar. Vocês sabem o que acontece.",
+   "variacoes": [
+    "isso aqui não vai dar pra passar",
+    "vocês sabem o que acontece, né",
+    "o YouTube não gosta dessa parte",
+    "vou pular essa parte senão o canal cai"
+   ],
+   "beleza": true,
+   "max_por_capitulo": 1,
+   "travas": [
+    "só personagem ADULTA da obra; nunca menor de idade, colegial ou idade incerta",
+    "não descrever o que acontece: a piada é justamente NÃO contar",
+    "só quando a obra de fato insinua (casal a sós, porta fecha) — nunca inventar cena"
+   ]
   }
  ],
  "jargao": {

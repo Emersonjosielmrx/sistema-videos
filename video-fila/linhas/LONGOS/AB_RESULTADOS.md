@@ -1,4 +1,4 @@
-# Resultados das variantes dos LONGOS — 17/11 12:09
+# Resultados das variantes dos LONGOS — 17/11 15:08
 
 Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fator (antes disso é ruído).
 
@@ -20,7 +20,7 @@ Só longos com 48 h+ no ar. Vencedor só com 4+ vídeos em CADA variante do fato
 | narradores_modo | com_terciarios | 5 | 0.01 | 1.3 |
 | narradores_modo | dupla | 9 | 0.04 | 0.6 |
 | narradores_modo | mistura_grande | 5 | 0.06 | 25.4 |
-| narradores_modo | primarios_secundarios | 16 | 0.07 | 0.5 |
+| narradores_modo | primarios_secundarios | 16 | 0.08 | 0.5 |
 | narradores_modo | so_primarios | 25 | 0.02 | 1.5 |
 | narradores_modo | solo | 16 | 0.04 | 0.9 |
 | **narradores_modo** | **vence primarios_secundarios** (views/h) | | | |

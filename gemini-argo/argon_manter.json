@@ -1,11 +1,11 @@
 {
  "proxy_pid": 11228,
  "tunnel_pid": 2468,
- "em": "2026-11-17T12:48:22",
+ "em": "2026-11-17T16:38:47",
  "proxy_local": true,
- "tunnel": true,
+ "tunnel": null,
  "ultimo": [
-  "ok"
+  "VPS não respondeu ao ssh (túnel não conferido)"
  ],
  "vps_20133": true
 }

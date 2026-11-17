@@ -31,7 +31,11 @@ MAXIMO = 16  # 06/11: 14 contas verificadas com cota até sexta 21h
 # 17/11 dona ("o VS Code está fechando toda hora — movemos tudo pra outros PCs?"): com 8 linhas de curto a meta virou 16
 # preparações JUNTAS no PC1, cada uma com seu whisper (~600 MB) — memória virtual em 0,5 GB de 31,8 e o VS Code caía.
 # A preparação (baixar + whisper + roteiro) roda no PC1: no máximo PC1_MAX juntas. ABASTECEDOR_PC1_MAX muda.
-PC1_MAX = int(os.environ.get("ABASTECEDOR_PC1_MAX", "0"))  # 17/11 10h40: 0 = não prepara no PC1 (memória do VS Code); falta mover pro STI/PC2/desktop
+# 17/11 10h40: 0 (memória do VS Code). 13h50: 2 — a transcrição agora é pelo Groq (sem whisper local de ~600 MB) e a
+# fila de Shorts do Kaggle zerou (10 GPUs paradas); STI quente (100 °C), PC2/desktop a 100%. Trava de memória abaixo.
+PC1_MAX = int(os.environ.get("ABASTECEDOR_PC1_MAX", "3"))  # 17/11 15h50: 3 (memória 9-11 GB livres com 2; trava de 5 GB segue)
+# memória virtual livre mínima pra disparar mais um (GB); ABASTECEDOR_MEM_MIN_GB muda
+MEM_MIN_GB = float(os.environ.get("ABASTECEDOR_MEM_MIN_GB", "5"))
 MARCA = "abastecedor_kaggle"
 BELOW_NORMAL, SEM_JANELA = 0x00004000, 0x08000000
 
@@ -136,6 +140,23 @@ def _um(simular=False):
     livre_gb = shutil.disk_usage("D:\\").free / 1e9
     if livre_gb < 6:
         return log(f"D: com {livre_gb:.1f} GB livres (< 6) — sem Short extra até liberar espaço")
+    try:  # memória de commit livre (= "memória virtual livre" do Windows; psutil somava o pagefile inteiro)
+        import ctypes
+
+        class _MS(ctypes.Structure):
+            _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                        ("ullTotalPhys", ctypes.c_ulonglong), ("ullAvailPhys", ctypes.c_ulonglong),
+                        ("ullTotalPageFile", ctypes.c_ulonglong), ("ullAvailPageFile", ctypes.c_ulonglong),
+                        ("ullTotalVirtual", ctypes.c_ulonglong), ("ullAvailVirtual", ctypes.c_ulonglong),
+                        ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+        ms = _MS()
+        ms.dwLength = ctypes.sizeof(_MS)
+        ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(ms))
+        livre_virt = ms.ullAvailPageFile / 1e9
+    except Exception:  # noqa: BLE001
+        livre_virt = 99
+    if livre_virt < MEM_MIN_GB:
+        return log(f"memória livre {livre_virt:.1f} GB (< {MEM_MIN_GB}) — sem preparação nova no PC1 (VS Code primeiro)")
     linhas = linhas_curto()
     meta = min(MAXIMO, POR_LINHA * len(linhas), PC1_MAX)
     # 15/11: depois do 3º banimento NENHUMA conta de curto roda no Kaggle (lote_shorts_kaggle._curto_rodando() False)
@@ -147,7 +168,12 @@ def _um(simular=False):
     if sem >= 0:
         try:
             import lote_shorts_kaggle as _lk
-            if _lk._curto_rodando() is False or _lk.kaggle_em_pausa():
+            # 17/11: círculo vicioso — sem Short na fila nenhuma conta de curto RODA, e sem conta rodando aqui a meta
+            # caía pra 1: 14 contas curto vivas e ociosas esperando 1 Short por vez. Agora só cai se NÃO há conta de
+            # curto VIVA no pool (linhas_curto vazio). ABASTECEDOR_EXIGE_RODANDO=1 volta ao antigo.
+            parado = _lk._curto_rodando() is False and (
+                os.environ.get("ABASTECEDOR_EXIGE_RODANDO") == "1" or not linhas)
+            if parado or _lk.kaggle_em_pausa():
                 if meta > sem:
                     log(f"nenhuma conta de curto rodando no Kaggle — meta {meta} -> {sem} (o extra renderizaria no PC1)")
                 meta = min(meta, sem)

@@ -1203,3 +1203,5 @@
 - 2026-11-17 11:18 | aplicar | CONSERTEI | Conserte (achado pelo vigia): Whisper estourou o timeout de 1800s no parceiro-render em vídeos shorts; revisar cálculo d → [20261117_111602_2291.md](20261117_111602_2291.md)
 - 2026-11-17 11:19 | propor | PROPOSTA | Conserte (achado pelo vigia): MemoryError no LEDGER_FILE devido à leitura integral do arquivo; refatorar _ler_ledger par → [20261117_111524_ac80.md](20261117_111524_ac80.md)
 - 2026-11-17 11:22 | aplicar | CONSERTEI | Conserte (achado pelo vigia): MemoryError no LEDGER_FILE devido à leitura integral do arquivo; refatorar _ler_ledger par → [20261117_111919_8499.md](20261117_111919_8499.md)
+- 2026-11-17 12:52 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261117_124037_2ec0.md](20261117_124037_2ec0.md)
+- 2026-11-17 14:32 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): instagram: 10 posts até 14:30, normal ~34 EVIDÊNCIA: ledger/logs de instagram: ho → [20261117_143038_4749.md](20261117_143038_4749.md)

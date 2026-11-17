@@ -24475,6 +24475,54 @@
         "ler as páginas oficiais support.google.com/youtube sobre enviar e agendar Short pelo celular e repos de fluxo ACTION_SEND com URI FileProvider"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_1127.md 2026-11-17"
+    },
+    {
+      "id": "limites_gemini_app",
+      "nome": "Limites oficiais do app Gemini (imagem/vídeo)",
+      "subtemas": [
+        "ler as páginas oficiais support.google.com/gemini e anotar os limites escritos, separando o que é regra e o que é interpretação"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1241.md 2026-11-17"
+    },
+    {
+      "id": "ip_por_conta",
+      "nome": "Um IP por conta no pool",
+      "subtemas": [
+        "como manter uma saída (IP) fixa por conta no proxy e como medir se a conta cai por mudança de IP"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_1241.md 2026-11-17"
+    },
+    {
+      "id": "yt_studio_regras",
+      "nome": "Regras oficiais do YouTube sobre upload automatizado e conteúdo reaproveitado",
+      "subtemas": [
+        "páginas de support.google.com/youtube sobre conteúdo reutilizado, limites de upload diário e verificação, com o texto exato e a data"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1527.md 2026-11-17"
+    },
+    {
+      "id": "termux_concat",
+      "nome": "Termux: montar longos por cópia de stream",
+      "subtemas": [
+        "scripts de `ffmpeg -c copy` e concat no Android, com bitrate e codec iguais entre partes"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1542.md 2026-11-17"
+    },
+    {
+      "id": "yt_estudio_agendar",
+      "nome": "Agendamento nativo do YouTube Studio",
+      "subtemas": [
+        "página oficial support.google.com/youtube sobre programar Shorts/longos, limites de upload por dia e verificação de canal"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1542.md 2026-11-17"
+    },
+    {
+      "id": "termux_liberar_disco",
+      "nome": "Liberar disco no celular e nos PCs",
+      "subtemas": [
+        "limpeza automática pós-upload, espaço do Termux/Android, rotação de arquivos temporários"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1542.md 2026-11-17"
     }
   ],
   "projetos": [

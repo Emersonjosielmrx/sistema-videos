@@ -1293,6 +1293,14 @@
    "nome": "odaniels00",
    "cobertura": "auto",
    "_obs": "15/11 dona: parceiro novo; ESTILO de narração emocional e trilha mais emocionante (referência)"
+  },
+  {
+   "url": "https://www.youtube.com/@izabela.anholett/shorts",
+   "tipo": "noticias_ia",
+   "nome": "izabela.anholett",
+   "cobertura": "auto",
+   "pausada": true,
+   "_obs": "17/11 dona: parceiro novo pra um canal de NOTÍCIAS DE IA. Ela comenta e aparece: usar SÓ a parte de CIMA (onde ela não aparece) e narrar de novo. tipo 'noticias_ia' não é nicho de nenhum canal ainda = não roda até a dona escolher o canal (Tech Noturno hoje é dorama) e o recorte do topo ser medido/testado (falta: chave de recorte no parceiro_marca)."
   }
  ],
  "_fontes_obs": "18/10: rodízio entre nichos (dono: 'todos os tipos de vídeo, não só manhwa'). Tipos: manhwa, anime, dorama, filme_sem_voz, fatos, esportes. Cobertura 'auto' = detecção de legenda por visão; 'kaijinre' = molde específico.",

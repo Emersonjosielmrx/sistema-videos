@@ -573,12 +573,73 @@ def api_canais_views(params):
             ult_i = dia_i[d].get("inscritos", ult_i) if d in dia_i else ult_i
             ult_v = dia_v[d].get("views", ult_v) if d in dia_v else ult_v
             serie.append([d, ult_i, ult_v])
-        out.append({"slug": slug, "inscritos": fim.get("inscritos", 0), "views": fim.get("views", 0),
+        # 17/11 dona ("tem que ter no painel a hora da última atualização dos dados"): hora em que o YouTube MUDOU o
+        # total de views pela última vez (a coleta é de hora em hora, mas o número só anda em lotes)
+        mudou = next((regs[i]["ts"][:16] for i in range(len(regs) - 1, 0, -1)
+                      if regs[i].get("views") != regs[i - 1].get("views")), regs[0].get("ts", "")[:16])
+        out.append({"slug": slug, "inscritos": fim.get("inscritos", 0), "views": fim.get("views", 0), "views_mudou_em": mudou,
                     "videos": fim.get("videos", 0), "ganho_inscritos": fim.get("inscritos", 0) - ini_i.get("inscritos", 0),
                     "ganho_views": fim.get("views", 0) - ini_v.get("views", 0), "desde": ini_v.get("ts", "")[:16],
                     "ate": fim.get("ts", "")[:16], "serie": serie[-120:]})
     out.sort(key=lambda x: -x["ganho_views"])
-    return {"de": de, "ate": ate, "canais": out}
+    return {"de": de, "ate": ate, "canais": out, "lido_em": max((c["ate"] for c in out), default=""),
+            "youtube_mudou_em": max((c["views_mudou_em"] for c in out), default="")}
+
+
+META_INSC = BASE / "estado" / "meta_inscritos.json"
+
+
+def api_meta_inscritos(_params):
+    """17/11 dona ("agregar inscritos pra uma quantidade x em x tempo, como as metas de views; metas inteligentes
+    auto ajustáveis, tanto pra adicionar quanto remover"): meta SEMANAL de inscritos (soma dos canais).
+    Ritmo = ganho médio/dia dos últimos 7 dias. Meta da semana = total no início + ritmo x 7 x fator. O fator SOBE 10%
+    quando a semana anterior bateu a meta e DESCE 10% quando não bateu (entre 1,0 e 2,0; começa em 1,2). Uma meta por
+    semana (gravada em estado\\meta_inscritos.json). PAINEL_META_INSC=0 desliga."""
+    if os.environ.get("PAINEL_META_INSC", "1") == "0":
+        return {"desligado": True}
+    tot = {}
+    for r in _ler_jsonl(BASE / "estado" / "canais_views_hist.jsonl"):
+        if r.get("slug") and r.get("ts"):
+            tot.setdefault(r["ts"][:10], {})[r["slug"]] = r.get("inscritos") or 0
+    dias = sorted(tot)
+    if len(dias) < 2:
+        return {"erro": "histórico curto"}
+    hoje, agora = dias[-1], datetime.now()
+
+    def soma_comum(a, b):
+        comuns = set(tot[a]) & set(tot[b])
+        return sum(tot[a][s] for s in comuns), sum(tot[b][s] for s in comuns)
+    ini7 = next((d for d in dias if d >= (agora - timedelta(days=7)).date().isoformat()), dias[0])
+    a7, b7 = soma_comum(ini7, hoje)
+    nd = max(1, (date.fromisoformat(hoje) - date.fromisoformat(ini7)).days)
+    ritmo = max(0.0, (b7 - a7) / nd)
+    atual = sum(tot[hoje].values())
+    try:
+        est = json.loads(META_INSC.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        est = {}
+    fim = est.get("fim")
+    if not fim or hoje > fim:  # semana nova: ajusta o fator pelo resultado da anterior
+        fator = float(est.get("fator", 1.2))
+        if fim:
+            bateu = atual >= est.get("meta", 0)
+            fator = min(2.0, fator * 1.1) if bateu else max(1.0, fator * 0.9)
+            est.setdefault("historico", []).append({"semana_ate": fim, "meta": est.get("meta"), "chegou": atual,
+                                                    "bateu": bateu})
+        meta = int(atual + max(7, ritmo * 7 * fator))
+        est.update({"inicio": hoje, "fim": (date.fromisoformat(hoje) + timedelta(days=7)).isoformat(),
+                    "base": atual, "meta": meta, "fator": round(fator, 3), "ritmo_dia": round(ritmo, 1)})
+        est["historico"] = est.get("historico", [])[-12:]
+        try:
+            META_INSC.write_text(json.dumps(est, ensure_ascii=False, indent=1), encoding="utf-8")
+        except OSError:
+            pass
+    falta = max(0, est["meta"] - atual)
+    dias_rest = max(1, (date.fromisoformat(est["fim"]) - date.fromisoformat(hoje)).days)
+    return {"atual": atual, "meta": est["meta"], "base": est["base"], "fim": est["fim"], "fator": est["fator"],
+            "ritmo_dia": round(ritmo, 1), "falta": falta, "precisa_dia": round(falta / dias_rest, 1),
+            "pct": round(100 * (atual - est["base"]) / max(1, est["meta"] - est["base"]), 1),
+            "historico": est.get("historico", [])[-4:]}
 
 
 def api_views_mesma_hora(_params):
@@ -3018,6 +3079,35 @@ def _graf_vigia(dias):
     return {"vigilancia": vig, "agente": agente, "melhoradores": melh, "fila_melhorador": fila}
 
 
+def _graf_horarios(_dias):
+    """17/11 dona ("adicionar um gráfico de horários das visualizações"). Duas leituras por hora do dia (0–23 h):
+    1) post: Shorts com 48 h+ (analise_sinais_shorts) — mediana de views e quantos saíram em cada HORA DE POSTAGEM
+       (é daqui o achado do horário nobre 21-22 h);
+    2) chegada: em que hora o total de views dos canais ANDOU (canais_views_hist, últimos 7 dias) — o YouTube solta
+       em lotes, então mostra quando o número sobe no painel, não o minuto exato em que assistiram."""
+    import statistics
+    sys.path.insert(0, str(BASE))
+    import analise_sinais_shorts as a
+    por = {}
+    for l in a.carregar():
+        if l.get("hora") is not None and l.get("views") is not None:
+            por.setdefault(int(l["hora"]), []).append(float(l["views"]))
+    post = {f"{h:02d}": {"mediana": round(statistics.median(v)), "videos": len(v)} for h, v in sorted(por.items())}
+    corte = (datetime.now() - timedelta(days=7)).isoformat()
+    regs = {}
+    for r in _ler_jsonl(BASE / "estado" / "canais_views_hist.jsonl"):
+        if r.get("slug") and (r.get("ts") or "") >= corte:
+            regs.setdefault(r["slug"], []).append(r)
+    cheg = {f"{h:02d}": 0 for h in range(24)}
+    for rs in regs.values():
+        rs.sort(key=lambda r: r["ts"])
+        for x, y in zip(rs, rs[1:]):
+            g = (y.get("views") or 0) - (x.get("views") or 0)
+            if g > 0:
+                cheg[y["ts"][11:13]] += g
+    return {"post": post, "chegada_7d": cheg}
+
+
 def api_graficos(params):
     """16/11 dona: gráficos de views/horas dos LONGOS separados dos Shorts, imagens/vídeos (Flow x Gemini), uso das
     máquinas (dia e hora) e vigia/melhoradores/fila. Cada parte com try próprio: uma fonte quebrada não derruba as outras."""
@@ -3026,8 +3116,16 @@ def api_graficos(params):
     except (ValueError, TypeError):
         n = 14
     dias = _dias_lista(n)
-    out = {"dias": dias}
-    for k, fn in (("views", _graf_views), ("midia", _graf_midia), ("maquinas", _graf_maquinas), ("vigia", _graf_vigia)):
+    out = {"dias": dias, "gerado_em": datetime.now().isoformat(timespec="minutes")}
+    # 17/11 dona: hora do dado em cada gráfico (não a hora da tela)
+    try:
+        ult = _ler_jsonl(BASE / "estado" / "views_longos_hist.jsonl")[-1]
+        out["longos_lido_em"] = str(ult.get("lido") or "")[:16]
+        out["longos_foto_em"] = str(ult.get("ts") or "")[:16]
+    except (IndexError, OSError, ValueError, TypeError):
+        pass
+    for k, fn in (("views", _graf_views), ("midia", _graf_midia), ("maquinas", _graf_maquinas), ("vigia", _graf_vigia),
+                  ("horarios", _graf_horarios)):
         try:
             out[k] = fn(dias)
         except Exception as e:  # noqa: BLE001
@@ -3044,7 +3142,7 @@ ROTAS = {"/api/geral": lambda p: _cache("geral", 60, lambda: api_geral(p)), "/ap
          "/api/ranking": (api_ranking if os.environ.get("PAINEL_RANKING_CACHE", "1") == "0" else
                           lambda p: _cache("ranking:" + str((p.get("dias") or ["7"])[0]) + ":" + str((p.get("de") or [""])[0])
                                            + ":" + str((p.get("ate") or [""])[0]), 600, lambda: api_ranking(p))),
-         "/api/canais_views": api_canais_views, "/api/placar": api_placar,
+         "/api/canais_views": api_canais_views, "/api/meta_inscritos": lambda p: _cache("meta_insc", 600, lambda: api_meta_inscritos(p)), "/api/placar": api_placar,
          "/api/views_mesma_hora": lambda p: _cache("views_mesma_hora", 120, lambda: api_views_mesma_hora(p)),
          "/api/ranking_canais": lambda p: _cache("ranking_canais", 120, lambda: api_ranking_canais(p)),
          "/api/resumo": lambda p: _cache("resumo", 60, lambda: api_resumo(p)),

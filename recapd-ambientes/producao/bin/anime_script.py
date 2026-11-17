@@ -220,6 +220,12 @@ def _jeito_do_nicho():
         "a voz SOLETRA isso e estraga o vídeo. Escreva normal — a ênfase e o alongamento são aplicados depois, "
         "no áudio. Reticências (...) só pra suspense de verdade.",
     ]
+    # 17/11 dona ("diminutivos como felizinha: a IA dubladora quase não usa diminutivos pra mulheres, temos que usar
+    # mais"): o brasileiro fala com diminutivo carinhoso, principalmente da moça. ROTEIRO_DIMINUTIVOS=0 desliga.
+    if os.environ.get("ROTEIRO_DIMINUTIVOS", "1") != "0" and not sem_protagonista:
+        linhas.append("- Use DIMINUTIVO CARINHOSO como o brasileiro fala, 2 a 4 vezes no vídeo, principalmente quando a "
+                      "personagem é mulher ou a cena é fofa: 'felizinha', 'toda boba', 'bravinha', 'envergonhadinha', "
+                      "'coitadinha', 'rapidinho', 'pertinho', 'quietinha'. Nunca diminutivo sobre corpo.")
     proib = [i["item"] for i in (rep.get("roteiro_automatico_proibido") or {}).get("itens") or [] if i.get("item")]
     if proib:
         linhas.append("- PROIBIDO (entrega roteiro automático): " + "; ".join(proib) + ".")

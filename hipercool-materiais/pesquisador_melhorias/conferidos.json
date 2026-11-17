@@ -18293,5 +18293,75 @@
     "arquivado": false,
     "descricao": "gemini-web-to-api fork: video reference images, multi-account pool, per-account proxy",
     "data": "2026-11-17"
+  },
+  "juangchuank-ops/gemini-web2api": {
+    "ok": true,
+    "nome": "juangchuank-ops/gemini-web2api",
+    "estrelas": 0,
+    "push": "2026-08-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Convert Google Gemini web interface into an OpenAI-compatible API with Web UI console, multi-account rotation, and concurrency limits",
+    "data": "2026-11-17"
+  },
+  "moonzayn/geminiwebapi": {
+    "ok": true,
+    "nome": "Moonzayn/geminiwebapi",
+    "estrelas": 0,
+    "push": "2026-09-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini Web to OpenAI API proxy with multi-account round-robin rotation",
+    "data": "2026-11-17"
+  },
+  "godde3s/ghostbrain": {
+    "ok": true,
+    "nome": "Godde3s/GhostBrain",
+    "estrelas": 10,
+    "push": "2026-09-27",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn your FREE web Gemini account into a real OpenAI + Anthropic compatible API — one file, no API key, multi-account rate-limit rotation, a",
+    "data": "2026-11-17"
+  },
+  "nv876620-design/gemini-web-2api": {
+    "ok": true,
+    "nome": "nv876620-design/gemini-web-2api",
+    "estrelas": 0,
+    "push": "2026-11-08",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-17"
+  },
+  "rizky-gumelar/gemini-web2api-go-multi-user": {
+    "ok": true,
+    "nome": "rizky-gumelar/gemini-web2api-go-multi-user",
+    "estrelas": 0,
+    "push": "2026-11-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-17"
+  },
+  "jacob-bd/gemini-notebook-mcp-cli": {
+    "ok": true,
+    "nome": "jacob-bd/gemini-notebook-mcp-cli",
+    "estrelas": 6527,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Programmatic access to Gemini Notebook - via command-line interface (CLI), Model Context Protocol (MCP) server, and AI agent skills.",
+    "data": "2026-11-17"
+  },
+  "mobile-next/mobilecli": {
+    "ok": true,
+    "nome": "mobile-next/mobilecli",
+    "estrelas": 323,
+    "push": "2026-11-17",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Universal command-line tool for managing iOS and Android devices, simulators, emulators and apps",
+    "data": "2026-11-17"
   }
 }

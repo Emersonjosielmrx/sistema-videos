@@ -15,6 +15,8 @@ AQUI = Path(__file__).resolve().parent
 POSTADOS = AQUI / "longos_postados.json"
 ARQ = AQUI / "views_longos.json"
 MAX_IDADE_H = 6  # releitura do mesmo vídeo no máximo a cada 6 h
+# 17/11 dona ("horas dos longos são as mesmas de ontem?"): VIEWS_LONGOS_IDADE_H muda (ColetarViewsLongos usa 2 h)
+MAX_IDADE_H = float(__import__("os").environ.get("VIEWS_LONGOS_IDADE_H", MAX_IDADE_H))
 
 
 def _ler_views(yid):

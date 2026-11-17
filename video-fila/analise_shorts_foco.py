@@ -14,6 +14,7 @@ Saída: relatorios\\shorts_foco_<data>.csv (1 linha por vídeo) + resumo na tela
 """
 import csv
 import json
+import os
 import statistics as st
 import sys
 from collections import defaultdict
@@ -130,6 +131,14 @@ def main():
             inteligencia_ajustada.relatorio()
         except Exception as e:  # noqa: BLE001 — fica a conta antiga
             print(f"[!] inteligencia_ajustada falhou ({type(e).__name__}: {e}) — ficam as notas sem ajuste")
+        # 17/11 dona (agente de padrões e cruzamento de sucesso): todo dia, RECEITA x SORTE x EVITAR em
+        # RECEITAS_DO_SUCESSO.md (capa, obra, fonte, voz, hora...). FOCO_RECEITAS=0 desliga.
+        if os.environ.get("FOCO_RECEITAS", "1") != "0":
+            try:
+                import analise_sinais_shorts as _as
+                _as.gravar_receitas()
+            except Exception as e:  # noqa: BLE001
+                print(f"[!] receitas falharam ({type(e).__name__}: {e})")
         aplicar(resumo(linhas, lambda l: (l["canal"], l["tipo"]), minimo),
                 {r["grupo"]: r["views_med"] or 0 for r in resumo(linhas, lambda l: l["canal"], 1)})
 

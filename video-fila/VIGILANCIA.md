@@ -1,13 +1,12 @@
-# Vigilância 24 h — 2026-11-17T12:00:45
+# Vigilância 24 h — 2026-11-17T16:00:43
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (3)
-- instagram: 10 posts até 12:00, normal ~28
+## Alarmes desta volta (2)
+- instagram: 10 posts até 16:00, normal ~39
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
-- longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade
 
-## Casos abertos (30)
+## Casos abertos (31)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (-)
 - [consertar] canal clinicalucrativaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal empresariointeligenteia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -38,9 +37,9 @@
 - [consertar] instagram: 10 posts até 22:50, normal ~47 (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [falso] instagram: 10 posts até 16:40, normal ~39 — - / -
 - [dona] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
 - [dona] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
 - [sem_mudanca] _parceiro_20261110.log: mesmo erro 5x — 1minopus-sonnetweb / -
@@ -55,6 +54,7 @@
 - [sem_mudanca] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
 - [falso] instagram: 10 posts até 08:20, normal ~21 — - / -
 - [falso] longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade — - / -
+- [falso] instagram: 10 posts até 14:30, normal ~34 — - / -
 
 ## Placar dos consertadores
 - **cw/claude-sonnet-5-5**: 28 casos, nota 7% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0)

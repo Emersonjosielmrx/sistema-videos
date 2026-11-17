@@ -44,7 +44,7 @@ SUG = {  # o que eu sugiro para cada tipo (a dona decide)
  "youtube-trava": "MANTER", "melhoria contínua": "MANTER (erro que não desfez)", "vigilancia": "CORTAR",
  "metricas": "MANTER no resumo", "msenergy-metricas": "MANTER 1x/semana",
 }
-out = ["# Catálogo dos avisos do Telegram — últimos 7 dias (gerado 09/11)", "",
+out = [f"# Catálogo dos avisos do Telegram — últimos 7 dias (gerado {datetime.now():%d/%m %H:%M})", "",
        "Cada tipo: quantos registrou / quantos foram MESMO pro Telegram (o resto entrou em resumo, repetido ou mudo),",
        "o último exemplo e minha sugestão. Dona: marque [x] no que quer cortar e me diga 'aplica os avisos'.", "",
        "Fonte: D:\\video-fila\\estado\\avisos.jsonl (avisos.py).", ""]

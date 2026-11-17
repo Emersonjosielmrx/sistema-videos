@@ -155,3 +155,9 @@ Trazer de volta um arquivo: `D:\tools\rclone.exe copyto "<no Drive>" "<esta past
 | 2026-11-16 13:41 | veo_stand-up_ia_20261114_145853__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_stand-up_ia_20261114_145853__inventoreact.png` | backup_drive.py |
 | 2026-11-16 14:36 | veo_robos_desastrad_20261114_155143__manhwareact.mp4 | 6.1 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_robos_desastrad_20261114_155143__manhwareact.mp4` | backup_drive.py |
 | 2026-11-16 14:36 | veo_robos_desastrad_20261114_155143__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_robos_desastrad_20261114_155143__manhwareact.png` | backup_drive.py |
+| 2026-11-17 13:43 | veo_stand-up_ia_20261115_203206__inventoreact.mp4 | 6.4 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_stand-up_ia_20261115_203206__inventoreact.mp4` | backup_drive.py |
+| 2026-11-17 13:43 | veo_stand-up_ia_20261115_203206__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_stand-up_ia_20261115_203206__inventoreact.png` | backup_drive.py |
+| 2026-11-17 14:41 | veo_corpo_humano_20261115_151609__inventoreact.mp4 | 6.4 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_corpo_humano_20261115_151609__inventoreact.mp4` | backup_drive.py |
+| 2026-11-17 14:41 | veo_e_se..._20261115_223133__manhwareact.mp4 | 4.5 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_e_se..._20261115_223133__manhwareact.mp4` | backup_drive.py |
+| 2026-11-17 14:41 | veo_e_se..._20261115_223133__manhwareact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_e_se..._20261115_223133__manhwareact.png` | backup_drive.py |
+| 2026-11-17 14:41 | veo_corpo_humano_20261115_151609__inventoreact.png | 0.0 | `manhwa-drive:videos-backup/manhwa-react/_copias_rede/veo_corpo_humano_20261115_151609__inventoreact.png` | backup_drive.py |

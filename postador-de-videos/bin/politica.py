@@ -880,10 +880,103 @@ def segurando_viral(canal):
         return None
 
 
+INCERTOS = Path(__file__).resolve().parent.parent / "logs" / "envios_incertos.jsonl"
+
+
+def _chave_video(arquivo):
+    """Pasta do vídeo (o arquivo quase sempre se chama video.mp4; a pasta é que identifica o Short)."""
+    p = Path(str(arquivo or ""))
+    if not p.name.lower().startswith("video"):
+        p = p.with_name(p.name.replace("_1080p.mp4", ".mp4"))  # o upscale (garantir_1080) grava <nome>_1080p.mp4
+    return str(p.parent if p.name.lower().startswith("video") else p).lower().rstrip("\\/")
+
+
+def marcar_envio_incerto(canal, arquivo, motivo=""):
+    """Falhou DEPOIS do botão final: o vídeo pode já estar no canal sem registro no ledger."""
+    try:
+        INCERTOS.parent.mkdir(parents=True, exist_ok=True)
+        with INCERTOS.open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"ts": agora().isoformat(timespec="seconds"), "canal_id": canal.get("id"),
+                                "chave": _chave_video(arquivo), "motivo": str(motivo)[:200]},
+                               ensure_ascii=False) + "\n")
+    except OSError:
+        pass
+
+
+TRAVAS_ENVIO = Path(__file__).resolve().parent.parent / "logs" / "enviando"
+
+
+def pegar_trava_envio(canal, arquivo, max_h=3):
+    """17/11: os repetidos de 15/11 04h subiram 2x NO MESMO MINUTO (duas rodadas mandando a mesma pasta juntas, antes
+    de qualquer registro no ledger). Trava atômica por canal+pasta: só um envio por vez; a 2ª rodada desiste. Trava com
+    mais de max_h horas = processo morto, é retomada. Devolve o caminho da trava (soltar_trava_envio) ou None."""
+    if os.environ.get("POLITICA_TRAVA_REPETIDO", "1") == "0":
+        return Path(os.devnull)
+    TRAVAS_ENVIO.mkdir(parents=True, exist_ok=True)
+    nome = hashlib.sha1(f"{canal.get('id')}|{_chave_video(arquivo)}".encode()).hexdigest()[:20] + ".lock"
+    t = TRAVAS_ENVIO / nome
+    for _ in range(2):
+        try:
+            fd = os.open(str(t), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(fd, f"{os.getpid()} {agora().isoformat(timespec='seconds')} {_chave_video(arquivo)}".encode())
+            os.close(fd)
+            return t
+        except FileExistsError:
+            try:
+                import time as _t
+                if _t.time() - t.stat().st_mtime > max_h * 3600:
+                    t.unlink()
+                    continue
+            except OSError:
+                continue
+            return None
+    return None
+
+
+def soltar_trava_envio(t):
+    try:
+        if t and str(t) != os.devnull:
+            Path(t).unlink()
+    except OSError:
+        pass
+
+
+def ja_enviado_aqui(canal, arquivo, horas=72):
+    """17/11 dona ("por que vídeos estão saindo repetidos?" — Game Noturno, Dorama Noturno): o envio que estourava o
+    tempo DEPOIS de subir não ficava no ledger e a rodada seguinte mandava a MESMA pasta de novo pro MESMO canal.
+    Recusa: mesma pasta já no ledger deste canal, ou marcada como envio incerto nas últimas `horas`.
+    POLITICA_TRAVA_REPETIDO=0 desliga."""
+    if os.environ.get("POLITICA_TRAVA_REPETIDO", "1") == "0" or not arquivo:
+        return None
+    ch = _chave_video(arquivo)
+    if not ch or ch in ("", "."):
+        return None
+    cid = canal.get("id")
+    for r in _ler_ledger():
+        if _do_canal(r, canal) and _chave_video(r.get("caminho") or "") == ch:
+            return f"esta pasta já subiu neste canal ({r.get('video_id')} em {str(r.get('ts'))[:16]}) — não reenvia"
+    try:
+        corte = agora() - timedelta(hours=horas)
+        for l in INCERTOS.read_text(encoding="utf-8").splitlines():
+            try:
+                x = json.loads(l)
+            except ValueError:
+                continue
+            if x.get("canal_id") == cid and x.get("chave") == ch and (_dt(x.get("ts")) or corte) > corte:
+                return (f"envio anterior desta pasta falhou DEPOIS do botão final em {x['ts'][:16]} (pode já estar no "
+                        f"canal) — confira no Studio; não reenvia por {horas} h")
+    except OSError:
+        pass
+    return None
+
+
 def checar_upload(canal, arquivo, projeto=None, tipo=None):
     """None se o upload pode seguir; senão (codigo, mensagem)."""
     if tipo == "completo":
         return _checar_longo(canal, arquivo, projeto)
+    rep = ja_enviado_aqui(canal, arquivo)
+    if rep:
+        return "repetido", rep
     p = parada_ativa()
     if p:
         return "parado", f"parada geral desde {p.get('desde')}: {p.get('motivo')}"
@@ -1127,6 +1220,10 @@ def postar_youtube(canal_nome, arquivo, titulo, descricao, tags,
     ate_aviso0 = em_advertencias(canal)
     if ate_aviso0:
         return "advertencias", f"canal bloqueado por muitos avisos — sem novo envio até {ate_aviso0:%d/%m %H:%M}"
+    if tipo != "completo":  # 17/11: repetido barra antes do upscale (não gasta tempo à toa)
+        rep = ja_enviado_aqui(canal, arquivo)
+        if rep:
+            return "repetido", rep
     try:  # 31/10 REGRA da dona: nada sobe com menos de 1080p
         arquivo = garantir_1080(arquivo)
     except Exception as e:  # noqa: BLE001

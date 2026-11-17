@@ -740,6 +740,9 @@ def _rodar(job):
     env = dict(os.environ, ANTHROPIC_BASE_URL=base_url, ANTHROPIC_AUTH_TOKEN=token, PYTHONUTF8="1",
                PATH=r"D:\hipercool-materiais\bin" + os.pathsep + os.environ.get("PATH", ""), PAINEL_IA_JOB=jid)
     env.pop("ANTHROPIC_API_KEY", None)
+    # 17/11 dona (Telegram: "API Error: Claude's response exceeded the 32000 output token maximum" / "O agente não
+    # conseguiu terminar"): o VS Code tem 64000, mas este processo herdava o padrão de 32000. PAINEL_IA_MAX_TOKENS muda.
+    env.setdefault("CLAUDE_CODE_MAX_OUTPUT_TOKENS", os.environ.get("PAINEL_IA_MAX_TOKENS", "64000"))
     ctx = f"\nCONTEXTO (da tela do painel):\n{job['contexto']}\n" if job.get("contexto") else ""
     if tipo in ("pergunta", "propor"):  # frente E: o que a base já sabe de casos parecidos (o vigia/IA aprende)
         try:

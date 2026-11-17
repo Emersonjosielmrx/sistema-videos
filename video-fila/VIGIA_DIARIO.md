@@ -226,3 +226,15 @@ STATUS: OK
 ## 20261117_1119 — MemoryError no _ler_ledger refatorado para leitura iterativa (pelo painel)
 - Motivo / O que fiz (arquivos): _ler_ledger() em D:\postador-de-videos\bin\politica.py carregava o ledger inteiro (2920 linhas, 1.02 MB) com read_text().splitlines(), causando MemoryError em situações de contenção (log manhwa_react_20261115.log). Refatorei linhas 404-413 para leitura iterativa com LEDGER_FILE.open() em vez de read_text(), eliminando pico de memória. / Como conferi: compilação OK, _ler_ledger() leu 2920 registros com sucesso, politica.py rodou sem erro. / Como desfazer: botão "Desfazer" no painel (pedido 20261117_111919_8499)
 - Estado: RESOLVIDO
+## 20261117_1236 — Aviso de SSLError temporário no discover_canal (@100ANIMEE)
+- Motivo / O que achei (trecho de log): parceiro_producao.log registrou aviso [discover_canal] API do site falhou em https://www.youtube.com/@100ANIMEE/shorts (SSLError: Max retries exceeded...) seguido de retry bem-sucedido logo em seguida.
+- Causa provável: Instabilidade transitória de rede / conexão SSL com o YouTube. O próprio script recuperou sozinho via yt-dlp / retry automático.
+- CONSERTO PROPOSTO: Nenhum (comportamento resiliente padrão do script).
+- Estado: NADA A FAZER
+## 20261117_1516 — Verificação do alimentador do recap longo e PC1
+- Motivo / O que achei (trecho de log): Alimentador do recap longo (`cliente.py alimentar`) ativo no PC1, com processamento regular de filas e pausas automáticas gerenciadas pelos scripts de monitoramento (`encher_pilha.log`, `alimentar_pc2.log`).
+- Causa provável: Ciclo normal de operação e controle de fluxo/contas do sistema.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma intervenção ou alteração de código necessária).
+- Estado: NADA A FAZER
+
+STATUS: OK

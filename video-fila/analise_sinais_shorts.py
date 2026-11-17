@@ -24,7 +24,9 @@ METR = Path(r"D:\postador-de-videos\_analise\metricas_studio.json")
 LEDGER = Path(r"D:\postador-de-videos\logs\uploads_ledger.jsonl")
 SAIDA = BASE / "estado" / "sinais_shorts.json"
 CAMPOS = ("estilo_titulo", "legenda_estilo", "gancho_meio", "gancho_remotion", "fx_choque", "mascote", "curto",
-          "fala_rapida", "saudacao", "ninguem_esperava", "teste_voz", "voz_base", "cobertura", "seo_versao", "midia")
+          "fala_rapida", "saudacao", "ninguem_esperava", "teste_voz", "voz_base", "cobertura", "seo_versao", "midia",
+          # 17/11 dona ("cruzar capa, dublador, obra, fonte... achar a receita do sucesso e testar se é ela ou sorte")
+          "capa_pose", "capa_variante", "capa_no_inicio", "obra", "parceiro", "narrador")
 
 
 def _dt(s):
@@ -70,11 +72,10 @@ def carregar():
             d["hora"] = loc.hour
             d["dia_semana"] = "seg ter qua qui sex sab dom".split()[loc.weekday()]
         for c in CAMPOS:
-            if pj.get(c) is not None:
+            if pj.get(c) is not None and pj.get(c) != "":
                 d[c] = pj[c]
-        for c in ("parceiro", "narrador"):  # quem decide fonte/voz (inteligencia_ajustada.py)
-            if pj.get(c):
-                d[c] = pj[c]
+        if quando:
+            d["_quando"] = quando.isoformat()
         d["projeto"] = m.get("fonte") or ""
         t = d["titulo"]
         d["titulo_len"] = "<=40" if len(t) <= 40 else "41-60" if len(t) <= 60 else "61-80" if len(t) <= 80 else ">80"
@@ -138,10 +139,81 @@ def main():
         print("\n=== faixa_dur")
         for r in rs:
             print(f"{r['valor']:28} {r['n']:4} {r['razao_med']:6} {r['acerto']:7} {r['zerado']:7} {r['continuaram'] or '':>7}")
+    receitas = receita_ou_sorte(linhas, campos, max(8, minimo // 2))
+    print("\n=== RECEITAS (ganham nas DUAS metades do tempo = padrão; só numa = sorte)")
+    for r in receitas[:25]:
+        print(f"{r['veredito']:8} {r['campo']}={r['valor'][:30]:30} antigos {r['razao_antigos']} (n={r['n_antigos']}) "
+              f"| recentes {r['razao_recentes']} (n={r['n_recentes']})")
     if "--json" in sys.argv:
         SAIDA.write_text(json.dumps({"_quando": datetime.now().isoformat(timespec="minutes"), "n": len(linhas),
-                                     "sinais": resumo}, ensure_ascii=False, indent=1), encoding="utf-8")
+                                     "sinais": resumo, "receitas": receitas}, ensure_ascii=False, indent=1),
+                         encoding="utf-8")
         print(f"\n-> {SAIDA}")
+
+
+DOC_RECEITAS = BASE / "RECEITAS_DO_SUCESSO.md"
+_NOMES = {"hora": "hora da postagem", "parceiro": "fonte (parceiro)", "narrador": "voz", "capa_pose": "pose da capa",
+          "capa_variante": "capa (variante)", "obra": "obra", "midia": "tipo de conteúdo", "dia_semana": "dia da semana"}
+
+
+def gravar_receitas(minimo=15):
+    """Roda o cruzamento e grava RECEITAS_DO_SUCESSO.md (pra dona ler) e o json (pra quem decide)."""
+    linhas = carregar()
+    campos = ["hora", "dia_semana", "titulo_len", "titulo_pergunta", "titulo_caixa_alta", "titulo_emoji", *CAMPOS]
+    rec = receita_ou_sorte(linhas, campos, max(8, minimo // 2))
+    try:
+        atual = json.loads(SAIDA.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        atual = {}
+    atual.update({"_quando": datetime.now().isoformat(timespec="minutes"), "n": len(linhas), "receitas": rec})
+    SAIDA.write_text(json.dumps(atual, ensure_ascii=False, indent=1), encoding="utf-8")
+    txt = [f"# Receitas do sucesso dos Shorts — {datetime.now():%d/%m %H:%M}", "",
+           f"{len(linhas)} Shorts com 48 h+. Razão = views ÷ mediana do canal (1,0 = normal do canal). Os Shorts são "
+           "divididos em 2 metades pela data: o que ganha nas DUAS é **receita** (repetiu, não foi sorte); o que ganha "
+           "só numa é **sorte** (testar mais antes de apostar); o que perde nas duas é **evitar**.", ""]
+    for ver, tit in (("RECEITA", "✅ Receitas confirmadas"), ("EVITAR", "⛔ Evitar"), ("SORTE", "🎲 Sorte (ainda não confirmou)")):
+        txt += [f"## {tit}", "", "| sinal | valor | razão antigos (n) | razão recentes (n) |", "|---|---|---:|---:|"]
+        for r in [r for r in rec if r["veredito"] == ver][:20]:
+            txt.append(f"| {_NOMES.get(r['campo'], r['campo'])} | {r['valor']} | {r['razao_antigos']} ({r['n_antigos']}) "
+                       f"| {r['razao_recentes']} ({r['n_recentes']}) |")
+        txt.append("")
+    DOC_RECEITAS.write_text("\n".join(txt), encoding="utf-8")
+    return rec
+
+
+def receita_ou_sorte(linhas, campos, minimo):
+    """17/11 dona ("testar pra ver se é aquilo mesmo ou se foi sorte"): divide os Shorts em 2 metades pela DATA de
+    postagem e mede cada valor de cada sinal nas duas. Mediana da razão >= 1,3 nas duas = RECEITA (repetiu); >= 1,3 só
+    numa = SORTE (não repetiu); <= 0,77 nas duas = EVITAR. Ordena pelo menor das duas metades (o mais confiável)."""
+    datadas = sorted((l for l in linhas if l.get("_quando")), key=lambda l: l["_quando"])
+    if len(datadas) < 2 * minimo:
+        return []
+    meio = len(datadas) // 2
+    metades = (datadas[:meio], datadas[meio:])
+    out = []
+    for c in campos:
+        g = [defaultdict(list), defaultdict(list)]
+        for i, parte in enumerate(metades):
+            for l in parte:
+                if l.get(c) is not None:
+                    g[i][str(l[c])].append(l["razao"])
+        for v in set(g[0]) & set(g[1]):
+            a, b = g[0][v], g[1][v]
+            if len(a) < minimo or len(b) < minimo:
+                continue
+            ma, mb = st.median(a), st.median(b)
+            if ma >= 1.3 and mb >= 1.3:
+                ver = "RECEITA"
+            elif ma <= 0.77 and mb <= 0.77:
+                ver = "EVITAR"
+            elif max(ma, mb) >= 1.3:
+                ver = "SORTE"
+            else:
+                continue
+            out.append({"campo": c, "valor": v, "veredito": ver, "razao_antigos": round(ma, 2),
+                        "razao_recentes": round(mb, 2), "n_antigos": len(a), "n_recentes": len(b)})
+    ordem = {"RECEITA": 0, "EVITAR": 1, "SORTE": 2}
+    return sorted(out, key=lambda r: (ordem[r["veredito"]], -min(r["razao_antigos"], r["razao_recentes"])))
 
 
 if __name__ == "__main__":
