@@ -72,6 +72,40 @@ sobrevivem ao RVC.
 - **Expressividade medida ≠ soar bem** (você já anotou isso). No teste A o juiz é o ouvido da dona.
 - Tudo no desktop ou no Kaggle, nunca no PC1 (`python D:\video-fila\teste_remoto.py --tipo pesado -- <comando>`).
 
+## 4b. Conta dos tempos — Shorts E longos (pedido da dona 17/11: "aplicar nos dois, levando em conta o tempo de cada motor")
+
+Calculadora: `python D:\tmp\t_pesq\custo_mix.py <pasta com roteiro.txt>` (edite `CUSTO` quando o estudo fechar).
+Tempos usados (segundos de máquina por segundo de áudio, DESKTOP sem GPU): Francisca 0,3 · Piper 0,6 · Supertonic 0,7 ·
+Kokoro 2,6 · Chatterbox 32 (melhor caso; o "normal" deu 75) · Qwen3 55 · Kitten 2 178 · RVC 7 (em toda frase).
+
+| Regra | Short típico (4 frases, 21 s) | Short grande (9 frases, 40 s) | Longo (152 frases, 9 min) | Maior trecho na mesma base (longo) |
+|---|---|---|---|---|
+| Hoje: só Francisca | 2,5 min | 4,9 min | 64 min | 527 s |
+| Hoje: só Kokoro | 3,3 min (1,3x) | 6,4 min (1,3x) | 84 min (1,3x) | 527 s |
+| **A. mistura rápida** (Francisca+Kokoro+Supertonic, troca a cada ~45 s) | 2,9 min (1,2x) | 5,6 min (1,2x) | 69 min (1,07x) | **48 s** |
+| B. A + Chatterbox no gancho/impactos (teto 60 s de fala) | 8,8 min (3,5x) | 13,3 min (2,7x) | 85 min (1,3x) | 47 s |
+| C. A + Qwen3 no gancho/impactos | 13,2 min (5,2x) | 19,1 min (3,9x) | 97 min (1,5x) | 47 s |
+| D. A + Kitten 2 no gancho/impactos | 36,6 min (14x) | 50,1 min (10x) | 163 min (2,5x) | 47 s |
+| E. A + Kitten 2 só no gancho (1 frase) | 22,9 min (9x) | 25,3 min (5,2x) | 78 min (1,2x) | 48 s |
+
+Leitura:
+- **A regra A é a que tira o padrão quase de graça**, nos dois formatos: +7% no longo, +15% no Short, e o maior trecho
+  na mesma base cai de 527 s para 48 s. É mais BARATA que usar só Kokoro, que já é o caso de 60% dos vídeos hoje.
+- **Motor caro num Short não fecha a conta sem GPU**: o Short tem 4 frases, então o gancho + 1 impacto já é metade do
+  vídeo (55%). B triplica o tempo de voz; D multiplica por 14. No Short a mistura deve ser só a A.
+- **No longo o motor caro cabe**, porque gancho + impactos são ~6% da fala: B custa +32% (igual a "só Kokoro" de hoje),
+  E (Kitten 2 em 1 frase) +21%. C e D passam do que eu proporia.
+- **O RVC é 90% do tempo em qualquer regra** (61 de 64 min no longo). Acelerar ou tirar o RVC do caminho rende mais
+  que qualquer troca de base: GPU do Kaggle, ou RVC em lote numa máquina sem disputa.
+- Ressalvas: tempos do desktop de 2 núcleos; na GPU os clones caem muito (falta medir). O "Short típico" é um texto
+  modelo com o tamanho mediano medido em 87 Shorts de 14–16/11. O longo é o maior roteiro disponível hoje na pasta de
+  trabalho (9 min); um de 80 min escala igual. A regra da calculadora é um rascunho da lógica, não o código final.
+
+Proposta para a dona decidir de manhã:
+- **Shorts:** regra A sempre. Motor expressivo só quando houver GPU de curto no Kaggle.
+- **Longos:** regra A + motor expressivo no gancho e nos impactos com teto de 60 s de fala (B se ela preferir o
+  Chatterbox; E se preferir o Kitten 2, limitado a 1–2 frases).
+
 ## 5. O que eu NÃO fiz
 
 Não mexi em `anime_tts.py`, `anime_voz_clonada.py` nem em `colab\cliente.py` — você está trabalhando neles. Os itens
