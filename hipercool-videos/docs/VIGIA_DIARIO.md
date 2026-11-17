@@ -397,3 +397,32 @@ evisão: REPROVADO — 10 quadro(s) com nudez), o que demonstra o funcionamento 
 - O que achei (com trecho de log): O arquivo `fila_postagem.log` registra execução contínua dos ciclos de postagem (ex: "Shorts em pt: canal parado, sai já" e gerenciamento da janela local de espaço em disco). O status atual mostra que a produção de render está desligada (tarefa desativada), mas os ciclos de postagem e verificação rodam normalmente.
 - CONSERTO PROPOSTO: nenhum
 - Estado: NADA A FAZER
+
+## 20261117_0536 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo ila_postagem.log registra execução contínua e normal dos ciclos a cada 20 minutos (último registro às 05:26 "Shorts en pt: canal parado, sai já"). O status da produção indica postagem ativa e ciclos funcionando corretamente sem travamento crítico.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e status do sistema.
+- CONSERTO PROPOSTO: Nenhum. O sistema está operando normalmente dentro dos parâmetros da fila.
+- Estado: NADA A FAZER
+## 20261117_1111 — Investigação de MemoryError no LEDGER_FILE durante postagem
+- Motivo: fila_postagem.log indicou MemoryError em  ao ler o arquivo de ledger de postagens devido ao tamanho excessivo do arquivo.
+- O que achei (com trecho de log):
+  D:\postador-de-videos\bin\politica.py,: cannot open `D:\postador-de-videos\bin\politica.py,' (No such file or directory)
+line:                                   cannot open `line' (No such file or directory)
+408,:                                   cannot open `408,' (No such file or directory)
+in:                                     cannot open `in' (No such file or directory)
+_ler_ledger:                            cannot open `_ler_ledger' (No such file or directory)
+- Causa provável:  carrega o ledger inteiro de uma só vez na memória em forma de string gigante e array de linhas, estourando a heap do Python 3.13 quando o ledger cresce muito.
+- CONSERTO PROPOSTO: Alterar  em  para usar leitura iterativa linha por linha (ex: ) em vez de , evitando carregar o arquivo inteiro na memória.
+- Estado: PRECISA REVISÃO
+## 20261117_1111 — Investigação de MemoryError no LEDGER_FILE durante postagem
+- Motivo: fila_postagem.log indicou MemoryError em `politica._ler_ledger()` ao ler o arquivo de ledger de postagens devido ao tamanho excessivo do arquivo.
+- O que achei (com trecho de log):
+  ```
+  File "D:\postador-de-videos\bin\politica.py", line 408, in _ler_ledger
+    for linha in LEDGER_FILE.read_text(encoding="utf-8").splitlines():
+  MemoryError
+  ```
+- Causa provável: `LEDGER_FILE.read_text().splitlines()` carrega o ledger inteiro de uma só vez na memória em forma de string gigante e array de linhas, estourando a heap do Python 3.13 quando o ledger cresce muito.
+- CONSERTO PROPOSTO: Alterar `_ler_ledger()` em `D:\postador-de-videos\bin\politica.py` para usar leitura iterativa linha por linha (`for linha in LEDGER_FILE.open(encoding="utf-8"):`) em vez de `read_text().splitlines()`, evitando carregar o arquivo inteiro na memória.
+- Estado: PRECISA REVISÃO

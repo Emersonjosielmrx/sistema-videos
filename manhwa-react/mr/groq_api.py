@@ -174,10 +174,68 @@ def _marcar_invalida(arq, id_, motivo):
         log(f"  groq: não deu pra marcar a chave {id_} ({str(e)[:80]})")
 
 
+CASAMENTO = Path(r"D:\postador-de-videos\secrets\groq_chave_proxy.json")
+
+
+def _proxy_da_chave(token):
+    """17/11 dona ("veja por que o Groq bloqueava as chaves; crie um sistema que não bane"): 26 de 55 chaves foram
+    restritas JUNTAS em 13/11. Causa: chave e proxy giravam separados e TODO proxy era '-rotate' (IP novo a cada
+    pedido) — cada chave grátis saía por dezenas de IPs e cada IP carregava várias contas = o padrão que o Groq bane em
+    grupo (igual ao Kaggle). Agora: 1 chave = 1 conta Webshare FIXA (usuário '-1' = sempre o mesmo IP), gravada em
+    groq_chave_proxy.json e nunca dividida com outra chave. GROQ_IP_FIXO=0 volta à rotação antiga."""
+    import hashlib
+    h = hashlib.sha256(token.encode()).hexdigest()[:16]  # o arquivo guarda só a impressão da chave, nunca a chave
+    try:
+        cas = json.loads(CASAMENTO.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        cas = {}
+    if h in cas:
+        return cas[h]
+    if not _proxy_list:
+        _load_proxies()
+    usados = set(cas.values())
+    fora, agora = _estado_proxies(), time.time()
+    for p in _proxy_list:
+        fixo = p.replace("-rotate", "-1")
+        if fixo in usados or fora.get(_conta_proxy(p), {}).get("_ts", 0) > agora:
+            continue
+        cas[h] = fixo
+        CASAMENTO.write_text(json.dumps(cas, indent=1), encoding="utf-8")
+        log(f"  groq: chave {h[:6]} presa ao IP fixo {_mascara(fixo)}")
+        return fixo
+    return None
+
+
 def _pedido(metodo, caminho, token, arquivo=None, **kw):
     """(status, json, proxy) de um pedido ao Groq por um proxy da rotação.
     status None = nenhum proxy disponível; 0 = todos os proxies tentados falharam."""
     cab = {"Authorization": f"Bearer {token}"}
+    if os.environ.get("GROQ_IP_FIXO", "1") != "0":
+        proxy = _proxy_da_chave(token)
+        if not proxy:
+            log("  groq: sem IP fixo livre pra esta chave — próxima chave (não divide IP)")
+            return 0, None, None
+        prox = {"http": proxy, "https": proxy}
+        try:
+            if arquivo:
+                with open(arquivo, "rb") as fh:
+                    r = requests.request(metodo, URL + caminho, headers=cab, proxies=prox,
+                                         files={"file": (Path(arquivo).name, fh)}, **kw)
+            else:
+                r = requests.request(metodo, URL + caminho, headers=cab, proxies=prox, **kw)
+        except requests.RequestException as e:
+            # o IP da chave caiu: NÃO troca pro IP de outra chave — esta chave fica de fora e vai a próxima
+            _proxy_falhou(proxy, f"groq: {type(e).__name__}")
+            return 0, None, None
+        try:
+            j = r.json()
+        except ValueError:
+            j = None
+        if not (isinstance(j, dict) and (r.status_code == 200 or "error" in j)):
+            log(f"  groq: HTTP {r.status_code} que não veio da API (IP fixo {_mascara(proxy)}) — próxima chave")
+            return 0, None, None
+        _proxy_ok(proxy)
+        return r.status_code, j, proxy
     for _ in range(PROXY_TENTATIVAS):
         proxy = _get_next_proxy()
         if not proxy:
@@ -219,6 +277,8 @@ def transcrever(audio, idioma="pt", palavras=True, timeout=300):
         return None
     dados = {"model": "whisper-large-v3", "response_format": "verbose_json", "language": idioma or "pt",
              "temperature": "0"}
+    if idioma == "auto":  # 17/11: Shorts de parceiro em qualquer língua — o Whisper detecta (sem forçar "pt")
+        dados.pop("language")
     if palavras:
         dados["timestamp_granularities[]"] = ["word", "segment"]
     _vez += 1

@@ -1,13 +1,13 @@
-# Painel do Pesquisador automático (Sonnet 5.5 web) — 17/11 00:41
+# Painel do Pesquisador automático (Sonnet 5.5 web) — 17/11 12:26
 
 Gerado por `motor_pesquisador.py` a cada volta (tarefa MotorPesquisador, 5 em 5 min). Não editar à mão.
 
-- Motor: **LIGADO** | teto hoje: **131** pesquisas | contas Sonnet web prontas agora: **45/45** (MonitorSonnet 2026-11-17T00:40)
-- Rodando agora: area_android_adb_automacao_upload desde 2026-11-17T00:41:37
+- Motor: **LIGADO** | teto hoje: **131** pesquisas | contas Sonnet web prontas agora: **45/45** (MonitorSonnet 2026-11-17T12:24)
+- Rodando agora: area_gemini_web_sessao_cookie desde 2026-11-17T12:26:59
 - Próxima pesquisa: assim que a atual terminar (+2 min), enquanto houver cota
-- Caixas das linhas (blocos PENDENTES de avaliação): **CURTOS** 0 | **LONGOS** 0 | **CAPAS** 0 | **VEO_HIPERCOOL** 0 — pasta `ENTREGAS\`
-- Chats das linhas (o CobradorPesquisador manda os pendentes de hora em hora): CURTOS: claude-c7 | LONGOS: claude-b3 | CAPAS: claude-b3 | VEO_HIPERCOOL: claude-c7
-- Cobrança por linha: **CURTOS** nova enviada 00:19, conferindo entrega na próxima volta | **LONGOS** em dia | **CAPAS** em dia | **VEO_HIPERCOOL** em dia
+- Caixas das linhas (blocos PENDENTES de avaliação): **CURTOS** 24 | **LONGOS** 0 | **CAPAS** 0 | **VEO_HIPERCOOL** 0 — pasta `ENTREGAS\`
+- Chats das linhas (o CobradorPesquisador manda os pendentes de hora em hora): CURTOS: claude-ff | LONGOS: claude-b3 | CAPAS: claude-b3 | VEO_HIPERCOOL: claude-ff
+- Cobrança por linha: **CURTOS** chat claude-ff FECHADO | **LONGOS** em dia | **CAPAS** em dia | **VEO_HIPERCOOL** em dia
 - Implantados pelos chats: **9** — `implantados.json`
 - Reprovados pelos chats (viram aprendizado do pedido): **1301** — `reprovados.json`; para registrar: `python motor_pesquisador.py reprovar dono/repo "motivo" chat`
 
@@ -19,18 +19,18 @@ Gerado por `motor_pesquisador.py` a cada volta (tarefa MotorPesquisador, 5 em 5 
 | 2026-11-14 | 107 | 55 | 0 | 0 | 52 | 8.3 | 19 | 18 |
 | 2026-11-15 | 104 | 44 | 0 | 2 | 58 | 8.0 | 10 | 10 |
 | 2026-11-16 | 104 | 69 | 7 | 0 | 28 | 6.0 | 28 | 27 |
-| 2026-11-17 | 3 | 2 | 0 | 0 | 1 | 5.0 | 0 | 0 |
+| 2026-11-17 | 53 | 42 | 0 | 0 | 11 | 6.7 | 50 | 49 |
 
 **Recomendação:** MANTER: abaixo do teto e sem falha de cota.
 
 Últimas pesquisas:
-- 2026-11-17T00:30:38 area_gemini_web_sessao_cookie: **ok** em 7.2 min, 0 novos (0 inéditos)
-- 2026-11-17T00:19:52 area_gemini_web_sessao_cookie: **sem_web** em 1.0 min, 0 novos (0 inéditos) — parou no passo 6 (2 ferramentas). Gemini) fora do que ela considera útil, a menos que ela destrave diretamente a produção de roteiro ou capa. AREAS_NOVAS: sem_pesquisa | nenhuma sugerida | não pesquisei, então não indico áreas novas
-- 2026-11-17T00:02:14 area_recap_intl: **ok** em 6.6 min, 0 novos (0 inéditos)
-- 2026-11-16T23:53:21 area_outliers_nicho: **ok** em 4.3 min, 0 novos (0 inéditos)
-- 2026-11-16T23:41:17 area_recap_outras_linguas: **ok** em 4.4 min, 0 novos (0 inéditos)
-- 2026-11-16T23:21:50 area_curva_retencao_30s: **ok** em 13.3 min, 2 novos (2 inéditos)
-- 2026-11-16T23:08:03 area_regras_yt_2026: **ok** em 9.4 min, 0 novos (0 inéditos)
-- 2026-11-16T22:36:27 area_tendencias_recap: **ok** em 13.3 min, 1 novos (1 inéditos)
+- 2026-11-17T12:14:44 area_gemini_web_sessao_cookie: **ok** em 8.8 min, 0 novos (0 inéditos)
+- 2026-11-17T11:49:10 area_gemini_web_sessao_cookie: **ok** em 3.9 min, 2 novos (2 inéditos)
+- 2026-11-17T11:27:05 area_android_adb_automacao_upload: **ok** em 12.5 min, 2 novos (2 inéditos)
+- 2026-11-17T11:17:55 area_android_adb_automacao_upload: **erro_proxy** em 4.5 min, 0 novos (0 inéditos) — parou no passo 31 (12 ferramentas). onitoramento. Vou ler os guias de solução de problemas e de montagem do entirefeed/phone-farm, que tratam de adb offline, diálogos do sistema e reconexão. API Error: Claude Web stream protocol error API Error: Claude Web stream protocol error
+- 2026-11-17T10:49:18 area_android_adb_automacao_upload: **ok** em 20.1 min, 0 novos (0 inéditos)
+- 2026-11-17T10:31:59 area_android_adb_automacao_upload: **ok** em 8.1 min, 0 novos (0 inéditos)
+- 2026-11-17T10:07:24 area_android_adb_automacao_upload: **ok** em 12.7 min, 0 novos (0 inéditos)
+- 2026-11-17T09:52:32 area_three_threshold_determinism: **ok** em 10.5 min, 0 novos (0 inéditos)
 
 Achados: `CATALOGO_DESCOBERTAS.md` | registro: `motor_registro.jsonl` | log: `motor_pesquisador.log`

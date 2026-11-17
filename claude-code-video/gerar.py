@@ -991,7 +991,8 @@ def _so_este_video(tid):
 _RENDER_PASSAGEIRO = re.compile(r"Timed out evaluating page function|Target closed|Session closed|"
                                 r"trying to connect to the browser|"
                                 r"Navigation timeout|ECONNRESET|Cannot allocate memory|browser has disconnected|"
-                                r"write EOF|EPIPE|render travou", re.I)  # 27/10: write EOF = filho do Remotion morreu (o código rendia)
+                                r"write EOF|EPIPE|render travou|ran out of memory|Decrease the concurrency|"
+                                r"Could not take a screenshot", re.I)  # 27/10: write EOF = filho do Remotion morreu (o código rendia)
 # 28/10: "render travou 20 min" (máquina sem RAM) ia para o corretor como se fosse erro de código (15 min perdidos)
 
 
@@ -1009,13 +1010,14 @@ def _virtual_livre_gb():
 
 
 def _render(t, out):
-    cmd = ["npx.cmd", "remotion", "render", f"src/videos/{t.e['id']}/index.ts", "Main", str(out),
-           f"--public-dir={_pub(t)}", "--log=error", "--crf=18", "--concurrency=2", "--timeout=120000"]
     saida = ""
     for tentativa in (1, 2):           # o Chrome do Remotion às vezes trava (26/10: 2h20 parado); 2ª tentativa limpa
         ini = time.time()
-        while _virtual_livre_gb() < 3 and time.time() - ini < 900:
+        while _virtual_livre_gb() < 2 and time.time() - ini < 900:
             time.sleep(60)  # 29/10: render começado sem memória virtual ficava parado até o limite de 20 min
+        conc = 1 if (_virtual_livre_gb() < 4 or tentativa > 1) else 2
+        cmd = ["npx.cmd", "remotion", "render", f"src/videos/{t.e['id']}/index.ts", "Main", str(out),
+               f"--public-dir={_pub(t)}", "--log=error", "--crf=18", f"--concurrency={conc}", "--timeout=120000"]
         try:
             rc, saida = motor.executar(cmd, REMOTION, timeout=1200, baixa=True)
         except subprocess.TimeoutExpired:
@@ -1027,7 +1029,7 @@ def _render(t, out):
         (t.pasta / "erro_render.txt").write_text(saida, "utf-8")
         if not _RENDER_PASSAGEIRO.search(saida):
             break
-        log(f"  [render] erro passageiro do Chrome (tentativa {tentativa}), tento de novo")
+        log(f"  [render] erro passageiro do Chrome (tentativa {tentativa}), tento de novo com conc={conc}")
         time.sleep(60)
     return False, saida[-2500:]
 

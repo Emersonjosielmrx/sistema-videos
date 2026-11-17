@@ -1,25 +1,13 @@
-# Vigilância 24 h — 2026-11-16T23:50:42
+# Vigilância 24 h — 2026-11-17T12:00:45
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
 ## Alarmes desta volta (3)
-- instagram: 10 posts até 23:50, normal ~47
-- _parceiro_20261116.log: mesmo erro 6x
-- _parceiro_20261116.log: mesmo erro 5x
+- instagram: 10 posts até 12:00, normal ~28
+- canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade
 
-## Casos abertos (40)
-- [consertar] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B (cw/claude-sonnet-5-5)
-- [consertar] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B (cw/claude-sonnet-5-5)
-- [consertar] desktop LIVRE 4 voltas seguidas e nada disparado (-)
-- [consertar] _parceiro_20261110.log: mesmo erro 5x (-)
-- [consertar] desktop LIVRE 4 voltas seguidas e nada disparado (-)
-- [consertar] _parceiro_20261110.log: mesmo erro 5x (-)
-- [consertar] desktop LIVRE 4 voltas seguidas e nada disparado (-)
-- [consertar] desktop LIVRE 4 voltas seguidas e nada disparado (-)
-- [consertar] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B (-)
-- [consertar] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B (-)
-- [consertar] longo McmTVgI6efk_Bullied_Orphan_Dated_His_Master_After_Be saiu com problema de qualidade (-)
-- [consertar] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B (-)
+## Casos abertos (30)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (-)
 - [consertar] canal clinicalucrativaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal empresariointeligenteia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
@@ -48,26 +36,28 @@
 - [consertar] _parceiro_20261116.log: mesmo erro 5x (-)
 - [consertar] _parceiro_20261116.log: mesmo erro 5x (-)
 - [consertar] instagram: 10 posts até 22:50, normal ~47 (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
 - [falso] instagram: 10 posts até 16:40, normal ~39 — - / -
-- [falso] instagram: 10 posts até 22:40, normal ~47 — - / -
-- [sem_mudanca] longo dflyIbOR5ME (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
-- [sem_mudanca] reel_advance_cron: clipe do Veo aprovado e a montagem morreu — gemini-4-argon / -
 - [dona] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
-- [sem_mudanca] longo dflyIbOR5ME (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
-- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — gemini-4-argon / -
-- [sem_mudanca] instagram: 3 posts até 02:10, normal ~7 — gemini-4-argon / -
-- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — gemini-4-argon / -
-- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — gemini-4-argon / -
-- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — gemini-4-argon / -
-- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — gemini-4-argon / -
-- [falso] instagram: 5 posts até 04:40, normal ~13 — - / -
-- [falso] instagram: 10 posts até 10:40, normal ~23 — - / -
-- [falso] instagram: 10 posts até 16:40, normal ~39 — - / -
+- [dona] longo 5g_mlSzwTJc (Manhwa Noturno) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
+- [sem_mudanca] _parceiro_20261110.log: mesmo erro 5x — 1minopus-sonnetweb / -
+- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — 1minopus-sonnetweb / -
+- [sem_mudanca] _parceiro_20261110.log: mesmo erro 5x — 1minopus-sonnetweb / -
+- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — 1minopus-sonnetweb / -
+- [sem_mudanca] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
+- [sem_mudanca] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
+- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — 1minopus-sonnetweb / -
+- [sem_mudanca] longo McmTVgI6efk_Bullied_Orphan_Dated_His_Master_After_Be saiu com problema de qualidade — 1minopus-sonnetweb / -
+- [sem_mudanca] desktop LIVRE 4 voltas seguidas e nada disparado — 1minopus-sonnetweb / -
+- [sem_mudanca] longo h1Ol-zUsJ-w (InovareManhwaVerse) sem as capas B/C do teste A/B — cw/claude-sonnet-5-5 / -
+- [falso] instagram: 10 posts até 08:20, normal ~21 — - / -
+- [falso] longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade — - / -
 
 ## Placar dos consertadores
-- **cw/claude-sonnet-5-5**: 26 casos, nota 8% — capa-longo: 2/25 (voltou 0), postagem-tiktok: 0/1 (voltou 0)
+- **cw/claude-sonnet-5-5**: 28 casos, nota 7% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0)
 - **gemini-4-argon**: 10 casos, nota 20% — capa-longo: 0/5 (voltou 0), reserva-canal: 0/1 (voltou 0), qualidade-longo: 0/1 (voltou 0), producao-cortes: 2/2 (voltou 0), postagem-solares: 0/1 (voltou 0)
 - **1minopus-sonnetweb**: 18 casos, nota 17% — postagem-tiktok: 1/2 (voltou 0), capa-longo: 1/15 (voltou 0), reserva-canal: 1/1 (voltou 0)
 - **kr/claude-sonnet-4.5**: 2 casos, nota 100% — capa-longo: 1/1 (voltou 0), solar-montagem: 1/1 (voltou 0)

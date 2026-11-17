@@ -79,6 +79,11 @@ python D:\video-fila\controle.py desligar celulares producao   # nada vai pros c
 
 Card "não respondeu": Termux fechado, celular dormindo ou sem Tailscale. Abrir o Termux no aparelho (o `.bashrc` sobe
 o sshd), conferir o Tailscale ligado e a bateria "Não restrito". Teste: `ssh s20ultra echo ok`.
+**Reserva pelo Wi-Fi (16/11):** o `_ssh` do celulares.py tenta `<alias>` (Tailscale) e, se não responder, cai sozinho em
+`<alias>-wifi` (`s20-wifi`, `s20ultra-wifi`, `g20-wifi`, `a3-wifi`, `a2-wifi` no `~/.ssh/config`, IP 192.168.18.x da casa).
+Serve pra quando o celular desliga o Tailscale pra usar app de proxy (Android só aceita 1 VPN). `CELULARES_WIFI=0` desliga.
+O IP do Wi-Fi pode mudar no roteador: conferir com `adb devices -l`. O A2 ainda não tem sshd no Termux (Wi-Fi recusou).
+Os mesmos celulares também GERAM imagem/vídeo (app Gemini / Flow) — ver `D:\projeto celular sub controle\LEIA_PRIMEIRO.md`.
 Celular novo: rodar no Termux o comando de instalação (pkg install + chaves + sshd), pôr o alias no `~/.ssh/config`,
 acrescentar em `HOSTS` (celulares.py), `LIMITES` (maquinas.py), `controlador.py`/`painel_controlador.py` (laço
 `for cel in ...`) e `cols`/`CEL` no `painel_web\index.html`.

@@ -10,6 +10,7 @@ Retorna caminhos locais. NÃO reescreve o roteiro (isso é o anime_script).
 O texto da legenda vem CRU (pode estar em qualquer língua) — traduzir/reescrever
 é trabalho do anime_script via IA.
 """
+import json
 import logging
 import os
 import sys
@@ -444,15 +445,40 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
         logging.error(f"[fetch] extração de áudio p/ Whisper falhou: {e}")
         return None, None
 
+    # 17/11 dona ("o VS Code fecha toda hora"): 16 whisper locais juntos (~600 MB cada) esgotaram a memória do PC1. 1º o
+    # Groq (whisper-large-v3 na nuvem, ~2 s, melhor que o tiny; D:\manhwa-react\mr\groq_api: rodízio de chaves + proxy
+    # Webshare). Grava os tempos no MESMO formato do _whisper_sub (<wav>.tempos.json). Falhou = whisper local, como antes.
+    # TRANSCRICAO_GROQ=0 desliga.
+    if os.environ.get("TRANSCRICAO_GROQ", "1") != "0":
+        try:
+            if r"D:\manhwa-react" not in sys.path:
+                sys.path.append(r"D:\manhwa-react")
+            from mr import groq_api
+            j = groq_api.transcrever(str(wav), idioma="auto", palavras=False, timeout=300)
+            txt = (j or {}).get("text", "").strip() if isinstance(j, dict) else ""
+            if len(txt) > 50:
+                segs = [[round(float(s.get("start", 0)), 2), str(s.get("text", "")).strip()]
+                        for s in (j.get("segments") or []) if str(s.get("text", "")).strip()]
+                if segs:
+                    Path(str(wav) + ".tempos.json").write_text(json.dumps(segs, ensure_ascii=False), encoding="utf-8")
+                _nomes = {"portuguese": "pt", "english": "en", "spanish": "es", "japanese": "ja", "korean": "ko",
+                          "chinese": "zh", "french": "fr", "german": "de", "italian": "it", "russian": "ru"}
+                lang = str(j.get("language") or "?").lower()
+                lang = _nomes.get(lang, lang[:2])
+                logging.info(f"[fetch] transcrição pelo Groq ({len(txt)} car., {lang}) — sem whisper no PC")
+                return txt, lang
+            logging.info("[fetch] Groq não transcreveu — whisper local")
+        except Exception as e:  # noqa: BLE001
+            logging.warning(f"[fetch] Groq falhou ({type(e).__name__}: {str(e)[:120]}) — whisper local")
     whisper_script = Path(__file__).parent / "_whisper_sub.py"
     # Timeout dinâmico progressivo (11/11: vídeos de 2-3min davam timeout em 600s quando CPU carregada levava 1500s+)
     # Vídeos curtos (até 10 min): 5x a duração, mínimo 900s (15 min)
     # Vídeos médios (10-25 min): 2.5x a duração
     # Vídeos longos (>25 min): 1.5x a duração, máximo 7200s (2h)
     if max_seconds <= 600:
-        # Calcula sobre a duração REAL do vídeo (sem a margem de +60s), mínimo 1800s
+        # Calcula sobre a duração REAL do vídeo (sem a margem de +60s), mínimo 900s
         duracao_real = max(60, max_seconds - 60)  # remove os +60s que anime_auto.py adiciona
-        whisper_timeout = max(1800, int(duracao_real * 5))
+        whisper_timeout = max(900, int(duracao_real * 5))
     elif max_seconds <= 1500:
         whisper_timeout = int(max_seconds * 2.5)
     else:

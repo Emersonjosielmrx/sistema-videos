@@ -443,3 +443,18 @@
 - prova: Em SO-icNCOO3E a nota de história caiu para 4.0 devido à quebra de imersão provocada pela inclusão de um vídeo live-action de escritório em baixa resolução para ilustrar 'O Salto Final Para A Queda' em meio a uma história escolar em preto e branco.
 - onde: bin/arsenal_memes.py / bin/fx_clips.py (filtro de estilo visual para seleção de mídias de apoio e memes)
 - como testar: Executar o seletor de memes em lote para histórias de mangá/manhwa e verificar por asserção que nenhum vídeo live-action com atores reais seja selecionado, priorizando painéis da própria obra ou animações estilizadas.
+
+## 17/11 11:32 [CERTEZA] Bloquear sobreposição de stickers e tarjas de texto sobre rostos e balões (antigravity/gemini-3.8-flash-tiered)
+- prova: No 97bBeHddKJI o sticker 'OS GURI?' cobriu olhos, nariz e boca do protagonista e 'DIZ' cobriu a testa; no 5DoGv3EXHgc a tarja 'SÓ QUE BIZARRA' foi posicionada entre os olhos; no SO-icNCOO3E stickers e HUD cobriram balões originais e rostos.
+- onde: bin/mascote_overlay.py / lógica de posicionamento de stickers e memes
+- como testar: Renderizar trecho de teste com close-up de personagem e aplicar stickers de texto; verificar se as coordenadas respeitam margem segura periférica e evitam o terço central e a região facial.
+
+## 17/11 11:32 [CERTEZA] Manter plano de fundo visual contínuo até o encerramento do áudio (antigravity/gemini-3.8-flash-tiered)
+- prova: No SO-icNCOO3E o encerramento ficou em tela totalmente preta em q25, q26 e q27 com movimento medido de apenas 6.6% no trecho final, deixando legendas soltas no vazio.
+- onde: bin/anime_tts.py e bin/fx_clips.py / rotina de finalização do stream de vídeo
+- como testar: Gerar render onde o áudio de encerramento/CTA ultrapasse o último painel do manhwa e confirmar se o pipeline estende o último quadro com desfoque e animação até o fim do áudio.
+
+## 17/11 11:32 [CERTEZA] Corrigir cálculo de frame_size no pipe rawvideo do marca_site (antigravity/gemini-3.8-flash-tiered)
+- prova: No 5DoGv3EXHgc o log registrou 'Broken pipe [rawvideo] packet size 1966080 < expected frame_size 2764800', falhando na remoção e deixando logos chinesas visíveis ('BOOK.SFACG.COM').
+- onde: bin/marca_site.py / comando ffmpeg com rawvideo
+- como testar: Executar marca_site sobre vídeo com resolução não padronizada e validar se os parâmetros width/height/pix_fmt do pipe rawvideo batem dinamicamente com o arquivo de entrada.

@@ -1,15 +1,15 @@
 {
- "nome": "capitulos_mais_frequentes",
- "hipotese": "Reduzir o intervalo entre capítulos de 300s para 240s aumenta a frequência de vinhetas/tarjas visuais e entradas da mascote, dinamizando o ritmo no meio dos longos e melhorando a retenção (% assistido).",
+ "nome": "resumo_curto_gancho",
+ "hipotese": "Reduzir resumo.max de abertura para 4 frases diminui o tempo de exposição estática inicial (medido em 16.6% e 19.1% de movimento), acelerando a transição para o clímax da história sem inflar o tempo de render.",
  "A": {},
  "B": {
-  "capitulos.a_cada_s": 240
+  "resumo.max": 4
  },
  "ativo": true,
  "enviados": {
-  "A": 7,
-  "B": 7
+  "A": 0,
+  "B": 0
  },
- "modelo": "gemini/gemini-3.5-flash",
- "aberto": "2026-11-14T08:18:04"
+ "modelo": "antigravity/gemini-3.8-flash-tiered",
+ "aberto": "2026-11-17T11:32:21"
 }

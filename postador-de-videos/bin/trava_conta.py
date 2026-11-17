@@ -42,6 +42,11 @@ NEGADO = re.compile(r"recursos avançados não estão disponíveis|perdeu o aces
                     r"advanced features (are )?(not|un)available|lost access to advanced features|"
                     r"contestação relacionada aos recursos avançados foi negada|acesso aos recursos avançados está bloqueado|"
                     r"appeal (related to|for) advanced features (was|has been) (denied|rejected)", re.I)
+# 17/11 (Fio da Meada e o canal 3D, na mesma madrugada): "Confirme sua identidade / Para continuar, precisamos confirmar
+# sua identidade". Não é punição, mas sem a dona confirmar todo envio sobe GB à toa e trava no fim (rascunho preso) —
+# e repetir sem confirmar parece robô. Trava TUDO no canal até a dona confirmar e apagar a linha. YT_TRAVA_IDENTIDADE=0 tira.
+IDENTIDADE = re.compile(r"confirme sua identidade|precisamos confirmar sua identidade|verify (it'?s you|your identity)|"
+                        r"confirm (it'?s you|your identity)", re.I)
 MESES = {"jan": 1, "fev": 2, "mar": 3, "abr": 4, "mai": 5, "jun": 6, "jul": 7, "ago": 8, "set": 9, "out": 10,
          "nov": 11, "dez": 12}
 
@@ -83,6 +88,8 @@ def classificar(txt):
         return "avisos"
     if NEGADO.search(txt):
         return "negado"
+    if os.environ.get("YT_TRAVA_IDENTIDADE", "1") != "0" and IDENTIDADE.search(txt):
+        return "identidade"
     return None
 
 
@@ -108,7 +115,8 @@ def marcar(slug, nome, tipo, txt="", print_=None):
     _gravar(ARQ, d)
     if ant.get("tipo") != tipo:
         o_que = {"removido": "foi REMOVIDO pelo YouTube", "strike": "levou STRIKE de direitos autorais",
-                 "avisos": "está com 'Muitos avisos' (envio bloqueado)"}[tipo]
+                 "avisos": "está com 'Muitos avisos' (envio bloqueado)",
+                 "identidade": "está pedindo 'Confirme sua identidade' (senha/celular — só você)"}[tipo]
         _avisar(f"🛑 YouTube: {nome} {o_que}. Parei TODA automação nesse canal "
                 f"{'por 7 dias' if ate else 'até você liberar'} pra não parecer tentativa de burlar "
                 f"(isso pode levar os canais ligados). Print: {print_}. Liberar: apagar a linha em "

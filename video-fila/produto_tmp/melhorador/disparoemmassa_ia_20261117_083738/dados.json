@@ -1,0 +1,320 @@
+{
+ "video": "disparoemmassa_ia_20261117_083738.mp4",
+ "conta": "disparoemmassa.ia",
+ "marca": "Disparo em Massa IA",
+ "titulo": "Como reativar contatos antigos no WhatsApp",
+ "formato": "dono_mesma_foto",
+ "veo_total": 2,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "moana",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 7.5,
+  "notas": {
+   "legibilidade": 10.0,
+   "movimento": 5.0,
+   "roteiro_marca": 10.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    10.38
+   ],
+   [
+    1,
+    "dono",
+    12.96
+   ],
+   [
+    2,
+    "conversa",
+    6.89
+   ],
+   [
+    3,
+    "dono",
+    10.26
+   ],
+   [
+    4,
+    "cartao",
+    5.17
+   ]
+  ],
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "Cena parada e ritmo arrastado: o apresentador permanece no mesmo plano médio fixo por cerca de 7 segundos (q04 a q06), sem cortes de câmera, zooms dinâmicos (punch-in) ou elementos gráficos animados para manter a retenção.",
+   "como_corrigir": "Aplicar punch-in digital (aproximação rápida de escala de 15% a 20%) nas mudanças de ênfase da fala ou sobrepor ícones e B-rolls animados ilustrando 'contatos parados' e 'agenda'."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 3,
+   "problema": "Falta de variedade e repetição de molde: a cena 3 (q10 a q12) repete o mesmo ângulo de câmera, enquadramento e composição estática da cena 1, tornando o vídeo monótono e previsível.",
+   "como_corrigir": "Variar a escala para um close-up mais fechado, utilizar split screen mostrando a interface da ferramenta ou inserir motion graphics com dados e palavras-chave dinâmicas ('milhares de contatos', 'envio automático')."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca e continuidade sem quebra entre Cena 0 e Cena 1: na passagem de q03 para q04, a filmagem do apresentador continua contínua no mesmo plano, apenas trocando o card de pergunta pela tarja verde sem transição animada de entrada.",
+   "como_corrigir": "Inserir uma transição de escala rápida (whip zoom ou punch-in) na virada do gancho para o problema e animar a entrada do retângulo verde e da pílula com slide-down e bounce suave."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Transição seca entre formatos: a mudança do vídeo real do apresentador (q06) para a tela escura com mockup (q07) e o retorno posterior para a cena 3 (q10) ocorrem por cortes secos diretos, sem transição gráfica fluida.",
+   "como_corrigir": "Adicionar transições cinéticas como zoom-in com motion blur ou transição direcional (swipe suave) para conectar o live-action ao bloco de simulação."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Animação de brilho (sheen) invertida no botão de CTA: nos quadros q13 (28.95s), q14 (30.13s) e q15 (31.32s), a barra de luz percorre o botão 'Chame no direct' da direita para a esquerda, sentido contrário ao fluxo de leitura natural.",
+   "como_corrigir": "Inverter os keyframes da animação do brilho para deslizar da esquerda para a direita, guiando naturalmente o olhar para a ação de clique."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "O gancho nos 2 primeiros segundos é visualmente fraco e tem erro de diagramação: a legenda karaokê foi posicionada alta demais, ficando sobreposta ao queixo e barba do apresentador (q01 e q02), e o cartão de pergunta apresenta uma rebarba gráfica verde desalinhada na borda inferior esquerda (q01 e q03). A abertura com pergunta longa e plano estático não gera retenção de agência.",
+   "como_corrigir": "Na Cena 0, descer a legenda karaokê para o terço inferior seguro da tela (livrando completamente o rosto do apresentador), corrigir a máscara do cartão removendo o artefato verde inferior e aplicar um corte inicial com zoom digital (punch-in de 12%) nos primeiros 2 segundos para dar impacto imediato ao gancho."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A cena 'Como funciona' quebra a autoridade de empresa séria e parece slide estático de Canva: a locução fala de 'disparo em massa inteligente com rotação de instâncias', mas o vídeo exibe apenas um card isolado em fundo escuro com um chat 1-a-1 e mais de 60% da área do balão vazia (q07 e q08), falhando completamente em provar o volume e a inteligência da ferramenta.",
+   "como_corrigir": "Na Cena 2, substituir o slide plano por uma demonstração visual de escala: animar uma sequência rápida de múltiplos cards de mensagens sendo disparadas em paralelo com nomes variados e adicionar elementos visuais de rotação de números/instâncias (ex: badges alternando números conectados), dando peso de produto SaaS real."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "A cena 'O resultado' não entrega progressão visual nem prova: repete exatamente o mesmo enquadramento, ângulo e fundo da Cena 1 (com tripé de ring light desligada e caixas de papelão aparentes no cenário), sem exibir nenhum dado, métrica ou elemento que materialize o resultado afirmado pelo apresentador.",
+   "como_corrigir": "Na Cena 3, diferenciar a montagem da Cena 1 aplicando um enquadramento mais fechado no apresentador (eliminando itens de bastidor como a ring light do fundo) e sobrepor um motion graphics de resultado na tela (ex: contador subindo mensagens enviadas ou taxa de clientes recuperados) sincronizado com a fala."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "mentoriasia_ia_20261116_162611.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 5.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 8.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "gestaodegrupos_ia_20261116_201720.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 7.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "futebolcom_ia2_20261117_045510.mp4",
+   "conta": "futebolcom.ia2",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "diretor": 5.5
+   }
+  },
+  {
+   "video": "sintetizerisada_20261117_061023.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 4.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "disparoemmassa_ia_20261117_083738.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   9,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   4,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

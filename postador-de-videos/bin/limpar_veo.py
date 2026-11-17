@@ -17,6 +17,7 @@ Uso (venv do manhwa-react): python bin/limpar_veo.py [--max N] [--drive] [arquiv
 import argparse
 import json
 import re
+import os
 import shutil
 import subprocess
 
@@ -156,8 +157,17 @@ def nota_tiktok(mp4):
     import numpy as np
     tpl = cv2.imread(str(MARCA_TIKTOK))
     w, h = 540, 960
-    raw = subprocess.run([FFMPEG, "-v", "error", "-i", str(mp4), "-vf", f"fps=1,scale={w}:{h}", "-f", "rawvideo",
-                          "-pix_fmt", "bgr24", "-"], capture_output=True, creationflags=_SEM_JANELA).stdout
+    # 17/11: sem memória o leitor do cano morreu (MemoryError 08:36) e o ffmpeg ficou 3 h esperando escrever — a
+    # tarefa ManhwaReact-Rede inteira travou atrás dele (nenhum Short da rede subiu). Teto de tempo: estourou = nota 0
+    # (sem logo) e segue. LIMPAR_VEO_TETO_S muda (0 = sem teto, como antes).
+    teto = int(os.environ.get("LIMPAR_VEO_TETO_S", "300")) or None
+    try:
+        raw = subprocess.run([FFMPEG, "-v", "error", "-i", str(mp4), "-vf", f"fps=1,scale={w}:{h}", "-f", "rawvideo",
+                              "-pix_fmt", "bgr24", "-"], capture_output=True, creationflags=_SEM_JANELA,
+                             timeout=teto).stdout
+    except (subprocess.TimeoutExpired, MemoryError) as e:
+        print(f"  nota_tiktok: {type(e).__name__} em {mp4.name} — segue sem a checagem da logo")
+        return 0.0
     melhor = 0.0
     for i in range(len(raw) // (w * h * 3)):
         quadro = np.frombuffer(raw[i * w * h * 3:(i + 1) * w * h * 3], np.uint8).reshape(h, w, 3)

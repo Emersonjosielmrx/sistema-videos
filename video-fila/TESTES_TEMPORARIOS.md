@@ -5,7 +5,6 @@ Precisa de espaço já? `python D:\video-fila\testes.py encerrar <caminho>` em c
 
 | Caminho | Para quê | Chat | Criado | Vence | Ao limpar |
 |---|---|---|---|---|---|
-| `D:\tmp\teste_capa_cel` | capa no celular 15/11 |  | 2026-11-15T19:09 | 2026-11-16T19:09 | apaga |
 | `D:\tmp\geladeira_original_backup.mp4` | backup antes da capa 3D 16/11 |  | 2026-11-16T14:34 | 2026-11-18T14:34 | apaga |
 | `D:\gemini-argo\_teste_http` | testes do Gemini imagem/vídeo sem navegador (trio 14/11) | gemini-midia | 2026-11-14T00:49 | 2026-11-21T00:49 | apaga |
 | `D:\gemini-argo\_teste_imagem` | testes do Gemini imagem/vídeo sem navegador (trio 14/11) | gemini-midia | 2026-11-14T00:49 | 2026-11-21T00:49 | apaga |

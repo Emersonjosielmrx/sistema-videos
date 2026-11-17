@@ -3,14 +3,14 @@
 (preenchido automaticamente a cada passada do D:ideo-fila\melhorador_central.py; quem for melhorar esta linha lê antes)
 
 <!-- central:inicio -->
-# Brief do melhorador central — Veo / manhwa-react — 17/11 01:04
+# Brief do melhorador central — Veo / manhwa-react — 17/11 12:34
 
-Vídeos nos últimos 7 dias: 27 | elegíveis (receberam o lote do feed): 18 | NÃO elegíveis: 0 | sem medida ainda: 9
-% assistido mediano (só elegíveis): 108.5 | views 48 h mediana: 13.0 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
+Vídeos nos últimos 7 dias: 26 | elegíveis (receberam o lote do feed): 13 | NÃO elegíveis: 0 | sem medida ainda: 13
+% assistido mediano (só elegíveis): 108.4 | views 48 h mediana: 8.0 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
-- InventoReact: n 13, elegíveis 9, % assistido 113.5, views48 117
-- ManhwaReact-ia: n 14, elegíveis 9, % assistido 95.1, views48 6
+- InventoReact: n 12, elegíveis 6, % assistido 117.3, views48 117
+- ManhwaReact-ia: n 14, elegíveis 7, % assistido 88.6, views48 3
 
 ## Os que mais renderam (copiar a estrutura, não o texto)
 - Cuf4h3a_glE InventoReact: views48 949, % assistido 133.39, continuaram 9.5 — 
@@ -28,10 +28,10 @@ Vídeos nos últimos 7 dias: 27 | elegíveis (receberam o lote do feed): 18 | N�
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-17T00:31: youtube 28/38, tiktok 44/58, instagram 46/53, flow 18/233, fotos 0/4 | MORTOS: youtube assistiainvestimentos, youtube cartuchoreact, youtube dicasfinanceirasdaia, youtube doramanoturno, youtube fiodameada, youtube gamenoturno, youtube empresariointeligenteia, youtube leielucro, youtube animenoturno, youtube bilionarionoturno, flow seebotsia, flow emersonjosiel2032@pc2
+## SEM NAVEGADOR (HTTP) — saúde em 11-17T12:29: youtube 32/39, tiktok 44/58, instagram 46/53, flow 17/234, fotos 0/4 | MORTOS: youtube inovare_ind, youtube inovaremanhwaverse, youtube empresariointeligenteia, youtube imovelemfoco, youtube vendasqueescalam, youtube leielucro, youtube dentrodascoisas3d, flow seebotsia, flow emersonjosiel2032@pc2, flow aulacomia@x200ma, flow canalanimescomia@x200ma, flow canalhistoriacomia@x200ma
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
-MS Energy - Instagram @msenergycap (4), Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede InventoReact (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (2), Tiktok @inovaremanhwaverse2 (6), Tiktok @emersonjosiel2031 (6), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (4), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0)
+Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (1), Tiktok @inovaremanhwaverse2 (6), Tiktok @emersonjosiel2031 (7), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0), Tiktok @solarmundo195 (0), Tiktok @empressinovare (0), Tiktok @filmescomia00 (0)
 
 ## PEDIDOS E OPINIÕES DA DONA (valem mais que o júri; atender antes de qualquer outra coisa)
 - 30/10 00:20 | hipercool, longo | Hipercool está DESATIVADO de propósito (como o Historias em Frames, trocado pelo Claude Code Video); volta à produção na semana que vem, depois que terminar a postagem dos capítulos já feitos. Usar um projeto para melhorar o outro: o hipercool é o mais moderno — os personagens FALAM (ela pediu falas também nos longos) e tem muitos efeitos bons; os que não acrescentam muito tempo de render podem ir para os longos | aberto

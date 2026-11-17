@@ -31,6 +31,8 @@ from .common import log, load_json, save_json, ffmpeg, ffprobe_json
 from . import publish as PB
 from .llm import ask_json
 
+REDE_3D_POR_DIA = int(__import__("os").environ.get("REDE_3D_POR_DIA", "3"))  # 17/11: Shorts 3D por dia (antes 1)
+
 REDE_PADRAO = {
     "historias_dir": "D:/hipercool-materiais/historias-em-frames",
     "postados_historias": "D:/hipercool-materiais/_postados/historias",
@@ -212,9 +214,12 @@ def inventario(cfg, politica, so_aprovados=True):
     # 16/11 dona ("postar a geladeira e os seguintes conforme forem saindo"): o 3D só tinha o InventoReact (Tech e
     # Mistérios estão como 'parceiro' na rede) e perdia toda vaga pro Veo/react na nota do diretor. O 3D aprovado mais
     # ANTIGO vira canal_fixo no 1º canal da lista dele (1 por rodada, na frente da fila). REDE_3D_FIXO=0 desliga.
+    # 17/11 dona ("os 3D estão todos aprovados — por que não postou nenhum?"): 1 por rodada + 1 vaga/dia = 9 aprovados
+    # levariam 9 dias. Agora os REDE_3D_POR_DIA (padrão 3 = os 3 horários do canal Dentro das Coisas 3D) mais antigos
+    # viram canal_fixo juntos.
     if tres_d and __import__("os").environ.get("REDE_3D_FIXO", "1") != "0":
-        it3 = sorted(tres_d, key=lambda t: t[0])[0][1]
-        it3["dados"] = dict(it3["dados"], canal_fixo=(it3.get("so_canais") or ["inventoreact"])[0])
+        for _t, it3 in sorted(tres_d, key=lambda t: t[0])[:REDE_3D_POR_DIA]:
+            it3["dados"] = dict(it3["dados"], canal_fixo=(it3.get("so_canais") or ["inventoreact"])[0])
     # 3. Veo LIMPO (sem a marca @InovareStories e sem o slide de propaganda/WhatsApp que derrubou os canais antigos):
     #    so nos canais de canais_veo_limpo; o limpar_veo.py ja aprova os de estrutura padrao (os outros ficam em 'esperando')
     R = _rc(cfg)
@@ -1345,14 +1350,13 @@ def _agendar(cfg, simular=False, dias=1, limite=None, janela_h=None, recuperar=F
             vagas[c["slug"]] = max(0, int(c.get("max_dia", 1)) - no_dia) if k < dias else 0
         # 16/11 (REDE_3D_FIXO): o Short 3D tem vaga PRÓPRIA (+1/dia no canal dele), fora do max_dia do react — o
         # InventoReact (max_dia 1) nunca tinha vaga pra ele. Só se nenhum 3D subiu nesse dia.
-        f3 = next((it for it in itens if it.get("dados", {}).get("origem") == "kit3d"
-                   and it["dados"].get("canal_fixo")), None)
-        if f3 and k < dias and f3["dados"]["canal_fixo"] in vagas:
+        f3 = [it for it in itens if it.get("dados", {}).get("origem") == "kit3d" and it["dados"].get("canal_fixo")]
+        if f3 and k < dias and f3[0]["dados"]["canal_fixo"] in vagas:
             ja3d = sum(1 for r in politica._ler_ledger()
                        if Path(str(r.get("arquivo") or "")).name.startswith("3d-")
                        and (politica._dt(r.get("ts")) or agora).date() == dia)
-            if not ja3d:
-                vagas[f3["dados"]["canal_fixo"]] += 1
+            # 17/11: até REDE_3D_POR_DIA por dia (antes 1)
+            vagas[f3[0]["dados"]["canal_fixo"]] += max(0, min(len(f3), REDE_3D_POR_DIA - ja3d))
         plano = []
         if any(vagas.values()):
             sem_veo = {s: [o for o in os_ if o not in ocup_veo[s]] for s, os_ in ocup.items()}

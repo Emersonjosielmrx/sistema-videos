@@ -28,6 +28,10 @@ ESTADO = BASE / "estado" / "abastecedor_kaggle.json"
 LOG = BASE / "logs" / "abastecedor_kaggle.log"
 POR_LINHA = 2  # 06/11: 3 x 4 linhas = 12 Shorts consultando o Drive juntos travavam o alimentador dos longos
 MAXIMO = 16  # 06/11: 14 contas verificadas com cota até sexta 21h
+# 17/11 dona ("o VS Code está fechando toda hora — movemos tudo pra outros PCs?"): com 8 linhas de curto a meta virou 16
+# preparações JUNTAS no PC1, cada uma com seu whisper (~600 MB) — memória virtual em 0,5 GB de 31,8 e o VS Code caía.
+# A preparação (baixar + whisper + roteiro) roda no PC1: no máximo PC1_MAX juntas. ABASTECEDOR_PC1_MAX muda.
+PC1_MAX = int(os.environ.get("ABASTECEDOR_PC1_MAX", "0"))  # 17/11 10h40: 0 = não prepara no PC1 (memória do VS Code); falta mover pro STI/PC2/desktop
 MARCA = "abastecedor_kaggle"
 BELOW_NORMAL, SEM_JANELA = 0x00004000, 0x08000000
 
@@ -133,7 +137,7 @@ def _um(simular=False):
     if livre_gb < 6:
         return log(f"D: com {livre_gb:.1f} GB livres (< 6) — sem Short extra até liberar espaço")
     linhas = linhas_curto()
-    meta = min(MAXIMO, POR_LINHA * len(linhas))
+    meta = min(MAXIMO, POR_LINHA * len(linhas), PC1_MAX)
     # 15/11: depois do 3º banimento NENHUMA conta de curto roda no Kaggle (lote_shorts_kaggle._curto_rodando() False)
     # e todo extra renderizava NO PC1 ("nenhuma conta de curto rodando — renderizo no PC agora"): 7 Shorts juntos, PC1
     # a 100%, abrir um processo levava até 96 s e o alimentar de PC2/desktop/STI travava (1,5-2 h sem Short neles).

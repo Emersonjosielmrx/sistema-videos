@@ -405,11 +405,12 @@ def _ler_ledger():
     if not LEDGER_FILE.exists():
         return []
     out = []
-    for linha in LEDGER_FILE.read_text(encoding="utf-8").splitlines():
-        try:
-            out.append(json.loads(linha))
-        except Exception:
-            continue
+    with LEDGER_FILE.open(encoding="utf-8") as f:
+        for linha in f:
+            try:
+                out.append(json.loads(linha))
+            except Exception:
+                continue
     return out
 
 
@@ -1185,6 +1186,18 @@ def postar_youtube(canal_nome, arquivo, titulo, descricao, tags,
     except subprocess.TimeoutExpired:
         return "timeout", f"sem resposta em {timeout}s"
     out = (r.stdout or "") + (r.stderr or "")
+    # 17/11 (InventoReact/Fio da Meada: "erro: Locator.click 30000ms" com o Studio mostrando "Envio em 7%" — só os
+    # últimos 300 caracteres chegavam no log, sem dizer QUAL clique falhou nem o progresso). Envio que não deu ok
+    # guarda a saída INTEIRA do poster em logs\envios_falhos\. POLITICA_LOG_FALHA=0 desliga.
+    # só erro de verdade (não pausa de cota/limite nem canal travado, que não abrem o navegador)
+    if os.environ.get("POLITICA_LOG_FALHA", "1") != "0" and re.search(r"^STATUS: (erro|timeout)\b", out, re.MULTILINE):
+        try:
+            pasta = ROOT / "logs" / "envios_falhos"
+            pasta.mkdir(parents=True, exist_ok=True)
+            (pasta / f"{agora():%Y%m%d_%H%M%S}_{re.sub(r'[^0-9A-Za-z_-]', '_', str(canal.get('id', '?')))[:40]}.log"
+             ).write_text(f"rc={r.returncode}\ncmd={' '.join(map(str, cmd))[:600]}\n\n{out}", encoding="utf-8")
+        except Exception:  # noqa: BLE001
+            pass
     m = re.search(r"^STATUS: (\w+)\s*(.*)$", out, re.MULTILINE)
     if m:
         status, info = m.group(1), m.group(2).strip()

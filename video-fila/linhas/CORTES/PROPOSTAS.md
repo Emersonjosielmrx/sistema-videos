@@ -1858,3 +1858,138 @@
 - prova: the-greatest-estate-developer_cap1_20261114 (q13.jpg, q16.jpg, q17.jpg) manteve a tela final promocional do canal de origem ('Cinefy / CAPÍTULO NOVO / A HISTORIA COMECA DE GRAÇA / OU SE VAI ESPERAR'), gerando sobreposição grave com a nossa legenda ('CINZAS') e derrubando o movimento para 9.0% no final.
 - onde: pipeline de corte de vídeo / detecção de fim de cena útil (cortes_pipeline / detector de outro)
 - como testar: Rodar o detector de cenas finais/estáticas em the-greatest-estate-developer_cap1_20261114 e verificar se os últimos segundos com cartela promocional fixa ('Cinefy') são podados antes de alinhar o loop final do roteiro.
+
+## 17/11 00:49 PROPOSTA [CERTEZA] Clamp de segurança vertical e padding interno na tarja superior do gancho (gemini-4-argon)
+- prova: Em sem-obra-cbd458_cap1_20261114 (q01.jpg) e sem-obra-a79b20_cap1_20261114 (q01.jpg), o texto da tarja branca superior ('FOGUEIRA' e 'DRAGÕES NO CÉU') aparece cortado na primeira letra/borda ou sobreposto, enquanto em sem-obra-567d14_cap1_20261116 (q02.jpg) e sem-obra-ae0a9f_cap1_20261113 (q01.jpg) a tarja invade a zona central cobrindo rosto e olhos do personagem nos primeiros 2 segundos.
+- onde: Pipeline de renderização de overlays/tarja superior (cálculo de bounding box da tarja branca e posicionamento y do título de gancho)
+- como testar: Garantir padding horizontal mínimo (x entre 60 e 1020) para não cortar a primeira letra do texto na tarja e limitar o y da tarja superior para não descer sobre a área central do rosto; validar gerando folha de topo em q01.jpg/q02.jpg dos 4 Shorts.
+
+## 17/11 00:49 PROPOSTA [GOSTO] Reforçar zoom progressivo (Ken Burns/punch-in) em painéis estáticos de manhwa (gemini-4-argon)
+- prova: Três Shorts do lote registraram movimento medido abaixo do ideal em cenas intermediárias/finais: sem-obra-a79b20_cap1_20261114 (q14.jpg cena 5 com 11.5% e q17.jpg cena 6 com 15.2%), sem-obra-cbd458_cap1_20261114 (q13.jpg cena 5 com 20.2% e q16.jpg cena 6 com 18.5%) e sem-obra-ae0a9f_cap1_20261113 (q06.jpg cena 2 com 23.9%).
+- onde: Módulo de animação de câmera / reenquadramento dinâmico de cenas paradas
+- como testar: Aplicar zoom-in/pan contínuo mais acentuado quando o movimento nativo da cena for < 22%, e medir no avaliador de movimento se todas as cenas de sem-obra-a79b20 e sem-obra-cbd458 passam de 20%.
+
+## 17/11 01:54 PROPOSTA [CERTEZA] Desativar ou reposicionar cards de alerta ('ALERTA CHEFE' / 'ALERTA MONSTRO') quando houver texto/legenda ativa no mesmo frame (gemini-4-argon)
+- prova: sem-obra-e47a5d_cap1_20261117 (q08.jpg: caixa 'ALERTA CHEFE' corta o topo da imagem e colide com o texto 'ESQUECER') e sem-obra-2cac5b_cap1_20261117 (q11.jpg e q12.jpg: card vermelho 'ALERTA MONSTRO' cobre parcialmente o texto 'RASO' e polui o quadro com múltiplas camadas).
+- onde: Gerador de overlays / cards de impacto (cortes_legenda.py ou módulo de composição ASS/FFmpeg)
+- como testar: Renderizar novamente sem-obra-e47a5d_cap1_20261117 e sem-obra-2cac5b_cap1_20261117 garantindo exclusão mútua entre card superior de alerta e palavras de impacto/legendas secundárias, verificando os frames q08 e q12.
+
+## 17/11 01:54 PROPOSTA [CERTEZA] Reforçar contorno preto (stroke >= 8px), opacidade 100% e proibir quebra de palavra com hífen na legenda dinâmica (gemini-4-argon)
+- prova: sem-obra-2cac5b_cap1_20261117 (q02.jpg: palavra 'HISTÓRIAS' quebrou ao meio como 'HISTÓ / RIAS'; q12.jpg: texto translúcido 'RASO' e baixo contraste em 'NADA'), sem-obra-e47a5d_cap1_20261117 (q06.jpg: texto roxo/rosa 'DONA FLORINDA' com baixo contraste) e sem-obra-2dc1ca_cap1_20261116 (q02.jpg: legenda 'DE' com opacidade/contraste ruim sobre brilho branco).
+- onde: Gerador de legendas ASS / estilo de palavras de impacto (cortes_legenda.py)
+- como testar: Forçar WrapStyle sem hifenização de palavra única no ASS, garantir alpha 00 (100% opaco) e borda preta mínima de 8px em todas as cores de personagem; inspecionar q02.jpg de sem-obra-2cac5b_cap1_20261117 e sem-obra-2dc1ca_cap1_20261116.
+
+## 17/11 03:16 PROPOSTA [CERTEZA] Remover o rótulo 'LOCAL MUNDO' dos Shorts (cw/claude-sonnet-5-5)
+- prova: Aparece em 2 Shorts do lote: sem-obra-39b0cb q16 (tarja informativa duplicada no topo) e bleach_cap1_20261117 q07 (colide com a legenda e o topo do enquadramento). A regra 3 do APRENDIDO já pede para eliminar esse rótulo redundante. Antes de implementar, conferir no roteiro.txt e no log desses 2 Shorts de onde o texto vem.
+- onde: Montagem do overlay do topo (função que desenha título/rótulo/@); provavelmente o módulo de render de tarjas do pipeline CORTES.
+- como testar: Rodar o render dos 2 Shorts de novo e conferir os quadros q16 e q07 sem o rótulo. Depois olhar a folha do topo no 1,5 s de todos os Shorts do dia (D:\tmp\folha_topo.py) para ver se o texto aparece em outros.
+
+## 17/11 03:16 PROPOSTA [GOSTO] Tela gráfica genérica 'RASTREANDO / INVESTIGANDO' no meio do Short (cw/claude-sonnet-5-5)
+- prova: Só no sem-obra-6001c5 (q10 e q11, 2 quadros do mesmo Short), onde o júri aponta quebra de ritmo. Para virar padrão, precisa de mais um Short do lote ou de outro dia com a mesma tela.
+- onde: Inserção de B-roll/HUD no montador de cenas; procurar a string 'RASTREANDO'.
+- como testar: Grep por 'RASTREANDO' nos roteiro.txt e no código dos últimos 3 dias. Se aparecer em 2 ou mais Shorts, trocar a tela por reenquadramento do próprio vídeo e medir o % assistido dos Shorts afetados.
+
+## 17/11 03:16 PROPOSTA [CERTEZA] Conferir 'Rem' e o gênero de personagem no Bleach (cw/claude-sonnet-5-5)
+- prova: bleach_cap1_20261117 q03/q07/q09: a legenda diz 'REM' enquanto a imagem mostra Rukia e Unohana. Pela lição de 28/10 (nota baixa do júri não é prova), conferir primeiro no roteiro.txt se a narração realmente diz 'Rem'. Só com a prova de que diz, tratar como erro de transcrição ou mistura de obras.
+- onde: roteiro.txt do Short e a etapa de correção de nomes por contexto visual (regra de roteiro 'Corrija palavras sem sentido vindas de erro de transcrição').
+- como testar: Abrir o roteiro.txt do bleach_cap1_20261117 e buscar 'Rem'. Se estiver lá, rodar a geração do roteiro de novo para esse Short e comparar. Se for erro de uma vez só, não vira regra.
+
+## 17/11 03:16 PROPOSTA [GOSTO] Legenda palavra a palavra gigante cobrindo olhos e rosto (cw/claude-sonnet-5-5)
+- prova: Só no bleach_cap1_20261117 (q03 'JOVENS' no olho, q09 'REM' no rosto, q12 'DESTRUIR' nos olhos de Unohana). Em ao menos 3 dos Shorts do lote não houve queixa de legenda sobre o rosto. A dona prefere palavras de impacto maiores, então limitar o tamanho no impacto pode contrariar essa preferência.
+- onde: Posicionamento/tamanho da palavra de destaque no gerador de legenda (zona vertical segura da regra 6 do APRENDIDO).
+- como testar: Se aparecer em mais 1 Short, mover a palavra de destaque para a zona inferior (y 1200 a 1500) apenas quando houver rosto no centro, e comparar a nota de legibilidade.
+
+## 17/11 04:37 PROPOSTA [GOSTO] Legenda palavra a palavra sai de cima do rosto e da boca (cw/claude-sonnet-5-5)
+- prova: sem-obra-f984b1 q01 ('ACEITARIA' sobre a boca nos primeiros 2 s) e q07 ('DELA' sobre os olhos); kazuma q01, q03 e q04 (palavras empilhadas sobre cabeça, rosto e gravata). São 2 Shorts do lote, o que passa do mínimo, mas é posicionamento, não defeito objetivo.
+- onde: Posição vertical e lateral da legenda ASS/PNG na renderização (módulo de legenda palavra a palavra do pipeline CORTES). A dona prefere legenda de lado com palavras de impacto, então deslocar para a lateral ou um pouco abaixo do rosto vai nessa direção.
+- como testar: Renderizar 6 Shorts do lote com a legenda deslocada, num lado só por teste, e comparar a nota de legibilidade e retenção do júri contra os mesmos Shorts sem deslocar. Mudar uma variável por vez e não mexer em tarja nem em letra.
+
+## 17/11 04:37 PROPOSTA [CERTEZA] Conferir o texto duplicado na tarja do topo antes de tratar como defeito (cw/claude-sonnet-5-5)
+- prova: the-nine-tailed-fire-fox-vs-the-dragon-guards q01, q02 e q03: 'GUARDAS DO DRAGUARDAS DO DRAGÃO' e tarja amarela do topo sobreposta à tarja branca. É 1 Short só, então não é padrão. Pode ser a legenda queimada da fonte vazando pela tarja.
+- onde: Log do Short (linha '[hardsub]') e a função que monta a tarja/título do topo; conferir se o texto vem do título gerado ou da fonte.
+- como testar: Abrir o log e o frame 1,5 s desse Short. Se o título gerado estiver duplicado, é bug de montagem do título e vale uma trava. Se for resíduo da fonte, não é defeito. Depois rodar folha_topo.py nos Shorts do dia para ver se repete em 2 ou mais.
+
+## 17/11 05:46 PROPOSTA [CERTEZA] Fixar limite vertical da legenda dinâmica na zona segura (y entre 1200 e 1500) acima da tarja e botões (gemini-4-argon)
+- prova: Quatro Shorts do lote tiveram a legenda jogada para a borda inferior (y > 1580) ou colada na tarja/botões do Reels/Shorts: sem-obra-abcbb8_cap1_20261117 (q03 'FORTE' abaixo de y=1580), sem-obra-a49e20_cap1_20261117 (q16 'COM UM' colado na borda inferior), when-the-lights-go-out_cap1_20261117 (q01 'O AS... SE APAGAM' cortando na base) e sem-obra-81b93f_cap1_20261117 (q17/q18 próximo à zona de botões).
+- onde: Gerador de legendas ASS / posicionamento vertical (MarginV / pos y da legenda palavra a palavra no pipeline de renderização)
+- como testar: Renderizar novamente sem-obra-abcbb8_cap1_20261117 e when-the-lights-go-out_cap1_20261117 e extrair q01, q03, q16 e q18 verificando se a caixa da legenda fica estritamente entre y=1200 e y=1500 sem tocar na tarja ou rodapé.
+
+## 17/11 05:46 PROPOSTA [CERTEZA] Evitar colisão da legenda dinâmica com cartelas/títulos estáticos de meio de tela do vídeo-fonte (gemini-4-argon)
+- prova: Três Shorts apresentaram poluição visual grave por sobrepor a legenda palavra a palavra diretamente em cima de cartelas numeradas ou manchetes estáticas da fonte: sem-obra-a49e20_cap1_20261117 (q04 '1 JÁ É Nem tudo que entra é lucro' e q10 '3 Anote tudo'), when-the-lights-go-out_cap1_20261117 (q01 título gigante no topo/centro e q04/q05 '2# SE... FALHA... VELA') e sem-obra-abcbb8_cap1_20261117 (q04 'ALERTA MONSTRO').
+- onde: Detector de texto da visão / posicionamento dinâmico da legenda ou reenquadramento de quadros de lista/cartela
+- como testar: Rodar detecção de caixa de texto em q01 e q04 de when-the-lights-go-out_cap1_20261117 e sem-obra-a49e20_cap1_20261117 para deslocar a legenda palavra a palavra para área limpa (ou aplicar cobertura localizada na cartela residual) quando houver texto grande estático na mesma faixa.
+
+## 17/11 07:00 PROPOSTA [CERTEZA] Primeiro take do Short deve ilustrar o assunto do título/gancho (cw/claude-sonnet-5-5)
+- prova: sem-obra-501b5f q01 (grave): primeiro quadro mostra um peixe comum no anzol, enquanto o título e a narração tratam do candiru vampiro. O júri também aponta o gancho fraco em ff3be4 q01.
+- onde: seleção/ordenação de cenas do pipeline de corte (função que escolhe a cena inicial, antes da montagem)
+- como testar: Em 10 Shorts, comparar a cena inicial escolhida com as palavras-chave do título/roteiro (visão ou legenda da cena); medir % assistido e retenção dos primeiros 3 s antes/depois e verificar se o júri para de apontar gancho fraco no q01.
+
+## 17/11 07:00 PROPOSTA [GOSTO] Conferir marca d'água/logotipo da fonte no topo e cobrir só o tamanho exato (cw/claude-sonnet-5-5)
+- prova: Só 1 Short (ff3be4 q01, 'FUTINEWS'); abaixo do limiar de >= 2 Shorts, então apenas observar no próximo lote.
+- onde: etapa de cobertura (delogo) em cortes_ajustes/pipeline de render
+- como testar: Se reaparecer em >= 2 Shorts do próximo lote, testar delogo na região da marca em 5 Shorts e conferir nos quadros q01.
+
+## 17/11 08:07 PROPOSTA [CERTEZA] O desfazer automático em sequência restaura o estado errado (cc-sobra)
+- prova: Histórico de 13/11: a mudança de 20:20 (remove 'Comece direto no gancho') e a de 20:21 estão as duas 'desfeitas', mas a regra não está em VALORES ATUAIS. Desfazer a de 20:21 aplicou o seu 'antes', que já não tinha a regra, e desfez também a 20:20 só no papel.
+- onde: rotina de desfazer do melhorador central (a que grava 'estado: desfeita' no histórico de mudanças de cortes_ajustes.json)
+- como testar: Simular 2 mudanças seguidas no mesmo campo, ambas com nota pior. Depois de desfazer as duas, o campo tem de ser igual ao 'antes' da PRIMEIRA. Desfazer da mais nova para a mais antiga e conferir no fim que valor atual == antes da mais antiga.
+
+## 17/11 08:07 PROPOSTA [CERTEZA] Barrar no código nomes de canal/narrador parceiro na narração (cc-sobra)
+- prova: 501b5f q16 mostra 'TRANCAS' na legenda final, provável 'Poucas Trancas'. Regra fixa: narrador parceiro nunca é chamado pelo nome. Hoje só uma regra de prompt, já perdida uma vez, protege isso.
+- onde: validação do roteiro antes da voz (onde o roteiro.txt é gravado): lista de nomes de canais e narradores parceiros mais as saudações ('e aí', 'salve', 'fala galera') nas 2 primeiras frases. Se achar, gera o roteiro de novo.
+- como testar: Conferir no roteiro.txt do 501b5f e do spy-x-family se 'Trancas' e 'E aí' estão lá. Rodar a validação sobre os roteiros dos últimos 7 dias e contar quantos seria barrados; fazer um controle negativo com roteiro limpo (0 bloqueios).
+
+## 17/11 08:07 PROPOSTA [GOSTO] Legenda palavra a palavra em cima do rosto ou do título do topo (cc-sobra)
+- prova: she-was q02 ('HORA' no queixo/gola), spy-x-family q06 ('MAUS' sobre o rosto), cc8e55 q08 ('DO CHÃO' sobre o foco da ação) e cc8e55 q02 ('CORDA' em cima da tarja do título): 3 Shorts.
+- onde: função de posição da legenda dinâmica (geração do ASS/drawtext da legenda palavra a palavra): detectar o rosto na cena e baixar a legenda para a zona segura inferior quando houver sobreposição, sem subir até a faixa do título.
+- como testar: Folha de quadros dos 4 Shorts citados, antes e depois. Contar os quadros com legenda sobre o rosto e conferir que a legenda nunca encosta no título do topo.
+
+## 17/11 08:07 PROPOSTA [CERTEZA] Texto 'ALERTA PERIGRO' com erro de português e acima de y=150 (cc-sobra)
+- prova: spy-x-family_cap1_20261111 q11 e q12: o júri leu 'ALERTA PERIGRO' na zona proibida do topo, por cima do título. Aparece em 1 Short só; antes de mexer, ver de onde vem.
+- onde: log do spy-x-family: ver se é palavra de impacto ou adesivo nosso. Se for, passar esse texto pela mesma conferência de ortografia do título e prender a posição em y >= 150. Se for da fonte, só anotar (a tarja vale só para a legenda queimada).
+- como testar: Folha do TOPO no 1,5 s e nos quadros q11/q12 dos Shorts do dia (D:\tmp\folha_topo.py) e procurar 'PERIGRO' ou outro texto de impacto gerado.
+
+## 17/11 09:16 PROPOSTA [CERTEZA] Subir a legenda palavra a palavra para longe da borda de baixo e da tarja de cobertura (cc-sobra)
+- prova: Visto em 4 de 4 Shorts: on-her-wedding q04 com 'NIPULADORA' cortada (palavra truncada na tela) e q02/q03 colada na margem; 5d0f2e q13; a1b3af q11/q17 encostada na tarja de cobertura; 62dc71 q13.
+- onde: Gerador do .ass ou drawtext da legenda palavra a palavra (MarginV / posição y). Não achei nenhum .py com MarginV em linhas/CORTES, então pode estar no pipeline compartilhado.
+- como testar: Recalcular y para a base da legenda ficar em ≤ 0,80 da altura e ≥ 40 px acima do topo da tarja quando houver tarja. Para palavra longa, reduzir o corpo da letra até caber, em vez de deixar sair da tela. Folha de quadros dos 4 Shorts do lote (q02, q04, q11, q13, q17) antes e depois, com 'MANIPULADORA' inteira como controle.
+
+## 17/11 09:16 PROPOSTA [GOSTO] Card colorido (ALERTA/LOCAL) nunca na mesma faixa da legenda e só em uso específico (cc-sobra)
+- prova: a1b3af q11: card vermelho 'ALERTA/SUSTO/DISPAROU' compete com a legenda 'SUSTO'. 62dc71 q13: 'LOCAL CAPITAL' poluindo. A dona já disse em 27/10 que não gosta de barra com frase, só para uso muito específico.
+- onde: Função que desenha os cards/adesivos de palavra-chave sobre o vídeo (a mesma família dos 'LOCAL MUN'/'VITÓRIA').
+- como testar: Desligar o card quando a palavra dele repete a legenda ativa, ou mover o card para o terço de cima, fora do rosto. Comparar retenção e nota de legibilidade em 10 Shorts com card e 10 sem.
+
+## 17/11 09:16 PROPOSTA [GOSTO] Palavra de impacto maior e colorida nos primeiros 2 s (gancho) (cc-sobra)
+- prova: 5d0f2e q01 (grave: 'PLATEIA' em fonte pouco chamativa), a1b3af q02 ('ESCONDIDO' sem contraste com a mata), 62dc71 q01 ('DE INVESTIMENTO' fragmentado). Bate com o pedido da dona de palavras de impacto maiores e cores por personagem.
+- onde: Estilo da legenda palavra a palavra no trecho de 0 a 2 s (escala e cor da palavra-chave).
+- como testar: Teste A/B em 1 canal (sugestão: Manhwa Noturno, 30,9% assistido): primeira palavra-chave com escala de 1,3x e cor de destaque. Medir o % assistido do feed em 48 h.
+
+## 17/11 09:16 PROPOSTA [CERTEZA] Barrar as regras 4 e 5 do APRENDIDO nas DECISOES_DONO (cc-sobra)
+- prova: Regra 4 manda cobrir manchetes e textos nativos com tarja ou fundo sólido. Regra 5 manda cobrir marca d'água, @ e stickers com cobertura sólida. Isso contradiz a regra fixa: tarja SÓ quando há legenda queimada e do tamanho exato. Regra 1 pode ficar ('ADORADORES' sobre a boca em on-her-wedding q01), mas foi vista em 1 Short só.
+- onde: cortes_juri: filtro DECISOES_DONO antes de qualquer regra do APRENDIDO ir para o pipeline.
+- como testar: Rodar o filtro sobre o APRENDIDO.md atual e confirmar que as regras 4 e 5 saem marcadas como 'contra a dona' e não viram mudança.
+
+## 17/11 10:26 PROPOSTA [CERTEZA] Faixa branca com texto truncado no topo/rodapé (título ou tarja saindo das bordas) (cc-sobra)
+- prova: sem-obra-60531c q15: faixa branca embaixo com 'TRARAI HANDO EM SEU EMPREGO DE MEIO PER...' cortado, na área dos botões; sem-obra-e37847 q01/q02: título 'PEIXE MAIS SABOROSO DO MAR' colado na margem de cima com faixa branca cortando as palavras. É CERTEZA só se a folha confirmar texto cortado ou faixa fora da legenda da fonte. Se o log der '[hardsub] só 0/6' com tarja ligada, é tarja sem legenda embaixo.
+- onde: função que desenha o título do topo e a tarja (quebra de linha/largura máxima do título; caixa da tarja vinda de cortes_hardsub/delogo); log de cada Short: linha [hardsub]
+- como testar: Rodar D:\tmp\folha_topo.py no 1,5 s dos Shorts do dia e uma folha com 6 quadros do rodapé de 60531c e e37847, ambas em 720 px ou mais. Conferir se o texto passa da caixa e se o y da faixa fica entre 150 e 1580. Fazer um controle negativo com um vídeo sem legenda queimada: a tarja não pode aparecer.
+
+## 17/11 10:26 PROPOSTA [CERTEZA] Legenda palavra a palavra baixa demais (perto da área dos botões) (cc-sobra)
+- prova: sem-obra-60531c q13 ('porque as contas' / 'sozinha no canto apareceu do nada', bem embaixo, colada na tarja) e sem-obra-e37847 q04 ('atum sabor forte' no limite de baixo).
+- onde: posição vertical da legenda dinâmica no gerador do ASS/drawtext (margem de baixo). Também a regra que empurra a legenda para baixo da tarja quando há hardsub embaixo.
+- como testar: Medir o y de baixo da legenda nesses 2 Shorts. Se passar de 1580, limitar em 1580 e subir a legenda quando houver tarja embaixo. Refazer 3 Shorts com hardsub embaixo e comparar a folha antes e depois.
+
+## 17/11 11:35 PROPOSTA [CERTEZA] Legenda palavra a palavra não pode cobrir rosto, olhos e boca (cw/claude-sonnet-5-5)
+- prova: 4 de 5 Shorts do lote: eda16a q09 ('RUIM' sobre os olhos), 0b7e8e q01 ('A' sobre nariz e boca), ebc49f q03 ('TODOS' sobre o rosto), 914886 q04 ('VIVO?' sobre a cabeça). Bate com a regra 1 do APRENDIDO.
+- onde: Função que posiciona a palavra ativa da legenda no render (ASS/drawtext). Posição vertical fixa na zona inferior, hoje provavelmente centralizada ou variável por cena.
+- como testar: Fixar a palavra ativa no terço inferior (entre y≈1250 e y≈1580, acima da zona dos botões). Re-renderizar os 4 Shorts acima e rodar o júri, ou conferir a folha de quadros nos mesmos instantes, e checar se o texto deixou de tocar o rosto. Medir a nota de legibilidade antes e depois.
+
+## 17/11 11:35 PROPOSTA [CERTEZA] Júri compara movimento medido contra limiar errado (4%) (cw/claude-sonnet-5-5)
+- prova: eda16a q13/q16 (11,9% e 9,9%), 0b7e8e q16 (12,4%) e ebc49f q10 (30,1%) são chamados de 'abaixo do limite de 4%', o que é contraditório. Isso gera falsos graves de retenção e movimento.
+- onde: Prompt do júri em cortes_juri: trecho que cita o limiar de movimento.
+- como testar: Deixar claro no prompt que 4% é o piso, e que só movimento medido abaixo de 4% conta como estático. Rodar o júri nos mesmos 5 Shorts e conferir se as notas de movimento e retenção deixam de punir cenas acima do piso.
+
+## 17/11 11:35 PROPOSTA [GOSTO] Imagem desconexa da fala na abertura (possível padrão, medir antes de agir) (cw/claude-sonnet-5-5)
+- prova: eda16a q01 (drone de ilha tropical sobre 'o sujeito aguentou desaforo...') e 914886 q02 ('VIVO?' sobre a fala 'bota esse fóssil na água'). Só 2 Shorts e o júri vê quadros soltos, então não é conclusivo.
+- onde: Escolha da cena de abertura (seleção de tomada para o 1º segundo, função de casamento fala × cena).
+- como testar: Conferir no roteiro.txt e no vídeo se a cena do primeiro segundo ilustra a primeira frase. Se isso se repetir em 3 ou mais Shorts no próximo lote, propor regra de seleção de tomada.

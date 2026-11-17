@@ -1,16 +1,16 @@
-# Teste gradual de formatos e vozes — 16/11 22:58
+# Teste gradual de formatos e vozes — 17/11 11:06
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 604.0 de 1085 Shorts medidos passaram da mediana do canal (taxa 0.56). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 617.0 de 1113 Shorts medidos passaram da mediana do canal (taxa 0.55). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| voz:cintilante_she_ra_flavia_saddy | promovido | 46 | 0 | 0 | 37 | 23 | 19.0/26 | 0.71 | 28 | 48% (12) | 45/0 | 0 |
-| voz:moana | promovido | 12 | 0 | 0 | 6 | 5 | 17.0/25 | 0.67 | 510 | 40% (5) | 12/0 | 0 |
-| voz:chapolin_colorado | testando | 8 | 0 | 0 | 5 | 2 | 8.5/14 | 0.59 | 2114 | 53% (2) | 8/0 | 0 |
+| voz:cintilante_she_ra_flavia_saddy | promovido | 47 | 0 | 0 | 38 | 24 | 19.0/27 | 0.69 | 28 | 48% (13) | 46/0 | 0 |
+| voz:moana | promovido | 13 | 0 | 0 | 6 | 5 | 18.0/26 | 0.68 | 510 | 40% (5) | 13/0 | 0 |
+| voz:chapolin_colorado | testando | 8 | 0 | 0 | 5 | 2 | 8.5/15 | 0.56 | 2114 | 53% (2) | 8/0 | 0 |
 | voz:chamber_valorant | testando | 1 | 0 | 0 | 1 | 1 | 7.0/11 | 0.61 | 1091 | 36% (1) | 1/0 | 0 |
-| formato:chaves_chiquinha | testando | 24 | 0 | 0 | 12 | 6 | 4.5/7 | 0.61 | 1140 | 65% (4) | 22/0 | 0 |
+| formato:chaves_chiquinha | testando | 24 | 0 | 0 | 12 | 7 | 4.5/8 | 0.55 | 652 | 47% (5) | 22/0 | 0 |
 | formato:joao_chico | testando | 6 | 0 | 0 | 3 | 3 | 3.0/6 | 0.50 | 13 | 19% (1) | 3/0 | 0 |
 | formato:show_do_milhao | pausado | 4 | 0 | 0 | 4 | 4 | 2.0/5 | 0.43 | 123 | 66% (2) | 4/0 | 0 |
 | voz:chiquinha | pausado | 6 | 0 | 0 | 6 | 5 | 2.0/5 | 0.43 | 1011 | 36% (4) | 6/0 | 0 |
@@ -23,21 +23,22 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:aracy_top_therm | testando | 2 | 0 | 0 | 2 | 2 | 1.5/3 | 0.50 | 13 | - | 2/0 | 0 |
 | voz:bills | testando | 3 | 0 | 0 | 3 | 3 | 1.0/3 | 0.40 | 6 | 81% (1) | 3/0 | 0 |
 | voz:chico_selton | testando | 3 | 0 | 0 | 3 | 3 | 2.5/3 | 0.70 | 1043 | 44% (2) | 3/0 | 0 |
-| voz:husk_hazbin_hotel | testando | 6 | 0 | 0 | 3 | 2 | 2.0/3 | 0.60 | 1983 | 65% (2) | 6/0 | 0 |
+| voz:husk_hazbin_hotel | testando | 6 | 0 | 0 | 4 | 2 | 2.0/3 | 0.60 | 1983 | 65% (2) | 6/0 | 0 |
 | voz:mestre_kame | testando | 3 | 0 | 0 | 3 | 3 | 2.0/3 | 0.60 | 17 | 44% (1) | 3/0 | 0 |
 | voz:naruto | testando | 5 | 0 | 0 | 4 | 3 | 3.0/3 | 0.80 | 1097 | 67% (4) | 5/0 | 0 |
 | formato:chaves_quico | testando | 7 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 1145 | 47% (1) | 3/0 | 0 |
-| formato:fofoca | testando | 7 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 3235 | 61% (2) | 3/0 | 0 |
+| formato:fofoca | testando | 8 | 0 | 0 | 2 | 2 | 2.0/2 | 0.75 | 3235 | 61% (2) | 4/0 | 0 |
 | formato:madruga_chaves | testando | 9 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1388 | 70% (2) | 5/0 | 0 |
 | voz:cell | testando | 3 | 0 | 0 | 3 | 2 | 2.0/2 | 0.75 | 1204 | 45% (2) | 3/0 | 0 |
 | voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 3 | 2.0/2 | 0.75 | 1796 | 46% (3) | 4/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 2 | 1.5/2 | 0.62 | 1537 | 53% (1) | 2/0 | 0 |
-| voz:quico | testando | 4 | 0 | 0 | 4 | 2 | 1.5/2 | 0.62 | 1783 | 44% (3) | 4/0 | 0 |
+| voz:quico | testando | 5 | 0 | 0 | 4 | 2 | 1.5/2 | 0.62 | 1783 | 44% (3) | 5/0 | 0 |
 | voz:alex_madagascar | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 8 | - | 1/0 | 0 |
 | voz:ashley_graham_re4_remake | testando | 2 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1741 | 61% (1) | 2/0 | 0 |
 | voz:bulma | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 108 | 11% (1) | 1/0 | 0 |
-| voz:cassidy_overwatch | testando | 3 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 10 | - | 3/0 | 0 |
+| voz:cassidy_overwatch | testando | 3 | 0 | 0 | 3 | 1 | 1.0/1 | 0.67 | 10 | - | 3/0 | 0 |
 | voz:gru_hassum | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 2 | - | 1/0 | 0 |
+| voz:harry_potter | testando | 2 | 0 | 0 | 2 | 1 | 0.0/1 | 0.33 | 4 | - | 2/0 | 0 |
 | voz:homem_de_ferro_tony_stark | testando | 2 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 2113 | 60% (2) | 2/0 | 0 |
 | voz:jett_valorant | testando | 2 | 0 | 0 | 2 | 1 | 1.0/1 | 0.67 | 1317 | 51% (1) | 2/0 | 0 |
 | voz:mulher_maravilha | testando | 1 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1003 | 32% (1) | 1/0 | 0 |
@@ -49,17 +50,16 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:vegeta | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 13 | - | 1/0 | 0 |
 | formato:transmissao | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | formato:trio_chaves | testando | 3 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
-| voz:anya_forger | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
+| voz:anya_forger | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | 61% (1) | 1/0 | 0 |
 | voz:barba_branca | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
-| voz:chopper | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
+| voz:chopper | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:emilia | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:enel | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:freeza | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:goten_gohan_crianca | testando | 2 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 2/0 | 0 |
 | voz:hanako_san_yo_kai_watch | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
-| voz:harry_potter | testando | 2 | 0 | 0 | 2 | 0 | 0/0 | 0.50 | - | - | 2/0 | 0 |
 | voz:ilulu_kobayashi_san_dragon_maid | testando | 2 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 2/0 | 0 |
-| voz:jessie_toy_story | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
+| voz:jessie_toy_story | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:mei_overwatch | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:muzan | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:pan_dbz | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |

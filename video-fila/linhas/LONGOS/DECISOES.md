@@ -1,5 +1,9 @@
 # LONGOS — decisões (mais nova em cima)
 
+- 17/11 11:32 [melhorador antigravity/gemini-3.8-flash-tiered] EXPERIMENTO aberto 'resumo_curto_gancho': A={} x B={'resumo.max': 4} — Reduzir resumo.max de abertura para 4 frases diminui o tempo de exposição estática inicial (medido em 16.6% e 19.1% de movimento), acelerando a transição para o clímax da história sem inflar o tempo de render.
+
+- 17/11 05:45 [melhorador] EXPERIMENTO 'capitulos_mais_frequentes' fechado: vence A (B não ganhou (júri 5.06 x 5.12; views/h None x None))
+
 - 15/11 23:08 [melhorador código cc-sobra] anime_tts.py: Garantir painel de fundo até o último segundo e eliminar tela preta/congelamento no encerramento (58 linhas). Desfazer: copiar anime_tts.py.bak_20261115_230817_melhorador
 
 - 15/11 05:16 [melhorador código cc-sobra] fx_clips.py: Clamp nas bordas do movimento de câmera e travamento do efeito 2.5D instável (36 linhas). Desfazer: copiar fx_clips.py.bak_20261115_051621_melhorador

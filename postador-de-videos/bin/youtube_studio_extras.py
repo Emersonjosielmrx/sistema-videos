@@ -25,6 +25,7 @@ Uso:
 """
 import argparse
 import json
+import os
 import re
 from datetime import datetime
 import subprocess
@@ -677,6 +678,46 @@ def editar_branding(pg, channel_id, foto=None, banner=None, ensaio=False):
     return "ok: " + "+".join(feitos)
 
 
+def editar_nome_handle(pg, channel_id, nome=None, handle=None, ensaio=False):
+    """17/11 dona ("muda o nome dela, capa etc. pra encaixar com os 3D"): Personalização > Informações básicas — troca o
+    NOME e/ou o @ do canal, publica e confere relendo. @ ocupado/recusado = o Studio mostra erro no campo e o Publicar
+    fica desligado: devolve aviso sem forçar. Pelo Chrome do cofre do próprio canal."""
+    yw._abrir_studio(pg, channel_id, "/editing/details")
+    pg.wait_for_timeout(15000)
+    campo_nome = pg.locator("#brand-name-input input, ytcp-channel-editing-channel-name input, "
+                            "input[aria-label*='ome'][maxlength]").first
+    campo_handle = pg.locator("#handle-input input, ytcp-channel-editing-channel-handle input, "
+                              "input[aria-label*='dentificador'], input[aria-label*='andle']").first
+    atual_n = campo_nome.input_value(timeout=30000) if campo_nome.count() else "?"
+    atual_h = campo_handle.input_value(timeout=30000) if campo_handle.count() else "?"
+    if ensaio:
+        return f"ensaio: nome '{atual_n}' | @ '{atual_h}'"
+    if nome and atual_n.strip() != nome:
+        campo_nome.click()
+        pg.keyboard.press("Control+A")
+        pg.keyboard.insert_text(nome)
+        pg.wait_for_timeout(1500)
+    if handle and atual_h.strip().lstrip("@").lower() != handle.lstrip("@").lower():
+        campo_handle.click()
+        pg.keyboard.press("Control+A")
+        pg.keyboard.insert_text(handle.lstrip("@"))
+        pg.wait_for_timeout(6000)  # o Studio confere se o @ está livre
+    erro = pg.locator("ytcp-channel-editing-channel-handle .error, #handle-input .error, [role=alert]:visible").all_inner_texts()
+    bt = pg.locator("ytcp-button#publish-button, #publish-button").first
+    bt.wait_for(state="visible", timeout=15000)
+    if bt.get_attribute("aria-disabled") == "true":
+        yw._shot(pg, "nome_handle_sem_publicar")
+        return f"aviso: Publicar desligado ({' | '.join(t.strip() for t in erro if t.strip())[:160] or 'sem mudança?'})"
+    bt.click(timeout=60000)
+    pg.wait_for_timeout(10000)
+    yw._shot(pg, "nome_handle_publicado")
+    yw._abrir_studio(pg, channel_id, "/editing/details")
+    pg.wait_for_timeout(10000)
+    novo_n = campo_nome.input_value(timeout=30000) if campo_nome.count() else "?"
+    novo_h = campo_handle.input_value(timeout=30000) if campo_handle.count() else "?"
+    return f"nome '{novo_n}' | @ '{novo_h}'"
+
+
 def editar_sobre(pg, channel_id, texto, ensaio=False):
     """14/11 dona (autorizou "escrever o Sobre de cada canal, texto diferente por canal"): Personalização > Informações
     básicas > Descrição. Pelo navegador (regra: YouTube só pelo navegador). Confere o texto gravado depois de publicar."""
@@ -1250,6 +1291,19 @@ def visibilidade(pg, vid, nivel="private"):
         yw._shot(pg, f"visibilidade_{vid}_sem_concluir")
         return "aviso: não achei o botão Concluído do seletor de visibilidade"
     pg.wait_for_timeout(1200)
+    # 17/11 (Shorts antigos de 2025 do canal 3D): vídeo velho sem a pergunta "é para crianças?" respondida — o Studio não
+    # salva nada ("Você precisa responder a esta pergunta") e o Salvar ficava esperando. Sem resposta = marca "Não é
+    # conteúdo para crianças" (nosso conteúdo nunca é infantil). YT_EXTRAS_MFK=0 desliga.
+    if os.environ.get("YT_EXTRAS_MFK", "1") != "0":
+        try:
+            nao = pg.locator("[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]").first
+            if nao.count() and not yw._marcado(pg, "[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]") \
+                    and not yw._marcado(pg, "[name=VIDEO_MADE_FOR_KIDS_MFK]"):
+                nao.scroll_into_view_if_needed(timeout=5000)
+                nao.click(timeout=8000)
+                pg.wait_for_timeout(800)
+        except Exception:  # noqa: BLE001
+            pass
     _salvar_pagina(pg)
     _abrir_edicao(pg, vid)
     ficou = _visib_atual(pg)
@@ -1505,6 +1559,8 @@ def main():
     ap.add_argument("--colaborar", metavar="@HANDLE", help="(com --video) convida esse canal como colaborador (collab)")
     ap.add_argument("--aceitar-collab", metavar="LINK", help="aceita o convite de collab (link do Studio do convidado)")
     ap.add_argument("--sobre", metavar="ARQ.txt", help="(14/11) troca a descrição do canal (Sobre) pelo texto do arquivo")
+    ap.add_argument("--nome", help="(17/11) troca o NOME do canal")
+    ap.add_argument("--handle", help="(17/11) troca o @ do canal (sem ou com @)")
     ap.add_argument("--foto", metavar="ARQ", help="(15/11) troca a foto do canal")
     ap.add_argument("--banner", metavar="ARQ", help="(15/11) troca o banner do canal (2048x1152+)")
     a = ap.parse_args()
@@ -1561,6 +1617,8 @@ def main():
         if a.ler_comentarios:
             acoes.append(("comentarios", lambda pg: ler_comentarios(pg, e["channel_id"])))
             acoes.append(("inscritos", lambda pg: ler_inscritos(pg, e["channel_id"])))
+        if a.nome or a.handle:  # 17/11: nome e/ou @ do canal
+            acoes.append(("nome_handle", lambda pg: editar_nome_handle(pg, e["channel_id"], a.nome, a.handle, a.ensaio)))
         if a.sobre:  # 14/11: "Sobre" do canal (descrição) a partir de um .txt
             txt = Path(a.sobre).read_text(encoding="utf-8")
             acoes.append(("sobre", lambda pg: editar_sobre(pg, e["channel_id"], txt, a.ensaio)))

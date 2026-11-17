@@ -69,6 +69,97 @@
    "ideia": "Descubra como a integração Docker e Portainer simplifica o isolamento das aplicações na sua VPS pronta e segura.",
    "pergunta_cliente": "Como os aplicativos rodam dentro do servidor?",
    "criada": "2026-10-26T06:23:58"
+  },
+  {
+   "id": "traefik_seguranca_web",
+   "tipo": "como_funciona",
+   "ideia": "Você precisa expor seu site ou sistema na internet com segurança, e o Traefik configurado na VPS Blindada gerencia o tráfego e as conexões de forma protegida.",
+   "pergunta_cliente": "Como o Traefik ajuda a manter meu sistema seguro na internet?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "falta_conhecimento_terminal",
+   "tipo": "objecao",
+   "ideia": "Você tem receio de contratar um servidor por não entender de linhas de comando Linux, mas recebe a VPS Blindada totalmente pronta com Docker e Portainer.",
+   "pergunta_cliente": "Preciso saber comandos avançados de terminal para usar a VPS Blindada?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "antes_depois_gestao_servicos",
+   "tipo": "antes_depois",
+   "ideia": "Antes você dependia de comandos manuais para subir cada aplicação; agora gerencia tudo visualmente através do Portainer configurado na VPS Blindada.",
+   "pergunta_cliente": "Como fica o gerenciamento dos meus serviços depois que a VPS é entregue?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "centralizacao_docker_portainer",
+   "tipo": "como_funciona",
+   "ideia": "Seus sistemas rodam de forma desorganizada, mas a VPS Blindada organiza cada aplicação em contêineres Docker controlados visualmente pelo Portainer.",
+   "pergunta_cliente": "Como o Docker e o Portainer organizam os sistemas dentro do servidor?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "antes_depois_visibilidade_infr",
+   "tipo": "antes_depois",
+   "ideia": "Antes você não sabia se o servidor estava estável; agora acompanha o histórico e a saúde da infraestrutura através de relatórios periódicos da VPS Blindada.",
+   "pergunta_cliente": "Vou conseguir acompanhar o estado do meu servidor com clareza?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "receio_configuracao_backup",
+   "tipo": "objecao",
+   "ideia": "Você tem medo de errar na configuração da rotina de cópias de segurança, mas a VPS Blindada já vem com o backup automático totalmente configurado.",
+   "pergunta_cliente": "Eu preciso configurar o backup sozinho ou ele já vem pronto?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "roteamento_traefik_dominios",
+   "tipo": "pergunta_frequente",
+   "ideia": "Você precisa apontar múltiplos domínios para seus sistemas internos, tarefa executada pelo proxy reverso Traefik configurado na VPS Blindada.",
+   "pergunta_cliente": "O Traefik consegue direcionar meus domínios para sistemas diferentes na mesma VPS?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "desconhecimento_falhas_silenci",
+   "tipo": "dor",
+   "ideia": "Serviços travam sem deixar rastros visíveis para o dono do negócio, cenário monitorado ativamente pelo Bot Sentinela na VPS Blindada.",
+   "pergunta_cliente": "Como o Bot Sentinela sabe quando ocorre um erro na minha máquina?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "receio_servidor_desprotegido",
+   "tipo": "objecao",
+   "ideia": "Você tem medo de deixar portas abertas e o servidor vulnerável, contando com a estrutura blindada e segura configurada com Traefik e Docker.",
+   "pergunta_cliente": "A VPS Blindada já vem protegida contra acessos indevidos e portas expostas?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "falha_geral_recuperacao",
+   "tipo": "dor",
+   "ideia": "O servidor apresenta um problema crítico e seus arquivos somem, risco mitigado pela rotina de backup automático da VPS Blindada pronta para recuperação.",
+   "pergunta_cliente": "Se acontecer um desastre no servidor, meus dados estão salvos no backup?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "rotina_relatorios_acompanhamen",
+   "tipo": "como_funciona",
+   "ideia": "Você quer saber como acompanhar o funcionamento da máquina, contando com os relatórios da VPS Blindada que documentam o status da infraestrutura.",
+   "pergunta_cliente": "Como funcionam os relatórios entregues com a VPS Blindada?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "antes_depois_seguranca_operaci",
+   "tipo": "antes_depois",
+   "ideia": "Antes sua operação rodava no improviso sem termos definidos; agora você conta com ambiente padronizado, seguro, respaldado por contratos e relatórios.",
+   "pergunta_cliente": "Qual a diferença entre uma VPS comum e a VPS Blindada com contrato?",
+   "criada": "2026-11-17T12:23:42"
+  },
+  {
+   "id": "medo_manutencao_isolamento",
+   "tipo": "objecao",
+   "ideia": "Você tem receio de que mexer em um sistema derrube os outros, cenário evitado pelo isolamento em contêineres Docker e Portainer da VPS Blindada.",
+   "pergunta_cliente": "Se um sistema apresentar problema, os outros serviços da VPS continuam funcionando?",
+   "criada": "2026-11-17T12:23:42"
   }
  ]
 }

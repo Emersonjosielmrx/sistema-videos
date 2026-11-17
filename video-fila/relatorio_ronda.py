@@ -762,8 +762,11 @@ def sec_insta_http():
         nome = {"ligado": "SEM NAVEGADOR", "teste": "TESTANDO a volta", "desligado": "PELA TELA (sem navegador quebrou)"}
         out.append(f"- Rota do Flow (imagem): {nome.get(ri.get('estado'), ri.get('estado', '?'))} — 30 min: "
                    f"{ja.get('ok', '?')}/{ja.get('pedidos', '?')} ok; 2 h: {u2.get('http_ok', 0)} sem navegador + "
-                   f"{u2.get('tela_ok', 0)} tela" + ("  ⚠️ AS DUAS ROTAS PARADAS" if u2 and not u2.get('http_ok')
-                                                     and not u2.get('tela_ok') else ""))
+                   f"{u2.get('tela_ok', 0)} tela" + (
+                       # 17/11: 0 pedidos na janela = ninguém pediu imagem ao Flow (não é rota quebrada)
+                       "  (sem pedido ao Flow agora — não é falha)" if u2 and not ja.get("pedidos")
+                       and not u2.get('http_ok') and not u2.get('tela_ok') else
+                       "  ⚠️ AS DUAS ROTAS PARADAS" if u2 and not u2.get('http_ok') and not u2.get('tela_ok') else ""))
     except (OSError, ValueError):
         out.append("- Rota do Flow: vigia sem leitura")
     return out

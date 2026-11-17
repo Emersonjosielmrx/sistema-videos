@@ -102,10 +102,33 @@ def coletar():
     o.gravar(SAIDA, feitos)
 
 
+def conferir():
+    """Reabre os que estão aprovados: anúncio saiu do ar = 'vendido'; atualiza frete e preço."""
+    feitos = o.ler(SAIDA, {})
+    alvo = [v for v in feitos.values() if (v.get("foto") or {}).get("aparece_ligada") and not v.get("vendido")]
+    print("conferindo", len(alvo), flush=True)
+
+    def um(v):
+        time.sleep(1)
+        try:
+            d = o.detalhe(v["url"])
+            v["frete"] = d.get("frete") if d["entrega"] else None
+        except Exception as e:
+            if "410" in str(e) or "404" in str(e):
+                v["vendido"] = True
+        return v
+    with ThreadPoolExecutor(3) as ex:
+        list(ex.map(um, alvo))
+    o.gravar(SAIDA, feitos)
+    print("saíram do ar", sum(1 for v in alvo if v.get("vendido")), flush=True)
+
+
 def relatorio():
     feitos = o.ler(SAIDA, {})
     itens = []
     for v in feitos.values():
+        if v.get("vendido"):
+            continue
         f = v.get("foto") or {}
         if not f or not f.get("aparece_ligada") or (f.get("nota") or 0) < 4 or f.get("tubo"):
             continue
@@ -116,7 +139,7 @@ def relatorio():
         v["fr"] = v["frete"]
         v["tot"] = v["pr"] + v["fr"]
         itens.append(v)
-    L = ["# Monitores e TVs baratos com entrega — pesquisa de 14/11/2026",
+    L = [f"# Monitores e TVs baratos com entrega — atualizado em {time.strftime('%d/%m/%Y')}",
          "Total = preço + frete REAL até Paragominas (só entra quem a OLX envia para lá; 'só retirar' sai). "
          "Fotos olhadas pela IA.",
          "Lista 1 = os mais baratos com a tela ACESA na foto (sai quem só tem foto apagada ou tela inútil). "
@@ -144,4 +167,4 @@ def relatorio():
 
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
-    {"coletar": coletar, "relatorio": relatorio}[sys.argv[1]]()
+    {"coletar": coletar, "conferir": conferir, "relatorio": relatorio}[sys.argv[1]]()

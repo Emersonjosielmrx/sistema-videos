@@ -24267,6 +24267,214 @@
         "não sugerir área nova a partir deste tema"
       ],
       "origem": "area_gemini_web_sessao_cookie__sonnet_0030.md 2026-11-17"
+    },
+    {
+      "id": "celular_render_termux",
+      "nome": "FFmpeg no Termux para render e upscale no celular",
+      "subtemas": [
+        "repositórios de scripts Termux com ffmpeg (fila de render, controle de temperatura e bateria), para usar os celulares como máquinas de render"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0041.md 2026-11-17"
+    },
+    {
+      "id": "celular_fila_paralela",
+      "nome": "fila e trava por aparelho no adb",
+      "subtemas": [
+        "exemplos reais de fila com trava por serial, reconexão `adb connect` por Wi-Fi e um upload por vez por celular, sem misturar contas"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0041.md 2026-11-17"
+    },
+    {
+      "id": "celular_agenda_app_youtube",
+      "nome": "agendar publicação no app do YouTube",
+      "subtemas": [
+        "fluxos que definem data e hora de publicação no app e conferem depois no Studio"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0041.md 2026-11-17"
+    },
+    {
+      "id": "yt_regras_monetizacao",
+      "nome": "Regras oficiais do YouTube sobre conteúdo reaproveitado e transformador",
+      "subtemas": [
+        "Ler as páginas em support.google.com/youtube sobre \"reused content\" e monetização, com link e data"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0141.md 2026-11-17"
+    },
+    {
+      "id": "adb_estavel",
+      "nome": "Reconexão e travas para fila de celulares",
+      "subtemas": [
+        "exemplos curtos em Python de reconexão Wi-Fi do adb, travas por serial e retomada de upload interrompido"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0218.md 2026-11-17"
+    },
+    {
+      "id": "fila_cota",
+      "nome": "Fila com pausa até o reset de cota",
+      "subtemas": [
+        "scripts curtos em Python que leem a mensagem de limite de uso e reagendam o lote (mais vídeos por dia sem perder trabalho)"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0352.md 2026-11-17"
+    },
+    {
+      "id": "sessao_agendada",
+      "nome": "Renovação de sessão por Agendador de Tarefas/cron",
+      "subtemas": [
+        "exemplos de keepalive de cookie a cada 15–20 min em Windows e na VPS, sem abrir navegador"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0352.md 2026-11-17"
+    },
+    {
+      "id": "views_shorts_ponte",
+      "nome": "Ponte Short→longo",
+      "subtemas": [
+        "achar como canal novo leva impressões do Short para o longo (playlist/vídeo relacionado), em Python/yt-dlp"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0407.md 2026-11-17"
+    },
+    {
+      "id": "views_recap_fontes",
+      "nome": "Fontes de recap mais vistas (anime/manhwa)",
+      "subtemas": [
+        "achar via yt-dlp quais recaps de outros idiomas têm mais views por inscrito, para traduzir o roteiro"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0440.md 2026-11-17"
+    },
+    {
+      "id": "studio_agendar",
+      "nome": "Regras e fluxo oficial de agendar/publicar Short",
+      "subtemas": [
+        "página oficial de ajuda do YouTube sobre agendamento e limites de upload, lida com python/curl ou por outro caminho que não dependa de JavaScript"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0551.md 2026-11-17"
+    },
+    {
+      "id": "share_intent",
+      "nome": "Fluxo de compartilhar vídeo ao app do YouTube sem tocar na tela",
+      "subtemas": [
+        "posts e issues sobre `ACTION_SEND` com `content://`, `--grant-read-uri-permission` e FileProvider em `am start"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0551.md 2026-11-17"
+    },
+    {
+      "id": "adb_reconexao_mdns",
+      "nome": "Reconexão de adb por mDNS",
+      "subtemas": [
+        "Exemplos em Python de `adb mdns services` ou adbutils para reconectar o celular sem IP fixo, com fila de tarefas por celular"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0601.md 2026-11-17"
+    },
+    {
+      "id": "shorts_longo_ponte",
+      "nome": "Ponte Short para longo",
+      "subtemas": [
+        "Como linkar o Short ao vídeo longo e à playlist (Studio, \"vídeo relacionado\") e o que a página oficial do YouTube diz sobre isso"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0601.md 2026-11-17"
+    },
+    {
+      "id": "share_intent_yt",
+      "nome": "Compartilhar vídeo para o app do YouTube por adb",
+      "subtemas": [
+        "exemplos de `am start -a android.intent.action.SEND` com FileProvider e `pm grant`, e issues de crash por permissão content://"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0616.md 2026-11-17"
+    },
+    {
+      "id": "upload_diagnostico",
+      "nome": "Detectar falha de upload do Short pelo app",
+      "subtemas": [
+        "o que o YouTube Studio e o app mostram quando o Short é marcado como cópia ou fica retido, e como ler isso por dump de tela"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0616.md 2026-11-17"
+    },
+    {
+      "id": "yt_intent",
+      "nome": "Activity de upload do YouTube oficial",
+      "subtemas": [
+        "buscar qual activity/intent (SEND com `content://`) o app oficial aceita hoje e por que dá crash; ver issues e gists de adb, não só repositórios"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0629.md 2026-11-17"
+    },
+    {
+      "id": "adb_fila",
+      "nome": "Fila e travas por aparelho",
+      "subtemas": [
+        "exemplos pequenos de lock por serial, reconexão `adb connect` por Wi-Fi e checagem de bateria/temperatura antes de postar"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0629.md 2026-11-17"
+    },
+    {
+      "id": "yt_titulos_traduzidos",
+      "nome": "Títulos e descrições em vários idiomas (Studio)",
+      "subtemas": [
+        "Página oficial do YouTube sobre traduzir título e descrição, e se o vídeo longo pode ter metadados localizados sem refazer a dublagem"
+      ],
+      "origem": "area_three_cpu_budget__sonnet_0802.md 2026-11-17"
+    },
+    {
+      "id": "yt_regras_shorts_remix",
+      "nome": "Regras oficiais de Shorts: remix e conteúdo reutilizado",
+      "subtemas": [
+        "Página oficial de monetização de Shorts e remix: o que conta como transformação em cortes de parceiro e o que muda para canal novo"
+      ],
+      "origem": "area_three_cpu_budget__sonnet_0802.md 2026-11-17"
+    },
+    {
+      "id": "outliers_recap",
+      "nome": "Recaps mais vistos por nicho",
+      "subtemas": [
+        "repositórios pequenos que ranqueiam vídeos de recap de anime ou manhwa por views ÷ inscritos, para escolher o que recapar"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0901.md 2026-11-17"
+    },
+    {
+      "id": "cota_oficial",
+      "nome": "Limites do app Gemini",
+      "subtemas": [
+        "ler a página oficial de ajuda (support.google.com/gemini) sobre limites diários de imagem e vídeo por plano, para planejar quantas capas por dia cada conta aguenta, sem depender de repositório"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0921.md 2026-11-17"
+    },
+    {
+      "id": "yt_regras_upload_mobile",
+      "nome": "Regras oficiais do YouTube para Shorts (agendamento, limites de upload, conteúdo reutilizado)",
+      "subtemas": [
+        "páginas em support.google.com/youtube sobre agendar e limites diários de upload, com link e data"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1007.md 2026-11-17"
+    },
+    {
+      "id": "adb_share_intent",
+      "nome": "Intent SEND via MediaStore para o app do YouTube",
+      "subtemas": [
+        "exemplos de `am start` com `content://media` e `--grant-read-uri-permission` em issues, gists e fóruns (XDA, StackOverflow), e o que muda por versão do Android"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1031.md 2026-11-17"
+    },
+    {
+      "id": "yt_app_estados",
+      "nome": "Telas e pop-ups do app do YouTube para automação",
+      "subtemas": [
+        "listas de `resource-id` e textos de tela (ex.: \"Concluído\", \"Adicionar descrição\") por versão do app, com tratamento de pop-ups"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1031.md 2026-11-17"
+    },
+    {
+      "id": "fila_celulares_wifi",
+      "nome": "Reconexão e fila de vários celulares sem IP duplicado",
+      "subtemas": [
+        "scripts curtos de watchdog para `adb connect` e rodízio de aparelhos, de preferência com mais de 20 estrelas"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1031.md 2026-11-17"
+    },
+    {
+      "id": "yt_app_agenda",
+      "nome": "Upload e agendamento no app do YouTube mobile",
+      "subtemas": [
+        "ler as páginas oficiais support.google.com/youtube sobre enviar e agendar Short pelo celular e repos de fluxo ACTION_SEND com URI FileProvider"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1127.md 2026-11-17"
     }
   ],
   "projetos": [

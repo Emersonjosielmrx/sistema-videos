@@ -712,7 +712,7 @@
    "porta": 9779,
    "channel_id": "UCLGX8IBbyQxdKKEs-vjJTDw",
    "nota": "17/11: canal novo do projeto rede (adicionar_canal.py), só pelo navegador",
-   "_obs": "17/11 dona: canal pessoal vira o canal SÓ DE 3D. Perfil do cofre 'contapessoal' está LOGADO na emersonjosielmrx@gmail.com (dona do canal). Abre pelo IP fixo rnprmtfo-3 (cofre._ip_fixo_kaggle)."
+   "_obs": "17/11: canal SÓ DE 3D na conta emersonjosielmrx (perfil cofre 'contapessoal'). Sai pela CASA (um IP só, igual ao 99Freelas que usa o mesmo perfil). Não rodar junto com o robô do 99Freelas (mesmo Chrome)."
   }
  },
  "_leia": "usar=true: politica.postar_youtube sobe esse canal pelo navegador (youtube_web_poster.py) em vez da API. Perfil e porta vem do cofre de logins (D:/logins-google/cofre/contas.json) pelo email; perfil/porta daqui sao antigos."

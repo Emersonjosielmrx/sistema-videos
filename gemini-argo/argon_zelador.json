@@ -1,64 +1,61 @@
 {
  "contas": 29,
- "prontas": 6,
- "cookies_mortos": 23,
- "sem_cota": 3,
+ "prontas": 10,
+ "cookies_mortos": 19,
+ "sem_cota": 0,
  "bloqueadas": 0,
- "aguardando_oi": 9,
- "proxima_volta": "2026-11-17T01:30",
+ "aguardando_oi": 2,
+ "proxima_volta": null,
  "ultimas_voltas": [
   [
-   "2026-11-17T01:18",
+   "2026-11-17T08:20",
+   "comoseriasecomia"
+  ],
+  [
+   "2026-11-17T06:44",
+   "inovaremanhwaverseesp"
+  ],
+  [
+   "2026-11-17T05:37",
+   "inovaremanhwaversethai"
+  ],
+  [
+   "2026-11-17T05:36",
    "emersonjosiel2033"
   ],
   [
-   "2026-11-16T23:27",
-   "emersongenc"
-  ],
-  [
-   "2026-11-16T23:09",
-   "mentoriaiapro"
-  ],
-  [
-   "2026-11-16T23:08",
-   "e4487017"
-  ],
-  [
-   "2026-11-16T22:39",
-   "inovaremanhwabr"
-  ],
-  [
-   "2026-11-16T22:39",
-   "filmescomia1"
-  ],
-  [
-   "2026-11-16T22:39",
+   "2026-11-17T05:36",
    "emersonjosiel2030"
   ],
   [
-   "2026-11-16T22:39",
+   "2026-11-17T05:27",
+   "fabricadeautomacoes0"
+  ],
+  [
+   "2026-11-17T04:55",
    "emersonjosiel2029"
+  ],
+  [
+   "2026-11-17T01:37",
+   "inovaremanhwaverseing"
   ]
  ],
- "em": "2026-11-17T01:18:51",
- "duracao_s": 1506,
- "conferidas": 10,
+ "em": "2026-11-17T12:48:47",
+ "duracao_s": 36,
+ "conferidas": 5,
  "mortas_vistas": [
-  "emersonjosiel2030",
-  "comoseriasecomia",
-  "emersonjosiel2033",
-  "inovaremanhwaverseesp",
-  "inovaremanhwaversethai",
+  "emersonjosiel2029",
   "solarmundo195",
-  "inovaremanhwabr",
-  "inovaremanhwaverseing",
-  "aulacomia",
   "aulasrevolution",
-  "filmescomia1",
   "msenergypara",
   "murilodoctor192",
   "emersonjosiel1995",
+  "mentoriaiapro",
+  "e4487017",
   "fabricadeautomacoes0",
+  "inovarecap",
+  "emersongenc",
+  "emersongencshin",
   "empressinovare",
   "fabiovideoseducativos",
   "gameoftroneskingsroadbrasil",
@@ -67,18 +64,8 @@
   "emersonjosiel2031",
   "entrevistacomia"
  ],
- "renovadas": [
-  "emersonjosiel2033"
- ],
- "falhas_renovar": [
-  "emersonjosiel2030",
-  "comoseriasecomia",
-  "inovaremanhwaversethai",
-  "solarmundo195",
-  "inovaremanhwabr"
- ],
- "voltaram": [
-  "emersonjosiel2033"
- ],
+ "renovadas": [],
+ "falhas_renovar": [],
+ "voltaram": [],
  "oi_sem_cota": []
 }

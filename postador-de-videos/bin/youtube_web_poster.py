@@ -615,7 +615,18 @@ def _conferir_detalhes(pg, titulo, descricao, sintetico, n_tags, maiores_18=Fals
         if _so_texto(desc)[:200] != _so_texto(descricao[:5000])[:200]:
             raise Falha("erro", f"descrição ficou diferente no Studio: '{desc[:60]}'")
     if not _marcado(pg, "[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]"):
-        raise Falha("erro", "'Não é conteúdo para crianças' não ficou marcado")
+        # 17/11 (HistoriasEmFrames 0w1FjXmgX0w: 5,8 GB perdidos): a caixa de tags ainda aberta empurra o rádio pra fora
+        # da tela e a 1ª leitura dá falso. Como na declaração de IA (AB-05): fecha a caixa, rola até o rádio e marca de
+        # novo antes de falhar. É sempre a opção certa (nosso conteúdo não é infantil). YT_MFK_RETENTA=0 desliga.
+        if os.environ.get("YT_MFK_RETENTA", "1") != "0":
+            try:  # sem Escape (não arriscar fechar o diálogo do envio): só rola até o rádio
+                pg.locator("[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]").first.scroll_into_view_if_needed(timeout=5000)
+            except Exception:  # noqa: BLE001
+                pass
+            _clicar_se_existe(pg, "[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]", 5000)
+            pg.wait_for_timeout(1000)
+        if not _marcado(pg, "[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]"):
+            raise Falha("erro", "'Não é conteúdo para crianças' não ficou marcado")
     if maiores_18 and not _loc_marcado(_radio_maiores_18(pg)):
         raise Falha("erro", "'restringir a maiores de 18' não ficou marcado")
     alvo_ia = f"[name=VIDEO_HAS_ALTERED_CONTENT_{'YES' if sintetico else 'NO'}]"
@@ -991,14 +1002,27 @@ def subir(pg, channel_id, video, titulo, descricao, tags, privacy, alvo, sinteti
     global FINAL_CLICADO
     FINAL_CLICADO = True  # daqui pra frente o vídeo existe (agendado/publicado): erro NÃO pode reenviar em outra máquina
     pg.locator("#done-button").first.click()
+    def _visivel_seguro(seletor):
+        # 17/11 (Curiosidades Noturnas 06:28: "falhou DEPOIS do botão final" — Locator.is_visible estourou 30 s com a
+        # página ocupada e o vídeo que JÁ tinha subido virou erro). Depois do clique final, travar a leitura = "ainda
+        # não apareceu", nunca erro. YT_CONFIRMA_SEGURO=0 volta ao antigo.
+        if os.environ.get("YT_CONFIRMA_SEGURO", "1") == "0":
+            return pg.locator(seletor).first.is_visible()
+        try:
+            return pg.locator(seletor).first.is_visible(timeout=5000)
+        except Exception:  # noqa: BLE001
+            return False
+
     for _ in range(60):  # confirmação: "Vídeo publicado/agendado" ou "ainda processando"
         pg.wait_for_timeout(2000)
-        if _fechar_aviso_publico(pg, 300):
-            _clicar_se_existe(pg, "#done-button", 2000)  # o aviso segurou o Publicar: clica de novo
-        if pg.locator("ytcp-video-share-dialog, ytcp-uploads-still-processing-dialog, ytcp-prechecks-warning-dialog"
-                      ).first.is_visible():
+        try:
+            if _fechar_aviso_publico(pg, 300):
+                _clicar_se_existe(pg, "#done-button", 2000)  # o aviso segurou o Publicar: clica de novo
+        except Exception:  # noqa: BLE001
+            pass
+        if _visivel_seguro("ytcp-video-share-dialog, ytcp-uploads-still-processing-dialog, ytcp-prechecks-warning-dialog"):
             break
-    checando = pg.locator("ytcp-prechecks-warning-dialog").first.is_visible()
+    checando = _visivel_seguro("ytcp-prechecks-warning-dialog")
     if checando:
         # aviso de verificação de direitos ainda rodando: confirma publicar mesmo assim
         _clicar_se_existe(pg, "ytcp-prechecks-warning-dialog #primary-action-button", 5000)

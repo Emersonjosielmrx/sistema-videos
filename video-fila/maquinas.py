@@ -256,8 +256,28 @@ def _rodar(host, script):
 AGENDA_CAMERA = [(1, "10:00", "12:00"), (3, "10:00", "12:00"), (4, "16:00", "18:00")]  # ter, qui, sex
 
 
+CAMERA_AGORA = BASE / "estado" / "desktop_camera_ate.txt"
+
+
+def camera_manual(agora=None):
+    """17/11 dona ("botão no desktop pra eu apertar: pedidos redirecionados com aviso de desktop ocupado com a câmera"):
+    o botão grava a hora de FIM em estado\\desktop_camera_ate.txt (ISO). Até lá o desktop não recebe trabalho NOVO — o que
+    já roda termina. Vencido = vale de novo sozinho. DESKTOP_CAMERA_MANUAL=0 desliga."""
+    if os.environ.get("DESKTOP_CAMERA_MANUAL", "1") == "0":
+        return None
+    try:
+        ate = datetime.fromisoformat(CAMERA_AGORA.read_text(encoding="utf-8").strip()[:16])
+    except (OSError, ValueError):
+        return None
+    agora = agora or datetime.now()
+    return f"câmera em uso (botão da dona, até {ate:%H:%M})" if agora < ate else None
+
+
 def camera_agendada(agora=None):
-    """Texto do horário fixo de gravação no desktop se `agora` cai nele, senão None."""
+    """Texto do horário fixo de gravação no desktop se `agora` cai nele, senão None. 17/11: também o botão manual."""
+    manual = camera_manual(agora)
+    if manual:
+        return manual
     agora = agora or datetime.now()
     hm = agora.strftime("%H:%M")
     for dia, ini, fim in AGENDA_CAMERA:

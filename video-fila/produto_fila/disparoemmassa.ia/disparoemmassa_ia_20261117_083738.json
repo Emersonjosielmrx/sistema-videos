@@ -1,0 +1,141 @@
+{
+ "conta": "disparoemmassa.ia",
+ "produto": "disparo_massa",
+ "marca": "Disparo em Massa IA",
+ "titulo": "Como reativar contatos antigos no WhatsApp",
+ "legenda": "Reaqueça contatos antigos da sua agenda com campanhas organizadas no WhatsApp.\nEnvie mensagens personalizadas com rotação de instâncias de forma simples.\nSaiba mais no link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#whatsappmarketing #disparoemmassa #vendas #automacao #marketingdigital",
+ "roteiro": {
+  "gancho_tela": "Reative clientes no WhatsApp",
+  "pergunta_cliente": "Consigo reativar clientes antigos que não compram faz tempo?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu tinha centenas de contatos parados na agenda sem saber como reaquecer essas conversas.",
+    "visual": "apresentador",
+    "prompt_en": "a focused Brazilian business owner wearing glasses, tidy bright modern office, warm lighting",
+    "cenario_en": "inside a tidy, bright modern office of an online store, neat desk and soft daylight",
+    "real_tema": "reativação de contatos",
+    "destaques": [
+     "contatos parados"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261117_084330_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "A solução faz disparo em massa inteligente no WhatsApp com rotação de instâncias e mensagens personalizadas.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "automação e rotação",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Oi, Mariana! Separamos novidades exclusivas para você hoje."
+     },
+     {
+      "de": "cliente",
+      "texto": "Que ótimo! Estava mesmo querendo conferir."
+     },
+     {
+      "de": "empresa",
+      "texto": "Perfeito, vou te enviar os detalhes por aqui!"
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje faço envio automático para milhares de contatos com rotação de números de maneira prática.",
+    "visual": "apresentador",
+    "prompt_en": "a confident Brazilian business owner wearing glasses smiling calmly, bright clean workspace",
+    "cenario_en": "standing in a modern and tidy Brazilian e-commerce office, well lit background",
+    "real_tema": "conversas reaquecidas",
+    "destaques": [
+     "envio automático",
+     "rotação de números"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261117_084330_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_disparoemmassa.ia_20261117_084330_1.png"
+   }
+  ],
+  "legenda": "Reaqueça contatos antigos da sua agenda com campanhas organizadas no WhatsApp.\nEnvie mensagens personalizadas com rotação de instâncias de forma simples.\nSaiba mais no link no perfil.",
+  "titulo": "Como reativar contatos antigos no WhatsApp",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "reengajar_base_parada",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 345,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\disparoemmassa.ia_20261117_083738\\dono_3.mp4",
+ "duracao_s": 32.11,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-17T09:27:39",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.87,
+   "fala": "Consigo reativar clientes antigos que não compram faz tempo?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.87,
+   "fim": 12.7,
+   "fala": "Eu tinha centenas de contatos parados na agenda sem saber como reaquecer essas conversas.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.7,
+   "fim": 20.33,
+   "fala": "A solução faz disparo em massa inteligente no WhatsApp com rotação de instâncias e mensagens personalizadas.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.33,
+   "fim": 28.16,
+   "fala": "Hoje faço envio automático para milhares de contatos com rotação de números de maneira prática.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 28.16,
+   "fim": 32.11,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 7.5,
+  "notas": {
+   "legibilidade": 10.0,
+   "movimento": 5.0,
+   "roteiro_marca": 10.0,
+   "diretor": 5.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

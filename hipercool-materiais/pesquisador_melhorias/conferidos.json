@@ -17663,5 +17663,635 @@
     "arquivado": false,
     "descricao": "Vision-based Android UI automation framework that uploads videos to TikTok, Instagram and YouTube Studio using LLMs",
     "data": "2026-11-17"
+  },
+  "autumnsentiment/gemini-web2api-go-browser-login": {
+    "ok": true,
+    "nome": "autumnsentiment/gemini-web2api-go-browser-login",
+    "estrelas": 6,
+    "push": "2026-10-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "把 Google Gemini 网页端反代成 OpenAI 兼容 API 的浏览器登录拓展版 —— 在原项目基础上新增全自动 Cookie 供给链路（浏览器登录抓取 / 有效期自动保活 / 失效才刷新 / 抓取后模型校验）。",
+    "data": "2026-11-17"
+  },
+  "godde3s/gemini-free-api": {
+    "ok": true,
+    "nome": "Godde3s/gemini-free-api",
+    "estrelas": 8,
+    "push": "2026-10-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free OpenAI & Anthropic-compatible bridge for the Gemini web app — guest mode works without cookies, live model discovery, real streaming, v",
+    "data": "2026-11-17"
+  },
+  "zexadev/gemini-web2api-go": {
+    "ok": true,
+    "nome": "zexadev/gemini-web2api-go",
+    "estrelas": 897,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini web → OpenAI-compatible + native Gemini API, self-hosted, no API key. Gemini 4 Argon from a paid account cookie, strict_model (429 in",
+    "data": "2026-11-17"
+  },
+  "exelite-dev/free-gemini-pro-api": {
+    "ok": true,
+    "nome": "exelite-dev/Free-Gemini-pro-API",
+    "estrelas": 26,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free, unlimited Google Gemini Pro API proxy completely compatible with OpenAI and Anthropic standards. Features auto cookie refresh, account",
+    "data": "2026-11-17"
+  },
+  "oggynjack/0hive": {
+    "ok": true,
+    "nome": "oggynjack/0hive",
+    "estrelas": 0,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Self-healing, multi-account OpenAI-compatible gateway for Gemini's web app. Built on gemini-web2api.",
+    "data": "2026-11-17"
+  },
+  "zinda2000/gemini-web2api": {
+    "ok": true,
+    "nome": "zinda2000/gemini-web2api",
+    "estrelas": 4,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini Web to OpenAI, Claude and Gemini compatible APIs, with Argon support, multi-account routing and a desktop admin console.",
+    "data": "2026-11-17"
+  },
+  "rafix4x/gemini-api": {
+    "ok": true,
+    "nome": "Rafix4x/gemini-api",
+    "estrelas": 1,
+    "push": "2026-11-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini Web → OpenAI-compatible API. No cookie, no key. Render one-click deploy (Docker). Tool calling, streaming, vision.",
+    "data": "2026-11-17"
+  },
+  "guardinary/web2gem": {
+    "ok": true,
+    "nome": "Guardinary/web2gem",
+    "estrelas": 182,
+    "push": "2026-08-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Lightweight Gemini Web gateway with OpenAI-compatible and Google-compatible APIs. Deploy the single Worker bundle to Cloudflare or run it wi",
+    "data": "2026-11-17"
+  },
+  "xwteam/gemini2api-plugin": {
+    "ok": true,
+    "nome": "xwteam/gemini2api-plugin",
+    "estrelas": 8,
+    "push": "2026-10-26",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Gemini Cookie 保活浏览器插件 - Gemini2API 配套工具",
+    "data": "2026-11-17"
+  },
+  "hanaokayuzu/gemini-api": {
+    "ok": true,
+    "nome": "HanaokaYuzu/Gemini-API",
+    "estrelas": 3828,
+    "push": "2026-11-16",
+    "licenca": "AGPL-3.0",
+    "arquivado": false,
+    "descricao": "✨ Reverse-engineered Python API for Google Gemini web app",
+    "data": "2026-11-17"
+  },
+  "rtiming/android-adb-automation-kit": {
+    "ok": true,
+    "nome": "Rtiming/android-adb-automation-kit",
+    "estrelas": 4,
+    "push": "2026-06-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Drive any Android phone from Python over ADB — pixel-perfect tapping, OpenCV+OCR element finding, and text input that works in WeChat/Flutte",
+    "data": "2026-11-17"
+  },
+  "firerpa/lamda": {
+    "ok": true,
+    "nome": "firerpa/lamda",
+    "estrelas": 8746,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android Full-Stack Device Control Platform: WebRTC/H.264 remote desktop, UI/OCR/image-matching automation, one-click MITM, built-in Frida, p",
+    "data": "2026-11-17"
+  },
+  "tanbro/uiautomator2-mcp-server": {
+    "ok": true,
+    "nome": "tanbro/uiautomator2-mcp-server",
+    "estrelas": 57,
+    "push": "2026-10-25",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "A MCP (Model Context Protocol) server that provides tools for controlling and interacting with Android devices using uiautomator2. ",
+    "data": "2026-11-17"
+  },
+  "quueli/adb-device-automation": {
+    "ok": true,
+    "nome": "quueli/adb-device-automation",
+    "estrelas": 3,
+    "push": "2026-09-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android device automation over ADB: cached UI-tree parsing, input emulation, multi-device workers, resume",
+    "data": "2026-11-17"
+  },
+  "alsrkal/adb-wireless-manager": {
+    "ok": true,
+    "nome": "ALSRKAL/adb-wireless-manager",
+    "estrelas": 2,
+    "push": "2026-09-27",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Wi-Fi ADB over mDNS from a system tray or CLI — multi-device, survives reboots, scrcpy mirroring.",
+    "data": "2026-11-17"
+  },
+  "arcships/android-use": {
+    "ok": true,
+    "nome": "arcships/android-use",
+    "estrelas": 10,
+    "push": "2026-11-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android control for Dim Agent and local MCP clients, with a live screen, native UI automation, and optional Jev decisions.",
+    "data": "2026-11-17"
+  },
+  "devenducommun/android-crash-monitor-py": {
+    "ok": true,
+    "nome": "DevenDucommun/android-crash-monitor-py",
+    "estrelas": 0,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Cross-platform Android crash monitoring tool with GUI and CLI. Real-time log streaming, multi-device support, and intelligent crash detectio",
+    "data": "2026-11-17"
+  },
+  "ntthanh2603/gemini-web-to-api": {
+    "ok": true,
+    "nome": "ntthanh2603/gemini-web-to-api",
+    "estrelas": 668,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "✨Reverse-engineered API for Gemini web app. It can be used as a genuine API key from OpenAI, Gemini, and Claude.",
+    "data": "2026-11-17"
+  },
+  "ekko237/imagegen-swarm": {
+    "ok": true,
+    "nome": "Ekko237/imagegen-swarm",
+    "estrelas": 2,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Use every AI image quota you already pay for, all at once: a Claude Code / Codex skill that runs Codex, Grok, Gemini, Jimeng, Muse and Lovar",
+    "data": "2026-11-17"
+  },
+  "teng-lin/notebooklm-py": {
+    "ok": true,
+    "nome": "teng-lin/notebooklm-py",
+    "estrelas": 20261,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Unofficial Python API and agentic skill for Google Gemini Notebook. Full programmatic access to Gemini Notebook's features—including capabil",
+    "data": "2026-11-17"
+  },
+  "e30goodman/gemini-web-proxy": {
+    "ok": true,
+    "nome": "e30goodman/gemini-web-proxy",
+    "estrelas": 0,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free OpenAI-compatible API for Gemini Web: use your Gemini subscription as an API (no Google API key). Real browser via X11/AT-SPI, tool cal",
+    "data": "2026-11-17"
+  },
+  "ven0m0/gemini-web-wrapper": {
+    "ok": true,
+    "nome": "Ven0m0/gemini-web-wrapper",
+    "estrelas": 5,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A Bun + FastAPI monorepo for running a mobile-friendly AI workspace in the browser, backed by a configurable LLM gateway and repository inde",
+    "data": "2026-11-17"
+  },
+  "avasz/gemini-web-to-openai-proxy": {
+    "ok": true,
+    "nome": "Avasz/gemini-web-to-openai-proxy",
+    "estrelas": 5,
+    "push": "2026-09-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Self-hosted OpenAI-compatible and Google-native API for Gemini Web. Cookie-based auth, no Google API key or billing account, streaming, tool",
+    "data": "2026-11-17"
+  },
+  "cyberanrhy/gemini-claude-web2api": {
+    "ok": true,
+    "nome": "cyberanrhy/gemini-claude-web2api",
+    "estrelas": 30,
+    "push": "2026-06-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "OpenAI-compatible proxy for Gemini and Claude Web APIs. Free AI access via cookie auth — no API key needed. Windows/Linux/macOS.",
+    "data": "2026-11-17"
+  },
+  "codewithmubasher/gemini-reverseeng-api": {
+    "ok": true,
+    "nome": "CodewithMubasher/Gemini-ReverseEng-API",
+    "estrelas": 1,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini web to api opensource 100% working no cookie needed",
+    "data": "2026-11-17"
+  },
+  "kuzmany/gemini-web-cli": {
+    "ok": true,
+    "nome": "kuzmany/gemini-web-cli",
+    "estrelas": 0,
+    "push": "2026-10-24",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Generate images and video from the CLI using your Google Gemini subscription (Nano Banana + Veo) by driving your logged-in browser session —",
+    "data": "2026-11-17"
+  },
+  "lymticsh/gemini-web2api-go": {
+    "ok": true,
+    "nome": "LymtIcsh/gemini-web2api-go",
+    "estrelas": 11,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini web to OpenAI-compatible API in Go, with browser account pooling, quota management, and bilingual documentation.",
+    "data": "2026-11-17"
+  },
+  "realmdstar/ghostbrain": {
+    "ok": true,
+    "nome": "RealMDstar/ghostbrain",
+    "estrelas": 5,
+    "push": "2026-08-27",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Gemini Web → OpenAI-compatible API bridge. Turn your Google Gemini account into a local LLM API with multi-account support, token pooling, a",
+    "data": "2026-11-17"
+  },
+  "gustavo-henriq/nano-banana-pro-skill": {
+    "ok": true,
+    "nome": "gustavo-henriq/nano-banana-pro-skill",
+    "estrelas": 30,
+    "push": "2026-11-16",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Agent skill: generate and edit images with Nano Banana Pro through your own Gemini web session. Works with Claude Code and any agent that ca",
+    "data": "2026-11-17"
+  },
+  "catdogfishfrog/gemini-webapi-manager": {
+    "ok": true,
+    "nome": "CatDogFishFrog/gemini-webapi-manager",
+    "estrelas": 0,
+    "push": "2026-10-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-17"
+  },
+  "lesterppo/hermes-gem-cli": {
+    "ok": true,
+    "nome": "lesterppo/hermes-gem-cli",
+    "estrelas": 2,
+    "push": "2026-11-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "AI-agent-native CLI for Google Gemini Gems — chat, image generation, deep research, Gem CRUD. No API key. Uses browser cookies via gemini-we",
+    "data": "2026-11-17"
+  },
+  "sophomoresty/gemini-web2api": {
+    "ok": true,
+    "nome": "Sophomoresty/gemini-web2api",
+    "estrelas": 3601,
+    "push": "2026-08-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Convert Google Gemini web into OpenAI-compatible API. Zero auth, cross-platform, single file.",
+    "data": "2026-11-17"
+  },
+  "abood-xd/android-social-automation-bot-using-adb-": {
+    "ok": true,
+    "nome": "abood-xd/Android-Social-Automation-Bot-Using-Adb-",
+    "estrelas": 1,
+    "push": "2026-07-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A PySide6-based GUI automation utility for Android devices to automate actions like opening links, liking posts, and posting comments across",
+    "data": "2026-11-17"
+  },
+  "hansalemaos/cyandrocel": {
+    "ok": true,
+    "nome": "hansalemaos/cyandrocel",
+    "estrelas": 70,
+    "push": "2025-08-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android Automation Framework for real devices without root access with multiple backends (uiautomator, uiautomator2, fragment parser, tesser",
+    "data": "2026-11-17"
+  },
+  "openatx/adbutils": {
+    "ok": true,
+    "nome": "openatx/adbutils",
+    "estrelas": 1082,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "pure python adb library for google adb service.",
+    "data": "2026-11-17"
+  },
+  "google/snippet-uiautomator": {
+    "ok": true,
+    "nome": "google/snippet-uiautomator",
+    "estrelas": 54,
+    "push": "2026-11-11",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Mobly UiAutomator module for using Python code to operate UI actions on an Android device.",
+    "data": "2026-11-17"
+  },
+  "dtmilano/androidviewclient": {
+    "ok": true,
+    "nome": "dtmilano/AndroidViewClient",
+    "estrelas": 1724,
+    "push": "2026-11-15",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Android ViewServer and ADB client",
+    "data": "2026-11-17"
+  },
+  "kuafuai/andee": {
+    "ok": true,
+    "nome": "kuafuai/andee",
+    "estrelas": 6150,
+    "push": "2026-11-17",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Andee lives on your phone or Mac and uses any app like you do—no integrations, no root, any model; memory and passwords never leave your dev",
+    "data": "2026-11-17"
+  },
+  "gitforlifeyall/youtube-redroid-automation": {
+    "ok": true,
+    "nome": "GitForlifeyall/youtube-redroid-automation",
+    "estrelas": 0,
+    "push": "2026-09-23",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automated YouTube Shorts uploader pipeline utilizing containerized Redroid (Android 14) on WSL2 / Linux with sub-second audio seeking and In",
+    "data": "2026-11-17"
+  },
+  "itaki33-bjk/telefon-ciftligi": {
+    "ok": true,
+    "nome": "itaki33-bjk/telefon-ciftligi",
+    "estrelas": 8,
+    "push": "2026-08-05",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Open-source Android phone farm management platform: ADB-based device fleet control, batch automation (YouTube/Instagram/WhatsApp/Play Store)",
+    "data": "2026-11-17"
+  },
+  "seokpilyoon/adb-autolink": {
+    "ok": true,
+    "nome": "SeokpilYoon/adb-autolink",
+    "estrelas": 1,
+    "push": "2026-11-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Zero-touch wireless Android control for Claude Code: auto-enables wireless debugging on trusted Wi-Fi, reconnects by itself, and installs, t",
+    "data": "2026-11-17"
+  },
+  "ethanez713/adbconnect": {
+    "ok": true,
+    "nome": "ethanez713/adbconnect",
+    "estrelas": 0,
+    "push": "2026-11-12",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Wireless ADB that reconnects by itself: a small Android app and a CLI that bring debugging back after a reboot, a Wi-Fi change or a rotated ",
+    "data": "2026-11-17"
+  },
+  "tokyoxpa3/omniadb-host": {
+    "ok": true,
+    "nome": "tokyoxpa3/OmniADB-Host",
+    "estrelas": 0,
+    "push": "2026-11-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Phone-side OmniADB: keeps wireless ADB pinned to port 5555 across reboots, Wi-Fi reconnects and sleep. No root, no computer. EN / 繁中 / 简中.",
+    "data": "2026-11-17"
+  },
+  "da-itda/wireless-adb-reconnect": {
+    "ok": true,
+    "nome": "da-itda/wireless-adb-reconnect",
+    "estrelas": 1,
+    "push": "2026-11-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Auto-reconnect wireless debugging (ADB over Wi-Fi) on macOS & Windows — menu bar / tray app with QR pairing and connection diagnosis. 무선 디버깅",
+    "data": "2026-11-17"
+  },
+  "femtanul/android_device_farm_orchestrator_telegram": {
+    "ok": true,
+    "nome": "Femtanul/Android_Device_Farm_Orchestrator_telegram",
+    "estrelas": 1,
+    "push": "2026-11-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android Device Farm Orchestrator — a multithreaded automation system for physical Android devices driven via ADB and uiautomator2, featuring",
+    "data": "2026-11-17"
+  },
+  "duarteenc/adb-device-farm": {
+    "ok": true,
+    "nome": "duarteenc/adb-device-farm",
+    "estrelas": 3,
+    "push": "2026-08-24",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Professional Android Device Farm Management Tool - Control multiple Android devices via ADB with modern UI",
+    "data": "2026-11-17"
+  },
+  "amarel-taylor-scott/kenburns": {
+    "ok": true,
+    "nome": "Amarel-Taylor-Scott/kenburns",
+    "estrelas": 0,
+    "push": "2026-08-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Deterministic pure-stdlib Ken Burns planner: per-frame pan/zoom rects over a still image → ready ffmpeg zoompan command",
+    "data": "2026-11-17"
+  },
+  "xinyue0228/gemini-imgbatch": {
+    "ok": true,
+    "nome": "Xinyue0228/gemini-imgbatch",
+    "estrelas": 1,
+    "push": "2026-10-23",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Batch image generation using your own Gemini (gemini.google.com) account — no API key needed. Reuses browser session cookies to drive the Ge",
+    "data": "2026-11-17"
+  },
+  "hsjlyj/gemini-web2api-cookie-exporter": {
+    "ok": true,
+    "nome": "hsjlyj/gemini-web2api-cookie-exporter",
+    "estrelas": 0,
+    "push": "2026-11-03",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "",
+    "data": "2026-11-17"
+  },
+  "dimnih/cliproxyapi-cookies": {
+    "ok": true,
+    "nome": "DimNih/cliproxyapi-cookies",
+    "estrelas": 0,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Local OpenAI-compatible reverse proxy for cookie-authenticated Gemini Web, OpenAI Codex, and Claude. Integrated with Aider AI Agent.",
+    "data": "2026-11-17"
+  },
+  "zhu748/gemini-web-api-gateway": {
+    "ok": true,
+    "nome": "zhu748/gemini-web-api-gateway",
+    "estrelas": 0,
+    "push": "2026-11-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "OpenAI-compatible reverse proxy for gemini.google.com - cookie auth, SOCKS/HTTP proxy, streaming SSE, model aliasing, live dashboard",
+    "data": "2026-11-17"
+  },
+  "mra1k3r0/nimji": {
+    "ok": true,
+    "nome": "Mra1k3r0/nimji",
+    "estrelas": 3,
+    "push": "2026-08-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Promise-first TypeScript client and nimji CLI for Gemini web chat: multi-turn sessions, configurable retries and keepalive, auth via env or ",
+    "data": "2026-11-17"
+  },
+  "talwayh1/gemini-api-server": {
+    "ok": true,
+    "nome": "talwayh1/gemini-api-server",
+    "estrelas": 0,
+    "push": "2026-05-20",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Gemini Web -> OpenAI API Server. Multi-account pool + auto cookie refresh. Based on HanaokaYuzu/Gemini-API.",
+    "data": "2026-11-17"
+  },
+  "brunorakotomalala62/gemini_tsara_cookie": {
+    "ok": true,
+    "nome": "BrunoRakotomalala62/gemini_tsara_cookie",
+    "estrelas": 0,
+    "push": "2026-08-02",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Proxy API REST pour Google Gemini utilisant les cookies d'authentification web. Auto-extraction XSRF, keep-alive HTTP/2, background refresh.",
+    "data": "2026-11-17"
+  },
+  "leechael/gemini-web-cli": {
+    "ok": true,
+    "nome": "Leechael/gemini-web-cli",
+    "estrelas": 24,
+    "push": "2026-09-17",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "A Go command-line interface for Google Gemini Web/Bard via browser cookies.",
+    "data": "2026-11-17"
+  },
+  "xwteam/gemini2api": {
+    "ok": true,
+    "nome": "xwteam/gemini2api",
+    "estrelas": 151,
+    "push": "2026-10-27",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Gemini Web to API - 通过浏览器Cookie将Google Gemini转换为兼容OpenAI/Claude/Gemini SDK的标准API",
+    "data": "2026-11-17"
+  },
+  "libiemochou/gemini-web-bridge": {
+    "ok": true,
+    "nome": "libiemochou/gemini-web-bridge",
+    "estrelas": 0,
+    "push": "2026-10-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "把 Gemini 网页版变成本地能力的开源工具：①调用 Gemini 生图 的MCP 工具——对模型说“生成一张图”，自动调用网页版画图并把原图（非压缩预览）下载到本地；②Anthropic 兼容的本地接口，可接入 Claude Code 等支持 MCP 的客户端（Windows",
+    "data": "2026-11-17"
+  },
+  "ekosaputro14/gemini-web2api": {
+    "ok": true,
+    "nome": "EkoSaputro14/gemini-web2api",
+    "estrelas": 0,
+    "push": "2026-10-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Convert Google Gemini web interface to OpenAI-compatible API with Gemini 4 Argon, 3.8 Flash, resilient tool calling & 1-click cookie sync ex",
+    "data": "2026-11-17"
+  },
+  "msomu/adbharbor": {
+    "ok": true,
+    "nome": "msomu/AdbHarbor",
+    "estrelas": 9,
+    "push": "2026-09-25",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Lock broker for shared Android devices — exclusive ADB leases, queueing, and session cleanup for multi-agent development",
+    "data": "2026-11-17"
+  },
+  "rock3r/atc": {
+    "ok": true,
+    "nome": "rock3r/atc",
+    "estrelas": 17,
+    "push": "2026-11-04",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Daemonless Agent Traffic Control for Android emulators, iOS Simulators, and physical devices — leases, warm-affinity wait queue, snapshots, ",
+    "data": "2026-11-17"
+  },
+  "nativu5/gemini-fastapi": {
+    "ok": true,
+    "nome": "Nativu5/Gemini-FastAPI",
+    "estrelas": 717,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Web-based Gemini models wrapped into an OpenAI-compatible API.",
+    "data": "2026-11-17"
+  },
+  "7waynelee/gemini-telegram-bot": {
+    "ok": true,
+    "nome": "7WayneLee/gemini-telegram-bot",
+    "estrelas": 1,
+    "push": "2026-11-15",
+    "licenca": "AGPL-3.0",
+    "arquivado": false,
+    "descricao": "Telegram bot for Google Gemini via the reverse-engineered web API. Cookie-lifecycle-first design for small shared VMs.",
+    "data": "2026-11-17"
+  },
+  "sak-114514/gemini-web-to-api": {
+    "ok": true,
+    "nome": "Sak-114514/gemini-web-to-api",
+    "estrelas": 0,
+    "push": "2026-11-17",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "gemini-web-to-api fork: video reference images, multi-account pool, per-account proxy",
+    "data": "2026-11-17"
   }
 }

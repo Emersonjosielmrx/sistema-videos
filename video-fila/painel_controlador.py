@@ -3039,7 +3039,12 @@ ROTAS = {"/api/geral": lambda p: _cache("geral", 60, lambda: api_geral(p)), "/ap
          "/api/graficos": lambda p: _cache("graficos:" + str((p.get("dias") or ["14"])[0]), 300, lambda: api_graficos(p)),
          "/api/modelos_central": api_modelos_central, "/api/nsn": api_nsn, "/api/er": api_er, "/api/celular": api_celular, "/api/telao_like": api_telao_like,
          "/api/canais": api_canais, "/api/postagens": api_postagens, "/api/cobertura": api_cobertura, "/api/kanban": api_kanban, "/api/erros": api_erros,
-         "/api/ranking": api_ranking, "/api/canais_views": api_canais_views, "/api/placar": api_placar,
+         # 17/11: /api/ranking sem cache levava > 120 s (lê o YouTube) — o melhorador dos longos desistiu 8x em 16/11
+         # ("painel :8790 não respondeu") e o relatório espera 150 s. Cache 10 min por período (dias). PAINEL_RANKING_CACHE=0 tira.
+         "/api/ranking": (api_ranking if os.environ.get("PAINEL_RANKING_CACHE", "1") == "0" else
+                          lambda p: _cache("ranking:" + str((p.get("dias") or ["7"])[0]) + ":" + str((p.get("de") or [""])[0])
+                                           + ":" + str((p.get("ate") or [""])[0]), 600, lambda: api_ranking(p))),
+         "/api/canais_views": api_canais_views, "/api/placar": api_placar,
          "/api/views_mesma_hora": lambda p: _cache("views_mesma_hora", 120, lambda: api_views_mesma_hora(p)),
          "/api/ranking_canais": lambda p: _cache("ranking_canais", 120, lambda: api_ranking_canais(p)),
          "/api/resumo": lambda p: _cache("resumo", 60, lambda: api_resumo(p)),
@@ -3061,7 +3066,31 @@ def api_recap_longo():
             return json.loads(r.read().decode("utf-8"))
     except Exception as e:  # noqa: BLE001
         return {"erro": f"sem dados da VPS ({type(e).__name__}: {str(e)[:120]})"}
-ROTAS_POST = {"/api/controle": api_controle_mudar, "/api/abrir": api_abrir, "/api/tarefa_rodar": api_tarefa_rodar,
+def api_desktop_camera(corpo):
+    """17/11 dona: botão na área de trabalho do DESKTOP ("desktop ocupado com a câmera"). {"horas": 2} = ocupado até agora
+    + 2 h (o que já roda termina; nada NOVO vai pro desktop); {"horas": 0} = libera. Grava estado\\desktop_camera_ate.txt,
+    lido por maquinas.camera_agendada (vale pra controlador, maquina_remota, Veo, kit3d)."""
+    arq = BASE / "estado" / "desktop_camera_ate.txt"
+    try:
+        horas = float(corpo.get("horas", 2))
+    except (TypeError, ValueError):
+        horas = 2.0
+    if horas <= 0:
+        arq.unlink(missing_ok=True)
+        return {"ok": True, "msg": "desktop LIBERADO — volta a receber trabalho"}
+    ate = datetime.now() + timedelta(hours=min(horas, 12))
+    arq.write_text(ate.isoformat(timespec="minutes"), encoding="utf-8")
+    try:
+        sys.path.insert(0, str(BASE))
+        import avisos
+        avisos.enviar(f"🎥 Desktop ocupado com a câmera até {ate:%H:%M} — nenhum trabalho novo vai pra ele "
+                      f"(o que já roda termina).", "desktop-camera", importante=False)
+    except Exception:  # noqa: BLE001
+        pass
+    return {"ok": True, "msg": f"desktop OCUPADO até {ate:%H:%M}", "ate": ate.isoformat(timespec="minutes")}
+
+
+ROTAS_POST = {"/api/desktop_camera": api_desktop_camera, "/api/controle": api_controle_mudar, "/api/abrir": api_abrir, "/api/tarefa_rodar": api_tarefa_rodar,
               "/api/modelos_central": api_modelos_central_mudar, "/api/bancada_rodar": api_bancada_rodar,
               "/api/er_prioridade": api_er_prioridade,
               "/api/aprendizado_marcar": api_aprendizado_marcar, "/api/ia_pedir": api_ia_pedir, "/api/ia_acao": api_ia_acao,
@@ -3153,6 +3182,10 @@ class Handler(SimpleHTTPRequestHandler):
         chave = _chave()
         q = parse_qs(urlparse(self.path).query).get("chave", [""])[0]
         cookie = re.search(r"painel_chave=([\w-]+)", self.headers.get("Cookie") or "")
+        # 17/11: o botão do desktop (PowerShell 5.1 descarta o Cookie montado à mão) manda ?chave= num POST — nessa rota
+        # vale direto, sem o 302 que grava o cookie (o POST se perderia no redirecionamento)
+        if q and _s.compare_digest(q, chave) and urlparse(self.path).path == "/api/desktop_camera":
+            return True
         if q and _s.compare_digest(q, chave):
             self.send_response(302)
             seguro = "; Secure" if self.headers.get("X-Forwarded-Proto") == "https" else ""  # 25/10: via videos.opus-sem-limites

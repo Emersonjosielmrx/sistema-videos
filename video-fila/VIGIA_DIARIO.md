@@ -178,3 +178,51 @@ STATUS: REVISAR - Arquivos comuns divergentes em recapd; rodar o script recursos
 - Causa provável: Instabilidade transitória de rede ou lentidão no carregamento do YouTube Studio via Playwright.
 - CONSERTO PROPOSTO: Adicionar lógica de retry (ex: tentar recarregar a página até 3 vezes com backoff exponencial) no método `Page.goto` ou na rotina de upload do postador do YouTube Studio.
 - Estado: NADA A FAZER
+## 20261117_0155 — Erro de login/bot do yt-dlp no parceiro (proxy/IP em pausa)
+- Motivo / O que achei (trecho de log): `[2026-11-17 00:58:39,374 - ERROR - [fetch] download falhou: e] DwTmTSZy9JU: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser...` e `[ytdlp_vez] proxy fora da roda por 60 min`
+- Causa provável: Bloqueio temporário do YouTube (HTTP 403 / Sign in to confirm you're not a bot) devido a volume de requisições no IP/proxy. O sistema já possui pausa automática em `ytdlp_pausa.json` e faz o espaçamento correto.
+- CONSERTO PROPOSTO: Nenhum (respeitar a regra de que o bloqueio yt-dlp passa sozinho e nunca mexer nas opções ou cookies do yt-dlp por conta disso).
+- Estado: NADA A FAZER
+## 20261117_0256 — Alimentador do recap longo e monitoramento estáveis; pausa do yt-dlp ativa
+- Motivo / O que achei (trecho de log): `[2026-11-17 01:55:35] ALERTA: ✅ Vídeos de anime voltaram ao normal: a produção automática voltou a ficar ligada.` e `ytdlp_pausa.json` ativo por bloqueio temporal do yt-dlp.
+- Causa provável: Bloqueio transitório do YouTube por volume de requisições no IP (yt-dlp 429/bot) e breve queda na tarefa agendada do cron corrigida pelo `anime_health_monitor`.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — sistema já se recuperou sozinho e mantém pausas automáticas).
+- Estado: NADA A FAZER
+
+STATUS: OK
+## 20261117_0356 — Timeout no rclone purge do Kaggle no parceiro-render (caiu para render local)
+- Motivo / O que achei (trecho de log): `2026-11-17 03:41:21,999 - WARNING - [auto|short] Kaggle falhou (TimeoutExpired: Command '['D:\\tools\\rclone.exe', 'purge', 'manhwa-drive:colab_recap/fila_shorts/20261117_030355_-sbNcAedVhc']' timed out after 300 seconds) — renderiza aqui`
+- Causa provável: Lentidão transitória ou travamento na API do Google Drive ao executar o comando `rclone purge`. O próprio sistema tratou o erro e seguiu o fluxo fazendo o render local com sucesso.
+- CONSERTO PROPOSTO: Aumentar o timeout do `rclone purge`/chamadas rclone em chamadas do Kaggle de 300 para 600 segundos ou implementar retry com backoff em `bin/parceiro_diario.py` / rotinas de integração com o Kaggle.
+- Estado: NADA A FAZER
+
+STATUS: OK
+
+## 20261117_0757 — Recap longo: alimentador e PC2 verificados (Modo só aviso)
+- Motivo / O que achei (trecho de log): `[2026-11-17 07:57:26] B) worker: worker PC2 NAO responde em [('100.125.7.77', 8772), ('192.168.18.7', 8771)]` e MemoryError pontual em upload (`Plantão das Histórias: não subiu sem-obra-6c9973_cap1_20261113 (erro: MemoryError)`).
+- Causa provável: Conexão temporária com o PC2 ou oscilação de memória no Windows durante upload/render simultâneo, já restabelecido pelo Wise Memory Optimizer (em execução).
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — nenhuma alteração de código ou intervenção manual permitida).
+- Estado: NADA A FAZER
+
+STATUS: OK
+
+## 20261117_0938 — Recap longo aguardando cota nas GPUs e verificação de rotinas (Modo só aviso)
+- Motivo / O que achei (trecho de log): Recap longo com 13 de 20 GPUs sem conta (espera a próxima volta) e contas verificadas 9 de 69; rotinas rodando normalmente.
+- Causa provável: Uso regular de cotas nas contas do Veo e rodízio automático aguardando a próxima volta.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — aguardar liberação de cota pelo próprio rodízio do sistema).
+- Estado: NADA A FAZER
+
+STATUS: OK
+## 20261117_1106 — Whisper com timeout de 1800s em shorts no parceiro-render devido a sobrecarga ou áudio longo/bloqueio
+- Motivo / O que achei (trecho de log): 2026-11-17 09:38:39,659 - ERROR - [fetch] Whisper (model=tiny) exception: Command [...] timed out after 1800 seconds
+- Causa provável: O timeout estático ou dinâmico do Whisper estoura em vídeos curtos/médios quando há lentidão na CPU ou bloqueio/retry do yt-dlp.
+- CONSERTO PROPOSTO: Ajustar o timeout do Whisper em bin/anime_fetch.py e bin/_whisper_sub.py para escalar proporcionalmente à duração real do vídeo com folga segura (ex: max(900, duration * 3)) e tratar timeouts com fallback de modelo ou re-tentativa.
+- Estado: PRECISA REVISÃO
+
+## 20261117_1116 — Timeout fixo de 1800s aplicado incorretamente a vídeos curtos (pelo painel)
+- Motivo / O que fiz (arquivos): Whisper estourou timeout de 1800s em vídeos de ~3 min porque o código usava max(1800, duracao_real * 5), forçando 30 min mesmo quando 5x seria 15 min. Consertos anteriores (15/11, 16/11) aumentaram de 900s pra 1800s, piorando o problema. Editei bin/anime_fetch.py:479,481 — troquei max(1800, ...) por max(900, ...) para timeout proporcional. Vídeo de 3 min: 900s (15m) vs 1800s (30m) anterior. / Como conferi: sintaxe OK, teste de cálculo confirmou 177s→900s (15m). / Como desfazer: botão "Desfazer" no painel (pedido 20261117_111602_2291)
+- Estado: RESOLVIDO
+
+## 20261117_1119 — MemoryError no _ler_ledger refatorado para leitura iterativa (pelo painel)
+- Motivo / O que fiz (arquivos): _ler_ledger() em D:\postador-de-videos\bin\politica.py carregava o ledger inteiro (2920 linhas, 1.02 MB) com read_text().splitlines(), causando MemoryError em situações de contenção (log manhwa_react_20261115.log). Refatorei linhas 404-413 para leitura iterativa com LEDGER_FILE.open() em vez de read_text(), eliminando pico de memória. / Como conferi: compilação OK, _ler_ledger() leu 2920 registros com sucesso, politica.py rodou sem erro. / Como desfazer: botão "Desfazer" no painel (pedido 20261117_111919_8499)
+- Estado: RESOLVIDO

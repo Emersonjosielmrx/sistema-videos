@@ -1,0 +1,148 @@
+{
+ "conta": "futebolcom.ia2",
+ "produto": "cardapio_digital",
+ "marca": "Cardápio Digital",
+ "titulo": "Cardápio direto no celular sem PDF pesado",
+ "legenda": "Facilite a escolha do seu cliente com fotos no celular e atendimento com IA no WhatsApp.\nMais praticidade para o seu delivery no dia a dia. Saiba mais no link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#cardapiodigital #delivery #restaurante #lanchonete #gestaoderestaurante",
+ "roteiro": {
+  "gancho_tela": "Chega de PDF pesado",
+  "pergunta_cliente": "Seu cliente ainda espera foto de cardápio para pedir?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu enviava arquivo em PDF pesado e percebia que o cliente desistia antes mesmo de abrir.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing behind a clean, tidy, well-lit counter of a modern Brazilian restaurant, smiling and confident",
+    "real_tema": "apresentador",
+    "destaques": [
+     "arquivo em PDF",
+     "o cliente desistia"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261117_045932_3.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Mudei para o acesso no celular: o cliente visualiza pratos com fotos e a IA esclarece perguntas.",
+    "visual": "imagem",
+    "prompt_en": "standing behind a clean, tidy, well-lit counter of a modern Brazilian restaurant, confident and articulate, no people in focus",
+    "cenario_en": "standing behind a clean, tidy, well-lit counter of a modern Brazilian restaurant, confident and articulate",
+    "real_tema": "apresentador",
+    "destaques": [
+     "acesso no celular",
+     "esclarece perguntas"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Tem opção sem cebola no lanche?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Sim! Você pode retirar a cebola ao montar seu pedido no cardápio."
+     },
+     {
+      "de": "cliente",
+      "texto": "Maravilha, vou fechar aqui!"
+     }
+    ],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261117_045932_3.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261117_045932_3.png"
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "O pedido finalizado chega pronto no WhatsApp, tornando o dia a dia do delivery muito mais ágil.",
+    "visual": "apresentador",
+    "prompt_en": "",
+    "cenario_en": "standing behind a clean, tidy, well-lit counter of a modern Brazilian restaurant, welcoming and satisfied",
+    "real_tema": "apresentador",
+    "destaques": [
+     "chega pronto",
+     "muito mais ágil"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261117_045932_3.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_futebolcom.ia2_20261117_045932_3.png"
+   }
+  ],
+  "legenda": "Facilite a escolha do seu cliente com fotos no celular e atendimento com IA no WhatsApp.\nMais praticidade para o seu delivery no dia a dia. Saiba mais no link no perfil.",
+  "titulo": "Cardápio direto no celular sem PDF pesado",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "cardapio_em_pdf_pesado",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 199,
+  "tentativas_roteiro": 2
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "fogo",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\futebolcom.ia2_20261117_045510\\dono_3.mp4",
+ "duracao_s": 31.39,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-17T05:25:02",
+ "variante": "dono_tres_veo_final",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [
+  "cartao"
+ ],
+ "veo_total": 3,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.15,
+   "fala": "Seu cliente ainda espera foto de cardápio para pedir?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.15,
+   "fim": 11.98,
+   "fala": "Eu enviava arquivo em PDF pesado e percebia que o cliente desistia antes mesmo de abrir.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 11.98,
+   "fim": 19.71,
+   "fala": "Mudei para o acesso no celular: o cliente visualiza pratos com fotos e a IA esclarece perguntas.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 19.71,
+   "fim": 27.54,
+   "fala": "O pedido finalizado chega pronto no WhatsApp, tornando o dia a dia do delivery muito mais ágil.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.54,
+   "fim": 31.39,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 5.5,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "diretor": 5.5
+  },
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

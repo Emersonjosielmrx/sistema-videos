@@ -172,127 +172,92 @@
  "historico_notas": [
   {
    "video": "video.mp4",
-   "conta": "sintetizerisada",
-   "formato": "dono_mesma_foto+editor",
-   "nota": 6.25,
+   "conta": "vpsblindada.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.5,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "quatro_veo+editor",
+   "nota": 6.12,
    "notas": {
     "legibilidade": 7.0,
     "movimento": 5.0,
     "roteiro_marca": 7.0,
-    "diretor": 6.0
+    "diretor": 5.5
    }
   },
   {
-   "video": "video.mp4",
-   "conta": "sintetizerisada",
-   "formato": "dono_mesma_foto+editor",
-   "nota": 6.0,
-   "notas": {
-    "legibilidade": 6.0,
-    "movimento": 6.0,
-    "roteiro_marca": 6.0,
-    "diretor": 6.0
-   }
-  },
-  {
-   "video": "followupia_ia_20261114_030252.mp4",
-   "conta": "followupia.ia",
-   "formato": "dono_mesma_foto",
-   "nota": 4.75,
-   "notas": {
-    "legibilidade": 5.0,
-    "movimento": 5.0,
-    "roteiro_marca": 5.0,
-    "diretor": 4.0
-   }
-  },
-  {
-   "video": "vpsblindada_ia_20261114_044257.mp4",
-   "conta": "vpsblindada.ia",
-   "formato": "dono_mesma_foto",
-   "nota": 6.67,
+   "video": "fabricademarketing_ia_20261116_125853.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 6.75,
    "notas": {
     "legibilidade": 7.0,
-    "movimento": 6.0,
-    "roteiro_marca": 7.0
-   }
-  },
-  {
-   "video": "fabricademarketing_ia_20261114_064315.mp4",
-   "conta": "fabricademarketing.ia",
-   "formato": "dono_abre_fecha",
-   "nota": 6.12,
-   "notas": {
-    "legibilidade": 8.0,
     "movimento": 4.0,
-    "roteiro_marca": 7.5,
-    "diretor": 5.0
-   }
-  },
-  {
-   "video": "video.mp4",
-   "conta": "fabricademarketing.ia",
-   "formato": "dono_abre_fecha+editor",
-   "nota": 7.25,
-   "notas": {
-    "legibilidade": 7.0,
-    "movimento": 6.0,
     "roteiro_marca": 10.0,
     "diretor": 6.0
    }
   },
   {
-   "video": "crmchatwoot_ia_20261114_085316.mp4",
+   "video": "video.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261116_153130.mp4",
    "conta": "crmchatwoot.ia",
-   "formato": "dono_uma_cena",
+   "formato": "dono_abre_fecha",
    "nota": 6.5,
    "notas": {
-    "legibilidade": 8.0,
-    "movimento": 6.0,
+    "legibilidade": 7.0,
+    "movimento": 5.5,
     "roteiro_marca": 7.0,
-    "diretor": 5.0
+    "diretor": 6.5
    }
   },
   {
-   "video": "mentoriasia_ia_20261114_110117.mp4",
+   "video": "mentoriasia_ia_20261116_162611.mp4",
    "conta": "mentoriasia.ia",
-   "formato": "dono_mesma_foto",
-   "nota": 5.25,
+   "formato": "dono_abre_fecha",
+   "nota": 5.5,
    "notas": {
     "legibilidade": 5.0,
-    "movimento": 4.0,
-    "roteiro_marca": 7.0,
-    "diretor": 5.0
-   }
-  },
-  {
-   "video": "landingpageia_ia_20261114_121122.mp4",
-   "conta": "landingpageia.ia",
-   "formato": "dono_mesma_foto",
-   "nota": 5.75,
-   "notas": {
-    "legibilidade": 6.0,
     "movimento": 5.0,
-    "roteiro_marca": 7.0,
-    "diretor": 5.0
+    "roteiro_marca": 6.0,
+    "diretor": 6.0
    }
   },
   {
-   "video": "gestaodegrupos_ia_20261114_132226.mp4",
-   "conta": "gestaodegrupos.ia",
-   "formato": "cinco_veo",
+   "video": "video.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha+editor",
    "nota": 6.25,
    "notas": {
-    "legibilidade": 8.0,
+    "legibilidade": 7.0,
     "movimento": 5.0,
-    "roteiro_marca": 7.0,
+    "roteiro_marca": 8.0,
     "diretor": 5.0
    }
   },
   {
    "video": "video.mp4",
-   "conta": "gestaodegrupos.ia",
-   "formato": "cinco_veo+editor",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha+editor",
    "nota": 6.25,
    "notas": {
     "legibilidade": 6.0,
@@ -303,14 +268,50 @@
   },
   {
    "video": "video.mp4",
+   "conta": "mentoriasia.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.25,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "gestaodegrupos_ia_20261116_201720.mp4",
    "conta": "gestaodegrupos.ia",
-   "formato": "cinco_veo+editor",
-   "nota": 7.12,
+   "formato": "dono_abre_fecha",
+   "nota": 6.0,
    "notas": {
     "legibilidade": 8.0,
-    "movimento": 6.5,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
     "roteiro_marca": 7.0,
-    "diretor": 7.0
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "gestaodegrupos.ia",
+   "formato": "dono_abre_fecha+editor",
+   "nota": 7.0,
+   "notas": {
+    "legibilidade": 8.0,
+    "movimento": 7.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
    }
   }
  ],
@@ -339,32 +340,32 @@
  },
  "placar_formatos": {
   "dono_uma_cena": [
-   4,
+   8,
    3
   ],
   "dono_abre_fecha": [
-   5,
-   2
+   8,
+   0
   ],
   "dono_mesma_foto": [
-   5,
+   6,
    0
   ],
   "dono_e_cena_veo": [
-   2,
+   3,
    1
   ],
   "dono_tres": [
-   1,
-   2
+   2,
+   1
   ],
   "dono_abre_fecha_veo_meio": [
-   1,
+   3,
    1
   ],
   "dono_tres_veo_final": [
-   2,
-   1
+   3,
+   0
   ],
   "quatro_veo": [
    0,
@@ -375,8 +376,8 @@
    0
   ],
   "sem_dono": [
-   16,
-   8
+   20,
+   7
   ]
  },
  "vigiando": []

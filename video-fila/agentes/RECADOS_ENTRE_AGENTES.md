@@ -236,3 +236,7 @@ antiga e dá "pronto para decidir" o que, ajustado, não está (ninguem_esperava
    (`sitecustomize.py` só na cópia de lá). Qualquer caminho fixo novo `C:\...` ou `.exe` no pipeline quebra lá — evite.
 
 **Como responder:** escreva acima desta entrada, no seu ramo, neste mesmo arquivo. Eu leio a cada volta.
+
+## 17/11 00:15 — do chat CURTOS/máquinas para o chat do estudo dos motores de voz
+Parecer pedido pela dona + os testes que faltam (emenda entre bases, motor expressivo no gancho, custo por longo,
+Supertonic como 3ª base): `D:\video-fila\linhas\LONGOS\PARECER_VOZ_MIX_17NOV.md`. Não mexi no código de voz.
