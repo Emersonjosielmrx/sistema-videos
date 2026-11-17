@@ -89,3 +89,8 @@ morto: a conta sai da fila e o zelador do Argon renova (`marcar_cookies`, o mesm
 - `python -X utf8 -I gemini_midia_http.py estado` — uso por conta e próximas da fila.
 - Log: `D:\gemini-argo\midia.log`. No cliente: linhas `[gemini]`; no robô do Veo: `[gemini]` e `[gerar] video feito
   pelo Gemini`.
+
+## 16/11 — celulares entram na produção (`D:\projeto celular sub controle\celular_midia.py`)
+- Imagem: Gemini HTTP -> Flow HTTP -> Flow tela -> **celular** (app Gemini; só sem referência e 9:16). `CELULAR_IMAGEM=0`.
+- Vídeo: Gemini HTTP -> **celular (S20 Ultra)** -> Flow (o vídeo do Flow está quebrado). Só sem foto e 9:16; corta em 8 s.
+  `CELULAR_VIDEO=0`. Ver LEIA_PRIMEIRO.md da pasta dos celulares.

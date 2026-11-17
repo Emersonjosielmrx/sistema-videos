@@ -598,6 +598,19 @@ def _gerar(tipo, prompt, saida, formato, conta, executar):
             log.warning("%s: erro do pedido (não castiga a conta): %s", tipo, e)
             return False, f"erro do pedido: {e}"
         except Exception as e:  # noqa: BLE001
+            # 17/11 (msenergypara: 42 falhas de "HTTP 401" num dia): 401/403 no pedido = sessão morta, mas virava falha
+            # comum (30 min e volta, falha de novo) e o zelador nunca era avisado. Agora = cookie morto: sai da fila do
+            # Argon até o zelador renovar. GEMINI_401_COOKIE=0 volta ao antigo.
+            if (os.environ.get("GEMINI_401_COOKIE", "1") != "0"
+                    and re.search(r"HTTP (401|403)\b", str(e))):
+                try:
+                    gh.marcar_cookies(ap, False)
+                except Exception:  # noqa: BLE001
+                    pass
+                _registrar(ap, tipo, False, f"cookie: 401 no pedido ({e})", ESPERA_FALHA)
+                ultimo = f"{ap}: cookie morto (401 no pedido; zelador renova)"
+                log.warning("%s falhou %s: %s", tipo, ap, ultimo)
+                continue
             # rede caindo (11h35-11h58 de 14/11: "Max retries exceeded" em todas as contas) não é defeito da conta:
             # castigo curto, senão a fila inteira some por 30 min
             rede = _e_rede(e)

@@ -285,6 +285,27 @@
         "22:00"
       ]
     },
+    "dentrodascoisas3d": {
+      "slug": "dentrodascoisas3d",
+      "creds": [
+        "novo_dentrodascoisas3d"
+      ],
+      "nome": "Dentro das Coisas 3D",
+      "handle": "@dentrodascoisas3d",
+      "channel_id": "UCLGX8IBbyQxdKKEs-vjJTDw",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "curiosidades em 3D: como as coisas funcionam por dentro (corpo humano, animais, objetos do dia a dia, ciência)",
+      "dono": "manhwa-react",
+      "alimentadores": {},
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ]
+    },
     "dicasfinanceirasdaia": {
       "slug": "dicasfinanceirasdaia",
       "creds": [

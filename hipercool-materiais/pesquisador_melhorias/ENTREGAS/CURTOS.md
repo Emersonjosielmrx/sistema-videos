@@ -3562,7 +3562,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_canais_estrangeiros_por_pais__sonnet_2321.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-15 23:48 — Nichos de Shorts por país só com yt-dlp (`area_nicho_pais_ytdlp`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-15 23:48 — Nichos de Shorts por país só com yt-dlp (`area_nicho_pais_ytdlp`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-15\respostas\area_nicho_pais_ytdlp__sonnet_2331.md`
 - [INÉDITO] github.com/Bedirhandd/dubbed-video-downloader — ★8, push 2026-07-05, MIT — Python CLI for downloading YouTube videos or audio in the dubbed language you want, powered by yt-dlp and FFmpeg.
 - [INÉDITO] github.com/liosvee/japanese-shorts-agent — ★0, push 2026-11-08, MIT — A Claude Code workflow for researching Japanese YouTube niches, analysing keywords and Shorts, and producing original Japanese videos with E
@@ -3579,7 +3579,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_parceria_modelo_carta__sonnet_0052.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 01:15 — Formulários e e-mails de contato comercial de canais de recap (`area_contato_comercial`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 01:15 — Formulários e e-mails de contato comercial de canais de recap (`area_contato_comercial`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_contato_comercial__sonnet_0106.md`
 - [INÉDITO] github.com/ScrapingBee/youtube-email-scraper-api — ★0, push 2026-10-30, MIT — YouTube email scraper reading business emails creators publish on channel About pages and video descriptions, in Python, Node and cURL.
 
@@ -3591,7 +3591,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_abertura_30s__sonnet_0141.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 02:28 — Concorrentes e tendências (`area_concorrentes_tendencias`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 02:28 — Concorrentes e tendências (`area_concorrentes_tendencias`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_concorrentes_tendencias__sonnet_0221.md`
 - [USA em D:\recapd-ambientes\producao\bin\studio_extras_anime.py:27] github.com/ahmedmostafa147/youtube-studio — ★5, push 2026-10-22, MIT — Free, open-source vidIQ / TubeBuddy alternative that runs on your computer: keyword research, SEO checker, competitor outliers, channel anal
 - [INÉDITO] github.com/ledrodh/EchoScope-AI — ★1, push 2026-11-10, MIT — EchoScope AI is a YouTube market intelligence dashboard built with Python. It tracks competitor metrics, compares Shorts vs. Long-form effic
@@ -3600,7 +3600,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_velocidade_tendencia__sonnet_0236.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 03:11 — Recap de mangá e vídeo por VLM com licença clara (`area_recap_vlm_licenca`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 03:11 — Recap de mangá e vídeo por VLM com licença clara (`area_recap_vlm_licenca`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_vlm_licenca__sonnet_0256.md`
 - [INÉDITO] github.com/malatangxiaxie/framekit — ★0, push 2026-11-14, MIT — A deterministic procedural video renderer running natively on Android Termux
 
@@ -3616,7 +3616,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trend_por_nicho__sonnet_0351.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 04:08 — Fila de recap guiada por busca (`area_trend_br_fila`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 04:08 — Fila de recap guiada por busca (`area_trend_br_fila`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trend_br_fila__sonnet_0401.md`
 - [INÉDITO] github.com/gregman2121/youtube-autocomplete-miner — ★0, push 2026-10-23, MIT — Find out what people actually type into YouTube search. Give it a seed term, and it pulls the autocomplete suggestions for the seed plus eve
 
@@ -3624,7 +3624,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trends_pais__sonnet_0411.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 04:36 — Título do próximo recap vindo do autocomplete (`area_fila_titulo`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 04:36 — Título do próximo recap vindo do autocomplete (`area_fila_titulo`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_fila_titulo__sonnet_0421.md`
 - [INÉDITO] github.com/ChocoData-com/youtube-suggest-scraper — ★1, push 2026-07-20, MIT — YouTube Suggest Scraper for extracting autocomplete suggestions and related search terms in any language from YouTube.com. Updated 2026.
 - [INÉDITO] github.com/sebdata-tools/search-autocomplete — ★0, push 2026-11-15, MIT — Google autocomplete scraper that also reads YouTube, Amazon and DuckDuckGo: keyword suggestions from four search boxes in one run. Many seed
@@ -3637,7 +3637,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_por_pais__sonnet_0506.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 05:34 — Formatos que viralizam por nicho (`area_formatos_nicho`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 05:34 — Formatos que viralizam por nicho (`area_formatos_nicho`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_formatos_nicho__sonnet_0522.md`
 - [INÉDITO] github.com/eliftforlife/youtube-formula-skills — ★0, push 2026-10-16, MIT — 8 free Claude skills from analyzing Alex Hormozi's top 100 YouTube videos: thumbnails, titles, hooks, descriptions, formats, delivery, editi
 
@@ -3665,7 +3665,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_ritmo__sonnet_0701.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 07:17 — Detecção de tendência por Reddit/HN sem API paga (`area_reddit_trend`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 07:17 — Detecção de tendência por Reddit/HN sem API paga (`area_reddit_trend`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_reddit_trend__sonnet_0711.md`
 - [INÉDITO] github.com/mvanhorn/last30days-skill — ★None, push ?, ver repo (fallback HTML) — AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary
 
@@ -3673,7 +3673,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_outlier_recap__sonnet_0721.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 07:42 — Mineração de comentários de concorrentes (pt, en, es) (`area_comment_mining`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 07:42 — Mineração de comentários de concorrentes (pt, en, es) (`area_comment_mining`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_comment_mining__sonnet_0736.md`
 - [INÉDITO] github.com/heyitsgautham/youtube-comments-scraper — ★0, push 2026-10-25, MIT — Export YouTube comments and replies with Python or curl, no API key, plus a finder for unanswered viewer questions
 
@@ -3681,7 +3681,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trend_forecast__sonnet_0804.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 08:36 — VSR de um passo (FlashVSR e concorrentes) em fp16 na T4 (`area_vsr_streaming`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 08:36 — VSR de um passo (FlashVSR e concorrentes) em fp16 na T4 (`area_vsr_streaming`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_vsr_streaming__sonnet_0821.md`
 - [INÉDITO] github.com/zhengchen1999/DOVE — ★227, push 2026-10-20, Apache-2.0 — [NeurIPS'25] DOVE: Efficient One-Step Diffusion Model for Real-World Video Super-Resolution
 - [INÉDITO] github.com/zhengchen1999/LSGQuant — ★16, push 2026-10-21, Apache-2.0 — PyTorch code for our paper "LSGQuant: Layer-Sensitivity Guided Quantization for One-Step Diffusion Real-World Video Super-Resolution"
@@ -3695,7 +3695,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_competitor_watch__sonnet_1101.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 11:22 — Fila de recap guiada pelo feed (`area_1__rss_estatisticas`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 11:22 — Fila de recap guiada pelo feed (`area_1__rss_estatisticas`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_1__rss_estatisticas__sonnet_1115.md`
 - [INÉDITO] github.com/victoranime/viralspy — ★0, push 2026-11-15, MIT — Open-source Instagram, TikTok, YouTube & Facebook Outlier Sorter Chrome Extension + Local AI MCP Server (Claude, Antigravity, Cursor) & Free
 
@@ -3703,7 +3703,7 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_asl_benchmarks__sonnet_1128.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-16 11:49 — Dados e métodos de legenda de quadrinhos por VLM (`area_recap_vlm_dataset`, Sonnet 5.5 web)
+## [x] AVALIADO 16/11 — 2026-11-16 11:49 — Dados e métodos de legenda de quadrinhos por VLM (`area_recap_vlm_dataset`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_vlm_dataset__sonnet_1141.md`
 - [INÉDITO] github.com/Chukie99/manhwa-recap-ai — ★0, push 2026-08-28, MIT — Turn manga/manhwa into cinematic recap videos with AI narration — full-stack FastAPI + React SaaS
 
@@ -3725,4 +3725,86 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 ## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 13:57 — Conteúdo transformador em recap (`area_cta_conteudo_transformador`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_cta_conteudo_transformador__sonnet_1346.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 16:50 — Tendências abertas sem login (`area_trends_wikipedia_gdelt`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_trends_wikipedia_gdelt__sonnet_1644.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 17:25 — Padrão de título dos recaps longos em outras línguas por país (`area_titulos_longos_idioma`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulos_longos_idioma__sonnet_1716.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 18:46 — Programa de parceria ou autorização com donos de recap (`area_parceria_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_parceria_canal__sonnet_1841.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 18:59 — Contrato curto de recap (`area_cl_modelo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_cl_modelo__sonnet_1853.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+
+> 16/11 19:25 (chat CURTOS): 12 blocos avaliados — 1 implantado (ideia do autocompletar: bin/palavras_buscadas.py), 15 reprovados com motivo, 0 deixados. O repositório já em uso (ahmedmostafa147/youtube-studio) não trouxe versão nova. Achado ao implantar: 6 nichos em produção (pesca, negócios, jurídico, imobiliário, saúde, jogos = 37% dos Shorts) saíam com regras e tags de anime; corrigido em seo_generator._MIDIAS (SEO_MIDIAS_NOVAS=0 desliga).
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, reprovados com motivo, 0 deixados — 2026-11-16 19:27 — Bancos de abertura e recap por episódio (`area_timestamps_anime`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_timestamps_anime__sonnet_1907.md`
+- [INÉDITO] github.com/isntfunny/aniskip-jellyfin — ★0, push 2026-07-04, MIT — Jellyfin media segment provider that skips anime openings, endings and recaps using the AniSkip database (with TheTVDB->MAL multi-cour mappi
+- [INÉDITO] github.com/AnimeThemes/animethemes-server — ★117, push 2026-11-16, MIT — AnimeThemes.moe resource management & API
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, reprovados com motivo, 0 deixados — 2026-11-16 20:05 — Capítulos como estrutura de corte (`area_recap_por_capitulo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_por_capitulo__sonnet_1942.md`
+- [INÉDITO] github.com/berkerb/chaptersaw — ★2, push 2026-01-01, MIT — A Python CLI tool to extract chapter metadata from video files and split them into individual chapter files using mkvmerge and ffmpeg
+- [INÉDITO] github.com/itzjk/chapter-carry — ★0, push 2026-10-31, MIT — Carry chapter intervals through a declared cut list and explain every clipped, split or removed chapter.
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, reprovados com motivo, 0 deixados — 2026-11-16 20:29 — Música livre em alta (`area_musica_cc0_trend`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_musica_cc0_trend__sonnet_2016.md`
+- [INÉDITO] github.com/fiehrfly/muses — ★2, push 2026-05-18, CC0-1.0 — Curated index of free, open-source, and royalty-free music libraries for video editing — with notes on licensing, account requirements, and 
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 20:47 — Música em alta por gênero para Shorts (`area_musica_tendencia`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_musica_tendencia__sonnet_2042.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, reprovados com motivo, 0 deixados — 2026-11-16 21:14 — Gancho dos primeiros 30 s dos recaps mais vistos (`area_primeiros30s_gancho`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_primeiros30s_gancho__sonnet_2054.md`
+- [INÉDITO] github.com/jasveerai88/retention-checker — ★0, push 2026-11-07, MIT — Pre-publish retention checker for faceless & AI video: hook window, dead zones, caption pacing, loudness, platform spec — local, no uploads,
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 21:29 — Variação PT-BR / ES-LATAM / ES-ES / EN nos mesmos recaps (`area_titulo_pais_latam`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulo_pais_latam__sonnet_2117.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 21:44 — Ritmo de cortes em recap (`area_ritmo_cortes`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_ritmo_cortes__sonnet_2134.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 22:04 — Quadro final no recap (`area_tela_final_render`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_tela_final_render__sonnet_2155.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 22:25 — Final do recap que prende (`area_cap_cena_final`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_cap_cena_final__sonnet_2211.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, reprovados com motivo, 0 deixados — 2026-11-16 23:00 — Achar recaps mais vistos (`area_tendencias_recap`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_tendencias_recap__sonnet_2236.md`
+- [INÉDITO] github.com/JuneYaooo/benchmark-outlier-radar — ★2, push 2026-11-03, Apache-2.0 — 博主的对标复盘雷达：每周导入自己和对标账号的数据，标出异常爆款、生成数据台账和周报
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, reprovados com motivo, 0 deixados — 2026-11-16 23:35 — Padrões dos primeiros 30 s em recap (`area_curva_retencao_30s`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_curva_retencao_30s__sonnet_2321.md`
+- [INÉDITO] github.com/jameselle/hook-tester — ★0, push 2026-10-06, MIT — Test your video's first line on strangers: post each opening as an Instagram trial reel, rank them by who stayed past 3 seconds. Free, MIT.
+- [INÉDITO] github.com/differentiatorX/echo — ★0, push 2026-11-15, MIT — Open-source AI clipper that turns long YouTube videos into the few Instagram Reels worth posting. Claude picks the moments, YouTube's Most r
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 23:45 — Recap do mesmo vídeo em outro idioma (`area_recap_outras_linguas`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_recap_outras_linguas__sonnet_2341.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 23:57 — Achar vídeos e recaps mais vistos por canal pequeno (`area_outliers_nicho`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_outliers_nicho__sonnet_2353.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 00:09 — Recaps em outras línguas (`area_recap_intl`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_recap_intl__sonnet_0002.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 00:39 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0030.md`
 - (todos os itens desta pesquisa foram reprovados)

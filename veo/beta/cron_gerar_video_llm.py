@@ -1398,7 +1398,22 @@ def aplicar_sessao(s):
 SESSAO_GEMINI = {"session": "gemini", "port": "0", "profile": "", "so_gemini": True}
 
 
+def _celular_video_livre():
+    """16/11 dona ("celulares em produção máxima"): o S20 Ultra gera vídeo no app Gemini (gera_auto._gerar_celular).
+    Com celular de vídeo livre, a sessão virtual "gemini" roda mesmo sem conta HTTP do Gemini. CELULAR_VIDEO=0 tira."""
+    if os.environ.get("CELULAR_VIDEO", "1") == "0" or os.environ.get("CELULAR_MIDIA", "1") == "0":
+        return False
+    try:
+        sys.path.insert(0, r"D:\projeto celular sub controle")
+        import celular_midia
+        return celular_midia.ligado("video") and bool(celular_midia.livres("video"))
+    except Exception:
+        return False
+
+
 def _gemini_tem_conta():
+    if _celular_video_livre():
+        return True
     if os.environ.get("GEMINI_MIDIA", "1") == "0" or os.environ.get("GEMINI_VIDEO", "1") == "0":
         return False
     py = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"

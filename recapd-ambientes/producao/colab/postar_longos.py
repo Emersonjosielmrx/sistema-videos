@@ -111,6 +111,11 @@ def _gravar_estado_trancado(est):
     est["reprovados"] = [n for n in est["reprovados"] if not (FICHAS / n / "SEM_PALAVRAO.txt").exists()]
     est["cortes_postados"] = sorted(set(est.get("cortes_postados", [])) | set(disco.get("cortes_postados", [])))
     est["presos"] = {**disco.get("presos", {}), **est.get("presos", {})}  # 14/11: rodada antiga não apaga preso
+    # 16/11 (LONGO_PRESO_ANTES): marca "enviando" que terminou com resultado é soltada de propósito — só ela sai, e só
+    # se ainda estiver como "enviando" (preso de verdade, por erro demorado, nunca é solto por aqui)
+    for n in set(est.pop("presos_soltar", []) + disco.get("presos_soltar", [])):
+        if est["presos"].get(n, {}).get("status") == "enviando":
+            est["presos"].pop(n, None)
     # 14/11 15h20: o título real do jardineiro (lztXRIb2s30) foi gravado à mão e a rodada que já estava rodando voltou
     # a nota "(reposto 03/11 ...)" por cima — título de NOTA na memória perde pro título de verdade do disco.
     tit_disco = {p.get("url"): p.get("titulo") for p in disco.get("postados", [])
@@ -856,6 +861,16 @@ def rodada(ver=False):
                 if t1 and t1 != t0:
                     p["titulo"] = t1
                     log(f"  título sem promessa enganosa: {t0} -> {t1}")
+            # 16/11 (PvkF8Ut: a rodada das 17:10 morreu com 91% enviado pro Fio da Meada SEM gravar nada; às 23:26 a
+            # rodada nova mandou o mesmo vídeo pro inovare manhwa br): o "preso ao canal" só valia pra ERRO; processo
+            # MORTO não deixava rastro. Agora a intenção fica gravada ANTES do envio e sai depois do resultado — se o
+            # processo morrer, a próxima rodada já acha o vídeo preso a este canal. LONGO_PRESO_ANTES=0 desliga.
+            if os.environ.get("LONGO_PRESO_ANTES", "1") != "0":
+                est.setdefault("presos", {})[ficha.name] = {
+                    "canal": cred, "canal_nome": nome_canal, "status": "enviando",
+                    "info": "envio começou; se este registro sobrar, o processo morreu no meio (pode ter rascunho)",
+                    "em": datetime.now().isoformat(timespec="minutes")}
+                _gravar_estado(est)
             status, info = politica.postar_youtube(cred, video, p["titulo"], p["descricao"], p.get("tags") or [],
                                                    privacy="public", projeto=_projeto(cred), tipo="completo",
                                                    thumbnail=thumb if thumb and thumb.exists() else None,
@@ -877,6 +892,15 @@ def rodada(ver=False):
                                                     "status": status, "em": datetime.now().isoformat("T", "minutes")})
                 teste_env.write_text(json.dumps(te, ensure_ascii=False, indent=1), encoding="utf-8")
             log(f"  {status}: {info}")
+            # LONGO_PRESO_ANTES: tira a marca "enviando" quando o envio terminou com resultado. ok = já está nos
+            # postados; erro rápido (< LONGO_PRESO_MIN_MIN) = não mandou os bytes. Erro demorado vira "preso" logo abaixo.
+            # A mescla do _gravar_estado nunca apaga preso do disco: por isso marca "apagar" pra ela respeitar.
+            if (est.get("presos", {}).get(ficha.name, {}).get("status") == "enviando"
+                    and (status in ("ok", "limite")
+                         or (time.time() - t_env) / 60 < float(os.environ.get("LONGO_PRESO_MIN_MIN", "5")))):
+                est["presos"].pop(ficha.name, None)
+                est.setdefault("presos_soltar", []).append(ficha.name)
+                _gravar_estado(est)
             # 14/11: erro DEPOIS de mandar o arquivo grande (> LONGO_PRESO_MIN_MIN minutos de envio, padrão 5) = o vídeo
             # pode ter ficado como rascunho no canal: prende a fonte nele (só ele pode tentar de novo) e avisa a dona.
             # LONGO_PRESO_AO_CANAL=0 desliga.

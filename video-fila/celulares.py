@@ -113,11 +113,41 @@ def log(msg):
         f.write(linha + "\n")
 
 
+_ROTA = {}  # host -> alias que respondeu por último ("s20" pelo Tailscale ou "s20-wifi" pelo Wi-Fi de casa)
+
+
+def _alcancavel(alias):
+    try:
+        r = subprocess.run([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=6", alias, "echo ok"],
+                           capture_output=True, timeout=15, creationflags=_SEM_JANELA)
+        return r.returncode == 0
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+
+
+def _rota(host):
+    """16/11 (dona: celular pode desligar o Tailscale p/ usar app de proxy): Tailscale primeiro, senão <host>-wifi
+    (~/.ssh/config). Guarda a rota que funcionou; CELULARES_WIFI=0 desliga a reserva."""
+    if os.environ.get("CELULARES_WIFI", "1") == "0" or HOSTS.get(host, {}).get("notebook"):
+        return host
+    atual = _ROTA.get(host)
+    if atual:
+        return atual
+    for alias in (host, f"{host}-wifi"):
+        if _alcancavel(alias):
+            _ROTA[host] = alias
+            return alias
+    return host
+
+
 def _ssh(host, comando, timeout=60, entrada=None, stdout=None):
-    return subprocess.run([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "ServerAliveInterval=15",
-                           "-o", "ServerAliveCountMax=4", host, comando], input=entrada, timeout=timeout,
-                          stdout=stdout if stdout is not None else subprocess.PIPE, stderr=subprocess.PIPE,
-                          creationflags=_SEM_JANELA)
+    r = subprocess.run([SSH, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "ServerAliveInterval=15",
+                        "-o", "ServerAliveCountMax=4", _rota(host), comando], input=entrada, timeout=timeout,
+                       stdout=stdout if stdout is not None else subprocess.PIPE, stderr=subprocess.PIPE,
+                       creationflags=_SEM_JANELA)
+    if r.returncode == 255:  # conexão caiu: na próxima, procura a rota de novo (Tailscale pode ter voltado/caído)
+        _ROTA.pop(host, None)
+    return r
 
 
 def _ligado():

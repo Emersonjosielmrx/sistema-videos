@@ -27,37 +27,37 @@
   impacto maiores, de lado, fontes e cores por personagem.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Cortes (Shorts de parceiro) — 16/11 15:54
+# Brief do melhorador central — Cortes (Shorts de parceiro) — 17/11 00:24
 
-Vídeos nos últimos 7 dias: 806 | elegíveis (receberam o lote do feed): 351 | NÃO elegíveis: 14 | sem medida ainda: 441
-% assistido mediano (só elegíveis): 49.6 | views 48 h mediana: 734 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
+Vídeos nos últimos 7 dias: 805 | elegíveis (receberam o lote do feed): 356 | NÃO elegíveis: 13 | sem medida ainda: 436
+% assistido mediano (só elegíveis): 50.4 | views 48 h mediana: 734 | QA com problema: 1 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
-- DicasFinanceirasDaIA: n 49, elegíveis 23, % assistido 56.2, views48 1240
-- Esporte Noturno: n 54, elegíveis 36, % assistido 67.6, views48 1188.0
-- CenaReact: n 52, elegíveis 21, % assistido 53.9, views48 1159.0
-- inovaremanhwabr: n 40, elegíveis 28, % assistido 50.5, views48 1122
+- DicasFinanceirasDaIA: n 51, elegíveis 21, % assistido 55.5, views48 1295.5
+- Esporte Noturno: n 52, elegíveis 34, % assistido 67.6, views48 1222.5
+- CenaReact: n 57, elegíveis 28, % assistido 59.4, views48 1215
+- HistoriasEmFrames: n 43, elegíveis 25, % assistido 67.3, views48 1145
 - Inovare Manhwa eng: n 3, elegíveis 3, % assistido 45.2, views48 1096
-- HistoriasEmFrames: n 43, elegíveis 21, % assistido 56.7, views48 1082.5
-- InventoReact: n 18, elegíveis 10, % assistido 47.2, views48 964
-- @CodigoInteligente-n7j: n 28, elegíveis 19, % assistido 46, views48 862
-- Inovare: n 93, elegíveis 32, % assistido 54.9, views48 855
-- Clínica Lucrativa IA: n 18, elegíveis 8, % assistido 49.3, views48 761.5
-- Lei e Lucro: n 13, elegíveis 6, % assistido 51.0, views48 654.5
-- Curiosidades Noturnas: n 33, elegíveis 7, % assistido 33.9, views48 474.0
-- Imóvel em Foco: n 20, elegíveis 9, % assistido 37.6, views48 263
+- Inovare: n 90, elegíveis 35, % assistido 55.7, views48 1059
+- inovaremanhwabr: n 40, elegíveis 26, % assistido 50.5, views48 1024
+- InventoReact: n 18, elegíveis 12, % assistido 54.7, views48 986.0
+- Imóvel em Foco: n 20, elegíveis 9, % assistido 37.6, views48 534
+- @CodigoInteligente-n7j: n 28, elegíveis 18, % assistido 45.1, views48 469
+- Clínica Lucrativa IA: n 18, elegíveis 8, % assistido 49.3, views48 425.0
+- Manhwa Noturno: n 12, elegíveis 11, % assistido 27.6, views48 249.5
 - YouTube inovaremanhwaverseviet: n 7, elegíveis 6, % assistido 44.5, views48 137.0
-- Empresário Inteligente IA: n 14, elegíveis 3, % assistido 25.7, views48 91.5
-- Vendas que Escalam: n 17, elegíveis 8, % assistido 35.5, views48 55.0
-- Bicho Noturno: n 44, elegíveis 16, % assistido 57.0, views48 24
+- Lei e Lucro: n 13, elegíveis 6, % assistido 51.0, views48 94
+- Empresário Inteligente IA: n 14, elegíveis 3, % assistido 25.7, views48 49.5
+- Bicho Noturno: n 42, elegíveis 14, % assistido 64.3, views48 38
 - Filme Noturno: n 38, elegíveis 17, % assistido 45.0, views48 20.5
-- CartuchoReact: n 41, elegíveis 23, % assistido 29.4, views48 5
+- Curiosidades Noturnas: n 32, elegíveis 6, % assistido 27.0, views48 18
+- Vendas que Escalam: n 17, elegíveis 8, % assistido 35.5, views48 16.0
+- Animescomia: n 41, elegíveis 20, % assistido 25.0, views48 9
+- CartuchoReact: n 41, elegíveis 23, % assistido 29.4, views48 5.5
 - AssistIA Investimentos: n 33, elegíveis 7, % assistido 54.7, views48 5
-- Animescomia: n 41, elegíveis 20, % assistido 25.0, views48 4
-- Manhwa Noturno: n 12, elegíveis 12, % assistido 13.8, views48 3
-- ManhwaReact-ia: n 19, elegíveis 13, % assistido 34.4, views48 3.0
+- ManhwaReact-ia: n 19, elegíveis 13, % assistido 34.4, views48 3
 - Dorama Noturno: n 28, elegíveis 0, % assistido None, views48 None
-- ForjaReact: n 15, elegíveis 1, % assistido 0, views48 0.0
+- ForjaReact: n 15, elegíveis 1, % assistido 0, views48 0
 - Game Noturno: n 7, elegíveis 0, % assistido None, views48 None
 - Inovaremanhwaversethai: n 7, elegíveis 2, % assistido 0.0, views48 0
 - YouTube inovaremanhwaverseind: n 5, elegíveis 0, % assistido None, views48 0.0
@@ -65,9 +65,12 @@ Vídeos nos últimos 7 dias: 806 | elegíveis (receberam o lote do feed): 351 | 
 - Bilionário Noturno: n 7, elegíveis 0, % assistido None, views48 None
 
 ## Os que mais renderam (copiar a estrutura, não o texto)
+- RpPEqGIB5As CenaReact: views48 19342, % assistido 67.76, continuaram 77.67 — 
 - Okv4q7oH9ZQ HistoriasEmFrames: views48 17766, % assistido 91.77, continuaram 81.48 — 
 - -Fyd3kUwUXk DicasFinanceirasDaIA: views48 9957, % assistido 87.48, continuaram 68.78 — 
-- 8oCAjppKOlg HistoriasEmFrames: views48 8227, % assistido 97.98, continuaram 55.36 — 
+
+## QA (defeito objetivo, sem IA)
+- 8rIMC2GRC3g: ffprobe não leu a duração
 
 ## O QUE DECIDE VIEWS (dado medido em 29/10 — FABLE_DECISOES.md D1; vale mais que gosto e que nota de júri)
 - 60% dos Shorts NÃO entram no lote de teste do feed ("continuaram" 100% com < 10 views = o YouTube mostrou a 2–5
@@ -80,10 +83,10 @@ Vídeos nos últimos 7 dias: 806 | elegíveis (receberam o lote do feed): 351 | 
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-16T15:22: youtube 37/38, tiktok 44/58, instagram 46/53, flow 20/233, fotos 0/4 | MORTOS: youtube vendasqueescalam, flow seebotsia, flow emersonjosiel2032@pc2, flow aulacomia@x200ma, flow canalanimescomia@x200ma, flow canalhistoriacomia@x200ma, flow comoseriasecomia@x200ma, flow emersongencshin@x200ma, flow emersonjosiel2027@x200ma, flow emersonjosiel2032@x200ma, flow en1653964@x200ma, flow entrevistacomia@x200ma
+## SEM NAVEGADOR (HTTP) — saúde em 11-16T23:26: youtube 27/38, tiktok 44/58, instagram 46/53, flow 18/233, fotos 0/4 | MORTOS: youtube dicasfinanceirasdaia, youtube inovare_thai, youtube inovare_viet, youtube inovaremanhwabr, youtube inovaremanhwaverse, youtube inovareq8l, youtube inovareu8b, youtube inventoreact, youtube manhwareact, youtube leielucro, youtube bilionarionoturno, flow seebotsia
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
-Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (2), Tiktok @inovaremanhwaverse2 (5), Tiktok @emersonjosiel2031 (5), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (5), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0), Tiktok @solarmundo195 (0), Tiktok @empressinovare (0)
+MS Energy - Instagram @msenergycap (4), Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede InventoReact (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (2), Tiktok @inovaremanhwaverse2 (6), Tiktok @emersonjosiel2031 (6), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (5), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0)
 
 ## PEDIDOS E OPINIÕES DA DONA (valem mais que o júri; atender antes de qualquer outra coisa)
 - 30/10 00:20 | hipercool, longo | Hipercool está DESATIVADO de propósito (como o Historias em Frames, trocado pelo Claude Code Video); volta à produção na semana que vem, depois que terminar a postagem dos capítulos já feitos. Usar um projeto para melhorar o outro: o hipercool é o mais moderno — os personagens FALAM (ela pediu falas também nos longos) e tem muitos efeitos bons; os que não acrescentam muito tempo de render podem ir para os longos | aberto

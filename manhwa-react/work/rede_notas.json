@@ -828,33 +828,58 @@
   }
  },
  "2026_10_08_12_06_26_p3": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "assistiainvestimentos": 7.0
+   "assistiainvestimentos": 10.0,
+   "dicasfinanceirasdaia": 7.0,
+   "empresariointeligenteia": 6.0,
+   "vendasqueescalam": 3.0,
+   "leielucro": 3.0,
+   "imovelemfoco": 2.0
   }
  },
  "2026_10_08_12_06_26_p4": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "assistiainvestimentos": 7.0
+   "assistiainvestimentos": 10.0,
+   "empresariointeligenteia": 7.0,
+   "dicasfinanceirasdaia": 6.0,
+   "vendasqueescalam": 4.0,
+   "clinicalucrativaia": 3.0,
+   "leielucro": 2.0
   }
  },
  "2026_10_08_12_06_26_p5": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "assistiainvestimentos": 7.0
+   "assistiainvestimentos": 10.0,
+   "dicasfinanceirasdaia": 6.0,
+   "empresariointeligenteia": 5.0,
+   "vendasqueescalam": 2.0,
+   "imovelemfoco": 2.0,
+   "leielucro": 2.0
   }
  },
  "2026_10_08_12_06_26_p6": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "assistiainvestimentos": 7.0
+   "assistiainvestimentos": 10.0,
+   "dicasfinanceirasdaia": 8.0,
+   "empresariointeligenteia": 4.0,
+   "imovelemfoco": 2.0,
+   "vendasqueescalam": 2.0,
+   "leielucro": 2.0
   }
  },
  "2026_10_08_12_06_26_p7": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "assistiainvestimentos": 7.0
+   "assistiainvestimentos": 10.0,
+   "dicasfinanceirasdaia": 9.0,
+   "empresariointeligenteia": 5.0,
+   "imovelemfoco": 3.0,
+   "vendasqueescalam": 2.0,
+   "leielucro": 2.0
   }
  },
  "veo:vendas_com_ia_20260802_070948": {
@@ -1693,12 +1718,26 @@
   }
  },
  "veo:tech_news_20260731_215156": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 6.0,
+   "empresariointeligenteia": 5.0,
+   "dentrodascoisas3d": 4.0,
+   "assistiainvestimentos": 4.0,
+   "inventoreact": 3.0,
+   "fiodameada": 3.0
+  }
  },
  "veo:danca_e_musica__20260731_023205": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 6.0,
+   "cenareact": 4.0,
+   "fiodameada": 3.0,
+   "dentrodascoisas3d": 3.0,
+   "inventoreact": 2.0,
+   "historiasemframes": 2.0
+  }
  },
  "veo:alienigenas_20260731_010248": {
   "canais": "a232471c74",
@@ -1721,8 +1760,15 @@
   }
  },
  "veo:alienigenas_20260730_095101": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 9.0,
+   "fiodameada": 6.0,
+   "cenareact": 5.0,
+   "historiasemframes": 4.0,
+   "inventoreact": 3.0,
+   "animescomia": 2.0
+  }
  },
  "veo:robos_desastrad_20260730_042932": {
   "canais": "a232471c74",
@@ -1763,8 +1809,15 @@
   }
  },
  "veo:danca_e_musica__20260730_012108": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "cenareact": 4.0,
+   "inventoreact": 3.0,
+   "fiodameada": 2.0,
+   "manhwareact": 1.0,
+   "animescomia": 1.0
+  }
  },
  "veo:danca_e_musica__20260729_224910": {
   "canais": "9e6d537edd",
@@ -1775,8 +1828,15 @@
   }
  },
  "veo:danca_e_musica__20260729_204223": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "cenareact": 4.0,
+   "inventoreact": 3.0,
+   "fiodameada": 2.0,
+   "manhwareact": 1.0,
+   "animescomia": 1.0
+  }
  },
  "veo:segredos_do_oce_20260729_180809": {
   "canais": "a232471c74",
@@ -1876,17 +1936,36 @@
   }
  },
  "veo:aulas_ia_20260729_155513": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 9.0,
+   "assistiainvestimentos": 8.0,
+   "vendasqueescalam": 8.0,
+   "clinicalucrativaia": 7.0,
+   "dicasfinanceirasdaia": 6.0,
+   "leielucro": 6.0
+  }
  },
  "veo:aulas_ia_20260729_115917": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 9.0,
+   "assistiainvestimentos": 8.0,
+   "vendasqueescalam": 7.0,
+   "dicasfinanceirasdaia": 7.0,
+   "clinicalucrativaia": 6.0,
+   "leielucro": 6.0
+  }
  },
  "2026_10_07_15_50_45_p2": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "manhwareact": 7.0
+   "animescomia": 8.0,
+   "animenoturno": 8.0,
+   "manhwareact": 7.0,
+   "inovaremanhwabr": 6.0,
+   "cenareact": 4.0,
+   "mundoquenaoexiste": 3.0
   }
  },
  "veo:cassetadas_ia_20260730_113226": {
@@ -1912,20 +1991,48 @@
   }
  },
  "veo:cassetadas_ia_20260729_215837": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "fiodameada": 6.0,
+   "cenareact": 5.0,
+   "inventoreact": 4.0,
+   "empresariointeligenteia": 3.0,
+   "assistiainvestimentos": 2.0
+  }
  },
  "veo:cassetadas_ia_20260729_174212": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "fiodameada": 6.0,
+   "cenareact": 5.0,
+   "inventoreact": 4.0,
+   "empresariointeligenteia": 3.0,
+   "assistiainvestimentos": 2.0
+  }
  },
  "veo:cassetadas_ia_20260729_021017": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "fiodameada": 6.0,
+   "cenareact": 5.0,
+   "inventoreact": 5.0,
+   "manhwareact": 2.0,
+   "animescomia": 2.0
+  }
  },
  "veo:cassetadas_ia_20260728_173829": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "fiodameada": 6.0,
+   "cenareact": 5.0,
+   "inventoreact": 4.0,
+   "empresariointeligenteia": 3.0,
+   "assistiainvestimentos": 2.0
+  }
  },
  "veo:cassetadas_ia_20260731_001229": {
   "canais": "a232471c74",
@@ -1950,16 +2057,37 @@
   }
  },
  "veo:cerebro_digital_20260731_000230": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 7.0,
+   "fiodameada": 5.0,
+   "dentrodascoisas3d": 4.0,
+   "cenareact": 3.0,
+   "inventoreact": 2.0,
+   "historiasemframes": 2.0
+  }
  },
  "veo:curiosidades_ia_20260729_104523": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "empresariointeligenteia": 7.0,
+   "inventoreact": 6.0,
+   "assistiainvestimentos": 6.0,
+   "fiodameada": 5.0,
+   "vendasqueescalam": 5.0
+  }
  },
  "veo:curiosidades_ia_20260731_214142": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 7.0,
+   "vendasqueescalam": 6.0,
+   "clinicalucrativaia": 6.0,
+   "assistiainvestimentos": 5.0,
+   "leielucro": 5.0,
+   "dicasfinanceirasdaia": 4.0
+  }
  },
  "veo:curiosidades_ia_20260730_035806": {
   "canais": "a232471c74",
@@ -1984,8 +2112,15 @@
   }
  },
  "veo:curiosidades_ia_20260729_224654": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 8.0,
+   "assistiainvestimentos": 7.0,
+   "vendasqueescalam": 7.0,
+   "inventoreact": 6.0,
+   "mundoquenaoexiste": 6.0,
+   "clinicalucrativaia": 6.0
+  }
  },
  "veo:curiosidades_ia_20260729_203152": {
   "canais": "a232471c74",
@@ -2043,8 +2178,15 @@
   }
  },
  "veo:curiosidades_ia_20260801_022457": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 8.0,
+   "assistiainvestimentos": 6.0,
+   "vendasqueescalam": 6.0,
+   "clinicalucrativaia": 5.0,
+   "leielucro": 5.0,
+   "dicasfinanceirasdaia": 4.0
+  }
  },
  "veo:dicas_financeir_20260730_051031": {
   "canais": "a232471c74",
@@ -2069,12 +2211,26 @@
   }
  },
  "veo:dicas_financeir_20260730_005750": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "dicasfinanceirasdaia": 10.0,
+   "assistiainvestimentos": 8.0,
+   "fiodameada": 7.0,
+   "leielucro": 6.0,
+   "empresariointeligenteia": 5.0,
+   "historiasemframes": 4.0
+  }
  },
  "veo:dicas_financeir_20260729_223202": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "dicasfinanceirasdaia": 10.0,
+   "assistiainvestimentos": 8.0,
+   "historiasemframes": 6.0,
+   "fiodameada": 5.0,
+   "empresariointeligenteia": 4.0,
+   "leielucro": 3.0
+  }
  },
  "veo:e_se..._20260811_084825": {
   "canais": "9e6d537edd",
@@ -2203,8 +2359,15 @@
   }
  },
  "veo:fofos_e_absurdo_20260729_222026": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 10.0,
+   "cenareact": 5.0,
+   "fiodameada": 4.0,
+   "inventoreact": 3.0,
+   "historiasemframes": 2.0,
+   "manhwareact": 1.0
+  }
  },
  "veo:ilusoes_de_otic_20260729_211415": {
   "canais": "9e6d537edd",
@@ -2217,12 +2380,26 @@
   }
  },
  "veo:fofos_e_absurdo_20260729_180542": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 10.0,
+   "cenareact": 5.0,
+   "fiodameada": 4.0,
+   "inventoreact": 3.0,
+   "historiasemframes": 2.0,
+   "manhwareact": 1.0
+  }
  },
  "veo:humor_de_ia_20260729_160531": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 9.0,
+   "fiodameada": 6.0,
+   "cenareact": 6.0,
+   "inventoreact": 4.0,
+   "historiasemframes": 3.0,
+   "manhwareact": 1.0
+  }
  },
  "veo:mitos_vs_verdad_20260729_164841": {
   "canais": "a232471c74",
@@ -2391,12 +2568,26 @@
   }
  },
  "veo:noticias_de_ia_20260806_085637": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 7.0,
+   "assistiainvestimentos": 6.0,
+   "vendasqueescalam": 5.0,
+   "clinicalucrativaia": 5.0,
+   "dicasfinanceirasdaia": 4.0,
+   "leielucro": 4.0
+  }
  },
  "veo:noticias_de_ia_20260825_114719": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 7.0,
+   "assistiainvestimentos": 6.0,
+   "vendasqueescalam": 5.0,
+   "clinicalucrativaia": 5.0,
+   "leielucro": 4.0,
+   "dicasfinanceirasdaia": 4.0
+  }
  },
  "veo:produtividade_20260802_090115": {
   "canais": "a232471c74",
@@ -2410,12 +2601,26 @@
   }
  },
  "veo:produtividade_20260802_020003": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 8.0,
+   "vendasqueescalam": 6.0,
+   "clinicalucrativaia": 6.0,
+   "leielucro": 5.0,
+   "dicasfinanceirasdaia": 5.0,
+   "assistiainvestimentos": 4.0
+  }
  },
  "veo:produtividade_20260802_013649": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "empresariointeligenteia": 8.0,
+   "vendasqueescalam": 6.0,
+   "clinicalucrativaia": 6.0,
+   "leielucro": 5.0,
+   "dicasfinanceirasdaia": 5.0,
+   "assistiainvestimentos": 4.0
+  }
  },
  "veo:produtividade_20260801_015615": {
   "canais": "a232471c74",
@@ -3550,8 +3755,15 @@
   }
  },
  "veo:recenas_ia_20260729_104752": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "fiodameada": 8.0,
+   "mundoquenaoexiste": 7.0,
+   "cenareact": 6.0,
+   "historiasemframes": 5.0,
+   "manhwareact": 3.0,
+   "animenoturno": 3.0
+  }
  },
  "veo:recordes_mundia_20260728_231911": {
   "canais": "a232471c74",
@@ -3565,16 +3777,37 @@
   }
  },
  "veo:noticias_de_ia_20260728_182029": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 8.0,
+   "empresariointeligenteia": 7.0,
+   "fiodameada": 7.0,
+   "assistiainvestimentos": 6.0,
+   "inventoreact": 6.0,
+   "vendasqueescalam": 5.0
+  }
  },
  "veo:mitos_vs_verdad_20260728_175610": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "fiodameada": 7.0,
+   "dicasfinanceirasdaia": 6.0,
+   "historiasemframes": 5.0,
+   "mundoquenaoexiste": 5.0,
+   "assistiainvestimentos": 4.0,
+   "cenareact": 4.0
+  }
  },
  "veo:motivacao_ia_20260728_174311": {
-  "canais": "f5be6085e0",
-  "notas": {}
+  "canais": "6f24053a7d",
+  "notas": {
+   "dicasfinanceirasdaia": 10.0,
+   "assistiainvestimentos": 9.0,
+   "historiasemframes": 7.0,
+   "empresariointeligenteia": 6.0,
+   "bilionarionoturno": 6.0,
+   "vendasqueescalam": 5.0
+  }
  },
  "veo:noticias_de_ia_20261111_054318": {
   "canais": "69bd0a81a5",
@@ -4029,13 +4262,13 @@
   }
  },
  "veo:robos_desastrad_20261116_070423": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "mundoquenaoexiste": 9.0,
-   "inventoreact": 7.0,
-   "fiodameada": 5.0,
+   "mundoquenaoexiste": 7.0,
+   "inventoreact": 5.0,
+   "fiodameada": 4.0,
    "cenareact": 4.0,
-   "historiasemframes": 3.0,
+   "dentrodascoisas3d": 2.0,
    "empresariointeligenteia": 2.0
   }
  },
@@ -4051,14 +4284,14 @@
   }
  },
  "veo:stand-up_ia_20261116_061939": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "fiodameada": 7.0,
-   "cenareact": 6.0,
-   "mundoquenaoexiste": 5.0,
-   "historiasemframes": 4.0,
-   "empresariointeligenteia": 3.0,
-   "vendasqueescalam": 2.0
+   "fiodameada": 6.0,
+   "cenareact": 5.0,
+   "mundoquenaoexiste": 4.0,
+   "historiasemframes": 3.0,
+   "animescomia": 2.0,
+   "animenoturno": 2.0
   }
  },
  "hist:3d-geladeira-v2": {
@@ -4073,58 +4306,146 @@
   }
  },
  "veo:super_slow_ia_20261116_095606": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "mundoquenaoexiste": 8.0,
-   "inventoreact": 5.0,
-   "cenareact": 4.0,
+   "mundoquenaoexiste": 5.0,
+   "dentrodascoisas3d": 4.0,
    "fiodameada": 3.0,
-   "historiasemframes": 2.0,
-   "cartuchoreact": 1.0
+   "inventoreact": 3.0,
+   "cenareact": 2.0,
+   "empresariointeligenteia": 1.0
   }
  },
  "veo:ilusoes_de_otic_20261116_071946": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "mundoquenaoexiste": 9.0,
-   "inventoreact": 6.0,
+   "mundoquenaoexiste": 8.0,
+   "dentrodascoisas3d": 5.0,
    "fiodameada": 4.0,
+   "inventoreact": 3.0,
    "cenareact": 3.0,
-   "historiasemframes": 2.0,
-   "cartuchoreact": 1.0
+   "historiasemframes": 2.0
   }
  },
  "veo:robos_desastrad_20261116_112100": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "mundoquenaoexiste": 9.0,
-   "inventoreact": 7.0,
-   "fiodameada": 5.0,
-   "cenareact": 4.0,
-   "empresariointeligenteia": 3.0,
-   "vendasqueescalam": 2.0
+   "mundoquenaoexiste": 7.0,
+   "inventoreact": 5.0,
+   "fiodameada": 4.0,
+   "cenareact": 3.0,
+   "dentrodascoisas3d": 2.0,
+   "empresariointeligenteia": 2.0
   }
  },
  "veo:motivacao_ia_20261116_124945": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "mundoquenaoexiste": 7.0,
-   "historiasemframes": 6.0,
+   "historiasemframes": 7.0,
+   "bilionarionoturno": 5.0,
    "fiodameada": 4.0,
-   "cenareact": 3.0,
-   "animenoturno": 2.0,
-   "manhwareact": 2.0
+   "dicasfinanceirasdaia": 4.0,
+   "empresariointeligenteia": 3.0,
+   "assistiainvestimentos": 3.0
   }
  },
  "veo:robos_desastrad_20261116_144035": {
-  "canais": "f5be6085e0",
+  "canais": "6f24053a7d",
   "notas": {
-   "mundoquenaoexiste": 8.0,
-   "inventoreact": 6.0,
+   "mundoquenaoexiste": 7.0,
+   "inventoreact": 5.0,
    "fiodameada": 4.0,
    "cenareact": 3.0,
-   "historiasemframes": 2.0,
+   "dentrodascoisas3d": 2.0,
    "empresariointeligenteia": 2.0
+  }
+ },
+ "hist:3d-abelha-ferrao": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "dentrodascoisas3d": 10.0,
+   "mundoquenaoexiste": 7.0,
+   "inventoreact": 6.0,
+   "fiodameada": 4.0,
+   "clinicalucrativaia": 3.0,
+   "cenareact": 2.0
+  }
+ },
+ "veo:corpo_humano_20261116_153057": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "dentrodascoisas3d": 10.0,
+   "clinicalucrativaia": 6.0,
+   "mundoquenaoexiste": 4.0,
+   "fiodameada": 3.0,
+   "historiasemframes": 2.0,
+   "cenareact": 2.0
+  }
+ },
+ "hist:3d-pontos-cirurgia": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "dentrodascoisas3d": 10.0,
+   "clinicalucrativaia": 6.0,
+   "mundoquenaoexiste": 5.0,
+   "inventoreact": 4.0,
+   "fiodameada": 3.0,
+   "cenareact": 2.0
+  }
+ },
+ "veo:dicas_financeir_20261116_162632": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "dicasfinanceirasdaia": 9.0,
+   "assistiainvestimentos": 8.0,
+   "empresariointeligenteia": 5.0,
+   "leielucro": 4.0,
+   "imovelemfoco": 3.0,
+   "bilionarionoturno": 3.0
+  }
+ },
+ "veo:robos_desastrad_20261116_180011": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 7.0,
+   "inventoreact": 5.0,
+   "fiodameada": 4.0,
+   "dentrodascoisas3d": 3.0,
+   "empresariointeligenteia": 2.0,
+   "cenareact": 2.0
+  }
+ },
+ "hist:3d-farpa-sai-sozinha": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "dentrodascoisas3d": 10.0,
+   "mundoquenaoexiste": 6.0,
+   "clinicalucrativaia": 5.0,
+   "inventoreact": 4.0,
+   "fiodameada": 3.0,
+   "cenareact": 2.0
+  }
+ },
+ "hist:3d-colher-mcflurry": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "dentrodascoisas3d": 10.0,
+   "inventoreact": 8.0,
+   "mundoquenaoexiste": 6.0,
+   "fiodameada": 3.0,
+   "cenareact": 2.0,
+   "cartuchoreact": 2.0
+  }
+ },
+ "veo:curiosidades_ia_20261116_231602": {
+  "canais": "6f24053a7d",
+  "notas": {
+   "mundoquenaoexiste": 4.0,
+   "fiodameada": 3.0,
+   "empresariointeligenteia": 2.0,
+   "clinicalucrativaia": 2.0,
+   "vendasqueescalam": 2.0,
+   "dentrodascoisas3d": 2.0
   }
  }
 }

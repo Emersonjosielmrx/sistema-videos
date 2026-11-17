@@ -11,6 +11,7 @@ estado\relatorio_ronda.json (a próxima compara com ele). Seções na ordem da m
     python relatorio_ronda.py --nao-gravar
 """
 import json
+import os
 import re
 import subprocess
 import sys
@@ -241,6 +242,15 @@ def sec_mais_vistos():
         dur = {r["id"]: float(r.get("dur_media") or 0) for r in rk.get("videos", []) if r.get("tipo") != "short"}
     except Exception:  # noqa: BLE001
         pass
+    # 16/11 dona ("horas assistidas erradas, o jardineiro com mais de 100 h"): o painel guardava a dur_media da 1ª
+    # leitura (jardineiro: 70:09 com 4 views em 05/11). A leitura mais nova do Studio (ret_lista, 16/11: 3:03 com 102
+    # views) fica em metricas_studio.json — vale a mais nova. HORAS_LEITURA_NOVA=0 desliga.
+    if os.environ.get("HORAS_LEITURA_NOVA", "1") != "0":
+        ms = _json(Path(r"D:\postador-de-videos\_analise\metricas_studio.json"), {}) or {}
+        for k in list(v):
+            rl = (ms.get(k) or {}).get("ret_lista") or {}
+            if rl.get("dur_media") and (rl.get("em") or "") > ((ms.get(k) or {}).get("lido_em") or ""):
+                dur[k] = float(rl["dur_media"])
     out += ["| # | Canal | ⏱️ Horas assistidas | Views | Views/dia | Duração média | Título | Link |",
             "|---:|---|---:|---:|---:|---:|---|---|"]
     hrs = {k: vw * dur.get(k, 0) / 3600 for vw, _, k, _ in linhas}
@@ -759,6 +769,59 @@ def sec_insta_http():
     return out
 
 
+def sec_celulares_adb():
+    """16/11 dona ("estamos adicionando os celulares não só pra render, mas pra upar vídeos e gerar imagens e vídeos
+    pela depuração USB; já quero o uso deles no relatório"): D:\\projeto celular sub controle\\vigilancia.jsonl — uma
+    linha por tentativa (serial, conta, tipo imagem/video/upload, resultado ok/sem_cota/bloqueio/captcha/erro/offline,
+    segundos). Desde a última ronda + hoje, por celular e tipo."""
+    import collections
+    out = ["## 📲 Celulares via depuração (ADB): imagem, vídeo e upload"]
+    pasta = Path(r"D:\projeto celular sub controle")
+    nomes = {"100.117.134.73": "S20", "100.103.218.7": "S20 Ultra", "100.75.139.24": "G20", "100.87.168.9": "A3"}
+    linhas = []
+    try:
+        for l in (pasta / "vigilancia.jsonl").read_text(encoding="utf-8", errors="ignore").splitlines():
+            try:
+                linhas.append(json.loads(l))
+            except ValueError:
+                pass
+    except OSError:
+        return out + ["- sem registro ainda (vigilancia.jsonl)"]
+    def _t(r):
+        try:
+            return datetime.fromisoformat(str(r.get("quando", ""))[:19])
+        except ValueError:
+            return None
+    hj = [r for r in linhas if _t(r) and _t(r).date() == agora.date()]
+    desde = [r for r in hj if _t(r) >= ultima.replace(tzinfo=None) if _t(r)] if hj else []
+    if not hj:
+        return out + ["- nenhuma tentativa hoje"]
+    ok_h = sum(1 for r in hj if r.get("resultado") == "ok")
+    out.append(f"- Hoje: {len(hj)} tentativas, {ok_h} ok ({100 * ok_h // max(1, len(hj))}%) | desde a última: "
+               f"{len(desde)} ({sum(1 for r in desde if r.get('resultado') == 'ok')} ok)")
+    por = collections.defaultdict(lambda: collections.Counter())
+    tempo = collections.defaultdict(list)
+    for r in hj:
+        cel = nomes.get(str(r.get("serial", "")).split(":")[0], str(r.get("serial", "?"))[:15])
+        chave = (cel, r.get("tipo", "?"))
+        por[chave][r.get("resultado", "?")] += 1
+        if r.get("resultado") == "ok" and r.get("segundos"):
+            tempo[chave].append(r["segundos"])
+    out += ["", "| Celular | Tipo | ✅ ok | Sem cota | Bloqueio/captcha | Erro/offline | Tempo médio |",
+            "|---|---|---:|---:|---:|---:|---:|"]
+    for (cel, tipo), c in sorted(por.items()):
+        t = tempo[(cel, tipo)]
+        out.append(f"| {cel} | {tipo} | {c['ok']} | {c['sem_cota']} | {c['bloqueio'] + c['captcha']} | "
+                   f"{c['erro'] + c['offline']} | {(str(round(sum(t) / len(t))) + ' s') if t else '—'} |")
+    pausados = [p.name for p in pasta.glob("pausado_*.txt")]
+    if pausados:
+        out.append(f"- ⏸️ pausados por bloqueio: {', '.join(pausados)}")
+    erros = collections.Counter(r.get("detalhe", "")[:60] for r in hj if r.get("resultado") in ("erro", "offline"))
+    if erros:
+        out.append("- Erros mais comuns: " + "; ".join(f"{k} ({v})" for k, v in erros.most_common(2) if k))
+    return out
+
+
 def sec_3d():
     """16/11 dona ("adicione no relatório os Shorts 3D, vamos ver como se saem em visualizações"): kit3d-producao.
     Feitos/falhos hoje (logs\\diario.log), postados (posted_url nos postar.json 3d-*) e views (painel :8790/api/ranking)."""
@@ -803,7 +866,7 @@ def main(gravar):
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
     for f in (sec_numeros, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
-              sec_pesquisador, sec_redes, sec_3d, sec_trio_midia, sec_insta_http, sec_serie):
+              sec_pesquisador, sec_redes, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()
         except Exception as e:  # noqa: BLE001 — uma seção quebrada não derruba o relatório

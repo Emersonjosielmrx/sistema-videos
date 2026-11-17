@@ -1565,3 +1565,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 12:54 — SEO de busca para recaps (nome da obra + episódio) (`area_busca_yt_longos`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_busca_yt_longos__sonnet_1246.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 — 0 aplicados, 1 reprovado, 0 deixados — 2026-11-16 18:35 — Sons em alta no YouTube Shorts (`area_yt_shorts_audio_trend`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_yt_shorts_audio_trend__sonnet_1828.md`
+- [INÉDITO] github.com/OnurByte/EditsMaker — ★3, push 2026-11-16, MIT — Turn any YouTube link, channel or topic into viral TikTok, Reels and Shorts edits. Alight Motion and Premiere presets, trending TikTok songs
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 23:17 — regras oficiais do YouTube sobre conteúdo reutilizado/recap (`area_regras_yt_2026`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_regras_yt_2026__sonnet_2308.md`
+- (todos os itens desta pesquisa foram reprovados)

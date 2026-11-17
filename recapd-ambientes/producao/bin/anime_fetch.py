@@ -450,9 +450,9 @@ def transcribe_whisper(video_path, model_size="tiny", max_seconds=1500):
     # Vídeos médios (10-25 min): 2.5x a duração
     # Vídeos longos (>25 min): 1.5x a duração, máximo 7200s (2h)
     if max_seconds <= 600:
-        # Calcula sobre a duração REAL do vídeo (sem a margem de +60s), mínimo 900s
+        # Calcula sobre a duração REAL do vídeo (sem a margem de +60s), mínimo 1800s
         duracao_real = max(60, max_seconds - 60)  # remove os +60s que anime_auto.py adiciona
-        whisper_timeout = max(900, int(duracao_real * 5))
+        whisper_timeout = max(1800, int(duracao_real * 5))
     elif max_seconds <= 1500:
         whisper_timeout = int(max_seconds * 2.5)
     else:

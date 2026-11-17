@@ -2745,3 +2745,51 @@ Não mexido: `assets\overlays\elemental`, `mascote_mov`, `memes_img`, `_download
   - segredos_do_oce_20261114_152409_intro.mp4
   - segredos_do_oce_20261114_152409_prop.mp4
   - segredos_do_oce_20261114_152409_punch.mp4
+
+## 2026-11-16 17:11 — 211 MB movidos
+
+- **D:\veo\beta\pos_producao\tmp\_montar_final** -> `manhwa-drive:veo_backups/render_tmp` (211 MB) — 44 arquivos:
+  - corpo_humano_20261115_064709_final.mp4
+  - corpo_humano_20261115_064709_imp.mp4
+  - corpo_humano_20261115_064709_intro.mp4
+  - corpo_humano_20261115_064709_prop.mp4
+  - corpo_humano_20261115_064709_punch.mp4
+  - curiosidades_ia_20261115_032830_final.mp4
+  - curiosidades_ia_20261115_032830_imp.mp4
+  - curiosidades_ia_20261115_032830_intro.mp4
+  - curiosidades_ia_20261115_032830_prop.mp4
+  - curiosidades_ia_20261115_032830_punch.mp4
+  - fofos_e_absurdo_20261115_131050_imp.mp4
+  - fofos_e_absurdo_20261115_131050_intro.mp4
+  - fofos_e_absurdo_20261115_131050_prop.mp4
+  - fofos_e_absurdo_20261115_131050_punch.mp4
+  - motivacao_ia_20261114_143144_final.mp4
+  - motivacao_ia_20261114_143144_imp.mp4
+  - motivacao_ia_20261114_143144_intro.mp4
+  - motivacao_ia_20261114_143144_prop.mp4
+  - motivacao_ia_20261114_143144_punch.mp4
+  - noticias_de_ia_20261114_134654_final.mp4
+  - noticias_de_ia_20261114_134654_imp.mp4
+  - noticias_de_ia_20261114_134654_intro.mp4
+  - noticias_de_ia_20261114_134654_prop.mp4
+  - noticias_de_ia_20261114_134654_punch.mp4
+  - recenas_ia_20261115_001550_final.mp4
+  - recenas_ia_20261115_001550_imp.mp4
+  - recenas_ia_20261115_001550_intro.mp4
+  - recenas_ia_20261115_001550_prop.mp4
+  - recenas_ia_20261115_001550_punch.mp4
+  - recenas_ia_20261115_120713_final.mp4
+  - recenas_ia_20261115_120713_imp.mp4
+  - recenas_ia_20261115_120713_intro.mp4
+  - recenas_ia_20261115_120713_prop.mp4
+  - recenas_ia_20261115_120713_punch.mp4
+  - recenas_ia_20261116_042658_final.mp4
+  - recenas_ia_20261116_042658_imp.mp4
+  - recenas_ia_20261116_042658_intro.mp4
+  - recenas_ia_20261116_042658_prop.mp4
+  - recenas_ia_20261116_042658_punch.mp4
+  - super_slow_ia_20261115_173107_final.mp4
+  - super_slow_ia_20261115_173107_imp.mp4
+  - super_slow_ia_20261115_173107_intro.mp4
+  - super_slow_ia_20261115_173107_prop.mp4
+  - super_slow_ia_20261115_173107_punch.mp4

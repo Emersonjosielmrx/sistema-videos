@@ -10,6 +10,28 @@
   "agente_revisor": "sonnet-ajudante",
   "areas": [
     {
+      "id": "android_adb_automacao_upload",
+      "nome": "Automação de celular Android por adb: app Gemini e upload no app do YouTube",
+      "subtemas": [
+        "uiautomator2/adb sem root: ler conta ativa e telas de forma estável",
+        "compartilhar vídeo pro app do YouTube via adb (content:// com permissão, sem crash)",
+        "agendar/publicar Short pelo app do YouTube automaticamente",
+        "vários celulares em paralelo (fila, travas, reconexão Wi-Fi)"
+      ],
+      "prioridade": 1
+    },
+    {
+      "id": "gemini_web_sessao_cookie",
+      "nome": "Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia",
+      "subtemas": [
+        "renovar __Secure-1PSIDTS sem abrir o Chrome",
+        "401 no StreamGenerate/batchexecute e como recuperar",
+        "rotação de contas e limite diário de imagem/vídeo do app Gemini",
+        "bibliotecas Gemini-API web (python) atualizadas"
+      ],
+      "prioridade": 1
+    },
+    {
       "id": "yt_politica_conteudo_sintetico",
       "nome": "Política do YouTube: rótulo de conteúdo alterado/sintético (voz clonada)",
       "subtemas": [
@@ -23877,6 +23899,374 @@
         "página oficial de áudio multilíngue e o que muda por país na descoberta, sem modelo novo, só o fluxo de upload e título por idioma"
       ],
       "origem": "area_cta_conteudo_transformador__sonnet_1346.md 2026-11-16"
+    },
+    {
+      "id": "wiki_lingua",
+      "nome": "Pageviews cruzados por língua",
+      "subtemas": [
+        "como mapear a mesma série em pt/es/en via `langlinks` e decidir o idioma do próximo longo."
+      ],
+      "origem": "area_trends_wikipedia_gdelt__sonnet_1644.md 2026-11-16"
+    },
+    {
+      "id": "titulos_pais",
+      "nome": "Títulos e miniaturas por país",
+      "subtemas": [
+        "como o mesmo recap vira título e gancho diferente em es/en/pt (o que muda por país, Gêmeos/Claude só para tradução do roteiro, sem modelo novo)."
+      ],
+      "origem": "area_trends_wikipedia_gdelt__sonnet_1644.md 2026-11-16"
+    },
+    {
+      "id": "antes_depois_views",
+      "nome": "Janela de comparação de views por hora após troca de título/capa",
+      "subtemas": [
+        "técnica de comparar 48 h antes e depois, sem repositório; buscar artigos ou relatos de criadores e a página oficial de resultados do A/B"
+      ],
+      "origem": "area_troca_titulo_capa__sonnet_1702.md 2026-11-16"
+    },
+    {
+      "id": "titulos_longos_idioma",
+      "nome": "Padrão de título dos recaps longos em outras línguas por país",
+      "subtemas": [
+        "como os canais campeões do mesmo nicho titulam em espanhol e inglês, medido por snapshot"
+      ],
+      "origem": "area_troca_titulo_capa__sonnet_1702.md 2026-11-16"
+    },
+    {
+      "id": "primeiros30s_gancho",
+      "nome": "Gancho dos primeiros 30 s dos recaps mais vistos",
+      "subtemas": [
+        "o que os vídeos campeões dizem e mostram nos primeiros 30 s, extraído de legenda automática via yt-dlp"
+      ],
+      "origem": "area_troca_titulo_capa__sonnet_1702.md 2026-11-16"
+    },
+    {
+      "id": "titulo_por_obra",
+      "nome": "Título por obra famosa vs obra desconhecida (nome na frente ou premissa)",
+      "subtemas": [
+        "repetir o snapshot com `ytsearch` e `ytsearchdate` por nome de obra, comparando views por dia desde a publicação"
+      ],
+      "origem": "area_titulos_longos_idioma__sonnet_1716.md 2026-11-16"
+    },
+    {
+      "id": "titulo_pais_latam",
+      "nome": "Variação PT-BR / ES-LATAM / ES-ES / EN nos mesmos recaps",
+      "subtemas": [
+        "medir o mesmo recap titulado nos 4 idiomas por canal e ver qual sufixo e vocabulário repete entre os de maior views por dia"
+      ],
+      "origem": "area_titulos_longos_idioma__sonnet_1716.md 2026-11-16"
+    },
+    {
+      "id": "titulo_longo_curto",
+      "nome": "Tamanho do título e o corte no celular",
+      "subtemas": [
+        "medir comprimento em caracteres vs views por dia nos campeões, e onde a palavra-chave cai nos primeiros ~60 caracteres"
+      ],
+      "origem": "area_titulos_longos_idioma__sonnet_1716.md 2026-11-16"
+    },
+    {
+      "id": "ab_titulo_short",
+      "nome": "Teste A/B de título e capa de Shorts",
+      "subtemas": [
+        "repos pequenos que registram título e capa por vídeo e comparam views depois, usando só o navegador ou RSS e sem API do Google"
+      ],
+      "origem": "area_titulo_thumb_corpus__sonnet_1812.md 2026-11-16"
+    },
+    {
+      "id": "capas_titulos",
+      "nome": "Primeiros 30 s e capas",
+      "subtemas": [
+        "truques de gancho e capa em Python/FFmpeg que não dependam de modelo novo"
+      ],
+      "origem": "area_yt_shorts_audio_trend__sonnet_1828.md 2026-11-16"
+    },
+    {
+      "id": "yt_cc_filtro",
+      "nome": "Fontes com licença CC BY",
+      "subtemas": [
+        "como listar e filtrar vídeos CC BY por nicho com yt-dlp e o campo `license`, e quais canais de anime/manhwa os usam"
+      ],
+      "origem": "area_parceria_canal__sonnet_1841.md 2026-11-16"
+    },
+    {
+      "id": "cid_release",
+      "nome": "Fluxo de liberação de Content ID",
+      "subtemas": [
+        "página oficial de liberação de reivindicação, e como o parceiro libera os vídeos que você posta"
+      ],
+      "origem": "area_parceria_canal__sonnet_1841.md 2026-11-16"
+    },
+    {
+      "id": "cl_modelo",
+      "nome": "Contrato curto de recap",
+      "subtemas": [
+        "modelos públicos de autorização e revenue share entre canais pequenos, de fonte oficial ou de criadores"
+      ],
+      "origem": "area_parceria_canal__sonnet_1841.md 2026-11-16"
+    },
+    {
+      "id": "rev_share_parceiro",
+      "nome": "Prestação de contas de revenue share com parceiros",
+      "subtemas": [
+        "exemplos reais de acordos e cálculos de divisão entre canais pequenos, em blogs de criadores ou páginas do YouTube Help sobre \"Content ID, claims e monetização compartilhada\""
+      ],
+      "origem": "area_cl_modelo__sonnet_1853.md 2026-11-16"
+    },
+    {
+      "id": "shorts_remix_regras",
+      "nome": "Regras oficiais de remix e áudio de terceiros em Shorts",
+      "subtemas": [
+        "páginas do YouTube Help sobre remix, biblioteca de áudio e uso de trechos de outros vídeos nos Shorts"
+      ],
+      "origem": "area_cl_modelo__sonnet_1853.md 2026-11-16"
+    },
+    {
+      "id": "ids_multicour",
+      "nome": "Mapeamento de ids e numeração entre cours",
+      "subtemas": [
+        "arm.haglund.dev, anibridge/anibridge-mappings e esquemas de numeração absoluta vs. por temporada, para achar o recap mais visto de cada episódio sem errar a série"
+      ],
+      "origem": "area_timestamps_anime__sonnet_1907.md 2026-11-16"
+    },
+    {
+      "id": "recap_por_capitulo",
+      "nome": "Capítulos como estrutura de corte",
+      "subtemas": [
+        "uso de capítulos e metadados de container (ffprobe/mkvmerge) para dividir episódio em blocos de recap e conferir contra o aniskip"
+      ],
+      "origem": "area_timestamps_anime__sonnet_1907.md 2026-11-16"
+    },
+    {
+      "id": "bridge_curto_longo",
+      "nome": "Ponte Short→longo",
+      "subtemas": [
+        "como canais de recap de anime ligam Short ao vídeo longo e à playlist da série (título, fixado, tela final), a partir de páginas oficiais do YouTube"
+      ],
+      "origem": "area_timestamps_anime__sonnet_1907.md 2026-11-16"
+    },
+    {
+      "id": "cap_yt_regras",
+      "nome": "Regras oficiais de Capítulos do YouTube",
+      "subtemas": [
+        "página support.google.com/youtube sobre capítulos automáticos e manuais: limites, efeito nas impressões e no Short->longo"
+      ],
+      "origem": "area_recap_por_capitulo__sonnet_1942.md 2026-11-16"
+    },
+    {
+      "id": "cap_ytdlp_fonte",
+      "nome": "Capítulos do vídeo-fonte via yt-dlp",
+      "subtemas": [
+        "dump-json` (campo `chapters`) e SponsorBlock em recaps campeões de outros canais, para copiar a estrutura de blocos que já segura público"
+      ],
+      "origem": "area_recap_por_capitulo__sonnet_1942.md 2026-11-16"
+    },
+    {
+      "id": "musica_tendencia",
+      "nome": "Música em alta por gênero para Shorts",
+      "subtemas": [
+        "páginas oficiais do YouTube Shorts e do TikTok Creative Center (só o que for permitido a canal comercial); sem repo"
+      ],
+      "origem": "area_musica_cc0_trend__sonnet_2016.md 2026-11-16"
+    },
+    {
+      "id": "musica_claim",
+      "nome": "Claim de Content ID em música CC",
+      "subtemas": [
+        "páginas oficiais do YouTube sobre disputa e liberação de claim, e como pedir liberação ao artista"
+      ],
+      "origem": "area_musica_cc0_trend__sonnet_2016.md 2026-11-16"
+    },
+    {
+      "id": "musica_credito",
+      "nome": "Linha de crédito CC-BY automática",
+      "subtemas": [
+        "ideia de gerar o crédito na descrição a partir do registro da faixa (modelos de atribuição CC e do FMA)"
+      ],
+      "origem": "area_musica_cc0_trend__sonnet_2016.md 2026-11-16"
+    },
+    {
+      "id": "yt_dub_regra",
+      "nome": "Dublagem automática do YouTube na prática",
+      "subtemas": [
+        "testar em 1 vídeo abaixo de 120 min o que acontece com views por faixa de áudio e se vale ativar nos canais PT/EN/ES"
+      ],
+      "origem": "area_titulo_pais_latam__sonnet_2117.md 2026-11-16"
+    },
+    {
+      "id": "yt_titulo_local",
+      "nome": "Título e descrição localizados por vídeo",
+      "subtemas": [
+        "confirmar na página oficial do Studio se título/descrição por idioma existem e como subir em lote pelo navegador"
+      ],
+      "origem": "area_titulo_pais_latam__sonnet_2117.md 2026-11-16"
+    },
+    {
+      "id": "yt_sufixo_campeao",
+      "nome": "Sufixos de título entre campeões por idioma",
+      "subtemas": [
+        "buscar scripts pequenos (0 a poucas estrelas) que contem padrões de título em yt-dlp --flat-playlist e cruzem com views"
+      ],
+      "origem": "area_titulo_pais_latam__sonnet_2117.md 2026-11-16"
+    },
+    {
+      "id": "ritmo_heatmap",
+      "nome": "Heatmap público × ritmo de plano",
+      "subtemas": [
+        "canais campeões de recap em cada língua: baixar 360p, medir cortes/min com PySceneDetect e alinhar com `heatmap` do yt-dlp; ver onde cai a curva"
+      ],
+      "origem": "area_ritmo_cortes__sonnet_2134.md 2026-11-16"
+    },
+    {
+      "id": "cap_cena_final",
+      "nome": "Final do recap que prende",
+      "subtemas": [
+        "Truques para fazer o espectador ver o próximo vídeo ou a playlist em Shorts: cartão final, texto \"parte 2\", ponte Short→longo"
+      ],
+      "origem": "area_tela_final_render__sonnet_2155.md 2026-11-16"
+    },
+    {
+      "id": "ffmpeg_celular",
+      "nome": "Render no Android (Termux)",
+      "subtemas": [
+        "Scripts pequenos de FFmpeg para fila de render em Termux, para usar celulares como máquina extra"
+      ],
+      "origem": "area_tela_final_render__sonnet_2155.md 2026-11-16"
+    },
+    {
+      "id": "tendencias_recap",
+      "nome": "Achar recaps mais vistos",
+      "subtemas": [
+        "Projetos pequenos que ranqueiam recaps por views por inscrito, sem API do Google"
+      ],
+      "origem": "area_tela_final_render__sonnet_2155.md 2026-11-16"
+    },
+    {
+      "id": "rss_uulf",
+      "nome": "Monitor de canais-fonte por RSS",
+      "subtemas": [
+        "feeds UULF/UUSH por canal, mediana dos 15 últimos como baseline, alerta de vídeo novo que já nasce acima da mediana"
+      ],
+      "origem": "area_tendencias_recap__sonnet_2236.md 2026-11-16"
+    },
+    {
+      "id": "android_termux",
+      "nome": "Render e upscale no celular Android",
+      "subtemas": [
+        "projetos pequenos com Termux + FFmpeg (h264_mediacodec, ou libx264 com preset), fila de tarefas e ritmo de render no celular"
+      ],
+      "origem": "area_tendencias_recap__sonnet_2236.md 2026-11-16"
+    },
+    {
+      "id": "shorts_longo",
+      "nome": "Ponte Short→longo",
+      "subtemas": [
+        "formas de apontar o Short para o recap longo (vídeo relacionado, playlist, comentário fixado) e como medir o efeito sem a API do Google"
+      ],
+      "origem": "area_tendencias_recap__sonnet_2236.md 2026-11-16"
+    },
+    {
+      "id": "auditoria_vitrine",
+      "nome": "Auditoria da vitrine do canal",
+      "subtemas": [
+        "Script lendo `metricas_studio.json` para marcar, por canal, os vídeos mais vistos e os mais recentes que fogem do padrão com narração própria"
+      ],
+      "origem": "area_regras_yt_2026__sonnet_2308.md 2026-11-16"
+    },
+    {
+      "id": "similaridade_roteiros",
+      "nome": "Similaridade de roteiros do mesmo canal",
+      "subtemas": [
+        "Medir com Python puro (difflib/RapidFuzz sobre `roteiro.txt`) o quanto os roteiros do canal se parecem, para evitar o \"template\""
+      ],
+      "origem": "area_regras_yt_2026__sonnet_2308.md 2026-11-16"
+    },
+    {
+      "id": "revisao_longo",
+      "nome": "Regras para longos de 1 a 4 h",
+      "subtemas": [
+        "Páginas oficiais ou blog do YouTube sobre como a revisão de monetização trata vídeos longos reutilizados (não consegui ler a página de Shorts remix, answer/10059070)"
+      ],
+      "origem": "area_regras_yt_2026__sonnet_2308.md 2026-11-16"
+    },
+    {
+      "id": "trial_ab",
+      "nome": "Teste A/B de abertura em contas novas ou trial reels",
+      "subtemas": [
+        "repositórios e regras do Instagram/TikTok para testar 2 ou 3 aberturas em não-seguidores e ler a taxa de saída em 3 s"
+      ],
+      "origem": "area_curva_retencao_30s__sonnet_2321.md 2026-11-16"
+    },
+    {
+      "id": "heatmap_corte",
+      "nome": "Abertura pelo pico de replay do vídeo fonte",
+      "subtemas": [
+        "como yt-dlp expõe o `heatmap` e quando falta (vídeos novos ou pequenos), e como usar o pico como cold open do Short"
+      ],
+      "origem": "area_curva_retencao_30s__sonnet_2321.md 2026-11-16"
+    },
+    {
+      "id": "titulo_pais",
+      "nome": "Título e capa por país",
+      "subtemas": [
+        "como canais nativos titulam o mesmo recap em DE e TR (formato de duração, palavras de gancho), via `ytsearch` e leitura de títulos"
+      ],
+      "origem": "area_recap_outras_linguas__sonnet_2341.md 2026-11-16"
+    },
+    {
+      "id": "ponte_idioma_short",
+      "nome": "Ponte de Short para longo em outro idioma",
+      "subtemas": [
+        "como canais estrangeiros ligam Short e playlist de longo (descrição, comentário fixado, playlist por idioma)"
+      ],
+      "origem": "area_recap_outras_linguas__sonnet_2341.md 2026-11-16"
+    },
+    {
+      "id": "mediana_flat",
+      "nome": "Mediana do canal via yt-dlp",
+      "subtemas": [
+        "flat-playlist` com `--print` de views e data, para ranquear views sobre a mediana do canal sem API"
+      ],
+      "origem": "area_outliers_nicho__sonnet_2353.md 2026-11-16"
+    },
+    {
+      "id": "recap_intl",
+      "nome": "Recaps em outras línguas",
+      "subtemas": [
+        "canais de recap de manhwa e anime em espanhol e inglês com poucos inscritos e muitas views, e o que muda por país"
+      ],
+      "origem": "area_outliers_nicho__sonnet_2353.md 2026-11-16"
+    },
+    {
+      "id": "dublagem_auto_pais",
+      "nome": "Dublagem automática e views por país",
+      "subtemas": [
+        "página de Analytics do Studio por idioma de áudio e relatos de criadores sobre retenção das faixas dubladas em canais pt/es"
+      ],
+      "origem": "area_recap_intl__sonnet_0002.md 2026-11-17"
+    },
+    {
+      "id": "titulos_traduzidos_studio",
+      "nome": "Títulos e descrições traduzidos no Studio",
+      "subtemas": [
+        "página oficial \"Traduzir os títulos e as descrições dos seus próprios vídeos\" e como isso afeta a descoberta por país"
+      ],
+      "origem": "area_recap_intl__sonnet_0002.md 2026-11-17"
+    },
+    {
+      "id": "termux_ffmpeg_android",
+      "nome": "Render em celular Android",
+      "subtemas": [
+        "scripts pequenos de FFmpeg em Termux, filas de render e limpeza de disco (repetir a busca, que falhou por limite de taxa)"
+      ],
+      "origem": "area_recap_intl__sonnet_0002.md 2026-11-17"
+    },
+    {
+      "id": "nenhuma",
+      "nome": "(nada encontrado dentro dos temas SERVE nesta rodada)",
+      "subtemas": [
+        "não sugerir área nova a partir deste tema"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0030.md 2026-11-17"
     }
   ],
   "projetos": [

@@ -17533,5 +17533,135 @@
     "arquivado": false,
     "descricao": "Turn manga/manhwa into cinematic recap videos with AI narration — full-stack FastAPI + React SaaS",
     "data": "2026-11-16"
+  },
+  "onurbyte/editsmaker": {
+    "ok": true,
+    "nome": "OnurByte/EditsMaker",
+    "estrelas": 3,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn any YouTube link, channel or topic into viral TikTok, Reels and Shorts edits. Alight Motion and Premiere presets, trending TikTok songs",
+    "data": "2026-11-16"
+  },
+  "isntfunny/aniskip-jellyfin": {
+    "ok": true,
+    "nome": "isntfunny/aniskip-jellyfin",
+    "estrelas": 0,
+    "push": "2026-07-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Jellyfin media segment provider that skips anime openings, endings and recaps using the AniSkip database (with TheTVDB->MAL multi-cour mappi",
+    "data": "2026-11-16"
+  },
+  "animethemes/animethemes-server": {
+    "ok": true,
+    "nome": "AnimeThemes/animethemes-server",
+    "estrelas": 117,
+    "push": "2026-11-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "AnimeThemes.moe resource management & API",
+    "data": "2026-11-16"
+  },
+  "berkerb/chaptersaw": {
+    "ok": true,
+    "nome": "berkerb/chaptersaw",
+    "estrelas": 2,
+    "push": "2026-01-01",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "A Python CLI tool to extract chapter metadata from video files and split them into individual chapter files using mkvmerge and ffmpeg",
+    "data": "2026-11-16"
+  },
+  "itzjk/chapter-carry": {
+    "ok": true,
+    "nome": "itzjk/chapter-carry",
+    "estrelas": 0,
+    "push": "2026-10-31",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Carry chapter intervals through a declared cut list and explain every clipped, split or removed chapter.",
+    "data": "2026-11-16"
+  },
+  "fiehrfly/muses": {
+    "ok": true,
+    "nome": "fiehrfly/muses",
+    "estrelas": 2,
+    "push": "2026-05-18",
+    "licenca": "CC0-1.0",
+    "arquivado": false,
+    "descricao": "Curated index of free, open-source, and royalty-free music libraries for video editing — with notes on licensing, account requirements, and ",
+    "data": "2026-11-16"
+  },
+  "jasveerai88/retention-checker": {
+    "ok": true,
+    "nome": "jasveerai88/retention-checker",
+    "estrelas": 0,
+    "push": "2026-11-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Pre-publish retention checker for faceless & AI video: hook window, dead zones, caption pacing, loudness, platform spec — local, no uploads,",
+    "data": "2026-11-16"
+  },
+  "juneyaooo/benchmark-outlier-radar": {
+    "ok": true,
+    "nome": "JuneYaooo/benchmark-outlier-radar",
+    "estrelas": 2,
+    "push": "2026-11-03",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "博主的对标复盘雷达：每周导入自己和对标账号的数据，标出异常爆款、生成数据台账和周报",
+    "data": "2026-11-16"
+  },
+  "jameselle/hook-tester": {
+    "ok": true,
+    "nome": "jameselle/hook-tester",
+    "estrelas": 0,
+    "push": "2026-10-06",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Test your video's first line on strangers: post each opening as an Instagram trial reel, rank them by who stayed past 3 seconds. Free, MIT.",
+    "data": "2026-11-16"
+  },
+  "differentiatorx/echo": {
+    "ok": true,
+    "nome": "differentiatorX/echo",
+    "estrelas": 0,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Open-source AI clipper that turns long YouTube videos into the few Instagram Reels worth posting. Claude picks the moments, YouTube's Most r",
+    "data": "2026-11-16"
+  },
+  "varunmk28/phone-automation": {
+    "ok": true,
+    "nome": "varunmk28/phone-automation",
+    "estrelas": 0,
+    "push": "2026-06-26",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Unattended YouTube uploads via Android ADB UI automation — metadata CSV + Notion status sync.",
+    "data": "2026-11-17"
+  },
+  "openatx/uiautomator2": {
+    "ok": true,
+    "nome": "openatx/uiautomator2",
+    "estrelas": 8511,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android Uiautomator2 Python Wrapper",
+    "data": "2026-11-17"
+  },
+  "brottobhmg/android-social-uploader": {
+    "ok": true,
+    "nome": "brottobhmg/android-social-uploader",
+    "estrelas": 0,
+    "push": "2026-10-19",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Vision-based Android UI automation framework that uploads videos to TikTok, Instagram and YouTube Studio using LLMs",
+    "data": "2026-11-17"
   }
 }

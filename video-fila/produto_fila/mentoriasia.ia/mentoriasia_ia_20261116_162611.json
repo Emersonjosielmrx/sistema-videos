@@ -1,0 +1,151 @@
+{
+ "conta": "mentoriasia.ia",
+ "produto": "treinamentos",
+ "marca": "Treinamentos e Mentorias IA",
+ "titulo": "Como planejar suas automações com IA usando mapa mental",
+ "legenda": "Antes de colocar suas automações com IA para rodar, é essencial estruturar suas ideias no mapa mental. 🧠\nCom o treinamento de Vibe Coding, consultoria de otimização e pack de prompts validados, você aprende a planejar e montar seus próprios fluxos.\nAcesse o link no perfil para conhecer. 🚀\n\n👉 Chame no direct • link no perfil",
+ "roteiro": {
+  "gancho_tela": "Planejar automações com IA",
+  "pergunta_cliente": "Quer automatizar sua empresa, mas não sabe por onde começar?",
+  "blocos": [
+   {
+    "rotulo": "O desafio",
+    "fala": "Eu não sabia qual tarefa automatizar primeiro, até usar o mapa mental para estruturar minhas ideias.",
+    "visual": "apresentador",
+    "prompt_en": "a tidy and well lit small Brazilian business office desk with a closed notebook, warm natural light, cinematic, no text",
+    "cenario_en": "sitting in a tidy, well lit modern small Brazilian business office",
+    "real_tema": "falta de planejamento antes de criar automações",
+    "destaques": [
+     "qual tarefa automatizar",
+     "mapa mental"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261116_162721_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "Com o mapa mental, consultoria de otimização, pack de prompts validados e treinamento Vibe Coding, você planeja tudo.",
+    "visual": "conversa",
+    "prompt_en": "a business owner viewed from the side organizing workflow ideas in a tidy well lit Brazilian office, warm light, cinematic, no text",
+    "cenario_en": "",
+    "real_tema": "estruturação de fluxos com mapa mental e treinamento",
+    "destaques": [
+     "consultoria de otimização",
+     "treinamento Vibe Coding"
+    ],
+    "conversa": [
+     {
+      "de": "cliente",
+      "texto": "Tenho várias ideias, mas não sei o que automatizar primeiro."
+     },
+     {
+      "de": "empresa",
+      "texto": "Começamos pelo mapa mental para estruturar seus fluxos de trabalho."
+     },
+     {
+      "de": "cliente",
+      "texto": "E depois de desenhar o processo no mapa mental?"
+     },
+     {
+      "de": "empresa",
+      "texto": "Você usa o treinamento de Vibe Coding e os prompts validados para montar suas próprias automações com IA."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Hoje planejo cada etapa no mapa mental antes de montar minhas próprias automações com IA.",
+    "visual": "apresentador",
+    "prompt_en": "a clean and organized small Brazilian office desk in warm daylight, professional atmosphere, cinematic, no text",
+    "cenario_en": "standing in a tidy, well lit small Brazilian business office",
+    "real_tema": "automações criadas com planejamento estruturado",
+    "destaques": [
+     "planejo cada etapa",
+     "automações com IA"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261116_162721_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_mentoriasia.ia_20261116_162721_1.png"
+   }
+  ],
+  "legenda": "Antes de colocar suas automações com IA para rodar, é essencial estruturar suas ideias no mapa mental. 🧠\nCom o treinamento de Vibe Coding, consultoria de otimização e pack de prompts validados, você aprende a planejar e montar seus próprios fluxos.\nAcesse o link no perfil para conhecer. 🚀",
+  "titulo": "Como planejar suas automações com IA usando mapa mental",
+  "modelo_roteiro": "gemini-4-argon",
+  "pauta_id": "organizacao_fluxo_trabalho",
+  "pauta_tipo": "como_funciona",
+  "tempo_roteiro_s": 69,
+  "tentativas_roteiro": 1
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "fatos_desconhecidos",
+ "efeito_transicao": "eletrico",
+ "trilha": "calm_chill.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\mentoriasia.ia_20261116_162611\\dono_3.mp4",
+ "duracao_s": 31.43,
+ "trava_final": {
+  "ok": true,
+  "motivos": [],
+  "obs": "versão do editor (nota dos verificadores)"
+ },
+ "formato": "explicativo+veo+editor",
+ "gerado_em": "2026-11-16T16:45:06",
+ "variante": "dono_abre_fecha",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": false,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.84,
+   "fala": "Quer automatizar sua empresa, mas não sabe por onde começar?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.84,
+   "fim": 12.31,
+   "fala": "Eu não sabia qual tarefa automatizar primeiro, até usar o mapa mental para estruturar minhas ideias.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 12.31,
+   "fim": 20.49,
+   "fala": "Com o mapa mental, consultoria de otimização, pack de prompts validados e treinamento Vibe Coding, você planeja tudo.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 20.49,
+   "fim": 27.48,
+   "fala": "Hoje planejo cada etapa no mapa mental antes de montar minhas próprias automações com IA.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 27.48,
+   "fim": 31.43,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.25,
+  "notas": {
+   "legibilidade": 7.0,
+   "movimento": 5.0,
+   "roteiro_marca": 8.0,
+   "diretor": 5.0
+  },
+  "graves": 4,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "editor": true
+}

@@ -220,11 +220,23 @@ def capar_3d():
             tmp = d / "video.mp4"
             if tmp.exists() and tmp != video:
                 continue
+            # 16/11: a aprovação da rede é por tamanho do arquivo — a capa muda o tamanho e o Short caía em
+            # "esperando aprovação" (geladeira aprovada pela dona ficou parada). Guarda o status e regrava depois.
+            status_antes = None
+            try:
+                if r"D:\postador-de-videos\bin" not in sys.path:
+                    sys.path.append(r"D:\postador-de-videos\bin")
+                import politica
+                status_antes = politica.status_aprovacao(video)
+            except Exception:  # noqa: BLE001
+                politica = None
             video.rename(tmp)
             try:
                 capa_no_inicio(tmp, capa, seg)
             finally:
                 tmp.rename(video)
+            if politica and status_antes == "aprovado" and os.environ.get("CAPAR_3D_MANTEM_APROV", "1") != "0":
+                politica.marcar_aprovacao(video, "aprovado", "kit3d: aprovado antes da capa no 1º quadro (capar_3d)")
             j = json.loads(pj.read_text("utf-8"))
             if j.get("posted_url"):
                 log(f"{d.name}: postado durante a capa — desfaço")

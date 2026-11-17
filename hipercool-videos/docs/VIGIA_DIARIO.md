@@ -392,3 +392,8 @@ evisão: REPROVADO — 10 quadro(s) com nudez), o que demonstra o funcionamento 
 - O que fiz (Modo Só Aviso): Nenhum arquivo alterado. Apenas verificação completa dos logs e processos.
 - CONSERTO PROPOSTO: Nenhum. A fila automática está ativa, executando os ciclos regularmente e gerenciando o espaço em disco e as postagens conforme as regras vigentes.
 - Estado: NADA A FAZER
+## 20261116_1715 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra execução contínua dos ciclos de postagem (ex: "Shorts em pt: canal parado, sai já" e gerenciamento da janela local de espaço em disco). O status atual mostra que a produção de render está desligada (tarefa desativada), mas os ciclos de postagem e verificação rodam normalmente.
+- CONSERTO PROPOSTO: nenhum
+- Estado: NADA A FAZER

@@ -46,5 +46,11 @@
     "onde": "bin/aba_shorts.py + anime_discover.discover_canal; DISCOVER_TUBESCRAPE=0 desliga",
     "quem": "CURTOS",
     "data": "2026-11-15"
+  },
+  {
+    "repo": "gregman2121/youtube-autocomplete-miner",
+    "onde": "ideia refeita em bin/palavras_buscadas.py (coleta por nicho em config/seo_palavras_nicho.json); uso no titulo fica DESLIGADO por padrao (SEO_PALAVRAS_NICHO=1 liga) porque o modelo inventava termos; o ganho real foi traduzir 6 nichos em seo_generator._MIDIAS (SEO_MIDIAS_NOVAS=0 desliga)",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
   }
 ]

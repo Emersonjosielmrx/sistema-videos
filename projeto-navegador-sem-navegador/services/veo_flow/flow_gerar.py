@@ -45,6 +45,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.request
 import uuid
 from pathlib import Path
@@ -229,7 +230,15 @@ class FlowGerador:
             else:
                 os.environ["FLOW_JANELA_OCULTA"] = "1"  # 29/10: o Chrome do token fica fora da tela (gera_auto)
                 self.abri = self.g._ensure_chrome_running(self.porta, self.log) == "novo"
-            self.aba = Aba.da_porta(self.porta, nova="about:blank")
+            try:
+                self.aba = Aba.da_porta(self.porta, nova="about:blank")
+            except urllib.error.HTTPError as e:
+                # 16/11: Chrome de CELULAR (adb forward chrome_devtools_remote) recusa /json/new com 500 — usa a aba
+                # do Flow que já está aberta lá (o celular_flow.py deixa o Chrome na frente antes de chamar)
+                if e.code != 500:
+                    raise
+                self.aba = Aba.da_porta(self.porta, url_contem="https://flow.google.com/")
+                self.aba.celular = True
             self.aba.chamar("Page.enable")
             self.aba.chamar("Page.addScriptToEvaluateOnNewDocument", {"source": ARMADILHA})
             self.aba.chamar("Page.navigate", {"url": self.url})
@@ -297,7 +306,7 @@ class FlowGerador:
         """Modo worker: o token já foi usado, o resto é HTTP — fecha a aba e o Chrome (libera a RAM do notebook)."""
         if self.aba:
             try:
-                self.aba.fechar(fechar_aba=True)
+                self.aba.fechar(fechar_aba=not getattr(self.aba, "celular", False))
             except Exception:  # noqa: BLE001
                 pass
             self.aba = None
@@ -313,8 +322,8 @@ class FlowGerador:
 
     def __exit__(self, *_):
         try:
-            if self.aba:
-                self.aba.fechar(fechar_aba=True)
+            if self.aba:  # celular: a aba é a do Flow da pessoa — solta a conexão, não fecha a aba
+                self.aba.fechar(fechar_aba=not getattr(self.aba, "celular", False))
         except Exception:  # noqa: BLE001
             pass
         self.aba = None

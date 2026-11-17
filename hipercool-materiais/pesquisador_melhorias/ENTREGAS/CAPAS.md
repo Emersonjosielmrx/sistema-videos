@@ -217,3 +217,11 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 06:30 — Miniaturas dos recaps campeões em es (`area_capa_es`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_capa_es__sonnet_0626.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 17:12 — Troca de título ou capa dos concorrentes (`area_troca_titulo_capa`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_troca_titulo_capa__sonnet_1702.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 18:21 — Corpus de títulos e thumbnails por nicho e idioma (`area_titulo_thumb_corpus`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_titulo_thumb_corpus__sonnet_1812.md`
+- (todos os itens desta pesquisa foram reprovados)

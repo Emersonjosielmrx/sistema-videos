@@ -7654,5 +7654,155 @@
     "motivo": "GUI de download (yt-dlp+PySide6); já temos yt-dlp + ytdlp_vez sem interface",
     "quem": "LONGOS",
     "data": "2026-11-16"
+  },
+  {
+    "repo": "OnurByte/EditsMaker",
+    "motivo": "linha LONGOS: músicas em alta de terceiros = Content ID no longo; presets de editor manual (Alight/Premiere); ★3 de hoje",
+    "quem": "LONGOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "Bedirhandd/dubbed-video-downloader",
+    "motivo": "baixa faixa dublada com yt-dlp; não usamos dublagem do YouTube",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "liosvee/japanese-shorts-agent",
+    "motivo": "0 estrelas; fluxo de prompt para nicho japonês, sem código",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "ScrapingBee/youtube-email-scraper-api",
+    "motivo": "0 estrelas; cliente de API paga de raspagem de e-mail",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "ledrodh/EchoScope-AI",
+    "motivo": "1 estrela; painel de concorrentes pela API do YouTube (não usamos API)",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "malatangxiaxie/framekit",
+    "motivo": "0 estrelas; renderizador de vídeo para Termux, sem uso",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "ChocoData-com/youtube-suggest-scraper",
+    "motivo": "cliente de API paga; autocompletar já feito em bin/palavras_buscadas.py",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "sebdata-tools/search-autocomplete",
+    "motivo": "0 estrelas; autocompletar já feito em bin/palavras_buscadas.py",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "eliftforlife/youtube-formula-skills",
+    "motivo": "0 estrelas; skills de prompt em inglês, sem código",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "mvanhorn/last30days-skill",
+    "motivo": "skill de pesquisa de tendência em Reddit/X/HN; público em inglês e sem ligação com a fila de fontes",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "heyitsgautham/youtube-comments-scraper",
+    "motivo": "0 estrelas; exemplos de API paga de comentários",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "zhengchen1999/DOVE",
+    "motivo": "difusão de vídeo (base CogVideoX), exige GPU forte; sem GPU de curto no Kaggle hoje",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "zhengchen1999/LSGQuant",
+    "motivo": "quantização do DOVE; mesmo motivo (GPU forte)",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "W-Shuoyan/OSDEnhancer",
+    "motivo": "super-resolução por difusão, exige GPU forte",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "victoranime/viralspy",
+    "motivo": "0 estrelas; extensão do Chrome logada nas redes (risco de conta)",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "Chukie99/manhwa-recap-ai",
+    "motivo": "0 estrelas; SaaS de recap com 830 linhas de serviço: narração, ducking e composição já temos, mais completos",
+    "quem": "CURTOS",
+    "data": "2026-11-16"
+  },
+  {
+    "repo": "isntfunny/aniskip-jellyfin",
+    "motivo": "0 estrelas; plugin de Jellyfin para pular abertura, sem uso nos Shorts de parceiro",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "AnimeThemes/animethemes-server",
+    "motivo": "servidor de catálogo de aberturas de anime (Laravel); nossos Shorts vêm de parceiros, não de episódios",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "berkerb/chaptersaw",
+    "motivo": "corta vídeo por capítulos do arquivo (mkvmerge); fontes de Shorts não têm capítulos",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "itzjk/chapter-carry",
+    "motivo": "0 estrelas; recalcula capítulos depois de cortes, sem uso em Short",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "fiehrfly/muses",
+    "motivo": "índice manual de bibliotecas de música livre, sem código; trilha já resolvida",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "jasveerai88/retention-checker",
+    "motivo": "0 estrelas; checagens que já temos (gancho, silêncio, loudness); hookcheck testado 15/11: aberturas já boas",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "JuneYaooo/benchmark-outlier-radar",
+    "motivo": "2 estrelas; planilha de concorrentes em chinês, importação manual",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "jameselle/hook-tester",
+    "motivo": "0 estrelas; testa abertura postando reels de teste no Instagram (gasta conta)",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
+  },
+  {
+    "repo": "differentiatorX/echo",
+    "motivo": "0 estrelas; corta vídeos longos em Reels; nossos Shorts vêm de Shorts de parceiro",
+    "quem": "CURTOS",
+    "data": "2026-11-17"
   }
 ]

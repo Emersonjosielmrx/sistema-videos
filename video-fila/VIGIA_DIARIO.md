@@ -152,3 +152,29 @@ STATUS: REVISAR - Arquivos comuns divergentes em recapd; rodar o script recursos
 - Causa provável: Acúmulo padrão de artefatos de trabalho e cache.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo; espaço sob gerenciamento automático do backup/limpeza de cache do sistema).
 - Estado: NADA A FAZER
+## 20261116_1835 — parceiro-render: Whisper timeout em vídeos longos/pesados
+- Motivo / O que achei (trecho de log): workspace/anime/_parceiro_20261116.log: [fetch] Whisper (model=base) exception: Command [...] timed out after 900 seconds (e.g.Bzjz_P_WBR4 e F1DJMLsbXv0)
+- Causa provável: Áudio longo ou pesado excedendo o timeout estático de 900 segundos do Whisper base.
+- CONSERTO PROPOSTO: Ajustar o timeout dinâmico do Whisper em bin/anime_fetch.py e bin/_whisper_sub.py para escalar de acordo com a duração do vídeo (conforme lição aprendida e histórico de consertos anteriores).
+- Estado: PRECISA REVISÃO
+
+## 20261116_1840 — Ajuste timeout dinâmico do Whisper para CPU carregada (pelo painel)
+- Motivo / O que fiz (arquivos): Timeout de 900s (15min) insuficiente para vídeos curtos (2-3min) quando CPU está carregada — vídeo gMvJdUybB6E (134s) deu timeout em AMBAS tentativas (tiny e base) após 900s cada. Editei bin/anime_fetch.py:455 aumentando mínimo de 900s→1800s (30min) para vídeos curtos (<=10min), mantendo multiplicador 5x. / Como conferi: sintaxe OK, teste de cálculo confirmou vídeo de 134s agora usa timeout de 1800s (30min) em vez de 900s (15min). / Como desfazer: botão "Desfazer" no painel (pedido 20261116_184016_77c7)
+- Estado: RESOLVIDO
+
+## 20261116_2039 — Vigia geral: D: com 6.32 GB livres, WiseMemoryOptimizer ativo e rotinas operando normalmente.
+- Motivo / O que achei: Espaço em D: em 6.32 GB (abaixo do ideal de 8 GB, mas em estabilização), WiseMemoryOptimizer rodando (PID 6820), recap longo aguardando liberação de contas/cota (19 de 20 GPUs sem conta verificada). Nenhuma alteração de código realizada (Modo Só Aviso ativo).
+- Causa provável: Consumo natural de cache/mídias em D: e restrições temporárias de cota de contas de IA.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso estrito; respeitar limites de cota e manter arquivos intactos conforme regras).
+- Estado: NADA A FAZER
+
+## 20261116_2138 — Recap longo e alimentador PC1
+- Motivo / O que achei: Verificação do alimentador e do estado dos processos no PC1. Alimentador e filas sob monitoramento, sem intervenção destrutiva necessária.
+- Causa provável: Ciclo normal de espera e processamento de filas e cotas.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — monitorando comportamento geral do sistema).
+- Estado: NADA A FAZER
+## 20261116_2236 — Clínica Lucrativa IA falhou no upload por net::ERR_TIMED_OUT no YouTube Studio
+- Motivo / O que achei (trecho de log): `[2026-11-16 22:17:44] Clínica Lucrativa IA: não subiu the-story-of-the-immortal-woman_cap1_20261112 (erro: Error: Page.goto: net::ERR_TIMED_OUT at https://studio.youtube.com/channel/UCwrlsPBLGkUQG6jONETdRCQ/videos/upload?d=ud)`
+- Causa provável: Instabilidade transitória de rede ou lentidão no carregamento do YouTube Studio via Playwright.
+- CONSERTO PROPOSTO: Adicionar lógica de retry (ex: tentar recarregar a página até 3 vezes com backoff exponencial) no método `Page.goto` ou na rotina de upload do postador do YouTube Studio.
+- Estado: NADA A FAZER

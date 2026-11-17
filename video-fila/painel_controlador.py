@@ -2861,7 +2861,182 @@ def api_celular(_params):
         return {"erro": f"{type(e).__name__}: {e}"}
 
 
+def _dias_lista(n):
+    hoje = datetime.now().date()
+    return [(hoje - timedelta(days=i)).isoformat() for i in range(n - 1, -1, -1)]
+
+
+def _graf_views(dias):
+    """Longos x Shorts por dia (views e horas). Longos: estado\\views_longos_hist.jsonl (coletar_views_longos.py), ganho
+    do dia = última foto do dia − última do dia anterior. Shorts: ganho de views de TODOS os canais (canais_views_hist,
+    corte das 06h igual aos cartões) − o ganho dos longos. Horas dos Shorts = views × duração média dos Shorts do Studio
+    (estimativa: o Studio não dá horas por dia)."""
+    ult_l = {}
+    for r in _ler_jsonl(BASE / "estado" / "views_longos_hist.jsonl"):
+        try:  # mesmo corte das 06h dos Shorts: foto de madrugada fecha o dia anterior
+            ult_l[(datetime.fromisoformat(r["ts"][:16]) - timedelta(hours=6)).date().isoformat()] = r
+        except (KeyError, ValueError):
+            continue
+    longo_v, longo_h, ant = {}, {}, None
+    for d in sorted(ult_l):
+        r = ult_l[d]
+        if ant is not None and d in dias:
+            longo_v[d], longo_h[d] = max(0, r["views"] - ant["views"]), round(max(0.0, r["horas"] - ant["horas"]), 1)
+        ant = r
+    # total de todos os canais por dia (corte 06h: views que o YouTube solta de madrugada são do dia anterior)
+    tot = {}
+    for r in _ler_jsonl(BASE / "estado" / "canais_views_hist.jsonl"):
+        try:
+            d = (datetime.fromisoformat(r["ts"][:16]) - timedelta(hours=6)).date().isoformat()
+        except (KeyError, ValueError):
+            continue
+        tot.setdefault(d, {})[r.get("slug")] = r.get("views") or 0
+    soma = {d: sum(v.values()) for d, v in tot.items()}
+    ds = sorted(soma)
+    todos = {}
+    for i in range(1, len(ds)):
+        # só compara dias com os mesmos canais lidos (canal novo entrando não vira "views ganhas")
+        a, b = tot[ds[i - 1]], tot[ds[i]]
+        comuns = set(a) & set(b)
+        todos[ds[i]] = max(0, sum(b[s] for s in comuns) - sum(a[s] for s in comuns))
+    try:
+        ms = json.loads(Path(r"D:\postador-de-videos\_analise\metricas_studio.json").read_text(encoding="utf-8"))
+        durs = [float(v.get("dur_media") or 0) for v in ms.values()
+                if "short" in str(v.get("fonte") or "") and 0 < float(v.get("dur_media") or 0) < 180]
+        dur_short = sorted(durs)[len(durs) // 2] if durs else 20.0
+    except (OSError, ValueError):
+        dur_short = 20.0
+    short_v = {d: max(0, todos.get(d, 0) - longo_v.get(d, 0)) for d in dias if d in todos}
+    short_h = {d: round(v * dur_short / 3600, 1) for d, v in short_v.items()}
+    return {"longos_views": longo_v, "longos_horas": longo_h, "shorts_views": short_v, "shorts_horas": short_h,
+            "dur_short_s": round(dur_short, 1)}
+
+
+def _graf_midia(dias):
+    """Imagens e vídeos gerados por dia, Flow x Gemini. Flow imagem = flow-imagens\\logs\\geracoes.jsonl com saída;
+    Flow vídeo = Veo limpos (.mp4 com data no nome); Gemini = gemini-argo\\midia.log (OK)."""
+    out = {"flow_imagem": {}, "flow_video": {}, "gemini_imagem": {}, "gemini_video": {}}
+    ds = set(dias)
+    try:
+        with open(r"D:\flow-imagens\logs\geracoes.jsonl", encoding="utf-8", errors="ignore") as f:
+            for l in f:
+                try:
+                    d = json.loads(l)
+                except ValueError:
+                    continue
+                dia = str(d.get("quando", ""))[:10]
+                if dia in ds and d.get("saida"):
+                    out["flow_imagem"][dia] = out["flow_imagem"].get(dia, 0) + 1
+    except OSError:
+        pass
+    try:
+        for p in Path(r"D:\hipercool-materiais\veo\limpos").glob("*.mp4"):
+            m = re.search(r"_(\d{4})(\d{2})(\d{2})_\d{6}", p.name)
+            if m:
+                dia = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+                if dia in ds:
+                    out["flow_video"][dia] = out["flow_video"].get(dia, 0) + 1
+    except OSError:
+        pass
+    try:
+        with open(r"D:\gemini-argo\midia.log", encoding="utf-8", errors="ignore") as f:
+            for l in f:
+                m = re.match(r"(\d{4}-\d{2}-\d{2}) \S+ \w+ (imagem|video) OK ", l)
+                if m and m.group(1) in ds:
+                    k = "gemini_" + m.group(2)
+                    out[k][m.group(1)] = out[k].get(m.group(1), 0) + 1
+    except OSError:
+        pass
+    return out
+
+
+def _graf_maquinas(dias):
+    """% do tempo ocupada por máquina: hoje por hora (0–23) e por dia (uso_maquinas.jsonl: 1 medida a cada ~5 min,
+    trab = trabalhando)."""
+    hoje = datetime.now().date().isoformat()
+    por_dia, por_hora = {}, {}
+    ds = set(dias)
+    for r in _ler_jsonl(BASE / "estado" / "uso_maquinas.jsonl"):
+        t, m = str(r.get("t", "")), r.get("m")
+        if not m or t[:10] not in ds:
+            continue
+        a = por_dia.setdefault(m, {}).setdefault(t[:10], [0, 0])
+        a[0] += 1 if r.get("trab") else 0
+        a[1] += 1
+        if t[:10] == hoje:
+            h = por_hora.setdefault(m, {}).setdefault(t[11:13], [0, 0])
+            h[0] += 1 if r.get("trab") else 0
+            h[1] += 1
+    pct = lambda a: round(100 * a[0] / a[1]) if a[1] else 0  # noqa: E731
+    return {"dia": {m: {d: pct(a) for d, a in v.items()} for m, v in por_dia.items()},
+            "hora": {m: {h: pct(a) for h, a in v.items()} for m, v in por_hora.items()}}
+
+
+def _graf_vigia(dias):
+    """Por dia: casos da vigilância por passo, rodadas do vigia agente (OK x REVISAR), mudanças dos melhoradores e a
+    fila do melhorador dos longos (vídeos esperando análise, foto de cada rodada)."""
+    ds = set(dias)
+    vig = {}
+    for r in _ler_jsonl(BASE / "estado" / "vigilancia_casos.jsonl"):
+        d = str(r.get("em", ""))[:10]
+        if d in ds:
+            p = r.get("passo") or "?"
+            # "consertando" se repete todo dia pros mesmos casos antigos (12/dia fixo) — não é conserto novo; conta só o
+            # que fechou: aplicado/aprovado = consertou
+            grupo = ("consertou" if p in ("aplicado", "aprovado", "consertou") else "falso alarme" if p == "falso"
+                     else "falhou" if p in ("falhou", "aplicar_falhou") else "problema real" if p == "real"
+                     else "sem IA/token" if p == "sem_token" else "abriu caso" if p == "aberto" else None)
+            if grupo:
+                vig.setdefault(grupo, {})[d] = vig.setdefault(grupo, {}).get(d, 0) + 1
+    agente = {"OK": {}, "REVISAR": {}}
+    for f in (BASE / "logs").glob("vigia_agente_*.log"):
+        s = f.stem[-13:-5]
+        d = f"{s[:4]}-{s[4:6]}-{s[6:8]}"
+        if d in ds:
+            for st in re.findall(r"STATUS:\s*(\S+)", f.read_text(encoding="utf-8", errors="ignore")):
+                k = "REVISAR" if st == "REVISAR" else "OK"
+                agente[k][d] = agente[k].get(d, 0) + 1
+    melh = {}
+    for nome, arq in (("central", BASE / "logs" / "melhorador_central.log"),
+                      ("longos", Path(r"D:\recapd-ambientes\producao\colab\melhorador_longo.log"))):
+        try:
+            with open(arq, encoding="utf-8", errors="ignore") as f:
+                for l in f:
+                    m = re.match(r"\[(\d{2})/(\d{2})", l)
+                    if not m:
+                        continue
+                    d = f"{datetime.now().year}-{m.group(2)}-{m.group(1)}"
+                    if d in ds and re.search(r"aplic|mudou|implant|conserto|vencedor|promov", l, re.I):
+                        melh.setdefault(nome, {})[d] = melh.setdefault(nome, {}).get(d, 0) + 1
+        except OSError:
+            pass
+    fila = {}
+    for r in _ler_jsonl(BASE / "estado" / "fila_melhorador_hist.jsonl"):
+        d = str(r.get("ts", ""))[:10]
+        if d in ds:
+            fila[d] = r.get("atrasados", 0)
+    return {"vigilancia": vig, "agente": agente, "melhoradores": melh, "fila_melhorador": fila}
+
+
+def api_graficos(params):
+    """16/11 dona: gráficos de views/horas dos LONGOS separados dos Shorts, imagens/vídeos (Flow x Gemini), uso das
+    máquinas (dia e hora) e vigia/melhoradores/fila. Cada parte com try próprio: uma fonte quebrada não derruba as outras."""
+    try:
+        n = max(2, min(90, int((params.get("dias") or ["14"])[0])))
+    except (ValueError, TypeError):
+        n = 14
+    dias = _dias_lista(n)
+    out = {"dias": dias}
+    for k, fn in (("views", _graf_views), ("midia", _graf_midia), ("maquinas", _graf_maquinas), ("vigia", _graf_vigia)):
+        try:
+            out[k] = fn(dias)
+        except Exception as e:  # noqa: BLE001
+            out[k] = {"erro": f"{type(e).__name__}: {e}"}
+    return out
+
+
 ROTAS = {"/api/geral": lambda p: _cache("geral", 60, lambda: api_geral(p)), "/api/medir": api_medir,
+         "/api/graficos": lambda p: _cache("graficos:" + str((p.get("dias") or ["14"])[0]), 300, lambda: api_graficos(p)),
          "/api/modelos_central": api_modelos_central, "/api/nsn": api_nsn, "/api/er": api_er, "/api/celular": api_celular, "/api/telao_like": api_telao_like,
          "/api/canais": api_canais, "/api/postagens": api_postagens, "/api/cobertura": api_cobertura, "/api/kanban": api_kanban, "/api/erros": api_erros,
          "/api/ranking": api_ranking, "/api/canais_views": api_canais_views, "/api/placar": api_placar,

@@ -38,21 +38,21 @@
 - 26/10: vídeo de 1 h: música dinâmica leva ~30 min pra mixar; timeout tem que ser proporcional à duração.
 
 <!-- central:inicio -->
-# Brief do melhorador central — Recap longo — 16/11 15:54
+# Brief do melhorador central — Recap longo — 17/11 00:24
 
-Vídeos nos últimos 7 dias: 40 | elegíveis (receberam o lote do feed): 32 | NÃO elegíveis: 0 | sem medida ainda: 8
-% assistido mediano (só elegíveis): 0.6 | views 48 h mediana: 10 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
+Vídeos nos últimos 7 dias: 40 | elegíveis (receberam o lote do feed): 34 | NÃO elegíveis: 0 | sem medida ainda: 6
+% assistido mediano (só elegíveis): 0.6 | views 48 h mediana: 7 | QA com problema: 0 | saíram com parte faltando (IA caiu): 0
 
 ## Por canal
 - @CodigoInteligente-n7j: n 16, elegíveis 13, % assistido 2.2, views48 34.5
-- InventoReact: n 8, elegíveis 5, % assistido 1.3, views48 10
+- InventoReact: n 8, elegíveis 7, % assistido 3.0, views48 10
 - inovaremanhwabr: n 3, elegíveis 3, % assistido 0.6, views48 6.5
 - Curiosidades Noturnas: n 2, elegíveis 2, % assistido 0.4, views48 5.5
-- HistoriasEmFrames: n 2, elegíveis 2, % assistido 0.0, views48 2
+- HistoriasEmFrames: n 2, elegíveis 2, % assistido 0.0, views48 3.5
 - CenaReact: n 2, elegíveis 2, % assistido 0.0, views48 2.0
 - Dorama Noturno: n 2, elegíveis 2, % assistido 50.0, views48 1
+- Animescomia: n 2, elegíveis 1, % assistido 0, views48 1
 - ForjaReact: n 3, elegíveis 2, % assistido 0.1, views48 0.5
-- Animescomia: n 2, elegíveis 1, % assistido 0, views48 None
 
 ## Os que mais renderam (copiar a estrutura, não o texto)
 - HomhRlIE72I InventoReact: views48 558, % assistido 3.02, continuaram 0 — 
@@ -70,10 +70,10 @@ Vídeos nos últimos 7 dias: 40 | elegíveis (receberam o lote do feed): 32 | N�
 - Para comparar A/B: só vídeos elegíveis (views_periodo ≥ 20); métrica primária pct_media, depois log(views/mediana
   do canal). Nunca promover por nota de júri sozinha.
 
-## SEM NAVEGADOR (HTTP) — saúde em 11-16T15:22: youtube 37/38, tiktok 44/58, instagram 46/53, flow 20/233, fotos 0/4 | MORTOS: youtube vendasqueescalam, flow seebotsia, flow emersonjosiel2032@pc2, flow aulacomia@x200ma, flow canalanimescomia@x200ma, flow canalhistoriacomia@x200ma, flow comoseriasecomia@x200ma, flow emersongencshin@x200ma, flow emersonjosiel2027@x200ma, flow emersonjosiel2032@x200ma, flow en1653964@x200ma, flow entrevistacomia@x200ma
+## SEM NAVEGADOR (HTTP) — saúde em 11-16T23:26: youtube 27/38, tiktok 44/58, instagram 46/53, flow 18/233, fotos 0/4 | MORTOS: youtube dicasfinanceirasdaia, youtube inovare_thai, youtube inovare_viet, youtube inovaremanhwabr, youtube inovaremanhwaverse, youtube inovareq8l, youtube inovareu8b, youtube inventoreact, youtube manhwareact, youtube leielucro, youtube bilionarionoturno, flow seebotsia
 
 ## FILAS DE POSTAGEM BAIXAS/VAZIAS (produzir/encaminhar vídeo para elas antes de qualquer melhoria de formato)
-Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (2), Tiktok @inovaremanhwaverse2 (5), Tiktok @emersonjosiel2031 (5), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (5), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0), Tiktok @solarmundo195 (0), Tiktok @empressinovare (0)
+MS Energy - Instagram @msenergycap (4), Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovaremanhwaverseita (0), Tiktok @canalalucinaai (0), Instagram @videocassetadascom.ia (2), Instagram @iapro.mentoria (0), YouTube rede InventoReact (0), YouTube rede Mundo Que Nao Existe (0), Tiktok @canalhistoriacomia (0), Tiktok @entrevistacomia (0), Tiktok @emersonjosiel2026 (2), Tiktok @inovaremanhwaverse2 (6), Tiktok @emersonjosiel2031 (6), Tiktok @inovaremanhwaversehindi (0), Tiktok @inovaremanhwaverserussian (0), Tiktok @inovaremanhwaversethai (0), Tiktok @inovaremanhwaverse (0), Tiktok @inovaremanhwaversefrench (0), Tiktok @inovaremanhwaverseesp (0), Tiktok @gameoftroneskingsroadbrasil (0), Instagram @futebolcom.ia2 (0), Instagram @sintetizerisada (5), Tiktok @filmescomia1 (0), Tiktok @aulasrevolution (0), Tiktok @e4487017 (0), Tiktok @emersonjosielmrx1995 (0), Tiktok @en1653964 (0), Tiktok @murilodoctor192 (0), Tiktok @emersongencshin (0)
 
 ## PEDIDOS DA DONA QUE NÃO SAÍRAM NOS ÚLTIMOS LONGOS (conferido no log do render; corrigir a causa)
 - X29n4fGbdXw_He_Entered_His_Favorite_Game: 12/13 ok — faltou: Falas de personagem com outra voz
@@ -83,59 +83,59 @@ Tiktok @jornalcomia (0), Tiktok @3dfabricadeautomacoesia (1), Tiktok @inovareman
 - 5DoGv3EXHgc_REENCARNOU_como_VILÃO____E_t: 12/13 ok — faltou: Falas de personagem com outra voz
 
 ## VARIANTES DOS LONGOS (views/h e % assistido por fator; só fixar com 4+ vídeos por variante)
-| cortes_resumo | A | 31 | 0.03 | 0.9 |
-| cortes_resumo | B | 38 | 0.05 | 0.9 |
+| cortes_resumo | A | 34 | 0.03 | 1.1 |
+| cortes_resumo | B | 40 | 0.05 | 1.1 |
 | **cortes_resumo** | **vence B** (views/h) | | | |
-| fala_rapida | A | 10 | 0.04 | 0.9 |
+| fala_rapida | A | 11 | 0.05 | 0.9 |
 | fala_rapida | B | 18 | 0.03 | 0.5 |
-| fala_rapida | C | 18 | 0.03 | 0.9 |
-| fala_rapida | D | 10 | 0.04 | 1.9 |
-| fala_rapida | E | 13 | 0.10 | 1.4 |
+| fala_rapida | C | 19 | 0.03 | 0.9 |
+| fala_rapida | D | 12 | 0.04 | 3.1 |
+| fala_rapida | E | 14 | 0.10 | 2.7 |
 | **fala_rapida** | **vence E** (views/h) | | | |
-| ganchos_15min | A | 18 | 0.07 | 0.8 |
-| ganchos_15min | B | 19 | 0.04 | 1.6 |
-| ganchos_15min | C | 32 | 0.04 | 1.0 |
+| ganchos_15min | A | 21 | 0.07 | 0.9 |
+| ganchos_15min | B | 19 | 0.03 | 2.6 |
+| ganchos_15min | C | 34 | 0.03 | 1.1 |
 | **ganchos_15min** | **vence A** (views/h) | | | |
 | narradores_modo | com_terciarios | 5 | 0.01 | 1.3 |
-| narradores_modo | dupla | 6 | 0.03 | 0.1 |
+| narradores_modo | dupla | 8 | 0.04 | 0.1 |
 | narradores_modo | mistura_grande | 5 | 0.06 | 25.4 |
-| narradores_modo | primarios_secundarios | 14 | 0.09 | 0.4 |
-| narradores_modo | so_primarios | 23 | 0.03 | 1.4 |
+| narradores_modo | primarios_secundarios | 15 | 0.08 | 0.4 |
+| narradores_modo | so_primarios | 25 | 0.03 | 1.5 |
 | narradores_modo | solo | 16 | 0.04 | 0.9 |
 | **narradores_modo** | **vence primarios_secundarios** (views/h) | | | |
-| titulo_triade | A | 31 | 0.05 | 1.3 |
-| titulo_triade | B | 38 | 0.04 | 0.7 |
+| titulo_triade | A | 34 | 0.04 | 2.0 |
+| titulo_triade | B | 40 | 0.04 | 0.7 |
 | **titulo_triade** | **vence A** (views/h) | | | |
 
 ## OBRAS: CONTINUAR OU NÃO (48 h+, 20+ views, 30%+ assistido)
-| This Useless Loser Swallowed God s Finge | inovare manhwa br | 2 | 0.6 | 22 | pouco dado |
-| He Can Make Any Weak Skill God Level by | InventoReact | 4 | — | 33 | pouco dado |
-| When a Top Player Gets 6 Unique Traits R | Fio da Meada | 17 | 0.8 | 37 | pouco dado |
-| He Can Upgrade Anything to Its Max Level | Manhwa Noturno | 1 | 99.9 | 41 | pouco dado |
-| No Mana  No Skills  He Knows What Hard W | Dorama Noturno | 1 | 100.0 | 42 | pouco dado |
-| While Everyone Else Can Have Only 1 Titl | Animescomia | 1 | — | 42 | pouco dado |
-| 17  He got into the Medieval Age   bega | Fio da Meada | 1 | — | 43 | pouco dado |
-| Orphan Reincarnated With God s Leveling | HistoriasEmFrames | 5 | — | 48 | pouco dado |
-| 6 He got into the Medieval Age   began | Fio da Meada | 35 | 1.4 | 49 | parar (assistem pouco) |
-| She Dumped Me for the  Hero  Now I Awake | InventoReact | 6 | — | 53 | pouco dado |
-| 4 He got into the Medieval Age   began | Fio da Meada | 34 | 0.5 | 57 | parar (assistem pouco) |
-| She Dumped Me Before  Reborn  I Want Her | InventoReact | 3 | 39.4 | 58 | pouco dado |
-| Boy is Reincarnated As The Weakest F Ran | InovareManhwaVerse | 2 | 0.9 | 58 | pouco dado |
-| He Accidentally Reincarnated As A Lv 1 S | InventoReact | 5 | 1.3 | 60 | pouco dado |
-| 16  He got into the Medieval Age   bega | Fio da Meada | 6 | 0.2 | 68 | pouco dado |
-| 10  He got into the Medieval Age   bega | Fio da Meada | 42 | 2.7 | 71 | parar (assistem pouco) |
-| 15  He got into the Medieval Age   bega | Fio da Meada | 14 | 0.4 | 75 | pouco dado |
-| POOR Guy Receives 90 BILLION To Get REVE | Manhwa Noturno | 12 | 0.3 | 77 | pouco dado |
-| 14  He got into the Medieval Age   bega | Fio da Meada | 62 | 2.6 | 82 | parar (assistem pouco) |
-| 13  He got into the Medieval Age   bega | Fio da Meada | 42 | 8.9 | 82 | parar (assistem pouco) |
-| 8 He got into the Medieval Age   began | Fio da Meada | 194 | 0.7 | 83 | parar (assistem pouco) |
-| No Mana Boy Becomes a Genius Alchemist i | InovareManhwaVerse | 5 | — | 85 | pouco dado |
-| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 8 | — | 88 | pouco dado |
-| He Destroys the Hunter Exam So Easily Th | CenaReact | 9 | — | 89 | pouco dado |
-| He Trains Hard After Ending Up in the Bo | ForjaReact | 0 | — | 90 | pouco dado |
-| He Spent 3000 Years in a Loop  Now Even | Manhwa Noturno | 4 | 0.1 | 92 | pouco dado |
-| He Acquires a New Skill Every Day    Man | Dorama Noturno | 1 | — | 98 | pouco dado |
-| His Ex Girlfriend wanted to Return when | InventoReact | 588 | 3.0 | 104 | parar (assistem pouco) |
+| Jujutsu Kaisen SEASON 1 RECAP    JJK Tim | Animescomia | 0 | — | 17 | pouco dado |
+| Reincarnated With 999x LEGENDARY Power E | ForjaReact | 0 | — | 18 | pouco dado |
+| Overpowered Boy Raised By Dragon Hides H | InventoReact | 1 | — | 19 | pouco dado |
+| When a Mercenary Is Reborn as a Genius f | InovareManhwaVerse | 1 | — | 20 | pouco dado |
+| He s the Only Genius Summoner with Creat | Fio da Meada | 2 | — | 25 | pouco dado |
+| This Useless Loser Swallowed God s Finge | inovare manhwa br | 4 | 0.6 | 30 | pouco dado |
+| He Can Make Any Weak Skill God Level by | InventoReact | 4 | 3.5 | 41 | pouco dado |
+| When a Top Player Gets 6 Unique Traits R | Fio da Meada | 27 | 0.8 | 45 | pouco dado |
+| He Can Upgrade Anything to Its Max Level | Manhwa Noturno | 1 | 99.9 | 49 | pouco dado |
+| No Mana  No Skills  He Knows What Hard W | Dorama Noturno | 1 | 100.0 | 50 | pouco dado |
+| While Everyone Else Can Have Only 1 Titl | Animescomia | 1 | — | 50 | pouco dado |
+| 17  He got into the Medieval Age   bega | Fio da Meada | 21 | — | 51 | pouco dado |
+| Orphan Reincarnated With God s Leveling | HistoriasEmFrames | 6 | — | 56 | pouco dado |
+| 6 He got into the Medieval Age   began | Fio da Meada | 39 | 1.4 | 57 | parar (assistem pouco) |
+| She Dumped Me for the  Hero  Now I Awake | InventoReact | 6 | 13.8 | 61 | pouco dado |
+| 4 He got into the Medieval Age   began | Fio da Meada | 41 | 0.5 | 65 | parar (assistem pouco) |
+| She Dumped Me Before  Reborn  I Want Her | InventoReact | 3 | 39.4 | 66 | pouco dado |
+| Boy is Reincarnated As The Weakest F Ran | InovareManhwaVerse | 3 | 0.9 | 66 | pouco dado |
+| He Accidentally Reincarnated As A Lv 1 S | InventoReact | 5 | 1.3 | 68 | pouco dado |
+| 16  He got into the Medieval Age   bega | Fio da Meada | 8 | 0.2 | 76 | pouco dado |
+| 10  He got into the Medieval Age   bega | Fio da Meada | 46 | 2.7 | 79 | parar (assistem pouco) |
+| 15  He got into the Medieval Age   bega | Fio da Meada | 18 | 0.4 | 83 | pouco dado |
+| POOR Guy Receives 90 BILLION To Get REVE | Manhwa Noturno | 12 | 0.3 | 85 | pouco dado |
+| 14  He got into the Medieval Age   bega | Fio da Meada | 82 | 2.6 | 90 | parar (assistem pouco) |
+| 13  He got into the Medieval Age   bega | Fio da Meada | 47 | 8.9 | 90 | parar (assistem pouco) |
+| 8 He got into the Medieval Age   began | Fio da Meada | 196 | 0.7 | 91 | parar (assistem pouco) |
+| No Mana Boy Becomes a Genius Alchemist i | InovareManhwaVerse | 6 | — | 93 | pouco dado |
+| They Betrayed Him  Now He Solo Levels Up | Curiosidades Noturnas | 8 | — | 96 | pouco dado |
 
 ## PEDIDOS E OPINIÕES DA DONA (valem mais que o júri; atender antes de qualquer outra coisa)
 - 30/10 00:20 | hipercool, longo | Hipercool está DESATIVADO de propósito (como o Historias em Frames, trocado pelo Claude Code Video); volta à produção na semana que vem, depois que terminar a postagem dos capítulos já feitos. Usar um projeto para melhorar o outro: o hipercool é o mais moderno — os personagens FALAM (ela pediu falas também nos longos) e tem muitos efeitos bons; os que não acrescentam muito tempo de render podem ir para os longos | aberto

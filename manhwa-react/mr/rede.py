@@ -187,6 +187,7 @@ def inventario(cfg, politica, so_aprovados=True):
         (itens if (not so_aprovados or politica.aprovado(it["mp4"], aprov)) else esperando).append(item)
     # 2. historias-em-frames (Shorts narrados feitos com IA, marca @InovareStories no canto)
     hdir = Path(_rc(cfg)["historias_dir"])
+    tres_d = []
     if hdir.exists():
         for pj in sorted(hdir.rglob("postar.json")):
             try:
@@ -204,7 +205,16 @@ def inventario(cfg, politica, so_aprovados=True):
                                                   "genero": d.get("genero", ""), "tags": (d.get("tags") or [])[:8]}}
             if d.get("canais"):  # 16/11 (Shorts 3D, kit3d): só nos canais listados no postar.json (curiosidades)
                 item["so_canais"] = list(d["canais"])
-            (itens if (not so_aprovados or politica.aprovado(mp4, aprov)) else esperando).append(item)
+            ok = not so_aprovados or politica.aprovado(mp4, aprov)
+            if d.get("origem") == "kit3d" and ok:
+                tres_d.append((mp4.stat().st_mtime, item))
+            (itens if ok else esperando).append(item)
+    # 16/11 dona ("postar a geladeira e os seguintes conforme forem saindo"): o 3D só tinha o InventoReact (Tech e
+    # Mistérios estão como 'parceiro' na rede) e perdia toda vaga pro Veo/react na nota do diretor. O 3D aprovado mais
+    # ANTIGO vira canal_fixo no 1º canal da lista dele (1 por rodada, na frente da fila). REDE_3D_FIXO=0 desliga.
+    if tres_d and __import__("os").environ.get("REDE_3D_FIXO", "1") != "0":
+        it3 = sorted(tres_d, key=lambda t: t[0])[0][1]
+        it3["dados"] = dict(it3["dados"], canal_fixo=(it3.get("so_canais") or ["inventoreact"])[0])
     # 3. Veo LIMPO (sem a marca @InovareStories e sem o slide de propaganda/WhatsApp que derrubou os canais antigos):
     #    so nos canais de canais_veo_limpo; o limpar_veo.py ja aprova os de estrutura padrao (os outros ficam em 'esperando')
     R = _rc(cfg)
@@ -1333,6 +1343,16 @@ def _agendar(cfg, simular=False, dias=1, limite=None, janela_h=None, recuperar=F
             no_dia = sum(1 for o in ocup[c["slug"]] if o.astimezone().date() == dia) \
                 - sum(1 for o in ocup_veo[c["slug"]] if o.astimezone().date() == dia)
             vagas[c["slug"]] = max(0, int(c.get("max_dia", 1)) - no_dia) if k < dias else 0
+        # 16/11 (REDE_3D_FIXO): o Short 3D tem vaga PRÓPRIA (+1/dia no canal dele), fora do max_dia do react — o
+        # InventoReact (max_dia 1) nunca tinha vaga pra ele. Só se nenhum 3D subiu nesse dia.
+        f3 = next((it for it in itens if it.get("dados", {}).get("origem") == "kit3d"
+                   and it["dados"].get("canal_fixo")), None)
+        if f3 and k < dias and f3["dados"]["canal_fixo"] in vagas:
+            ja3d = sum(1 for r in politica._ler_ledger()
+                       if Path(str(r.get("arquivo") or "")).name.startswith("3d-")
+                       and (politica._dt(r.get("ts")) or agora).date() == dia)
+            if not ja3d:
+                vagas[f3["dados"]["canal_fixo"]] += 1
         plano = []
         if any(vagas.values()):
             sem_veo = {s: [o for o in os_ if o not in ocup_veo[s]] for s, os_ in ocup.items()}

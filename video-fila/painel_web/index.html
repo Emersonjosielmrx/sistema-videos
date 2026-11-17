@@ -333,6 +333,31 @@ details.dobra > summary svg.lucide { color: hsl(var(--primary)); width: 17px; he
   <div class="glass card"><div id="geral-melhores"></div></div>
   <h2 class="tit"><i data-lucide="bar-chart-3"></i>Postagens por dia <span class="mini">(todas as redes)</span></h2>
   <div class="glass card"><div id="geral-chart"></div></div>
+  <!-- 16/11 dona: "views e horas dos longos separados dos Shorts, em gráfico; imagens e vídeos gerados (Flow x Gemini);
+       uso dos aparelhos no dia e na hora; vigia, melhoradores e fila" — /api/graficos -->
+  <!-- 16/11 dona: views dos Shorts já estão no "VIEWS ganhas" acima e Short não paga por hora — aqui só os LONGOS -->
+  <h2 class="tit"><i data-lucide="film"></i>LONGOS — views e horas assistidas por dia <span class="mini" id="gg-sub"></span></h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
+    <div class="glass card"><b>🎬 Longos — views</b><div id="gg-longo-v"></div></div>
+    <div class="glass card"><b>🎬 Longos — horas assistidas</b><div id="gg-longo-h"></div></div>
+  </div>
+  <h2 class="tit"><i data-lucide="image"></i>Imagens e vídeos gerados por dia <span class="mini">Flow x Gemini</span></h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
+    <div class="glass card"><b>🖼️ Imagens</b><div id="gg-img"></div></div>
+    <div class="glass card"><b>🎞️ Vídeos</b><div id="gg-vid"></div></div>
+  </div>
+  <h2 class="tit"><i data-lucide="cpu"></i>Uso dos aparelhos <span class="mini">% do tempo trabalhando</span></h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
+    <div class="glass card"><b>Na hora</b><div id="gg-maq-h"></div></div>
+    <div class="glass card"><b>No dia</b><div id="gg-maq-d"></div></div>
+  </div>
+  <h2 class="tit"><i data-lucide="shield-check"></i>Vigia, melhoradores e fila</h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px">
+    <div class="glass card"><b>🛡️ Vigilância — casos por dia</b><div id="gg-vig"></div></div>
+    <div class="glass card"><b>👁️ Vigia agente — rodadas</b><div id="gg-agente"></div></div>
+    <div class="glass card"><b>🧠 Melhoradores — mudanças por dia</b><div id="gg-melh"></div></div>
+    <div class="glass card"><b>📥 Fila do melhorador dos longos <span class="mini">(vídeos esperando análise)</span></b><div id="gg-fila"></div></div>
+  </div>
   <!-- 10/11 dona: "reunir as coisas principais na primeira; saúde dos serviços, sem navegador, proxy do celular e os
        Instagram das solares (prioridade)" — tudo de /api/resumo, cada cartão leva à aba completa -->
   <h2 class="tit"><i data-lucide="heart-pulse"></i>Está tudo funcionando?</h2>
@@ -995,7 +1020,7 @@ const GER_PER = [['1', 'Hoje'], ['7', '7 dias'], ['14', '14 dias'], ['30', '30 d
 function perGeral() { return lerLS('per:geral') || '14'; }
 function montarPerGeral() {
   const s = perGeral();
-  $('per-geral').innerHTML = GER_PER.map(([d, n]) => `<button class="btn${d === s ? ' on' : ''}" onclick="gravarLS('per:geral','${d}');montarPerGeral();graficosGeral()">${n}</button>`).join('');
+  $('per-geral').innerHTML = GER_PER.map(([d, n]) => `<button class="btn${d === s ? ' on' : ''}" onclick="gravarLS('per:geral','${d}');montarPerGeral();graficosGeral();graficosExtras()">${n}</button>`).join('');
 }
 function diasDe(n) { return [...Array(n)].map((_, i) => new Date(Date.now() - (n - 1 - i) * 864e5).toLocaleDateString('sv-SE')); }
 // 12/11 dona: cores por ranking de views. Os canais que mais têm views ganham as cores bem diferentes entre si;
@@ -1114,12 +1139,65 @@ async function atualizarViews() {
     if (window.lucide) lucide.createIcons(); toast('views atualizadas'); }, 90000);
 }
 
+// 16/11 dona: gráficos de longos x Shorts, mídia (Flow x Gemini), aparelhos e vigia — /api/graficos (cache 5 min)
+const MAQ_COR = {pc1: '#10b981', pc2: '#22d3ee', desktop: '#a78bfa', sti: '#fbbf24', hp: '#f87171', asus: '#60a5fa',
+  acer: '#e879f9', x200ma: '#f97316', s20: '#84cc16', s20ultra: '#14b8a6', g20: '#eab308', a3: '#94a3b8'};
+async function graficosExtras() {
+  const per = (lerLS('per:geral') || '14'), n = Math.max(7, Math.min(90, parseInt(per) || 14));
+  const d = await api('graficos?dias=' + n);
+  if (!d || d.erro) { $('gg-longo-v').innerHTML = erro(d || {erro: 'sem resposta'}); return; }
+  const ds = d.dias, v = d.views || {};
+  const so = (s) => { const o = {}; ds.forEach(x => { if (s && s[x] != null) o[x] = s[x]; }); return o; };
+  const dl = ds.filter(x => (v.longos_views || {})[x] != null || (v.shorts_views || {})[x] != null);
+  if (v.erro) { $('gg-longo-v').innerHTML = erro(v); }
+  else {
+    const dlo = ds.filter(x => (v.longos_views || {})[x] != null);
+    $('gg-sub').textContent = '· foto de hora em hora (histórico desde 13/11); horas = views × duração média de cada longo';
+    $('gg-longo-v').innerHTML = barras(dlo, {'views longos': so(v.longos_views)}, {'views longos': '#f59e0b'});
+    $('gg-longo-h').innerHTML = barras(dlo, {'horas longos': so(v.longos_horas)}, {'horas longos': '#ef4444'});
+  }
+  const m = d.midia || {};
+  if (m.erro) $('gg-img').innerHTML = erro(m);
+  else {
+    $('gg-img').innerHTML = barras(ds, {'Flow': so(m.flow_imagem), 'Gemini': so(m.gemini_imagem)}, {'Flow': '#3b82f6', 'Gemini': '#f472b6'});
+    $('gg-vid').innerHTML = barras(ds, {'Flow (Veo)': so(m.flow_video), 'Gemini': so(m.gemini_video)}, {'Flow (Veo)': '#3b82f6', 'Gemini': '#f472b6'});
+  }
+  const mq = d.maquinas || {};
+  if (mq.erro) $('gg-maq-h').innerHTML = erro(mq);
+  else {
+    // 16/11: linhas de 11 aparelhos embolavam — barra por aparelho, escala fixa 0–100%
+    const pctBar = (nm, v, cor) => `<div style="display:flex;align-items:center;gap:8px;margin:5px 0" title="${esc(nm)}: ${v}%">
+      <div style="width:80px;flex-shrink:0;font-size:12px">${esc(nm)}</div>
+      <div style="flex:1;min-width:0;background:hsl(220 15% 18%);border-radius:5px;height:16px"><div style="width:${Math.max(0, Math.min(100, v))}%;height:100%;border-radius:5px;background:${cor}"></div></div>
+      <div style="width:44px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">${v}%</div></div>`;
+    const hAgora = String(new Date().getHours()).padStart(2, '0'), hoje = ds[ds.length - 1];
+    const nomes = [...new Set([...Object.keys(mq.hora || {}), ...Object.keys(mq.dia || {})])].sort((a, b) =>
+      (((mq.dia[b] || {})[hoje]) || 0) - (((mq.dia[a] || {})[hoje]) || 0));
+    $('gg-maq-h').innerHTML = `<div class="mini" style="margin:4px 0 6px">última hora (${hAgora}h)</div>` +
+      nomes.map(nm => pctBar(nm, (mq.hora[nm] || {})[hAgora] ?? 0, MAQ_COR[nm] || '#10b981')).join('');
+    $('gg-maq-d').innerHTML = `<div class="mini" style="margin:4px 0 6px">hoje inteiro (desde 00h)</div>` +
+      nomes.map(nm => pctBar(nm, (mq.dia[nm] || {})[hoje] ?? 0, MAQ_COR[nm] || '#10b981')).join('');
+  }
+  const vg = d.vigia || {};
+  if (vg.erro) $('gg-vig').innerHTML = erro(vg);
+  else {
+    const vs = {}; Object.entries(vg.vigilancia || {}).forEach(([k, s]) => { vs[k] = so(s); });
+    $('gg-vig').innerHTML = barras(ds, vs, {'consertou': '#10b981', 'problema real': '#f59e0b', 'abriu caso': '#60a5fa', 'falso alarme': '#a3a3a3', 'falhou': '#ef4444', 'sem IA/token': '#a78bfa'});
+    $('gg-agente').innerHTML = barras(ds, {'OK': so((vg.agente || {}).OK), 'REVISAR': so((vg.agente || {}).REVISAR)}, {'OK': '#10b981', 'REVISAR': '#f59e0b'});
+    const ml = {}; Object.entries(vg.melhoradores || {}).forEach(([k, s]) => { ml['melhorador ' + k] = so(s); });
+    $('gg-melh').innerHTML = barras(ds, ml, {'melhorador central': '#22d3ee', 'melhorador longos': '#e879f9'});
+    const fd = ds.filter(x => (vg.fila_melhorador || {})[x] != null);
+    $('gg-fila').innerHTML = fd.length ? grafLinha(fd.map(x => x.slice(8, 10) + '/' + x.slice(5, 7)), {'esperando análise': fd.map(x => vg.fila_melhorador[x])}, {'esperando análise': '#f59e0b'})
+      : '<div class="vazio">histórico começou hoje (16/11) — os pontos aparecem a cada hora</div>';
+  }
+}
+
 // ───────────────────────── visão geral ─────────────────────────
 let G = null, POST14 = null;
 async function loadGeral() {
   // 11/11: os gráficos e o ranking não esperam o kanban/cobertura (lentos logo depois de religar o painel)
   // gráficos: na 1ª vez e a cada 5 min (o loadGeral roda de 30 em 30 s; redesenhar tudo a cada 30 s piscava a tela)
-  if (!$('per-geral').innerHTML || Date.now() - (window._gerT || 0) > 300000) { window._gerT = Date.now(); montarPerGeral(); graficosGeral(); loadRankingGeral(); }
+  if (!$('per-geral').innerHTML || Date.now() - (window._gerT || 0) > 300000) { window._gerT = Date.now(); montarPerGeral(); graficosGeral(); loadRankingGeral(); graficosExtras(); }
   loadResumoSaude();
   const [d, p, v1, v2, cob, kb, mh] = await Promise.all([api('geral'), POST14 ? Promise.resolve(POST14) : api('postagens?dias=14'),
     api('canais_views?dias=1'), api('canais_views?dias=2'), api('cobertura'), api('kanban'), api('views_mesma_hora')]);

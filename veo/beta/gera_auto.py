@@ -821,9 +821,58 @@ def _gerar_gemini(prompt, out_path, image, aspect, duration, log):
     return None
 
 
+def _gerar_celular(prompt, out_path, image, aspect, duration, log):
+    """16/11 dona ("já pode usar os celulares pra gerar vídeo"): 2º do vídeo = app Gemini do celular (S20 Ultra), via
+    D:\\projeto celular sub controle\\celular_midia.py. Vem ANTES do Flow porque o vídeo do Flow está quebrado em todas as
+    máquinas desde 14/11. Só sem foto inicial (o app não recebe foto pelo adb) e 9:16. Corta na duração pedida (o app
+    entrega 10 s; o robô valida 8 s ±1). Não gasta crédito do Flow (imprime GEMINI_VIDEO_OK). CELULAR_VIDEO=0 desliga."""
+    script = r"D:\projeto celular sub controle\celular_midia.py"
+    if image or aspect != "9:16" or os.environ.get("CELULAR_VIDEO", "1") == "0" or not os.path.exists(script):
+        return None
+    py = r"C:\Users\Haylla\AppData\Local\Programs\Python\Python313\python.exe"
+    import subprocess
+    import time as _t
+    try:
+        dur = float(re.sub(r"[^\d.]", "", str(duration)) or 8)
+    except ValueError:
+        dur = 8.0
+    bruto = out_path + ".celular.mp4"
+    t0 = _t.time()
+    try:
+        r = subprocess.run([py, "-X", "utf8", script, "video", prompt, bruto], capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=900, creationflags=0x08000000)
+    except Exception as e:  # noqa: BLE001
+        log(f"[celular] nao rodou ({type(e).__name__}) -> Flow")
+        return None
+    if not (r.returncode == 0 and os.path.exists(bruto) and os.path.getsize(bruto) > 100000):
+        log(f"[celular] nao gerou em {_t.time() - t0:.0f}s ({(r.stdout or '').strip()[-160:]}) -> Flow")
+        return None
+    sys.path.insert(0, r"D:\gemini-argo")
+    try:
+        import gemini_midia_http as gm
+        from pathlib import Path as _P
+        ok = gm._cortar(_P(bruto), _P(out_path), dur)
+    except Exception as e:  # noqa: BLE001
+        log(f"[celular] corte falhou ({type(e).__name__}) — vai o vídeo de 10 s")
+        ok = False
+    if not ok or not os.path.exists(out_path):
+        os.replace(bruto, out_path)
+    else:
+        try:
+            os.remove(bruto)
+        except OSError:
+            pass
+    log(f"[celular] video gerado no celular em {_t.time() - t0:.0f}s -> {out_path}")
+    print("GEMINI_VIDEO_OK", flush=True)  # não desconta crédito do Flow
+    return out_path
+
+
 def gerar(prompt, out_path, image=None, aspect="9:16", modelo="Veo 3.1 - Fast",
           duration="8S", log=print):
     feito = _gerar_gemini(prompt, out_path, image, aspect, duration, log)
+    if feito:
+        return feito
+    feito = _gerar_celular(prompt, out_path, image, aspect, duration, log)  # roda também no modo "só Gemini" (16/11)
     if feito:
         return feito
     if os.environ.get("VEO_SO_GEMINI") == "1":

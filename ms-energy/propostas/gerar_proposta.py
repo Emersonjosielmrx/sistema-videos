@@ -79,7 +79,9 @@ for _chave, _n, _ger, _valor in [("iedson1600", 20, 1600, 34900.00), ("iedson180
                 "Acompanhamento da geração pelo aplicativo do inversor."])
 # Keyla 16/11: 500 kWh/mes -> 6 x 625 W = 3,75 kWp (mesma base: 7,5 kWp = 1.000 kWh)
 VERSOES["keyla"] = dict(
-    n=6, ger_media=500, consumo=500, valor=13900.00, num="P26-1116",
+    n=6, ger_media=500, consumo=500, valor=17900.00, num="P26-1116",
+    extras=[("AR-CONDICIONADO SPLIT INVERTER 12.000 BTUs", "Instalação inclusa · tecnologia inverter, gasta menos energia", "PC", 1, "ar"),
+            ("POSTE DE ALUMÍNIO PARA PADRÃO DE ENTRADA", "Leve, não enferruja · instalação inclusa", "PC", 1, "poste")],
     saida="Proposta MS Energy - Keyla Mayra dos Santos - 500 kWh - 6x625W Solis 3k.pdf",
     cliente="KEYLA MAYRA DOS SANTOS", cliente_doc="CPF: 550.197.222-00", cliente_end="",
     ligacao="Monofásico", grupo="Grupo B1 – Residencial", minimo=30,
@@ -451,7 +453,20 @@ produtos = [(PAINEL_SVG, f"PAINEL SOLAR {W_PAINEL} W MONOCRISTALINO N-TYPE (TOPC
 produtos += [(inv_svg(m), n, d, "PC", q) for q, n, d, m in V["inversores"]]
 img_estr = V["estrutura"][2] if len(V["estrutura"]) > 2 else "prod_estrutura.jpg"
 produtos += [(f'<img src="{b64(img_estr)}">', V["estrutura"][0], V["estrutura"][1], "KIT", -(-N_PAINEIS // 4))]
-produtos += [(protecao_svg(), n, d, u, q) for n, d, u, q in V.get("extras", [])]
+def ar_svg():
+    return ('<svg viewBox="0 0 80 80" width="64" height="64"><rect x="6" y="22" width="68" height="28" rx="6" fill="#f4f6f8" stroke="#9aa5b1"/>'
+            '<rect x="12" y="40" width="56" height="4" rx="2" fill="#123b57"/><circle cx="62" cy="30" r="2.5" fill="#f2a900"/>'
+            '<path d="M22 56c2 4-2 6 0 10M40 56c2 4-2 6 0 10M58 56c2 4-2 6 0 10" stroke="#2a76a8" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>')
+
+
+def poste_svg():
+    return ('<svg viewBox="0 0 80 80" width="64" height="64"><rect x="36" y="8" width="8" height="68" rx="2" fill="#c5ccd3" stroke="#9aa5b1"/>'
+            '<rect x="22" y="14" width="36" height="5" rx="2" fill="#9aa5b1"/><rect x="46" y="36" width="16" height="20" rx="2" fill="#123b57"/>'
+            '<circle cx="54" cy="44" r="3" fill="#f2a900"/><rect x="26" y="74" width="28" height="4" rx="1" fill="#52606d"/></svg>')
+
+
+_SVGS = {"ar": ar_svg, "poste": poste_svg}
+produtos += [(_SVGS.get(e[4], protecao_svg)() if len(e) > 4 else protecao_svg(), *e[:4]) for e in V.get("extras", [])]
 produtos += [
     (f'<img src="{b64("prod_cabo_preto.jpg")}">', "CABO SOLAR NEXANS 0,6/1 kV PRETO", "Proteção UV para uso externo", "M", V["cabo_m"]),
     (f'<img src="{b64("prod_cabo_verm.jpg")}">', "CABO SOLAR NEXANS 0,6/1 kV VERMELHO", "Proteção UV para uso externo", "M", V["cabo_m"]),
@@ -547,6 +562,8 @@ etapas = [("Visita técnica", "Medição do local e confirmação do projeto"), 
           ("Ligação", "Vistoria, troca do medidor e geração")]
 linha_et = "".join(f'<div class="et"><div class="num">{i+1}</div><b>{t}</b><span>{d}</span></div>' for i, (t, d) in enumerate(etapas))
 nao_cob = ["Obras civis (parede, reboco etc.)", "Adequação do padrão de entrada de energia", "Taxa mínima da concessionária"]
+if any("POSTE" in e[0] for e in V.get("extras", [])):
+    nao_cob[1] = "Outras adequações do padrão de entrada (o poste de alumínio já está incluso)"
 if V.get("solo"):
     nao_cob[0] = "Limpeza, terraplenagem e cerca do terreno"
 if KWP > 75:
@@ -643,7 +660,8 @@ figcaption {{ position:absolute; left:2mm; bottom:2mm; background:rgba(18,59,87,
 .lista div {{ display:flex; gap:3mm; align-items:flex-start; padding:2mm 0; border-bottom:1px dashed {GRADE}; font-size:9.6pt }}
 .lista svg {{ flex:none }}
 /* produtos */
-.prod td {{ padding:2mm }} .pimg {{ width:26mm }} .pimg img {{ max-width:22mm; max-height:17mm; border-radius:4px }}
+.prod td {{ padding:{'1.2mm 2mm' if len(V.get('extras', [])) > 1 else '2mm'} }} .pimg {{ width:26mm }} .pimg img {{ max-width:22mm; max-height:{'13mm' if len(V.get('extras', [])) > 1 else '17mm'}; border-radius:4px }}
+{'.prod .pimg svg {{ width:48px; height:48px }}' if len(V.get('extras', [])) > 1 else ''}
 td.pn {{ text-align:left }} td.q {{ font-size:13pt; font-weight:700; color:{AZUL} }}
 .preco {{ margin-top:6mm; display:flex; justify-content:flex-end }}
 .preco div {{ background:linear-gradient(135deg,{AZUL},{AZUL2}); color:#fff; border-radius:10px; padding:5mm 9mm; text-align:right; border-bottom:4px solid {AMARELO} }}

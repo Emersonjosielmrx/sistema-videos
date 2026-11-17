@@ -87,9 +87,33 @@ def formato_mais_proximo(aspect):
     return min(FORMATOS, key=lambda f: abs(FORMATOS[f] - r))
 
 
+CELULAR = Path(r"D:\projeto celular sub controle\celular_midia.py")
+
+
+def _celular(prompt, saida, formato, log, refs=(), timeout=420):
+    """16/11 dona ("já pode usar os celulares pra gerar imagem"): 4º degrau = app Gemini num celular livre
+    (celular_midia.py). Só sem referência (o app não recebe foto pelo adb) e só 9:16 (o pedido do app é vertical).
+    CELULAR_IMAGEM=0 desliga. Path ou None, nunca levanta."""
+    if refs or formato != "9:16" or os.environ.get("CELULAR_IMAGEM", "1") == "0" or not CELULAR.exists():
+        return None
+    t0 = time.time()
+    try:
+        r = subprocess.run([str(PY_GEMINI), "-X", "utf8", str(CELULAR), "imagem", prompt, str(saida)],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout,
+                           creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+    except Exception as e:  # noqa: BLE001
+        log(f"[celular] não rodou ({type(e).__name__})")
+        return None
+    if r.returncode == 0 and saida.exists() and saida.stat().st_size > 10_000:
+        log(f"[celular] ok {saida.name} em {time.time() - t0:.0f}s ({(r.stdout or '').strip().splitlines()[-2][:90]})")
+        return saida
+    log(f"[celular] não gerou em {time.time() - t0:.0f}s ({(r.stdout or '').strip()[-160:]})")
+    return None
+
+
 def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log=None):
     """Path da imagem salva em `saida` (png/jpg pela extensão) ou None. Nunca levanta.
-    Ordem (14/11): Gemini sem navegador -> Flow HTTP -> Flow tela."""
+    Ordem (14/11): Gemini sem navegador -> Flow HTTP -> Flow tela -> (16/11) celular."""
     log = log or (lambda m: None)
     saida = Path(saida)
     saida.parent.mkdir(parents=True, exist_ok=True)
@@ -97,7 +121,7 @@ def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log
     if feito:
         return feito
     if not disponivel():
-        return None
+        return _celular(prompt, saida, formato_mais_proximo(formato), log, refs=refs)
     cmd = [str(PY), str(SCRIPT), prompt, str(saida), "--formato", formato_mais_proximo(formato),
            "--max-contas", str(max_contas)]
     if refs:
@@ -109,11 +133,11 @@ def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log
                            env={**os.environ, "GEMINI_JA_TENTOU": "1"})  # o gera_imagem não repete o Gemini
     except subprocess.TimeoutExpired:
         _pausar(f"passou de {timeout}s")
-        log(f"[flow] passou de {timeout}s — Flow em pausa 30 min, segue o gerador antigo")
-        return None
+        log(f"[flow] passou de {timeout}s — Flow em pausa 30 min, tenta o celular")
+        return _celular(prompt, saida, formato_mais_proximo(formato), log, refs=refs)
     except Exception as e:  # noqa: BLE001
         log(f"[flow] não rodou: {e}")
-        return None
+        return _celular(prompt, saida, formato_mais_proximo(formato), log, refs=refs)
     if r.returncode == 0 and saida.exists() and saida.stat().st_size > 10_000:
         log(f"[flow] ok {saida.name} em {time.time() - t0:.0f}s")
         return saida
@@ -121,4 +145,6 @@ def gerar(prompt, saida, formato="9:16", refs=(), timeout=780, max_contas=3, log
     if "recusou" not in saida_txt:  # recusa por política é do pedido, não do Flow: não pausa
         _pausar(saida_txt.strip().splitlines()[-1] if saida_txt.strip() else "falhou")
     log(f"[flow] não gerou em {time.time() - t0:.0f}s ({(saida_txt.strip().splitlines() or ['?'])[-1][:160]})")
-    return None
+    if "recusou" in saida_txt:  # recusa por política: o celular recusaria igual
+        return None
+    return _celular(prompt, saida, formato_mais_proximo(formato), log, refs=refs)

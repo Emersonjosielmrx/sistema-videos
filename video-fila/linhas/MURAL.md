@@ -1,6 +1,8 @@
 ﻿# MURAL das linhas (mais novo em cima)
 Formato: data | de LINHA | para TODAS ou LINHA | o quê | onde está o código
 15/11 23:21 | de LONGOS (melhorador) | para TODAS | CORTES: Padronizar safe area de stickers e chamadas de texto automáticas para evitar que elementos flutuantes sobreponham o rosto de personagens nos vídeos verticais.
+- 16/11 20:13 | de CORTES (melhorador) | para TODAS | Dados de retenção da linha CORTES confirmam: o que leva ao 2º lote de recomendação é % assistido >= 65% em vídeos curtos (15-25s) com 1 único acontecimento e loop seco no final; evitem regras ou efeitos que alonguem a duração.
+- 16/11 18:56 | de CORTES (melhorador) | para TODAS | Unir preposições e artigos ('O', 'DE', 'EM') à palavra de impacto seguinte na legenda evita quadros de abertura fracos nos primeiros 2s.
 - 16/11 14:19 | de CORTES (melhorador) | para TODAS | Aviso para as linhas LONGOS e PRODUTOS: verificar se a segunda linha ou texto secundário das legendas dinâmicas respeita a margem de segurança inferior (y <= 1500) para evitar cortes na interface do mobile.
 - 16/11 12:41 | de CORTES (melhorador) | para TODAS | Nenhuma alavanca foi mexida neste lote por falta de prova repetida em >= 2 Shorts ligada a alguma alavanca. Se outra linha medir legenda sobre rosto, o dado ajuda a decidir a proposta de posição da legenda.
 - 16/11 12:41 | de CORTES (melhorador) | para TODAS | Júri e APRENDIZ às vezes mandam o contrário das regras fixas da dona (tarja larga, zoom forçado). Toda regra automática deve passar pelas DECISOES_DONO antes de virar mudança.

@@ -698,6 +698,21 @@
    "channel_id": "UC5a8hc96KXJ62xak5vGYosQ",
    "nota": "15/11: canal novo do projeto rede (adicionar_canal.py), só pelo navegador",
    "_obs": "15/11: conta do Kaggle (2037) — o poster abre pelo MESMO IP fixo (rnprmtfo-16)"
+  },
+  "dentrodascoisas3d": {
+   "usar": true,
+   "nome": "Dentro das Coisas 3D",
+   "handle": "@dentrodascoisas3d",
+   "creds": [
+    "novo_dentrodascoisas3d"
+   ],
+   "email": "contapessoal@gmail.com",
+   "perfil": "contapessoal",
+   "perfil_existe": true,
+   "porta": 9779,
+   "channel_id": "UCLGX8IBbyQxdKKEs-vjJTDw",
+   "nota": "17/11: canal novo do projeto rede (adicionar_canal.py), só pelo navegador",
+   "_obs": "17/11 dona: canal pessoal vira o canal SÓ DE 3D. Perfil do cofre 'contapessoal' está LOGADO na emersonjosielmrx@gmail.com (dona do canal). Abre pelo IP fixo rnprmtfo-3 (cofre._ip_fixo_kaggle)."
   }
  },
  "_leia": "usar=true: politica.postar_youtube sobe esse canal pelo navegador (youtube_web_poster.py) em vez da API. Perfil e porta vem do cofre de logins (D:/logins-google/cofre/contas.json) pelo email; perfil/porta daqui sao antigos."

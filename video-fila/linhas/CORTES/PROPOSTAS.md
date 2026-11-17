@@ -1818,3 +1818,43 @@
 - prova: Três Shorts do lote perderam nota de movimento/retenção por tomadas com mudança de imagem abaixo de 20%: sem-obra-aa91d4 (q11 com 18.5%), sem-obra-1fada7 (q02 com 15.1%) e sem-obra-3a43e4 (q04 com 16.7%).
 - onde: Pipeline de vídeo / filtro FFmpeg de reenquadramento e zoom progressivo por cena
 - como testar: Rodar o medidor de movimento por cena nos 3 Shorts após aplicar punch-in progressivo nos trechos parados e confirmar que todas as tomadas ultrapassam 20% de mudança útil.
+
+## 16/11 16:41 PROPOSTA [CERTEZA] Travar zona segura de overlays superiores, legenda dinâmica e evitar empilhamento de palavras no loop (gemini-4-argon)
+- prova: Em `surubim_cap1_20261116` (q11/q12: selo 'ALERTA PERIGO' colado em y=150 competindo com @ e legenda; q18: palavra 'DESCOBRE' duplicada empilhada), `sem-obra-119c24_cap1_20261114` (q04: 'ALERTA MONSTRENGO NA AMAZÔNIA' com duas tarjas sobrepostas) e `sem-obra-f4a41c_cap1_20261116` (q07: legenda cobrindo rosto/olhos; q03: 'PORTA' isolada no topo).
+- onde: Renderizador de legendas ASS/FFmpeg e gerador de overlays de topo na pipeline de cortes
+- como testar: Renderizar novamente `surubim_cap1_20261116` e `sem-obra-f4a41c_cap1_20261116` garantindo y fixo da legenda na zona segura inferior (1200..1500), limpando eventos ASS no timestamp final antes do loop e bloqueando segundo overlay superior quando já houver tarja de topo ativa.
+
+## 16/11 16:41 PROPOSTA [CERTEZA] Forçar zoom/punch-in progressivo ou corte em tomadas com movimento medido baixo (< 16%) (gemini-4-argon)
+- prova: Em `sem-obra-f4a41c_cap1_20261116` (q07, cena 3 com 3.9% de movimento no clímax do guarda) e `surubim_cap1_20261116` (q07, cena 3 com 15.6% em pôr do sol parado durante 'GENTALHA!' e q16 com céu estático).
+- onde: Módulo de seleção de cenas / filtro de movimento e ken-burns no FFmpeg
+- como testar: Aplicar zoompan dinâmico (>20% de variação) automaticamente quando o detector de movimento da cena medir < 16% ou duração parada > 2.0s, e validar se o movimento medido de `sem-obra-f4a41c_cap1_20261116` q07 sobe acima de 20%.
+
+## 16/11 18:56 PROPOSTA [CERTEZA] Agrupar preposições e artigos curtos à palavra seguinte na legenda palavra a palavra (gemini-4-argon)
+- prova: bleach_cap1_20261116 (q01 isola 'O' no gancho 0-2s e q04 isola 'DE' pequeno acima de 'PEDINTE') e sem-obra-418f6f_cap1_20261116 (q08 isola palavra sem contexto).
+- onde: Gerador de legenda ASS / tokenizador de palavras da locução em D:\video-fila\linhas\CORTES
+- como testar: Impedir que tokens com <= 2 caracteres ('O', 'A', 'DE', 'DO', 'DA', 'EM', 'UM') formem evento ASS isolado, mesclando-os com a palavra principal seguinte, e regerar a legenda de bleach_cap1_20261116 conferindo q01 e q04.
+
+## 16/11 18:56 PROPOSTA [GOSTO] Forçar zoom/pan progressivo (Ken Burns) em takes com movimento medido abaixo de 16% (gemini-4-argon)
+- prova: 3 de 4 Shorts do lote tiveram cenas com movimento entre 10.6% e 14.9%: sem-obra-418f6f_cap1_20261116 (q04: 14.9%), sem-obra-e48ecc_cap1_20261114 (q07: 10.6%) e bleach_cap1_20261116 (q07: 14.4%, q13: 13.4%).
+- onde: Filtro FFmpeg de montagem/reenquadramento de cenas da linha CORTES
+- como testar: Aplicar zoom-in contínuo (ex.: 1.00 -> 1.12) ou corte intermediário quando o movimento medido entre 20% e 80% da tomada ficar abaixo de 16%, e reavaliar q07/q13 de bleach_cap1_20261116.
+
+## 16/11 20:13 PROPOSTA [CERTEZA] Expandir detecção e margem vertical do delogo/tarja para cobrir legendas de 2 linhas e textos secundários da fonte (gemini-4-argon)
+- prova: Em sem-obra-d7aa9f_cap1_20261116 (q01.jpg, q03.jpg, q04.jpg, q06.jpg, q10.jpg) sobraram textos em inglês ('POWER SOURCE', 'chest cavity of 12-', 'PATIENT IN JULY OF 2024') fora da área coberta; em sem-obra-be5dab_cap1_20261116 (q03.jpg, q11.jpg) o texto original inferior ('po[si]ções', 'ansi...ente') ficou apenas parcialmente coberto pela máscara/tarja.
+- onde: Módulo de detecção de hardsub / cálculo de bounding box do delogo e posicionamento da legenda ASS no pipeline de renderização
+- como testar: Rodar a detecção de caixa de letras em 720p nos fontes de d7aa9f e be5dab e gerar folha de quadros verificando 100% de oclusão das linhas originais inferiores sem colidir com a legenda dinâmica.
+
+## 16/11 20:13 PROPOSTA [GOSTO] Reforçar contorno preto (outline) e posicionar legenda dinâmica estritamente na zona segura centralizada (gemini-4-argon)
+- prova: Em sem-obra-83d7ff_cap1_20261114 (q03.jpg 'PORCO' em verde escuro sobre fundo escuro próxima da borda inferior; q14.jpg 'CHEIRO' quase ilegível no escuro) e sem-obra-321838_cap1_20261114 (q02.jpg 'PIAU' deslocada acima/esquerda; q08.jpg 'ESSA' sem contraste na sombra), a variação de cor escura e posição fora do eixo central reduziu a legibilidade.
+- onde: Gerador de estilos ASS da legenda palavra a palavra (definição de PrimaryColour, Outline e alinhamento/margem vertical)
+- como testar: Renderizar trecho de 5s de 83d7ff e 321838 fixando cores de alto contraste (amarelo #FFFF00 / branco #FFFFFF com borda preta 8-10px) e alinhamento centralizado na faixa y=1200..1500.
+
+## 16/11 21:41 PROPOSTA [CERTEZA] Remover ou reposicionar card de 'ALERTA' no topo e ampliar cobertura da legenda nativa inferior (gemini-4-argon)
+- prova: Em sem-obra-54aa9d_cap1_20261116 (q05.jpg, 'ALERTA MONSTR') e sem-obra-ee912c_cap1_20261116 (q11.jpg e q13.jpg, 'ALERTA PERIGO'), o elemento gráfico de alerta no topo polui a zona segura superior e compete com a cena; além disso, nos mesmos dois Shorts (sem-obra-54aa9d_cap1_20261116 q04.jpg 'enço' e sem-obra-ee912c_cap1_20261116 q02.jpg/q05.jpg 'Al...ar' / 'é só barulhento'), sobram fragmentos de legenda inferior cortada/parcialmente visível.
+- onde: Pipeline de renderização de overlays/stickers de alerta e detecção de caixa de hardsub inferior (cortes_pipeline / delogo)
+- como testar: Reprocessar sem-obra-54aa9d_cap1_20261116 e sem-obra-ee912c_cap1_20261116 sem o sticker de alerta superior e com margem extra no bbox do delogo inferior, conferindo os quadros q02, q04, q05 e q11.
+
+## 16/11 23:40 PROPOSTA [CERTEZA] Cortar telas finais promocionais e cartelas estáticas da fonte antes de renderizar o Short (gemini-4-argon)
+- prova: the-greatest-estate-developer_cap1_20261114 (q13.jpg, q16.jpg, q17.jpg) manteve a tela final promocional do canal de origem ('Cinefy / CAPÍTULO NOVO / A HISTORIA COMECA DE GRAÇA / OU SE VAI ESPERAR'), gerando sobreposição grave com a nossa legenda ('CINZAS') e derrubando o movimento para 9.0% no final.
+- onde: pipeline de corte de vídeo / detecção de fim de cena útil (cortes_pipeline / detector de outro)
+- como testar: Rodar o detector de cenas finais/estáticas em the-greatest-estate-developer_cap1_20261114 e verificar se os últimos segundos com cartela promocional fixa ('Cinefy') são podados antes de alinhar o loop final do roteiro.
