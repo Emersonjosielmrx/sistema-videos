@@ -254,3 +254,19 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_0718.md`
 - [INÉDITO] github.com/PhantomAnas/Slideshow-Maker — ★0, push 2026-11-04, MIT — Photos or image URLs to polished slideshow videos: Ken Burns, transitions, blur fill, logo, end card, music. PySide6 + FFmpeg.
 - [INÉDITO] github.com/trancongtien406/ai-shorts-pipeline — ★0, push 2026-11-14, MIT — Topic → faceless vertical short (YouTube Shorts/TikTok): LLM script, free edge-tts voice, Ken Burns motion, word-by-word captions, FFmpeg re
+
+## [ ] PENDENTE — 2026-11-18 10:14 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1006.md`
+- [INÉDITO] github.com/Sayandeep1013/PanelWeaver — ★2, push 2026-10-24, MIT — Manga/manhwa-to-video pipeline — converts static panels and pages into narrated video, end to end.
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 10:28 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1016.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 10:36 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1032.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 11:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1053.md`
+- [INÉDITO] github.com/pr0h0/OpenManga — ★20, push 2026-11-17, Apache-2.0 — Self-hosted studio that turns a story into a consistent AI-illustrated comic, webtoon or narrated video. Bring your own provider key, local 

@@ -2,66 +2,6 @@
  "_leia": "09/11 dona: 'prioridade aos vídeos que dão mais visualizações, independente do canal' + autorização dos canais novos (8 escolhidos pela dona 09/11 21h30 (lista colada), pesquisa de 09/11, conferida na página). O alimentador (cliente.py alimentar) pega DESTA lista primeiro, do mais visto pro menos, 1 por vez; vídeo já feito/enviado é pulado; lista vazia = só o canal normal. FONTES_PRIORIDADE=0 desliga. tipo: anime | manhwa.",
  "videos": [
   {
-   "id": "mHEDdMTTUWs",
-   "canal": "OverPowered Main Character (OPMC) and Isekai",
-   "views": 368958,
-   "min": 161,
-   "titulo": "FULL His Girlfriend Cheated On Him, But He Got An Ingenious Ultra Magic Cheat System - Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-18",
-   "parecido": true
-  },
-  {
-   "id": "Y3pj6ulP9z8",
-   "canal": "Manga King",
-   "views": 284885,
-   "min": 61,
-   "titulo": "His GF Betrayed Him For An S-Rank Party Not Knowing He Can One-Shot Gods! - Manga Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-18",
-   "parecido": true
-  },
-  {
-   "id": "QiXfC44V364",
-   "canal": "Jinwoo Recap",
-   "views": 258024,
-   "min": 92,
-   "titulo": "After My GF Betrayed Me for Her Assistant, the Chairman’s Granddaughter Chased Me - Jinwoo Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-18",
-   "parecido": true
-  },
-  {
-   "id": "qWr_xHqLZ5I",
-   "canal": "Popi Recaps",
-   "views": 170446,
-   "min": 81,
-   "titulo": "His Childhood Friend Kicks Him Out of The Party... And Regrets It | Manga Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_ia_agora_h3n",
-   "tema": "ex_arrependida",
-   "garimpado": "2026-11-18",
-   "parecido": true
-  },
-  {
-   "id": "NeWiQUR_mNc",
-   "canal": "Tobs Manhwa",
-   "views": 206793,
-   "min": 154,
-   "titulo": "ONLY He Can Acess His Storage And Gets S-RANK Items On Day 1 | Manhwa Recap",
-   "tipo": "manhwa",
-   "canal_destino": "novo_codigo_inteligente_n7j",
-   "tema": "loot_box_sistema",
-   "garimpado": "2026-11-18",
-   "parecido": true
-  },
-  {
    "id": "Bb3C8_mEpUE",
    "canal": "Mamoru Manhwa",
    "views": 1189622,
@@ -269,6 +209,66 @@
    "canal_destino": "novo_codigo_inteligente_n7j",
    "tema": "medieval_tecnologia",
    "garimpado": "2026-11-12",
+   "parecido": true
+  },
+  {
+   "id": "NeWiQUR_mNc",
+   "canal": "Tobs Manhwa",
+   "views": 206793,
+   "min": 154,
+   "titulo": "ONLY He Can Acess His Storage And Gets S-RANK Items On Day 1 | Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_codigo_inteligente_n7j",
+   "tema": "loot_box_sistema",
+   "garimpado": "2026-11-18",
+   "parecido": true
+  },
+  {
+   "id": "mHEDdMTTUWs",
+   "canal": "OverPowered Main Character (OPMC) and Isekai",
+   "views": 368958,
+   "min": 161,
+   "titulo": "FULL His Girlfriend Cheated On Him, But He Got An Ingenious Ultra Magic Cheat System - Manhwa Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-18",
+   "parecido": true
+  },
+  {
+   "id": "Y3pj6ulP9z8",
+   "canal": "Manga King",
+   "views": 284885,
+   "min": 61,
+   "titulo": "His GF Betrayed Him For An S-Rank Party Not Knowing He Can One-Shot Gods! - Manga Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-18",
+   "parecido": true
+  },
+  {
+   "id": "QiXfC44V364",
+   "canal": "Jinwoo Recap",
+   "views": 258024,
+   "min": 92,
+   "titulo": "After My GF Betrayed Me for Her Assistant, the Chairman’s Granddaughter Chased Me - Jinwoo Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-18",
+   "parecido": true
+  },
+  {
+   "id": "qWr_xHqLZ5I",
+   "canal": "Popi Recaps",
+   "views": 170446,
+   "min": 81,
+   "titulo": "His Childhood Friend Kicks Him Out of The Party... And Regrets It | Manga Recap",
+   "tipo": "manhwa",
+   "canal_destino": "novo_ia_agora_h3n",
+   "tema": "ex_arrependida",
+   "garimpado": "2026-11-18",
    "parecido": true
   },
   {
@@ -836,6 +836,24 @@
    "garimpado": "2026-11-17"
   },
   {
+   "id": "EnL8-H2581A",
+   "tipo": "anime",
+   "canal": "AniQuest",
+   "views": 568970,
+   "min": 130,
+   "titulo": "After Unlocking Every Weakest Skill, But He Fuses Them into Epic Power | Anime Recap",
+   "garimpado": "2026-11-18"
+  },
+  {
+   "id": "0P-5CcXYOvk",
+   "tipo": "manhwa",
+   "canal": "Burrer Recap",
+   "views": 349899,
+   "min": 62,
+   "titulo": "He Paid Me $8M To Leave His Daughter, So I Did | Manhwa Recap",
+   "garimpado": "2026-11-18"
+  },
+  {
    "id": "_GRXRlk-1v8",
    "canal": "Torno Petruska",
    "views": 253611,
@@ -1166,24 +1184,6 @@
    "min": 62,
    "titulo": "(6) He got into the Medieval Age - SÉRIE da dona",
    "serie": "medieval"
-  },
-  {
-   "id": "EnL8-H2581A",
-   "tipo": "anime",
-   "canal": "AniQuest",
-   "views": 568970,
-   "min": 130,
-   "titulo": "After Unlocking Every Weakest Skill, But He Fuses Them into Epic Power | Anime Recap",
-   "garimpado": "2026-11-18"
-  },
-  {
-   "id": "0P-5CcXYOvk",
-   "tipo": "manhwa",
-   "canal": "Burrer Recap",
-   "views": 349899,
-   "min": 62,
-   "titulo": "He Paid Me $8M To Leave His Daughter, So I Did | Manhwa Recap",
-   "garimpado": "2026-11-18"
   }
  ],
  "_leia_medieval": "10/11 dona: a série 'He got into the Medieval Age' interessa a ela — completar o COMEÇO (partes 4, 6, 8 faltavam; 1-2, 3, 5, 7 já postadas) antes de continuação. Avisar com ênfase quando postar. | 13/11 23h dona: \"pode parar de focar no Medieval Age, já temos muitos por hora pra eu ir assistindo; foco nos mais vistos\" -> série foi pro FIM da lista; a (16-17) já está no Kaggle e segue normal.",

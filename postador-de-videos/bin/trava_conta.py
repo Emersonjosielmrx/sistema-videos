@@ -46,7 +46,12 @@ NEGADO = re.compile(r"recursos avançados não estão disponíveis|perdeu o aces
 # sua identidade". Não é punição, mas sem a dona confirmar todo envio sobe GB à toa e trava no fim (rascunho preso) —
 # e repetir sem confirmar parece robô. Trava TUDO no canal até a dona confirmar e apagar a linha. YT_TRAVA_IDENTIDADE=0 tira.
 IDENTIDADE = re.compile(r"confirme sua identidade|precisamos confirmar sua identidade|verify (it'?s you|your identity)|"
-                        r"confirm (it'?s you|your identity)", re.I)
+                        r"confirm (it'?s you|your identity)"
+                        # 18/11 dona ("conta nova: qualquer captcha/não sou um robô/confirmação = parar e me avisar"):
+                        # captcha em pt/en e a conta vietnamita do Fato Chocante (Studio em vietnamita).
+                        r"|não sou um robô|confirme que você não é um robô|i'?m not a robot|confirm you'?re not a robot|"
+                        r"xác minh danh tính|xác nhận danh tính|xác minh (rằng )?(đó là )?bạn|tôi không phải là người máy",
+                        re.I)
 MESES = {"jan": 1, "fev": 2, "mar": 3, "abr": 4, "mai": 5, "jun": 6, "jul": 7, "ago": 8, "set": 9, "out": 10,
          "nov": 11, "dez": 12}
 

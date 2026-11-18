@@ -32,7 +32,7 @@ VEZ = "login google lote (dona)"
 # dona 12/11: contas novas entram em UMA máquina por dia (muitos logins da mesma conta em IPs/aparelhos novos bloqueiam).
 # Registro de onde/quando cada uma entrou: config/contas_novas_rodizio.json. As outras contas não têm limite.
 CONTAS_NOVAS = {"emersonjosiel2035", "emersonjosiel2034", "inovaremanhwaverse7", "inovaremanhwaverse8",
-                "inovaremanhwaverse9"}
+                "inovaremanhwaverse9", "azad95889246", "phikhanh141173", "duongphuong6983"}  # 18/11: 2 contas novas de canal novo
 RODIZIO = mr.ROOT / "config" / "contas_novas_rodizio.json"
 
 

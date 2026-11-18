@@ -6526,3 +6526,79 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0801.md`
 
 - (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 08:41 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_0828.md`
+
+- [INÉDITO] github.com/entirefeed/phone-farm — ★0, push 2026-11-13, CC0-1.0 — Open-source tools and a setup guide for running an Android phone farm: adb, scrcpy, UI automation, device management.
+- [INÉDITO] github.com/codeskyblue/uiautodev — ★545, push 2026-10-07, MIT — Mobile UI viewer in browser, view the UI in a tree view, and generate XPath automatically.
+
+## 2026-11-18 08:52 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_0846.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 09:07 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_0859.md`
+
+- [INÉDITO] github.com/c00l-k1D/DroidFleet — ★4, push 2026-10-24, MIT — Open-source device fleet management and orchestration platform for Android, Windows and Linux. ADB, FarmAgent, remote control, automation an
+- [INÉDITO] github.com/Gregorio29/hermes-android-agent — ★0, push 2026-09-30, MIT — Android automation toolkit for agent-driven device inspection, ADB/UIAutomator control and multi-device lifecycle management.
+
+## 2026-11-18 09:18 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_0911.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 09:29 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_0921.md`
+
+- [INÉDITO] github.com/PatrickNoFilter/pocket-director — ★1, push 2026-06-07, MIT — Pro animated infographic videos from your Android phone. Termux + PRoot Ubuntu + Modal cloud ffmpeg.
+
+## 2026-11-18 09:45 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_0931.md`
+
+- [INÉDITO] github.com/jatin-verma-real/mobile-use — ★0, push 2026-11-13, MIT — Give your AI agent hands on your Android phone. MCP server + Android accessibility app over Tailscale: numbered UI elements, any-language ty
+- [INÉDITO] github.com/Rudrasamadhiya/android-agent-bridge — ★5, push 2026-11-18, MIT — Let AI agents (Claude Code, Cursor, Antigravity) use your Android phone: screen reading, taps, typing, OCR, device controls and file transfe
+
+## 2026-11-18 10:03 — Chrome headless com ANGLE/Vulkan na T4 do Kaggle (Linux sem tela) (`area_three_gpu_t4_headless`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_three_gpu_t4_headless__sonnet_0952.md`
+
+- [INÉDITO] github.com/ajmeese7/gpu-browser-bridge — ★2, push 2026-11-04, BSD-3-Clause — HTTP API that wraps a GPU-backed Chrome on Windows, letting headless callers take screenshots and run JS against real WebGPU/WebGL code path
+
+## 2026-11-18 10:14 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1006.md`
+
+- [INÉDITO] github.com/Sayandeep1013/PanelWeaver — ★2, push 2026-10-24, MIT — Manga/manhwa-to-video pipeline — converts static panels and pages into narrated video, end to end.
+
+## 2026-11-18 10:28 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1016.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 10:36 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1032.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 11:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1053.md`
+
+- [INÉDITO] github.com/pr0h0/OpenManga — ★20, push 2026-11-17, Apache-2.0 — Self-hosted studio that turns a story into a consistent AI-illustrated comic, webtoon or narrated video. Bring your own provider key, local 
+
+## 2026-11-18 11:40 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1126.md`
+
+- [INÉDITO] github.com/zekefarioli-arch/playwright-android-real-device — ★0, push 2026-10-04, MIT — Playwright end-to-end tests on Chrome of a real Android phone over USB (adb + CDP), no emulator or device farm
+- [INÉDITO] github.com/eminogrande/phoneuse-agent — ★0, push 2026-10-14, MIT — Turn old unrooted Android phones into LLM-operable agent nodes: adb bootstrap, control app, farm control plane

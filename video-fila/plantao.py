@@ -189,6 +189,16 @@ def rodada():
             if not texto or msg.get("chat", {}).get("id") != dono:
                 continue
             log(f"dona: {texto[:200]}")
+            try:  # 18/11: "ok"/"visto" para o alarme de venda/mensagem (alarme_vendas.py)
+                sys.path.insert(0, str(BASE))
+                import alarme_vendas
+                parado = alarme_vendas.confirmar(texto)
+            except Exception as e:  # noqa: BLE001
+                parado = None
+                log(f"alarme_vendas: {e}")
+            if parado:
+                enviar(parado, mid)
+                continue
             rapida = resposta_rapida(texto)
             if rapida:
                 enviar(rapida, mid)

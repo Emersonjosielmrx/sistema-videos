@@ -292,3 +292,28 @@ STATUS: OK
 - Causa provável: Funcionamento normal do ciclo de preenchimento do recap longo, com pausa de proteção no parceiro do PC2.
 - CONSERTO PROPOSTO: Nenhum. O sistema está operando dentro dos parâmetros de controle e proteções automáticas.
 - Estado: NADA A FAZER
+## 20261118_0915 — Disco D: com 6.76 GB livres (abaixo do limite de 8 GB)
+- Motivo / O que achei (trecho de log): igia_agente_20261118_0517.log indicou operações normais, mas o disco D: apresenta atualmente 6.76 GB livres (4.1% de 166.01 GB), ficando abaixo do limite mínimo de 8 GB estabelecido para a produção.
+- Causa provável: Acúmulo natural de materiais e arquivos temporários de trabalho na fila de render e workspaces.
+- CONSERTO PROPOSTO: Nenhum (o sistema possui rotinas automáticas de pausa e controle de espaço; seguir a regra de não apagar arquivos de workspace, materiais ou caches manualmente).
+- Estado: NADA A FAZER
+## 20261118_1017 — recap longo: alimentador travado (41 min) e reiniciado automaticamente pelo vigia
+- Motivo / O que achei (trecho de log): [18/11 10:15:51] outros projetos: PROBLEMAS: recap longo: alimentador travado (41 min sem dar a volta) — reiniciado || recap longo: 16 de 20 GPUs sem conta (sem conta livre/verificada); contas verificadas: 11 de 71 || disco D: com só 4.8 GB livres (mínimo 8): a produção para quando encher
+- Causa provável: Travamento transitório no ciclo do alimentador por concorrência de I/O ou espera de locks em JSON/API, combinado com espaço reduzido em disco (4.8 GB) e esgotamento de contas de GPU.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — travamento transitório já recuperado pelo reinício automático do alimentador; monitorar espaço em disco e rotatividade de contas).
+- Estado: NADA A FAZER
+## 20261118_1117 — Recap longo: alimentador travado recuperado automaticamente e verificação de GPUs
+- Motivo / O que achei (trecho de log): [18/11 10:15:51] outros projetos: PROBLEMAS: recap longo: alimentador travado (41 min sem dar a volta) — reiniciado || recap longo: 16 de 20 GPUs sem conta (sem conta livre/verificada); contas verificadas: 11 de 71 || disco D: com só 4.8 GB livres (mínimo 8)
+- Causa provável: Travamento transitório no ciclo do alimentador por concorrência de I/O ou espera em JSON/API, combinado com esgotamento temporário de cota/contas de GPU e espaço reduzido em disco.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — travamento transitório já recuperado pelo reinício automático do alimentador; monitorar espaço em disco e cota de contas de GPU).
+- Estado: NADA A FAZER
+## 20261118_1135 — Erro de memória MKL e Whisper no parceiro-render
+- Motivo / O que achei (trecho de log): `RuntimeError: mkl_malloc: failed to allocate memory` e `Whisper (model=base) rc=1` ao tentar transcrever localmente após falha do Groq/proxy.
+- Causa provável: Sobrecarga de memória RAM/heap ao carregar o modelo base do Whisper junto com MKL.
+- CONSERTO PROPOSTO: Em `bin/anime_fetch.py` ou `bin/_whisper_sub.py`, tratar exceções de falta de memória do MKL/Whisper liberando cache ou caindo para o modelo tiny/fallback mais leve, ou checar RAM antes de iniciar o Whisper pesado.
+- Estado: PRECISA REVISÃO
+## 20261118_1155 — Recap longo e alimentador do PC1 operando normalmente
+- Motivo / O que achei (trecho de log): [18/11 11:57:10] pilha: nenhum baixador de fora deu sinal nos últimos 5 min e abastecedor Kaggle despachando shorts extras normalmente ([18/11 11:58:42] DISPAROU Short extra fS9dv8k5q_A [pesca]). PC2 pausado temporariamente por falhas consecutivas no parceiro (pc2_parceiro_falhou.json), mas alimentador geral ativo.
+- Causa provável: Ciclo normal de operação, com pausas de proteção ativas para o PC2 devido a falhas de Shorts e espera de novas fontes externas.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o alimentador do recap longo e processos no PC1 estão rodando corretamente).
+- Estado: NADA A FAZER

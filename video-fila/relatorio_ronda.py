@@ -886,13 +886,54 @@ def sec_3d():
     return out
 
 
+def sec_hydrogen():
+    """18/11 dona ("como o Hydrogen está indo — modelo novo, acompanhar se é inferior ou superior ao Gemini 3.8"):
+    (1) placar das caixas de código (entregou = mudança útil sem quebrar arquivo) e (2) chamadas no OmniRoute (todo
+    lugar que usa o Hydrogen passa por lá). RONDA_HYDROGEN=0 tira a seção."""
+    if os.environ.get("RONDA_HYDROGEN", "1") == "0":
+        return []
+    out = ["## 🧪 Hydrogen x Gemini 3.8 (consertos de código)"]
+    try:
+        if r"D:\hipercool-materiais\comum" not in sys.path:
+            sys.path.append(r"D:\hipercool-materiais\comum")
+        import placar_modelos
+        r = placar_modelos.resumo()
+    except Exception:  # noqa: BLE001
+        r = {}
+    if r:
+        out += ["", "| Modelo | Tentativas | ✅ Entregou | % | Tempo (mediana) | Onde |", "|---|---:|---:|---:|---:|---|"]
+        for fam in ("Hydrogen", "Gemini 3.8"):
+            x = r.get(fam)
+            if not x:
+                out.append(f"| {fam} | 0 | 0 | — | — | — |")
+                continue
+            onde = ", ".join(f"{k} {v[1]}/{v[0]}" for k, v in x["lugares"].items())
+            out.append(f"| {fam} | {x['tentativas']} | {x['entregou']} | {x['pct']}% | "
+                       f"{x['mediana_s'] or '—'} s | {onde} |")
+    else:
+        out.append("- Caixas de código: nenhuma tentativa registrada ainda (placar começou 18/11 ~11h).")
+    try:
+        p = subprocess.run(["ssh", "-o", "ConnectTimeout=15", "-o", "BatchMode=yes", "hermes-bloqueio",
+                            "python3 /opt/omniroute/placar_modelos.py 2>/dev/null"],
+                           capture_output=True, text=True, timeout=120, creationflags=0x08000000)
+        d = json.loads(p.stdout.strip().splitlines()[-1])["modelos"]
+        partes = []
+        for m, x in sorted(d.items(), key=lambda t: -t[1]["total"]):
+            nome = "Hydrogen" if "hydrogen" in m else m.split("/")[-1]
+            partes.append(f"{nome}: {x['ok']}/{x['total']} ok, {x['mediana_s'] or '—'} s")
+        out.append("- Chamadas no OmniRoute hoje (todos os lugares): " + " · ".join(partes))
+    except Exception:  # noqa: BLE001
+        out.append("- Chamadas no OmniRoute: sem leitura agora")
+    return out
+
+
 def main(gravar):
     partes = [f"# Relatório completo — {agora:%d/%m, %H:%M}",
               f"_(desde a última ronda = desde {ultima:%d/%m %H:%M})_"]
     # 13/11 dona ("pode parar de focar no Medieval; foco nos mais vistos"): mais vistos logo depois dos números,
     # a série vai pro fim
     for f in (sec_numeros, sec_mais_vistos, sec_kaggle, sec_frentes, sec_maquinas, sec_capas, sec_vigia_melhorador,
-              sec_pesquisador, sec_redes, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
+              sec_pesquisador, sec_hydrogen, sec_redes, sec_3d, sec_celulares_adb, sec_trio_midia, sec_insta_http, sec_serie):
         try:
             partes += [""] + f()
         except Exception as e:  # noqa: BLE001 — uma seção quebrada não derruba o relatório

@@ -37,6 +37,7 @@
    "implementador": [
     "gemini-4-argon",
     "cw/claude-sonnet-5-5",
+    "ag-hydrogen",
     "agy/gemini-3.8-flash-high",
     "argon-pro"
    ]
@@ -76,5 +77,6 @@
  "_dona_29out_noite": "dona 29/10 21:30: conjunto argon = gemini-4-argon (Argon puro) -> cw/claude-sonnet-5-5 (Sonnet web) -> argon-pro; implementador = argon-pro -> Argon puro -> Sonnet web; argon-flash saiu. Se TODOS falharem, registra em D:\\video-fila\\estado\\central\\modelos_esgotados.jsonl (para pôr mais modelos). Antes: modelos_central.antes_fila_argon_sonnet.json",
  "_fable_30out": "30/10 00h (Fable): agy/gemini-3.8-flash-high no FIM de cada papel do conjunto argon — só entra quando Argon, Sonnet web e Argon Pro falharem (29/10 23:59 os 3 falharam e os Cortes ficaram sem decisão). Ordem da dona mantida. Desfazer: modelos_central.json.antes_fallback_30out",
  "kiro_liberado": true,
- "_dona_30out": "dona 30/10 09:40: 'não adianta usar Gemini 3.1 como failback do Argon pois usam as mesmas cotas; o Argon, o Sonnet web, aí pode colocar o Kiro Sonnet 4.5, depois o Gemini 3.8 e o Argon Pro de volta' -> todos os papéis do conjunto argon nessa ordem; kiro_liberado=true (o central e as linhas deixam o Kiro passar). Antes: modelos_central.json.antes_kiro_30out"
+ "_dona_30out": "dona 30/10 09:40: 'não adianta usar Gemini 3.1 como failback do Argon pois usam as mesmas cotas; o Argon, o Sonnet web, aí pode colocar o Kiro Sonnet 4.5, depois o Gemini 3.8 e o Argon Pro de volta' -> todos os papéis do conjunto argon nessa ordem; kiro_liberado=true (o central e as linhas deixam o Kiro passar). Antes: modelos_central.json.antes_kiro_30out",
+ "_hydrogen_18nov": "18/11 dona: Hydrogen (ag-hydrogen) logo ANTES do Gemini 3.8 só no papel implementador (conserto de código curto: 37/37 x 22/37 do 3.8). Argon/Sonnet seguem na frente (16/16 na tarefa difícil, onde o Hydrogen tirou 8/16). Antes: modelos_central.json.bak-antes-hydrogen-18nov"
 }

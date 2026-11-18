@@ -1,11 +1,14 @@
-# Vigilância 24 h — 2026-11-18T08:00:39
+# Vigilância 24 h — 2026-11-18T12:00:40
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
-## Alarmes desta volta (1)
+## Alarmes desta volta (4)
+- instagram: 10 posts até 12:00, normal ~28
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
+- canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (26)
+## Casos abertos (28)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (cw/claude-sonnet-5-5)
 - [consertar] _parceiro_20261114.log: mesmo erro 6x (-)
 - [consertar] _parceiro_20261114.log: mesmo erro 6x (-)
@@ -32,9 +35,10 @@
 - [consertar] tiktok: mesmo erro 5x em 6 h (-)
 - [consertar] instagram: 5 posts até 04:20, normal ~12 (-)
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
-- [falso] instagram: 10 posts até 08:20, normal ~21 — - / -
 - [falso] longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade — - / -
 - [falso] instagram: 10 posts até 14:30, normal ~34 — - / -
 - [sem_mudanca] canal clinicalucrativaia com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) — cw/claude-sonnet-5-5 / -
@@ -49,6 +53,7 @@
 - [sem_mudanca] _parceiro_20261114.log: mesmo erro 5x — cw/claude-sonnet-5-5 / -
 - [sem_mudanca] _parceiro_20261114.log: mesmo erro 5x — cw/claude-sonnet-5-5 / -
 - [falso] tiktok: mesmo erro 5x em 6 h — - / -
+- [falso] instagram: 10 posts até 10:20, normal ~23 — - / -
 
 ## Placar dos consertadores
 - **cw/claude-sonnet-5-5**: 29 casos, nota 7% — capa-longo: 2/27 (voltou 0), postagem-tiktok: 0/1 (voltou 0), qualidade-longo: 0/1 (voltou 0)

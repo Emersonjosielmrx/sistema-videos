@@ -960,6 +960,26 @@ def subir(pg, channel_id, video, titulo, descricao, tags, privacy, alvo, sinteti
         log(f"  capa: {_capa(pg, capa)}")
     if playlist:
         log(f"  playlist: {_playlist(pg, playlist)}")
+    # 18/11 (3D geladeira 09:32 e Filme Noturno 09:18: "capa_falhou" e depois a lista de hashtags #ciencia… aberta POR
+    # CIMA do "Não é para crianças" — clique estourou 30 s): depois da capa/playlist, fecha a lista de novo, só se
+    # estiver visível (Escape sem lista fecha o diálogo inteiro). YT_FECHA_LISTA_ANTES_KIDS=0 desliga.
+    if os.environ.get("YT_FECHA_LISTA_ANTES_KIDS", "1") != "0":
+        # lista do print = sugestão do "#ciencia" do TÍTULO; fecha clicando no cabeçalho do diálogo (texto parado, igual
+        # ao _fechar_sugestoes) — nunca Escape aqui (sem lista ele fecha o diálogo e perde o envio).
+        for _ in range(2):
+            try:
+                if not pg.locator("tp-yt-iron-dropdown:visible, ytcp-text-menu:visible, "
+                                  ".ytcp-hashtag-suggestions:visible").count():
+                    break
+                b = pg.locator("ytcp-uploads-dialog tp-yt-paper-dialog, ytcp-uploads-dialog #dialog").first \
+                    .bounding_box(timeout=3000)
+                if not b:
+                    break
+                pg.mouse.click(b["x"] + 24, b["y"] + 24)
+                pg.wait_for_timeout(700)
+                log("  fechei a lista de hashtags que cobria o 'Não é para crianças'")
+            except Exception:  # noqa: BLE001
+                break
     if not _clicar_se_existe(pg, "[name=VIDEO_MADE_FOR_KIDS_NOT_MFK]", 15000):
         raise Falha("erro", "não achei 'Não é conteúdo para crianças'")
     _clicar_se_existe(pg, "ytcp-video-metadata-editor #toggle-button, #toggle-button", 5000)  # Mostrar mais

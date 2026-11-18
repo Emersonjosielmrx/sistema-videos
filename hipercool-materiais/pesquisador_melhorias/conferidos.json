@@ -18813,5 +18813,155 @@
     "arquivado": false,
     "descricao": "Topic → faceless vertical short (YouTube Shorts/TikTok): LLM script, free edge-tts voice, Ken Burns motion, word-by-word captions, FFmpeg re",
     "data": "2026-11-18"
+  },
+  "entirefeed/phone-farm": {
+    "ok": true,
+    "nome": "entirefeed/phone-farm",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "CC0-1.0",
+    "arquivado": false,
+    "descricao": "Open-source tools and a setup guide for running an Android phone farm: adb, scrcpy, UI automation, device management.",
+    "data": "2026-11-18"
+  },
+  "codeskyblue/uiautodev": {
+    "ok": true,
+    "nome": "codeskyblue/uiautodev",
+    "estrelas": 545,
+    "push": "2026-10-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Mobile UI viewer in browser, view the UI in a tree view, and generate XPath automatically.",
+    "data": "2026-11-18"
+  },
+  "mvp/uhubctl": {
+    "ok": true,
+    "nome": "mvp/uhubctl",
+    "estrelas": 2862,
+    "push": "2026-07-25",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "uhubctl - USB hub per-port power control",
+    "data": "2026-11-18"
+  },
+  "c00l-k1d/droidfleet": {
+    "ok": true,
+    "nome": "c00l-k1D/DroidFleet",
+    "estrelas": 4,
+    "push": "2026-10-24",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Open-source device fleet management and orchestration platform for Android, Windows and Linux. ADB, FarmAgent, remote control, automation an",
+    "data": "2026-11-18"
+  },
+  "gregorio29/hermes-android-agent": {
+    "ok": true,
+    "nome": "Gregorio29/hermes-android-agent",
+    "estrelas": 0,
+    "push": "2026-09-30",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android automation toolkit for agent-driven device inspection, ADB/UIAutomator control and multi-device lifecycle management.",
+    "data": "2026-11-18"
+  },
+  "patricknofilter/pocket-director": {
+    "ok": true,
+    "nome": "PatrickNoFilter/pocket-director",
+    "estrelas": 1,
+    "push": "2026-06-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Pro animated infographic videos from your Android phone. Termux + PRoot Ubuntu + Modal cloud ffmpeg.",
+    "data": "2026-11-18"
+  },
+  "jatin-verma-real/mobile-use": {
+    "ok": true,
+    "nome": "jatin-verma-real/mobile-use",
+    "estrelas": 0,
+    "push": "2026-11-13",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Give your AI agent hands on your Android phone. MCP server + Android accessibility app over Tailscale: numbered UI elements, any-language ty",
+    "data": "2026-11-18"
+  },
+  "rudrasamadhiya/android-agent-bridge": {
+    "ok": true,
+    "nome": "Rudrasamadhiya/android-agent-bridge",
+    "estrelas": 5,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Let AI agents (Claude Code, Cursor, Antigravity) use your Android phone: screen reading, taps, typing, OCR, device controls and file transfe",
+    "data": "2026-11-18"
+  },
+  "jasonmayes/headless-chrome-nvidia-t4-gpu-support": {
+    "ok": true,
+    "nome": "jasonmayes/headless-chrome-nvidia-t4-gpu-support",
+    "estrelas": 89,
+    "push": "2024-02-23",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Using headless Chrome on server side environments for true client side browser emulation with NVIDIA T4 GPUs for Web AI model testing or gra",
+    "data": "2026-11-18"
+  },
+  "ajmeese7/gpu-browser-bridge": {
+    "ok": true,
+    "nome": "ajmeese7/gpu-browser-bridge",
+    "estrelas": 2,
+    "push": "2026-11-04",
+    "licenca": "BSD-3-Clause",
+    "arquivado": false,
+    "descricao": "HTTP API that wraps a GPU-backed Chrome on Windows, letting headless callers take screenshots and run JS against real WebGPU/WebGL code path",
+    "data": "2026-11-18"
+  },
+  "sayandeep1013/panelweaver": {
+    "ok": true,
+    "nome": "Sayandeep1013/PanelWeaver",
+    "estrelas": 2,
+    "push": "2026-10-24",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Manga/manhwa-to-video pipeline — converts static panels and pages into narrated video, end to end.",
+    "data": "2026-11-18"
+  },
+  "saukau6-debug/manhwa-recap-studio": {
+    "ok": true,
+    "nome": "saukau6-debug/manhwa-recap-studio",
+    "estrelas": 0,
+    "push": "2026-09-11",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "AI-powered open-source manhwa recap video generator with local AI, OCR, TTS, and FFmpeg rendering",
+    "data": "2026-11-18"
+  },
+  "pr0h0/openmanga": {
+    "ok": true,
+    "nome": "pr0h0/OpenManga",
+    "estrelas": 20,
+    "push": "2026-11-17",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Self-hosted studio that turns a story into a consistent AI-illustrated comic, webtoon or narrated video. Bring your own provider key, local ",
+    "data": "2026-11-18"
+  },
+  "zekefarioli-arch/playwright-android-real-device": {
+    "ok": true,
+    "nome": "zekefarioli-arch/playwright-android-real-device",
+    "estrelas": 0,
+    "push": "2026-10-04",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Playwright end-to-end tests on Chrome of a real Android phone over USB (adb + CDP), no emulator or device farm",
+    "data": "2026-11-18"
+  },
+  "eminogrande/phoneuse-agent": {
+    "ok": true,
+    "nome": "eminogrande/phoneuse-agent",
+    "estrelas": 0,
+    "push": "2026-10-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn old unrooted Android phones into LLM-operable agent nodes: adb bootstrap, control app, farm control plane",
+    "data": "2026-11-18"
   }
 }

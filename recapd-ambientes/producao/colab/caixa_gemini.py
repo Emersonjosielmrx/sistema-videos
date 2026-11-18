@@ -16,7 +16,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import juri_longo  # noqa: E402
 
 RAIZ = Path(r"D:\hipercool-materiais\_melhorador_caixa")
-MODELOS = [("agy/gemini-3.8-flash-high", 40), ("antigravity/gemini-3.8-flash-tiered", 50)]
+# 18/11 (dona): Hydrogen na frente do Gemini (conserto de código curto 37/37 x 22/37); sem mudança = o Gemini assume
+MODELOS = [("ag-hydrogen", 40), ("agy/gemini-3.8-flash-high", 40), ("antigravity/gemini-3.8-flash-tiered", 50)]
 
 
 def caixa(nome, tarefa, arquivos, modelos=None, texto=False):
@@ -36,14 +37,21 @@ def caixa(nome, tarefa, arquivos, modelos=None, texto=False):
     resumo = None
     t0 = time.time()
     for m, turnos in modelos:
+        t_m = time.time()
         try:
             if texto:
                 resumo = _editar_por_texto(tarefa, pasta, arquivos, m)
             else:
                 cmd_tools = ("Read,Edit,Write,Glob,Grep", "Bash,WebFetch,WebSearch,Agent")
                 resumo = _chamar_editor(prompt, pasta, m, turnos, cmd_tools)
-            break
+            if any((pasta / Path(a).name).read_bytes() != (pasta / "original" / Path(a).name).read_bytes()
+                   for a in arquivos):
+                _placar(m, True, time.time() - t_m, nome)
+                break
+            _placar(m, False, time.time() - t_m, "sem mudança")
+            print(f"[caixa] {m} respondeu sem mudar nenhum arquivo — próximo modelo", flush=True)
         except Exception as e:  # noqa: BLE001
+            _placar(m, False, time.time() - t_m, str(e)[:120])
             print(f"[caixa] {m} falhou: {str(e)[:200]}", flush=True)
     (pasta / "tempo_s.txt").write_text(str(round(time.time() - t0)), encoding="utf-8")
     dif = []
@@ -56,6 +64,17 @@ def caixa(nome, tarefa, arquivos, modelos=None, texto=False):
     (pasta / "resumo_gemini.txt").write_text(resumo or "(sem resposta)", encoding="utf-8")
     print(f"[caixa] {pasta} — {len(dif)} linhas de diff", flush=True)
     return pasta
+
+
+def _placar(modelo, entregou, segundos, obs=""):
+    """18/11 dona: placar Hydrogen x Gemini 3.8 (comum\\placar_modelos.py). Nunca levanta."""
+    try:
+        if r"D:\hipercool-materiais\comum" not in sys.path:
+            sys.path.append(r"D:\hipercool-materiais\comum")
+        import placar_modelos
+        placar_modelos.registrar("caixa do recap", modelo, entregou, segundos, obs)
+    except Exception:  # noqa: BLE001
+        pass
 
 
 def _editar_por_texto(tarefa, pasta, arquivos, modelo):

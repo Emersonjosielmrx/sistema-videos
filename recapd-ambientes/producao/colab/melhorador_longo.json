@@ -155,9 +155,11 @@
   "reserva": "agy/gemini-3.8-flash-high",
   "reservas": [
    "ag-opus-5-5",
+   "ag-hydrogen",
    "agy/gemini-3.8-flash-high"
   ],
-  "_14nov": "14/11 dona ('o Opus 5.5 que eu dei pra sua quando não tiver ninguém usando; tem o gerenciador que mede'): 1º cc-sobra (Opus 5.5 da cc só quando outra pessoa usa a conta / janela vira com sobra — modo_tokens.py na VPS; falha em 1 s se não puder), 2º ag-opus-5-5 (Antigravity 5.5 -> 4.6), 3º Gemini 3.8. Volta: modelo='ag-opus-5-5'."
+  "_14nov": "14/11 dona ('o Opus 5.5 que eu dei pra sua quando não tiver ninguém usando; tem o gerenciador que mede'): 1º cc-sobra (Opus 5.5 da cc só quando outra pessoa usa a conta / janela vira com sobra — modo_tokens.py na VPS; falha em 1 s se não puder), 2º ag-opus-5-5 (Antigravity 5.5 -> 4.6), 3º Gemini 3.8. Volta: modelo='ag-opus-5-5'.",
+  "_18nov": "18/11 dona: ag-hydrogen antes do Gemini 3.8 nas reservas de código (conserto curto 37/37 x 22/37)."
  },
  "_modelos_desligados_06nov": "06/11: \"opus\" saiu da lista para liberar SÓ o ag-opus-5-5 (Antigravity). cc/claude-opus e opus-auto (cota do Claude da dona) continuam proibidos."
 }

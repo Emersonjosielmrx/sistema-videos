@@ -24931,6 +24931,110 @@
         "scripts Python/yt-dlp que montam ordem de playlist e \"próximo vídeo\" em fim de tela"
       ],
       "origem": "area_gemini_web_sessao_cookie__sonnet_0746.md 2026-11-18"
+    },
+    {
+      "id": "yt_regras_upload",
+      "nome": "Regras oficiais do YouTube para upload automatizado e conteúdo reutilizado",
+      "subtemas": [
+        "Páginas support.google.com/youtube sobre \"reused content\", \"inauthentic content\" e monetização de recaps; ler o texto oficial e separar a regra da interpretação"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0828.md 2026-11-18"
+    },
+    {
+      "id": "render_termux",
+      "nome": "Render FFmpeg no celular Android via Termux para usar os celulares como máquinas extras de render",
+      "subtemas": [
+        "scripts de Termux + ffmpeg com Python, fila de renders e limites de temperatura"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0859.md 2026-11-18"
+    },
+    {
+      "id": "regras_upload_shorts",
+      "nome": "Regras oficiais do YouTube para Shorts enviados pelo app (agendamento, título, conta)",
+      "subtemas": [
+        "páginas em support.google.com/youtube sobre agendamento, limite diário de uploads e elegibilidade de Shorts"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0859.md 2026-11-18"
+    },
+    {
+      "id": "retencao_loop",
+      "nome": "Final do Short que religa no gancho (loop)",
+      "subtemas": [
+        "repos pequenos com teste de retenção por final em Shorts; dados públicos de Shorts em loop"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0921.md 2026-11-18"
+    },
+    {
+      "id": "agenda_horario",
+      "nome": "Agendar publicação por horário da audiência",
+      "subtemas": [
+        "scripts em Python que escolhem a hora de postar por país/fuso e medem o efeito em canais novos"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0921.md 2026-11-18"
+    },
+    {
+      "id": "variedade_temas",
+      "nome": "Evitar repetir tema entre vídeos do mesmo canal",
+      "subtemas": [
+        "guarda de diversidade de títulos/temas na fila de postagem"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0921.md 2026-11-18"
+    },
+    {
+      "id": "yt_regras_auto",
+      "nome": "Regras oficiais do YouTube sobre automação e conteúdo reaproveitado",
+      "subtemas": [
+        "páginas em support.google.com/youtube sobre \"conteúdo inautêntico/reutilizado\" e uploads em massa, com data de cada página, para checar o que afeta canais de recap"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_0931.md 2026-11-18"
+    },
+    {
+      "id": "termux_render_celular",
+      "nome": "Render e slideshow de painéis no Android (Termux + ffmpeg)",
+      "subtemas": [
+        "buscar scripts curtos de zoompan/xfade em lote que rodem em celular e como dividir a fila entre os PCs e os celulares"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1016.md 2026-11-18"
+    },
+    {
+      "id": "yt_recap_mais_vistos",
+      "nome": "Achar recaps de anime/manhwa mais vistos para recapar",
+      "subtemas": [
+        "buscar scripts com yt-dlp que listam vídeos campeões por canal e tema, com ordenação por views ÷ inscritos"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1016.md 2026-11-18"
+    },
+    {
+      "id": "abertura_30s_retencao",
+      "nome": "Primeiros 30 s e capas de recap",
+      "subtemas": [
+        "buscar regras de gancho (cena de impacto antes da intro, título e capa casados) em projetos pequenos de recap"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1016.md 2026-11-18"
+    },
+    {
+      "id": "ritmo_painel",
+      "nome": "Ritmo do recap pelo conteúdo",
+      "subtemas": [
+        "Buscar no GitHub \"pacing by text length\", \"duração de cena por palavras\" em recaps; testar a duração do painel proporcional à altura e à fala"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1053.md 2026-11-18"
+    },
+    {
+      "id": "cobertura_roteiro",
+      "nome": "Conferência do roteiro contra os painéis",
+      "subtemas": [
+        "Buscar checagem de parágrafos omitidos ou repetidos entre roteiro e painéis (ideia \"Story coverage\" do OpenManga), em Python simples"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1053.md 2026-11-18"
+    },
+    {
+      "id": "chrome_cdp_celular",
+      "nome": "YouTube Studio e TikTok web no Chrome do celular por CDP",
+      "subtemas": [
+        "exemplos de `connectOverCDP` com upload de arquivo via adb push, tratando o seletor de arquivos do Android"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_1126.md 2026-11-18"
     }
   ],
   "projetos": [

@@ -114,6 +114,8 @@ def chamar(prompt, pasta, projeto, etapa, timeout=600, max_turnos=12, ferramenta
     if ini is None:
         return _chamar1(prompt, pasta, projeto, etapa, timeout, max_turnos, ferramentas, modelo, aceitar_limite)
     degraus = [{**cadeia[ini], "modelo": modelo_ef}] + cadeia[ini + 1:]
+    # 18/11: degrau com "so_etapas" (ex.: Hydrogen só no conserto de código, onde ganhou do Gemini) é pulado nas outras
+    degraus = [d for n, d in enumerate(degraus) if n == 0 or not d.get("so_etapas") or etapa in d["so_etapas"]]
     for n, d in enumerate(degraus):
         ultimo = n == len(degraus) - 1
         prazo = timeout if ultimo else min(timeout, (d.get("prazos") or {}).get(etapa, d.get("padrao", 600)))

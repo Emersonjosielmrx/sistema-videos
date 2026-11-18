@@ -535,14 +535,40 @@ def foto_codigo():
     return pasta
 
 
+EXECUTORES = ["ag-hydrogen", "agy/gemini-3.8-flash-high"]  # 18/11 (dona): Hydrogen na frente (código 37/37 x 22/37)
+
+
 def caixa_codigo(ideia, modelo=None, base=None):
+    """18/11 (dona: "Hydrogen na frente do Gemini onde ele se sai melhor; se falhar, o Gemini assume"): tenta o 1º
+    executor; sem diff ou com arquivo quebrado = a caixa é refeita do zero com o próximo (o Gemini)."""
+    if modelo:
+        return _caixa_codigo(ideia, modelo, base)
+    fila = cfg().get("cadeia", {}).get("executor") or EXECUTORES
+    res = None
+    for m in fila:
+        t_m = time.time()
+        res = _caixa_codigo(ideia, m, base)
+        ok = bool(res["linhas_diff"] and not res["quebrados"])
+        try:  # 18/11 dona: placar Hydrogen x Gemini 3.8 (comum\placar_modelos.py). PLACAR_MODELOS=0 desliga
+            if r"D:\hipercool-materiais\comum" not in sys.path:
+                sys.path.append(r"D:\hipercool-materiais\comum")
+            import placar_modelos
+            placar_modelos.registrar("caixa do postador", m, ok, time.time() - t_m,
+                                     f"{res['linhas_diff']} linhas, {len(res['quebrados'])} quebrado(s)")
+        except Exception:  # noqa: BLE001
+            pass
+        if ok:
+            return res
+        log(f"[caixa] {m} não entregou ({res['linhas_diff']} linhas, {len(res['quebrados'])} quebrado(s)) — próximo")
+    return res
+
+
+def _caixa_codigo(ideia, modelo, base=None):
     r"""27/10 (dono: "deixe o Gemini numa caixa separada... faz uma cópia do que ele vai mexer no código e põe ele pra
     mexer sem chance de quebrar o original"): o EXECUTOR implementa a ideia numa CÓPIA de produto\*.py (sem Bash, só
     edita dentro da pasta da caixa); sai o diff + checagem de sintaxe para comparar com a mudança real."""
     import ast
     import difflib
-    c = cfg()
-    modelo = modelo or (c.get("cadeia", {}).get("executor") or ["agy/gemini-3.8-flash-high"])[0]
     pasta = CAIXA / datetime.now().strftime("%Y%m%d_%H%M%S_%f")  # %f: caixas em paralelo no mesmo segundo
     (pasta / "produto").mkdir(parents=True)
     originais = {p.name: p for p in (Path(base) if base else BIN / "produto").glob("*.py")}

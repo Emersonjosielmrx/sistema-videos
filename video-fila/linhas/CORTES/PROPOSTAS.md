@@ -2143,3 +2143,38 @@
 - prova: O júri viu o card em 7 Shorts de 04/11 a 17/11, mas só travou 1 (7869fa). É o mesmo caso da lição de 28/10: o júri vê o defeito de texto e ninguém age.
 - onde: cortes_juri._trava_texto_erro: incluir na lista de padrões o texto 'LOCAL MUNDO' / 'LOCAL MUND' / sticker 'LOCAL' que o júri descreve.
 - como testar: Passar de novo o juri.json do bleach_cap1_20261115 e do adventure-time_cap1_20261111 pela trava e confirmar que os 2 seriam segurados. Passar um juri.json limpo (sem-obra-d99606) e confirmar que ele não é segurado.
+
+## 18/11 08:28 PROPOSTA [CERTEZA] Piso de movimento por cena: punch-in/zoom progressivo quando a cena medir < 10% (cw/claude-sonnet-5-5)
+- prova: sem-obra-55392a cenas 5 e 6 (6,5% e 6,9%, q13/q17) e sem-obra-ca43d3 cena 3 (6,6%, q07, narração rodando com imagem parada). Em sem-obra-355c6a (q13/q17, 13,2-14,3%) e sem-obra-ba89e9 (q08, 19,2%) há o mesmo padrão em escala menor. São 4 Shorts de 4.
+- onde: Montagem de cenas da linha CORTES (função que escolhe/enquadra takes e aplica zoom/reenquadramento) e o cálculo do movimento por cena que alimenta o júri.
+- como testar: Reprocessar os 3 Shorts com cenas < 10% aplicando zoom-in progressivo (~8-12%) ou troca de take na cena, remedir o movimento (meta >= 15%) e rodar o júri de novo comparando a nota de retenção. Sem mexer na tarja nem na legenda.
+
+## 18/11 08:28 PROPOSTA [CERTEZA] Tarja do título com texto duplicado/cortado no topo (cw/claude-sonnet-5-5)
+- prova: sem-obra-55392a q01: a tarja branca mostra 'ações da Petrobras em 19ções da Petrobras em 1982. ões da Petrobras em 1982.', ou seja, o texto aparece repetido três vezes e cortado. É 1 Short, então antes de corrigir é preciso medir se é recorrente.
+- onde: Função que desenha a tarja/título do topo (quebra de linha e largura do texto) e o arquivo do título desse Short; conferir se o título gerado já vem com repetição.
+- como testar: Rodar D:\tmp\folha_topo.py (folha do 1,5 s) em todos os Shorts do dia 18/11 e contar quantos têm texto repetido ou cortado na tarja. Se >= 2, corrigir o renderizador. Se for só este, conferir o título gerado e a quebra de linha com título longo e sem acento.
+
+## 18/11 08:28 PROPOSTA [GOSTO] Legenda palavra a palavra sobre o rosto (conferir recorrência) (cw/claude-sonnet-5-5)
+- prova: sem-obra-ba89e9 q15 (palavra cobre boca e nariz) e q18 (cobre olhos e testa). É 1 Short, então não é padrão ainda. Só vira mudança se aparecer em outro Short do lote seguinte.
+- onde: Posicionamento da legenda palavra a palavra (zona segura inferior) na renderização das legendas.
+- como testar: Medir em uma amostra de Shorts a fração dos quadros em que a legenda cai sobre a região do rosto. Se for relevante, testar descer a legenda em cenas com rosto centralizado.
+
+## 18/11 09:41 PROPOSTA [CERTEZA] Tarja de título com texto triplicado/cortado no topo (cw/claude-sonnet-5-5)
+- prova: sem-obra-55392a_cap1_20261118 q01: a tarja branca mostra 'ações da Petrobras em 19ções da Petrobras em 1982. ões da Petrobras em 1982.' (texto repetido e truncado). q07 mostra a tarja ainda poluída. A regra do aprendiz 2/3 (camada estática dentro da zona segura) também aponta isso.
+- onde: Função que desenha a tarja/título superior (render do cabeçalho em cortes; procurar por drawtext/overlay do título e tarja_largura_max). Provável causa: texto desenhado em mais de uma passada ou camada herdando pan/zoom.
+- como testar: Reprocessar sem-obra-55392a_cap1_20261118 e conferir o quadro em 1,5 s. Depois rodar a folha do topo (D:\tmp\folha_topo.py) em todos os Shorts do dia para ver quantos têm o mesmo defeito antes de generalizar.
+
+## 18/11 09:41 PROPOSTA [GOSTO] Tarja sobre a legenda queimada com dupla legenda visível (cw/claude-sonnet-5-5)
+- prova: sem-obra-ca43d3_cap1_20261118 q01: tarja branca com 'Você mistura o dinheiro do MEI' abaixo e palavra ativa 'NOITE' acima. Atenção: pela lição de 26-27/10, o júri não vê o que há sob a tarja; só vale como defeito se o log do Short mostrar que a visão NÃO leu legenda ('[hardsub] só 0/6'), e aqui isso não foi apresentado. Só 1 Short.
+- onde: Log do Short ca43d3 (linha [hardsub]) e a função de detecção de legenda queimada/posicionamento da tarja.
+- como testar: Abrir o log do ca43d3 e conferir se a visão leu a legenda. Se sim, o caso é só visual do júri e não há defeito. Se não, entra como CERTEZA e deve ser testado com folha de quadros e controle negativo.
+
+## 18/11 09:41 PROPOSTA [CERTEZA] Legenda palavra a palavra sobre o rosto/olhos (cw/claude-sonnet-5-5)
+- prova: sem-obra-ba89e9_cap1_20261114 q15 (legenda cobre boca e nariz) e q18 ('QUANDO' cobre olhos e testa). Só 1 Short no lote, mas o defeito se repete na regra 1 do aprendiz; confirmar frequência antes de agir.
+- onde: Posicionamento vertical da legenda dinâmica (função que define y da legenda palavra a palavra, provavelmente no render de legenda de cortes).
+- como testar: Medir em uma amostra de >=20 Shorts do dia a posição y da legenda versus a caixa do rosto. Se passar de ~10% dos Shorts, ajustar o y base; senão, deixar como está.
+
+## 18/11 09:41 PROPOSTA [GOSTO] Cenas com movimento medido abaixo de 7% (cw/claude-sonnet-5-5)
+- prova: sem-obra-55392a cenas 5 e 6 (6.5%, 6.9%) e sem-obra-ca43d3 cena 3 (6.6%). Repete em 2 Shorts, porém o júri chamou de 'grave' sem número de retenção que comprove perda.
+- onde: Seleção/corte de cenas (limiar de movimento por cena e zoom/punch-in progressivo na montagem).
+- como testar: Subir o piso de movimento por cena só nesses nichos (finanças/MEI) e comparar % assistido mediano de 20+ Shorts antes e depois.

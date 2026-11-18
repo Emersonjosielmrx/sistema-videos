@@ -412,6 +412,27 @@
         "21:50"
       ]
     },
+    "fatochocante": {
+      "slug": "fatochocante",
+      "creds": [
+        "novo_fatochocante"
+      ],
+      "nome": "Fato Chocante",
+      "handle": "@fatochocante-v4g",
+      "channel_id": "UCmGAAoh6XRGs0Vz2S2hvARQ",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "fatos chocantes e curiosidades: ciência, corpo humano, história, natureza, tecnologia e mistérios",
+      "dono": "manhwa-react",
+      "alimentadores": {},
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:00",
+        "19:00",
+        "21:30"
+      ]
+    },
     "filmenoturno": {
       "slug": "filmenoturno",
       "creds": [
@@ -1047,6 +1068,27 @@
         "22:10"
       ],
       "reserva_dono": 1
+    },
+    "pordentro": {
+      "slug": "pordentro",
+      "creds": [
+        "novo_pordentro"
+      ],
+      "nome": "Por Dentro",
+      "handle": "@pordentrobr-d4w",
+      "channel_id": "UCq_n2JGOuagdyC3GHMv0J0w",
+      "navegador": true,
+      "idioma": "pt",
+      "fuso": "America/Sao_Paulo",
+      "nicho": "como as coisas funcionam por dentro: motores, aviões, eletrônicos, máquinas, invenções, engenharia do dia a dia",
+      "dono": "manhwa-react",
+      "alimentadores": {},
+      "max_dia": 3,
+      "horarios_rede": [
+        "12:30",
+        "19:30",
+        "21:00"
+      ]
     },
     "vendasqueescalam": {
       "slug": "vendasqueescalam",

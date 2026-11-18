@@ -1,5 +1,10 @@
 # Máquinas: trabalharam as 24 h? (mais novo em cima)
 
+🖥️ Máquinas nas últimas 24 h (18/11 08:05) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
+❌ PC2: trabalhando 17% do tempo (CPU média 30%, RAM 20%, ffmpeg em 3%), parado 62%; maior parada 54 min desde 00:25; horas quase paradas: 00, 01, 02, 04, 07, 11, 14, 15, 17, 18, 19, 20, 22, 23h; medidor só cobriu 89% do dia
+✅ PC1: trabalhando 95% do tempo (CPU média 95%, RAM 61%, ffmpeg em 84%), parado 1%; medidor só cobriu 54% do dia
+❌ DESKTOP: trabalhando 38% do tempo (CPU média 48%, RAM 58%, ffmpeg em 23%), parado 37%; maior parada 43 min desde 11:32; horas quase paradas: 01, 12, 18, 19, 20h; câmera/OBS em uso 113 min (não conta)
+
 🖥️ Máquinas nas últimas 24 h (17/11 08:06) — plano: PC2, PC1 e desktop (câmera desligada) no máximo o tempo todo
 ❌ PC2: trabalhando 38% do tempo (CPU média 48%, RAM 30%, ffmpeg em 24%), parado 42%; maior parada 58 min desde 08:12; horas quase paradas: 04, 05, 06, 07, 08, 09, 13, 18, 19h
 ✅ PC1: trabalhando 93% do tempo (CPU média 95%, RAM 62%, ffmpeg em 82%), parado 0%; medidor só cobriu 50% do dia
