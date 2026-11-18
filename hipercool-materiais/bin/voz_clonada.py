@@ -289,6 +289,19 @@ _KOKOROS = {}
 _PONTUACAO = set(';:,.!?¡¿—…"«»“”()')
 
 
+PIPER = RAIZ / "models" / "piper"
+_PIPERS = {}
+
+
+def _piper(nome="cadu"):
+    """18/11 (dona: mistura de motores Kokoro/Francisca/Piper com as técnicas — "p3 sem Kitten" nos PCs): a voz Piper
+    pt_BR (rhasspy/piper-voices, MIT, ~60 MB, CPU) aberta 1x por processo (abrir custa ~45 s; a fala, ~1-2 s)."""
+    if nome not in _PIPERS:
+        from piper import PiperVoice
+        _PIPERS[nome] = PiperVoice.load(str(PIPER / f"pt_BR-{nome}-medium.onnx"))
+    return _PIPERS[nome]
+
+
 def _kokoro(modelo):
     if modelo not in _KOKOROS:
         from kokoro_onnx import Kokoro
@@ -338,6 +351,13 @@ def _base_tts(base, texto, saida, velocidade=1.0, palavras=None):
         else:
             audio, sr = _kokoro("kokoro-v1.0.onnx").create(falado, voice=nome, speed=velocidade, lang="pt-br")
         sf.write(str(saida), audio, sr)
+    elif motor == "piper":
+        import wave
+        from piper import SynthesisConfig
+        # velocidade: length_scale é o inverso (1,1 = 10% mais devagar)
+        cfg = SynthesisConfig(length_scale=round(1.0 / max(0.6, min(1.6, velocidade)), 3))
+        with wave.open(str(saida), "wb") as w:
+            _piper(nome).synthesize_wav(texto, w, syn_config=cfg)
     elif motor == "edge":
         import edge_tts
         mp3 = Path(saida).with_suffix(".mp3")
@@ -454,9 +474,12 @@ def lote(voz, lista):
         origem = it.get("entrada")
         if not origem:
             origem = TMP / f"lote_{voz}_{os.getpid()}.wav"
-            kokoro_voz = _KOKORO_VOZES_PT[i % len(_KOKORO_VOZES_PT)]
-            _base_tts(f"kokoro:{kokoro_voz}", it["texto"], origem, it.get("velocidade", 1.0),
-                      palavras=it["saida"] + ".words.json")
+            if it.get("motor") == "piper":  # 18/11: 3ª base da mistura (tom_base "3_piper")
+                _base_tts("piper:cadu", it["texto"], origem, it.get("velocidade", 1.0))
+            else:
+                kokoro_voz = _KOKORO_VOZES_PT[i % len(_KOKORO_VOZES_PT)]
+                _base_tts(f"kokoro:{kokoro_voz}", it["texto"], origem, it.get("velocidade", 1.0),
+                          palavras=it["saida"] + ".words.json")
         os.environ["APPLIO_F0_ESCALA"] = str(it.get("f0_escala", 1))
         os.environ["APPLIO_F0_FINAL_ST"] = str(it.get("final_st", 0))
         tom = converter(voz, origem, it["saida"], tom_fixo(voz, it["tom_base"]) + int(it.get("tom_extra", 0)),

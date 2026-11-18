@@ -88,6 +88,51 @@ def clone_ligado():
 
 MISTURA_TETO_S = float(os.environ.get("ANIME_MISTURA_TETO_S", "50"))  # máx. de fala seguida na mesma base
 _SEGUIDA = {"base": None, "s": 0.0}
+PIPER_OK = Path(r"D:\hipercool-materiais\models\piper\pt_BR-cadu-medium.onnx")
+
+
+def _voz_modo():
+    """Modo da voz deste vídeo: VOZ_MODO manda; senão "p3" (18/11, padrão). p3 exige o Piper instalado (modelo +
+    tom_3_piper do narrador) e voz clonada; sem isso cai pro "p1", nunca pra base única."""
+    m = (os.environ.get("VOZ_MODO") or "p3").strip().lower()
+    if os.environ.get("ANIME_MISTURA") == "0":
+        return "p0"
+    if m == "p3" and not (_piper_pronto() and clone_ligado()):
+        return "p1"
+    return m
+
+
+def _piper_pronto():
+    if os.name != "nt":  # nuvem: o Piper vem pelo pacote quando o voz_clonada_nuvem souber gerar (ainda não)
+        return False
+    voz = os.environ.get("VOZ_CLONADA")
+    base_amostra = Path(r"D:\hipercool-materiais\amostras_voz\2026-10-18_vozes_clonadas\_bases\3_piper.wav")
+    return PIPER_OK.exists() and base_amostra.exists() and bool(voz) and (VOZES_DIR / voz / f"{voz}.pth").exists()
+
+
+def _base_p3(texto, indice, impactos, total):
+    """Revezamento das 3 bases rápidas (teste de ouvido 17-18/11: a v4/P2 com Kokoro, Francisca e Piper ganhou da
+    base única). Kokoro na subida pro clímax e nos impactos (o "gol"); fora disso Francisca e Piper revezam por
+    VIRADA: a base só muda depois de MISTURA_TETO_S de fala seguida (padrão 50 s; no Short, ~1 troca), e a ordem
+    da próxima é fixa por hash do texto (refazer dá o mesmo áudio). Gancho (frase 0) = Kokoro."""
+    import hashlib
+    if indice == 0:
+        _SEGUIDA.update(base=None, s=0.0, calma=None)
+    sobe = indice == 0 or indice in (impactos or []) or narracao_curva.deltas(texto, indice, impactos, total)[0] >= 8
+    dur = len(texto.split()) / 2.6
+    if sobe:
+        base = "kokoro"
+    else:
+        calma = _SEGUIDA.get("calma")
+        if calma is None:
+            calma = "francisca" if int(hashlib.md5(texto.encode("utf-8")).hexdigest(), 16) % 2 else "piper"
+        elif _SEGUIDA["base"] == calma and _SEGUIDA["s"] >= MISTURA_TETO_S:
+            calma = "piper" if calma == "francisca" else "francisca"
+        _SEGUIDA["calma"] = calma
+        base = calma
+    _SEGUIDA["s"] = _SEGUIDA["s"] + dur if base == _SEGUIDA["base"] else dur
+    _SEGUIDA["base"] = base
+    return base
 
 
 def base_da_frase(modo, texto, indice, impactos, total):
@@ -96,6 +141,16 @@ def base_da_frase(modo, texto, indice, impactos, total):
     15/11 (dona + revisão do outro agente: dos últimos 400 vídeos só 6 misturaram; no misto a Francisca ficava 86% da
     fala e até 33,7 min seguidos): com ANIME_MISTURA=1 todo vídeo mistura, e nenhuma base passa de MISTURA_TETO_S
     seguidos — passou, a próxima frase vai pra outra base. Sem a chave = exatamente como antes."""
+    # 18/11 dona (teste de ouvido P0..P5): o p0 (uma base no vídeo inteiro) sai de cena. Modos de voz (VOZ_MODO):
+    #   "p3" (padrão sem GPU) = revezamento Kokoro / Francisca / Piper, troca na virada (teto de tempo), Kokoro na
+    #       subida pro clímax; "kitten_tudo" (só onde há GPU) e o "p3" com Kitten ficam pro lado da nuvem;
+    #   "p1" = o misto de antes (Kokoro no gancho/subidas, Francisca no resto) — reserva se a produção apertar.
+    #   VOZ_MODO=p0 (ou ANIME_MISTURA=0) volta à base única sorteada por vídeo.
+    vm = _voz_modo()
+    if vm == "p3":
+        return _base_p3(texto, indice, impactos, total)
+    if vm == "p1":
+        modo = "misto"
     if os.environ.get("ANIME_MISTURA") == "1":
         modo = "misto"
     if modo != "misto":
@@ -159,6 +214,9 @@ def _frase_v2(a, base, texto, indice, impactos, total, chave):
     curva e do volume na medida dele, pausa dele, tom que varia entre frases como o dele, faixa de entonação, EQ e o
     jeito dele de fechar a frase (final_st, na força que o narracao_curva.variacao der pra esta frase)."""
     import hashlib
+    # 18/11: o Piper (3ª base do p3) não tem medida própria no perfil do narrador — usa a do Kokoro (as duas são
+    # bases geradas no lote, com velocidade em vez do "rate" do edge, e o mesmo tom natural ~130 Hz)
+    perfil_base = "kokoro" if base == "piper" else base
     dr, dp, dg, _cauda = narracao_curva.deltas(texto, indice, impactos, total)
     dr2 = dr * a["curva_rate"]
     cauda = a["cauda_impacto"] if indice in (impactos or []) else a["cauda"]
@@ -166,13 +224,13 @@ def _frase_v2(a, base, texto, indice, impactos, total, chave):
         cauda = max(cauda, 1.5)
     ruido = (int(hashlib.md5(texto.encode("utf-8")).hexdigest(), 16) % 5 - 2) / 4
     tom_extra = int(round(max(-2.0, min(2.0, (dr / narracao_curva.PICO_RATE + ruido) * a["tom_extra_st"]))))
-    extra = {"tom_extra": tom_extra, "f0_escala": a[base]["f0_escala"], "eq": a[base]["eq"]}
+    extra = {"tom_extra": tom_extra, "f0_escala": a[perfil_base]["f0_escala"], "eq": a[perfil_base]["eq"]}
     v = narracao_curva.variacao(chave, indice, texto, impactos, total)
     extra["index_rate"] = v["index_rate"]
     extra["protect"] = v["protect"]
     extra["volume_envelope"] = v["volume_envelope"]
-    if a[base].get("final_st"):
-        extra["final_st"] = round(a[base]["final_st"] * v["final_mult"], 2)
+    if a[perfil_base].get("final_st"):
+        extra["final_st"] = round(a[perfil_base]["final_st"] * v["final_mult"], 2)
     # 29/10 teste T9 (Fable; dona: "quero os vídeos falando mais rápido, um louco como o parceiro kaijime, mas pode
     # ficar ruim em alguns — gera variante e vai testando"): CORTES_FALA_DELTA = pontos % a mais na velocidade da fala
     # (B = +15); vazio/0 = como sempre. Vale para o clone (Edge rate e Kokoro vel), nunca para a voz Edge pura.
@@ -180,7 +238,7 @@ def _frase_v2(a, base, texto, indice, impactos, total, chave):
         delta_fala = float(os.environ.get("CORTES_FALA_DELTA") or 0)
     except ValueError:
         delta_fala = 0.0
-    if base == "kokoro":
+    if base in ("kokoro", "piper"):
         vel = max(0.75, min(1.6, a["kokoro"]["velocidade"] * (1 + (dr2 + delta_fala) / 100)))
         return extra, f"x{vel:.2f}", None, dg * a["curva_ganho"], cauda, round(vel, 2)
     rate = int(round(max(-40, min(70, a["francisca"]["rate"] + dr2 + delta_fala))))
@@ -318,6 +376,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
     Uma chamada só ao voz_clonada.py lote: o Applio carrega 1x (frase a frase era ~1 min de carga cada).
     Falhou = levanta: vídeo com metade da voz clonada não pode sair."""
     voz, modo = os.environ["VOZ_CLONADA"], os.environ.get("VOZ_CLONADA_BASE", "francisca")
+    _SEGUIDA.update(base=None, s=0.0, calma=None)  # 18/11: revezamento do p3 começa limpo em cada chamada
     perfil = _perfil_v2(voz)
     audio_dir = Path(audio_dir)
     bases = audio_dir / "_base_clone"
@@ -345,8 +404,15 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                 aj = climas_voz.ajustes(voz, climas, i)
             except Exception as e:  # noqa: BLE001
                 logging.warning(f"[clone] clima da frase {i} falhou ({e}) — normal")
-        base = (aj or {}).get("base") or base_da_frase(modo, texto, i, impactos, len(lines))
+        # 18/11: no p3 quem escolhe a base é o revezamento (o clima continua mudando tom, ritmo e pausa da frase);
+        # antes o clima trocava a base sozinho (tensão/épico -> Francisca, ação -> Kokoro)
+        if _voz_modo() == "p3":
+            base = base_da_frase(modo, texto, i, impactos, len(lines))
+        else:
+            base = (aj or {}).get("base") or base_da_frase(modo, texto, i, impactos, len(lines))
         if base == "kokoro" and not _KOKORO_OK:  # 26/10 (dona: "as vozes clonadas dos Cortes"): só sem o modelo
+            base = "francisca"
+        if base == "piper" and not _piper_pronto():
             base = "francisca"
         # 28/10: outra língua = base Edge da língua (Kokoro aqui é pt). ANIME_OUTRA_LINGUA, NÃO ANIME_TTS_VOICE: o
         # parceiro em pt também põe ANIME_TTS_VOICE (narradores do nicho, Emma/Andrew) e o pt saía com base gringa
@@ -374,7 +440,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                 if aj["final"] is not None:
                     ex["final_st"] = aj["final"]
                 ex["eq"] = climas_voz.juntar_eq(ex.get("eq"), aj["eq"])
-                if base == "kokoro":
+                if base in ("kokoro", "piper"):
                     vel = round(max(0.75, min(1.6, (vel or 1.0) * aj["vel"])), 2)
                 else:
                     rate = f"{int(round(max(-40, min(70, int(str(rate).rstrip('%')) + aj['rate'])))):+d}%"
@@ -383,7 +449,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                 logging.warning(f"[clone] ajuste do clima na frase {i} falhou ({e}) — normal")
         if os.environ.get("VOZ_CLONADA_CONFIG") == "2":  # timbre forte (anime_voz_clonada.CONFIGS)
             extra = {**extra, "index_rate": 0.8, "protect": 0.33, "volume_envelope": 0.8}
-        resumo.append({"i": i, "base": base, "rate": rate if base != "kokoro" else f"x{vel}", "clima": (aj or {}).get("clima", "normal"),
+        resumo.append({"i": i, "base": base, "rate": rate if base not in ("kokoro", "piper") else f"x{vel}", "clima": (aj or {}).get("clima", "normal"),
                        "tom_extra": int(extra.get("tom_extra", 0)), "index_rate": extra.get("index_rate", 0.5),
                        "protect": extra.get("protect", 0.33), "volume_envelope": extra.get("volume_envelope", 1.0),
                        "texto": texto})
@@ -391,6 +457,9 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
         if base == "kokoro":
             itens.append({"saida": str(out), "tom_base": "1_kokoro", "texto": texto, "velocidade": round(vel, 2),
                           **extra})
+        elif base == "piper":  # 18/11: 3ª base do p3, gerada no lote como o Kokoro (voz_clonada._piper)
+            itens.append({"saida": str(out), "tom_base": "3_piper", "motor": "piper", "texto": texto,
+                          "velocidade": round(vel or 1.0, 2), **extra})
         else:
             bruto = bases / f"audio_{i}.wav"
             # sem contour: o edge grátis recusa (No audio was received) e o vigia achou que a Microsoft bloqueou a voz (20/10)
