@@ -8,7 +8,7 @@ modelo melhor". A ordem quando a produção apertar está no fim.
 
 | Modo | O que é | Onde | Estado |
 |---|---|---|---|
-| **kitten_tudo** | Kitten 2 em todas as frases + todas as técnicas de produção | só onde há GPU (Kaggle) | **a implantar** (etapa 2) |
+| **kitten_tudo** (padrão com GPU) | Kitten 2 com a voz pronta "Portuguese" em todas as frases + RVC do narrador por cima + todas as técnicas de produção | Kaggle com GPU (longos e Shorts de lá) | **ATIVO** a partir da próxima sessão (18/11); teste de ponta a ponta no código de produção OK (Barba Branca, 10/10 falas em 133 s) |
 | **p3** (padrão) | revezamento Kokoro / Francisca / Piper + técnicas. Kokoro no gancho, nas subidas e nos impactos; Francisca e Piper revezam o resto com teto de 50 s seguidos. Onde há GPU, entra o Kitten 2 no gancho, nas perguntas e no clímax | PCs (sem GPU) hoje; Kaggle depois | **ATIVO** no PC1, desktop e PC2 (18/11) |
 | **p1** | Kokoro no gancho e nas subidas, Francisca no resto + técnicas | reserva | ativo como queda automática |
 | p0 | base única por vídeo, sem mistura | aposentado | só com `VOZ_MODO=p0` ou `ANIME_MISTURA=0` |
@@ -49,6 +49,22 @@ vcozes\<voz>` (o `tom_fixo` cria sozinho no Windows se a amostra existir).
 Voz nova no Drive: rodar `voz_clonada.tom_fixo(voz, "3_piper")` e subir o `tom_3_piper.txt` junto.
 Backups: `anime_tts.py.bak_20261118_*`, `voz_clonada.py.bak_*`, `voz_clonada_nuvem.py.bak_*`, `sti_short.sh.bak_*`;
 central: `kaggle_trabalhador.py.bak_20261118_0931_antes_piper`.
+
+## kitten_tudo — como funciona (18/11)
+- Dona escolheu a voz PADRÃO do Kitten (sem copiar o jeito de áudio real): "o que me preocupa são os personagens famosos".
+  Teste das 3 referências (real / clone / padrão) em `TESTE_DE_OUVIDO\versao_K_ref_*.mp4`: mesmo tempo (±3%); o padrão
+  não precisa de preparo nenhum por voz.
+- `anime_tts._voz_modo()`: sem `VOZ_MODO`, usa `kitten_tudo` se `_kitten_pronto()` (não-Windows, `KITTEN_NUVEM=1` e
+  `tom_4_kitten.txt` do narrador); senão `p3`; senão `p1`. Nos PCs nunca liga (forçar também cai pro p3).
+- `kaggle_trabalhador.preparar_applio()` (central e PC1): só com GPU, cria `/tmp/venvs_voz/kitten2`
+  (`--system-site-packages`, `kittenml` + `soundfile`) e liga `KITTEN_NUVEM=1`. `KITTEN=0` desliga.
+- `voz_clonada_nuvem._bases_kitten()`: gera todas as frases de um vídeo num processo só (modelo abre 1x, ~35 s; ~5 s
+  por fala); falhou uma frase = ela sai no Kokoro.
+- Tom do clone: amostra `_bases\4_kitten.wav` (10 falas reais do Kitten padrão, 42 s, mediana 137 Hz) ->
+  `tom_4_kitten.txt` em 107 vozes, no PC1 e no cache `colab_recap/vozes`. Voz nova: `voz_clonada.tom_fixo(voz, "4_kitten")`.
+- 18/11: 18 vozes do cache do Kaggle estavam SEM `tom_1_kokoro`/`tom_2_edge_francisca` (falha antiga: subiam sem o tom
+  e o clone usava tom 0 na Francisca). Completadas.
+- Memória da GPU com Kitten + clone + render: NÃO medida. Se apertar: `VOZ_MODO=p3` na sessão (ordem abaixo).
 
 ## Custo de tempo (voz, medido/estimado)
 - p3 sem Kitten nos PCs: ~igual ao de hoje. O Piper abre em ~20–45 s uma vez por processo e gera cada frase em ~0,6 s.
