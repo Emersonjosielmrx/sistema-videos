@@ -6602,3 +6602,48 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 - [INÉDITO] github.com/zekefarioli-arch/playwright-android-real-device — ★0, push 2026-10-04, MIT — Playwright end-to-end tests on Chrome of a real Android phone over USB (adb + CDP), no emulator or device farm
 - [INÉDITO] github.com/eminogrande/phoneuse-agent — ★0, push 2026-10-14, MIT — Turn old unrooted Android phones into LLM-operable agent nodes: adb bootstrap, control app, farm control plane
+
+## 2026-11-18 12:06 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_webgl_frame_a_frame__sonnet_1156.md`
+
+- [INÉDITO] github.com/EGO-CYBER/termux-animation-renderer — ★2, push 2026-09-29, MIT — Рендерит HTML/Canvas/SVG/WebGL-анимации в MP4 на Android через Chromium CDP и FFmpeg
+
+## 2026-11-18 12:18 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_webgl_frame_a_frame__sonnet_1211.md`
+
+- [INÉDITO] github.com/majiayu000/stillmotion — ★2, push 2026-11-07, MIT — Turn browser animations into frame-exact MP4 videos with synthesized sound: CSS, SVG/SMIL and WebGL recorded in headless Chrome, soundtrack 
+- [INÉDITO] github.com/YASSERRMD/Cadra — ★5, push 2026-07-13, Apache-2.0 — Code-first, agent-first 3D video animation framework and studio, built on Three.js and WebGPU. One scene DSL authored in code, by an agent o
+- [INÉDITO] github.com/ayst-z/music-code-mv — ★6, push 2026-10-15, MIT — DSH plugin: render code-driven music videos (music-code-mv) — deterministic Canvas2D/Three.js shots, headless-Chrome or browserless skia eng
+
+## 2026-11-18 12:38 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_1231.md`
+
+- [INÉDITO] github.com/Spartan-Game-Studios/puppet — ★0, push 2026-11-15, MIT — Free, open-source webcam VTuber app: VRM avatars driven by Google MediaPipe face (52 ARKit blendshapes), body and hand tracking. Tauri; macO
+
+## 2026-11-18 13:04 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_1256.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 13:25 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_1311.md`
+
+- [INÉDITO] github.com/riggle3d/glb-to-vrm — ★None, push ?, ver repo (fallback HTML) — Convert GLB to VRM 1.0 with visemes, blinks and expressions - Python and Node clients for the Riggle API
+- [INÉDITO] github.com/marmooo/vrm-pose-maker — ★None, push ?, ver repo (fallback HTML) — A browser-based tool for posing VRM avatars (bone rotation/position, expressions, camera, background) and saving the result.
+
+## 2026-11-18 14:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1406.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 15:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1511.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

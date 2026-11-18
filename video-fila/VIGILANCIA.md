@@ -1,14 +1,14 @@
-# Vigilância 24 h — 2026-11-18T12:00:40
+# Vigilância 24 h — 2026-11-18T16:00:48
 
 (gerado por vigilancia.py; detalhe em estado\vigilancia_casos.jsonl)
 
 ## Alarmes desta volta (4)
-- instagram: 10 posts até 12:00, normal ~28
+- instagram: 10 posts até 16:00, normal ~39
 - canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 - canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar)
 
-## Casos abertos (28)
+## Casos abertos (30)
 - [consertar] longo AXR1lZb1P-o_4_He_got_into_the_Medieval_Age___began saiu com problema de qualidade (cw/claude-sonnet-5-5)
 - [consertar] _parceiro_20261114.log: mesmo erro 6x (-)
 - [consertar] _parceiro_20261114.log: mesmo erro 6x (-)
@@ -37,6 +37,8 @@
 - [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 - [consertar] canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
+- [consertar] canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem postar) (-)
 
 ## Últimos fechados
 - [falso] longo zZGctp8j_QU_Beating_Up_the_Arrogant_Bully_Inside_the saiu com problema de qualidade — - / -

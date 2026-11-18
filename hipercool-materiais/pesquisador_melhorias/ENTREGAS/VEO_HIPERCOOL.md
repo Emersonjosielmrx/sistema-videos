@@ -270,3 +270,20 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-18 11:04 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1053.md`
 - [INÉDITO] github.com/pr0h0/OpenManga — ★20, push 2026-11-17, Apache-2.0 — Self-hosted studio that turns a story into a consistent AI-illustrated comic, webtoon or narrated video. Bring your own provider key, local 
+
+## [ ] PENDENTE — 2026-11-18 12:38 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_1231.md`
+- [INÉDITO] github.com/Spartan-Game-Studios/puppet — ★0, push 2026-11-15, MIT — Free, open-source webcam VTuber app: VRM avatars driven by Google MediaPipe face (52 ARKit blendshapes), body and hand tracking. Tauri; macO
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 13:04 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_1256.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 13:25 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_avatar_3d_comercial__sonnet_1311.md`
+- [INÉDITO] github.com/riggle3d/glb-to-vrm — ★None, push ?, ver repo (fallback HTML) — Convert GLB to VRM 1.0 with visemes, blinks and expressions - Python and Node clients for the Riggle API
+- [INÉDITO] github.com/marmooo/vrm-pose-maker — ★None, push ?, ver repo (fallback HTML) — A browser-based tool for posing VRM avatars (bone rotation/position, expressions, camera, background) and saving the result.
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 14:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_camera_3d_painel__sonnet_1406.md`
+- (todos os itens desta pesquisa foram reprovados)

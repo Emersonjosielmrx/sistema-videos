@@ -18963,5 +18963,85 @@
     "arquivado": false,
     "descricao": "Turn old unrooted Android phones into LLM-operable agent nodes: adb bootstrap, control app, farm control plane",
     "data": "2026-11-18"
+  },
+  "ego-cyber/termux-animation-renderer": {
+    "ok": true,
+    "nome": "EGO-CYBER/termux-animation-renderer",
+    "estrelas": 2,
+    "push": "2026-09-29",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Рендерит HTML/Canvas/SVG/WebGL-анимации в MP4 на Android через Chromium CDP и FFmpeg",
+    "data": "2026-11-18"
+  },
+  "majiayu000/stillmotion": {
+    "ok": true,
+    "nome": "majiayu000/stillmotion",
+    "estrelas": 2,
+    "push": "2026-11-07",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn browser animations into frame-exact MP4 videos with synthesized sound: CSS, SVG/SMIL and WebGL recorded in headless Chrome, soundtrack ",
+    "data": "2026-11-18"
+  },
+  "yasserrmd/cadra": {
+    "ok": true,
+    "nome": "YASSERRMD/Cadra",
+    "estrelas": 5,
+    "push": "2026-07-13",
+    "licenca": "Apache-2.0",
+    "arquivado": false,
+    "descricao": "Code-first, agent-first 3D video animation framework and studio, built on Three.js and WebGPU. One scene DSL authored in code, by an agent o",
+    "data": "2026-11-18"
+  },
+  "ayst-z/music-code-mv": {
+    "ok": true,
+    "nome": "ayst-z/music-code-mv",
+    "estrelas": 6,
+    "push": "2026-10-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "DSH plugin: render code-driven music videos (music-code-mv) — deterministic Canvas2D/Three.js shots, headless-Chrome or browserless skia eng",
+    "data": "2026-11-18"
+  },
+  "spartan-game-studios/puppet": {
+    "ok": true,
+    "nome": "Spartan-Game-Studios/puppet",
+    "estrelas": 0,
+    "push": "2026-11-15",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Free, open-source webcam VTuber app: VRM avatars driven by Google MediaPipe face (52 ARKit blendshapes), body and hand tracking. Tauri; macO",
+    "data": "2026-11-18"
+  },
+  "elainyilanchen/blender-vrm-perfect-sync": {
+    "ok": true,
+    "nome": "elainyilanchen/blender-vrm-perfect-sync",
+    "estrelas": 5,
+    "push": "2026-07-05",
+    "licenca": "NOASSERTION",
+    "arquivado": false,
+    "descricao": "Click-to-run Windows tool to batch-add ARKit perfect-sync (52 blendshapes) to VRoid VRM models via headless Blender. Bilingual GUI, no Blend",
+    "data": "2026-11-18"
+  },
+  "riggle3d/glb-to-vrm": {
+    "ok": true,
+    "nome": "riggle3d/glb-to-vrm",
+    "estrelas": null,
+    "push": "?",
+    "licenca": "ver repo (fallback HTML)",
+    "arquivado": false,
+    "descricao": "Convert GLB to VRM 1.0 with visemes, blinks and expressions - Python and Node clients for the Riggle API",
+    "data": "2026-11-18"
+  },
+  "marmooo/vrm-pose-maker": {
+    "ok": true,
+    "nome": "marmooo/vrm-pose-maker",
+    "estrelas": null,
+    "push": "?",
+    "licenca": "ver repo (fallback HTML)",
+    "arquivado": false,
+    "descricao": "A browser-based tool for posing VRM avatars (bone rotation/position, expressions, camera, background) and saving the result.",
+    "data": "2026-11-18"
   }
 }

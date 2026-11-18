@@ -4261,3 +4261,17 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_android_adb_automacao_upload__sonnet_1126.md`
 - [INÉDITO] github.com/zekefarioli-arch/playwright-android-real-device — ★0, push 2026-10-04, MIT — Playwright end-to-end tests on Chrome of a real Android phone over USB (adb + CDP), no emulator or device farm
 - [INÉDITO] github.com/eminogrande/phoneuse-agent — ★0, push 2026-10-14, MIT — Turn old unrooted Android phones into LLM-operable agent nodes: adb bootstrap, control app, farm control plane
+
+## [ ] PENDENTE — 2026-11-18 12:06 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_webgl_frame_a_frame__sonnet_1156.md`
+- [INÉDITO] github.com/EGO-CYBER/termux-animation-renderer — ★2, push 2026-09-29, MIT — Рендерит HTML/Canvas/SVG/WebGL-анимации в MP4 на Android через Chromium CDP и FFmpeg
+
+## [ ] PENDENTE — 2026-11-18 12:18 — Render determinístico de WebGL e Three.js sem GPU (`area_webgl_frame_a_frame`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_webgl_frame_a_frame__sonnet_1211.md`
+- [INÉDITO] github.com/majiayu000/stillmotion — ★2, push 2026-11-07, MIT — Turn browser animations into frame-exact MP4 videos with synthesized sound: CSS, SVG/SMIL and WebGL recorded in headless Chrome, soundtrack 
+- [INÉDITO] github.com/YASSERRMD/Cadra — ★5, push 2026-07-13, Apache-2.0 — Code-first, agent-first 3D video animation framework and studio, built on Three.js and WebGPU. One scene DSL authored in code, by an agent o
+- [INÉDITO] github.com/ayst-z/music-code-mv — ★6, push 2026-10-15, MIT — DSH plugin: render code-driven music videos (music-code-mv) — deterministic Canvas2D/Three.js shots, headless-Chrome or browserless skia eng
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 15:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_1511.md`
+- (todos os itens desta pesquisa foram reprovados)

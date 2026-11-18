@@ -49,7 +49,15 @@ Pela contagem de 17/11 (`projeto celular sub controle\CONTAS_POR_APARELHO_1711.m
 "celular com várias contas" (o mesmo cenário que derrubou os 12), não "conta orgânica". A dona precisa confirmar se
 os aparelhos foram limpos (só a conta nova) ou se o teste segue assim mesmo (aí o resultado vale pra esse cenário).
 
+**Decisão da dona 18/11 ~13h40:** NÃO tirar as contas antigas — o teste segue com elas nos aparelhos. Então o teste
+mede "conta nova criada e usada só no celular, num aparelho que tem outras contas" (A2: +15, inclusive Kaggle vivas;
+S20 Ultra: +8). Interpretar o resultado com isso em mente: se a conta nova for punida, olhar se as outras do mesmo
+aparelho também foram (sinal de família ligada pelo aparelho).
+Motivo da dona: se o teste mostrar que o celular é o melhor caminho, as contas teriam que ser logadas de novo — e o que
+vimos é que **logins em massa / simultâneos** é o que causa banimento. Deslogar agora = relogar depois = risco à toa.
+
 ## Status
 - 18/11 ~10:35: documentado. Contas criadas pela dona nos aparelhos. Falta: confirmar que cada aparelho só tem a conta
   dele, criar o canal pelo app, 1º post. Fato Chocante e Por Dentro (controle PC) com 1º Short agendado 11:05/11:10.
 - 18/11 10:45: 1º Short dos canais de controle (PC): Fato Chocante https://youtu.be/Em6oLFNG6yo (11:15), Por Dentro https://youtu.be/1Em7b7KE6WE (11:30, sem capa: telefone não verificado).
+- 18/11 15:05: A2 com toque fantasma — automação parada; a dona decide (criar o canal da 2042 na mão ou tentar depois).

@@ -2178,3 +2178,18 @@
 - prova: sem-obra-55392a cenas 5 e 6 (6.5%, 6.9%) e sem-obra-ca43d3 cena 3 (6.6%). Repete em 2 Shorts, porém o júri chamou de 'grave' sem número de retenção que comprove perda.
 - onde: Seleção/corte de cenas (limiar de movimento por cena e zoom/punch-in progressivo na montagem).
 - como testar: Subir o piso de movimento por cena só nesses nichos (finanças/MEI) e comparar % assistido mediano de 20+ Shorts antes e depois.
+
+## 18/11 15:56 PROPOSTA [CERTEZA] Tarja e legenda nossa sobrepõem legenda queimada da fonte (sem-obra-b33b8c) (cw/claude-sonnet-5-5)
+- prova: sem-obra-b33b8c_cap1_20261118: q01 legenda da fonte no topo ('hootie frutti live in INSANE') e tarja rosa duplicada; q10 e q13 legenda queimada longa em inglês/português legível no rodapé, historia 4.0. sem-obra-f25426 q08 mostra 'USEFATOS' vazando. Falta conferir o log [hardsub] dos dois Shorts: se leu legenda e ela ficou à mostra, a tarja está no lugar errado ou menor que a legenda.
+- onde: função que mede a caixa da legenda e desenha a tarja/delogo (visão do hardsub + cobertura_legenda); conferir log do Short e rodar D:\tmp\folha_topo.py nos Shorts do dia
+- como testar: Reprocessar sem-obra-b33b8c e sem-obra-f25426, extrair quadros q10/q13 em >= 720 px e checar se a tarja cobre exatamente a caixa da legenda; controle: vídeo sem legenda não pode ganhar tarja.
+
+## 18/11 15:56 PROPOSTA [GOSTO] Movimento baixo em cenas longas e imagem estática (cw/claude-sonnet-5-5)
+- prova: sem-obra-f25426 cenas 1, 3, 5 com 30.2%, 28.6%, 28.5%; sem-obra-767d45 q13 com 18.3% (cena 5); pintado-surubim q13-q15 água turva estática. Repetido em 3 Shorts.
+- onde: seleção/duração de cenas no montador (corte de cena por movimento medido)
+- como testar: Limitar cena a ~3 s e trocar cena abaixo de 20% de movimento por outro trecho da fonte; comparar nota de movimento e % assistido em 1 lote.
+
+## 18/11 15:56 PROPOSTA [CERTEZA] Quadro estourado em branco no sem-obra-767d45 (cw/claude-sonnet-5-5)
+- prova: sem-obra-767d45_cap1 q11: trecho muito claro/quase estourado (movimento 6.0, grave). Só 1 Short, então só investigar se se repetir; pode ser a luz da própria fonte.
+- onde: transições/filtros de render (fade ou flash entre cenas)
+- como testar: Comparar quadro q11 do render com o trecho correspondente da fonte; se a fonte não estoura, é artefato do pipeline.

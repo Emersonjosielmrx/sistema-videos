@@ -1,0 +1,142 @@
+{
+ "conta": "followupia.ia",
+ "produto": "follow_up",
+ "marca": "Follow-up IA",
+ "titulo": "Recupere vendas esquecidas no WhatsApp",
+ "legenda": "Pare de perder vendas por falta de acompanhamento no WhatsApp. A IA recupera seus leads inativos e converte sozinha.\n\nSaiba mais no link no perfil.\n\n👉 Chame no direct • link no perfil\n\n#followup #vendas #whatsappbusiness #automacao #inteligenciaartificial",
+ "roteiro": {
+  "gancho_tela": "Propostas paradas no WhatsApp?",
+  "pergunta_cliente": "Vou parar de perder vendas por falta de acompanhamento?",
+  "blocos": [
+   {
+    "rotulo": "O problema",
+    "fala": "Eu perdia dinheiro todos os meses esquecendo de responder propostas pendentes no trabalho.",
+    "visual": "apresentador",
+    "prompt_en": "a confident Brazilian business owner wearing glasses, tidy and well lit modern commercial office background",
+    "cenario_en": "standing in a modern tidy commercial office with warm light",
+    "real_tema": "esquecimento de propostas",
+    "destaques": [
+     "perdia dinheiro",
+     "propostas pendentes"
+    ],
+    "conversa": [],
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261118_121225_1.png"
+   },
+   {
+    "rotulo": "Como funciona",
+    "fala": "O Follow-up IA assume esses contatos parados e recupera leads inativos no WhatsApp.",
+    "visual": "conversa",
+    "prompt_en": "",
+    "cenario_en": "",
+    "real_tema": "follow-up com IA",
+    "destaques": [],
+    "conversa": [
+     {
+      "de": "empresa",
+      "texto": "Olá! Conseguiu avaliar a proposta que te enviei?"
+     },
+     {
+      "de": "cliente",
+      "texto": "Oi! Na correria acabei esquecendo. Vamos fechar sim!"
+     },
+     {
+      "de": "empresa",
+      "texto": "Perfeito! Já vou preparar tudo para você."
+     }
+    ]
+   },
+   {
+    "rotulo": "O resultado",
+    "fala": "Agora a inteligência artificial converte leads esquecidos no WhatsApp sozinha e nunca desiste.",
+    "visual": "apresentador",
+    "prompt_en": "a confident Brazilian business owner wearing glasses smiling, tidy and well lit modern office background",
+    "cenario_en": "standing in a bright and tidy corporate office",
+    "real_tema": "conversão no WhatsApp",
+    "destaques": [
+     "converte leads esquecidos",
+     "nunca desiste"
+    ],
+    "conversa": [],
+    "foto_fixa": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261118_121225_1.png",
+    "foto_dono": "D:\\veo\\fotos_na_hora\\produto_followupia.ia_20261118_121225_1.png"
+   }
+  ],
+  "legenda": "Pare de perder vendas por falta de acompanhamento no WhatsApp. A IA recupera seus leads inativos e converte sozinha.\n\nSaiba mais no link no perfil.",
+  "titulo": "Recupere vendas esquecidas no WhatsApp",
+  "modelo_roteiro": "antigravity/gemini-3.8-flash-tiered (Argon falhou)",
+  "pauta_id": "esquecimento_vs_conversao",
+  "pauta_tipo": "antes_depois",
+  "tempo_roteiro_s": 1619,
+  "tentativas_roteiro": 4
+ },
+ "voz": "pt-BR-FranciscaNeural",
+ "voz_clonada": "moana",
+ "efeito_transicao": "eletrico",
+ "trilha": "Beyond - Patrick Patrikios.mp3",
+ "veo": "D:\\video-fila\\produto_tmp\\followupia.ia_20261118_114526\\dono_3.mp4",
+ "duracao_s": 29.21,
+ "trava_final": {
+  "ok": true,
+  "motivos": []
+ },
+ "formato": "explicativo+veo",
+ "gerado_em": "2026-11-18T12:26:57",
+ "variante": "dono_mesma_foto",
+ "cenas_dono_feitas": [
+  1,
+  3
+ ],
+ "mesma_foto": true,
+ "veo_broll_feitos": [],
+ "veo_extra_feitos": [],
+ "veo_total": 2,
+ "cenas": [
+  {
+   "n": 0,
+   "ini": 0.0,
+   "fim": 4.48,
+   "fala": "Vou parar de perder vendas por falta de acompanhamento?",
+   "tipo": "pergunta"
+  },
+  {
+   "n": 1,
+   "ini": 4.48,
+   "fim": 10.5,
+   "fala": "Eu perdia dinheiro todos os meses esquecendo de responder propostas pendentes no trabalho.",
+   "tipo": "dono"
+  },
+  {
+   "n": 2,
+   "ini": 10.5,
+   "fim": 17.44,
+   "fala": "O Follow-up IA assume esses contatos parados e recupera leads inativos no WhatsApp.",
+   "tipo": "conversa"
+  },
+  {
+   "n": 3,
+   "ini": 17.44,
+   "fim": 25.27,
+   "fala": "Agora a inteligência artificial converte leads esquecidos no WhatsApp sozinha e nunca desiste.",
+   "tipo": "dono"
+  },
+  {
+   "n": 4,
+   "ini": 25.27,
+   "fim": 29.21,
+   "fala": "Chame a gente no direct.",
+   "tipo": "cartao"
+  }
+ ],
+ "lapidar": {
+  "nota": 6.5,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 5.0,
+   "roteiro_marca": 9.0,
+   "diretor": 6.0
+  },
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ }
+}

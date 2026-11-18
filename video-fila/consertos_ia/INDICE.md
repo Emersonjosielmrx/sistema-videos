@@ -1229,3 +1229,5 @@
 - 2026-11-18 09:58 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261118_095042_a141.md](20261118_095042_a141.md)
 - 2026-11-18 10:22 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): instagram: 10 posts até 10:20, normal ~23 EVIDÊNCIA: ledger/logs de instagram: ho → [20261118_102040_0299.md](20261118_102040_0299.md)
 - 2026-11-18 11:43 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal pordentro com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem po → [20261118_113039_d96d.md](20261118_113039_d96d.md)
+- 2026-11-18 12:54 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal dentrodascoisas3d com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 di → [20261118_125038_b8dc.md](20261118_125038_b8dc.md)
+- 2026-11-18 15:55 | pergunta | OK | ALARME DA VIGILÂNCIA (medidor sem IA): canal fatochocante com 0 vídeo agendado e 0 pronto (regra: nenhum canal 1 dia sem → [20261118_155040_ef6b.md](20261118_155040_ef6b.md)

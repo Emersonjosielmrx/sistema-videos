@@ -25035,6 +25035,38 @@
         "exemplos de `connectOverCDP` com upload de arquivo via adb push, tratando o seletor de arquivos do Android"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_1126.md 2026-11-18"
+    },
+    {
+      "id": "avatares_stop",
+      "nome": "Encerrar tema avatares 3D VRM/GLB",
+      "subtemas": [
+        "Nenhuma busca nova; migrar o tempo para os temas SERVE abaixo."
+      ],
+      "origem": "area_avatar_3d_comercial__sonnet_1311.md 2026-11-18"
+    },
+    {
+      "id": "cam_ffmpeg_tiras",
+      "nome": "Rolagem e pan de tira vertical de manhwa só em FFmpeg",
+      "subtemas": [
+        "buscar snippets de crop animado com expressão de tempo (crop=y='...') e easing para tira longa em Short 9:16 sem zoompan tremido, rodando em CPU"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1406.md 2026-11-18"
+    },
+    {
+      "id": "cam_ordem_leitura",
+      "nome": "Ordem de leitura e duração por painel pelo volume de fala",
+      "subtemas": [
+        "buscar projetos pequenos que calculam o tempo de cada painel pelo número de palavras do balão, para sincronizar câmera e voz num recap"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1406.md 2026-11-18"
+    },
+    {
+      "id": "cam_gancho_visual",
+      "nome": "Primeiros 30 s do recap com painel de impacto",
+      "subtemas": [
+        "buscar ideias de escolher o painel mais forte para abrir o vídeo e a capa, em Python simples com CPU"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_1406.md 2026-11-18"
     }
   ],
   "projetos": [

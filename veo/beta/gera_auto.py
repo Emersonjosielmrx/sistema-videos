@@ -240,7 +240,8 @@ def garantir_modo_veo(page, aspect="9:16", modelo="Veo 3.1 - Fast", log=print):
             page.locator("[role=menuitem], [role=option], mat-option").filter(has_text=modelo).first.click(timeout=5000)
             page.wait_for_timeout(800)
             atual = (page.get_by_text(_RE_MODELO).last.inner_text() or "").strip()
-        page.locator("button").filter(has_text=re.compile(r"^\s*(Salvar|Save)\s*$")).last.click(timeout=5000)
+        # 18/11: conta em pt-PT mostra "Guardar"
+        page.locator("button").filter(has_text=re.compile(r"^\s*(Salvar|Save|Guardar)\s*$")).last.click(timeout=5000)
         page.wait_for_timeout(1500)
         atual = atual.replace("arrow_drop_down", "").strip()
         ok = modelo in atual

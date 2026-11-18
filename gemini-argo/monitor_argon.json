@@ -3,13 +3,14 @@
   "previsao_avisada": null,
   "teste_falhou_em": null,
   "leitura": {
-    "em": "2026-11-18T12:04:58",
+    "em": "2026-11-18T16:25:28",
     "contas": 29,
-    "prontas": 11,
+    "prontas": 1,
     "voltas": [
-      "2026-11-18T13:09"
+      "2026-11-18T16:31",
+      "2026-11-18T16:43"
     ],
     "exata": false,
-    "cookies_mortos": 11
+    "cookies_mortos": 24
   }
 }
