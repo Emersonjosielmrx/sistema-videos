@@ -94,6 +94,62 @@ def _base_piper(texto, saida, velocidade, nome="cadu"):
         _PIPERS[nome].synthesize_wav(texto, w, syn_config=cfg)
 
 
+KITTEN_VENV = Path(os.environ.get("KITTEN_VENV", "/tmp/venvs_voz/kitten2"))
+_KITTEN_SCRIPT = r'''
+import json, sys, time
+import numpy as np, soundfile as sf
+from kittenml import KittenTTS
+M = KittenTTS("KittenML/kitten-tts-2", backend="torch")
+for saida, texto in json.load(open(sys.argv[1], encoding="utf-8")):
+    t0 = time.time()
+    try:
+        a = M.generate(texto, voice="Portuguese", normalize=False)
+        a = a.cpu().numpy() if hasattr(a, "cpu") else np.asarray(a)
+        sf.write(saida, a.squeeze(), M.sample_rate)
+        print("OK", saida, round(time.time() - t0, 1), flush=True)
+    except Exception as e:
+        print("ERRO", saida, type(e).__name__, str(e)[:200], flush=True)
+'''
+
+
+def kitten_pronto():
+    """O venv do Kitten 2 existe e importa (o kaggle_trabalhador cria em /tmp/venvs_voz/kitten2 quando há GPU)."""
+    py = KITTEN_VENV / "bin" / "python"
+    if not py.exists():
+        return False
+    return subprocess.run([str(py), "-c", "import kittenml"], capture_output=True, timeout=120).returncode == 0
+
+
+def _bases_kitten(itens, lista_dir):
+    """18/11 dona ("vamos começar com o padrão" — modo kitten_tudo): gera de UMA vez, num processo só (o modelo abre
+    1x: ~35 s; cada fala ~5 s na GPU), a base de todo item com motor "kitten", com a voz pronta "Portuguese" do Kitten 2
+    (sem copiar o jeito de ninguém: o timbre do narrador vem do RVC). Item que falhar fica sem 'entrada' e cai pro
+    Kokoro no laço do lote — o vídeo nunca sai sem voz."""
+    ped = []
+    for i, it in enumerate(itens, 1):
+        if it.get("motor") == "kitten" and not it.get("entrada"):
+            ped.append([str(lista_dir / f"_kitten_{i}.wav"), it["texto"], i])
+    if not ped:
+        return
+    py = KITTEN_VENV / "bin" / "python"
+    scr = lista_dir / "_kitten_gerar.py"
+    scr.write_text(_KITTEN_SCRIPT, encoding="utf-8")
+    pj = lista_dir / "_kitten_ped.json"
+    pj.write_text(json.dumps([[s, t] for s, t, _i in ped], ensure_ascii=False), encoding="utf-8")
+    t0 = time.time()
+    r = subprocess.run([str(py), str(scr), str(pj)], capture_output=True, text=True, timeout=3 * 3600)
+    ok = 0
+    for saida, _t, i in ped:
+        if Path(saida).exists() and Path(saida).stat().st_size > 1000:
+            itens[i - 1]["entrada"] = saida
+            ok += 1
+        else:
+            itens[i - 1].pop("motor", None)  # sem a frase do Kitten: o lote gera Kokoro no lugar
+            itens[i - 1]["tom_base"] = "1_kokoro"
+    print(f"[kitten] {ok}/{len(ped)} frases em {time.time() - t0:.0f} s"
+          + ("" if r.returncode == 0 else f" (saiu {r.returncode}: {(r.stderr or '')[-300:]})"), flush=True)
+
+
 def lote(voz, lista):
     """26/10 (dona: "as vozes clonadas dos Cortes"): base Kokoro também — item sem 'entrada' gera o Kokoro aqui,
     com o tom da base certa (tom_1_kokoro / tom_2_edge_francisca), igual ao lote do PC."""
@@ -103,6 +159,8 @@ def lote(voz, lista):
     tons = {p.stem[4:]: int(p.read_text().strip()) for p in modelo.glob("tom_*.txt")}
     f_on, f_q, f_t = _formante(voz)
     lista_dir = Path(lista).resolve().parent
+    if any(it.get("motor") == "kitten" for it in itens):  # 18/11: modo kitten_tudo — todas as bases do Kitten antes
+        _bases_kitten(itens, lista_dir)
     os.chdir(APPLIO)  # o Applio acha contentvec/rmvpe/fcpe por caminho relativo
     sys.path.insert(0, str(APPLIO))
     from core import run_infer_script

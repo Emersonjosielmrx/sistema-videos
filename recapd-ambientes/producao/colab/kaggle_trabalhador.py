@@ -172,6 +172,29 @@ def preparar_applio():
                             "pathvalidate"], capture_output=True, text=True, timeout=900)
         if r.returncode != 0:
             print(f"piper-tts não instalou ({r.stderr[-200:]}) — modo de voz cai pro p1", flush=True)
+        # 18/11 dona ("vamos começar com o padrão"): modo kitten_tudo = Kitten 2 com a voz pronta "Portuguese" em
+        # todas as frases + RVC do narrador por cima. Só com GPU (em CPU leva ~30 min por frase). Ambiente próprio
+        # (o pip do kittenml troca pacotes; junto do Applio quebraria o RVC), igual ao job de testes de voz. O
+        # anime_tts só usa o Kitten com KITTEN_NUVEM=1; falhou aqui = o vídeo sai no p3 (Kokoro/Francisca/Piper).
+        if os.environ.get("KITTEN", "1") != "0" and shutil.which("nvidia-smi") and subprocess.run(
+                ["nvidia-smi"], capture_output=True).returncode == 0:
+            try:
+                kv = Path("/tmp/venvs_voz/kitten2")
+                if not (kv / "bin" / "python").exists():
+                    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "virtualenv"], check=False,
+                                   timeout=600)
+                    subprocess.run([sys.executable, "-m", "virtualenv", "--system-site-packages", str(kv)],
+                                   check=True, capture_output=True, timeout=600)
+                r = subprocess.run([str(kv / "bin" / "python"), "-m", "pip", "install", "-q", "kittenml",
+                                    "soundfile"], capture_output=True, text=True, timeout=3600)
+                if r.returncode == 0 and subprocess.run([str(kv / "bin" / "python"), "-c", "import kittenml"],
+                                                        capture_output=True, timeout=300).returncode == 0:
+                    os.environ["KITTEN_NUVEM"] = "1"
+                    print("Kitten 2 pronto (modo de voz kitten_tudo)", flush=True)
+                else:
+                    print(f"kittenml não instalou ({(r.stderr or '')[-200:]}) — modo de voz fica no p3", flush=True)
+            except Exception as e:  # noqa: BLE001
+                print(f"Kitten 2 falhou ({type(e).__name__}: {str(e)[-200:]}) — modo de voz fica no p3", flush=True)
         patch =RAIZ / "D/hipercool-materiais/tools/applio/rvc/infer/pipeline.py"
         if patch.exists():
             shutil.copyfile(patch, APPLIO_DIR / "rvc" / "infer" / "pipeline.py")

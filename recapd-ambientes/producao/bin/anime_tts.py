@@ -92,14 +92,27 @@ PIPER_OK = Path(r"D:\hipercool-materiais\models\piper\pt_BR-cadu-medium.onnx")
 
 
 def _voz_modo():
-    """Modo da voz deste vídeo: VOZ_MODO manda; senão "p3" (18/11, padrão). p3 exige o Piper instalado (modelo +
-    tom_3_piper do narrador) e voz clonada; sem isso cai pro "p1", nunca pra base única."""
-    m = (os.environ.get("VOZ_MODO") or "p3").strip().lower()
+    """Modo da voz deste vídeo: VOZ_MODO manda; senão o padrão da máquina (18/11): "kitten_tudo" onde o Kitten 2 está
+    pronto (GPU do Kaggle: KITTEN_NUVEM=1 + tom_4_kitten do narrador), senão "p3" (Piper instalado) e, por último,
+    "p1". Nunca volta à base única sozinho."""
     if os.environ.get("ANIME_MISTURA") == "0":
         return "p0"
+    m = (os.environ.get("VOZ_MODO") or ("kitten_tudo" if _kitten_pronto() else "p3")).strip().lower()
+    if m == "kitten_tudo" and not (_kitten_pronto() and clone_ligado()):
+        m = "p3"
     if m == "p3" and not (_piper_pronto() and clone_ligado()):
         return "p1"
     return m
+
+
+def _kitten_pronto():
+    """18/11 (dona: "vamos começar com o padrão"): Kitten 2 com a voz pronta "Portuguese", só onde o kaggle_trabalhador
+    montou o venv dele (GPU) e ligou KITTEN_NUVEM=1, e com o tom do clone do narrador já calculado (tom_4_kitten.txt,
+    sobe com a voz). Sem GPU o Kitten leva ~30 min por frase: nos PCs nunca."""
+    voz = os.environ.get("VOZ_CLONADA")
+    if os.name == "nt" or os.environ.get("KITTEN_NUVEM") != "1" or not voz:
+        return False
+    return (VOZES_DIR / Path(voz).name / "tom_4_kitten.txt").exists()
 
 
 _PIPER_CACHE = {}
@@ -167,6 +180,8 @@ def base_da_frase(modo, texto, indice, impactos, total):
     #   "p1" = o misto de antes (Kokoro no gancho/subidas, Francisca no resto) — reserva se a produção apertar.
     #   VOZ_MODO=p0 (ou ANIME_MISTURA=0) volta à base única sorteada por vídeo.
     vm = _voz_modo()
+    if vm == "kitten_tudo":
+        return "kitten"
     if vm == "p3":
         return _base_p3(texto, indice, impactos, total)
     if vm == "p1":
@@ -236,7 +251,7 @@ def _frase_v2(a, base, texto, indice, impactos, total, chave):
     import hashlib
     # 18/11: o Piper (3ª base do p3) não tem medida própria no perfil do narrador — usa a do Kokoro (as duas são
     # bases geradas no lote, com velocidade em vez do "rate" do edge, e o mesmo tom natural ~130 Hz)
-    perfil_base = "kokoro" if base == "piper" else base
+    perfil_base = "kokoro" if base in ("piper", "kitten") else base
     dr, dp, dg, _cauda = narracao_curva.deltas(texto, indice, impactos, total)
     dr2 = dr * a["curva_rate"]
     cauda = a["cauda_impacto"] if indice in (impactos or []) else a["cauda"]
@@ -258,7 +273,7 @@ def _frase_v2(a, base, texto, indice, impactos, total, chave):
         delta_fala = float(os.environ.get("CORTES_FALA_DELTA") or 0)
     except ValueError:
         delta_fala = 0.0
-    if base in ("kokoro", "piper"):
+    if base in ("kokoro", "piper", "kitten"):
         vel = max(0.75, min(1.6, a["kokoro"]["velocidade"] * (1 + (dr2 + delta_fala) / 100)))
         return extra, f"x{vel:.2f}", None, dg * a["curva_ganho"], cauda, round(vel, 2)
     rate = int(round(max(-40, min(70, a["francisca"]["rate"] + dr2 + delta_fala))))
@@ -426,12 +441,14 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                 logging.warning(f"[clone] clima da frase {i} falhou ({e}) — normal")
         # 18/11: no p3 quem escolhe a base é o revezamento (o clima continua mudando tom, ritmo e pausa da frase);
         # antes o clima trocava a base sozinho (tensão/épico -> Francisca, ação -> Kokoro)
-        if _voz_modo() == "p3":
+        if _voz_modo() in ("p3", "kitten_tudo"):
             base = base_da_frase(modo, texto, i, impactos, len(lines))
         else:
             base = (aj or {}).get("base") or base_da_frase(modo, texto, i, impactos, len(lines))
         if base == "kokoro" and not _KOKORO_OK:  # 26/10 (dona: "as vozes clonadas dos Cortes"): só sem o modelo
             base = "francisca"
+        if base == "kitten" and not _kitten_pronto():
+            base = "kokoro" if _KOKORO_OK else "francisca"
         if base == "piper" and not _piper_pronto():
             base = "francisca"
         # 28/10: outra língua = base Edge da língua (Kokoro aqui é pt). ANIME_OUTRA_LINGUA, NÃO ANIME_TTS_VOICE: o
@@ -460,7 +477,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                 if aj["final"] is not None:
                     ex["final_st"] = aj["final"]
                 ex["eq"] = climas_voz.juntar_eq(ex.get("eq"), aj["eq"])
-                if base in ("kokoro", "piper"):
+                if base in ("kokoro", "piper", "kitten"):
                     vel = round(max(0.75, min(1.6, (vel or 1.0) * aj["vel"])), 2)
                 else:
                     rate = f"{int(round(max(-40, min(70, int(str(rate).rstrip('%')) + aj['rate'])))):+d}%"
@@ -469,7 +486,7 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
                 logging.warning(f"[clone] ajuste do clima na frase {i} falhou ({e}) — normal")
         if os.environ.get("VOZ_CLONADA_CONFIG") == "2":  # timbre forte (anime_voz_clonada.CONFIGS)
             extra = {**extra, "index_rate": 0.8, "protect": 0.33, "volume_envelope": 0.8}
-        resumo.append({"i": i, "base": base, "rate": rate if base not in ("kokoro", "piper") else f"x{vel}", "clima": (aj or {}).get("clima", "normal"),
+        resumo.append({"i": i, "base": base, "rate": rate if base not in ("kokoro", "piper", "kitten") else f"x{vel}", "clima": (aj or {}).get("clima", "normal"),
                        "tom_extra": int(extra.get("tom_extra", 0)), "index_rate": extra.get("index_rate", 0.5),
                        "protect": extra.get("protect", 0.33), "volume_envelope": extra.get("volume_envelope", 1.0),
                        "texto": texto})
@@ -477,6 +494,9 @@ def preparar_clone(lines, audio_dir, impactos, so=None, abertura=True):
         if base == "kokoro":
             itens.append({"saida": str(out), "tom_base": "1_kokoro", "texto": texto, "velocidade": round(vel, 2),
                           **extra})
+        elif base == "kitten":  # 18/11: kitten_tudo — o voz_clonada_nuvem gera todas de uma vez (voz "Portuguese")
+            itens.append({"saida": str(out), "tom_base": "4_kitten", "motor": "kitten", "texto": texto,
+                          "velocidade": round(vel or 1.0, 2), **extra})
         elif base == "piper":  # 18/11: 3ª base do p3, gerada no lote como o Kokoro (voz_clonada._piper)
             itens.append({"saida": str(out), "tom_base": "3_piper", "motor": "piper", "texto": texto,
                           "velocidade": round(vel or 1.0, 2), **extra})
