@@ -112,15 +112,22 @@ def _visao(img_path, gw):
     im.thumbnail((1024, 1024))
     buf = io.BytesIO()
     im.save(buf, "JPEG", quality=88)
-    corpo = {"model": "gemini/gemini-3.5-flash", "max_tokens": 400, "messages": [{"role": "user", "content": [
-        {"type": "text", "text": PERGUNTA},
-        {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()}}]}]}
     url = gw.get("gateway_url", "http://157.173.207.22:20128").rstrip("/") + "/v1/chat/completions"
-    req = urllib.request.Request(url, data=json.dumps(corpo).encode(), headers={
-        "Authorization": "Bearer " + gw["gateway_key"], "Content-Type": "application/json"})
-    txt = json.loads(urllib.request.urlopen(req, timeout=90).read())["choices"][0]["message"]["content"]
-    m = re.search(r"\{.*\}", txt, re.S)
-    return json.loads(m.group(0))
+    imagem = base64.b64encode(buf.getvalue()).decode()
+    erro = None
+    # 18/11: AI Studio (gemini/gemini-3.5-flash) acertava 7%; 3-flash do Antigravity 99%. AI Studio vira reserva.
+    for modelo in ("antigravity/gemini-3-flash", "gemini/gemini-3.5-flash"):
+        corpo = {"model": modelo, "max_tokens": 400, "messages": [{"role": "user", "content": [
+            {"type": "text", "text": PERGUNTA},
+            {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + imagem}}]}]}
+        req = urllib.request.Request(url, data=json.dumps(corpo).encode(), headers={
+            "Authorization": "Bearer " + gw["gateway_key"], "Content-Type": "application/json"})
+        try:
+            txt = json.loads(urllib.request.urlopen(req, timeout=90).read())["choices"][0]["message"]["content"]
+            return json.loads(re.search(r"\{.*\}", txt, re.S).group(0))
+        except Exception as e:  # noqa: BLE001
+            erro = e
+    raise erro
 
 
 def classificar(workers=4):

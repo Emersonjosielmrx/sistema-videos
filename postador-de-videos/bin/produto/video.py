@@ -1044,7 +1044,8 @@ def _visao(jpeg, pergunta):
     # 28/10: 3 timeouts num vídeo só com o gemini-3-flash -> a imagem nova (nota 9 depois, conferida) foi trocada por
     # foto do banco sem nada a ver com a fala. Tenta os outros Gemini antes de desistir (testados: 5 s / 5 s / 29 s).
     erro = None
-    for modelo in ("antigravity/gemini-3-flash", "gemini/gemini-3.5-flash", "agy/gemini-3.8-flash-high"):
+    # 18/11: AI Studio (gemini/gemini-3.5-flash) acertava 7% e atrasava o 3.8 -> foi pro fim
+    for modelo in ("antigravity/gemini-3-flash", "agy/gemini-3.8-flash-high", "gemini/gemini-3.5-flash"):
         corpo = {"model": modelo, "max_tokens": 300, "temperature": 0.1, "messages": [
             {"role": "user", "content": [{"type": "text", "text": pergunta}, {"type": "image_url", "image_url": {
                 "url": "data:image/jpeg;base64," + base64.b64encode(jpeg).decode()}}]}]}

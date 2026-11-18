@@ -139,6 +139,20 @@ def _um(simular=False):
     import shutil
     livre_gb = shutil.disk_usage("D:\\").free / 1e9
     if livre_gb < 6:
+        # 18/11: o D ficou 3 h abaixo de 6 GB (pagefile cresceu 4 GB) e só a faxina na mão liberou (1,4 → 10 GB).
+        # Agora dispara a faxina (manda pro Drive com conferência; nada sem cópia) no máx. 1x a cada 2 h, oculto.
+        # ABASTECEDOR_FAXINA=0 desliga.
+        if os.environ.get("ABASTECEDOR_FAXINA", "1") != "0":
+            marca = Path(r"D:\video-fila\estado\abastecedor_faxina.txt")
+            try:
+                ult = marca.stat().st_mtime
+            except OSError:
+                ult = 0
+            if time.time() - ult > 7200:
+                marca.write_text(datetime.now().isoformat(), encoding="utf-8")
+                subprocess.Popen([sys.executable, r"D:\video-fila\faxina_disco.py"], cwd=r"D:\video-fila",
+                                 creationflags=0x08000000, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                log("disparei a faxina_disco.py (oculta) pra liberar espaço")
         return log(f"D: com {livre_gb:.1f} GB livres (< 6) — sem Short extra até liberar espaço")
     try:  # memória de commit livre (= "memória virtual livre" do Windows; psutil somava o pagefile inteiro)
         import ctypes

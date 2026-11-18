@@ -187,9 +187,17 @@ def _devolver(vid):
 def _trazer_pasta(p):
     """Traz 1 pasta de Short pronta do STI pra postagem do PC1. True = entrou na postagem."""
     dst = SHORTS / p
-    if dst.exists():  # nome já usado aqui (raro): não sobrescreve
-        log(f"[!] {p} já existe no PC1 — fica no STI")
-        return False
+    if dst.exists():  # nome já usado aqui: não sobrescreve
+        # 17/11: solo-leveling_cap1_20261116 ficou 202 rodadas preso no STI ("já existe no PC1" — a pasta daqui era
+        # outro Short que já tinha ido pro Drive). Agora entra com nome novo (<nome>_sti, _sti2...). STI_RENOMEIA=0 desliga.
+        if os.environ.get("STI_RENOMEIA", "1") == "0":
+            log(f"[!] {p} já existe no PC1 — fica no STI")
+            return False
+        n = 1
+        while dst.exists():
+            dst = SHORTS / f"{p}_sti{'' if n == 1 else n}"
+            n += 1
+        log(f"  {p} já existe no PC1 — entra como {dst.name}")
     tmp = Path(tempfile.mkdtemp(prefix="sti_short_", dir=str(SHORTS.parent)))
     # 13/11: o scp do Windows fala SFTP e quer o caminho CRU — com "\ " ele procurava "animes\" e falhava
     # ("No such file"): 2 Shorts prontos ficaram presos no STI. Tenta cru; o jeito antigo fica de reserva.

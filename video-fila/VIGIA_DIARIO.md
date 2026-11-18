@@ -272,3 +272,13 @@ STATUS: OK
 - Causa provável: Travamento transitório no ciclo do alimentador por concorrência de I/O ou espera em JSON/API.
 - CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — travamento transitório já recuperado pelo reinício automático).
 - Estado: NADA A FAZER
+## 20261117_2217 — Recap longo ativo e alimentando no PC1; PC2 com pausa do parceiro por falha em Shorts
+- Motivo / O que achei (trecho de log): `encher_pilha.log` mostra pilha de recap longo ativa e recebendo fontes (pilha 10/10), enquanto `alimentar_pc2.log` indica pausa do parceiro no PC2 por 3 falhas seguidas no short `oYKDa0qCotc`. RAM livre em 7 GB, Wise Memory Optimizer ativo.
+- Causa provável: Ciclo normal de preenchimento do recap longo no PC1; falhas na geração/upload de Shorts no PC2 ativando o mecanismo de proteção (`pc2_parceiro_falhou.json`).
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — respeitar a pausa automática do PC2 sem remover arquivos de travamento por conta da regra de não interferir em execuções e pausas).
+- Estado: NADA A FAZER
+## 20261118_0156 — Recap longo: alimentador reiniciado e disco D com 2.11 GB livres
+- Motivo / O que achei (trecho de log): O alimentador do recap longo estava travado (88 min sem dar a volta), mas já havia sido reiniciado automaticamente pelo sistema. O disco D: apresenta 2.11 GB livres (abaixo do limite de 8 GB), com alto volume de arquivos e processos python ativos em render e preenchimento de pilhas. O Wise Memory Optimizer está rodando (PID 3840).
+- Causa provável: Travamento transitório por concorrência de I/O no alimentador do recap longo (já recuperado) e uso intenso de armazenamento pela fila de render e pilhas de vídeos em D:.
+- CONSERTO PROPOSTO: Nenhum (Modo só aviso ativo — o reinício automático do alimentador ocorreu com sucesso e a regra proíbe remoção de arquivos ou limpeza de disco por conta própria).
+- Estado: NADA A FAZER

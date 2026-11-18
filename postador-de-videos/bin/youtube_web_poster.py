@@ -1308,7 +1308,13 @@ def _subir_celular(slug, e, a, alvo, maiores_18):
         if pasta not in sys.path:
             sys.path.append(pasta)  # no fim (pasta de outro projeto nunca na frente)
         import postar_celular as pc
-        serial = pc.aparelho_do_canal(e["email"])
+        # 18/11 dona ("um canal por telefone, o menor que tiver naquele telefone"): teste_celular.json "aparelho"
+        # fixa o celular do canal (a mesma conta pode estar em 2 aparelhos)
+        try:
+            fixo = (json.loads(TESTE_CELULAR.read_text(encoding="utf-8")).get("aparelho") or {}).get(slug)
+        except (OSError, ValueError):
+            fixo = None
+        serial = fixo or pc.aparelho_do_canal(e["email"])
         if not serial:
             log(f"{slug}: nenhum celular tem a conta {e['email']}")
             return None

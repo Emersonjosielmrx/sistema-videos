@@ -426,3 +426,10 @@ _ler_ledger:                            cannot open `_ler_ledger' (No such file 
 - Causa provável: `LEDGER_FILE.read_text().splitlines()` carrega o ledger inteiro de uma só vez na memória em forma de string gigante e array de linhas, estourando a heap do Python 3.13 quando o ledger cresce muito.
 - CONSERTO PROPOSTO: Alterar `_ler_ledger()` em `D:\postador-de-videos\bin\politica.py` para usar leitura iterativa linha por linha (`for linha in LEDGER_FILE.open(encoding="utf-8"):`) em vez de `read_text().splitlines()`, evitando carregar o arquivo inteiro na memória.
 - Estado: PRECISA REVISÃO
+
+## 20261117_2318 — Ronda de rotina e verificação da fila automática (Modo Só Aviso)
+- Motivo: Ronda de rotina do vigia para verificar se a fila está andando de verdade, checar travamentos e relatar o estado da produção.
+- O que achei (com trecho de log): O arquivo `fila_postagem.log` registra execução contínua dos ciclos de postagem (ex: "janela: D: com 5.8 GB livres (< 10) — só o próximo capítulo de cada língua no PC" e "Shorts em pt: canal parado, sai já"). O log `fila_ciclo.log` indica ciclos regulares informando "fila de capítulos terminada — adicione a próxima obra em config/fila.json", refletindo o funcionamento normal da rotina automatizada.
+- O que fiz: Nenhum código alterado (Modo Só Aviso). Apenas verificação dos logs e registro no diário.
+- CONSERTO PROPOSTO: Nenhum. A fila automática está rodando normalmente nos ciclos configurados de 20 minutos.
+- Estado: NADA A FAZER

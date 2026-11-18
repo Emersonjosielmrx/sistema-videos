@@ -1,0 +1,26 @@
+{
+ "basefy:canal youtube": {
+  "erro": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[type=search], input[placeholder*='uscar' i], input[name=q], input[type=text]\").first\n    - locator resolved to <input ",
+  "url_final": "https://basefy.io/"
+ },
+ "basefy:youtube": {
+  "erro": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[type=search], input[placeholder*='uscar' i], input[name=q], input[type=text]\").first\n    - locator resolved to <input ",
+  "url_final": "https://basefy.io/"
+ },
+ "basefy:canal monetizado": {
+  "erro": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[type=search], input[placeholder*='uscar' i], input[name=q], input[type=text]\").first\n    - locator resolved to <input ",
+  "url_final": "https://basefy.io/"
+ },
+ "ggmax": {
+  "url_final": "https://ggmax.com.br/anuncios?q=canal+youtube",
+  "titulo": "Um momento…",
+  "texto": "ggmax.com.br Executando verificação de segurança Este site utiliza um serviço de segurança para proteção contra bots maliciosos. Esta página é exibida enquanto o site verifica se você não é um bot. Por que esta verificação está demorando mais? Esta verificação pode demorar mais devido a um computador antigo ou a uma conexão lenta com a internet. Próximos passos: Aguarde um pouco. Atualizar a página reiniciará a verificação de segurança e poderá levar mais tempo. Se a verificação ainda não for concluída, atualize esta página. Se você ainda estiver travado nesta página após a atualização, consulte a documentação de solução de problemas da Cloudflare para obter mais ajuda. Ray ID: a5c40f0e99871af6 Desempenho e segurança da Cloudflare Privacidade",
+  "links": []
+ },
+ "dfg": {
+  "erro": "Page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.dfg.com.br/busca?q=canal+youtube\nCall log:\n  - navigating to \"https://www.dfg.com.br/busca?q=canal+youtube\", waiting until \"domcontentloaded\"\n"
+ },
+ "accs_home": {
+  "erro": "Page.goto: Navigation to \"https://accsmarket.com/en\" is interrupted by another navigation to \"chrome-error://chromewebdata/\"\nCall log:\n  - navigating to \"https://accsmarket.com/en\", waiting until \"dom"
+ }
+}

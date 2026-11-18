@@ -1,0 +1,342 @@
+{
+ "video": "crmchatwoot_ia_20261117_165404.mp4",
+ "conta": "crmchatwoot.ia",
+ "marca": "CRM Chatwoot IA",
+ "titulo": "Chatwoot comum ou personalizado com IA?",
+ "formato": "dono_tres_veo_final",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "eletrico",
+ "voz_clonada": "moana",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.62,
+  "notas": {
+   "legibilidade": 7.5,
+   "movimento": 4.0,
+   "roteiro_marca": 6.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    12.79
+   ],
+   [
+    1,
+    "dono",
+    13.12
+   ],
+   [
+    2,
+    "dono",
+    11.79
+   ],
+   [
+    3,
+    "dono",
+    12.6
+   ],
+   [
+    4,
+    "cartao",
+    3.54
+   ]
+  ],
+  "graves": 6,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "media",
+   "cena": 0,
+   "problema": "A legenda karaokê ('básicas' em q03, e também visível em q01 e q02) está posicionada diretamente sobre o queixo e a barba do apresentador, cobrindo parte do seu rosto enquanto ele fala. Isso acontece porque o enquadramento do apresentador foi rebaixado para abrir espaço ao cartão de pergunta no topo, fazendo o queixo colidir com a área da legenda.",
+   "como_corrigir": "Subir ligeiramente o enquadramento do apresentador na cena 0 e tornar o cartão de pergunta superior mais compacto (reduzindo padding vertical), permitindo que a legenda desça para a altura do peito/colarinho (sem ultrapassar y=1580), desobstruindo totalmente o queixo e a boca do apresentador."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 4,
+   "problema": "Cena parada e completamente estática: os quadros q13, q14 e q15 são absolutamente idênticos ao longo de quase 3 segundos, transformando o encerramento do vídeo em uma imagem congelada sem nenhum movimento.",
+   "como_corrigir": "Aplicar animação contínua de câmera lenta (slow zoom in/scale de 100% para 105% no fundo), entrada escalonada dos textos (stagger) e um efeito de pulso suave (pulse/shimmer) no botão 'Chame no direct' para reter a atenção."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Imagem com cara de banco de imagens genérico no fundo do cartão final: a foto de escritório escurecida com mesa de madeira e planta não remete a um software avançado de CRM com IA.",
+   "como_corrigir": "Substituir a foto genérica por um fundo tecnológico sutil (gradiente animado mesh/blur na paleta da marca) ou por uma captura em movimento desfocada da interface real do CRM/Chatwoot."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Todas as cenas com o mesmo molde e falta de variedade visual: da cena 0 à cena 3 (mais de 24 segundos de vídeo), o apresentador permanece rigorosamente no mesmo ângulo, enquadramento e distância focal, sem alternância de planos, B-rolls ou mockups.",
+   "como_corrigir": "Aplicar punch-in de corte (zoom digital de 110% a 115%) na troca para a cena 2 para dar dinamismo ao roteiro e inserir sobreposições gráficas animadas (ex: ícone de IA, tickets ou cartões flutuantes) para ilustrar o conteúdo."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "Transição seca entre blocos e ritmo visual arrastado: a mudança da cena 0 para a cena 1 ocorre sem dinamismo, mantendo o apresentador exatamente na mesma posição e apenas trocando o elemento superior de forma brusca.",
+   "como_corrigir": "Adicionar uma transição dinâmica de corte com leve impacto sonoro e zoom, além de animar a entrada da pílula de tópico ('1 O problema') com efeito de slide ou pop com amortecimento (overshoot)."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "grave",
+   "cena": 1,
+   "problema": "O texto fixo no retângulo superior exibe 'CHATWOOT COMUM OU COM IA?' (presente nos quadros q04 a q12), o que não combina com a fala do apresentador nem com a pergunta inicial. O roteiro trata sobre a perda de controle dos atendimentos com 'ferramentas básicas de mensagens' e a solução de CRM personalizado com IA, sem em nenhum momento comparar ou mencionar um 'Chatwoot comum'. Trata-se de um título desconectado da narrativa ou resquício de outro template.",
+   "como_corrigir": "Substituir o texto do retângulo fixo superior por um título alinhado ao roteiro e à dor apresentada, como 'CONTROLE DOS ATENDIMENTOS', 'FERRAMENTAS BÁSICAS?' ou 'CRM PERSONALIZADO COM IA'."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "[Mudança 1 de Maior Impacto - Gancho sem retenção] O gancho não prende nos primeiros 2 segundos: a cena abre com plano médio estático e um cartão branco de pergunta ('Pergunta frequente') sem movimento ou quebra de padrão visual (pattern interrupt), parecendo um Q&A amador em vez de um anúncio de tecnologia de alto impacto.",
+   "como_corrigir": "Na Cena 0, iniciar com corte em punch-in zoom (10% a 15% mais aproximado) no apresentador e inserir elemento visual dinâmico de dor (ex.: notificação animada de dezenas de mensagens acumuladas do WhatsApp) para gerar tensão visual imediata nos primeiros 2 segundos."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Falha de renderização/glitch gráfico na abertura: há uma barra azul deslocada visível logo abaixo da quina inferior esquerda do cartão de pergunta branco (x≈50 a 270), parecendo uma camada mal posicionada vazando por trás da caixa.",
+   "como_corrigir": "Na Cena 0, remover a camada da barra azul excedente ou reposicioná-la para que fique oculta atrás do cartão, garantindo acabamento gráfico limpo logo no início do vídeo."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "[Mudança 2 de Maior Impacto - Ausência de Prova Visual/Produto] Monotonia de talking head contínuo por mais de 20 segundos sem demonstração visual do produto: ao falar que 'adaptamos o sistema com IA para o fluxo do seu negócio', não há B-roll, print ou simulação da interface do Chatwoot com IA ou painel de tickets. Isso passa sensação de 'slide falado' sem comprovação prática, reduzindo a autoridade de empresa de tecnologia.",
+   "como_corrigir": "Na Cena 2 (e Cena 3), inserir B-roll de 2 a 3 segundos com screencast ou mockup da interface real do Chatwoot com IA em ação (mostrando automação respondendo e kanban de tickets organizados) em corte L (mantendo a voz do apresentador), comprovando visualmente a solução."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 1,
+   "problema": "[Mudança 3 de Maior Impacto - Dinâmica e Ritmo de Enquadramento] Câmera congelada no mesmo plano médio da Cena 0 à Cena 3. A transição entre os tópicos (1 O problema, 2 Como funciona, 3 O resultado) depende unicamente da troca de rótulos, reforçando a sensação de apresentação de slides corporativa sem ritmo de anúncio moderno.",
+   "como_corrigir": "Na transição entre blocos (Cena 1 para Cena 2 e Cena 3), alternar a escala do enquadramento com cortes de aproximação (plano médio para primeiro plano no apresentador), conferindo cadência visual ao discurso e quebrando a estática."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Elemento gráfico órfão e quebra de atmosfera no CTA: há um traço azul horizontal solto flutuando no vazio logo acima de 'CRM Chatwoot IA'. Além disso, o fundo escuro e frio de escritório genérico contrasta bruscamente com o ambiente natural e iluminado onde o apresentador gravou.",
+   "como_corrigir": "Na Cena 4, deletar o traço azul órfão que ficou sem utilidade acima do título e clarear/aquecer a imagem de fundo para harmonizar com a temperatura de cor do escritório do fundador."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "disparoemmassa_ia_20261117_083738.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261117_101728.mp4",
+   "conta": "followupia.ia",
+   "formato": "cinco_veo",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261117_122241.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261117_154653.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261117_165404.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 9.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 7.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   9,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   4,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

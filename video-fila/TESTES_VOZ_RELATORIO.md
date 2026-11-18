@@ -1,15 +1,15 @@
-# Teste gradual de formatos e vozes — 17/11 17:15
+# Teste gradual de formatos e vozes — 18/11 02:17
 
 Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: recapd `bin\anime_testes.py`, config `config\testes_voz.json` (ligado=True, 15% dos Shorts com clone + 15% pros promovidos).
 
-**Controle (solo):** 635.0 de 1140 Shorts medidos passaram da mediana do canal (taxa 0.56). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
+**Controle (solo):** 645.0 de 1152 Shorts medidos passaram da mediana do canal (taxa 0.56). Promove com >= 5 medidos e taxa >= solo + 0.1; pausa com taxa <= solo - 0.1 ou 2 áudios ruins.
 
 | Item | Estado | Produzidos | Refeitos solo | Segurados | Postados | Medidos 48 h | Vitórias | Taxa | Views (mediana) | Continuaram (mediana) | Áudio ok/ruim | Falhas |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| voz:cintilante_she_ra_flavia_saddy | promovido | 48 | 0 | 0 | 39 | 25 | 19.0/28 | 0.67 | 28 | 48% (13) | 47/0 | 0 |
-| voz:moana | testando | 13 | 0 | 0 | 6 | 5 | 18.0/27 | 0.66 | 510 | 40% (5) | 13/0 | 0 |
-| voz:chapolin_colorado | testando | 8 | 0 | 0 | 5 | 2 | 8.5/15 | 0.56 | 2114 | 53% (2) | 8/0 | 0 |
-| voz:chamber_valorant | testando | 1 | 0 | 0 | 1 | 1 | 7.0/11 | 0.61 | 1091 | 36% (1) | 1/0 | 0 |
+| voz:cintilante_she_ra_flavia_saddy | promovido | 49 | 0 | 0 | 39 | 25 | 19.0/28 | 0.67 | 28 | 48% (13) | 48/0 | 0 |
+| voz:moana | testando | 13 | 0 | 0 | 6 | 6 | 18.0/28 | 0.63 | 510 | 40% (5) | 13/0 | 0 |
+| voz:chapolin_colorado | testando | 9 | 0 | 0 | 5 | 2 | 8.5/15 | 0.56 | 2114 | 53% (2) | 9/0 | 0 |
+| voz:chamber_valorant | testando | 1 | 0 | 0 | 1 | 1 | 8.0/12 | 0.64 | 1091 | 36% (1) | 1/0 | 0 |
 | formato:chaves_chiquinha | testando | 24 | 0 | 0 | 12 | 7 | 4.5/8 | 0.55 | 652 | 47% (5) | 22/0 | 0 |
 | formato:joao_chico | testando | 6 | 0 | 0 | 3 | 3 | 3.0/6 | 0.50 | 13 | 19% (1) | 3/0 | 0 |
 | formato:show_do_milhao | pausado | 4 | 0 | 0 | 4 | 4 | 2.0/5 | 0.43 | 123 | 66% (2) | 4/0 | 0 |
@@ -18,7 +18,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | formato:escolinha | testando | 3 | 0 | 0 | 3 | 3 | 3.0/4 | 0.67 | 16 | 28% (1) | 3/0 | 0 |
 | formato:videocassetadas | testando | 2 | 0 | 0 | 2 | 2 | 1.5/4 | 0.42 | 9 | - | 2/0 | 0 |
 | voz:chaves_chapolin | testando | 7 | 0 | 0 | 6 | 4 | 2.5/4 | 0.58 | 18 | 38% (1) | 7/0 | 0 |
-| voz:naruto | testando | 5 | 0 | 0 | 4 | 4 | 4.0/4 | 0.83 | 1097 | 67% (4) | 5/0 | 0 |
+| voz:naruto | testando | 6 | 0 | 0 | 4 | 4 | 4.0/4 | 0.83 | 1097 | 67% (4) | 6/0 | 0 |
 | voz:pato_donald | testando | 3 | 0 | 0 | 3 | 3 | 1.0/4 | 0.33 | 9 | - | 3/0 | 0 |
 | formato:cameo_interrupcao | testando | 3 | 0 | 0 | 2 | 2 | 1.0/3 | 0.40 | 31 | - | 2/0 | 0 |
 | formato:madruga_chaves | testando | 9 | 0 | 0 | 3 | 3 | 2.0/3 | 0.60 | 986 | 70% (2) | 5/0 | 0 |
@@ -34,7 +34,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:joao_grilo | testando | 4 | 0 | 0 | 4 | 3 | 2.0/2 | 0.75 | 1796 | 46% (3) | 4/0 | 0 |
 | voz:kratos_god_of_war_2018 | testando | 2 | 0 | 0 | 2 | 2 | 1.5/2 | 0.62 | 1537 | 53% (1) | 2/0 | 0 |
 | voz:puss_in_boots_gato_de_botas_portuguese_d | testando | 2 | 0 | 0 | 2 | 2 | 1.0/2 | 0.50 | 2007 | 48% (2) | 2/0 | 0 |
-| voz:quico | testando | 5 | 0 | 0 | 4 | 2 | 1.5/2 | 0.62 | 1783 | 44% (3) | 5/0 | 0 |
+| voz:quico | testando | 5 | 0 | 0 | 5 | 2 | 1.5/2 | 0.62 | 1783 | 44% (3) | 5/0 | 0 |
 | voz:alex_madagascar | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 8 | - | 1/0 | 0 |
 | voz:ashley_graham_re4_remake | testando | 2 | 0 | 0 | 1 | 1 | 1.0/1 | 0.67 | 1741 | 61% (1) | 2/0 | 0 |
 | voz:bulma | testando | 1 | 0 | 0 | 1 | 1 | 0.0/1 | 0.33 | 108 | 11% (1) | 1/0 | 0 |
@@ -70,7 +70,7 @@ Gerado pelo vigia `D:\video-fila\avaliar_testes_voz.py` (a cada 3 h). Teste: rec
 | voz:thomas_shelby_peaky_blinders | novo | 0 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 0/0 | 0 |
 | voz:verosika_helluva_boss_fandub | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 | voz:walter_white_breaking_bad | testando | 1 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
-| voz:wolverine_bardavid | testando | 3 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | - | 3/0 | 0 |
+| voz:wolverine_bardavid | testando | 3 | 0 | 0 | 1 | 0 | 0/0 | 0.50 | - | 6% (1) | 3/0 | 0 |
 | voz:yor_forger | testando | 1 | 0 | 0 | 0 | 0 | 0/0 | 0.50 | - | - | 1/0 | 0 |
 
 Legenda: *novo* = ainda não saiu; *testando* = saindo, sem medida suficiente; *promovido* = rendeu acima do solo, sai mais vezes; *pausado* = rendeu abaixo, soou mal ou a dona pausou (config `pausados`).

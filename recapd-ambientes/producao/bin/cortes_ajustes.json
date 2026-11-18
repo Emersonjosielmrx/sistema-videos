@@ -30,13 +30,13 @@
  "texto_video_timeout_s": 120,
  "gancho_remotion": "ab",
  "gancho_meio": "ab",
- "fx_choque": "ab",
+ "fx_choque": "B",
  "mascote": "ab",
- "curto": "ab",
+ "curto": "B",
  "fala_rapida": "ab",
  "fala_delta": 15,
  "saudacao": "ab",
- "ninguem_esperava": "ab",
+ "ninguem_esperava": "A",
  "horario_fraco": "ab",
  "_variantes": "30/10: testes A/B/C/D… pelo bin\\variantes.py. Valor \"ab\"/\"abc\"/\"abcd\" ou lista [\"x\",\"y\",\"z\"] = teste com N braços (sorteio estável md5 por vídeo); valor fixo (\"A\", \"B\", \"lateral\"…) = sem teste. Placar: bin\\placar_variantes.py -> D:\\video-fila\\linhas\\CORTES\\placar_cortes_testes.json/.md. Decidir só pela régua D1/D3 do FABLE_DECISOES.md, nunca pelo júri.",
  "abertura": "abcd",
@@ -1014,6 +1014,30 @@
    "antes": 0.52,
    "depois": 0.62,
    "porque": "nota caiu 5.13 -> 4.63"
+  },
+  {
+   "em": "2026-11-17T20:55",
+   "quem": "chat ronda (dona 17/11: focar nos canais que restaram e em tudo que melhore os vídeos)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "B",
+   "porque": "T6 fechado: B (raio/fogo cortando a tela na palavra de impacto) melhor que A — placar_variantes PRONTO PARA DECIDIR (D3+D16)"
+  },
+  {
+   "em": "2026-11-17T20:55",
+   "quem": "chat ronda (dona 17/11: focar nos canais que restaram e em tudo que melhore os vídeos)",
+   "chave": "curto",
+   "antes": "ab",
+   "depois": "B",
+   "porque": "T8 fechado: B (Short curto, 4-5 frases, 22-27 s) melhor que A — placar PRONTO PARA DECIDIR"
+  },
+  {
+   "em": "2026-11-17T20:55",
+   "quem": "chat ronda (dona 17/11: focar nos canais que restaram e em tudo que melhore os vídeos)",
+   "chave": "<SEGREDO_REMOVIDO>",
+   "antes": "ab",
+   "depois": "A",
+   "porque": "T11 fechado: A (NINGUÉM ESPERAVA liberado) — B (proibido) pior que A no placar"
   }
  ]
 }

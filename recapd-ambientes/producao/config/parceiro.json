@@ -1452,9 +1452,10 @@
    "nicho": "manhwa",
    "fuso": "America/Sao_Paulo",
    "horarios": [
-    "13:00",
-    "19:20",
-    "22:00"
+    "21:00",
+    "22:00",
+    "23:00",
+    "07:30"
    ],
    "horario": "13:00",
    "por_dia": 2,
@@ -1465,7 +1466,13 @@
    "nichos_foco": {
     "pesca": 1117.0,
     "manhwa": 463.5
-   }
+   },
+   "_horarios_antes_1711": [
+    "13:00",
+    "19:20",
+    "22:00"
+   ],
+   "_obs_horario": "17/11 noite dona (focar nos melhores): horário nobre medido (21h = 8,9x o normal do canal, 22h = 2x, 7h = 1,65x; 12-20h <= 1x). 4 vagas 21:00-23:00 + 07:30. Antes em _horarios_antes_1711."
   },
   {
    "canal": "novo_universo_ia_d6s",
@@ -1474,8 +1481,10 @@
    "nicho": "filme_sem_voz",
    "fuso": "America/Sao_Paulo",
    "horarios": [
-    "12:00",
-    "21:35"
+    "21:00",
+    "22:00",
+    "23:00",
+    "07:30"
    ],
    "horario": "12:00",
    "por_dia": 2,
@@ -1490,7 +1499,12 @@
     "pesca": 1159.0,
     "filme_sem_voz": 986.0
    },
-   "_obs_nobre": "13/11: 20:10 -> 21:35 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)"
+   "_obs_nobre": "13/11: 20:10 -> 21:35 — horário nobre (21-22 h rende ~100x nos canais fracos, mesmo canal/mesma mídia; analise_sinais_shorts.py)",
+   "_horarios_antes_1711": [
+    "12:00",
+    "21:35"
+   ],
+   "_obs_horario": "17/11 noite dona (focar nos melhores): horário nobre medido (21h = 8,9x o normal do canal, 22h = 2x, 7h = 1,65x; 12-20h <= 1x). 4 vagas 21:00-23:00 + 07:30. Antes em _horarios_antes_1711."
   },
   {
    "canal": "novo_ia_agora_h3n",
@@ -1577,9 +1591,10 @@
    "nicho": "fatos",
    "fuso": "America/Sao_Paulo",
    "horarios": [
-    "12:30",
-    "20:00",
-    "22:20"
+    "21:00",
+    "22:00",
+    "23:00",
+    "07:30"
    ],
    "horario": "13:10",
    "por_dia": 3,
@@ -1591,7 +1606,13 @@
     "fatos": 1212.5,
     "dorama": 1159.5
    },
-   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco."
+   "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
+   "_horarios_antes_1711": [
+    "12:30",
+    "20:00",
+    "22:20"
+   ],
+   "_obs_horario": "17/11 noite dona (focar nos melhores): horário nobre medido (21h = 8,9x o normal do canal, 22h = 2x, 7h = 1,65x; 12-20h <= 1x). 4 vagas 21:00-23:00 + 07:30. Antes em _horarios_antes_1711."
   },
   {
    "canal": "novo_codigo_inteligente_n7j",
@@ -1600,11 +1621,10 @@
    "nicho": "curiosidades",
    "fuso": "America/Sao_Paulo",
    "horarios": [
-    "12:10",
-    "18:00",
-    "19:50",
-    "15:25",
-    "21:30"
+    "21:00",
+    "22:00",
+    "23:00",
+    "07:30"
    ],
    "horario": "19:10",
    "por_dia": 5,
@@ -1617,7 +1637,15 @@
     "fatos": 1310.5
    },
    "_horarios_05nov": "05/11 dona (\"analise tudo que podemos melhorar\"): Studio 1038 Shorts -> 20-23h: 33-40% >=1k (12-13h: 22%, 16-17h: 6%). Cada canal com os horários que renderam NELE. Backup parceiro.json.bak_20261105_foco.",
-   "_obs_nobre2": "13/11: 20:40->15:25 (ficava a 50 min do nobre 21:30 e o 5º post do dia não cabia)"
+   "_obs_nobre2": "13/11: 20:40->15:25 (ficava a 50 min do nobre 21:30 e o 5º post do dia não cabia)",
+   "_horarios_antes_1711": [
+    "12:10",
+    "18:00",
+    "19:50",
+    "15:25",
+    "21:30"
+   ],
+   "_obs_horario": "17/11 noite dona (focar nos melhores): horário nobre medido (21h = 8,9x o normal do canal, 22h = 2x, 7h = 1,65x; 12-20h <= 1x). 4 vagas 21:00-23:00 + 07:30. Antes em _horarios_antes_1711."
   },
   {
    "canal": "novo_assistiainvestimentos",

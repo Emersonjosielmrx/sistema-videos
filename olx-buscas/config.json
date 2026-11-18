@@ -10,12 +10,17 @@
   "max_paginas": 5,
   "modelo_ia": "gemini-fila",
   "_modelos": "modelos_texto = ordem para ler/julgar anúncios (dona 04/11: Sonnet web 1º, Argon reserva). modelo_ia = só fotos (Gemini enxerga).",
-  "modelos_texto": ["sonnet-fila", "gemini/gemini-4-argon", "gemini-fila"],
+  "modelos_texto": [
+    "sonnet-fila",
+    "gemini-fila",
+    "gemini/gemini-4-argon"
+  ],
   "modelo_assistente": "sonnet-fila",
   "avisar_incerto": true,
   "chat_ligado": true,
   "chat_max_dia": 20,
   "chat_max_por_conversa": 4,
   "chat_intervalo_s": 180,
-  "chat_ciclo_min": 10
+  "chat_ciclo_min": 10,
+  "_modelos_texto_18nov": "Argon pelo AI Studio falhou 44 de 44 vezes no log (sem cota gratis) -> foi pro fim; teste 18/11 com o PROMPT real: gemini-fila 17/17, Sonnet 16/17, Hydrogen 14/17 (9x mais lento)."
 }

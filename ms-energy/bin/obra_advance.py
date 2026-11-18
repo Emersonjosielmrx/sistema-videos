@@ -96,19 +96,25 @@ def classificar(nome, orig):
     feito = est.get("classificados", {}).get(CONTA, {}).get(nome)
     if feito:
         return feito["tipo"], feito.get("cliente_nome", ""), feito.get("motivo", "")
-    try:
-        gw = json.loads(pe.GATEWAY.read_text("utf-8"))
-        corpo = {"model": "gemini/gemini-3.5-flash", "max_tokens": 200, "messages": [{"role": "user", "content": [
-            {"type": "text", "text": PERGUNTA},
-            {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," +
-                                                base64.b64encode(pe._quadro(orig)).decode()}}]}]}
-        req = urllib.request.Request(gw["gateway_url"].rstrip("/") + "/v1/chat/completions",
-                                     data=json.dumps(corpo).encode(),
-                                     headers={"Authorization": "Bearer " + gw["gateway_key"],
-                                              "Content-Type": "application/json"})
-        txt = json.loads(urllib.request.urlopen(req, timeout=90).read())["choices"][0]["message"]["content"]
-    except Exception as e:  # noqa: BLE001
-        return "ruim", "", f"classificação falhou: {type(e).__name__}"
+    txt, erro = None, None
+    gw = json.loads(pe.GATEWAY.read_text("utf-8"))
+    imagem = base64.b64encode(pe._quadro(orig)).decode()
+    # 18/11: AI Studio (gemini/gemini-3.5-flash) acertava 7%; 3-flash do Antigravity 99%. AI Studio vira reserva.
+    for modelo in ("antigravity/gemini-3-flash", "gemini/gemini-3.5-flash"):
+        try:
+            corpo = {"model": modelo, "max_tokens": 200, "messages": [{"role": "user", "content": [
+                {"type": "text", "text": PERGUNTA},
+                {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + imagem}}]}]}
+            req = urllib.request.Request(gw["gateway_url"].rstrip("/") + "/v1/chat/completions",
+                                         data=json.dumps(corpo).encode(),
+                                         headers={"Authorization": "Bearer " + gw["gateway_key"],
+                                                  "Content-Type": "application/json"})
+            txt = json.loads(urllib.request.urlopen(req, timeout=90).read())["choices"][0]["message"]["content"]
+            break
+        except Exception as e:  # noqa: BLE001
+            erro = e
+    if txt is None:
+        return "ruim", "", f"classificação falhou: {type(erro).__name__}"
     t = re.search(r'"tipo"\s*:\s*"(\w+)"', txt)
     c = re.search(r'"cliente_nome"\s*:\s*"([^"]*)', txt)
     m = re.search(r'"motivo"\s*:\s*"([^"]*)', txt)

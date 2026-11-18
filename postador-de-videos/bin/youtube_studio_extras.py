@@ -228,6 +228,10 @@ def _abrir_edicao(pg, vid):
                 pg.reload(wait_until="domcontentloaded", timeout=90000)
             except Exception:  # noqa: BLE001
                 pg.goto(f"https://studio.youtube.com/video/{vid}/edit", wait_until="domcontentloaded", timeout=90000)
+    try:  # 17/11: 3 capas falharam 2x aqui sem print — salva o que a tela mostrava
+        yw._shot(pg, f"edicao_nao_abriu_{vid}")
+    except Exception:  # noqa: BLE001
+        pass
     raise yw.Falha("erro", f"a página de edição do vídeo {vid} não abriu")
 
 

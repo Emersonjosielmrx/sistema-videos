@@ -18483,5 +18483,205 @@
     "arquivado": false,
     "descricao": "Free local auto-editor: stills + voiceover + captions -> Ken Burns, punch-ins, animated captions, music, SFX (ffmpeg + Python)",
     "data": "2026-11-17"
+  },
+  "quinntas/recaper": {
+    "ok": true,
+    "nome": "Quinntas/recaper",
+    "estrelas": 0,
+    "push": "2026-11-07",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Drop manga / manhwa chapters into a folder, run one command, get a narrated recap video.",
+    "data": "2026-11-17"
+  },
+  "moallemi/android-mcp-server": {
+    "ok": true,
+    "nome": "moallemi/android-mcp-server",
+    "estrelas": 1,
+    "push": "2026-03-20",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Android MCP server. Control devices, capture screenshots, interact with UI, and manage apps via ADB using Claude, Codex, Gemini CLI, GitHub ",
+    "data": "2026-11-17"
+  },
+  "lll-404/long-image-to-video": {
+    "ok": true,
+    "nome": "LLL-404/long-image-to-video",
+    "estrelas": 0,
+    "push": "2026-09-30",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Turn tall screenshots into a smooth scrolling MP4 - GPU-accelerated encoding (NVENC/QSV/AMF), Tkinter GUI + Python API",
+    "data": "2026-11-17"
+  },
+  "saumitratambe/comic-to-video-pipeline": {
+    "ok": true,
+    "nome": "saumitratambe/comic-to-video-pipeline",
+    "estrelas": 0,
+    "push": "2026-09-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Desktop pipeline that turns chapter images into narrated 1080p videos: OCR, panel crop, Gemini narration, TTS, FFmpeg render.",
+    "data": "2026-11-17"
+  },
+  "leortoro/depth-parallax-pipeline": {
+    "ok": true,
+    "nome": "LeoRToro/depth-parallax-pipeline",
+    "estrelas": 0,
+    "push": "2026-06-14",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Camera-moving-around-a-static-object video from N real photos, no generative video model - optical-flow morph + depth-map parallax (Depth An",
+    "data": "2026-11-17"
+  },
+  "alexander-kz/video-final-pack-skill": {
+    "ok": true,
+    "nome": "Alexander-Kz/video-final-pack-skill",
+    "estrelas": 0,
+    "push": "2026-05-21",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Claude Code skill for YouTube release packaging — takes a finished episode and produces upload-ready 4K MP4 + thumbnails + a copy-paste UPLO",
+    "data": "2026-11-18"
+  },
+  "jimmymacman/shorts-converter": {
+    "ok": true,
+    "nome": "JimmyMacMan/Shorts-Converter",
+    "estrelas": 0,
+    "push": "2026-10-19",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automated GPU-accelerated video splitter that turns widescreen (16:9) footage into numbered, 30-second vertical (9:16) clips complete with a",
+    "data": "2026-11-18"
+  },
+  "lord-dubious/openclaw-youtube-shorts": {
+    "ok": true,
+    "nome": "lord-dubious/openclaw-youtube-shorts",
+    "estrelas": 0,
+    "push": "2026-04-09",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "OpenClaw plugin for automated YouTube Shorts creation with viral optimization and Part 2 sequel support",
+    "data": "2026-11-18"
+  },
+  "kj-aiml/thai-recap": {
+    "ok": true,
+    "nome": "KJ-AIML/thai-recap",
+    "estrelas": 0,
+    "push": "2026-10-27",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Automated Thai movie/cartoon recap short-video pipeline (yt-dlp + Gemini + TTS + ffmpeg)",
+    "data": "2026-11-18"
+  },
+  "jaimebg/youtube-studio-mcp": {
+    "ok": true,
+    "nome": "jaimebg/youtube-studio-mcp",
+    "estrelas": 0,
+    "push": "2026-09-16",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "MCP server that audits and optimises your own YouTube channel — impressions, CTR, retention, search terms and metadata quality, with opportu",
+    "data": "2026-11-18"
+  },
+  "mahzoonmmd/yt-guard": {
+    "ok": true,
+    "nome": "mahzoonmmd/YT-Guard",
+    "estrelas": 1,
+    "push": "2026-11-10",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Pre-upload YouTube video checker (Long & Shorts): AI disclosure, reused content, copyright suspicions, retention. PyQt6 + Gemini.",
+    "data": "2026-11-18"
+  },
+  "s44070saad-ux/reused-shield": {
+    "ok": true,
+    "nome": "s44070saad-ux/reused-shield",
+    "estrelas": 0,
+    "push": "2026-11-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Find out your reused-content risk before YouTube tells you.",
+    "data": "2026-11-18"
+  },
+  "lovepaper/gemini-reverse-proxy": {
+    "ok": true,
+    "nome": "lovepaper/gemini-reverse-proxy",
+    "estrelas": 0,
+    "push": "2026-11-03",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "本地 Gemini 网页协议反代 (OpenAI 兼容), 匿名免 Key, 基于 zexadev/gemini-web2api-go 适配编译. 需本地代理出网.",
+    "data": "2026-11-18"
+  },
+  "hau04/gemini-web2api": {
+    "ok": true,
+    "nome": "Hau04/gemini-web2api",
+    "estrelas": 0,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Convert Google Gemini web into OpenAI-compatible API. Zero cost, single static binary.",
+    "data": "2026-11-18"
+  },
+  "greenyarik0505-jpg/flow_auto": {
+    "ok": true,
+    "nome": "greenyarik0505-jpg/flow_auto",
+    "estrelas": 12,
+    "push": "2026-11-17",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Автоматизация генерации видео и фото в Google Flow (Gemini Omni, Veo 3.1, Imagen 4) через CLI и Web2API (FastAPI & Swagger UI)",
+    "data": "2026-11-18"
+  },
+  "brokedevs4/gemini-web2api-v2": {
+    "ok": true,
+    "nome": "brokedevs4/gemini-web2api-v2",
+    "estrelas": 0,
+    "push": "2026-11-16",
+    "licenca": "SEM LICENÇA",
+    "arquivado": false,
+    "descricao": "Turn Google Gemini Web into a local OpenAI-compatible API. Free, zero-setup, with Gemini 4 Hydrogen and Argon.",
+    "data": "2026-11-18"
+  },
+  "himanusia/hermes-antigravity-multiaccount": {
+    "ok": true,
+    "nome": "himanusia/hermes-antigravity-multiaccount",
+    "estrelas": 1,
+    "push": "2026-10-27",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Run Hermes Agent on your Google Antigravity / Gemini subscription via the official agy CLI. Multi-account quota rotation, quota in /usage, a",
+    "data": "2026-11-18"
+  },
+  "igok045-netizen/gemini-web2api": {
+    "ok": true,
+    "nome": "igok045-netizen/gemini-web2api",
+    "estrelas": 1,
+    "push": "2026-11-08",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Local OpenAI-compatible Gemini web bridge with admin UI and Firefox session support",
+    "data": "2026-11-18"
+  },
+  "kittors/clirelay": {
+    "ok": true,
+    "nome": "kittors/CliRelay",
+    "estrelas": 1059,
+    "push": "2026-11-18",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Self-hosted AI gateway for coding CLIs — one OpenAI/Claude/Gemini/Codex-compatible endpoint, with a multi-tenant web console, request logs, ",
+    "data": "2026-11-18"
+  },
+  "ghostedmyself/gravpool": {
+    "ok": true,
+    "nome": "ghostedmyself/gravpool",
+    "estrelas": 1,
+    "push": "2026-10-02",
+    "licenca": "MIT",
+    "arquivado": false,
+    "descricao": "Google Antigravity OAuth account pool + unified OpenAI-compatible gateway: refresh auto, kuota live, external providers, web dashboard. Pure",
+    "data": "2026-11-18"
   }
 }

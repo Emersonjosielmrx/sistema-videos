@@ -1573,3 +1573,43 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [x] AVALIADO 16/11 (automático: nada aproveitável) — 2026-11-16 23:17 — regras oficiais do YouTube sobre conteúdo reutilizado/recap (`area_regras_yt_2026`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-16\respostas\area_regras_yt_2026__sonnet_2308.md`
 - (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 — 0 aplicados, 1 reprovado (video-final-pack-skill: 0★, já temos poster/capa) — 2026-11-18 00:26 — Playlists e séries para longos (`area_dist_playlists_series`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_playlists_series__sonnet_0002.md`
+- [INÉDITO] github.com/Alexander-Kz/video-final-pack-skill — ★0, push 2026-05-21, MIT — Claude Code skill for YouTube release packaging — takes a finished episode and produces upload-ready 4K MP4 + thumbnails + a copy-paste UPLO
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 00:42 — Tela final, playlist e sessão (`area_fim_playlist`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_fim_playlist__sonnet_0033.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 01:04 — Séries e playlists em Shorts (`area_shorts_seriados`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_shorts_seriados__sonnet_0054.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 01:15 — Distribuição e algoritmos (`area_distribuicao`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_distribuicao__sonnet_0107.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 01:31 — Ponte Short -> longo (link relacionado, fixado, cards) (`area_dist_ponte_short_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_ponte_short_longo__sonnet_0122.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 01:51 — Canal novo de longos: arranque com poucas impressões (`area_dist_canal_novo_longo`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_canal_novo_longo__sonnet_0144.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-18 02:25 — 0 implantados, 1 reprovado, 0 deixados — 2026-11-18 02:19 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_impressoes_diagnostico__sonnet_0156.md`
+- [INÉDITO] github.com/jaimebg/youtube-studio-mcp — ★0, push 2026-09-16, MIT — MCP server that audits and optimises your own YouTube channel — impressions, CTR, retention, search terms and metadata quality, with opportu
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 02:25 — Recuperar recursos avançados do YouTube (caminho oficial) (`area_yt_recursos_avancados_recuperar`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_yt_recursos_avancados_recuperar__sonnet_0221.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 02:35 — Crescer canal SEM recursos avançados (`area_yt_crescer_sem_recursos_avancados`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_yt_crescer_sem_recursos_avancados__sonnet_0232.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-18 03:45 — 0 implantados, 1 reprovado, 0 deixados — 2026-11-18 02:48 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_yt_conformidade_canal__sonnet_0241.md`
+- [INÉDITO] github.com/mahzoonmmd/YT-Guard — ★1, push 2026-11-10, MIT — Pre-upload YouTube video checker (Long & Shorts): AI disclosure, reused content, copyright suspicions, retention. PyQt6 + Gemini.

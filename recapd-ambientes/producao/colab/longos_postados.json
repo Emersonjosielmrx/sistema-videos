@@ -4667,13 +4667,6 @@
  ],
  "cortes_pendentes": [
   {
-   "nome": "NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge",
-   "canal": "hNQrW5ouNe0Ni5Me",
-   "canal_nome": "inovare manhwa br",
-   "drive": "manhwa-drive:videos-backup/anime/1_youtube_pendente/NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge/video.mp4",
-   "url_longo": "https://youtu.be/Vqzd9oirlC0"
-  },
-  {
    "nome": "XYDK10mfxd0_He_s_the_Only_Genius_Summoner_with_Creat",
    "canal": "novo_codigo_inteligente_n7j",
    "canal_nome": "Fio da Meada",
@@ -4781,6 +4774,9 @@
   "Lmwys95pPQE_Everyone_at_This_Galactic_Tournament_Is/corte_01.mp4",
   "NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge/corte_01.mp4",
   "NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge/corte_02.mp4",
+  "NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge/corte_03.mp4",
+  "NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge/corte_04.mp4",
+  "NatfJn-eQp0_This_Useless_Loser_Swallowed_God_s_Finge/corte_05.mp4",
   "P-djtsSY2Co_Garoto_é_ESCOLHIDO_para_uma_BATALHA_onde/corte_01.mp4",
   "P-djtsSY2Co_Garoto_é_ESCOLHIDO_para_uma_BATALHA_onde/corte_02.mp4",
   "P-djtsSY2Co_Garoto_é_ESCOLHIDO_para_uma_BATALHA_onde/corte_03.mp4",
@@ -4794,6 +4790,9 @@
   "PFsXz-tGt2M_He_Destroys_the_Hunter_Exam_So_Easily_Th/corte_02.mp4",
   "PFsXz-tGt2M_He_Destroys_the_Hunter_Exam_So_Easily_Th/corte_03.mp4",
   "PvkF8Ut-mIM_He_Awakens_With_The_Power_Of_The_STRONGE/corte_01.mp4",
+  "PvkF8Ut-mIM_He_Awakens_With_The_Power_Of_The_STRONGE/corte_02.mp4",
+  "PvkF8Ut-mIM_He_Awakens_With_The_Power_Of_The_STRONGE/corte_03.mp4",
+  "PvkF8Ut-mIM_He_Awakens_With_The_Power_Of_The_STRONGE/corte_04.mp4",
   "SsMmrKRTjyY_The_Nobles_Tried_To_Execute_Him__But_His/corte_01.mp4",
   "SsMmrKRTjyY_The_Nobles_Tried_To_Execute_Him__But_His/corte_02.mp4",
   "SsMmrKRTjyY_The_Nobles_Tried_To_Execute_Him__But_His/corte_03.mp4",
@@ -4870,9 +4869,7 @@
   "ukz1eN12VPA_He_got_into_the_Stone_Age_and_Conquered/corte_03.mp4"
  ],
  "cortes_dia": {
-  "2026-11-17|novo_doramanoturno": 2,
-  "2026-11-17|hNQrW5ouNe0Ni5Me": 3,
-  "2026-11-17|novo_codigo_inteligente_n7j": 2
+  "2026-11-18|hNQrW5ouNe0Ni5Me": 6
  },
  "pontes": [
   {
@@ -5897,8 +5894,9 @@
    "short": "rcigJFwPoZY",
    "longo": "jDvE8AVJx0w",
    "titulo_longo": "",
-   "tentativas": 0,
-   "estado": "pendente"
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
   },
   {
    "canal": "novo_codigo_inteligente_n7j",
@@ -5917,6 +5915,60 @@
    "tentativas": 1,
    "estado": "desistiu",
    "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até 2027-01-05\"}"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "short": "6uaHxf91q9I",
+   "longo": "Vqzd9oirlC0",
+   "titulo_longo": "",
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "short": "qY8TG1mPMrk",
+   "longo": "Vqzd9oirlC0",
+   "titulo_longo": "",
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "short": "fila_celular:20261118_024505_24476_8114.json",
+   "longo": "jDvE8AVJx0w",
+   "titulo_longo": "",
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "short": "fila_celular:20261118_024517_3016_9930.json",
+   "longo": "jDvE8AVJx0w",
+   "titulo_longo": "",
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "short": "fila_celular:20261118_031855_29328_8265.json",
+   "longo": "Vqzd9oirlC0",
+   "titulo_longo": "",
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
+  },
+  {
+   "canal": "hNQrW5ouNe0Ni5Me",
+   "short": "8_QQGXSt6fE",
+   "longo": "jDvE8AVJx0w",
+   "titulo_longo": "",
+   "tentativas": 1,
+   "estado": "desistiu",
+   "ultimo": "RESULTADO: {\"relacionado\": \"bloqueado: recursos avançados negados pelo YouTube (pedir de novo/contestar) até \"}"
   }
  ],
  "presos": {
@@ -5940,20 +5992,6 @@
    "status": "erro",
    "info": "TimeoutError: Locator.click: Timeout 30000ms exceeded.",
    "em": "2026-11-17T02:03"
-  },
-  "X29n4fGbdXw_He_Entered_His_Favorite_Game_as_a_Slave": {
-   "canal": "novo_codigo_inteligente_n7j",
-   "canal_nome": "Fio da Meada",
-   "status": "erro",
-   "info": "TimeoutError: Locator.evaluate: Timeout 30000ms exceeded.",
-   "em": "2026-11-17T15:37"
-  },
-  "SO-icNCOO3E_HE_WAS_REJECTED_BY_HIS_CHILDHOOD_FRIEND": {
-   "canal": "novo_ia_agora_h3n",
-   "canal_nome": "InventoReact",
-   "status": "erro",
-   "info": "Error: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://studio.youtube.com/channel/UClN7sup9FM11tMM1UxXBwOQ/videos/upload?d=ud",
-   "em": "2026-11-17T19:36"
   }
  }
 }

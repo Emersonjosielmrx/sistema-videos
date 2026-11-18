@@ -7804,5 +7804,23 @@
     "motivo": "0 estrelas; corta vídeos longos em Reels; nossos Shorts vêm de Shorts de parceiro",
     "quem": "CURTOS",
     "data": "2026-11-17"
+  },
+  {
+    "repo": "Alexander-Kz/video-final-pack-skill",
+    "motivo": "skill 0 estrelas de empacotar upload 4K + capa; já temos youtube_web_poster e capar_shorts, 4K não serve",
+    "quem": "LONGOS",
+    "data": "2026-11-18"
+  },
+  {
+    "repo": "jaimebg/youtube-studio-mcp",
+    "motivo": "0 estrelas; MCP que exige OAuth da API do YouTube por canal (regra: Google só pelo navegador e 1 saída por conta); views/horas/impressões dos longos já lidas pelo Studio em views_longos.py/coletar_views_longos.py",
+    "quem": "LONGOS",
+    "data": "2026-11-18"
+  },
+  {
+    "repo": "mahzoonmmd/YT-Guard",
+    "motivo": "1 estrela; app de tela PyQt6 pra conferir na mão antes de subir; nossa conferência pré-upload já é automática (politica.py checar_upload, trava de nudez, revisão do vídeo pronto)",
+    "quem": "LONGOS",
+    "data": "2026-11-18"
   }
 ]

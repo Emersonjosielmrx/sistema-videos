@@ -215,10 +215,12 @@ def visao_json(jpeg, pergunta):
     """Pergunta ao modelo de visao do gateway (gemini-3-flash) sobre uma imagem JPEG; devolve o JSON da resposta ou
     {"_erro": ...}. Tambem usado pelo carrossel_ms (conferir ilustracao)."""
     erro = None
-    for _ in range(2):  # o modelo as vezes devolve JSON mal formado: 2a tentativa
+    # 18/11: AI Studio (gemini/gemini-3.5-flash) acertava 7% (403 sem free tier / 429 por minuto); 3-flash do
+    # Antigravity acerta 99% e leu certo as fotos reais no teste. AI Studio fica de 2a tentativa.
+    for modelo in ("antigravity/gemini-3-flash", "gemini/gemini-3.5-flash"):
         try:
             gw = json.loads(GATEWAY.read_text(encoding="utf-8"))
-            corpo = {"model": "gemini/gemini-3.5-flash", "max_tokens": 500, "temperature": 0.1,
+            corpo = {"model": modelo, "max_tokens": 500, "temperature": 0.1,
                      "messages": [{"role": "user", "content": [
                          {"type": "text", "text": pergunta},
                          {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64,"

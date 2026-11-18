@@ -1,57 +1,55 @@
 {
  "contas": 29,
- "prontas": 9,
- "cookies_mortos": 17,
- "sem_cota": 5,
- "bloqueadas": 1,
- "aguardando_oi": 7,
- "proxima_volta": "2026-11-17T21:33",
+ "prontas": 4,
+ "cookies_mortos": 12,
+ "sem_cota": 1,
+ "bloqueadas": 12,
+ "aguardando_oi": 4,
+ "proxima_volta": "2026-11-18T06:09",
  "ultimas_voltas": [
   [
-   "2026-11-17T18:25",
+   "2026-11-18T02:33",
+   "inovaremultiatendimento"
+  ],
+  [
+   "2026-11-18T02:03",
+   "inovaremanhwaverseing"
+  ],
+  [
+   "2026-11-18T02:03",
    "emersonjosiel2030"
   ],
   [
-   "2026-11-17T18:25",
+   "2026-11-18T02:02",
    "emersonjosiel2029"
+  ],
+  [
+   "2026-11-17T22:50",
+   "inovaremanhwabr"
+  ],
+  [
+   "2026-11-17T22:28",
+   "emersonjosiel2033"
+  ],
+  [
+   "2026-11-17T21:34",
+   "inovaremanhwaverseesp"
   ],
   [
    "2026-11-17T08:20",
    "comoseriasecomia"
-  ],
-  [
-   "2026-11-17T06:44",
-   "inovaremanhwaverseesp"
-  ],
-  [
-   "2026-11-17T05:37",
-   "inovaremanhwaversethai"
-  ],
-  [
-   "2026-11-17T05:36",
-   "emersonjosiel2033"
-  ],
-  [
-   "2026-11-17T05:27",
-   "fabricadeautomacoes0"
-  ],
-  [
-   "2026-11-17T01:37",
-   "inovaremanhwaverseing"
   ]
  ],
- "em": "2026-11-17T20:43:54",
- "duracao_s": 342,
- "conferidas": 4,
+ "em": "2026-11-18T04:26:14",
+ "duracao_s": 1087,
+ "conferidas": 1,
  "mortas_vistas": [
-  "emersonjosiel2029",
-  "comoseriasecomia",
-  "emersonjosiel2033",
   "solarmundo195",
   "aulasrevolution",
-  "filmescomia1",
-  "msenergypara",
   "murilodoctor192",
+  "e4487017",
+  "fabricadeautomacoes0",
+  "inovarecap",
   "emersongenc",
   "emersongencshin",
   "empressinovare",
@@ -59,12 +57,21 @@
   "gameoftroneskingsroadbrasil",
   "vendeafiliados3",
   "en1653964",
+  "emersonjosiel2031",
   "entrevistacomia"
  ],
- "renovadas": [],
+ "renovadas": [
+  "e4487017",
+  "fabricadeautomacoes0",
+  "inovarecap"
+ ],
  "falhas_renovar": [
-  "emersonjosiel2031"
+  "solarmundo195",
+  "aulasrevolution",
+  "murilodoctor192"
  ],
  "voltaram": [],
- "oi_sem_cota": []
+ "oi_sem_cota": [
+  "msenergypara"
+ ]
 }

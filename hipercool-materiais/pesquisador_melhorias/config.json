@@ -24571,6 +24571,310 @@
         "páginas de support.google.com sobre conteúdo reutilizado/inautêntico e limites de upload em contas novas"
       ],
       "origem": "area_android_adb_automacao_upload__sonnet_1911.md 2026-11-17"
+    },
+    {
+      "id": "retencao_painel_parado",
+      "nome": "Ritmo de corte e punch-in em recap de painéis estáticos",
+      "subtemas": [
+        "scripts ffmpeg/Python que trocam enquadramento a cada 2–4 s, com métrica de retenção dos primeiros 30 s"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2007.md 2026-11-17"
+    },
+    {
+      "id": "renda_celular_android",
+      "nome": "Render de Ken Burns no Android (Termux + FFmpeg)",
+      "subtemas": [
+        "scripts zoompan leves que rodam no celular para liberar os PCs"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2007.md 2026-11-17"
+    },
+    {
+      "id": "capitulos_yt",
+      "nome": "Capítulos e marcadores nos longos",
+      "subtemas": [
+        "geradores de timestamps/chapters a partir do roteiro (ffmpeg metadata ou descrição) e a regra oficial de capítulos do YouTube"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2042.md 2026-11-17"
+    },
+    {
+      "id": "recap_mais_visto",
+      "nome": "Achar recaps mais vistos",
+      "subtemas": [
+        "scripts yt-dlp que listam os vídeos mais vistos de canais de recap por views÷inscritos, por idioma/país"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2042.md 2026-11-17"
+    },
+    {
+      "id": "capas_30s",
+      "nome": "Primeiros 30 s de recap de mangá",
+      "subtemas": [
+        "Projetos pequenos (0 a poucas estrelas) que testam gancho/cold open em recap e medem retenção por segundo, com ideia aplicável em Python + FFmpeg"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2101.md 2026-11-17"
+    },
+    {
+      "id": "traducao_longos",
+      "nome": "Longos recap em outras línguas",
+      "subtemas": [
+        "Fluxo de tradução do roteiro (não da voz) e o que muda por país em título, capa e horário de postagem"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2101.md 2026-11-17"
+    },
+    {
+      "id": "longos_outras_linguas",
+      "nome": "Vídeo longo em outras línguas",
+      "subtemas": [
+        "O que muda por país em título, capa e roteiro traduzido; canais estrangeiros de recap"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_2121.md 2026-11-17"
+    },
+    {
+      "id": "recaps_vistos",
+      "nome": "Achar recaps de manhwa/anime mais vistos",
+      "subtemas": [
+        "pesquisar outliers por nicho via yt-dlp --flat-playlist e views÷inscritos, sem API do Google"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2236.md 2026-11-17"
+    },
+    {
+      "id": "bridge_short_longo",
+      "nome": "Ponte Short para vídeo longo",
+      "subtemas": [
+        "Como o YouTube mostra ao espectador de um Short o vídeo longo relacionado, e o que a página oficial de ajuda diz sobre vídeo relacionado e playlist de série"
+      ],
+      "origem": "area_android_adb_automacao_upload__sonnet_2251.md 2026-11-17"
+    },
+    {
+      "id": "easing_crop",
+      "nome": "Rolagem de webtoon com easing no FFmpeg",
+      "subtemas": [
+        "expressões de easing em `crop`/`zoompan` para pan de tira vertical, e scripts curtos que as geram"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2311.md 2026-11-17"
+    },
+    {
+      "id": "painel_duracao",
+      "nome": "Tempo de tela por painel x narração",
+      "subtemas": [
+        "ideias para ajustar a duração e a ordem dos painéis ao ritmo da fala, sem modelo novo"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2311.md 2026-11-17"
+    },
+    {
+      "id": "pan_vertical_webtoon",
+      "nome": "Pan vertical em webtoon só com ffmpeg",
+      "subtemas": [
+        "expressões prontas de `crop` e `zoompan` para rolar tira vertical 9:16 no ritmo da fala, sem IA"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2341.md 2026-11-17"
+    },
+    {
+      "id": "recap_abertura_30s",
+      "nome": "Primeiros 30 s de recap de manhwa e anime",
+      "subtemas": [
+        "projetos pequenos que analisam a retenção da abertura de recaps e os ganchos que seguram o público (via yt-dlp e Python)"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2341.md 2026-11-17"
+    },
+    {
+      "id": "capa_primeiros30s",
+      "nome": "Capa e abertura",
+      "subtemas": [
+        "scripts em Python/FFmpeg que testam variantes de miniatura ou gancho dos primeiros 30 s com dados de retenção"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2351.md 2026-11-17"
+    },
+    {
+      "id": "android_ffmpeg_render",
+      "nome": "Render no celular",
+      "subtemas": [
+        "truques de Termux + FFmpeg (filtros leves, hwaccel MediaCodec, limpeza de disco) para dividir render entre PCs e celulares"
+      ],
+      "origem": "area_camera_3d_painel__sonnet_2351.md 2026-11-17"
+    },
+    {
+      "id": "tela_final_serie",
+      "nome": "Tela final e cartões apontando para o próximo episódio",
+      "subtemas": [
+        "página oficial de ajuda sobre telas finais e cartões (limite de elementos, duração mínima); como gerar a área vazia da tela final no ffmpeg"
+      ],
+      "origem": "area_dist_playlists_series__sonnet_0002.md 2026-11-18"
+    },
+    {
+      "id": "short_para_longo",
+      "nome": "Ponte de Short para o longo da mesma obra",
+      "subtemas": [
+        "página oficial sobre o \"vídeo relacionado\" em Shorts; como medir no Studio exportado se o Short empurra o longo"
+      ],
+      "origem": "area_dist_playlists_series__sonnet_0002.md 2026-11-18"
+    },
+    {
+      "id": "parte_n_titulo_capa",
+      "nome": "Convenção de título e capa de \"Parte N\"",
+      "subtemas": [
+        "repositórios pequenos de numeração de partes em título/capa/descrição e o que canais de recap grandes fazem, com amostra de 5 canais abertos"
+      ],
+      "origem": "area_shorts_seriados__sonnet_0054.md 2026-11-18"
+    },
+    {
+      "id": "retomada_condicional",
+      "nome": "Parte seguinte condicionada à retenção da anterior",
+      "subtemas": [
+        "regra simples (views ou retenção em 24 h) para liberar a parte N+1 usando o json de métricas que já temos"
+      ],
+      "origem": "area_shorts_seriados__sonnet_0054.md 2026-11-18"
+    },
+    {
+      "id": "faixas_idioma",
+      "nome": "Longos em outros idiomas",
+      "subtemas": [
+        "página oficial de múltiplas faixas de áudio e de título/descrição traduzidos no Studio, e o que muda por país"
+      ],
+      "origem": "area_distribuicao__sonnet_0107.md 2026-11-18"
+    },
+    {
+      "id": "ponte_campo",
+      "nome": "Campo Related Video no Studio",
+      "subtemas": [
+        "inspecionar a requisição HTTP que salva o vídeo relacionado e como saber se o canal tem \"advanced feature access\""
+      ],
+      "origem": "area_dist_ponte_short_longo__sonnet_0122.md 2026-11-18"
+    },
+    {
+      "id": "tela_final",
+      "nome": "Tela final automática nos longos",
+      "subtemas": [
+        "como reservar 5–20 s no fim do longo e configurar a tela final do próximo episódio em lote"
+      ],
+      "origem": "area_dist_ponte_short_longo__sonnet_0122.md 2026-11-18"
+    },
+    {
+      "id": "shorts_stay",
+      "nome": "Stayed to watch e viewed vs swiped em Shorts",
+      "subtemas": [
+        "Páginas oficiais do YouTube e artigos de criadores sobre como diagnosticar Short sem impressões, e quais fontes de tráfego (Shorts, Sound pages, Remixed) levam ao longo."
+      ],
+      "origem": "area_dist_impressoes_diagnostico__sonnet_0156.md 2026-11-18"
+    },
+    {
+      "id": "canal_novo_piso",
+      "nome": "Piso de impressões e canal novo",
+      "subtemas": [
+        "Regras e dados públicos sobre quantas impressões esperar em canal com menos de 1 semana, para calibrar o piso de \"dados insuficientes\"."
+      ],
+      "origem": "area_dist_impressoes_diagnostico__sonnet_0156.md 2026-11-18"
+    },
+    {
+      "id": "yt_audio_idiomas",
+      "nome": "Áudio em vários idiomas",
+      "subtemas": [
+        "passo a passo no Studio, formatos aceitos, se voz sintética é aceita, relatos de canais BR em 2026"
+      ],
+      "origem": "area_yt_recursos_avancados_recuperar__sonnet_0221.md 2026-11-18"
+    },
+    {
+      "id": "yt_ab_longo",
+      "nome": "Teste A/B de título e miniatura nos longos",
+      "subtemas": [
+        "relatos de 2026, quanto tempo leva, que vídeos testar primeiro"
+      ],
+      "origem": "area_yt_recursos_avancados_recuperar__sonnet_0221.md 2026-11-18"
+    },
+    {
+      "id": "yt_short_para_longo",
+      "nome": "Ponte Short → longo pelo \"vídeo relacionado\"",
+      "subtemas": [
+        "página oficial com passo a passo, limites e efeito medido em views"
+      ],
+      "origem": "area_yt_recursos_avancados_recuperar__sonnet_0221.md 2026-11-18"
+    },
+    {
+      "id": "yt_regras_shorts_2027",
+      "nome": "Regras de monetização de Shorts em 2027",
+      "subtemas": [
+        "página oficial de Shorts, o corte de 10 milhões de visualizações em 90 dias, o que muda para canais pequenos"
+      ],
+      "origem": "area_yt_conformidade_canal__sonnet_0241.md 2026-11-18"
+    },
+    {
+      "id": "yt_rede_canais",
+      "nome": "Risco de canais coordenados",
+      "subtemas": [
+        "texto oficial da política de spam sobre \"redes coordenadas de canais\", mesma voz ou modelo em muitos canais"
+      ],
+      "origem": "area_yt_conformidade_canal__sonnet_0241.md 2026-11-18"
+    },
+    {
+      "id": "yt_claim_short",
+      "nome": "Rotina de claim em Short",
+      "subtemas": [
+        "como ver, editar e repostar Shorts com reivindicação ativa pelo Studio no navegador, sem API"
+      ],
+      "origem": "area_yt_conformidade_canal__sonnet_0241.md 2026-11-18"
+    },
+    {
+      "id": "gem_cota",
+      "nome": "Cota de mídia por conta Gemini",
+      "subtemas": [
+        "inspect`/leitura de uso do app para decidir o rodízio, sem contador fixo"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0326.md 2026-11-18"
+    },
+    {
+      "id": "sessao_alerta",
+      "nome": "Alerta de sessão morta",
+      "subtemas": [
+        "detectar 401 na rotação e avisar a dona no painel antes do lote falhar"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0326.md 2026-11-18"
+    },
+    {
+      "id": "fila_ritmo",
+      "nome": "Ritmo de pedidos ao proxy",
+      "subtemas": [
+        "fila com intervalo, jitter e pausa após 429, por conta e por IP"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0326.md 2026-11-18"
+    },
+    {
+      "id": "gem_motivo",
+      "nome": "Tratar 401/429 do StreamGenerate",
+      "subtemas": [
+        "ler em código de proxy como se distingue sessão expirada, `/sorry` e cota, e quando trocar de conta"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0336.md 2026-11-18"
+    },
+    {
+      "id": "gem_hist",
+      "nome": "Cota lida pelo histórico",
+      "subtemas": [
+        "como estimar uso de vídeo/imagem por conta sem gastar requisições"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0336.md 2026-11-18"
+    },
+    {
+      "id": "gem_yt_regra",
+      "nome": "Regras oficiais do YouTube sobre conteúdo gerado por IA",
+      "subtemas": [
+        "páginas de support.google.com/youtube sobre conteúdo alterado/sintético e monetização, para checar os canais antes de postar"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0336.md 2026-11-18"
+    },
+    {
+      "id": "views_recaps_campeoes",
+      "nome": "Achar os recaps e Shorts mais vistos para recapar",
+      "subtemas": [
+        "Projetos pequenos em Python que ranqueiam vídeos por views ÷ inscritos e por idade, usando yt-dlp, sem API do Google"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0346.md 2026-11-18"
+    },
+    {
+      "id": "tendencia_recap",
+      "nome": "Recaps mais vistos",
+      "subtemas": [
+        "formas de achar via yt-dlp os recaps de anime/manhwa com mais views em canais de qualquer porte (views por inscrito, idade do vídeo)"
+      ],
+      "origem": "area_gemini_web_sessao_cookie__sonnet_0356.md 2026-11-18"
     }
   ],
   "projetos": [

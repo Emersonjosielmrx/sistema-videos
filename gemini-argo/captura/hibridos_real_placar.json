@@ -245,5 +245,31 @@
     "prep: last):\n  File \"D:\\gemini-argo\\captura\\hibridos_real\\microcortes\\argon-flash\\_conferir.py\", line 7, in <module>\n    exec(compile(PREP, \"prep\", \"exec\"), ns)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"prep\", line 34, in <module>\nAttributeError: module 'narracao' has no attribute 'microcortes'\n"
    ]
   }
+ },
+ "ag-hydrogen": {
+  "fila_agendado": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 112,
+   "turnos": 8,
+   "erro": "",
+   "falhas": []
+  },
+  "numero_yt": {
+   "ok": 15,
+   "total": 15,
+   "tempo": 156,
+   "turnos": 10,
+   "erro": "",
+   "falhas": []
+  },
+  "microcortes": {
+   "ok": 11,
+   "total": 11,
+   "tempo": 256,
+   "turnos": 11,
+   "erro": "",
+   "falhas": []
+  }
  }
 }

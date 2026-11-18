@@ -45,6 +45,27 @@ def log(m):
             pass
 
 
+_TRAVADO = {}
+
+
+def _canal_travado(canal):
+    """18/11: os 12 canais encerrados em 17/11 seguiam ganhando capa IA + re-render (miyamoto/dragon-ball do
+    CartuchoReact às 02:03 e 03:33). Mesma checagem da reserva_shorts_drive. CAPAR_PULA_TRAVADO=0 desliga."""
+    if not canal or os.environ.get("CAPAR_PULA_TRAVADO", "1") == "0":
+        return False
+    if canal not in _TRAVADO:
+        try:
+            import sys
+            sys.path.insert(1, r"D:\postador-de-videos\bin")
+            import trava_conta
+            import youtube_web_poster as ywp
+            slug, _e = ywp.entrada_do_cred(canal)
+            _TRAVADO[canal] = bool(slug and trava_conta.checar(slug))
+        except Exception:  # noqa: BLE001
+            _TRAVADO[canal] = False
+    return _TRAVADO[canal]
+
+
 def candidatos():
     out = []
     for d in SHORTS.iterdir():
@@ -61,6 +82,8 @@ def candidatos():
                 or j.get("posted_url") or j.get("timeout_em") or not j.get("pronto") or j.get("tipo") != "short"):
             continue
         if (d / "_NO_DRIVE.txt").exists():  # 14/11: vídeo no Drive (estoque do mês) — capa só quando voltar
+            continue
+        if _canal_travado(j.get("canal")):  # 18/11: canal encerrado (CartuchoReact etc.) não posta — capa é trabalho à toa
             continue
         if time.time() - (d / "video.mp4").stat().st_mtime < 180 or list(d.glob("*.lock")):
             continue

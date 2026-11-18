@@ -184,3 +184,40 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 ## [ ] PENDENTE — 2026-11-17 20:05 — Avatares 3D GLB e VRM com licença comercial (`area_avatar_3d_comercial`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_avatar_3d_comercial__sonnet_1957.md`
 - [INÉDITO] github.com/LimiNode/speech-animation — ★0, push 2026-10-22, MIT — Engine-agnostic realtime speech animation for lip sync, visemes, and speech-driven facial cues.
+
+## [ ] PENDENTE — 2026-11-17 20:16 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2007.md`
+- [INÉDITO] github.com/Philoso4er/why-this-sucks-autoedit — ★0, push 2026-10-21, MIT — Free local auto-editor: stills + voiceover + captions -> Ken Burns, punch-ins, animated captions, music, SFX (ffmpeg + Python)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 20:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2042.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 20:58 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2052.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 21:07 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2101.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 22:42 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2236.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 23:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2311.md`
+- [INÉDITO] github.com/LLL-404/long-image-to-video — ★0, push 2026-09-30, MIT — Turn tall screenshots into a smooth scrolling MP4 - GPU-accelerated encoding (NVENC/QSV/AMF), Tkinter GUI + Python API
+- [INÉDITO] github.com/saumitratambe/comic-to-video-pipeline — ★0, push 2026-09-21, MIT — Desktop pipeline that turns chapter images into narrated 1080p videos: OCR, panel crop, Gemini narration, TTS, FFmpeg render.
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 23:29 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2326.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 23:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2341.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-17 23:59 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2351.md`
+- [INÉDITO] github.com/LeoRToro/depth-parallax-pipeline — ★0, push 2026-06-14, MIT — Camera-moving-around-a-static-object video from N real photos, no generative video model - optical-flow morph + depth-map parallax (Depth An

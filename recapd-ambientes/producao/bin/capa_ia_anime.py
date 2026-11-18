@@ -368,12 +368,19 @@ def _papel(texto="", cena=""):
 
 
 def _etiqueta(texto="", cena=""):
+    # 18/11: frase curta escrita para a capa ('JOGADO AOS ZUMBIS') vale mais que o arquétipo do título ('REENCARNOU')
+    if texto and len(texto.split()) <= 4 and len(texto) <= 24 and texto.isupper():
+        return texto
     t = f"{cena} {texto}".lower()
     for palavra, rx in _ETIQUETAS:
         if re.search(rx, t):
             return palavra
     pal = re.sub(r"[^\wÀ-ú ]", " ", texto or "").split()
-    return " ".join(pal[:2]).upper() if pal else ""
+    # 17/11: cortava a frase em 2 palavras ('GUERREIRA DO PASSADO' -> 'GUERREIRA DO', 'HUMILHADO SER'): frase curta
+    # (até 4 palavras / 24 letras) entra inteira; longa usa só a 1ª palavra, nunca meio de frase
+    if len(pal) <= 4 and len(" ".join(pal)) <= 24:
+        return " ".join(pal).upper()
+    return pal[0].upper() if pal else ""
 
 
 AMARELO, PRETO = (255, 236, 0), (0, 0, 0)

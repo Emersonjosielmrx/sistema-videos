@@ -327,6 +327,23 @@ def _nicho_do_canal(alvo, proprio, principais):
     return principal
 
 
+class _RendFoco(dict):
+    """Rendimento por canal (mediana 48 h) lido 1x por processo pro foco nas fontes dos campeões (17/11)."""
+    _ok = False
+
+    def get(self, k, d=None):
+        if not self._ok:
+            self._ok = True
+            try:
+                self.update(_rendimento_canais() or {})
+            except Exception:  # noqa: BLE001
+                pass
+        return super().get(k, d)
+
+
+_REND_FOCO = _RendFoco()
+
+
 def _escolher_fonte(c, alvo=None, evitar=None):
     """Fonte do nicho do canal de destino (pt[i]["nicho"]); nicho sem fonte ainda: rodízio — o nicho que menos
     produziu nas últimas 24h. Dentro do nicho, a fonte menos usada."""
@@ -422,7 +439,14 @@ def _escolher_fonte(c, alvo=None, evitar=None):
         # no rodízio do nicho). Reversível: apagar o campo. O motivo fica no "_peso_obs" da fonte
         peso *= max(0.05, float(f.get("peso", 1) or 0.05))
         # 12/11 dona: a fonte que rende NESTE canal (mediana dela no canal ÷ mediana do canal, 0,3–3) sai mais vezes
-        peso *= _fonte_no_canal.get(f["nome"], 1.0)
+        nota_f = _fonte_no_canal.get(f["nome"], 1.0)
+        # 17/11 noite dona ("focar nos canais que restaram, nos melhores vídeos"): nos canais CAMPEÕES (mediana >=
+        # PARCEIRO_CAMPEAO_VIEWS em 48 h) a nota da fonte vale ao quadrado — receita (2x) sai 4x, fonte ruim (0,4x) 6x
+        # menos. PARCEIRO_FONTE_FOCO=0 desliga.
+        if (alvo and os.environ.get("PARCEIRO_FONTE_FOCO", "1") != "0"
+                and (_REND_FOCO.get(alvo["canal"]) or 0) >= float(os.environ.get("PARCEIRO_CAMPEAO_VIEWS", "500"))):
+            nota_f = nota_f ** 2
+        peso *= nota_f
         # 12/11: fonte cujo TIPO é o próprio nicho do canal vem antes da que só "também serve" (Imóvel em Foco: Professor
         # Baroni [imobiliario] antes dos de negócios, que ficam de reserva)
         if (alvo or {}).get("nicho_fixo") and f.get("tipo") != nicho:
@@ -537,6 +561,31 @@ def _prioridade(its, fila, alvo_fila, c=None):
         dias = (fila[d["canal"]] + agendados[d["canal"]]) / gasto
         t = teto(d)
         return min(t, int(dias)) - t  # negativo = falta pra chegar no teto dele (mais negativo produz antes)
+    if os.environ.get("PARCEIRO_FOCO_MELHORES", "1") != "0":
+        # 17/11 noite dona (12 canais encerrados; "focar nos canais que restaram, os melhores vídeos e tudo que melhore
+        # neles"): com os 30 dias pra todos, o Tech Noturno (mediana 1 view) levou 19 Shorts no dia e o HistoriasEmFrames
+        # (1.052) ficou com 25% do estoque. Agora: (1) piso — canal abaixo de PISO_DIAS de estoque vai primeiro (ninguém
+        # fica sem post); (2) acima do piso, quem RENDE mais produz primeiro até os 30 dias; (3) canal fraco (mediana <
+        # FRACO_VIEWS) fica só no piso (não disputa a produção extra). PARCEIRO_FOCO_MELHORES=0 volta aos 30 dias pra todos.
+        piso_dias = float(os.environ.get("PARCEIRO_PISO_DIAS", "7"))
+        fraco_v = float(os.environ.get("PARCEIRO_FRACO_VIEWS", "15"))
+
+        def _dias_estoque(d):
+            gasto = max(1.0, float(d.get("por_dia") or 2), float(ritmo_real().get(d["canal"], 0) or 0))
+            r = rend.get(d["canal"])
+            if r is not None and r < fraco_v:  # 12/11 dona: o fraco recebe 1 a 3 por dia — o piso conta com 2/dia
+                gasto = min(gasto, float(os.environ.get("PARCEIRO_FRACO_POR_DIA", "2")))
+            return fila[d["canal"]] / gasto
+
+        def _chave(d):
+            r = rend.get(d["canal"])
+            dias = _dias_estoque(d)
+            abaixo_piso = dias < piso_dias
+            fraco = r is not None and r < fraco_v
+            # 0 = abaixo do piso (todos), 1 = acima do piso e bom, 2 = fraco já no piso (só sobra)
+            faixa = 0 if abaixo_piso else (2 if fraco else 1)
+            return (d["canal"] in com_hoje, faixa, round(dias, 1) if faixa == 0 else -(r or 0), uso(d))
+        return _chave
     if os.environ.get("PARCEIRO_30_DIAS_TODOS", "1") != "0":
         # 16/11 dona ("cada canal tem que ficar com 30 dias"): o rendimento puro deixava canal com 0 (InovareManhwaVerse
         # 0/90, Anime Noturno 5/60) enquanto o Esporte Noturno chegava a 207/220. Agora vai primeiro quem está MAIS LONGE
@@ -624,6 +673,12 @@ def alvo_por_rendimento(d, rend, base):
     # (estoque_drive.py). PARCEIRO_DIAS_ESTOQUE=0 volta à conta de 10/7 dias.
     dias_env = int(os.environ.get("PARCEIRO_DIAS_ESTOQUE", "30"))
     dias = dias_env if dias_env > 0 else (10 if (r or 0) >= 300 else 7)
+    # 17/11 noite (foco nos melhores): canal fraco (mediana < PARCEIRO_FRACO_VIEWS) só tem estoque do piso (7 dias),
+    # não 30 — senão ele fica eternamente "faltando" e puxa a produção extra. PARCEIRO_FOCO_MELHORES=0 desliga.
+    if (os.environ.get("PARCEIRO_FOCO_MELHORES", "1") != "0" and r is not None
+            and r < float(os.environ.get("PARCEIRO_FRACO_VIEWS", "15"))):
+        dias = min(dias, float(os.environ.get("PARCEIRO_PISO_DIAS", "7")))
+        gasto = min(gasto, float(os.environ.get("PARCEIRO_FRACO_POR_DIA", "2")))
     return max(base if r is None else 3, int(round(gasto * dias)))
 
 

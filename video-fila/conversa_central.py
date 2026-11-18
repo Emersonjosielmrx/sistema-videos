@@ -23,7 +23,8 @@ from produto import motor  # noqa: E402  (gateway, chave, claude.exe e teste de 
 LINHA = Path(r"D:\video-fila\linhas\CENTRAL")
 CONFIG_DIR = LINHA / ".conversa"
 CFG = Path(r"D:\video-fila\config\melhorador_central.json")
-CADEIA_PADRAO = ["gemini/gemini-3.5-flash", "agy/gemini-3.8-flash-high", "antigravity/gemini-3.8-flash-tiered"]  # 07/11: Antigravity responde "no longer supported"
+# 07/11 o Antigravity respondia "no longer supported" (consertado 09/11); 18/11: AI Studio acerta 7% -> volta pro fim
+CADEIA_PADRAO = ["agy/gemini-3.8-flash-high", "antigravity/gemini-3.8-flash-tiered", "gemini/gemini-3.5-flash"]
 ABRIR = ("A dona abriu a conversa. Leia o que mudou desde a última vez (seção 'Ao abrir' do CLAUDE.md) e diga em até "
          "6 linhas: o que o central rodou, o que as linhas decidiram, o que está medido (elegíveis, % assistido) e o "
          "que precisa dela. Depois espere o pedido dela.")

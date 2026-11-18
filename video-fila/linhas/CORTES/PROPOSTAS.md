@@ -2018,3 +2018,98 @@
 - prova: Em sem-obra-59de6e_cap1_20261117 (q06, q10, q12, q15) a legenda queimada em inglês ('She injured her an...', 'The members were worried', 'She asked other members to keep performing') ficou totalmente descoberta na borda inferior enquanto o filtro delogo borrou a perna da cantora no centro (q02), além de exibir sticker 'LOCAL MUND' cortado em q05.
 - onde: detector de hardsub (filtro de coordenadas Y da caixa de legenda) e camada de stickers/cards superiores
 - como testar: Rodar a detecção de hardsub em sem-obra-59de6e_cap1_20261117 restringindo a busca de legenda queimada à faixa inferior real do vídeo original e verificar na folha se o texto em inglês é coberto sem borrar o centro do palco.
+
+## 17/11 21:17 PROPOSTA [CERTEZA] Palavra de impacto desenhada duas vezes empilhada (estilo solto + estilo em caixa) (cc-sobra)
+- prova: sem-obra-997c59 q09 ('NINGUÉM' amarelo em cima, 'SÓ QUE', 'NINGUÉM' na caixa laranja embaixo; júri: grave em legibilidade e em retenção) e sem-obra-7a1da2 q17 ('JAMAIS' amarelo + 'JAMAIS' na caixa azul; júri: média em retenção). Os dois são de 17/11, mesmo canal.
+- onde: Função que escolhe e desenha as palavras de impacto no centro da tela (não achei o arquivo daqui; provavelmente a camada de destaque no Remotion/ASS): parece somar 2 camadas de destaque, de dois estilos diferentes, para a mesma palavra, sem tirar a repetida.
+- como testar: Antes de desenhar, tirar a palavra de impacto repetida, comparando sem acento e sem diferença de maiúscula, quando as 2 vezes se sobrepõem no tempo ou ficam a menos de 1,5 s uma da outra (manter uma só, a de maior destaque). Refazer 997c59 e 7a1da2 e conferir na folha de quadros que q09 e q17 mostram uma única palavra de impacto. Rodar a folha do TOPO/centro em todos os Shorts do dia, porque o júri vê só 1 em 4.
+
+## 17/11 21:17 PROPOSTA [CERTEZA] Letra acentuada sai minúscula dentro da legenda em MAIÚSCULAS (cc-sobra)
+- prova: sem-obra-997c59 (folha): q12 'NESSAS CONDIçõES', q14/q15 'TAMBéM SãO EXCELENTES'. Até agora só neste Short e só em um dos estilos de legenda (no 376426, 'CONSTRUÇÃO' saiu certo). Por isso é 1 Short e precisa medir antes.
+- onde: Linha palavra a palavra de baixo: a passagem para MAIÚSCULAS do estilo usado no 997c59 (provavelmente só converte letras sem acento, ou a fonte desse estilo não tem a versão maiúscula de é/ã/ç/õ e cai em outra fonte).
+- como testar: Tirar a folha de quadros de todos os Shorts do dia e procurar por letra com acento em minúscula no meio de palavra em MAIÚSCULAS. Testar o estilo com a frase 'AÇÃO TAMBÉM SÃO CONDIÇÕES' e garantir que a conversão é feita no Python (str.upper) antes de desenhar e que a fonte tem os acentos maiúsculos.
+
+## 17/11 21:17 PROPOSTA [CERTEZA] Nome/bordão da voz parceira ('Motunui') vazando na narração (cc-sobra)
+- prova: sem-obra-376426 q07: palavra de impacto 'DE MOTUNUI' sobre a escavadeira, sem relação com a cena. A regra fixa da dona diz 'narrador parceiro nunca é chamado pelo nome' e 'sem bordão'. A regra das alavancas que tratava disso foi removida em 13/11 e, quando foi recolocada, o sistema desfez pela nota (5,54 → 4,87), que é barulho e não prova contra a regra. 1 Short neste lote.
+- onde: Bloco de instrução do narrador/persona no gerador de roteiro (lição de 26/10: a instrução do narrador vale por cima das regras gerais) e o conferidor do roteiro antes da voz.
+- como testar: Colocar a proibição DENTRO do bloco do narrador e adicionar um filtro no texto final que trava ou reescreve quando a fala tem nomes/bordões da persona (lista: Moana, Motunui, saudações tipo 'Salve rapaziada'). Procurar 'motunui|moana' em todos os roteiro.txt dos últimos 7 dias para medir quantos Shorts vazaram.
+
+## 17/11 22:27 PROPOSTA [CERTEZA] Forçar margem superior segura (y >= 150) e desobstrução facial no gancho inicial (gemini-4-argon)
+- prova: Textos/tarjas superiores cortados na borda superior ou cobrindo o rosto nos primeiros segundos em 4 Shorts do lote: sem-obra-ccfe49_cap1_20261117 (q02.jpg, 'PRA'/'PENSAR' cortados no topo), sem-obra-12e749_cap1_20261117 (q02.jpg, 'INÚTIL IRMÃ' cortado na borda superior), sem-obra-657319_cap1_20261117 (q02.jpg, legenda superior invadindo a cabeça) e unfair_cap1_20261117 (q01.jpg, tarja branca gigante cobrindo o rosto no gancho 'PERDI').
+- onde: Renderizador de overlay/ASS e posicionamento de tarja/gancho superior no pipeline de vídeo (cálculo de bounding box vertical e clamp de zona segura y entre 150 e 1580).
+- como testar: Gerar folha de quadros em 1.5s (q01/q02) dos 4 Shorts afetados e validar que nenhum caractere do gancho superior fique com y < 150px nem sobreponha a caixa de detecção facial.
+
+## 17/11 22:27 PROPOSTA [GOSTO] Aplicar zoom-in progressivo automático em cenas de palestrante com movimento < 20% (gemini-4-argon)
+- prova: Queda de dinamismo e retenção apontada pelo júri com medição objetiva abaixo de 20% em 2 Shorts: sem-obra-ccfe49_cap1_20261117 (q02.jpg, cena 1 com 15.6% de movimento) e sem-obra-657319_cap1_20261117 (q10.jpg, cena 4 com 14.4% de movimento).
+- onde: Filtro de pós-processamento/reenquadramento dinâmico de cenas estáticas no pipeline de montagem FFmpeg.
+- como testar: Reprocessar sem-obra-ccfe49_cap1_20261117 e sem-obra-657319_cap1_20261117 ativando punch-in/ken burns quando o movimento medido da cena for < 20% e verificar se a medição sobe para > 20% sem cortar o topo da cabeça.
+
+## 17/11 23:40 PROPOSTA [CERTEZA] Conferir palavras estranhas da legenda contra o roteiro.txt antes de agir (cw/claude-sonnet-5-5)
+- prova: sem-obra-30e09b q03/q04 ('E ELITEROL', 'E FLITEROI', 'TU IRIA' enquanto a voz diz 'de futebol') e sem-obra-84829a q13/q16 ('FROQ'). Dois Shorts com termos que não parecem português.
+- onde: roteiro.txt dos dois Shorts; etapa que gera a legenda palavra a palavra e a transcrição (Whisper/alinhamento) do pipeline CORTES
+- como testar: Abrir o roteiro.txt de cada Short e procurar 'FLITEROI', 'ELITEROL' e 'FROQ'. Se estiverem no roteiro, é erro de transcrição da fonte e a regra de roteiro 'corrija palavras sem sentido vindas de erro de transcrição' deveria ter pegado (então propor reforço no prompt). Se NÃO estiverem, é desalinhamento do tempo/texto na legenda e vira bug de código. Só então decidir.
+
+## 17/11 23:40 PROPOSTA [CERTEZA] Caixas de chat pretas e tarja grande cobrindo o rosto no blackie-your-imaginary-friend (cw/claude-sonnet-5-5)
+- prova: blackie q02 (tarja/legenda gigante verde cobre quase o personagem inteiro, tapando o rosto enfaixado) e q07/q08 (caixas de chat pretas estáticas no topo do quadro). Só 1 Short no lote, então ainda não é padrão.
+- onde: módulo de legenda com destaque por personagem (tamanho/cor do destaque) e overlay de chat do canal; verificar também se a tarja respeita a regra fixa do tamanho exato da legenda
+- como testar: Gerar folha do TOPO e do centro (D:\tmp\folha_topo.py) no 1,5 s de todos os Shorts do dia para medir quantos têm destaque ou caixa cobrindo o rosto. Se >= 2 Shorts, limitar o corpo máximo do destaque (hoje 50-70px) e reposicionar para o terço inferior.
+
+## 18/11 00:58 PROPOSTA [CERTEZA] Júri não pode marcar movimento 'grave' quando a cena está acima do limite de 4% (gemini-4-argon)
+- prova: sem-obra-d31f4c q13: cena 5 com 5.9% marcada como [grave]. corte-de-papel q16 e d31f4c q16: cena 6 com 8.7%. sem-obra-c01788 q14: cena 5 com 6.6%. Todas acima de 4%, e a nota de retenção caiu para 6.0-7.0 por causa disso.
+- onde: prompt/critérios do júri em cortes_juri (regra de movimento e retenção)
+- como testar: Mudar a instrução para só citar movimento baixo quando o valor medido for < 4%. Reprocessar este lote e conferir se a retenção sobe sem esconder cena realmente parada.
+
+## 18/11 00:58 PROPOSTA [GOSTO] Conferir a medida de movimento: cena 6 com 8.7% idêntico em dois Shorts diferentes (gemini-4-argon)
+- prova: corte-de-papel_cap1_20261114 q16 e sem-obra-d31f4c_cap1_20261114 q16 trazem exatamente 8.7% na cena 6. Pode ser coincidência, mas também pode ser a medida vindo de cache ou do mesmo arquivo.
+- onde: função que mede movimento por cena (quem preenche o 'movimento medido' que o júri recebe)
+- como testar: Medir à mão a cena 6 dos dois Shorts com o mesmo método (diferença média entre quadros). Se os valores forem iguais, procurar cache ou chave repetida na gravação do log.
+
+## 18/11 00:58 PROPOSTA [GOSTO] Verificar se a tarja do corte-de-papel tem o tamanho exato da legenda lida (gemini-4-argon)
+- prova: corte-de-papel_cap1_20261114: q03 'tarja preta grossa' e q10 'tarja preta opaca retangular na região inferior'. O júri não vê o que está debaixo da tarja, então isso só vira CERTEZA (faixa grande, contra a regra fixa) se a caixa da tarja for maior que a caixa de letras medida.
+- onde: log do Short ([hardsub] caixa lida) comparado com a tarja desenhada, na função de cobertura de legenda
+- como testar: Medir a altura da tarja nos quadros q03 e q10 e comparar com a caixa de letras do log. Se passar de ~15% de folga, é bug de tamanho; se bater, a legenda da fonte era grande e não há defeito.
+
+## 18/11 00:58 PROPOSTA [GOSTO] Desfazer regra só com amostra maior ou repetição (gemini-4-argon)
+- prova: Em 13/11, a mesma regra de palavrão foi 'mantida' (4.25 -> 4.88) e depois 'desfeita' (5.54 -> 4.87), com notas do mesmo nível. A tarja_letra 0.62 -> 0.52 foi desfeita por 5.13 -> 4.63. São lotes pequenos e o júri vê 1 Short em 4.
+- onde: regra de desfazer mudança em cortes_ajustes (comparação da nota média antes/depois)
+- como testar: Exigir >= 8 Shorts avaliados em cada lado e diferença > 0.8, ou duas medições seguidas, antes de desfazer. Rodar a regra nos lotes antigos e ver quantas desfeitas teriam sido evitadas.
+
+## 18/11 02:21 PROPOSTA [CERTEZA] Conferir cobertura da legenda inglesa queimada no fanta_cap1 (cw/claude-sonnet-5-5)
+- prova: fanta_cap1_20261118: q02, q08, q13 e q14 mostram legenda inglesa da fonte ('FOOD', 'FRUIT PULP', 'It doesn't exactly sound APPEALING') competindo com a nossa em português. Falta confirmar no log do Short se a visão leu a legenda ('[hardsub] N/6'). Só vale como defeito se leu e a tarja/delogo não cobriu; se não leu, o problema é a detecção.
+- onde: log do Short fanta_cap1_20261118 + detecção de hardsub e função que posiciona a tarja/delogo (cortes_tarja / visão de hardsub)
+- como testar: Abrir o log e ver o hardsub lido. Se leu e não cobriu: renderizar de novo e conferir a folha de quadros com a tarja do tamanho exato da legenda, usando um vídeo sem legenda como controle negativo. Se não leu: rodar a visão em resolução >= 720 px, que é a lição de 27/10. Ver também se o problema se repete em outros Shorts com legenda inglesa grande no dia.
+
+## 18/11 02:21 PROPOSTA [CERTEZA] Verificar 'trauei' e 'PORÉM' duplicado no roteiro e na legenda (cw/claude-sonnet-5-5)
+- prova: sem-obra-f673d2 q18 ('trauei, lembrando') e sem-obra-a175ec q10 ('PORÉM' sobreposto). Pelas lições, a legenda é o texto do roteiro: conferir no roteiro.txt antes de concluir que é erro de legenda.
+- onde: roteiro.txt dos dois Shorts; geração do ASS da legenda palavra a palavra (palavra repetida em dois eventos sobrepostos)
+- como testar: Procurar 'trauei' no roteiro.txt. Se estiver lá, é erro de roteiro e conta como 1 ocorrência; se aparecer em outro Short do dia, aí sim vira regra de roteiro. Para o 'PORÉM', listar os eventos do ASS e ver se há dois com o mesmo texto e tempos sobrepostos.
+
+## 18/11 02:21 PROPOSTA [GOSTO] Medir se o gancho de 1 palavra no primeiro quadro prejudica a retenção (cw/claude-sonnet-5-5)
+- prova: f673d2 q01 ('ANOS' isolado, nota grave) e 3f722b q02 ('LUA' grande + 'COMO MINERADOR' fraco). Só 2 Shorts, nota do júri sem prova de retenção real.
+- onde: cortes_ajustes.json:regras_roteiro (só se a medição confirmar) e geração do gancho
+- como testar: Comparar % assistido mediano dos Shorts do dia que começam com 1 palavra isolada contra os que começam com frase de 3+ palavras, só entre os elegíveis (n >= 20 de cada lado). Se a diferença for clara, testar 1 regra de roteiro e medir no lote seguinte.
+
+## 18/11 03:31 PROPOSTA [CERTEZA] Legenda palavra a palavra: não deixar palavra solta de 1 letra ('A', 'E') nem cortada na zona inferior (cw/claude-sonnet-5-5)
+- prova: d31f52_cap1_20261114 q13 ('E' solta, muito baixa e cortada) e q07 ('SOZINHO' colado na margem/tarja); e3914f_cap1_20261118 q11 ('A' isolada, quase na margem inferior); 84eb99_cap1_20261118 q01 ('PORQUE' cortada na zona insegura inferior). 3 Shorts do lote.
+- onde: módulo de renderização da legenda palavra a palavra (posição Y e agrupamento de palavras curtas); conferir o limite inferior da zona segura (y <= 1580) e juntar artigos/conjunções de 1 letra à palavra seguinte.
+- como testar: Renderizar os 3 Shorts de novo, extrair os quadros q13/q11/q01 e confirmar que nenhuma palavra fica fora de y 150–1580 e que não há palavra de 1 letra sozinha na tela. Rodar também um controle de 5 Shorts de outros canais.
+
+## 18/11 03:31 PROPOSTA [CERTEZA] Legenda duplicada/sobreposta na dobra do loop ('TIROU' + 'QUE TIROU') (cw/claude-sonnet-5-5)
+- prova: d31f52_cap1_20261114 q16 (júri grave: 'TIROU' grande e 'QUE TIROU' logo abaixo) e q17 ('QUE' e 'TIROU' sobrepostos). Defeito objetivo de duas camadas de texto ao mesmo tempo, mesmo Short, dois quadros.
+- onde: função que gera os eventos da legenda palavra a palavra no fim do vídeo (provável sobreposição entre o último bloco e o bloco do gancho do loop).
+- como testar: Gerar de novo o d31f52, amostrar quadros a cada 0,1 s nos últimos 2 s e garantir 1 único bloco de texto ativo por vez.
+
+## 18/11 03:31 PROPOSTA [CERTEZA] Texto/tarja sobre o rosto do personagem (CORAÇÃO sobre Gordon Ramsay) (cw/claude-sonnet-5-5)
+- prova: e3914f_cap1_20261118 q12 (júri grave). Só 1 Short, então só vira regra se aparecer de novo; coletar o log do Short para ver se a tarja era sobre legenda queimada real (regra fixa: tarja só quando há legenda queimada, do tamanho exato) ou se é a legenda do próprio Short subindo.
+- onde: posicionamento da tarja/legenda em cortes_render (conferir se o elemento é a nossa legenda ou a tarja de cobertura) e o log do Short.
+- como testar: Abrir o log e a folha de quadros do e3914f; checar se aparece '[hardsub]'. Se for a nossa legenda, subir a checagem de colisão com rosto; se for tarja, confirmar o tamanho exato da legenda fonte.
+
+## 18/11 03:31 PROPOSTA [CERTEZA] Conferir no roteiro.txt a palavra 'ESTADO' na legenda do e3914f antes de agir (cw/claude-sonnet-5-5)
+- prova: e3914f q12: legenda inferior mostra 'ESTADO' enquanto o trecho esperado é 'quase me mata do coração de tanto suspense!'. Pelas lições a legenda é o texto do roteiro: se o roteiro.txt tiver 'ESTADO', é erro de roteiro (regra de roteiro), se não tiver, é bug de legenda/ASR.
+- onde: roteiro.txt do Short e o alinhamento de palavras (tempo vindo da voz).
+- como testar: Comparar roteiro.txt com as palavras renderizadas do Short; só então decidir entre regra de roteiro e correção de código.
+
+## 18/11 03:31 PROPOSTA [GOSTO] Revisar o limiar de 'cena parada' que o júri usa (4% vs 20%) (cw/claude-sonnet-5-5)
+- prova: Notas de movimento citam 15.6%, 12.2%, 15.7%, 14.3% e 19.5% como 'abaixo do limiar' ora de 4%, ora de 20%. Nota inconsistente, não é prova de cena estática (nenhuma cena abaixo de 5%).
+- onde: prompt/rubrica do júri de movimento em cortes_juri.
+- como testar: Fixar um único limiar (ex.: parada < 5%) na rubrica, reavaliar o lote de hoje e ver se as notas de movimento convergem.

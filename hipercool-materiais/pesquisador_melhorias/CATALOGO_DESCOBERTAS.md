@@ -6202,3 +6202,216 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_avatar_3d_comercial__sonnet_1957.md`
 
 - [INÉDITO] github.com/LimiNode/speech-animation — ★0, push 2026-10-22, MIT — Engine-agnostic realtime speech animation for lip sync, visemes, and speech-driven facial cues.
+
+## 2026-11-17 20:16 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2007.md`
+
+- [INÉDITO] github.com/Philoso4er/why-this-sucks-autoedit — ★0, push 2026-10-21, MIT — Free local auto-editor: stills + voiceover + captions -> Ken Burns, punch-ins, animated captions, music, SFX (ffmpeg + Python)
+
+## 2026-11-17 20:28 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2021.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 20:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2042.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 20:58 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2052.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 21:07 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2101.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 21:25 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2121.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 21:40 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2133.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 21:55 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2147.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 22:08 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2201.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 22:16 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2212.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 22:25 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2221.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 22:42 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2236.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 23:01 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_2251.md`
+
+- [INÉDITO] github.com/moallemi/android-mcp-server — ★1, push 2026-03-20, MIT — Android MCP server. Control devices, capture screenshots, interact with UI, and manage apps via ADB using Claude, Codex, Gemini CLI, GitHub 
+
+## 2026-11-17 23:22 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2311.md`
+
+- [INÉDITO] github.com/LLL-404/long-image-to-video — ★0, push 2026-09-30, MIT — Turn tall screenshots into a smooth scrolling MP4 - GPU-accelerated encoding (NVENC/QSV/AMF), Tkinter GUI + Python API
+- [INÉDITO] github.com/saumitratambe/comic-to-video-pipeline — ★0, push 2026-09-21, MIT — Desktop pipeline that turns chapter images into narrated 1080p videos: OCR, panel crop, Gemini narration, TTS, FFmpeg render.
+
+## 2026-11-17 23:29 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2326.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 23:47 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2341.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-17 23:59 — Câmera 3D e parallax em painéis de mangá (`area_camera_3d_painel`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_camera_3d_painel__sonnet_2351.md`
+
+- [INÉDITO] github.com/LeoRToro/depth-parallax-pipeline — ★0, push 2026-06-14, MIT — Camera-moving-around-a-static-object video from N real photos, no generative video model - optical-flow morph + depth-map parallax (Depth An
+
+## 2026-11-18 00:26 — Playlists e séries para longos (`area_dist_playlists_series`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_playlists_series__sonnet_0002.md`
+
+- [REPROVADO por LONGOS: skill 0 estrelas de empacotar upload 4K + capa; já temos youtube_web_poster e capar_shorts, 4K não serve] github.com/Alexander-Kz/video-final-pack-skill — ★0, push 2026-05-21, MIT — Claude Code skill for YouTube release packaging — takes a finished episode and produces upload-ready 4K MP4 + thumbnails + a copy-paste UPLO
+
+## 2026-11-18 00:42 — Tela final, playlist e sessão (`area_fim_playlist`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_fim_playlist__sonnet_0033.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 01:04 — Séries e playlists em Shorts (`area_shorts_seriados`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_shorts_seriados__sonnet_0054.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 01:15 — Distribuição e algoritmos (`area_distribuicao`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_distribuicao__sonnet_0107.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 01:31 — Ponte Short -> longo (link relacionado, fixado, cards) (`area_dist_ponte_short_longo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_ponte_short_longo__sonnet_0122.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 01:51 — Canal novo de longos: arranque com poucas impressões (`area_dist_canal_novo_longo`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_canal_novo_longo__sonnet_0144.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 02:19 — Diagnóstico de impressões baixas (YouTube Analytics leitura) (`area_dist_impressoes_diagnostico`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_dist_impressoes_diagnostico__sonnet_0156.md`
+
+- [REPROVADO por LONGOS: 0 estrelas; MCP que exige OAuth da API do YouTube por canal (regra: Google só pelo navegador e 1 saída por conta); views/horas/impressões dos longos já lidas pelo Studio em views_longos.py/coletar_views_longos.py] github.com/jaimebg/youtube-studio-mcp — ★0, push 2026-09-16, MIT — MCP server that audits and optimises your own YouTube channel — impressions, CTR, retention, search terms and metadata quality, with opportu
+
+## 2026-11-18 02:25 — Recuperar recursos avançados do YouTube (caminho oficial) (`area_yt_recursos_avancados_recuperar`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_yt_recursos_avancados_recuperar__sonnet_0221.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 02:35 — Crescer canal SEM recursos avançados (`area_yt_crescer_sem_recursos_avancados`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_yt_crescer_sem_recursos_avancados__sonnet_0232.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 02:48 — Conformidade do canal para não perder recursos (`area_yt_conformidade_canal`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_yt_conformidade_canal__sonnet_0241.md`
+
+- [REPROVADO por LONGOS: 1 estrela; app de tela PyQt6 pra conferir na mão antes de subir; nossa conferência pré-upload já é automática (politica.py checar_upload, trava de nudez, revisão do vídeo pronto)] github.com/mahzoonmmd/YT-Guard — ★1, push 2026-11-10, MIT — Pre-upload YouTube video checker (Long & Shorts): AI disclosure, reused content, copyright suspicions, retention. PyQt6 + Gemini.
+
+## 2026-11-18 02:56 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0251.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 03:11 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0301.md`
+
+- [INÉDITO] github.com/lovepaper/gemini-reverse-proxy — ★0, push 2026-11-03, MIT — 本地 Gemini 网页协议反代 (OpenAI 兼容), 匿名免 Key, 基于 zexadev/gemini-web2api-go 适配编译. 需本地代理出网.
+
+## 2026-11-18 03:22 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0317.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)
+
+## 2026-11-18 03:33 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0326.md`
+
+- [INÉDITO] github.com/Hau04/gemini-web2api — ★0, push 2026-11-18, MIT — Convert Google Gemini web into OpenAI-compatible API. Zero cost, single static binary.
+- [INÉDITO] github.com/Sophomoresty/gemini-web2api — ★3601, push 2026-08-14, MIT — Convert Google Gemini web into OpenAI-compatible API. Zero auth, cross-platform, single file.
+
+## 2026-11-18 03:41 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0336.md`
+
+- [INÉDITO] github.com/himanusia/hermes-antigravity-multiaccount — ★1, push 2026-10-27, MIT — Run Hermes Agent on your Google Antigravity / Gemini subscription via the official agy CLI. Multi-account quota rotation, quota in /usage, a
+- [INÉDITO] github.com/igok045-netizen/gemini-web2api — ★1, push 2026-11-08, MIT — Local OpenAI-compatible Gemini web bridge with admin UI and Firefox session support
+
+## 2026-11-18 03:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0346.md`
+
+- [INÉDITO] github.com/kittors/CliRelay — ★1059, push 2026-11-18, MIT — Self-hosted AI gateway for coding CLIs — one OpenAI/Claude/Gemini/Codex-compatible endpoint, with a multi-tenant web console, request logs, 
+
+## 2026-11-18 04:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0356.md`
+
+- [INÉDITO] github.com/ghostedmyself/gravpool — ★1, push 2026-10-02, MIT — Google Antigravity OAuth account pool + unified OpenAI-compatible gateway: refresh auto, kuota live, external providers, web dashboard. Pure
+
+## 2026-11-18 04:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0407.md`
+
+- (nada novo: tudo já estava no ja_conhecidos)

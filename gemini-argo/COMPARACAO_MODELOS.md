@@ -76,6 +76,51 @@ conferência do Argon servido (10:10), pode ter sido Flash-Lite.
 
 ## Análises (mais nova em cima)
 
+### 17/11 ~23h — OmniRoute — Gemini 4 Hydrogen (`ag-hydrogen`) na bancada de código real (hibridos_real.py)
+Mesma bancada de 27/10 (3 consertos reais, 37 testes escondidos, Claude Code CLI pelo :20133, máx. 30 turnos).
+Hydrogen só aceita raciocínio até "medium" (high/xhigh = 400 THINKING_LEVEL_XHIGH; o proxy rebaixa).
+
+| Modelo | fila_agendado | numero_yt | microcortes | Total |
+|---|---|---|---|---|
+| **ag-hydrogen** (17/11) | 11/11 | 15/15 | 11/11 | **37/37** |
+| hx-maos-gemini (27/10) | 11/11 | 15/15 | 11/11 | 37/37 |
+| gemini-4-argon (27/10) | 11/11 | 14/15 | 11/11 | 36/37 |
+| agy/gemini-3.8-flash-high (27/10) | 11/11 | 11/15 | 0/11 | 22/37 |
+
+**Conclusão:** o Hydrogen sozinho empata com a melhor dupla e passa o Gemini 3.8 de longe. A bancada ficou fácil
+demais para separar os de cima.
+
+**Tarefa difícil REAL** (`captura/dificil_estado.py`, dona: "edição real do projeto em que até o Opus teve
+dificuldade"): `_gravar_estado` do recapd colab/postar_longos.py — o mesmo defeito (rodada antiga grava o estado por
+cima) voltou 4× (02/11, 13/11, 14/11, 16/11) e foi remendado em camadas. O modelo recebe a versão de 03/11 + os 4
+relatos; 16 testes escondidos simulam 2 rodadas concorrentes por incidente (versão 03/11 = 8/16, produção = 16/16).
+
+| Modelo | Nota | Tempo | Turnos |
+|---|---|---|---|
+| cc/claude-opus-5-5 (referência) | 16/16 | 254 s | 9 |
+| gemini-4-argon | 16/16 | 623 s | 10 |
+| agy/gemini-3.8-flash-high | 16/16 | 936 s | 30 (no limite) |
+| ag-hydrogen (medium, low e budget 32k) | **8/16** nas 3 | 360–420 s | 9 |
+
+Hydrogen: em toda resposta grande gasta os **16.384 tokens de saída** (teto dele) só raciocinando, e o raciocínio vem
+como TEXTO (não bloco thinking) → nunca chega a editar; o Claude Code acusa "exceeded the 64000 output token". Não
+muda com esforço (low/medium) nem com thinkingBudget (ignorado: 4447 tokens com 16k, 32k e 60k). Serve para conserto
+curto; em tarefa longa de agente trava. Gemini 3.8 acertou mas precisou de 30 turnos (3× o Opus).
+
+**18/11 — Hydrogen nas FUNÇÕES REAIS dos projetos (dona: "na frente do Gemini só onde ele se sair melhor")**
+| Projeto / função real | Hydrogen | Gemini (o que já estava) | Decisão |
+|---|---|---|---|
+| ms-energy qa_ms (visão, fotos reais das solares) | 2/6 (vazio, 502, "nenhuma imagem anexada"), 10–100 s | 3-flash 3/3, 3–7 s | não entra |
+| postador agentes.revisor (mentira plantada) | 4/6, 79 s | 3.8 6/6, 10 s | não entra |
+| postador agentes._pedir_pautas (20 pautas ×3) | 20 pautas, 2 lotes JSON cortado, 133 s | 3.8 60 pautas, 0 problema, 17 s | não entra |
+| recapd anime_tts._passagem (troca de narrador) | 0/5 (400 tok), 1/5 (3000 tok), sem JSON | 3-flash 5/5 2 s · 3.8 5/5 4 s · Argon 3/5 118 s | não entra |
+| olx ia() + PROMPT de avaliação (6 anúncios) | 14/17, 1 falha, 35 s | gemini-fila 17/17, 4 s · Sonnet 16/17 | não entra |
+| bancada de código curto (hibridos_real) | **37/37** | 3.8 22/37 | único em que ganhou |
+
+**Conclusão:** em texto curto com JSON e prazo, o Hydrogen sonar é pior e 6–9× mais lento que o Gemini 3-flash/3.8
+(gasta o teto pensando e devolve vazio/cortado). Só vale para conserto de código curto. Não foi posto na frente de
+nenhuma fila de projeto.
+
 ### 03/11 17:15 — PESQUISADOR DE MELHORIAS — Busca GitHub (`area_voz_rapida`: Argon vs Claude Sonnet vs Gemini Pro vs Opus)
 Mesmo pedido (`rodadas\2026-11-03_1205\pedidos\area_voz_rapida.md`, com 69 repositórios em `ja_conhecidos.txt` proibidos de repetir) enviado em paralelo para `argon-pesquisa`, `sonnet-ajudante`, `gemini-pro-pesquisa` e `opus-ajudante`. Conferido na API do GitHub (`pesquisador.py comparar` -> `placar.json` e `JUNTO.md`):
 

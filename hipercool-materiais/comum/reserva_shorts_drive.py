@@ -65,8 +65,23 @@ def main(simular):
             sair.append(p)
             continue
         por_canal[str(m.get("canal") or "?")].append(p)
+    # 18/11 (disco D 4,8 GB; 523 Shorts de 12 canais ENCERRADOS em 17/11 ocupando 5,7 GB): canal travado pelo YouTube
+    # não posta — tudo dele vai pro Drive (fica guardado até o resultado da contestação; nada é apagado).
+    # RESERVA_TRAVADO_DRIVE=0 desliga.
+    travados = set()
+    if os.environ.get("RESERVA_TRAVADO_DRIVE", "1") != "0":
+        try:
+            sys.path.insert(1, r"D:\postador-de-videos\bin")
+            import trava_conta
+            import youtube_web_poster as ywp
+            for canal in por_canal:
+                slug, _e = ywp.entrada_do_cred(canal)
+                if slug and trava_conta.checar(slug):
+                    travados.add(canal)
+        except Exception as e:  # noqa: BLE001
+            log(f"[!] não li os canais travados ({type(e).__name__}) — segue a reserva normal")
     for canal, pastas in por_canal.items():
-        fica = max(DIAS, DIAS * int(por_dia.get(canal, 1)))
+        fica = 0 if canal in travados else max(DIAS, DIAS * int(por_dia.get(canal, 1)))
         pastas.sort(key=lambda p: (p / "video.mp4").stat().st_mtime)  # mais velho primeiro = posta antes
         sair += pastas[fica:]
     tam = sum((p / "video.mp4").stat().st_size for p in sair)

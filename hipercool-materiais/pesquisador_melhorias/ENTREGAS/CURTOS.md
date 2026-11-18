@@ -3809,79 +3809,90 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0030.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 01:02 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 01:02 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0041.md`
 - [INÉDITO] github.com/varunmk28/phone-automation — ★0, push 2026-06-26, MIT — Unattended YouTube uploads via Android ADB UI automation — metadata CSV + Notion status sync.
 - [INÉDITO] github.com/openatx/uiautomator2 — ★8511, push 2026-11-15, MIT — Android Uiautomator2 Python Wrapper
 - [INÉDITO] github.com/brottobhmg/android-social-uploader — ★0, push 2026-10-19, MIT — Vision-based Android UI automation framework that uploads videos to TikTok, Instagram and YouTube Studio using LLMs
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 01:13 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0107.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 01:24 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 01:24 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0117.md`
 - [INÉDITO] github.com/autumnsentiment/gemini-web2api-go-browser-login — ★6, push 2026-10-14, MIT — 把 Google Gemini 网页端反代成 OpenAI 兼容 API 的浏览器登录拓展版 —— 在原项目基础上新增全自动 Cookie 供给链路（浏览器登录抓取 / 有效期自动保活 / 失效才刷新 / 抓取后模型校验）。
 - [INÉDITO] github.com/Godde3s/gemini-free-api — ★8, push 2026-10-26, MIT — Free OpenAI & Anthropic-compatible bridge for the Gemini web app — guest mode works without cookies, live model discovery, real streaming, v
 - [INÉDITO] github.com/zexadev/gemini-web2api-go — ★897, push 2026-11-16, MIT — Gemini web → OpenAI-compatible + native Gemini API, self-hosted, no API key. Gemini 4 Argon from a paid account cookie, strict_model (429 in
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 01:38 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 01:38 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0126.md`
 - [INÉDITO] github.com/exelite-dev/Free-Gemini-pro-API — ★26, push 2026-11-16, MIT — Free, unlimited Google Gemini Pro API proxy completely compatible with OpenAI and Anthropic standards. Features auto cookie refresh, account
 - [INÉDITO] github.com/oggynjack/0hive — ★0, push 2026-11-15, MIT — Self-healing, multi-account OpenAI-compatible gateway for Gemini's web app. Built on gemini-web2api.
 - [INÉDITO] github.com/zinda2000/gemini-web2api — ★4, push 2026-11-15, MIT — Gemini Web to OpenAI, Claude and Gemini compatible APIs, with Argon support, multi-account routing and a desktop admin console.
 - [INÉDITO] github.com/Rafix4x/gemini-api — ★1, push 2026-11-12, MIT — Gemini Web → OpenAI-compatible API. No cookie, no key. Render one-click deploy (Docker). Tool calling, streaming, vision.
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 01:44 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 01:44 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0141.md`
 - [INÉDITO] github.com/Guardinary/web2gem — ★182, push 2026-08-10, MIT — Lightweight Gemini Web gateway with OpenAI-compatible and Google-compatible APIs. Deploy the single Worker bundle to Cloudflare or run it wi
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 01:52 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0146.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 02:27 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 02:27 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0218.md`
 - [INÉDITO] github.com/Rtiming/android-adb-automation-kit — ★4, push 2026-06-03, MIT — Drive any Android phone from Python over ADB — pixel-perfect tapping, OpenCV+OCR element finding, and text input that works in WeChat/Flutte
 - [INÉDITO] github.com/firerpa/lamda — ★8746, push 2026-11-15, MIT — Android Full-Stack Device Control Platform: WebRTC/H.264 remote desktop, UI/OCR/image-matching automation, one-click MITM, built-in Frida, p
-- [INÉDITO] github.com/tanbro/uiautomator2-mcp-server — ★57, push 2026-10-25, Apache-2.0 — A MCP (Model Context Protocol) server that provides tools for controlling and interacting with Android devices using uiautomator2. 
+- [INÉDITO] github.com/tanbro/uiautomator2-mcp-server — ★57, push 2026-10-25, Apache-2.0 — A MCP (Model Context Protocol) server that provides tools for controlling and interacting with Android devices using uiautomator2.
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 02:41 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 02:41 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0231.md`
 - [INÉDITO] github.com/quueli/adb-device-automation — ★3, push 2026-09-18, MIT — Android device automation over ADB: cached UI-tree parsing, input emulation, multi-device workers, resume
 - [INÉDITO] github.com/ALSRKAL/adb-wireless-manager — ★2, push 2026-09-27, MIT — Wi-Fi ADB over mDNS from a system tray or CLI — multi-device, survives reboots, scrcpy mirroring.
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 02:55 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0246.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 03:29 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 03:29 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0301.md`
 - [INÉDITO] github.com/arcships/android-use — ★10, push 2026-11-10, MIT — Android control for Dim Agent and local MCP clients, with a live screen, native UI automation, and optional Jev decisions.
 - [INÉDITO] github.com/DevenDucommun/android-crash-monitor-py — ★0, push 2026-11-03, MIT — Cross-platform Android crash monitoring tool with GUI and CLI. Real-time log streaming, multi-device support, and intelligent crash detectio
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 03:49 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 03:49 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0333.md`
 - [INÉDITO] github.com/ntthanh2603/gemini-web-to-api — ★668, push 2026-11-17, MIT — ✨Reverse-engineered API for Gemini web app. It can be used as a genuine API key from OpenAI, Gemini, and Claude.
 - [INÉDITO] github.com/Ekko237/imagegen-swarm — ★2, push 2026-11-17, MIT — Use every AI image quota you already pay for, all at once: a Claude Code / Codex skill that runs Codex, Grok, Gemini, Jimeng, Muse and Lovar
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 04:01 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 04:01 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0352.md`
 - [INÉDITO] github.com/teng-lin/notebooklm-py — ★20261, push 2026-11-15, MIT — Unofficial Python API and agentic skill for Google Gemini Notebook. Full programmatic access to Gemini Notebook's features—including capabil
 - [INÉDITO] github.com/e30goodman/gemini-web-proxy — ★0, push 2026-11-17, MIT — Free OpenAI-compatible API for Gemini Web: use your Gemini subscription as an API (no Google API key). Real browser via X11/AT-SPI, tool cal
 - [INÉDITO] github.com/Ven0m0/gemini-web-wrapper — ★5, push 2026-11-17, MIT — A Bun + FastAPI monorepo for running a mobile-friendly AI workspace in the browser, backed by a configurable LLM gateway and repository inde
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 04:33 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 04:33 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0407.md`
 - [INÉDITO] github.com/Avasz/gemini-web-to-openai-proxy — ★5, push 2026-09-04, MIT — Self-hosted OpenAI-compatible and Google-native API for Gemini Web. Cookie-based auth, no Google API key or billing account, streaming, tool
 - [INÉDITO] github.com/cyberanrhy/gemini-claude-web2api — ★30, push 2026-06-18, MIT — OpenAI-compatible proxy for Gemini and Claude Web APIs. Free AI access via cookie auth — no API key needed. Windows/Linux/macOS.
 - [INÉDITO] github.com/CodewithMubasher/Gemini-ReverseEng-API — ★1, push 2026-11-03, MIT — Gemini web to api opensource 100% working no cookie needed
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 04:49 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 04:49 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0440.md`
 - [INÉDITO] github.com/kuzmany/gemini-web-cli — ★0, push 2026-10-24, MIT — Generate images and video from the CLI using your Google Gemini subscription (Nano Banana + Veo) by driving your logged-in browser session —
 - [INÉDITO] github.com/LymtIcsh/gemini-web2api-go — ★11, push 2026-11-03, MIT — Gemini web to OpenAI-compatible API in Go, with browser account pooling, quota management, and bilingual documentation.
 - [INÉDITO] github.com/RealMDstar/ghostbrain — ★5, push 2026-08-27, MIT — Gemini Web → OpenAI-compatible API bridge. Turn your Google Gemini account into a local LLM API with multi-account support, token pooling, a
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 04:56 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0451.md`
@@ -3891,46 +3902,54 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0516.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 05:40 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 05:40 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0531.md`
 - [INÉDITO] github.com/abood-xd/Android-Social-Automation-Bot-Using-Adb- — ★1, push 2026-07-18, MIT — A PySide6-based GUI automation utility for Android devices to automate actions like opening links, liking posts, and posting comments across
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 05:49 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 05:49 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0541.md`
 - [INÉDITO] github.com/hansalemaos/cyandrocel — ★70, push 2025-08-17, MIT — Android Automation Framework for real devices without root access with multiple backends (uiautomator, uiautomator2, fragment parser, tesser
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 05:57 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0551.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 06:12 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 06:12 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0601.md`
 - [INÉDITO] github.com/openatx/adbutils — ★1082, push 2026-11-17, MIT — pure python adb library for google adb service.
 - [INÉDITO] github.com/google/snippet-uiautomator — ★54, push 2026-11-11, Apache-2.0 — Mobly UiAutomator module for using Python code to operate UI actions on an Android device.
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 06:24 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 06:24 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0616.md`
 - [INÉDITO] github.com/dtmilano/AndroidViewClient — ★1724, push 2026-11-15, Apache-2.0 — Android ViewServer and ADB client
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 06:41 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 06:41 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0629.md`
 - [INÉDITO] github.com/itaki33-bjk/telefon-ciftligi — ★8, push 2026-08-05, MIT — Open-source Android phone farm management platform: ADB-based device fleet control, batch automation (YouTube/Instagram/WhatsApp/Play Store)
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 06:57 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 06:57 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0646.md`
 - [INÉDITO] github.com/SeokpilYoon/adb-autolink — ★1, push 2026-11-06, MIT — Zero-touch wireless Android control for Claude Code: auto-enables wireless debugging on trusted Wi-Fi, reconnects by itself, and installs, t
 - [INÉDITO] github.com/ethanez713/adbconnect — ★0, push 2026-11-12, MIT — Wireless ADB that reconnects by itself: a small Android app and a CLI that bring debugging back after a reboot, a Wi-Fi change or a rotated 
 - [INÉDITO] github.com/tokyoxpa3/OmniADB-Host — ★0, push 2026-11-06, MIT — Phone-side OmniADB: keeps wireless ADB pinned to port 5555 across reboots, Wi-Fi reconnects and sleep. No root, no computer. EN / 繁中 / 简中.
 - [INÉDITO] github.com/da-itda/wireless-adb-reconnect — ★1, push 2026-11-10, MIT — Auto-reconnect wireless debugging (ADB over Wi-Fi) on macOS & Windows — menu bar / tray app with QR pairing and connection diagnosis. 무선 디버깅
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 07:30 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 07:30 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_0710.md`
 - [INÉDITO] github.com/Femtanul/Android_Device_Farm_Orchestrator_telegram — ★1, push 2026-11-14, MIT — Android Device Farm Orchestrator — a multithreaded automation system for physical Android devices driven via ADB and uiautomator2, featuring
 - [INÉDITO] github.com/duarteenc/adb-device-farm — ★3, push 2026-08-24, Apache-2.0 — Professional Android Device Farm Management Tool - Control multiple Android devices via ADB with modern UI
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 07:56 — Trajetórias de câmera (dolly, orbit, rack-focus) para parallax 2.5D em Remotion/three.js (`area_parallax_camera_paths`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 07:56 — Trajetórias de câmera (dolly, orbit, rack-focus) para parallax 2.5D em Remotion/three.js (`area_parallax_camera_paths`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_parallax_camera_paths__sonnet_0747.md`
 - [USA em D:\recapd-ambientes\producao\bin\contextual_motion.py:27] github.com/Amarel-Taylor-Scott/kenburns — ★0, push 2026-08-14, MIT — Deterministic pure-stdlib Ken Burns planner: per-frame pan/zoom rects over a still image → ready ffmpeg zoompan command
+> DEIXADO (chat CURTOS, 17/11): câmera 2.5D é da linha VEO_HIPERCOOL/3D, não dos Shorts de parceiro. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 08:07 — cenas Three.js leves para CPU (sem sombras, PBR simples, baixo MSAA) (`area_three_cpu_budget`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_three_cpu_budget__sonnet_0802.md`
@@ -3944,22 +3963,25 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0822.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 08:59 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 08:59 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0849.md`
 - [INÉDITO] github.com/DimNih/cliproxyapi-cookies — ★0, push 2026-11-16, MIT — Local OpenAI-compatible reverse proxy for cookie-authenticated Gemini Web, OpenAI Codex, and Claude. Integrated with Aider AI Agent.
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 09:09 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 09:09 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0901.md`
-- [INÉDITO] github.com/Mra1k3r0/nimji — ★3, push 2026-08-17, MIT — Promise-first TypeScript client and nimji CLI for Gemini web chat: multi-turn sessions, configurable retries and keepalive, auth via env or 
+- [INÉDITO] github.com/Mra1k3r0/nimji — ★3, push 2026-08-17, MIT — Promise-first TypeScript client and nimji CLI for Gemini web chat: multi-turn sessions, configurable retries and keepalive, auth via env or
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 09:18 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0912.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 09:29 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 09:29 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_0921.md`
 - [INÉDITO] github.com/libiemochou/gemini-web-bridge — ★0, push 2026-10-18, MIT — 把 Gemini 网页版变成本地能力的开源工具：①调用 Gemini 生图 的MCP 工具——对模型说“生成一张图”，自动调用网页版画图并把原图（非压缩预览）下载到本地；②Anthropic 兼容的本地接口，可接入 Claude Code 等支持 MCP 的客户端（Windows
 - [INÉDITO] github.com/EkoSaputro14/gemini-web2api — ★0, push 2026-10-18, MIT — Convert Google Gemini web interface to OpenAI-compatible API with Gemini 4 Argon, 3.8 Flash, resilient tool calling & 1-click cookie sync ex
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 09:44 — Chrome headless com ANGLE/Vulkan na T4 do Kaggle (Linux sem tela) (`area_three_gpu_t4_headless`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_three_gpu_t4_headless__sonnet_0941.md`
@@ -3981,35 +4003,40 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1049.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 11:40 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 11:40 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1127.md`
 - [INÉDITO] github.com/msomu/AdbHarbor — ★9, push 2026-09-25, MIT — Lock broker for shared Android devices — exclusive ADB leases, queueing, and session cleanup for multi-agent development
-- [INÉDITO] github.com/rock3r/atc — ★17, push 2026-11-04, Apache-2.0 — Daemonless Agent Traffic Control for Android emulators, iOS Simulators, and physical devices — leases, warm-affinity wait queue, snapshots, 
+- [INÉDITO] github.com/rock3r/atc — ★17, push 2026-11-04, Apache-2.0 — Daemonless Agent Traffic Control for Android emulators, iOS Simulators, and physical devices — leases, warm-affinity wait queue, snapshots,
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 12:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 12:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1149.md`
 - [INÉDITO] github.com/Nativu5/Gemini-FastAPI — ★717, push 2026-11-16, MIT — Web-based Gemini models wrapped into an OpenAI-compatible API.
 - [INÉDITO] github.com/Sak-114514/gemini-web-to-api — ★0, push 2026-11-17, MIT — gemini-web-to-api fork: video reference images, multi-account pool, per-account proxy
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 12:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1214.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 12:36 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 12:36 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1226.md`
-- [INÉDITO] github.com/CatDogFishFrog/gemini-webapi-manager — ★0, push 2026-10-19, MIT — 
+- [INÉDITO] github.com/CatDogFishFrog/gemini-webapi-manager — ★0, push 2026-10-19, MIT —
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 13:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 13:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1241.md`
 - [INÉDITO] github.com/juangchuank-ops/gemini-web2api — ★0, push 2026-08-03, MIT — Convert Google Gemini web interface into an OpenAI-compatible API with Web UI console, multi-account rotation, and concurrency limits
 - [INÉDITO] github.com/Moonzayn/geminiwebapi — ★0, push 2026-09-15, MIT — Gemini Web to OpenAI API proxy with multi-account round-robin rotation
 - [INÉDITO] github.com/Godde3s/GhostBrain — ★10, push 2026-09-27, MIT — Turn your FREE web Gemini account into a real OpenAI + Anthropic compatible API — one file, no API key, multi-account rate-limit rotation, a
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 13:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 13:23 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1310.md`
 - [INÉDITO] github.com/nv876620-design/gemini-web-2api — ★0, push 2026-11-08, MIT — 
 - [INÉDITO] github.com/rizky-gumelar/gemini-web2api-go-multi-user — ★0, push 2026-11-05, MIT — 
 - [INÉDITO] github.com/jacob-bd/gemini-notebook-mcp-cli — ★6527, push 2026-11-17, MIT — Programmatic access to Gemini Notebook - via command-line interface (CLI), Model Context Protocol (MCP) server, and AI agent skills.
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 13:34 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1326.md`
@@ -4039,23 +4066,26 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_webgl_frame_a_frame__sonnet_1642.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 17:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 17:03 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1653.md`
 - [INÉDITO] github.com/azrinaldi/gemini-stealth-bridge — ★145, push 2026-11-13, MIT — Browserless Chrome uTLS + HTTP/2 OpenAI-compatible API daemon for Google Gemini Web (/v1/chat/completions & /v1/responses)
 - [INÉDITO] github.com/zhiyu1998/Gemi2Api-Server — ★403, push 2026-11-17, MIT — HanaokaYuzu / Gemini-API 的服务端简单实现，仓库自动更新上游，支持gemini-4-argon、gemini-3.1-pro、gemini-4-hydrogen、gemini-3.5-flash-lite 等
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 17:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 17:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1706.md`
 - [INÉDITO] github.com/BUKOWSKIREAL/magpie-gemini-web — ★222, push 2026-11-17, MIT — Google AI Studio and Gemini Web provider for Magpie (Gemini 4 Carbon / Hydrogen / Argon, Nano Banana image generation, Deep Research), backe
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 17:29 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1721.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 17:58 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 17:58 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1737.md`
 - [INÉDITO] github.com/Mag1cFall/Gemini-Web2API — ★129, push 2026-11-17, MIT — 将 Google Gemini Web 转换为 OpenAI、Claude 和 Gemini 兼容 API
 - [INÉDITO] github.com/jianli9158/cpa-plugin-gemini-web2api — ★4, push 2026-11-17, MIT — Gemini-Web2API native plugin for CLIProxyAPI (ported from Mag1cFall/Gemini-Web2API)
+> DEIXADO (chat CURTOS, 17/11): Gemini web com cookie de conta Google: assunto do chat do TRIO/Flow; toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 18:07 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_1801.md`
@@ -4065,14 +4095,16 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1816.md`
 - (todos os itens desta pesquisa foram reprovados)
 
-## [ ] PENDENTE — 2026-11-17 18:55 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 18:55 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1833.md`
 - [INÉDITO] github.com/ilter2014/ADB-QR — ★1, push 2026-10-28, MIT — Windows-first CLI for Android ADB over Wi-Fi: generate pairing QR codes, discover mDNS services, pair devices, and manage wireless connectio
 - [INÉDITO] github.com/sharoobi/AutoWirelessdebuggingQR — ★0, push 2026-04-22, MIT —  ADB wireless debugging launcher that auto-detects ADB and Python, offers guided installs, opens QR pairing when needed, and reconnects Andr
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
-## [ ] PENDENTE — 2026-11-17 19:06 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, todos deixados — 2026-11-17 19:06 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1857.md`
 - [INÉDITO] github.com/aminmaskur88/youtube-reels — ★0, push 2026-10-09, MIT — YouTube to Facebook Reels Generator (Portrait 9:16) with Cinematic Blur, Template Frame, Auto-Split & Metadata for Facebook Reels
+> DEIXADO (chat CURTOS, 17/11): celulares e contas: 17/11 12 canais foram encerrados por várias contas no mesmo aparelho; automação de app/upload pelo celular só com a dona e no chat dos celulares. Repositórios NÃO reprovados — o chat certo avalia.
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 19:19 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1911.md`
@@ -4080,4 +4112,74 @@ Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026
 
 ## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 19:30 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
 Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_1921.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 20:28 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2021.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 21:25 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2121.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 21:40 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2133.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 21:55 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2147.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 22:08 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2201.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 22:16 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2212.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 17/11 (automático: nada aproveitável) — 2026-11-17 22:25 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_gemini_web_sessao_cookie__sonnet_2221.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-17 — 0 implantados, 0 reprovados, 1 deixado — 2026-11-17 23:01 — Automação de celular Android por adb: app Gemini e upload no app do YouTube (`area_android_adb_automacao_upload`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-17\respostas\area_android_adb_automacao_upload__sonnet_2251.md`
+- [INÉDITO] github.com/moallemi/android-mcp-server — ★1, push 2026-03-20, MIT — Android MCP server. Control devices, capture screenshots, interact with UI, and manage apps via ADB using Claude, Codex, Gemini CLI, GitHub
+> DEIXADO (chat CURTOS, 17/11): automação de celular/app do YouTube por adb mexe com contas e aparelhos — 17/11 12 canais foram encerrados por várias contas no mesmo celular. Só com a dona, no chat dos celulares. Repositórios NÃO reprovados.
+
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 02:56 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0251.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [x] AVALIADO 2026-11-18 — 0 implantados, 0 reprovados, 1 deixado — 2026-11-18 03:11 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0301.md`
+- [INÉDITO] github.com/lovepaper/gemini-reverse-proxy — ★0, push 2026-11-03, MIT — 本地 Gemini 网页协议反代 (OpenAI 兼容), 匿名免 Key, 基于 zexadev/gemini-web2api-go 适配编译. 需本地代理出网.
+> DEIXADO (chat CURTOS, 18/11): Gemini web com cookie de conta Google é assunto do chat do TRIO/Flow e toca conta (regra do IP fixo, 3 banimentos) — só com a dona. Repositórios NÃO reprovados.
+
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 03:22 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0317.md`
+- (todos os itens desta pesquisa foram reprovados)
+
+## [ ] PENDENTE — 2026-11-18 03:33 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0326.md`
+- [INÉDITO] github.com/Hau04/gemini-web2api — ★0, push 2026-11-18, MIT — Convert Google Gemini web into OpenAI-compatible API. Zero cost, single static binary.
+- [INÉDITO] github.com/Sophomoresty/gemini-web2api — ★3601, push 2026-08-14, MIT — Convert Google Gemini web into OpenAI-compatible API. Zero auth, cross-platform, single file.
+
+## [ ] PENDENTE — 2026-11-18 03:41 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0336.md`
+- [INÉDITO] github.com/himanusia/hermes-antigravity-multiaccount — ★1, push 2026-10-27, MIT — Run Hermes Agent on your Google Antigravity / Gemini subscription via the official agy CLI. Multi-account quota rotation, quota in /usage, a
+- [INÉDITO] github.com/igok045-netizen/gemini-web2api — ★1, push 2026-11-08, MIT — Local OpenAI-compatible Gemini web bridge with admin UI and Firefox session support
+
+## [ ] PENDENTE — 2026-11-18 03:51 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0346.md`
+- [INÉDITO] github.com/kittors/CliRelay — ★1059, push 2026-11-18, MIT — Self-hosted AI gateway for coding CLIs — one OpenAI/Claude/Gemini/Codex-compatible endpoint, with a multi-tenant web console, request logs, 
+
+## [ ] PENDENTE — 2026-11-18 04:02 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0356.md`
+- [INÉDITO] github.com/ghostedmyself/gravpool — ★1, push 2026-10-02, MIT — Google Antigravity OAuth account pool + unified OpenAI-compatible gateway: refresh auto, kuota live, external providers, web dashboard. Pure
+
+## [x] AVALIADO 18/11 (automático: nada aproveitável) — 2026-11-18 04:15 — Gemini web sem navegador: manter sessão/cookie vivo e cota de mídia (`area_gemini_web_sessao_cookie`, Sonnet 5.5 web)
+Resposta bruta: `D:\hipercool-materiais\pesquisador_melhorias\rodadas\motor_2026-11-18\respostas\area_gemini_web_sessao_cookie__sonnet_0407.md`
 - (todos os itens desta pesquisa foram reprovados)

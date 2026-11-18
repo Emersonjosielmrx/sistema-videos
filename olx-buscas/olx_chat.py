@@ -156,7 +156,8 @@ telefone, Pix, endereço, nem aceite negociar fora da OLX."""
 
 def _txt_ia(prompt):
     j = o.ler(o.OMNI, {})
-    for modelo in (o.cfg().get("modelo_assistente", "sonnet-fila"), "gemini/gemini-4-argon", o.cfg()["modelo_ia"]):
+    # 18/11: Argon pelo AI Studio falhava sempre (sem cota grátis) -> fim; o Gemini assume direto
+    for modelo in (o.cfg().get("modelo_assistente", "sonnet-fila"), o.cfg()["modelo_ia"], "gemini/gemini-4-argon"):
         try:
             r = o.cr.post(j["base_url"].rstrip("/") + "/v1/chat/completions", timeout=120,
                           headers={"Authorization": "Bearer " + j["api_key"]},

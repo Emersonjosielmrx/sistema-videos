@@ -1,0 +1,335 @@
+{
+ "video": "sintetizerisada_20261117_061023.mp4",
+ "conta": "sintetizerisada",
+ "marca": "Agenda IA",
+ "titulo": "Atendimento simples no WhatsApp sem complicação",
+ "formato": "dono_tres_veo_final",
+ "veo_total": 4,
+ "voz": "pt-BR-FranciscaNeural",
+ "efeito_transicao": "fogo",
+ "voz_clonada": "moana",
+ "status": "fila/postado",
+ "juri": {
+  "nota": 5.5,
+  "notas": {
+   "legibilidade": 6.0,
+   "movimento": 4.0,
+   "roteiro_marca": 7.0,
+   "diretor": 5.0
+  },
+  "movimento": [
+   [
+    0,
+    "pergunta",
+    11.07
+   ],
+   [
+    1,
+    "dono",
+    13.77
+   ],
+   [
+    2,
+    "dono",
+    14.72
+   ],
+   [
+    3,
+    "dono",
+    17.21
+   ],
+   [
+    4,
+    "cartao",
+    4.68
+   ]
+  ],
+  "graves": 5,
+  "reprovar": false,
+  "motivo": ""
+ },
+ "juri_problemas": [
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "A legenda karaokê 'Medo de sistema' está posicionada sobre o rosto do apresentador, cobrindo diretamente seu queixo e barba e encostando no lábio inferior.",
+   "como_corrigir": "Descer a linha da legenda para a região do peito (mantendo-a acima de y=1580) ou reenquadrar a filmagem do apresentador na cena 0 para deixar o terço inferior livre sem cobrir a face."
+  },
+  {
+   "foco": "legibilidade",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "A legenda 'A IA agenda,' apresenta colisão de caracteres entre o artigo 'A' e 'IA' (dois textos sobrepostos/falha de alinhamento), não possui a palavra ativa destacada em laranja como nos demais quadros e sofre de gravíssimo déficit de contraste, pois as letras brancas estão sobrepostas ao pente branco e às tesouras cromadas reflexivas da bancada.",
+   "como_corrigir": "Corrigir o espaçamento entre 'A' e 'IA' no gerador de legendas, aplicar o destaque laranja na palavra em fala e adicionar uma tarja/sombra escura protetora sob a legenda para garantir contraste contra elementos claros do fundo."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Mesmo molde visual repetido com plano fixo do apresentador, sem variação de escala ou demonstração da interface do WhatsApp citada.",
+   "como_corrigir": "Inserir simulação animada da tela do WhatsApp ou aplicar corte com punch-in de aproximação."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Ritmo arrastado pela manutenção do mesmo enquadramento estático das cenas anteriores por tempo prolongado.",
+   "como_corrigir": "Incluir sobreposição visual com ícones dos recursos ou alternar para B-roll complementar."
+  },
+  {
+   "foco": "movimento",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cena parada no cartão final, com quadros q13 a q15 perfeitamente idênticos e sem animação no CTA.",
+   "como_corrigir": "Aplicar slow push-in no fundo e animação sutil de pulso no botão 'Chame no direct'."
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 3,
+   "problema": "Redundância no roteiro da locução: a frase da cena 3 repete quase literalmente expressões recém-ditas na cena 2 ('pelo WhatsApp com agendamentos automáticos' em q08/q09 e 'WhatsApp com agendamentos automáticos' em q10/q11), tornando a narrativa repetitiva.",
+   "como_corrigir": "Reescrever o áudio da cena 3 para evitar o eco vocabular, variando para: 'Tudo roda direto pelo aplicativo, sem conflito de horários e sem duplo agendamento.'"
+  },
+  {
+   "foco": "roteiro_marca",
+   "gravidade": "media",
+   "cena": 2,
+   "problema": "Fragilidade no branding falado e visual: o nome da marca 'Agenda IA' não é citado na locução durante todo o anúncio (o locutor diz apenas 'A IA agenda...' em vez de 'A Agenda IA agenda...'), e o cabeçalho fixo no topo traz apenas o texto genérico 'ATENDIMENTO SIMPLES SEM COMPLICAÇÃO' sem a marca, deixando o produto anônimo até os últimos 3 segundos.",
+   "como_corrigir": "Ajustar a locução na cena 2 para 'A Agenda IA agenda, confirma...' e/ou inserir o nome ou logotipo da Agenda IA na barra superior para fixação imediata da marca."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 0,
+   "problema": "Gancho inicial fraco e desconectado: o apresentador passa toda a Cena 0 (0s a 2.8s) olhando para o lado, totalmente fora do eixo da câmera e com postura passiva. Para um Reel de topo de funil, isso passa a impressão de erro de gravação ou take bruto não editado, falhando em reter a atenção nos 2 primeiros segundos cruciais.",
+   "como_corrigir": "Na Cena 0, regravar ou selecionar um take em que o apresentador encare diretamente a lente com energia e expressão provocativa ao formular a pergunta, combinando com uma transição de entrada dinâmica (snap zoom ou push in) e efeito sonoro sutil no card para travar o scroll imediatamente."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "grave",
+   "cena": 2,
+   "problema": "Ausência total de demonstração visual do produto (falta a conversa de WhatsApp): enquanto o áudio das Cenas 2 e 3 detalha que a IA agenda, confirma e reagenda sozinha pelo WhatsApp, o visual permanece estático no mesmo plano do apresentador por mais de 20 segundos. A falta da simulação prática do bot funcionando prejudica a percepção de empresa séria de tecnologia e torna o anúncio excessivamente monótono.",
+   "como_corrigir": "Nas Cenas 2 e 3 (q07 a q12), aplicar split screen ou picture-in-picture com a tela do smartphone exibindo a simulação da conversa do WhatsApp (com o selo 'Simulação'), mostrando a interação do cliente e a resposta imediata da IA enquanto o dono explica a facilidade."
+  },
+  {
+   "foco": "diretor",
+   "gravidade": "media",
+   "cena": 4,
+   "problema": "Cartão final escuro, estático e com cara de template amador: o fechamento cai em uma imagem escura e desvitalizada da bancada com textos chapados e botão genérico flutuando, sem logotipo estruturado ou acabamento de agência de tecnologia para converter em clique.",
+   "como_corrigir": "Na Cena 4, redesenhar o fechamento mantendo iluminação adequada no fundo, inserindo o logotipo oficial vetorizado da Agenda IA e um mockup realista do smartphone exibindo uma mensagem de agendamento confirmado ao lado do botão 'Chame no direct', elevando a autoridade de marca."
+  }
+ ],
+ "historico_notas": [
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "sintetizerisada",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "disparoemmassa_ia_20261117_083738.mp4",
+   "conta": "disparoemmassa.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 7.5,
+   "notas": {
+    "legibilidade": 10.0,
+    "movimento": 5.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "followupia_ia_20261117_101728.mp4",
+   "conta": "followupia.ia",
+   "formato": "cinco_veo",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 10.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "vpsblindada_ia_20261117_122241.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto",
+   "nota": 5.5,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.0,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "vpsblindada.ia",
+   "formato": "dono_mesma_foto+editor",
+   "nota": 6.5,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "fabricademarketing_ia_20261117_154653.mp4",
+   "conta": "fabricademarketing.ia",
+   "formato": "dono_abre_fecha",
+   "nota": 5.75,
+   "notas": {
+    "legibilidade": 6.0,
+    "movimento": 5.0,
+    "roteiro_marca": 7.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "crmchatwoot_ia_20261117_165404.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final",
+   "nota": 5.62,
+   "notas": {
+    "legibilidade": 7.5,
+    "movimento": 4.0,
+    "roteiro_marca": 6.0,
+    "diretor": 5.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 6.75,
+   "notas": {
+    "legibilidade": 7.0,
+    "movimento": 6.0,
+    "roteiro_marca": 8.0,
+    "diretor": 6.0
+   }
+  },
+  {
+   "video": "video.mp4",
+   "conta": "crmchatwoot.ia",
+   "formato": "dono_tres_veo_final+editor",
+   "nota": 7.25,
+   "notas": {
+    "legibilidade": 9.0,
+    "movimento": 6.0,
+    "roteiro_marca": 7.0,
+    "diretor": 7.0
+   }
+  }
+ ],
+ "opinioes": "",
+ "ajustes": {
+  "kenburns_zoom": 0.16,
+  "kenburns_pan": 1.2,
+  "chat_fonte_msg": 52,
+  "legenda_fonte": 74,
+  "vol_trilha": 0.13,
+  "folga_fala": 0.28,
+  "pulso_botao": 0.06,
+  "punchin_video": 0.06,
+  "conversa_zoom": 0.12,
+  "conversa_subida": 50,
+  "efeitos_transicao": 1,
+  "folga_dono": 0.45,
+  "brilho_botao": 1,
+  "destaques_tela": 1,
+  "variantes_desligadas": [],
+  "pesos_variantes": {}
+ },
+ "regras_atuais": {
+  "roteiro": [],
+  "editor": []
+ },
+ "placar_formatos": {
+  "dono_uma_cena": [
+   9,
+   4
+  ],
+  "dono_abre_fecha": [
+   9,
+   0
+  ],
+  "dono_mesma_foto": [
+   7,
+   0
+  ],
+  "dono_e_cena_veo": [
+   3,
+   1
+  ],
+  "dono_tres": [
+   2,
+   1
+  ],
+  "dono_abre_fecha_veo_meio": [
+   3,
+   1
+  ],
+  "dono_tres_veo_final": [
+   4,
+   0
+  ],
+  "quatro_veo": [
+   0,
+   0
+  ],
+  "cinco_veo": [
+   0,
+   0
+  ],
+  "sem_dono": [
+   21,
+   7
+  ]
+ },
+ "vigiando": []
+}

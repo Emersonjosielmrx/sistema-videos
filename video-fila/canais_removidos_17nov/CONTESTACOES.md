@@ -95,3 +95,10 @@ Olá! O Dorama Noturno foi encerrado e gostaria muito que a decisão fosse revis
 O canal comenta doramas: contamos o que acontece na história com nossas palavras, nossa voz e nossa edição, sempre como resenha e opinião, sem publicar episódios.
 
 Usamos uma internet pública e compartilhada, onde muitas pessoas acessam pelo mesmo endereço, e acreditamos que o encerramento foi uma associação automática por causa disso. Se algum vídeo tiver problema, removemos assim que vocês avisarem.
+
+## STATUS FINAL 17/11 ~20:10 — 12 de 12 ENVIADAS (Manhwa Noturno enviada depois da confirmação da dona)
+ENVIADAS (confirmadas "Recebemos sua contestação"): InventoReact, ManhwaReact, CartuchoReact, Esporte Noturno,
+Animescomia, Inovare Ind, Inovare Ru, Bicho Noturno, Game Noturno, Dorama Noturno, Dicas Financeiras.
+Game/Dorama/Dicas passaram SEM QR code depois da troca de IP (IPv4 191.36.137.8, IPv6 desativado pela operadora).
+FALTA: Manhwa Noturno (inovaremanhwaverse2, conta viva do Kaggle — aberta pela saída fixa dela) pede confirmação
+(tela de escolha de método) — janela aberta pra dona.

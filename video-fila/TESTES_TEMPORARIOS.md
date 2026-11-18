@@ -6,6 +6,9 @@ Precisa de espaço já? `python D:\video-fila\testes.py encerrar <caminho>` em c
 | Caminho | Para quê | Chat | Criado | Vence | Ao limpar |
 |---|---|---|---|---|---|
 | `D:\tmp\geladeira_original_backup.mp4` | backup antes da capa 3D 16/11 |  | 2026-11-16T14:34 | 2026-11-18T14:34 | apaga |
+| `D:\gemini-argo\captura\bench_hydrogen.py` | bancada Hydrogen x Argon x Gemini (17/11) |  | 2026-11-17T22:40 | 2026-11-20T22:40 | apaga |
+| `D:\gemini-argo\captura\dificil_legenda.py` | tarefa dificil legenda (17/11) |  | 2026-11-17T22:55 | 2026-11-20T22:55 | apaga |
+| `D:\gemini-argo\captura\dificil_estado.py` | tarefa real estado dos longos (17/11) |  | 2026-11-17T23:01 | 2026-11-20T23:01 | apaga |
 | `D:\gemini-argo\_teste_http` | testes do Gemini imagem/vídeo sem navegador (trio 14/11) | gemini-midia | 2026-11-14T00:49 | 2026-11-21T00:49 | apaga |
 | `D:\gemini-argo\_teste_imagem` | testes do Gemini imagem/vídeo sem navegador (trio 14/11) | gemini-midia | 2026-11-14T00:49 | 2026-11-21T00:49 | apaga |
 | `D:\gemini-argo\_teste_video` | testes do Gemini imagem/vídeo sem navegador (trio 14/11) | gemini-midia | 2026-11-14T00:49 | 2026-11-21T00:49 | apaga |

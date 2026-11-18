@@ -22,8 +22,8 @@ from pathlib import Path
 
 # 23/10 (dona: "adicione o fallback do Antigravity Gemini 3.8"): o 3.8 vai primeiro — testado 23/10 como agente
 # (claude.exe -p + Read): 94 s e resposta certa; o 3-flash (mais rápido, mais simples) fica de segunda reserva
-RESERVAS = ["agy/gemini-3.8-flash-high", "antigravity/gemini-3-flash", "gemini/gemini-2.5-flash",
-            "openrouter/google/gemini-2.5-flash"]  # 09/11: gemini-3.5 dava resposta vazia; +openrouter fallback
+RESERVAS = ["agy/gemini-3.8-flash-high", "antigravity/gemini-3-flash", "openrouter/google/gemini-2.5-flash",
+            "gemini/gemini-2.5-flash"]  # 09/11: +openrouter; 18/11: AI Studio 2.5 acertava 17% (404/403/429) -> fim
 ESTADO = Path(__file__).resolve().parent / "estado" / "ia_reserva.json"
 PROXY = Path(r"D:\hipercool-videos\secrets\claude_proxy.json")
 FORA_S = 3600

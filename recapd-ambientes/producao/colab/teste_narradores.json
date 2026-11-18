@@ -76,7 +76,7 @@
   "chaves",
   "chaves_chapolin"
  ],
- "cursor": 918,
+ "cursor": 920,
  "videos": [
   {
    "pid": "20261026_111528_5-vQopGwQ8Y",
@@ -1889,6 +1889,13 @@
     "vegeta",
     "mike"
    ]
+  },
+  {
+   "pid": "20261118_035210_zdiZtx5CGI4",
+   "vozes": [
+    "porao",
+    "guugou"
+   ]
   }
  ],
  "_obs": [
@@ -1970,5 +1977,5 @@
   "_vegeta": "29/10 dona: 'Vegeta é um excelente dublador, põe ele como uma das prioridades do segundo'",
   "_leia_modos_30_10": "Fable 30/10 (dona: vídeos SOLO, misturas com mais e com menos narradores, outros só com os da fila 1): solo = 1 primário; dupla = 2 primários; so_primarios = 4; primarios_secundarios; com_terciarios; mistura_grande = 6-7 vozes. Só-primários somam 65%. O modo vai no pedido.json (narradores_modo) pra comparar pelas views."
  },
- "_modo": "primarios_secundarios"
+ "_modo": "solo"
 }
